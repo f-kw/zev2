@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "presentation-a-v002-proof-execution-record-v001",
+  "startedAt": "2026-08-09T12:16:09Z",
+  "finishedAt": "2026-08-09T12:33:38Z",
+  "command": {
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "arguments": [
+      "--import",
+      "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+      "evals/clip_composition/run_presentation_a_v002_layer1_v3_proof_job_v001.ts",
+      "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-jobs/a-v002-layer1-v3-option-b-proof-20260809-v003.json"
+    ]
+  },
+  "environment": {
+    "native": true,
+    "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "nodeOptionsPresent": false,
+    "chromiumLaunchPreflight": "passed",
+    "runtimeToolBindingsPreflight": "passed"
+  },
+  "job": {
+    "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-jobs/a-v002-layer1-v3-option-b-proof-20260809-v003.json",
+    "fileSha256": "dd6d727bdc909b7f5139b6cb8b9b353ce0f60fc9d5f63f37314c3b2a830a0da1"
+  },
+  "result": {
+    "exitCode": 2,
+    "parsedStatus": "fatal",
+    "parsedExecutionCount": null,
+    "stdoutByteLength": 680,
+    "stdoutSha256": "2e53225cf506aa394f9538866c795cc4f2cb52f45fb385a819d1b11742402745",
+    "stderrByteLength": 0,
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proofCallerStage": "variant-execution",
+    "proofStep": null,
+    "proofExceptionType": "child-process",
+    "proofTargetPath": null,
+    "proofTargetSha256": null,
+    "completedCheckpoints": [
+      "dependency-initialization-entered",
+      "dependency-initialization-completed",
+      "start-input-reread-entered",
+      "start-input-reread-completed"
+    ]
+  }
+}

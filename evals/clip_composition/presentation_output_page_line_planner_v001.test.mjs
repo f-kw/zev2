@@ -10,8 +10,15 @@ import {
   PRESENTATION_OUTPUT_PLANNER_RESOURCE_DIAGNOSTIC_V001,
   PresentationOutputPlannerResourceExhaustedV001,
   buildPresentationOutputPageLinePlanV001,
+  selectPresentationOutputPagePathV001,
   validatePresentationOutputCaptionDisplaysV001,
 } from './presentation_output_page_line_planner_v001.mjs';
+import {
+  derivePresentationExpectedAtomOccurrencesV001,
+} from './presentation_meaning_information_package_v001.mjs';
+import {
+  serializePresentationAFormalJsonV002,
+} from './presentation_a_source_sequence_v002.mjs';
 import {
   PRESENTATION_OUTPUT_CHARACTER_WIDTH_RULE_V001,
   inspectPresentationOutputDisplayPageV001,
@@ -53,6 +60,47 @@ const artifactBinding = (schemaVersion, artifact) => ({
   fileSha256: sha256(artifact.bytes),
   canonicalSha256: canonicalSha256(artifact.value),
 });
+
+const PLANNER_RESOURCE_EVENT_KEYS_V001 = Object.freeze([
+  'schemaVersion',
+  'stage',
+  'processedAtomCount',
+  'generatedPhysicalEdgeCount',
+  'acceptedPhysicalEdgeCount',
+  'processedTimelineEdgeCount',
+  'mappedTimelineEdgeCount',
+  'rejectedTimelineEdgeCount',
+  'generatedStateCount',
+  'insertedStateCount',
+  'replacedEquivalentStateCount',
+  'prunedDominatedStateCount',
+  'retainedStateCount',
+  'maximumRetainedStateCount',
+  'elapsedMs',
+]);
+const PLANNER_RESOURCE_EVENT_STAGES_V001 = Object.freeze([
+  'physical-graph',
+  'timeline-mapping',
+  'path-selection',
+  'planner-completed',
+]);
+const assertPlannerResourceEventsV001 = events => {
+  assert.ok(events.length >= PLANNER_RESOURCE_EVENT_STAGES_V001.length);
+  for (const event of events) {
+    assert.deepEqual(Object.keys(event), PLANNER_RESOURCE_EVENT_KEYS_V001);
+    assert.equal(event.schemaVersion, 'presentation-output-planner-resource-event-v001');
+    assert.ok(PLANNER_RESOURCE_EVENT_STAGES_V001.includes(event.stage));
+    for (const key of PLANNER_RESOURCE_EVENT_KEYS_V001.slice(2)) {
+      assert.ok(event[key] === null
+        || (Number.isSafeInteger(event[key]) && event[key] >= 0), `${event.stage}:${key}`);
+    }
+    assert.doesNotMatch(JSON.stringify(event), /(?:caption|atom-|display-|\.json|\/)/u);
+  }
+  assert.deepEqual(
+    [...new Set(events.map(event => event.stage))],
+    PLANNER_RESOURCE_EVENT_STAGES_V001,
+  );
+};
 
 const cropApplicationFixture = ({
   cropDecisionArtifact,
@@ -695,8 +743,18 @@ test('OPL021: planner結果に旧B4 artifactを含めない', async () => {
 test('OPL022: L=1/2とも有限で任意cutoffを持たずresource fatalを専用化する', async () => {
   const atomCount = 3;
   for (const maxLines of [1, 2]) {
+    const plannerEvents = [];
     const style = withPolicy(await landscapeStyle(), 4, maxLines);
-    const {result} = await plan({captionTexts: [['a', 'b', 'c']], style});
+    const input = fixture({captionTexts: [['a', 'b', 'c']]});
+    const result = await buildPresentationOutputPageLinePlanV001({
+      ...input,
+      styleResolution: style,
+      baseMediaTimeline: timeline(),
+      resourceObserver(event) {
+        plannerEvents.push(structuredClone(event));
+        return {ignored: true};
+      },
+    });
     const lineEdgeBound = atomCount * (atomCount + 1) / 2;
     const pageEdgeBound = atomCount * (atomCount + 1) * (2 * atomCount + 1) / 6;
     assert.equal(result.status, 'planned');
@@ -710,7 +768,86 @@ test('OPL022: L=1/2とも有限で任意cutoffを持たずresource fatalを専�
       * BigInt(style.resolvedStyle.maxLogicalWidthPerLine + 1) ** 2n
       * BigInt(result.timelineEdges[0].edges.length + 1);
     assert.ok(finiteStateSpaceUpperBound > 0n);
+    assertPlannerResourceEventsV001(plannerEvents);
   }
+
+  const edge = ({fixtureId, start, end, widths, lineEnds, startFrame, endFrame}) => ({
+    fixtureId,
+    startBoundaryOrdinal: start,
+    endBoundaryOrdinal: end,
+    lineEndBoundaryOrdinals: lineEnds,
+    lines: widths.map(logicalWidth => ({logicalWidth})),
+    frameRange: {startFrame, endFrameExclusive: endFrame},
+  });
+  const frameRangeOf = item => item.frameRange;
+  const dominationEvents = [];
+  const dominated = selectPresentationOutputPagePathV001({
+    edges: [
+      edge({
+        fixtureId: 'earlier-frame', start: 0, end: 1, widths: [4], lineEnds: [1],
+        startFrame: 0, endFrame: 5,
+      }),
+      edge({
+        fixtureId: 'later-frame', start: 0, end: 1, widths: [4], lineEnds: [1],
+        startFrame: 0, endFrame: 6,
+      }),
+      edge({
+        fixtureId: 'tail', start: 1, end: 2, widths: [4], lineEnds: [2],
+        startFrame: 5, endFrame: 10,
+      }),
+    ],
+    finalBoundary: 2,
+    frameRangeOf,
+    resourceObserver: event => dominationEvents.push(structuredClone(event)),
+  });
+  assert.equal(dominated.selectedEdges[0].fixtureId, 'earlier-frame');
+  assert.ok(dominationEvents.some(event => event.stage === 'path-selection'
+    && event.prunedDominatedStateCount > 0));
+
+  const incomparableWidthEvents = [];
+  const incomparableWidths = selectPresentationOutputPagePathV001({
+    edges: [
+      edge({
+        fixtureId: 'smaller-maximum', start: 0, end: 2, widths: [2, 10], lineEnds: [1, 2],
+        startFrame: 0, endFrame: 5,
+      }),
+      edge({
+        fixtureId: 'better-future-range', start: 0, end: 2, widths: [8, 11], lineEnds: [1, 2],
+        startFrame: 0, endFrame: 5,
+      }),
+      edge({
+        fixtureId: 'future-width', start: 2, end: 3, widths: [12], lineEnds: [3],
+        startFrame: 5, endFrame: 10,
+      }),
+    ],
+    finalBoundary: 3,
+    frameRangeOf,
+    resourceObserver: event => incomparableWidthEvents.push(structuredClone(event)),
+  });
+  assert.equal(incomparableWidths.selectedEdges[0].fixtureId, 'better-future-range');
+  assert.equal(incomparableWidthEvents[0].processedAtomCount, 1);
+  assert.equal(incomparableWidthEvents[0].prunedDominatedStateCount, 0);
+
+  const incomparableFrames = selectPresentationOutputPagePathV001({
+    edges: [
+      edge({
+        fixtureId: 'later-but-narrower', start: 0, end: 1, widths: [4], lineEnds: [1],
+        startFrame: 0, endFrame: 7,
+      }),
+      edge({
+        fixtureId: 'earlier-but-wider', start: 0, end: 1, widths: [5], lineEnds: [1],
+        startFrame: 0, endFrame: 5,
+      }),
+      edge({
+        fixtureId: 'frame-sensitive-tail', start: 1, end: 2, widths: [10], lineEnds: [2],
+        startFrame: 5, endFrame: 10,
+      }),
+    ],
+    finalBoundary: 2,
+    frameRangeOf,
+  });
+  assert.equal(incomparableFrames.selectedEdges[0].fixtureId, 'earlier-but-wider');
+
   const error = new PresentationOutputPlannerResourceExhaustedV001(new RangeError('fixture'));
   assert.equal(error.diagnosticCode, PRESENTATION_OUTPUT_PLANNER_RESOURCE_DIAGNOSTIC_V001);
   assert.equal(PRESENTATION_OUTPUT_PLANNER_MAX_PAGES_PER_CAPTION_V001, 999);
@@ -734,7 +871,7 @@ test('OPL022: L=1/2とも有限で任意cutoffを持たずresource fatalを専�
     readFile(path.join(ROOT, 'evals/clip_composition/presentation_output_page_line_planner_v001.mjs'), 'utf8'),
     readFile(path.join(ROOT, 'evals/clip_composition/run_presentation_output_job_v001.ts'), 'utf8'),
   ]);
-  assert.match(plannerSource, /Array\.from\(\{length: finalBoundary \+ 1\}, \(\) => new Map\(\)\)/u);
+  assert.match(plannerSource, /prunedDominatedStateCount/u);
   assert.doesNotMatch(plannerSource, /(?:beamWidth|maxStates|maxEdges|arbitraryCutoff)/u);
   assert.match(runnerSource, /fatalDiagnostic\('caption-display-layout', 'OUTPUT_PLANNER_RESOURCE_EXHAUSTED'\)/u);
 });
@@ -783,6 +920,54 @@ const fixtures = {
   candidate59Timeline: 'evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/timeline.json',
   candidate59Vertical: 'evals/clip_composition/outputs/presentation/caption-display-pairs/qdczJpv8RCc-candidate-59-vertical-caption-b4-rebuild-v002/display-plan.json',
   alternatives: 'evals/clip_composition/outputs/presentation/diagnostics/qdczJpv8RCc-candidate-59-b4-layout-v001/split-alternatives.json',
+  formalMeaningPackage: 'evals/clip_composition/outputs/presentation/meaning-information-packages/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/meaning-information-package.json',
+  formalTimelineDecision: 'evals/clip_composition/outputs/presentation/meaning-timeline-decisions/qdczJpv8RCc-candidate-59-meaning-output-first-run-timeline-v002/timeline-composition-decision.json',
+  formalRetainedAtoms: 'evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/source-atoms.json',
+  formalRetainedManifest: 'evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/generation-manifest.json',
+  formalRetainedReport: 'evals/clip_composition/outputs/presentation/retained-source-atoms/qdczJpv8RCc-candidate-59-v001/validation-report.json',
+  formalBaseTimeline: 'evals/clip_composition/outputs/presentation/meaning-output-base-media/qdczJpv8RCc-candidate-59-meaning-output-first-run-meaning-package-v002-meaning-information/timeline.json',
+  formalLandscapeRenderPlan: 'evals/clip_composition/outputs/presentation/meaning-output-control/qdczJpv8RCc-candidate-59-meaning-output-first-run-landscape-v003/render-plan.json',
+  formalVerticalRenderPlan: 'evals/clip_composition/outputs/presentation/meaning-output-control/qdczJpv8RCc-candidate-59-meaning-output-first-run-vertical-v002/render-plan.json',
+};
+
+const loadFormalPlannerInput = async () => {
+  const [meaningPackage, timelineDecision, sourceAtoms, generationManifest,
+    validationReport, baseMediaTimeline] = await Promise.all([
+    readJson(fixtures.formalMeaningPackage),
+    readJson(fixtures.formalTimelineDecision),
+    readJson(fixtures.formalRetainedAtoms),
+    readJson(fixtures.formalRetainedManifest),
+    readJson(fixtures.formalRetainedReport),
+    readJson(fixtures.formalBaseTimeline),
+  ]);
+  const derived = derivePresentationExpectedAtomOccurrencesV001({
+    timelineDecision,
+    retainedSources: [{
+      sourceMediaId: meaningPackage.sourceMedia[0].sourceMediaId,
+      sourceAtoms,
+      generationManifest,
+      validationReport,
+    }],
+  });
+  assert.equal(derived.status, 'passed', JSON.stringify(derived));
+  const atoms = [...derived.occurrenceAtoms.values()];
+  assert.equal(atoms.length, derived.expectedAtomOccurrences.length);
+  const atomByRef = new Map(derived.expectedAtomOccurrences.map(
+    (atomRef, index) => [canonicalJson(atomRef), atoms[index]],
+  ));
+  const occurrenceAtoms = meaningPackage.captions.flatMap(caption => caption.atomRefs.map(
+    atomRef => {
+      const atom = atomByRef.get(canonicalJson(atomRef));
+      assert.ok(atom, canonicalJson(atomRef));
+      return {
+        atomRef: structuredClone(atomRef),
+        text: atom.text,
+        startMs: atom.startMs,
+        endMs: atom.endMs,
+      };
+    },
+  ));
+  return {meaningPackage, occurrenceAtoms, baseMediaTimeline};
 };
 
 const projectLegacyDisplayFixture = (value, retainedSourceAtoms) => {
@@ -1005,4 +1190,57 @@ test('OPL027: candidate 59縦型の認定caption/style fixtureは決定的であ
   }
   assert.ok(physicallyRequiredShortWrapCount > 0);
   assert.equal(JSON.stringify(first), JSON.stringify(second));
+});
+
+test('OPL028: 共有入口抽出後もv001 planner結果byteは固定値と一致する', async () => {
+  const style = withPolicy(await landscapeStyle(), 4, 2);
+  const {result} = await plan({captionTexts: [['a', 'b', 'c', 'd']], style});
+  assert.equal(result.status, 'planned');
+  assert.equal(
+    sha256(Buffer.from(canonicalJson(result), 'utf8')),
+    '51854eae88f66b136d627244ee58df60a78a92bc6429d9829738a6c5dd316955',
+  );
+
+  const formalInput = await loadFormalPlannerInput();
+  const oracles = [
+    {
+      name: 'landscape',
+      renderPlanPath: fixtures.formalLandscapeRenderPlan,
+      renderPlanSha256: '17a2c8a499bc8a7c49a8bdcf4993fa6e0e7618c6d64a6650c6ffda3755f44988',
+      styleResolution: await landscapeStyle(),
+    },
+    {
+      name: 'vertical',
+      renderPlanPath: fixtures.formalVerticalRenderPlan,
+      renderPlanSha256: '282389a256088fd374bd49453ee0c7c75f7e0a1828a157c99e99818a1a4778ad',
+      styleResolution: await verticalStyle(),
+    },
+  ];
+  for (const oracle of oracles) {
+    const renderPlanArtifact = await readArtifact(oracle.renderPlanPath);
+    assert.equal(sha256(renderPlanArtifact.bytes), oracle.renderPlanSha256, oracle.name);
+    const rebuilt = await buildPresentationOutputPageLinePlanV001({
+      ...formalInput,
+      styleResolution: oracle.styleResolution,
+    });
+    assert.equal(rebuilt.status, 'planned', oracle.name);
+    assert.deepEqual(
+      serializePresentationAFormalJsonV002(rebuilt.captionDisplays),
+      serializePresentationAFormalJsonV002(renderPlanArtifact.value.captionDisplays),
+      oracle.name,
+    );
+  }
+});
+
+test('OPL029: v001/v002は物理候補とpath選択の同一入口を使う', async () => {
+  const [v001, v002] = await Promise.all([
+    readFile(path.join(ROOT, 'evals/clip_composition/presentation_output_page_line_planner_v001.mjs'), 'utf8'),
+    readFile(path.join(ROOT, 'evals/clip_composition/presentation_output_page_line_planner_v002.mjs'), 'utf8'),
+  ]);
+  for (const source of [v001, v002]) {
+    assert.match(source, /buildPresentationOutputPhysicalPageGraphV001\(/u);
+    assert.match(source, /selectPresentationOutputPagePathV001\(/u);
+  }
+  assert.doesNotMatch(v002, /const buildLineCandidates\s*=/u);
+  assert.doesNotMatch(v002, /const selectTimelinePath\s*=/u);
 });

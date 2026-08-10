@@ -1,0 +1,58 @@
+{
+  "exitCode": 2,
+  "status": "fatal",
+  "violations": [],
+  "fatalObservation": {
+    "schemaVersion": "presentation-fatal-observation-v002",
+    "innerStage": "layout-preflight",
+    "targetFile": null,
+    "innerCode": "CHILD_PROCESS_EXIT_NONZERO"
+  },
+  "proofObservation": {
+    "schemaVersion": "presentation-a-v002-layer1-v3-proof-observation-v002",
+    "checkpoints": [
+      "dependency-initialization-entered",
+      "dependency-initialization-completed",
+      "start-input-reread-entered",
+      "start-input-reread-completed",
+      "base-media-inspection-entered",
+      "base-media-inspection-completed",
+      "horizontal-style-resolution-entered",
+      "horizontal-style-resolution-completed",
+      "page-line-plan-entered",
+      "page-line-plan-completed",
+      "render-plan-entered",
+      "render-plan-completed",
+      "common-render-plan-entered",
+      "common-render-plan-completed",
+      "media-inspection-entered",
+      "media-inspection-completed",
+      "renderer-work-acquisition-entered",
+      "renderer-work-acquisition-completed",
+      "rendering-entered",
+      "rendering-completed",
+      "qc-entered",
+      "qc-completed",
+      "vertical-style-resolution-entered",
+      "vertical-style-resolution-completed",
+      "page-line-plan-entered",
+      "page-line-plan-completed",
+      "render-plan-entered",
+      "render-plan-completed",
+      "common-render-plan-entered",
+      "common-render-plan-completed",
+      "media-inspection-entered",
+      "media-inspection-completed",
+      "renderer-work-acquisition-entered",
+      "renderer-work-acquisition-completed",
+      "rendering-entered"
+    ],
+    "failure": {
+      "callerStage": "rendering",
+      "step": null,
+      "exceptionType": "child-process",
+      "targetFile": null,
+      "toolExitCode": null
+    }
+  }
+}

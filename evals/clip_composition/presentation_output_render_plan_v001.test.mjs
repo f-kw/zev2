@@ -48,6 +48,7 @@ import {
 import presentationOutputStyleResolverV001 from './presentation_output_style_resolver_v001.ts';
 import {
   PRESENTATION_OUTPUT_RENDER_DIAGNOSTIC_CODES_V001,
+  buildPresentationOutputCommonCoreElementProjectionV001,
   buildPresentationOutputCommonCorePlanV001,
   buildPresentationOutputRenderApplicationResultsV001,
   buildPresentationOutputRenderFailureReportV002,
@@ -1634,6 +1635,83 @@ test('ORP008: common coreは新native planのpage値を実際に受ける', () =
   assert.equal(element.startFrame, page.startFrame);
   assert.deepEqual(element.indexedLines.map(line => line.renderedText),
     page.lines.map(line => line.text));
+});
+
+test('ORP017: element共有入口抽出後もv001 common core byteは固定値と一致する', () => {
+  const {result} = buildPlan();
+  const core = buildPresentationOutputCommonCorePlanV001({
+    renderPlan: result.plan,
+    layoutContext: layoutContext('normal-landscape'),
+  });
+  assert.equal(core.status, 'built');
+  assert.equal(
+    outputCanonicalSha256(core.plan),
+    '7f7b9c3fcfa883f97c63a5e9ef42090b76a442613d0aa0f8316a6118383567cd',
+  );
+  const page = result.plan.captionDisplays[0].pages[0];
+  const shared = buildPresentationOutputCommonCoreElementProjectionV001({
+    instructionId: page.pageId,
+    text: page.text,
+    lineTexts: page.lines.map(line => line.text),
+    startFrame: page.startFrame,
+    endFrameExclusive: page.endFrameExclusive,
+    resolvedStyle: result.plan.resolvedStyle,
+    layoutContext: layoutContext('normal-landscape'),
+    targetProvenance: core.plan.elements[0].targetProvenance,
+  });
+  assert.equal(shared.status, 'built');
+  assert.equal(shared.projection.text, core.plan.elements[0].text);
+  assert.equal(shared.projection.startFrame, core.plan.elements[0].startFrame);
+  const diagnosticStyle = {
+    ...style('vertical-short-1080x1920'),
+    screenLayoutId: null,
+    presetId: 'diagnostic-full-frame-contain-v001',
+    cropMode: 'diagnostic-contain',
+  };
+  const v001DiagnosticPlan = structuredClone(result.plan);
+  v001DiagnosticPlan.resolvedStyle = diagnosticStyle;
+  assert.equal(
+    validatePresentationOutputRenderPlanV001(v001DiagnosticPlan).status,
+    'rejected',
+  );
+  assert.equal(buildPresentationOutputCommonCorePlanV001({
+    renderPlan: v001DiagnosticPlan,
+    layoutContext: layoutContext('vertical-short-1080x1920'),
+  }).status, 'rejected');
+  const sharedDiagnostic = buildPresentationOutputCommonCoreElementProjectionV001({
+    instructionId: page.pageId,
+    text: page.text,
+    lineTexts: page.lines.map(line => line.text),
+    startFrame: page.startFrame,
+    endFrameExclusive: page.endFrameExclusive,
+    resolvedStyle: diagnosticStyle,
+    layoutContext: layoutContext('vertical-short-1080x1920'),
+    targetProvenance: core.plan.elements[0].targetProvenance,
+  });
+  assert.equal(sharedDiagnostic.status, 'built');
+  assert.equal(buildPresentationOutputCommonCoreElementProjectionV001({
+    ...{
+      instructionId: page.pageId,
+      text: page.text,
+      lineTexts: page.lines.map(line => line.text),
+      startFrame: page.startFrame,
+      endFrameExclusive: page.endFrameExclusive,
+      layoutContext: layoutContext('vertical-short-1080x1920'),
+      targetProvenance: core.plan.elements[0].targetProvenance,
+    },
+    resolvedStyle: {...diagnosticStyle, presetId: 'wrong-diagnostic-v001'},
+  }).status, 'rejected');
+});
+
+test('ORP018: v001/v002は同一element投影入口を使う', async () => {
+  const [v001, v002] = await Promise.all([
+    readFile(path.join(ROOT, 'evals/clip_composition/presentation_output_render_plan_v001.mjs'), 'utf8'),
+    readFile(path.join(ROOT, 'evals/clip_composition/presentation_output_render_plan_v002.mjs'), 'utf8'),
+  ]);
+  for (const source of [v001, v002]) {
+    assert.match(source, /buildPresentationOutputCommonCoreElementProjectionV001\(/u);
+  }
+  assert.doesNotMatch(v002, /function indexExplicitLinesV001|const indexExplicitLinesV001/u);
 });
 
 test('OEE001: 合成横型を意味packageからapplication/QC/manifestまで一気通貫する', async () => {

@@ -19,6 +19,9 @@ import {
   validatePresentationOutputCaptionDisplaysV001,
 } from './presentation_output_page_line_planner_v001.mjs';
 import {
+  validatePresentationOutputResolvedStyleV002,
+} from './presentation_output_page_line_planner_v002.mjs';
+import {
   PRESENTATION_RENDERER_QC_VIOLATION_CODES,
 } from './presentation_renderer_qc_v002.mjs';
 import {
@@ -148,6 +151,18 @@ const isResolvedStyle = value => exactKeys(value, [
   && value.characterWidthRule === 'U+0000..U+00FF=1; other Unicode code point=2'
   && value.sceneTransitionMode === 'straight-cut-only'
   && value.audioMode === 'preserve-source-only';
+
+const isExactV002DiagnosticResolvedStyle = value => (
+  validatePresentationOutputResolvedStyleV002(value)
+  && value.format === 'vertical-short-1080x1920'
+  && value.screenLayoutId === null
+  && value.presetId === 'diagnostic-full-frame-contain-v001'
+  && value.cropMode === 'diagnostic-contain'
+);
+
+const isCommonCoreProjectionResolvedStyle = value => (
+  isResolvedStyle(value) || isExactV002DiagnosticResolvedStyle(value)
+);
 
 const isRendererQc = value => exactKeys(value, [
   'schemaVersion', 'status', 'instructionCount', 'checks', 'instructionEvidence',
@@ -399,6 +414,66 @@ export function buildPresentationOutputRenderPlanV001({
     : validation;
 }
 
+/**
+ * speech caption一件の本文index・出力frame・style投影を一つの正本で作る。
+ * source来歴と意味参照のfield形は版ごとに異なるため、呼出側が付与する。
+ */
+export function buildPresentationOutputCommonCoreElementProjectionV001({
+  instructionId,
+  text,
+  lineTexts,
+  startFrame,
+  endFrameExclusive,
+  resolvedStyle,
+  layoutContext,
+  targetProvenance,
+}) {
+  if (!FORMAL_ID.test(instructionId)
+    || !nonempty(text)
+    || !dense(lineTexts)
+    || lineTexts.length < 1
+    || !lineTexts.every(nonempty)
+    || !nonnegative(startFrame)
+    || !positive(endFrameExclusive)
+    || startFrame >= endFrameExclusive
+    || !isCommonCoreProjectionResolvedStyle(resolvedStyle)
+    || !isObject(layoutContext)
+    || !FORMAL_ID.test(layoutContext.presetRegistryVersion)
+    || !isFiniteJsonValue(layoutContext.visualState)
+    || !isFiniteJsonValue(layoutContext.transition)
+    || !isFiniteJsonValue(targetProvenance)) {
+    return {status: 'rejected'};
+  }
+  const explicit = indexExplicitLinesV001(lineTexts);
+  if (explicit.status !== 'passed'
+    || explicit.sourceText !== text
+    || explicit.indexedLines.length !== lineTexts.length) {
+    return {status: 'rejected'};
+  }
+  return {
+    status: 'built',
+    projection: {
+      instructionId,
+      kind: 'speech-caption',
+      text,
+      indexedLines: explicit.indexedLines,
+      startFrame,
+      endFrameExclusive,
+      displayFrameCount: endFrameExclusive - startFrame,
+      requestedPresetId: resolvedStyle.presetId,
+      appliedPresetId: resolvedStyle.presetId,
+      presetId: resolvedStyle.presetId,
+      registryVersion: layoutContext.presetRegistryVersion,
+      presetRegistryVersion: layoutContext.presetRegistryVersion,
+      stateId: resolvedStyle.visualStateId,
+      visualState: structuredClone(layoutContext.visualState),
+      transition: structuredClone(layoutContext.transition),
+      targetProvenance: structuredClone(targetProvenance),
+      materialRefs: [],
+    },
+  };
+}
+
 /** Native page一件を共通描画core element一件へ直接写す。旧B4 objectは作らない。 */
 export function buildPresentationOutputCommonCorePlanV001({renderPlan, layoutContext}) {
   const validation = validatePresentationOutputRenderPlanV001(renderPlan);
@@ -406,14 +481,28 @@ export function buildPresentationOutputCommonCorePlanV001({renderPlan, layoutCon
   const elements = [];
   for (const display of renderPlan.captionDisplays) {
     for (const page of display.pages) {
-      const explicit = indexExplicitLinesV001(page.lines.map(line => line.text));
-      if (explicit.status !== 'passed' || explicit.sourceText !== page.text) {
+      const shared = buildPresentationOutputCommonCoreElementProjectionV001({
+        instructionId: page.pageId,
+        text: page.text,
+        lineTexts: page.lines.map(line => line.text),
+        startFrame: page.startFrame,
+        endFrameExclusive: page.endFrameExclusive,
+        resolvedStyle: renderPlan.resolvedStyle,
+        layoutContext,
+        targetProvenance: {
+          targetRefId: display.semanticCaptionId,
+          targetType: 'semantic-caption',
+          sourceAtomIds: page.atomRefs.map(ref => ref.atomId),
+          lineAtomIds: page.lines.map(line => line.atomRefs.map(ref => ref.atomId)),
+        },
+      });
+      if (shared.status !== 'built') {
         return {status: 'rejected', violations: [{
           code: 'COMMON_RENDER_PLAN_INVALID', path: `/captionDisplays/${display.ordinal - 1}`,
           relatedIds: [page.pageId],
         }]};
       }
-      const indexedLines = explicit.indexedLines.map((line, index) => ({
+      const indexedLines = shared.projection.indexedLines.map((line, index) => ({
         ...line,
         atomRefs: structuredClone(page.lines[index].atomRefs),
         logicalWidth: page.lines[index].logicalWidth,
@@ -425,25 +514,20 @@ export function buildPresentationOutputCommonCorePlanV001({renderPlan, layoutCon
         indexedLines,
         sourceStartMs: page.sourceStartMs,
         sourceEndMs: page.sourceEndMs,
-        startFrame: page.startFrame,
-        endFrameExclusive: page.endFrameExclusive,
-        displayFrameCount: page.displayFrameCount,
-        requestedPresetId: renderPlan.resolvedStyle.presetId,
-        appliedPresetId: renderPlan.resolvedStyle.presetId,
-        presetId: renderPlan.resolvedStyle.presetId,
-        registryVersion: layoutContext.presetRegistryVersion,
-        presetRegistryVersion: layoutContext.presetRegistryVersion,
-        stateId: renderPlan.resolvedStyle.visualStateId,
-        visualState: structuredClone(layoutContext.visualState),
-        transition: structuredClone(layoutContext.transition),
+        startFrame: shared.projection.startFrame,
+        endFrameExclusive: shared.projection.endFrameExclusive,
+        displayFrameCount: shared.projection.displayFrameCount,
+        requestedPresetId: shared.projection.requestedPresetId,
+        appliedPresetId: shared.projection.appliedPresetId,
+        presetId: shared.projection.presetId,
+        registryVersion: shared.projection.registryVersion,
+        presetRegistryVersion: shared.projection.presetRegistryVersion,
+        stateId: shared.projection.stateId,
+        visualState: shared.projection.visualState,
+        transition: shared.projection.transition,
         timelineSegmentId: page.timelineSegmentId,
-        targetProvenance: {
-          targetRefId: display.semanticCaptionId,
-          targetType: 'semantic-caption',
-          sourceAtomIds: page.atomRefs.map(ref => ref.atomId),
-          lineAtomIds: page.lines.map(line => line.atomRefs.map(ref => ref.atomId)),
-        },
-        materialRefs: [],
+        targetProvenance: shared.projection.targetProvenance,
+        materialRefs: shared.projection.materialRefs,
       });
     }
   }

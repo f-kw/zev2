@@ -1,0 +1,60 @@
+TAP version 13
+# Subtest: APJ001: proof jobはexact fieldと出力rootだけを受理する
+ok 1 - APJ001: proof jobはexact fieldと出力rootだけを受理する
+  ---
+  duration_ms: 0.934042
+  ...
+# Subtest: APJ002: 三fixtureを入力順の横型・縦型診断の計六本へ一度ずつ写す
+ok 2 - APJ002: 三fixtureを入力順の横型・縦型診断の計六本へ一度ずつ写す
+  ---
+  duration_ms: 1.043208
+  ...
+# Subtest: APJ003: trim/concat・描画QCは既存の実exportだけを正本として保持する
+ok 3 - APJ003: trim/concat・描画QCは既存の実exportだけを正本として保持する
+  ---
+  duration_ms: 23.117083
+  ...
+# Subtest: APJ004: 六経路は二採用区間のtrim/concat結果だけを受理する
+ok 4 - APJ004: 六経路は二採用区間のtrim/concat結果だけを受理する
+  ---
+  duration_ms: 0.376042
+  ...
+# Subtest: APJ005: 開始時と公開直前に全入力bindingを再読する
+ok 5 - APJ005: 開始時と公開直前に全入力bindingを再読する
+  ---
+  duration_ms: 3.696417
+  ...
+# Subtest: APJ006: 公開直前のbinding差を拒否して公開しない
+ok 6 - APJ006: 公開直前のbinding差を拒否して公開しない
+  ---
+  duration_ms: 12.749
+  ...
+# Subtest: APJ007: QC不合格をOUTPUT_V002_QC_FAILEDが所有する
+ok 7 - APJ007: QC不合格をOUTPUT_V002_QC_FAILEDが所有する
+  ---
+  duration_ms: 0.210541
+  ...
+# Subtest: APJ008: no-replace公開競合をOUTPUT_V002_PUBLICATION_FAILEDが所有する
+ok 8 - APJ008: no-replace公開競合をOUTPUT_V002_PUBLICATION_FAILEDが所有する
+  ---
+  duration_ms: 0.258667
+  ...
+# Subtest: APJ009: formal jobはAPI通信・費用・再試行の入口を一つも持たない
+ok 9 - APJ009: formal jobはAPI通信・費用・再試行の入口を一つも持たない
+  ---
+  duration_ms: 0.204292
+  ...
+# Subtest: APJ010: 保存済み旧v3実fixture一経路を正式化しproof runner入力へ渡せる
+ok 10 - APJ010: 保存済み旧v3実fixture一経路を正式化しproof runner入力へ渡せる
+  ---
+  duration_ms: 22.399292
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 395.495

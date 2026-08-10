@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "presentation-a-v002-layer1-v3-proof-job-v001",
+  "jobId": "a-v002-layer1-v3-option-b-proof-20260809-v001",
+  "createdAt": "2026-08-09T08:07:00Z",
+  "sourceMedia": {
+    "path": "evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4",
+    "fileSha256": "8359f59d8c205fb815c9165f5a464ec4bb9f109f9d91384b80e571410dc2fa25"
+  },
+  "inputBindings": {
+    "legacyPackage": {
+      "schemaVersion": "presentation-a-v002-layer1-v3-proposal-v001",
+      "path": "evals/clip_composition/outputs/internal-edit/20260717-layer1-v003-long-gap-pair-review-v001/package-input.json",
+      "fileSha256": "cfb43e60d8bf73d3377f39ff45d2d69156b6b5432d6944799b402ede764d5b0c",
+      "canonicalSha256": "5cfa7d1ca86542333c66b0dbecf886cc9088cfe6e43cc74fd9edb533ce80cdb0"
+    },
+    "humanResult": {
+      "schemaVersion": "presentation-a-v002-layer1-v3-legacy-human-result-v001",
+      "path": "evals/clip_composition/outputs/internal-edit/20260717-layer1-v003-long-gap-pair-review-v001/human-result.json",
+      "fileSha256": "cb08a7607b6d99f3f7fd5ef27582a90b096ac07356d9fd7fc59fef740b44a3bc",
+      "canonicalSha256": "0325f5b3dfb6aaedcd112e3e7de88114c2eae84b250a248c774861c3d26b2e91"
+    },
+    "sourceIdentity": {
+      "schemaVersion": "presentation-material-source-identity-v001",
+      "path": "evals/clip_composition/outputs/presentation/source-review-preparations/qdczJpv8RCc-candidate-59-v001/source-identity.json",
+      "fileSha256": "fb27b0c17e9663e6fee71489bcb5755964ad04fe0277609d93acd087c3437ac4",
+      "canonicalSha256": "34ede5c533218032932140c89ec4a2b23ffaf432d70a23cda9caa9b7713b4171"
+    },
+    "sourceTranscriptByte": {
+      "path": "evals/clip_composition/fixtures/nE_bNeBNp4E_multiblock_material_v001/transcript.json",
+      "fileSha256": "3e6dc8fa8dd22ea02f296a4fa3bb2d311639af1fba1a56f999abbc6834bcfea3"
+    }
+  },
+  "styleBindings": {
+    "horizontalPresetRegistry": {
+      "schemaVersion": "presentation-preset-registry-v001",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+      "canonicalSha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4"
+    },
+    "verticalPresetRegistry": {
+      "schemaVersion": "presentation-preset-registry-v002",
+      "path": "evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-registry.json",
+      "fileSha256": "3a3e0b7b9ce4e349f778b8035c60085a101f7631373404bdc8252a9cc7532133",
+      "canonicalSha256": "cbe37484700436cf4ca6ff745273a7941654e412c744de11d24be387c0a10ef7"
+    }
+  },
+  "outputDirectory": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260809-v001",
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/run_presentation_a_v002_layer1_v3_proof_job_v001.ts",
+      "fileSha256": "4c4bba6516f9bee6dbb329e7552c78e2ddd0e2ddcb5fd109eb36128f8572d49f",
+      "role": "proof-runner"
+    },
+    {
+      "path": "evals/clip_composition/presentation_a_v002_layer1_v3_fixture_v001.mjs",
+      "fileSha256": "f48a8a0e7aa37946fddada05d93b4bd9dbf47cb6c4445ebf51e2c8939f24700f",
+      "role": "fixture"
+    },
+    {
+      "path": "evals/clip_composition/presentation_a_source_sequence_v002.mjs",
+      "fileSha256": "c20401d398956710842823e9ec2677f07cf5686c9f04b03c1df1532d540e09ec",
+      "role": "source-sequence"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_a_source_sequence_job_v002.mjs",
+      "fileSha256": "a564bd336f8bd5d03e9052b6e727b844c894897f4a5a20b2bf2fc0154198cec2",
+      "role": "source-sequence-runner"
+    },
+    {
+      "path": "evals/clip_composition/presentation_a_meaning_information_package_v002.mjs",
+      "fileSha256": "40a85f526666dd5f68bf64d141a5236146ae5b8e2baf285d4390bef41410e1a2",
+      "role": "meaning-package"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_a_meaning_information_package_job_v002.mjs",
+      "fileSha256": "2bdf703d830a03a6ccf4d1988e268cd198b30de3faec7a99d6f0fb18209845eb",
+      "role": "meaning-package-runner"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "role": "strict-json"
+    },
+    {
+      "path": "evals/clip_composition/presentation_fatal_observation_v002.mjs",
+      "fileSha256": "cf95c2ba8785be681dcecc03dc4ec009d6f02b4161e3c39f7edbf431b92b6115",
+      "role": "fatal-observation"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_piecewise_timeline_v002.mjs",
+      "fileSha256": "72305c31005fa8b64d3b881a07a315e619eba36677bf1f8b691b2af4c4623516",
+      "role": "piecewise-timeline"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_page_line_planner_v002.mjs",
+      "fileSha256": "7c7d4db95dd3ae8a264b0bcf8d7b3d27e1b57034a233e95e99613bf213bec502",
+      "role": "page-line-planner-v002"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_page_line_planner_v001.mjs",
+      "fileSha256": "c1204f0ef6321510263358414f29f17be85050670e9d96e9c30f6387f3b8913f",
+      "role": "page-line-planner-v001"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_style_resolver_v001.ts",
+      "fileSha256": "e63e4b4cf47d94d763333e13513570abe2dbac418e5ac5b396e1295b22956403",
+      "role": "style-resolver"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_render_plan_v002.mjs",
+      "fileSha256": "80623c9690be58ea4db59eec40d76af3c0f51e3f5c860b0c985c78832e88fe01",
+      "role": "render-plan-v002"
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_render_plan_v001.mjs",
+      "fileSha256": "fb7a7ea2839444955ab7a8da6c86d38ab7007c2627af4e00e210d6bda2b7ab82",
+      "role": "render-plan-v001"
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_build_v001.mjs",
+      "fileSha256": "5e76f31c71f6a3d95fc9d0a3980174b326a2d1e630c8800fdfaee57efa7d5287",
+      "role": "base-media-builder"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "c90dc00456ade415e46cf8c692c49f3d08ae0ab21186b10227cdb5676f445292",
+      "role": "renderer-core"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "ecf221f6434190adf2e99e8de1c4969b5f4533bf04cf8cf2363d8de79bf187e2",
+      "role": "renderer-qc"
+    },
+    {
+      "path": "evals/clip_composition/presentation_a_v002_vertical_caption_diagnostic_v001.mjs",
+      "fileSha256": "4782b56fce59702bdb002deafd1989f86f19dc7936c7341d890be0adf51876c9",
+      "role": "vertical-diagnostic"
+    },
+    {
+      "path": "evals/clip_composition/presentation_a_v002_review_ui_v001.mjs",
+      "fileSha256": "bae53b0b60deba96d4645ac6b00a9afc870d096e5c2e9ad84751145f84cf986b",
+      "role": "review-ui"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_vertical_review_v001.ts",
+      "fileSha256": "6fb4edfd9c9a9161f474921368b05bd32c0aaef2b1fd5155e148d291134c8c75",
+      "role": "vertical-renderer"
+    }
+  ]
+}

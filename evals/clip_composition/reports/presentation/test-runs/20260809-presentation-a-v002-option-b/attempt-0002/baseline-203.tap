@@ -1,0 +1,3858 @@
+TAP version 13
+# Subtest: strict job, decision, tool and manifest contracts reject unknown or changed facts
+ok 1 - strict job, decision, tool and manifest contracts reject unknown or changed facts
+  ---
+  duration_ms: 3.7895
+  ...
+# Subtest: 30fps source without audio builds only the approved disjoint frame intervals
+not ok 2 - 30fps source without audio builds only the approved disjoint frame intervals
+  ---
+  duration_ms: 634.802875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:427:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:434:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 60fps globally takes even source frames and produces the same 30fps frame grid
+not ok 3 - 60fps globally takes even source frames and produces the same 30fps frame grid
+  ---
+  duration_ms: 523.832333
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:493:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:500:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 60fps・181 decoded framesの最後のglobal-even frame 180を媒体終端までの区間で選べる
+not ok 4 - 60fps・181 decoded framesの最後のglobal-even frame 180を媒体終端までの区間で選べる
+  ---
+  duration_ms: 885.513542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:512:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:524:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 60fps・181 decoded framesの48kHz AAC末尾は実在sampleだけを使いvideo-only尾を明示する
+not ok 5 - 60fps・181 decoded framesの48kHz AAC末尾は実在sampleだけを使いvideo-only尾を明示する
+  ---
+  duration_ms: 913.628125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:539:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:553:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 44100Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+not ok 6 - 44100Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+  ---
+  duration_ms: 335.325292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:589:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:597:12)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 48000Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+not ok 7 - 48000Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+  ---
+  duration_ms: 331.303375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:589:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:597:12)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: positive source audio PTS is preserved as zero-filled canonical PCM instead of moving speech forward
+not ok 8 - positive source audio PTS is preserved as zero-filled canonical PCM instead of moving speech forward
+  ---
+  duration_ms: 338.554084
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:630:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:639:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: an internal audio PTS gap remains silent between real PCM before and after it
+not ok 9 - an internal audio PTS gap remains silent between real PCM before and after it
+  ---
+  duration_ms: 362.540208
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:653:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:660:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: source audio without both stream and packet presentation clocks is rejected without decoded fallback
+ok 10 - source audio without both stream and packet presentation clocks is rejected without decoded fallback
+  ---
+  duration_ms: 618.506333
+  ...
+# Subtest: non-contiguous selected tone segments preserve approved segment order in decoded PCM
+not ok 11 - non-contiguous selected tone segments preserve approved segment order in decoded PCM
+  ---
+  duration_ms: 353.760709
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:686:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:696:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: stereo FL and FR channel order remains distinguishable in real decoded PCM
+not ok 12 - stereo FL and FR channel order remains distinguishable in real decoded PCM
+  ---
+  duration_ms: 336.048209
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:704:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:711:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: raw millisecond endpoint beyond decoded source is rejected before frame rounding can hide it
+ok 13 - raw millisecond endpoint beyond decoded source is rejected before frame rounding can hide it
+  ---
+  duration_ms: 0.555667
+  ...
+# Subtest: audio presentation shortfall is allowed only at the exact decoded-media terminal segment
+ok 14 - audio presentation shortfall is allowed only at the exact decoded-media terminal segment
+  ---
+  duration_ms: 0.426292
+  ...
+# Subtest: unsafe symlink is rejected before reading and existing output is never overwritten
+not ok 15 - unsafe symlink is rejected before reading and existing output is never overwritten
+  ---
+  duration_ms: 329.795625
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:764:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(result.violations.some((item) => item.code === 'BASE_MEDIA_OUTPUT_PATH_UNSAFE'))
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:782:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: parent directory replaced by symlink during processing is rejected immediately before publish
+ok 16 - parent directory replaced by symlink during processing is rejected immediately before publish
+  ---
+  duration_ms: 2.432083
+  ...
+# Subtest: basis declaration is checked against actual JSON kind and direct execution has no synthetic job-hash fallback
+not ok 17 - basis declaration is checked against actual JSON kind and direct execution has no synthetic job-hash fallback
+  ---
+  duration_ms: 338.514375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:817:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'BASE_MEDIA_TOOL_PROFILE_MISMATCH'
+    - 'ASSEMBLY_DECISION_BASIS_MISMATCH'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'ASSEMBLY_DECISION_BASIS_MISMATCH'
+  actual: 'BASE_MEDIA_TOOL_PROFILE_MISMATCH'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:846:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: logical build is deterministic across two job ids and output directories
+not ok 18 - logical build is deterministic across two job ids and output directories
+  ---
+  duration_ms: 346.453875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:863:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"BASE_MEDIA_TOOL_PROFILE_MISMATCH","path":"$implementationFiles","relatedIds":[],"details":{"actual":"a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c","expected":"0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789","path":"evals/clip_composition/presentation_caption_contract_v002.mjs","retainedBuildPaths":{"lockFile":null,"policy":"retain-without-automatic-delete-v001","publicationTemporaryDirectory":null,"workingDirectory":null}}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:879:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: CLI distinguishes invalid validated input from an unreadable path
+ok 19 - CLI distinguishes invalid validated input from an unreadable path
+  ---
+  duration_ms: 92.829375
+  ...
+# Subtest: every fixed violation code fires from its validator, binding, QC stage, or filesystem path
+not ok 20 - every fixed violation code fires from its validator, binding, QC stage, or filesystem path
+  ---
+  duration_ms: 2188.466042
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:894:1'
+  failureType: 'testCodeFailure'
+  error: '失敗経路は掃除より安全を優先して残留させる'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v001.test.mjs:1072:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 承認済みdecisionから実builder成果物を作りrenderer v002正式入口へ直結する
+not ok 21 - 承認済みdecisionから実builder成果物を作りrenderer v002正式入口へ直結する
+  ---
+  duration_ms: 623.431542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_renderer_v002.integration.test.mjs:378:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [
+      {
+        "code": "BASE_MEDIA_TOOL_PROFILE_MISMATCH",
+        "path": "$implementationFiles",
+        "relatedIds": [],
+        "details": {
+          "actual": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c",
+          "expected": "0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789",
+          "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+          "retainedBuildPaths": {
+            "lockFile": null,
+            "policy": "retain-without-automatic-delete-v001",
+            "publicationTemporaryDirectory": null,
+            "workingDirectory": null
+          }
+        }
+      }
+    ]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    runBuilderRendererCase (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_renderer_v002.integration.test.mjs:189:12)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_renderer_v002.integration.test.mjs:379:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 60fps無音声・非frame境界・空きを持つ複数区間をglobal-evenで連結してrenderer v002へ渡す
+not ok 22 - 60fps無音声・非frame境界・空きを持つ複数区間をglobal-evenで連結してrenderer v002へ渡す
+  ---
+  duration_ms: 1373.048917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_renderer_v002.integration.test.mjs:415:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [
+      {
+        "code": "BASE_MEDIA_TOOL_PROFILE_MISMATCH",
+        "path": "$implementationFiles",
+        "relatedIds": [],
+        "details": {
+          "actual": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c",
+          "expected": "0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789",
+          "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+          "retainedBuildPaths": {
+            "lockFile": null,
+            "policy": "retain-without-automatic-delete-v001",
+            "publicationTemporaryDirectory": null,
+            "workingDirectory": null
+          }
+        }
+      }
+    ]
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    runBuilderRendererCase (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_renderer_v002.integration.test.mjs:189:12)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_renderer_v002.integration.test.mjs:416:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+ok 23 - 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+  ---
+  duration_ms: 15.007042
+  ...
+# Subtest: 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+ok 24 - 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+  ---
+  duration_ms: 9.675125
+  ...
+# Subtest: 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+ok 25 - 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+  ---
+  duration_ms: 3.787125
+  ...
+# Subtest: 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+not ok 26 - 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+  ---
+  duration_ms: 29.374708
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:890:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[0]","relatedIds":["evals/clip_composition/presentation_renderer_entry_v001.tsx"],"details":{"actualFileSha256":"5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7","expectedFileSha256":"884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[1]","relatedIds":["evals/clip_composition/presentation_renderer_text_layout_v001.mjs"],"details":{"actualFileSha256":"8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0","expectedFileSha256":"066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:893:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+not ok 27 - 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+  ---
+  duration_ms: 292.0545
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:962:1'
+  failureType: 'testCodeFailure'
+  error: 'INSTRUCTION_CONTRACT_NOT_PASSED was not observed: [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[0]","relatedIds":["evals/clip_composition/presentation_renderer_entry_v001.tsx"],"details":{"actualFileSha256":"5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7","expectedFileSha256":"884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[1]","relatedIds":["evals/clip_composition/presentation_renderer_text_layout_v001.mjs"],"details":{"actualFileSha256":"8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0","expectedFileSha256":"066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"}}]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    assertHasCode (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:115:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:985:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+not ok 28 - 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+  ---
+  duration_ms: 280.253458
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1041:1'
+  failureType: 'testCodeFailure'
+  error: 'INSTRUCTION_CONTRACT_NOT_PASSED was not observed: [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[0]","relatedIds":["evals/clip_composition/presentation_renderer_entry_v001.tsx"],"details":{"actualFileSha256":"5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7","expectedFileSha256":"884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[1]","relatedIds":["evals/clip_composition/presentation_renderer_text_layout_v001.mjs"],"details":{"actualFileSha256":"8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0","expectedFileSha256":"066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"}}]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    assertHasCode (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:115:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1049:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+ok 29 - 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+  ---
+  duration_ms: 1.782916
+  ...
+# Subtest: 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+ok 30 - 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+  ---
+  duration_ms: 0.118625
+  ...
+# Subtest: 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+ok 31 - 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+  ---
+  duration_ms: 0.407083
+  ...
+# Subtest: 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+ok 32 - 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+  ---
+  duration_ms: 0.824416
+  ...
+# Subtest: 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+ok 33 - 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+  ---
+  duration_ms: 2.667417
+  ...
+# Subtest: 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+ok 34 - 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+  ---
+  duration_ms: 0.224625
+  ...
+# Subtest: 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+ok 35 - 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+  ---
+  duration_ms: 0.759833
+  ...
+# Subtest: 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+ok 36 - 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+  ---
+  duration_ms: 441.34775
+  ...
+# Subtest: 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+ok 37 - 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+  ---
+  duration_ms: 0.526125
+  ...
+# Subtest: 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+not ok 38 - 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+  ---
+  duration_ms: 271.426375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1496:1'
+  failureType: 'testCodeFailure'
+  error: 'INSTRUCTION_CONTRACT_NOT_PASSED was not observed: [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[0]","relatedIds":["evals/clip_composition/presentation_renderer_entry_v001.tsx"],"details":{"actualFileSha256":"5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7","expectedFileSha256":"884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[1]","relatedIds":["evals/clip_composition/presentation_renderer_text_layout_v001.mjs"],"details":{"actualFileSha256":"8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0","expectedFileSha256":"066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"}}]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    assertHasCode (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:115:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1517:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+not ok 39 - 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+  ---
+  duration_ms: 2796.850792
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1524:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "trust",
+      "violations": [
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[0]",
+          "relatedIds": [
+            "runner/src/remotion/Root.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+            "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[1]",
+          "relatedIds": [
+            "runner/src/remotion/renderer/TelopRenderer.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+            "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[0]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7",
+            "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[1]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+          ],
+          "details": {
+            "actualFileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+            "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+          }
+        }
+      ],
+      "nested": {
+        "schemaVersion": "presentation-renderer-trust-report-v001",
+        "status": "failed",
+        "violations": [
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[0]",
+            "relatedIds": [
+              "runner/src/remotion/Root.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+              "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[1]",
+            "relatedIds": [
+              "runner/src/remotion/renderer/TelopRenderer.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+              "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[0]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7",
+              "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[1]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+            ],
+            "details": {
+              "actualFileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+              "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+            }
+          }
+        ],
+        "trust": null,
+        "trustCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+      }
+    }
+    
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:705:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1525:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+not ok 40 - 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+  ---
+  duration_ms: 0.473792
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1564:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "trust",
+      "violations": [
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[0]",
+          "relatedIds": [
+            "runner/src/remotion/Root.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+            "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[1]",
+          "relatedIds": [
+            "runner/src/remotion/renderer/TelopRenderer.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+            "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[0]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7",
+            "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[1]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+          ],
+          "details": {
+            "actualFileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+            "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+          }
+        }
+      ],
+      "nested": {
+        "schemaVersion": "presentation-renderer-trust-report-v001",
+        "status": "failed",
+        "violations": [
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[0]",
+            "relatedIds": [
+              "runner/src/remotion/Root.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+              "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[1]",
+            "relatedIds": [
+              "runner/src/remotion/renderer/TelopRenderer.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+              "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[0]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7",
+              "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[1]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+            ],
+            "details": {
+              "actualFileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+              "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+            }
+          }
+        ],
+        "trust": null,
+        "trustCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+      }
+    }
+    
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:705:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1525:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+not ok 41 - 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+  ---
+  duration_ms: 0.241375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1633:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "trust",
+      "violations": [
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[0]",
+          "relatedIds": [
+            "runner/src/remotion/Root.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+            "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[1]",
+          "relatedIds": [
+            "runner/src/remotion/renderer/TelopRenderer.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+            "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[0]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7",
+            "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[1]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+          ],
+          "details": {
+            "actualFileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+            "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+          }
+        }
+      ],
+      "nested": {
+        "schemaVersion": "presentation-renderer-trust-report-v001",
+        "status": "failed",
+        "violations": [
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[0]",
+            "relatedIds": [
+              "runner/src/remotion/Root.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+              "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[1]",
+            "relatedIds": [
+              "runner/src/remotion/renderer/TelopRenderer.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+              "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[0]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7",
+              "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[1]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+            ],
+            "details": {
+              "actualFileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+              "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+            }
+          }
+        ],
+        "trust": null,
+        "trustCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+      }
+    }
+    
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:705:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1525:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: H01: candidate 13/59の保存済み正式成果物treeは認定tagから不変
+ok 42 - H01: candidate 13/59の保存済み正式成果物treeは認定tagから不変
+  ---
+  duration_ms: 919.861125
+  ...
+# {"observations":[{"candidateId":"DmWu0jVQfTE-candidate-13","pathCount":95,"excludedVerticalSiblingPathCount":0,"treeSha256":"2c68a23d126586b5e071848858edba637e79839bcb5d0906613d4398e9c62464"},{"candidateId":"qdczJpv8RCc-candidate-59","pathCount":91,"excludedVerticalSiblingPathCount":55,"treeSha256":"983763b52a60e10fd99126265e7178e4a600fd3024e00614f8abfcc90a724397"}],"scopeRegression":{"horizontalRootSidecarRemainsProtected":true,"missingHorizontalPathRejected":true,"changedHorizontalByteRejected":true,"separateVersionedVerticalRootExcluded":true,"unregisteredHorizontalSiblingRejected":true,"candidateIdMentionOutsideArtifactIdentityIgnored":true}}
+# Subtest: H02: 横型B3の処理結果projectionはbyte不変
+ok 43 - H02: 横型B3の処理結果projectionはbyte不変
+  ---
+  duration_ms: 366.983417
+  ...
+# {"artifacts":[{"path":"evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/segmenter-boundary-evidence.json","byteSha256":"40230b94302914261b7e2c46c51cb0fc46ae18b26b99580ea2f74f1b02666c43"},{"path":"evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/embedded-gate-a-validation-report.json","byteSha256":"2ffaa7ae5edfc0950163e664aa09c85057782dc1c74bd20bdcd1eb289565fa19"},{"path":"evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/semantic-source-input.json","byteSha256":"c350a402db15ff7a5405894f939f0a66522482d6d8c78584fe5b55d9dc489980"},{"path":"evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/deterministic-expansion-map.json","byteSha256":"33c42a4c625452c6d120f59ccb5a8e78822f9008f5121a91a32e9d3be7133b3d"},{"path":"evals/clip_composition/outputs/presentation/segmenter-boundary-evidence/DmWu0jVQfTE-candidate-13-v001/source-only-leakage-report.json","byteSha256":"e2963f6e4e1e68823a97bd66483b8e13688230961f03190bea259d29997003ec"}],"sharedCalculation":{"tests":161,"pass":1,"fail":0,"skipped":160}}
+# Subtest: H03: candidate 13 B6は処理結果と現在実装来歴を二層で照合する
+not ok 44 - H03: candidate 13 B6は処理結果と現在実装来歴を二層で照合する
+  ---
+  duration_ms: 1121.710041
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_formal_path_integration_v001.test.mjs:665:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    evals/clip_composition/run_presentation_caption_gate_b6_v001.mjs
+    + actual - expected
+    
+    + 'ecad17891d63038647e2be0634b5844d2d117c38ea6e07ccef470d2887e56204'
+    - '636a733d1036158e7269022ca3ae6105c51ae595907874c6a6b1d53e8f3cff1d'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '636a733d1036158e7269022ca3ae6105c51ae595907874c6a6b1d53e8f3cff1d'
+  actual: 'ecad17891d63038647e2be0634b5844d2d117c38ea6e07ccef470d2887e56204'
+  operator: 'strictEqual'
+  stack: |-
+    assertApprovedCurrentImplementations (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_formal_path_integration_v001.test.mjs:250:14)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_formal_path_integration_v001.test.mjs:701:33)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: H04: 横型B4とrendererは処理結果と現在実装来歴を二層で照合する
+not ok 45 - H04: 横型B4とrendererは処理結果と現在実装来歴を二層で照合する
+  ---
+  duration_ms: 986.078917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_formal_path_integration_v001.test.mjs:727:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    evals/clip_composition/presentation_renderer_qc_v002.mjs
+    + actual - expected
+    
+    + 'ecf221f6434190adf2e99e8de1c4969b5f4533bf04cf8cf2363d8de79bf187e2'
+    - '73ede4f3556f80afac98b8e0e3c4b81019f718b4644d2b3f8cb1ac037989f0d3'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '73ede4f3556f80afac98b8e0e3c4b81019f718b4644d2b3f8cb1ac037989f0d3'
+  actual: 'ecf221f6434190adf2e99e8de1c4969b5f4533bf04cf8cf2363d8de79bf187e2'
+  operator: 'strictEqual'
+  stack: |-
+    assertApprovedCurrentImplementations (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_formal_path_integration_v001.test.mjs:250:14)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_formal_path_integration_v001.test.mjs:769:33)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: H05: v002字幕回帰は24/24を維持する
+ok 46 - H05: v002字幕回帰は24/24を維持する
+  ---
+  duration_ms: 102.871667
+  ...
+# {"tests":24,"pass":24,"fail":0,"skipped":0}
+# Subtest: H06: 横型QC v003 wrapperは共通計算とbyte一致し現在実装来歴だけを照合する
+not ok 47 - H06: 横型QC v003 wrapperは共通計算とbyte一致し現在実装来歴だけを照合する
+  ---
+  duration_ms: 105.385583
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_formal_path_integration_v001.test.mjs:811:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    evals/clip_composition/presentation_renderer_qc_v002.mjs
+    + actual - expected
+    
+    + 'ecf221f6434190adf2e99e8de1c4969b5f4533bf04cf8cf2363d8de79bf187e2'
+    - '73ede4f3556f80afac98b8e0e3c4b81019f718b4644d2b3f8cb1ac037989f0d3'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '73ede4f3556f80afac98b8e0e3c4b81019f718b4644d2b3f8cb1ac037989f0d3'
+  actual: 'ecf221f6434190adf2e99e8de1c4969b5f4533bf04cf8cf2363d8de79bf187e2'
+  operator: 'strictEqual'
+  stack: |-
+    assertApprovedCurrentImplementations (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_formal_path_integration_v001.test.mjs:250:14)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_formal_path_integration_v001.test.mjs:833:33)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: V01: speaker_onlyの正常viewportを共通crop計算へ渡す
+ok 48 - V01: speaker_onlyの正常viewportを共通crop計算へ渡す
+  ---
+  duration_ms: 10.993542
+  ...
+# Subtest: V02: 必須viewport欠落を拒否する
+ok 49 - V02: 必須viewport欠落を拒否する
+  ---
+  duration_ms: 0.454792
+  ...
+# Subtest: V03: 余分なviewportを拒否する
+ok 50 - V03: 余分なviewportを拒否する
+  ---
+  duration_ms: 0.084625
+  ...
+# Subtest: V04: 非有限・範囲外・逆転viewportを拒否する
+ok 51 - V04: 非有限・範囲外・逆転viewportを拒否する
+  ---
+  duration_ms: 0.131542
+  ...
+# Subtest: V05: crop decisionの入力SHA差し替えを専用codeへ帰属できる
+ok 52 - V05: crop decisionの入力SHA差し替えを専用codeへ帰属できる
+  ---
+  duration_ms: 0.193875
+  ...
+# Subtest: V06: screen-layout実装SHA不一致を専用codeへ帰属する
+ok 53 - V06: screen-layout実装SHA不一致を専用codeへ帰属する
+  ---
+  duration_ms: 6.047709
+  ...
+# Subtest: V07: crop filter構築不能を専用違反へ帰属する
+ok 54 - V07: crop filter構築不能を専用違反へ帰属する
+  ---
+  duration_ms: 0.103334
+  ...
+# Subtest: V08: crop後の1080x1920・30fps違反を拒否する
+ok 55 - V08: crop後の1080x1920・30fps違反を拒否する
+  ---
+  duration_ms: 0.077083
+  ...
+# Subtest: V09: frame数変化を拒否する
+ok 56 - V09: frame数変化を拒否する
+  ---
+  duration_ms: 0.058667
+  ...
+# Subtest: V10: 音声packet変化を拒否する
+ok 57 - V10: 音声packet変化を拒否する
+  ---
+  duration_ms: 0.088709
+  ...
+# Subtest: V11: B4明示行と文字modelの行不一致を拒否する
+ok 58 - V11: B4明示行と文字modelの行不一致を拒否する
+  ---
+  duration_ms: 6.402
+  ...
+# Subtest: V12: 末尾句点を含む明示行はそのまま文字modelを通る
+ok 59 - V12: 末尾句点を含む明示行はそのまま文字modelを通る
+  ---
+  duration_ms: 1.938625
+  ...
+# Subtest: V13: 134px相当のalpha境界内と外を区別する
+ok 60 - V13: 134px相当のalpha境界内と外を区別する
+  ---
+  duration_ms: 0.111541
+  ...
+# Subtest: V14: 版中立QCとfailure所有表は固定されたまま動く
+ok 61 - V14: 版中立QCとfailure所有表は固定されたまま動く
+  ---
+  duration_ms: 0.192208
+  ...
+# Subtest: V15: 縦型overlay adapterはfont失敗を許さない
+ok 62 - V15: 縦型overlay adapterはfont失敗を許さない
+  ---
+  duration_ms: 0.121583
+  ...
+# Subtest: V16: 正式Remotion入口は束縛実体とbrowserを必須にする
+ok 63 - V16: 正式Remotion入口は束縛実体とbrowserを必須にする
+  ---
+  duration_ms: 0.155542
+  ...
+# Subtest: V17: 縦型は共通下位描画入口を呼び独自合成器を持たない
+ok 64 - V17: 縦型は共通下位描画入口を呼び独自合成器を持たない
+  ---
+  duration_ms: 0.79625
+  ...
+# Subtest: V18: font check falseもstrict-cancel経路へ固定される
+ok 65 - V18: font check falseもstrict-cancel経路へ固定される
+  ---
+  duration_ms: 0.329417
+  ...
+# Subtest: V19: @zev2/sharedは固定symlinkとruntime exportへ解決する
+ok 66 - V19: @zev2/sharedは固定symlinkとruntime exportへ解決する
+  ---
+  duration_ms: 0.462875
+  ...
+# Subtest: V20: 非crop入力不一致のfailureは15件summaryとして表現する
+ok 67 - V20: 非crop入力不一致のfailureは15件summaryとして表現する
+  ---
+  duration_ms: 0.144958
+  ...
+# Subtest: V21: screen-layout以外の実装不一致は29件summaryへ帰属する
+ok 68 - V21: screen-layout以外の実装不一致は29件summaryへ帰属する
+  ---
+  duration_ms: 0.28825
+  ...
+# Subtest: V22: 生成時renderer来歴と現在実装のlive束縛を分離する
+not ok 69 - V22: 生成時renderer来歴と現在実装のlive束縛を分離する
+  ---
+  duration_ms: 3.974125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_review_renderer_v001.test.mjs:386:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'rejected'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'rejected'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_vertical_review_renderer_v001.test.mjs:407:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: V23: 実crop入口は共通frame数読取処理を通してAVを保持する
+ok 70 - V23: 実crop入口は共通frame数読取処理を通してAVを保持する
+  ---
+  duration_ms: 261.542625
+  ...
+# Subtest: package coreの公開入口と違反コードは承認済み集合だけである
+ok 71 - package coreの公開入口と違反コードは承認済み集合だけである
+  ---
+  duration_ms: 0.666209
+  ...
+# Subtest: package runnerの公開入口は承認済み4件だけである
+ok 72 - package runnerの公開入口は承認済み4件だけである
+  ---
+  duration_ms: 0.119667
+  ...
+# Subtest: package production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す
+ok 73 - package production読取handleは固定3入口・同期one-use・AsyncIterableで同一内容を返す
+  ---
+  duration_ms: 7.773083
+  ...
+# Subtest: R3:3.38GB実fileのchunk hash/countは独立helperと完全一致し全byteを保持しない
+ok 74 - R3:3.38GB実fileのchunk hash/countは独立helperと完全一致し全byteを保持しない
+  ---
+  duration_ms: 4260.514334
+  ...
+# Subtest: strict JSONは適法なescapeと補助平面文字を無変更で往復する
+ok 75 - strict JSONは適法なescapeと補助平面文字を無変更で往復する
+  ---
+  duration_ms: 0.87425
+  ...
+# Subtest: strict JSONは不正UTF-8を拒否する
+ok 76 - strict JSONは不正UTF-8を拒否する
+  ---
+  duration_ms: 0.070291
+  ...
+# Subtest: strict JSONはBOMを拒否する
+ok 77 - strict JSONはBOMを拒否する
+  ---
+  duration_ms: 0.032458
+  ...
+# Subtest: strict JSONは構文不成立を拒否する
+ok 78 - strict JSONは構文不成立を拒否する
+  ---
+  duration_ms: 0.074375
+  ...
+# Subtest: strict JSONは後続文字を拒否する
+ok 79 - strict JSONは後続文字を拒否する
+  ---
+  duration_ms: 0.039791
+  ...
+# Subtest: strict JSONは複数JSON値を拒否する
+ok 80 - strict JSONは複数JSON値を拒否する
+  ---
+  duration_ms: 0.034333
+  ...
+# Subtest: strict JSONは重複keyを拒否する
+ok 81 - strict JSONは重複keyを拒否する
+  ---
+  duration_ms: 0.168667
+  ...
+# Subtest: strict JSONは小数tokenを拒否する
+ok 82 - strict JSONは小数tokenを拒否する
+  ---
+  duration_ms: 0.0795
+  ...
+# Subtest: strict JSONは指数tokenを拒否する
+ok 83 - strict JSONは指数tokenを拒否する
+  ---
+  duration_ms: 0.14425
+  ...
+# Subtest: strict JSONは巨大指数を拒否する
+ok 84 - strict JSONは巨大指数を拒否する
+  ---
+  duration_ms: 0.0575
+  ...
+# Subtest: strict JSONは負のゼロを拒否する
+ok 85 - strict JSONは負のゼロを拒否する
+  ---
+  duration_ms: 0.039917
+  ...
+# Subtest: strict JSONは孤立surrogateを拒否する
+ok 86 - strict JSONは孤立surrogateを拒否する
+  ---
+  duration_ms: 0.111666
+  ...
+# Subtest: strict JSONはcode fenceを拒否する
+ok 87 - strict JSONはcode fenceを拒否する
+  ---
+  duration_ms: 0.034417
+  ...
+# Subtest: strict decodeはBuffer以外を不正引数としてthrowせず拒否する
+ok 88 - strict decodeはBuffer以外を不正引数としてthrowせず拒否する
+  ---
+  duration_ms: 0.141834
+  ...
+# Subtest: strict in-memory検査はJSON正式値だけを受理する
+ok 89 - strict in-memory検査はJSON正式値だけを受理する
+  ---
+  duration_ms: 0.123625
+  ...
+# Subtest: strict in-memory検査はundefinedを拒否する
+ok 90 - strict in-memory検査はundefinedを拒否する
+  ---
+  duration_ms: 0.041083
+  ...
+# Subtest: strict in-memory検査はfunctionを拒否する
+ok 91 - strict in-memory検査はfunctionを拒否する
+  ---
+  duration_ms: 0.032458
+  ...
+# Subtest: strict in-memory検査はsymbolを拒否する
+ok 92 - strict in-memory検査はsymbolを拒否する
+  ---
+  duration_ms: 0.032334
+  ...
+# Subtest: strict in-memory検査はBigIntを拒否する
+ok 93 - strict in-memory検査はBigIntを拒否する
+  ---
+  duration_ms: 0.024708
+  ...
+# Subtest: strict in-memory検査はNaNを拒否する
+ok 94 - strict in-memory検査はNaNを拒否する
+  ---
+  duration_ms: 0.028958
+  ...
+# Subtest: strict in-memory検査はInfinityを拒否する
+ok 95 - strict in-memory検査はInfinityを拒否する
+  ---
+  duration_ms: 0.023333
+  ...
+# Subtest: strict in-memory検査は小数を拒否する
+ok 96 - strict in-memory検査は小数を拒否する
+  ---
+  duration_ms: 0.023541
+  ...
+# Subtest: strict in-memory検査は負のゼロを拒否する
+ok 97 - strict in-memory検査は負のゼロを拒否する
+  ---
+  duration_ms: 0.023042
+  ...
+# Subtest: strict in-memory検査はsafe integer外を拒否する
+ok 98 - strict in-memory検査はsafe integer外を拒否する
+  ---
+  duration_ms: 0.101958
+  ...
+# Subtest: strict in-memory検査はDateを拒否する
+ok 99 - strict in-memory検査はDateを拒否する
+  ---
+  duration_ms: 0.023416
+  ...
+# Subtest: strict in-memory検査はMapを拒否する
+ok 100 - strict in-memory検査はMapを拒否する
+  ---
+  duration_ms: 0.023041
+  ...
+# Subtest: strict in-memory検査は孤立surrogateを拒否する
+ok 101 - strict in-memory検査は孤立surrogateを拒否する
+  ---
+  duration_ms: 0.019083
+  ...
+# Subtest: strict in-memory検査は疎な配列と追加propertyを区別して拒否する
+ok 102 - strict in-memory検査は疎な配列と追加propertyを区別して拒否する
+  ---
+  duration_ms: 0.05425
+  ...
+# Subtest: strict in-memory検査はaccessor・toJSON・symbol key・非列挙fieldを拒否する
+ok 103 - strict in-memory検査はaccessor・toJSON・symbol key・非列挙fieldを拒否する
+  ---
+  duration_ms: 0.074125
+  ...
+# Subtest: strict decodeはrootと入れ子をnull prototypeのown data propertyとして復号する
+ok 104 - strict decodeはrootと入れ子をnull prototypeのown data propertyとして復号する
+  ---
+  duration_ms: 0.147791
+  ...
+# Subtest: strict decodeの一般objectは整数風keyを保持しcanonical化だけがUTF-16順へ並べる
+ok 105 - strict decodeの一般objectは整数風keyを保持しcanonical化だけがUTF-16順へ並べる
+  ---
+  duration_ms: 0.329625
+  ...
+# Subtest: strict in-memory検査は通常objectとnull prototype objectの双方を受理する
+ok 106 - strict in-memory検査は通常objectとnull prototype objectの双方を受理する
+  ---
+  duration_ms: 0.104292
+  ...
+# Subtest: B1所有値と時刻・frame・sampleは小数をbyteでもメモリでも正式化でも拒否する
+ok 107 - B1所有値と時刻・frame・sampleは小数をbyteでもメモリでも正式化でも拒否する
+  ---
+  duration_ms: 0.108667
+  ...
+# Subtest: 正式JSONとcanonical JSONは目的どおり異なるbyteを作りhashできる
+ok 108 - 正式JSONとcanonical JSONは目的どおり異なるbyteを作りhashできる
+  ---
+  duration_ms: 0.241292
+  ...
+# Subtest: Q1:A監視投影入口は不存在preflight jobだけを除外しproductionと同じ読取経路を使う
+not ok 109 - Q1:A監視投影入口は不存在preflight jobだけを除外しproductionと同じ読取経路を使う
+  ---
+  duration_ms: 145.996084
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2258:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2259:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: Q1:A監視投影入口は許可外path・既存target・追加optionをuntrustedで拒否する
+not ok 110 - Q1:A監視投影入口は許可外path・既存target・追加optionをuntrustedで拒否する
+  ---
+  duration_ms: 113.147541
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2291:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2296:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: Q1:A監視投影入口はunsupported entryと読取中変化を固定diagnosticで拒否する
+not ok 111 - Q1:A監視投影入口はunsupported entryと読取中変化を固定diagnosticで拒否する
+  ---
+  duration_ms: 103.69225
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2323:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2328:26)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: R3:監視投影は空fileを0 chunkで扱いone・multi・uneven chunkでも同じhashになる
+not ok 112 - R3:監視投影は空fileを0 chunkで扱いone・multi・uneven chunkでも同じhashになる
+  ---
+  duration_ms: 103.945584
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2368:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2392:23)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: R3:監視投影はopen・不正chunk・短過読・読取後変化・close失敗を同じuntrustedへ閉じる
+not ok 113 - R3:監視投影はopen・不正chunk・短過読・読取後変化・close失敗を同じuntrustedへ閉じる
+  ---
+  duration_ms: 104.035958
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2419:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2445:23)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: Q1:A監視投影hashは同じ非空treeを読むproduction runner開始投影と完全一致する
+not ok 114 - Q1:A監視投影hashは同じ非空treeを読むproduction runner開始投影と完全一致する
+  ---
+  duration_ms: 103.293291
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2563:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2564:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 外部表示5 JSONは承認済みfile/canonical hash対を保ちrenderer trustの4係数だけが小数である
+not ok 115 - 外部表示5 JSONは承認済みfile/canonical hash対を保ちrenderer trustの4係数だけが小数である
+  ---
+  duration_ms: 104.206083
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2629:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2630:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 正式7成果物とGemini可視入力へ外部表示の小数係数を転記しない
+not ok 116 - 正式7成果物とGemini可視入力へ外部表示の小数係数を転記しない
+  ---
+  duration_ms: 102.906292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2679:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2680:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 外部表示profileはrenderer trustの未承認小数・別値・小数時刻をschema不成立にする
+not ok 117 - 外部表示profileはrenderer trustの未承認小数・別値・小数時刻をschema不成立にする
+  ---
+  duration_ms: 103.631542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2707:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2719:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: renderer trust以外の外部JSONでは小数を許可しない
+not ok 118 - renderer trust以外の外部JSONでは小数を許可しない
+  ---
+  duration_ms: 103.109666
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2735:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2736:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: renderer trustの全layout ruleは型と固定値のexact一致を要求する
+not ok 119 - renderer trustの全layout ruleは型と固定値のexact一致を要求する
+  ---
+  duration_ms: 102.8175
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2751:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2754:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 外部JSONの別字句0.040は意味値が同じでもfile hash不一致を先に返す
+not ok 120 - 外部JSONの別字句0.040は意味値が同じでもfile hash不一致を先に返す
+  ---
+  duration_ms: 102.376958
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2788:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2789:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 検査indexのfile hashとcanonical hashを取り違えずbinding値をcanonicalとして照合する
+not ok 121 - 検査indexのfile hashとcanonical hashを取り違えずbinding値をcanonicalとして照合する
+  ---
+  duration_ms: 102.851209
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2807:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2827:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: preset validation indexのregistryVersionはpreset registry版と一致しなければならない
+not ok 122 - preset validation indexのregistryVersionはpreset registry版と一致しなければならない
+  ---
+  duration_ms: 103.922542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2847:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2848:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job validatorは正本field順の正常jobを受理し最小leaf pathで不成立を返す
+not ok 123 - job validatorは正本field順の正常jobを受理し最小leaf pathで不成立を返す
+  ---
+  duration_ms: 102.450167
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2858:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2859:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影は境界候補件数が不正な子を親集計へ部分利用しない
+not ok 124 - job投影は境界候補件数が不正な子を親集計へ部分利用しない
+  ---
+  duration_ms: 102.907125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2874:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2875:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影は両件数が不正な子について二つの子違反だけを返す
+not ok 125 - job投影は両件数が不正な子について二つの子違反だけを返す
+  ---
+  duration_ms: 103.576791
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2886:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2887:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影は片側の子不正があっても他方の独立した親不一致を検出する
+not ok 126 - job投影は片側の子不正があっても他方の独立した親不一致を検出する
+  ---
+  duration_ms: 102.854
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2900:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2901:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影は境界候補の子不正があっても対応元の親不一致を検出する
+not ok 127 - job投影は境界候補の子不正があっても対応元の親不一致を検出する
+  ---
+  duration_ms: 102.795333
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2918:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2919:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影は未知fieldを持つ子を二種類の親集計から丸ごと除外する
+not ok 128 - job投影は未知fieldを持つ子を二種類の親集計から丸ごと除外する
+  ---
+  duration_ms: 102.890292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2935:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2936:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影はfield順違反の子を除外してもcontainer数の独立検査を維持する
+not ok 129 - job投影はfield順違反の子を除外してもcontainer数の独立検査を維持する
+  ---
+  duration_ms: 102.292208
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2948:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2949:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影は件数fieldが欠けた子を親集計へ部分利用しない
+not ok 130 - job投影は件数fieldが欠けた子を親集計へ部分利用しない
+  ---
+  duration_ms: 102.484834
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2969:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2970:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影はshape違反と数値不正が併存する子を子全体の違反に限定する
+not ok 131 - job投影はshape違反と数値不正が併存する子を子全体の違反に限定する
+  ---
+  duration_ms: 103.688875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2979:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2980:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影は非objectの子を親集計へ部分利用しない
+not ok 132 - job投影は非objectの子を親集計へ部分利用しない
+  ---
+  duration_ms: 103.555375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2992:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:2993:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影は全子が有効なとき対応元の親合計不一致を検出する
+not ok 133 - job投影は全子が有効なとき対応元の親合計不一致を検出する
+  ---
+  duration_ms: 104.253417
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3002:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3003:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影は全子が有効なとき境界候補の親合計不一致を検出する
+not ok 134 - job投影は全子が有効なとき境界候補の親合計不一致を検出する
+  ---
+  duration_ms: 102.862708
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3014:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3015:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job投影はcontainer数と配列長の独立検査を維持する
+not ok 135 - job投影はcontainer数と配列長の独立検査を維持する
+  ---
+  duration_ms: 101.402709
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3026:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3027:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 公開derive入口はGate A生観測を同一checker経路へ決定的に運び入力を変更しない
+not ok 136 - 公開derive入口はGate A生観測を同一checker経路へ決定的に運び入力を変更しない
+  ---
+  duration_ms: 103.468125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3038:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3039:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package builderは同一snapshotから同一7成果物を作り入力を変更しない
+not ok 137 - package builderは同一snapshotから同一7成果物を作り入力を変更しない
+  ---
+  duration_ms: 103.2065
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3098:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3099:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 正常なpure checkerと最終report validatorは読み取り専用preflightを合格にする
+not ok 138 - 正常なpure checkerと最終report validatorは読み取り専用preflightを合格にする
+  ---
+  duration_ms: 102.474333
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3179:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3180:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package前半の違反は正本checkerの担当checkから発火する
+not ok 139 - package前半の違反は正本checkerの担当checkから発火する
+  ---
+  duration_ms: 103.573625
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3283:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3284:22)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package import graphは関数・block arrow・concise arrow内file I/Oをmodule-load扱いしない
+not ok 140 - package import graphは関数・block arrow・concise arrow内file I/Oをmodule-load扱いしない
+  ---
+  duration_ms: 101.805334
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3407:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3408:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package import graphはtemplate式でmodule-load時に実行されるfile I/Oを拒否する
+not ok 141 - package import graphはtemplate式でmodule-load時に実行されるfile I/Oを拒否する
+  ---
+  duration_ms: 103.4465
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3447:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3448:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package import graphはobject初期化で直接実行されるfile I/Oを拒否する
+not ok 142 - package import graphはobject初期化で直接実行されるfile I/Oを拒否する
+  ---
+  duration_ms: 102.354042
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3464:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3465:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package import graphはmodule-load時に実行されるconcise arrow IIFEを拒否する
+not ok 143 - package import graphはmodule-load時に実行されるconcise arrow IIFEを拒否する
+  ---
+  duration_ms: 103.706667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3498:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3499:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package import graphはmodule-load時に実行されるblock arrow IIFEを拒否する
+not ok 144 - package import graphはmodule-load時に実行されるblock arrow IIFEを拒否する
+  ---
+  duration_ms: 104.769667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3498:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3499:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package import graphはmodule-load時に実行されるfunction IIFEを拒否する
+not ok 145 - package import graphはmodule-load時に実行されるfunction IIFEを拒否する
+  ---
+  duration_ms: 104.0885
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3498:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3499:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは通常member・optional member後の除算を受理する
+not ok 146 - package R1 scannerは通常member・optional member後の除算を受理する
+  ---
+  duration_ms: 102.378667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3657:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3658:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはspread三形とspread直後のregexを受理する
+not ok 147 - package R1 scannerはspread三形とspread直後のregexを受理する
+  ---
+  duration_ms: 102.548625
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3657:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3658:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはregex・comment・string・template raw内の禁止語を受理する
+not ok 148 - package R1 scannerはregex・comment・string・template raw内の禁止語を受理する
+  ---
+  duration_ms: 102.675167
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3657:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3658:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは固定済み数値五形を受理する
+not ok 149 - package R1 scannerは固定済み数値五形を受理する
+  ---
+  duration_ms: 102.010917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3657:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3658:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは制御条件内とstatement開始のregexを受理する
+not ok 150 - package R1 scannerは制御条件内とstatement開始のregexを受理する
+  ---
+  duration_ms: 103.568375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3657:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3658:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは通常member経由file I/Oを拒否する
+not ok 151 - package R1 scannerは通常member経由file I/Oを拒否する
+  ---
+  duration_ms: 103.272291
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはoptional member経由file I/Oを拒否する
+not ok 152 - package R1 scannerはoptional member経由file I/Oを拒否する
+  ---
+  duration_ms: 102.805125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはspread内file I/Oを拒否する
+not ok 153 - package R1 scannerはspread内file I/Oを拒否する
+  ---
+  duration_ms: 102.433167
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはdynamic importを拒否する
+not ok 154 - package R1 scannerはdynamic importを拒否する
+  ---
+  duration_ms: 102.738667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは関数内dynamic importを拒否する
+not ok 155 - package R1 scannerは関数内dynamic importを拒否する
+  ---
+  duration_ms: 102.499166
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはspread内dynamic importを拒否する
+not ok 156 - package R1 scannerはspread内dynamic importを拒否する
+  ---
+  duration_ms: 102.635625
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはtemplate式内dynamic importを拒否する
+not ok 157 - package R1 scannerはtemplate式内dynamic importを拒否する
+  ---
+  duration_ms: 102.659917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはproperty名のdynamic importを拒否する
+not ok 158 - package R1 scannerはproperty名のdynamic importを拒否する
+  ---
+  duration_ms: 103.427542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはCommonJS requireを拒否する
+not ok 159 - package R1 scannerはCommonJS requireを拒否する
+  ---
+  duration_ms: 102.974125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはarrow内CommonJS requireを拒否する
+not ok 160 - package R1 scannerはarrow内CommonJS requireを拒否する
+  ---
+  duration_ms: 104.250042
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはspread内CommonJS requireを拒否する
+not ok 161 - package R1 scannerはspread内CommonJS requireを拒否する
+  ---
+  duration_ms: 102.429625
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはtemplate式内CommonJS requireを拒否する
+not ok 162 - package R1 scannerはtemplate式内CommonJS requireを拒否する
+  ---
+  duration_ms: 102.695791
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはoptional property名のrequireを拒否する
+not ok 163 - package R1 scannerはoptional property名のrequireを拒否する
+  ---
+  duration_ms: 103.782166
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはmember待機中のslashを拒否する
+not ok 164 - package R1 scannerはmember待機中のslashを拒否する
+  ---
+  duration_ms: 103.154125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは二個のdotを拒否する
+not ok 165 - package R1 scannerは二個のdotを拒否する
+  ---
+  duration_ms: 101.906875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは四個のdotを拒否する
+not ok 166 - package R1 scannerは四個のdotを拒否する
+  ---
+  duration_ms: 103.152292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは未完のdotを拒否する
+not ok 167 - package R1 scannerは未完のdotを拒否する
+  ---
+  duration_ms: 109.369834
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは未完のoptional dotを拒否する
+not ok 168 - package R1 scannerは未完のoptional dotを拒否する
+  ---
+  duration_ms: 104.307708
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは未完のspreadを拒否する
+not ok 169 - package R1 scannerは未完のspreadを拒否する
+  ---
+  duration_ms: 103.561666
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは先頭dot小数を拒否する
+not ok 170 - package R1 scannerは先頭dot小数を拒否する
+  ---
+  duration_ms: 103.378875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは末尾dot数値を拒否する
+not ok 171 - package R1 scannerは末尾dot数値を拒否する
+  ---
+  duration_ms: 103.32175
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは二個dot数値memberを拒否する
+not ok 172 - package R1 scannerは二個dot数値memberを拒否する
+  ---
+  duration_ms: 103.274042
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは指数表記を拒否する
+not ok 173 - package R1 scannerは指数表記を拒否する
+  ---
+  duration_ms: 102.941541
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは二進数表記を拒否する
+not ok 174 - package R1 scannerは二進数表記を拒否する
+  ---
+  duration_ms: 103.536875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはseparator付き数値を拒否する
+not ok 175 - package R1 scannerはseparator付き数値を拒否する
+  ---
+  duration_ms: 102.886
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはoptional callを拒否する
+not ok 176 - package R1 scannerはoptional callを拒否する
+  ---
+  duration_ms: 102.551542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはoptional private nameを拒否する
+not ok 177 - package R1 scannerはoptional private nameを拒否する
+  ---
+  duration_ms: 102.745333
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはoptional tagged templateを拒否する
+not ok 178 - package R1 scannerはoptional tagged templateを拒否する
+  ---
+  duration_ms: 102.905416
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerはreturn直後spreadを拒否する
+not ok 179 - package R1 scannerはreturn直後spreadを拒否する
+  ---
+  duration_ms: 103.313042
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは二項演算子直後spreadを拒否する
+not ok 180 - package R1 scannerは二項演算子直後spreadを拒否する
+  ---
+  duration_ms: 102.083667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは未閉鎖regexを拒否する
+not ok 181 - package R1 scannerは未閉鎖regexを拒否する
+  ---
+  duration_ms: 102.623125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは未閉鎖regex classを拒否する
+not ok 182 - package R1 scannerは未閉鎖regex classを拒否する
+  ---
+  duration_ms: 101.809917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは括弧不一致を拒否する
+not ok 183 - package R1 scannerは括弧不一致を拒否する
+  ---
+  duration_ms: 102.878208
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは閉じbrace直後slashを拒否する
+not ok 184 - package R1 scannerは閉じbrace直後slashを拒否する
+  ---
+  duration_ms: 103.234417
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3707:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    checkPackageImportGraphSuffix (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3516:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3708:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package R1 scannerは実package 2 sourceと限定hashbang表を契約どおり扱う
+not ok 185 - package R1 scannerは実package 2 sourceと限定hashbang表を契約どおり扱う
+  ---
+  duration_ms: 103.306042
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3716:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3719:5)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: Gate A build・決定性・reportの違反は段階ごとの担当checkから発火する
+not ok 186 - Gate A build・決定性・reportの違反は段階ごとの担当checkから発火する
+  ---
+  duration_ms: 103.0745
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3838:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3839:23)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package側3 build stageはpass別の全失敗型を固定配列形と入力copy記録で拒否する
+not ok 187 - package側3 build stageはpass別の全失敗型を固定配列形と入力copy記録で拒否する
+  ---
+  duration_ms: 103.756667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3980:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:3981:20)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package成果物とsource-only検査は改変を上流へ遡って自動修復しない
+not ok 188 - package成果物とsource-only検査は改変を上流へ遡って自動修復しない
+  ---
+  duration_ms: 103.916959
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4076:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4077:19)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: formal開始入力再構成は既存18観測と一致し一件差・列構造差を拒否する
+not ok 189 - formal開始入力再構成は既存18観測と一致し一件差・列構造差を拒否する
+  ---
+  duration_ms: 103.368208
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4559:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeFormalFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4384:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4560:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: job二時点差とpublication各段の違反は固有check・pathへ帰属する
+not ok 190 - job二時点差とpublication各段の違反は固有check・pathへ帰属する
+  ---
+  duration_ms: 103.080542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4658:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeFormalFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4384:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4659:29)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: runner spyはGate A二段へのinput-mutated指定を設定時に拒否する
+not ok 191 - runner spyはGate A二段へのinput-mutated指定を設定時に拒否する
+  ---
+  duration_ms: 103.245333
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4917:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeBuildFailureFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1277:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4931:27)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 公開runnerは読み取り専用preflightでderive結果を2回そのまま既存builderへ渡す
+not ok 192 - 公開runnerは読み取り専用preflightでderive結果を2回そのまま既存builderへ渡す
+  ---
+  duration_ms: 102.119042
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4942:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:4943:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 公開runnerは各build stage・pass・失敗型を同じBUILD_FAILEDへ閉じ後段を呼ばない
+not ok 193 - 公開runnerは各build stage・pass・失敗型を同じBUILD_FAILEDへ閉じ後段を呼ばない
+  ---
+  duration_ms: 102.289292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5007:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5026:27)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: formal runnerはstaging・input recheck・preRenameの各gateで止まり後続publication I/Oを行わない
+not ok 194 - formal runnerはstaging・input recheck・preRenameの各gateで止まり後続publication I/Oを行わない
+  ---
+  duration_ms: 103.714292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5136:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5158:23)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完全snapshot不一致は53/54/56を維持する
+not ok 195 - R3:formal artifactのopen/read失敗はPUBLICATION_FAILEDへ帰属し完全snapshot不一致は53/54/56を維持する
+  ---
+  duration_ms: 102.577334
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5312:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5335:23)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: R3:publication失敗記録後のjobPreReport読取分類不能はexit 2かつpartial reportなしになる
+not ok 196 - R3:publication失敗記録後のjobPreReport読取分類不能はexit 2かつpartial reportなしになる
+  ---
+  duration_ms: 103.206292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5617:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5618:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: runner sourceは公開derive入口をproductionと検査で共用しGate A checkerを直importしない
+ok 197 - runner sourceは公開derive入口をproductionと検査で共用しGate A checkerを直importしない
+  ---
+  duration_ms: 0.83675
+  ...
+# Subtest: runnerは全phaseを同じcheckerへ渡し後続段を先行失敗後に実行しない構造を持つ
+ok 198 - runnerは全phaseを同じcheckerへ渡し後続段を先行失敗後に実行しない構造を持つ
+  ---
+  duration_ms: 0.364916
+  ...
+# Subtest: CLIは0件・2件を固定usage診断でexit 2にしstdoutへ何も書かない
+ok 199 - CLIは0件・2件を固定usage診断でexit 2にしstdoutへ何も書かない
+  ---
+  duration_ms: 0.251834
+  ...
+# Subtest: production CLIの実process入口も0件・2件を同じusage診断で拒否する
+ok 200 - production CLIの実process入口も0件・2件を同じusage診断で拒否する
+  ---
+  duration_ms: 86.047667
+  ...
+# Subtest: production CLI実processはproduction chunk投影を共用しexit 0/1をstdout/stderr排他で返す
+not ok 201 - production CLI実processはproduction chunk投影を共用しexit 0/1をstdout/stderr排他で返す
+  ---
+  duration_ms: 101.55575
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5978:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'context-invalid'
+    - 'derived'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'derived'
+  actual: 'context-invalid'
+  operator: 'strictEqual'
+  stack: |-
+    makeValidFixture (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:946:10)
+    makeRunnerJob (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:1450:19)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:5979:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: package担当codeと担当checkの正本写像はcore実装と検査表で欠落しない
+ok 202 - package担当codeと担当checkの正本写像はcore実装と検査表で欠落しない
+  ---
+  duration_ms: 0.176625
+  ...
+# Subtest: package合成検査が動的に観測するcode×checkは承認済み割当だけである
+not ok 203 - package合成検査が動的に観測するcode×checkは承認済み割当だけである
+  ---
+  duration_ms: 0.1025
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:6095:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    JOB_FILE_MISMATCH jobPrePublication
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/test_presentation_caption_semantic_source_package_v001.mjs:6110:12)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..203
+# tests 203
+# suites 0
+# pass 86
+# fail 117
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 33424.509333

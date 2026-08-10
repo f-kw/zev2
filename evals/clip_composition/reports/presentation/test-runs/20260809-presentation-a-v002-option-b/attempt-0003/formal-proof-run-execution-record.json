@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "presentation-a-v002-proof-execution-record-v001",
+  "startedAt": "2026-08-09T11:01:34Z",
+  "finishedAt": "2026-08-09T11:01:36Z",
+  "command": {
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "arguments": [
+      "--import",
+      "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+      "evals/clip_composition/run_presentation_a_v002_layer1_v3_proof_job_v001.ts",
+      "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-jobs/a-v002-layer1-v3-option-b-proof-20260809-v002.json"
+    ]
+  },
+  "environment": {
+    "native": true,
+    "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "nodeOptionsPresent": false,
+    "chromiumLaunchPreflight": "passed"
+  },
+  "job": {
+    "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-jobs/a-v002-layer1-v3-option-b-proof-20260809-v002.json",
+    "fileSha256": "b5c6b148431724a898d06e09aebdd2dc985aced8fcdc9a838c5dfa15d6633eee"
+  },
+  "result": {
+    "exitCode": 2,
+    "parsedStatus": "fatal",
+    "parsedExecutionCount": null,
+    "stdoutByteLength": 831,
+    "stdoutSha256": "019d518d68e1cbdfc695deed237a04890c35f9697da4c15f5b007609bce785d2",
+    "stderrByteLength": 0,
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proofCallerStage": "start-input-reread",
+    "proofStep": "runtime-binary",
+    "proofExceptionType": "file-read",
+    "proofTargetPath": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+    "proofTargetSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+  }
+}

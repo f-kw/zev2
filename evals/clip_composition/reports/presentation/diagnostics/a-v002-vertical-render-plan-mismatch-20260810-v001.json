@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "presentation-a-v002-vertical-render-plan-mismatch-diagnostic-v001",
+  "sourceAttempt": {
+    "jobPath": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-jobs/a-v002-layer1-v3-option-b-proof-20260810-v008.json",
+    "jobFileSha256": "0c5fcf0320bfa72d60350182a40462ae700e4515e172ba7f6c4e3e608b183fcf",
+    "outputRoot": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v006",
+    "candidateId": "layer1-v3-nE_bNeBNp4E_multiblock_material_v001-2-voice-013",
+    "variant": "vertical-caption-diagnostic"
+  },
+  "inputs": {
+    "meaningPackageFileSha256": "d8254505e5ee68e023e5924637b5c2e13e1b42c36ff4cb9ddf17edbeb6d3a3b3",
+    "baseMediaTimelineFileSha256": "c72550e162531a04c791248638b7d52d3a33ce1ea931bc8a5347e4f0b01f09bf",
+    "verticalDiagnosticProducerFileSha256": "4782b56fce59702bdb002deafd1989f86f19dc7936c7341d890be0adf51876c9",
+    "pageLinePlannerV002FileSha256": "8c943d68e1d08aadd48ab80e100006e091d2163c8fcb88a005e9f07f050b7f83",
+    "renderPlanV002FileSha256": "80623c9690be58ea4db59eec40d76af3c0f51e3f5c860b0c985c78832e88fe01",
+    "sharedProjectionV001FileSha256": "fb7a7ea2839444955ab7a8da6c86d38ab7007c2627af4e00e210d6bda2b7ab82"
+  },
+  "observedPath": "/captionDisplays/0",
+  "observedCode": "OUTPUT_V002_RENDER_PROJECTION_MISMATCH",
+  "pageLinePlanStatus": "planned",
+  "renderPlanStatus": "built",
+  "commonCoreStatus": "rejected",
+  "resolvedStyle": {
+    "format": "vertical-short-1080x1920",
+    "screenLayoutId": null,
+    "presetId": "diagnostic-full-frame-contain-v001",
+    "cropMode": "diagnostic-contain",
+    "compactByteCount": 397,
+    "compactSha256": "474a14f6c536e8c6f0363ce15eeaaa76dbf49b4ea68ead8ecd8b617fabf7348c"
+  },
+  "renderPlan": {
+    "pageCount": 8,
+    "formalByteCount": 40601,
+    "formalFileSha256": "299062f1e826a1f069d77b250397db5260b8d8764819abd4ea0d462bee0894b1",
+    "publishedByteCount": 0
+  },
+  "fieldIsolation": {
+    "actualCropMode": {
+      "value": "diagnostic-contain",
+      "byteCount": 18,
+      "hex": "646961676e6f737469632d636f6e7461696e"
+    },
+    "legacyProjectionRequiredCropMode": {
+      "value": "bound-decision",
+      "byteCount": 14,
+      "hex": "626f756e642d6465636973696f6e"
+    },
+    "actualBuiltPageCount": 0,
+    "actualRejectedPageCount": 8,
+    "screenLayoutOnlyChangedBuiltPageCount": 0,
+    "cropModeOnlyChangedBuiltPageCount": 8,
+    "cropModeOnlyCounterfactualPlanByteCount": 40597,
+    "cropModeOnlyCounterfactualPlanSha256": "6fc692d0b158d3d35a815b068d3ae94cd6978640863b13752b50eb2540ba9919",
+    "firstFormalPlanDiffOffsetZeroBased": 3442,
+    "counterfactualIsNotContractValid": true
+  },
+  "classification": {
+    "productionConnectionDefect": true,
+    "fixtureOrSetupDefect": false,
+    "contractConflict": false
+  },
+  "networkCalls": 0,
+  "reruns": 0,
+  "costUsd": 0
+}

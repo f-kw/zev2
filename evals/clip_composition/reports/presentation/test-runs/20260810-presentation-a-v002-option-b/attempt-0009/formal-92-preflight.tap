@@ -1,0 +1,770 @@
+TAP version 13
+# Subtest: AMP001 an untouched atom has one exact retained span
+ok 1 - AMP001 an untouched atom has one exact retained span
+  ---
+  duration_ms: 2.405292
+  ...
+# Subtest: AMP002 one logical atom remains once with two retained spans
+ok 2 - AMP002 one logical atom remains once with two retained spans
+  ---
+  duration_ms: 0.765
+  ...
+# Subtest: AMP003 two cuts in one atom produce a three-span array
+ok 3 - AMP003 two cuts in one atom produce a three-span array
+  ---
+  duration_ms: 0.490417
+  ...
+# Subtest: AMP004 intersections preserve integer half-open boundaries without rounding
+ok 4 - AMP004 intersections preserve integer half-open boundaries without rounding
+  ---
+  duration_ms: 2.3275
+  ...
+# Subtest: AMP005 every source atom creates exactly one occurrence and one caption reference
+ok 5 - AMP005 every source atom creates exactly one occurrence and one caption reference
+  ---
+  duration_ms: 1.073167
+  ...
+# Subtest: AMP006 a fully removed source atom is rejected
+ok 6 - AMP006 a fully removed source atom is rejected
+  ---
+  duration_ms: 0.381
+  ...
+# Subtest: AMP007 malformed atom fields are owned as source atom invalid
+ok 7 - AMP007 malformed atom fields are owned as source atom invalid
+  ---
+  duration_ms: 0.444583
+  ...
+# Subtest: AMP008 source atom order is rejected rather than sorted
+ok 8 - AMP008 source atom order is rejected rather than sorted
+  ---
+  duration_ms: 0.194958
+  ...
+# Subtest: AMP009 source caption text must equal the source atom byte concatenation
+ok 9 - AMP009 source caption text must equal the source atom byte concatenation
+  ---
+  duration_ms: 0.209209
+  ...
+# Subtest: AMP010 caption coverage rejects a missing occurrence id
+ok 10 - AMP010 caption coverage rejects a missing occurrence id
+  ---
+  duration_ms: 1.036584
+  ...
+# Subtest: AMP011 caption text rejects byte differences
+ok 11 - AMP011 caption text rejects byte differences
+  ---
+  duration_ms: 0.718333
+  ...
+# Subtest: AMP012 provenance binding mismatches are rejected
+ok 12 - AMP012 provenance binding mismatches are rejected
+  ---
+  duration_ms: 1.083166
+  ...
+# Subtest: AMP013 v001 meaning packages are not accepted
+ok 13 - AMP013 v001 meaning packages are not accepted
+  ---
+  duration_ms: 0.522417
+  ...
+# Subtest: AMP014 formal bytes require the exact serializer output
+ok 14 - AMP014 formal bytes require the exact serializer output
+  ---
+  duration_ms: 3.582542
+  ...
+# Subtest: AMP015 timeline values must match the adopted source sequence exactly
+ok 15 - AMP015 timeline values must match the adopted source sequence exactly
+  ---
+  duration_ms: 0.32775
+  ...
+# Subtest: AMP016 exact v002 schema and runner real path preserve reread and no-replace
+ok 16 - AMP016 exact v002 schema and runner real path preserve reread and no-replace
+  ---
+  duration_ms: 231.192458
+  ...
+# Subtest: ASQ001 strict job and approved removal build the exact complement
+ok 17 - ASQ001 strict job and approved removal build the exact complement
+  ---
+  duration_ms: 1.775292
+  ...
+# Subtest: ASQ002 no removal is a deterministic one-segment no-op
+ok 18 - ASQ002 no removal is a deterministic one-segment no-op
+  ---
+  duration_ms: 0.245208
+  ...
+# Subtest: ASQ003 unknown job fields are rejected
+ok 19 - ASQ003 unknown job fields are rejected
+  ---
+  duration_ms: 0.194542
+  ...
+# Subtest: ASQ004 a VAD observation cannot approve removal
+ok 20 - ASQ004 a VAD observation cannot approve removal
+  ---
+  duration_ms: 0.42325
+  ...
+# Subtest: ASQ005 keep and defer are not executable removal verdicts
+ok 21 - ASQ005 keep and defer are not executable removal verdicts
+  ---
+  duration_ms: 0.7475
+  ...
+# Subtest: ASQ006 removal outside the approved outer range is rejected
+ok 22 - ASQ006 removal outside the approved outer range is rejected
+  ---
+  duration_ms: 0.137208
+  ...
+# Subtest: ASQ007 overlapping removals are rejected
+ok 23 - ASQ007 overlapping removals are rejected
+  ---
+  duration_ms: 0.110167
+  ...
+# Subtest: ASQ008 removal order must already be source-time order
+ok 24 - ASQ008 removal order must already be source-time order
+  ---
+  duration_ms: 0.145417
+  ...
+# Subtest: ASQ009 removal of the complete outer range is rejected
+ok 25 - ASQ009 removal of the complete outer range is rejected
+  ---
+  duration_ms: 0.137083
+  ...
+# Subtest: ASQ010 output ordinals and four-digit segment ids are exact
+ok 26 - ASQ010 output ordinals and four-digit segment ids are exact
+  ---
+  duration_ms: 1.836625
+  ...
+# Subtest: ASQ011 v001 is not accepted as v002 formal bytes
+ok 27 - ASQ011 v001 is not accepted as v002 formal bytes
+  ---
+  duration_ms: 1.389792
+  ...
+# Subtest: ASQ012 fractional source times are rejected rather than rounded
+ok 28 - ASQ012 fractional source times are rejected rather than rounded
+  ---
+  duration_ms: 0.104833
+  ...
+# Subtest: ASQ013 duplicate decision ids are rejected
+ok 29 - ASQ013 duplicate decision ids are rejected
+  ---
+  duration_ms: 0.116459
+  ...
+# Subtest: ASQ014 formal bytes and the runner real path preserve reread and no-replace
+ok 30 - ASQ014 formal bytes and the runner real path preserve reread and no-replace
+  ---
+  duration_ms: 265.862584
+  ...
+# Subtest: APF001: 旧v3正式化が四つの保存実体SHAをexactに照合する
+ok 31 - APF001: 旧v3正式化が四つの保存実体SHAをexactに照合する
+  ---
+  duration_ms: 58.72625
+  ...
+# Subtest: APF002: 三候補を101・72・80 atomの独立fixtureとして正式化する
+ok 32 - APF002: 三候補を101・72・80 atomの独立fixtureとして正式化する
+  ---
+  duration_ms: 17.112875
+  ...
+# Subtest: APF003: 保存済み発話本文と現行atom連結byteを一件ずつ一致させる
+ok 33 - APF003: 保存済み発話本文と現行atom連結byteを一件ずつ一致させる
+  ---
+  duration_ms: 25.4435
+  ...
+# Subtest: APF004: 人間認定済み三切断を丸めずremove決定へ写す
+ok 34 - APF004: 人間認定済み三切断を丸めずremove決定へ写す
+  ---
+  duration_ms: 17.684959
+  ...
+# Subtest: APF005: 人間結果が差なし・繋ぎ問題なしでない候補を拒否する
+ok 35 - APF005: 人間結果が差なし・繋ぎ問題なしでない候補を拒否する
+  ---
+  duration_ms: 4.47125
+  ...
+# Subtest: APF006: proposalと人間結果の一対一対応崩れを拒否する
+ok 36 - APF006: proposalと人間結果の一対一対応崩れを拒否する
+  ---
+  duration_ms: 14.994708
+  ...
+# Subtest: APF007: v002 proof inputはidentityとatom transcriptを別bindingで保持する
+ok 37 - APF007: v002 proof inputはidentityとatom transcriptを別bindingで保持する
+  ---
+  duration_ms: 15.896458
+  ...
+# Subtest: APF008: candidate59の保存済み六観測も複数retained spanで表現可能と確定する
+ok 38 - APF008: candidate59の保存済み六観測も複数retained spanで表現可能と確定する
+  ---
+  duration_ms: 2.552375
+  ...
+# Subtest: ARU001: 三候補それぞれの横型・縦型をexact 6 mediaとして受理する
+ok 39 - ARU001: 三候補それぞれの横型・縦型をexact 6 mediaとして受理する
+  ---
+  duration_ms: 0.812584
+  ...
+# Subtest: ARU002: 確認HTMLは三つの対と六つのvideoを一画面へ出す
+ok 40 - ARU002: 確認HTMLは三つの対と六つのvideoを一画面へ出す
+  ---
+  duration_ms: 0.545333
+  ...
+# Subtest: ARU003: 縦型を正式preset品質でなく字幕跨ぎ診断と明示する
+ok 41 - ARU003: 縦型を正式preset品質でなく字幕跨ぎ診断と明示する
+  ---
+  duration_ms: 0.240417
+  ...
+# Subtest: ARU004: 候補・対・fieldの欠落または余分を拒否する
+ok 42 - ARU004: 候補・対・fieldの欠落または余分を拒否する
+  ---
+  duration_ms: 0.079416
+  ...
+# Subtest: AVD001: 縦型字幕診断IDと保証限界を固定する
+ok 43 - AVD001: 縦型字幕診断IDと保証限界を固定する
+  ---
+  duration_ms: 0.800875
+  ...
+# Subtest: AVD002: 診断canvasを1080x1920・30fpsへ固定する
+ok 44 - AVD002: 診断canvasを1080x1920・30fpsへ固定する
+  ---
+  duration_ms: 0.542083
+  ...
+# Subtest: AVD003: 全画面containはsource pixelをcropせずpadする
+ok 45 - AVD003: 全画面containはsource pixelをcropせずpadする
+  ---
+  duration_ms: 0.205542
+  ...
+# Subtest: AVD004: 診断planは字幕本文を欠落・重複なく一度だけ保持する
+ok 46 - AVD004: 診断planは字幕本文を欠落・重複なく一度だけ保持する
+  ---
+  duration_ms: 0.371875
+  ...
+# Subtest: AVD005: 診断styleを正式preset registryやscreen_speakerとして登録しない
+ok 47 - AVD005: 診断styleを正式preset registryやscreen_speakerとして登録しない
+  ---
+  duration_ms: 0.185209
+  ...
+# Subtest: AVD006: 診断base mediaはframe・音声を維持した場合だけ合格する
+ok 48 - AVD006: 診断base mediaはframe・音声を維持した場合だけ合格する
+  ---
+  duration_ms: 0.101667
+  ...
+# Subtest: OPL001: 複数atomでも幅上限内なら一行に保つ
+ok 49 - OPL001: 複数atomでも幅上限内なら一行に保つ # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.347
+  ...
+# Subtest: OPL002: 二行pageは明示した二境界を一pageに保持する
+ok 50 - OPL002: 二行pageは明示した二境界を一pageに保持する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.049292
+  ...
+# Subtest: OPL003: AtomRef境界nodeは全量・順序・uniqueを保つ
+ok 51 - OPL003: AtomRef境界nodeは全量・順序・uniqueを保つ # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.040875
+  ...
+# Subtest: OPL004: 幅超過line候補は物理edgeへ入らない
+ok 52 - OPL004: 幅超過line候補は物理edgeへ入らない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.035292
+  ...
+# Subtest: OPL005: 横型の物理edgeはsafe areaと非交差を通過したものだけである
+ok 53 - OPL005: 横型の物理edgeはsafe areaと非交差を通過したものだけである # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.03275
+  ...
+# Subtest: OPL006: 縦型の物理edgeはline矩形・safe area・非交差を通過する
+ok 54 - OPL006: 縦型の物理edgeはline矩形・safe area・非交差を通過する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.02925
+  ...
+# Subtest: OPL007: 0-frame区間は物理edgeに残りtimeline edgeだけから除外される
+ok 55 - OPL007: 0-frame区間は物理edgeに残りtimeline edgeだけから除外される # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.032834
+  ...
+# Subtest: OPL008: 物理pathが無い場合はlayout違反が所有する
+ok 56 - OPL008: 物理pathが無い場合はlayout違反が所有する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.032208
+  ...
+# Subtest: OPL009: 物理path成立後にtimeline pathが無い場合はtimeline違反が所有する
+ok 57 - OPL009: 物理path成立後にtimeline pathが無い場合はtimeline違反が所有する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.081292
+  ...
+# Subtest: OPL010: 選択はpage数最少を第一目的にする
+ok 58 - OPL010: 選択はpage数最少を第一目的にする # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.084209
+  ...
+# Subtest: OPL011: 同じpage数なら総行数を減らし不要な改行を入れない
+ok 59 - OPL011: 同じpage数なら総行数を減らし不要な改行を入れない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.036791
+  ...
+# Subtest: OPL012: page数と行数が同じなら最大行幅を最小化する
+ok 60 - OPL012: page数と行数が同じなら最大行幅を最小化する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.032541
+  ...
+# Subtest: OPL013: 最大幅が同じなら行幅rangeを最小化する
+ok 61 - OPL013: 最大幅が同じなら行幅rangeを最小化する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.032292
+  ...
+# Subtest: OPL014: tuple同値ならpage境界・行境界を辞書順で決める
+ok 62 - OPL014: tuple同値ならpage境界・行境界を辞書順で決める # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.10875
+  ...
+# Subtest: OPL015: pageとlineを連結すると意味本文・AtomRefが完全一致する
+ok 63 - OPL015: pageとlineを連結すると意味本文・AtomRefが完全一致する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.063583
+  ...
+# Subtest: OPL016: page時刻はAtomRefの先頭startと末尾endだけから導く
+ok 64 - OPL016: page時刻はAtomRefの先頭startと末尾endだけから導く # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.040209
+  ...
+# Subtest: OPL017: 同一入力二回でedge・predecessor・plan byteが一致する
+ok 65 - OPL017: 同一入力二回でedge・predecessor・plan byteが一致する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.036042
+  ...
+# Subtest: OPL018: 横型と縦型の差は表示page/lineだけに閉じる
+ok 66 - OPL018: 横型と縦型の差は表示page/lineだけに閉じる # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.155875
+  ...
+# Subtest: OPL019: style差を通しても意味package byteは変化しない
+ok 67 - OPL019: style差を通しても意味package byteは変化しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.0405
+  ...
+# Subtest: OPL020: planner acceptedは日本語の読みやすさ合格を報告しない
+ok 68 - OPL020: planner acceptedは日本語の読みやすさ合格を報告しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.034083
+  ...
+# Subtest: OPL021: planner結果に旧B4 artifactを含めない
+ok 69 - OPL021: planner結果に旧B4 artifactを含めない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.082208
+  ...
+# Subtest: OPL022: L=1/2とも有限で任意cutoffを持たずresource fatalを専用化する
+ok 70 - OPL022: L=1/2とも有限で任意cutoffを持たずresource fatalを専用化する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.028792
+  ...
+# Subtest: OPL023: atom重複は一pageで保持し隣接pageまたはcaptionのframe重複だけを拒否する
+ok 71 - OPL023: atom重複は一pageで保持し隣接pageまたはcaptionのframe重複だけを拒否する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.026791
+  ...
+# Subtest: OPL024: 999 pageを上限として1000 pageをtimeline不成立にする
+ok 72 - OPL024: 999 pageを上限として1000 pageをtimeline不成立にする # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.026375
+  ...
+# Subtest: OPL025: candidate 13保存caption/style fixtureは決定的である
+ok 73 - OPL025: candidate 13保存caption/style fixtureは決定的である # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.026375
+  ...
+# Subtest: OPL026: candidate 59横型の既知20/36を拒否し30/26を受理する
+ok 74 - OPL026: candidate 59横型の既知20/36を拒否し30/26を受理する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.067042
+  ...
+# Subtest: OPL027: candidate 59縦型の認定caption/style fixtureは決定的である
+ok 75 - OPL027: candidate 59縦型の認定caption/style fixtureは決定的である # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.034542
+  ...
+# Subtest: OPL028: 共有入口抽出後もv001 planner結果byteは固定値と一致する
+ok 76 - OPL028: 共有入口抽出後もv001 planner結果byteは固定値と一致する
+  ---
+  duration_ms: 18.063166
+  ...
+# Subtest: OPL029: v001/v002は物理候補とpath選択の同一入口を使う
+ok 77 - OPL029: v001/v002は物理候補とpath選択の同一入口を使う
+  ---
+  duration_ms: 1.098875
+  ...
+# Subtest: OPLV2001: 一つの意味atomを一度だけ保持して複数spanを写す
+ok 78 - OPLV2001: 一つの意味atomを一度だけ保持して複数spanを写す
+  ---
+  duration_ms: 9.5975
+  ...
+# Subtest: OPLV2002: 幅内の短い本文は不要な改行を入れない
+ok 79 - OPLV2002: 幅内の短い本文は不要な改行を入れない
+  ---
+  duration_ms: 1.550791
+  ...
+# Subtest: OPLV2003: pageとlineはoccurrence境界だけで切る
+ok 80 - OPLV2003: pageとlineはoccurrence境界だけで切る
+  ---
+  duration_ms: 1.167417
+  ...
+# Subtest: OPLV2004: 全lineは入力幅上限以下である
+ok 81 - OPLV2004: 全lineは入力幅上限以下である
+  ---
+  duration_ms: 1.352
+  ...
+# Subtest: OPLV2005: safe area外の物理候補はlayout拒否になる
+ok 82 - OPLV2005: safe area外の物理候補はlayout拒否になる
+  ---
+  duration_ms: 0.647291
+  ...
+# Subtest: OPLV2006: pageとlineの連結は意味本文を全量一回だけ保持する
+ok 83 - OPLV2006: pageとlineの連結は意味本文を全量一回だけ保持する
+  ---
+  duration_ms: 0.87825
+  ...
+# Subtest: OPLV2007: segment別包絡とframe来歴を分けて連続表示へ投影する
+ok 84 - OPLV2007: segment別包絡とframe来歴を分けて連続表示へ投影する
+  ---
+  duration_ms: 0.731291
+  ...
+# Subtest: OPLV2008: 同一入力二回のplanはbyte一致する
+ok 85 - OPLV2008: 同一入力二回のplanはbyte一致する
+  ---
+  duration_ms: 1.454792
+  ...
+# Subtest: OPLV2009: v001意味packageは暗黙変換せず拒否する
+ok 86 - OPLV2009: v001意味packageは暗黙変換せず拒否する
+  ---
+  duration_ms: 0.276416
+  ...
+# Subtest: OPLV2010: occurrenceのspan順不正は入力拒否になる
+ok 87 - OPLV2010: occurrenceのspan順不正は入力拒否になる
+  ---
+  duration_ms: 0.299208
+  ...
+# Subtest: OPLV2011: 不正なbase timelineはspan未写像として拒否する
+ok 88 - OPLV2011: 不正なbase timelineはspan未写像として拒否する
+  ---
+  duration_ms: 0.519167
+  ...
+# Subtest: OPLV2012: 一atomも幅内に収まらない場合はlayout拒否する
+ok 89 - OPLV2012: 一atomも幅内に収まらない場合はlayout拒否する
+  ---
+  duration_ms: 0.151541
+  ...
+# Subtest: OPT001: 一つのretained spanを既存mapperでexact写像する
+ok 90 - OPT001: 一つのretained spanを既存mapperでexact写像する
+  ---
+  duration_ms: 1.385208
+  ...
+# Subtest: OPT002: 同一segment内の複数spanは通常の時間差を含む一包絡へ畳む
+ok 91 - OPT002: 同一segment内の複数spanは通常の時間差を含む一包絡へ畳む
+  ---
+  duration_ms: 0.171541
+  ...
+# Subtest: OPT003: 切断前後segmentは出力frameでexact接触し切断時間を写さない
+ok 92 - OPT003: 切断前後segmentは出力frameでexact接触し切断時間を写さない
+  ---
+  duration_ms: 0.150667
+  ...
+# Subtest: OPT004: 元時刻またはsegment再出現の逆順を拒否する
+ok 93 - OPT004: 元時刻またはsegment再出現の逆順を拒否する
+  ---
+  duration_ms: 0.080583
+  ...
+# Subtest: OPT005: 一つのspanが複数segmentに入る曖昧写像を拒否する
+ok 94 - OPT005: 一つのspanが複数segmentに入る曖昧写像を拒否する
+  ---
+  duration_ms: 0.208
+  ...
+# Subtest: OPT006: timelineに含まれないspanを未写像として拒否する
+ok 95 - OPT006: timelineに含まれないspanを未写像として拒否する
+  ---
+  duration_ms: 0.126334
+  ...
+# Subtest: OPT007: frame gapを専用codeで拒否する
+ok 96 - OPT007: frame gapを専用codeで拒否する
+  ---
+  duration_ms: 0.083417
+  ...
+# Subtest: OPT008: frame overlapを専用codeで拒否する
+ok 97 - OPT008: frame overlapを専用codeで拒否する
+  ---
+  duration_ms: 0.524541
+  ...
+# Subtest: OPT009: 0-frame写像を専用codeで拒否する
+ok 98 - OPT009: 0-frame写像を専用codeで拒否する
+  ---
+  duration_ms: 0.142625
+  ...
+# Subtest: OPT010: source包絡と一致しないframe来歴を拒否する
+ok 99 - OPT010: source包絡と一致しないframe来歴を拒否する
+  ---
+  duration_ms: 0.139291
+  ...
+# Subtest: ORP001: native render planはexact 9 keyである
+ok 100 - ORP001: native render planはexact 9 keyである # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.398959
+  ...
+# Subtest: ORP002: native page一件をcommon core element一件へ写す
+ok 101 - ORP002: native page一件をcommon core element一件へ写す # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.049709
+  ...
+# Subtest: ORP003: meaning projection 7 fieldは意味packageから不変導出される
+ok 102 - ORP003: meaning projection 7 fieldは意味packageから不変導出される # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.040292
+  ...
+# Subtest: ORP004: base mediaの4 bindingをrequestからそのまま保持する
+ok 103 - ORP004: base mediaの4 bindingをrequestからそのまま保持する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.033917
+  ...
+# Subtest: ORP005: title空はnot-requestedとなる
+ok 104 - ORP005: title空はnot-requestedとなる # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.086625
+  ...
+# Subtest: ORP006: title非空はv001で拒否する
+ok 105 - ORP006: title非空はv001で拒否する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.035
+  ...
+# Subtest: ORP007: instruction/resolution/旧B4 artifactを一件も生成しない
+ok 106 - ORP007: instruction/resolution/旧B4 artifactを一件も生成しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.029333
+  ...
+# Subtest: ORP008: common coreは新native planのpage値を実際に受ける
+ok 107 - ORP008: common coreは新native planのpage値を実際に受ける # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.077792
+  ...
+# Subtest: ORP017: element共有入口抽出後もv001 common core byteは固定値と一致する
+ok 108 - ORP017: element共有入口抽出後もv001 common core byteは固定値と一致する
+  ---
+  duration_ms: 2.377375
+  ...
+# Subtest: ORP018: v001/v002は同一element投影入口を使う
+ok 109 - ORP018: v001/v002は同一element投影入口を使う
+  ---
+  duration_ms: 5.965875
+  ...
+# Subtest: OEE001: 合成横型を意味packageからapplication/QC/manifestまで一気通貫する
+ok 110 - OEE001: 合成横型を意味packageからapplication/QC/manifestまで一気通貫する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.099416
+  ...
+# Subtest: OEE002: 合成縦型をcrop前提の意味packageからQCまで一気通貫する
+ok 111 - OEE002: 合成縦型をcrop前提の意味packageからQCまで一気通貫する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.035875
+  ...
+# Subtest: OEE003: 横縦の出力形式差で意味package byteを変えない
+ok 112 - OEE003: 横縦の出力形式差で意味package byteを変えない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.029459
+  ...
+# Subtest: OEE004: rejected時はcontrol 2件・render 0件でfallbackしない
+ok 113 - OEE004: rejected時はcontrol 2件・render 0件でfallbackしない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.1025
+  ...
+# Subtest: OEE005: core契約/QC失敗はrejected failure exact 11 keyへ帰属する
+ok 114 - OEE005: core契約/QC失敗はrejected failure exact 11 keyへ帰属する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.033417
+  ...
+# Subtest: OEE006: 複合不正は数値tokenを優先し、tool/I/O fatalはexit 2相当へ帰属する
+ok 115 - OEE006: 複合不正は数値tokenを優先し、tool/I/O fatalはexit 2相当へ帰属する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.029834
+  ...
+# Subtest: OEE007: staging exact検査不合格は旧publisherを呼ばず専用fatalにする
+ok 116 - OEE007: staging exact検査不合格は旧publisherを呼ばず専用fatalにする # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.029292
+  ...
+# Subtest: OEE008: staging合格後だけ既存commit入口を一度呼ぶ
+ok 117 - OEE008: staging合格後だけ既存commit入口を一度呼ぶ # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.11625
+  ...
+# Subtest: OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み替えない
+ok 118 - OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み替えない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.036833
+  ...
+# Subtest: OPF001: 親契約2文書のSHAが承認値と一致する
+ok 119 - OPF001: 親契約2文書のSHAが承認値と一致する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.030625
+  ...
+# Subtest: OPF002: §4の13正本は開始来歴と非変更9件・承認済み変更2件を別層で束縛する
+ok 120 - OPF002: §4の13正本は開始来歴と非変更9件・承認済み変更2件を別層で束縛する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.070042
+  ...
+# Subtest: OPF003: X01〜X04は開始SHAと許可された共通入口を持つ
+ok 121 - OPF003: X01〜X04は開始SHAと許可された共通入口を持つ # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.036167
+  ...
+# Subtest: OPF004: 実装path集合はexact 32件で33件目を持たない
+ok 122 - OPF004: 実装path集合はexact 32件で33件目を持たない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.022417
+  ...
+# Subtest: OPF005: 参照exportが実在しproductionとtestが同入口を使う
+ok 123 - OPF005: 参照exportが実在しproductionとtestが同入口を使う # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.019209
+  ...
+# Subtest: OPF006: candidate 13横型stable treeは不変である
+ok 124 - OPF006: candidate 13横型stable treeは不変である # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.031792
+  ...
+# Subtest: OPF007: candidate 59横型stable treeは不変である
+ok 125 - OPF007: candidate 59横型stable treeは不変である # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.01975
+  ...
+# Subtest: OPF008: candidate 59縦型stable treeは不変である
+ok 126 - OPF008: candidate 59縦型stable treeは不変である # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017666
+  ...
+# Subtest: OPF009: 旧schema converter/fallback/併産を新経路に持たない
+ok 127 - OPF009: 旧schema converter/fallback/併産を新経路に持たない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.018292
+  ...
+# Subtest: OPF010: 新規検査はAPI通信0件・secret保存0件である
+ok 128 - OPF010: 新規検査はAPI通信0件・secret保存0件である # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.02
+  ...
+# Subtest: OPF011: O07はO03と既存validatorを出力作成前に実行する
+ok 129 - OPF011: O07はO03と既存validatorを出力作成前に実行する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017709
+  ...
+# Subtest: OPF012: 固定Node+TSX loaderでO05/O07実exportを使い追加loaderを持たない
+ok 130 - OPF012: 固定Node+TSX loaderでO05/O07実exportを使い追加loaderを持たない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.01975
+  ...
+# Subtest: OPF013: 実行入力・crop適用の承認済み親設計SHAが一致する
+ok 131 - OPF013: 実行入力・crop適用の承認済み親設計SHAが一致する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.019041
+  ...
+# Subtest: OPF014: 既存3本のstable tagは承認済みcommitを指す
+ok 132 - OPF014: 既存3本のstable tagは承認済みcommitを指す # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.073959
+  ...
+# Subtest: OPF015: v006原本とpresentation台帳の完全treeは初期HEADから不変である
+ok 133 - OPF015: v006原本とpresentation台帳の完全treeは初期HEADから不変である # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.018416
+  ...
+# Subtest: OPF016: 実装baselineからの差分は承認済み16 pathだけである
+ok 134 - OPF016: 実装baselineからの差分は承認済み16 pathだけである # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.018333
+  ...
+# Subtest: ORPV2001: v002 native render planはexact 9 keyである
+ok 135 - ORPV2001: v002 native render planはexact 9 keyである
+  ---
+  duration_ms: 3.949875
+  ...
+# Subtest: ORPV2002: 一つのpage本文を一つの共通描画elementへ渡す
+ok 136 - ORPV2002: 一つのpage本文を一つの共通描画elementへ渡す
+  ---
+  duration_ms: 2.136292
+  ...
+# Subtest: ORPV2003: 複数元時刻片・包絡・frame写像を別来歴として保持する
+ok 137 - ORPV2003: 複数元時刻片・包絡・frame写像を別来歴として保持する
+  ---
+  duration_ms: 1.55225
+  ...
+# Subtest: ORPV2004: 意味projectionは本文・span列・timelineを別hashで束縛する
+ok 138 - ORPV2004: 意味projectionは本文・span列・timelineを別hashで束縛する
+  ---
+  duration_ms: 0.881333
+  ...
+# Subtest: ORPV2005: 横縦style差は同じ意味package byteを変更しない
+ok 139 - ORPV2005: 横縦style差は同じ意味package byteを変更しない
+  ---
+  duration_ms: 5.920583
+  ...
+# Subtest: ORPV2006: v001 packageを暗黙変換せず拒否する
+ok 140 - ORPV2006: v001 packageを暗黙変換せず拒否する
+  ---
+  duration_ms: 0.28975
+  ...
+# Subtest: ORPV2007: base mediaの4 bindingをbyte変更せず保持する
+ok 141 - ORPV2007: base mediaの4 bindingをbyte変更せず保持する
+  ---
+  duration_ms: 1.80125
+  ...
+# Subtest: ORPV2008: page本文改変をrender projection不一致として拒否する
+ok 142 - ORPV2008: page本文改変をrender projection不一致として拒否する
+  ---
+  duration_ms: 1.428958
+  ...
+# Subtest: APJ001: proof jobはexact fieldと出力rootだけを受理する
+ok 143 - APJ001: proof jobはexact fieldと出力rootだけを受理する
+  ---
+  duration_ms: 1.163042
+  ...
+# Subtest: APJ002: 三fixtureを入力順の横型・縦型診断の計六本へ一度ずつ写す
+ok 144 - APJ002: 三fixtureを入力順の横型・縦型診断の計六本へ一度ずつ写す
+  ---
+  duration_ms: 1.300042
+  ...
+# Subtest: APJ003: trim/concat・描画QCは既存の実exportだけを正本として保持する
+ok 145 - APJ003: trim/concat・描画QCは既存の実exportだけを正本として保持する
+  ---
+  duration_ms: 26.616958
+  ...
+# Subtest: APJ004: 六経路は二採用区間のtrim/concat結果だけを受理する
+ok 146 - APJ004: 六経路は二採用区間のtrim/concat結果だけを受理する
+  ---
+  duration_ms: 0.360042
+  ...
+# Subtest: APJ005: 開始時と公開直前に全入力bindingを再読する
+ok 147 - APJ005: 開始時と公開直前に全入力bindingを再読する
+  ---
+  duration_ms: 3.50075
+  ...
+# Subtest: APJ006: 公開直前のbinding差を拒否して公開しない
+ok 148 - APJ006: 公開直前のbinding差を拒否して公開しない
+  ---
+  duration_ms: 13.391667
+  ...
+# Subtest: APJ007: QC不合格をOUTPUT_V002_QC_FAILEDが所有する
+ok 149 - APJ007: QC不合格をOUTPUT_V002_QC_FAILEDが所有する
+  ---
+  duration_ms: 0.151375
+  ...
+# Subtest: APJ008: no-replace公開競合をOUTPUT_V002_PUBLICATION_FAILEDが所有する
+ok 150 - APJ008: no-replace公開競合をOUTPUT_V002_PUBLICATION_FAILEDが所有する
+  ---
+  duration_ms: 0.248666
+  ...
+# Subtest: APJ009: formal jobはAPI通信・費用・再試行の入口を一つも持たない
+ok 151 - APJ009: formal jobはAPI通信・費用・再試行の入口を一つも持たない
+  ---
+  duration_ms: 0.119209
+  ...
+# Subtest: APJ010: 保存済み旧v3実fixture一経路を正式化しproof runner入力へ渡せる
+ok 152 - APJ010: 保存済み旧v3実fixture一経路を正式化しproof runner入力へ渡せる
+  ---
+  duration_ms: 22.409083
+  ...
+1..152
+# tests 152
+# suites 0
+# pass 92
+# fail 0
+# cancelled 0
+# skipped 60
+# todo 0
+# duration_ms 459.774667

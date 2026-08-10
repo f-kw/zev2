@@ -1,0 +1,28 @@
+{
+  "exitCode": 2,
+  "status": "fatal",
+  "violations": [],
+  "fatalObservation": {
+    "schemaVersion": "presentation-fatal-observation-v002",
+    "innerStage": "unknown",
+    "targetFile": null,
+    "innerCode": "UNCLASSIFIED"
+  },
+  "proofObservation": {
+    "schemaVersion": "presentation-a-v002-layer1-v3-proof-observation-v001",
+    "checkpoints": [
+      "dependency-initialization-entered",
+      "dependency-initialization-completed",
+      "start-input-reread-entered"
+    ],
+    "failure": {
+      "callerStage": "start-input-reread",
+      "step": "runtime-binary",
+      "exceptionType": "file-read",
+      "targetFile": {
+        "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+        "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+      }
+    }
+  }
+}

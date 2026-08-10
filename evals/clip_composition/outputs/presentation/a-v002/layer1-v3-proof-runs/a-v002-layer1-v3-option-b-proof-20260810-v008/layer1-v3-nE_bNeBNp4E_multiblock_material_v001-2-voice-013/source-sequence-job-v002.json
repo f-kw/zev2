@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "presentation-a-source-sequence-job-v002",
+  "jobId": "a-v002-proof-0b0d371a67d39824cb47c008-sequence-v001-job",
+  "sequenceId": "a-v002-proof-0b0d371a67d39824cb47c008-sequence-v001",
+  "parentSemanticInputBinding": {
+    "schemaVersion": "presentation-a-v002-layer1-v3-proof-input-v001",
+    "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-2-voice-013/proof-input-v001.json",
+    "fileSha256": "089a1cfaa119a6742aca2a1dd9ff64275870af74ba4b35d84611d49d9784a381",
+    "canonicalSha256": "f48d20ba4450aebdfa792ab09a73eec67d6c2bb3622eeebceba906ee5d7d9a42"
+  },
+  "sourceMedia": {
+    "sourceMediaId": "source-media-000001",
+    "sourceRef": "youtube:qdczJpv8RCc",
+    "mediaBinding": {
+      "path": "evals/clip_composition/research/downloads/nE_bNeBNp4E/sources/qdczJpv8RCc/qdczJpv8RCc.mp4",
+      "fileSha256": "8359f59d8c205fb815c9165f5a464ec4bb9f109f9d91384b80e571410dc2fa25"
+    },
+    "sourceAtomBinding": {
+      "schemaVersion": "presentation-a-v002-layer1-v3-source-atom-transcript-v001",
+      "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/source-atom-transcript-v001.json",
+      "fileSha256": "9c95ab7e8428da7e84ae8b8dd20d8cfbfdf80498ce95c5893ba0e7ec4355cad7",
+      "canonicalSha256": "e73021cf8f6c717fdfcf852ffe8ef1c1796f0920c4f2a453942ea2b48d3e7c5e"
+    }
+  },
+  "outerRange": {
+    "sourceMediaId": "source-media-000001",
+    "sourceStartMs": 4080650,
+    "sourceEndMs": 4108290
+  },
+  "removalDecisions": [
+    {
+      "decisionId": "layer1-v3-nE_bNeBNp4E_multiblock_material_v001-2-voice-013-removal-000001",
+      "verdict": "remove",
+      "evidenceBinding": {
+        "schemaVersion": "presentation-a-v002-layer1-v3-human-approval-v001",
+        "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/human-approval-v001.json",
+        "fileSha256": "a731556d31a22a1b7f02533cf605ff3e80ad9ccc4123e9645acbaf64cfd0e7a0",
+        "canonicalSha256": "6690f4bf63a3f91f92d356cd717393e2438fdcecf769972b6882b78353e9a14e"
+      },
+      "sourceMediaId": "source-media-000001",
+      "sourceStartMs": 4084435,
+      "sourceEndMs": 4086915
+    }
+  ],
+  "outputDirectory": "evals/clip_composition/outputs/presentation/a-v002/source-sequences/a-v002-proof-0b0d371a67d39824cb47c008-sequence-v001",
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/presentation_a_source_sequence_v002.mjs",
+      "fileSha256": "c20401d398956710842823e9ec2677f07cf5686c9f04b03c1df1532d540e09ec",
+      "role": "source-sequence"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_a_source_sequence_job_v002.mjs",
+      "fileSha256": "a564bd336f8bd5d03e9052b6e727b844c894897f4a5a20b2bf2fc0154198cec2",
+      "role": "source-sequence-runner"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "role": "strict-json"
+    },
+    {
+      "path": "evals/clip_composition/presentation_fatal_observation_v002.mjs",
+      "fileSha256": "cf95c2ba8785be681dcecc03dc4ec009d6f02b4161e3c39f7edbf431b92b6115",
+      "role": "fatal-observation"
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+import {performance} from 'node:perf_hooks';
+
 import {
   mapPresentationSourceIntervalV002,
 } from './presentation_base_media_timeline_v002.mjs';
@@ -18,6 +20,7 @@ export const PRESENTATION_OUTPUT_PLANNER_MAX_PAGES_PER_CAPTION_V001 = 999;
 
 const FORMAL_ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/u;
 const FORMATS = Object.freeze(['normal-landscape', 'vertical-short-1080x1920']);
+const RESOURCE_EVENT_SCHEMA_VERSION = 'presentation-output-planner-resource-event-v001';
 
 const isObject = value => value !== null && typeof value === 'object'
   && !Array.isArray(value);
@@ -30,6 +33,158 @@ const nonnegative = value => Number.isSafeInteger(value) && value >= 0;
 const positive = value => Number.isSafeInteger(value) && value > 0;
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const clone = value => structuredClone(value);
+
+const validResourceObserver = value => value === undefined || typeof value === 'function';
+
+const emitResourceEvent = (resourceObserver, {
+  stage,
+  processedAtomCount = null,
+  generatedPhysicalEdgeCount = null,
+  acceptedPhysicalEdgeCount = null,
+  processedTimelineEdgeCount = null,
+  mappedTimelineEdgeCount = null,
+  rejectedTimelineEdgeCount = null,
+  generatedStateCount = null,
+  insertedStateCount = null,
+  replacedEquivalentStateCount = null,
+  prunedDominatedStateCount = null,
+  retainedStateCount = null,
+  maximumRetainedStateCount = null,
+  elapsedMs = null,
+}) => {
+  if (resourceObserver === undefined) return;
+  const numericValues = [
+    processedAtomCount,
+    generatedPhysicalEdgeCount,
+    acceptedPhysicalEdgeCount,
+    processedTimelineEdgeCount,
+    mappedTimelineEdgeCount,
+    rejectedTimelineEdgeCount,
+    generatedStateCount,
+    insertedStateCount,
+    replacedEquivalentStateCount,
+    prunedDominatedStateCount,
+    retainedStateCount,
+    maximumRetainedStateCount,
+    elapsedMs,
+  ];
+  if (!numericValues.every(value => value === null || nonnegative(value))) {
+    throw new TypeError('presentation output planner resource event is invalid');
+  }
+  resourceObserver(Object.freeze({
+    schemaVersion: RESOURCE_EVENT_SCHEMA_VERSION,
+    stage,
+    processedAtomCount,
+    generatedPhysicalEdgeCount,
+    acceptedPhysicalEdgeCount,
+    processedTimelineEdgeCount,
+    mappedTimelineEdgeCount,
+    rejectedTimelineEdgeCount,
+    generatedStateCount,
+    insertedStateCount,
+    replacedEquivalentStateCount,
+    prunedDominatedStateCount,
+    retainedStateCount,
+    maximumRetainedStateCount,
+    elapsedMs,
+  }));
+};
+
+const createInvocationResourceTracker = resourceObserver => {
+  const startedAt = resourceObserver === undefined ? null : performance.now();
+  const totals = {
+    processedAtomCount: 0,
+    generatedPhysicalEdgeCount: 0,
+    acceptedPhysicalEdgeCount: 0,
+    processedTimelineEdgeCount: 0,
+    mappedTimelineEdgeCount: 0,
+    rejectedTimelineEdgeCount: 0,
+    generatedStateCount: 0,
+    insertedStateCount: 0,
+    replacedEquivalentStateCount: 0,
+    prunedDominatedStateCount: 0,
+    maximumRetainedStateCount: 0,
+  };
+  let atomOffset = 0;
+  const beginCaption = () => {
+    if (resourceObserver === undefined) return undefined;
+    const base = {...totals};
+    return event => {
+      totals.processedAtomCount = Math.max(
+        totals.processedAtomCount,
+        atomOffset + event.processedAtomCount,
+      );
+      if (event.stage === 'physical-graph') {
+        totals.generatedPhysicalEdgeCount = base.generatedPhysicalEdgeCount
+          + event.generatedPhysicalEdgeCount;
+        totals.acceptedPhysicalEdgeCount = base.acceptedPhysicalEdgeCount
+          + event.acceptedPhysicalEdgeCount;
+        emitResourceEvent(resourceObserver, {
+          stage: event.stage,
+          processedAtomCount: atomOffset + event.processedAtomCount,
+          generatedPhysicalEdgeCount: totals.generatedPhysicalEdgeCount,
+          acceptedPhysicalEdgeCount: totals.acceptedPhysicalEdgeCount,
+        });
+        return;
+      }
+      if (event.stage === 'timeline-mapping') {
+        totals.processedTimelineEdgeCount = base.processedTimelineEdgeCount
+          + event.processedTimelineEdgeCount;
+        totals.mappedTimelineEdgeCount = base.mappedTimelineEdgeCount
+          + event.mappedTimelineEdgeCount;
+        totals.rejectedTimelineEdgeCount = base.rejectedTimelineEdgeCount
+          + event.rejectedTimelineEdgeCount;
+        emitResourceEvent(resourceObserver, {
+          stage: event.stage,
+          processedAtomCount: atomOffset + event.processedAtomCount,
+          processedTimelineEdgeCount: totals.processedTimelineEdgeCount,
+          mappedTimelineEdgeCount: totals.mappedTimelineEdgeCount,
+          rejectedTimelineEdgeCount: totals.rejectedTimelineEdgeCount,
+        });
+        return;
+      }
+      if (event.stage === 'path-selection') {
+        totals.generatedStateCount = base.generatedStateCount + event.generatedStateCount;
+        totals.insertedStateCount = base.insertedStateCount + event.insertedStateCount;
+        totals.replacedEquivalentStateCount = base.replacedEquivalentStateCount
+          + event.replacedEquivalentStateCount;
+        totals.prunedDominatedStateCount = base.prunedDominatedStateCount
+          + event.prunedDominatedStateCount;
+        totals.maximumRetainedStateCount = Math.max(
+          totals.maximumRetainedStateCount,
+          event.maximumRetainedStateCount,
+        );
+        emitResourceEvent(resourceObserver, {
+          stage: event.stage,
+          processedAtomCount: atomOffset + event.processedAtomCount,
+          generatedStateCount: totals.generatedStateCount,
+          insertedStateCount: totals.insertedStateCount,
+          replacedEquivalentStateCount: totals.replacedEquivalentStateCount,
+          prunedDominatedStateCount: totals.prunedDominatedStateCount,
+          retainedStateCount: event.retainedStateCount,
+          maximumRetainedStateCount: totals.maximumRetainedStateCount,
+        });
+      }
+    };
+  };
+  return {
+    beginCaption,
+    completeCaption(atomCount) {
+      atomOffset += atomCount;
+    },
+    finish(result) {
+      if (resourceObserver === undefined) return result;
+      emitResourceEvent(resourceObserver, {
+        stage: 'planner-completed',
+        processedAtomCount: totals.processedAtomCount,
+        generatedStateCount: totals.generatedStateCount,
+        maximumRetainedStateCount: totals.maximumRetainedStateCount,
+        elapsedMs: Math.floor(performance.now() - startedAt),
+      });
+      return result;
+    },
+  };
+};
 
 const compareNumberArrays = (left, right) => {
   const length = Math.min(left.length, right.length);
@@ -286,7 +441,80 @@ const inspectPhysicalPage = async ({edge, caption, styleResolution}) => {
     });
 };
 
-const reachableEnd = (edgeList, finalBoundary) => {
+/**
+ * 意味schemaやtimeline写像から独立した、表示上のpage/line候補だけを構築する。
+ * v001/v002はこの入口を共用し、文字幅・安全領域・行選択を二重実装しない。
+ */
+export async function buildPresentationOutputPhysicalPageGraphV001({
+  caption,
+  records,
+  styleResolution,
+  resolvedStyleValidator,
+  resourceObserver,
+}) {
+  if (!isObject(caption)
+    || !positive(caption.ordinal)
+    || !dense(records)
+    || records.length < 1
+    || !records.every(record => isObject(record)
+      && typeof record.text === 'string'
+      && record.text.length > 0
+      && !/[\r\n]/u.test(record.text))
+    || !exactKeys(styleResolution, ['resolvedStyle', 'layoutContext'])
+    || typeof resolvedStyleValidator !== 'function'
+    || !resolvedStyleValidator(styleResolution.resolvedStyle)
+    || !isObject(styleResolution.layoutContext)
+    || !validResourceObserver(resourceObserver)) {
+    throw new TypeError('presentation output physical page graph input is invalid');
+  }
+  const lineCandidates = buildLineCandidates(
+    records,
+    styleResolution.resolvedStyle.maxLogicalWidthPerLine,
+    styleResolution.resolvedStyle.characterWidthRule,
+  );
+  const edges = [];
+  let generatedPhysicalEdgeCount = 0;
+  let acceptedPhysicalEdgeCount = 0;
+  for (let start = 0; start < records.length; start += 1) {
+    for (const firstLine of lineCandidates[start]) {
+      const oneLine = physicalEdge(records, [firstLine]);
+      generatedPhysicalEdgeCount += 1;
+      if (await inspectPhysicalPage({
+        edge: oneLine,
+        caption,
+        styleResolution,
+      })) {
+        edges.push(oneLine);
+        acceptedPhysicalEdgeCount += 1;
+      }
+      if (styleResolution.resolvedStyle.maxLinesPerDisplayPage === 2) {
+        for (const secondLine of lineCandidates[firstLine.endBoundaryOrdinal] ?? []) {
+          const twoLine = physicalEdge(records, [firstLine, secondLine]);
+          generatedPhysicalEdgeCount += 1;
+          if (await inspectPhysicalPage({
+            edge: twoLine,
+            caption,
+            styleResolution,
+          })) {
+            edges.push(twoLine);
+            acceptedPhysicalEdgeCount += 1;
+          }
+        }
+      }
+    }
+    emitResourceEvent(resourceObserver, {
+      stage: 'physical-graph',
+      processedAtomCount: start + 1,
+      generatedPhysicalEdgeCount,
+      acceptedPhysicalEdgeCount,
+    });
+  }
+  edges.sort(comparePageEdges);
+  return edges;
+}
+
+export const isPresentationOutputPageGraphCompleteV001 = (edgeList, finalBoundary) => {
+  if (!dense(edgeList) || !nonnegative(finalBoundary)) return false;
   const edgesByStart = new Map();
   for (const edge of edgeList) {
     const bucket = edgesByStart.get(edge.startBoundaryOrdinal) ?? [];
@@ -320,14 +548,109 @@ const makeTimelineEdge = (edge, baseMediaTimeline) => {
   };
 };
 
+const mapTimelineEdgesV001 = ({
+  edges,
+  finalBoundary,
+  baseMediaTimeline,
+  resourceObserver,
+}) => {
+  const edgesByStart = new Map();
+  for (const edge of edges) {
+    const bucket = edgesByStart.get(edge.startBoundaryOrdinal) ?? [];
+    bucket.push(edge);
+    edgesByStart.set(edge.startBoundaryOrdinal, bucket);
+  }
+  const mappedEdges = [];
+  let processedTimelineEdgeCount = 0;
+  let mappedTimelineEdgeCount = 0;
+  let rejectedTimelineEdgeCount = 0;
+  for (let start = 0; start < finalBoundary; start += 1) {
+    for (const edge of edgesByStart.get(start) ?? []) {
+      processedTimelineEdgeCount += 1;
+      const mapped = makeTimelineEdge(edge, baseMediaTimeline);
+      if (mapped === null) {
+        rejectedTimelineEdgeCount += 1;
+      } else {
+        mappedEdges.push(mapped);
+        mappedTimelineEdgeCount += 1;
+      }
+    }
+    emitResourceEvent(resourceObserver, {
+      stage: 'timeline-mapping',
+      processedAtomCount: start + 1,
+      processedTimelineEdgeCount,
+      mappedTimelineEdgeCount,
+      rejectedTimelineEdgeCount,
+    });
+  }
+  mappedEdges.sort(comparePageEdges);
+  return mappedEdges;
+};
+
 const stateKey = state => [
-  state.boundaryOrdinal,
   state.pageCount,
   state.totalLineCount,
   state.minimumLineLogicalWidth,
   state.maximumLineLogicalWidth,
   state.previousEndFrameExclusive,
 ].join('\u0000');
+
+const validSelectionFrameRange = value => isObject(value)
+  && nonnegative(value.startFrame)
+  && positive(value.endFrameExclusive)
+  && value.startFrame < value.endFrameExclusive;
+
+const edgeWidthInterval = edge => {
+  const widths = edge.lines.map(line => line.logicalWidth);
+  return {
+    minimum: Math.min(...widths),
+    maximum: Math.max(...widths),
+  };
+};
+
+const selectionEdgeDominates = (left, right) => {
+  if (left.lines.length === 1 && right.lines.length > 1) return true;
+  if (left.lines.length !== right.lines.length) return false;
+  const leftWidth = edgeWidthInterval(left);
+  const rightWidth = edgeWidthInterval(right);
+  return leftWidth.maximum <= rightWidth.maximum
+    && leftWidth.minimum >= rightWidth.minimum
+    && compareNumberArrays(
+      left.lineEndBoundaryOrdinals,
+      right.lineEndBoundaryOrdinals,
+    ) <= 0;
+};
+
+const pruneSelectionEdges = (bucket, frameRangeByEdge) => {
+  const groups = new Map();
+  for (const [index, edge] of bucket.entries()) {
+    const frameRange = frameRangeByEdge.get(edge);
+    if (!validSelectionFrameRange(frameRange)) continue;
+    const key = [
+      edge.endBoundaryOrdinal,
+      frameRange.startFrame,
+      frameRange.endFrameExclusive,
+    ].join('\u0000');
+    const group = groups.get(key) ?? [];
+    group.push({edge, index});
+    groups.set(key, group);
+  }
+  const removed = new Set();
+  for (const group of groups.values()) {
+    for (const candidate of group) {
+      for (const other of group) {
+        if (candidate.index === other.index
+          || !selectionEdgeDominates(other.edge, candidate.edge)) continue;
+        const mutuallyDominated = selectionEdgeDominates(candidate.edge, other.edge);
+        if (!mutuallyDominated || other.index < candidate.index) {
+          removed.add(candidate.index);
+          break;
+        }
+      }
+    }
+  }
+  return bucket.filter((edge, index) => !removed.has(index));
+};
 
 const reconstructEdges = state => {
   const edges = [];
@@ -340,12 +663,18 @@ const reconstructEdges = state => {
   return edges;
 };
 
+const pathOrdinalCache = new WeakMap();
+
 const pathOrdinals = state => {
+  const cached = pathOrdinalCache.get(state);
+  if (cached !== undefined) return cached;
   const edges = reconstructEdges(state);
-  return {
+  const ordinals = {
     pageEnds: edges.map(edge => edge.endBoundaryOrdinal),
     lineEnds: edges.flatMap(edge => edge.lineEndBoundaryOrdinals),
   };
+  pathOrdinalCache.set(state, ordinals);
+  return ordinals;
 };
 
 const compareTiePaths = (left, right) => {
@@ -371,14 +700,33 @@ const compareTerminalStates = (left, right) => {
   return compareTiePaths(left, right);
 };
 
-const selectTimelinePath = (edges, finalBoundary) => {
+const stateDominates = (left, right) => {
+  if (left.previousEndFrameExclusive > right.previousEndFrameExclusive) return false;
+  if (left.pageCount !== right.pageCount) return left.pageCount < right.pageCount;
+  if (left.totalLineCount !== right.totalLineCount) {
+    return left.totalLineCount < right.totalLineCount;
+  }
+  return left.maximumLineLogicalWidth <= right.maximumLineLogicalWidth
+    && left.minimumLineLogicalWidth >= right.minimumLineLogicalWidth
+    && compareTiePaths(left, right) <= 0;
+};
+
+const selectTimelinePath = (edges, finalBoundary, frameRangeOf, resourceObserver) => {
+  const frameRangeByEdge = new Map();
+  for (const edge of edges) frameRangeByEdge.set(edge, frameRangeOf(edge));
   const edgesByStart = new Map();
   for (const edge of edges) {
     const bucket = edgesByStart.get(edge.startBoundaryOrdinal) ?? [];
     bucket.push(edge);
     edgesByStart.set(edge.startBoundaryOrdinal, bucket);
   }
-  for (const bucket of edgesByStart.values()) bucket.sort(comparePageEdges);
+  for (const [startBoundary, bucket] of edgesByStart.entries()) {
+    bucket.sort(comparePageEdges);
+    edgesByStart.set(
+      startBoundary,
+      pruneSelectionEdges(bucket, frameRangeByEdge),
+    );
+  }
   const statesByBoundary = Array.from({length: finalBoundary + 1}, () => new Map());
   const startState = {
     boundaryOrdinal: 0,
@@ -391,12 +739,20 @@ const selectTimelinePath = (edges, finalBoundary) => {
     edge: null,
   };
   statesByBoundary[0].set(stateKey(startState), startState);
+  let generatedStateCount = 0;
+  let insertedStateCount = 0;
+  let replacedEquivalentStateCount = 0;
+  let prunedDominatedStateCount = 0;
+  let retainedStateCount = 1;
+  let maximumRetainedStateCount = 1;
   for (let boundary = 0; boundary < finalBoundary; boundary += 1) {
     for (const state of statesByBoundary[boundary].values()) {
       for (const edge of edgesByStart.get(boundary) ?? []) {
+        const frameRange = frameRangeByEdge.get(edge);
+        if (!validSelectionFrameRange(frameRange)) continue;
         if (state.pageCount >= PRESENTATION_OUTPUT_PLANNER_MAX_PAGES_PER_CAPTION_V001
           || (state.previousEndFrameExclusive !== null
-            && state.previousEndFrameExclusive > edge.frameMapping.startFrame)) continue;
+            && state.previousEndFrameExclusive > frameRange.startFrame)) continue;
         const widths = edge.lines.map(line => line.logicalWidth);
         const edgeMinimum = Math.min(...widths);
         const edgeMaximum = Math.max(...widths);
@@ -410,23 +766,99 @@ const selectTimelinePath = (edges, finalBoundary) => {
           maximumLineLogicalWidth: state.maximumLineLogicalWidth === null
             ? edgeMaximum
             : Math.max(state.maximumLineLogicalWidth, edgeMaximum),
-          previousEndFrameExclusive: edge.frameMapping.endFrameExclusive,
+          previousEndFrameExclusive: frameRange.endFrameExclusive,
           predecessor: state,
           edge,
         };
+        generatedStateCount += 1;
         const key = stateKey(next);
-        const current = statesByBoundary[next.boundaryOrdinal].get(key);
-        if (current === undefined || compareTiePaths(next, current) < 0) {
-          statesByBoundary[next.boundaryOrdinal].set(key, next);
+        const nextBucket = statesByBoundary[next.boundaryOrdinal];
+        const equivalent = nextBucket.get(key);
+        let replacesEquivalent = false;
+        if (equivalent !== undefined) {
+          if (compareTiePaths(next, equivalent) >= 0) {
+            prunedDominatedStateCount += 1;
+            continue;
+          }
+          nextBucket.delete(key);
+          retainedStateCount -= 1;
+          replacedEquivalentStateCount += 1;
+          replacesEquivalent = true;
         }
+        let isDominated = false;
+        for (const current of nextBucket.values()) {
+          if (stateDominates(current, next)) {
+            isDominated = true;
+            break;
+          }
+        }
+        if (isDominated) {
+          prunedDominatedStateCount += 1;
+          continue;
+        }
+        for (const [currentKey, current] of nextBucket.entries()) {
+          if (!stateDominates(next, current)) continue;
+          nextBucket.delete(currentKey);
+          retainedStateCount -= 1;
+          prunedDominatedStateCount += 1;
+        }
+        nextBucket.set(key, next);
+        retainedStateCount += 1;
+        if (!replacesEquivalent) insertedStateCount += 1;
+        maximumRetainedStateCount = Math.max(
+          maximumRetainedStateCount,
+          retainedStateCount,
+        );
       }
     }
+    retainedStateCount -= statesByBoundary[boundary].size;
+    statesByBoundary[boundary].clear();
+    emitResourceEvent(resourceObserver, {
+      stage: 'path-selection',
+      processedAtomCount: boundary + 1,
+      generatedStateCount,
+      insertedStateCount,
+      replacedEquivalentStateCount,
+      prunedDominatedStateCount,
+      retainedStateCount,
+      maximumRetainedStateCount,
+    });
   }
-  const terminals = [...statesByBoundary[finalBoundary].values()];
-  if (terminals.length === 0) return null;
-  terminals.sort(compareTerminalStates);
-  return terminals[0];
+  let terminal = null;
+  for (const candidate of statesByBoundary[finalBoundary].values()) {
+    if (terminal === null || compareTerminalStates(candidate, terminal) < 0) {
+      terminal = candidate;
+    }
+  }
+  return terminal;
 };
+
+/**
+ * 時刻写像済みedgeから、承認済みの固定tupleで一つのpage pathを選ぶ。
+ * 戻り値は選択edgeと監査用predecessor終端を分けて保持する。
+ */
+export function selectPresentationOutputPagePathV001({
+  edges,
+  finalBoundary,
+  frameRangeOf,
+  resourceObserver,
+}) {
+  if (!dense(edges)
+    || !nonnegative(finalBoundary)
+    || typeof frameRangeOf !== 'function'
+    || !validResourceObserver(resourceObserver)) {
+    throw new TypeError('presentation output page path input is invalid');
+  }
+  const terminal = selectTimelinePath(
+    edges,
+    finalBoundary,
+    frameRangeOf,
+    resourceObserver,
+  );
+  return terminal === null
+    ? null
+    : {selectedEdges: reconstructEdges(terminal), terminal};
+}
 
 const buildCaptionDisplay = (caption, records, selectedEdges) => ({
   displayCaptionId: `display-caption-${String(caption.ordinal).padStart(6, '0')}`,
@@ -603,92 +1035,85 @@ export async function buildPresentationOutputPageLinePlanV001({
   occurrenceAtoms,
   styleResolution,
   baseMediaTimeline,
+  resourceObserver,
 }) {
+  const resourceTracker = createInvocationResourceTracker(resourceObserver);
   try {
     if (!validatePresentationOutputPlannerInputV001({
       meaningPackage,
       occurrenceAtoms,
       styleResolution,
       baseMediaTimeline,
-    })) throw new TypeError('presentation output planner input is invalid');
+    }) || !validResourceObserver(resourceObserver)) {
+      throw new TypeError('presentation output planner input is invalid');
+    }
     const physicalEdges = [];
     const timelineEdges = [];
     const selectedStates = [];
     const selectedByCaption = [];
     let occurrenceOffset = 0;
     for (const caption of meaningPackage.captions) {
+      const captionResourceObserver = resourceTracker.beginCaption();
       const records = occurrenceAtoms.slice(
         occurrenceOffset,
         occurrenceOffset + caption.atomRefs.length,
       );
       occurrenceOffset += caption.atomRefs.length;
-      const lineCandidates = buildLineCandidates(
+      const captionPhysicalEdges = await buildPresentationOutputPhysicalPageGraphV001({
+        caption,
         records,
-        styleResolution.resolvedStyle.maxLogicalWidthPerLine,
-        styleResolution.resolvedStyle.characterWidthRule,
-      );
-      const captionPhysicalEdges = [];
-      for (let start = 0; start < records.length; start += 1) {
-        for (const firstLine of lineCandidates[start]) {
-          const oneLine = physicalEdge(records, [firstLine]);
-          if (await inspectPhysicalPage({
-            edge: oneLine,
-            caption,
-            styleResolution,
-          })) captionPhysicalEdges.push(oneLine);
-          if (styleResolution.resolvedStyle.maxLinesPerDisplayPage === 2) {
-            for (const secondLine of lineCandidates[firstLine.endBoundaryOrdinal] ?? []) {
-              const twoLine = physicalEdge(records, [firstLine, secondLine]);
-              if (await inspectPhysicalPage({
-                edge: twoLine,
-                caption,
-                styleResolution,
-              })) captionPhysicalEdges.push(twoLine);
-            }
-          }
-        }
-      }
-      captionPhysicalEdges.sort(comparePageEdges);
+        styleResolution,
+        resolvedStyleValidator: validResolvedStyle,
+        resourceObserver: captionResourceObserver,
+      });
       physicalEdges.push({
         semanticCaptionId: caption.captionId,
         edges: captionPhysicalEdges,
       });
-      if (!reachableEnd(captionPhysicalEdges, records.length)) {
-        return rejected(
+      if (!isPresentationOutputPageGraphCompleteV001(captionPhysicalEdges, records.length)) {
+        return resourceTracker.finish(rejected(
           'DISPLAY_PAGE_LAYOUT_UNREPRESENTABLE',
           physicalEdges,
           timelineEdges,
-        );
+        ));
       }
-      const captionTimelineEdges = captionPhysicalEdges
-        .map(edge => makeTimelineEdge(edge, baseMediaTimeline))
-        .filter(edge => edge !== null)
-        .sort(comparePageEdges);
+      const captionTimelineEdges = mapTimelineEdgesV001({
+        edges: captionPhysicalEdges,
+        finalBoundary: records.length,
+        baseMediaTimeline,
+        resourceObserver: captionResourceObserver,
+      });
       timelineEdges.push({
         semanticCaptionId: caption.captionId,
         edges: captionTimelineEdges,
       });
-      const terminal = selectTimelinePath(captionTimelineEdges, records.length);
-      if (terminal === null) {
-        return rejected(
+      const selectedPath = selectPresentationOutputPagePathV001({
+        edges: captionTimelineEdges,
+        finalBoundary: records.length,
+        frameRangeOf: edge => edge.frameMapping,
+        resourceObserver: captionResourceObserver,
+      });
+      if (selectedPath === null) {
+        return resourceTracker.finish(rejected(
           'DISPLAY_PAGE_TIMELINE_UNREPRESENTABLE',
           physicalEdges,
           timelineEdges,
-        );
+        ));
       }
-      const selectedEdges = reconstructEdges(terminal);
+      const {selectedEdges, terminal} = selectedPath;
       selectedByCaption.push({caption, records, selectedEdges});
       selectedStates.push(buildPredecessorProjection(caption, terminal));
+      resourceTracker.completeCaption(records.length);
     }
     const flattened = selectedByCaption.flatMap(entry => entry.selectedEdges);
     for (let index = 1; index < flattened.length; index += 1) {
       if (flattened[index - 1].frameMapping.endFrameExclusive
         > flattened[index].frameMapping.startFrame) {
-        return rejected(
+        return resourceTracker.finish(rejected(
           'DISPLAY_PAGE_TIMELINE_UNREPRESENTABLE',
           physicalEdges,
           timelineEdges,
-        );
+        ));
       }
     }
     const captionDisplays = selectedByCaption.map(({caption, records, selectedEdges}) =>
@@ -700,13 +1125,13 @@ export async function buildPresentationOutputPageLinePlanV001({
     )) {
       throw new TypeError('planner postcondition failed');
     }
-    return {
+    return resourceTracker.finish({
       status: 'planned',
       captionDisplays,
       physicalEdges,
       timelineEdges,
       selectedPredecessors: selectedStates,
-    };
+    });
   } catch (error) {
     rethrowResourceFailure(error);
   }

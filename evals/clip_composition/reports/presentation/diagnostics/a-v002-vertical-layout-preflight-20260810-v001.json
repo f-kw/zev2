@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "presentation-a-v002-read-only-diagnosis-v001",
+  "diagnosisId": "a-v002-vertical-layout-preflight-20260810-v001",
+  "sourceAttempt": {
+    "jobPath": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-jobs/a-v002-layer1-v3-option-b-proof-20260810-v009.json",
+    "jobFileSha256": "9628f013a766c30f0c19b76e132f485d1c6227fdaf356e9eff7b1c02811af2e8",
+    "outputRoot": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v007",
+    "runnerExitCode": 2,
+    "innerStage": "layout-preflight",
+    "innerCode": "CHILD_PROCESS_EXIT_NONZERO"
+  },
+  "savedLayoutInput": {
+    "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/.a-v002-layer1-v3-option-b-proof-20260810-v007-renderer-work/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-2-voice-013/.vertical-caption-diagnostic.presentation-renderer-v002-work-2bGsZm/scratch/layout-input.json",
+    "byteCount": 6152,
+    "fileSha256": "3b0b0d2bc26858f2daa950ae188f4c8b3ba4fd700b8140273b5c066591f4e6b3",
+    "overlayCount": 8,
+    "overlayKeys": [
+      "text",
+      "style",
+      "position",
+      "maxCharsPerLine",
+      "width",
+      "height",
+      "glowSeedHint",
+      "inspectionLineIndex",
+      "fontFailurePolicy"
+    ],
+    "genericInspectorRequiredFieldsPresent": false,
+    "layoutOutputExists": false
+  },
+  "pureReadOnlyReproduction": {
+    "genericInspectorResult": "throws",
+    "genericInspectorErrorName": "Error",
+    "genericInspectorErrorMessage": "renderer overlay props schema mismatch",
+    "verticalInspectorStatus": "passed",
+    "verticalInspectorItemCount": 8,
+    "verticalInspectorViolationCount": 0
+  },
+  "classification": {
+    "owner": "proof-runner-production-connection",
+    "category": "implementation-does-not-reach-contract",
+    "fixtureDefect": false,
+    "contractConflict": false,
+    "repairRequiresContractChange": false
+  },
+  "repair": {
+    "reuse": "inspectPresentationVerticalTextLayoutV001",
+    "connection": "validatedLayoutInspection",
+    "genericInspectorAcceptanceChange": false,
+    "calculationDuplication": false,
+    "round": "2/2-final"
+  }
+}
