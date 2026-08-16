@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v022-known-six-boundary-check-v001",
+  "observedAt": "2026-08-16T03:03:53.277Z",
+  "status": "passed",
+  "sourcePackage": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v003/source-package-v001.json",
+    "fileSha256": "6b77964113028eacf3ac64f56b82f8aac901004aad4a2df82387aee6cd142fe0"
+  },
+  "selection": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/output-caption-cue-selections/a-v002-caption-quality-first-api-selection-20260816-v002-attempt-0001/selection-v001.json",
+    "fileSha256": "d6a3b27ef8d334e2c043310786149852d958b4567f9dbd6c5e4cc762d4cbb625"
+  },
+  "humanObservationFixture": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0005/normal/review/review-input-v001.json",
+    "fileSha256": "4b51cc9559f9000e961e3bf80dffa9045c91c0385a517c0f2b6e0fdfc2de90f5"
+  },
+  "counts": {
+    "planOccurrences": 7,
+    "expectedUniqueBoundaries": 6,
+    "checked": 6,
+    "nonReselected": 6,
+    "reselected": 0
+  },
+  "checks": [
+    {
+      "issueId": "old-break-004",
+      "splitText": "マリ/ン",
+      "caseId": "voice-013",
+      "captionId": "input-caption-000001",
+      "afterAtomOccurrenceId": "atom-occurrence-000020",
+      "boundaryId": "display-boundary-000001-000020",
+      "planOccurrences": [
+        {
+          "format": "vertical-caption-diagnostic",
+          "boundaryKind": "line-end"
+        }
+      ],
+      "cueEndSelected": false,
+      "lineEndSelected": false,
+      "status": "passed"
+    },
+    {
+      "issueId": "old-break-004",
+      "splitText": "マリ/ン",
+      "caseId": "voice-013",
+      "captionId": "input-caption-000001",
+      "afterAtomOccurrenceId": "atom-occurrence-000032",
+      "boundaryId": "display-boundary-000001-000032",
+      "planOccurrences": [
+        {
+          "format": "vertical-caption-diagnostic",
+          "boundaryKind": "line-end"
+        }
+      ],
+      "cueEndSelected": false,
+      "lineEndSelected": false,
+      "status": "passed"
+    },
+    {
+      "issueId": "old-break-001",
+      "splitText": "ス/イちゃん",
+      "caseId": "voice-067",
+      "captionId": "input-caption-000002",
+      "afterAtomOccurrenceId": "atom-occurrence-000042",
+      "boundaryId": "display-boundary-000002-000042",
+      "planOccurrences": [
+        {
+          "format": "horizontal",
+          "boundaryKind": "page-end"
+        }
+      ],
+      "cueEndSelected": false,
+      "lineEndSelected": false,
+      "status": "passed"
+    },
+    {
+      "issueId": "old-break-002",
+      "splitText": "じ/ゃ報告",
+      "caseId": "voice-190",
+      "captionId": "input-caption-000003",
+      "afterAtomOccurrenceId": "atom-occurrence-000032",
+      "boundaryId": "display-boundary-000003-000032",
+      "planOccurrences": [
+        {
+          "format": "horizontal",
+          "boundaryKind": "line-end"
+        },
+        {
+          "format": "vertical-caption-diagnostic",
+          "boundaryKind": "page-end"
+        }
+      ],
+      "cueEndSelected": false,
+      "lineEndSelected": false,
+      "status": "passed"
+    },
+    {
+      "issueId": "old-break-003",
+      "splitText": "言ってほし/いみたいな",
+      "caseId": "voice-190",
+      "captionId": "input-caption-000003",
+      "afterAtomOccurrenceId": "atom-occurrence-000015",
+      "boundaryId": "display-boundary-000003-000015",
+      "planOccurrences": [
+        {
+          "format": "vertical-caption-diagnostic",
+          "boundaryKind": "line-end"
+        }
+      ],
+      "cueEndSelected": false,
+      "lineEndSelected": false,
+      "status": "passed"
+    },
+    {
+      "issueId": "old-break-005",
+      "splitText": "サク/サク",
+      "caseId": "voice-190",
+      "captionId": "input-caption-000003",
+      "afterAtomOccurrenceId": "atom-occurrence-000062",
+      "boundaryId": "display-boundary-000003-000062",
+      "planOccurrences": [
+        {
+          "format": "vertical-caption-diagnostic",
+          "boundaryKind": "line-end"
+        }
+      ],
+      "cueEndSelected": false,
+      "lineEndSelected": false,
+      "status": "passed"
+    }
+  ]
+}

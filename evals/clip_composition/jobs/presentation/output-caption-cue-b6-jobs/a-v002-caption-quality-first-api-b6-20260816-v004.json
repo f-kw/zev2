@@ -1,0 +1,241 @@
+{
+  "schemaVersion": "presentation-output-caption-cue-b6-job-v001",
+  "jobId": "a-v002-caption-quality-first-api-b6-20260816-v004",
+  "attemptId": "attempt-0001",
+  "action": "generate-once",
+  "b5ManifestBinding": {
+    "schemaVersion": "presentation-output-caption-cue-b5-manifest-v001",
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v004/attempt-0001/b5-manifest.json",
+    "fileSha256": "361ad5573f97d1dd5d90983204fe80c803b1ce3293b763955dc9758f5c4eb8ea",
+    "canonicalSha256": "f082e77c88c15bb31629a481c4d23a9f8804905ef006ee2ff84183e314643888"
+  },
+  "generateRequestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-request-inputs/a-v002-caption-quality-first-api-b6-20260816-v004/attempt-0001/generate-content-request.json",
+    "fileSha256": "3953d03a8f34cb715295dc9e1cdc87ace1272cda1e07f95c174449cc36338fc7"
+  },
+  "outputRoot": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260816-v004/attempt-0001",
+  "executionPolicy": {
+    "oneShot": true,
+    "allowRetry": false,
+    "timeoutMilliseconds": 600000,
+    "rawResponseMustPrecedeParsing": true,
+    "allowRepair": false
+  },
+  "sendAuthorization": {
+    "decisionLineBinding": {
+      "path": "DECISIONS.md",
+      "lineText": "ZEVO_CAPTION_QUALITY_V002_B6|jobId=a-v002-caption-quality-first-api-b6-20260816-v004|attemptId=attempt-0001|outputRoot=evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260816-v004/attempt-0001|b5ManifestFileSha256=361ad5573f97d1dd5d90983204fe80c803b1ce3293b763955dc9758f5c4eb8ea|generateRequestFileSha256=3953d03a8f34cb715295dc9e1cdc87ace1272cda1e07f95c174449cc36338fc7|finalInputTokens=10282|maxOutputTokens=65536|maximumNanoUsd=1000000000|costScope=generate-content-standard-list-price-only|status=approved-for-single-send",
+      "lineSha256": "010f0eab6c11a0e789d48d65acef2969c26314522067d146f6e74460c9fbb226"
+    },
+    "status": "approved-for-single-send",
+    "currency": "USD",
+    "costScope": "generate-content-standard-list-price-only",
+    "maximumNanoUsd": 1000000000,
+    "inputPriceNanoUsdPerToken": 750,
+    "outputPriceNanoUsdPerToken": 3750,
+    "finalInputTokens": 10282,
+    "maxOutputTokens": 65536,
+    "preSendEstimateNanoUsd": 253471500
+  },
+  "implementationBindings": [
+    {
+      "role": "api-cost-guard",
+      "path": "evals/clip_composition/presentation_caption_api_cost_guard_v001.mjs",
+      "fileSha256": "ffd6957a057371c479fc9f996f09ec61c127cb932a009041a4782a1fbdf037ce"
+    },
+    {
+      "role": "atomic-directory-publisher-adapter-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+      "fileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af"
+    },
+    {
+      "role": "atomic-directory-publisher-native-darwin-arm64-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001-darwin-arm64",
+      "fileSha256": "ba5067dd933ae9b1213ab39236bf07c7e87513afbb384643347cefe0a75084b3"
+    },
+    {
+      "role": "atomic-directory-publisher-native-source-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.c",
+      "fileSha256": "6c237ceac499a83db74324165d630e14857a86165267cdbbc88c46b92c01150c"
+    },
+    {
+      "role": "caption-cue-api-runner",
+      "path": "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.mjs",
+      "fileSha256": "e94aedeee0d4096ddea94196a0e30fd340d7e50328533a1cf271f80da71cd9ec"
+    },
+    {
+      "role": "dep-base-media-timeline-v002",
+      "path": "evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+      "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+    },
+    {
+      "role": "dep-caption-contract-v003",
+      "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+      "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+    },
+    {
+      "role": "dep-caption-display-pair-v003",
+      "path": "evals/clip_composition/presentation_caption_display_pair_v003.mjs",
+      "fileSha256": "a22aa6ad44a7cd07c75ba1ebde4d40601efe29915ca6cfe915f4e1a3d8808a04"
+    },
+    {
+      "role": "dep-caption-semantic-output-v001",
+      "path": "evals/clip_composition/presentation_caption_semantic_output_v001.mjs",
+      "fileSha256": "9b9bb011dcd198e02cb075b70e79d3090ddfe17694198f56b83726f004e78c6d"
+    },
+    {
+      "role": "dep-formal-json-codec",
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+    },
+    {
+      "role": "dep-instruction-contract-v003",
+      "path": "evals/clip_composition/presentation_instruction_contract_v003.mjs",
+      "fileSha256": "c0a3c791c74a8c303e97e1fe0c81b8017c5dee35bd93e57668d8e11fa24925e7"
+    },
+    {
+      "role": "dep-provider-display-pair-runner-v001",
+      "path": "evals/clip_composition/run_presentation_caption_display_pair_job_v001.mjs",
+      "fileSha256": "567757847273ba52dd82ea7c497531f5767a28ed8082072331d38e15605d8204"
+    },
+    {
+      "role": "dep-provider-semantic-check-runner-v001",
+      "path": "evals/clip_composition/run_presentation_caption_semantic_output_check_v001.mjs",
+      "fileSha256": "d13e1becf0745915455947bc01e4175555ef19dc08ba9f69ee19566f6c119018"
+    },
+    {
+      "role": "dep-provider-transport-v001",
+      "path": "evals/clip_composition/run_presentation_caption_gate_b6_v001.mjs",
+      "fileSha256": "d2619f1943c9f02a7fd6cae09654159f6fa3c4cb8319a3f12d7e46bbea754a45"
+    },
+    {
+      "role": "dep-renderer-text-layout-v001",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0"
+    },
+    {
+      "role": "dep-retained-source-atoms-v001",
+      "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+      "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+    },
+    {
+      "role": "dep-segmenter-boundary-evidence-v001",
+      "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+      "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+    },
+    {
+      "role": "dep-segmenter-boundary-preflight-v001",
+      "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+      "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+    },
+    {
+      "role": "dep-source-speaker-policy-v001",
+      "path": "evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+      "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b"
+    }
+  ],
+  "runtimeDataBindings": [
+    {
+      "role": "renderer-core-speaker-registry",
+      "path": "evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+      "fileSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a"
+    }
+  ],
+  "approvedContractBindings": [
+    {
+      "role": "caption-quality-atomic-publication-b6-owner-scope-revision-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-atomic-publication-b6-owner-scope-revision-addendum-20260811-v004.md",
+      "fileSha256": "39e7c9b9005fb8ec762c19c0e6fde86acb398f1e99c75dd5d7100eabf452eade"
+    },
+    {
+      "role": "caption-quality-atomic-runtime-lc-uuid-compatibility-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-atomic-runtime-lc-uuid-compatibility-addendum-20260811-v006.md",
+      "fileSha256": "bd4b52901081c418b5c5ebe6a71ba4a02895fde3c86223ec433653af53530e1e"
+    },
+    {
+      "role": "caption-quality-b6-credential-unavailable-owner-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-b6-credential-unavailable-owner-addendum-20260811-v005.md",
+      "fileSha256": "573b705f80935ba0015a2f509371f17911d6aa0ea2fd7130b097ed98262b07dd"
+    },
+    {
+      "role": "caption-quality-complete-implementation-design",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-complete-implementation-design-20260810-v001.md",
+      "fileSha256": "44fb6199a80663657bf056df0118def3db750fe65813d86e9d106cdc4f42d6e4"
+    },
+    {
+      "role": "caption-quality-complete-implementation-design-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-complete-implementation-design-binding-wiring-addendum-20260811-v002.md",
+      "fileSha256": "a3c8c3ef8e57cd557e4a7cae17ecc188dc523df1508a45de6e2bce36691c7e4d"
+    },
+    {
+      "role": "caption-quality-dependency-load-stage-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-dependency-load-stage-observation-addendum-20260813-v014.md",
+      "fileSha256": "446cd7df58d61fd345a9f6ef73510c1e225ebc4f078de9d001fcb84d1ba5d7bc"
+    },
+    {
+      "role": "caption-quality-dependency-unit-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-dependency-unit-observation-addendum-20260813-v013.md",
+      "fileSha256": "77e579582fdfaad131172564b8ce81790db6b779540f338244cbc65b0d1c7501"
+    },
+    {
+      "role": "caption-quality-formal-capability-read-entry-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-formal-capability-read-entry-addendum-20260812-v010.md",
+      "fileSha256": "6b2cd93d0ab366806160f05457d861899b87b0b08234f051f241ca2510988110"
+    },
+    {
+      "role": "caption-quality-gemini-3-7-flash-price-model-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-gemini-3-7-flash-price-model-addendum-20260815-v016.md",
+      "fileSha256": "7ef23bdadc7a54c6ecb060e59c73ffaf14e6fc26ee2ec266d55b737cf64480fc"
+    },
+    {
+      "role": "caption-quality-gemini-3-6-flash-formal-regression-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-gemini-3-6-flash-formal-regression-addendum-20260816-v019.md",
+      "fileSha256": "dc3d3f51a76165b668dc8840127e395a3ed6652ebdb010ecf4bb94329574c7f5"
+    },
+    {
+      "role": "caption-quality-parent-contract",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-contract-design-20260810-v001.md",
+      "fileSha256": "33b61ee497d765fbe9eb63fb1b05bce16a99488d238eb27b732550b4daac24ba"
+    },
+    {
+      "role": "caption-quality-pre-staging-inner-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-pre-staging-inner-observation-addendum-20260813-v012.md",
+      "fileSha256": "668158f99ff6bacafe2ccbc9f182493a191fd3896469a972117714c86427d27f"
+    },
+    {
+      "role": "caption-quality-provider-schema-thinning-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-provider-schema-thinning-addendum-20260815-v017.md",
+      "fileSha256": "19b130ba9918c3b015bb96278f4eac5787b880ca3fbcec52aeadb0b7a1e54ceb"
+    },
+    {
+      "role": "caption-quality-provider-safety-block-classification-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-provider-safety-block-classification-addendum-20260816-v018.md",
+      "fileSha256": "6fb15bcb5d6aaec098857d03f064c7ad8f2591ab85225b8f3cbfcc2e0ad989ae"
+    },
+    {
+      "role": "caption-quality-proof-capability-and-tsx-namespace-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-proof-capability-and-tsx-namespace-addendum-20260812-v009.md",
+      "fileSha256": "b22aab0ef923b459b1785e32841f9df215ee9f095cf78afc188518523966285a"
+    },
+    {
+      "role": "caption-quality-resolved-url-evaluation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-resolved-url-evaluation-addendum-20260814-v015.md",
+      "fileSha256": "42874101356eac7c2d76d8a7c75cdc1c77097f7c4ee8391dda2bb80b8d0ce275"
+    },
+    {
+      "role": "caption-quality-runtime-live-binding-separation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-runtime-live-binding-separation-addendum-20260811-v008.md",
+      "fileSha256": "6a5d2115763f97f473f1a66690da05561339c1f51f7412b644ae259dfc61d8a1"
+    },
+    {
+      "role": "caption-quality-source-final-package-validator-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-source-final-package-validator-addendum-20260811-v007.md",
+      "fileSha256": "787d401d2939f58cbc10562c1ed29ab2118f6169607e05bbb2d7c5c5971c8053"
+    },
+    {
+      "role": "caption-quality-tsx-wrapper-descriptor-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-tsx-wrapper-descriptor-addendum-20260812-v011.md",
+      "fileSha256": "61f2c3ddbe5a3bcb2bfaba39e0ce1cc2e18a77fb2f1f5337d3fd166044b41010"
+    }
+  ]
+}

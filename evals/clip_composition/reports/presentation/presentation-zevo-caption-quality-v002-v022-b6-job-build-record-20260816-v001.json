@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v022-b6-job-build-record-v001",
+  "mode": "published",
+  "job": {
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b6-jobs/a-v002-caption-quality-first-api-b6-20260816-v006.json",
+    "fileSha256": "1e131275ce912dc5d30f4abc5049073717db2f7a97771621cb176bdb06f8bcd3",
+    "canonicalSha256": "e7a8ea027a604715531113f57d960dfda9c1f05fec4f9d558af522ce07f7b16d"
+  },
+  "b5Manifest": {
+    "schemaVersion": "presentation-output-caption-cue-b5-manifest-v001",
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/b5-manifest.json",
+    "fileSha256": "8558009339161af7dbcb95b35599b7c6574529ce5da9b241c4361815d715b352",
+    "canonicalSha256": "225db438a16f1e2476ac2b18563a97cafdb591413bcd75d153a7e31b275f43d4"
+  },
+  "generateRequest": {
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-request-inputs/a-v002-caption-quality-first-api-b6-20260816-v006/attempt-0001/generate-content-request.json",
+    "fileSha256": "d3a8f50a5d4fd37c2b67aa74a402bba4268dc12e6bfb1fb3b91223fb68d6baf0"
+  },
+  "outputRoot": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260816-v006/attempt-0001",
+  "sourcePackage": {
+    "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v003/source-package-v001.json",
+    "fileSha256": "6b77964113028eacf3ac64f56b82f8aac901004aad4a2df82387aee6cd142fe0",
+    "canonicalSha256": "c217ecc5df65e545cebd9b8ced4c7cd3a157abd685685c77767c7348f8a3ed25"
+  },
+  "tokenAndCostAuthorization": {
+    "finalInputTokens": 10458,
+    "maxOutputTokens": 65536,
+    "preSendEstimateNanoUsd": 253603500,
+    "maximumNanoUsd": 1000000000
+  },
+  "counts": {
+    "implementationBindings": 19,
+    "runtimeDataBindings": 1,
+    "approvedContractBindings": 21
+  },
+  "authorizationLine": "ZEVO_CAPTION_QUALITY_V002_B6|jobId=a-v002-caption-quality-first-api-b6-20260816-v006|attemptId=attempt-0001|outputRoot=evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260816-v006/attempt-0001|b5ManifestFileSha256=8558009339161af7dbcb95b35599b7c6574529ce5da9b241c4361815d715b352|generateRequestFileSha256=d3a8f50a5d4fd37c2b67aa74a402bba4268dc12e6bfb1fb3b91223fb68d6baf0|finalInputTokens=10458|maxOutputTokens=65536|maximumNanoUsd=1000000000|costScope=generate-content-standard-list-price-only|status=approved-for-single-send",
+  "decoderStatus": "decoded",
+  "validatorStatus": "passed"
+}

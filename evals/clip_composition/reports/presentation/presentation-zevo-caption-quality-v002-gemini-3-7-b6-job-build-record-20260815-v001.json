@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-gemini-3-7-b6-job-build-record-v001",
+  "job": {
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b6-jobs/a-v002-caption-quality-first-api-b6-20260815-v001.json",
+    "fileSha256": "2adee846d0db2e928741a5a35b8820b06cac20f2aa5345d2636ee9f1720c5a3a",
+    "canonicalSha256": "3579267d8787373191d44d35dbf78e9bfb0a5be6a8f8326ed63695e4000b0601"
+  },
+  "b5Manifest": {
+    "schemaVersion": "presentation-output-caption-cue-b5-manifest-v001",
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260815-v002/attempt-0001/b5-manifest.json",
+    "fileSha256": "4552624985804872a5d8b9351c899f9135781fa7bcb32b6d5656c8417b4bb66c",
+    "canonicalSha256": "aec240873353f5d72ee99c8f6cefd2285301f40f2997c79938e35952744745ea"
+  },
+  "generateRequest": {
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260815-v002/attempt-0001/generate-content-request.json",
+    "fileSha256": "d6b12757879e83855f6c416d99b25ecd4d5ce96a428da84255b1ae4a1b20a93e"
+  },
+  "outputRoot": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260815-v001/attempt-0001",
+  "tokenAndCostAuthorization": {
+    "finalInputTokens": 10282,
+    "maxOutputTokens": 65536,
+    "preSendEstimateNanoUsd": 253471500,
+    "maximumNanoUsd": 1000000000
+  },
+  "counts": {
+    "implementationBindings": 19,
+    "runtimeDataBindings": 1,
+    "approvedContractBindings": 16
+  },
+  "decisionLine": "ZEVO_CAPTION_QUALITY_V002_B6|jobId=a-v002-caption-quality-first-api-b6-20260815-v001|attemptId=attempt-0001|outputRoot=evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260815-v001/attempt-0001|b5ManifestFileSha256=4552624985804872a5d8b9351c899f9135781fa7bcb32b6d5656c8417b4bb66c|generateRequestFileSha256=d6b12757879e83855f6c416d99b25ecd4d5ce96a428da84255b1ae4a1b20a93e|finalInputTokens=10282|maxOutputTokens=65536|maximumNanoUsd=1000000000|costScope=generate-content-standard-list-price-only|status=approved-for-single-send",
+  "validation": "decoded-and-passed"
+}

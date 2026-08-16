@@ -1,0 +1,150 @@
+TAP version 13
+# Subtest: ZCQ042 proof job・束縛・pure入口・module表面
+ok 1 - ZCQ042 proof job・束縛・pure入口・module表面
+  ---
+  duration_ms: 2485.676917
+  ...
+# proof-item:ZCQ042-P-03-f29219bd499b:passed
+# proof-item:ZCQ042-P-04-d92c6a81b2ff:passed
+# proof-item:ZCQ042-P-05-dc84adb7bfaf:passed
+# proof-item:ZCQ042-P-06-78c52b949ee0:passed
+# proof-item:ZCQ042-P-07-5181199399d5:passed
+# proof-item:ZCQ042-P-08-247d5206d24d:passed
+# proof-item:ZCQ042-P-09-381724dd0fa4:passed
+# proof-item:ZCQ042-P-10-0bde67fc7419:passed
+# proof-item:ZCQ042-P-11-df9970e4176d:passed
+# proof-item:ZCQ042-P-12-315b217225d2:passed
+# proof-item:ZCQ042-P-13-fc204969f2b7:passed
+# proof-item:ZCQ042-P-14-14df1b3d37a7:passed
+# proof-item:ZCQ042-P-15-e9baa03532cd:passed
+# proof-item:ZCQ042-P-16-2d2e319adc2c:passed
+# proof-item:ZCQ042-P-17-400fa8dcc670:passed
+# proof-item:ZCQ042-P-18-71f10c37e770:passed
+# proof-item:ZCQ042-P-19-2473d157fd09:passed
+# proof-item:ZCQ042-P-20-14678dfea8f4:passed
+# proof-item:ZCQ042-V1-01-d94da34aa35f:passed
+# proof-item:ZCQ042-V1-02-766e5c4ccb87:passed
+# proof-item:ZCQ042-V1-03-70cdcfaf8987:passed
+# proof-item:ZCQ042-V1-04-f66e4a8bde4e:passed
+# proof-item:ZCQ042-V1-05-9ebb9ff3d6ab:passed
+# proof-item:ZCQ042-V1-06-d1eaa5e0071f:passed
+# proof-item:ZCQ042-V1-07-aab8e0b1a8ff:passed
+# proof-item:ZCQ042-V1-08-07a6949220a4:passed
+# proof-item:ZCQ042-V1-09-a933f5e3fda5:passed
+# proof-item:ZCQ042-V2-02-602b8756b621:passed
+# proof-item:ZCQ042-V2-03-1b072252bc9f:passed
+# proof-item:ZCQ042-V2-04-2b6717af5676:passed
+# proof-item:ZCQ042-V3-02-0ea4c2477dd6:passed
+# proof-item:ZCQ042-V3-03-4fa5a9354723:passed
+# proof-item:ZCQ042-V3-04-ba3e28859afa:passed
+# proof-item:ZCQ042-V3-05-d73b9c892502:passed
+# proof-item:V15-ZCQ042-01:passed
+# proof-item:V15-ZCQ042-02:passed
+# Subtest: ZCQ043 合成selectionから実renderer・QCまでの正常経路
+not ok 2 - ZCQ043 合成selectionから実renderer・QCまでの正常経路
+  ---
+  duration_ms: 4506.376375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:1364:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+      {
+        action: 'proof-run',
+    ...
+        jobId: 'zcq-caption-quality-proof-f-gate-attempt-0009',
+        outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011',
+    +   primaryCode: 'CUE_PROOF_RENDER_FAILED',
+    -   primaryCode: null,
+        schemaVersion: 'presentation-zevo-caption-local-cli-result-v001',
+    +   stage: 'renderer-work',
+    +   status: 'rejected'
+    -   stage: 'completed',
+    -   status: 'passed'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    schemaVersion: 'presentation-zevo-caption-local-cli-result-v001'
+    status: 'passed'
+    action: 'proof-run'
+    jobId: 'zcq-caption-quality-proof-f-gate-attempt-0009'
+    attemptId: 'attempt-0009'
+    outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011'
+    stage: 'completed'
+    primaryCode: ~
+    innerObservation: ~
+  actual:
+    schemaVersion: 'presentation-zevo-caption-local-cli-result-v001'
+    status: 'rejected'
+    action: 'proof-run'
+    jobId: 'zcq-caption-quality-proof-f-gate-attempt-0009'
+    attemptId: 'attempt-0009'
+    outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011'
+    stage: 'renderer-work'
+    primaryCode: 'CUE_PROOF_RENDER_FAILED'
+    innerObservation: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    assertCliWithInnerDiagnostic (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:838:12)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:1370:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# inner-observation:null
+# Subtest: ZCQ044 失敗境界・公開排他・証拠保持
+not ok 3 - ZCQ044 失敗境界・公開排他・証拠保持
+  ---
+  duration_ms: 11513.098667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:1399:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    renderer-rejected-second-case:output:exact-files
+    + actual - expected
+    
+      [
+        'rejection-report-v001.json',
+        'voice-013/horizontal-formal/output-request-v001.json',
+        'voice-013/horizontal-formal/page-line-plan-v003.json',
+        'voice-013/horizontal-formal/render-plan-v003.json',
+    -   'voice-013/horizontal-formal/renderer-qc-v001.json',
+    -   'voice-013/horizontal-formal/video.mp4',
+    -   'voice-067/horizontal-formal/output-request-v001.json',
+    -   'voice-067/horizontal-formal/page-line-plan-v003.json',
+    -   'voice-067/horizontal-formal/render-plan-v003.json'
+      ]
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'rejection-report-v001.json'
+    1: 'voice-013/horizontal-formal/output-request-v001.json'
+    2: 'voice-013/horizontal-formal/page-line-plan-v003.json'
+    3: 'voice-013/horizontal-formal/render-plan-v003.json'
+    4: 'voice-013/horizontal-formal/renderer-qc-v001.json'
+    5: 'voice-013/horizontal-formal/video.mp4'
+    6: 'voice-067/horizontal-formal/output-request-v001.json'
+    7: 'voice-067/horizontal-formal/page-line-plan-v003.json'
+    8: 'voice-067/horizontal-formal/render-plan-v003.json'
+  actual:
+    0: 'rejection-report-v001.json'
+    1: 'voice-013/horizontal-formal/output-request-v001.json'
+    2: 'voice-013/horizontal-formal/page-line-plan-v003.json'
+    3: 'voice-013/horizontal-formal/render-plan-v003.json'
+  operator: 'deepStrictEqual'
+  stack: |-
+    assertNegativePreservation (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:695:12)
+    async runNegativeVariant (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:710:24)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:1480:33)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 1
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 19077.88425

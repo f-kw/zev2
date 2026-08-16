@@ -1,0 +1,26 @@
+{
+  "recordVersion": "presentation-zevo-caption-quality-v002-abstention-diagnosis-preflight-v001",
+  "diagnosticId": "D1",
+  "networkCallsPerformed": 0,
+  "sourceRequest": {
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-request-inputs/a-v002-caption-quality-first-api-b6-20260816-v004/attempt-0001/generate-content-request.json",
+    "sha256": "3953d03a8f34cb715295dc9e1cdc87ace1272cda1e07f95c174449cc36338fc7"
+  },
+  "diagnosticRequest": {
+    "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-abstention-diagnosis-20260816-v001/d1-thinking-high/request.json",
+    "sha256": "ebb0755fae5174ea9b253351a55be856c7e608fa21ea26a7283bcb1f6b542304"
+  },
+  "exactChange": {
+    "field": "generationConfig.thinkingConfig.thinkingLevel",
+    "before": "medium",
+    "after": "high"
+  },
+  "invariantChecks": {
+    "promptAndSystemInstructionByteEqual": true,
+    "responseSchemaByteEqual": true,
+    "maxOutputTokensEqual": true,
+    "responseMimeTypeEqual": true
+  },
+  "downstreamUse": "diagnostic-only; response must never be reused as formal selection input",
+  "state": "prepared-not-sent-explicit-approval-required"
+}

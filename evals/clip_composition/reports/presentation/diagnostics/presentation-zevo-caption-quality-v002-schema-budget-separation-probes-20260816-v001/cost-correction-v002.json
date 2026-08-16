@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-schema-budget-separation-cost-correction-v002",
+  "supersedesSummaryPath": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-schema-budget-separation-probes-20260816-v001/summary.json",
+  "correctionReason": "The first HTTP 200 response omitted candidatesTokenCount because generation ended at MAX_TOKENS before candidate text was emitted. The v001 collector therefore rejected the usage shape and recorded zero cost. Billing is recomputed from the raw provider usage fields without altering the raw response or the v001 summary.",
+  "priceSnapshot": {
+    "modelId": "gemini-3.7-flash",
+    "tier": "Standard",
+    "inputNanoUsdPerToken": 750,
+    "outputNanoUsdPerTokenIncludingThinking": 3750
+  },
+  "probes": [
+    {
+      "probeId": "full-input-tier-01-minimum-output-budget",
+      "rawResponseSha256": "c1251c7dac5f7c367cb408791b56856236b2aa893b01b7c47ada37d32b0c6b70",
+      "promptTokenCount": 10282,
+      "candidatesTokenCount": 0,
+      "thoughtsTokenCount": 13,
+      "finishReason": "MAX_TOKENS",
+      "blockReason": null,
+      "chargedNanoUsd": 7760250
+    },
+    {
+      "probeId": "full-input-tier-03-formal-output-budget",
+      "rawResponseSha256": "3726a3194fe0398d077217553e24c818e0f8c0edba5281cd3a22214fb35a6783",
+      "promptTokenCount": 10282,
+      "candidatesTokenCount": 12,
+      "thoughtsTokenCount": 1920,
+      "finishReason": "STOP",
+      "blockReason": null,
+      "chargedNanoUsd": 14956500
+    }
+  ],
+  "correctedCumulativeNanoUsd": 22716750,
+  "correctedCumulativeUsd": "0.02271675",
+  "maximumNanoUsd": 50000000,
+  "withinCostLimit": true,
+  "result": "Neither Tier 1 with the minimum output budget nor Tier 3 with the formal output budget was safety-blocked. The block therefore does not track either factor in isolation."
+}

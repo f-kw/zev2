@@ -1,0 +1,312 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-review-input-v001",
+  "reviewId": "zcq-caption-quality-proof-publisher-helper-failure-attempt-0001-review",
+  "observedFadeFrameCount": 4,
+  "proofJobBinding": {
+    "schemaVersion": "presentation-zevo-caption-quality-v002-proof-job-v001",
+    "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0009/fixtures/zcq-caption-quality-proof-publisher-helper-failure-attempt-0001.json",
+    "fileSha256": "eca2805389e1bef4a9a69ca11105722caf3c581ce1507e734fa12934416a7c98",
+    "canonicalSha256": "565c2067543eda0d73014d1a2160cdd21072aa5f3d2448abeb70b9c3e77bc77f"
+  },
+  "reviewQuestions": [
+    {
+      "questionId": "prior-caption-residue",
+      "prompt": "前の発話の文字が次の発話まで残っていないか。"
+    },
+    {
+      "questionId": "short-cue-line-break",
+      "prompt": "一行に収まる短い発話が改行されていないか。"
+    },
+    {
+      "questionId": "long-cue-line-break",
+      "prompt": "長い発話だけが必要な位置で自然に二行へ分かれているか。"
+    },
+    {
+      "questionId": "text-closure",
+      "prompt": "全文を通して文字の欠落・重複・逆順がないか。"
+    },
+    {
+      "questionId": "short-cue-fade",
+      "prompt": "最短cueで既存4frame fadeにより読めない・不自然に瞬く見え方がないか。"
+    }
+  ],
+  "items": [
+    {
+      "caseId": "voice-013",
+      "inputCaptionId": "input-caption-000001",
+      "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-013",
+      "humanObservationFixture": {
+        "oldRenderPlanBindings": [
+          {
+            "schemaVersion": "presentation-output-render-plan-v002",
+            "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-2-voice-013/horizontal-formal/render-plan-v002.json",
+            "fileSha256": "86d8769415b00c5a9379164fdaa209e07b78a0179745382d67612cb1a19cbd5e",
+            "canonicalSha256": "9f91df2f907291c0f312baa6faedf912bdc87d545dd4c1edf1720d4528754c5f"
+          },
+          {
+            "schemaVersion": "presentation-output-render-plan-v002",
+            "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-2-voice-013/vertical-caption-diagnostic/render-plan-v002.json",
+            "fileSha256": "5ebed5a6bb21e29af5c347e17af619737e2b06db55fd4d82336c8ad43cce1ca5",
+            "canonicalSha256": "1d25b2a12c0a388f67f5f67df5dd5bc1eea8e781cefeb43ca3ee0a14bb173c60"
+          }
+        ],
+        "knownIssuePatterns": [
+          {
+            "issueId": "old-break-004",
+            "splitText": "マリ/ン",
+            "occurrences": [
+              {
+                "caseId": "voice-013",
+                "format": "vertical-caption-diagnostic",
+                "boundaryKind": "line-end",
+                "afterAtomOccurrenceId": "atom-occurrence-000020"
+              },
+              {
+                "caseId": "voice-013",
+                "format": "vertical-caption-diagnostic",
+                "boundaryKind": "line-end",
+                "afterAtomOccurrenceId": "atom-occurrence-000032"
+              }
+            ]
+          }
+        ]
+      },
+      "horizontal": {
+        "videoBinding": {
+          "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-publisher-helper-failure/voice-013/horizontal-formal/video.mp4",
+          "fileSha256": "b12ec0af708af0a5afa69488b72bf55a6300bbed162877c59cc9154f79f14fcf"
+        },
+        "qcBinding": {
+          "schemaVersion": "presentation-render-qc-v002",
+          "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-publisher-helper-failure/voice-013/horizontal-formal/renderer-qc-v001.json",
+          "fileSha256": "0d4edae47323c866357c849b17160301045ab688fa2bdeec585d905b67acd59d",
+          "canonicalSha256": "14ab255d6c42705e25b73d36ddc07c4608e7d942e081f7f1ca22b86152b8eba0"
+        },
+        "durationMilliseconds": 25167,
+        "frameCount": 755
+      },
+      "cueTimingSummary": [
+        {
+          "cueId": "cue-000001-000001",
+          "startFrame": 0,
+          "endFrameExclusive": 179,
+          "displayFrameCount": 179,
+          "lineTexts": [
+            "マジ殺してやる!見ろ!バカが!なぁ",
+            "!マリン疑ってんじゃねぇ!マリンが"
+          ]
+        },
+        {
+          "cueId": "cue-000001-000002",
+          "startFrame": 179,
+          "endFrameExclusive": 402,
+          "displayFrameCount": 223,
+          "lineTexts": [
+            "好きなんじゃなかったんか!てで!何",
+            "生き残ってんだよぉ!生き残んなお前"
+          ]
+        },
+        {
+          "cueId": "cue-000001-000003",
+          "startFrame": 402,
+          "endFrameExclusive": 755,
+          "displayFrameCount": 353,
+          "lineTexts": [
+            "はぁ!デスカード、デビルカード来な",
+            "いんだけど来るのかないつか来ない"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "voice-067",
+      "inputCaptionId": "input-caption-000002",
+      "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-067",
+      "humanObservationFixture": {
+        "oldRenderPlanBindings": [
+          {
+            "schemaVersion": "presentation-output-render-plan-v002",
+            "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-5-voice-067/horizontal-formal/render-plan-v002.json",
+            "fileSha256": "4c82f3ecd81153befcc4ce470322a4fdbe6a777441fb0ff89f03a2d9c256c0e3",
+            "canonicalSha256": "a84bb0653477253b9a39418d0d30dfa7f4a0057f499780bda32981c5c04135d1"
+          },
+          {
+            "schemaVersion": "presentation-output-render-plan-v002",
+            "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-5-voice-067/vertical-caption-diagnostic/render-plan-v002.json",
+            "fileSha256": "476fe41ad5b0e659641819f78e49f7b992044f37cf2f9bb56b6973decad1ff92",
+            "canonicalSha256": "14dff3764fb2a5502bb908a4f94b8c9aa94ae2bcc72e2a4c991d01dfe9820071"
+          }
+        ],
+        "knownIssuePatterns": [
+          {
+            "issueId": "old-break-001",
+            "splitText": "ス/イちゃん",
+            "occurrences": [
+              {
+                "caseId": "voice-067",
+                "format": "horizontal",
+                "boundaryKind": "page-end",
+                "afterAtomOccurrenceId": "atom-occurrence-000042"
+              }
+            ]
+          }
+        ]
+      },
+      "horizontal": {
+        "videoBinding": {
+          "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-publisher-helper-failure/voice-067/horizontal-formal/video.mp4",
+          "fileSha256": "ff8571395187d26a609576fa107422a2aa1c05c6c7a5e17ce3928f569e643cdd"
+        },
+        "qcBinding": {
+          "schemaVersion": "presentation-render-qc-v002",
+          "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-publisher-helper-failure/voice-067/horizontal-formal/renderer-qc-v001.json",
+          "fileSha256": "43955d3ac6348dfba3a0a09cf06732002e70d118a313a1a73284a996b7e36d55",
+          "canonicalSha256": "032bcc6c58ce87352d064d8ef8ecbc833eacc53bfbabdf59194edfcdd39cdd97"
+        },
+        "durationMilliseconds": 21367,
+        "frameCount": 641
+      },
+      "cueTimingSummary": [
+        {
+          "cueId": "cue-000002-000001",
+          "startFrame": 0,
+          "endFrameExclusive": 93,
+          "displayFrameCount": 93,
+          "lineTexts": [
+            "あそっかペコラの命ペコラさよ"
+          ]
+        },
+        {
+          "cueId": "cue-000002-000002",
+          "startFrame": 93,
+          "endFrameExclusive": 380,
+          "displayFrameCount": 287,
+          "lineTexts": [
+            "うならペコラペコラの命が尊き",
+            "ペコラの命がツッキさんはさス"
+          ]
+        },
+        {
+          "cueId": "cue-000002-000003",
+          "startFrame": 380,
+          "endFrameExclusive": 641,
+          "displayFrameCount": 261,
+          "lineTexts": [
+            "イちゃんのさどこが好きなの?歌",
+            "?なんかうなずきが小さくない?"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "voice-190",
+      "inputCaptionId": "input-caption-000003",
+      "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-190",
+      "humanObservationFixture": {
+        "oldRenderPlanBindings": [
+          {
+            "schemaVersion": "presentation-output-render-plan-v002",
+            "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-5-voice-190/horizontal-formal/render-plan-v002.json",
+            "fileSha256": "613f2862bc6ed7a331a37dad0c03b94fbf0d17b8a1d04958790d9f80d3b72e01",
+            "canonicalSha256": "9da441d1c2265067837602483c8c6b03da9ff39aa1c49f1ac2842db3473bfd57"
+          },
+          {
+            "schemaVersion": "presentation-output-render-plan-v002",
+            "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-5-voice-190/vertical-caption-diagnostic/render-plan-v002.json",
+            "fileSha256": "f153fc409cbb07a9514a80c0f27c6c7f165495ffd23c6eda68ed0b49b139d317",
+            "canonicalSha256": "ff2834ad902706927998d8412e3fd7a0b871131cac21d7c2c787700157a29a3a"
+          }
+        ],
+        "knownIssuePatterns": [
+          {
+            "issueId": "old-break-002",
+            "splitText": "じ/ゃ報告",
+            "occurrences": [
+              {
+                "caseId": "voice-190",
+                "format": "horizontal",
+                "boundaryKind": "line-end",
+                "afterAtomOccurrenceId": "atom-occurrence-000032"
+              },
+              {
+                "caseId": "voice-190",
+                "format": "vertical-caption-diagnostic",
+                "boundaryKind": "page-end",
+                "afterAtomOccurrenceId": "atom-occurrence-000032"
+              }
+            ]
+          },
+          {
+            "issueId": "old-break-003",
+            "splitText": "言ってほし/いみたいな",
+            "occurrences": [
+              {
+                "caseId": "voice-190",
+                "format": "vertical-caption-diagnostic",
+                "boundaryKind": "line-end",
+                "afterAtomOccurrenceId": "atom-occurrence-000015"
+              }
+            ]
+          },
+          {
+            "issueId": "old-break-005",
+            "splitText": "サク/サク",
+            "occurrences": [
+              {
+                "caseId": "voice-190",
+                "format": "vertical-caption-diagnostic",
+                "boundaryKind": "line-end",
+                "afterAtomOccurrenceId": "atom-occurrence-000062"
+              }
+            ]
+          }
+        ]
+      },
+      "horizontal": {
+        "videoBinding": {
+          "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-publisher-helper-failure/voice-190/horizontal-formal/video.mp4",
+          "fileSha256": "5745e6b282759db7b10f4af28c332225df5db8869f8784a3e527cb5ed207d9f0"
+        },
+        "qcBinding": {
+          "schemaVersion": "presentation-render-qc-v002",
+          "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-publisher-helper-failure/voice-190/horizontal-formal/renderer-qc-v001.json",
+          "fileSha256": "c8b4edffd1c57693c6f4a96d6c354dd1eb8d83b1244c0f4d554dd06d6d7a80a6",
+          "canonicalSha256": "5b50e0a889ddf2a9fee481942441e8798334add868b3357f7a911fab1f8dcbc3"
+        },
+        "durationMilliseconds": 26900,
+        "frameCount": 807
+      },
+      "cueTimingSummary": [
+        {
+          "cueId": "cue-000003-000001",
+          "startFrame": 0,
+          "endFrameExclusive": 80,
+          "displayFrameCount": 80,
+          "lineTexts": [
+            "僕のことをコロさんに言ってほしい"
+          ]
+        },
+        {
+          "cueId": "cue-000003-000002",
+          "startFrame": 80,
+          "endFrameExclusive": 431,
+          "displayFrameCount": 351,
+          "lineTexts": [
+            "みたいなてめぇはしゃぎやがってじ",
+            "ゃ報告しないお前を喜ばしたりしな"
+          ]
+        },
+        {
+          "cueId": "cue-000003-000003",
+          "startFrame": 431,
+          "endFrameExclusive": 807,
+          "displayFrameCount": 376,
+          "lineTexts": [
+            "い一旦さサクサクやろうやサクサク",
+            "こんな序盤でさ嘘つかんから普通に"
+          ]
+        }
+      ]
+    }
+  ]
+}

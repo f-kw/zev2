@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "presentation-output-caption-cue-residual-risk-acceptance-v001",
+  "acceptanceId": "a-v002-caption-quality-first-api-risk-20260816-v003",
+  "acceptedBy": "kawafmm",
+  "acceptedOn": "2026-08-16",
+  "sourcePackageBinding": {
+    "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v003/source-package-v001.json",
+    "fileSha256": "6b77964113028eacf3ac64f56b82f8aac901004aad4a2df82387aee6cd142fe0",
+    "canonicalSha256": "c217ecc5df65e545cebd9b8ced4c7cd3a157abd685685c77767c7348f8a3ed25"
+  },
+  "claimVerdicts": [
+    {
+      "claimId": "count-tokens-unbilled",
+      "verdict": "unverified"
+    },
+    {
+      "claimId": "count-tokens-upper-bounds-prompt-billing",
+      "verdict": "contradicted"
+    },
+    {
+      "claimId": "max-output-upper-bounds-candidate-plus-thinking",
+      "verdict": "unverified"
+    }
+  ],
+  "maximumNanoUsd": 1000000000,
+  "scope": "allow-count-tokens-measurement-with-unverified-billing;generate-content-requires-separate-authorization",
+  "decisionLineBinding": {
+    "path": "DECISIONS.md",
+    "lineText": "ZEVO_CAPTION_QUALITY_V002_RESIDUAL_RISK|acceptanceId=a-v002-caption-quality-first-api-risk-20260816-v003|acceptedBy=kawafmm|acceptedOn=2026-08-16|sourcePackageFileSha256=6b77964113028eacf3ac64f56b82f8aac901004aad4a2df82387aee6cd142fe0|claimVerdictsCanonicalSha256=14ea4daf034ae2ef92a30ddf0bd4f74349e7d84c8062727490d1ef0a9fd7d20f|maximumNanoUsd=1000000000|costScope=generate-content-standard-list-price-only|scope=allow-count-tokens-measurement-with-unverified-billing;generate-content-requires-separate-authorization|status=accepted",
+    "lineSha256": "6d3c5c238c9f97bfc96187646d8d09ed09f6f57e87a2ecdab8e071ce577624e3"
+  }
+}

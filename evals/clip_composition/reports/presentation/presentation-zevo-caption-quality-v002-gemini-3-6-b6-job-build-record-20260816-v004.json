@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-gemini-3-6-b6-job-build-record-v004",
+  "mode": "published",
+  "job": {
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b6-jobs/a-v002-caption-quality-first-api-b6-20260816-v004.json",
+    "fileSha256": "595d43b53942ed2376c73cbe13d73ad740b40d27fbdf616a91e4141890bae030",
+    "canonicalSha256": "baa9dfc44047bc7664a305cfbf1f21ebbc6d4ccc360a5feb93e3631c72785a1a"
+  },
+  "b5Manifest": {
+    "schemaVersion": "presentation-output-caption-cue-b5-manifest-v001",
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v004/attempt-0001/b5-manifest.json",
+    "fileSha256": "361ad5573f97d1dd5d90983204fe80c803b1ce3293b763955dc9758f5c4eb8ea",
+    "canonicalSha256": "f082e77c88c15bb31629a481c4d23a9f8804905ef006ee2ff84183e314643888"
+  },
+  "generateRequest": {
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-request-inputs/a-v002-caption-quality-first-api-b6-20260816-v004/attempt-0001/generate-content-request.json",
+    "fileSha256": "3953d03a8f34cb715295dc9e1cdc87ace1272cda1e07f95c174449cc36338fc7"
+  },
+  "outputRoot": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260816-v004/attempt-0001",
+  "tokenAndCostAuthorization": {
+    "finalInputTokens": 10282,
+    "maxOutputTokens": 65536,
+    "preSendEstimateNanoUsd": 253471500,
+    "maximumNanoUsd": 1000000000
+  },
+  "counts": {
+    "implementationBindings": 19,
+    "runtimeDataBindings": 1,
+    "approvedContractBindings": 19
+  },
+  "authorizationLine": "ZEVO_CAPTION_QUALITY_V002_B6|jobId=a-v002-caption-quality-first-api-b6-20260816-v004|attemptId=attempt-0001|outputRoot=evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260816-v004/attempt-0001|b5ManifestFileSha256=361ad5573f97d1dd5d90983204fe80c803b1ce3293b763955dc9758f5c4eb8ea|generateRequestFileSha256=3953d03a8f34cb715295dc9e1cdc87ace1272cda1e07f95c174449cc36338fc7|finalInputTokens=10282|maxOutputTokens=65536|maximumNanoUsd=1000000000|costScope=generate-content-standard-list-price-only|status=approved-for-single-send",
+  "decoderStatus": "decoded",
+  "validatorStatus": "passed"
+}

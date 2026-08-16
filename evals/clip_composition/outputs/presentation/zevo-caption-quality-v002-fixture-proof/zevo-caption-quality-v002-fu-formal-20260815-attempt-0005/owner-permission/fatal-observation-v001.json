@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-fatal-observation-v001",
+  "status": "fatal",
+  "proofJobBinding": {
+    "schemaVersion": "presentation-zevo-caption-quality-v002-proof-job-v001",
+    "path": "evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0005/f/negative/zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0005-owner-permission.json",
+    "fileSha256": "c366a01106f1d1c7d91ae7a98860fad438fba1a6d0f34a66d689035ebaaf106d",
+    "canonicalSha256": "d7247c23039b5d72c021340584a4eb4e431d46b0854fda2f7d88c72dd891a950"
+  },
+  "stage": "renderer-work",
+  "innerCode": "OS_PERMISSION_DENIED",
+  "targetFile": {
+    "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0005/owner-permission/voice-013/horizontal-formal/render-plan-v003.json",
+    "fileSha256": "cda8f4b52c5dee2d56a6540dd144acc8f29357afd73049ee343e6ab680bff87d"
+  },
+  "toolExitCode": null,
+  "checkpoints": [
+    {
+      "stage": "input-read",
+      "event": "entered",
+      "caseId": null,
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "input-read",
+      "event": "completed",
+      "caseId": null,
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "output-request",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "output-request",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0005/owner-permission/voice-013/horizontal-formal/output-request-v001.json",
+        "fileSha256": "2da28017a6aee213b09a391d423bc68aecf3ac66b4d996272879d98ae7ca9be5"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "page-line-planner",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "page-line-planner",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0005/owner-permission/voice-013/horizontal-formal/page-line-plan-v003.json",
+        "fileSha256": "5dbf5bd3d5f3a486755448987e221af3f7fa8c23bf5c51adfb086dc6648994d6"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "render-plan",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "render-plan",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0005/owner-permission/voice-013/horizontal-formal/render-plan-v003.json",
+        "fileSha256": "cda8f4b52c5dee2d56a6540dd144acc8f29357afd73049ee343e6ab680bff87d"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "common-render-plan",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "common-render-plan",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "media-inspection",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-2-voice-013/base-media.mp4",
+        "fileSha256": "6fe8c8ac4b41379073b5f194c1a3e5977a64ed39434c8842fe7db03b40247f7e"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "media-inspection",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-2-voice-013/base-media.mp4",
+        "fileSha256": "6fe8c8ac4b41379073b5f194c1a3e5977a64ed39434c8842fe7db03b40247f7e"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "renderer-work",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    }
+  ],
+  "rendererWorkEvidence": [],
+  "retentionPaths": []
+}

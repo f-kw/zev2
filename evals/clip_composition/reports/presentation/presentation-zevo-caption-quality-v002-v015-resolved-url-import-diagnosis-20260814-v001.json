@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-resolved-url-import-diagnosis-v001",
+  "diagnosisId": "presentation-zevo-caption-quality-v002-v015-resolved-url-import-diagnosis-20260814-v001",
+  "status": "inconclusive",
+  "formalLaunchContext": {
+    "node": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "tsxCli": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+    "argumentsInOrder": [
+      "--test",
+      "/private/tmp/zev-caption-v015-resolved-url-import-diagnosis.test.ts"
+    ],
+    "nodeOptionsPresent": false
+  },
+  "observations": {
+    "relativeLiteralDirect": {
+      "status": "passed",
+      "errorCodeIdentifier": null
+    },
+    "resolvedFileUrl": {
+      "status": "passed",
+      "errorCodeIdentifier": null
+    }
+  },
+  "expectedComparison": {
+    "relativeLiteralDirect": {
+      "status": "failed",
+      "errorCodeIdentifier": "ERR_UNSUPPORTED_RESOLVE_REQUEST"
+    },
+    "resolvedFileUrl": {
+      "status": "passed",
+      "errorCodeIdentifier": null
+    }
+  },
+  "conclusion": {
+    "resolvedFileUrlSuccessConfirmed": true,
+    "relativeLiteralFailureReproducedInSameDiagnosisProcess": false,
+    "comparisonClosed": false,
+    "v015DraftAllowed": false,
+    "reason": "the required same-process contrast was not reproduced; the diagnosis process does not establish that resolved URL is the unique cause of success"
+  },
+  "evidence": {
+    "tapSha256": "4bbf9c42544f7cd7d35103263b3c5e8b7cf319c6fffa1bf203c8b55e866187d4",
+    "stderrBytes": 0,
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exitCode": 1,
+    "exitCodeRecordSha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "restrictions": {
+    "formalProductionPathChanges": 0,
+    "fixtureUsed": false,
+    "formalOutputOrStagingUsed": false,
+    "exceptionMessageSaved": false,
+    "stackSavedByDiagnosisRecord": false,
+    "apiCommunicationCount": 0,
+    "costUsd": 0
+  }
+}

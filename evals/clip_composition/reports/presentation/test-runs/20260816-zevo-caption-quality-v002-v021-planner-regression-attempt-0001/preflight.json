@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v021-formal-preflight-v001",
+  "observedAt": "2026-08-16T00:19:45.579Z",
+  "status": "passed",
+  "executionEnvironment": {
+    "nativeArchitecture": "arm64",
+    "node": {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "tsxCli": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+    },
+    "nodeOptions": "absent",
+    "pathOrder": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin",
+      "/opt/homebrew/bin",
+      "/usr/local/bin",
+      "/usr/bin",
+      "/bin",
+      "/usr/sbin",
+      "/sbin"
+    ]
+  },
+  "formalCommand": {
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "arguments": [
+      "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "--test",
+      "evals/clip_composition/presentation_output_page_line_planner_v003.test.mjs"
+    ],
+    "matchesRegisteredFormalShape": true
+  },
+  "testSource": {
+    "path": "evals/clip_composition/presentation_output_page_line_planner_v003.test.mjs",
+    "fileSha256": "73ef66f12b4af2fa114523ecc4c0ea5cf304ab42c01c12ae3cb1a21428937b7d"
+  },
+  "sourcePackage": {
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v002/source-package-v001.json",
+    "fileSha256": "505e0af866f9c9014ac134723fa80b54281860e834fa706ade6a5894f4d4bf4d",
+    "captionCount": 3,
+    "boundaryCount": 253,
+    "approvedContractCount": 15
+  }
+}

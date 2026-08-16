@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-provider-safety-probe-result-v001",
+  "probeId": "caption-03-input-caption-000003",
+  "captionIndexes": [
+    2
+  ],
+  "captionIds": [
+    "input-caption-000003"
+  ],
+  "sourceJsonPointers": [
+    "/promptInput/captions/2"
+  ],
+  "requestBinding": {
+    "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-03-input-caption-000003/request.json",
+    "fileSha256": "1796e29d685926f7739ab7cd2e64c67051e7a1bd99bdfcf1d5897f235e75bcba"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-03-input-caption-000003/response.raw.json",
+    "fileSha256": "55782f5378e64dbcae0409268ccc153e6a279527cd8f57d9a67a5f170bbced1d"
+  },
+  "httpStatus": 200,
+  "contentType": "application/json; charset=UTF-8",
+  "providerObservationStatus": "rejected",
+  "providerInnerCode": "B6_V002_USAGE_INVALID",
+  "blockReason": null,
+  "safetyRatings": null,
+  "modelVersion": "gemini-3.7-flash",
+  "usageMetadata": null,
+  "candidateCount": 1,
+  "chargedNanoUsd": 0,
+  "cumulativeNanoUsd": 0
+}

@@ -1,0 +1,210 @@
+TAP version 13
+# Subtest: FOVI001: TSX権限拒否は生messageなしの閉じた観測になる
+ok 1 - FOVI001: TSX権限拒否は生messageなしの閉じた観測になる # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.303084
+  ...
+# Subtest: FOVI002: 配置小数token拒否はlayout段階として別attemptへ写せる
+ok 2 - FOVI002: 配置小数token拒否はlayout段階として別attemptへ写せる # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.038291
+  ...
+# Subtest: FOVI003: Gate A拒否はfatal専用語彙へ混入しない
+ok 3 - FOVI003: Gate A拒否はfatal専用語彙へ混入しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.031167
+  ...
+# Subtest: FOVI004: byte列型喪失はmemory対象を捏造せずnullで写す
+ok 4 - FOVI004: byte列型喪失はmemory対象を捏造せずnullで写す # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.071167
+  ...
+# Subtest: FOVI005: SHA参照不一致は一意な受理済みbindingだけを対象にする
+ok 5 - FOVI005: SHA参照不一致は一意な受理済みbindingだけを対象にする # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.032584
+  ...
+# Subtest: FOVI006: export欠落はcrop検査段階の安全な観測へ写せる
+ok 6 - FOVI006: export欠落はcrop検査段階の安全な観測へ写せる # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.024417
+  ...
+# Subtest: FOVI007: 描画指示欠落はQC失敗のままfatal専用語彙へ混入しない
+ok 7 - FOVI007: 描画指示欠落はQC失敗のままfatal専用語彙へ混入しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.028
+  ...
+# Subtest: FOVI008: timelineと意味packageの大容量読取は別reportで保持できる
+ok 8 - FOVI008: timelineと意味packageの大容量読取は別reportで保持できる # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.025667
+  ...
+# Subtest: FOVI009: child signalからOS権限原因を推測しない
+ok 9 - FOVI009: child signalからOS権限原因を推測しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.0765
+  ...
+# Subtest: FOVB001: timeline context前fatalはv002 envelopeを持つ
+ok 10 - FOVB001: timeline context前fatalはv002 envelopeを持つ # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.0955
+  ...
+# Subtest: FOVB002: timeline context後fatalも共通fatalObservationを使用する
+ok 11 - FOVB002: timeline context後fatalも共通fatalObservationを使用する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.032209
+  ...
+# Subtest: FOVB003: timelineはF01を末尾束縛しfatal専用rootを新設しない
+ok 12 - FOVB003: timelineはF01を末尾束縛しfatal専用rootを新設しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.028708
+  ...
+# Subtest: FOVB004: 旧B1 context前fatalはformal runner v002を使う
+ok 13 - FOVB004: 旧B1 context前fatalはformal runner v002を使う # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.025709
+  ...
+# Subtest: FOVB005: 旧B1 context後fatalにもfatalObservationがある
+ok 14 - FOVB005: 旧B1 context後fatalにもfatalObservationがある # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.073667
+  ...
+# Subtest: FOVB006: 旧B1 fixtureだけがF01 dependencyを追加し既存statusを保つ
+ok 15 - FOVB006: 旧B1 fixtureだけがF01 dependencyを追加し既存statusを保つ # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.029709
+  ...
+# Subtest: FOVB007: 意味終端context前fatalはrunner fatal v002を使う
+ok 16 - FOVB007: 意味終端context前fatalはrunner fatal v002を使う # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.02575
+  ...
+# Subtest: FOVB008: 意味終端context後fatalにfatalObservationがある
+ok 17 - FOVB008: 意味終端context後fatalにfatalObservationがある # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.026375
+  ...
+# Subtest: FOVB009: 意味終端はF01を末尾束縛し通常validation schemaを維持する
+ok 18 - FOVB009: 意味終端はF01を末尾束縛し通常validation schemaを維持する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.156167
+  ...
+# Subtest: FOVB010: 意味package context前fatalはstdout用formal runner v002を作る
+ok 19 - FOVB010: 意味package context前fatalはstdout用formal runner v002を作る # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.034375
+  ...
+# Subtest: FOVB011: 意味package context後はF01束縛とdurable v002を持つ
+ok 20 - FOVB011: 意味package context後はF01束縛とdurable v002を持つ # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.026709
+  ...
+# Subtest: FOVB012: 意味package同一job SHAの二回目はtarget不正へ分離される
+ok 21 - FOVB012: 意味package同一job SHAの二回目はtarget不正へ分離される # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.073458
+  ...
+# Subtest: FOVB013: 意味packageの実公開失敗はreport公開失敗へ分離される
+ok 22 - FOVB013: 意味packageの実公開失敗はreport公開失敗へ分離される # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.025958
+  ...
+# Subtest: FOVB014: 出力context前fatalはstderr用diagnostic v002を作る
+ok 23 - FOVB014: 出力context前fatalはstderr用diagnostic v002を作る # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.022
+  ...
+# Subtest: FOVB015: 出力context後はF01束縛とdurable v002を持つ
+ok 24 - FOVB015: 出力context後はF01束縛とdurable v002を持つ # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.021208
+  ...
+# Subtest: FOVB016: 出力同一job SHAの二回目はtarget不正へ分離される
+ok 25 - FOVB016: 出力同一job SHAの二回目はtarget不正へ分離される # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.020583
+  ...
+# Subtest: FOVB017: 出力の実公開失敗はreport公開失敗へ分離される
+ok 26 - FOVB017: 出力の実公開失敗はreport公開失敗へ分離される # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.020625
+  ...
+# Subtest: FOVB018: 出力runnerの外側13 codeは安全記録streamと共存する
+ok 27 - FOVB018: 出力runnerの外側13 codeは安全記録streamと共存する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.0205
+  ...
+# Subtest: FOVF001: v001 fatalObservationはv002入口で拒否する
+ok 28 - FOVF001: v001 fatalObservationはv002入口で拒否する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.020583
+  ...
+# Subtest: FOVF002: v001からv002へのconverterをproductionへ作らない
+ok 29 - FOVF002: v001からv002へのconverterをproductionへ作らない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.020542
+  ...
+# Subtest: FOVF003: fatal v002にfallbackを作らない
+ok 30 - FOVF003: fatal v002にfallbackを作らない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.020125
+  ...
+# Subtest: FOVF004: v001/v002のunion受理・併産を作らない
+ok 31 - FOVF004: v001/v002のunion受理・併産を作らない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.027583
+  ...
+# Subtest: FOVF005: 意味packageの正常formal経路は公開byteとCLI byteを一致させる
+ok 32 - FOVF005: 意味packageの正常formal経路は公開byteとCLI byteを一致させる # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.021042
+  ...
+# Subtest: FOVF006: 検査済み拒否のstatusと終了code契約をfatalへ統合しない
+ok 33 - FOVF006: 検査済み拒否のstatusと終了code契約をfatalへ統合しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.074334
+  ...
+# Subtest: FOVF007: 既存違反code集合へ14 inner codeを混入しない
+ok 34 - FOVF007: 既存違反code集合へ14 inner codeを混入しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.021416
+  ...
+# Subtest: FOVF008: 正式fatal byteに生文字列・secretを混入できない
+ok 35 - FOVF008: 正式fatal byteに生文字列・secretを混入できない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.020167
+  ...
+# Subtest: FOVT001: 正式成果物treeは正本tagと完全一致する
+ok 36 - FOVT001: 正式成果物treeは正本tagと完全一致する
+  ---
+  duration_ms: 420.693334
+  ...
+# Subtest: FOVT002: 正式成果物treeは正本tagと完全一致する
+ok 37 - FOVT002: 正式成果物treeは正本tagと完全一致する
+  ---
+  duration_ms: 365.760292
+  ...
+# Subtest: FOVT003: 正式成果物treeは正本tagと完全一致する
+ok 38 - FOVT003: 正式成果物treeは正本tagと完全一致する
+  ---
+  duration_ms: 600.157291
+  ...
+# Subtest: FOVT004: 正式成果物treeは正本tagと完全一致する
+ok 39 - FOVT004: 正式成果物treeは正本tagと完全一致する
+  ---
+  duration_ms: 589.623125
+  ...
+# Subtest: FOVT005: 正式成果物treeは正本tagと完全一致する
+ok 40 - FOVT005: 正式成果物treeは正本tagと完全一致する
+  ---
+  duration_ms: 674.772375
+  ...
+1..40
+# tests 40
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 35
+# todo 0
+# duration_ms 2904.617834

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v022-return-shape-static-audit-v001",
+  "observedOn": "2026-08-16",
+  "status": "passed",
+  "checks": [
+    {
+      "scope": "source",
+      "productionResultShape": "passed -> value -> sourcePackage",
+      "testReadShape": "width35Result.value.sourcePackage",
+      "productionSourceSha256": "954f4ed77638c5ff5ffc837bc67014220ebf6d9611e349aade10a7c0bebf8d70",
+      "testSourceSha256": "bf3a4f49dd9114de493f43c5cec4df066bdc8466253bb6ae0ae04d17b716a5c6",
+      "result": "matched"
+    },
+    {
+      "scope": "B5/B6",
+      "productionResultShape": "formal request artifact stored as generate-content-request.json",
+      "testReadShape": "readJson(outputRoot/generate-content-request.json) then contents[0].parts[0].text",
+      "productionSourceSha256": "4f0dfbd8ad6e5bf94a4f6678ba6545684dc9a7ded4f70a3503565dded1d0507b",
+      "testSourceSha256": "e53ef3bf2b974125cea470b6f91cd2d8f4dec03aae3875da48e9777e4a892b9b",
+      "result": "matched"
+    },
+    {
+      "scope": "selection",
+      "productionResultShape": "rejected -> primaryCode",
+      "testReadShape": "exact36Invalid.primaryCode",
+      "productionSourceSha256": "fbe7152f1a26837af51f26a4c673b2cddbc889370988b6e3c85dedb50d741cd6",
+      "testSourceSha256": "caef1b3e1172ca73ff4ed8f27b383a56e78ecdc32abe8529917cd5cf7ad635aa",
+      "result": "matched"
+    },
+    {
+      "scope": "planner",
+      "productionResultShape": "passed -> value -> pageLinePlan",
+      "testReadShape": "result.value.pageLinePlan",
+      "productionSourceSha256": "f5f783f9a50c9657c74a9e6e3b7a8c82abc4ebf09a4704ba8797f0a96657a811",
+      "testSourceSha256": "a53ccc25c269ec2d53de218b38951a23bc54c9c3c8b4d863b7d66671ef5eec86",
+      "result": "matched"
+    }
+  ],
+  "mismatches": []
+}

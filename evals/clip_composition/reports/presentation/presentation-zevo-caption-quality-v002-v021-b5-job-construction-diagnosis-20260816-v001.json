@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v021-b5-job-construction-diagnosis-v001",
+  "observedAt": "2026-08-16T09:24:00+09:00",
+  "status": "stopped-before-api-communication",
+  "stage": "b5-formal-job-decoding",
+  "job": {
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-jobs/a-v002-caption-quality-first-api-b5-20260816-v005.json",
+    "fileSha256": "f27717b28ee5bed29edee0555f8fe19deee8019e270ff346063238f129928c1e",
+    "decoderResult": "rejected",
+    "decoderReason": "schema-invalid"
+  },
+  "confirmedCause": {
+    "category": "job-construction-implementation-defect",
+    "summary": "The six official evidence snapshots still point to the predecessor B5 job directory, while the formal B5 decoder requires every snapshot path to be under the current B5 job ID directory.",
+    "affectedSourceIds": [
+      "pricing",
+      "tokens-guide",
+      "count-tokens-api",
+      "billing",
+      "thinking",
+      "latest-model"
+    ],
+    "expectedJobId": "a-v002-caption-quality-first-api-b5-20260816-v005",
+    "observedSnapshotJobId": "a-v002-caption-quality-first-api-b5-20260816-v004"
+  },
+  "threeWayAttribution": {
+    "productionOrImplementation": "job-construction-implementation-defect",
+    "fixtureOrExecutionSetup": "not-applicable",
+    "contractInterpretation": "not-required"
+  },
+  "preApiEvidence": {
+    "sourcePackage": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v002/source-package-v001.json",
+      "fileSha256": "505e0af866f9c9014ac134723fa80b54281860e834fa706ade6a5894f4d4bf4d",
+      "captionCount": 3,
+      "boundaryCount": 253,
+      "contentAndBoundariesMatchPredecessor": true
+    },
+    "sourceTests": "6/6",
+    "b5B6Tests": "11/11",
+    "selectionTests": "10/10",
+    "plannerTests": "10/10"
+  },
+  "externalEffects": {
+    "countTokensCalls": 0,
+    "generateContentCalls": 0,
+    "apiCommunications": 0,
+    "estimatedCostUsd": 0
+  },
+  "forwardOnlyRepairCandidate": {
+    "requiresApproval": true,
+    "steps": [
+      "Keep the rejected v005 job and its decision line unchanged as failure evidence.",
+      "Copy the six already-verified snapshot bytes without modification into a new job-specific snapshot directory.",
+      "Issue a new versioned B5 job and unused output root whose six snapshot paths match that new job ID.",
+      "Run the formal decoder and value validator before countTokens."
+    ],
+    "networkRequiredForRepair": false
+  }
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZEVO字幕品質v002 確認</title><style>
+:root{color-scheme:dark;background:#0d1117;color:#f0f3f6;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif}body{margin:0;padding:24px}main{max-width:1320px;margin:auto}.summary,.questions{padding:18px;background:#171d26;border:1px solid #3a4655;border-radius:12px}.questions label{display:block;margin:12px 0}.case{margin:24px 0;padding:18px;background:#151a22;border-radius:12px}.case header{display:flex;gap:14px;align-items:center}.ordinal{color:#a6b2c2}video{width:100%;max-height:72vh;background:#000}table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #303a47;text-align:left}code{overflow-wrap:anywhere}@media(max-width:720px){body{padding:10px}th:nth-child(2),td:nth-child(2){display:none}}
+</style></head><body><main data-review-id="zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0005-completion-write-failure-review" data-review-input-canonical-sha256="9247acc211c5a871304bcf4f5ac4a2fe57e09440ee9755315731e4ae3da964df">
+<h1>ZEVO字幕品質v002・横型3本確認</h1><section class="summary"><p>最短cue: <code>voice-190 / cue-000003-000001</code> — 80 frames</p><p>既存fade: 4 frames。短いcueが読めるかは映像で確認してください。</p></section>
+<section class="questions"><h2>一度の目視で確認する5点</h2>
+        <label><input type="checkbox" data-question-id="prior-caption-residue">前の発話の文字が次の発話まで残っていないか。</label>
+
+        <label><input type="checkbox" data-question-id="short-cue-line-break">一行に収まる短い発話が改行されていないか。</label>
+
+        <label><input type="checkbox" data-question-id="long-cue-line-break">長い発話だけが必要な位置で自然に二行へ分かれているか。</label>
+
+        <label><input type="checkbox" data-question-id="text-closure">全文を通して文字の欠落・重複・逆順がないか。</label>
+
+        <label><input type="checkbox" data-question-id="short-cue-fade">最短cueで既存4frame fadeにより読めない・不自然に瞬く見え方がないか。</label></section>
+      <section class="case" data-case-id="voice-013">
+        <header><span class="ordinal">1 / 3</span><h2>nE_bNeBNp4E_multiblock_material_v001:2:voice-013</h2></header>
+        <video controls preload="metadata" data-workspace-path="evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0005/completion-write-failure/voice-013/horizontal-formal/video.mp4"></video>
+        <p>尺 25167 ms / 755 frames</p>
+        <table><thead><tr><th>cue</th><th>frame範囲</th><th>表示frame</th><th>表示行</th></tr></thead><tbody>
+              <tr data-cue-id="cue-000001-000001">
+                <td><code>cue-000001-000001</code></td>
+                <td>0–179</td>
+                <td>179</td>
+                <td>マジ殺してやる!見ろ!バカが!なぁ<br>!マリン疑ってんじゃねぇ!マリンが</td>
+              </tr>
+              <tr data-cue-id="cue-000001-000002">
+                <td><code>cue-000001-000002</code></td>
+                <td>179–402</td>
+                <td>223</td>
+                <td>好きなんじゃなかったんか!てで!何<br>生き残ってんだよぉ!生き残んなお前</td>
+              </tr>
+              <tr data-cue-id="cue-000001-000003">
+                <td><code>cue-000001-000003</code></td>
+                <td>402–755</td>
+                <td>353</td>
+                <td>はぁ!デスカード、デビルカード来な<br>いんだけど来るのかないつか来ない</td>
+              </tr></tbody></table>
+      </section>
+
+      <section class="case" data-case-id="voice-067">
+        <header><span class="ordinal">2 / 3</span><h2>nE_bNeBNp4E_multiblock_material_v001:5:voice-067</h2></header>
+        <video controls preload="metadata" data-workspace-path="evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0005/completion-write-failure/voice-067/horizontal-formal/video.mp4"></video>
+        <p>尺 21367 ms / 641 frames</p>
+        <table><thead><tr><th>cue</th><th>frame範囲</th><th>表示frame</th><th>表示行</th></tr></thead><tbody>
+              <tr data-cue-id="cue-000002-000001">
+                <td><code>cue-000002-000001</code></td>
+                <td>0–93</td>
+                <td>93</td>
+                <td>あそっかペコラの命ペコラさよ</td>
+              </tr>
+              <tr data-cue-id="cue-000002-000002">
+                <td><code>cue-000002-000002</code></td>
+                <td>93–380</td>
+                <td>287</td>
+                <td>うならペコラペコラの命が尊き<br>ペコラの命がツッキさんはさス</td>
+              </tr>
+              <tr data-cue-id="cue-000002-000003">
+                <td><code>cue-000002-000003</code></td>
+                <td>380–641</td>
+                <td>261</td>
+                <td>イちゃんのさどこが好きなの?歌<br>?なんかうなずきが小さくない?</td>
+              </tr></tbody></table>
+      </section>
+
+      <section class="case" data-case-id="voice-190">
+        <header><span class="ordinal">3 / 3</span><h2>nE_bNeBNp4E_multiblock_material_v001:5:voice-190</h2></header>
+        <video controls preload="metadata" data-workspace-path="evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0005/completion-write-failure/voice-190/horizontal-formal/video.mp4"></video>
+        <p>尺 26900 ms / 807 frames</p>
+        <table><thead><tr><th>cue</th><th>frame範囲</th><th>表示frame</th><th>表示行</th></tr></thead><tbody>
+              <tr data-cue-id="cue-000003-000001">
+                <td><code>cue-000003-000001</code></td>
+                <td>0–80</td>
+                <td>80</td>
+                <td>僕のことをコロさんに言ってほしい</td>
+              </tr>
+              <tr data-cue-id="cue-000003-000002">
+                <td><code>cue-000003-000002</code></td>
+                <td>80–431</td>
+                <td>351</td>
+                <td>みたいなてめぇはしゃぎやがってじ<br>ゃ報告しないお前を喜ばしたりしな</td>
+              </tr>
+              <tr data-cue-id="cue-000003-000003">
+                <td><code>cue-000003-000003</code></td>
+                <td>431–807</td>
+                <td>376</td>
+                <td>い一旦さサクサクやろうやサクサク<br>こんな序盤でさ嘘つかんから普通に</td>
+              </tr></tbody></table>
+      </section>
+</main><script>for(const video of document.querySelectorAll('video[data-workspace-path]')){const marker='/evals/clip_composition/';const here=decodeURIComponent(location.pathname);const at=here.indexOf(marker);if(at>=0){video.src='file://'+here.slice(0,at+1)+video.dataset.workspacePath;}}</script></body></html>

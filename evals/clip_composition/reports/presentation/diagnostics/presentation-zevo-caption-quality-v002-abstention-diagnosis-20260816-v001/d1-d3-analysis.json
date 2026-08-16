@@ -1,0 +1,70 @@
+{
+  "recordVersion": "presentation-zevo-caption-quality-v002-abstention-d1-d3-analysis-v001",
+  "diagnosticCallCount": 3,
+  "maximumDiagnosticCallCount": 6,
+  "cumulativeDiagnosticNanoUsd": 61322250,
+  "maximumDiagnosticNanoUsd": 250000000,
+  "withinDiagnosticCostLimit": true,
+  "branch": "D1-abstained-D2-D3-reason-observation-stop",
+  "formalB6SentAfterDiagnosis": false,
+  "diagnosticResponseFormalReuseAllowed": false,
+  "observations": [
+    {
+      "diagnosticId": "D1",
+      "settingDifference": "thinkingLevel medium-to-high only",
+      "httpStatus": 200,
+      "providerStatus": "passed",
+      "applicationStatus": "abstained",
+      "strictAdmission": "not-entered-because-application-abstained",
+      "knownSixBoundaryCheck": "not-entered",
+      "conclusion": "thinking-high-did-not-resolve-abstention"
+    },
+    {
+      "diagnosticId": "D2",
+      "settingDifference": "abstained-branch-reason-string-one-field only",
+      "httpStatus": 200,
+      "providerStatus": "passed",
+      "observedTopLevelKeys": [
+        "status",
+        "captions"
+      ],
+      "observedApplicationStatus": "success",
+      "observedCaptionCount": 3,
+      "observedCueCounts": [
+        13,
+        8,
+        6
+      ],
+      "strictAdmission": "rejected-at-response-schema",
+      "strictFailure": {
+        "predicate": "status must be exact complete or abstained",
+        "observed": "success"
+      },
+      "knownSixBoundaryCheck": "not-entered-after-response-schema-failure",
+      "conclusion": "diagnostic-output-is-not-formally-acceptable-and-is-not-reused"
+    },
+    {
+      "diagnosticId": "D3",
+      "settingDifference": "structured-output-removed-and-diagnostic-instruction-added",
+      "httpStatus": 200,
+      "providerStatus": "passed",
+      "observedExplanation": "出力フォーマットとなるJSON Schemaの詳細な定義および「意味の小単位」の客観的な分割基準が提示されていないため、要求された仕様を正確に満たす結果を生成できません。",
+      "strictAdmission": "not-applicable-to-free-text-diagnostic",
+      "knownSixBoundaryCheck": "not-entered",
+      "conclusion": "reason-observed-without-claiming-provider-mechanism"
+    }
+  ],
+  "additionalDiagnostics": {
+    "D4": "not-selected-because-the-approved-D1-abstained-branch-stops-after-D2-D3",
+    "D5": "not-selected",
+    "D6": "not-selected"
+  },
+  "externalEffects": {
+    "formalB6Calls": 0,
+    "renderedVideos": 0,
+    "selectionArtifactsProduced": 0,
+    "secretRecorded": false,
+    "commitCount": 0,
+    "stableTagCount": 0
+  }
+}

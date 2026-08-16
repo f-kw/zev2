@@ -1,0 +1,804 @@
+TAP version 13
+# Subtest: ZCQ018 job, binding, live implementation, and formal selection execution
+ok 1 - ZCQ018 job, binding, live implementation, and formal selection execution
+  ---
+  duration_ms: 1040.177083
+  ...
+# proof-item:ZCQ018-P-01-19daf3263aad:passed
+# proof-item:ZCQ018-P-02-b8ff0c3b79be:passed
+# proof-item:ZCQ018-P-05-034d7c81a083:passed
+# proof-item:ZCQ018-P-06-72decdf4c9b1:passed
+# proof-item:ZCQ018-P-07-4f1528a1d40d:passed
+# proof-item:ZCQ018-P-08-808e5a1b6499:passed
+# proof-item:ZCQ018-P-09-1a5219a8272a:passed
+# proof-item:ZCQ018-P-10-842ae1113f59:passed
+# proof-item:ZCQ018-P-11-e1304a457d97:passed
+# proof-item:ZCQ018-P-12-d565731a87fa:passed
+# proof-item:ZCQ018-P-13-877c9602a746:passed
+# proof-item:ZCQ018-V2-01-81440ccebf15:passed
+# proof-item:ZCQ018-V2-02-8edfa0c9995a:passed
+# proof-item:ZCQ018-V2-03-77a9101c749b:passed
+# proof-item:ZCQ018-V2-05-37a00dd83274:passed
+# proof-item:ZCQ018-V3-02-c70ed6fd683a:passed
+# proof-item:ZCQ018-V3-03-f49f3e398fb0:passed
+# proof-item:ZCQ018-V3-04-3ae3ccb62796:passed
+# proof-item:ZCQ018-V3-05-66df4f483edc:passed
+# proof-item:ZCQ018-V3-06-f3360118874b:passed
+# proof-item:ZCQ018-V3-07-01013f2be9db:passed
+# proof-item:ZCQ018-V3-08-743bb9850e14:passed
+# proof-item:ZCQ018-V3-09-4cde4d33a005:passed
+# proof-item:ZCQ018-V3-10-1667d540fd12:passed
+# proof-item:ZCQ018-V3-11-5f498d7fd143:passed
+# proof-item:ZCQ018-V3-12-cc9b4d01962a:passed
+# proof-item:ZCQ018-V3-13-78fe512bda43:passed
+# proof-item:V4-ZCQ018-02:passed
+# proof-item:V15-ZCQ018-01:passed
+# proof-item:V15-ZCQ018-02:passed
+# code-owner:CUE_SELECTION_JOB_INVALID:passed
+# code-owner:CUE_SELECTION_INPUT_BINDING_MISMATCH:passed
+# Subtest: ZCQ019 strict provider response envelope rejects normalization and extra keys
+ok 2 - ZCQ019 strict provider response envelope rejects normalization and extra keys
+  ---
+  duration_ms: 0.537584
+  ...
+# proof-item:ZCQ019-P-01-cc4b0ce5f226:passed
+# proof-item:ZCQ019-P-02-8a7049ee99cb:passed
+# proof-item:ZCQ019-P-03-243a065691f5:passed
+# proof-item:ZCQ019-P-04-87346eb28235:passed
+# proof-item:ZCQ019-P-05-3a2f135a1f9f:passed
+# proof-item:ZCQ019-P-06-9c351396cb99:passed
+# proof-item:ZCQ019-P-07-235962c2dd49:passed
+# proof-item:ZCQ019-P-08-11f778065c6a:passed
+# proof-item:ZCQ019-P-09-b090776eb4bc:passed
+# proof-item:ZCQ019-P-10-624286a52725:passed
+# code-owner:CUE_PROVIDER_RESPONSE_INVALID:passed
+# Subtest: ZCQ020 abstained response publishes no selection value
+ok 3 - ZCQ020 abstained response publishes no selection value
+  ---
+  duration_ms: 0.168916
+  ...
+# proof-item:ZCQ020-P-01-a388f4e57d56:passed
+# proof-item:ZCQ020-V2-01-8acd13aa92bf:passed
+# code-owner:CUE_PROVIDER_ABSTAINED:passed
+# Subtest: ZCQ021 caption set is exact and ordered
+ok 4 - ZCQ021 caption set is exact and ordered
+  ---
+  duration_ms: 0.246334
+  ...
+# proof-item:ZCQ021-P-01-c1b0545cd5d8:passed
+# proof-item:ZCQ021-P-02-f8bb3159acf7:passed
+# proof-item:ZCQ021-P-03-842ae1113f59:passed
+# proof-item:ZCQ021-P-04-cb59ef06dab1:passed
+# proof-item:ZCQ021-P-05-160531e4d0e9:passed
+# code-owner:CUE_CAPTION_SET_MISMATCH:passed
+# Subtest: ZCQ022 boundary IDs are caption-local and enumerated
+ok 5 - ZCQ022 boundary IDs are caption-local and enumerated
+  ---
+  duration_ms: 0.1815
+  ...
+# proof-item:ZCQ022-P-01-d103e322526c:passed
+# proof-item:ZCQ022-P-02-28ba0f2bfd5f:passed
+# proof-item:ZCQ022-P-03-1584396b68b5:passed
+# code-owner:CUE_BOUNDARY_ID_INVALID:passed
+# Subtest: ZCQ023 cue and line endings are strictly increasing and complete
+ok 6 - ZCQ023 cue and line endings are strictly increasing and complete
+  ---
+  duration_ms: 0.423583
+  ...
+# proof-item:ZCQ023-P-01-a42bfd08604e:passed
+# proof-item:ZCQ023-P-02-7eec0dffe566:passed
+# code-owner:CUE_ORDER_INVALID:passed
+# code-owner:CUE_LINE_END_INVALID:passed
+# Subtest: ZCQ024 atom, text, retained-span, and source closure is total
+ok 7 - ZCQ024 atom, text, retained-span, and source closure is total
+  ---
+  duration_ms: 24.020917
+  ...
+# proof-item:ZCQ024-P-01-ddc1be14959a:passed
+# proof-item:ZCQ024-P-02-2617ab4ad6fe:passed
+# proof-item:ZCQ024-P-03-1136a9b50458:passed
+# proof-item:ZCQ024-P-04-07c7861a2d44:passed
+# proof-item:ZCQ024-P-05-e7351d3191b1:passed
+# proof-item:ZCQ024-V3-01-dec632a1e6e4:passed
+# proof-item:ZCQ024-V3-02-5570dc1d27ea:passed
+# proof-item:ZCQ024-V3-03-dfe97aad054b:passed
+# proof-item:ZCQ024-V3-04-cff2755d6195:passed
+# proof-item:ZCQ024-V3-05-70e0cd64313e:passed
+# proof-item:ZCQ024-V3-06-1f2f0b746981:passed
+# proof-item:ZCQ024-V3-07-388b768f2266:passed
+# proof-item:ZCQ024-V3-08-8b335f5a3274:passed
+# proof-item:ZCQ024-V3-09-1c58d99b7b63:passed
+# code-owner:CUE_ATOM_COVERAGE_INVALID:passed
+# Subtest: ZCQ025 only overlong cues may use a second line
+ok 8 - ZCQ025 only overlong cues may use a second line
+  ---
+  duration_ms: 767.684625
+  ...
+# proof-item:ZCQ025-P-01-37bcc2a8fb8f:passed
+# proof-item:ZCQ025-P-02-f1d56456b769:passed
+# code-owner:CUE_LINE_WIDTH_INVALID:passed
+# Subtest: ZCQ026 physical and timeline projections use the shared production calculations
+ok 9 - ZCQ026 physical and timeline projections use the shared production calculations
+  ---
+  duration_ms: 1533.285833
+  ...
+# proof-item:ZCQ026-P-01-4585aecb9702:passed
+# proof-item:ZCQ026-P-02-ffe5c0bb845c:passed
+# proof-item:ZCQ026-P-03-4ecf67058403:passed
+# proof-item:ZCQ026-P-04-4c0c96c344fe:passed
+# proof-item:ZCQ026-P-05-23b9c1e1c34d:passed
+# proof-item:ZCQ026-P-06-ca13a5386410:passed
+# proof-item:ZCQ026-V2-01-a1d754b2caa9:passed
+# proof-item:ZCQ026-V3-01-21a40c33a87c:passed
+# proof-item:ZCQ026-V3-02-92fa89c28006:passed
+# proof-item:ZCQ026-V3-03-6924773e2aea:passed
+# proof-item:ZCQ026-V3-04-e708a4f1a0c2:passed
+# proof-item:ZCQ026-V3-05-a60eaa66afc1:passed
+# proof-item:ZCQ026-V3-06-a80cc30a398f:passed
+# proof-item:ZCQ026-V3-07-4adac6a2e58b:passed
+# proof-item:ZCQ026-V3-08-1b1fd3e5bf1b:passed
+# proof-item:ZCQ026-V3-09-e2648ad5ccbf:passed
+# proof-item:ZCQ026-V3-10-43d2f558a2d4:passed
+# proof-item:ZCQ026-V3-11-4d1c45b9bceb:passed
+# proof-item:ZCQ026-V3-12-a0ad47898e24:passed
+# code-owner:CUE_PHYSICAL_LAYOUT_INVALID:passed
+# code-owner:CUE_TIMELINE_MAPPING_INVALID:passed
+# Subtest: ZCQ027 fatal stages and publication finalization remain structurally separate
+ok 10 - ZCQ027 fatal stages and publication finalization remain structurally separate
+  ---
+  duration_ms: 751.120792
+  ...
+# proof-item:ZCQ027-P-01-2e04388b8ab4:passed
+# proof-item:ZCQ027-P-02-1f97e7f16195:passed
+# proof-item:ZCQ027-P-03-ba3dab34d317:passed
+# proof-item:ZCQ027-P-04-0cfadebace33:passed
+# proof-item:ZCQ027-P-05-bac81ef0b6b4:passed
+# proof-item:ZCQ027-P-06-adb434851ca3:passed
+# proof-item:ZCQ027-P-07-50f95e2c17a8:passed
+# proof-item:ZCQ027-P-08-630dd644aea0:passed
+# proof-item:ZCQ027-P-09-f0fcb511651c:passed
+# proof-item:ZCQ027-P-10-72c825100dd4:passed
+# proof-item:ZCQ027-P-11-754280af4f45:passed
+# proof-item:ZCQ027-P-12-5967c9315be1:passed
+# proof-item:ZCQ027-P-13-d32b1d94676e:passed
+# proof-item:ZCQ027-P-14-fec90baf34ce:passed
+# proof-item:ZCQ027-V2-01-effd94c4cc78:passed
+# proof-item:ZCQ027-V2-02-3b5ce72862c2:passed
+# proof-item:ZCQ027-V2-03-af58685ed02b:passed
+# proof-item:ZCQ027-V2-04-808bc9898278:passed
+# proof-item:ZCQ027-V2-05-6520db2ffdf9:passed
+# proof-item:ZCQ027-V2-06-a153e4124536:passed
+# proof-item:ZCQ027-V2-07-698b0fb03cf5:passed
+# proof-item:ZCQ027-V3-01-1e22b102cf5f:passed
+# proof-item:ZCQ027-V3-02-c807a1947bb4:passed
+# proof-item:ZCQ027-V3-03-23a9709d38f5:passed
+# proof-item:ZCQ027-V3-04-70e2f69bc073:passed
+# proof-item:ZCQ027-V3-05-280cf5536065:passed
+# proof-item:ZCQ027-V3-06-d3071f1ab5da:passed
+# proof-item:ZCQ027-V3-07-c86c187da89b:passed
+# proof-item:ZCQ027-V3-08-bc48deeddfd4:passed
+# proof-item:ZCQ027-V3-09-1f9a49d847ce:passed
+# proof-item:V4-ZCQ027-01:passed
+# proof-item:V4-ZCQ027-02:passed
+# proof-item:V4-ZCQ027-03:passed
+# proof-item:V15-ZCQ027-01:passed
+# code-owner:CUE_SELECTION_EXECUTION_FAILED:passed
+# code-owner:CUE_SELECTION_PUBLICATION_FAILED:passed
+# Subtest: ZCQ001 source job schema, fixed loader, bound import graph, and CLI guard
+ok 11 - ZCQ001 source job schema, fixed loader, bound import graph, and CLI guard
+  ---
+  duration_ms: 1395.010084
+  ...
+# proof-item:ZCQ001-P-01-13c0f4fa9b24:passed
+# proof-item:ZCQ001-P-02-eec89906405e:passed
+# proof-item:ZCQ001-P-03-850e16d958ce:passed
+# proof-item:ZCQ001-P-04-bfa4a1b9c46d:passed
+# proof-item:ZCQ001-P-05-b8ff0c3b79be:passed
+# proof-item:V4-ZCQ001-01:passed
+# proof-item:V15-ZCQ001-01:passed
+# proof-item:ZCQ001-P-08-e3cff4d98376:passed
+# proof-item:ZCQ001-P-09-e55f181b8f6a:passed
+# proof-item:ZCQ001-P-10-ec1eb56272fc:passed
+# proof-item:ZCQ001-P-11-6044e9f095e0:passed
+# proof-item:ZCQ001-P-12-80f70afeef3c:passed
+# proof-item:ZCQ001-P-13-c972c530f95a:passed
+# code-owner:CUE_SOURCE_JOB_INVALID:passed
+# proof-item:ZCQ001-P-14-42330d1b09c4:passed
+# proof-item:ZCQ001-P-15-842ae1113f59:passed
+# proof-item:ZCQ001-P-16-e1304a457d97:passed
+# proof-item:ZCQ001-P-17-877c9602a746:passed
+# proof-item:ZCQ001-V2-01-38e27cb76066:passed
+# proof-item:V4-ZCQ001-02:passed
+# proof-item:ZCQ001-V2-03-5f660c8cc348:passed
+# proof-item:V4-ZCQ001-03:passed
+# proof-item:V8-ZCQ001-02:passed
+# Subtest: ZCQ002 multiple meaning packages preserve input order and deterministic IDs
+ok 12 - ZCQ002 multiple meaning packages preserve input order and deterministic IDs
+  ---
+  duration_ms: 0.888417
+  ...
+# proof-item:ZCQ002-P-01-167db456a837:passed
+# proof-item:ZCQ002-P-02-4b8fe2566ede:passed
+# proof-item:ZCQ002-P-03-df11878b850b:passed
+# Subtest: ZCQ003 every atom is retained once and case context remains one-to-one
+ok 13 - ZCQ003 every atom is retained once and case context remains one-to-one
+  ---
+  duration_ms: 0.905166
+  ...
+# proof-item:ZCQ003-P-01-f194c81fac64:passed
+# proof-item:ZCQ003-P-02-8073a63752e1:passed
+# proof-item:ZCQ003-P-03-9dc4b2c72978:passed
+# code-owner:CUE_SOURCE_ATOM_CLOSURE_INVALID:passed
+# Subtest: ZCQ004 final package validator, code trigger, upstream dominance, and projection predicates
+ok 14 - ZCQ004 final package validator, code trigger, upstream dominance, and projection predicates
+  ---
+  duration_ms: 340.524208
+  ...
+# proof-item:V7-ZCQ004-01:passed
+# proof-item:V7-ZCQ004-02:passed
+# code-owner:CUE_SOURCE_PROMPT_PROJECTION_INVALID:passed
+# proof-item:V7-ZCQ004-03:passed
+# proof-item:V7-ZCQ004-04:passed
+# Subtest: ZCQ005 input bindings, resolved style, reread, and no-replace publication reject correctly
+ok 15 - ZCQ005 input bindings, resolved style, reread, and no-replace publication reject correctly
+  ---
+  duration_ms: 920.9155
+  ...
+# proof-item:ZCQ005-P-01-45440c1d3fb3:passed
+# proof-item:ZCQ005-P-02-5e698b570508:passed
+# code-owner:CUE_SOURCE_INPUT_BINDING_INVALID:passed
+# proof-item:ZCQ005-P-03-341f8b2db3e3:passed
+# proof-item:ZCQ005-P-04-ab5e7a3ec0f1:passed
+# code-owner:CUE_SOURCE_STYLE_INVALID:passed
+# code-owner:CUE_SOURCE_EXECUTION_FAILED:passed
+# proof-item:ZCQ005-P-05-9046b29ea2f5:passed
+# proof-item:V4-ZCQ005-01:passed
+# proof-item:V4-ZCQ005-02:passed
+# code-owner:CUE_SOURCE_PUBLICATION_FAILED:passed
+# proof-item:V4-ZCQ005-03:passed
+# proof-item:V4-ZCQ005-04:passed
+# proof-item:V4-ZCQ005-05:passed
+# proof-item:V4-ZCQ005-06:passed
+# proof-item:V4-ZCQ005-07:passed
+# proof-item:V4-ZCQ005-08:passed
+# Subtest: ZCQ006 source package bytes and binding provenance are deterministic
+ok 16 - ZCQ006 source package bytes and binding provenance are deterministic
+  ---
+  duration_ms: 359.280334
+  ...
+# proof-item:ZCQ006-P-01-0e4db82712cf:passed
+# proof-item:ZCQ006-P-02-b7c7ba6f37b1:passed
+# proof-item:ZCQ006-P-03-e7de2476355c:passed
+# proof-item:ZCQ006-V2-01-8920d8468d0b:passed
+# proof-item:V4-ZCQ006-01:passed
+# Subtest: ZCQ028 reconstructs one case through the shared source closure and projection set
+ok 17 - ZCQ028 reconstructs one case through the shared source closure and projection set
+  ---
+  duration_ms: 2285.077167
+  ...
+# proof-item:ZCQ028-P-01-00c55f252dd3:passed
+# proof-item:ZCQ028-P-02-34096b603803:passed
+# proof-item:ZCQ028-P-03-2617ab4ad6fe:passed
+# proof-item:ZCQ028-P-04-993d3edd8ae1:passed
+# proof-item:ZCQ028-P-05-22303597d3ef:passed
+# proof-item:ZCQ028-P-06-41f4a2965886:passed
+# proof-item:ZCQ028-P-07-f502a39f834b:passed
+# proof-item:ZCQ028-V1-01-616f7a7d85de:passed
+# proof-item:ZCQ028-V1-02-bfb88d36ff97:passed
+# proof-item:ZCQ028-V2-01-0255d22791eb:passed
+# proof-item:ZCQ028-V3-01-aba30163e8c1:passed
+# proof-item:ZCQ028-V3-02-fd34acfacc71:passed
+# proof-item:ZCQ028-V3-03-cd5b624e49ad:passed
+# proof-item:ZCQ028-V3-04-5322f34d5e6b:passed
+# proof-item:ZCQ028-V3-05-af1b171ba95c:passed
+# proof-item:ZCQ028-V3-06-df268bcf844f:passed
+# proof-item:ZCQ028-V3-07-3a4aa31b6539:passed
+# code-owner:CUE_RECONSTRUCTION_FAILED:passed
+# Subtest: ZCQ029 keeps cues that fit on one line unbroken
+ok 18 - ZCQ029 keeps cues that fit on one line unbroken
+  ---
+  duration_ms: 757.272
+  ...
+# proof-item:ZCQ029-P-01-fcb4b72072fe:passed
+# Subtest: ZCQ030 preserves the selected two-line physical edge without replanning
+ok 19 - ZCQ030 preserves the selected two-line physical edge without replanning
+  ---
+  duration_ms: 743.200292
+  ...
+# proof-item:ZCQ030-P-01-d73675959b4d:passed
+# proof-item:ZCQ030-P-02-357249ab45e6:passed
+# Subtest: ZCQ031 rejects duplicate selected physical edges as physically ambiguous
+ok 20 - ZCQ031 rejects duplicate selected physical edges as physically ambiguous
+  ---
+  duration_ms: 720.357666
+  ...
+# proof-item:ZCQ031-P-01-5017dc924015:passed
+# proof-item:ZCQ031-P-02-227bbc82e2df:passed
+# proof-item:ZCQ031-P-03-54ef2cea626f:passed
+# proof-item:ZCQ031-P-04-a6f0d89c4860:passed
+# code-owner:CUE_PLANNER_PHYSICAL_INVALID:passed
+# Subtest: ZCQ032 rejects a selection for which the production graph has no exact edge
+ok 21 - ZCQ032 rejects a selection for which the production graph has no exact edge
+  ---
+  duration_ms: 1.452666
+  ...
+# proof-item:ZCQ032-P-01-3ef1d542e5d3:passed
+# code-owner:CUE_SELECTED_EDGE_NOT_FOUND:passed
+# Subtest: ZCQ033 rejects a non-mapped production timeline result
+ok 22 - ZCQ033 rejects a non-mapped production timeline result
+  ---
+  duration_ms: 732.455375
+  ...
+# proof-item:ZCQ033-P-01-8cf09569bd00:passed
+# proof-item:ZCQ033-P-02-8de0f92dccef:passed
+# code-owner:CUE_PLANNER_TIMELINE_INVALID:passed
+# Subtest: ZCQ034 rejects positive frame overlap between adjacent cues
+ok 23 - ZCQ034 rejects positive frame overlap between adjacent cues
+  ---
+  duration_ms: 745.826125
+  ...
+# proof-item:ZCQ034-P-01-4832db24daac:passed
+# proof-item:ZCQ034-P-02-8c3badd7d102:passed
+# proof-item:ZCQ034-P-03-b75645404d63:passed
+# code-owner:CUE_PLANNER_OVERLAP_INVALID:passed
+# Subtest: ZCQ035 returns byte-identical formal plans from the same verified tuple
+ok 24 - ZCQ035 returns byte-identical formal plans from the same verified tuple
+  ---
+  duration_ms: 1480.268584
+  ...
+# proof-item:ZCQ035-P-01-9e1509379ee6:passed
+# proof-item:ZCQ035-V1-01-4da0ac5c1f1d:passed
+# proof-item:ZCQ035-V1-02-7e0711156451:passed
+# proof-item:ZCQ035-V2-01-0542de098b14:passed
+# proof-item:ZCQ035-V3-01-39a639b743f8:passed
+# proof-item:ZCQ035-V3-02-4b33862faca8:passed
+# Subtest: ZCQ036 rejects old argument shapes and any verified projection or binding drift
+ok 25 - ZCQ036 rejects old argument shapes and any verified projection or binding drift
+  ---
+  duration_ms: 780.373208
+  ...
+# proof-item:ZCQ036-P-01-d4c608fd4816:passed
+# proof-item:ZCQ036-V1-01-daeb8bc6a216:passed
+# proof-item:ZCQ036-V1-02-842ae1113f59:passed
+# proof-item:ZCQ036-V1-03-5bd59221bff8:passed
+# proof-item:ZCQ036-V1-04-452eee378e27:passed
+# proof-item:ZCQ036-V1-05-9b5e077a13fa:passed
+# proof-item:ZCQ036-V1-06-311c5ec620f9:passed
+# proof-item:ZCQ036-V2-01-174a78809833:passed
+# proof-item:ZCQ036-V2-02-842ae1113f59:passed
+# proof-item:ZCQ036-V2-03-1756715ae245:passed
+# proof-item:ZCQ036-V3-01-e7953baece5c:passed
+# proof-item:ZCQ036-V3-02-6088bae9dfc0:passed
+# proof-item:ZCQ036-V3-03-0b0e8d4d826a:passed
+# proof-item:ZCQ036-V3-04-9ec34fd8b761:passed
+# proof-item:ZCQ036-V3-05-3579ebae65cf:passed
+# proof-item:ZCQ036-V3-06-6a5951d560fb:passed
+# proof-item:ZCQ036-V3-07-80f335f757b4:passed
+# proof-item:ZCQ036-V3-08-a5939327f04b:passed
+# proof-item:ZCQ036-V3-09-8c231599f648:passed
+# code-owner:CUE_PLANNER_INPUT_INVALID:passed
+# code-owner:CUE_PLANNER_BINDING_MISMATCH:passed
+# Subtest: ZCQ037 freezes the six approved old plans and their known split evidence
+ok 26 - ZCQ037 freezes the six approved old plans and their known split evidence
+  ---
+  duration_ms: 3.670375
+  ...
+# proof-item:ZCQ037-P-01-192d5b7ab9fc:passed
+# proof-item:ZCQ037-P-02-9813ac1dfbf2:passed
+# proof-item:ZCQ037-P-03-181ca3b33797:passed
+# proof-item:ZCQ037-P-04-d005f7a63648:passed
+# Subtest: ZCQ038 accepts only the new exact request/render schemas and preserves cue IDs
+ok 27 - ZCQ038 accepts only the new exact request/render schemas and preserves cue IDs
+  ---
+  duration_ms: 56.988625
+  ...
+# proof-item:ZCQ038-P-01-5d0966da5389:passed
+# proof-item:ZCQ038-P-02-08aa9b5dc37e:passed
+# proof-item:ZCQ038-P-03-290f31076180:passed
+# proof-item:ZCQ038-P-04-7abe89f13d8f:passed
+# proof-item:ZCQ038-P-05-40498866bc9a:passed
+# proof-item:ZCQ038-P-06-2e92345dffa3:passed
+# proof-item:ZCQ038-V1-01-0b86c66c0bae:passed
+# proof-item:ZCQ038-V1-02-842ae1113f59:passed
+# proof-item:ZCQ038-V1-03-5bd59221bff8:passed
+# proof-item:ZCQ038-V1-04-e781bd6ae847:passed
+# proof-item:ZCQ038-V1-05-76f8185d3940:passed
+# proof-item:ZCQ038-V2-01-51f2ff37929a:passed
+# proof-item:ZCQ038-V2-02-7003a10d6df7:passed
+# proof-item:ZCQ038-V2-03-a777452e0acf:passed
+# proof-item:ZCQ038-V2-04-69c3f5ee3ba3:passed
+# code-owner:CUE_RENDER_INPUT_INVALID:passed
+# Subtest: ZCQ039 rejects any cross-input binding or live source-context drift
+ok 28 - ZCQ039 rejects any cross-input binding or live source-context drift
+  ---
+  duration_ms: 0.882667
+  ...
+# proof-item:ZCQ039-P-01-41cf6794ba42:passed
+# proof-item:ZCQ039-P-02-65045134064d:passed
+# proof-item:ZCQ039-P-03-e409bfc6fe79:passed
+# proof-item:ZCQ039-P-04-61b95405ae75:passed
+# proof-item:ZCQ039-V1-01-ded7da5fa4d6:passed
+# proof-item:ZCQ039-V1-02-f5cbecfd76b9:passed
+# proof-item:ZCQ039-V1-03-f9e8dfb9daf0:passed
+# proof-item:ZCQ039-V1-04-19a9aaf2470a:passed
+# proof-item:ZCQ039-V1-05-d063367ae935:passed
+# proof-item:ZCQ039-V2-01-6c76a852510a:passed
+# proof-item:ZCQ039-V2-02-ea6f0fb1c972:passed
+# code-owner:CUE_RENDER_BINDING_MISMATCH:passed
+# Subtest: ZCQ040 projects every cue through the existing common element implementation
+ok 29 - ZCQ040 projects every cue through the existing common element implementation
+  ---
+  duration_ms: 3.862875
+  ...
+# proof-item:ZCQ040-P-01-a19647f4b189:passed
+# proof-item:ZCQ040-P-02-5a1c1131b253:passed
+# proof-item:ZCQ040-V2-01-d9e266975743:passed
+# proof-item:ZCQ040-V2-02-3785903cb2d9:passed
+# proof-item:ZCQ040-V2-03-67e2bff73370:passed
+# proof-item:ZCQ040-V2-04-273a00c5a96d:passed
+# code-owner:CUE_RENDER_PROJECTION_INVALID:passed
+# Subtest: ZCQ041 returns byte-identical render and common-core plans from the same tuple
+ok 30 - ZCQ041 returns byte-identical render and common-core plans from the same tuple
+  ---
+  duration_ms: 2.778834
+  ...
+# proof-item:ZCQ041-P-01-6f7eef04ee91:passed
+# proof-item:ZCQ041-P-02-4c74ef9f0392:passed
+# proof-item:ZCQ041-P-03-3692aaaf1cef:passed
+# proof-item:ZCQ041-P-04-566d89b8a83d:passed
+# proof-item:ZCQ041-P-05-ca9411c633fc:passed
+# proof-item:ZCQ041-P-06-38f61daab4da:passed
+# proof-item:ZCQ041-V1-01-e926cb8e3777:passed
+# proof-item:ZCQ041-V1-02-d97b2356b26f:passed
+# proof-item:ZCQ041-V1-03-43b8a53c6401:passed
+# proof-item:ZCQ041-V1-04-dfa0ab936794:passed
+# proof-item:ZCQ041-V2-01-2c2403277c8c:passed
+# proof-item:ZCQ041-V2-02-d6bfa9dd8e7c:passed
+# Subtest: ZCQ045: 確認画面は横型3本と固定5問を一つの非循環入力から構築する
+ok 31 - ZCQ045: 確認画面は横型3本と固定5問を一つの非循環入力から構築する
+  ---
+  duration_ms: 96.268375
+  ...
+# proof-item:ZCQ045-P-01-feea61f399f5:passed
+# proof-item:ZCQ045-P-02-456e98c4a2a0:passed
+# proof-item:ZCQ045-P-03-9d5f5a090a08:passed
+# proof-item:ZCQ045-P-04-ccf8200bf065:passed
+# proof-item:ZCQ045-P-05-7e93476c4bef:passed
+# proof-item:ZCQ045-P-06-28195406ddee:passed
+# proof-item:ZCQ045-P-07-f1373ffdc23a:passed
+# proof-item:ZCQ045-V2-01-9747d46a9789:passed
+# proof-item:ZCQ045-V2-02-84c573eab2a0:passed
+# Subtest: ZCQ046: 最短cueとfade証拠・binding・HTML escapeを個別byteで閉じる
+ok 32 - ZCQ046: 最短cueとfade証拠・binding・HTML escapeを個別byteで閉じる
+  ---
+  duration_ms: 0.813167
+  ...
+# proof-item:ZCQ046-P-01-2b806e0154da:passed
+# proof-item:ZCQ046-P-02-46e73d103013:passed
+# proof-item:ZCQ046-P-03-0757019708ef:passed
+# proof-item:ZCQ046-P-04-285c38012db0:passed
+# proof-item:ZCQ046-P-05-b872c25f5465:passed
+# proof-item:ZCQ046-V2-01-3fb42dcdb0ca:passed
+# proof-item:ZCQ046-V2-02-ab7076feab35:passed
+# Subtest: ZCQ007 B5/B6の正式job・束縛・import順・分離実行を実観測する
+ok 33 - ZCQ007 B5/B6の正式job・束縛・import順・分離実行を実観測する
+  ---
+  duration_ms: 1778.183416
+  ...
+# proof-item:ZCQ007-P-01-781ef35a415d:passed
+# proof-item:ZCQ007-P-06-f29219bd499b:passed
+# proof-item:ZCQ007-P-07-739f1cbfe7bf:passed
+# proof-item:ZCQ007-P-08-659b37314300:passed
+# proof-item:ZCQ007-P-09-ffe4a2d6ee89:passed
+# proof-item:ZCQ007-P-10-0b261ce0f676:passed
+# proof-item:ZCQ007-P-11-125d1973c3d0:passed
+# proof-item:ZCQ007-P-12-6706d6691284:passed
+# proof-item:ZCQ007-P-13-3ce1762b29bf:passed
+# proof-item:ZCQ007-P-14-d2cb376ef09f:passed
+# proof-item:ZCQ007-P-15-8faa91204a07:passed
+# proof-item:ZCQ007-P-16-0bb2e5b7affa:passed
+# proof-item:V4-ZCQ007-01:passed
+# proof-item:V4-ZCQ007-03:passed
+# proof-item:V4-ZCQ007-04:passed
+# proof-item:V4-ZCQ007-05:passed
+# proof-item:V15-ZCQ007-01:passed
+# Subtest: ZCQ008 Gemini可視意味入力はsource packageのprompt byteと一致する
+ok 34 - ZCQ008 Gemini可視意味入力はsource packageのprompt byteと一致する
+  ---
+  duration_ms: 312.241584
+  ...
+# proof-item:ZCQ008-P-01-8c1580507752:passed
+# Subtest: ZCQ009 system instructionは仕事本文を複製せず6行に固定する
+ok 35 - ZCQ009 system instructionは仕事本文を複製せず6行に固定する
+  ---
+  duration_ms: 380.301875
+  ...
+# proof-item:ZCQ009-P-01-9172a8a8d125:passed
+# proof-item:ZCQ009-P-02-e11a773c6611:passed
+# proof-item:ZCQ009-P-03-4514d3fa1618:passed
+# Subtest: ZCQ010 model・endpoint・thinking・tier省略・max outputを一意に束縛する
+ok 36 - ZCQ010 model・endpoint・thinking・tier省略・max outputを一意に束縛する
+  ---
+  duration_ms: 723.372584
+  ...
+# proof-item:ZCQ010-P-01-63627d9c750f:passed
+# proof-item:ZCQ010-P-02-08305518517f:passed
+# proof-item:ZCQ010-P-03-9b4d31ebcfb1:passed
+# proof-item:ZCQ010-P-04-0dee663a4bbd:passed
+# proof-item:ZCQ010-P-05-21857b06d4f3:passed
+# Subtest: ZCQ011 countTokens adapterと2回計測を実呼出しで検査する
+ok 37 - ZCQ011 countTokens adapterと2回計測を実呼出しで検査する
+  ---
+  duration_ms: 315.838375
+  ...
+# proof-item:ZCQ011-P-01-d6976ebb4dfa:passed
+# proof-item:ZCQ011-P-02-9aee6b1bcdf6:passed
+# proof-item:ZCQ011-P-03-f7cedcee993c:passed
+# proof-item:ZCQ011-P-04-8e58ff8f01e5:passed
+# proof-item:ZCQ011-P-05-6bb0a9b7008a:passed
+# proof-item:ZCQ011-P-06-4d15680da254:passed
+# proof-item:ZCQ011-P-07-e3292a74331e:passed
+# proof-item:ZCQ011-P-08-a2aaa095701d:passed
+# proof-item:ZCQ011-P-09-4a1a345786ac:passed
+# proof-item:ZCQ011-P-10-2e5a6580c838:passed
+# proof-item:ZCQ011-P-11-f15026ca9a1b:passed
+# proof-item:ZCQ011-P-12-9fdacca7f791:passed
+# proof-item:ZCQ011-P-13-81bd1feea5c8:passed
+# proof-item:ZCQ011-P-14-796a3a81dbe6:passed
+# proof-item:ZCQ011-P-15-6ddefe55b71d:passed
+# proof-item:ZCQ011-P-16-bb0e3ffc4b0f:passed
+# proof-item:ZCQ011-P-17-db6acf747784:passed
+# proof-item:ZCQ011-P-18-2e5836725386:passed
+# proof-item:ZCQ011-P-19-ea22c8ca33a4:passed
+# Subtest: ZCQ012 公式snapshot・claim・残余リスク受容をbyte来歴で検査する
+ok 38 - ZCQ012 公式snapshot・claim・残余リスク受容をbyte来歴で検査する
+  ---
+  duration_ms: 498.327375
+  ...
+# proof-item:ZCQ012-P-01-9b90438fd642:passed
+# proof-item:ZCQ012-P-02-01105310ff8e:passed
+# proof-item:ZCQ012-P-03-89cc4d4a623b:passed
+# proof-item:ZCQ012-P-04-6d8ace4f0830:passed
+# proof-item:ZCQ012-P-05-d574a4afa754:passed
+# Subtest: ZCQ013 事前費用は既存BigInt正本をprobe/final双方へ適用する
+ok 39 - ZCQ013 事前費用は既存BigInt正本をprobe/final双方へ適用する
+  ---
+  duration_ms: 538.507834
+  ...
+# proof-item:ZCQ013-P-01-0f9bf7c91e36:passed
+# proof-item:ZCQ013-P-02-d1621589f99a:passed
+# proof-item:ZCQ013-P-03-a39585fe366d:passed
+# proof-item:ZCQ013-P-04-a80707259323:passed
+# proof-item:ZCQ013-P-05-27773a3c14a0:passed
+# proof-item:ZCQ013-P-06-e0acca8d22e6:passed
+# proof-item:ZCQ013-P-07-8a6b89c89ad8:passed
+# Subtest: ZCQ014 provider schemaと最大有効構造を入力集合から決定的に作る
+ok 40 - ZCQ014 provider schemaと最大有効構造を入力集合から決定的に作る
+  ---
+  duration_ms: 271.589667
+  ...
+# proof-item:ZCQ014-P-01-172994589a44:passed
+# proof-item:ZCQ014-P-02-dccadaf2b386:passed
+# proof-item:ZCQ014-P-03-bcfe9f279688:passed
+# proof-item:ZCQ014-P-04-fc69612bca82:passed
+# proof-item:ZCQ014-P-05-5b427711378e:passed
+# Subtest: ZCQ015 B6は既存provider transport契約を一回だけ通しrawを先行保存する
+ok 41 - ZCQ015 B6は既存provider transport契約を一回だけ通しrawを先行保存する
+  ---
+  duration_ms: 1412.722
+  ...
+# proof-item:ZCQ015-P-01-f925b6af2f39:passed
+# proof-item:ZCQ015-P-02-1c8df05bd8d2:passed
+# proof-item:ZCQ015-P-03-248e8c70dcde:passed
+# proof-item:ZCQ015-P-04-49c96677622b:passed
+# proof-item:ZCQ015-P-05-afe7de66d8d7:passed
+# proof-item:ZCQ015-P-06-fcdb80943413:passed
+# proof-item:ZCQ015-P-07-b4c3515cad4e:passed
+# proof-item:ZCQ015-P-08-6d878cb96869:passed
+# proof-item:ZCQ015-P-09-6a29a26e0176:passed
+# proof-item:ZCQ015-P-10-171b9359dbac:passed
+# proof-item:V4-ZCQ015-01:passed
+# proof-item:V4-ZCQ015-02:passed
+# proof-item:V4-ZCQ015-04:passed
+# proof-item:V5-ZCQ015-01:passed
+# proof-item:V5-ZCQ015-02:passed
+# Subtest: ZCQ016 B5/B6の結果別成果物集合・費用・公開失敗を実発火する
+ok 42 - ZCQ016 B5/B6の結果別成果物集合・費用・公開失敗を実発火する
+  ---
+  duration_ms: 5339.918625
+  ...
+# proof-item:ZCQ016-P-01-06ee9a1962ca:passed
+# proof-item:ZCQ016-P-02-3727d4ddcee5:passed
+# proof-item:ZCQ016-P-03-7b3f7303e5f1:passed
+# proof-item:ZCQ016-P-04-3c39f88e936c:passed
+# proof-item:ZCQ016-P-05-6261369241ca:passed
+# proof-item:ZCQ016-P-06-a5642d7f87e5:passed
+# proof-item:ZCQ016-P-07-89afbfc18eb9:passed
+# proof-item:ZCQ016-P-08-c20063533421:passed
+# proof-item:ZCQ016-P-09-1e4f4eafd3b1:passed
+# proof-item:ZCQ016-P-10-cb1aa265450d:passed
+# proof-item:ZCQ016-P-11-c0d96f98c087:passed
+# proof-item:ZCQ016-P-12-5b034dfac6c5:passed
+# proof-item:ZCQ016-P-13-8b7f3fe75e95:passed
+# proof-item:ZCQ016-P-14-64c07897ce02:passed
+# proof-item:ZCQ016-P-15-535183f415eb:passed
+# proof-item:ZCQ016-P-16-ef5bdc33ae49:passed
+# proof-item:ZCQ016-P-17-c5fae9fe051a:passed
+# proof-item:ZCQ016-P-18-d0b8a4559616:passed
+# proof-item:ZCQ016-V2-01-1a7d98f64fc5:passed
+# proof-item:ZCQ016-V2-02-16d34b5e7bcb:passed
+# proof-item:ZCQ016-V2-03-13494330c563:passed
+# proof-item:ZCQ016-V2-04-2a7428faced1:passed
+# proof-item:V4-ZCQ016-01:passed
+# proof-item:V4-ZCQ016-02:passed
+# proof-item:V4-ZCQ016-03:passed
+# proof-item:V4-ZCQ016-04:passed
+# proof-item:V4-ZCQ016-05:passed
+# proof-item:V4-ZCQ016-06:passed
+# proof-item:V4-ZCQ016-07:passed
+# proof-item:V4-ZCQ016-08:passed
+# proof-item:V5-ZCQ016-01:passed
+# Subtest: ZCQ017 secret混入と外部回答の暗黙正規化を全て拒否する
+ok 43 - ZCQ017 secret混入と外部回答の暗黙正規化を全て拒否する
+  ---
+  duration_ms: 2322.963417
+  ...
+# proof-item:ZCQ017-P-01-7c120d89badf:passed
+# proof-item:ZCQ017-P-02-1d82ee71fec6:passed
+# proof-item:ZCQ017-P-03-de1e97648cb9:passed
+# proof-item:ZCQ017-P-04-cddd133809c7:passed
+# proof-item:ZCQ017-P-05-206034584050:passed
+# proof-item:ZCQ017-P-06-dd65c56f7340:passed
+# proof-item:ZCQ017-P-07-b1f219dcd5e4:passed
+# proof-item:ZCQ017-P-08-88b56e08fa80:passed
+# Subtest: ZCQF001 fixture manufactureは44成果物と600環境行をatomic公開する
+ok 44 - ZCQF001 fixture manufactureは44成果物と600環境行をatomic公開する
+  ---
+  duration_ms: 294.116375
+  ...
+# proof-item:ZCQF001-01:passed
+# proof-item:ZCQF001-02:passed
+# proof-item:ZCQF001-03:passed
+# proof-item:ZCQF001-04:passed
+# proof-item:ZCQF001-05:passed
+# proof-item:ZCQF001-06:passed
+# proof-item:ZCQF001-07:passed
+# proof-item:ZCQF001-08:passed
+# proof-item:ZCQF001-09:passed
+# proof-item:ZCQF001-10:passed
+# proof-item:ZCQF001-11:passed
+# proof-item:ZCQF001-12:passed
+# proof-item:ZCQF001-13:passed
+# proof-item:ZCQF001-14:passed
+# proof-item:ZCQF001-15:passed
+# proof-item:ZCQF001-16:passed
+# proof-item:ZCQF001-17:passed
+# proof-item:ZCQF001-18:passed
+# Subtest: ZCQF002 receipt admissionはFとUを分離し、root escapeと環境差を拒否する
+ok 45 - ZCQF002 receipt admissionはFとUを分離し、root escapeと環境差を拒否する
+  ---
+  duration_ms: 125.869417
+  ...
+# proof-item:ZCQF002-01:passed
+# proof-item:ZCQF002-02:passed
+# proof-item:ZCQF002-03:passed
+# proof-item:ZCQF002-04:passed
+# proof-item:ZCQF002-05:passed
+# proof-item:ZCQF002-06:passed
+# proof-item:ZCQF002-07:passed
+# proof-item:ZCQF002-08:passed
+# proof-item:ZCQF002-09:passed
+# proof-item:ZCQF002-10:passed
+# proof-item:ZCQF002-11:passed
+# proof-item:ZCQF002-12:passed
+# proof-item:ZCQF002-13:passed
+# proof-item:ZCQF002-14:passed
+# proof-item:ZCQF002-15:passed
+# proof-item:ZCQF002-16:passed
+# Subtest: ZCQ042 proof job・束縛・pure入口・module表面
+ok 46 - ZCQ042 proof job・束縛・pure入口・module表面
+  ---
+  duration_ms: 812.220125
+  ...
+# proof-item:ZCQ042-P-03-f29219bd499b:passed
+# proof-item:ZCQ042-P-04-d92c6a81b2ff:passed
+# proof-item:ZCQ042-P-05-dc84adb7bfaf:passed
+# proof-item:ZCQ042-P-06-78c52b949ee0:passed
+# proof-item:ZCQ042-P-07-5181199399d5:passed
+# proof-item:ZCQ042-P-08-247d5206d24d:passed
+# proof-item:ZCQ042-P-09-381724dd0fa4:passed
+# proof-item:ZCQ042-P-10-0bde67fc7419:passed
+# proof-item:ZCQ042-P-11-df9970e4176d:passed
+# proof-item:ZCQ042-P-12-315b217225d2:passed
+# proof-item:ZCQ042-P-13-fc204969f2b7:passed
+# proof-item:ZCQ042-P-14-14df1b3d37a7:passed
+# proof-item:ZCQ042-P-15-e9baa03532cd:passed
+# proof-item:ZCQ042-P-16-2d2e319adc2c:passed
+# proof-item:ZCQ042-P-17-400fa8dcc670:passed
+# proof-item:ZCQ042-P-18-71f10c37e770:passed
+# proof-item:ZCQ042-P-19-2473d157fd09:passed
+# proof-item:ZCQ042-P-20-14678dfea8f4:passed
+# proof-item:ZCQ042-V1-01-d94da34aa35f:passed
+# proof-item:ZCQ042-V1-02-766e5c4ccb87:passed
+# proof-item:ZCQ042-V1-03-70cdcfaf8987:passed
+# proof-item:ZCQ042-V1-04-f66e4a8bde4e:passed
+# proof-item:ZCQ042-V1-05-9ebb9ff3d6ab:passed
+# proof-item:ZCQ042-V1-06-d1eaa5e0071f:passed
+# proof-item:ZCQ042-V1-07-aab8e0b1a8ff:passed
+# proof-item:ZCQ042-V1-08-07a6949220a4:passed
+# proof-item:ZCQ042-V1-09-a933f5e3fda5:passed
+# proof-item:ZCQ042-V2-02-602b8756b621:passed
+# proof-item:ZCQ042-V2-03-1b072252bc9f:passed
+# proof-item:ZCQ042-V2-04-2b6717af5676:passed
+# proof-item:ZCQ042-V3-02-0ea4c2477dd6:passed
+# proof-item:ZCQ042-V3-03-4fa5a9354723:passed
+# proof-item:ZCQ042-V3-04-ba3e28859afa:passed
+# proof-item:ZCQ042-V3-05-d73b9c892502:passed
+# proof-item:V15-ZCQ042-01:passed
+# proof-item:V15-ZCQ042-02:passed
+# Subtest: ZCQ043 合成selectionから実renderer・QCまでの正常経路
+ok 47 - ZCQ043 合成selectionから実renderer・QCまでの正常経路
+  ---
+  duration_ms: 320180.321667
+  ...
+# proof-item:ZCQ043-P-01-c48b6bb4be4f:passed
+# proof-item:ZCQ043-P-02-8716571ecd21:passed
+# proof-item:ZCQ043-P-03-b800cb838f84:passed
+# proof-item:ZCQ043-P-04-331e15ec2419:passed
+# proof-item:ZCQ043-P-05-9b2faa9415af:passed
+# proof-item:ZCQ043-P-06-11dd1deeb815:passed
+# proof-item:ZCQ043-P-07-ce94a8b1ebba:passed
+# proof-item:ZCQ043-P-08-1b95777dd22c:passed
+# proof-item:ZCQ043-V1-01-27f1f6fbb6fe:passed
+# proof-item:ZCQ043-V1-02-e3aa41d51834:passed
+# proof-item:ZCQ043-V2-01-5e0e6c35df91:passed
+# proof-item:ZCQ043-V2-02-4536da43bec4:passed
+# Subtest: ZCQ044 失敗境界・公開排他・証拠保持
+ok 48 - ZCQ044 失敗境界・公開排他・証拠保持
+  ---
+  duration_ms: 3347973.110208
+  ...
+# proof-item:V9-ZCQ044-01:passed
+# proof-item:V9-ZCQ044-02:passed
+# proof-item:V9-ZCQ044-03:passed
+# proof-item:V9-ZCQ044-04:passed
+# proof-item:V9-ZCQ044-05:passed
+# proof-item:V9-ZCQ044-06:passed
+# proof-item:V9-ZCQ044-07:passed
+# proof-item:V9-ZCQ044-08:passed
+# proof-item:V9-ZCQ044-09:passed
+# proof-item:V9-ZCQ044-10:passed
+# proof-item:V9-ZCQ044-11:passed
+# proof-item:V9-ZCQ044-12:passed
+# proof-item:V9-ZCQ044-13:passed
+# proof-item:V9-ZCQ044-14:passed
+# proof-item:V9-ZCQ044-15:passed
+# proof-item:V9-ZCQ044-16:passed
+# proof-item:V9-ZCQ044-17:passed
+# proof-item:V9-ZCQ044-18:passed
+# proof-item:V9-ZCQ044-19:passed
+# proof-item:V9-ZCQ044-20:passed
+# proof-item:V9-ZCQ044-21:passed
+# proof-item:V9-ZCQ044-22:passed
+# proof-item:V9-ZCQ044-23:passed
+# proof-item:V9-ZCQ044-24:passed
+# proof-item:V9-ZCQ044-25:passed
+# proof-item:V9-ZCQ044-26:passed
+# proof-item:V9-ZCQ044-27:passed
+# proof-item:V9-ZCQ044-28:passed
+# proof-item:V9-ZCQ044-29:passed
+# proof-item:V9-ZCQ044-30:passed
+# proof-item:V9-ZCQ044-31:passed
+# proof-item:V9-ZCQ044-32:passed
+# proof-item:V9-ZCQ044-33:passed
+# proof-item:V9-ZCQ044-34:passed
+# proof-item:V9-ZCQ044-35:passed
+1..48
+# tests 48
+# suites 0
+# pass 48
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3669651.877042

@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-fatal-observation-v001",
+  "status": "fatal",
+  "proofJobBinding": {
+    "schemaVersion": "presentation-zevo-caption-quality-v002-proof-job-v001",
+    "path": "evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0004/f/negative/zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0004-render-plan-reread-mismatch.json",
+    "fileSha256": "4f03de8284282acc6621c7e9b611694395986802ce950d049db8eded0fa3fac8",
+    "canonicalSha256": "17eb8260fde29300a5c3533c352db7fe11cda1a28fe91ce1df3c7cb0c0117198"
+  },
+  "stage": "render-plan",
+  "innerCode": "PUBLICATION_FAILED",
+  "targetFile": {
+    "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0004/render-plan-reread-mismatch/voice-013/horizontal-formal/render-plan-v003.json",
+    "fileSha256": "e65c115ceba5c3efc32843b5d2cf36f8f41e9ad3012e9c3fc89f7f9ed59983e1"
+  },
+  "toolExitCode": null,
+  "checkpoints": [
+    {
+      "stage": "input-read",
+      "event": "entered",
+      "caseId": null,
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "input-read",
+      "event": "completed",
+      "caseId": null,
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "output-request",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "output-request",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0004/render-plan-reread-mismatch/voice-013/horizontal-formal/output-request-v001.json",
+        "fileSha256": "2c31467549ff9567c4c27c95c974f572c168f74f9093a13c698fdc69209045d4"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "page-line-planner",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "page-line-planner",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0004/render-plan-reread-mismatch/voice-013/horizontal-formal/page-line-plan-v003.json",
+        "fileSha256": "44add7765457e1086f94bf198e8b5c011862939f14e103d54922b655a1f401d5"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "render-plan",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    }
+  ],
+  "rendererWorkEvidence": [],
+  "retentionPaths": []
+}

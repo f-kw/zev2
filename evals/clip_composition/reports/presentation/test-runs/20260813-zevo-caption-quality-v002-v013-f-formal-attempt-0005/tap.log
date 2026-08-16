@@ -1,0 +1,179 @@
+TAP version 13
+# Subtest: ZCQ042 proof job・束縛・pure入口・module表面
+not ok 1 - ZCQ042 proof job・束縛・pure入口・module表面
+  ---
+  duration_ms: 1859.735125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:647:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+      {
+        action: 'proof-run',
+        attemptId: 'attempt-0005',
+        innerObservation: {
+    +     checkpoint: 'dependency-initialization',
+    +     operation: 'import-runtime-dependencies',
+    +     osCode: null,
+    +     targetPath: 'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs'
+    -     checkpoint: 'staging-root-acquisition',
+    -     operation: 'create-staging-root',
+    -     osCode: 'ENOENT',
+    -     targetPath: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0005.staging'
+        },
+    ...
+        stage: 'input-reread',
+        status: 'fatal'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    schemaVersion: 'presentation-zevo-caption-local-cli-result-v001'
+    status: 'fatal'
+    action: 'proof-run'
+    jobId: 'zcq-caption-quality-proof-f-gate-attempt-0005'
+    attemptId: 'attempt-0005'
+    outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0005'
+    stage: 'input-reread'
+    primaryCode: 'CUE_PROOF_EXECUTION_FAILED'
+    innerObservation:
+      checkpoint: 'staging-root-acquisition'
+      operation: 'create-staging-root'
+      targetPath: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0005.staging'
+      osCode: 'ENOENT'
+  actual:
+    schemaVersion: 'presentation-zevo-caption-local-cli-result-v001'
+    status: 'fatal'
+    action: 'proof-run'
+    jobId: 'zcq-caption-quality-proof-f-gate-attempt-0005'
+    attemptId: 'attempt-0005'
+    outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0005'
+    stage: 'input-reread'
+    primaryCode: 'CUE_PROOF_EXECUTION_FAILED'
+    innerObservation:
+      checkpoint: 'dependency-initialization'
+      operation: 'import-runtime-dependencies'
+      targetPath: 'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs'
+      osCode: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    assertCliWithInnerDiagnostic (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:336:12)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:731:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# inner-observation:{"checkpoint":"dependency-initialization","operation":"import-runtime-dependencies","targetPath":"evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs","osCode":null}
+# Subtest: ZCQ043 合成selectionから実renderer・QCまでの正常経路
+not ok 2 - ZCQ043 合成selectionから実renderer・QCまでの正常経路
+  ---
+  duration_ms: 120.955708
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:835:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      {
+        action: 'proof-run',
+        attemptId: 'attempt-0005',
+    +   innerObservation: {
+    +     checkpoint: 'dependency-initialization',
+    +     operation: 'import-runtime-dependencies',
+    +     osCode: null,
+    +     targetPath: 'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs'
+    +   },
+    +   jobId: 'zcq-caption-quality-proof-f-gate-attempt-0005',
+    +   outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0005',
+    +   primaryCode: 'CUE_PROOF_EXECUTION_FAILED',
+    +   schemaVersion: 'presentation-zevo-caption-local-cli-result-v001',
+    +   stage: 'input-reread',
+    +   status: 'fatal'
+    -   innerObservation: null,
+    -   jobId: 'zcq-caption-quality-proof-f-gate-attempt-0005',
+    -   outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0005',
+    -   primaryCode: null,
+    -   schemaVersion: 'presentation-zevo-caption-local-cli-result-v001',
+    -   stage: 'completed',
+    -   status: 'passed'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    schemaVersion: 'presentation-zevo-caption-local-cli-result-v001'
+    status: 'passed'
+    action: 'proof-run'
+    jobId: 'zcq-caption-quality-proof-f-gate-attempt-0005'
+    attemptId: 'attempt-0005'
+    outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0005'
+    stage: 'completed'
+    primaryCode: ~
+    innerObservation: ~
+  actual:
+    schemaVersion: 'presentation-zevo-caption-local-cli-result-v001'
+    status: 'fatal'
+    action: 'proof-run'
+    jobId: 'zcq-caption-quality-proof-f-gate-attempt-0005'
+    attemptId: 'attempt-0005'
+    outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0005'
+    stage: 'input-reread'
+    primaryCode: 'CUE_PROOF_EXECUTION_FAILED'
+    innerObservation:
+      checkpoint: 'dependency-initialization'
+      operation: 'import-runtime-dependencies'
+      targetPath: 'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs'
+      osCode: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    assertCliWithInnerDiagnostic (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:336:12)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:841:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# inner-observation:{"checkpoint":"dependency-initialization","operation":"import-runtime-dependencies","targetPath":"evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs","osCode":null}
+# Subtest: ZCQ044 失敗境界・公開排他・証拠保持
+not ok 3 - ZCQ044 失敗境界・公開排他・証拠保持
+  ---
+  duration_ms: 344.002792
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:870:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      {
+    +   primaryCode: 'CUE_PROOF_EXECUTION_FAILED',
+    +   stage: 'input-reread',
+    +   status: 'fatal'
+    -   primaryCode: 'CUE_PROOF_PUBLICATION_FAILED',
+    -   stage: 'root-publication',
+    -   status: 'rejected'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    status: 'rejected'
+    stage: 'root-publication'
+    primaryCode: 'CUE_PROOF_PUBLICATION_FAILED'
+  actual:
+    status: 'fatal'
+    stage: 'input-reread'
+    primaryCode: 'CUE_PROOF_EXECUTION_FAILED'
+  operator: 'deepStrictEqual'
+  stack: |-
+    assertCliWithInnerDiagnostic (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:336:12)
+    expectCli (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:878:61)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:907:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# inner-observation:{"checkpoint":"dependency-initialization","operation":"import-runtime-dependencies","targetPath":"evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs","osCode":null}
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2912.195417

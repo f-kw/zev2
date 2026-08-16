@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v021-selection-rejection-diagnostic-v001",
+  "observedOn": "2026-08-16",
+  "sourceBindings": {
+    "sourcePackage": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v002/source-package-v001.json",
+      "fileSha256": "505e0af866f9c9014ac134723fa80b54281860e834fa706ade6a5894f4d4bf4d"
+    },
+    "providerEnvelope": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260816-v005/attempt-0001/provider-response-envelope.json",
+      "fileSha256": "b2565b646f32bd364ca2acba51b21352c3b731cfb243c26a9575dd5af33886ab"
+    },
+    "selectionReport": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-selections/a-v002-caption-quality-first-api-selection-20260816-v001-attempt-0001/selection-report-v001.json",
+      "fileSha256": "1bfbd457842e2451d5b5b1ef20a8c185d2f02d68dd4f09f87ca05638b0379b7e"
+    }
+  },
+  "providerResult": {
+    "status": "complete",
+    "captionCount": 3,
+    "cueCounts": [
+      {
+        "captionId": "input-caption-000001",
+        "cueCount": 12,
+        "lineCount": 13
+      },
+      {
+        "captionId": "input-caption-000002",
+        "cueCount": 9,
+        "lineCount": 9
+      },
+      {
+        "captionId": "input-caption-000003",
+        "cueCount": 7,
+        "lineCount": 8
+      }
+    ]
+  },
+  "strictAdmission": {
+    "status": "rejected",
+    "checks": {
+      "sourceBinding": "passed",
+      "providerEnvelope": "passed",
+      "responseSchema": "passed",
+      "captionSet": "passed",
+      "cueBoundaryResolution": "passed",
+      "cueOrder": "passed",
+      "lineBoundaryResolution": "passed",
+      "lineOrder": "passed",
+      "atomClosure": "passed",
+      "logicalWidth": "passed",
+      "deterministicReconstruction": "passed",
+      "physicalLayout": "failed",
+      "timelineMapping": "blocked"
+    },
+    "violations": [
+      {
+        "code": "CUE_PHYSICAL_LAYOUT_INVALID",
+        "path": "/response/captions/2/cues/1",
+        "relatedIds": [
+          "input-caption-000003",
+          "voice-190"
+        ]
+      }
+    ],
+    "failedProjectionClass": "selected-edge-not-found"
+  },
+  "failedCue": {
+    "captionId": "input-caption-000003",
+    "cueIndex": 1,
+    "cueOrdinal": 2,
+    "cueEndBoundaryId": "display-boundary-000003-000038",
+    "lineEndBoundaryIds": [
+      "display-boundary-000003-000038"
+    ],
+    "text": "てめぇはしゃぎやがってじゃ報告しない",
+    "logicalWidth": 36,
+    "lines": [
+      {
+        "lineEndBoundaryId": "display-boundary-000003-000038",
+        "text": "てめぇはしゃぎやがってじゃ報告しない",
+        "logicalWidth": 36
+      }
+    ],
+    "maximumLogicalWidthPerLine": 36,
+    "providerVisibleLogicalWidthSatisfied": true,
+    "physicalPageGraphExactEdgeFound": false
+  },
+  "knownBoundaryNonReselection": {
+    "uniqueBoundaryCount": 6,
+    "passedCount": 6,
+    "rows": [
+      {
+        "issueId": "old-break-004",
+        "captionId": "input-caption-000001",
+        "boundaryId": "display-boundary-000001-000020",
+        "splitText": "マリ/ン",
+        "cueEndSelected": false,
+        "lineEndSelected": false,
+        "passed": true
+      },
+      {
+        "issueId": "old-break-004",
+        "captionId": "input-caption-000001",
+        "boundaryId": "display-boundary-000001-000032",
+        "splitText": "マリ/ン",
+        "cueEndSelected": false,
+        "lineEndSelected": false,
+        "passed": true
+      },
+      {
+        "issueId": "old-break-001",
+        "captionId": "input-caption-000002",
+        "boundaryId": "display-boundary-000002-000042",
+        "splitText": "ス/イちゃん",
+        "cueEndSelected": false,
+        "lineEndSelected": false,
+        "passed": true
+      },
+      {
+        "issueId": "old-break-002",
+        "captionId": "input-caption-000003",
+        "boundaryId": "display-boundary-000003-000032",
+        "splitText": "じ/ゃ報告",
+        "cueEndSelected": false,
+        "lineEndSelected": false,
+        "passed": true
+      },
+      {
+        "issueId": "old-break-003",
+        "captionId": "input-caption-000003",
+        "boundaryId": "display-boundary-000003-000015",
+        "splitText": "言ってほし/いみたいな",
+        "cueEndSelected": false,
+        "lineEndSelected": false,
+        "passed": true
+      },
+      {
+        "issueId": "old-break-005",
+        "captionId": "input-caption-000003",
+        "boundaryId": "display-boundary-000003-000062",
+        "splitText": "サク/サク",
+        "cueEndSelected": false,
+        "lineEndSelected": false,
+        "passed": true
+      }
+    ]
+  },
+  "diagnosis": {
+    "production": "strict-admission-correctly-rejected-no-matching-physical-page-edge",
+    "fixtureOrExecutionSetup": "no-defect-observed-all-bindings-and-pre-physical-checks-passed",
+    "contract": "human-contract-judgment-required-provider-visible-logical-width-allowed-one-line-while-physical-layout-rejected-it",
+    "recurrence": "same-cue-and-same-logical-width-as-D2-diagnostic-before-v021"
+  },
+  "downstream": {
+    "selectionArtifactPublished": false,
+    "pageLinePlanBuilt": false,
+    "renderPlanBuilt": false,
+    "horizontalVideosRendered": 0,
+    "qcRun": false,
+    "reviewPageBuilt": false
+  }
+}

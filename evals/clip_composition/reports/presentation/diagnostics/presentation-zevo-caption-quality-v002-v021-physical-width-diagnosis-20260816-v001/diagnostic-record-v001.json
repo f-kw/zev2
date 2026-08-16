@@ -1,0 +1,1441 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v021-physical-width-diagnosis-v001",
+  "observedOn": "2026-08-16",
+  "mode": "read-only-saved-input-and-existing-production-pure-entries",
+  "bindings": {
+    "sourcePackage": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v002/source-package-v001.json",
+      "fileSha256": "505e0af866f9c9014ac134723fa80b54281860e834fa706ade6a5894f4d4bf4d"
+    },
+    "providerEnvelope": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260816-v005/attempt-0001/provider-response-envelope.json",
+      "fileSha256": "b2565b646f32bd364ca2acba51b21352c3b731cfb243c26a9575dd5af33886ab"
+    },
+    "selectionReport": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-selections/a-v002-caption-quality-first-api-selection-20260816-v001-attempt-0001/selection-report-v001.json",
+      "fileSha256": "1bfbd457842e2451d5b5b1ef20a8c185d2f02d68dd4f09f87ca05638b0379b7e"
+    }
+  },
+  "case": {
+    "caseId": "voice-190",
+    "inputCaptionId": "input-caption-000003",
+    "format": "normal-landscape",
+    "presetId": "normal-landscape-readable-pop-v001",
+    "logicalWidthLimit": 36,
+    "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2",
+    "canvas": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "safeAreaPx": {
+        "top": 40,
+        "right": 80,
+        "bottom": 40,
+        "left": 80
+      }
+    }
+  },
+  "failedCue": {
+    "cueOrdinal": 2,
+    "text": "てめぇはしゃぎやがってじゃ報告しない",
+    "cueEndBoundaryId": "display-boundary-000003-000038",
+    "lineEndBoundaryIds": [
+      "display-boundary-000003-000038"
+    ],
+    "logicalWidth": 36,
+    "lineLogicalWidths": [
+      36
+    ],
+    "logicalBreakdown": [
+      {
+        "ordinal": 1,
+        "character": "て",
+        "codePoint": "U+3066",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 2,
+        "character": "め",
+        "codePoint": "U+3081",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 3,
+        "character": "ぇ",
+        "codePoint": "U+3047",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 4,
+        "character": "は",
+        "codePoint": "U+306F",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 5,
+        "character": "し",
+        "codePoint": "U+3057",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 6,
+        "character": "ゃ",
+        "codePoint": "U+3083",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 7,
+        "character": "ぎ",
+        "codePoint": "U+304E",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 8,
+        "character": "や",
+        "codePoint": "U+3084",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 9,
+        "character": "が",
+        "codePoint": "U+304C",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 10,
+        "character": "っ",
+        "codePoint": "U+3063",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 11,
+        "character": "て",
+        "codePoint": "U+3066",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 12,
+        "character": "じ",
+        "codePoint": "U+3058",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 13,
+        "character": "ゃ",
+        "codePoint": "U+3083",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 14,
+        "character": "報",
+        "codePoint": "U+5831",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 15,
+        "character": "告",
+        "codePoint": "U+544A",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 16,
+        "character": "し",
+        "codePoint": "U+3057",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 17,
+        "character": "な",
+        "codePoint": "U+306A",
+        "logicalWidth": 2
+      },
+      {
+        "ordinal": 18,
+        "character": "い",
+        "codePoint": "U+3044",
+        "logicalWidth": 2
+      }
+    ],
+    "publicInspection": {
+      "status": "rejected",
+      "violations": [
+        {
+          "layerId": "diagnostic-page-000003-000020-000038",
+          "code": "LINE_BOX_OUTSIDE_SAFE_AREA",
+          "details": {
+            "lineIndex": 0,
+            "rect": {
+              "left": 81,
+              "top": 833.2,
+              "right": 1849,
+              "bottom": 969.2
+            },
+            "safeAreaPx": {
+              "top": 40,
+              "right": 80,
+              "bottom": 40,
+              "left": 80
+            }
+          }
+        }
+      ]
+    },
+    "measurementContext": {
+      "documentAvailable": false,
+      "widthSource": "production-estimated-width-fallback",
+      "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+      "fontSizePx": 96,
+      "fontWeight": 800,
+      "borderWidthPx": 8,
+      "borderStrokeWidthPx": 16,
+      "glowWidthPx": 12,
+      "glowStrokeWidthPx": 40,
+      "strokeExtentPx": 20,
+      "safePaddingPx": 4,
+      "measuredLineWidthsPx": [
+        1728
+      ],
+      "svgWidthPx": 1776,
+      "wrapper": {
+        "top": 829.2,
+        "left": 77,
+        "width": 1776,
+        "height": 164,
+        "renderScale": 1,
+        "displayWidth": 1776,
+        "displayHeight": 164
+      },
+      "lineRects": [
+        {
+          "left": 81,
+          "top": 833.2,
+          "right": 1849,
+          "bottom": 969.2
+        }
+      ],
+      "safeBounds": {
+        "left": 80,
+        "top": 40,
+        "right": 1840,
+        "bottom": 1040,
+        "width": 1760,
+        "height": 1000
+      },
+      "horizontalOverflowPx": [
+        {
+          "left": 0,
+          "right": 9,
+          "total": 9
+        }
+      ]
+    }
+  },
+  "selectedCueInspections": [
+    {
+      "cueOrdinal": 1,
+      "text": "僕のことをコロさんに言ってほしいみたいな",
+      "cueEndBoundaryId": "display-boundary-000003-000020",
+      "lineEndBoundaryIds": [
+        "display-boundary-000003-000010",
+        "display-boundary-000003-000020"
+      ],
+      "logicalWidth": 40,
+      "lineLogicalWidths": [
+        20,
+        20
+      ],
+      "logicalBreakdown": [
+        {
+          "ordinal": 1,
+          "character": "僕",
+          "codePoint": "U+50D5",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 2,
+          "character": "の",
+          "codePoint": "U+306E",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 3,
+          "character": "こ",
+          "codePoint": "U+3053",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 4,
+          "character": "と",
+          "codePoint": "U+3068",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 5,
+          "character": "を",
+          "codePoint": "U+3092",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 6,
+          "character": "コ",
+          "codePoint": "U+30B3",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 7,
+          "character": "ロ",
+          "codePoint": "U+30ED",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 8,
+          "character": "さ",
+          "codePoint": "U+3055",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 9,
+          "character": "ん",
+          "codePoint": "U+3093",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 10,
+          "character": "に",
+          "codePoint": "U+306B",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 11,
+          "character": "言",
+          "codePoint": "U+8A00",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 12,
+          "character": "っ",
+          "codePoint": "U+3063",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 13,
+          "character": "て",
+          "codePoint": "U+3066",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 14,
+          "character": "ほ",
+          "codePoint": "U+307B",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 15,
+          "character": "し",
+          "codePoint": "U+3057",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 16,
+          "character": "い",
+          "codePoint": "U+3044",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 17,
+          "character": "み",
+          "codePoint": "U+307F",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 18,
+          "character": "た",
+          "codePoint": "U+305F",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 19,
+          "character": "い",
+          "codePoint": "U+3044",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 20,
+          "character": "な",
+          "codePoint": "U+306A",
+          "logicalWidth": 2
+        }
+      ],
+      "publicInspection": {
+        "status": "passed",
+        "violations": [],
+        "inspection": {
+          "status": "passed",
+          "items": [
+            {
+              "layerId": "diagnostic-page-000003-000000-000010-000020",
+              "stateId": "caption-core-v001",
+              "resolvedText": "僕のことをコロさんに\n言ってほしいみたいな",
+              "lineCount": 2,
+              "lineRects": [
+                {
+                  "left": 460,
+                  "top": 689.2,
+                  "right": 1460,
+                  "bottom": 825.2
+                },
+                {
+                  "left": 460,
+                  "top": 833.2,
+                  "right": 1460,
+                  "bottom": 969.2
+                }
+              ],
+              "wrapper": {
+                "top": 685.2,
+                "left": 456,
+                "width": 1008,
+                "height": 308,
+                "renderScale": 1,
+                "displayWidth": 1008,
+                "displayHeight": 308
+              },
+              "fontSizePx": 96,
+              "lineHeightPx": 144
+            }
+          ],
+          "violations": []
+        }
+      },
+      "measurementContext": {
+        "documentAvailable": false,
+        "widthSource": "production-estimated-width-fallback",
+        "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+        "fontSizePx": 96,
+        "fontWeight": 800,
+        "borderWidthPx": 8,
+        "borderStrokeWidthPx": 16,
+        "glowWidthPx": 12,
+        "glowStrokeWidthPx": 40,
+        "strokeExtentPx": 20,
+        "safePaddingPx": 4,
+        "measuredLineWidthsPx": [
+          960,
+          960
+        ],
+        "svgWidthPx": 1008,
+        "wrapper": {
+          "top": 685.2,
+          "left": 456,
+          "width": 1008,
+          "height": 308,
+          "renderScale": 1,
+          "displayWidth": 1008,
+          "displayHeight": 308
+        },
+        "lineRects": [
+          {
+            "left": 460,
+            "top": 689.2,
+            "right": 1460,
+            "bottom": 825.2
+          },
+          {
+            "left": 460,
+            "top": 833.2,
+            "right": 1460,
+            "bottom": 969.2
+          }
+        ],
+        "safeBounds": {
+          "left": 80,
+          "top": 40,
+          "right": 1840,
+          "bottom": 1040,
+          "width": 1760,
+          "height": 1000
+        },
+        "horizontalOverflowPx": [
+          {
+            "left": 0,
+            "right": 0,
+            "total": 0
+          },
+          {
+            "left": 0,
+            "right": 0,
+            "total": 0
+          }
+        ]
+      }
+    },
+    {
+      "cueOrdinal": 2,
+      "text": "てめぇはしゃぎやがってじゃ報告しない",
+      "cueEndBoundaryId": "display-boundary-000003-000038",
+      "lineEndBoundaryIds": [
+        "display-boundary-000003-000038"
+      ],
+      "logicalWidth": 36,
+      "lineLogicalWidths": [
+        36
+      ],
+      "logicalBreakdown": [
+        {
+          "ordinal": 1,
+          "character": "て",
+          "codePoint": "U+3066",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 2,
+          "character": "め",
+          "codePoint": "U+3081",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 3,
+          "character": "ぇ",
+          "codePoint": "U+3047",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 4,
+          "character": "は",
+          "codePoint": "U+306F",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 5,
+          "character": "し",
+          "codePoint": "U+3057",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 6,
+          "character": "ゃ",
+          "codePoint": "U+3083",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 7,
+          "character": "ぎ",
+          "codePoint": "U+304E",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 8,
+          "character": "や",
+          "codePoint": "U+3084",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 9,
+          "character": "が",
+          "codePoint": "U+304C",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 10,
+          "character": "っ",
+          "codePoint": "U+3063",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 11,
+          "character": "て",
+          "codePoint": "U+3066",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 12,
+          "character": "じ",
+          "codePoint": "U+3058",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 13,
+          "character": "ゃ",
+          "codePoint": "U+3083",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 14,
+          "character": "報",
+          "codePoint": "U+5831",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 15,
+          "character": "告",
+          "codePoint": "U+544A",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 16,
+          "character": "し",
+          "codePoint": "U+3057",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 17,
+          "character": "な",
+          "codePoint": "U+306A",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 18,
+          "character": "い",
+          "codePoint": "U+3044",
+          "logicalWidth": 2
+        }
+      ],
+      "publicInspection": {
+        "status": "rejected",
+        "violations": [
+          {
+            "layerId": "diagnostic-page-000003-000020-000038",
+            "code": "LINE_BOX_OUTSIDE_SAFE_AREA",
+            "details": {
+              "lineIndex": 0,
+              "rect": {
+                "left": 81,
+                "top": 833.2,
+                "right": 1849,
+                "bottom": 969.2
+              },
+              "safeAreaPx": {
+                "top": 40,
+                "right": 80,
+                "bottom": 40,
+                "left": 80
+              }
+            }
+          }
+        ]
+      },
+      "measurementContext": {
+        "documentAvailable": false,
+        "widthSource": "production-estimated-width-fallback",
+        "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+        "fontSizePx": 96,
+        "fontWeight": 800,
+        "borderWidthPx": 8,
+        "borderStrokeWidthPx": 16,
+        "glowWidthPx": 12,
+        "glowStrokeWidthPx": 40,
+        "strokeExtentPx": 20,
+        "safePaddingPx": 4,
+        "measuredLineWidthsPx": [
+          1728
+        ],
+        "svgWidthPx": 1776,
+        "wrapper": {
+          "top": 829.2,
+          "left": 77,
+          "width": 1776,
+          "height": 164,
+          "renderScale": 1,
+          "displayWidth": 1776,
+          "displayHeight": 164
+        },
+        "lineRects": [
+          {
+            "left": 81,
+            "top": 833.2,
+            "right": 1849,
+            "bottom": 969.2
+          }
+        ],
+        "safeBounds": {
+          "left": 80,
+          "top": 40,
+          "right": 1840,
+          "bottom": 1040,
+          "width": 1760,
+          "height": 1000
+        },
+        "horizontalOverflowPx": [
+          {
+            "left": 0,
+            "right": 9,
+            "total": 9
+          }
+        ]
+      }
+    },
+    {
+      "cueOrdinal": 3,
+      "text": "お前を喜ばしたりしない",
+      "cueEndBoundaryId": "display-boundary-000003-000049",
+      "lineEndBoundaryIds": [
+        "display-boundary-000003-000049"
+      ],
+      "logicalWidth": 22,
+      "lineLogicalWidths": [
+        22
+      ],
+      "logicalBreakdown": [
+        {
+          "ordinal": 1,
+          "character": "お",
+          "codePoint": "U+304A",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 2,
+          "character": "前",
+          "codePoint": "U+524D",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 3,
+          "character": "を",
+          "codePoint": "U+3092",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 4,
+          "character": "喜",
+          "codePoint": "U+559C",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 5,
+          "character": "ば",
+          "codePoint": "U+3070",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 6,
+          "character": "し",
+          "codePoint": "U+3057",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 7,
+          "character": "た",
+          "codePoint": "U+305F",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 8,
+          "character": "り",
+          "codePoint": "U+308A",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 9,
+          "character": "し",
+          "codePoint": "U+3057",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 10,
+          "character": "な",
+          "codePoint": "U+306A",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 11,
+          "character": "い",
+          "codePoint": "U+3044",
+          "logicalWidth": 2
+        }
+      ],
+      "publicInspection": {
+        "status": "passed",
+        "violations": [],
+        "inspection": {
+          "status": "passed",
+          "items": [
+            {
+              "layerId": "diagnostic-page-000003-000038-000049",
+              "stateId": "caption-core-v001",
+              "resolvedText": "お前を喜ばしたりしない",
+              "lineCount": 1,
+              "lineRects": [
+                {
+                  "left": 412,
+                  "top": 833.2,
+                  "right": 1508,
+                  "bottom": 969.2
+                }
+              ],
+              "wrapper": {
+                "top": 829.2,
+                "left": 408,
+                "width": 1104,
+                "height": 164,
+                "renderScale": 1,
+                "displayWidth": 1104,
+                "displayHeight": 164
+              },
+              "fontSizePx": 96,
+              "lineHeightPx": 144
+            }
+          ],
+          "violations": []
+        }
+      },
+      "measurementContext": {
+        "documentAvailable": false,
+        "widthSource": "production-estimated-width-fallback",
+        "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+        "fontSizePx": 96,
+        "fontWeight": 800,
+        "borderWidthPx": 8,
+        "borderStrokeWidthPx": 16,
+        "glowWidthPx": 12,
+        "glowStrokeWidthPx": 40,
+        "strokeExtentPx": 20,
+        "safePaddingPx": 4,
+        "measuredLineWidthsPx": [
+          1056
+        ],
+        "svgWidthPx": 1104,
+        "wrapper": {
+          "top": 829.2,
+          "left": 408,
+          "width": 1104,
+          "height": 164,
+          "renderScale": 1,
+          "displayWidth": 1104,
+          "displayHeight": 164
+        },
+        "lineRects": [
+          {
+            "left": 412,
+            "top": 833.2,
+            "right": 1508,
+            "bottom": 969.2
+          }
+        ],
+        "safeBounds": {
+          "left": 80,
+          "top": 40,
+          "right": 1840,
+          "bottom": 1040,
+          "width": 1760,
+          "height": 1000
+        },
+        "horizontalOverflowPx": [
+          {
+            "left": 0,
+            "right": 0,
+            "total": 0
+          }
+        ]
+      }
+    },
+    {
+      "cueOrdinal": 4,
+      "text": "一旦さサクサクやろうや",
+      "cueEndBoundaryId": "display-boundary-000003-000060",
+      "lineEndBoundaryIds": [
+        "display-boundary-000003-000060"
+      ],
+      "logicalWidth": 22,
+      "lineLogicalWidths": [
+        22
+      ],
+      "logicalBreakdown": [
+        {
+          "ordinal": 1,
+          "character": "一",
+          "codePoint": "U+4E00",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 2,
+          "character": "旦",
+          "codePoint": "U+65E6",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 3,
+          "character": "さ",
+          "codePoint": "U+3055",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 4,
+          "character": "サ",
+          "codePoint": "U+30B5",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 5,
+          "character": "ク",
+          "codePoint": "U+30AF",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 6,
+          "character": "サ",
+          "codePoint": "U+30B5",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 7,
+          "character": "ク",
+          "codePoint": "U+30AF",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 8,
+          "character": "や",
+          "codePoint": "U+3084",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 9,
+          "character": "ろ",
+          "codePoint": "U+308D",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 10,
+          "character": "う",
+          "codePoint": "U+3046",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 11,
+          "character": "や",
+          "codePoint": "U+3084",
+          "logicalWidth": 2
+        }
+      ],
+      "publicInspection": {
+        "status": "passed",
+        "violations": [],
+        "inspection": {
+          "status": "passed",
+          "items": [
+            {
+              "layerId": "diagnostic-page-000003-000049-000060",
+              "stateId": "caption-core-v001",
+              "resolvedText": "一旦さサクサクやろうや",
+              "lineCount": 1,
+              "lineRects": [
+                {
+                  "left": 412,
+                  "top": 833.2,
+                  "right": 1508,
+                  "bottom": 969.2
+                }
+              ],
+              "wrapper": {
+                "top": 829.2,
+                "left": 408,
+                "width": 1104,
+                "height": 164,
+                "renderScale": 1,
+                "displayWidth": 1104,
+                "displayHeight": 164
+              },
+              "fontSizePx": 96,
+              "lineHeightPx": 144
+            }
+          ],
+          "violations": []
+        }
+      },
+      "measurementContext": {
+        "documentAvailable": false,
+        "widthSource": "production-estimated-width-fallback",
+        "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+        "fontSizePx": 96,
+        "fontWeight": 800,
+        "borderWidthPx": 8,
+        "borderStrokeWidthPx": 16,
+        "glowWidthPx": 12,
+        "glowStrokeWidthPx": 40,
+        "strokeExtentPx": 20,
+        "safePaddingPx": 4,
+        "measuredLineWidthsPx": [
+          1056
+        ],
+        "svgWidthPx": 1104,
+        "wrapper": {
+          "top": 829.2,
+          "left": 408,
+          "width": 1104,
+          "height": 164,
+          "renderScale": 1,
+          "displayWidth": 1104,
+          "displayHeight": 164
+        },
+        "lineRects": [
+          {
+            "left": 412,
+            "top": 833.2,
+            "right": 1508,
+            "bottom": 969.2
+          }
+        ],
+        "safeBounds": {
+          "left": 80,
+          "top": 40,
+          "right": 1840,
+          "bottom": 1040,
+          "width": 1760,
+          "height": 1000
+        },
+        "horizontalOverflowPx": [
+          {
+            "left": 0,
+            "right": 0,
+            "total": 0
+          }
+        ]
+      }
+    },
+    {
+      "cueOrdinal": 5,
+      "text": "サクサク",
+      "cueEndBoundaryId": "display-boundary-000003-000064",
+      "lineEndBoundaryIds": [
+        "display-boundary-000003-000064"
+      ],
+      "logicalWidth": 8,
+      "lineLogicalWidths": [
+        8
+      ],
+      "logicalBreakdown": [
+        {
+          "ordinal": 1,
+          "character": "サ",
+          "codePoint": "U+30B5",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 2,
+          "character": "ク",
+          "codePoint": "U+30AF",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 3,
+          "character": "サ",
+          "codePoint": "U+30B5",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 4,
+          "character": "ク",
+          "codePoint": "U+30AF",
+          "logicalWidth": 2
+        }
+      ],
+      "publicInspection": {
+        "status": "passed",
+        "violations": [],
+        "inspection": {
+          "status": "passed",
+          "items": [
+            {
+              "layerId": "diagnostic-page-000003-000060-000064",
+              "stateId": "caption-core-v001",
+              "resolvedText": "サクサク",
+              "lineCount": 1,
+              "lineRects": [
+                {
+                  "left": 748,
+                  "top": 833.2,
+                  "right": 1172,
+                  "bottom": 969.2
+                }
+              ],
+              "wrapper": {
+                "top": 829.2,
+                "left": 744,
+                "width": 432,
+                "height": 164,
+                "renderScale": 1,
+                "displayWidth": 432,
+                "displayHeight": 164
+              },
+              "fontSizePx": 96,
+              "lineHeightPx": 144
+            }
+          ],
+          "violations": []
+        }
+      },
+      "measurementContext": {
+        "documentAvailable": false,
+        "widthSource": "production-estimated-width-fallback",
+        "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+        "fontSizePx": 96,
+        "fontWeight": 800,
+        "borderWidthPx": 8,
+        "borderStrokeWidthPx": 16,
+        "glowWidthPx": 12,
+        "glowStrokeWidthPx": 40,
+        "strokeExtentPx": 20,
+        "safePaddingPx": 4,
+        "measuredLineWidthsPx": [
+          384
+        ],
+        "svgWidthPx": 432,
+        "wrapper": {
+          "top": 829.2,
+          "left": 744,
+          "width": 432,
+          "height": 164,
+          "renderScale": 1,
+          "displayWidth": 432,
+          "displayHeight": 164
+        },
+        "lineRects": [
+          {
+            "left": 748,
+            "top": 833.2,
+            "right": 1172,
+            "bottom": 969.2
+          }
+        ],
+        "safeBounds": {
+          "left": 80,
+          "top": 40,
+          "right": 1840,
+          "bottom": 1040,
+          "width": 1760,
+          "height": 1000
+        },
+        "horizontalOverflowPx": [
+          {
+            "left": 0,
+            "right": 0,
+            "total": 0
+          }
+        ]
+      }
+    },
+    {
+      "cueOrdinal": 6,
+      "text": "こんな序盤でさ嘘つかんから",
+      "cueEndBoundaryId": "display-boundary-000003-000077",
+      "lineEndBoundaryIds": [
+        "display-boundary-000003-000077"
+      ],
+      "logicalWidth": 26,
+      "lineLogicalWidths": [
+        26
+      ],
+      "logicalBreakdown": [
+        {
+          "ordinal": 1,
+          "character": "こ",
+          "codePoint": "U+3053",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 2,
+          "character": "ん",
+          "codePoint": "U+3093",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 3,
+          "character": "な",
+          "codePoint": "U+306A",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 4,
+          "character": "序",
+          "codePoint": "U+5E8F",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 5,
+          "character": "盤",
+          "codePoint": "U+76E4",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 6,
+          "character": "で",
+          "codePoint": "U+3067",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 7,
+          "character": "さ",
+          "codePoint": "U+3055",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 8,
+          "character": "嘘",
+          "codePoint": "U+5618",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 9,
+          "character": "つ",
+          "codePoint": "U+3064",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 10,
+          "character": "か",
+          "codePoint": "U+304B",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 11,
+          "character": "ん",
+          "codePoint": "U+3093",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 12,
+          "character": "か",
+          "codePoint": "U+304B",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 13,
+          "character": "ら",
+          "codePoint": "U+3089",
+          "logicalWidth": 2
+        }
+      ],
+      "publicInspection": {
+        "status": "passed",
+        "violations": [],
+        "inspection": {
+          "status": "passed",
+          "items": [
+            {
+              "layerId": "diagnostic-page-000003-000064-000077",
+              "stateId": "caption-core-v001",
+              "resolvedText": "こんな序盤でさ嘘つかんから",
+              "lineCount": 1,
+              "lineRects": [
+                {
+                  "left": 316,
+                  "top": 833.2,
+                  "right": 1604,
+                  "bottom": 969.2
+                }
+              ],
+              "wrapper": {
+                "top": 829.2,
+                "left": 312,
+                "width": 1296,
+                "height": 164,
+                "renderScale": 1,
+                "displayWidth": 1296,
+                "displayHeight": 164
+              },
+              "fontSizePx": 96,
+              "lineHeightPx": 144
+            }
+          ],
+          "violations": []
+        }
+      },
+      "measurementContext": {
+        "documentAvailable": false,
+        "widthSource": "production-estimated-width-fallback",
+        "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+        "fontSizePx": 96,
+        "fontWeight": 800,
+        "borderWidthPx": 8,
+        "borderStrokeWidthPx": 16,
+        "glowWidthPx": 12,
+        "glowStrokeWidthPx": 40,
+        "strokeExtentPx": 20,
+        "safePaddingPx": 4,
+        "measuredLineWidthsPx": [
+          1248
+        ],
+        "svgWidthPx": 1296,
+        "wrapper": {
+          "top": 829.2,
+          "left": 312,
+          "width": 1296,
+          "height": 164,
+          "renderScale": 1,
+          "displayWidth": 1296,
+          "displayHeight": 164
+        },
+        "lineRects": [
+          {
+            "left": 316,
+            "top": 833.2,
+            "right": 1604,
+            "bottom": 969.2
+          }
+        ],
+        "safeBounds": {
+          "left": 80,
+          "top": 40,
+          "right": 1840,
+          "bottom": 1040,
+          "width": 1760,
+          "height": 1000
+        },
+        "horizontalOverflowPx": [
+          {
+            "left": 0,
+            "right": 0,
+            "total": 0
+          }
+        ]
+      }
+    },
+    {
+      "cueOrdinal": 7,
+      "text": "普通に",
+      "cueEndBoundaryId": "display-boundary-000003-000080",
+      "lineEndBoundaryIds": [
+        "display-boundary-000003-000080"
+      ],
+      "logicalWidth": 6,
+      "lineLogicalWidths": [
+        6
+      ],
+      "logicalBreakdown": [
+        {
+          "ordinal": 1,
+          "character": "普",
+          "codePoint": "U+666E",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 2,
+          "character": "通",
+          "codePoint": "U+901A",
+          "logicalWidth": 2
+        },
+        {
+          "ordinal": 3,
+          "character": "に",
+          "codePoint": "U+306B",
+          "logicalWidth": 2
+        }
+      ],
+      "publicInspection": {
+        "status": "passed",
+        "violations": [],
+        "inspection": {
+          "status": "passed",
+          "items": [
+            {
+              "layerId": "diagnostic-page-000003-000077-000080",
+              "stateId": "caption-core-v001",
+              "resolvedText": "普通に",
+              "lineCount": 1,
+              "lineRects": [
+                {
+                  "left": 796,
+                  "top": 833.2,
+                  "right": 1124,
+                  "bottom": 969.2
+                }
+              ],
+              "wrapper": {
+                "top": 829.2,
+                "left": 792,
+                "width": 336,
+                "height": 164,
+                "renderScale": 1,
+                "displayWidth": 336,
+                "displayHeight": 164
+              },
+              "fontSizePx": 96,
+              "lineHeightPx": 144
+            }
+          ],
+          "violations": []
+        }
+      },
+      "measurementContext": {
+        "documentAvailable": false,
+        "widthSource": "production-estimated-width-fallback",
+        "fontFamily": "LINESeedJP_A_OTF_Eb.otf",
+        "fontSizePx": 96,
+        "fontWeight": 800,
+        "borderWidthPx": 8,
+        "borderStrokeWidthPx": 16,
+        "glowWidthPx": 12,
+        "glowStrokeWidthPx": 40,
+        "strokeExtentPx": 20,
+        "safePaddingPx": 4,
+        "measuredLineWidthsPx": [
+          288
+        ],
+        "svgWidthPx": 336,
+        "wrapper": {
+          "top": 829.2,
+          "left": 792,
+          "width": 336,
+          "height": 164,
+          "renderScale": 1,
+          "displayWidth": 336,
+          "displayHeight": 164
+        },
+        "lineRects": [
+          {
+            "left": 796,
+            "top": 833.2,
+            "right": 1124,
+            "bottom": 969.2
+          }
+        ],
+        "safeBounds": {
+          "left": 80,
+          "top": 40,
+          "right": 1840,
+          "bottom": 1040,
+          "width": 1760,
+          "height": 1000
+        },
+        "horizontalOverflowPx": [
+          {
+            "left": 0,
+            "right": 0,
+            "total": 0
+          }
+        ]
+      }
+    }
+  ],
+  "sameCaptionSelectedOneLineCuesAtLogicalWidth34To36": {
+    "count": 1,
+    "cues": [
+      {
+        "cueOrdinal": 2,
+        "text": "てめぇはしゃぎやがってじゃ報告しない",
+        "logicalWidth": 36,
+        "physicalStatus": "rejected"
+      }
+    ]
+  },
+  "diagnosis": {
+    "mismatchClass": "logical-width-limit-does-not-reserve-physical-decoration-and-safe-area-budget",
+    "characterSpecificDifferenceObserved": false,
+    "uniformCoefficientDifferenceObserved": false,
+    "logicalMaximumValueMismatchObserved": true,
+    "reason": "all-18-non-ascii-code-points-have-weight-2-and-produce-1728px-estimated-glyph-width; border-glow-stroke-and-safe-area-reduce-the-admissible-one-line-budget",
+    "formalNodeSafeWidthPx": 1760,
+    "formalNodeStrokeExtentTotalPx": 40,
+    "formalNodeLogicalUnitWidthPx": 48,
+    "formalNodeMaximumLogicalWidthDerived": 35,
+    "formalNodeMaximumLogicalWidthDerivation": "floor((1760-40)/48)=35",
+    "branch": "2a-style-limit-or-width-rule-setting-difference-can-close-the-observed-case",
+    "caveat": "formal-node-inspection-uses-production-estimated-width-fallback-not-browser-canvas-font-metrics"
+  },
+  "effects": {
+    "apiCalls": 0,
+    "apiCostUsd": 0,
+    "formalArtifactsPublished": 0,
+    "renderingRuns": 0
+  }
+}

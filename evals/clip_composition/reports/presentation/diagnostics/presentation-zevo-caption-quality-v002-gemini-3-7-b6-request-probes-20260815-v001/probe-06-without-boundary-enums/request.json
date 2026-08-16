@@ -1,0 +1,118 @@
+{
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "Return a JSON object."
+        }
+      ]
+    }
+  ],
+  "generationConfig": {
+    "maxOutputTokens": 16,
+    "thinkingConfig": {
+      "thinkingLevel": "medium"
+    },
+    "responseMimeType": "application/json",
+    "responseJsonSchema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "abstained"
+              ]
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "additionalProperties": false,
+          "propertyOrdering": [
+            "status"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "complete"
+              ]
+            },
+            "captions": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "captionId": {
+                    "type": "string",
+                    "enum": [
+                      "input-caption-000001",
+                      "input-caption-000002",
+                      "input-caption-000003"
+                    ]
+                  },
+                  "cues": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 101,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "cueEndBoundaryId": {
+                          "type": "string"
+                        },
+                        "lineEndBoundaryIds": {
+                          "type": "array",
+                          "minItems": 1,
+                          "maxItems": 2,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "required": [
+                        "cueEndBoundaryId",
+                        "lineEndBoundaryIds"
+                      ],
+                      "additionalProperties": false,
+                      "propertyOrdering": [
+                        "cueEndBoundaryId",
+                        "lineEndBoundaryIds"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "captionId",
+                  "cues"
+                ],
+                "additionalProperties": false,
+                "propertyOrdering": [
+                  "captionId",
+                  "cues"
+                ]
+              }
+            }
+          },
+          "required": [
+            "status",
+            "captions"
+          ],
+          "additionalProperties": false,
+          "propertyOrdering": [
+            "status",
+            "captions"
+          ]
+        }
+      ]
+    }
+  }
+}

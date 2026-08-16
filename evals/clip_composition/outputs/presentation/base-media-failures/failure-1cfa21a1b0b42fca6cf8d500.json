@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "presentation-base-media-validation-report-v001",
+  "buildId": null,
+  "status": "failed",
+  "violations": [
+    {
+      "code": "BASE_MEDIA_TOOL_PROFILE_MISMATCH",
+      "path": "$implementationFiles",
+      "relatedIds": [],
+      "details": {
+        "actual": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c",
+        "expected": "0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789",
+        "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+        "retainedBuildPaths": {
+          "lockFile": null,
+          "policy": "retain-without-automatic-delete-v001",
+          "publicationTemporaryDirectory": null,
+          "workingDirectory": null
+        }
+      }
+    }
+  ],
+  "inputs": {
+    "assemblyDecision": null,
+    "basisEditPlan": null,
+    "sourceMedia": null
+  },
+  "outputs": {
+    "baseMedia": null,
+    "timeline": null,
+    "generationManifest": null
+  },
+  "checks": {
+    "approvalBinding": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_TOOL_PROFILE_MISMATCH"
+      ]
+    },
+    "sourceBinding": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_TOOL_PROFILE_MISMATCH"
+      ]
+    },
+    "videoQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_TOOL_PROFILE_MISMATCH"
+      ]
+    },
+    "audioQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_TOOL_PROFILE_MISMATCH"
+      ]
+    },
+    "timelineQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_TOOL_PROFILE_MISMATCH"
+      ]
+    },
+    "hashGraph": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_TOOL_PROFILE_MISMATCH"
+      ]
+    },
+    "publishPreconditions": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_TOOL_PROFILE_MISMATCH"
+      ]
+    }
+  }
+}

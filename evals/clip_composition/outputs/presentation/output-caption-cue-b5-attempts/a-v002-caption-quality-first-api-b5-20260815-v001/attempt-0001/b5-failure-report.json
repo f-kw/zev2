@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "presentation-output-caption-cue-b5-failure-report-v001",
+  "reportId": "a-v002-caption-quality-first-api-b5-20260815-v001-b5-failure-report",
+  "status": "rejected",
+  "b5JobBinding": {
+    "schemaVersion": "presentation-output-caption-cue-b5-job-v001",
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-jobs/a-v002-caption-quality-first-api-b5-20260815-v001.json",
+    "fileSha256": "2d56b8a2804ecb74f021d737a47f21346c73e9a9f0cb2bf47e4067a3d36fe608",
+    "canonicalSha256": "d8fd2d1e9a8a14b4e72c619eee414f1219169f7f8b62ab70c7ca8d57e1301642"
+  },
+  "stage": "source-reread",
+  "primaryCode": "CUE_B5_JOB_INVALID",
+  "evidenceBindings": [],
+  "checks": {
+    "sourceBinding": "failed",
+    "officialSnapshot": "blocked",
+    "probeRequest": "blocked",
+    "probeTokenCount": "blocked",
+    "inputLimit": "blocked",
+    "maximumResponseDiagnosis": "blocked",
+    "generateRequest": "blocked",
+    "finalRequest": "blocked",
+    "finalTokenCount": "blocked",
+    "manifestPublication": "blocked",
+    "failurePublication": "passed",
+    "rootPublication": "passed"
+  },
+  "implementationBindings": [
+    {
+      "role": "api-cost-guard",
+      "path": "evals/clip_composition/presentation_caption_api_cost_guard_v001.mjs",
+      "fileSha256": "a260592119e7fcaf32a02bb0893cd8e4411fa6f723ca283181006588221fbf67"
+    },
+    {
+      "role": "atomic-directory-publisher-adapter-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+      "fileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af"
+    },
+    {
+      "role": "atomic-directory-publisher-native-darwin-arm64-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001-darwin-arm64",
+      "fileSha256": "ba5067dd933ae9b1213ab39236bf07c7e87513afbb384643347cefe0a75084b3"
+    },
+    {
+      "role": "atomic-directory-publisher-native-source-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.c",
+      "fileSha256": "6c237ceac499a83db74324165d630e14857a86165267cdbbc88c46b92c01150c"
+    },
+    {
+      "role": "caption-cue-api-runner",
+      "path": "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.mjs",
+      "fileSha256": "d7b13af12d76a9285ed24cfc9cc9ff393e4f0a6b2c3f45ac30eb22f9215437de"
+    },
+    {
+      "role": "caption-cue-source-contract",
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "fileSha256": "4fad07904c31a48d0aa4eecaac771f6b7b1304275356edc9a13e6173f3b269ff"
+    },
+    {
+      "role": "dep-formal-json-codec",
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+    },
+    {
+      "role": "dep-renderer-text-layout-v001",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0"
+    },
+    {
+      "role": "dep-retained-source-atoms-v001",
+      "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+      "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+    },
+    {
+      "role": "dep-segmenter-boundary-evidence-v001",
+      "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+      "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+    },
+    {
+      "role": "dep-segmenter-boundary-preflight-v001",
+      "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+      "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+    }
+  ]
+}

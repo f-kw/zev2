@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "presentation-output-caption-cue-provider-safety-block-v001",
+  "observationId": "a-v002-caption-quality-first-api-b6-20260816-v003-provider-safety-block",
+  "observedAt": "2026-08-15T15:33:27.343Z",
+  "b6JobBinding": {
+    "schemaVersion": "presentation-output-caption-cue-b6-job-v001",
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b6-jobs/a-v002-caption-quality-first-api-b6-20260816-v003.json",
+    "fileSha256": "a3f6bccaa99517e6f1e75d09c8f67f0042d254e4748b2c04e01dab68580520b1",
+    "canonicalSha256": "b965b871e1346fcb42f954316070bc53e9907512324eb2fbdc75da2ed4bd0c59"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260816-v003/attempt-0001/generate-content-response.raw.json",
+    "fileSha256": "8b8a60fae9ca6801d5bf91c9e7773d7d3685c847c6e4f304daaed5d3464b59c2"
+  },
+  "responseModelVersion": "gemini-3.7-flash",
+  "observedServiceTier": "standard",
+  "blockReason": "PROHIBITED_CONTENT",
+  "safetyRatings": null,
+  "usageMetadata": {
+    "promptTokenCount": 10282,
+    "candidatesTokenCount": 0,
+    "thoughtsTokenCount": 1556,
+    "totalTokenCount": 11838
+  },
+  "usageListPriceEstimate": {
+    "currency": "USD",
+    "scope": "generate-content-standard-list-price-only",
+    "promptCostNanoUsd": 7711500,
+    "outputCostNanoUsd": 5835000,
+    "totalCostNanoUsd": 13546500,
+    "withinApprovedLimit": true,
+    "exceededPreSendEstimate": false,
+    "billingObservation": "provider-safety-usage-observed-standard-list-price"
+  }
+}

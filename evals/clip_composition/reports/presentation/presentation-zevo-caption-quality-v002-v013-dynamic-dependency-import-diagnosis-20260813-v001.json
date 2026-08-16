@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-dependency-import-diagnosis-v001",
+  "diagnosisId": "presentation-zevo-caption-quality-v002-v013-dependency-import-diagnosis-20260813-v001",
+  "status": "all-individual-imports-passed",
+  "productionSource": {
+    "path": "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.ts",
+    "fileSha256": "93719fb4e274486606d32ed51fd7f5a129b65064348efff3e0e0fdc1a82683a9",
+    "extraction": "dynamicDependencies direct import statements in source order",
+    "directImportCount": 19
+  },
+  "execution": {
+    "importerKind": "physical-mjs",
+    "fixtureRootUsed": false,
+    "formalOutputOrStagingUsed": false,
+    "apiCommunicationCount": 0,
+    "costUsd": 0
+  },
+  "imports": [
+    {
+      "ordinal": 1,
+      "bindingName": "source",
+      "targetPath": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 2,
+      "bindingName": "selection",
+      "targetPath": "evals/clip_composition/presentation_output_caption_cue_selection_v001.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 3,
+      "bindingName": "planner",
+      "targetPath": "evals/clip_composition/presentation_output_page_line_planner_v003.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 4,
+      "bindingName": "render",
+      "targetPath": "evals/clip_composition/presentation_output_render_plan_v003.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 5,
+      "bindingName": "review",
+      "targetPath": "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 6,
+      "bindingName": "renderer",
+      "targetPath": "evals/clip_composition/render_presentation_v002.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 7,
+      "bindingName": "style",
+      "targetPath": "evals/clip_composition/presentation_output_style_resolver_v001.ts",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 8,
+      "bindingName": "plannerV1",
+      "targetPath": "evals/clip_composition/presentation_output_page_line_planner_v001.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 9,
+      "bindingName": "plannerV2",
+      "targetPath": "evals/clip_composition/presentation_output_page_line_planner_v002.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 10,
+      "bindingName": "renderV1",
+      "targetPath": "evals/clip_composition/presentation_output_render_plan_v001.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 11,
+      "bindingName": "renderV2",
+      "targetPath": "evals/clip_composition/presentation_output_render_plan_v002.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 12,
+      "bindingName": "timeline",
+      "targetPath": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 13,
+      "bindingName": "meaningV2",
+      "targetPath": "evals/clip_composition/presentation_a_meaning_information_package_v002.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 14,
+      "bindingName": "sourceSequenceV2",
+      "targetPath": "evals/clip_composition/presentation_a_source_sequence_v002.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 15,
+      "bindingName": "semantic",
+      "targetPath": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 16,
+      "bindingName": "finite",
+      "targetPath": "evals/clip_composition/presentation_output_crop_application_v001.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 17,
+      "bindingName": "piecewise",
+      "targetPath": "evals/clip_composition/presentation_output_piecewise_timeline_v002.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 18,
+      "bindingName": "qc",
+      "targetPath": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "status": "passed",
+      "osCode": null
+    },
+    {
+      "ordinal": 19,
+      "bindingName": "fatal",
+      "targetPath": "evals/clip_composition/presentation_fatal_observation_v002.mjs",
+      "status": "passed",
+      "osCode": null
+    }
+  ],
+  "compoundObservation": {
+    "individualImportOrder": "same-as-production-source",
+    "duplicateDirectSpecifierCount": 0,
+    "formalAttempt0004CompoundImportStatus": "failed",
+    "causeConclusion": null
+  }
+}

@@ -1,0 +1,734 @@
+TAP version 13
+# Subtest: MBA001 probe countTokens request exact happy path
+ok 1 - MBA001 probe countTokens request exact happy path
+  ---
+  duration_ms: 4.171042
+  ...
+# Subtest: MBA002 final countTokens request uses budget-derived output limit
+ok 2 - MBA002 final countTokens request uses budget-derived output limit
+  ---
+  duration_ms: 1.372833
+  ...
+# Subtest: MBA003 request invalid owns code 8
+ok 3 - MBA003 request invalid owns code 8
+  ---
+  duration_ms: 0.280375
+  ...
+# Subtest: MBA004 model mismatch owns code 16
+ok 4 - MBA004 model mismatch owns code 16
+  ---
+  duration_ms: 0.432583
+  ...
+# Subtest: MBA005 usage invalid owns code 17
+ok 5 - MBA005 usage invalid owns code 17
+  ---
+  duration_ms: 0.184292
+  ...
+# Subtest: MBA006 cost limit exceeded owns code 18
+ok 6 - MBA006 cost limit exceeded owns code 18
+  ---
+  duration_ms: 0.165791
+  ...
+# Subtest: MBA007 raw response unavailable owns code 19
+ok 7 - MBA007 raw response unavailable owns code 19
+  ---
+  duration_ms: 0.339333
+  ...
+# Subtest: MBA008 secret exposure owns code 20
+ok 8 - MBA008 secret exposure owns code 20
+  ---
+  duration_ms: 0.21975
+  ...
+# Subtest: MBA009 publication failure owns code 21 through the production publication inspector
+ok 9 - MBA009 publication failure owns code 21 through the production publication inspector
+  ---
+  duration_ms: 7.718792
+  ...
+# Subtest: MBA010 saved generate request bytes are the bytes sent
+ok 10 - MBA010 saved generate request bytes are the bytes sent
+  ---
+  duration_ms: 0.371417
+  ...
+# Subtest: MBA011 generate is one shot with retry zero and timeout 600 seconds
+ok 11 - MBA011 generate is one shot with retry zero and timeout 600 seconds
+  ---
+  duration_ms: 2.331416
+  ...
+# Subtest: MBA012 secret scan and raw wx publication precede provider interpretation
+ok 12 - MBA012 secret scan and raw wx publication precede provider interpretation
+  ---
+  duration_ms: 0.906334
+  ...
+# Subtest: MBA013 B5 and B6 jobs have exact 11-key schemas and distinct authorization
+ok 13 - MBA013 B5 and B6 jobs have exact 11-key schemas and distinct authorization
+  ---
+  duration_ms: 1.37775
+  ...
+# Subtest: MBA014 B5 11-key and B6 13-key manifests accept exact artifact unions
+ok 14 - MBA014 B5 11-key and B6 13-key manifests accept exact artifact unions
+  ---
+  duration_ms: 4.989
+  ...
+# Subtest: MBA015 maximum valid response uses every candidate exactly once
+ok 15 - MBA015 maximum valid response uses every candidate exactly once
+  ---
+  duration_ms: 0.952625
+  ...
+# Subtest: MBA016 provider envelope has nine keys and keeps thought signature raw-only
+ok 16 - MBA016 provider envelope has nine keys and keeps thought signature raw-only
+  ---
+  duration_ms: 0.119541
+  ...
+# Subtest: MBA017 B5 stops after measurement and never advances automatically to B6
+ok 17 - MBA017 B5 stops after measurement and never advances automatically to B6
+  ---
+  duration_ms: 0.406375
+  ...
+# Subtest: MBA018 six official inputs are copied with byte and SHA claims intact
+ok 18 - MBA018 six official inputs are copied with byte and SHA claims intact
+  ---
+  duration_ms: 2.576333
+  ...
+# Subtest: MBA019 both endpoints use exactly two headers and a 600-second signal
+ok 19 - MBA019 both endpoints use exactly two headers and a 600-second signal
+  ---
+  duration_ms: 2.413834
+  ...
+# Subtest: MBA020 old fixed cost adapter and new parameterized entry share the same result
+ok 20 - MBA020 old fixed cost adapter and new parameterized entry share the same result
+  ---
+  duration_ms: 4.250333
+  ...
+# Subtest: MBA021 post-send budget excess is rejected-cost and does not start B1
+ok 21 - MBA021 post-send budget excess is rejected-cost and does not start B1
+  ---
+  duration_ms: 1.838708
+  ...
+# Subtest: MBA022 transport extraction preserves V002 success and failure precedence
+ok 22 - MBA022 transport extraction preserves V002 success and failure precedence
+  ---
+  duration_ms: 1.43525
+  ...
+# Subtest: MBA023 invalid candidate count keeps raw usage and cost but no envelope
+ok 23 - MBA023 invalid candidate count keeps raw usage and cost but no envelope
+  ---
+  duration_ms: 1.758041
+  ...
+# Subtest: MBA024 invalid candidate content keeps raw usage and cost but no envelope
+ok 24 - MBA024 invalid candidate content keeps raw usage and cost but no envelope
+  ---
+  duration_ms: 1.482208
+  ...
+# Subtest: MBA025 HTTP or model rejection is parsed once and cost requires model plus usage
+ok 25 - MBA025 HTTP or model rejection is parsed once and cost requires model plus usage
+  ---
+  duration_ms: 4.843958
+  ...
+# Subtest: MBA026 usage invalid blocks cost and never reparses raw bytes
+ok 26 - MBA026 usage invalid blocks cost and never reparses raw bytes
+  ---
+  duration_ms: 1.609125
+  ...
+# Subtest: ZCQ018 job, binding, live implementation, and formal selection execution
+ok 27 - ZCQ018 job, binding, live implementation, and formal selection execution
+  ---
+  duration_ms: 887.907541
+  ...
+# proof-item:ZCQ018-P-01-19daf3263aad:passed
+# proof-item:ZCQ018-P-02-b8ff0c3b79be:passed
+# proof-item:ZCQ018-P-05-034d7c81a083:passed
+# proof-item:ZCQ018-P-06-72decdf4c9b1:passed
+# proof-item:ZCQ018-P-07-4f1528a1d40d:passed
+# proof-item:ZCQ018-P-08-808e5a1b6499:passed
+# proof-item:ZCQ018-P-09-1a5219a8272a:passed
+# proof-item:ZCQ018-P-10-842ae1113f59:passed
+# proof-item:ZCQ018-P-11-e1304a457d97:passed
+# proof-item:ZCQ018-P-12-d565731a87fa:passed
+# proof-item:ZCQ018-P-13-877c9602a746:passed
+# proof-item:ZCQ018-V2-01-81440ccebf15:passed
+# proof-item:ZCQ018-V2-02-8edfa0c9995a:passed
+# proof-item:ZCQ018-V2-03-77a9101c749b:passed
+# proof-item:ZCQ018-V2-05-37a00dd83274:passed
+# proof-item:ZCQ018-V3-02-c70ed6fd683a:passed
+# proof-item:ZCQ018-V3-03-f49f3e398fb0:passed
+# proof-item:ZCQ018-V3-04-3ae3ccb62796:passed
+# proof-item:ZCQ018-V3-05-66df4f483edc:passed
+# proof-item:ZCQ018-V3-06-f3360118874b:passed
+# proof-item:ZCQ018-V3-07-01013f2be9db:passed
+# proof-item:ZCQ018-V3-08-743bb9850e14:passed
+# proof-item:ZCQ018-V3-09-4cde4d33a005:passed
+# proof-item:ZCQ018-V3-10-1667d540fd12:passed
+# proof-item:ZCQ018-V3-11-5f498d7fd143:passed
+# proof-item:ZCQ018-V3-12-cc9b4d01962a:passed
+# proof-item:ZCQ018-V3-13-78fe512bda43:passed
+# proof-item:V4-ZCQ018-02:passed
+# proof-item:V15-ZCQ018-01:passed
+# proof-item:V15-ZCQ018-02:passed
+# code-owner:CUE_SELECTION_JOB_INVALID:passed
+# code-owner:CUE_SELECTION_INPUT_BINDING_MISMATCH:passed
+# Subtest: ZCQ019 strict provider response envelope rejects normalization and extra keys
+ok 28 - ZCQ019 strict provider response envelope rejects normalization and extra keys
+  ---
+  duration_ms: 0.62775
+  ...
+# proof-item:ZCQ019-P-01-cc4b0ce5f226:passed
+# proof-item:ZCQ019-P-02-8a7049ee99cb:passed
+# proof-item:ZCQ019-P-03-243a065691f5:passed
+# proof-item:ZCQ019-P-04-87346eb28235:passed
+# proof-item:ZCQ019-P-05-3a2f135a1f9f:passed
+# proof-item:ZCQ019-P-06-9c351396cb99:passed
+# proof-item:ZCQ019-P-07-235962c2dd49:passed
+# proof-item:ZCQ019-P-08-11f778065c6a:passed
+# proof-item:ZCQ019-P-09-b090776eb4bc:passed
+# proof-item:ZCQ019-P-10-624286a52725:passed
+# code-owner:CUE_PROVIDER_RESPONSE_INVALID:passed
+# Subtest: ZCQ020 abstained response publishes no selection value
+ok 29 - ZCQ020 abstained response publishes no selection value
+  ---
+  duration_ms: 0.188083
+  ...
+# proof-item:ZCQ020-P-01-a388f4e57d56:passed
+# proof-item:ZCQ020-V2-01-8acd13aa92bf:passed
+# code-owner:CUE_PROVIDER_ABSTAINED:passed
+# Subtest: ZCQ021 caption set is exact and ordered
+ok 30 - ZCQ021 caption set is exact and ordered
+  ---
+  duration_ms: 0.2515
+  ...
+# proof-item:ZCQ021-P-01-c1b0545cd5d8:passed
+# proof-item:ZCQ021-P-02-f8bb3159acf7:passed
+# proof-item:ZCQ021-P-03-842ae1113f59:passed
+# proof-item:ZCQ021-P-04-cb59ef06dab1:passed
+# proof-item:ZCQ021-P-05-160531e4d0e9:passed
+# code-owner:CUE_CAPTION_SET_MISMATCH:passed
+# Subtest: ZCQ022 boundary IDs are caption-local and enumerated
+ok 31 - ZCQ022 boundary IDs are caption-local and enumerated
+  ---
+  duration_ms: 0.177041
+  ...
+# proof-item:ZCQ022-P-01-d103e322526c:passed
+# proof-item:ZCQ022-P-02-28ba0f2bfd5f:passed
+# proof-item:ZCQ022-P-03-1584396b68b5:passed
+# code-owner:CUE_BOUNDARY_ID_INVALID:passed
+# Subtest: ZCQ023 cue and line endings are strictly increasing and complete
+ok 32 - ZCQ023 cue and line endings are strictly increasing and complete
+  ---
+  duration_ms: 0.45975
+  ...
+# proof-item:ZCQ023-P-01-a42bfd08604e:passed
+# proof-item:ZCQ023-P-02-7eec0dffe566:passed
+# code-owner:CUE_ORDER_INVALID:passed
+# code-owner:CUE_LINE_END_INVALID:passed
+# Subtest: ZCQ024 atom, text, retained-span, and source closure is total
+ok 33 - ZCQ024 atom, text, retained-span, and source closure is total
+  ---
+  duration_ms: 19.809083
+  ...
+# proof-item:ZCQ024-P-01-ddc1be14959a:passed
+# proof-item:ZCQ024-P-02-2617ab4ad6fe:passed
+# proof-item:ZCQ024-P-03-1136a9b50458:passed
+# proof-item:ZCQ024-P-04-07c7861a2d44:passed
+# proof-item:ZCQ024-P-05-e7351d3191b1:passed
+# proof-item:ZCQ024-V3-01-dec632a1e6e4:passed
+# proof-item:ZCQ024-V3-02-5570dc1d27ea:passed
+# proof-item:ZCQ024-V3-03-dfe97aad054b:passed
+# proof-item:ZCQ024-V3-04-cff2755d6195:passed
+# proof-item:ZCQ024-V3-05-70e0cd64313e:passed
+# proof-item:ZCQ024-V3-06-1f2f0b746981:passed
+# proof-item:ZCQ024-V3-07-388b768f2266:passed
+# proof-item:ZCQ024-V3-08-8b335f5a3274:passed
+# proof-item:ZCQ024-V3-09-1c58d99b7b63:passed
+# code-owner:CUE_ATOM_COVERAGE_INVALID:passed
+# Subtest: ZCQ025 only overlong cues may use a second line
+ok 34 - ZCQ025 only overlong cues may use a second line
+  ---
+  duration_ms: 705.146375
+  ...
+# proof-item:ZCQ025-P-01-37bcc2a8fb8f:passed
+# proof-item:ZCQ025-P-02-f1d56456b769:passed
+# code-owner:CUE_LINE_WIDTH_INVALID:passed
+# Subtest: ZCQ026 physical and timeline projections use the shared production calculations
+ok 35 - ZCQ026 physical and timeline projections use the shared production calculations
+  ---
+  duration_ms: 1424.426
+  ...
+# proof-item:ZCQ026-P-01-4585aecb9702:passed
+# proof-item:ZCQ026-P-02-ffe5c0bb845c:passed
+# proof-item:ZCQ026-P-03-4ecf67058403:passed
+# proof-item:ZCQ026-P-04-4c0c96c344fe:passed
+# proof-item:ZCQ026-P-05-23b9c1e1c34d:passed
+# proof-item:ZCQ026-P-06-ca13a5386410:passed
+# proof-item:ZCQ026-V2-01-a1d754b2caa9:passed
+# proof-item:ZCQ026-V3-01-21a40c33a87c:passed
+# proof-item:ZCQ026-V3-02-92fa89c28006:passed
+# proof-item:ZCQ026-V3-03-6924773e2aea:passed
+# proof-item:ZCQ026-V3-04-e708a4f1a0c2:passed
+# proof-item:ZCQ026-V3-05-a60eaa66afc1:passed
+# proof-item:ZCQ026-V3-06-a80cc30a398f:passed
+# proof-item:ZCQ026-V3-07-4adac6a2e58b:passed
+# proof-item:ZCQ026-V3-08-1b1fd3e5bf1b:passed
+# proof-item:ZCQ026-V3-09-e2648ad5ccbf:passed
+# proof-item:ZCQ026-V3-10-43d2f558a2d4:passed
+# proof-item:ZCQ026-V3-11-4d1c45b9bceb:passed
+# proof-item:ZCQ026-V3-12-a0ad47898e24:passed
+# code-owner:CUE_PHYSICAL_LAYOUT_INVALID:passed
+# code-owner:CUE_TIMELINE_MAPPING_INVALID:passed
+# Subtest: ZCQ027 fatal stages and publication finalization remain structurally separate
+ok 36 - ZCQ027 fatal stages and publication finalization remain structurally separate
+  ---
+  duration_ms: 711.748042
+  ...
+# proof-item:ZCQ027-P-01-2e04388b8ab4:passed
+# proof-item:ZCQ027-P-02-1f97e7f16195:passed
+# proof-item:ZCQ027-P-03-ba3dab34d317:passed
+# proof-item:ZCQ027-P-04-0cfadebace33:passed
+# proof-item:ZCQ027-P-05-bac81ef0b6b4:passed
+# proof-item:ZCQ027-P-06-adb434851ca3:passed
+# proof-item:ZCQ027-P-07-50f95e2c17a8:passed
+# proof-item:ZCQ027-P-08-630dd644aea0:passed
+# proof-item:ZCQ027-P-09-f0fcb511651c:passed
+# proof-item:ZCQ027-P-10-72c825100dd4:passed
+# proof-item:ZCQ027-P-11-754280af4f45:passed
+# proof-item:ZCQ027-P-12-5967c9315be1:passed
+# proof-item:ZCQ027-P-13-d32b1d94676e:passed
+# proof-item:ZCQ027-P-14-fec90baf34ce:passed
+# proof-item:ZCQ027-V2-01-effd94c4cc78:passed
+# proof-item:ZCQ027-V2-02-3b5ce72862c2:passed
+# proof-item:ZCQ027-V2-03-af58685ed02b:passed
+# proof-item:ZCQ027-V2-04-808bc9898278:passed
+# proof-item:ZCQ027-V2-05-6520db2ffdf9:passed
+# proof-item:ZCQ027-V2-06-a153e4124536:passed
+# proof-item:ZCQ027-V2-07-698b0fb03cf5:passed
+# proof-item:ZCQ027-V3-01-1e22b102cf5f:passed
+# proof-item:ZCQ027-V3-02-c807a1947bb4:passed
+# proof-item:ZCQ027-V3-03-23a9709d38f5:passed
+# proof-item:ZCQ027-V3-04-70e2f69bc073:passed
+# proof-item:ZCQ027-V3-05-280cf5536065:passed
+# proof-item:ZCQ027-V3-06-d3071f1ab5da:passed
+# proof-item:ZCQ027-V3-07-c86c187da89b:passed
+# proof-item:ZCQ027-V3-08-bc48deeddfd4:passed
+# proof-item:ZCQ027-V3-09-1f9a49d847ce:passed
+# proof-item:V4-ZCQ027-01:passed
+# proof-item:V4-ZCQ027-02:passed
+# proof-item:V4-ZCQ027-03:passed
+# proof-item:V15-ZCQ027-01:passed
+# code-owner:CUE_SELECTION_EXECUTION_FAILED:passed
+# code-owner:CUE_SELECTION_PUBLICATION_FAILED:passed
+# Subtest: ORP001: native render planはexact 9 keyである
+ok 37 - ORP001: native render planはexact 9 keyである
+  ---
+  duration_ms: 2.146542
+  ...
+# Subtest: ORP002: native page一件をcommon core element一件へ写す
+ok 38 - ORP002: native page一件をcommon core element一件へ写す
+  ---
+  duration_ms: 2.310833
+  ...
+# Subtest: ORP003: meaning projection 7 fieldは意味packageから不変導出される
+ok 39 - ORP003: meaning projection 7 fieldは意味packageから不変導出される
+  ---
+  duration_ms: 0.302917
+  ...
+# Subtest: ORP004: base mediaの4 bindingをrequestからそのまま保持する
+ok 40 - ORP004: base mediaの4 bindingをrequestからそのまま保持する
+  ---
+  duration_ms: 0.249667
+  ...
+# Subtest: ORP005: title空はnot-requestedとなる
+ok 41 - ORP005: title空はnot-requestedとなる
+  ---
+  duration_ms: 0.316625
+  ...
+# Subtest: ORP006: title非空はv001で拒否する
+ok 42 - ORP006: title非空はv001で拒否する
+  ---
+  duration_ms: 0.089625
+  ...
+# Subtest: ORP007: instruction/resolution/旧B4 artifactを一件も生成しない
+ok 43 - ORP007: instruction/resolution/旧B4 artifactを一件も生成しない
+  ---
+  duration_ms: 0.916375
+  ...
+# Subtest: ORP008: common coreは新native planのpage値を実際に受ける
+ok 44 - ORP008: common coreは新native planのpage値を実際に受ける
+  ---
+  duration_ms: 0.580417
+  ...
+# Subtest: ORP017: element共有入口抽出後もv001 common core byteは固定値と一致する
+ok 45 - ORP017: element共有入口抽出後もv001 common core byteは固定値と一致する
+  ---
+  duration_ms: 0.598916
+  ...
+# Subtest: ORP018: v001/v002は同一element投影入口を使う
+ok 46 - ORP018: v001/v002は同一element投影入口を使う
+  ---
+  duration_ms: 4.443667
+  ...
+# Subtest: OEE001: 合成横型を意味packageからapplication/QC/manifestまで一気通貫する
+not ok 47 - OEE001: 合成横型を意味packageからapplication/QC/manifestまで一気通貫する
+  ---
+  duration_ms: 1335.291583
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1717:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'fatal'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'fatal'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1719:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE002: 合成縦型をcrop前提の意味packageからQCまで一気通貫する
+not ok 48 - OEE002: 合成縦型をcrop前提の意味packageからQCまで一気通貫する
+  ---
+  duration_ms: 1318.281542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1757:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'rejected'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'rejected'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1785:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE003: 横縦の出力形式差で意味package byteを変えない
+ok 49 - OEE003: 横縦の出力形式差で意味package byteを変えない
+  ---
+  duration_ms: 1.106959
+  ...
+# Subtest: OEE004: rejected時はcontrol 2件・render 0件でfallbackしない
+ok 50 - OEE004: rejected時はcontrol 2件・render 0件でfallbackしない
+  ---
+  duration_ms: 1283.064542
+  ...
+# Subtest: OEE005: core契約/QC失敗はrejected failure exact 11 keyへ帰属する
+not ok 51 - OEE005: core契約/QC失敗はrejected failure exact 11 keyへ帰属する
+  ---
+  duration_ms: 1273.49975
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1837:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    2 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1842:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE006: 複合不正は数値tokenを優先し、tool/I/O fatalはexit 2相当へ帰属する
+not ok 52 - OEE006: 複合不正は数値tokenを優先し、tool/I/O fatalはexit 2相当へ帰属する
+  ---
+  duration_ms: 1323.222083
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1863:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1921:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE007: staging exact検査不合格は旧publisherを呼ばず専用fatalにする
+not ok 53 - OEE007: staging exact検査不合格は旧publisherを呼ばず専用fatalにする
+  ---
+  duration_ms: 1315.064708
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1948:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1953:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE008: staging合格後だけ既存commit入口を一度呼ぶ
+not ok 54 - OEE008: staging合格後だけ既存commit入口を一度呼ぶ
+  ---
+  duration_ms: 1302.461542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1979:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:1984:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み替えない
+ok 55 - OEE009: coreのRENDER_OUTPUT違反はstage publishをpublicationへ読み替えない
+  ---
+  duration_ms: 1.061959
+  ...
+# Subtest: OPF001: 親契約2文書のSHAが承認値と一致する
+ok 56 - OPF001: 親契約2文書のSHAが承認値と一致する
+  ---
+  duration_ms: 0.435209
+  ...
+# Subtest: OPF002: §4の13正本は開始来歴と非変更9件・承認済み変更2件を別層で束縛する
+not ok 57 - OPF002: §4の13正本は開始来歴と非変更9件・承認済み変更2件を別層で束縛する
+  ---
+  duration_ms: 137.802417
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2161:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0'
+    - '066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e'
+  actual: '8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2174:14)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OPF003: X01〜X04は開始SHAと許可された共通入口を持つ
+not ok 58 - OPF003: X01〜X04は開始SHAと許可された共通入口を持つ
+  ---
+  duration_ms: 85.761042
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2179:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'a260592119e7fcaf32a02bb0893cd8e4411fa6f723ca283181006588221fbf67'
+    - '29ac0e7e4d54400d8063bd35caab5272a64474b3c00a306d49b33aa0092db57b'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '29ac0e7e4d54400d8063bd35caab5272a64474b3c00a306d49b33aa0092db57b'
+  actual: 'a260592119e7fcaf32a02bb0893cd8e4411fa6f723ca283181006588221fbf67'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2190:12)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OPF004: 実装path集合はexact 32件で33件目を持たない
+not ok 59 - OPF004: 実装path集合はexact 32件で33件目を持たない
+  ---
+  duration_ms: 388.036917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2197:1'
+  failureType: 'testCodeFailure'
+  error: 'spawnSync git ENOBUFS'
+  code: 'ENOBUFS'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1123:20)
+    spawnSync (node:child_process:877:24)
+    execFileSync (node:child_process:920:15)
+    git (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2142:21)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2210:34)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OPF005: 参照exportが実在しproductionとtestが同入口を使う
+ok 60 - OPF005: 参照exportが実在しproductionとtestが同入口を使う
+  ---
+  duration_ms: 9.621458
+  ...
+# Subtest: OPF006: candidate 13横型stable treeは不変である
+ok 61 - OPF006: candidate 13横型stable treeは不変である
+  ---
+  duration_ms: 437.47625
+  ...
+# Subtest: OPF007: candidate 59横型stable treeは不変である
+ok 62 - OPF007: candidate 59横型stable treeは不変である
+  ---
+  duration_ms: 410.913958
+  ...
+# Subtest: OPF008: candidate 59縦型stable treeは不変である
+ok 63 - OPF008: candidate 59縦型stable treeは不変である
+  ---
+  duration_ms: 595.297333
+  ...
+# Subtest: OPF009: 旧schema converter/fallback/併産を新経路に持たない
+ok 64 - OPF009: 旧schema converter/fallback/併産を新経路に持たない
+  ---
+  duration_ms: 2.414625
+  ...
+# Subtest: OPF010: 新規検査はAPI通信0件・secret保存0件である
+ok 65 - OPF010: 新規検査はAPI通信0件・secret保存0件である
+  ---
+  duration_ms: 2.310834
+  ...
+# Subtest: OPF011: O07はO03と既存validatorを出力作成前に実行する
+ok 66 - OPF011: O07はO03と既存validatorを出力作成前に実行する
+  ---
+  duration_ms: 0.855834
+  ...
+# Subtest: OPF012: 固定Node+TSX loaderでO05/O07実exportを使い追加loaderを持たない
+not ok 67 - OPF012: 固定Node+TSX loaderでO05/O07実exportを使い追加loaderを持たない
+  ---
+  duration_ms: 46.032542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2443:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+    +   'file:///Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs'
+    -   '/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs'
+      ]
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: '/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs'
+  actual:
+    0: 'file:///Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2457:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OPF013: 実行入力・crop適用の承認済み親設計SHAが一致する
+ok 68 - OPF013: 実行入力・crop適用の承認済み親設計SHAが一致する
+  ---
+  duration_ms: 2.850417
+  ...
+# Subtest: OPF014: 既存3本のstable tagは承認済みcommitを指す
+ok 69 - OPF014: 既存3本のstable tagは承認済みcommitを指す
+  ---
+  duration_ms: 44.903666
+  ...
+# Subtest: OPF015: v006原本とpresentation台帳の完全treeは初期HEADから不変である
+not ok 70 - OPF015: v006原本とpresentation台帳の完全treeは初期HEADから不変である
+  ---
+  duration_ms: 255.770084
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2507:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+      [
+        'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json',
+    ...
+        'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-validation-index.json',
+        'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/trusted-registry-bindings.json',
+    +   'evals/clip_composition/registries/presentation/zevo-title-style-registry-v001/registry.json',
+    +   'evals/clip_composition/registries/presentation/zevo-title-style-registry-v002/registry.json',
+    +   'evals/clip_composition/registries/presentation/zevo-title-style-registry-v003/registry.json',
+    +   'evals/clip_composition/registries/presentation/zevo-title-style-registry-v004/registry.json'
+      ]
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json'
+    1: 'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json'
+    2: 'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json'
+    3: 'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json'
+    4: 'evals/clip_composition/registries/presentation/presentation-renderer-trust-v001/trust.json'
+    5: 'evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json'
+    6: 'evals/clip_composition/registries/presentation/presentation-vertical-renderer-trust-v001/trust.json'
+    7: 'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/material-validation-index.json'
+    8: 'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-finalization-report.json'
+    9: 'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-registry.json'
+    10: 'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-validation-index.json'
+    11: 'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/trusted-registry-bindings.json'
+  actual:
+    0: 'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json'
+    1: 'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json'
+    2: 'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json'
+    3: 'evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json'
+    4: 'evals/clip_composition/registries/presentation/presentation-renderer-trust-v001/trust.json'
+    5: 'evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json'
+    6: 'evals/clip_composition/registries/presentation/presentation-vertical-renderer-trust-v001/trust.json'
+    7: 'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/material-validation-index.json'
+    8: 'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-finalization-report.json'
+    9: 'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-registry.json'
+    10: 'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/preset-validation-index.json'
+    11: 'evals/clip_composition/registries/presentation/vertical-short-preset-registry-v001/trusted-registry-bindings.json'
+    12: 'evals/clip_composition/registries/presentation/zevo-title-style-registry-v001/registry.json'
+    13: 'evals/clip_composition/registries/presentation/zevo-title-style-registry-v002/registry.json'
+    14: 'evals/clip_composition/registries/presentation/zevo-title-style-registry-v003/registry.json'
+    15: 'evals/clip_composition/registries/presentation/zevo-title-style-registry-v004/registry.json'
+  operator: 'deepStrictEqual'
+  stack: |-
+    verifyStableRoot (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2318:10)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2520:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: OPF016: 実装baselineからの差分は承認済み16 pathだけである
+not ok 71 - OPF016: 実装baselineからの差分は承認済み16 pathだけである
+  ---
+  duration_ms: 170.859792
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2524:1'
+  failureType: 'testCodeFailure'
+  error: 'spawnSync git ENOBUFS'
+  code: 'ENOBUFS'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1123:20)
+    spawnSync (node:child_process:877:24)
+    execFileSync (node:child_process:920:15)
+    git (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2142:21)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_render_plan_v001.test.mjs:2566:21)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+  ...
+1..71
+# tests 71
+# suites 0
+# pass 59
+# fail 12
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 16512.787667

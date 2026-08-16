@@ -1,0 +1,524 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-b5-dependency-binding-closure-table-v001",
+  "generatedBeforeJobPublication": true,
+  "jobId": "a-v002-caption-quality-first-api-b5-20260816-v008",
+  "attemptId": "attempt-0001",
+  "status": "passed",
+  "sharedPathDerivation": {
+    "jobPath": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-jobs/a-v002-caption-quality-first-api-b5-20260816-v008.json",
+    "outputRoot": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001",
+    "snapshotRoot": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008",
+    "riskPath": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-risk-acceptances/a-v002-caption-quality-first-api-risk-20260816-v003.json"
+  },
+  "counts": {
+    "rows": 49,
+    "snapshots": 6,
+    "implementationBindings": 11,
+    "approvedContractBindings": 18,
+    "officialClaims": 9
+  },
+  "rows": [
+    {
+      "order": 1,
+      "kind": "source-package",
+      "role": "v022-source-package",
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v003/source-package-v001.json",
+      "fileSha256": "6b77964113028eacf3ac64f56b82f8aac901004aad4a2df82387aee6cd142fe0",
+      "classification": "source-version-dependent",
+      "actionForV008": "bind-new-v022-source",
+      "verification": "formal-byte-and-canonical-sha"
+    },
+    {
+      "order": 2,
+      "kind": "official-snapshot",
+      "role": "pricing",
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/pricing.snapshot.html",
+      "fileSha256": "bd907600d61fc791a269ebebf46357f1322563ef88487ab730b6b00940cbbd76",
+      "classification": "job-version-dependent",
+      "actionForV008": "copy-byte-identical-to-job-derived-path",
+      "verification": "source-target-sha-and-byte-length"
+    },
+    {
+      "order": 3,
+      "kind": "official-snapshot",
+      "role": "tokens-guide",
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/tokens-guide.snapshot.html",
+      "fileSha256": "28a3a751e027697000222c074aada037eb604247ca4dc4a03afeb1c35c790b58",
+      "classification": "job-version-dependent",
+      "actionForV008": "copy-byte-identical-to-job-derived-path",
+      "verification": "source-target-sha-and-byte-length"
+    },
+    {
+      "order": 4,
+      "kind": "official-snapshot",
+      "role": "count-tokens-api",
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/count-tokens-api.snapshot.html",
+      "fileSha256": "52e5f00be7e3b4f93984f6e453f42a03388f60b2b4b2f8260fb42cc896d3d2a1",
+      "classification": "job-version-dependent",
+      "actionForV008": "copy-byte-identical-to-job-derived-path",
+      "verification": "source-target-sha-and-byte-length"
+    },
+    {
+      "order": 5,
+      "kind": "official-snapshot",
+      "role": "billing",
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/billing.snapshot.html",
+      "fileSha256": "8e894a579398a2a14862e39f39972b43136925a76d156016c1cf6dc3b8dd6e33",
+      "classification": "job-version-dependent",
+      "actionForV008": "copy-byte-identical-to-job-derived-path",
+      "verification": "source-target-sha-and-byte-length"
+    },
+    {
+      "order": 6,
+      "kind": "official-snapshot",
+      "role": "thinking",
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/thinking.snapshot.html",
+      "fileSha256": "1527bcb945065f358860c7bdc0c65e97e7b96d14cfa553421f74a7be6af716cc",
+      "classification": "job-version-dependent",
+      "actionForV008": "copy-byte-identical-to-job-derived-path",
+      "verification": "source-target-sha-and-byte-length"
+    },
+    {
+      "order": 7,
+      "kind": "official-snapshot",
+      "role": "latest-model",
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/latest-model.snapshot.html",
+      "fileSha256": "b557e3a36034b515703dd4db578b7f8a47bea0a202d4f15475f0682ece22d6bd",
+      "classification": "job-version-dependent",
+      "actionForV008": "copy-byte-identical-to-job-derived-path",
+      "verification": "source-target-sha-and-byte-length"
+    },
+    {
+      "order": 8,
+      "kind": "price-snapshot",
+      "role": "standard-list-price",
+      "path": null,
+      "fileSha256": null,
+      "canonicalSha256": "b8365189c3b50debb38bc5836e95b1e61c6553bbb64f01b0626c89af49b030f7",
+      "classification": "common-invariant-embedded-value",
+      "actionForV008": "retain",
+      "verification": "canonical-sha-and-effective-date"
+    },
+    {
+      "order": 9,
+      "kind": "official-claim",
+      "role": "model-exists",
+      "path": null,
+      "fileSha256": null,
+      "canonicalSha256": "3fc40f0ab52b57afa68f91405393fd00f06f50f33637c42e1b547ccacc9195c8",
+      "classification": "common-invariant-embedded-value",
+      "actionForV008": "retain",
+      "verification": "canonical-sha-and-source-evidence"
+    },
+    {
+      "order": 10,
+      "kind": "official-claim",
+      "role": "input-limit",
+      "path": null,
+      "fileSha256": null,
+      "canonicalSha256": "406302de8c5e69b22018ad3d20b65c0cacb9b24f7227221259edeed60424da1b",
+      "classification": "common-invariant-embedded-value",
+      "actionForV008": "retain",
+      "verification": "canonical-sha-and-source-evidence"
+    },
+    {
+      "order": 11,
+      "kind": "official-claim",
+      "role": "output-limit",
+      "path": null,
+      "fileSha256": null,
+      "canonicalSha256": "82b07c3330092b14ab675fb9e0920e2d276fec2fb0466afeefa16daec188743c",
+      "classification": "common-invariant-embedded-value",
+      "actionForV008": "retain",
+      "verification": "canonical-sha-and-source-evidence"
+    },
+    {
+      "order": 12,
+      "kind": "official-claim",
+      "role": "standard-input-price",
+      "path": null,
+      "fileSha256": null,
+      "canonicalSha256": "4cdf86dc3cfb967bafbf21896879dfdab3c8270f89ae371ab1976e86d92006ff",
+      "classification": "common-invariant-embedded-value",
+      "actionForV008": "retain",
+      "verification": "canonical-sha-and-source-evidence"
+    },
+    {
+      "order": 13,
+      "kind": "official-claim",
+      "role": "standard-output-price",
+      "path": null,
+      "fileSha256": null,
+      "canonicalSha256": "5e9380249b6da3183fb79a514dc4df4545ba8b11b75fc9e6e1437642afebb1c5",
+      "classification": "common-invariant-embedded-value",
+      "actionForV008": "retain",
+      "verification": "canonical-sha-and-source-evidence"
+    },
+    {
+      "order": 14,
+      "kind": "official-claim",
+      "role": "service-tier-omission-standard",
+      "path": null,
+      "fileSha256": null,
+      "canonicalSha256": "c6e26f92948b5dc8b00fa401314b73506d6ace1e64ef8216d01bcffd24b4b836",
+      "classification": "common-invariant-embedded-value",
+      "actionForV008": "retain",
+      "verification": "canonical-sha-and-source-evidence"
+    },
+    {
+      "order": 15,
+      "kind": "official-claim",
+      "role": "count-tokens-unbilled",
+      "path": null,
+      "fileSha256": null,
+      "canonicalSha256": "7d81995ca2814599df296f41fb38ad94c0a2d5053064de0096bbba094912ef1e",
+      "classification": "common-invariant-embedded-value",
+      "actionForV008": "retain",
+      "verification": "canonical-sha-and-source-evidence"
+    },
+    {
+      "order": 16,
+      "kind": "official-claim",
+      "role": "count-tokens-upper-bounds-prompt-billing",
+      "path": null,
+      "fileSha256": null,
+      "canonicalSha256": "7e2876839998999a0ac3a2d5d06bebb6d3b2a2f6e4e826ebdef3a54e4965ff76",
+      "classification": "common-invariant-embedded-value",
+      "actionForV008": "retain",
+      "verification": "canonical-sha-and-source-evidence"
+    },
+    {
+      "order": 17,
+      "kind": "official-claim",
+      "role": "max-output-upper-bounds-candidate-plus-thinking",
+      "path": null,
+      "fileSha256": null,
+      "canonicalSha256": "87f6a36465d9c6fbe21062ea8c1fc497c4b7265aeb3befb53e95be484ebd1890",
+      "classification": "common-invariant-embedded-value",
+      "actionForV008": "retain",
+      "verification": "canonical-sha-and-source-evidence"
+    },
+    {
+      "order": 18,
+      "kind": "residual-risk-acceptance",
+      "role": "a-v002-caption-quality-first-api-risk-20260816-v003",
+      "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-risk-acceptances/a-v002-caption-quality-first-api-risk-20260816-v003.json",
+      "fileSha256": "c07a3b3f0b1a0a7330f2f932cafd3c79c249b5a8632444b10b544415df833fea",
+      "classification": "source-version-dependent",
+      "actionForV008": "issue-new-binding-for-v022-source",
+      "verification": "formal-byte-canonical-sha-source-binding-and-scope"
+    },
+    {
+      "order": 19,
+      "kind": "residual-risk-decision",
+      "role": "human-risk-acceptance",
+      "path": "DECISIONS.md",
+      "fileSha256": null,
+      "lineSha256": "6d3c5c238c9f97bfc96187646d8d09ed09f6f57e87a2ecdab8e071ce577624e3",
+      "classification": "source-version-dependent",
+      "actionForV008": "append-new-exact-line",
+      "verification": "exact-line-count-one"
+    },
+    {
+      "order": 20,
+      "kind": "b5-spending-decision",
+      "role": "single-b5-job-authorization",
+      "path": "DECISIONS.md",
+      "fileSha256": null,
+      "lineSha256": "77fa5453568f1c3d489c812452da7764fb3f5f3afff1a5ddcb7c42ce0afc0df3",
+      "classification": "job-version-dependent",
+      "actionForV008": "append-new-exact-line",
+      "verification": "exact-line-count-one"
+    },
+    {
+      "order": 21,
+      "kind": "implementation",
+      "role": "api-cost-guard",
+      "path": "evals/clip_composition/presentation_caption_api_cost_guard_v001.mjs",
+      "fileSha256": "ffd6957a057371c479fc9f996f09ec61c127cb932a009041a4782a1fbdf037ce",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 22,
+      "kind": "implementation",
+      "role": "atomic-directory-publisher-adapter-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+      "fileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 23,
+      "kind": "implementation",
+      "role": "atomic-directory-publisher-native-darwin-arm64-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001-darwin-arm64",
+      "fileSha256": "ba5067dd933ae9b1213ab39236bf07c7e87513afbb384643347cefe0a75084b3",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 24,
+      "kind": "implementation",
+      "role": "atomic-directory-publisher-native-source-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.c",
+      "fileSha256": "6c237ceac499a83db74324165d630e14857a86165267cdbbc88c46b92c01150c",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 25,
+      "kind": "implementation",
+      "role": "caption-cue-api-runner",
+      "path": "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.mjs",
+      "fileSha256": "4f0dfbd8ad6e5bf94a4f6678ba6545684dc9a7ded4f70a3503565dded1d0507b",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 26,
+      "kind": "implementation",
+      "role": "caption-cue-source-contract",
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "fileSha256": "954f4ed77638c5ff5ffc837bc67014220ebf6d9611e349aade10a7c0bebf8d70",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 27,
+      "kind": "implementation",
+      "role": "dep-formal-json-codec",
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 28,
+      "kind": "implementation",
+      "role": "dep-renderer-text-layout-v001",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 29,
+      "kind": "implementation",
+      "role": "dep-retained-source-atoms-v001",
+      "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+      "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 30,
+      "kind": "implementation",
+      "role": "dep-segmenter-boundary-evidence-v001",
+      "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+      "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 31,
+      "kind": "implementation",
+      "role": "dep-segmenter-boundary-preflight-v001",
+      "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+      "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e",
+      "classification": "common-live-reread",
+      "actionForV008": "retain-path-refresh-live-sha",
+      "verification": "formal-role-order-and-live-sha"
+    },
+    {
+      "order": 32,
+      "kind": "approved-contract",
+      "role": "caption-quality-atomic-publication-b6-owner-scope-revision-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-atomic-publication-b6-owner-scope-revision-addendum-20260811-v004.md",
+      "fileSha256": "39e7c9b9005fb8ec762c19c0e6fde86acb398f1e99c75dd5d7100eabf452eade",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 33,
+      "kind": "approved-contract",
+      "role": "caption-quality-atomic-runtime-lc-uuid-compatibility-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-atomic-runtime-lc-uuid-compatibility-addendum-20260811-v006.md",
+      "fileSha256": "bd4b52901081c418b5c5ebe6a71ba4a02895fde3c86223ec433653af53530e1e",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 34,
+      "kind": "approved-contract",
+      "role": "caption-quality-complete-implementation-design",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-complete-implementation-design-20260810-v001.md",
+      "fileSha256": "44fb6199a80663657bf056df0118def3db750fe65813d86e9d106cdc4f42d6e4",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 35,
+      "kind": "approved-contract",
+      "role": "caption-quality-complete-implementation-design-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-complete-implementation-design-binding-wiring-addendum-20260811-v002.md",
+      "fileSha256": "a3c8c3ef8e57cd557e4a7cae17ecc188dc523df1508a45de6e2bce36691c7e4d",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 36,
+      "kind": "approved-contract",
+      "role": "caption-quality-dependency-load-stage-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-dependency-load-stage-observation-addendum-20260813-v014.md",
+      "fileSha256": "446cd7df58d61fd345a9f6ef73510c1e225ebc4f078de9d001fcb84d1ba5d7bc",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 37,
+      "kind": "approved-contract",
+      "role": "caption-quality-dependency-unit-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-dependency-unit-observation-addendum-20260813-v013.md",
+      "fileSha256": "77e579582fdfaad131172564b8ce81790db6b779540f338244cbc65b0d1c7501",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 38,
+      "kind": "approved-contract",
+      "role": "caption-quality-formal-capability-read-entry-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-formal-capability-read-entry-addendum-20260812-v010.md",
+      "fileSha256": "6b2cd93d0ab366806160f05457d861899b87b0b08234f051f241ca2510988110",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 39,
+      "kind": "approved-contract",
+      "role": "caption-quality-gemini-3-7-flash-price-model-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-gemini-3-7-flash-price-model-addendum-20260815-v016.md",
+      "fileSha256": "7ef23bdadc7a54c6ecb060e59c73ffaf14e6fc26ee2ec266d55b737cf64480fc",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 40,
+      "kind": "approved-contract",
+      "role": "caption-quality-gemini-3-6-flash-formal-regression-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-gemini-3-6-flash-formal-regression-addendum-20260816-v019.md",
+      "fileSha256": "dc3d3f51a76165b668dc8840127e395a3ed6652ebdb010ecf4bb94329574c7f5",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 41,
+      "kind": "approved-contract",
+      "role": "caption-quality-parent-contract",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-contract-design-20260810-v001.md",
+      "fileSha256": "33b61ee497d765fbe9eb63fb1b05bce16a99488d238eb27b732550b4daac24ba",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 42,
+      "kind": "approved-contract",
+      "role": "caption-quality-pre-staging-inner-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-pre-staging-inner-observation-addendum-20260813-v012.md",
+      "fileSha256": "668158f99ff6bacafe2ccbc9f182493a191fd3896469a972117714c86427d27f",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 43,
+      "kind": "approved-contract",
+      "role": "caption-quality-proof-capability-and-tsx-namespace-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-proof-capability-and-tsx-namespace-addendum-20260812-v009.md",
+      "fileSha256": "b22aab0ef923b459b1785e32841f9df215ee9f095cf78afc188518523966285a",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 44,
+      "kind": "approved-contract",
+      "role": "caption-quality-resolved-url-evaluation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-resolved-url-evaluation-addendum-20260814-v015.md",
+      "fileSha256": "42874101356eac7c2d76d8a7c75cdc1c77097f7c4ee8391dda2bb80b8d0ce275",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 45,
+      "kind": "approved-contract",
+      "role": "caption-quality-runtime-live-binding-separation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-runtime-live-binding-separation-addendum-20260811-v008.md",
+      "fileSha256": "6a5d2115763f97f473f1a66690da05561339c1f51f7412b644ae259dfc61d8a1",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 46,
+      "kind": "approved-contract",
+      "role": "caption-quality-source-final-package-validator-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-source-final-package-validator-addendum-20260811-v007.md",
+      "fileSha256": "787d401d2939f58cbc10562c1ed29ab2118f6169607e05bbb2d7c5c5971c8053",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 47,
+      "kind": "approved-contract",
+      "role": "caption-quality-tsx-wrapper-descriptor-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-tsx-wrapper-descriptor-addendum-20260812-v011.md",
+      "fileSha256": "61f2c3ddbe5a3bcb2bfaba39e0ce1cc2e18a77fb2f1f5337d3fd166044b41010",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 48,
+      "kind": "approved-contract",
+      "role": "caption-quality-meaning-small-unit-criteria-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-meaning-small-unit-criteria-addendum-20260816-v021.md",
+      "fileSha256": "7532e5e5ad788a47f9c672486e183e2dc859b83334f94954c9317538fb53a4a9",
+      "classification": "common-approved-invariant",
+      "actionForV008": "retain-exact-order-and-sha",
+      "verification": "formal-role-path-sha-order"
+    },
+    {
+      "order": 49,
+      "kind": "approved-contract",
+      "role": "caption-quality-logical-width-physical-alignment-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-logical-width-physical-alignment-addendum-20260816-v022.md",
+      "fileSha256": "f1e0eb7061b44b27785a30842220bcaa9adb83c12dc4984176eb5383dd01c651",
+      "classification": "source-version-dependent-addendum",
+      "actionForV008": "append-approved-v022",
+      "verification": "formal-role-path-sha-order"
+    }
+  ]
+}

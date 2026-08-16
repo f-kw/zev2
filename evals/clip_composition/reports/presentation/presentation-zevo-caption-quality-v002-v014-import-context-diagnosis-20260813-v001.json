@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-import-context-diagnosis-v001",
+  "diagnosisId": "presentation-zevo-caption-quality-v002-v014-import-context-diagnosis-20260813-v001",
+  "status": "completed",
+  "production": {
+    "path": "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.ts",
+    "fileSha256": "1c95254f41832b296f2997bd4bbb2f84c66fb34e1dba3264adcaee54e2d34347",
+    "directDependencyCount": 19,
+    "rows": [
+      {
+        "ordinal": 1,
+        "key": "source",
+        "targetPath": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+        "specifier": "./presentation_output_caption_cue_source_package_v001.mjs"
+      },
+      {
+        "ordinal": 2,
+        "key": "selection",
+        "targetPath": "evals/clip_composition/presentation_output_caption_cue_selection_v001.mjs",
+        "specifier": "./presentation_output_caption_cue_selection_v001.mjs"
+      },
+      {
+        "ordinal": 3,
+        "key": "planner",
+        "targetPath": "evals/clip_composition/presentation_output_page_line_planner_v003.mjs",
+        "specifier": "./presentation_output_page_line_planner_v003.mjs"
+      },
+      {
+        "ordinal": 4,
+        "key": "render",
+        "targetPath": "evals/clip_composition/presentation_output_render_plan_v003.mjs",
+        "specifier": "./presentation_output_render_plan_v003.mjs"
+      },
+      {
+        "ordinal": 5,
+        "key": "review",
+        "targetPath": "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.mjs",
+        "specifier": "./presentation_zevo_caption_quality_v002_review_ui_v001.mjs"
+      },
+      {
+        "ordinal": 6,
+        "key": "renderer",
+        "targetPath": "evals/clip_composition/render_presentation_v002.mjs",
+        "specifier": "./render_presentation_v002.mjs"
+      },
+      {
+        "ordinal": 7,
+        "key": "style",
+        "targetPath": "evals/clip_composition/presentation_output_style_resolver_v001.ts",
+        "specifier": "./presentation_output_style_resolver_v001.ts"
+      },
+      {
+        "ordinal": 8,
+        "key": "plannerV1",
+        "targetPath": "evals/clip_composition/presentation_output_page_line_planner_v001.mjs",
+        "specifier": "./presentation_output_page_line_planner_v001.mjs"
+      },
+      {
+        "ordinal": 9,
+        "key": "plannerV2",
+        "targetPath": "evals/clip_composition/presentation_output_page_line_planner_v002.mjs",
+        "specifier": "./presentation_output_page_line_planner_v002.mjs"
+      },
+      {
+        "ordinal": 10,
+        "key": "renderV1",
+        "targetPath": "evals/clip_composition/presentation_output_render_plan_v001.mjs",
+        "specifier": "./presentation_output_render_plan_v001.mjs"
+      },
+      {
+        "ordinal": 11,
+        "key": "renderV2",
+        "targetPath": "evals/clip_composition/presentation_output_render_plan_v002.mjs",
+        "specifier": "./presentation_output_render_plan_v002.mjs"
+      },
+      {
+        "ordinal": 12,
+        "key": "timeline",
+        "targetPath": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+        "specifier": "./presentation_timeline_composition_decision_v001.mjs"
+      },
+      {
+        "ordinal": 13,
+        "key": "meaningV2",
+        "targetPath": "evals/clip_composition/presentation_a_meaning_information_package_v002.mjs",
+        "specifier": "./presentation_a_meaning_information_package_v002.mjs"
+      },
+      {
+        "ordinal": 14,
+        "key": "sourceSequenceV2",
+        "targetPath": "evals/clip_composition/presentation_a_source_sequence_v002.mjs",
+        "specifier": "./presentation_a_source_sequence_v002.mjs"
+      },
+      {
+        "ordinal": 15,
+        "key": "semantic",
+        "targetPath": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "specifier": "./presentation_caption_semantic_source_package_v001.mjs"
+      },
+      {
+        "ordinal": 16,
+        "key": "finite",
+        "targetPath": "evals/clip_composition/presentation_output_crop_application_v001.mjs",
+        "specifier": "./presentation_output_crop_application_v001.mjs"
+      },
+      {
+        "ordinal": 17,
+        "key": "piecewise",
+        "targetPath": "evals/clip_composition/presentation_output_piecewise_timeline_v002.mjs",
+        "specifier": "./presentation_output_piecewise_timeline_v002.mjs"
+      },
+      {
+        "ordinal": 18,
+        "key": "qc",
+        "targetPath": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+        "specifier": "./presentation_renderer_qc_v002.mjs"
+      },
+      {
+        "ordinal": 19,
+        "key": "fatal",
+        "targetPath": "evals/clip_composition/presentation_fatal_observation_v002.mjs",
+        "specifier": "./presentation_fatal_observation_v002.mjs"
+      }
+    ]
+  },
+  "diagnosedSetComparison": {
+    "priorDiagnosisPath": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-v013-dynamic-dependency-import-diagnosis-20260813-v001.json",
+    "priorDiagnosisDirectDependencyCount": 19,
+    "exactOrdinalKeyPathMatch": true,
+    "missingFromPriorDiagnosis": [],
+    "extraInPriorDiagnosis": [],
+    "surroundingAtomicPublisherLoaderCount": 1,
+    "interpretation": "dynamicDependencies has 19 direct imports; the separate preceding atomic publisher loader is not a dynamicDependencies member"
+  },
+  "firstDependencySpecifierComparison": {
+    "v013Production": {
+      "value": "./presentation_output_caption_cue_source_package_v001.mjs",
+      "form": "relative-literal-inside-loader-closure"
+    },
+    "v013Diagnosis": {
+      "value": "file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "form": "absolute-file-url"
+    },
+    "v012TransformedProduction": {
+      "value": "./presentation_output_caption_cue_source_package_v001.mjs",
+      "form": "relative-literal-direct-await-import"
+    },
+    "v012TransformCacheEvidence": {
+      "fileSha256": "5d0ae98a54f4e68430fb1cf24dcd981b752c74ff77d7b981fd55a35fa4c4a68a",
+      "identifiesV012": true,
+      "identifiesV013": false
+    }
+  },
+  "contextReproduction": {
+    "fModuleBaseFixedTsx": {
+      "processExitCode": 0,
+      "status": "failed",
+      "errorCodeIdentifier": null,
+      "stdoutSchemaValid": true
+    },
+    "physicalMjsFixedTsx": {
+      "processExitCode": 0,
+      "status": "passed",
+      "errorCodeIdentifier": null,
+      "stdoutSchemaValid": true
+    }
+  },
+  "conclusion": {
+    "attribution": null,
+    "reason": "both controlled imports passed; the formal test-process failure was not reproduced and no closed error identifier was observed"
+  },
+  "restrictions": {
+    "fixtureUsed": false,
+    "formalOutputOrStagingUsed": false,
+    "exceptionMessageSaved": false,
+    "stackSaved": false,
+    "apiCommunicationCount": 0,
+    "costUsd": 0
+  }
+}

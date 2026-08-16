@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v021-b5-job-build-record-v003",
+  "predecessor": {
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-jobs/a-v002-caption-quality-first-api-b5-20260816-v006.json",
+    "fileSha256": "5c5ebe4c2c4a9c0e9b95854407a3005e5a546f2093ef5faba156257c732461bd"
+  },
+  "job": {
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-jobs/a-v002-caption-quality-first-api-b5-20260816-v007.json",
+    "fileSha256": "eb88f03a935b5ac13863df2226d866738c7ea67c79bb716c258901a17a26648f",
+    "canonicalSha256": "786326a52b838720c24c64d223ebb36e863f77b7dcb98cb75ecb6019acc09bb8"
+  },
+  "riskAcceptance": {
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-risk-acceptances/a-v002-caption-quality-first-api-risk-20260816-v002.json",
+    "fileSha256": "5000288c48d324893c8990b843ebc5030836393fc0f5c6c3c83454be14b9a2f5",
+    "canonicalSha256": "c949301b823e33453594a7f9525171378abfb15af2010612b5777d72b2728650"
+  },
+  "dependencyBindingClosureTable": {
+    "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-v021-b5-dependency-binding-closure-table-20260816-v001.json",
+    "fileSha256": "8797258768af178ecf82a09eeacb1b3f9986cf26c55de1347921d7c64783cdea",
+    "rowCount": 48
+  },
+  "snapshotCopies": [
+    {
+      "sourceId": "pricing",
+      "sourcePath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v006/pricing.snapshot.html",
+      "targetPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v007/pricing.snapshot.html",
+      "fileSha256": "bd907600d61fc791a269ebebf46357f1322563ef88487ab730b6b00940cbbd76",
+      "byteLength": 248452
+    },
+    {
+      "sourceId": "tokens-guide",
+      "sourcePath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v006/tokens-guide.snapshot.html",
+      "targetPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v007/tokens-guide.snapshot.html",
+      "fileSha256": "28a3a751e027697000222c074aada037eb604247ca4dc4a03afeb1c35c790b58",
+      "byteLength": 144627
+    },
+    {
+      "sourceId": "count-tokens-api",
+      "sourcePath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v006/count-tokens-api.snapshot.html",
+      "targetPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v007/count-tokens-api.snapshot.html",
+      "fileSha256": "52e5f00be7e3b4f93984f6e453f42a03388f60b2b4b2f8260fb42cc896d3d2a1",
+      "byteLength": 283766
+    },
+    {
+      "sourceId": "billing",
+      "sourcePath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v006/billing.snapshot.html",
+      "targetPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v007/billing.snapshot.html",
+      "fileSha256": "8e894a579398a2a14862e39f39972b43136925a76d156016c1cf6dc3b8dd6e33",
+      "byteLength": 136690
+    },
+    {
+      "sourceId": "thinking",
+      "sourcePath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v006/thinking.snapshot.html",
+      "targetPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v007/thinking.snapshot.html",
+      "fileSha256": "1527bcb945065f358860c7bdc0c65e97e7b96d14cfa553421f74a7be6af716cc",
+      "byteLength": 223997
+    },
+    {
+      "sourceId": "latest-model",
+      "sourcePath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v006/latest-model.snapshot.html",
+      "targetPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v007/latest-model.snapshot.html",
+      "fileSha256": "b557e3a36034b515703dd4db578b7f8a47bea0a202d4f15475f0682ece22d6bd",
+      "byteLength": 119282
+    }
+  ],
+  "counts": {
+    "implementationBindings": 11,
+    "approvedContractBindings": 17,
+    "snapshots": 6
+  },
+  "decisionLines": {
+    "residualRisk": "ZEVO_CAPTION_QUALITY_V002_RESIDUAL_RISK|acceptanceId=a-v002-caption-quality-first-api-risk-20260816-v002|acceptedBy=kawafmm|acceptedOn=2026-08-16|sourcePackageFileSha256=505e0af866f9c9014ac134723fa80b54281860e834fa706ade6a5894f4d4bf4d|claimVerdictsCanonicalSha256=14ea4daf034ae2ef92a30ddf0bd4f74349e7d84c8062727490d1ef0a9fd7d20f|maximumNanoUsd=1000000000|costScope=generate-content-standard-list-price-only|scope=allow-count-tokens-measurement-with-unverified-billing;generate-content-requires-separate-authorization|status=accepted",
+    "b5": "ZEVO_CAPTION_QUALITY_V002_B5|jobId=a-v002-caption-quality-first-api-b5-20260816-v007|attemptId=attempt-0001|outputRoot=evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v007/attempt-0001|sourcePackageFileSha256=505e0af866f9c9014ac134723fa80b54281860e834fa706ade6a5894f4d4bf4d|modelId=gemini-3.6-flash|thinkingLevel=medium|officialClaimsCanonicalSha256=53fdc7299c9aaf8547b3953152b2e0573b801a53c0a0838e4c0959eb97067ba2|inputPriceNanoUsdPerToken=750|outputPriceNanoUsdPerToken=3750|priceSnapshotCanonicalSha256=b8365189c3b50debb38bc5836e95b1e61c6553bbb64f01b0626c89af49b030f7|residualRiskAcceptanceFileSha256=5000288c48d324893c8990b843ebc5030836393fc0f5c6c3c83454be14b9a2f5|maximumCountTokensCalls=2|maximumNanoUsd=1000000000|costScope=generate-content-standard-list-price-only|status=approved-for-measurement"
+  },
+  "prePublicationValueValidation": "passed",
+  "decoder": "decoded",
+  "valueValidator": "passed",
+  "closureTableAttached": true,
+  "snapshotCopyRecord": {
+    "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-v021-b5-snapshot-copy-record-20260816-v002.json",
+    "fileSha256": "e9cda2762a7ea4d1654d9ea40ac04c89b264b83043a6924787105a07ce0e6cd8"
+  }
+}

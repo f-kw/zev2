@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-provider-safety-probe-cost-and-branch-correction-v002",
+  "corrects": {
+    "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/summary.json",
+    "fileSha256": "12da45d55034292560708c212e0db2dda46fc9d5c54b53b04d1d86a1f66e2a21"
+  },
+  "correctionReason": "HTTP 200 probe responses omitted candidatesTokenCount while totalTokenCount equaled promptTokenCount plus thoughtsTokenCount; the initial strict observer therefore returned usage null and the initial summary incorrectly recorded zero cost. Raw responses are unchanged. Cost is recomputed from exact total minus prompt output tokens because candidate and thinking tokens share the same output price.",
+  "price": {
+    "currency": "USD",
+    "tier": "Standard",
+    "inputPriceNanoUsdPerToken": 750,
+    "outputPriceNanoUsdPerToken": 3750
+  },
+  "results": [
+    {
+      "probeId": "caption-01-input-caption-000001",
+      "captionId": "input-caption-000001",
+      "sourceJsonPointer": "/promptInput/captions/0",
+      "rawResponseBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-01-input-caption-000001/response.raw.json",
+        "fileSha256": "3907e203be6293fdc460b4ea83973ea1960e8a1b5d1662902aaa5d38920b2b55"
+      },
+      "httpStatus": 200,
+      "blockReason": null,
+      "safetyRatings": null,
+      "promptTokenCount": 4292,
+      "outputTokenCount": 12,
+      "totalTokenCount": 4304,
+      "chargedNanoUsd": 3264000
+    },
+    {
+      "probeId": "caption-02-input-caption-000002",
+      "captionId": "input-caption-000002",
+      "sourceJsonPointer": "/promptInput/captions/1",
+      "rawResponseBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-02-input-caption-000002/response.raw.json",
+        "fileSha256": "88ab54777cc9ac5a77d71b31d8b683d62b199364d4a5fc97b81604e8914b95e7"
+      },
+      "httpStatus": 200,
+      "blockReason": null,
+      "safetyRatings": null,
+      "promptTokenCount": 3164,
+      "outputTokenCount": 13,
+      "totalTokenCount": 3177,
+      "chargedNanoUsd": 2421750
+    },
+    {
+      "probeId": "caption-03-input-caption-000003",
+      "captionId": "input-caption-000003",
+      "sourceJsonPointer": "/promptInput/captions/2",
+      "rawResponseBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-03-input-caption-000003/response.raw.json",
+        "fileSha256": "55782f5378e64dbcae0409268ccc153e6a279527cd8f57d9a67a5f170bbced1d"
+      },
+      "httpStatus": 200,
+      "blockReason": null,
+      "safetyRatings": null,
+      "promptTokenCount": 3482,
+      "outputTokenCount": 13,
+      "totalTokenCount": 3495,
+      "chargedNanoUsd": 2660250
+    },
+    {
+      "probeId": "control-all-03-captions",
+      "captionId": null,
+      "sourceJsonPointer": "/promptInput/captions",
+      "rawResponseBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/control-all-03-captions/response.raw.json",
+        "fileSha256": "2e082de3c179e74e007c9e60e8650d1b0e760175035bc84f8b0e4e695ea57785"
+      },
+      "httpStatus": 200,
+      "blockReason": null,
+      "safetyRatings": null,
+      "promptTokenCount": 10282,
+      "outputTokenCount": 13,
+      "totalTokenCount": 10295,
+      "chargedNanoUsd": 7760250
+    }
+  ],
+  "probeCount": 4,
+  "cumulativeNanoUsd": 16106250,
+  "cumulativeCostUsd": "0.016106250",
+  "maximumNanoUsd": 100000000,
+  "withinCostLimit": true,
+  "blockedSingletons": [],
+  "controlBlockReason": null,
+  "branch": "control-not-blocked-authorized-new-formal-3-7",
+  "rawResponsesModified": 0,
+  "additionalProbeCalls": 0
+}

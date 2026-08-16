@@ -1,0 +1,410 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v022-b5-authorization-preflight-v001",
+  "observedAt": "2026-08-16T02:46:17.908Z",
+  "status": "passed",
+  "formalCommand": {
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "arguments": [
+      "--import",
+      "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/loader.mjs",
+      "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.mjs",
+      "measure-only",
+      "evals/clip_composition/jobs/presentation/output-caption-cue-b5-jobs/a-v002-caption-quality-first-api-b5-20260816-v008.json"
+    ]
+  },
+  "counts": {
+    "checks": 55,
+    "passed": 55,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "id": "job-file-sha",
+      "status": "passed",
+      "detail": {
+        "observed": "3092ebcd7a376847ee8eafc9984239985d7596b39eff9fbd7cdc932467972f89",
+        "expected": "3092ebcd7a376847ee8eafc9984239985d7596b39eff9fbd7cdc932467972f89"
+      }
+    },
+    {
+      "id": "job-decoder",
+      "status": "passed",
+      "detail": {
+        "observed": "decoded"
+      }
+    },
+    {
+      "id": "job-value-validator",
+      "status": "passed",
+      "detail": {
+        "observed": "passed"
+      }
+    },
+    {
+      "id": "job-output-root",
+      "status": "passed",
+      "detail": {
+        "observed": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001",
+        "expected": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001"
+      }
+    },
+    {
+      "id": "output-root-unused",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001"
+      }
+    },
+    {
+      "id": "b5-decision-line",
+      "status": "passed",
+      "detail": {
+        "exactCount": 1
+      }
+    },
+    {
+      "id": "official-verification",
+      "status": "passed",
+      "detail": {
+        "observed": "passed"
+      }
+    },
+    {
+      "id": "source-file-binding",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v003/source-package-v001.json"
+      }
+    },
+    {
+      "id": "source-canonical-binding",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v003/source-package-v001.json"
+      }
+    },
+    {
+      "id": "source-v022-shape",
+      "status": "passed",
+      "detail": {
+        "captions": 3,
+        "boundaries": 253,
+        "maximumLogicalWidth": 35,
+        "sourceContracts": 16
+      }
+    },
+    {
+      "id": "risk-formal-bytes",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-risk-acceptances/a-v002-caption-quality-first-api-risk-20260816-v003.json"
+      }
+    },
+    {
+      "id": "risk-file-binding",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-risk-acceptances/a-v002-caption-quality-first-api-risk-20260816-v003.json"
+      }
+    },
+    {
+      "id": "risk-canonical-binding",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-risk-acceptances/a-v002-caption-quality-first-api-risk-20260816-v003.json"
+      }
+    },
+    {
+      "id": "risk-source-binding",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "id": "risk-claim-verdicts",
+      "status": "passed",
+      "detail": {
+        "count": 3
+      }
+    },
+    {
+      "id": "risk-limit",
+      "status": "passed",
+      "detail": {
+        "observed": 1000000000,
+        "expected": 1000000000
+      }
+    },
+    {
+      "id": "risk-scope",
+      "status": "passed",
+      "detail": {
+        "observed": "allow-count-tokens-measurement-with-unverified-billing;generate-content-requires-separate-authorization"
+      }
+    },
+    {
+      "id": "risk-decision-shape",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "id": "risk-decision-line",
+      "status": "passed",
+      "detail": {
+        "exactCount": 1
+      }
+    },
+    {
+      "id": "implementation:api-cost-guard",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/presentation_caption_api_cost_guard_v001.mjs"
+      }
+    },
+    {
+      "id": "implementation:atomic-directory-publisher-adapter-v001",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs"
+      }
+    },
+    {
+      "id": "implementation:atomic-directory-publisher-native-darwin-arm64-v001",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/presentation_atomic_directory_publish_v001-darwin-arm64"
+      }
+    },
+    {
+      "id": "implementation:atomic-directory-publisher-native-source-v001",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.c"
+      }
+    },
+    {
+      "id": "implementation:caption-cue-api-runner",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.mjs"
+      }
+    },
+    {
+      "id": "implementation:caption-cue-source-contract",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs"
+      }
+    },
+    {
+      "id": "implementation:dep-formal-json-codec",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs"
+      }
+    },
+    {
+      "id": "implementation:dep-renderer-text-layout-v001",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+      }
+    },
+    {
+      "id": "implementation:dep-retained-source-atoms-v001",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs"
+      }
+    },
+    {
+      "id": "implementation:dep-segmenter-boundary-evidence-v001",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs"
+      }
+    },
+    {
+      "id": "implementation:dep-segmenter-boundary-preflight-v001",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs"
+      }
+    },
+    {
+      "id": "contract:caption-quality-atomic-publication-b6-owner-scope-revision-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-atomic-publication-b6-owner-scope-revision-addendum-20260811-v004.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-atomic-runtime-lc-uuid-compatibility-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-atomic-runtime-lc-uuid-compatibility-addendum-20260811-v006.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-complete-implementation-design",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-complete-implementation-design-20260810-v001.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-complete-implementation-design-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-complete-implementation-design-binding-wiring-addendum-20260811-v002.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-dependency-load-stage-observation-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-dependency-load-stage-observation-addendum-20260813-v014.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-dependency-unit-observation-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-dependency-unit-observation-addendum-20260813-v013.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-formal-capability-read-entry-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-formal-capability-read-entry-addendum-20260812-v010.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-gemini-3-7-flash-price-model-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-gemini-3-7-flash-price-model-addendum-20260815-v016.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-gemini-3-6-flash-formal-regression-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-gemini-3-6-flash-formal-regression-addendum-20260816-v019.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-parent-contract",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-contract-design-20260810-v001.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-pre-staging-inner-observation-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-pre-staging-inner-observation-addendum-20260813-v012.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-proof-capability-and-tsx-namespace-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-proof-capability-and-tsx-namespace-addendum-20260812-v009.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-resolved-url-evaluation-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-resolved-url-evaluation-addendum-20260814-v015.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-runtime-live-binding-separation-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-runtime-live-binding-separation-addendum-20260811-v008.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-source-final-package-validator-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-source-final-package-validator-addendum-20260811-v007.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-tsx-wrapper-descriptor-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-tsx-wrapper-descriptor-addendum-20260812-v011.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-meaning-small-unit-criteria-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-meaning-small-unit-criteria-addendum-20260816-v021.md"
+      }
+    },
+    {
+      "id": "contract:caption-quality-logical-width-physical-alignment-addendum",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-logical-width-physical-alignment-addendum-20260816-v022.md"
+      }
+    },
+    {
+      "id": "snapshot:pricing",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/pricing.snapshot.html"
+      }
+    },
+    {
+      "id": "snapshot:tokens-guide",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/tokens-guide.snapshot.html"
+      }
+    },
+    {
+      "id": "snapshot:count-tokens-api",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/count-tokens-api.snapshot.html"
+      }
+    },
+    {
+      "id": "snapshot:billing",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/billing.snapshot.html"
+      }
+    },
+    {
+      "id": "snapshot:thinking",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/thinking.snapshot.html"
+      }
+    },
+    {
+      "id": "snapshot:latest-model",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/latest-model.snapshot.html"
+      }
+    },
+    {
+      "id": "dependency-binding-closure-table",
+      "status": "passed",
+      "detail": {
+        "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-v022-b5-dependency-binding-closure-table-20260816-v001.json",
+        "rows": 49
+      }
+    }
+  ]
+}

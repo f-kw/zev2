@@ -1,0 +1,97 @@
+TAP version 13
+# Subtest: ZCQ001 source job schema, fixed loader, bound import graph, and CLI guard
+ok 1 - ZCQ001 source job schema, fixed loader, bound import graph, and CLI guard
+  ---
+  duration_ms: 1249.282667
+  ...
+# proof-item:ZCQ001-P-01-13c0f4fa9b24:passed
+# proof-item:ZCQ001-P-02-eec89906405e:passed
+# proof-item:ZCQ001-P-03-850e16d958ce:passed
+# proof-item:ZCQ001-P-04-bfa4a1b9c46d:passed
+# proof-item:ZCQ001-P-05-b8ff0c3b79be:passed
+# proof-item:V4-ZCQ001-01:passed
+# proof-item:V15-ZCQ001-01:passed
+# proof-item:ZCQ001-P-08-e3cff4d98376:passed
+# proof-item:ZCQ001-P-09-e55f181b8f6a:passed
+# proof-item:ZCQ001-P-10-ec1eb56272fc:passed
+# proof-item:ZCQ001-P-11-6044e9f095e0:passed
+# proof-item:ZCQ001-P-12-80f70afeef3c:passed
+# proof-item:ZCQ001-P-13-c972c530f95a:passed
+# code-owner:CUE_SOURCE_JOB_INVALID:passed
+# proof-item:ZCQ001-P-14-42330d1b09c4:passed
+# proof-item:ZCQ001-P-15-842ae1113f59:passed
+# proof-item:ZCQ001-P-16-e1304a457d97:passed
+# proof-item:ZCQ001-P-17-877c9602a746:passed
+# proof-item:ZCQ001-V2-01-38e27cb76066:passed
+# proof-item:V4-ZCQ001-02:passed
+# proof-item:ZCQ001-V2-03-5f660c8cc348:passed
+# proof-item:V4-ZCQ001-03:passed
+# proof-item:V8-ZCQ001-02:passed
+# Subtest: ZCQ002 multiple meaning packages preserve input order and deterministic IDs
+ok 2 - ZCQ002 multiple meaning packages preserve input order and deterministic IDs
+  ---
+  duration_ms: 0.973459
+  ...
+# proof-item:ZCQ002-P-01-167db456a837:passed
+# proof-item:ZCQ002-P-02-4b8fe2566ede:passed
+# proof-item:ZCQ002-P-03-df11878b850b:passed
+# Subtest: ZCQ003 every atom is retained once and case context remains one-to-one
+ok 3 - ZCQ003 every atom is retained once and case context remains one-to-one
+  ---
+  duration_ms: 0.955542
+  ...
+# proof-item:ZCQ003-P-01-f194c81fac64:passed
+# proof-item:ZCQ003-P-02-8073a63752e1:passed
+# proof-item:ZCQ003-P-03-9dc4b2c72978:passed
+# code-owner:CUE_SOURCE_ATOM_CLOSURE_INVALID:passed
+# Subtest: ZCQ004 final package validator, code trigger, upstream dominance, and projection predicates
+ok 4 - ZCQ004 final package validator, code trigger, upstream dominance, and projection predicates
+  ---
+  duration_ms: 325.608834
+  ...
+# proof-item:V7-ZCQ004-01:passed
+# proof-item:V7-ZCQ004-02:passed
+# code-owner:CUE_SOURCE_PROMPT_PROJECTION_INVALID:passed
+# proof-item:V7-ZCQ004-03:passed
+# proof-item:V7-ZCQ004-04:passed
+# Subtest: ZCQ005 input bindings, resolved style, reread, and no-replace publication reject correctly
+ok 5 - ZCQ005 input bindings, resolved style, reread, and no-replace publication reject correctly
+  ---
+  duration_ms: 1118.31275
+  ...
+# proof-item:ZCQ005-P-01-45440c1d3fb3:passed
+# proof-item:ZCQ005-P-02-5e698b570508:passed
+# code-owner:CUE_SOURCE_INPUT_BINDING_INVALID:passed
+# proof-item:ZCQ005-P-03-341f8b2db3e3:passed
+# proof-item:ZCQ005-P-04-ab5e7a3ec0f1:passed
+# code-owner:CUE_SOURCE_STYLE_INVALID:passed
+# code-owner:CUE_SOURCE_EXECUTION_FAILED:passed
+# proof-item:ZCQ005-P-05-9046b29ea2f5:passed
+# proof-item:V4-ZCQ005-01:passed
+# proof-item:V4-ZCQ005-02:passed
+# code-owner:CUE_SOURCE_PUBLICATION_FAILED:passed
+# proof-item:V4-ZCQ005-03:passed
+# proof-item:V4-ZCQ005-04:passed
+# proof-item:V4-ZCQ005-05:passed
+# proof-item:V4-ZCQ005-06:passed
+# proof-item:V4-ZCQ005-07:passed
+# proof-item:V4-ZCQ005-08:passed
+# Subtest: ZCQ006 source package bytes and binding provenance are deterministic
+ok 6 - ZCQ006 source package bytes and binding provenance are deterministic
+  ---
+  duration_ms: 339.470125
+  ...
+# proof-item:ZCQ006-P-01-0e4db82712cf:passed
+# proof-item:ZCQ006-P-02-b7c7ba6f37b1:passed
+# proof-item:ZCQ006-P-03-e7de2476355c:passed
+# proof-item:ZCQ006-V2-01-8920d8468d0b:passed
+# proof-item:V4-ZCQ006-01:passed
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3513.000291

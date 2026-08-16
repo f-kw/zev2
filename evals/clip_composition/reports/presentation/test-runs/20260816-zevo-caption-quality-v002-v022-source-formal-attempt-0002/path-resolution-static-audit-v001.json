@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v022-path-resolution-static-audit-v001",
+  "observedAt": "2026-08-16T02:39:06Z",
+  "status": "passed",
+  "rule": {
+    "absolutePath": "use-as-is",
+    "workspaceRelativePath": "resolve-from-workspace-root"
+  },
+  "checks": [
+    {
+      "target": "/private/tmp/preflight_zevo_caption_quality_v022_source_v003.mjs",
+      "inputSet": "source job file bindings",
+      "observedPathCount": 75,
+      "observedAbsolutePathCount": 2,
+      "observedWorkspaceRelativePathCount": 73,
+      "result": "resolver distinguishes absolute and workspace-relative paths before reading"
+    },
+    {
+      "target": "/private/tmp/preflight_zevo_caption_quality_v021_b5_20260816_v007.mjs",
+      "inputSet": "latest completed B5 job path fields",
+      "observedPathCount": 31,
+      "observedAbsolutePathCount": 0,
+      "observedWorkspaceRelativePathCount": 31,
+      "result": "all inputs consumed by the workspace-root resolver are contractually workspace-relative"
+    },
+    {
+      "target": "/private/tmp/preflight_zevo_caption_quality_v021_b6_20260816_v005.mjs",
+      "inputSet": "latest completed B6 job path fields",
+      "observedPathCount": 43,
+      "observedAbsolutePathCount": 0,
+      "observedWorkspaceRelativePathCount": 43,
+      "result": "all inputs consumed by the workspace-root resolver are contractually workspace-relative"
+    },
+    {
+      "target": "/private/tmp/run_zevo_caption_quality_v022_source_20260816_v003.zsh",
+      "inputSet": "formal command executable and loader arguments",
+      "result": "fixed Node and TSX paths are passed as explicit absolute command arguments and are not joined to the workspace root"
+    },
+    {
+      "target": "historical v017/v018/v019 B6 preflight helpers",
+      "inputSet": "historical job-relative artifacts",
+      "result": "not in the resumed execution path; their workspace-root helpers only receive workspace-relative artifact paths"
+    }
+  ],
+  "changes": {
+    "production": 0,
+    "job": 0,
+    "contract": 0,
+    "fixtureValue": 0,
+    "preflightHelper": 1
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "presentation-base-media-generation-manifest-v002",
+  "buildId": "presentation-renderer-synthetic-base-build-v001",
+  "job": {
+    "jobId": "synthetic-base-build-job-v001",
+    "schemaVersion": "presentation-base-media-build-job-v001",
+    "fileSha256": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "source": {
+    "sourceProvenance": "presentation-renderer-synthetic-source-v001",
+    "sourceRef": "synthetic-source-v001",
+    "sourceUri": "synthetic://presentation-renderer-v002",
+    "path": "evals/clip_composition/testdata/presentation-renderer-v002/synthetic-source.json",
+    "fileSha256": "8ec4085debb4b70141842ba751f960aae5b564953ebc3402e04324babda62f77",
+    "video": {
+      "width": 1920,
+      "height": 1080,
+      "frameRate": "30/1",
+      "timeBase": "1/30",
+      "decodedFrameCount": 330,
+      "firstPts": 0,
+      "lastPts": 329,
+      "rotation": 0
+    },
+    "audio": {
+      "present": true,
+      "codec": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "timeBase": "1/48000",
+      "firstDecodedPts": 0,
+      "lastDecodedPts": 527999,
+      "presentationClock": {
+        "authority": "stream-and-packet-v001",
+        "endSample": 528000,
+        "streamEndSample": 528000,
+        "packetEndSample": 528000,
+        "skipSamples": 1024,
+        "discardPadding": 0
+      }
+    }
+  },
+  "assemblyDecision": {
+    "decisionId": "synthetic-decision-v001",
+    "fileSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+    "payloadSha256": "5555555555555555555555555555555555555555555555555555555555555555",
+    "approvalRecordId": "synthetic-human-approval-v001"
+  },
+  "basisEditPlan": {
+    "kind": "edit_plan_json",
+    "path": "synthetic-edit-plan.json",
+    "fileSha256": "6666666666666666666666666666666666666666666666666666666666666666"
+  },
+  "segments": [
+    {
+      "segmentId": "segment-0001",
+      "sourceStartMs": 1000,
+      "sourceEndMs": 5000,
+      "sourceStartFrame30": 30,
+      "sourceEndFrame30": 150,
+      "outputStartFrame": 0,
+      "outputEndFrame": 120,
+      "audioSamples": {
+        "sourceStart": 48000,
+        "sourceEnd": 240000,
+        "outputStart": 0,
+        "outputEnd": 192000
+      }
+    },
+    {
+      "segmentId": "segment-0002",
+      "sourceStartMs": 6000,
+      "sourceEndMs": 11000,
+      "sourceStartFrame30": 180,
+      "sourceEndFrame30": 330,
+      "outputStartFrame": 120,
+      "outputEndFrame": 270,
+      "audioSamples": {
+        "sourceStart": 288000,
+        "sourceEnd": 528000,
+        "outputStart": 192000,
+        "outputEnd": 432000
+      }
+    }
+  ],
+  "audio": {
+    "present": true,
+    "sampleRate": 48000,
+    "channels": 2,
+    "channelLayout": "stereo",
+    "channelOrder": [
+      "FL",
+      "FR"
+    ],
+    "canonicalPcmFormat": {
+      "sampleFormat": "f32le",
+      "packing": "interleaved"
+    },
+    "insertedSilenceSpans": [],
+    "sourceGrid": {
+      "sampleCount": 528000,
+      "byteCount": 4224000,
+      "payloadSha256": "7777777777777777777777777777777777777777777777777777777777777777",
+      "decodedSampleCount": 528000,
+      "decodedTailPaddingSampleCount": 0
+    },
+    "encodeInput": {
+      "sampleCount": 432000,
+      "byteCount": 3456000,
+      "payloadSha256": "8888888888888888888888888888888888888888888888888888888888888888"
+    },
+    "encoded": {
+      "codec": "aac",
+      "bitRate": "192k",
+      "movieTimeScale": 30,
+      "timeBase": "1/48000",
+      "startPts": 0,
+      "durationTs": 432000,
+      "containerDurationSamples": 432000,
+      "presentationDurationSamples": 432000,
+      "videoPresentationDurationSamples": 432000,
+      "trailingVideoOnlySampleCount": 0,
+      "tailPolicy": "frame-aligned-v001",
+      "rawDecodedSampleCount": 432128,
+      "effectiveDecodedSampleCount": 432000,
+      "effectiveDecodedPayloadSha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "packetPayloadSha256": "d0053aedfbbac08367780661785eb3da5b16b35909bcbf666011f2c8bce4d372",
+      "skipSamples": 1024,
+      "discardPadding": 0,
+      "encoderDelay": 1024
+    }
+  },
+  "execution": {
+    "commands": [
+      {
+        "stage": "video-build",
+        "tool": "ffmpeg",
+        "arguments": [
+          "-i",
+          "<SOURCE_MEDIA>",
+          "-filter_complex",
+          "[0:v]null[video]",
+          "-map",
+          "[video]",
+          "<TEMP_VIDEO>"
+        ],
+        "filterGraph": "[0:v]null[video]"
+      },
+      {
+        "stage": "audio-grid",
+        "tool": "ffmpeg",
+        "arguments": [
+          "-i",
+          "<SOURCE_MEDIA>",
+          "-map",
+          "0:a:0",
+          "<SOURCE_GRID>"
+        ],
+        "filterGraph": null
+      },
+      {
+        "stage": "audio-mux",
+        "tool": "ffmpeg",
+        "arguments": [
+          "-i",
+          "<TEMP_VIDEO>",
+          "-i",
+          "<ENCODE_PCM>",
+          "<BASE_MEDIA>"
+        ],
+        "filterGraph": null
+      }
+    ],
+    "trustedSourceFiles": [
+      {
+        "role": "renderer-v001-encode-source",
+        "path": "evals/clip_composition/render_presentation_v001.mjs",
+        "fileSha256": "13dc1c76ccdca415cb398ba1f3e0cb77e8cac5918f92c3647a273c4a6e4a281d"
+      },
+      {
+        "role": "preview-builder-aac-source",
+        "path": "evals/clip_composition/build_presentation_initial_preset_review.mjs",
+        "fileSha256": "97cd4c4cfb2369103228c5156297b3b7a8ea2f14746f0ebd58927074f7ca2646"
+      },
+      {
+        "role": "caption-canonical-json-source",
+        "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+        "fileSha256": "0fcb9f9c6b0ae2f50b4ca68ba1190c75dc0acfe9e7d27a3d504bd46a5d4ce789"
+      }
+    ]
+  },
+  "tools": {
+    "expected": {
+      "nodeVersion": "v20.19.6",
+      "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+      "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+    },
+    "observed": {
+      "nodeVersion": "v20.19.6",
+      "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+      "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+    },
+    "binaryDiagnostics": {
+      "node": {
+        "resolvedPath": "/fixture/bin/node",
+        "fileSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "ffmpeg": {
+        "resolvedPath": "/fixture/bin/ffmpeg",
+        "fileSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "ffprobe": {
+        "resolvedPath": "/fixture/bin/ffprobe",
+        "fileSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    }
+  },
+  "versions": {
+    "generatorVersion": "presentation-base-media-builder-v001",
+    "timelineCheckerVersion": "presentation-base-media-timeline-checker-v002"
+  },
+  "git": {
+    "head": "0000000000000000000000000000000000000000",
+    "dirty": true
+  },
+  "implementationFiles": [
+    {
+      "path": "evals/clip_composition/presentation_base_media_build_v001.mjs",
+      "fileSha256": "5e76f31c71f6a3d95fc9d0a3980174b326a2d1e630c8800fdfaee57efa7d5287"
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+      "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+    }
+  ],
+  "outputs": {
+    "baseMedia": {
+      "artifactId": "presentation-renderer-synthetic-base-v001",
+      "path": "base-media.mp4",
+      "fileSha256": "8b424ddc3b1080373fe1b6bf016e292d2841581fe78f085fcf3ad1a1efd7bb9d",
+      "frameRate": "30/1",
+      "frameCount": 270,
+      "audioPacketPayloadSha256": "d0053aedfbbac08367780661785eb3da5b16b35909bcbf666011f2c8bce4d372"
+    },
+    "timeline": {
+      "timelineId": "presentation-renderer-synthetic-timeline-v002",
+      "schemaVersion": "presentation-base-media-timeline-v002",
+      "path": "timeline.json",
+      "fileSha256": "d9a2a7dbe0f2e73e0858bd987cdd9b540ce8797184e057a5ccfcc63ae4decc02"
+    }
+  },
+  "excludedLegacyFields": [
+    "screenLayout",
+    "telopPlan"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v022-test-change-static-audit-v001",
+  "observedOn": "2026-08-16",
+  "status": "passed",
+  "requiredChecks": [
+    "production-return-shape-to-test-read-path",
+    "owner-proof-count-to-observation-count"
+  ],
+  "checks": [
+    {
+      "testPath": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+      "fileSha256": "bf3a4f49dd9114de493f43c5cec4df066bdc8466253bb6ae0ae04d17b716a5c6",
+      "subcases": [
+        {
+          "owner": "ZCQ004",
+          "returnShape": "passed.value.sourcePackage",
+          "addedProofObservations": 0,
+          "ownerAllocationChange": 0,
+          "result": "matched"
+        },
+        {
+          "owner": "ZCQ005",
+          "returnShape": "rejected.primaryCode",
+          "addedProofObservations": 0,
+          "ownerAllocationChange": 0,
+          "result": "matched"
+        }
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.test.mjs",
+      "fileSha256": "340093b01ca2115d567c8154bf14c33ea63f11ff0763d682ef3d75194f0677f6",
+      "subcases": [
+        {
+          "owner": "ZCQ007",
+          "returnShape": "formal result status and stored job bindings",
+          "proofObservations": 17,
+          "ownerProofItems": 17,
+          "result": "matched"
+        },
+        {
+          "owner": "ZCQ008",
+          "returnShape": "stored request JSON object",
+          "proofObservations": 1,
+          "ownerProofItems": 1,
+          "singleObservationFields": [
+            "promptInputBytes",
+            "maxLogicalWidthPerLine"
+          ],
+          "result": "matched"
+        }
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_caption_cue_selection_v001.test.mjs",
+      "fileSha256": "caef1b3e1172ca73ff4ed8f27b383a56e78ecdc32abe8529917cd5cf7ad635aa",
+      "subcases": [
+        {
+          "owner": "ZCQ025",
+          "returnShape": "rejected.primaryCode",
+          "addedProofObservations": 0,
+          "ownerAllocationChange": 0,
+          "result": "matched"
+        }
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_page_line_planner_v003.test.mjs",
+      "fileSha256": "a53ccc25c269ec2d53de218b38951a23bc54c9c3c8b4d863b7d66671ef5eec86",
+      "subcases": [
+        {
+          "owner": "ZCQ030",
+          "returnShape": "passed.value.pageLinePlan",
+          "addedProofObservations": 0,
+          "ownerAllocationChange": 0,
+          "result": "matched"
+        }
+      ]
+    }
+  ],
+  "mismatches": []
+}

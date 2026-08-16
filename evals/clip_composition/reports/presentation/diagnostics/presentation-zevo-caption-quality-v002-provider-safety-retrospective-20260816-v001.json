@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-provider-safety-retrospective-v001",
+  "recordId": "a-v002-caption-quality-first-api-b6-20260815-v002-attempt-0001-v018-retrospective",
+  "observedAt": "2026-08-15T15:26:07.000Z",
+  "v018ContractBinding": {
+    "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-provider-safety-block-classification-addendum-20260816-v018.md",
+    "fileSha256": "6fb15bcb5d6aaec098857d03f064c7ad8f2591ab85225b8f3cbfcc2e0ad989ae"
+  },
+  "sourceAttempt": {
+    "b6JobBinding": {
+      "schemaVersion": "presentation-output-caption-cue-b6-job-v001",
+      "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b6-jobs/a-v002-caption-quality-first-api-b6-20260815-v002.json",
+      "fileSha256": "612391fa642efc605e42fcf86f6b7dc16767d28ddb09f95b47900d1ec05f6108",
+      "canonicalSha256": "5246361b8a8a6f3de141c05c03c6fe5030351b8bc9dc1fde166a5e7b1b595248"
+    },
+    "rawResponseBinding": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260815-v002/attempt-0001/generate-content-response.raw.json",
+      "fileSha256": "1c4124c60cae3c5adb7faf527ed66b22b022298946f55386b3f3386aefead559"
+    },
+    "manifestBinding": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260815-v002/attempt-0001/b6-manifest.json",
+      "fileSha256": "ff366d3bf0afad0c7a94f5da9dc143f81d7a9202d26c85a9674ad8f4ef5334e1"
+    }
+  },
+  "classification": {
+    "historicalManifestStatus": "rejected-provider-response",
+    "historicalPrimaryCode": "CUE_PROVIDER_USAGE_INVALID",
+    "v018ProviderInnerCode": "B6_V002_PROVIDER_SAFETY_BLOCKED",
+    "v018ManifestStatus": "blocked-provider-safety",
+    "v018PrimaryCode": "CUE_PROVIDER_SAFETY_BLOCKED",
+    "blockReason": "PROHIBITED_CONTENT",
+    "safetyRatings": null,
+    "candidateCount": 0
+  },
+  "usageMetadata": {
+    "promptTokenCount": 10282,
+    "candidatesTokenCount": 0,
+    "thoughtsTokenCount": 498,
+    "totalTokenCount": 10780
+  },
+  "usageListPriceEstimate": {
+    "currency": "USD",
+    "tier": "Standard",
+    "inputPriceNanoUsdPerToken": 750,
+    "outputPriceNanoUsdPerToken": 3750,
+    "promptCostNanoUsd": 7711500,
+    "outputCostNanoUsd": 1867500,
+    "totalCostNanoUsd": 9579000,
+    "totalCostUsd": "0.009579000",
+    "withinApprovedLimit": true,
+    "approvedMaximumNanoUsd": 1000000000
+  },
+  "immutability": {
+    "sourceAttemptFilesModified": 0,
+    "classificationRecordSeparate": true,
+    "inferredProviderReasonAdded": false
+  }
+}

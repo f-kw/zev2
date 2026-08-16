@@ -1,0 +1,20 @@
+node:net:1886
+      const error = new UVExceptionWithHostPort(rval, 'listen', address, port);
+                    ^
+
+Error: listen EPERM: operation not permitted /var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/tsx-501/90372.pipe
+    at Server.setupListenHandle [as _listen2] (node:net:1886:21)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2084:5)
+    at file:///Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/cli.mjs:53:31537
+    at new Promise (<anonymous>)
+    at createIpcServer (file:///Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/cli.mjs:53:31515)
+    at async file:///Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/cli.mjs:55:459 {
+  code: 'EPERM',
+  errno: -1,
+  syscall: 'listen',
+  address: '/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/tsx-501/90372.pipe',
+  port: -1
+}
+
+Node.js v20.19.6

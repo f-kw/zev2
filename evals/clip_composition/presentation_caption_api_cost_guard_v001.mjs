@@ -44,6 +44,48 @@ export const PRESENTATION_CAPTION_API_COST_POLICY_V001 = Object.freeze({
       + 'models/gemini-3.6-flash:generateContent',
 });
 
+export const PRESENTATION_CAPTION_API_COST_POLICY_V002 = Object.freeze({
+  modelId: 'gemini-3.7-flash',
+  modelResource: 'models/gemini-3.7-flash',
+  inputLimit: 1048576,
+  outputLimit: 65536,
+  tier: 'PAID_STANDARD_DEFAULT_BY_OMISSION',
+  inputPriceNanoUsdPerToken: 750,
+  outputPriceNanoUsdPerToken: 3750,
+  maximumNanoUsd: 1000000000,
+  countTokensCalls: 2,
+  generateContentCalls: 1,
+  automaticRetries: 0,
+  timeoutMilliseconds: 600000,
+  countTokensEndpoint:
+    'https://generativelanguage.googleapis.com/v1beta/'
+      + 'models/gemini-3.7-flash:countTokens',
+  generateContentEndpoint:
+    'https://generativelanguage.googleapis.com/v1beta/'
+      + 'models/gemini-3.7-flash:generateContent',
+});
+
+export const PRESENTATION_CAPTION_API_COST_POLICY_V003 = Object.freeze({
+  modelId: 'gemini-3.6-flash',
+  modelResource: 'models/gemini-3.6-flash',
+  inputLimit: 1048576,
+  outputLimit: 65536,
+  tier: 'PAID_STANDARD_DEFAULT_BY_OMISSION',
+  inputPriceNanoUsdPerToken: 750,
+  outputPriceNanoUsdPerToken: 3750,
+  maximumNanoUsd: 1000000000,
+  countTokensCalls: 2,
+  generateContentCalls: 1,
+  automaticRetries: 0,
+  timeoutMilliseconds: 600000,
+  countTokensEndpoint:
+    'https://generativelanguage.googleapis.com/v1beta/'
+      + 'models/gemini-3.6-flash:countTokens',
+  generateContentEndpoint:
+    'https://generativelanguage.googleapis.com/v1beta/'
+      + 'models/gemini-3.6-flash:generateContent',
+});
+
 const PRESENTATION_API_PARAMETERIZED_COST_POLICY_V001 = Object.freeze({
   modelOutputTokenLimit: PRESENTATION_CAPTION_API_COST_POLICY_V001.outputLimit,
   inputPriceNanoUsdPerToken:
@@ -192,8 +234,27 @@ const makeFailure = (code, path, facts = {}) => Object.freeze({
   facts: Object.freeze({...facts}),
 });
 
-export function validatePresentationCaptionApiOfficialVerificationV001(value) {
-  if (!exactKeys(value, [
+const PRICE_SNAPSHOT_KEYS_V001 = Object.freeze([
+  'schemaVersion',
+  'modelId',
+  'tier',
+  'inputPriceNanoUsdPerToken',
+  'outputPriceNanoUsdPerToken',
+  'outputIncludesThinkingTokens',
+  'effectiveThrough',
+  'successorEffectiveFrom',
+  'successorInputPriceNanoUsdPerToken',
+  'successorOutputPriceNanoUsdPerToken',
+  'sourceUrl',
+  'observedAt',
+]);
+
+const validateOfficialVerificationAgainstPolicy = (
+  value,
+  policy,
+  requirePriceSnapshot,
+) => {
+  const keys = [
     'modelId',
     'modelResource',
     'observedAt',
@@ -202,12 +263,13 @@ export function validatePresentationCaptionApiOfficialVerificationV001(value) {
     'tier',
     'inputPriceNanoUsdPerToken',
     'outputPriceNanoUsdPerToken',
+    ...(requirePriceSnapshot ? ['priceSnapshot'] : []),
     'sources',
     'claims',
-  ])) {
+  ];
+  if (!exactKeys(value, keys)) {
     return makeFailure('API_BUDGET_BINDING_INVALID', '$.officialVerification');
   }
-  const policy = PRESENTATION_CAPTION_API_COST_POLICY_V001;
   if (value.modelId !== policy.modelId
     || value.modelResource !== policy.modelResource
     || value.inputLimit !== policy.inputLimit
@@ -317,10 +379,61 @@ export function validatePresentationCaptionApiOfficialVerificationV001(value) {
       );
     }
   }
+  if (requirePriceSnapshot) {
+    const snapshot = value.priceSnapshot;
+    const pricingSource = sourceById.get('pricing');
+    if (!exactKeys(snapshot, PRICE_SNAPSHOT_KEYS_V001)
+      || snapshot.schemaVersion !== 'presentation-caption-api-price-snapshot-v001'
+      || snapshot.modelId !== policy.modelId
+      || snapshot.tier !== 'Standard'
+      || snapshot.inputPriceNanoUsdPerToken !== policy.inputPriceNanoUsdPerToken
+      || snapshot.outputPriceNanoUsdPerToken !== policy.outputPriceNanoUsdPerToken
+      || snapshot.outputIncludesThinkingTokens !== true
+      || snapshot.effectiveThrough !== '2026-12-31'
+      || snapshot.successorEffectiveFrom !== '2027-01-01'
+      || snapshot.successorInputPriceNanoUsdPerToken !== 1500
+      || snapshot.successorOutputPriceNanoUsdPerToken !== 7500
+      || snapshot.sourceUrl !== 'https://ai.google.dev/gemini-api/docs/pricing'
+      || !validRfc3339UtcMilliseconds(snapshot.observedAt)
+      || pricingSource === undefined
+      || snapshot.sourceUrl !== pricingSource.url
+      || snapshot.observedAt !== pricingSource.observedAt
+      || value.inputPriceNanoUsdPerToken !== snapshot.inputPriceNanoUsdPerToken
+      || value.outputPriceNanoUsdPerToken !== snapshot.outputPriceNanoUsdPerToken) {
+      return makeFailure(
+        'API_BUDGET_BINDING_INVALID',
+        '$.officialVerification.priceSnapshot',
+      );
+    }
+  }
   return Object.freeze({
     status: 'passed',
     officialClaimsCanonicalSha256: canonicalSha256(value.claims),
   });
+};
+
+export function validatePresentationCaptionApiOfficialVerificationV001(value) {
+  return validateOfficialVerificationAgainstPolicy(
+    value,
+    PRESENTATION_CAPTION_API_COST_POLICY_V001,
+    false,
+  );
+}
+
+export function validatePresentationCaptionApiOfficialVerificationV002(value) {
+  return validateOfficialVerificationAgainstPolicy(
+    value,
+    PRESENTATION_CAPTION_API_COST_POLICY_V002,
+    true,
+  );
+}
+
+export function validatePresentationCaptionApiOfficialVerificationV003(value) {
+  return validateOfficialVerificationAgainstPolicy(
+    value,
+    PRESENTATION_CAPTION_API_COST_POLICY_V003,
+    true,
+  );
 }
 
 export function buildPresentationCaptionResidualRiskAcceptanceV001(
@@ -401,9 +514,10 @@ export function validatePresentationCaptionResidualRiskAcceptanceV001({
   });
 }
 
-export function buildPresentationCaptionCountTokensRequestV001(
+const buildPresentationCaptionCountTokensRequestAgainstPolicy = (
   generateContentRequest,
-) {
+  policy,
+) => {
   if (!exactKeys(generateContentRequest, [
     'systemInstruction',
     'contents',
@@ -413,7 +527,7 @@ export function buildPresentationCaptionCountTokensRequestV001(
   }
   const value = {
     generateContentRequest: {
-      model: PRESENTATION_CAPTION_API_COST_POLICY_V001.modelResource,
+      model: policy.modelResource,
       systemInstruction: generateContentRequest.systemInstruction,
       contents: generateContentRequest.contents,
       generationConfig: generateContentRequest.generationConfig,
@@ -424,6 +538,33 @@ export function buildPresentationCaptionCountTokensRequestV001(
     value,
     bytes: formalBytes(value),
   });
+};
+
+export function buildPresentationCaptionCountTokensRequestV001(
+  generateContentRequest,
+) {
+  return buildPresentationCaptionCountTokensRequestAgainstPolicy(
+    generateContentRequest,
+    PRESENTATION_CAPTION_API_COST_POLICY_V001,
+  );
+}
+
+export function buildPresentationCaptionCountTokensRequestV002(
+  generateContentRequest,
+) {
+  return buildPresentationCaptionCountTokensRequestAgainstPolicy(
+    generateContentRequest,
+    PRESENTATION_CAPTION_API_COST_POLICY_V002,
+  );
+}
+
+export function buildPresentationCaptionCountTokensRequestV003(
+  generateContentRequest,
+) {
+  return buildPresentationCaptionCountTokensRequestAgainstPolicy(
+    generateContentRequest,
+    PRESENTATION_CAPTION_API_COST_POLICY_V003,
+  );
 }
 
 export function parsePresentationCaptionCountTokensResponseV001({

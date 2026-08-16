@@ -1,0 +1,422 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-proof-job-v001",
+  "jobId": "zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0004-publisher-late-collision",
+  "attemptId": "attempt-0001",
+  "sourcePackageBinding": {
+    "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+    "path": "evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0004/f/source-package-v001.json",
+    "fileSha256": "06525d18519ca367b85447552647227df60fcbe729c631811413ee54a5be4d20",
+    "canonicalSha256": "e675f912d1ba55af352780bdaa88cd0343fae0209e4084075d19ee9b03360ed0"
+  },
+  "selectionBinding": {
+    "schemaVersion": "presentation-output-caption-cue-selection-v001",
+    "path": "evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0004/f/selection-v001.json",
+    "fileSha256": "79469f8e18ff1a3d49e2419aad370c2e30a2fe0cbbe679ed2bce6b09bb07471d",
+    "canonicalSha256": "a343538f8f6b40c492f99b3539cbc799620763a3de92525067227ab11137584d"
+  },
+  "selectionReportBinding": {
+    "schemaVersion": "presentation-output-caption-cue-selection-report-v001",
+    "path": "evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0004/f/selection-report-v001.json",
+    "fileSha256": "968b1d25f5d18ee9fbbaf9fd777445357fea994950cfdb7a9cc274133ac11883",
+    "canonicalSha256": "69b0af58fc8cda48e29407e1dc9952c1137008f2e84512162ab1de0057b6480b"
+  },
+  "cases": [
+    {
+      "caseId": "voice-013",
+      "inputCaptionId": "input-caption-000001",
+      "candidateId": "nE_bNeBNp4E_multiblock_material_v001:2:voice-013"
+    },
+    {
+      "caseId": "voice-067",
+      "inputCaptionId": "input-caption-000002",
+      "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-067"
+    },
+    {
+      "caseId": "voice-190",
+      "inputCaptionId": "input-caption-000003",
+      "candidateId": "nE_bNeBNp4E_multiblock_material_v001:5:voice-190"
+    }
+  ],
+  "runtimeProfile": {
+    "node": {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "tsx": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+    },
+    "remotion": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/@remotion/cli/remotion-cli.js",
+      "fileSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa"
+    },
+    "browser": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8"
+    },
+    "ffmpeg": {
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    "ffprobe": {
+      "path": "/opt/homebrew/bin/ffprobe",
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    },
+    "imageMagick": {
+      "path": "/opt/homebrew/bin/magick",
+      "fileSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29"
+    }
+  },
+  "runtimeDataBindings": [
+    {
+      "role": "renderer-core-speaker-registry",
+      "path": "evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+      "fileSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a"
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0004/publisher-late-collision",
+  "implementationBindings": [
+    {
+      "role": "atomic-directory-publisher-adapter-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+      "fileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af"
+    },
+    {
+      "role": "atomic-directory-publisher-native-darwin-arm64-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001-darwin-arm64",
+      "fileSha256": "ba5067dd933ae9b1213ab39236bf07c7e87513afbb384643347cefe0a75084b3"
+    },
+    {
+      "role": "atomic-directory-publisher-native-source-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.c",
+      "fileSha256": "6c237ceac499a83db74324165d630e14857a86165267cdbbc88c46b92c01150c"
+    },
+    {
+      "role": "caption-cue-selection",
+      "path": "evals/clip_composition/presentation_output_caption_cue_selection_v001.mjs",
+      "fileSha256": "fbe7152f1a26837af51f26a4c673b2cddbc889370988b6e3c85dedb50d741cd6"
+    },
+    {
+      "role": "caption-cue-source-contract",
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "fileSha256": "4fad07904c31a48d0aa4eecaac771f6b7b1304275356edc9a13e6173f3b269ff"
+    },
+    {
+      "role": "dep-base-media-timeline-v002",
+      "path": "evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+      "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+    },
+    {
+      "role": "dep-caption-contract-v002",
+      "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+      "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c"
+    },
+    {
+      "role": "dep-caption-contract-v003",
+      "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+      "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+    },
+    {
+      "role": "dep-caption-display-pair-v003",
+      "path": "evals/clip_composition/presentation_caption_display_pair_v003.mjs",
+      "fileSha256": "a22aa6ad44a7cd07c75ba1ebde4d40601efe29915ca6cfe915f4e1a3d8808a04"
+    },
+    {
+      "role": "dep-caption-display-pair-v004",
+      "path": "evals/clip_composition/presentation_caption_display_pair_v004.mjs",
+      "fileSha256": "9b93619c1285dca5bd66ff07bd762ea6235b66cec9c215260f95174689370e17"
+    },
+    {
+      "role": "dep-caption-semantic-output-v001",
+      "path": "evals/clip_composition/presentation_caption_semantic_output_v001.mjs",
+      "fileSha256": "9b9bb011dcd198e02cb075b70e79d3090ddfe17694198f56b83726f004e78c6d"
+    },
+    {
+      "role": "dep-fatal-observation-v002",
+      "path": "evals/clip_composition/presentation_fatal_observation_v002.mjs",
+      "fileSha256": "cf95c2ba8785be681dcecc03dc4ec009d6f02b4161e3c39f7edbf431b92b6115"
+    },
+    {
+      "role": "dep-formal-json-codec",
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+    },
+    {
+      "role": "dep-inspect-preset-layout",
+      "path": "evals/clip_composition/inspect_presentation_preset_layout.ts",
+      "fileSha256": "416a81b54b18be6a6ccdd5906d3a3730bd0455edfe4be7002c9c6c4ccf2f8843"
+    },
+    {
+      "role": "dep-instruction-contract-v002",
+      "path": "evals/clip_composition/presentation_instruction_contract_v002.mjs",
+      "fileSha256": "11c80c40d4fd9cbe88bb40ed5a941e084e381b5646123edecad8f224926c3e20"
+    },
+    {
+      "role": "dep-instruction-contract-v003",
+      "path": "evals/clip_composition/presentation_instruction_contract_v003.mjs",
+      "fileSha256": "c0a3c791c74a8c303e97e1fe0c81b8017c5dee35bd93e57668d8e11fa24925e7"
+    },
+    {
+      "role": "dep-instruction-contract-v004",
+      "path": "evals/clip_composition/presentation_instruction_contract_v004.mjs",
+      "fileSha256": "caab417919e03e2ff9b169aaeba731104f8ed01d9a2963f81f801bea79e1d21c"
+    },
+    {
+      "role": "dep-meaning-package-v001",
+      "path": "evals/clip_composition/presentation_meaning_information_package_v001.mjs",
+      "fileSha256": "46562003fabb1032b1422c2fe266e79f8a6f30f8c27214302f8436c670276567"
+    },
+    {
+      "role": "dep-meaning-package-v002",
+      "path": "evals/clip_composition/presentation_a_meaning_information_package_v002.mjs",
+      "fileSha256": "40a85f526666dd5f68bf64d141a5236146ae5b8e2baf285d4390bef41410e1a2"
+    },
+    {
+      "role": "dep-output-base-media-v001",
+      "path": "evals/clip_composition/presentation_output_base_media_v001.mjs",
+      "fileSha256": "2a7c01e3b60059350ffbf80494b4e4ba041f0624b05bc96c92f356448e15fd06"
+    },
+    {
+      "role": "dep-output-contract-v001",
+      "path": "evals/clip_composition/presentation_output_contract_v001.mjs",
+      "fileSha256": "95f1da2029a3cf0dda4fa873490321d2aa92ea6bfb548f38d939a0800f5bd5b8"
+    },
+    {
+      "role": "dep-output-crop-application-v001",
+      "path": "evals/clip_composition/presentation_output_crop_application_v001.mjs",
+      "fileSha256": "322fdc1e06a13600c522f577913336c6f042851305880e5053b8728f2d8640d3"
+    },
+    {
+      "role": "dep-page-line-planner-v001",
+      "path": "evals/clip_composition/presentation_output_page_line_planner_v001.mjs",
+      "fileSha256": "ebafe022060aaf9b98d9f7f27ae60af5e139295e0390ccca4db5caa99f590879"
+    },
+    {
+      "role": "dep-page-line-planner-v002",
+      "path": "evals/clip_composition/presentation_output_page_line_planner_v002.mjs",
+      "fileSha256": "8c943d68e1d08aadd48ab80e100006e091d2163c8fcb88a005e9f07f050b7f83"
+    },
+    {
+      "role": "dep-piecewise-timeline-v002",
+      "path": "evals/clip_composition/presentation_output_piecewise_timeline_v002.mjs",
+      "fileSha256": "72305c31005fa8b64d3b881a07a315e619eba36677bf1f8b691b2af4c4623516"
+    },
+    {
+      "role": "dep-render-plan-v001",
+      "path": "evals/clip_composition/presentation_output_render_plan_v001.mjs",
+      "fileSha256": "a333b9cca2e4c376be9022113f185b718218d339281c0c8dd4e67916390abb35"
+    },
+    {
+      "role": "dep-render-plan-v002",
+      "path": "evals/clip_composition/presentation_output_render_plan_v002.mjs",
+      "fileSha256": "80623c9690be58ea4db59eec40d76af3c0f51e3f5c860b0c985c78832e88fe01"
+    },
+    {
+      "role": "dep-renderer-core-v002",
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "c90dc00456ade415e46cf8c692c49f3d08ae0ab21186b10227cdb5676f445292"
+    },
+    {
+      "role": "dep-renderer-plan-v002",
+      "path": "evals/clip_composition/presentation_renderer_plan_v002.mjs",
+      "fileSha256": "3a77c7feb7005fa06d7e45a6364f76ab4bc40a8622370568cf557d5090f08b79"
+    },
+    {
+      "role": "dep-renderer-qc-v002",
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "ecf221f6434190adf2e99e8de1c4969b5f4533bf04cf8cf2363d8de79bf187e2"
+    },
+    {
+      "role": "dep-renderer-text-layout-v001",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0"
+    },
+    {
+      "role": "dep-retained-source-atoms-v001",
+      "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+      "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+    },
+    {
+      "role": "dep-segmenter-boundary-evidence-v001",
+      "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+      "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+    },
+    {
+      "role": "dep-segmenter-boundary-preflight-v001",
+      "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+      "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+    },
+    {
+      "role": "dep-source-sequence-v002",
+      "path": "evals/clip_composition/presentation_a_source_sequence_v002.mjs",
+      "fileSha256": "c20401d398956710842823e9ec2677f07cf5686c9f04b03c1df1532d540e09ec"
+    },
+    {
+      "role": "dep-source-speaker-policy-v001",
+      "path": "evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+      "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b"
+    },
+    {
+      "role": "dep-style-resolver-v001",
+      "path": "evals/clip_composition/presentation_output_style_resolver_v001.ts",
+      "fileSha256": "e63e4b4cf47d94d763333e13513570abe2dbac418e5ac5b396e1295b22956403"
+    },
+    {
+      "role": "dep-telop-glow",
+      "path": "runner/src/shared/telop-glow.ts",
+      "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+    },
+    {
+      "role": "dep-telop-line-break",
+      "path": "runner/src/telop/telop-line-break.ts",
+      "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+    },
+    {
+      "role": "dep-telop-render-model",
+      "path": "runner/src/telop/telop-render-model.ts",
+      "fileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+    },
+    {
+      "role": "dep-text-metrics",
+      "path": "runner/src/telop/text-metrics.ts",
+      "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+    },
+    {
+      "role": "dep-timeline-composition-decision-v001",
+      "path": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+      "fileSha256": "6bd3adba0b12d118df93ffd978c29a727db49003c8391d47f82f23a14ea796ba"
+    },
+    {
+      "role": "dep-vertical-review-renderer-v001",
+      "path": "evals/clip_composition/render_presentation_vertical_review_v001.ts",
+      "fileSha256": "6fb4edfd9c9a9161f474921368b05bd32c0aaef2b1fd5155e148d291134c8c75"
+    },
+    {
+      "role": "layout-inspector-v001",
+      "path": "evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c"
+    },
+    {
+      "role": "page-line-planner-v003",
+      "path": "evals/clip_composition/presentation_output_page_line_planner_v003.mjs",
+      "fileSha256": "f5f783f9a50c9657c74a9e6e3b7a8c82abc4ebf09a4704ba8797f0a96657a811"
+    },
+    {
+      "role": "proof-runner",
+      "path": "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.ts",
+      "fileSha256": "ae789a4cc8e9aeaeecc493a5ca13b2137ce56b33b84712f141e9f23cf90f86ee"
+    },
+    {
+      "role": "render-plan-v003",
+      "path": "evals/clip_composition/presentation_output_render_plan_v003.mjs",
+      "fileSha256": "5c16cf593aeb070a32e9bdb4936647a2a1a1becc6a17e276be33214dd69a03d6"
+    },
+    {
+      "role": "renderer-entry-v001",
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7"
+    },
+    {
+      "role": "renderer-telop-font",
+      "path": "runner/src/remotion/utils/telop-font.ts",
+      "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+    },
+    {
+      "role": "renderer-telop-text",
+      "path": "runner/src/remotion/components/TelopText.tsx",
+      "fileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+    },
+    {
+      "role": "review-ui",
+      "path": "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.mjs",
+      "fileSha256": "0624fdd54cc39d1899910e1386bd587a2218543183db6b884580d9bcec996888"
+    }
+  ],
+  "approvedContractBindings": [
+    {
+      "role": "caption-quality-atomic-publication-b6-owner-scope-revision-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-atomic-publication-b6-owner-scope-revision-addendum-20260811-v004.md",
+      "fileSha256": "39e7c9b9005fb8ec762c19c0e6fde86acb398f1e99c75dd5d7100eabf452eade"
+    },
+    {
+      "role": "caption-quality-atomic-runtime-lc-uuid-compatibility-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-atomic-runtime-lc-uuid-compatibility-addendum-20260811-v006.md",
+      "fileSha256": "bd4b52901081c418b5c5ebe6a71ba4a02895fde3c86223ec433653af53530e1e"
+    },
+    {
+      "role": "caption-quality-b6-credential-unavailable-owner-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-b6-credential-unavailable-owner-addendum-20260811-v005.md",
+      "fileSha256": "573b705f80935ba0015a2f509371f17911d6aa0ea2fd7130b097ed98262b07dd"
+    },
+    {
+      "role": "caption-quality-complete-implementation-design",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-complete-implementation-design-20260810-v001.md",
+      "fileSha256": "44fb6199a80663657bf056df0118def3db750fe65813d86e9d106cdc4f42d6e4"
+    },
+    {
+      "role": "caption-quality-complete-implementation-design-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-complete-implementation-design-binding-wiring-addendum-20260811-v002.md",
+      "fileSha256": "a3c8c3ef8e57cd557e4a7cae17ecc188dc523df1508a45de6e2bce36691c7e4d"
+    },
+    {
+      "role": "caption-quality-dependency-load-stage-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-dependency-load-stage-observation-addendum-20260813-v014.md",
+      "fileSha256": "446cd7df58d61fd345a9f6ef73510c1e225ebc4f078de9d001fcb84d1ba5d7bc"
+    },
+    {
+      "role": "caption-quality-dependency-unit-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-dependency-unit-observation-addendum-20260813-v013.md",
+      "fileSha256": "77e579582fdfaad131172564b8ce81790db6b779540f338244cbc65b0d1c7501"
+    },
+    {
+      "role": "caption-quality-formal-capability-read-entry-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-formal-capability-read-entry-addendum-20260812-v010.md",
+      "fileSha256": "6b2cd93d0ab366806160f05457d861899b87b0b08234f051f241ca2510988110"
+    },
+    {
+      "role": "caption-quality-fu-fixture-manufacturing-contract-design",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-fu-fixture-manufacturing-contract-design-20260815-v001.md",
+      "fileSha256": "8312ab82095dec1e0fd96fea00f6c5e61e04997ae0a9956799fe2b30be17b554"
+    },
+    {
+      "role": "caption-quality-parent-contract",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-contract-design-20260810-v001.md",
+      "fileSha256": "33b61ee497d765fbe9eb63fb1b05bce16a99488d238eb27b732550b4daac24ba"
+    },
+    {
+      "role": "caption-quality-pre-staging-inner-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-pre-staging-inner-observation-addendum-20260813-v012.md",
+      "fileSha256": "668158f99ff6bacafe2ccbc9f182493a191fd3896469a972117714c86427d27f"
+    },
+    {
+      "role": "caption-quality-proof-capability-and-tsx-namespace-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-proof-capability-and-tsx-namespace-addendum-20260812-v009.md",
+      "fileSha256": "b22aab0ef923b459b1785e32841f9df215ee9f095cf78afc188518523966285a"
+    },
+    {
+      "role": "caption-quality-resolved-url-evaluation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-resolved-url-evaluation-addendum-20260814-v015.md",
+      "fileSha256": "42874101356eac7c2d76d8a7c75cdc1c77097f7c4ee8391dda2bb80b8d0ce275"
+    },
+    {
+      "role": "caption-quality-runtime-live-binding-separation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-runtime-live-binding-separation-addendum-20260811-v008.md",
+      "fileSha256": "6a5d2115763f97f473f1a66690da05561339c1f51f7412b644ae259dfc61d8a1"
+    },
+    {
+      "role": "caption-quality-selection-runtime-value-wiring-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-selection-runtime-value-wiring-addendum-20260811-v003.md",
+      "fileSha256": "632aa7fdec88da47fe8639fb10f74f390aa0cc5f191a114b797c08115bee4c9e"
+    },
+    {
+      "role": "caption-quality-source-final-package-validator-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-source-final-package-validator-addendum-20260811-v007.md",
+      "fileSha256": "787d401d2939f58cbc10562c1ed29ab2118f6169607e05bbb2d7c5c5971c8053"
+    },
+    {
+      "role": "caption-quality-tsx-wrapper-descriptor-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-tsx-wrapper-descriptor-addendum-20260812-v011.md",
+      "fileSha256": "61f2c3ddbe5a3bcb2bfaba39e0ce1cc2e18a77fb2f1f5337d3fd166044b41010"
+    }
+  ]
+}

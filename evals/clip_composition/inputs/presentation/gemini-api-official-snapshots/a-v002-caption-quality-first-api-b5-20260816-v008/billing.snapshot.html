@@ -1,0 +1,3246 @@
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html 
+      lang="en"
+      dir="ltr">
+  <head>
+    <meta name="google-signin-client-id" content="157101835696-ooapojlodmuabs2do2vuhhnf90bccmoi.apps.googleusercontent.com"><meta name="google-signin-scope"
+          content="profile email https://www.googleapis.com/auth/developerprofiles https://www.googleapis.com/auth/developerprofiles.award https://www.googleapis.com/auth/devprofiles.full_control.firstparty"><meta property="og:site_name" content="Google AI for Developers">
+    <meta property="og:type" content="website"><meta name="theme-color" content="#1967d2"><meta charset="utf-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <link rel="manifest" href="/_pwa/googledevai/manifest.json"
+          crossorigin="use-credentials">
+    <link rel="preconnect" href="//www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="//fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="//www.google-analytics.com" crossorigin><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700|Inter:400,500|Inter+Tight:300,500,600&display=swap">
+      <link rel="stylesheet"
+            href="//fonts.googleapis.com/css2?family=Material+Icons&family=Material+Symbols+Outlined&display=block"><link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/googledevai/css/app.css">
+      
+        <link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/googledevai/css/dark-theme.css" disabled>
+      <link rel="shortcut icon" href="https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/googledevai/images/favicon-new.png">
+    <link rel="apple-touch-icon" href="https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/googledevai/images/touchicon-180-new.png"><link rel="canonical" href="https://ai.google.dev/gemini-api/docs/billing"><link rel="search" type="application/opensearchdescription+xml"
+            title="Google AI for Developers" href="https://ai.google.dev/s/opensearch.xml">
+      <link rel="alternate" hreflang="en"
+          href="https://ai.google.dev/gemini-api/docs/billing" /><link rel="alternate" hreflang="x-default" href="https://ai.google.dev/gemini-api/docs/billing" /><link rel="alternate" hreflang="ar"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=ar" /><link rel="alternate" hreflang="bn"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=bn" /><link rel="alternate" hreflang="zh-Hans"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn" /><link rel="alternate" hreflang="zh-Hant"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=zh-tw" /><link rel="alternate" hreflang="fa"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=fa" /><link rel="alternate" hreflang="fr"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=fr" /><link rel="alternate" hreflang="de"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=de" /><link rel="alternate" hreflang="he"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=he" /><link rel="alternate" hreflang="hi"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=hi" /><link rel="alternate" hreflang="id"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=id" /><link rel="alternate" hreflang="it"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=it" /><link rel="alternate" hreflang="ja"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=ja" /><link rel="alternate" hreflang="ko"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=ko" /><link rel="alternate" hreflang="pl"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=pl" /><link rel="alternate" hreflang="pt-BR"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=pt-br" /><link rel="alternate" hreflang="ru"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=ru" /><link rel="alternate" hreflang="es-419"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=es-419" /><link rel="alternate" hreflang="th"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=th" /><link rel="alternate" hreflang="tr"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=tr" /><link rel="alternate" hreflang="vi"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=vi" /><link rel="alternate" hreflang="sq"
+          href="https://ai.google.dev/gemini-api/docs/billing?hl=sq" /><title>Billing &nbsp;|&nbsp; Gemini API &nbsp;|&nbsp; Google AI for Developers</title>
+
+<meta property="og:title" content="Billing &nbsp;|&nbsp; Gemini API &nbsp;|&nbsp; Google AI for Developers"><meta property="og:url" content="https://ai.google.dev/gemini-api/docs/billing"><meta property="og:image" content="https://ai.google.dev/static/site-assets/images/share-gemini-api-2026-07.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675"><meta property="og:locale" content="en"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    
+    "headline": "Billing"
+  }
+</script><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Gemini API",
+      "item": "https://ai.google.dev/gemini-api"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Billing",
+      "item": "https://ai.google.dev/gemini-api/docs/billing"
+    }]
+  }
+  </script>
+  
+
+  
+
+  
+
+
+    </head>
+  <body class="gemini-api color-scheme--light"
+        template="page"
+        theme="googledevai-theme"
+        type="article"
+        
+        appearance
+        
+        layout="docs"
+        
+        
+        
+        
+        
+        display-toc
+        pending>
+  
+    <devsite-progress type="indeterminate" id="app-progress"></devsite-progress>
+  
+  
+    <a href="#main-content" class="skip-link button">
+      
+      Skip to main content
+    </a>
+    <section class="devsite-wrapper">
+      <devsite-cookie-notification-bar></devsite-cookie-notification-bar>
+        <devsite-header role="banner" keep-tabs-visible>
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-header--inner" data-nosnippet>
+  <div class="devsite-top-logo-row-wrapper-wrapper">
+    <div class="devsite-top-logo-row-wrapper">
+      <div class="devsite-top-logo-row">
+        <button type="button" id="devsite-hamburger-menu"
+          class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+          data-category="Site-Wide Custom Events"
+          data-label="Navigation menu button"
+          visually-hidden
+          aria-label="Open menu">
+        </button>
+        
+<div class="devsite-product-name-wrapper">
+
+  <a href="/" class="devsite-site-logo-link gc-analytics-event"
+   data-category="Site-Wide Custom Events" data-label="Site logo" track-type="globalNav"
+   track-name="geminiAPI" track-metadata-position="nav"
+   track-metadata-eventDetail="nav">
+  
+  <picture>
+    
+    <source srcset="https://ai.google.dev/_static/googledevai/images/gemini-api-logo-dark-theme.svg"
+            media="(prefers-color-scheme: dark)"
+            class="devsite-dark-theme">
+    
+    <img src="https://ai.google.dev/_static/googledevai/images/gemini-api-logo.svg" class="devsite-site-logo" alt="Gemini API">
+  </picture>
+  
+</a>
+
+
+
+  
+  
+  <span class="devsite-product-name">
+    <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+      
+    
+  </li>
+  
+</ul>
+  </span>
+
+</div>
+        <div class="devsite-top-logo-row-middle">
+          <div class="devsite-header-upper-tabs">
+            
+           </div>
+          
+<devsite-search
+    enable-signin
+    enable-search
+    enable-suggestions
+      enable-query-completion
+    
+    enable-search-summaries
+    project-name="Gemini API"
+    tenant-name="Google AI for Developers"
+    project-scope="/gemini-api"
+    url-scoped="https://ai.google.dev/s/results/gemini-api"
+    
+    
+    
+    >
+  <form class="devsite-search-form" action="https://ai.google.dev/s/results" method="GET">
+    <div class="devsite-search-container">
+      <button type="button"
+              search-open
+              class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+              
+              aria-label="Open search"></button>
+      <div class="devsite-searchbox">
+        <input
+          aria-activedescendant=""
+          aria-autocomplete="list"
+          
+          aria-label="Search"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          autocomplete="off"
+          class="devsite-search-field devsite-search-query"
+          name="q"
+          
+          placeholder="Search"
+          role="combobox"
+          type="text"
+          value=""
+          >
+          <div class="devsite-search-image material-icons" aria-hidden="true">
+            
+              <svg class="devsite-search-ai-image" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_6641_386)">
+                    <path d="M19.6 21L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16C7.68333 16 6.14167 15.375 4.875 14.125C3.625 12.8583 3 11.3167 3 9.5C3 7.68333 3.625 6.15 4.875 4.9C6.14167 3.63333 7.68333 3 9.5 3C10.0167 3 10.5167 3.05833 11 3.175C11.4833 3.275 11.9417 3.43333 12.375 3.65L10.825 5.2C10.6083 5.13333 10.3917 5.08333 10.175 5.05C9.95833 5.01667 9.73333 5 9.5 5C8.25 5 7.18333 5.44167 6.3 6.325C5.43333 7.19167 5 8.25 5 9.5C5 10.75 5.43333 11.8167 6.3 12.7C7.18333 13.5667 8.25 14 9.5 14C10.6667 14 11.6667 13.625 12.5 12.875C13.35 12.1083 13.8417 11.15 13.975 10H15.975C15.925 10.6333 15.7833 11.2333 15.55 11.8C15.3333 12.3667 15.05 12.8667 14.7 13.3L21 19.6L19.6 21ZM17.5 12C17.5 10.4667 16.9667 9.16667 15.9 8.1C14.8333 7.03333 13.5333 6.5 12 6.5C13.5333 6.5 14.8333 5.96667 15.9 4.9C16.9667 3.83333 17.5 2.53333 17.5 0.999999C17.5 2.53333 18.0333 3.83333 19.1 4.9C20.1667 5.96667 21.4667 6.5 23 6.5C21.4667 6.5 20.1667 7.03333 19.1 8.1C18.0333 9.16667 17.5 10.4667 17.5 12Z" fill="#5F6368"/>
+                  </g>
+                <defs>
+                <clipPath id="clip0_6641_386">
+                <rect width="24" height="24" fill="white"/>
+                </clipPath>
+                </defs>
+              </svg>
+            
+          </div>
+          <div class="devsite-search-shortcut-icon-container" aria-hidden="true">
+            <kbd class="devsite-search-shortcut-icon">/</kbd>
+          </div>
+      </div>
+    </div>
+  </form>
+  <button type="button"
+          search-close
+          class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+          
+          aria-label="Close search"></button>
+</devsite-search>
+
+        </div>
+
+        
+
+          
+
+          
+
+          
+
+          <devsite-appearance-selector></devsite-appearance-selector>
+
+          
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="sq"
+        >Shqip</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="he"
+        >עברית</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fa"
+        >فارسی</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="bn"
+        >বাংলা</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+
+          
+            <a class="devsite-header-link devsite-top-button button gc-analytics-event "
+    href="https://aistudio.google.com/apikey"
+    data-category="Site-Wide Custom Events"
+    data-label="Site header link: Get API key"
+    
+      
+        target="_blank"
+      
+    >
+  Get API key
+</a>
+          
+            <a class="devsite-header-link devsite-top-button button gc-analytics-event "
+    href="https://github.com/google-gemini/cookbook"
+    data-category="Site-Wide Custom Events"
+    data-label="Site header link: Cookbook"
+    
+      
+        target="_blank"
+      
+    >
+  Cookbook
+</a>
+          
+            <a class="devsite-header-link devsite-top-button button gc-analytics-event "
+    href="https://discuss.ai.google.dev/c/gemini-api/"
+    data-category="Site-Wide Custom Events"
+    data-label="Site header link: Community"
+    
+      
+        target="_blank"
+      
+    >
+  Community
+</a>
+          
+
+        
+
+        
+          <devsite-user 
+                        
+                        
+                          enable-profiles
+                        
+                        
+                        id="devsite-user">
+            
+              
+              <span class="button devsite-top-button" aria-hidden="true" visually-hidden>Sign in</span>
+            
+          </devsite-user>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="devsite-collapsible-section
+    ">
+    <div class="devsite-header-background">
+      
+        
+      
+      
+        <div class="devsite-doc-set-nav-row">
+          
+          
+            
+            
+  <devsite-tabs class="lower-tabs">
+
+    <nav class="devsite-tabs-wrapper" aria-label="Lower tabs">
+      
+        
+          <tab  class="devsite-active">
+            
+    <a href="https://ai.google.dev/gemini-api/docs"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://ai.google.dev/gemini-api/docs"
+    
+       track-type="nav"
+       track-metadata-position="nav - docs"
+       track-metadata-module="primary nav"
+       aria-label="Docs, selected" 
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Docs"
+         
+           track-name="docs"
+         
+       >
+    Docs
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://ai.google.dev/api"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://ai.google.dev/api"
+    
+       track-type="nav"
+       track-metadata-position="nav - api reference"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: API reference"
+         
+           track-name="api reference"
+         
+       >
+    API reference
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+    </nav>
+
+  </devsite-tabs>
+
+          
+          
+        </div>
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+  
+
+  
+</devsite-header>
+        <devsite-book-nav scrollbars >
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-book-nav-filter"
+     hidden>
+  <span class="filter-list-icon material-icons" aria-hidden="true"></span>
+  <input type="text"
+         placeholder="Filter"
+         
+         aria-label="Type to filter"
+         role="searchbox">
+  
+  <span class="filter-clear-button hidden"
+        data-title="Clear filter"
+        aria-label="Clear filter"
+        role="button"
+        tabindex="0"></span>
+</div>
+
+<nav class="devsite-book-nav devsite-nav nocontent" data-nosnippet
+     aria-label="Side menu">
+  <div class="devsite-mobile-header">
+    <button type="button"
+            id="devsite-close-nav"
+            class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Close navigation"
+            aria-label="Close navigation">
+    </button>
+    <div class="devsite-product-name-wrapper">
+
+  <a href="/" class="devsite-site-logo-link gc-analytics-event"
+   data-category="Site-Wide Custom Events" data-label="Site logo" track-type="globalNav"
+   track-name="geminiAPI" track-metadata-position="nav"
+   track-metadata-eventDetail="nav">
+  
+  <picture>
+    
+    <source srcset="https://ai.google.dev/_static/googledevai/images/gemini-api-logo-dark-theme.svg"
+            media="(prefers-color-scheme: dark)"
+            class="devsite-dark-theme">
+    
+    <img src="https://ai.google.dev/_static/googledevai/images/gemini-api-logo.svg" class="devsite-site-logo" alt="Gemini API">
+  </picture>
+  
+</a>
+
+
+  
+      <span class="devsite-product-name">
+        
+        
+        <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+      
+    
+  </li>
+  
+</ul>
+      </span>
+    
+
+</div>
+  </div>
+
+  <div class="devsite-book-nav-wrapper">
+    <div class="devsite-mobile-nav-top">
+      
+        <ul class="devsite-nav-list">
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/gemini-api/docs"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              devsite-nav-active"
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Gemini API"
+      
+        track-name="gemini api"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Gemini API"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Gemini API
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+                <ul class="devsite-nav-responsive-tabs">
+                  
+                    
+                    
+                    
+                    <li class="devsite-nav-item">
+                      
+  
+  <a href="/gemini-api/docs"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              devsite-nav-active"
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Docs"
+      
+        track-name="docs"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Docs"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip menu="_book">
+      Docs
+   </span>
+    
+  
+  </a>
+  
+
+  
+                    </li>
+                  
+                    
+                    
+                    
+                    <li class="devsite-nav-item">
+                      
+  
+  <a href="/api"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: API reference"
+      
+        track-name="api reference"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: API reference"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      API reference
+   </span>
+    
+  
+  </a>
+  
+
+  
+                    </li>
+                  
+                </ul>
+              
+            </li>
+          
+          
+    
+    
+<li class="devsite-nav-item">
+
+  
+  <a href="https://aistudio.google.com/apikey"
+    
+       class="devsite-nav-title gc-analytics-event "
+    
+
+    
+      
+        target="_blank"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Get API key"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Get API key
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+  
+    
+    
+<li class="devsite-nav-item">
+
+  
+  <a href="https://github.com/google-gemini/cookbook"
+    
+       class="devsite-nav-title gc-analytics-event "
+    
+
+    
+      
+        target="_blank"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Cookbook"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Cookbook
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+  
+    
+    
+<li class="devsite-nav-item">
+
+  
+  <a href="https://discuss.ai.google.dev/c/gemini-api/"
+    
+       class="devsite-nav-title gc-analytics-event "
+    
+
+    
+      
+        target="_blank"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Community"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Community
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+  
+          
+        </ul>
+      
+    </div>
+    
+      <div class="devsite-mobile-nav-bottom">
+        
+          
+          <ul class="devsite-nav-list" menu="_book">
+            <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Get started</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/get-started"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Get started</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/api-key"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>API keys</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/pricing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Pricing</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/coding-agents"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Coding agent setup</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Models</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/models"
+        class="devsite-nav-title"
+      
+        alt-paths=" /gemini-api/docs/models/gemini-3.1-flash-image /gemini-api/docs/models/gemini-3.1-flash-lite-image /gemini-api/docs/models/gemini-3.1-pro-preview /gemini-api/docs/models/gemini-3-pro-preview /gemini-api/docs/models/gemini-3-pro-image /gemini-api/docs/models/gemini-3.7-flash /gemini-api/docs/models/gemini-3.6-flash /gemini-api/docs/models/gemini-3.5-flash /gemini-api/docs/models/gemini-3.5-live-translate-preview /gemini-api/docs/models/gemini-3-flash-preview /gemini-api/docs/models/gemini-3.1-flash-tts-preview /gemini-api/docs/models/veo-3.1-lite-generate-preview /gemini-api/docs/models/gemini-3.1-flash-live-preview /gemini-api/docs/models/gemini-3.5-flash-lite /gemini-api/docs/models/gemini-3.1-flash-lite /gemini-api/docs/models/gemini-3.1-flash-lite-preview /gemini-api/docs/models/gemini-2.5-flash /gemini-api/docs/models/gemini-2.5-flash-preview-09-2025 /gemini-api/docs/models/gemini-2.5-flash-image /gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025 /gemini-api/docs/models/gemini-2.5-flash-preview-tts /gemini-api/docs/models/gemini-2.5-flash-lite /gemini-api/docs/models/gemini-2.5-flash-lite-preview-09-2025 /gemini-api/docs/models/gemini-2.5-pro /gemini-api/docs/models/gemini-2.5-pro-preview-tts /gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025 /gemini-api/docs/models/gemini-2.0-flash /gemini-api/docs/models/gemini-2.0-flash-lite /gemini-api/docs/models/imagen /gemini-api/docs/models/veo-3.1-generate-preview /gemini-api/docs/models/veo-2.0-generate-001 /gemini-api/docs/models/gemini-embedding-001 /gemini-api/docs/models/gemini-embedding-2 /gemini-api/docs/models/gemini-robotics-er-1.5-preview /gemini-api/docs/models/gemini-robotics-er-2-preview /gemini-api/docs/models/gemini-robotics-er-2-streaming-preview /gemini-api/docs/models/gemini-robotics-er-1.6-preview /gemini-api/docs/models/deep-research-pro-preview-12-2025 /gemini-api/docs/models/deep-research-preview-04-2026 /gemini-api/docs/models/deep-research-max-preview-04-2026 /gemini-api/docs/models/antigravity-preview-05-2026 /gemini-api/docs/models/lyria-realtime-exp /gemini-api/docs/models/lyria-3-clip-preview /gemini-api/docs/models/lyria-3-pro-preview /gemini-api/docs/models/gemini-omni-flash "><span class="devsite-nav-text" tooltip>All models</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/latest-model"
+        class="devsite-nav-title"
+      
+        alt-paths=" /gemini-api/docs/whats-new-gemini-3.5 "><span class="devsite-nav-text" tooltip>Latest Gemini models</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/image-generation"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Nano Banana</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/veo"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Veo</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/omni"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Gemini Omni Flash</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/music-generation"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Lyria 3</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/realtime-music-generation"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Lyria RealTime</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/imagen"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Imagen</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/speech-generation"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Text-to-speech</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/live-api"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Live</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/live-api/live-translate"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Live translate</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/embeddings"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Embeddings</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Robotics</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/robotics-overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/robotics-spatial"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Spatial reasoning</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/robotics-agentic"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Agentic vision</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/robotics-orchestration"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Task orchestration</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/robotics-streaming"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Robotics with streaming</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/robotics-video-progress"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Video understanding</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Core capabilities</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/text-generation"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Text</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Image</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/image-generation"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Image generation 🍌</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/image-understanding"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Image understanding</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Video</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/video"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Video overview</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/video-understanding"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Video understanding</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/document-processing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Documents</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Speech and audio</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/speech-generation"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Speech generation</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/audio"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Audio understanding</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Thinking</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/thinking"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Thinking</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/thought-signatures"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Thought signatures</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/structured-output"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Structured outputs</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/function-calling"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Function calling</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/long-context"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Long context</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Agents</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/agents"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/managed-agents-quickstart"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Quickstart</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/antigravity-agent"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Antigravity agent</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/custom-agents"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Building managed agents</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/agent-environment"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Environments</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/agent-hooks"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Hooks</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/deep-research"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Deep Research agent</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Tools</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/tools"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/google-search"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google Search</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/maps-grounding"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google Maps</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/code-execution"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Code execution</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/url-context"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>URL context</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/computer-use"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Computer use</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/file-search"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>File search</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/tool-combination"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Combine tools and function calling</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Live API</span>
+      </div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/live-api"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Get started</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/live-api/get-started-sdk"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Get started using the GenAI SDK</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/live-api/get-started-websocket"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Get started using raw WebSockets</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/live-api/capabilities"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Capabilities</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/live-api/live-translate"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Live translation</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/live-api/tools"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Tool use</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/live-api/session-management"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Session management</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/live-api/ephemeral-tokens"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Ephemeral tokens</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/live-api/best-practices"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Best practices</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Optimization</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/optimization"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/batch-api"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Batch API</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/webhooks"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Webhooks</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/flex-inference"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Flex inference</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-preview"><a href="/gemini-api/docs/priority-inference"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Priority inference</span><span class="devsite-nav-icon material-icons"
+        data-icon="preview"
+        data-title="Preview"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/caching"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Context caching</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Guides</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/interactions-overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Interactions API</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/streaming"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Streaming</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/background-execution"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Background execution</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>File input</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/file-input-methods"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Input methods</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/files"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Files API</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/openai"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>OpenAI compatibility</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/media-resolution"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Media resolution</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/tokens"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Token counting</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/prompting-strategies"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Prompt engineering</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Logs and datasets</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/logs-datasets"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Get started with logs</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/logs-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Data logging and sharing</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Safety</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/safety-settings"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Safety settings</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/safety-guidance"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Safety guidance</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Frameworks</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/langgraph-example"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>LangChain &amp; LangGraph</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/crewai-example"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>CrewAI</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/llama-index"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>LlamaIndex</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/vercel-ai-sdk-example"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Vercel AI SDK</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/temporal-example"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Temporal</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Resources</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/changelog"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Release notes</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/deprecations"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Deprecations</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/libraries"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Libraries</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Migration</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/migrate"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate to Gen AI SDK</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/migrate-to-interactions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate to Interactions API</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/interactions-breaking-changes-may-2026"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Interactions breaking changes (May 2026)</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/rate-limits"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Rate limits</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/billing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Billing info</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/troubleshooting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>API troubleshooting</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/api-errors"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>API errors</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-external"><a href="https://aistudio.google.com/status"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Status</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="External"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/partner-integration"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Partner and library integrations</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Google AI Studio</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/ai-studio-quickstart"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Quickstart</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/google-ai-plans"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google AI plans</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/aistudio-build-mode"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Vibe code in Build mode</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/aistudio-fullstack"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Developing full-stack apps</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/aistudio-android"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Build Android apps</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/aistudio-deploying"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Deploying your app</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/aistudio-agents"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Agents in AI Studio Playground</span></a></li><li class="devsite-nav-item
+           devsite-nav-experimental"><a href="/gemini-api/docs/learnlm"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Try out LearnLM</span><span class="devsite-nav-icon material-icons"
+        data-icon="experimental"
+        data-title="Experimental!"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/troubleshoot-ai-studio"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Troubleshooting</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/workspace"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Access for Workspace users</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Google Cloud Platform</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/gemini-api/docs/migrate-to-cloud"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Gemini Enterprise Agent Platform Gemini API</span></a></li><li class="devsite-nav-item"><a href="/gemini-api/docs/oauth"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>OAuth authentication</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Policies</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/terms"
+        class="devsite-nav-title"
+      
+        alt-paths=" /gemini-api/docs/zdr "><span class="devsite-nav-text" tooltip>Terms of service</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/available-regions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Available regions</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/usage-policies"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Abuse monitoring</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/gemini-api/docs/feedback-policies"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Feedback information</span></a></li>
+          </ul>
+        
+        
+          
+    
+  
+        
+        
+          
+    
+  
+    
+  
+        
+      </div>
+    
+  </div>
+</nav>
+          
+        </devsite-book-nav>
+      
+      <section id="gc-wrapper">
+        <main role="main" id="main-content" class="devsite-main-content"
+            
+              has-book-nav
+              has-sidebar
+            >
+          <div class="devsite-sidebar">
+            <div class="devsite-sidebar-content">
+                
+                <devsite-toc class="devsite-nav"
+                            role="navigation"
+                            aria-label="On this page"
+                            depth="2"
+                            scrollbars
+                            data-nosnippet
+                  ></devsite-toc>
+                <devsite-recommendations-sidebar class="nocontent devsite-nav" data-nosnippet>
+                </devsite-recommendations-sidebar>
+            </div>
+          </div>
+          <devsite-content>
+            
+              
+
+
+
+
+
+
+
+
+
+
+<article class="devsite-article"><style>
+      /* Styles inlined from /site-assets/css/style.css */
+body[theme="googledevai-theme"] {
+  --devsite-background-0: var(--devsite-background-1);
+  --devsite-button-border: 1px solid #747775;
+  --devsite-button-border-radius: 20rem;
+  --devsite-button-font: 500 14px/36px 'Google Sans Text', Roboto, sans-serif;
+  --devsite-code-font-family: 'Google Sans Mono', Roboto Mono, monospace;
+  --devsite-primary-font-family: 'Google Sans Text', Roboto, sans-serif;
+  --devsite-table-heading-font: 500 14px/20px 'Google Sans Text', Roboto, sans-serif;
+  --googledevai-border-color: #c4c7c5;
+  --googledevai-blue-light: #d7e6ff;
+  --googledevai-blue-dark: #2e64de;
+  --googledevai-cyan-light: #c7e4ff;
+  --googledevai-cyan-dark: #3c8fe3;
+  --googledevai-purple-light: #dce2ff;
+  --googledevai-purple-dark: #987be9;
+  --googledevai-purple: #ac87eb;
+  --googledevai-red: #ee4d5d;
+  --googledevai-secondary-text: #001d35;
+  --googledevai-button-gradient-light: linear-gradient(90deg, var(--googledevai-blue-light), var(--googledevai-cyan-light), var(--googledevai-purple-light));
+  --googledevai-button-gradient-dark: linear-gradient(90deg, var(--googledevai-blue), var(--googledevai-cyan), var(--googledevai-purple));
+}
+
+body[theme="googledevai-theme"]:not([type="reference"]){
+  --googledevai-page-width: 1100px;
+}
+
+body[layout=docs][theme="googledevai-theme"]:not([type="reference"]) .devsite-main-content,
+body[layout=docs][theme="googledevai-theme"]:not([type="reference"]) .devsite-main-content[has-book-nav][has-sidebar] {
+  grid-template-columns: minmax(269px, 1fr) minmax(752px, var(--googledevai-page-width)) minmax(160px, 1fr);
+  grid-gap: 3rem;
+}
+
+body[layout=docs][theme="googledevai-theme"] devsite-content {
+  max-width: var(--googledevai-page-width);
+}
+
+body[layout=docs][theme="googledevai-theme"] .devsite-article {
+  box-shadow: unset;
+}
+
+body[theme="googledevai-theme"] {
+  --googledevai-header-gradient: linear-gradient(90deg, var(--googledevai-blue) 50%, var(--googledevai-cyan), var(--googledevai-purple), var(--googledevai-red));
+}
+
+body[theme="googledevai-theme"].color-scheme--dark {
+  --googledevai-header-gradient: linear-gradient(90deg, var(--googledevai-blue) 75%, var(--googledevai-cyan), var(--googledevai-purple));
+  --googledevai-border-color: #444746;
+}
+
+/* Ensure that full-bleed pages get the full width. */
+body[theme="googledevai-theme"][layout="full"] .devsite-main-content {
+  max-width: none;
+  padding: 0;
+}
+
+/* And ensure that any site banners/ACL warnings/etc don't get hidden on
+ * full-bleed pages. */
+body[theme="googledevai-theme"][layout="full"] .devsite-banner {
+  margin: 0;
+}
+
+tab:has(> a.hidden-tab) {
+  display: none;
+}
+
+body[theme="googledevai-theme"] devsite-toc > .devsite-nav-list {
+  border-inline-start: unset;
+}
+
+/* Banner notice */
+[layout=docs] .devsite-banner:first-of-type {
+  background: var(--googledevai-cyan-light);
+  border-radius: 10px;
+  color: var(--googledevai-secondary-text);
+  margin: -2.5rem -0.25rem 2.5rem;
+  display: flex;
+}
+
+/* Banner notice smaller screens */
+@media (max-width: 840px) {
+  [layout=docs] .devsite-banner:first-of-type {
+    margin: -0.25rem -0.25rem 2.5rem;
+  }
+}
+
+/* Asides */
+.devsite-article-body>aside:not([class*=attempt])  {
+  border-radius: 2px;
+}
+
+/* Tables */
+table:not(.tfo-notebook-buttons) {
+  border: 1px solid var(--googledevai-border-color);
+  border-collapse: unset;
+  border-radius: 9px;
+  margin: auto;
+  width: 100%;
+}
+
+.gemini-api-model-table tr:not(:last-child) td:not(:first-child),
+.gemini-api-model-table tr:not(:last-child) th,
+th,
+table:not(.gemini-api-model-table):not(.tfo-notebook-buttons) tr:not(:last-child) td {
+  border-bottom: 1px solid var(--googledevai-border-color);
+}
+
+th,
+td {
+  background: transparent;
+  padding: 1rem;
+}
+
+/* Notebooks */
+devsite-code .tfo-notebook-code-cell-output {
+  max-height: 300px;
+  overflow: auto;
+  background: rgba(237, 247, 255, 1);  /* blue bg to distinguish from input code cells */
+}
+
+devsite-code .tfo-notebook-code-cell-output + .devsite-code-buttons-container button {
+  background: rgba(237, 247, 255, .7);  /* blue bg to distinguish from input code cells */
+}
+
+.color-scheme--dark devsite-code .tfo-notebook-code-cell-output {
+  background: rgba(var(--devsite-background-2), 1);
+}
+
+.color-scheme--dark devsite-code .tfo-notebook-code-cell-output + .devsite-code-buttons-container button {
+  background: rgba(var(--devsite-background-2), .7);
+}
+
+devsite-code[dark-code] .tfo-notebook-code-cell-output {
+  background: rgba(64, 78, 103, 1);  /* medium slate */
+}
+
+devsite-code[dark-code] .tfo-notebook-code-cell-output + .devsite-code-buttons-container button {
+  background: rgba(64, 78, 103, .7);  /* medium slate */
+}
+
+.devsite-article-body>devsite-code {
+  --devsite-code-buttons-container-right: 0;
+  --devsite-code-margin: 0 0;
+  --devsite-code-padding-block: 14px;
+  border-radius: 8px;
+}
+
+.devsite-article-body>.beta:not([class*=attempt]),
+.devsite-article-body>.caution:not([class*=attempt]),
+.devsite-article-body>.deprecated:not([class*=attempt]),
+.devsite-article-body>.dogfood:not([class*=attempt]),
+.devsite-article-body>.experimental:not([class*=attempt]),
+.devsite-article-body>.key-point:not([class*=attempt]),
+.devsite-article-body>.key-term:not([class*=attempt]),
+.devsite-article-body>.note:not([class*=attempt]),
+.devsite-article-body>.objective:not([class*=attempt]),
+.devsite-article-body>.preview:not([class*=attempt]),
+.devsite-article-body>.special:not([class*=attempt]),
+.devsite-article-body>.success:not([class*=attempt]),
+.devsite-article-body>.tip:not([class*=attempt]),
+.devsite-article-body>.warning:not([class*=attempt]),
+.devsite-article-body>aside:not([class*=attempt]) {
+  --devsite-notice-margin: 0 0;
+  border-radius: 8px;
+}
+
+/* override default table styles for notebook buttons */
+.devsite-table-wrapper .tfo-notebook-buttons {
+  display: block;
+  width: auto;
+}
+
+.tfo-notebook-buttons td {
+  display: inline-block;
+  padding: 0 16px 16px 0;
+}
+
+/* from DevSite's buttons.scss */
+.tfo-notebook-buttons a,
+.tfo-notebook-buttons :link,
+.tfo-notebook-buttons :visited {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  align-self: var(--devsite-button-align-self);
+  background: var(--devsite-button-background, var(--devsite-background-1));
+  border: var(--devsite-button-border, 0);
+  border-radius: var(--devsite-button-border-radius, 2px);
+  box-sizing: border-box;
+  color: var(--devsite-button-color);
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font: var(--devsite-button-font, 500 14px/36px var(--devsite-primary-font-family));
+  height: var(--devsite-button-height, 36px);
+  letter-spacing: var(--devsite-button-letter-spacing, 0);
+  line-height: var(--devsite-button-line-height, 36px);
+  margin: var(--devsite-button-margin, 0);
+  margin-inline-end: var(--devsite-button-margin-x-end);
+  max-width: var(--devsite-button-max-width, none);
+  min-width: 36px;
+  outline: 0;
+  overflow: hidden;
+  padding: var(--devsite-button-with-icon-padding, 0 16px);
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-transform: var(--devsite-button-text-transform, uppercase);
+  transition:
+    background-color .2s,
+    border .2s;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: var(--devsite-button-width, auto);
+}
+
+.tfo-notebook-buttons a:hover,
+.tfo-notebook-buttons a:focus {
+  background: var(--devsite-button-background-hover);
+  border: var(--devsite-button-border-hover, 0);
+  color: var(--devsite-button-color-hover, var(--devsite-button-color));
+  text-decoration: var(--devsite-button-text-decoration-hover, none);
+}
+
+.tfo-notebook-buttons a:active {
+  background: var(--devsite-button-background-active);
+  border: var(--devsite-button-border-active, 0);
+  transform: var(--devsite-button-transform-active, none);
+}
+
+.tfo-notebook-buttons tr {
+  background: 0;
+  border: 0;
+}
+
+/* on rendered notebook page,
+   remove link to webpage since we're already here */
+.tfo-notebook-buttons:not(.tfo-api) td:first-child {
+  display: none;
+}
+
+.tfo-notebook-buttons td > a > img {
+  margin: 0 8px 0 -4px;
+  height: 20px;
+}
+
+[appearance='dark'] .tfo-notebook-buttons td > a > img {
+  filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  [appearance='device'] .tfo-notebook-buttons td > a > img {
+    filter: invert(1);
+  }
+  .sub-heading {
+    background-color: #333;
+    color: #bdbdbd;
+  }
+}
+
+[appearance='dark'] .sub-heading {
+  background-color: #333;
+  color: #bdbdbd;
+}
+
+.sub-heading {
+  background-color: #f2f2f2;
+  color: #5f6368;
+}
+
+@media screen and (max-width: 600px) {
+  .tfo-notebook-buttons td {
+    display: block;
+  }
+}
+
+devsite-nav-buttons button {
+  margin-left: 0;
+  margin-top: 5px;
+}
+
+code {
+  border-radius: 6px
+}
+
+devsite-book-nav .devsite-nav-list>.devsite-nav-heading:not(.devsite-nav-divider) {
+  border-top: 0;
+  padding-bottom: 0.9rem;
+  font-size: 1rem;
+}
+
+/*
+ * TODO(b/439059414): Remove this workaround in favor of a project-level
+ * body_class when possible.
+ */
+.ais-theme-marker {
+  display: none;
+}
+
+/*
+ * Gemini API body class.
+ * https://source.corp.google.com/piper///depot/google3/third_party/devsite/googledevai/en/gemini-api/_project.yaml;l=7
+ */
+.gemini-api devsite-thumb-rating[position="header"],
+.gemini-api devsite-feedback[position="header"] {
+  /* Hide the thumb rating and feedback widgets at the top of the page. */
+  display: none;
+}
+
+/*
+ * Shaded table styles look like a .pricing-table but are more flexible around
+ * content sizes in each column.
+ */
+.shaded-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.shaded-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 8px;
+}
+
+/* These should use theme colours for light too, so we don't
+ * need an override. */
+.color-scheme--dark .shaded-table th {
+  background-color: var(--devsite-ref-palette--grey800);
+}
+
+.shaded-table td {
+    padding: 8px;
+}
+
+.shaded-table th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.shaded-table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.shaded-table tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.shaded-table tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+.devsite-nav {
+    font-size: var(--devsite-nav-font-size, 14px);
+}
+
+.devsite-nav-item {
+    line-height: var(--devsite-nav-item-line-height, 20px);
+}
+
+.devsite-book-nav-bg, devsite-book-nav {
+    width: 210px;
+    scrollbar-width: thin;
+}
+
+/* Hide the old toggle button immediately */
+.devsite-expandable-nav > .devsite-nav-toggle {
+    display: none !important;
+}
+
+/* Ion setup: Default State (Chevron Right) */
+.devsite-expandable-nav > .devsite-nav-title::after {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1;
+    color: #888;
+    /* Default: Chevron Right */
+    content: "\e5cc";
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+/* Down state logic */
+.devsite-expandable-nav.expanded > .devsite-nav-title::after,
+.devsite-expandable-nav:has(.devsite-nav-active) > .devsite-nav-title::after,
+.devsite-expandable-nav > .devsite-nav-title[aria-expanded="true"]::after {
+    content: "\e313";
+}
+
+/* Close state logic */
+.devsite-expandable-nav > .devsite-nav-title[aria-expanded="false"]::after {
+    content: "\e5cc" !important;
+}
+
+/* Hovercard styling */
+.gemini-api .heading:has(devsite-gemini-api-hovercard-button) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gemini-api .heading:has(devsite-gemini-api-hovercard-button) h1 {
+  margin-bottom: 0;
+}
+
+devsite-gemini-api-hovercard,
+devsite-gemini-api-hovercard-button {
+  /* Render above any code blocks on the page */
+  z-index: 1;
+}
+
+.devsite-nav-icon[data-icon="beta"], .devsite-nav-icon[data-icon="preview"],
+.devsite-nav-icon[data-icon="experimental"] {
+  margin: -5px 0 -1px 4px;
+}
+      </style>
+  
+  
+  
+    <div class="devsite-banner devsite-banner-announcement nocontent" data-nosnippet
+      
+        
+    background="google-blue"
+  
+      >
+      <div class="devsite-banner-message">
+        <div class="devsite-banner-message-text">
+          The <a href="/gemini-api/docs/interactions-overview" style="color: black;">Interactions API</a> is now generally available. We recommend using this API for access to all the latest features and models.
+        </div>
+      </div>
+    </div>
+  
+  
+  
+
+  <div class="devsite-article-meta nocontent" role="navigation" data-nosnippet>
+    
+    
+    <ul class="devsite-breadcrumb-list"
+  
+    aria-label="Breadcrumb">
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+        
+  <a href="https://ai.google.dev/"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+          Home
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://ai.google.dev/gemini-api"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="2"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="2"
+      
+        track-metadata-eventdetail="Gemini API"
+      
+    >
+    
+          Gemini API
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://ai.google.dev/gemini-api/docs"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="3"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="3"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+          Docs
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+    
+      
+    <devsite-thumb-rating position="header">
+    </devsite-thumb-rating>
+  
+    
+    <devsite-gemini-api-switcher class="nocontent"></devsite-gemini-api-switcher>
+  </div>
+  
+    <devsite-feedback
+  position="header"
+  project-name="Gemini API"
+  product-id="5292923"
+  bucket="documentation"
+  context=""
+  version="t-devsite-webserver-20260811-r00-rc00.479616193737279308"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="header"
+  class="nocontent"
+  data-nosnippet
+  
+  
+  
+    project-icon="https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/googledevai/images/touchicon-180-new.png"
+  
+  
+  
+  >
+
+  <button>
+  
+    
+    Send feedback
+  
+  </button>
+</devsite-feedback>
+  
+    <h1 class="devsite-page-title" tabindex="-1">
+      Billing<devsite-actions hidden data-nosnippet>
+    <devsite-llm-tools></devsite-llm-tools></devsite-actions>
+  
+      
+    </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  
+
+  <devsite-toc class="devsite-nav"
+    depth="2"
+    devsite-toc-embedded
+    >
+  </devsite-toc>
+  
+    
+  <div class="devsite-article-body clearfix
+  ">
+
+  
+    
+    
+<p>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>This guide provides an overview of different Gemini API billing options,
+explains how to enable billing and monitor usage, and provides answers to
+frequently asked questions (FAQs) about billing.</p>
+
+<h2 id="about-billing" data-text="About billing and tiers" tabindex="-1">About billing and tiers</h2>
+
+<p>Billing for the Gemini API is based on your payment history.</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left">Usage tier</th>
+<th style="text-align: left">Qualification</th>
+<th style="text-align: left"><a href="#spend-caps">Billing tier cap</a></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left"><strong>Free</strong></td>
+<td style="text-align: left"><a href="/gemini-api/docs/api-key#google-cloud-projects">Active project</a> or free trial</td>
+<td style="text-align: left">N/A</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Tier 1</strong></td>
+<td style="text-align: left"><a href="#setup-billing">Set up and link an active billing account</a></td>
+<td style="text-align: left">$250</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Tier 2</strong></td>
+<td style="text-align: left">Paid $100 + 3 days from first successful payment</td>
+<td style="text-align: left">$2,000</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Tier 3</strong></td>
+<td style="text-align: left">Paid $1,000 + 30 days from first successful payment</td>
+<td style="text-align: left">$20,000 - $100,000+</td>
+</tr>
+</tbody>
+</table>
+
+<p>New accounts begin on the Free Tier, which allows access to
+<a href="/gemini-api/docs/pricing">certain models</a> in the Gemini API and AI Studio,
+up to the models&#39; free tier <a href="https://aistudio.google.com/rate-limit">rate limits</a>.</p>
+
+<p>To deploy your applications directly from Build mode, you can use the
+<strong>Google Cloud Starter Tier</strong>. This tier lets you publish up to 2 full stack
+applications without setting up a Google Cloud project or billing account.
+See <a href="/gemini-api/docs/aistudio-deploying">Deploying from Google AI Studio</a> for
+details and refer to the <a href="https://docs.cloud.google.com/docs/starter-tier">Google Cloud Starter Tier documentation</a> for more information.</p>
+
+<p>To access higher rate limits, use advanced models, and ensure your prompts and
+responses are <strong>not</strong> used to improve Google products<sup>*</sup>, you can
+<a href="#setup-billing">link a billing account</a> and <a href="#prepay">Prepay</a> to move to the
+Paid Tiers.
+Then, you&#39;ll move through higher tiers based on cumulative spend and account
+age.</p>
+
+<p>Tiers, rate limits, and billing account caps are all determined at the <a href="#cloud-billing">billing
+account</a> level.</p>
+
+<p><sup>*</sup> <em>Enterprise-grade data privacy: For more information on data use
+for paid services, see the <a href="/gemini-api/terms#data-use-paid">Terms of Service</a>.</em></p>
+
+<h2 id="setup-billing" data-text="Set up billing to access the Paid Tier" tabindex="-1">Set up billing to access the Paid Tier</h2>
+
+<p>You can create a project and set up billing, or import an existing project, to
+upgrade to the Paid Tier in <a href="https://aistudio.google.com/projects">Google AI Studio</a>.
+Upgrading from the Free Tier to the Paid Tier means linking a billing account
+and <a href="#prepay">prepaying</a> to add a minimum of $10 (or equivalent in other
+currencies) of credits to your account.</p>
+
+<ol>
+<li>Go to the AI Studio <a href="https://aistudio.google.com/api-keys">API keys</a> page,
+<a href="https://aistudio.google.com/projects">Projects</a> page, or anywhere you see
+<strong>Set up billing</strong> button in AI Studio.
+<ul>
+<li>New users will have a <a href="/gemini-api/docs/api-key#google-cloud-projects">project and API key</a> created for them by default.</li>
+<li>If you need a new key, click <a href="https://aistudio.google.com/api-keys"><strong>Create API key</strong></a>
+and follow the dialog to add a key-project pair to the table.</li>
+</ul></li>
+<li>Find the Free Tier project you want to upgrade to the Paid Tier, and click
+<strong>Set up billing</strong> under the <em>Billing Tier</em> column.</li>
+<li>If you&#39;ve never set up a Google billing account before:
+<ul>
+<li>You&#39;ll be asked to select your country to agree to the Terms of Service.</li>
+<li>Then, fill in or confirm your contact information and payment method to continue.</li>
+</ul></li>
+<li>If you have set up Google billing accounts in the past:
+<ul>
+<li>You&#39;ll be asked to choose from your existing billing accounts.</li>
+<li>If you don&#39;t want to use any of your existing accounts, click <strong>Add new
+billing account</strong> and fill in or confirm your contact information and
+payment method to continue.</li>
+</ul></li>
+<li>Next, you will either be:
+<ul>
+<li>Asked to prepay a minimum of $10 to complete billing
+setup (meaning your account is auto-assigned to the <a href="#prepay">Prepay</a> billing
+plan),</li>
+<li>Given the choice between <a href="#prepay">Prepay</a> and <a href="#postpay">Postpay</a>
+billing plans for your account.</li>
+<li>Assigned to a <a href="#postpay">Postpay</a> billing plan for an intermediary period
+until the new Prepay system propagates to all users (starting March 23, 2026).</li>
+</ul></li>
+<li>After prepaying or selecting Postpay, your account setup is complete.</li>
+</ol>
+
+<h3 id="request-an-upgrade" data-text="Upgrade to the next paid tier" tabindex="-1">Upgrade to the next paid tier</h3>
+
+<p>If you&#39;re already on a paid tier and meet the <a href="#about-billing">criteria</a>
+for a plan change, you will be automatically upgraded to the next tier
+(subject to <a href="#processing-times">processing times</a>).</p>
+
+<h2 id="verify-billing" data-text="Verify billing status" tabindex="-1">Verify billing status</h2>
+
+<p>After you have <a href="#setup-billing">linked a billing account</a> to your project, you
+can monitor its status on the
+<a href="https://aistudio.google.com/billing">AI Studio Billing page</a>. Unlike the free
+tier, paid tier status is dynamic; while your usage tier is determined by your
+account history, the Gemini API will only serve requests if you have a
+positive <a href="#prepay">Prepay</a> credit balance.</p>
+
+<p>On the <a href="https://aistudio.google.com/projects">Projects</a> page, you&#39;ll be able to
+see your project&#39;s tier and billing plan under the <em>Billing Tier</em> column. Any
+billing status actions you may need to take for a project display in the
+<em>Billing Tier</em> or <em>Status</em> columns:</p>
+
+<ul>
+<li>&quot;<strong><em>Set up billing</em></strong>&quot; if the project doesn&#39;t have a billing account attached.</li>
+<li>&quot;<strong><em>Set up Prepay</em></strong>&quot; if the project does have a billing account attached, but
+is required to use a <a href="#prepay">Prepay</a> billing plan that needs to be set up.</li>
+<li>&quot;<strong><em>No credits</em></strong>&quot; if the billing account is required to purchase
+credits but the Prepay payments account isn&#39;t set up or the available credit
+balance is depleted.</li>
+</ul>
+
+<p>Click any of the messages to proceed with the necessary actions.</p>
+
+<h2 id="monitor-usage" data-text="Monitor usage" tabindex="-1">Monitor usage</h2>
+
+<p>You can monitor your usage of the Gemini API in
+<a href="https://aistudio.google.com/usage">Google AI Studio</a> in <strong>Dashboard</strong> &gt;
+<strong>Usage</strong>.</p>
+
+<h2 id="billing-plans" data-text="Billing plans" tabindex="-1">Billing plans</h2>
+
+<p>Billing plans for the Gemini API and AI Studio fall into two categories that
+determine when you pay for usage: Prepay and Postpay. You can check your
+assigned billing plan and manage payment methods on the
+<a href="https://aistudio.google.com/billing">AI Studio Billing</a> page.</p>
+<aside class="special"><strong>Important:</strong><span> Prepay and Postpay billing plans start taking effect <b>March 23, 2026</b>.<br>
+<li>Accounts that predate the introduction of Prepay and Postpay billing plans will
+be evaluated and assigned a plan or offered the choice between plans.</li>
+<li>Accounts created after the effective date might not be immediately affected;
+you may be assigned a Postpay account initially, and be switched to Prepay once
+the new billing plan system is fully released. See <a href="#migrate-to-prepay">Migrate to prepay</a> for details.</li>
+<li>If you have a prepay billing account, you must add funds to your account before you can use promotional Cloud Credits. After adding funds, your promotional credits will be consumed first before your prepaid funds.</li></span></aside>
+<h3 id="prepay" data-text="Prepay" tabindex="-1">Prepay</h3>
+
+<p>In the Prepay billing plan, you purchase credits towards your prepay balance in
+advance of your Gemini API usage, and your API usage costs are deducted from
+your Prepay credit balance in <a href="#processing-times">near real-time</a>.
+You can prepay by <a href="#buy-credits">adding credits</a> into your account, or setting
+up <a href="#auto-reload">auto-reload</a>. After credits are purchased, unused credits
+expire after 12 months and are <a href="#refunds">non-refundable</a>, except after
+<a href="#postpay">switching to a Postpay account</a>.</p>
+
+<p>When your Prepay credit balance on the billing account hits $0, all API keys in
+all projects linked to that billing account will stop working simultaneously.
+Prepay credits apply only to Gemini API usage costs; you can&#39;t use
+them to pay for other Google Cloud services.</p>
+<aside class="note"><strong>Note:</strong><span> Prepay billing is subject to overages during the approximately 10 minute
+billing pipeline latency. Long-running tasks like
+<a href="/gemini-api/docs/batch-api">batch mode</a> and agents may continue to consume
+credits beyond your balance before the system can process and halt usage.</span></aside>
+<p>New users default to the Prepay billing plan. Projects that pre-date the
+introduction of Prepay and Postpay billing plans may need to <a href="#verify-billing">update their
+project&#39;s billing details</a> before continuing to use the Gemini
+API.</p>
+
+<p><em>Note that Prepay is not available for <a href="https://docs.cloud.google.com/billing/docs/concepts#billing_account_types">Invoiced (or Offline)</a>
+accounts.</em></p>
+
+<h4 id="adding-prepay-to-postpay" data-text="Add Prepay to an existing Postpay account" tabindex="-1">Add Prepay to an existing Postpay account</h4>
+
+<p>If your existing Cloud Billing account uses a <strong>Postpay</strong> plan, you can add <strong>Prepay</strong>
+capabilities to purchase credits in advance. These prepay credits let you use
+the Gemini API without creating a new Cloud Billing account.</p>
+
+<p>During the setup to add <strong>Prepay</strong> to an existing account, you are
+presented with a mandatory confirmation screen explaining that your selected
+Cloud Billing account will be modified.</p>
+
+<p>The system must modify your account state <em>before</em> you submit your prepayment.
+Therefore, canceling the process after confirming the modification but before
+completing the prepayment setup might result in temporary service disruptions
+for projects already linked to that Cloud Billing account. Ensure you are ready
+to complete the prepayment process before confirming the transition. If you
+encounter issues, see <a href="https://docs.cloud.google.com/billing/docs/in-product-billing-setup#prepay-issue">Services disrupted after canceling a <strong>Prepay</strong>
+setup</a>.</p>
+
+<p>If you are eligible and manually switch from a <strong>Prepay</strong> cycle to a <strong>Postpay</strong>
+cycle, any remaining prepay credit balance is automatically refunded to the
+original payment method used for the prepayment. However, if you close your
+Cloud Billing account for any other reason, any remaining prepay
+credits are forfeited and aren&#39;t refunded.</p>
+
+<h4 id="buy-credits" data-text="Buy credits" tabindex="-1">Buy credits</h4>
+
+<p>You can manually purchase credits in advance of your Gemini API usage to load
+them into your Prepay account credit balance.</p>
+
+<p>To purchase credits, go to the <a href="https://aistudio.google.com/billing">AI Studio Billing</a> page and select <strong>Buy credits</strong>.
+The minimum purchase is $10. The maximum amount of credits you can prepay for is
+$5,000.</p>
+<aside class="note"><strong>Note:</strong><span> Prepay users must <a href="#buy-credits">purchase Prepaid credits</a> before they can
+use any Google Cloud credits that are eligible for the Gemini API. Once you have
+an active Prepay credit balance, eligible Google Cloud credits are consumed
+before your Prepay credit balance. When your Prepay credit balance on the
+billing account hits $0, Google Cloud credits will no longer be consumed.</span></aside>
+<h4 id="auto-reload" data-text="Auto reload" tabindex="-1">Auto reload</h4>
+
+<p>Auto-reload is an optional feature that automatically tops up your Prepay credit
+balance when it&#39;s running low. This is useful to prevent service interruptions.</p>
+
+<p>You can set up auto reload and see your auto-reload status in the <em>Available
+credits</em> card on the <a href="https://aistudio.google.com/billing">AI Studio Billing</a>
+page. Click <strong>Setup auto-reload</strong> or
+<strong>Manage auto-reload</strong> to set your payment method, reload amount, and the
+minimum balance that triggers a reload payment.</p>
+
+<h4 id="monthly-auto-charge-limit" data-text="Monthly auto-charge limit" tabindex="-1">Monthly auto-charge limit</h4>
+
+<p>The monthly auto-charge limit is available to Prepay users
+and helps prevent unexpected costs from frequent automatic credit reloads.
+Use this feature to set a maximum limit for automatic credit reloads within
+a single billing cycle. Once the total amount of automatic reloads in a billing
+cycle reaches this limit, the system disables auto-reload until the start of the
+next month. One-time payments you initiate manually don&#39;t count against this limit.</p>
+
+<p>To set the monthly auto-charge limit when auto-reload is enabled:</p>
+
+<ol>
+<li>Go to the <a href="https://aistudio.google.com/billing">AI Studio Billing</a> page.</li>
+<li>Click <strong>Manage auto-reload</strong>.</li>
+<li>Expand the <strong>Monthly Limit</strong> section and enter the maximum monthly limit for auto-reloads.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h3 id="postpay" data-text="Postpay" tabindex="-1">Postpay</h3>
+
+<p>In the Postpay billing plan, your Cloud Billing account accrues costs and you
+are automatically charged at the end of the month, or when your costs reach an
+<a href="#tier-spend-caps">automatically assigned spend cap</a> based on your account tier.
+The payment is charged to the payment method attached to your Postpay payments
+account, which you can manage on the <a href="https://aistudio.google.com/billing">AI Studio Billing</a> page. On the <strong>Billing</strong> page you&#39;ll be able
+to view your balance, due dates, and past payments, as well as make payments and
+manage payment methods.</p>
+
+<p>When <a href="#setup-billing">setting up billing</a> for a new project, if you are eligible
+for Postpay, you will have the option to choose between Prepay and Postpay in
+the <a href="#setup-billing">billing setup</a> dialogue.</p>
+
+<p>After you switch a Cloud Billing account to use the Postpay billing plan, all
+projects linked to that billing account are switched to the Postpay plan. You
+can move an eligible account to Prepay by following the steps in <a href="#migrate-to-prepay">Migrate to prepay</a>. You can also
+move a project to a billing account with a different billing plan to change
+the charging cycle for that project; visit the Cloud documentation on <a href="https://docs.cloud.google.com/billing/docs/how-to/modify-project">managing
+billing for projects</a>.</p>
+
+<p>You can learn more about the Postpay charging cycle in the <a href="https://docs.cloud.google.com/billing/docs/how-to/billing-cycle">Cloud Billing guide</a>.</p>
+
+<h3 id="migrate-to-prepay" data-text="Migrate to prepay" tabindex="-1">Migrate to prepay</h3>
+
+<p>Google AI Studio is transitioning developer accounts from Postpay to Prepay billing for Gemini API usage. This change applies only to the Gemini API; other Google Cloud services linked to your billing account remain on Postpay.</p>
+
+<p>Switch to Prepay and add credits before the cutover date in your account notice to avoid service interruptions. Accounts that use only Free Tier features do not need to take action.</p>
+
+<p>To switch an existing Postpay account to Prepay:</p>
+
+<ol>
+<li>Go to the <a href="https://aistudio.google.com/billing">AI Studio Billing</a> page.</li>
+<li>Select <strong>Switch to Prepay</strong> for your billing account.</li>
+<li><a href="#buy-credits">Purchase credits</a> (minimum $10) to load your starting balance.</li>
+</ol>
+
+<p>To prevent service interruptions after switching, configure <a href="#auto-reload">auto-reload</a> to top up your credit balance when it runs low.</p>
+
+<h2 id="spend-caps" data-text="Spend caps" tabindex="-1">Spend caps</h2>
+
+<p>The Gemini API supports monthly spend caps at both the billing account tier and
+project levels. These controls are designed to protect your account from
+unexpected overages, and the ecosystem to ensure service availability.</p>
+
+<p><em>Note that spend caps are not available for <a href="https://docs.cloud.google.com/billing/docs/concepts#billing_account_types">Invoiced (or Offline)</a>
+accounts.</em></p>
+
+<h3 id="project-spend-caps" data-text="Project spend caps" tabindex="-1">Project spend caps</h3>
+<aside class="experimental"><strong>Experimental:</strong><span> The feature is experimental and limited in scope. You are subject
+to overages for around a 10 minute latency period.</span></aside>
+<p>You can set your own <a href="/gemini-api/docs/api-key#google-cloud-projects">project-level</a> spend caps in AI Studio.
+This is useful if you have multiple projects under the same billing
+account and want to ensure each has access to enough of the cumulative spending
+limit.</p>
+
+<p>Accounts with the project editor, owner, or admin <a href="https://docs.cloud.google.com/iam/docs/roles-overview">roles</a> can set spend caps per
+project in AI Studio on the <a href="https://aistudio.google.com/spend">Spend</a> page
+under <strong>Monthly spend cap</strong> &gt; <strong>Edit spend cap</strong>.</p>
+
+<p>For details on the specific Google Cloud IAM permissions required to view or edit spend caps and billing information in AI Studio, see the <a href="/gemini-api/docs/troubleshoot-ai-studio#iam-permissions">AI Studio troubleshooting guide</a>.</p>
+
+<p>If you <a href="https://docs.cloud.google.com/billing/docs/how-to/modify-project#change_the_billing_account_for_a_project">move a project to a different billing account</a>,
+any spend cap you already set for that project will persist, but any accumulated
+spend will reset to $0 for the new billing cycle.</p>
+
+<p>Long-running tasks like <a href="/gemini-api/docs/batch-api">batch mode</a> completions and
+agent sessions may incur overages beyond your project spend cap.</p>
+
+<p>Billing data processing times can be delayed in AI Studio, up to around 10
+minutes. You may experience overages beyond your project cap if billing data
+hasn&#39;t processed before more charges are accrued.</p>
+
+<h3 id="tier-spend-caps" data-text="Billing account tier spend caps" tabindex="-1">Billing account tier spend caps</h3>
+
+<p>Each <a href="#about-billing">tier</a> has a maximum monthly spend limit:</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left">Usage tier</th>
+<th style="text-align: left">Spend cap</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left"><strong>Free</strong></td>
+<td style="text-align: left">N/A</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Tier 1</strong></td>
+<td style="text-align: left">$250</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Tier 2</strong></td>
+<td style="text-align: left">$2,000</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Tier 3</strong></td>
+<td style="text-align: left">$20,000 - $100,000</td>
+</tr>
+</tbody>
+</table>
+
+<p>Monthly usage caps are enforced for the Gemini API at the <a href="#cloud-billing">billing account</a> level. While default limits are preset, you can <a href="https://docs.google.com/forms/d/e/1FAIpQLSdiP6BWJyNNN65lnwnlOr-5Kv0MOFp0jLQyqi_ixVCfddqWBw/viewform">request an
+increase</a>
+to accommodate higher usage. Total spend is aggregated across all linked
+projects that have the Gemini API service enabled. After the cumulative account
+total reaches the tier limit, service is paused for all projects linked to that
+billing account until the start of the next billing cycle (the 1st of each
+month).</p>
+
+<h4 id="evaluate-spend" data-text="Evaluate your billing account spend" tabindex="-1">Evaluate your billing account spend</h4>
+
+<p>To evaluate your historical monthly spending to determine if the new <a href="#tier-spend-caps">Billing
+Account tier spend caps</a> will impact your ongoing projects,
+follow these steps:</p>
+
+<ol>
+<li>In the Google Cloud console, view your <a href="https://console.cloud.google.com/billing/reports">Cloud Billing account Reports</a> page.
+<ul>
+<li>If you have more than one billing account, at the prompt, choose the Cloud
+Billing account for which you&#39;d like to view cost reports.</li>
+</ul></li>
+<li>The report defaults to &quot;Group by Service&quot; in the &quot;Current month&quot;. You will
+see <strong>Gemini API</strong> in the <strong>Service</strong> column and total spend in the <strong>Usage
+cost</strong> column of the table.</li>
+<li>To see granular costs limited to Gemini API usage, set the <strong>Group by</strong>
+filter to group by <strong>SKU</strong>, and the <strong>Services</strong> filter to <strong>Gemini API</strong>.</li>
+<li>Adjust the <strong>Time range by usage date</strong> filter to your desired range to
+evaluate your historical spend in a period.</li>
+</ol>
+
+<h2 id="processing-times" data-text="Processing times" tabindex="-1">Processing times</h2>
+
+<p>Billing signals and updates don&#39;t always happen in real time.</p>
+
+<ul>
+<li><strong>Credit usage</strong>: Usage costs are typically drawn down from your balance
+within minutes.</li>
+<li><strong>Payment confirmation</strong>: While most card payments are instant, some forms
+of payment (like bank transfers) may take several days to clear. Services
+only resume or upgrade after the purchase of credits is officially confirmed.</li>
+<li><strong>Tier upgrades</strong>: After a successful payment, or when you meet the
+<a href="#about-billing">upgrade criteria</a>, tier upgrades usually reflect within 10
+minutes.</li>
+<li><strong>Total Cost breakdown graphs</strong>: The graphs showing your total cost
+breakdown on both the <a href="https://aistudio.google.com/billing">Billing</a> page
+and the <a href="https://aistudio.google.com/spend">Spend</a> page can take up to 24
+hours to update.</li>
+</ul>
+
+<p>Read the Cloud Billing guides on <a href="https://docs.cloud.google.com/billing/docs/how-to/billing-cycle#delayed-billing">charging cycle</a>
+and <a href="https://docs.cloud.google.com/billing/docs/how-to/view-history#missing-transactions">transaction</a>
+latencies to learn more about potential billing delays.</p>
+
+<h2 id="refunds" data-text="Refunds" tabindex="-1">Refunds</h2>
+
+<p>Refunds aren&#39;t allowed for <strong>Prepay</strong> billing accounts, except when switching
+account types.</p>
+
+<p><strong>When a Prepay account switches to the Postpay account type</strong> (after you
+meet the <a href="#about-billing">criteria</a> and <a href="#postpay">manually upgrade</a>
+your account), the Prepay account is closed and any remaining prepaid credits
+are automatically refunded to the payment method on file.</p>
+
+<p>If you <a href="https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account#close-a-billing-account">close</a>
+your Prepay account for any reason other than upgrading to Postpay, any
+remaining prepaid credits are forfeited.</p>
+
+<p>Purchased credits expire after 1 year. After expiration, credits are forfeited
+and can&#39;t be retrieved.</p>
+
+<p><strong>Postpay</strong> accounts follow the <a href="https://docs.cloud.google.com/billing/docs/how-to/resolve-issues#request_a_refund">Google Cloud refund policy</a>.</p>
+
+<h2 id="cloud-billing" data-text="Cloud Billing accounts" tabindex="-1">Cloud Billing accounts</h2>
+
+<p>The Gemini API uses <a href="https://cloud.google.com/billing/docs/concepts">Cloud Billing accounts</a> for billing services, which you
+can <a href="#setup-billing">set up directly in AI Studio</a>.
+You can use AI Studio to track spending, understand costs, and make payments.</p>
+<aside class="note"><strong>Note:</strong><span> New users might be granted a <a href="https://docs.cloud.google.com/billing/docs/in-product-billing-setup#welcome-credits">$300 Welcome credit</a>
+in their new Google Cloud Billing accounts. If you opened your account
+<strong>after March 2, 2026</strong>, you can&#39;t use these credits to pay for Gemini API and
+AI Studio usage, but you can use them on <a href="https://docs.cloud.google.com/free/docs/free-cloud-features">other Google Cloud products</a> in the
+<a href="https://console.cloud.google.com/">Google Cloud console</a>.</span></aside>
+<p>Tiers, rate limits, and billing account caps are all determined at the billing
+account level.</p>
+
+<h3 id="projects-api-keys" data-text="Projects and API keys" tabindex="-1">Projects and API keys</h3>
+
+<p>All <a href="/gemini-api/docs/api-key#google-cloud-projects">projects</a> linked to a Cloud
+Billing account inherit the billing account&#39;s usage tier and associated rate
+limits and account caps. If you <a href="https://docs.cloud.google.com/billing/docs/how-to/modify-project#change_the_billing_account_for_a_project">change a project</a>
+from one billing account to another, its tier, and subsequently rate limits and
+account caps, will switch to the tier of the new billing account.</p>
+
+<p>Cumulative spend (towards all Google Cloud products) and account age across all
+projects tied to a billing account counts towards that billing account&#39;s
+<a href="#about-billing">tier qualifications</a>.</p>
+
+<p>You can <a href="https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project">unlink a project</a>
+from its billing account to return to the free tier.</p>
+
+<p><a href="/gemini-api/docs/api-key">API keys</a> are credentials generated inside a project.
+They have no independent billing settings; they inherit the tier limits and
+billing status of the project. The cumulative usage from all keys within a
+project counts toward that project&#39;s spend cap and the billing account&#39;s total
+spend.</p>
+
+<h2 id="faq" data-text="Frequently asked questions" tabindex="-1">Frequently asked questions</h2>
+
+<p>The following sections provide answers to frequently asked questions.</p>
+
+<h3 id="what-am-i-billed-for" class="hide-from-toc" data-text="What am I billed for?" tabindex="-1">What am I billed for?</h3>
+
+<p>Gemini API pricing is based on the following:</p>
+
+<ul>
+<li>Input token count</li>
+<li>Output token count</li>
+<li>Cached token count</li>
+<li>Cached token storage duration</li>
+</ul>
+
+<p>For pricing information, see the <a href="https://ai.google.dev/pricing">Pricing page</a>.</p>
+
+<h3 id="where-can-i-view-my-quota" class="hide-from-toc" data-text="Where can I view my quota?" tabindex="-1">Where can I view my quota?</h3>
+
+<p>You can view your quota and system limits in
+<a href="https://aistudio.google.com/usage">AI Studio</a>.</p>
+
+<h3 id="how-do-i-request-more-quota" class="hide-from-toc" data-text="How do I move to a higher rate limit tier, or request more quota?" tabindex="-1">How do I move to a higher rate limit tier, or request more quota?</h3>
+
+<p>You will automatically be granted more quota when your account reaches the next
+<a href="/gemini-api/docs/rate-limits#usage-tiers">tier requirements</a>.</p>
+
+<h3 id="is-Gemini-free-in-EEA-UK-CH" class="hide-from-toc" data-text="Can I use the Gemini API for free in EEA (including EU), the UK, and CH?" tabindex="-1">Can I use the Gemini API for free in EEA (including EU), the UK, and CH?</h3>
+
+<p>Yes, we make the free tier and paid tier available in <a href="/gemini-api/docs/available-regions">many regions</a>.</p>
+
+<h3 id="is-AI-Studio-free" class="hide-from-toc" data-text="If I set up billing with the Gemini API, will I be charged for my Google AI Studio usage?" tabindex="-1">If I set up billing with the Gemini API, will I be charged for my Google AI Studio usage?</h3>
+
+<p>AI Studio usage remains free of charge unless users link a paid API key for
+access to paid features.
+Once you link a paid API key as part of a paid project in AI Studio, you will be
+charged for AI Studio usage for that key. You can switch between Paid Tier
+projects and Free Tier projects as needed by using the respective API keys
+linked to each type.</p>
+
+<h3 id="how-do-i-upgrade" class="hide-from-toc" data-text="If I'm on the Free Tier, how do I upgrade to higher tiers?" tabindex="-1">If I'm on the Free Tier, how do I upgrade to higher tiers?</h3>
+
+<p>To access higher tiers, you must set up billing on your project. Click <a href="#setup-billing"><strong>Set up
+billing</strong></a> in Google AI Studio. This will walk you through
+selecting or creating a Cloud Billing account. If you are required to be on the
+prepaid billing model, the <strong>Set up billing</strong> process will guide you through the
+process to create your Prepay account that is linked to your Cloud Billing
+account.</p>
+
+<h3 id="can-i-use-1m-tokens-for-free" class="hide-from-toc" data-text="Can I use 1M tokens in the free tier?" tabindex="-1">Can I use 1M tokens in the free tier?</h3>
+
+<p>The free tier for Gemini API differs based on the model selected. For now, you
+can try the 1M token context window in the following ways:</p>
+
+<ul>
+<li>In Google AI Studio</li>
+<li>With free-of-charge plans for select models</li>
+<li>With postpaid plans</li>
+</ul>
+
+<h3 id="revert-to-free" class="hide-from-toc" data-text="Can I revert back to Free Tier after I've upgraded to higher (paid) tiers?" tabindex="-1">Can I revert back to Free Tier after I've upgraded to higher (paid) tiers?</h3>
+
+<p>To downgrade to the Free Tier, you can <a href="https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project">disable billing</a>
+on each of your projects that you want to downgrade.</p>
+
+<h3 id="count-tokens" class="hide-from-toc" data-text="How can I calculate the number of tokens I'm using?" tabindex="-1">How can I calculate the number of tokens I'm using?</h3>
+
+<p>Use the <a href="/api/python/google/generativeai/GenerativeModel#count_tokens"><code translate="no" dir="ltr">GenerativeModel.count_tokens</code></a>
+method to count the number of tokens. Refer to the <a href="/gemini-api/docs/tokens">Tokens guide</a> to learn more about tokens.</p>
+
+<h3 id="free-trial-through-ais" class="hide-from-toc" data-text="If I sign up for my first Cloud Billing account through AI Studio, will I still get a Google Cloud Free Trial?" tabindex="-1">If I sign up for my first Cloud Billing account through AI Studio, will I still get a Google Cloud Free Trial?</h3>
+
+<p>When you sign up for your first ever Cloud Billing account, your <a href="https://docs.cloud.google.com/free/docs/free-cloud-features#free-trial">Google Cloud
+Free Trial</a> starts
+and you are granted a $300 <a href="https://docs.cloud.google.com/billing/docs/in-product-billing-setup#welcome-credits">Welcome credit</a>.
+However, those credits can&#39;t be used to pay for AI Studio usage. You can use the
+Welcome credit to pay for other eligible services within Google Cloud (note that
+once those credits are consumed or expire (within 90 days), any additional usage
+costs are automatically billed to your established form of payment).</p>
+
+<h3 id="cloud-credits" class="hide-from-toc" data-text="Can I use my Google Cloud Welcome credit with the Gemini API?" tabindex="-1">Can I use my Google Cloud Welcome credit with the Gemini API?</h3>
+
+<p>No, the Google Cloud <a href="https://docs.cloud.google.com/billing/docs/in-product-billing-setup#welcome-credits">Welcome credit</a>
+or free trial credit can&#39;t be used towards the Gemini API or AI Studio.</p>
+
+<p>If you were granted a Google Cloud welcome credit before they became
+ineligible, you are allowed to spend your remaining credits on the Gemini API
+and AI Studio up until the credits expire (after 90 days).</p>
+
+<h3 id="cloud-free-trial" class="hide-from-toc" data-text="Does the Google Cloud Free Trial apply to Gemini API usage?" tabindex="-1">Does the Google Cloud Free Trial apply to Gemini API usage?</h3>
+
+<p>No, starting March 2026, Gemini API usage costs are specifically excluded from
+the <a href="https://docs.cloud.google.com/free/docs/free-cloud-features#free-trial">$300 Google Cloud Free Trial</a>
+program.</p>
+
+<h3 id="cloud-credits-prepay" class="hide-from-toc" data-text="How do Google Cloud credits work with Prepay?" tabindex="-1">How do Google Cloud credits work with Prepay?</h3>
+
+<p>Prepay users must first <a href="#buy-credits">purchase Prepaid credits</a> before any
+eligible Google Cloud credits can be applied to Gemini API usage. Once you have
+an active Prepay credit balance, Google Cloud credits that are eligible for the
+Gemini API are consumed before your Prepay credit balance. When your Prepay
+credit balance on the billing account hits $0, Google Cloud credits will no
+longer be consumed.</p>
+
+<p>Not all Google Cloud credits, such as the
+<a href="#cloud-credits">Google Cloud Welcome credit</a>, can be used towards Gemini API
+and AI Studio.</p>
+
+<h3 id="how-is-billing-handled" class="hide-from-toc" data-text="How is billing handled?" tabindex="-1">How is billing handled?</h3>
+
+<p>Billing for the Gemini API is handled by the <a href="https://cloud.google.com/billing/docs/concepts">Cloud billing</a> system. Learn about the
+in-product Cloud Billing setup in the <a href="https://docs.cloud.google.com/billing/docs/in-product-billing-setup">Cloud Billing documentation</a>.</p>
+
+<h3 id="am-i-charged-for-failed-requests" class="hide-from-toc" data-text="Am I charged for failed requests?" tabindex="-1">Am I charged for failed requests?</h3>
+
+<p>If your request fails with a 400 or 500 error, you won&#39;t be charged for the
+tokens used. However, the request will still count against your quota.</p>
+
+<h3 id="is-gettokens-billed" class="hide-from-toc" data-text="Is GetTokens billed?" tabindex="-1">Is <code translate="no" dir="ltr">GetTokens</code> billed?</h3>
+
+<p>Requests to the <code translate="no" dir="ltr">GetTokens</code> API are not billed, and they don&#39;t count against
+inference quota.</p>
+
+<h3 id="paid-api-ai-studio" class="hide-from-toc" data-text="How is my Google AI Studio data handled if I have a paid API account?" tabindex="-1">How is my Google AI Studio data handled if I have a paid API account?</h3>
+
+<p>Refer to the <a href="/gemini-api/terms#paid-services">Terms of service</a> for details on
+how data is handled when Cloud billing is enabled (see &quot;How Google Uses Your
+Data&quot; under &quot;Paid Services&quot;). Note that your Google AI Studio prompts are
+treated under the same &quot;Paid Services&quot; terms so long as at least 1 API project
+has billing enabled, which you can validate on the
+<a href="https://aistudio.google.com/api-keys">Gemini API key page</a> if you see any
+projects marked as &quot;Paid&quot; under &quot;Plan&quot;.</p>
+
+<h3 id="what-is-prepaid" class="hide-from-toc" data-text="What is Prepaid billing and who is required to use the prepaid billing model?" tabindex="-1">What is Prepaid billing and who is required to use the prepaid billing model?</h3>
+
+<p>Prepaid billing allows users of Gemini API in AI Studio to pre-purchase credits.
+Starting Mar 23, 2026, new users to AI Studio might be required to be on the
+Prepaid billing plan. During the AI Studio <a href="#setup-billing">Set up Billing</a>
+process, the UI will guide you through the billing set up flow and will indicate
+if you are required to prepay.</p>
+
+<h3 id="purchase-prepay" class="hide-from-toc" data-text="How do I purchase Prepay credits, and is there a minimum amount or maximum?" tabindex="-1">How do I purchase Prepay credits, and is there a minimum amount or maximum?</h3>
+
+<p>You can <a href="#buy-credits">purchase credits</a> on the AI Studio Billing page. During
+the purchase process, the UI will provide the minimum pre-purchase amount that
+is required for your region and tier level, as well as a maximum amount that can
+be in your account at one time.</p>
+
+<h3 id="configure-auto-purchase" class="hide-from-toc" data-text="Can I configure my Prepay account to automatically purchase more credits as needed?" tabindex="-1">Can I configure my Prepay account to automatically purchase more credits as needed?</h3>
+
+<p>Yes, we recommend that you configure <a href="#auto-reload">auto-reload</a> in the AI
+Studio Billing settings. You specify a &quot;trigger&quot; credit balance (e.g., &quot;when my
+balance falls below $30&quot;) and a &quot;reload value&quot; (e.g., &quot;add $100&quot;).</p>
+
+<h3 id="limit-auto-reload-charges" class="hide-from-toc" data-text="Can I limit the amount of automatic reload charges?" tabindex="-1">Can I limit the amount of automatic reload charges?</h3>
+
+<p>Yes, Prepay users can set a <a href="#monthly-auto-charge-limit">Monthly Auto-Charge Limit</a>
+within the <strong>Auto-Reload</strong> widget. When the total amount of automatic reloads in a billing
+cycle reaches this limit, the system disables auto-reload until the next month. Manual credit
+purchases do not count toward this limit.</p>
+
+<h3 id="refund-unused-credits" class="hide-from-toc" data-text="Can I get a refund for my unused credits?" tabindex="-1">Can I get a refund for my unused credits?</h3>
+
+<p>All Prepaid API credits expire after 1 year and cannot be refunded. Read the
+<a href="#refunds">refund policy for Prepay accounts</a>.</p>
+
+<h3 id="prepay-credits-expire" class="hide-from-toc" data-text="Do my prepaid credits expire?" tabindex="-1">Do my prepaid credits expire?</h3>
+
+<p>Yes, credits expire 12 months after their purchase date.</p>
+
+<h3 id="zero-balance" class="hide-from-toc" data-text="What happens when my prepaid credit balance hits $0?" tabindex="-1">What happens when my prepaid credit balance hits $0?</h3>
+
+<p>All Gemini API services in all projects paid for by that Cloud Billing Prepay
+account will stop immediately to prevent incurring more charges. Your projects
+aren&#39;t automatically downgraded to the Free Tier.</p>
+
+<p>To restore service at your current Paid Tier level, you must <a href="#buy-credits">purchase
+additional credits</a>. After you&#39;ve purchased credits, you should be
+able to use the Gemini API. Note that there might be a <a href="#processing-times">delay</a> while our systems update to reflect your credit balance.</p>
+
+<p>Optionally, to downgrade to the Free Tier, you can <a href="https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project">disable billing</a>
+on the projects you want to downgrade.</p>
+
+<h3 id="usage-stop" class="hide-from-toc" data-text="Why did my usage stop even though my Prepay credit balance is greater than $0?" tabindex="-1">Why did my usage stop even though my Prepay credit balance is greater than $0?</h3>
+
+<p>You may have hit the <a href="#tier-spend-caps">usage limit</a> for your current tier.
+Usage limits will increase automatically as you progress to higher tiers. Your
+Gemini API AI Studio usage can also be impacted due to <a href="#missed-payment">the status of your
+Cloud Billing account</a>.</p>
+
+<h3 id="negative-balance" class="hide-from-toc" data-text="Why is my Prepay account credit balance negative?" tabindex="-1">Why is my Prepay account credit balance negative?</h3>
+
+<p>Due to the complexity of our billing and processing systems, there might be
+<a href="#processing-times">delays</a> in our ability to cut off usage after you consume
+all of your credits. This excess usage might appear as a negative credit balance
+in your AI Studio billing dashboard. If this happens, your service is paused,
+and your negative balance will be deducted from your next credit purchase.</p>
+
+<p>To avoid a pause in your Gemini API service, we recommend setting up
+<a href="#auto-reload">auto-reload</a> to automatically purchase more credits when your
+credit balance falls below a value you specify.</p>
+
+<h3 id="other-prepay" class="hide-from-toc" data-text="Can I use my Prepay credits for other Google Cloud services, like Gemini Enterprise Agent Platform?" tabindex="-1">Can I use my Prepay credits for other Google Cloud services, like Gemini Enterprise Agent Platform?</h3>
+
+<p>No, Prepay credits are strictly locked to Gemini API usage. Any
+other Google Cloud services you use (Compute, Storage, Gemini Enterprise Agent Platform) are billed using
+the standard <a href="https://docs.cloud.google.com/billing/docs/how-to/billing-cycle">Cloud charging cycle</a>.</p>
+
+<h3 id="switch-to-postpaid" class="hide-from-toc" data-text="Can I switch from Prepay to Postpay billing?" tabindex="-1">Can I switch from Prepay to Postpay billing?</h3>
+
+<p>No, switching from a Prepay billing plan to a Postpay billing plan is not supported.</p>
+
+<h3 id="switch-to-prepay" class="hide-from-toc" data-text="Can I switch from Postpay to Prepay billing?" tabindex="-1">Can I switch from Postpay to Prepay billing?</h3>
+
+<p>Yes, you can transition an existing Postpay account on the <a href="https://aistudio.google.com/billing">AI Studio Billing</a> page. See <a href="#migrate-to-prepay">Migrate to prepay</a> for instructions.</p>
+
+<h3 id="credits-in-postpaid" class="hide-from-toc" data-text="What happens to my Prepaid credits if I switch to Postpay?" tabindex="-1">What happens to my Prepaid credits if I switch to Postpay?</h3>
+
+<p>When you upgrade to <a href="#postpay">Postpay</a>, Cloud Billing closes your Prepay
+payments account, turns off <a href="#auto-reload">auto-reload</a>, and automatically
+refunds any unused Prepay credits to you (subject to standard refund processing
+time).</p>
+
+<h3 id="balance-history" class="hide-from-toc" data-text="Where can I see my current Prepay credit balance and transaction history?" tabindex="-1">Where can I see my current Prepay credit balance and transaction history?</h3>
+
+<p>All balance management and transaction history for the Gemini API must be
+done directly within the Google AI Studio Billing tab.</p>
+
+<h3 id="eligible-accounts" class="hide-from-toc" data-text='Why am I seeing "The billing account type is inactive or unsupported"?' tabindex="-1">Why am I seeing "The billing account type is inactive or unsupported"?</h3>
+
+<p>Payments interactions on the <a href="https://aistudio.google.com/billing">AI Studio Billing page</a> may be blocked and replaced with the
+message &quot;The billing account type is inactive or unsupported&quot; if your
+selected billing account type or billing account status is not eligible for
+the Paid Tier in AI Studio.</p>
+
+<p>Check the <a href="https://console.cloud.google.com/billing/">Cloud Console</a> to see your
+billing account&#39;s status. One ineligible type could be <em>Free trial account</em>, in
+which case you can <a href="#setup-billing">activate billing</a> in AI Studio to become
+eligible. One inactive state could be <em>Closed</em>, in which case you can <a href="https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account">reopen
+the account</a>.</p>
+
+<h3 id="cloud-console" class="hide-from-toc" data-text="Will my Gemini API usage costs show up in the Google Cloud console?" tabindex="-1">Will my Gemini API usage costs show up in the Google Cloud console?</h3>
+
+<p>Yes, Gemini API costs, alongside costs associated with any other Google Cloud
+services that are paid for by your Cloud Billing account, are viewable on the
+<a href="https://docs.cloud.google.com/billing/docs/how-to/split-charging-cycle#cost-reports">Cost management pages</a>
+in the <a href="https://console.cloud.google.com/billing">Cloud Billing console</a>. Note
+that you can only manage your Prepay credit balance in AI Studio.</p>
+
+<h3 id="delayed-billing" class="hide-from-toc" data-text="Why isn't my Gemini API Usage showing up in the Cloud Billing Console, when I can see it in AI Studio Billing, along with the consumption of my credits?" tabindex="-1">Why isn't my Gemini API Usage showing up in the Cloud Billing Console, when I can see it in AI Studio Billing, along with the consumption of my credits?</h3>
+
+<p>Google Cloud and AI Studio report usage data to Cloud Billing at varying
+intervals. Due to the complexity of our billing and processing systems, you
+might see a delay between your use of services, and the usage and costs being
+available to view in Cloud Billing. Typically, your cost details are available
+within a day, but can sometimes take more than 24 hours.
+Learn more about delayed billing in the <a href="https://docs.cloud.google.com/billing/docs/how-to/billing-cycle#delayed-billing">Cloud Billing documentation</a>.</p>
+
+<h3 id="missed-payment" class="hide-from-toc" data-text="If I use other Google Cloud services with costs that are subject to a Postpay charging cycle, what happens if I miss a payment?" tabindex="-1">If I use other Google Cloud services with costs that are subject to a Postpay charging cycle, what happens if I miss a payment?</h3>
+
+<p>Missing a payment for other Google Cloud services can suspend your Gemini API
+access in AI Studio, <strong>regardless of how many Prepaid credits you have
+available</strong>. AI Studio usage is powered by a Google Cloud Billing account, which
+can share both Prepay billing for AI Studio and Postpay billing for other Cloud
+services. An issue with your Postpay balance halts all services tied to that
+account. Your Gemini API usage will be suspended if your Cloud Billing account
+is flagged for issues such as:</p>
+
+<ul>
+<li>A delinquent or overdue balance</li>
+<li>A declined payment</li>
+<li>An invalid or expired payment method</li>
+</ul>
+
+<p>To restore service, you must <a href="https://docs.cloud.google.com/billing/docs/how-to/resolve-issues#resolving-declined-payments">resolve the Postpay account issue</a>
+in the Google Cloud Billing console. Once you resolve the issue, you will regain
+access to your Prepaid Gemini API credits and services.</p>
+
+<h3 id="prepay-issue" class="hide-from-toc" data-text="Why are my projects disrupted after I canceled a Prepay setup?" tabindex="-1">Why are my projects disrupted after I canceled a Prepay setup?</h3>
+
+<p><strong>Issue:</strong> You started the flow to add Prepay capabilities to an existing
+Postpay billing account, but closed the window or canceled the process before
+completing the prepayment setup. Other projects linked to that billing account
+lost access to the Gemini API.</p>
+
+<p><strong>Cause:</strong> During the transition flow, the infrastructure to support Prepay is
+created on your billing account immediately after you accept the confirmation
+dialog. If you don&#39;t complete the prepayment steps, the configuration remains
+in an unchargeable state. Because this state applies at the billing account
+level, it restricts access for all projects linked to that billing account that
+rely on Prepay services.</p>
+
+<p><strong>Resolution:</strong> Because the account state has already changed, there is no
+automatic way to revert the state if you abandon the payment flow. To restore
+service to your linked projects, do one of the following:</p>
+
+<ul>
+<li><strong>Complete the setup:</strong> Return to Google AI Studio, restart the billing
+setup flow, and complete the prepayment process. After the payment is
+processed, the Prepay billing plan becomes active and the service is restored.</li>
+<li><strong>Contact Support:</strong> If you don&#39;t want to use the Prepay billing plan and
+want to revert your billing account back to Postpay,
+<a href="https://cloud.google.com/support/billing">contact Cloud Billing Support</a> to
+manually reset your account state.</li>
+</ul>
+
+<h3 id="get-help" class="hide-from-toc" data-text="Where can I get help with billing?" tabindex="-1">Where can I get help with billing?</h3>
+
+<p>To get help with billing, see
+<a href="https://cloud.google.com/support/billing">Get Cloud billing support</a>.</p>
+<link href="https://fonts.googleapis.com/css2?family=Google+Symbols:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" data-page-link>
+  
+
+  
+</div>
+
+  
+    
+    
+      
+    <devsite-thumb-rating position="footer">
+    </devsite-thumb-rating>
+  
+       
+         <devsite-feedback
+  position="footer"
+  project-name="Gemini API"
+  product-id="5292923"
+  bucket="documentation"
+  context=""
+  version="t-devsite-webserver-20260811-r00-rc00.479616193737279308"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="footer"
+  class="nocontent"
+  data-nosnippet
+  
+  
+  
+    project-icon="https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/googledevai/images/touchicon-180-new.png"
+  
+  
+  
+  >
+
+  <button>
+  
+    
+    Send feedback
+  
+  </button>
+</devsite-feedback>
+       
+    
+    
+  
+
+  <div class="devsite-floating-action-buttons"></div></article>
+
+
+<devsite-content-footer class="nocontent" data-nosnippet>
+  <p>Except as otherwise noted, the content of this page is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 License</a>, and code samples are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. For details, see the <a href="https://developers.google.com/site-policies">Google Developers Site Policies</a>. Java is a registered trademark of Oracle and/or its affiliates.</p>
+  <p>Last updated 2026-08-10 UTC.</p>
+</devsite-content-footer>
+
+
+<devsite-notification
+>
+</devsite-notification>
+
+
+  
+<div class="devsite-content-data">
+  
+    
+    
+    <template class="devsite-thumb-rating-feedback">
+      <devsite-feedback
+  position="thumb-rating"
+  project-name="Gemini API"
+  product-id="5292923"
+  bucket="documentation"
+  context=""
+  version="t-devsite-webserver-20260811-r00-rc00.479616193737279308"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="thumb-rating"
+  class="nocontent"
+  data-nosnippet
+  
+  
+  
+    project-icon="https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/googledevai/images/touchicon-180-new.png"
+  
+  
+  
+  >
+
+  <button>
+  
+    Need to tell us more?
+  
+  </button>
+</devsite-feedback>
+    </template>
+  
+  
+    <template class="devsite-content-data-template">
+      [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-08-10 UTC."],[],[]]
+    </template>
+  
+</div>
+            
+          </devsite-content>
+        </main>
+        <devsite-footer-promos class="devsite-footer">
+          
+            
+          
+        </devsite-footer-promos>
+        <devsite-footer-linkboxes class="devsite-footer">
+          
+            
+<nav class="devsite-footer-linkboxes nocontent"
+     aria-label="Footer links"
+     data-nosnippet>
+  
+</nav>
+          
+        </devsite-footer-linkboxes>
+        <devsite-footer-utility class="devsite-footer">
+          
+            
+
+<div class="devsite-footer-utility nocontent" data-nosnippet>
+  
+
+  
+  <nav class="devsite-footer-utility-links" aria-label="Utility links">
+    
+    <ul class="devsite-footer-utility-list">
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="//policies.google.com/terms"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Terms link"
+         >
+          Terms
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="//policies.google.com/privacy"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Privacy link"
+         >
+          Privacy
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 glue-cookie-notification-bar-control">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="#"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Manage cookies link"
+         
+           aria-hidden="true"
+         >
+          Manage cookies
+        </a>
+        
+      </li>
+      
+    </ul>
+    
+    
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="sq"
+        >Shqip</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="he"
+        >עברית</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fa"
+        >فارسی</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="bn"
+        >বাংলা</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+  </nav>
+</div>
+          
+        </devsite-footer-utility>
+        <devsite-panel>
+          
+        </devsite-panel>
+        
+      </section>
+      </section>
+    <devsite-sitemask></devsite-sitemask>
+    <devsite-snackbar></devsite-snackbar>
+    <devsite-tooltip ></devsite-tooltip>
+    <devsite-heading-link></devsite-heading-link>
+    <devsite-analytics>
+      
+        <script type="application/json" analytics>[]</script>
+<script type="application/json" tag-management>{&#34;at&#34;: &#34;True&#34;, &#34;ga4&#34;: [], &#34;ga4p&#34;: [], &#34;gtm&#34;: [{&#34;id&#34;: &#34;GTM-TC2MQKS8&#34;, &#34;purpose&#34;: 0}], &#34;parameters&#34;: {&#34;internalUser&#34;: &#34;False&#34;, &#34;language&#34;: {&#34;machineTranslated&#34;: &#34;False&#34;, &#34;requested&#34;: &#34;en&#34;, &#34;served&#34;: &#34;en&#34;}, &#34;pageType&#34;: &#34;article&#34;, &#34;projectName&#34;: &#34;Gemini API&#34;, &#34;signedIn&#34;: &#34;False&#34;, &#34;tenant&#34;: &#34;googledevai&#34;, &#34;recommendations&#34;: {&#34;sourcePage&#34;: &#34;&#34;, &#34;sourceType&#34;: 0, &#34;sourceRank&#34;: 0, &#34;sourceIdenticalDescriptions&#34;: 0, &#34;sourceTitleWords&#34;: 0, &#34;sourceDescriptionWords&#34;: 0, &#34;experiment&#34;: &#34;&#34;}, &#34;experiment&#34;: {&#34;ids&#34;: &#34;&#34;}}}</script>
+      
+    </devsite-analytics>
+    
+      <devsite-badger></devsite-badger>
+    
+    
+    
+    
+<script nonce="kZjbViYe9Auf79yKP46ENihV21p685">
+  
+  (function(d,e,v,s,i,t,E){d['GoogleDevelopersObject']=i;
+    t=e.createElement(v);t.async=1;t.src=s;E=e.getElementsByTagName(v)[0];
+    E.parentNode.insertBefore(t,E);})(window, document, 'script',
+    'https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/googledevai/js/app_loader.js', '[59,"en",null,"/js/devsite_app_module.js","https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f","https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/googledevai","https://googledevai-dot-devsite-v2-prod-3p.appspot.com",null,null,["/_pwa/googledevai/manifest.json","https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/images/video-placeholder.svg","https://www.gstatic.com/devrel-devsite/prod/vfaab1c846319b03545a380628f94a5f2242cc1b4a1f651e46c0205139cef731f/googledevai/images/favicon-new.png","/_static/googledevai/images/gemini-api-logo.svg","https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700|Inter:400,500|Inter+Tight:300,500,600&display=swap"],1,null,[1,6,8,12,14,17,21,25,50,52,63,70,75,76,80,87,91,92,93,97,98,100,101,102,103,104,105,107,108,109,110,112,113,117,118,120,122,124,125,126,127,129,130,131,132,133,134,135,136,138,140,141,147,148,149,151,152,156,157,158,159,161,163,164,168,169,170,179,180,182,183,186,191,193,196],"AIzaSyCNm9YxQumEXwGJgTDjxoxXK6m1F-9720Q","AIzaSyCc76DZePGtoyUjqKrLdsMGk_ry7sljLbY","ai.google.dev","AIzaSyB9bqgQ2t11WJsOX8qNsCQ6U-w91mmqF-I","AIzaSyAdYnStPdzjcJJtQ0mvIaeaMKj7_t6J_Fg",null,null,null,["MiscFeatureFlags__enable_variable_operator_index_yaml","DevPro__enable_cloud_innovators_plus","DevPro__enable_payments_first_batch","MiscFeatureFlags__enable_view_transitions","Profiles__enable_developer_profile_pages_as_content","Profiles__enable_completecodelab_endpoint","AIStudioInteractionsToggle__interactions_are_default","DevPro__enable_devpro_offers","DevPro__enable_g1_ineligible_redirect","Profiles__enable_awarding_url","DevPro__enable_code_assist","EngEduTelemetry__enable_engedu_telemetry","MiscFeatureFlags__gdp_dashboard_reskin_enabled","Search__enable_dynamic_content_confidential_banner","Profiles__enable_targeted_hero","DevPro__remove_eu_tax_intake_form","MiscFeatureFlags__enable_variable_operator","CloudShell__cloud_shell_button","MiscFeatureFlags__developers_footer_dark_image","Search__enable_ai_eligibility_checks","MiscFeatureFlags__developers_footer_image","Search__enable_suggestions_from_borg","Profiles__enable_purchase_prompts","DevPro__enable_firebase_workspaces_card","Profiles__enable_completequiz_endpoint","Profiles__enable_join_program_group_endpoint","CloudShell__cloud_code_overflow_menu","MiscFeatureFlags__enable_project_variables","MiscFeatureFlags__enable_framebox_badge_methods","DevPro__enable_g1_integration","Cloud__enable_cloud_shell_fte_user_flow","DevPro__enable_developer_subscriptions","Cloud__enable_cloudx_experiment_ids","OnSwitch__enable","Profiles__enable_developer_profiles_callout","Profiles__enable_page_saving","DevPro__enable_enterprise","Analytics__enable_clearcut_logging","Profiles__enable_profile_collections","TpcFeatures__enable_unmirrored_page_left_nav","Search__enable_page_map","DevPro__enable_google_payments_buyflow","Profiles__enable_playlist_community_acl","BookNav__enable_tenant_cache_key","Profiles__enable_recognition_badges","MiscFeatureFlags__enable_explain_this_code","DevPro__enable_embed_profile_creation","DevPro__enable_free_benefits","MiscFeatureFlags__enable_llms_txt","Cloud__cache_serialized_dynamic_content","Profiles__enable_dashboard_curated_recommendations","Cloud__enable_legacy_calculator_redirect","Concierge__enable_actions_menu","Search__enable_ai_search_summaries_for_all","SignIn__enable_l1_signup_flow","Experiments__reqs_query_experiments","Profiles__enable_developer_profile_benefits_ui_redesign","MiscFeatureFlags__enable_firebase_utm","Cloud__enable_cloud_shell","Analytics__enable_devpro_interaction_logging","DevPro__enable_nvidia_credits_card","DevPro__enable_google_one_card","Profiles__enable_auto_apply_credits","DevPro__enable_vertex_credit_card","Profiles__enable_release_notes_notifications","Profiles__enable_callout_notifications","TpcFeatures__proxy_prod_host","Profiles__enable_complete_playlist_endpoint","DevPro__enable_credits_banner","Concierge__enable_pushui","DevPro__enable_devsite_captcha","Profiles__enable_stripe_subscription_management","Profiles__enable_user_type","MiscFeatureFlags__enable_appearance_cookies","MiscFeatureFlags__fix_lower_breadcrumbs","Cloud__fast_free_trial","Cloud__enable_free_trial_server_call","Concierge__enable_remove_info_panel_tags","Profiles__enable_public_developer_profiles","Cloud__enable_cloud_dlp_service","MiscFeatureFlags__remove_cross_domain_tracking_params","MiscFeatureFlags__enable_explicit_template_dependencies","Profiles__require_profile_eligibility_for_signin","Concierge__enable_devsite_llm_tools"],null,null,"AIzaSyA58TaKli1DculwmAmbpzLVGuWc8eCQgQc","https://developerscontentserving-pa.googleapis.com","AIzaSyDWBU60w0P9hEkr29kkksYs8Z7gvZ8u_wc","https://developerscontentsearch-pa.googleapis.com",2,4,null,"https://developerprofiles-pa.googleapis.com",[59,"googledevai","Google AI for Developers","ai.google.dev",null,"googledevai-dot-devsite-v2-prod-3p.appspot.com",null,null,[null,1,null,null,null,null,null,null,null,null,null,[1],null,null,null,null,null,null,[1],null,null,null,null,[1],[1,1,null,1,1],null,null,null,null,null,[1]],null,[73,null,null,null,null,null,"/images/lockup-new.svg","/images/touchicon-180-new.png",null,null,null,null,1,1,null,null,null,null,null,null,null,2,null,null,null,"/images/lockup-dark-theme-new.svg",[]],[],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[44,2,4,6,7,12,14,15,17,18,20,21,22,23,28,29,32,37,39,40,43],null,[[],[1,1],null,1],[[null,null,null,null,null,["GTM-TC2MQKS8"],null,null,null,null,null,[["GTM-TC2MQKS8",1]],1]],null,4,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[]],null,null,1,1,"https://developerscontentinsights-pa.googleapis.com","AIzaSyC11xEGtFhkmSh_iF6l_itbxnFz2GrIBOg","AIzaSyAXJ10nRF73mmdSDINgkCNX5bbd2KPcWm8","https://developers.googleapis.com",["https://aistudio.google.com"],null,"AIzaSyCjP0KOnHfv8mwe38sfzZJMOnqE3HvrD4A",null,null,"https://developers.googleapis.com"]')
+  
+</script>
+
+    <devsite-a11y-announce></devsite-a11y-announce>
+  </body>
+</html>

@@ -1,0 +1,326 @@
+{
+  "schemaVersion": "presentation-output-caption-cue-b5-manifest-v001",
+  "manifestId": "a-v002-caption-quality-first-api-b5-20260816-v008-b5-manifest",
+  "status": "passed",
+  "b5JobBinding": {
+    "schemaVersion": "presentation-output-caption-cue-b5-job-v001",
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-jobs/a-v002-caption-quality-first-api-b5-20260816-v008.json",
+    "fileSha256": "3092ebcd7a376847ee8eafc9984239985d7596b39eff9fbd7cdc932467972f89",
+    "canonicalSha256": "a33266b1257058a13a1153e1f3e7f9729672eb807f02badd730f8fa5207999cf"
+  },
+  "sourcePackageBinding": {
+    "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v003/source-package-v001.json",
+    "fileSha256": "6b77964113028eacf3ac64f56b82f8aac901004aad4a2df82387aee6cd142fe0",
+    "canonicalSha256": "c217ecc5df65e545cebd9b8ced4c7cd3a157abd685685c77767c7348f8a3ed25"
+  },
+  "generateRequestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/generate-content-request.json",
+    "fileSha256": "7206c8e6a07c93e237f0c65da41435af3d3616aef5383f1ab8d312b705d9d22a"
+  },
+  "tokenCountBindings": {
+    "probeRequest": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/probe-count-tokens-request.json",
+      "fileSha256": "cf9ed925bc93e2b46ab671caf7acb6da6b3366f84fef92ef6e0ccf6c6196e458"
+    },
+    "probeResponse": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/probe-count-tokens-response.raw.json",
+      "fileSha256": "80aad68cf3dc08aa37ba3538e853bedd66b8e66537510263f5ac899d144614cc"
+    },
+    "finalRequest": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/final-count-tokens-request.json",
+      "fileSha256": "cf9ed925bc93e2b46ab671caf7acb6da6b3366f84fef92ef6e0ccf6c6196e458"
+    },
+    "finalResponse": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/final-count-tokens-response.raw.json",
+      "fileSha256": "80aad68cf3dc08aa37ba3538e853bedd66b8e66537510263f5ac899d144614cc"
+    },
+    "maximumResponseStructure": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/maximum-response-structure.json",
+      "fileSha256": "ca25c0a1e909015a2248d0e3ec1f962df5b88ef16d2cc298056ace0771373919"
+    }
+  },
+  "officialSnapshot": {
+    "verification": {
+      "modelId": "gemini-3.6-flash",
+      "modelResource": "models/gemini-3.6-flash",
+      "observedAt": "2026-08-15T16:15:44.000Z",
+      "inputLimit": 1048576,
+      "outputLimit": 65536,
+      "tier": "PAID_STANDARD_DEFAULT_BY_OMISSION",
+      "inputPriceNanoUsdPerToken": 750,
+      "outputPriceNanoUsdPerToken": 3750,
+      "priceSnapshot": {
+        "schemaVersion": "presentation-caption-api-price-snapshot-v001",
+        "modelId": "gemini-3.6-flash",
+        "tier": "Standard",
+        "inputPriceNanoUsdPerToken": 750,
+        "outputPriceNanoUsdPerToken": 3750,
+        "outputIncludesThinkingTokens": true,
+        "effectiveThrough": "2026-12-31",
+        "successorEffectiveFrom": "2027-01-01",
+        "successorInputPriceNanoUsdPerToken": 1500,
+        "successorOutputPriceNanoUsdPerToken": 7500,
+        "sourceUrl": "https://ai.google.dev/gemini-api/docs/pricing",
+        "observedAt": "2026-08-15T16:15:40.000Z"
+      },
+      "sources": [
+        {
+          "sourceId": "pricing",
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "observedAt": "2026-08-15T16:15:40.000Z",
+          "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/pricing.snapshot.html",
+          "snapshotFileSha256": "bd907600d61fc791a269ebebf46357f1322563ef88487ab730b6b00940cbbd76",
+          "snapshotByteLength": 248452
+        },
+        {
+          "sourceId": "tokens-guide",
+          "url": "https://ai.google.dev/gemini-api/docs/tokens",
+          "observedAt": "2026-08-15T16:15:41.000Z",
+          "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/tokens-guide.snapshot.html",
+          "snapshotFileSha256": "28a3a751e027697000222c074aada037eb604247ca4dc4a03afeb1c35c790b58",
+          "snapshotByteLength": 144627
+        },
+        {
+          "sourceId": "count-tokens-api",
+          "url": "https://ai.google.dev/api/tokens",
+          "observedAt": "2026-08-15T16:15:42.000Z",
+          "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/count-tokens-api.snapshot.html",
+          "snapshotFileSha256": "52e5f00be7e3b4f93984f6e453f42a03388f60b2b4b2f8260fb42cc896d3d2a1",
+          "snapshotByteLength": 283766
+        },
+        {
+          "sourceId": "billing",
+          "url": "https://ai.google.dev/gemini-api/docs/billing",
+          "observedAt": "2026-08-15T16:15:43.000Z",
+          "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/billing.snapshot.html",
+          "snapshotFileSha256": "8e894a579398a2a14862e39f39972b43136925a76d156016c1cf6dc3b8dd6e33",
+          "snapshotByteLength": 136690
+        },
+        {
+          "sourceId": "thinking",
+          "url": "https://ai.google.dev/gemini-api/docs/generate-content/thinking",
+          "observedAt": "2026-08-15T16:15:43.000Z",
+          "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/thinking.snapshot.html",
+          "snapshotFileSha256": "1527bcb945065f358860c7bdc0c65e97e7b96d14cfa553421f74a7be6af716cc",
+          "snapshotByteLength": 223997
+        },
+        {
+          "sourceId": "latest-model",
+          "url": "https://ai.google.dev/gemini-api/docs/latest-model",
+          "observedAt": "2026-08-15T16:15:44.000Z",
+          "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/latest-model.snapshot.html",
+          "snapshotFileSha256": "b557e3a36034b515703dd4db578b7f8a47bea0a202d4f15475f0682ece22d6bd",
+          "snapshotByteLength": 119282
+        }
+      ],
+      "claims": [
+        {
+          "claimId": "model-exists",
+          "verdict": "verified",
+          "evidence": [
+            {
+              "sourceId": "latest-model",
+              "utf8ByteOffset": 0,
+              "utf8ByteLength": 119282,
+              "excerptSha256": "b557e3a36034b515703dd4db578b7f8a47bea0a202d4f15475f0682ece22d6bd",
+              "locatorLabel": "whole-snapshot:latest-model"
+            }
+          ]
+        },
+        {
+          "claimId": "input-limit",
+          "verdict": "verified",
+          "evidence": [
+            {
+              "sourceId": "latest-model",
+              "utf8ByteOffset": 0,
+              "utf8ByteLength": 119282,
+              "excerptSha256": "b557e3a36034b515703dd4db578b7f8a47bea0a202d4f15475f0682ece22d6bd",
+              "locatorLabel": "whole-snapshot:latest-model"
+            }
+          ]
+        },
+        {
+          "claimId": "output-limit",
+          "verdict": "verified",
+          "evidence": [
+            {
+              "sourceId": "latest-model",
+              "utf8ByteOffset": 0,
+              "utf8ByteLength": 119282,
+              "excerptSha256": "b557e3a36034b515703dd4db578b7f8a47bea0a202d4f15475f0682ece22d6bd",
+              "locatorLabel": "whole-snapshot:latest-model"
+            }
+          ]
+        },
+        {
+          "claimId": "standard-input-price",
+          "verdict": "verified",
+          "evidence": [
+            {
+              "sourceId": "pricing",
+              "utf8ByteOffset": 0,
+              "utf8ByteLength": 248452,
+              "excerptSha256": "bd907600d61fc791a269ebebf46357f1322563ef88487ab730b6b00940cbbd76",
+              "locatorLabel": "whole-snapshot:pricing"
+            }
+          ]
+        },
+        {
+          "claimId": "standard-output-price",
+          "verdict": "verified",
+          "evidence": [
+            {
+              "sourceId": "pricing",
+              "utf8ByteOffset": 0,
+              "utf8ByteLength": 248452,
+              "excerptSha256": "bd907600d61fc791a269ebebf46357f1322563ef88487ab730b6b00940cbbd76",
+              "locatorLabel": "whole-snapshot:pricing"
+            }
+          ]
+        },
+        {
+          "claimId": "service-tier-omission-standard",
+          "verdict": "verified",
+          "evidence": [
+            {
+              "sourceId": "pricing",
+              "utf8ByteOffset": 0,
+              "utf8ByteLength": 248452,
+              "excerptSha256": "bd907600d61fc791a269ebebf46357f1322563ef88487ab730b6b00940cbbd76",
+              "locatorLabel": "whole-snapshot:pricing"
+            }
+          ]
+        },
+        {
+          "claimId": "count-tokens-unbilled",
+          "verdict": "unverified",
+          "evidence": []
+        },
+        {
+          "claimId": "count-tokens-upper-bounds-prompt-billing",
+          "verdict": "contradicted",
+          "evidence": [
+            {
+              "sourceId": "tokens-guide",
+              "utf8ByteOffset": 0,
+              "utf8ByteLength": 144627,
+              "excerptSha256": "28a3a751e027697000222c074aada037eb604247ca4dc4a03afeb1c35c790b58",
+              "locatorLabel": "whole-snapshot:tokens-guide"
+            }
+          ]
+        },
+        {
+          "claimId": "max-output-upper-bounds-candidate-plus-thinking",
+          "verdict": "unverified",
+          "evidence": []
+        }
+      ]
+    },
+    "sourceCopies": [
+      {
+        "sourceId": "pricing",
+        "inputBinding": {
+          "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/pricing.snapshot.html",
+          "fileSha256": "bd907600d61fc791a269ebebf46357f1322563ef88487ab730b6b00940cbbd76"
+        },
+        "outputBinding": {
+          "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/official/pricing.snapshot.html",
+          "fileSha256": "bd907600d61fc791a269ebebf46357f1322563ef88487ab730b6b00940cbbd76"
+        }
+      },
+      {
+        "sourceId": "tokens-guide",
+        "inputBinding": {
+          "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/tokens-guide.snapshot.html",
+          "fileSha256": "28a3a751e027697000222c074aada037eb604247ca4dc4a03afeb1c35c790b58"
+        },
+        "outputBinding": {
+          "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/official/tokens-guide.snapshot.html",
+          "fileSha256": "28a3a751e027697000222c074aada037eb604247ca4dc4a03afeb1c35c790b58"
+        }
+      },
+      {
+        "sourceId": "count-tokens-api",
+        "inputBinding": {
+          "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/count-tokens-api.snapshot.html",
+          "fileSha256": "52e5f00be7e3b4f93984f6e453f42a03388f60b2b4b2f8260fb42cc896d3d2a1"
+        },
+        "outputBinding": {
+          "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/official/count-tokens-api.snapshot.html",
+          "fileSha256": "52e5f00be7e3b4f93984f6e453f42a03388f60b2b4b2f8260fb42cc896d3d2a1"
+        }
+      },
+      {
+        "sourceId": "billing",
+        "inputBinding": {
+          "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/billing.snapshot.html",
+          "fileSha256": "8e894a579398a2a14862e39f39972b43136925a76d156016c1cf6dc3b8dd6e33"
+        },
+        "outputBinding": {
+          "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/official/billing.snapshot.html",
+          "fileSha256": "8e894a579398a2a14862e39f39972b43136925a76d156016c1cf6dc3b8dd6e33"
+        }
+      },
+      {
+        "sourceId": "thinking",
+        "inputBinding": {
+          "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/thinking.snapshot.html",
+          "fileSha256": "1527bcb945065f358860c7bdc0c65e97e7b96d14cfa553421f74a7be6af716cc"
+        },
+        "outputBinding": {
+          "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/official/thinking.snapshot.html",
+          "fileSha256": "1527bcb945065f358860c7bdc0c65e97e7b96d14cfa553421f74a7be6af716cc"
+        }
+      },
+      {
+        "sourceId": "latest-model",
+        "inputBinding": {
+          "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v008/latest-model.snapshot.html",
+          "fileSha256": "b557e3a36034b515703dd4db578b7f8a47bea0a202d4f15475f0682ece22d6bd"
+        },
+        "outputBinding": {
+          "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v008/attempt-0001/official/latest-model.snapshot.html",
+          "fileSha256": "b557e3a36034b515703dd4db578b7f8a47bea0a202d4f15475f0682ece22d6bd"
+        }
+      }
+    ]
+  },
+  "residualRiskAcceptanceBinding": {
+    "schemaVersion": "presentation-output-caption-cue-residual-risk-acceptance-v001",
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-risk-acceptances/a-v002-caption-quality-first-api-risk-20260816-v003.json",
+    "fileSha256": "c07a3b3f0b1a0a7330f2f932cafd3c79c249b5a8632444b10b544415df833fea",
+    "canonicalSha256": "3608e84ce32850d28ed9ec39aece81498a5b75ce3d5b6486614153617fdc8ccb"
+  },
+  "tokenProjection": {
+    "probeInputTokenCount": 10458,
+    "finalInputTokenCount": 10458,
+    "modelInputTokenLimit": 1048576,
+    "modelOutputTokenLimit": 65536,
+    "derivedMaxOutputTokens": 65536,
+    "maximumValidResponseCanonicalByteLength": 43501
+  },
+  "costProjection": {
+    "currency": "USD",
+    "scope": "generate-content-standard-list-price-only",
+    "maximumNanoUsd": 1000000000,
+    "preSendEstimateNanoUsd": 253603500,
+    "verdict": "within-approved-limit"
+  },
+  "checks": {
+    "sourceBinding": "passed",
+    "visibleInput": "passed",
+    "requestByte": "passed",
+    "responseSchema": "passed",
+    "officialSnapshot": "passed",
+    "residualRiskAcceptance": "passed",
+    "probeTokenCount": "passed",
+    "finalTokenCount": "passed",
+    "inputLimit": "passed",
+    "maximumResponseDiagnosis": "passed",
+    "costLimit": "passed",
+    "secretAbsence": "passed",
+    "artifactHashGraph": "passed"
+  }
+}

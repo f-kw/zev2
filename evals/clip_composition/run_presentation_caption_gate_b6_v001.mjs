@@ -421,6 +421,25 @@ export function inspectPresentationCaptionGateB6ProviderResponseV001({
     && contentType === 'application/json; charset=UTF-8';
   const parsed = parseProviderResponseRawOnceV001(rawBytes);
   const envelope = parsed.status === 'parsed' ? parsed.envelope : null;
+  const promptFeedback = envelope !== null
+    && envelope.promptFeedback !== null
+    && typeof envelope.promptFeedback === 'object'
+    && !Array.isArray(envelope.promptFeedback)
+    ? envelope.promptFeedback
+    : null;
+  const providerBlockReason = promptFeedback !== null
+    && typeof promptFeedback.blockReason === 'string'
+    && promptFeedback.blockReason.length > 0
+    ? promptFeedback.blockReason
+    : null;
+  const providerSafetyRatingsPresent = promptFeedback !== null
+    && Object.hasOwn(promptFeedback, 'safetyRatings');
+  const providerSafetyRatingsValid = !providerSafetyRatingsPresent
+    || Array.isArray(promptFeedback.safetyRatings);
+  const providerSafetyRatings = providerSafetyRatingsPresent
+    && providerSafetyRatingsValid
+    ? cloneJson(promptFeedback.safetyRatings)
+    : null;
 
   const responseModelVersion = envelope !== null
     && typeof envelope.modelVersion === 'string'
@@ -443,14 +462,26 @@ export function inspectPresentationCaptionGateB6ProviderResponseV001({
     && rawUsage.promptTokenCount >= 0
     && Number.isSafeInteger(rawUsage.totalTokenCount)
     && rawUsage.totalTokenCount >= rawUsage.promptTokenCount;
+  const rawCandidates = envelope !== null ? envelope.candidates : null;
+  const rawCandidateCount = Array.isArray(rawCandidates) ? rawCandidates.length : null;
+  const normalizedCandidateCount = providerBlockReason !== null
+    && rawCandidateCount === null ? 0 : rawCandidateCount;
+  const normalizedCandidatesTokenCount = rawUsage !== null
+    && Number.isSafeInteger(rawUsage.candidatesTokenCount)
+    ? rawUsage.candidatesTokenCount
+    : providerBlockReason !== null && normalizedCandidateCount === 0 ? 0 : null;
+  const normalizedThoughtsTokenCount = rawUsage !== null
+    && Number.isSafeInteger(rawUsage.thoughtsTokenCount)
+    ? rawUsage.thoughtsTokenCount
+    : providerBlockReason !== null ? 0 : null;
   const usageValuesValid = preliminaryUsageValid
-    && [rawUsage.promptTokenCount, rawUsage.candidatesTokenCount,
-      rawUsage.thoughtsTokenCount, rawUsage.totalTokenCount]
+    && [rawUsage.promptTokenCount, normalizedCandidatesTokenCount,
+      normalizedThoughtsTokenCount, rawUsage.totalTokenCount]
       .every((value) => Number.isSafeInteger(value) && value >= 0)
     && BigInt(rawUsage.totalTokenCount)
       === BigInt(rawUsage.promptTokenCount)
-        + BigInt(rawUsage.candidatesTokenCount)
-        + BigInt(rawUsage.thoughtsTokenCount);
+        + BigInt(normalizedCandidatesTokenCount)
+        + BigInt(normalizedThoughtsTokenCount);
   const observedServiceTier = rawUsage !== null
     && typeof rawUsage === 'object'
     && !Array.isArray(rawUsage)
@@ -461,14 +492,14 @@ export function inspectPresentationCaptionGateB6ProviderResponseV001({
   const usageMetadata = usageValuesValid
     ? Object.freeze({
       promptTokenCount: rawUsage.promptTokenCount,
-      candidatesTokenCount: rawUsage.candidatesTokenCount,
-      thoughtsTokenCount: rawUsage.thoughtsTokenCount,
+      candidatesTokenCount: normalizedCandidatesTokenCount,
+      thoughtsTokenCount: normalizedThoughtsTokenCount,
       totalTokenCount: rawUsage.totalTokenCount,
     })
     : null;
 
-  const candidates = envelope !== null ? envelope.candidates : null;
-  const candidateCount = Array.isArray(candidates) ? candidates.length : null;
+  const candidates = rawCandidates;
+  const candidateCount = normalizedCandidateCount;
   const candidateCountValid = candidateCount === 1;
   const candidate = candidateCountValid ? candidates[0] : null;
   const part = candidate?.content?.parts?.[0];
@@ -500,6 +531,16 @@ export function inspectPresentationCaptionGateB6ProviderResponseV001({
     : Buffer.from(semanticText, 'utf8');
   const candidateTextUtf8Valid = semanticText === null
     || semanticBytes.toString('utf8') === semanticText;
+  const providerSafetyBlockValid = providerBlockReason !== null
+    && providerSafetyRatingsValid
+    && responseStatusAndTypeValid
+    && parsed.status === 'parsed'
+    && modelMissingCode === null
+    && modelMismatchCode === null
+    && preliminaryUsageValid
+    && usageValuesValid
+    && tierValid
+    && candidateCount === 0;
 
   const failures = [
     httpEnvelopeFailure(responseStatusAndTypeValid),
@@ -527,6 +568,21 @@ export function inspectPresentationCaptionGateB6ProviderResponseV001({
         code: 'B6_V002_RESPONSE_TIER_INVALID',
         facts: Object.freeze({observedServiceTier}),
       }),
+    providerBlockReason === null || providerSafetyRatingsValid
+      ? null
+      : Object.freeze({
+        code: 'B6_V002_PROVIDER_SAFETY_METADATA_INVALID',
+        facts: Object.freeze({}),
+      }),
+    providerSafetyBlockValid
+      ? Object.freeze({
+        code: 'B6_V002_PROVIDER_SAFETY_BLOCKED',
+        facts: Object.freeze({
+          blockReason: providerBlockReason,
+          safetyRatings: providerSafetyRatings,
+        }),
+      })
+      : null,
     envelope === null || candidateCountValid
       ? null
       : Object.freeze({
@@ -563,6 +619,8 @@ export function inspectPresentationCaptionGateB6ProviderResponseV001({
         : 'failed',
     responseCandidateCount: envelope === null
       ? 'blocked'
+      : providerSafetyBlockValid
+        ? 'blocked'
       : candidateCountValid
         ? 'passed'
         : 'failed',

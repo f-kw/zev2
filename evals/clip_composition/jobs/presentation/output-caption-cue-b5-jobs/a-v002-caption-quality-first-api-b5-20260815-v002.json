@@ -1,0 +1,356 @@
+{
+  "schemaVersion": "presentation-output-caption-cue-b5-job-v001",
+  "jobId": "a-v002-caption-quality-first-api-b5-20260815-v002",
+  "attemptId": "attempt-0001",
+  "action": "measure-only",
+  "sourcePackageBinding": {
+    "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260815-v001/source-package-v001.json",
+    "fileSha256": "1dcc8189ea34bb0a001a6ec6d07066f583133d8fda7f71bf9263cc189e555536",
+    "canonicalSha256": "307e54203f63585ba3e55d88ab24c5ac2ee57de8c0b72babf65d0e0ab2c27dcc"
+  },
+  "outputRoot": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260815-v002/attempt-0001",
+  "executionConfiguration": {
+    "product": "Gemini Developer API",
+    "apiVersion": "v1beta",
+    "endpointClass": "synchronous",
+    "configuredModelId": "gemini-3.7-flash",
+    "modelResource": "models/gemini-3.7-flash",
+    "thinkingLevel": "medium",
+    "responseMimeType": "application/json",
+    "modelOutputTokenLimit": 65536,
+    "serviceTierPolicy": "omit-field-use-paid-standard-default",
+    "clientTimeoutMilliseconds": 600000,
+    "automaticRetries": 0
+  },
+  "officialVerification": {
+    "modelId": "gemini-3.7-flash",
+    "modelResource": "models/gemini-3.7-flash",
+    "observedAt": "2026-08-15T09:32:37.029Z",
+    "inputLimit": 1048576,
+    "outputLimit": 65536,
+    "tier": "PAID_STANDARD_DEFAULT_BY_OMISSION",
+    "inputPriceNanoUsdPerToken": 750,
+    "outputPriceNanoUsdPerToken": 3750,
+    "priceSnapshot": {
+      "schemaVersion": "presentation-caption-api-price-snapshot-v001",
+      "modelId": "gemini-3.7-flash",
+      "tier": "Standard",
+      "inputPriceNanoUsdPerToken": 750,
+      "outputPriceNanoUsdPerToken": 3750,
+      "outputIncludesThinkingTokens": true,
+      "effectiveThrough": "2026-12-31",
+      "successorEffectiveFrom": "2027-01-01",
+      "successorInputPriceNanoUsdPerToken": 1500,
+      "successorOutputPriceNanoUsdPerToken": 7500,
+      "sourceUrl": "https://ai.google.dev/gemini-api/docs/pricing",
+      "observedAt": "2026-08-15T09:32:36.822Z"
+    },
+    "sources": [
+      {
+        "sourceId": "pricing",
+        "url": "https://ai.google.dev/gemini-api/docs/pricing",
+        "observedAt": "2026-08-15T09:32:36.822Z",
+        "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260815-v002/pricing.snapshot.html",
+        "snapshotFileSha256": "c7afcf71eb007fd065209897ca31478e3f785313fcbd0712bbe58031531b28bd",
+        "snapshotByteLength": 248452
+      },
+      {
+        "sourceId": "tokens-guide",
+        "url": "https://ai.google.dev/gemini-api/docs/tokens",
+        "observedAt": "2026-08-15T09:32:36.808Z",
+        "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260815-v002/tokens-guide.snapshot.html",
+        "snapshotFileSha256": "b8b61594b8d287b068b588ba78202c8eaf6b0981c7d095d5416043c4a9c528c2",
+        "snapshotByteLength": 144627
+      },
+      {
+        "sourceId": "count-tokens-api",
+        "url": "https://ai.google.dev/api/tokens",
+        "observedAt": "2026-08-15T09:32:37.029Z",
+        "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260815-v002/count-tokens-api.snapshot.html",
+        "snapshotFileSha256": "8674e80185268d959e78c5545d1ed4d475c641eba087ca2283aab286217eacfe",
+        "snapshotByteLength": 283766
+      },
+      {
+        "sourceId": "billing",
+        "url": "https://ai.google.dev/gemini-api/docs/billing",
+        "observedAt": "2026-08-15T09:32:36.673Z",
+        "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260815-v002/billing.snapshot.html",
+        "snapshotFileSha256": "df5733538bdaceb47b11d063d4fcd2601caea677db5fae7baeaa47296500894f",
+        "snapshotByteLength": 136690
+      },
+      {
+        "sourceId": "thinking",
+        "url": "https://ai.google.dev/gemini-api/docs/generate-content/thinking",
+        "observedAt": "2026-08-15T09:32:36.704Z",
+        "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260815-v002/thinking.snapshot.html",
+        "snapshotFileSha256": "bf6c5bece2612422d3c131f1677fd33107ac480f579f0ee874e7978c968b069c",
+        "snapshotByteLength": 223993
+      },
+      {
+        "sourceId": "latest-model",
+        "url": "https://ai.google.dev/gemini-api/docs/latest-model",
+        "observedAt": "2026-08-15T09:32:36.904Z",
+        "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260815-v002/latest-model.snapshot.html",
+        "snapshotFileSha256": "34d3bd8843886365b3dbfa95f7f0ff669daeb7f1ae7044fb6ba162ec16f1f5f0",
+        "snapshotByteLength": 119282
+      }
+    ],
+    "claims": [
+      {
+        "claimId": "model-exists",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "latest-model",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 119282,
+            "excerptSha256": "34d3bd8843886365b3dbfa95f7f0ff669daeb7f1ae7044fb6ba162ec16f1f5f0",
+            "locatorLabel": "whole-snapshot:latest-model"
+          }
+        ]
+      },
+      {
+        "claimId": "input-limit",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "latest-model",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 119282,
+            "excerptSha256": "34d3bd8843886365b3dbfa95f7f0ff669daeb7f1ae7044fb6ba162ec16f1f5f0",
+            "locatorLabel": "whole-snapshot:latest-model"
+          }
+        ]
+      },
+      {
+        "claimId": "output-limit",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "latest-model",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 119282,
+            "excerptSha256": "34d3bd8843886365b3dbfa95f7f0ff669daeb7f1ae7044fb6ba162ec16f1f5f0",
+            "locatorLabel": "whole-snapshot:latest-model"
+          }
+        ]
+      },
+      {
+        "claimId": "standard-input-price",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "pricing",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 248452,
+            "excerptSha256": "c7afcf71eb007fd065209897ca31478e3f785313fcbd0712bbe58031531b28bd",
+            "locatorLabel": "whole-snapshot:pricing"
+          }
+        ]
+      },
+      {
+        "claimId": "standard-output-price",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "pricing",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 248452,
+            "excerptSha256": "c7afcf71eb007fd065209897ca31478e3f785313fcbd0712bbe58031531b28bd",
+            "locatorLabel": "whole-snapshot:pricing"
+          }
+        ]
+      },
+      {
+        "claimId": "service-tier-omission-standard",
+        "verdict": "verified",
+        "evidence": [
+          {
+            "sourceId": "pricing",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 248452,
+            "excerptSha256": "c7afcf71eb007fd065209897ca31478e3f785313fcbd0712bbe58031531b28bd",
+            "locatorLabel": "whole-snapshot:pricing"
+          }
+        ]
+      },
+      {
+        "claimId": "count-tokens-unbilled",
+        "verdict": "unverified",
+        "evidence": []
+      },
+      {
+        "claimId": "count-tokens-upper-bounds-prompt-billing",
+        "verdict": "contradicted",
+        "evidence": [
+          {
+            "sourceId": "tokens-guide",
+            "utf8ByteOffset": 0,
+            "utf8ByteLength": 144627,
+            "excerptSha256": "b8b61594b8d287b068b588ba78202c8eaf6b0981c7d095d5416043c4a9c528c2",
+            "locatorLabel": "whole-snapshot:tokens-guide"
+          }
+        ]
+      },
+      {
+        "claimId": "max-output-upper-bounds-candidate-plus-thinking",
+        "verdict": "unverified",
+        "evidence": []
+      }
+    ]
+  },
+  "residualRiskAcceptanceBinding": {
+    "schemaVersion": "presentation-output-caption-cue-residual-risk-acceptance-v001",
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-risk-acceptances/a-v002-caption-quality-first-api-risk-20260815-v001.json",
+    "fileSha256": "6778fa54d652ef407614ea99a369ac6120671a60b353b437b5ac25cf4e5bebaf",
+    "canonicalSha256": "c2f4abf9dd43e095aa1bef3a365c50269627c9fb79cd14e32a5c9c28842b59ff"
+  },
+  "spendingAuthorization": {
+    "decisionLineBinding": {
+      "path": "DECISIONS.md",
+      "lineText": "ZEVO_CAPTION_QUALITY_V002_B5|jobId=a-v002-caption-quality-first-api-b5-20260815-v002|attemptId=attempt-0001|outputRoot=evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260815-v002/attempt-0001|sourcePackageFileSha256=1dcc8189ea34bb0a001a6ec6d07066f583133d8fda7f71bf9263cc189e555536|modelId=gemini-3.7-flash|thinkingLevel=medium|officialClaimsCanonicalSha256=c82b1a400a2ff8c0424e224af59b57b89fc1c949471fd9c0d4c429cfa1e9e7c3|inputPriceNanoUsdPerToken=750|outputPriceNanoUsdPerToken=3750|priceSnapshotCanonicalSha256=a76cd67252e8edee680cfd80725ed4c13cb088266e583e6d3f381269f8a6fea6|residualRiskAcceptanceFileSha256=6778fa54d652ef407614ea99a369ac6120671a60b353b437b5ac25cf4e5bebaf|maximumCountTokensCalls=2|maximumNanoUsd=1000000000|costScope=generate-content-standard-list-price-only|status=approved-for-measurement",
+      "lineSha256": "244b256d472cbb867a44d843143d80f5587b2afb5c4bd61bb0a4e78d3da9cc3f"
+    },
+    "currency": "USD",
+    "costScope": "generate-content-standard-list-price-only",
+    "maximumNanoUsd": 1000000000,
+    "inputPriceNanoUsdPerToken": 750,
+    "outputPriceNanoUsdPerToken": 3750,
+    "status": "approved-for-measurement"
+  },
+  "implementationBindings": [
+    {
+      "role": "api-cost-guard",
+      "path": "evals/clip_composition/presentation_caption_api_cost_guard_v001.mjs",
+      "fileSha256": "a260592119e7fcaf32a02bb0893cd8e4411fa6f723ca283181006588221fbf67"
+    },
+    {
+      "role": "atomic-directory-publisher-adapter-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+      "fileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af"
+    },
+    {
+      "role": "atomic-directory-publisher-native-darwin-arm64-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001-darwin-arm64",
+      "fileSha256": "ba5067dd933ae9b1213ab39236bf07c7e87513afbb384643347cefe0a75084b3"
+    },
+    {
+      "role": "atomic-directory-publisher-native-source-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.c",
+      "fileSha256": "6c237ceac499a83db74324165d630e14857a86165267cdbbc88c46b92c01150c"
+    },
+    {
+      "role": "caption-cue-api-runner",
+      "path": "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.mjs",
+      "fileSha256": "2d83f5cbaeae78944713e3aee63bc6ec11a93ef5e19e666c1d9b06c97866f1c1"
+    },
+    {
+      "role": "caption-cue-source-contract",
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "fileSha256": "4fad07904c31a48d0aa4eecaac771f6b7b1304275356edc9a13e6173f3b269ff"
+    },
+    {
+      "role": "dep-formal-json-codec",
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+    },
+    {
+      "role": "dep-renderer-text-layout-v001",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0"
+    },
+    {
+      "role": "dep-retained-source-atoms-v001",
+      "path": "evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+      "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+    },
+    {
+      "role": "dep-segmenter-boundary-evidence-v001",
+      "path": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+      "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+    },
+    {
+      "role": "dep-segmenter-boundary-preflight-v001",
+      "path": "evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+      "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+    }
+  ],
+  "approvedContractBindings": [
+    {
+      "role": "caption-quality-atomic-publication-b6-owner-scope-revision-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-atomic-publication-b6-owner-scope-revision-addendum-20260811-v004.md",
+      "fileSha256": "39e7c9b9005fb8ec762c19c0e6fde86acb398f1e99c75dd5d7100eabf452eade"
+    },
+    {
+      "role": "caption-quality-atomic-runtime-lc-uuid-compatibility-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-atomic-runtime-lc-uuid-compatibility-addendum-20260811-v006.md",
+      "fileSha256": "bd4b52901081c418b5c5ebe6a71ba4a02895fde3c86223ec433653af53530e1e"
+    },
+    {
+      "role": "caption-quality-complete-implementation-design",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-complete-implementation-design-20260810-v001.md",
+      "fileSha256": "44fb6199a80663657bf056df0118def3db750fe65813d86e9d106cdc4f42d6e4"
+    },
+    {
+      "role": "caption-quality-complete-implementation-design-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-complete-implementation-design-binding-wiring-addendum-20260811-v002.md",
+      "fileSha256": "a3c8c3ef8e57cd557e4a7cae17ecc188dc523df1508a45de6e2bce36691c7e4d"
+    },
+    {
+      "role": "caption-quality-dependency-load-stage-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-dependency-load-stage-observation-addendum-20260813-v014.md",
+      "fileSha256": "446cd7df58d61fd345a9f6ef73510c1e225ebc4f078de9d001fcb84d1ba5d7bc"
+    },
+    {
+      "role": "caption-quality-dependency-unit-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-dependency-unit-observation-addendum-20260813-v013.md",
+      "fileSha256": "77e579582fdfaad131172564b8ce81790db6b779540f338244cbc65b0d1c7501"
+    },
+    {
+      "role": "caption-quality-formal-capability-read-entry-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-formal-capability-read-entry-addendum-20260812-v010.md",
+      "fileSha256": "6b2cd93d0ab366806160f05457d861899b87b0b08234f051f241ca2510988110"
+    },
+    {
+      "role": "caption-quality-gemini-3-7-flash-price-model-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-gemini-3-7-flash-price-model-addendum-20260815-v016.md",
+      "fileSha256": "7ef23bdadc7a54c6ecb060e59c73ffaf14e6fc26ee2ec266d55b737cf64480fc"
+    },
+    {
+      "role": "caption-quality-parent-contract",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-contract-design-20260810-v001.md",
+      "fileSha256": "33b61ee497d765fbe9eb63fb1b05bce16a99488d238eb27b732550b4daac24ba"
+    },
+    {
+      "role": "caption-quality-pre-staging-inner-observation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-pre-staging-inner-observation-addendum-20260813-v012.md",
+      "fileSha256": "668158f99ff6bacafe2ccbc9f182493a191fd3896469a972117714c86427d27f"
+    },
+    {
+      "role": "caption-quality-proof-capability-and-tsx-namespace-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-proof-capability-and-tsx-namespace-addendum-20260812-v009.md",
+      "fileSha256": "b22aab0ef923b459b1785e32841f9df215ee9f095cf78afc188518523966285a"
+    },
+    {
+      "role": "caption-quality-resolved-url-evaluation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-resolved-url-evaluation-addendum-20260814-v015.md",
+      "fileSha256": "42874101356eac7c2d76d8a7c75cdc1c77097f7c4ee8391dda2bb80b8d0ce275"
+    },
+    {
+      "role": "caption-quality-runtime-live-binding-separation-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-runtime-live-binding-separation-addendum-20260811-v008.md",
+      "fileSha256": "6a5d2115763f97f473f1a66690da05561339c1f51f7412b644ae259dfc61d8a1"
+    },
+    {
+      "role": "caption-quality-source-final-package-validator-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-source-final-package-validator-addendum-20260811-v007.md",
+      "fileSha256": "787d401d2939f58cbc10562c1ed29ab2118f6169607e05bbb2d7c5c5971c8053"
+    },
+    {
+      "role": "caption-quality-tsx-wrapper-descriptor-addendum",
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-tsx-wrapper-descriptor-addendum-20260812-v011.md",
+      "fileSha256": "61f2c3ddbe5a3bcb2bfaba39e0ce1cc2e18a77fb2f1f5337d3fd166044b41010"
+    }
+  ]
+}

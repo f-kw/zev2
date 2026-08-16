@@ -1,0 +1,195 @@
+TAP version 13
+# Subtest: ZCQ018 job, binding, live implementation, and formal selection execution
+ok 1 - ZCQ018 job, binding, live implementation, and formal selection execution
+  ---
+  duration_ms: 931.27225
+  ...
+# proof-item:ZCQ018-P-01-19daf3263aad:passed
+# proof-item:ZCQ018-P-02-b8ff0c3b79be:passed
+# proof-item:ZCQ018-P-05-034d7c81a083:passed
+# proof-item:ZCQ018-P-06-72decdf4c9b1:passed
+# proof-item:ZCQ018-P-07-4f1528a1d40d:passed
+# proof-item:ZCQ018-P-08-808e5a1b6499:passed
+# proof-item:ZCQ018-P-09-1a5219a8272a:passed
+# proof-item:ZCQ018-P-10-842ae1113f59:passed
+# proof-item:ZCQ018-P-11-e1304a457d97:passed
+# proof-item:ZCQ018-P-12-d565731a87fa:passed
+# proof-item:ZCQ018-P-13-877c9602a746:passed
+# proof-item:ZCQ018-V2-01-81440ccebf15:passed
+# proof-item:ZCQ018-V2-02-8edfa0c9995a:passed
+# proof-item:ZCQ018-V2-03-77a9101c749b:passed
+# proof-item:ZCQ018-V2-05-37a00dd83274:passed
+# proof-item:ZCQ018-V3-02-c70ed6fd683a:passed
+# proof-item:ZCQ018-V3-03-f49f3e398fb0:passed
+# proof-item:ZCQ018-V3-04-3ae3ccb62796:passed
+# proof-item:ZCQ018-V3-05-66df4f483edc:passed
+# proof-item:ZCQ018-V3-06-f3360118874b:passed
+# proof-item:ZCQ018-V3-07-01013f2be9db:passed
+# proof-item:ZCQ018-V3-08-743bb9850e14:passed
+# proof-item:ZCQ018-V3-09-4cde4d33a005:passed
+# proof-item:ZCQ018-V3-10-1667d540fd12:passed
+# proof-item:ZCQ018-V3-11-5f498d7fd143:passed
+# proof-item:ZCQ018-V3-12-cc9b4d01962a:passed
+# proof-item:ZCQ018-V3-13-78fe512bda43:passed
+# proof-item:V4-ZCQ018-02:passed
+# proof-item:V15-ZCQ018-01:passed
+# proof-item:V15-ZCQ018-02:passed
+# code-owner:CUE_SELECTION_JOB_INVALID:passed
+# code-owner:CUE_SELECTION_INPUT_BINDING_MISMATCH:passed
+# Subtest: ZCQ019 strict provider response envelope rejects normalization and extra keys
+ok 2 - ZCQ019 strict provider response envelope rejects normalization and extra keys
+  ---
+  duration_ms: 0.537875
+  ...
+# proof-item:ZCQ019-P-01-cc4b0ce5f226:passed
+# proof-item:ZCQ019-P-02-8a7049ee99cb:passed
+# proof-item:ZCQ019-P-03-243a065691f5:passed
+# proof-item:ZCQ019-P-04-87346eb28235:passed
+# proof-item:ZCQ019-P-05-3a2f135a1f9f:passed
+# proof-item:ZCQ019-P-06-9c351396cb99:passed
+# proof-item:ZCQ019-P-07-235962c2dd49:passed
+# proof-item:ZCQ019-P-08-11f778065c6a:passed
+# proof-item:ZCQ019-P-09-b090776eb4bc:passed
+# proof-item:ZCQ019-P-10-624286a52725:passed
+# code-owner:CUE_PROVIDER_RESPONSE_INVALID:passed
+# Subtest: ZCQ020 abstained response publishes no selection value
+ok 3 - ZCQ020 abstained response publishes no selection value
+  ---
+  duration_ms: 0.147208
+  ...
+# proof-item:ZCQ020-P-01-a388f4e57d56:passed
+# proof-item:ZCQ020-V2-01-8acd13aa92bf:passed
+# code-owner:CUE_PROVIDER_ABSTAINED:passed
+# Subtest: ZCQ021 caption set is exact and ordered
+ok 4 - ZCQ021 caption set is exact and ordered
+  ---
+  duration_ms: 0.230791
+  ...
+# proof-item:ZCQ021-P-01-c1b0545cd5d8:passed
+# proof-item:ZCQ021-P-02-f8bb3159acf7:passed
+# proof-item:ZCQ021-P-03-842ae1113f59:passed
+# proof-item:ZCQ021-P-04-cb59ef06dab1:passed
+# proof-item:ZCQ021-P-05-160531e4d0e9:passed
+# code-owner:CUE_CAPTION_SET_MISMATCH:passed
+# Subtest: ZCQ022 boundary IDs are caption-local and enumerated
+ok 5 - ZCQ022 boundary IDs are caption-local and enumerated
+  ---
+  duration_ms: 0.186334
+  ...
+# proof-item:ZCQ022-P-01-d103e322526c:passed
+# proof-item:ZCQ022-P-02-28ba0f2bfd5f:passed
+# proof-item:ZCQ022-P-03-1584396b68b5:passed
+# code-owner:CUE_BOUNDARY_ID_INVALID:passed
+# Subtest: ZCQ023 cue and line endings are strictly increasing and complete
+ok 6 - ZCQ023 cue and line endings are strictly increasing and complete
+  ---
+  duration_ms: 0.397958
+  ...
+# proof-item:ZCQ023-P-01-a42bfd08604e:passed
+# proof-item:ZCQ023-P-02-7eec0dffe566:passed
+# code-owner:CUE_ORDER_INVALID:passed
+# code-owner:CUE_LINE_END_INVALID:passed
+# Subtest: ZCQ024 atom, text, retained-span, and source closure is total
+ok 7 - ZCQ024 atom, text, retained-span, and source closure is total
+  ---
+  duration_ms: 19.080125
+  ...
+# proof-item:ZCQ024-P-01-ddc1be14959a:passed
+# proof-item:ZCQ024-P-02-2617ab4ad6fe:passed
+# proof-item:ZCQ024-P-03-1136a9b50458:passed
+# proof-item:ZCQ024-P-04-07c7861a2d44:passed
+# proof-item:ZCQ024-P-05-e7351d3191b1:passed
+# proof-item:ZCQ024-V3-01-dec632a1e6e4:passed
+# proof-item:ZCQ024-V3-02-5570dc1d27ea:passed
+# proof-item:ZCQ024-V3-03-dfe97aad054b:passed
+# proof-item:ZCQ024-V3-04-cff2755d6195:passed
+# proof-item:ZCQ024-V3-05-70e0cd64313e:passed
+# proof-item:ZCQ024-V3-06-1f2f0b746981:passed
+# proof-item:ZCQ024-V3-07-388b768f2266:passed
+# proof-item:ZCQ024-V3-08-8b335f5a3274:passed
+# proof-item:ZCQ024-V3-09-1c58d99b7b63:passed
+# code-owner:CUE_ATOM_COVERAGE_INVALID:passed
+# Subtest: ZCQ025 only overlong cues may use a second line
+ok 8 - ZCQ025 only overlong cues may use a second line
+  ---
+  duration_ms: 743.968875
+  ...
+# proof-item:ZCQ025-P-01-37bcc2a8fb8f:passed
+# proof-item:ZCQ025-P-02-f1d56456b769:passed
+# code-owner:CUE_LINE_WIDTH_INVALID:passed
+# Subtest: ZCQ026 physical and timeline projections use the shared production calculations
+ok 9 - ZCQ026 physical and timeline projections use the shared production calculations
+  ---
+  duration_ms: 1544.572583
+  ...
+# proof-item:ZCQ026-P-01-4585aecb9702:passed
+# proof-item:ZCQ026-P-02-ffe5c0bb845c:passed
+# proof-item:ZCQ026-P-03-4ecf67058403:passed
+# proof-item:ZCQ026-P-04-4c0c96c344fe:passed
+# proof-item:ZCQ026-P-05-23b9c1e1c34d:passed
+# proof-item:ZCQ026-P-06-ca13a5386410:passed
+# proof-item:ZCQ026-V2-01-a1d754b2caa9:passed
+# proof-item:ZCQ026-V3-01-21a40c33a87c:passed
+# proof-item:ZCQ026-V3-02-92fa89c28006:passed
+# proof-item:ZCQ026-V3-03-6924773e2aea:passed
+# proof-item:ZCQ026-V3-04-e708a4f1a0c2:passed
+# proof-item:ZCQ026-V3-05-a60eaa66afc1:passed
+# proof-item:ZCQ026-V3-06-a80cc30a398f:passed
+# proof-item:ZCQ026-V3-07-4adac6a2e58b:passed
+# proof-item:ZCQ026-V3-08-1b1fd3e5bf1b:passed
+# proof-item:ZCQ026-V3-09-e2648ad5ccbf:passed
+# proof-item:ZCQ026-V3-10-43d2f558a2d4:passed
+# proof-item:ZCQ026-V3-11-4d1c45b9bceb:passed
+# proof-item:ZCQ026-V3-12-a0ad47898e24:passed
+# code-owner:CUE_PHYSICAL_LAYOUT_INVALID:passed
+# code-owner:CUE_TIMELINE_MAPPING_INVALID:passed
+# Subtest: ZCQ027 fatal stages and publication finalization remain structurally separate
+ok 10 - ZCQ027 fatal stages and publication finalization remain structurally separate
+  ---
+  duration_ms: 752.56875
+  ...
+# proof-item:ZCQ027-P-01-2e04388b8ab4:passed
+# proof-item:ZCQ027-P-02-1f97e7f16195:passed
+# proof-item:ZCQ027-P-03-ba3dab34d317:passed
+# proof-item:ZCQ027-P-04-0cfadebace33:passed
+# proof-item:ZCQ027-P-05-bac81ef0b6b4:passed
+# proof-item:ZCQ027-P-06-adb434851ca3:passed
+# proof-item:ZCQ027-P-07-50f95e2c17a8:passed
+# proof-item:ZCQ027-P-08-630dd644aea0:passed
+# proof-item:ZCQ027-P-09-f0fcb511651c:passed
+# proof-item:ZCQ027-P-10-72c825100dd4:passed
+# proof-item:ZCQ027-P-11-754280af4f45:passed
+# proof-item:ZCQ027-P-12-5967c9315be1:passed
+# proof-item:ZCQ027-P-13-d32b1d94676e:passed
+# proof-item:ZCQ027-P-14-fec90baf34ce:passed
+# proof-item:ZCQ027-V2-01-effd94c4cc78:passed
+# proof-item:ZCQ027-V2-02-3b5ce72862c2:passed
+# proof-item:ZCQ027-V2-03-af58685ed02b:passed
+# proof-item:ZCQ027-V2-04-808bc9898278:passed
+# proof-item:ZCQ027-V2-05-6520db2ffdf9:passed
+# proof-item:ZCQ027-V2-06-a153e4124536:passed
+# proof-item:ZCQ027-V2-07-698b0fb03cf5:passed
+# proof-item:ZCQ027-V3-01-1e22b102cf5f:passed
+# proof-item:ZCQ027-V3-02-c807a1947bb4:passed
+# proof-item:ZCQ027-V3-03-23a9709d38f5:passed
+# proof-item:ZCQ027-V3-04-70e2f69bc073:passed
+# proof-item:ZCQ027-V3-05-280cf5536065:passed
+# proof-item:ZCQ027-V3-06-d3071f1ab5da:passed
+# proof-item:ZCQ027-V3-07-c86c187da89b:passed
+# proof-item:ZCQ027-V3-08-bc48deeddfd4:passed
+# proof-item:ZCQ027-V3-09-1f9a49d847ce:passed
+# proof-item:V4-ZCQ027-01:passed
+# proof-item:V4-ZCQ027-02:passed
+# proof-item:V4-ZCQ027-03:passed
+# proof-item:V15-ZCQ027-01:passed
+# code-owner:CUE_SELECTION_EXECUTION_FAILED:passed
+# code-owner:CUE_SELECTION_PUBLICATION_FAILED:passed
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4552.364958

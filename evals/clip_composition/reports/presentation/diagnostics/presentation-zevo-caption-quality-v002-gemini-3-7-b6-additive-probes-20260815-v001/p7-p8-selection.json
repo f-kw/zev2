@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-gemini-additive-probe-selection-v001",
+  "observedBeforeSelection": {
+    "rootOneOfAlone": 200,
+    "constAlone": 200,
+    "boundedNestedArrayAlone": 200,
+    "deepAdditionalPropertiesFalseAlone": 200,
+    "propertyOrderingAlone": 200
+  },
+  "reason": "Every candidate vocabulary was accepted alone, so the remaining probes test the full equivalent anyOf encoding and the deep complete branch independently.",
+  "probes": [
+    {
+      "id": "probe-07-formal-any-of-status-const",
+      "purpose": "the complete formal schema with root oneOf re-encoded as anyOf and singleton status enums re-encoded as const"
+    },
+    {
+      "id": "probe-08-formal-complete-branch-only",
+      "purpose": "the complete branch alone, retaining its nested arrays, limits, enums, property ordering, and closed objects"
+    }
+  ],
+  "meaningInputSent": false,
+  "rawSavedBeforeParsing": true,
+  "retryPerProbe": 0
+}

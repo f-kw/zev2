@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-provider-block-usage-cost-observation-v001",
+  "observedAt": "2026-08-15T12:43:44.980Z",
+  "modelId": "gemini-3.7-flash",
+  "serviceTier": "standard",
+  "providerResult": {
+    "httpEnvelope": "passed",
+    "promptBlockReason": "PROHIBITED_CONTENT",
+    "candidateCount": 0,
+    "formalAcceptance": "rejected-provider-response",
+    "formalPrimaryCode": "CUE_PROVIDER_USAGE_INVALID"
+  },
+  "usage": {
+    "promptTokenCount": 10282,
+    "thoughtsTokenCount": 498,
+    "totalTokenCount": 10780
+  },
+  "listPrice": {
+    "currency": "USD",
+    "inputNanoUsdPerToken": 750,
+    "outputNanoUsdPerToken": 3750,
+    "promptCostNanoUsd": 7711500,
+    "thoughtsCostNanoUsd": 1867500,
+    "totalCostNanoUsd": 9579000,
+    "totalCostUsd": "0.009579000"
+  },
+  "approvedLimit": {
+    "maximumNanoUsd": 1000000000,
+    "withinLimit": true
+  },
+  "sourceBindings": {
+    "rawResponse": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260815-v002/attempt-0001/generate-content-response.raw.json",
+      "fileSha256": "1c4124c60cae3c5adb7faf527ed66b22b022298946f55386b3f3386aefead559"
+    },
+    "b6Manifest": {
+      "path": "evals/clip_composition/outputs/presentation/output-caption-cue-b6-attempts/a-v002-caption-quality-first-api-b6-20260815-v002/attempt-0001/b6-manifest.json",
+      "fileSha256": "ff366d3bf0afad0c7a94f5da9dc143f81d7a9202d26c85a9674ad8f4ef5334e1"
+    },
+    "priceContract": {
+      "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-gemini-3-7-flash-price-model-addendum-20260815-v016.md",
+      "fileSha256": "7ef23bdadc7a54c6ecb060e59c73ffaf14e6fc26ee2ec266d55b737cf64480fc"
+    }
+  },
+  "persistencePolicy": {
+    "secretStored": false,
+    "rawMessageCopied": false,
+    "stackCopied": false
+  }
+}

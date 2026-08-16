@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-f-formal-preflight-v001",
+  "observedAt": "2026-08-14T13:36:04Z",
+  "status": "passed",
+  "executionEnvironment": {
+    "nativeArchitecture": "arm64",
+    "node": {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "tsxCli": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+    },
+    "nodeOptions": "absent",
+    "pathOrder": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin",
+      "/opt/homebrew/bin",
+      "/usr/local/bin",
+      "/usr/bin",
+      "/bin",
+      "/usr/sbin",
+      "/sbin"
+    ],
+    "ffmpeg": {
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    "ffprobe": {
+      "path": "/opt/homebrew/bin/ffprobe",
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    },
+    "chromium": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8",
+      "nativeLaunch": "passed",
+      "exitCode": 0
+    }
+  },
+  "formalCommand": {
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "arguments": [
+      "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "--test",
+      "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs"
+    ],
+    "matchesRegisteredFormalShape": true
+  },
+  "testSource": {
+    "path": "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs",
+    "fileSha256": "c5849ec09dfb15600f1729f051ceaa0fc8ef5b623b0aa698678517ea55ed5df5",
+    "syntaxCheck": "passed"
+  },
+  "preservationManifestPreflight": {
+    "failedEvidencePreserved": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-f-negative-preservation-manifest-preflight-20260814-v001.json",
+    "passedRecord": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-f-negative-preservation-manifest-preflight-20260814-v002.json",
+    "expectationCount": 26,
+    "existenceConflicts": 0,
+    "undeclaredAggregateRoots": 0
+  },
+  "unusedRoots": {
+    "fixtureRoot": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0010",
+    "outputRoot": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0010",
+    "bothAbsent": true
+  },
+  "concurrency": {
+    "conflictingFormalTestProcesses": 0,
+    "conflictingRemotionProcesses": 0,
+    "conflictingChromiumProcesses": 0
+  }
+}

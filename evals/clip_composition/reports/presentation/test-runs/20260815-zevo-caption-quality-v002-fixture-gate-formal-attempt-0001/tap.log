@@ -1,0 +1,63 @@
+TAP version 13
+# Subtest: ZCQF001 fixture manufactureは44成果物と600環境行をatomic公開する
+not ok 1 - ZCQF001 fixture manufactureは44成果物と600環境行をatomic公開する
+  ---
+  duration_ms: 20.167166
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs:105:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      {
+    +   primaryCode: 'CUE_FIXTURE_SOURCE_INVALID',
+    +   stage: 'fixture-build',
+    +   status: 'fatal'
+    -   primaryCode: null,
+    -   stage: 'completed',
+    -   status: 'passed'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    status: 'passed'
+    stage: 'completed'
+    primaryCode: ~
+  actual:
+    status: 'fatal'
+    stage: 'fixture-build'
+    primaryCode: 'CUE_FIXTURE_SOURCE_INVALID'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs:127:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: ZCQF002 receipt admissionはFとUを分離し、root escapeと環境差を拒否する
+not ok 2 - ZCQF002 receipt admissionはFとUを分離し、root escapeと環境差を拒否する
+  ---
+  duration_ms: 0.584292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs:145:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'startsWith')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Module.admitPresentationZevoCaptionQualityV002FixtureV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.mjs:568:27)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs:146:33)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 0
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 207.848209

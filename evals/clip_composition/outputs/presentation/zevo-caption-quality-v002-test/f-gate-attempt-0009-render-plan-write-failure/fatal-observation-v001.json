@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-fatal-observation-v001",
+  "status": "fatal",
+  "proofJobBinding": {
+    "schemaVersion": "presentation-zevo-caption-quality-v002-proof-job-v001",
+    "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0009/fixtures/zcq-caption-quality-proof-render-plan-write-failure-attempt-0001.json",
+    "fileSha256": "a7b6eb791ae28ef39cb9b9044a874f4da6f213e9f6b3baaae61d51c4749ea6c4",
+    "canonicalSha256": "fe478666e8be975190c7e15d1e3e1084beb12853275aa323e2e42f77854bfc7c"
+  },
+  "stage": "render-plan",
+  "innerCode": "FILE_CHANGED_DURING_READ",
+  "targetFile": {
+    "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-render-plan-write-failure/voice-013/horizontal-formal/render-plan-v003.json",
+    "fileSha256": "43ef9e24ac6d180d1712b16403d09460ba75b1dde8db1f1e030e1550b92a4951"
+  },
+  "toolExitCode": null,
+  "checkpoints": [
+    {
+      "stage": "input-read",
+      "event": "entered",
+      "caseId": null,
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "input-read",
+      "event": "completed",
+      "caseId": null,
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "output-request",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "output-request",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-render-plan-write-failure/voice-013/horizontal-formal/output-request-v001.json",
+        "fileSha256": "642d8e9c5085366d1d1aadbe51cfa05befc8c9200b2a30d58b12e8da539cbdd3"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "page-line-planner",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "page-line-planner",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-render-plan-write-failure/voice-013/horizontal-formal/page-line-plan-v003.json",
+        "fileSha256": "62d1af1b2f735cb54d7c6e8b33c8b40f7b52973ab7ebf4280d3ec12592adde89"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "render-plan",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    }
+  ],
+  "rendererWorkEvidence": [],
+  "retentionPaths": []
+}

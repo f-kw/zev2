@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-fatal-observation-v001",
+  "status": "fatal",
+  "proofJobBinding": {
+    "schemaVersion": "presentation-zevo-caption-quality-v002-proof-job-v001",
+    "path": "evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0004/f/negative/zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0004-output-request-reread-io-failure.json",
+    "fileSha256": "9108e32ad6a5e075d2b6501471e9ac119579c430e10d6cdc3a27d1c7b0be23ec",
+    "canonicalSha256": "577e17d4810a2fce2c461ca08505f0deff98a3eb77013b650ff3813503d494c4"
+  },
+  "stage": "output-request",
+  "innerCode": "FILE_CHANGED_DURING_READ",
+  "targetFile": {
+    "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0004/output-request-reread-io-failure/voice-013/horizontal-formal/output-request-v001.json",
+    "fileSha256": "efc2b1642db18c908f907d32ee25e9a515878edfb1687c8472ff229842a14614"
+  },
+  "toolExitCode": null,
+  "checkpoints": [
+    {
+      "stage": "input-read",
+      "event": "entered",
+      "caseId": null,
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "input-read",
+      "event": "completed",
+      "caseId": null,
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "output-request",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    }
+  ],
+  "rendererWorkEvidence": [],
+  "retentionPaths": []
+}

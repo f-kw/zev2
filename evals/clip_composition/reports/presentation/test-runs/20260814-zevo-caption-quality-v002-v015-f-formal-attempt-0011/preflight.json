@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-f-formal-preflight-v001",
+  "observedAt": "2026-08-14T14:56:34Z",
+  "status": "passed",
+  "executionEnvironment": {
+    "nativeArchitecture": "arm64",
+    "node": {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "tsxCli": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+    },
+    "nodeOptions": "absent",
+    "pathOrder": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin",
+      "/opt/homebrew/bin",
+      "/usr/local/bin",
+      "/usr/bin",
+      "/bin",
+      "/usr/sbin",
+      "/sbin"
+    ],
+    "ffmpeg": {
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    "ffprobe": {
+      "path": "/opt/homebrew/bin/ffprobe",
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    },
+    "chromium": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8",
+      "nativeLaunch": "passed",
+      "exitCode": 0
+    }
+  },
+  "formalCommand": {
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "arguments": [
+      "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "--test",
+      "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs"
+    ],
+    "matchesRegisteredFormalShape": true
+  },
+  "testSource": {
+    "path": "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs",
+    "fileSha256": "713cf57e4d0d8e8d40e5748a2a193472eb8048495a62e79caf0238d853a85e0a",
+    "syntaxCheck": "passed"
+  },
+  "environmentManifestPreflight": {
+    "path": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-fu-environment-manifest-preflight-20260814-v001.json",
+    "fileSha256": "3ec5452f0255095a56407591065d550d7bef5206abaf9dbdd0b2e2a590c092d3",
+    "declaration": "passed",
+    "manufacture": "passed",
+    "verification": "passed",
+    "preservationManifest": "26/26"
+  },
+  "formalEntryState": {
+    "runRoot": "real-directory",
+    "fixtureRoot": "real-empty-directory",
+    "outputRoot": "absent",
+    "stagingRoot": "absent"
+  },
+  "concurrency": {
+    "conflictingFormalTestProcesses": 0,
+    "conflictingRemotionProcesses": 0,
+    "conflictingChromiumProcesses": 0
+  }
+}

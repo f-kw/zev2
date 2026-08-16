@@ -1,0 +1,126 @@
+TAP version 13
+# Subtest: ZCQ028 reconstructs one case through the shared source closure and projection set
+ok 1 - ZCQ028 reconstructs one case through the shared source closure and projection set
+  ---
+  duration_ms: 2193.628959
+  ...
+# proof-item:ZCQ028-P-01-00c55f252dd3:passed
+# proof-item:ZCQ028-P-02-34096b603803:passed
+# proof-item:ZCQ028-P-03-2617ab4ad6fe:passed
+# proof-item:ZCQ028-P-04-993d3edd8ae1:passed
+# proof-item:ZCQ028-P-05-22303597d3ef:passed
+# proof-item:ZCQ028-P-06-41f4a2965886:passed
+# proof-item:ZCQ028-P-07-f502a39f834b:passed
+# proof-item:ZCQ028-V1-01-616f7a7d85de:passed
+# proof-item:ZCQ028-V1-02-bfb88d36ff97:passed
+# proof-item:ZCQ028-V2-01-0255d22791eb:passed
+# proof-item:ZCQ028-V3-01-aba30163e8c1:passed
+# proof-item:ZCQ028-V3-02-fd34acfacc71:passed
+# proof-item:ZCQ028-V3-03-cd5b624e49ad:passed
+# proof-item:ZCQ028-V3-04-5322f34d5e6b:passed
+# proof-item:ZCQ028-V3-05-af1b171ba95c:passed
+# proof-item:ZCQ028-V3-06-df268bcf844f:passed
+# proof-item:ZCQ028-V3-07-3a4aa31b6539:passed
+# code-owner:CUE_RECONSTRUCTION_FAILED:passed
+# Subtest: ZCQ029 keeps cues that fit on one line unbroken
+ok 2 - ZCQ029 keeps cues that fit on one line unbroken
+  ---
+  duration_ms: 722.829958
+  ...
+# proof-item:ZCQ029-P-01-fcb4b72072fe:passed
+# Subtest: ZCQ030 preserves the selected two-line physical edge without replanning
+ok 3 - ZCQ030 preserves the selected two-line physical edge without replanning
+  ---
+  duration_ms: 713.9285
+  ...
+# proof-item:ZCQ030-P-01-d73675959b4d:passed
+# proof-item:ZCQ030-P-02-357249ab45e6:passed
+# Subtest: ZCQ031 rejects duplicate selected physical edges as physically ambiguous
+ok 4 - ZCQ031 rejects duplicate selected physical edges as physically ambiguous
+  ---
+  duration_ms: 719.64575
+  ...
+# proof-item:ZCQ031-P-01-5017dc924015:passed
+# proof-item:ZCQ031-P-02-227bbc82e2df:passed
+# proof-item:ZCQ031-P-03-54ef2cea626f:passed
+# proof-item:ZCQ031-P-04-a6f0d89c4860:passed
+# code-owner:CUE_PLANNER_PHYSICAL_INVALID:passed
+# Subtest: ZCQ032 rejects a selection for which the production graph has no exact edge
+ok 5 - ZCQ032 rejects a selection for which the production graph has no exact edge
+  ---
+  duration_ms: 1.551958
+  ...
+# proof-item:ZCQ032-P-01-3ef1d542e5d3:passed
+# code-owner:CUE_SELECTED_EDGE_NOT_FOUND:passed
+# Subtest: ZCQ033 rejects a non-mapped production timeline result
+ok 6 - ZCQ033 rejects a non-mapped production timeline result
+  ---
+  duration_ms: 747.071084
+  ...
+# proof-item:ZCQ033-P-01-8cf09569bd00:passed
+# proof-item:ZCQ033-P-02-8de0f92dccef:passed
+# code-owner:CUE_PLANNER_TIMELINE_INVALID:passed
+# Subtest: ZCQ034 rejects positive frame overlap between adjacent cues
+ok 7 - ZCQ034 rejects positive frame overlap between adjacent cues
+  ---
+  duration_ms: 705.040709
+  ...
+# proof-item:ZCQ034-P-01-4832db24daac:passed
+# proof-item:ZCQ034-P-02-8c3badd7d102:passed
+# proof-item:ZCQ034-P-03-b75645404d63:passed
+# code-owner:CUE_PLANNER_OVERLAP_INVALID:passed
+# Subtest: ZCQ035 returns byte-identical formal plans from the same verified tuple
+ok 8 - ZCQ035 returns byte-identical formal plans from the same verified tuple
+  ---
+  duration_ms: 1442.021875
+  ...
+# proof-item:ZCQ035-P-01-9e1509379ee6:passed
+# proof-item:ZCQ035-V1-01-4da0ac5c1f1d:passed
+# proof-item:ZCQ035-V1-02-7e0711156451:passed
+# proof-item:ZCQ035-V2-01-0542de098b14:passed
+# proof-item:ZCQ035-V3-01-39a639b743f8:passed
+# proof-item:ZCQ035-V3-02-4b33862faca8:passed
+# Subtest: ZCQ036 rejects old argument shapes and any verified projection or binding drift
+ok 9 - ZCQ036 rejects old argument shapes and any verified projection or binding drift
+  ---
+  duration_ms: 763.142375
+  ...
+# proof-item:ZCQ036-P-01-d4c608fd4816:passed
+# proof-item:ZCQ036-V1-01-daeb8bc6a216:passed
+# proof-item:ZCQ036-V1-02-842ae1113f59:passed
+# proof-item:ZCQ036-V1-03-5bd59221bff8:passed
+# proof-item:ZCQ036-V1-04-452eee378e27:passed
+# proof-item:ZCQ036-V1-05-9b5e077a13fa:passed
+# proof-item:ZCQ036-V1-06-311c5ec620f9:passed
+# proof-item:ZCQ036-V2-01-174a78809833:passed
+# proof-item:ZCQ036-V2-02-842ae1113f59:passed
+# proof-item:ZCQ036-V2-03-1756715ae245:passed
+# proof-item:ZCQ036-V3-01-e7953baece5c:passed
+# proof-item:ZCQ036-V3-02-6088bae9dfc0:passed
+# proof-item:ZCQ036-V3-03-0b0e8d4d826a:passed
+# proof-item:ZCQ036-V3-04-9ec34fd8b761:passed
+# proof-item:ZCQ036-V3-05-3579ebae65cf:passed
+# proof-item:ZCQ036-V3-06-6a5951d560fb:passed
+# proof-item:ZCQ036-V3-07-80f335f757b4:passed
+# proof-item:ZCQ036-V3-08-a5939327f04b:passed
+# proof-item:ZCQ036-V3-09-8c231599f648:passed
+# code-owner:CUE_PLANNER_INPUT_INVALID:passed
+# code-owner:CUE_PLANNER_BINDING_MISMATCH:passed
+# Subtest: ZCQ037 freezes the six approved old plans and their known split evidence
+ok 10 - ZCQ037 freezes the six approved old plans and their known split evidence
+  ---
+  duration_ms: 5.940667
+  ...
+# proof-item:ZCQ037-P-01-192d5b7ab9fc:passed
+# proof-item:ZCQ037-P-02-9813ac1dfbf2:passed
+# proof-item:ZCQ037-P-03-181ca3b33797:passed
+# proof-item:ZCQ037-P-04-d005f7a63648:passed
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8588.582083

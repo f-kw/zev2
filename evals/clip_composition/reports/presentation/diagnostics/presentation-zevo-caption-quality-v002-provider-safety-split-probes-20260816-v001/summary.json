@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-provider-safety-probe-summary-v001",
+  "probeCount": 4,
+  "maximumCalls": 4,
+  "cumulativeNanoUsd": 0,
+  "maximumNanoUsd": 100000000,
+  "withinCostLimit": true,
+  "blockedSingletons": [],
+  "controlBlockReason": null,
+  "branch": "control-not-blocked-authorized-new-formal-3-7",
+  "results": [
+    {
+      "schemaVersion": "presentation-zevo-caption-quality-provider-safety-probe-result-v001",
+      "probeId": "caption-01-input-caption-000001",
+      "captionIndexes": [
+        0
+      ],
+      "captionIds": [
+        "input-caption-000001"
+      ],
+      "sourceJsonPointers": [
+        "/promptInput/captions/0"
+      ],
+      "requestBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-01-input-caption-000001/request.json",
+        "fileSha256": "31f62d2dab914f0196f73081768db0870b68431bf666972d18d54c7a868457d5"
+      },
+      "rawResponseBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-01-input-caption-000001/response.raw.json",
+        "fileSha256": "3907e203be6293fdc460b4ea83973ea1960e8a1b5d1662902aaa5d38920b2b55"
+      },
+      "httpStatus": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "providerObservationStatus": "rejected",
+      "providerInnerCode": "B6_V002_USAGE_INVALID",
+      "blockReason": null,
+      "safetyRatings": null,
+      "modelVersion": "gemini-3.7-flash",
+      "usageMetadata": null,
+      "candidateCount": 1,
+      "chargedNanoUsd": 0,
+      "cumulativeNanoUsd": 0
+    },
+    {
+      "schemaVersion": "presentation-zevo-caption-quality-provider-safety-probe-result-v001",
+      "probeId": "caption-02-input-caption-000002",
+      "captionIndexes": [
+        1
+      ],
+      "captionIds": [
+        "input-caption-000002"
+      ],
+      "sourceJsonPointers": [
+        "/promptInput/captions/1"
+      ],
+      "requestBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-02-input-caption-000002/request.json",
+        "fileSha256": "9fd9a58a1308296d6e70891b1bea62cb46ff55ea6ab991e7f952e1f00bc16a4e"
+      },
+      "rawResponseBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-02-input-caption-000002/response.raw.json",
+        "fileSha256": "88ab54777cc9ac5a77d71b31d8b683d62b199364d4a5fc97b81604e8914b95e7"
+      },
+      "httpStatus": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "providerObservationStatus": "rejected",
+      "providerInnerCode": "B6_V002_USAGE_INVALID",
+      "blockReason": null,
+      "safetyRatings": null,
+      "modelVersion": "gemini-3.7-flash",
+      "usageMetadata": null,
+      "candidateCount": 1,
+      "chargedNanoUsd": 0,
+      "cumulativeNanoUsd": 0
+    },
+    {
+      "schemaVersion": "presentation-zevo-caption-quality-provider-safety-probe-result-v001",
+      "probeId": "caption-03-input-caption-000003",
+      "captionIndexes": [
+        2
+      ],
+      "captionIds": [
+        "input-caption-000003"
+      ],
+      "sourceJsonPointers": [
+        "/promptInput/captions/2"
+      ],
+      "requestBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-03-input-caption-000003/request.json",
+        "fileSha256": "1796e29d685926f7739ab7cd2e64c67051e7a1bd99bdfcf1d5897f235e75bcba"
+      },
+      "rawResponseBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/caption-03-input-caption-000003/response.raw.json",
+        "fileSha256": "55782f5378e64dbcae0409268ccc153e6a279527cd8f57d9a67a5f170bbced1d"
+      },
+      "httpStatus": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "providerObservationStatus": "rejected",
+      "providerInnerCode": "B6_V002_USAGE_INVALID",
+      "blockReason": null,
+      "safetyRatings": null,
+      "modelVersion": "gemini-3.7-flash",
+      "usageMetadata": null,
+      "candidateCount": 1,
+      "chargedNanoUsd": 0,
+      "cumulativeNanoUsd": 0
+    },
+    {
+      "schemaVersion": "presentation-zevo-caption-quality-provider-safety-probe-result-v001",
+      "probeId": "control-all-03-captions",
+      "captionIndexes": [
+        0,
+        1,
+        2
+      ],
+      "captionIds": [
+        "input-caption-000001",
+        "input-caption-000002",
+        "input-caption-000003"
+      ],
+      "sourceJsonPointers": [
+        "/promptInput/captions/0",
+        "/promptInput/captions/1",
+        "/promptInput/captions/2"
+      ],
+      "requestBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/control-all-03-captions/request.json",
+        "fileSha256": "927d8156ca9bcbc40695b1ae0c17be69bf2b5a7330060a754737f9efc1fc72e4"
+      },
+      "rawResponseBinding": {
+        "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-provider-safety-split-probes-20260816-v001/control-all-03-captions/response.raw.json",
+        "fileSha256": "2e082de3c179e74e007c9e60e8650d1b0e760175035bc84f8b0e4e695ea57785"
+      },
+      "httpStatus": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "providerObservationStatus": "rejected",
+      "providerInnerCode": "B6_V002_USAGE_INVALID",
+      "blockReason": null,
+      "safetyRatings": null,
+      "modelVersion": "gemini-3.7-flash",
+      "usageMetadata": null,
+      "candidateCount": 1,
+      "chargedNanoUsd": 0,
+      "cumulativeNanoUsd": 0
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-formal-command-preflight-v001",
+  "runId": "20260814-zevo-caption-quality-v002-v015-f-formal-command-preflight-v001",
+  "status": "passed",
+  "comparison": {
+    "referenceRecord": "evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-v014-formal-command-preflight-20260814-v001.json",
+    "commandBlockByteExact": true,
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "argumentsInOrder": [
+      "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "--test",
+      "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs"
+    ],
+    "formalCommandBytesSha256": "6723ee41e52d5e5baaa8610d64648fdd4e93ac372c79d7e8ee5590d5b9a1e351"
+  },
+  "runtimeBindings": {
+    "nativeArchitecture": "arm64",
+    "nodeSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "tsxCliSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8",
+    "nodeOptionsPresent": false,
+    "requiredPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "ffmpegResolvedPath": "/opt/homebrew/bin/ffmpeg",
+    "ffmpegRealPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+    "ffmpegSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+    "ffprobeResolvedPath": "/opt/homebrew/bin/ffprobe",
+    "ffprobeRealPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+    "ffprobeSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9",
+    "chromiumSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8",
+    "chromiumLaunchable": true
+  },
+  "unusedBeforeExecution": {
+    "formalAttemptRoot": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-v015-f-formal-attempt-0008",
+    "fixtureAttemptRoot": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0008",
+    "formalOutputRoot": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0008",
+    "stagingRoot": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0008.staging",
+    "allUnused": true
+  },
+  "proofClosure": {
+    "expected": 489,
+    "unique": 489,
+    "v14Remaining": 0,
+    "v15": 7,
+    "ownerCounts": {
+      "ZCQ001": 22,
+      "ZCQ007": 17,
+      "ZCQ018": 30,
+      "ZCQ027": 34,
+      "ZCQ042": 36
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-gemini-3-6-b5-job-build-record-v003",
+  "predecessorJob": {
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-jobs/a-v002-caption-quality-first-api-b5-20260815-v002.json",
+    "fileSha256": "2e12268ba21f24ff1fd7c8775831ac94f6e182f8d96f57bb85310414907e2ac6"
+  },
+  "job": {
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-jobs/a-v002-caption-quality-first-api-b5-20260816-v004.json",
+    "fileSha256": "14a3ff397a4739fdd32ddc169bd07bf78c6c0a56beeea59e770f15a415370b07",
+    "canonicalSha256": "888fcdb72f7a53a5f1af04455dded0ba98257d6b1192a7959f089594b4437293"
+  },
+  "sourcePackage": {
+    "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+    "path": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260815-v001/source-package-v001.json",
+    "fileSha256": "1dcc8189ea34bb0a001a6ec6d07066f583133d8fda7f71bf9263cc189e555536",
+    "canonicalSha256": "307e54203f63585ba3e55d88ab24c5ac2ee57de8c0b72babf65d0e0ab2c27dcc"
+  },
+  "riskAcceptance": {
+    "schemaVersion": "presentation-output-caption-cue-residual-risk-acceptance-v001",
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-risk-acceptances/a-v002-caption-quality-first-api-risk-20260815-v001.json",
+    "fileSha256": "6778fa54d652ef407614ea99a369ac6120671a60b353b437b5ac25cf4e5bebaf",
+    "canonicalSha256": "c2f4abf9dd43e095aa1bef3a365c50269627c9fb79cd14e32a5c9c28842b59ff"
+  },
+  "officialSnapshots": [
+    {
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v004/pricing.snapshot.html",
+      "fileSha256": "bd907600d61fc791a269ebebf46357f1322563ef88487ab730b6b00940cbbd76",
+      "byteLength": 248452
+    },
+    {
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v004/tokens-guide.snapshot.html",
+      "fileSha256": "28a3a751e027697000222c074aada037eb604247ca4dc4a03afeb1c35c790b58",
+      "byteLength": 144627
+    },
+    {
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v004/count-tokens-api.snapshot.html",
+      "fileSha256": "52e5f00be7e3b4f93984f6e453f42a03388f60b2b4b2f8260fb42cc896d3d2a1",
+      "byteLength": 283766
+    },
+    {
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v004/billing.snapshot.html",
+      "fileSha256": "8e894a579398a2a14862e39f39972b43136925a76d156016c1cf6dc3b8dd6e33",
+      "byteLength": 136690
+    },
+    {
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v004/thinking.snapshot.html",
+      "fileSha256": "1527bcb945065f358860c7bdc0c65e97e7b96d14cfa553421f74a7be6af716cc",
+      "byteLength": 223997
+    },
+    {
+      "path": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260816-v004/latest-model.snapshot.html",
+      "fileSha256": "b557e3a36034b515703dd4db578b7f8a47bea0a202d4f15475f0682ece22d6bd",
+      "byteLength": 119282
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v004/attempt-0001",
+  "counts": {
+    "implementationBindings": 11,
+    "approvedContractBindings": 16
+  },
+  "decisionLine": "ZEVO_CAPTION_QUALITY_V002_B5|jobId=a-v002-caption-quality-first-api-b5-20260816-v004|attemptId=attempt-0001|outputRoot=evals/clip_composition/outputs/presentation/output-caption-cue-b5-attempts/a-v002-caption-quality-first-api-b5-20260816-v004/attempt-0001|sourcePackageFileSha256=1dcc8189ea34bb0a001a6ec6d07066f583133d8fda7f71bf9263cc189e555536|modelId=gemini-3.6-flash|thinkingLevel=medium|officialClaimsCanonicalSha256=53fdc7299c9aaf8547b3953152b2e0573b801a53c0a0838e4c0959eb97067ba2|inputPriceNanoUsdPerToken=750|outputPriceNanoUsdPerToken=3750|priceSnapshotCanonicalSha256=b8365189c3b50debb38bc5836e95b1e61c6553bbb64f01b0626c89af49b030f7|residualRiskAcceptanceFileSha256=6778fa54d652ef407614ea99a369ac6120671a60b353b437b5ac25cf4e5bebaf|maximumCountTokensCalls=2|maximumNanoUsd=1000000000|costScope=generate-content-standard-list-price-only|status=approved-for-measurement",
+  "validation": "decoded-and-passed"
+}

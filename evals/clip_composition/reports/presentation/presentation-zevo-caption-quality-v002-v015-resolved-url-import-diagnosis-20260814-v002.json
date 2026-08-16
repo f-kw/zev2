@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-resolved-url-import-diagnosis-v002",
+  "diagnosisId": "presentation-zevo-caption-quality-v002-v015-resolved-url-import-diagnosis-20260814-v002",
+  "status": "passed",
+  "executionCountAddedAfterV001": 0,
+  "errata": {
+    "supersededRecord": "presentation-zevo-caption-quality-v002-v015-resolved-url-import-diagnosis-20260814-v001.json",
+    "supersededRecordSha256": "522d9ef89172b677c3b774fd38ad6dae458d3bf90025df5986f2e4736a646918",
+    "incorrectLabel": "relativeLiteralDirect",
+    "actualExpression": "import(RELATIVE_FROM_DIAG)",
+    "actualSpecifierForm": "runtime-variable",
+    "reason": "the v001 diagnosis did not pass a relative literal to import; its successful control cannot establish relative-literal behavior"
+  },
+  "formalLaunchContext": {
+    "nodeSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "tsxCliSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8",
+    "nodeOptionsPresent": false,
+    "launcherShape": "fixed Node -> fixed TSX CLI -> --test -> test path"
+  },
+  "observations": {
+    "relativeLiteralDirect": {
+      "source": "v014 F formal attempt-0007 TAP",
+      "sourceSha256": "ccbab5d2a398df67c354647de23dcf40c9c2c1469cbf0ee5652a55a6ec340182",
+      "specifier": "./presentation_output_caption_cue_source_package_v001.mjs",
+      "importExpression": "import('./presentation_output_caption_cue_source_package_v001.mjs')",
+      "status": "failed",
+      "checkpoint": "dependency-evaluate",
+      "targetPath": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "errorCodeIdentifier": "ERR_UNSUPPORTED_RESOLVE_REQUEST"
+    },
+    "resolvedFileUrl": {
+      "source": "v015 diagnosis execution v001",
+      "sourceSha256": "4bbf9c42544f7cd7d35103263b3c5e8b7cf319c6fffa1bf203c8b55e866187d4",
+      "resolution": "new URL(specifier, F module URL).href",
+      "status": "passed",
+      "errorCodeIdentifier": null
+    }
+  },
+  "conclusion": {
+    "relativeLiteralFailureConfirmedUnderFormalLauncher": true,
+    "resolvedFileUrlSuccessConfirmedUnderFormalLauncher": true,
+    "sameFixedToolchainAndLauncherShape": true,
+    "v015DraftAllowed": true,
+    "additionalExecutionRequired": false
+  },
+  "restrictions": {
+    "formalProductionPathChanges": 0,
+    "fixtureUsedByResolvedUrlDiagnosis": false,
+    "formalOutputOrStagingUsedByResolvedUrlDiagnosis": false,
+    "exceptionMessageSaved": false,
+    "stackSavedByDiagnosisRecord": false,
+    "apiCommunicationCount": 0,
+    "costUsd": 0
+  }
+}

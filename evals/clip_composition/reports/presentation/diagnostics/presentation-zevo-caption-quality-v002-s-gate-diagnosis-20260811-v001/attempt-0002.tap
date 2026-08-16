@@ -1,0 +1,160 @@
+TAP version 13
+# Subtest: ZCQ001 source job schema, fixed loader, bound import graph, and CLI guard
+not ok 1 - ZCQ001 source job schema, fixed loader, bound import graph, and CLI guard
+  ---
+  duration_ms: 281.903542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:361:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    ZCQ001-P-09-e55f181b8f6a
+    
+    2 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 2
+  operator: 'deepStrictEqual'
+  stack: |-
+    prove (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:89:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:374:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# proof-item:ZCQ001-P-01-13c0f4fa9b24:passed
+# proof-item:ZCQ001-P-02-eec89906405e:passed
+# proof-item:ZCQ001-P-03-850e16d958ce:passed
+# proof-item:ZCQ001-P-04-bfa4a1b9c46d:passed
+# proof-item:ZCQ001-P-05-b8ff0c3b79be:passed
+# proof-item:ZCQ001-P-06-b310cc503b06:passed
+# proof-item:ZCQ001-P-07-c88eea09ccd5:passed
+# proof-item:ZCQ001-P-08-e3cff4d98376:passed
+# Subtest: ZCQ002 multiple meaning packages preserve input order and deterministic IDs
+not ok 2 - ZCQ002 multiple meaning packages preserve input order and deterministic IDs
+  ---
+  duration_ms: 1.004167
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:396:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'rejected'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'rejected'
+  operator: 'strictEqual'
+  stack: |-
+    buildSynthetic (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:270:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:397:27)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: ZCQ003 every atom is retained once and case context remains one-to-one
+not ok 3 - ZCQ003 every atom is retained once and case context remains one-to-one
+  ---
+  duration_ms: 0.407125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:403:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'rejected'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'rejected'
+  operator: 'strictEqual'
+  stack: |-
+    buildSynthetic (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:270:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:404:39)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: ZCQ004 provider-visible projection is complete and contains no local context
+not ok 4 - ZCQ004 provider-visible projection is complete and contains no local context
+  ---
+  duration_ms: 0.882833
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:411:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'rejected'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'rejected'
+  operator: 'strictEqual'
+  stack: |-
+    buildSynthetic (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:270:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:412:27)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: ZCQ005 input bindings, resolved style, reread, and no-replace publication reject correctly
+not ok 5 - ZCQ005 input bindings, resolved style, reread, and no-replace publication reject correctly
+  ---
+  duration_ms: 146.662458
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:420:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    ZCQ005-P-01-45440c1d3fb3
+    + actual - expected
+    
+    + 'CUE_SOURCE_EXECUTION_FAILED'
+    - 'CUE_SOURCE_INPUT_BINDING_INVALID'
+                  ^
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'CUE_SOURCE_INPUT_BINDING_INVALID'
+  actual: 'CUE_SOURCE_EXECUTION_FAILED'
+  operator: 'deepStrictEqual'
+  stack: |-
+    prove (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:89:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:425:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: ZCQ006 source package bytes and binding provenance are deterministic
+not ok 6 - ZCQ006 source package bytes and binding provenance are deterministic
+  ---
+  duration_ms: 0.468416
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:446:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'rejected'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'rejected'
+  operator: 'strictEqual'
+  stack: |-
+    buildSynthetic (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:270:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs:447:17)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 0
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 568.9715

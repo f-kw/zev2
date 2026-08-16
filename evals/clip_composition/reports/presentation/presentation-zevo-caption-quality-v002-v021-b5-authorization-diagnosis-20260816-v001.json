@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-v021-b5-authorization-diagnosis-v001",
+  "observedAt": "2026-08-16T09:35:50+09:00",
+  "status": "stopped-before-count-tokens",
+  "stage": "authorization",
+  "primaryCode": "CUE_B5_JOB_INVALID",
+  "formalJob": {
+    "path": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-jobs/a-v002-caption-quality-first-api-b5-20260816-v006.json",
+    "fileSha256": "5c5ebe4c2c4a9c0e9b95854407a3005e5a546f2093ef5faba156257c732461bd",
+    "decoder": "passed",
+    "valueValidator": "passed"
+  },
+  "snapshotRepair": {
+    "status": "passed",
+    "copiedFileCount": 6,
+    "allCopiesByteIdentical": true,
+    "jobDerivedSnapshotPaths": "passed"
+  },
+  "confirmedCause": {
+    "category": "job-construction-implementation-defect",
+    "summary": "The residual-risk acceptance bound to the B5 job still identifies the predecessor source package, while authorization requires exact equality with the current v021 source-package binding.",
+    "currentSourcePackagePath": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260816-v002/source-package-v001.json",
+    "boundRiskAcceptancePath": "evals/clip_composition/jobs/presentation/output-caption-cue-b5-risk-acceptances/a-v002-caption-quality-first-api-risk-20260815-v001.json",
+    "riskAcceptanceSourcePackagePath": "evals/clip_composition/outputs/presentation/output-caption-cue-source-packages/a-v002-caption-quality-first-api-source-20260815-v001/source-package-v001.json",
+    "exactBindingMatch": false
+  },
+  "threeWayAttribution": {
+    "productionOrImplementation": "job-construction-implementation-defect",
+    "fixtureOrExecutionSetup": "not-applicable",
+    "contractInterpretation": "not-required"
+  },
+  "externalEffects": {
+    "countTokensCalls": 0,
+    "generateContentCalls": 0,
+    "apiCommunications": 0,
+    "estimatedCostUsd": 0
+  },
+  "forwardOnlyRepairCandidate": {
+    "requiresApproval": true,
+    "steps": [
+      "Keep the rejected v006 job, copied snapshots, run evidence, and decision line unchanged.",
+      "Create a new versioned residual-risk acceptance that binds the v021 source package while preserving the accepted claim verdicts, scope, and US$1.00 maximum.",
+      "Issue a new versioned B5 job, job-specific snapshot directory, and unused output root.",
+      "Verify decoder, value validator, decision line, and residual-risk authorization before countTokens."
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "recordVersion": "presentation-zevo-caption-quality-v002-abstention-d1-d3-summary-v001",
+  "performedCalls": 3,
+  "maximumDiagnosticCalls": 6,
+  "cumulativeDiagnosticNanoUsd": 61322250,
+  "maximumDiagnosticNanoUsd": 250000000,
+  "withinDiagnosticCostLimit": true,
+  "branch": "D1-abstained-D2-D3-reason-observation-stop",
+  "formalB6SentAfterDiagnosis": false,
+  "diagnosticResponseFormalReuseAllowed": false,
+  "observations": [
+    {
+      "diagnosticId": "D1",
+      "httpStatus": 200,
+      "providerObservationStatus": "passed",
+      "applicationStatus": "abstained",
+      "usageMetadata": {
+        "promptTokenCount": 10282,
+        "candidatesTokenCount": 6,
+        "thoughtsTokenCount": 2004,
+        "totalTokenCount": 12292
+      },
+      "chargedNanoUsd": 15249000
+    },
+    {
+      "diagnosticId": "D2",
+      "httpStatus": 200,
+      "providerObservationStatus": "passed",
+      "applicationStatus": "success",
+      "usageMetadata": {
+        "promptTokenCount": 10282,
+        "candidatesTokenCount": 1797,
+        "thoughtsTokenCount": 4427,
+        "totalTokenCount": 16506
+      },
+      "chargedNanoUsd": 31051500
+    },
+    {
+      "diagnosticId": "D3",
+      "httpStatus": 200,
+      "providerObservationStatus": "passed",
+      "applicationStatus": null,
+      "usageMetadata": {
+        "promptTokenCount": 10299,
+        "candidatesTokenCount": 49,
+        "thoughtsTokenCount": 1897,
+        "totalTokenCount": 12245
+      },
+      "chargedNanoUsd": 15021750
+    }
+  ]
+}

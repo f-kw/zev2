@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-formal-launch-checklist-v001",
+  "runId": "20260814-zevo-caption-quality-v002-v014-f-formal-attempt-0007",
+  "status": "passed",
+  "nativeExecution": "confirmed",
+  "formalCommandPreflight": {
+    "status": "passed",
+    "recordSha256": "18bc76c0a295846aab4ee56ceb6ef54747f2d3f1ef078688807c86bc249c3423",
+    "commandBlockByteExact": true,
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "argumentsInOrder": [
+      "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "--test",
+      "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs"
+    ]
+  },
+  "environment": {
+    "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "nodeOptionsPresent": false,
+    "environmentPreflightStatus": "passed",
+    "environmentPreflightSha256": "10b25637b621e44a9286a4db4b9834e4a6575da641aa14ac91c0c80a43878659",
+    "readableFiles": 99,
+    "runtimeFiles": 7,
+    "implementationFiles": 51,
+    "preparedDirectories": 5,
+    "requiredAbsentPaths": 2
+  },
+  "runtimeBindings": {
+    "nodeSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "tsxCliSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8",
+    "ffmpegResolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+    "ffmpegSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+    "ffprobeResolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+    "ffprobeSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9",
+    "chromiumNativeLaunchExitCode": 0,
+    "chromiumStdoutExact": "<html><head></head><body></body></html>\n"
+  },
+  "fixtureAndOutput": {
+    "fixtureAttemptRootUnused": true,
+    "formalEvidenceRootUnused": true,
+    "outputRootUnused": true,
+    "stagingRootUnused": true,
+    "testSyntaxStatus": "passed"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "recordVersion": "presentation-zevo-caption-quality-v002-abstention-diagnostic-result-v001",
+  "diagnosticId": "D3",
+  "requestBinding": {
+    "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-abstention-diagnosis-20260816-v001/d3-free-text-obstacle/request.json",
+    "fileSha256": "b4fcf9ec4f177637aa096f8b9aaf62bfd48ac6f1d263f0f51ef394865f792a6b"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-abstention-diagnosis-20260816-v001/d3-free-text-obstacle/response.raw.json",
+    "fileSha256": "0c066787cc7a211a62588459e894225c73087b5b6b037e6af2b65ff2bb6ebf76"
+  },
+  "httpStatus": 200,
+  "contentType": "application/json; charset=UTF-8",
+  "providerObservationStatus": "passed",
+  "providerInnerCode": null,
+  "responseModelVersion": "gemini-3.6-flash",
+  "observedServiceTier": "standard",
+  "candidateCount": 1,
+  "usageMetadata": {
+    "promptTokenCount": 10299,
+    "candidatesTokenCount": 49,
+    "thoughtsTokenCount": 1897,
+    "totalTokenCount": 12245
+  },
+  "chargedNanoUsd": 15021750,
+  "cumulativeDiagnosticNanoUsd": 61322250,
+  "withinDiagnosticCostLimit": true,
+  "applicationStatus": null,
+  "diagnosticReason": "{\"status\":\"abstained\",\"reason\":\"出力フォーマットとなるJSON Schemaの詳細な定義および「意味の小単位」の客観的な分割基準が提示されていないため、要求された仕様を正確に満たす結果を生成できません。\"}",
+  "rawSavedBeforeParsing": true,
+  "automaticRetries": 0,
+  "diagnosticResponseFormalReuseAllowed": false,
+  "secretRecorded": false
+}

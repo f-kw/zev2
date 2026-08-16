@@ -1,0 +1,39 @@
+{
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "Return a JSON object."
+        }
+      ]
+    }
+  ],
+  "generationConfig": {
+    "maxOutputTokens": 16,
+    "thinkingConfig": {
+      "thinkingLevel": "medium"
+    },
+    "responseMimeType": "application/json",
+    "responseJsonSchema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "ok"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "const": "fixed"
+        }
+      },
+      "required": [
+        "status",
+        "kind"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

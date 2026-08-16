@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-fatal-observation-v001",
+  "status": "fatal",
+  "proofJobBinding": {
+    "schemaVersion": "presentation-zevo-caption-quality-v002-proof-job-v001",
+    "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0009/fixtures/zcq-caption-quality-proof-owner-permission-attempt-0001.json",
+    "fileSha256": "f2940a1460baa5e114aedf03daeba181a661adceef7cf5a2a4d412aa4939742b",
+    "canonicalSha256": "4e7960065e09b64d68aaa298e3a8a2df120e96fd6b89887d299ecf40f6336652"
+  },
+  "stage": "renderer-work",
+  "innerCode": "OS_PERMISSION_DENIED",
+  "targetFile": {
+    "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-owner-permission/voice-013/horizontal-formal/render-plan-v003.json",
+    "fileSha256": "73bd8aeac5e3c5097bbe1fb40d61aabc04cc004832b680178b8d97d9aafff015"
+  },
+  "toolExitCode": null,
+  "checkpoints": [
+    {
+      "stage": "input-read",
+      "event": "entered",
+      "caseId": null,
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "input-read",
+      "event": "completed",
+      "caseId": null,
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "output-request",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "output-request",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-owner-permission/voice-013/horizontal-formal/output-request-v001.json",
+        "fileSha256": "5a4a48cac9d001645e798b13334369813444ff6ba186e53e9e00c15a3fee4845"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "page-line-planner",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "page-line-planner",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-owner-permission/voice-013/horizontal-formal/page-line-plan-v003.json",
+        "fileSha256": "e0ecbadfffcf29b019ea5d9dc1babbe8098d0927460a07a6582eea0fd316939e"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "render-plan",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "render-plan",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0009-owner-permission/voice-013/horizontal-formal/render-plan-v003.json",
+        "fileSha256": "73bd8aeac5e3c5097bbe1fb40d61aabc04cc004832b680178b8d97d9aafff015"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "common-render-plan",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "common-render-plan",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    },
+    {
+      "stage": "media-inspection",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-2-voice-013/base-media.mp4",
+        "fileSha256": "6fe8c8ac4b41379073b5f194c1a3e5977a64ed39434c8842fe7db03b40247f7e"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "media-inspection",
+      "event": "completed",
+      "caseId": "voice-013",
+      "targetFile": {
+        "path": "evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008/layer1-v3-nE_bNeBNp4E_multiblock_material_v001-2-voice-013/base-media.mp4",
+        "fileSha256": "6fe8c8ac4b41379073b5f194c1a3e5977a64ed39434c8842fe7db03b40247f7e"
+      },
+      "toolExitCode": null
+    },
+    {
+      "stage": "renderer-work",
+      "event": "entered",
+      "caseId": "voice-013",
+      "targetFile": null,
+      "toolExitCode": null
+    }
+  ],
+  "rendererWorkEvidence": [],
+  "retentionPaths": []
+}

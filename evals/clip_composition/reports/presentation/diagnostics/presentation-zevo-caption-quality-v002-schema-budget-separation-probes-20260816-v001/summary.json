@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-schema-budget-separation-summary-v001",
+  "probeCount": 2,
+  "maximumCalls": 2,
+  "cumulativeNanoUsd": 14956500,
+  "maximumNanoUsd": 50000000,
+  "withinCostLimit": true,
+  "downstreamBranchDependsOnTheseResults": false,
+  "observations": [
+    {
+      "probeId": "full-input-tier-01-minimum-output-budget",
+      "schemaId": "tier-01-structure-and-boundary-enums",
+      "maxOutputTokens": 16,
+      "httpStatus": 200,
+      "blockReason": null,
+      "candidateCount": 1,
+      "usageMetadata": null,
+      "chargedNanoUsd": 0
+    },
+    {
+      "probeId": "full-input-tier-03-formal-output-budget",
+      "schemaId": "tier-03-top-level-status-skeleton",
+      "maxOutputTokens": 65536,
+      "httpStatus": 200,
+      "blockReason": null,
+      "candidateCount": 1,
+      "usageMetadata": {
+        "promptTokenCount": 10282,
+        "candidatesTokenCount": 12,
+        "thoughtsTokenCount": 1920,
+        "totalTokenCount": 12214
+      },
+      "chargedNanoUsd": 14956500
+    }
+  ]
+}

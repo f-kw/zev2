@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-gemini-3-6-tier1-compatibility-result-v001",
+  "requestBinding": {
+    "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-gemini-3-6-tier1-compatibility-probe-20260816-v001/request.json",
+    "fileSha256": "610b8e1fe68de436ee2da9702da35739437ae34e677f38ee7b844abe14db4713"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/reports/presentation/diagnostics/presentation-zevo-caption-quality-v002-gemini-3-6-tier1-compatibility-probe-20260816-v001/response.raw.json",
+    "fileSha256": "a9a86be29582928fcee518fb7c8dea19c4b004f7e40a2f8cf98ef30d39f7008c"
+  },
+  "httpStatus": 200,
+  "contentType": "application/json; charset=UTF-8",
+  "modelVersion": "gemini-3.6-flash",
+  "blockReason": null,
+  "candidateCount": 1,
+  "finishReasons": [
+    "MAX_TOKENS"
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 6,
+    "totalTokenCount": 19,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 6
+      }
+    ],
+    "thoughtsTokenCount": 13,
+    "serviceTier": "standard"
+  },
+  "chargedNanoUsd": 53250,
+  "acceptedByEndpoint": true
+}

@@ -1,0 +1,420 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-reverse-consumer-graph-v001",
+  "scope": {
+    "testRoots": [
+      "evals/clip_composition",
+      "runner"
+    ],
+    "testSourcePattern": "*.test.{mjs,ts,tsx}",
+    "resolution": "TypeScript AST static import/export and literal dynamic import/require; relative specifiers only"
+  },
+  "targetPaths": [
+    "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+    "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+    "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.mjs",
+    "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.test.mjs",
+    "evals/clip_composition/presentation_output_caption_cue_selection_v001.mjs",
+    "evals/clip_composition/presentation_output_caption_cue_selection_v001.test.mjs",
+    "evals/clip_composition/presentation_output_page_line_planner_v003.mjs",
+    "evals/clip_composition/presentation_output_page_line_planner_v003.test.mjs",
+    "evals/clip_composition/presentation_output_render_plan_v003.mjs",
+    "evals/clip_composition/presentation_output_render_plan_v003.test.mjs",
+    "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.ts",
+    "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs",
+    "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.mjs",
+    "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs",
+    "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+    "evals/clip_composition/presentation_atomic_directory_publish_v001.c",
+    "evals/clip_composition/presentation_atomic_directory_publish_v001-darwin-arm64",
+    "evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.mjs",
+    "evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs"
+  ],
+  "counts": {
+    "targetPaths": 19,
+    "testSources": 67,
+    "formal48TestSources": 8,
+    "formal48Consumers": 8,
+    "existingTestSources": 59,
+    "existingConsumers": 0
+  },
+  "conclusion": {
+    "existingDirectImpactTests": [],
+    "formal48ConsumerTests": [
+      "evals/clip_composition/presentation_output_caption_cue_selection_v001.test.mjs",
+      "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+      "evals/clip_composition/presentation_output_page_line_planner_v003.test.mjs",
+      "evals/clip_composition/presentation_output_render_plan_v003.test.mjs",
+      "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs",
+      "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.test.mjs",
+      "evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs",
+      "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs"
+    ]
+  },
+  "rows": [
+    {
+      "testPath": "evals/clip_composition/formalize_presentation_first_real_data_assembly_decision_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/layer1_internal_trim.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/layer1_internal_trim_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/observe_presentation_first_real_data_edge_playback_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/package_presentation_first_real_data_rendered_comparison_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/prepare_presentation_first_real_data_gate_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_a_meaning_information_package_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_a_source_sequence_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_a_v002_layer1_v3_fixture_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_a_v002_review_ui_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_a_v002_vertical_caption_diagnostic_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_audio_grid_reconstruction_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_base_media_build_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_base_media_renderer_v002.integration.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_base_media_timeline_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_caption_contract.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_fatal_observability_v002.integration.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_fatal_observation_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_first_real_data_gate_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_first_real_data_rendered_comparison_human_response_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_first_real_data_rendered_comparison_trust_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_first_real_data_rendered_comparison_ui_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_first_real_data_rendered_comparison_ui_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_first_real_data_rendered_comparison_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_first_real_data_review_ui_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_gt03_classification_sync.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_initial_preset_finalization.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_initial_preset_review.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_instruction_contract.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_meaning_boundary_b5_b6_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_meaning_boundary_selection_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_meaning_boundary_source_package_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_meaning_information_package_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_meaning_output_run_input_record_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_base_media_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_caption_cue_selection_v001.test.mjs",
+      "classification": "formal-48-test",
+      "references": [
+        "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+        "evals/clip_composition/presentation_output_caption_cue_selection_v001.mjs",
+        "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs"
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+      "classification": "formal-48-test",
+      "references": [
+        "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+        "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs"
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_contract_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_page_line_planner_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_page_line_planner_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_page_line_planner_v003.test.mjs",
+      "classification": "formal-48-test",
+      "references": [
+        "evals/clip_composition/presentation_output_caption_cue_selection_v001.mjs",
+        "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+        "evals/clip_composition/presentation_output_page_line_planner_v003.mjs"
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_piecewise_timeline_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_render_plan_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_render_plan_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_render_plan_v003.test.mjs",
+      "classification": "formal-48-test",
+      "references": [
+        "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+        "evals/clip_composition/presentation_output_render_plan_v003.mjs"
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_style_resolver_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_timeline_mapping_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_output_title_compositor_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_renderer_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_renderer_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_retained_source_atoms_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_review_renderer_v003.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_segmenter_boundary_evidence_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_source_media_equivalence_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_source_speaker_contract_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_vertical_formal_path_integration_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_vertical_review_renderer_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_vertical_speaker_only_preset_finalization.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs",
+      "classification": "formal-48-test",
+      "references": [
+        "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+        "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.mjs",
+        "evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.mjs"
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/run_presentation_a_v002_layer1_v3_proof_job_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.test.mjs",
+      "classification": "formal-48-test",
+      "references": [
+        "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+        "evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.mjs"
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/run_presentation_output_title_job_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs",
+      "classification": "formal-48-test",
+      "references": [
+        "evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.mjs",
+        "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.ts"
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs",
+      "classification": "formal-48-test",
+      "references": [
+        "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+        "evals/clip_composition/presentation_output_caption_cue_selection_v001.mjs",
+        "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+        "evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.mjs",
+        "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.ts"
+      ]
+    },
+    {
+      "testPath": "evals/clip_composition/serve_presentation_first_real_data_gate_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/serve_presentation_first_real_data_rendered_comparison_v001.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    },
+    {
+      "testPath": "evals/clip_composition/serve_presentation_first_real_data_rendered_comparison_v002.test.mjs",
+      "classification": "existing-test",
+      "references": []
+    }
+  ]
+}

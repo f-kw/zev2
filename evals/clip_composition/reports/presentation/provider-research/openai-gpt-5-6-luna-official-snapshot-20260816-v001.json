@@ -1,0 +1,94 @@
+{
+  "recordVersion": "openai-gpt-5-6-luna-official-snapshot-v001",
+  "retrievedAt": "2026-08-16T01:40:11+09:00",
+  "networkCallsToProviderApi": 0,
+  "scope": "Official public documentation snapshot for future subtitle-boundary provider comparison; this is transport design material, not an approved ZEV contract.",
+  "model": {
+    "displayName": "GPT-5.6 Luna",
+    "modelId": "gpt-5.6-luna",
+    "contextWindowTokens": 1050000,
+    "maxOutputTokens": 128000,
+    "knowledgeCutoff": "2026-02-16",
+    "reasoningEfforts": [
+      "none",
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+    ],
+    "structuredOutputsSupported": true
+  },
+  "transport": {
+    "recommendedEndpoint": "POST https://api.openai.com/v1/responses",
+    "authentication": "Authorization: Bearer $OPENAI_API_KEY",
+    "requestModelValue": "gpt-5.6-luna",
+    "structuredOutput": {
+      "requestLocation": "text.format",
+      "shape": {
+        "type": "json_schema",
+        "name": "application-defined-name",
+        "strict": true,
+        "schema": "application-defined-JSON-Schema"
+      }
+    },
+    "usageFields": [
+      "usage.input_tokens",
+      "usage.input_tokens_details.cached_tokens",
+      "usage.input_tokens_details.cache_write_tokens",
+      "usage.output_tokens",
+      "usage.output_tokens_details.reasoning_tokens",
+      "usage.total_tokens"
+    ]
+  },
+  "standardPricingUsdPerMillionTokens": {
+    "input": 0.2,
+    "cachedInput": 0.02,
+    "outputIncludingReasoning": 1.2,
+    "longContextRule": "Prompts over 272K input tokens are priced at 2x input and 1.5x output for the full request.",
+    "cacheWriteRule": "Cache writes are billed at 1.25x the uncached input rate."
+  },
+  "rateLimits": {
+    "free": "not-supported",
+    "tier1": {
+      "rpm": 500,
+      "tpm": 500000,
+      "batchQueueTokens": 5000000
+    },
+    "tier2": {
+      "rpm": 5000,
+      "tpm": 2000000,
+      "batchQueueTokens": 20000000
+    },
+    "tier3": {
+      "rpm": 5000,
+      "tpm": 4000000,
+      "batchQueueTokens": 40000000
+    },
+    "tier4": {
+      "rpm": 10000,
+      "tpm": 10000000,
+      "batchQueueTokens": 1000000000
+    },
+    "tier5": {
+      "rpm": 30000,
+      "tpm": 180000000,
+      "batchQueueTokens": 15000000000
+    }
+  },
+  "dataHandling": {
+    "trainingDefault": "API data is not used to train or improve OpenAI models unless the customer explicitly opts in.",
+    "defaultAbuseMonitoringRetention": "up to 30 days, subject to stated legal and safety exceptions",
+    "responsesApplicationState": "Responses API response data is retained for at least 30 days by default or when store=true.",
+    "zeroDataRetention": "Eligible approved organizations can use Zero Data Retention; for those organizations store is treated as false.",
+    "designImplication": "A future transport must set store=false and must not claim zero retention unless the project is actually approved and configured for ZDR."
+  },
+  "officialSources": [
+    "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "https://developers.openai.com/api/docs/guides/migrate-to-responses",
+    "https://developers.openai.com/api/docs/guides/structured-outputs",
+    "https://developers.openai.com/api/docs/guides/your-data#default-usage-policies-by-endpoint",
+    "https://openai.com/index/building-abundant-intelligence/",
+    "https://help.openai.com/en/articles/5112595-best-practices-for-api-key"
+  ]
+}

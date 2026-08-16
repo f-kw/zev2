@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-formal-command-preflight-v001",
+  "runId": "20260814-zevo-caption-quality-v002-v014-f-formal-command-preflight-v001",
+  "status": "passed",
+  "comparison": {
+    "referenceAttempts": [
+      {
+        "path": "/private/tmp/zev-caption-v012-run-f-attempt-0004.mjs",
+        "wrapperFileSha256": "de2fd5fa414a1d300424e71e913fad6fd6a3f100316a69bec250c8d685cb634d",
+        "commandBlockSha256": "9ab26022e6da1c088cedb8cfea41a95afa953b9f01d3db39bc99b42aa78373c3"
+      },
+      {
+        "path": "/private/tmp/zev-caption-v013-run-f-attempt-0005.mjs",
+        "wrapperFileSha256": "c8e9a53a10a00d68a80cf52490367e4b87c92bc312b173d5f8830423aeb85872",
+        "commandBlockSha256": "9ab26022e6da1c088cedb8cfea41a95afa953b9f01d3db39bc99b42aa78373c3"
+      }
+    ],
+    "currentAttempt": {
+      "path": "/private/tmp/zev-caption-v014-run-f-attempt-0007.mjs",
+      "wrapperFileSha256": "3cc776d8081dc29fa00fd1fdaff7976a95971dd31b9a77d2aaaa4510fdefa714",
+      "commandBlockSha256": "9ab26022e6da1c088cedb8cfea41a95afa953b9f01d3db39bc99b42aa78373c3"
+    },
+    "commandBlockByteExact": true,
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "argumentsInOrder": [
+      "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "--test",
+      "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs"
+    ],
+    "formalCommandBytesSha256": "6723ee41e52d5e5baaa8610d64648fdd4e93ac372c79d7e8ee5590d5b9a1e351"
+  },
+  "runtimeBindings": {
+    "nodeSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+    "tsxCliSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8",
+    "nodeOptionsPresent": false,
+    "requiredPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  },
+  "unusedBeforeExecution": {
+    "formalAttemptRoot": true,
+    "fixtureAttemptRoot": true,
+    "formalOutputRoot": true,
+    "stagingRoot": true
+  }
+}

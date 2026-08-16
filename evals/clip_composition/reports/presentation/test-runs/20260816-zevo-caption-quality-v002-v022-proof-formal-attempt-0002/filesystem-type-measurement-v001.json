@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-filesystem-type-measurement-v001",
+  "observedAt": "2026-08-16T04:18:23.449Z",
+  "targetPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs",
+  "predecessorFailure": {
+    "command": "/usr/bin/stat -f %T <target>",
+    "observedStdout": "/",
+    "reason": "format did not return filesystem type"
+  },
+  "measurement": {
+    "df": {
+      "command": "/bin/df",
+      "arguments": [
+        "-P",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "Filesystem   512-blocks       Used Available Capacity  Mounted on\n/dev/disk3s5 1942700360 1576624440 264091288    86%    /System/Volumes/Data\n",
+      "stderr": "",
+      "stdoutByteCount": 142,
+      "stderrByteCount": 0
+    },
+    "derivedDevice": "/dev/disk3s5",
+    "diskutil": {
+      "command": "/usr/sbin/diskutil",
+      "arguments": [
+        "info",
+        "-plist",
+        "/dev/disk3s5"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>AESHardware</key>\n\t<true/>\n\t<key>APFSContainerFree</key>\n\t<integer>135214739456</integer>\n\t<key>APFSContainerReference</key>\n\t<string>disk3</string>\n\t<key>APFSContainerSize</key>\n\t<integer>994662584320</integer>\n\t<key>APFSPhysicalStores</key>\n\t<array>\n\t\t<dict>\n\t\t\t<key>APFSPhysicalStore</key>\n\t\t\t<string>disk0s2</string>\n\t\t</dict>\n\t</array>\n\t<key>APFSSnapshot</key>\n\t<false/>\n\t<key>APFSVolumeGroupID</key>\n\t<string>757B95FF-B689-4A11-8473-45F8BC36991C</string>\n\t<key>Bootable</key>\n\t<true/>\n\t<key>BooterDeviceIdentifier</key>\n\t<string>disk3s2</string>\n\t<key>BusProtocol</key>\n\t<string>Apple Fabric</string>\n\t<key>CanBeMadeBootable</key>\n\t<false/>\n\t<key>CanBeMadeBootableRequiresDestroy</key>\n\t<false/>\n\t<key>CapacityInUse</key>\n\t<integer>807231713280</integer>\n\t<key>Content</key>\n\t<string>41504653-0000-11AA-AA11-00306543ECAC</string>\n\t<key>DeviceBlockSize</key>\n\t<integer>4096</integer>\n\t<key>DeviceIdentifier</key>\n\t<string>disk3s5</string>\n\t<key>DeviceNode</key>\n\t<string>/dev/disk3s5</string>\n\t<key>DeviceTreePath</key>\n\t<string>IODeviceTree:/arm-io@10F00000/ans@49400000/iop-ans-nub/AppleANS3CGv2Controller</string>\n\t<key>DiskUUID</key>\n\t<string>757B95FF-B689-4A11-8473-45F8BC36991C</string>\n\t<key>Ejectable</key>\n\t<false/>\n\t<key>EjectableMediaAutomaticUnderSoftwareControl</key>\n\t<false/>\n\t<key>EjectableOnly</key>\n\t<false/>\n\t<key>Encryption</key>\n\t<true/>\n\t<key>EncryptionThisVolumeProper</key>\n\t<true/>\n\t<key>FileVault</key>\n\t<true/>\n\t<key>FilesystemName</key>\n\t<string>APFS</string>\n\t<key>FilesystemType</key>\n\t<string>apfs</string>\n\t<key>FilesystemUserVisibleName</key>\n\t<string>APFS</string>\n\t<key>FreeSpace</key>\n\t<integer>0</integer>\n\t<key>GlobalPermissionsEnabled</key>\n\t<true/>\n\t<key>IOKitSize</key>\n\t<integer>994662584320</integer>\n\t<key>IORegistryEntryName</key>\n\t<string>Data</string>\n\t<key>Internal</key>\n\t<true/>\n\t<key>Locked</key>\n\t<false/>\n\t<key>MediaName</key>\n\t<string></string>\n\t<key>MediaType</key>\n\t<string>一般</string>\n\t<key>MountPoint</key>\n\t<string>/System/Volumes/Data</string>\n\t<key>OSInternalMedia</key>\n\t<false/>\n\t<key>ParentWholeDisk</key>\n\t<string>disk3</string>\n\t<key>PartitionMapPartition</key>\n\t<false/>\n\t<key>RAIDMaster</key>\n\t<false/>\n\t<key>RAIDSlice</key>\n\t<false/>\n\t<key>RecoveryDeviceIdentifier</key>\n\t<string>disk3s3</string>\n\t<key>Removable</key>\n\t<false/>\n\t<key>RemovableMedia</key>\n\t<false/>\n\t<key>RemovableMediaOrExternalDevice</key>\n\t<false/>\n\t<key>SMARTDeviceSpecificKeysMayVaryNotGuaranteed</key>\n\t<dict>\n\t\t<key>AVAILABLE_SPARE</key>\n\t\t<integer>100</integer>\n\t\t<key>AVAILABLE_SPARE_THRESHOLD</key>\n\t\t<integer>99</integer>\n\t\t<key>CONTROLLER_BUSY_TIME_0</key>\n\t\t<integer>0</integer>\n\t\t<key>CONTROLLER_BUSY_TIME_1</key>\n\t\t<integer>0</integer>\n\t\t<key>DATA_UNITS_READ_0</key>\n\t\t<integer>45809822</integer>\n\t\t<key>DATA_UNITS_READ_1</key>\n\t\t<integer>0</integer>\n\t\t<key>DATA_UNITS_WRITTEN_0</key>\n\t\t<integer>50595127</integer>\n\t\t<key>DATA_UNITS_WRITTEN_1</key>\n\t\t<integer>0</integer>\n\t\t<key>HOST_READ_COMMANDS_0</key>\n\t\t<integer>520342320</integer>\n\t\t<key>HOST_READ_COMMANDS_1</key>\n\t\t<integer>0</integer>\n\t\t<key>HOST_WRITE_COMMANDS_0</key>\n\t\t<integer>1138630147</integer>\n\t\t<key>HOST_WRITE_COMMANDS_1</key>\n\t\t<integer>0</integer>\n\t\t<key>MEDIA_ERRORS_0</key>\n\t\t<integer>0</integer>\n\t\t<key>MEDIA_ERRORS_1</key>\n\t\t<integer>0</integer>\n\t\t<key>NUM_ERROR_INFO_LOG_ENTRIES_0</key>\n\t\t<integer>0</integer>\n\t\t<key>NUM_ERROR_INFO_LOG_ENTRIES_1</key>\n\t\t<integer>0</integer>\n\t\t<key>PERCENTAGE_USED</key>\n\t\t<integer>0</integer>\n\t\t<key>POWER_CYCLES_0</key>\n\t\t<integer>185</integer>\n\t\t<key>POWER_CYCLES_1</key>\n\t\t<integer>0</integer>\n\t\t<key>POWER_ON_HOURS_0</key>\n\t\t<integer>434</integer>\n\t\t<key>POWER_ON_HOURS_1</key>\n\t\t<integer>0</integer>\n\t\t<key>TEMPERATURE</key>\n\t\t<integer>305</integer>\n\t\t<key>UNSAFE_SHUTDOWNS_0</key>\n\t\t<integer>7</integer>\n\t\t<key>UNSAFE_SHUTDOWNS_1</key>\n\t\t<integer>0</integer>\n\t</dict>\n\t<key>SMARTStatus</key>\n\t<string>Verified</string>\n\t<key>Sealed</key>\n\t<string>No</string>\n\t<key>Size</key>\n\t<integer>994662584320</integer>\n\t<key>SolidState</key>\n\t<true/>\n\t<key>SupportsGlobalPermissionsDisable</key>\n\t<true/>\n\t<key>SystemImage</key>\n\t<false/>\n\t<key>TotalSize</key>\n\t<integer>994662584320</integer>\n\t<key>VolumeAllocationBlockSize</key>\n\t<integer>4096</integer>\n\t<key>VolumeName</key>\n\t<string>Data</string>\n\t<key>VolumeSize</key>\n\t<integer>0</integer>\n\t<key>VolumeUUID</key>\n\t<string>757B95FF-B689-4A11-8473-45F8BC36991C</string>\n\t<key>WholeDisk</key>\n\t<false/>\n\t<key>Writable</key>\n\t<true/>\n\t<key>WritableMedia</key>\n\t<true/>\n\t<key>WritableVolume</key>\n\t<true/>\n</dict>\n</plist>\n",
+      "stderr": "",
+      "stdoutByteCount": 4719,
+      "stderrByteCount": 0
+    },
+    "plutil": {
+      "command": "/usr/bin/plutil",
+      "arguments": [
+        "-extract",
+        "FilesystemType",
+        "raw",
+        "-o",
+        "-",
+        "-"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "apfs\n",
+      "stderr": "",
+      "stdoutByteCount": 5,
+      "stderrByteCount": 0
+    }
+  },
+  "observedFilesystemType": "apfs",
+  "expectedFilesystemTypeForPreflight": "apfs",
+  "status": "passed"
+}

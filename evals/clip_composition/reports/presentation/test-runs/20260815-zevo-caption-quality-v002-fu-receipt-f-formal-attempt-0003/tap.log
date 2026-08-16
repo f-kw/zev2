@@ -1,0 +1,191 @@
+TAP version 13
+# Subtest: ZCQ042 proof job・束縛・pure入口・module表面
+not ok 1 - ZCQ042 proof job・束縛・pure入口・module表面
+  ---
+  duration_ms: 53.258375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:746:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      {
+        action: 'proof-run',
+        attemptId: 'attempt-0001',
+        innerObservation: {
+    +     checkpoint: 'job-decode-validation',
+    +     errorCodeIdentifier: null,
+    +     operation: 'decode-and-validate-job',
+    +     osCode: null,
+    +     targetPath: 'evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/f/proof-normal.json'
+    -     checkpoint: 'staging-root-acquisition',
+    -     errorCodeIdentifier: 'ENOENT',
+    -     operation: 'create-staging-root',
+    -     osCode: 'ENOENT',
+    -     targetPath: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/normal.staging'
+        },
+        jobId: 'zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0003-normal',
+        outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/normal',
+    +   primaryCode: 'CUE_PROOF_JOB_INVALID',
+    -   primaryCode: 'CUE_PROOF_EXECUTION_FAILED',
+        schemaVersion: 'presentation-zevo-caption-local-cli-result-v001',
+    +   stage: 'job-read',
+    +   status: 'rejected'
+    -   stage: 'input-reread',
+    -   status: 'fatal'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    schemaVersion: 'presentation-zevo-caption-local-cli-result-v001'
+    status: 'fatal'
+    action: 'proof-run'
+    jobId: 'zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0003-normal'
+    attemptId: 'attempt-0001'
+    outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/normal'
+    stage: 'input-reread'
+    primaryCode: 'CUE_PROOF_EXECUTION_FAILED'
+    innerObservation:
+      checkpoint: 'staging-root-acquisition'
+      operation: 'create-staging-root'
+      targetPath: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/normal.staging'
+      osCode: 'ENOENT'
+      errorCodeIdentifier: 'ENOENT'
+  actual:
+    schemaVersion: 'presentation-zevo-caption-local-cli-result-v001'
+    status: 'rejected'
+    action: 'proof-run'
+    jobId: 'zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0003-normal'
+    attemptId: 'attempt-0001'
+    outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/normal'
+    stage: 'job-read'
+    primaryCode: 'CUE_PROOF_JOB_INVALID'
+    innerObservation:
+      checkpoint: 'job-decode-validation'
+      operation: 'decode-and-validate-job'
+      targetPath: 'evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/f/proof-normal.json'
+      osCode: ~
+      errorCodeIdentifier: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    assertCliWithInnerDiagnostic (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:633:12)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:831:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# inner-observation:{"checkpoint":"job-decode-validation","operation":"decode-and-validate-job","targetPath":"evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/f/proof-normal.json","osCode":null,"errorCodeIdentifier":null}
+# Subtest: ZCQ043 合成selectionから実renderer・QCまでの正常経路
+not ok 2 - ZCQ043 合成selectionから実renderer・QCまでの正常経路
+  ---
+  duration_ms: 2.204791
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:959:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      {
+        action: 'proof-run',
+        attemptId: 'attempt-0001',
+    +   innerObservation: {
+    +     checkpoint: 'job-decode-validation',
+    +     errorCodeIdentifier: null,
+    +     operation: 'decode-and-validate-job',
+    +     osCode: null,
+    +     targetPath: 'evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/f/proof-normal.json'
+    +   },
+    +   jobId: 'zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0003-normal',
+    +   outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/normal',
+    +   primaryCode: 'CUE_PROOF_JOB_INVALID',
+    +   schemaVersion: 'presentation-zevo-caption-local-cli-result-v001',
+    +   stage: 'job-read',
+    +   status: 'rejected'
+    -   innerObservation: null,
+    -   jobId: 'zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0003-normal',
+    -   outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/normal',
+    -   primaryCode: null,
+    -   schemaVersion: 'presentation-zevo-caption-local-cli-result-v001',
+    -   stage: 'completed',
+    -   status: 'passed'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    schemaVersion: 'presentation-zevo-caption-local-cli-result-v001'
+    status: 'passed'
+    action: 'proof-run'
+    jobId: 'zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0003-normal'
+    attemptId: 'attempt-0001'
+    outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/normal'
+    stage: 'completed'
+    primaryCode: ~
+    innerObservation: ~
+  actual:
+    schemaVersion: 'presentation-zevo-caption-local-cli-result-v001'
+    status: 'rejected'
+    action: 'proof-run'
+    jobId: 'zcq-zevo-caption-quality-v002-fu-formal-20260815-attempt-0003-normal'
+    attemptId: 'attempt-0001'
+    outputRoot: 'evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/normal'
+    stage: 'job-read'
+    primaryCode: 'CUE_PROOF_JOB_INVALID'
+    innerObservation:
+      checkpoint: 'job-decode-validation'
+      operation: 'decode-and-validate-job'
+      targetPath: 'evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/f/proof-normal.json'
+      osCode: ~
+      errorCodeIdentifier: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    assertCliWithInnerDiagnostic (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:633:12)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:965:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# inner-observation:{"checkpoint":"job-decode-validation","operation":"decode-and-validate-job","targetPath":"evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/f/proof-normal.json","osCode":null,"errorCodeIdentifier":null}
+# Subtest: ZCQ044 失敗境界・公開排他・証拠保持
+not ok 3 - ZCQ044 失敗境界・公開排他・証拠保持
+  ---
+  duration_ms: 236.341917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:997:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      {
+    +   primaryCode: 'CUE_PROOF_JOB_INVALID',
+    +   stage: 'job-read',
+    -   primaryCode: 'CUE_PROOF_PUBLICATION_FAILED',
+    -   stage: 'root-publication',
+        status: 'rejected'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    status: 'rejected'
+    stage: 'root-publication'
+    primaryCode: 'CUE_PROOF_PUBLICATION_FAILED'
+  actual:
+    status: 'rejected'
+    stage: 'job-read'
+    primaryCode: 'CUE_PROOF_JOB_INVALID'
+  operator: 'deepStrictEqual'
+  stack: |-
+    assertCliWithInnerDiagnostic (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:633:12)
+    assertNegativeCli (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:470:3)
+    expectCli (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:1001:40)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs:1026:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# inner-observation:{"checkpoint":"job-decode-validation","operation":"decode-and-validate-job","targetPath":"evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/zevo-caption-quality-v002-fu-formal-20260815-attempt-0003/f/negative/root-reservation-collision.json","osCode":null,"errorCodeIdentifier":null}
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 846.208875

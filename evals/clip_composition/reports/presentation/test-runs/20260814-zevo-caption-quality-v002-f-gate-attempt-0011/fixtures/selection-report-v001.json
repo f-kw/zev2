@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "presentation-output-caption-cue-selection-report-v001",
+  "reportId": "zcq-proof-selection-report-attempt-0009",
+  "status": "passed",
+  "selectionJobBinding": {
+    "schemaVersion": "presentation-output-caption-cue-selection-job-v001",
+    "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures/selection-job-v001.json",
+    "fileSha256": "02eccc894bd4c13f07491b8bcf88c09e08e8a907ed5bd8c947eabdcf7e541c9e",
+    "canonicalSha256": "89fb0c937fc17d880ffbb17c109fde21224abc5e60b9b38929c8b46908030351"
+  },
+  "sourcePackageBinding": {
+    "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+    "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures/source-package-v001.json",
+    "fileSha256": "06525d18519ca367b85447552647227df60fcbe729c631811413ee54a5be4d20",
+    "canonicalSha256": "e675f912d1ba55af352780bdaa88cd0343fae0209e4084075d19ee9b03360ed0"
+  },
+  "b6ManifestBinding": {
+    "schemaVersion": "presentation-output-caption-cue-b6-manifest-v001",
+    "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures/b6-manifest-v001.json",
+    "fileSha256": "8518b3db971efbec3cf40f1b4aeeca3c438bb62ed5eac1a0d3490d4c96ceb275",
+    "canonicalSha256": "9aeb6be5b9c8983f96dfc90425c5ea7f64b8bc6a9f648a414456b3765b406c58"
+  },
+  "providerEnvelopeBinding": {
+    "schemaVersion": "presentation-output-caption-cue-provider-response-envelope-v001",
+    "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures/provider-envelope-v001.json",
+    "fileSha256": "74961200d5186bea522e4898f04c368d0d80da638d5c1f39cccd8c649b23e016",
+    "canonicalSha256": "e3c17cac20b019388b453ebb28846fe2987a4db0e7d30c8da807a4f29bf49466"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures/provider.raw.json",
+    "fileSha256": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "selectionBinding": {
+    "schemaVersion": "presentation-output-caption-cue-selection-v001",
+    "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures/selection-v001.json",
+    "fileSha256": "725daed83828a08396fd4ae524d44b3d03029e28809bed12bcb2c002062eb980",
+    "canonicalSha256": "2a1014d1743d274495527c221557d3707e6c14d53a38bfdfa3680a3ecb6d7a5e"
+  },
+  "checks": {
+    "sourceBinding": "passed",
+    "providerEnvelope": "passed",
+    "responseSchema": "passed",
+    "captionSet": "passed",
+    "cueBoundaryResolution": "passed",
+    "cueOrder": "passed",
+    "lineBoundaryResolution": "passed",
+    "lineOrder": "passed",
+    "atomClosure": "passed",
+    "logicalWidth": "passed",
+    "deterministicReconstruction": "passed",
+    "physicalLayout": "passed",
+    "timelineMapping": "passed"
+  },
+  "violations": [],
+  "fatalObservation": null,
+  "selectionProjection": {
+    "captionCount": 3,
+    "cueCount": 9,
+    "lineCount": 16,
+    "selectedBoundaryCount": 25,
+    "reconstructionCanonicalSha256": "dfabc25d695c5f476a0dec6f5ee7feb6a928a165f40342c5c7438f266712a1ef",
+    "physicalProjectionCanonicalSha256": "73f5643101d6cb958d567281896ec6434988812bc4a00823d69022173f70f894",
+    "timelineProjectionCanonicalSha256": "9e527be8938668f0b5baf9406b60ed26b151b96fe9211efae813e4270e5fa52a"
+  },
+  "captionProjection": [
+    {
+      "inputCaptionId": "input-caption-000001",
+      "caseId": "voice-013",
+      "cueCount": 3,
+      "lineCount": 6,
+      "selectedCueEndBoundaryIds": [
+        "display-boundary-000001-000034",
+        "display-boundary-000001-000068",
+        "display-boundary-000001-000101"
+      ],
+      "selectedLineEndBoundaryIds": [
+        "display-boundary-000001-000017",
+        "display-boundary-000001-000034",
+        "display-boundary-000001-000051",
+        "display-boundary-000001-000068",
+        "display-boundary-000001-000085",
+        "display-boundary-000001-000101"
+      ],
+      "atomOccurrenceCount": 101,
+      "firstStartFrame": 0,
+      "lastEndFrameExclusive": 755
+    },
+    {
+      "inputCaptionId": "input-caption-000002",
+      "caseId": "voice-067",
+      "cueCount": 3,
+      "lineCount": 5,
+      "selectedCueEndBoundaryIds": [
+        "display-boundary-000002-000014",
+        "display-boundary-000002-000042",
+        "display-boundary-000002-000072"
+      ],
+      "selectedLineEndBoundaryIds": [
+        "display-boundary-000002-000014",
+        "display-boundary-000002-000028",
+        "display-boundary-000002-000042",
+        "display-boundary-000002-000057",
+        "display-boundary-000002-000072"
+      ],
+      "atomOccurrenceCount": 72,
+      "firstStartFrame": 0,
+      "lastEndFrameExclusive": 641
+    },
+    {
+      "inputCaptionId": "input-caption-000003",
+      "caseId": "voice-190",
+      "cueCount": 3,
+      "lineCount": 5,
+      "selectedCueEndBoundaryIds": [
+        "display-boundary-000003-000016",
+        "display-boundary-000003-000048",
+        "display-boundary-000003-000080"
+      ],
+      "selectedLineEndBoundaryIds": [
+        "display-boundary-000003-000016",
+        "display-boundary-000003-000032",
+        "display-boundary-000003-000048",
+        "display-boundary-000003-000064",
+        "display-boundary-000003-000080"
+      ],
+      "atomOccurrenceCount": 80,
+      "firstStartFrame": 0,
+      "lastEndFrameExclusive": 807
+    }
+  ],
+  "implementationBindings": []
+}

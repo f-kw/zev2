@@ -1,0 +1,197 @@
+TAP version 13
+# Subtest: ZCQ007 B5/B6の正式job・束縛・import順・分離実行を実観測する
+ok 1 - ZCQ007 B5/B6の正式job・束縛・import順・分離実行を実観測する
+  ---
+  duration_ms: 4223.055333
+  ...
+# proof-item:ZCQ007-P-01-781ef35a415d:passed
+# proof-item:ZCQ007-P-06-f29219bd499b:passed
+# proof-item:ZCQ007-P-07-739f1cbfe7bf:passed
+# proof-item:ZCQ007-P-08-659b37314300:passed
+# proof-item:ZCQ007-P-09-ffe4a2d6ee89:passed
+# proof-item:ZCQ007-P-10-0b261ce0f676:passed
+# proof-item:ZCQ007-P-11-125d1973c3d0:passed
+# proof-item:ZCQ007-P-12-6706d6691284:passed
+# proof-item:ZCQ007-P-13-3ce1762b29bf:passed
+# proof-item:ZCQ007-P-14-d2cb376ef09f:passed
+# proof-item:ZCQ007-P-15-8faa91204a07:passed
+# proof-item:ZCQ007-P-16-0bb2e5b7affa:passed
+# proof-item:V4-ZCQ007-01:passed
+# proof-item:V4-ZCQ007-03:passed
+# proof-item:V4-ZCQ007-04:passed
+# proof-item:V4-ZCQ007-05:passed
+# proof-item:V15-ZCQ007-01:passed
+# Subtest: ZCQ008 Gemini可視意味入力はsource packageのprompt byteと一致する
+not ok 2 - ZCQ008 Gemini可視意味入力はsource packageのprompt byteと一致する
+  ---
+  duration_ms: 311.392416
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.test.mjs:1528:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    ZCQ008 proof observation count
+    
+    2 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    proveAll (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.test.mjs:453:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_output_caption_cue_b5_b6_v001.test.mjs:1534:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: ZCQ009 system instructionは仕事本文を複製せず6行に固定する
+ok 3 - ZCQ009 system instructionは仕事本文を複製せず6行に固定する
+  ---
+  duration_ms: 378.223834
+  ...
+# proof-item:ZCQ009-P-01-9172a8a8d125:passed
+# proof-item:ZCQ009-P-02-e11a773c6611:passed
+# proof-item:ZCQ009-P-03-4514d3fa1618:passed
+# Subtest: ZCQ010 model・endpoint・thinking・tier省略・max outputを一意に束縛する
+ok 4 - ZCQ010 model・endpoint・thinking・tier省略・max outputを一意に束縛する
+  ---
+  duration_ms: 773.216042
+  ...
+# proof-item:ZCQ010-P-01-63627d9c750f:passed
+# proof-item:ZCQ010-P-02-08305518517f:passed
+# proof-item:ZCQ010-P-03-9b4d31ebcfb1:passed
+# proof-item:ZCQ010-P-04-0dee663a4bbd:passed
+# proof-item:ZCQ010-P-05-21857b06d4f3:passed
+# Subtest: ZCQ011 countTokens adapterと2回計測を実呼出しで検査する
+ok 5 - ZCQ011 countTokens adapterと2回計測を実呼出しで検査する
+  ---
+  duration_ms: 310.025
+  ...
+# proof-item:ZCQ011-P-01-d6976ebb4dfa:passed
+# proof-item:ZCQ011-P-02-9aee6b1bcdf6:passed
+# proof-item:ZCQ011-P-03-f7cedcee993c:passed
+# proof-item:ZCQ011-P-04-8e58ff8f01e5:passed
+# proof-item:ZCQ011-P-05-6bb0a9b7008a:passed
+# proof-item:ZCQ011-P-06-4d15680da254:passed
+# proof-item:ZCQ011-P-07-e3292a74331e:passed
+# proof-item:ZCQ011-P-08-a2aaa095701d:passed
+# proof-item:ZCQ011-P-09-4a1a345786ac:passed
+# proof-item:ZCQ011-P-10-2e5a6580c838:passed
+# proof-item:ZCQ011-P-11-f15026ca9a1b:passed
+# proof-item:ZCQ011-P-12-9fdacca7f791:passed
+# proof-item:ZCQ011-P-13-81bd1feea5c8:passed
+# proof-item:ZCQ011-P-14-796a3a81dbe6:passed
+# proof-item:ZCQ011-P-15-6ddefe55b71d:passed
+# proof-item:ZCQ011-P-16-bb0e3ffc4b0f:passed
+# proof-item:ZCQ011-P-17-db6acf747784:passed
+# proof-item:ZCQ011-P-18-2e5836725386:passed
+# proof-item:ZCQ011-P-19-ea22c8ca33a4:passed
+# Subtest: ZCQ012 公式snapshot・claim・残余リスク受容をbyte来歴で検査する
+ok 6 - ZCQ012 公式snapshot・claim・残余リスク受容をbyte来歴で検査する
+  ---
+  duration_ms: 502.778833
+  ...
+# proof-item:ZCQ012-P-01-9b90438fd642:passed
+# proof-item:ZCQ012-P-02-01105310ff8e:passed
+# proof-item:ZCQ012-P-03-89cc4d4a623b:passed
+# proof-item:ZCQ012-P-04-6d8ace4f0830:passed
+# proof-item:ZCQ012-P-05-d574a4afa754:passed
+# Subtest: ZCQ013 事前費用は既存BigInt正本をprobe/final双方へ適用する
+ok 7 - ZCQ013 事前費用は既存BigInt正本をprobe/final双方へ適用する
+  ---
+  duration_ms: 618.215083
+  ...
+# proof-item:ZCQ013-P-01-0f9bf7c91e36:passed
+# proof-item:ZCQ013-P-02-d1621589f99a:passed
+# proof-item:ZCQ013-P-03-a39585fe366d:passed
+# proof-item:ZCQ013-P-04-a80707259323:passed
+# proof-item:ZCQ013-P-05-27773a3c14a0:passed
+# proof-item:ZCQ013-P-06-e0acca8d22e6:passed
+# proof-item:ZCQ013-P-07-8a6b89c89ad8:passed
+# Subtest: ZCQ014 provider schemaと最大有効構造を入力集合から決定的に作る
+ok 8 - ZCQ014 provider schemaと最大有効構造を入力集合から決定的に作る
+  ---
+  duration_ms: 417.5985
+  ...
+# proof-item:ZCQ014-P-01-172994589a44:passed
+# proof-item:ZCQ014-P-02-dccadaf2b386:passed
+# proof-item:ZCQ014-P-03-bcfe9f279688:passed
+# proof-item:ZCQ014-P-04-fc69612bca82:passed
+# proof-item:ZCQ014-P-05-5b427711378e:passed
+# Subtest: ZCQ015 B6は既存provider transport契約を一回だけ通しrawを先行保存する
+ok 9 - ZCQ015 B6は既存provider transport契約を一回だけ通しrawを先行保存する
+  ---
+  duration_ms: 1521.918334
+  ...
+# proof-item:ZCQ015-P-01-f925b6af2f39:passed
+# proof-item:ZCQ015-P-02-1c8df05bd8d2:passed
+# proof-item:ZCQ015-P-03-248e8c70dcde:passed
+# proof-item:ZCQ015-P-04-49c96677622b:passed
+# proof-item:ZCQ015-P-05-afe7de66d8d7:passed
+# proof-item:ZCQ015-P-06-fcdb80943413:passed
+# proof-item:ZCQ015-P-07-b4c3515cad4e:passed
+# proof-item:ZCQ015-P-08-6d878cb96869:passed
+# proof-item:ZCQ015-P-09-6a29a26e0176:passed
+# proof-item:ZCQ015-P-10-171b9359dbac:passed
+# proof-item:V4-ZCQ015-01:passed
+# proof-item:V4-ZCQ015-02:passed
+# proof-item:V4-ZCQ015-04:passed
+# proof-item:V5-ZCQ015-01:passed
+# proof-item:V5-ZCQ015-02:passed
+# Subtest: ZCQ016 B5/B6の結果別成果物集合・費用・公開失敗を実発火する
+ok 10 - ZCQ016 B5/B6の結果別成果物集合・費用・公開失敗を実発火する
+  ---
+  duration_ms: 5960.630708
+  ...
+# proof-item:ZCQ016-P-01-06ee9a1962ca:passed
+# proof-item:ZCQ016-P-02-3727d4ddcee5:passed
+# proof-item:ZCQ016-P-03-7b3f7303e5f1:passed
+# proof-item:ZCQ016-P-04-3c39f88e936c:passed
+# proof-item:ZCQ016-P-05-6261369241ca:passed
+# proof-item:ZCQ016-P-06-a5642d7f87e5:passed
+# proof-item:ZCQ016-P-07-89afbfc18eb9:passed
+# proof-item:ZCQ016-P-08-c20063533421:passed
+# proof-item:ZCQ016-P-09-1e4f4eafd3b1:passed
+# proof-item:ZCQ016-P-10-cb1aa265450d:passed
+# proof-item:ZCQ016-P-11-c0d96f98c087:passed
+# proof-item:ZCQ016-P-12-5b034dfac6c5:passed
+# proof-item:ZCQ016-P-13-8b7f3fe75e95:passed
+# proof-item:ZCQ016-P-14-64c07897ce02:passed
+# proof-item:ZCQ016-P-15-535183f415eb:passed
+# proof-item:ZCQ016-P-16-ef5bdc33ae49:passed
+# proof-item:ZCQ016-P-17-c5fae9fe051a:passed
+# proof-item:ZCQ016-P-18-d0b8a4559616:passed
+# proof-item:ZCQ016-V2-01-1a7d98f64fc5:passed
+# proof-item:ZCQ016-V2-02-16d34b5e7bcb:passed
+# proof-item:ZCQ016-V2-03-13494330c563:passed
+# proof-item:ZCQ016-V2-04-2a7428faced1:passed
+# proof-item:V4-ZCQ016-01:passed
+# proof-item:V4-ZCQ016-02:passed
+# proof-item:V4-ZCQ016-03:passed
+# proof-item:V4-ZCQ016-04:passed
+# proof-item:V4-ZCQ016-05:passed
+# proof-item:V4-ZCQ016-06:passed
+# proof-item:V4-ZCQ016-07:passed
+# proof-item:V4-ZCQ016-08:passed
+# proof-item:V5-ZCQ016-01:passed
+# Subtest: ZCQ017 secret混入と外部回答の暗黙正規化を全て拒否する
+ok 11 - ZCQ017 secret混入と外部回答の暗黙正規化を全て拒否する
+  ---
+  duration_ms: 2484.776125
+  ...
+# proof-item:ZCQ017-P-01-7c120d89badf:passed
+# proof-item:ZCQ017-P-02-1d82ee71fec6:passed
+# proof-item:ZCQ017-P-03-de1e97648cb9:passed
+# proof-item:ZCQ017-P-04-cddd133809c7:passed
+# proof-item:ZCQ017-P-05-206034584050:passed
+# proof-item:ZCQ017-P-06-dd65c56f7340:passed
+# proof-item:ZCQ017-P-07-b1f219dcd5e4:passed
+# proof-item:ZCQ017-P-08-88b56e08fa80:passed
+1..11
+# tests 11
+# suites 0
+# pass 10
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 18268.65075

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "presentation-resolution-package-generation-manifest-v001",
+  "generatorVersion": "presentation-resolution-package-builder-v001",
+  "sourceArtifacts": [
+    {
+      "sourceRef": "synthetic-source-v001",
+      "path": "evals/clip_composition/testdata/presentation-renderer-v002/synthetic-source.json",
+      "fileSha256": "8ec4085debb4b70141842ba751f960aae5b564953ebc3402e04324babda62f77"
+    }
+  ],
+  "sourceProvenance": "presentation-renderer-synthetic-source-v001",
+  "speakerNormalization": {
+    "normalizerVersion": "presentation-source-speaker-normalizer-v001",
+    "registryVersion": "presentation-source-speaker-non-identity-registry-v001",
+    "registryCanonicalSha256": "093fa63d1314fdd9d432c348d470522e81eda6fd1cd97973a3b36a510dc1ff02",
+    "mappedRecords": [],
+    "passThroughValueCounts": [
+      {
+        "value": "SOURCE_LABEL_MUST_NOT_RENDER",
+        "count": 1
+      },
+      {
+        "value": "SPEAKER_SOURCE_CAPTION",
+        "count": 1
+      },
+      {
+        "value": "SPEAKER_SOURCE_COMMENT",
+        "count": 1
+      },
+      {
+        "value": "SPEAKER_SOURCE_DISCOVERY",
+        "count": 1
+      },
+      {
+        "value": "SPEAKER_SOURCE_EMOTION",
+        "count": 1
+      },
+      {
+        "value": "SPEAKER_SOURCE_IMPORTANT",
+        "count": 1
+      },
+      {
+        "value": "SPEAKER_SOURCE_LYRICS",
+        "count": 1
+      },
+      {
+        "value": "SPEAKER_SOURCE_MISTAKE",
+        "count": 1
+      },
+      {
+        "value": "SPEAKER_SOURCE_NARRATION",
+        "count": 1
+      }
+    ]
+  },
+  "output": {
+    "resolutionPackageId": "presentation-renderer-synthetic-resolution-v001",
+    "resolutionPackageCanonicalSha256": "8ccb7aaee36862e16d01d9164cce4063929f0f841ddb20e8d9ba0f7fe745ef07",
+    "rawSourceAtomsCanonicalSha256": "be1b44dd5f71a42d24be82570c25d80b496747779654938fcd56b918c2af4c0d",
+    "sourceAtomsCanonicalSha256": "f9d64d7ab29a39bcff0045e3935ff96c05a23c3e5c8e97a293ca2c1aa790de4a"
+  }
+}

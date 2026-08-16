@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-gemini-feature-verification-v001",
+  "verificationId": "a-v002-caption-quality-gemini-3-7-flash-20260815-v001",
+  "verifiedAt": "2026-08-15T18:40:44.000Z",
+  "modelId": "gemini-3.7-flash",
+  "api": {
+    "product": "Gemini Developer API",
+    "apiVersion": "v1beta",
+    "endpointClass": "synchronous",
+    "methods": [
+      "countTokens",
+      "generateContent"
+    ]
+  },
+  "requestShape": {
+    "topLevelKeys": [
+      "systemInstruction",
+      "contents",
+      "generationConfig"
+    ],
+    "generationConfigKeys": [
+      "maxOutputTokens",
+      "thinkingConfig",
+      "responseMimeType",
+      "responseJsonSchema"
+    ],
+    "thinkingLevel": "medium",
+    "responseMimeType": "application/json",
+    "serviceTierPolicy": "omit-field-use-paid-standard-default",
+    "forbiddenKeysAbsent": [
+      "candidate_count",
+      "candidateCount",
+      "temperature",
+      "top_p",
+      "topP",
+      "top_k",
+      "topK"
+    ]
+  },
+  "officialEvidence": [
+    {
+      "claim": "model-is-ga-and-model-id-is-gemini-3.7-flash",
+      "url": "https://ai.google.dev/gemini-api/docs/latest-model",
+      "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260815-v001/latest-model.snapshot.html",
+      "snapshotSha256": "34d3bd8843886365b3dbfa95f7f0ff669daeb7f1ae7044fb6ba162ec16f1f5f0",
+      "lineLocator": "2121-2149"
+    },
+    {
+      "claim": "structured-output-and-thinking-low-medium-high-are-supported",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+      "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260815-v001/model.snapshot.html",
+      "snapshotSha256": "da216ea8001c3278a4dfbeb7cde5d9a25133fe78ec891feee0d62e8024e2c68c",
+      "lineLocator": "2687-2773"
+    },
+    {
+      "claim": "candidate-count-and-deprecated-sampling-fields-are-not-allowed-for-gemini-3-x",
+      "url": "https://ai.google.dev/gemini-api/docs/latest-model",
+      "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260815-v001/latest-model.snapshot.html",
+      "snapshotSha256": "34d3bd8843886365b3dbfa95f7f0ff669daeb7f1ae7044fb6ba162ec16f1f5f0",
+      "lineLocator": "2316-2336"
+    },
+    {
+      "claim": "standard-price-is-0.75-input-and-3.75-output-through-2026-12-31-and-output-includes-thinking",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "snapshotPath": "evals/clip_composition/inputs/presentation/gemini-api-official-snapshots/a-v002-caption-quality-first-api-b5-20260815-v001/pricing.snapshot.html",
+      "snapshotSha256": "c7afcf71eb007fd065209897ca31478e3f785313fcbd0712bbe58031531b28bd",
+      "lineLocator": "3277-3310"
+    }
+  ],
+  "verdict": "passed"
+}

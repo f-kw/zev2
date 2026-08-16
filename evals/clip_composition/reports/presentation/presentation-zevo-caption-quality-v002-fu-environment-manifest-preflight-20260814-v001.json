@@ -1,0 +1,579 @@
+{
+  "schemaVersion": "presentation-zevo-caption-quality-v002-fu-environment-preflight-record-v001",
+  "observedAt": "2026-08-14T14:56:06.413Z",
+  "status": "passed",
+  "sourceBindings": [
+    {
+      "path": "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs",
+      "fileSha256": "713cf57e4d0d8e8d40e5748a2a193472eb8048495a62e79caf0238d853a85e0a"
+    },
+    {
+      "path": "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs",
+      "fileSha256": "3358e6d53fd64c3f8ba29d3ae4a3cd473c27da7173fbc74ce187b5844dd6f534"
+    }
+  ],
+  "declaration": {
+    "manifest": {
+      "schemaVersion": "presentation-zevo-caption-quality-v002-test-environment-manifest-v001",
+      "gates": [
+        {
+          "gateId": "F",
+          "testPath": "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs",
+          "requirements": [
+            {
+              "role": "run-root",
+              "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011",
+              "before": {
+                "kind": "absent"
+              },
+              "manufacture": "create-directory",
+              "after": {
+                "kind": "directory",
+                "symbolicLink": false,
+                "entriesExact": [
+                  "fixtures"
+                ],
+                "permissions": [
+                  "write",
+                  "execute"
+                ]
+              }
+            },
+            {
+              "role": "fixture-root",
+              "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures",
+              "before": {
+                "kind": "absent"
+              },
+              "manufacture": "create-directory",
+              "after": {
+                "kind": "directory",
+                "symbolicLink": false,
+                "entriesExact": [],
+                "permissions": [
+                  "write",
+                  "execute"
+                ]
+              }
+            },
+            {
+              "role": "output-parent",
+              "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test",
+              "before": {
+                "kind": "directory",
+                "symbolicLink": false,
+                "entriesExact": null,
+                "permissions": [
+                  "write",
+                  "execute"
+                ]
+              },
+              "manufacture": "none",
+              "after": {
+                "kind": "directory",
+                "symbolicLink": false,
+                "entriesExact": null,
+                "permissions": [
+                  "write",
+                  "execute"
+                ]
+              }
+            },
+            {
+              "role": "proof-output-root",
+              "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011",
+              "before": {
+                "kind": "absent"
+              },
+              "manufacture": "none",
+              "after": {
+                "kind": "absent"
+              }
+            },
+            {
+              "role": "proof-staging-root",
+              "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011.staging",
+              "before": {
+                "kind": "absent"
+              },
+              "manufacture": "none",
+              "after": {
+                "kind": "absent"
+              }
+            }
+          ]
+        },
+        {
+          "gateId": "U",
+          "testPath": "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs",
+          "requirements": []
+        }
+      ]
+    },
+    "checks": {
+      "gateIdsExact": true,
+      "sourcePathsExact": true,
+      "uHasNoMutableFilesystemRequirements": true,
+      "uSourceHasNoDirectMutatingFilesystemCall": true
+    }
+  },
+  "manufacture": {
+    "schemaVersion": "presentation-zevo-caption-quality-v002-test-environment-manufacture-result-v001",
+    "status": "passed",
+    "manifest": {
+      "schemaVersion": "presentation-zevo-caption-quality-v002-test-environment-manifest-v001",
+      "gates": [
+        {
+          "gateId": "F",
+          "testPath": "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs",
+          "requirements": [
+            {
+              "role": "run-root",
+              "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011",
+              "before": {
+                "kind": "absent"
+              },
+              "manufacture": "create-directory",
+              "after": {
+                "kind": "directory",
+                "symbolicLink": false,
+                "entriesExact": [
+                  "fixtures"
+                ],
+                "permissions": [
+                  "write",
+                  "execute"
+                ]
+              }
+            },
+            {
+              "role": "fixture-root",
+              "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures",
+              "before": {
+                "kind": "absent"
+              },
+              "manufacture": "create-directory",
+              "after": {
+                "kind": "directory",
+                "symbolicLink": false,
+                "entriesExact": [],
+                "permissions": [
+                  "write",
+                  "execute"
+                ]
+              }
+            },
+            {
+              "role": "output-parent",
+              "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test",
+              "before": {
+                "kind": "directory",
+                "symbolicLink": false,
+                "entriesExact": null,
+                "permissions": [
+                  "write",
+                  "execute"
+                ]
+              },
+              "manufacture": "none",
+              "after": {
+                "kind": "directory",
+                "symbolicLink": false,
+                "entriesExact": null,
+                "permissions": [
+                  "write",
+                  "execute"
+                ]
+              }
+            },
+            {
+              "role": "proof-output-root",
+              "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011",
+              "before": {
+                "kind": "absent"
+              },
+              "manufacture": "none",
+              "after": {
+                "kind": "absent"
+              }
+            },
+            {
+              "role": "proof-staging-root",
+              "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011.staging",
+              "before": {
+                "kind": "absent"
+              },
+              "manufacture": "none",
+              "after": {
+                "kind": "absent"
+              }
+            }
+          ]
+        },
+        {
+          "gateId": "U",
+          "testPath": "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs",
+          "requirements": []
+        }
+      ]
+    },
+    "before": [
+      {
+        "role": "run-root",
+        "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011",
+        "observed": {
+          "kind": "absent"
+        }
+      },
+      {
+        "role": "fixture-root",
+        "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures",
+        "observed": {
+          "kind": "absent"
+        }
+      },
+      {
+        "role": "output-parent",
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test",
+        "observed": {
+          "kind": "directory",
+          "symbolicLink": false,
+          "entries": [
+            "f-gate-attempt-0009",
+            "f-gate-attempt-0009-completion-reread-failure",
+            "f-gate-attempt-0009-completion-write-failure",
+            "f-gate-attempt-0009-fade-throw",
+            "f-gate-attempt-0009-failure-report-reread-failure.staging",
+            "f-gate-attempt-0009-failure-report-write-failure.staging",
+            "f-gate-attempt-0009-output-request-reread-io-failure",
+            "f-gate-attempt-0009-output-request-reread-mismatch",
+            "f-gate-attempt-0009-owner-mismatch",
+            "f-gate-attempt-0009-owner-missing",
+            "f-gate-attempt-0009-owner-permission",
+            "f-gate-attempt-0009-planner-rejected-first-case",
+            "f-gate-attempt-0009-publisher-helper-failure.staging",
+            "f-gate-attempt-0009-publisher-late-collision",
+            "f-gate-attempt-0009-publisher-late-collision.staging",
+            "f-gate-attempt-0009-render-plan-reread-mismatch",
+            "f-gate-attempt-0009-render-plan-write-failure",
+            "f-gate-attempt-0009-render-rejected-first-case",
+            "f-gate-attempt-0009-renderer-rejected-first-case",
+            "f-gate-attempt-0009-renderer-rejected-second-case",
+            "f-gate-attempt-0009-review-build-failure",
+            "f-gate-attempt-0009-review-fade-mismatch",
+            "f-gate-attempt-0009-review-id-mismatch",
+            "f-gate-attempt-0009-review-reread-failure",
+            "f-gate-attempt-0009-review-write-failure",
+            "f-gate-attempt-0009-work-video-missing"
+          ],
+          "permissions": {
+            "write": true,
+            "execute": true
+          }
+        }
+      },
+      {
+        "role": "proof-output-root",
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011",
+        "observed": {
+          "kind": "absent"
+        }
+      },
+      {
+        "role": "proof-staging-root",
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011.staging",
+        "observed": {
+          "kind": "absent"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "role": "run-root",
+        "operation": "create-directory"
+      },
+      {
+        "role": "fixture-root",
+        "operation": "create-directory"
+      },
+      {
+        "role": "output-parent",
+        "operation": "none"
+      },
+      {
+        "role": "proof-output-root",
+        "operation": "none"
+      },
+      {
+        "role": "proof-staging-root",
+        "operation": "none"
+      }
+    ],
+    "after": [
+      {
+        "role": "run-root",
+        "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011",
+        "observed": {
+          "kind": "directory",
+          "symbolicLink": false,
+          "entries": [
+            "fixtures"
+          ],
+          "permissions": {
+            "write": true,
+            "execute": true
+          }
+        }
+      },
+      {
+        "role": "fixture-root",
+        "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures",
+        "observed": {
+          "kind": "directory",
+          "symbolicLink": false,
+          "entries": [],
+          "permissions": {
+            "write": true,
+            "execute": true
+          }
+        }
+      },
+      {
+        "role": "output-parent",
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test",
+        "observed": {
+          "kind": "directory",
+          "symbolicLink": false,
+          "entries": [
+            "f-gate-attempt-0009",
+            "f-gate-attempt-0009-completion-reread-failure",
+            "f-gate-attempt-0009-completion-write-failure",
+            "f-gate-attempt-0009-fade-throw",
+            "f-gate-attempt-0009-failure-report-reread-failure.staging",
+            "f-gate-attempt-0009-failure-report-write-failure.staging",
+            "f-gate-attempt-0009-output-request-reread-io-failure",
+            "f-gate-attempt-0009-output-request-reread-mismatch",
+            "f-gate-attempt-0009-owner-mismatch",
+            "f-gate-attempt-0009-owner-missing",
+            "f-gate-attempt-0009-owner-permission",
+            "f-gate-attempt-0009-planner-rejected-first-case",
+            "f-gate-attempt-0009-publisher-helper-failure.staging",
+            "f-gate-attempt-0009-publisher-late-collision",
+            "f-gate-attempt-0009-publisher-late-collision.staging",
+            "f-gate-attempt-0009-render-plan-reread-mismatch",
+            "f-gate-attempt-0009-render-plan-write-failure",
+            "f-gate-attempt-0009-render-rejected-first-case",
+            "f-gate-attempt-0009-renderer-rejected-first-case",
+            "f-gate-attempt-0009-renderer-rejected-second-case",
+            "f-gate-attempt-0009-review-build-failure",
+            "f-gate-attempt-0009-review-fade-mismatch",
+            "f-gate-attempt-0009-review-id-mismatch",
+            "f-gate-attempt-0009-review-reread-failure",
+            "f-gate-attempt-0009-review-write-failure",
+            "f-gate-attempt-0009-work-video-missing"
+          ],
+          "permissions": {
+            "write": true,
+            "execute": true
+          }
+        }
+      },
+      {
+        "role": "proof-output-root",
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011",
+        "observed": {
+          "kind": "absent"
+        }
+      },
+      {
+        "role": "proof-staging-root",
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011.staging",
+        "observed": {
+          "kind": "absent"
+        }
+      }
+    ],
+    "failures": []
+  },
+  "verification": {
+    "schemaVersion": "presentation-zevo-caption-quality-v002-test-environment-verification-v001",
+    "status": "passed",
+    "observations": [
+      {
+        "role": "run-root",
+        "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011",
+        "observed": {
+          "kind": "directory",
+          "symbolicLink": false,
+          "entries": [
+            "fixtures"
+          ],
+          "permissions": {
+            "write": true,
+            "execute": true
+          }
+        }
+      },
+      {
+        "role": "fixture-root",
+        "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures",
+        "observed": {
+          "kind": "directory",
+          "symbolicLink": false,
+          "entries": [],
+          "permissions": {
+            "write": true,
+            "execute": true
+          }
+        }
+      },
+      {
+        "role": "output-parent",
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test",
+        "observed": {
+          "kind": "directory",
+          "symbolicLink": false,
+          "entries": [
+            "f-gate-attempt-0009",
+            "f-gate-attempt-0009-completion-reread-failure",
+            "f-gate-attempt-0009-completion-write-failure",
+            "f-gate-attempt-0009-fade-throw",
+            "f-gate-attempt-0009-failure-report-reread-failure.staging",
+            "f-gate-attempt-0009-failure-report-write-failure.staging",
+            "f-gate-attempt-0009-output-request-reread-io-failure",
+            "f-gate-attempt-0009-output-request-reread-mismatch",
+            "f-gate-attempt-0009-owner-mismatch",
+            "f-gate-attempt-0009-owner-missing",
+            "f-gate-attempt-0009-owner-permission",
+            "f-gate-attempt-0009-planner-rejected-first-case",
+            "f-gate-attempt-0009-publisher-helper-failure.staging",
+            "f-gate-attempt-0009-publisher-late-collision",
+            "f-gate-attempt-0009-publisher-late-collision.staging",
+            "f-gate-attempt-0009-render-plan-reread-mismatch",
+            "f-gate-attempt-0009-render-plan-write-failure",
+            "f-gate-attempt-0009-render-rejected-first-case",
+            "f-gate-attempt-0009-renderer-rejected-first-case",
+            "f-gate-attempt-0009-renderer-rejected-second-case",
+            "f-gate-attempt-0009-review-build-failure",
+            "f-gate-attempt-0009-review-fade-mismatch",
+            "f-gate-attempt-0009-review-id-mismatch",
+            "f-gate-attempt-0009-review-reread-failure",
+            "f-gate-attempt-0009-review-write-failure",
+            "f-gate-attempt-0009-work-video-missing"
+          ],
+          "permissions": {
+            "write": true,
+            "execute": true
+          }
+        }
+      },
+      {
+        "role": "proof-output-root",
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011",
+        "observed": {
+          "kind": "absent"
+        }
+      },
+      {
+        "role": "proof-staging-root",
+        "path": "evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-test/f-gate-attempt-0011.staging",
+        "observed": {
+          "kind": "absent"
+        }
+      }
+    ],
+    "failures": []
+  },
+  "preservationManifest": {
+    "schemaVersion": "presentation-zevo-caption-quality-v002-preservation-manifest-preflight-v001",
+    "status": "passed",
+    "expectationCount": 26,
+    "expectedLabels": [
+      "completion-reread-failure",
+      "completion-write-failure",
+      "fade-throw",
+      "failure-report-reread-failure",
+      "failure-report-write-failure",
+      "malformed-byte-envelope",
+      "output-request-reread-io-failure",
+      "output-request-reread-mismatch",
+      "owner-mismatch",
+      "owner-missing",
+      "owner-permission",
+      "planner-rejected-first-case",
+      "publisher-helper-failure",
+      "publisher-late-collision",
+      "render-plan-reread-mismatch",
+      "render-plan-write-failure",
+      "render-rejected-first-case",
+      "renderer-rejected-first-case",
+      "renderer-rejected-second-case",
+      "review-build-failure",
+      "review-fade-mismatch",
+      "review-id-mismatch",
+      "review-reread-failure",
+      "review-write-failure",
+      "root-reservation-collision",
+      "work-video-missing"
+    ],
+    "usedLabels": [
+      "completion-reread-failure",
+      "completion-write-failure",
+      "fade-throw",
+      "failure-report-reread-failure",
+      "failure-report-write-failure",
+      "malformed-byte-envelope",
+      "output-request-reread-io-failure",
+      "output-request-reread-mismatch",
+      "owner-mismatch",
+      "owner-missing",
+      "owner-permission",
+      "planner-rejected-first-case",
+      "publisher-helper-failure",
+      "publisher-late-collision",
+      "render-plan-reread-mismatch",
+      "render-plan-write-failure",
+      "render-rejected-first-case",
+      "renderer-rejected-first-case",
+      "renderer-rejected-second-case",
+      "review-build-failure",
+      "review-fade-mismatch",
+      "review-id-mismatch",
+      "review-reread-failure",
+      "review-write-failure",
+      "root-reservation-collision",
+      "work-video-missing"
+    ],
+    "preservationFileUniverse": [
+      "collision-marker.txt",
+      "completion-report-v001.json",
+      "fatal-observation-v001.json",
+      "rejection-report-v001.json",
+      "review/review-input-v001.json",
+      "review/review.html",
+      "voice-013/horizontal-formal/output-request-v001.json",
+      "voice-013/horizontal-formal/page-line-plan-v003.json",
+      "voice-013/horizontal-formal/render-plan-v003.json",
+      "voice-013/horizontal-formal/renderer-qc-v001.json",
+      "voice-013/horizontal-formal/video.mp4",
+      "voice-067/horizontal-formal/output-request-v001.json",
+      "voice-067/horizontal-formal/page-line-plan-v003.json",
+      "voice-067/horizontal-formal/render-plan-v003.json",
+      "voice-067/horizontal-formal/renderer-qc-v001.json",
+      "voice-067/horizontal-formal/video.mp4",
+      "voice-190/horizontal-formal/output-request-v001.json",
+      "voice-190/horizontal-formal/page-line-plan-v003.json",
+      "voice-190/horizontal-formal/render-plan-v003.json",
+      "voice-190/horizontal-formal/renderer-qc-v001.json",
+      "voice-190/horizontal-formal/video.mp4"
+    ],
+    "manifestCanonicalSha256": "5ed14b45f8618c3854fde3ec91fd1f3781f69cb2e3ad5130bca3618c4eff1f46",
+    "checks": {
+      "noExistenceConflict": true,
+      "allRootFileUniversesClosed": true,
+      "noUndeclaredAggregateRoot": true,
+      "noDuplicateNegativeUse": true
+    },
+    "failures": []
+  }
+}
