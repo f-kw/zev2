@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "presentation-rendering-decoupling-order-review-manifest-v001",
+  "status": "review-ready-with-side-by-side-comparisons",
+  "formalVerification": {
+    "expectedIdCount": 44,
+    "observedIdCount": 44,
+    "passedIdCount": 44,
+    "heldId": null,
+    "tapPath": "evals/clip_composition/reports/presentation/test-runs/20260818-rendering-decoupling-formal-44-attempt-0004/stdout.txt",
+    "tapSha256": "dea7825ec97b15d5acab7e3f9a3a1ddc41f22d686d4fa5a6aab1597ea7e263c1"
+  },
+  "sideBySideComparisonRun": {
+    "positionConvention": "old-left-new-right",
+    "processObservationRoot": "evals/clip_composition/reports/presentation/rendering-decoupling-order-review-20260818-v001/comparison-process-observations-v001",
+    "observedProcessCount": 14,
+    "passedProcessCount": 14,
+    "runnerSourceSha256": "0140cb64afba0db28c76f728f4fbd69c281bdf976f8d8c85ca0b1d019d422a79",
+    "runtimeBindings": {
+      "ffmpeg": {
+        "path": "/opt/homebrew/bin/ffmpeg",
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      "ffprobe": {
+        "path": "/opt/homebrew/bin/ffprobe",
+        "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+      }
+    }
+  },
+  "cases": [
+    {
+      "caseId": "voice-013-caption-landscape",
+      "orderPath": "evals/clip_composition/outputs/presentation/rendering-decoupling-caption-control/a-v002-voice-013-v006/presentation-instruction-v001.json",
+      "orderSha256": "a910896acef2f12e0aa61aaa5d4bd43224f0bfb4276cef07224539230b526e47",
+      "oldVideoPath": "evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs/a-v002-caption-quality-v022-proof-20260816-v003/voice-013/horizontal-formal/video.mp4",
+      "oldVideoSha256": "c7fc6c07fbd1ad94851e02774d735f4ef8da82052b67dc9afd8cd6100ef21811",
+      "newVideoPath": "evals/clip_composition/outputs/presentation/rendering-decoupling-caption-renders/a-v002-voice-013-v006/presentation-rendered-v002.mp4",
+      "newVideoSha256": "6b477c886cebabde3bca461613fa23cad8ca8f37b8875385d2f14e003d566036",
+      "sideBySideVideo": {
+        "path": "evals/clip_composition/reports/presentation/rendering-decoupling-order-review-20260818-v001/side-by-side-comparisons-v001/voice-013-caption-landscape-old-left-new-right.mp4",
+        "fileSha256": "6c7ae321d3a17ee9df57671bcd1205bef9d1f3f83aebcf8ec35a30ba4fdbf7c5",
+        "fileSize": 26982100,
+        "width": 3840,
+        "height": 1080,
+        "frameRate": "30/1",
+        "frameCount": 755,
+        "audioFrom": "old-video"
+      },
+      "qc": "passed",
+      "comparison": "cue text, cue end, frame, and all line boundaries exact; the 24/14 line split is restored"
+    },
+    {
+      "caseId": "candidate-59-title-landscape",
+      "orderPath": "evals/clip_composition/outputs/presentation/rendering-decoupling-title-control/qdczJpv8RCc-candidate-59-c-title-landscape-decoupled-v017/presentation-instruction-v001.json",
+      "orderSha256": "a13b83d9e50f8f5d5cea3cdf3c7f14fff88e295b35800b6e59553809c68eacb5",
+      "oldVideoPath": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-v009-output/title-rendered-v001.mp4",
+      "oldVideoSha256": "9ea78fa0a8105af78e755b429b1ae27d69537670d48953fbc5d0034b33764afe",
+      "newVideoPath": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-decoupled-v017-output/presentation-rendered-v002.mp4",
+      "newVideoSha256": "0aa5c83d7c407406eacd604abb337adf98d99913af962da85aebf0f4fe0ddd63",
+      "sideBySideVideo": {
+        "path": "evals/clip_composition/reports/presentation/rendering-decoupling-order-review-20260818-v001/side-by-side-comparisons-v001/candidate-59-title-landscape-old-left-new-right.mp4",
+        "fileSha256": "b9a4f73a4fe32807273b1923ed4d88231bf8e272fa8db55d58feae9af675f687",
+        "fileSize": 57404396,
+        "width": 3840,
+        "height": 1080,
+        "frameRate": "30/1",
+        "frameCount": 1547,
+        "audioFrom": "old-video"
+      },
+      "qc": "passed",
+      "comparison": "text, 180-frame title interval, one-line layout, and applied style exact"
+    },
+    {
+      "caseId": "candidate-59-title-vertical",
+      "orderPath": "evals/clip_composition/outputs/presentation/rendering-decoupling-title-control/qdczJpv8RCc-candidate-59-c-title-vertical-decoupled-v017/presentation-instruction-v001.json",
+      "orderSha256": "39569939e441bfd80e328457db195e4e55891f9d932b136a9838891097820bab",
+      "oldVideoPath": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v009-output/title-rendered-v001.mp4",
+      "oldVideoSha256": "fcc9f91e879377baedfb2a4fa30036fac272ac15b6223d9006584309e166a396",
+      "newVideoPath": "evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-decoupled-v017-output/presentation-rendered-v002.mp4",
+      "newVideoSha256": "889fb29ac65860528bb70f06c404d236b10dc3e491d7e1d13c85310e578bb890",
+      "sideBySideVideo": {
+        "path": "evals/clip_composition/reports/presentation/rendering-decoupling-order-review-20260818-v001/side-by-side-comparisons-v001/candidate-59-title-vertical-old-left-new-right.mp4",
+        "fileSha256": "bccac67067157738cf14bbf7f969af1eccb5647b709cdd900687267606cc30e0",
+        "fileSize": 60996872,
+        "width": 2160,
+        "height": 1920,
+        "frameRate": "30/1",
+        "frameCount": 1547,
+        "audioFrom": "old-video"
+      },
+      "qc": "passed",
+      "comparison": "text, 180-frame title interval, 11/8-code-point two-line layout, and applied style exact"
+    }
+  ]
+}

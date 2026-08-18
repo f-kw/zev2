@@ -32,39 +32,37 @@ import {
   validatePresentationOutputRenderQcV001,
 } from './presentation_output_render_plan_v001.mjs';
 import {
-  evaluatePresentationRendererQcWithProfileV001,
   inspectRenderedMediaWithToolsV001,
 } from './presentation_renderer_qc_v002.mjs';
+import {
+  createPresentationRendererProcessObserverV001,
+} from './presentation_renderer_process_observation_v001.mjs';
 import {
   buildPresentationFatalObservationV002,
   classifyPresentationFatalInnerCodeV002,
 } from './presentation_fatal_observation_v002.mjs';
 import {
-  commitValidatedPresentationArtifactsV002,
-  executeValidatedPresentationDrawAndQcV001,
-} from './render_presentation_v002.mjs';
-import {
-  ZEVO_TITLE_DISPLAY_PLAN_SCHEMA_V001,
   ZEVO_TITLE_IMPLEMENTATION_BINDINGS_V001,
   ZEVO_TITLE_OUTPUT_JOB_SCHEMA_V001,
-  ZEVO_TITLE_OUTPUT_MANIFEST_SCHEMA_V001,
-  ZEVO_TITLE_OUTPUT_QC_SCHEMA_V001,
-  ZEVO_TITLE_RENDERER_EVIDENCE_SCHEMA_V001,
-  buildZevoTitleCommonCorePlanV001,
-  buildZevoTitleDisplayPlanV001,
-  buildZevoTitleOutputManifestV001,
-  buildZevoTitleOutputQcV001,
-  buildZevoTitleRendererEvidenceV001,
   canonicalSha256ZevoTitleJsonV001,
   serializeZevoTitleFormalJsonV001,
-  validateZevoTitleDisplayPlanV001,
   validateZevoTitleMeaningReplacementV001,
   validateZevoTitleOutputJobV001,
-  validateZevoTitleOutputManifestV001,
-  validateZevoTitleOutputQcV001,
-  validateZevoTitleRendererEvidenceV001,
   validateZevoTitleStyleRegistryV001,
 } from './presentation_output_title_compositor_v001.mjs';
+import {
+  buildPresentationInstructionArtifactBindingV001,
+  buildPresentationTitleInstructionArtifactV001,
+  serializePresentationInstructionArtifactV001,
+} from './presentation_instruction_artifact_v001.mjs';
+import {
+  serializePresentationInstructionRendererJobV001,
+} from './presentation_renderer_admission_receipt_v001.mjs';
+import {
+  PRESENTATION_INSTRUCTION_RENDERER_CONTRACT_ROLE_PATHS_V001,
+  PRESENTATION_INSTRUCTION_RENDERER_IMPLEMENTATION_ROLE_PATHS_V001,
+  runPresentationInstructionRendererJobFileV001,
+} from './run_presentation_instruction_renderer_job_v001.ts';
 
 const MODULE_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
 const WORKSPACE_ROOT = path.resolve(MODULE_DIRECTORY, '../..');
@@ -75,6 +73,8 @@ export const ZEVO_TITLE_OUTPUT_JOB_ROOT_V001 =
   'evals/clip_composition/outputs/presentation/title-output-jobs';
 export const ZEVO_TITLE_OUTPUT_ROOT_V001 =
   'evals/clip_composition/outputs/presentation/title-output-renders';
+export const ZEVO_TITLE_RENDERING_DECOUPLING_CONTROL_ROOT_V001 =
+  'evals/clip_composition/outputs/presentation/rendering-decoupling-title-control';
 export const ZEVO_TITLE_OUTPUT_ARTIFACT_NAMES_V001 = Object.freeze({
   video: 'title-rendered-v001.mp4',
   overlays: 'overlays',
@@ -93,6 +93,17 @@ const TITLE_MEANING_ROOT =
 const TITLE_STYLE_REGISTRY_PATH =
   'evals/clip_composition/registries/presentation/'
   + 'zevo-title-style-registry-v004/registry.json';
+const RENDERER_TRUST_V002_PATH =
+  'evals/clip_composition/registries/presentation/'
+  + 'presentation-renderer-trust-v002/trust.json';
+const RENDERER_RUNTIME_PATHS_V001 = Object.freeze({
+  ffmpeg: '/opt/homebrew/bin/ffmpeg',
+  ffprobe: '/opt/homebrew/bin/ffprobe',
+  imageMagick: '/opt/homebrew/bin/magick',
+  remotion: '/Users/kawafmm/workspace/zev2/runner/node_modules/@remotion/cli/remotion-cli.js',
+  tsx: '/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs',
+  chromium: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+});
 const RUNTIME_ROLES = Object.freeze([
   'node', 'tsx', 'remotion', 'browser', 'ffmpeg', 'ffprobe', 'imageMagick',
 ]);
@@ -120,6 +131,7 @@ const isObject = value => value !== null && typeof value === 'object'
 const singleRegular = value => value.isFile()
   && !value.isSymbolicLink()
   && value.nlink === 1n;
+const runtimeRegular = value => value.isFile() && !value.isSymbolicLink();
 const sameIdentity = (left, right) => left.dev === right.dev
   && left.ino === right.ino
   && left.size === right.size
@@ -262,17 +274,23 @@ const observeJsonBinding = async (workspaceRoot, binding) => {
   return {binding, bytes, value};
 };
 
-const streamHashAbsoluteStable = async absolutePath => {
+const streamHashAbsoluteStable = async (
+  absolutePath,
+  {requireSingleLink = true} = {},
+) => {
+  const accepted = value => requireSingleLink
+    ? singleRegular(value)
+    : runtimeRegular(value);
   const resolved = await realpath(absolutePath);
   const beforePath = await lstat(resolved, {bigint: true});
-  if (!singleRegular(beforePath)) throw new Error('stream-file-unsafe');
+  if (!accepted(beforePath)) throw new Error('stream-file-unsafe');
   const handle = await open(resolved, 'r');
   let beforeHandle;
   let afterHandle;
   const digest = createHash('sha256');
   try {
     beforeHandle = await handle.stat({bigint: true});
-    if (!singleRegular(beforeHandle) || !sameIdentity(beforePath, beforeHandle)) {
+    if (!accepted(beforeHandle) || !sameIdentity(beforePath, beforeHandle)) {
       throw new Error('stream-file-unstable');
     }
     await new Promise((resolve, reject) => {
@@ -282,14 +300,14 @@ const streamHashAbsoluteStable = async absolutePath => {
       stream.once('error', reject);
     });
     afterHandle = await handle.stat({bigint: true});
-    if (!singleRegular(afterHandle) || !sameIdentity(beforeHandle, afterHandle)) {
+    if (!accepted(afterHandle) || !sameIdentity(beforeHandle, afterHandle)) {
       throw new Error('stream-file-unstable');
     }
   } finally {
     await handle.close();
   }
   const afterPath = await lstat(resolved, {bigint: true});
-  if (!singleRegular(afterPath) || !sameIdentity(afterHandle, afterPath)
+  if (!accepted(afterPath) || !sameIdentity(afterHandle, afterPath)
     || await realpath(absolutePath) !== resolved) {
     throw new Error('stream-file-unstable');
   }
@@ -310,7 +328,8 @@ const observeWorkspaceMediaBinding = async (workspaceRoot, binding) => {
 
 const observeRuntimeBinding = async binding => {
   const resolved = await realpath(binding.path);
-  if (await streamHashAbsoluteStable(resolved) !== binding.fileSha256
+  if (await streamHashAbsoluteStable(resolved, {requireSingleLink: false})
+      !== binding.fileSha256
     || await realpath(binding.path) !== resolved) {
     throw new Error('runtime-binding-mismatch');
   }
@@ -350,6 +369,56 @@ const writeFormalExclusive = async (absolutePath, value) => {
   await writeFile(absolutePath, bytes, {flag: 'wx'});
   return bytes;
 };
+
+const writeFormalBytesExclusive = async (absolutePath, bytes) => {
+  await writeFile(absolutePath, bytes, {flag: 'wx', mode: 0o444});
+  return bytes;
+};
+
+export function deriveZevoTitleRenderingDecouplingPathsV001(job) {
+  const controlRoot = `${ZEVO_TITLE_RENDERING_DECOUPLING_CONTROL_ROOT_V001}/${job.jobId}`;
+  return Object.freeze({
+    controlRoot,
+    instructionArtifactPath: `${controlRoot}/presentation-instruction-v001.json`,
+    rendererJobPath: `${controlRoot}/renderer-job-v001.json`,
+    admissionReceiptPath: `${controlRoot}/admission-receipt-v001.json`,
+    lineLayoutPath: `${controlRoot}/line-layout-v001.json`,
+    renderOutputRoot: job.publication.outputRoot,
+  });
+}
+
+const buildRuntimeBindingsV001 = async () => Object.freeze(Object.fromEntries(
+  await Promise.all(Object.entries(RENDERER_RUNTIME_PATHS_V001).map(
+    async ([role, runtimePath]) => [role, Object.freeze({
+      path: runtimePath,
+      fileSha256: await streamHashAbsoluteStable(runtimePath, {requireSingleLink: false}),
+    })],
+  )),
+));
+
+const buildRendererImplementationBindingsV001 = async workspaceRoot => Object.freeze(
+  await Promise.all(PRESENTATION_INSTRUCTION_RENDERER_IMPLEMENTATION_ROLE_PATHS_V001.map(
+    async ([role, implementationPath]) => {
+      const observed = await observePresentationMeaningWorkspaceFileStableStreamingV001({
+        workspaceRoot,
+        relativePath: implementationPath,
+      });
+      return Object.freeze({role, path: implementationPath, fileSha256: observed.fileSha256});
+    },
+  )),
+);
+
+const buildApprovedContractBindingsV001 = async workspaceRoot => Object.freeze(
+  await Promise.all(PRESENTATION_INSTRUCTION_RENDERER_CONTRACT_ROLE_PATHS_V001.map(
+    async ([role, contractPath]) => {
+    const observed = await observePresentationMeaningWorkspaceFileStableStreamingV001({
+      workspaceRoot,
+      relativePath: contractPath,
+    });
+    return Object.freeze({role, path: contractPath, fileSha256: observed.fileSha256});
+    },
+  )),
+);
 
 const verifySourceClosure = ({
   job,
@@ -579,6 +648,15 @@ export async function runZevoTitleOutputJobV001({
       jobBytes,
       job,
     );
+    const processObserver = createPresentationRendererProcessObserverV001({
+      observationDirectory: path.resolve(
+        workspaceRoot,
+        path.posix.dirname(jobPath),
+        'process-observations',
+        job.jobId,
+        'title-source',
+      ),
+    });
     innerStage = 'runner-bootstrap';
     await verifyRuntimeTopology(await realpath(workspaceRoot), job.runtimeProfile);
     for (const role of RUNTIME_ROLES) await observeRuntimeBinding(job.runtimeProfile[role]);
@@ -661,9 +739,18 @@ export async function runZevoTitleOutputJobV001({
       {
         ffmpegPath: job.runtimeProfile.ffmpeg.path,
         ffprobePath: job.runtimeProfile.ffprobe.path,
+        processObserver,
+        observationLabelPrefix: 'title-source-media-inspection',
       },
     );
-    const profile = registry.profiles.find(candidate => candidate.profileId === job.profileId);
+    const profiles = registry.profiles.filter(candidate => candidate.profileId === job.profileId);
+    const profile = profiles.length === 1 ? profiles[0] : null;
+    if (profile === null || !isObject(profile.visualState)
+      || !FORMAL_ID.test(profile.visualState.stateId)) {
+      return {exitCode: 1, result: fixedFailure(
+        'rejected', 'input-validation', 'TITLE_OUTPUT_INPUT_INVALID',
+      )};
+    }
     if (!sourceMedia.video || !sourceMedia.audio
       || sourceMedia.video.width !== profile.canvas.width
       || sourceMedia.video.height !== profile.canvas.height
@@ -680,200 +767,133 @@ export async function runZevoTitleOutputJobV001({
       )};
     }
 
-    innerStage = 'layout-preflight';
-    const planResult = buildZevoTitleDisplayPlanV001({
-      job,
-      jobBinding,
-      registry,
-      sourceMeaningPackage: sourceMeaningInput.value,
-      titleMeaningPackage,
+    innerStage = 'instruction-publication';
+    const paths = deriveZevoTitleRenderingDecouplingPathsV001(job);
+    const instructionBuilt = buildPresentationTitleInstructionArtifactV001({
+      artifactId: `${job.jobId}-instruction-v001`,
+      sourceCaseId: titleMeaningPackage.packageId,
+      meaningInformationPackageBinding: job.titleMeaningPackageBinding,
+      producerJobBinding: jobBinding,
+      styleProfileId: job.profileId,
+      displayFrameRange: profile.displayFrameRange,
+      meaningPackage: titleMeaningPackage,
     });
-    if (planResult.status !== 'built') {
+    if (instructionBuilt.status !== 'built') {
       return {exitCode: 1, result: fixedFailure(
-        'rejected', 'title-plan', 'TITLE_OUTPUT_PLAN_REJECTED',
+        'rejected', 'instruction-publication', 'TITLE_OUTPUT_INSTRUCTION_REJECTED',
       )};
     }
-    const plan = planResult.plan;
-    const common = buildZevoTitleCommonCorePlanV001({plan, registry});
-    if (common.status !== 'built') {
-      return {exitCode: 1, result: fixedFailure(
-        'rejected', 'title-plan', 'TITLE_OUTPUT_PLAN_REJECTED',
-      )};
-    }
+    const instructionBytes = serializePresentationInstructionArtifactV001(
+      instructionBuilt.artifact,
+    );
+    await writeFormalBytesExclusive(
+      await workspaceAbsolute(workspaceRoot, paths.instructionArtifactPath),
+      instructionBytes,
+    );
+    const instructionArtifactBinding = buildPresentationInstructionArtifactBindingV001({
+      path: paths.instructionArtifactPath,
+      artifact: instructionBuilt.artifact,
+    });
 
-    const outputAbsolute = await workspaceAbsolute(workspaceRoot, job.publication.outputRoot);
-    innerStage = 'overlay-render';
-    const draw = await executeValidatedPresentationDrawAndQcV001({
-      outputDirectory: outputAbsolute,
-      plan: common.plan,
-      presetRegistry: registry,
-      baseMediaPath: sourceVideoInput.absolutePath,
-      baseMediaInspection: {media: sourceMedia},
-      expectedFrameCount: sourceMedia.video.frameCount,
-      artifactNames: ZEVO_TITLE_OUTPUT_ARTIFACT_NAMES_V001,
-      evaluateQc: input => evaluatePresentationRendererQcWithProfileV001(
-        input,
-        {
-          schemaVersion: 'presentation-render-qc-v002',
-          planFile: ZEVO_TITLE_OUTPUT_ARTIFACT_NAMES_V001.plan,
-        },
+    innerStage = 'renderer-job-publication';
+    const trustInput = await observeJsonBinding(workspaceRoot, {
+      schemaVersion: 'presentation-renderer-trust-v002',
+      path: RENDERER_TRUST_V002_PATH,
+      fileSha256: hash(await readFile(await workspaceAbsolute(workspaceRoot, RENDERER_TRUST_V002_PATH))),
+      canonicalSha256: canonicalSha256ZevoTitleJsonV001(
+        decodeFormal(await readFile(await workspaceAbsolute(workspaceRoot, RENDERER_TRUST_V002_PATH))),
       ),
-      toolPaths: {
-        ffmpegPath: job.runtimeProfile.ffmpeg.path,
-        ffprobePath: job.runtimeProfile.ffprobe.path,
-        imageMagickPath: job.runtimeProfile.imageMagick.path,
-        tsxPath: job.runtimeProfile.tsx.path,
-        layoutInspectorPath: path.join(
-          await realpath(workspaceRoot),
-          'evals/clip_composition/inspect_presentation_render_layout_v001.ts',
+    });
+    const trustBinding = jsonBindingFor(
+      trustInput.value.schemaVersion,
+      RENDERER_TRUST_V002_PATH,
+      trustInput.bytes,
+      trustInput.value,
+    );
+    const rendererJob = {
+      schemaVersion: 'presentation-instruction-renderer-job-v001',
+      jobId: `${job.jobId}-instruction-render-v001`,
+      attemptId: 'attempt-0001',
+      instructionArtifactBinding,
+      lineEndProjectionBinding: null,
+      cropAppliedBaseMedia: {
+        baseMedia: structuredClone(job.sourceOutput.video),
+        timeline: structuredClone(sourceManifest.baseMediaBinding.timeline),
+        generationManifest: structuredClone(sourceManifest.baseMediaBinding.generationManifest),
+        validationReceipt: structuredClone(sourceManifest.baseMediaBinding.validationReceipt),
+      },
+      executionInputs: {
+        format: profile.format,
+        canvas: structuredClone(profile.canvas),
+        screenLayoutId: sourceRequestInput.value.styleInput.screenLayoutId,
+        visualStateId: profile.visualState.stateId,
+        cropPolicy: {mode: 'already-applied'},
+        sceneTransitionPolicy: {mode: 'straight-cut'},
+        audioPolicy: {mode: 'preserve-source'},
+        lineLayoutRules: {
+          'speech-caption': 'semantic-line-end-projection-v001',
+          title: 'greedy-code-point-v001',
+        },
+      },
+      registryBindings: {
+        styleProfileRegistry: structuredClone(job.styleRegistryBinding),
+        materialRegistry: structuredClone(
+          sourceRequestInput.value.styleInput.presetBinding.materialValidationIndex,
         ),
+        fontLedger: {
+          ...structuredClone(trustBinding),
+          jsonPointer: '/fontAssets',
+          valueCanonicalSha256: canonicalSha256ZevoTitleJsonV001(
+            trustInput.value.fontAssets,
+          ),
+        },
+        rendererTrust: structuredClone(trustBinding),
       },
-    });
-    if (draw.exitCode !== 0) {
-      const fatalObservation = draw.exitCode === 2
-        ? trustedProcessFatalObservation(draw.presentationFatalProcessEvidence)
-        : null;
-      return {exitCode: draw.exitCode === 1 ? 1 : 2, result: fixedFailure(
-        draw.exitCode === 1 ? 'rejected' : 'fatal',
-        typeof draw.failure?.stage === 'string' ? draw.failure.stage : 'render',
-        draw.exitCode === 1
-          ? 'TITLE_OUTPUT_RENDER_REJECTED'
-          : 'TITLE_OUTPUT_RENDER_FATAL',
-        fatalObservation,
-      )};
-    }
+      runtimeBindings: await buildRuntimeBindingsV001(),
+      rendererImplementationBindings: await buildRendererImplementationBindingsV001(
+        workspaceRoot,
+      ),
+      approvedContractBindings: await buildApprovedContractBindingsV001(workspaceRoot),
+      publication: {
+        admissionReceiptPath: paths.admissionReceiptPath,
+        lineLayoutPath: paths.lineLayoutPath,
+        renderOutputRoot: paths.renderOutputRoot,
+      },
+    };
+    const rendererJobBytes = serializePresentationInstructionRendererJobV001(rendererJob);
+    await writeFormalBytesExclusive(
+      await workspaceAbsolute(workspaceRoot, paths.rendererJobPath),
+      rendererJobBytes,
+    );
+    const rendererJobBinding = jsonBindingFor(
+      rendererJob.schemaVersion,
+      paths.rendererJobPath,
+      rendererJobBytes,
+      rendererJob,
+    );
 
-    innerStage = 'formal-serialization';
-    const names = ZEVO_TITLE_OUTPUT_ARTIFACT_NAMES_V001;
-    const planPath = `${job.publication.outputRoot}/${names.plan}`;
-    const evidencePath = `${job.publication.outputRoot}/${names.applicationResults}`;
-    const qcPath = `${job.publication.outputRoot}/${names.qc}`;
-    const manifestPath = `${job.publication.outputRoot}/${names.manifest}`;
-    const videoPath = `${job.publication.outputRoot}/${names.video}`;
-    const planBytes = serializeZevoTitleFormalJsonV001(plan);
-    const planBinding = jsonBindingFor(
-      ZEVO_TITLE_DISPLAY_PLAN_SCHEMA_V001, planPath, planBytes, plan,
+    innerStage = 'instruction-renderer';
+    const rendererExecution = await runPresentationInstructionRendererJobFileV001(
+      paths.rendererJobPath,
+      {workspaceRoot},
     );
-    const evidenceResult = buildZevoTitleRendererEvidenceV001({
-      plan,
-      planBinding,
-      applicationResults: draw.applicationResults,
-      rendererQc: draw.finalQc,
-    });
-    if (evidenceResult.status !== 'built') throw new Error('renderer-evidence-invalid');
-    const rendererEvidence = evidenceResult.evidence;
-    const evidenceBytes = serializeZevoTitleFormalJsonV001(rendererEvidence);
-    const rendererEvidenceBinding = jsonBindingFor(
-      ZEVO_TITLE_RENDERER_EVIDENCE_SCHEMA_V001,
-      evidencePath,
-      evidenceBytes,
-      rendererEvidence,
-    );
-    const outputVideoSha256 = await streamHashAbsoluteStable(draw.workVideo);
-    const outputVideo = mediaBindingFor(videoPath, outputVideoSha256);
-    const qcResult = buildZevoTitleOutputQcV001({
-      job,
-      jobBinding,
-      plan,
-      planBinding,
-      rendererEvidenceBinding,
-      rendererEvidence,
-      outputVideo,
-      sourceMedia: {
-        frameCount: sourceMedia.video.frameCount,
-        audioPacketPayloadSha256: sourceMedia.audio.packetPayloadSha256,
-      },
-      outputMedia: {
-        frameCount: draw.outputMedia.video?.frameCount,
-        audioPacketPayloadSha256: draw.outputMedia.audio?.packetPayloadSha256,
-      },
-    });
-    if (qcResult.status !== 'built') throw new Error('title-qc-invalid');
-    const qc = qcResult.qc;
-    const qcBytes = serializeZevoTitleFormalJsonV001(qc);
-    const qcBinding = jsonBindingFor(ZEVO_TITLE_OUTPUT_QC_SCHEMA_V001, qcPath, qcBytes, qc);
-    const manifestResult = buildZevoTitleOutputManifestV001({
-      job,
-      jobBinding,
-      planBinding,
-      rendererEvidenceBinding,
-      qcBinding,
-      qc,
-    });
-    if (manifestResult.status !== 'built') throw new Error('title-manifest-invalid');
-    const manifest = manifestResult.manifest;
-
-    await writeFormalExclusive(path.join(draw.stagingDirectory, names.plan), plan);
-    await writeFormalExclusive(
-      path.join(draw.stagingDirectory, names.applicationResults),
-      rendererEvidence,
-    );
-    await writeFormalExclusive(path.join(draw.stagingDirectory, names.qc), qc);
-    await writeFormalExclusive(path.join(draw.stagingDirectory, names.manifest), manifest);
-    if (!validateZevoTitleDisplayPlanV001(plan, {
-      job,
-      registry,
-      sourceMeaningPackage: sourceMeaningInput.value,
-      titleMeaningPackage,
-    })
-      || !validateZevoTitleRendererEvidenceV001(rendererEvidence, {plan})
-      || !validateZevoTitleOutputQcV001(qc, {job, plan, outputId: job.outputId})
-      || !validateZevoTitleOutputManifestV001(manifest, {job, qc})) {
-      throw new Error('title-output-postcondition-failed');
+    if (rendererExecution.exitCode !== 0) {
+      return {exitCode: rendererExecution.exitCode, result: rendererExecution.result};
     }
-    await verifyStaging({
-      stagingDirectory: draw.stagingDirectory,
-      documents: new Map([
-        [names.plan, plan],
-        [names.applicationResults, rendererEvidence],
-        [names.qc, qc],
-        [names.manifest, manifest],
-      ]),
-      rendererEvidence,
-    });
+    innerStage = 'input-reread';
     await rereadTracked({
       workspaceRoot,
       tracked: trackedBindingsFor({job, jobBinding, sourceManifest}),
       job,
     });
-    await verifyRegistryAssets(workspaceRoot, registry);
-    innerStage = 'publication';
-    let publication;
-    try {
-      publication = await commitValidatedPresentationArtifactsV002({
-        stagingDirectory: draw.stagingDirectory,
-        outputDirectory: outputAbsolute,
-        reservation: draw.reservation,
-      });
-    } catch {
-      const closedError = new Error('closed-publication-failure');
-      Object.defineProperty(closedError, 'presentationFatalEvidence', {
-        configurable: false,
-        enumerable: false,
-        writable: false,
-        value: {kind: 'publication-failed'},
-      });
-      throw closedError;
-    }
-    if (publication.status !== 'published') throw new Error('title-output-publish-failed');
-    const manifestBytes = await readPresentationMeaningWorkspaceFileStableV001({
-      workspaceRoot,
-      relativePath: manifestPath,
-    });
-    if (!manifestBytes.equals(serializeZevoTitleFormalJsonV001(manifest))) {
-      throw new Error('published-manifest-changed');
-    }
     return {
       exitCode: 0,
       result: {
         schemaVersion: 'zevo-title-output-runner-result-v001',
         status: 'passed',
-        manifestBinding: jsonBindingFor(
-          ZEVO_TITLE_OUTPUT_MANIFEST_SCHEMA_V001,
-          manifestPath,
-          manifestBytes,
-          manifest,
-        ),
+        instructionArtifactBinding,
+        rendererJobBinding,
+        rendererResult: rendererExecution.result,
       },
     };
   } catch (error) {
@@ -902,15 +922,7 @@ const main = async () => {
     return;
   }
   const execution = await runZevoTitleOutputJobV001({jobPath: launch.jobPath});
-  if (execution.exitCode === 0) {
-    const manifestBytes = await readPresentationMeaningWorkspaceFileStableV001({
-      workspaceRoot: WORKSPACE_ROOT,
-      relativePath: execution.result.manifestBinding.path,
-    });
-    process.stdout.write(manifestBytes);
-  } else {
-    process.stdout.write(serializeZevoTitleFormalJsonV001(execution.result));
-  }
+  process.stdout.write(serializeZevoTitleFormalJsonV001(execution.result));
   process.exitCode = execution.exitCode;
 };
 

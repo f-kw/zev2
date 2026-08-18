@@ -150,7 +150,7 @@ const presentationRendererChildProcessErrorV001 = ({
   return error;
 };
 
-export const runPresentationRendererChildProcessV001 = (
+const runPresentationRendererChildProcessUnobservedV001 = (
   command,
   args,
   options = {},
@@ -197,6 +197,44 @@ export const runPresentationRendererChildProcessV001 = (
     }
   });
 });
+
+export const runPresentationRendererChildProcessV001 = async (
+  command,
+  args,
+  options = {},
+) => {
+  if (options.processObserver === undefined || options.processObserver === null) {
+    return runPresentationRendererChildProcessUnobservedV001(command, args, options);
+  }
+  try {
+    return await options.processObserver.run(command, args, {
+      cwd: options.cwd ?? WORKSPACE_ROOT,
+      env: {...process.env, TMPDIR: '/private/tmp', ...(options.env ?? {})},
+      allowedExitCodes: options.allowedExitCodes ?? [0],
+      observationLabel: options.observationLabel,
+    });
+  } catch (error) {
+    const result = error?.processResult ?? null;
+    const spawnErrorCode = error?.spawnErrorCode ?? null;
+    const innerCode = classifyPresentationFatalInnerCodeV002(
+      ['EPERM', 'EACCES'].includes(spawnErrorCode)
+        ? {kind: 'node-error', code: spawnErrorCode}
+        : {kind: 'child-process', event: result === null
+          ? 'spawn-failed'
+          : result.signal === null ? 'exit-nonzero' : 'signalled'},
+    );
+    const rendererViolationCode = result === null
+      ? null
+      : classifyPresentationRenderErrorV002(
+        `${result.stderr.toString()}${result.stdout.toString()}`,
+      );
+    throw presentationRendererChildProcessErrorV001({
+      innerStage: options.fatalInnerStage ?? 'unknown',
+      innerCode,
+      rendererViolationCode,
+    });
+  }
+};
 
 /** レンダラーが成果物を書き始める前のcommitと作業木状態を記録する。 */
 export const inspectGitStateV001 = async () => {
@@ -485,12 +523,14 @@ export const inspectFrameCountWithToolV001 = async (
   filePath,
   ffprobePath,
   fatalInnerStage = 'input-read',
+  processObserver = null,
+  observationLabel = 'frame-count-inspection',
 ) => {
   if (!isNonEmptyString(ffprobePath)) throw new TypeError('ffprobePath is required');
   const result = await runPresentationRendererChildProcessV001(ffprobePath, [
     '-v', 'error', '-count_frames', '-select_streams', 'v:0',
     '-show_entries', 'stream=nb_read_frames', '-of', 'json', filePath,
-  ], {fatalInnerStage});
+  ], {fatalInnerStage, processObserver, observationLabel});
   const parsed = JSON.parse(result.stdout.toString());
   return Number(parsed.streams?.[0]?.nb_read_frames);
 };
@@ -720,20 +760,68 @@ const overlayPropsFor = (element, plan, presetRegistry) => {
   };
 };
 
-const renderOverlayStill = async (props, outputPath) => {
-  await runPresentationRendererChildProcessV001(REMOTION_BIN, [
+const renderOverlayStillWithRuntimeV001 = async ({
+  props,
+  outputPath,
+  remotionPath,
+  chromiumPath,
+  processObserver = null,
+  observationLabel = 'overlay-still',
+}) => {
+  await runPresentationRendererChildProcessV001(remotionPath, [
     'still', REMOTION_ENTRY, 'PresentationOverlayV001', outputPath,
     '--props', JSON.stringify(props),
     '--image-format', 'png',
     '--public-dir', REMOTION_PUBLIC,
-    '--browser-executable', CHROME_BIN,
+    '--browser-executable', chromiumPath,
     '--log', 'error',
   ], {
     cwd: WORKSPACE_ROOT,
     env: {NODE_PATH: RENDER_NODE_MODULES},
     fatalInnerStage: 'overlay-render',
+    processObserver,
+    observationLabel,
   });
 };
+
+const renderOverlayStill = async (props, outputPath) => renderOverlayStillWithRuntimeV001({
+  props,
+  outputPath,
+  remotionPath: REMOTION_BIN,
+  chromiumPath: CHROME_BIN,
+});
+
+export function buildPresentationRendererOverlayAdapterV001({
+  remotionPath,
+  chromiumPath,
+  processObserver,
+}) {
+  if (!path.isAbsolute(remotionPath) || !path.isAbsolute(chromiumPath)) {
+    throw new TypeError('renderer overlay runtime paths must be absolute');
+  }
+  if (!isObject(processObserver) || typeof processObserver.run !== 'function') {
+    throw new TypeError('renderer overlay process observer is required');
+  }
+  return Object.freeze({
+    buildProps: overlayPropsFor,
+    renderStill: (props, outputPath) => renderOverlayStillWithRuntimeV001({
+      props,
+      outputPath,
+      remotionPath,
+      chromiumPath,
+      processObserver,
+      observationLabel: 'overlay-still',
+    }),
+    renderLineMask: (props, lineIndex, outputPath) => renderOverlayStillWithRuntimeV001({
+      props: {...props, inspectionLineIndex: lineIndex},
+      outputPath,
+      remotionPath,
+      chromiumPath,
+      processObserver,
+      observationLabel: 'overlay-line-mask',
+    }),
+  });
+}
 
 /** Remotionの失敗文を未知失敗へ丸めず、既知のfont失敗だけを固定コードへ分類する。 */
 export function classifyPresentationRenderErrorV002(error) {
@@ -759,7 +847,13 @@ export function validateOverlayDeterminismV002(firstSha256, secondSha256, instru
   };
 }
 
-const imageDifferencePixelsWithinBounds = async (leftPath, rightPath, bounds, imageMagickPath = 'magick') => {
+const imageDifferencePixelsWithinBounds = async (
+  leftPath,
+  rightPath,
+  bounds,
+  imageMagickPath = 'magick',
+  processObserver = null,
+) => {
   const width = bounds.right - bounds.left;
   const height = bounds.bottom - bounds.top;
   if (![bounds.left, bounds.top, width, height].every(Number.isInteger) || width <= 0 || height <= 0) {
@@ -774,17 +868,29 @@ const imageDifferencePixelsWithinBounds = async (leftPath, rightPath, bounds, im
   ], {
     allowedExitCodes: [0, 1],
     fatalInnerStage: 'post-render-qc',
+    processObserver,
+    observationLabel: 'qc-image-difference',
   });
   const value = Number(result.stderr.toString().trim().split(/\s+/)[0]);
   if (!Number.isFinite(value)) throw new Error('bounded image difference could not be parsed');
   return value;
 };
 
-const extractFrame = async (inputPath, frame, outputPath, ffmpegPath = 'ffmpeg') => {
+const extractFrame = async (
+  inputPath,
+  frame,
+  outputPath,
+  ffmpegPath = 'ffmpeg',
+  processObserver = null,
+) => {
   await runPresentationRendererChildProcessV001(ffmpegPath, [
     '-hide_banner', '-loglevel', 'error', '-y', '-i', inputPath,
     '-vf', `select=eq(n\\,${frame})`, '-frames:v', '1', outputPath,
-  ], {fatalInnerStage: 'post-render-qc'});
+  ], {
+    fatalInnerStage: 'post-render-qc',
+    processObserver,
+    observationLabel: 'qc-frame-extract',
+  });
 };
 
 const composite = async ({
@@ -795,6 +901,8 @@ const composite = async ({
   outputPath,
   ffmpegPath = 'ffmpeg',
   fatalInnerStage = 'overlay-render',
+  processObserver = null,
+  observationLabel = 'video-composite',
 }) => {
   const args = ['-hide_banner', '-loglevel', 'error', '-y', '-i', baseMediaPath];
   for (const record of overlayRecords) {
@@ -827,6 +935,8 @@ const composite = async ({
   );
   await runPresentationRendererChildProcessV001(ffmpegPath, args, {
     fatalInnerStage,
+    processObserver,
+    observationLabel,
   });
 };
 
@@ -1341,6 +1451,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
   overlayAdapter = DEFAULT_PRESENTATION_OVERLAY_ADAPTER_V001,
   toolPaths = DEFAULT_PRESENTATION_DRAW_TOOL_PATHS_V001,
   validatedLayoutInspection = null,
+  processObserver = null,
 }) {
   if (
     !isObject(overlayAdapter)
@@ -1423,6 +1534,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
           allowedExitCodes: [0, 1],
           env: {NODE_PATH: RENDER_NODE_MODULES},
           fatalInnerStage: 'layout-preflight',
+          processObserver,
+          observationLabel: 'layout-inspection',
         },
       );
       try {
@@ -1462,6 +1575,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
             instructionId: element.instructionId,
             pngPath: calibrationPath,
             imageMagickPath: toolPaths.imageMagickPath,
+            processObserver,
+            observationLabelPrefix: 'overlay-calibration-inspection',
           });
           if (!calibration.alphaBounds) {
             throw new Error('top band visible center calibration produced no alpha bounds');
@@ -1515,6 +1630,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
           instructionId: element.instructionId,
           pngPath: lineMaskPath,
           imageMagickPath: toolPaths.imageMagickPath,
+          processObserver,
+          observationLabelPrefix: 'overlay-line-inspection',
         });
         if (lineInspection.alphaBounds) {
           lineAlphaBounds.push({lineIndex: line.lineIndex, ...lineInspection.alphaBounds});
@@ -1524,6 +1641,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
         instructionId: element.instructionId,
         pngPath,
         imageMagickPath: toolPaths.imageMagickPath,
+        processObserver,
+        observationLabelPrefix: 'overlay-final-inspection',
         lineRects,
         lineAlphaBounds,
         appliedOverlayPropsCanonicalSha256: sha256Canonical(overlayProps[index]),
@@ -1569,16 +1688,22 @@ export async function executeValidatedPresentationDrawAndQcV001({
       outputPath: workVideo,
       ffmpegPath: toolPaths.ffmpegPath,
       fatalInnerStage: 'overlay-render',
+      processObserver,
+      observationLabel: 'video-composite',
     });
     const outputMedia = await inspectRenderedMediaWithToolsV001(workVideo, {
       ffprobePath: toolPaths.ffprobePath,
       ffmpegPath: toolPaths.ffmpegPath,
+      processObserver,
+      observationLabelPrefix: 'output-media-inspection',
     });
     if (outputMedia.video) {
       outputMedia.video.frameCount = await inspectFrameCountWithToolV001(
         workVideo,
         toolPaths.ffprobePath,
         'post-render-qc',
+        processObserver,
+        'output-frame-count',
       );
     }
 
@@ -1587,7 +1712,11 @@ export async function executeValidatedPresentationDrawAndQcV001({
       '-size', `${plan.canvas.width}x${plan.canvas.height}`,
       'xc:none',
       transparentOverlayPath,
-    ], {fatalInnerStage: 'post-render-qc'});
+    ], {
+      fatalInnerStage: 'post-render-qc',
+      processObserver,
+      observationLabel: 'transparent-overlay-create',
+    });
     for (const record of overlayRecords) {
       const representativeFrame = record.element.startFrame
         + Math.floor(record.element.displayFrameCount / 2);
@@ -1605,9 +1734,23 @@ export async function executeValidatedPresentationDrawAndQcV001({
         outputPath: omittedVideo,
         ffmpegPath: toolPaths.ffmpegPath,
         fatalInnerStage: 'post-render-qc',
+        processObserver,
+        observationLabel: 'counterfactual-composite',
       });
-      await extractFrame(workVideo, representativeFrame, outputFrame, toolPaths.ffmpegPath);
-      await extractFrame(omittedVideo, representativeFrame, omittedFrame, toolPaths.ffmpegPath);
+      await extractFrame(
+        workVideo,
+        representativeFrame,
+        outputFrame,
+        toolPaths.ffmpegPath,
+        processObserver,
+      );
+      await extractFrame(
+        omittedVideo,
+        representativeFrame,
+        omittedFrame,
+        toolPaths.ffmpegPath,
+        processObserver,
+      );
       record.inspection.visibilityComparisonBasis = 'same-composite-with-instruction-omitted';
       record.inspection.representativeFrame = representativeFrame;
       record.inspection.changedPixelsAgainstInstructionOmittedFrame =
@@ -1616,6 +1759,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
           omittedFrame,
           record.inspection.alphaBounds,
           toolPaths.imageMagickPath,
+          processObserver,
         );
     }
 

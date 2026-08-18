@@ -1,0 +1,17 @@
+{
+  "command": "/usr/bin/env",
+  "environment": {
+    "NODE_OPTIONS": "absent",
+    "NODE_PATH": "/Users/kawafmm/workspace/zev2/runner/node_modules",
+    "PATH": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  },
+  "args": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+    "--test",
+    "--test-concurrency=1",
+    "--test-name-pattern=^(?:renderer runner|renderer overlay|renderer child|ZCQ042)",
+    "evals/clip_composition/run_presentation_instruction_renderer_job_v001.test.mjs",
+    "evals/clip_composition/run_presentation_zevo_caption_quality_v002_proof_job_v001.test.mjs"
+  ]
+}

@@ -1,0 +1,250 @@
+TAP version 13
+# Subtest: ZTC001 registry accepts exact landscape and vertical profiles
+ok 1 - ZTC001 registry accepts exact landscape and vertical profiles
+  ---
+  duration_ms: 0.95175
+  ...
+# Subtest: ZTC002 registry rejects an unknown root key
+ok 2 - ZTC002 registry rejects an unknown root key
+  ---
+  duration_ms: 0.086042
+  ...
+# Subtest: ZTC003 profile rejects a crop key
+ok 3 - ZTC003 profile rejects a crop key
+  ---
+  duration_ms: 0.106625
+  ...
+# Subtest: ZTC004 profile rejects a viewport key
+ok 4 - ZTC004 profile rejects a viewport key
+  ---
+  duration_ms: 0.077084
+  ...
+# Subtest: ZTC005 registry rejects duplicate profile IDs
+ok 5 - ZTC005 registry rejects duplicate profile IDs
+  ---
+  duration_ms: 0.075542
+  ...
+# Subtest: ZTC006 registry rejects an unbound font
+ok 6 - ZTC006 registry rejects an unbound font
+  ---
+  duration_ms: 0.063958
+  ...
+# Subtest: ZTC007 landscape profile rejects a portrait canvas
+ok 7 - ZTC007 landscape profile rejects a portrait canvas
+  ---
+  duration_ms: 0.124584
+  ...
+# Subtest: ZTC008 vertical profile rejects a landscape canvas
+ok 8 - ZTC008 vertical profile rejects a landscape canvas
+  ---
+  duration_ms: 0.06675
+  ...
+# Subtest: ZTC009 exact title job passes with a human-title package
+ok 9 - ZTC009 exact title job passes with a human-title package
+  ---
+  duration_ms: 1.288459
+  ...
+# Subtest: ZTC010 title job rejects an unknown key
+ok 10 - ZTC010 title job rejects an unknown key
+  ---
+  duration_ms: 0.163833
+  ...
+# Subtest: ZTC011 title job rejects an empty implementation set
+ok 11 - ZTC011 title job rejects an empty implementation set
+  ---
+  duration_ms: 0.091209
+  ...
+# Subtest: ZTC012 title job context rejects an empty title
+ok 12 - ZTC012 title job context rejects an empty title
+  ---
+  duration_ms: 0.3405
+  ...
+# Subtest: ZTC013 replacement permits package ID, timeline ID, and provenance changes
+ok 13 - ZTC013 replacement permits package ID, timeline ID, and provenance changes
+  ---
+  duration_ms: 0.99825
+  ...
+# Subtest: ZTC014 replacement rejects an empty target title
+ok 14 - ZTC014 replacement rejects an empty target title
+  ---
+  duration_ms: 0.219083
+  ...
+# Subtest: ZTC015 replacement rejects a source that already has a title
+ok 15 - ZTC015 replacement rejects a source that already has a title
+  ---
+  duration_ms: 0.173167
+  ...
+# Subtest: ZTC016 replacement rejects a source-media meaning change
+ok 16 - ZTC016 replacement rejects a source-media meaning change
+  ---
+  duration_ms: 0.436959
+  ...
+# Subtest: ZTC017 replacement rejects a timeline segment change
+ok 17 - ZTC017 replacement rejects a timeline segment change
+  ---
+  duration_ms: 0.182125
+  ...
+# Subtest: ZTC018 replacement rejects a caption change
+ok 18 - ZTC018 replacement rejects a caption change
+  ---
+  duration_ms: 0.237209
+  ...
+# Subtest: ZTC019 replacement rejects semantic observation leakage
+ok 19 - ZTC019 replacement rejects semantic observation leakage
+  ---
+  duration_ms: 0.157375
+  ...
+# Subtest: ZTC020 plan mechanically wraps a long title without text loss
+ok 20 - ZTC020 plan mechanically wraps a long title without text loss
+  ---
+  duration_ms: 1.99825
+  ...
+# Subtest: ZTC021 short title remains one line
+ok 21 - ZTC021 short title remains one line
+  ---
+  duration_ms: 1.565833
+  ...
+# Subtest: ZTC022 plan rejects a max-lines overflow
+ok 22 - ZTC022 plan rejects a max-lines overflow
+  ---
+  duration_ms: 0.980041
+  ...
+# Subtest: ZTC023 plan records requested and applied profile identically
+ok 23 - ZTC023 plan records requested and applied profile identically
+  ---
+  duration_ms: 1.324667
+  ...
+# Subtest: ZTC024 plan uses the profile start and end frames
+ok 24 - ZTC024 plan uses the profile start and end frames
+  ---
+  duration_ms: 2.420417
+  ...
+# Subtest: ZTC025 plan rejects an unknown key
+ok 25 - ZTC025 plan rejects an unknown key
+  ---
+  duration_ms: 1.1605
+  ...
+# Subtest: ZTC026 plan rejects a crop key
+ok 26 - ZTC026 plan rejects a crop key
+  ---
+  duration_ms: 1.067875
+  ...
+# Subtest: ZTC027 common core contains exactly one title-cover element
+ok 27 - ZTC027 common core contains exactly one title-cover element
+  ---
+  duration_ms: 1.011875
+  ...
+# Subtest: ZTC028 common core preserves title text, line indices, and frame interval
+ok 28 - ZTC028 common core preserves title text, line indices, and frame interval
+  ---
+  duration_ms: 1.091125
+  ...
+# Subtest: ZTC029 common core uses final canvas coordinates and no crop fields
+ok 29 - ZTC029 common core uses final canvas coordinates and no crop fields
+  ---
+  duration_ms: 0.988042
+  ...
+# Subtest: ZTC030 vertical format builds through the same common contract
+ok 30 - ZTC030 vertical format builds through the same common contract
+  ---
+  duration_ms: 0.920833
+  ...
+# Subtest: ZTC031 renderer evidence accepts one applied title and passed renderer QC
+ok 31 - ZTC031 renderer evidence accepts one applied title and passed renderer QC
+  ---
+  duration_ms: 2.180834
+  ...
+# Subtest: ZTC032 renderer evidence rejects a second title application
+ok 32 - ZTC032 renderer evidence rejects a second title application
+  ---
+  duration_ms: 1.130291
+  ...
+# Subtest: ZTC033 QC passes all six checks from bound renderer evidence
+ok 33 - ZTC033 QC passes all six checks from bound renderer evidence
+  ---
+  duration_ms: 1.398208
+  ...
+# Subtest: ZTC034 QC rejects a frame-count change
+ok 34 - ZTC034 QC rejects a frame-count change
+  ---
+  duration_ms: 1.160708
+  ...
+# Subtest: ZTC035 QC rejects an audio-payload change
+ok 35 - ZTC035 QC rejects an audio-payload change
+  ---
+  duration_ms: 1.228583
+  ...
+# Subtest: ZTC036 QC rejects an unknown key
+ok 36 - ZTC036 QC rejects an unknown key
+  ---
+  duration_ms: 1.150125
+  ...
+# Subtest: ZTC037 manifest exactly binds job, plan, renderer evidence, QC, and video
+ok 37 - ZTC037 manifest exactly binds job, plan, renderer evidence, QC, and video
+  ---
+  duration_ms: 1.765958
+  ...
+# Subtest: ZTC038 manifest rejects an unknown key
+ok 38 - ZTC038 manifest rejects an unknown key
+  ---
+  duration_ms: 0.876708
+  ...
+# Subtest: ZTC039 ZEVO v1 render plan is not accepted as a title plan
+ok 39 - ZTC039 ZEVO v1 render plan is not accepted as a title plan
+  ---
+  duration_ms: 0.036958
+  ...
+# Subtest: ZTC040 formal serializer is deterministic, two-space, and LF terminated
+ok 40 - ZTC040 formal serializer is deterministic, two-space, and LF terminated
+  ---
+  duration_ms: 0.095708
+  ...
+# Subtest: ZTC041 common core revalidates indexed title text before rendering
+ok 41 - ZTC041 common core revalidates indexed title text before rendering
+  ---
+  duration_ms: 0.838
+  ...
+# Subtest: ZTC042 manifest context rejects a renderer-evidence binding swap
+ok 42 - ZTC042 manifest context rejects a renderer-evidence binding swap
+  ---
+  duration_ms: 1.429
+  ...
+# Subtest: ZTC043 title job rejects a role bound to the wrong implementation path
+ok 43 - ZTC043 title job rejects a role bound to the wrong implementation path
+  ---
+  duration_ms: 0.13625
+  ...
+# Subtest: ZTC044 title job rejects the correct implementation set in a different order
+ok 44 - ZTC044 title job rejects the correct implementation set in a different order
+  ---
+  duration_ms: 0.130833
+  ...
+# Subtest: ZTC045 selected title is one landscape line and two vertical lines at 80px
+ok 45 - ZTC045 selected title is one landscape line and two vertical lines at 80px
+  ---
+  duration_ms: 2.152333
+  ...
+# Subtest: ZTC046 top-band is a closed preset with required square centered background
+ok 46 - ZTC046 top-band is a closed preset with required square centered background
+  ---
+  duration_ms: 0.323084
+  ...
+# Subtest: ZTC047 top-band exact model fills canvas edges and keeps the base text model safe
+ok 47 - ZTC047 top-band exact model fills canvas edges and keeps the base text model safe
+  ---
+  duration_ms: 2.446084
+  ...
+# Subtest: ZTC048 top-band visible alpha centering resolves each line horizontally and all lines vertically
+ok 48 - ZTC048 top-band visible alpha centering resolves each line horizontally and all lines vertically
+  ---
+  duration_ms: 0.345
+  ...
+1..48
+# tests 48
+# suites 0
+# pass 48
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 251.437125

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>④.5 描画疎結合化 注文書レビュー</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, -apple-system, sans-serif; }
+    body { margin: 0; background: #11151c; color: #eef2f8; }
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 24px 80px; }
+    h1 { margin-bottom: 8px; }
+    h2 { margin-top: 0; }
+    .summary, .case { background: #1b222d; border: 1px solid #344052; border-radius: 14px; padding: 20px; margin: 18px 0; }
+    .pass { color: #7de3a1; font-weight: 700; }
+    .videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px; }
+    .comparison { border: 2px solid #59769a; border-radius: 12px; padding: 14px; margin: 16px 0 20px; background: #111821; }
+    .comparison video { max-height: 720px; }
+    .comparison-label { display: flex; justify-content: space-around; font-weight: 700; color: #bcd7f7; }
+    video { width: 100%; max-height: 520px; background: #000; }
+    code { overflow-wrap: anywhere; color: #cfe2ff; }
+    a { color: #8ec5ff; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid #344052; padding: 9px; text-align: left; vertical-align: top; }
+  </style>
+</head>
+<body><main>
+  <h1>④.5 描画疎結合化 注文書レビュー</h1>
+  <p>注文書を中間成果物として読み、同じ独立rendererが作った動画を旧動画と並べて確認するページです。</p>
+
+  <section class="summary">
+    <h2>機械検証の現在地</h2>
+    <p><span class="pass">44 / 44 ID 合格</span>。タイトル横・縦と字幕横の描画/QCは全て合格しています。各ケースに旧版を左、新renderer版を右へ結合した同期比較動画を追加しました。</p>
+    <p><span class="pass">字幕の改行も一致:</span> 人間合格済みの意味上の行末を独立projectionで動画出力プログラムへ渡し、旧v022の24/14分割を一意に再現しました。</p>
+    <table>
+      <tr><th>旧v022</th><td>デスカード、デビルカード<br>来ないんだけど</td><th>新renderer</th><td>デスカード、デビルカード<br>来ないんだけど</td></tr>
+    </table>
+    <p><a href="../test-runs/20260818-rendering-decoupling-formal-44-attempt-0004/stdout.txt">正式44 ID TAP</a> / <a href="review-manifest.json">manifest</a></p>
+  </section>
+
+  <section class="case">
+    <h2>字幕横型 voice-013</h2>
+    <p>注文書: <a href="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/rendering-decoupling-caption-control/a-v002-voice-013-v006/presentation-instruction-v001.json">presentation-instruction-v001.json</a></p>
+    <p>11 cue、本文・cue終端・frame・全改行が旧v022と一致。QCは1920×1080・755 frame・音声一致・違反0件です。</p>
+    <div class="comparison"><h3>同期比較</h3><div class="comparison-label"><span>左: 旧v022</span><span>右: 新renderer</span></div><video controls preload="metadata" src="side-by-side-comparisons-v001/voice-013-caption-landscape-old-left-new-right.mp4"></video></div>
+    <details><summary>元動画を個別に開く</summary><div class="videos">
+      <div><h3>旧v022</h3><video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs/a-v002-caption-quality-v022-proof-20260816-v003/voice-013/horizontal-formal/video.mp4"></video></div>
+      <div><h3>新renderer</h3><video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/rendering-decoupling-caption-renders/a-v002-voice-013-v006/presentation-rendered-v002.mp4"></video></div>
+    </div></details>
+  </section>
+
+  <section class="case">
+    <h2>タイトル横型 candidate 59</h2>
+    <p>注文書: <a href="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/rendering-decoupling-title-control/qdczJpv8RCc-candidate-59-c-title-landscape-decoupled-v017/presentation-instruction-v001.json">presentation-instruction-v001.json</a></p>
+    <p><span class="pass">一致:</span> 本文、0〜180 frame、一行、適用style。QCは1920×1080・1547 frame・音声一致です。</p>
+    <div class="comparison"><h3>同期比較</h3><div class="comparison-label"><span>左: 旧v009</span><span>右: 新renderer</span></div><video controls preload="metadata" src="side-by-side-comparisons-v001/candidate-59-title-landscape-old-left-new-right.mp4"></video></div>
+    <details><summary>元動画を個別に開く</summary><div class="videos">
+      <div><h3>旧v009</h3><video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-v009-output/title-rendered-v001.mp4"></video></div>
+      <div><h3>新renderer</h3><video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-landscape-decoupled-v017-output/presentation-rendered-v002.mp4"></video></div>
+    </div></details>
+  </section>
+
+  <section class="case">
+    <h2>タイトル縦型 candidate 59</h2>
+    <p>注文書: <a href="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/rendering-decoupling-title-control/qdczJpv8RCc-candidate-59-c-title-vertical-decoupled-v017/presentation-instruction-v001.json">presentation-instruction-v001.json</a></p>
+    <p><span class="pass">一致:</span> 本文、0〜180 frame、11/8文字の二行、適用style。QCは1080×1920・1547 frame・音声一致です。</p>
+    <div class="comparison"><h3>同期比較</h3><div class="comparison-label"><span>左: 旧v009</span><span>右: 新renderer</span></div><video controls preload="metadata" src="side-by-side-comparisons-v001/candidate-59-title-vertical-old-left-new-right.mp4"></video></div>
+    <details><summary>元動画を個別に開く</summary><div class="videos">
+      <div><h3>旧v009</h3><video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-v009-output/title-rendered-v001.mp4"></video></div>
+      <div><h3>新renderer</h3><video controls preload="metadata" src="file:///Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/title-output-renders/qdczJpv8RCc-candidate-59-c-title-vertical-decoupled-v017-output/presentation-rendered-v002.mp4"></video></div>
+    </div></details>
+  </section>
+
+  <section class="summary">
+    <h2>確認手順</h2>
+    <ol>
+      <li>各「注文書」を開き、表示本文・frame区間・style profileが人間に読める独立fileになっていることを確認する。</li>
+      <li>各「同期比較」を再生する。左が旧版、右が新renderer版で、同じframeが常に並ぶ。</li>
+      <li>タイトル2件は左右の表示内容と改行が同じことを確認する。</li>
+      <li>字幕は11 cueすべてで、左右の表示本文・切替・改行が同じことを確認する。</li>
+    </ol>
+  </section>
+</main></body>
+</html>

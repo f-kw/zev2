@@ -1,0 +1,130 @@
+TAP version 13
+# Subtest: PRP001 formal byte・exact schema・決定的再構築
+ok 1 - PRP001 formal byte・exact schema・決定的再構築
+  ---
+  duration_ms: 4.310708
+  ...
+# Subtest: PRP002 source packageとcaption集合・順序・IDがexact一致
+ok 2 - PRP002 source packageとcaption集合・順序・IDがexact一致
+  ---
+  duration_ms: 1.925042
+  ...
+# Subtest: PRP003 cue終端がstrict増加し最終boundaryまでatom全量を一度ずつ覆う
+ok 3 - PRP003 cue終端がstrict増加し最終boundaryまでatom全量を一度ずつ覆う
+  ---
+  duration_ms: 0.92975
+  ...
+# Subtest: PRP004 旧selectionのlineEndBoundaryIdsがprojection byteへ0件
+ok 4 - PRP004 旧selectionのlineEndBoundaryIdsがprojection byteへ0件
+  ---
+  duration_ms: 1.04425
+  ...
+# Subtest: PRP005 sourceSelectionDigestにpathがなく旧selection bindingをreject
+ok 5 - PRP005 sourceSelectionDigestにpathがなく旧selection bindingをreject
+  ---
+  duration_ms: 0.736375
+  ...
+# Subtest: PRP006 同一sourceとselectionから2回製造したprojection byteが一致
+ok 6 - PRP006 同一sourceとselectionから2回製造したprojection byteが一致
+  ---
+  duration_ms: 0.889417
+  ...
+# Subtest: PRI001 formal byteとexact schema、未知key拒否
+ok 7 - PRI001 formal byteとexact schema、未知key拒否
+  ---
+  duration_ms: 8.121875
+  ...
+# Subtest: PRI002 source binding全件のstable再読・SHA一致
+ok 8 - PRI002 source binding全件のstable再読・SHA一致
+  ---
+  duration_ms: 3.222834
+  ...
+# Subtest: PRI003 instruction ID一意性と決定順
+ok 9 - PRI003 instruction ID一意性と決定順
+  ---
+  duration_ms: 8.651208
+  ...
+# Subtest: PRI004 frame範囲が正でtimeline内に閉じms field 0件
+ok 10 - PRI004 frame範囲が正でtimeline内に閉じms field 0件
+  ---
+  duration_ms: 1.957083
+  ...
+# Subtest: PRI005 caption本文・atom順・cue終端の全量閉包
+ok 11 - PRI005 caption本文・atom順・cue終端の全量閉包
+  ---
+  duration_ms: 2.487125
+  ...
+# Subtest: PRI006 title本文と意味情報package titleのbyte一致
+ok 12 - PRI006 title本文と意味情報package titleのbyte一致
+  ---
+  duration_ms: 0.822584
+  ...
+# Subtest: PRI007 semanticKind・targetType・artifactKindの条件表一致
+ok 13 - PRI007 semanticKind・targetType・artifactKindの条件表一致
+  ---
+  duration_ms: 2.456875
+  ...
+# Subtest: PRI008 target・material参照実在と重複0
+ok 14 - PRI008 target・material参照実在と重複0
+  ---
+  duration_ms: 2.309709
+  ...
+# Subtest: PRI009 禁止field閉集合全件が発火し正当なtimelineは誤拒否しない
+ok 15 - PRI009 禁止field閉集合全件が発火し正当なtimelineは誤拒否しない
+  ---
+  duration_ms: 3.502583
+  ...
+# Subtest: PRI010 同一入力から注文書formal byteが一致
+ok 16 - PRI010 同一入力から注文書formal byteが一致
+  ---
+  duration_ms: 3.780042
+  ...
+# Subtest: PRL001 一行に収まるcaptionを一行にする
+ok 17 - PRL001 一行に収まるcaptionを一行にする
+  ---
+  duration_ms: 9.178917
+  ...
+# Subtest: PRL002 voice-013 cue 1をboundary 17へ分け同点18をordinalで退ける
+ok 18 - PRL002 voice-013 cue 1をboundary 17へ分け同点18をordinalで退ける
+  ---
+  duration_ms: 3.75475
+  ...
+# Subtest: PRL003 voice-013 cue 2/3を51/85へ分ける
+ok 19 - PRL003 voice-013 cue 2/3を51/85へ分ける
+  ---
+  duration_ms: 2.869667
+  ...
+# Subtest: PRL004 3 cueのline text・atom集合・論理幅が旧plan projectionとbyte一致
+ok 20 - PRL004 3 cueのline text・atom集合・論理幅が旧plan projectionとbyte一致
+  ---
+  duration_ms: 2.918667
+  ...
+# Subtest: PRL005 title landscape v009を一行で再現
+ok 21 - PRL005 title landscape v009を一行で再現
+  ---
+  duration_ms: 0.957084
+  ...
+# Subtest: PRL006 title vertical v009を11/8 code pointの二行で再現
+ok 22 - PRL006 title vertical v009を11/8 code pointの二行で再現
+  ---
+  duration_ms: 0.98
+  ...
+# Subtest: PRL007 有効partition 0件・maxLines超過・unit欠落重複をreject
+ok 23 - PRL007 有効partition 0件・maxLines超過・unit欠落重複をreject
+  ---
+  duration_ms: 2.904292
+  ...
+# Subtest: PRL008 乱数・係数・旧selection読取・別計算実装0件
+ok 24 - PRL008 乱数・係数・旧selection読取・別計算実装0件
+  ---
+  duration_ms: 0.454458
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 97.580208

@@ -1,0 +1,17 @@
+/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+renderer@4.0.481_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@remotion/renderer/dist/browser/BrowserRunner.js:269
+            reject(new Error([
+                   ^
+
+Error: Failed to launch the browser process!
+Error: Closed with null signal: SIGABRT
+    at ChildProcess.<anonymous> (/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+renderer@4.0.481_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@remotion/renderer/dist/browser/BrowserRunner.js:260:32)
+    at ChildProcess.emit (node:events:524:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+dlopen /Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/../Frameworks/Google Chrome Framework.framework/Versions/151.0.7922.138/Google Chrome Framework: dlopen(/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/../Frameworks/Google Chrome Framework.framework/Versions/151.0.7922.138/Google Chrome Framework, 0x0105): tried: '/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/../Frameworks/Google Chrome Framework.framework/Versions/151.0.7922.138/Google Chrome Framework' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/../Frameworks/Google Chrome Framework.framework/Versions/151.0.7922.138/Google Chrome Framework' (no such file), '/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/../Frameworks/Google Chrome Framework.framework/Versions/151.0.7922.138/Google Chrome Framework' (no such file).
+Troubleshooting: https://remotion.dev/docs/troubleshooting/browser-launch
+    at onClose (/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+renderer@4.0.481_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@remotion/renderer/dist/browser/BrowserRunner.js:269:20)
+    at ChildProcess.<anonymous> (/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+renderer@4.0.481_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@remotion/renderer/dist/browser/BrowserRunner.js:260:24)
+    at ChildProcess.emit (node:events:524:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+
+Node.js v20.19.6

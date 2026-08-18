@@ -1,0 +1,8 @@
+file:///private/tmp/render_caption_voice013_decoupled_v001.mjs:91
+if (proofValidation.status !== 'passed') throw new Error(`proof job invalid: ${JSON.stringify(proofValidation)}`);
+                                               ^
+
+Error: proof job invalid: {"status":"rejected","violations":[{"code":"CUE_PROOF_JOB_INVALID","path":"/implementationBindings","relatedPaths":[]}]}
+    at file:///private/tmp/render_caption_voice013_decoupled_v001.mjs:91:48
+
+Node.js v20.19.6

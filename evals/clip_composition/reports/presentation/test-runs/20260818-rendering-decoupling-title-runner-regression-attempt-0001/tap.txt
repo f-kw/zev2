@@ -1,0 +1,110 @@
+TAP version 13
+# Subtest: ZTOR001 importは自動起動せずpure入口を公開し既知data読取だけを束縛する
+ok 1 - ZTOR001 importは自動起動せずpure入口を公開し既知data読取だけを束縛する
+  ---
+  duration_ms: 265.1475
+  ...
+# Subtest: ZTOR002 正式job pathは版付きroot直下のexact fileだけを受理する
+ok 2 - ZTOR002 正式job pathは版付きroot直下のexact fileだけを受理する
+  ---
+  duration_ms: 0.239625
+  ...
+# Subtest: ZTOR003 CLIはjob引数ちょうど1件だけを受理しfatalを閉語彙で返す
+ok 3 - ZTOR003 CLIはjob引数ちょうど1件だけを受理しfatalを閉語彙で返す
+  ---
+  duration_ms: 0.387958
+  ...
+# Subtest: ZTOR004 job root外・nested・traversal pathを拒否する
+ok 4 - ZTOR004 job root外・nested・traversal pathを拒否する
+  ---
+  duration_ms: 0.09475
+  ...
+# Subtest: ZTOR005 NODE_OPTIONSは空値を含め存在自体を拒否する
+ok 5 - ZTOR005 NODE_OPTIONSは空値を含め存在自体を拒否する
+  ---
+  duration_ms: 0.075333
+  ...
+# Subtest: ZTOR006 成果物集合は6名称へexact固定される
+ok 6 - ZTOR006 成果物集合は6名称へexact固定される
+  ---
+  duration_ms: 0.059875
+  ...
+# Subtest: ZTOR007 output rootはoutputIdから一意に導出する
+ok 7 - ZTOR007 output rootはoutputIdから一意に導出する
+  ---
+  duration_ms: 0.609459
+  ...
+# Subtest: ZTOR008 source manifest・QC・videoは同じ既存v1 rootへ束縛する
+ok 8 - ZTOR008 source manifest・QC・videoは同じ既存v1 rootへ束縛する
+  ---
+  duration_ms: 0.240209
+  ...
+# Subtest: ZTOR009 source planは既存control root外を拒否する
+ok 9 - ZTOR009 source planは既存control root外を拒否する
+  ---
+  duration_ms: 0.19925
+  ...
+# Subtest: ZTOR010 title packageは意味情報package正式root外を拒否する
+ok 10 - ZTOR010 title packageは意味情報package正式root外を拒否する
+  ---
+  duration_ms: 0.348708
+  ...
+# Subtest: ZTOR011 source v1 schemaと成果物名を変更しない
+ok 11 - ZTOR011 source v1 schemaと成果物名を変更しない
+  ---
+  duration_ms: 0.100542
+  ...
+# Subtest: ZTOR012 runnerは新rendererを一度呼び、旧描画coreを直接呼ばない
+ok 12 - ZTOR012 runnerは新rendererを一度呼び、旧描画coreを直接呼ばない
+  ---
+  duration_ms: 1.343042
+  ...
+# Subtest: ZTOR013 source成果物へのwrite・rename・unlink経路を持たない
+ok 13 - ZTOR013 source成果物へのwrite・rename・unlink経路を持たない
+  ---
+  duration_ms: 0.519
+  ...
+# Subtest: ZTOR014 registry・font・license・source・implementation・runtimeを実読取監査する
+ok 14 - ZTOR014 registry・font・license・source・implementation・runtimeを実読取監査する
+  ---
+  duration_ms: 0.60075
+  ...
+# Subtest: ZTOR015 implementation graphの欠落・余分・role-path swapを拒否する
+ok 15 - ZTOR015 implementation graphの欠落・余分・role-path swapを拒否する
+  ---
+  duration_ms: 160.318958
+  ...
+# Subtest: ZTOR016 source manifestの全JSON・media参照を実読取し終了前に再照合する
+ok 16 - ZTOR016 source manifestの全JSON・media参照を実読取し終了前に再照合する
+  ---
+  duration_ms: 1.816
+  ...
+# Subtest: PRM005: title landscapeとverticalは同じ注文書外枠とrenderer jobを使う
+ok 17 - PRM005: title landscapeとverticalは同じ注文書外枠とrenderer jobを使う
+  ---
+  duration_ms: 14.918666
+  ...
+# Subtest: PRM006: title v009の本文・180frame・行分割・style適用結果が旧oracleと一致する
+ok 18 - PRM006: title v009の本文・180frame・行分割・style適用結果が旧oracleと一致する
+  ---
+  duration_ms: 1.240583
+  ...
+# Subtest: PRM007: captionとtitleのformal runnerは旧direct builderや暗黙runtimeを使わない
+ok 19 - PRM007: captionとtitleのformal runnerは旧direct builderや暗黙runtimeを使わない
+  ---
+  duration_ms: 0.638167
+  ...
+# Subtest: PRM008: 既存5 treeとA-v002記録対象treeは現在byte差0である
+ok 20 - PRM008: 既存5 treeとA-v002記録対象treeは現在byte差0である
+  ---
+  duration_ms: 0.48725
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 985.956709

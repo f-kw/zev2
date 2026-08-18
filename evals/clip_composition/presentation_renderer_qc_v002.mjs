@@ -48,7 +48,7 @@ const sortViolations = (violations) => violations.sort((left, right) => {
   return JSON.stringify(left).localeCompare(JSON.stringify(right), 'en');
 });
 
-const runBuffer = (command, args) => new Promise((resolve, reject) => {
+const runBufferUnobserved = (command, args) => new Promise((resolve, reject) => {
   const stdout = [];
   const stderr = [];
   const child = spawn(command, args, {stdio: ['ignore', 'pipe', 'pipe']});
@@ -60,6 +60,16 @@ const runBuffer = (command, args) => new Promise((resolve, reject) => {
     else reject(new Error(`${command} failed (${code ?? 'unknown'}): ${Buffer.concat(stderr).toString()}`));
   });
 });
+
+const runBuffer = (command, args, {
+  processObserver = null,
+  observationLabel = 'renderer-qc-process',
+} = {}) => processObserver === null
+  ? runBufferUnobserved(command, args)
+  : processObserver.run(command, args, {
+    allowedExitCodes: [0],
+    observationLabel,
+  });
 
 const overlap = (left, right) => ({
   width: Math.min(left.right, right.right) - Math.max(left.left, right.left),
@@ -483,8 +493,14 @@ async function inspectOverlayPngWithCommand({
   appliedOverlayPropsCanonicalSha256 = null,
   overlayFile = null,
   overlaySha256 = null,
+  processObserver = null,
+  observationLabelPrefix = 'overlay-inspection',
 }, imageMagickPath) {
-  const alpha = await runBuffer(imageMagickPath, [pngPath, '-alpha', 'extract', '-format', '%[fx:maxima]', 'info:']);
+  const alpha = await runBuffer(
+    imageMagickPath,
+    [pngPath, '-alpha', 'extract', '-format', '%[fx:maxima]', 'info:'],
+    {processObserver, observationLabel: `${observationLabelPrefix}-alpha`},
+  );
   const alphaMax = Number(alpha.stdout.toString().trim());
   if (!(alphaMax > 0)) {
     return {
@@ -508,16 +524,20 @@ async function inspectOverlayPngWithCommand({
   // Extract alpha, turn every non-zero alpha into foreground, and add a known
   // transparent border before trimming.  The artificial border makes the
   // reference background independent of the overlay's corner pixels.
-  const geometry = await runBuffer(imageMagickPath, [
-    pngPath,
-    '-alpha', 'extract',
-    '-threshold', '0',
-    '-bordercolor', 'black',
-    '-border', '1',
-    '-trim',
-    '-format', '%w %h %X %Y',
-    'info:',
-  ]);
+  const geometry = await runBuffer(
+    imageMagickPath,
+    [
+      pngPath,
+      '-alpha', 'extract',
+      '-threshold', '0',
+      '-bordercolor', 'black',
+      '-border', '1',
+      '-trim',
+      '-format', '%w %h %X %Y',
+      'info:',
+    ],
+    {processObserver, observationLabel: `${observationLabelPrefix}-bounds`},
+  );
   const match = geometry.stdout.toString().trim().match(/^(\d+) (\d+) ([+-]\d+) ([+-]\d+)$/);
   if (!match) throw new Error(`alpha bounds could not be parsed: ${geometry.stdout.toString().trim()}`);
   const width = Number(match[1]);
@@ -552,11 +572,20 @@ export async function inspectOverlayPngWithToolV001(input) {
   return inspectOverlayPngWithCommand(inspectionInput, imageMagickPath);
 }
 
-async function audioPacketPayloadSha256WithCommand(filePath, ffmpegPath) {
-  const result = await runBuffer(ffmpegPath, [
-    '-hide_banner', '-loglevel', 'error', '-i', filePath,
-    '-map', '0:a:0', '-c:a', 'copy', '-f', 'data', '-',
-  ]);
+async function audioPacketPayloadSha256WithCommand(
+  filePath,
+  ffmpegPath,
+  processObserver = null,
+  observationLabel = 'audio-payload-inspection',
+) {
+  const result = await runBuffer(
+    ffmpegPath,
+    [
+      '-hide_banner', '-loglevel', 'error', '-i', filePath,
+      '-map', '0:a:0', '-c:a', 'copy', '-f', 'data', '-',
+    ],
+    {processObserver, observationLabel},
+  );
   return createHash('sha256').update(result.stdout).digest('hex');
 }
 
@@ -569,13 +598,22 @@ export async function audioPacketPayloadSha256WithToolV001(filePath, ffmpegPath)
   return audioPacketPayloadSha256WithCommand(filePath, ffmpegPath);
 }
 
-async function inspectRenderedMediaWithCommands(filePath, {ffprobePath, ffmpegPath}) {
-  const result = await runBuffer(ffprobePath, [
-    '-v', 'error', '-count_frames',
-    '-show_entries', 'format=duration:stream=index,codec_type,codec_name,width,height,avg_frame_rate,nb_read_frames',
-    '-of', 'json',
-    filePath,
-  ]);
+async function inspectRenderedMediaWithCommands(filePath, {
+  ffprobePath,
+  ffmpegPath,
+  processObserver = null,
+  observationLabelPrefix = 'media-inspection',
+}) {
+  const result = await runBuffer(
+    ffprobePath,
+    [
+      '-v', 'error', '-count_frames',
+      '-show_entries', 'format=duration:stream=index,codec_type,codec_name,width,height,avg_frame_rate,nb_read_frames',
+      '-of', 'json',
+      filePath,
+    ],
+    {processObserver, observationLabel: `${observationLabelPrefix}-ffprobe`},
+  );
   const probe = JSON.parse(result.stdout.toString());
   const videoStream = probe.streams?.find((stream) => stream.codec_type === 'video');
   const audioStream = probe.streams?.find((stream) => stream.codec_type === 'audio');
@@ -594,7 +632,12 @@ async function inspectRenderedMediaWithCommands(filePath, {ffprobePath, ffmpegPa
     } : null,
     audio: audioStream ? {
       codecName: audioStream.codec_name,
-      packetPayloadSha256: await audioPacketPayloadSha256WithCommand(filePath, ffmpegPath),
+      packetPayloadSha256: await audioPacketPayloadSha256WithCommand(
+        filePath,
+        ffmpegPath,
+        processObserver,
+        `${observationLabelPrefix}-audio-payload`,
+      ),
     } : null,
   };
 }

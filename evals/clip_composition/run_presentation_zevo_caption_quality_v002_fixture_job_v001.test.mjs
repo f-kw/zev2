@@ -8,9 +8,9 @@ import * as fixtureModule from './run_presentation_zevo_caption_quality_v002_fix
 import {decodePresentationZevoCaptionQualityV002ProofJobV001} from './run_presentation_zevo_caption_quality_v002_proof_job_v001.ts';
 
 const ROOT = process.cwd();
-const FIXTURE_SET_ID = 'zevo-caption-quality-v002-fixture-selftest-20260815-attempt-0005';
+const FIXTURE_SET_ID = 'zevo-caption-quality-v002-fixture-selftest-20260818-attempt-0006';
 const OUTPUT_ROOT = `evals/clip_composition/reports/presentation/test-fixtures/zevo-caption-quality-v002/${FIXTURE_SET_ID}`;
-const JOB_ROOT = 'evals/clip_composition/reports/presentation/test-runs/20260815-zevo-caption-quality-v002-fixture-gate-attempt-0005';
+const JOB_ROOT = 'evals/clip_composition/reports/presentation/test-runs/20260818-zevo-caption-quality-v002-fixture-gate-attempt-0006';
 const JOB_PATH = `${JOB_ROOT}/fixture-job-v001.json`;
 const OLD_ROOT = 'evals/clip_composition/outputs/presentation/a-v002/layer1-v3-proof-runs/a-v002-layer1-v3-option-b-proof-20260810-v008';
 const NORMAL_ORACLE = 'evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0009/fixtures/zcq-caption-quality-proof-f-gate-attempt-0009.json';
@@ -50,13 +50,32 @@ const CONTRACT_BINDINGS = Object.freeze([
   ['caption-quality-selection-runtime-value-wiring-addendum', 'presentation-zevo-caption-quality-v002-selection-runtime-value-wiring-addendum-20260811-v003.md', '632aa7fdec88da47fe8639fb10f74f390aa0cc5f191a114b797c08115bee4c9e'],
   ['caption-quality-source-final-package-validator-addendum', 'presentation-zevo-caption-quality-v002-source-final-package-validator-addendum-20260811-v007.md', '787d401d2939f58cbc10562c1ed29ab2118f6169607e05bbb2d7c5c5971c8053'],
   ['caption-quality-tsx-wrapper-descriptor-addendum', 'presentation-zevo-caption-quality-v002-tsx-wrapper-descriptor-addendum-20260812-v011.md', '61f2c3ddbe5a3bcb2bfaba39e0ce1cc2e18a77fb2f1f5337d3fd166044b41010'],
+  ['rendering-decoupling-contract-design-v001', 'presentation-rendering-decoupling-contract-design-20260817-v001.md', 'aec224048ac6131173eb8b69b4b4d45cda88d5646ab3b67e8fa8b5561310df94'],
+  ['rendering-decoupling-contract-addendum-v001', 'presentation-rendering-decoupling-contract-design-addendum-20260817-v001.md', '2643e7bf7ad8cdac6dd81a4fa1f1bb5c884b6f2968ec4db465554ad91bee1fad'],
+  ['rendering-decoupling-contract-addendum-v002', 'presentation-rendering-decoupling-contract-design-addendum-20260817-v002.md', 'f19a0ff9a27de640959bbbc81fcf7920b63f7a0c19354bc7bf7c6b2a5fcdf47b'],
+  ['rendering-decoupling-contract-addendum-v003', 'presentation-rendering-decoupling-contract-design-addendum-20260818-v003.md', 'cd4bfb75f8dfe0aec325ee8ae79cb136908ea7fa7e5fd2e610a430bfb4d1b16d'],
+  ['rendering-decoupling-contract-addendum-v004', 'presentation-rendering-decoupling-contract-design-addendum-20260818-v004.md', '8321a7ba99672af164f6a66285a3802f05b7f876e6c4fbf94e4211b0524f4d36'],
 ].map(([role, name, fileSha256]) => ({role, path: `evals/clip_composition/reports/presentation/${name}`, fileSha256})));
+
+const NEW_PROOF_ROLE_PATHS = Object.freeze([
+  ['instruction-renderer-runner-v001', 'evals/clip_composition/run_presentation_instruction_renderer_job_v001.ts'],
+  ['presentation-cue-end-projection-v001', 'evals/clip_composition/presentation_cue_end_projection_v001.mjs'],
+  ['presentation-instruction-artifact-v001', 'evals/clip_composition/presentation_instruction_artifact_v001.mjs'],
+  ['presentation-renderer-admission-v001', 'evals/clip_composition/presentation_renderer_admission_receipt_v001.mjs'],
+  ['presentation-renderer-line-layout-v001', 'evals/clip_composition/presentation_renderer_line_layout_rule_v001.mjs'],
+  ['presentation-renderer-process-observation-v001', 'evals/clip_composition/presentation_renderer_process_observation_v001.mjs'],
+]);
 
 const makeJob = async () => {
   const oracleJob = JSON.parse(await readFile(path.join(ROOT, NORMAL_ORACLE)));
   const proofBindings = await Promise.all(oracleJob.implementationBindings.map(async binding => ({
     role: binding.role, path: binding.path, fileSha256: sha(await readFile(path.join(ROOT, binding.path))),
   })));
+  for (const [role, bindingPath] of NEW_PROOF_ROLE_PATHS) proofBindings.push({
+    role,
+    path: bindingPath,
+    fileSha256: sha(await readFile(path.join(ROOT, bindingPath))),
+  });
   const selfPath = 'evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.mjs';
   const implementationBindings = [...proofBindings, {role: 'caption-quality-fixture-manufacture-runner-v001', path: selfPath, fileSha256: sha(await readFile(path.join(ROOT, selfPath)))}]
     .sort((left, right) => left.role.localeCompare(right.role) || left.path.localeCompare(right.path));
@@ -79,7 +98,7 @@ const makeJob = async () => {
   return {
     schemaVersion: 'presentation-zevo-caption-quality-v002-fixture-job-v001',
     jobId: 'zevo-caption-quality-v002-fixture-selftest-job-v001',
-    attemptId: 'attempt-0005', fixtureSetId: FIXTURE_SET_ID, outputRoot: OUTPUT_ROOT,
+    attemptId: 'attempt-0006', fixtureSetId: FIXTURE_SET_ID, outputRoot: OUTPUT_ROOT,
     sourceInputs: {landscapeStyleRequestBinding: await formalBinding(STYLE_REQUEST), cases},
     proofExecutionRoots: {
       proofOutputParent: `evals/clip_composition/outputs/presentation/zevo-caption-quality-v002-fixture-proof/${FIXTURE_SET_ID}`,
@@ -115,8 +134,8 @@ test('ZCQF001 fixture manufactureは44成果物と600環境行をatomic公開す
     'validatePresentationZevoCaptionQualityV002FixtureReceiptV001',
   ]);
   const job = await makeJob();
-  assert.equal(job.implementationBindings.length, 52);
-  assert.equal(job.approvedContractBindings.length, 17);
+  assert.equal(job.implementationBindings.length, 58);
+  assert.equal(job.approvedContractBindings.length, 22);
   assert.equal(fixtureModule.validatePresentationZevoCaptionQualityV002FixtureJobV001(job).status, 'passed');
   assert.equal(fixtureModule.decodePresentationZevoCaptionQualityV002FixtureJobV001(formalBytes(job)).status, 'decoded');
   for (const bytes of [Buffer.alloc(0), Buffer.from(` ${formalBytes(job)}`), formalBytes(job).subarray(0, formalBytes(job).length - 1), Buffer.from('```json\n{}\n```\n')]) {

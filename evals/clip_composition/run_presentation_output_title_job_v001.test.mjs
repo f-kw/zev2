@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFile, stat} from 'node:fs/promises';
+import {readFile, readdir, stat} from 'node:fs/promises';
 import path from 'node:path';
 import {test} from 'node:test';
 import {fileURLToPath} from 'node:url';
@@ -48,6 +48,20 @@ const MODULE_LOAD_DATA_OWNERS = Object.freeze(new Map([
     SPEAKER_REGISTRY,
   ],
 ]));
+const TITLE_KINDS = Object.freeze(['landscape', 'vertical']);
+const TITLE_ATTEMPT_ROOT = kind => 'evals/clip_composition/reports/presentation/test-runs/'
+  + `20260818-rendering-decoupling-title-${kind}-attempt-0017`;
+const TITLE_CONTROL_ROOT = kind => 'evals/clip_composition/outputs/presentation/'
+  + `rendering-decoupling-title-control/qdczJpv8RCc-candidate-59-c-title-${kind}`
+  + '-decoupled-v017';
+const OLD_TITLE_PLAN_PATH = kind => 'evals/clip_composition/outputs/presentation/'
+  + `title-output-renders/qdczJpv8RCc-candidate-59-c-title-${kind}-v009-output/`
+  + 'title-display-plan-v001.json';
+const FIVE_TREE_TAP_PATH = 'evals/clip_composition/reports/presentation/test-runs/'
+  + '20260818-rendering-decoupling-five-tree-attempt-0002/stdout.txt';
+const A_V002_TREE_RESULT_PATH = 'evals/clip_composition/reports/presentation/test-runs/'
+  + '20260818-rendering-decoupling-a-v002-tree-attempt-0001/'
+  + 'a-v002-recorded-tree-verification.json';
 const COMPUTED_DYNAMIC_IMPORTS = Object.freeze(new Map([
   [
     'evals/clip_composition/render_presentation_vertical_review_v001.ts',
@@ -64,6 +78,19 @@ const COMPUTED_DYNAMIC_IMPORTS = Object.freeze(new Map([
 const FILE_IO_MODULES = Object.freeze(new Set([
   'node:fs', 'node:fs/promises', 'node:child_process',
 ]));
+const readJson = async file => JSON.parse(await readFile(file, 'utf8'));
+const titleFormalEvidence = async kind => {
+  const controlRoot = TITLE_CONTROL_ROOT(kind);
+  const [result, instruction, job, receipt, lineLayout, oldPlan] = await Promise.all([
+    readJson(`${TITLE_ATTEMPT_ROOT(kind)}/stdout.txt`),
+    readJson(`${controlRoot}/presentation-instruction-v001.json`),
+    readJson(`${controlRoot}/renderer-job-v001.json`),
+    readJson(`${controlRoot}/admission-receipt-v001.json`),
+    readJson(`${controlRoot}/line-layout-v001.json`),
+    readJson(OLD_TITLE_PLAN_PATH(kind)),
+  ]);
+  return {kind, controlRoot, result, instruction, job, receipt, lineLayout, oldPlan};
+};
 
 const resolveLocalImport = async (fromPath, specifier) => {
   if (!specifier.startsWith('.')) return null;
@@ -468,16 +495,16 @@ test('ZTOR011 source v1 schemaと成果物名を変更しない', () => {
   assert.match(job.sourceOutput.video.path, /presentation-output-rendered-v001\.mp4$/u);
 });
 
-test('ZTOR012 runnerは共通描画coreを一度呼び、no-replace commitを使う', async () => {
+test('ZTOR012 runnerは新rendererを一度呼び、旧描画coreを直接呼ばない', async () => {
   const source = await readFile(
     new URL('./run_presentation_output_title_job_v001.ts', import.meta.url),
     'utf8',
   );
-  assert.equal((source.match(/executeValidatedPresentationDrawAndQcV001\(\{/gu) ?? []).length, 1);
-  assert.equal((source.match(/commitValidatedPresentationArtifactsV002\(\{/gu) ?? []).length, 1);
-  assert.equal((source.match(/evaluatePresentationRendererQcWithProfileV001\(/gu) ?? []).length, 1);
-  assert.match(source,
-    /planFile: ZEVO_TITLE_OUTPUT_ARTIFACT_NAMES_V001\.plan/u);
+  assert.equal((source.match(/runPresentationInstructionRendererJobFileV001\(/gu)
+    ?? []).length, 1);
+  assert.doesNotMatch(source, /executeValidatedPresentationDrawAndQcV001/u);
+  assert.doesNotMatch(source, /commitValidatedPresentationArtifactsV002/u);
+  assert.doesNotMatch(source, /evaluatePresentationRendererQcWithProfileV001/u);
   assert.doesNotMatch(source, /publishPresentationArtifactsV002/u);
 });
 
@@ -503,6 +530,11 @@ test('ZTOR014 registry・font・license・source・implementation・runtimeを�
     'observeRuntimeBinding(job.runtimeProfile[role])',
     'runner/public/font/${asset.fileName}',
   ]) assert.match(source, new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&'), 'u'));
+  assert.match(source,
+    /streamHashAbsoluteStable\(resolved, \{requireSingleLink: false\}\)/u);
+  assert.match(source,
+    /streamHashAbsoluteStable\(runtimePath, \{requireSingleLink: false\}\)/u);
+  assert.match(source, /\{requireSingleLink = true\} = \{\}/u);
   const cliPath = '/workspace/runner/node_modules/@remotion/cli/remotion-cli.js';
   const launcher = Buffer.from(
     '#!/bin/sh\nexec node "$basedir/../@remotion/cli/remotion-cli.js" "$@"\n'
@@ -529,10 +561,10 @@ test('ZTOR014 registry・font・license・source・implementation・runtimeを�
 });
 
 test('ZTOR015 implementation graphの欠落・余分・role-path swapを拒否する', async () => {
-  assert.equal(ZEVO_TITLE_IMPLEMENTATION_ROLES_V001.length, 56);
+  assert.equal(ZEVO_TITLE_IMPLEMENTATION_ROLES_V001.length, 66);
   const graph = await collectLocalRuntimeImportGraph();
-  assert.equal(graph.paths.length, 54);
-  assert.equal(graph.edgeCount, 139);
+  assert.equal(graph.paths.length, 64);
+  assert.equal(graph.edgeCount, 171);
   assert.equal(graph.literalDynamicEdgeCount, 2);
   assert.equal(
     graph.typeOnlyEdges.includes(
@@ -545,7 +577,7 @@ test('ZTOR015 implementation graphの欠落・余分・role-path swapを拒否�
   const codeBindings = ZEVO_TITLE_IMPLEMENTATION_BINDINGS_V001.filter(
     binding => !MODULE_LOAD_DATA_BINDINGS.includes(binding.path),
   );
-  assert.equal(codeBindings.length, 54);
+  assert.equal(codeBindings.length, 64);
   assert.deepEqual(
     graph.paths,
     codeBindings.map(binding => binding.path).sort(),
@@ -617,4 +649,121 @@ test('ZTOR016 source manifestの全JSON・media参照を実読取し終了前に
     manifest: {...manifest, implementationBindings:
       invalidGenerationJob.implementationBindings},
   }), false);
+});
+
+test('PRM005: title landscapeとverticalは同じ注文書外枠とrenderer jobを使う', async () => {
+  const evidence = await Promise.all(TITLE_KINDS.map(titleFormalEvidence));
+  const expectedResultKeys = [
+    'schemaVersion', 'status', 'instructionArtifactBinding', 'rendererJobBinding',
+    'rendererResult',
+  ];
+  const expectedJobKeys = [
+    'schemaVersion', 'jobId', 'attemptId', 'instructionArtifactBinding',
+    'lineEndProjectionBinding',
+    'cropAppliedBaseMedia', 'executionInputs', 'registryBindings', 'runtimeBindings',
+    'rendererImplementationBindings', 'approvedContractBindings', 'publication',
+  ];
+  for (const row of evidence) {
+    assert.deepEqual(Object.keys(row.result), expectedResultKeys);
+    assert.deepEqual(Object.keys(row.job), expectedJobKeys);
+    assert.equal(row.result.status, 'passed');
+    assert.equal(row.result.rendererResult.status, 'completed');
+    assert.equal(row.result.rendererResult.qc.status, 'passed');
+    assert.equal(row.receipt.status, 'accepted');
+    assert.equal(row.instruction.artifactKind, 'title');
+    assert.equal(row.instruction.instructions.length, 1);
+    assert.equal(row.lineLayout.entries.length, 1);
+    assert.equal(row.receipt.visualStateId, row.job.executionInputs.visualStateId);
+    assert.equal(row.job.lineEndProjectionBinding, null);
+    assert.equal(row.receipt.lineEndProjectionBinding, null);
+    assert.deepEqual(row.receipt.runtimeBindings, row.job.runtimeBindings);
+
+    const processRoot = `${row.controlRoot}/process-observations/attempt-0001`;
+    const records = (await readdir(processRoot, {withFileTypes: true}))
+      .filter(entry => entry.isDirectory());
+    assert.ok(records.length > 0);
+    for (const record of records) {
+      const root = path.join(processRoot, record.name);
+      const exitCode = await readFile(path.join(root, 'exit-code.txt'), 'utf8');
+      assert.equal(
+        exitCode === '0\n'
+          || (record.name.endsWith('qc-image-difference') && exitCode === '1\n'),
+        true,
+      );
+      assert.equal(await readFile(path.join(root, 'signal.txt'), 'utf8'), 'none\n');
+      await readFile(path.join(root, 'stderr.txt'));
+    }
+  }
+  assert.deepEqual(
+    Object.keys(evidence[0].job.runtimeBindings),
+    Object.keys(evidence[1].job.runtimeBindings),
+  );
+});
+
+test('PRM006: title v009の本文・180frame・行分割・style適用結果が旧oracleと一致する', async () => {
+  const evidence = await Promise.all(TITLE_KINDS.map(titleFormalEvidence));
+  for (const row of evidence) {
+    const instruction = row.instruction.instructions[0];
+    const oldDisplay = row.oldPlan.titleDisplay;
+    const qc = row.result.rendererResult.qc;
+    const qcInstruction = qc.instructionEvidence[0];
+    assert.equal(instruction.content.text, oldDisplay.text);
+    assert.deepEqual(instruction.outputTime, {
+      startFrame: oldDisplay.startFrame,
+      endFrameExclusive: oldDisplay.endFrameExclusive,
+    });
+    assert.equal(oldDisplay.displayFrameCount, 180);
+    assert.deepEqual(
+      row.lineLayout.entries[0].lines.map(line => line.text),
+      oldDisplay.indexedLines.map(line => line.text),
+    );
+    assert.equal(qcInstruction.requestedPresetId, oldDisplay.requestedProfileId);
+    assert.equal(qcInstruction.appliedPresetId, oldDisplay.appliedProfileId);
+    assert.equal(qcInstruction.lineCount, oldDisplay.indexedLines.length);
+    assert.equal(qc.status, 'passed');
+    assert.equal(qc.mediaEvidence.observed.video.frameCount, 1547);
+  }
+});
+
+test('PRM007: captionとtitleのformal runnerは旧direct builderや暗黙runtimeを使わない', async () => {
+  const [captionSource, titleSource] = await Promise.all([
+    readFile(new URL('./run_presentation_zevo_caption_quality_v002_proof_job_v001.ts',
+      import.meta.url), 'utf8'),
+    readFile(new URL('./run_presentation_output_title_job_v001.ts', import.meta.url), 'utf8'),
+  ]);
+  for (const source of [captionSource, titleSource]) {
+    for (const obsolete of [
+      'buildPresentationOutputPageLinePlanV003(',
+      'buildPresentationOutputRenderPlanV003(',
+      'buildPresentationOutputCommonCorePlanV001(',
+      'executeValidatedPresentationDrawAndQcV001(',
+      'commitValidatedPresentationArtifactsV002(',
+      'publishPresentationArtifactsV002(',
+    ]) assert.equal(source.includes(obsolete), false, obsolete);
+    assert.doesNotMatch(source, /process\.env\.(?:PATH|CHROME|REMOTION)/u);
+  }
+  assert.equal(
+    (captionSource.match(/runPresentationInstructionRendererJobFileV001\(/gu) ?? []).length,
+    1,
+  );
+  assert.equal(
+    (titleSource.match(/runPresentationInstructionRendererJobFileV001\(/gu) ?? []).length,
+    1,
+  );
+});
+
+test('PRM008: 既存5 treeとA-v002記録対象treeは現在byte差0である', async () => {
+  const [fiveTreeTap, aV002] = await Promise.all([
+    readFile(FIVE_TREE_TAP_PATH, 'utf8'),
+    readJson(A_V002_TREE_RESULT_PATH),
+  ]);
+  assert.match(fiveTreeTap, /# pass 5\n/u);
+  assert.match(fiveTreeTap, /# fail 0\n/u);
+  for (const id of ['FOVT001', 'FOVT002', 'FOVT003', 'FOVT004', 'FOVT005']) {
+    assert.match(fiveTreeTap, new RegExp(`ok \\d+ - ${id}:`, 'u'));
+  }
+  assert.equal(aV002.exact, true);
+  assert.equal(aV002.recordedFileCount, 2887);
+  assert.deepEqual(aV002.missingPaths, []);
+  assert.deepEqual(aV002.changedPaths, []);
 });

@@ -1,0 +1,15 @@
+{
+  "command": "/usr/bin/env",
+  "environment": {
+    "NODE_OPTIONS": "absent",
+    "NODE_PATH": "/Users/kawafmm/workspace/zev2/runner/node_modules",
+    "PATH": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  },
+  "args": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+    "--test",
+    "--test-concurrency=1",
+    "evals/clip_composition/run_presentation_output_title_job_v001.test.mjs"
+  ]
+}

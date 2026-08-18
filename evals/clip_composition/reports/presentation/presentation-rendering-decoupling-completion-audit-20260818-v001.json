@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "presentation-rendering-decoupling-completion-audit-v001",
+  "workOrderId": "PRESENTATION-RENDERING-DECOUPLING-V001",
+  "status": "machine-verification-complete",
+  "canonicalPathAccounting": {
+    "used": 24,
+    "limit": 25,
+    "lastPath": "evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-addendum-20260818-v004.md",
+    "lastPathSha256": "8321a7ba99672af164f6a66285a3802f05b7f876e6c4fbf94e4211b0524f4d36"
+  },
+  "formalVerification": {
+    "contractExpected": 44,
+    "testSourceDeclared": 44,
+    "tapObserved": 44,
+    "tapPassed": 44,
+    "tapSha256": "dea7825ec97b15d5acab7e3f9a3a1ddc41f22d686d4fa5a6aab1597ea7e263c1",
+    "fourWayExact": true
+  },
+  "renders": [
+    {
+      "caseId": "voice-013-caption-landscape",
+      "status": "completed-qc-passed",
+      "videoSha256": "6b477c886cebabde3bca461613fa23cad8ca8f37b8875385d2f14e003d566036",
+      "comparison": "cue text, cue end, frame and every line boundary exact; human-approved 24/14 split restored"
+    },
+    {
+      "caseId": "candidate-59-title-landscape",
+      "status": "completed-qc-passed",
+      "videoSha256": "0aa5c83d7c407406eacd604abb337adf98d99913af962da85aebf0f4fe0ddd63",
+      "comparison": "text, 180-frame title interval, one-line layout and applied style exact"
+    },
+    {
+      "caseId": "candidate-59-title-vertical",
+      "status": "completed-qc-passed",
+      "videoSha256": "889fb29ac65860528bb70f06c404d236b10dc3e491d7e1d13c85310e578bb890",
+      "comparison": "text, 180-frame title interval, 11/8-code-point layout and applied style exact"
+    }
+  ],
+  "regression": {
+    "baseline": {
+      "expectedPass": 86,
+      "expectedTotal": 203,
+      "actualPass": 86,
+      "actualTotal": 203,
+      "exact": true,
+      "comparisonSha256": "801d5159c3eff105f3a81529aefd6e2ee24de0246680c7acebe2b4038229a0b3"
+    },
+    "fiveTrees": {"passed": 5, "total": 5, "tapSha256": "e78a0f98a8099b3acefbe68cbcb0022e800bd2ed9523740a009f886c95d4a43e"},
+    "aV002RecordedTree": {"recordedFiles": 2887, "missing": 0, "changed": 0, "exact": true, "recordSha256": "386462402f325e92daa378319f8b8681d979f2f41ad2d3195c0cab2fbbf0bc47"}
+  },
+  "restoredLargeFixture": {
+    "size": 3384584064,
+    "sha256": "219cd4af6e6560a0819bbca67fe36433cdb5e3f4b3260b42a5285093e9030209",
+    "sourceUnchanged": true,
+    "destinationRetained": true,
+    "recordSha256": "5efbb62b30252822a90ad190e4cb5c0c607cfc8fbdedf53bf8e3df44a3be5cac"
+  },
+  "review": {
+    "status": "review-ready",
+    "referencedArtifacts": 9,
+    "pathAndShaExact": 9,
+    "htmlSha256": "7459383dbdb01804476dab1feddf3cfb2402fd9502001fee7a18a5ddf9bc17a7",
+    "manifestSha256": "d3336e85a29f8511e81c26e7633216e371acccc12fdfcbcb74885c1cc28ab236"
+  },
+  "workPathCleanup": {
+    "archivedFilesBeforeManifest": 1582,
+    "archivedBytesBeforeManifest": 699650201,
+    "archivePayloadDigest": "db62b4add101f5fc53cf6f77babffd8884eb7309c47b76fe49c3b9e6c3722ca4",
+    "deletedEvidenceFiles": 0
+  },
+  "inventory": [
+    "Large regression fixture lifecycle is undefined: the baseline permanently depends on a 3.38GB file in a random-suffix work directory without a formal owner, supplier or admission contract. Revisit during skeleton cleanup."
+  ],
+  "externalEffects": {
+    "apiCalls": 0,
+    "costUsd": 0,
+    "commits": 0,
+    "tags": 0,
+    "publishes": 0
+  }
+}

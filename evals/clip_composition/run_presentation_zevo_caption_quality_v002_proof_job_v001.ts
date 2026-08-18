@@ -74,8 +74,8 @@ const RUNTIME_BINDINGS = Object.freeze({
     fileSha256: 'a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa',
   }),
   browser: Object.freeze({
-    path: '/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell',
-    fileSha256: 'b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8',
+    path: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    fileSha256: 'ee37661755341e9fc1babf9c20ec09d6a36e50aa8713ceb08082f8bbe2d8217d',
   }),
   ffmpeg: Object.freeze({
     path: '/opt/homebrew/bin/ffmpeg',
@@ -108,7 +108,18 @@ const CONTRACT_BINDINGS = Object.freeze([
   ['caption-quality-selection-runtime-value-wiring-addendum', 'evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-selection-runtime-value-wiring-addendum-20260811-v003.md', '632aa7fdec88da47fe8639fb10f74f390aa0cc5f191a114b797c08115bee4c9e'],
   ['caption-quality-source-final-package-validator-addendum', 'evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-source-final-package-validator-addendum-20260811-v007.md', '787d401d2939f58cbc10562c1ed29ab2118f6169607e05bbb2d7c5c5971c8053'],
   ['caption-quality-tsx-wrapper-descriptor-addendum', 'evals/clip_composition/reports/presentation/presentation-zevo-caption-quality-v002-tsx-wrapper-descriptor-addendum-20260812-v011.md', '61f2c3ddbe5a3bcb2bfaba39e0ce1cc2e18a77fb2f1f5337d3fd166044b41010'],
+  ['rendering-decoupling-contract-design-v001', 'evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-20260817-v001.md', 'aec224048ac6131173eb8b69b4b4d45cda88d5646ab3b67e8fa8b5561310df94'],
+  ['rendering-decoupling-contract-addendum-v001', 'evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-addendum-20260817-v001.md', '2643e7bf7ad8cdac6dd81a4fa1f1bb5c884b6f2968ec4db465554ad91bee1fad'],
+  ['rendering-decoupling-contract-addendum-v002', 'evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-addendum-20260817-v002.md', 'f19a0ff9a27de640959bbbc81fcf7920b63f7a0c19354bc7bf7c6b2a5fcdf47b'],
+  ['rendering-decoupling-contract-addendum-v003', 'evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-addendum-20260818-v003.md', 'cd4bfb75f8dfe0aec325ee8ae79cb136908ea7fa7e5fd2e610a430bfb4d1b16d'],
+  ['rendering-decoupling-contract-addendum-v004', 'evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-addendum-20260818-v004.md', '8321a7ba99672af164f6a66285a3802f05b7f876e6c4fbf94e4211b0524f4d36'],
 ].map(([role, bindingPath, fileSha256]) => Object.freeze({role, path: bindingPath, fileSha256})));
+
+export const PRESENTATION_ZEVO_CAPTION_RENDERER_TRUST_RUNTIME_BINDING_V002 = Object.freeze({
+  role: 'presentation-renderer-trust-v002',
+  path: 'evals/clip_composition/registries/presentation/presentation-renderer-trust-v002/trust.json',
+  fileSha256: '6e21352ff105e3b77acc351625fed22ff97486fb21d0ce9ee5b1821750a9047a',
+});
 
 const PROOF_IMPLEMENTATION_ROLE_PATHS = Object.freeze([
   ['atomic-directory-publisher-adapter-v001', 'evals/clip_composition/presentation_atomic_directory_publish_v001.mjs'],
@@ -142,6 +153,12 @@ const PROOF_IMPLEMENTATION_ROLE_PATHS = Object.freeze([
   ['dep-renderer-plan-v002', 'evals/clip_composition/presentation_renderer_plan_v002.mjs'],
   ['dep-renderer-qc-v002', 'evals/clip_composition/presentation_renderer_qc_v002.mjs'],
   ['dep-renderer-text-layout-v001', 'evals/clip_composition/presentation_renderer_text_layout_v001.mjs'],
+  ['instruction-renderer-runner-v001', 'evals/clip_composition/run_presentation_instruction_renderer_job_v001.ts'],
+  ['presentation-cue-end-projection-v001', 'evals/clip_composition/presentation_cue_end_projection_v001.mjs'],
+  ['presentation-instruction-artifact-v001', 'evals/clip_composition/presentation_instruction_artifact_v001.mjs'],
+  ['presentation-renderer-admission-v001', 'evals/clip_composition/presentation_renderer_admission_receipt_v001.mjs'],
+  ['presentation-renderer-line-layout-v001', 'evals/clip_composition/presentation_renderer_line_layout_rule_v001.mjs'],
+  ['presentation-renderer-process-observation-v001', 'evals/clip_composition/presentation_renderer_process_observation_v001.mjs'],
   ['dep-retained-source-atoms-v001', 'evals/clip_composition/presentation_retained_source_atoms_v001.mjs'],
   ['dep-segmenter-boundary-evidence-v001', 'evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs'],
   ['dep-segmenter-boundary-preflight-v001', 'evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs'],
@@ -256,10 +273,11 @@ export function validatePresentationZevoCaptionQualityV002ProofJobV001(value) {
       violations.push(violation('CUE_PROOF_CASE_SET_MISMATCH', '/cases'));
     }
     if (!validateRuntimeProfile(value.runtimeProfile)) violations.push(violation('CUE_PROOF_JOB_INVALID', '/runtimeProfile'));
-    if (!dense(value.runtimeDataBindings) || value.runtimeDataBindings.length !== 1
+    if (!dense(value.runtimeDataBindings) || value.runtimeDataBindings.length !== 2
       || !validateImplementationBinding(value.runtimeDataBindings[0])
       || value.runtimeDataBindings[0].role !== 'renderer-core-speaker-registry'
-      || value.runtimeDataBindings[0].path !== 'evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json') {
+      || value.runtimeDataBindings[0].path !== 'evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json'
+      || !same(value.runtimeDataBindings[1], PRESENTATION_ZEVO_CAPTION_RENDERER_TRUST_RUNTIME_BINDING_V002)) {
       violations.push(violation('CUE_PROOF_JOB_INVALID', '/runtimeDataBindings'));
     }
     if (!WORKSPACE_PATH.test(value.outputRoot) || !value.outputRoot.includes('/outputs/presentation/')) {
@@ -348,6 +366,118 @@ export function buildPresentationZevoCaptionQualityV002OutputRequestV001(input) 
   });
   if (!validateOutputRequest(outputRequest)) return rejectedValidation('CUE_RENDER_INPUT_INVALID', '/');
   return Object.freeze({status: 'passed', value: Object.freeze({outputRequest})});
+}
+
+export function buildPresentationZevoCaptionQualityV002RendererJobV001(input) {
+  if (!exactKeys(input, [
+    'proofJob', 'caseContext', 'instructionArtifactBinding', 'lineEndProjectionBinding',
+    'styleProfileRegistry',
+    'rendererTrust', 'rendererTrustBinding', 'rendererImplementationBindings',
+    'approvedContractBindings', 'publication',
+  ])
+    || validatePresentationZevoCaptionQualityV002ProofJobV001(input.proofJob).status
+      !== 'passed'
+    || !isObject(input.caseContext)
+    || !validateFormalBinding(input.instructionArtifactBinding)
+    || !validateFormalBinding(input.lineEndProjectionBinding)
+    || input.lineEndProjectionBinding.schemaVersion
+      !== 'presentation-semantic-line-end-projection-v001'
+    || !isObject(input.styleProfileRegistry)
+    || !isObject(input.rendererTrust)
+    || !validateFormalBinding(input.rendererTrustBinding)
+    || !dense(input.rendererImplementationBindings)
+    || !input.rendererImplementationBindings.every(validateImplementationBinding)
+    || !dense(input.approvedContractBindings)
+    || !input.approvedContractBindings.every(validateImplementationBinding)
+    || !exactKeys(input.publication, [
+      'admissionReceiptPath', 'lineLayoutPath', 'renderOutputRoot',
+    ])
+    || !Object.values(input.publication).every(value => WORKSPACE_PATH.test(value))) {
+    return rejectedValidation('CUE_RENDER_INPUT_INVALID', '/');
+  }
+  const proofCase = input.proofJob.cases.find(
+    row => row.caseId === input.caseContext.caseId,
+  );
+  const style = input.caseContext.resolvedStyle;
+  const presetBinding = input.caseContext.horizontalStyleInput?.presetBinding;
+  const profiles = input.styleProfileRegistry.presets?.filter(
+    row => row?.presetId === style?.presetId,
+  ) ?? [];
+  const visualStates = profiles.length === 1
+    ? profiles[0].visualStates?.filter(row => row?.stateId === style?.visualStateId) ?? []
+    : [];
+  if (proofCase === undefined
+    || proofCase.inputCaptionId !== input.caseContext.inputCaptionId
+    || !validateBaseMediaInput(input.caseContext.baseMediaInput)
+    || !validateStyleInput(input.caseContext.horizontalStyleInput)
+    || !isObject(style)
+    || !FORMAL_ID.test(style.presetId)
+    || !FORMAL_ID.test(style.visualStateId)
+    || style.format !== input.caseContext.horizontalStyleInput.format
+    || style.screenLayoutId !== input.caseContext.horizontalStyleInput.screenLayoutId
+    || profiles.length !== 1
+    || visualStates.length !== 1
+    || !isObject(input.styleProfileRegistry.canvas)
+    || !positive(input.styleProfileRegistry.canvas.width)
+    || !positive(input.styleProfileRegistry.canvas.height)
+    || !positive(input.styleProfileRegistry.canvas.fps)
+    || !isObject(presetBinding)
+    || !validateFormalBinding(presetBinding.presetRegistry)
+    || !validateFormalBinding(presetBinding.materialValidationIndex)
+    || input.rendererTrust.schemaVersion !== input.rendererTrustBinding.schemaVersion
+    || !dense(input.rendererTrust.fontAssets)) {
+    return rejectedValidation('CUE_RENDER_BINDING_MISMATCH', '/caseContext');
+  }
+  const runtime = input.proofJob.runtimeProfile;
+  const rendererJob = Object.freeze({
+    schemaVersion: 'presentation-instruction-renderer-job-v001',
+    jobId: `${input.proofJob.jobId}-${proofCase.caseId}-instruction-render-v001`,
+    attemptId: input.proofJob.attemptId,
+    instructionArtifactBinding: clone(input.instructionArtifactBinding),
+    lineEndProjectionBinding: clone(input.lineEndProjectionBinding),
+    cropAppliedBaseMedia: clone(input.caseContext.baseMediaInput),
+    executionInputs: Object.freeze({
+      format: style.format,
+      canvas: Object.freeze({
+        width: input.styleProfileRegistry.canvas.width,
+        height: input.styleProfileRegistry.canvas.height,
+        fps: input.styleProfileRegistry.canvas.fps,
+      }),
+      screenLayoutId: style.screenLayoutId,
+      visualStateId: style.visualStateId,
+      cropPolicy: Object.freeze({mode: 'already-applied'}),
+      sceneTransitionPolicy: Object.freeze({mode: 'straight-cut'}),
+      audioPolicy: Object.freeze({mode: 'preserve-source'}),
+      lineLayoutRules: Object.freeze({
+        'speech-caption': 'semantic-line-end-projection-v001',
+        title: 'greedy-code-point-v001',
+      }),
+    }),
+    registryBindings: Object.freeze({
+      styleProfileRegistry: clone(presetBinding.presetRegistry),
+      materialRegistry: clone(presetBinding.materialValidationIndex),
+      fontLedger: Object.freeze({
+        ...clone(input.rendererTrustBinding),
+        jsonPointer: '/fontAssets',
+        valueCanonicalSha256: canonicalSha(input.rendererTrust.fontAssets),
+      }),
+      rendererTrust: clone(input.rendererTrustBinding),
+    }),
+    runtimeBindings: Object.freeze({
+      ffmpeg: clone(runtime.ffmpeg),
+      ffprobe: clone(runtime.ffprobe),
+      imageMagick: clone(runtime.imageMagick),
+      remotion: clone(runtime.remotion),
+      tsx: clone(runtime.tsx),
+      chromium: clone(runtime.browser),
+    }),
+    rendererImplementationBindings: Object.freeze(clone(
+      input.rendererImplementationBindings,
+    )),
+    approvedContractBindings: Object.freeze(clone(input.approvedContractBindings)),
+    publication: Object.freeze(clone(input.publication)),
+  });
+  return Object.freeze({status: 'passed', value: Object.freeze({rendererJob})});
 }
 
 export function derivePresentationZevoCaptionQualityV002ObservedFadeFrameCountV001(input) {
@@ -442,10 +572,9 @@ const runtimeBindingCheck = async runtime => {
   return before === after && sha256(bytes) === runtime.fileSha256;
 };
 const CAPABILITY_KEYS = Object.freeze([
-  'ensurePathAbsent', 'createDirectory', 'readStableBytes', 'writeNoReplaceBytes',
+  'ensurePathAbsent', 'createDirectory', 'createDirectoryTree', 'readStableBytes', 'writeNoReplaceBytes',
   'copyNoReplaceBytes', 'verifyRuntimeBinding', 'rereadCaseInputs',
-  'buildPageLinePlan', 'buildRenderPlan', 'buildCommonRenderPlan',
-  'hashStableMedia', 'inspectBaseMedia', 'executeRendererAndQc', 'resolveStyle',
+  'runInstructionRendererJob', 'resolveStyle',
   'deriveObservedFadeFrameCount', 'validateReviewInput', 'decodeReviewInput',
   'buildReviewHtml', 'publishDirectory',
 ]);
@@ -459,6 +588,10 @@ function formalEnsurePathAbsent(input) {
 function formalCreateDirectory(input) {
   exactCapabilityInput(input, ['absolutePath'], 'createDirectory');
   return mkdir(input.absolutePath, {recursive: false});
+}
+function formalCreateDirectoryTree(input) {
+  exactCapabilityInput(input, ['absolutePath'], 'createDirectoryTree');
+  return mkdir(input.absolutePath, {recursive: true});
 }
 function formalReadStableBytes(input) {
   exactCapabilityInput(input, ['absolutePath'], 'readStableBytes');
@@ -484,66 +617,12 @@ function formalRereadCaseInputs(input) {
     rereadDependencies: input.verifiedDependencies.rereadDependencies,
   });
 }
-function formalBuildPageLinePlan(input) {
-  exactCapabilityInput(input, [
-    'sourcePackage', 'selection', 'selectionReport', 'selectionReportBinding',
-    'caseInputResult', 'caseId', 'proofJobId', 'projectionDependencies', 'plannerModule',
-  ], 'buildPageLinePlan');
-  return input.plannerModule.buildPresentationOutputPageLinePlanV003({
-    sourcePackage: input.sourcePackage,
-    selection: input.selection,
-    selectionReport: input.selectionReport,
-    selectionReportBinding: input.selectionReportBinding,
-    caseInputResult: input.caseInputResult,
-    caseId: input.caseId,
-    proofJobId: input.proofJobId,
-    projectionDependencies: input.projectionDependencies,
-  });
-}
-function formalBuildRenderPlan(input) {
-  exactCapabilityInput(input, [
-    'outputRequest', 'outputRequestBinding', 'pageLinePlan', 'sourcePackage',
-    'selection', 'selectionReport', 'meaningPackage', 'proofJobId',
-    'verifiedDependencies', 'renderModule',
-  ], 'buildRenderPlan');
-  return input.renderModule.buildPresentationOutputRenderPlanV003({
-    outputRequest: input.outputRequest,
-    outputRequestBinding: input.outputRequestBinding,
-    pageLinePlan: input.pageLinePlan,
-    sourcePackage: input.sourcePackage,
-    selection: input.selection,
-    selectionReport: input.selectionReport,
-    meaningPackage: input.meaningPackage,
-    proofJobId: input.proofJobId,
-    verifiedDependencies: input.verifiedDependencies,
-  });
-}
-function formalBuildCommonRenderPlan(input) {
-  exactCapabilityInput(input, [
-    'renderPlan', 'layoutContext', 'verifiedDependencies', 'renderModule',
-  ], 'buildCommonRenderPlan');
-  return input.renderModule.buildPresentationOutputCommonCorePlanV003({
-    renderPlan: input.renderPlan,
-    layoutContext: input.layoutContext,
-    verifiedDependencies: input.verifiedDependencies,
-  });
-}
-function formalHashStableMedia(input) {
-  exactCapabilityInput(input, ['absolutePath', 'timelineModule'], 'hashStableMedia');
-  return input.timelineModule.hashAbsoluteStableStreaming(input.absolutePath);
-}
-function formalInspectBaseMedia(input) {
-  exactCapabilityInput(input, [
-    'absolutePath', 'ffmpegPath', 'ffprobePath', 'qcModule',
-  ], 'inspectBaseMedia');
-  return input.qcModule.inspectRenderedMediaWithToolsV001(input.absolutePath, {
-    ffmpegPath: input.ffmpegPath,
-    ffprobePath: input.ffprobePath,
-  });
-}
-function formalExecuteRendererAndQc(input) {
-  exactCapabilityInput(input, ['drawInput', 'rendererModule'], 'executeRendererAndQc');
-  return input.rendererModule.executeValidatedPresentationDrawAndQcV001(input.drawInput);
+function formalRunInstructionRendererJob(input) {
+  exactCapabilityInput(input, ['jobPath', 'instructionRendererModule'], 'runInstructionRendererJob');
+  return input.instructionRendererModule.runPresentationInstructionRendererJobFileV001(
+    input.jobPath,
+    {workspaceRoot: WORKSPACE_ROOT},
+  );
 }
 function formalResolveStyle(input) {
   exactCapabilityInput(input, [
@@ -587,17 +666,13 @@ function formalPublishDirectory(input) {
 const FORMAL_PROOF_CAPABILITIES_V001 = {
   ensurePathAbsent: formalEnsurePathAbsent,
   createDirectory: formalCreateDirectory,
+  createDirectoryTree: formalCreateDirectoryTree,
   readStableBytes: formalReadStableBytes,
   writeNoReplaceBytes: formalWriteNoReplaceBytes,
   copyNoReplaceBytes: formalCopyNoReplaceBytes,
   verifyRuntimeBinding: formalVerifyRuntimeBinding,
   rereadCaseInputs: formalRereadCaseInputs,
-  buildPageLinePlan: formalBuildPageLinePlan,
-  buildRenderPlan: formalBuildRenderPlan,
-  buildCommonRenderPlan: formalBuildCommonRenderPlan,
-  hashStableMedia: formalHashStableMedia,
-  inspectBaseMedia: formalInspectBaseMedia,
-  executeRendererAndQc: formalExecuteRendererAndQc,
+  runInstructionRendererJob: formalRunInstructionRendererJob,
   resolveStyle: formalResolveStyle,
   deriveObservedFadeFrameCount: formalDeriveObservedFadeFrameCount,
   validateReviewInput: formalValidateReviewInput,
@@ -655,15 +730,12 @@ const cliResult = ({status, job = null, stage, primaryCode, innerObservation = n
 const DYNAMIC_DEPENDENCY_LOADERS = Object.freeze([
   Object.freeze({key: 'source', targetPath: 'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs', specifier: './presentation_output_caption_cue_source_package_v001.mjs', load: resolvedUrl => import(resolvedUrl)}),
   Object.freeze({key: 'selection', targetPath: 'evals/clip_composition/presentation_output_caption_cue_selection_v001.mjs', specifier: './presentation_output_caption_cue_selection_v001.mjs', load: resolvedUrl => import(resolvedUrl)}),
-  Object.freeze({key: 'planner', targetPath: 'evals/clip_composition/presentation_output_page_line_planner_v003.mjs', specifier: './presentation_output_page_line_planner_v003.mjs', load: resolvedUrl => import(resolvedUrl)}),
-  Object.freeze({key: 'render', targetPath: 'evals/clip_composition/presentation_output_render_plan_v003.mjs', specifier: './presentation_output_render_plan_v003.mjs', load: resolvedUrl => import(resolvedUrl)}),
+  Object.freeze({key: 'cueProjection', targetPath: 'evals/clip_composition/presentation_cue_end_projection_v001.mjs', specifier: './presentation_cue_end_projection_v001.mjs', load: resolvedUrl => import(resolvedUrl)}),
+  Object.freeze({key: 'instructionArtifact', targetPath: 'evals/clip_composition/presentation_instruction_artifact_v001.mjs', specifier: './presentation_instruction_artifact_v001.mjs', load: resolvedUrl => import(resolvedUrl)}),
+  Object.freeze({key: 'rendererAdmission', targetPath: 'evals/clip_composition/presentation_renderer_admission_receipt_v001.mjs', specifier: './presentation_renderer_admission_receipt_v001.mjs', load: resolvedUrl => import(resolvedUrl)}),
+  Object.freeze({key: 'instructionRenderer', targetPath: 'evals/clip_composition/run_presentation_instruction_renderer_job_v001.ts', specifier: './run_presentation_instruction_renderer_job_v001.ts', load: resolvedUrl => import(resolvedUrl)}),
   Object.freeze({key: 'review', targetPath: 'evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.mjs', specifier: './presentation_zevo_caption_quality_v002_review_ui_v001.mjs', load: resolvedUrl => import(resolvedUrl)}),
-  Object.freeze({key: 'renderer', targetPath: 'evals/clip_composition/render_presentation_v002.mjs', specifier: './render_presentation_v002.mjs', load: resolvedUrl => import(resolvedUrl)}),
   Object.freeze({key: 'style', targetPath: 'evals/clip_composition/presentation_output_style_resolver_v001.ts', specifier: './presentation_output_style_resolver_v001.ts', load: resolvedUrl => import(resolvedUrl)}),
-  Object.freeze({key: 'plannerV1', targetPath: 'evals/clip_composition/presentation_output_page_line_planner_v001.mjs', specifier: './presentation_output_page_line_planner_v001.mjs', load: resolvedUrl => import(resolvedUrl)}),
-  Object.freeze({key: 'plannerV2', targetPath: 'evals/clip_composition/presentation_output_page_line_planner_v002.mjs', specifier: './presentation_output_page_line_planner_v002.mjs', load: resolvedUrl => import(resolvedUrl)}),
-  Object.freeze({key: 'renderV1', targetPath: 'evals/clip_composition/presentation_output_render_plan_v001.mjs', specifier: './presentation_output_render_plan_v001.mjs', load: resolvedUrl => import(resolvedUrl)}),
-  Object.freeze({key: 'renderV2', targetPath: 'evals/clip_composition/presentation_output_render_plan_v002.mjs', specifier: './presentation_output_render_plan_v002.mjs', load: resolvedUrl => import(resolvedUrl)}),
   Object.freeze({key: 'timeline', targetPath: 'evals/clip_composition/presentation_timeline_composition_decision_v001.mjs', specifier: './presentation_timeline_composition_decision_v001.mjs', load: resolvedUrl => import(resolvedUrl)}),
   Object.freeze({key: 'meaningV2', targetPath: 'evals/clip_composition/presentation_a_meaning_information_package_v002.mjs', specifier: './presentation_a_meaning_information_package_v002.mjs', load: resolvedUrl => import(resolvedUrl)}),
   Object.freeze({key: 'sourceSequenceV2', targetPath: 'evals/clip_composition/presentation_a_source_sequence_v002.mjs', specifier: './presentation_a_source_sequence_v002.mjs', load: resolvedUrl => import(resolvedUrl)}),
@@ -1071,263 +1143,328 @@ export async function executePresentationZevoCaptionQualityV002ProofJobV001(inpu
       throw Object.assign(new Error(), {innerCode: caseInputResult.innerCode ?? 'UNCLASSIFIED'});
     }
     checkpoint(checkpoints, 'input-read', 'completed');
-    const projectionDependencies = {
-      resolveStyle: dependencies.style.resolvePresentationOutputStyleV001,
-      validateResolvedStyle: dependencies.plannerV2.validatePresentationOutputResolvedStyleV002,
-      buildPhysicalPageGraph: dependencies.plannerV1.buildPresentationOutputPhysicalPageGraphV001,
-      mapPiecewiseTimeline: dependencies.piecewise.mapPresentationOutputPiecewiseTimelineV002,
-      canonicalSha256MeaningJson: dependencies.sourceSequenceV2.canonicalSha256PresentationAJsonV002,
-      canonicalSha256FiniteJson: dependencies.finite.canonicalSha256PresentationOutputFiniteJsonV001,
-      serializeFiniteJson: dependencies.finite.serializePresentationOutputCropApplicationFormalJsonV001,
-      hashBytes: dependencies.semantic.sha256PresentationCaptionB1BytesV001,
-    };
-    const renderDependencies = {
-      deriveMeaningProjection: dependencies.renderV2.derivePresentationOutputMeaningProjectionV002,
-      buildCommonCoreElementProjection: dependencies.renderV1.buildPresentationOutputCommonCoreElementProjectionV001,
-    };
+    const rendererTrustRuntimeBinding = job.runtimeDataBindings.find(
+      binding => binding.role === PRESENTATION_ZEVO_CAPTION_RENDERER_TRUST_RUNTIME_BINDING_V002.role,
+    );
+    const rendererTrustBytes = await capabilities.readStableBytes({
+      absolutePath: absoluteWorkspacePath(rendererTrustRuntimeBinding.path),
+    });
+    if (sha256(rendererTrustBytes) !== rendererTrustRuntimeBinding.fileSha256) {
+      return rejectAfterStaging({
+        stage: 'dependency-initialization',
+        cliStage: 'dependency-initialization',
+        primaryCode: 'CUE_PROOF_EXECUTION_FAILED',
+        targetFile: failureTarget(rendererTrustRuntimeBinding),
+      });
+    }
+    const rendererTrust = JSON.parse(rendererTrustBytes.toString('utf8'));
+    const rendererTrustBinding = bindingForFormal(
+      rendererTrust.schemaVersion,
+      rendererTrustRuntimeBinding.path,
+      rendererTrust,
+    );
+    const rendererImplementationBindings = dependencies.instructionRenderer
+      .PRESENTATION_INSTRUCTION_RENDERER_IMPLEMENTATION_ROLE_PATHS_V001.map(([role, bindingPath]) => {
+        const bound = job.implementationBindings.find(binding => binding.path === bindingPath);
+        if (bound === undefined) throw new Error(`renderer implementation is not job-bound: ${bindingPath}`);
+        return Object.freeze({role, path: bindingPath, fileSha256: bound.fileSha256});
+      });
+    const rendererContractBindings = dependencies.instructionRenderer
+      .PRESENTATION_INSTRUCTION_RENDERER_CONTRACT_ROLE_PATHS_V001.map(([role, bindingPath]) => {
+        const bound = job.approvedContractBindings.find(binding => binding.path === bindingPath);
+        if (bound === undefined) throw new Error(`renderer contract is not job-bound: ${bindingPath}`);
+        return Object.freeze({role, path: bindingPath, fileSha256: bound.fileSha256});
+      });
+    const oldCompletionOracles = Object.freeze({
+      'voice-013': Object.freeze({
+        pageLinePlanBinding: Object.freeze({schemaVersion: 'presentation-output-page-line-plan-v003', path: 'evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs/a-v002-caption-quality-v022-proof-20260816-v003/voice-013/horizontal-formal/page-line-plan-v003.json', fileSha256: '71d47f3e069ddcf5d27c075ef19658face39de835cd954ed5e29cccde54029e9', canonicalSha256: '2bb831e3e264e0c514b03d4ebd8ae1c5b4d46611c97a40223da7f6297e5e9489'}),
+        renderPlanBinding: Object.freeze({schemaVersion: 'presentation-output-render-plan-v003', path: 'evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs/a-v002-caption-quality-v022-proof-20260816-v003/voice-013/horizontal-formal/render-plan-v003.json', fileSha256: 'd78c5486d172dd323b1bddbc8c99344260b448527589879fc356819aa54206c6', canonicalSha256: 'ad329d350b133abb0d9120191ab2badf7735a361e3bfa5bbc998d0d25fabc96a'}),
+      }),
+      'voice-067': Object.freeze({
+        pageLinePlanBinding: Object.freeze({schemaVersion: 'presentation-output-page-line-plan-v003', path: 'evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs/a-v002-caption-quality-v022-proof-20260816-v003/voice-067/horizontal-formal/page-line-plan-v003.json', fileSha256: '63e7e35d3ef967ccf42bcba1a0448d31d59224bbefbe4cb31dbf78862ed6792f', canonicalSha256: '7ac64db04f1fd9527e4f6581dcc1d1964f888cc29199865cd47663bdf62d604d'}),
+        renderPlanBinding: Object.freeze({schemaVersion: 'presentation-output-render-plan-v003', path: 'evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs/a-v002-caption-quality-v022-proof-20260816-v003/voice-067/horizontal-formal/render-plan-v003.json', fileSha256: '34624c6b33eae0ebc8b18d4221f0aa3cc45d54ea8838d0b87b2869e0908bce85', canonicalSha256: '8da0683c4f11c8181bf4d078cf4e0a0ad71ead11f4021bc06703e7347ab69798'}),
+      }),
+      'voice-190': Object.freeze({
+        pageLinePlanBinding: Object.freeze({schemaVersion: 'presentation-output-page-line-plan-v003', path: 'evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs/a-v002-caption-quality-v022-proof-20260816-v003/voice-190/horizontal-formal/page-line-plan-v003.json', fileSha256: 'f93a442e9a272e1fa8f66b89e872ef9d130fa95a001605f9be655321e751fd8f', canonicalSha256: 'e5b9f98e4d2949cd270a21f055e1ca4056f5776fa72ec101b36249186df9aeb5'}),
+        renderPlanBinding: Object.freeze({schemaVersion: 'presentation-output-render-plan-v003', path: 'evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs/a-v002-caption-quality-v022-proof-20260816-v003/voice-190/horizontal-formal/render-plan-v003.json', fileSha256: '7f24f356a3aa94fd9c86049d3b661418f8a4f22c06c0597d5057b1620eebc636', canonicalSha256: 'da5088d79c82a229f70b6d0358dd73e75f77601b8b24212d73d9145f8c7421a9'}),
+      }),
+    });
     const completionItems = [];
     const reviewItems = [];
     for (const expected of CASES) {
       const context = sourcePackage.reconstructionMap.caseContexts.find(entry => entry.caseId === expected.caseId);
-      if (context === undefined || context.inputCaptionId !== expected.inputCaptionId) {
+      const caseInput = caseInputResult.caseInputs.find(entry => entry.caseId === expected.caseId);
+      if (context === undefined || caseInput === undefined
+        || context.inputCaptionId !== expected.inputCaptionId) {
         return cliResult({status: 'rejected', job, stage: 'job-read', primaryCode: 'CUE_PROOF_CASE_SET_MISMATCH'});
       }
+      const casePaths = executionPaths.cases.find(entry => entry.caseId === expected.caseId);
+      if (casePaths === undefined) throw new TypeError('caption quality case path projection is missing');
+      const caseRoot = casePaths.proofCaseRoot;
+      const stagingCaseRoot = absoluteWorkspacePath(casePaths.proofStagingCaseRoot);
+
       activeTargetFile = null;
       activeFatalStage = 'output-request';
       activeCliStage = 'artifact-publication';
       activePrimaryCode = 'CUE_PROOF_PUBLICATION_FAILED';
       checkpoint(checkpoints, 'output-request', 'entered', expected.caseId);
-      const outputResult = buildPresentationZevoCaptionQualityV002OutputRequestV001({proofJob: job, caseContext: context});
+      const outputResult = buildPresentationZevoCaptionQualityV002OutputRequestV001({
+        proofJob: job,
+        caseContext: context,
+      });
       if (outputResult.status !== 'passed') return rejectAfterStaging({
         stage: 'render-plan', cliStage: 'render-plan', primaryCode: 'CUE_RENDER_INPUT_INVALID',
       });
       const outputRequest = outputResult.value.outputRequest;
-      const casePaths = executionPaths.cases.find(entry => entry.caseId === expected.caseId);
-      if (casePaths === undefined) throw new TypeError('caption quality case path projection is missing');
-      const caseRoot = casePaths.proofCaseRoot;
-      const stagingCaseRoot = absoluteWorkspacePath(casePaths.proofStagingCaseRoot);
       const outputRequestPath = `${caseRoot}/output-request-v001.json`;
       await capabilities.writeNoReplaceBytes({
         absolutePath: path.join(stagingCaseRoot, 'output-request-v001.json'),
         bytes: formalBytes(outputRequest),
       });
       const outputRequestBinding = bindingForFormal(OUTPUT_REQUEST_SCHEMA, outputRequestPath, outputRequest);
-      activeTargetFile = failureTarget(outputRequestBinding);
       const outputRequestReread = await capabilities.readStableBytes({
         absolutePath: path.join(stagingCaseRoot, 'output-request-v001.json'),
       });
-      const outputRequestDecoded = dependencies.render.decodePresentationZevoCaptionQualityOutputRequestV001(outputRequestReread);
-      if (outputRequestDecoded.status !== 'decoded' || !same(outputRequestDecoded.value, outputRequest)) {
-        return rejectAfterStaging({
-          stage: 'render-plan', cliStage: 'render-plan', primaryCode: 'CUE_RENDER_INPUT_INVALID',
-          targetFile: activeTargetFile,
-        });
-      }
+      if (!outputRequestReread.equals(formalBytes(outputRequest))) return rejectAfterStaging({
+        stage: 'render-plan', cliStage: 'render-plan', primaryCode: 'CUE_RENDER_INPUT_INVALID',
+        targetFile: failureTarget(outputRequestBinding),
+      });
       evidenceBindings.push(outputRequestBinding);
-      checkpoint(checkpoints, 'output-request', 'completed', expected.caseId, activeTargetFile);
-      activeFatalStage = 'page-line-planner';
-      activeCliStage = 'page-line-planner';
-      activePrimaryCode = 'CUE_PROOF_EXECUTION_FAILED';
-      checkpoint(checkpoints, 'page-line-planner', 'entered', expected.caseId);
-      const plannerResult = await capabilities.buildPageLinePlan({
-        sourcePackage,
-        selection,
-        selectionReport,
-        selectionReportBinding: job.selectionReportBinding,
-        caseInputResult,
-        caseId: expected.caseId,
-        proofJobId: job.jobId,
-        projectionDependencies,
-        plannerModule: dependencies.planner,
-      });
-      if (plannerResult.status !== 'passed') return rejectAfterStaging({
-        stage: 'page-line-planner', cliStage: 'page-line-planner', primaryCode: plannerResult.primaryCode,
-      });
-      const {pageLinePlan, renderSupport} = plannerResult.value;
-      const pageLinePath = `${caseRoot}/page-line-plan-v003.json`;
-      await capabilities.writeNoReplaceBytes({
-        absolutePath: path.join(stagingCaseRoot, 'page-line-plan-v003.json'),
-        bytes: formalBytes(pageLinePlan),
-      });
-      const pageLineBinding = bindingForFormal(pageLinePlan.schemaVersion, pageLinePath, pageLinePlan);
-      activeTargetFile = failureTarget(pageLineBinding);
-      const pageLineReread = dependencies.planner.decodePresentationOutputPageLinePlanV003(
-        await capabilities.readStableBytes({absolutePath: path.join(stagingCaseRoot, 'page-line-plan-v003.json')}),
-      );
-      if (pageLineReread.status !== 'decoded' || !same(pageLineReread.value, pageLinePlan)) {
-        activePrimaryCode = 'CUE_PROOF_PUBLICATION_FAILED';
-        activeCliStage = 'artifact-publication';
-        throw Object.assign(new Error(), {innerCode: 'PUBLICATION_FAILED'});
-      }
-      evidenceBindings.push(pageLineBinding);
-      checkpoint(checkpoints, 'page-line-planner', 'completed', expected.caseId, activeTargetFile);
-      const meaningPackage = caseInputResult.caseInputs.find(item => item.caseId === expected.caseId).meaningPackage;
-      activeFatalStage = 'render-plan';
-      activeCliStage = 'render-plan';
-      activePrimaryCode = 'CUE_PROOF_EXECUTION_FAILED';
-      checkpoint(checkpoints, 'render-plan', 'entered', expected.caseId);
-      const renderResult = await capabilities.buildRenderPlan({
-        outputRequest,
-        outputRequestBinding,
-        pageLinePlan,
-        sourcePackage,
-        selection,
-        selectionReport,
-        meaningPackage,
-        proofJobId: job.jobId,
-        verifiedDependencies: renderDependencies,
-        renderModule: dependencies.render,
-      });
-      if (renderResult.status !== 'passed') return rejectAfterStaging({
-        stage: 'render-plan', cliStage: 'render-plan', primaryCode: renderResult.primaryCode,
-      });
-      const renderPlan = renderResult.value.renderPlan;
-      const renderPath = `${caseRoot}/render-plan-v003.json`;
-      const renderBinding = bindingForFormal(renderPlan.schemaVersion, renderPath, renderPlan);
-      activeTargetFile = failureTarget(renderBinding);
-      activeCliStage = 'artifact-publication';
-      activePrimaryCode = 'CUE_RENDER_PUBLICATION_FAILED';
-      await capabilities.writeNoReplaceBytes({
-        absolutePath: path.join(stagingCaseRoot, 'render-plan-v003.json'),
-        bytes: formalBytes(renderPlan),
-      });
-      const renderReread = dependencies.render.decodePresentationOutputRenderPlanV003(
-        await capabilities.readStableBytes({absolutePath: path.join(stagingCaseRoot, 'render-plan-v003.json')}),
-      );
-      if (renderReread.status !== 'decoded' || !same(renderReread.value, renderPlan)) {
-        throw Object.assign(new Error(), {innerCode: 'PUBLICATION_FAILED'});
-      }
-      evidenceBindings.push(renderBinding);
-      checkpoint(checkpoints, 'render-plan', 'completed', expected.caseId, activeTargetFile);
-      activeFatalStage = 'common-render-plan';
-      activeCliStage = 'render-plan';
-      activePrimaryCode = 'CUE_PROOF_EXECUTION_FAILED';
-      checkpoint(checkpoints, 'common-render-plan', 'entered', expected.caseId);
-      const common = await capabilities.buildCommonRenderPlan({
-        renderPlan,
-        layoutContext: renderSupport.layoutContext,
-        verifiedDependencies: renderDependencies,
-        renderModule: dependencies.render,
-      });
-      if (common.status !== 'passed') return rejectAfterStaging({
-        stage: 'render-plan', cliStage: 'render-plan', primaryCode: common.primaryCode,
-      });
-      checkpoint(checkpoints, 'common-render-plan', 'completed', expected.caseId);
-      activeFatalStage = 'media-inspection';
-      activeCliStage = 'renderer-work';
-      checkpoint(checkpoints, 'media-inspection', 'entered', expected.caseId, failureTarget(context.baseMediaInput.baseMedia));
-      const baseMediaPath = absoluteWorkspacePath(context.baseMediaInput.baseMedia.path);
-      const baseSha = await capabilities.hashStableMedia({
-        absolutePath: baseMediaPath,
-        timelineModule: dependencies.timeline,
-      });
-      if (baseSha !== context.baseMediaInput.baseMedia.fileSha256) throw new Error('base media binding changed');
-      const media = await capabilities.inspectBaseMedia({
-        absolutePath: baseMediaPath,
-        ffmpegPath: job.runtimeProfile.ffmpeg.path,
-        ffprobePath: job.runtimeProfile.ffprobe.path,
-        qcModule: dependencies.qc,
-      });
-      const expectedFrameCount = media.video?.frameCount;
-      if (!positive(expectedFrameCount)) throw new Error('base media frame count unavailable');
-      checkpoint(checkpoints, 'media-inspection', 'completed', expected.caseId, failureTarget(context.baseMediaInput.baseMedia));
+      checkpoint(checkpoints, 'output-request', 'completed', expected.caseId, failureTarget(outputRequestBinding));
+
       activeFatalStage = 'renderer-work';
       activeCliStage = 'renderer-work';
+      activePrimaryCode = 'CUE_PROOF_EXECUTION_FAILED';
       checkpoint(checkpoints, 'renderer-work', 'entered', expected.caseId);
-      const workRoot = absoluteWorkspacePath(casePaths.rendererOutputRoot);
-      if (!(await capabilities.ensurePathAbsent({absolutePath: workRoot}))) throw new Error('renderer work root is already used');
-      const draw = await capabilities.executeRendererAndQc({
-        drawInput: {
-          outputDirectory: workRoot,
-          plan: common.value.commonCorePlan,
-          presetRegistry: renderSupport.layoutContext.presetRegistry,
-          baseMediaPath,
-          baseMediaInspection: {fileSha256: baseSha, frameCount: expectedFrameCount, media},
-          expectedFrameCount,
-          toolPaths: {
-            ffmpegPath: job.runtimeProfile.ffmpeg.path,
-            ffprobePath: job.runtimeProfile.ffprobe.path,
-            imageMagickPath: job.runtimeProfile.imageMagick.path,
-            tsxPath: job.runtimeProfile.tsx.path,
-            layoutInspectorPath: absoluteWorkspacePath('evals/clip_composition/inspect_presentation_render_layout_v001.ts'),
-          },
-        },
-        rendererModule: dependencies.renderer,
-      });
-      if (draw.exitCode !== 0 || draw.finalQc?.status !== 'passed') {
-        const failureStage = draw.failure?.stage === 'post-render-qc' ? 'qc'
-          : ['overlay-render', 'execution'].includes(draw.failure?.stage) ? 'rendering' : 'renderer-work';
-        for (const warning of draw.failure?.cleanupWarnings ?? []) {
-          if (typeof warning?.path === 'string') retentionPaths.push(warning.path);
-        }
-        if (draw.exitCode === 1) {
-          return rejectAfterStaging({
-            stage: failureStage,
-            cliStage: failureStage,
-            primaryCode: failureStage === 'qc' ? 'CUE_PROOF_QC_FAILED' : 'CUE_PROOF_RENDER_FAILED',
-          });
-        }
-        activeFatalStage = failureStage;
-        activeCliStage = failureStage;
-        activeToolExitCode = Number.isSafeInteger(draw.failure?.toolExitCode) ? draw.failure.toolExitCode : null;
-        throw Object.assign(new Error(), {innerCode: draw.failure?.innerCode ?? 'UNCLASSIFIED'});
+      const rendererCaseAbsolute = absoluteWorkspacePath(casePaths.rendererCaseParent);
+      if (!(await capabilities.ensurePathAbsent({absolutePath: rendererCaseAbsolute}))) {
+        throw new Error('renderer case root is already used');
       }
-      const owner = JSON.parse((await capabilities.readStableBytes({absolutePath: draw.reservation.ownerFile})).toString('utf8'));
-      if (!exactKeys(owner, ['schemaVersion', 'ownerToken', 'processId', 'outputDirectory'])
-        || owner.schemaVersion !== 'presentation-render-output-lock-v002'
-        || owner.ownerToken !== draw.reservation.ownerToken || owner.processId !== process.pid
-        || owner.outputDirectory !== draw.reservation.outputDirectory) throw new Error('renderer owner changed');
-      const workVideoBytes = await capabilities.readStableBytes({absolutePath: draw.workVideo});
+      await capabilities.createDirectoryTree({absolutePath: rendererCaseAbsolute});
+
+      const projectionBuilt = dependencies.cueProjection.buildPresentationCueEndProjectionV001({
+        projectionId: `${job.jobId}-${expected.caseId}-cue-end-projection-v001`,
+        sourcePackageBinding: selection.sourcePackageBinding,
+        sourceSelectionDigest: {
+          schemaVersion: selection.schemaVersion,
+          artifactId: selection.selectionId,
+          fileSha256: job.selectionBinding.fileSha256,
+          canonicalSha256: job.selectionBinding.canonicalSha256,
+        },
+        producerJobBinding: proofJobBinding,
+        sourcePackage,
+        selection,
+      });
+      if (projectionBuilt.status !== 'built') return rejectAfterStaging({
+        stage: 'render-plan', cliStage: 'render-plan', primaryCode: 'CUE_RENDER_INPUT_INVALID',
+      });
+      const projectionPath = `${casePaths.rendererCaseParent}/cue-end-projection-v001.json`;
+      await capabilities.writeNoReplaceBytes({
+        absolutePath: absoluteWorkspacePath(projectionPath),
+        bytes: dependencies.cueProjection.serializePresentationCueEndProjectionV001(projectionBuilt.projection),
+      });
+      const projectionBinding = dependencies.cueProjection.buildPresentationCueEndProjectionBindingV001({
+        path: projectionPath,
+        projection: projectionBuilt.projection,
+      });
+
+      const lineProjectionBuilt = dependencies.cueProjection
+        .buildPresentationSemanticLineEndProjectionV001({
+          projectionId: `${job.jobId}-${expected.caseId}-semantic-line-end-projection-v001`,
+          sourcePackageBinding: selection.sourcePackageBinding,
+          cueEndProjectionBinding: projectionBinding,
+          sourceSelectionDigest: {
+            schemaVersion: selection.schemaVersion,
+            artifactId: selection.selectionId,
+            fileSha256: job.selectionBinding.fileSha256,
+            canonicalSha256: job.selectionBinding.canonicalSha256,
+          },
+          producerJobBinding: proofJobBinding,
+          sourcePackage,
+          selection,
+          cueEndProjection: projectionBuilt.projection,
+        });
+      if (lineProjectionBuilt.status !== 'built') return rejectAfterStaging({
+        stage: 'render-plan', cliStage: 'render-plan', primaryCode: 'CUE_RENDER_INPUT_INVALID',
+      });
+      const lineProjectionPath = `${casePaths.rendererCaseParent}`
+        + '/semantic-line-end-projection-v001.json';
+      await capabilities.writeNoReplaceBytes({
+        absolutePath: absoluteWorkspacePath(lineProjectionPath),
+        bytes: dependencies.cueProjection.serializePresentationSemanticLineEndProjectionV001(
+          lineProjectionBuilt.projection,
+        ),
+      });
+      const lineProjectionBinding = dependencies.cueProjection
+        .buildPresentationSemanticLineEndProjectionBindingV001({
+          path: lineProjectionPath,
+          projection: lineProjectionBuilt.projection,
+        });
+
+      const instructionBuilt = dependencies.instructionArtifact
+        .buildPresentationCaptionInstructionArtifactV001({
+          artifactId: `${job.jobId}-${expected.caseId}-presentation-instruction-v001`,
+          sourceCaseId: expected.caseId,
+          meaningInformationPackageBinding: context.meaningPackageBinding,
+          timelineBinding: context.baseMediaInput.timeline,
+          cueEndProjectionBinding: projectionBinding,
+          producerJobBinding: proofJobBinding,
+          styleProfileId: context.resolvedStyle.presetId,
+          meaningPackage: caseInput.meaningPackage,
+          timeline: caseInput.baseMediaResolverInput.timeline,
+          cueEndProjection: projectionBuilt.projection,
+        });
+      if (instructionBuilt.status !== 'built') return rejectAfterStaging({
+        stage: 'render-plan', cliStage: 'render-plan', primaryCode: 'CUE_RENDER_INPUT_INVALID',
+      });
+      const instructionPath = `${casePaths.rendererCaseParent}/presentation-instruction-v001.json`;
+      await capabilities.writeNoReplaceBytes({
+        absolutePath: absoluteWorkspacePath(instructionPath),
+        bytes: dependencies.instructionArtifact.serializePresentationInstructionArtifactV001(
+          instructionBuilt.artifact,
+        ),
+      });
+      const instructionBinding = dependencies.instructionArtifact
+        .buildPresentationInstructionArtifactBindingV001({
+          path: instructionPath,
+          artifact: instructionBuilt.artifact,
+        });
+
+      const rendererJobBuilt = buildPresentationZevoCaptionQualityV002RendererJobV001({
+        proofJob: job,
+        caseContext: context,
+        instructionArtifactBinding: instructionBinding,
+        lineEndProjectionBinding: lineProjectionBinding,
+        styleProfileRegistry: caseInput.styleArtifacts.presetRegistry,
+        rendererTrust,
+        rendererTrustBinding,
+        rendererImplementationBindings,
+        approvedContractBindings: rendererContractBindings,
+        publication: {
+          admissionReceiptPath: `${casePaths.rendererCaseParent}/admission-receipt-v001.json`,
+          lineLayoutPath: `${casePaths.rendererCaseParent}/line-layout-v001.json`,
+          renderOutputRoot: casePaths.rendererOutputRoot,
+        },
+      });
+      if (rendererJobBuilt.status !== 'passed') return rejectAfterStaging({
+        stage: 'render-plan', cliStage: 'render-plan', primaryCode: 'CUE_RENDER_INPUT_INVALID',
+      });
+      const rendererJob = rendererJobBuilt.value.rendererJob;
+      const rendererJobPath = `${casePaths.rendererCaseParent}/renderer-job-v001.json`;
+      await capabilities.writeNoReplaceBytes({
+        absolutePath: absoluteWorkspacePath(rendererJobPath),
+        bytes: dependencies.rendererAdmission.serializePresentationInstructionRendererJobV001(rendererJob),
+      });
+      const rendererJobBinding = bindingForFormal(rendererJob.schemaVersion, rendererJobPath, rendererJob);
+      const rendered = await capabilities.runInstructionRendererJob({
+        jobPath: absoluteWorkspacePath(rendererJobPath),
+        instructionRendererModule: dependencies.instructionRenderer,
+      });
+      if (rendered.exitCode !== 0 || rendered.result?.status !== 'completed') {
+        if (rendered.exitCode === 1) return rejectAfterStaging({
+          stage: 'rendering', cliStage: 'rendering', primaryCode: 'CUE_PROOF_RENDER_FAILED',
+        });
+        activeToolExitCode = rendered.result?.failure?.toolExitCode ?? null;
+        throw Object.assign(new Error(), {innerCode: rendered.result?.failure?.stage ?? 'UNCLASSIFIED'});
+      }
+      const receiptBinding = bindingForFormal(
+        rendered.result.receipt.schemaVersion,
+        rendererJob.publication.admissionReceiptPath,
+        rendered.result.receipt,
+      );
+      const lineLayoutBinding = bindingForFormal(
+        rendered.result.lineLayout.schemaVersion,
+        rendererJob.publication.lineLayoutPath,
+        rendered.result.lineLayout,
+      );
+      const workVideoPath = `${casePaths.rendererOutputRoot}/presentation-rendered-v002.mp4`;
+      const workVideoBytes = await capabilities.readStableBytes({
+        absolutePath: absoluteWorkspacePath(workVideoPath),
+      });
       const videoPath = `${caseRoot}/video.mp4`;
       await capabilities.copyNoReplaceBytes({
-        sourceAbsolutePath: draw.workVideo,
+        sourceAbsolutePath: absoluteWorkspacePath(workVideoPath),
         targetAbsolutePath: path.join(stagingCaseRoot, 'video.mp4'),
       });
-      if (!(await capabilities.readStableBytes({absolutePath: path.join(stagingCaseRoot, 'video.mp4')})).equals(workVideoBytes)) {
-        throw new Error('video copy mismatch');
-      }
-      const qcPath = `${caseRoot}/renderer-qc-v001.json`;
+      const qcPath = `${caseRoot}/renderer-qc-v002.json`;
       await capabilities.writeNoReplaceBytes({
-        absolutePath: path.join(stagingCaseRoot, 'renderer-qc-v001.json'),
-        bytes: formalBytes(draw.finalQc),
+        absolutePath: path.join(stagingCaseRoot, 'renderer-qc-v002.json'),
+        bytes: formalBytes(rendered.result.qc),
       });
       const videoBinding = bindingForBytes(videoPath, workVideoBytes);
-      const qcBinding = bindingForFormal(draw.finalQc.schemaVersion, qcPath, draw.finalQc);
-      const ownerBytes = await capabilities.readStableBytes({absolutePath: draw.reservation.ownerFile});
-      const ownerBinding = bindingForBytes(workspaceRelative(draw.reservation.ownerFile), ownerBytes);
-      const workVideoBinding = bindingForBytes(workspaceRelative(draw.workVideo), workVideoBytes);
-      const evidence = {
-        outputDirectory: workspaceRelative(draw.reservation.outputDirectory),
-        workDirectory: workspaceRelative(draw.workDirectory),
-        lockDirectory: workspaceRelative(draw.reservation.lockDirectory),
-        ownerFileBinding: ownerBinding,
-        workVideoBinding,
-        retentionStatus: 'retained',
-      };
-      failureRendererWorkEvidence.push({caseId: expected.caseId, ...clone(evidence)});
-      evidenceBindings.push(videoBinding, qcBinding);
-      checkpoint(checkpoints, 'renderer-work', 'completed', expected.caseId, failureTarget(workVideoBinding));
-      checkpoint(checkpoints, 'rendering', 'entered', expected.caseId, failureTarget(workVideoBinding));
-      checkpoint(checkpoints, 'rendering', 'completed', expected.caseId, failureTarget(workVideoBinding));
+      const qcBinding = bindingForFormal(rendered.result.qc.schemaVersion, qcPath, rendered.result.qc);
+      const oracle = oldCompletionOracles[expected.caseId];
+      for (const binding of [oracle.pageLinePlanBinding, oracle.renderPlanBinding]) {
+        const oracleBytes = await readBoundBytes(binding, capabilities);
+        const oracleValue = JSON.parse(oracleBytes.toString('utf8'));
+        if (oracleValue.schemaVersion !== binding.schemaVersion
+          || canonicalSha(oracleValue) !== binding.canonicalSha256) throw new Error('byte oracle changed');
+      }
+      evidenceBindings.push(
+        projectionBinding,
+        lineProjectionBinding,
+        instructionBinding,
+        rendererJobBinding,
+        receiptBinding,
+        lineLayoutBinding,
+        videoBinding,
+        qcBinding,
+      );
+      checkpoint(checkpoints, 'renderer-work', 'completed', expected.caseId, failureTarget(videoBinding));
+      checkpoint(checkpoints, 'rendering', 'entered', expected.caseId, failureTarget(videoBinding));
+      checkpoint(checkpoints, 'rendering', 'completed', expected.caseId, failureTarget(videoBinding));
       checkpoint(checkpoints, 'qc', 'entered', expected.caseId, failureTarget(qcBinding));
       checkpoint(checkpoints, 'qc', 'completed', expected.caseId, failureTarget(qcBinding));
-      const cues = pageLinePlan.captionDisplays.flatMap(display => display.cues);
-      const shortest = [...cues].sort((left, right) => left.displayFrameCount - right.displayFrameCount || left.cueId.localeCompare(right.cueId))[0];
+
+      const cueTimingSummary = instructionBuilt.artifact.instructions.map((instruction, index) => ({
+        cueId: instruction.instructionId,
+        startFrame: instruction.outputTime.startFrame,
+        endFrameExclusive: instruction.outputTime.endFrameExclusive,
+        displayFrameCount: instruction.outputTime.endFrameExclusive - instruction.outputTime.startFrame,
+        lineTexts: rendered.result.lineLayout.entries[index].lines.map(line => line.text),
+      }));
+      const shortest = [...cueTimingSummary].sort((left, right) => (
+        left.displayFrameCount - right.displayFrameCount || left.cueId.localeCompare(right.cueId)
+      ))[0];
+      const frameCount = rendered.result.qc.mediaEvidence.observed.video.frameCount;
+      const durationMilliseconds = rendered.result.qc.mediaEvidence.observed.durationMs;
+      const rendererWorkEvidence = {
+        outputDirectory: casePaths.rendererOutputRoot,
+        workDirectory: null,
+        lockDirectory: null,
+        ownerFileBinding: null,
+        workVideoBinding: bindingForBytes(workVideoPath, workVideoBytes),
+        retentionStatus: 'published',
+      };
       completionItems.push({
-        caseId: expected.caseId, inputCaptionId: expected.inputCaptionId, candidateId: expected.candidateId,
-        pageLinePlanBinding: pageLineBinding, renderPlanBinding: renderBinding, videoBinding, qcBinding,
-        durationMilliseconds: Math.round(expectedFrameCount * 1000 / media.video.fps), frameCount: expectedFrameCount,
-        shortestCueId: shortest.cueId, shortestCueDisplayFrameCount: shortest.displayFrameCount,
-        rendererWorkEvidence: evidence,
+        caseId: expected.caseId,
+        inputCaptionId: expected.inputCaptionId,
+        candidateId: expected.candidateId,
+        pageLinePlanBinding: oracle.pageLinePlanBinding,
+        renderPlanBinding: oracle.renderPlanBinding,
+        cueEndProjectionBinding: projectionBinding,
+        instructionArtifactBinding: instructionBinding,
+        rendererJobBinding,
+        admissionReceiptBinding: receiptBinding,
+        lineLayoutBinding,
+        videoBinding,
+        qcBinding,
+        durationMilliseconds,
+        frameCount,
+        shortestCueId: shortest.cueId,
+        shortestCueDisplayFrameCount: shortest.displayFrameCount,
+        rendererWorkEvidence,
       });
       reviewItems.push({
-        caseId: expected.caseId, inputCaptionId: expected.inputCaptionId, candidateId: expected.candidateId,
-        humanObservationFixture: {oldRenderPlanBindings: oldFixtureFor(expected.caseId), knownIssuePatterns: patternsFor(expected.caseId)},
-        horizontal: {videoBinding, qcBinding, durationMilliseconds: Math.round(expectedFrameCount * 1000 / media.video.fps), frameCount: expectedFrameCount},
-        cueTimingSummary: cues.map(cue => ({
-          cueId: cue.cueId, startFrame: cue.startFrame, endFrameExclusive: cue.endFrameExclusive,
-          displayFrameCount: cue.displayFrameCount, lineTexts: cue.lines.map(line => line.text),
-        })),
+        caseId: expected.caseId,
+        inputCaptionId: expected.inputCaptionId,
+        candidateId: expected.candidateId,
+        humanObservationFixture: {
+          oldRenderPlanBindings: oldFixtureFor(expected.caseId),
+          knownIssuePatterns: patternsFor(expected.caseId),
+        },
+        horizontal: {videoBinding, qcBinding, durationMilliseconds, frameCount},
+        cueTimingSummary,
       });
     }
     const rendererBinding = job.implementationBindings.find(binding => binding.role === 'dep-renderer-core-v002');

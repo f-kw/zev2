@@ -1,0 +1,72 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/output-caption-cue-proof-runs/a-v002-caption-quality-v022-proof-20260816-v003/voice-013/horizontal-formal/video.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf62.3.100
+  Duration: 00:00:25.17, start: 0.000000, bitrate: 4380 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 4177 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc62.11.100 libx264
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 193 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Input #1, mov,mp4,m4a,3gp,3g2,mj2, from '/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/rendering-decoupling-caption-renders/a-v002-voice-013-v006/presentation-rendered-v002.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf62.3.100
+  Duration: 00:00:25.17, start: 0.000000, bitrate: 4379 kb/s
+  Stream #1:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 4176 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc62.11.100 libx264
+  Stream #1:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 193 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:0 (h264) -> hstack
+  Stream #1:0 (h264) -> hstack
+  hstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (copy)
+[libx264 @ 0x7cb051f80] using SAR=1/1
+[libx264 @ 0x7cb051f80] using cpu capabilities: ARMv8 NEON DotProd I8MM
+[libx264 @ 0x7cb051f80] profile High, level 5.0, 4:2:0, 8-bit
+[libx264 @ 0x7cb051f80] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=21 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=abr mbtree=1 bitrate=8354 ratetol=1.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to '/Users/kawafmm/workspace/zev2/evals/clip_composition/reports/presentation/rendering-decoupling-order-review-20260818-v001/side-by-side-comparisons-v001/voice-013-caption-landscape-old-left-new-right.mp4':
+  Metadata:
+    encoder         : Lavf62.3.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709/unknown/unknown, progressive), 3840x1080 [SAR 1:1 DAR 32:9], q=2-31, 8354 kb/s, 30 fps, 15360 tbn
+    Metadata:
+      encoder         : Lavc62.11.100 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/8354000 buffer size: 0 vbv_delay: N/A
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 193 kb/s (default)
+frame=    7 fps=0.0 q=30.0 size=     256KiB time=00:00:00.16 bitrate=12585.2kbits/s speed=0.33x elapsed=0:00:00.50    frame=   55 fps= 54 q=29.0 size=    1792KiB time=00:00:01.76 bitrate=8309.7kbits/s speed=1.75x elapsed=0:00:01.01    frame=  111 fps= 73 q=25.0 size=    2816KiB time=00:00:03.63 bitrate=6349.3kbits/s speed= 2.4x elapsed=0:00:01.51    frame=  161 fps= 80 q=25.0 size=    4608KiB time=00:00:05.30 bitrate=7122.5kbits/s speed=2.63x elapsed=0:00:02.01    frame=  220 fps= 87 q=22.0 size=    5888KiB time=00:00:07.26 bitrate=6637.8kbits/s speed=2.89x elapsed=0:00:02.51    frame=  275 fps= 91 q=23.0 size=    8192KiB time=00:00:09.10 bitrate=7374.6kbits/s speed=3.01x elapsed=0:00:03.01    frame=  312 fps= 89 q=24.0 size=    9984KiB time=00:00:10.33 bitrate=7915.1kbits/s speed=2.93x elapsed=0:00:03.52    frame=  359 fps= 89 q=24.0 size=   11776KiB time=00:00:11.90 bitrate=8106.7kbits/s speed=2.95x elapsed=0:00:04.02    frame=  403 fps= 89 q=25.0 size=   13568KiB time=00:00:13.36 bitrate=8315.4kbits/s speed=2.95x elapsed=0:00:04.53    frame=  447 fps= 89 q=25.0 size=   15360KiB time=00:00:14.83 bitrate=8482.9kbits/s speed=2.95x elapsed=0:00:05.03    frame=  492 fps= 89 q=26.0 size=   17152KiB time=00:00:16.33 bitrate=8602.6kbits/s speed=2.95x elapsed=0:00:05.53    frame=  540 fps= 89 q=26.0 size=   19200KiB time=00:00:17.93 bitrate=8770.6kbits/s speed=2.97x elapsed=0:00:06.04    frame=  597 fps= 91 q=26.0 size=   20992KiB time=00:00:19.83 bitrate=8670.6kbits/s speed=3.03x elapsed=0:00:06.54    frame=  640 fps= 91 q=25.0 size=   22272KiB time=00:00:21.26 bitrate=8579.3kbits/s speed=3.02x elapsed=0:00:07.04    frame=  694 fps= 92 q=25.0 size=   24064KiB time=00:00:23.06 bitrate=8546.2kbits/s speed=3.05x elapsed=0:00:07.55    [mp4 @ 0x7cb02fc00] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x7cb0206c0] video:25726KiB audio:595KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.107999%
+frame=  755 fps= 94 q=-1.0 Lsize=   26350KiB time=00:00:25.10 bitrate=8599.9kbits/s speed=3.13x elapsed=0:00:08.01    
+[libx264 @ 0x7cb051f80] frame I:4     Avg QP:15.30  size:329193
+[libx264 @ 0x7cb051f80] frame P:215   Avg QP:17.41  size: 80911
+[libx264 @ 0x7cb051f80] frame B:536   Avg QP:21.48  size: 14235
+[libx264 @ 0x7cb051f80] consecutive B-frames:  1.5% 10.6%  3.2% 84.8%
+[libx264 @ 0x7cb051f80] mb I  I16..4: 12.1% 63.6% 24.4%
+[libx264 @ 0x7cb051f80] mb P  I16..4:  3.8%  8.0%  1.4%  P16..4: 37.4% 15.0%  7.4%  0.0%  0.0%    skip:26.9%
+[libx264 @ 0x7cb051f80] mb B  I16..4:  0.5%  0.8%  0.1%  B16..8: 30.9%  2.8%  0.4%  direct: 2.0%  skip:62.6%  L0:46.9% L1:48.3% BI: 4.8%
+[libx264 @ 0x7cb051f80] final ratefactor: 19.22
+[libx264 @ 0x7cb051f80] 8x8 transform intra:60.5% inter:72.6%
+[libx264 @ 0x7cb051f80] coded y,uvDC,uvAC intra: 43.5% 76.3% 33.7% inter: 7.6% 14.3% 0.7%
+[libx264 @ 0x7cb051f80] i16 v,h,dc,p: 29% 29% 20% 22%
+[libx264 @ 0x7cb051f80] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 19% 25% 30%  3%  4%  3%  6%  3%  6%
+[libx264 @ 0x7cb051f80] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 26% 28% 18%  4%  5%  4%  6%  4%  4%
+[libx264 @ 0x7cb051f80] i8c dc,h,v,p: 42% 28% 20%  9%
+[libx264 @ 0x7cb051f80] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0x7cb051f80] ref P L0: 66.2%  7.3% 22.2%  4.3%
+[libx264 @ 0x7cb051f80] ref B L0: 84.7% 13.1%  2.2%
+[libx264 @ 0x7cb051f80] ref B L1: 96.3%  3.7%
+[libx264 @ 0x7cb051f80] kb/s:8373.82

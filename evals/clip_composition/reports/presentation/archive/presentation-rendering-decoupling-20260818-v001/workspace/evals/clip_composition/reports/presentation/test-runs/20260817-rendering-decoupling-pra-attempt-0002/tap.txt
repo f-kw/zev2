@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: PRA001 renderer job exact schema・formal byte・未使用出力先
+ok 1 - PRA001 renderer job exact schema・formal byte・未使用出力先
+  ---
+  duration_ms: 55.496333
+  ...
+# Subtest: PRA002 注文書・projection・意味情報・timelineのstable再読と相互binding一致
+ok 2 - PRA002 注文書・projection・意味情報・timelineのstable再読と相互binding一致
+  ---
+  duration_ms: 52.603667
+  ...
+# Subtest: PRA003 crop適用済み媒体4 bindingとframe/audio実体
+ok 3 - PRA003 crop適用済み媒体4 bindingとframe/audio実体
+  ---
+  duration_ms: 56.212584
+  ...
+# Subtest: PRA004 format/canvas/fpsの有限整数と媒体実体の整合
+ok 4 - PRA004 format/canvas/fpsの有限整数と媒体実体の整合
+  ---
+  duration_ms: 46.545
+  ...
+# Subtest: PRA005 instructionのstyleProfileIdが束縛台帳に一件だけ存在
+ok 5 - PRA005 instructionのstyleProfileIdが束縛台帳に一件だけ存在
+  ---
+  duration_ms: 50.453416
+  ...
+# Subtest: PRA006 materialRefs全件がmaterial台帳に存在
+ok 6 - PRA006 materialRefs全件がmaterial台帳に存在
+  ---
+  duration_ms: 48.008
+  ...
+# Subtest: PRA007 使用書体がfont ledger sectionと実file SHAへ閉じる
+ok 7 - PRA007 使用書体がfont ledger sectionと実file SHAへ閉じる
+  ---
+  duration_ms: 48.878625
+  ...
+# Subtest: PRA008 renderer trust台帳・layout規則・tool binding成立
+ok 8 - PRA008 renderer trust台帳・layout規則・tool binding成立
+  ---
+  duration_ms: 47.248
+  ...
+# Subtest: PRA009 renderer implementation全件のlive SHA一致
+ok 9 - PRA009 renderer implementation全件のlive SHA一致
+  ---
+  duration_ms: 48.7895
+  ...
+# Subtest: PRA010 crop/scene/audio/screen layout/line ruleのjob所有と注文書内0件
+ok 10 - PRA010 crop/scene/audio/screen layout/line ruleのjob所有と注文書内0件
+  ---
+  duration_ms: 48.064708
+  ...
+# Subtest: PRA011 receiptを描画work作成前に独立no-replace公開し、公開後再読一致
+ok 11 - PRA011 receiptを描画work作成前に独立no-replace公開し、公開後再読一致
+  ---
+  duration_ms: 65.357291
+  ...
+# Subtest: PRA012 receiptなし・差替え・既使用root・旧plan fallbackを全てfail-closed
+ok 12 - PRA012 receiptなし・差替え・既使用root・旧plan fallbackを全てfail-closed
+  ---
+  duration_ms: 46.602
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 673.172833

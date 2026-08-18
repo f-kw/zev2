@@ -1,0 +1,822 @@
+TAP version 13
+# Subtest: PRP001 formal byte・exact schema・決定的再構築
+ok 1 - PRP001 formal byte・exact schema・決定的再構築
+  ---
+  duration_ms: 4.18925
+  ...
+# Subtest: PRP002 source packageとcaption集合・順序・IDがexact一致
+ok 2 - PRP002 source packageとcaption集合・順序・IDがexact一致
+  ---
+  duration_ms: 1.974166
+  ...
+# Subtest: PRP003 cue終端がstrict増加し最終boundaryまでatom全量を一度ずつ覆う
+ok 3 - PRP003 cue終端がstrict増加し最終boundaryまでatom全量を一度ずつ覆う
+  ---
+  duration_ms: 1.051
+  ...
+# Subtest: PRP004 旧selectionのlineEndBoundaryIdsがprojection byteへ0件
+ok 4 - PRP004 旧selectionのlineEndBoundaryIdsがprojection byteへ0件
+  ---
+  duration_ms: 1.199541
+  ...
+# Subtest: PRP005 sourceSelectionDigestにpathがなく旧selection bindingをreject
+ok 5 - PRP005 sourceSelectionDigestにpathがなく旧selection bindingをreject
+  ---
+  duration_ms: 0.773125
+  ...
+# Subtest: PRP006 同一sourceとselectionから2回製造したprojection byteが一致
+ok 6 - PRP006 同一sourceとselectionから2回製造したprojection byteが一致
+  ---
+  duration_ms: 1.585458
+  ...
+# Subtest: PRI001 formal byteとexact schema、未知key拒否
+ok 7 - PRI001 formal byteとexact schema、未知key拒否
+  ---
+  duration_ms: 8.384667
+  ...
+# Subtest: PRI002 source binding全件のstable再読・SHA一致
+ok 8 - PRI002 source binding全件のstable再読・SHA一致
+  ---
+  duration_ms: 3.270875
+  ...
+# Subtest: PRI003 instruction ID一意性と決定順
+ok 9 - PRI003 instruction ID一意性と決定順
+  ---
+  duration_ms: 8.1665
+  ...
+# Subtest: PRI004 frame範囲が正でtimeline内に閉じms field 0件
+ok 10 - PRI004 frame範囲が正でtimeline内に閉じms field 0件
+  ---
+  duration_ms: 2.328
+  ...
+# Subtest: PRI005 caption本文・atom順・cue終端の全量閉包
+ok 11 - PRI005 caption本文・atom順・cue終端の全量閉包
+  ---
+  duration_ms: 2.751875
+  ...
+# Subtest: PRI006 title本文と意味情報package titleのbyte一致
+ok 12 - PRI006 title本文と意味情報package titleのbyte一致
+  ---
+  duration_ms: 0.871209
+  ...
+# Subtest: PRI007 semanticKind・targetType・artifactKindの条件表一致
+ok 13 - PRI007 semanticKind・targetType・artifactKindの条件表一致
+  ---
+  duration_ms: 2.535125
+  ...
+# Subtest: PRI008 target・material参照実在と重複0
+ok 14 - PRI008 target・material参照実在と重複0
+  ---
+  duration_ms: 2.38525
+  ...
+# Subtest: PRI009 禁止field閉集合全件が発火し正当なtimelineは誤拒否しない
+ok 15 - PRI009 禁止field閉集合全件が発火し正当なtimelineは誤拒否しない
+  ---
+  duration_ms: 3.057792
+  ...
+# Subtest: PRI010 同一入力から注文書formal byteが一致
+ok 16 - PRI010 同一入力から注文書formal byteが一致
+  ---
+  duration_ms: 4.0465
+  ...
+# Subtest: PRA001 renderer job exact schema・formal byte・未使用出力先
+ok 17 - PRA001 renderer job exact schema・formal byte・未使用出力先
+  ---
+  duration_ms: 54.904791
+  ...
+# Subtest: PRA002 注文書・projection・意味情報・timelineのstable再読と相互binding一致
+ok 18 - PRA002 注文書・projection・意味情報・timelineのstable再読と相互binding一致
+  ---
+  duration_ms: 51.454416
+  ...
+# Subtest: PRA003 crop適用済み媒体4 bindingとframe/audio実体
+ok 19 - PRA003 crop適用済み媒体4 bindingとframe/audio実体
+  ---
+  duration_ms: 56.736875
+  ...
+# Subtest: PRA004 format/canvas/fpsの有限整数と媒体実体の整合
+ok 20 - PRA004 format/canvas/fpsの有限整数と媒体実体の整合
+  ---
+  duration_ms: 46.533958
+  ...
+# Subtest: PRA005 styleProfileIdとvisualStateIdが同じprofile配下に各一件だけ存在
+ok 21 - PRA005 styleProfileIdとvisualStateIdが同じprofile配下に各一件だけ存在
+  ---
+  duration_ms: 49.442
+  ...
+# Subtest: PRA006 materialRefs全件がmaterial台帳に存在
+ok 22 - PRA006 materialRefs全件がmaterial台帳に存在
+  ---
+  duration_ms: 48.928584
+  ...
+# Subtest: PRA007 使用書体がfont ledger sectionと実file SHAへ閉じる
+ok 23 - PRA007 使用書体がfont ledger sectionと実file SHAへ閉じる
+  ---
+  duration_ms: 47.212334
+  ...
+# Subtest: PRA008 renderer trust台帳・layout規則・tool binding成立
+ok 24 - PRA008 renderer trust台帳・layout規則・tool binding成立
+  ---
+  duration_ms: 49.521958
+  ...
+# Subtest: PRA009 renderer implementation全件のlive SHA一致
+ok 25 - PRA009 renderer implementation全件のlive SHA一致
+  ---
+  duration_ms: 47.92475
+  ...
+# Subtest: PRA010 visual stateと実行値のjob所有・receipt同値・注文書内0件
+ok 26 - PRA010 visual stateと実行値のjob所有・receipt同値・注文書内0件
+  ---
+  duration_ms: 50.060541
+  ...
+# Subtest: PRA011 receiptを描画work作成前に独立no-replace公開し、公開後再読一致
+ok 27 - PRA011 receiptを描画work作成前に独立no-replace公開し、公開後再読一致
+  ---
+  duration_ms: 62.975666
+  ...
+# Subtest: PRA012 receiptなし・差替え・既使用root・旧plan fallbackを全てfail-closed
+ok 28 - PRA012 receiptなし・差替え・既使用root・旧plan fallbackを全てfail-closed
+  ---
+  duration_ms: 50.976167
+  ...
+# Subtest: PRL001 一行に収まるcaptionを一行にする
+ok 29 - PRL001 一行に収まるcaptionを一行にする
+  ---
+  duration_ms: 8.31475
+  ...
+# Subtest: PRL002 voice-013 cue 1をboundary 17へ分け同点18をordinalで退ける
+ok 30 - PRL002 voice-013 cue 1をboundary 17へ分け同点18をordinalで退ける
+  ---
+  duration_ms: 3.294875
+  ...
+# Subtest: PRL003 voice-013 cue 2/3を51/85へ分ける
+ok 31 - PRL003 voice-013 cue 2/3を51/85へ分ける
+  ---
+  duration_ms: 2.616166
+  ...
+# Subtest: PRL004 3 cueのline text・atom集合・論理幅が旧plan projectionとbyte一致
+ok 32 - PRL004 3 cueのline text・atom集合・論理幅が旧plan projectionとbyte一致
+  ---
+  duration_ms: 2.804958
+  ...
+# Subtest: PRL005 title landscape v009を一行で再現
+ok 33 - PRL005 title landscape v009を一行で再現
+  ---
+  duration_ms: 1.080708
+  ...
+# Subtest: PRL006 title vertical v009を11/8 code pointの二行で再現
+ok 34 - PRL006 title vertical v009を11/8 code pointの二行で再現
+  ---
+  duration_ms: 0.895291
+  ...
+# Subtest: PRL007 有効partition 0件・maxLines超過・unit欠落重複をreject
+ok 35 - PRL007 有効partition 0件・maxLines超過・unit欠落重複をreject
+  ---
+  duration_ms: 2.859125
+  ...
+# Subtest: PRL008 乱数・係数・旧selection読取・別計算実装0件
+ok 36 - PRL008 乱数・係数・旧selection読取・別計算実装0件
+  ---
+  duration_ms: 0.488833
+  ...
+# Subtest: renderer runner title planは新line layoutから旧共通planと同じ表示値を作る
+ok 37 - renderer runner title planは新line layoutから旧共通planと同じ表示値を作る # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.348875
+  ...
+# Subtest: renderer runnerは明示visualStateIdだけを選び暗黙defaultを使わない
+ok 38 - renderer runnerは明示visualStateIdだけを選び暗黙defaultを使わない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.041834
+  ...
+# Subtest: renderer runnerは外部実行体6件をpath実体とSHAで再読する
+ok 39 - renderer runnerは外部実行体6件をpath実体とSHAで再読する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.036083
+  ...
+# Subtest: renderer overlayはjobとreceiptで確定したRemotionとChromiumだけを明示使用する
+ok 40 - renderer overlayはjobとreceiptで確定したRemotionとChromiumだけを明示使用する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.030666
+  ...
+# Subtest: renderer child観測は終了code・stderr・signalを出力読取前に独立保存する
+ok 41 - renderer child観測は終了code・stderr・signalを出力読取前に独立保存する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.099
+  ...
+# Subtest: PRM001: voice-013横型はprojectionから注文書・receipt・line layout・描画・QCまで完走する
+ok 42 - PRM001: voice-013横型はprojectionから注文書・receipt・line layout・描画・QCまで完走する
+  ---
+  duration_ms: 40.278417
+  ...
+# Subtest: PRM002: voice-013の注文書は旧render planなしで描画できる
+ok 43 - PRM002: voice-013の注文書は旧render planなしで描画できる
+  ---
+  duration_ms: 3.149667
+  ...
+# Subtest: PRM003: 工事前後でvoice-013の本文・cue終端・frame・行分割projectionがbyte一致する
+not ok 44 - PRM003: 工事前後でvoice-013の本文・cue終端・frame・行分割projectionがbyte一致する
+  ---
+  duration_ms: 3.130833
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v001.test.mjs:270:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+      [
+        {
+    ...
+          lines: [
+            {
+    +         logicalWidth: 18,
+    -         logicalWidth: 24,
+              sourceUnitIds: [
+                'atom-occurrence-000072',
+    ...
+                'atom-occurrence-000079',
+                'atom-occurrence-000080'
+    +         ],
+    +         text: 'デスカード、デビル'
+    +       },
+    +       {
+    +         logicalWidth: 20,
+    +         sourceUnitIds: [
+    +           'atom-occurrence-000081',
+    +           'atom-occurrence-000082',
+    +           'atom-occurrence-000083',
+    -           'atom-occurrence-000081',
+    -           'atom-occurrence-000082',
+    -           'atom-occurrence-000083'
+    -         ],
+    -         text: 'デスカード、デビルカード'
+    -       },
+    -       {
+    -         logicalWidth: 14,
+    -         sourceUnitIds: [
+                'atom-occurrence-000084',
+                'atom-occurrence-000085',
+    ...
+                'atom-occurrence-000090'
+              ],
+    +         text: 'カード来ないんだけど'
+    -         text: '来ないんだけど'
+            }
+    ...
+          text: '来るのかないつか来ない'
+        }
+      ]
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      text: 'マジ殺してやる!'
+      cueEndBoundaryId: 'display-boundary-000001-000008'
+      startFrame: 0
+      endFrameExclusive: 31
+      lines:
+        0:
+          text: 'マジ殺してやる!'
+          logicalWidth: 15
+          sourceUnitIds:
+            0: 'atom-occurrence-000001'
+            1: 'atom-occurrence-000002'
+            2: 'atom-occurrence-000003'
+            3: 'atom-occurrence-000004'
+            4: 'atom-occurrence-000005'
+            5: 'atom-occurrence-000006'
+            6: 'atom-occurrence-000007'
+            7: 'atom-occurrence-000008'
+    1:
+      text: '見ろ!'
+      cueEndBoundaryId: 'display-boundary-000001-000011'
+      startFrame: 31
+      endFrameExclusive: 50
+      lines:
+        0:
+          text: '見ろ!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000009'
+            1: 'atom-occurrence-000010'
+            2: 'atom-occurrence-000011'
+    2:
+      text: 'バカが!'
+      cueEndBoundaryId: 'display-boundary-000001-000015'
+      startFrame: 50
+      endFrameExclusive: 96
+      lines:
+        0:
+          text: 'バカが!'
+          logicalWidth: 7
+          sourceUnitIds:
+            0: 'atom-occurrence-000012'
+            1: 'atom-occurrence-000013'
+            2: 'atom-occurrence-000014'
+            3: 'atom-occurrence-000015'
+    3:
+      text: 'なぁ!'
+      cueEndBoundaryId: 'display-boundary-000001-000018'
+      startFrame: 96
+      endFrameExclusive: 125
+      lines:
+        0:
+          text: 'なぁ!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000016'
+            1: 'atom-occurrence-000017'
+            2: 'atom-occurrence-000018'
+    4:
+      text: 'マリン疑ってんじゃねぇ!'
+      cueEndBoundaryId: 'display-boundary-000001-000030'
+      startFrame: 125
+      endFrameExclusive: 167
+      lines:
+        0:
+          text: 'マリン疑ってんじゃねぇ!'
+          logicalWidth: 23
+          sourceUnitIds:
+            0: 'atom-occurrence-000019'
+            1: 'atom-occurrence-000020'
+            2: 'atom-occurrence-000021'
+            3: 'atom-occurrence-000022'
+            4: 'atom-occurrence-000023'
+            5: 'atom-occurrence-000024'
+            6: 'atom-occurrence-000025'
+            7: 'atom-occurrence-000026'
+            8: 'atom-occurrence-000027'
+            9: 'atom-occurrence-000028'
+            10: 'atom-occurrence-000029'
+            11: 'atom-occurrence-000030'
+    5:
+      text: 'マリンが好きなんじゃなかったんか!'
+      cueEndBoundaryId: 'display-boundary-000001-000047'
+      startFrame: 167
+      endFrameExclusive: 251
+      lines:
+        0:
+          text: 'マリンが好きなんじゃなかったんか!'
+          logicalWidth: 33
+          sourceUnitIds:
+            0: 'atom-occurrence-000031'
+            1: 'atom-occurrence-000032'
+            2: 'atom-occurrence-000033'
+            3: 'atom-occurrence-000034'
+            4: 'atom-occurrence-000035'
+            5: 'atom-occurrence-000036'
+            6: 'atom-occurrence-000037'
+            7: 'atom-occurrence-000038'
+            8: 'atom-occurrence-000039'
+            9: 'atom-occurrence-000040'
+            10: 'atom-occurrence-000041'
+            11: 'atom-occurrence-000042'
+            12: 'atom-occurrence-000043'
+            13: 'atom-occurrence-000044'
+            14: 'atom-occurrence-000045'
+            15: 'atom-occurrence-000046'
+            16: 'atom-occurrence-000047'
+    6:
+      text: 'てで!'
+      cueEndBoundaryId: 'display-boundary-000001-000050'
+      startFrame: 251
+      endFrameExclusive: 295
+      lines:
+        0:
+          text: 'てで!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000048'
+            1: 'atom-occurrence-000049'
+            2: 'atom-occurrence-000050'
+    7:
+      text: '何生き残ってんだよぉ!'
+      cueEndBoundaryId: 'display-boundary-000001-000061'
+      startFrame: 295
+      endFrameExclusive: 375
+      lines:
+        0:
+          text: '何生き残ってんだよぉ!'
+          logicalWidth: 21
+          sourceUnitIds:
+            0: 'atom-occurrence-000051'
+            1: 'atom-occurrence-000052'
+            2: 'atom-occurrence-000053'
+            3: 'atom-occurrence-000054'
+            4: 'atom-occurrence-000055'
+            5: 'atom-occurrence-000056'
+            6: 'atom-occurrence-000057'
+            7: 'atom-occurrence-000058'
+            8: 'atom-occurrence-000059'
+            9: 'atom-occurrence-000060'
+            10: 'atom-occurrence-000061'
+    8:
+      text: '生き残んなお前はぁ!'
+      cueEndBoundaryId: 'display-boundary-000001-000071'
+      startFrame: 375
+      endFrameExclusive: 518
+      lines:
+        0:
+          text: '生き残んなお前はぁ!'
+          logicalWidth: 19
+          sourceUnitIds:
+            0: 'atom-occurrence-000062'
+            1: 'atom-occurrence-000063'
+            2: 'atom-occurrence-000064'
+            3: 'atom-occurrence-000065'
+            4: 'atom-occurrence-000066'
+            5: 'atom-occurrence-000067'
+            6: 'atom-occurrence-000068'
+            7: 'atom-occurrence-000069'
+            8: 'atom-occurrence-000070'
+            9: 'atom-occurrence-000071'
+    9:
+      text: 'デスカード、デビルカード来ないんだけど'
+      cueEndBoundaryId: 'display-boundary-000001-000090'
+      startFrame: 518
+      endFrameExclusive: 605
+      lines:
+        0:
+          text: 'デスカード、デビルカード'
+          logicalWidth: 24
+          sourceUnitIds:
+            0: 'atom-occurrence-000072'
+            1: 'atom-occurrence-000073'
+            2: 'atom-occurrence-000074'
+            3: 'atom-occurrence-000075'
+            4: 'atom-occurrence-000076'
+            5: 'atom-occurrence-000077'
+            6: 'atom-occurrence-000078'
+            7: 'atom-occurrence-000079'
+            8: 'atom-occurrence-000080'
+            9: 'atom-occurrence-000081'
+            10: 'atom-occurrence-000082'
+            11: 'atom-occurrence-000083'
+        1:
+          text: '来ないんだけど'
+          logicalWidth: 14
+          sourceUnitIds:
+            0: 'atom-occurrence-000084'
+            1: 'atom-occurrence-000085'
+            2: 'atom-occurrence-000086'
+            3: 'atom-occurrence-000087'
+            4: 'atom-occurrence-000088'
+            5: 'atom-occurrence-000089'
+            6: 'atom-occurrence-000090'
+    10:
+      text: '来るのかないつか来ない'
+      cueEndBoundaryId: 'display-boundary-000001-000101'
+      startFrame: 605
+      endFrameExclusive: 755
+      lines:
+        0:
+          text: '来るのかないつか来ない'
+          logicalWidth: 22
+          sourceUnitIds:
+            0: 'atom-occurrence-000091'
+            1: 'atom-occurrence-000092'
+            2: 'atom-occurrence-000093'
+            3: 'atom-occurrence-000094'
+            4: 'atom-occurrence-000095'
+            5: 'atom-occurrence-000096'
+            6: 'atom-occurrence-000097'
+            7: 'atom-occurrence-000098'
+            8: 'atom-occurrence-000099'
+            9: 'atom-occurrence-000100'
+            10: 'atom-occurrence-000101'
+  actual:
+    0:
+      text: 'マジ殺してやる!'
+      cueEndBoundaryId: 'display-boundary-000001-000008'
+      startFrame: 0
+      endFrameExclusive: 31
+      lines:
+        0:
+          text: 'マジ殺してやる!'
+          logicalWidth: 15
+          sourceUnitIds:
+            0: 'atom-occurrence-000001'
+            1: 'atom-occurrence-000002'
+            2: 'atom-occurrence-000003'
+            3: 'atom-occurrence-000004'
+            4: 'atom-occurrence-000005'
+            5: 'atom-occurrence-000006'
+            6: 'atom-occurrence-000007'
+            7: 'atom-occurrence-000008'
+    1:
+      text: '見ろ!'
+      cueEndBoundaryId: 'display-boundary-000001-000011'
+      startFrame: 31
+      endFrameExclusive: 50
+      lines:
+        0:
+          text: '見ろ!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000009'
+            1: 'atom-occurrence-000010'
+            2: 'atom-occurrence-000011'
+    2:
+      text: 'バカが!'
+      cueEndBoundaryId: 'display-boundary-000001-000015'
+      startFrame: 50
+      endFrameExclusive: 96
+      lines:
+        0:
+          text: 'バカが!'
+          logicalWidth: 7
+          sourceUnitIds:
+            0: 'atom-occurrence-000012'
+            1: 'atom-occurrence-000013'
+            2: 'atom-occurrence-000014'
+            3: 'atom-occurrence-000015'
+    3:
+      text: 'なぁ!'
+      cueEndBoundaryId: 'display-boundary-000001-000018'
+      startFrame: 96
+      endFrameExclusive: 125
+      lines:
+        0:
+          text: 'なぁ!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000016'
+            1: 'atom-occurrence-000017'
+            2: 'atom-occurrence-000018'
+    4:
+      text: 'マリン疑ってんじゃねぇ!'
+      cueEndBoundaryId: 'display-boundary-000001-000030'
+      startFrame: 125
+      endFrameExclusive: 167
+      lines:
+        0:
+          text: 'マリン疑ってんじゃねぇ!'
+          logicalWidth: 23
+          sourceUnitIds:
+            0: 'atom-occurrence-000019'
+            1: 'atom-occurrence-000020'
+            2: 'atom-occurrence-000021'
+            3: 'atom-occurrence-000022'
+            4: 'atom-occurrence-000023'
+            5: 'atom-occurrence-000024'
+            6: 'atom-occurrence-000025'
+            7: 'atom-occurrence-000026'
+            8: 'atom-occurrence-000027'
+            9: 'atom-occurrence-000028'
+            10: 'atom-occurrence-000029'
+            11: 'atom-occurrence-000030'
+    5:
+      text: 'マリンが好きなんじゃなかったんか!'
+      cueEndBoundaryId: 'display-boundary-000001-000047'
+      startFrame: 167
+      endFrameExclusive: 251
+      lines:
+        0:
+          text: 'マリンが好きなんじゃなかったんか!'
+          logicalWidth: 33
+          sourceUnitIds:
+            0: 'atom-occurrence-000031'
+            1: 'atom-occurrence-000032'
+            2: 'atom-occurrence-000033'
+            3: 'atom-occurrence-000034'
+            4: 'atom-occurrence-000035'
+            5: 'atom-occurrence-000036'
+            6: 'atom-occurrence-000037'
+            7: 'atom-occurrence-000038'
+            8: 'atom-occurrence-000039'
+            9: 'atom-occurrence-000040'
+            10: 'atom-occurrence-000041'
+            11: 'atom-occurrence-000042'
+            12: 'atom-occurrence-000043'
+            13: 'atom-occurrence-000044'
+            14: 'atom-occurrence-000045'
+            15: 'atom-occurrence-000046'
+            16: 'atom-occurrence-000047'
+    6:
+      text: 'てで!'
+      cueEndBoundaryId: 'display-boundary-000001-000050'
+      startFrame: 251
+      endFrameExclusive: 295
+      lines:
+        0:
+          text: 'てで!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000048'
+            1: 'atom-occurrence-000049'
+            2: 'atom-occurrence-000050'
+    7:
+      text: '何生き残ってんだよぉ!'
+      cueEndBoundaryId: 'display-boundary-000001-000061'
+      startFrame: 295
+      endFrameExclusive: 375
+      lines:
+        0:
+          text: '何生き残ってんだよぉ!'
+          logicalWidth: 21
+          sourceUnitIds:
+            0: 'atom-occurrence-000051'
+            1: 'atom-occurrence-000052'
+            2: 'atom-occurrence-000053'
+            3: 'atom-occurrence-000054'
+            4: 'atom-occurrence-000055'
+            5: 'atom-occurrence-000056'
+            6: 'atom-occurrence-000057'
+            7: 'atom-occurrence-000058'
+            8: 'atom-occurrence-000059'
+            9: 'atom-occurrence-000060'
+            10: 'atom-occurrence-000061'
+    8:
+      text: '生き残んなお前はぁ!'
+      cueEndBoundaryId: 'display-boundary-000001-000071'
+      startFrame: 375
+      endFrameExclusive: 518
+      lines:
+        0:
+          text: '生き残んなお前はぁ!'
+          logicalWidth: 19
+          sourceUnitIds:
+            0: 'atom-occurrence-000062'
+            1: 'atom-occurrence-000063'
+            2: 'atom-occurrence-000064'
+            3: 'atom-occurrence-000065'
+            4: 'atom-occurrence-000066'
+            5: 'atom-occurrence-000067'
+            6: 'atom-occurrence-000068'
+            7: 'atom-occurrence-000069'
+            8: 'atom-occurrence-000070'
+            9: 'atom-occurrence-000071'
+    9:
+      text: 'デスカード、デビルカード来ないんだけど'
+      cueEndBoundaryId: 'display-boundary-000001-000090'
+      startFrame: 518
+      endFrameExclusive: 605
+      lines:
+        0:
+          text: 'デスカード、デビル'
+          logicalWidth: 18
+          sourceUnitIds:
+            0: 'atom-occurrence-000072'
+            1: 'atom-occurrence-000073'
+            2: 'atom-occurrence-000074'
+            3: 'atom-occurrence-000075'
+            4: 'atom-occurrence-000076'
+            5: 'atom-occurrence-000077'
+            6: 'atom-occurrence-000078'
+            7: 'atom-occurrence-000079'
+            8: 'atom-occurrence-000080'
+        1:
+          text: 'カード来ないんだけど'
+          logicalWidth: 20
+          sourceUnitIds:
+            0: 'atom-occurrence-000081'
+            1: 'atom-occurrence-000082'
+            2: 'atom-occurrence-000083'
+            3: 'atom-occurrence-000084'
+            4: 'atom-occurrence-000085'
+            5: 'atom-occurrence-000086'
+            6: 'atom-occurrence-000087'
+            7: 'atom-occurrence-000088'
+            8: 'atom-occurrence-000089'
+            9: 'atom-occurrence-000090'
+    10:
+      text: '来るのかないつか来ない'
+      cueEndBoundaryId: 'display-boundary-000001-000101'
+      startFrame: 605
+      endFrameExclusive: 755
+      lines:
+        0:
+          text: '来るのかないつか来ない'
+          logicalWidth: 22
+          sourceUnitIds:
+            0: 'atom-occurrence-000091'
+            1: 'atom-occurrence-000092'
+            2: 'atom-occurrence-000093'
+            3: 'atom-occurrence-000094'
+            4: 'atom-occurrence-000095'
+            5: 'atom-occurrence-000096'
+            6: 'atom-occurrence-000097'
+            7: 'atom-occurrence-000098'
+            8: 'atom-occurrence-000099'
+            9: 'atom-occurrence-000100'
+            10: 'atom-occurrence-000101'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v001.test.mjs:297:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: PRM004: voice-013は注文一件ごとのapplication resultとoverlay・QCが一対一になる
+ok 45 - PRM004: voice-013は注文一件ごとのapplication resultとoverlay・QCが一対一になる
+  ---
+  duration_ms: 6.145916
+  ...
+# Subtest: ZTOR001 importは自動起動せずpure入口を公開し既知data読取だけを束縛する
+ok 46 - ZTOR001 importは自動起動せずpure入口を公開し既知data読取だけを束縛する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.387125
+  ...
+# Subtest: ZTOR002 正式job pathは版付きroot直下のexact fileだけを受理する
+ok 47 - ZTOR002 正式job pathは版付きroot直下のexact fileだけを受理する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.051125
+  ...
+# Subtest: ZTOR003 CLIはjob引数ちょうど1件だけを受理しfatalを閉語彙で返す
+ok 48 - ZTOR003 CLIはjob引数ちょうど1件だけを受理しfatalを閉語彙で返す # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.03725
+  ...
+# Subtest: ZTOR004 job root外・nested・traversal pathを拒否する
+ok 49 - ZTOR004 job root外・nested・traversal pathを拒否する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.038333
+  ...
+# Subtest: ZTOR005 NODE_OPTIONSは空値を含め存在自体を拒否する
+ok 50 - ZTOR005 NODE_OPTIONSは空値を含め存在自体を拒否する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.03275
+  ...
+# Subtest: ZTOR006 成果物集合は6名称へexact固定される
+ok 51 - ZTOR006 成果物集合は6名称へexact固定される # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.027542
+  ...
+# Subtest: ZTOR007 output rootはoutputIdから一意に導出する
+ok 52 - ZTOR007 output rootはoutputIdから一意に導出する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.081458
+  ...
+# Subtest: ZTOR008 source manifest・QC・videoは同じ既存v1 rootへ束縛する
+ok 53 - ZTOR008 source manifest・QC・videoは同じ既存v1 rootへ束縛する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.048042
+  ...
+# Subtest: ZTOR009 source planは既存control root外を拒否する
+ok 54 - ZTOR009 source planは既存control root外を拒否する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.117208
+  ...
+# Subtest: ZTOR010 title packageは意味情報package正式root外を拒否する
+ok 55 - ZTOR010 title packageは意味情報package正式root外を拒否する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.102625
+  ...
+# Subtest: ZTOR011 source v1 schemaと成果物名を変更しない
+ok 56 - ZTOR011 source v1 schemaと成果物名を変更しない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.041708
+  ...
+# Subtest: ZTOR012 runnerは新rendererを一度呼び、旧描画coreを直接呼ばない
+ok 57 - ZTOR012 runnerは新rendererを一度呼び、旧描画coreを直接呼ばない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.041709
+  ...
+# Subtest: ZTOR013 source成果物へのwrite・rename・unlink経路を持たない
+ok 58 - ZTOR013 source成果物へのwrite・rename・unlink経路を持たない # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.035291
+  ...
+# Subtest: ZTOR014 registry・font・license・source・implementation・runtimeを実読取監査する
+ok 59 - ZTOR014 registry・font・license・source・implementation・runtimeを実読取監査する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.080042
+  ...
+# Subtest: ZTOR015 implementation graphの欠落・余分・role-path swapを拒否する
+ok 60 - ZTOR015 implementation graphの欠落・余分・role-path swapを拒否する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.036875
+  ...
+# Subtest: ZTOR016 source manifestの全JSON・media参照を実読取し終了前に再照合する
+ok 61 - ZTOR016 source manifestの全JSON・media参照を実読取し終了前に再照合する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.037958
+  ...
+# Subtest: PRM005: title landscapeとverticalは同じ注文書外枠とrenderer jobを使う
+ok 62 - PRM005: title landscapeとverticalは同じ注文書外枠とrenderer jobを使う
+  ---
+  duration_ms: 23.633
+  ...
+# Subtest: PRM006: title v009の本文・180frame・行分割・style適用結果が旧oracleと一致する
+ok 63 - PRM006: title v009の本文・180frame・行分割・style適用結果が旧oracleと一致する
+  ---
+  duration_ms: 1.143208
+  ...
+# Subtest: PRM007: captionとtitleのformal runnerは旧direct builderや暗黙runtimeを使わない
+ok 64 - PRM007: captionとtitleのformal runnerは旧direct builderや暗黙runtimeを使わない
+  ---
+  duration_ms: 0.716
+  ...
+# Subtest: PRM008: 既存5 treeとA-v002記録対象treeは現在byte差0である
+ok 65 - PRM008: 既存5 treeとA-v002記録対象treeは現在byte差0である
+  ---
+  duration_ms: 0.445959
+  ...
+1..65
+# tests 65
+# suites 0
+# pass 43
+# fail 1
+# cancelled 0
+# skipped 21
+# todo 0
+# duration_ms 1939.755834

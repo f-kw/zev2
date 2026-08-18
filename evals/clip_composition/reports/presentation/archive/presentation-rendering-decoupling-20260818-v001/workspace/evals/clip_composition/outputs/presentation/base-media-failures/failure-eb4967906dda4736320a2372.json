@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "presentation-base-media-validation-report-v001",
+  "buildId": null,
+  "status": "failed",
+  "violations": [
+    {
+      "code": "BASE_MEDIA_JOB_INVALID",
+      "path": "$.assemblyDecision",
+      "relatedIds": [],
+      "details": {
+        "retainedBuildPaths": {
+          "lockFile": null,
+          "policy": "retain-without-automatic-delete-v001",
+          "publicationTemporaryDirectory": null,
+          "workingDirectory": null
+        }
+      }
+    }
+  ],
+  "inputs": {
+    "assemblyDecision": null,
+    "basisEditPlan": null,
+    "sourceMedia": null
+  },
+  "outputs": {
+    "baseMedia": null,
+    "timeline": null,
+    "generationManifest": null
+  },
+  "checks": {
+    "approvalBinding": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_JOB_INVALID"
+      ]
+    },
+    "sourceBinding": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_JOB_INVALID"
+      ]
+    },
+    "videoQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_JOB_INVALID"
+      ]
+    },
+    "audioQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_JOB_INVALID"
+      ]
+    },
+    "timelineQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_JOB_INVALID"
+      ]
+    },
+    "hashGraph": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_JOB_INVALID"
+      ]
+    },
+    "publishPreconditions": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_JOB_INVALID"
+      ]
+    }
+  }
+}

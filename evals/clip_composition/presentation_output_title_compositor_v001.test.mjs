@@ -851,7 +851,7 @@ test('ZTC044 title job rejects the correct implementation set in a different ord
   [job.implementationBindings[0], job.implementationBindings[1]] =
     [job.implementationBindings[1], job.implementationBindings[0]];
   assert.equal(validateZevoTitleOutputJobV001(job), false);
-  assert.equal(ZEVO_TITLE_IMPLEMENTATION_ROLES_V001.length, 56);
+  assert.equal(ZEVO_TITLE_IMPLEMENTATION_ROLES_V001.length, 66);
 });
 
 const buildSelectedTitlePlans = () => {

@@ -1,0 +1,1135 @@
+TAP version 13
+# Subtest: PRP001 formal byte・exact schema・決定的再構築
+ok 1 - PRP001 formal byte・exact schema・決定的再構築
+  ---
+  duration_ms: 3.508166
+  ...
+# Subtest: PRP002 source packageとcaption集合・順序・IDがexact一致
+ok 2 - PRP002 source packageとcaption集合・順序・IDがexact一致
+  ---
+  duration_ms: 2.216708
+  ...
+# Subtest: PRP003 cue終端がstrict増加し最終boundaryまでatom全量を一度ずつ覆う
+ok 3 - PRP003 cue終端がstrict増加し最終boundaryまでatom全量を一度ずつ覆う
+  ---
+  duration_ms: 1.182875
+  ...
+# Subtest: PRP004 旧selectionのlineEndBoundaryIdsがprojection byteへ0件
+ok 4 - PRP004 旧selectionのlineEndBoundaryIdsがprojection byteへ0件
+  ---
+  duration_ms: 1.206208
+  ...
+# Subtest: PRP005 sourceSelectionDigestにpathがなく旧selection bindingをreject
+ok 5 - PRP005 sourceSelectionDigestにpathがなく旧selection bindingをreject
+  ---
+  duration_ms: 0.780041
+  ...
+# Subtest: PRP006 同一sourceとselectionから2回製造したprojection byteが一致
+ok 6 - PRP006 同一sourceとselectionから2回製造したprojection byteが一致
+  ---
+  duration_ms: 1.930084
+  ...
+# Subtest: PRI001 formal byteとexact schema、未知key拒否
+ok 7 - PRI001 formal byteとexact schema、未知key拒否
+  ---
+  duration_ms: 8.593
+  ...
+# Subtest: PRI002 source binding全件のstable再読・SHA一致
+ok 8 - PRI002 source binding全件のstable再読・SHA一致
+  ---
+  duration_ms: 3.3795
+  ...
+# Subtest: PRI003 instruction ID一意性と決定順
+ok 9 - PRI003 instruction ID一意性と決定順
+  ---
+  duration_ms: 8.60325
+  ...
+# Subtest: PRI004 frame範囲が正でtimeline内に閉じms field 0件
+ok 10 - PRI004 frame範囲が正でtimeline内に閉じms field 0件
+  ---
+  duration_ms: 2.37425
+  ...
+# Subtest: PRI005 caption本文・atom順・cue終端の全量閉包
+ok 11 - PRI005 caption本文・atom順・cue終端の全量閉包
+  ---
+  duration_ms: 2.574333
+  ...
+# Subtest: PRI006 title本文と意味情報package titleのbyte一致
+ok 12 - PRI006 title本文と意味情報package titleのbyte一致
+  ---
+  duration_ms: 0.762791
+  ...
+# Subtest: PRI007 semanticKind・targetType・artifactKindの条件表一致
+ok 13 - PRI007 semanticKind・targetType・artifactKindの条件表一致
+  ---
+  duration_ms: 2.677125
+  ...
+# Subtest: PRI008 target・material参照実在と重複0
+ok 14 - PRI008 target・material参照実在と重複0
+  ---
+  duration_ms: 2.860417
+  ...
+# Subtest: PRI009 禁止field閉集合全件が発火し正当なtimelineは誤拒否しない
+ok 15 - PRI009 禁止field閉集合全件が発火し正当なtimelineは誤拒否しない
+  ---
+  duration_ms: 3.236458
+  ...
+# Subtest: PRI010 同一入力から注文書formal byteが一致
+ok 16 - PRI010 同一入力から注文書formal byteが一致
+  ---
+  duration_ms: 4.087834
+  ...
+# node:internal/modules/cjs/loader:1207
+#   const err = new Error(message);
+#               ^
+# Error: Cannot find module 'react'
+# Require stack:
+# - /Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_entry_v001.tsx
+#     at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+#     at nextResolveSimple (/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-BOkp8V6j.cjs:10:1017)
+#     at /Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-BOkp8V6j.cjs:9:4388
+#     at /Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-BOkp8V6j.cjs:9:3818
+#     at resolveTsPaths (/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-BOkp8V6j.cjs:10:770)
+#     at /Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-BOkp8V6j.cjs:10:1155
+#     at T._resolveFilename (file:///Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-D_B8UL5H.mjs:2:14812)
+#     at Module._load (node:internal/modules/cjs/loader:1038:27)
+#     at Module.require (node:internal/modules/cjs/loader:1289:19)
+#     at require (node:internal/modules/helpers:182:18) {
+#   code: 'MODULE_NOT_FOUND',
+#   requireStack: [
+#     '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_entry_v001.tsx'
+#   ]
+# }
+# Node.js v20.19.6
+# Subtest: /Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_title_compositor_v001.test.mjs
+not ok 3 - /Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_title_compositor_v001.test.mjs
+  ---
+  duration_ms: 163.229292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_title_compositor_v001.test.mjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: PRA001 renderer job exact schema・formal byte・未使用出力先
+ok 18 - PRA001 renderer job exact schema・formal byte・未使用出力先
+  ---
+  duration_ms: 58.776416
+  ...
+# Subtest: PRA002 注文書・projection・意味情報・timelineのstable再読と相互binding一致
+ok 19 - PRA002 注文書・projection・意味情報・timelineのstable再読と相互binding一致
+  ---
+  duration_ms: 50.711541
+  ...
+# Subtest: PRA003 crop適用済み媒体4 bindingとframe/audio実体
+ok 20 - PRA003 crop適用済み媒体4 bindingとframe/audio実体
+  ---
+  duration_ms: 58.170375
+  ...
+# Subtest: PRA004 format/canvas/fpsの有限整数と媒体実体の整合
+ok 21 - PRA004 format/canvas/fpsの有限整数と媒体実体の整合
+  ---
+  duration_ms: 49.692
+  ...
+# Subtest: PRA005 styleProfileIdとvisualStateIdが同じprofile配下に各一件だけ存在
+ok 22 - PRA005 styleProfileIdとvisualStateIdが同じprofile配下に各一件だけ存在
+  ---
+  duration_ms: 50.112084
+  ...
+# Subtest: PRA006 materialRefs全件がmaterial台帳に存在
+ok 23 - PRA006 materialRefs全件がmaterial台帳に存在
+  ---
+  duration_ms: 51.338708
+  ...
+# Subtest: PRA007 使用書体がfont ledger sectionと実file SHAへ閉じる
+ok 24 - PRA007 使用書体がfont ledger sectionと実file SHAへ閉じる
+  ---
+  duration_ms: 48.044542
+  ...
+# Subtest: PRA008 renderer trust台帳・layout規則・tool binding成立
+ok 25 - PRA008 renderer trust台帳・layout規則・tool binding成立
+  ---
+  duration_ms: 49.818417
+  ...
+# Subtest: PRA009 renderer implementation全件のlive SHA一致
+ok 26 - PRA009 renderer implementation全件のlive SHA一致
+  ---
+  duration_ms: 52.875875
+  ...
+# Subtest: PRA010 visual stateと実行値のjob所有・receipt同値・注文書内0件
+ok 27 - PRA010 visual stateと実行値のjob所有・receipt同値・注文書内0件
+  ---
+  duration_ms: 48.792208
+  ...
+# Subtest: PRA011 receiptを描画work作成前に独立no-replace公開し、公開後再読一致
+ok 28 - PRA011 receiptを描画work作成前に独立no-replace公開し、公開後再読一致
+  ---
+  duration_ms: 65.51825
+  ...
+# Subtest: PRA012 receiptなし・差替え・既使用root・旧plan fallbackを全てfail-closed
+ok 29 - PRA012 receiptなし・差替え・既使用root・旧plan fallbackを全てfail-closed
+  ---
+  duration_ms: 46.358583
+  ...
+# Subtest: PRL001 一行に収まるcaptionを一行にする
+ok 30 - PRL001 一行に収まるcaptionを一行にする
+  ---
+  duration_ms: 8.720208
+  ...
+# Subtest: PRL002 voice-013 cue 1をboundary 17へ分け同点18をordinalで退ける
+ok 31 - PRL002 voice-013 cue 1をboundary 17へ分け同点18をordinalで退ける
+  ---
+  duration_ms: 3.6605
+  ...
+# Subtest: PRL003 voice-013 cue 2/3を51/85へ分ける
+ok 32 - PRL003 voice-013 cue 2/3を51/85へ分ける
+  ---
+  duration_ms: 3.236042
+  ...
+# Subtest: PRL004 3 cueのline text・atom集合・論理幅が旧plan projectionとbyte一致
+ok 33 - PRL004 3 cueのline text・atom集合・論理幅が旧plan projectionとbyte一致
+  ---
+  duration_ms: 2.818375
+  ...
+# Subtest: PRL005 title landscape v009を一行で再現
+ok 34 - PRL005 title landscape v009を一行で再現
+  ---
+  duration_ms: 1.014416
+  ...
+# Subtest: PRL006 title vertical v009を11/8 code pointの二行で再現
+ok 35 - PRL006 title vertical v009を11/8 code pointの二行で再現
+  ---
+  duration_ms: 0.880208
+  ...
+# Subtest: PRL007 有効partition 0件・maxLines超過・unit欠落重複をreject
+ok 36 - PRL007 有効partition 0件・maxLines超過・unit欠落重複をreject
+  ---
+  duration_ms: 2.890167
+  ...
+# Subtest: PRL008 乱数・係数・旧selection読取・別計算実装0件
+ok 37 - PRL008 乱数・係数・旧selection読取・別計算実装0件
+  ---
+  duration_ms: 0.513
+  ...
+# Subtest: 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+ok 38 - 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+  ---
+  duration_ms: 13.649458
+  ...
+# Subtest: 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+ok 39 - 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+  ---
+  duration_ms: 10.578625
+  ...
+# Subtest: 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+ok 40 - 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+  ---
+  duration_ms: 4.377292
+  ...
+# Subtest: 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+not ok 41 - 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+  ---
+  duration_ms: 23.930833
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:890:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[0]","relatedIds":["evals/clip_composition/presentation_renderer_entry_v001.tsx"],"details":{"actualFileSha256":"5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7","expectedFileSha256":"884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[1]","relatedIds":["evals/clip_composition/presentation_renderer_text_layout_v001.mjs"],"details":{"actualFileSha256":"8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0","expectedFileSha256":"066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"}}]
+    + actual - expected
+    
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:893:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+not ok 42 - 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+  ---
+  duration_ms: 111.986625
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:962:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/VERSION'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1246:14)
+    async Promise.all (index 1)
+    async actualToolVersions (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs:420:62)
+    async executePresentationRendererV002 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs:1848:17)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:983:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+not ok 43 - 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+  ---
+  duration_ms: 110.501375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1041:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/VERSION'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1246:14)
+    async Promise.all (index 1)
+    async actualToolVersions (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs:420:62)
+    async executePresentationRendererV002 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs:1848:17)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1048:26)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+ok 44 - 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+  ---
+  duration_ms: 2.355208
+  ...
+# Subtest: 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+ok 45 - 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+  ---
+  duration_ms: 0.161042
+  ...
+# Subtest: 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+ok 46 - 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+  ---
+  duration_ms: 0.285459
+  ...
+# Subtest: 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+ok 47 - 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+  ---
+  duration_ms: 0.725333
+  ...
+# Subtest: 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+ok 48 - 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+  ---
+  duration_ms: 2.412833
+  ...
+# Subtest: 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+ok 49 - 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+  ---
+  duration_ms: 0.156958
+  ...
+# Subtest: 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+ok 50 - 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+  ---
+  duration_ms: 0.811667
+  ...
+# Subtest: 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+ok 51 - 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+  ---
+  duration_ms: 95.452375
+  ...
+# Subtest: 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+ok 52 - 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+  ---
+  duration_ms: 0.549459
+  ...
+# Subtest: 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+not ok 53 - 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+  ---
+  duration_ms: 102.689667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1496:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/VERSION'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1246:14)
+    async Promise.all (index 1)
+    async actualToolVersions (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs:420:62)
+    async executePresentationRendererV002 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs:1848:17)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1515:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+not ok 54 - 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+  ---
+  duration_ms: 1315.579875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1524:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "process_failed",
+      "stage": "execution",
+      "message": "ENOENT: no such file or directory, open '/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/VERSION'"
+    }
+    
+    
+    
+    2 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:705:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1525:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+not ok 55 - 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+  ---
+  duration_ms: 0.320292
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1564:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "process_failed",
+      "stage": "execution",
+      "message": "ENOENT: no such file or directory, open '/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/VERSION'"
+    }
+    
+    
+    
+    2 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:705:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1525:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+not ok 56 - 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+  ---
+  duration_ms: 0.327542
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1633:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "process_failed",
+      "stage": "execution",
+      "message": "ENOENT: no such file or directory, open '/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/VERSION'"
+    }
+    
+    
+    
+    2 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:705:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1525:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs:18
+# if (typeof RECEIPT_PATH !== 'string') throw new TypeError('fixture receipt environment is required');
+#                                             ^
+# TypeError: fixture receipt environment is required
+#     at file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs:18:45
+# Node.js v20.19.6
+# Subtest: /Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs
+not ok 7 - /Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs
+  ---
+  duration_ms: 484.717167
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: renderer runner title planは新line layoutから旧共通planと同じ表示値を作る
+ok 58 - renderer runner title planは新line layoutから旧共通planと同じ表示値を作る
+  ---
+  duration_ms: 5.27175
+  ...
+# Subtest: renderer runnerは明示visualStateIdだけを選び暗黙defaultを使わない
+ok 59 - renderer runnerは明示visualStateIdだけを選び暗黙defaultを使わない
+  ---
+  duration_ms: 2.11975
+  ...
+# Subtest: renderer runnerは外部実行体6件をpath実体とSHAで再読する
+ok 60 - renderer runnerは外部実行体6件をpath実体とSHAで再読する
+  ---
+  duration_ms: 5.377292
+  ...
+# Subtest: renderer overlayはjobとreceiptで確定したRemotionとChromiumだけを明示使用する
+ok 61 - renderer overlayはjobとreceiptで確定したRemotionとChromiumだけを明示使用する
+  ---
+  duration_ms: 0.447542
+  ...
+# Subtest: renderer child観測は終了code・stderr・signalを出力読取前に独立保存する
+ok 62 - renderer child観測は終了code・stderr・signalを出力読取前に独立保存する
+  ---
+  duration_ms: 32.8745
+  ...
+# Subtest: PRM001: voice-013横型はprojectionから注文書・receipt・line layout・描画・QCまで完走する
+ok 63 - PRM001: voice-013横型はprojectionから注文書・receipt・line layout・描画・QCまで完走する
+  ---
+  duration_ms: 35.359125
+  ...
+# Subtest: PRM002: voice-013の注文書は旧render planなしで描画できる
+ok 64 - PRM002: voice-013の注文書は旧render planなしで描画できる
+  ---
+  duration_ms: 6.513958
+  ...
+# Subtest: PRM003: 工事前後でvoice-013の本文・cue終端・frame・行分割projectionがbyte一致する
+not ok 65 - PRM003: 工事前後でvoice-013の本文・cue終端・frame・行分割projectionがbyte一致する
+  ---
+  duration_ms: 3.309334
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v001.test.mjs:270:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+      [
+        {
+    ...
+          lines: [
+            {
+    +         logicalWidth: 18,
+    -         logicalWidth: 24,
+              sourceUnitIds: [
+                'atom-occurrence-000072',
+    ...
+                'atom-occurrence-000079',
+                'atom-occurrence-000080'
+    +         ],
+    +         text: 'デスカード、デビル'
+    +       },
+    +       {
+    +         logicalWidth: 20,
+    +         sourceUnitIds: [
+    +           'atom-occurrence-000081',
+    +           'atom-occurrence-000082',
+    +           'atom-occurrence-000083',
+    -           'atom-occurrence-000081',
+    -           'atom-occurrence-000082',
+    -           'atom-occurrence-000083'
+    -         ],
+    -         text: 'デスカード、デビルカード'
+    -       },
+    -       {
+    -         logicalWidth: 14,
+    -         sourceUnitIds: [
+                'atom-occurrence-000084',
+                'atom-occurrence-000085',
+    ...
+                'atom-occurrence-000090'
+              ],
+    +         text: 'カード来ないんだけど'
+    -         text: '来ないんだけど'
+            }
+    ...
+          text: '来るのかないつか来ない'
+        }
+      ]
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      text: 'マジ殺してやる!'
+      cueEndBoundaryId: 'display-boundary-000001-000008'
+      startFrame: 0
+      endFrameExclusive: 31
+      lines:
+        0:
+          text: 'マジ殺してやる!'
+          logicalWidth: 15
+          sourceUnitIds:
+            0: 'atom-occurrence-000001'
+            1: 'atom-occurrence-000002'
+            2: 'atom-occurrence-000003'
+            3: 'atom-occurrence-000004'
+            4: 'atom-occurrence-000005'
+            5: 'atom-occurrence-000006'
+            6: 'atom-occurrence-000007'
+            7: 'atom-occurrence-000008'
+    1:
+      text: '見ろ!'
+      cueEndBoundaryId: 'display-boundary-000001-000011'
+      startFrame: 31
+      endFrameExclusive: 50
+      lines:
+        0:
+          text: '見ろ!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000009'
+            1: 'atom-occurrence-000010'
+            2: 'atom-occurrence-000011'
+    2:
+      text: 'バカが!'
+      cueEndBoundaryId: 'display-boundary-000001-000015'
+      startFrame: 50
+      endFrameExclusive: 96
+      lines:
+        0:
+          text: 'バカが!'
+          logicalWidth: 7
+          sourceUnitIds:
+            0: 'atom-occurrence-000012'
+            1: 'atom-occurrence-000013'
+            2: 'atom-occurrence-000014'
+            3: 'atom-occurrence-000015'
+    3:
+      text: 'なぁ!'
+      cueEndBoundaryId: 'display-boundary-000001-000018'
+      startFrame: 96
+      endFrameExclusive: 125
+      lines:
+        0:
+          text: 'なぁ!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000016'
+            1: 'atom-occurrence-000017'
+            2: 'atom-occurrence-000018'
+    4:
+      text: 'マリン疑ってんじゃねぇ!'
+      cueEndBoundaryId: 'display-boundary-000001-000030'
+      startFrame: 125
+      endFrameExclusive: 167
+      lines:
+        0:
+          text: 'マリン疑ってんじゃねぇ!'
+          logicalWidth: 23
+          sourceUnitIds:
+            0: 'atom-occurrence-000019'
+            1: 'atom-occurrence-000020'
+            2: 'atom-occurrence-000021'
+            3: 'atom-occurrence-000022'
+            4: 'atom-occurrence-000023'
+            5: 'atom-occurrence-000024'
+            6: 'atom-occurrence-000025'
+            7: 'atom-occurrence-000026'
+            8: 'atom-occurrence-000027'
+            9: 'atom-occurrence-000028'
+            10: 'atom-occurrence-000029'
+            11: 'atom-occurrence-000030'
+    5:
+      text: 'マリンが好きなんじゃなかったんか!'
+      cueEndBoundaryId: 'display-boundary-000001-000047'
+      startFrame: 167
+      endFrameExclusive: 251
+      lines:
+        0:
+          text: 'マリンが好きなんじゃなかったんか!'
+          logicalWidth: 33
+          sourceUnitIds:
+            0: 'atom-occurrence-000031'
+            1: 'atom-occurrence-000032'
+            2: 'atom-occurrence-000033'
+            3: 'atom-occurrence-000034'
+            4: 'atom-occurrence-000035'
+            5: 'atom-occurrence-000036'
+            6: 'atom-occurrence-000037'
+            7: 'atom-occurrence-000038'
+            8: 'atom-occurrence-000039'
+            9: 'atom-occurrence-000040'
+            10: 'atom-occurrence-000041'
+            11: 'atom-occurrence-000042'
+            12: 'atom-occurrence-000043'
+            13: 'atom-occurrence-000044'
+            14: 'atom-occurrence-000045'
+            15: 'atom-occurrence-000046'
+            16: 'atom-occurrence-000047'
+    6:
+      text: 'てで!'
+      cueEndBoundaryId: 'display-boundary-000001-000050'
+      startFrame: 251
+      endFrameExclusive: 295
+      lines:
+        0:
+          text: 'てで!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000048'
+            1: 'atom-occurrence-000049'
+            2: 'atom-occurrence-000050'
+    7:
+      text: '何生き残ってんだよぉ!'
+      cueEndBoundaryId: 'display-boundary-000001-000061'
+      startFrame: 295
+      endFrameExclusive: 375
+      lines:
+        0:
+          text: '何生き残ってんだよぉ!'
+          logicalWidth: 21
+          sourceUnitIds:
+            0: 'atom-occurrence-000051'
+            1: 'atom-occurrence-000052'
+            2: 'atom-occurrence-000053'
+            3: 'atom-occurrence-000054'
+            4: 'atom-occurrence-000055'
+            5: 'atom-occurrence-000056'
+            6: 'atom-occurrence-000057'
+            7: 'atom-occurrence-000058'
+            8: 'atom-occurrence-000059'
+            9: 'atom-occurrence-000060'
+            10: 'atom-occurrence-000061'
+    8:
+      text: '生き残んなお前はぁ!'
+      cueEndBoundaryId: 'display-boundary-000001-000071'
+      startFrame: 375
+      endFrameExclusive: 518
+      lines:
+        0:
+          text: '生き残んなお前はぁ!'
+          logicalWidth: 19
+          sourceUnitIds:
+            0: 'atom-occurrence-000062'
+            1: 'atom-occurrence-000063'
+            2: 'atom-occurrence-000064'
+            3: 'atom-occurrence-000065'
+            4: 'atom-occurrence-000066'
+            5: 'atom-occurrence-000067'
+            6: 'atom-occurrence-000068'
+            7: 'atom-occurrence-000069'
+            8: 'atom-occurrence-000070'
+            9: 'atom-occurrence-000071'
+    9:
+      text: 'デスカード、デビルカード来ないんだけど'
+      cueEndBoundaryId: 'display-boundary-000001-000090'
+      startFrame: 518
+      endFrameExclusive: 605
+      lines:
+        0:
+          text: 'デスカード、デビルカード'
+          logicalWidth: 24
+          sourceUnitIds:
+            0: 'atom-occurrence-000072'
+            1: 'atom-occurrence-000073'
+            2: 'atom-occurrence-000074'
+            3: 'atom-occurrence-000075'
+            4: 'atom-occurrence-000076'
+            5: 'atom-occurrence-000077'
+            6: 'atom-occurrence-000078'
+            7: 'atom-occurrence-000079'
+            8: 'atom-occurrence-000080'
+            9: 'atom-occurrence-000081'
+            10: 'atom-occurrence-000082'
+            11: 'atom-occurrence-000083'
+        1:
+          text: '来ないんだけど'
+          logicalWidth: 14
+          sourceUnitIds:
+            0: 'atom-occurrence-000084'
+            1: 'atom-occurrence-000085'
+            2: 'atom-occurrence-000086'
+            3: 'atom-occurrence-000087'
+            4: 'atom-occurrence-000088'
+            5: 'atom-occurrence-000089'
+            6: 'atom-occurrence-000090'
+    10:
+      text: '来るのかないつか来ない'
+      cueEndBoundaryId: 'display-boundary-000001-000101'
+      startFrame: 605
+      endFrameExclusive: 755
+      lines:
+        0:
+          text: '来るのかないつか来ない'
+          logicalWidth: 22
+          sourceUnitIds:
+            0: 'atom-occurrence-000091'
+            1: 'atom-occurrence-000092'
+            2: 'atom-occurrence-000093'
+            3: 'atom-occurrence-000094'
+            4: 'atom-occurrence-000095'
+            5: 'atom-occurrence-000096'
+            6: 'atom-occurrence-000097'
+            7: 'atom-occurrence-000098'
+            8: 'atom-occurrence-000099'
+            9: 'atom-occurrence-000100'
+            10: 'atom-occurrence-000101'
+  actual:
+    0:
+      text: 'マジ殺してやる!'
+      cueEndBoundaryId: 'display-boundary-000001-000008'
+      startFrame: 0
+      endFrameExclusive: 31
+      lines:
+        0:
+          text: 'マジ殺してやる!'
+          logicalWidth: 15
+          sourceUnitIds:
+            0: 'atom-occurrence-000001'
+            1: 'atom-occurrence-000002'
+            2: 'atom-occurrence-000003'
+            3: 'atom-occurrence-000004'
+            4: 'atom-occurrence-000005'
+            5: 'atom-occurrence-000006'
+            6: 'atom-occurrence-000007'
+            7: 'atom-occurrence-000008'
+    1:
+      text: '見ろ!'
+      cueEndBoundaryId: 'display-boundary-000001-000011'
+      startFrame: 31
+      endFrameExclusive: 50
+      lines:
+        0:
+          text: '見ろ!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000009'
+            1: 'atom-occurrence-000010'
+            2: 'atom-occurrence-000011'
+    2:
+      text: 'バカが!'
+      cueEndBoundaryId: 'display-boundary-000001-000015'
+      startFrame: 50
+      endFrameExclusive: 96
+      lines:
+        0:
+          text: 'バカが!'
+          logicalWidth: 7
+          sourceUnitIds:
+            0: 'atom-occurrence-000012'
+            1: 'atom-occurrence-000013'
+            2: 'atom-occurrence-000014'
+            3: 'atom-occurrence-000015'
+    3:
+      text: 'なぁ!'
+      cueEndBoundaryId: 'display-boundary-000001-000018'
+      startFrame: 96
+      endFrameExclusive: 125
+      lines:
+        0:
+          text: 'なぁ!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000016'
+            1: 'atom-occurrence-000017'
+            2: 'atom-occurrence-000018'
+    4:
+      text: 'マリン疑ってんじゃねぇ!'
+      cueEndBoundaryId: 'display-boundary-000001-000030'
+      startFrame: 125
+      endFrameExclusive: 167
+      lines:
+        0:
+          text: 'マリン疑ってんじゃねぇ!'
+          logicalWidth: 23
+          sourceUnitIds:
+            0: 'atom-occurrence-000019'
+            1: 'atom-occurrence-000020'
+            2: 'atom-occurrence-000021'
+            3: 'atom-occurrence-000022'
+            4: 'atom-occurrence-000023'
+            5: 'atom-occurrence-000024'
+            6: 'atom-occurrence-000025'
+            7: 'atom-occurrence-000026'
+            8: 'atom-occurrence-000027'
+            9: 'atom-occurrence-000028'
+            10: 'atom-occurrence-000029'
+            11: 'atom-occurrence-000030'
+    5:
+      text: 'マリンが好きなんじゃなかったんか!'
+      cueEndBoundaryId: 'display-boundary-000001-000047'
+      startFrame: 167
+      endFrameExclusive: 251
+      lines:
+        0:
+          text: 'マリンが好きなんじゃなかったんか!'
+          logicalWidth: 33
+          sourceUnitIds:
+            0: 'atom-occurrence-000031'
+            1: 'atom-occurrence-000032'
+            2: 'atom-occurrence-000033'
+            3: 'atom-occurrence-000034'
+            4: 'atom-occurrence-000035'
+            5: 'atom-occurrence-000036'
+            6: 'atom-occurrence-000037'
+            7: 'atom-occurrence-000038'
+            8: 'atom-occurrence-000039'
+            9: 'atom-occurrence-000040'
+            10: 'atom-occurrence-000041'
+            11: 'atom-occurrence-000042'
+            12: 'atom-occurrence-000043'
+            13: 'atom-occurrence-000044'
+            14: 'atom-occurrence-000045'
+            15: 'atom-occurrence-000046'
+            16: 'atom-occurrence-000047'
+    6:
+      text: 'てで!'
+      cueEndBoundaryId: 'display-boundary-000001-000050'
+      startFrame: 251
+      endFrameExclusive: 295
+      lines:
+        0:
+          text: 'てで!'
+          logicalWidth: 5
+          sourceUnitIds:
+            0: 'atom-occurrence-000048'
+            1: 'atom-occurrence-000049'
+            2: 'atom-occurrence-000050'
+    7:
+      text: '何生き残ってんだよぉ!'
+      cueEndBoundaryId: 'display-boundary-000001-000061'
+      startFrame: 295
+      endFrameExclusive: 375
+      lines:
+        0:
+          text: '何生き残ってんだよぉ!'
+          logicalWidth: 21
+          sourceUnitIds:
+            0: 'atom-occurrence-000051'
+            1: 'atom-occurrence-000052'
+            2: 'atom-occurrence-000053'
+            3: 'atom-occurrence-000054'
+            4: 'atom-occurrence-000055'
+            5: 'atom-occurrence-000056'
+            6: 'atom-occurrence-000057'
+            7: 'atom-occurrence-000058'
+            8: 'atom-occurrence-000059'
+            9: 'atom-occurrence-000060'
+            10: 'atom-occurrence-000061'
+    8:
+      text: '生き残んなお前はぁ!'
+      cueEndBoundaryId: 'display-boundary-000001-000071'
+      startFrame: 375
+      endFrameExclusive: 518
+      lines:
+        0:
+          text: '生き残んなお前はぁ!'
+          logicalWidth: 19
+          sourceUnitIds:
+            0: 'atom-occurrence-000062'
+            1: 'atom-occurrence-000063'
+            2: 'atom-occurrence-000064'
+            3: 'atom-occurrence-000065'
+            4: 'atom-occurrence-000066'
+            5: 'atom-occurrence-000067'
+            6: 'atom-occurrence-000068'
+            7: 'atom-occurrence-000069'
+            8: 'atom-occurrence-000070'
+            9: 'atom-occurrence-000071'
+    9:
+      text: 'デスカード、デビルカード来ないんだけど'
+      cueEndBoundaryId: 'display-boundary-000001-000090'
+      startFrame: 518
+      endFrameExclusive: 605
+      lines:
+        0:
+          text: 'デスカード、デビル'
+          logicalWidth: 18
+          sourceUnitIds:
+            0: 'atom-occurrence-000072'
+            1: 'atom-occurrence-000073'
+            2: 'atom-occurrence-000074'
+            3: 'atom-occurrence-000075'
+            4: 'atom-occurrence-000076'
+            5: 'atom-occurrence-000077'
+            6: 'atom-occurrence-000078'
+            7: 'atom-occurrence-000079'
+            8: 'atom-occurrence-000080'
+        1:
+          text: 'カード来ないんだけど'
+          logicalWidth: 20
+          sourceUnitIds:
+            0: 'atom-occurrence-000081'
+            1: 'atom-occurrence-000082'
+            2: 'atom-occurrence-000083'
+            3: 'atom-occurrence-000084'
+            4: 'atom-occurrence-000085'
+            5: 'atom-occurrence-000086'
+            6: 'atom-occurrence-000087'
+            7: 'atom-occurrence-000088'
+            8: 'atom-occurrence-000089'
+            9: 'atom-occurrence-000090'
+    10:
+      text: '来るのかないつか来ない'
+      cueEndBoundaryId: 'display-boundary-000001-000101'
+      startFrame: 605
+      endFrameExclusive: 755
+      lines:
+        0:
+          text: '来るのかないつか来ない'
+          logicalWidth: 22
+          sourceUnitIds:
+            0: 'atom-occurrence-000091'
+            1: 'atom-occurrence-000092'
+            2: 'atom-occurrence-000093'
+            3: 'atom-occurrence-000094'
+            4: 'atom-occurrence-000095'
+            5: 'atom-occurrence-000096'
+            6: 'atom-occurrence-000097'
+            7: 'atom-occurrence-000098'
+            8: 'atom-occurrence-000099'
+            9: 'atom-occurrence-000100'
+            10: 'atom-occurrence-000101'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v001.test.mjs:297:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: PRM004: voice-013は注文一件ごとのapplication resultとoverlay・QCが一対一になる
+ok 66 - PRM004: voice-013は注文一件ごとのapplication resultとoverlay・QCが一対一になる
+  ---
+  duration_ms: 3.277167
+  ...
+# Subtest: ZTOR001 importは自動起動せずpure入口を公開し既知data読取だけを束縛する
+ok 67 - ZTOR001 importは自動起動せずpure入口を公開し既知data読取だけを束縛する
+  ---
+  duration_ms: 265.827458
+  ...
+# Subtest: ZTOR002 正式job pathは版付きroot直下のexact fileだけを受理する
+ok 68 - ZTOR002 正式job pathは版付きroot直下のexact fileだけを受理する
+  ---
+  duration_ms: 0.254416
+  ...
+# Subtest: ZTOR003 CLIはjob引数ちょうど1件だけを受理しfatalを閉語彙で返す
+ok 69 - ZTOR003 CLIはjob引数ちょうど1件だけを受理しfatalを閉語彙で返す
+  ---
+  duration_ms: 0.470792
+  ...
+# Subtest: ZTOR004 job root外・nested・traversal pathを拒否する
+ok 70 - ZTOR004 job root外・nested・traversal pathを拒否する
+  ---
+  duration_ms: 0.101917
+  ...
+# Subtest: ZTOR005 NODE_OPTIONSは空値を含め存在自体を拒否する
+ok 71 - ZTOR005 NODE_OPTIONSは空値を含め存在自体を拒否する
+  ---
+  duration_ms: 0.066208
+  ...
+# Subtest: ZTOR006 成果物集合は6名称へexact固定される
+ok 72 - ZTOR006 成果物集合は6名称へexact固定される
+  ---
+  duration_ms: 0.0555
+  ...
+# Subtest: ZTOR007 output rootはoutputIdから一意に導出する
+ok 73 - ZTOR007 output rootはoutputIdから一意に導出する
+  ---
+  duration_ms: 0.656833
+  ...
+# Subtest: ZTOR008 source manifest・QC・videoは同じ既存v1 rootへ束縛する
+ok 74 - ZTOR008 source manifest・QC・videoは同じ既存v1 rootへ束縛する
+  ---
+  duration_ms: 0.24675
+  ...
+# Subtest: ZTOR009 source planは既存control root外を拒否する
+ok 75 - ZTOR009 source planは既存control root外を拒否する
+  ---
+  duration_ms: 0.214417
+  ...
+# Subtest: ZTOR010 title packageは意味情報package正式root外を拒否する
+ok 76 - ZTOR010 title packageは意味情報package正式root外を拒否する
+  ---
+  duration_ms: 0.365459
+  ...
+# Subtest: ZTOR011 source v1 schemaと成果物名を変更しない
+ok 77 - ZTOR011 source v1 schemaと成果物名を変更しない
+  ---
+  duration_ms: 0.112416
+  ...
+# Subtest: ZTOR012 runnerは新rendererを一度呼び、旧描画coreを直接呼ばない
+ok 78 - ZTOR012 runnerは新rendererを一度呼び、旧描画coreを直接呼ばない
+  ---
+  duration_ms: 1.293
+  ...
+# Subtest: ZTOR013 source成果物へのwrite・rename・unlink経路を持たない
+ok 79 - ZTOR013 source成果物へのwrite・rename・unlink経路を持たない
+  ---
+  duration_ms: 0.531041
+  ...
+# Subtest: ZTOR014 registry・font・license・source・implementation・runtimeを実読取監査する
+ok 80 - ZTOR014 registry・font・license・source・implementation・runtimeを実読取監査する
+  ---
+  duration_ms: 2.1145
+  ...
+# Subtest: ZTOR015 implementation graphの欠落・余分・role-path swapを拒否する
+ok 81 - ZTOR015 implementation graphの欠落・余分・role-path swapを拒否する
+  ---
+  duration_ms: 184.58125
+  ...
+# Subtest: ZTOR016 source manifestの全JSON・media参照を実読取し終了前に再照合する
+ok 82 - ZTOR016 source manifestの全JSON・media参照を実読取し終了前に再照合する
+  ---
+  duration_ms: 2.533333
+  ...
+# Subtest: PRM005: title landscapeとverticalは同じ注文書外枠とrenderer jobを使う
+ok 83 - PRM005: title landscapeとverticalは同じ注文書外枠とrenderer jobを使う
+  ---
+  duration_ms: 16.923458
+  ...
+# Subtest: PRM006: title v009の本文・180frame・行分割・style適用結果が旧oracleと一致する
+ok 84 - PRM006: title v009の本文・180frame・行分割・style適用結果が旧oracleと一致する
+  ---
+  duration_ms: 1.33275
+  ...
+# Subtest: PRM007: captionとtitleのformal runnerは旧direct builderや暗黙runtimeを使わない
+ok 85 - PRM007: captionとtitleのformal runnerは旧direct builderや暗黙runtimeを使わない
+  ---
+  duration_ms: 0.793791
+  ...
+# Subtest: PRM008: 既存5 treeとA-v002記録対象treeは現在byte差0である
+ok 86 - PRM008: 既存5 treeとA-v002記録対象treeは現在byte差0である
+  ---
+  duration_ms: 0.740916
+  ...
+# Subtest: ZCQF001 fixture manufactureは44成果物と600環境行をatomic公開する
+not ok 87 - ZCQF001 fixture manufactureは44成果物と600環境行をatomic公開する
+  ---
+  duration_ms: 14.224208
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs:124:1'
+  failureType: 'testCodeFailure'
+  error: "EEXIST: file already exists, open '/Users/kawafmm/workspace/zev2/evals/clip_composition/reports/presentation/test-runs/20260815-zevo-caption-quality-v002-fixture-gate-attempt-0005/fixture-job-v001.json'"
+  code: 'EEXIST'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async writeFile (node:internal/fs/promises:1216:14)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs:144:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: ZCQF002 receipt admissionはFとUを分離し、root escapeと環境差を拒否する
+not ok 88 - ZCQF002 receipt admissionはFとUを分離し、root escapeと環境差を拒否する
+  ---
+  duration_ms: 1.273458
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs:181:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'rejected'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'rejected'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs:183:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..88
+# tests 88
+# suites 0
+# pass 76
+# fail 12
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5216.03275

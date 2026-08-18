@@ -1,0 +1,24 @@
+{
+  "command": "/usr/bin/env",
+  "environment": {
+    "NODE_OPTIONS": "absent",
+    "PATH": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  },
+  "args": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+    "--test",
+    "--test-concurrency=1",
+    "--test-name-pattern=^(?!PRM003:)",
+    "evals/clip_composition/presentation_output_title_compositor_v001.test.mjs",
+    "evals/clip_composition/presentation_renderer_v002.test.mjs",
+    "evals/clip_composition/run_presentation_zevo_caption_quality_v002_fixture_job_v001.test.mjs",
+    "evals/clip_composition/presentation_zevo_caption_quality_v002_review_ui_v001.test.mjs",
+    "evals/clip_composition/presentation_cue_end_projection_v001.test.mjs",
+    "evals/clip_composition/presentation_instruction_artifact_v001.test.mjs",
+    "evals/clip_composition/presentation_renderer_line_layout_rule_v001.test.mjs",
+    "evals/clip_composition/presentation_renderer_admission_receipt_v001.test.mjs",
+    "evals/clip_composition/run_presentation_instruction_renderer_job_v001.test.mjs",
+    "evals/clip_composition/run_presentation_output_title_job_v001.test.mjs"
+  ]
+}

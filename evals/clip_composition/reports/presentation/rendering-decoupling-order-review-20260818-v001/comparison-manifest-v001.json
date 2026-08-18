@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "presentation-rendering-decoupling-side-by-side-result-v001",
+  "status": "completed",
+  "positionConvention": "old-left-new-right",
+  "runtimeBindings": {
+    "ffmpeg": {
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    "ffprobe": {
+      "path": "/opt/homebrew/bin/ffprobe",
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    }
+  },
+  "processEvidence": {
+    "root": "evals/clip_composition/reports/presentation/rendering-decoupling-order-review-20260818-v001/comparison-process-observations-v001",
+    "observedProcessCount": 14,
+    "passedProcessCount": 14,
+    "exitCode": 0,
+    "signal": "none",
+    "stderrPolicy": "full-bytes-saved-before-output-read",
+    "runnerSourceSha256": "0140cb64afba0db28c76f728f4fbd69c281bdf976f8d8c85ca0b1d019d422a79"
+  },
+  "cases": [
+    {
+      "caseId": "voice-013-caption-landscape",
+      "outputPath": "evals/clip_composition/reports/presentation/rendering-decoupling-order-review-20260818-v001/side-by-side-comparisons-v001/voice-013-caption-landscape-old-left-new-right.mp4",
+      "outputSize": 26982100,
+      "outputSha256": "6c7ae321d3a17ee9df57671bcd1205bef9d1f3f83aebcf8ec35a30ba4fdbf7c5",
+      "width": 3840,
+      "height": 1080,
+      "frameRate": "30/1",
+      "frameCount": 755,
+      "audioFrom": "old-video",
+      "inputShaAndVideoShapeExact": true
+    },
+    {
+      "caseId": "candidate-59-title-landscape",
+      "outputPath": "evals/clip_composition/reports/presentation/rendering-decoupling-order-review-20260818-v001/side-by-side-comparisons-v001/candidate-59-title-landscape-old-left-new-right.mp4",
+      "outputSize": 57404396,
+      "outputSha256": "b9a4f73a4fe32807273b1923ed4d88231bf8e272fa8db55d58feae9af675f687",
+      "width": 3840,
+      "height": 1080,
+      "frameRate": "30/1",
+      "frameCount": 1547,
+      "audioFrom": "old-video",
+      "inputShaAndVideoShapeExact": true
+    },
+    {
+      "caseId": "candidate-59-title-vertical",
+      "outputPath": "evals/clip_composition/reports/presentation/rendering-decoupling-order-review-20260818-v001/side-by-side-comparisons-v001/candidate-59-title-vertical-old-left-new-right.mp4",
+      "outputSize": 60996872,
+      "outputSha256": "bccac67067157738cf14bbf7f969af1eccb5647b709cdd900687267606cc30e0",
+      "width": 2160,
+      "height": 1920,
+      "frameRate": "30/1",
+      "frameCount": 1547,
+      "audioFrom": "old-video",
+      "inputShaAndVideoShapeExact": true
+    }
+  ]
+}

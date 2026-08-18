@@ -1,0 +1,55 @@
+TAP version 13
+# Subtest: renderer runner title planは新line layoutから旧共通planと同じ表示値を作る
+ok 1 - renderer runner title planは新line layoutから旧共通planと同じ表示値を作る
+  ---
+  duration_ms: 7.544084
+  ...
+# Subtest: renderer runnerは明示visualStateIdだけを選び暗黙defaultを使わない
+ok 2 - renderer runnerは明示visualStateIdだけを選び暗黙defaultを使わない
+  ---
+  duration_ms: 1.933208
+  ...
+# Subtest: renderer runnerは外部実行体6件をpath実体とSHAで再読する
+ok 3 - renderer runnerは外部実行体6件をpath実体とSHAで再読する
+  ---
+  duration_ms: 5.371208
+  ...
+# Subtest: renderer overlayはjobとreceiptで確定したRemotionとChromiumだけを明示使用する
+ok 4 - renderer overlayはjobとreceiptで確定したRemotionとChromiumだけを明示使用する
+  ---
+  duration_ms: 0.403542
+  ...
+# Subtest: renderer child観測は終了code・stderr・signalを出力読取前に独立保存する
+ok 5 - renderer child観測は終了code・stderr・signalを出力読取前に独立保存する
+  ---
+  duration_ms: 31.602542
+  ...
+# Subtest: PRM001: voice-013横型はprojectionから注文書・receipt・line layout・描画・QCまで完走する
+ok 6 - PRM001: voice-013横型はprojectionから注文書・receipt・line layout・描画・QCまで完走する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.062083
+  ...
+# Subtest: PRM002: voice-013の注文書は旧render planなしで描画できる
+ok 7 - PRM002: voice-013の注文書は旧render planなしで描画できる # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.031
+  ...
+# Subtest: PRM003: 工事前後でvoice-013の本文・cue終端・frame・行分割projectionがbyte一致する
+ok 8 - PRM003: 工事前後でvoice-013の本文・cue終端・frame・行分割projectionがbyte一致する # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.048209
+  ...
+# Subtest: PRM004: voice-013は注文一件ごとのapplication resultとoverlay・QCが一対一になる
+ok 9 - PRM004: voice-013は注文一件ごとのapplication resultとoverlay・QCが一対一になる # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.088167
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 4
+# todo 0
+# duration_ms 222.975125
