@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>voice-013 字幕見た目 第1回候補比較</title>
+<style>
+:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#070a12;color:#edf2ff}
+body{margin:0;padding:32px;background:linear-gradient(135deg,#070a12,#101a34)}
+main{max-width:1500px;margin:auto}h1{font-size:32px;margin:0 0 8px}.lead{color:#b8c4df;margin:0 0 24px}
+.summary{padding:18px 20px;border:1px solid #33405f;border-radius:14px;background:#10182a;margin-bottom:26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(430px,1fr));gap:22px}.card{background:#111a2d;border:1px solid #33405f;border-radius:16px;padding:16px;box-shadow:0 12px 40px #0006}.card[data-axis="基準"]{border-color:#8da7e8;box-shadow:0 0 0 2px #526faa inset}header{display:flex;align-items:center;gap:12px}.axis{background:#243353;color:#bcd0ff;padding:4px 9px;border-radius:999px;font-size:12px}h2{font-size:20px;margin:0}img,video{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#000;border-radius:10px;margin-top:14px}.values{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#d7e3ff;font-size:13px}.meta{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fa0c4;font-size:11px;word-break:break-all}.excluded{margin-top:28px;padding:18px 20px;border:1px solid #33405f;border-radius:14px;background:#10182a}
+</style></head><body><main>
+<h1>voice-013 字幕の色・大きさ・書体 — 第1回候補</h1>
+<p class="lead">全候補は同じ先頭8 cue・375 frame（12.5秒）。静止画は全てframe 145です。候補0が人間合格済みの現在値です。</p>
+<section class="summary"><strong>見方</strong>：まず静止画で文字の存在感を横比較し、気になる候補だけ動画でフェード・背景との分離・音声との馴染みを確認してください。</section>
+<section class="grid"><article class="card" data-axis="基準">
+    <header><span class="axis">基準</span><h2>候補0 現在値</h2></header>
+    <img src="candidates/candidate-0-current/render/review-still-frame-000145.png" alt="候補0 現在値 同一フレーム145">
+    <p class="values">LINE Seed JP ExtraBold / 96px / #FFFDF8 / 縁 #111827 8px / 光彩 #000000 12px・82%</p>
+    <p>人間合格済みの現行字幕を比較の基準に固定する。</p>
+    <video controls preload="metadata" src="candidates/candidate-0-current/render/presentation-rendered-v002.mp4"></video>
+    <p class="meta">QC passed / 375 frames / audio preserved<br>video SHA-256 fd0835cd44157c42ad5fb51826ab27c06020dfecb2d2c1034e13823cc01e83c3</p>
+  </article>
+<article class="card" data-axis="大きさ">
+    <header><span class="axis">大きさ</span><h2>S1 小さめ 80px</h2></header>
+    <img src="candidates/candidate-s1-compact/render/review-still-frame-000145.png" alt="S1 小さめ 80px 同一フレーム145">
+    <p class="values">LINE Seed JP ExtraBold / 80px / #FFFDF8 / 縁 #111827 8px / 光彩 #000000 12px・82%</p>
+    <p>画面情報を隠す量を大きく減らした端の候補として、可読性の下限寄りを確認する。</p>
+    <video controls preload="metadata" src="candidates/candidate-s1-compact/render/presentation-rendered-v002.mp4"></video>
+    <p class="meta">QC passed / 375 frames / audio preserved<br>video SHA-256 38d6abe34622452b273cd95e73f11ed00be6658e103f0d595f7c99105b9f6b7a</p>
+  </article>
+<article class="card" data-axis="大きさ">
+    <header><span class="axis">大きさ</span><h2>S2 やや大きめ 100px</h2></header>
+    <img src="candidates/candidate-s2-large/render/review-still-frame-000145.png" alt="S2 やや大きめ 100px 同一フレーム145">
+    <p class="values">LINE Seed JP ExtraBold / 100px / #FFFDF8 / 縁 #111827 8px / 光彩 #000000 12px・82%</p>
+    <p>現行から少しだけ視認性を強め、長い一行も安全域に残す穏当な候補。</p>
+    <video controls preload="metadata" src="candidates/candidate-s2-large/render/presentation-rendered-v002.mp4"></video>
+    <p class="meta">QC passed / 375 frames / audio preserved<br>video SHA-256 8432f200897da881fb6440eeb0eecf93bb149812b831f7982ececf3d3b7147c7</p>
+  </article>
+<article class="card" data-axis="色・縁・光彩">
+    <header><span class="axis">色・縁・光彩</span><h2>C1 暖色イエロー</h2></header>
+    <img src="candidates/candidate-c1-warm/render/review-still-frame-000145.png" alt="C1 暖色イエロー 同一フレーム145">
+    <p class="values">LINE Seed JP ExtraBold / 96px / #FFE36E / 縁 #2B1820 10px / 光彩 #080407 18px・86%</p>
+    <p>強い発話の勢いを出す高彩度側として、既存の暖色表現値を字幕位置で比較する。</p>
+    <video controls preload="metadata" src="candidates/candidate-c1-warm/render/presentation-rendered-v002.mp4"></video>
+    <p class="meta">QC passed / 375 frames / audio preserved<br>video SHA-256 ebba93074dc6714b39293d58f89fcd41940ad90f72381fecc9e7f90c6221e005</p>
+  </article>
+<article class="card" data-axis="色・縁・光彩">
+    <header><span class="axis">色・縁・光彩</span><h2>C2 淡いシアン</h2></header>
+    <img src="candidates/candidate-c2-cool/render/review-still-frame-000145.png" alt="C2 淡いシアン 同一フレーム145">
+    <p class="values">LINE Seed JP ExtraBold / 96px / #A8F5FF / 縁 #083B55 10px / 光彩 #00111B 17px・86%</p>
+    <p>白に近い読みやすさを残しつつ、配信画面から分離しやすい寒色の穏当案。</p>
+    <video controls preload="metadata" src="candidates/candidate-c2-cool/render/presentation-rendered-v002.mp4"></video>
+    <p class="meta">QC passed / 375 frames / audio preserved<br>video SHA-256 afc4ba422d3d2bf6d75b1a01cfa64692c738a39951a5ea0f9b30e0071448935a</p>
+  </article>
+<article class="card" data-axis="書体">
+    <header><span class="axis">書体</span><h2>F1 LINE Seed JP Bold</h2></header>
+    <img src="candidates/candidate-f1-line-bold/render/review-still-frame-000145.png" alt="F1 LINE Seed JP Bold 同一フレーム145">
+    <p class="values">LINE Seed JP Bold / 96px / #FFFDF8 / 縁 #111827 8px / 光彩 #000000 12px・82%</p>
+    <p>現行ExtraBoldの骨格を保ったまま太さだけを一段軽くし、密度差を比較する。</p>
+    <video controls preload="metadata" src="candidates/candidate-f1-line-bold/render/presentation-rendered-v002.mp4"></video>
+    <p class="meta">QC passed / 375 frames / audio preserved<br>video SHA-256 7e60d42581a86a5947de58b78e7ceec9bb2d15308080d68eb616f58bffcccb22</p>
+  </article>
+<article class="card" data-axis="書体">
+    <header><span class="axis">書体</span><h2>F2 Shippori Mincho Bold</h2></header>
+    <img src="candidates/candidate-f2-shippori/render/review-still-frame-000145.png" alt="F2 Shippori Mincho Bold 同一フレーム145">
+    <p class="values">Shippori Mincho Bold / 96px / #FFFDF8 / 縁 #111827 8px / 光彩 #000000 12px・82%</p>
+    <p>明朝体への大きな振れ幅を置き、勢い重視の字幕に品位方向が合うかを確認する。</p>
+    <video controls preload="metadata" src="candidates/candidate-f2-shippori/render/presentation-rendered-v002.mp4"></video>
+    <p class="meta">QC passed / 375 frames / audio preserved<br>video SHA-256 c0b9be8ed28845f4247dd584470cfa27c4d57810a0218d76fb20263f076fe072</p>
+  </article></section>
+<section class="excluded"><h2>機械QCによる除外</h2><p>不合格で除外した候補はありません。</p></section>
+</main></body></html>

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "presentation-caption-appearance-candidate-job-v001",
+  "jobId": "a-v002-voice-013-candidate-0-current-work-render-v001",
+  "attemptId": "attempt-0001",
+  "sourceBindings": {
+    "instruction": {
+      "path": "evals/clip_composition/outputs/presentation/rendering-decoupling-caption-control/a-v002-voice-013-v006/presentation-instruction-v001.json",
+      "fileSha256": "a910896acef2f12e0aa61aaa5d4bd43224f0bfb4276cef07224539230b526e47"
+    },
+    "lineLayout": {
+      "path": "evals/clip_composition/outputs/presentation/rendering-decoupling-caption-control/a-v002-voice-013-v006/line-layout-v001.json",
+      "fileSha256": "7c058da0c7e8bdddb0e0d039c0f7834453437509f93a106e80587da5b512b1ed"
+    },
+    "rendererJob": {
+      "path": "evals/clip_composition/outputs/presentation/rendering-decoupling-caption-control/a-v002-voice-013-v006/renderer-job-v001.json",
+      "fileSha256": "24f4d2fa5e7b01bf685930d2dd70256e00575a3bb15f1f4f539e73d39dc9aa77"
+    },
+    "admissionReceipt": {
+      "path": "evals/clip_composition/outputs/presentation/rendering-decoupling-caption-control/a-v002-voice-013-v006/admission-receipt-v001.json",
+      "fileSha256": "6d7afd37b2f216377d09d28f505adbd5a123ddf2588a6ee10c78e7b1720657ae"
+    },
+    "presetRegistry": {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8"
+    },
+    "rendererTrust": {
+      "path": "evals/clip_composition/registries/presentation/presentation-renderer-trust-v002/trust.json",
+      "fileSha256": "6e21352ff105e3b77acc351625fed22ff97486fb21d0ce9ee5b1821750a9047a"
+    },
+    "baseSegment": {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-appearance-candidates-20260818-v001/voice-013-first-8-cues-375f-base.mp4",
+      "fileSha256": "8d25928dbc77a6e48a4b3085d7aae6e8bed998c2f66df2f8c30057e98d9a85ce"
+    }
+  },
+  "segment": {
+    "startFrame": 0,
+    "endFrameExclusive": 375,
+    "fps": 30,
+    "durationMs": 12500,
+    "includedCueOrdinals": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "executionInputs": {
+    "format": "normal-landscape",
+    "canvas": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30
+    },
+    "visualStateId": "candidate-0-current-visual-state-v001",
+    "appearance": {
+      "stateId": "candidate-0-current-visual-state-v001",
+      "textStyle": {
+        "fontAssetId": "line-seed-jp-extra-bold-v001",
+        "fontSizePx": 96,
+        "fontColor": "#FFFDF8",
+        "borderColor": "#111827",
+        "borderWidthPx": 8,
+        "lineSpacingPercent": 150,
+        "glowColor": "#000000",
+        "glowWidthPx": 12,
+        "glowOpacityPercent": 82
+      },
+      "position": {
+        "preset": "bottom-center",
+        "alignment": "center",
+        "offsetXPercent": 0,
+        "offsetYPercent": -6
+      },
+      "background": null,
+      "layout": {
+        "maxCharsPerLine": 36,
+        "maxLines": 2,
+        "singleLine": false
+      },
+      "transitionId": "quick-fade-4f-v001"
+    },
+    "outputRoot": "evals/clip_composition/outputs/presentation/work-caption-appearance-candidates-20260818-v001/candidates/candidate-0-current/render"
+  },
+  "reason": "人間合格済みの現行字幕を比較の基準に固定する。"
+}
