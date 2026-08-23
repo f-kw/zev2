@@ -281,10 +281,10 @@ function buildResponseJsonSchema(
             candidateId: {type: 'string', pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*$'},
             anchorId: {type: 'string', enum: anchorIds},
             firstPartSemanticUtteranceIds: {
-              type: 'array', minItems: 1, uniqueItems: true, items: {type: 'string', enum: utteranceIds}
+              type: 'array', minItems: 1, items: {type: 'string', enum: utteranceIds}
             },
             secondPartSemanticUtteranceIds: {
-              type: 'array', minItems: 1, uniqueItems: true, items: {type: 'string', enum: utteranceIds}
+              type: 'array', minItems: 1, items: {type: 'string', enum: utteranceIds}
             },
             addedUnderstanding: {type: 'string', minLength: 1},
             direction: {type: 'string', enum: ['past', 'future']}

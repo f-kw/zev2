@@ -313,6 +313,33 @@ test('発話の重複・時系列逆転・前後同一位置・方向不一致�
   ));
 });
 
+test('provider schemaではuniqueItemsを使わず、前半・後半の重複はローカルで拒否する', () => {
+  const {sourcePackage, sourcePackageBytes} = builtPackage();
+  const validationInput = {sourcePackagePath: 'outputs/source-package.json', sourcePackageBytes};
+  assert.equal(
+    JSON.stringify(sourcePackage.responseContract.jsonSchema).includes('uniqueItems'),
+    false
+  );
+
+  const duplicateFirst = responseFor(sourcePackageBytes);
+  duplicateFirst.candidates[0].firstPartSemanticUtteranceIds = [
+    'semantic-utterance-000001',
+    'semantic-utterance-000001'
+  ];
+  expectCode('UTTERANCE_DUPLICATE', () => (
+    validateDistantConnectionLunaResponseV001(duplicateFirst, validationInput)
+  ));
+
+  const duplicateSecond = responseFor(sourcePackageBytes);
+  duplicateSecond.candidates[0].secondPartSemanticUtteranceIds = [
+    'semantic-utterance-000002',
+    'semantic-utterance-000002'
+  ];
+  expectCode('UTTERANCE_DUPLICATE', () => (
+    validateDistantConnectionLunaResponseV001(duplicateSecond, validationInput)
+  ));
+});
+
 test('返答の余分なfieldとschema外構造を拒否する', () => {
   const {sourcePackageBytes} = builtPackage();
   const validationInput = {sourcePackagePath: 'outputs/source-package.json', sourcePackageBytes};
