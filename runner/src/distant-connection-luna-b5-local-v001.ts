@@ -139,7 +139,7 @@ const SHA256 = /^[0-9a-f]{64}$/u;
 const FORMAL_ID = /^[A-Za-z0-9][A-Za-z0-9._-]*$/u;
 const WORKSPACE_RELATIVE_PATH =
   /^(?!\/)(?!\.\/)(?!.*(?:^|\/)\.\.(?:\/|$))(?!.*\\)(?!.*\/\/)[^\0]+$/u;
-const REQUEST_INSTRUCTIONS =
+const REQUEST_INSTRUCTIONS_PREFIX =
   '正式source packageのexplorationTaskに従って遠方接続候補を探索し、responseContract.jsonSchemaに適合するJSONだけを返してください。正式意味発話IDを変更、補完、推測しないでください。';
 
 function fail(code: DistantConnectionLunaB5ErrorCodeV001, message: string, cause?: unknown): never {
@@ -232,14 +232,51 @@ function assertSourcePackageExecutionPlan(
   }
 }
 
+function buildResponseSourcePackageBinding(
+  sourcePackage: DistantConnectionLunaSourcePackageV001,
+  sourcePackageBytes: Uint8Array
+): DistantConnectionLunaFormalFileBindingV001 {
+  return {
+    path: sourcePackage.responseContract.sourcePackagePath,
+    schemaVersion: DISTANT_CONNECTION_LUNA_SOURCE_PACKAGE_SCHEMA_V001,
+    fileSha256: sha256(sourcePackageBytes)
+  };
+}
+
+function buildRequestInstructions(
+  sourcePackageBinding: DistantConnectionLunaFormalFileBindingV001
+): string {
+  return `${REQUEST_INSTRUCTIONS_PREFIX} 返答のsourcePackageBindingは次のexact値を一字も変えずに転記してください: ${JSON.stringify(sourcePackageBinding)}`;
+}
+
+export function assertDistantConnectionLunaResponseBindingDisclosureV001(
+  request: DistantConnectionLunaExactRequestV001,
+  sourcePackage: DistantConnectionLunaSourcePackageV001,
+  sourcePackageBytes: Uint8Array
+): void {
+  const expectedBinding = buildResponseSourcePackageBinding(sourcePackage, sourcePackageBytes);
+  const expectedInstructions = buildRequestInstructions(expectedBinding);
+  if (request.instructions !== expectedInstructions
+    || request.input !== Buffer.from(sourcePackageBytes).toString('utf8')
+    || JSON.stringify(request.text.format.schema)
+      !== JSON.stringify(sourcePackage.responseContract.jsonSchema)) {
+    fail('REQUEST_BINDING_MISMATCH',
+      'Lunaへ返答を要求するbinding値がexact requestから参照できません');
+  }
+}
+
 function buildExactRequest(
   sourcePackage: DistantConnectionLunaSourcePackageV001,
   sourcePackageBytes: Uint8Array,
   settings: DistantConnectionLunaRequestSettingsV001
 ): DistantConnectionLunaExactRequestV001 {
+  const responseSourcePackageBinding = buildResponseSourcePackageBinding(
+    sourcePackage,
+    sourcePackageBytes
+  );
   return {
     model: settings.modelId,
-    instructions: REQUEST_INSTRUCTIONS,
+    instructions: buildRequestInstructions(responseSourcePackageBinding),
     input: Buffer.from(sourcePackageBytes).toString('utf8'),
     reasoning: {
       effort: settings.reasoningEffort
@@ -411,11 +448,15 @@ export function assertDistantConnectionLunaExactRequestV001(
   value: unknown,
   sourcePackage: DistantConnectionLunaSourcePackageV001
 ): asserts value is DistantConnectionLunaExactRequestV001 {
+  const sourcePackageBytes = Buffer.from(`${JSON.stringify(sourcePackage, null, 2)}\n`, 'utf8');
+  const expectedInstructions = buildRequestInstructions(
+    buildResponseSourcePackageBinding(sourcePackage, sourcePackageBytes)
+  );
   if (!isRecord(value) || !hasExactKeys(value, [
     'model', 'instructions', 'input', 'reasoning', 'text', 'store'
   ])
     || value.model !== DISTANT_CONNECTION_LUNA_REQUEST_SETTINGS_V001.modelId
-    || value.instructions !== REQUEST_INSTRUCTIONS
+    || value.instructions !== expectedInstructions
     || typeof value.input !== 'string'
     || value.store !== false
     || !isRecord(value.reasoning) || !hasExactKeys(value.reasoning, ['effort'])
@@ -437,6 +478,11 @@ export function assertDistantConnectionLunaExactRequestV001(
     fail('RESPONSE_SCHEMA_BINDING_MISMATCH',
       'Luna exact requestのstructured-output schemaがsource packageと一致しません');
   }
+  assertDistantConnectionLunaResponseBindingDisclosureV001(
+    value as DistantConnectionLunaExactRequestV001,
+    sourcePackage,
+    sourcePackageBytes
+  );
 }
 
 export function serializeDistantConnectionLunaExactRequestV001(

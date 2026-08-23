@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "distant-connection-luna-response-binding-disclosure-audit-v001",
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json",
+    "schemaVersion": "distant-connection-luna-source-package-v001",
+    "fileSha256": "b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76"
+  },
+  "sourcePackageDeterministicRebuild": {
+    "savedSha256": "b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76",
+    "rebuiltSha256": "b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76",
+    "byteIdentical": true
+  },
+  "requiredResponseBindings": [
+    {
+      "field": "sourceVideoId",
+      "requiredValue": "source",
+      "valueSource": "request.input.responseContract.jsonSchema.properties.sourceVideoId.const",
+      "knowable": true
+    },
+    {
+      "field": "sourcePackageBinding.path",
+      "requiredValue": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json",
+      "valueSource": "request.input.responseContract.jsonSchema.properties.sourcePackageBinding.properties.path.const",
+      "knowable": true
+    },
+    {
+      "field": "sourcePackageBinding.schemaVersion",
+      "requiredValue": "distant-connection-luna-source-package-v001",
+      "valueSource": "request.input.responseContract.jsonSchema.properties.sourcePackageBinding.properties.schemaVersion.const",
+      "knowable": true
+    },
+    {
+      "field": "sourcePackageBinding.fileSha256",
+      "requiredValue": "b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76",
+      "valueSource": "request.instructions exact binding disclosure",
+      "knowable": true
+    }
+  ],
+  "requestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/exact-request-v001.json",
+    "fileSha256": "4979ec79da717e62d908518f83e55c4668d5ef630e1c7071968aec0b638b1ccd"
+  },
+  "manifestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/b5-local-manifest-v001.json",
+    "fileSha256": "a3ce2a4d786ce123c1be4a8f0f9e17c79cb06c39487d33471a73bb5ec1bc06ea"
+  },
+  "decision": "passed"
+}

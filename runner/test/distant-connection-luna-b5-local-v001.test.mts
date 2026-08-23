@@ -13,6 +13,7 @@ import {
   assertDistantConnectionLunaB5MeasurementV001,
   assertDistantConnectionLunaB6RequestBindingV001,
   assertDistantConnectionLunaExactRequestV001,
+  assertDistantConnectionLunaResponseBindingDisclosureV001,
   buildDistantConnectionLunaB5LocalArtifactsFromBytesV001,
   buildDistantConnectionLunaB5LocalArtifactsFromFileV001,
   serializeDistantConnectionLunaExactRequestV001,
@@ -31,9 +32,15 @@ const sourcePackagePath =
   'evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/'
   + 'source-package-v001.json';
 const requestPath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-b5-local-v001/'
+  'evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/'
   + 'exact-request-v001.json';
 const manifestPath =
+  'evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/'
+  + 'b5-local-manifest-v001.json';
+const historicalRequestPath =
+  'evals/clip_composition/outputs/work-distant-connection-luna-b5-local-v001/'
+  + 'exact-request-v001.json';
+const historicalManifestPath =
   'evals/clip_composition/outputs/work-distant-connection-luna-b5-local-v001/'
   + 'b5-local-manifest-v001.json';
 const tokenCountRoot =
@@ -87,7 +94,8 @@ test('正式source packageからLuna Responses APIのexact requestを決定的�
   assert.deepEqual(artifacts.request, {
     model: 'gpt-5.6-luna',
     instructions:
-      '正式source packageのexplorationTaskに従って遠方接続候補を探索し、responseContract.jsonSchemaに適合するJSONだけを返してください。正式意味発話IDを変更、補完、推測しないでください。',
+      '正式source packageのexplorationTaskに従って遠方接続候補を探索し、responseContract.jsonSchemaに適合するJSONだけを返してください。正式意味発話IDを変更、補完、推測しないでください。 返答のsourcePackageBindingは次のexact値を一字も変えずに転記してください: '
+      + JSON.stringify(sourceBinding(sourcePackageBytes)),
     input: sourcePackageBytes.toString('utf8'),
     reasoning: {effort: 'medium'},
     text: {
@@ -101,6 +109,29 @@ test('正式source packageからLuna Responses APIのexact requestを決定的�
     },
     store: false
   });
+  assert.doesNotThrow(() => assertDistantConnectionLunaResponseBindingDisclosureV001(
+    artifacts.request,
+    decodeDistantConnectionLunaSourcePackageV001(sourcePackageBytes),
+    sourcePackageBytes
+  ));
+});
+
+test('返答で要求するbinding値は全てrequest内から参照でき、SHA転記値の改変を拒否する', async () => {
+  const sourcePackageBytes = await readFile(path.join(workspaceRoot, sourcePackagePath));
+  const sourcePackage = decodeDistantConnectionLunaSourcePackageV001(sourcePackageBytes);
+  const artifacts = buildDistantConnectionLunaB5LocalArtifactsFromBytesV001(
+    input(sourcePackageBytes)
+  );
+  assert.match(artifacts.request.instructions, new RegExp(sha256(sourcePackageBytes), 'u'));
+  const changed = structuredClone(artifacts.request);
+  changed.instructions = changed.instructions.replace(sha256(sourcePackageBytes), '0'.repeat(64));
+  expectCode('REQUEST_BINDING_MISMATCH', () => (
+    assertDistantConnectionLunaResponseBindingDisclosureV001(
+      changed,
+      sourcePackage,
+      sourcePackageBytes
+    )
+  ));
 });
 
 test('source packageとexact requestのSHAをmanifestへ束縛する', async () => {
@@ -306,8 +337,8 @@ test('保存済み成功rawをexact requestへ束縛し、context・長文境界
     evaluationBytes,
     priceSnapshotBytes
   ] = await Promise.all([
-    readFile(path.join(workspaceRoot, requestPath)),
-    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, historicalRequestPath)),
+    readFile(path.join(workspaceRoot, historicalManifestPath)),
     readFile(path.join(workspaceRoot, successfulTokenCountRequestPath)),
     readFile(path.join(workspaceRoot, successfulTokenCountRawPath)),
     readFile(path.join(workspaceRoot, tokenCountMeasurementPath)),
