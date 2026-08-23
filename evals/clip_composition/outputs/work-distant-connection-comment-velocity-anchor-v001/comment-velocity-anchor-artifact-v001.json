@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "comment-velocity-anchor-artifact-v001",
+  "sourceVideoId": "source",
+  "commentVelocityBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comment-velocity-anchor-v001/comment-velocity-fixture-v001.json",
+    "schemaVersion": "chat-velocity-analysis-v001",
+    "fileSha256": "8a683995d1fe3e82f7902e29a99c965a04bfec2ba198b04a038453241e2f4534"
+  },
+  "semanticUtteranceBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-semantic-utterance-v001/semantic-utterance-artifact-v001.json",
+    "schemaVersion": "semantic-utterance-artifact-v001",
+    "fileSha256": "736c5fce59f05a0a596c6d4999be91509a2a413b33e8a8370ccd43e5ba93bd20"
+  },
+  "commentRangeCount": 1,
+  "anchorCount": 2,
+  "commentRanges": [
+    {
+      "commentRangeId": "comment-minute-000000",
+      "minuteIndex": 0,
+      "sourceStartMs": 0,
+      "sourceEndMs": 60000,
+      "commentCount": 1,
+      "relativeToStreamBaseline": 1
+    }
+  ],
+  "anchors": [
+    {
+      "anchorId": "comment-anchor-000001",
+      "ordinal": 1,
+      "utteranceId": "semantic-utterance-000001",
+      "evidenceCommentRangeIds": [
+        "comment-minute-000000"
+      ]
+    },
+    {
+      "anchorId": "comment-anchor-000002",
+      "ordinal": 2,
+      "utteranceId": "semantic-utterance-000002",
+      "evidenceCommentRangeIds": [
+        "comment-minute-000000"
+      ]
+    }
+  ]
+}
