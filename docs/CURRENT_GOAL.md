@@ -4,16 +4,16 @@
 
 ## 1. 今の目的（1行・kawafmmの言葉）
 
-遠方接続の正式入力と返答形式は完成した。次はLunaへ送るexact requestと、token計測・生成の直前検査を作る。（2026-08-23 kawafmm）
+遠方接続のLuna初回実走まで完了し、正式候補を取得・検査した。次は候補をkawafmmが確認できる形にする。（2026-08-24 kawafmm）
 
 ## 2. 主計画上の現在位置
 
-正式意味発話、コメント流量アンカー、Luna source package・返答schemaまで実装・検査・commit・tag済み。現在はLuna B5のローカル実装段階。字幕の見た目は途中状態を保持する。
+正式意味発話、コメント流量アンカー、Luna source package・返答schema、B5 token計測、B6初回実走まで実装・検査・commit・tag済み。正式候補2件を取得し、現在は人間確認の準備段階。字幕の見た目は途中状態を保持する。
 
 ## 3. 今の作業とそれが目的へどう繋がるか
 
-固定済みsource packageから、実際にLunaへ送るrequestをbyte単位で固定する。次工程ではこの同じrequestだけをtoken計測し、合格した場合だけ生成へ進める。
+Lunaが返した前半発話・後半発話・追加理解を、kawafmmが採否できる確認材料へまとめる。compositionや動画生成にはまだ接続しない。
 
 ## 4. 今回やらないこと
 
-Luna/API通信 / token外部計測 / 実際の候補生成 / 人間採否 / composition / 注文書 / renderer・動画出力 / 既存正式成果物の削除・上書き / push・remote操作 / 費用発生 / 各種閾値・件数の正式固定
+候補の自動採否 / composition / 注文書 / renderer・動画出力 / 既存正式成果物の削除・上書き / push・remote操作 / 追加API通信 / 費用発生 / 各種閾値・件数の正式固定
