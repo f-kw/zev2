@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "semantic-utterance-artifact-v001",
+  "sourceTranscriptBinding": {
+    "path": "docs/artifacts/samples/transcript.json",
+    "schemaVersion": "transcript-json-v001",
+    "fileSha256": "b43f71e72115288bd238cfb7d4695ecf651812dbf25ddda96d9f127e784fb7ee"
+  },
+  "sourceUri": "file:///sample/source.mp4",
+  "language": "ja-JP",
+  "segmentCount": 3,
+  "utteranceCount": 2,
+  "utterances": [
+    {
+      "utteranceId": "semantic-utterance-000001",
+      "ordinal": 1,
+      "text": "ここが今日一番大事な話です。実は裏でこういう流れがありました。",
+      "sourceStartMs": 1000,
+      "sourceEndMs": 7000,
+      "sourceSegmentIds": [
+        1,
+        2
+      ]
+    },
+    {
+      "utteranceId": "semantic-utterance-000002",
+      "ordinal": 2,
+      "text": "だから最後にこの判断になりました。",
+      "sourceStartMs": 7200,
+      "sourceEndMs": 11000,
+      "sourceSegmentIds": [
+        3
+      ]
+    }
+  ]
+}
