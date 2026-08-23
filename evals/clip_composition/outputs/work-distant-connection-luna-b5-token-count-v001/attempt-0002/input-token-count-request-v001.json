@@ -1,0 +1,119 @@
+{
+  "model": "gpt-5.6-luna",
+  "instructions": "正式source packageのexplorationTaskに従って遠方接続候補を探索し、responseContract.jsonSchemaに適合するJSONだけを返してください。正式意味発話IDを変更、補完、推測しないでください。",
+  "input": "{\n  \"schemaVersion\": \"distant-connection-luna-source-package-v001\",\n  \"sourceVideoId\": \"source\",\n  \"semanticUtteranceBinding\": {\n    \"path\": \"evals/clip_composition/outputs/work-distant-connection-semantic-utterance-v001/semantic-utterance-artifact-v001.json\",\n    \"schemaVersion\": \"semantic-utterance-artifact-v001\",\n    \"fileSha256\": \"736c5fce59f05a0a596c6d4999be91509a2a413b33e8a8370ccd43e5ba93bd20\"\n  },\n  \"commentVelocityAnchorBinding\": {\n    \"path\": \"evals/clip_composition/outputs/work-distant-connection-comment-velocity-anchor-v001/comment-velocity-anchor-artifact-v001.json\",\n    \"schemaVersion\": \"comment-velocity-anchor-artifact-v001\",\n    \"fileSha256\": \"6d71c029eb67f0fff49344fa9d4feb130c4a0fb4a663a89580d983ff9fc13c38\"\n  },\n  \"plannedExecution\": {\n    \"providerId\": \"openai-api\",\n    \"modelId\": \"gpt-5.6-luna\",\n    \"operationId\": \"responses\",\n    \"jobExperimentValues\": []\n  },\n  \"explorationTask\": {\n    \"objective\": \"各コメント流量アンカーについて、配信全文の正式意味発話から時間的に離れた過去または未来の相方を探してください。\",\n    \"anchorInstruction\": \"各候補は一つのanchorIdを起点にし、過去を結ぶ場合はdirectionをpast、未来を結ぶ場合はfutureとしてください。\",\n    \"returnInstruction\": \"候補ごとに、前半として必要な正式意味発話ID群、後半として必要な正式意味発話ID群、前半を付けることで後半の何が新しく分かるかを返してください。\",\n    \"boundaryMeaning\": \"返す正式意味発話IDは探索根拠であり、完成動画の最終切り出し位置ではありません。導入文脈や自然な終端は後続工程が決めます。\"\n  },\n  \"utteranceCount\": 2,\n  \"anchorCount\": 2,\n  \"utterances\": [\n    {\n      \"utteranceId\": \"semantic-utterance-000001\",\n      \"ordinal\": 1,\n      \"text\": \"ここが今日一番大事な話です。実は裏でこういう流れがありました。\",\n      \"sourceStartMs\": 1000,\n      \"sourceEndMs\": 7000,\n      \"sourceSegmentIds\": [\n        1,\n        2\n      ]\n    },\n    {\n      \"utteranceId\": \"semantic-utterance-000002\",\n      \"ordinal\": 2,\n      \"text\": \"だから最後にこの判断になりました。\",\n      \"sourceStartMs\": 7200,\n      \"sourceEndMs\": 11000,\n      \"sourceSegmentIds\": [\n        3\n      ]\n    }\n  ],\n  \"anchors\": [\n    {\n      \"anchorId\": \"comment-anchor-000001\",\n      \"semanticUtteranceId\": \"semantic-utterance-000001\"\n    },\n    {\n      \"anchorId\": \"comment-anchor-000002\",\n      \"semanticUtteranceId\": \"semantic-utterance-000002\"\n    }\n  ],\n  \"responseContract\": {\n    \"schemaVersion\": \"distant-connection-luna-response-v001\",\n    \"sourcePackagePath\": \"evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json\",\n    \"jsonSchema\": {\n      \"type\": \"object\",\n      \"additionalProperties\": false,\n      \"required\": [\n        \"schemaVersion\",\n        \"sourceVideoId\",\n        \"sourcePackageBinding\",\n        \"candidates\"\n      ],\n      \"properties\": {\n        \"schemaVersion\": {\n          \"type\": \"string\",\n          \"const\": \"distant-connection-luna-response-v001\"\n        },\n        \"sourceVideoId\": {\n          \"type\": \"string\",\n          \"const\": \"source\"\n        },\n        \"sourcePackageBinding\": {\n          \"type\": \"object\",\n          \"additionalProperties\": false,\n          \"required\": [\n            \"path\",\n            \"schemaVersion\",\n            \"fileSha256\"\n          ],\n          \"properties\": {\n            \"path\": {\n              \"type\": \"string\",\n              \"const\": \"evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json\"\n            },\n            \"schemaVersion\": {\n              \"type\": \"string\",\n              \"const\": \"distant-connection-luna-source-package-v001\"\n            },\n            \"fileSha256\": {\n              \"type\": \"string\",\n              \"pattern\": \"^[0-9a-f]{64}$\"\n            }\n          }\n        },\n        \"candidates\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"object\",\n            \"additionalProperties\": false,\n            \"required\": [\n              \"candidateId\",\n              \"anchorId\",\n              \"firstPartSemanticUtteranceIds\",\n              \"secondPartSemanticUtteranceIds\",\n              \"addedUnderstanding\",\n              \"direction\"\n            ],\n            \"properties\": {\n              \"candidateId\": {\n                \"type\": \"string\",\n                \"pattern\": \"^[A-Za-z0-9][A-Za-z0-9._-]*$\"\n              },\n              \"anchorId\": {\n                \"type\": \"string\",\n                \"enum\": [\n                  \"comment-anchor-000001\",\n                  \"comment-anchor-000002\"\n                ]\n              },\n              \"firstPartSemanticUtteranceIds\": {\n                \"type\": \"array\",\n                \"minItems\": 1,\n                \"items\": {\n                  \"type\": \"string\",\n                  \"enum\": [\n                    \"semantic-utterance-000001\",\n                    \"semantic-utterance-000002\"\n                  ]\n                }\n              },\n              \"secondPartSemanticUtteranceIds\": {\n                \"type\": \"array\",\n                \"minItems\": 1,\n                \"items\": {\n                  \"type\": \"string\",\n                  \"enum\": [\n                    \"semantic-utterance-000001\",\n                    \"semantic-utterance-000002\"\n                  ]\n                }\n              },\n              \"addedUnderstanding\": {\n                \"type\": \"string\",\n                \"minLength\": 1\n              },\n              \"direction\": {\n                \"type\": \"string\",\n                \"enum\": [\n                  \"past\",\n                  \"future\"\n                ]\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "distant_connection_candidates_v001",
+      "strict": true,
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "sourceVideoId",
+          "sourcePackageBinding",
+          "candidates"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "type": "string",
+            "const": "distant-connection-luna-response-v001"
+          },
+          "sourceVideoId": {
+            "type": "string",
+            "const": "source"
+          },
+          "sourcePackageBinding": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "schemaVersion",
+              "fileSha256"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "const": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json"
+              },
+              "schemaVersion": {
+                "type": "string",
+                "const": "distant-connection-luna-source-package-v001"
+              },
+              "fileSha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "candidateId",
+                "anchorId",
+                "firstPartSemanticUtteranceIds",
+                "secondPartSemanticUtteranceIds",
+                "addedUnderstanding",
+                "direction"
+              ],
+              "properties": {
+                "candidateId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+                },
+                "anchorId": {
+                  "type": "string",
+                  "enum": [
+                    "comment-anchor-000001",
+                    "comment-anchor-000002"
+                  ]
+                },
+                "firstPartSemanticUtteranceIds": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "semantic-utterance-000001",
+                      "semantic-utterance-000002"
+                    ]
+                  }
+                },
+                "secondPartSemanticUtteranceIds": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "semantic-utterance-000001",
+                      "semantic-utterance-000002"
+                    ]
+                  }
+                },
+                "addedUnderstanding": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "past",
+                    "future"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

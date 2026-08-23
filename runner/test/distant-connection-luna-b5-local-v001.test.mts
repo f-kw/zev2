@@ -36,6 +36,17 @@ const requestPath =
 const manifestPath =
   'evals/clip_composition/outputs/work-distant-connection-luna-b5-local-v001/'
   + 'b5-local-manifest-v001.json';
+const tokenCountRoot =
+  'evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-v001';
+const successfulTokenCountRequestPath =
+  `${tokenCountRoot}/attempt-0002/input-token-count-request-v001.json`;
+const successfulTokenCountRawPath =
+  `${tokenCountRoot}/attempt-0002/input-token-count-raw-response-v001.json`;
+const tokenCountMeasurementPath = `${tokenCountRoot}/input-token-count-measurement-v001.json`;
+const tokenCountEvaluationPath = `${tokenCountRoot}/input-token-count-evaluation-v001.json`;
+const priceSnapshotPath =
+  'evals/clip_composition/reports/presentation/provider-research/'
+  + 'openai-gpt-5-6-luna-official-snapshot-20260816-v001.json';
 
 function sha256(bytes: Uint8Array): string {
   return createHash('sha256').update(bytes).digest('hex');
@@ -283,4 +294,82 @@ test('保存済みB5 exact requestとmanifestをsource packageから決定的に
     manifestBytes,
     requestBytes
   ));
+});
+
+test('保存済み成功rawをexact requestへ束縛し、context・長文境界・最大費用を再計算できる', async () => {
+  const [
+    exactRequestBytes,
+    manifestBytes,
+    tokenCountRequestBytes,
+    rawBytes,
+    measurementBytes,
+    evaluationBytes,
+    priceSnapshotBytes
+  ] = await Promise.all([
+    readFile(path.join(workspaceRoot, requestPath)),
+    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, successfulTokenCountRequestPath)),
+    readFile(path.join(workspaceRoot, successfulTokenCountRawPath)),
+    readFile(path.join(workspaceRoot, tokenCountMeasurementPath)),
+    readFile(path.join(workspaceRoot, tokenCountEvaluationPath)),
+    readFile(path.join(workspaceRoot, priceSnapshotPath))
+  ]);
+  const exactRequest = JSON.parse(exactRequestBytes.toString('utf8'));
+  const tokenCountRequest = JSON.parse(tokenCountRequestBytes.toString('utf8'));
+  const expectedTokenCountRequest = structuredClone(exactRequest);
+  delete expectedTokenCountRequest.store;
+  assert.deepEqual(tokenCountRequest, expectedTokenCountRequest);
+
+  const raw = JSON.parse(rawBytes.toString('utf8'));
+  assert.deepEqual(raw, {object: 'response.input_tokens', input_tokens: 1766});
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
+  assertDistantConnectionLunaB5LocalManifestV001(manifest);
+  const measurement = JSON.parse(measurementBytes.toString('utf8'));
+  assertDistantConnectionLunaB5MeasurementV001(measurement, manifest);
+  assert.deepEqual(measurement.tokenMeasurement, {
+    rawResponseBinding: {
+      path: successfulTokenCountRawPath,
+      schemaVersion: 'openai-responses-input-token-count-response-v001',
+      fileSha256: sha256(rawBytes)
+    },
+    inputTokens: 1766
+  });
+
+  const priceSnapshot = JSON.parse(priceSnapshotBytes.toString('utf8'));
+  assert.equal(priceSnapshot.model.contextWindowTokens, 1_050_000);
+  assert.equal(priceSnapshot.model.maxOutputTokens, 128_000);
+  assert.equal(priceSnapshot.standardPricingUsdPerMillionTokens.input, 0.2);
+  assert.equal(priceSnapshot.standardPricingUsdPerMillionTokens.outputIncludingReasoning, 1.2);
+  const evaluation = JSON.parse(evaluationBytes.toString('utf8'));
+  assert.deepEqual(evaluation, {
+    schemaVersion: 'distant-connection-luna-b5-token-count-evaluation-v001',
+    measurementBinding: {
+      path: tokenCountMeasurementPath,
+      schemaVersion: DISTANT_CONNECTION_LUNA_B5_MEASUREMENT_SCHEMA_V001,
+      fileSha256: sha256(measurementBytes)
+    },
+    priceSnapshotBinding: measurement.costEvaluation.priceSnapshotBinding,
+    contextEvaluation: {
+      inputTokens: 1766,
+      contextWindowTokens: 1_050_000,
+      usageFraction: {numeratorTokens: 1766, denominatorTokens: 1_050_000},
+      withinContextWindow: true
+    },
+    longContextPricing: {
+      thresholdTokens: 272_000,
+      comparison: 'inputTokens > thresholdTokens',
+      applies: false
+    },
+    b6MaximumCostProjection: {
+      currency: 'USD',
+      maximumOutputTokens: 128_000,
+      inputPriceNanoUsdPerToken: 200,
+      outputPriceNanoUsdPerToken: 1200,
+      projectedInputNanoUsd: 353_200,
+      projectedMaximumOutputNanoUsd: 153_600_000,
+      projectedNanoUsd: 153_953_200,
+      maximumNanoUsd: 500_000_000,
+      decision: 'passed'
+    }
+  });
 });
