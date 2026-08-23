@@ -51,6 +51,16 @@ const successfulTokenCountRawPath =
   `${tokenCountRoot}/attempt-0002/input-token-count-raw-response-v001.json`;
 const tokenCountMeasurementPath = `${tokenCountRoot}/input-token-count-measurement-v001.json`;
 const tokenCountEvaluationPath = `${tokenCountRoot}/input-token-count-evaluation-v001.json`;
+const bindingFixTokenCountRoot =
+  'evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-binding-fix-v001';
+const bindingFixTokenCountRequestPath =
+  `${bindingFixTokenCountRoot}/attempt-0001/input-token-count-request-v001.json`;
+const bindingFixTokenCountRawPath =
+  `${bindingFixTokenCountRoot}/attempt-0001/input-token-count-raw-response-v001.json`;
+const bindingFixTokenCountMeasurementPath =
+  `${bindingFixTokenCountRoot}/input-token-count-measurement-v001.json`;
+const bindingFixTokenCountEvaluationPath =
+  `${bindingFixTokenCountRoot}/input-token-count-evaluation-v001.json`;
 const priceSnapshotPath =
   'evals/clip_composition/reports/presentation/provider-research/'
   + 'openai-gpt-5-6-luna-official-snapshot-20260816-v001.json';
@@ -402,5 +412,63 @@ test('保存済み成功rawをexact requestへ束縛し、context・長文境界
       maximumNanoUsd: 500_000_000,
       decision: 'passed'
     }
+  });
+});
+
+test('binding修正後の保存済みtoken計測を新exact requestへ束縛して再検証できる', async () => {
+  const [
+    exactRequestBytes,
+    manifestBytes,
+    tokenCountRequestBytes,
+    rawBytes,
+    measurementBytes,
+    evaluationBytes
+  ] = await Promise.all([
+    readFile(path.join(workspaceRoot, requestPath)),
+    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, bindingFixTokenCountRequestPath)),
+    readFile(path.join(workspaceRoot, bindingFixTokenCountRawPath)),
+    readFile(path.join(workspaceRoot, bindingFixTokenCountMeasurementPath)),
+    readFile(path.join(workspaceRoot, bindingFixTokenCountEvaluationPath))
+  ]);
+  const exactRequest = JSON.parse(exactRequestBytes.toString('utf8'));
+  const expectedTokenCountRequest = structuredClone(exactRequest);
+  delete expectedTokenCountRequest.store;
+  assert.deepEqual(
+    JSON.parse(tokenCountRequestBytes.toString('utf8')),
+    expectedTokenCountRequest
+  );
+  assert.deepEqual(
+    JSON.parse(rawBytes.toString('utf8')),
+    {object: 'response.input_tokens', input_tokens: 1874}
+  );
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
+  assertDistantConnectionLunaB5LocalManifestV001(manifest);
+  const measurement = JSON.parse(measurementBytes.toString('utf8'));
+  assertDistantConnectionLunaB5MeasurementV001(measurement, manifest);
+  assert.equal(measurement.requestBinding.fileSha256, sha256(exactRequestBytes));
+  assert.equal(measurement.tokenMeasurement.inputTokens, 1874);
+  const evaluation = JSON.parse(evaluationBytes.toString('utf8'));
+  assert.deepEqual(evaluation.contextEvaluation, {
+    inputTokens: 1874,
+    contextWindowTokens: 1_050_000,
+    usageFraction: {numeratorTokens: 1874, denominatorTokens: 1_050_000},
+    withinContextWindow: true
+  });
+  assert.deepEqual(evaluation.longContextPricing, {
+    thresholdTokens: 272_000,
+    comparison: 'inputTokens > thresholdTokens',
+    applies: false
+  });
+  assert.deepEqual(evaluation.b6MaximumCostProjection, {
+    currency: 'USD',
+    maximumOutputTokens: 128_000,
+    inputPriceNanoUsdPerToken: 200,
+    outputPriceNanoUsdPerToken: 1200,
+    projectedInputNanoUsd: 374_800,
+    projectedMaximumOutputNanoUsd: 153_600_000,
+    projectedNanoUsd: 153_974_800,
+    maximumNanoUsd: 500_000_000,
+    decision: 'passed'
   });
 });

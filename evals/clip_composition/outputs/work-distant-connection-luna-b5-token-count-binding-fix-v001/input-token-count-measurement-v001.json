@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "distant-connection-luna-b5-measurement-v001",
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json",
+    "schemaVersion": "distant-connection-luna-source-package-v001",
+    "fileSha256": "b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76"
+  },
+  "requestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/exact-request-v001.json",
+    "schemaVersion": "openai-responses-distant-connection-request-v001",
+    "fileSha256": "4979ec79da717e62d908518f83e55c4668d5ef630e1c7071968aec0b638b1ccd"
+  },
+  "providerId": "openai-api",
+  "modelId": "gpt-5.6-luna",
+  "tokenMeasurement": {
+    "rawResponseBinding": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-binding-fix-v001/attempt-0001/input-token-count-raw-response-v001.json",
+      "schemaVersion": "openai-responses-input-token-count-response-v001",
+      "fileSha256": "45f037e794215aec0e23c8b4b34f78b0a325e6be7385bc8f0780bb1527cbb42c"
+    },
+    "inputTokens": 1874
+  },
+  "costEvaluation": {
+    "priceSnapshotBinding": {
+      "path": "evals/clip_composition/reports/presentation/provider-research/openai-gpt-5-6-luna-official-snapshot-20260816-v001.json",
+      "schemaVersion": "openai-gpt-5-6-luna-official-snapshot-v001",
+      "fileSha256": "9d53b52a6e1726bcbf715137a32d6819d668c4023e89ddf2d81edaec7f5166d7"
+    },
+    "maximumNanoUsd": 500000000,
+    "projectedNanoUsd": 153974800,
+    "decision": "passed"
+  }
+}
