@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "distant-connection-luna-b6-setup-failure-v001",
+  "setupAttemptId": "setup-attempt-0001",
+  "command": "node /private/tmp/run-distant-connection-luna-b6-attempt-0001.mjs",
+  "exitCode": 1,
+  "signal": null,
+  "apiCommunicationCount": 0,
+  "failure": {
+    "code": "ENOENT",
+    "operation": "mkdir",
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-luna-b6-first-candidates-v001/attempt-0001",
+    "reason": "attemptの親directoryを作る前に非再帰作成したため"
+  },
+  "resolution": "attemptの親directoryだけを再帰作成し、その後attempt directoryを非再帰作成する"
+}

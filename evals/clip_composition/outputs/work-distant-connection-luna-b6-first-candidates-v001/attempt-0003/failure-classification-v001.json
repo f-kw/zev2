@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "distant-connection-luna-b6-failure-classification-v001",
+  "attemptId": "attempt-0003",
+  "classification": "local-strict-validation-rejected",
+  "httpStatus": 200,
+  "providerStatus": "completed",
+  "providerCandidateCount": 2,
+  "localValidation": {
+    "decision": "rejected",
+    "firstFailingPredicate": "SOURCE_PACKAGE_SHA_MISMATCH",
+    "expectedSourcePackageSha256": "b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76",
+    "returnedSourcePackageSha256": "736c5fce59f05a0a596c6d4999be91509a2a413b33e8a8370ccd43e5ba93bd20"
+  },
+  "inputObservation": {
+    "sourcePackageOwnShaExposedToModel": false,
+    "responseSchemaForSourcePackageSha": "pattern-only",
+    "returnedShaMeaning": "semanticUtteranceBinding.fileSha256"
+  },
+  "retryDecision": "stopped-before-repeat",
+  "retryDecisionReason": "B5で固定したexact requestはsource package自身のSHAをモデルへ提示しておらず、正値を返す情報経路がない。修正にはB5 request bindingの改訂が必要であり、自走停止条件の契約変更に該当するため",
+  "formalCandidatePublished": false
+}

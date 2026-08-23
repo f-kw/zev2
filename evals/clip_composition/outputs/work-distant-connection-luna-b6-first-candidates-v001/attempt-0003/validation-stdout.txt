@@ -1,0 +1,32 @@
+{
+  "validationResult": {
+    "schemaVersion": "distant-connection-luna-b6-validation-v001",
+    "attemptId": "attempt-0003",
+    "decision": "rejected",
+    "errorCode": "SOURCE_PACKAGE_SHA_MISMATCH",
+    "errorMessage": "Luna返答が束縛するsource packageのSHA-256が一致しません",
+    "expectedSourcePackageSha256": "b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76",
+    "returnedSourcePackageSha256": "736c5fce59f05a0a596c6d4999be91509a2a413b33e8a8370ccd43e5ba93bd20"
+  },
+  "candidateCount": 2,
+  "usage": {
+    "inputTokens": 1766,
+    "cachedInputTokens": 0,
+    "cacheWriteTokens": 1763,
+    "uncachedNonWriteInputTokens": 3,
+    "outputTokens": 601,
+    "reasoningTokens": 285,
+    "totalTokens": 2367
+  },
+  "cost": {
+    "inputNanoUsd": 600,
+    "cachedInputNanoUsd": 0,
+    "cacheWriteNanoUsd": 440750,
+    "outputNanoUsd": 721200,
+    "totalNanoUsd": 1162550,
+    "totalUsd": 0.00116255,
+    "maximumNanoUsd": 500000000,
+    "withinMaximum": true
+  },
+  "structuredOutputSha256": "f4ecbb35d9d18f6a165557770375abca71896efea75a7ce8330e79225355b0eb"
+}

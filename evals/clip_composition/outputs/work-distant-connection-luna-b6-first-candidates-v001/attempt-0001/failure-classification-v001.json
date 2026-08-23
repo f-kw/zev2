@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "distant-connection-luna-b6-failure-classification-v001",
+  "attemptId": "attempt-0001",
+  "classification": "provider-credit-balance-exhausted",
+  "httpStatus": 429,
+  "providerError": {
+    "type": "insufficient_quota",
+    "code": "credit_balance_exhausted",
+    "message": "You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.",
+    "param": null
+  },
+  "requestWasSent": true,
+  "providerUsageReturned": false,
+  "candidateResponseReturned": false,
+  "apiCommunicationCount": 1,
+  "additionalRetryCount": 0,
+  "retryDecision": "stopped-before-repeat",
+  "retryDecisionReason": "credit残高の外部状態が変わらないまま再送すると同型停止2回目になるため"
+}

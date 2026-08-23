@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "distant-connection-luna-response-v001",
+  "sourceVideoId": "source",
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json",
+    "schemaVersion": "distant-connection-luna-source-package-v001",
+    "fileSha256": "b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76"
+  },
+  "candidates": [
+    {
+      "candidateId": "candidate-000001",
+      "anchorId": "comment-anchor-000001",
+      "firstPartSemanticUtteranceIds": [
+        "semantic-utterance-000001"
+      ],
+      "secondPartSemanticUtteranceIds": [
+        "semantic-utterance-000002"
+      ],
+      "addedUnderstanding": "裏で起きていた流れを先に知ることで、最後にこの判断へ至った理由が新しく分かります。",
+      "direction": "future"
+    },
+    {
+      "candidateId": "candidate-000002",
+      "anchorId": "comment-anchor-000002",
+      "firstPartSemanticUtteranceIds": [
+        "semantic-utterance-000001"
+      ],
+      "secondPartSemanticUtteranceIds": [
+        "semantic-utterance-000002"
+      ],
+      "addedUnderstanding": "最後の判断に至る前に、裏で進んでいた流れと今回の話の重要性を知ることで、この判断の背景が新しく分かります。",
+      "direction": "past"
+    }
+  ]
+}

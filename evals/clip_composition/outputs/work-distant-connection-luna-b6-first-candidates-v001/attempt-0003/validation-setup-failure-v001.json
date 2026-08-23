@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "distant-connection-luna-b6-validation-setup-failure-v001",
+  "attemptId": "attempt-0003",
+  "command": "corepack pnpm --filter @zev2/agent-runner exec tsx /private/tmp/validate-distant-connection-luna-b6-attempt-0003.mts",
+  "exitCode": 1,
+  "signal": null,
+  "failureCode": "EPERM",
+  "failureOperation": "listen",
+  "failureReason": "sandbox内でtsxのIPC socketを作成できなかった",
+  "resolution": "同一commandを権限拡張して再実行",
+  "apiCommunicationCount": 0
+}

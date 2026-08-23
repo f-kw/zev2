@@ -1,0 +1,208 @@
+{
+  "id": "resp_0a76081f9a378e29016a8b1c140bd087d08ffce8642908a559",
+  "object": "response",
+  "created_at": 1787501588,
+  "status": "completed",
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1787501592,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": "\u6b63\u5f0fsource package\u306eexplorationTask\u306b\u5f93\u3063\u3066\u9060\u65b9\u63a5\u7d9a\u5019\u88dc\u3092\u63a2\u7d22\u3057\u3001responseContract.jsonSchema\u306b\u9069\u5408\u3059\u308bJSON\u3060\u3051\u3092\u8fd4\u3057\u3066\u304f\u3060\u3055\u3044\u3002\u6b63\u5f0f\u610f\u5473\u767a\u8a71ID\u3092\u5909\u66f4\u3001\u88dc\u5b8c\u3001\u63a8\u6e2c\u3057\u306a\u3044\u3067\u304f\u3060\u3055\u3044\u3002 \u8fd4\u7b54\u306esourcePackageBinding\u306f\u6b21\u306eexact\u5024\u3092\u4e00\u5b57\u3082\u5909\u3048\u305a\u306b\u8ee2\u8a18\u3057\u3066\u304f\u3060\u3055\u3044: {\"path\":\"evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json\",\"schemaVersion\":\"distant-connection-luna-source-package-v001\",\"fileSha256\":\"b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76\"}",
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "model": "gpt-5.6-luna",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_0a76081f9a378e29016a8b1c14627087d08e3fee8b2ae9e998",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqixwYhq7p6ysrn3vRH0stzZG869apPq_fXKxyJE46Tmp_0-u7tClHPdehwX8LlJGmHBHD9pysu-5eOqIg2s-1cxYvEsfhDXZg0WYIeYX524OWOecUThlk6zOl9ef1wRJSOhtDdiGMyCWbxG2EbNYyWW1hULIDgIqXCEUxneGjGG841fbJpUY2OjIQcEWLYCQlfqN-zwpiqTHwFvxkbPsk0pO5iCG0Ig9U8qwCpfN02Tcfsq5qLhqEhr_jk5-81WZoH2jUP5SyZCf8nPrzitMhzc29fUcjJ33kguETtKWFStbH3jvfLpkXgcqxLvruzvuV1unywftoM6vTWHi4H-gZK5rp8hkH2qjnu1CKunqcMKVhEBZGNUSlhkKaFf-nI67Vm8rzI4o__R05EZlhsOdpuLdM77gXy4Rra6bvHXMQWooHMczGWtZkcKXh4ZdahBR3_EL6MJ0agv5B12Xmo4WOAmVi2mbuAEJEQ0AbGt6dtFPxzexDe3xmFOaU0j8CAHDin0seZI39b4nYNi33eV87fxFc_j82jreqzdMaDndNb4sTqq-HiWL6DywS6v3Ez-1dbjQ7DhmOmwH6gtJ4G-4_zxjAfmk44B6FYb1xUseQpjwCCITYFwh_0S6zol6OJZ6T_lkNdc7O63xhPn9FZQj-WST8D1x9MR2yZeEVhpkDoOguUdQ0-BzbkwwG7lGoX1Td88Ayckk46SD_ych3a5zty2MzJASy12BwG6c95p-kmcZqFd_5t_PL5VaELRw_E2IH09LZoB5i7KxFfIE7gYo_8Z_vdZXgPFdfWGgO2cMhv5vJkr9XqlH5CONPIbbiDwoyXQCrP3hF7-uq2TkaKb7Tn3q4O2QIJxUNArWmN4gjxz2FX0g6n0hglt42yTEXaI34mRbmDL0cmFN-FkYGHMvOuE9xltjQDQrLleQrBy9qmVN0ylhZXoCTEwe02zTYcSLxNTG0NuHmVVtZQmw8WAJ3lGsS1af5zs-i_Zw5FY-cVZVF0Aey1VVXMuMp2Hxv-G4rudXpSeuUUv-yoW5U5-90yi6eTDFdFFcDiu4BnbWkC1V6lEJDPg4RttduaPBn8u2Gspa-PfyZF3anxVYQgzDikeoFphnznLQopSQvTgLE44jvqBp10R3uER5n3QeRrc2FmkuoI_th2W7lKmUxPZJZ300kFHDA2FsPUF_E8GQkkUBCIfASNwwsOB6j-ufic03yaLM87L9gDLOfXtivfZSa_hgtTxxLj1Il2wKs93fMmd8fIEkE-l8HNbES2zdoLCNWAnJNDjzfQW0r2sIz83vjG6rf6n7m70i9nC50U44-jPWE5RfUHa72o7rS2Jx6_32rL11ou2etHeCeoCxAdkB2n_6NeXveLK8cBFIp8de8w0k6vTHZgwZqLv5emFHDngE4YDnFBsjALpKEgPQT-3PlBQyIi6ZmpvqRQSn2aya7e8qLWwQTg_LegZz7ZUYsOEWKNOOSkZd2rzJ_JUsn9mR5VxUcyGTuj4f4W_XHEsmUawiHkdXVW0A2PvB7VE5YiWj0Dvtl_4wsuiyHmuvBtpvcOj7cvlzPHqWgFozg3wd7KSsFg2Gzqm0fEyNu1a27iqqQhJn2GQtPYneDudezpaCQjwUAa7DrlpTXzuvh0MUe6_accWBMHh7Itp99aM2wp-lcEyD5HrXt1wxXL5Y8rRUR3fjLAvTHRpDHSelU7L22EjFWa435TkypMhteh1lcWJGEmYJmC38hbKoRo7fw7-rRBKnpVTAOqb_Oc061rnPP9oE2rNa6Xzl145wGfDBMpIjoZZcL8YfmL8kglumUUue5yb-Ykj3MfDPpjLplTv2bJb3BFARu24qfc5MsBAS1yc2GJcozic0Wz8qq97RUkvRwMQjLv7qn0GxYyYSlQ2cbtIyNfOrwg37G6tEG3Ci2XwBlWuakrcIqph9NS-_944pU5Nja1zorjPsIZWXs9HIVT7MFHYABBul-jhBDzVKObiXoATzvgco_v0YPa8QTs5n5vdJdKw==",
+      "summary": []
+    },
+    {
+      "id": "msg_0a76081f9a378e29016a8b1c15f63c87d0a3fc8d713c06c80e",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"schemaVersion\":\"distant-connection-luna-response-v001\",\"sourceVideoId\":\"source\",\"sourcePackageBinding\":{\"path\":\"evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json\",\"schemaVersion\":\"distant-connection-luna-source-package-v001\",\"fileSha256\":\"b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76\"},\"candidates\":[{\"candidateId\":\"candidate-000001\",\"anchorId\":\"comment-anchor-000001\",\"firstPartSemanticUtteranceIds\":[\"semantic-utterance-000001\"],\"secondPartSemanticUtteranceIds\":[\"semantic-utterance-000002\"],\"addedUnderstanding\":\"\u88cf\u3067\u8d77\u304d\u3066\u3044\u305f\u6d41\u308c\u3092\u5148\u306b\u77e5\u308b\u3053\u3068\u3067\u3001\u6700\u5f8c\u306b\u3053\u306e\u5224\u65ad\u3078\u81f3\u3063\u305f\u7406\u7531\u304c\u65b0\u3057\u304f\u5206\u304b\u308a\u307e\u3059\u3002\",\"direction\":\"future\"},{\"candidateId\":\"candidate-000002\",\"anchorId\":\"comment-anchor-000002\",\"firstPartSemanticUtteranceIds\":[\"semantic-utterance-000001\"],\"secondPartSemanticUtteranceIds\":[\"semantic-utterance-000002\"],\"addedUnderstanding\":\"\u6700\u5f8c\u306e\u5224\u65ad\u306b\u81f3\u308b\u524d\u306b\u3001\u88cf\u3067\u9032\u3093\u3067\u3044\u305f\u6d41\u308c\u3068\u4eca\u56de\u306e\u8a71\u306e\u91cd\u8981\u6027\u3092\u77e5\u308b\u3053\u3068\u3067\u3001\u3053\u306e\u5224\u65ad\u306e\u80cc\u666f\u304c\u65b0\u3057\u304f\u5206\u304b\u308a\u307e\u3059\u3002\",\"direction\":\"past\"}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "description": null,
+      "name": "distant_connection_candidates_v001",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "sourceVideoId",
+          "sourcePackageBinding",
+          "candidates"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "type": "string",
+            "const": "distant-connection-luna-response-v001"
+          },
+          "sourceVideoId": {
+            "type": "string",
+            "const": "source"
+          },
+          "sourcePackageBinding": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "schemaVersion",
+              "fileSha256"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "const": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json"
+              },
+              "schemaVersion": {
+                "type": "string",
+                "const": "distant-connection-luna-source-package-v001"
+              },
+              "fileSha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "candidateId",
+                "anchorId",
+                "firstPartSemanticUtteranceIds",
+                "secondPartSemanticUtteranceIds",
+                "addedUnderstanding",
+                "direction"
+              ],
+              "properties": {
+                "candidateId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+                },
+                "anchorId": {
+                  "type": "string",
+                  "enum": [
+                    "comment-anchor-000001",
+                    "comment-anchor-000002"
+                  ]
+                },
+                "firstPartSemanticUtteranceIds": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "semantic-utterance-000001",
+                      "semantic-utterance-000002"
+                    ]
+                  }
+                },
+                "secondPartSemanticUtteranceIds": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "semantic-utterance-000001",
+                      "semantic-utterance-000002"
+                    ]
+                  }
+                },
+                "addedUnderstanding": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "past",
+                    "future"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "strict": true
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1874,
+    "input_tokens_details": {
+      "cache_write_tokens": 1871,
+      "cached_tokens": 0
+    },
+    "output_tokens": 449,
+    "output_tokens_details": {
+      "reasoning_tokens": 135
+    },
+    "total_tokens": 2323
+  },
+  "user": null,
+  "metadata": {}
+}

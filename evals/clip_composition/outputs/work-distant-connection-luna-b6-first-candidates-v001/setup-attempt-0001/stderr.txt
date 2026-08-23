@@ -1,0 +1,14 @@
+node:internal/fs/promises:858
+  return await PromisePrototypeThen(
+         ^
+
+Error: ENOENT: no such file or directory, mkdir '/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-luna-b6-first-candidates-v001/attempt-0001'
+    at async mkdir (node:internal/fs/promises:858:10)
+    at async file:///private/tmp/run-distant-connection-luna-b6-attempt-0001.mjs:93:1 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'mkdir',
+  path: '/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-luna-b6-first-candidates-v001/attempt-0001'
+}
+
+Node.js v20.19.6
