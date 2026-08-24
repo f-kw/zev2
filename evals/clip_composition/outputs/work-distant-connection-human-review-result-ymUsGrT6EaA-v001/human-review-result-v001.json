@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "distant-connection-human-review-result-v001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "reviewedAt": "2026-08-25",
+  "reviewer": "kawafmm",
+  "sourceBindings": {
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "schemaVersion": "distant-connection-luna-response-v001",
+      "fileSha256": "3fa51bcf8c7fd604b316c94cd7a522adf81793a095c0bd3ebbc74b375fdb9c1e"
+    },
+    "videoPrototypeResult": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-ymUsGrT6EaA-v001/video-prototype-result-v001.json",
+      "schemaVersion": "distant-connection-video-prototype-result-v001",
+      "fileSha256": "e112f11674394848731a5b8927203d676024e28f5831b2317521e7f734f3fe51"
+    }
+  },
+  "candidateCount": 2,
+  "candidateReviews": [
+    {
+      "candidateId": "candidate-000001",
+      "judgment": "connection-valid-increment-weak",
+      "reason": "接続自体は成立しているが、汎用的な冒頭説明との関連に留まり、後半による強い回収・意味・面白さの増分が不足"
+    },
+    {
+      "candidateId": "candidate-000002",
+      "judgment": "connection-valid-increment-weak",
+      "reason": "接続自体は成立しているが、汎用的な冒頭説明との関連に留まり、後半による強い回収・意味・面白さの増分が不足"
+    }
+  ],
+  "exceptionPrinciple": "ゲーム紹介・一般説明そのものは除外しない。後半がその説明を強く回収し、前から後へ見ることで意味や面白さが明確に増える場合は成立し得る。"
+}
