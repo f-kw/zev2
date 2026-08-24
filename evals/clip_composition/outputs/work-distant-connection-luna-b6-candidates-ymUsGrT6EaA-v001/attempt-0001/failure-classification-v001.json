@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "distant-connection-luna-b6-failure-classification-v001",
+  "attemptId": "attempt-0001",
+  "decision": "stopped",
+  "providerCompletion": "completed",
+  "candidateCount": 3,
+  "strictValidation": {
+    "decision": "rejected",
+    "errorCode": "ANCHOR_DIRECTION_MISMATCH",
+    "errorMessage": "候補 candidate-doctor-disappearance-guard-room の方向とアンカーを含む側が一致しません",
+    "mismatchedCandidateCount": 3,
+    "observations": [
+      {
+        "candidateId": "candidate-doctor-disappearance-guard-room",
+        "anchorId": "comment-anchor-003544",
+        "anchorSemanticUtteranceId": "semantic-utterance-003544",
+        "direction": "future",
+        "expectedAnchorPart": "firstPart",
+        "anchorInFirstPart": false,
+        "anchorInSecondPart": true,
+        "directionMatchesAnchorPart": false
+      },
+      {
+        "candidateId": "candidate-doctor-disappearance-security-graffiti",
+        "anchorId": "comment-anchor-007095",
+        "anchorSemanticUtteranceId": "semantic-utterance-007095",
+        "direction": "future",
+        "expectedAnchorPart": "firstPart",
+        "anchorInFirstPart": false,
+        "anchorInSecondPart": true,
+        "directionMatchesAnchorPart": false
+      },
+      {
+        "candidateId": "candidate-security-graffiti-repeated-fear",
+        "anchorId": "comment-anchor-010119",
+        "anchorSemanticUtteranceId": "semantic-utterance-010119",
+        "direction": "future",
+        "expectedAnchorPart": "firstPart",
+        "anchorInFirstPart": false,
+        "anchorInSecondPart": true,
+        "directionMatchesAnchorPart": false
+      }
+    ]
+  },
+  "confirmedCause": "Lunaは3候補すべてでanchor発話を後半へ置きながらdirectionをfutureと返した。現行validatorはanchorから未来の相方を探す場合だけfutureとし、その場合anchor発話を前半へ要求する。",
+  "correctionPlan": "directionがanchorから見た相方の位置であることと、pastはanchorを後半、futureはanchorを前半へ含めることをLuna入力へ明示する。strict validatorは変更しない。新しいsource package・request・token計測を固定し、2回目の有料B6は別承認後にのみ行う。",
+  "secondPaidB6Executed": false
+}

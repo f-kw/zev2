@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "distant-connection-luna-b6-usage-and-cost-v001",
+  "attemptId": "attempt-0001",
+  "requestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-a2-ymUsGrT6EaA-v001/exact-request-v001.json",
+    "fileSha256": "85d3d27f33a4aadaaf9a2eb4d75fb591099a2be4b0fbef9354c296a20d855851"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-ymUsGrT6EaA-v001/attempt-0001/raw-response-v001.json",
+    "fileSha256": "de19b9c3d48e369a8d0c1da519bb47cdb437546cf91e85f6bb12febd66af8163"
+  },
+  "usage": {
+    "inputTokens": 892611,
+    "cachedInputTokens": 0,
+    "cacheWriteTokens": 892608,
+    "uncachedNonWriteInputTokens": 3,
+    "outputTokens": 3599,
+    "reasoningTokens": 1927,
+    "totalTokens": 896210
+  },
+  "pricing": {
+    "longContextThresholdTokens": 272000,
+    "longContextPricingApplies": true,
+    "inputMultiplier": 2,
+    "outputMultiplierNumerator": 3,
+    "outputMultiplierDenominator": 2
+  },
+  "cost": {
+    "inputNanoUsd": 1200,
+    "cachedInputNanoUsd": 0,
+    "cacheWriteNanoUsd": 446304000,
+    "outputNanoUsd": 6478200,
+    "totalNanoUsd": 452783400,
+    "totalUsd": 0.4527834,
+    "maximumNanoUsd": 1000000000,
+    "withinMaximum": true
+  }
+}
