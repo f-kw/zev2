@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "openai-responses-input-token-count-preflight-v001",
+  "endpoint": "https://api.openai.com/v1/responses/input_tokens",
+  "attemptId": "attempt-0001",
+  "cumulativeApiCallNumber": 2,
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-ymUsGrT6EaA-v001/source-package-v001.json",
+    "fileSha256": "24af313437af615961d8b4836f59bc46ae6fa1189d0e3a9356b3468ae2c4ce6f"
+  },
+  "exactRequestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-schema-thinning-ymUsGrT6EaA-v001/exact-request-v001.json",
+    "fileSha256": "3a7326e8a0cc2c5c9ce048952f54fdf4ff6b5bedfa6dcb1a2a0ff8153ca3cfd7"
+  },
+  "localManifestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-schema-thinning-ymUsGrT6EaA-v001/b5-local-manifest-v001.json",
+    "fileSha256": "ece0974a78237d2290adf8028a3923c73c913285e56a658e3312a8b93cc6c3da"
+  },
+  "requestProjection": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-schema-thinning-ymUsGrT6EaA-v001/attempt-0001/input-token-count-request-v001.json",
+    "fileSha256": "5a70c80031000d3cc127dc505d5582d02cb1226ba58597c5c1b758de9fc12eaa",
+    "omittedTokenNeutralFields": [
+      "store"
+    ]
+  },
+  "providerSchemaIdEnumsRemoved": true,
+  "semanticUtteranceCount": 10723,
+  "anchorCount": 4442,
+  "credential": {
+    "source": ".env:OPENAI_API_KEY",
+    "valuePersisted": false
+  },
+  "status": "passed"
+}
