@@ -1,0 +1,115 @@
+[h264 @ 0x9d9038a80] Reinit context to 1920x1088, pix_fmt: yuv420p
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf62.3.100
+  Duration: 01:43:02.13, start: 0.000000, bitrate: 4543 kb/s
+  Stream #0:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 127 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+  Stream #0:1[0x2](und): Video: h264 (High), 1 reference frame (avc1 / 0x31637661), yuv420p(tv, bt709, progressive, left), 1920x1080 [SAR 1:1 DAR 16:9], 4403 kb/s, 60 fps, 60 tbr, 90k tbn, start 0.016000 (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+[out#0/mp4 @ 0x9d8c4c300] Adding streams from explicit maps...
+[vost#0:0/libx264 @ 0x9d8cdc000] Created video stream from input stream 0:1
+[Parsed_fps_0 @ 0x9d8c4c480] 0 frames in, 0 frames out; 0 frames dropped, 0 frames duplicated.
+[aost#0:1/aac @ 0x9d8cdc300] Created audio stream from input stream 0:0
+Stream mapping:
+  Stream #0:1 -> #0:0 (h264 (native) -> h264 (libx264))
+  Stream #0:0 -> #0:1 (aac (native) -> aac (native))
+[vost#0:0/libx264 @ 0x9d8cdc000] Starting thread...
+[aost#0:1/aac @ 0x9d8cdc300] Starting thread...
+[vf#0:0 @ 0x9d940c000] Starting thread...
+[af#0:1 @ 0x9d940c500] Starting thread...
+[vist#0:1/h264 @ 0x9d900c180] [dec:h264 @ 0x9d8c203c0] Starting thread...
+[aist#0:0/aac @ 0x9d900c600] [dec:aac @ 0x9d8c20500] Starting thread...
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x9d8c20000] Starting thread...
+Press [q] to stop, [?] for help
+[h264 @ 0x9d9039880] Reinit context to 1920x1088, pix_fmt: yuv420p
+[graph_-1_in_0:0 @ 0x9d8c4e100] tb:1/44100 samplefmt:fltp samplerate:44100 chlayout:stereo
+[trim for input stream 0:0 @ 0x9d8c4e1c0] TB:0.000023 FRAME_RATE:nan SAMPLE_RATE:44100.000000
+[graph -1 input from stream 0:1 @ 0x9d8ddd140] w:1920 h:1080 pixfmt:yuv420p tb:1/90000 fr:60/1 sar:1/1 csp:bt709 range:tv
+[Parsed_fps_0 @ 0x9d8ddcfc0] fps=30/1
+[Parsed_fps_0 @ 0x9d8ddcfc0] Set first pts to 0
+[libx264 @ 0x9d9039180] using SAR=1/1
+[libx264 @ 0x9d9039180] using cpu capabilities: ARMv8 NEON DotProd I8MM
+[libx264 @ 0x9d9039180] profile High, level 4.0, 4:2:0, 8-bit
+[libx264 @ 0x9d9039180] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=2 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=6 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=21 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=30 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to '/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-ymUsGrT6EaA-v001.work/candidate-000001/segment-1.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf62.3.100
+  Stream #0:0(und): Video: h264, 1 reference frame (avc1 / 0x31637661), yuv420p(tv, bt709, progressive, left), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn (default)
+    Metadata:
+      encoder         : Lavc62.11.100 libx264
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+  Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, delay 1024, 128 kb/s (default)
+    Metadata:
+      encoder         : Lavc62.11.100 aac
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+[out#0/mp4 @ 0x9d8c4c300] Starting thread...
+frame=  101 fps=0.0 q=26.0 size=    1280KiB time=00:00:03.30 bitrate=3177.6kbits/s speed=6.53x elapsed=0:00:00.50    [vf#0:0 @ 0x9d940c000] Filtergraph returned EOF, finishing
+[vf#0:0 @ 0x9d940c000] All consumers returned EOF
+[Parsed_fps_0 @ 0x9d8ddcfc0] 357 frames in, 179 frames out; 178 frames dropped, 0 frames duplicated.
+[af#0:1 @ 0x9d940c500] All consumers returned EOF
+[vf#0:0 @ 0x9d940c000] Terminating thread with return code 0 (success)
+[af#0:1 @ 0x9d940c500] Terminating thread with return code 0 (success)
+[vist#0:1/h264 @ 0x9d900c180] [dec:h264 @ 0x9d8c203c0] Decoder returned EOF, finishing
+[vist#0:1/h264 @ 0x9d900c180] [dec:h264 @ 0x9d8c203c0] Terminating thread with return code 0 (success)
+[aist#0:0/aac @ 0x9d900c600] [dec:aac @ 0x9d8c20500] Decoder returned EOF, finishing
+[aist#0:0/aac @ 0x9d900c600] [dec:aac @ 0x9d8c20500] Terminating thread with return code 0 (success)
+[aist#0:0/aac @ 0x9d900c600] All consumers of this stream are done
+[vist#0:1/h264 @ 0x9d900c180] All consumers of this stream are done
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x9d8c20000] All consumers are done
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x9d8c20000] Terminating thread with return code 0 (success)
+[aost#0:1/aac @ 0x9d8cdc300] [enc:aac @ 0x9d8c25d50] Encoder thread received EOF
+[aost#0:1/aac @ 0x9d8cdc300] Terminating thread with return code 0 (success)
+[vost#0:0/libx264 @ 0x9d8cdc000] [enc:libx264 @ 0x9d8c24770] Encoder thread received EOF
+[vost#0:0/libx264 @ 0x9d8cdc000] Terminating thread with return code 0 (success)
+[out#0/mp4 @ 0x9d8c4c300] All streams finished
+[out#0/mp4 @ 0x9d8c4c300] Terminating thread with return code 0 (success)
+[mp4 @ 0x9d9013700] Starting second pass: moving the moov atom to the beginning of the file
+[AVIOContext @ 0x9d8c20b40] Statistics: 2505531 bytes read, 0 seeks
+[AVIOContext @ 0x9d8c20780] Statistics: 5018885 bytes written, 4 seeks, 23 writeouts
+[out#0/mp4 @ 0x9d8c4c300] Output file #0 (/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-ymUsGrT6EaA-v001.work/candidate-000001/segment-1.mp4):
+[out#0/mp4 @ 0x9d8c4c300]   Output stream #0:0 (video): 178 frames encoded; 178 packets muxed (2410149 bytes); 
+[out#0/mp4 @ 0x9d8c4c300]   Output stream #0:1 (audio): 256 frames encoded (261660 samples); 257 packets muxed (95333 bytes); 
+[out#0/mp4 @ 0x9d8c4c300]   Total: 435 packets (2505482 bytes) muxed
+[out#0/mp4 @ 0x9d8c4c300] video:2354KiB audio:93KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.315309%
+frame=  178 fps=0.0 q=-1.0 Lsize=    2454KiB time=00:00:05.86 bitrate=3427.3kbits/s speed=8.51x elapsed=0:00:00.68    
+[libx264 @ 0x9d9039180] frame I:1     Avg QP:13.84  size: 95602
+[libx264 @ 0x9d9039180] frame P:45    Avg QP:15.90  size: 30530
+[libx264 @ 0x9d9039180] frame B:132   Avg QP:17.14  size:  7121
+[libx264 @ 0x9d9039180] consecutive B-frames:  1.1%  0.0%  0.0% 98.9%
+[libx264 @ 0x9d9039180] mb I  I16..4: 42.7% 41.6% 15.6%
+[libx264 @ 0x9d9039180] mb P  I16..4:  5.0% 13.6%  0.7%  P16..4: 24.6%  8.1%  4.5%  0.0%  0.0%    skip:43.5%
+[libx264 @ 0x9d9039180] mb B  I16..4:  2.6%  0.6%  0.0%  B16..8: 19.5%  3.4%  0.6%  direct: 3.7%  skip:69.6%  L0:48.9% L1:43.2% BI: 7.8%
+[libx264 @ 0x9d9039180] 8x8 transform intra:52.4% inter:49.6%
+[libx264 @ 0x9d9039180] coded y,uvDC,uvAC intra: 13.6% 12.1% 2.4% inter: 5.3% 5.3% 0.1%
+[libx264 @ 0x9d9039180] i16 v,h,dc,p: 65% 24%  9%  3%
+[libx264 @ 0x9d9039180] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 15% 57%  1%  1%  1%  1%  1%  1%
+[libx264 @ 0x9d9039180] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 36% 15% 20%  4%  6%  8%  4%  5%  3%
+[libx264 @ 0x9d9039180] i8c dc,h,v,p: 78% 10% 11%  1%
+[libx264 @ 0x9d9039180] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0x9d9039180] ref P L0: 59.3% 40.7%
+[libx264 @ 0x9d9039180] ref B L0: 84.2% 15.8%
+[libx264 @ 0x9d9039180] ref B L1: 94.8%  5.2%
+[libx264 @ 0x9d9039180] kb/s:3248.71
+[aac @ 0x9d9465180] Qavg: 306.805
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x9d8c20000] Input file #0 (/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4):
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x9d8c20000]   Input stream #0:0 (audio): 420 packets read (156320 bytes); 411 frames decoded; 0 decode errors (420864 samples); 
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x9d8c20000]   Input stream #0:1 (video): 584 packets read (3777710 bytes); 561 frames decoded; 0 decode errors; 
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x9d8c20000]   Total: 1004 packets (3934030 bytes) demuxed
+[AVIOContext @ 0x9d8c20140] Statistics: 13293735 bytes read, 1 seeks
+
+Exiting with exit code 0

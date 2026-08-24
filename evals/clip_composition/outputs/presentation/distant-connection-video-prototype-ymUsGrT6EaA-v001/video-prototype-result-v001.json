@@ -1,0 +1,581 @@
+{
+  "schemaVersion": "distant-connection-video-prototype-result-v001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "sourceBindings": {
+    "sourceVideo": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    },
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "fileSha256": "3fa51bcf8c7fd604b316c94cd7a522adf81793a095c0bd3ebbc74b375fdb9c1e"
+    },
+    "semanticUtterance": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-semantic-utterance-ymUsGrT6EaA-v001/semantic-utterance-artifact-v001.json",
+      "fileSha256": "e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2"
+    },
+    "sourcePackage": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-direction-clarified-ymUsGrT6EaA-v001/source-package-v001.json",
+      "fileSha256": "13371ae512a634252d2257edba547d9835bae3368d1cc942e5bb931971db7530"
+    },
+    "prototypePlan": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-ymUsGrT6EaA-v001/video-prototype-plan-v001.json",
+      "fileSha256": "5f72049c6e0b804d1362f3c361e3d8b771291f3c8281dd563c81986e5c45fead"
+    }
+  },
+  "intervalPolicy": {
+    "selection": "candidate-selected-formal-utterance-closure",
+    "expansionApplied": false,
+    "reason": "両候補の前半・後半はいずれも連続する正式発話で意味が閉じており、追加文脈を発明せず候補範囲をそのまま使用する。"
+  },
+  "physicalLayoutSelection": {
+    "method": "highest-integer-logical-width-passing-existing-physical-layout-preflight",
+    "registryMaximum": 36,
+    "selectedMaximum": 34,
+    "candidateInspections": [
+      {
+        "candidateId": "candidate-000001",
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "passed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "top": 40,
+            "right": 80,
+            "bottom": 40,
+            "left": 80
+          }
+        },
+        "items": [
+          {
+            "instructionId": "candidate-000001-presentation-instruction-001",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 172,
+                "top": 815.2,
+                "right": 1748,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 168,
+              "width": 1584,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "candidate-000001-presentation-instruction-002",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 124,
+                "top": 671.2,
+                "right": 1796,
+                "bottom": 807.2
+              },
+              {
+                "left": 124,
+                "top": 815.2,
+                "right": 1796,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 667.2,
+              "left": 120,
+              "width": 1680,
+              "height": 308
+            }
+          },
+          {
+            "instructionId": "candidate-000001-presentation-instruction-003",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 124,
+                "top": 671.2,
+                "right": 1796,
+                "bottom": 807.2
+              },
+              {
+                "left": 124,
+                "top": 815.2,
+                "right": 1796,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 667.2,
+              "left": 120,
+              "width": 1680,
+              "height": 308
+            }
+          },
+          {
+            "instructionId": "candidate-000001-presentation-instruction-004",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 892,
+                "top": 815.2,
+                "right": 1028,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 888,
+              "width": 144,
+              "height": 164
+            }
+          }
+        ],
+        "violations": []
+      },
+      {
+        "candidateId": "candidate-000002",
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "passed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "top": 40,
+            "right": 80,
+            "bottom": 40,
+            "left": 80
+          }
+        },
+        "items": [
+          {
+            "instructionId": "candidate-000002-presentation-instruction-001",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 172,
+                "top": 815.2,
+                "right": 1748,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 168,
+              "width": 1584,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "candidate-000002-presentation-instruction-002",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 124,
+                "top": 671.2,
+                "right": 1796,
+                "bottom": 807.2
+              },
+              {
+                "left": 604,
+                "top": 815.2,
+                "right": 1316,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 667.2,
+              "left": 120,
+              "width": 1680,
+              "height": 308
+            }
+          }
+        ],
+        "violations": []
+      }
+    ]
+  },
+  "candidateCount": 2,
+  "candidates": [
+    {
+      "candidateId": "candidate-000001",
+      "anchorId": "comment-anchor-000067",
+      "direction": "future",
+      "addedUnderstanding": "冒頭で紹介された「今年一番怖いと言われるホラーゲーム」が、後半で語られる、昔ある女とその子供にまつわる出来事を背景にした物語だと分かる。",
+      "firstPart": {
+        "sourceStartMs": 249378,
+        "sourceEndMs": 255324,
+        "text": "今年一怖いと言われるホラーゲーム",
+        "semanticUtteranceIds": [
+          "semantic-utterance-000067",
+          "semantic-utterance-000068",
+          "semantic-utterance-000069",
+          "semantic-utterance-000070",
+          "semantic-utterance-000071",
+          "semantic-utterance-000072",
+          "semantic-utterance-000073",
+          "semantic-utterance-000074",
+          "semantic-utterance-000075",
+          "semantic-utterance-000076",
+          "semantic-utterance-000077",
+          "semantic-utterance-000078",
+          "semantic-utterance-000079",
+          "semantic-utterance-000080",
+          "semantic-utterance-000081",
+          "semantic-utterance-000082"
+        ],
+        "sourceSegmentIds": [
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "secondPart": {
+        "sourceStartMs": 5681391,
+        "sourceEndMs": 5698719,
+        "text": "昔ある女がいた彼女の子供は祭りに向かう途中で事故に遭った人々は祭りに夢中で彼女の助けを求める声を無視した可哀想な子供は若くして命を落とした",
+        "semanticUtteranceIds": [
+          "semantic-utterance-009109",
+          "semantic-utterance-009110",
+          "semantic-utterance-009111",
+          "semantic-utterance-009112",
+          "semantic-utterance-009113",
+          "semantic-utterance-009114",
+          "semantic-utterance-009115",
+          "semantic-utterance-009116",
+          "semantic-utterance-009117",
+          "semantic-utterance-009118",
+          "semantic-utterance-009119",
+          "semantic-utterance-009120",
+          "semantic-utterance-009121",
+          "semantic-utterance-009122",
+          "semantic-utterance-009123",
+          "semantic-utterance-009124",
+          "semantic-utterance-009125",
+          "semantic-utterance-009126",
+          "semantic-utterance-009127",
+          "semantic-utterance-009128",
+          "semantic-utterance-009129",
+          "semantic-utterance-009130",
+          "semantic-utterance-009131",
+          "semantic-utterance-009132",
+          "semantic-utterance-009133",
+          "semantic-utterance-009134",
+          "semantic-utterance-009135",
+          "semantic-utterance-009136",
+          "semantic-utterance-009137",
+          "semantic-utterance-009138",
+          "semantic-utterance-009139",
+          "semantic-utterance-009140",
+          "semantic-utterance-009141",
+          "semantic-utterance-009142",
+          "semantic-utterance-009143",
+          "semantic-utterance-009144",
+          "semantic-utterance-009145",
+          "semantic-utterance-009146",
+          "semantic-utterance-009147",
+          "semantic-utterance-009148",
+          "semantic-utterance-009149",
+          "semantic-utterance-009150",
+          "semantic-utterance-009151",
+          "semantic-utterance-009152",
+          "semantic-utterance-009153",
+          "semantic-utterance-009154",
+          "semantic-utterance-009155",
+          "semantic-utterance-009156",
+          "semantic-utterance-009157",
+          "semantic-utterance-009158",
+          "semantic-utterance-009159",
+          "semantic-utterance-009160",
+          "semantic-utterance-009161",
+          "semantic-utterance-009162",
+          "semantic-utterance-009163",
+          "semantic-utterance-009164",
+          "semantic-utterance-009165",
+          "semantic-utterance-009166",
+          "semantic-utterance-009167",
+          "semantic-utterance-009168",
+          "semantic-utterance-009169",
+          "semantic-utterance-009170",
+          "semantic-utterance-009171",
+          "semantic-utterance-009172",
+          "semantic-utterance-009173",
+          "semantic-utterance-009174",
+          "semantic-utterance-009175",
+          "semantic-utterance-009176",
+          "semantic-utterance-009177"
+        ],
+        "sourceSegmentIds": [
+          9109,
+          9110,
+          9111,
+          9112,
+          9113,
+          9114,
+          9115,
+          9116,
+          9117,
+          9118,
+          9119,
+          9120,
+          9121,
+          9122,
+          9123,
+          9124,
+          9125,
+          9126,
+          9127,
+          9128,
+          9129,
+          9130,
+          9131,
+          9132,
+          9133,
+          9134,
+          9135,
+          9136,
+          9137,
+          9138,
+          9139,
+          9140,
+          9141,
+          9142,
+          9143,
+          9144,
+          9145,
+          9146,
+          9147,
+          9148,
+          9149,
+          9150,
+          9151,
+          9152,
+          9153,
+          9154,
+          9155,
+          9156,
+          9157,
+          9158,
+          9159,
+          9160,
+          9161,
+          9162,
+          9163,
+          9164,
+          9165,
+          9166,
+          9167,
+          9168,
+          9169,
+          9170,
+          9171,
+          9172,
+          9173,
+          9174,
+          9175,
+          9176,
+          9177
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "gapMs": 5426067,
+      "videoRelativePath": "candidates/candidate-000001/render/presentation-rendered-v002.mp4",
+      "video": {
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-ymUsGrT6EaA-v001/candidates/candidate-000001/render/presentation-rendered-v002.mp4",
+        "fileSha256": "e58b89619898874caf3054a3301b3c316a3b5bd327ab46e6be21eee0efc88b61"
+      },
+      "media": {
+        "durationMs": 23266,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 698
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "8cfadea076dfd222025cc2931f4c76cd7c7300f84f7cf00e9723408c35a08689"
+        }
+      },
+      "qc": {
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-ymUsGrT6EaA-v001/candidates/candidate-000001/render/presentation-render-qc-v002.json",
+        "fileSha256": "152e68840dccab3d4e9a55adf0cb5e513937f5e9e686e468c838c9624772f786",
+        "status": "passed"
+      },
+      "processObservations": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-ymUsGrT6EaA-v001/candidates/candidate-000001/process-observations-v001"
+    },
+    {
+      "candidateId": "candidate-000002",
+      "anchorId": "comment-anchor-001182",
+      "direction": "past",
+      "addedUnderstanding": "前半でゲーム自体が恐怖を売りにした作品だと分かるため、後半の「カメラでビビらせる感じ」は単なる操作ではなく、作品の恐怖演出への反応として理解できる。",
+      "firstPart": {
+        "sourceStartMs": 249378,
+        "sourceEndMs": 255324,
+        "text": "今年一怖いと言われるホラーゲーム",
+        "semanticUtteranceIds": [
+          "semantic-utterance-000067",
+          "semantic-utterance-000068",
+          "semantic-utterance-000069",
+          "semantic-utterance-000070",
+          "semantic-utterance-000071",
+          "semantic-utterance-000072",
+          "semantic-utterance-000073",
+          "semantic-utterance-000074",
+          "semantic-utterance-000075",
+          "semantic-utterance-000076",
+          "semantic-utterance-000077",
+          "semantic-utterance-000078",
+          "semantic-utterance-000079",
+          "semantic-utterance-000080",
+          "semantic-utterance-000081",
+          "semantic-utterance-000082"
+        ],
+        "sourceSegmentIds": [
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "secondPart": {
+        "sourceStartMs": 664354,
+        "sourceEndMs": 671316,
+        "text": "え、このカメラもさね、ビビらせる感じやめてほしい",
+        "semanticUtteranceIds": [
+          "semantic-utterance-001182",
+          "semantic-utterance-001183",
+          "semantic-utterance-001184",
+          "semantic-utterance-001185",
+          "semantic-utterance-001186",
+          "semantic-utterance-001187",
+          "semantic-utterance-001188",
+          "semantic-utterance-001189",
+          "semantic-utterance-001190",
+          "semantic-utterance-001191",
+          "semantic-utterance-001192",
+          "semantic-utterance-001193",
+          "semantic-utterance-001194",
+          "semantic-utterance-001195",
+          "semantic-utterance-001196",
+          "semantic-utterance-001197",
+          "semantic-utterance-001198",
+          "semantic-utterance-001199",
+          "semantic-utterance-001200",
+          "semantic-utterance-001201",
+          "semantic-utterance-001202",
+          "semantic-utterance-001203",
+          "semantic-utterance-001204",
+          "semantic-utterance-001205"
+        ],
+        "sourceSegmentIds": [
+          1182,
+          1183,
+          1184,
+          1185,
+          1186,
+          1187,
+          1188,
+          1189,
+          1190,
+          1191,
+          1192,
+          1193,
+          1194,
+          1195,
+          1196,
+          1197,
+          1198,
+          1199,
+          1200,
+          1201,
+          1202,
+          1203,
+          1204,
+          1205
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "gapMs": 409030,
+      "videoRelativePath": "candidates/candidate-000002/render/presentation-rendered-v002.mp4",
+      "video": {
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-ymUsGrT6EaA-v001/candidates/candidate-000002/render/presentation-rendered-v002.mp4",
+        "fileSha256": "bf92c8dcbc64faa102bf91ab913e9cfcdd9547f126275b4caeee9c55aa91643a"
+      },
+      "media": {
+        "durationMs": 12900,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 387
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "bdc83cc16deb3dc035f4aced9cba45650c2e25f308ef7e08e677a75eb355b7ac"
+        }
+      },
+      "qc": {
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-ymUsGrT6EaA-v001/candidates/candidate-000002/render/presentation-render-qc-v002.json",
+        "fileSha256": "789e81cd97a0c4d4e2e4b519bbc705b90099de5905dcf63ed303e1a8ec2e1cb4",
+        "status": "passed"
+      },
+      "processObservations": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-ymUsGrT6EaA-v001/candidates/candidate-000002/process-observations-v001"
+    }
+  ],
+  "reviewPage": {
+    "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-ymUsGrT6EaA-v001/review.html",
+    "fileSha256": "0c7f19f6868c61cd67da85a505ab39ff6018fda5cf3b1a8c68961ad38586690a"
+  },
+  "qc": {
+    "status": "passed",
+    "candidateOrderMatchesFormalResponse": true,
+    "sourceVideoShaMatches": true,
+    "candidateResponseShaMatches": true,
+    "semanticUtteranceShaMatches": true,
+    "unrelatedMiddleIntervalsIncluded": false,
+    "subtitlesUseApprovedExistingProfile": "normal-landscape-readable-pop-v001",
+    "apiCalls": 0,
+    "costUsd": 0,
+    "remoteOperations": 0
+  }
+}
