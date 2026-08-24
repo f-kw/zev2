@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "distant-connection-luna-b5-token-count-evaluation-v001",
+  "measurementBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-a2-ymUsGrT6EaA-v001/input-token-count-measurement-v001.json",
+    "schemaVersion": "distant-connection-luna-b5-measurement-v001",
+    "fileSha256": "8eb16d8be9fe33a94fea7a4fe703d01f14e517ce56ab367f064f936d0d537500"
+  },
+  "priceSnapshotBinding": {
+    "path": "evals/clip_composition/reports/presentation/provider-research/openai-gpt-5-6-luna-official-snapshot-20260816-v001.json",
+    "schemaVersion": "openai-gpt-5-6-luna-official-snapshot-v001",
+    "fileSha256": "9d53b52a6e1726bcbf715137a32d6819d668c4023e89ddf2d81edaec7f5166d7"
+  },
+  "contextEvaluation": {
+    "inputTokens": 892611,
+    "contextWindowTokens": 1050000,
+    "usageFraction": {
+      "numeratorTokens": 892611,
+      "denominatorTokens": 1050000
+    },
+    "withinContextWindow": true,
+    "excessTokens": 0,
+    "remainingTokens": 157389
+  },
+  "longContextPricing": {
+    "thresholdTokens": 272000,
+    "comparison": "inputTokens > thresholdTokens",
+    "applies": true
+  },
+  "b6MaximumCostProjection": {
+    "currency": "USD",
+    "maximumOutputTokens": 128000,
+    "inputPriceNanoUsdPerToken": 400,
+    "outputPriceNanoUsdPerToken": 1800,
+    "projectedInputNanoUsd": 357044400,
+    "projectedMaximumOutputNanoUsd": 230400000,
+    "projectedNanoUsd": 587444400,
+    "maximumNanoUsd": 500000000,
+    "decision": "stopped"
+  },
+  "b6Admission": {
+    "decision": "stopped",
+    "reasons": [
+      "projected_cost_exceeds_maximum"
+    ]
+  }
+}
