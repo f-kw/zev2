@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "distant-connection-real-human-review-manifest-v001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "candidateResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-ymUsGrT6EaA-v001/candidate-response-v001.json",
+    "schemaVersion": "distant-connection-luna-response-v001",
+    "fileSha256": "3fa51bcf8c7fd604b316c94cd7a522adf81793a095c0bd3ebbc74b375fdb9c1e"
+  },
+  "semanticUtteranceBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-semantic-utterance-ymUsGrT6EaA-v001/semantic-utterance-artifact-v001.json",
+    "schemaVersion": "semantic-utterance-artifact-v001",
+    "fileSha256": "e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2"
+  },
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-direction-clarified-ymUsGrT6EaA-v001/source-package-v001.json",
+    "schemaVersion": "distant-connection-luna-source-package-v001",
+    "fileSha256": "13371ae512a634252d2257edba547d9835bae3368d1cc942e5bb931971db7530"
+  },
+  "b6RunManifestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-ymUsGrT6EaA-v001/b6-run-manifest-v001.json",
+    "schemaVersion": "distant-connection-luna-b6-run-manifest-v001",
+    "fileSha256": "37917a92a565f9b7aa568cb5a9ba2c118d62c6d97e2659b2a370c3e2d6828ec0"
+  },
+  "reviewPageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-human-review-ymUsGrT6EaA-v001/review.html",
+    "schemaVersion": "distant-connection-real-human-review-page-v001",
+    "fileSha256": "0de9ef036b328468dd9337e4dbe51d67fa8350584176214527760b6c86c43111"
+  },
+  "candidateCount": 2,
+  "candidates": [
+    {
+      "candidateId": "candidate-000001",
+      "firstPart": {
+        "startMs": 249378,
+        "endMs": 255324
+      },
+      "secondPart": {
+        "startMs": 5681391,
+        "endMs": 5698719
+      },
+      "gapMs": 5426067,
+      "direction": "future",
+      "anchorId": "comment-anchor-000067",
+      "anchorSemanticUtteranceId": "semantic-utterance-000067",
+      "anchorPart": "first",
+      "surroundingContext": {
+        "decision": "not-shown",
+        "reason": "selected-utterances-form-readable-statement"
+      }
+    },
+    {
+      "candidateId": "candidate-000002",
+      "firstPart": {
+        "startMs": 249378,
+        "endMs": 255324
+      },
+      "secondPart": {
+        "startMs": 664354,
+        "endMs": 671316
+      },
+      "gapMs": 409030,
+      "direction": "past",
+      "anchorId": "comment-anchor-001182",
+      "anchorSemanticUtteranceId": "semantic-utterance-001182",
+      "anchorPart": "second",
+      "surroundingContext": {
+        "decision": "not-shown",
+        "reason": "selected-utterances-form-readable-statement"
+      }
+    }
+  ],
+  "validation": {
+    "decision": "passed",
+    "strictCandidateCount": 2
+  }
+}
