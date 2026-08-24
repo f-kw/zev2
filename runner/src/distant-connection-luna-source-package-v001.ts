@@ -240,9 +240,7 @@ function assertPlannedExecution(
 
 function buildResponseJsonSchema(
   sourceVideoId: string,
-  sourcePackagePath: string,
-  anchorIds: string[],
-  utteranceIds: string[]
+  sourcePackagePath: string
 ): Record<string, unknown> {
   return {
     type: 'object',
@@ -279,12 +277,19 @@ function buildResponseJsonSchema(
           ],
           properties: {
             candidateId: {type: 'string', pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*$'},
-            anchorId: {type: 'string', enum: anchorIds},
+            anchorId: {
+              type: 'string',
+              pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*$'
+            },
             firstPartSemanticUtteranceIds: {
-              type: 'array', minItems: 1, items: {type: 'string', enum: utteranceIds}
+              type: 'array',
+              minItems: 1,
+              items: {type: 'string', pattern: '^semantic-utterance-[0-9]{6}$'}
             },
             secondPartSemanticUtteranceIds: {
-              type: 'array', minItems: 1, items: {type: 'string', enum: utteranceIds}
+              type: 'array',
+              minItems: 1,
+              items: {type: 'string', pattern: '^semantic-utterance-[0-9]{6}$'}
             },
             addedUnderstanding: {type: 'string', minLength: 1},
             direction: {type: 'string', enum: ['past', 'future']}
@@ -297,9 +302,7 @@ function buildResponseJsonSchema(
 
 function assertResponseContract(
   value: unknown,
-  sourceVideoId: string,
-  anchorIds: string[],
-  utteranceIds: string[]
+  sourceVideoId: string
 ): asserts value is DistantConnectionLunaSourcePackageV001['responseContract'] {
   if (!isRecord(value) || !hasExactKeys(value, [
     'schemaVersion', 'sourcePackagePath', 'jsonSchema'
@@ -310,9 +313,7 @@ function assertResponseContract(
   assertWorkspaceRelativePath(value.sourcePackagePath, 'Luna source packageのpath');
   const expected = buildResponseJsonSchema(
     sourceVideoId,
-    value.sourcePackagePath,
-    anchorIds,
-    utteranceIds
+    value.sourcePackagePath
   );
   if (JSON.stringify(value.jsonSchema) !== JSON.stringify(expected)) {
     fail('SOURCE_PACKAGE_INVALID', 'Luna返答用JSON Schemaが正式入力からの導出値と一致しません');
@@ -347,8 +348,6 @@ function buildSourcePackage(
     };
   });
 
-  const utteranceIds = semanticUtterances.utterances.map((item) => item.utteranceId);
-  const anchorIds = projectedAnchors.map((item) => item.anchorId);
   return {
     schemaVersion: DISTANT_CONNECTION_LUNA_SOURCE_PACKAGE_SCHEMA_V001,
     sourceVideoId: anchors.sourceVideoId,
@@ -373,9 +372,7 @@ function buildSourcePackage(
       sourcePackagePath: input.sourcePackagePath,
       jsonSchema: buildResponseJsonSchema(
         anchors.sourceVideoId,
-        input.sourcePackagePath,
-        anchorIds,
-        utteranceIds
+        input.sourcePackagePath
       )
     }
   };
@@ -500,7 +497,6 @@ export function assertDistantConnectionLunaSourcePackageV001(
   }
 
   const knownUtteranceIds = new Set(utteranceIds);
-  const anchorIds: string[] = [];
   const seenAnchorIds = new Set<string>();
   for (const [index, item] of value.anchors.entries()) {
     if (!isRecord(item) || !hasExactKeys(item, ['anchorId', 'semanticUtteranceId'])
@@ -510,10 +506,9 @@ export function assertDistantConnectionLunaSourcePackageV001(
       || seenAnchorIds.has(item.anchorId)) {
       fail('SOURCE_PACKAGE_INVALID', `コメント流量アンカー ${index + 1}件目が不正です`);
     }
-    anchorIds.push(item.anchorId);
     seenAnchorIds.add(item.anchorId);
   }
-  assertResponseContract(value.responseContract, value.sourceVideoId, anchorIds, utteranceIds);
+  assertResponseContract(value.responseContract, value.sourceVideoId);
 }
 
 export function decodeDistantConnectionLunaSourcePackageV001(

@@ -320,6 +320,15 @@ test('provider schemaではuniqueItemsを使わず、前半・後半の重複は
     JSON.stringify(sourcePackage.responseContract.jsonSchema).includes('uniqueItems'),
     false
   );
+  const candidateProperties = (sourcePackage.responseContract.jsonSchema as any)
+    .properties.candidates.items.properties;
+  assert.equal(candidateProperties.anchorId.enum, undefined);
+  assert.equal(candidateProperties.anchorId.pattern, '^[A-Za-z0-9][A-Za-z0-9._-]*$');
+  assert.equal(candidateProperties.firstPartSemanticUtteranceIds.items.enum, undefined);
+  assert.equal(
+    candidateProperties.firstPartSemanticUtteranceIds.items.pattern,
+    '^semantic-utterance-[0-9]{6}$'
+  );
 
   const duplicateFirst = responseFor(sourcePackageBytes);
   duplicateFirst.candidates[0].firstPartSemanticUtteranceIds = [
@@ -388,14 +397,13 @@ test('保存済みの正式意味発話・コメント流量アンカーを無�
   assert.equal(sourcePackage.sourceVideoId, 'source');
 });
 
-test('保存済みの正式source packageを両入力からbyte単位で再検証できる', async () => {
+test('保存済み旧source packageは履歴としてbyte不変に保ち、現行入力は薄化後byteへ再構築する', async () => {
   const [semanticUtteranceBytes, commentVelocityAnchorBytes, sourcePackageBytes] = await Promise.all([
     readFile(path.join(workspaceRoot, semanticUtterancePath)),
     readFile(path.join(workspaceRoot, commentVelocityAnchorPath)),
     readFile(path.join(workspaceRoot, sourcePackagePath))
   ]);
-  const sourcePackage = decodeDistantConnectionLunaSourcePackageV001(sourcePackageBytes);
-  validateDistantConnectionLunaSourcePackageAgainstInputsV001(sourcePackage, {
+  const rebuilt = buildDistantConnectionLunaSourcePackageFromBytesV001({
     semanticUtterancePath,
     semanticUtteranceBytes,
     commentVelocityAnchorPath,
@@ -403,4 +411,15 @@ test('保存済みの正式source packageを両入力からbyte単位で再検�
     sourcePackagePath,
     plannedExecution
   });
+  const rebuiltBytes = serializeDistantConnectionLunaSourcePackageV001(rebuilt);
+  assert.notDeepEqual(rebuiltBytes, sourcePackageBytes);
+  assert.equal(sourcePackageBytes.toString('utf8').includes('"enum"'), true);
+  assert.equal(rebuiltBytes.toString('utf8').includes('"enum"'), true);
+  const candidateProperties = (rebuilt.responseContract.jsonSchema as any)
+    .properties.candidates.items.properties;
+  assert.equal(candidateProperties.anchorId.enum, undefined);
+  assert.deepEqual(
+    await readFile(path.join(workspaceRoot, sourcePackagePath)),
+    sourcePackageBytes
+  );
 });

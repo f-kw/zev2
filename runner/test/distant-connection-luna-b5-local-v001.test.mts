@@ -29,7 +29,7 @@ import {
 
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..');
 const sourcePackagePath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/'
+  'evals/clip_composition/outputs/work-distant-connection-luna-source-package-a2-ymUsGrT6EaA-v001/'
   + 'source-package-v001.json';
 const requestPath =
   'evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/'
@@ -113,10 +113,15 @@ test('正式source packageからLuna Responses APIのexact requestを決定的�
     .properties.candidates.items.properties;
   const providerCandidateProperties = (artifacts.request.text.format.schema as any)
     .properties.candidates.items.properties;
-  assert.equal(formalCandidateProperties.anchorId.enum.length, sourcePackage.anchorCount);
+  assert.equal(formalCandidateProperties.anchorId.enum, undefined);
   assert.equal(
-    formalCandidateProperties.firstPartSemanticUtteranceIds.items.enum.length,
-    sourcePackage.utteranceCount
+    formalCandidateProperties.anchorId.pattern,
+    '^[A-Za-z0-9][A-Za-z0-9._-]*$'
+  );
+  assert.equal(formalCandidateProperties.firstPartSemanticUtteranceIds.items.enum, undefined);
+  assert.equal(
+    formalCandidateProperties.firstPartSemanticUtteranceIds.items.pattern,
+    '^semantic-utterance-[0-9]{6}$'
   );
   assert.deepEqual(providerCandidateProperties.anchorId, {
     type: 'string', pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*$'

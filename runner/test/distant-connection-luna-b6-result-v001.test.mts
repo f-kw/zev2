@@ -11,15 +11,15 @@ import {
 
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..');
 const sourcePackagePath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-source-package-v001/source-package-v001.json';
+  'evals/clip_composition/outputs/work-distant-connection-luna-source-package-a2-ymUsGrT6EaA-v001/source-package-v001.json';
 const requestPath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/exact-request-v001.json';
+  'evals/clip_composition/outputs/work-distant-connection-luna-b5-a2-ymUsGrT6EaA-v001/exact-request-v001.json';
 const manifestPath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/b5-local-manifest-v001.json';
+  'evals/clip_composition/outputs/work-distant-connection-luna-b5-a2-ymUsGrT6EaA-v001/b5-local-manifest-v001.json';
 const tokenMeasurementPath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-binding-fix-v001/input-token-count-measurement-v001.json';
+  'outputs/test-token-measurement.json';
 const rawResponsePath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-b6-first-candidates-v001/attempt-0004/raw-response-v001.json';
+  'outputs/test-b6-raw-response.json';
 const candidateResponsePath =
   'evals/clip_composition/outputs/work-distant-connection-luna-b6-first-candidates-v001/candidate-response-v001.json';
 const runManifestPath =
@@ -36,17 +36,84 @@ async function input() {
     sourcePackageBytes,
     requestBytes,
     b5ManifestBytes,
-    tokenMeasurementBytes,
-    rawResponseBytes,
     priceSnapshotBytes
   ] = await Promise.all([
     readFile(path.join(workspaceRoot, sourcePackagePath)),
     readFile(path.join(workspaceRoot, requestPath)),
     readFile(path.join(workspaceRoot, manifestPath)),
-    readFile(path.join(workspaceRoot, tokenMeasurementPath)),
-    readFile(path.join(workspaceRoot, rawResponsePath)),
     readFile(path.join(workspaceRoot, priceSnapshotPath))
   ]);
+  const sourcePackage = JSON.parse(sourcePackageBytes.toString('utf8'));
+  const manifest = JSON.parse(b5ManifestBytes.toString('utf8'));
+  const priceSnapshot = JSON.parse(priceSnapshotBytes.toString('utf8'));
+  const anchor = sourcePackage.anchors.find((item: any) => {
+    const ordinal = Number(item.semanticUtteranceId.slice(-6));
+    return ordinal < sourcePackage.utteranceCount;
+  });
+  const anchorOrdinal = Number(anchor.semanticUtteranceId.slice(-6));
+  const secondId = `semantic-utterance-${String(anchorOrdinal + 1).padStart(6, '0')}`;
+  const response = {
+    schemaVersion: 'distant-connection-luna-response-v001',
+    sourceVideoId: sourcePackage.sourceVideoId,
+    sourcePackageBinding: {
+      path: sourcePackagePath,
+      schemaVersion: sourcePackage.schemaVersion,
+      fileSha256: sha256(sourcePackageBytes)
+    },
+    candidates: [{
+      candidateId: 'distant-connection-candidate-test-000001',
+      anchorId: anchor.anchorId,
+      firstPartSemanticUtteranceIds: [anchor.semanticUtteranceId],
+      secondPartSemanticUtteranceIds: [secondId],
+      addedUnderstanding: '前の発言を付けることで後の発言の意味が新しく分かります。',
+      direction: 'future'
+    }]
+  };
+  const rawResponseBytes = Buffer.from(`${JSON.stringify({
+    id: 'resp_test_current_a2',
+    model: 'gpt-5.6-luna',
+    status: 'completed',
+    error: null,
+    incomplete_details: null,
+    output: [{
+      type: 'message',
+      status: 'completed',
+      role: 'assistant',
+      content: [{type: 'output_text', text: JSON.stringify(response)}]
+    }],
+    usage: {
+      input_tokens: 100,
+      input_tokens_details: {cached_tokens: 0, cache_write_tokens: 0},
+      output_tokens: 50,
+      output_tokens_details: {reasoning_tokens: 10},
+      total_tokens: 150
+    }
+  }, null, 2)}\n`);
+  const tokenMeasurementBytes = Buffer.from(`${JSON.stringify({
+    schemaVersion: 'distant-connection-luna-b5-measurement-v001',
+    sourcePackageBinding: manifest.sourcePackageBinding,
+    requestBinding: manifest.requestBinding,
+    providerId: 'openai-api',
+    modelId: 'gpt-5.6-luna',
+    tokenMeasurement: {
+      rawResponseBinding: {
+        path: 'outputs/test-token-count-raw.json',
+        schemaVersion: 'openai-responses-input-token-count-response-v001',
+        fileSha256: '1'.repeat(64)
+      },
+      inputTokens: 100
+    },
+    costEvaluation: {
+      priceSnapshotBinding: {
+        path: priceSnapshotPath,
+        schemaVersion: priceSnapshot.recordVersion,
+        fileSha256: sha256(priceSnapshotBytes)
+      },
+      maximumNanoUsd: 500_000_000,
+      projectedNanoUsd: 80_000,
+      decision: 'passed'
+    }
+  }, null, 2)}\n`);
   return {
     sourcePackagePath,
     sourcePackageBytes,
@@ -70,25 +137,25 @@ function expectCode(code: string, action: () => unknown): void {
   ));
 }
 
-test('保存済みHTTP 200応答をstrict検査し候補2件の正式成果物へ変換する', async () => {
+test('A2正式入力に対するHTTP 200応答をstrict検査し正式候補へ変換する', async () => {
   const artifacts = buildDistantConnectionLunaB6ResultArtifactsV001(await input());
-  assert.equal(artifacts.response.candidates.length, 2);
+  assert.equal(artifacts.response.candidates.length, 1);
   assert.deepEqual(artifacts.response.sourcePackageBinding, {
     path: sourcePackagePath,
     schemaVersion: 'distant-connection-luna-source-package-v001',
-    fileSha256: 'b2754d69c6cda70dc1a680238a5edd15af1706a7de5b93b62f05675557cdcc76'
+    fileSha256: 'a2b57aab82b3d582136b79a98b25039c8eec1a7c12a9c26ee8b0169645a22301'
   });
   assert.deepEqual(artifacts.manifest.usage, {
-    inputTokens: 1874,
+    inputTokens: 100,
     cachedInputTokens: 0,
-    cacheWriteTokens: 1871,
-    uncachedNonWriteInputTokens: 3,
-    outputTokens: 449,
-    reasoningTokens: 135,
-    totalTokens: 2323
+    cacheWriteTokens: 0,
+    uncachedNonWriteInputTokens: 100,
+    outputTokens: 50,
+    reasoningTokens: 10,
+    totalTokens: 150
   });
-  assert.equal(artifacts.manifest.cost.totalNanoUsd, 1_007_150);
-  assert.equal(artifacts.manifest.cost.totalUsd, 0.00100715);
+  assert.equal(artifacts.manifest.cost.totalNanoUsd, 80_000);
+  assert.equal(artifacts.manifest.cost.totalUsd, 0.00008);
   assert.equal(artifacts.manifest.cost.withinMaximum, true);
   assert.equal(
     artifacts.manifest.candidateResponseBinding.fileSha256,
@@ -145,12 +212,17 @@ test('同一保存入力から同一candidate byte・manifest byteを再構築�
   assert.deepEqual(first.manifestBytes, second.manifestBytes);
 });
 
-test('公開前の正式candidateとrun manifestは保存済み入力からbyte同一に再構築できる', async () => {
-  const artifacts = buildDistantConnectionLunaB6ResultArtifactsV001(await input());
+test('旧B6正式candidateとrun manifestは履歴としてbyte不変に保つ', async () => {
   const [savedCandidateBytes, savedManifestBytes] = await Promise.all([
     readFile(path.join(workspaceRoot, candidateResponsePath)),
     readFile(path.join(workspaceRoot, runManifestPath))
   ]);
-  assert.deepEqual(savedCandidateBytes, artifacts.responseBytes);
-  assert.deepEqual(savedManifestBytes, artifacts.manifestBytes);
+  assert.equal(
+    sha256(savedCandidateBytes),
+    'bab6f3a37d74ae99829b09258a41cf45c12b5dc5a18a651ae4ed49d8ba7196fe'
+  );
+  assert.equal(
+    sha256(savedManifestBytes),
+    '94ccf404edb86e286955778375684782612feea65e1ddd0a5ba4eaab2dfaec40'
+  );
 });

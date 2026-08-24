@@ -263,28 +263,15 @@ function buildProviderResponseSchema(
   const anchorId = candidateProperties?.anchorId;
   const firstPart = candidateProperties?.firstPartSemanticUtteranceIds;
   const secondPart = candidateProperties?.secondPartSemanticUtteranceIds;
-  if (!isRecord(anchorId) || !Array.isArray(anchorId.enum)
+  if (!isRecord(anchorId)
+    || anchorId.pattern !== '^[A-Za-z0-9][A-Za-z0-9._-]*$'
     || !isRecord(firstPart) || !isRecord(firstPart.items)
-    || !Array.isArray(firstPart.items.enum)
+    || firstPart.items.pattern !== '^semantic-utterance-[0-9]{6}$'
     || !isRecord(secondPart) || !isRecord(secondPart.items)
-    || !Array.isArray(secondPart.items.enum)) {
+    || secondPart.items.pattern !== '^semantic-utterance-[0-9]{6}$') {
     fail('RESPONSE_SCHEMA_BINDING_MISMATCH',
       '正式返答schemaからprovider向けID制約を導出できません');
   }
-  candidateProperties!.anchorId = {
-    type: 'string',
-    pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*$'
-  };
-  candidateProperties!.firstPartSemanticUtteranceIds = {
-    type: 'array',
-    minItems: 1,
-    items: {type: 'string', pattern: '^semantic-utterance-[0-9]{6}$'}
-  };
-  candidateProperties!.secondPartSemanticUtteranceIds = {
-    type: 'array',
-    minItems: 1,
-    items: {type: 'string', pattern: '^semantic-utterance-[0-9]{6}$'}
-  };
   return schema;
 }
 
