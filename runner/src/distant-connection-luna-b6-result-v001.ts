@@ -268,6 +268,8 @@ export function buildDistantConnectionLunaB6ResultArtifactsV001(
     || priceSnapshot.standardPricingUsdPerMillionTokens.input !== 0.2
     || priceSnapshot.standardPricingUsdPerMillionTokens.cachedInput !== 0.02
     || priceSnapshot.standardPricingUsdPerMillionTokens.outputIncludingReasoning !== 1.2
+    || priceSnapshot.standardPricingUsdPerMillionTokens.longContextRule
+      !== 'Prompts over 272K input tokens are priced at 2x input and 1.5x output for the full request.'
     || priceSnapshot.standardPricingUsdPerMillionTokens.cacheWriteRule
       !== 'Cache writes are billed at 1.25x the uncached input rate.') {
     fail('B6_PRICE_SNAPSHOT_INVALID', '価格snapshotが固定済みLuna料金と一致しません');
@@ -275,10 +277,13 @@ export function buildDistantConnectionLunaB6ResultArtifactsV001(
   if (!Number.isSafeInteger(input.maximumNanoUsd) || input.maximumNanoUsd < 0) {
     fail('B6_PRICE_SNAPSHOT_INVALID', '費用上限が不正です');
   }
-  const inputNanoUsd = parsed.usage.uncachedNonWriteInputTokens * 200;
-  const cachedInputNanoUsd = parsed.usage.cachedInputTokens * 20;
-  const cacheWriteNanoUsd = parsed.usage.cacheWriteTokens * 250;
-  const outputNanoUsd = parsed.usage.outputTokens * 1200;
+  const longContextPricingApplies = parsed.usage.inputTokens > 272_000;
+  const inputMultiplier = longContextPricingApplies ? 2 : 1;
+  const outputNumerator = longContextPricingApplies ? 3 : 2;
+  const inputNanoUsd = parsed.usage.uncachedNonWriteInputTokens * 200 * inputMultiplier;
+  const cachedInputNanoUsd = parsed.usage.cachedInputTokens * 20 * inputMultiplier;
+  const cacheWriteNanoUsd = parsed.usage.cacheWriteTokens * 250 * inputMultiplier;
+  const outputNanoUsd = parsed.usage.outputTokens * 1200 * outputNumerator / 2;
   const totalNanoUsd = inputNanoUsd + cachedInputNanoUsd + cacheWriteNanoUsd + outputNanoUsd;
   if (![inputNanoUsd, cachedInputNanoUsd, cacheWriteNanoUsd, outputNanoUsd, totalNanoUsd]
     .every(Number.isSafeInteger)) {

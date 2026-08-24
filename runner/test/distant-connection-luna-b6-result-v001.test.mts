@@ -163,6 +163,28 @@ test('A2正式入力に対するHTTP 200応答をstrict検査し正式候補へ�
   );
 });
 
+test('272,000入力token超では長文料金を全入力と出力へ適用する', async () => {
+  const valid = await input();
+  const raw = JSON.parse(valid.rawResponseBytes.toString('utf8'));
+  raw.usage = {
+    input_tokens: 300_000,
+    input_tokens_details: {cached_tokens: 1_000, cache_write_tokens: 2_000},
+    output_tokens: 100,
+    output_tokens_details: {reasoning_tokens: 20},
+    total_tokens: 300_100
+  };
+  const artifacts = buildDistantConnectionLunaB6ResultArtifactsV001({
+    ...valid,
+    rawResponseBytes: Buffer.from(`${JSON.stringify(raw, null, 2)}\n`)
+  });
+  assert.equal(artifacts.manifest.cost.inputNanoUsd, 118_800_000);
+  assert.equal(artifacts.manifest.cost.cachedInputNanoUsd, 40_000);
+  assert.equal(artifacts.manifest.cost.cacheWriteNanoUsd, 1_000_000);
+  assert.equal(artifacts.manifest.cost.outputNanoUsd, 180_000);
+  assert.equal(artifacts.manifest.cost.totalNanoUsd, 120_020_000);
+  assert.equal(artifacts.manifest.cost.totalUsd, 0.12002);
+});
+
 test('B5 request・source package・token計測のbinding差を拒否する', async () => {
   const valid = await input();
   expectCode('B6_BINDING_MISMATCH', () => buildDistantConnectionLunaB6ResultArtifactsV001({
