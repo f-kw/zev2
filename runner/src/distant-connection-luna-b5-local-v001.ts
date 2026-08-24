@@ -249,6 +249,45 @@ function buildRequestInstructions(
   return `${REQUEST_INSTRUCTIONS_PREFIX} 返答のsourcePackageBindingは次のexact値を一字も変えずに転記してください: ${JSON.stringify(sourcePackageBinding)}`;
 }
 
+function buildProviderResponseSchema(
+  sourcePackage: DistantConnectionLunaSourcePackageV001
+): Record<string, unknown> {
+  const schema = structuredClone(sourcePackage.responseContract.jsonSchema);
+  const properties = (schema as {
+    properties?: Record<string, unknown>;
+  }).properties;
+  const candidates = properties?.candidates as {
+    items?: {properties?: Record<string, unknown>};
+  } | undefined;
+  const candidateProperties = candidates?.items?.properties;
+  const anchorId = candidateProperties?.anchorId;
+  const firstPart = candidateProperties?.firstPartSemanticUtteranceIds;
+  const secondPart = candidateProperties?.secondPartSemanticUtteranceIds;
+  if (!isRecord(anchorId) || !Array.isArray(anchorId.enum)
+    || !isRecord(firstPart) || !isRecord(firstPart.items)
+    || !Array.isArray(firstPart.items.enum)
+    || !isRecord(secondPart) || !isRecord(secondPart.items)
+    || !Array.isArray(secondPart.items.enum)) {
+    fail('RESPONSE_SCHEMA_BINDING_MISMATCH',
+      '正式返答schemaからprovider向けID制約を導出できません');
+  }
+  candidateProperties!.anchorId = {
+    type: 'string',
+    pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*$'
+  };
+  candidateProperties!.firstPartSemanticUtteranceIds = {
+    type: 'array',
+    minItems: 1,
+    items: {type: 'string', pattern: '^semantic-utterance-[0-9]{6}$'}
+  };
+  candidateProperties!.secondPartSemanticUtteranceIds = {
+    type: 'array',
+    minItems: 1,
+    items: {type: 'string', pattern: '^semantic-utterance-[0-9]{6}$'}
+  };
+  return schema;
+}
+
 export function assertDistantConnectionLunaResponseBindingDisclosureV001(
   request: DistantConnectionLunaExactRequestV001,
   sourcePackage: DistantConnectionLunaSourcePackageV001,
@@ -259,7 +298,7 @@ export function assertDistantConnectionLunaResponseBindingDisclosureV001(
   if (request.instructions !== expectedInstructions
     || request.input !== Buffer.from(sourcePackageBytes).toString('utf8')
     || JSON.stringify(request.text.format.schema)
-      !== JSON.stringify(sourcePackage.responseContract.jsonSchema)) {
+      !== JSON.stringify(buildProviderResponseSchema(sourcePackage))) {
     fail('REQUEST_BINDING_MISMATCH',
       'Lunaへ返答を要求するbinding値がexact requestから参照できません');
   }
@@ -286,7 +325,7 @@ function buildExactRequest(
         type: 'json_schema',
         name: settings.responseFormatName,
         strict: true,
-        schema: structuredClone(sourcePackage.responseContract.jsonSchema)
+        schema: buildProviderResponseSchema(sourcePackage)
       }
     },
     store: settings.store
@@ -474,9 +513,9 @@ export function assertDistantConnectionLunaExactRequestV001(
     fail('REQUEST_BINDING_MISMATCH', 'Luna exact requestのinputがsource package byteと一致しません');
   }
   if (JSON.stringify(value.text.format.schema)
-    !== JSON.stringify(sourcePackage.responseContract.jsonSchema)) {
+    !== JSON.stringify(buildProviderResponseSchema(sourcePackage))) {
     fail('RESPONSE_SCHEMA_BINDING_MISMATCH',
-      'Luna exact requestのstructured-output schemaがsource packageと一致しません');
+      'Luna exact requestのprovider向けstructured-output schemaが正式入力からの導出値と一致しません');
   }
   assertDistantConnectionLunaResponseBindingDisclosureV001(
     value as DistantConnectionLunaExactRequestV001,

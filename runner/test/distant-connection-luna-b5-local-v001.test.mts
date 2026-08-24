@@ -98,27 +98,36 @@ function expectCode(code: string, action: () => unknown): void {
 
 test('正式source packageからLuna Responses APIのexact requestを決定的に作る', async () => {
   const sourcePackageBytes = await readFile(path.join(workspaceRoot, sourcePackagePath));
+  const sourcePackage = decodeDistantConnectionLunaSourcePackageV001(sourcePackageBytes);
   const artifacts = buildDistantConnectionLunaB5LocalArtifactsFromBytesV001(
     input(sourcePackageBytes)
   );
-  assert.deepEqual(artifacts.request, {
-    model: 'gpt-5.6-luna',
-    instructions:
-      '正式source packageのexplorationTaskに従って遠方接続候補を探索し、responseContract.jsonSchemaに適合するJSONだけを返してください。正式意味発話IDを変更、補完、推測しないでください。 返答のsourcePackageBindingは次のexact値を一字も変えずに転記してください: '
-      + JSON.stringify(sourceBinding(sourcePackageBytes)),
-    input: sourcePackageBytes.toString('utf8'),
-    reasoning: {effort: 'medium'},
-    text: {
-      format: {
-        type: 'json_schema',
-        name: 'distant_connection_candidates_v001',
-        strict: true,
-        schema: decodeDistantConnectionLunaSourcePackageV001(sourcePackageBytes)
-          .responseContract.jsonSchema
-      }
-    },
-    store: false
+  assert.equal(artifacts.request.model, 'gpt-5.6-luna');
+  assert.match(artifacts.request.instructions, new RegExp(sha256(sourcePackageBytes), 'u'));
+  assert.equal(artifacts.request.input, sourcePackageBytes.toString('utf8'));
+  assert.deepEqual(artifacts.request.reasoning, {effort: 'medium'});
+  assert.equal(artifacts.request.text.format.type, 'json_schema');
+  assert.equal(artifacts.request.text.format.name, 'distant_connection_candidates_v001');
+  assert.equal(artifacts.request.text.format.strict, true);
+  const formalCandidateProperties = (sourcePackage.responseContract.jsonSchema as any)
+    .properties.candidates.items.properties;
+  const providerCandidateProperties = (artifacts.request.text.format.schema as any)
+    .properties.candidates.items.properties;
+  assert.equal(formalCandidateProperties.anchorId.enum.length, sourcePackage.anchorCount);
+  assert.equal(
+    formalCandidateProperties.firstPartSemanticUtteranceIds.items.enum.length,
+    sourcePackage.utteranceCount
+  );
+  assert.deepEqual(providerCandidateProperties.anchorId, {
+    type: 'string', pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*$'
   });
+  assert.deepEqual(providerCandidateProperties.firstPartSemanticUtteranceIds, {
+    type: 'array', minItems: 1,
+    items: {type: 'string', pattern: '^semantic-utterance-[0-9]{6}$'}
+  });
+  assert.deepEqual(providerCandidateProperties.secondPartSemanticUtteranceIds,
+    providerCandidateProperties.firstPartSemanticUtteranceIds);
+  assert.equal(artifacts.request.store, false);
   assert.doesNotThrow(() => assertDistantConnectionLunaResponseBindingDisclosureV001(
     artifacts.request,
     decodeDistantConnectionLunaSourcePackageV001(sourcePackageBytes),
@@ -320,21 +329,39 @@ test('保存済み工程6 source packageを無変更で読み、B5 local成果�
   assert.notEqual(manifestPath, requestPath);
 });
 
-test('保存済みB5 exact requestとmanifestをsource packageから決定的に再検証できる', async () => {
+test('保存済み旧B5成果物を履歴として不変保持し、現行生成ではprovider schemaを薄化する', async () => {
   const sourcePackageBytes = await readFile(path.join(workspaceRoot, sourcePackagePath));
-  const requestBytes = await readFile(path.join(workspaceRoot, requestPath));
-  const manifestBytes = await readFile(path.join(workspaceRoot, manifestPath));
-  const request = JSON.parse(requestBytes.toString('utf8'));
-  const manifest = JSON.parse(manifestBytes.toString('utf8'));
-  assert.doesNotThrow(() => validateDistantConnectionLunaB5LocalArtifactsV001(
-    {request, requestBytes, manifest, manifestBytes},
+  const historicalRequestBytes = await readFile(path.join(workspaceRoot, requestPath));
+  const historicalManifestBytes = await readFile(path.join(workspaceRoot, manifestPath));
+  const historicalRequest = JSON.parse(historicalRequestBytes.toString('utf8'));
+  const historicalManifest = JSON.parse(historicalManifestBytes.toString('utf8'));
+  const current = buildDistantConnectionLunaB5LocalArtifactsFromBytesV001(
     input(sourcePackageBytes)
-  ));
+  );
+  const historicalCandidateProperties = historicalRequest.text.format.schema
+    .properties.candidates.items.properties;
+  const currentCandidateProperties = (current.request.text.format.schema as any)
+    .properties.candidates.items.properties;
+  assert.ok(Array.isArray(historicalCandidateProperties.anchorId.enum));
+  assert.equal(currentCandidateProperties.anchorId.enum, undefined);
+  assert.equal(
+    currentCandidateProperties.firstPartSemanticUtteranceIds.items.pattern,
+    '^semantic-utterance-[0-9]{6}$'
+  );
+  assert.notDeepEqual(current.requestBytes, historicalRequestBytes);
   assert.doesNotThrow(() => assertDistantConnectionLunaB6RequestBindingV001(
-    manifest.requestBinding,
-    manifestBytes,
-    requestBytes
+    historicalManifest.requestBinding,
+    historicalManifestBytes,
+    historicalRequestBytes
   ));
+  assert.deepEqual(
+    await readFile(path.join(workspaceRoot, requestPath)),
+    historicalRequestBytes
+  );
+  assert.deepEqual(
+    await readFile(path.join(workspaceRoot, manifestPath)),
+    historicalManifestBytes
+  );
 });
 
 test('保存済み成功rawをexact requestへ束縛し、context・長文境界・最大費用を再計算できる', async () => {
