@@ -146,7 +146,7 @@ const EXPLORATION_TASK = Object.freeze({
   objective:
     '各コメント流量アンカーについて、配信全文の正式意味発話から時間的に離れた過去または未来の相方を探してください。',
   anchorInstruction:
-    '各候補は一つのanchorIdを起点にし、過去を結ぶ場合はdirectionをpast、未来を結ぶ場合はfutureとしてください。',
+    'directionはanchorから見た相方の位置を表します。futureの場合はanchor発話をfirstPartに含め、相方を未来側のsecondPartに置いてください。pastの場合はanchor発話をsecondPartに含め、相方を過去側のfirstPartに置いてください。',
   returnInstruction:
     '候補ごとに、前半として必要な正式意味発話ID群、後半として必要な正式意味発話ID群、前半を付けることで後半の何が新しく分かるかを返してください。',
   boundaryMeaning:

@@ -174,6 +174,10 @@ test('全文の正式意味発話・コメント起点・探索目的・返答sc
     {anchorId: 'comment-anchor-000003', semanticUtteranceId: 'semantic-utterance-000003'}
   ]);
   assert.deepEqual(sourcePackage.plannedExecution, plannedExecution);
+  assert.equal(
+    sourcePackage.explorationTask.anchorInstruction,
+    'directionはanchorから見た相方の位置を表します。futureの場合はanchor発話をfirstPartに含め、相方を未来側のsecondPartに置いてください。pastの場合はanchor発話をsecondPartに含め、相方を過去側のfirstPartに置いてください。'
+  );
   assert.match(sourcePackage.explorationTask.boundaryMeaning, /最終切り出し位置ではありません/u);
   assert.equal(sourcePackage.responseContract.sourcePackagePath, 'outputs/source-package.json');
 });

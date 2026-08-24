@@ -29,12 +29,21 @@ import {
 
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..');
 const sourcePackagePath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-source-package-a2-ymUsGrT6EaA-v001/'
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-source-package-direction-clarified-ymUsGrT6EaA-v001/'
   + 'source-package-v001.json';
 const requestPath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/'
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/'
   + 'exact-request-v001.json';
 const manifestPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'b5-local-manifest-v001.json';
+const preThinningRequestPath =
+  'evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/'
+  + 'exact-request-v001.json';
+const preThinningManifestPath =
   'evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/'
   + 'b5-local-manifest-v001.json';
 const historicalRequestPath =
@@ -336,8 +345,8 @@ test('保存済み工程6 source packageを無変更で読み、B5 local成果�
 
 test('保存済み旧B5成果物を履歴として不変保持し、現行生成ではprovider schemaを薄化する', async () => {
   const sourcePackageBytes = await readFile(path.join(workspaceRoot, sourcePackagePath));
-  const historicalRequestBytes = await readFile(path.join(workspaceRoot, requestPath));
-  const historicalManifestBytes = await readFile(path.join(workspaceRoot, manifestPath));
+  const historicalRequestBytes = await readFile(path.join(workspaceRoot, preThinningRequestPath));
+  const historicalManifestBytes = await readFile(path.join(workspaceRoot, preThinningManifestPath));
   const historicalRequest = JSON.parse(historicalRequestBytes.toString('utf8'));
   const historicalManifest = JSON.parse(historicalManifestBytes.toString('utf8'));
   const current = buildDistantConnectionLunaB5LocalArtifactsFromBytesV001(
@@ -360,11 +369,11 @@ test('保存済み旧B5成果物を履歴として不変保持し、現行生成
     historicalRequestBytes
   ));
   assert.deepEqual(
-    await readFile(path.join(workspaceRoot, requestPath)),
+    await readFile(path.join(workspaceRoot, preThinningRequestPath)),
     historicalRequestBytes
   );
   assert.deepEqual(
-    await readFile(path.join(workspaceRoot, manifestPath)),
+    await readFile(path.join(workspaceRoot, preThinningManifestPath)),
     historicalManifestBytes
   );
 });
@@ -456,8 +465,8 @@ test('binding修正後の保存済みtoken計測を新exact requestへ束縛し�
     measurementBytes,
     evaluationBytes
   ] = await Promise.all([
-    readFile(path.join(workspaceRoot, requestPath)),
-    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, preThinningRequestPath)),
+    readFile(path.join(workspaceRoot, preThinningManifestPath)),
     readFile(path.join(workspaceRoot, bindingFixTokenCountRequestPath)),
     readFile(path.join(workspaceRoot, bindingFixTokenCountRawPath)),
     readFile(path.join(workspaceRoot, bindingFixTokenCountMeasurementPath)),

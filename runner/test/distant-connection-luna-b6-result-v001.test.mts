@@ -11,11 +11,17 @@ import {
 
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..');
 const sourcePackagePath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-source-package-a2-ymUsGrT6EaA-v001/source-package-v001.json';
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-source-package-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'source-package-v001.json';
 const requestPath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-b5-a2-ymUsGrT6EaA-v001/exact-request-v001.json';
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'exact-request-v001.json';
 const manifestPath =
-  'evals/clip_composition/outputs/work-distant-connection-luna-b5-a2-ymUsGrT6EaA-v001/b5-local-manifest-v001.json';
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'b5-local-manifest-v001.json';
 const tokenMeasurementPath =
   'outputs/test-token-measurement.json';
 const rawResponsePath =
@@ -143,7 +149,7 @@ test('A2正式入力に対するHTTP 200応答をstrict検査し正式候補へ�
   assert.deepEqual(artifacts.response.sourcePackageBinding, {
     path: sourcePackagePath,
     schemaVersion: 'distant-connection-luna-source-package-v001',
-    fileSha256: 'a2b57aab82b3d582136b79a98b25039c8eec1a7c12a9c26ee8b0169645a22301'
+    fileSha256: sha256((await input()).sourcePackageBytes)
   });
   assert.deepEqual(artifacts.manifest.usage, {
     inputTokens: 100,
