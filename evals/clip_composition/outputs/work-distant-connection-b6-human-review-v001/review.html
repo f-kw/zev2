@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="zev-review-schema" content="distant-connection-b6-human-review-page-v001">
+  <meta name="source-candidate-sha256" content="bab6f3a37d74ae99829b09258a41cf45c12b5dc5a18a651ae4ed49d8ba7196fe">
+  <title>遠方接続 B6 経路成立確認</title>
+  <style>
+    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #09121e; color: #eaf3ff; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(circle at top, #18375a 0, #0b1929 35rem, #07101a 100%); }
+    main { width: min(1080px, calc(100% - 32px)); margin: 0 auto; padding: 52px 0 72px; }
+    h1 { margin: 8px 0 14px; font-size: clamp(30px, 5vw, 52px); letter-spacing: -.03em; }
+    h2, h3, p { margin-top: 0; }
+    .subtitle { color: #b7c8db; line-height: 1.7; max-width: 780px; }
+    .notice { margin: 30px 0 18px; padding: 18px 20px; border: 1px solid #ffca63; border-left-width: 6px; border-radius: 14px; background: #30250d; color: #ffe4a8; font-weight: 700; line-height: 1.65; }
+    .summary { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 22px; }
+    .chip { padding: 8px 12px; border: 1px solid #3b668e; border-radius: 999px; background: #10263c; color: #cfe8ff; }
+    .pair-note { padding: 18px 20px; border-radius: 14px; background: #142437; color: #d9e9fa; line-height: 1.7; }
+    .candidate { margin-top: 26px; padding: 26px; border: 1px solid #2c5579; border-radius: 20px; background: rgba(10, 26, 42, .92); box-shadow: 0 18px 45px rgba(0, 0, 0, .28); }
+    .candidate-heading { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
+    .candidate-heading h2 { margin: 3px 0 0; font-size: 28px; }
+    .eyebrow { color: #7fc8ff; font-size: 12px; font-weight: 800; letter-spacing: .16em; }
+    .direction { padding: 7px 12px; border-radius: 999px; background: #215278; color: #e8f6ff; font-weight: 800; }
+    section { position: relative; }
+    .anchor, .understanding { margin-top: 20px; padding: 18px 20px; border-radius: 14px; background: #111f2f; }
+    .anchor p, .understanding p, .part p { margin: 10px 0 0; font-size: 18px; line-height: 1.75; }
+    .anchor small { display: block; margin-top: 10px; color: #9eb5cb; }
+    code { color: #8ed4ff; overflow-wrap: anywhere; }
+    .connection { display: grid; grid-template-columns: 1fr 42px 1fr; align-items: stretch; gap: 12px; margin-top: 20px; }
+    .part { padding: 20px; border-radius: 14px; background: #10283b; }
+    .part.second { background: #1b2d43; }
+    .part ol { margin: 12px 0 0; padding-left: 22px; }
+    .part li + li { margin-top: 14px; }
+    .arrow { display: grid; place-items: center; color: #67c8ff; font-size: 30px; font-weight: 900; }
+    .step { float: right; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #43aeea; color: #06121d; font-weight: 900; }
+    .passed { margin: 20px 0 0; color: #78e3aa; font-weight: 900; }
+    .provenance { margin-top: 32px; padding-top: 18px; border-top: 1px solid #2a4259; color: #91a9bf; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+    @media (max-width: 760px) {
+      .connection { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); min-height: 34px; }
+      .candidate { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="eyebrow">ZEV · DISTANT CONNECTION</span>
+      <h1>遠方接続 B6 経路成立確認</h1>
+      <p class="subtitle">Lunaが返した正式候補を、ZEVがsource packageと照合し、strict検査を通して受け取れたことを確認するページです。</p>
+    </header>
+    <div class="notice">これは実配信の候補品質確認ではない。発話2件の小型入力を使った、遠方接続経路の成立確認である。</div>
+    <div class="summary">
+      <span class="chip">正式発話 2件</span>
+      <span class="chip">候補 2件</span>
+      <span class="chip">strict検査 合格</span>
+    </div>
+    <p class="pair-note">2件は同じ「前→後」の発話組です。前側の発言を起点に未来を探した結果と、後側の発言を起点に過去を探した結果として、それぞれ見つかりました。</p>
+      <article class="candidate" data-candidate-id="candidate-000001">
+        <div class="candidate-heading">
+          <div>
+            <span class="eyebrow">候補</span>
+            <h2>candidate-000001</h2>
+          </div>
+          <span class="direction">未来方向</span>
+        </div>
+        <section class="anchor">
+          <h3>起点になった発言</h3>
+          <code>comment-anchor-000001 → semantic-utterance-000001</code>
+          <p>ここが今日一番大事な話です。実は裏でこういう流れがありました。</p>
+          <small>起点を前半として、その後に起きる相方を探しました。</small>
+        </section>
+        <div class="connection">
+          <section class="part first">
+            <span class="step">1</span>
+            <h3>前に置く発言</h3>
+            <ol>
+          <li>
+            <code>semantic-utterance-000001</code>
+            <p>ここが今日一番大事な話です。実は裏でこういう流れがありました。</p>
+          </li>
+            </ol>
+          </section>
+          <div class="arrow" aria-hidden="true">→</div>
+          <section class="part second">
+            <span class="step">2</span>
+            <h3>後に置く発言</h3>
+            <ol>
+          <li>
+            <code>semantic-utterance-000002</code>
+            <p>だから最後にこの判断になりました。</p>
+          </li>
+            </ol>
+          </section>
+        </div>
+        <section class="understanding">
+          <span class="step">3</span>
+          <h3>前を付けることで分かること</h3>
+          <p>裏で起きていた流れを先に知ることで、最後にこの判断へ至った理由が新しく分かります。</p>
+        </section>
+        <p class="passed">✓ strict検査 合格</p>
+      </article>
+      <article class="candidate" data-candidate-id="candidate-000002">
+        <div class="candidate-heading">
+          <div>
+            <span class="eyebrow">候補</span>
+            <h2>candidate-000002</h2>
+          </div>
+          <span class="direction">過去方向</span>
+        </div>
+        <section class="anchor">
+          <h3>起点になった発言</h3>
+          <code>comment-anchor-000002 → semantic-utterance-000002</code>
+          <p>だから最後にこの判断になりました。</p>
+          <small>起点を後半として、その前にあった相方を探しました。</small>
+        </section>
+        <div class="connection">
+          <section class="part first">
+            <span class="step">1</span>
+            <h3>前に置く発言</h3>
+            <ol>
+          <li>
+            <code>semantic-utterance-000001</code>
+            <p>ここが今日一番大事な話です。実は裏でこういう流れがありました。</p>
+          </li>
+            </ol>
+          </section>
+          <div class="arrow" aria-hidden="true">→</div>
+          <section class="part second">
+            <span class="step">2</span>
+            <h3>後に置く発言</h3>
+            <ol>
+          <li>
+            <code>semantic-utterance-000002</code>
+            <p>だから最後にこの判断になりました。</p>
+          </li>
+            </ol>
+          </section>
+        </div>
+        <section class="understanding">
+          <span class="step">3</span>
+          <h3>前を付けることで分かること</h3>
+          <p>最後の判断に至る前に、裏で進んでいた流れと今回の話の重要性を知ることで、この判断の背景が新しく分かります。</p>
+        </section>
+        <p class="passed">✓ strict検査 合格</p>
+      </article>
+    <footer class="provenance">
+      <strong>正式候補source</strong><br>
+      evals/clip_composition/outputs/work-distant-connection-luna-b6-first-candidates-v001/candidate-response-v001.json<br>
+      SHA-256: bab6f3a37d74ae99829b09258a41cf45c12b5dc5a18a651ae4ed49d8ba7196fe<br>
+      B6実行記録: evals/clip_composition/outputs/work-distant-connection-luna-b6-first-candidates-v001/b6-run-manifest-v001.json
+    </footer>
+  </main>
+</body>
+</html>
