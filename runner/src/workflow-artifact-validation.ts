@@ -212,7 +212,11 @@ function assertScreenLayout(value: unknown, label: string): void {
 export function assertTranscriptArtifact(value: unknown, label = '文字起こし成果物'): asserts value is TranscriptArtifact {
   const record = assertRecord(value, label);
   assertLiteral(record.kind, `${label}の種類`, ['transcript_json'] as const);
-  assertLiteral(record.mode, `${label}の作成方法`, ['zev-local-stt', 'zev-sample-stt'] as const);
+  assertLiteral(
+    record.mode,
+    `${label}の作成方法`,
+    ['zev-local-stt', 'zev-local-stt-chunked', 'zev-sample-stt'] as const
+  );
   assertNonEmptyString(record.sourceUri, `${label}の動画参照`);
   assertStringArray(record.notes, `${label}のメモ`);
   assertNonEmptyString(record.generatedAt, `${label}の作成日時`);

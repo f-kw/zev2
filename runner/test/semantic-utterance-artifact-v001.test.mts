@@ -82,6 +82,20 @@ test('正式意味発話は現行の発話まとまりを安定ID・本文・時
   });
 });
 
+test('長尺分割STTを正式入力として受理し、未登録の作成方法は拒否する', () => {
+  const chunked = buildSemanticUtteranceArtifactFromTranscriptBytesV001({
+    sourceTranscriptPath: 'fixtures/chunked-transcript.json',
+    sourceTranscriptBytes: transcript({mode: 'zev-local-stt-chunked'})
+  });
+  assert.equal(chunked.segmentCount, 3);
+  assert.equal(chunked.utteranceCount, 2);
+
+  expectCode('TRANSCRIPT_INVALID', () => buildSemanticUtteranceArtifactFromTranscriptBytesV001({
+    sourceTranscriptPath: 'fixtures/unknown-transcript.json',
+    sourceTranscriptBytes: transcript({mode: 'zev-local-stt-unregistered'})
+  }));
+});
+
 test('各STT断片の完全被覆を要求し、未知・重複・欠落・順序逆転を個別に拒否する', () => {
   expectCode('UNKNOWN_SEGMENT_ID', () => buildSemanticUtteranceArtifactFromTranscriptBytesV001({
     sourceTranscriptPath: 'fixtures/transcript.json',

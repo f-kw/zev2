@@ -36,7 +36,7 @@ export type SpeechTimingRef = {
   speaker?: string;
 };
 
-export type TranscriptMode = 'zev-local-stt' | 'zev-sample-stt';
+export type TranscriptMode = 'zev-local-stt' | 'zev-local-stt-chunked' | 'zev-sample-stt';
 
 export type TranscriptThemeSeed = {
   id?: string;
