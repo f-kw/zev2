@@ -32,6 +32,22 @@ const runManifestPath =
   'evals/clip_composition/outputs/work-distant-connection-luna-b6-first-candidates-v001/b6-run-manifest-v001.json';
 const priceSnapshotPath =
   'evals/clip_composition/reports/presentation/provider-research/openai-gpt-5-6-luna-official-snapshot-20260816-v001.json';
+const realTokenMeasurementPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-token-count-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'input-token-count-measurement-v001.json';
+const realRawResponsePath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b6-candidates-ymUsGrT6EaA-v001/'
+  + 'attempt-0002/raw-response-v001.json';
+const realCandidateResponsePath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b6-candidates-ymUsGrT6EaA-v001/'
+  + 'candidate-response-v001.json';
+const realRunManifestPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b6-candidates-ymUsGrT6EaA-v001/'
+  + 'b6-run-manifest-v001.json';
 
 function sha256(bytes: Uint8Array): string {
   return createHash('sha256').update(bytes).digest('hex');
@@ -253,4 +269,47 @@ test('旧B6正式candidateとrun manifestは履歴としてbyte不変に保つ',
     sha256(savedManifestBytes),
     '94ccf404edb86e286955778375684782612feea65e1ddd0a5ba4eaab2dfaec40'
   );
+});
+
+test('方向規則を明記した実配信B6応答をstrict検査し保存byteと一致する', async () => {
+  const [
+    sourcePackageBytes,
+    requestBytes,
+    b5ManifestBytes,
+    tokenMeasurementBytes,
+    rawResponseBytes,
+    priceSnapshotBytes,
+    savedCandidateBytes,
+    savedManifestBytes
+  ] = await Promise.all([
+    readFile(path.join(workspaceRoot, sourcePackagePath)),
+    readFile(path.join(workspaceRoot, requestPath)),
+    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, realTokenMeasurementPath)),
+    readFile(path.join(workspaceRoot, realRawResponsePath)),
+    readFile(path.join(workspaceRoot, priceSnapshotPath)),
+    readFile(path.join(workspaceRoot, realCandidateResponsePath)),
+    readFile(path.join(workspaceRoot, realRunManifestPath))
+  ]);
+  const artifacts = buildDistantConnectionLunaB6ResultArtifactsV001({
+    sourcePackagePath,
+    sourcePackageBytes,
+    requestPath,
+    requestBytes,
+    b5ManifestBytes,
+    tokenMeasurementPath: realTokenMeasurementPath,
+    tokenMeasurementBytes,
+    rawResponsePath: realRawResponsePath,
+    rawResponseBytes,
+    candidateResponsePath: realCandidateResponsePath,
+    priceSnapshotPath,
+    priceSnapshotBytes,
+    maximumNanoUsd: 1_000_000_000
+  });
+  assert.equal(artifacts.response.sourceVideoId, 'ymUsGrT6EaA');
+  assert.equal(artifacts.response.candidates.length, 2);
+  assert.deepEqual(artifacts.responseBytes, savedCandidateBytes);
+  assert.deepEqual(artifacts.manifestBytes, savedManifestBytes);
+  assert.equal(sha256(savedCandidateBytes), '3fa51bcf8c7fd604b316c94cd7a522adf81793a095c0bd3ebbc74b375fdb9c1e');
+  assert.equal(sha256(savedManifestBytes), '37917a92a565f9b7aa568cb5a9ba2c118d62c6d97e2659b2a370c3e2d6828ec0');
 });
