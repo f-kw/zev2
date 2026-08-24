@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "openai-responses-input-token-count-preflight-v001",
+  "endpoint": "https://api.openai.com/v1/responses/input_tokens",
+  "attemptId": "attempt-0001",
+  "cumulativeApiCallNumber": 5,
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-direction-clarified-ymUsGrT6EaA-v001/source-package-v001.json",
+    "fileSha256": "13371ae512a634252d2257edba547d9835bae3368d1cc942e5bb931971db7530"
+  },
+  "exactRequestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/exact-request-v001.json",
+    "fileSha256": "007a0872d4d1b09db96562deb09f67b4714f3cdaf50db2c27b086cc605bd1815"
+  },
+  "localManifestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/b5-local-manifest-v001.json",
+    "fileSha256": "aab8649990b2b430a6f79cb47048b21c5f8c507e6d2fdb1de0f5b55a19617fc7"
+  },
+  "requestProjection": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-direction-clarified-ymUsGrT6EaA-v001/attempt-0001/input-token-count-request-v001.json",
+    "fileSha256": "d81bf7278621af9729cadf2e0dd1f01f133d6de54fbd711ba8f4ea8627f0ee54",
+    "omittedTokenNeutralFields": [
+      "store"
+    ]
+  },
+  "semanticUtteranceCount": 10723,
+  "anchorCount": 4442,
+  "directionInstructionExact": true,
+  "credential": {
+    "source": ".env:OPENAI_API_KEY",
+    "valuePersisted": false
+  },
+  "status": "passed"
+}

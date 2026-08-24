@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "openai-responses-input-token-count-transport-v001",
+  "endpoint": "https://api.openai.com/v1/responses/input_tokens",
+  "attemptId": "attempt-0001",
+  "cumulativeApiCallNumber": 5,
+  "requestProjection": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-direction-clarified-ymUsGrT6EaA-v001/attempt-0001/input-token-count-request-v001.json",
+    "schemaVersion": "openai-responses-input-token-count-request-v001",
+    "fileSha256": "d81bf7278621af9729cadf2e0dd1f01f133d6de54fbd711ba8f4ea8627f0ee54",
+    "sourceExactRequestBinding": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/exact-request-v001.json",
+      "schemaVersion": "openai-responses-distant-connection-request-v001",
+      "fileSha256": "007a0872d4d1b09db96562deb09f67b4714f3cdaf50db2c27b086cc605bd1815"
+    },
+    "omittedTokenNeutralFields": [
+      "store"
+    ]
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-direction-clarified-ymUsGrT6EaA-v001/attempt-0001/input-token-count-raw-response-v001.json",
+    "schemaVersion": "openai-responses-input-token-count-response-v001",
+    "fileSha256": "0d03b49cca1f3d18eff551b6a2582ea8b718959c6a3404bc0df2daee6c43c9f7"
+  },
+  "http": {
+    "status": 200,
+    "ok": true,
+    "requestId": "req_dcd1ace873f74b08b4a473582c3223e9",
+    "openaiVersion": "2020-10-01",
+    "processingMilliseconds": "918"
+  },
+  "timing": {
+    "startedAt": "2026-08-24T12:30:44.378Z",
+    "responseReceivedAt": "2026-08-24T12:30:47.227Z",
+    "rawResponseSavedAt": "2026-08-24T12:30:47.227Z"
+  },
+  "credential": {
+    "source": ".env:OPENAI_API_KEY",
+    "valuePersisted": false
+  }
+}
