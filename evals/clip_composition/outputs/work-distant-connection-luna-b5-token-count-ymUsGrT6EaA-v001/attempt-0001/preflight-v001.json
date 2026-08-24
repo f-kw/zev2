@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "openai-responses-input-token-count-preflight-v001",
+  "endpoint": "https://api.openai.com/v1/responses/input_tokens",
+  "attemptId": "attempt-0001",
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-ymUsGrT6EaA-v001/source-package-v001.json",
+    "fileSha256": "24af313437af615961d8b4836f59bc46ae6fa1189d0e3a9356b3468ae2c4ce6f"
+  },
+  "exactRequestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-local-ymUsGrT6EaA-v001/exact-request-v001.json",
+    "fileSha256": "34b4061caecc822b21dc2a003e0c580e94841be80a2bacd0a36680776b817694"
+  },
+  "localManifestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-local-ymUsGrT6EaA-v001/b5-local-manifest-v001.json",
+    "fileSha256": "24a5d8ed5e3ca3c19832a22725aa828532e6d3d5d8a1724b4b5787ec8fe94516"
+  },
+  "requestProjection": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-ymUsGrT6EaA-v001/attempt-0001/input-token-count-request-v001.json",
+    "fileSha256": "09949069376acb3682e430a1306ee4a6c8f5da1dab1d3cd2aef94ab6d30314b4",
+    "omittedTokenNeutralFields": [
+      "store"
+    ]
+  },
+  "expectedProvider": "openai-api",
+  "expectedModel": "gpt-5.6-luna",
+  "expectedOperation": "responses-input-tokens",
+  "expectedReasoningEffort": "medium",
+  "credential": {
+    "source": ".env:OPENAI_API_KEY",
+    "valuePersisted": false
+  },
+  "status": "passed"
+}
