@@ -30,15 +30,15 @@ import {
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..');
 const sourcePackagePath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-source-package-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/'
   + 'source-package-v001.json';
 const requestPath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-b5-quality-increment-ymUsGrT6EaA-v001/'
   + 'exact-request-v001.json';
 const manifestPath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-b5-quality-increment-ymUsGrT6EaA-v001/'
   + 'b5-local-manifest-v001.json';
 const preThinningRequestPath =
   'evals/clip_composition/outputs/work-distant-connection-luna-b5-binding-fix-v001/'

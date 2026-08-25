@@ -178,6 +178,22 @@ test('全文の正式意味発話・コメント起点・探索目的・返答sc
     sourcePackage.explorationTask.anchorInstruction,
     'directionはanchorから見た相方の位置を表します。futureの場合はanchor発話をfirstPartに含め、相方を未来側のsecondPartに置いてください。pastの場合はanchor発話をsecondPartに含め、相方を過去側のfirstPartに置いてください。'
   );
+  assert.match(
+    sourcePackage.explorationTask.objective,
+    /後半単独では得られない理解、回収感、意外性、面白さ/u
+  );
+  assert.match(
+    sourcePackage.explorationTask.objective,
+    /閉じた分類ではありません/u
+  );
+  assert.match(
+    sourcePackage.explorationTask.returnInstruction,
+    /前半を外しても後半の理解や面白さがほぼ変わらない接続は返さない/u
+  );
+  assert.match(
+    sourcePackage.explorationTask.returnInstruction,
+    /ゲーム紹介・一般説明そのものを除外せず/u
+  );
   assert.match(sourcePackage.explorationTask.boundaryMeaning, /最終切り出し位置ではありません/u);
   assert.equal(sourcePackage.responseContract.sourcePackagePath, 'outputs/source-package.json');
 });

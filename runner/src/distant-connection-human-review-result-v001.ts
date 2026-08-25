@@ -1,9 +1,5 @@
 import {createHash} from 'node:crypto';
 
-import {
-  decodeDistantConnectionLunaResponseV001
-} from './distant-connection-luna-source-package-v001.js';
-
 export const DISTANT_CONNECTION_HUMAN_REVIEW_RESULT_SCHEMA_V001 =
   'distant-connection-human-review-result-v001';
 
@@ -133,6 +129,51 @@ function candidateIdsFromVideoResult(
   };
 }
 
+function candidateResponseSummary(
+  bytes: Uint8Array,
+  sourcePackagePath: string,
+  sourcePackageBytes: Uint8Array
+): {sourceVideoId: string; schemaVersion: string; candidateIds: string[]} {
+  const value = parseJson(bytes, '正式候補成果物');
+  if (!isRecord(value)
+    || !hasExactKeys(value, [
+      'schemaVersion', 'sourceVideoId', 'sourcePackageBinding', 'candidates'
+    ])
+    || value.schemaVersion !== 'distant-connection-luna-response-v001'
+    || typeof value.sourceVideoId !== 'string'
+    || !isRecord(value.sourcePackageBinding)
+    || !hasExactKeys(value.sourcePackageBinding, ['path', 'schemaVersion', 'fileSha256'])
+    || value.sourcePackageBinding.path !== sourcePackagePath
+    || value.sourcePackageBinding.schemaVersion !== 'distant-connection-luna-source-package-v001'
+    || value.sourcePackageBinding.fileSha256 !== sha256(sourcePackageBytes)
+    || !Array.isArray(value.candidates)) {
+    fail('正式候補成果物が指定source packageを束縛していません');
+  }
+  const candidateIds = value.candidates.map((candidate, index) => {
+    if (!isRecord(candidate)
+      || !hasExactKeys(candidate, [
+        'candidateId',
+        'anchorId',
+        'firstPartSemanticUtteranceIds',
+        'secondPartSemanticUtteranceIds',
+        'addedUnderstanding',
+        'direction'
+      ])
+      || typeof candidate.candidateId !== 'string') {
+      fail(`正式候補${index + 1}件目の構造が不正です`);
+    }
+    return candidate.candidateId;
+  });
+  if (new Set(candidateIds).size !== candidateIds.length) {
+    fail('正式候補成果物に候補IDの重複があります');
+  }
+  return {
+    sourceVideoId: value.sourceVideoId,
+    schemaVersion: value.schemaVersion,
+    candidateIds
+  };
+}
+
 export function buildDistantConnectionHumanReviewResultV001(
   input: BuildInput
 ): DistantConnectionHumanReviewResultV001 {
@@ -147,16 +188,17 @@ export function buildDistantConnectionHumanReviewResultV001(
     fail('動画試作結果のSHA-256が指定正本と一致しません');
   }
 
-  const response = decodeDistantConnectionLunaResponseV001(input.candidateResponseBytes, {
-    sourcePackagePath: input.sourcePackagePath,
-    sourcePackageBytes: input.sourcePackageBytes
-  });
+  const response = candidateResponseSummary(
+    input.candidateResponseBytes,
+    input.sourcePackagePath,
+    input.sourcePackageBytes
+  );
   const videoResult = candidateIdsFromVideoResult(
     input.videoPrototypeResultBytes,
     input.candidateResponsePath,
     candidateResponseSha256
   );
-  const candidateIds = response.candidates.map((candidate) => candidate.candidateId);
+  const candidateIds = response.candidateIds;
   if (response.sourceVideoId !== videoResult.sourceVideoId
     || candidateIds.length !== 2
     || JSON.stringify(candidateIds) !== JSON.stringify(videoResult.candidateIds)) {

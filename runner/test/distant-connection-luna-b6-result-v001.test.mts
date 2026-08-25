@@ -12,15 +12,15 @@ import {
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..');
 const sourcePackagePath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-source-package-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/'
   + 'source-package-v001.json';
 const requestPath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-b5-quality-increment-ymUsGrT6EaA-v001/'
   + 'exact-request-v001.json';
 const manifestPath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-b5-direction-clarified-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-b5-quality-increment-ymUsGrT6EaA-v001/'
   + 'b5-local-manifest-v001.json';
 const tokenMeasurementPath =
   'outputs/test-token-measurement.json';
@@ -271,45 +271,16 @@ test('旧B6正式candidateとrun manifestは履歴としてbyte不変に保つ',
   );
 });
 
-test('方向規則を明記した実配信B6応答をstrict検査し保存byteと一致する', async () => {
-  const [
-    sourcePackageBytes,
-    requestBytes,
-    b5ManifestBytes,
-    tokenMeasurementBytes,
-    rawResponseBytes,
-    priceSnapshotBytes,
-    savedCandidateBytes,
-    savedManifestBytes
-  ] = await Promise.all([
-    readFile(path.join(workspaceRoot, sourcePackagePath)),
-    readFile(path.join(workspaceRoot, requestPath)),
-    readFile(path.join(workspaceRoot, manifestPath)),
-    readFile(path.join(workspaceRoot, realTokenMeasurementPath)),
-    readFile(path.join(workspaceRoot, realRawResponsePath)),
-    readFile(path.join(workspaceRoot, priceSnapshotPath)),
-    readFile(path.join(workspaceRoot, realCandidateResponsePath)),
-    readFile(path.join(workspaceRoot, realRunManifestPath))
-  ]);
-  const artifacts = buildDistantConnectionLunaB6ResultArtifactsV001({
-    sourcePackagePath,
-    sourcePackageBytes,
-    requestPath,
-    requestBytes,
-    b5ManifestBytes,
-    tokenMeasurementPath: realTokenMeasurementPath,
-    tokenMeasurementBytes,
-    rawResponsePath: realRawResponsePath,
-    rawResponseBytes,
-    candidateResponsePath: realCandidateResponsePath,
-    priceSnapshotPath,
-    priceSnapshotBytes,
-    maximumNanoUsd: 1_000_000_000
-  });
-  assert.equal(artifacts.response.sourceVideoId, 'ymUsGrT6EaA');
-  assert.equal(artifacts.response.candidates.length, 2);
-  assert.deepEqual(artifacts.responseBytes, savedCandidateBytes);
-  assert.deepEqual(artifacts.manifestBytes, savedManifestBytes);
+test('方向規則を明記した旧実配信B6成果物は履歴としてbyte不変に保つ', async () => {
+  const [savedCandidateBytes, savedManifestBytes, rawResponseBytes, tokenMeasurementBytes] =
+    await Promise.all([
+      readFile(path.join(workspaceRoot, realCandidateResponsePath)),
+      readFile(path.join(workspaceRoot, realRunManifestPath)),
+      readFile(path.join(workspaceRoot, realRawResponsePath)),
+      readFile(path.join(workspaceRoot, realTokenMeasurementPath))
+    ]);
   assert.equal(sha256(savedCandidateBytes), '3fa51bcf8c7fd604b316c94cd7a522adf81793a095c0bd3ebbc74b375fdb9c1e');
   assert.equal(sha256(savedManifestBytes), '37917a92a565f9b7aa568cb5a9ba2c118d62c6d97e2659b2a370c3e2d6828ec0');
+  assert.equal(sha256(rawResponseBytes), 'a1eada903fba4bb0fee45eeaad4e04ca5ccffe3b3c94edf59a41baea19fedaf4');
+  assert.equal(sha256(tokenMeasurementBytes), '1aeba1144d3723f107d6ba6baba9fefd46feb7e3ef0a44681eb017e9e50ad06c');
 });
