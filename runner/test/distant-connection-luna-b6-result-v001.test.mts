@@ -12,13 +12,25 @@ import {
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..');
 const sourcePackagePath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-source-package-short-form-viability-ymUsGrT6EaA-v001/'
   + 'source-package-v001.json';
 const requestPath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-b5-quality-increment-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-b5-short-form-viability-ymUsGrT6EaA-v001/'
   + 'exact-request-v001.json';
 const manifestPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-short-form-viability-ymUsGrT6EaA-v001/'
+  + 'b5-local-manifest-v001.json';
+const qualitySourcePackagePath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/'
+  + 'source-package-v001.json';
+const qualityRequestPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-quality-increment-ymUsGrT6EaA-v001/'
+  + 'exact-request-v001.json';
+const qualityManifestPath =
   'evals/clip_composition/outputs/'
   + 'work-distant-connection-luna-b5-quality-increment-ymUsGrT6EaA-v001/'
   + 'b5-local-manifest-v001.json';
@@ -295,7 +307,7 @@ test('方向規則を明記した旧実配信B6成果物は履歴としてbyte�
   assert.equal(sha256(tokenMeasurementBytes), '1aeba1144d3723f107d6ba6baba9fefd46feb7e3ef0a44681eb017e9e50ad06c');
 });
 
-test('探索品質改訂後の実配信B6候補2件をstrict再構築し保存byteと一致させる', async () => {
+test('探索品質改訂後の実配信B6一式は履歴としてbyte不変に保つ', async () => {
   const [
     sourcePackageBytes,
     requestBytes,
@@ -306,37 +318,21 @@ test('探索品質改訂後の実配信B6候補2件をstrict再構築し保存by
     savedCandidateBytes,
     savedManifestBytes
   ] = await Promise.all([
-    readFile(path.join(workspaceRoot, sourcePackagePath)),
-    readFile(path.join(workspaceRoot, requestPath)),
-    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, qualitySourcePackagePath)),
+    readFile(path.join(workspaceRoot, qualityRequestPath)),
+    readFile(path.join(workspaceRoot, qualityManifestPath)),
     readFile(path.join(workspaceRoot, qualityTokenMeasurementPath)),
     readFile(path.join(workspaceRoot, qualityRawResponsePath)),
     readFile(path.join(workspaceRoot, priceSnapshotPath)),
     readFile(path.join(workspaceRoot, qualityCandidateResponsePath)),
     readFile(path.join(workspaceRoot, qualityRunManifestPath))
   ]);
-  const rebuilt = buildDistantConnectionLunaB6ResultArtifactsV001({
-    sourcePackagePath,
-    sourcePackageBytes,
-    requestPath,
-    requestBytes,
-    b5ManifestBytes,
-    tokenMeasurementPath: qualityTokenMeasurementPath,
-    tokenMeasurementBytes,
-    rawResponsePath: qualityRawResponsePath,
-    rawResponseBytes,
-    candidateResponsePath: qualityCandidateResponsePath,
-    priceSnapshotPath,
-    priceSnapshotBytes,
-    maximumNanoUsd: 1_000_000_000
-  });
-  assert.equal(rebuilt.response.candidates.length, 2);
-  assert.equal(rebuilt.manifest.validation.decision, 'passed');
-  assert.equal(rebuilt.manifest.cost.totalUsd, 0.4523419);
-  assert.equal(rebuilt.manifest.cost.withinMaximum, true);
-  assert.deepEqual(rebuilt.responseBytes, savedCandidateBytes);
-  assert.deepEqual(rebuilt.manifestBytes, savedManifestBytes);
+  assert.equal(sha256(sourcePackageBytes), '49d5686cce07177433ce707e84bad8f47c16aab059428026b7e83344cbd9e532');
+  assert.equal(sha256(requestBytes), '577d1907f8fce987b4a056b8cd0fd56c61d502a3ee21f77027c88b5191435cd1');
+  assert.equal(sha256(b5ManifestBytes), 'bd609520ddb406d424563c65076ceaea0919e5a2e3298220e73b7f16a3c457e0');
+  assert.equal(sha256(tokenMeasurementBytes), '6cc164f442f13ad9b1c480e887dea979512117122e89a92f3c7b55695c614681');
   assert.equal(sha256(savedCandidateBytes), '8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d');
   assert.equal(sha256(savedManifestBytes), '4d1ddb50590caa21cdf75034269ae0bdc624cfe0bf052cb0d42449f968f81338');
   assert.equal(sha256(rawResponseBytes), '9dd218f42d85d38742fd57b6f984792cbca88d1da4c5651d88b5bdaf1056a267');
+  assert.equal(sha256(priceSnapshotBytes), '9d53b52a6e1726bcbf715137a32d6819d668c4023e89ddf2d81edaec7f5166d7');
 });

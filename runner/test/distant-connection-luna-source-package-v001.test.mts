@@ -194,6 +194,19 @@ test('全文の正式意味発話・コメント起点・探索目的・返答sc
     sourcePackage.explorationTask.returnInstruction,
     /ゲーム紹介・一般説明そのものを除外せず/u
   );
+  assert.match(
+    sourcePackage.explorationTask.returnInstruction,
+    /必要な前提情報が、短尺動画として自然な長さに収まる候補だけ/u
+  );
+  assert.match(
+    sourcePackage.explorationTask.returnInstruction,
+    /長い説明や複雑な前提を必要とする候補/u
+  );
+  assert.match(
+    sourcePackage.explorationTask.returnInstruction,
+    /追加説明なしで接続を理解できる/u
+  );
+  assert.doesNotMatch(sourcePackage.explorationTask.returnInstruction, /30秒/u);
   assert.match(sourcePackage.explorationTask.boundaryMeaning, /最終切り出し位置ではありません/u);
   assert.equal(sourcePackage.responseContract.sourcePackagePath, 'outputs/source-package.json');
 });
