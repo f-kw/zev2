@@ -73,6 +73,9 @@ const bindingFixTokenCountEvaluationPath =
 const priceSnapshotPath =
   'evals/clip_composition/reports/presentation/provider-research/'
   + 'openai-gpt-5-6-luna-official-snapshot-20260816-v001.json';
+const qualityTokenCountRoot =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-token-count-quality-increment-ymUsGrT6EaA-v001';
 
 function sha256(bytes: Uint8Array): string {
   return createHash('sha256').update(bytes).digest('hex');
@@ -512,4 +515,52 @@ test('binding修正後の保存済みtoken計測を新exact requestへ束縛し�
     maximumNanoUsd: 500_000_000,
     decision: 'passed'
   });
+});
+
+test('探索品質改訂後のtoken計測をexact requestへ束縛しcontextと最大費用を判定する', async () => {
+  const [
+    exactRequestBytes,
+    manifestBytes,
+    projectionBytes,
+    rawBytes,
+    transportBytes,
+    measurementBytes,
+    evaluationBytes
+  ] = await Promise.all([
+    readFile(path.join(workspaceRoot, requestPath)),
+    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, qualityTokenCountRoot,
+      'attempt-0001/input-token-count-request-v001.json')),
+    readFile(path.join(workspaceRoot, qualityTokenCountRoot,
+      'attempt-0001/input-token-count-raw-response-v001.json')),
+    readFile(path.join(workspaceRoot, qualityTokenCountRoot,
+      'attempt-0001/input-token-count-transport-v001.json')),
+    readFile(path.join(workspaceRoot, qualityTokenCountRoot,
+      'input-token-count-measurement-v001.json')),
+    readFile(path.join(workspaceRoot, qualityTokenCountRoot,
+      'input-token-count-evaluation-v001.json'))
+  ]);
+  const exactRequest = JSON.parse(exactRequestBytes.toString('utf8'));
+  const expectedProjection = structuredClone(exactRequest);
+  delete expectedProjection.store;
+  assert.deepEqual(JSON.parse(projectionBytes.toString('utf8')), expectedProjection);
+  assert.deepEqual(JSON.parse(rawBytes.toString('utf8')), {
+    object: 'response.input_tokens', input_tokens: 892_898
+  });
+  const transport = JSON.parse(transportBytes.toString('utf8'));
+  assert.equal(transport.http.status, 200);
+  assert.equal(transport.http.ok, true);
+  assert.equal(transport.apiCallNumberInQualityRevision, 1);
+  assert.equal(transport.rawResponseBinding.fileSha256, sha256(rawBytes));
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
+  const measurement = JSON.parse(measurementBytes.toString('utf8'));
+  assertDistantConnectionLunaB5MeasurementV001(measurement, manifest);
+  assert.equal(measurement.tokenMeasurement.inputTokens, 892_898);
+  assert.equal(measurement.costEvaluation.projectedNanoUsd, 587_559_200);
+  const evaluation = JSON.parse(evaluationBytes.toString('utf8'));
+  assert.equal(evaluation.contextEvaluation.withinContextWindow, true);
+  assert.equal(evaluation.contextEvaluation.remainingTokens, 157_102);
+  assert.equal(evaluation.longContextPricing.applies, true);
+  assert.equal(evaluation.b6MaximumCostProjection.projectedNanoUsd, 587_559_200);
+  assert.equal(evaluation.b6Admission.decision, 'passed');
 });
