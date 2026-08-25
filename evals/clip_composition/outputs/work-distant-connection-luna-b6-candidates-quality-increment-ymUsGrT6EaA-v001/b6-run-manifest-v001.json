@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "distant-connection-luna-b6-run-manifest-v001",
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/source-package-v001.json",
+    "schemaVersion": "distant-connection-luna-source-package-v001",
+    "fileSha256": "49d5686cce07177433ce707e84bad8f47c16aab059428026b7e83344cbd9e532"
+  },
+  "requestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-quality-increment-ymUsGrT6EaA-v001/exact-request-v001.json",
+    "schemaVersion": "openai-responses-distant-connection-request-v001",
+    "fileSha256": "577d1907f8fce987b4a056b8cd0fd56c61d502a3ee21f77027c88b5191435cd1"
+  },
+  "tokenMeasurementBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-quality-increment-ymUsGrT6EaA-v001/input-token-count-measurement-v001.json",
+    "schemaVersion": "distant-connection-luna-b5-measurement-v001",
+    "fileSha256": "6cc164f442f13ad9b1c480e887dea979512117122e89a92f3c7b55695c614681"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/attempt-0001/raw-response-v001.json",
+    "schemaVersion": "openai-responses-distant-connection-raw-v001",
+    "fileSha256": "9dd218f42d85d38742fd57b6f984792cbca88d1da4c5651d88b5bdaf1056a267"
+  },
+  "candidateResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/candidate-response-v001.json",
+    "schemaVersion": "distant-connection-luna-response-v001",
+    "fileSha256": "8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d"
+  },
+  "providerResponse": {
+    "id": "resp_0f4273f759a93a45016a8ce0e1015487d080aca38d5775346e",
+    "model": "gpt-5.6-luna",
+    "status": "completed"
+  },
+  "usage": {
+    "inputTokens": 892898,
+    "cachedInputTokens": 0,
+    "cacheWriteTokens": 892895,
+    "uncachedNonWriteInputTokens": 3,
+    "outputTokens": 3274,
+    "reasoningTokens": 1925,
+    "totalTokens": 896172
+  },
+  "cost": {
+    "priceSnapshotBinding": {
+      "path": "evals/clip_composition/reports/presentation/provider-research/openai-gpt-5-6-luna-official-snapshot-20260816-v001.json",
+      "schemaVersion": "openai-gpt-5-6-luna-official-snapshot-v001",
+      "fileSha256": "9d53b52a6e1726bcbf715137a32d6819d668c4023e89ddf2d81edaec7f5166d7"
+    },
+    "inputNanoUsd": 1200,
+    "cachedInputNanoUsd": 0,
+    "cacheWriteNanoUsd": 446447500,
+    "outputNanoUsd": 5893200,
+    "totalNanoUsd": 452341900,
+    "totalUsd": 0.4523419,
+    "maximumNanoUsd": 1000000000,
+    "withinMaximum": true
+  },
+  "validation": {
+    "decision": "passed",
+    "candidateCount": 2
+  }
+}

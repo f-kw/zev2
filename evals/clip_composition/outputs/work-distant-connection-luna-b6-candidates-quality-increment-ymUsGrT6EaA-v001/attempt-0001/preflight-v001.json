@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "distant-connection-luna-b6-preflight-v001",
+  "attemptId": "attempt-0001",
+  "consultationId": "ZEV-CONSULT-20260825-DISTANT-QUALITY-B6-001",
+  "endpoint": "https://api.openai.com/v1/responses",
+  "approvedPaidB6Calls": 1,
+  "automaticRetry": false,
+  "bindings": {
+    "sourcePackage": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/source-package-v001.json",
+      "fileSha256": "49d5686cce07177433ce707e84bad8f47c16aab059428026b7e83344cbd9e532"
+    },
+    "exactRequest": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-quality-increment-ymUsGrT6EaA-v001/exact-request-v001.json",
+      "fileSha256": "577d1907f8fce987b4a056b8cd0fd56c61d502a3ee21f77027c88b5191435cd1"
+    },
+    "b5LocalManifest": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-quality-increment-ymUsGrT6EaA-v001/b5-local-manifest-v001.json",
+      "fileSha256": "bd609520ddb406d424563c65076ceaea0919e5a2e3298220e73b7f16a3c457e0"
+    },
+    "tokenMeasurement": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-quality-increment-ymUsGrT6EaA-v001/input-token-count-measurement-v001.json",
+      "fileSha256": "6cc164f442f13ad9b1c480e887dea979512117122e89a92f3c7b55695c614681"
+    }
+  },
+  "input": {
+    "semanticUtteranceCount": 10723,
+    "anchorCount": 4442,
+    "measuredInputTokens": 892898
+  },
+  "requestSettings": {
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "medium",
+    "responseFormatType": "json_schema",
+    "responseFormatName": "distant_connection_candidates_v001",
+    "responseFormatStrict": true,
+    "store": false
+  },
+  "costAdmission": {
+    "approvedMaximumNanoUsd": 1000000000,
+    "projectedNanoUsd": 587559200,
+    "decision": "passed"
+  },
+  "credential": {
+    "source": ".env:OPENAI_API_KEY",
+    "valuePersisted": false
+  },
+  "checks": {
+    "allShaBindings": "passed",
+    "requestInputByteIdentity": "passed",
+    "responseSchemaBinding": "passed",
+    "b5B6RequestBinding": "passed",
+    "explorationQualityInstructions": "passed",
+    "fullUtteranceAndAnchorInput": "passed",
+    "costAdmission": "passed"
+  }
+}

@@ -48,6 +48,16 @@ const realRunManifestPath =
   'evals/clip_composition/outputs/'
   + 'work-distant-connection-luna-b6-candidates-ymUsGrT6EaA-v001/'
   + 'b6-run-manifest-v001.json';
+const qualityTokenMeasurementPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-token-count-quality-increment-ymUsGrT6EaA-v001/'
+  + 'input-token-count-measurement-v001.json';
+const qualityB6Root =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001';
+const qualityRawResponsePath = `${qualityB6Root}/attempt-0001/raw-response-v001.json`;
+const qualityCandidateResponsePath = `${qualityB6Root}/candidate-response-v001.json`;
+const qualityRunManifestPath = `${qualityB6Root}/b6-run-manifest-v001.json`;
 
 function sha256(bytes: Uint8Array): string {
   return createHash('sha256').update(bytes).digest('hex');
@@ -283,4 +293,50 @@ test('方向規則を明記した旧実配信B6成果物は履歴としてbyte�
   assert.equal(sha256(savedManifestBytes), '37917a92a565f9b7aa568cb5a9ba2c118d62c6d97e2659b2a370c3e2d6828ec0');
   assert.equal(sha256(rawResponseBytes), 'a1eada903fba4bb0fee45eeaad4e04ca5ccffe3b3c94edf59a41baea19fedaf4');
   assert.equal(sha256(tokenMeasurementBytes), '1aeba1144d3723f107d6ba6baba9fefd46feb7e3ef0a44681eb017e9e50ad06c');
+});
+
+test('探索品質改訂後の実配信B6候補2件をstrict再構築し保存byteと一致させる', async () => {
+  const [
+    sourcePackageBytes,
+    requestBytes,
+    b5ManifestBytes,
+    tokenMeasurementBytes,
+    rawResponseBytes,
+    priceSnapshotBytes,
+    savedCandidateBytes,
+    savedManifestBytes
+  ] = await Promise.all([
+    readFile(path.join(workspaceRoot, sourcePackagePath)),
+    readFile(path.join(workspaceRoot, requestPath)),
+    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, qualityTokenMeasurementPath)),
+    readFile(path.join(workspaceRoot, qualityRawResponsePath)),
+    readFile(path.join(workspaceRoot, priceSnapshotPath)),
+    readFile(path.join(workspaceRoot, qualityCandidateResponsePath)),
+    readFile(path.join(workspaceRoot, qualityRunManifestPath))
+  ]);
+  const rebuilt = buildDistantConnectionLunaB6ResultArtifactsV001({
+    sourcePackagePath,
+    sourcePackageBytes,
+    requestPath,
+    requestBytes,
+    b5ManifestBytes,
+    tokenMeasurementPath: qualityTokenMeasurementPath,
+    tokenMeasurementBytes,
+    rawResponsePath: qualityRawResponsePath,
+    rawResponseBytes,
+    candidateResponsePath: qualityCandidateResponsePath,
+    priceSnapshotPath,
+    priceSnapshotBytes,
+    maximumNanoUsd: 1_000_000_000
+  });
+  assert.equal(rebuilt.response.candidates.length, 2);
+  assert.equal(rebuilt.manifest.validation.decision, 'passed');
+  assert.equal(rebuilt.manifest.cost.totalUsd, 0.4523419);
+  assert.equal(rebuilt.manifest.cost.withinMaximum, true);
+  assert.deepEqual(rebuilt.responseBytes, savedCandidateBytes);
+  assert.deepEqual(rebuilt.manifestBytes, savedManifestBytes);
+  assert.equal(sha256(savedCandidateBytes), '8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d');
+  assert.equal(sha256(savedManifestBytes), '4d1ddb50590caa21cdf75034269ae0bdc624cfe0bf052cb0d42449f968f81338');
+  assert.equal(sha256(rawResponseBytes), '9dd218f42d85d38742fd57b6f984792cbca88d1da4c5651d88b5bdaf1056a267');
 });
