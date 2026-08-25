@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "distant-connection-human-review-result-v002",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "reviewedAt": "2026-08-25",
+  "reviewer": "kawafmm",
+  "sourceBindings": {
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "schemaVersion": "distant-connection-luna-response-v001",
+      "fileSha256": "8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d"
+    },
+    "originalVideoPrototypeResult": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-quality-increment-ymUsGrT6EaA-v001/video-prototype-result-v001.json",
+      "schemaVersion": "distant-connection-video-prototype-result-v001",
+      "fileSha256": "194e8749adbd28c78118caead50c278ea5d2d0949d9c2bfdc431c6646f1b740f"
+    },
+    "intervalizationImprovementResult": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001/video-intervalization-improvement-result-v001.json",
+      "schemaVersion": "distant-connection-video-intervalization-improvement-result-v001",
+      "fileSha256": "b1a6c1e4233aaabf447ec5ab3ca7d14657bd5a1dfb09a18557c11752fdd85dfe"
+    }
+  },
+  "candidateCount": 2,
+  "candidateReviews": [
+    {
+      "candidateId": "camera-fear-escalation",
+      "candidateSelection": "pass",
+      "originalIntervalization": "fail",
+      "improvedIntervalization": "pass",
+      "shortFormViability": "pass",
+      "classification": "accepted-distant-connection-example",
+      "reason": "旧版では発話の原因となる重要な恐怖映像を落としていた。区間化改善によって必要な映像を含めた結果、前半との接続が理解でき、遠方接続として成立した。",
+      "shortFormAssessment": "必要な恐怖映像と反応を短尺として自然な長さに含められる。"
+    },
+    {
+      "candidateId": "medicine-effect-payoff",
+      "candidateSelection": "fail",
+      "originalIntervalization": "fail",
+      "improvedIntervalization": "pass",
+      "shortFormViability": "fail",
+      "classification": "rejected-short-form-candidate",
+      "reason": "区間化不良の診断と改善は正しかった。しかし改善後でも接続理解に必要な前提情報が多すぎ、説明と文脈をさらに長くすると動画のテンポを損なうため、遠方接続候補として不採用とする。",
+      "shortFormAssessment": "接続を理解するための前提情報が短尺として自然な長さに収まらない。これ以上の区間拡張は行わない。"
+    }
+  ],
+  "selectionPrinciple": "前半と後半の意味関係を理解するために必要な前提情報が、短尺動画として自然な長さに収まること。前提情報が複雑で長い説明区間を必要とする候補は、意味的接続が存在していても除外する。"
+}
