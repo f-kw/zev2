@@ -1,0 +1,510 @@
+{
+  "schemaVersion": "distant-connection-video-intervalization-improvement-candidate-v001",
+  "candidateId": "distant-connection-003",
+  "sourceVideoBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+    "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+  },
+  "candidateResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-short-form-viability-ymUsGrT6EaA-v001/candidate-response-v001.json",
+    "fileSha256": "a73fef9ac2c1d12b46b49b0d0dab9eb6f0293aa34b89425296717fc1334b8d49"
+  },
+  "semanticUtteranceBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-semantic-utterance-ymUsGrT6EaA-v001/semantic-utterance-artifact-v001.json",
+    "fileSha256": "e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2"
+  },
+  "firstPart": {
+    "sourceStartMs": 249378,
+    "sourceEndMs": 255324,
+    "text": "今年一怖いと言われるホラーゲーム",
+    "semanticUtteranceIds": [
+      "semantic-utterance-000067",
+      "semantic-utterance-000068",
+      "semantic-utterance-000069",
+      "semantic-utterance-000070",
+      "semantic-utterance-000071",
+      "semantic-utterance-000072",
+      "semantic-utterance-000073",
+      "semantic-utterance-000074",
+      "semantic-utterance-000075",
+      "semantic-utterance-000076",
+      "semantic-utterance-000077",
+      "semantic-utterance-000078",
+      "semantic-utterance-000079",
+      "semantic-utterance-000080",
+      "semantic-utterance-000081",
+      "semantic-utterance-000082"
+    ],
+    "sourceSegmentIds": [
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82
+    ],
+    "boundaryDecision": "candidate-selected-formal-utterance-closure"
+  },
+  "formalSecondPart": {
+    "sourceStartMs": 1029974,
+    "sourceEndMs": 1032976,
+    "text": "おい、帰って金庫そこにいらない!",
+    "semanticUtteranceIds": [
+      "semantic-utterance-002076",
+      "semantic-utterance-002077",
+      "semantic-utterance-002078",
+      "semantic-utterance-002079",
+      "semantic-utterance-002080",
+      "semantic-utterance-002081",
+      "semantic-utterance-002082",
+      "semantic-utterance-002083",
+      "semantic-utterance-002084",
+      "semantic-utterance-002085",
+      "semantic-utterance-002086",
+      "semantic-utterance-002087",
+      "semantic-utterance-002088",
+      "semantic-utterance-002089",
+      "semantic-utterance-002090",
+      "semantic-utterance-002091"
+    ],
+    "sourceSegmentIds": [
+      2076,
+      2077,
+      2078,
+      2079,
+      2080,
+      2081,
+      2082,
+      2083,
+      2084,
+      2085,
+      2086,
+      2087,
+      2088,
+      2089,
+      2090,
+      2091
+    ],
+    "boundaryDecision": "candidate-selected-formal-utterance-closure"
+  },
+  "secondPart": {
+    "sourceStartMs": 1028000,
+    "sourceEndMs": 1033336,
+    "text": "おい、帰って金庫そこにいらない!また風船!",
+    "semanticUtteranceIds": [
+      "semantic-utterance-002076",
+      "semantic-utterance-002077",
+      "semantic-utterance-002078",
+      "semantic-utterance-002079",
+      "semantic-utterance-002080",
+      "semantic-utterance-002081",
+      "semantic-utterance-002082",
+      "semantic-utterance-002083",
+      "semantic-utterance-002084",
+      "semantic-utterance-002085",
+      "semantic-utterance-002086",
+      "semantic-utterance-002087",
+      "semantic-utterance-002088",
+      "semantic-utterance-002089",
+      "semantic-utterance-002090",
+      "semantic-utterance-002091",
+      "semantic-utterance-002092",
+      "semantic-utterance-002093",
+      "semantic-utterance-002094",
+      "semantic-utterance-002095",
+      "semantic-utterance-002096"
+    ],
+    "sourceSegmentIds": [
+      2076,
+      2077,
+      2078,
+      2079,
+      2080,
+      2081,
+      2082,
+      2083,
+      2084,
+      2085,
+      2086,
+      2087,
+      2088,
+      2089,
+      2090,
+      2091,
+      2092,
+      2093,
+      2094,
+      2095,
+      2096
+    ],
+    "boundaryDecision": "human-reviewed-local-intervalization-evidence-v001"
+  },
+  "intervalizationDecision": {
+    "formalSecondStartMs": 1029974,
+    "formalSecondEndMs": 1032976,
+    "improvedSecondStartMs": 1028000,
+    "improvedSecondEndMs": 1033336,
+    "semanticStartOrdinal": 2076,
+    "semanticEndOrdinal": 2096,
+    "classification": "MINIMAL_VISUAL_LEAD_AND_REACTION_EXTENSION",
+    "observedCause": "正式後半は赤い照明の通路を探索中の発話で、直前約2秒の映像が場所と移動方向を示していた。発話直後の「また風船」までが同じ反応単位で、それより後の怪物反応は別の出来事だった。",
+    "boundaryReason": "赤い通路へ入った直後を開始とし、正式発話と直後の「また風船」が完結する時点で終了する。後続の別の怪物反応は追加しない。",
+    "addedContextSemanticUtteranceIds": [
+      "semantic-utterance-002092",
+      "semantic-utterance-002093",
+      "semantic-utterance-002094",
+      "semantic-utterance-002095",
+      "semantic-utterance-002096"
+    ],
+    "formalCandidateChanged": false,
+    "firstPartChanged": false,
+    "secondPartOnlyExpanded": true
+  },
+  "gapMs": 772676,
+  "outputFrameMapping": {
+    "fps": 30,
+    "firstPartFrameCount": 178,
+    "secondPartFrameCount": 160,
+    "totalFrameCount": 338
+  },
+  "captionCueCount": 2,
+  "captionCues": [
+    {
+      "cueId": "distant-connection-003-first-caption-001",
+      "part": "first",
+      "text": "今年一怖いと言われるホラーゲーム",
+      "semanticUtteranceIds": [
+        "semantic-utterance-000067",
+        "semantic-utterance-000068",
+        "semantic-utterance-000069",
+        "semantic-utterance-000070",
+        "semantic-utterance-000071",
+        "semantic-utterance-000072",
+        "semantic-utterance-000073",
+        "semantic-utterance-000074",
+        "semantic-utterance-000075",
+        "semantic-utterance-000076",
+        "semantic-utterance-000077",
+        "semantic-utterance-000078",
+        "semantic-utterance-000079",
+        "semantic-utterance-000080",
+        "semantic-utterance-000081",
+        "semantic-utterance-000082"
+      ],
+      "sourceUnits": [
+        {
+          "semanticUtteranceId": "semantic-utterance-000067",
+          "text": "今"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000068",
+          "text": "年"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000069",
+          "text": "一"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000070",
+          "text": "怖"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000071",
+          "text": "い"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000072",
+          "text": "と"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000073",
+          "text": "言"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000074",
+          "text": "わ"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000075",
+          "text": "れ"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000076",
+          "text": "る"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000077",
+          "text": "ホ"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000078",
+          "text": "ラ"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000079",
+          "text": "ー"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000080",
+          "text": "ゲ"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000081",
+          "text": "ー"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-000082",
+          "text": "ム"
+        }
+      ],
+      "sourceStartMs": 249378,
+      "sourceEndMs": 255324
+    },
+    {
+      "cueId": "distant-connection-003-second-intervalization-caption-001",
+      "part": "second",
+      "text": "おい、帰って金庫そこにいらない!また風船!",
+      "semanticUtteranceIds": [
+        "semantic-utterance-002076",
+        "semantic-utterance-002077",
+        "semantic-utterance-002078",
+        "semantic-utterance-002079",
+        "semantic-utterance-002080",
+        "semantic-utterance-002081",
+        "semantic-utterance-002082",
+        "semantic-utterance-002083",
+        "semantic-utterance-002084",
+        "semantic-utterance-002085",
+        "semantic-utterance-002086",
+        "semantic-utterance-002087",
+        "semantic-utterance-002088",
+        "semantic-utterance-002089",
+        "semantic-utterance-002090",
+        "semantic-utterance-002091",
+        "semantic-utterance-002092",
+        "semantic-utterance-002093",
+        "semantic-utterance-002094",
+        "semantic-utterance-002095",
+        "semantic-utterance-002096"
+      ],
+      "sourceUnits": [
+        {
+          "semanticUtteranceId": "semantic-utterance-002076",
+          "text": "お"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002077",
+          "text": "い"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002078",
+          "text": "、"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002079",
+          "text": "帰"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002080",
+          "text": "っ"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002081",
+          "text": "て"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002082",
+          "text": "金"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002083",
+          "text": "庫"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002084",
+          "text": "そ"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002085",
+          "text": "こ"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002086",
+          "text": "に"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002087",
+          "text": "い"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002088",
+          "text": "ら"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002089",
+          "text": "な"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002090",
+          "text": "い"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002091",
+          "text": "!"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002092",
+          "text": "ま"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002093",
+          "text": "た"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002094",
+          "text": "風"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002095",
+          "text": "船"
+        },
+        {
+          "semanticUtteranceId": "semantic-utterance-002096",
+          "text": "!"
+        }
+      ],
+      "sourceStartMs": 1029974,
+      "sourceEndMs": 1033336
+    }
+  ],
+  "qc": {
+    "schemaVersion": "distant-connection-video-prototype-qc-v001",
+    "status": "passed",
+    "instructionCount": 2,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "instructionEvidence": [
+      {
+        "instructionId": "distant-connection-003-presentation-instruction-001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 172,
+          "top": 842,
+          "right": 1734,
+          "bottom": 975,
+          "width": 1562,
+          "height": 133
+        },
+        "lineCount": 1,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 172,
+            "top": 842,
+            "right": 1734,
+            "bottom": 975,
+            "width": 1562,
+            "height": 133
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 89,
+        "changedPixelsAgainstInstructionOmittedFrame": 205084,
+        "appliedOverlayPropsCanonicalSha256": "fdb5fe8fd56cff9c5118e1ffa635962973de425b0448f231609e3ee6ef49ad04",
+        "applicationOverlayFile": "overlays/01-a091edca5c99.png",
+        "inspectedOverlayFile": "overlays/01-a091edca5c99.png",
+        "applicationOverlaySha256": "bc33643a6d2043eee57dcdf0e942af0a541197c7b31390a493e3b5b0fcfbaeac",
+        "overlaySha256": "bc33643a6d2043eee57dcdf0e942af0a541197c7b31390a493e3b5b0fcfbaeac"
+      },
+      {
+        "instructionId": "distant-connection-003-presentation-instruction-002",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 153,
+          "top": 700,
+          "right": 1739,
+          "bottom": 975,
+          "width": 1586,
+          "height": 275
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 153,
+            "top": 700,
+            "right": 1739,
+            "bottom": 831,
+            "width": 1586,
+            "height": 131
+          },
+          {
+            "lineIndex": 1,
+            "left": 778,
+            "top": 844,
+            "right": 1128,
+            "bottom": 975,
+            "width": 350,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 287,
+        "changedPixelsAgainstInstructionOmittedFrame": 433452,
+        "appliedOverlayPropsCanonicalSha256": "90e077a3186622a14709b590dd7491568932cd82bd14fbae373f6ade1614535f",
+        "applicationOverlayFile": "overlays/02-a1a143598f26.png",
+        "inspectedOverlayFile": "overlays/02-a1a143598f26.png",
+        "applicationOverlaySha256": "d3b70117edb87f7999b4880189b805241052c8bcd1e54fbf6c84f675ea62020e",
+        "overlaySha256": "d3b70117edb87f7999b4880189b805241052c8bcd1e54fbf6c84f675ea62020e"
+      }
+    ],
+    "mediaEvidence": {
+      "observed": {
+        "durationMs": 11266,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 338
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "c9252a3d36792f6665fe884b281f1f1258ee082e4c6ed309b7bdaf20bf3f5064"
+        }
+      },
+      "expectedAudio": {
+        "present": true,
+        "codecName": "aac",
+        "packetPayloadSha256": "c9252a3d36792f6665fe884b281f1f1258ee082e4c6ed309b7bdaf20bf3f5064"
+      },
+      "expectedFrameCount": 338
+    },
+    "violations": []
+  }
+}

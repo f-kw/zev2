@@ -278,8 +278,8 @@ export function buildDistantConnectionVideoPrototypePlanV001(
     sourcePackagePath: input.sourcePackagePath,
     sourcePackageBytes: input.sourcePackageBytes
   });
-  if (response.sourceVideoId !== sourcePackage.sourceVideoId || response.candidates.length !== 2) {
-    fail('動画試作対象は実配信の正式候補2件である必要があります');
+  if (response.sourceVideoId !== sourcePackage.sourceVideoId || response.candidates.length === 0) {
+    fail('動画試作対象は同一実配信の1件以上の正式候補である必要があります');
   }
   const byId = new Map(semantic.utterances.map((row) => [row.utteranceId, row]));
   const maxCueWidth = input.maxLogicalWidthPerLine * input.maxLines;

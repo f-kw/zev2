@@ -35,9 +35,16 @@ import {createPresentationRendererProcessObserverV001}
 
 const workspaceRoot = path.resolve(import.meta.dirname, '../..');
 const relative = (absolutePath: string) => path.relative(workspaceRoot, absolutePath);
+const buildMode = process.argv[2] ?? 'intervalization-improvement';
+if (!['intervalization-improvement', 'short-form-viability'].includes(buildMode)) {
+  throw new Error(`unknown build mode: ${buildMode}`);
+}
+const isShortFormViability = buildMode === 'short-form-viability';
 const candidateResponsePath = path.join(
   workspaceRoot,
-  'evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/candidate-response-v001.json'
+  isShortFormViability
+    ? 'evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-short-form-viability-ymUsGrT6EaA-v001/candidate-response-v001.json'
+    : 'evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/candidate-response-v001.json'
 );
 const semanticUtterancePath = path.join(
   workspaceRoot,
@@ -45,7 +52,9 @@ const semanticUtterancePath = path.join(
 );
 const sourcePackagePath = path.join(
   workspaceRoot,
-  'evals/clip_composition/outputs/work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/source-package-v001.json'
+  isShortFormViability
+    ? 'evals/clip_composition/outputs/work-distant-connection-luna-source-package-short-form-viability-ymUsGrT6EaA-v001/source-package-v001.json'
+    : 'evals/clip_composition/outputs/work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/source-package-v001.json'
 );
 const sourceVideoPath = path.join(
   workspaceRoot,
@@ -65,14 +74,20 @@ const rendererTrustPath = path.join(
 );
 const outputRoot = path.join(
   workspaceRoot,
-  'evals/clip_composition/outputs/presentation/distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001'
+  isShortFormViability
+    ? 'evals/clip_composition/outputs/presentation/distant-connection-video-prototype-short-form-viability-ymUsGrT6EaA-v001'
+    : 'evals/clip_composition/outputs/presentation/distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001'
 );
 const temporaryRoot = path.join(
   workspaceRoot,
-  'evals/clip_composition/outputs/presentation/.distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001.work'
+  isShortFormViability
+    ? 'evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-short-form-viability-ymUsGrT6EaA-v001.work'
+    : 'evals/clip_composition/outputs/presentation/.distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001.work'
 );
 
-const expectedCandidateSha = '8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d';
+const expectedCandidateSha = isShortFormViability
+  ? 'a73fef9ac2c1d12b46b49b0d0dab9eb6f0293aa34b89425296717fc1334b8d49'
+  : '8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d';
 const expectedSemanticSha = 'e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2';
 const expectedSourceVideoSha = '79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537';
 const styleProfileId = 'normal-landscape-readable-pop-v001';
@@ -87,7 +102,7 @@ type SemanticRow = {
   sourceSegmentIds: number[];
 };
 
-const intervalizationDecisions = {
+const intervalizationImprovementDecisions = {
   'camera-fear-escalation': {
     formalSecondStartMs: 1_412_798,
     formalSecondEndMs: 1_426_409,
@@ -111,6 +126,46 @@ const intervalizationDecisions = {
     boundaryReason: '文書の読み上げが始まる「ここから出られない」から、読み上げ内容への反応「バケモノ肯定派がいるん?」が終わりゲーム操作へ戻る直前まで。'
   }
 } as const;
+
+const shortFormViabilityDecisions = {
+  'distant-connection-001': {
+    formalSecondStartMs: 963_664,
+    formalSecondEndMs: 964_925,
+    improvedSecondStartMs: 958_000,
+    improvedSecondEndMs: 967_666,
+    semanticStartOrdinal: 2_003,
+    semanticEndOrdinal: 2_026,
+    classification: 'SHORT_FORM_INTERVALIZATION_LIMIT_POSSIBLE',
+    observedCause: '正式後半の直前約5.7秒から映像を確認したが、赤い女が明確に出現する決定的な映像は確認できず、暗い通路から赤みのある区域へ進む場面だった。発話だけを切る問題は補えるが、Lunaが説明した強い回収が映像に存在するかは人間判断が必要。',
+    boundaryReason: '暗い通路から該当区域へ接近する時点を開始とし、「サムネにも顔赤いやついたわ」の自然な終端までを含める。無関係な探索を追加せず、区間化だけで約束した回収を作らない。'
+  },
+  'distant-connection-002': {
+    formalSecondStartMs: 5_681_391,
+    formalSecondEndMs: 5_694_838,
+    improvedSecondStartMs: 5_681_391,
+    improvedSecondEndMs: 5_698_719,
+    semanticStartOrdinal: 9_109,
+    semanticEndOrdinal: 9_177,
+    classification: 'NATURAL_SENTENCE_END_EXTENSION',
+    observedCause: '正式後半は画面内の物語文を読み上げる一続きの場面だが、「可哀想な子供」で文が途中終了していた。映像上の原因イベントは別に存在せず、必要なのは読み上げ文の自然な終端だった。',
+    boundaryReason: '開始は正式候補のまま維持し、事故に遭った子供について「若くして命を落とした」まで読了する時点へ約3.9秒だけ延長する。後続の長い怪異説明までは含めない。'
+  },
+  'distant-connection-003': {
+    formalSecondStartMs: 1_029_974,
+    formalSecondEndMs: 1_032_976,
+    improvedSecondStartMs: 1_028_000,
+    improvedSecondEndMs: 1_033_336,
+    semanticStartOrdinal: 2_076,
+    semanticEndOrdinal: 2_096,
+    classification: 'MINIMAL_VISUAL_LEAD_AND_REACTION_EXTENSION',
+    observedCause: '正式後半は赤い照明の通路を探索中の発話で、直前約2秒の映像が場所と移動方向を示していた。発話直後の「また風船」までが同じ反応単位で、それより後の怪物反応は別の出来事だった。',
+    boundaryReason: '赤い通路へ入った直後を開始とし、正式発話と直後の「また風船」が完結する時点で終了する。後続の別の怪物反応は追加しない。'
+  }
+} as const;
+
+const intervalizationDecisions = isShortFormViability
+  ? shortFormViabilityDecisions
+  : intervalizationImprovementDecisions;
 
 function sha256(bytes: Uint8Array | string): string {
   return createHash('sha256').update(bytes).digest('hex');
@@ -461,9 +516,21 @@ function buildReviewHtml(results: any[]): string {
     <section><h2>前を付けることで分かること</h2><p>${escapeHtml(result.addedUnderstanding)}</p></section>
     <p class="sha">video SHA-256 ${escapeHtml(result.video.fileSha256)}</p>
   </article>`).join('\n');
+  const pageTitle = isShortFormViability
+    ? 'ymUsGrT6EaA 遠方接続 短尺成立条件3候補'
+    : 'ymUsGrT6EaA 遠方接続 区間化改善版';
+  const heading = isShortFormViability
+    ? '遠方接続 — 短尺成立条件反映後の3候補'
+    : '遠方接続 — 区間化改善版2件';
+  const lead = isShortFormViability
+    ? '短尺成立条件を追加したLuna候補を、原因映像・導入文脈・自然な終端を落とさない最小区間で動画化しました。正式候補の発話IDは変更していません。'
+    : 'Lunaが選んだ意味上の発話は変えず、実際の映像イベント・導入文脈・自然な終端を後半動画へ補いました。旧動画は保持されています。';
+  const reviewPoints = isShortFormViability
+    ? '①前→後だけで接続を理解できるか　②前半で後半の理解・回収感・面白さが増えるか　③余計な説明を必要としないか　④短尺としてテンポを壊していないか'
+    : '重要場面を含めたことで接続が成立したか／それでも接続自体が弱いか。候補の正式採否はまだ行いません。';
   return `<!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ymUsGrT6EaA 遠方接続 区間化改善版</title><style>
+<title>${escapeHtml(pageTitle)}</title><style>
 :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#080b13;color:#eef3ff}
 body{margin:0;padding:32px;background:linear-gradient(145deg,#080b13,#111b33)}main{max-width:1320px;margin:auto}
 h1{margin:0 0 8px;font-size:32px}.lead{color:#bdc9e3;margin:0 0 24px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(500px,1fr));gap:22px}
@@ -471,9 +538,9 @@ article{background:#10182a;border:1px solid #334363;border-radius:16px;padding:1
 .candidate{font:700 18px ui-monospace,SFMono-Regular,Menlo,monospace}.passed{color:#78e7aa}video{display:block;width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;margin:16px 0}
 .times{line-height:1.8;color:#d6e1f7}h2{font-size:15px;color:#9db6e8;margin:16px 0 6px}.speech{padding:10px 12px;background:#0b1221;border-radius:8px}.speech.improved{border-left:4px solid #78a6ff}.speech p{line-height:1.7}.sha{font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8393b5;word-break:break-all}
 .check{margin-top:24px;padding:16px 20px;border-left:4px solid #78a6ff;background:#0d1528;border-radius:8px}
-</style></head><body><main><h1>遠方接続 — 区間化改善版2件</h1>
-<p class="lead">Lunaが選んだ意味上の発話は変えず、実際の映像イベント・導入文脈・自然な終端を後半動画へ補いました。旧動画は保持されています。</p>
-<section class="grid">${cards}</section><section class="check"><strong>見る点</strong>：重要場面を含めたことで接続が成立したか／それでも接続自体が弱いか。候補の正式採否はまだ行いません。</section>
+</style></head><body><main><h1>${escapeHtml(heading)}</h1>
+<p class="lead">${escapeHtml(lead)}</p>
+<section class="grid">${cards}</section><section class="check"><strong>見る点</strong>：${escapeHtml(reviewPoints)}</section>
 </main></body></html>\n`;
 }
 
@@ -772,7 +839,8 @@ async function main() {
     candidates: results,
     reviewPage: {path: relative(reviewPath), fileSha256: sha256(reviewHtml)},
     qc: {
-      status: results.length === 2 && results.every((row) => row.qc.status === 'passed')
+      status: results.length === plan.candidates.length
+        && results.every((row) => row.qc.status === 'passed')
         ? 'passed' : 'failed',
       candidateOrderMatchesFormalResponse: results.map((row) => row.candidateId).join(',')
         === plan.candidates.map((row) => row.candidateId).join(','),

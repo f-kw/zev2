@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "distant-connection-video-prototype-qc-v001",
+  "status": "passed",
+  "instructionCount": 2,
+  "checks": {
+    "instructionApplication": {
+      "status": "passed"
+    },
+    "layoutAndVisibility": {
+      "status": "passed"
+    },
+    "media": {
+      "status": "passed"
+    }
+  },
+  "instructionEvidence": [
+    {
+      "instructionId": "distant-connection-001-presentation-instruction-001",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 124,
+        "top": 698,
+        "right": 1782,
+        "bottom": 975,
+        "width": 1658,
+        "height": 277
+      },
+      "lineCount": 2,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 124,
+          "top": 698,
+          "right": 1782,
+          "bottom": 831,
+          "width": 1658,
+          "height": 133
+        },
+        {
+          "lineIndex": 1,
+          "left": 429,
+          "top": 844,
+          "right": 1502,
+          "bottom": 975,
+          "width": 1073,
+          "height": 131
+        }
+      ],
+      "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+      "representativeFrame": 236,
+      "changedPixelsAgainstInstructionOmittedFrame": 454180,
+      "appliedOverlayPropsCanonicalSha256": "a228f9ae69b9ec43eab94aab5b61085294b89dbcf9fedc9301b92bbb8c1c51b3",
+      "applicationOverlayFile": "overlays/01-a154ca25507b.png",
+      "inspectedOverlayFile": "overlays/01-a154ca25507b.png",
+      "applicationOverlaySha256": "36a50a23f9f16ee3ccbe4d1f55457858e8810fdb88bef516156dd9e0538f41fb",
+      "overlaySha256": "36a50a23f9f16ee3ccbe4d1f55457858e8810fdb88bef516156dd9e0538f41fb"
+    },
+    {
+      "instructionId": "distant-connection-001-presentation-instruction-002",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 124,
+        "top": 700,
+        "right": 1766,
+        "bottom": 975,
+        "width": 1642,
+        "height": 275
+      },
+      "lineCount": 2,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 124,
+          "top": 700,
+          "right": 1766,
+          "bottom": 831,
+          "width": 1642,
+          "height": 131
+        },
+        {
+          "lineIndex": 1,
+          "left": 604,
+          "top": 844,
+          "right": 1310,
+          "bottom": 975,
+          "width": 706,
+          "height": 131
+        }
+      ],
+      "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+      "representativeFrame": 702,
+      "changedPixelsAgainstInstructionOmittedFrame": 448327,
+      "appliedOverlayPropsCanonicalSha256": "a36370dbc77a3633a207b506143103372af696834c792505c4f4b3e18a990ab6",
+      "applicationOverlayFile": "overlays/02-39fdb5965d47.png",
+      "inspectedOverlayFile": "overlays/02-39fdb5965d47.png",
+      "applicationOverlaySha256": "04759101bef59f8668258e82c4db5872b102000319bb6c7230b23e33885ccf61",
+      "overlaySha256": "04759101bef59f8668258e82c4db5872b102000319bb6c7230b23e33885ccf61"
+    }
+  ],
+  "mediaEvidence": {
+    "observed": {
+      "durationMs": 25400,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 762
+      },
+      "audio": {
+        "codecName": "aac",
+        "packetPayloadSha256": "ea73f5ec8ec1386589783c6ea30702ceb07fd32232d26b3587a109a0d085d464"
+      }
+    },
+    "expectedAudio": {
+      "present": true,
+      "codecName": "aac",
+      "packetPayloadSha256": "ea73f5ec8ec1386589783c6ea30702ceb07fd32232d26b3587a109a0d085d464"
+    },
+    "expectedFrameCount": 762
+  },
+  "violations": []
+}
