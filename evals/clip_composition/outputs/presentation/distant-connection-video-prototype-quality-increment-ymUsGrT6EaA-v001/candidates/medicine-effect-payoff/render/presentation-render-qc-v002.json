@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "distant-connection-video-prototype-qc-v001",
+  "status": "passed",
+  "instructionCount": 3,
+  "checks": {
+    "instructionApplication": {
+      "status": "passed"
+    },
+    "layoutAndVisibility": {
+      "status": "passed"
+    },
+    "media": {
+      "status": "passed"
+    }
+  },
+  "instructionEvidence": [
+    {
+      "instructionId": "medicine-effect-payoff-presentation-instruction-001",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 94,
+        "top": 698,
+        "right": 1815,
+        "bottom": 975,
+        "width": 1721,
+        "height": 277
+      },
+      "lineCount": 2,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 99,
+          "top": 698,
+          "right": 1814,
+          "bottom": 830,
+          "width": 1715,
+          "height": 132
+        },
+        {
+          "lineIndex": 1,
+          "left": 94,
+          "top": 844,
+          "right": 1815,
+          "bottom": 975,
+          "width": 1721,
+          "height": 131
+        }
+      ],
+      "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+      "representativeFrame": 80,
+      "changedPixelsAgainstInstructionOmittedFrame": 470300,
+      "appliedOverlayPropsCanonicalSha256": "b8644f576a02bfb178316262ec3409b4cd8627f6ad1bf51527d952c5a230b371",
+      "applicationOverlayFile": "overlays/01-3b7302fdaae8.png",
+      "inspectedOverlayFile": "overlays/01-3b7302fdaae8.png",
+      "applicationOverlaySha256": "0fd015bea80f113d4c2664f2259fa2e14b7076713b4ff1530ad142c51704e308",
+      "overlaySha256": "0fd015bea80f113d4c2664f2259fa2e14b7076713b4ff1530ad142c51704e308"
+    },
+    {
+      "instructionId": "medicine-effect-payoff-presentation-instruction-002",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 608,
+        "top": 844,
+        "right": 1307,
+        "bottom": 975,
+        "width": 699,
+        "height": 131
+      },
+      "lineCount": 1,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 608,
+          "top": 844,
+          "right": 1307,
+          "bottom": 975,
+          "width": 699,
+          "height": 131
+        }
+      ],
+      "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+      "representativeFrame": 172,
+      "changedPixelsAgainstInstructionOmittedFrame": 90692,
+      "appliedOverlayPropsCanonicalSha256": "38aadf4dae3ceaafe6dcc78e3843e945c9bd5c67e32889c71ad25603b2bcb717",
+      "applicationOverlayFile": "overlays/02-943dd1af9eb5.png",
+      "inspectedOverlayFile": "overlays/02-943dd1af9eb5.png",
+      "applicationOverlaySha256": "fefa925faed849f75a944452b5b5d83430b5aafd5f30edb14c73b6de7821ab07",
+      "overlaySha256": "fefa925faed849f75a944452b5b5d83430b5aafd5f30edb14c73b6de7821ab07"
+    },
+    {
+      "instructionId": "medicine-effect-payoff-presentation-instruction-003",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 317,
+        "top": 844,
+        "right": 1598,
+        "bottom": 975,
+        "width": 1281,
+        "height": 131
+      },
+      "lineCount": 1,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 317,
+          "top": 844,
+          "right": 1598,
+          "bottom": 975,
+          "width": 1281,
+          "height": 131
+        }
+      ],
+      "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+      "representativeFrame": 209,
+      "changedPixelsAgainstInstructionOmittedFrame": 164641,
+      "appliedOverlayPropsCanonicalSha256": "952842b07588cb56730d806f246d8eba9ffafaf7321033da084c38d8ea9ee39e",
+      "applicationOverlayFile": "overlays/03-5b1ba9e2daeb.png",
+      "inspectedOverlayFile": "overlays/03-5b1ba9e2daeb.png",
+      "applicationOverlaySha256": "5123363d3452568f3fe24ea9fa09b66da1d48bdc3f65ad1f7f67a2bb3e7ffc24",
+      "overlaySha256": "5123363d3452568f3fe24ea9fa09b66da1d48bdc3f65ad1f7f67a2bb3e7ffc24"
+    }
+  ],
+  "mediaEvidence": {
+    "observed": {
+      "durationMs": 7833,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 235
+      },
+      "audio": {
+        "codecName": "aac",
+        "packetPayloadSha256": "c02a218f1cdaf40b361a09873e9c3dce2ef88623c6ff5e51570712ed183939ca"
+      }
+    },
+    "expectedAudio": {
+      "present": true,
+      "codecName": "aac",
+      "packetPayloadSha256": "c02a218f1cdaf40b361a09873e9c3dce2ef88623c6ff5e51570712ed183939ca"
+    },
+    "expectedFrameCount": 235
+  },
+  "violations": []
+}

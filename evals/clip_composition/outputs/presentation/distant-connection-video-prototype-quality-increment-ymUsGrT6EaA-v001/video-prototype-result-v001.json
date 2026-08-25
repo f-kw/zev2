@@ -1,0 +1,573 @@
+{
+  "schemaVersion": "distant-connection-video-prototype-result-v001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "sourceBindings": {
+    "sourceVideo": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    },
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "fileSha256": "8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d"
+    },
+    "semanticUtterance": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-semantic-utterance-ymUsGrT6EaA-v001/semantic-utterance-artifact-v001.json",
+      "fileSha256": "e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2"
+    },
+    "sourcePackage": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/source-package-v001.json",
+      "fileSha256": "49d5686cce07177433ce707e84bad8f47c16aab059428026b7e83344cbd9e532"
+    },
+    "prototypePlan": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-quality-increment-ymUsGrT6EaA-v001/video-prototype-plan-v001.json",
+      "fileSha256": "c85fb7b94fdebf61746b109156adb8cca90aa2cdb618ab2b3e13f90f710c54ef"
+    }
+  },
+  "intervalPolicy": {
+    "selection": "candidate-selected-formal-utterance-closure",
+    "expansionApplied": false,
+    "reason": "両候補の前半・後半はいずれも連続する正式発話で意味が閉じており、追加文脈を発明せず候補範囲をそのまま使用する。"
+  },
+  "physicalLayoutSelection": {
+    "method": "highest-integer-logical-width-passing-existing-physical-layout-preflight",
+    "registryMaximum": 36,
+    "selectedMaximum": 35,
+    "candidateInspections": [
+      {
+        "candidateId": "camera-fear-escalation",
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "passed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "top": 40,
+            "right": 80,
+            "bottom": 40,
+            "left": 80
+          }
+        },
+        "items": [
+          {
+            "instructionId": "camera-fear-escalation-presentation-instruction-001",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 124,
+                "top": 671.2,
+                "right": 1796,
+                "bottom": 807.2
+              },
+              {
+                "left": 604,
+                "top": 815.2,
+                "right": 1316,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 667.2,
+              "left": 120,
+              "width": 1680,
+              "height": 308
+            }
+          },
+          {
+            "instructionId": "camera-fear-escalation-presentation-instruction-002",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 124,
+                "top": 671.2,
+                "right": 1796,
+                "bottom": 807.2
+              },
+              {
+                "left": 100,
+                "top": 815.2,
+                "right": 1820,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 667.2,
+              "left": 96,
+              "width": 1728,
+              "height": 308
+            }
+          },
+          {
+            "instructionId": "camera-fear-escalation-presentation-instruction-003",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 652,
+                "top": 815.2,
+                "right": 1268,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 648,
+              "width": 624,
+              "height": 164
+            }
+          }
+        ],
+        "violations": []
+      },
+      {
+        "candidateId": "medicine-effect-payoff",
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "passed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "top": 40,
+            "right": 80,
+            "bottom": 40,
+            "left": 80
+          }
+        },
+        "items": [
+          {
+            "instructionId": "medicine-effect-payoff-presentation-instruction-001",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 100,
+                "top": 671.2,
+                "right": 1820,
+                "bottom": 807.2
+              },
+              {
+                "left": 100,
+                "top": 815.2,
+                "right": 1820,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 667.2,
+              "left": 96,
+              "width": 1728,
+              "height": 308
+            }
+          },
+          {
+            "instructionId": "medicine-effect-payoff-presentation-instruction-002",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 604,
+                "top": 815.2,
+                "right": 1316,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 600,
+              "width": 720,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "medicine-effect-payoff-presentation-instruction-003",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 316,
+                "top": 815.2,
+                "right": 1604,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 312,
+              "width": 1296,
+              "height": 164
+            }
+          }
+        ],
+        "violations": []
+      }
+    ]
+  },
+  "candidateCount": 2,
+  "candidates": [
+    {
+      "candidateId": "camera-fear-escalation",
+      "anchorId": "comment-anchor-001182",
+      "direction": "future",
+      "addedUnderstanding": "前半でカメラによるビビらせ演出を嫌がっていることを見せておくと、後半で本人が「今年一怖すぎる」と評価する怖さが、単なるゲーム紹介ではなく、実際に恐怖が予想を上回った反応として回収される。",
+      "firstPart": {
+        "sourceStartMs": 664354,
+        "sourceEndMs": 671316,
+        "text": "え、このカメラもさね、ビビらせる感じやめてほしい",
+        "semanticUtteranceIds": [
+          "semantic-utterance-001182",
+          "semantic-utterance-001183",
+          "semantic-utterance-001184",
+          "semantic-utterance-001185",
+          "semantic-utterance-001186",
+          "semantic-utterance-001187",
+          "semantic-utterance-001188",
+          "semantic-utterance-001189",
+          "semantic-utterance-001190",
+          "semantic-utterance-001191",
+          "semantic-utterance-001192",
+          "semantic-utterance-001193",
+          "semantic-utterance-001194",
+          "semantic-utterance-001195",
+          "semantic-utterance-001196",
+          "semantic-utterance-001197",
+          "semantic-utterance-001198",
+          "semantic-utterance-001199",
+          "semantic-utterance-001200",
+          "semantic-utterance-001201",
+          "semantic-utterance-001202",
+          "semantic-utterance-001203",
+          "semantic-utterance-001204",
+          "semantic-utterance-001205"
+        ],
+        "sourceSegmentIds": [
+          1182,
+          1183,
+          1184,
+          1185,
+          1186,
+          1187,
+          1188,
+          1189,
+          1190,
+          1191,
+          1192,
+          1193,
+          1194,
+          1195,
+          1196,
+          1197,
+          1198,
+          1199,
+          1200,
+          1201,
+          1202,
+          1203,
+          1204,
+          1205
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "secondPart": {
+        "sourceStartMs": 1412798,
+        "sourceEndMs": 1426409,
+        "text": "マジ今んところ今年一怖すぎて笑ったビデオ見る気?もう勘弁してよ夜中になんか映るよう",
+        "semanticUtteranceIds": [
+          "semantic-utterance-002766",
+          "semantic-utterance-002767",
+          "semantic-utterance-002768",
+          "semantic-utterance-002769",
+          "semantic-utterance-002770",
+          "semantic-utterance-002771",
+          "semantic-utterance-002772",
+          "semantic-utterance-002773",
+          "semantic-utterance-002774",
+          "semantic-utterance-002775",
+          "semantic-utterance-002776",
+          "semantic-utterance-002777",
+          "semantic-utterance-002778",
+          "semantic-utterance-002779",
+          "semantic-utterance-002780",
+          "semantic-utterance-002781",
+          "semantic-utterance-002782",
+          "semantic-utterance-002783",
+          "semantic-utterance-002784",
+          "semantic-utterance-002785",
+          "semantic-utterance-002786",
+          "semantic-utterance-002787",
+          "semantic-utterance-002788",
+          "semantic-utterance-002789",
+          "semantic-utterance-002790",
+          "semantic-utterance-002791",
+          "semantic-utterance-002792",
+          "semantic-utterance-002793",
+          "semantic-utterance-002794",
+          "semantic-utterance-002795",
+          "semantic-utterance-002796",
+          "semantic-utterance-002797",
+          "semantic-utterance-002798",
+          "semantic-utterance-002799",
+          "semantic-utterance-002800",
+          "semantic-utterance-002801",
+          "semantic-utterance-002802",
+          "semantic-utterance-002803",
+          "semantic-utterance-002804",
+          "semantic-utterance-002805",
+          "semantic-utterance-002806"
+        ],
+        "sourceSegmentIds": [
+          2766,
+          2767,
+          2768,
+          2769,
+          2770,
+          2771,
+          2772,
+          2773,
+          2774,
+          2775,
+          2776,
+          2777,
+          2778,
+          2779,
+          2780,
+          2781,
+          2782,
+          2783,
+          2784,
+          2785,
+          2786,
+          2787,
+          2788,
+          2789,
+          2790,
+          2791,
+          2792,
+          2793,
+          2794,
+          2795,
+          2796,
+          2797,
+          2798,
+          2799,
+          2800,
+          2801,
+          2802,
+          2803,
+          2804,
+          2805,
+          2806
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "gapMs": 741482,
+      "videoRelativePath": "candidates/camera-fear-escalation/render/presentation-rendered-v002.mp4",
+      "video": {
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-quality-increment-ymUsGrT6EaA-v001/candidates/camera-fear-escalation/render/presentation-rendered-v002.mp4",
+        "fileSha256": "9beb26b47aa74c124c734e1dc90d9050e0b0678214a1ef6b8b329009acf398ed"
+      },
+      "media": {
+        "durationMs": 20566,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 617
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "b577c458eabab2b2ba3011f5a08730bdfdb3033fd8d04e2624098a6059aca822"
+        }
+      },
+      "qc": {
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-quality-increment-ymUsGrT6EaA-v001/candidates/camera-fear-escalation/render/presentation-render-qc-v002.json",
+        "fileSha256": "9a61a047f7d0b745800b6fb5803e33e8889e7609a8177cb5722653f084694f33",
+        "status": "passed"
+      },
+      "processObservations": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-quality-increment-ymUsGrT6EaA-v001/candidates/camera-fear-escalation/process-observations-v001"
+    },
+    {
+      "candidateId": "medicine-effect-payoff",
+      "anchorId": "comment-anchor-003403",
+      "direction": "future",
+      "addedUnderstanding": "前半で薬品室に入り、痛みを抑えるための実を見つける流れを見せると、後半の「薬の効き目も切れかけている」が、突然の独り言ではなく、先に得た回復手段にも限界が来たという結果として分かる。",
+      "firstPart": {
+        "sourceStartMs": 1680130,
+        "sourceEndMs": 1686233,
+        "text": "え、なに?あーやばいかもーやばいとこ見ちゃった?ここは薬品室のようだ痛みの実を見つける",
+        "semanticUtteranceIds": [
+          "semantic-utterance-003403",
+          "semantic-utterance-003404",
+          "semantic-utterance-003405",
+          "semantic-utterance-003406",
+          "semantic-utterance-003407",
+          "semantic-utterance-003408",
+          "semantic-utterance-003409",
+          "semantic-utterance-003410",
+          "semantic-utterance-003411",
+          "semantic-utterance-003412",
+          "semantic-utterance-003413",
+          "semantic-utterance-003414",
+          "semantic-utterance-003415",
+          "semantic-utterance-003416",
+          "semantic-utterance-003417",
+          "semantic-utterance-003418",
+          "semantic-utterance-003419",
+          "semantic-utterance-003420",
+          "semantic-utterance-003421",
+          "semantic-utterance-003422",
+          "semantic-utterance-003423",
+          "semantic-utterance-003424",
+          "semantic-utterance-003425",
+          "semantic-utterance-003426",
+          "semantic-utterance-003427",
+          "semantic-utterance-003428",
+          "semantic-utterance-003429",
+          "semantic-utterance-003430",
+          "semantic-utterance-003431",
+          "semantic-utterance-003432",
+          "semantic-utterance-003433",
+          "semantic-utterance-003434",
+          "semantic-utterance-003435",
+          "semantic-utterance-003436",
+          "semantic-utterance-003437",
+          "semantic-utterance-003438",
+          "semantic-utterance-003439",
+          "semantic-utterance-003440",
+          "semantic-utterance-003441",
+          "semantic-utterance-003442",
+          "semantic-utterance-003443",
+          "semantic-utterance-003444",
+          "semantic-utterance-003445"
+        ],
+        "sourceSegmentIds": [
+          3403,
+          3404,
+          3405,
+          3406,
+          3407,
+          3408,
+          3409,
+          3410,
+          3411,
+          3412,
+          3413,
+          3414,
+          3415,
+          3416,
+          3417,
+          3418,
+          3419,
+          3420,
+          3421,
+          3422,
+          3423,
+          3424,
+          3425,
+          3426,
+          3427,
+          3428,
+          3429,
+          3430,
+          3431,
+          3432,
+          3433,
+          3434,
+          3435,
+          3436,
+          3437,
+          3438,
+          3439,
+          3440,
+          3441,
+          3442,
+          3443,
+          3444,
+          3445
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "secondPart": {
+        "sourceStartMs": 4398688,
+        "sourceEndMs": 4400430,
+        "text": "薬の効き目も切れかけている",
+        "semanticUtteranceIds": [
+          "semantic-utterance-007381",
+          "semantic-utterance-007382",
+          "semantic-utterance-007383",
+          "semantic-utterance-007384",
+          "semantic-utterance-007385",
+          "semantic-utterance-007386",
+          "semantic-utterance-007387",
+          "semantic-utterance-007388",
+          "semantic-utterance-007389",
+          "semantic-utterance-007390",
+          "semantic-utterance-007391",
+          "semantic-utterance-007392",
+          "semantic-utterance-007393"
+        ],
+        "sourceSegmentIds": [
+          7381,
+          7382,
+          7383,
+          7384,
+          7385,
+          7386,
+          7387,
+          7388,
+          7389,
+          7390,
+          7391,
+          7392,
+          7393
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "gapMs": 2712455,
+      "videoRelativePath": "candidates/medicine-effect-payoff/render/presentation-rendered-v002.mp4",
+      "video": {
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-quality-increment-ymUsGrT6EaA-v001/candidates/medicine-effect-payoff/render/presentation-rendered-v002.mp4",
+        "fileSha256": "15154d7352406c5bfa5b7cc6fc009f6795f58703835a7fb05b944a76a7a1ff15"
+      },
+      "media": {
+        "durationMs": 7833,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 235
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "c02a218f1cdaf40b361a09873e9c3dce2ef88623c6ff5e51570712ed183939ca"
+        }
+      },
+      "qc": {
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-quality-increment-ymUsGrT6EaA-v001/candidates/medicine-effect-payoff/render/presentation-render-qc-v002.json",
+        "fileSha256": "787706beef5209b9989e362d9abafdcc10a7fe4c5f42adfb52bd177cc230bae1",
+        "status": "passed"
+      },
+      "processObservations": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-quality-increment-ymUsGrT6EaA-v001/candidates/medicine-effect-payoff/process-observations-v001"
+    }
+  ],
+  "reviewPage": {
+    "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-quality-increment-ymUsGrT6EaA-v001/review.html",
+    "fileSha256": "7c3b45bd4e31102e1a3d32310a229097f9f06b0e67e9e1b3496b9165e55197ea"
+  },
+  "qc": {
+    "status": "passed",
+    "candidateOrderMatchesFormalResponse": true,
+    "sourceVideoShaMatches": true,
+    "candidateResponseShaMatches": true,
+    "semanticUtteranceShaMatches": true,
+    "unrelatedMiddleIntervalsIncluded": false,
+    "subtitlesUseApprovedExistingProfile": "normal-landscape-readable-pop-v001",
+    "apiCalls": 0,
+    "costUsd": 0,
+    "remoteOperations": 0
+  }
+}

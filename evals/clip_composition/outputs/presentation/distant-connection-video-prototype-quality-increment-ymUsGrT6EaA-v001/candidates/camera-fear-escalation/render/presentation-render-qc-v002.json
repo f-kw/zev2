@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "distant-connection-video-prototype-qc-v001",
+  "status": "passed",
+  "instructionCount": 3,
+  "checks": {
+    "instructionApplication": {
+      "status": "passed"
+    },
+    "layoutAndVisibility": {
+      "status": "passed"
+    },
+    "media": {
+      "status": "passed"
+    }
+  },
+  "instructionEvidence": [
+    {
+      "instructionId": "camera-fear-escalation-presentation-instruction-001",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 130,
+        "top": 699,
+        "right": 1788,
+        "bottom": 974,
+        "width": 1658,
+        "height": 275
+      },
+      "lineCount": 2,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 130,
+          "top": 699,
+          "right": 1788,
+          "bottom": 830,
+          "width": 1658,
+          "height": 131
+        },
+        {
+          "lineIndex": 1,
+          "left": 618,
+          "top": 845,
+          "right": 1304,
+          "bottom": 974,
+          "width": 686,
+          "height": 129
+        }
+      ],
+      "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+      "representativeFrame": 104,
+      "changedPixelsAgainstInstructionOmittedFrame": 454489,
+      "appliedOverlayPropsCanonicalSha256": "ec8e68df1535eaa537ed3153b9a596571e6fb3fd8b428941655e3dbade769428",
+      "applicationOverlayFile": "overlays/01-d480f873eb5a.png",
+      "inspectedOverlayFile": "overlays/01-d480f873eb5a.png",
+      "applicationOverlaySha256": "e1c10eddf05d1976a760eed18065fc14a4f0f0d9c9848040f5885e51f4eb47c1",
+      "overlaySha256": "e1c10eddf05d1976a760eed18065fc14a4f0f0d9c9848040f5885e51f4eb47c1"
+    },
+    {
+      "instructionId": "camera-fear-escalation-presentation-instruction-002",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 109,
+        "top": 698,
+        "right": 1801,
+        "bottom": 975,
+        "width": 1692,
+        "height": 277
+      },
+      "lineCount": 2,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 132,
+          "top": 698,
+          "right": 1785,
+          "bottom": 831,
+          "width": 1653,
+          "height": 133
+        },
+        {
+          "lineIndex": 1,
+          "left": 109,
+          "top": 842,
+          "right": 1801,
+          "bottom": 975,
+          "width": 1692,
+          "height": 133
+        }
+      ],
+      "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+      "representativeFrame": 404,
+      "changedPixelsAgainstInstructionOmittedFrame": 461357,
+      "appliedOverlayPropsCanonicalSha256": "87d800e1c44e23a73bc1d4ee65212d8247c4d8c7a92b862e3e3cf093d104ba0f",
+      "applicationOverlayFile": "overlays/02-d7e2999d6151.png",
+      "inspectedOverlayFile": "overlays/02-d7e2999d6151.png",
+      "applicationOverlaySha256": "dc864d1c001e9c92dfdfed0eddf4571a34708a30697d3379f0bc2b1423954823",
+      "overlaySha256": "dc864d1c001e9c92dfdfed0eddf4571a34708a30697d3379f0bc2b1423954823"
+    },
+    {
+      "instructionId": "camera-fear-escalation-presentation-instruction-003",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 656,
+        "top": 844,
+        "right": 1255,
+        "bottom": 975,
+        "width": 599,
+        "height": 131
+      },
+      "lineCount": 1,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 656,
+          "top": 844,
+          "right": 1255,
+          "bottom": 975,
+          "width": 599,
+          "height": 131
+        }
+      ],
+      "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+      "representativeFrame": 608,
+      "changedPixelsAgainstInstructionOmittedFrame": 77779,
+      "appliedOverlayPropsCanonicalSha256": "e5cf209e76d0a77c688cda18627ecad7a1a0a34e74afaaa333d2671c80668076",
+      "applicationOverlayFile": "overlays/03-44fb3539aa61.png",
+      "inspectedOverlayFile": "overlays/03-44fb3539aa61.png",
+      "applicationOverlaySha256": "b96857de9c2a10ce0232ae55c4a194589adb63185ff60397ec287003441ae3b9",
+      "overlaySha256": "b96857de9c2a10ce0232ae55c4a194589adb63185ff60397ec287003441ae3b9"
+    }
+  ],
+  "mediaEvidence": {
+    "observed": {
+      "durationMs": 20566,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 617
+      },
+      "audio": {
+        "codecName": "aac",
+        "packetPayloadSha256": "b577c458eabab2b2ba3011f5a08730bdfdb3033fd8d04e2624098a6059aca822"
+      }
+    },
+    "expectedAudio": {
+      "present": true,
+      "codecName": "aac",
+      "packetPayloadSha256": "b577c458eabab2b2ba3011f5a08730bdfdb3033fd8d04e2624098a6059aca822"
+    },
+    "expectedFrameCount": 617
+  },
+  "violations": []
+}
