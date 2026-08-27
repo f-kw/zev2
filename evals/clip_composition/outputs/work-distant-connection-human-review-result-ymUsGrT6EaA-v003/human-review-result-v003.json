@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "distant-connection-human-review-result-v003",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "reviewedAt": "2026-08-27",
+  "reviewer": "kawafmm",
+  "sourceBindings": {
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-short-form-viability-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "schemaVersion": "distant-connection-luna-response-v001",
+      "fileSha256": "a73fef9ac2c1d12b46b49b0d0dab9eb6f0293aa34b89425296717fc1334b8d49"
+    },
+    "videoPrototypeResult": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-short-form-viability-ymUsGrT6EaA-v001/video-intervalization-improvement-result-v001.json",
+      "schemaVersion": "distant-connection-video-intervalization-improvement-result-v001",
+      "fileSha256": "7bc9c46b3dce4d1cef650cdb1ff4a3e358f7295bbc54bf6c282045482dadc992"
+    },
+    "comparisonHumanReviewResultV002": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-human-review-result-ymUsGrT6EaA-v002/human-review-result-v002.json",
+      "schemaVersion": "distant-connection-human-review-result-v002",
+      "fileSha256": "fac03dc688f28e64831a7b8241cec560313cf7da3aacc585b30bf8efab270a92"
+    }
+  },
+  "candidateCount": 3,
+  "candidateReviews": [
+    {
+      "candidateId": "distant-connection-001",
+      "candidateSelection": "fail",
+      "primaryCause": "candidate-selection",
+      "reason": "後半に怖い対象・出来事が具体的に現れず、話題に触れただけである。前後をつなぐことによる理解・回収感・面白さの増分がない。"
+    },
+    {
+      "candidateId": "distant-connection-002",
+      "candidateSelection": "fail",
+      "primaryCause": "candidate-selection",
+      "reason": "前半の「子供が好きだった」だけでは人物・話題を特定できず、後半の悲劇を前半が補強する関係を短尺内で理解できない。"
+    },
+    {
+      "candidateId": "distant-connection-003",
+      "candidateSelection": "fail",
+      "primaryCause": "candidate-selection",
+      "reason": "「ホラーゲーム」という一般的な振りに対し、後半が具体的な恐怖場面として回収しておらず、単なる同一テーマの接続に留まる。"
+    }
+  ],
+  "selectionPrinciple": "単なる話題一致ではなく、前半に含まれる具体的な情報・出来事・予告・認識が、後半で具体的な回収・変化・結果として現れること。前半を置くことで、後半の理解・回収感・意外性・面白さが明確に増えること。",
+  "comparisonDistinction": "camera-fear-escalationは候補選択自体が正しく、必要な恐怖映像を区間化が落としていた。今回3件は区間化ではなく候補選択が主因で不合格である。"
+}
