@@ -95,6 +95,9 @@ const qualityTokenCountRoot =
 const shortFormTokenCountRoot =
   'evals/clip_composition/outputs/'
   + 'work-distant-connection-luna-b5-token-count-short-form-viability-ymUsGrT6EaA-v001';
+const concretePayoffTokenCountRoot =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-token-count-concrete-payoff-ymUsGrT6EaA-v001';
 
 function sha256(bytes: Uint8Array): string {
   return createHash('sha256').update(bytes).digest('hex');
@@ -646,5 +649,70 @@ test('短尺成立条件追加後のtoken計測を新exact requestへ束縛し�
   });
   assert.equal(evaluation.longContextPricing.applies, true);
   assert.equal(evaluation.b6MaximumCostProjection.projectedNanoUsd, 587_620_000);
+  assert.equal(evaluation.b6Admission.decision, 'pending-kawafmm-approval');
+});
+
+test('具体的回収条件追加後のtoken計測を新exact requestへ束縛し有料B6を承認待ちにする', async () => {
+  const [
+    exactRequestBytes,
+    manifestBytes,
+    projectionBytes,
+    rawBytes,
+    transportBytes,
+    processBytes,
+    measurementBytes,
+    evaluationBytes
+  ] = await Promise.all([
+    readFile(path.join(workspaceRoot, requestPath)),
+    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, concretePayoffTokenCountRoot,
+      'attempt-0001/input-token-count-request-v001.json')),
+    readFile(path.join(workspaceRoot, concretePayoffTokenCountRoot,
+      'attempt-0001/input-token-count-raw-response-v001.json')),
+    readFile(path.join(workspaceRoot, concretePayoffTokenCountRoot,
+      'attempt-0001/input-token-count-transport-v001.json')),
+    readFile(path.join(workspaceRoot, concretePayoffTokenCountRoot,
+      'attempt-0001/process-observation-v001.json')),
+    readFile(path.join(workspaceRoot, concretePayoffTokenCountRoot,
+      'input-token-count-measurement-v001.json')),
+    readFile(path.join(workspaceRoot, concretePayoffTokenCountRoot,
+      'input-token-count-evaluation-v001.json'))
+  ]);
+  const exactRequest = JSON.parse(exactRequestBytes.toString('utf8'));
+  const expectedProjection = structuredClone(exactRequest);
+  delete expectedProjection.store;
+  assert.deepEqual(JSON.parse(projectionBytes.toString('utf8')), expectedProjection);
+  assert.deepEqual(JSON.parse(rawBytes.toString('utf8')), {
+    object: 'response.input_tokens', input_tokens: 893_214
+  });
+  const transport = JSON.parse(transportBytes.toString('utf8'));
+  assert.equal(transport.http.status, 200);
+  assert.equal(transport.http.ok, true);
+  assert.equal(transport.apiCallNumberInConcretePayoffRevision, 1);
+  assert.equal(transport.rawResponseBinding.fileSha256, sha256(rawBytes));
+  assert.deepEqual(JSON.parse(processBytes.toString('utf8')), {
+    schemaVersion: 'process-observation-v001',
+    process: 'node:https OpenAI Responses input token count',
+    exitCode: 0,
+    signal: null,
+    stderr: '',
+    responseBodySavedBeforeRead: true
+  });
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
+  const measurement = JSON.parse(measurementBytes.toString('utf8'));
+  assertDistantConnectionLunaB5MeasurementV001(measurement, manifest);
+  assert.equal(measurement.tokenMeasurement.inputTokens, 893_214);
+  assert.equal(measurement.costEvaluation.projectedNanoUsd, 587_685_600);
+  const evaluation = JSON.parse(evaluationBytes.toString('utf8'));
+  assert.deepEqual(evaluation.contextEvaluation, {
+    inputTokens: 893_214,
+    contextWindowTokens: 1_050_000,
+    usageFraction: {numeratorTokens: 893_214, denominatorTokens: 1_050_000},
+    withinContextWindow: true,
+    excessTokens: 0,
+    remainingTokens: 156_786
+  });
+  assert.equal(evaluation.longContextPricing.applies, true);
+  assert.equal(evaluation.b6MaximumCostProjection.projectedNanoUsd, 587_685_600);
   assert.equal(evaluation.b6Admission.decision, 'pending-kawafmm-approval');
 });
