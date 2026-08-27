@@ -92,6 +92,19 @@ const shortFormB6Root =
 const shortFormRawResponsePath = `${shortFormB6Root}/attempt-0001/raw-response-v001.json`;
 const shortFormCandidateResponsePath = `${shortFormB6Root}/candidate-response-v001.json`;
 const shortFormRunManifestPath = `${shortFormB6Root}/b6-run-manifest-v001.json`;
+const concretePayoffTokenMeasurementPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-token-count-concrete-payoff-ymUsGrT6EaA-v001/'
+  + 'input-token-count-measurement-v001.json';
+const concretePayoffB6Root =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b6-candidates-concrete-payoff-ymUsGrT6EaA-v001';
+const concretePayoffRawResponsePath =
+  `${concretePayoffB6Root}/attempt-0001/raw-response-v001.json`;
+const concretePayoffCandidateResponsePath =
+  `${concretePayoffB6Root}/candidate-response-v001.json`;
+const concretePayoffRunManifestPath =
+  `${concretePayoffB6Root}/b6-run-manifest-v001.json`;
 
 function sha256(bytes: Uint8Array): string {
   return createHash('sha256').update(bytes).digest('hex');
@@ -395,6 +408,67 @@ test('短尺成立条件追加後の実配信B6一式を履歴としてbyte不�
   const transport = JSON.parse(transportBytes.toString('utf8'));
   assert.equal(transport.httpStatus, 200);
   assert.equal(transport.paidB6CallNumberInShortFormRevision, 1);
+  assert.equal(transport.rawResponseBinding.fileSha256, sha256(rawResponseBytes));
+  const process = JSON.parse(processBytes.toString('utf8'));
+  assert.equal(process.exitCode, 0);
+  assert.equal(process.signal, null);
+  assert.equal(process.stderr, '');
+  assert.equal(process.rawResponseSavedBeforeRead, true);
+});
+
+test('具体的回収条件追加後の実配信B6候補2件をstrict再構築し保存byteと一致させる', async () => {
+  const [
+    sourcePackageBytes,
+    requestBytes,
+    b5ManifestBytes,
+    tokenMeasurementBytes,
+    rawResponseBytes,
+    priceSnapshotBytes,
+    savedCandidateBytes,
+    savedManifestBytes,
+    transportBytes,
+    processBytes
+  ] = await Promise.all([
+    readFile(path.join(workspaceRoot, sourcePackagePath)),
+    readFile(path.join(workspaceRoot, requestPath)),
+    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, concretePayoffTokenMeasurementPath)),
+    readFile(path.join(workspaceRoot, concretePayoffRawResponsePath)),
+    readFile(path.join(workspaceRoot, priceSnapshotPath)),
+    readFile(path.join(workspaceRoot, concretePayoffCandidateResponsePath)),
+    readFile(path.join(workspaceRoot, concretePayoffRunManifestPath)),
+    readFile(path.join(workspaceRoot, concretePayoffB6Root,
+      'attempt-0001/transport-v001.json')),
+    readFile(path.join(workspaceRoot, concretePayoffB6Root,
+      'attempt-0001/process-observation-v001.json'))
+  ]);
+  const rebuilt = buildDistantConnectionLunaB6ResultArtifactsV001({
+    sourcePackagePath,
+    sourcePackageBytes,
+    requestPath,
+    requestBytes,
+    b5ManifestBytes,
+    tokenMeasurementPath: concretePayoffTokenMeasurementPath,
+    tokenMeasurementBytes,
+    rawResponsePath: concretePayoffRawResponsePath,
+    rawResponseBytes,
+    candidateResponsePath: concretePayoffCandidateResponsePath,
+    priceSnapshotPath,
+    priceSnapshotBytes,
+    maximumNanoUsd: 1_000_000_000
+  });
+  assert.equal(rebuilt.response.candidates.length, 2);
+  assert.equal(rebuilt.manifest.validation.decision, 'passed');
+  assert.equal(rebuilt.manifest.cost.totalUsd, 0.4519005);
+  assert.equal(rebuilt.manifest.cost.withinMaximum, true);
+  assert.deepEqual(rebuilt.responseBytes, savedCandidateBytes);
+  assert.deepEqual(rebuilt.manifestBytes, savedManifestBytes);
+  assert.equal(sha256(savedCandidateBytes), '4239b6b51d3dd3dd548a9083ac0434860182d497321a89cf07c8f53eb66586b8');
+  assert.equal(sha256(savedManifestBytes), '575e6aeb145a43083a6527adc187b2bcf923eaf771dc03d5ce1af6e3e88a31f5');
+  assert.equal(sha256(rawResponseBytes), '981a77b3e904025e41e0ccae54300722d0fe63becc7b8cda98d55dccb298c73e');
+  const transport = JSON.parse(transportBytes.toString('utf8'));
+  assert.equal(transport.httpStatus, 200);
+  assert.equal(transport.paidB6CallNumberInConcretePayoffRevision, 1);
   assert.equal(transport.rawResponseBinding.fileSha256, sha256(rawResponseBytes));
   const process = JSON.parse(processBytes.toString('utf8'));
   assert.equal(process.exitCode, 0);
