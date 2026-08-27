@@ -1,0 +1,158 @@
+[h264 @ 0x72d058380] Reinit context to 1920x1088, pix_fmt: yuv420p
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001.work/candidate-doctor-disappearance-to-ogre-mother/segment-1.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf62.3.100
+  Duration: 00:00:15.03, start: 0.000000, bitrate: 3540 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High), 1 reference frame (avc1 / 0x31637661), yuv420p(tv, bt709, progressive, left), 1920x1080 [SAR 1:1 DAR 16:9], 3401 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc62.11.100 libx264
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 129 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+[h264 @ 0x72d059180] Reinit context to 1920x1088, pix_fmt: yuv420p
+Input #1, mov,mp4,m4a,3gp,3g2,mj2, from '/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001.work/candidate-doctor-disappearance-to-ogre-mother/segment-2.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf62.3.100
+  Duration: 00:00:20.70, start: 0.000000, bitrate: 2029 kb/s
+  Stream #1:0[0x1](und): Video: h264 (High), 1 reference frame (avc1 / 0x31637661), yuv420p(tv, bt709, progressive, left), 1920x1080 [SAR 1:1 DAR 16:9], 1888 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc62.11.100 libx264
+  Stream #1:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 131 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+[out#0/mp4 @ 0x72d0206c0] Adding streams from explicit maps...
+[out#0/mp4 @ 0x72d0206c0] Creating output stream from an explicitly mapped complex filtergraph 0, output [v]
+[vost#0:0/libx264 @ 0x72ccd8000] Created video stream from complex filtergraph 0:[setpts:default]
+[vost#0:0/libx264 @ 0x72ccd8000] 
+[out#0/mp4 @ 0x72d0206c0] Creating output stream from an explicitly mapped complex filtergraph 0, output [a]
+[aost#0:1/aac @ 0x72ccd8300] Created audio stream from complex filtergraph 0:[asetpts:default]
+[aost#0:1/aac @ 0x72ccd8300] 
+[fc#0 @ 0x72d018000] Binding input with label '0:v:0' to input stream 0:0
+[fc#0 @ 0x72d018000] Binding input with label '0:a:0' to input stream 0:1
+[fc#0 @ 0x72d018000] Binding input with label '1:v:0' to input stream 1:0
+[fc#0 @ 0x72d018000] Binding input with label '1:a:0' to input stream 1:1
+Stream mapping:
+  Stream #0:0 (h264) -> concat
+  Stream #0:1 (aac) -> concat
+  Stream #1:0 (h264) -> concat
+  Stream #1:1 (aac) -> concat
+  setpts:default -> Stream #0:0 (libx264)
+  asetpts:default -> Stream #0:1 (aac)
+[vost#0:0/libx264 @ 0x72ccd8000] Starting thread...
+[aost#0:1/aac @ 0x72ccd8300] Starting thread...
+[fc#0 @ 0x72d018000] Starting thread...
+[vist#0:0/h264 @ 0x72d010c00] [dec:h264 @ 0x72cc24b40] Starting thread...
+[aist#0:1/aac @ 0x72d010a80] [dec:aac @ 0x72cc24c80] Starting thread...
+[vist#1:0/h264 @ 0x72d011380] [dec:h264 @ 0x72cc24dc0] Starting thread...
+[aist#1:1/aac @ 0x72d011200] [dec:aac @ 0x72cc24f00] Starting thread...
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc24000] Starting thread...
+[in#1/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc243c0] Starting thread...
+Press [q] to stop, [?] for help
+[h264 @ 0x72d05ad80] Reinit context to 1920x1088, pix_fmt: yuv420p
+[h264 @ 0x72d15aa00] Reinit context to 1920x1088, pix_fmt: yuv420p
+[graph 0 input from stream 0:0 @ 0x72d480cc0] w:1920 h:1080 pixfmt:yuv420p tb:1/15360 fr:30/1 sar:1/1 csp:bt709 range:tv
+[graph_0_in_0:1 @ 0x72d480d80] tb:1/44100 samplefmt:fltp samplerate:44100 chlayout:stereo
+[graph 0 input from stream 1:0 @ 0x72d480e40] w:1920 h:1080 pixfmt:yuv420p tb:1/15360 fr:30/1 sar:1/1 csp:bt709 range:tv
+[graph_0_in_1:1 @ 0x72d480f00] tb:1/44100 samplefmt:fltp samplerate:44100 chlayout:stereo
+[Parsed_trim_1 @ 0x72d4809c0] TB:0.000001 FRAME_RATE:30.000000 SAMPLE_RATE:nan
+[Parsed_atrim_3 @ 0x72d480b40] TB:0.000001 FRAME_RATE:nan SAMPLE_RATE:44100.000000
+[libx264 @ 0x72d059f80] using SAR=1/1
+[libx264 @ 0x72d059f80] using cpu capabilities: ARMv8 NEON DotProd I8MM
+[libx264 @ 0x72d059f80] profile High, level 4.0, 4:2:0, 8-bit
+[libx264 @ 0x72d059f80] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=2 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=6 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=21 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=30 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to '/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001.work/candidate-doctor-disappearance-to-ogre-mother/concatenated-base-media.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf62.3.100
+  Stream #0:0: Video: h264, 1 reference frame (avc1 / 0x31637661), yuv420p(tv, bt709, progressive, left), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+    Metadata:
+      encoder         : Lavc62.11.100 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, delay 1024, 128 kb/s
+    Metadata:
+      encoder         : Lavc62.11.100 aac
+[out#0/mp4 @ 0x72d0206c0] Starting thread...
+frame=  100 fps=0.0 q=26.0 size=    1280KiB time=00:00:03.26 bitrate=3210.0kbits/s speed=6.39x elapsed=0:00:00.51    frame=  251 fps=246 q=26.0 size=    3328KiB time=00:00:08.30 bitrate=3284.7kbits/s speed=8.13x elapsed=0:00:01.02    [in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc24000] EOF while reading input
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc24000] Terminating thread with return code 0 (success)
+[aist#0:1/aac @ 0x72d010a80] [dec:aac @ 0x72cc24c80] Decoder thread received EOF packet
+[aist#0:1/aac @ 0x72d010a80] [dec:aac @ 0x72cc24c80] Decoder returned EOF, finishing
+[aist#0:1/aac @ 0x72d010a80] [dec:aac @ 0x72cc24c80] Terminating thread with return code 0 (success)
+[vist#0:0/h264 @ 0x72d010c00] [dec:h264 @ 0x72cc24b40] Decoder thread received EOF packet
+[Parsed_concat_0 @ 0x72d480900] EOF on in0:a0, 1 streams left in segment.
+[vist#0:0/h264 @ 0x72d010c00] [dec:h264 @ 0x72cc24b40] Decoder returned EOF, finishing
+[vist#0:0/h264 @ 0x72d010c00] [dec:h264 @ 0x72cc24b40] Terminating thread with return code 0 (success)
+[Parsed_concat_0 @ 0x72d480900] EOF on in0:v0, 0 streams left in segment.
+[Parsed_concat_0 @ 0x72d480900] Segment finished at pts=15046531
+frame=  389 fps=255 q=26.0 size=    5120KiB time=00:00:12.90 bitrate=3251.4kbits/s speed=8.44x elapsed=0:00:01.52    frame=  570 fps=281 q=26.0 size=    7168KiB time=00:00:18.93 bitrate=3101.4kbits/s speed=9.32x elapsed=0:00:02.03    frame=  799 fps=315 q=26.0 size=    8960KiB time=00:00:26.56 bitrate=2762.9kbits/s speed=10.5x elapsed=0:00:02.53    [in#1/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc243c0] EOF while reading input
+[in#1/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc243c0] Terminating thread with return code 0 (success)
+[aist#1:1/aac @ 0x72d011200] [dec:aac @ 0x72cc24f00] Decoder thread received EOF packet
+[aist#1:1/aac @ 0x72d011200] [dec:aac @ 0x72cc24f00] Decoder returned EOF, finishing
+[aist#1:1/aac @ 0x72d011200] [dec:aac @ 0x72cc24f00] Terminating thread with return code 0 (success)
+[vist#1:0/h264 @ 0x72d011380] [dec:h264 @ 0x72cc24dc0] Decoder thread received EOF packet
+[vist#1:0/h264 @ 0x72d011380] [dec:h264 @ 0x72cc24dc0] Decoder returned EOF, finishing
+[vist#1:0/h264 @ 0x72d011380] [dec:h264 @ 0x72cc24dc0] Terminating thread with return code 0 (success)
+[Parsed_concat_0 @ 0x72d480900] EOF on in1:v0, 1 streams left in segment.
+[fc#0 @ 0x72d018000] Filtergraph returned EOF, finishing
+[fc#0 @ 0x72d018000] All consumers returned EOF
+[fc#0 @ 0x72d018000] Terminating thread with return code 0 (success)
+[aost#0:1/aac @ 0x72ccd8300] [enc:aac @ 0x72d0302a0] Encoder thread received EOF
+[aost#0:1/aac @ 0x72ccd8300] Terminating thread with return code 0 (success)
+[vost#0:0/libx264 @ 0x72ccd8000] [enc:libx264 @ 0x72d030150] Encoder thread received EOF
+frame= 1021 fps=335 q=26.0 size=   10752KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:03.04    [vost#0:0/libx264 @ 0x72ccd8000] Terminating thread with return code 0 (success)
+[out#0/mp4 @ 0x72d0206c0] All streams finished
+[out#0/mp4 @ 0x72d0206c0] Terminating thread with return code 0 (success)
+[mp4 @ 0x72d037c00] Starting second pass: moving the moov atom to the beginning of the file
+[AVIOContext @ 0x72cc25180] Statistics: 11345742 bytes read, 0 seeks
+[AVIOContext @ 0x72cc24a00] Statistics: 22731587 bytes written, 4 seeks, 91 writeouts
+[out#0/mp4 @ 0x72d0206c0] Output file #0 (/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001.work/candidate-doctor-disappearance-to-ogre-mother/concatenated-base-media.mp4):
+[out#0/mp4 @ 0x72d0206c0]   Output stream #0:0 (video): 1072 frames encoded; 1072 packets muxed (10759330 bytes); 
+[out#0/mp4 @ 0x72d0206c0]   Output stream #0:1 (audio): 1539 frames encoded (1575840 samples); 1540 packets muxed (586363 bytes); 
+[out#0/mp4 @ 0x72d0206c0]   Total: 2612 packets (11345693 bytes) muxed
+[out#0/mp4 @ 0x72d0206c0] video:10507KiB audio:573KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.354143%
+frame= 1072 fps=346 q=-1.0 Lsize=   11119KiB time=00:00:35.66 bitrate=2553.8kbits/s speed=11.5x elapsed=0:00:03.09    
+[libx264 @ 0x72d059f80] frame I:6     Avg QP:14.36  size:167168
+[libx264 @ 0x72d059f80] frame P:286   Avg QP:17.72  size: 23250
+[libx264 @ 0x72d059f80] frame B:780   Avg QP:20.33  size:  3982
+[libx264 @ 0x72d059f80] consecutive B-frames:  1.1%  5.0%  1.7% 92.2%
+[libx264 @ 0x72d059f80] mb I  I16..4: 16.9% 60.4% 22.7%
+[libx264 @ 0x72d059f80] mb P  I16..4:  2.3%  6.1%  0.4%  P16..4: 15.3%  5.8%  3.7%  0.0%  0.0%    skip:66.4%
+[libx264 @ 0x72d059f80] mb B  I16..4:  0.6%  0.4%  0.0%  B16..8:  7.8%  2.0%  0.4%  direct: 2.2%  skip:86.5%  L0:46.9% L1:41.8% BI:11.4%
+[libx264 @ 0x72d059f80] 8x8 transform intra:61.3% inter:47.8%
+[libx264 @ 0x72d059f80] coded y,uvDC,uvAC intra: 25.1% 19.6% 3.8% inter: 3.9% 3.9% 0.1%
+[libx264 @ 0x72d059f80] i16 v,h,dc,p: 53% 27% 12%  9%
+[libx264 @ 0x72d059f80] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 30% 17% 43%  1%  2%  1%  3%  1%  2%
+[libx264 @ 0x72d059f80] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 28% 17% 20%  5%  6%  7%  6%  6%  5%
+[libx264 @ 0x72d059f80] i8c dc,h,v,p: 71% 15% 13%  1%
+[libx264 @ 0x72d059f80] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0x72d059f80] ref P L0: 72.8% 27.2%
+[libx264 @ 0x72d059f80] ref B L0: 82.3% 17.7%
+[libx264 @ 0x72d059f80] ref B L1: 95.6%  4.4%
+[libx264 @ 0x72d059f80] kb/s:2408.65
+[aac @ 0x72d05a680] Qavg: 643.760
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc24000] Input file #0 (/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001.work/candidate-doctor-disappearance-to-ogre-mother/segment-1.mp4):
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc24000]   Input stream #0:0 (video): 451 packets read (6391792 bytes); 451 frames decoded; 0 decode errors; 
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc24000]   Input stream #0:1 (audio): 649 packets read (244450 bytes); 648 frames decoded; 0 decode errors (663552 samples); 
+[in#0/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc24000]   Total: 1100 packets (6636242 bytes) demuxed
+[AVIOContext @ 0x72cc24280] Statistics: 6653985 bytes read, 0 seeks
+[in#1/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc243c0] Input file #1 (/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001.work/candidate-doctor-disappearance-to-ogre-mother/segment-2.mp4):
+[in#1/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc243c0]   Input stream #1:0 (video): 621 packets read (4885969 bytes); 621 frames decoded; 0 decode errors; 
+[in#1/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc243c0]   Input stream #1:1 (audio): 893 packets read (341157 bytes); 892 frames decoded; 0 decode errors (913408 samples); 
+[in#1/mov,mp4,m4a,3gp,3g2,mj2 @ 0x72cc243c0]   Total: 1514 packets (5227126 bytes) demuxed
+[AVIOContext @ 0x72cc24640] Statistics: 5251053 bytes read, 0 seeks
+
+Exiting with exit code 0

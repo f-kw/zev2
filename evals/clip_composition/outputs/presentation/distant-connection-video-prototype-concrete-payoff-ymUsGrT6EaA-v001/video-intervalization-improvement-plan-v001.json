@@ -1,0 +1,2245 @@
+{
+  "schemaVersion": "distant-connection-video-concrete-payoff-plan-v001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "sourceVideoBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+    "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+  },
+  "candidateResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-concrete-payoff-ymUsGrT6EaA-v001/candidate-response-v001.json",
+    "fileSha256": "4239b6b51d3dd3dd548a9083ac0434860182d497321a89cf07c8f53eb66586b8"
+  },
+  "semanticUtteranceBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-semantic-utterance-ymUsGrT6EaA-v001/semantic-utterance-artifact-v001.json",
+    "fileSha256": "e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2"
+  },
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-concrete-payoff-ymUsGrT6EaA-v001/source-package-v001.json",
+    "fileSha256": "23d555928762e5a98ccf13c291e0a80ae1935a5cd49010f36512498f5033f6df"
+  },
+  "intervalPolicy": {
+    "selection": "local-evidence-guided-both-part-intervalization",
+    "expansionApplied": true,
+    "formalCandidateChanged": false,
+    "reason": "Lunaの正式候補を不変保持し、映像上の原因・出来事・反応と自然な文脈だけを前後の動画区間へ追加する。"
+  },
+  "captionLayoutPolicy": {
+    "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2",
+    "maxLogicalWidthPerLine": 34,
+    "maxLines": 2
+  },
+  "candidates": [
+    {
+      "candidateId": "candidate-horror-claim-to-speed-up",
+      "anchorId": "comment-anchor-000067",
+      "direction": "future",
+      "addedUnderstanding": "冒頭で「今年一怖い」と紹介されたホラーゲームが、後半では実際に急加速してプレイヤーを追い詰めるため、単なる大げさな紹介ではなく恐怖の実演だったと分かる。",
+      "firstPart": {
+        "sourceStartMs": 246000,
+        "sourceEndMs": 255324,
+        "text": "今年一怖いと言われるホラーゲーム",
+        "semanticUtteranceIds": [
+          "semantic-utterance-000067",
+          "semantic-utterance-000068",
+          "semantic-utterance-000069",
+          "semantic-utterance-000070",
+          "semantic-utterance-000071",
+          "semantic-utterance-000072",
+          "semantic-utterance-000073",
+          "semantic-utterance-000074",
+          "semantic-utterance-000075",
+          "semantic-utterance-000076",
+          "semantic-utterance-000077",
+          "semantic-utterance-000078",
+          "semantic-utterance-000079",
+          "semantic-utterance-000080",
+          "semantic-utterance-000081",
+          "semantic-utterance-000082"
+        ],
+        "sourceSegmentIds": [
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82
+        ],
+        "boundaryDecision": "human-reviewed-local-concrete-payoff-intervalization-v001"
+      },
+      "secondPart": {
+        "sourceStartMs": 1980000,
+        "sourceEndMs": 1996000,
+        "text": "おい、急に速くなった!おい、急に速くなった!",
+        "semanticUtteranceIds": [
+          "semantic-utterance-003931",
+          "semantic-utterance-003932",
+          "semantic-utterance-003933",
+          "semantic-utterance-003934",
+          "semantic-utterance-003935",
+          "semantic-utterance-003936",
+          "semantic-utterance-003937",
+          "semantic-utterance-003938",
+          "semantic-utterance-003939",
+          "semantic-utterance-003940",
+          "semantic-utterance-003941",
+          "semantic-utterance-003942",
+          "semantic-utterance-003943",
+          "semantic-utterance-003944",
+          "semantic-utterance-003945",
+          "semantic-utterance-003946",
+          "semantic-utterance-003947",
+          "semantic-utterance-003948",
+          "semantic-utterance-003949",
+          "semantic-utterance-003950",
+          "semantic-utterance-003951",
+          "semantic-utterance-003952"
+        ],
+        "sourceSegmentIds": [
+          3931,
+          3932,
+          3933,
+          3934,
+          3935,
+          3936,
+          3937,
+          3938,
+          3939,
+          3940,
+          3941,
+          3942,
+          3943,
+          3944,
+          3945,
+          3946,
+          3947,
+          3948,
+          3949,
+          3950,
+          3951,
+          3952
+        ],
+        "boundaryDecision": "human-reviewed-local-concrete-payoff-intervalization-v001"
+      },
+      "gapMs": 1724676,
+      "outputDurationMs": 25324,
+      "captions": [
+        {
+          "cueId": "candidate-horror-claim-to-speed-up-first-intervalization-caption-001",
+          "part": "first",
+          "text": "今年一怖いと言われるホラーゲーム",
+          "semanticUtteranceIds": [
+            "semantic-utterance-000067",
+            "semantic-utterance-000068",
+            "semantic-utterance-000069",
+            "semantic-utterance-000070",
+            "semantic-utterance-000071",
+            "semantic-utterance-000072",
+            "semantic-utterance-000073",
+            "semantic-utterance-000074",
+            "semantic-utterance-000075",
+            "semantic-utterance-000076",
+            "semantic-utterance-000077",
+            "semantic-utterance-000078",
+            "semantic-utterance-000079",
+            "semantic-utterance-000080",
+            "semantic-utterance-000081",
+            "semantic-utterance-000082"
+          ],
+          "sourceUnits": [
+            {
+              "semanticUtteranceId": "semantic-utterance-000067",
+              "text": "今"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000068",
+              "text": "年"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000069",
+              "text": "一"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000070",
+              "text": "怖"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000071",
+              "text": "い"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000072",
+              "text": "と"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000073",
+              "text": "言"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000074",
+              "text": "わ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000075",
+              "text": "れ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000076",
+              "text": "る"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000077",
+              "text": "ホ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000078",
+              "text": "ラ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000079",
+              "text": "ー"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000080",
+              "text": "ゲ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000081",
+              "text": "ー"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-000082",
+              "text": "ム"
+            }
+          ],
+          "sourceStartMs": 249378,
+          "sourceEndMs": 255324
+        },
+        {
+          "cueId": "candidate-horror-claim-to-speed-up-second-intervalization-caption-001",
+          "part": "second",
+          "text": "おい、急に速くなった!おい、急に速くなった!",
+          "semanticUtteranceIds": [
+            "semantic-utterance-003931",
+            "semantic-utterance-003932",
+            "semantic-utterance-003933",
+            "semantic-utterance-003934",
+            "semantic-utterance-003935",
+            "semantic-utterance-003936",
+            "semantic-utterance-003937",
+            "semantic-utterance-003938",
+            "semantic-utterance-003939",
+            "semantic-utterance-003940",
+            "semantic-utterance-003941",
+            "semantic-utterance-003942",
+            "semantic-utterance-003943",
+            "semantic-utterance-003944",
+            "semantic-utterance-003945",
+            "semantic-utterance-003946",
+            "semantic-utterance-003947",
+            "semantic-utterance-003948",
+            "semantic-utterance-003949",
+            "semantic-utterance-003950",
+            "semantic-utterance-003951",
+            "semantic-utterance-003952"
+          ],
+          "sourceUnits": [
+            {
+              "semanticUtteranceId": "semantic-utterance-003931",
+              "text": "お"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003932",
+              "text": "い"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003933",
+              "text": "、"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003934",
+              "text": "急"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003935",
+              "text": "に"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003936",
+              "text": "速"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003937",
+              "text": "く"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003938",
+              "text": "な"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003939",
+              "text": "っ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003940",
+              "text": "た"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003941",
+              "text": "!"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003942",
+              "text": "お"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003943",
+              "text": "い"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003944",
+              "text": "、"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003945",
+              "text": "急"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003946",
+              "text": "に"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003947",
+              "text": "速"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003948",
+              "text": "く"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003949",
+              "text": "な"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003950",
+              "text": "っ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003951",
+              "text": "た"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003952",
+              "text": "!"
+            }
+          ],
+          "sourceStartMs": 1984756,
+          "sourceEndMs": 1994974
+        }
+      ],
+      "formalFirstPart": {
+        "sourceStartMs": 249378,
+        "sourceEndMs": 255324,
+        "text": "今年一怖いと言われるホラーゲーム",
+        "semanticUtteranceIds": [
+          "semantic-utterance-000067",
+          "semantic-utterance-000068",
+          "semantic-utterance-000069",
+          "semantic-utterance-000070",
+          "semantic-utterance-000071",
+          "semantic-utterance-000072",
+          "semantic-utterance-000073",
+          "semantic-utterance-000074",
+          "semantic-utterance-000075",
+          "semantic-utterance-000076",
+          "semantic-utterance-000077",
+          "semantic-utterance-000078",
+          "semantic-utterance-000079",
+          "semantic-utterance-000080",
+          "semantic-utterance-000081",
+          "semantic-utterance-000082"
+        ],
+        "sourceSegmentIds": [
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "formalSecondPart": {
+        "sourceStartMs": 1984756,
+        "sourceEndMs": 1994974,
+        "text": "おい、急に速くなった!おい、急に速くなった!",
+        "semanticUtteranceIds": [
+          "semantic-utterance-003931",
+          "semantic-utterance-003932",
+          "semantic-utterance-003933",
+          "semantic-utterance-003934",
+          "semantic-utterance-003935",
+          "semantic-utterance-003936",
+          "semantic-utterance-003937",
+          "semantic-utterance-003938",
+          "semantic-utterance-003939",
+          "semantic-utterance-003940",
+          "semantic-utterance-003941",
+          "semantic-utterance-003942",
+          "semantic-utterance-003943",
+          "semantic-utterance-003944",
+          "semantic-utterance-003945",
+          "semantic-utterance-003946",
+          "semantic-utterance-003947",
+          "semantic-utterance-003948",
+          "semantic-utterance-003949",
+          "semantic-utterance-003950",
+          "semantic-utterance-003951",
+          "semantic-utterance-003952"
+        ],
+        "sourceSegmentIds": [
+          3931,
+          3932,
+          3933,
+          3934,
+          3935,
+          3936,
+          3937,
+          3938,
+          3939,
+          3940,
+          3941,
+          3942,
+          3943,
+          3944,
+          3945,
+          3946,
+          3947,
+          3948,
+          3949,
+          3950,
+          3951,
+          3952
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "intervalizationDecision": {
+        "first": {
+          "formalStartMs": 249378,
+          "formalEndMs": 255324,
+          "selectedStartMs": 246000,
+          "selectedEndMs": 255324,
+          "semanticStartOrdinal": 67,
+          "semanticEndOrdinal": 82
+        },
+        "second": {
+          "formalStartMs": 1984756,
+          "formalEndMs": 1994974,
+          "selectedStartMs": 1980000,
+          "selectedEndMs": 1996000,
+          "semanticStartOrdinal": 3931,
+          "semanticEndOrdinal": 3952
+        },
+        "classification": "VISUAL_CAUSE_AND_REACTION_INCLUDED",
+        "observedCause": "映像確認では後半の正式発話より前に、暗い通路で追跡される距離感と敵の急接近があり、その結果として「急に速くなった」と叫ぶ。正式発話だけでは何が速くなったかを落とす。",
+        "boundaryReason": "前半はタイトル画面と「今年一怖い」の紹介を含む直前から、後半は追跡が加速する直前から二度の絶叫が終わる直後までを使用する。",
+        "shortFormAssessment": "映像上の具体的な恐怖と反応が短い区間で見えるため、具体的回収を人間が判断できる。",
+        "addedFirstContextSemanticUtteranceIds": [],
+        "addedSecondContextSemanticUtteranceIds": [],
+        "formalCandidateChanged": false,
+        "videoIntervalsDerivedFromFormalCandidate": true
+      }
+    },
+    {
+      "candidateId": "candidate-doctor-disappearance-to-ogre-mother",
+      "anchorId": "comment-anchor-003611",
+      "direction": "future",
+      "addedUnderstanding": "前半で示された医師の失踪と深夜の病院、赤い服の女の噂が、後半で若い子どもを捕らえて喰らう鬼母の存在として具体化する。病院の怪異が単なる失踪事件ではなく、子どもを狙う怪物の物語だったと分かる。",
+      "firstPart": {
+        "sourceStartMs": 1724755,
+        "sourceEndMs": 1739800,
+        "text": "医師の失踪異様な技に発展先日市内の病院で医師が行方不明となる事件が発生これ以前にも地下室から赤ん坊の泣き声を聞こえるとの報告医療策から相次いでいた失踪事件の直後には深夜に赤い服え?これ前も見たなこれ前も見たやつだ",
+        "semanticUtteranceIds": [
+          "semantic-utterance-003544",
+          "semantic-utterance-003545",
+          "semantic-utterance-003546",
+          "semantic-utterance-003547",
+          "semantic-utterance-003548",
+          "semantic-utterance-003549",
+          "semantic-utterance-003550",
+          "semantic-utterance-003551",
+          "semantic-utterance-003552",
+          "semantic-utterance-003553",
+          "semantic-utterance-003554",
+          "semantic-utterance-003555",
+          "semantic-utterance-003556",
+          "semantic-utterance-003557",
+          "semantic-utterance-003558",
+          "semantic-utterance-003559",
+          "semantic-utterance-003560",
+          "semantic-utterance-003561",
+          "semantic-utterance-003562",
+          "semantic-utterance-003563",
+          "semantic-utterance-003564",
+          "semantic-utterance-003565",
+          "semantic-utterance-003566",
+          "semantic-utterance-003567",
+          "semantic-utterance-003568",
+          "semantic-utterance-003569",
+          "semantic-utterance-003570",
+          "semantic-utterance-003571",
+          "semantic-utterance-003572",
+          "semantic-utterance-003573",
+          "semantic-utterance-003574",
+          "semantic-utterance-003575",
+          "semantic-utterance-003576",
+          "semantic-utterance-003577",
+          "semantic-utterance-003578",
+          "semantic-utterance-003579",
+          "semantic-utterance-003580",
+          "semantic-utterance-003581",
+          "semantic-utterance-003582",
+          "semantic-utterance-003583",
+          "semantic-utterance-003584",
+          "semantic-utterance-003585",
+          "semantic-utterance-003586",
+          "semantic-utterance-003587",
+          "semantic-utterance-003588",
+          "semantic-utterance-003589",
+          "semantic-utterance-003590",
+          "semantic-utterance-003591",
+          "semantic-utterance-003592",
+          "semantic-utterance-003593",
+          "semantic-utterance-003594",
+          "semantic-utterance-003595",
+          "semantic-utterance-003596",
+          "semantic-utterance-003597",
+          "semantic-utterance-003598",
+          "semantic-utterance-003599",
+          "semantic-utterance-003600",
+          "semantic-utterance-003601",
+          "semantic-utterance-003602",
+          "semantic-utterance-003603",
+          "semantic-utterance-003604",
+          "semantic-utterance-003605",
+          "semantic-utterance-003606",
+          "semantic-utterance-003607",
+          "semantic-utterance-003608",
+          "semantic-utterance-003609",
+          "semantic-utterance-003610",
+          "semantic-utterance-003611",
+          "semantic-utterance-003612",
+          "semantic-utterance-003613",
+          "semantic-utterance-003614",
+          "semantic-utterance-003615",
+          "semantic-utterance-003616",
+          "semantic-utterance-003617",
+          "semantic-utterance-003618",
+          "semantic-utterance-003619",
+          "semantic-utterance-003620",
+          "semantic-utterance-003621",
+          "semantic-utterance-003622",
+          "semantic-utterance-003623",
+          "semantic-utterance-003624",
+          "semantic-utterance-003625",
+          "semantic-utterance-003626",
+          "semantic-utterance-003627",
+          "semantic-utterance-003628",
+          "semantic-utterance-003629",
+          "semantic-utterance-003630",
+          "semantic-utterance-003631",
+          "semantic-utterance-003632",
+          "semantic-utterance-003633",
+          "semantic-utterance-003634",
+          "semantic-utterance-003635",
+          "semantic-utterance-003636",
+          "semantic-utterance-003637",
+          "semantic-utterance-003638",
+          "semantic-utterance-003639",
+          "semantic-utterance-003640",
+          "semantic-utterance-003641",
+          "semantic-utterance-003642",
+          "semantic-utterance-003643",
+          "semantic-utterance-003644",
+          "semantic-utterance-003645",
+          "semantic-utterance-003646",
+          "semantic-utterance-003647",
+          "semantic-utterance-003648",
+          "semantic-utterance-003649"
+        ],
+        "sourceSegmentIds": [
+          3544,
+          3545,
+          3546,
+          3547,
+          3548,
+          3549,
+          3550,
+          3551,
+          3552,
+          3553,
+          3554,
+          3555,
+          3556,
+          3557,
+          3558,
+          3559,
+          3560,
+          3561,
+          3562,
+          3563,
+          3564,
+          3565,
+          3566,
+          3567,
+          3568,
+          3569,
+          3570,
+          3571,
+          3572,
+          3573,
+          3574,
+          3575,
+          3576,
+          3577,
+          3578,
+          3579,
+          3580,
+          3581,
+          3582,
+          3583,
+          3584,
+          3585,
+          3586,
+          3587,
+          3588,
+          3589,
+          3590,
+          3591,
+          3592,
+          3593,
+          3594,
+          3595,
+          3596,
+          3597,
+          3598,
+          3599,
+          3600,
+          3601,
+          3602,
+          3603,
+          3604,
+          3605,
+          3606,
+          3607,
+          3608,
+          3609,
+          3610,
+          3611,
+          3612,
+          3613,
+          3614,
+          3615,
+          3616,
+          3617,
+          3618,
+          3619,
+          3620,
+          3621,
+          3622,
+          3623,
+          3624,
+          3625,
+          3626,
+          3627,
+          3628,
+          3629,
+          3630,
+          3631,
+          3632,
+          3633,
+          3634,
+          3635,
+          3636,
+          3637,
+          3638,
+          3639,
+          3640,
+          3641,
+          3642,
+          3643,
+          3644,
+          3645,
+          3646,
+          3647,
+          3648,
+          3649
+        ],
+        "boundaryDecision": "human-reviewed-local-concrete-payoff-intervalization-v001"
+      },
+      "secondPart": {
+        "sourceStartMs": 5693397,
+        "sourceEndMs": 5714097,
+        "text": "可哀想な子供は若くして命を落とした女は悲しみに打ちひしがれあの無情な者どもを決して許さないと心の中で誓ったやがて女は死に若い子を捕らえて喰らう何て読むのこれ鬼母となった",
+        "semanticUtteranceIds": [
+          "semantic-utterance-009161",
+          "semantic-utterance-009162",
+          "semantic-utterance-009163",
+          "semantic-utterance-009164",
+          "semantic-utterance-009165",
+          "semantic-utterance-009166",
+          "semantic-utterance-009167",
+          "semantic-utterance-009168",
+          "semantic-utterance-009169",
+          "semantic-utterance-009170",
+          "semantic-utterance-009171",
+          "semantic-utterance-009172",
+          "semantic-utterance-009173",
+          "semantic-utterance-009174",
+          "semantic-utterance-009175",
+          "semantic-utterance-009176",
+          "semantic-utterance-009177",
+          "semantic-utterance-009178",
+          "semantic-utterance-009179",
+          "semantic-utterance-009180",
+          "semantic-utterance-009181",
+          "semantic-utterance-009182",
+          "semantic-utterance-009183",
+          "semantic-utterance-009184",
+          "semantic-utterance-009185",
+          "semantic-utterance-009186",
+          "semantic-utterance-009187",
+          "semantic-utterance-009188",
+          "semantic-utterance-009189",
+          "semantic-utterance-009190",
+          "semantic-utterance-009191",
+          "semantic-utterance-009192",
+          "semantic-utterance-009193",
+          "semantic-utterance-009194",
+          "semantic-utterance-009195",
+          "semantic-utterance-009196",
+          "semantic-utterance-009197",
+          "semantic-utterance-009198",
+          "semantic-utterance-009199",
+          "semantic-utterance-009200",
+          "semantic-utterance-009201",
+          "semantic-utterance-009202",
+          "semantic-utterance-009203",
+          "semantic-utterance-009204",
+          "semantic-utterance-009205",
+          "semantic-utterance-009206",
+          "semantic-utterance-009207",
+          "semantic-utterance-009208",
+          "semantic-utterance-009209",
+          "semantic-utterance-009210",
+          "semantic-utterance-009211",
+          "semantic-utterance-009212",
+          "semantic-utterance-009213",
+          "semantic-utterance-009214",
+          "semantic-utterance-009215",
+          "semantic-utterance-009216",
+          "semantic-utterance-009217",
+          "semantic-utterance-009218",
+          "semantic-utterance-009219",
+          "semantic-utterance-009220",
+          "semantic-utterance-009221",
+          "semantic-utterance-009222",
+          "semantic-utterance-009223",
+          "semantic-utterance-009224",
+          "semantic-utterance-009225",
+          "semantic-utterance-009226",
+          "semantic-utterance-009227",
+          "semantic-utterance-009228",
+          "semantic-utterance-009229",
+          "semantic-utterance-009230",
+          "semantic-utterance-009231",
+          "semantic-utterance-009232",
+          "semantic-utterance-009233",
+          "semantic-utterance-009234",
+          "semantic-utterance-009235",
+          "semantic-utterance-009236",
+          "semantic-utterance-009237",
+          "semantic-utterance-009238",
+          "semantic-utterance-009239",
+          "semantic-utterance-009240",
+          "semantic-utterance-009241",
+          "semantic-utterance-009242",
+          "semantic-utterance-009243",
+          "semantic-utterance-009244"
+        ],
+        "sourceSegmentIds": [
+          9161,
+          9162,
+          9163,
+          9164,
+          9165,
+          9166,
+          9167,
+          9168,
+          9169,
+          9170,
+          9171,
+          9172,
+          9173,
+          9174,
+          9175,
+          9176,
+          9177,
+          9178,
+          9179,
+          9180,
+          9181,
+          9182,
+          9183,
+          9184,
+          9185,
+          9186,
+          9187,
+          9188,
+          9189,
+          9190,
+          9191,
+          9192,
+          9193,
+          9194,
+          9195,
+          9196,
+          9197,
+          9198,
+          9199,
+          9200,
+          9201,
+          9202,
+          9203,
+          9204,
+          9205,
+          9206,
+          9207,
+          9208,
+          9209,
+          9210,
+          9211,
+          9212,
+          9213,
+          9214,
+          9215,
+          9216,
+          9217,
+          9218,
+          9219,
+          9220,
+          9221,
+          9222,
+          9223,
+          9224,
+          9225,
+          9226,
+          9227,
+          9228,
+          9229,
+          9230,
+          9231,
+          9232,
+          9233,
+          9234,
+          9235,
+          9236,
+          9237,
+          9238,
+          9239,
+          9240,
+          9241,
+          9242,
+          9243,
+          9244
+        ],
+        "boundaryDecision": "human-reviewed-local-concrete-payoff-intervalization-v001"
+      },
+      "gapMs": 3953597,
+      "outputDurationMs": 35745,
+      "captions": [
+        {
+          "cueId": "candidate-doctor-disappearance-to-ogre-mother-first-intervalization-caption-001",
+          "part": "first",
+          "text": "医師の失踪異様な技に発展先日市内の病院で医師が行方不明となる事件が発",
+          "semanticUtteranceIds": [
+            "semantic-utterance-003544",
+            "semantic-utterance-003545",
+            "semantic-utterance-003546",
+            "semantic-utterance-003547",
+            "semantic-utterance-003548",
+            "semantic-utterance-003549",
+            "semantic-utterance-003550",
+            "semantic-utterance-003551",
+            "semantic-utterance-003552",
+            "semantic-utterance-003553",
+            "semantic-utterance-003554",
+            "semantic-utterance-003555",
+            "semantic-utterance-003556",
+            "semantic-utterance-003557",
+            "semantic-utterance-003558",
+            "semantic-utterance-003559",
+            "semantic-utterance-003560",
+            "semantic-utterance-003561",
+            "semantic-utterance-003562",
+            "semantic-utterance-003563",
+            "semantic-utterance-003564",
+            "semantic-utterance-003565",
+            "semantic-utterance-003566",
+            "semantic-utterance-003567",
+            "semantic-utterance-003568",
+            "semantic-utterance-003569",
+            "semantic-utterance-003570",
+            "semantic-utterance-003571",
+            "semantic-utterance-003572",
+            "semantic-utterance-003573",
+            "semantic-utterance-003574",
+            "semantic-utterance-003575",
+            "semantic-utterance-003576",
+            "semantic-utterance-003577"
+          ],
+          "sourceUnits": [
+            {
+              "semanticUtteranceId": "semantic-utterance-003544",
+              "text": "医"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003545",
+              "text": "師"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003546",
+              "text": "の"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003547",
+              "text": "失"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003548",
+              "text": "踪"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003549",
+              "text": "異"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003550",
+              "text": "様"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003551",
+              "text": "な"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003552",
+              "text": "技"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003553",
+              "text": "に"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003554",
+              "text": "発"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003555",
+              "text": "展"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003556",
+              "text": "先"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003557",
+              "text": "日"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003558",
+              "text": "市"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003559",
+              "text": "内"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003560",
+              "text": "の"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003561",
+              "text": "病"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003562",
+              "text": "院"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003563",
+              "text": "で"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003564",
+              "text": "医"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003565",
+              "text": "師"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003566",
+              "text": "が"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003567",
+              "text": "行"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003568",
+              "text": "方"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003569",
+              "text": "不"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003570",
+              "text": "明"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003571",
+              "text": "と"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003572",
+              "text": "な"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003573",
+              "text": "る"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003574",
+              "text": "事"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003575",
+              "text": "件"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003576",
+              "text": "が"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003577",
+              "text": "発"
+            }
+          ],
+          "sourceStartMs": 1724755,
+          "sourceEndMs": 1726696
+        },
+        {
+          "cueId": "candidate-doctor-disappearance-to-ogre-mother-first-intervalization-caption-002",
+          "part": "first",
+          "text": "生これ以前にも地下室から赤ん坊の泣き声を聞こえるとの報告医療策から相",
+          "semanticUtteranceIds": [
+            "semantic-utterance-003578",
+            "semantic-utterance-003579",
+            "semantic-utterance-003580",
+            "semantic-utterance-003581",
+            "semantic-utterance-003582",
+            "semantic-utterance-003583",
+            "semantic-utterance-003584",
+            "semantic-utterance-003585",
+            "semantic-utterance-003586",
+            "semantic-utterance-003587",
+            "semantic-utterance-003588",
+            "semantic-utterance-003589",
+            "semantic-utterance-003590",
+            "semantic-utterance-003591",
+            "semantic-utterance-003592",
+            "semantic-utterance-003593",
+            "semantic-utterance-003594",
+            "semantic-utterance-003595",
+            "semantic-utterance-003596",
+            "semantic-utterance-003597",
+            "semantic-utterance-003598",
+            "semantic-utterance-003599",
+            "semantic-utterance-003600",
+            "semantic-utterance-003601",
+            "semantic-utterance-003602",
+            "semantic-utterance-003603",
+            "semantic-utterance-003604",
+            "semantic-utterance-003605",
+            "semantic-utterance-003606",
+            "semantic-utterance-003607",
+            "semantic-utterance-003608",
+            "semantic-utterance-003609",
+            "semantic-utterance-003610",
+            "semantic-utterance-003611"
+          ],
+          "sourceUnits": [
+            {
+              "semanticUtteranceId": "semantic-utterance-003578",
+              "text": "生"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003579",
+              "text": "こ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003580",
+              "text": "れ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003581",
+              "text": "以"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003582",
+              "text": "前"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003583",
+              "text": "に"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003584",
+              "text": "も"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003585",
+              "text": "地"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003586",
+              "text": "下"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003587",
+              "text": "室"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003588",
+              "text": "か"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003589",
+              "text": "ら"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003590",
+              "text": "赤"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003591",
+              "text": "ん"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003592",
+              "text": "坊"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003593",
+              "text": "の"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003594",
+              "text": "泣"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003595",
+              "text": "き"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003596",
+              "text": "声"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003597",
+              "text": "を"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003598",
+              "text": "聞"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003599",
+              "text": "こ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003600",
+              "text": "え"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003601",
+              "text": "る"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003602",
+              "text": "と"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003603",
+              "text": "の"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003604",
+              "text": "報"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003605",
+              "text": "告"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003606",
+              "text": "医"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003607",
+              "text": "療"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003608",
+              "text": "策"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003609",
+              "text": "か"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003610",
+              "text": "ら"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003611",
+              "text": "相"
+            }
+          ],
+          "sourceStartMs": 1726696,
+          "sourceEndMs": 1732157
+        },
+        {
+          "cueId": "candidate-doctor-disappearance-to-ogre-mother-first-intervalization-caption-003",
+          "part": "first",
+          "text": "次いでいた失踪事件の直後には深夜に赤い服え?これ前も見たなこれ前も見",
+          "semanticUtteranceIds": [
+            "semantic-utterance-003612",
+            "semantic-utterance-003613",
+            "semantic-utterance-003614",
+            "semantic-utterance-003615",
+            "semantic-utterance-003616",
+            "semantic-utterance-003617",
+            "semantic-utterance-003618",
+            "semantic-utterance-003619",
+            "semantic-utterance-003620",
+            "semantic-utterance-003621",
+            "semantic-utterance-003622",
+            "semantic-utterance-003623",
+            "semantic-utterance-003624",
+            "semantic-utterance-003625",
+            "semantic-utterance-003626",
+            "semantic-utterance-003627",
+            "semantic-utterance-003628",
+            "semantic-utterance-003629",
+            "semantic-utterance-003630",
+            "semantic-utterance-003631",
+            "semantic-utterance-003632",
+            "semantic-utterance-003633",
+            "semantic-utterance-003634",
+            "semantic-utterance-003635",
+            "semantic-utterance-003636",
+            "semantic-utterance-003637",
+            "semantic-utterance-003638",
+            "semantic-utterance-003639",
+            "semantic-utterance-003640",
+            "semantic-utterance-003641",
+            "semantic-utterance-003642",
+            "semantic-utterance-003643",
+            "semantic-utterance-003644",
+            "semantic-utterance-003645"
+          ],
+          "sourceUnits": [
+            {
+              "semanticUtteranceId": "semantic-utterance-003612",
+              "text": "次"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003613",
+              "text": "い"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003614",
+              "text": "で"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003615",
+              "text": "い"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003616",
+              "text": "た"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003617",
+              "text": "失"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003618",
+              "text": "踪"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003619",
+              "text": "事"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003620",
+              "text": "件"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003621",
+              "text": "の"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003622",
+              "text": "直"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003623",
+              "text": "後"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003624",
+              "text": "に"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003625",
+              "text": "は"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003626",
+              "text": "深"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003627",
+              "text": "夜"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003628",
+              "text": "に"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003629",
+              "text": "赤"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003630",
+              "text": "い"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003631",
+              "text": "服"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003632",
+              "text": "え"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003633",
+              "text": "?"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003634",
+              "text": "こ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003635",
+              "text": "れ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003636",
+              "text": "前"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003637",
+              "text": "も"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003638",
+              "text": "見"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003639",
+              "text": "た"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003640",
+              "text": "な"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003641",
+              "text": "こ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003642",
+              "text": "れ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003643",
+              "text": "前"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003644",
+              "text": "も"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003645",
+              "text": "見"
+            }
+          ],
+          "sourceStartMs": 1732157,
+          "sourceEndMs": 1739560
+        },
+        {
+          "cueId": "candidate-doctor-disappearance-to-ogre-mother-first-intervalization-caption-004",
+          "part": "first",
+          "text": "たやつだ",
+          "semanticUtteranceIds": [
+            "semantic-utterance-003646",
+            "semantic-utterance-003647",
+            "semantic-utterance-003648",
+            "semantic-utterance-003649"
+          ],
+          "sourceUnits": [
+            {
+              "semanticUtteranceId": "semantic-utterance-003646",
+              "text": "た"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003647",
+              "text": "や"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003648",
+              "text": "つ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-003649",
+              "text": "だ"
+            }
+          ],
+          "sourceStartMs": 1739560,
+          "sourceEndMs": 1739800
+        },
+        {
+          "cueId": "candidate-doctor-disappearance-to-ogre-mother-second-intervalization-caption-001",
+          "part": "second",
+          "text": "可哀想な子供は若くして命を落とした女は悲しみに打ちひしがれ",
+          "semanticUtteranceIds": [
+            "semantic-utterance-009161",
+            "semantic-utterance-009162",
+            "semantic-utterance-009163",
+            "semantic-utterance-009164",
+            "semantic-utterance-009165",
+            "semantic-utterance-009166",
+            "semantic-utterance-009167",
+            "semantic-utterance-009168",
+            "semantic-utterance-009169",
+            "semantic-utterance-009170",
+            "semantic-utterance-009171",
+            "semantic-utterance-009172",
+            "semantic-utterance-009173",
+            "semantic-utterance-009174",
+            "semantic-utterance-009175",
+            "semantic-utterance-009176",
+            "semantic-utterance-009177",
+            "semantic-utterance-009178",
+            "semantic-utterance-009179",
+            "semantic-utterance-009180",
+            "semantic-utterance-009181",
+            "semantic-utterance-009182",
+            "semantic-utterance-009183",
+            "semantic-utterance-009184",
+            "semantic-utterance-009185",
+            "semantic-utterance-009186",
+            "semantic-utterance-009187",
+            "semantic-utterance-009188",
+            "semantic-utterance-009189"
+          ],
+          "sourceUnits": [
+            {
+              "semanticUtteranceId": "semantic-utterance-009161",
+              "text": "可"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009162",
+              "text": "哀"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009163",
+              "text": "想"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009164",
+              "text": "な"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009165",
+              "text": "子"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009166",
+              "text": "供"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009167",
+              "text": "は"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009168",
+              "text": "若"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009169",
+              "text": "く"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009170",
+              "text": "し"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009171",
+              "text": "て"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009172",
+              "text": "命"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009173",
+              "text": "を"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009174",
+              "text": "落"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009175",
+              "text": "と"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009176",
+              "text": "し"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009177",
+              "text": "た"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009178",
+              "text": "女"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009179",
+              "text": "は"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009180",
+              "text": "悲"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009181",
+              "text": "し"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009182",
+              "text": "み"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009183",
+              "text": "に"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009184",
+              "text": "打"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009185",
+              "text": "ち"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009186",
+              "text": "ひ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009187",
+              "text": "し"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009188",
+              "text": "が"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009189",
+              "text": "れ"
+            }
+          ],
+          "sourceStartMs": 5693397,
+          "sourceEndMs": 5699760
+        },
+        {
+          "cueId": "candidate-doctor-disappearance-to-ogre-mother-second-intervalization-caption-002",
+          "part": "second",
+          "text": "あの無情な者どもを決して許さないと心の中で誓ったやがて女は死に若い子",
+          "semanticUtteranceIds": [
+            "semantic-utterance-009190",
+            "semantic-utterance-009191",
+            "semantic-utterance-009192",
+            "semantic-utterance-009193",
+            "semantic-utterance-009194",
+            "semantic-utterance-009195",
+            "semantic-utterance-009196",
+            "semantic-utterance-009197",
+            "semantic-utterance-009198",
+            "semantic-utterance-009199",
+            "semantic-utterance-009200",
+            "semantic-utterance-009201",
+            "semantic-utterance-009202",
+            "semantic-utterance-009203",
+            "semantic-utterance-009204",
+            "semantic-utterance-009205",
+            "semantic-utterance-009206",
+            "semantic-utterance-009207",
+            "semantic-utterance-009208",
+            "semantic-utterance-009209",
+            "semantic-utterance-009210",
+            "semantic-utterance-009211",
+            "semantic-utterance-009212",
+            "semantic-utterance-009213",
+            "semantic-utterance-009214",
+            "semantic-utterance-009215",
+            "semantic-utterance-009216",
+            "semantic-utterance-009217",
+            "semantic-utterance-009218",
+            "semantic-utterance-009219",
+            "semantic-utterance-009220",
+            "semantic-utterance-009221",
+            "semantic-utterance-009222",
+            "semantic-utterance-009223"
+          ],
+          "sourceUnits": [
+            {
+              "semanticUtteranceId": "semantic-utterance-009190",
+              "text": "あ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009191",
+              "text": "の"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009192",
+              "text": "無"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009193",
+              "text": "情"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009194",
+              "text": "な"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009195",
+              "text": "者"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009196",
+              "text": "ど"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009197",
+              "text": "も"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009198",
+              "text": "を"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009199",
+              "text": "決"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009200",
+              "text": "し"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009201",
+              "text": "て"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009202",
+              "text": "許"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009203",
+              "text": "さ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009204",
+              "text": "な"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009205",
+              "text": "い"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009206",
+              "text": "と"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009207",
+              "text": "心"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009208",
+              "text": "の"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009209",
+              "text": "中"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009210",
+              "text": "で"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009211",
+              "text": "誓"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009212",
+              "text": "っ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009213",
+              "text": "た"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009214",
+              "text": "や"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009215",
+              "text": "が"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009216",
+              "text": "て"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009217",
+              "text": "女"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009218",
+              "text": "は"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009219",
+              "text": "死"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009220",
+              "text": "に"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009221",
+              "text": "若"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009222",
+              "text": "い"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009223",
+              "text": "子"
+            }
+          ],
+          "sourceStartMs": 5700214,
+          "sourceEndMs": 5708116
+        },
+        {
+          "cueId": "candidate-doctor-disappearance-to-ogre-mother-second-intervalization-caption-003",
+          "part": "second",
+          "text": "を捕らえて喰らう何て読むのこれ鬼母となった",
+          "semanticUtteranceIds": [
+            "semantic-utterance-009224",
+            "semantic-utterance-009225",
+            "semantic-utterance-009226",
+            "semantic-utterance-009227",
+            "semantic-utterance-009228",
+            "semantic-utterance-009229",
+            "semantic-utterance-009230",
+            "semantic-utterance-009231",
+            "semantic-utterance-009232",
+            "semantic-utterance-009233",
+            "semantic-utterance-009234",
+            "semantic-utterance-009235",
+            "semantic-utterance-009236",
+            "semantic-utterance-009237",
+            "semantic-utterance-009238",
+            "semantic-utterance-009239",
+            "semantic-utterance-009240",
+            "semantic-utterance-009241",
+            "semantic-utterance-009242",
+            "semantic-utterance-009243",
+            "semantic-utterance-009244"
+          ],
+          "sourceUnits": [
+            {
+              "semanticUtteranceId": "semantic-utterance-009224",
+              "text": "を"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009225",
+              "text": "捕"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009226",
+              "text": "ら"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009227",
+              "text": "え"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009228",
+              "text": "て"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009229",
+              "text": "喰"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009230",
+              "text": "ら"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009231",
+              "text": "う"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009232",
+              "text": "何"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009233",
+              "text": "て"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009234",
+              "text": "読"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009235",
+              "text": "む"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009236",
+              "text": "の"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009237",
+              "text": "こ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009238",
+              "text": "れ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009239",
+              "text": "鬼"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009240",
+              "text": "母"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009241",
+              "text": "と"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009242",
+              "text": "な"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009243",
+              "text": "っ"
+            },
+            {
+              "semanticUtteranceId": "semantic-utterance-009244",
+              "text": "た"
+            }
+          ],
+          "sourceStartMs": 5708116,
+          "sourceEndMs": 5714097
+        }
+      ],
+      "formalFirstPart": {
+        "sourceStartMs": 1731997,
+        "sourceEndMs": 1739620,
+        "text": "相次いでいた失踪事件の直後には深夜に赤い服え?これ前も見たなこれ前も見た",
+        "semanticUtteranceIds": [
+          "semantic-utterance-003611",
+          "semantic-utterance-003612",
+          "semantic-utterance-003613",
+          "semantic-utterance-003614",
+          "semantic-utterance-003615",
+          "semantic-utterance-003616",
+          "semantic-utterance-003617",
+          "semantic-utterance-003618",
+          "semantic-utterance-003619",
+          "semantic-utterance-003620",
+          "semantic-utterance-003621",
+          "semantic-utterance-003622",
+          "semantic-utterance-003623",
+          "semantic-utterance-003624",
+          "semantic-utterance-003625",
+          "semantic-utterance-003626",
+          "semantic-utterance-003627",
+          "semantic-utterance-003628",
+          "semantic-utterance-003629",
+          "semantic-utterance-003630",
+          "semantic-utterance-003631",
+          "semantic-utterance-003632",
+          "semantic-utterance-003633",
+          "semantic-utterance-003634",
+          "semantic-utterance-003635",
+          "semantic-utterance-003636",
+          "semantic-utterance-003637",
+          "semantic-utterance-003638",
+          "semantic-utterance-003639",
+          "semantic-utterance-003640",
+          "semantic-utterance-003641",
+          "semantic-utterance-003642",
+          "semantic-utterance-003643",
+          "semantic-utterance-003644",
+          "semantic-utterance-003645",
+          "semantic-utterance-003646"
+        ],
+        "sourceSegmentIds": [
+          3611,
+          3612,
+          3613,
+          3614,
+          3615,
+          3616,
+          3617,
+          3618,
+          3619,
+          3620,
+          3621,
+          3622,
+          3623,
+          3624,
+          3625,
+          3626,
+          3627,
+          3628,
+          3629,
+          3630,
+          3631,
+          3632,
+          3633,
+          3634,
+          3635,
+          3636,
+          3637,
+          3638,
+          3639,
+          3640,
+          3641,
+          3642,
+          3643,
+          3644,
+          3645,
+          3646
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "formalSecondPart": {
+        "sourceStartMs": 5698719,
+        "sourceEndMs": 5710496,
+        "text": "女は悲しみに打ちひしがれあの無情な者どもを決して許さないと心の中で誓ったやがて女は死に若い子を捕らえて喰らう何て読むのこれ",
+        "semanticUtteranceIds": [
+          "semantic-utterance-009178",
+          "semantic-utterance-009179",
+          "semantic-utterance-009180",
+          "semantic-utterance-009181",
+          "semantic-utterance-009182",
+          "semantic-utterance-009183",
+          "semantic-utterance-009184",
+          "semantic-utterance-009185",
+          "semantic-utterance-009186",
+          "semantic-utterance-009187",
+          "semantic-utterance-009188",
+          "semantic-utterance-009189",
+          "semantic-utterance-009190",
+          "semantic-utterance-009191",
+          "semantic-utterance-009192",
+          "semantic-utterance-009193",
+          "semantic-utterance-009194",
+          "semantic-utterance-009195",
+          "semantic-utterance-009196",
+          "semantic-utterance-009197",
+          "semantic-utterance-009198",
+          "semantic-utterance-009199",
+          "semantic-utterance-009200",
+          "semantic-utterance-009201",
+          "semantic-utterance-009202",
+          "semantic-utterance-009203",
+          "semantic-utterance-009204",
+          "semantic-utterance-009205",
+          "semantic-utterance-009206",
+          "semantic-utterance-009207",
+          "semantic-utterance-009208",
+          "semantic-utterance-009209",
+          "semantic-utterance-009210",
+          "semantic-utterance-009211",
+          "semantic-utterance-009212",
+          "semantic-utterance-009213",
+          "semantic-utterance-009214",
+          "semantic-utterance-009215",
+          "semantic-utterance-009216",
+          "semantic-utterance-009217",
+          "semantic-utterance-009218",
+          "semantic-utterance-009219",
+          "semantic-utterance-009220",
+          "semantic-utterance-009221",
+          "semantic-utterance-009222",
+          "semantic-utterance-009223",
+          "semantic-utterance-009224",
+          "semantic-utterance-009225",
+          "semantic-utterance-009226",
+          "semantic-utterance-009227",
+          "semantic-utterance-009228",
+          "semantic-utterance-009229",
+          "semantic-utterance-009230",
+          "semantic-utterance-009231",
+          "semantic-utterance-009232",
+          "semantic-utterance-009233",
+          "semantic-utterance-009234",
+          "semantic-utterance-009235",
+          "semantic-utterance-009236",
+          "semantic-utterance-009237",
+          "semantic-utterance-009238"
+        ],
+        "sourceSegmentIds": [
+          9178,
+          9179,
+          9180,
+          9181,
+          9182,
+          9183,
+          9184,
+          9185,
+          9186,
+          9187,
+          9188,
+          9189,
+          9190,
+          9191,
+          9192,
+          9193,
+          9194,
+          9195,
+          9196,
+          9197,
+          9198,
+          9199,
+          9200,
+          9201,
+          9202,
+          9203,
+          9204,
+          9205,
+          9206,
+          9207,
+          9208,
+          9209,
+          9210,
+          9211,
+          9212,
+          9213,
+          9214,
+          9215,
+          9216,
+          9217,
+          9218,
+          9219,
+          9220,
+          9221,
+          9222,
+          9223,
+          9224,
+          9225,
+          9226,
+          9227,
+          9228,
+          9229,
+          9230,
+          9231,
+          9232,
+          9233,
+          9234,
+          9235,
+          9236,
+          9237,
+          9238
+        ],
+        "boundaryDecision": "candidate-selected-formal-utterance-closure"
+      },
+      "intervalizationDecision": {
+        "first": {
+          "formalStartMs": 1731997,
+          "formalEndMs": 1739620,
+          "selectedStartMs": 1724755,
+          "selectedEndMs": 1739800,
+          "semanticStartOrdinal": 3544,
+          "semanticEndOrdinal": 3649
+        },
+        "second": {
+          "formalStartMs": 5698719,
+          "formalEndMs": 5710496,
+          "selectedStartMs": 5693397,
+          "selectedEndMs": 5714097,
+          "semanticStartOrdinal": 9161,
+          "semanticEndOrdinal": 9244
+        },
+        "classification": "SHORT_FORM_INTERVALIZATION_LIMIT_POSSIBLE",
+        "observedCause": "前半は新聞記事、後半は鬼母伝承の朗読で具体的な文字情報はあるが、どちらも静的な説明場面である。正式発話だけでは記事見出しと「鬼母となった」という結末を落とす。",
+        "boundaryReason": "前半は「医師の失踪」の見出しから赤い服の女への反応まで、後半は子どもの死から女が鬼母となる結末までに限定し、それ以上の長い背景説明は追加しない。",
+        "shortFormAssessment": "具体化は確認できるが、短尺内で医師の失踪と鬼母の関係を追加説明なしに理解できるかは人間確認が必要。",
+        "addedFirstContextSemanticUtteranceIds": [
+          "semantic-utterance-003544",
+          "semantic-utterance-003545",
+          "semantic-utterance-003546",
+          "semantic-utterance-003547",
+          "semantic-utterance-003548",
+          "semantic-utterance-003549",
+          "semantic-utterance-003550",
+          "semantic-utterance-003551",
+          "semantic-utterance-003552",
+          "semantic-utterance-003553",
+          "semantic-utterance-003554",
+          "semantic-utterance-003555",
+          "semantic-utterance-003556",
+          "semantic-utterance-003557",
+          "semantic-utterance-003558",
+          "semantic-utterance-003559",
+          "semantic-utterance-003560",
+          "semantic-utterance-003561",
+          "semantic-utterance-003562",
+          "semantic-utterance-003563",
+          "semantic-utterance-003564",
+          "semantic-utterance-003565",
+          "semantic-utterance-003566",
+          "semantic-utterance-003567",
+          "semantic-utterance-003568",
+          "semantic-utterance-003569",
+          "semantic-utterance-003570",
+          "semantic-utterance-003571",
+          "semantic-utterance-003572",
+          "semantic-utterance-003573",
+          "semantic-utterance-003574",
+          "semantic-utterance-003575",
+          "semantic-utterance-003576",
+          "semantic-utterance-003577",
+          "semantic-utterance-003578",
+          "semantic-utterance-003579",
+          "semantic-utterance-003580",
+          "semantic-utterance-003581",
+          "semantic-utterance-003582",
+          "semantic-utterance-003583",
+          "semantic-utterance-003584",
+          "semantic-utterance-003585",
+          "semantic-utterance-003586",
+          "semantic-utterance-003587",
+          "semantic-utterance-003588",
+          "semantic-utterance-003589",
+          "semantic-utterance-003590",
+          "semantic-utterance-003591",
+          "semantic-utterance-003592",
+          "semantic-utterance-003593",
+          "semantic-utterance-003594",
+          "semantic-utterance-003595",
+          "semantic-utterance-003596",
+          "semantic-utterance-003597",
+          "semantic-utterance-003598",
+          "semantic-utterance-003599",
+          "semantic-utterance-003600",
+          "semantic-utterance-003601",
+          "semantic-utterance-003602",
+          "semantic-utterance-003603",
+          "semantic-utterance-003604",
+          "semantic-utterance-003605",
+          "semantic-utterance-003606",
+          "semantic-utterance-003607",
+          "semantic-utterance-003608",
+          "semantic-utterance-003609",
+          "semantic-utterance-003610",
+          "semantic-utterance-003647",
+          "semantic-utterance-003648",
+          "semantic-utterance-003649"
+        ],
+        "addedSecondContextSemanticUtteranceIds": [
+          "semantic-utterance-009161",
+          "semantic-utterance-009162",
+          "semantic-utterance-009163",
+          "semantic-utterance-009164",
+          "semantic-utterance-009165",
+          "semantic-utterance-009166",
+          "semantic-utterance-009167",
+          "semantic-utterance-009168",
+          "semantic-utterance-009169",
+          "semantic-utterance-009170",
+          "semantic-utterance-009171",
+          "semantic-utterance-009172",
+          "semantic-utterance-009173",
+          "semantic-utterance-009174",
+          "semantic-utterance-009175",
+          "semantic-utterance-009176",
+          "semantic-utterance-009177",
+          "semantic-utterance-009239",
+          "semantic-utterance-009240",
+          "semantic-utterance-009241",
+          "semantic-utterance-009242",
+          "semantic-utterance-009243",
+          "semantic-utterance-009244"
+        ],
+        "formalCandidateChanged": false,
+        "videoIntervalsDerivedFromFormalCandidate": true
+      }
+    }
+  ]
+}

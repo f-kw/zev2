@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "distant-connection-video-prototype-qc-v001",
+  "status": "passed",
+  "instructionCount": 2,
+  "checks": {
+    "instructionApplication": {
+      "status": "passed"
+    },
+    "layoutAndVisibility": {
+      "status": "passed"
+    },
+    "media": {
+      "status": "passed"
+    }
+  },
+  "instructionEvidence": [
+    {
+      "instructionId": "candidate-horror-claim-to-speed-up-presentation-instruction-001",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 172,
+        "top": 842,
+        "right": 1734,
+        "bottom": 975,
+        "width": 1562,
+        "height": 133
+      },
+      "lineCount": 1,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 172,
+          "top": 842,
+          "right": 1734,
+          "bottom": 975,
+          "width": 1562,
+          "height": 133
+        }
+      ],
+      "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+      "representativeFrame": 190,
+      "changedPixelsAgainstInstructionOmittedFrame": 205123,
+      "appliedOverlayPropsCanonicalSha256": "c7c8418475b9c71930df694ceacd0f1c8101fe324f20656a0880c7bd91a12549",
+      "applicationOverlayFile": "overlays/01-2584d699a840.png",
+      "inspectedOverlayFile": "overlays/01-2584d699a840.png",
+      "applicationOverlaySha256": "bc33643a6d2043eee57dcdf0e942af0a541197c7b31390a493e3b5b0fcfbaeac",
+      "overlaySha256": "bc33643a6d2043eee57dcdf0e942af0a541197c7b31390a493e3b5b0fcfbaeac"
+    },
+    {
+      "instructionId": "candidate-horror-claim-to-speed-up-presentation-instruction-002",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 153,
+        "top": 700,
+        "right": 1751,
+        "bottom": 973,
+        "width": 1598,
+        "height": 273
+      },
+      "lineCount": 2,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 153,
+          "top": 700,
+          "right": 1751,
+          "bottom": 830,
+          "width": 1598,
+          "height": 130
+        },
+        {
+          "lineIndex": 1,
+          "left": 738,
+          "top": 846,
+          "right": 1172,
+          "bottom": 973,
+          "width": 434,
+          "height": 127
+        }
+      ],
+      "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+      "representativeFrame": 576,
+      "changedPixelsAgainstInstructionOmittedFrame": 431733,
+      "appliedOverlayPropsCanonicalSha256": "32aa200b1af337814edd93a2e154074e238c74de4776517e197e3608e009ba05",
+      "applicationOverlayFile": "overlays/02-8d760b63e1f8.png",
+      "inspectedOverlayFile": "overlays/02-8d760b63e1f8.png",
+      "applicationOverlaySha256": "e62799649ee941f0e2a02ce14601de499b136872a0add5f9d91090e72a9280e8",
+      "overlaySha256": "e62799649ee941f0e2a02ce14601de499b136872a0add5f9d91090e72a9280e8"
+    }
+  ],
+  "mediaEvidence": {
+    "observed": {
+      "durationMs": 25333,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 760
+      },
+      "audio": {
+        "codecName": "aac",
+        "packetPayloadSha256": "5bd86cac8f6fca7b212ab808f04fc9f256fb7a206b42b86f1522be47c4bb44fd"
+      }
+    },
+    "expectedAudio": {
+      "present": true,
+      "codecName": "aac",
+      "packetPayloadSha256": "5bd86cac8f6fca7b212ab808f04fc9f256fb7a206b42b86f1522be47c4bb44fd"
+    },
+    "expectedFrameCount": 760
+  },
+  "violations": []
+}

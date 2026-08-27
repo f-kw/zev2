@@ -36,15 +36,18 @@ import {createPresentationRendererProcessObserverV001}
 const workspaceRoot = path.resolve(import.meta.dirname, '../..');
 const relative = (absolutePath: string) => path.relative(workspaceRoot, absolutePath);
 const buildMode = process.argv[2] ?? 'intervalization-improvement';
-if (!['intervalization-improvement', 'short-form-viability'].includes(buildMode)) {
+if (!['intervalization-improvement', 'short-form-viability', 'concrete-payoff'].includes(buildMode)) {
   throw new Error(`unknown build mode: ${buildMode}`);
 }
 const isShortFormViability = buildMode === 'short-form-viability';
+const isConcretePayoff = buildMode === 'concrete-payoff';
 const candidateResponsePath = path.join(
   workspaceRoot,
-  isShortFormViability
-    ? 'evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-short-form-viability-ymUsGrT6EaA-v001/candidate-response-v001.json'
-    : 'evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/candidate-response-v001.json'
+  isConcretePayoff
+    ? 'evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-concrete-payoff-ymUsGrT6EaA-v001/candidate-response-v001.json'
+    : isShortFormViability
+      ? 'evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-short-form-viability-ymUsGrT6EaA-v001/candidate-response-v001.json'
+      : 'evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/candidate-response-v001.json'
 );
 const semanticUtterancePath = path.join(
   workspaceRoot,
@@ -52,9 +55,11 @@ const semanticUtterancePath = path.join(
 );
 const sourcePackagePath = path.join(
   workspaceRoot,
-  isShortFormViability
-    ? 'evals/clip_composition/outputs/work-distant-connection-luna-source-package-short-form-viability-ymUsGrT6EaA-v001/source-package-v001.json'
-    : 'evals/clip_composition/outputs/work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/source-package-v001.json'
+  isConcretePayoff
+    ? 'evals/clip_composition/outputs/work-distant-connection-luna-source-package-concrete-payoff-ymUsGrT6EaA-v001/source-package-v001.json'
+    : isShortFormViability
+      ? 'evals/clip_composition/outputs/work-distant-connection-luna-source-package-short-form-viability-ymUsGrT6EaA-v001/source-package-v001.json'
+      : 'evals/clip_composition/outputs/work-distant-connection-luna-source-package-quality-increment-ymUsGrT6EaA-v001/source-package-v001.json'
 );
 const sourceVideoPath = path.join(
   workspaceRoot,
@@ -74,20 +79,26 @@ const rendererTrustPath = path.join(
 );
 const outputRoot = path.join(
   workspaceRoot,
-  isShortFormViability
-    ? 'evals/clip_composition/outputs/presentation/distant-connection-video-prototype-short-form-viability-ymUsGrT6EaA-v001'
-    : 'evals/clip_composition/outputs/presentation/distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001'
+  isConcretePayoff
+    ? 'evals/clip_composition/outputs/presentation/distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001'
+    : isShortFormViability
+      ? 'evals/clip_composition/outputs/presentation/distant-connection-video-prototype-short-form-viability-ymUsGrT6EaA-v001'
+      : 'evals/clip_composition/outputs/presentation/distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001'
 );
 const temporaryRoot = path.join(
   workspaceRoot,
-  isShortFormViability
-    ? 'evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-short-form-viability-ymUsGrT6EaA-v001.work'
-    : 'evals/clip_composition/outputs/presentation/.distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001.work'
+  isConcretePayoff
+    ? 'evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001.work'
+    : isShortFormViability
+      ? 'evals/clip_composition/outputs/presentation/.distant-connection-video-prototype-short-form-viability-ymUsGrT6EaA-v001.work'
+      : 'evals/clip_composition/outputs/presentation/.distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001.work'
 );
 
-const expectedCandidateSha = isShortFormViability
-  ? 'a73fef9ac2c1d12b46b49b0d0dab9eb6f0293aa34b89425296717fc1334b8d49'
-  : '8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d';
+const expectedCandidateSha = isConcretePayoff
+  ? '4239b6b51d3dd3dd548a9083ac0434860182d497321a89cf07c8f53eb66586b8'
+  : isShortFormViability
+    ? 'a73fef9ac2c1d12b46b49b0d0dab9eb6f0293aa34b89425296717fc1334b8d49'
+    : '8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d';
 const expectedSemanticSha = 'e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2';
 const expectedSourceVideoSha = '79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537';
 const styleProfileId = 'normal-landscape-readable-pop-v001';
@@ -163,6 +174,53 @@ const shortFormViabilityDecisions = {
   }
 } as const;
 
+const concretePayoffDecisions = {
+  'candidate-horror-claim-to-speed-up': {
+    first: {
+      formalStartMs: 249_378,
+      formalEndMs: 255_324,
+      selectedStartMs: 246_000,
+      selectedEndMs: 255_324,
+      semanticStartOrdinal: 67,
+      semanticEndOrdinal: 82
+    },
+    second: {
+      formalStartMs: 1_984_756,
+      formalEndMs: 1_994_974,
+      selectedStartMs: 1_980_000,
+      selectedEndMs: 1_996_000,
+      semanticStartOrdinal: 3_931,
+      semanticEndOrdinal: 3_952
+    },
+    classification: 'VISUAL_CAUSE_AND_REACTION_INCLUDED',
+    observedCause: '映像確認では後半の正式発話より前に、暗い通路で追跡される距離感と敵の急接近があり、その結果として「急に速くなった」と叫ぶ。正式発話だけでは何が速くなったかを落とす。',
+    boundaryReason: '前半はタイトル画面と「今年一怖い」の紹介を含む直前から、後半は追跡が加速する直前から二度の絶叫が終わる直後までを使用する。',
+    shortFormAssessment: '映像上の具体的な恐怖と反応が短い区間で見えるため、具体的回収を人間が判断できる。'
+  },
+  'candidate-doctor-disappearance-to-ogre-mother': {
+    first: {
+      formalStartMs: 1_731_997,
+      formalEndMs: 1_739_620,
+      selectedStartMs: 1_724_755,
+      selectedEndMs: 1_739_800,
+      semanticStartOrdinal: 3_544,
+      semanticEndOrdinal: 3_649
+    },
+    second: {
+      formalStartMs: 5_698_719,
+      formalEndMs: 5_710_496,
+      selectedStartMs: 5_693_397,
+      selectedEndMs: 5_714_097,
+      semanticStartOrdinal: 9_161,
+      semanticEndOrdinal: 9_244
+    },
+    classification: 'SHORT_FORM_INTERVALIZATION_LIMIT_POSSIBLE',
+    observedCause: '前半は新聞記事、後半は鬼母伝承の朗読で具体的な文字情報はあるが、どちらも静的な説明場面である。正式発話だけでは記事見出しと「鬼母となった」という結末を落とす。',
+    boundaryReason: '前半は「医師の失踪」の見出しから赤い服の女への反応まで、後半は子どもの死から女が鬼母となる結末までに限定し、それ以上の長い背景説明は追加しない。',
+    shortFormAssessment: '具体化は確認できるが、短尺内で医師の失踪と鬼母の関係を追加説明なしに理解できるかは人間確認が必要。'
+  }
+} as const;
+
 const intervalizationDecisions = isShortFormViability
   ? shortFormViabilityDecisions
   : intervalizationImprovementDecisions;
@@ -217,6 +275,7 @@ function escapeHtml(value: unknown): string {
 
 function buildContextCaptions(
   candidateId: string,
+  part: 'first' | 'second',
   rows: SemanticRow[],
   maxCueWidth: number,
   characterWidthRule: string
@@ -245,8 +304,8 @@ function buildContextCaptions(
   }
   flush();
   return groups.map((rowsInCue, index) => ({
-    cueId: `${candidateId}-second-intervalization-caption-${String(index + 1).padStart(3, '0')}`,
-    part: 'second' as const,
+    cueId: `${candidateId}-${part}-intervalization-caption-${String(index + 1).padStart(3, '0')}`,
+    part,
     text: rowsInCue.map((row) => row.text).join(''),
     semanticUtteranceIds: rowsInCue.map((row) => row.utteranceId),
     sourceUnits: rowsInCue.map((row) => ({
@@ -311,6 +370,7 @@ function applyIntervalizationImprovement(
         ...candidate.captions.filter((cue) => cue.part === 'first'),
         ...buildContextCaptions(
           candidate.candidateId,
+          'second',
           rows,
           maxLogicalWidthPerLine * maxLines,
           characterWidthRule
@@ -333,6 +393,110 @@ function applyIntervalizationImprovement(
       expansionApplied: true,
       formalCandidateChanged: false,
       reason: 'Lunaの正式発話IDは意味探索の正本として不変保持し、映像イベント・導入文脈・自然な終端を動画区間にのみ追加する。'
+    },
+    candidates
+  };
+}
+
+function applyConcretePayoffIntervalization(
+  plan: any,
+  semanticRows: SemanticRow[],
+  maxLogicalWidthPerLine: number,
+  maxLines: number,
+  characterWidthRule: string
+) {
+  const decisions = concretePayoffDecisions as Record<
+    string,
+    typeof concretePayoffDecisions[keyof typeof concretePayoffDecisions]
+  >;
+  const candidates = plan.candidates.map((candidate: DistantConnectionVideoCandidatePlanV001) => {
+    const decision = decisions[candidate.candidateId];
+    if (!decision) throw new Error(`${candidate.candidateId}の具体的回収区間判断がありません`);
+    const resolveSelectedPart = (partName: 'first' | 'second') => {
+      const formalPart = candidate[`${partName}Part`];
+      const partDecision = decision[partName];
+      if (formalPart.sourceStartMs !== partDecision.formalStartMs
+        || formalPart.sourceEndMs !== partDecision.formalEndMs) {
+        throw new Error(`${candidate.candidateId}の正式${partName}区間が調査対象と一致しません`);
+      }
+      const rows = semanticRows.filter((row) =>
+        row.ordinal >= partDecision.semanticStartOrdinal
+        && row.ordinal <= partDecision.semanticEndOrdinal);
+      if (rows.length !== partDecision.semanticEndOrdinal - partDecision.semanticStartOrdinal + 1
+        || rows[0]?.ordinal !== partDecision.semanticStartOrdinal
+        || rows.at(-1)?.ordinal !== partDecision.semanticEndOrdinal) {
+        throw new Error(`${candidate.candidateId}の${partName}周辺文脈が正式意味発話で連続していません`);
+      }
+      if (rows[0].sourceStartMs < partDecision.selectedStartMs
+        || rows.at(-1)!.sourceEndMs > partDecision.selectedEndMs) {
+        throw new Error(`${candidate.candidateId}の${partName}字幕が選択動画区間外です`);
+      }
+      const selectedPart = {
+        sourceStartMs: partDecision.selectedStartMs,
+        sourceEndMs: partDecision.selectedEndMs,
+        text: rows.map((row) => row.text).join(''),
+        semanticUtteranceIds: rows.map((row) => row.utteranceId),
+        sourceSegmentIds: rows.flatMap((row) => row.sourceSegmentIds),
+        boundaryDecision: 'human-reviewed-local-concrete-payoff-intervalization-v001'
+      };
+      if (!formalPart.semanticUtteranceIds.every((id: string) =>
+        selectedPart.semanticUtteranceIds.includes(id))) {
+        throw new Error(`${candidate.candidateId}の${partName}動画区間がLunaの正式発話を包含していません`);
+      }
+      return {formalPart, selectedPart, rows};
+    };
+    const first = resolveSelectedPart('first');
+    const second = resolveSelectedPart('second');
+    if (second.selectedPart.sourceStartMs <= first.selectedPart.sourceEndMs) {
+      throw new Error(`${candidate.candidateId}の前半と後半が時間的に離れていません`);
+    }
+    return {
+      ...candidate,
+      formalFirstPart: first.formalPart,
+      formalSecondPart: second.formalPart,
+      firstPart: first.selectedPart,
+      secondPart: second.selectedPart,
+      gapMs: second.selectedPart.sourceStartMs - first.selectedPart.sourceEndMs,
+      outputDurationMs:
+        (first.selectedPart.sourceEndMs - first.selectedPart.sourceStartMs)
+        + (second.selectedPart.sourceEndMs - second.selectedPart.sourceStartMs),
+      captions: [
+        ...buildContextCaptions(
+          candidate.candidateId,
+          'first',
+          first.rows,
+          maxLogicalWidthPerLine * maxLines,
+          characterWidthRule
+        ),
+        ...buildContextCaptions(
+          candidate.candidateId,
+          'second',
+          second.rows,
+          maxLogicalWidthPerLine * maxLines,
+          characterWidthRule
+        )
+      ],
+      intervalizationDecision: {
+        ...decision,
+        addedFirstContextSemanticUtteranceIds: first.selectedPart.semanticUtteranceIds.filter(
+          (id: string) => !first.formalPart.semanticUtteranceIds.includes(id)
+        ),
+        addedSecondContextSemanticUtteranceIds: second.selectedPart.semanticUtteranceIds.filter(
+          (id: string) => !second.formalPart.semanticUtteranceIds.includes(id)
+        ),
+        formalCandidateChanged: false,
+        videoIntervalsDerivedFromFormalCandidate: true
+      }
+    };
+  });
+  return {
+    ...plan,
+    schemaVersion: 'distant-connection-video-concrete-payoff-plan-v001',
+    intervalPolicy: {
+      selection: 'local-evidence-guided-both-part-intervalization',
+      expansionApplied: true,
+      formalCandidateChanged: false,
+      reason: 'Lunaの正式候補を不変保持し、映像上の原因・出来事・反応と自然な文脈だけを前後の動画区間へ追加する。'
     },
     candidates
   };
@@ -501,33 +665,53 @@ async function manufactureBaseMedia(
 }
 
 function buildReviewHtml(results: any[]): string {
-  const cards = results.map((result) => `<article>
+  const cards = results.map((result) => {
+    const formalFirstPart = result.formalFirstPart ?? result.firstPart;
+    const firstLabel = isConcretePayoff ? '動画用前半' : '前半（不変）';
+    const contextSection = isConcretePayoff
+      ? `<section class="speech"><h2>Lunaが選んだ前半発話（不変）</h2><p>${escapeHtml(formalFirstPart.text)}</p></section>
+    <section class="speech improved"><h2>実際に使用した前半動画区間</h2><p>${escapeHtml(result.firstPart.text)}</p></section>
+    <section class="speech"><h2>Lunaが選んだ後半発話（不変）</h2><p>${escapeHtml(result.formalSecondPart.text)}</p></section>
+    <section class="speech improved"><h2>実際に使用した後半動画区間</h2><p>${escapeHtml(result.secondPart.text)}</p></section>`
+      : `<section class="speech"><h2>前半の実際の発話</h2><p>${escapeHtml(result.firstPart.text)}</p></section>
+    <section class="speech"><h2>Lunaが選んだ後半発話（不変）</h2><p>${escapeHtml(result.formalSecondPart.text)}</p></section>
+    <section class="speech improved"><h2>動画用に追加した周辺文脈</h2><p>${escapeHtml(result.secondPart.text)}</p></section>`;
+    return `<article>
     <header><span class="candidate">${escapeHtml(result.candidateId)}</span><span class="passed">✓ QC合格</span></header>
     <video controls preload="metadata" src="${escapeHtml(result.videoRelativePath)}"></video>
-    <div class="times"><strong>前半（不変）</strong> ${escapeHtml(formatClock(result.firstPart.sourceStartMs))}–${escapeHtml(formatClock(result.firstPart.sourceEndMs))}<br>
+    <div class="times"><strong>正式前半</strong> ${escapeHtml(formatClock(formalFirstPart.sourceStartMs))}–${escapeHtml(formatClock(formalFirstPart.sourceEndMs))}<br>
+    <strong>${escapeHtml(firstLabel)}</strong> ${escapeHtml(formatClock(result.firstPart.sourceStartMs))}–${escapeHtml(formatClock(result.firstPart.sourceEndMs))}<br>
     <strong>旧後半</strong> ${escapeHtml(formatClock(result.formalSecondPart.sourceStartMs))}–${escapeHtml(formatClock(result.formalSecondPart.sourceEndMs))}<br>
     <strong>改善後半</strong> ${escapeHtml(formatClock(result.secondPart.sourceStartMs))}–${escapeHtml(formatClock(result.secondPart.sourceEndMs))}<br>
     <strong>距離</strong> ${escapeHtml(formatGap(result.gapMs))}</div>
-    <section class="speech"><h2>前半の実際の発話</h2><p>${escapeHtml(result.firstPart.text)}</p></section>
-    <section class="speech"><h2>Lunaが選んだ後半発話（不変）</h2><p>${escapeHtml(result.formalSecondPart.text)}</p></section>
-    <section class="speech improved"><h2>動画用に追加した周辺文脈</h2><p>${escapeHtml(result.secondPart.text)}</p></section>
+    ${contextSection}
     <section><h2>現物調査で分かったこと</h2><p>${escapeHtml(result.intervalizationDecision.observedCause)}</p></section>
     <section><h2>改善境界の理由</h2><p>${escapeHtml(result.intervalizationDecision.boundaryReason)}</p></section>
+    ${isConcretePayoff ? `<section><h2>短尺成立についての所見</h2><p>${escapeHtml(result.intervalizationDecision.shortFormAssessment)}</p></section>` : ''}
     <section><h2>前を付けることで分かること</h2><p>${escapeHtml(result.addedUnderstanding)}</p></section>
     <p class="sha">video SHA-256 ${escapeHtml(result.video.fileSha256)}</p>
-  </article>`).join('\n');
-  const pageTitle = isShortFormViability
-    ? 'ymUsGrT6EaA 遠方接続 短尺成立条件3候補'
-    : 'ymUsGrT6EaA 遠方接続 区間化改善版';
-  const heading = isShortFormViability
-    ? '遠方接続 — 短尺成立条件反映後の3候補'
-    : '遠方接続 — 区間化改善版2件';
-  const lead = isShortFormViability
-    ? '短尺成立条件を追加したLuna候補を、原因映像・導入文脈・自然な終端を落とさない最小区間で動画化しました。正式候補の発話IDは変更していません。'
-    : 'Lunaが選んだ意味上の発話は変えず、実際の映像イベント・導入文脈・自然な終端を後半動画へ補いました。旧動画は保持されています。';
-  const reviewPoints = isShortFormViability
-    ? '①前→後だけで接続を理解できるか　②前半で後半の理解・回収感・面白さが増えるか　③余計な説明を必要としないか　④短尺としてテンポを壊していないか'
-    : '重要場面を含めたことで接続が成立したか／それでも接続自体が弱いか。候補の正式採否はまだ行いません。';
+  </article>`;
+  }).join('\n');
+  const pageTitle = isConcretePayoff
+    ? 'ymUsGrT6EaA 遠方接続 具体的回収2候補'
+    : isShortFormViability
+      ? 'ymUsGrT6EaA 遠方接続 短尺成立条件3候補'
+      : 'ymUsGrT6EaA 遠方接続 区間化改善版';
+  const heading = isConcretePayoff
+    ? '遠方接続 — 具体的回収条件反映後の2候補'
+    : isShortFormViability
+      ? '遠方接続 — 短尺成立条件反映後の3候補'
+      : '遠方接続 — 区間化改善版2件';
+  const lead = isConcretePayoff
+    ? '単なる同一話題ではなく、前半の具体的な情報が後半で回収されるかを実動画で確認します。正式候補は変更せず、映像上の原因・出来事・反応を落とさない区間だけを使用しました。'
+    : isShortFormViability
+      ? '短尺成立条件を追加したLuna候補を、原因映像・導入文脈・自然な終端を落とさない最小区間で動画化しました。正式候補の発話IDは変更していません。'
+      : 'Lunaが選んだ意味上の発話は変えず、実際の映像イベント・導入文脈・自然な終端を後半動画へ補いました。旧動画は保持されています。';
+  const reviewPoints = isConcretePayoff
+    ? '①前→後だけで接続が分かるか　②前半で後半の意味・回収感・面白さが増えるか　③単なる同一話題ではなく具体的回収か　④余計な説明なしに短尺として成立するか'
+    : isShortFormViability
+      ? '①前→後だけで接続を理解できるか　②前半で後半の理解・回収感・面白さが増えるか　③余計な説明を必要としないか　④短尺としてテンポを壊していないか'
+      : '重要場面を含めたことで接続が成立したか／それでも接続自体が弱いか。候補の正式採否はまだ行いません。';
   return `<!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${escapeHtml(pageTitle)}</title><style>
@@ -576,13 +760,21 @@ async function main() {
       maxLines: visualState.layout.maxLines,
       characterWidthRule: rendererTrust.layoutRules.characterWidthRule
     });
-    return applyIntervalizationImprovement(
-      formalPlan,
-      semanticArtifact.utterances,
-      maxLogicalWidthPerLine,
-      visualState.layout.maxLines,
-      rendererTrust.layoutRules.characterWidthRule
-    );
+    return isConcretePayoff
+      ? applyConcretePayoffIntervalization(
+        formalPlan,
+        semanticArtifact.utterances,
+        maxLogicalWidthPerLine,
+        visualState.layout.maxLines,
+        rendererTrust.layoutRules.characterWidthRule
+      )
+      : applyIntervalizationImprovement(
+        formalPlan,
+        semanticArtifact.utterances,
+        maxLogicalWidthPerLine,
+        visualState.layout.maxLines,
+        rendererTrust.layoutRules.characterWidthRule
+      );
   };
   const selectionObserver = createPresentationRendererProcessObserverV001({
     observationDirectory: path.join(temporaryRoot, 'unused-layout-selection-observations')
@@ -752,6 +944,7 @@ async function main() {
       sourceVideoBinding: plan.sourceVideoBinding,
       candidateResponseBinding: plan.candidateResponseBinding,
       semanticUtteranceBinding: plan.semanticUtteranceBinding,
+      formalFirstPart: candidate.formalFirstPart ?? candidate.firstPart,
       firstPart: candidate.firstPart,
       formalSecondPart: candidate.formalSecondPart,
       secondPart: candidate.secondPart,
@@ -801,6 +994,7 @@ async function main() {
       anchorId: candidate.anchorId,
       direction: candidate.direction,
       addedUnderstanding: candidate.addedUnderstanding,
+      formalFirstPart: candidate.formalFirstPart ?? candidate.firstPart,
       firstPart: candidate.firstPart,
       formalSecondPart: candidate.formalSecondPart,
       secondPart: candidate.secondPart,
@@ -849,7 +1043,12 @@ async function main() {
       semanticUtteranceShaMatches: sha256(await readFile(semanticUtterancePath)) === expectedSemanticSha,
       unrelatedMiddleIntervalsIncluded: false,
       formalCandidatesChanged: false,
-      firstPartsChanged: false,
+      firstPartsChanged: results.some((row) =>
+        row.firstPart.sourceStartMs !== row.formalFirstPart.sourceStartMs
+        || row.firstPart.sourceEndMs !== row.formalFirstPart.sourceEndMs),
+      firstPartsContainFormalSelections: results.every((row) =>
+        row.formalFirstPart.semanticUtteranceIds.every((id: string) =>
+          row.firstPart.semanticUtteranceIds.includes(id))),
       secondPartsContainFormalSelections: results.every((row) =>
         row.formalSecondPart.semanticUtteranceIds.every((id: string) =>
           row.secondPart.semanticUtteranceIds.includes(id))),
@@ -864,6 +1063,7 @@ async function main() {
     || !finalManifest.qc.sourceVideoShaMatches
     || !finalManifest.qc.candidateResponseShaMatches
     || !finalManifest.qc.semanticUtteranceShaMatches
+    || !finalManifest.qc.firstPartsContainFormalSelections
     || !finalManifest.qc.secondPartsContainFormalSelections) {
     throw new Error('final prototype QC failed');
   }
