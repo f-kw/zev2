@@ -30,13 +30,21 @@ import {
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..');
 const sourcePackagePath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-source-package-short-form-viability-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-source-package-concrete-payoff-ymUsGrT6EaA-v001/'
   + 'source-package-v001.json';
 const requestPath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-b5-short-form-viability-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-b5-concrete-payoff-ymUsGrT6EaA-v001/'
   + 'exact-request-v001.json';
 const manifestPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-concrete-payoff-ymUsGrT6EaA-v001/'
+  + 'b5-local-manifest-v001.json';
+const shortFormRequestPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-short-form-viability-ymUsGrT6EaA-v001/'
+  + 'exact-request-v001.json';
+const shortFormManifestPath =
   'evals/clip_composition/outputs/'
   + 'work-distant-connection-luna-b5-short-form-viability-ymUsGrT6EaA-v001/'
   + 'b5-local-manifest-v001.json';
@@ -587,8 +595,8 @@ test('短尺成立条件追加後のtoken計測を新exact requestへ束縛し�
     measurementBytes,
     evaluationBytes
   ] = await Promise.all([
-    readFile(path.join(workspaceRoot, requestPath)),
-    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, shortFormRequestPath)),
+    readFile(path.join(workspaceRoot, shortFormManifestPath)),
     readFile(path.join(workspaceRoot, shortFormTokenCountRoot,
       'attempt-0001/input-token-count-request-v001.json')),
     readFile(path.join(workspaceRoot, shortFormTokenCountRoot,

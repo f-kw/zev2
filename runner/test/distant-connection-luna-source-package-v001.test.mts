@@ -196,6 +196,22 @@ test('全文の正式意味発話・コメント起点・探索目的・返答sc
   );
   assert.match(
     sourcePackage.explorationTask.returnInstruction,
+    /単なる話題一致ではなく、前半に含まれる具体的な情報・出来事・予告・認識/u
+  );
+  assert.match(
+    sourcePackage.explorationTask.returnInstruction,
+    /後半が同じ対象や出来事に触れるだけでは、具体的な回収ではありません/u
+  );
+  assert.match(
+    sourcePackage.explorationTask.returnInstruction,
+    /後半で具体的な強烈な恐怖演出が起き本人が絶叫するなら候補になり得ます/u
+  );
+  assert.match(
+    sourcePackage.explorationTask.returnInstruction,
+    /前半だけで人物や話題を特定できず/u
+  );
+  assert.match(
+    sourcePackage.explorationTask.returnInstruction,
     /必要な前提情報が、短尺動画として自然な長さに収まる候補だけ/u
   );
   assert.match(

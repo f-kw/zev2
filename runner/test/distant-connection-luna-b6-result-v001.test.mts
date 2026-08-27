@@ -12,13 +12,25 @@ import {
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..');
 const sourcePackagePath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-source-package-short-form-viability-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-source-package-concrete-payoff-ymUsGrT6EaA-v001/'
   + 'source-package-v001.json';
 const requestPath =
   'evals/clip_composition/outputs/'
-  + 'work-distant-connection-luna-b5-short-form-viability-ymUsGrT6EaA-v001/'
+  + 'work-distant-connection-luna-b5-concrete-payoff-ymUsGrT6EaA-v001/'
   + 'exact-request-v001.json';
 const manifestPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-concrete-payoff-ymUsGrT6EaA-v001/'
+  + 'b5-local-manifest-v001.json';
+const shortFormSourcePackagePath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-source-package-short-form-viability-ymUsGrT6EaA-v001/'
+  + 'source-package-v001.json';
+const shortFormRequestPath =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b5-short-form-viability-ymUsGrT6EaA-v001/'
+  + 'exact-request-v001.json';
+const shortFormManifestPath =
   'evals/clip_composition/outputs/'
   + 'work-distant-connection-luna-b5-short-form-viability-ymUsGrT6EaA-v001/'
   + 'b5-local-manifest-v001.json';
@@ -347,7 +359,7 @@ test('探索品質改訂後の実配信B6一式は履歴としてbyte不変に�
   assert.equal(sha256(priceSnapshotBytes), '9d53b52a6e1726bcbf715137a32d6819d668c4023e89ddf2d81edaec7f5166d7');
 });
 
-test('短尺成立条件追加後の実配信B6候補3件をstrict再構築し保存byteと一致させる', async () => {
+test('短尺成立条件追加後の実配信B6一式を履歴としてbyte不変に保つ', async () => {
   const [
     sourcePackageBytes,
     requestBytes,
@@ -360,9 +372,9 @@ test('短尺成立条件追加後の実配信B6候補3件をstrict再構築し�
     transportBytes,
     processBytes
   ] = await Promise.all([
-    readFile(path.join(workspaceRoot, sourcePackagePath)),
-    readFile(path.join(workspaceRoot, requestPath)),
-    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, shortFormSourcePackagePath)),
+    readFile(path.join(workspaceRoot, shortFormRequestPath)),
+    readFile(path.join(workspaceRoot, shortFormManifestPath)),
     readFile(path.join(workspaceRoot, shortFormTokenMeasurementPath)),
     readFile(path.join(workspaceRoot, shortFormRawResponsePath)),
     readFile(path.join(workspaceRoot, priceSnapshotPath)),
@@ -372,30 +384,14 @@ test('短尺成立条件追加後の実配信B6候補3件をstrict再構築し�
     readFile(path.join(workspaceRoot, shortFormB6Root,
       'attempt-0001/process-observation-v001.json'))
   ]);
-  const rebuilt = buildDistantConnectionLunaB6ResultArtifactsV001({
-    sourcePackagePath,
-    sourcePackageBytes,
-    requestPath,
-    requestBytes,
-    b5ManifestBytes,
-    tokenMeasurementPath: shortFormTokenMeasurementPath,
-    tokenMeasurementBytes,
-    rawResponsePath: shortFormRawResponsePath,
-    rawResponseBytes,
-    candidateResponsePath: shortFormCandidateResponsePath,
-    priceSnapshotPath,
-    priceSnapshotBytes,
-    maximumNanoUsd: 1_000_000_000
-  });
-  assert.equal(rebuilt.response.candidates.length, 3);
-  assert.equal(rebuilt.manifest.validation.decision, 'passed');
-  assert.equal(rebuilt.manifest.cost.totalUsd, 0.4541279);
-  assert.equal(rebuilt.manifest.cost.withinMaximum, true);
-  assert.deepEqual(rebuilt.responseBytes, savedCandidateBytes);
-  assert.deepEqual(rebuilt.manifestBytes, savedManifestBytes);
+  assert.equal(sha256(sourcePackageBytes), 'ac429b473a39c8fb72175992eb444d8b34df8a3fef7b3970af91950fe8d322db');
+  assert.equal(sha256(requestBytes), 'f3bd1bedf7867f2a2f7bbe9553ad05125f107f07c594874f12f45335a48e716f');
+  assert.equal(sha256(b5ManifestBytes), 'd421223adb33efa8f37ff57d0a646ceeeba99ecabbd71c9d8078135f624f6b9f');
+  assert.equal(sha256(tokenMeasurementBytes), '6ed8c28949093e23c96e0eb179c05eca6ce29a239d2d13f717702d9d4a31330c');
   assert.equal(sha256(savedCandidateBytes), 'a73fef9ac2c1d12b46b49b0d0dab9eb6f0293aa34b89425296717fc1334b8d49');
   assert.equal(sha256(savedManifestBytes), '2137e4ca0916370172759322efec67b59e691032b5ec5d5b6746c729f2bba804');
   assert.equal(sha256(rawResponseBytes), '22bd28162cc094fa48240b0c57d8488994e24c24b2c5601c4c881176c5224353');
+  assert.equal(sha256(priceSnapshotBytes), '9d53b52a6e1726bcbf715137a32d6819d668c4023e89ddf2d81edaec7f5166d7');
   const transport = JSON.parse(transportBytes.toString('utf8'));
   assert.equal(transport.httpStatus, 200);
   assert.equal(transport.paidB6CallNumberInShortFormRevision, 1);
