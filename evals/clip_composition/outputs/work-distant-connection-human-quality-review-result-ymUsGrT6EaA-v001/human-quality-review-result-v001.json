@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "distant-connection-human-quality-review-result-v001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "reviewedAt": "2026-08-29",
+  "reviewer": "kawafmm",
+  "sourceBindings": {
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-concrete-payoff-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "schemaVersion": "distant-connection-luna-response-v001",
+      "fileSha256": "4239b6b51d3dd3dd548a9083ac0434860182d497321a89cf07c8f53eb66586b8"
+    },
+    "videoPrototypeResult": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001/video-intervalization-improvement-result-v001.json",
+      "schemaVersion": "distant-connection-video-intervalization-improvement-result-v001",
+      "fileSha256": "8137a990774f78974008e8bbe8555f8618ce4933a968dd3295c22b017db2b527"
+    }
+  },
+  "candidateCount": 2,
+  "candidateReviews": [
+    {
+      "candidateId": "candidate-horror-claim-to-speed-up",
+      "connectionValidity": "pass",
+      "payoffStrength": "fail",
+      "visualSuitability": "not-primary-cause",
+      "intervalizationEvaluation": "pass",
+      "finalDecision": "fail",
+      "humanReason": "接続関係自体はある。ただし後半の恐怖場面・反応が弱く、「今年一怖い」という前振りに対する回収強度が不足している。意味接続と具体的回収の存在だけでは採用価値を保証できない。"
+    },
+    {
+      "candidateId": "candidate-doctor-disappearance-to-ogre-mother",
+      "connectionValidity": "pass",
+      "payoffStrength": "story-level-pass",
+      "visualSuitability": "fail",
+      "intervalizationEvaluation": "pass",
+      "finalDecision": "fail",
+      "humanReason": "物語上の意味接続はある。ただし前後とも文字情報中心で、映像としての変化・反応・魅力が弱い。意味的には成立していてもショート動画として弱い。"
+    }
+  ],
+  "responsibilityPrinciple": "Lunaは意味上の接続と文章上の回収候補を提示する。区間化は候補を実動画区間へ変換し、動画QCは技術成立を検査する。実動画を確認した人間が接続成立・回収強度・映像適性・区間化評価・最終採否を独立して正式所有する。"
+}
