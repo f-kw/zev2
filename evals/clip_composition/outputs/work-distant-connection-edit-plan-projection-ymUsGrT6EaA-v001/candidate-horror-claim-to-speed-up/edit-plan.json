@@ -1,0 +1,95 @@
+{
+  "kind": "edit_plan_json",
+  "schemaVersion": "distant-connection-edit-plan-projection-v001",
+  "projectionId": "ymUsGrT6EaA-candidate-horror-claim-to-speed-up-edit-plan-projection-v001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "candidateId": "candidate-horror-claim-to-speed-up",
+  "sourceBindings": {
+    "intervalizationPlan": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-intervalization-plan-ymUsGrT6EaA-v002/intervalization-plan-v002.json",
+      "schemaVersion": "distant-connection-intervalization-plan-v002",
+      "fileSha256": "f9a4c6e3b524117fd46b56d8e14bb410dea9747fec1657022ab69d15019be192"
+    },
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-concrete-payoff-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "schemaVersion": "distant-connection-luna-response-v001",
+      "fileSha256": "4239b6b51d3dd3dd548a9083ac0434860182d497321a89cf07c8f53eb66586b8"
+    },
+    "semanticUtterance": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-semantic-utterance-ymUsGrT6EaA-v001/semantic-utterance-artifact-v001.json",
+      "schemaVersion": "semantic-utterance-artifact-v001",
+      "fileSha256": "e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2"
+    },
+    "sourceVideo": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "sourceUri": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    }
+  },
+  "segments": [
+    {
+      "part": "first",
+      "sourceStartMs": 246000,
+      "sourceEndMs": 255324,
+      "includedSemanticUtteranceIds": [
+        "semantic-utterance-000067",
+        "semantic-utterance-000068",
+        "semantic-utterance-000069",
+        "semantic-utterance-000070",
+        "semantic-utterance-000071",
+        "semantic-utterance-000072",
+        "semantic-utterance-000073",
+        "semantic-utterance-000074",
+        "semantic-utterance-000075",
+        "semantic-utterance-000076",
+        "semantic-utterance-000077",
+        "semantic-utterance-000078",
+        "semantic-utterance-000079",
+        "semantic-utterance-000080",
+        "semantic-utterance-000081",
+        "semantic-utterance-000082"
+      ],
+      "expansionReasons": [
+        "candidate-utterance-containment",
+        "minimal-introduction-context"
+      ],
+      "reason": "前半はタイトル画面と「今年一怖い」の紹介を含む直前から、後半は追跡が加速する直前から二度の絶叫が終わる直後までを使用する。"
+    },
+    {
+      "part": "second",
+      "sourceStartMs": 1980000,
+      "sourceEndMs": 1996000,
+      "includedSemanticUtteranceIds": [
+        "semantic-utterance-003931",
+        "semantic-utterance-003932",
+        "semantic-utterance-003933",
+        "semantic-utterance-003934",
+        "semantic-utterance-003935",
+        "semantic-utterance-003936",
+        "semantic-utterance-003937",
+        "semantic-utterance-003938",
+        "semantic-utterance-003939",
+        "semantic-utterance-003940",
+        "semantic-utterance-003941",
+        "semantic-utterance-003942",
+        "semantic-utterance-003943",
+        "semantic-utterance-003944",
+        "semantic-utterance-003945",
+        "semantic-utterance-003946",
+        "semantic-utterance-003947",
+        "semantic-utterance-003948",
+        "semantic-utterance-003949",
+        "semantic-utterance-003950",
+        "semantic-utterance-003951",
+        "semantic-utterance-003952"
+      ],
+      "expansionReasons": [
+        "candidate-utterance-containment",
+        "cause-visual",
+        "natural-ending"
+      ],
+      "reason": "前半はタイトル画面と「今年一怖い」の紹介を含む直前から、後半は追跡が加速する直前から二度の絶叫が終わる直後までを使用する。"
+    }
+  ],
+  "responsibilityPrinciple": "本projectionは一般区間化計画v002の候補別first・second区間を、既存基礎映像builderが来歴として受理するedit_plan_jsonへ無変更投影する。区間判断・候補採否・描画責務は所有しない。"
+}
