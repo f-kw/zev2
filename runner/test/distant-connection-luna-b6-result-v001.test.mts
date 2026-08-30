@@ -105,6 +105,15 @@ const concretePayoffCandidateResponsePath =
   `${concretePayoffB6Root}/candidate-response-v001.json`;
 const concretePayoffRunManifestPath =
   `${concretePayoffB6Root}/b6-run-manifest-v001.json`;
+const newCandidateB6Root =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b6-new-candidates-ymUsGrT6EaA-v001';
+const newCandidateRawResponsePath =
+  `${newCandidateB6Root}/attempt-0001/raw-response-v001.json`;
+const newCandidateResponsePath =
+  `${newCandidateB6Root}/candidate-response-v001.json`;
+const newCandidateRunManifestPath =
+  `${newCandidateB6Root}/b6-run-manifest-v001.json`;
 
 function sha256(bytes: Uint8Array): string {
   return createHash('sha256').update(bytes).digest('hex');
@@ -469,6 +478,72 @@ test('具体的回収条件追加後の実配信B6候補2件をstrict再構築�
   const transport = JSON.parse(transportBytes.toString('utf8'));
   assert.equal(transport.httpStatus, 200);
   assert.equal(transport.paidB6CallNumberInConcretePayoffRevision, 1);
+  assert.equal(transport.rawResponseBinding.fileSha256, sha256(rawResponseBytes));
+  const process = JSON.parse(processBytes.toString('utf8'));
+  assert.equal(process.exitCode, 0);
+  assert.equal(process.signal, null);
+  assert.equal(process.stderr, '');
+  assert.equal(process.rawResponseSavedBeforeRead, true);
+});
+
+test('新selection候補生成のB6候補1件をstrict再構築し保存byteと一致させる', async () => {
+  const [
+    sourcePackageBytes,
+    requestBytes,
+    b5ManifestBytes,
+    tokenMeasurementBytes,
+    rawResponseBytes,
+    priceSnapshotBytes,
+    savedCandidateBytes,
+    savedManifestBytes,
+    transportBytes,
+    processBytes
+  ] = await Promise.all([
+    readFile(path.join(workspaceRoot, sourcePackagePath)),
+    readFile(path.join(workspaceRoot, requestPath)),
+    readFile(path.join(workspaceRoot, manifestPath)),
+    readFile(path.join(workspaceRoot, concretePayoffTokenMeasurementPath)),
+    readFile(path.join(workspaceRoot, newCandidateRawResponsePath)),
+    readFile(path.join(workspaceRoot, priceSnapshotPath)),
+    readFile(path.join(workspaceRoot, newCandidateResponsePath)),
+    readFile(path.join(workspaceRoot, newCandidateRunManifestPath)),
+    readFile(path.join(workspaceRoot, newCandidateB6Root,
+      'attempt-0001/transport-v001.json')),
+    readFile(path.join(workspaceRoot, newCandidateB6Root,
+      'attempt-0001/process-observation-v001.json'))
+  ]);
+  const rebuilt = buildDistantConnectionLunaB6ResultArtifactsV001({
+    sourcePackagePath,
+    sourcePackageBytes,
+    requestPath,
+    requestBytes,
+    b5ManifestBytes,
+    tokenMeasurementPath: concretePayoffTokenMeasurementPath,
+    tokenMeasurementBytes,
+    rawResponsePath: newCandidateRawResponsePath,
+    rawResponseBytes,
+    candidateResponsePath: newCandidateResponsePath,
+    priceSnapshotPath,
+    priceSnapshotBytes,
+    maximumNanoUsd: 1_000_000_000
+  });
+  assert.equal(rebuilt.response.candidates.length, 1);
+  assert.equal(rebuilt.response.candidates[0]?.candidateId,
+    'candidate-horror-game-to-screams-001');
+  assert.equal(rebuilt.manifest.validation.decision, 'passed');
+  assert.equal(rebuilt.manifest.cost.totalUsd, 0.4498791);
+  assert.equal(rebuilt.manifest.cost.withinMaximum, true);
+  assert.deepEqual(rebuilt.responseBytes, savedCandidateBytes);
+  assert.deepEqual(rebuilt.manifestBytes, savedManifestBytes);
+  assert.equal(sha256(savedCandidateBytes),
+    'cd21549ffa65b749e76c44710ccc6a92bdcf3ca99d07df4e281f5becf3277216');
+  assert.equal(sha256(savedManifestBytes),
+    '4835f7e3ed77d760b227c4019755c6628f2244883159d6a23871df2c27356183');
+  assert.equal(sha256(rawResponseBytes),
+    'ec1b1bd88060c546943c5dc9bf8cf55c956cfd0987c185ebb5c221f2aae1a94b');
+  const transport = JSON.parse(transportBytes.toString('utf8'));
+  assert.equal(transport.httpStatus, 200);
+  assert.equal(transport.paidB6CallNumberInNewCandidateGate, 1);
   assert.equal(transport.rawResponseBinding.fileSha256, sha256(rawResponseBytes));
   const process = JSON.parse(processBytes.toString('utf8'));
   assert.equal(process.exitCode, 0);
