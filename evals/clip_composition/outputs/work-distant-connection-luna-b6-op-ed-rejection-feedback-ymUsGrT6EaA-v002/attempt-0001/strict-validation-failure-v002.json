@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "distant-connection-luna-b6-strict-validation-failure-v002",
+  "attemptId": "attempt-0001",
+  "observedAt": "2026-08-30T13:24:55Z",
+  "requestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-op-ed-rejection-feedback-ymUsGrT6EaA-v002/exact-request-v002.json",
+    "fileSha256": "4aef551e0e35f5e2c04b1da20b8f27e13027a4df830ed566f8287e85c9052c5b"
+  },
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-op-ed-rejection-feedback-ymUsGrT6EaA-v002/source-package-v002.json",
+    "fileSha256": "13bdd7e8b0184cd1cf8a5c8e6515e6e4c11574bf10fd6f24a113eb1c0fbbabea"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-op-ed-rejection-feedback-ymUsGrT6EaA-v002/attempt-0001/raw-response-v002.json",
+    "fileSha256": "3bbe99f094c2ceb42d9e6e71113d6bd64868715d21255d6a5c9bc6e060422139"
+  },
+  "provider": {
+    "responseId": "resp_0a9b0e9d78adcee0016a942eb20c9087d0ba9cf0ee6555f7b8",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "medium",
+    "httpStatus": 200,
+    "providerCandidateCount": 2
+  },
+  "usage": {
+    "inputTokens": 894620,
+    "cachedInputTokens": 0,
+    "cacheWriteTokens": 894617,
+    "uncachedNonWriteInputTokens": 3,
+    "outputTokens": 2035,
+    "reasoningTokens": 1460,
+    "totalTokens": 896655
+  },
+  "cost": {
+    "inputNanoUsd": 1200,
+    "cachedInputNanoUsd": 0,
+    "cacheWriteNanoUsd": 447308500,
+    "outputNanoUsd": 3663000,
+    "totalNanoUsd": 450972700,
+    "totalUsd": 0.4509727,
+    "approvedMaximumNanoUsd": 1000000000,
+    "withinMaximum": true
+  },
+  "strictValidation": {
+    "decision": "rejected",
+    "errorCode": "UNKNOWN_ANCHOR_ID",
+    "message": "候補candidate-door-opening-to-entrapment-001が未知のアンカーを参照しています",
+    "candidateObservations": [
+      {
+        "candidateId": "candidate-door-opening-to-entrapment-001",
+        "anchorId": "comment-anchor-002000",
+        "anchorExistsInSourcePackage": false
+      },
+      {
+        "candidateId": "candidate-locked-door-to-key-objective-001",
+        "anchorId": "comment-anchor-000972",
+        "anchorExistsInSourcePackage": false
+      }
+    ]
+  },
+  "publication": {
+    "formalCandidateArtifactPublished": false,
+    "b6RunManifestPublished": false,
+    "duplicateAuditPublished": false,
+    "candidateReviewMp4Count": 0,
+    "formalSelectionPublished": false
+  },
+  "executionControl": {
+    "paidB6CallCount": 1,
+    "automaticRetry": false,
+    "secondB6CallExecuted": false
+  }
+}

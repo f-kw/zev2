@@ -27,6 +27,10 @@ const candidateResponsePath = 'outputs/test-b6-v002-candidate-response.json';
 const priceSnapshotPath =
   'evals/clip_composition/reports/presentation/provider-research/'
   + 'openai-gpt-5-6-luna-official-snapshot-20260816-v001.json';
+const realAttemptRoot =
+  'evals/clip_composition/outputs/'
+  + 'work-distant-connection-luna-b6-op-ed-rejection-feedback-ymUsGrT6EaA-v002/'
+  + 'attempt-0001';
 
 function sha256(bytes: Uint8Array): string {
   return createHash('sha256').update(bytes).digest('hex');
@@ -171,4 +175,31 @@ test('同一保存入力から同一candidate byte・manifest byteを再構築�
   const second = buildDistantConnectionLunaB6ResultArtifactsV002(input);
   assert.deepEqual(first.responseBytes, second.responseBytes);
   assert.deepEqual(first.manifestBytes, second.manifestBytes);
+});
+
+test('実走rawは未知anchorをstrict拒否し、失敗証拠と一致する', async () => {
+  const input = await validInput();
+  const [rawResponseBytes, failureBytes] = await Promise.all([
+    readFile(path.join(workspaceRoot, realAttemptRoot, 'raw-response-v002.json')),
+    readFile(path.join(workspaceRoot, realAttemptRoot, 'strict-validation-failure-v002.json'))
+  ]);
+  assert.throws(
+    () => buildDistantConnectionLunaB6ResultArtifactsV002({
+      ...input,
+      rawResponsePath: `${realAttemptRoot}/raw-response-v002.json`,
+      rawResponseBytes
+    }),
+    (error: any) => error?.code === 'UNKNOWN_ANCHOR_ID'
+  );
+  const failure = JSON.parse(failureBytes.toString('utf8'));
+  assert.equal(failure.rawResponseBinding.fileSha256, sha256(rawResponseBytes));
+  assert.equal(failure.strictValidation.errorCode, 'UNKNOWN_ANCHOR_ID');
+  assert.deepEqual(
+    failure.strictValidation.candidateObservations.map((item: any) => item.anchorExistsInSourcePackage),
+    [false, false]
+  );
+  assert.equal(failure.executionControl.paidB6CallCount, 1);
+  assert.equal(failure.executionControl.secondB6CallExecuted, false);
+  assert.equal(failure.publication.formalCandidateArtifactPublished, false);
+  assert.equal(failure.publication.candidateReviewMp4Count, 0);
 });

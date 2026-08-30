@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "distant-connection-luna-b6-preflight-v002",
+  "attemptId": "attempt-0001",
+  "approvalReference": "ZEV相談役・kawafmm裁定 2026-08-30: updated exact-request-v002 B6 one paid call",
+  "endpoint": "https://api.openai.com/v1/responses",
+  "approvedPaidB6Calls": 1,
+  "automaticRetry": false,
+  "bindings": {
+    "sourcePackage": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-op-ed-rejection-feedback-ymUsGrT6EaA-v002/source-package-v002.json",
+      "fileSha256": "13bdd7e8b0184cd1cf8a5c8e6515e6e4c11574bf10fd6f24a113eb1c0fbbabea"
+    },
+    "exactRequest": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-op-ed-rejection-feedback-ymUsGrT6EaA-v002/exact-request-v002.json",
+      "fileSha256": "4aef551e0e35f5e2c04b1da20b8f27e13027a4df830ed566f8287e85c9052c5b"
+    },
+    "b5LocalManifest": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-op-ed-rejection-feedback-ymUsGrT6EaA-v002/b5-local-manifest-v002.json",
+      "fileSha256": "b9f023a983eedee924d2fff86e7a658e88c00de13a94d33811af7b72a594f496"
+    }
+  },
+  "requestSettings": {
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "medium",
+    "responseFormatType": "json_schema",
+    "responseFormatName": "distant_connection_candidates_v001",
+    "responseFormatStrict": true,
+    "store": false
+  },
+  "explorationCoverage": {
+    "semanticUtteranceCount": 10723,
+    "anchorCount": 4442,
+    "reduced": false
+  },
+  "costAdmission": {
+    "approvedMaximumNanoUsd": 1000000000,
+    "officialContextWindowTokens": 1050000,
+    "officialMaximumOutputTokens": 128000,
+    "worstCaseLongContextNanoUsd": 755400000,
+    "decision": "passed"
+  },
+  "credential": {
+    "source": ".env:OPENAI_API_KEY",
+    "valuePersisted": false
+  },
+  "checks": {
+    "allShaBindings": "passed",
+    "requestInputByteIdentity": "passed",
+    "responseSchemaBinding": "passed",
+    "b5B6RequestBinding": "passed",
+    "fullUtteranceAndAnchorInput": "passed",
+    "costAdmission": "passed"
+  }
+}
