@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "distant-connection-candidate-human-review-result-v001",
+  "reviewId": "candidate-horror-game-to-screams-001-human-review-v001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "candidateId": "candidate-horror-game-to-screams-001",
+  "reviewedAt": "2026-08-30T11:36:39.000Z",
+  "reviewer": {
+    "kind": "human",
+    "id": "kawafmm"
+  },
+  "sourceBindings": {
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-new-candidates-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "schemaVersion": "distant-connection-luna-response-v001",
+      "fileSha256": "cd21549ffa65b749e76c44710ccc6a92bdcf3ca99d07df4e281f5becf3277216"
+    },
+    "candidateReviewResult": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v001/candidate-horror-game-to-screams-001/candidate-review-result-v001.json",
+      "schemaVersion": "distant-connection-candidate-review-result-v001",
+      "fileSha256": "7cd117df0609cf258f62d91d2d032eb7cc54d8903d56e2f626ef26478bce1fb8"
+    }
+  },
+  "evaluatedIntervals": {
+    "firstPartSourceInterval": {
+      "sourceStartMs": 249378,
+      "sourceEndMs": 255324
+    },
+    "secondPartSourceInterval": {
+      "sourceStartMs": 6134433,
+      "sourceEndMs": 6141636
+    }
+  },
+  "verdict": "rejected",
+  "primaryCause": "candidate-selection",
+  "reason": "配信冒頭の一般的なゲーム紹介と終了時の振り返りを結んだだけで、両者の関係が短尺動画内で普通の視聴者に自明ではない。関係を理解しても、後半の理解・回収感・意外性・面白さが増えないため、遠方接続として不合格。",
+  "selectionStatus": "not-selected",
+  "responsibilityPrinciple": "本成果物はcandidate review artifactを見た人間の候補評価を保存する。正式selectionや正式区間を生成・承認せず、不採用候補をnot-selectedのまま保持する。"
+}

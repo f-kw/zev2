@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "distant-connection-candidate-review-job-v001",
+  "jobId": "candidate-horror-game-to-screams-001-review-job-v001",
+  "artifactClassification": "candidate-review-artifact",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "candidateId": "candidate-horror-game-to-screams-001",
+  "sourceBindings": {
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-new-candidates-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "schemaVersion": "distant-connection-luna-response-v001",
+      "fileSha256": "cd21549ffa65b749e76c44710ccc6a92bdcf3ca99d07df4e281f5becf3277216"
+    },
+    "semanticUtterance": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-semantic-utterance-ymUsGrT6EaA-v001/semantic-utterance-artifact-v001.json",
+      "schemaVersion": "semantic-utterance-artifact-v001",
+      "fileSha256": "e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2"
+    },
+    "sourcePackage": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-concrete-payoff-ymUsGrT6EaA-v001/source-package-v001.json",
+      "schemaVersion": "distant-connection-luna-source-package-v001",
+      "fileSha256": "23d555928762e5a98ccf13c291e0a80ae1935a5cd49010f36512498f5033f6df"
+    },
+    "sourceVideo": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    }
+  },
+  "orderedParts": [
+    {
+      "part": "first",
+      "selectedSemanticUtteranceIds": [
+        "semantic-utterance-000067",
+        "semantic-utterance-000068",
+        "semantic-utterance-000069",
+        "semantic-utterance-000070",
+        "semantic-utterance-000071",
+        "semantic-utterance-000072",
+        "semantic-utterance-000073",
+        "semantic-utterance-000074",
+        "semantic-utterance-000075",
+        "semantic-utterance-000076",
+        "semantic-utterance-000077",
+        "semantic-utterance-000078",
+        "semantic-utterance-000079",
+        "semantic-utterance-000080",
+        "semantic-utterance-000081",
+        "semantic-utterance-000082"
+      ],
+      "enclosedSemanticUtteranceIds": [
+        "semantic-utterance-000067",
+        "semantic-utterance-000068",
+        "semantic-utterance-000069",
+        "semantic-utterance-000070",
+        "semantic-utterance-000071",
+        "semantic-utterance-000072",
+        "semantic-utterance-000073",
+        "semantic-utterance-000074",
+        "semantic-utterance-000075",
+        "semantic-utterance-000076",
+        "semantic-utterance-000077",
+        "semantic-utterance-000078",
+        "semantic-utterance-000079",
+        "semantic-utterance-000080",
+        "semantic-utterance-000081",
+        "semantic-utterance-000082"
+      ],
+      "firstOrdinal": 67,
+      "lastOrdinal": 82,
+      "sourceInterval": {
+        "sourceStartMs": 249378,
+        "sourceEndMs": 255324
+      }
+    },
+    {
+      "part": "second",
+      "selectedSemanticUtteranceIds": [
+        "semantic-utterance-010644",
+        "semantic-utterance-010645",
+        "semantic-utterance-010646",
+        "semantic-utterance-010647",
+        "semantic-utterance-010648",
+        "semantic-utterance-010649",
+        "semantic-utterance-010650",
+        "semantic-utterance-010658",
+        "semantic-utterance-010659",
+        "semantic-utterance-010660",
+        "semantic-utterance-010661",
+        "semantic-utterance-010662",
+        "semantic-utterance-010663",
+        "semantic-utterance-010664"
+      ],
+      "enclosedSemanticUtteranceIds": [
+        "semantic-utterance-010644",
+        "semantic-utterance-010645",
+        "semantic-utterance-010646",
+        "semantic-utterance-010647",
+        "semantic-utterance-010648",
+        "semantic-utterance-010649",
+        "semantic-utterance-010650",
+        "semantic-utterance-010651",
+        "semantic-utterance-010652",
+        "semantic-utterance-010653",
+        "semantic-utterance-010654",
+        "semantic-utterance-010655",
+        "semantic-utterance-010656",
+        "semantic-utterance-010657",
+        "semantic-utterance-010658",
+        "semantic-utterance-010659",
+        "semantic-utterance-010660",
+        "semantic-utterance-010661",
+        "semantic-utterance-010662",
+        "semantic-utterance-010663",
+        "semantic-utterance-010664"
+      ],
+      "firstOrdinal": 10644,
+      "lastOrdinal": 10664,
+      "sourceInterval": {
+        "sourceStartMs": 6134433,
+        "sourceEndMs": 6141636
+      }
+    }
+  ],
+  "output": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v001/candidate-horror-game-to-screams-001/candidate-review-v001.mp4",
+    "container": "mp4"
+  },
+  "ffmpeg": {
+    "executable": "ffmpeg",
+    "args": [
+      "-hide_banner",
+      "-nostdin",
+      "-n",
+      "-ss",
+      "249.378",
+      "-to",
+      "255.324",
+      "-i",
+      "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "-ss",
+      "6134.433",
+      "-to",
+      "6141.636",
+      "-i",
+      "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "-filter_complex",
+      "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]",
+      "-map",
+      "[outv]",
+      "-map",
+      "[outa]",
+      "-c:v",
+      "libx264",
+      "-c:a",
+      "aac",
+      "-movflags",
+      "+faststart",
+      "evals/clip_composition/outputs/work-distant-connection-candidate-review-v001/candidate-horror-game-to-screams-001/candidate-review-v001.mp4"
+    ]
+  },
+  "statusFlags": {
+    "formalSelection": false,
+    "formalRenderer": false,
+    "completedShort": false,
+    "technicalQcCompleted": false
+  },
+  "responsibilityPrinciple": "本成果物は正式selection前の候補を人間が直接確認するため、前半・後半それぞれを最初の選択発話開始から最後の選択発話終了までの元映像・元音声区間へ決定的に投影する。候補採否、正式区間承認、正式renderer出力、完成short、技術QCを所有しない。"
+}
