@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "distant-connection-presentation-execution-job-v001",
+  "jobId": "candidate-doctor-disappearance-to-ogre-mother-presentation-execution-v001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "candidateId": "candidate-doctor-disappearance-to-ogre-mother",
+  "inputs": {
+    "renderAdapterJob": {
+      "schemaVersion": "distant-connection-render-adapter-job-v002",
+      "path": "evals/clip_composition/outputs/work-distant-connection-render-adapter-ymUsGrT6EaA-v002/render-adapter-job-v002.json",
+      "fileSha256": "e1d9ca181e1fc84c0c3422dd4263ea35740b6a633f6bfa407260df16b2ddb413",
+      "canonicalSha256": "f7c2bb17c8759d3dadc7188c4675ce31f51627a22993c058b8f35a4da2fdd37b"
+    },
+    "presentationMeaningInput": {
+      "schemaVersion": "distant-connection-presentation-meaning-input-v001",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/meaning-input-v001.json",
+      "fileSha256": "389448931673096c6971ad2d96f00c3c05b7a767f23e44dfc19d015b6bc4009b",
+      "canonicalSha256": "f8e854170523fd8db0a9588314beadb215aef787b17bad8d5650fb1d720d52db"
+    },
+    "sourceVideo": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    },
+    "baseMedia": {
+      "media": {
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-doctor-disappearance-to-ogre-mother-audio-grid-v003/base-media.mp4",
+        "fileSha256": "9bbf87100b7fe2ab11f83c587b98565beeebe11f97bd31c7b41e12a53c4fe89d"
+      },
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v003",
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-doctor-disappearance-to-ogre-mother-audio-grid-v003/timeline.json",
+        "fileSha256": "5dac9288fc5f84463bbfe32f8a6cb066bdcadcc9ff70782ba929dd50c6cb57bd",
+        "canonicalSha256": "6dd17fc51ac44d4ac4c08eb9ab2dd80cec8baf3eab3270d1bdd73c41f14a687a"
+      },
+      "generationManifest": {
+        "schemaVersion": "presentation-base-media-generation-manifest-v003",
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-doctor-disappearance-to-ogre-mother-audio-grid-v003/generation-manifest.json",
+        "fileSha256": "ecba9de2118f0777eab123e3cb0742ecc23f1c147276b035125f7cea5a2ca272",
+        "canonicalSha256": "fe8688f34937d9161ee5ec96eb27308612921eb2b1a9879a3de24199c106b74a"
+      },
+      "validationReceipt": {
+        "schemaVersion": "presentation-base-media-validation-report-v001",
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-doctor-disappearance-to-ogre-mother-audio-grid-v003/validation-report.json",
+        "fileSha256": "21ea9ed58ad03b54aea6ca634c296789a2a13f0ecdfd03c12965b13f2da24554",
+        "canonicalSha256": "94ce2ddb0c02eab14dcd251b0e0722ac64de371b55ec3bfb075430a07dd4f07f"
+      }
+    },
+    "approvedSelection": {
+      "sourcePackage": {
+        "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+        "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+        "canonicalSha256": "5594ddf2d1aa08660d893b7b8de7f37954f760981f76d615d13187034c5e3c8a"
+      },
+      "selection": {
+        "schemaVersion": "presentation-output-caption-cue-selection-v001",
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/cue-selection-v001.json",
+        "fileSha256": "e6a6c11cdb46929c23378560ad387964e8279ffdc572469795d2a7cac571d095",
+        "canonicalSha256": "67bd9aabcb233b9d430ccaafa564c237a4d2b043e7f48ebd2932fb828184062a"
+      }
+    },
+    "rendererJobTemplate": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-template-v002.json",
+      "fileSha256": "cfdb4c6e18e47cde8ea9fe2302d35993a7795ad804586adc36ff601c8ddfca5e",
+      "canonicalSha256": "3b72513981982691439d1dcc2d7cb3f200c4ce04663316edcef35bf260185703"
+    }
+  },
+  "executionPolicy": {
+    "selectionHandling": "preserve-response-and-rebind-source-package-v001",
+    "renderingHandling": "reuse-renderer-v002-settings-v001",
+    "styleProfileId": "normal-landscape-readable-pop-v001",
+    "externalAiExecution": "forbidden"
+  },
+  "implementationBinding": {
+    "role": "distant-connection-presentation-execution-v001",
+    "path": "evals/clip_composition/distant_connection_presentation_execution_v001.mts",
+    "fileSha256": "2edc907a9168fdd3d65bf8a93e325d1f975a86b4452eb56f02a6a44dae631848"
+  },
+  "publication": {
+    "root": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001",
+    "sourcePackagePath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+    "selectionPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/approved-selection-adapter-v001.json",
+    "cueEndProjectionPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/cue-end-projection-v001.json",
+    "lineEndProjectionPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/semantic-line-end-projection-v001.json",
+    "instructionPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/presentation-instruction-v002.json",
+    "rendererJobPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-job-v002.json",
+    "admissionReceiptPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/admission-receipt-v002.json",
+    "lineLayoutPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/line-layout-v002.json",
+    "renderOutputRoot": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/render-output-v001",
+    "rendererExecutionResultPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-execution-result-v002.json",
+    "executionResultPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/execution-result-v001.json"
+  },
+  "responsibilityPrinciple": "本jobは既存の正式selection判断を変更せず実在するjobへ再束縛し、既存renderer v002へ決定的に渡す。候補探索、再selection、字幕意味判断、区間判断、候補採否、外部AI実行を行わない。"
+}

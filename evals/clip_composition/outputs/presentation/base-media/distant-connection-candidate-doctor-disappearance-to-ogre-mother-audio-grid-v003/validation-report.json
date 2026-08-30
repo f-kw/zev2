@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "presentation-base-media-validation-report-v001",
+  "buildId": "base-media-build-e5d030bfafddafbd80c48cc5",
+  "status": "passed",
+  "violations": [],
+  "inputs": {
+    "assemblyDecision": {
+      "path": "evals/clip_composition/outputs/presentation/source-assembly-formalizations/ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-edit-plan-projection-v001/assembly-decision.json",
+      "fileSha256": "8a9e4dccfa3a08c8a33db71261efbd4f3f0c7df70bff84def65acb8358a33362",
+      "payloadSha256": "751f5b8de4fe9e38a2f479071cf192c40518b4e827198fda135c74f2e30fd0a6"
+    },
+    "basisEditPlan": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-edit-plan-projection-ymUsGrT6EaA-v001/candidate-doctor-disappearance-to-ogre-mother/edit-plan.json",
+      "fileSha256": "ea5aac7a133da5575660dc4527f14625e5eddafad191bbae98532641146d8bc0"
+    },
+    "sourceMedia": {
+      "path": "evals/clip_composition/research/downloads/ymUsGrT6EaA/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    }
+  },
+  "outputs": {
+    "baseMedia": {
+      "artifactId": "base-media-e5d030bfafddafbd80c48cc5",
+      "path": "base-media.mp4",
+      "fileSha256": "9bbf87100b7fe2ab11f83c587b98565beeebe11f97bd31c7b41e12a53c4fe89d"
+    },
+    "timeline": {
+      "timelineId": "timeline-e5d030bfafddafbd80c48cc5",
+      "path": "timeline.json",
+      "fileSha256": "5dac9288fc5f84463bbfe32f8a6cb066bdcadcc9ff70782ba929dd50c6cb57bd"
+    },
+    "generationManifest": {
+      "buildId": "base-media-build-e5d030bfafddafbd80c48cc5",
+      "path": "generation-manifest.json",
+      "fileSha256": "ecba9de2118f0777eab123e3cb0742ecc23f1c147276b035125f7cea5a2ca272"
+    }
+  },
+  "checks": {
+    "approvalBinding": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "sourceBinding": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "videoQc": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "audioQc": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "timelineQc": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "hashGraph": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "publishPreconditions": {
+      "status": "passed",
+      "violationCodes": []
+    }
+  }
+}

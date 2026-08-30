@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "distant-connection-existing-caption-selection-projection-job-v001",
+  "jobId": "candidate-doctor-disappearance-to-ogre-mother-existing-caption-selection-v001",
+  "candidateId": "candidate-doctor-disappearance-to-ogre-mother",
+  "artifactId": "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001",
+  "inputs": {
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-concrete-payoff-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "fileSha256": "4239b6b51d3dd3dd548a9083ac0434860182d497321a89cf07c8f53eb66586b8"
+    },
+    "semanticUtterance": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-semantic-utterance-ymUsGrT6EaA-v001/semantic-utterance-artifact-v001.json",
+      "fileSha256": "e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2"
+    },
+    "intervalizationPlan": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-intervalization-plan-ymUsGrT6EaA-v002/intervalization-plan-v002.json",
+      "fileSha256": "f9a4c6e3b524117fd46b56d8e14bb410dea9747fec1657022ab69d15019be192"
+    },
+    "editPlanProjection": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-edit-plan-projection-ymUsGrT6EaA-v001/candidate-doctor-disappearance-to-ogre-mother/edit-plan.json",
+      "fileSha256": "ea5aac7a133da5575660dc4527f14625e5eddafad191bbae98532641146d8bc0"
+    },
+    "assemblyDecision": {
+      "path": "evals/clip_composition/outputs/presentation/source-assembly-formalizations/ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-edit-plan-projection-v001/assembly-decision.json",
+      "fileSha256": "8a9e4dccfa3a08c8a33db71261efbd4f3f0c7df70bff84def65acb8358a33362"
+    },
+    "baseMediaRoot": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-doctor-disappearance-to-ogre-mother-audio-grid-v003",
+    "historicalInstruction": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001/candidates/candidate-doctor-disappearance-to-ogre-mother/render/presentation-instruction-v001.json",
+      "fileSha256": "3e25598a7a8a008122d15d1f544d1300801ab0b7142cfa080934b7514c310467"
+    },
+    "historicalLineLayout": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-video-prototype-concrete-payoff-ymUsGrT6EaA-v001/candidates/candidate-doctor-disappearance-to-ogre-mother/render/line-layout-v001.json",
+      "fileSha256": "feff6a35afd85c3cc97865414608e5c84befbb7e96f71a001de84dec3c0dd3d5"
+    },
+    "styleSourcePackage": {
+      "path": "evals/clip_composition/reports/presentation/test-runs/20260814-zevo-caption-quality-v002-f-gate-attempt-0011/fixtures/source-package-v001.json",
+      "fileSha256": "06525d18519ca367b85447552647227df60fcbe729c631811413ee54a5be4d20"
+    }
+  },
+  "outputs": {
+    "root": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001",
+    "meaningInputPath": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/meaning-input-v001.json",
+    "sourcePackagePath": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+    "selectionPath": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/cue-selection-v001.json"
+  },
+  "implementationBinding": {
+    "role": "distant-connection-existing-caption-selection-projection-v001",
+    "path": "evals/clip_composition/distant_connection_existing_caption_selection_projection_v001.mts",
+    "fileSha256": "2be3a5404fa8cded8aa0803af61bbe23091f0f79c076f921db8541e19670ba84"
+  },
+  "responsibilityPrinciple": "本jobは既存動画で実使用された字幕区切りと行末を、正式意味入力の本文・発話順と完全照合して既存selection契約へ無変更投影する。新しい字幕判断、要約、言い換え、候補選択、区間判断を行わない。"
+}
