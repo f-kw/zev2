@@ -703,10 +703,9 @@ function inspectGenerationManifest(manifestInput, add) {
         if (!isNonNegativeInteger(samples[field])) invalid(`${path}.audioSamples.${field}`);
       }
       if (samplesPerVideoFrame !== null) {
-        const offsetSamples = video.presentationOffsetMs * sourceAudio.sampleRate / 1000;
-        if (!isNonNegativeInteger(offsetSamples)) {
-          invalid('$generationManifest.source.video.presentationOffsetMs');
-        }
+        const offsetSamples = Math.round(
+          video.presentationOffsetMs * sourceAudio.sampleRate / 1000,
+        );
         const expectedSourceStart = offsetSamples + segment.sourceStartFrame30 * samplesPerVideoFrame;
         const nominalSourceEnd = offsetSamples + segment.sourceEndFrame30 * samplesPerVideoFrame;
         const expectedOutputStart = segment.outputStartFrame * samplesPerVideoFrame;

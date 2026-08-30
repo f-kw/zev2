@@ -39,7 +39,9 @@ const run = (command, args) => new Promise((resolve, reject) => {
   }));
 });
 
-const createClockFixture = async ({name, videoOffsetSeconds = 0, audioInputs = 1}) => {
+const createClockFixture = async ({
+  name, videoOffsetSeconds = 0, audioInputs = 1, sampleRate = 48000,
+}) => {
   const output = path.join(runtimeRoot, `${name}.mp4`);
   const args = [
     '-hide_banner', '-loglevel', 'error', '-y',
@@ -49,14 +51,14 @@ const createClockFixture = async ({name, videoOffsetSeconds = 0, audioInputs = 1
   for (let index = 0; index < audioInputs; index += 1) {
     args.push(
       '-f', 'lavfi', '-i',
-      `sine=frequency=${880 + index * 220}:sample_rate=48000:duration=0.2`,
+      `sine=frequency=${880 + index * 220}:sample_rate=${sampleRate}:duration=0.2`,
     );
   }
   args.push('-map', '0:v:0');
   for (let index = 0; index < audioInputs; index += 1) args.push('-map', `${index + 1}:a:0`);
   args.push(
     '-c:v', 'libx264', '-bf', '0', '-pix_fmt', 'yuv420p',
-    '-c:a', 'aac', '-ar', '48000', '-ac', '1',
+    '-c:a', 'aac', '-ar', String(sampleRate), '-ac', '1',
     '-video_track_timescale', '90000', '-avoid_negative_ts', 'disabled',
     '-map_metadata', '-1', output,
   );
@@ -120,8 +122,10 @@ test('offset=0msの既存型sourceを受理する', async () => {
   assert.equal(validation.mappings[0].audioSamples.sourceStart, 0);
 });
 
-test('offset=16msを元PTSのまま受理しvideo/audio対応へ反映する', async () => {
-  const source = await createClockFixture({name: 'offset-16', videoOffsetSeconds: 0.016});
+test('offset=16msを元PTSのまま受理し44.1kHz音声の最寄りsampleへ対応する', async () => {
+  const source = await createClockFixture({
+    name: 'offset-16', videoOffsetSeconds: 0.016, sampleRate: 44100,
+  });
   const inspection = await inspectPresentationBaseMediaSourceV002(source);
   assert.deepEqual(
     {
@@ -151,8 +155,8 @@ test('offset=16msを元PTSのまま受理しvideo/audio対応へ反映する', a
   );
   assert.equal(validation.status, 'passed');
   assert.equal(validation.mappings[0].sourceStartFrame30, 3);
-  assert.equal(validation.mappings[0].audioSamples.sourceStart, 5568);
-  assert.equal(validation.mappings[0].audioSamples.sourceStart / 48000, 0.116);
+  assert.equal(validation.mappings[0].audioSamples.sourceStart, 5116);
+  assert.ok(Math.abs(validation.mappings[0].audioSamples.sourceStart / 44100 - 0.116) < 1 / 44100);
 });
 
 test('stream構成変更をfail-closedで拒否する', async () => {

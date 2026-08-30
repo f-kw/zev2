@@ -1253,15 +1253,12 @@ const buildSegmentMappings = (segments, sourceClock, audioClock) => {
     };
     if (audioClock) {
       const samplesPerVideoFrame = audioClock.sampleRate / 30;
-      const offsetSamples = presentationOffsetMs * audioClock.sampleRate / 1000;
+      // container時刻を音声sample gridへ対応させる。44.1kHzでは16msが
+      // 705.6 samplesなので、offset単体の整数性ではなく実在する最寄りの
+      // sample境界へ決定的に写像する。
+      const offsetSamples = Math.round(presentationOffsetMs * audioClock.sampleRate / 1000);
       if (!Number.isInteger(samplesPerVideoFrame)) {
         throwBuild('BASE_MEDIA_AUDIO_SOURCE_CLOCK_INVALID', '$source.audio.sampleRate');
-      }
-      if (!Number.isInteger(offsetSamples)) {
-        throwBuild('BASE_MEDIA_VIDEO_SOURCE_CLOCK_INVALID', '$source.video.presentationOffsetMs', {
-          presentationOffsetMs,
-          sampleRate: audioClock.sampleRate,
-        });
       }
       const sourceStartSample = offsetSamples + sourceStartFrame30 * samplesPerVideoFrame;
       const nominalSourceEndSample = offsetSamples + sourceEndFrame30 * samplesPerVideoFrame;

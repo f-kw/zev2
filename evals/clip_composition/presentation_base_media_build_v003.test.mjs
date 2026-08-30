@@ -542,11 +542,11 @@ test('60fps globally takes even source frames and produces the same 30fps frame 
   assertColorFamily(await framePixel(outputMedia, 3), 'cyan');
 });
 
-test('16ms video offsetを保持したままframeとaudioを同じcontainer時刻へ対応させる', async () => {
+test('16ms video offsetを44.1kHzの最寄りsampleへ写像しcontainer時刻を維持する', async () => {
   const sourcePath = await createSource({
     name: 'video-60-offset-16ms',
     fps: 60,
-    sampleRate: 48000,
+    sampleRate: 44100,
     videoOffsetSeconds: 0.016,
     videoTrackTimeScale: 90000,
   });
@@ -577,10 +577,10 @@ test('16ms video offsetを保持したままframeとaudioを同じcontainer時�
     [3, 4],
   );
   assert.deepEqual(manifest.segments[0].audioSamples, {
-    sourceStart: 5568,
-    sourceEnd: 7168,
+    sourceStart: 5116,
+    sourceEnd: 6586,
     outputStart: 0,
-    outputEnd: 1600,
+    outputEnd: 1470,
   });
   assert.equal(validatePresentationBaseMediaTimelineV004(timeline, manifest, {
     fileSha256: manifest.outputs.baseMedia.fileSha256,
