@@ -1,0 +1,216 @@
+{
+  "schemaVersion": "distant-connection-luna-b5-local-manifest-v003",
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-op-ed-rejection-feedback-ymUsGrT6EaA-v002/source-package-v002.json",
+    "schemaVersion": "distant-connection-luna-source-package-v002",
+    "fileSha256": "13bdd7e8b0184cd1cf8a5c8e6515e6e4c11574bf10fd6f24a113eb1c0fbbabea"
+  },
+  "indexedModelInputBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-index-reference-ymUsGrT6EaA-v001/indexed-model-input-v001.json",
+    "schemaVersion": "distant-connection-luna-indexed-model-input-v001",
+    "fileSha256": "ce7bd510cec2e9ea0aed570405335e7115baf65698c6dc15b49acc2f8bee8425"
+  },
+  "requestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-reference-integrity-ymUsGrT6EaA-v003/exact-request-v003.json",
+    "schemaVersion": "openai-responses-distant-connection-request-v003",
+    "fileSha256": "cb96df0e74dce404d115607824fc55d359e67737909ecfd5ad1f4deb4ee61426"
+  },
+  "requestSettings": {
+    "providerId": "openai-api",
+    "modelId": "gpt-5.6-luna",
+    "operationId": "responses",
+    "reasoningEffort": "medium",
+    "responseFormatName": "distant_connection_index_response_v001",
+    "store": false
+  },
+  "measurementContract": {
+    "schemaVersion": "distant-connection-luna-b5-measurement-v003",
+    "jsonSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "sourcePackageBinding",
+        "indexedModelInputBinding",
+        "requestBinding",
+        "providerId",
+        "modelId",
+        "tokenMeasurement",
+        "costEvaluation"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "const": "distant-connection-luna-b5-measurement-v003"
+        },
+        "sourcePackageBinding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "schemaVersion",
+            "fileSha256"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "const": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-op-ed-rejection-feedback-ymUsGrT6EaA-v002/source-package-v002.json"
+            },
+            "schemaVersion": {
+              "type": "string",
+              "const": "distant-connection-luna-source-package-v002"
+            },
+            "fileSha256": {
+              "type": "string",
+              "const": "13bdd7e8b0184cd1cf8a5c8e6515e6e4c11574bf10fd6f24a113eb1c0fbbabea"
+            }
+          }
+        },
+        "indexedModelInputBinding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "schemaVersion",
+            "fileSha256"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "const": "evals/clip_composition/outputs/work-distant-connection-luna-index-reference-ymUsGrT6EaA-v001/indexed-model-input-v001.json"
+            },
+            "schemaVersion": {
+              "type": "string",
+              "const": "distant-connection-luna-indexed-model-input-v001"
+            },
+            "fileSha256": {
+              "type": "string",
+              "const": "ce7bd510cec2e9ea0aed570405335e7115baf65698c6dc15b49acc2f8bee8425"
+            }
+          }
+        },
+        "requestBinding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "schemaVersion",
+            "fileSha256"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "const": "evals/clip_composition/outputs/work-distant-connection-luna-b5-reference-integrity-ymUsGrT6EaA-v003/exact-request-v003.json"
+            },
+            "schemaVersion": {
+              "type": "string",
+              "const": "openai-responses-distant-connection-request-v003"
+            },
+            "fileSha256": {
+              "type": "string",
+              "const": "cb96df0e74dce404d115607824fc55d359e67737909ecfd5ad1f4deb4ee61426"
+            }
+          }
+        },
+        "providerId": {
+          "type": "string",
+          "const": "openai-api"
+        },
+        "modelId": {
+          "type": "string",
+          "const": "gpt-5.6-luna"
+        },
+        "tokenMeasurement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "rawResponseBinding",
+            "inputTokens"
+          ],
+          "properties": {
+            "rawResponseBinding": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "path",
+                "schemaVersion",
+                "fileSha256"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "schemaVersion": {
+                  "type": "string"
+                },
+                "fileSha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            },
+            "inputTokens": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "costEvaluation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "priceSnapshotBinding",
+            "maximumNanoUsd",
+            "projectedNanoUsd",
+            "decision"
+          ],
+          "properties": {
+            "priceSnapshotBinding": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "path",
+                "schemaVersion",
+                "fileSha256"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "schemaVersion": {
+                  "type": "string"
+                },
+                "fileSha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            },
+            "maximumNanoUsd": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "projectedNanoUsd": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "decision": {
+              "type": "string",
+              "enum": [
+                "passed",
+                "stopped"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "b6ContinuationContract": {
+    "requiredRequestBinding": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-reference-integrity-ymUsGrT6EaA-v003/exact-request-v003.json",
+      "schemaVersion": "openai-responses-distant-connection-request-v003",
+      "fileSha256": "cb96df0e74dce404d115607824fc55d359e67737909ecfd5ad1f4deb4ee61426"
+    }
+  }
+}
