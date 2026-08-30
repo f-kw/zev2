@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "presentation-base-media-timeline-v003",
+  "timelineId": "timeline-17a4939d10c39921f4653890",
+  "sourceProvenance": "zev-local-stt-chunked",
+  "sourceRef": "youtube:ymUsGrT6EaA",
+  "sourceFrameClock": {
+    "inputFrameRate": "60/1",
+    "logicalFrameRate": "30/1",
+    "extractionRuleId": "source-frame-60fps-global-even-v001",
+    "decodedFrameCount": 370924,
+    "containerStartTimeMs": 0,
+    "videoStreamTimeBase": "1/90000",
+    "videoFirstPts": 1440,
+    "videoPtsStep": 1500,
+    "videoPresentationOffsetMs": 16
+  },
+  "baseMedia": {
+    "artifactId": "base-media-17a4939d10c39921f4653890",
+    "path": "base-media.mp4",
+    "fileSha256": "9e4d3f1747779a443c58262cebcb4da43543b44759f50be54d0b813e689661f6",
+    "frameRate": "30/1",
+    "expectedFrameCount": 759
+  },
+  "segments": [
+    {
+      "segmentId": "segment-0001",
+      "sourceStartMs": 246000,
+      "sourceEndMs": 255324,
+      "sourceStartFrame30": 7380,
+      "sourceEndFrame30": 7659,
+      "outputStartFrame": 0,
+      "outputEndFrame": 279
+    },
+    {
+      "segmentId": "segment-0002",
+      "sourceStartMs": 1980000,
+      "sourceEndMs": 1996000,
+      "sourceStartFrame30": 59400,
+      "sourceEndFrame30": 59880,
+      "outputStartFrame": 279,
+      "outputEndFrame": 759
+    }
+  ]
+}

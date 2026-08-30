@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "presentation-base-media-validation-report-v001",
+  "buildId": "base-media-build-17a4939d10c39921f4653890",
+  "status": "passed",
+  "violations": [],
+  "inputs": {
+    "assemblyDecision": {
+      "path": "evals/clip_composition/outputs/presentation/source-assembly-formalizations/ymUsGrT6EaA-candidate-horror-claim-to-speed-up-edit-plan-projection-v001/assembly-decision.json",
+      "fileSha256": "bd9a0394c1caec7008d291c272aba62798b17f4a9a31c880b57ba68e44a76ca3",
+      "payloadSha256": "062d1c1560a450d1fa5e3d14c5523075964a73c9d3fef5869fdc7917a7d825d9"
+    },
+    "basisEditPlan": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-edit-plan-projection-ymUsGrT6EaA-v001/candidate-horror-claim-to-speed-up/edit-plan.json",
+      "fileSha256": "961b4f529fb5abff4ffa11129e6ee55967977794ba1bb15d394c2cd8ffee9db6"
+    },
+    "sourceMedia": {
+      "path": "evals/clip_composition/research/downloads/ymUsGrT6EaA/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    }
+  },
+  "outputs": {
+    "baseMedia": {
+      "artifactId": "base-media-17a4939d10c39921f4653890",
+      "path": "base-media.mp4",
+      "fileSha256": "9e4d3f1747779a443c58262cebcb4da43543b44759f50be54d0b813e689661f6"
+    },
+    "timeline": {
+      "timelineId": "timeline-17a4939d10c39921f4653890",
+      "path": "timeline.json",
+      "fileSha256": "185354ccceb41243d6c32519bd950dc8be585d1673eba32fc626f8b38ef3ad0c"
+    },
+    "generationManifest": {
+      "buildId": "base-media-build-17a4939d10c39921f4653890",
+      "path": "generation-manifest.json",
+      "fileSha256": "b0d3354b9e0ed51a32935a7d13919dd21a9c26e93e512837ebc44b946a31bd88"
+    }
+  },
+  "checks": {
+    "approvalBinding": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "sourceBinding": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "videoQc": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "audioQc": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "timelineQc": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "hashGraph": {
+      "status": "passed",
+      "violationCodes": []
+    },
+    "publishPreconditions": {
+      "status": "passed",
+      "violationCodes": []
+    }
+  }
+}
