@@ -1,0 +1,41 @@
+{
+  "kind": "remotion_browser_cache_post_repair_and_render_attempt",
+  "schemaVersion": "v001",
+  "consultationId": "ZEV-CONSULT-20260830-DISTANT-PRESENTATION-REMOTION-BROWSER-SANDBOX-007",
+  "cacheRepair": {
+    "ensureBrowserCalls": 1,
+    "browserDownloadCalls": 1,
+    "downloadUrl": "https://storage.googleapis.com/chrome-for-testing-public/149.0.7790.0/mac-arm64/chrome-headless-shell-mac-arm64.zip",
+    "version": "149.0.7790.0",
+    "binaryPath": "runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+    "binarySha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8",
+    "binarySizeBytes": 159972320,
+    "architecture": "arm64",
+    "codesignVerification": "valid on disk; satisfies its Designated Requirement",
+    "requiredRuntimeFilesPresent": true
+  },
+  "sandboxedProbe": {
+    "calls": 1,
+    "exitCode": 133,
+    "finalError": "bootstrap_check_in org.chromium.Chromium.MachPortRendezvousServer: Permission denied (1100)"
+  },
+  "unsandboxedProbe": {
+    "calls": 1,
+    "exitCode": 0,
+    "stdout": "<html><head></head><body></body></html>\n"
+  },
+  "renderAttempt": {
+    "calls": 1,
+    "sandbox": "outside",
+    "jobPath": "evals/clip_composition/outputs/presentation/distant-connection-formal-render/candidate-horror-claim-to-speed-up-v002/renderer-job-v002-attempt-0002.json",
+    "jobSha256": "7d7892f8e4c6fb05de55198c790a2995ae04ff05d31140bc1807aa7153a01e85",
+    "exitCode": 1,
+    "failure": "runtime-binding-mismatch",
+    "rendererStarted": false,
+    "renderOutputCreated": false,
+    "boundChromiumSha256": "ee37661755341e9fc1babf9c20ec09d6a36e50aa8713ceb08082f8bbe2d8217d",
+    "observedChromiumSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8",
+    "stderr": "Error: runtime-binding-mismatch at observePresentationRendererRuntimeBindingsV001"
+  },
+  "safeguardOutcome": "No automatic retry was performed. The formal job still binds the pre-repair Chromium SHA and was rejected before renderer execution."
+}

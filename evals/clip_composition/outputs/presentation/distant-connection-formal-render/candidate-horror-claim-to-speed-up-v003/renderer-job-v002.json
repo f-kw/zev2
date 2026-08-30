@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "presentation-instruction-renderer-job-v002",
+  "jobId": "candidate-horror-claim-to-speed-up-formal-render-repaired-chromium-v001",
+  "attemptId": "attempt-0001",
+  "instructionArtifactBinding": {
+    "schemaVersion": "presentation-instruction-artifact-v002",
+    "path": "evals/clip_composition/outputs/presentation/distant-connection-formal-render/candidate-horror-claim-to-speed-up-v002/presentation-instruction-v002.json",
+    "fileSha256": "e9b6ed13441b5c66b6a5d6f8f7643ce218ae884a7f42ef67af954e4b8d1a2aa2",
+    "canonicalSha256": "3d4e1587dbff40fe8ab8997faca47825767dba5c44257a577e9360382af517bd"
+  },
+  "lineEndProjectionBinding": {
+    "schemaVersion": "presentation-semantic-line-end-projection-v001",
+    "path": "evals/clip_composition/outputs/presentation/distant-connection-formal-render/candidate-horror-claim-to-speed-up-v002/semantic-line-end-projection-v001.json",
+    "fileSha256": "a2939f78d439f5fd164b733571c7733c083500ba4f3053d6d4a5c5964b6ec2e5",
+    "canonicalSha256": "1dda2c3a58d2196467c922e21ce20a800b01aa0aa8b58e9f3d3c2be9f495792e"
+  },
+  "cropAppliedBaseMedia": {
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-horror-claim-to-speed-up-audio-grid-v003/base-media.mp4",
+      "fileSha256": "9e4d3f1747779a443c58262cebcb4da43543b44759f50be54d0b813e689661f6"
+    },
+    "timeline": {
+      "schemaVersion": "presentation-base-media-timeline-v003",
+      "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-horror-claim-to-speed-up-audio-grid-v003/timeline.json",
+      "fileSha256": "185354ccceb41243d6c32519bd950dc8be585d1673eba32fc626f8b38ef3ad0c",
+      "canonicalSha256": "f8c6d9a72dc4b5d45bdf82520b84b878ff17a9d5d6702f71077f9fce93a271db"
+    },
+    "generationManifest": {
+      "schemaVersion": "presentation-base-media-generation-manifest-v003",
+      "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-horror-claim-to-speed-up-audio-grid-v003/generation-manifest.json",
+      "fileSha256": "b0d3354b9e0ed51a32935a7d13919dd21a9c26e93e512837ebc44b946a31bd88",
+      "canonicalSha256": "b1727239a01ab8839b298328fa035a5dcb74534ef1b516c94c0179bb821dee3d"
+    },
+    "validationReceipt": {
+      "schemaVersion": "presentation-base-media-validation-report-v001",
+      "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-horror-claim-to-speed-up-audio-grid-v003/validation-report.json",
+      "fileSha256": "d96b50ab6488b1ff53deccd5074088f278d20bc018a393007338f20f1065dcda",
+      "canonicalSha256": "7e8c295653772cd82aa0fba14b76c3ec4faf48b967cc9fc12d8a47f3600da7b4"
+    }
+  },
+  "executionInputs": {
+    "format": "normal-landscape",
+    "canvas": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30
+    },
+    "screenLayoutId": null,
+    "visualStateId": "caption-core-v001",
+    "cropPolicy": {
+      "mode": "already-applied"
+    },
+    "sceneTransitionPolicy": {
+      "mode": "straight-cut"
+    },
+    "audioPolicy": {
+      "mode": "preserve-source"
+    },
+    "lineLayoutRules": {
+      "speech-caption": "semantic-line-end-projection-v001",
+      "title": "greedy-code-point-v001"
+    }
+  },
+  "registryBindings": {
+    "styleProfileRegistry": {
+      "schemaVersion": "presentation-preset-registry-v001",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+      "canonicalSha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4"
+    },
+    "materialRegistry": {
+      "schemaVersion": "presentation-material-registry-empty-v001",
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+      "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+      "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+    },
+    "fontLedger": {
+      "schemaVersion": "presentation-renderer-trust-v002",
+      "path": "evals/clip_composition/registries/presentation/presentation-renderer-trust-v002/trust.json",
+      "fileSha256": "6e21352ff105e3b77acc351625fed22ff97486fb21d0ce9ee5b1821750a9047a",
+      "canonicalSha256": "03279ad65b94107408652a053aad689824782b97a90eaa9220f9d01d053cd94c",
+      "jsonPointer": "/fontAssets",
+      "valueCanonicalSha256": "5c31322527905c8e82555fa4c62ce3c8574509a8abe30551774ebefdf2444e91"
+    },
+    "rendererTrust": {
+      "schemaVersion": "presentation-renderer-trust-v002",
+      "path": "evals/clip_composition/registries/presentation/presentation-renderer-trust-v002/trust.json",
+      "fileSha256": "6e21352ff105e3b77acc351625fed22ff97486fb21d0ce9ee5b1821750a9047a",
+      "canonicalSha256": "03279ad65b94107408652a053aad689824782b97a90eaa9220f9d01d053cd94c"
+    }
+  },
+  "runtimeBindings": {
+    "ffmpeg": {
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    "ffprobe": {
+      "path": "/opt/homebrew/bin/ffprobe",
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    },
+    "imageMagick": {
+      "path": "/opt/homebrew/bin/magick",
+      "fileSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29"
+    },
+    "remotion": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/@remotion/cli/remotion-cli.js",
+      "fileSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa"
+    },
+    "tsx": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+    },
+    "chromium": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8"
+    }
+  },
+  "rendererImplementationBindings": [
+    {
+      "role": "instruction-renderer-runner-v002",
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "21ce2a8e7dae02c11ef137948383ba35bd962314e6bb1a066c523d73bcb53675"
+    },
+    {
+      "role": "instruction-artifact-v002",
+      "path": "evals/clip_composition/presentation_instruction_artifact_v002.mjs",
+      "fileSha256": "44f67d3297330f339edde9487dd34222584e064b4c1352cfbc3bacdb394ac6c4"
+    },
+    {
+      "role": "renderer-admission-v002",
+      "path": "evals/clip_composition/presentation_renderer_admission_receipt_v002.mjs",
+      "fileSha256": "04bab61032904638964b2c1101b7e12ce02ecdbf898e4eac5637ac9d2e46a4ee"
+    },
+    {
+      "role": "base-media-timeline-mapper-v004",
+      "path": "evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+      "fileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32"
+    },
+    {
+      "role": "renderer-line-layout-v002",
+      "path": "evals/clip_composition/presentation_renderer_line_layout_rule_v002.mjs",
+      "fileSha256": "7b9926fe8391b324f002276a1ea7c0dfb83e9cb848d8ab85393ab61d91d08af6"
+    },
+    {
+      "role": "renderer-text-layout-v001",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0"
+    },
+    {
+      "role": "renderer-qc-v002",
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "b20992c6756f4c5e460af79a7b7d5872f7b6f4a23b41700023c7bd51b14c4837"
+    },
+    {
+      "role": "renderer-core-v002",
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "666907c3ff9f045b2141d62a41eb9b746cdad1f5102fe4500e5cb8036c77ce59"
+    },
+    {
+      "role": "renderer-process-observation-v001",
+      "path": "evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+      "fileSha256": "957952952fc736f21d7de59aedd8add53d9f12e211ed3db9f3d65e38f24bf030"
+    },
+    {
+      "role": "renderer-overlay-v001",
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7"
+    },
+    {
+      "role": "renderer-layout-inspector-v001",
+      "path": "evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c"
+    },
+    {
+      "role": "renderer-atomic-publisher-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+      "fileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af"
+    }
+  ],
+  "approvedContractBindings": [
+    {
+      "role": "rendering-decoupling-contract-design-v001",
+      "path": "evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-20260817-v001.md",
+      "fileSha256": "aec224048ac6131173eb8b69b4b4d45cda88d5646ab3b67e8fa8b5561310df94"
+    },
+    {
+      "role": "rendering-decoupling-contract-addendum-v001",
+      "path": "evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-addendum-20260817-v001.md",
+      "fileSha256": "2643e7bf7ad8cdac6dd81a4fa1f1bb5c884b6f2968ec4db465554ad91bee1fad"
+    },
+    {
+      "role": "rendering-decoupling-contract-addendum-v002",
+      "path": "evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-addendum-20260817-v002.md",
+      "fileSha256": "f19a0ff9a27de640959bbbc81fcf7920b63f7a0c19354bc7bf7c6b2a5fcdf47b"
+    },
+    {
+      "role": "rendering-decoupling-contract-addendum-v003",
+      "path": "evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-addendum-20260818-v003.md",
+      "fileSha256": "cd4bfb75f8dfe0aec325ee8ae79cb136908ea7fa7e5fd2e610a430bfb4d1b16d"
+    },
+    {
+      "role": "rendering-decoupling-contract-addendum-v004",
+      "path": "evals/clip_composition/reports/presentation/presentation-rendering-decoupling-contract-design-addendum-20260818-v004.md",
+      "fileSha256": "8321a7ba99672af164f6a66285a3802f05b7f876e6c4fbf94e4211b0524f4d36"
+    }
+  ],
+  "publication": {
+    "admissionReceiptPath": "evals/clip_composition/outputs/presentation/distant-connection-formal-render/candidate-horror-claim-to-speed-up-v003/admission-receipt-v002.json",
+    "lineLayoutPath": "evals/clip_composition/outputs/presentation/distant-connection-formal-render/candidate-horror-claim-to-speed-up-v003/line-layout-v002.json",
+    "renderOutputRoot": "evals/clip_composition/outputs/presentation/distant-connection-formal-render/candidate-horror-claim-to-speed-up-v003/render-output-v001"
+  }
+}

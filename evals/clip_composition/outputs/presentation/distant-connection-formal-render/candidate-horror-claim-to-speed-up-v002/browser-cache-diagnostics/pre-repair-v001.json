@@ -1,0 +1,44 @@
+{
+  "kind": "remotion_browser_cache_pre_repair_diagnostic",
+  "schemaVersion": "v001",
+  "consultationId": "ZEV-CONSULT-20260830-DISTANT-PRESENTATION-REMOTION-BROWSER-CACHE-REPAIR-006",
+  "observedAt": "2026-08-30",
+  "cachePath": "runner/node_modules/.remotion/chrome-headless-shell",
+  "versionFile": {
+    "path": "runner/node_modules/.remotion/chrome-headless-shell/VERSION",
+    "exists": false,
+    "remotionTestedVersion": "149.0.7790.0"
+  },
+  "binary": {
+    "path": "runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+    "sha256": "ee37661755341e9fc1babf9c20ec09d6a36e50aa8713ceb08082f8bbe2d8217d",
+    "sizeBytes": 367696,
+    "mode": "0775",
+    "architectures": [
+      "x86_64",
+      "arm64"
+    ],
+    "embeddedFrameworkVersion": "151.0.7922.138",
+    "codesignVerification": {
+      "x86_64": "invalid signature (code or signature have been modified)",
+      "arm64": "invalid signature (code or signature have been modified)"
+    },
+    "extendedAttributes": [
+      "com.apple.provenance"
+    ],
+    "quarantinePresent": false
+  },
+  "cacheFiles": [
+    "runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell"
+  ],
+  "requiredFramework": {
+    "relativeReference": "../Frameworks/Google Chrome Framework.framework/Versions/151.0.7922.138/Google Chrome Framework",
+    "exists": false
+  },
+  "observedFailure": {
+    "probeExitCode": 137,
+    "stdout": "",
+    "afterMacRestart": true
+  },
+  "conclusion": "The Remotion browser cache is incomplete and version-inconsistent: only the launcher binary exists, the VERSION file and referenced Frameworks are missing, both architectures fail code-signature verification, and the embedded framework version differs from the Remotion 4.0.481 tested version."
+}
