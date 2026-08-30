@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "distant-connection-presentation-execution-job-v001",
+  "jobId": "candidate-horror-claim-to-speed-up-presentation-execution-v001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "candidateId": "candidate-horror-claim-to-speed-up",
+  "inputs": {
+    "renderAdapterJob": {
+      "schemaVersion": "distant-connection-render-adapter-job-v002",
+      "path": "evals/clip_composition/outputs/work-distant-connection-render-adapter-ymUsGrT6EaA-v002/render-adapter-job-v002.json",
+      "fileSha256": "e1d9ca181e1fc84c0c3422dd4263ea35740b6a633f6bfa407260df16b2ddb413",
+      "canonicalSha256": "f7c2bb17c8759d3dadc7188c4675ce31f51627a22993c058b8f35a4da2fdd37b"
+    },
+    "presentationMeaningInput": {
+      "schemaVersion": "distant-connection-presentation-meaning-input-v001",
+      "path": "evals/clip_composition/outputs/work-distant-connection-presentation-meaning-input-ymUsGrT6EaA-v001/candidate-horror-claim-to-speed-up/meaning-input-v001.json",
+      "fileSha256": "9b21aed457efa0b5ca9b9a1eabe7572b7da8cd2ca1771460300a34b5002f9ec6",
+      "canonicalSha256": "3a42cc628808d740a65ddc8f5e02d33517839bab73065c7a4445829e1e356209"
+    },
+    "sourceVideo": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    },
+    "baseMedia": {
+      "media": {
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-horror-claim-to-speed-up-audio-grid-v003/base-media.mp4",
+        "fileSha256": "9e4d3f1747779a443c58262cebcb4da43543b44759f50be54d0b813e689661f6"
+      },
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v003",
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-horror-claim-to-speed-up-audio-grid-v003/timeline.json",
+        "fileSha256": "185354ccceb41243d6c32519bd950dc8be585d1673eba32fc626f8b38ef3ad0c",
+        "canonicalSha256": "f8c6d9a72dc4b5d45bdf82520b84b878ff17a9d5d6702f71077f9fce93a271db"
+      },
+      "generationManifest": {
+        "schemaVersion": "presentation-base-media-generation-manifest-v003",
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-horror-claim-to-speed-up-audio-grid-v003/generation-manifest.json",
+        "fileSha256": "b0d3354b9e0ed51a32935a7d13919dd21a9c26e93e512837ebc44b946a31bd88",
+        "canonicalSha256": "b1727239a01ab8839b298328fa035a5dcb74534ef1b516c94c0179bb821dee3d"
+      },
+      "validationReceipt": {
+        "schemaVersion": "presentation-base-media-validation-report-v001",
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-horror-claim-to-speed-up-audio-grid-v003/validation-report.json",
+        "fileSha256": "d96b50ab6488b1ff53deccd5074088f278d20bc018a393007338f20f1065dcda",
+        "canonicalSha256": "7e8c295653772cd82aa0fba14b76c3ec4faf48b967cc9fc12d8a47f3600da7b4"
+      }
+    },
+    "approvedSelection": {
+      "sourcePackage": {
+        "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-formal-render/candidate-horror-claim-to-speed-up-v002/source-package-v001.json",
+        "fileSha256": "f4abc1415b8297494599ece690a6261da2fd8d11a7f0dda51c24039e3ca13432",
+        "canonicalSha256": "0103e85040288febda8ecb3d2de53387c7462daef1a6ee85784ab9844424daba"
+      },
+      "selection": {
+        "schemaVersion": "presentation-output-caption-cue-selection-v001",
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-formal-render/candidate-horror-claim-to-speed-up-v002/cue-selection-v001.json",
+        "fileSha256": "292bd74821ff97dd1cf77778bba24770062d2913875ddfd42617beac311be734",
+        "canonicalSha256": "9882f5657e26610d422ce615cc7b26cab6a8f1d72bdbfd2e52c38748d27ba6ca"
+      }
+    },
+    "rendererJobTemplate": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-formal-render/candidate-horror-claim-to-speed-up-v003/renderer-job-v002.json",
+      "fileSha256": "3e35234d028962615d983d02cde5032ae5045bb4fab52c9ebc700dde3ea14b08",
+      "canonicalSha256": "038202dd830fb2503c717f7108aa17f2a3b405c2755f6e15151906b101c6b865"
+    }
+  },
+  "executionPolicy": {
+    "selectionHandling": "preserve-response-and-rebind-source-package-v001",
+    "renderingHandling": "reuse-renderer-v002-settings-v001",
+    "styleProfileId": "normal-landscape-readable-pop-v001",
+    "externalAiExecution": "forbidden"
+  },
+  "implementationBinding": {
+    "role": "distant-connection-presentation-execution-v001",
+    "path": "evals/clip_composition/distant_connection_presentation_execution_v001.mts",
+    "fileSha256": "1435c27b19459221b63e255fc9eab499242578946244d1c0d88dcb69d2d44cf1"
+  },
+  "publication": {
+    "root": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001",
+    "sourcePackagePath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/source-package-v001.json",
+    "selectionPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/approved-selection-adapter-v001.json",
+    "cueEndProjectionPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/cue-end-projection-v001.json",
+    "lineEndProjectionPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/semantic-line-end-projection-v001.json",
+    "instructionPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/presentation-instruction-v002.json",
+    "rendererJobPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/renderer-job-v002.json",
+    "admissionReceiptPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/admission-receipt-v002.json",
+    "lineLayoutPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/line-layout-v002.json",
+    "renderOutputRoot": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/render-output-v001",
+    "rendererExecutionResultPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/renderer-execution-result-v002.json",
+    "executionResultPath": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-horror-claim-to-speed-up-v001/execution-result-v001.json"
+  },
+  "responsibilityPrinciple": "本jobは既存の正式selection判断を変更せず実在するjobへ再束縛し、既存renderer v002へ決定的に渡す。候補探索、再selection、字幕意味判断、区間判断、候補採否、外部AI実行を行わない。"
+}
