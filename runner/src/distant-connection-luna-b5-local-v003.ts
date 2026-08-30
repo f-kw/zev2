@@ -54,6 +54,9 @@ export const DISTANT_CONNECTION_LUNA_B5_ERROR_CODES_V003 = Object.freeze([
   'RESPONSE_SCHEMA_BINDING_MISMATCH',
   'REQUEST_BINDING_MISMATCH',
   'MANIFEST_INVALID',
+  'MEASUREMENT_RESULT_INVALID',
+  'PRICE_SNAPSHOT_INVALID',
+  'COST_EVALUATION_INVALID',
   'B6_REQUEST_BINDING_MISMATCH'
 ] as const);
 
@@ -99,6 +102,61 @@ export type DistantConnectionLunaB5LocalManifestV003 = {
   b6ContinuationContract: {
     requiredRequestBinding: DistantConnectionLunaFormalFileBindingV002;
   };
+};
+
+export type DistantConnectionLunaB5MeasurementV003 = {
+  schemaVersion: typeof DISTANT_CONNECTION_LUNA_B5_MEASUREMENT_SCHEMA_V003;
+  sourcePackageBinding: DistantConnectionLunaFormalFileBindingV002;
+  indexedModelInputBinding: DistantConnectionLunaFormalFileBindingV002;
+  requestBinding: DistantConnectionLunaFormalFileBindingV002;
+  providerId: 'openai-api';
+  modelId: 'gpt-5.6-luna';
+  tokenMeasurement: {
+    rawResponseBinding: DistantConnectionLunaFormalFileBindingV002;
+    inputTokens: number;
+  };
+  costEvaluation: {
+    priceSnapshotBinding: DistantConnectionLunaFormalFileBindingV002;
+    maximumNanoUsd: number;
+    projectedNanoUsd: number;
+    decision: 'passed' | 'stopped';
+  };
+};
+
+export type DistantConnectionLunaB5CostAdmissionV003 = {
+  inputTokens: number;
+  contextWindowTokens: 1_050_000;
+  contextUsage: {numeratorTokens: number; denominatorTokens: 1_050_000};
+  withinContextWindow: boolean;
+  longContextPricing: {
+    thresholdTokens: 272_000;
+    applies: boolean;
+  };
+  maximumOutputTokens: 128_000;
+  maximumInputPriceNanoUsdPerToken: number;
+  outputPriceNanoUsdPerToken: number;
+  projectedInputNanoUsd: number;
+  projectedMaximumOutputNanoUsd: number;
+  projectedNanoUsd: number;
+  maximumNanoUsd: number;
+  withinMaximumCost: boolean;
+  decision: 'passed' | 'stopped';
+  priceSnapshotBinding: DistantConnectionLunaFormalFileBindingV002;
+};
+
+export type BuildDistantConnectionLunaB5CostAdmissionInputV003 = {
+  inputTokens: number;
+  priceSnapshotPath: string;
+  priceSnapshotBytes: Uint8Array;
+  expectedPriceSnapshotSha256: string;
+  maximumNanoUsd: number;
+};
+
+export type BuildDistantConnectionLunaB5MeasurementInputV003 = {
+  manifestBytes: Uint8Array;
+  rawResponsePath: string;
+  rawResponseBytes: Uint8Array;
+  costAdmission: DistantConnectionLunaB5CostAdmissionV003;
 };
 
 export type BuildDistantConnectionLunaB5LocalInputV003 = {
@@ -673,6 +731,233 @@ export function decodeDistantConnectionLunaB5LocalManifestV003(
   assertDistantConnectionLunaB5LocalManifestV003(value);
   if (!serializeDistantConnectionLunaB5LocalManifestV003(value).equals(Buffer.from(bytes))) {
     fail('MANIFEST_INVALID', 'B5 local manifest v003が正式byte表現ではありません');
+  }
+  return value;
+}
+
+export function buildDistantConnectionLunaB5CostAdmissionV003(
+  input: BuildDistantConnectionLunaB5CostAdmissionInputV003
+): DistantConnectionLunaB5CostAdmissionV003 {
+  assertPath(input.priceSnapshotPath, '価格snapshot path');
+  if (typeof input.expectedPriceSnapshotSha256 !== 'string'
+    || !SHA256.test(input.expectedPriceSnapshotSha256)
+    || sha256(input.priceSnapshotBytes) !== input.expectedPriceSnapshotSha256) {
+    fail('PRICE_SNAPSHOT_INVALID', '価格snapshotのSHA-256が指定値と一致しません');
+  }
+  if (!Number.isSafeInteger(input.inputTokens) || input.inputTokens < 0
+    || !Number.isSafeInteger(input.maximumNanoUsd) || input.maximumNanoUsd < 0) {
+    fail('COST_EVALUATION_INVALID', '入力token数または費用上限が不正です');
+  }
+  let snapshot: unknown;
+  try {
+    snapshot = JSON.parse(Buffer.from(input.priceSnapshotBytes).toString('utf8'));
+  } catch (error) {
+    fail('PRICE_SNAPSHOT_INVALID', '価格snapshotがJSONとして読めません', error);
+  }
+  if (!isRecord(snapshot)
+    || snapshot.recordVersion !== 'openai-gpt-5-6-luna-official-snapshot-v001'
+    || !isRecord(snapshot.model)
+    || snapshot.model.modelId !== 'gpt-5.6-luna'
+    || snapshot.model.contextWindowTokens !== 1_050_000
+    || snapshot.model.maxOutputTokens !== 128_000
+    || !isRecord(snapshot.standardPricingUsdPerMillionTokens)
+    || snapshot.standardPricingUsdPerMillionTokens.input !== 0.2
+    || snapshot.standardPricingUsdPerMillionTokens.cachedInput !== 0.02
+    || snapshot.standardPricingUsdPerMillionTokens.outputIncludingReasoning !== 1.2
+    || snapshot.standardPricingUsdPerMillionTokens.longContextRule
+      !== 'Prompts over 272K input tokens are priced at 2x input and 1.5x output for the full request.'
+    || snapshot.standardPricingUsdPerMillionTokens.cacheWriteRule
+      !== 'Cache writes are billed at 1.25x the uncached input rate.') {
+    fail('PRICE_SNAPSHOT_INVALID', '価格snapshotが固定済みLuna仕様と一致しません');
+  }
+
+  const longContextPricingApplies = input.inputTokens > 272_000;
+  const longInputMultiplier = longContextPricingApplies ? 2 : 1;
+  const outputMultiplierNumerator = longContextPricingApplies ? 3 : 2;
+  const uncachedInputPriceNanoUsdPerToken = 200;
+  const cacheWritePriceNanoUsdPerToken = 250;
+  const maximumInputPriceNanoUsdPerToken = Math.max(
+    uncachedInputPriceNanoUsdPerToken,
+    cacheWritePriceNanoUsdPerToken
+  ) * longInputMultiplier;
+  const outputPriceNanoUsdPerToken = 1_200 * outputMultiplierNumerator / 2;
+  const projectedInputNanoUsd = input.inputTokens * maximumInputPriceNanoUsdPerToken;
+  const projectedMaximumOutputNanoUsd = 128_000 * outputPriceNanoUsdPerToken;
+  const projectedNanoUsd = projectedInputNanoUsd + projectedMaximumOutputNanoUsd;
+  if (![maximumInputPriceNanoUsdPerToken, outputPriceNanoUsdPerToken,
+    projectedInputNanoUsd, projectedMaximumOutputNanoUsd, projectedNanoUsd]
+    .every(Number.isSafeInteger)) {
+    fail('COST_EVALUATION_INVALID', '最大費用投影が安全な整数範囲を超えました');
+  }
+  const withinContextWindow = input.inputTokens <= 1_050_000;
+  const withinMaximumCost = projectedNanoUsd <= input.maximumNanoUsd;
+  return {
+    inputTokens: input.inputTokens,
+    contextWindowTokens: 1_050_000,
+    contextUsage: {
+      numeratorTokens: input.inputTokens,
+      denominatorTokens: 1_050_000
+    },
+    withinContextWindow,
+    longContextPricing: {
+      thresholdTokens: 272_000,
+      applies: longContextPricingApplies
+    },
+    maximumOutputTokens: 128_000,
+    maximumInputPriceNanoUsdPerToken,
+    outputPriceNanoUsdPerToken,
+    projectedInputNanoUsd,
+    projectedMaximumOutputNanoUsd,
+    projectedNanoUsd,
+    maximumNanoUsd: input.maximumNanoUsd,
+    withinMaximumCost,
+    decision: withinContextWindow && withinMaximumCost ? 'passed' : 'stopped',
+    priceSnapshotBinding: {
+      path: input.priceSnapshotPath,
+      schemaVersion: snapshot.recordVersion,
+      fileSha256: input.expectedPriceSnapshotSha256
+    }
+  };
+}
+
+export function assertDistantConnectionLunaB5MeasurementV003(
+  value: unknown,
+  manifest: DistantConnectionLunaB5LocalManifestV003
+): asserts value is DistantConnectionLunaB5MeasurementV003 {
+  if (!isRecord(value) || !hasExactKeys(value, [
+    'schemaVersion',
+    'sourcePackageBinding',
+    'indexedModelInputBinding',
+    'requestBinding',
+    'providerId',
+    'modelId',
+    'tokenMeasurement',
+    'costEvaluation'
+  ])
+    || value.schemaVersion !== DISTANT_CONNECTION_LUNA_B5_MEASUREMENT_SCHEMA_V003
+    || value.providerId !== manifest.requestSettings.providerId
+    || value.modelId !== manifest.requestSettings.modelId) {
+    fail('MEASUREMENT_RESULT_INVALID', 'B5 v003計測成果物のroot構造が不正です');
+  }
+  assertFormalBinding(
+    value.sourcePackageBinding,
+    '計測時source package binding',
+    'MEASUREMENT_RESULT_INVALID'
+  );
+  assertFormalBinding(
+    value.indexedModelInputBinding,
+    '計測時indexed model input binding',
+    'MEASUREMENT_RESULT_INVALID'
+  );
+  assertFormalBinding(
+    value.requestBinding,
+    '計測時request binding',
+    'MEASUREMENT_RESULT_INVALID'
+  );
+  if (JSON.stringify(value.sourcePackageBinding) !== JSON.stringify(manifest.sourcePackageBinding)
+    || JSON.stringify(value.indexedModelInputBinding)
+      !== JSON.stringify(manifest.indexedModelInputBinding)
+    || JSON.stringify(value.requestBinding) !== JSON.stringify(manifest.requestBinding)
+    || !isRecord(value.tokenMeasurement)
+    || !hasExactKeys(value.tokenMeasurement, ['rawResponseBinding', 'inputTokens'])
+    || !Number.isSafeInteger(value.tokenMeasurement.inputTokens)
+    || (value.tokenMeasurement.inputTokens as number) < 0
+    || !isRecord(value.costEvaluation)
+    || !hasExactKeys(value.costEvaluation, [
+      'priceSnapshotBinding', 'maximumNanoUsd', 'projectedNanoUsd', 'decision'
+    ])
+    || !Number.isSafeInteger(value.costEvaluation.maximumNanoUsd)
+    || (value.costEvaluation.maximumNanoUsd as number) < 0
+    || !Number.isSafeInteger(value.costEvaluation.projectedNanoUsd)
+    || (value.costEvaluation.projectedNanoUsd as number) < 0
+    || (value.costEvaluation.decision !== 'passed'
+      && value.costEvaluation.decision !== 'stopped')) {
+    fail('MEASUREMENT_RESULT_INVALID', 'B5 v003計測値・費用判定・bindingが不正です');
+  }
+  assertFormalBinding(
+    value.tokenMeasurement.rawResponseBinding,
+    'token計測raw response binding',
+    'MEASUREMENT_RESULT_INVALID'
+  );
+  assertFormalBinding(
+    value.costEvaluation.priceSnapshotBinding,
+    '価格snapshot binding',
+    'MEASUREMENT_RESULT_INVALID'
+  );
+  const projectedNanoUsd = value.costEvaluation.projectedNanoUsd as number;
+  const maximumNanoUsd = value.costEvaluation.maximumNanoUsd as number;
+  if ((projectedNanoUsd <= maximumNanoUsd) !== (value.costEvaluation.decision === 'passed')) {
+    fail('MEASUREMENT_RESULT_INVALID', '費用投影と上限判定が一致しません');
+  }
+}
+
+export function buildDistantConnectionLunaB5MeasurementV003(
+  input: BuildDistantConnectionLunaB5MeasurementInputV003
+): DistantConnectionLunaB5MeasurementV003 {
+  assertPath(input.rawResponsePath, 'token計測raw response path');
+  const manifest = decodeDistantConnectionLunaB5LocalManifestV003(input.manifestBytes);
+  let raw: unknown;
+  try {
+    raw = JSON.parse(Buffer.from(input.rawResponseBytes).toString('utf8'));
+  } catch (error) {
+    fail('MEASUREMENT_RESULT_INVALID', 'token計測raw responseがJSONとして読めません', error);
+  }
+  if (!isRecord(raw)
+    || !hasExactKeys(raw, ['object', 'input_tokens'])
+    || raw.object !== 'response.input_tokens'
+    || !Number.isSafeInteger(raw.input_tokens)
+    || (raw.input_tokens as number) < 0
+    || raw.input_tokens !== input.costAdmission.inputTokens) {
+    fail('MEASUREMENT_RESULT_INVALID', 'token計測raw responseと費用評価のtoken数が一致しません');
+  }
+  const measurement: DistantConnectionLunaB5MeasurementV003 = {
+    schemaVersion: DISTANT_CONNECTION_LUNA_B5_MEASUREMENT_SCHEMA_V003,
+    sourcePackageBinding: structuredClone(manifest.sourcePackageBinding),
+    indexedModelInputBinding: structuredClone(manifest.indexedModelInputBinding),
+    requestBinding: structuredClone(manifest.requestBinding),
+    providerId: manifest.requestSettings.providerId,
+    modelId: manifest.requestSettings.modelId,
+    tokenMeasurement: {
+      rawResponseBinding: {
+        path: input.rawResponsePath,
+        schemaVersion: 'openai-responses-input-token-count-response-v001',
+        fileSha256: sha256(input.rawResponseBytes)
+      },
+      inputTokens: input.costAdmission.inputTokens
+    },
+    costEvaluation: {
+      priceSnapshotBinding: structuredClone(input.costAdmission.priceSnapshotBinding),
+      maximumNanoUsd: input.costAdmission.maximumNanoUsd,
+      projectedNanoUsd: input.costAdmission.projectedNanoUsd,
+      decision: input.costAdmission.withinMaximumCost ? 'passed' : 'stopped'
+    }
+  };
+  assertDistantConnectionLunaB5MeasurementV003(measurement, manifest);
+  return measurement;
+}
+
+export function serializeDistantConnectionLunaB5MeasurementV003(
+  value: DistantConnectionLunaB5MeasurementV003,
+  manifest: DistantConnectionLunaB5LocalManifestV003
+): Buffer {
+  assertDistantConnectionLunaB5MeasurementV003(value, manifest);
+  return Buffer.from(`${JSON.stringify(value, null, 2)}\n`, 'utf8');
+}
+
+export function decodeDistantConnectionLunaB5MeasurementV003(
+  bytes: Uint8Array,
+  manifest: DistantConnectionLunaB5LocalManifestV003
+): DistantConnectionLunaB5MeasurementV003 {
+  let value: unknown;
+  try {
+    value = JSON.parse(Buffer.from(bytes).toString('utf8'));
+  } catch (error) {
+    fail('MEASUREMENT_RESULT_INVALID', 'B5 v003計測成果物がJSONとして読めません', error);
+  }
+  assertDistantConnectionLunaB5MeasurementV003(value, manifest);
+  if (!serializeDistantConnectionLunaB5MeasurementV003(value, manifest)
+    .equals(Buffer.from(bytes))) {
+    fail('MEASUREMENT_RESULT_INVALID', 'B5 v003計測成果物が正式byte表現ではありません');
   }
   return value;
 }

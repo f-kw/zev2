@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "openai-responses-input-token-count-preflight-v003",
+  "attemptId": "attempt-0001",
+  "endpoint": "https://api.openai.com/v1/responses/input_tokens",
+  "approvedApiCalls": 1,
+  "automaticRetry": false,
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-op-ed-rejection-feedback-ymUsGrT6EaA-v002/source-package-v002.json",
+    "schemaVersion": "distant-connection-luna-source-package-v002",
+    "fileSha256": "13bdd7e8b0184cd1cf8a5c8e6515e6e4c11574bf10fd6f24a113eb1c0fbbabea"
+  },
+  "indexedModelInputBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-index-reference-ymUsGrT6EaA-v001/indexed-model-input-v001.json",
+    "schemaVersion": "distant-connection-luna-indexed-model-input-v001",
+    "fileSha256": "ce7bd510cec2e9ea0aed570405335e7115baf65698c6dc15b49acc2f8bee8425"
+  },
+  "exactRequestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-reference-integrity-ymUsGrT6EaA-v003/exact-request-v003.json",
+    "schemaVersion": "openai-responses-distant-connection-request-v003",
+    "fileSha256": "cb96df0e74dce404d115607824fc55d359e67737909ecfd5ad1f4deb4ee61426"
+  },
+  "b5LocalManifestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-reference-integrity-ymUsGrT6EaA-v003/b5-local-manifest-v003.json",
+    "schemaVersion": "distant-connection-luna-b5-local-manifest-v003",
+    "fileSha256": "9eff5986431f6197fe044f7bc2ba1715d81ea1ab2b8852385482b04e08759c60"
+  },
+  "requestProjection": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-reference-integrity-ymUsGrT6EaA-v003/attempt-0001/input-token-count-request-v001.json",
+    "schemaVersion": "openai-responses-input-token-count-request-v001",
+    "fileSha256": "8fb97679ad4d75d659fe418e9f99f07316a81dd4db0989dd67ad3ad663c62494",
+    "omittedTokenNeutralFields": [
+      "store"
+    ]
+  },
+  "requestSettings": {
+    "providerId": "openai-api",
+    "modelId": "gpt-5.6-luna",
+    "operationId": "responses",
+    "reasoningEffort": "medium",
+    "responseFormatName": "distant_connection_index_response_v001",
+    "store": false
+  },
+  "semanticUtteranceCount": 10723,
+  "anchorCount": 4442,
+  "credential": {
+    "source": ".env:OPENAI_API_KEY",
+    "valuePersisted": false
+  },
+  "checks": {
+    "allShaBindings": "passed",
+    "sourceIndexRequestManifestDeterminism": "passed",
+    "exactRequestProjection": "passed",
+    "fullUtteranceAndAnchorInput": "passed"
+  },
+  "status": "passed"
+}

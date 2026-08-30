@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "distant-connection-luna-b5-measurement-v003",
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-source-package-op-ed-rejection-feedback-ymUsGrT6EaA-v002/source-package-v002.json",
+    "schemaVersion": "distant-connection-luna-source-package-v002",
+    "fileSha256": "13bdd7e8b0184cd1cf8a5c8e6515e6e4c11574bf10fd6f24a113eb1c0fbbabea"
+  },
+  "indexedModelInputBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-index-reference-ymUsGrT6EaA-v001/indexed-model-input-v001.json",
+    "schemaVersion": "distant-connection-luna-indexed-model-input-v001",
+    "fileSha256": "ce7bd510cec2e9ea0aed570405335e7115baf65698c6dc15b49acc2f8bee8425"
+  },
+  "requestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-reference-integrity-ymUsGrT6EaA-v003/exact-request-v003.json",
+    "schemaVersion": "openai-responses-distant-connection-request-v003",
+    "fileSha256": "cb96df0e74dce404d115607824fc55d359e67737909ecfd5ad1f4deb4ee61426"
+  },
+  "providerId": "openai-api",
+  "modelId": "gpt-5.6-luna",
+  "tokenMeasurement": {
+    "rawResponseBinding": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b5-token-count-reference-integrity-ymUsGrT6EaA-v003/attempt-0001/input-token-count-raw-response-v001.json",
+      "schemaVersion": "openai-responses-input-token-count-response-v001",
+      "fileSha256": "cda79e1fa2572063e3c4e27d3cb56c22d432a4ad9767f29490d7162a4938b2ef"
+    },
+    "inputTokens": 707519
+  },
+  "costEvaluation": {
+    "priceSnapshotBinding": {
+      "path": "evals/clip_composition/reports/presentation/provider-research/openai-gpt-5-6-luna-official-snapshot-20260816-v001.json",
+      "schemaVersion": "openai-gpt-5-6-luna-official-snapshot-v001",
+      "fileSha256": "9d53b52a6e1726bcbf715137a32d6819d668c4023e89ddf2d81edaec7f5166d7"
+    },
+    "maximumNanoUsd": 1000000000,
+    "projectedNanoUsd": 584159500,
+    "decision": "passed"
+  }
+}

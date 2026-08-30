@@ -9,11 +9,16 @@ import {
   DISTANT_CONNECTION_LUNA_REQUEST_SETTINGS_V003,
   DistantConnectionLunaB5LocalErrorV003,
   assertDistantConnectionLunaB5LocalManifestV003,
+  assertDistantConnectionLunaB5MeasurementV003,
   assertDistantConnectionLunaB6RequestBindingV003,
   assertDistantConnectionLunaExactRequestV003,
+  buildDistantConnectionLunaB5CostAdmissionV003,
   buildDistantConnectionLunaB5LocalArtifactsFromBytesV003,
+  buildDistantConnectionLunaB5MeasurementV003,
   decodeDistantConnectionLunaB5LocalManifestV003,
+  decodeDistantConnectionLunaB5MeasurementV003,
   serializeDistantConnectionLunaExactRequestV003,
+  serializeDistantConnectionLunaB5MeasurementV003,
   validateDistantConnectionLunaB5LocalArtifactsV003,
   type BuildDistantConnectionLunaB5LocalInputV003,
   type DistantConnectionLunaRequestSettingsV003
@@ -46,12 +51,16 @@ const formalManifestPath =
   'evals/clip_composition/outputs/'
   + 'work-distant-connection-luna-b5-reference-integrity-ymUsGrT6EaA-v003/'
   + 'b5-local-manifest-v003.json';
+const priceSnapshotPath =
+  'evals/clip_composition/reports/presentation/provider-research/'
+  + 'openai-gpt-5-6-luna-official-snapshot-20260816-v001.json';
 
 function sha256(bytes: Uint8Array): string {
   return createHash('sha256').update(bytes).digest('hex');
 }
 
 const sourcePackageBytes = await readFile(new URL(`../../${sourcePackagePath}`, import.meta.url));
+const priceSnapshotBytes = await readFile(new URL(`../../${priceSnapshotPath}`, import.meta.url));
 const indexedModelInput = buildDistantConnectionLunaIndexedModelInputV001({
   sourcePackagePath,
   sourcePackageBytes
@@ -364,4 +373,118 @@ test('実配信の全10,723発話・4,442アンカーを保持した正式v003�
       .b6ContinuationContract.requiredRequestBinding.fileSha256,
     sha256(formalRequestBytes)
   );
+});
+
+test('B5 v003はcache writeを含む公式最大料金とcontext境界をfail-closed評価する', () => {
+  const common = {
+    priceSnapshotPath,
+    priceSnapshotBytes,
+    expectedPriceSnapshotSha256: sha256(priceSnapshotBytes),
+    maximumNanoUsd: 1_000_000_000
+  };
+  const standard = buildDistantConnectionLunaB5CostAdmissionV003({
+    ...common,
+    inputTokens: 272_000
+  });
+  assert.equal(standard.longContextPricing.applies, false);
+  assert.equal(standard.maximumInputPriceNanoUsdPerToken, 250);
+  assert.equal(standard.outputPriceNanoUsdPerToken, 1_200);
+  assert.equal(standard.projectedNanoUsd, 221_600_000);
+
+  const long = buildDistantConnectionLunaB5CostAdmissionV003({
+    ...common,
+    inputTokens: 893_214
+  });
+  assert.equal(long.longContextPricing.applies, true);
+  assert.equal(long.maximumInputPriceNanoUsdPerToken, 500);
+  assert.equal(long.outputPriceNanoUsdPerToken, 1_800);
+  assert.equal(long.projectedNanoUsd, 677_007_000);
+  assert.equal(long.decision, 'passed');
+
+  const contextLimit = buildDistantConnectionLunaB5CostAdmissionV003({
+    ...common,
+    inputTokens: 1_050_000
+  });
+  assert.equal(contextLimit.withinContextWindow, true);
+  assert.equal(contextLimit.projectedNanoUsd, 755_400_000);
+  const contextOverflow = buildDistantConnectionLunaB5CostAdmissionV003({
+    ...common,
+    inputTokens: 1_050_001
+  });
+  assert.equal(contextOverflow.withinContextWindow, false);
+  assert.equal(contextOverflow.decision, 'stopped');
+  const costStopped = buildDistantConnectionLunaB5CostAdmissionV003({
+    ...common,
+    inputTokens: 893_214,
+    maximumNanoUsd: 677_006_999
+  });
+  assert.equal(costStopped.withinMaximumCost, false);
+  assert.equal(costStopped.decision, 'stopped');
+  expectCode('PRICE_SNAPSHOT_INVALID', () => (
+    buildDistantConnectionLunaB5CostAdmissionV003({
+      ...common,
+      inputTokens: 1,
+      expectedPriceSnapshotSha256: '0'.repeat(64)
+    })
+  ));
+});
+
+test('B5 v003 token計測成果物はraw・source・index・request・価格を束縛してbyte再現する', () => {
+  const artifacts = buildDistantConnectionLunaB5LocalArtifactsFromBytesV003(buildInput());
+  const rawResponsePath = 'outputs/input-token-count-raw-response-v001.json';
+  const rawResponseBytes = Buffer.from(
+    `${JSON.stringify({object: 'response.input_tokens', input_tokens: 893_214}, null, 2)}\n`,
+    'utf8'
+  );
+  const costAdmission = buildDistantConnectionLunaB5CostAdmissionV003({
+    inputTokens: 893_214,
+    priceSnapshotPath,
+    priceSnapshotBytes,
+    expectedPriceSnapshotSha256: sha256(priceSnapshotBytes),
+    maximumNanoUsd: 1_000_000_000
+  });
+  const measurement = buildDistantConnectionLunaB5MeasurementV003({
+    manifestBytes: artifacts.manifestBytes,
+    rawResponsePath,
+    rawResponseBytes,
+    costAdmission
+  });
+  assert.deepEqual(measurement.sourcePackageBinding, artifacts.manifest.sourcePackageBinding);
+  assert.deepEqual(
+    measurement.indexedModelInputBinding,
+    artifacts.manifest.indexedModelInputBinding
+  );
+  assert.deepEqual(measurement.requestBinding, artifacts.manifest.requestBinding);
+  assert.equal(measurement.tokenMeasurement.inputTokens, 893_214);
+  assert.equal(measurement.costEvaluation.projectedNanoUsd, 677_007_000);
+  assert.equal(measurement.costEvaluation.decision, 'passed');
+  const bytes = serializeDistantConnectionLunaB5MeasurementV003(
+    measurement,
+    artifacts.manifest
+  );
+  assert.deepEqual(
+    decodeDistantConnectionLunaB5MeasurementV003(bytes, artifacts.manifest),
+    measurement
+  );
+  assert.deepEqual(
+    bytes,
+    serializeDistantConnectionLunaB5MeasurementV003(measurement, artifacts.manifest)
+  );
+  expectCode('MEASUREMENT_RESULT_INVALID', () => (
+    buildDistantConnectionLunaB5MeasurementV003({
+      manifestBytes: artifacts.manifestBytes,
+      rawResponsePath,
+      rawResponseBytes: Buffer.from(
+        `${JSON.stringify({object: 'response.input_tokens', input_tokens: 893_215}, null, 2)}\n`,
+        'utf8'
+      ),
+      costAdmission
+    })
+  ));
+  expectCode('MEASUREMENT_RESULT_INVALID', () => (
+    assertDistantConnectionLunaB5MeasurementV003(
+      {...measurement, unexpected: true},
+      artifacts.manifest
+    )
+  ));
 });
