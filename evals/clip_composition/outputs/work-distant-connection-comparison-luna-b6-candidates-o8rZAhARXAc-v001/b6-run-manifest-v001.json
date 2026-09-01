@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "distant-connection-comparison-luna-b6-run-manifest-v001",
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/source-package-v001.json",
+    "schemaVersion": "distant-connection-comparison-source-package-v001",
+    "fileSha256": "6a5cb3249d28f8406e77e4d3812008317a97a873ae310052ffa51fe3fbf560d3"
+  },
+  "indexedModelInputBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/indexed-model-input-v001.json",
+    "schemaVersion": "distant-connection-comparison-indexed-model-input-v001",
+    "fileSha256": "fad0fd140dbdfeded1266b3dae342e8ebfce211e861f3f92a9f7477734063d4f"
+  },
+  "exactRequestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/exact-request-v001.json",
+    "schemaVersion": "openai-responses-distant-connection-comparison-request-v001",
+    "fileSha256": "9d40efc855b6620719bccbf416dc34cc3a12838271e3ddabe1c0b17beb083777"
+  },
+  "b5LocalManifestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/b5-local-manifest-v001.json",
+    "schemaVersion": "distant-connection-comparison-luna-b5-local-manifest-v001",
+    "fileSha256": "8247de5e2833be816f3f73e4a7d76bf97e680ddbc885db1001192fcc65704f37"
+  },
+  "tokenCountMeasurementBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-luna-b5-token-count-o8rZAhARXAc-v001/input-token-count-measurement-v001.json",
+    "schemaVersion": "distant-connection-comparison-luna-b5-token-count-measurement-v001",
+    "fileSha256": "c1af0cd7afccb23ad9464f28363939722e523bf5a02d4f158d2987f0267d7d16"
+  },
+  "rawResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-luna-b6-candidates-o8rZAhARXAc-v001/attempt-0001/raw-response-v001.json",
+    "schemaVersion": "openai-responses-distant-connection-comparison-raw-v001",
+    "fileSha256": "fa9d4e9caaff607ffb24f6b8f785f4efe6b7eaea61264d764e2ca094c8b0901e"
+  },
+  "candidateResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-luna-b6-candidates-o8rZAhARXAc-v001/candidate-response-v001.json",
+    "schemaVersion": "distant-connection-comparison-candidate-response-v001",
+    "fileSha256": "301919134213a54783540784c537553fc283874cf676f44064165975cec3f089"
+  },
+  "providerResponse": {
+    "id": "resp_0d675c7f80ce76d6016a967c78bbc887d093818be5b5e004c3",
+    "model": "gpt-5.6-luna",
+    "status": "completed"
+  },
+  "usage": {
+    "inputTokens": 97818,
+    "cachedInputTokens": 0,
+    "cacheWriteTokens": 97815,
+    "uncachedNonWriteInputTokens": 3,
+    "outputTokens": 3244,
+    "reasoningTokens": 2624,
+    "totalTokens": 101062
+  },
+  "cost": {
+    "priceSnapshotBinding": {
+      "path": "evals/clip_composition/reports/presentation/provider-research/openai-gpt-5-6-luna-official-snapshot-20260816-v001.json",
+      "schemaVersion": "openai-gpt-5-6-luna-official-snapshot-v001",
+      "fileSha256": "9d53b52a6e1726bcbf715137a32d6819d668c4023e89ddf2d81edaec7f5166d7"
+    },
+    "longContextPricingApplies": false,
+    "inputNanoUsd": 600,
+    "cachedInputNanoUsd": 0,
+    "cacheWriteNanoUsd": 24453750,
+    "outputNanoUsd": 3892800,
+    "totalNanoUsd": 28347150,
+    "totalUsd": 0.02834715,
+    "maximumNanoUsd": 1000000000,
+    "withinMaximum": true
+  },
+  "validation": {
+    "decision": "passed",
+    "tokenCountMeasurementRevalidated": true,
+    "indexReferenceValidation": "passed",
+    "deterministicFormalIdResolution": "passed",
+    "candidateCount": 7
+  }
+}
