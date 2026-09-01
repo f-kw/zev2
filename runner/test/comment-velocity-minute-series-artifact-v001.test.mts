@@ -72,8 +72,12 @@ test('raw chat replayを正式な1分流量へ変換し、本文・投稿者を�
   const source = input();
   const artifact = buildCommentVelocityMinuteSeriesArtifactFromBytesV001(source);
 
-  assert.equal(COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_ID_V001, 'chat-velocity-analysis-v001');
-  assert.equal(artifact.schemaVersion, 1);
+  assert.equal(
+    COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_ID_V001,
+    'comment-velocity-minute-series-artifact-v001'
+  );
+  assert.equal(artifact.schemaVersion, 2);
+  assert.equal(artifact.schemaId, 'comment-velocity-minute-series-artifact-v001');
   assert.equal(artifact.sourceVideoId, 'source');
   assert.equal(artifact.acquisition.filePath, source.rawChatReplayPath);
   assert.equal(artifact.acquisition.fileBytes, source.rawChatReplayBytes.byteLength);
@@ -181,6 +185,16 @@ test('JSONL parse失敗・空行・不正offset・末尾未到達をfail-closed�
       rawChatReplayBytes: rawChat([replayLine(0), replayLine(124_999)])
     }))
   ));
+  const invalidUtf8 = rawChat();
+  const textByte = Buffer.from('成果物', 'utf8')[0];
+  const invalidIndex = invalidUtf8.indexOf(textByte);
+  assert.notEqual(invalidIndex, -1);
+  invalidUtf8[invalidIndex] = 0xff;
+  expectCode('RAW_CHAT_JSONL_INVALID', () => (
+    buildCommentVelocityMinuteSeriesArtifactFromBytesV001(input({
+      rawChatReplayBytes: invalidUtf8
+    }))
+  ));
 });
 
 test('raw chat replay pathの動画ID不一致と完全1分の基準不足を拒否する', () => {
@@ -211,6 +225,11 @@ test('同一入力は同一byteとなり、再読後もraw SHA・全内容を照
 
   const decoded = decodeCommentVelocityMinuteSeriesArtifactV001(firstBytes);
   validateCommentVelocityMinuteSeriesArtifactAgainstRawChatBytesV001(decoded, source);
+  expectCode('ARTIFACT_INVALID', () => (
+    decodeCommentVelocityMinuteSeriesArtifactV001(
+      Buffer.from(JSON.stringify(decoded), 'utf8')
+    )
+  ));
 });
 
 test('raw chat replayのSHA差、動画差、生成内容改変をそれぞれ拒否する', () => {
@@ -244,13 +263,13 @@ test('raw chat replayのSHA差、動画差、生成内容改変をそれぞれ�
   expectCode('ARTIFACT_INVALID', () => assertCommentVelocityMinuteSeriesArtifactV001(changed));
 });
 
-test('余分なfield・未知schema・minute順序差を拒否する', () => {
+test('余分なfield・未知schema・minute順序差・計数対象外renderer・総数差を拒否する', () => {
   const artifact = buildCommentVelocityMinuteSeriesArtifactFromBytesV001(input());
   expectCode('ARTIFACT_INVALID', () => (
     assertCommentVelocityMinuteSeriesArtifactV001({...artifact, unexpected: true})
   ));
   expectCode('ARTIFACT_INVALID', () => (
-    assertCommentVelocityMinuteSeriesArtifactV001({...artifact, schemaVersion: 2})
+    assertCommentVelocityMinuteSeriesArtifactV001({...artifact, schemaVersion: 3})
   ));
   const reversed = structuredClone(artifact);
   [reversed.minuteSeries[0], reversed.minuteSeries[1]] = [
@@ -258,4 +277,18 @@ test('余分なfield・未知schema・minute順序差を拒否する', () => {
     reversed.minuteSeries[0]
   ];
   expectCode('ARTIFACT_INVALID', () => assertCommentVelocityMinuteSeriesArtifactV001(reversed));
+
+  const uncountedInMinute = structuredClone(artifact);
+  uncountedInMinute.minuteSeries[0]!.rendererCounts = {
+    liveChatViewerEngagementMessageRenderer: 1
+  };
+  expectCode('ARTIFACT_INVALID', () => (
+    assertCommentVelocityMinuteSeriesArtifactV001(uncountedInMinute)
+  ));
+
+  const forgedAcquisitionTotal = structuredClone(artifact);
+  forgedAcquisitionTotal.acquisition.rendererCounts.liveChatTextMessageRenderer += 1;
+  expectCode('ARTIFACT_INVALID', () => (
+    assertCommentVelocityMinuteSeriesArtifactV001(forgedAcquisitionTotal)
+  ));
 });

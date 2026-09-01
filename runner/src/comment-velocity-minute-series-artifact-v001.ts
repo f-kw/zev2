@@ -1,9 +1,11 @@
 import {createHash} from 'node:crypto';
 import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
+import {TextDecoder} from 'node:util';
 
-export const COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_VERSION_V001 = 1 as const;
-export const COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_ID_V001 = 'chat-velocity-analysis-v001';
+export const COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_VERSION_V001 = 2 as const;
+export const COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_ID_V001 =
+  'comment-velocity-minute-series-artifact-v001';
 export const COMMENT_VELOCITY_MINUTE_SERIES_ANALYSIS_TYPE_V001 =
   'distant-connection-comment-velocity-minute-series';
 
@@ -61,6 +63,7 @@ export type CommentVelocityMinuteV001 = {
 
 export type CommentVelocityMinuteSeriesArtifactV001 = {
   schemaVersion: typeof COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_VERSION_V001;
+  schemaId: typeof COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_ID_V001;
   analysisId: string;
   analysisType: typeof COMMENT_VELOCITY_MINUTE_SERIES_ANALYSIS_TYPE_V001;
   sourceVideoId: string;
@@ -263,7 +266,12 @@ function parseRawChatReplay(
   maxOffsetMs: number;
   rendererCounts: RendererCounts;
 } {
-  const text = Buffer.from(bytes).toString('utf8');
+  let text: string;
+  try {
+    text = new TextDecoder('utf-8', {fatal: true}).decode(bytes);
+  } catch (error) {
+    fail('RAW_CHAT_JSONL_INVALID', 'raw chat replayが正しいUTF-8ではありません', error);
+  }
   const lines = text.split(/\r?\n/u);
   if (lines.at(-1) === '') lines.pop();
   if (lines.length === 0) {
@@ -427,6 +435,7 @@ export function buildCommentVelocityMinuteSeriesArtifactFromBytesV001(
 
   return {
     schemaVersion: COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_VERSION_V001,
+    schemaId: COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_ID_V001,
     analysisId: input.analysisId,
     analysisType: COMMENT_VELOCITY_MINUTE_SERIES_ANALYSIS_TYPE_V001,
     sourceVideoId: input.sourceVideoId,
@@ -475,12 +484,17 @@ export async function buildCommentVelocityMinuteSeriesArtifactFromFileV001(
   return buildCommentVelocityMinuteSeriesArtifactFromBytesV001({...input, rawChatReplayBytes});
 }
 
-function assertRendererCounts(value: unknown, label: string): asserts value is RendererCounts {
+function assertRendererCounts(
+  value: unknown,
+  label: string,
+  allowedRenderers?: ReadonlySet<string>
+): asserts value is RendererCounts {
   if (!isRecord(value)) {
     fail('ARTIFACT_INVALID', `${label}がobjectではありません`);
   }
   const keys = Object.keys(value);
   if (keys.some((key, index) => !RENDERER_NAME.test(key)
+    || (allowedRenderers !== undefined && !allowedRenderers.has(key))
     || (index > 0 && compareStrings(keys[index - 1], key) >= 0))) {
     fail('ARTIFACT_INVALID', `${label}のrenderer名または順序が不正です`);
   }
@@ -502,6 +516,7 @@ export function assertCommentVelocityMinuteSeriesArtifactV001(
 ): asserts value is CommentVelocityMinuteSeriesArtifactV001 {
   if (!isRecord(value) || !hasExactKeys(value, [
     'schemaVersion',
+    'schemaId',
     'analysisId',
     'analysisType',
     'sourceVideoId',
@@ -515,6 +530,7 @@ export function assertCommentVelocityMinuteSeriesArtifactV001(
     fail('ARTIFACT_INVALID', '正式1分コメント流量成果物のroot構造が不正です');
   }
   if (value.schemaVersion !== COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_VERSION_V001
+    || value.schemaId !== COMMENT_VELOCITY_MINUTE_SERIES_SCHEMA_ID_V001
     || typeof value.analysisId !== 'string'
     || !FORMAL_ID.test(value.analysisId)
     || value.analysisType !== COMMENT_VELOCITY_MINUTE_SERIES_ANALYSIS_TYPE_V001
@@ -611,6 +627,7 @@ export function assertCommentVelocityMinuteSeriesArtifactV001(
     fail('ARTIFACT_INVALID', '1分区間数が元動画尺と一致しません');
   }
   let calculatedFullMinuteCommentCount = 0;
+  let calculatedInStreamCommentCount = 0;
   for (const [index, minute] of value.minuteSeries.entries()) {
     if (!isRecord(minute) || !hasExactKeys(minute, [
       'minuteIndex',
@@ -629,7 +646,11 @@ export function assertCommentVelocityMinuteSeriesArtifactV001(
     const expectedEndMs = Math.min((index + 1) * MINUTE_MS, value.sourceDurationMs);
     const expectedDurationMs = expectedEndMs - expectedStartMs;
     assertNonNegativeSafeInteger(minute.commentCount, `1分区間 ${index + 1}件目のコメント数`);
-    assertRendererCounts(minute.rendererCounts, `1分区間 ${index + 1}件目のrenderer件数`);
+    assertRendererCounts(
+      minute.rendererCounts,
+      `1分区間 ${index + 1}件目のrenderer件数`,
+      COUNTED_RENDERER_SET
+    );
     const rendererCount = Object.values(minute.rendererCounts)
       .reduce((total, count) => total + count, 0);
     const expectedRate = minute.commentCount / (expectedDurationMs / MINUTE_MS);
@@ -645,11 +666,20 @@ export function assertCommentVelocityMinuteSeriesArtifactV001(
       fail('ARTIFACT_INVALID', `1分区間 ${index + 1}件目の時刻・件数・流量値が不正です`);
     }
     if (minute.isFullMinute) calculatedFullMinuteCommentCount += minute.commentCount;
+    calculatedInStreamCommentCount += minute.commentCount;
   }
   if (value.baseline.fullMinuteCommentCount !== calculatedFullMinuteCommentCount
     || value.baseline.baselineCommentsPerMinute
       !== calculatedFullMinuteCommentCount / value.baseline.fullMinuteCount) {
     fail('ARTIFACT_INVALID', '配信内基準流量の集計値が1分区間と一致しません');
+  }
+  const acquisitionCountedRendererTotal = Object.entries(value.acquisition.rendererCounts)
+    .filter(([renderer]) => COUNTED_RENDERER_SET.has(renderer))
+    .reduce((total, [, count]) => total + count, 0);
+  if (acquisitionCountedRendererTotal !== calculatedInStreamCommentCount
+    + value.baseline.beforeStreamCount
+    + value.baseline.afterStreamCount) {
+    fail('ARTIFACT_INVALID', 'raw chat replayの計数対象renderer総数と1分集計が一致しません');
   }
 }
 
@@ -670,6 +700,10 @@ export function decodeCommentVelocityMinuteSeriesArtifactV001(
     fail('ARTIFACT_INVALID', '正式1分コメント流量成果物をJSONとして読めません', error);
   }
   assertCommentVelocityMinuteSeriesArtifactV001(value);
+  const formalBytes = serializeCommentVelocityMinuteSeriesArtifactV001(value);
+  if (!formalBytes.equals(Buffer.from(bytes))) {
+    fail('ARTIFACT_INVALID', '正式1分コメント流量成果物がformal byteではありません');
+  }
   return value;
 }
 
