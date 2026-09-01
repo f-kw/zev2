@@ -1,4 +1,5 @@
 import {createHash} from 'node:crypto';
+import {createReadStream} from 'node:fs';
 import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -9,6 +10,7 @@ import {assertTranscriptArtifact} from './workflow-artifact-validation.js';
 export const SOURCE_VIDEO_TRANSCRIPT_REUSE_ARTIFACT_SCHEMA_V001 =
   'source-video-transcript-reuse-artifact-v001';
 export const SOURCE_TRANSCRIPT_SCHEMA_V001 = 'transcript-json-v001';
+export const SOURCE_DURATION_NORMALIZATION_V001 = 'nearest-millisecond-v001';
 
 export const SOURCE_VIDEO_TRANSCRIPT_REUSE_ERROR_CODES_V001 = Object.freeze([
   'INPUT_INVALID',
@@ -55,6 +57,7 @@ export type SourceVideoTranscriptReuseArtifactV001 = {
     fileSha256: string;
     mode: TranscriptArtifact['mode'];
     sourceUri: string;
+    durationNormalization: typeof SOURCE_DURATION_NORMALIZATION_V001;
     durationMs: number;
   };
   transcriptCoverage: {
@@ -134,10 +137,22 @@ function assertSha256(value: unknown, label: string, code: SourceVideoTranscript
   }
 }
 
-function assertSafeDuration(value: unknown, label: string, code: SourceVideoTranscriptReuseErrorCodeV001): asserts value is number {
+function assertSafeDuration(
+  value: unknown,
+  label: string,
+  code: SourceVideoTranscriptReuseErrorCodeV001
+): asserts value is number {
   if (!Number.isSafeInteger(value) || (value as number) <= 0) {
     fail(code, `${label}は正の安全な整数ミリ秒である必要があります`);
   }
+}
+
+async function sha256File(filePath: string): Promise<string> {
+  const hash = createHash('sha256');
+  for await (const chunk of createReadStream(filePath)) {
+    hash.update(chunk as Buffer);
+  }
+  return hash.digest('hex');
 }
 
 function parseTranscript(bytes: Uint8Array): TranscriptArtifact {
@@ -173,44 +188,8 @@ function sourceVideoIdFromReference(reference: string): string {
   return sourceVideoId;
 }
 
-function transcriptSourceMatchesLocalVideo(
-  transcriptSourceUri: string,
-  workspaceRoot: string,
-  sourceVideoPath: string,
-  sourceVideoId: string
-): boolean {
-  const expectedAbsolutePath = path.resolve(workspaceRoot, sourceVideoPath);
-  try {
-    const parsed = new URL(transcriptSourceUri);
-    if (parsed.protocol === 'file:') {
-      return path.resolve(fileURLToPath(parsed)) === expectedAbsolutePath;
-    }
-    if (parsed.hostname === 'youtu.be' || parsed.hostname.endsWith('youtube.com')) {
-      return sourceVideoIdFromReference(transcriptSourceUri) === sourceVideoId;
-    }
-    return false;
-  } catch {
-    const transcriptPath = path.isAbsolute(transcriptSourceUri)
-      ? path.resolve(transcriptSourceUri)
-      : path.resolve(workspaceRoot, transcriptSourceUri);
-    return transcriptPath === expectedAbsolutePath;
-  }
-}
-
-function assertSourcePathNamesVideo(sourceVideoPath: string, sourceVideoId: string): void {
-  const fileName = path.basename(sourceVideoPath);
-  const extension = path.extname(fileName);
-  const fileVideoId = extension ? fileName.slice(0, -extension.length) : fileName;
-  if (fileVideoId !== sourceVideoId) {
-    fail(
-      'SOURCE_VIDEO_ID_MISMATCH',
-      `元動画pathの動画ID ${fileVideoId} と指定された動画ID ${sourceVideoId} が一致しません`
-    );
-  }
-}
-
 function transcriptDurationMs(transcript: TranscriptArtifact): number {
-  const durationMs = transcript.durationSec * 1000;
+  const durationMs = Math.round(transcript.durationSec * 1000);
   assertSafeDuration(durationMs, 'transcriptの動画尺', 'TRANSCRIPT_INVALID');
   return durationMs;
 }
@@ -268,8 +247,9 @@ function assertCompleteSpeechUnitCoverage(transcript: TranscriptArtifact): void 
   }
 }
 
-export function buildSourceVideoTranscriptReuseArtifactFromBytesV001(
-  input: BuildSourceVideoTranscriptReuseFromBytesInputV001
+function buildSourceVideoTranscriptReuseArtifactFromKnownVideoShaV001(
+  input: Omit<BuildSourceVideoTranscriptReuseFromBytesInputV001, 'sourceVideoBytes'>,
+  actualVideoSha256: string
 ): SourceVideoTranscriptReuseArtifactV001 {
   if (typeof input.workspaceRoot !== 'string' || !path.isAbsolute(input.workspaceRoot)) {
     fail('INPUT_INVALID', 'workspace rootは絶対pathである必要があります');
@@ -288,9 +268,6 @@ export function buildSourceVideoTranscriptReuseArtifactFromBytesV001(
     '承認済み元動画尺',
     'INPUT_INVALID'
   );
-  assertSourcePathNamesVideo(input.sourceVideoPath, input.sourceVideoId);
-
-  const actualVideoSha256 = sha256(input.sourceVideoBytes);
   if (actualVideoSha256 !== input.approvedSourceVideoSha256) {
     fail(
       'SOURCE_VIDEO_SHA_MISMATCH',
@@ -308,15 +285,6 @@ export function buildSourceVideoTranscriptReuseArtifactFromBytesV001(
   if (sourceVideoIdFromReference(transcript.sourceUri) !== input.sourceVideoId) {
     fail('SOURCE_VIDEO_ID_MISMATCH', '既存transcriptの動画参照が取得動画IDと一致しません');
   }
-  if (!transcriptSourceMatchesLocalVideo(
-    transcript.sourceUri,
-    input.workspaceRoot,
-    input.sourceVideoPath,
-    input.sourceVideoId
-  )) {
-    fail('TRANSCRIPT_SOURCE_MISMATCH', '既存transcriptの動画参照が取得動画pathと一致しません');
-  }
-
   const durationMs = transcriptDurationMs(transcript);
   if (durationMs !== input.measuredSourceVideoDurationMs) {
     fail(
@@ -345,6 +313,7 @@ export function buildSourceVideoTranscriptReuseArtifactFromBytesV001(
       fileSha256: sha256(input.sourceTranscriptBytes),
       mode: transcript.mode,
       sourceUri: transcript.sourceUri,
+      durationNormalization: SOURCE_DURATION_NORMALIZATION_V001,
       durationMs
     },
     transcriptCoverage: {
@@ -357,20 +326,32 @@ export function buildSourceVideoTranscriptReuseArtifactFromBytesV001(
   };
 }
 
+export function buildSourceVideoTranscriptReuseArtifactFromBytesV001(
+  input: BuildSourceVideoTranscriptReuseFromBytesInputV001
+): SourceVideoTranscriptReuseArtifactV001 {
+  if (!(input.sourceVideoBytes instanceof Uint8Array)) {
+    fail('INPUT_INVALID', '元動画はbyte列である必要があります');
+  }
+  return buildSourceVideoTranscriptReuseArtifactFromKnownVideoShaV001(
+    input,
+    sha256(input.sourceVideoBytes)
+  );
+}
+
 export async function buildSourceVideoTranscriptReuseArtifactFromFilesV001(
   input: BuildSourceVideoTranscriptReuseFromFilesInputV001
 ): Promise<SourceVideoTranscriptReuseArtifactV001> {
   assertWorkspaceRelativePath(input.sourceVideoPath, '元動画path');
   assertWorkspaceRelativePath(input.sourceTranscriptPath, '既存transcript path');
-  const [sourceVideoBytes, sourceTranscriptBytes] = await Promise.all([
-    readFile(path.join(input.workspaceRoot, input.sourceVideoPath)),
+  const sourceVideoAbsolutePath = path.join(input.workspaceRoot, input.sourceVideoPath);
+  const [actualVideoSha256, sourceTranscriptBytes] = await Promise.all([
+    sha256File(sourceVideoAbsolutePath),
     readFile(path.join(input.workspaceRoot, input.sourceTranscriptPath))
   ]);
-  return buildSourceVideoTranscriptReuseArtifactFromBytesV001({
-    ...input,
-    sourceVideoBytes,
-    sourceTranscriptBytes
-  });
+  return buildSourceVideoTranscriptReuseArtifactFromKnownVideoShaV001(
+    {...input, sourceTranscriptBytes},
+    actualVideoSha256
+  );
 }
 
 export function assertSourceVideoTranscriptReuseArtifactV001(
@@ -403,8 +384,6 @@ export function assertSourceVideoTranscriptReuseArtifactV001(
     '元動画bindingの実測尺',
     'ARTIFACT_INVALID'
   );
-  assertSourcePathNamesVideo(value.sourceVideoBinding.path, value.sourceVideoId);
-
   if (!isRecord(value.approvedSourceIdentity) || !hasExactKeys(value.approvedSourceIdentity, [
     'fileSha256', 'durationMs'
   ])) {
@@ -428,7 +407,8 @@ export function assertSourceVideoTranscriptReuseArtifactV001(
   }
 
   if (!isRecord(value.sourceTranscriptBinding) || !hasExactKeys(value.sourceTranscriptBinding, [
-    'path', 'schemaVersion', 'fileSha256', 'mode', 'sourceUri', 'durationMs'
+    'path', 'schemaVersion', 'fileSha256', 'mode', 'sourceUri',
+    'durationNormalization', 'durationMs'
   ])) {
     fail('ARTIFACT_INVALID', '既存transcript bindingの構造が不正です');
   }
@@ -438,7 +418,8 @@ export function assertSourceVideoTranscriptReuseArtifactV001(
       value.sourceTranscriptBinding.mode as string
     )
     || typeof value.sourceTranscriptBinding.sourceUri !== 'string'
-    || value.sourceTranscriptBinding.sourceUri.length === 0) {
+    || value.sourceTranscriptBinding.sourceUri.length === 0
+    || value.sourceTranscriptBinding.durationNormalization !== SOURCE_DURATION_NORMALIZATION_V001) {
     fail('ARTIFACT_INVALID', '既存transcript bindingの版・作成方法・動画参照が不正です');
   }
   assertSha256(
@@ -496,6 +477,10 @@ export function decodeSourceVideoTranscriptReuseArtifactV001(
     fail('ARTIFACT_INVALID', '動画・既存文字起こし再利用成果物をJSONとして読めません', error);
   }
   assertSourceVideoTranscriptReuseArtifactV001(value);
+  const formalBytes = serializeSourceVideoTranscriptReuseArtifactV001(value);
+  if (!formalBytes.equals(Buffer.from(bytes))) {
+    fail('ARTIFACT_INVALID', '動画・既存文字起こし再利用成果物がformal byteではありません');
+  }
   return value;
 }
 

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {readFile} from 'node:fs/promises';
+import {mkdtemp, mkdir, readFile, rm, writeFile} from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 
@@ -8,6 +9,7 @@ import {
   SourceVideoTranscriptReuseArtifactErrorV001,
   assertSourceVideoTranscriptReuseArtifactV001,
   buildSourceVideoTranscriptReuseArtifactFromBytesV001,
+  buildSourceVideoTranscriptReuseArtifactFromFilesV001,
   decodeSourceVideoTranscriptReuseArtifactV001,
   serializeSourceVideoTranscriptReuseArtifactV001,
   validateSourceVideoTranscriptReuseArtifactAgainstBytesV001,
@@ -84,6 +86,7 @@ test('取得動画と既存全文STTを動画ID・path・SHA・実測尺で正�
       fileSha256: createHash('sha256').update(source.sourceTranscriptBytes).digest('hex'),
       mode: 'zev-local-stt-chunked',
       sourceUri: '/workspace/fixtures/source-video.mp4',
+      durationNormalization: 'nearest-millisecond-v001',
       durationMs: 3_000
     },
     transcriptCoverage: {
@@ -109,22 +112,18 @@ test('取得動画のbyteまたは実測尺が承認済み履歴値と違う場�
   ));
 });
 
-test('動画ID、動画path、transcript動画参照の不一致を個別に拒否する', () => {
+test('動画IDとtranscript動画参照の不一致を拒否し、同一byteの配置pathは同一性に混ぜない', () => {
   expectCode('SOURCE_VIDEO_ID_MISMATCH', () => (
     buildSourceVideoTranscriptReuseArtifactFromBytesV001(input({sourceVideoId: 'different-video'}))
   ));
-  expectCode('SOURCE_VIDEO_ID_MISMATCH', () => (
-    buildSourceVideoTranscriptReuseArtifactFromBytesV001(input({
-      sourceVideoPath: 'fixtures/other-video.mp4'
-    }))
-  ));
-  expectCode('TRANSCRIPT_SOURCE_MISMATCH', () => (
-    buildSourceVideoTranscriptReuseArtifactFromBytesV001(input({
-      sourceTranscriptBytes: transcript({
-        sourceUri: '/different/root/fixtures/source-video.mp4'
-      })
-    }))
-  ));
+  const relocated = buildSourceVideoTranscriptReuseArtifactFromBytesV001(input({
+    sourceVideoPath: 'fixtures/approved-source-hardlink.mp4',
+    sourceTranscriptBytes: transcript({
+      sourceUri: '/different/root/fixtures/source-video.mp4'
+    })
+  }));
+  assert.equal(relocated.sourceVideoBinding.path, 'fixtures/approved-source-hardlink.mp4');
+  assert.equal(relocated.sourceVideoId, 'source-video');
   expectCode('SOURCE_VIDEO_ID_MISMATCH', () => (
     buildSourceVideoTranscriptReuseArtifactFromBytesV001(input({
       sourceTranscriptBytes: transcript({
@@ -164,6 +163,43 @@ test('transcriptの動画尺差、時系列逆転、動画尺外断片を拒否�
   ));
 });
 
+test('transcriptの小数ミリ秒は既存ZEVと同じ最寄りミリ秒へ決定的に正規化する', () => {
+  const artifact = buildSourceVideoTranscriptReuseArtifactFromBytesV001(input({
+    measuredSourceVideoDurationMs: 3_000,
+    approvedSourceVideoDurationMs: 3_000,
+    sourceTranscriptBytes: transcript({durationSec: 3.000166})
+  }));
+  assert.equal(artifact.sourceVideoBinding.measuredDurationMs, 3_000);
+  assert.equal(artifact.sourceTranscriptBinding.durationNormalization, 'nearest-millisecond-v001');
+  assert.equal(artifact.sourceTranscriptBinding.durationMs, 3_000);
+});
+
+test('file入口は動画を一括読込せずSHAを計算し、同じ正式成果物を作る', async () => {
+  const temporaryRoot = await mkdtemp(path.join(os.tmpdir(), 'source-video-transcript-reuse-'));
+  try {
+    await mkdir(path.join(temporaryRoot, 'fixtures'), {recursive: true});
+    await Promise.all([
+      writeFile(path.join(temporaryRoot, sourceVideoPath), sourceVideoBytes),
+      writeFile(path.join(temporaryRoot, sourceTranscriptPath), transcript({
+        sourceUri: path.join(temporaryRoot, sourceVideoPath)
+      }))
+    ]);
+    const artifact = await buildSourceVideoTranscriptReuseArtifactFromFilesV001({
+      workspaceRoot: temporaryRoot,
+      sourceVideoId: 'source-video',
+      sourceVideoPath,
+      measuredSourceVideoDurationMs: 3_000,
+      approvedSourceVideoSha256: sourceVideoSha256,
+      approvedSourceVideoDurationMs: 3_000,
+      sourceTranscriptPath
+    });
+    assert.equal(artifact.sourceVideoBinding.fileSha256, sourceVideoSha256);
+    assert.equal(artifact.sourceTranscriptBinding.durationMs, 3_000);
+  } finally {
+    await rm(temporaryRoot, {recursive: true, force: true});
+  }
+});
+
 test('元STT断片の欠落、重複、順序変更を完全被覆検査で拒否する', () => {
   expectCode('TRANSCRIPT_COVERAGE_INVALID', () => (
     buildSourceVideoTranscriptReuseArtifactFromBytesV001(input({
@@ -198,6 +234,11 @@ test('同じ入力は同じformal byteになり、SHA差と余分なfieldはfail
   ));
   expectCode('ARTIFACT_INVALID', () => (
     assertSourceVideoTranscriptReuseArtifactV001({...decoded, unexpected: true})
+  ));
+  expectCode('ARTIFACT_INVALID', () => (
+    decodeSourceVideoTranscriptReuseArtifactV001(
+      Buffer.from(JSON.stringify(decoded), 'utf8')
+    )
   ));
 });
 
