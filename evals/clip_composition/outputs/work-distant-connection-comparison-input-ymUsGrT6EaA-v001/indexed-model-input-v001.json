@@ -1,0 +1,3318 @@
+{
+  "schemaVersion": "distant-connection-comparison-indexed-model-input-v001",
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-ymUsGrT6EaA-v001/source-package-v001.json",
+    "schemaVersion": "distant-connection-comparison-source-package-v001",
+    "fileSha256": "4428cef6bf1323319b98f8c1b304e3bba36e364468345ac5bcb64e2b17bd49f5"
+  },
+  "indexBase": 0,
+  "explorationTask": {
+    "objective": "各コメント流量アンカーについて、配信全文から時間的に離れた過去または未来の相方を探してください。前振りと回収、予告と実現、原因と後の結果、過去の発言と後の反応、認識・予想と後の出来事、約束・宣言と後の実行、疑問と後の答え、以前の出来事によって後の意味が変わる関係は例であり、閉じた分類ではありません。前半の具体的な情報、出来事、予告、認識または判断が、後半の具体的な出来事、回収、変化、反応または結果として現れ、前から後の順に短く見る価値が生まれる接続だけを候補にしてください。",
+    "anchorInstruction": "directionはanchorから見た相方の位置を表します。futureの場合はanchor発話をfirstPartに含め、相方を未来側のsecondPartに置いてください。pastの場合はanchor発話をsecondPartに含め、相方を過去側のfirstPartに置いてください。anchorと発話は入力にある0-based indexだけで参照してください。",
+    "returnInstruction": "同じゲーム、人物、設定または話題に属するだけ、一般的な背景説明が後半にも当てはまるだけ、単なるオープニングとエンディングの対応、または冒頭の一般説明と終了時総括が時系列上で対称なだけの接続は返さないでください。後半が同じ対象に触れるだけ、前半を単に言い換える、確認する、または自然な具体例として示すだけでも不十分です。前半を外しても後半の理解や面白さがほぼ変わらない接続は返さないでください。前半の具体的な内容が後半の具体的な出来事、反応または結果によって強く回収され、前半を付けることで後半の理解、回収感、意外性または面白さの少なくとも一つが明確に増える必要があります。一般説明そのものは禁止しませんが、後半が具体的に強く回収する場合だけ候補にしてください。普通の視聴者が前半から後半だけを短尺で見て接続を理解でき、外部説明を必要としない候補だけを返してください。意味関係を理解する前提情報が短尺として自然な長さに収まり、長い説明、複雑な前提または大幅な区間拡張を必要としないことも条件です。",
+    "boundaryMeaning": "返答では各候補にanchorIndex、firstPartUtteranceIndexes、secondPartUtteranceIndexesを必ず含め、入力配列の0-based範囲内の整数だけで参照してください。これらのindexは意味探索の根拠であり、完成動画の最終切り出し位置ではありません。範囲外の値を補完、推測、類似照合せず、参照解決は後続の決定論的ローカル処理へ任せてください。導入文脈や自然な終端は後続の区間化が決めます。"
+  },
+  "utteranceCount": 431,
+  "anchorCount": 161,
+  "utterances": [
+    {
+      "utteranceIndex": 0,
+      "text": "ばんばんちゃん",
+      "sourceStartMs": 87170,
+      "sourceEndMs": 88606
+    },
+    {
+      "utteranceIndex": 1,
+      "text": "ぶんぶんちゃんぶんぶんちゃんぶんぶんちゃんみんなお待ちかねーす",
+      "sourceStartMs": 150162,
+      "sourceEndMs": 155058
+    },
+    {
+      "utteranceIndex": 2,
+      "text": "ぶんぶんちゃんぶんぶんちゃんぶんぶんちゃんぶんぶんちゃん",
+      "sourceStartMs": 212402,
+      "sourceEndMs": 216558
+    },
+    {
+      "utteranceIndex": 3,
+      "text": "今年一怖いと言われるホラーゲームハリチ鬼の子供の母ハリチあのなんだっけあのあのビー玉ばあちゃんとか悪意のところの新たなやつらしいなんか早くねここの会社",
+      "sourceStartMs": 249378,
+      "sourceEndMs": 269860
+    },
+    {
+      "utteranceIndex": 4,
+      "text": "なんかめちゃめちゃ早い気がする出すスパンが今回はガチです怖いらしい多分ハリチって読むんだと思うガチのマジで今年1位怖いらしい今年1位やっぱ更新されてくから今年はまだまだあと半年もないけどまだ数ヶ月あるから",
+      "sourceStartMs": 273388,
+      "sourceEndMs": 299880
+    },
+    {
+      "utteranceIndex": 5,
+      "text": "されてくよねっていうついさっきもホラーゲーやってたよねうん相手にバコバコバコバコ入れられる得点入れられるホラーゲームやってましたデスベースボールね今回はガチのマジのホラーゲームもう今日はダブルホラーゲームの日だから今日はダブルホラー",
+      "sourceStartMs": 301154,
+      "sourceEndMs": 329780
+    },
+    {
+      "utteranceIndex": 6,
+      "text": "やっぱ夏は暑いからホラーゲームで涼みたい寒くなりたいっていうのでのこれダブルホラーゲームでもさっきのよりも多分怖いよこれはダントツで今年一怖いと噂だからこれ多分やばいよでもサムネ自体がやばいからねまずはポエムからいきましょうか",
+      "sourceStartMs": 332863,
+      "sourceEndMs": 358858
+    },
+    {
+      "utteranceIndex": 7,
+      "text": "夏まだまだ続くペコンそんな時時時はホラーゲーム今年一怖いと噂のハリチハリチって何なんだろうハリチうーんと",
+      "sourceStartMs": 362626,
+      "sourceEndMs": 388962
+    },
+    {
+      "utteranceIndex": 8,
+      "text": "やってみるしかないぺこじゃん!",
+      "sourceStartMs": 390242,
+      "sourceEndMs": 392783
+    },
+    {
+      "utteranceIndex": 9,
+      "text": "やるっきゃない!",
+      "sourceStartMs": 392783,
+      "sourceEndMs": 394645
+    },
+    {
+      "utteranceIndex": 10,
+      "text": "ない!",
+      "sourceStartMs": 394645,
+      "sourceEndMs": 395825
+    },
+    {
+      "utteranceIndex": 11,
+      "text": "ぺこじゃん!",
+      "sourceStartMs": 395825,
+      "sourceEndMs": 397106
+    },
+    {
+      "utteranceIndex": 12,
+      "text": "これにしよオッケー!",
+      "sourceStartMs": 397106,
+      "sourceEndMs": 398927
+    },
+    {
+      "utteranceIndex": 13,
+      "text": "開始ツイートしたぺこの代わりツイートー!",
+      "sourceStartMs": 398927,
+      "sourceEndMs": 407172
+    },
+    {
+      "utteranceIndex": 14,
+      "text": "頼むぺこーん!",
+      "sourceStartMs": 407172,
+      "sourceEndMs": 408432
+    },
+    {
+      "utteranceIndex": 15,
+      "text": "あれ何個?",
+      "sourceStartMs": 408432,
+      "sourceEndMs": 409513
+    },
+    {
+      "utteranceIndex": 16,
+      "text": "あ、大丈夫だX一瞬バグったかと思ったの",
+      "sourceStartMs": 409513,
+      "sourceEndMs": 417678
+    },
+    {
+      "utteranceIndex": 17,
+      "text": "こんならばハリチハリチってなんか言い方的に可愛いのになこの画面でもう怖い?",
+      "sourceStartMs": 426323,
+      "sourceEndMs": 432285
+    },
+    {
+      "utteranceIndex": 18,
+      "text": "音も聞いてみよううわー怖そうベコちゃん勝つ役がいれば負ける役もいる配信ありがとううんガチで慰めやめてねうんガチ慰め気にしてねーし別に",
+      "sourceStartMs": 432285,
+      "sourceEndMs": 449230
+    },
+    {
+      "utteranceIndex": 19,
+      "text": "別に負ける時だってあるなんて分かってるし別に気にしてんしホラーゲーですこれからねホラーゲー鬼の子の母ハリチ行きましょうかすかに見える程度でも配信的にはみんなには見えててほしいからこんぐらい出てみよう音でか母ちゃん",
+      "sourceStartMs": 450266,
+      "sourceEndMs": 479380
+    },
+    {
+      "utteranceIndex": 20,
+      "text": "隠れ虫よ病院?",
+      "sourceStartMs": 485178,
+      "sourceEndMs": 488320
+    },
+    {
+      "utteranceIndex": 21,
+      "text": "なんて読むの普通に病院でかくれんぼしちゃいけないよ急にリアルな手おいおいおいおいおい",
+      "sourceStartMs": 513806,
+      "sourceEndMs": 534826
+    },
+    {
+      "utteranceIndex": 22,
+      "text": "どういうことだ娘の捜索ちょっと音大きくない?",
+      "sourceStartMs": 540494,
+      "sourceEndMs": 545335
+    },
+    {
+      "utteranceIndex": 23,
+      "text": "大丈夫そう?",
+      "sourceStartMs": 545335,
+      "sourceEndMs": 548816
+    },
+    {
+      "utteranceIndex": 24,
+      "text": "おいおいおいさっきまであんな綺麗だったどういうことだ?",
+      "sourceStartMs": 548816,
+      "sourceEndMs": 556377
+    },
+    {
+      "utteranceIndex": 25,
+      "text": "何の病気なんだろ娘さんこれ開けれる?",
+      "sourceStartMs": 556377,
+      "sourceEndMs": 563859
+    },
+    {
+      "utteranceIndex": 26,
+      "text": "うわ今回こういう戸棚とか開くんだやだなあらまあ",
+      "sourceStartMs": 563859,
+      "sourceEndMs": 569380
+    },
+    {
+      "utteranceIndex": 27,
+      "text": "鍵はかかってる何もなさそうマスカードもうちょい低くていいなん?",
+      "sourceStartMs": 573174,
+      "sourceEndMs": 593460
+    },
+    {
+      "utteranceIndex": 28,
+      "text": "こうかこれ何も触れないんけ!",
+      "sourceStartMs": 593460,
+      "sourceEndMs": 594080
+    },
+    {
+      "utteranceIndex": 29,
+      "text": "あ、なんか触らなさそう",
+      "sourceStartMs": 594080,
+      "sourceEndMs": 598762
+    },
+    {
+      "utteranceIndex": 30,
+      "text": "鏡は?",
+      "sourceStartMs": 603234,
+      "sourceEndMs": 603434
+    },
+    {
+      "utteranceIndex": 31,
+      "text": "これボタン…ボタン目じゃないんかな?",
+      "sourceStartMs": 603434,
+      "sourceEndMs": 615526
+    },
+    {
+      "utteranceIndex": 32,
+      "text": "あ、なんかあるん?",
+      "sourceStartMs": 615526,
+      "sourceEndMs": 616547
+    },
+    {
+      "utteranceIndex": 33,
+      "text": "はい!",
+      "sourceStartMs": 616547,
+      "sourceEndMs": 616867
+    },
+    {
+      "utteranceIndex": 34,
+      "text": "ハンドルが必要なんだねこれねここ開けるにはここにハンドルが必要あるじゃんそっち行けばいいんだ",
+      "sourceStartMs": 616867,
+      "sourceEndMs": 628098
+    },
+    {
+      "utteranceIndex": 35,
+      "text": "開かないどこにいるの?",
+      "sourceStartMs": 635752,
+      "sourceEndMs": 637835
+    },
+    {
+      "utteranceIndex": 36,
+      "text": "お母さんを困らせんじゃないよ!",
+      "sourceStartMs": 637835,
+      "sourceEndMs": 640097
+    },
+    {
+      "utteranceIndex": 37,
+      "text": "汚ねぇトイレえぇ!",
+      "sourceStartMs": 640097,
+      "sourceEndMs": 644862
+    },
+    {
+      "utteranceIndex": 38,
+      "text": "こういうのも開くのかよ!",
+      "sourceStartMs": 644862,
+      "sourceEndMs": 649307
+    },
+    {
+      "utteranceIndex": 39,
+      "text": "え、こう…え?",
+      "sourceStartMs": 649307,
+      "sourceEndMs": 649508
+    },
+    {
+      "utteranceIndex": 40,
+      "text": "ねぇ、ちょっと待て見せ方怖いんだけど普通に",
+      "sourceStartMs": 649508,
+      "sourceEndMs": 651390
+    },
+    {
+      "utteranceIndex": 41,
+      "text": "え、このカメラもさね、ビビらせる感じやめてほしいおい、カーペンしてくんない?",
+      "sourceStartMs": 664354,
+      "sourceEndMs": 674196
+    },
+    {
+      "utteranceIndex": 42,
+      "text": "なんかその見せ方が怖いやつじゃんちゃんとーくっそ…もう…え、マジちゃんと",
+      "sourceStartMs": 674196,
+      "sourceEndMs": 689740
+    },
+    {
+      "utteranceIndex": 43,
+      "text": "もうちゃんと…お?",
+      "sourceStartMs": 690866,
+      "sourceEndMs": 705230
+    },
+    {
+      "utteranceIndex": 44,
+      "text": "ちょっと?",
+      "sourceStartMs": 705230,
+      "sourceEndMs": 705450
+    },
+    {
+      "utteranceIndex": 45,
+      "text": "どこにいんの?",
+      "sourceStartMs": 705450,
+      "sourceEndMs": 710612
+    },
+    {
+      "utteranceIndex": 46,
+      "text": "どこ?",
+      "sourceStartMs": 710612,
+      "sourceEndMs": 710912
+    },
+    {
+      "utteranceIndex": 47,
+      "text": "なんか監視カメラついてそうほにゃららこーこわこのパンダ",
+      "sourceStartMs": 710912,
+      "sourceEndMs": 717234
+    },
+    {
+      "utteranceIndex": 48,
+      "text": "ん?",
+      "sourceStartMs": 736537,
+      "sourceEndMs": 736577
+    },
+    {
+      "utteranceIndex": 49,
+      "text": "ここか?",
+      "sourceStartMs": 736577,
+      "sourceEndMs": 736817
+    },
+    {
+      "utteranceIndex": 50,
+      "text": "え?",
+      "sourceStartMs": 736817,
+      "sourceEndMs": 736937
+    },
+    {
+      "utteranceIndex": 51,
+      "text": "中にいるの?",
+      "sourceStartMs": 736937,
+      "sourceEndMs": 737718
+    },
+    {
+      "utteranceIndex": 52,
+      "text": "これなんて読むの?",
+      "sourceStartMs": 737718,
+      "sourceEndMs": 739478
+    },
+    {
+      "utteranceIndex": 53,
+      "text": "テツコ?",
+      "sourceStartMs": 739478,
+      "sourceEndMs": 740198
+    },
+    {
+      "utteranceIndex": 54,
+      "text": "鍵を見つけないとないね、鍵ないこんな中に閉じ込めるの?",
+      "sourceStartMs": 740198,
+      "sourceEndMs": 750000
+    },
+    {
+      "utteranceIndex": 55,
+      "text": "鍵あんの?",
+      "sourceStartMs": 750066,
+      "sourceEndMs": 750206
+    },
+    {
+      "utteranceIndex": 56,
+      "text": "あるぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅぅ�",
+      "sourceStartMs": 750206,
+      "sourceEndMs": 779726
+    },
+    {
+      "utteranceIndex": 57,
+      "text": "赤い風船になるとなんかさイット思い出すわなに?",
+      "sourceStartMs": 782183,
+      "sourceEndMs": 808093
+    },
+    {
+      "utteranceIndex": 58,
+      "text": "もう行けるとこない?",
+      "sourceStartMs": 808093,
+      "sourceEndMs": 808694
+    },
+    {
+      "utteranceIndex": 59,
+      "text": "やめてね金庫もう帰れよお家にこんな変な所やめよ",
+      "sourceStartMs": 808694,
+      "sourceEndMs": 809594
+    },
+    {
+      "utteranceIndex": 60,
+      "text": "さっきまでついてなかったやんここは警備室だ監視カメラに金庫の行き先が映ってるはずだなんとかして中に入らないと普通になんで電気ついてんのこここれ割れない",
+      "sourceStartMs": 824176,
+      "sourceEndMs": 837990
+    },
+    {
+      "utteranceIndex": 61,
+      "text": "さっきロウソクなんてなかったよね?",
+      "sourceStartMs": 853357,
+      "sourceEndMs": 864283
+    },
+    {
+      "utteranceIndex": 62,
+      "text": "しゃがめんのかよ…なるほどね、しゃがみもありますちゃんと勘弁して!",
+      "sourceStartMs": 864283,
+      "sourceEndMs": 865924
+    },
+    {
+      "utteranceIndex": 63,
+      "text": "タン先生も大変だよね一人で子供の付き添いに入院で病院行き来して金庫なんてもう病院が実家みたいなもんだろ",
+      "sourceStartMs": 865924,
+      "sourceEndMs": 869606
+    },
+    {
+      "utteranceIndex": 64,
+      "text": "あ、医者の子供が金庫で自分主人公医者か?",
+      "sourceStartMs": 871526,
+      "sourceEndMs": 875748
+    },
+    {
+      "utteranceIndex": 65,
+      "text": "これタム先生あ、まあペコアラ先生も大変だね一人で子供の付き添い入院で病院を行き来してる金庫なんてもう実家があ、病院が実家みたいなもんだろうってことは違う別に先生じゃねえか病院に行き来病院通いしてるから病院が家だねみたいな言われてるってだけかなんの病気なんだろう",
+      "sourceStartMs": 875748,
+      "sourceEndMs": 899800
+    },
+    {
+      "utteranceIndex": 66,
+      "text": "しないと治らないって言ってたよね禁止ご注射うわー怖いこういうのもみんな医師の失踪異様な噂に発展か先日市内の病院で医師が行方不明になる事件が発生したこれ以前にも地下室から看護の泣き声を聞かれるのとの報告が医療スタッフ",
+      "sourceStartMs": 900394,
+      "sourceEndMs": 929840
+    },
+    {
+      "utteranceIndex": 67,
+      "text": "はいはい赤い服着た女が出てきますこのゲーム分かりましたもう何今回この扉開け",
+      "sourceStartMs": 930506,
+      "sourceEndMs": 948815
+    },
+    {
+      "utteranceIndex": 68,
+      "text": "赤い女が出てくるんだねサムネにも顔赤いやついたわ入れるわけじゃないのね赤い服の女来ますハンドルゲットシャッターのクランクね",
+      "sourceStartMs": 963664,
+      "sourceEndMs": 989940
+    },
+    {
+      "utteranceIndex": 69,
+      "text": "とりあえずそのこのシャー",
+      "sourceStartMs": 991922,
+      "sourceEndMs": 992776
+    },
+    {
+      "utteranceIndex": 70,
+      "text": "おい、帰って金庫そこにいらない!",
+      "sourceStartMs": 1029974,
+      "sourceEndMs": 1032976
+    },
+    {
+      "utteranceIndex": 71,
+      "text": "また風船!",
+      "sourceStartMs": 1032976,
+      "sourceEndMs": 1033336
+    },
+    {
+      "utteranceIndex": 72,
+      "text": "え?",
+      "sourceStartMs": 1033336,
+      "sourceEndMs": 1033716
+    },
+    {
+      "utteranceIndex": 73,
+      "text": "え?",
+      "sourceStartMs": 1033716,
+      "sourceEndMs": 1043122
+    },
+    {
+      "utteranceIndex": 74,
+      "text": "え?",
+      "sourceStartMs": 1043122,
+      "sourceEndMs": 1045764
+    },
+    {
+      "utteranceIndex": 75,
+      "text": "今、バケモノいたよね?",
+      "sourceStartMs": 1045764,
+      "sourceEndMs": 1048686
+    },
+    {
+      "utteranceIndex": 76,
+      "text": "リカちゃん?",
+      "sourceStartMs": 1048686,
+      "sourceEndMs": 1049086
+    },
+    {
+      "utteranceIndex": 77,
+      "text": "今リカちゃんいた?",
+      "sourceStartMs": 1050838,
+      "sourceEndMs": 1056441
+    },
+    {
+      "utteranceIndex": 78,
+      "text": "言ったー!",
+      "sourceStartMs": 1056441,
+      "sourceEndMs": 1057681
+    },
+    {
+      "utteranceIndex": 79,
+      "text": "言ったー!",
+      "sourceStartMs": 1057681,
+      "sourceEndMs": 1058802
+    },
+    {
+      "utteranceIndex": 80,
+      "text": "つって今リカちゃんみたいなバケモノ居なかった?",
+      "sourceStartMs": 1058802,
+      "sourceEndMs": 1064004
+    },
+    {
+      "utteranceIndex": 81,
+      "text": "大丈夫だよね?",
+      "sourceStartMs": 1064004,
+      "sourceEndMs": 1066145
+    },
+    {
+      "utteranceIndex": 82,
+      "text": "仮面してよ気のせいだよね?",
+      "sourceStartMs": 1066145,
+      "sourceEndMs": 1071047
+    },
+    {
+      "utteranceIndex": 83,
+      "text": "今なんかとんでもなくでっかいやつ居たけどえ、これ上行っていいの?",
+      "sourceStartMs": 1071047,
+      "sourceEndMs": 1076510
+    },
+    {
+      "utteranceIndex": 84,
+      "text": "失礼だな純愛だよって怖えよどこに繋がってんのこれ病院から離れてる?",
+      "sourceStartMs": 1080394,
+      "sourceEndMs": 1087015
+    },
+    {
+      "utteranceIndex": 85,
+      "text": "斧?",
+      "sourceStartMs": 1087015,
+      "sourceEndMs": 1087195
+    },
+    {
+      "utteranceIndex": 86,
+      "text": "ん?",
+      "sourceStartMs": 1087195,
+      "sourceEndMs": 1087315
+    },
+    {
+      "utteranceIndex": 87,
+      "text": "なんか斧っぽいのある?",
+      "sourceStartMs": 1087315,
+      "sourceEndMs": 1103859
+    },
+    {
+      "utteranceIndex": 88,
+      "text": "えーもうこれ斧必要なんだろ?",
+      "sourceStartMs": 1103859,
+      "sourceEndMs": 1104779
+    },
+    {
+      "utteranceIndex": 89,
+      "text": "ん?",
+      "sourceStartMs": 1104779,
+      "sourceEndMs": 1105019
+    },
+    {
+      "utteranceIndex": 90,
+      "text": "え?",
+      "sourceStartMs": 1105019,
+      "sourceEndMs": 1105459
+    },
+    {
+      "utteranceIndex": 91,
+      "text": "え?",
+      "sourceStartMs": 1105459,
+      "sourceEndMs": 1105499
+    },
+    {
+      "utteranceIndex": 92,
+      "text": "誰かいるくね?",
+      "sourceStartMs": 1105499,
+      "sourceEndMs": 1108700
+    },
+    {
+      "utteranceIndex": 93,
+      "text": "いるよね誰か!",
+      "sourceStartMs": 1108700,
+      "sourceEndMs": 1109040
+    },
+    {
+      "utteranceIndex": 94,
+      "text": "え、金庫じゃない?",
+      "sourceStartMs": 1109040,
+      "sourceEndMs": 1109260
+    },
+    {
+      "utteranceIndex": 95,
+      "text": "なんか必要だ必要アイテム必要だこれ",
+      "sourceStartMs": 1109260,
+      "sourceEndMs": 1109920
+    },
+    {
+      "utteranceIndex": 96,
+      "text": "ねえ、病院でこんな細い道なくない?",
+      "sourceStartMs": 1119354,
+      "sourceEndMs": 1120235
+    },
+    {
+      "utteranceIndex": 97,
+      "text": "普通にどういうこと?",
+      "sourceStartMs": 1120235,
+      "sourceEndMs": 1120856
+    },
+    {
+      "utteranceIndex": 98,
+      "text": "え、なにこれパーテーションエグエグエグ?",
+      "sourceStartMs": 1120856,
+      "sourceEndMs": 1121797
+    },
+    {
+      "utteranceIndex": 99,
+      "text": "ん?",
+      "sourceStartMs": 1121797,
+      "sourceEndMs": 1122177
+    },
+    {
+      "utteranceIndex": 100,
+      "text": "まただ!",
+      "sourceStartMs": 1122177,
+      "sourceEndMs": 1122737
+    },
+    {
+      "utteranceIndex": 101,
+      "text": "りんりんランラン",
+      "sourceStartMs": 1122737,
+      "sourceEndMs": 1124940
+    },
+    {
+      "utteranceIndex": 102,
+      "text": "なんかアイテム、なんか棚はあるけどアイテムろくにねぇなこれ触れないよね触れないまぁマジで今んところ今年一段おいパンダボイス好きかよこのおもちゃ",
+      "sourceStartMs": 1143591,
+      "sourceEndMs": 1169330
+    },
+    {
+      "utteranceIndex": 103,
+      "text": "教えてくれてた",
+      "sourceStartMs": 1187925,
+      "sourceEndMs": 1188751
+    },
+    {
+      "utteranceIndex": 104,
+      "text": "やばい、狙われとるやん、もう狙われてますって、もう確実になんて書いてあるか全然わかんねえびっくりしたな、これゆっくりになったから急に",
+      "sourceStartMs": 1204054,
+      "sourceEndMs": 1229026
+    },
+    {
+      "utteranceIndex": 105,
+      "text": "もう必要だね結婚じゃないかあ、ラッキー!",
+      "sourceStartMs": 1235186,
+      "sourceEndMs": 1246574
+    },
+    {
+      "utteranceIndex": 106,
+      "text": "バール手に入ったら強いぞおい手に持てえちらほ、えちらほもうここえ、もう",
+      "sourceStartMs": 1246574,
+      "sourceEndMs": 1259222
+    },
+    {
+      "utteranceIndex": 107,
+      "text": "やめませんかーだってもう!",
+      "sourceStartMs": 1260975,
+      "sourceEndMs": 1268581
+    },
+    {
+      "utteranceIndex": 108,
+      "text": "え?",
+      "sourceStartMs": 1268581,
+      "sourceEndMs": 1268621
+    },
+    {
+      "utteranceIndex": 109,
+      "text": "いるんでしょ?",
+      "sourceStartMs": 1268621,
+      "sourceEndMs": 1268861
+    },
+    {
+      "utteranceIndex": 110,
+      "text": "あーもういるやんこれもういるやんいるやんいるやんもうリカちゃんやめてー!",
+      "sourceStartMs": 1268861,
+      "sourceEndMs": 1270303
+    },
+    {
+      "utteranceIndex": 111,
+      "text": "リカー!",
+      "sourceStartMs": 1270303,
+      "sourceEndMs": 1272485
+    },
+    {
+      "utteranceIndex": 112,
+      "text": "もう勘弁してーよこの覗き方やめろ!",
+      "sourceStartMs": 1272485,
+      "sourceEndMs": 1273746
+    },
+    {
+      "utteranceIndex": 113,
+      "text": "早よ上行ってお前!",
+      "sourceStartMs": 1273746,
+      "sourceEndMs": 1279511
+    },
+    {
+      "utteranceIndex": 114,
+      "text": "え、もうやだーもうこいつの覗き方もう世界一嫌い!",
+      "sourceStartMs": 1279511,
+      "sourceEndMs": 1287598
+    },
+    {
+      "utteranceIndex": 115,
+      "text": "そうけど",
+      "sourceStartMs": 1298706,
+      "sourceEndMs": 1298970
+    },
+    {
+      "utteranceIndex": 116,
+      "text": "風船のやついたのにまただよ",
+      "sourceStartMs": 1327040,
+      "sourceEndMs": 1341254
+    },
+    {
+      "utteranceIndex": 117,
+      "text": "やばいおい、いるんだろ?",
+      "sourceStartMs": 1366474,
+      "sourceEndMs": 1368675
+    },
+    {
+      "utteranceIndex": 118,
+      "text": "人をバカにするバラやめろよ!",
+      "sourceStartMs": 1368675,
+      "sourceEndMs": 1369055
+    },
+    {
+      "utteranceIndex": 119,
+      "text": "あ、行けなくなってるあれ?",
+      "sourceStartMs": 1369055,
+      "sourceEndMs": 1369755
+    },
+    {
+      "utteranceIndex": 120,
+      "text": "あそこって穴にあがるかったっけ?",
+      "sourceStartMs": 1369755,
+      "sourceEndMs": 1377918
+    },
+    {
+      "utteranceIndex": 121,
+      "text": "マジ今んところ今年一怖すぎて笑ったビデオ見る気?",
+      "sourceStartMs": 1412798,
+      "sourceEndMs": 1425208
+    },
+    {
+      "utteranceIndex": 122,
+      "text": "もう勘弁してよ夜中になんか映るようなやつあ、ちげーやそれよりも動画のプレミアム公開の時の画面だこれえ?",
+      "sourceStartMs": 1425208,
+      "sourceEndMs": 1428431
+    },
+    {
+      "utteranceIndex": 123,
+      "text": "き、金庫?",
+      "sourceStartMs": 1428431,
+      "sourceEndMs": 1429091
+    },
+    {
+      "utteranceIndex": 124,
+      "text": "どこだここここはどこあの子を見た",
+      "sourceStartMs": 1429091,
+      "sourceEndMs": 1439780
+    },
+    {
+      "utteranceIndex": 125,
+      "text": "え、どこだろこれポスターでなんか明かりがあるところだなえ、え、え、え、え!",
+      "sourceStartMs": 1440462,
+      "sourceEndMs": 1454830
+    },
+    {
+      "utteranceIndex": 126,
+      "text": "え?",
+      "sourceStartMs": 1454830,
+      "sourceEndMs": 1455050
+    },
+    {
+      "utteranceIndex": 127,
+      "text": "はっなに?",
+      "sourceStartMs": 1455050,
+      "sourceEndMs": 1468117
+    },
+    {
+      "utteranceIndex": 128,
+      "text": "気持ち悪いな、な、なに?",
+      "sourceStartMs": 1468117,
+      "sourceEndMs": 1469598
+    },
+    {
+      "utteranceIndex": 129,
+      "text": "変わったか?",
+      "sourceStartMs": 1471706,
+      "sourceEndMs": 1475648
+    },
+    {
+      "utteranceIndex": 130,
+      "text": "中庭へ続く道が塞がれてるそっち中庭ーなにこれー気持ち悪いーなぜここがこんな風になっているとかこれは何の世界観なの?",
+      "sourceStartMs": 1475648,
+      "sourceEndMs": 1488995
+    },
+    {
+      "utteranceIndex": 131,
+      "text": "かくれんぼをただ仕移してただけなんじゃないの?",
+      "sourceStartMs": 1488995,
+      "sourceEndMs": 1498499
+    },
+    {
+      "utteranceIndex": 132,
+      "text": "ね、金庫をかくれんぼするって言ったから",
+      "sourceStartMs": 1498499,
+      "sourceEndMs": 1499580
+    },
+    {
+      "utteranceIndex": 133,
+      "text": "いけない銀行…ん?",
+      "sourceStartMs": 1502978,
+      "sourceEndMs": 1503378
+    },
+    {
+      "utteranceIndex": 134,
+      "text": "今なんかいい…やばい、行けるところ増えてるこれは?",
+      "sourceStartMs": 1503378,
+      "sourceEndMs": 1528898
+    },
+    {
+      "utteranceIndex": 135,
+      "text": "え、これ何?",
+      "sourceStartMs": 1534755,
+      "sourceEndMs": 1535758
+    },
+    {
+      "utteranceIndex": 136,
+      "text": "あの赤い女に関係していると分かっている極度の恐怖と疲労でいつの間にか気を失った再び目を開けた時は小さな女の子が私を起こしてくれた彼女はここにいる他の不気味な子供たちとは全く違っていたあ、さっきのあれかこっちに走ってきたガキか話を聞くと彼女は金…お、え?",
+      "sourceStartMs": 1590722,
+      "sourceEndMs": 1610074
+    },
+    {
+      "utteranceIndex": 137,
+      "text": "うちの子?",
+      "sourceStartMs": 1610074,
+      "sourceEndMs": 1612575
+    },
+    {
+      "utteranceIndex": 138,
+      "text": "あの赤い女にここに連れてこられたのだという最初大丈夫ですか?",
+      "sourceStartMs": 1612575,
+      "sourceEndMs": 1617919
+    },
+    {
+      "utteranceIndex": 139,
+      "text": "あの娘を見かけませんでしたが金庫なんで",
+      "sourceStartMs": 1617919,
+      "sourceEndMs": 1619800
+    },
+    {
+      "utteranceIndex": 140,
+      "text": "医者なんだなんとかして彼の病状を和らげるテーブルの上にはいはいはいはい新聞ですけど肉舌の中には未熟な胎児のようなものもいるがあれ子供?",
+      "sourceStartMs": 1623160,
+      "sourceEndMs": 1643932
+    },
+    {
+      "utteranceIndex": 141,
+      "text": "怪獣伝統の強行モードで当て続けると追い払うことができるえ?",
+      "sourceStartMs": 1643932,
+      "sourceEndMs": 1648014
+    },
+    {
+      "utteranceIndex": 142,
+      "text": "そうやって?",
+      "sourceStartMs": 1655570,
+      "sourceEndMs": 1658252
+    },
+    {
+      "utteranceIndex": 143,
+      "text": "LT!",
+      "sourceStartMs": 1658252,
+      "sourceEndMs": 1658512
+    },
+    {
+      "utteranceIndex": 144,
+      "text": "LTって何?",
+      "sourceStartMs": 1658512,
+      "sourceEndMs": 1659773
+    },
+    {
+      "utteranceIndex": 145,
+      "text": "みんなLTってこれ溶けてる?",
+      "sourceStartMs": 1659773,
+      "sourceEndMs": 1661034
+    },
+    {
+      "utteranceIndex": 146,
+      "text": "LTって何?",
+      "sourceStartMs": 1661034,
+      "sourceEndMs": 1661414
+    },
+    {
+      "utteranceIndex": 147,
+      "text": "エンター?",
+      "sourceStartMs": 1661414,
+      "sourceEndMs": 1665116
+    },
+    {
+      "utteranceIndex": 148,
+      "text": "なんか溶けさすことができるんだキーモードでやった",
+      "sourceStartMs": 1665116,
+      "sourceEndMs": 1679766
+    },
+    {
+      "utteranceIndex": 149,
+      "text": "え、なに?",
+      "sourceStartMs": 1680130,
+      "sourceEndMs": 1680550
+    },
+    {
+      "utteranceIndex": 150,
+      "text": "あーやばいかもーやばいとこ見ちゃった?",
+      "sourceStartMs": 1680550,
+      "sourceEndMs": 1684012
+    },
+    {
+      "utteranceIndex": 151,
+      "text": "ここは薬品室のようだ痛みの実を見つけるーあ、オッケーオッケーここでね!",
+      "sourceStartMs": 1684012,
+      "sourceEndMs": 1688375
+    },
+    {
+      "utteranceIndex": 152,
+      "text": "だからこいつにーあ、これじゃね?",
+      "sourceStartMs": 1688375,
+      "sourceEndMs": 1694378
+    },
+    {
+      "utteranceIndex": 153,
+      "text": "おらぁ!",
+      "sourceStartMs": 1694378,
+      "sourceEndMs": 1694678
+    },
+    {
+      "utteranceIndex": 154,
+      "text": "おららららら!",
+      "sourceStartMs": 1694678,
+      "sourceEndMs": 1700181
+    },
+    {
+      "utteranceIndex": 155,
+      "text": "え、一体だけ?",
+      "sourceStartMs": 1700181,
+      "sourceEndMs": 1708046
+    },
+    {
+      "utteranceIndex": 156,
+      "text": "なんかこれ子供だと思うとなんかあんな良くないことしちゃったかなって思っちゃうんだけど仕方ないよね医師の失踪異様な技に発展先日市内の病院で医師が行方不明となる事件が発生これ以前にも地下室から赤ん坊の泣き声を聞こえるとの報告医療策から相次いでいた失踪事件の直後には深夜に赤い服え?",
+      "sourceStartMs": 1711210,
+      "sourceEndMs": 1735699
+    },
+    {
+      "utteranceIndex": 157,
+      "text": "これ前も見たなこれ前も見たやつだ",
+      "sourceStartMs": 1735699,
+      "sourceEndMs": 1739800
+    },
+    {
+      "utteranceIndex": 158,
+      "text": "なんかおみくじ入れてる箱みたいでいいねお、鍵あったこれはなし引き出しの鍵…あ、ここかん?",
+      "sourceStartMs": 1743974,
+      "sourceEndMs": 1751942
+    },
+    {
+      "utteranceIndex": 159,
+      "text": "入る?",
+      "sourceStartMs": 1751942,
+      "sourceEndMs": 1767438
+    },
+    {
+      "utteranceIndex": 160,
+      "text": "やめて、これじゃないこれは?",
+      "sourceStartMs": 1776498,
+      "sourceEndMs": 1777379
+    },
+    {
+      "utteranceIndex": 161,
+      "text": "違うの?",
+      "sourceStartMs": 1777379,
+      "sourceEndMs": 1777559
+    },
+    {
+      "utteranceIndex": 162,
+      "text": "え、これは?",
+      "sourceStartMs": 1777559,
+      "sourceEndMs": 1787026
+    },
+    {
+      "utteranceIndex": 163,
+      "text": "そこは意外と力ないんかこいつビビらすだけやん普通だったらさバーンってなんか扉ぶっ壊して",
+      "sourceStartMs": 1818614,
+      "sourceEndMs": 1829520
+    },
+    {
+      "utteranceIndex": 164,
+      "text": "なにして襲いかかってペコロがねえキマイお前もうふざけんなよお前",
+      "sourceStartMs": 1830122,
+      "sourceEndMs": 1842997
+    },
+    {
+      "utteranceIndex": 165,
+      "text": "もう普通にさぁ",
+      "sourceStartMs": 1867366,
+      "sourceEndMs": 1869651
+    },
+    {
+      "utteranceIndex": 166,
+      "text": "あれ?",
+      "sourceStartMs": 1895934,
+      "sourceEndMs": 1898117
+    },
+    {
+      "utteranceIndex": 167,
+      "text": "あれ?",
+      "sourceStartMs": 1898117,
+      "sourceEndMs": 1900980
+    },
+    {
+      "utteranceIndex": 168,
+      "text": "閉じ込められたここ行くないよっちゅうこと?",
+      "sourceStartMs": 1900980,
+      "sourceEndMs": 1911132
+    },
+    {
+      "utteranceIndex": 169,
+      "text": "さっきの化け物",
+      "sourceStartMs": 1911132,
+      "sourceEndMs": 1912093
+    },
+    {
+      "utteranceIndex": 170,
+      "text": "こっちが聞きたいんだけどペコラミスったの?",
+      "sourceStartMs": 1933854,
+      "sourceEndMs": 1943137
+    },
+    {
+      "utteranceIndex": 171,
+      "text": "捕まっちゃいけないの?",
+      "sourceStartMs": 1943137,
+      "sourceEndMs": 1944498
+    },
+    {
+      "utteranceIndex": 172,
+      "text": "壊れたんだけど夢?",
+      "sourceStartMs": 1944498,
+      "sourceEndMs": 1945358
+    },
+    {
+      "utteranceIndex": 173,
+      "text": "逃げるやつ?",
+      "sourceStartMs": 1958422,
+      "sourceEndMs": 1966508
+    },
+    {
+      "utteranceIndex": 174,
+      "text": "逃げるんだでもこいつ走りでこれだよこいつ走りでこれなんだけどだからこっちに行けなってことだなうん",
+      "sourceStartMs": 1966508,
+      "sourceEndMs": 1974034
+    },
+    {
+      "utteranceIndex": 175,
+      "text": "おい、急に速くなった!",
+      "sourceStartMs": 1984756,
+      "sourceEndMs": 1989043
+    },
+    {
+      "utteranceIndex": 176,
+      "text": "おい、急に速くなった!",
+      "sourceStartMs": 1989043,
+      "sourceEndMs": 1994974
+    },
+    {
+      "utteranceIndex": 177,
+      "text": "なんかグロいやつに捕まってる",
+      "sourceStartMs": 2015191,
+      "sourceEndMs": 2024693
+    },
+    {
+      "utteranceIndex": 178,
+      "text": "どこ?",
+      "sourceStartMs": 2054466,
+      "sourceEndMs": 2062652
+    },
+    {
+      "utteranceIndex": 179,
+      "text": "何これ?",
+      "sourceStartMs": 2062652,
+      "sourceEndMs": 2063032
+    },
+    {
+      "utteranceIndex": 180,
+      "text": "なんか棺みたいなところに入れられてる!",
+      "sourceStartMs": 2063032,
+      "sourceEndMs": 2065294
+    },
+    {
+      "utteranceIndex": 181,
+      "text": "何の音?",
+      "sourceStartMs": 2071794,
+      "sourceEndMs": 2072622
+    },
+    {
+      "utteranceIndex": 182,
+      "text": "もう来た終わった死んな目細めるわもうこれ来るもん分かる",
+      "sourceStartMs": 2121442,
+      "sourceEndMs": 2128053
+    },
+    {
+      "utteranceIndex": 183,
+      "text": "ここに入れて食ってどうすんだよ金庫返せよ送るんでしょ分かってんだよパンで食うんだろ分かってんだよこの価格ほらね分かってんだよバカ",
+      "sourceStartMs": 2132975,
+      "sourceEndMs": 2144616
+    },
+    {
+      "utteranceIndex": 184,
+      "text": "生きてたの?",
+      "sourceStartMs": 2160278,
+      "sourceEndMs": 2164740
+    },
+    {
+      "utteranceIndex": 185,
+      "text": "我え?",
+      "sourceStartMs": 2164740,
+      "sourceEndMs": 2166541
+    },
+    {
+      "utteranceIndex": 186,
+      "text": "え?",
+      "sourceStartMs": 2166541,
+      "sourceEndMs": 2178467
+    },
+    {
+      "utteranceIndex": 187,
+      "text": "え?",
+      "sourceStartMs": 2178467,
+      "sourceEndMs": 2181128
+    },
+    {
+      "utteranceIndex": 188,
+      "text": "え?",
+      "sourceStartMs": 2181128,
+      "sourceEndMs": 2181628
+    },
+    {
+      "utteranceIndex": 189,
+      "text": "え?",
+      "sourceStartMs": 2181628,
+      "sourceEndMs": 2181668
+    },
+    {
+      "utteranceIndex": 190,
+      "text": "え?",
+      "sourceStartMs": 2181668,
+      "sourceEndMs": 2181848
+    },
+    {
+      "utteranceIndex": 191,
+      "text": "え?",
+      "sourceStartMs": 2181848,
+      "sourceEndMs": 2181888
+    },
+    {
+      "utteranceIndex": 192,
+      "text": "え?",
+      "sourceStartMs": 2181888,
+      "sourceEndMs": 2181929
+    },
+    {
+      "utteranceIndex": 193,
+      "text": "え?",
+      "sourceStartMs": 2181929,
+      "sourceEndMs": 2184910
+    },
+    {
+      "utteranceIndex": 194,
+      "text": "え?",
+      "sourceStartMs": 2184910,
+      "sourceEndMs": 2184990
+    },
+    {
+      "utteranceIndex": 195,
+      "text": "え、ま、まだ薬渡すの?",
+      "sourceStartMs": 2191410,
+      "sourceEndMs": 2192592
+    },
+    {
+      "utteranceIndex": 196,
+      "text": "なにこれ電気がないんだ今あ、でもついてるよ",
+      "sourceStartMs": 2192592,
+      "sourceEndMs": 2203713
+    },
+    {
+      "utteranceIndex": 197,
+      "text": "もうマジこの感じ怖すぎなんだあ、どこまで来たんだこれ?",
+      "sourceStartMs": 2232559,
+      "sourceEndMs": 2234120
+    },
+    {
+      "utteranceIndex": 198,
+      "text": "もし誰もその遺体を受け取りに来なければ処分してしまえ我々自力振ることは全てあった私は数え切れないほどの患者を扱ってきた死に、死にはもう慣れているだがどういうわけか私はいつもその夢を見る夢の中ではその花が大きく開いてえ、待ってそれさっきの化け物じゃね?",
+      "sourceStartMs": 2234120,
+      "sourceEndMs": 2249646
+    },
+    {
+      "utteranceIndex": 199,
+      "text": "ん、な、何言ってんの?",
+      "sourceStartMs": 2253535,
+      "sourceEndMs": 2258298
+    },
+    {
+      "utteranceIndex": 200,
+      "text": "扉?",
+      "sourceStartMs": 2258298,
+      "sourceEndMs": 2258718
+    },
+    {
+      "utteranceIndex": 201,
+      "text": "扉じゃなくてただの化け物だろここどこ?",
+      "sourceStartMs": 2280866,
+      "sourceEndMs": 2281246
+    },
+    {
+      "utteranceIndex": 202,
+      "text": "あ、ここ来たーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー",
+      "sourceStartMs": 2281246,
+      "sourceEndMs": 2309980
+    },
+    {
+      "utteranceIndex": 203,
+      "text": "何?",
+      "sourceStartMs": 2314051,
+      "sourceEndMs": 2315812
+    },
+    {
+      "utteranceIndex": 204,
+      "text": "どこのベッドの病室?",
+      "sourceStartMs": 2315812,
+      "sourceEndMs": 2334418
+    },
+    {
+      "utteranceIndex": 205,
+      "text": "え、待てこれガキ視点きた",
+      "sourceStartMs": 2346568,
+      "sourceEndMs": 2367386
+    },
+    {
+      "utteranceIndex": 206,
+      "text": "嘘だろ子供視点あるん?",
+      "sourceStartMs": 2373479,
+      "sourceEndMs": 2374622
+    },
+    {
+      "utteranceIndex": 207,
+      "text": "この脇よくこれ怖くないなぁ",
+      "sourceStartMs": 2412448,
+      "sourceEndMs": 2413591
+    },
+    {
+      "utteranceIndex": 208,
+      "text": "寝て",
+      "sourceStartMs": 2458787,
+      "sourceEndMs": 2458890
+    },
+    {
+      "utteranceIndex": 209,
+      "text": "バケモノなんでしょ?",
+      "sourceStartMs": 2460778,
+      "sourceEndMs": 2461299
+    },
+    {
+      "utteranceIndex": 210,
+      "text": "え?",
+      "sourceStartMs": 2461299,
+      "sourceEndMs": 2461339
+    },
+    {
+      "utteranceIndex": 211,
+      "text": "ドアノブが高くて手が届かないなんか…台みたいなの…うわ…",
+      "sourceStartMs": 2461339,
+      "sourceEndMs": 2478942
+    },
+    {
+      "utteranceIndex": 212,
+      "text": "こっちー?",
+      "sourceStartMs": 2640290,
+      "sourceEndMs": 2640610
+    },
+    {
+      "utteranceIndex": 213,
+      "text": "え?",
+      "sourceStartMs": 2640610,
+      "sourceEndMs": 2640650
+    },
+    {
+      "utteranceIndex": 214,
+      "text": "え?",
+      "sourceStartMs": 2640650,
+      "sourceEndMs": 2640690
+    },
+    {
+      "utteranceIndex": 215,
+      "text": "これ誰視点?",
+      "sourceStartMs": 2640690,
+      "sourceEndMs": 2642151
+    },
+    {
+      "utteranceIndex": 216,
+      "text": "あ、これ誰視点?",
+      "sourceStartMs": 2642151,
+      "sourceEndMs": 2647155
+    },
+    {
+      "utteranceIndex": 217,
+      "text": "これ何?",
+      "sourceStartMs": 2647155,
+      "sourceEndMs": 2647255
+    },
+    {
+      "utteranceIndex": 218,
+      "text": "これ子供?",
+      "sourceStartMs": 2647255,
+      "sourceEndMs": 2647475
+    },
+    {
+      "utteranceIndex": 219,
+      "text": "え、これ子供?",
+      "sourceStartMs": 2647475,
+      "sourceEndMs": 2649357
+    },
+    {
+      "utteranceIndex": 220,
+      "text": "カメラ無くなっ",
+      "sourceStartMs": 2649357,
+      "sourceEndMs": 2656322
+    },
+    {
+      "utteranceIndex": 221,
+      "text": "意味わかんないな",
+      "sourceStartMs": 2683762,
+      "sourceEndMs": 2684857
+    },
+    {
+      "utteranceIndex": 222,
+      "text": "あいつの跡ついてった方がいいんかなぁ?",
+      "sourceStartMs": 2703682,
+      "sourceEndMs": 2704483
+    },
+    {
+      "utteranceIndex": 223,
+      "text": "やばいこんな歌ご機嫌になってる今",
+      "sourceStartMs": 2704483,
+      "sourceEndMs": 2705525
+    },
+    {
+      "utteranceIndex": 224,
+      "text": "メンタル強すぎだ!",
+      "sourceStartMs": 2730338,
+      "sourceEndMs": 2741586
+    },
+    {
+      "utteranceIndex": 225,
+      "text": "どうして写真撮れた?",
+      "sourceStartMs": 2767991,
+      "sourceEndMs": 2770052
+    },
+    {
+      "utteranceIndex": 226,
+      "text": "現像まで行けた?",
+      "sourceStartMs": 2770052,
+      "sourceEndMs": 2772033
+    },
+    {
+      "utteranceIndex": 227,
+      "text": "金庫ー!",
+      "sourceStartMs": 2772033,
+      "sourceEndMs": 2777656
+    },
+    {
+      "utteranceIndex": 228,
+      "text": "金庫ー!",
+      "sourceStartMs": 2777656,
+      "sourceEndMs": 2787042
+    },
+    {
+      "utteranceIndex": 229,
+      "text": "下に降りて",
+      "sourceStartMs": 2810429,
+      "sourceEndMs": 2811017
+    },
+    {
+      "utteranceIndex": 230,
+      "text": "さっきの電気のところかレバーがなくなっているレバーどこ?",
+      "sourceStartMs": 2828016,
+      "sourceEndMs": 2846325
+    },
+    {
+      "utteranceIndex": 231,
+      "text": "ここさっき閉じ込められてたところだあいつこんなところやってさ何しようとしたわけ?",
+      "sourceStartMs": 2846325,
+      "sourceEndMs": 2848046
+    },
+    {
+      "utteranceIndex": 232,
+      "text": "でも今たぶんあの化け物はうちの子供金庫にぴったりだからたぶん近くにはもう今はいないよなきっとこっちにはレバー探せ",
+      "sourceStartMs": 2854883,
+      "sourceEndMs": 2870614
+    },
+    {
+      "utteranceIndex": 233,
+      "text": "あいつ来るあいつ来るやめて",
+      "sourceStartMs": 2893186,
+      "sourceEndMs": 2894596
+    },
+    {
+      "utteranceIndex": 234,
+      "text": "なにもねーぞあれ?",
+      "sourceStartMs": 2929111,
+      "sourceEndMs": 2929753
+    },
+    {
+      "utteranceIndex": 235,
+      "text": "ここなにもなっし?",
+      "sourceStartMs": 2929753,
+      "sourceEndMs": 2930574
+    },
+    {
+      "utteranceIndex": 236,
+      "text": "じゃあなんでここ開けたの?",
+      "sourceStartMs": 2952637,
+      "sourceEndMs": 2953822
+    },
+    {
+      "utteranceIndex": 237,
+      "text": "ほら落ちないよわ、これ下じゃね?",
+      "sourceStartMs": 2971434,
+      "sourceEndMs": 2981697
+    },
+    {
+      "utteranceIndex": 238,
+      "text": "うぅぅぅぅぅぅぅぅぅぅ",
+      "sourceStartMs": 2981697,
+      "sourceEndMs": 2981998
+    },
+    {
+      "utteranceIndex": 239,
+      "text": "え?",
+      "sourceStartMs": 3001454,
+      "sourceEndMs": 3004598
+    },
+    {
+      "utteranceIndex": 240,
+      "text": "母ちゃん?",
+      "sourceStartMs": 3004598,
+      "sourceEndMs": 3004798
+    },
+    {
+      "utteranceIndex": 241,
+      "text": "か、母ちゃん?",
+      "sourceStartMs": 3004798,
+      "sourceEndMs": 3017231
+    },
+    {
+      "utteranceIndex": 242,
+      "text": "戻すの?",
+      "sourceStartMs": 3017231,
+      "sourceEndMs": 3019093
+    },
+    {
+      "utteranceIndex": 243,
+      "text": "誰も助けてくれない終わった?",
+      "sourceStartMs": 3019093,
+      "sourceEndMs": 3023838
+    },
+    {
+      "utteranceIndex": 244,
+      "text": "はしご、それはしごじゃんかといってこっちでなんかあ、あらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあらあら",
+      "sourceStartMs": 3034674,
+      "sourceEndMs": 3059980
+    },
+    {
+      "utteranceIndex": 245,
+      "text": "おい、だいじょうぶ?",
+      "sourceStartMs": 3068176,
+      "sourceEndMs": 3069457
+    },
+    {
+      "utteranceIndex": 246,
+      "text": "この…",
+      "sourceStartMs": 3069457,
+      "sourceEndMs": 3070718
+    },
+    {
+      "utteranceIndex": 247,
+      "text": "その価格もやめろ",
+      "sourceStartMs": 3120290,
+      "sourceEndMs": 3121215
+    },
+    {
+      "utteranceIndex": 248,
+      "text": "なんで逃げたの?",
+      "sourceStartMs": 3173928,
+      "sourceEndMs": 3174428
+    },
+    {
+      "utteranceIndex": 249,
+      "text": "しかもお前逃げる!",
+      "sourceStartMs": 3174428,
+      "sourceEndMs": 3175589
+    },
+    {
+      "utteranceIndex": 250,
+      "text": "いるんだろ?",
+      "sourceStartMs": 3189622,
+      "sourceEndMs": 3190430
+    },
+    {
+      "utteranceIndex": 251,
+      "text": "うちの子を返せもうやめて同じさ母同士もわかるよね同じ母同士さもうやめない?",
+      "sourceStartMs": 3214754,
+      "sourceEndMs": 3236434
+    },
+    {
+      "utteranceIndex": 252,
+      "text": "やめましょうよもう娘だけかい…うわっ死んどるんまじけぇあれはハンドルがあるなら上に行こうあーつよし行くよ子供のためなら命はれる!",
+      "sourceStartMs": 3242822,
+      "sourceEndMs": 3268014
+    },
+    {
+      "utteranceIndex": 253,
+      "text": "やめろよ、急にはやめろよ",
+      "sourceStartMs": 3280442,
+      "sourceEndMs": 3282402
+    },
+    {
+      "utteranceIndex": 254,
+      "text": "金庫とバケモノ金庫!",
+      "sourceStartMs": 3311491,
+      "sourceEndMs": 3318714
+    },
+    {
+      "utteranceIndex": 255,
+      "text": "金庫!",
+      "sourceStartMs": 3318714,
+      "sourceEndMs": 3319075
+    },
+    {
+      "utteranceIndex": 256,
+      "text": "金庫と子供とバケモノが一緒にいるここにはたくさんの子供たちがいる彼らはみんなこの世界に引きずり込まれたのだ私もその一人彼女はすべての子供を愛してるしかし何よりも",
+      "sourceStartMs": 3319075,
+      "sourceEndMs": 3329720
+    },
+    {
+      "utteranceIndex": 257,
+      "text": "もう本当に耐えられない体中が痛いママーママービッグベイビーベコーランだよービッグベイビーベコーランママーえ?",
+      "sourceStartMs": 3331003,
+      "sourceEndMs": 3349033
+    },
+    {
+      "utteranceIndex": 258,
+      "text": "今鍵の足音してなかった?",
+      "sourceStartMs": 3349033,
+      "sourceEndMs": 3360000
+    },
+    {
+      "utteranceIndex": 259,
+      "text": "子供が好きだった",
+      "sourceStartMs": 3371723,
+      "sourceEndMs": 3372470
+    },
+    {
+      "utteranceIndex": 260,
+      "text": "できるということ?",
+      "sourceStartMs": 3399244,
+      "sourceEndMs": 3400462
+    },
+    {
+      "utteranceIndex": 261,
+      "text": "それは分かってる",
+      "sourceStartMs": 3461302,
+      "sourceEndMs": 3463648
+    },
+    {
+      "utteranceIndex": 262,
+      "text": "タコが撮った写真なのか…それ何?",
+      "sourceStartMs": 3492258,
+      "sourceEndMs": 3494660
+    },
+    {
+      "utteranceIndex": 263,
+      "text": "タコそこ…え、タコ…これ何?",
+      "sourceStartMs": 3494660,
+      "sourceEndMs": 3500683
+    },
+    {
+      "utteranceIndex": 264,
+      "text": "タコ?",
+      "sourceStartMs": 3500683,
+      "sourceEndMs": 3501944
+    },
+    {
+      "utteranceIndex": 265,
+      "text": "な、何それ?",
+      "sourceStartMs": 3501944,
+      "sourceEndMs": 3504606
+    },
+    {
+      "utteranceIndex": 266,
+      "text": "まだいる?",
+      "sourceStartMs": 3516910,
+      "sourceEndMs": 3517350
+    },
+    {
+      "utteranceIndex": 267,
+      "text": "そいつまだいるわあったあったバカめこれか?",
+      "sourceStartMs": 3517350,
+      "sourceEndMs": 3536919
+    },
+    {
+      "utteranceIndex": 268,
+      "text": "赤ちゃんの子供はいはいこの化け物があやして",
+      "sourceStartMs": 3536919,
+      "sourceEndMs": 3539760
+    },
+    {
+      "utteranceIndex": 269,
+      "text": "やめてやその中!",
+      "sourceStartMs": 3548610,
+      "sourceEndMs": 3550206
+    },
+    {
+      "utteranceIndex": 270,
+      "text": "なんで化け物…なんであいつこっちから来ないの?",
+      "sourceStartMs": 3579664,
+      "sourceEndMs": 3581726
+    },
+    {
+      "utteranceIndex": 271,
+      "text": "あんたの赤ちゃんもらうよ!",
+      "sourceStartMs": 3581726,
+      "sourceEndMs": 3586150
+    },
+    {
+      "utteranceIndex": 272,
+      "text": "え?",
+      "sourceStartMs": 3586150,
+      "sourceEndMs": 3588372
+    },
+    {
+      "utteranceIndex": 273,
+      "text": "おれ!",
+      "sourceStartMs": 3588372,
+      "sourceEndMs": 3588552
+    },
+    {
+      "utteranceIndex": 274,
+      "text": "一体一体駆除!",
+      "sourceStartMs": 3588552,
+      "sourceEndMs": 3592896
+    },
+    {
+      "utteranceIndex": 275,
+      "text": "一体一体しっかりとね",
+      "sourceStartMs": 3592896,
+      "sourceEndMs": 3599262
+    },
+    {
+      "utteranceIndex": 276,
+      "text": "気にしないで",
+      "sourceStartMs": 3603586,
+      "sourceEndMs": 3604394
+    },
+    {
+      "utteranceIndex": 277,
+      "text": "なななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななななな",
+      "sourceStartMs": 3632063,
+      "sourceEndMs": 3641189
+    },
+    {
+      "utteranceIndex": 278,
+      "text": "さっきのあの化け物どこ行ったの?",
+      "sourceStartMs": 3663106,
+      "sourceEndMs": 3665502
+    },
+    {
+      "utteranceIndex": 279,
+      "text": "それを逆手にとってやっていいの?",
+      "sourceStartMs": 3690214,
+      "sourceEndMs": 3693517
+    },
+    {
+      "utteranceIndex": 280,
+      "text": "心痛まないかお前傷一つつけたくないらしいあっちには近づかない方がいいあっこっちか悪魔めっていやいやいやいやしょうがない",
+      "sourceStartMs": 3693517,
+      "sourceEndMs": 3710554
+    },
+    {
+      "utteranceIndex": 281,
+      "text": "赤ちゃんこれ浄化できるからさ",
+      "sourceStartMs": 3723303,
+      "sourceEndMs": 3725157
+    },
+    {
+      "utteranceIndex": 282,
+      "text": "じゃあ子供病院にいますか?",
+      "sourceStartMs": 3750534,
+      "sourceEndMs": 3763262
+    },
+    {
+      "utteranceIndex": 283,
+      "text": "子供病院行こうおばさん!",
+      "sourceStartMs": 3763262,
+      "sourceEndMs": 3769326
+    },
+    {
+      "utteranceIndex": 284,
+      "text": "家に帰りたい!",
+      "sourceStartMs": 3769326,
+      "sourceEndMs": 3769746
+    },
+    {
+      "utteranceIndex": 285,
+      "text": "ちょっと待ってやばい人質には人質用スタイルだこいつもうここで遊びたくない!",
+      "sourceStartMs": 3769746,
+      "sourceEndMs": 3775230
+    },
+    {
+      "utteranceIndex": 286,
+      "text": "最悪、最強の赤ちゃん!",
+      "sourceStartMs": 3785866,
+      "sourceEndMs": 3787207
+    },
+    {
+      "utteranceIndex": 287,
+      "text": "赤ちゃんゲット!",
+      "sourceStartMs": 3787207,
+      "sourceEndMs": 3787888
+    },
+    {
+      "utteranceIndex": 288,
+      "text": "のところ行きたかったのに子供の忍者が終わるためプレイルームの鍵はこうして保管しているあらかじめご了承くださいってことはどっか高いところにあんだ最悪だよ赤ちゃんさっきのくれよ",
+      "sourceStartMs": 3787888,
+      "sourceEndMs": 3808669
+    },
+    {
+      "utteranceIndex": 289,
+      "text": "ん?",
+      "sourceStartMs": 3815584,
+      "sourceEndMs": 3815624
+    },
+    {
+      "utteranceIndex": 290,
+      "text": "公園に連れてってくれるって約束したのに連れてってくれないならくまちゃんと二人で行くくまちゃんだけが私の一番の友達でくまちゃんは絶対私にお…私置いてかないもん人形と遊んでなさいってことねちょっとどうにかして母ちゃんと合わせてあげたいけど金子難しそう",
+      "sourceStartMs": 3815624,
+      "sourceEndMs": 3838239
+    },
+    {
+      "utteranceIndex": 291,
+      "text": "何もないかでもあのなんか化け物シーってやってたけどこれ今かくれんぼ中もしかして何中なんだろ早く母ちゃんのところ行きたい最強母ちゃん",
+      "sourceStartMs": 3850236,
+      "sourceEndMs": 3866014
+    },
+    {
+      "utteranceIndex": 292,
+      "text": "私のカメラはあの子の友達に撮られた。",
+      "sourceStartMs": 3870854,
+      "sourceEndMs": 3881620
+    },
+    {
+      "utteranceIndex": 293,
+      "text": "それは母がくれたもの。",
+      "sourceStartMs": 3881620,
+      "sourceEndMs": 3884302
+    },
+    {
+      "utteranceIndex": 294,
+      "text": "なんとかして取り戻さないと。",
+      "sourceStartMs": 3884302,
+      "sourceEndMs": 3884962
+    },
+    {
+      "utteranceIndex": 295,
+      "text": "母ちゃんからもらったんだ。",
+      "sourceStartMs": 3884962,
+      "sourceEndMs": 3885522
+    },
+    {
+      "utteranceIndex": 296,
+      "text": "いいプレゼントもらってんね。",
+      "sourceStartMs": 3885522,
+      "sourceEndMs": 3886803
+    },
+    {
+      "utteranceIndex": 297,
+      "text": "あ、あるじゃん、そこに。",
+      "sourceStartMs": 3886803,
+      "sourceEndMs": 3888984
+    },
+    {
+      "utteranceIndex": 298,
+      "text": "女児が一人で外出して数日間行方不明。",
+      "sourceStartMs": 3888984,
+      "sourceEndMs": 3890345
+    },
+    {
+      "utteranceIndex": 299,
+      "text": "感激感交通生活ワンダー。",
+      "sourceStartMs": 3890345,
+      "sourceEndMs": 3890906
+    },
+    {
+      "utteranceIndex": 300,
+      "text": "教育の徹底を呼びかけ。",
+      "sourceStartMs": 3890906,
+      "sourceEndMs": 3893227
+    },
+    {
+      "utteranceIndex": 301,
+      "text": "行方不明者が多かったんだ。",
+      "sourceStartMs": 3893227,
+      "sourceEndMs": 3897730
+    },
+    {
+      "utteranceIndex": 302,
+      "text": "あぶねーじゃねー!",
+      "sourceStartMs": 3897730,
+      "sourceEndMs": 3898450
+    },
+    {
+      "utteranceIndex": 303,
+      "text": "こんな子供男子の怖いことしやがって",
+      "sourceStartMs": 3920647,
+      "sourceEndMs": 3922909
+    },
+    {
+      "utteranceIndex": 304,
+      "text": "めっちゃあるあそこ開かない鍵必要なんだ高いところってあなんか増えてる高すぎるもっと高いところこれじゃないの?",
+      "sourceStartMs": 3933650,
+      "sourceEndMs": 3953076
+    },
+    {
+      "utteranceIndex": 305,
+      "text": "違うんかあー椅子がある",
+      "sourceStartMs": 3953076,
+      "sourceEndMs": 3958898
+    },
+    {
+      "utteranceIndex": 306,
+      "text": "ようできてますね",
+      "sourceStartMs": 3963210,
+      "sourceEndMs": 3964222
+    },
+    {
+      "utteranceIndex": 307,
+      "text": "うるせぇって!",
+      "sourceStartMs": 3990934,
+      "sourceEndMs": 4014304
+    },
+    {
+      "utteranceIndex": 308,
+      "text": "うるさいうるさいうるさい化け物来んだろ風船3つ落書きしてるわ汚ねぇ",
+      "sourceStartMs": 4014304,
+      "sourceEndMs": 4019346
+    },
+    {
+      "utteranceIndex": 309,
+      "text": "とても愛してくれているから毎日寂しくないしもうつらくない誰もこっから出て行きたがらないこれからもたくさんの友達ができるんだからあの化け物のガキたちには好評みたいよなあの母ちゃん子供を傷つけさせないって言ってるからその点においては親としては神なんだろうなやったるよやったったり",
+      "sourceStartMs": 4023478,
+      "sourceEndMs": 4049980
+    },
+    {
+      "utteranceIndex": 310,
+      "text": "後でなんかいけるんか?",
+      "sourceStartMs": 4058683,
+      "sourceEndMs": 4059886
+    },
+    {
+      "utteranceIndex": 311,
+      "text": "内側に?",
+      "sourceStartMs": 4113074,
+      "sourceEndMs": 4113998
+    },
+    {
+      "utteranceIndex": 312,
+      "text": "お前は危ないぞあと一人どこ?",
+      "sourceStartMs": 4151253,
+      "sourceEndMs": 4152093
+    },
+    {
+      "utteranceIndex": 313,
+      "text": "あと一人はどこにいるべこなの?",
+      "sourceStartMs": 4152093,
+      "sourceEndMs": 4152994
+    },
+    {
+      "utteranceIndex": 314,
+      "text": "おっしゃがめなーいん?",
+      "sourceStartMs": 4175250,
+      "sourceEndMs": 4185576
+    },
+    {
+      "utteranceIndex": 315,
+      "text": "邪魔だったな",
+      "sourceStartMs": 4185576,
+      "sourceEndMs": 4189338
+    },
+    {
+      "utteranceIndex": 316,
+      "text": "そこうるせえなよBGM",
+      "sourceStartMs": 4201187,
+      "sourceEndMs": 4202238
+    },
+    {
+      "utteranceIndex": 317,
+      "text": "えーと、何だっけ、警備室の落書きか",
+      "sourceStartMs": 4271170,
+      "sourceEndMs": 4274274
+    },
+    {
+      "utteranceIndex": 318,
+      "text": "赤ちゃんは?",
+      "sourceStartMs": 4304932,
+      "sourceEndMs": 4305253
+    },
+    {
+      "utteranceIndex": 319,
+      "text": "赤ちゃんは?",
+      "sourceStartMs": 4305253,
+      "sourceEndMs": 4307598
+    },
+    {
+      "utteranceIndex": 320,
+      "text": "いたけどどう行くんだ?",
+      "sourceStartMs": 4320034,
+      "sourceEndMs": 4322915
+    },
+    {
+      "utteranceIndex": 321,
+      "text": "ガキはおったガキはおったあ、こっちから行けそうくらーいおいぺこーらの赤ちゃん消えたー!",
+      "sourceStartMs": 4322915,
+      "sourceEndMs": 4339402
+    },
+    {
+      "utteranceIndex": 322,
+      "text": "返せよ!",
+      "sourceStartMs": 4339402,
+      "sourceEndMs": 4341823
+    },
+    {
+      "utteranceIndex": 323,
+      "text": "あ、公園か?",
+      "sourceStartMs": 4341823,
+      "sourceEndMs": 4345925
+    },
+    {
+      "utteranceIndex": 324,
+      "text": "ん?",
+      "sourceStartMs": 4345925,
+      "sourceEndMs": 4349326
+    },
+    {
+      "utteranceIndex": 325,
+      "text": "きたー",
+      "sourceStartMs": 4349326,
+      "sourceEndMs": 4349406
+    },
+    {
+      "utteranceIndex": 326,
+      "text": "ここが小児病棟かペコーラの赤ちゃんってペコーラの赤ちゃん返して金庫中にいるの?",
+      "sourceStartMs": 4350642,
+      "sourceEndMs": 4360025
+    },
+    {
+      "utteranceIndex": 327,
+      "text": "ここが小児病室金庫が残した写真はここを探しているドアに電気が通ってない金庫は危険だなんとかして中に入らないとでも赤ちゃんどこしまったんこの子ペコーラは一番大事やぞうわっ",
+      "sourceStartMs": 4360025,
+      "sourceEndMs": 4379090
+    },
+    {
+      "utteranceIndex": 328,
+      "text": "ここから出られないおそらくここが終着点なのだろうすべてを受け入れようと思った時不思議と気持ちが軽くなったもうひどく疲れてしまったし薬の効き目も切れかけている元の世界には未練など何もない私は最初から一人っきりだったのだからけれどここではある種の安らぎを見つけることができた彼女は私の過ちを責めることもなく",
+      "sourceStartMs": 4389098,
+      "sourceEndMs": 4409820
+    },
+    {
+      "utteranceIndex": 329,
+      "text": "何?",
+      "sourceStartMs": 4410322,
+      "sourceEndMs": 4410422
+    },
+    {
+      "utteranceIndex": 330,
+      "text": "バケモノ肯定派がいるん?",
+      "sourceStartMs": 4410422,
+      "sourceEndMs": 4412003
+    },
+    {
+      "utteranceIndex": 331,
+      "text": "え、ここが出口勝ち?",
+      "sourceStartMs": 4412003,
+      "sourceEndMs": 4422249
+    },
+    {
+      "utteranceIndex": 332,
+      "text": "過ちって何?",
+      "sourceStartMs": 4422249,
+      "sourceEndMs": 4435197
+    },
+    {
+      "utteranceIndex": 333,
+      "text": "鍵を見つけないともう赤ちゃん死ぬ",
+      "sourceStartMs": 4435197,
+      "sourceEndMs": 4439520
+    },
+    {
+      "utteranceIndex": 334,
+      "text": "あ、なんかあるん?",
+      "sourceStartMs": 4441411,
+      "sourceEndMs": 4452140
+    },
+    {
+      "utteranceIndex": 335,
+      "text": "写真?",
+      "sourceStartMs": 4452140,
+      "sourceEndMs": 4452560
+    },
+    {
+      "utteranceIndex": 336,
+      "text": "滑り台の方だもうマジで心ごとね連打して使ってたのバレたんかなぁ",
+      "sourceStartMs": 4452560,
+      "sourceEndMs": 4467853
+    },
+    {
+      "utteranceIndex": 337,
+      "text": "金庫と帰ろうみんな金庫ともうやめて来た来た来た来たうわでもあの赤ちゃんもういなくなってるかいやいなくなってるよな泣いてないってことはあの化け物と対峙するときがやばいな",
+      "sourceStartMs": 4475426,
+      "sourceEndMs": 4499049
+    },
+    {
+      "utteranceIndex": 338,
+      "text": "ここは?",
+      "sourceStartMs": 4500706,
+      "sourceEndMs": 4501614
+    },
+    {
+      "utteranceIndex": 339,
+      "text": "警備装…あっ",
+      "sourceStartMs": 4501614,
+      "sourceEndMs": 4501958
+    },
+    {
+      "utteranceIndex": 340,
+      "text": "やばい金庫いないん?",
+      "sourceStartMs": 4534226,
+      "sourceEndMs": 4542991
+    },
+    {
+      "utteranceIndex": 341,
+      "text": "最初に彼女の文字を見つけたのは霊案室彼女がそこにどれくらいこたわっていたのかはわからない赤ん坊はまだ彼女の体内で泣いていたあの小さな赤ん坊の他にも私は多くのものを取り出した赤ん坊は保育器に入れられ腐敗した握手を放っていた",
+      "sourceStartMs": 4542991,
+      "sourceEndMs": 4559720
+    },
+    {
+      "utteranceIndex": 342,
+      "text": "今でもあの生きられるか今でもあの泣き声は聞こえる彼女を邪魔するべきではなかった冷凍庫で静かに眠らしておくべきだった母親もはや空っぽのわかったあの化け物ってだからお腹が切り裂かれてたんじゃないの開いてたんじゃないのそれでも彼女は私たちのためにこの場所を作り出してくれた",
+      "sourceStartMs": 4560002,
+      "sourceEndMs": 4589350
+    },
+    {
+      "utteranceIndex": 343,
+      "text": "まるで子育てをする鳥のようにはぐれた子供たちを自分の巣に連れ戻し育てる生きてる者を死んでる者も皆ここ次第で迷い込みこの場所の一部となり二度と戻れなくなる彼女は母でありこの場所であり家なのだ私は彼女の子供を奪ったもう逃げられないだろう私もまた彼女の子供になるのだたぶん彼女あれだよね化け物は子供をその産む前に亡くなっちゃってで一応医者だから",
+      "sourceStartMs": 4590242,
+      "sourceEndMs": 4619900
+    },
+    {
+      "utteranceIndex": 344,
+      "text": "子供は取り上げたってことだよねお腹からもうやめてそういうことだよねだからもう子供を大切…ちょうどそこかい!",
+      "sourceStartMs": 4625295,
+      "sourceEndMs": 4637397
+    },
+    {
+      "utteranceIndex": 345,
+      "text": "崖!",
+      "sourceStartMs": 4637397,
+      "sourceEndMs": 4637577
+    },
+    {
+      "utteranceIndex": 346,
+      "text": "うちの金庫に何してくれたんだ!",
+      "sourceStartMs": 4637577,
+      "sourceEndMs": 4650000
+    },
+    {
+      "utteranceIndex": 347,
+      "text": "でも大変だよね一人で子供の付き添い",
+      "sourceStartMs": 4678129,
+      "sourceEndMs": 4679960
+    },
+    {
+      "utteranceIndex": 348,
+      "text": "キンコは病気なの?",
+      "sourceStartMs": 4691675,
+      "sourceEndMs": 4702658
+    },
+    {
+      "utteranceIndex": 349,
+      "text": "じゃないよねそれ化け物の方だよねぇ人形この人形金庫に似てるを見つけないとあれ?",
+      "sourceStartMs": 4716714,
+      "sourceEndMs": 4732578
+    },
+    {
+      "utteranceIndex": 350,
+      "text": "小児病院にいたんじゃないの?",
+      "sourceStartMs": 4732578,
+      "sourceEndMs": 4737679
+    },
+    {
+      "utteranceIndex": 351,
+      "text": "持ちこたえて金庫お母さんが絶対",
+      "sourceStartMs": 4737679,
+      "sourceEndMs": 4739880
+    },
+    {
+      "utteranceIndex": 352,
+      "text": "え、また病?",
+      "sourceStartMs": 4741762,
+      "sourceEndMs": 4742042
+    },
+    {
+      "utteranceIndex": 353,
+      "text": "え、普通の病に戻ってるおいおいあの赤ちゃんどこ?",
+      "sourceStartMs": 4742042,
+      "sourceEndMs": 4743583
+    },
+    {
+      "utteranceIndex": 354,
+      "text": "あの赤ちゃんもしかしてこれってさあの化け物のこの病院だけど",
+      "sourceStartMs": 4743583,
+      "sourceEndMs": 4769300
+    },
+    {
+      "utteranceIndex": 355,
+      "text": "あの化け物の中だから繋がってるからこういうさ血っぽいやつの中を行き来できんじゃない?",
+      "sourceStartMs": 4775397,
+      "sourceEndMs": 4778339
+    },
+    {
+      "utteranceIndex": 356,
+      "text": "あ、もう結局はみんなあいつの腹の中にいるっちゅうことじゃない?",
+      "sourceStartMs": 4778339,
+      "sourceEndMs": 4785983
+    },
+    {
+      "utteranceIndex": 357,
+      "text": "行けないか行き止まりだ",
+      "sourceStartMs": 4785983,
+      "sourceEndMs": 4797710
+    },
+    {
+      "utteranceIndex": 358,
+      "text": "だからこんだけ子供たちが迷い込みましたよってあ、ここ小児病院…あ、これ子供のところだった",
+      "sourceStartMs": 4803406,
+      "sourceEndMs": 4817613
+    },
+    {
+      "utteranceIndex": 359,
+      "text": "え、キンコ!",
+      "sourceStartMs": 4835475,
+      "sourceEndMs": 4835895
+    },
+    {
+      "utteranceIndex": 360,
+      "text": "?",
+      "sourceStartMs": 4835895,
+      "sourceEndMs": 4835915
+    },
+    {
+      "utteranceIndex": 361,
+      "text": "?",
+      "sourceStartMs": 4835895,
+      "sourceEndMs": 4835915
+    },
+    {
+      "utteranceIndex": 362,
+      "text": "え、え、え、え、え、あ人形?",
+      "sourceStartMs": 4835915,
+      "sourceEndMs": 4855359
+    },
+    {
+      "utteranceIndex": 363,
+      "text": "最悪なことするね、あの子どもマジさ、やっていいことと",
+      "sourceStartMs": 4855359,
+      "sourceEndMs": 4859760
+    },
+    {
+      "utteranceIndex": 364,
+      "text": "まじすんあの化け物教育させろやあのガキたちにやっちゃいけないだろなあ教育せえや教育これ扉は?",
+      "sourceStartMs": 4861587,
+      "sourceEndMs": 4885310
+    },
+    {
+      "utteranceIndex": 365,
+      "text": "なんか開いてるところと開いてないとこ…うわっマジどんだけキンコ殺したいのあいつら",
+      "sourceStartMs": 4891226,
+      "sourceEndMs": 4898981
+    },
+    {
+      "utteranceIndex": 366,
+      "text": "なんか扉厳重すぎない?",
+      "sourceStartMs": 4920726,
+      "sourceEndMs": 4922827
+    },
+    {
+      "utteranceIndex": 367,
+      "text": "なにこれ?",
+      "sourceStartMs": 4922827,
+      "sourceEndMs": 4932690
+    },
+    {
+      "utteranceIndex": 368,
+      "text": "厳重な扉どんどん下に行くすごい下行くねどんだけ行くん?",
+      "sourceStartMs": 4932690,
+      "sourceEndMs": 4945614
+    },
+    {
+      "utteranceIndex": 369,
+      "text": "どうしたなんだけど?",
+      "sourceStartMs": 4951410,
+      "sourceEndMs": 4961577
+    },
+    {
+      "utteranceIndex": 370,
+      "text": "え、まだ?",
+      "sourceStartMs": 4961577,
+      "sourceEndMs": 4963258
+    },
+    {
+      "utteranceIndex": 371,
+      "text": "え、あーやばいやばいなんか飛んだ?",
+      "sourceStartMs": 4963258,
+      "sourceEndMs": 4964839
+    },
+    {
+      "utteranceIndex": 372,
+      "text": "と、え、え、なに?",
+      "sourceStartMs": 4964839,
+      "sourceEndMs": 4966240
+    },
+    {
+      "utteranceIndex": 373,
+      "text": "あ、なるほど水が、あれ、なんちゃってんだ?",
+      "sourceStartMs": 4966240,
+      "sourceEndMs": 4967100
+    },
+    {
+      "utteranceIndex": 374,
+      "text": "浸水しちゃってる!",
+      "sourceStartMs": 4967100,
+      "sourceEndMs": 4969342
+    },
+    {
+      "utteranceIndex": 375,
+      "text": "なんで?",
+      "sourceStartMs": 4969342,
+      "sourceEndMs": 4969422
+    },
+    {
+      "utteranceIndex": 376,
+      "text": "欲しいね、こいつら",
+      "sourceStartMs": 5002370,
+      "sourceEndMs": 5003064
+    },
+    {
+      "utteranceIndex": 377,
+      "text": "なんか浮いてる",
+      "sourceStartMs": 5032391,
+      "sourceEndMs": 5032762
+    },
+    {
+      "utteranceIndex": 378,
+      "text": "大丈夫人形だ4体全員ミルキー嘘なの?",
+      "sourceStartMs": 5043426,
+      "sourceEndMs": 5053634
+    },
+    {
+      "utteranceIndex": 379,
+      "text": "お?",
+      "sourceStartMs": 5075526,
+      "sourceEndMs": 5075758
+    },
+    {
+      "utteranceIndex": 380,
+      "text": "そんなことがあっていいの?",
+      "sourceStartMs": 5133874,
+      "sourceEndMs": 5138500
+    },
+    {
+      "utteranceIndex": 381,
+      "text": "ここさっき見た",
+      "sourceStartMs": 5138500,
+      "sourceEndMs": 5139682
+    },
+    {
+      "utteranceIndex": 382,
+      "text": "いや、回路は一回ないもん",
+      "sourceStartMs": 5168629,
+      "sourceEndMs": 5170261
+    },
+    {
+      "utteranceIndex": 383,
+      "text": "今はまずまっすぐ行くわあっ近くに来ないとシロまで行かないんだ",
+      "sourceStartMs": 5242196,
+      "sourceEndMs": 5244118
+    },
+    {
+      "utteranceIndex": 384,
+      "text": "2点!",
+      "sourceStartMs": 5302828,
+      "sourceEndMs": 5303102
+    },
+    {
+      "utteranceIndex": 385,
+      "text": "が無事になったらお前ら",
+      "sourceStartMs": 5314595,
+      "sourceEndMs": 5315826
+    },
+    {
+      "utteranceIndex": 386,
+      "text": "行き止まり",
+      "sourceStartMs": 5370310,
+      "sourceEndMs": 5370618
+    },
+    {
+      "utteranceIndex": 387,
+      "text": "おい来んのかよなあ来いよほらお前らもやっとるよ金庫にやおい金庫のカメラじゃねえかどこにやってんの",
+      "sourceStartMs": 5403550,
+      "sourceEndMs": 5422298
+    },
+    {
+      "utteranceIndex": 388,
+      "text": "そうだまたこれは",
+      "sourceStartMs": 5437586,
+      "sourceEndMs": 5438522
+    },
+    {
+      "utteranceIndex": 389,
+      "text": "ココア!",
+      "sourceStartMs": 5464194,
+      "sourceEndMs": 5464542
+    },
+    {
+      "utteranceIndex": 390,
+      "text": "え?",
+      "sourceStartMs": 5527154,
+      "sourceEndMs": 5527915
+    },
+    {
+      "utteranceIndex": 391,
+      "text": "ほんとに?",
+      "sourceStartMs": 5527915,
+      "sourceEndMs": 5529557
+    },
+    {
+      "utteranceIndex": 392,
+      "text": "え?",
+      "sourceStartMs": 5529557,
+      "sourceEndMs": 5529958
+    },
+    {
+      "utteranceIndex": 393,
+      "text": "え?",
+      "sourceStartMs": 5529958,
+      "sourceEndMs": 5534183
+    },
+    {
+      "utteranceIndex": 394,
+      "text": "これほんとに?",
+      "sourceStartMs": 5534183,
+      "sourceEndMs": 5535464
+    },
+    {
+      "utteranceIndex": 395,
+      "text": "本当に返してくれたの?",
+      "sourceStartMs": 5557678,
+      "sourceEndMs": 5565445
+    },
+    {
+      "utteranceIndex": 396,
+      "text": "いやまだ不安なんだけどそんな簡単に!",
+      "sourceStartMs": 5565445,
+      "sourceEndMs": 5568127
+    },
+    {
+      "utteranceIndex": 397,
+      "text": "え、確かにこいつこの子ども本当に金庫?",
+      "sourceStartMs": 5568127,
+      "sourceEndMs": 5576313
+    },
+    {
+      "utteranceIndex": 398,
+      "text": "え、待ってこれ本当にこの子金庫なのかな?",
+      "sourceStartMs": 5576313,
+      "sourceEndMs": 5577294
+    },
+    {
+      "utteranceIndex": 399,
+      "text": "え?",
+      "sourceStartMs": 5588754,
+      "sourceEndMs": 5589074
+    },
+    {
+      "utteranceIndex": 400,
+      "text": "返したでしょ?",
+      "sourceStartMs": 5589074,
+      "sourceEndMs": 5590576
+    },
+    {
+      "utteranceIndex": 401,
+      "text": "赤ちゃんシールド返したでしょ?",
+      "sourceStartMs": 5590576,
+      "sourceEndMs": 5591717
+    },
+    {
+      "utteranceIndex": 402,
+      "text": "やめてもうやめてよ!",
+      "sourceStartMs": 5591717,
+      "sourceEndMs": 5592157
+    },
+    {
+      "utteranceIndex": 403,
+      "text": "ねぇどんだけ強欲なのお前マジでさぁねぇお前強欲だよ!",
+      "sourceStartMs": 5592157,
+      "sourceEndMs": 5606850
+    },
+    {
+      "utteranceIndex": 404,
+      "text": "それは返してあげないわさすがにそれは返すべきじゃないいや地面を見置くな10日後かんと返してなかったわ普通に持ってた赤ちゃんシールドじゃあね!",
+      "sourceStartMs": 5644791,
+      "sourceEndMs": 5662918
+    },
+    {
+      "utteranceIndex": 405,
+      "text": "二度とこんなことすなよ!",
+      "sourceStartMs": 5662918,
+      "sourceEndMs": 5668379
+    },
+    {
+      "utteranceIndex": 406,
+      "text": "お前!",
+      "sourceStartMs": 5668379,
+      "sourceEndMs": 5668580
+    },
+    {
+      "utteranceIndex": 407,
+      "text": "やっぱ母同士通じるものがあるみたい",
+      "sourceStartMs": 5668580,
+      "sourceEndMs": 5669860
+    },
+    {
+      "utteranceIndex": 408,
+      "text": "なになになに急になに昔ある女がいた彼女の子供は祭りに向かう途中で事故に遭った人々は祭りに夢中で彼女の助けを求める声を無視した可哀想な子供は若くして命を落とした女は悲しみに打ちひしがれ",
+      "sourceStartMs": 5678270,
+      "sourceEndMs": 5699760
+    },
+    {
+      "utteranceIndex": 409,
+      "text": "あの無情な者どもを決して許さないと心の中で誓ったやがて女は死に若い子を捕らえて喰らう何て読むのこれ鬼母となった人々は尽きぬ恐慌と苦痛に苛まれた鬼母は数百もの子供を産み落としたが神様は彼女の最も愛する松子マッシー",
+      "sourceStartMs": 5700214,
+      "sourceEndMs": 5729380
+    },
+    {
+      "utteranceIndex": 410,
+      "text": "盗み水晶の鉢の下に封じ込めた焦る規模は全力を尽くしたが息子を閉じ込めるその水晶の鉢をどうしても持ち上げることができなかった神様は規模に許した里下お前が我が子をそれほどに慈しんでいるようにお前が食した子供たちの親もまだ我が子を同じように思っている",
+      "sourceStartMs": 5730762,
+      "sourceEndMs": 5759860
+    },
+    {
+      "utteranceIndex": 411,
+      "text": "その胸中を思いなさい貴母は自らの罪を悟り二度と人の子を殺めぬことを誓い代わりに母子の守護神となったえ?",
+      "sourceStartMs": 5760546,
+      "sourceEndMs": 5770231
+    },
+    {
+      "utteranceIndex": 412,
+      "text": "じゃああの化け物は守護神?",
+      "sourceStartMs": 5770231,
+      "sourceEndMs": 5771112
+    },
+    {
+      "utteranceIndex": 413,
+      "text": "え?",
+      "sourceStartMs": 5771112,
+      "sourceEndMs": 5771172
+    },
+    {
+      "utteranceIndex": 414,
+      "text": "嘘だよねお母さん怖い",
+      "sourceStartMs": 5771172,
+      "sourceEndMs": 5777195
+    },
+    {
+      "utteranceIndex": 415,
+      "text": "すごく暗くて誰かに追いかけられてたでもね大きな鳥さんが助けてくれて安全な場所に連れて行ってくれたの金庫お母さんがずっと守ってあげるから",
+      "sourceStartMs": 5792786,
+      "sourceEndMs": 5816506
+    },
+    {
+      "utteranceIndex": 416,
+      "text": "え、え、まるまるえ、あのー化け、赤いやつは化け物だよね?",
+      "sourceStartMs": 5827938,
+      "sourceEndMs": 5839742
+    },
+    {
+      "utteranceIndex": 417,
+      "text": "何もないわ規模だったんじゃないか子供を守る子供には攻撃をしなかったから規模だけど大人は許せなかったってことなのかな確かに子供には危害は加えてない金庫にも加えてないし",
+      "sourceStartMs": 5852864,
+      "sourceEndMs": 5878585
+    },
+    {
+      "utteranceIndex": 418,
+      "text": "まあだから変な世界規模のいる世界線に急に呼び込まれてあれだったってことか親はペコーラ先生は頑張って金庫を救えたということで鳥さんになんか",
+      "sourceStartMs": 5884854,
+      "sourceEndMs": 5909840
+    },
+    {
+      "utteranceIndex": 419,
+      "text": "鳥さん、鳥さんに助けてもらってってママじゃねぇの?",
+      "sourceStartMs": 5912382,
+      "sourceEndMs": 5917144
+    },
+    {
+      "utteranceIndex": 420,
+      "text": "ペコラ、ペコラじゃなかったのかなまぁでも怖かったねやっぱここの会社さ、アングル攻めんのやめてほしいマジで怖いなんかさぁアングルで怖がらせんのマジ上手いと思うここの会社",
+      "sourceStartMs": 5917144,
+      "sourceEndMs": 5937750
+    },
+    {
+      "utteranceIndex": 421,
+      "text": "じゃないしかも確かに新しい要素連打があったねボタン連打があったのびっくりしたないやカメラワークと今回時間差怖かったいや分かってるよなんかやっぱさホラーゲーやってるとさなんか分かってくるじゃんあーここ来そうだなみたいなのここの会社すごいのがさいやもうなんか来るよなっていうところじゃないところで",
+      "sourceStartMs": 5940658,
+      "sourceEndMs": 5969880
+    },
+    {
+      "utteranceIndex": 422,
+      "text": "油断させてビビらせてくるのがマジでここの会社多いなって思うビー玉ばあちゃんの時から思うけどわかってるよね人のびっくりポイントちゃんとアングルもやだしかもさトイレのあそこさ覗いてたけど何もなかったやん結局なんか作れよじゃあって思ったわバーンってさ規模がいて",
+      "sourceStartMs": 5971386,
+      "sourceEndMs": 5999980
+    },
+    {
+      "utteranceIndex": 423,
+      "text": "ええのにさただ覗くだけであんな毎回さ怖がらさせられてとんでもねえ今年一でしたわ今年一いやびっくりポイントマジうまいと思うほんとにいやでも赤ちゃんシールドありがたかったな今回のその化け物が赤ちゃんを傷つけさせないからめちゃめちゃそれがでかかったな",
+      "sourceStartMs": 6000682,
+      "sourceEndMs": 6028882
+    },
+    {
+      "utteranceIndex": 424,
+      "text": "なんてえ?",
+      "sourceStartMs": 6030578,
+      "sourceEndMs": 6031359
+    },
+    {
+      "utteranceIndex": 425,
+      "text": "あった?",
+      "sourceStartMs": 6031359,
+      "sourceEndMs": 6035021
+    },
+    {
+      "utteranceIndex": 426,
+      "text": "もう記憶にないよ足あったのいやこれ今んとこ今年一ですわいや赤ちゃんシールドがなかったら結構やばかったけど赤ちゃんシールドが出てからはよかったなめっちゃうん赤ちゃんを縦にするやってることは",
+      "sourceStartMs": 6035021,
+      "sourceEndMs": 6059760
+    },
+    {
+      "utteranceIndex": 427,
+      "text": "いや確かにギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャーギャー",
+      "sourceStartMs": 6060002,
+      "sourceEndMs": 6085922
+    },
+    {
+      "utteranceIndex": 428,
+      "text": "でもああやって行方不明者が多いのは大変だな毎回こんな怖がらせられてるのか医者さえも行方不明の中に入ってたしあーおもろかった怖いやっぱりホラーゲーいろんなのをやってきたけど怖いもんは怖いねあインド経由の",
+      "sourceStartMs": 6090502,
+      "sourceEndMs": 6119800
+    },
+    {
+      "utteranceIndex": 429,
+      "text": "あそうなんだいやおもろいやっぱ夏はホラゲーに限ります楽しかった首痛え叫んだね今日このハリチはよく叫んだわギャーギャーギャーギャー言いながらできたおもろピカタですオッケー",
+      "sourceStartMs": 6120446,
+      "sourceEndMs": 6149760
+    },
+    {
+      "utteranceIndex": 430,
+      "text": "また次回の配信でお会いしましょうおつぺこでしたバイバイ",
+      "sourceStartMs": 6153114,
+      "sourceEndMs": 6161684
+    }
+  ],
+  "anchors": [
+    {
+      "anchorIndex": 0,
+      "utteranceIndex": 0
+    },
+    {
+      "anchorIndex": 1,
+      "utteranceIndex": 1
+    },
+    {
+      "anchorIndex": 2,
+      "utteranceIndex": 2
+    },
+    {
+      "anchorIndex": 3,
+      "utteranceIndex": 3
+    },
+    {
+      "anchorIndex": 4,
+      "utteranceIndex": 4
+    },
+    {
+      "anchorIndex": 5,
+      "utteranceIndex": 5
+    },
+    {
+      "anchorIndex": 6,
+      "utteranceIndex": 6
+    },
+    {
+      "anchorIndex": 7,
+      "utteranceIndex": 7
+    },
+    {
+      "anchorIndex": 8,
+      "utteranceIndex": 8
+    },
+    {
+      "anchorIndex": 9,
+      "utteranceIndex": 9
+    },
+    {
+      "anchorIndex": 10,
+      "utteranceIndex": 10
+    },
+    {
+      "anchorIndex": 11,
+      "utteranceIndex": 11
+    },
+    {
+      "anchorIndex": 12,
+      "utteranceIndex": 12
+    },
+    {
+      "anchorIndex": 13,
+      "utteranceIndex": 13
+    },
+    {
+      "anchorIndex": 14,
+      "utteranceIndex": 14
+    },
+    {
+      "anchorIndex": 15,
+      "utteranceIndex": 15
+    },
+    {
+      "anchorIndex": 16,
+      "utteranceIndex": 16
+    },
+    {
+      "anchorIndex": 17,
+      "utteranceIndex": 17
+    },
+    {
+      "anchorIndex": 18,
+      "utteranceIndex": 18
+    },
+    {
+      "anchorIndex": 19,
+      "utteranceIndex": 19
+    },
+    {
+      "anchorIndex": 20,
+      "utteranceIndex": 20
+    },
+    {
+      "anchorIndex": 21,
+      "utteranceIndex": 21
+    },
+    {
+      "anchorIndex": 22,
+      "utteranceIndex": 41
+    },
+    {
+      "anchorIndex": 23,
+      "utteranceIndex": 42
+    },
+    {
+      "anchorIndex": 24,
+      "utteranceIndex": 43
+    },
+    {
+      "anchorIndex": 25,
+      "utteranceIndex": 44
+    },
+    {
+      "anchorIndex": 26,
+      "utteranceIndex": 45
+    },
+    {
+      "anchorIndex": 27,
+      "utteranceIndex": 46
+    },
+    {
+      "anchorIndex": 28,
+      "utteranceIndex": 47
+    },
+    {
+      "anchorIndex": 29,
+      "utteranceIndex": 70
+    },
+    {
+      "anchorIndex": 30,
+      "utteranceIndex": 71
+    },
+    {
+      "anchorIndex": 31,
+      "utteranceIndex": 72
+    },
+    {
+      "anchorIndex": 32,
+      "utteranceIndex": 73
+    },
+    {
+      "anchorIndex": 33,
+      "utteranceIndex": 74
+    },
+    {
+      "anchorIndex": 34,
+      "utteranceIndex": 75
+    },
+    {
+      "anchorIndex": 35,
+      "utteranceIndex": 76
+    },
+    {
+      "anchorIndex": 36,
+      "utteranceIndex": 77
+    },
+    {
+      "anchorIndex": 37,
+      "utteranceIndex": 78
+    },
+    {
+      "anchorIndex": 38,
+      "utteranceIndex": 79
+    },
+    {
+      "anchorIndex": 39,
+      "utteranceIndex": 80
+    },
+    {
+      "anchorIndex": 40,
+      "utteranceIndex": 81
+    },
+    {
+      "anchorIndex": 41,
+      "utteranceIndex": 82
+    },
+    {
+      "anchorIndex": 42,
+      "utteranceIndex": 83
+    },
+    {
+      "anchorIndex": 43,
+      "utteranceIndex": 102
+    },
+    {
+      "anchorIndex": 44,
+      "utteranceIndex": 103
+    },
+    {
+      "anchorIndex": 45,
+      "utteranceIndex": 104
+    },
+    {
+      "anchorIndex": 46,
+      "utteranceIndex": 105
+    },
+    {
+      "anchorIndex": 47,
+      "utteranceIndex": 106
+    },
+    {
+      "anchorIndex": 48,
+      "utteranceIndex": 107
+    },
+    {
+      "anchorIndex": 49,
+      "utteranceIndex": 108
+    },
+    {
+      "anchorIndex": 50,
+      "utteranceIndex": 109
+    },
+    {
+      "anchorIndex": 51,
+      "utteranceIndex": 110
+    },
+    {
+      "anchorIndex": 52,
+      "utteranceIndex": 111
+    },
+    {
+      "anchorIndex": 53,
+      "utteranceIndex": 112
+    },
+    {
+      "anchorIndex": 54,
+      "utteranceIndex": 113
+    },
+    {
+      "anchorIndex": 55,
+      "utteranceIndex": 114
+    },
+    {
+      "anchorIndex": 56,
+      "utteranceIndex": 115
+    },
+    {
+      "anchorIndex": 57,
+      "utteranceIndex": 121
+    },
+    {
+      "anchorIndex": 58,
+      "utteranceIndex": 122
+    },
+    {
+      "anchorIndex": 59,
+      "utteranceIndex": 123
+    },
+    {
+      "anchorIndex": 60,
+      "utteranceIndex": 124
+    },
+    {
+      "anchorIndex": 61,
+      "utteranceIndex": 125
+    },
+    {
+      "anchorIndex": 62,
+      "utteranceIndex": 126
+    },
+    {
+      "anchorIndex": 63,
+      "utteranceIndex": 127
+    },
+    {
+      "anchorIndex": 64,
+      "utteranceIndex": 128
+    },
+    {
+      "anchorIndex": 65,
+      "utteranceIndex": 129
+    },
+    {
+      "anchorIndex": 66,
+      "utteranceIndex": 130
+    },
+    {
+      "anchorIndex": 67,
+      "utteranceIndex": 131
+    },
+    {
+      "anchorIndex": 68,
+      "utteranceIndex": 132
+    },
+    {
+      "anchorIndex": 69,
+      "utteranceIndex": 149
+    },
+    {
+      "anchorIndex": 70,
+      "utteranceIndex": 150
+    },
+    {
+      "anchorIndex": 71,
+      "utteranceIndex": 151
+    },
+    {
+      "anchorIndex": 72,
+      "utteranceIndex": 152
+    },
+    {
+      "anchorIndex": 73,
+      "utteranceIndex": 153
+    },
+    {
+      "anchorIndex": 74,
+      "utteranceIndex": 154
+    },
+    {
+      "anchorIndex": 75,
+      "utteranceIndex": 155
+    },
+    {
+      "anchorIndex": 76,
+      "utteranceIndex": 156
+    },
+    {
+      "anchorIndex": 77,
+      "utteranceIndex": 157
+    },
+    {
+      "anchorIndex": 78,
+      "utteranceIndex": 163
+    },
+    {
+      "anchorIndex": 79,
+      "utteranceIndex": 164
+    },
+    {
+      "anchorIndex": 80,
+      "utteranceIndex": 165
+    },
+    {
+      "anchorIndex": 81,
+      "utteranceIndex": 166
+    },
+    {
+      "anchorIndex": 82,
+      "utteranceIndex": 167
+    },
+    {
+      "anchorIndex": 83,
+      "utteranceIndex": 168
+    },
+    {
+      "anchorIndex": 84,
+      "utteranceIndex": 169
+    },
+    {
+      "anchorIndex": 85,
+      "utteranceIndex": 170
+    },
+    {
+      "anchorIndex": 86,
+      "utteranceIndex": 171
+    },
+    {
+      "anchorIndex": 87,
+      "utteranceIndex": 172
+    },
+    {
+      "anchorIndex": 88,
+      "utteranceIndex": 173
+    },
+    {
+      "anchorIndex": 89,
+      "utteranceIndex": 174
+    },
+    {
+      "anchorIndex": 90,
+      "utteranceIndex": 175
+    },
+    {
+      "anchorIndex": 91,
+      "utteranceIndex": 176
+    },
+    {
+      "anchorIndex": 92,
+      "utteranceIndex": 177
+    },
+    {
+      "anchorIndex": 93,
+      "utteranceIndex": 178
+    },
+    {
+      "anchorIndex": 94,
+      "utteranceIndex": 179
+    },
+    {
+      "anchorIndex": 95,
+      "utteranceIndex": 180
+    },
+    {
+      "anchorIndex": 96,
+      "utteranceIndex": 181
+    },
+    {
+      "anchorIndex": 97,
+      "utteranceIndex": 182
+    },
+    {
+      "anchorIndex": 98,
+      "utteranceIndex": 183
+    },
+    {
+      "anchorIndex": 99,
+      "utteranceIndex": 184
+    },
+    {
+      "anchorIndex": 100,
+      "utteranceIndex": 185
+    },
+    {
+      "anchorIndex": 101,
+      "utteranceIndex": 186
+    },
+    {
+      "anchorIndex": 102,
+      "utteranceIndex": 187
+    },
+    {
+      "anchorIndex": 103,
+      "utteranceIndex": 188
+    },
+    {
+      "anchorIndex": 104,
+      "utteranceIndex": 189
+    },
+    {
+      "anchorIndex": 105,
+      "utteranceIndex": 190
+    },
+    {
+      "anchorIndex": 106,
+      "utteranceIndex": 191
+    },
+    {
+      "anchorIndex": 107,
+      "utteranceIndex": 192
+    },
+    {
+      "anchorIndex": 108,
+      "utteranceIndex": 193
+    },
+    {
+      "anchorIndex": 109,
+      "utteranceIndex": 194
+    },
+    {
+      "anchorIndex": 110,
+      "utteranceIndex": 195
+    },
+    {
+      "anchorIndex": 111,
+      "utteranceIndex": 196
+    },
+    {
+      "anchorIndex": 112,
+      "utteranceIndex": 247
+    },
+    {
+      "anchorIndex": 113,
+      "utteranceIndex": 248
+    },
+    {
+      "anchorIndex": 114,
+      "utteranceIndex": 249
+    },
+    {
+      "anchorIndex": 115,
+      "utteranceIndex": 250
+    },
+    {
+      "anchorIndex": 116,
+      "utteranceIndex": 251
+    },
+    {
+      "anchorIndex": 117,
+      "utteranceIndex": 259
+    },
+    {
+      "anchorIndex": 118,
+      "utteranceIndex": 260
+    },
+    {
+      "anchorIndex": 119,
+      "utteranceIndex": 261
+    },
+    {
+      "anchorIndex": 120,
+      "utteranceIndex": 276
+    },
+    {
+      "anchorIndex": 121,
+      "utteranceIndex": 277
+    },
+    {
+      "anchorIndex": 122,
+      "utteranceIndex": 278
+    },
+    {
+      "anchorIndex": 123,
+      "utteranceIndex": 279
+    },
+    {
+      "anchorIndex": 124,
+      "utteranceIndex": 280
+    },
+    {
+      "anchorIndex": 125,
+      "utteranceIndex": 281
+    },
+    {
+      "anchorIndex": 126,
+      "utteranceIndex": 282
+    },
+    {
+      "anchorIndex": 127,
+      "utteranceIndex": 283
+    },
+    {
+      "anchorIndex": 128,
+      "utteranceIndex": 284
+    },
+    {
+      "anchorIndex": 129,
+      "utteranceIndex": 285
+    },
+    {
+      "anchorIndex": 130,
+      "utteranceIndex": 317
+    },
+    {
+      "anchorIndex": 131,
+      "utteranceIndex": 318
+    },
+    {
+      "anchorIndex": 132,
+      "utteranceIndex": 319
+    },
+    {
+      "anchorIndex": 133,
+      "utteranceIndex": 386
+    },
+    {
+      "anchorIndex": 134,
+      "utteranceIndex": 387
+    },
+    {
+      "anchorIndex": 135,
+      "utteranceIndex": 388
+    },
+    {
+      "anchorIndex": 136,
+      "utteranceIndex": 389
+    },
+    {
+      "anchorIndex": 137,
+      "utteranceIndex": 399
+    },
+    {
+      "anchorIndex": 138,
+      "utteranceIndex": 400
+    },
+    {
+      "anchorIndex": 139,
+      "utteranceIndex": 401
+    },
+    {
+      "anchorIndex": 140,
+      "utteranceIndex": 402
+    },
+    {
+      "anchorIndex": 141,
+      "utteranceIndex": 403
+    },
+    {
+      "anchorIndex": 142,
+      "utteranceIndex": 404
+    },
+    {
+      "anchorIndex": 143,
+      "utteranceIndex": 405
+    },
+    {
+      "anchorIndex": 144,
+      "utteranceIndex": 406
+    },
+    {
+      "anchorIndex": 145,
+      "utteranceIndex": 407
+    },
+    {
+      "anchorIndex": 146,
+      "utteranceIndex": 408
+    },
+    {
+      "anchorIndex": 147,
+      "utteranceIndex": 409
+    },
+    {
+      "anchorIndex": 148,
+      "utteranceIndex": 410
+    },
+    {
+      "anchorIndex": 149,
+      "utteranceIndex": 416
+    },
+    {
+      "anchorIndex": 150,
+      "utteranceIndex": 417
+    },
+    {
+      "anchorIndex": 151,
+      "utteranceIndex": 421
+    },
+    {
+      "anchorIndex": 152,
+      "utteranceIndex": 422
+    },
+    {
+      "anchorIndex": 153,
+      "utteranceIndex": 423
+    },
+    {
+      "anchorIndex": 154,
+      "utteranceIndex": 424
+    },
+    {
+      "anchorIndex": 155,
+      "utteranceIndex": 425
+    },
+    {
+      "anchorIndex": 156,
+      "utteranceIndex": 426
+    },
+    {
+      "anchorIndex": 157,
+      "utteranceIndex": 427
+    },
+    {
+      "anchorIndex": 158,
+      "utteranceIndex": 428
+    },
+    {
+      "anchorIndex": 159,
+      "utteranceIndex": 429
+    },
+    {
+      "anchorIndex": 160,
+      "utteranceIndex": 430
+    }
+  ],
+  "responseContract": {
+    "schemaVersion": "distant-connection-comparison-index-response-v001",
+    "jsonSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "candidates"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "const": "distant-connection-comparison-index-response-v001"
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "anchorIndex",
+              "firstPartUtteranceIndexes",
+              "secondPartUtteranceIndexes",
+              "addedUnderstanding",
+              "direction"
+            ],
+            "properties": {
+              "anchorIndex": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 160
+              },
+              "firstPartUtteranceIndexes": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 430
+                }
+              },
+              "secondPartUtteranceIndexes": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 430
+                }
+              },
+              "addedUnderstanding": {
+                "type": "string",
+                "minLength": 1
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "past",
+                  "future"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

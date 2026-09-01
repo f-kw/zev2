@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "distant-connection-comparison-luna-b5-local-manifest-v001",
+  "sourcePackageBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/source-package-v001.json",
+    "schemaVersion": "distant-connection-comparison-source-package-v001",
+    "fileSha256": "6a5cb3249d28f8406e77e4d3812008317a97a873ae310052ffa51fe3fbf560d3"
+  },
+  "indexedModelInputBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/indexed-model-input-v001.json",
+    "schemaVersion": "distant-connection-comparison-indexed-model-input-v001",
+    "fileSha256": "fad0fd140dbdfeded1266b3dae342e8ebfce211e861f3f92a9f7477734063d4f"
+  },
+  "requestBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/exact-request-v001.json",
+    "schemaVersion": "openai-responses-distant-connection-comparison-request-v001",
+    "fileSha256": "9d40efc855b6620719bccbf416dc34cc3a12838271e3ddabe1c0b17beb083777"
+  },
+  "requestSettings": {
+    "providerId": "openai-api",
+    "modelId": "gpt-5.6-luna",
+    "operationId": "responses",
+    "reasoningEffort": "medium",
+    "responseFormatName": "distant_connection_comparison_index_response_v001",
+    "store": false
+  },
+  "b6ContinuationContract": {
+    "requiredRequestBinding": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/exact-request-v001.json",
+      "schemaVersion": "openai-responses-distant-connection-comparison-request-v001",
+      "fileSha256": "9d40efc855b6620719bccbf416dc34cc3a12838271e3ddabe1c0b17beb083777"
+    }
+  }
+}
