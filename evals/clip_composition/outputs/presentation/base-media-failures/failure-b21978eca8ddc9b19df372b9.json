@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "presentation-base-media-validation-report-v001",
+  "buildId": null,
+  "status": "failed",
+  "violations": [
+    {
+      "code": "BASE_MEDIA_FORMAT_UNSUPPORTED",
+      "path": "$.source.video.frames[0].pts",
+      "relatedIds": [],
+      "details": {
+        "expected": 0,
+        "pts": 1440,
+        "retainedBuildPaths": {
+          "lockFile": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-horror-claim-to-speed-up-current-caption-v002.lock",
+          "policy": "retain-without-automatic-delete-v001",
+          "publicationTemporaryDirectory": "evals/clip_composition/outputs/presentation/base-media/.distant-connection-candidate-horror-claim-to-speed-up-current-caption-v002.publish-tmp-yHEtRM",
+          "workingDirectory": "evals/clip_composition/outputs/presentation/base-media/.distant-connection-candidate-horror-claim-to-speed-up-current-caption-v002.work-PDoD7z"
+        }
+      }
+    }
+  ],
+  "inputs": {
+    "assemblyDecision": null,
+    "basisEditPlan": null,
+    "sourceMedia": null
+  },
+  "outputs": {
+    "baseMedia": null,
+    "timeline": null,
+    "generationManifest": null
+  },
+  "checks": {
+    "approvalBinding": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_FORMAT_UNSUPPORTED"
+      ]
+    },
+    "sourceBinding": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_FORMAT_UNSUPPORTED"
+      ]
+    },
+    "videoQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_FORMAT_UNSUPPORTED"
+      ]
+    },
+    "audioQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_FORMAT_UNSUPPORTED"
+      ]
+    },
+    "timelineQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_FORMAT_UNSUPPORTED"
+      ]
+    },
+    "hashGraph": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_FORMAT_UNSUPPORTED"
+      ]
+    },
+    "publishPreconditions": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_FORMAT_UNSUPPORTED"
+      ]
+    }
+  }
+}

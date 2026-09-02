@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "presentation-base-media-validation-report-v001",
+  "buildId": null,
+  "status": "failed",
+  "violations": [
+    {
+      "code": "BASE_MEDIA_VIDEO_SOURCE_CLOCK_INVALID",
+      "path": "$source.video.presentationOffsetMs",
+      "relatedIds": [],
+      "details": {
+        "presentationOffsetMs": 16,
+        "retainedBuildPaths": {
+          "lockFile": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-horror-claim-to-speed-up-video-clock-v003.lock",
+          "policy": "retain-without-automatic-delete-v001",
+          "publicationTemporaryDirectory": "evals/clip_composition/outputs/presentation/base-media/.distant-connection-candidate-horror-claim-to-speed-up-video-clock-v003.publish-tmp-mRgPiB",
+          "workingDirectory": "evals/clip_composition/outputs/presentation/base-media/.distant-connection-candidate-horror-claim-to-speed-up-video-clock-v003.work-hzDiQx"
+        },
+        "sampleRate": 44100
+      }
+    }
+  ],
+  "inputs": {
+    "assemblyDecision": null,
+    "basisEditPlan": null,
+    "sourceMedia": null
+  },
+  "outputs": {
+    "baseMedia": null,
+    "timeline": null,
+    "generationManifest": null
+  },
+  "checks": {
+    "approvalBinding": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_VIDEO_SOURCE_CLOCK_INVALID"
+      ]
+    },
+    "sourceBinding": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_VIDEO_SOURCE_CLOCK_INVALID"
+      ]
+    },
+    "videoQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_VIDEO_SOURCE_CLOCK_INVALID"
+      ]
+    },
+    "audioQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_VIDEO_SOURCE_CLOCK_INVALID"
+      ]
+    },
+    "timelineQc": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_VIDEO_SOURCE_CLOCK_INVALID"
+      ]
+    },
+    "hashGraph": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_VIDEO_SOURCE_CLOCK_INVALID"
+      ]
+    },
+    "publishPreconditions": {
+      "status": "not_run",
+      "violationCodes": [
+        "BASE_MEDIA_VIDEO_SOURCE_CLOCK_INVALID"
+      ]
+    }
+  }
+}

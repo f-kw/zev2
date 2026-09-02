@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "video-acquisition-failure-evidence-v001",
+  "sourceVideoId": "o8rZAhARXAc",
+  "attemptId": "attempt-0002",
+  "attemptedAt": "2026-09-01T13:21:33+09:00",
+  "command": [
+    "yt-dlp",
+    "--ignore-config",
+    "--verbose",
+    "--no-playlist",
+    "--no-overwrites",
+    "--no-continue",
+    "--retries",
+    "0",
+    "--fragment-retries",
+    "0",
+    "--file-access-retries",
+    "0",
+    "--extractor-retries",
+    "0",
+    "--abort-on-unavailable-fragments",
+    "--downloader",
+    "curl",
+    "-f",
+    "bv*+ba/b",
+    "--merge-output-format",
+    "mp4",
+    "-o",
+    "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc-attempt-0002/o8rZAhARXAc.%(ext)s",
+    "https://www.youtube.com/watch?v=o8rZAhARXAc"
+  ],
+  "changedAcquisitionCondition": "Use yt-dlp's curl downloader for one continuous transfer instead of the native downloader's approximately 10 MiB range reconnections.",
+  "selectedFormats": [
+    "399",
+    "251"
+  ],
+  "exitCode": 1,
+  "providerObservation": {
+    "initialMediaRequestStatusAfterRedirect": 403,
+    "videoBytesReceived": 0,
+    "audioBytesReceived": 0
+  },
+  "outputFiles": [
+    {
+      "path": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc-attempt-0002/o8rZAhARXAc.f399.mp4",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc-attempt-0002/o8rZAhARXAc.f251.webm",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "terminalError": "Postprocessing could not open the empty format 399 input after both provider media requests returned HTTP 403.",
+  "automaticRetryCount": 0,
+  "chatReplayAttempted": false,
+  "aiApiCommunicationCount": 0,
+  "paidCostUsd": 0
+}
