@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>遠方接続 3択観測</title>
+  <style>
+    :root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f4f6fa}
+    body{max-width:1000px;margin:0 auto;padding:28px 18px 80px}h1{margin-bottom:8px}.lead{line-height:1.8}
+    .notice{background:#fff4ce;border:1px solid #d8aa00;border-radius:12px;padding:16px;line-height:1.8}
+    .progress{position:sticky;top:0;z-index:2;background:#172033;color:white;border-radius:12px;padding:14px 18px;margin:20px 0}
+    .candidate{background:white;border:1px solid #d8deea;border-radius:16px;margin:22px 0;padding:20px;box-shadow:0 3px 14px #17203312}
+    header{display:flex;justify-content:space-between;align-items:center;gap:16px}.answer-state{background:#edf2ff;border-radius:999px;padding:5px 10px}
+    .stage{border-top:1px solid #e4e8f0;margin-top:14px;padding-top:14px}.stage[hidden]{display:none!important}
+    video{display:block;width:100%;max-height:560px;background:#111;border-radius:10px;margin:12px 0}
+    button{border:1px solid #2457d6;border-radius:9px;background:#2457d6;color:white;padding:11px 18px;font-weight:700;cursor:pointer}
+    button[disabled]{opacity:.45;cursor:not-allowed}.verdicts{display:flex;flex-wrap:wrap;gap:10px}.verdicts button{min-width:130px;background:white;color:#2457d6}
+    .verdicts button.selected{background:#2457d6;color:white}.download{margin-top:22px}.complete{background:#e7f8ee;color:#155b33}
+  </style>
+</head>
+<body>
+  <h1>遠方接続候補を3択だけで見る</h1>
+  <p class="lead">理由を考えなくてよい。後半だけと前半付きの映像を見て、最終的にこの動画が良いと思うかを「良い／良くない／分からない」のどれかで押すだけです。</p>
+  <p class="notice">これは最終採否ではありません。「良い」は正式selectionへ自動昇格せず、「良くない」は永久禁止にならず、「分からない」は失敗扱いになりません。Lunaの接続理由は回答前に表示しません。</p>
+  <div class="progress" id="progress">0 / 7 件回答済み — まだ回答漏れがあります</div>
+
+      <article class="candidate" data-candidate-id="candidate-770d2f9e783b663421151e6b9ddcf091a2bb2d82a2ae269ffd261be35aa59520" data-candidate-ordinal="1">
+        <header><h2>候補 1</h2><span class="answer-state">未回答</span></header>
+        <section class="stage">
+          <h3>1. まず後半だけを見る</h3>
+          <p>前半やLunaの説明は表示していません。</p>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-01/second-only-v001.mp4"></video>
+          <button type="button" class="show-first" data-show-first>前半付きも見る</button>
+        </section>
+        <section class="stage first-then-second" data-first-then-second hidden>
+          <h3>2. 前半→後半を見る</h3>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-01/first-then-second-v001.mp4"></video>
+          <p class="question">最終的に、この動画を良いと思いますか。</p>
+          <div class="verdicts" role="group" aria-label="候補 1 の三択">
+            <button type="button" data-verdict="good">良い</button>
+            <button type="button" data-verdict="not-good">良くない</button>
+            <button type="button" data-verdict="unsure">分からない</button>
+          </div>
+        </section>
+      </article>
+
+      <article class="candidate" data-candidate-id="candidate-158d269211dfcf7b84d2dcb311eb845b7b7ca492e0d1c964c2ee99d4227a7f39" data-candidate-ordinal="2">
+        <header><h2>候補 2</h2><span class="answer-state">未回答</span></header>
+        <section class="stage">
+          <h3>1. まず後半だけを見る</h3>
+          <p>前半やLunaの説明は表示していません。</p>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-02/second-only-v001.mp4"></video>
+          <button type="button" class="show-first" data-show-first>前半付きも見る</button>
+        </section>
+        <section class="stage first-then-second" data-first-then-second hidden>
+          <h3>2. 前半→後半を見る</h3>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-02/first-then-second-v001.mp4"></video>
+          <p class="question">最終的に、この動画を良いと思いますか。</p>
+          <div class="verdicts" role="group" aria-label="候補 2 の三択">
+            <button type="button" data-verdict="good">良い</button>
+            <button type="button" data-verdict="not-good">良くない</button>
+            <button type="button" data-verdict="unsure">分からない</button>
+          </div>
+        </section>
+      </article>
+
+      <article class="candidate" data-candidate-id="candidate-d4466ed1d34fbaa1c4328afb71bcdc2c5d12af459a6f4a316229fb104608cca1" data-candidate-ordinal="3">
+        <header><h2>候補 3</h2><span class="answer-state">未回答</span></header>
+        <section class="stage">
+          <h3>1. まず後半だけを見る</h3>
+          <p>前半やLunaの説明は表示していません。</p>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-03/second-only-v001.mp4"></video>
+          <button type="button" class="show-first" data-show-first>前半付きも見る</button>
+        </section>
+        <section class="stage first-then-second" data-first-then-second hidden>
+          <h3>2. 前半→後半を見る</h3>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-03/first-then-second-v001.mp4"></video>
+          <p class="question">最終的に、この動画を良いと思いますか。</p>
+          <div class="verdicts" role="group" aria-label="候補 3 の三択">
+            <button type="button" data-verdict="good">良い</button>
+            <button type="button" data-verdict="not-good">良くない</button>
+            <button type="button" data-verdict="unsure">分からない</button>
+          </div>
+        </section>
+      </article>
+
+      <article class="candidate" data-candidate-id="candidate-0e8f81e3d107d61a6c11387069ec3fb28a262c01f960bedd7505898c8b7fb8e6" data-candidate-ordinal="4">
+        <header><h2>候補 4</h2><span class="answer-state">未回答</span></header>
+        <section class="stage">
+          <h3>1. まず後半だけを見る</h3>
+          <p>前半やLunaの説明は表示していません。</p>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-04/second-only-v001.mp4"></video>
+          <button type="button" class="show-first" data-show-first>前半付きも見る</button>
+        </section>
+        <section class="stage first-then-second" data-first-then-second hidden>
+          <h3>2. 前半→後半を見る</h3>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-04/first-then-second-v001.mp4"></video>
+          <p class="question">最終的に、この動画を良いと思いますか。</p>
+          <div class="verdicts" role="group" aria-label="候補 4 の三択">
+            <button type="button" data-verdict="good">良い</button>
+            <button type="button" data-verdict="not-good">良くない</button>
+            <button type="button" data-verdict="unsure">分からない</button>
+          </div>
+        </section>
+      </article>
+
+      <article class="candidate" data-candidate-id="candidate-aa201a9a020bdcc21301dc3ed332c0596a8d0cf6754b52df09ad9d76b5e6e0ae" data-candidate-ordinal="5">
+        <header><h2>候補 5</h2><span class="answer-state">未回答</span></header>
+        <section class="stage">
+          <h3>1. まず後半だけを見る</h3>
+          <p>前半やLunaの説明は表示していません。</p>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-05/second-only-v001.mp4"></video>
+          <button type="button" class="show-first" data-show-first>前半付きも見る</button>
+        </section>
+        <section class="stage first-then-second" data-first-then-second hidden>
+          <h3>2. 前半→後半を見る</h3>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-05/first-then-second-v001.mp4"></video>
+          <p class="question">最終的に、この動画を良いと思いますか。</p>
+          <div class="verdicts" role="group" aria-label="候補 5 の三択">
+            <button type="button" data-verdict="good">良い</button>
+            <button type="button" data-verdict="not-good">良くない</button>
+            <button type="button" data-verdict="unsure">分からない</button>
+          </div>
+        </section>
+      </article>
+
+      <article class="candidate" data-candidate-id="candidate-a32e5044ed7b1135ff23bae23f064111171af8f6f591ccdb7e85a2f455707c6d" data-candidate-ordinal="6">
+        <header><h2>候補 6</h2><span class="answer-state">未回答</span></header>
+        <section class="stage">
+          <h3>1. まず後半だけを見る</h3>
+          <p>前半やLunaの説明は表示していません。</p>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-06/second-only-v001.mp4"></video>
+          <button type="button" class="show-first" data-show-first>前半付きも見る</button>
+        </section>
+        <section class="stage first-then-second" data-first-then-second hidden>
+          <h3>2. 前半→後半を見る</h3>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-06/first-then-second-v001.mp4"></video>
+          <p class="question">最終的に、この動画を良いと思いますか。</p>
+          <div class="verdicts" role="group" aria-label="候補 6 の三択">
+            <button type="button" data-verdict="good">良い</button>
+            <button type="button" data-verdict="not-good">良くない</button>
+            <button type="button" data-verdict="unsure">分からない</button>
+          </div>
+        </section>
+      </article>
+
+      <article class="candidate" data-candidate-id="candidate-7caea97694cc62115214a91a612fc09979a310937450921a257b18d172912ee2" data-candidate-ordinal="7">
+        <header><h2>候補 7</h2><span class="answer-state">未回答</span></header>
+        <section class="stage">
+          <h3>1. まず後半だけを見る</h3>
+          <p>前半やLunaの説明は表示していません。</p>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-07/second-only-v001.mp4"></video>
+          <button type="button" class="show-first" data-show-first>前半付きも見る</button>
+        </section>
+        <section class="stage first-then-second" data-first-then-second hidden>
+          <h3>2. 前半→後半を見る</h3>
+          <video controls preload="metadata" src="../work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-07/first-then-second-v001.mp4"></video>
+          <p class="question">最終的に、この動画を良いと思いますか。</p>
+          <div class="verdicts" role="group" aria-label="候補 7 の三択">
+            <button type="button" data-verdict="good">良い</button>
+            <button type="button" data-verdict="not-good">良くない</button>
+            <button type="button" data-verdict="unsure">分からない</button>
+          </div>
+        </section>
+      </article>
+  <section class="download">
+    <button type="button" id="download-result" disabled>7件の正式観測結果JSONを保存</button>
+    <p id="download-help">7件すべてに答えると保存できます。</p>
+  </section>
+  <script>
+    const pageContext = {"resultBase":{"schemaVersion":"distant-connection-pleasant-video-observation-result-v001","resultId":"pleasant-video-observation-result-o8rZAhARXAc-v001","sourceVideoId":"o8rZAhARXAc","sourceBindings":{"candidateResponse":{"path":"evals/clip_composition/outputs/work-distant-connection-comparison-luna-b6-candidates-o8rZAhARXAc-v001/candidate-response-v001.json","schemaVersion":"distant-connection-comparison-candidate-response-v001","fileSha256":"301919134213a54783540784c537553fc283874cf676f44064165975cec3f089"},"candidateReviewResult":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidate-review-result-v002.json","schemaVersion":"distant-connection-candidate-review-result-v002","fileSha256":"1ef46044e236dfd798f9b4591ffd6cebcb656536e1eb549c5f87c3f270d7ed59"},"reviewPlan":{"path":"evals/clip_composition/outputs/work-distant-connection-pleasant-video-observation-o8rZAhARXAc-v001/observation-plan-v001.json","schemaVersion":"distant-connection-pleasant-video-observation-plan-v001","fileSha256":"412f2949910a300fc8cc6089c9f7995a6bf2aec1af82e05dec4d7ec325a8c2d2"}},"reviewer":{"kind":"human","reviewerId":"kawafmm"},"candidateCount":7,"completionStatus":"complete","responsibilityPrinciple":"本成果物は旧方式で生成された正式候補を新設計前の観測材料として人間が実動画で一周し、良い・良くない・分からないの三値だけを保存する。理由、意味的接続、回収強度、映像適性、接続型、区間化、点数、順位、正式selection、永久禁止、強い正例への昇格を所有しない。"},"candidates":[{"candidateId":"candidate-770d2f9e783b663421151e6b9ddcf091a2bb2d82a2ae269ffd261be35aa59520","candidateOrdinal":1,"reviewMedia":{"secondOnly":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-01/second-only-v001.mp4","fileSha256":"1f76531596bb6cbc58e1aa8d4b70f93e5c14484f79b0689016f07d8200b1b71c"},"firstThenSecond":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-01/first-then-second-v001.mp4","fileSha256":"2ae52001efd939efc57ae8a068f344893a12e97dec7e0f04c81b8ddf6ea96438"}}},{"candidateId":"candidate-158d269211dfcf7b84d2dcb311eb845b7b7ca492e0d1c964c2ee99d4227a7f39","candidateOrdinal":2,"reviewMedia":{"secondOnly":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-02/second-only-v001.mp4","fileSha256":"8b8e977964b931fbed2e7e94aec997069f3fe66200e1e829f719421e5e056fc0"},"firstThenSecond":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-02/first-then-second-v001.mp4","fileSha256":"39c8e91836b494349508fc40341b867fc8c691cbd06b5a39b500d18313b10aad"}}},{"candidateId":"candidate-d4466ed1d34fbaa1c4328afb71bcdc2c5d12af459a6f4a316229fb104608cca1","candidateOrdinal":3,"reviewMedia":{"secondOnly":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-03/second-only-v001.mp4","fileSha256":"e806f1cec1c34ec16294f4dd1a96706d610d626199ee5b130d505579922dcb67"},"firstThenSecond":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-03/first-then-second-v001.mp4","fileSha256":"4e1cc400f10dfe353e692fd966a5e41c08b1bb612f059b509a59f93a3a257792"}}},{"candidateId":"candidate-0e8f81e3d107d61a6c11387069ec3fb28a262c01f960bedd7505898c8b7fb8e6","candidateOrdinal":4,"reviewMedia":{"secondOnly":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-04/second-only-v001.mp4","fileSha256":"cb202df8174792ae5327e41b34010bf8d5bc33206847891609cfc1e0fe62d2ab"},"firstThenSecond":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-04/first-then-second-v001.mp4","fileSha256":"4df38c64844011183b3023aabda014ea84d9a66387b775282ea9bdd00083e6d2"}}},{"candidateId":"candidate-aa201a9a020bdcc21301dc3ed332c0596a8d0cf6754b52df09ad9d76b5e6e0ae","candidateOrdinal":5,"reviewMedia":{"secondOnly":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-05/second-only-v001.mp4","fileSha256":"896ec763facbbb486d380d4a5b1ebe20bc4a3d3525decb190968fbf909c6ba7c"},"firstThenSecond":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-05/first-then-second-v001.mp4","fileSha256":"acb93f8b10b9c02b8f9ea70fe71341340c41b5bdfeecc411ef28fad386d3bd7a"}}},{"candidateId":"candidate-a32e5044ed7b1135ff23bae23f064111171af8f6f591ccdb7e85a2f455707c6d","candidateOrdinal":6,"reviewMedia":{"secondOnly":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-06/second-only-v001.mp4","fileSha256":"266944c0a7ac64545ea07a6e7f9ea761ad7d8108dc53da4cc955e70e25623d55"},"firstThenSecond":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-06/first-then-second-v001.mp4","fileSha256":"5c322b4b0921de32b0794594a697fa41b6bdb8c56aff7661b1153f1ceaeb3a45"}}},{"candidateId":"candidate-7caea97694cc62115214a91a612fc09979a310937450921a257b18d172912ee2","candidateOrdinal":7,"reviewMedia":{"secondOnly":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-07/second-only-v001.mp4","fileSha256":"17f1ba1a1bdaccb8d3fb7fa6dd0eaf5fb70bc1f56be8aae381f323763c8806f4"},"firstThenSecond":{"path":"evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-07/first-then-second-v001.mp4","fileSha256":"7ac2a9817a815f47fba22f57a73c1dffbd17300010d3742d91f56936d322159d"}}}]};
+    const answers = new Map();
+    const progress = document.getElementById('progress');
+    const downloadButton = document.getElementById('download-result');
+    const downloadHelp = document.getElementById('download-help');
+
+    for (const card of document.querySelectorAll('.candidate')) {
+      card.querySelector('[data-show-first]').addEventListener('click', (event) => {
+        card.querySelector('[data-first-then-second]').hidden = false;
+        event.currentTarget.disabled = true;
+        card.querySelector('[data-first-then-second]').scrollIntoView({behavior:'smooth',block:'start'});
+      });
+      for (const button of card.querySelectorAll('[data-verdict]')) {
+        button.addEventListener('click', () => {
+          const candidateId = card.dataset.candidateId;
+          answers.set(candidateId, button.dataset.verdict);
+          for (const peer of card.querySelectorAll('[data-verdict]')) {
+            peer.classList.toggle('selected', peer === button);
+            peer.setAttribute('aria-pressed', peer === button ? 'true' : 'false');
+          }
+          card.querySelector('.answer-state').textContent = '回答済み';
+          updateCompletion();
+        });
+      }
+    }
+
+    function updateCompletion() {
+      const answered = answers.size;
+      const complete = answered === pageContext.candidates.length;
+      progress.textContent = complete
+        ? answered + ' / ' + pageContext.candidates.length + ' 件回答済み — 全件回答済みです'
+        : answered + ' / ' + pageContext.candidates.length + ' 件回答済み — まだ回答漏れがあります';
+      progress.classList.toggle('complete', complete);
+      downloadButton.disabled = !complete;
+      downloadHelp.textContent = complete
+        ? '正式観測結果JSONを保存できます。これはselectionではありません。'
+        : '7件すべてに答えると保存できます。';
+    }
+
+    downloadButton.addEventListener('click', () => {
+      if (answers.size !== pageContext.candidates.length) return;
+      const result = {
+        schemaVersion: pageContext.resultBase.schemaVersion,
+        resultId: pageContext.resultBase.resultId,
+        sourceVideoId: pageContext.resultBase.sourceVideoId,
+        sourceBindings: pageContext.resultBase.sourceBindings,
+        reviewer: pageContext.resultBase.reviewer,
+        candidateCount: pageContext.resultBase.candidateCount,
+        candidateObservations: pageContext.candidates.map((candidate) => ({
+          candidateId: candidate.candidateId,
+          candidateOrdinal: candidate.candidateOrdinal,
+          reviewMedia: candidate.reviewMedia,
+          verdict: answers.get(candidate.candidateId)
+        })),
+        completionStatus: pageContext.resultBase.completionStatus,
+        responsibilityPrinciple: pageContext.resultBase.responsibilityPrinciple
+      };
+      const blob = new Blob([JSON.stringify(result, null, 2) + '\n'], {type:'application/json'});
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'pleasant-video-observation-result-v001.json';
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+  </script>
+</body>
+</html>
