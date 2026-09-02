@@ -7,7 +7,9 @@ import test from 'node:test';
 import {
   DistantConnectionRenderAdapterErrorV002,
   assertDistantConnectionRenderAdapterJobV002,
+  buildPresentationBaseMediaExecutionJobProjectionV002,
   buildDistantConnectionRenderAdapterJobV002,
+  serializePresentationBaseMediaBuildJobProjectionV002,
   serializeDistantConnectionRenderAdapterJobV002,
   validateDistantConnectionRenderAdapterJobAgainstSourcesV002,
   type BuildDistantConnectionRenderAdapterJobV002Input
@@ -19,6 +21,8 @@ const candidatePath = 'evals/clip_composition/outputs/work-distant-connection-lu
 const semanticPath = 'evals/clip_composition/outputs/work-distant-connection-semantic-utterance-ymUsGrT6EaA-v001/semantic-utterance-artifact-v001.json';
 const sourcePackagePath = 'evals/clip_composition/outputs/work-distant-connection-luna-source-package-concrete-payoff-ymUsGrT6EaA-v001/source-package-v001.json';
 const sourceVideoPath = 'evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4';
+const executionSourceVideoPath =
+  'evals/clip_composition/research/downloads/ymUsGrT6EaA/ymUsGrT6EaA.mp4';
 const sourceVideoUri = path.join(root, sourceVideoPath);
 const sourceVideoSha = '79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537';
 const candidateIds = [
@@ -197,6 +201,54 @@ test('同一入力から同一formal byteを生成する', async () => {
     serializeDistantConnectionRenderAdapterJobV002(first),
     serializeDistantConnectionRenderAdapterJobV002(second)
   );
+});
+
+test('embedded base-media jobを候補別の同一byteへ投影できる', async () => {
+  const job = buildDistantConnectionRenderAdapterJobV002(await jobInput());
+  for (const candidate of job.candidates) {
+    const bytes = serializePresentationBaseMediaBuildJobProjectionV002(candidate.baseMediaBuildJob);
+    assert.deepEqual(JSON.parse(bytes.toString('utf8')), candidate.baseMediaBuildJob);
+    assert.deepEqual(bytes, serializePresentationBaseMediaBuildJobProjectionV002(
+      candidate.baseMediaBuildJob
+    ));
+  }
+});
+
+test('同一inode・同一SHAの正式hard linkだけを実行pathへ投影する', async () => {
+  const adapterJob = buildDistantConnectionRenderAdapterJobV002(await jobInput());
+  const verificationPath =
+    'evals/clip_composition/outputs/work-distant-connection-source-video-hardlink-ymUsGrT6EaA-v001/hardlink-verification-v001.json';
+  const verificationBytes = await read(verificationPath);
+  const formalJob = {
+    ...adapterJob.candidates[0].baseMediaBuildJob,
+    sourceArtifact: {
+      ...adapterJob.candidates[0].baseMediaBuildJob.sourceArtifact,
+      path: 'evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4'
+    }
+  };
+  const projected = buildPresentationBaseMediaExecutionJobProjectionV002({
+    formalJob,
+    hardlinkVerificationPath: verificationPath,
+    hardlinkVerificationBytes: verificationBytes,
+    expectedHardlinkVerificationSha256: sha(verificationBytes),
+    executionSourcePath: executionSourceVideoPath,
+    outputDirectory:
+      'evals/clip_composition/outputs/presentation/base-media/distant-connection-hardlink-test-v002'
+  });
+  assert.equal(projected.job.sourceArtifact.path, executionSourceVideoPath);
+  assert.equal(projected.job.sourceArtifact.fileSha256, sourceVideoSha);
+  assert.equal(projected.hardlinkVerificationBinding.fileSha256, sha(verificationBytes));
+  const changed = JSON.parse(verificationBytes.toString('utf8'));
+  changed.target.inode = 'different';
+  const changedBytes = jsonBytes(changed);
+  assert.throws(() => buildPresentationBaseMediaExecutionJobProjectionV002({
+    formalJob,
+    hardlinkVerificationPath: verificationPath,
+    hardlinkVerificationBytes: changedBytes,
+    expectedHardlinkVerificationSha256: sha(changedBytes),
+    executionSourcePath: executionSourceVideoPath,
+    outputDirectory: projected.job.outputDirectory
+  }), DistantConnectionRenderAdapterErrorV002);
 });
 
 test('余分fieldとschema外値を拒否する', async () => {

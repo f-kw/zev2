@@ -46,6 +46,15 @@ export type PresentationBaseMediaBuildJobProjectionV002 = {
   outputDirectory: string;
 };
 
+export type BuildPresentationBaseMediaExecutionJobProjectionV002Input = {
+  formalJob: PresentationBaseMediaBuildJobProjectionV002;
+  hardlinkVerificationPath: string;
+  hardlinkVerificationBytes: Uint8Array;
+  expectedHardlinkVerificationSha256: string;
+  executionSourcePath: string;
+  outputDirectory: string;
+};
+
 export type DistantConnectionRenderAdapterJobV002 = {
   schemaVersion: typeof DISTANT_CONNECTION_RENDER_ADAPTER_JOB_SCHEMA_V002;
   jobId: string;
@@ -491,4 +500,84 @@ export async function writeDistantConnectionRenderAdapterJobV002(input: {
   const absolute = path.join(input.workspaceRoot, input.outputPath);
   await mkdir(path.dirname(absolute), {recursive: true});
   await writeFile(absolute, serializeDistantConnectionRenderAdapterJobV002(input.job), {flag: 'wx'});
+}
+
+export function serializePresentationBaseMediaBuildJobProjectionV002(
+  job: PresentationBaseMediaBuildJobProjectionV002
+): Buffer {
+  assertBaseMediaJob(job, '候補別base-media build job');
+  return Buffer.from(`${JSON.stringify(job, null, 2)}\n`, 'utf8');
+}
+
+export function buildPresentationBaseMediaExecutionJobProjectionV002(
+  input: BuildPresentationBaseMediaExecutionJobProjectionV002Input
+): {
+  job: PresentationBaseMediaBuildJobProjectionV002;
+  hardlinkVerificationBinding: Binding;
+} {
+  assertBaseMediaJob(input.formalJob, 'formal base-media build job');
+  const verificationSha = exactSha(
+    input.hardlinkVerificationBytes,
+    input.expectedHardlinkVerificationSha256,
+    '元動画hard link検証証拠'
+  );
+  const verification = parse(input.hardlinkVerificationBytes, '元動画hard link検証証拠');
+  if (!exactKeys(verification, [
+    'schemaVersion', 'sourceVideoId', 'source', 'target', 'checks'
+  ])
+    || verification.schemaVersion
+      !== 'distant-connection-source-video-hardlink-verification-v001'
+    || !isRecord(verification.source)
+    || !isRecord(verification.target)
+    || !isRecord(verification.checks)
+    || verification.source.path !== input.formalJob.sourceArtifact.path
+    || verification.source.fileSha256 !== input.formalJob.sourceArtifact.fileSha256
+    || verification.target.path !== input.executionSourcePath
+    || verification.target.fileSha256 !== input.formalJob.sourceArtifact.fileSha256
+    || verification.source.device !== verification.target.device
+    || verification.source.inode !== verification.target.inode
+    || verification.source.sizeBytes !== verification.target.sizeBytes
+    || verification.checks.sourcePreserved !== true
+    || verification.checks.targetCreatedAsHardLink !== true
+    || verification.checks.sameDevice !== true
+    || verification.checks.sameInode !== true
+    || verification.checks.sameFileSha256 !== true
+    || verification.checks.sameSize !== true
+    || verification.checks.physicalCopyCreated !== false) {
+    fail('元動画hard link検証証拠がformal jobと一致しません');
+  }
+  const job: PresentationBaseMediaBuildJobProjectionV002 = {
+    ...input.formalJob,
+    sourceArtifact: {...input.formalJob.sourceArtifact, path: input.executionSourcePath},
+    outputDirectory: input.outputDirectory
+  };
+  assertBaseMediaJob(job, '実行用base-media build job');
+  return {
+    job,
+    hardlinkVerificationBinding: {
+      path: input.hardlinkVerificationPath,
+      schemaVersion: verification.schemaVersion as string,
+      fileSha256: verificationSha
+    }
+  };
+}
+
+export async function writePresentationBaseMediaBuildJobProjectionsV002(input: {
+  workspaceRoot: string;
+  outputRoot: string;
+  job: DistantConnectionRenderAdapterJobV002;
+}): Promise<Array<{candidateId: string; path: string; fileSha256: string}>> {
+  assertDistantConnectionRenderAdapterJobV002(input.job);
+  const outputs = [];
+  for (const candidate of input.job.candidates) {
+    const outputPath = path.join(
+      input.outputRoot, 'base-media-jobs', candidate.candidateId, 'base-media-build-job-v001.json'
+    );
+    const bytes = serializePresentationBaseMediaBuildJobProjectionV002(candidate.baseMediaBuildJob);
+    const absolute = path.join(input.workspaceRoot, outputPath);
+    await mkdir(path.dirname(absolute), {recursive: true});
+    await writeFile(absolute, bytes, {flag: 'wx'});
+    outputs.push({candidateId: candidate.candidateId, path: outputPath, fileSha256: sha256(bytes)});
+  }
+  return outputs;
 }
