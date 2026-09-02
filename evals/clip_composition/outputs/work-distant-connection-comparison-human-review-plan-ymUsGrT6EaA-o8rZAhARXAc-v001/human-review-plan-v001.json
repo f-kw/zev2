@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "distant-connection-comparison-human-review-plan-v001",
+  "experimentId": "distant-connection-cross-stream-comparison-20260902-v001",
+  "sources": [
+    {
+      "sourceRole": "new-stream",
+      "sourceVideoId": "o8rZAhARXAc",
+      "candidateResponseBinding": {
+        "path": "evals/clip_composition/outputs/work-distant-connection-comparison-luna-b6-candidates-o8rZAhARXAc-v001/candidate-response-v001.json",
+        "schemaVersion": "distant-connection-comparison-candidate-response-v001",
+        "fileSha256": "301919134213a54783540784c537553fc283874cf676f44064165975cec3f089"
+      },
+      "candidateArrayStatus": "fixed-before-human-review",
+      "candidateCount": 7,
+      "primaryTargetRule": {
+        "kind": "formal-candidate-array-order-prefix",
+        "count": 5,
+        "rankingOrReranking": "none"
+      },
+      "supplementaryTargetRule": {
+        "kind": "formal-candidate-array-order-remainder",
+        "metricAggregation": "excluded-from-primary-A-to-E-except-known-good-rediscovery"
+      },
+      "candidateTargets": [
+        {
+          "candidateId": "candidate-770d2f9e783b663421151e6b9ddcf091a2bb2d82a2ae269ffd261be35aa59520",
+          "candidateOrdinal": 1,
+          "reviewScope": "primary"
+        },
+        {
+          "candidateId": "candidate-158d269211dfcf7b84d2dcb311eb845b7b7ca492e0d1c964c2ee99d4227a7f39",
+          "candidateOrdinal": 2,
+          "reviewScope": "primary"
+        },
+        {
+          "candidateId": "candidate-d4466ed1d34fbaa1c4328afb71bcdc2c5d12af459a6f4a316229fb104608cca1",
+          "candidateOrdinal": 3,
+          "reviewScope": "primary"
+        },
+        {
+          "candidateId": "candidate-0e8f81e3d107d61a6c11387069ec3fb28a262c01f960bedd7505898c8b7fb8e6",
+          "candidateOrdinal": 4,
+          "reviewScope": "primary"
+        },
+        {
+          "candidateId": "candidate-aa201a9a020bdcc21301dc3ed332c0596a8d0cf6754b52df09ad9d76b5e6e0ae",
+          "candidateOrdinal": 5,
+          "reviewScope": "primary"
+        },
+        {
+          "candidateId": "candidate-a32e5044ed7b1135ff23bae23f064111171af8f6f591ccdb7e85a2f455707c6d",
+          "candidateOrdinal": 6,
+          "reviewScope": "supplementary"
+        },
+        {
+          "candidateId": "candidate-7caea97694cc62115214a91a612fc09979a310937450921a257b18d172912ee2",
+          "candidateOrdinal": 7,
+          "reviewScope": "supplementary"
+        }
+      ]
+    },
+    {
+      "sourceRole": "old-stream",
+      "sourceVideoId": "ymUsGrT6EaA",
+      "exactRequestBinding": {
+        "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-ymUsGrT6EaA-v001/exact-request-v001.json",
+        "schemaVersion": "openai-responses-distant-connection-comparison-request-v001",
+        "fileSha256": "8b1a4eaa3b0844f451c4eef611310b1b4e1fa3fd4541f074a85cdcb09b273b08"
+      },
+      "candidateArrayStatus": "pending-single-authorized-b6",
+      "primaryTargetRule": {
+        "kind": "formal-candidate-array-order-prefix",
+        "count": 5,
+        "rankingOrReranking": "none"
+      },
+      "supplementaryTargetRule": {
+        "kind": "formal-candidate-array-order-remainder",
+        "metricAggregation": "excluded-from-primary-A-to-E-except-known-good-rediscovery"
+      },
+      "candidateTargets": []
+    }
+  ],
+  "disclosureSequence": [
+    {
+      "stage": "second-only",
+      "visible": [
+        "second-part-review-mp4"
+      ],
+      "hidden": [
+        "first-part-content",
+        "first-then-second-review-mp4",
+        "luna-reason"
+      ],
+      "requiredObservation": "second-part-understanding"
+    },
+    {
+      "stage": "first-then-second",
+      "visible": [
+        "first-then-second-review-mp4"
+      ],
+      "hidden": [
+        "luna-reason"
+      ],
+      "requiredObservation": "concrete-meaning-increment"
+    },
+    {
+      "stage": "luna-reason",
+      "visible": [
+        "luna-added-understanding"
+      ],
+      "hidden": [],
+      "requiredObservation": "reason-disclosure-assessment"
+    }
+  ],
+  "criteria": {
+    "A": {
+      "name": "known-good-rediscovery",
+      "appliesTo": "old-stream",
+      "knownGoodReference": "camera-fear-escalation",
+      "successLabelExposedToLuna": false,
+      "aggregation": "any-human-confirmed-equivalent-in-formal-candidate-array"
+    },
+    "B": {
+      "name": "general-introduction",
+      "definition": "前半がゲーム名・ジャンル・一般的評判などの紹介だけで、特定の出来事・人物・物・判断・予告を含まない候補か。",
+      "aggregation": "primary-count-and-exact-ratio"
+    },
+    "C": {
+      "name": "concrete-meaning-increment",
+      "definition": "後半単独の理解を先に記録し、前半→後半を見た後に、後半の読みが具体的にどう変わったかを記録できる場合だけpassとする。",
+      "aggregation": "primary-pass-count-and-exact-ratio"
+    },
+    "D": {
+      "name": "top-five-connection-and-payoff",
+      "definition": "正式candidate配列先頭5件のうち、意味的接続と回収の強さがどちらもpassの件数を0〜5で数える。",
+      "aggregation": "primary-both-pass-count-zero-to-five"
+    },
+    "E": {
+      "name": "want-to-make",
+      "definition": "人間が遠方接続ショートとして実際に動画化したいかをpass/failで記録する。",
+      "role": "supplementary-metric",
+      "aggregation": "primary-pass-count-and-exact-ratio"
+    }
+  },
+  "knownGoodReferenceEvidence": {
+    "sourceVideoId": "ymUsGrT6EaA",
+    "candidateId": "camera-fear-escalation",
+    "humanVerdict": "accepted-after-intervalization-improvement",
+    "evidenceBindings": {
+      "humanReviewResult": {
+        "path": "evals/clip_composition/outputs/work-distant-connection-human-review-result-ymUsGrT6EaA-v002/human-review-result-v002.json",
+        "schemaVersion": "distant-connection-human-review-result-v002",
+        "fileSha256": "fac03dc688f28e64831a7b8241cec560313cf7da3aacc585b30bf8efab270a92"
+      },
+      "candidateResponse": {
+        "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/candidate-response-v001.json",
+        "schemaVersion": "distant-connection-luna-response-v001",
+        "fileSha256": "8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d"
+      },
+      "intervalizationImprovementResult": {
+        "path": "evals/clip_composition/outputs/presentation/distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001/video-intervalization-improvement-result-v001.json",
+        "schemaVersion": "distant-connection-video-intervalization-improvement-result-v001",
+        "fileSha256": "b1a6c1e4233aaabf447ec5ab3ca7d14657bd5a1dfb09a18557c11752fdd85dfe"
+      }
+    },
+    "modelInputUse": "forbidden",
+    "modelInputNegativeAudit": {
+      "exactRequestBinding": {
+        "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-ymUsGrT6EaA-v001/exact-request-v001.json",
+        "schemaVersion": "openai-responses-distant-connection-comparison-request-v001",
+        "fileSha256": "8b1a4eaa3b0844f451c4eef611310b1b4e1fa3fd4541f074a85cdcb09b273b08"
+      },
+      "auditedFields": [
+        "instructions",
+        "input"
+      ],
+      "forbiddenStrings": [
+        {
+          "kind": "known-good-candidate-id",
+          "value": "camera-fear-escalation"
+        },
+        {
+          "kind": "known-good-human-review-path",
+          "value": "evals/clip_composition/outputs/work-distant-connection-human-review-result-ymUsGrT6EaA-v002/human-review-result-v002.json"
+        },
+        {
+          "kind": "known-good-human-review-sha256",
+          "value": "fac03dc688f28e64831a7b8241cec560313cf7da3aacc585b30bf8efab270a92"
+        },
+        {
+          "kind": "known-good-candidate-response-path",
+          "value": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/candidate-response-v001.json"
+        },
+        {
+          "kind": "known-good-candidate-response-sha256",
+          "value": "8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d"
+        },
+        {
+          "kind": "known-good-intervalization-result-path",
+          "value": "evals/clip_composition/outputs/presentation/distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001/video-intervalization-improvement-result-v001.json"
+        },
+        {
+          "kind": "known-good-intervalization-result-sha256",
+          "value": "b1a6c1e4233aaabf447ec5ab3ca7d14657bd5a1dfb09a18557c11752fdd85dfe"
+        },
+        {
+          "kind": "known-good-human-verdict-label",
+          "value": "accepted-after-intervalization-improvement"
+        },
+        {
+          "kind": "known-good-human-classification-label",
+          "value": "accepted-distant-connection-example"
+        },
+        {
+          "kind": "known-good-criterion-label",
+          "value": "known-good-rediscovery"
+        }
+      ],
+      "allAbsent": true
+    }
+  },
+  "diagnostics": {
+    "connectionTypes": [
+      "予告→実現",
+      "断言→裏切り",
+      "設置→使用",
+      "認識→訂正",
+      "その他"
+    ],
+    "temporalDistanceUnit": "milliseconds",
+    "secondPartCommentIncreaseOrigin": "boolean",
+    "requiredVideoDurationUnit": "milliseconds",
+    "diagnosticOnly": true
+  },
+  "comparisonPrinciple": {
+    "sameHumanProcedureForBothSources": true,
+    "candidateOrderOwner": "formal-candidate-artifact",
+    "coefficients": "none",
+    "rankingOrReranking": "none",
+    "explorationChangeAfterSeeingNewCandidates": "forbidden-until-comparison-complete"
+  }
+}
