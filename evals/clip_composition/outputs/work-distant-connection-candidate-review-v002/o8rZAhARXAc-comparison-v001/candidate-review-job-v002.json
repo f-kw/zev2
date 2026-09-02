@@ -1,0 +1,959 @@
+{
+  "schemaVersion": "distant-connection-candidate-review-job-v002",
+  "jobId": "distant-connection-comparison-o8rZAhARXAc-review-job-v002",
+  "artifactClassification": "candidate-human-review-artifact",
+  "sourceVideoId": "o8rZAhARXAc",
+  "sourceProjectionBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/source-projection-v001.json",
+    "schemaVersion": "distant-connection-candidate-review-source-projection-v001",
+    "fileSha256": "97149251b4b0610a253aef2b43a80c8d31813643a7471486061a631efc782295"
+  },
+  "candidateResponseBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-comparison-luna-b6-candidates-o8rZAhARXAc-v001/candidate-response-v001.json",
+    "schemaVersion": "distant-connection-comparison-candidate-response-v001",
+    "fileSha256": "301919134213a54783540784c537553fc283874cf676f44064165975cec3f089"
+  },
+  "sourceVideoBinding": {
+    "path": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+    "fileSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06",
+    "measuredDurationMs": 11898441
+  },
+  "candidates": [
+    {
+      "candidateId": "candidate-770d2f9e783b663421151e6b9ddcf091a2bb2d82a2ae269ffd261be35aa59520",
+      "candidateOrdinal": 1,
+      "reviewStages": {
+        "secondOnly": {
+          "stage": "second-only",
+          "evaluatedParts": [
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-000390",
+                "common-utterance-000391",
+                "common-utterance-000392"
+              ],
+              "selectedOrdinals": [
+                390,
+                391,
+                392
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 4350706,
+                "sourceEndMs": 4439900
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-01/second-only-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "4350.706",
+              "-to",
+              "4439.900",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0]concat=n=1:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-01/second-only-v001.mp4"
+            ]
+          }
+        },
+        "firstThenSecond": {
+          "stage": "first-then-second",
+          "evaluatedParts": [
+            {
+              "part": "first",
+              "selectedUtteranceIds": [
+                "common-utterance-000256",
+                "common-utterance-000257"
+              ],
+              "selectedOrdinals": [
+                256,
+                257
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 2623306,
+                "sourceEndMs": 2668770
+              }
+            },
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-000390",
+                "common-utterance-000391",
+                "common-utterance-000392"
+              ],
+              "selectedOrdinals": [
+                390,
+                391,
+                392
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 4350706,
+                "sourceEndMs": 4439900
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-01/first-then-second-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "2623.306",
+              "-to",
+              "2668.770",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-ss",
+              "4350.706",
+              "-to",
+              "4439.900",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-01/first-then-second-v001.mp4"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "candidateId": "candidate-158d269211dfcf7b84d2dcb311eb845b7b7ca492e0d1c964c2ee99d4227a7f39",
+      "candidateOrdinal": 2,
+      "reviewStages": {
+        "secondOnly": {
+          "stage": "second-only",
+          "evaluatedParts": [
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-000387",
+                "common-utterance-000388",
+                "common-utterance-000389"
+              ],
+              "selectedOrdinals": [
+                387,
+                388,
+                389
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 4260438,
+                "sourceEndMs": 4348170
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-02/second-only-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "4260.438",
+              "-to",
+              "4348.170",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0]concat=n=1:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-02/second-only-v001.mp4"
+            ]
+          }
+        },
+        "firstThenSecond": {
+          "stage": "first-then-second",
+          "evaluatedParts": [
+            {
+              "part": "first",
+              "selectedUtteranceIds": [
+                "common-utterance-000373"
+              ],
+              "selectedOrdinals": [
+                373
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 4052862,
+                "sourceEndMs": 4071314
+              }
+            },
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-000387",
+                "common-utterance-000388",
+                "common-utterance-000389"
+              ],
+              "selectedOrdinals": [
+                387,
+                388,
+                389
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 4260438,
+                "sourceEndMs": 4348170
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-02/first-then-second-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "4052.862",
+              "-to",
+              "4071.314",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-ss",
+              "4260.438",
+              "-to",
+              "4348.170",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-02/first-then-second-v001.mp4"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "candidateId": "candidate-d4466ed1d34fbaa1c4328afb71bcdc2c5d12af459a6f4a316229fb104608cca1",
+      "candidateOrdinal": 3,
+      "reviewStages": {
+        "secondOnly": {
+          "stage": "second-only",
+          "evaluatedParts": [
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-000940",
+                "common-utterance-000941",
+                "common-utterance-000942",
+                "common-utterance-000946"
+              ],
+              "selectedOrdinals": [
+                940,
+                941,
+                942,
+                946
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 8497012,
+                "sourceEndMs": 8515890
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-03/second-only-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "8497.012",
+              "-to",
+              "8515.890",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0]concat=n=1:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-03/second-only-v001.mp4"
+            ]
+          }
+        },
+        "firstThenSecond": {
+          "stage": "first-then-second",
+          "evaluatedParts": [
+            {
+              "part": "first",
+              "selectedUtteranceIds": [
+                "common-utterance-000393"
+              ],
+              "selectedOrdinals": [
+                393
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 4445458,
+                "sourceEndMs": 4466549
+              }
+            },
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-000940",
+                "common-utterance-000941",
+                "common-utterance-000942",
+                "common-utterance-000946"
+              ],
+              "selectedOrdinals": [
+                940,
+                941,
+                942,
+                946
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 8497012,
+                "sourceEndMs": 8515890
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-03/first-then-second-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "4445.458",
+              "-to",
+              "4466.549",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-ss",
+              "8497.012",
+              "-to",
+              "8515.890",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-03/first-then-second-v001.mp4"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "candidateId": "candidate-0e8f81e3d107d61a6c11387069ec3fb28a262c01f960bedd7505898c8b7fb8e6",
+      "candidateOrdinal": 4,
+      "reviewStages": {
+        "secondOnly": {
+          "stage": "second-only",
+          "evaluatedParts": [
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-001261",
+                "common-utterance-001262",
+                "common-utterance-001263"
+              ],
+              "selectedOrdinals": [
+                1261,
+                1262,
+                1263
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 11083154,
+                "sourceEndMs": 11106471
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-04/second-only-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "11083.154",
+              "-to",
+              "11106.471",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0]concat=n=1:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-04/second-only-v001.mp4"
+            ]
+          }
+        },
+        "firstThenSecond": {
+          "stage": "first-then-second",
+          "evaluatedParts": [
+            {
+              "part": "first",
+              "selectedUtteranceIds": [
+                "common-utterance-000493"
+              ],
+              "selectedOrdinals": [
+                493
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 5079483,
+                "sourceEndMs": 5085406
+              }
+            },
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-001261",
+                "common-utterance-001262",
+                "common-utterance-001263"
+              ],
+              "selectedOrdinals": [
+                1261,
+                1262,
+                1263
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 11083154,
+                "sourceEndMs": 11106471
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-04/first-then-second-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "5079.483",
+              "-to",
+              "5085.406",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-ss",
+              "11083.154",
+              "-to",
+              "11106.471",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-04/first-then-second-v001.mp4"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "candidateId": "candidate-aa201a9a020bdcc21301dc3ed332c0596a8d0cf6754b52df09ad9d76b5e6e0ae",
+      "candidateOrdinal": 5,
+      "reviewStages": {
+        "secondOnly": {
+          "stage": "second-only",
+          "evaluatedParts": [
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-000908",
+                "common-utterance-000911",
+                "common-utterance-000919",
+                "common-utterance-000920",
+                "common-utterance-000921"
+              ],
+              "selectedOrdinals": [
+                908,
+                911,
+                919,
+                920,
+                921
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 8281210,
+                "sourceEndMs": 8305218
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-05/second-only-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "8281.210",
+              "-to",
+              "8305.218",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0]concat=n=1:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-05/second-only-v001.mp4"
+            ]
+          }
+        },
+        "firstThenSecond": {
+          "stage": "first-then-second",
+          "evaluatedParts": [
+            {
+              "part": "first",
+              "selectedUtteranceIds": [
+                "common-utterance-000752"
+              ],
+              "selectedOrdinals": [
+                752
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 6965498,
+                "sourceEndMs": 6969742
+              }
+            },
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-000908",
+                "common-utterance-000911",
+                "common-utterance-000919",
+                "common-utterance-000920",
+                "common-utterance-000921"
+              ],
+              "selectedOrdinals": [
+                908,
+                911,
+                919,
+                920,
+                921
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 8281210,
+                "sourceEndMs": 8305218
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-05/first-then-second-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "6965.498",
+              "-to",
+              "6969.742",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-ss",
+              "8281.210",
+              "-to",
+              "8305.218",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-05/first-then-second-v001.mp4"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "candidateId": "candidate-a32e5044ed7b1135ff23bae23f064111171af8f6f591ccdb7e85a2f455707c6d",
+      "candidateOrdinal": 6,
+      "reviewStages": {
+        "secondOnly": {
+          "stage": "second-only",
+          "evaluatedParts": [
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-001197",
+                "common-utterance-001202",
+                "common-utterance-001205"
+              ],
+              "selectedOrdinals": [
+                1197,
+                1202,
+                1205
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 10572750,
+                "sourceEndMs": 10687940
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-06/second-only-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "10572.750",
+              "-to",
+              "10687.940",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0]concat=n=1:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-06/second-only-v001.mp4"
+            ]
+          }
+        },
+        "firstThenSecond": {
+          "stage": "first-then-second",
+          "evaluatedParts": [
+            {
+              "part": "first",
+              "selectedUtteranceIds": [
+                "common-utterance-000857",
+                "common-utterance-000858"
+              ],
+              "selectedOrdinals": [
+                857,
+                858
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 7981290,
+                "sourceEndMs": 7996639
+              }
+            },
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-001197",
+                "common-utterance-001202",
+                "common-utterance-001205"
+              ],
+              "selectedOrdinals": [
+                1197,
+                1202,
+                1205
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 10572750,
+                "sourceEndMs": 10687940
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-06/first-then-second-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "7981.290",
+              "-to",
+              "7996.639",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-ss",
+              "10572.750",
+              "-to",
+              "10687.940",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-06/first-then-second-v001.mp4"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "candidateId": "candidate-7caea97694cc62115214a91a612fc09979a310937450921a257b18d172912ee2",
+      "candidateOrdinal": 7,
+      "reviewStages": {
+        "secondOnly": {
+          "stage": "second-only",
+          "evaluatedParts": [
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-001262",
+                "common-utterance-001263"
+              ],
+              "selectedOrdinals": [
+                1262,
+                1263
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 11100566,
+                "sourceEndMs": 11106471
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-07/second-only-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "11100.566",
+              "-to",
+              "11106.471",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0]concat=n=1:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-07/second-only-v001.mp4"
+            ]
+          }
+        },
+        "firstThenSecond": {
+          "stage": "first-then-second",
+          "evaluatedParts": [
+            {
+              "part": "first",
+              "selectedUtteranceIds": [
+                "common-utterance-001156"
+              ],
+              "selectedOrdinals": [
+                1156
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 10441547,
+                "sourceEndMs": 10444708
+              }
+            },
+            {
+              "part": "second",
+              "selectedUtteranceIds": [
+                "common-utterance-001262",
+                "common-utterance-001263"
+              ],
+              "selectedOrdinals": [
+                1262,
+                1263
+              ],
+              "sourceInterval": {
+                "sourceStartMs": 11100566,
+                "sourceEndMs": 11106471
+              }
+            }
+          ],
+          "output": {
+            "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-07/first-then-second-v001.mp4",
+            "container": "mp4"
+          },
+          "ffmpeg": {
+            "executable": "ffmpeg",
+            "args": [
+              "-hide_banner",
+              "-nostdin",
+              "-n",
+              "-ss",
+              "10441.547",
+              "-to",
+              "10444.708",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-ss",
+              "11100.566",
+              "-to",
+              "11106.471",
+              "-i",
+              "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+              "-filter_complex",
+              "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]",
+              "-map",
+              "[outv]",
+              "-map",
+              "[outa]",
+              "-c:v",
+              "libx264",
+              "-c:a",
+              "aac",
+              "-movflags",
+              "+faststart",
+              "evals/clip_composition/outputs/work-distant-connection-candidate-review-v002/o8rZAhARXAc-comparison-v001/candidates/candidate-07/first-then-second-v001.mp4"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "statusFlags": {
+    "formalSelection": false,
+    "formalRenderer": false,
+    "completedShort": false,
+    "technicalQcCompleted": false
+  },
+  "responsibilityPrinciple": "本成果物は正式selection前の比較候補を人間が段階確認するため、正式候補が選んだ発話の無拡張区間を後半のみ、および前半から後半の順で元映像・元音声へ決定的に投影する。候補探索、候補採否、区間拡張、字幕、正式renderer、完成short、技術QCを所有しない。"
+}

@@ -1,0 +1,312 @@
+{
+  "schemaVersion": "distant-connection-candidate-review-source-projection-v001",
+  "projectionId": "distant-connection-comparison-o8rZAhARXAc-review-source-v001",
+  "sourceVideoId": "o8rZAhARXAc",
+  "sourceBindings": {
+    "candidateResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-luna-b6-candidates-o8rZAhARXAc-v001/candidate-response-v001.json",
+      "schemaVersion": "distant-connection-comparison-candidate-response-v001",
+      "fileSha256": "301919134213a54783540784c537553fc283874cf676f44064165975cec3f089"
+    },
+    "commonUtterance": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/common-utterance-artifact-v001.json",
+      "schemaVersion": "distant-connection-common-utterance-artifact-v001",
+      "fileSha256": "ebc394fdc848d4d89d5de168eeeac191e07d2aa53d11238a14a3973c53995aa2"
+    },
+    "sourcePackage": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/source-package-v001.json",
+      "schemaVersion": "distant-connection-comparison-source-package-v001",
+      "fileSha256": "6a5cb3249d28f8406e77e4d3812008317a97a873ae310052ffa51fe3fbf560d3"
+    },
+    "sourceReuse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/source-video-transcript-reuse-artifact-v001.json",
+      "schemaVersion": "source-video-transcript-reuse-artifact-v001",
+      "fileSha256": "89823e051608b83fdbfe2aca2e65e306514e300f26a822dc37e4399fd5940948"
+    },
+    "indexedModelInput": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/indexed-model-input-v001.json",
+      "schemaVersion": "distant-connection-comparison-indexed-model-input-v001",
+      "fileSha256": "fad0fd140dbdfeded1266b3dae342e8ebfce211e861f3f92a9f7477734063d4f"
+    },
+    "rawResponse": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-luna-b6-candidates-o8rZAhARXAc-v001/attempt-0001/raw-response-v001.json",
+      "schemaVersion": "openai-responses-distant-connection-comparison-raw-v001",
+      "fileSha256": "fa9d4e9caaff607ffb24f6b8f785f4efe6b7eaea61264d764e2ca094c8b0901e"
+    },
+    "sourceVideo": {
+      "path": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+      "fileSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06",
+      "measuredDurationMs": 11898441
+    }
+  },
+  "candidates": [
+    {
+      "candidateId": "candidate-770d2f9e783b663421151e6b9ddcf091a2bb2d82a2ae269ffd261be35aa59520",
+      "candidateOrdinal": 1,
+      "anchorId": "comparison-anchor-000095",
+      "firstPart": {
+        "part": "first",
+        "selectedUtteranceIds": [
+          "common-utterance-000256",
+          "common-utterance-000257"
+        ],
+        "selectedOrdinals": [
+          256,
+          257
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 2623306,
+          "sourceEndMs": 2668770
+        }
+      },
+      "secondPart": {
+        "part": "second",
+        "selectedUtteranceIds": [
+          "common-utterance-000390",
+          "common-utterance-000391",
+          "common-utterance-000392"
+        ],
+        "selectedOrdinals": [
+          390,
+          391,
+          392
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 4350706,
+          "sourceEndMs": 4439900
+        }
+      },
+      "addedUnderstanding": "フブちゃんにオリジナル変化球を覚えさせると決めた迷いが、後半で実際にスーパーノヴァを習得させる実行として回収される。",
+      "direction": "future"
+    },
+    {
+      "candidateId": "candidate-158d269211dfcf7b84d2dcb311eb845b7b7ca492e0d1c964c2ee99d4227a7f39",
+      "candidateOrdinal": 2,
+      "anchorId": "comparison-anchor-000168",
+      "firstPart": {
+        "part": "first",
+        "selectedUtteranceIds": [
+          "common-utterance-000373"
+        ],
+        "selectedOrdinals": [
+          373
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 4052862,
+          "sourceEndMs": 4071314
+        }
+      },
+      "secondPart": {
+        "part": "second",
+        "selectedUtteranceIds": [
+          "common-utterance-000387",
+          "common-utterance-000388",
+          "common-utterance-000389"
+        ],
+        "selectedOrdinals": [
+          387,
+          388,
+          389
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 4260438,
+          "sourceEndMs": 4348170
+        }
+      },
+      "addedUnderstanding": "カーブは重さより変化を重視して重さを下げるという方針が、投票を経て実際に重さを削った仕様を選ぶ結果につながる。",
+      "direction": "future"
+    },
+    {
+      "candidateId": "candidate-d4466ed1d34fbaa1c4328afb71bcdc2c5d12af459a6f4a316229fb104608cca1",
+      "candidateOrdinal": 3,
+      "anchorId": "comparison-anchor-000184",
+      "firstPart": {
+        "part": "first",
+        "selectedUtteranceIds": [
+          "common-utterance-000393"
+        ],
+        "selectedOrdinals": [
+          393
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 4445458,
+          "sourceEndMs": 4466549
+        }
+      },
+      "secondPart": {
+        "part": "second",
+        "selectedUtteranceIds": [
+          "common-utterance-000940",
+          "common-utterance-000941",
+          "common-utterance-000942",
+          "common-utterance-000946"
+        ],
+        "selectedOrdinals": [
+          940,
+          941,
+          942,
+          946
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 8497012,
+          "sourceEndMs": 8515890
+        }
+      },
+      "addedUnderstanding": "覚えたばかりのスーパーノヴァをキレキレだと喜んだ直後ではなく、後の試合でその球が打たれ、失点につながる意外な反転が起きる。",
+      "direction": "future"
+    },
+    {
+      "candidateId": "candidate-0e8f81e3d107d61a6c11387069ec3fb28a262c01f960bedd7505898c8b7fb8e6",
+      "candidateOrdinal": 4,
+      "anchorId": "comparison-anchor-000270",
+      "firstPart": {
+        "part": "first",
+        "selectedUtteranceIds": [
+          "common-utterance-000493"
+        ],
+        "selectedOrdinals": [
+          493
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 5079483,
+          "sourceEndMs": 5085406
+        }
+      },
+      "secondPart": {
+        "part": "second",
+        "selectedUtteranceIds": [
+          "common-utterance-001261",
+          "common-utterance-001262",
+          "common-utterance-001263"
+        ],
+        "selectedOrdinals": [
+          1261,
+          1262,
+          1263
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 11083154,
+          "sourceEndMs": 11106471
+        }
+      },
+      "addedUnderstanding": "甲子園で勝てば選手たちを許すという宣言が、長い接戦の末に実際の勝利として回収される。",
+      "direction": "future"
+    },
+    {
+      "candidateId": "candidate-aa201a9a020bdcc21301dc3ed332c0596a8d0cf6754b52df09ad9d76b5e6e0ae",
+      "candidateOrdinal": 5,
+      "anchorId": "comparison-anchor-000421",
+      "firstPart": {
+        "part": "first",
+        "selectedUtteranceIds": [
+          "common-utterance-000752"
+        ],
+        "selectedOrdinals": [
+          752
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 6965498,
+          "sourceEndMs": 6969742
+        }
+      },
+      "secondPart": {
+        "part": "second",
+        "selectedUtteranceIds": [
+          "common-utterance-000908",
+          "common-utterance-000911",
+          "common-utterance-000919",
+          "common-utterance-000920",
+          "common-utterance-000921"
+        ],
+        "selectedOrdinals": [
+          908,
+          911,
+          919,
+          920,
+          921
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 8281210,
+          "sourceEndMs": 8305218
+        }
+      },
+      "addedUnderstanding": "向かい風なら打球が飛びにくいという判断が、引っ張った打球が入りそうで入らず本塁打にならない場面で具体的に現れる。",
+      "direction": "future"
+    },
+    {
+      "candidateId": "candidate-a32e5044ed7b1135ff23bae23f064111171af8f6f591ccdb7e85a2f455707c6d",
+      "candidateOrdinal": 6,
+      "anchorId": "comparison-anchor-000488",
+      "firstPart": {
+        "part": "first",
+        "selectedUtteranceIds": [
+          "common-utterance-000857",
+          "common-utterance-000858"
+        ],
+        "selectedOrdinals": [
+          857,
+          858
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 7981290,
+          "sourceEndMs": 7996639
+        }
+      },
+      "secondPart": {
+        "part": "second",
+        "selectedUtteranceIds": [
+          "common-utterance-001197",
+          "common-utterance-001202",
+          "common-utterance-001205"
+        ],
+        "selectedOrdinals": [
+          1197,
+          1202,
+          1205
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 10572750,
+          "sourceEndMs": 10687940
+        }
+      },
+      "addedUnderstanding": "天野の盗塁は危険だという迷いを越えて、後半ではリスクを取らないと勝てない局面で盗塁を選び、実際にセーフになる。",
+      "direction": "future"
+    },
+    {
+      "candidateId": "candidate-7caea97694cc62115214a91a612fc09979a310937450921a257b18d172912ee2",
+      "candidateOrdinal": 7,
+      "anchorId": "comparison-anchor-000601",
+      "firstPart": {
+        "part": "first",
+        "selectedUtteranceIds": [
+          "common-utterance-001156"
+        ],
+        "selectedOrdinals": [
+          1156
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 10441547,
+          "sourceEndMs": 10444708
+        }
+      },
+      "secondPart": {
+        "part": "second",
+        "selectedUtteranceIds": [
+          "common-utterance-001262",
+          "common-utterance-001263"
+        ],
+        "selectedOrdinals": [
+          1262,
+          1263
+        ],
+        "sourceInterval": {
+          "sourceStartMs": 11100566,
+          "sourceEndMs": 11106471
+        }
+      },
+      "addedUnderstanding": "ここで1点取れば勝てるという終盤の切迫した見通しが、その後の苦戦と最終的な勝利によって回収される。",
+      "direction": "future"
+    }
+  ],
+  "responsibilityPrinciple": "本成果物は正式selection前の比較候補を人間が段階確認するため、正式候補が選んだ発話の無拡張区間を後半のみ、および前半から後半の順で元映像・元音声へ決定的に投影する。候補探索、候補採否、区間拡張、字幕、正式renderer、完成short、技術QCを所有しない。"
+}
