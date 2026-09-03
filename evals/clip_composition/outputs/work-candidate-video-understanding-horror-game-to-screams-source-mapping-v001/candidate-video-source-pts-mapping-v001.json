@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "candidate-video-source-pts-mapping-v001",
+  "artifactId": "candidate-horror-game-to-screams-001-source-pts-mapping-v001",
+  "candidateId": "candidate-horror-game-to-screams-001",
+  "sourceVideoId": "ymUsGrT6EaA",
+  "evidenceBindings": {
+    "generationJob": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v001/candidate-horror-game-to-screams-001/candidate-review-job-v001.json",
+      "schemaVersion": "distant-connection-candidate-review-job-v001",
+      "fileSha256": "ee643a24f24e7deb6b2bf312a428aa93fa51a45372bc660652744051864b4812"
+    },
+    "candidateVideo": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-candidate-review-v001/candidate-horror-game-to-screams-001/candidate-review-v001.mp4",
+      "schemaVersion": "media-file-v001",
+      "fileSha256": "d2f6d8c3eceae5178703a01f3b8947ef3571219ab7d329af37c8a5569d875af0"
+    },
+    "sourceVideo": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "schemaVersion": "media-file-v001",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    }
+  },
+  "derivation": {
+    "generationCommand": {
+      "ffmpegExecutable": "ffmpeg",
+      "concatFilter": "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]",
+      "orderedParts": [
+        "first",
+        "second"
+      ],
+      "videoCodec": "libx264"
+    },
+    "candidateFrameEvidence": {
+      "timeBase": {
+        "numerator": 1,
+        "denominator": 15360
+      },
+      "frameCount": 790,
+      "firstFramePts": 0,
+      "lastFramePts": 202240,
+      "frameDurationPts": 256,
+      "nominalPtsDelta": 256,
+      "ptsDeltaDeviations": [
+        {
+          "currentFrameIndex": 357,
+          "previousPts": 91136,
+          "currentPts": 91648,
+          "deltaPts": 512
+        }
+      ]
+    },
+    "sourceFrameEvidence": {
+      "timeBase": {
+        "numerator": 1,
+        "denominator": 90000
+      },
+      "streamStartPts": 1440,
+      "frameDurationPts": 1500,
+      "parts": [
+        {
+          "part": "first",
+          "decoderFrameCount": 357,
+          "relativeFirstPts": 420,
+          "relativeLastPts": 534420,
+          "non1500PtsDeltaCount": 0
+        },
+        {
+          "part": "second",
+          "decoderFrameCount": 433,
+          "relativeFirstPts": 1470,
+          "relativeLastPts": 649470,
+          "non1500PtsDeltaCount": 0
+        }
+      ]
+    },
+    "closure": {
+      "decodedPartFrameCountSum": 790,
+      "candidateFrameCount": 790,
+      "spliceFrameIndex": 357,
+      "unmappedPtsDuration": 256
+    }
+  },
+  "mapping": {
+    "candidateTimeBase": {
+      "numerator": 1,
+      "denominator": 15360
+    },
+    "sourceTimeBase": {
+      "numerator": 1,
+      "denominator": 90000
+    },
+    "candidateTimelineStartPts": 0,
+    "candidateTimelineEndPtsExclusive": 202496,
+    "segments": [
+      {
+        "segmentId": "segment-0001",
+        "candidateFrameStartIndex": 0,
+        "candidateFrameEndIndexExclusive": 357,
+        "candidateStartPts": 0,
+        "candidateEndPtsExclusive": 91392,
+        "sourceFrameStartIndex": 14962,
+        "sourceFrameEndIndexExclusive": 15319,
+        "sourceStartPts": 22444440,
+        "sourceEndPtsExclusive": 22979940,
+        "sourceSelectionStartMs": 249378,
+        "sourceSelectionEndMs": 255324
+      },
+      {
+        "segmentId": "segment-0002",
+        "candidateFrameStartIndex": 357,
+        "candidateFrameEndIndexExclusive": 790,
+        "candidateStartPts": 91648,
+        "candidateEndPtsExclusive": 202496,
+        "sourceFrameStartIndex": 368066,
+        "sourceFrameEndIndexExclusive": 368499,
+        "sourceStartPts": 552100440,
+        "sourceEndPtsExclusive": 552749940,
+        "sourceSelectionStartMs": 6134433,
+        "sourceSelectionEndMs": 6141636
+      }
+    ],
+    "unmappedCandidatePts": [
+      {
+        "startPts": 91392,
+        "endPtsExclusive": 91648,
+        "reason": "no-candidate-frame"
+      }
+    ]
+  }
+}
