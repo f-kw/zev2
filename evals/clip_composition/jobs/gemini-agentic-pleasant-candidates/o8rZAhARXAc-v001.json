@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "gemini-agentic-pleasant-execution-job-v001",
+  "jobId": "o8rZAhARXAc-agentic-pleasant-candidates-v001",
+  "attemptId": "attempt-0001",
+  "authorization": {
+    "approvedBy": "kawafmm",
+    "apiCommunicationCount": 1,
+    "automaticRetries": 0,
+    "targetCostUsd": 1,
+    "strictDollarStopUnavailableRiskAccepted": true,
+    "pushAndRemoteOperationsAllowed": false
+  },
+  "source": {
+    "sourceVideoId": "o8rZAhARXAc",
+    "publicYoutubeUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+    "localSourcePath": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+    "localSourceSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06",
+    "sourceDurationMs": 11898441,
+    "localSourceByteLength": 2923277322,
+    "googleFetchedBytesEqualLocalSourceBytesProven": false,
+    "limitation": "公開YouTube URLをGoogleが取得したbyteとローカルMP4のbyte一致は証明できない"
+  },
+  "api": {
+    "product": "Gemini Developer API",
+    "apiVersion": "v1beta",
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/interactions",
+    "method": "POST",
+    "model": "gemini-3.5-flash-lite",
+    "modelReleaseChannel": "stable",
+    "processingMode": "agentic",
+    "thinkingLevel": "minimal",
+    "thinkingSummaries": "none",
+    "automaticRetries": 0,
+    "exactRequest": {
+      "model": "gemini-3.5-flash-lite",
+      "input": [
+        {
+          "type": "video",
+          "uri": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+          "processing": "agentic"
+        },
+        {
+          "type": "text",
+          "text": "この公開YouTube動画の全体を探索し、映像と音声を直接確認してください。\n\n単独で見ても人間が「見ていて気持ちいい」「面白い」「見続けたい」と感じる可能性がある場面を広めに探してください。意味上重要という理由だけでは選ばないでください。\n\n手掛かりとして、映像上の出来事、配信者の反応、音声の変化、成功、失敗、驚き、笑い、緊張から解放される瞬間、視覚的な変化を使えます。ただし「良い動画」の詳細な定義を独自に追加しないでください。\n\n候補数は10〜20件程度を目標にし、根拠が弱い場合は水増ししないでください。最大20件です。各候補は、出来事の必要な核が分かる開始・終了にしてください。核を特定しないまま周辺文脈を長く含めないでください。固定秒数には揃えないでください。\n\n時刻は動画開始を0とする整数ミリ秒で返してください。候補は開始時刻の昇順に並べてください。同じ開始時刻なら終了時刻の昇順にしてください。factualDescriptionには、その場面で実際に起きていることだけを日本語で短く書いてください。遠方接続理由、品質点数、採用判断、長い評価理由、人間の好みの推測は返さないでください。"
+        }
+      ],
+      "response_format": {
+        "type": "text",
+        "mime_type": "application/json",
+        "schema": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "candidates": {
+              "type": "array",
+              "maxItems": 20,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "startTimeMs": {
+                    "type": "integer",
+                    "description": "動画開始を0とする候補開始時刻の整数ミリ秒"
+                  },
+                  "endTimeMs": {
+                    "type": "integer",
+                    "description": "動画開始を0とする候補終了時刻の整数ミリ秒"
+                  },
+                  "factualDescription": {
+                    "type": "string",
+                    "description": "場面で実際に起きていることの短い日本語の事実説明"
+                  }
+                },
+                "required": [
+                  "startTimeMs",
+                  "endTimeMs",
+                  "factualDescription"
+                ]
+              }
+            }
+          },
+          "required": [
+            "candidates"
+          ]
+        }
+      },
+      "generation_config": {
+        "thinking_level": "minimal",
+        "thinking_summaries": "none"
+      },
+      "store": false
+    },
+    "exactRequestSha256": "035101cb6eb05c2545bd121506aea79abbe92e96306c8d3619ca38086c5a6075"
+  },
+  "pricingSnapshot": {
+    "observedOn": "2026-09-03",
+    "tier": "Paid Standard list price",
+    "inputTextImageVideoAudioUsdPerMillionTokens": 0.3,
+    "outputIncludingThinkingUsdPerMillionTokens": 2.5,
+    "youtubeUrlFeatureAdditionalCharge": 0,
+    "maximumDollarGuaranteeAvailableBeforeSend": false,
+    "sourceUrl": "https://ai.google.dev/gemini-api/docs/pricing"
+  },
+  "officialSpecificationBindings": [
+    {
+      "claim": "model is Stable",
+      "sourceUrl": "https://ai.google.dev/gemini-api/docs/models",
+      "observedOn": "2026-09-03"
+    },
+    {
+      "claim": "YouTube URI input and processing=agentic are supported; processing steps prove use",
+      "sourceUrl": "https://ai.google.dev/gemini-api/docs/video-understanding",
+      "observedOn": "2026-09-03"
+    },
+    {
+      "claim": "response_format carries JSON schema for structured output",
+      "sourceUrl": "https://ai.google.dev/gemini-api/docs/structured-output",
+      "observedOn": "2026-09-03"
+    },
+    {
+      "claim": "minimal is supported and default-equivalent minimum thinking level",
+      "sourceUrl": "https://ai.google.dev/gemini-api/docs/generate-content/thinking",
+      "observedOn": "2026-09-03"
+    },
+    {
+      "claim": "POST /v1beta/interactions is the create endpoint",
+      "sourceUrl": "https://ai.google.dev/api/interactions-api-v1",
+      "observedOn": "2026-09-03"
+    }
+  ],
+  "localBindings": {
+    "implementationBindings": [
+      {
+        "path": "evals/clip_composition/gemini_agentic_pleasant_candidate_v001.mjs",
+        "fileSha256": "3dce1f15b1f4a5c41450a337430e310761ee1642799439d68b1d568b1f08e7cb"
+      },
+      {
+        "path": "evals/clip_composition/run_gemini_agentic_pleasant_candidate_v001.mjs",
+        "fileSha256": "bdd63b11b4ba80a96e17fff20a76758301ffe3b839c311619fec8aa2177e2bf3"
+      },
+      {
+        "path": "evals/clip_composition/gemini_agentic_pleasant_candidate_v001.test.mjs",
+        "fileSha256": "3986944ee4c1834e02f7a1889f99c6bbf109c91db52c4f19879f2c6e56655f1a"
+      }
+    ],
+    "commentIntervalSource": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/comment-velocity-minute-series-v001.json",
+      "fileSha256": "d3792d8e83729b95d0a417a956f63f40cb45512410b6484a1d3701b5646c28f9",
+      "expectedAboveBaselineFullMinuteCount": 98
+    }
+  },
+  "publication": {
+    "outputRoot": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001",
+    "exactRequestPath": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001/exact-request-v001.json",
+    "preflightPath": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001/preflight-v001.json",
+    "rawResponsePath": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001/raw-response-v001.json",
+    "executionRecordPath": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001/execution-record-v001.json",
+    "candidateResultPath": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001/candidate-result-v001.json",
+    "overlapDiagnosticPath": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001/comment-overlap-diagnostic-v001.json",
+    "verificationPath": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001/verification-v001.json",
+    "failureEvidencePath": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001/failure-evidence-v001.json"
+  }
+}

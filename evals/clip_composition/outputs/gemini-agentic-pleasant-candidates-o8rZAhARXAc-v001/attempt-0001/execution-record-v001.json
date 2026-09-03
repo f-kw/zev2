@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "gemini-agentic-pleasant-execution-record-v001",
+  "job": {
+    "path": "evals/clip_composition/jobs/gemini-agentic-pleasant-candidates/o8rZAhARXAc-v001.json",
+    "fileSha256": "b9f86fdb0f4d89ba351d65d27a258932876739958e80dff816d1c9c31b8b901b"
+  },
+  "exactRequest": {
+    "path": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001/exact-request-v001.json",
+    "fileSha256": "035101cb6eb05c2545bd121506aea79abbe92e96306c8d3619ca38086c5a6075"
+  },
+  "rawResponse": {
+    "path": "evals/clip_composition/outputs/gemini-agentic-pleasant-candidates-o8rZAhARXAc-v001/attempt-0001/raw-response-v001.json",
+    "fileSha256": "b2f3fda40a8fb2a836904091abf41c3cce2cea3187f82fd0f043904ea4208269",
+    "byteLength": 2375
+  },
+  "model": "gemini-3.5-flash-lite",
+  "providerResponseId": null,
+  "providerStatus": "completed",
+  "usage": {
+    "total_tokens": 58484,
+    "total_input_tokens": 275,
+    "input_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 275
+      }
+    ],
+    "total_cached_tokens": 0,
+    "total_output_tokens": 154,
+    "total_tool_use_tokens": 530,
+    "tool_use_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 530
+      }
+    ],
+    "total_thought_tokens": 57525,
+    "raw_prompt_token": 36557,
+    "model_invocation_token_counts": [
+      {
+        "prompt_tokens_details": [
+          {
+            "modality": "text",
+            "tokens": 892
+          }
+        ],
+        "candidates_tokens_details": [
+          {
+            "modality": "text",
+            "tokens": 31
+          }
+        ]
+      },
+      {
+        "prompt_tokens_details": [
+          {
+            "modality": "text",
+            "tokens": 950
+          }
+        ],
+        "candidates_tokens_details": [
+          {
+            "modality": "text",
+            "tokens": 136
+          }
+        ]
+      }
+    ]
+  },
+  "thinkingUsageTokens": 57525,
+  "cost": {
+    "pricingBasis": "Gemini Developer API paid Standard list price",
+    "inputAndToolUsePriceUsdPerMillionTokens": 0.3,
+    "outputAndThinkingPriceUsdPerMillionTokens": 2.5,
+    "inputAndToolUseTokens": 805,
+    "outputAndThinkingTokens": 57679,
+    "calculatedNanoUsd": "144439000",
+    "calculatedUsd": 0.144439,
+    "invoiceBillingTierIndependentlyConfirmed": false
+  },
+  "agenticEvidence": {
+    "agenticProcessingObserved": true,
+    "processingCallCount": 1,
+    "processingResultCount": 1,
+    "pairedProcessingCallCount": 1,
+    "processingCallIds": [
+      "call_370577"
+    ],
+    "processingResultCallIds": [
+      "call_370577"
+    ],
+    "inspectedMediaIntervals": [],
+    "inspectedMediaIntervalsAvailability": "not-exposed-by-observed-processing-steps"
+  },
+  "transport": {
+    "httpStatus": 200,
+    "httpOk": true,
+    "responseHeaders": {
+      "content-type": "application/json",
+      "date": "Thu, 03 Sep 2026 04:40:34 GMT",
+      "x-request-id": null,
+      "x-goog-request-id": null
+    },
+    "rawResponseSha256": "b2f3fda40a8fb2a836904091abf41c3cce2cea3187f82fd0f043904ea4208269",
+    "rawResponseByteLength": 2375,
+    "apiCommunicationCount": 1,
+    "automaticRetries": 0
+  },
+  "sourceByteIdentityLimitation": "公開YouTube URLをGoogleが取得したbyteとローカルMP4のbyte一致は証明できない"
+}

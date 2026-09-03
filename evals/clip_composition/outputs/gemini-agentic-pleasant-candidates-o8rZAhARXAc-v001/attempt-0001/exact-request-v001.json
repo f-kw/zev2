@@ -1,0 +1,59 @@
+{
+  "model": "gemini-3.5-flash-lite",
+  "input": [
+    {
+      "type": "video",
+      "uri": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+      "processing": "agentic"
+    },
+    {
+      "type": "text",
+      "text": "この公開YouTube動画の全体を探索し、映像と音声を直接確認してください。\n\n単独で見ても人間が「見ていて気持ちいい」「面白い」「見続けたい」と感じる可能性がある場面を広めに探してください。意味上重要という理由だけでは選ばないでください。\n\n手掛かりとして、映像上の出来事、配信者の反応、音声の変化、成功、失敗、驚き、笑い、緊張から解放される瞬間、視覚的な変化を使えます。ただし「良い動画」の詳細な定義を独自に追加しないでください。\n\n候補数は10〜20件程度を目標にし、根拠が弱い場合は水増ししないでください。最大20件です。各候補は、出来事の必要な核が分かる開始・終了にしてください。核を特定しないまま周辺文脈を長く含めないでください。固定秒数には揃えないでください。\n\n時刻は動画開始を0とする整数ミリ秒で返してください。候補は開始時刻の昇順に並べてください。同じ開始時刻なら終了時刻の昇順にしてください。factualDescriptionには、その場面で実際に起きていることだけを日本語で短く書いてください。遠方接続理由、品質点数、採用判断、長い評価理由、人間の好みの推測は返さないでください。"
+    }
+  ],
+  "response_format": {
+    "type": "text",
+    "mime_type": "application/json",
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "candidates": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "startTimeMs": {
+                "type": "integer",
+                "description": "動画開始を0とする候補開始時刻の整数ミリ秒"
+              },
+              "endTimeMs": {
+                "type": "integer",
+                "description": "動画開始を0とする候補終了時刻の整数ミリ秒"
+              },
+              "factualDescription": {
+                "type": "string",
+                "description": "場面で実際に起きていることの短い日本語の事実説明"
+              }
+            },
+            "required": [
+              "startTimeMs",
+              "endTimeMs",
+              "factualDescription"
+            ]
+          }
+        }
+      },
+      "required": [
+        "candidates"
+      ]
+    }
+  },
+  "generation_config": {
+    "thinking_level": "minimal",
+    "thinking_summaries": "none"
+  },
+  "store": false
+}

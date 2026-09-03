@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "gemini-agentic-pleasant-saved-raw-verification-v002",
+  "status": "passed",
+  "recoveryMode": "saved-raw-only-no-api-communication",
+  "contractDecision": {
+    "originalStopWasProviderFailure": false,
+    "originalStopWasLocalSavingContractOverconstraint": true,
+    "providerResponseIdRequired": false,
+    "providerResponseIdFabricated": false
+  },
+  "checks": {
+    "originalEvidenceHashesExactBeforeRecovery": true,
+    "originalEvidenceHashesExactAfterRecovery": true,
+    "originalFailureEvidencePreserved": true,
+    "exactRequestAndRawResponseBound": true,
+    "sourceVideoIdAndYoutubeUrlBound": true,
+    "modelAttemptTimeHttpAndCompletionBound": true,
+    "structuredOutputPresent": true,
+    "schemaAndExtraFieldsStrict": true,
+    "candidateTimesWithinSource": true,
+    "endStrictlyAfterStart": true,
+    "exactDuplicatesAbsent": true,
+    "chronologicalOrderDeterministic": true,
+    "candidateIdsDeterministicFromSavedRawAndOrder": true,
+    "commentIntervalsExactly98": true,
+    "commentOverlapUsesTimeOnly": true,
+    "agenticProcessingCallAndResultPaired": true,
+    "exploredMediaIntervalsNotExposed": true,
+    "additionalApiCommunicationZero": true,
+    "candidateTimesManuallyChanged": false
+  },
+  "originalEvidenceSha256": {
+    "job": "b9f86fdb0f4d89ba351d65d27a258932876739958e80dff816d1c9c31b8b901b",
+    "exactRequest": "035101cb6eb05c2545bd121506aea79abbe92e96306c8d3619ca38086c5a6075",
+    "preflight": "51054a37cb05f2079d158f5fe5e8621d6923e0d04a481e6bf85da33ec480efd5",
+    "rawResponse": "b2f3fda40a8fb2a836904091abf41c3cce2cea3187f82fd0f043904ea4208269",
+    "executionRecord": "21dd6056f3823738c7e760364b708cf78e66fffc5a62cbd72ec89d6e8f7f7b10",
+    "failureEvidence": "7a2d02c8dfd954b4c17e51a9eb9ec9c1a91a81e76a87ae4761ec09ed16f10916",
+    "commentArtifact": "d3792d8e83729b95d0a417a956f63f40cb45512410b6484a1d3701b5646c28f9"
+  },
+  "derivedArtifacts": {
+    "providerIdContractReviewSha256": "9f66142fc0e2261bfc19d6c4dc987eaf05b205e6d5f83aa3bccc877c9e7646f2",
+    "candidateResultSha256": "d27a940f5c9db9268cf25f6531456349367efb52e29dbcf5c7e54b48805521c8",
+    "overlapDiagnosticSha256": "ac7ecca4a162ea4070e93325331368a9e45ef656247a4f5ea243e37fe0d18cbf",
+    "usageAndCostSha256": "faa616f70ea8d4f7bcc4da5ff2a11a2449b91eda339166db7ad108feef57fec7"
+  },
+  "agenticEvaluation": {
+    "confirmed": "長尺動画を対象にAgentic動画探索が正常完了した",
+    "notConfirmed": "3時間18分の動画全体を漏れなく確認したこと",
+    "unavailableEvidence": "APIが探索した全時刻範囲",
+    "agenticProcessingObserved": true,
+    "processingCallCount": 1,
+    "processingResultCount": 1,
+    "pairedProcessingCallCount": 1,
+    "processingCallIds": [
+      "call_370577"
+    ],
+    "processingResultCallIds": [
+      "call_370577"
+    ],
+    "inspectedMediaIntervals": [],
+    "inspectedMediaIntervalsAvailability": "not-exposed-by-observed-processing-steps"
+  },
+  "humanReviewWorkload": {
+    "mechanicallyFeasible": true,
+    "candidateCount": 2,
+    "purePlaybackTimeMs": 2450,
+    "longestCandidateMs": 1750,
+    "qualityJudgmentPerformed": false
+  }
+}

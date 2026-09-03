@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "gemini-agentic-pleasant-usage-and-cost-v002",
+  "recoveryMode": "saved-raw-only-no-api-communication",
+  "rawResponseSha256": "b2f3fda40a8fb2a836904091abf41c3cce2cea3187f82fd0f043904ea4208269",
+  "savedUsage": {
+    "total_tokens": 58484,
+    "total_input_tokens": 275,
+    "input_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 275
+      }
+    ],
+    "total_cached_tokens": 0,
+    "total_output_tokens": 154,
+    "total_tool_use_tokens": 530,
+    "tool_use_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 530
+      }
+    ],
+    "total_thought_tokens": 57525,
+    "raw_prompt_token": 36557,
+    "model_invocation_token_counts": [
+      {
+        "prompt_tokens_details": [
+          {
+            "modality": "text",
+            "tokens": 892
+          }
+        ],
+        "candidates_tokens_details": [
+          {
+            "modality": "text",
+            "tokens": 31
+          }
+        ]
+      },
+      {
+        "prompt_tokens_details": [
+          {
+            "modality": "text",
+            "tokens": 950
+          }
+        ],
+        "candidates_tokens_details": [
+          {
+            "modality": "text",
+            "tokens": 136
+          }
+        ]
+      }
+    ]
+  },
+  "estimatedCost": {
+    "pricingBasis": "Gemini Developer API paid Standard list price",
+    "inputAndToolUsePriceUsdPerMillionTokens": 0.3,
+    "outputAndThinkingPriceUsdPerMillionTokens": 2.5,
+    "inputAndToolUseTokens": 805,
+    "outputAndThinkingTokens": 57679,
+    "calculatedNanoUsd": "144439000",
+    "calculatedUsd": 0.144439,
+    "invoiceBillingTierIndependentlyConfirmed": false
+  },
+  "estimateMeaning": "保存usageと保存済みStandard価格情報からの推定であり実請求額ではない",
+  "originalApiCommunicationCount": 1,
+  "originalAutomaticRetryCount": 0,
+  "additionalApiCommunicationCount": 0,
+  "additionalApiCostUsd": 0
+}

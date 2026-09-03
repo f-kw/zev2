@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "gemini-agentic-pleasant-candidate-result-v002",
+  "experimentId": "o8rZAhARXAc-agentic-pleasant-candidates-v001",
+  "recoveryMode": "saved-raw-only-no-api-communication",
+  "executionIdentity": {
+    "exactRequestSha256": "035101cb6eb05c2545bd121506aea79abbe92e96306c8d3619ca38086c5a6075",
+    "rawResponseSha256": "b2f3fda40a8fb2a836904091abf41c3cce2cea3187f82fd0f043904ea4208269",
+    "sourceVideoId": "o8rZAhARXAc",
+    "publicYoutubeUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+    "model": "gemini-3.5-flash-lite",
+    "attemptId": "attempt-0001",
+    "executedAt": "2026-09-03T04:40:34Z",
+    "responseUpdatedAt": "2026-09-03T04:40:34Z",
+    "httpStatus": 200,
+    "completionStatus": "completed",
+    "providerResponseId": null,
+    "executionIdentitySha256": "035aa9c593676bff9474948c6c5902b31343081ff0994e307f63d2a5a20b4ff4",
+    "identityPolicy": "保存要求・保存応答・動画・モデル・試行・時刻・HTTP状態・完了状態の合成束縛",
+    "providerExecutionIdentifierAvailability": "top-level interaction id absent"
+  },
+  "source": {
+    "sourceVideoId": "o8rZAhARXAc",
+    "publicYoutubeUrl": "https://www.youtube.com/watch?v=o8rZAhARXAc",
+    "localSourcePath": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+    "localSourceSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06",
+    "sourceDurationMs": 11898441
+  },
+  "model": "gemini-3.5-flash-lite",
+  "providerResponseId": null,
+  "providerResponseIdRequiredByLocalContract": false,
+  "candidateOrderPolicy": "provider-chronological-array-order-bound-to-saved-raw-by-one-based-order",
+  "candidates": [
+    {
+      "candidateId": "gemini-agentic-saved-raw-0a53e3b2bac6e2eaaa99933478b0884c93308470134cfedae44eaa4d83a1cc42",
+      "candidateOrder": 1,
+      "startTimeMs": 183600,
+      "endTimeMs": 184300,
+      "factualDescription": "甲子園の1回戦でスクイズが成功し、歓喜する場面",
+      "durationMs": 700
+    },
+    {
+      "candidateId": "gemini-agentic-saved-raw-e2e3bb80e3f46986ba28f5f742f8600084e94cc845c71663156d36113c207429",
+      "candidateOrder": 2,
+      "startTimeMs": 196500,
+      "endTimeMs": 198250,
+      "factualDescription": "配信のエンディングで音楽に合わせてキャラクターが踊る歌唱の場面",
+      "durationMs": 1750
+    }
+  ],
+  "workload": {
+    "candidateCount": 2,
+    "candidateDurationsMs": [
+      700,
+      1750
+    ],
+    "candidateDurationTotalMs": 2450,
+    "purePlaybackTimeMs": 2450,
+    "longestCandidateMs": 1750,
+    "medianCandidateMs": 1225,
+    "candidatesAtLeastOneMinute": 0,
+    "candidatesAtLeastTwoMinutes": 0
+  }
+}
