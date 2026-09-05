@@ -5,6 +5,7 @@ import {tmpdir} from 'node:os';
 import {dirname, join} from 'node:path';
 
 import {
+  assertCandidateVideoJobV002, assertCandidateVideoOutputV002,
   CANDIDATE_VIDEO_COMPARISON_EXPERIMENT_PLAN_SCHEMA_V002,
   CANDIDATE_VIDEO_SOURCE_MAPPING_SCHEMA_V001,
   CANDIDATE_VIDEO_HUMAN_COMPARISON_REFERENCE_SCHEMA_V001,
@@ -3613,3 +3614,94 @@ async function main(): Promise<void> {
 }
 
 await main();
+
+// Forward-only real exploration mappings; no human evaluation file is opened here.
+{
+  const {loadPreparationJobs} = await import('./candidate-video-understanding-transport-v001.js');
+  const {projectCandidateIntervalV002,
+    deriveCandidateVideoReviewV002, aggregateCandidateVideoReviewsV002,
+    candidateVideoSchemaV002} = await import('./candidate-video-understanding-v001.js');
+  const jobs = await loadPreparationJobs(join(import.meta.dirname, '../..'));
+  let checks = 0;
+  for (const job of jobs) {
+    assertCandidateVideoJobV002(job);
+    assertCandidateVideoProviderSchemaSupportedSubsetV001(candidateVideoSchemaV002(job.itemId));
+    const interval = {startTimeMs: job.itemId === 'item-0003' ? 55051 : job.itemId === 'item-0005' ? 50618 : 1000,
+      endTimeMs: job.itemId === 'item-0003' ? 55052 : job.itemId === 'item-0005' ? 50619 : 1001};
+    const p = projectCandidateIntervalV002(job, interval);
+    assert.ok(p.sourceIntervals.length > 0);
+    const s = job.sourceMapping.segments.find(s => s.segmentId === p.sourceIntervals[0].mappingSegmentId)!;
+    const actual = p.sourceIntervals[0].sourceStartTimeMs;
+    // Independent cross-product equality, with no floating-point tolerance.
+    const t = job.sourceMapping.candidateTimeBase;
+    const st = job.sourceMapping.sourceTimeBase;
+    const deltaN = BigInt(interval.startTimeMs) * BigInt(t.denominator) - BigInt(s.candidateStartPts) * 1000n * BigInt(t.numerator);
+    const deltaD = 1000n * BigInt(t.numerator);
+    const n = (BigInt(s.sourceStartPts) * deltaD * BigInt(s.candidateEndPtsExclusive - s.candidateStartPts)
+      + deltaN * BigInt(s.sourceEndPtsExclusive - s.sourceStartPts)) * 1000n * BigInt(st.numerator);
+    const d = deltaD * BigInt(s.candidateEndPtsExclusive - s.candidateStartPts) * BigInt(st.denominator);
+    assert.equal(BigInt(actual.numerator) * d, n * BigInt(actual.denominator));
+    for (const gap of job.sourceMapping.unmappedCandidatePts) {
+      const start = Math.ceil(gap.startPts * 1000 / 15360);
+      const end = Math.floor(gap.endPtsExclusive * 1000 / 15360);
+      const only = projectCandidateIntervalV002(job, {startTimeMs: start, endTimeMs: end});
+      assert.equal(only.sourceIntervals.length, 0);
+      assert.equal(only.unmappedCandidateIntervals.length, 1);
+      const cross = projectCandidateIntervalV002(job, {startTimeMs: start - 2, endTimeMs: end + 2});
+      assert.equal(cross.sourceIntervals.length, 2);
+      assert.equal(cross.unmappedCandidateIntervals.length, 1);
+      checks += 4;
+    }
+    checks += 4;
+  }
+  const entries = jobs.map(job => ({job, output: {...validProviderOutput(),
+    schemaVersion: 'candidate-video-understanding-provider-output-v002' as const,
+    itemId: job.itemId, status: 'partial' as const}}));
+  for (const {job, output} of entries) {
+    assertCandidateVideoOutputV002(output, job);
+    const review = deriveCandidateVideoReviewV002(job, output);
+    assert.equal(review.status, 'established');
+    assert.deepEqual(review.candidatePresentationDurationMs, {numerator: 3100, denominator: 1});
+    const contradictory = {...output, status: 'answered'};
+    assert.throws(() => assertCandidateVideoOutputV002(contradictory, job));
+    const extra = {...output, humanApproval: 'synthetic'};
+    assert.throws(() => assertCandidateVideoOutputV002(extra, job));
+    checks += 5;
+  }
+  const aggregate = aggregateCandidateVideoReviewsV002(entries);
+  assert.equal(aggregate.status, 'established');
+  assert.ok(aggregate.sourcePurePlaybackDurationMs);
+  // Items 4 and 5 share their first source piece: global union must deduplicate it.
+  const total = aggregate.totalPresentationDurationMs!;
+  const pure = aggregate.sourcePurePlaybackDurationMs!;
+  assert.ok(BigInt(pure.numerator) * BigInt(total.denominator) < BigInt(total.numerator) * BigInt(pure.denominator));
+  const absent = structuredClone(entries[0]);
+  absent.output.roleObservations[0].status = 'notObserved';
+  absent.output.roleObservations[0].intervals = [];
+  absent.output.insufficientEvidence.missingEvidence.push('coreEvent');
+  let ordinal = 0;
+  absent.output.roleObservations.forEach(r => r.intervals.forEach(i => { i.observationId = `observation-${String(++ordinal).padStart(3, '0')}`; }));
+  assert.equal(deriveCandidateVideoReviewV002(absent.job, absent.output).status, 'not-established');
+  assert.equal(aggregateCandidateVideoReviewsV002([absent, ...entries.slice(1)]).totalPresentationDurationMs, null);
+  checks += 5;
+  const disjoint = structuredClone(entries[0]);
+  disjoint.output.roleObservations[0].intervals[0].startTimeMs = 1000;
+  disjoint.output.roleObservations[0].intervals[0].endTimeMs = 2000;
+  assert.deepEqual(deriveCandidateVideoReviewV002(disjoint.job, disjoint.output).candidatePresentationDurationMs,
+    {numerator: 3900, denominator: 1});
+  assert.equal(deriveCandidateVideoReviewV002(disjoint.job, disjoint.output).humanInitialReviewIntervals.length, 2);
+  const gapOnly = structuredClone(entries[4]);
+  const gap = gapOnly.job.sourceMapping.unmappedCandidatePts[0];
+  gapOnly.output.roleObservations[0].intervals[0].startTimeMs = Math.ceil(gap.startPts * 1000 / 15360);
+  gapOnly.output.roleObservations[0].intervals[0].endTimeMs = Math.floor(gap.endPtsExclusive * 1000 / 15360);
+  assert.equal(deriveCandidateVideoReviewV002(gapOnly.job, gapOnly.output).status, 'not-established');
+  const abstained = structuredClone(entries[0]);
+  abstained.output.status = 'abstain' as typeof abstained.output.status;
+  abstained.output.roleObservations.forEach(r => { r.status = 'notObserved'; r.intervals = []; });
+  abstained.output.insufficientEvidence.missingEvidence = [...CANDIDATE_VIDEO_ROLE_VALUES_V001];
+  assertCandidateVideoOutputV002(abstained.output, abstained.job);
+  assert.equal(deriveCandidateVideoReviewV002(abstained.job, abstained.output).sourcePresentationDurationMs, null);
+  checks += 5;
+  process.stdout.write(JSON.stringify({suite: 'v002-pts-roles-review-regression', status: 'passed', checks,
+    realExplorationMappings: 5, humanReviewArtifactReads: 0, apiCommunications: 0}) + '\n');
+}
