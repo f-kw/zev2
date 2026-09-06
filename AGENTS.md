@@ -8,6 +8,14 @@
 - Codexへの指示はすべてZEV相談役セッション経由でkawafmmの言葉として届く。kawafmmからの直接指示は行われない。相談役の指示に「kawafmm承認」が明記されない限り、契約・費用・素材・成果物・commit・tag・Goal・work-orderに触れる作業を開始しない。この列挙に該当しない作業（文書作成・検査実行・probe・調査を含む）も、着工承認済みwork-orderの範囲内であるか、個別指示がある場合のみ行う。
 - 相談役からの`continue`は、既に指示された範囲内の続行のみを意味し、新しい作業・権限を与えない。
 
+### Codex–ChatGPT監査プロトコル（2026-09-06 kawafmm承認）
+
+- Codexの通常の実装・テスト・限定修正は、着工承認済みwork-orderの範囲内で自律的に進める。判断または監査が必要な箇所では、まずChatGPTへ監査を依頼し、ChatGPTで判断できない第1層事項だけをkawafmmへ上げる。詳細は `docs/CODEX_CHATGPT_AUDIT_PROTOCOL.md` を正本とする。
+- ChatGPT監査へ現物を渡すため、着工承認済みwork-orderの範囲内に限り、監査用checkpoint commitおよびそのremote pushを個別の追加承認なしで許可する。この権限は監査対象の現状固定だけに使い、正式採用・完成承認・stable昇格を意味しない。
+- 前項の例外にtag作成、release・公開、正式成果物の削除・上書き、Goal・work-order・契約の新設/改訂、API通信・費用支出、新素材取得は含まない。これらは従来どおりkawafmm承認を必要とする。
+- 監査依頼には、何をしようとしているか、なぜ監査/判断が必要か、推奨案、branch、commit SHA、対象file/diff、test・検証結果を含める。第一完成時もcheckpointをcommit/pushし、ChatGPTの最終監査を通す。
+- 質問種別は `GPT_DECISION`（ChatGPT判断で進行可能）、`HUMAN_DECISION`（kawafmm判断が必要）、`AUDIT_ONLY`（判断不要で監査のみ）の3種とする。Codexが迷ったという理由だけで `HUMAN_DECISION` にしない。
+
 ### DECISIONS.md
 
 - DECISIONS.mdへの承認行の追加を絶対禁止する。承認はkawafmmの言葉として相談役経由で届く。違反は即停止・報告の対象である（2026-08-17の作業ツリー上765行目が違反の現物。kawafmm本人が削除済み）。
@@ -19,7 +27,7 @@
 
 ### kawafmm承認明記時のみ許される操作
 
-- Goal設定 / work-order承認 / タグ作成・削除 / commit / 退避folder操作 / API通信 / 費用支出 / remote操作（push等）/ 正式成果物とstable tagの削除・上書き。
+- Goal設定 / work-order承認 / タグ作成・削除 / commit / 退避folder操作 / API通信 / 費用支出 / remote操作（push等）/ 正式成果物とstable tagの削除・上書き。ただし、`docs/CODEX_CHATGPT_AUDIT_PROTOCOL.md` に定める監査用checkpoint commit/pushは、着工承認済みwork-order内に限りこの個別承認要件の例外とする。
 - 上限値・定期報告・開始タグ・ACTIVE pointer・reservationなどの運用装置と数値はkawafmmが決める。Codexによる設置・仮置きは無効である。試験・合成・準備の名目でこれらを先行しない。
 
 ### 三層の判断所有（CLAUDE.md v002 §2と同一）
@@ -43,9 +51,9 @@
 
 zev2 は ZEV を参考にするが、既存ZEVの後方互換を持たない新規プロジェクトとして扱う。
 
-現在の作業目的・現在位置・対象外は `docs/CURRENT_GOAL.md`、製品目標と評価関門は `docs/GOAL_DEFINITION.md` を正本とする。今回の許可範囲は、相談役経由の最新の個別指示または着工承認済みwork-orderで確認する。目的の記載を着工・再開の承認として扱わない。
+現在の作業目的・現在位置・対象外は `docs/CURRENT_GOAL.md`、上位製品方針は `相談役/方針/2026-09-06_ZEV_方針整理.md` を正本とする。`docs/GOAL_DEFINITION.md` v3.6は既存の切り抜き中心の目標・評価関門を保持する文書であり、9月6日方針への適用範囲と改訂は第1層判断待ちである。そのまま最新の上位製品目標とは扱わない。今回の許可範囲は、相談役経由の最新の個別指示または着工承認済みwork-orderで確認する。目的の記載を着工・再開の承認として扱わない。
 
-人間が実行前下書きを確認・承認し、型付き命令とファイル参照で処理する原則を維持する。完成形・責務分離・移行順を扱う場合は `docs/architecture/ZEV_AGENT_SKILL_ARCHITECTURE_v001.md` を参照する。この設計の参照だけで新しい工事や既存工程の置換を開始しない。
+人間が実行前下書きを確認・承認し、型付き命令とファイル参照で処理する原則を維持する。完成形・責務分離・移行順を扱う場合は、9月6日製品方針に対する詳細architectureとして `docs/architecture/ZEV_AGENT_SKILL_ARCHITECTURE_v001.md` を参照する。この設計の参照だけで新しい工事や既存工程の置換を開始しない。
 
 ## 技術選定
 
