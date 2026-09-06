@@ -2,6 +2,8 @@
 
 ## 現在地
 
+実装と製造前検査を完了。新規22件、第1 Skillの回帰13件、既存の意味境界・Core関連92件、Skillのstrict型検査が合格した。新規の意味判断と実動画生成は次に実行する。以下の調査・GPT_DECISIONは実装前からの履歴として残す。
+
 2026-09-06「ZEV進行管理２」経由のkawafmm承認済み続行指示に基づく第2 Skill工事。開始HEADはmain `b3f688944b53243633615c9a9d805a0d0b0521c3`。字幕表示区切りSkillの人間評価3項目を既存報告へ追記し、`63bb9ea3e066ae945c1bc93597585825d16a0789` でcommit/push、local/remote main一致を確認した。未判定だった履歴と当時の動画・manifestは保持した。
 
 本工事の目的は、確定発話列を意味のまとまりへ区切る問いを独立したSkillにし、既存の字幕表示区切りSkillを無変更で再利用して実動画へ通すこと。技術合格と人間品質評価を分け、第一完成時には人間目視だけをHUMAN_DECISIONとして残す。
@@ -43,6 +45,8 @@
 
 ## 実装予定の最小単位
 
+2026-09-06、同じ「ZEV進行管理２」で `ef60dc644fba1939648945f202c1db731de72b7a` とDrive報告を参照した生成完了回答を確認した。`decision: continue`。意味まとまりを正式中間成果物として保持し、各まとまり単位で第1 Skillを無変更呼出し、検査・昇格後の表示列を順序保存でflattenする接続は責務境界に適合するとの判断。Coreの1-container制約は変更しない。意味境界変更・表示の結合/分割・本文変更・新しい意味判断をflattenに入れず、意味まとまりとCore入力の対応をtestする条件で、同じ工事の第一完成・AUDIT_ONLYまで続行する。現在モデルInstantを維持し、再送なし。
+
 - `runner/src/skills/caption-meaning-grouping-v001.ts`：一つの意味上の問いと権限なしの回答。
 - `runner/test/caption-meaning-grouping-v001.test.mts`：入力・出力・実呼出の検査。
 - `evals/clip_composition/run_caption_meaning_grouping_skill_e2e_v001.mts`：固定plan、意味/表示の独立した検査・昇格、既存Coreへの接続、由来再検証。
@@ -56,3 +60,27 @@
 現時点では第1 Skillの完成manifestを再検証し、決定的昇格の一致と動画SHA一致を確認した。今回の人間評価は新しい追記が正本となるため、当時の技術manifestに保存された未判定状態は履歴として保持する。第2 Skillの新規判断・実動画・testの合格はまだ主張しない。
 
 第一完成時は、Skill導入前・表示区切りSkillのみ・意味まとまり+表示区切りSkillの3本を示す。前2本は既存動画を再利用する。前回は資料リンクで動画が見られなかったため、比較Markdownに加え、完了時に会話へ3本の動画を直接表示する。人間の問いは内容の追いやすさ、意味の自然さ、字幕の過不足、気持ちよさの4項目とする。
+
+## 実装checkpointの検証
+
+新規の実装・固定plan・testは上記5pathに限定した。意味まとまりの正本は、検査済み回答と元の本文・発話ID・atom出現IDから決定的に作る。各意味まとまりから表示区切りSkillを実呼出する。意味・表示の検査済みtokenは外部からコピーしたJSONでは代替できない。最後の配線は検査済み表示の順序保存だけを行い、すべての表示から元の意味まとまりとatom出現列へ追跡できる。
+
+元の字幕入力は190文字で、意味素材の5正本から再構築して同一性を確認した。字幕表示区切りSkill・既存executor・Coreのコードは変更していない。各段階の実呼出はその段階の入力と回答をそのまま保存し、別入力への回答へ付け替えない。初期のtestは保存済みの表示回答を8まとまりへ分けた配線fixtureであり、新規の意味判断や実動画実証として数えない。
+
+| 検査 | 実行結果 |
+| --- | --- |
+| 新規Skill入口と意味→表示→Core配線 | 22件合格、失敗0 |
+| 第1 Skillと既存executorの回帰 | 13件合格、失敗0 |
+| 意味境界source/selection、意味情報、表示終端/行末projection、注文書v002、行組みv002、renderer admission | 7ファイル92件合格、失敗0 |
+| 新規Skillのstrict TypeScript検査 | 合格 |
+| 固定planと既存入力のpreflight | 合格。入力・実装・元媒体・比較動画のSHA、元5正本からの再構築を照合 |
+
+実行した主要commandは以下。動画生成前のtest結果であり、物理的な実描画・technical QC・新動画の品質を代替しない。
+
+```sh
+node --import ./runner/node_modules/tsx/dist/loader.mjs --test runner/test/caption-meaning-grouping-v001.test.mts evals/clip_composition/run_caption_meaning_grouping_skill_e2e_v001.test.mts
+node --import ./runner/node_modules/tsx/dist/loader.mjs --test runner/test/caption-display-boundaries-v001.test.mts evals/clip_composition/run_caption_display_skill_e2e_v001.test.mts
+node --test evals/clip_composition/presentation_meaning_boundary_source_package_v001.test.mjs evals/clip_composition/presentation_meaning_boundary_selection_v001.test.mjs evals/clip_composition/presentation_meaning_information_package_v001.test.mjs evals/clip_composition/presentation_cue_end_projection_v001.test.mjs evals/clip_composition/presentation_instruction_artifact_v002.test.mjs evals/clip_composition/presentation_renderer_line_layout_rule_v002.test.mjs evals/clip_composition/presentation_renderer_admission_receipt_v002.test.mjs
+node runner/node_modules/typescript/bin/tsc --noEmit --strict --target ES2022 --module NodeNext --skipLibCheck runner/src/skills/caption-meaning-grouping-v001.ts
+node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_caption_meaning_grouping_skill_e2e_v001.mts preflight evals/clip_composition/jobs/presentation/caption-meaning-grouping-skill-e2e/fixed-plan-v001.json
+```
