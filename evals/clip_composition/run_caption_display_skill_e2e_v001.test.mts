@@ -12,7 +12,12 @@ import {validatePresentationInstructionArtifactV002} from './presentation_instru
 import {validatePresentationInstructionRendererJobV002} from './presentation_renderer_admission_receipt_v002.mjs';
 
 const planPath = 'evals/clip_composition/jobs/presentation/caption-display-skill-e2e/fixed-plan-v001.json';
-const context = await loadCaptionDisplayContextV001(process.cwd(), planPath);
+const actualContext = await loadCaptionDisplayContextV001(process.cwd(), planPath);
+// 新規呼出側は従来の保存fixtureで配線だけを検査。再開側の実回答とは分離する。
+const context = structuredClone(actualContext);
+context.plan.priorJudgment = null;
+context.priorJudgment = null;
+context.planBinding = bind(planPath, context.plan);
 const request = buildCaptionDisplayJudgmentRequestV001(context);
 const selection = JSON.parse(await readFile('evals/clip_composition/outputs/presentation/'
   + 'distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/cue-selection-v001.json', 'utf8'));
@@ -87,4 +92,19 @@ test('昇格後の命令・renderer jobは生回答ファイルを入力にし�
   assert.equal(rendererInputs.includes('skill-result.json'), false);
   assert.deepEqual(p.instruction.provenance.producerJobBinding,
     bind(context.plan.outputRoot + '/validation-and-adoption.json', p.adoption));
+});
+
+test('描画準備失敗から同じ新規判断をbyte同一で再開し、別の出力先へ昇格する', () => {
+  const prior = actualContext.priorJudgment!;
+  const p = promoteCaptionDisplayV001(validateAndAdoptCaptionDisplayV001(
+    actualContext, prior.request, prior.response, prior.result));
+  assert.deepEqual(p.selection.response.captions, prior.result.answer.captions);
+  assert.deepEqual(p.adoption.priorJudgmentBindings, actualContext.plan.priorJudgment);
+  assert.match(p.rendererJob.publication.renderOutputRoot, /^evals\/clip_composition\/outputs\/presentation\//);
+  const wrong = structuredClone(prior.request); wrong.input.captions[0].boundaryCandidates[0].text = '変更';
+  assert.throws(() => validateAndAdoptCaptionDisplayV001(actualContext, wrong, prior.response, prior.result), /PROVENANCE/);
+  const changedResponse = structuredClone(prior.response);
+  const changedResult = structuredClone(prior.result);
+  changedResponse.answer.captions[0].cues.pop(); changedResult.answer.captions[0].cues.pop();
+  assert.throws(() => validateAndAdoptCaptionDisplayV001(actualContext, prior.request, changedResponse, changedResult), /PROVENANCE/);
 });

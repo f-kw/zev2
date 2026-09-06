@@ -77,9 +77,9 @@ function assertBinding(v: unknown): asserts v is Binding {
 }
 export function assertCaptionDisplayPlanV001(plan: unknown): asserts plan is Json {
   if (!keys(plan, ['schemaVersion', 'planId', 'request', 'skill', 'adoptionPolicy',
-    'implementationBindings', 'outputRoot']) || plan.schemaVersion !== PLAN_SCHEMA
+    'implementationBindings', 'outputRoot', 'priorJudgment']) || plan.schemaVersion !== PLAN_SCHEMA
     || !ID.test(plan.planId) || !WORKSPACE_PATH.test(plan.outputRoot)
-    || !plan.outputRoot.startsWith('evals/clip_composition/outputs/work-caption-display-skill-')
+    || !plan.outputRoot.startsWith('evals/clip_composition/outputs/presentation/work-caption-display-skill-')
     || !keys(plan.request, ['purpose', 'caseId', 'meaningInput', 'sourcePackage', 'baseMedia',
       'rendererTemplate', 'baselineVideo', 'sourceVideo'])
     || typeof plan.request.purpose !== 'string' || !plan.request.purpose.length
@@ -93,6 +93,10 @@ export function assertCaptionDisplayPlanV001(plan: unknown): asserts plan is Jso
   for (const [index, expected] of [SKILL_PATH, EXECUTOR_PATH].entries()) {
     assertByteBinding(plan.implementationBindings[index]);
     if (plan.implementationBindings[index].path !== expected) fail('IMPLEMENTATION_PATH_INVALID');
+  }
+  if (plan.priorJudgment !== null) {
+    if (!keys(plan.priorJudgment, ['planSnapshot', 'request', 'response', 'result'])) fail('PRIOR_JUDGMENT_INVALID');
+    for (const v of Object.values(plan.priorJudgment)) assertBinding(v);
   }
   for (const name of ['meaningInput', 'sourcePackage', 'rendererTemplate']) assertBinding(plan.request[name]);
   for (const name of ['baselineVideo', 'sourceVideo']) assertByteBinding(plan.request[name]);
@@ -177,7 +181,22 @@ export async function loadCaptionDisplayContextV001(root: string, planPath: stri
   });
   const style = await readBound(root, rendererTemplate.registryBindings.styleProfileRegistry);
   const trust = await readBound(root, rendererTemplate.registryBindings.rendererTrust);
-  return {root, plan, planBinding, sourcePackage, meaning, timeline, rendererTemplate, style, trust};
+  let priorJudgment: Json | null = null;
+  if (plan.priorJudgment !== null) {
+    priorJudgment = Object.fromEntries(await Promise.all(Object.entries(plan.priorJudgment)
+      .map(async ([name, binding]) => [name, await readBound(root, binding as Binding)])));
+    const previous = priorJudgment.planSnapshot;
+    const request = priorJudgment.request;
+    // 描画準備失敗からの再開だけ。新しい判断の呼出・回答の書換えには数えない。
+    if (!same(previous.request, plan.request) || !same(previous.skill, plan.skill)
+      || previous.planId !== plan.planId || previous.adoptionPolicy !== plan.adoptionPolicy
+      || !same(previous.implementationBindings[0], plan.implementationBindings[0])
+      || request.planBinding.fileSha256 !== plan.priorJudgment.planSnapshot.fileSha256
+      || request.planBinding.canonicalSha256 !== plan.priorJudgment.planSnapshot.canonicalSha256
+      || !same(request.input, sourcePackage.promptInput)
+      || request.inputCanonicalSha256 !== canonicalSha(sourcePackage.promptInput)) fail('PRIOR_JUDGMENT_INPUT_MISMATCH');
+  }
+  return {root, plan, planBinding, sourcePackage, meaning, timeline, rendererTemplate, style, trust, priorJudgment};
 }
 export type CaptionDisplayContextV001 = Awaited<ReturnType<typeof loadCaptionDisplayContextV001>>;
 
@@ -273,7 +292,9 @@ export function validateAndAdoptCaptionDisplayV001(context: CaptionDisplayContex
   assertCaptionDisplayPlanV001(c.plan);
   assertCaptionDisplayResultV001(result);
   const r = clone(result);
-  if (!same(request, buildCaptionDisplayJudgmentRequestV001(c))
+  if (c.priorJudgment !== null && (!same(response, c.priorJudgment.response)
+    || !same(r, c.priorJudgment.result))) fail('PRIOR_JUDGMENT_PROVENANCE_MISMATCH');
+  if (!same(request, c.priorJudgment?.request ?? buildCaptionDisplayJudgmentRequestV001(c))
     || !keys(response, ['schemaVersion', 'requestFileSha256', 'answer', 'judgmentNote'])
     || response.schemaVersion !== 'caption-display-skill-judgment-response-v001'
     || response.requestFileSha256 !== sha(formal(request))
@@ -286,6 +307,7 @@ export function validateAndAdoptCaptionDisplayV001(context: CaptionDisplayContex
     requestBinding: bind(target(c, 'judgment-request.json'), request),
     responseBinding: bind(target(c, 'judgment-response.json'), response),
     resultBinding: bind(target(c, 'skill-result.json'), r),
+    priorJudgmentBindings: clone(c.plan.priorJudgment),
     inputCanonicalSha256: request.inputCanonicalSha256,
     validation: {input: 'passed', output: 'passed', sourceClosure: 'passed',
       boundaryMembershipOrderCoverage: 'passed', lineLayout: 'passed', provenance: 'passed'},
@@ -332,16 +354,20 @@ export async function executeCaptionDisplaySkillE2EV001(root: string, planPath: 
   const c = await loadCaptionDisplayContextV001(root, planPath);
   // 新しい出力rootを排他的に作る。既存の出力には入らない。
   await mkdir(path.join(root, c.plan.outputRoot));
-  const request = buildCaptionDisplayJudgmentRequestV001(c);
+  const request = c.priorJudgment?.request ?? buildCaptionDisplayJudgmentRequestV001(c);
   const requestBinding = await publish(root, target(c, 'judgment-request.json'), request);
-  let response: Json | undefined;
-  const result = await runCaptionDisplayBoundariesV001(request.input, async input => {
+  let response: Json | undefined = c.priorJudgment?.response;
+  const result = c.priorJudgment?.result ?? await runCaptionDisplayBoundariesV001(request.input, async input => {
     if (!same(input, request.input)) fail('SKILL_INPUT_CHANGED');
     response = await judgeThroughStdin(request);
     // 受信した回答を検査前にformal JSONで保存。B6由来と称さない。
     await publish(root, target(c, 'judgment-response.json'), response);
     return response.answer;
   });
+  if (c.priorJudgment !== null) {
+    // 元実行の検査前回答・権限なしresultを同じbyteで保持し、その由来をmanifestへ残す。
+    await publish(root, target(c, 'judgment-response.json'), response!);
+  }
   const resultBinding = await publish(root, target(c, 'skill-result.json'), result);
   const current = await loadCaptionDisplayContextV001(root, planPath);
   if (!same(c.planBinding, current.planBinding)) fail('PLAN_CHANGED_DURING_JUDGMENT');
@@ -361,7 +387,9 @@ export async function executeCaptionDisplaySkillE2EV001(root: string, planPath: 
   const videoPath = target(c, 'render/presentation-rendered-v002.mp4');
   const manifest = {
     schemaVersion: 'caption-display-skill-e2e-manifest-v001', status: 'review-ready',
-    planBinding: c.planBinding, judgment: {mode: c.plan.skill.judgmentMode,
+    planBinding: c.planBinding, judgment: {mode: c.priorJudgment === null
+      ? c.plan.skill.judgmentMode : 'resume-original-current-codex-judgment-v001',
+      priorJudgmentBindings: clone(c.plan.priorJudgment),
       request: requestBinding, response: bind(target(c, 'judgment-response.json'), response!), result: resultBinding},
     validationAndAdoption: adoptionBinding, promoted: artifacts,
     renderer: {execution: rendererResultBinding,

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "caption-display-skill-validation-adoption-v001",
+  "planBinding": {
+    "schemaVersion": "caption-display-skill-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/caption-display-skill-e2e/fixed-plan-v001.json",
+    "fileSha256": "383d40d461f1caa7f80a34cc9bca842ef020fc55d436a48f439535e95bef4cb9",
+    "canonicalSha256": "dd145b11f2ff05afe74ff56738339f6cba71652ce6a4f0e691391d5ee683031b"
+  },
+  "requestBinding": {
+    "schemaVersion": "caption-display-skill-judgment-request-v001",
+    "path": "evals/clip_composition/outputs/work-caption-display-skill-doctor-20260906-v001/judgment-request.json",
+    "fileSha256": "94537e26761077db204f7301c9d51f1fb96458bd0f8808a7bcd4fc4b5ab50558",
+    "canonicalSha256": "1e0e7612e282e593688f548ab08229e411b940a0218c4cc8fa43eef95fb65c28"
+  },
+  "responseBinding": {
+    "schemaVersion": "caption-display-skill-judgment-response-v001",
+    "path": "evals/clip_composition/outputs/work-caption-display-skill-doctor-20260906-v001/judgment-response.json",
+    "fileSha256": "0a9222e3f1bdb5683b6a343aef7e021f35579ed62aa8517b48e2841971776aea",
+    "canonicalSha256": "2f42253d5b304e873e4c44141bd588a81776c8318ebe303285d4d08cfc9ea876"
+  },
+  "resultBinding": {
+    "schemaVersion": "caption-display-skill-result-v001",
+    "path": "evals/clip_composition/outputs/work-caption-display-skill-doctor-20260906-v001/skill-result.json",
+    "fileSha256": "4ef28359f35c82aed99a5294af7ae4bbbcf1b78f7df0127ac8a978a0ca7b0dba",
+    "canonicalSha256": "71dcb631e684bb45f096a059a6d358cce819abb2c7f9d4bc68feef4841128b72"
+  },
+  "inputCanonicalSha256": "cccb476a873364858173617387041dd65f6a65981373b5ba2fa3a6c04a7a0f1c",
+  "validation": {
+    "input": "passed",
+    "output": "passed",
+    "sourceClosure": "passed",
+    "boundaryMembershipOrderCoverage": "passed",
+    "lineLayout": "passed",
+    "provenance": "passed"
+  },
+  "adoption": {
+    "policy": "validated-boundaries-for-review-only-v001",
+    "purpose": "human-review",
+    "quality": "not-evaluated"
+  }
+}

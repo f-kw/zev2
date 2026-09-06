@@ -54,3 +54,17 @@ node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/r
 第一完成時に本報告を実績へ更新し、commit/push、local/remote mainの同一HEAD、Drive MANIFEST同期を確認してAUDIT_ONLYを同じ相談役へ提出する。自己commitのSHAは本書へ自己参照させず、Drive MANIFESTと提出本文へ記録する。
 
 回帰の追加切り分け: `/private/tmp/zev2-caption-skill-bgild7ec/core-source-native.tap` の結果は6件中6件合格。制限外では既存コード・保存値を変更せず合格したため、今回の必要な既存回帰53件はすべて合格を確認した。初回失敗ログと再実行ログを両方保持する。
+
+## 6. 新規判断実行と描画準備失敗 — 限定修正checkpoint
+
+最初のGPT_DECISIONは `main/f89d16dfa2242e999199e90902985fb8dc4a4984` でcontinue。相談役は現Codexによる新規判断と標準入力受渡しを今回のE2E実証に限定して許可した。入力を固定後、その190文字を現Codexが読み、13個の表示単位・16行を新しく判断した。過去selectionはこの実行の入力にしていない。長文JSONの端末受渡しでmacOSの行バッファ制限に当たり、未受理bufferを消去して非canonicalモードへ変更し、同じ回答byteを再送した。判断の再生成はしていない。
+
+入力requestのSHA-256は `94537e26761077db204f7301c9d51f1fb96458bd0f8808a7bcd4fc4b5ab50558`。入力本文側のcanonical SHA-256は `cccb476a873364858173617387041dd65f6a65981373b5ba2fa3a6c04a7a0f1c`。
+
+保存先は `evals/clip_composition/outputs/work-caption-display-skill-doctor-20260906-v001/`。検査・採用、両projection、正式注文書、行組み、renderer admissionまで成功した。描画開始時に `output-reservation / UNSAFE_PRESENTATION_OUTPUT_DIRECTORY` で失敗し、動画は生成されなかった。既存rendererは `outputs/presentation/` の配下だけを許すが、新しいexecutorの出力先指定がそれに合っていなかった。既存rendererや検査規約の欠陥ではなく、新規接続部分の実装欠陥として扱う。
+
+限定修正は、出力先を既存の許可配下に直すこと、および**今回すでに得た新規判断を再生成せず描画準備から再開すること**に限定する。新planは元の入力・回答・Skill結果・元planの同一byte snapshotをSHAで束縛する。元の本文・素材・表示規約・Skill実装・採用方針が一致する場合だけ再使用できる。入力request・回答・Skill結果は元のbyteを保持し、昇格記録とmanifestには元の由来を明記する。新しいSkill呼出があったとは数えない。過去の旧fixtureを新規判断と称する経路ではない。回答を書き換えた場合、同じ書換えを回答と結果の両方へ加えても拒否する。
+
+新規13テストが合格し、出力先、元判断からの再開、入力差替え・回答同時改変の拒否を追加確認した。既存Coreは変更していない。
+
+**GPT_DECISION**: この限定修正と、保存した今回の新規判断からの再開で同一work-orderを続行してよいか。出力先を直すための再描画であり、新しい推論・素材・技法・正式規約は増やさない。ここでは再開実走をまだ行っていない。元の新規判断を含む失敗attemptは証拠として保持し、成功・品質合格へ書き換えない。

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "caption-display-skill-renderer-execution-v001",
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-caption-display-skill-doctor-20260906-v001/renderer-job.json",
+    "fileSha256": "e176e1eb5a90ca595b45349a33cf1a232dd68460ece6dae651e3ea467485904c",
+    "canonicalSha256": "cb148dd1bb4da1ed2e6de23f2007c8fe3975c617c9e1eefef40ae670580a8705"
+  },
+  "exitCode": 1,
+  "result": {
+    "exitCode": 1,
+    "failure": {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "output-reservation",
+      "violations": [
+        {
+          "code": "RENDER_JOB_SCHEMA_INVALID",
+          "path": "$.outputDirectory",
+          "relatedIds": [],
+          "details": {
+            "reason": "UNSAFE_PRESENTATION_OUTPUT_DIRECTORY"
+          }
+        }
+      ]
+    }
+  }
+}
