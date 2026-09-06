@@ -1,31 +1,10 @@
-# 字幕Skill 3版比較 — 第2 Skillの人間レビュー待ち
+# 字幕意味まとまりSkill — 技術実証終了
 
-同じ確定本文・映像・音声・場面順・表示規約を使用しています。第1 Skillのみの版は、人間による見やすさ・意味上の分割・気持ちよさの3項目合格を正式記録済みです。
+「ZEV進行管理２」経由のkawafmm承認済み指示により、HUMAN_DECISIONを残さず技術実証として閉じました。人間A/B比較は求めません。
 
-今回の意味まとまり10件を経由した版は、第1 Skillのみの版と最終の14表示・行末・表示時刻が一致し、新しく生成した動画もファイルSHAまで一致しました。独立した意味判断と第1 Skillの無変更再利用を実証した結果です。この素材での追加の見た目改善は主張しません。
+第1 Skill単独版と第2 Skill追加版は本文・表示区切り・時刻・完成動画が同一です。独立した意味判断と第1 Skillの無変更再利用、正式値と実動画への接続は成功しましたが、この素材における可視品質改善は確認できませんでした。
 
-## A: Skill導入前の既存版
-
-![A: Skill導入前の既存版](/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/render-output-v001/presentation-rendered-v002.mp4)
-
-## B: 字幕表示区切りSkillのみ（人間品質合格済み）
-
-![B: 字幕表示区切りSkillのみ（人間品質合格済み）](/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-caption-display-skill-doctor-20260906-v004/render/presentation-rendered-v002.mp4)
-
-## C: 字幕意味まとまり + 字幕表示区切りSkill（今回）
-
-![C: 字幕意味まとまり + 字幕表示区切りSkill（今回）](/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/render/presentation-rendered-v002.mp4)
-
-## HUMAN_DECISION
-
-今回のC版について、次の4点だけが人間の判断待ちです。
-
-- 内容が追いやすいか。
-- 意味のまとまりが自然か。
-- 字幕が過不足なく読めるか。
-- 動画の気持ちよさを損なっていないか。
-
-第1 Skillの合格を第2 Skillの人間評価へ自動転記しません。
+以下は実装結果を説明するテキスト資料です。新しい評価・再視聴の依頼ではありません。
 
 ## 今回採用した意味のまとまり
 
