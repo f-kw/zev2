@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "candidate-discovery-digest-fixed-plan-v002",
+  "planId": "candidate-digest-ymUsGrT6EaA-20260906-v002",
+  "authorization": {
+    "schemaVersion": "candidate-digest-user-authorization-record-v001",
+    "path": "evals/clip_composition/jobs/presentation/candidate-digest-skill-e2e/authorization-record-v001.json",
+    "fileSha256": "c2512f2ae0fbf46ea8ab5ec8bc0b56017393e547c4eb9738a4adf747cd91943c",
+    "canonicalSha256": "8ef8a66af46f73691505fca921b3ec4870117bf80b617112511a008e831fecae"
+  },
+  "request": {
+    "purpose": "既存素材の確定発話から、内容上重要または見どころになる複数箇所を選び、必要な文脈を残して短いダイジェスト動画にする。",
+    "sourceId": "ymUsGrT6EaA",
+    "sourceVideo": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    },
+    "transcript": {
+      "path": "evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/transcript.json",
+      "fileSha256": "28938e70d267c617a50568f2782c541c9d6814eda7537349fefae1b45053960f"
+    },
+    "utterances": {
+      "schemaVersion": "distant-connection-common-utterance-artifact-v001",
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-ymUsGrT6EaA-v001/common-utterance-artifact-v001.json",
+      "fileSha256": "dae20487328216beb7ec96398f79849fbe60910b33823f10dce6c628ce403523",
+      "canonicalSha256": "d8bff64b0b3775dc04d44376f8470d9ab76b7ec88c57055616ae2b4b0ec084c0"
+    },
+    "rendererTemplate": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-template-v002.json",
+      "fileSha256": "cfdb4c6e18e47cde8ea9fe2302d35993a7795ad804586adc36ff601c8ddfca5e",
+      "canonicalSha256": "3b72513981982691439d1dcc2d7cb3f200c4ce04663316edcef35bf260185703"
+    },
+    "captionStyleTemplate": {
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+      "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+      "canonicalSha256": "5594ddf2d1aa08660d893b7b8de7f37954f760981f76d615d13187034c5e3c8a"
+    }
+  },
+  "skills": [
+    {
+      "id": "candidate-discovery",
+      "version": "v001",
+      "mode": "current-codex-stdin-v001",
+      "api": "forbidden"
+    },
+    {
+      "id": "caption-display-boundaries",
+      "version": "v001",
+      "mode": "current-codex-stdin-v001",
+      "api": "forbidden"
+    }
+  ],
+  "policy": {
+    "adoption": "all-validated-candidates-for-this-review-v001",
+    "composition": "multiple-disjoint-evidence-contained-context-ranges",
+    "order": "source-utterance-order",
+    "context": "proposed-contiguous-utterance-ids",
+    "finalTime": "existing-transcript-position-and-core-frame-projection",
+    "quality": "human-review-after-render"
+  },
+  "implementationBindings": [
+    {
+      "path": "runner/src/skills/candidate-discovery-v001.ts",
+      "fileSha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+    },
+    {
+      "path": "evals/clip_composition/candidate_digest_core_adapter_v001.mts",
+      "fileSha256": "8c2621fe64203b4f06b45b915df6b04d71da1ce02feaa1fadf0a12e0513fa592"
+    },
+    {
+      "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3"
+    },
+    {
+      "path": "evals/clip_composition/prompts/theme_generation_prompt_v002.md",
+      "fileSha256": "0f1e0f62ae363412af5468f5226a13386fb635636d5ae9399f3654964a684572"
+    },
+    {
+      "path": "runner/src/distant-connection-common-utterance-artifact-v001.ts",
+      "fileSha256": "e3d2792913b284ba2b2f3cee5e1371a15d2fd3ee54ce6b1615041dfd7217562b"
+    },
+    {
+      "path": "runner/src/transcript-utils.ts",
+      "fileSha256": "9604833fd62d3c52ca5d6dd1ef0f7136d342511901de13ae80f31570e8cecd17"
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002",
+  "priorCandidateJudgment": {
+    "planSnapshot": {
+      "schemaVersion": "candidate-discovery-digest-fixed-plan-v001",
+      "path": "evals/clip_composition/jobs/presentation/candidate-digest-skill-e2e/fixed-plan-v001.json",
+      "fileSha256": "02da85d5c57834870fa41b5f709b369a4dd5be5eb269b6f94de33e091d9939dd",
+      "canonicalSha256": "50bbaf638efdf42c33326efc37c9fb702b794b200887c242a1de1fb312900ccb"
+    },
+    "request": {
+      "schemaVersion": "candidate-discovery-judgment-request-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v001/candidate-request.json",
+      "fileSha256": "42969b77e20b6c7c0b12b5475c5053fda4385104692c91ef4e815a52c7df093f",
+      "canonicalSha256": "cef6962157b4a2a6409df2c5f126b8d21eef2a4a2a2d7941c98ec5ebcba94f0d"
+    },
+    "response": {
+      "schemaVersion": "candidate-discovery-judgment-response-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v001/candidate-response.json",
+      "fileSha256": "7567084730f80aa9d5c9ee84e3fd7d160181106a6577ff2d9a67e482b0272994",
+      "canonicalSha256": "c2b214f440b3f27161baf1767dfcab016b70d47fae9cc1a32bf5f88dfc125c4e"
+    },
+    "result": {
+      "schemaVersion": "candidate-discovery-skill-result-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v001/candidate-result.json",
+      "fileSha256": "9e04e61002b1a0730bf1ae8cd28b815125965221e6b61cd37879019656061823",
+      "canonicalSha256": "13e4bfa6afa0b50e3a91068268300c2e2a3ea014678c6b64ddb9f19a84eb5758"
+    },
+    "failure": {
+      "schemaVersion": "candidate-digest-e2e-failure-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v001/failure.json",
+      "fileSha256": "5a8b4fbe8f6f9a1dfd5aa310473afde7411893f0761c8006d84e939af8126244",
+      "canonicalSha256": "e0940b87e3d1a585e9fced051f6ff4b45ba03175f5bd3f3467de46ab9ef704f5"
+    }
+  }
+}

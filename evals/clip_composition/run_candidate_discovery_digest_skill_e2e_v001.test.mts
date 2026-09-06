@@ -3,17 +3,18 @@ import test from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {bind, formal, sha, buildCandidateRequestV001, validateCandidateAdoptionV001,
   promoteCandidateAdoptionV001, assertDigestPlanV001, decodeDigestTransportV001,
+  loadDigestContextV001,
   type Context, type Json} from './run_candidate_discovery_digest_skill_e2e_v001.mts';
 import {buildDigestCaptionInputsV001, validateDigestDisplayV001, constructDigestCaptionCoreV001}
   from './candidate_digest_core_adapter_v001.mts';
 import {runCandidateDiscoveryV001} from '../../runner/src/skills/candidate-discovery-v001.js';
 import {runCaptionDisplayBoundariesV001} from '../../runner/src/skills/caption-display-boundaries-v001.js';
-const planPath = 'evals/clip_composition/jobs/presentation/candidate-digest-skill-e2e/fixed-plan-v001.json';
+const planPath = 'evals/clip_composition/jobs/presentation/candidate-digest-skill-e2e/fixed-plan-v002.json';
 const plan = JSON.parse(await readFile(planPath, 'utf8'));
 const fixture = (): Context => {
   const segments = Array.from({length: 6}, (_, i) => ({id: i + 1, startMs: 1000 + i * 1000,
     endMs: 1500 + i * 1000, text: ['鍵', '発見', '余談', '扉', '開いた', '余談'][i]}));
-  return {plan, planBinding: bind(planPath, plan), authorization: {}, rendererTemplate: {}, captionStyleTemplate: {},
+  return {plan, planBinding: bind(planPath, plan), authorization: {}, rendererTemplate: {}, captionStyleTemplate: {}, priorCandidate: null,
     transcript: {segments} as any, utterances: {utterances: segments.map((s, i) => ({utteranceId: `u-${i + 1}`,
       ordinal: i + 1, text: s.text, sourceStartMs: s.startMs, sourceEndMs: s.endMs, sourceSegmentIds: [s.id]}))}} as Context;
 };
@@ -85,6 +86,18 @@ test('標準入力は日本語の1行JSONを受理し、重複key・非有限値
   for (const line of ['{"text":1,"text":2}', '{"text":NaN}', '{"text":1e999}']) {
     assert.throws(() => decodeDigestTransportV001(line));
   }
+});
+
+test('入口修正後は実行済みの同一候補判断だけを再開し、回答の差し替えを拒否する', async () => {
+  const c = await loadDigestContextV001(planPath);
+  assert.ok(c.priorCandidate);
+  const r = buildCandidateRequestV001(c);
+  assert.equal(sha(formal(r)), c.plan.priorCandidateJudgment.request.fileSha256);
+  const token = validateCandidateAdoptionV001(c, r, c.priorCandidate.response, c.priorCandidate.result);
+  assert.equal(promoteCandidateAdoptionV001(token).adoption.selectedCandidates.length, 3);
+  const response = structuredClone(c.priorCandidate.response), result = structuredClone(c.priorCandidate.result);
+  response.answer.candidates[0].title = '別の判断'; result.answer = response.answer;
+  assert.throws(() => validateCandidateAdoptionV001(c, r, response, result), /PRIOR_JUDGMENT_CHANGED/);
 });
 
 test('候補ごとの字幕を無変更Skillで呼出し、全文順序とCoreへの対応を保存する', async () => {

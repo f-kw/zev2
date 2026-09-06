@@ -1,0 +1,120 @@
+TAP version 13
+# Subtest: clock対応forward-only版は旧実装を不変保持し現行字幕契約だけを信頼する
+ok 1 - clock対応forward-only版は旧実装を不変保持し現行字幕契約だけを信頼する
+  ---
+  duration_ms: 4.478125
+  ...
+# Subtest: strict job, decision, tool and manifest contracts reject unknown or changed facts
+ok 2 - strict job, decision, tool and manifest contracts reject unknown or changed facts
+  ---
+  duration_ms: 1.116166
+  ...
+# Subtest: 30fps source without audio builds only the approved disjoint frame intervals
+ok 3 - 30fps source without audio builds only the approved disjoint frame intervals
+  ---
+  duration_ms: 1041.733125
+  ...
+# Subtest: 60fps globally takes even source frames and produces the same 30fps frame grid
+ok 4 - 60fps globally takes even source frames and produces the same 30fps frame grid
+  ---
+  duration_ms: 1038.681541
+  ...
+# Subtest: 16ms video offsetを44.1kHzの最寄りsampleへ写像しcontainer時刻を維持する
+ok 5 - 16ms video offsetを44.1kHzの最寄りsampleへ写像しcontainer時刻を維持する
+  ---
+  duration_ms: 953.939041
+  ...
+# Subtest: 60fps・181 decoded framesの最後のglobal-even frame 180を媒体終端までの区間で選べる
+ok 6 - 60fps・181 decoded framesの最後のglobal-even frame 180を媒体終端までの区間で選べる
+  ---
+  duration_ms: 1185.823541
+  ...
+# Subtest: 60fps・181 decoded framesの48kHz AAC末尾は実在sampleだけを使いvideo-only尾を明示する
+ok 7 - 60fps・181 decoded framesの48kHz AAC末尾は実在sampleだけを使いvideo-only尾を明示する
+  ---
+  duration_ms: 1414.486959
+  ...
+# Subtest: 44100Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+ok 8 - 44100Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+  ---
+  duration_ms: 1764.873916
+  ...
+# Subtest: 48000Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+ok 9 - 48000Hz audio uses video-frame sample boundaries and keeps exact presentation duration
+  ---
+  duration_ms: 1766.37975
+  ...
+# Subtest: positive source audio PTS is preserved as zero-filled canonical PCM instead of moving speech forward
+ok 10 - positive source audio PTS is preserved as zero-filled canonical PCM instead of moving speech forward
+  ---
+  duration_ms: 958.470375
+  ...
+# Subtest: an internal audio PTS gap remains silent between real PCM before and after it
+ok 11 - an internal audio PTS gap remains silent between real PCM before and after it
+  ---
+  duration_ms: 1123.112583
+  ...
+# Subtest: source audio without both stream and packet presentation clocks is rejected without decoded fallback
+ok 12 - source audio without both stream and packet presentation clocks is rejected without decoded fallback
+  ---
+  duration_ms: 216.81075
+  ...
+# Subtest: non-contiguous selected tone segments preserve approved segment order in decoded PCM
+ok 13 - non-contiguous selected tone segments preserve approved segment order in decoded PCM
+  ---
+  duration_ms: 1055.143417
+  ...
+# Subtest: stereo FL and FR channel order remains distinguishable in real decoded PCM
+ok 14 - stereo FL and FR channel order remains distinguishable in real decoded PCM
+  ---
+  duration_ms: 1038.470167
+  ...
+# Subtest: raw millisecond endpoint beyond decoded source is rejected before frame rounding can hide it
+ok 15 - raw millisecond endpoint beyond decoded source is rejected before frame rounding can hide it
+  ---
+  duration_ms: 0.419625
+  ...
+# Subtest: audio presentation shortfall is allowed only at the exact decoded-media terminal segment
+ok 16 - audio presentation shortfall is allowed only at the exact decoded-media terminal segment
+  ---
+  duration_ms: 0.114708
+  ...
+# Subtest: unsafe symlink is rejected before reading and existing output is never overwritten
+ok 17 - unsafe symlink is rejected before reading and existing output is never overwritten
+  ---
+  duration_ms: 145.286375
+  ...
+# Subtest: parent directory replaced by symlink during processing is rejected immediately before publish
+ok 18 - parent directory replaced by symlink during processing is rejected immediately before publish
+  ---
+  duration_ms: 2.423708
+  ...
+# Subtest: basis declaration is checked against actual JSON kind and direct execution has no synthetic job-hash fallback
+ok 19 - basis declaration is checked against actual JSON kind and direct execution has no synthetic job-hash fallback
+  ---
+  duration_ms: 134.583416
+  ...
+# Subtest: logical build is deterministic across two job ids and output directories
+ok 20 - logical build is deterministic across two job ids and output directories
+  ---
+  duration_ms: 680.507625
+  ...
+# Subtest: CLI distinguishes invalid validated input from an unreadable path
+ok 21 - CLI distinguishes invalid validated input from an unreadable path
+  ---
+  duration_ms: 89.244166
+  ...
+# Subtest: every fixed violation code fires from its validator, binding, QC stage, or filesystem path
+ok 22 - every fixed violation code fires from its validator, binding, QC stage, or filesystem path
+  ---
+  duration_ms: 999.1185
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 15680.0565

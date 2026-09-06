@@ -1,0 +1,1953 @@
+{
+  "schemaVersion": "candidate-digest-display-request-v001",
+  "requestId": "candidate-digest-ymUsGrT6EaA-20260906-v002-display-3",
+  "planBinding": {
+    "schemaVersion": "candidate-discovery-digest-fixed-plan-v002",
+    "path": "evals/clip_composition/jobs/presentation/candidate-digest-skill-e2e/fixed-plan-v002.json",
+    "fileSha256": "7a03e8fde6855d34f0d02a8fbda4692f02403884ac48e8fbf9b78a2f368ff946",
+    "canonicalSha256": "083bbc2e90921414ed102bfb4929b2eadda8195df84a3be683bac8d471a24087"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "candidate-digest-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/machine-adoption.json",
+    "fileSha256": "e98e06541d3f1f8324439063870f4184f002bc7a8abf1ef065e68a90ee65e6fb",
+    "canonicalSha256": "78d4ed84e3edeffe78a879631e1e2c9554de7848d9e2c9fb10ccfd09c7773167"
+  },
+  "meaningInputBinding": {
+    "schemaVersion": "candidate-digest-presentation-meaning-input-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/meaning-input.json",
+    "fileSha256": "1d9be310e59451e71d82a94427d4e567979ee93f313040ff7e83933dc816aca8",
+    "canonicalSha256": "58197edba8d8b11c787ea8be3390cd1201d5e47f1cd78ffd166e7c8cc4e9cc5d"
+  },
+  "candidateId": "candidate-0003",
+  "timelineSegmentId": "segment-0003",
+  "input": {
+    "schemaVersion": "presentation-zevo-caption-selection-input-v001",
+    "taskDescription": "各captionの境界片を記載順に一度ずつ全量使用してください。cueは、直前から続く発話がそれだけで意味を読める短いまとまりになり、その末尾で発話の意味が一区切りつくように、cue終端を提示されたboundaryIdから選んでください。cue終端を意味の基準で先に決め、そのcueが一行に収まらない場合だけ行末を提示されたboundaryIdから選んでください。cue終端と行末は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。必要な行末候補が複数ある場合は、二行の幅が大きく偏らない候補を選んでください。各cueはstyleLimits.maxLinesPerCue以下とし、一行に収まるcueを改行しないでください。最後のcueはcaption最後のboundaryIdで終えてください。本文、境界片、ID、順序を変更しないでください。",
+    "captions": [
+      {
+        "captionId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-segment-3",
+        "boundaryCandidates": [
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000216",
+            "text": "ペ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000217",
+            "text": "コ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000218",
+            "text": "ラ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000219",
+            "text": "、"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000220",
+            "text": "ペ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000221",
+            "text": "コ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000222",
+            "text": "ラ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000223",
+            "text": "じ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000224",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000225",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000226",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000227",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000228",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000229",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000230",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000231",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000232",
+            "text": "ま"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000233",
+            "text": "ぁ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000234",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000235",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000236",
+            "text": "怖"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000237",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000238",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000239",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000240",
+            "text": "ね"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000241",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000242",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000243",
+            "text": "ぱ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000244",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000245",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000246",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000247",
+            "text": "会"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000248",
+            "text": "社"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000249",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000250",
+            "text": "、"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000251",
+            "text": "ア"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000252",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000253",
+            "text": "グ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000254",
+            "text": "ル"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000255",
+            "text": "攻"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000256",
+            "text": "め"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000257",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000258",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000259",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000260",
+            "text": "め"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000261",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000262",
+            "text": "ほ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000263",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000264",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000265",
+            "text": "マ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000266",
+            "text": "ジ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000267",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000268",
+            "text": "怖"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000269",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000270",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000271",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000272",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000273",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000274",
+            "text": "ぁ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000275",
+            "text": "ア"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000276",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000277",
+            "text": "グ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000278",
+            "text": "ル"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000279",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000280",
+            "text": "怖"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000281",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000282",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000283",
+            "text": "せ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000284",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000285",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000286",
+            "text": "マ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000287",
+            "text": "ジ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000288",
+            "text": "上"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000289",
+            "text": "手"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000290",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000291",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000292",
+            "text": "思"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000293",
+            "text": "う"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000294",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000295",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000296",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000297",
+            "text": "会"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000298",
+            "text": "社"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000299",
+            "text": "じ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000300",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000301",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000302",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000303",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000304",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000305",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000306",
+            "text": "確"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000307",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000308",
+            "text": "に"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000309",
+            "text": "新"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000310",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000311",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000312",
+            "text": "要"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000313",
+            "text": "素"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000314",
+            "text": "連"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000315",
+            "text": "打"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000316",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000317",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000318",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000319",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000320",
+            "text": "ね"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000321",
+            "text": "ボ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000322",
+            "text": "タ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000323",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000324",
+            "text": "連"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000325",
+            "text": "打"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000326",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000327",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000328",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000329",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000330",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000331",
+            "text": "び"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000332",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000333",
+            "text": "く"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000334",
+            "text": "り"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000335",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000336",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000337",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000338",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000339",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000340",
+            "text": "カ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000341",
+            "text": "メ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000342",
+            "text": "ラ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000343",
+            "text": "ワ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000344",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000345",
+            "text": "ク"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000346",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000347",
+            "text": "今"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000348",
+            "text": "回"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000349",
+            "text": "時"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000350",
+            "text": "間"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000351",
+            "text": "差"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000352",
+            "text": "怖"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000353",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000354",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000355",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000356",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000357",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000358",
+            "text": "分"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000359",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000360",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000361",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000362",
+            "text": "る"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000363",
+            "text": "よ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000364",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000365",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000366",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000367",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000368",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000369",
+            "text": "ぱ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000370",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000371",
+            "text": "ホ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000372",
+            "text": "ラ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000373",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000374",
+            "text": "ゲ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000375",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000376",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000377",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000378",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000379",
+            "text": "る"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000380",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000381",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000382",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000383",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000384",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000385",
+            "text": "分"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000386",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000387",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000388",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000389",
+            "text": "く"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000390",
+            "text": "る"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000391",
+            "text": "じ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000392",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000393",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000394",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000395",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000396",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000397",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000398",
+            "text": "来"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000399",
+            "text": "そ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000400",
+            "text": "う"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000401",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000402",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000403",
+            "text": "み"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000404",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000405",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000406",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000407",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000408",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000409",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000410",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000411",
+            "text": "会"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000412",
+            "text": "社"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000413",
+            "text": "す"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000414",
+            "text": "ご"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000415",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000416",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000417",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000418",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000419",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000420",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000421",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000422",
+            "text": "う"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000423",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000424",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000425",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000426",
+            "text": "来"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000427",
+            "text": "る"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000428",
+            "text": "よ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000429",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000430",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000431",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000432",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000433",
+            "text": "う"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000434",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000435",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000436",
+            "text": "ろ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000437",
+            "text": "じ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000438",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000439",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000440",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000441",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000442",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000443",
+            "text": "ろ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000444",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000445",
+            "text": "油"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000446",
+            "text": "断"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000447",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000448",
+            "text": "せ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000449",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000450",
+            "text": "ビ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000451",
+            "text": "ビ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000452",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000453",
+            "text": "せ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000454",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000455",
+            "text": "く"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000456",
+            "text": "る"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000457",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000458",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000459",
+            "text": "マ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000460",
+            "text": "ジ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000461",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000462",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000463",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000464",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000465",
+            "text": "会"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000466",
+            "text": "社"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000467",
+            "text": "多"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000468",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000469",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000470",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000471",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000472",
+            "text": "思"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000473",
+            "text": "う"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000474",
+            "text": "ビ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000475",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000476",
+            "text": "玉"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000477",
+            "text": "ば"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000478",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000479",
+            "text": "ち"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000480",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000481",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000482",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000483",
+            "text": "時"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000484",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000485",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000486",
+            "text": "思"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000487",
+            "text": "う"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000488",
+            "text": "け"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000489",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000490",
+            "text": "わ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000491",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000492",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000493",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000494",
+            "text": "る"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000495",
+            "text": "よ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000496",
+            "text": "ね"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000497",
+            "text": "人"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000498",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000499",
+            "text": "び"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000500",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000501",
+            "text": "く"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000502",
+            "text": "り"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000503",
+            "text": "ポ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000504",
+            "text": "イ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000505",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000506",
+            "text": "ト"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000507",
+            "text": "ち"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000508",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000509",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000510",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000511",
+            "text": "ア"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000512",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000513",
+            "text": "グ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000514",
+            "text": "ル"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000515",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000516",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000517",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000518",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000519",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000520",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000521",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000522",
+            "text": "ト"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000523",
+            "text": "イ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000524",
+            "text": "レ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000525",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000526",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000527",
+            "text": "そ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000528",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000529",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000530",
+            "text": "覗"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000531",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000532",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000533",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000534",
+            "text": "け"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000535",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000536",
+            "text": "何"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000537",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000538",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000539",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000540",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000541",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000542",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000543",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000544",
+            "text": "結"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000545",
+            "text": "局"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000546",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000547",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000548",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000549",
+            "text": "作"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000550",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000551",
+            "text": "よ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000552",
+            "text": "じ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000553",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000554",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000555",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000556",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000557",
+            "text": "思"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000558",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000559",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000560",
+            "text": "わ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000561",
+            "text": "バ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000562",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000563",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000564",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000565",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000566",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000567",
+            "text": "規"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000568",
+            "text": "模"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000569",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000570",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000571",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000572",
+            "text": "え"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000573",
+            "text": "え"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000574",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000575",
+            "text": "に"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000576",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000577",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000578",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000579",
+            "text": "覗"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000580",
+            "text": "く"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000581",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000582",
+            "text": "け"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000583",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000584",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000585",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000586",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000587",
+            "text": "毎"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000588",
+            "text": "回"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000589",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000590",
+            "text": "怖"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000591",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000592",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000593",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000594",
+            "text": "せ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000595",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000596",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000597",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000598",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000599",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000600",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000601",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000602",
+            "text": "ね"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000603",
+            "text": "え"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000604",
+            "text": "今"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000605",
+            "text": "年"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000606",
+            "text": "一"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000607",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000608",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000609",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000610",
+            "text": "わ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000611",
+            "text": "今"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000612",
+            "text": "年"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000613",
+            "text": "一"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000614",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000615",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000616",
+            "text": "び"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000617",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000618",
+            "text": "く"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000619",
+            "text": "り"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000620",
+            "text": "ポ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000621",
+            "text": "イ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000622",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000623",
+            "text": "ト"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000624",
+            "text": "マ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000625",
+            "text": "ジ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000626",
+            "text": "う"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000627",
+            "text": "ま"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000628",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000629",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000630",
+            "text": "思"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000631",
+            "text": "う"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000632",
+            "text": "ほ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000633",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000634",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000635",
+            "text": "に"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000636",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000637",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000638",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000639",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000640",
+            "text": "赤"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000641",
+            "text": "ち"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000642",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000643",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000644",
+            "text": "シ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000645",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000646",
+            "text": "ル"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000647",
+            "text": "ド"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000648",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000649",
+            "text": "り"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000650",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000651",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000652",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000653",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000654",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000655",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000656",
+            "text": "今"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000657",
+            "text": "回"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000658",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000659",
+            "text": "そ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000660",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000661",
+            "text": "化"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000662",
+            "text": "け"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000663",
+            "text": "物"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000664",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000665",
+            "text": "赤"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000666",
+            "text": "ち"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000667",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000668",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000669",
+            "text": "を"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000670",
+            "text": "傷"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000671",
+            "text": "つ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000672",
+            "text": "け"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000673",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000674",
+            "text": "せ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000675",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000676",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000677",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000678",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000679",
+            "text": "め"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000680",
+            "text": "ち"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000681",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000682",
+            "text": "め"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000683",
+            "text": "ち"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000684",
+            "text": "ゃ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000685",
+            "text": "そ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000686",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000687",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000688",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000689",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000690",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000691",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000692",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-digest-ymUsGrT6EaA-20260906-v002-input-caption-boundary-000693",
+            "text": "な"
+          }
+        ]
+      }
+    ],
+    "styleLimits": {
+      "maxLogicalWidthPerLine": 36,
+      "maxLinesPerCue": 2,
+      "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+    }
+  },
+  "inputCanonicalSha256": "6acda2cff8cff6ed38a45cab5e293be57e0a5684e60e20132879d19bbe204c9c"
+}

@@ -27,7 +27,7 @@ import {decodePresentationCaptionB1StrictJsonV001 as decodeWire}
 export type Json = Record<string, any>;
 export type Binding = {schemaVersion: string; path: string; fileSha256: string; canonicalSha256: string};
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-export const PLAN_SCHEMA = 'candidate-discovery-digest-fixed-plan-v001';
+export const PLAN_SCHEMA = 'candidate-discovery-digest-fixed-plan-v002';
 export const PATHS = Object.freeze({
   skill: 'runner/src/skills/candidate-discovery-v001.ts',
   executor: 'evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts',
@@ -101,7 +101,7 @@ export async function publish(p: string, value: Json) {
 }
 export function assertDigestPlanV001(p: unknown): asserts p is Json {
   if (!keys(p, ['schemaVersion', 'planId', 'authorization', 'request', 'skills', 'policy',
-    'implementationBindings', 'outputRoot']) || p.schemaVersion !== PLAN_SCHEMA || !ID.test(p.planId)
+    'implementationBindings', 'outputRoot', 'priorCandidateJudgment']) || p.schemaVersion !== PLAN_SCHEMA || !ID.test(p.planId)
     || !WP.test(p.outputRoot) || !p.outputRoot.startsWith('evals/clip_composition/outputs/presentation/work-candidate-digest-skill-')
     || !keys(p.request, ['purpose', 'sourceId', 'sourceVideo', 'transcript', 'utterances',
       'rendererTemplate', 'captionStyleTemplate']) || !ID.test(p.request.sourceId)
@@ -119,6 +119,10 @@ export function assertDigestPlanV001(p: unknown): asserts p is Json {
     assertByteBinding(p.implementationBindings[i]);
     if (p.implementationBindings[i].path !== expected) fail('IMPLEMENTATION_BINDING_INVALID');
   });
+  if (p.priorCandidateJudgment !== null) {
+    if (!keys(p.priorCandidateJudgment, ['planSnapshot', 'request', 'response', 'result', 'failure'])) fail('PRIOR_JUDGMENT_BINDINGS_INVALID');
+    for (const b of Object.values(p.priorCandidateJudgment)) assertBinding(b);
+  }
 }
 export async function loadDigestContextV001(planPath: string) {
   const plan = await readJson(planPath);
@@ -144,8 +148,30 @@ export async function loadDigestContextV001(planPath: string) {
   for (const v of [plan.request.sourceVideo, ...plan.implementationBindings]) {
     await verifyByte(v);
   }
-  return {plan, planBinding: bind(planPath, plan), authorization, utterances, transcript,
-    rendererTemplate, captionStyleTemplate};
+  let priorCandidate: Json | null = null;
+  if (plan.priorCandidateJudgment !== null) {
+    priorCandidate = Object.fromEntries(await Promise.all(Object.entries(plan.priorCandidateJudgment)
+      .map(async ([k, b]) => [k, await readBound(b as Binding)])));
+    const old = priorCandidate.planSnapshot;
+    const r = priorCandidate.request;
+    if (!same(old.request, plan.request) || !same(old.skills, plan.skills) || !same(old.policy, plan.policy)
+      || !same(old.authorization, plan.authorization)
+      || !same(r.planBinding, plan.priorCandidateJudgment.planSnapshot)
+      || priorCandidate.failure.stage !== 'core-adapter-module-load' || priorCandidate.failure.observedExitCode !== 13
+      || priorCandidate.response.requestFileSha256 !== plan.priorCandidateJudgment.request.fileSha256
+      || !same(priorCandidate.response.answer, priorCandidate.result.answer)) fail('PRIOR_JUDGMENT_PROVENANCE_MISMATCH');
+    for (const oldBinding of old.implementationBindings) {
+      // 通常修正を許された実行配線以外の入力・意味判断実装は同一に固定する。
+      if (![PATHS.executor, PATHS.coreAdapter].includes(oldBinding.path)
+        && !same(oldBinding, plan.implementationBindings.find((v: Json) => v.path === oldBinding.path))) fail('PRIOR_JUDGMENT_SEMANTICS_CHANGED');
+    }
+    assertCandidateDiscoveryResultV001(priorCandidate.result);
+  }
+  const c = {plan, planBinding: bind(planPath, plan), authorization, utterances, transcript,
+    rendererTemplate, captionStyleTemplate, priorCandidate};
+  if (priorCandidate && (!same(priorCandidate.request.input, buildCandidateInputV001(c))
+    || priorCandidate.request.inputCanonicalSha256 !== canonicalSha(buildCandidateInputV001(c)))) fail('PRIOR_JUDGMENT_INPUT_CHANGED');
+  return c;
 }
 export type Context = Awaited<ReturnType<typeof loadDigestContextV001>>;
 export function buildCandidateInputV001(c: Context): CandidateDiscoveryInputV001 {
@@ -158,6 +184,7 @@ export function buildCandidateInputV001(c: Context): CandidateDiscoveryInputV001
   return input;
 }
 export function buildCandidateRequestV001(c: Context) {
+  if (c.priorCandidate) return structuredClone(c.priorCandidate.request);
   const input = buildCandidateInputV001(c);
   return {schemaVersion: 'candidate-discovery-judgment-request-v001', requestId: `${c.plan.planId}-candidates`,
     planBinding: c.planBinding, input, inputCanonicalSha256: canonicalSha(input)};
@@ -176,6 +203,7 @@ export function validateCandidateAdoptionV001(context: Context, request: Json, r
     || response.schemaVersion !== 'candidate-discovery-judgment-response-v001'
     || response.requestFileSha256 !== sha(formal(request)) || !same(response.answer, answer)
     || typeof response.judgmentNote !== 'string' || response.judgmentNote.length === 0) fail('JUDGMENT_PROVENANCE_MISMATCH');
+  if (c.priorCandidate && (!same(response, c.priorCandidate.response) || !same(result, c.priorCandidate.result))) fail('PRIOR_JUDGMENT_CHANGED');
   if (answer.status !== 'complete') fail('CANDIDATE_SKILL_ABSTAINED');
   // 「複数箇所」という承認済み構成条件。独自の上限や採点規則ではない。
   if (answer.candidates.length < 2) fail('MULTIPLE_HIGHLIGHTS_REQUIRED');
@@ -221,6 +249,7 @@ export function validateCandidateAdoptionV001(context: Context, request: Json, r
     requestBinding: bind(out('candidate-request.json'), request),
     responseBinding: bind(out('candidate-response.json'), response),
     resultBinding: bind(out('candidate-result.json'), result),
+    priorCandidateJudgmentBindings: c.plan.priorCandidateJudgment,
     validation: {provenance: 'passed', idMembershipOrder: 'passed', evidenceContained: 'passed',
       contextCoverage: 'passed', noOverlap: 'passed', compositionCondition: 'passed'},
     policy: c.plan.policy,
@@ -268,13 +297,14 @@ export async function executeDigestE2EV001(planPath: string) {
     await publish(target('plan-snapshot.json'), c.plan);
     const request = buildCandidateRequestV001(c);
     const req = await publish(target('candidate-request.json'), request);
-    let response: Json | undefined;
-    const result = await runCandidateDiscoveryV001(request.input, async input => {
+    let response: Json | undefined = c.priorCandidate?.response;
+    const result = c.priorCandidate?.result ?? await runCandidateDiscoveryV001(request.input, async input => {
       if (!same(input, request.input)) fail('SKILL_INPUT_CHANGED');
       response = await judgeThroughStdinV001(request);
       await publish(target('candidate-response.json'), response);
       return response.answer;
     });
+    if (c.priorCandidate) await publish(target('candidate-response.json'), response!);
     const res = await publish(target('candidate-result.json'), result);
     const current = await loadDigestContextV001(planPath);
     if (!same(current.planBinding, c.planBinding)) fail('PLAN_CHANGED_DURING_JUDGMENT');
@@ -321,6 +351,8 @@ export async function executeDigestE2EV001(planPath: string) {
     const manifest = {schemaVersion: 'candidate-discovery-digest-skill-e2e-manifest-v001', status: 'review-ready',
       instruction: 'ZEV進行管理２ 指示-001', planBinding: fresh.planBinding,
       candidateJudgment: {request: req, response: bind(target('candidate-response.json'), response!), result: res},
+      candidateJudgmentMode: c.priorCandidate ? 'continue-same-new-codex-judgment-after-cli-repair' : 'new-current-codex-judgment',
+      priorCandidateJudgmentBindings: c.plan.priorCandidateJudgment,
       machineAdoption: ad, editPlan: ep, baseMedia: base,
       displayJudgments, reusedDisplaySkill: c.plan.implementationBindings.find((v: Json) => v.path === PATHS.displaySkill),
       core: artifacts, renderer,
@@ -394,7 +426,7 @@ export async function verifyDigestE2EV001(manifestPath: string) {
     selectedCandidates: adoption.selectedCandidates.length,
     finalFrames: timeline.baseMedia.expectedFrameCount, humanDecision: 'pending'};
 }
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+async function main() {
   const [command, p] = process.argv.slice(2);
   if (!p) fail('ARGUMENT_REQUIRED');
   if (command === 'preflight') {
@@ -404,4 +436,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   } else if (command === 'run') process.stdout.write(`${JSON.stringify(await executeDigestE2EV001(p))}\n`);
   else if (command === 'verify') process.stdout.write(`${JSON.stringify(await verifyDigestE2EV001(p))}\n`);
   else fail('COMMAND_INVALID');
+}
+// CLIのPromiseをmodule評価に含めない。adapterがこのmoduleの純粋関数を参照しても
+// 最上位awaitの循環で終了せず、明示的な失敗はstderrと非0終了へ伝える。
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch(error => {console.error(error); process.exitCode = 1;});
 }

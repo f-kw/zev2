@@ -1,0 +1,130 @@
+TAP version 13
+# Subtest: PRP001 formal byte・exact schema・決定的再構築
+ok 1 - PRP001 formal byte・exact schema・決定的再構築
+  ---
+  duration_ms: 5.868834
+  ...
+# Subtest: PRP002 source packageとcaption集合・順序・IDがexact一致
+ok 2 - PRP002 source packageとcaption集合・順序・IDがexact一致
+  ---
+  duration_ms: 2.048208
+  ...
+# Subtest: PRP003 cue終端がstrict増加し最終boundaryまでatom全量を一度ずつ覆う
+ok 3 - PRP003 cue終端がstrict増加し最終boundaryまでatom全量を一度ずつ覆う
+  ---
+  duration_ms: 1.481375
+  ...
+# Subtest: PRP004 旧selectionのlineEndBoundaryIdsがprojection byteへ0件
+ok 4 - PRP004 旧selectionのlineEndBoundaryIdsがprojection byteへ0件
+  ---
+  duration_ms: 1.984167
+  ...
+# Subtest: PRP005 sourceSelectionDigestにpathがなく旧selection bindingをreject
+ok 5 - PRP005 sourceSelectionDigestにpathがなく旧selection bindingをreject
+  ---
+  duration_ms: 1.17475
+  ...
+# Subtest: PRP006 同一sourceとselectionから2回製造したprojection byteが一致
+ok 6 - PRP006 同一sourceとselectionから2回製造したprojection byteが一致
+  ---
+  duration_ms: 2.468833
+  ...
+# Subtest: PRI2-001 実候補をtimeline v003の+16ms frame mappingで正式注文へ変換する
+ok 7 - PRI2-001 実候補をtimeline v003の+16ms frame mappingで正式注文へ変換する
+  ---
+  duration_ms: 17.20675
+  ...
+# Subtest: PRI2-002 前後の本文・発話ID・順序を候補から変更しない
+ok 8 - PRI2-002 前後の本文・発話ID・順序を候補から変更しない
+  ---
+  duration_ms: 11.395125
+  ...
+# Subtest: PRI2-003 timeline v002を新版へ混入させずfail-closedにする
+ok 9 - PRI2-003 timeline v002を新版へ混入させずfail-closedにする
+  ---
+  duration_ms: 8.921958
+  ...
+# Subtest: PRI2-004 offset=0のv003は旧v001と同じframe意味を持つ
+ok 10 - PRI2-004 offset=0のv003は旧v001と同じframe意味を持つ
+  ---
+  duration_ms: 13.530917
+  ...
+# Subtest: PRI2-005 formal byteとbindingは同一入力で決定的
+ok 11 - PRI2-005 formal byteとbindingは同一入力で決定的
+  ---
+  duration_ms: 19.577666
+  ...
+# Subtest: PRI2-006 timeline binding schema差と余分fieldを拒否する
+ok 12 - PRI2-006 timeline binding schema差と余分fieldを拒否する
+  ---
+  duration_ms: 9.086291
+  ...
+# Subtest: PRI2-007 旧instruction v001実装byteを不変保持する
+ok 13 - PRI2-007 旧instruction v001実装byteを不変保持する
+  ---
+  duration_ms: 0.468125
+  ...
+# Subtest: PRA2-001 実候補のtimeline v003と+16msを正式admissionへ通す
+ok 14 - PRA2-001 実候補のtimeline v003と+16msを正式admissionへ通す
+  ---
+  duration_ms: 52.27325
+  ...
+# Subtest: PRA2-002 job/receipt formal byteは決定的でschema外fieldを拒否する
+ok 15 - PRA2-002 job/receipt formal byteは決定的でschema外fieldを拒否する
+  ---
+  duration_ms: 83.052833
+  ...
+# Subtest: PRA2-003 instruction/timeline/line projectionのSHA差をfail-closedにする
+ok 16 - PRA2-003 instruction/timeline/line projectionのSHA差をfail-closedにする
+  ---
+  duration_ms: 41.857625
+  ...
+# Subtest: PRA2-004 timeline v002と旧manifestをrenderer jobへ混入させない
+ok 17 - PRA2-004 timeline v002と旧manifestをrenderer jobへ混入させない
+  ---
+  duration_ms: 42.139958
+  ...
+# Subtest: PRA2-005 receipt no-replace公開と再読検査
+ok 18 - PRA2-005 receipt no-replace公開と再読検査
+  ---
+  duration_ms: 52.174583
+  ...
+# Subtest: PRA2-006 receipt bindingと候補完全被覆を保持する
+ok 19 - PRA2-006 receipt bindingと候補完全被覆を保持する
+  ---
+  duration_ms: 43.79
+  ...
+# Subtest: PRA2-007 旧admission v001実装byteを不変保持する
+ok 20 - PRA2-007 旧admission v001実装byteを不変保持する
+  ---
+  duration_ms: 0.697875
+  ...
+# Subtest: PRL2-001 実候補2区間をinstruction v002から同順序で行配置する
+ok 21 - PRL2-001 実候補2区間をinstruction v002から同順序で行配置する
+  ---
+  duration_ms: 17.333083
+  ...
+# Subtest: PRL2-002 同一入力byte一致とdecode成立
+ok 22 - PRL2-002 同一入力byte一致とdecode成立
+  ---
+  duration_ms: 21.845542
+  ...
+# Subtest: PRL2-003 instruction v001 bindingと余分fieldを拒否する
+ok 23 - PRL2-003 instruction v001 bindingと余分fieldを拒否する
+  ---
+  duration_ms: 12.87825
+  ...
+# Subtest: PRL2-004 旧line layout v001実装byteを不変保持する
+ok 24 - PRL2-004 旧line layout v001実装byteを不変保持する
+  ---
+  duration_ms: 0.855125
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 386.331833

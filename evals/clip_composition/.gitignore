@@ -15,3 +15,14 @@ outputs/work-distant-connection-real-input-preparation-*/source/*.mp4
 outputs/work-distant-connection-v2-*/acquisition-attempt-*/source-video.mp4
 research/downloads/*/sources/**/*-attempt-*/*.webm
 research/downloads/*/sources/**/*.part
+
+# Candidate digest media are retained locally and shared through the review Drive.
+# Their exact SHA and source/frame mappings remain in the committed manifest.
+outputs/presentation/work-candidate-digest-skill-*/base-media/*.mp4
+outputs/presentation/work-candidate-digest-skill-*/render/*.mp4
+outputs/presentation/work-candidate-digest-skill-*/.render.presentation-renderer-*-work-*/
+outputs/presentation/work-candidate-digest-skill-*/.render.presentation-renderer-*.lock/
+# Raw process records are retained locally; their complete bytes and hashes are
+# collected in process-observation-evidence.json for the audit commit.
+outputs/presentation/work-candidate-digest-skill-*/process-observations/
+outputs/presentation/work-candidate-digest-skill-*/failed-*/process-observations/

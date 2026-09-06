@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "candidate-digest-test-evidence-v001",
+  "status": "passed",
+  "savedTaps": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/candidate-and-connection-tests.tap",
+      "fileSha256": "22b6240ab7c314138f7cfc42bd081e533512b86207b7e3a0347d53f077f58ae5",
+      "passed": 20,
+      "failed": 0
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/caption-core-regression-tests.tap",
+      "fileSha256": "040408fd6ba7dc706a9d149ffabb612b4f88727fc85b4134e8fba3ad7c36cace",
+      "passed": 24,
+      "failed": 0
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/base-media-core-regression-tests.tap",
+      "fileSha256": "b1ce7745f20bead5a85d066fe999b0684c80388732ede76f76a8028d4eeafb35",
+      "passed": 22,
+      "failed": 0
+    }
+  ],
+  "unchangedDisplaySkillAndExecutor": {
+    "passed": 13,
+    "failed": 0,
+    "exitCode": 0,
+    "command": "node --import ./runner/node_modules/tsx/dist/loader.mjs --test runner/test/caption-display-boundaries-v001.test.mts evals/clip_composition/run_caption_display_skill_e2e_v001.test.mts"
+  },
+  "skillStrictTypecheck": {
+    "exitCode": 0,
+    "command": "node runner/node_modules/typescript/bin/tsc --noEmit --strict --target ES2022 --module NodeNext --skipLibCheck runner/src/skills/candidate-discovery-v001.ts"
+  },
+  "totalPassed": 79,
+  "totalFailed": 0,
+  "qualityAssessment": "not-performed",
+  "expectedNegativeTestArtifact": {
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/base-media-negative-test-evidence.json",
+    "fileSha256": "c0390d7385798b07c40612d3acecb174331cee7964b0c59b482a73de4ad252fa",
+    "testFile": "evals/clip_composition/presentation_base_media_build_v003.test.mjs",
+    "testName": "basis declaration is checked against actual JSON kind and direct execution has no synthetic job-hash fallback",
+    "expectedViolation": "BASE_MEDIA_JOB_INVALID",
+    "description": "元jobファイルのbyteなしで直接実行する負の検査が保存した正常な拒否記録。E2Eの実走失敗とは数えない。"
+  }
+}
