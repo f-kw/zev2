@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "digest-acoustic-runtime-execution-v002",
+  "preflightBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/acoustic-preflight-v001.json",
+    "bytes": 243766,
+    "fileSha256": "5e434826afb0f29cb253b69ac62ec6162fa26527a0bca50a567f0f28214d2372"
+  },
+  "runtimeWrapperBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/run_digest_acoustics_without_model_conversion_v001.py",
+    "bytes": 1593,
+    "fileSha256": "ed0f2340b030eaf89ac598df7d9e7377e08e43823c4f5cbb2aae0e8575e3b7cf"
+  },
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "correction": "Optional torch/tensorflow conversion imports are unavailable in this process. Existing converted CT2 model and original alignment implementation are unchanged.",
+  "priorFailures": [
+    {
+      "attempt": 1,
+      "exitCode": 134,
+      "reason": "OpenMP shared memory denied in sandbox"
+    },
+    {
+      "attempt": 2,
+      "exitCode": 134,
+      "reason": "Duplicate OpenMP loaded through optional torch conversion import"
+    }
+  ],
+  "setupCorrectionCount": 2,
+  "observationsBeforeCorrection": 0
+}

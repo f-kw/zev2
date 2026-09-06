@@ -1,0 +1,90 @@
+TAP version 13
+# Subtest: repeated text is grounded by complete ordered IDs, with actual local-to-source offset
+ok 1 - repeated text is grounded by complete ordered IDs, with actual local-to-source offset
+  ---
+  duration_ms: 0.756292
+  ...
+# Subtest: a character inside a multi-character acoustic token has no invented time
+ok 2 - a character inside a multi-character acoustic token has no invented time
+  ---
+  duration_ms: 0.090208
+  ...
+# Subtest: punctuation with zero duration is preserved but cannot become a positive standalone cue
+ok 3 - punctuation with zero duration is preserved but cannot become a positive standalone cue
+  ---
+  duration_ms: 0.137125
+  ...
+# Subtest: corrected cue intersects existing composition without changing the media interval
+ok 4 - corrected cue intersects existing composition without changing the media interval
+  ---
+  duration_ms: 0.162917
+  ...
+# Subtest: rejects text change
+ok 5 - rejects text change
+  ---
+  duration_ms: 1.844958
+  ...
+# Subtest: rejects token mismatch
+ok 6 - rejects token mismatch
+  ---
+  duration_ms: 0.722041
+  ...
+# Subtest: rejects wrong chunk
+ok 7 - rejects wrong chunk
+  ---
+  duration_ms: 0.200625
+  ...
+# Subtest: rejects backwards time
+ok 8 - rejects backwards time
+  ---
+  duration_ms: 0.474542
+  ...
+# Subtest: rejects time outside audio
+ok 9 - rejects time outside audio
+  ---
+  duration_ms: 0.169417
+  ...
+# Subtest: rejects invalid number
+ok 10 - rejects invalid number
+  ---
+  duration_ms: 10.736542
+  ...
+# Subtest: rejects audio length mismatch
+ok 11 - rejects audio length mismatch
+  ---
+  duration_ms: 0.154583
+  ...
+# Subtest: rejects duplicate or discontinuous source IDs
+ok 12 - rejects duplicate or discontinuous source IDs
+  ---
+  duration_ms: 0.186791
+  ...
+# Subtest: ambiguous repeated observation cannot be promoted
+ok 13 - ambiguous repeated observation cannot be promoted
+  ---
+  duration_ms: 0.073084
+  ...
+# Subtest: cue cannot silently skip or reorder source IDs
+ok 14 - cue cannot silently skip or reorder source IDs
+  ---
+  duration_ms: 22235.636791
+  ...
+# Subtest: DTW window origin is not a measured first speech onset
+ok 15 - DTW window origin is not a measured first speech onset
+  ---
+  duration_ms: 0.233917
+  ...
+# Subtest: an unresolved endpoint prevents conflict without discarding unrelated measured endpoints
+ok 16 - an unresolved endpoint prevents conflict without discarding unrelated measured endpoints
+  ---
+  duration_ms: 0.2535
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 22370.117542

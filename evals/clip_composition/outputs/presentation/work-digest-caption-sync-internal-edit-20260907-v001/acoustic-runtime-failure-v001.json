@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "digest-acoustic-runtime-failure-v001",
+  "stage": "local-model-runtime-start",
+  "exitCode": 134,
+  "stderr": "OMP: Error #179: Function Can't open SHM failed: OMP: System error #0: Undefined error: 0",
+  "observationsPublished": 0,
+  "classification": "sandbox-local-shared-memory-access",
+  "nextAction": "same fixed preflight/model/text/implementation in native local process; no network or model change",
+  "setupCorrectionCount": 1
+}
