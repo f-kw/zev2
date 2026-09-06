@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+  "response": {
+    "schemaVersion": "caption-meaning-e2e-local-response-v001",
+    "requestSha256": "71e5e9ef145bb3b3b4acf8eb2adbe5b5010ee4e2dc13ec146121d20f043bd140",
+    "answer": {
+      "status": "complete",
+      "captions": [
+        {
+          "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000004",
+          "cues": [
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。失踪直後の深夜と赤い服を記した連続本文を一行で示す。入力にない続きを補わない。"
+  },
+  "result": {
+    "schemaVersion": "caption-display-skill-result-v001",
+    "skillId": "caption-display-boundaries",
+    "skillVersion": "v001",
+    "answer": {
+      "status": "complete",
+      "captions": [
+        {
+          "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000004",
+          "cues": [
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

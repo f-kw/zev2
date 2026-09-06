@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+  "response": {
+    "schemaVersion": "caption-meaning-e2e-local-response-v001",
+    "requestSha256": "e4a0271f4a030ec83f525c1ea833e92a78f087b29c45a31bc477c9100db43181",
+    "answer": {
+      "status": "complete",
+      "containers": [
+        {
+          "containerId": "segment-0001",
+          "meaningGroups": [
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+            }
+          ]
+        },
+        {
+          "containerId": "segment-0002",
+          "meaningGroups": [
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190"
+            }
+          ]
+        }
+      ]
+    },
+    "judgmentNote": "この工事で現Codexが新しく選択した10個の意味終端を、受信配線修正後に同一入力へ再送する。元回答はv001/attempted-meaning-response.jsonに保存済み。入力本文・ID・意味終端を再判断や変更せず、受信先planの束縛だけを更新した。"
+  },
+  "result": {
+    "schemaVersion": "caption-meaning-grouping-skill-result-v001",
+    "skillId": "caption-meaning-grouping",
+    "skillVersion": "v001",
+    "answer": {
+      "status": "complete",
+      "containers": [
+        {
+          "containerId": "segment-0001",
+          "meaningGroups": [
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+            }
+          ]
+        },
+        {
+          "containerId": "segment-0002",
+          "meaningGroups": [
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184"
+            },
+            {
+              "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

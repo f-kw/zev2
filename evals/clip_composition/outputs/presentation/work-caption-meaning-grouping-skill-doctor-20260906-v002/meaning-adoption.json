@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "caption-meaning-grouping-adoption-v001",
+  "planBinding": {
+    "schemaVersion": "caption-meaning-grouping-skill-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/caption-meaning-grouping-skill-e2e/fixed-plan-v001.json",
+    "fileSha256": "dd84f4c4ef85f45981ef86be87e4823754c0e181cdfcbb7365ff9e8e83948328",
+    "canonicalSha256": "aa57f08c94e88aa2ebf492e7944c95a5244756bb35120801f6564d621b369e21"
+  },
+  "requestBinding": {
+    "schemaVersion": "caption-meaning-grouping-judgment-request-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-request.json",
+    "fileSha256": "e4a0271f4a030ec83f525c1ea833e92a78f087b29c45a31bc477c9100db43181",
+    "canonicalSha256": "c87bec8391cfd3dea74f8cb3e79912ec63598748ccc1d18cf6aa2e72777b614b"
+  },
+  "judgmentBinding": {
+    "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-judgment.json",
+    "fileSha256": "e6da0d019d99b8c4084d79a976a42261f5f8dc81d589dc86d751da09bcd8935b",
+    "canonicalSha256": "15b6ec798be2493d9f54c88bac8d079554ccd49213a6831f759b77356f4fef32"
+  },
+  "validation": {
+    "input": "passed",
+    "output": "passed",
+    "membership": "passed",
+    "order": "passed",
+    "fullCoverage": "passed",
+    "originalText": "passed",
+    "provenance": "passed"
+  },
+  "adoption": {
+    "policy": "validated-meaning-groups-for-review-v001",
+    "purpose": "human-review",
+    "humanQuality": "not-evaluated"
+  }
+}

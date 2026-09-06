@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+  "response": {
+    "schemaVersion": "caption-meaning-e2e-local-response-v001",
+    "requestSha256": "c1bc52a6d64bc56c49d1e34850429da498e47f2c80290e1a7dc3ccbc23fe66ad",
+    "answer": {
+      "status": "complete",
+      "captions": [
+        {
+          "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000003",
+          "cues": [
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000046",
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062"
+              ]
+            },
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。以前からの泣き声の報告と、相次いでいたという後続を別表示にする。前者は場所の記述の後で折り、泣き声から報告までを同じ行に保つ。"
+  },
+  "result": {
+    "schemaVersion": "caption-display-skill-result-v001",
+    "skillId": "caption-display-boundaries",
+    "skillVersion": "v001",
+    "answer": {
+      "status": "complete",
+      "captions": [
+        {
+          "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000003",
+          "cues": [
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000046",
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062"
+              ]
+            },
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

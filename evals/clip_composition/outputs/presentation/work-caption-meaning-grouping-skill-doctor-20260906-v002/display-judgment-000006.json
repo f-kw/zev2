@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+  "response": {
+    "schemaVersion": "caption-meaning-e2e-local-response-v001",
+    "requestSha256": "abbb5296b59eecc16464a39529ee5da36a64c0879943cb2050dca86243a78085",
+    "answer": {
+      "status": "complete",
+      "captions": [
+        {
+          "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000006",
+          "cues": [
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。子供が若くして命を落としたという一文を一つの表示・一行で保つ。"
+  },
+  "result": {
+    "schemaVersion": "caption-display-skill-result-v001",
+    "skillId": "caption-display-boundaries",
+    "skillVersion": "v001",
+    "answer": {
+      "status": "complete",
+      "captions": [
+        {
+          "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000006",
+          "cues": [
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

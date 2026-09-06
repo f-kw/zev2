@@ -1,0 +1,2565 @@
+{
+  "schemaVersion": "caption-meaning-grouping-audit-evidence-v001",
+  "files": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-judgment.json",
+      "sha256": "e6da0d019d99b8c4084d79a976a42261f5f8dc81d589dc86d751da09bcd8935b",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "e4a0271f4a030ec83f525c1ea833e92a78f087b29c45a31bc477c9100db43181",
+          "answer": {
+            "status": "complete",
+            "containers": [
+              {
+                "containerId": "segment-0001",
+                "meaningGroups": [
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+                  }
+                ]
+              },
+              {
+                "containerId": "segment-0002",
+                "meaningGroups": [
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190"
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "この工事で現Codexが新しく選択した10個の意味終端を、受信配線修正後に同一入力へ再送する。元回答はv001/attempted-meaning-response.jsonに保存済み。入力本文・ID・意味終端を再判断や変更せず、受信先planの束縛だけを更新した。"
+        },
+        "result": {
+          "schemaVersion": "caption-meaning-grouping-skill-result-v001",
+          "skillId": "caption-meaning-grouping",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "containers": [
+              {
+                "containerId": "segment-0001",
+                "meaningGroups": [
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+                  }
+                ]
+              },
+              {
+                "containerId": "segment-0002",
+                "meaningGroups": [
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184"
+                  },
+                  {
+                    "meaningGroupEndBoundaryCandidateId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-adoption.json",
+      "sha256": "4d5751c3f603eca7e39c2005b14a13937e67ea20f0f17e585a7a08f9e3042303",
+      "value": {
+        "schemaVersion": "caption-meaning-grouping-adoption-v001",
+        "planBinding": {
+          "schemaVersion": "caption-meaning-grouping-skill-fixed-plan-v001",
+          "path": "evals/clip_composition/jobs/presentation/caption-meaning-grouping-skill-e2e/fixed-plan-v001.json",
+          "fileSha256": "dd84f4c4ef85f45981ef86be87e4823754c0e181cdfcbb7365ff9e8e83948328",
+          "canonicalSha256": "aa57f08c94e88aa2ebf492e7944c95a5244756bb35120801f6564d621b369e21"
+        },
+        "requestBinding": {
+          "schemaVersion": "caption-meaning-grouping-judgment-request-v001",
+          "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-request.json",
+          "fileSha256": "e4a0271f4a030ec83f525c1ea833e92a78f087b29c45a31bc477c9100db43181",
+          "canonicalSha256": "c87bec8391cfd3dea74f8cb3e79912ec63598748ccc1d18cf6aa2e72777b614b"
+        },
+        "judgmentBinding": {
+          "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+          "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-judgment.json",
+          "fileSha256": "e6da0d019d99b8c4084d79a976a42261f5f8dc81d589dc86d751da09bcd8935b",
+          "canonicalSha256": "15b6ec798be2493d9f54c88bac8d079554ccd49213a6831f759b77356f4fef32"
+        },
+        "validation": {
+          "input": "passed",
+          "output": "passed",
+          "membership": "passed",
+          "order": "passed",
+          "fullCoverage": "passed",
+          "originalText": "passed",
+          "provenance": "passed"
+        },
+        "adoption": {
+          "policy": "validated-meaning-groups-for-review-v001",
+          "purpose": "human-review",
+          "humanQuality": "not-evaluated"
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+      "sha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+      "value": {
+        "schemaVersion": "caption-meaning-groups-adopted-v001",
+        "artifactId": "caption-meaning-doctor-review-20260906-v001-meaning-groups",
+        "sourceMeaningBinding": {
+          "schemaVersion": "distant-connection-presentation-meaning-input-v001",
+          "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/meaning-input-v001.json",
+          "fileSha256": "389448931673096c6971ad2d96f00c3c05b7a767f23e44dfc19d015b6bc4009b",
+          "canonicalSha256": "f8e854170523fd8db0a9588314beadb215aef787b17bad8d5650fb1d720d52db"
+        },
+        "adoptionBinding": {
+          "schemaVersion": "caption-meaning-grouping-adoption-v001",
+          "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-adoption.json",
+          "fileSha256": "4d5751c3f603eca7e39c2005b14a13937e67ea20f0f17e585a7a08f9e3042303",
+          "canonicalSha256": "5a6d50383ba03b2312071f09ef7a84602c0dc6f107d0b57ae1f23bd1b4065f00"
+        },
+        "groups": [
+          {
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000001",
+            "ordinal": 1,
+            "containerId": "segment-0001",
+            "boundaryCandidateIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000001",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000002",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000003",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000004",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000005",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000006",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000007",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000008",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000009",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000010",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000011",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012"
+            ],
+            "utteranceIds": [
+              "semantic-utterance-003544",
+              "semantic-utterance-003545",
+              "semantic-utterance-003546",
+              "semantic-utterance-003547",
+              "semantic-utterance-003548",
+              "semantic-utterance-003549",
+              "semantic-utterance-003550",
+              "semantic-utterance-003551",
+              "semantic-utterance-003552",
+              "semantic-utterance-003553",
+              "semantic-utterance-003554",
+              "semantic-utterance-003555"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000001",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000002",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000003",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000004",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000005",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000006",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000007",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000008",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000009",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000010",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000011",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000012"
+            ],
+            "text": "医師の失踪異様な技に発展"
+          },
+          {
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000002",
+            "ordinal": 2,
+            "containerId": "segment-0001",
+            "boundaryCandidateIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000013",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000014",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000015",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000016",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000017",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000018",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000019",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000020",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000021",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000022",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000023",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000024",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000025",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000026",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000027",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000028",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000029",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000030",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000031",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000032",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000033",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000034",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035"
+            ],
+            "utteranceIds": [
+              "semantic-utterance-003556",
+              "semantic-utterance-003557",
+              "semantic-utterance-003558",
+              "semantic-utterance-003559",
+              "semantic-utterance-003560",
+              "semantic-utterance-003561",
+              "semantic-utterance-003562",
+              "semantic-utterance-003563",
+              "semantic-utterance-003564",
+              "semantic-utterance-003565",
+              "semantic-utterance-003566",
+              "semantic-utterance-003567",
+              "semantic-utterance-003568",
+              "semantic-utterance-003569",
+              "semantic-utterance-003570",
+              "semantic-utterance-003571",
+              "semantic-utterance-003572",
+              "semantic-utterance-003573",
+              "semantic-utterance-003574",
+              "semantic-utterance-003575",
+              "semantic-utterance-003576",
+              "semantic-utterance-003577",
+              "semantic-utterance-003578"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000013",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000014",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000015",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000016",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000017",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000018",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000019",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000020",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000021",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000022",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000023",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000024",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000025",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000026",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000027",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000028",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000029",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000030",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000031",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000032",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000033",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000034",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000035"
+            ],
+            "text": "先日市内の病院で医師が行方不明となる事件が発生"
+          },
+          {
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000003",
+            "ordinal": 3,
+            "containerId": "segment-0001",
+            "boundaryCandidateIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000036",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000037",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000038",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000039",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000040",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000041",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000042",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000043",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000044",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000045",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000046",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000047",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000048",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000049",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000050",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000051",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000052",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000053",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000054",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000055",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000056",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000057",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000058",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000059",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000060",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000061",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000063",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000064",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000065",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000066",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000067",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000068",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000069",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000070",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000071",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000072",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+            ],
+            "utteranceIds": [
+              "semantic-utterance-003579",
+              "semantic-utterance-003580",
+              "semantic-utterance-003581",
+              "semantic-utterance-003582",
+              "semantic-utterance-003583",
+              "semantic-utterance-003584",
+              "semantic-utterance-003585",
+              "semantic-utterance-003586",
+              "semantic-utterance-003587",
+              "semantic-utterance-003588",
+              "semantic-utterance-003589",
+              "semantic-utterance-003590",
+              "semantic-utterance-003591",
+              "semantic-utterance-003592",
+              "semantic-utterance-003593",
+              "semantic-utterance-003594",
+              "semantic-utterance-003595",
+              "semantic-utterance-003596",
+              "semantic-utterance-003597",
+              "semantic-utterance-003598",
+              "semantic-utterance-003599",
+              "semantic-utterance-003600",
+              "semantic-utterance-003601",
+              "semantic-utterance-003602",
+              "semantic-utterance-003603",
+              "semantic-utterance-003604",
+              "semantic-utterance-003605",
+              "semantic-utterance-003606",
+              "semantic-utterance-003607",
+              "semantic-utterance-003608",
+              "semantic-utterance-003609",
+              "semantic-utterance-003610",
+              "semantic-utterance-003611",
+              "semantic-utterance-003612",
+              "semantic-utterance-003613",
+              "semantic-utterance-003614",
+              "semantic-utterance-003615",
+              "semantic-utterance-003616"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000036",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000037",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000038",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000039",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000040",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000041",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000042",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000043",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000044",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000045",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000046",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000047",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000048",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000049",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000050",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000051",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000052",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000053",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000054",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000055",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000056",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000057",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000058",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000059",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000060",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000061",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000062",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000063",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000064",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000065",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000066",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000067",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000068",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000069",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000070",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000071",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000072",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000073"
+            ],
+            "text": "これ以前にも地下室から赤ん坊の泣き声を聞こえるとの報告医療策から相次いでいた"
+          },
+          {
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000004",
+            "ordinal": 4,
+            "containerId": "segment-0001",
+            "boundaryCandidateIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000074",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000075",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000076",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000077",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000078",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000079",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000080",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000081",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000082",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000083",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000084",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000085",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000086",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000087",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+            ],
+            "utteranceIds": [
+              "semantic-utterance-003617",
+              "semantic-utterance-003618",
+              "semantic-utterance-003619",
+              "semantic-utterance-003620",
+              "semantic-utterance-003621",
+              "semantic-utterance-003622",
+              "semantic-utterance-003623",
+              "semantic-utterance-003624",
+              "semantic-utterance-003625",
+              "semantic-utterance-003626",
+              "semantic-utterance-003627",
+              "semantic-utterance-003628",
+              "semantic-utterance-003629",
+              "semantic-utterance-003630",
+              "semantic-utterance-003631"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000074",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000075",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000076",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000077",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000078",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000079",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000080",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000081",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000082",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000083",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000084",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000085",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000086",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000087",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000088"
+            ],
+            "text": "失踪事件の直後には深夜に赤い服"
+          },
+          {
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000005",
+            "ordinal": 5,
+            "containerId": "segment-0001",
+            "boundaryCandidateIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000089",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000090",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000091",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000092",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000093",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000094",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000095",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000096",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000098",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000099",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000100",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000101",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000102",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000103",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000104",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000105",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+            ],
+            "utteranceIds": [
+              "semantic-utterance-003632",
+              "semantic-utterance-003633",
+              "semantic-utterance-003634",
+              "semantic-utterance-003635",
+              "semantic-utterance-003636",
+              "semantic-utterance-003637",
+              "semantic-utterance-003638",
+              "semantic-utterance-003639",
+              "semantic-utterance-003640",
+              "semantic-utterance-003641",
+              "semantic-utterance-003642",
+              "semantic-utterance-003643",
+              "semantic-utterance-003644",
+              "semantic-utterance-003645",
+              "semantic-utterance-003646",
+              "semantic-utterance-003647",
+              "semantic-utterance-003648",
+              "semantic-utterance-003649"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000089",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000090",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000091",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000092",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000093",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000094",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000095",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000096",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000097",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000098",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000099",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000100",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000101",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000102",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000103",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000104",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000105",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000106"
+            ],
+            "text": "え?これ前も見たなこれ前も見たやつだ"
+          },
+          {
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000006",
+            "ordinal": 6,
+            "containerId": "segment-0002",
+            "boundaryCandidateIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000107",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000108",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000109",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000110",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000111",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000112",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000113",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000114",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000115",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000116",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000117",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000118",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000119",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000120",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000121",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000122",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+            ],
+            "utteranceIds": [
+              "semantic-utterance-009161",
+              "semantic-utterance-009162",
+              "semantic-utterance-009163",
+              "semantic-utterance-009164",
+              "semantic-utterance-009165",
+              "semantic-utterance-009166",
+              "semantic-utterance-009167",
+              "semantic-utterance-009168",
+              "semantic-utterance-009169",
+              "semantic-utterance-009170",
+              "semantic-utterance-009171",
+              "semantic-utterance-009172",
+              "semantic-utterance-009173",
+              "semantic-utterance-009174",
+              "semantic-utterance-009175",
+              "semantic-utterance-009176",
+              "semantic-utterance-009177"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000107",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000108",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000109",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000110",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000111",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000112",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000113",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000114",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000115",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000116",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000117",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000118",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000119",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000120",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000121",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000122",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000123"
+            ],
+            "text": "可哀想な子供は若くして命を落とした"
+          },
+          {
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000007",
+            "ordinal": 7,
+            "containerId": "segment-0002",
+            "boundaryCandidateIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000124",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000125",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000126",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000127",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000128",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000129",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000130",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000131",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000132",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000133",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000134",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000135",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000136",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000137",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000138",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000139",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000140",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000141",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000142",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000143",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000144",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000145",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000146",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000147",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000148",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000149",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000150",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000151",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000152",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000153",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000154",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000155",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000156",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000157",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000158",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159"
+            ],
+            "utteranceIds": [
+              "semantic-utterance-009178",
+              "semantic-utterance-009179",
+              "semantic-utterance-009180",
+              "semantic-utterance-009181",
+              "semantic-utterance-009182",
+              "semantic-utterance-009183",
+              "semantic-utterance-009184",
+              "semantic-utterance-009185",
+              "semantic-utterance-009186",
+              "semantic-utterance-009187",
+              "semantic-utterance-009188",
+              "semantic-utterance-009189",
+              "semantic-utterance-009190",
+              "semantic-utterance-009191",
+              "semantic-utterance-009192",
+              "semantic-utterance-009193",
+              "semantic-utterance-009194",
+              "semantic-utterance-009195",
+              "semantic-utterance-009196",
+              "semantic-utterance-009197",
+              "semantic-utterance-009198",
+              "semantic-utterance-009199",
+              "semantic-utterance-009200",
+              "semantic-utterance-009201",
+              "semantic-utterance-009202",
+              "semantic-utterance-009203",
+              "semantic-utterance-009204",
+              "semantic-utterance-009205",
+              "semantic-utterance-009206",
+              "semantic-utterance-009207",
+              "semantic-utterance-009208",
+              "semantic-utterance-009209",
+              "semantic-utterance-009210",
+              "semantic-utterance-009211",
+              "semantic-utterance-009212",
+              "semantic-utterance-009213"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000124",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000125",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000126",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000127",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000128",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000129",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000130",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000131",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000132",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000133",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000134",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000135",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000136",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000137",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000138",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000139",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000140",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000141",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000142",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000143",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000144",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000145",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000146",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000147",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000148",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000149",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000150",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000151",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000152",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000153",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000154",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000155",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000156",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000157",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000158",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000159"
+            ],
+            "text": "女は悲しみに打ちひしがれあの無情な者どもを決して許さないと心の中で誓った"
+          },
+          {
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000008",
+            "ordinal": 8,
+            "containerId": "segment-0002",
+            "boundaryCandidateIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000160",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000161",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000162",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000163",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000164",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000165",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000167",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000168",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000169",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000170",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000171",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000172",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000173",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000174",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000175",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000176",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+            ],
+            "utteranceIds": [
+              "semantic-utterance-009214",
+              "semantic-utterance-009215",
+              "semantic-utterance-009216",
+              "semantic-utterance-009217",
+              "semantic-utterance-009218",
+              "semantic-utterance-009219",
+              "semantic-utterance-009220",
+              "semantic-utterance-009221",
+              "semantic-utterance-009222",
+              "semantic-utterance-009223",
+              "semantic-utterance-009224",
+              "semantic-utterance-009225",
+              "semantic-utterance-009226",
+              "semantic-utterance-009227",
+              "semantic-utterance-009228",
+              "semantic-utterance-009229",
+              "semantic-utterance-009230",
+              "semantic-utterance-009231"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000160",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000161",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000162",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000163",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000164",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000165",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000166",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000167",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000168",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000169",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000170",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000171",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000172",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000173",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000174",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000175",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000176",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000177"
+            ],
+            "text": "やがて女は死に若い子を捕らえて喰らう"
+          },
+          {
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000009",
+            "ordinal": 9,
+            "containerId": "segment-0002",
+            "boundaryCandidateIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000178",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000179",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000180",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000181",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000182",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000183",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184"
+            ],
+            "utteranceIds": [
+              "semantic-utterance-009232",
+              "semantic-utterance-009233",
+              "semantic-utterance-009234",
+              "semantic-utterance-009235",
+              "semantic-utterance-009236",
+              "semantic-utterance-009237",
+              "semantic-utterance-009238"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000178",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000179",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000180",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000181",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000182",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000183",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000184"
+            ],
+            "text": "何て読むのこれ"
+          },
+          {
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000010",
+            "ordinal": 10,
+            "containerId": "segment-0002",
+            "boundaryCandidateIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000185",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000186",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000187",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000188",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000189",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190"
+            ],
+            "utteranceIds": [
+              "semantic-utterance-009239",
+              "semantic-utterance-009240",
+              "semantic-utterance-009241",
+              "semantic-utterance-009242",
+              "semantic-utterance-009243",
+              "semantic-utterance-009244"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000185",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000186",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000187",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000188",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000189",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000190"
+            ],
+            "text": "鬼母となった"
+          }
+        ]
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-adoptions.json",
+      "sha256": "5bfa8bd667b0cbb59a4fc7f18efee24158c9f07f41cdd26e646b142343e20370",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-display-adoptions-v001",
+        "meaningGroupsBinding": {
+          "schemaVersion": "caption-meaning-groups-adopted-v001",
+          "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+          "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+          "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+        },
+        "entries": [
+          {
+            "schemaVersion": "caption-meaning-e2e-display-group-adoption-v001",
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000001",
+            "meaningGroupsBinding": {
+              "schemaVersion": "caption-meaning-groups-adopted-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+              "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+              "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+            },
+            "requestCollectionBinding": {
+              "schemaVersion": "caption-meaning-e2e-display-requests-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-requests.json",
+              "fileSha256": "fa98eb73eef34585ff705c658acd6d3f65348dd1c8f85c058efe81c81d78093c",
+              "canonicalSha256": "aa60544208c533fb8ff5889a557e7f2cd7becae711a23206733a8a34fc4a17a3"
+            },
+            "requestIndex": 0,
+            "judgmentBinding": {
+              "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000001.json",
+              "fileSha256": "565bb5450a9d7de0cd548edd8a81aa36b5276df1e5205f6016eaeb7f9f9bdedd",
+              "canonicalSha256": "792648869a01efbc3c00926e9334b13fe2dfa06a7591cf65961a7980002a10c9"
+            },
+            "validation": {
+              "input": "passed",
+              "output": "passed",
+              "membership": "passed",
+              "order": "passed",
+              "fullCoverage": "passed",
+              "logicalLayout": "passed",
+              "provenance": "passed"
+            },
+            "adoption": {
+              "policy": "validated-display-groups-for-review-v001",
+              "purpose": "human-review",
+              "humanQuality": "not-evaluated"
+            },
+            "selection": {
+              "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000001",
+              "cues": [
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "schemaVersion": "caption-meaning-e2e-display-group-adoption-v001",
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000002",
+            "meaningGroupsBinding": {
+              "schemaVersion": "caption-meaning-groups-adopted-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+              "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+              "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+            },
+            "requestCollectionBinding": {
+              "schemaVersion": "caption-meaning-e2e-display-requests-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-requests.json",
+              "fileSha256": "fa98eb73eef34585ff705c658acd6d3f65348dd1c8f85c058efe81c81d78093c",
+              "canonicalSha256": "aa60544208c533fb8ff5889a557e7f2cd7becae711a23206733a8a34fc4a17a3"
+            },
+            "requestIndex": 1,
+            "judgmentBinding": {
+              "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000002.json",
+              "fileSha256": "25a3735b4a7e0d0a78b2c908366a3658c37e78cedb8d68f6a1477290c00eb703",
+              "canonicalSha256": "efe464cd40296beaba2e2677d6c10cf46620a92da3ab7cfe005e1c4b133493e2"
+            },
+            "validation": {
+              "input": "passed",
+              "output": "passed",
+              "membership": "passed",
+              "order": "passed",
+              "fullCoverage": "passed",
+              "logicalLayout": "passed",
+              "provenance": "passed"
+            },
+            "adoption": {
+              "policy": "validated-display-groups-for-review-v001",
+              "purpose": "human-review",
+              "humanQuality": "not-evaluated"
+            },
+            "selection": {
+              "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000002",
+              "cues": [
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000023",
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "schemaVersion": "caption-meaning-e2e-display-group-adoption-v001",
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000003",
+            "meaningGroupsBinding": {
+              "schemaVersion": "caption-meaning-groups-adopted-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+              "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+              "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+            },
+            "requestCollectionBinding": {
+              "schemaVersion": "caption-meaning-e2e-display-requests-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-requests.json",
+              "fileSha256": "fa98eb73eef34585ff705c658acd6d3f65348dd1c8f85c058efe81c81d78093c",
+              "canonicalSha256": "aa60544208c533fb8ff5889a557e7f2cd7becae711a23206733a8a34fc4a17a3"
+            },
+            "requestIndex": 2,
+            "judgmentBinding": {
+              "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000003.json",
+              "fileSha256": "18d20b6a50b0950f9ecd31cb001eceb49e86a5445f0e4bc7e9bf3c1f88a0fdc4",
+              "canonicalSha256": "ccadbdf2acb78a369bf2dd503aaebfb7a811fb59c8f75b40181b863dbaa3f10c"
+            },
+            "validation": {
+              "input": "passed",
+              "output": "passed",
+              "membership": "passed",
+              "order": "passed",
+              "fullCoverage": "passed",
+              "logicalLayout": "passed",
+              "provenance": "passed"
+            },
+            "adoption": {
+              "policy": "validated-display-groups-for-review-v001",
+              "purpose": "human-review",
+              "humanQuality": "not-evaluated"
+            },
+            "selection": {
+              "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000003",
+              "cues": [
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000046",
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062"
+                  ]
+                },
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "schemaVersion": "caption-meaning-e2e-display-group-adoption-v001",
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000004",
+            "meaningGroupsBinding": {
+              "schemaVersion": "caption-meaning-groups-adopted-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+              "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+              "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+            },
+            "requestCollectionBinding": {
+              "schemaVersion": "caption-meaning-e2e-display-requests-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-requests.json",
+              "fileSha256": "fa98eb73eef34585ff705c658acd6d3f65348dd1c8f85c058efe81c81d78093c",
+              "canonicalSha256": "aa60544208c533fb8ff5889a557e7f2cd7becae711a23206733a8a34fc4a17a3"
+            },
+            "requestIndex": 3,
+            "judgmentBinding": {
+              "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000004.json",
+              "fileSha256": "398bb6e69fd62e68cf238b29f7b8a695514a9f3edc4767bae531e74724be341c",
+              "canonicalSha256": "49c71bfbef3aee7c340f7e303735fdf35d4d45fe0be352155a8ab410c19adac2"
+            },
+            "validation": {
+              "input": "passed",
+              "output": "passed",
+              "membership": "passed",
+              "order": "passed",
+              "fullCoverage": "passed",
+              "logicalLayout": "passed",
+              "provenance": "passed"
+            },
+            "adoption": {
+              "policy": "validated-display-groups-for-review-v001",
+              "purpose": "human-review",
+              "humanQuality": "not-evaluated"
+            },
+            "selection": {
+              "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000004",
+              "cues": [
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "schemaVersion": "caption-meaning-e2e-display-group-adoption-v001",
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000005",
+            "meaningGroupsBinding": {
+              "schemaVersion": "caption-meaning-groups-adopted-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+              "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+              "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+            },
+            "requestCollectionBinding": {
+              "schemaVersion": "caption-meaning-e2e-display-requests-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-requests.json",
+              "fileSha256": "fa98eb73eef34585ff705c658acd6d3f65348dd1c8f85c058efe81c81d78093c",
+              "canonicalSha256": "aa60544208c533fb8ff5889a557e7f2cd7becae711a23206733a8a34fc4a17a3"
+            },
+            "requestIndex": 4,
+            "judgmentBinding": {
+              "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000005.json",
+              "fileSha256": "2b38d86905fc0337d4a334911224cae26bf87aa05f0cee34bb015d26ae6868b4",
+              "canonicalSha256": "42ecc4f0068e32db5c05ed80f5d0d811ba32f3fd5691c9dd191aec799d84edae"
+            },
+            "validation": {
+              "input": "passed",
+              "output": "passed",
+              "membership": "passed",
+              "order": "passed",
+              "fullCoverage": "passed",
+              "logicalLayout": "passed",
+              "provenance": "passed"
+            },
+            "adoption": {
+              "policy": "validated-display-groups-for-review-v001",
+              "purpose": "human-review",
+              "humanQuality": "not-evaluated"
+            },
+            "selection": {
+              "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000005",
+              "cues": [
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097"
+                  ]
+                },
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "schemaVersion": "caption-meaning-e2e-display-group-adoption-v001",
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000006",
+            "meaningGroupsBinding": {
+              "schemaVersion": "caption-meaning-groups-adopted-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+              "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+              "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+            },
+            "requestCollectionBinding": {
+              "schemaVersion": "caption-meaning-e2e-display-requests-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-requests.json",
+              "fileSha256": "fa98eb73eef34585ff705c658acd6d3f65348dd1c8f85c058efe81c81d78093c",
+              "canonicalSha256": "aa60544208c533fb8ff5889a557e7f2cd7becae711a23206733a8a34fc4a17a3"
+            },
+            "requestIndex": 5,
+            "judgmentBinding": {
+              "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000006.json",
+              "fileSha256": "acaf22e1c3f8c0ea1f8afe366dbce6f2e32f777f80e951c4b076db2bdfbfad4e",
+              "canonicalSha256": "68e88b7b6039ce18da4ea03165438be9250e14fc1695083230eb2f3ad1afb38c"
+            },
+            "validation": {
+              "input": "passed",
+              "output": "passed",
+              "membership": "passed",
+              "order": "passed",
+              "fullCoverage": "passed",
+              "logicalLayout": "passed",
+              "provenance": "passed"
+            },
+            "adoption": {
+              "policy": "validated-display-groups-for-review-v001",
+              "purpose": "human-review",
+              "humanQuality": "not-evaluated"
+            },
+            "selection": {
+              "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000006",
+              "cues": [
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "schemaVersion": "caption-meaning-e2e-display-group-adoption-v001",
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000007",
+            "meaningGroupsBinding": {
+              "schemaVersion": "caption-meaning-groups-adopted-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+              "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+              "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+            },
+            "requestCollectionBinding": {
+              "schemaVersion": "caption-meaning-e2e-display-requests-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-requests.json",
+              "fileSha256": "fa98eb73eef34585ff705c658acd6d3f65348dd1c8f85c058efe81c81d78093c",
+              "canonicalSha256": "aa60544208c533fb8ff5889a557e7f2cd7becae711a23206733a8a34fc4a17a3"
+            },
+            "requestIndex": 6,
+            "judgmentBinding": {
+              "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000007.json",
+              "fileSha256": "a10b88d3159f2fc47985d5d51e23ca9ff2745b3a89e178b9b41f2e4ae75498b1",
+              "canonicalSha256": "1c21aa0d24bb09ce3939c70ddcf44bde54fa97742d7ca0897a4f06e7286d2ba7"
+            },
+            "validation": {
+              "input": "passed",
+              "output": "passed",
+              "membership": "passed",
+              "order": "passed",
+              "fullCoverage": "passed",
+              "logicalLayout": "passed",
+              "provenance": "passed"
+            },
+            "adoption": {
+              "policy": "validated-display-groups-for-review-v001",
+              "purpose": "human-review",
+              "humanQuality": "not-evaluated"
+            },
+            "selection": {
+              "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000007",
+              "cues": [
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000135",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000135"
+                  ]
+                },
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000144",
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "schemaVersion": "caption-meaning-e2e-display-group-adoption-v001",
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000008",
+            "meaningGroupsBinding": {
+              "schemaVersion": "caption-meaning-groups-adopted-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+              "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+              "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+            },
+            "requestCollectionBinding": {
+              "schemaVersion": "caption-meaning-e2e-display-requests-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-requests.json",
+              "fileSha256": "fa98eb73eef34585ff705c658acd6d3f65348dd1c8f85c058efe81c81d78093c",
+              "canonicalSha256": "aa60544208c533fb8ff5889a557e7f2cd7becae711a23206733a8a34fc4a17a3"
+            },
+            "requestIndex": 7,
+            "judgmentBinding": {
+              "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000008.json",
+              "fileSha256": "b8674aa93832024d03daf729b59d421c5d87b68bfcea5d8fbf0393b61e8f31c7",
+              "canonicalSha256": "42d28c6dbe2ddc869ad3ed1f0b1f12f24ebd7517f1ed6aca902da51d1fb563f4"
+            },
+            "validation": {
+              "input": "passed",
+              "output": "passed",
+              "membership": "passed",
+              "order": "passed",
+              "fullCoverage": "passed",
+              "logicalLayout": "passed",
+              "provenance": "passed"
+            },
+            "adoption": {
+              "policy": "validated-display-groups-for-review-v001",
+              "purpose": "human-review",
+              "humanQuality": "not-evaluated"
+            },
+            "selection": {
+              "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000008",
+              "cues": [
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166"
+                  ]
+                },
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "schemaVersion": "caption-meaning-e2e-display-group-adoption-v001",
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000009",
+            "meaningGroupsBinding": {
+              "schemaVersion": "caption-meaning-groups-adopted-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+              "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+              "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+            },
+            "requestCollectionBinding": {
+              "schemaVersion": "caption-meaning-e2e-display-requests-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-requests.json",
+              "fileSha256": "fa98eb73eef34585ff705c658acd6d3f65348dd1c8f85c058efe81c81d78093c",
+              "canonicalSha256": "aa60544208c533fb8ff5889a557e7f2cd7becae711a23206733a8a34fc4a17a3"
+            },
+            "requestIndex": 8,
+            "judgmentBinding": {
+              "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000009.json",
+              "fileSha256": "306e0401fe4c414eb2dc078badce4487ed63e169e46aab0a4eb7ec6e13ca7df7",
+              "canonicalSha256": "09dcf0544a78a11fedd0f888606089a6d3101e2bd7306800ea074188df01684b"
+            },
+            "validation": {
+              "input": "passed",
+              "output": "passed",
+              "membership": "passed",
+              "order": "passed",
+              "fullCoverage": "passed",
+              "logicalLayout": "passed",
+              "provenance": "passed"
+            },
+            "adoption": {
+              "policy": "validated-display-groups-for-review-v001",
+              "purpose": "human-review",
+              "humanQuality": "not-evaluated"
+            },
+            "selection": {
+              "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000009",
+              "cues": [
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "schemaVersion": "caption-meaning-e2e-display-group-adoption-v001",
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000010",
+            "meaningGroupsBinding": {
+              "schemaVersion": "caption-meaning-groups-adopted-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+              "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+              "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+            },
+            "requestCollectionBinding": {
+              "schemaVersion": "caption-meaning-e2e-display-requests-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-requests.json",
+              "fileSha256": "fa98eb73eef34585ff705c658acd6d3f65348dd1c8f85c058efe81c81d78093c",
+              "canonicalSha256": "aa60544208c533fb8ff5889a557e7f2cd7becae711a23206733a8a34fc4a17a3"
+            },
+            "requestIndex": 9,
+            "judgmentBinding": {
+              "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+              "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000010.json",
+              "fileSha256": "63010ea99cf9e8cfacb7edd9f87314150725fc453f0753a3f066fbed6ef85ffc",
+              "canonicalSha256": "de5eb6ed6e033704713d1c4dc0a10f9d56dc77e632862bdba0e2ac5387038eb8"
+            },
+            "validation": {
+              "input": "passed",
+              "output": "passed",
+              "membership": "passed",
+              "order": "passed",
+              "fullCoverage": "passed",
+              "logicalLayout": "passed",
+              "provenance": "passed"
+            },
+            "adoption": {
+              "policy": "validated-display-groups-for-review-v001",
+              "purpose": "human-review",
+              "humanQuality": "not-evaluated"
+            },
+            "selection": {
+              "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000010",
+              "cues": [
+                {
+                  "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190",
+                  "lineEndBoundaryIds": [
+                    "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/core-adoption.json",
+      "sha256": "9648441b799a07ff75244997ae3f8e01b3c22cd25ea615652013394598fbb64b",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-core-adoption-v001",
+        "planBinding": {
+          "schemaVersion": "caption-meaning-grouping-skill-fixed-plan-v001",
+          "path": "evals/clip_composition/jobs/presentation/caption-meaning-grouping-skill-e2e/fixed-plan-v001.json",
+          "fileSha256": "dd84f4c4ef85f45981ef86be87e4823754c0e181cdfcbb7365ff9e8e83948328",
+          "canonicalSha256": "aa57f08c94e88aa2ebf492e7944c95a5244756bb35120801f6564d621b369e21"
+        },
+        "meaningGroupsBinding": {
+          "schemaVersion": "caption-meaning-groups-adopted-v001",
+          "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/meaning-groups.json",
+          "fileSha256": "43856e83cbdc37b04727b21d9a999bf1668b07f5a8f9457000317a8b01ff1eb1",
+          "canonicalSha256": "5b0f71ba2a7eb1179775a3513239af1cf4a39dae5523e8d75e0bd13eee4b0694"
+        },
+        "displayAdoptionsBinding": {
+          "schemaVersion": "caption-meaning-e2e-display-adoptions-v001",
+          "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-adoptions.json",
+          "fileSha256": "5bfa8bd667b0cbb59a4fc7f18efee24158c9f07f41cdd26e646b142343e20370",
+          "canonicalSha256": "e42f0751120289bee3af9f27a57a2bfe14dc1bc33ed94610acd8a0e6f7616312"
+        },
+        "flattenPolicy": "preserve-validated-display-order-without-editing-v001",
+        "validation": {
+          "groupMembership": "passed",
+          "fullCoverage": "passed",
+          "originalOrder": "passed",
+          "unmodifiedDisplays": "passed",
+          "originalText": "passed"
+        },
+        "mappings": [
+          {
+            "displayOrdinal": 1,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000001",
+            "groupDisplayOrdinal": 1,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000001",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000002",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000003",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000004",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000005",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000006",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000007",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000008",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000009",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000010",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000011",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000012"
+            ]
+          },
+          {
+            "displayOrdinal": 2,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000002",
+            "groupDisplayOrdinal": 1,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000023",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000013",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000014",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000015",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000016",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000017",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000018",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000019",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000020",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000021",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000022",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000023",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000024",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000025",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000026",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000027",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000028",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000029",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000030",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000031",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000032",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000033",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000034",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000035"
+            ]
+          },
+          {
+            "displayOrdinal": 3,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000003",
+            "groupDisplayOrdinal": 1,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000046",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000036",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000037",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000038",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000039",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000040",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000041",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000042",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000043",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000044",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000045",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000046",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000047",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000048",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000049",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000050",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000051",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000052",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000053",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000054",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000055",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000056",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000057",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000058",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000059",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000060",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000061",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000062"
+            ]
+          },
+          {
+            "displayOrdinal": 4,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000003",
+            "groupDisplayOrdinal": 2,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000063",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000064",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000065",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000066",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000067",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000068",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000069",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000070",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000071",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000072",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000073"
+            ]
+          },
+          {
+            "displayOrdinal": 5,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000004",
+            "groupDisplayOrdinal": 1,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000074",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000075",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000076",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000077",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000078",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000079",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000080",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000081",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000082",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000083",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000084",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000085",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000086",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000087",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000088"
+            ]
+          },
+          {
+            "displayOrdinal": 6,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000005",
+            "groupDisplayOrdinal": 1,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000089",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000090",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000091",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000092",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000093",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000094",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000095",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000096",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000097"
+            ]
+          },
+          {
+            "displayOrdinal": 7,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000005",
+            "groupDisplayOrdinal": 2,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000098",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000099",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000100",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000101",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000102",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000103",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000104",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000105",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000106"
+            ]
+          },
+          {
+            "displayOrdinal": 8,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000006",
+            "groupDisplayOrdinal": 1,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000107",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000108",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000109",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000110",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000111",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000112",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000113",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000114",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000115",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000116",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000117",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000118",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000119",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000120",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000121",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000122",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000123"
+            ]
+          },
+          {
+            "displayOrdinal": 9,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000007",
+            "groupDisplayOrdinal": 1,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000135",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000135"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000124",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000125",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000126",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000127",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000128",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000129",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000130",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000131",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000132",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000133",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000134",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000135"
+            ]
+          },
+          {
+            "displayOrdinal": 10,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000007",
+            "groupDisplayOrdinal": 2,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000144",
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000136",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000137",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000138",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000139",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000140",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000141",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000142",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000143",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000144",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000145",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000146",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000147",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000148",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000149",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000150",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000151",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000152",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000153",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000154",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000155",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000156",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000157",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000158",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000159"
+            ]
+          },
+          {
+            "displayOrdinal": 11,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000008",
+            "groupDisplayOrdinal": 1,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000160",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000161",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000162",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000163",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000164",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000165",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000166"
+            ]
+          },
+          {
+            "displayOrdinal": 12,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000008",
+            "groupDisplayOrdinal": 2,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000167",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000168",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000169",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000170",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000171",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000172",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000173",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000174",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000175",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000176",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000177"
+            ]
+          },
+          {
+            "displayOrdinal": 13,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000009",
+            "groupDisplayOrdinal": 1,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000178",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000179",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000180",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000181",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000182",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000183",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000184"
+            ]
+          },
+          {
+            "displayOrdinal": 14,
+            "groupId": "caption-meaning-doctor-review-20260906-v001-meaning-000010",
+            "groupDisplayOrdinal": 1,
+            "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190",
+            "lineEndBoundaryIds": [
+              "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190"
+            ],
+            "atomOccurrenceIds": [
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000185",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000186",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000187",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000188",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000189",
+              "ymUsGrT6EaA-candidate-doctor-disappearance-to-ogre-mother-presentation-meaning-v001-atom-000190"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/comparison-evidence.json",
+      "sha256": "8deee0aa7f04d533bf3498be7c0f4d1bd0a30b6faf9fa18d512f4fe5a5e2ff8d",
+      "value": {
+        "schemaVersion": "caption-meaning-grouping-three-way-comparison-v001",
+        "beforeSkills": {
+          "path": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/render-output-v001/presentation-rendered-v002.mp4",
+          "fileSha256": "d9ce7d6f45c9eb46807402d379dc176397dc38d06b9f4ceeb180565a94593861"
+        },
+        "displayOnly": {
+          "path": "evals/clip_composition/outputs/presentation/work-caption-display-skill-doctor-20260906-v004/render/presentation-rendered-v002.mp4",
+          "fileSha256": "561a6d7c74dcee39684a4040f5a7e892cb729ef3ae19857d294bb4bf25835e6d"
+        },
+        "meaningAndDisplay": {
+          "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/render/presentation-rendered-v002.mp4",
+          "fileSha256": "561a6d7c74dcee39684a4040f5a7e892cb729ef3ae19857d294bb4bf25835e6d"
+        },
+        "sameDisplayTextLinesAndTiming": true,
+        "sameVideoBytes": true,
+        "displaySequence": [
+          {
+            "text": "医師の失踪異様な技に発展",
+            "outputTime": {
+              "startFrame": 0,
+              "endFrameExclusive": 11
+            },
+            "lines": [
+              "医師の失踪異様な技に発展"
+            ]
+          },
+          {
+            "text": "先日市内の病院で医師が行方不明となる事件が発生",
+            "outputTime": {
+              "startFrame": 11,
+              "endFrameExclusive": 66
+            },
+            "lines": [
+              "先日市内の病院で医師が",
+              "行方不明となる事件が発生"
+            ]
+          },
+          {
+            "text": "これ以前にも地下室から赤ん坊の泣き声を聞こえるとの報告",
+            "outputTime": {
+              "startFrame": 66,
+              "endFrameExclusive": 202
+            },
+            "lines": [
+              "これ以前にも地下室から",
+              "赤ん坊の泣き声を聞こえるとの報告"
+            ]
+          },
+          {
+            "text": "医療策から相次いでいた",
+            "outputTime": {
+              "startFrame": 202,
+              "endFrameExclusive": 263
+            },
+            "lines": [
+              "医療策から相次いでいた"
+            ]
+          },
+          {
+            "text": "失踪事件の直後には深夜に赤い服",
+            "outputTime": {
+              "startFrame": 263,
+              "endFrameExclusive": 325
+            },
+            "lines": [
+              "失踪事件の直後には深夜に赤い服"
+            ]
+          },
+          {
+            "text": "え?これ前も見たな",
+            "outputTime": {
+              "startFrame": 325,
+              "endFrameExclusive": 425
+            },
+            "lines": [
+              "え?これ前も見たな"
+            ]
+          },
+          {
+            "text": "これ前も見たやつだ",
+            "outputTime": {
+              "startFrame": 425,
+              "endFrameExclusive": 452
+            },
+            "lines": [
+              "これ前も見たやつだ"
+            ]
+          },
+          {
+            "text": "可哀想な子供は若くして命を落とした",
+            "outputTime": {
+              "startFrame": 452,
+              "endFrameExclusive": 612
+            },
+            "lines": [
+              "可哀想な子供は若くして命を落とした"
+            ]
+          },
+          {
+            "text": "女は悲しみに打ちひしがれ",
+            "outputTime": {
+              "startFrame": 612,
+              "endFrameExclusive": 643
+            },
+            "lines": [
+              "女は悲しみに打ちひしがれ"
+            ]
+          },
+          {
+            "text": "あの無情な者どもを決して許さないと心の中で誓った",
+            "outputTime": {
+              "startFrame": 657,
+              "endFrameExclusive": 840
+            },
+            "lines": [
+              "あの無情な者どもを",
+              "決して許さないと心の中で誓った"
+            ]
+          },
+          {
+            "text": "やがて女は死に",
+            "outputTime": {
+              "startFrame": 840,
+              "endFrameExclusive": 879
+            },
+            "lines": [
+              "やがて女は死に"
+            ]
+          },
+          {
+            "text": "若い子を捕らえて喰らう",
+            "outputTime": {
+              "startFrame": 879,
+              "endFrameExclusive": 944
+            },
+            "lines": [
+              "若い子を捕らえて喰らう"
+            ]
+          },
+          {
+            "text": "何て読むのこれ",
+            "outputTime": {
+              "startFrame": 944,
+              "endFrameExclusive": 965
+            },
+            "lines": [
+              "何て読むのこれ"
+            ]
+          },
+          {
+            "text": "鬼母となった",
+            "outputTime": {
+              "startFrame": 965,
+              "endFrameExclusive": 1073
+            },
+            "lines": [
+              "鬼母となった"
+            ]
+          }
+        ],
+        "meaningGroups": [
+          {
+            "ordinal": 1,
+            "containerId": "segment-0001",
+            "text": "医師の失踪異様な技に発展",
+            "displayOrdinals": [
+              1
+            ]
+          },
+          {
+            "ordinal": 2,
+            "containerId": "segment-0001",
+            "text": "先日市内の病院で医師が行方不明となる事件が発生",
+            "displayOrdinals": [
+              2
+            ]
+          },
+          {
+            "ordinal": 3,
+            "containerId": "segment-0001",
+            "text": "これ以前にも地下室から赤ん坊の泣き声を聞こえるとの報告医療策から相次いでいた",
+            "displayOrdinals": [
+              3,
+              4
+            ]
+          },
+          {
+            "ordinal": 4,
+            "containerId": "segment-0001",
+            "text": "失踪事件の直後には深夜に赤い服",
+            "displayOrdinals": [
+              5
+            ]
+          },
+          {
+            "ordinal": 5,
+            "containerId": "segment-0001",
+            "text": "え?これ前も見たなこれ前も見たやつだ",
+            "displayOrdinals": [
+              6,
+              7
+            ]
+          },
+          {
+            "ordinal": 6,
+            "containerId": "segment-0002",
+            "text": "可哀想な子供は若くして命を落とした",
+            "displayOrdinals": [
+              8
+            ]
+          },
+          {
+            "ordinal": 7,
+            "containerId": "segment-0002",
+            "text": "女は悲しみに打ちひしがれあの無情な者どもを決して許さないと心の中で誓った",
+            "displayOrdinals": [
+              9,
+              10
+            ]
+          },
+          {
+            "ordinal": 8,
+            "containerId": "segment-0002",
+            "text": "やがて女は死に若い子を捕らえて喰らう",
+            "displayOrdinals": [
+              11,
+              12
+            ]
+          },
+          {
+            "ordinal": 9,
+            "containerId": "segment-0002",
+            "text": "何て読むのこれ",
+            "displayOrdinals": [
+              13
+            ]
+          },
+          {
+            "ordinal": 10,
+            "containerId": "segment-0002",
+            "text": "鬼母となった",
+            "displayOrdinals": [
+              14
+            ]
+          }
+        ],
+        "additionalVisualImprovement": "not-demonstrated",
+        "humanEvaluation": "pending"
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000001.json",
+      "sha256": "565bb5450a9d7de0cd548edd8a81aa36b5276df1e5205f6016eaeb7f9f9bdedd",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "7f36fc67dbb4622bd54ebe16206c916a622aab0d004c65a1069e70b602911afb",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000001",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。見出しとして一続きに読める12文字を一つの表示にし、一行に保つ。"
+        },
+        "result": {
+          "schemaVersion": "caption-display-skill-result-v001",
+          "skillId": "caption-display-boundaries",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000001",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000002.json",
+      "sha256": "25a3735b4a7e0d0a78b2c908366a3658c37e78cedb8d68f6a1477290c00eb703",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "7a5610f4738f5f0971e4539c69bb26b8deff70fb30bf20d638554f520c3c87a0",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000002",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000023",
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。失踪事件が発生したという一つの文を一つの表示とし、医師が、の後で行を折って主部と出来事を分ける。"
+        },
+        "result": {
+          "schemaVersion": "caption-display-skill-result-v001",
+          "skillId": "caption-display-boundaries",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000002",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000023",
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000003.json",
+      "sha256": "18d20b6a50b0950f9ecd31cb001eceb49e86a5445f0e4bc7e9bf3c1f88a0fdc4",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "c1bc52a6d64bc56c49d1e34850429da498e47f2c80290e1a7dc3ccbc23fe66ad",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000003",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000046",
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062"
+                    ]
+                  },
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。以前からの泣き声の報告と、相次いでいたという後続を別表示にする。前者は場所の記述の後で折り、泣き声から報告までを同じ行に保つ。"
+        },
+        "result": {
+          "schemaVersion": "caption-display-skill-result-v001",
+          "skillId": "caption-display-boundaries",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000003",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000046",
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062"
+                    ]
+                  },
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000004.json",
+      "sha256": "398bb6e69fd62e68cf238b29f7b8a695514a9f3edc4767bae531e74724be341c",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "71e5e9ef145bb3b3b4acf8eb2adbe5b5010ee4e2dc13ec146121d20f043bd140",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000004",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。失踪直後の深夜と赤い服を記した連続本文を一行で示す。入力にない続きを補わない。"
+        },
+        "result": {
+          "schemaVersion": "caption-display-skill-result-v001",
+          "skillId": "caption-display-boundaries",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000004",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000005.json",
+      "sha256": "2b38d86905fc0337d4a334911224cae26bf87aa05f0cee34bb015d26ae6868b4",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "0290b85b9e556f20cb483792f67beb18a9f0753e6f53e03ec40dd471afbfbdd9",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000005",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097"
+                    ]
+                  },
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。見た記憶への気付きと、それを確かめる言い直しを、それぞれ一つの短い表示にする。"
+        },
+        "result": {
+          "schemaVersion": "caption-display-skill-result-v001",
+          "skillId": "caption-display-boundaries",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000005",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097"
+                    ]
+                  },
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000006.json",
+      "sha256": "acaf22e1c3f8c0ea1f8afe366dbce6f2e32f777f80e951c4b076db2bdfbfad4e",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "abbb5296b59eecc16464a39529ee5da36a64c0879943cb2050dca86243a78085",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000006",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。子供が若くして命を落としたという一文を一つの表示・一行で保つ。"
+        },
+        "result": {
+          "schemaVersion": "caption-display-skill-result-v001",
+          "skillId": "caption-display-boundaries",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000006",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000007.json",
+      "sha256": "a10b88d3159f2fc47985d5d51e23ca9ff2745b3a89e178b9b41f2e4ae75498b1",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "7f8775e5375a7c8cea145a14c01087180bdf0d450c75cc36e8097ea30abca49d",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000007",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000135",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000135"
+                    ]
+                  },
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000144",
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。女の悲しみを示す部分と、許さないと誓う部分を別表示にする。誓いは相手を指す部分の後で折り、許さないという決意と心の中で誓った結びを続けて読める行にする。"
+        },
+        "result": {
+          "schemaVersion": "caption-display-skill-result-v001",
+          "skillId": "caption-display-boundaries",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000007",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000135",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000135"
+                    ]
+                  },
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000144",
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000008.json",
+      "sha256": "b8674aa93832024d03daf729b59d421c5d87b68bfcea5d8fbf0393b61e8f31c7",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "086db95b6cdec59ae3be4e80f09f9a6d9a4fbd1896152f4ccbce69f0479394d3",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000008",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166"
+                    ]
+                  },
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。女の死と、若い子を捕らえて喰らう行為を別の表示にする。それぞれ一行で完結させる。"
+        },
+        "result": {
+          "schemaVersion": "caption-display-skill-result-v001",
+          "skillId": "caption-display-boundaries",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000008",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166"
+                    ]
+                  },
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000009.json",
+      "sha256": "306e0401fe4c414eb2dc078badce4487ed63e169e46aab0a4eb7ec6e13ca7df7",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "9cdbe68d7626e50d75f5ebd76c29c46851705aa59a5a841b6b007c6225789fc0",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000009",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。読み方を問う一つの発話を一行で示す。"
+        },
+        "result": {
+          "schemaVersion": "caption-display-skill-result-v001",
+          "skillId": "caption-display-boundaries",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000009",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/display-judgment-000010.json",
+      "sha256": "63010ea99cf9e8cfacb7edd9f87314150725fc453f0753a3f066fbed6ef85ffc",
+      "value": {
+        "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+        "response": {
+          "schemaVersion": "caption-meaning-e2e-local-response-v001",
+          "requestSha256": "1768948f58621cccec73d90e99e7461bf5774101b80f7167b68d6b8201b18645",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000010",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。鬼母となったという結末を一行で示す。"
+        },
+        "result": {
+          "schemaVersion": "caption-display-skill-result-v001",
+          "skillId": "caption-display-boundaries",
+          "skillVersion": "v001",
+          "answer": {
+            "status": "complete",
+            "captions": [
+              {
+                "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000010",
+                "cues": [
+                  {
+                    "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190",
+                    "lineEndBoundaryIds": [
+                      "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

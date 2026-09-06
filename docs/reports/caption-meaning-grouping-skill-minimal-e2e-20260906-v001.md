@@ -2,7 +2,7 @@
 
 ## 現在地
 
-実装と製造前検査を完了。新規22件、第1 Skillの回帰13件、既存の意味境界・Core関連92件、Skillのstrict型検査が合格した。新規の意味判断と実動画生成は次に実行する。以下の調査・GPT_DECISIONは実装前からの履歴として残す。
+技術E2Eの第一完成。新しい意味判断から10まとまりを採用し、第1 Skillを無変更で10回実呼出して、既存Core・実動画生成・technical QCまで合格した。同一入力・同一採用回答からの正式値再現とSHA検証も合格。新規23件、第1 Skill回帰13件、既存Core関連92件、strict型検査はすべて合格。人間目視4項目は未判定であり、これからcommit/push・Drive同期後のAUDIT_ONLYへ提出する。以下の調査・中間検証は履歴として残す。
 
 2026-09-06「ZEV進行管理２」経由のkawafmm承認済み続行指示に基づく第2 Skill工事。開始HEADはmain `b3f688944b53243633615c9a9d805a0d0b0521c3`。字幕表示区切りSkillの人間評価3項目を既存報告へ追記し、`63bb9ea3e066ae945c1bc93597585825d16a0789` でcommit/push、local/remote main一致を確認した。未判定だった履歴と当時の動画・manifestは保持した。
 
@@ -86,3 +86,61 @@ node --test evals/clip_composition/presentation_meaning_boundary_source_package_
 node runner/node_modules/typescript/bin/tsc --noEmit --strict --target ES2022 --module NodeNext --skipLibCheck runner/src/skills/caption-meaning-grouping-v001.ts
 node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_caption_meaning_grouping_skill_e2e_v001.mts preflight evals/clip_composition/jobs/presentation/caption-meaning-grouping-skill-e2e/fixed-plan-v001.json
 ```
+
+## 第一完成の実証結果
+
+現Codexが提示された2場面・190個の確定本文片を読み、既存境界IDだけで10個の意味終端を新規に選択した。最初の1行JSON受信失敗後は同じ意味判断を明記して再送し、意味判断回数を水増ししていない。採用した10まとまりごとに、無変更の字幕表示区切りSkillから提示された入力を読み、表示終端と行末をそれぞれ新しく返した。配線fixtureの8まとまりを実走で再生したものではない。
+
+意味の採用正本→10件の表示Skill実呼出→各回答の検査・採用→順序を保存した14表示→既存Coreの正式注文書→renderer admission→実レイアウト→実動画とtechnical QCが成立した。本文190片と元atom列はすべて順序を保存し、追加・欠落・本文改変はない。時刻は既存Coreの投影で解決しており、Skillは時刻を生成していない。
+
+| 確認事項 | 現物での結果・証拠 |
+| --- | --- |
+| ID存在・所属・順序・被覆 | 新規testと実走の意味採用・表示採用で合格。未知ID、別所属、逆順、重複、末尾欠落を拒否 |
+| 本文・時刻・権限の不正出力 | testで拒否。Skill resultからの直接正式化、検査済みtokenの模造・別の採用回答への流用も拒否 |
+| 決定的昇格 | 保存された同一入力・同一採用回答から意味正本・表示採用・Core成果6種の正式byteを再構築し一致 |
+| 第1 Skill無変更再利用 | 固定済み第1 Skill実装SHAを照合し、意味まとまりごとの実呼出10件を保存 |
+| Coreとの一対一対応 | 14表示すべてから意味まとまりと元atom出現列へ追跡。flattenは順序保存のみ |
+| renderer admission | accepted。既存規約・style・rendererを変更せず通過 |
+| 実レイアウト | 14表示・17行、実測14/14合格、領域違反0 |
+| technical QC | 命令適用・配置と可視性・媒体検査すべてpassed。14表示それぞれを省いた比較で適用を検証 |
+| 描画証拠 | 合成に使った14画像と検査対象14画像のSHAが現物と14/14一致 |
+| 実動画 | 11,764,243 byte。SHA-256 `561a6d7c74dcee39684a4040f5a7e892cb729ef3ae19857d294bb4bf25835e6d` |
+| 回帰と型検査 | 新規23件 + 第1 Skill13件 + Core92件 = 128件合格、失敗0。新規Skillのstrict型検査も合格 |
+
+実動画は今回の新しい採用成果から既存rendererを1回実行して生成した。171件のローカル処理の観測を保存した。画像差分検査の終了値1は差分ありの正常な観測であり、QC失敗を意味しない。描画の一時物590ファイルはpath・byte数・SHAと必要な測定内容を証拠へ保存してから今回の出力内に限って削除した。削除後も正式値再現検査は合格した。
+
+### 比較から分かったことと限界
+
+今回の10個の意味まとまりを経由した最終14表示・17行・表示時刻は、第1 Skillのみの人間合格版とすべて一致した。新しく生成した動画も同じSHAになった。したがって今回実証したのは、意味判断の独立、意味まとまりが表示Skillの入力範囲として実際に作用すること、共通Skillを無変更で再利用すること、正式値・実動画への接続である。この素材で第2 Skillを加えたことによる追加の見た目改善は実証していない。
+
+同一素材のまま本文・映像・音声・場面順・styleを固定し、3版を比較可能にした。見た目の差を作る目的で判断を変えたり、別の動画を追加生成したりしていない。一般素材での意味判断精度や品質改善率は今回の対象外である。元の確定本文に含まれる表現の修正もしていない。
+
+[3版比較と意味まとまり一覧](/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/review.md)
+
+### 正本と監査用証拠
+
+成果root: `evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/`
+
+- `manifest.json`: 固定plan・意味判断・意味採用・表示実呼出・表示採用・Core・描画・比較動画のSHA束縛。
+- `meaning-groups.json` / `core-adoption.json`: 意味まとまり正本と全表示・元atom列の所属対応。
+- `renderer-result.json`: renderer admission、合成、technical QCの正式結果。
+- `technical-evidence.json`: 正式値再現結果、実レイアウト、画像SHA、ローカル処理観測、成功/失敗を含むtestログ、削除済み一時物のSHA一覧。
+- `comparison-evidence.json`: 3版の動画参照と、表示本文・行末・時刻の一致および意味まとまりとの対応。
+- `audit-evidence.json`: 新規判断の回答・各段階の採用・所属・比較の小さな監査証拠。実装ソースは含めない。
+- `review.md`: 3本の動画と人間評価4項目。
+
+再検証command:
+
+```sh
+node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_caption_meaning_grouping_skill_e2e_v001.mts verify evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002/manifest.json
+```
+
+第1 Skillの人間評価確定は `63bb9ea3e066ae945c1bc93597585825d16a0789`、接続方針の監査は `ef60dc644fba1939648945f202c1db731de72b7a`、実装checkpointは `d2c5bab98f548831da944fe86bb05401571ec1c6`、受信配線修正と失敗証拠は `9e2e84ac5b6b8ceed7dbfa7df880ddab98d14960`。いずれもmainへ通常push済み。第一完成成果と本報告を含む監査対象HEADはDriveの最新MANIFESTとAUDIT_ONLY本文で示す。
+
+今回の開始前からある別作業13pathはSHA一致を確認し、今回のcommitへ含めない。今回分の成果はすべてcommit対象とする。ソースコードのDrive送信は自動承認レビューで拒否されたため実施せず、GitHubのcommit/diffを監査元とする。Driveは指示された報告書・manifest・小さな証拠を同じsnapshotへ同期する。
+
+### 作業会計と残る判断
+
+新規意味判断1回、同じ意味回答の受信修正後再送1回、表示判断10回、renderer実行1回。意味判断の変更0回、API通信0回、追加費用US$0、新素材0件。限定修正2回（受信配線）、検査設営修正1回（prototypeの比較方法）。新たな契約追補0件、規約緩和0件。受信失敗の証拠を保持して承認済み自律修正を行い、判断待ちの正式停止は発生していない。
+
+第1 Skillは技術E2E + 人間品質評価の両方が合格済み。第2 Skillは技術E2E第一完成としてAUDIT_ONLYへ提出し、人間目視の「内容の追いやすさ」「意味の自然さ」「字幕の過不足」「動画の気持ちよさ」の4項目だけをHUMAN_DECISIONとして残す。第1 Skillの人間合格を第2 Skillへ自動転記しない。第3 Skillへは着工しない。

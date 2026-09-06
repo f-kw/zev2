@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+  "response": {
+    "schemaVersion": "caption-meaning-e2e-local-response-v001",
+    "requestSha256": "0290b85b9e556f20cb483792f67beb18a9f0753e6f53e03ec40dd471afbfbdd9",
+    "answer": {
+      "status": "complete",
+      "captions": [
+        {
+          "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000005",
+          "cues": [
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097"
+              ]
+            },
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。見た記憶への気付きと、それを確かめる言い直しを、それぞれ一つの短い表示にする。"
+  },
+  "result": {
+    "schemaVersion": "caption-display-skill-result-v001",
+    "skillId": "caption-display-boundaries",
+    "skillVersion": "v001",
+    "answer": {
+      "status": "complete",
+      "captions": [
+        {
+          "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000005",
+          "cues": [
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097"
+              ]
+            },
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

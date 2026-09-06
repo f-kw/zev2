@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "caption-meaning-grouping-skill-fixed-plan-v001",
+  "planId": "caption-meaning-doctor-review-20260906-v001",
+  "sourcePlanBinding": {
+    "schemaVersion": "caption-display-skill-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/caption-display-skill-e2e/fixed-plan-v001.json",
+    "fileSha256": "0ae9adb62f66df71c8e395573729a3d1575116163f3304e7979600ef47a13b08",
+    "canonicalSha256": "6d8746b32d19f05179c4894f8667975413517309b0cdff9c8670768081fddfdc"
+  },
+  "skills": [
+    {
+      "id": "caption-meaning-grouping",
+      "version": "v001",
+      "judgmentMode": "current-codex-stdin-v001",
+      "apiCommunication": "forbidden"
+    },
+    {
+      "id": "caption-display-boundaries",
+      "version": "v001",
+      "judgmentMode": "current-codex-stdin-v001",
+      "apiCommunication": "forbidden"
+    }
+  ],
+  "adoptionPolicies": {
+    "meaning": "validated-meaning-groups-for-review-v001",
+    "display": "validated-display-groups-for-review-v001"
+  },
+  "displayOnlyVideo": {
+    "path": "evals/clip_composition/outputs/presentation/work-caption-display-skill-doctor-20260906-v004/render/presentation-rendered-v002.mp4",
+    "fileSha256": "561a6d7c74dcee39684a4040f5a7e892cb729ef3ae19857d294bb4bf25835e6d"
+  },
+  "implementationBindings": [
+    {
+      "path": "runner/src/skills/caption-meaning-grouping-v001.ts",
+      "fileSha256": "52e53358c8cb274404abada4afe8d8e49975717f9fc8faf262bd9fc0d33bfc81"
+    },
+    {
+      "path": "evals/clip_composition/run_caption_meaning_grouping_skill_e2e_v001.mts",
+      "fileSha256": "c61ee1e9dc20c5da964ed2778a572cf0425976d5da959c91aa802585a891bb2d"
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/presentation/work-caption-meaning-grouping-skill-doctor-20260906-v002"
+}

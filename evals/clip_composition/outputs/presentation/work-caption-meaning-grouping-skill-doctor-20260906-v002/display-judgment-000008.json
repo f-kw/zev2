@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "caption-meaning-e2e-judgment-trace-v001",
+  "response": {
+    "schemaVersion": "caption-meaning-e2e-local-response-v001",
+    "requestSha256": "086db95b6cdec59ae3be4e80f09f9a6d9a4fbd1896152f4ccbce69f0479394d3",
+    "answer": {
+      "status": "complete",
+      "captions": [
+        {
+          "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000008",
+          "cues": [
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166"
+              ]
+            },
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "judgmentNote": "今回この意味まとまりの確定本文を読んで新しく表示を判断した。女の死と、若い子を捕らえて喰らう行為を別の表示にする。それぞれ一行で完結させる。"
+  },
+  "result": {
+    "schemaVersion": "caption-display-skill-result-v001",
+    "skillId": "caption-display-boundaries",
+    "skillVersion": "v001",
+    "answer": {
+      "status": "complete",
+      "captions": [
+        {
+          "captionId": "caption-meaning-doctor-review-20260906-v001-meaning-000008",
+          "cues": [
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166"
+              ]
+            },
+            {
+              "cueEndBoundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177",
+              "lineEndBoundaryIds": [
+                "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
