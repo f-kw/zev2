@@ -6,7 +6,7 @@
 
 - [レビュー動画](/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/render/presentation-rendered-v002.mp4)
 - [人間レビューの入口](/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/review.md)
-- [Driveの最新共有MANIFEST](https://drive.google.com/file/d/1qUmmCjhpQ1fQKX8foJGZWWtC6aTRjjuE/view)
+- [Drive共有folder（今回の報告・動画・MANIFESTを追加保存）](https://drive.google.com/drive/folders/1sVj-mZU-MXEqLKeaIlI5x2jicvte_C8i)
 - 出力root: `evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002`
 - 完成動画: 1920×1080、30fps、H.264 / AAC、7,128frame、237,600ms、110,090,024bytes。
 - 完成動画SHA-256: `fa4733dca128f3ab146c2f8cde3f8b8b6e22586304fa13d34c65cf47f6264df0`。
@@ -163,3 +163,8 @@ node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/r
 修正後の実寸検査は合格。全字幕の実描画と文字領域検査を進行中。この時点では完成動画と最終QCの合格をまだ主張しない。
 
 実装修正は2件、設営修正は2件、既存表示Skillの実測拒否に応じた回答の限定修正は1件。新規候補判断は全工事で1回、表示判断は初回3回と限定修正1回。API通信・費用・新素材・人間品質評価は行っていない。
+
+
+## Drive共有の保存方法
+
+既存報告の同一ID更新は、自動承認レビューが「既存snapshotを上書きしない制約に反する」として拒否した。このため、同じ共有folderへ今回の報告・レビュー入口・実行manifest・監査証拠・動画・共有MANIFESTを新しいファイルとして追加する。既存Driveファイルの内容・ID・配置を変更しない。今回のcommitと新しい共有ファイルの対応は、追加する共有MANIFESTの先頭に記載する。技術成果・動画・検査結果はこの保存方法の変更によって変わらない。
