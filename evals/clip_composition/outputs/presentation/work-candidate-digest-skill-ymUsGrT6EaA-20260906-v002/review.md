@@ -1,6 +1,6 @@
 # 候補探索Skillで作成したダイジェスト
 
-[動画を開く（3分57.6秒）](/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/render/presentation-rendered-v002.mp4) · [Drive版の動画・報告一覧](https://drive.google.com/drive/folders/1sVj-mZU-MXEqLKeaIlI5x2jicvte_C8i)
+[動画を開く（3分57.6秒）](/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/render/presentation-rendered-v002.mp4) · [Driveの報告・検査証拠](https://drive.google.com/drive/folders/1sVj-mZU-MXEqLKeaIlI5x2jicvte_C8i)
 
 既存素材の431発話から新しく選んだ3場面を、元素材の順に連結しました。字幕は既存の確定本文を維持し、51表示に分けています。技術検査は合格しています。内容の品質は人間の確認待ちです。
 

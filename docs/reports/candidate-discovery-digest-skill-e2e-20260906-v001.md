@@ -6,7 +6,7 @@
 
 - [レビュー動画](/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/render/presentation-rendered-v002.mp4)
 - [人間レビューの入口](/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/review.md)
-- [Drive共有folder（今回の報告・動画・MANIFESTを追加保存）](https://drive.google.com/drive/folders/1sVj-mZU-MXEqLKeaIlI5x2jicvte_C8i)
+- [Drive共有folder（今回の報告・検査証拠・MANIFESTを追加保存）](https://drive.google.com/drive/folders/1sVj-mZU-MXEqLKeaIlI5x2jicvte_C8i)
 - 出力root: `evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002`
 - 完成動画: 1920×1080、30fps、H.264 / AAC、7,128frame、237,600ms、110,090,024bytes。
 - 完成動画SHA-256: `fa4733dca128f3ab146c2f8cde3f8b8b6e22586304fa13d34c65cf47f6264df0`。
@@ -68,7 +68,7 @@ node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/r
 
 主な監査資料は `manifest.json`、`audit-evidence.json`、`test-evidence.json`、`process-observation-evidence.json`、`recovery-history-resolution.json`。process観測1,833ファイルは全byteとSHAを一つの証拠へ保存した。今回の完了済みrendererが作った検査用一時映像・scratch・lockと保存済み観測の一時物約5.6GBは整理し、完成動画SHAの不変と正式値再検証の合格を確認した。失敗履歴、基礎映像、完成動画、元素材は保持した。整理記録は `temporary-cleanup-evidence.json` にある。
 
-実装と小さな正本・検査証拠・字幕画像はGitへ保存する。大型の基礎映像と完成動画はローカルにSHA付きで保持し、完成動画は同じDrive共有folderへ保存する。Git追跡対象から外した媒体の識別は実行manifestにあり、共有先の現在のcommit・動画・報告の対応はDriveのMANIFESTへ同期する。入力の元動画は既存のローカル素材を使用しており、新素材取得は行っていない。
+実装と小さな正本・検査証拠・字幕画像はGitへ保存する。大型の基礎映像と完成動画はローカルにSHA付きで保持し、Driveには完成動画のローカル保存先・SHAと報告・検査証拠を保存する。Git追跡対象から外した媒体の識別は実行manifestにあり、共有先の現在のcommit・動画・報告の対応はDriveのMANIFESTへ同期する。入力の元動画は既存のローカル素材を使用しており、新素材取得は行っていない。
 
 モデルAPI通信・新provider・追加API費用・新素材取得・Goal/DECISIONS改訂・renderer/style規約変更は行っていない。開始時から存在した別作業13pathはbyte不変を確認し、今回のcommit対象から除外する。
 
@@ -167,4 +167,6 @@ node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/r
 
 ## Drive共有の保存方法
 
-既存報告の同一ID更新は、自動承認レビューが「既存snapshotを上書きしない制約に反する」として拒否した。このため、同じ共有folderへ今回の報告・レビュー入口・実行manifest・監査証拠・動画・共有MANIFESTを新しいファイルとして追加する。既存Driveファイルの内容・ID・配置を変更しない。今回のcommitと新しい共有ファイルの対応は、追加する共有MANIFESTの先頭に記載する。技術成果・動画・検査結果はこの保存方法の変更によって変わらない。
+既存報告の同一ID更新は、自動承認レビューが「既存snapshotを上書きしない制約に反する」として拒否した。このため、同じ共有folderへ今回の報告・レビュー入口・実行manifest・監査証拠・動画の保存先/SHA・共有MANIFESTを新しいファイルとして追加する。既存Driveファイルの内容・ID・配置を変更しない。今回のcommitと新しい共有ファイルの対応は、追加する共有MANIFESTの先頭に記載する。技術成果・動画・検査結果はこの保存方法の変更によって変わらない。
+
+動画本体のDrive送信も、自動承認レビューが「動画本体の外部共有は明示承認されておらず、ローカルpathとSHAの報告が許可されている」として拒否した。動画本体は外部送信せず、このPC上の完成動画を人間レビューの主導線とする。Drive側には保存先・SHA・媒体情報を含む実行manifestと監査証拠を共有する。この方法で実動画の提示と監査資料の共有を完了し、動画送信の追加承認は要求しない。
