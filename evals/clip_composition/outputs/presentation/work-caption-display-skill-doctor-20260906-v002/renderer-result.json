@@ -1,0 +1,370 @@
+{
+  "schemaVersion": "caption-display-skill-renderer-execution-v001",
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/presentation/work-caption-display-skill-doctor-20260906-v002/renderer-job.json",
+    "fileSha256": "da6cdce91490f4f08878eddf8cc5904c52adacfb0d802d26c8e197f675740dfa",
+    "canonicalSha256": "4e606e173cdcde7fe2bba20e326e9f237f3abeb54cd48f2bc158b2904266feda"
+  },
+  "exitCode": 1,
+  "result": {
+    "exitCode": 1,
+    "failure": {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "layout-preflight",
+      "violations": [
+        {
+          "code": "LAYOUT_SAFE_AREA_VIOLATION",
+          "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000011",
+          "details": {
+            "bounds": {
+              "left": 80,
+              "top": 811.2,
+              "right": 1856,
+              "bottom": 975.2
+            },
+            "lineRects": [
+              {
+                "left": 84,
+                "top": 815.2,
+                "right": 1852,
+                "bottom": 951.2
+              }
+            ],
+            "safeAreaPx": {
+              "top": 40,
+              "right": 80,
+              "bottom": 40,
+              "left": 80
+            },
+            "geometryPolicy": "full-overlay-safe-area"
+          }
+        }
+      ],
+      "nested": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "top": 40,
+            "right": 80,
+            "bottom": 40,
+            "left": 80
+          }
+        },
+        "items": [
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000001",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 364,
+                "top": 815.2,
+                "right": 1556,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 360,
+              "width": 1200,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000002",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 412,
+                "top": 671.2,
+                "right": 1508,
+                "bottom": 807.2
+              },
+              {
+                "left": 364,
+                "top": 815.2,
+                "right": 1556,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 667.2,
+              "left": 360,
+              "width": 1200,
+              "height": 308
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000003",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 412,
+                "top": 671.2,
+                "right": 1508,
+                "bottom": 807.2
+              },
+              {
+                "left": 172,
+                "top": 815.2,
+                "right": 1748,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 667.2,
+              "left": 168,
+              "width": 1584,
+              "height": 308
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000004",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 412,
+                "top": 815.2,
+                "right": 1508,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 408,
+              "width": 1104,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000005",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 220,
+                "top": 815.2,
+                "right": 1700,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 216,
+              "width": 1488,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000006",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 532,
+                "top": 815.2,
+                "right": 1388,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 528,
+              "width": 864,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000007",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 508,
+                "top": 815.2,
+                "right": 1412,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 504,
+              "width": 912,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000008",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 124,
+                "top": 815.2,
+                "right": 1796,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 120,
+              "width": 1680,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000009",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 364,
+                "top": 815.2,
+                "right": 1556,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 360,
+              "width": 1200,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000010",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 508,
+                "top": 671.2,
+                "right": 1412,
+                "bottom": 807.2
+              },
+              {
+                "left": 220,
+                "top": 815.2,
+                "right": 1700,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 667.2,
+              "left": 216,
+              "width": 1488,
+              "height": 308
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000011",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 84,
+                "top": 815.2,
+                "right": 1852,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 80,
+              "width": 1776,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000012",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 604,
+                "top": 815.2,
+                "right": 1316,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 600,
+              "width": 720,
+              "height": 164
+            }
+          },
+          {
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000013",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 652,
+                "top": 815.2,
+                "right": 1268,
+                "bottom": 951.2
+              }
+            ],
+            "wrapper": {
+              "top": 811.2,
+              "left": 648,
+              "width": 624,
+              "height": 164
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "caption-display-doctor-review-20260906-v001-instruction-instruction-000011",
+            "details": {
+              "bounds": {
+                "left": 80,
+                "top": 811.2,
+                "right": 1856,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 84,
+                  "top": 815.2,
+                  "right": 1852,
+                  "bottom": 951.2
+                }
+              ],
+              "safeAreaPx": {
+                "top": 40,
+                "right": 80,
+                "bottom": 40,
+                "left": 80
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      },
+      "cleanupWarnings": [
+        {
+          "code": "RENDER_OUTPUT_LOCK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-caption-display-skill-doctor-20260906-v002/.render.presentation-renderer-v002.lock",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        },
+        {
+          "code": "RENDER_OUTPUT_WORK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-caption-display-skill-doctor-20260906-v002/.render.presentation-renderer-v002-work-oscPFg",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        }
+      ]
+    }
+  }
+}
