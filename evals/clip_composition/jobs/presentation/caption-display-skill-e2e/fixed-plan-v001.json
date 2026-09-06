@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "caption-display-skill-fixed-plan-v001",
+  "planId": "caption-display-doctor-review-20260906-v001",
+  "request": {
+    "purpose": "固定済みの場面・本文・音声を保持し、字幕の表示単位と改行を読みやすくする。比較動画は人間評価待ちとする。",
+    "caseId": "candidate-doctor-disappearance-to-ogre-mother",
+    "meaningInput": {
+      "schemaVersion": "distant-connection-presentation-meaning-input-v001",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/meaning-input-v001.json",
+      "fileSha256": "389448931673096c6971ad2d96f00c3c05b7a767f23e44dfc19d015b6bc4009b",
+      "canonicalSha256": "f8e854170523fd8db0a9588314beadb215aef787b17bad8d5650fb1d720d52db"
+    },
+    "sourcePackage": {
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+      "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+      "canonicalSha256": "5594ddf2d1aa08660d893b7b8de7f37954f760981f76d615d13187034c5e3c8a"
+    },
+    "baseMedia": {
+      "media": {
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-doctor-disappearance-to-ogre-mother-audio-grid-v003/base-media.mp4",
+        "fileSha256": "9bbf87100b7fe2ab11f83c587b98565beeebe11f97bd31c7b41e12a53c4fe89d"
+      },
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v003",
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-doctor-disappearance-to-ogre-mother-audio-grid-v003/timeline.json",
+        "fileSha256": "5dac9288fc5f84463bbfe32f8a6cb066bdcadcc9ff70782ba929dd50c6cb57bd",
+        "canonicalSha256": "6dd17fc51ac44d4ac4c08eb9ab2dd80cec8baf3eab3270d1bdd73c41f14a687a"
+      },
+      "generationManifest": {
+        "schemaVersion": "presentation-base-media-generation-manifest-v003",
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-doctor-disappearance-to-ogre-mother-audio-grid-v003/generation-manifest.json",
+        "fileSha256": "ecba9de2118f0777eab123e3cb0742ecc23f1c147276b035125f7cea5a2ca272",
+        "canonicalSha256": "fe8688f34937d9161ee5ec96eb27308612921eb2b1a9879a3de24199c106b74a"
+      },
+      "validationReceipt": {
+        "schemaVersion": "presentation-base-media-validation-report-v001",
+        "path": "evals/clip_composition/outputs/presentation/base-media/distant-connection-candidate-doctor-disappearance-to-ogre-mother-audio-grid-v003/validation-report.json",
+        "fileSha256": "21ea9ed58ad03b54aea6ca634c296789a2a13f0ecdfd03c12965b13f2da24554",
+        "canonicalSha256": "94ce2ddb0c02eab14dcd251b0e0722ac64de371b55ec3bfb075430a07dd4f07f"
+      }
+    },
+    "rendererTemplate": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-template-v002.json",
+      "fileSha256": "cfdb4c6e18e47cde8ea9fe2302d35993a7795ad804586adc36ff601c8ddfca5e",
+      "canonicalSha256": "3b72513981982691439d1dcc2d7cb3f200c4ce04663316edcef35bf260185703"
+    },
+    "baselineVideo": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/render-output-v001/presentation-rendered-v002.mp4",
+      "fileSha256": "d9ce7d6f45c9eb46807402d379dc176397dc38d06b9f4ceeb180565a94593861"
+    },
+    "sourceVideo": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    }
+  },
+  "skill": {
+    "id": "caption-display-boundaries",
+    "version": "v001",
+    "judgmentMode": "current-codex-stdin-v001",
+    "apiCommunication": "forbidden"
+  },
+  "adoptionPolicy": "validated-boundaries-for-review-only-v001",
+  "implementationBindings": [
+    {
+      "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3"
+    },
+    {
+      "path": "evals/clip_composition/run_caption_display_skill_e2e_v001.mts",
+      "fileSha256": "c6fd3a5c6284a5c937d107a223b45a7d09c6ab36dbeb2e6dcf594da696395886"
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/work-caption-display-skill-doctor-20260906-v001"
+}
