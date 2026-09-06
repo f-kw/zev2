@@ -1,0 +1,793 @@
+{
+  "schemaVersion": "caption-display-skill-judgment-request-v001",
+  "requestId": "caption-display-doctor-review-20260906-judgment2-v001-judgment",
+  "planBinding": {
+    "schemaVersion": "caption-display-skill-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/caption-display-skill-e2e/fixed-plan-v001.json",
+    "fileSha256": "0ae9adb62f66df71c8e395573729a3d1575116163f3304e7979600ef47a13b08",
+    "canonicalSha256": "6d8746b32d19f05179c4894f8667975413517309b0cdff9c8670768081fddfdc"
+  },
+  "skill": {
+    "id": "caption-display-boundaries",
+    "version": "v001",
+    "judgmentMode": "current-codex-stdin-v001",
+    "apiCommunication": "forbidden"
+  },
+  "input": {
+    "schemaVersion": "presentation-zevo-caption-selection-input-v001",
+    "taskDescription": "各captionの境界片を記載順に一度ずつ全量使用してください。cueは、直前から続く発話がそれだけで意味を読める短いまとまりになり、その末尾で発話の意味が一区切りつくように、cue終端を提示されたboundaryIdから選んでください。cue終端を意味の基準で先に決め、そのcueが一行に収まらない場合だけ行末を提示されたboundaryIdから選んでください。cue終端と行末は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。必要な行末候補が複数ある場合は、二行の幅が大きく偏らない候補を選んでください。各cueはstyleLimits.maxLinesPerCue以下とし、一行に収まるcueを改行しないでください。最後のcueはcaption最後のboundaryIdで終えてください。本文、境界片、ID、順序を変更しないでください。",
+    "captions": [
+      {
+        "captionId": "candidate-doctor-disappearance-to-ogre-mother-input-caption",
+        "boundaryCandidates": [
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000001",
+            "text": "医"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000002",
+            "text": "師"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000003",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000004",
+            "text": "失"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000005",
+            "text": "踪"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000006",
+            "text": "異"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000007",
+            "text": "様"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000008",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000009",
+            "text": "技"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000010",
+            "text": "に"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000011",
+            "text": "発"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000012",
+            "text": "展"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000013",
+            "text": "先"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000014",
+            "text": "日"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000015",
+            "text": "市"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000016",
+            "text": "内"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000017",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000018",
+            "text": "病"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000019",
+            "text": "院"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000020",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000021",
+            "text": "医"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000022",
+            "text": "師"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000023",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000024",
+            "text": "行"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000025",
+            "text": "方"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000026",
+            "text": "不"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000027",
+            "text": "明"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000028",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000029",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000030",
+            "text": "る"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000031",
+            "text": "事"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000032",
+            "text": "件"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000033",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000034",
+            "text": "発"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000035",
+            "text": "生"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000036",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000037",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000038",
+            "text": "以"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000039",
+            "text": "前"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000040",
+            "text": "に"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000041",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000042",
+            "text": "地"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000043",
+            "text": "下"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000044",
+            "text": "室"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000045",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000046",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000047",
+            "text": "赤"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000048",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000049",
+            "text": "坊"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000050",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000051",
+            "text": "泣"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000052",
+            "text": "き"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000053",
+            "text": "声"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000054",
+            "text": "を"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000055",
+            "text": "聞"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000056",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000057",
+            "text": "え"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000058",
+            "text": "る"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000059",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000060",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000061",
+            "text": "報"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000062",
+            "text": "告"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000063",
+            "text": "医"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000064",
+            "text": "療"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000065",
+            "text": "策"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000066",
+            "text": "か"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000067",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000068",
+            "text": "相"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000069",
+            "text": "次"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000070",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000071",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000072",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000073",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000074",
+            "text": "失"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000075",
+            "text": "踪"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000076",
+            "text": "事"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000077",
+            "text": "件"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000078",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000079",
+            "text": "直"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000080",
+            "text": "後"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000081",
+            "text": "に"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000082",
+            "text": "は"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000083",
+            "text": "深"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000084",
+            "text": "夜"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000085",
+            "text": "に"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000086",
+            "text": "赤"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000087",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000088",
+            "text": "服"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000089",
+            "text": "え"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000090",
+            "text": "?"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000091",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000092",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000093",
+            "text": "前"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000094",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000095",
+            "text": "見"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000096",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000097",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000098",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000099",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000100",
+            "text": "前"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000101",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000102",
+            "text": "見"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000103",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000104",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000105",
+            "text": "つ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000106",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000107",
+            "text": "可"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000108",
+            "text": "哀"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000109",
+            "text": "想"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000110",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000111",
+            "text": "子"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000112",
+            "text": "供"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000113",
+            "text": "は"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000114",
+            "text": "若"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000115",
+            "text": "く"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000116",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000117",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000118",
+            "text": "命"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000119",
+            "text": "を"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000120",
+            "text": "落"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000121",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000122",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000123",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000124",
+            "text": "女"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000125",
+            "text": "は"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000126",
+            "text": "悲"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000127",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000128",
+            "text": "み"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000129",
+            "text": "に"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000130",
+            "text": "打"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000131",
+            "text": "ち"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000132",
+            "text": "ひ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000133",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000134",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000135",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000136",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000137",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000138",
+            "text": "無"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000139",
+            "text": "情"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000140",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000141",
+            "text": "者"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000142",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000143",
+            "text": "も"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000144",
+            "text": "を"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000145",
+            "text": "決"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000146",
+            "text": "し"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000147",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000148",
+            "text": "許"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000149",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000150",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000151",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000152",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000153",
+            "text": "心"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000154",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000155",
+            "text": "中"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000156",
+            "text": "で"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000157",
+            "text": "誓"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000158",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000159",
+            "text": "た"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000160",
+            "text": "や"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000161",
+            "text": "が"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000162",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000163",
+            "text": "女"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000164",
+            "text": "は"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000165",
+            "text": "死"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000166",
+            "text": "に"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000167",
+            "text": "若"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000168",
+            "text": "い"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000169",
+            "text": "子"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000170",
+            "text": "を"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000171",
+            "text": "捕"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000172",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000173",
+            "text": "え"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000174",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000175",
+            "text": "喰"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000176",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000177",
+            "text": "う"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000178",
+            "text": "何"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000179",
+            "text": "て"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000180",
+            "text": "読"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000181",
+            "text": "む"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000182",
+            "text": "の"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000183",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000184",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000185",
+            "text": "鬼"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000186",
+            "text": "母"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000187",
+            "text": "と"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000188",
+            "text": "な"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000189",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "candidate-doctor-disappearance-to-ogre-mother-input-caption-boundary-000190",
+            "text": "た"
+          }
+        ]
+      }
+    ],
+    "styleLimits": {
+      "maxLogicalWidthPerLine": 36,
+      "maxLinesPerCue": 2,
+      "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+    }
+  },
+  "inputCanonicalSha256": "cccb476a873364858173617387041dd65f6a65981373b5ba2fa3a6c04a7a0f1c"
+}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>字幕表示の比較 — 医者失踪から鬼の母へ</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#e8edf5;background:#10161e;color-scheme:dark}body{margin:0 auto;max-width:1500px;padding:28px}h1{font-size:26px;margin:5px 0 12px}p{line-height:1.7;color:#bbc7d8}.tag{font-size:13px;color:#a1d9cd}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.card{background:#1a2431;border:1px solid #354255;border-radius:12px;overflow:hidden}h2{font-size:18px;padding:0 16px}video{display:block;width:100%;background:#000;aspect-ratio:16/9}.tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 0}button,select{font:inherit;border:1px solid #50627b;border-radius:7px;padding:10px 14px;cursor:pointer;background:#22374a;color:#fff}button.primary{background:#28695e;border-color:#479d8d}input[type=range]{flex:1;min-width:160px}.status{min-height:25px}details{margin-top:24px;background:#18212d;padding:18px;border-radius:10px}summary{cursor:pointer;font-weight:600}li{margin:12px 0;line-height:1.6}a{color:#a0dbf2}.source{max-width:850px;margin-top:16px}.note{font-size:13px;color:#a7b2c1}@media(max-width:800px){.grid{grid-template-columns:1fr}body{padding:16px}}
+</style>
+<div class="tag">人間レビュー待ち · 字幕表示区切りSkill</div><h1>字幕の出し方を見比べる</h1>
+<p>同じ本文・映像・音声・場面順・表示規約で比較します。新しい版では、字幕をまとめて見せる単位と行末をSkillが判断しています。</p>
+<div class="grid"><section class="card"><h2>A · Skillなしの既存完成版</h2><video id="a" controls preload="metadata" src="../distant-connection-presentation-execution/candidate-doctor-disappearance-to-ogre-mother-v001/render-output-v001/presentation-rendered-v002.mp4"></video></section><section class="card"><h2>B · Skill使用版</h2><video id="b" controls preload="metadata" muted src="render/presentation-rendered-v002.mp4"></video></section></div>
+<div class="tools"><button id="play" class="primary">並べて再生</button><button id="pause">停止</button><button id="start">先頭へ</button><label>音声 <select id="sound"><option value="a">A · 既存版</option><option value="b">B · Skill使用版</option></select></label><input id="seek" aria-label="両方の再生位置" type="range" min="0" max="1" value="0" step="any"><output id="time">0:00</output></div><p id="status" class="status" role="status">各プレイヤーを個別に再生することもできます。</p>
+<section><h2>確認してほしい3点</h2><ul><li>Skill使用版の方が見やすいですか。（良い・同等・以前の方が良い・保留）</li><li>意味上、不自然に切れた字幕はありますか。（なし・あり・保留）</li><li>字幕の出方が、動画の気持ちよさを損なっていませんか。（保てている・損なっている・保留）</li></ul><p class="note">評価は未判定です。気になった箇所があれば再生時刻とともにお知らせください。技術検査の結果と、人間による品質の判断は別に扱います。</p></section>
+<details><summary>字幕を重ねる前の映像・元動画を見る</summary><p>同じ2場面をつないだ比較用の既存入力</p><video class="source" controls preload="none" src="../base-media/distant-connection-candidate-doctor-disappearance-to-ogre-mother-audio-grid-v003/base-media.mp4"></video><p>元動画の対象場面を開く</p><div class="tools"><button id="part1">前半 · 28:44.755</button><button id="part2">後半 · 1:34:53.397</button></div><video id="original" class="source" controls preload="none" src="../../work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4"></video><p class="note">元動画は既存ファイルを参照しています。対象区間は前半28:44.755–28:59.800、後半1:34:53.397–1:35:14.097です。</p></details>
+<script>
+const a=document.getElementById('a'),b=document.getElementById('b'),seek=document.getElementById('seek'),status=document.getElementById('status');
+function pause(){a.pause();b.pause()}
+function setTime(t){a.currentTime=t;b.currentTime=t;seek.value=t}
+function clock(t){return Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0')}
+function syncSound(){a.muted=document.getElementById('sound').value!=='a';b.muted=document.getElementById('sound').value!=='b'}
+document.getElementById('play').onclick=async()=>{try{b.currentTime=a.currentTime;syncSound();await Promise.all([a.play(),b.play()]);status.textContent='AとBを同じ位置から再生しています。'}catch(e){pause();status.textContent='再生できませんでした。動画ファイルへのアクセスを確認してください。'}};
+document.getElementById('pause').onclick=pause;document.getElementById('start').onclick=()=>{pause();setTime(0)};document.getElementById('sound').onchange=syncSound;
+a.onloadedmetadata=()=>{seek.max=a.duration};a.ontimeupdate=()=>{seek.value=a.currentTime;document.getElementById('time').textContent=clock(a.currentTime)+' / '+clock(a.duration||0)};seek.oninput=()=>setTime(Number(seek.value));
+for(const v of [a,b])v.onerror=()=>{status.textContent='動画ファイルを読み込めません。ローカルのreview.htmlから開いてください。'};
+const original=document.getElementById('original');let sourceEnd=null;original.ontimeupdate=()=>{if(sourceEnd!==null&&original.currentTime>=sourceEnd)original.pause()};
+async function source(start,end){pause();sourceEnd=end;original.currentTime=start;try{await original.play()}catch(e){status.textContent='元動画の再生ボタンを押してください。'}}
+document.getElementById('part1').onclick=()=>source(1724.755,1739.8);document.getElementById('part2').onclick=()=>source(5693.397,5714.097);
+</script></html>

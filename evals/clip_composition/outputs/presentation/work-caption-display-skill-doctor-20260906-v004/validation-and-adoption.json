@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "caption-display-skill-validation-adoption-v001",
+  "planBinding": {
+    "schemaVersion": "caption-display-skill-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/caption-display-skill-e2e/fixed-plan-v001.json",
+    "fileSha256": "0ae9adb62f66df71c8e395573729a3d1575116163f3304e7979600ef47a13b08",
+    "canonicalSha256": "6d8746b32d19f05179c4894f8667975413517309b0cdff9c8670768081fddfdc"
+  },
+  "requestBinding": {
+    "schemaVersion": "caption-display-skill-judgment-request-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-caption-display-skill-doctor-20260906-v004/judgment-request.json",
+    "fileSha256": "946e4283a0b2c64639caae414ffb836f25fafdcb760a5a8d8df77fec227bff4f",
+    "canonicalSha256": "83837404335481ee20fbd919853632a6832954be67f44d80759925c316a3dcc8"
+  },
+  "responseBinding": {
+    "schemaVersion": "caption-display-skill-judgment-response-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-caption-display-skill-doctor-20260906-v004/judgment-response.json",
+    "fileSha256": "e1c2c1aa00c1b86249f7bb73970532c850df323869c70404c23fdba925168ee2",
+    "canonicalSha256": "16cb522bfca3a94361b2e1790af7787e9c4c06efd24ed602c86298495f179b3b"
+  },
+  "resultBinding": {
+    "schemaVersion": "caption-display-skill-result-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-caption-display-skill-doctor-20260906-v004/skill-result.json",
+    "fileSha256": "6315e7167b6ab19f9509173ba52c953c112eb462ce3584081bcc806f5c0cbf11",
+    "canonicalSha256": "195cdb0a6b0998b1f83d7c3bca6ac3cfd7afacb5be675ba96d99d090e2cf0d76"
+  },
+  "priorJudgmentBindings": null,
+  "inputCanonicalSha256": "cccb476a873364858173617387041dd65f6a65981373b5ba2fa3a6c04a7a0f1c",
+  "validation": {
+    "input": "passed",
+    "output": "passed",
+    "sourceClosure": "passed",
+    "boundaryMembershipOrderCoverage": "passed",
+    "lineLayout": "passed",
+    "provenance": "passed"
+  },
+  "adoption": {
+    "policy": "validated-boundaries-for-review-only-v001",
+    "purpose": "human-review",
+    "quality": "not-evaluated"
+  }
+}

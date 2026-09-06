@@ -94,17 +94,19 @@ test('昇格後の命令・renderer jobは生回答ファイルを入力にし�
     bind(context.plan.outputRoot + '/validation-and-adoption.json', p.adoption));
 });
 
-test('描画準備失敗から同じ新規判断をbyte同一で再開し、別の出力先へ昇格する', () => {
-  const prior = actualContext.priorJudgment!;
+test('描画準備失敗から同じ新規判断をbyte同一で再開し、別の出力先へ昇格する', async () => {
+  const recoveryContext = await loadCaptionDisplayContextV001(process.cwd(),
+    'evals/clip_composition/outputs/presentation/work-caption-display-skill-doctor-20260906-v002/plan-snapshot.json');
+  const prior = recoveryContext.priorJudgment!;
   const p = promoteCaptionDisplayV001(validateAndAdoptCaptionDisplayV001(
-    actualContext, prior.request, prior.response, prior.result));
+    recoveryContext, prior.request, prior.response, prior.result));
   assert.deepEqual(p.selection.response.captions, prior.result.answer.captions);
-  assert.deepEqual(p.adoption.priorJudgmentBindings, actualContext.plan.priorJudgment);
+  assert.deepEqual(p.adoption.priorJudgmentBindings, recoveryContext.plan.priorJudgment);
   assert.match(p.rendererJob.publication.renderOutputRoot, /^evals\/clip_composition\/outputs\/presentation\//);
   const wrong = structuredClone(prior.request); wrong.input.captions[0].boundaryCandidates[0].text = '変更';
-  assert.throws(() => validateAndAdoptCaptionDisplayV001(actualContext, wrong, prior.response, prior.result), /PROVENANCE/);
+  assert.throws(() => validateAndAdoptCaptionDisplayV001(recoveryContext, wrong, prior.response, prior.result), /PROVENANCE/);
   const changedResponse = structuredClone(prior.response);
   const changedResult = structuredClone(prior.result);
   changedResponse.answer.captions[0].cues.pop(); changedResult.answer.captions[0].cues.pop();
-  assert.throws(() => validateAndAdoptCaptionDisplayV001(actualContext, prior.request, changedResponse, changedResult), /PROVENANCE/);
+  assert.throws(() => validateAndAdoptCaptionDisplayV001(recoveryContext, prior.request, changedResponse, changedResult), /PROVENANCE/);
 });
