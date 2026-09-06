@@ -7,6 +7,7 @@ import {
   validateAndAdoptCaptionMeaningV001, promoteCaptionMeaningV001, buildGroupedDisplayRequestsV001,
   validateAndAdoptGroupedDisplayV001, promoteGroupedDisplayV001,
   flattenValidatedCaptionDisplaysV001, promoteCaptionMeaningCoreV001,
+  decodeCaptionMeaningTransportResponseV001,
 } from './run_caption_meaning_grouping_skill_e2e_v001.mts';
 import {runCaptionMeaningGroupingV001} from '../../runner/src/skills/caption-meaning-grouping-v001.js';
 import {runCaptionDisplayBoundariesV001, assertCaptionDisplayInputV001}
@@ -29,6 +30,14 @@ const fixtureMeaning = {status: 'complete', containers: request.input.containers
 }))};
 const responseFor = (request: any, answer: any) => ({schemaVersion: 'caption-meaning-e2e-local-response-v001',
   requestSha256: sha(formal(request)), answer: structuredClone(answer), judgmentNote: '保存回答を使う配線test。実際の新規判断とは数えない。'});
+
+test('標準入力の1行JSONを復号し、重複key・余分なJSON・不正rootを拒否する', () => {
+  const response = responseFor(request, fixtureMeaning);
+  assert.deepEqual(formal(decodeCaptionMeaningTransportResponseV001(JSON.stringify(response))), formal(response));
+  for (const line of ['{"answer":1,"answer":2}', '{"answer":1} {"other":2}', '[]', 'null', '{broken']) {
+    assert.throws(() => decodeCaptionMeaningTransportResponseV001(line), /JUDGMENT_ENVELOPE_INVALID/);
+  }
+});
 async function meaning(answer = fixtureMeaning) {
   const result = await runCaptionMeaningGroupingV001(request.input, async () => structuredClone(answer));
   const response = responseFor(request, answer);

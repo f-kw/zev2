@@ -15,6 +15,8 @@ import {buildDistantConnectionPresentationMeaningInputFromFilesV001 as rebuildMe
 import {loadCaptionDisplayContextV001, bind} from './run_caption_display_skill_e2e_v001.mts';
 import {PRESENTATION_MEANING_BOUNDARY_TASK_DESCRIPTION_V001 as meaningQuestion}
   from './presentation_meaning_boundary_source_package_v001.mjs';
+import {decodePresentationCaptionB1StrictJsonV001 as decodeTransportJson}
+  from './presentation_caption_semantic_source_package_v001.mjs';
 import {
   decodePresentationMeaningBoundaryResponseV001 as decodeMeaningAnswer,
   inspectPresentationMeaningBoundaryCandidateCoverageV001 as inspectCoverage,
@@ -414,15 +416,20 @@ async function publish(root: string, relative: string, value: Json) {
   if (!bytes.equals(saved)) fail('PUBLICATION_MISMATCH');
   return bind(relative, value);
 }
+export function decodeCaptionMeaningTransportResponseV001(line: string): Json {
+  // 標準入力は1行JSON。正式保存byteの検査はpublish/readBoundで別に行う。
+  const decoded = decodeTransportJson(Buffer.from(line, 'utf8'));
+  if (decoded.status !== 'decoded' || !object(decoded.value)) fail('JUDGMENT_ENVELOPE_INVALID');
+  // Strict parserのnull prototypeを既存の正式serializerが受け取る通常のJSON objectへ写す。
+  return clone(decoded.value);
+}
 async function judgeThroughStdin(request: Json): Promise<Json> {
   process.stdout.write(`${JSON.stringify({event: 'caption-meaning-e2e-judgment-required',
     requestSha256: sha(formal(request)), request})}\n`);
   const lines = createInterface({input: process.stdin, crlfDelay: Infinity, terminal: false});
   try {
     for await (const line of lines) {
-      const decoded = decode(Buffer.from(line, 'utf8'));
-      if (decoded.status !== 'decoded' || !object(decoded.value)) fail('JUDGMENT_ENVELOPE_INVALID');
-      return decoded.value;
+      return decodeCaptionMeaningTransportResponseV001(line);
     }
     return fail('JUDGMENT_INPUT_CLOSED');
   } finally { lines.close(); }
