@@ -1,0 +1,25 @@
+{
+  "checks": [
+    "capture frame 1680 maps to audio sample 2469600; end remains 1794",
+    "place end maps without changing locked start 2673",
+    "end before locked start saved as conflict, never adjusted",
+    "foreign target, bool, fractional frame, outside-window and extra changed-start field rejected",
+    "not-identifiable has no timing value",
+    "HTTP 206 original MP4 bytes exact",
+    "cross-origin record rejected"
+  ],
+  "status": "passed",
+  "testObservations": "isolated in /private/tmp/zev2-human-boundary-test-observations; excluded from human answers",
+  "humanObservationCount": 0,
+  "browserChecks": [
+    "初期状態では確定が無効",
+    "1コマ前後移動を確認",
+    "再生位置から正しいコマへ移動",
+    "捕縛は開始のみ・終了は固定",
+    "どこは終了のみ・開始2673は固定",
+    "位置保存と再読復元",
+    "区間末尾で停止",
+    "最初から再生・一時停止",
+    "検査回答2件は一時フォルダのみ"
+  ]
+}

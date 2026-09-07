@@ -1,0 +1,15 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>字幕2か所の位置合わせ</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#e9edf3;background:#10151d;color-scheme:dark}*{box-sizing:border-box}body{margin:0}main{max-width:1040px;margin:auto;padding:26px 24px}h1{font-size:25px;margin:0 0 8px}p{line-height:1.6;margin:8px 0}small,.muted{color:#aebccb}nav{display:flex;gap:12px;margin:22px 0}button{font:inherit;border:1px solid #536479;border-radius:9px;background:#233040;color:inherit;padding:11px 16px;cursor:pointer}button:disabled{opacity:.4;cursor:default}nav button{flex:1;text-align:left}nav button[aria-current=true]{border-color:#83d7d2;background:#224144}.primary{background:#87dad3;color:#102726;font-weight:700;border-color:#87dad3}section{padding:18px;background:#19232e;border:1px solid #344454;border-radius:14px}h2{font-size:21px;margin:0 0 8px}.question{font-size:19px;font-weight:650}video{display:block;width:100%;max-height:49vh;background:black;border-radius:9px;margin:14px 0}.controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.timeline{display:flex;gap:14px;align-items:center;margin:14px 0}.timeline input{flex:1;accent-color:#8eddd6}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}#message{min-height:1.6em;color:#91e6c2}#saved{font-size:14px;color:#bed8d2}#position{font-variant-numeric:tabular-nums;min-width:115px}#review{margin-top:22px}#review li{margin:9px 0}.hint{font-size:14px;color:#aebccb}@media(max-width:620px){main{padding:18px 12px}nav{flex-direction:column}video{max-height:40vh}.controls button{padding:10px}.actions button{width:100%}}
+</style>
+<main><h1>字幕2か所の位置合わせ</h1><p class="muted">短く再生 → 境目で一時停止 → 1コマずつ合わせて確定。秒数の入力は不要です。</p>
+<nav aria-label="確認する字幕"><button id="capture">1　捕まった後・話し始め <span id="capture-state"></span></button><button id="place">2　どこ？・話し終わり <span id="place-state"></span></button></nav>
+<section><h2 id="title"></h2><p id="question" class="question"></p><p id="locked" class="hint"></p>
+<video id="video" src="/media.mp4" preload="auto" playsinline aria-label="発話の位置を確認する動画"></video>
+<div class="controls"><button id="restart">最初から再生</button><button id="play">再生</button><button id="back">1コマ戻る</button><button id="forward">1コマ進む</button><label>速さ <select id="speed" aria-label="再生速度"><option value="1">通常</option><option value="0.5">ゆっくり</option></select></label></div>
+<div class="timeline"><input id="seek" aria-label="短い動画の再生位置" type="range" min="0" step="1" value="0"><output id="position"></output></div>
+<p class="hint">少し前へ戻して再生し直せます。「どこ？」は言い終わった直後のコマを選んでください。</p>
+<div class="actions"><button id="save" class="primary" disabled>この位置で確定</button><button id="unclear">この動画では指定できない</button></div>
+<p id="message" role="status"></p><p id="saved"></p></section>
+<div id="review"><h2>保存した回答 <span id="count">0 / 2</span></h2><ul id="summary"></ul><p class="hint">確定した位置はこのPCへ保存されます。2か所を指定した後、Codexへ「指定した」と伝えてください。</p></div>
+</main><script src="/app.js"></script></html>
