@@ -1,0 +1,402 @@
+{
+  "instruction": "ZEV進行管理２ 指示-006",
+  "scope": "問題の3字幕だけの保存済み根拠照合。新計測・時刻変更・描画は未実行。",
+  "sourceBindings": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/human-review.json",
+      "bytes": 2972,
+      "fileSha256": "291b347cb49ffda75e31899b4ab0f69f54c3641ee9cd44ac590fafcf56915151"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/caption-timing.json",
+      "bytes": 75104,
+      "fileSha256": "f8662e03b846c6fa5e174012c41d4ca9b970b9cf0f99fc07e0a95d60cf193f50"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/instruction.json",
+      "bytes": 57938,
+      "fileSha256": "1db7eb81565b8d941d0d45473c651f3af724fa6272b694c849d4870d4f570308"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/machine-adoption.json",
+      "bytes": 40898,
+      "fileSha256": "32264e9b6ef7a0bc9332b9dab8622113da6797f7617f4d93b05ec7e780bcfec6"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/acoustic-correspondence-validation-v003.json",
+      "bytes": 372240,
+      "fileSha256": "651876378d7113708c455f416721084e354cc339e0a496095ea75d4b458f5042"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/timeline.json",
+      "bytes": 2483,
+      "fileSha256": "dd4ebac277c0f3da73765457ea7812cfc801a16231d35a1cd0a0c4c1b0e61aef"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+      "bytes": 75334482,
+      "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+    }
+  ],
+  "checks": {
+    "targetCount": 3,
+    "audioAndRawTextSha": "passed",
+    "uniqueOrderedIdEndpoints": "passed",
+    "openingSpeechOutsideRetainedMedia": "passed",
+    "captureOnsetNotObserved": "confirmed",
+    "placeEndBeforeLockedStart": "confirmed"
+  },
+  "cases": [
+    {
+      "ordinal": 1,
+      "text": "え?いるんでしょ?",
+      "sourceSegmentIds": [
+        2595,
+        2596,
+        2597,
+        2598,
+        2599,
+        2600,
+        2601,
+        2602,
+        2603
+      ],
+      "humanReview": {
+        "id": "caption-1",
+        "ordinal": 1,
+        "text": "え?いるんでしょ?",
+        "start": "遅い",
+        "end": "遅い",
+        "memo": "え?いるんでしょ?は発話がない"
+      },
+      "retainedSourceInterval": {
+        "segmentId": "segment-0001",
+        "sourceStartMs": 1268581,
+        "sourceEndMs": 1279920
+      },
+      "currentOutputFrames": {
+        "startFrame": 0,
+        "endFrameExclusive": 8
+      },
+      "currentSourceTimes": {
+        "startMs": 1268581,
+        "endMs": 1268861
+      },
+      "firstAcousticUnit": {
+        "unitId": "chunk-42-unit-10",
+        "text": "え",
+        "sourceSegmentIds": [
+          2595
+        ],
+        "startBoundary": {
+          "before": 2594,
+          "after": 2595
+        },
+        "endBoundary": {
+          "before": 2595,
+          "after": 2596
+        },
+        "startTimeRole": "acoustic-token-boundary",
+        "startMs": 1262300,
+        "endMs": 1262380,
+        "timeOrigin": "fixed-text-acoustic-token-group",
+        "individualCharacterTimes": "not-observed"
+      },
+      "lastAcousticUnit": {
+        "unitId": "chunk-42-unit-15",
+        "text": "?",
+        "sourceSegmentIds": [
+          2603
+        ],
+        "startBoundary": {
+          "before": 2602,
+          "after": 2603
+        },
+        "endBoundary": {
+          "before": 2603,
+          "after": 2604
+        },
+        "startTimeRole": "acoustic-token-boundary",
+        "startMs": 1268040,
+        "endMs": 1268220,
+        "timeOrigin": "fixed-text-acoustic-token-group",
+        "individualCharacterTimes": "not-observed"
+      },
+      "originalResolution": {
+        "status": "unresolved",
+        "reason": "acoustic-cue-outside-retained-media",
+        "sourceSegmentIds": [
+          2595,
+          2596,
+          2597,
+          2598,
+          2599,
+          2600,
+          2601,
+          2602,
+          2603
+        ],
+        "startResolution": {
+          "status": "unresolved",
+          "reason": "acoustic-cue-outside-retained-media"
+        },
+        "endResolution": {
+          "status": "unresolved",
+          "reason": "acoustic-cue-outside-retained-media"
+        },
+        "sourceStartMs": 1268581,
+        "sourceEndMs": 1268861
+      },
+      "sourceAudioBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0042.flac",
+        "bytes": 479666,
+        "fileSha256": "884eaf2268ac5d4be63c9609684236eaae101da710fde2eb1a9140010c58683d"
+      },
+      "sourceRawTextBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0042.raw.json",
+        "bytes": 36912,
+        "fileSha256": "7de847d0a2b584c918cfe6ddd3954bc8b7f99c24b7c58448f090cad92570541e"
+      },
+      "finding": "人間の発話不在回答と、対応IDの音響終端が採用音声開始より前である証拠が一致。元STTの非発話誤認を断定せず、今回の完成版字幕trackから当該字幕を除外する修正候補。"
+    },
+    {
+      "ordinal": 15,
+      "text": "なんかグロいやつに捕まってる",
+      "sourceSegmentIds": [
+        3953,
+        3954,
+        3955,
+        3956,
+        3957,
+        3958,
+        3959,
+        3960,
+        3961,
+        3962,
+        3963,
+        3964,
+        3965,
+        3966
+      ],
+      "humanReview": {
+        "id": "caption-15",
+        "ordinal": 15,
+        "text": "なんかグロいやつに捕まってる",
+        "start": "早い",
+        "end": "判別できない",
+        "memo": "７秒くらい早い"
+      },
+      "retainedSourceInterval": {
+        "segmentId": "segment-0004",
+        "sourceStartMs": 1990580,
+        "sourceEndMs": 2065294
+      },
+      "currentOutputFrames": {
+        "startFrame": 1494,
+        "endFrameExclusive": 1794
+      },
+      "currentSourceTimes": {
+        "startMs": 2015191,
+        "endMs": 2025180
+      },
+      "firstAcousticUnit": {
+        "unitId": "chunk-67-unit-1",
+        "text": "なんか",
+        "sourceSegmentIds": [
+          3953,
+          3954,
+          3955
+        ],
+        "startBoundary": {
+          "before": null,
+          "after": 3953
+        },
+        "endBoundary": {
+          "before": 3955,
+          "after": 3956
+        },
+        "startTimeRole": "alignment-window-origin-not-speech-onset",
+        "startMs": 2010000,
+        "endMs": 2021700,
+        "timeOrigin": "fixed-text-acoustic-token-group",
+        "individualCharacterTimes": "not-observed"
+      },
+      "lastAcousticUnit": {
+        "unitId": "chunk-67-unit-9",
+        "text": "ってる",
+        "sourceSegmentIds": [
+          3964,
+          3965,
+          3966
+        ],
+        "startBoundary": {
+          "before": 3963,
+          "after": 3964
+        },
+        "endBoundary": {
+          "before": 3966,
+          "after": null
+        },
+        "startTimeRole": "acoustic-token-boundary",
+        "startMs": 2024720,
+        "endMs": 2025180,
+        "timeOrigin": "fixed-text-acoustic-token-group",
+        "individualCharacterTimes": "not-observed"
+      },
+      "originalResolution": {
+        "status": "partial",
+        "sourceSegmentIds": [
+          3953,
+          3954,
+          3955,
+          3956,
+          3957,
+          3958,
+          3959,
+          3960,
+          3961,
+          3962,
+          3963,
+          3964,
+          3965,
+          3966
+        ],
+        "startResolution": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endResolution": {
+          "status": "resolved",
+          "unitId": "chunk-67-unit-9",
+          "observedMs": 2025180,
+          "sourceMs": 2025180
+        },
+        "sourceStartMs": 2015191,
+        "sourceEndMs": 2025180,
+        "observedStartMs": 2010000,
+        "observedEndMs": 2025180,
+        "intersectionWithUnchangedComposition": false
+      },
+      "sourceAudioBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0067.flac",
+        "bytes": 628958,
+        "fileSha256": "b24495ef1180050a9bcb6b2ab201d349a42d4361b26b31af85c3a3ec3a90d60e"
+      },
+      "sourceRawTextBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0067.raw.json",
+        "bytes": 5028,
+        "fileSha256": "c5b72ddf9d757631e70821eb55ea4076664bb8aa5adabc7e25782974d6951f11"
+      },
+      "finding": "先頭のなんかは整列窓の0秒から11.7秒までが割り当てられており、発声開始を観測できていない。次の文字グの境界を全文の開始へ流用しない。概算7秒は使わない。"
+    },
+    {
+      "ordinal": 16,
+      "text": "どこ?",
+      "sourceSegmentIds": [
+        3967,
+        3968,
+        3969
+      ],
+      "humanReview": {
+        "id": "caption-16",
+        "ordinal": 16,
+        "text": "どこ?",
+        "start": "問題なし",
+        "end": "遅い",
+        "memo": ""
+      },
+      "retainedSourceInterval": {
+        "segmentId": "segment-0004",
+        "sourceStartMs": 1990580,
+        "sourceEndMs": 2065294
+      },
+      "currentOutputFrames": {
+        "startFrame": 2673,
+        "endFrameExclusive": 2918
+      },
+      "currentSourceTimes": {
+        "startMs": 2054466,
+        "endMs": 2062652
+      },
+      "firstAcousticUnit": {
+        "unitId": "chunk-68-unit-1",
+        "text": "ど",
+        "sourceSegmentIds": [
+          3967
+        ],
+        "startBoundary": {
+          "before": null,
+          "after": 3967
+        },
+        "endBoundary": {
+          "before": 3967,
+          "after": 3968
+        },
+        "startTimeRole": "alignment-window-origin-not-speech-onset",
+        "startMs": 2040000,
+        "endMs": 2049560,
+        "timeOrigin": "fixed-text-acoustic-token-group",
+        "individualCharacterTimes": "not-observed"
+      },
+      "lastAcousticUnit": {
+        "unitId": "chunk-68-unit-3",
+        "text": "?",
+        "sourceSegmentIds": [
+          3969
+        ],
+        "startBoundary": {
+          "before": 3968,
+          "after": 3969
+        },
+        "endBoundary": {
+          "before": 3969,
+          "after": 3970
+        },
+        "startTimeRole": "acoustic-token-boundary",
+        "startMs": 2053660,
+        "endMs": 2053840,
+        "timeOrigin": "fixed-text-acoustic-token-group",
+        "individualCharacterTimes": "not-observed"
+      },
+      "originalResolution": {
+        "status": "unresolved",
+        "sourceSegmentIds": [
+          3967,
+          3968,
+          3969
+        ],
+        "startResolution": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endResolution": {
+          "status": "unresolved",
+          "reason": "corrected-endpoint-conflicts-with-unresolved-other-endpoint",
+          "notPromotedObservation": {
+            "status": "resolved",
+            "unitId": "chunk-68-unit-3",
+            "observedMs": 2053840,
+            "sourceMs": 2053840
+          }
+        },
+        "sourceStartMs": 2054466,
+        "sourceEndMs": 2062652,
+        "observedStartMs": 2040000,
+        "observedEndMs": 2053840,
+        "intersectionWithUnchangedComposition": false
+      },
+      "sourceAudioBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0068.flac",
+        "bytes": 388060,
+        "fileSha256": "beeead37629d10375632d49aa70839a4dda9851e34b159b32d8f597025e81563"
+      },
+      "sourceRawTextBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0068.raw.json",
+        "bytes": 9613,
+        "fileSha256": "1c1b3c788201bd1b4b26f792566202c0e670794942399159164439c15dc790a4"
+      },
+      "finding": "保存済み音響終端は、人間が問題なしとした維持必須の現在開始より626ms前。開始固定と正区間を同時に満たさないため終端を採用できない。開始前の終端を任意holdや隣接字幕へ丸めない。"
+    }
+  ],
+  "proposal": "冒頭字幕は除外候補。他2字幕は現在の根拠で正しい修正時刻を確定できない。根拠のない複数offset案は生成せず、局所音響再確認の方法または人間が短い動画内で表示境界を示す確認をGPT_DECISIONへ相談する。"
+}
