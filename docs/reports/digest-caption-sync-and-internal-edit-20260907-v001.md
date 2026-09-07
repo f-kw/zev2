@@ -6,7 +6,7 @@
 
 開始時のmain: `a8815ae32148e59e3e3f20ec68c315fc0c6f6c80`。候補探索は再実行しない。固定入力は人間が確認した3候補とする。自由な時刻生成、尺先行の短縮、独自係数、API通信、新素材、Gemini追加実験、自由な導入生成、Goal/DECISIONS改訂は行わない。
 
-同じ3分57.6秒の字幕修正版は、既存renderer/QCの全51字幕と来歴照合に合格した。その後、候補内部の意味判断から7保持区間を採用し、2分41.033秒・33字幕の内部編集版を生成した。新版もrenderer/QC・意味判断と採用の再構築・元音声から字幕frameまでの来歴・SHA照合に合格し、旧版との比較画面の操作確認まで完了した。現在は第一完成を監査用checkpointへ固定し、Drive同期と最終AUDIT_ONLYを行う段階。人間品質の合格はまだ主張しない。新版では字幕66境界中55境界を音響観測へ対応付け、11境界は未確定として元時刻を維持している。
+同じ3分57.6秒の字幕修正版は、既存renderer/QCの全51字幕と来歴照合に合格した。その後、候補内部の意味判断から7保持区間を採用し、2分41.033秒・33字幕の内部編集版を生成した。新版もrenderer/QC・意味判断と採用の再構築・元音声から字幕frameまでの来歴・SHA照合に合格し、旧版との比較画面の操作確認まで完了した。監査用checkpointのcommit/push、local/remote main一致、Driveの6資料の取得byte照合を終え、最終AUDIT_ONLYも合格した。指示-002/003/004の技術第一完成は閉じ、人間レビュー5点のみを残す。新版では字幕66境界中55境界を音響観測へ対応付け、11境界は未確定として元時刻を維持している。人間品質の合格は主張しない。
 
 ## 人間レビューの正式記録
 
@@ -217,3 +217,22 @@ Microsoft Edge上で、3動画の読み込み完了と媒体エラーなし、3�
 ## 監査提出準備
 
 第一完成の実装・判断原文・失敗と修正の証拠・全体照合・比較資料を監査用checkpointへcommit/pushし、local/remote main一致を確認する。その後、同じDrive共有フォルダーへ新しい版の報告・比較説明・検証証拠・MANIFESTを保存し、取得byteを照合して「ZEV進行管理２」へ最終AUDIT_ONLYを提出する。正式採用、stable昇格、完成動画の人間品質合格とは区別する。
+
+## 最終AUDIT_ONLYの合格と技術第一完成の閉鎖
+
+2026-09-07、監査用checkpoint `4353527c67a55edb9981924d7a9aa72dce5fadfb` をmainへcommit・通常pushし、remote mainが同じSHAであることを確認した。今回の実装と検証証拠182ファイルだけを対象とし、開始時から存在する別作業13ファイルはSHA不変かつcommit対象外とした。動画、PCM、一時描画物、raw実行ログはcommitせず、動画のSHAと実行ログの全byteを収録した検証証拠を保持した。
+
+同じDriveフォルダーへ次の6資料を新規保存し、すべて取得byteとローカル原本の完全一致を確認した。旧版のDriveファイルは上書きしていない。
+
+- [第一完成の報告](https://drive.google.com/file/d/1ttUTgigNzPZwv-60z10wvE2X8PqornJ5/view?usp=drivesdk)
+- [比較説明と動画のローカル参照](https://drive.google.com/file/d/121l2Pg_2i2X6W7TuleYQMwcX8FF8xXzu/view?usp=drivesdk)
+- [同一映像の字幕修正版の最終検証](https://drive.google.com/file/d/1Es-c0qdYlfZyc6DkprD9IO2ihz-WSKfa/view?usp=drivesdk)
+- [内部編集版の最終検証](https://drive.google.com/file/d/1COI6vYq2Mzr7486sec_VHVuid7RZFsqO/view?usp=drivesdk)
+- [内部編集版の成果物manifest](https://drive.google.com/file/d/1NOq6gpfA1oobOf4MJOWZ6EoqFFFWb7sB/view?usp=drivesdk)
+- [第一完成資料のMANIFEST](https://drive.google.com/file/d/1g_3FG06GUvHfyvaToUSpA4f_p7hCAzTl/view?usp=drivesdk)
+
+[同じ「ZEV進行管理２」会話](https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6a9d1cb7-b3c0-83ee-ae3a-613c9dc53f08) へ、Edge・既存のInstant設定を維持してAUDIT_ONLYを1回送信し、生成完了した返答を確認した。再送は行っていない。
+
+相談役の結論は「decision: continue — AUDIT_ONLY 最終監査合格。指示-002/003/004の技術第一完成を閉じてよい」。字幕補正と内部編集の両経路、意味判断後のID検査と音響時刻解決、不成立案を正式化しない再判断、最終検証の技術合格と人間品質未評価の分離を確認した。残す判断は、字幕同期・不要部分・文脈・見どころ・テンポの5点だけとされた。
+
+この追記は監査結果と資料参照の記録であり、監査対象の実装・判断・動画は上記checkpointのままである。相談役は、人間評価が返った後に指示-005を出すと述べている。現時点で次工事には着手していない。
