@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "two-e2e-first-completion-record-v001",
+  "authority": "ZEV進行管理２ 指示-015",
+  "status": "closed-technical-and-human-quality-first-completion",
+  "recordedAt": "2026-09-07T23:41:21.511771+00:00",
+  "evidenceCheckpoint": "697380835803be5854ce3b29bff5b8fb0f98bf59",
+  "systems": [
+    {
+      "system": "digest",
+      "authority": "ZEV進行管理２ 指示-008 / 指示-010",
+      "status": "previously-closed-maintained",
+      "completedMedia": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/render/presentation-rendered-v002.mp4",
+        "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+        "sizeBytes": 75458918
+      },
+      "baseMedia": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+        "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d",
+        "sizeBytes": 78398378
+      },
+      "frameCount": 4831,
+      "framesPerSecond": 30,
+      "durationSecondsExact": {
+        "numerator": 4831,
+        "denominator": 30
+      },
+      "captionCount": 32,
+      "retainedMediaSegments": 7,
+      "candidateCount": 3,
+      "technicalVerification": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/final-verification.json",
+        "fileSha256": "26c0fd21add505ffb93dcd8d686ad97c0239bd7584b5d6beba9b25503b0c45ad",
+        "sizeBytes": 1312
+      },
+      "technicalManifest": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/manifest.json",
+        "fileSha256": "16b4d341adf2a747b8f1f055eace17d1dad0da3ba6085698580eec8f7d97e76d",
+        "sizeBytes": 8839
+      },
+      "humanReview": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-repaired-three-v001/confirmed-human-review.json",
+        "fileSha256": "6835d3e31436c61fb798565f6b07b66e472673a94a503eecf697b49241938a2c",
+        "sizeBytes": 11639
+      },
+      "completionManifest": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-repaired-three-v001/completion-records-MANIFEST.md",
+        "fileSha256": "58ebbce2fcc69b107ecf513574b2cd1dd313dad0f0dda5469b909383591000fc",
+        "sizeBytes": 2433
+      },
+      "humanQualityPoints": {
+        "不要部分": "passed-previously-in-instruction-005",
+        "文脈": "passed-previously-in-instruction-005",
+        "見どころ": "passed-previously-in-instruction-005",
+        "テンポ・見心地": "passed-previously-in-instruction-006",
+        "字幕同期": "passed-by-current-three-reviews"
+      }
+    },
+    {
+      "system": "distant-connection",
+      "authority": "ZEV進行管理２ 指示-015",
+      "status": "closed-now",
+      "completedMedia": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/render/presentation-rendered-v002.mp4",
+        "fileSha256": "87ad00ae273471487cc6b90ef936dac0fa0f82072d5a74da8d03b328b03faabb",
+        "sizeBytes": 35674817
+      },
+      "baseMedia": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/base-media/base-media.mp4",
+        "fileSha256": "2ce0e6649bd76deefc015aaf735c5a758229118a605ff25ddcf6ea2c37711195",
+        "sizeBytes": 37084242
+      },
+      "frameCount": 1671,
+      "framesPerSecond": 30,
+      "durationSecondsExact": {
+        "numerator": 1671,
+        "denominator": 30
+      },
+      "captionCount": 4,
+      "retainedMediaSegments": 2,
+      "retainedMediaBoundaryCount": 4,
+      "technicalVerification": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/final-verification.json",
+        "fileSha256": "36ef1d247662198ae4ea5e7c73a090be70d8c6f8f2d94cdcfbed45089d57cd28",
+        "sizeBytes": 9496
+      },
+      "technicalManifest": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/MANIFEST.json",
+        "fileSha256": "41f6867a8730130ad33d59d8e1938cc612afe9464f7fe424dd8c41c2f24833e9",
+        "sizeBytes": 9458
+      },
+      "humanReview": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-review-result-v002.json",
+        "fileSha256": "6a38246907bd888011fd3baede27080be1ad3d333a167fdc58db10090190ddb4",
+        "sizeBytes": 7130
+      },
+      "humanQuality": "first-completion-passed"
+    }
+  ],
+  "firstCompletionMeaning": "今回承認された2系統の実動画・技術QC・人間品質が成立。共通構造の第一完成であり、自由Planner・全素材への品質一般化・旧GOAL_DEFINITIONの全関門通過を意味しない。",
+  "historicalRecords": "旧技術記録の人間未評価は生成当時の事実として保持し、本記録と最終人間評価で現在の完了を示す。",
+  "nextWork": "not-started; GPT_DECISIONとして現状整理と最優先案を相談役へ提出する。",
+  "newMediaInferenceRender": 0
+}
