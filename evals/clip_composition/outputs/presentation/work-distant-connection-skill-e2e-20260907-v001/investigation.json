@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "distant-connection-skill-investigation-v001",
+  "instruction": "ZEV進行管理２ 指示-011",
+  "startingCommit": "c22c49acf9c4cb21c169edf92880b3027c3e846c",
+  "authorizationQuote": "いいじゃないか。遠方接続E2E着工をしてくれ",
+  "sourceBindings": [
+    {
+      "path": "docs/architecture/ZEV_AGENT_SKILL_ARCHITECTURE_v001.md",
+      "fileSha256": "6a69a0b040d12ddb2f2ee5bc0313c6294fd7c1004e3a53dd2587759788b93258"
+    },
+    {
+      "path": "runner/src/distant-connection-edit-plan-projection-v001.ts",
+      "fileSha256": "06560bb4b50d1bcdd7a0e76dde31395f5bf5e19f07e40143e3b1c1099b34e785"
+    },
+    {
+      "path": "runner/src/distant-connection-render-adapter-v002.ts",
+      "fileSha256": "84339f6cf769815251c15f8a9235bbd6da19af9df581de1cb4c7a269ffaf5ff7"
+    },
+    {
+      "path": "runner/src/distant-connection-presentation-meaning-input-v001.ts",
+      "fileSha256": "83d7062d64fdf7183001d2ef5f7457a2ac03b3a4c60066f5669fdae3299d5d0e"
+    },
+    {
+      "path": "runner/src/skills/candidate-discovery-v001.ts",
+      "fileSha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e"
+    },
+    {
+      "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+      "fileSha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291"
+    },
+    {
+      "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3"
+    },
+    {
+      "path": "evals/clip_composition/candidate_digest_core_adapter_v001.mts",
+      "fileSha256": "8c2621fe64203b4f06b45b915df6b04d71da1ce02feaa1fadf0a12e0513fa592"
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_edit_core_v001.mts",
+      "fileSha256": "f413494132a04f55a3eb9c8d5c90812745848c1a009fdac772d0e4ef578ba2b5"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-distant-connection-human-review-result-ymUsGrT6EaA-v002/human-review-result-v002.json",
+      "fileSha256": "fac03dc688f28e64831a7b8241cec560313cf7da3aacc585b30bf8efab270a92"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-distant-connection-human-review-result-ymUsGrT6EaA-v003/human-review-result-v003.json",
+      "fileSha256": "f448e3d8da7e4ba7c29d967461995aa503039c009851a00b0d687ba20c8476a2"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-distant-connection-human-quality-review-result-ymUsGrT6EaA-v001/human-quality-review-result-v001.json",
+      "fileSha256": "1087dcab775f89d6d344cf061063a33f614c94af6fb7305f4f39a48e7402dffd"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-distant-connection-luna-b6-candidates-quality-increment-ymUsGrT6EaA-v001/candidate-response-v001.json",
+      "fileSha256": "8c8f1aa5bf69eb38076ce9ccdffab2f94cb2e8c2348695da2f3b45b9ad3b114d"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-video-intervalization-improvement-ymUsGrT6EaA-v001/video-intervalization-improvement-plan-v001.json",
+      "fileSha256": "5a1719e510ae44c593720e291cd97d31540cb802238b38eea07c67425cfd7349"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-distant-connection-semantic-utterance-ymUsGrT6EaA-v001/semantic-utterance-artifact-v001.json",
+      "fileSha256": "e4eb9657994df2814c398a47e751e91d973db28c9ce674dc16f6eaea71f7ffd2"
+    }
+  ],
+  "sourceVideoBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+    "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+  },
+  "verifiedExistingBoundaryExample": {
+    "candidateId": "camera-fear-escalation",
+    "firstStart": {
+      "utteranceId": "semantic-utterance-001182",
+      "edge": "start",
+      "resolvedMs": 664354
+    },
+    "firstEnd": {
+      "utteranceId": "semantic-utterance-001205",
+      "edge": "end",
+      "resolvedMs": 671316
+    },
+    "secondStart": {
+      "utteranceId": "semantic-utterance-002765",
+      "edge": "end",
+      "resolvedMs": 1377918
+    },
+    "secondEnd": {
+      "utteranceId": "semantic-utterance-002809",
+      "edge": "end",
+      "resolvedMs": 1426649
+    },
+    "status": "all-four-exactly-equal-to-existing-human-reviewed-plan",
+    "note": "再利用可能性の現物確認。今回の新規候補採用や新規意味判断ではない。"
+  },
+  "unrelatedChangeBaseline": [
+    {
+      "path": "runner/src/candidate-video-understanding-transport-v001.test.ts",
+      "sha256": "038b3b23f294590aeb6e9e2ef22b6b0b4ce3db94243e25f23c2027a747b759f2"
+    },
+    {
+      "path": "runner/src/candidate-video-understanding-transport-v001.ts",
+      "sha256": "dfceab4619d77b1611ffa9573e0053d59cde29ca658ebf059e0ae7fc08a450cc"
+    },
+    {
+      "path": "runner/src/candidate-video-understanding-v001.test.ts",
+      "sha256": "3bde6ca28bae5e97a433c772332aa5d5c6ec14fdce86881e072d215d802cb541"
+    },
+    {
+      "path": "runner/src/candidate-video-understanding-v001.ts",
+      "sha256": "2c04253e2f4d15738b5d27906c6a788226381d7c33aad4d4ff4dea99e621d833"
+    },
+    {
+      "path": "docs/ZEV_候補動画理解_ID参照再較正計画_v001.md",
+      "sha256": "8b12ef23a5ee886a592bba5c5d3ec74aeb7d824985164185f23b83011e1c8a9a"
+    },
+    {
+      "path": "docs/ZEV_候補動画理解_v1_較正結果_v001.md",
+      "sha256": "26886bf33e05c77ed9399196bee7e8e67bc9dda3194165981c7ab5340ba6a7b1"
+    },
+    {
+      "path": "docs/reports/candidate-video-understanding-numeric-time-calibration-summary-v001.md",
+      "sha256": "110991cd012209c9aaf941b2c9acaa131c60d8080e8f0b43eb7c1dfe03688a16"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-candidate-video-understanding-api-preparation-v001/item-0001-inference-record-v001.jsonl",
+      "sha256": "a71cb4e52c20f0b1157f13d84c548856f29e9ddd6500e9b67ec4b6b95adbeed9"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-candidate-video-understanding-api-preparation-v001/item-0001-local-revalidation-v001.json",
+      "sha256": "5eeddf0a3cf5384f673e60a6a0a29a69146bd657cedf3c84c24b04eaccf16e51"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-candidate-video-understanding-api-preparation-v001/item-0005-inference-record-v001.jsonl",
+      "sha256": "c071e1686df77f2c973493e4187ba6bdfe704533a3f9f63f3c3c18296b21da9b"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-candidate-video-understanding-api-preparation-v001/remaining-four-inference-record-v001.jsonl",
+      "sha256": "efa00a9a655017871c06091ff8a54415066953a891ef497f8fa1fb4fd5f6a476"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-candidate-video-understanding-api-preparation-v001/remaining-three-inference-record-v001.jsonl",
+      "sha256": "e89329987673c40d84cf1ce54e0236d25c7bf9cbbfa6df3d52446468b7ee787e"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-candidate-video-understanding-api-preparation-v001/stage1-measurement-v001.json",
+      "sha256": "2b30a621df6df9004dbede6fa4eef5171db61e61a0681409796bf160cf3a2888"
+    }
+  ],
+  "newSemanticJudgment": "not-run",
+  "newRender": "not-run"
+}
