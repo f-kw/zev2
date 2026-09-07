@@ -1,0 +1,532 @@
+{
+  "schemaVersion": "distant-connection-pair-final-verification-v001",
+  "technicalStatus": "passed",
+  "humanQuality": "not-evaluated",
+  "perceptualCaptionSync": "not-evaluated",
+  "verificationBinding": {
+    "schemaVersion": "distant-connection-pair-e2e-verification-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/verification.json",
+    "fileSha256": "fe5c797f0f57507a25e66ab3d009e6d7919bf93843e67105feb73e6869d42473",
+    "canonicalSha256": "8e6ed60e6e1a1748dd68d2b3d59499fd76eb0125a31d1e6fe680daabe03cbae7"
+  },
+  "planBinding": {
+    "schemaVersion": "distant-connection-pair-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/distant-connection-pair-skill-e2e/fixed-plan-v001.json",
+    "fileSha256": "2e85eacbbdd16567e979e262420656e388f821b2cd7c5bc0bd94384d6052ef90",
+    "canonicalSha256": "50f27d4074b1fab2a79d8329449bf614f6afdb23f60dbaa1bdb63389ed80106b"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "distant-connection-pair-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/machine-adoption.json",
+    "fileSha256": "b887f492897e7001cd70dfa6e4512ef3515b69c71016120348fb67fc240b149e",
+    "canonicalSha256": "a11664bdb00ff7e588de6d58484c2c311e0d8d4f85df87a40b485d2492ba8c0b"
+  },
+  "editPlanBinding": {
+    "schemaVersion": "distant-connection-pair-edit-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/edit-plan.json",
+    "fileSha256": "6f8f8b72e1f8b819ae43c509c68198aa2f7ad635dd0e1aa0c12e89f22bf8e770",
+    "canonicalSha256": "0976ecb78165c6fae7da521ff9dbb473a1ef72f3c475f069390e6e2f416debe6"
+  },
+  "checks": {
+    "newSemanticJudgment": "saved-current-codex-response",
+    "adoptionReconstruction": "exact",
+    "captionCoreReconstruction": "all-eight-artifacts-exact",
+    "sourceToFrameAndAudioMapping": "exact",
+    "sourceTextCoverage": "exact",
+    "frameCount": 1671,
+    "firstPartFrameCount": 209,
+    "durationMs": 55700,
+    "captionCount": 4,
+    "rendererAdmission": "accepted",
+    "technicalQc": "passed",
+    "finalCaptionVisibilityChecks": 4,
+    "renderedAudioPacketPayload": "exact-match-to-base-media",
+    "sourceOutputAndImplementationSha": "exact",
+    "displaySkillRendererStyleRuntime": "unchanged",
+    "historicalHumanQualityInherited": false,
+    "freeTimeOrOffsetIntroduced": false,
+    "internalDeletion": "none",
+    "captionTimingBasis": "saved-STT-without-perceptual-accuracy-claim"
+  },
+  "actualFrameAndAudioMappings": [
+    {
+      "segmentId": "segment-0001",
+      "sourceStartMs": 664354,
+      "sourceEndMs": 671316,
+      "sourceStartFrame30": 19930,
+      "sourceEndFrame30": 20139,
+      "outputStartFrame": 0,
+      "outputEndFrame": 209,
+      "audioSamples": {
+        "sourceStart": 29297806,
+        "sourceEnd": 29605036,
+        "outputStart": 0,
+        "outputEnd": 307230
+      }
+    },
+    {
+      "segmentId": "segment-0002",
+      "sourceStartMs": 1377918,
+      "sourceEndMs": 1426649,
+      "sourceStartFrame30": 41337,
+      "sourceEndFrame30": 42799,
+      "outputStartFrame": 209,
+      "outputEndFrame": 1671,
+      "audioSamples": {
+        "sourceStart": 60766096,
+        "sourceEnd": 62915236,
+        "outputStart": 307230,
+        "outputEnd": 2456370
+      }
+    }
+  ],
+  "actualCaptionTraces": [
+    {
+      "text": "え、このカメラもさね、ビビらせる感じやめてほしい",
+      "outputTime": {
+        "startFrame": 0,
+        "endFrameExclusive": 209
+      },
+      "lines": {
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000001",
+        "lineLayoutRuleId": "semantic-line-end-projection-v001",
+        "lines": [
+          {
+            "lineIndex": 0,
+            "sourceUnitIds": [
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000001",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000002",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000003",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000004",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000005",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000006",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000007",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000008",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000009",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000010",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000011"
+            ],
+            "text": "え、このカメラもさね、",
+            "logicalWidth": 22
+          },
+          {
+            "lineIndex": 1,
+            "sourceUnitIds": [
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000012",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000013",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000014",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000015",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000016",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000017",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000018",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000019",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000020",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000021",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000022",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000023",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000024"
+            ],
+            "text": "ビビらせる感じやめてほしい",
+            "logicalWidth": 26
+          }
+        ]
+      },
+      "sourceAtomOccurrenceIds": [
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000001",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000002",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000003",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000004",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000005",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000006",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000007",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000008",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000009",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000010",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000011",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000012",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000013",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000014",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000015",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000016",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000017",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000018",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000019",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000020",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000021",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000022",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000023",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000024"
+      ]
+    },
+    {
+      "text": "マジ今んところ今年一怖すぎて笑った",
+      "outputTime": {
+        "startFrame": 1255,
+        "endFrameExclusive": 1598
+      },
+      "lines": {
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000002",
+        "lineLayoutRuleId": "semantic-line-end-projection-v001",
+        "lines": [
+          {
+            "lineIndex": 0,
+            "sourceUnitIds": [
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000025",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000026",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000027",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000028",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000029",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000030",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000031",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000032",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000033",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000034",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000035",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000036",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000037",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000038",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000039",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000040",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000041"
+            ],
+            "text": "マジ今んところ今年一怖すぎて笑った",
+            "logicalWidth": 34
+          }
+        ]
+      },
+      "sourceAtomOccurrenceIds": [
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000025",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000026",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000027",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000028",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000029",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000030",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000031",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000032",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000033",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000034",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000035",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000036",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000037",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000038",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000039",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000040",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000041"
+      ]
+    },
+    {
+      "text": "ビデオ見る気?",
+      "outputTime": {
+        "startFrame": 1598,
+        "endFrameExclusive": 1628
+      },
+      "lines": {
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000003",
+        "lineLayoutRuleId": "semantic-line-end-projection-v001",
+        "lines": [
+          {
+            "lineIndex": 0,
+            "sourceUnitIds": [
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000042",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000043",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000044",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000045",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000046",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000047",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000048"
+            ],
+            "text": "ビデオ見る気?",
+            "logicalWidth": 13
+          }
+        ]
+      },
+      "sourceAtomOccurrenceIds": [
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000042",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000043",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000044",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000045",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000046",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000047",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000048"
+      ]
+    },
+    {
+      "text": "もう勘弁してよ夜中になんか映るようなやつ",
+      "outputTime": {
+        "startFrame": 1628,
+        "endFrameExclusive": 1671
+      },
+      "lines": {
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000004",
+        "lineLayoutRuleId": "semantic-line-end-projection-v001",
+        "lines": [
+          {
+            "lineIndex": 0,
+            "sourceUnitIds": [
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000049",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000050",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000051",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000052",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000053",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000054",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000055"
+            ],
+            "text": "もう勘弁してよ",
+            "logicalWidth": 14
+          },
+          {
+            "lineIndex": 1,
+            "sourceUnitIds": [
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000056",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000057",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000058",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000059",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000060",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000061",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000062",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000063",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000064",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000065",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000066",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000067",
+              "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000068"
+            ],
+            "text": "夜中になんか映るようなやつ",
+            "logicalWidth": 26
+          }
+        ]
+      },
+      "sourceAtomOccurrenceIds": [
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000049",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000050",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000051",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000052",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000053",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000054",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000055",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000056",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000057",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000058",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000059",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000060",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000061",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000062",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000063",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000064",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000065",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000066",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000067",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000068"
+      ]
+    }
+  ],
+  "video": {
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/render/presentation-rendered-v002.mp4",
+    "fileSha256": "8299565f47c5ec1f83928462fa2ef1a144ff1ef297778e2ba8a23036d6c5b4e4"
+  },
+  "rendererQc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 4,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "instructionEvidence": [
+      {
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 332,
+          "top": 702,
+          "right": 1587,
+          "bottom": 974,
+          "width": 1255,
+          "height": 272
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 418,
+            "top": 702,
+            "right": 1451,
+            "bottom": 830,
+            "width": 1033,
+            "height": 128
+          },
+          {
+            "lineIndex": 1,
+            "left": 332,
+            "top": 843,
+            "right": 1587,
+            "bottom": 974,
+            "width": 1255,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 104,
+        "changedPixelsAgainstInstructionOmittedFrame": 339748,
+        "appliedOverlayPropsCanonicalSha256": "12dc98302cd214bce3bc1cd619133c599068d7a85f3a9592d31ef5586f29abe7",
+        "applicationOverlayFile": "overlays/01-25b48b874d91.png",
+        "inspectedOverlayFile": "overlays/01-25b48b874d91.png",
+        "applicationOverlaySha256": "c4970b7130abeba9baf778b45b834d179500c66440619817f7eb42a0d04b0f50",
+        "overlaySha256": "c4970b7130abeba9baf778b45b834d179500c66440619817f7eb42a0d04b0f50"
+      },
+      {
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000002",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 132,
+          "top": 842,
+          "right": 1786,
+          "bottom": 975,
+          "width": 1654,
+          "height": 133
+        },
+        "lineCount": 1,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 132,
+            "top": 842,
+            "right": 1786,
+            "bottom": 975,
+            "width": 1654,
+            "height": 133
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1426,
+        "changedPixelsAgainstInstructionOmittedFrame": 214515,
+        "appliedOverlayPropsCanonicalSha256": "0ea5670039a911bb0e7385b12d16051e3fa29219403ca063ff94eda41a0467a5",
+        "applicationOverlayFile": "overlays/02-3c047d6ba226.png",
+        "inspectedOverlayFile": "overlays/02-3c047d6ba226.png",
+        "applicationOverlaySha256": "0baed043524ce78a610da691d770a4b8d6b99995384d15741c640de8b624f7ec",
+        "overlaySha256": "0baed043524ce78a610da691d770a4b8d6b99995384d15741c640de8b624f7ec"
+      },
+      {
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000003",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 637,
+          "top": 842,
+          "right": 1293,
+          "bottom": 975,
+          "width": 656,
+          "height": 133
+        },
+        "lineCount": 1,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 637,
+            "top": 842,
+            "right": 1293,
+            "bottom": 975,
+            "width": 656,
+            "height": 133
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1613,
+        "changedPixelsAgainstInstructionOmittedFrame": 85513,
+        "appliedOverlayPropsCanonicalSha256": "445e3b50d068bf0080143ea6e0475a97c98be4c9914e991eac79620baf86135d",
+        "applicationOverlayFile": "overlays/03-96601a4ae932.png",
+        "inspectedOverlayFile": "overlays/03-96601a4ae932.png",
+        "applicationOverlaySha256": "b9214d8deb57709df6627fdd2bb554a73839dc32d017cf1c6535be7340954271",
+        "overlaySha256": "b9214d8deb57709df6627fdd2bb554a73839dc32d017cf1c6535be7340954271"
+      },
+      {
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000004",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 316,
+          "top": 700,
+          "right": 1594,
+          "bottom": 975,
+          "width": 1278,
+          "height": 275
+        },
+        "lineCount": 2,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 612,
+            "top": 700,
+            "right": 1290,
+            "bottom": 831,
+            "width": 678,
+            "height": 131
+          },
+          {
+            "lineIndex": 1,
+            "left": 316,
+            "top": 844,
+            "right": 1594,
+            "bottom": 975,
+            "width": 1278,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": "same-composite-with-instruction-omitted",
+        "representativeFrame": 1649,
+        "changedPixelsAgainstInstructionOmittedFrame": 348871,
+        "appliedOverlayPropsCanonicalSha256": "b47d25bf079a1938f62a6f2d7d5f4711a713a7b0bf8fde1022f9512c869cbcbb",
+        "applicationOverlayFile": "overlays/04-c4117bfbc8e8.png",
+        "inspectedOverlayFile": "overlays/04-c4117bfbc8e8.png",
+        "applicationOverlaySha256": "1ccde235e95aa80ea38d708c8f1779e63f9ac538cf73f55b3dfa1dfe6c5b1845",
+        "overlaySha256": "1ccde235e95aa80ea38d708c8f1779e63f9ac538cf73f55b3dfa1dfe6c5b1845"
+      }
+    ],
+    "mediaEvidence": {
+      "observed": {
+        "durationMs": 55700,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 1671
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "fbe7dbfd23e208ca77248b67a96a17f86c83748be7bf6543f3a33f337637a08f"
+        }
+      },
+      "expectedAudio": {
+        "present": true,
+        "codecName": "aac",
+        "packetPayloadSha256": "fbe7dbfd23e208ca77248b67a96a17f86c83748be7bf6543f3a33f337637a08f"
+      },
+      "expectedFrameCount": 1671
+    },
+    "violations": []
+  },
+  "processEvidence": {
+    "schemaVersion": "distant-connection-pair-process-evidence-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/process-observation-evidence.json",
+    "fileSha256": "6815da3b722645d22410a2b2afa5cdfe51812cb48117568466a9eddd234822b0",
+    "canonicalSha256": "4792526c1b2e8773596330035379c5d426afb80ac6b11dbfbe6e8f264a52c11b"
+  }
+}

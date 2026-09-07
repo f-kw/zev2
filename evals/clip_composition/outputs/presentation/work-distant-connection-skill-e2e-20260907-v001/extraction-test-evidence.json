@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "distant-connection-extraction-test-evidence-v001",
+  "observedAt": "2026-09-07T13:53:42.953613+00:00",
+  "status": "passed",
+  "baselineDigestTests": 16,
+  "currentDigestTests": 16,
+  "distantAndCommonRegressionTests": 14,
+  "commands": [
+    "node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.test.mts",
+    "node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/run_distant_connection_pair_skill_e2e_v001.test.mts"
+  ],
+  "beforeExtractionCoreHashes": {
+    "meaning": "58197edba8d8b11c787ea8be3390cd1201d5e47f1cd78ffd166e7c8cc4e9cc5d",
+    "sourcePackage": "bd3fa3439e51283f522b7b48fbf03bf3494b8ea1ff7e7fa3dd7daa2b6f19772d",
+    "captionAdoption": "d97872ca6e01c7dc253cc49efb92765d880a4e188b04ed5839ea41eea30e6f47",
+    "selection": "857c83f9953cf9e0acef8aa155ca1a1b1adefc4cee93dd8e9d04889d4960400f",
+    "cueEndProjection": "cde33f2480f1e94f5dcb6c3f981e25c65dcaa106105047046145e2aea153077a",
+    "lineEndProjection": "02524eb1386187f0bd16b18a736f7869508c7f6471bace148ba0580971ac1487",
+    "instruction": "d3bb08c95a4c027c0bd2d5024e2d4b1fa1b6b77cbe3af5144bb70e222e2cd79f",
+    "rendererJob": "9c10e4156de8f6e8ca1400206198551a229fd6c699beee9c06feb33a5ae6783a"
+  },
+  "historicalExactComparison": "正式採用の再構築、正式区間・映像frame・音声sample配置、表示request、8成果物の全値が保存済みダイジェスト成果物に一致",
+  "historicalPlan": "旧SHA束縛を変更せず、新実装で旧planを実行しようとすると拒否することも検査",
+  "realJudgmentIsolation": "合成回答はtest内だけで使用し、実走responseに使用しない",
+  "testBindings": [
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.test.mts",
+      "fileSha256": "1ac0130331197b48f4eff935193ed9da27496fb3d8f0097c942d80f009777184"
+    },
+    {
+      "path": "evals/clip_composition/run_distant_connection_pair_skill_e2e_v001.test.mts",
+      "fileSha256": "26649a12528d7bdcc2605b5bbf66f196a30b9dc5d5daac6f2516552fe68437bb"
+    }
+  ],
+  "currentDigestTapBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/digest-regression.tap",
+    "fileSha256": "d089f4b9ae95a91a9e8865d6e86df1e35ae8283556597d055a99b4f6764e4a32"
+  },
+  "newSkillTypeCheck": {
+    "command": "node ./runner/node_modules/typescript/bin/tsc --noEmit --skipLibCheck --strict --target ES2022 --module NodeNext runner/src/skills/distant-connection-pair-v001.ts",
+    "exitCode": 0
+  }
+}

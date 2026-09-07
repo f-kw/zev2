@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "distant-connection-pair-core-invocation-v001",
+  "authorizationBinding": {
+    "schemaVersion": "distant-connection-instruction-record-v001",
+    "path": "evals/clip_composition/jobs/presentation/distant-connection-pair-skill-e2e/instruction-record-v001.json",
+    "fileSha256": "4ff342a8100b4d3a05082b0a5d1fc9963db3dcdabd32fffe3ec887597c3229a1",
+    "canonicalSha256": "99bcdcaa8682a7033a103e149b283741b58c2728329ae0083cdbaa63178a3d65"
+  },
+  "planBinding": {
+    "schemaVersion": "distant-connection-pair-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/distant-connection-pair-skill-e2e/fixed-plan-v001.json",
+    "fileSha256": "2e85eacbbdd16567e979e262420656e388f821b2cd7c5bc0bd94384d6052ef90",
+    "canonicalSha256": "50f27d4074b1fab2a79d8329449bf614f6afdb23f60dbaa1bdb63389ed80106b"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "distant-connection-pair-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/machine-adoption.json",
+    "fileSha256": "b887f492897e7001cd70dfa6e4512ef3515b69c71016120348fb67fc240b149e",
+    "canonicalSha256": "a11664bdb00ff7e588de6d58484c2c311e0d8d4f85df87a40b485d2492ba8c0b"
+  },
+  "editPlanBinding": {
+    "schemaVersion": "distant-connection-pair-edit-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/edit-plan.json",
+    "fileSha256": "6f8f8b72e1f8b819ae43c509c68198aa2f7ad635dd0e1aa0c12e89f22bf8e770",
+    "canonicalSha256": "0976ecb78165c6fae7da521ff9dbb473a1ef72f3c475f069390e6e2f416debe6"
+  },
+  "manufacturingValuesBinding": {
+    "schemaVersion": "presentation-base-media-build-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/manufacturing-values.json",
+    "fileSha256": "4e8495b4258f28648e2a9ada0d168e5fbf872e3a1642b9e58453c37751e85ef5",
+    "canonicalSha256": "53ec2e4d8c81b07eb6307824676f1d283f98e4f03ea64da2828b842d12710fb9"
+  },
+  "admission": "distant-pair-reconstructed-machine-adoption-v001",
+  "legacyLunaHumanApprovalEntry": "not-invoked",
+  "individualCandidateHumanApproval": "not-performed",
+  "implementationBindings": [
+    {
+      "path": "runner/src/skills/distant-connection-pair-v001.ts",
+      "fileSha256": "e7bcf5f1aaefb5337ae2004e2d3f3c73a66cbbac2d8170264286d7ca3893978b"
+    },
+    {
+      "path": "evals/clip_composition/run_distant_connection_pair_skill_e2e_v001.mts",
+      "fileSha256": "b18e1aa317c1d8f846fc21ca55e37bf995cf07e9b7d220794aa3881fedefd65b"
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+    },
+    {
+      "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3"
+    },
+    {
+      "path": "runner/src/semantic-utterance-artifact-v001.ts",
+      "fileSha256": "b9794af36f21475977bec7efd6ce0f4b9a8812f38bde6a9e89b19117bcb4feff"
+    }
+  ]
+}

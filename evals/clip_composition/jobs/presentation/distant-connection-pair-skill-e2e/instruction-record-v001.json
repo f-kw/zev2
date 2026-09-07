@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "distant-connection-instruction-record-v001",
+  "recordId": "zev-management-2-instruction-011-with-012",
+  "instruction": "ZEV進行管理２ 指示-011",
+  "approvalQuote": "いいじゃないか。遠方接続E2E着工をしてくれ",
+  "origin": "kawafmmの言葉として相談役経由で受領した指示-011",
+  "boundaryDecision": "ZEV進行管理２ 指示-012",
+  "decision": "continue",
+  "advisorSession": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6a9d1cb7-b3c0-83ee-ae3a-613c9dc53f08",
+  "allowedBoundary": "採用・来歴の再構築は用途固有に残し、検査済み区間からの製造・確定字幕命令組立だけを共用する。ダイジェストを同入力で回帰検証し、遠方接続の新規判断から実動画まで続行する。",
+  "constraints": [
+    "既存素材のみ",
+    "新しい意味判断を実行",
+    "過去selectionを新回答として再生しない",
+    "既存発話ID境界のみ",
+    "既存Skill・Core・renderer・style・QC規則は不変",
+    "保存STTは知覚同期の正解と見なさず短時間人間確認へ残す",
+    "20〜30秒を基本に確認対象を明示",
+    "API通信・新素材・Gemini追加実験なし"
+  ],
+  "individualCandidateHumanReview": "not-performed"
+}

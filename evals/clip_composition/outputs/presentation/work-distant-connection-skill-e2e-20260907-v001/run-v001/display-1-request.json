@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "distant-connection-pair-display-request-v001",
+  "requestId": "distant-pair-ymUsGrT6EaA-20260907-v001-display-1",
+  "planBinding": {
+    "schemaVersion": "distant-connection-pair-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/distant-connection-pair-skill-e2e/fixed-plan-v001.json",
+    "fileSha256": "2e85eacbbdd16567e979e262420656e388f821b2cd7c5bc0bd94384d6052ef90",
+    "canonicalSha256": "50f27d4074b1fab2a79d8329449bf614f6afdb23f60dbaa1bdb63389ed80106b"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "distant-connection-pair-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/machine-adoption.json",
+    "fileSha256": "b887f492897e7001cd70dfa6e4512ef3515b69c71016120348fb67fc240b149e",
+    "canonicalSha256": "a11664bdb00ff7e588de6d58484c2c311e0d8d4f85df87a40b485d2492ba8c0b"
+  },
+  "meaningInputBinding": {
+    "schemaVersion": "distant-connection-pair-presentation-meaning-input-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/meaning-input.json",
+    "fileSha256": "6a218e063dab9bf03641b117d553705f63e2f5c64b2ca0ae91b21ee14edc81f0",
+    "canonicalSha256": "5a6c69b5ff8e18b01d8f392421071771fe34650d55077670e7f6f50c6ae686ef"
+  },
+  "candidateId": "camera-fear-escalation",
+  "timelineSegmentId": "segment-0001",
+  "input": {
+    "schemaVersion": "presentation-zevo-caption-selection-input-v001",
+    "taskDescription": "各captionの境界片を記載順に一度ずつ全量使用してください。cueは、直前から続く発話がそれだけで意味を読める短いまとまりになり、その末尾で発話の意味が一区切りつくように、cue終端を提示されたboundaryIdから選んでください。cue終端を意味の基準で先に決め、そのcueが一行に収まらない場合だけ行末を提示されたboundaryIdから選んでください。cue終端と行末は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。必要な行末候補が複数ある場合は、二行の幅が大きく偏らない候補を選んでください。各cueはstyleLimits.maxLinesPerCue以下とし、一行に収まるcueを改行しないでください。最後のcueはcaption最後のboundaryIdで終えてください。本文、境界片、ID、順序を変更しないでください。",
+    "captions": [
+      {
+        "captionId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-segment-1",
+        "boundaryCandidates": [
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000001",
+            "text": "え"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000002",
+            "text": "、"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000003",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000004",
+            "text": "の"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000005",
+            "text": "カ"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000006",
+            "text": "メ"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000007",
+            "text": "ラ"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000008",
+            "text": "も"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000009",
+            "text": "さ"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000010",
+            "text": "ね"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000011",
+            "text": "、"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000012",
+            "text": "ビ"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000013",
+            "text": "ビ"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000014",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000015",
+            "text": "せ"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000016",
+            "text": "る"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000017",
+            "text": "感"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000018",
+            "text": "じ"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000019",
+            "text": "や"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000020",
+            "text": "め"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000021",
+            "text": "て"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000022",
+            "text": "ほ"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000023",
+            "text": "し"
+          },
+          {
+            "boundaryId": "distant-pair-ymUsGrT6EaA-20260907-v001-input-caption-boundary-000024",
+            "text": "い"
+          }
+        ]
+      }
+    ],
+    "styleLimits": {
+      "maxLogicalWidthPerLine": 36,
+      "maxLinesPerCue": 2,
+      "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+    }
+  },
+  "inputCanonicalSha256": "d342b845d6b27bb959446342afb8b897b60ab4107fb2f90bf01d209c583bc216"
+}

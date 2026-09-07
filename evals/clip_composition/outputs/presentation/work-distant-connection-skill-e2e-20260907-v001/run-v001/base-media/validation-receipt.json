@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "distant-connection-pair-base-media-validation-v001",
+  "status": "passed",
+  "coreInvocationBinding": {
+    "schemaVersion": "distant-connection-pair-core-invocation-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/core-invocation.json",
+    "fileSha256": "dba6ada432de811f786e8fa5ca2a394f7de47db7cfa651e20c40e2c15e16e799",
+    "canonicalSha256": "156dfddfb4fbca22a39a90d054de0021ce3799626cf87351d31c74ae68b4d436"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "distant-connection-pair-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/machine-adoption.json",
+    "fileSha256": "b887f492897e7001cd70dfa6e4512ef3515b69c71016120348fb67fc240b149e",
+    "canonicalSha256": "a11664bdb00ff7e588de6d58484c2c311e0d8d4f85df87a40b485d2492ba8c0b"
+  },
+  "editPlanBinding": {
+    "schemaVersion": "distant-connection-pair-edit-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/edit-plan.json",
+    "fileSha256": "6f8f8b72e1f8b819ae43c509c68198aa2f7ad635dd0e1aa0c12e89f22bf8e770",
+    "canonicalSha256": "0976ecb78165c6fae7da521ff9dbb473a1ef72f3c475f069390e6e2f416debe6"
+  },
+  "checks": {
+    "machineAdoptionReconstruction": "passed",
+    "sourceSnapshotSha": "passed",
+    "formalRangeProjection": "passed",
+    "videoQc": "passed",
+    "audioQc": "passed",
+    "timelineQc": "passed"
+  },
+  "individualCandidateHumanApproval": "not-performed",
+  "humanQuality": "not-evaluated",
+  "outputs": {
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/base-media/base-media.mp4",
+      "fileSha256": "2ce0e6649bd76deefc015aaf735c5a758229118a605ff25ddcf6ea2c37711195"
+    },
+    "timeline": {
+      "schemaVersion": "presentation-base-media-timeline-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/base-media/timeline.json",
+      "fileSha256": "97461f24474e1ffa2ff28366f7ff8ce693459a929a8d945c66c5013661c52bc1",
+      "canonicalSha256": "87a8e94747aa013e0aa93cdd91c2fb39c2a521aed0d1e1ec28f5e26326c2af34"
+    },
+    "generationManifest": {
+      "schemaVersion": "presentation-base-media-generation-manifest-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/base-media/generation-manifest.json",
+      "fileSha256": "bc6facda0d61aa3e4e7f82deb9de0d9f25d51539058c35d7e69f1ffd14f3355e",
+      "canonicalSha256": "4cd6152e95c8fbd96166a9ec3be140be3dc2f921789483a929a78cdcad22c093"
+    }
+  },
+  "decodedFramePayloadSha256": "bc2b3a2eb72b3a6d1756e75dd5fe4ba8e30e31f38a9039e0c544a1fb9769bbdd",
+  "encodeInputPayloadSha256": "2afbd2355a1a90d42e59194eeeb6fb09531849cec0533f116626038819c2461a"
+}

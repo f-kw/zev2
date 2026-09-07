@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "distant-connection-short-review-v001",
+  "status": "passed",
+  "sourceVideoBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/render/presentation-rendered-v002.mp4",
+    "fileSha256": "8299565f47c5ec1f83928462fa2ef1a144ff1ef297778e2ba8a23036d6c5b4e4"
+  },
+  "humanQuality": "not-evaluated",
+  "frameRate": "30/1",
+  "windows": [
+    {
+      "id": "review-1",
+      "label": "前振りと恐怖場面",
+      "ranges": [
+        [
+          0,
+          600
+        ]
+      ],
+      "description": "完成動画の冒頭20秒。連続区間。",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/review/review-1.mp4",
+      "fileSha256": "f3849842bc9fcc9a2fd4a83aaef4154a656933f90b8d3d363d5380b2db181178",
+      "frameCount": 600,
+      "durationSeconds": 20.0,
+      "mediaProbe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_type": "video",
+            "nb_read_frames": "600"
+          },
+          {
+            "codec_type": "audio",
+            "sample_rate": "44100",
+            "nb_read_frames": "862"
+          }
+        ],
+        "format": {
+          "duration": "20.000000"
+        }
+      },
+      "decodedFrameContent": "exact-match-to-selected-completed-video-frames",
+      "command": [
+        "ffmpeg",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-n",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/render/presentation-rendered-v002.mp4",
+        "-filter_complex",
+        "[0:v]trim=start_frame=0:end_frame=600,setpts=PTS-STARTPTS[v0];[0:a]atrim=start=0.000000000000:end=20.000000000000,asetpts=PTS-STARTPTS[a0];[v0][a0]concat=n=1:v=1:a=1[v][a]",
+        "-map",
+        "[v]",
+        "-map",
+        "[a]",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-crf",
+        "0",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "192k",
+        "-movflags",
+        "+faststart",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/review/review-1.mp4"
+      ]
+    },
+    {
+      "id": "review-2",
+      "label": "その後の流れ",
+      "ranges": [
+        [
+          600,
+          1200
+        ]
+      ],
+      "description": "完成動画の20〜40秒。連続区間。",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/review/review-2.mp4",
+      "fileSha256": "05385b41bf8747ec76b56af4b42a4ee902ac7d6b74b04a209fc5aa8a40ae0243",
+      "frameCount": 600,
+      "durationSeconds": 20.0,
+      "mediaProbe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_type": "video",
+            "nb_read_frames": "600"
+          },
+          {
+            "codec_type": "audio",
+            "sample_rate": "44100",
+            "nb_read_frames": "862"
+          }
+        ],
+        "format": {
+          "duration": "20.000000"
+        }
+      },
+      "decodedFrameContent": "exact-match-to-selected-completed-video-frames",
+      "command": [
+        "ffmpeg",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-n",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/render/presentation-rendered-v002.mp4",
+        "-filter_complex",
+        "[0:v]trim=start_frame=600:end_frame=1200,setpts=PTS-STARTPTS[v0];[0:a]atrim=start=20.000000000000:end=40.000000000000,asetpts=PTS-STARTPTS[a0];[v0][a0]concat=n=1:v=1:a=1[v][a]",
+        "-map",
+        "[v]",
+        "-map",
+        "[a]",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-crf",
+        "0",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "192k",
+        "-movflags",
+        "+faststart",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/review/review-2.mp4"
+      ]
+    },
+    {
+      "id": "review-3",
+      "label": "前振りの回収",
+      "ranges": [
+        [
+          0,
+          209
+        ],
+        [
+          1200,
+          1671
+        ]
+      ],
+      "description": "対応確認の抜粋。前振り＋40秒以降。中間は確認1・2で提示。本編自体は不変。",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/review/review-3.mp4",
+      "fileSha256": "ebb4c0047d2af31b13f2436a5e5d3d663cc7f13d7068479a60493597d085c3a7",
+      "frameCount": 680,
+      "durationSeconds": 22.666666666666668,
+      "mediaProbe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_type": "video",
+            "nb_read_frames": "680"
+          },
+          {
+            "codec_type": "audio",
+            "sample_rate": "44100",
+            "nb_read_frames": "977"
+          }
+        ],
+        "format": {
+          "duration": "22.666667"
+        }
+      },
+      "decodedFrameContent": "exact-match-to-selected-completed-video-frames",
+      "command": [
+        "ffmpeg",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-n",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/render/presentation-rendered-v002.mp4",
+        "-filter_complex",
+        "[0:v]trim=start_frame=0:end_frame=209,setpts=PTS-STARTPTS[v0];[0:a]atrim=start=0.000000000000:end=6.966666666667,asetpts=PTS-STARTPTS[a0];[0:v]trim=start_frame=1200:end_frame=1671,setpts=PTS-STARTPTS[v1];[0:a]atrim=start=40.000000000000:end=55.700000000000,asetpts=PTS-STARTPTS[a1];[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]",
+        "-map",
+        "[v]",
+        "-map",
+        "[a]",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-crf",
+        "0",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "192k",
+        "-movflags",
+        "+faststart",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/review/review-3.mp4"
+      ]
+    }
+  ],
+  "sourceVideoUnchanged": true,
+  "timelineCoverage": "全編を確認1、2、3の後半で被覆。前振りだけを確認3で繰り返す。",
+  "notSelected": "元配信の二部分間の約11分47秒。薬の別候補。採用した部分内部の削除はなし。"
+}

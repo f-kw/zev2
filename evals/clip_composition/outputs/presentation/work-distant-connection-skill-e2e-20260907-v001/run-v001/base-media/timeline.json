@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "presentation-base-media-timeline-v003",
+  "timelineId": "timeline-bae70c4d9e9dfabd4c1cb7b9",
+  "sourceProvenance": "existing-repository-media",
+  "sourceRef": "ymUsGrT6EaA",
+  "sourceFrameClock": {
+    "inputFrameRate": "60/1",
+    "logicalFrameRate": "30/1",
+    "extractionRuleId": "source-frame-60fps-global-even-v001",
+    "decodedFrameCount": 370924,
+    "containerStartTimeMs": 0,
+    "videoStreamTimeBase": "1/90000",
+    "videoFirstPts": 1440,
+    "videoPtsStep": 1500,
+    "videoPresentationOffsetMs": 16
+  },
+  "baseMedia": {
+    "artifactId": "base-media-bae70c4d9e9dfabd4c1cb7b9",
+    "path": "base-media.mp4",
+    "fileSha256": "2ce0e6649bd76deefc015aaf735c5a758229118a605ff25ddcf6ea2c37711195",
+    "frameRate": "30/1",
+    "expectedFrameCount": 1671
+  },
+  "segments": [
+    {
+      "segmentId": "segment-0001",
+      "sourceStartMs": 664354,
+      "sourceEndMs": 671316,
+      "sourceStartFrame30": 19930,
+      "sourceEndFrame30": 20139,
+      "outputStartFrame": 0,
+      "outputEndFrame": 209
+    },
+    {
+      "segmentId": "segment-0002",
+      "sourceStartMs": 1377918,
+      "sourceEndMs": 1426649,
+      "sourceStartFrame30": 41337,
+      "sourceEndFrame30": 42799,
+      "outputStartFrame": 209,
+      "outputEndFrame": 1671
+    }
+  ]
+}

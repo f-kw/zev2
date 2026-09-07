@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "distant-connection-pair-source-inspection-v001",
+  "sourceVideoBinding": {
+    "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+    "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+  },
+  "observedTools": {
+    "nodeVersion": "v20.19.6",
+    "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+    "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+  },
+  "binaryDiagnostics": {
+    "node": {
+      "resolvedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "ffmpeg": {
+      "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    "ffprobe": {
+      "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    }
+  },
+  "media": {
+    "source": {
+      "streamConfiguration": {
+        "videoCount": 1,
+        "audioCount": 1,
+        "videoStreamIndex": 1,
+        "audioStreamIndex": 0
+      },
+      "video": {
+        "width": 1920,
+        "height": 1080,
+        "frameRate": "60/1",
+        "timeBase": "1/90000",
+        "decodedFrameCount": 370924,
+        "firstPts": 1440,
+        "lastPts": 556385940,
+        "ptsStep": 1500,
+        "containerStartTimeMs": 0,
+        "presentationOffsetMs": 16,
+        "clockAuthority": "container-zero-video-stream-offset-v001",
+        "rotation": 0
+      },
+      "audio": {
+        "present": true,
+        "codec": "aac",
+        "sampleRate": 44100,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "timeBase": "1/44100",
+        "firstDecodedPts": 0,
+        "lastDecodedPts": 272630784,
+        "presentationClock": {
+          "authority": "stream-and-packet-v001",
+          "endSample": 272631808,
+          "streamEndSample": 272631808,
+          "packetEndSample": 272631808,
+          "skipSamples": 0,
+          "discardPadding": 0
+        }
+      }
+    },
+    "fps": 60,
+    "decodedFrameCount": 370924,
+    "logicalFrameCount": 185462,
+    "videoClock": {
+      "containerStartTimeMs": 0,
+      "streamTimeBase": "1/90000",
+      "firstPts": 1440,
+      "lastPts": 556385940,
+      "ptsStep": 1500,
+      "presentationOffsetMs": 16
+    },
+    "audioClock": {
+      "sampleRate": 44100,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "spans": [],
+      "sourceGridSampleCount": 272631808,
+      "sourceGridMappingEndSample": 272631808,
+      "decodedTailPaddingSampleCount": 0
+    }
+  }
+}

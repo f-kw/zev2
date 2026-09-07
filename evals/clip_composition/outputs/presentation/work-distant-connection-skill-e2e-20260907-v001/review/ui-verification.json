@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "distant-connection-short-review-ui-verification-v001",
+  "status": "passed",
+  "url": "http://127.0.0.1:58615/review/",
+  "browser": "Microsoft Edge",
+  "checks": [
+    "各確認の見出し・対象・質問が切り替わる",
+    "次の確認ボタンが1→2→3へ進み、3で無効になる",
+    "前振り再掲の比較であることが明示される",
+    "省略内容を開くと中間区間・別候補・内部削除なしの説明が出る",
+    "初期画面は1、動画は自動再生しない",
+    "3動画の音声とframe数が存在し、本編の選択frame内容へ完全一致"
+  ],
+  "humanAnswersRecorded": 0,
+  "humanQuality": "not-evaluated",
+  "htmlBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/review/index.html",
+    "fileSha256": "a98bfdffa6c7805bbb3df8021d9d55d64eec65886becbfea7bb7ded1e316a11b"
+  },
+  "reviewManifestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/review/review-manifest.json",
+    "fileSha256": "da6ebaf3a2aceff9d2f62e8b971bb826b456e5b930e2359629e93d03e2d1ebc6"
+  }
+}

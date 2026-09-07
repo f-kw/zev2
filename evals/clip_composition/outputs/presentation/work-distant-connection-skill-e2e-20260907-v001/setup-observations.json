@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "distant-connection-execution-setup-observations-v001",
+  "observations": [
+    {
+      "stage": "extraction-oracle-setup",
+      "issue": "基礎映像参照の保存wrapper全体を渡し、rendererのexact shape検査で拒否",
+      "correction": "wrapperのschemaVersionを除き既存4参照だけを渡す。再検査成功。実装変更なし。"
+    },
+    {
+      "stage": "fixed-plan-setup",
+      "issue": "絶対path専用の安定SHA取得へ相対pathを渡した",
+      "correction": "既存workspace絶対pathへ解決してから呼ぶ。planの事前作成だけで、正式実走前。"
+    },
+    {
+      "stage": "new-input-verification-preflight",
+      "issue": "既存正式MP4にhard linkがあり、単一link限定の成果物用SHA検査を誤適用した",
+      "correction": "既存ダイジェストと同じ正式入力検証関数を無変更再利用した。製造時は従来どおり独立コピーをSHA検査。"
+    },
+    {
+      "stage": "pair-judgment-transport",
+      "issue": "PTYのcanonical行長制限により新回答のJSON終端が実行プロセスへ到着しなかった",
+      "correction": "未送信bufferを消去し、この実走の端末だけ非canonicalへ変更。同じ新規判断の文面を再送。保存responseは1件で、意味判断や採用の再実行はなし。"
+    }
+  ]
+}

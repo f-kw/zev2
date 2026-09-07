@@ -3,7 +3,7 @@ import test from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {bind, formal, sha, buildCandidateRequestV001, validateCandidateAdoptionV001,
   promoteCandidateAdoptionV001, assertDigestPlanV001, decodeDigestTransportV001,
-  loadDigestContextV001,
+  loadDigestContextV001, readBound, readJson,
   type Context, type Json} from './run_candidate_discovery_digest_skill_e2e_v001.mts';
 import {buildDigestCaptionInputsV001, validateDigestDisplayV001, constructDigestCaptionCoreV001}
   from './candidate_digest_core_adapter_v001.mts';
@@ -89,7 +89,16 @@ test('標準入力は日本語の1行JSONを受理し、重複key・非有限値
 });
 
 test('入口修正後は実行済みの同一候補判断だけを再開し、回答の差し替えを拒否する', async () => {
-  const c = await loadDigestContextV001(planPath);
+  // 指示-012の抽出後、新実装を旧planのSHAとして受理してはならない。
+  await assert.rejects(loadDigestContextV001(planPath), /trusted file byte hash mismatch: evals\/clip_composition\/candidate_digest_core_adapter_v001.mts/);
+  // 旧判断の検査はSHA照合した歴史入力から行う。製造入口や旧planを書き換えない。
+  const c = {...fixture(),
+    authorization: await readBound(plan.authorization),
+    utterances: await readBound(plan.request.utterances),
+    transcript: await readJson(plan.request.transcript.path),
+    priorCandidate: Object.fromEntries(await Promise.all(Object.entries(plan.priorCandidateJudgment)
+      .map(async ([k, b]) => [k, await readBound(b as any)]))),
+  } as Context;
   assert.ok(c.priorCandidate);
   const r = buildCandidateRequestV001(c);
   assert.equal(sha(formal(r)), c.plan.priorCandidateJudgment.request.fileSha256);

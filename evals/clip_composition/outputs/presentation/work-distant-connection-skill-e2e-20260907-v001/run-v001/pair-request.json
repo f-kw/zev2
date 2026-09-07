@@ -1,0 +1,1171 @@
+{
+  "schemaVersion": "distant-connection-pair-judgment-request-v001",
+  "requestId": "distant-pair-ymUsGrT6EaA-20260907-v001-pair",
+  "planBinding": {
+    "schemaVersion": "distant-connection-pair-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/distant-connection-pair-skill-e2e/fixed-plan-v001.json",
+    "fileSha256": "2e85eacbbdd16567e979e262420656e388f821b2cd7c5bc0bd94384d6052ef90",
+    "canonicalSha256": "50f27d4074b1fab2a79d8329449bf614f6afdb23f60dbaa1bdb63389ed80106b"
+  },
+  "input": {
+    "schemaVersion": "distant-connection-pair-skill-input-v001",
+    "productionRequest": "離れた位置の前半と後半を意味的に接続し、前振りと回収、必要な原因映像と反応が理解できる動画を、既存の正式素材と共通製造から作る。",
+    "sourceId": "ymUsGrT6EaA",
+    "editorialCriteria": [
+      "前半で示された具体的な不安・期待・出来事が、後半の出来事や反応でどう回収されるかを判断する。",
+      "単なる同じ話題や同じ単語では不十分。短い動画の中で関係と必要な文脈が伝わる組を選ぶ。",
+      "過去の観測・評価は既存事実として参照するが、過去回答をコピーせず今回の制作要求へ新しく判断する。",
+      "返すのは既存の前半ID・後半IDと意味上の理由・根拠発話IDだけ。時刻・字幕・正式採用は返さない。",
+      "前半と後半は元の時間順で離れた部分であること。成立しなければabstainedを返す。"
+    ],
+    "parts": [
+      {
+        "partId": "camera-fear-escalation-first",
+        "candidateId": "camera-fear-escalation",
+        "role": "first",
+        "utterances": [
+          {
+            "utteranceId": "semantic-utterance-001182",
+            "text": "え"
+          },
+          {
+            "utteranceId": "semantic-utterance-001183",
+            "text": "、"
+          },
+          {
+            "utteranceId": "semantic-utterance-001184",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-001185",
+            "text": "の"
+          },
+          {
+            "utteranceId": "semantic-utterance-001186",
+            "text": "カ"
+          },
+          {
+            "utteranceId": "semantic-utterance-001187",
+            "text": "メ"
+          },
+          {
+            "utteranceId": "semantic-utterance-001188",
+            "text": "ラ"
+          },
+          {
+            "utteranceId": "semantic-utterance-001189",
+            "text": "も"
+          },
+          {
+            "utteranceId": "semantic-utterance-001190",
+            "text": "さ"
+          },
+          {
+            "utteranceId": "semantic-utterance-001191",
+            "text": "ね"
+          },
+          {
+            "utteranceId": "semantic-utterance-001192",
+            "text": "、"
+          },
+          {
+            "utteranceId": "semantic-utterance-001193",
+            "text": "ビ"
+          },
+          {
+            "utteranceId": "semantic-utterance-001194",
+            "text": "ビ"
+          },
+          {
+            "utteranceId": "semantic-utterance-001195",
+            "text": "ら"
+          },
+          {
+            "utteranceId": "semantic-utterance-001196",
+            "text": "せ"
+          },
+          {
+            "utteranceId": "semantic-utterance-001197",
+            "text": "る"
+          },
+          {
+            "utteranceId": "semantic-utterance-001198",
+            "text": "感"
+          },
+          {
+            "utteranceId": "semantic-utterance-001199",
+            "text": "じ"
+          },
+          {
+            "utteranceId": "semantic-utterance-001200",
+            "text": "や"
+          },
+          {
+            "utteranceId": "semantic-utterance-001201",
+            "text": "め"
+          },
+          {
+            "utteranceId": "semantic-utterance-001202",
+            "text": "て"
+          },
+          {
+            "utteranceId": "semantic-utterance-001203",
+            "text": "ほ"
+          },
+          {
+            "utteranceId": "semantic-utterance-001204",
+            "text": "し"
+          },
+          {
+            "utteranceId": "semantic-utterance-001205",
+            "text": "い"
+          }
+        ],
+        "priorObservation": ""
+      },
+      {
+        "partId": "camera-fear-escalation-second",
+        "candidateId": "camera-fear-escalation",
+        "role": "second",
+        "utterances": [
+          {
+            "utteranceId": "semantic-utterance-002766",
+            "text": "マ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002767",
+            "text": "ジ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002768",
+            "text": "今"
+          },
+          {
+            "utteranceId": "semantic-utterance-002769",
+            "text": "ん"
+          },
+          {
+            "utteranceId": "semantic-utterance-002770",
+            "text": "と"
+          },
+          {
+            "utteranceId": "semantic-utterance-002771",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002772",
+            "text": "ろ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002773",
+            "text": "今"
+          },
+          {
+            "utteranceId": "semantic-utterance-002774",
+            "text": "年"
+          },
+          {
+            "utteranceId": "semantic-utterance-002775",
+            "text": "一"
+          },
+          {
+            "utteranceId": "semantic-utterance-002776",
+            "text": "怖"
+          },
+          {
+            "utteranceId": "semantic-utterance-002777",
+            "text": "す"
+          },
+          {
+            "utteranceId": "semantic-utterance-002778",
+            "text": "ぎ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002779",
+            "text": "て"
+          },
+          {
+            "utteranceId": "semantic-utterance-002780",
+            "text": "笑"
+          },
+          {
+            "utteranceId": "semantic-utterance-002781",
+            "text": "っ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002782",
+            "text": "た"
+          },
+          {
+            "utteranceId": "semantic-utterance-002783",
+            "text": "ビ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002784",
+            "text": "デ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002785",
+            "text": "オ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002786",
+            "text": "見"
+          },
+          {
+            "utteranceId": "semantic-utterance-002787",
+            "text": "る"
+          },
+          {
+            "utteranceId": "semantic-utterance-002788",
+            "text": "気"
+          },
+          {
+            "utteranceId": "semantic-utterance-002789",
+            "text": "?"
+          },
+          {
+            "utteranceId": "semantic-utterance-002790",
+            "text": "も"
+          },
+          {
+            "utteranceId": "semantic-utterance-002791",
+            "text": "う"
+          },
+          {
+            "utteranceId": "semantic-utterance-002792",
+            "text": "勘"
+          },
+          {
+            "utteranceId": "semantic-utterance-002793",
+            "text": "弁"
+          },
+          {
+            "utteranceId": "semantic-utterance-002794",
+            "text": "し"
+          },
+          {
+            "utteranceId": "semantic-utterance-002795",
+            "text": "て"
+          },
+          {
+            "utteranceId": "semantic-utterance-002796",
+            "text": "よ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002797",
+            "text": "夜"
+          },
+          {
+            "utteranceId": "semantic-utterance-002798",
+            "text": "中"
+          },
+          {
+            "utteranceId": "semantic-utterance-002799",
+            "text": "に"
+          },
+          {
+            "utteranceId": "semantic-utterance-002800",
+            "text": "な"
+          },
+          {
+            "utteranceId": "semantic-utterance-002801",
+            "text": "ん"
+          },
+          {
+            "utteranceId": "semantic-utterance-002802",
+            "text": "か"
+          },
+          {
+            "utteranceId": "semantic-utterance-002803",
+            "text": "映"
+          },
+          {
+            "utteranceId": "semantic-utterance-002804",
+            "text": "る"
+          },
+          {
+            "utteranceId": "semantic-utterance-002805",
+            "text": "よ"
+          },
+          {
+            "utteranceId": "semantic-utterance-002806",
+            "text": "う"
+          },
+          {
+            "utteranceId": "semantic-utterance-002807",
+            "text": "な"
+          },
+          {
+            "utteranceId": "semantic-utterance-002808",
+            "text": "や"
+          },
+          {
+            "utteranceId": "semantic-utterance-002809",
+            "text": "つ"
+          }
+        ],
+        "priorObservation": "正式発話の約32秒前に白い人物が出現する恐怖映像があり、無言反応を経て「今年一怖すぎて」という正式発話へつながる。旧区間は原因となる映像を全て落としていた。"
+      },
+      {
+        "partId": "medicine-effect-payoff-first",
+        "candidateId": "medicine-effect-payoff",
+        "role": "first",
+        "utterances": [
+          {
+            "utteranceId": "semantic-utterance-003403",
+            "text": "え"
+          },
+          {
+            "utteranceId": "semantic-utterance-003404",
+            "text": "、"
+          },
+          {
+            "utteranceId": "semantic-utterance-003405",
+            "text": "な"
+          },
+          {
+            "utteranceId": "semantic-utterance-003406",
+            "text": "に"
+          },
+          {
+            "utteranceId": "semantic-utterance-003407",
+            "text": "?"
+          },
+          {
+            "utteranceId": "semantic-utterance-003408",
+            "text": "あ"
+          },
+          {
+            "utteranceId": "semantic-utterance-003409",
+            "text": "ー"
+          },
+          {
+            "utteranceId": "semantic-utterance-003410",
+            "text": "や"
+          },
+          {
+            "utteranceId": "semantic-utterance-003411",
+            "text": "ば"
+          },
+          {
+            "utteranceId": "semantic-utterance-003412",
+            "text": "い"
+          },
+          {
+            "utteranceId": "semantic-utterance-003413",
+            "text": "か"
+          },
+          {
+            "utteranceId": "semantic-utterance-003414",
+            "text": "も"
+          },
+          {
+            "utteranceId": "semantic-utterance-003415",
+            "text": "ー"
+          },
+          {
+            "utteranceId": "semantic-utterance-003416",
+            "text": "や"
+          },
+          {
+            "utteranceId": "semantic-utterance-003417",
+            "text": "ば"
+          },
+          {
+            "utteranceId": "semantic-utterance-003418",
+            "text": "い"
+          },
+          {
+            "utteranceId": "semantic-utterance-003419",
+            "text": "と"
+          },
+          {
+            "utteranceId": "semantic-utterance-003420",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-003421",
+            "text": "見"
+          },
+          {
+            "utteranceId": "semantic-utterance-003422",
+            "text": "ち"
+          },
+          {
+            "utteranceId": "semantic-utterance-003423",
+            "text": "ゃ"
+          },
+          {
+            "utteranceId": "semantic-utterance-003424",
+            "text": "っ"
+          },
+          {
+            "utteranceId": "semantic-utterance-003425",
+            "text": "た"
+          },
+          {
+            "utteranceId": "semantic-utterance-003426",
+            "text": "?"
+          },
+          {
+            "utteranceId": "semantic-utterance-003427",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-003428",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-003429",
+            "text": "は"
+          },
+          {
+            "utteranceId": "semantic-utterance-003430",
+            "text": "薬"
+          },
+          {
+            "utteranceId": "semantic-utterance-003431",
+            "text": "品"
+          },
+          {
+            "utteranceId": "semantic-utterance-003432",
+            "text": "室"
+          },
+          {
+            "utteranceId": "semantic-utterance-003433",
+            "text": "の"
+          },
+          {
+            "utteranceId": "semantic-utterance-003434",
+            "text": "よ"
+          },
+          {
+            "utteranceId": "semantic-utterance-003435",
+            "text": "う"
+          },
+          {
+            "utteranceId": "semantic-utterance-003436",
+            "text": "だ"
+          },
+          {
+            "utteranceId": "semantic-utterance-003437",
+            "text": "痛"
+          },
+          {
+            "utteranceId": "semantic-utterance-003438",
+            "text": "み"
+          },
+          {
+            "utteranceId": "semantic-utterance-003439",
+            "text": "の"
+          },
+          {
+            "utteranceId": "semantic-utterance-003440",
+            "text": "実"
+          },
+          {
+            "utteranceId": "semantic-utterance-003441",
+            "text": "を"
+          },
+          {
+            "utteranceId": "semantic-utterance-003442",
+            "text": "見"
+          },
+          {
+            "utteranceId": "semantic-utterance-003443",
+            "text": "つ"
+          },
+          {
+            "utteranceId": "semantic-utterance-003444",
+            "text": "け"
+          },
+          {
+            "utteranceId": "semantic-utterance-003445",
+            "text": "る"
+          }
+        ],
+        "priorObservation": ""
+      },
+      {
+        "partId": "medicine-effect-payoff-second",
+        "candidateId": "medicine-effect-payoff",
+        "role": "second",
+        "utterances": [
+          {
+            "utteranceId": "semantic-utterance-007316",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007317",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007318",
+            "text": "か"
+          },
+          {
+            "utteranceId": "semantic-utterance-007319",
+            "text": "ら"
+          },
+          {
+            "utteranceId": "semantic-utterance-007320",
+            "text": "出"
+          },
+          {
+            "utteranceId": "semantic-utterance-007321",
+            "text": "ら"
+          },
+          {
+            "utteranceId": "semantic-utterance-007322",
+            "text": "れ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007323",
+            "text": "な"
+          },
+          {
+            "utteranceId": "semantic-utterance-007324",
+            "text": "い"
+          },
+          {
+            "utteranceId": "semantic-utterance-007325",
+            "text": "お"
+          },
+          {
+            "utteranceId": "semantic-utterance-007326",
+            "text": "そ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007327",
+            "text": "ら"
+          },
+          {
+            "utteranceId": "semantic-utterance-007328",
+            "text": "く"
+          },
+          {
+            "utteranceId": "semantic-utterance-007329",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007330",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007331",
+            "text": "が"
+          },
+          {
+            "utteranceId": "semantic-utterance-007332",
+            "text": "終"
+          },
+          {
+            "utteranceId": "semantic-utterance-007333",
+            "text": "着"
+          },
+          {
+            "utteranceId": "semantic-utterance-007334",
+            "text": "点"
+          },
+          {
+            "utteranceId": "semantic-utterance-007335",
+            "text": "な"
+          },
+          {
+            "utteranceId": "semantic-utterance-007336",
+            "text": "の"
+          },
+          {
+            "utteranceId": "semantic-utterance-007337",
+            "text": "だ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007338",
+            "text": "ろ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007339",
+            "text": "う"
+          },
+          {
+            "utteranceId": "semantic-utterance-007340",
+            "text": "す"
+          },
+          {
+            "utteranceId": "semantic-utterance-007341",
+            "text": "べ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007342",
+            "text": "て"
+          },
+          {
+            "utteranceId": "semantic-utterance-007343",
+            "text": "を"
+          },
+          {
+            "utteranceId": "semantic-utterance-007344",
+            "text": "受"
+          },
+          {
+            "utteranceId": "semantic-utterance-007345",
+            "text": "け"
+          },
+          {
+            "utteranceId": "semantic-utterance-007346",
+            "text": "入"
+          },
+          {
+            "utteranceId": "semantic-utterance-007347",
+            "text": "れ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007348",
+            "text": "よ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007349",
+            "text": "う"
+          },
+          {
+            "utteranceId": "semantic-utterance-007350",
+            "text": "と"
+          },
+          {
+            "utteranceId": "semantic-utterance-007351",
+            "text": "思"
+          },
+          {
+            "utteranceId": "semantic-utterance-007352",
+            "text": "っ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007353",
+            "text": "た"
+          },
+          {
+            "utteranceId": "semantic-utterance-007354",
+            "text": "時"
+          },
+          {
+            "utteranceId": "semantic-utterance-007355",
+            "text": "不"
+          },
+          {
+            "utteranceId": "semantic-utterance-007356",
+            "text": "思"
+          },
+          {
+            "utteranceId": "semantic-utterance-007357",
+            "text": "議"
+          },
+          {
+            "utteranceId": "semantic-utterance-007358",
+            "text": "と"
+          },
+          {
+            "utteranceId": "semantic-utterance-007359",
+            "text": "気"
+          },
+          {
+            "utteranceId": "semantic-utterance-007360",
+            "text": "持"
+          },
+          {
+            "utteranceId": "semantic-utterance-007361",
+            "text": "ち"
+          },
+          {
+            "utteranceId": "semantic-utterance-007362",
+            "text": "が"
+          },
+          {
+            "utteranceId": "semantic-utterance-007363",
+            "text": "軽"
+          },
+          {
+            "utteranceId": "semantic-utterance-007364",
+            "text": "く"
+          },
+          {
+            "utteranceId": "semantic-utterance-007365",
+            "text": "な"
+          },
+          {
+            "utteranceId": "semantic-utterance-007366",
+            "text": "っ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007367",
+            "text": "た"
+          },
+          {
+            "utteranceId": "semantic-utterance-007368",
+            "text": "も"
+          },
+          {
+            "utteranceId": "semantic-utterance-007369",
+            "text": "う"
+          },
+          {
+            "utteranceId": "semantic-utterance-007370",
+            "text": "ひ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007371",
+            "text": "ど"
+          },
+          {
+            "utteranceId": "semantic-utterance-007372",
+            "text": "く"
+          },
+          {
+            "utteranceId": "semantic-utterance-007373",
+            "text": "疲"
+          },
+          {
+            "utteranceId": "semantic-utterance-007374",
+            "text": "れ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007375",
+            "text": "て"
+          },
+          {
+            "utteranceId": "semantic-utterance-007376",
+            "text": "し"
+          },
+          {
+            "utteranceId": "semantic-utterance-007377",
+            "text": "ま"
+          },
+          {
+            "utteranceId": "semantic-utterance-007378",
+            "text": "っ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007379",
+            "text": "た"
+          },
+          {
+            "utteranceId": "semantic-utterance-007380",
+            "text": "し"
+          },
+          {
+            "utteranceId": "semantic-utterance-007381",
+            "text": "薬"
+          },
+          {
+            "utteranceId": "semantic-utterance-007382",
+            "text": "の"
+          },
+          {
+            "utteranceId": "semantic-utterance-007383",
+            "text": "効"
+          },
+          {
+            "utteranceId": "semantic-utterance-007384",
+            "text": "き"
+          },
+          {
+            "utteranceId": "semantic-utterance-007385",
+            "text": "目"
+          },
+          {
+            "utteranceId": "semantic-utterance-007386",
+            "text": "も"
+          },
+          {
+            "utteranceId": "semantic-utterance-007387",
+            "text": "切"
+          },
+          {
+            "utteranceId": "semantic-utterance-007388",
+            "text": "れ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007389",
+            "text": "か"
+          },
+          {
+            "utteranceId": "semantic-utterance-007390",
+            "text": "け"
+          },
+          {
+            "utteranceId": "semantic-utterance-007391",
+            "text": "て"
+          },
+          {
+            "utteranceId": "semantic-utterance-007392",
+            "text": "い"
+          },
+          {
+            "utteranceId": "semantic-utterance-007393",
+            "text": "る"
+          },
+          {
+            "utteranceId": "semantic-utterance-007394",
+            "text": "元"
+          },
+          {
+            "utteranceId": "semantic-utterance-007395",
+            "text": "の"
+          },
+          {
+            "utteranceId": "semantic-utterance-007396",
+            "text": "世"
+          },
+          {
+            "utteranceId": "semantic-utterance-007397",
+            "text": "界"
+          },
+          {
+            "utteranceId": "semantic-utterance-007398",
+            "text": "に"
+          },
+          {
+            "utteranceId": "semantic-utterance-007399",
+            "text": "は"
+          },
+          {
+            "utteranceId": "semantic-utterance-007400",
+            "text": "未"
+          },
+          {
+            "utteranceId": "semantic-utterance-007401",
+            "text": "練"
+          },
+          {
+            "utteranceId": "semantic-utterance-007402",
+            "text": "な"
+          },
+          {
+            "utteranceId": "semantic-utterance-007403",
+            "text": "ど"
+          },
+          {
+            "utteranceId": "semantic-utterance-007404",
+            "text": "何"
+          },
+          {
+            "utteranceId": "semantic-utterance-007405",
+            "text": "も"
+          },
+          {
+            "utteranceId": "semantic-utterance-007406",
+            "text": "な"
+          },
+          {
+            "utteranceId": "semantic-utterance-007407",
+            "text": "い"
+          },
+          {
+            "utteranceId": "semantic-utterance-007408",
+            "text": "私"
+          },
+          {
+            "utteranceId": "semantic-utterance-007409",
+            "text": "は"
+          },
+          {
+            "utteranceId": "semantic-utterance-007410",
+            "text": "最"
+          },
+          {
+            "utteranceId": "semantic-utterance-007411",
+            "text": "初"
+          },
+          {
+            "utteranceId": "semantic-utterance-007412",
+            "text": "か"
+          },
+          {
+            "utteranceId": "semantic-utterance-007413",
+            "text": "ら"
+          },
+          {
+            "utteranceId": "semantic-utterance-007414",
+            "text": "一"
+          },
+          {
+            "utteranceId": "semantic-utterance-007415",
+            "text": "人"
+          },
+          {
+            "utteranceId": "semantic-utterance-007416",
+            "text": "っ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007417",
+            "text": "き"
+          },
+          {
+            "utteranceId": "semantic-utterance-007418",
+            "text": "り"
+          },
+          {
+            "utteranceId": "semantic-utterance-007419",
+            "text": "だ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007420",
+            "text": "っ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007421",
+            "text": "た"
+          },
+          {
+            "utteranceId": "semantic-utterance-007422",
+            "text": "の"
+          },
+          {
+            "utteranceId": "semantic-utterance-007423",
+            "text": "だ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007424",
+            "text": "か"
+          },
+          {
+            "utteranceId": "semantic-utterance-007425",
+            "text": "ら"
+          },
+          {
+            "utteranceId": "semantic-utterance-007426",
+            "text": "け"
+          },
+          {
+            "utteranceId": "semantic-utterance-007427",
+            "text": "れ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007428",
+            "text": "ど"
+          },
+          {
+            "utteranceId": "semantic-utterance-007429",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007430",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007431",
+            "text": "で"
+          },
+          {
+            "utteranceId": "semantic-utterance-007432",
+            "text": "は"
+          },
+          {
+            "utteranceId": "semantic-utterance-007433",
+            "text": "あ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007434",
+            "text": "る"
+          },
+          {
+            "utteranceId": "semantic-utterance-007435",
+            "text": "種"
+          },
+          {
+            "utteranceId": "semantic-utterance-007436",
+            "text": "の"
+          },
+          {
+            "utteranceId": "semantic-utterance-007437",
+            "text": "安"
+          },
+          {
+            "utteranceId": "semantic-utterance-007438",
+            "text": "ら"
+          },
+          {
+            "utteranceId": "semantic-utterance-007439",
+            "text": "ぎ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007440",
+            "text": "を"
+          },
+          {
+            "utteranceId": "semantic-utterance-007441",
+            "text": "見"
+          },
+          {
+            "utteranceId": "semantic-utterance-007442",
+            "text": "つ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007443",
+            "text": "け"
+          },
+          {
+            "utteranceId": "semantic-utterance-007444",
+            "text": "る"
+          },
+          {
+            "utteranceId": "semantic-utterance-007445",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007446",
+            "text": "と"
+          },
+          {
+            "utteranceId": "semantic-utterance-007447",
+            "text": "が"
+          },
+          {
+            "utteranceId": "semantic-utterance-007448",
+            "text": "で"
+          },
+          {
+            "utteranceId": "semantic-utterance-007449",
+            "text": "き"
+          },
+          {
+            "utteranceId": "semantic-utterance-007450",
+            "text": "た"
+          },
+          {
+            "utteranceId": "semantic-utterance-007451",
+            "text": "彼"
+          },
+          {
+            "utteranceId": "semantic-utterance-007452",
+            "text": "女"
+          },
+          {
+            "utteranceId": "semantic-utterance-007453",
+            "text": "は"
+          },
+          {
+            "utteranceId": "semantic-utterance-007454",
+            "text": "私"
+          },
+          {
+            "utteranceId": "semantic-utterance-007455",
+            "text": "の"
+          },
+          {
+            "utteranceId": "semantic-utterance-007456",
+            "text": "過"
+          },
+          {
+            "utteranceId": "semantic-utterance-007457",
+            "text": "ち"
+          },
+          {
+            "utteranceId": "semantic-utterance-007458",
+            "text": "を"
+          },
+          {
+            "utteranceId": "semantic-utterance-007459",
+            "text": "責"
+          },
+          {
+            "utteranceId": "semantic-utterance-007460",
+            "text": "め"
+          },
+          {
+            "utteranceId": "semantic-utterance-007461",
+            "text": "る"
+          },
+          {
+            "utteranceId": "semantic-utterance-007462",
+            "text": "こ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007463",
+            "text": "と"
+          },
+          {
+            "utteranceId": "semantic-utterance-007464",
+            "text": "も"
+          },
+          {
+            "utteranceId": "semantic-utterance-007465",
+            "text": "な"
+          },
+          {
+            "utteranceId": "semantic-utterance-007466",
+            "text": "く"
+          },
+          {
+            "utteranceId": "semantic-utterance-007467",
+            "text": "何"
+          },
+          {
+            "utteranceId": "semantic-utterance-007468",
+            "text": "?"
+          },
+          {
+            "utteranceId": "semantic-utterance-007469",
+            "text": "バ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007470",
+            "text": "ケ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007471",
+            "text": "モ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007472",
+            "text": "ノ"
+          },
+          {
+            "utteranceId": "semantic-utterance-007473",
+            "text": "肯"
+          },
+          {
+            "utteranceId": "semantic-utterance-007474",
+            "text": "定"
+          },
+          {
+            "utteranceId": "semantic-utterance-007475",
+            "text": "派"
+          },
+          {
+            "utteranceId": "semantic-utterance-007476",
+            "text": "が"
+          },
+          {
+            "utteranceId": "semantic-utterance-007477",
+            "text": "い"
+          },
+          {
+            "utteranceId": "semantic-utterance-007478",
+            "text": "る"
+          },
+          {
+            "utteranceId": "semantic-utterance-007479",
+            "text": "ん"
+          },
+          {
+            "utteranceId": "semantic-utterance-007480",
+            "text": "?"
+          }
+        ],
+        "priorObservation": "「薬の効き目も切れかけている」は画面内文書を読み上げる一続きの段落中の一文であり、旧区間は1.742秒だけを抜いて導入・対象・読後反応を落としていた。"
+      }
+    ],
+    "historicalCalibration": [
+      {
+        "candidateId": "camera-fear-escalation",
+        "finding": "過去の評価（今回の品質判定ではない）：旧版では発話の原因となる重要な恐怖映像を落としていた。区間化改善によって必要な映像を含めた結果、前半との接続が理解でき、遠方接続として成立した。 必要な恐怖映像と反応を短尺として自然な長さに含められる。"
+      },
+      {
+        "candidateId": "medicine-effect-payoff",
+        "finding": "過去の評価（今回の品質判定ではない）：区間化不良の診断と改善は正しかった。しかし改善後でも接続理解に必要な前提情報が多すぎ、説明と文脈をさらに長くすると動画のテンポを損なうため、遠方接続候補として不採用とする。 接続を理解するための前提情報が短尺として自然な長さに収まらない。これ以上の区間拡張は行わない。"
+      }
+    ]
+  },
+  "inputCanonicalSha256": "4a5e10c62ee8e3457bc700278ecfa5b8880595f88ab85606cce01a1009b76aed"
+}
