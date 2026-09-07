@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "distant-human-caption-scope-and-tests-v001",
+  "status": "passed",
+  "parentFilesAndMediaUnchanged": 64,
+  "originalHumanReviewFilesUnchanged": 11,
+  "unrelatedChangesUnchanged": 13,
+  "tests": {
+    "command": "node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/test_repair_distant_caption_human_v001.mts",
+    "passed": 12,
+    "failed": 0
+  },
+  "browserUi": {
+    "browser": "Microsoft Edge",
+    "url": "http://127.0.0.1:49763/",
+    "initialState": "停止中 · 確認範囲 0.0 / 25.0 秒",
+    "play": "再生中",
+    "ended": "停止中 · 確認範囲 25.0 / 25.0 秒",
+    "restart": "停止中 · 確認範囲 0.0 / 25.0 秒",
+    "layout": "readable-four-review-points-within-page",
+    "humanJudgmentPerformedByCodex": false
+  },
+  "humanFourPointReview": "pending"
+}

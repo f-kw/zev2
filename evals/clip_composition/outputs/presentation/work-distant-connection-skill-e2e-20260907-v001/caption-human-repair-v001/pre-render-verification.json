@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "distant-human-caption-pre-render-verification-v001",
+  "status": "passed",
+  "artifacts": {
+    "meaning": {
+      "schemaVersion": "distant-connection-pair-presentation-meaning-input-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/meaning-input.json",
+      "fileSha256": "01052cf490449c77f57e0e828596691c45d61a2b860b7c001fa9debfde47c318",
+      "canonicalSha256": "1c7ac63b66a1c2ad2b15c4c8b399faedb6be6bea7837ba8ab68e3156af813973"
+    },
+    "sourcePackage": {
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/source-package.json",
+      "fileSha256": "3b6773b8b46dee23068198878c2ed2580f387d6a8cf6685d207b6e8c05440bf2",
+      "canonicalSha256": "6c806d36668f929e08725dfd942b7a37ecc58302ca3000f6a8e16bb94e3a7698"
+    },
+    "captionAdoption": {
+      "schemaVersion": "distant-human-caption-repair-adoption-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/caption-adoption.json",
+      "fileSha256": "4013d7fe3e8c95f42b04bf231e0d711ce868a21b854a34c1ac52fafe8b5cd94f",
+      "canonicalSha256": "5ea9aeb65f79c907a8c71f162ced3d8e0e925e04125aa34351eb366baf9bca72"
+    },
+    "selection": {
+      "schemaVersion": "presentation-output-caption-cue-selection-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/selection.json",
+      "fileSha256": "37339dd7021dc17e253805af210559fbe025762c32f31e98dd45d75b34cf97bd",
+      "canonicalSha256": "7be5b6a0f6424d8f537972d28753810f8e3988eb434cd910b32f6caaea49d4bb"
+    },
+    "cueEndProjection": {
+      "schemaVersion": "presentation-cue-end-projection-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/cue-end-projection.json",
+      "fileSha256": "d1c1d2d37b9b1047a64792859c5d0a2ad37460208e300277551e9a63cb3f3bab",
+      "canonicalSha256": "7cc027f4c32eef401b17765271b831d69b52b1cd0583091d5c8c33425301c911"
+    },
+    "lineEndProjection": {
+      "schemaVersion": "presentation-semantic-line-end-projection-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/line-end-projection.json",
+      "fileSha256": "a87689a3536121c833bb72dd1cf529314d81dd6b6e66d11cd5fe966694165fa9",
+      "canonicalSha256": "c1b36deed0ed411a0fe900b641e92c789ffd232816b2aab5be19a7a51a30dee5"
+    },
+    "instruction": {
+      "schemaVersion": "presentation-instruction-artifact-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/instruction.json",
+      "fileSha256": "9ea234e4b1a45dc445031d249728822ee10a6a1c5768ad39af15928e82f85724",
+      "canonicalSha256": "9d76fe1f75f882439855a0bb13ee32b33e0990d89147ef10a62be07221f8eb79"
+    },
+    "rendererJob": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/renderer-job.json",
+      "fileSha256": "e76666b5ac7ebea8b5e359fb778962e8a7535c440825acb2d764314f24c491a8",
+      "canonicalSha256": "360ae40f5c5d54cf5467d4deb18aefa3fe769df97a5ba8a94c134fad76185bc4"
+    }
+  },
+  "humanObservations": {
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-caption-boundary-v001/confirmed-observations.json",
+    "fileSha256": "6425cc8791070b9fd9411201f910c662a4bd96d2eb117895dffc6683ccbef38b"
+  },
+  "changes": [
+    {
+      "text": "マジ今んところ今年一怖すぎて笑った",
+      "before": {
+        "startFrame": 1255,
+        "endFrameExclusive": 1598
+      },
+      "after": {
+        "startFrame": 1255,
+        "endFrameExclusive": 1338
+      },
+      "startMode": "keep-current"
+    },
+    {
+      "text": "ビデオ見る気?",
+      "before": {
+        "startFrame": 1598,
+        "endFrameExclusive": 1628
+      },
+      "after": {
+        "startFrame": 1505,
+        "endFrameExclusive": 1565
+      },
+      "startMode": "human-selected"
+    },
+    {
+      "text": "もう勘弁してよ夜中になんか映るようなやつ",
+      "before": {
+        "startFrame": 1628,
+        "endFrameExclusive": 1671
+      },
+      "after": {
+        "startFrame": 1576,
+        "endFrameExclusive": 1671
+      },
+      "startMode": "human-selected"
+    }
+  ],
+  "checks": {
+    "parentReconstruction": "all-eight-core-artifacts-exact",
+    "humanFrameRoundTrip": "all-five-specified-boundaries-exact",
+    "otherCaption": "text-frames-and-lines-exact",
+    "allCaptionTextIdsAndLineBreaks": "unchanged",
+    "baseMediaAndAudio": "unchanged",
+    "rendererStyleCoreAndQc": "unchanged",
+    "newInference": 0
+  }
+}
