@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "digest-human-caption-renderer-execution-v001",
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/renderer-job.json",
+    "fileSha256": "805e620999a7360d1ce592448812389b278d9bea217a23b8948891eeb7984ed7",
+    "canonicalSha256": "f967846ed32109063b0d279ebd4a8e70173fbbf3f63a48259d10e97fd8557ca9"
+  },
+  "exitCode": 2,
+  "result": {
+    "exitCode": 2,
+    "failure": {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "process_failed",
+      "stage": "execution",
+      "message": "layout inspector produced no result",
+      "cleanupWarnings": [
+        {
+          "code": "RENDER_OUTPUT_LOCK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/.render.presentation-renderer-v002.lock",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        },
+        {
+          "code": "RENDER_OUTPUT_WORK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/.render.presentation-renderer-v002-work-YQ4bWY",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        }
+      ]
+    }
+  }
+}

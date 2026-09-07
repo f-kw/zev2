@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "digest-three-caption-review-config-v001",
+  "completedMediaBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/render/presentation-rendered-v002.mp4",
+    "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+  },
+  "technicalManifestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/manifest.json",
+    "fileSha256": "16b4d341adf2a747b8f1f055eace17d1dad0da3ba6085698580eec8f7d97e76d"
+  },
+  "targets": [
+    {
+      "id": "opening",
+      "title": "1. 冒頭",
+      "question": "発話のない「え?いるんでしょ?」の字幕が消えて、問題ないか。",
+      "startFrame": 0,
+      "endFrame": 600,
+      "fields": [
+        {
+          "id": "absence",
+          "label": "字幕を消した冒頭の状態"
+        }
+      ],
+      "originalInstructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000001",
+      "text": "え?いるんでしょ?",
+      "originalAtomOccurrenceIds": [
+        "digest-internal-edit-20260907-v002-atom-000001",
+        "digest-internal-edit-20260907-v002-atom-000002",
+        "digest-internal-edit-20260907-v002-atom-000003",
+        "digest-internal-edit-20260907-v002-atom-000004",
+        "digest-internal-edit-20260907-v002-atom-000005",
+        "digest-internal-edit-20260907-v002-atom-000006",
+        "digest-internal-edit-20260907-v002-atom-000007",
+        "digest-internal-edit-20260907-v002-atom-000008",
+        "digest-internal-edit-20260907-v002-atom-000009"
+      ],
+      "originalOutputFrames": {
+        "startFrame": 0,
+        "endFrameExclusive": 8
+      },
+      "durationSeconds": 20.0,
+      "repairedInstructionId": null,
+      "repairedOutputFrames": null,
+      "repair": "caption-track-omission-only",
+      "sourceSegmentIds": [
+        2595,
+        2596,
+        2597,
+        2598,
+        2599,
+        2600,
+        2601,
+        2602,
+        2603
+      ]
+    },
+    {
+      "id": "capture",
+      "title": "2. 捕縛",
+      "question": "「なんかグロいやつに捕まってる」の出始めと消え方は自然か。",
+      "startFrame": 1350,
+      "endFrame": 1950,
+      "fields": [
+        {
+          "id": "start",
+          "label": "出始め"
+        },
+        {
+          "id": "end",
+          "label": "消え方"
+        }
+      ],
+      "originalInstructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000015",
+      "text": "なんかグロいやつに捕まってる",
+      "originalAtomOccurrenceIds": [
+        "digest-internal-edit-20260907-v002-atom-000125",
+        "digest-internal-edit-20260907-v002-atom-000126",
+        "digest-internal-edit-20260907-v002-atom-000127",
+        "digest-internal-edit-20260907-v002-atom-000128",
+        "digest-internal-edit-20260907-v002-atom-000129",
+        "digest-internal-edit-20260907-v002-atom-000130",
+        "digest-internal-edit-20260907-v002-atom-000131",
+        "digest-internal-edit-20260907-v002-atom-000132",
+        "digest-internal-edit-20260907-v002-atom-000133",
+        "digest-internal-edit-20260907-v002-atom-000134",
+        "digest-internal-edit-20260907-v002-atom-000135",
+        "digest-internal-edit-20260907-v002-atom-000136",
+        "digest-internal-edit-20260907-v002-atom-000137",
+        "digest-internal-edit-20260907-v002-atom-000138"
+      ],
+      "originalOutputFrames": {
+        "startFrame": 1494,
+        "endFrameExclusive": 1794
+      },
+      "durationSeconds": 20.0,
+      "repairedInstructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "repairedOutputFrames": {
+        "startFrame": 1723,
+        "endFrameExclusive": 1794
+      },
+      "sourceSegmentIds": [
+        3953,
+        3954,
+        3955,
+        3956,
+        3957,
+        3958,
+        3959,
+        3960,
+        3961,
+        3962,
+        3963,
+        3964,
+        3965,
+        3966
+      ],
+      "repair": "human-start-only"
+    },
+    {
+      "id": "place",
+      "title": "3. どこ？",
+      "question": "「どこ?」の出始めが変わらず、消え方が自然になったか。",
+      "startFrame": 2550,
+      "endFrame": 3150,
+      "fields": [
+        {
+          "id": "start",
+          "label": "出始め"
+        },
+        {
+          "id": "end",
+          "label": "消え方"
+        }
+      ],
+      "originalInstructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000016",
+      "text": "どこ?",
+      "originalAtomOccurrenceIds": [
+        "digest-internal-edit-20260907-v002-atom-000139",
+        "digest-internal-edit-20260907-v002-atom-000140",
+        "digest-internal-edit-20260907-v002-atom-000141"
+      ],
+      "originalOutputFrames": {
+        "startFrame": 2673,
+        "endFrameExclusive": 2918
+      },
+      "durationSeconds": 20.0,
+      "repairedInstructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "repairedOutputFrames": {
+        "startFrame": 2673,
+        "endFrameExclusive": 2708
+      },
+      "sourceSegmentIds": [
+        3967,
+        3968,
+        3969
+      ],
+      "repair": "human-end-only"
+    }
+  ],
+  "finalVerificationBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/final-verification.json",
+    "fileSha256": "26c0fd21add505ffb93dcd8d686ad97c0239bd7584b5d6beba9b25503b0c45ad"
+  },
+  "policy": "only-three-local-human-questions; unmodified-QC-passed-media-by-range; no-test-observations"
+}

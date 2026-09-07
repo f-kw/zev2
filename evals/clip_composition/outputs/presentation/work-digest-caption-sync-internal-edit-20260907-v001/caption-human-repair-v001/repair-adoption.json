@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "digest-human-caption-local-repair-adoption-v001",
+  "artifactId": "digest-human-caption-repair-20260907-v001-adoption",
+  "instruction": "ZEV進行管理２ 指示-008",
+  "parentManifest": {
+    "schemaVersion": "candidate-internal-edit-manifest-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/manifest.json",
+    "fileSha256": "7097cec82c6a9907a7c21ec340177890ca7b25b1c6c5ae0383225e0c09eb3692",
+    "canonicalSha256": "1eb3ba70ea9ef0336f86abb17c30c8b19de05bdd76ddf8691e72ebcd69d55e4b"
+  },
+  "humanObservations": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/human-boundary-review-v001/confirmed-observations.json",
+    "fileSha256": "527d45cf0d1136c48dfe5e63962f634f41f6bdfd88b6651a2ce6a4f7caf79d7a"
+  },
+  "diagnosis": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-local-repair-v001/diagnosis.json",
+    "fileSha256": "0cfbd17e1b4289c9e59520ffb48616ad3981500bc2073e5682c9ebbb94d75d94"
+  },
+  "implementation": {
+    "path": "evals/clip_composition/repair_internal_caption_human_v001.mts",
+    "fileSha256": "e082014eedd25fe3bca104ca248b14570c68715c21b362a46c9add8eb678172a"
+  },
+  "scope": "one-caption-omission-and-two-human-frame-boundaries-only",
+  "structuralRenumbering": "instruction-008-permits-dense-cue-boundary-reference-and-sha-reconstruction",
+  "omission": {
+    "originalInstruction": {
+      "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000001",
+      "semanticKind": "speech-caption",
+      "content": {
+        "text": "え?いるんでしょ?"
+      },
+      "outputTime": {
+        "startFrame": 0,
+        "endFrameExclusive": 8
+      },
+      "cueEndReference": {
+        "projectionId": "digest-internal-edit-20260907-v002-cue-end",
+        "inputCaptionId": "digest-internal-edit-20260907-v002-input-caption",
+        "cueId": "digest-internal-edit-20260907-v002-input-caption-cue-000001",
+        "cueOrdinal": 1,
+        "cueEndBoundaryId": "digest-internal-edit-20260907-v002-input-caption-boundary-000009"
+      },
+      "targetProvenance": {
+        "targetRefId": "digest-internal-edit-20260907-v002-caption",
+        "targetType": "semantic-caption",
+        "atomOccurrenceIds": [
+          "digest-internal-edit-20260907-v002-atom-000001",
+          "digest-internal-edit-20260907-v002-atom-000002",
+          "digest-internal-edit-20260907-v002-atom-000003",
+          "digest-internal-edit-20260907-v002-atom-000004",
+          "digest-internal-edit-20260907-v002-atom-000005",
+          "digest-internal-edit-20260907-v002-atom-000006",
+          "digest-internal-edit-20260907-v002-atom-000007",
+          "digest-internal-edit-20260907-v002-atom-000008",
+          "digest-internal-edit-20260907-v002-atom-000009"
+        ]
+      },
+      "materialRefs": []
+    },
+    "sourceSegmentIds": [
+      2595,
+      2596,
+      2597,
+      2598,
+      2599,
+      2600,
+      2601,
+      2602,
+      2603
+    ],
+    "reason": "corresponding-speech-outside-retained-audio; human-confirmed-absent; source-STT-and-media-adoption-unchanged"
+  },
+  "changes": [
+    {
+      "originalOrdinal": 15,
+      "originalInstructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000015",
+      "side": "start",
+      "frame": 1723,
+      "sourceFrame30": 60684,
+      "coreIntegerSourceMs": 2022816,
+      "sourceMsRole": "integer-bridge-to-existing-video-frame-clock-not-a-new-acoustic-observation",
+      "exactHumanAudioEvidence": {
+        "side": "start",
+        "outputVideoFrame": 1723,
+        "windowLocalFrame": 373,
+        "outputAudioSample": 2532810,
+        "sourceAudioSample": 89206186,
+        "outputTimeSecondsExact": {
+          "numerator": 1723,
+          "denominator": 30
+        },
+        "sourceAudioTimeSecondsExact": {
+          "numerator": 89206186,
+          "denominator": 44100
+        },
+        "unchangedOtherCaptionFrame": 1794,
+        "positiveCaptionInterval": true,
+        "insideSameRetainedSegment": true
+      },
+      "expectedTime": {
+        "startFrame": 1723,
+        "endFrameExclusive": 1794
+      },
+      "interval": {
+        "sourceStartMs": 2022816,
+        "sourceEndMs": 2025180
+      },
+      "originalObservation": {
+        "schemaVersion": "digest-human-speech-boundary-observation-v001",
+        "authority": "ZEV進行管理２ 指示-007 / human selected frame",
+        "request": {
+          "targetId": "caption-15-start",
+          "frame": 1723,
+          "requestId": "e5f93e82-c920-42ca-ad15-22c899829a22"
+        },
+        "targetBinding": {
+          "id": "caption-15-start",
+          "ordinal": 15,
+          "text": "なんかグロいやつに捕まってる",
+          "side": "start",
+          "captionId": "digest-internal-edit-20260907-v002-instruction-instruction-000015",
+          "sourceSegmentIds": [
+            3953,
+            3954,
+            3955,
+            3956,
+            3957,
+            3958,
+            3959,
+            3960,
+            3961,
+            3962,
+            3963,
+            3964,
+            3965,
+            3966
+          ],
+          "atomOccurrenceIds": [
+            "digest-internal-edit-20260907-v002-atom-000125",
+            "digest-internal-edit-20260907-v002-atom-000126",
+            "digest-internal-edit-20260907-v002-atom-000127",
+            "digest-internal-edit-20260907-v002-atom-000128",
+            "digest-internal-edit-20260907-v002-atom-000129",
+            "digest-internal-edit-20260907-v002-atom-000130",
+            "digest-internal-edit-20260907-v002-atom-000131",
+            "digest-internal-edit-20260907-v002-atom-000132",
+            "digest-internal-edit-20260907-v002-atom-000133",
+            "digest-internal-edit-20260907-v002-atom-000134",
+            "digest-internal-edit-20260907-v002-atom-000135",
+            "digest-internal-edit-20260907-v002-atom-000136",
+            "digest-internal-edit-20260907-v002-atom-000137",
+            "digest-internal-edit-20260907-v002-atom-000138"
+          ],
+          "windowStartFrame": 1350,
+          "windowEndFrameExclusive": 1950,
+          "currentCaptionFrames": {
+            "startFrame": 1494,
+            "endFrameExclusive": 1794
+          },
+          "timelineSegment": {
+            "segmentId": "segment-0004",
+            "sourceStartMs": 1990580,
+            "sourceEndMs": 2065294,
+            "sourceStartFrame30": 59717,
+            "sourceEndFrame30": 61958,
+            "outputStartFrame": 756,
+            "outputEndFrame": 2997,
+            "audioSamples": {
+              "sourceStart": 87784696,
+              "sourceEnd": 91078966,
+              "outputStart": 1111320,
+              "outputEnd": 4405590
+            }
+          },
+          "completedMediaBinding": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+            "bytes": 75334482,
+            "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+          },
+          "baseMediaBinding": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+            "bytes": 78398378,
+            "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d"
+          },
+          "audioPacketPayloadSha256": "475233b0648161e3014ef52ffa1d7f4400b8dca1b0dc66214a2d66af9cd1b56e",
+          "audioSampleRate": 44100,
+          "framesPerSecond": 30
+        },
+        "humanEvaluation": "boundary-observation-only; final-sync-review-pending",
+        "status": "eligible-for-local-promotion",
+        "selectedBoundary": {
+          "side": "start",
+          "outputVideoFrame": 1723,
+          "windowLocalFrame": 373,
+          "outputAudioSample": 2532810,
+          "sourceAudioSample": 89206186,
+          "outputTimeSecondsExact": {
+            "numerator": 1723,
+            "denominator": 30
+          },
+          "sourceAudioTimeSecondsExact": {
+            "numerator": 89206186,
+            "denominator": 44100
+          },
+          "unchangedOtherCaptionFrame": 1794,
+          "positiveCaptionInterval": true,
+          "insideSameRetainedSegment": true
+        },
+        "observedAt": "2026-09-07T11:24:15.141287+00:00"
+      }
+    },
+    {
+      "originalOrdinal": 16,
+      "originalInstructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000016",
+      "side": "end",
+      "frame": 2708,
+      "sourceFrame30": 61669,
+      "coreIntegerSourceMs": 2055649,
+      "sourceMsRole": "integer-bridge-to-existing-video-frame-clock-not-a-new-acoustic-observation",
+      "exactHumanAudioEvidence": {
+        "side": "end",
+        "outputVideoFrame": 2708,
+        "windowLocalFrame": 158,
+        "outputAudioSample": 3980760,
+        "sourceAudioSample": 90654136,
+        "outputTimeSecondsExact": {
+          "numerator": 2708,
+          "denominator": 30
+        },
+        "sourceAudioTimeSecondsExact": {
+          "numerator": 90654136,
+          "denominator": 44100
+        },
+        "unchangedOtherCaptionFrame": 2673,
+        "positiveCaptionInterval": true,
+        "insideSameRetainedSegment": true
+      },
+      "expectedTime": {
+        "startFrame": 2673,
+        "endFrameExclusive": 2708
+      },
+      "interval": {
+        "sourceStartMs": 2054466,
+        "sourceEndMs": 2055649
+      },
+      "originalObservation": {
+        "schemaVersion": "digest-human-speech-boundary-observation-v001",
+        "authority": "ZEV進行管理２ 指示-007 / human selected frame",
+        "request": {
+          "targetId": "caption-16-end",
+          "frame": 2708,
+          "requestId": "80a3cd5b-1e8c-4f89-8267-748aa95619c3"
+        },
+        "targetBinding": {
+          "id": "caption-16-end",
+          "ordinal": 16,
+          "text": "どこ?",
+          "side": "end",
+          "captionId": "digest-internal-edit-20260907-v002-instruction-instruction-000016",
+          "sourceSegmentIds": [
+            3967,
+            3968,
+            3969
+          ],
+          "atomOccurrenceIds": [
+            "digest-internal-edit-20260907-v002-atom-000139",
+            "digest-internal-edit-20260907-v002-atom-000140",
+            "digest-internal-edit-20260907-v002-atom-000141"
+          ],
+          "windowStartFrame": 2550,
+          "windowEndFrameExclusive": 3090,
+          "currentCaptionFrames": {
+            "startFrame": 2673,
+            "endFrameExclusive": 2918
+          },
+          "timelineSegment": {
+            "segmentId": "segment-0004",
+            "sourceStartMs": 1990580,
+            "sourceEndMs": 2065294,
+            "sourceStartFrame30": 59717,
+            "sourceEndFrame30": 61958,
+            "outputStartFrame": 756,
+            "outputEndFrame": 2997,
+            "audioSamples": {
+              "sourceStart": 87784696,
+              "sourceEnd": 91078966,
+              "outputStart": 1111320,
+              "outputEnd": 4405590
+            }
+          },
+          "completedMediaBinding": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+            "bytes": 75334482,
+            "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+          },
+          "baseMediaBinding": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+            "bytes": 78398378,
+            "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d"
+          },
+          "audioPacketPayloadSha256": "475233b0648161e3014ef52ffa1d7f4400b8dca1b0dc66214a2d66af9cd1b56e",
+          "audioSampleRate": 44100,
+          "framesPerSecond": 30
+        },
+        "humanEvaluation": "boundary-observation-only; final-sync-review-pending",
+        "status": "eligible-for-local-promotion",
+        "selectedBoundary": {
+          "side": "end",
+          "outputVideoFrame": 2708,
+          "windowLocalFrame": 158,
+          "outputAudioSample": 3980760,
+          "sourceAudioSample": 90654136,
+          "outputTimeSecondsExact": {
+            "numerator": 2708,
+            "denominator": 30
+          },
+          "sourceAudioTimeSecondsExact": {
+            "numerator": 90654136,
+            "denominator": 44100
+          },
+          "unchangedOtherCaptionFrame": 2673,
+          "positiveCaptionInterval": true,
+          "insideSameRetainedSegment": true
+        },
+        "observedAt": "2026-09-07T11:25:04.624796+00:00"
+      }
+    }
+  ],
+  "humanQuality": "pending-three-local-reviews"
+}

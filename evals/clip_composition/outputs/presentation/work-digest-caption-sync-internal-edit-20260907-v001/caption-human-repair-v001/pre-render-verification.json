@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "digest-human-caption-pre-render-verification-v001",
+  "status": "passed",
+  "artifacts": {
+    "adoption": {
+      "schemaVersion": "digest-human-caption-local-repair-adoption-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/repair-adoption.json",
+      "fileSha256": "439a32cf2dd910843570b8a459ccfa098fe92973e41ebe6ee98c57ad979451b8",
+      "canonicalSha256": "31655a051b681329b50c619f6ff4a9b5dd6087782171ccd6b9c326ffdc60b895"
+    },
+    "timing": {
+      "schemaVersion": "digest-human-caption-timing-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/caption-timing.json",
+      "fileSha256": "af259e77baa7193d5e627a33f6d94c08df5c529ee13298b207a636e0dffc4b97",
+      "canonicalSha256": "436e212cabc2d48494e063f81e933ebb6949e62c85ee03765b17580e2d961ec4"
+    },
+    "meaning": {
+      "schemaVersion": "candidate-internal-edit-meaning-input-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/meaning-input.json",
+      "fileSha256": "a7f615fb33261dd2e8956c155c11792c70c2559655a8e0583897bf3f4e17a193",
+      "canonicalSha256": "f0ed7f8bad99c22b2f50e38c2871b240245e08480c4d123b4d39e43d31a23def"
+    },
+    "sourcePackage": {
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/source-package.json",
+      "fileSha256": "00da4abf1d9c8a962bab393a22c3fc070c4b9608d51ac97a44f92ea6005ee032",
+      "canonicalSha256": "efacbd8ca43d8a8d6ec2d81f8d418688e4593c89870dca596aede82203b9d03a"
+    },
+    "selection": {
+      "schemaVersion": "presentation-output-caption-cue-selection-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/selection.json",
+      "fileSha256": "09f53a43873110704a745c1b8b3e4460692c8d9ab4f86739f96a873a47957f57",
+      "canonicalSha256": "adf1c72116336451000a7d08345883a24b254564beba3e55a448a6ccc2e7f358"
+    },
+    "cueEndProjection": {
+      "schemaVersion": "presentation-cue-end-projection-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/cue-end-projection.json",
+      "fileSha256": "d757980c16668fff259a3b2f38178c0990367762c1c069ad555a66df9491fc0e",
+      "canonicalSha256": "e4c54abae7d661dbae43533fdb6b242477e7abd8034461b2850dca85bdd5a650"
+    },
+    "lineEndProjection": {
+      "schemaVersion": "presentation-semantic-line-end-projection-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/line-end-projection.json",
+      "fileSha256": "bb4bfb5370749424149db6a1770368749d5d12f1cee96298b2408aba5d1fbf33",
+      "canonicalSha256": "74336905f9ec6e6d5b009243d8cbfe88568ec6b804edfaa5068e0249a6a23136"
+    },
+    "instruction": {
+      "schemaVersion": "presentation-instruction-artifact-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/instruction.json",
+      "fileSha256": "28de8e76506d72d75d33e8c1e2a4aa9b1acc0051a8920d3b7735133d107d15dc",
+      "canonicalSha256": "9f74a2539aa006d4479d777b127d55e20021c98ffbf7986440521c91b880be4e"
+    },
+    "rendererJob": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/renderer-job.json",
+      "fileSha256": "805e620999a7360d1ce592448812389b278d9bea217a23b8948891eeb7984ed7",
+      "canonicalSha256": "f967846ed32109063b0d279ebd4a8e70173fbbf3f63a48259d10e97fd8557ca9"
+    }
+  },
+  "checks": {
+    "parentReconstruction": "exact",
+    "originalTextIdsAndSourceStt": "unchanged",
+    "captionOnlyOmission": "9-atoms-explained-415-retained-original-media-424-unchanged",
+    "other30TextFramesLineBreaks": "exact",
+    "humanFramesRoundTrip": "1723,2708-exact",
+    "oppositeEndpoints": "1794,2673-unchanged",
+    "baseMediaStyleRenderer": "unchanged"
+  },
+  "humanReview": "pending-three-local-reviews"
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "digest-three-caption-interface-verification-v001",
+  "status": "passed",
+  "interfaceFiles": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-repaired-three-v001/index.html",
+      "fileSha256": "61b1e3574b5cf61ee0b48f7129fc9398bba9586e3dcfae3d99a4872ff5d4a156"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-repaired-three-v001/app.js",
+      "fileSha256": "489a0d4614e40c0bab2bcbb7b688ca51c5ed2b03286cfb4311c8f30e3c4fab7a"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-repaired-three-v001/server.py",
+      "fileSha256": "f43514a4e57f0ad6fcac594b8075caef00fee62d910e65e5936079ed31db9b84"
+    }
+  ],
+  "checks": {
+    "threeTargetsOnly": "exact",
+    "eachWindowDurationSeconds": 20,
+    "emptyAnswer": "rejected-in-browser-and-server",
+    "saveAndReload": "exact-test-only-answer-and-memo",
+    "windowEndAutoPause": {
+      "windowEndSeconds": 65,
+      "actualPaused": true,
+      "actualTimeSeconds": 64.966666
+    },
+    "playbackReadyState": 4,
+    "playbackError": null,
+    "oneTargetAndFieldsAndMediaBinding": "exact",
+    "unknownTargetMissingFieldEmptyAnswerExtraFrameInvalidId": "5-rejected",
+    "unresolvedHumanAnswer": "preserved-not-promoted",
+    "testAnswerLocation": "separate-temporary-directory",
+    "productionHumanAnswersWritten": 0,
+    "visualLayout": "readable-heading-tabs-player-controls; responses-below-player"
+  },
+  "mediaScope": "UI mechanics were tested with unchanged prior completed media in an isolated test server; the delivered config must bind the repaired QC-passed video."
+}

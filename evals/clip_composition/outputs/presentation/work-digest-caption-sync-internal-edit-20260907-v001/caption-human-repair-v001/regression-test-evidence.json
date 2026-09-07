@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "digest-human-caption-regression-evidence-v001",
+  "status": "passed",
+  "testFile": "evals/clip_composition/repair_internal_caption_human_v001.test.mts",
+  "tests": 11,
+  "passed": 11,
+  "failed": 0,
+  "tapSha256": "d242cffa978ed2e76cabae4d16a173a767ddee35f2f2e09a3b51d8aaccc9b43c",
+  "tap": "TAP version 13\n# Subtest: actual two observations reconstruct 32 captions with 30 fully unchanged\nok 1 - actual two observations reconstruct 32 captions with 30 fully unchanged\n  ---\n  duration_ms: 2.326625\n  ...\n# Subtest: reject other-caption timing\nok 2 - reject other-caption timing\n  ---\n  duration_ms: 6.069792\n  ...\n# Subtest: reject fixed capture end\nok 3 - reject fixed capture end\n  ---\n  duration_ms: 3.715417\n  ...\n# Subtest: reject fixed place start\nok 4 - reject fixed place start\n  ---\n  duration_ms: 3.766958\n  ...\n# Subtest: reject source text ID\nok 5 - reject source text ID\n  ---\n  duration_ms: 2.116834\n  ...\n# Subtest: reject source line end\nok 6 - reject source line end\n  ---\n  duration_ms: 3.083584\n  ...\n# Subtest: reject base video binding\nok 7 - reject base video binding\n  ---\n  duration_ms: 4.155083\n  ...\n# Subtest: reject unselected frame\nok 8 - reject unselected frame\n  ---\n  duration_ms: 0.171583\n  ...\n# Subtest: reject different media\nok 9 - reject different media\n  ---\n  duration_ms: 0.115416\n  ...\n# Subtest: reject different audio sample\nok 10 - reject different audio sample\n  ---\n  duration_ms: 0.224\n  ...\n# Subtest: reject ineligible observation\nok 11 - reject ineligible observation\n  ---\n  duration_ms: 0.514875\n  ...\n1..11\n# tests 11\n# suites 0\n# pass 11\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 2414.536541\n"
+}
