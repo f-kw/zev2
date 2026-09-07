@@ -1,0 +1,2916 @@
+{
+  "schemaVersion": "candidate-internal-retention-request-v001",
+  "requestId": "digest-internal-edit-20260907-v002-meaning-2",
+  "planBinding": {
+    "schemaVersion": "candidate-internal-edit-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/candidate-internal-edit/fixed-plan-v002.json",
+    "fileSha256": "ac7b3e5197ad12af0f1d04345defdfa199757614e6542e331d429b172988440c",
+    "canonicalSha256": "96cc8731fd92a3cbd9dc6673afc4857eb4ba26c3f4930fee8d352e012335bbf0"
+  },
+  "parentAdoptionBinding": {
+    "schemaVersion": "candidate-digest-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/machine-adoption.json",
+    "fileSha256": "e98e06541d3f1f8324439063870f4184f002bc7a8abf1ef065e68a90ee65e6fb",
+    "canonicalSha256": "78d4ed84e3edeffe78a879631e1e2c9554de7848d9e2c9fb10ccfd09c7773167"
+  },
+  "input": {
+    "schemaVersion": "candidate-internal-retention-input-v001",
+    "taskDescription": "採用済み候補の中で、意味と見どころを保ちながら残す部分と削れる部分を判断する。\n候補の追加・採否・並べ替えはしない。本文と既存IDだけを使い、時刻や目標尺を生成しない。\n全本文を順番どおり連続したkeep/drop範囲に分け、開始・終了の既存本文片ID、役割、理由を返す。\nkeepの役割はlead-in（導入）、development（展開）、payoff（オチ・結論）、reaction（反応）。\ndropの役割はduplicate（重複）、digression（脱線）、dispensable（無くても意味が通る）。\n一つのkeep範囲内では映像を連続して残す。keepを別範囲へ分けると、間の映像も除かれる。\n連続したkeep同士を分ける場合も、意味上その接続が成立する理由を示す。単純な語間削除はしない。\n文字数、秒数、固定割合で短くしない。必要な前提・展開・反応・結論は、反復表現であっても残す。\n候補ごとに保持できる意味を説明する。本文にない映像内容を見たと主張せず、判断不能ならabstainedを返す。",
+    "candidates": [
+      {
+        "candidateId": "candidate-0001",
+        "title": "覗く相手に気づき、嫌いな見せ方だと悲鳴を上げる",
+        "highlightReason": "相手がいるか確かめる言葉から発見と抗議までが連続し、怖がり方が具体的に伝わる。",
+        "utterances": [
+          {
+            "utteranceId": "common-utterance-000109",
+            "atoms": [
+              {
+                "sourceSegmentId": 2595,
+                "text": "え"
+              },
+              {
+                "sourceSegmentId": 2596,
+                "text": "?"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000110",
+            "atoms": [
+              {
+                "sourceSegmentId": 2597,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 2598,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 2599,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 2600,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 2601,
+                "text": "し"
+              },
+              {
+                "sourceSegmentId": 2602,
+                "text": "ょ"
+              },
+              {
+                "sourceSegmentId": 2603,
+                "text": "?"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000111",
+            "atoms": [
+              {
+                "sourceSegmentId": 2604,
+                "text": "あ"
+              },
+              {
+                "sourceSegmentId": 2605,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 2606,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 2607,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 2608,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 2609,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 2610,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 2611,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 2612,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 2613,
+                "text": "れ"
+              },
+              {
+                "sourceSegmentId": 2614,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 2615,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 2616,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 2617,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 2618,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 2619,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 2620,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 2621,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 2622,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 2623,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 2624,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 2625,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 2626,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 2627,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 2628,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 2629,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 2630,
+                "text": "リ"
+              },
+              {
+                "sourceSegmentId": 2631,
+                "text": "カ"
+              },
+              {
+                "sourceSegmentId": 2632,
+                "text": "ち"
+              },
+              {
+                "sourceSegmentId": 2633,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 2634,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 2635,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 2636,
+                "text": "め"
+              },
+              {
+                "sourceSegmentId": 2637,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 2638,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 2639,
+                "text": "!"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000112",
+            "atoms": [
+              {
+                "sourceSegmentId": 2640,
+                "text": "リ"
+              },
+              {
+                "sourceSegmentId": 2641,
+                "text": "カ"
+              },
+              {
+                "sourceSegmentId": 2642,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 2643,
+                "text": "!"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000113",
+            "atoms": [
+              {
+                "sourceSegmentId": 2644,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 2645,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 2646,
+                "text": "勘"
+              },
+              {
+                "sourceSegmentId": 2647,
+                "text": "弁"
+              },
+              {
+                "sourceSegmentId": 2648,
+                "text": "し"
+              },
+              {
+                "sourceSegmentId": 2649,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 2650,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 2651,
+                "text": "よ"
+              },
+              {
+                "sourceSegmentId": 2652,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 2653,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 2654,
+                "text": "覗"
+              },
+              {
+                "sourceSegmentId": 2655,
+                "text": "き"
+              },
+              {
+                "sourceSegmentId": 2656,
+                "text": "方"
+              },
+              {
+                "sourceSegmentId": 2657,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 2658,
+                "text": "め"
+              },
+              {
+                "sourceSegmentId": 2659,
+                "text": "ろ"
+              },
+              {
+                "sourceSegmentId": 2660,
+                "text": "!"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000114",
+            "atoms": [
+              {
+                "sourceSegmentId": 2661,
+                "text": "早"
+              },
+              {
+                "sourceSegmentId": 2662,
+                "text": "よ"
+              },
+              {
+                "sourceSegmentId": 2663,
+                "text": "上"
+              },
+              {
+                "sourceSegmentId": 2664,
+                "text": "行"
+              },
+              {
+                "sourceSegmentId": 2665,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 2666,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 2667,
+                "text": "お"
+              },
+              {
+                "sourceSegmentId": 2668,
+                "text": "前"
+              },
+              {
+                "sourceSegmentId": 2669,
+                "text": "!"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000115",
+            "atoms": [
+              {
+                "sourceSegmentId": 2670,
+                "text": "え"
+              },
+              {
+                "sourceSegmentId": 2671,
+                "text": "、"
+              },
+              {
+                "sourceSegmentId": 2672,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 2673,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 2674,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 2675,
+                "text": "だ"
+              },
+              {
+                "sourceSegmentId": 2676,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 2677,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 2678,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 2679,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 2680,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 2681,
+                "text": "つ"
+              },
+              {
+                "sourceSegmentId": 2682,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 2683,
+                "text": "覗"
+              },
+              {
+                "sourceSegmentId": 2684,
+                "text": "き"
+              },
+              {
+                "sourceSegmentId": 2685,
+                "text": "方"
+              },
+              {
+                "sourceSegmentId": 2686,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 2687,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 2688,
+                "text": "世"
+              },
+              {
+                "sourceSegmentId": 2689,
+                "text": "界"
+              },
+              {
+                "sourceSegmentId": 2690,
+                "text": "一"
+              },
+              {
+                "sourceSegmentId": 2691,
+                "text": "嫌"
+              },
+              {
+                "sourceSegmentId": 2692,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 2693,
+                "text": "!"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "candidateId": "candidate-0002",
+        "title": "遅い走りを確かめた直後、急加速に驚いて捕まる",
+        "highlightReason": "逃走方法と走る速さへの言及が、突然の加速への反応と捕まった状況の説明につながる。",
+        "utterances": [
+          {
+            "utteranceId": "common-utterance-000174",
+            "atoms": [
+              {
+                "sourceSegmentId": 3877,
+                "text": "逃"
+              },
+              {
+                "sourceSegmentId": 3878,
+                "text": "げ"
+              },
+              {
+                "sourceSegmentId": 3879,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 3880,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 3881,
+                "text": "つ"
+              },
+              {
+                "sourceSegmentId": 3882,
+                "text": "?"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000175",
+            "atoms": [
+              {
+                "sourceSegmentId": 3883,
+                "text": "逃"
+              },
+              {
+                "sourceSegmentId": 3884,
+                "text": "げ"
+              },
+              {
+                "sourceSegmentId": 3885,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 3886,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 3887,
+                "text": "だ"
+              },
+              {
+                "sourceSegmentId": 3888,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 3889,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 3890,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 3891,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 3892,
+                "text": "つ"
+              },
+              {
+                "sourceSegmentId": 3893,
+                "text": "走"
+              },
+              {
+                "sourceSegmentId": 3894,
+                "text": "り"
+              },
+              {
+                "sourceSegmentId": 3895,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 3896,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 3897,
+                "text": "れ"
+              },
+              {
+                "sourceSegmentId": 3898,
+                "text": "だ"
+              },
+              {
+                "sourceSegmentId": 3899,
+                "text": "よ"
+              },
+              {
+                "sourceSegmentId": 3900,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 3901,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 3902,
+                "text": "つ"
+              },
+              {
+                "sourceSegmentId": 3903,
+                "text": "走"
+              },
+              {
+                "sourceSegmentId": 3904,
+                "text": "り"
+              },
+              {
+                "sourceSegmentId": 3905,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 3906,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 3907,
+                "text": "れ"
+              },
+              {
+                "sourceSegmentId": 3908,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 3909,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 3910,
+                "text": "だ"
+              },
+              {
+                "sourceSegmentId": 3911,
+                "text": "け"
+              },
+              {
+                "sourceSegmentId": 3912,
+                "text": "ど"
+              },
+              {
+                "sourceSegmentId": 3913,
+                "text": "だ"
+              },
+              {
+                "sourceSegmentId": 3914,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 3915,
+                "text": "ら"
+              },
+              {
+                "sourceSegmentId": 3916,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 3917,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 3918,
+                "text": "ち"
+              },
+              {
+                "sourceSegmentId": 3919,
+                "text": "に"
+              },
+              {
+                "sourceSegmentId": 3920,
+                "text": "行"
+              },
+              {
+                "sourceSegmentId": 3921,
+                "text": "け"
+              },
+              {
+                "sourceSegmentId": 3922,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 3923,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 3924,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 3925,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 3926,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 3927,
+                "text": "だ"
+              },
+              {
+                "sourceSegmentId": 3928,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 3929,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 3930,
+                "text": "ん"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000176",
+            "atoms": [
+              {
+                "sourceSegmentId": 3931,
+                "text": "お"
+              },
+              {
+                "sourceSegmentId": 3932,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 3933,
+                "text": "、"
+              },
+              {
+                "sourceSegmentId": 3934,
+                "text": "急"
+              },
+              {
+                "sourceSegmentId": 3935,
+                "text": "に"
+              },
+              {
+                "sourceSegmentId": 3936,
+                "text": "速"
+              },
+              {
+                "sourceSegmentId": 3937,
+                "text": "く"
+              },
+              {
+                "sourceSegmentId": 3938,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 3939,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 3940,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 3941,
+                "text": "!"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000177",
+            "atoms": [
+              {
+                "sourceSegmentId": 3942,
+                "text": "お"
+              },
+              {
+                "sourceSegmentId": 3943,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 3944,
+                "text": "、"
+              },
+              {
+                "sourceSegmentId": 3945,
+                "text": "急"
+              },
+              {
+                "sourceSegmentId": 3946,
+                "text": "に"
+              },
+              {
+                "sourceSegmentId": 3947,
+                "text": "速"
+              },
+              {
+                "sourceSegmentId": 3948,
+                "text": "く"
+              },
+              {
+                "sourceSegmentId": 3949,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 3950,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 3951,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 3952,
+                "text": "!"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000178",
+            "atoms": [
+              {
+                "sourceSegmentId": 3953,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 3954,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 3955,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 3956,
+                "text": "グ"
+              },
+              {
+                "sourceSegmentId": 3957,
+                "text": "ロ"
+              },
+              {
+                "sourceSegmentId": 3958,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 3959,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 3960,
+                "text": "つ"
+              },
+              {
+                "sourceSegmentId": 3961,
+                "text": "に"
+              },
+              {
+                "sourceSegmentId": 3962,
+                "text": "捕"
+              },
+              {
+                "sourceSegmentId": 3963,
+                "text": "ま"
+              },
+              {
+                "sourceSegmentId": 3964,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 3965,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 3966,
+                "text": "る"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000179",
+            "atoms": [
+              {
+                "sourceSegmentId": 3967,
+                "text": "ど"
+              },
+              {
+                "sourceSegmentId": 3968,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 3969,
+                "text": "?"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000180",
+            "atoms": [
+              {
+                "sourceSegmentId": 3970,
+                "text": "何"
+              },
+              {
+                "sourceSegmentId": 3971,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 3972,
+                "text": "れ"
+              },
+              {
+                "sourceSegmentId": 3973,
+                "text": "?"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000181",
+            "atoms": [
+              {
+                "sourceSegmentId": 3974,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 3975,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 3976,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 3977,
+                "text": "棺"
+              },
+              {
+                "sourceSegmentId": 3978,
+                "text": "み"
+              },
+              {
+                "sourceSegmentId": 3979,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 3980,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 3981,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 3982,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 3983,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 3984,
+                "text": "ろ"
+              },
+              {
+                "sourceSegmentId": 3985,
+                "text": "に"
+              },
+              {
+                "sourceSegmentId": 3986,
+                "text": "入"
+              },
+              {
+                "sourceSegmentId": 3987,
+                "text": "れ"
+              },
+              {
+                "sourceSegmentId": 3988,
+                "text": "ら"
+              },
+              {
+                "sourceSegmentId": 3989,
+                "text": "れ"
+              },
+              {
+                "sourceSegmentId": 3990,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 3991,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 3992,
+                "text": "!"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "candidateId": "candidate-0003",
+        "title": "カメラの角度と時間差の怖さを振り返る",
+        "highlightReason": "体験した怖さをカメラワーク、油断を狙う間、今年一という感想で具体的に説明して締めくくれる。",
+        "utterances": [
+          {
+            "utteranceId": "common-utterance-000421",
+            "atoms": [
+              {
+                "sourceSegmentId": 9763,
+                "text": "ペ"
+              },
+              {
+                "sourceSegmentId": 9764,
+                "text": "コ"
+              },
+              {
+                "sourceSegmentId": 9765,
+                "text": "ラ"
+              },
+              {
+                "sourceSegmentId": 9766,
+                "text": "、"
+              },
+              {
+                "sourceSegmentId": 9767,
+                "text": "ペ"
+              },
+              {
+                "sourceSegmentId": 9768,
+                "text": "コ"
+              },
+              {
+                "sourceSegmentId": 9769,
+                "text": "ラ"
+              },
+              {
+                "sourceSegmentId": 9770,
+                "text": "じ"
+              },
+              {
+                "sourceSegmentId": 9771,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 9772,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9773,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9774,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9775,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 9776,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 9777,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9778,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9779,
+                "text": "ま"
+              },
+              {
+                "sourceSegmentId": 9780,
+                "text": "ぁ"
+              },
+              {
+                "sourceSegmentId": 9781,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 9782,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 9783,
+                "text": "怖"
+              },
+              {
+                "sourceSegmentId": 9784,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9785,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9786,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 9787,
+                "text": "ね"
+              },
+              {
+                "sourceSegmentId": 9788,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 9789,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9790,
+                "text": "ぱ"
+              },
+              {
+                "sourceSegmentId": 9791,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 9792,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 9793,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 9794,
+                "text": "会"
+              },
+              {
+                "sourceSegmentId": 9795,
+                "text": "社"
+              },
+              {
+                "sourceSegmentId": 9796,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 9797,
+                "text": "、"
+              },
+              {
+                "sourceSegmentId": 9798,
+                "text": "ア"
+              },
+              {
+                "sourceSegmentId": 9799,
+                "text": "ン"
+              },
+              {
+                "sourceSegmentId": 9800,
+                "text": "グ"
+              },
+              {
+                "sourceSegmentId": 9801,
+                "text": "ル"
+              },
+              {
+                "sourceSegmentId": 9802,
+                "text": "攻"
+              },
+              {
+                "sourceSegmentId": 9803,
+                "text": "め"
+              },
+              {
+                "sourceSegmentId": 9804,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 9805,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 9806,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 9807,
+                "text": "め"
+              },
+              {
+                "sourceSegmentId": 9808,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 9809,
+                "text": "ほ"
+              },
+              {
+                "sourceSegmentId": 9810,
+                "text": "し"
+              },
+              {
+                "sourceSegmentId": 9811,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9812,
+                "text": "マ"
+              },
+              {
+                "sourceSegmentId": 9813,
+                "text": "ジ"
+              },
+              {
+                "sourceSegmentId": 9814,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 9815,
+                "text": "怖"
+              },
+              {
+                "sourceSegmentId": 9816,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9817,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9818,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 9819,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9820,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 9821,
+                "text": "ぁ"
+              },
+              {
+                "sourceSegmentId": 9822,
+                "text": "ア"
+              },
+              {
+                "sourceSegmentId": 9823,
+                "text": "ン"
+              },
+              {
+                "sourceSegmentId": 9824,
+                "text": "グ"
+              },
+              {
+                "sourceSegmentId": 9825,
+                "text": "ル"
+              },
+              {
+                "sourceSegmentId": 9826,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 9827,
+                "text": "怖"
+              },
+              {
+                "sourceSegmentId": 9828,
+                "text": "が"
+              },
+              {
+                "sourceSegmentId": 9829,
+                "text": "ら"
+              },
+              {
+                "sourceSegmentId": 9830,
+                "text": "せ"
+              },
+              {
+                "sourceSegmentId": 9831,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 9832,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 9833,
+                "text": "マ"
+              },
+              {
+                "sourceSegmentId": 9834,
+                "text": "ジ"
+              },
+              {
+                "sourceSegmentId": 9835,
+                "text": "上"
+              },
+              {
+                "sourceSegmentId": 9836,
+                "text": "手"
+              },
+              {
+                "sourceSegmentId": 9837,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9838,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 9839,
+                "text": "思"
+              },
+              {
+                "sourceSegmentId": 9840,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 9841,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 9842,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 9843,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 9844,
+                "text": "会"
+              },
+              {
+                "sourceSegmentId": 9845,
+                "text": "社"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000422",
+            "atoms": [
+              {
+                "sourceSegmentId": 9846,
+                "text": "じ"
+              },
+              {
+                "sourceSegmentId": 9847,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 9848,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9849,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9850,
+                "text": "し"
+              },
+              {
+                "sourceSegmentId": 9851,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9852,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 9853,
+                "text": "確"
+              },
+              {
+                "sourceSegmentId": 9854,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9855,
+                "text": "に"
+              },
+              {
+                "sourceSegmentId": 9856,
+                "text": "新"
+              },
+              {
+                "sourceSegmentId": 9857,
+                "text": "し"
+              },
+              {
+                "sourceSegmentId": 9858,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9859,
+                "text": "要"
+              },
+              {
+                "sourceSegmentId": 9860,
+                "text": "素"
+              },
+              {
+                "sourceSegmentId": 9861,
+                "text": "連"
+              },
+              {
+                "sourceSegmentId": 9862,
+                "text": "打"
+              },
+              {
+                "sourceSegmentId": 9863,
+                "text": "が"
+              },
+              {
+                "sourceSegmentId": 9864,
+                "text": "あ"
+              },
+              {
+                "sourceSegmentId": 9865,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9866,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 9867,
+                "text": "ね"
+              },
+              {
+                "sourceSegmentId": 9868,
+                "text": "ボ"
+              },
+              {
+                "sourceSegmentId": 9869,
+                "text": "タ"
+              },
+              {
+                "sourceSegmentId": 9870,
+                "text": "ン"
+              },
+              {
+                "sourceSegmentId": 9871,
+                "text": "連"
+              },
+              {
+                "sourceSegmentId": 9872,
+                "text": "打"
+              },
+              {
+                "sourceSegmentId": 9873,
+                "text": "が"
+              },
+              {
+                "sourceSegmentId": 9874,
+                "text": "あ"
+              },
+              {
+                "sourceSegmentId": 9875,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9876,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 9877,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 9878,
+                "text": "び"
+              },
+              {
+                "sourceSegmentId": 9879,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9880,
+                "text": "く"
+              },
+              {
+                "sourceSegmentId": 9881,
+                "text": "り"
+              },
+              {
+                "sourceSegmentId": 9882,
+                "text": "し"
+              },
+              {
+                "sourceSegmentId": 9883,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 9884,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9885,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9886,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 9887,
+                "text": "カ"
+              },
+              {
+                "sourceSegmentId": 9888,
+                "text": "メ"
+              },
+              {
+                "sourceSegmentId": 9889,
+                "text": "ラ"
+              },
+              {
+                "sourceSegmentId": 9890,
+                "text": "ワ"
+              },
+              {
+                "sourceSegmentId": 9891,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 9892,
+                "text": "ク"
+              },
+              {
+                "sourceSegmentId": 9893,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 9894,
+                "text": "今"
+              },
+              {
+                "sourceSegmentId": 9895,
+                "text": "回"
+              },
+              {
+                "sourceSegmentId": 9896,
+                "text": "時"
+              },
+              {
+                "sourceSegmentId": 9897,
+                "text": "間"
+              },
+              {
+                "sourceSegmentId": 9898,
+                "text": "差"
+              },
+              {
+                "sourceSegmentId": 9899,
+                "text": "怖"
+              },
+              {
+                "sourceSegmentId": 9900,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9901,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9902,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 9903,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9904,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 9905,
+                "text": "分"
+              },
+              {
+                "sourceSegmentId": 9906,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9907,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9908,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 9909,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 9910,
+                "text": "よ"
+              },
+              {
+                "sourceSegmentId": 9911,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9912,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 9913,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9914,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 9915,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9916,
+                "text": "ぱ"
+              },
+              {
+                "sourceSegmentId": 9917,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 9918,
+                "text": "ホ"
+              },
+              {
+                "sourceSegmentId": 9919,
+                "text": "ラ"
+              },
+              {
+                "sourceSegmentId": 9920,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 9921,
+                "text": "ゲ"
+              },
+              {
+                "sourceSegmentId": 9922,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 9923,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 9924,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9925,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 9926,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 9927,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 9928,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 9929,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9930,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 9931,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9932,
+                "text": "分"
+              },
+              {
+                "sourceSegmentId": 9933,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9934,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9935,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 9936,
+                "text": "く"
+              },
+              {
+                "sourceSegmentId": 9937,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 9938,
+                "text": "じ"
+              },
+              {
+                "sourceSegmentId": 9939,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 9940,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 9941,
+                "text": "あ"
+              },
+              {
+                "sourceSegmentId": 9942,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 9943,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 9944,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 9945,
+                "text": "来"
+              },
+              {
+                "sourceSegmentId": 9946,
+                "text": "そ"
+              },
+              {
+                "sourceSegmentId": 9947,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 9948,
+                "text": "だ"
+              },
+              {
+                "sourceSegmentId": 9949,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9950,
+                "text": "み"
+              },
+              {
+                "sourceSegmentId": 9951,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 9952,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9953,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9954,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 9955,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 9956,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 9957,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 9958,
+                "text": "会"
+              },
+              {
+                "sourceSegmentId": 9959,
+                "text": "社"
+              },
+              {
+                "sourceSegmentId": 9960,
+                "text": "す"
+              },
+              {
+                "sourceSegmentId": 9961,
+                "text": "ご"
+              },
+              {
+                "sourceSegmentId": 9962,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9963,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 9964,
+                "text": "が"
+              },
+              {
+                "sourceSegmentId": 9965,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 9966,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9967,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 9968,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 9969,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 9970,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9971,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 9972,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 9973,
+                "text": "来"
+              },
+              {
+                "sourceSegmentId": 9974,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 9975,
+                "text": "よ"
+              },
+              {
+                "sourceSegmentId": 9976,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9977,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 9978,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 9979,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9980,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 9981,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 9982,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 9983,
+                "text": "ろ"
+              },
+              {
+                "sourceSegmentId": 9984,
+                "text": "じ"
+              },
+              {
+                "sourceSegmentId": 9985,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 9986,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 9987,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 9988,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 9989,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 9990,
+                "text": "ろ"
+              },
+              {
+                "sourceSegmentId": 9991,
+                "text": "で"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000423",
+            "atoms": [
+              {
+                "sourceSegmentId": 9992,
+                "text": "油"
+              },
+              {
+                "sourceSegmentId": 9993,
+                "text": "断"
+              },
+              {
+                "sourceSegmentId": 9994,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 9995,
+                "text": "せ"
+              },
+              {
+                "sourceSegmentId": 9996,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 9997,
+                "text": "ビ"
+              },
+              {
+                "sourceSegmentId": 9998,
+                "text": "ビ"
+              },
+              {
+                "sourceSegmentId": 9999,
+                "text": "ら"
+              },
+              {
+                "sourceSegmentId": 10000,
+                "text": "せ"
+              },
+              {
+                "sourceSegmentId": 10001,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 10002,
+                "text": "く"
+              },
+              {
+                "sourceSegmentId": 10003,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 10004,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 10005,
+                "text": "が"
+              },
+              {
+                "sourceSegmentId": 10006,
+                "text": "マ"
+              },
+              {
+                "sourceSegmentId": 10007,
+                "text": "ジ"
+              },
+              {
+                "sourceSegmentId": 10008,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 10009,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 10010,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 10011,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 10012,
+                "text": "会"
+              },
+              {
+                "sourceSegmentId": 10013,
+                "text": "社"
+              },
+              {
+                "sourceSegmentId": 10014,
+                "text": "多"
+              },
+              {
+                "sourceSegmentId": 10015,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 10016,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 10017,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 10018,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 10019,
+                "text": "思"
+              },
+              {
+                "sourceSegmentId": 10020,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 10021,
+                "text": "ビ"
+              },
+              {
+                "sourceSegmentId": 10022,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 10023,
+                "text": "玉"
+              },
+              {
+                "sourceSegmentId": 10024,
+                "text": "ば"
+              },
+              {
+                "sourceSegmentId": 10025,
+                "text": "あ"
+              },
+              {
+                "sourceSegmentId": 10026,
+                "text": "ち"
+              },
+              {
+                "sourceSegmentId": 10027,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 10028,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 10029,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 10030,
+                "text": "時"
+              },
+              {
+                "sourceSegmentId": 10031,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 10032,
+                "text": "ら"
+              },
+              {
+                "sourceSegmentId": 10033,
+                "text": "思"
+              },
+              {
+                "sourceSegmentId": 10034,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 10035,
+                "text": "け"
+              },
+              {
+                "sourceSegmentId": 10036,
+                "text": "ど"
+              },
+              {
+                "sourceSegmentId": 10037,
+                "text": "わ"
+              },
+              {
+                "sourceSegmentId": 10038,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 10039,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 10040,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 10041,
+                "text": "る"
+              },
+              {
+                "sourceSegmentId": 10042,
+                "text": "よ"
+              },
+              {
+                "sourceSegmentId": 10043,
+                "text": "ね"
+              },
+              {
+                "sourceSegmentId": 10044,
+                "text": "人"
+              },
+              {
+                "sourceSegmentId": 10045,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 10046,
+                "text": "び"
+              },
+              {
+                "sourceSegmentId": 10047,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 10048,
+                "text": "く"
+              },
+              {
+                "sourceSegmentId": 10049,
+                "text": "り"
+              },
+              {
+                "sourceSegmentId": 10050,
+                "text": "ポ"
+              },
+              {
+                "sourceSegmentId": 10051,
+                "text": "イ"
+              },
+              {
+                "sourceSegmentId": 10052,
+                "text": "ン"
+              },
+              {
+                "sourceSegmentId": 10053,
+                "text": "ト"
+              },
+              {
+                "sourceSegmentId": 10054,
+                "text": "ち"
+              },
+              {
+                "sourceSegmentId": 10055,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 10056,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 10057,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 10058,
+                "text": "ア"
+              },
+              {
+                "sourceSegmentId": 10059,
+                "text": "ン"
+              },
+              {
+                "sourceSegmentId": 10060,
+                "text": "グ"
+              },
+              {
+                "sourceSegmentId": 10061,
+                "text": "ル"
+              },
+              {
+                "sourceSegmentId": 10062,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 10063,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 10064,
+                "text": "だ"
+              },
+              {
+                "sourceSegmentId": 10065,
+                "text": "し"
+              },
+              {
+                "sourceSegmentId": 10066,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 10067,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 10068,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 10069,
+                "text": "ト"
+              },
+              {
+                "sourceSegmentId": 10070,
+                "text": "イ"
+              },
+              {
+                "sourceSegmentId": 10071,
+                "text": "レ"
+              },
+              {
+                "sourceSegmentId": 10072,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 10073,
+                "text": "あ"
+              },
+              {
+                "sourceSegmentId": 10074,
+                "text": "そ"
+              },
+              {
+                "sourceSegmentId": 10075,
+                "text": "こ"
+              },
+              {
+                "sourceSegmentId": 10076,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 10077,
+                "text": "覗"
+              },
+              {
+                "sourceSegmentId": 10078,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 10079,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 10080,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 10081,
+                "text": "け"
+              },
+              {
+                "sourceSegmentId": 10082,
+                "text": "ど"
+              },
+              {
+                "sourceSegmentId": 10083,
+                "text": "何"
+              },
+              {
+                "sourceSegmentId": 10084,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 10085,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 10086,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 10087,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 10088,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 10089,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 10090,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 10091,
+                "text": "結"
+              },
+              {
+                "sourceSegmentId": 10092,
+                "text": "局"
+              },
+              {
+                "sourceSegmentId": 10093,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 10094,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 10095,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 10096,
+                "text": "作"
+              },
+              {
+                "sourceSegmentId": 10097,
+                "text": "れ"
+              },
+              {
+                "sourceSegmentId": 10098,
+                "text": "よ"
+              },
+              {
+                "sourceSegmentId": 10099,
+                "text": "じ"
+              },
+              {
+                "sourceSegmentId": 10100,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 10101,
+                "text": "あ"
+              },
+              {
+                "sourceSegmentId": 10102,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 10103,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 10104,
+                "text": "思"
+              },
+              {
+                "sourceSegmentId": 10105,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 10106,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 10107,
+                "text": "わ"
+              },
+              {
+                "sourceSegmentId": 10108,
+                "text": "バ"
+              },
+              {
+                "sourceSegmentId": 10109,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 10110,
+                "text": "ン"
+              },
+              {
+                "sourceSegmentId": 10111,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 10112,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 10113,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 10114,
+                "text": "規"
+              },
+              {
+                "sourceSegmentId": 10115,
+                "text": "模"
+              },
+              {
+                "sourceSegmentId": 10116,
+                "text": "が"
+              },
+              {
+                "sourceSegmentId": 10117,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 10118,
+                "text": "て"
+              }
+            ]
+          },
+          {
+            "utteranceId": "common-utterance-000424",
+            "atoms": [
+              {
+                "sourceSegmentId": 10119,
+                "text": "え"
+              },
+              {
+                "sourceSegmentId": 10120,
+                "text": "え"
+              },
+              {
+                "sourceSegmentId": 10121,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 10122,
+                "text": "に"
+              },
+              {
+                "sourceSegmentId": 10123,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 10124,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 10125,
+                "text": "だ"
+              },
+              {
+                "sourceSegmentId": 10126,
+                "text": "覗"
+              },
+              {
+                "sourceSegmentId": 10127,
+                "text": "く"
+              },
+              {
+                "sourceSegmentId": 10128,
+                "text": "だ"
+              },
+              {
+                "sourceSegmentId": 10129,
+                "text": "け"
+              },
+              {
+                "sourceSegmentId": 10130,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 10131,
+                "text": "あ"
+              },
+              {
+                "sourceSegmentId": 10132,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 10133,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 10134,
+                "text": "毎"
+              },
+              {
+                "sourceSegmentId": 10135,
+                "text": "回"
+              },
+              {
+                "sourceSegmentId": 10136,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 10137,
+                "text": "怖"
+              },
+              {
+                "sourceSegmentId": 10138,
+                "text": "が"
+              },
+              {
+                "sourceSegmentId": 10139,
+                "text": "ら"
+              },
+              {
+                "sourceSegmentId": 10140,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 10141,
+                "text": "せ"
+              },
+              {
+                "sourceSegmentId": 10142,
+                "text": "ら"
+              },
+              {
+                "sourceSegmentId": 10143,
+                "text": "れ"
+              },
+              {
+                "sourceSegmentId": 10144,
+                "text": "て"
+              },
+              {
+                "sourceSegmentId": 10145,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 10146,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 10147,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 10148,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 10149,
+                "text": "ね"
+              },
+              {
+                "sourceSegmentId": 10150,
+                "text": "え"
+              },
+              {
+                "sourceSegmentId": 10151,
+                "text": "今"
+              },
+              {
+                "sourceSegmentId": 10152,
+                "text": "年"
+              },
+              {
+                "sourceSegmentId": 10153,
+                "text": "一"
+              },
+              {
+                "sourceSegmentId": 10154,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 10155,
+                "text": "し"
+              },
+              {
+                "sourceSegmentId": 10156,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 10157,
+                "text": "わ"
+              },
+              {
+                "sourceSegmentId": 10158,
+                "text": "今"
+              },
+              {
+                "sourceSegmentId": 10159,
+                "text": "年"
+              },
+              {
+                "sourceSegmentId": 10160,
+                "text": "一"
+              },
+              {
+                "sourceSegmentId": 10161,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 10162,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 10163,
+                "text": "び"
+              },
+              {
+                "sourceSegmentId": 10164,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 10165,
+                "text": "く"
+              },
+              {
+                "sourceSegmentId": 10166,
+                "text": "り"
+              },
+              {
+                "sourceSegmentId": 10167,
+                "text": "ポ"
+              },
+              {
+                "sourceSegmentId": 10168,
+                "text": "イ"
+              },
+              {
+                "sourceSegmentId": 10169,
+                "text": "ン"
+              },
+              {
+                "sourceSegmentId": 10170,
+                "text": "ト"
+              },
+              {
+                "sourceSegmentId": 10171,
+                "text": "マ"
+              },
+              {
+                "sourceSegmentId": 10172,
+                "text": "ジ"
+              },
+              {
+                "sourceSegmentId": 10173,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 10174,
+                "text": "ま"
+              },
+              {
+                "sourceSegmentId": 10175,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 10176,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 10177,
+                "text": "思"
+              },
+              {
+                "sourceSegmentId": 10178,
+                "text": "う"
+              },
+              {
+                "sourceSegmentId": 10179,
+                "text": "ほ"
+              },
+              {
+                "sourceSegmentId": 10180,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 10181,
+                "text": "と"
+              },
+              {
+                "sourceSegmentId": 10182,
+                "text": "に"
+              },
+              {
+                "sourceSegmentId": 10183,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 10184,
+                "text": "や"
+              },
+              {
+                "sourceSegmentId": 10185,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 10186,
+                "text": "も"
+              },
+              {
+                "sourceSegmentId": 10187,
+                "text": "赤"
+              },
+              {
+                "sourceSegmentId": 10188,
+                "text": "ち"
+              },
+              {
+                "sourceSegmentId": 10189,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 10190,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 10191,
+                "text": "シ"
+              },
+              {
+                "sourceSegmentId": 10192,
+                "text": "ー"
+              },
+              {
+                "sourceSegmentId": 10193,
+                "text": "ル"
+              },
+              {
+                "sourceSegmentId": 10194,
+                "text": "ド"
+              },
+              {
+                "sourceSegmentId": 10195,
+                "text": "あ"
+              },
+              {
+                "sourceSegmentId": 10196,
+                "text": "り"
+              },
+              {
+                "sourceSegmentId": 10197,
+                "text": "が"
+              },
+              {
+                "sourceSegmentId": 10198,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 10199,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 10200,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 10201,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 10202,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 10203,
+                "text": "今"
+              },
+              {
+                "sourceSegmentId": 10204,
+                "text": "回"
+              },
+              {
+                "sourceSegmentId": 10205,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 10206,
+                "text": "そ"
+              },
+              {
+                "sourceSegmentId": 10207,
+                "text": "の"
+              },
+              {
+                "sourceSegmentId": 10208,
+                "text": "化"
+              },
+              {
+                "sourceSegmentId": 10209,
+                "text": "け"
+              },
+              {
+                "sourceSegmentId": 10210,
+                "text": "物"
+              },
+              {
+                "sourceSegmentId": 10211,
+                "text": "が"
+              },
+              {
+                "sourceSegmentId": 10212,
+                "text": "赤"
+              },
+              {
+                "sourceSegmentId": 10213,
+                "text": "ち"
+              },
+              {
+                "sourceSegmentId": 10214,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 10215,
+                "text": "ん"
+              },
+              {
+                "sourceSegmentId": 10216,
+                "text": "を"
+              },
+              {
+                "sourceSegmentId": 10217,
+                "text": "傷"
+              },
+              {
+                "sourceSegmentId": 10218,
+                "text": "つ"
+              },
+              {
+                "sourceSegmentId": 10219,
+                "text": "け"
+              },
+              {
+                "sourceSegmentId": 10220,
+                "text": "さ"
+              },
+              {
+                "sourceSegmentId": 10221,
+                "text": "せ"
+              },
+              {
+                "sourceSegmentId": 10222,
+                "text": "な"
+              },
+              {
+                "sourceSegmentId": 10223,
+                "text": "い"
+              },
+              {
+                "sourceSegmentId": 10224,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 10225,
+                "text": "ら"
+              },
+              {
+                "sourceSegmentId": 10226,
+                "text": "め"
+              },
+              {
+                "sourceSegmentId": 10227,
+                "text": "ち"
+              },
+              {
+                "sourceSegmentId": 10228,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 10229,
+                "text": "め"
+              },
+              {
+                "sourceSegmentId": 10230,
+                "text": "ち"
+              },
+              {
+                "sourceSegmentId": 10231,
+                "text": "ゃ"
+              },
+              {
+                "sourceSegmentId": 10232,
+                "text": "そ"
+              },
+              {
+                "sourceSegmentId": 10233,
+                "text": "れ"
+              },
+              {
+                "sourceSegmentId": 10234,
+                "text": "が"
+              },
+              {
+                "sourceSegmentId": 10235,
+                "text": "で"
+              },
+              {
+                "sourceSegmentId": 10236,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 10237,
+                "text": "か"
+              },
+              {
+                "sourceSegmentId": 10238,
+                "text": "っ"
+              },
+              {
+                "sourceSegmentId": 10239,
+                "text": "た"
+              },
+              {
+                "sourceSegmentId": 10240,
+                "text": "な"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "previousRejection": {
+    "schemaVersion": "candidate-internal-edit-cut-rejection-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/meaning-1-rejection.json",
+    "fileSha256": "038b436d62b21cfb67fd7e3bcec3150f98b92c536698a2fb20199e84bcdde7a5",
+    "canonicalSha256": "40e3b10499c14cef8984cf4591c317beaa9c57ceef5575e60d55e8c18adba3bd"
+  }
+}

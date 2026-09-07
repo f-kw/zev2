@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "candidate-internal-edit-fixed-plan-v001",
+  "planId": "digest-internal-edit-20260907-v002",
+  "authorization": {
+    "schemaVersion": "candidate-internal-edit-received-instruction-record-v001",
+    "path": "evals/clip_composition/jobs/presentation/candidate-internal-edit/received-instructions-v001.json",
+    "fileSha256": "a1519b39d8996ab98b1c07e415cf88059106cf2a013cdf9a967cdbc8e9fedb25",
+    "canonicalSha256": "677d7d79b330e6217e93b14d7b2371ce28347b90bb199b2ecd46ac366bf48a81"
+  },
+  "priorManifest": {
+    "schemaVersion": "candidate-discovery-digest-skill-e2e-manifest-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-digest-skill-ymUsGrT6EaA-20260906-v002/manifest.json",
+    "fileSha256": "e45785cf67a0b3ed780eeb8df2ebb1b55775d0bb8520d592985578302239e08e",
+    "canonicalSha256": "b7960c2dd739ebe7922a4d7a3d4dbdda0dd81d9b05e0ad543d5a9263f58b46a5"
+  },
+  "syncVerification": {
+    "schemaVersion": "digest-sync-final-verification-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/sync-render-v001/final-verification.json",
+    "fileSha256": "a479c916d1e4e69056b735aa2f5f14f0ca0bc8b94319514af98f97572311bd58",
+    "canonicalSha256": "e369b641a6e9ab40a91e5c8d5ede37195f2f5cd1468fe323b876cec02018060f"
+  },
+  "syncTimingAdoption": {
+    "schemaVersion": "digest-caption-acoustic-timing-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/sync-render-v001/timing-adoption.json",
+    "fileSha256": "59e31263fc0893bbb92ce9a8813cc9be77b3b22d892885c260dd7426c23b0840",
+    "canonicalSha256": "20709729aab405c4c2ee610854334dbd0f89ffdc093b00734b757abe2d10abe1"
+  },
+  "acousticValidation": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/acoustic-correspondence-validation-v003.json",
+    "fileSha256": "651876378d7113708c455f416721084e354cc339e0a496095ea75d4b458f5042"
+  },
+  "request": {
+    "purpose": "既存素材の確定発話から、内容上重要または見どころになる複数箇所を選び、必要な文脈を残して短いダイジェスト動画にする。",
+    "sourceId": "ymUsGrT6EaA",
+    "sourceVideo": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    },
+    "transcript": {
+      "path": "evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/transcript.json",
+      "fileSha256": "28938e70d267c617a50568f2782c541c9d6814eda7537349fefae1b45053960f"
+    },
+    "utterances": {
+      "schemaVersion": "distant-connection-common-utterance-artifact-v001",
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-ymUsGrT6EaA-v001/common-utterance-artifact-v001.json",
+      "fileSha256": "dae20487328216beb7ec96398f79849fbe60910b33823f10dce6c628ce403523",
+      "canonicalSha256": "d8bff64b0b3775dc04d44376f8470d9ab76b7ec88c57055616ae2b4b0ec084c0"
+    },
+    "rendererTemplate": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-template-v002.json",
+      "fileSha256": "cfdb4c6e18e47cde8ea9fe2302d35993a7795ad804586adc36ff601c8ddfca5e",
+      "canonicalSha256": "3b72513981982691439d1dcc2d7cb3f200c4ce04663316edcef35bf260185703"
+    },
+    "captionStyleTemplate": {
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+      "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+      "canonicalSha256": "5594ddf2d1aa08660d893b7b8de7f37954f760981f76d615d13187034c5e3c8a"
+    }
+  },
+  "taskDescription": "採用済み候補の中で、意味と見どころを保ちながら残す部分と削れる部分を判断する。\n候補の追加・採否・並べ替えはしない。本文と既存IDだけを使い、時刻や目標尺を生成しない。\n全本文を順番どおり連続したkeep/drop範囲に分け、開始・終了の既存本文片ID、役割、理由を返す。\nkeepの役割はlead-in（導入）、development（展開）、payoff（オチ・結論）、reaction（反応）。\ndropの役割はduplicate（重複）、digression（脱線）、dispensable（無くても意味が通る）。\n一つのkeep範囲内では映像を連続して残す。keepを別範囲へ分けると、間の映像も除かれる。\n連続したkeep同士を分ける場合も、意味上その接続が成立する理由を示す。単純な語間削除はしない。\n文字数、秒数、固定割合で短くしない。必要な前提・展開・反応・結論は、反復表現であっても残す。\n候補ごとに保持できる意味を説明する。本文にない映像内容を見たと主張せず、判断不能ならabstainedを返す。",
+  "policy": {
+    "candidates": "preserve-all-adopted-candidates-in-original-order",
+    "meaning": "new-id-grounded-judgment-with-full-text-accounting-before-time-resolution",
+    "cuts": "unique-observed-internal-endpoints-or-explicit-parent-edge-inheritance",
+    "unresolved": "reject-proposal-and-request-new-meaning-judgment-without-nearby-time-substitution",
+    "duration": "derived-from-retained-meaning; no-target",
+    "quality": "human-review-after-existing-core-and-technical-qc"
+  },
+  "skills": [
+    {
+      "id": "candidate-internal-retention",
+      "version": "v001",
+      "mode": "current-codex-stdin-v001",
+      "api": "forbidden"
+    },
+    {
+      "id": "caption-display-boundaries",
+      "version": "v001",
+      "mode": "current-codex-stdin-v001",
+      "api": "forbidden"
+    }
+  ],
+  "implementationBindings": [
+    {
+      "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+      "fileSha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291"
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+      "fileSha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_internal_edit_v001.mts",
+      "fileSha256": "cb336bd5000e39015cf830ed17e483cd74bdb73f235f895331c6feb26207f000"
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_edit_core_v001.mts",
+      "fileSha256": "f413494132a04f55a3eb9c8d5c90812745848c1a009fdac772d0e4ef578ba2b5"
+    },
+    {
+      "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3"
+    },
+    {
+      "path": "evals/clip_composition/digest_acoustic_timing_validation_v001.mts",
+      "fileSha256": "efde9b9d009711eed8433ecba94b8ff7ff92e1b06fe99165f689cddc6e09d754"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+    },
+    {
+      "path": "evals/clip_composition/candidate_digest_core_adapter_v001.mts",
+      "fileSha256": "8c2621fe64203b4f06b45b915df6b04d71da1ce02feaa1fadf0a12e0513fa592"
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001"
+}

@@ -1,0 +1,110 @@
+TAP version 13
+# Subtest: new judgment receives only text and IDs; result cannot mutate input
+ok 1 - new judgment receives only text and IDs; result cannot mutate input
+  ---
+  duration_ms: 0.664958
+  ...
+# Subtest: input rejects startMs
+ok 2 - input rejects startMs
+  ---
+  duration_ms: 0.258083
+  ...
+# Subtest: input rejects durationMs
+ok 3 - input rejects durationMs
+  ---
+  duration_ms: 0.064125
+  ...
+# Subtest: input rejects cuttableBoundaries
+ok 4 - input rejects cuttableBoundaries
+  ---
+  duration_ms: 0.0555
+  ...
+# Subtest: ordered full accounting promotes exact observed cuts and inherited old edges
+ok 5 - ordered full accounting promotes exact observed cuts and inherited old edges
+  ---
+  duration_ms: 0.919292
+  ...
+# Subtest: detached token and later result mutation cannot change validated ranges
+ok 6 - detached token and later result mutation cannot change validated ranges
+  ---
+  duration_ms: 1.609209
+  ...
+# Subtest: refuses unknown ID
+ok 7 - refuses unknown ID
+  ---
+  duration_ms: 0.19025
+  ...
+# Subtest: refuses unexplained gap
+ok 8 - refuses unexplained gap
+  ---
+  duration_ms: 0.466875
+  ...
+# Subtest: refuses overlap
+ok 9 - refuses overlap
+  ---
+  duration_ms: 0.250666
+  ...
+# Subtest: refuses reversed range
+ok 10 - refuses reversed range
+  ---
+  duration_ms: 0.18975
+  ...
+# Subtest: refuses missing tail
+ok 11 - refuses missing tail
+  ---
+  duration_ms: 0.224333
+  ...
+# Subtest: refuses different candidate
+ok 12 - refuses different candidate
+  ---
+  duration_ms: 0.528958
+  ...
+# Subtest: refuses whole candidate dropped
+ok 13 - refuses whole candidate dropped
+  ---
+  duration_ms: 0.109333
+  ...
+# Subtest: refuses free absolute time
+ok 14 - refuses free absolute time
+  ---
+  duration_ms: 0.106292
+  ...
+# Subtest: token interior refuses the whole proposal, without dropping necessary block or moving cut
+ok 15 - token interior refuses the whole proposal, without dropping necessary block or moving cut
+  ---
+  duration_ms: 0.165042
+  ...
+# Subtest: window origin, duplicate observation, zero-length unit and outside-parent observation are unresolved
+ok 16 - window origin, duplicate observation, zero-length unit and outside-parent observation are unresolved
+  ---
+  duration_ms: 0.110917
+  ...
+# Subtest: source membership cannot be changed after meaning validation
+ok 17 - source membership cannot be changed after meaning validation
+  ---
+  duration_ms: 0.168792
+  ...
+# Subtest: judgment envelope must bind exact request bytes and exact answer
+ok 18 - judgment envelope must bind exact request bytes and exact answer
+  ---
+  duration_ms: 0.88225
+  ...
+# Subtest: display validation requires complete grounded cues with exact provenance
+ok 19 - display validation requires complete grounded cues with exact provenance
+  ---
+  duration_ms: 1.439375
+  ...
+# Subtest: original acoustic raw JSON is read without changing numeric representation and rejects changed SHA
+ok 20 - original acoustic raw JSON is read without changing numeric representation and rejects changed SHA
+  ---
+  duration_ms: 7.240666
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 239.753542

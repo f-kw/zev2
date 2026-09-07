@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "candidate-internal-edit-cut-rejection-v001",
+  "judgment": {
+    "revision": 1,
+    "request": {
+      "schemaVersion": "candidate-internal-retention-request-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/meaning-1-request.json",
+      "fileSha256": "21159b879c85559fba845c8920f6b59916ce5e4f96aaac7abf550c5c98d00425",
+      "canonicalSha256": "39180d3c146a371ed4a29de913dc3cd3bd558e95bffdef51837d2169d0794a4e"
+    },
+    "response": {
+      "schemaVersion": "candidate-internal-retention-response-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/meaning-1-response.json",
+      "fileSha256": "dc0938f1494b6ee5d40de60694dee39f0bc8faee868286caf89ab12fbcc87aab",
+      "canonicalSha256": "2f83db26628c9c345a213b9bdbda2ab1dd77252011d3e9ac7292681d7dba21e7"
+    },
+    "result": {
+      "schemaVersion": "candidate-internal-retention-result-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/meaning-1-result.json",
+      "fileSha256": "7e37e49f3a282ce5346be044ceeb2226429e6b176923ee2275a9fb9d9a03b801",
+      "canonicalSha256": "08aca649bc2f1bb2f231d6b66fd3167b8fee3862a322b4fddeb0a59609d8c16b"
+    }
+  },
+  "status": "requires-new-meaning-judgment",
+  "unresolved": [
+    {
+      "candidateId": "candidate-0002",
+      "blockOrdinal": 3,
+      "endpoints": [
+        {
+          "status": "unresolved",
+          "sourceSegmentId": 3931,
+          "side": "start",
+          "reason": "window-origin-is-not-speech-onset"
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0002",
+      "blockOrdinal": 5,
+      "endpoints": [
+        {
+          "status": "unresolved",
+          "sourceSegmentId": 3953,
+          "side": "start",
+          "reason": "window-origin-is-not-speech-onset"
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0003",
+      "blockOrdinal": 4,
+      "endpoints": [
+        {
+          "status": "unresolved",
+          "sourceSegmentId": 9885,
+          "side": "start",
+          "reason": "boundary-inside-token-or-not-unique"
+        }
+      ]
+    }
+  ],
+  "nextAction": "意味を保つ別の既存ID範囲を新規判断する。切断可能時刻の一覧・補間・近傍移動は使わない。"
+}

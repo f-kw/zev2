@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "candidate-internal-edit-review-interface-verification-v001",
+  "status": "passed",
+  "scope": "interface-and-local-file-delivery; no-human-video-quality-judgment",
+  "origin": "http://127.0.0.1:52714",
+  "allowedFiles": [
+    "edited.mp4",
+    "old.mp4",
+    "report.md",
+    "review.html",
+    "review.md",
+    "synced.mp4"
+  ],
+  "httpChecks": [
+    {
+      "file": "old.mp4",
+      "check": "metadata",
+      "status": 200,
+      "sizeBytes": 110090024
+    },
+    {
+      "file": "old.mp4",
+      "check": "range-exact-bytes",
+      "request": "bytes=0-15",
+      "status": 206,
+      "bytes": 16
+    },
+    {
+      "file": "old.mp4",
+      "check": "range-exact-bytes",
+      "request": "bytes=110090008-",
+      "status": 206,
+      "bytes": 16
+    },
+    {
+      "file": "synced.mp4",
+      "check": "metadata",
+      "status": 200,
+      "sizeBytes": 109742508
+    },
+    {
+      "file": "synced.mp4",
+      "check": "range-exact-bytes",
+      "request": "bytes=0-15",
+      "status": 206,
+      "bytes": 16
+    },
+    {
+      "file": "synced.mp4",
+      "check": "range-exact-bytes",
+      "request": "bytes=109742492-",
+      "status": 206,
+      "bytes": 16
+    },
+    {
+      "file": "edited.mp4",
+      "check": "metadata",
+      "status": 200,
+      "sizeBytes": 75334482
+    },
+    {
+      "file": "edited.mp4",
+      "check": "range-exact-bytes",
+      "request": "bytes=0-15",
+      "status": 206,
+      "bytes": 16
+    },
+    {
+      "file": "edited.mp4",
+      "check": "range-exact-bytes",
+      "request": "bytes=75334466-",
+      "status": 206,
+      "bytes": 16
+    },
+    {
+      "route": "/DECISIONS.md",
+      "check": "unlisted-route-rejected",
+      "status": 404
+    },
+    {
+      "route": "/%2e%2e/.git/config",
+      "check": "unlisted-route-rejected",
+      "status": 404
+    }
+  ],
+  "browserObservation": {
+    "browser": "Microsoft Edge",
+    "allObservedMediaReadyState": 4,
+    "allObservedMediaErrors": null,
+    "oldAndSyncedDurationSeconds": 237.6,
+    "newDurationSeconds": 161.033333,
+    "sceneButtonObservations": [
+      {
+        "scene": 3,
+        "oldSeconds": 125.866666,
+        "newSeconds": 99.9
+      },
+      {
+        "scene": 2,
+        "oldSeconds": 19,
+        "newSeconds": 15.4
+      },
+      {
+        "scene": 2,
+        "comparison": "synced",
+        "oldSeconds": 19,
+        "newSeconds": 15.4
+      },
+      {
+        "scene": 1,
+        "oldSeconds": 0,
+        "newSeconds": 0
+      }
+    ]
+  },
+  "bindings": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/review.html",
+      "fileSha256": "61242ba496c88cd7c81078d9906d349c6148366d4fcf2ecdfc28676b781ab111"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/review.md",
+      "fileSha256": "2438773039e5c196fb2227dd9294ef653fe0d3975aebdf6c1955e8d142dd5c87"
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.py",
+      "fileSha256": "74eddfc7c92aab814a9a342c9b80a9628e0d0d72e1e813de75ebf480c135bf32"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "candidate-internal-edit-preflight-failure-v001",
+  "stage": "raw-acoustic-observation-read",
+  "planBinding": {
+    "schemaVersion": "candidate-internal-edit-fixed-plan-v001",
+    "path": "evals/clip_composition/jobs/presentation/candidate-internal-edit/fixed-plan-v001.json",
+    "fileSha256": "b19bff7fc91e01784085e14d11ef6fbb27c67cbdbaefd8fdd815f445c2f27a1d",
+    "canonicalSha256": "cb1f5241cc95b8b700a95456d8a206cafb5d8666738b42dfaaefe951d0c866ac"
+  },
+  "observedExitCode": 1,
+  "message": "JSON_INVALID at raw observation index 6; formal finite JSON decoder rejects stored raw numeric representation",
+  "observationsChanged": false,
+  "newMeaningJudgments": 0,
+  "fix": "Read immutable raw observation bytes with stable read, verify the existing SHA, then parse original JSON without reserializing or rewriting observations."
+}

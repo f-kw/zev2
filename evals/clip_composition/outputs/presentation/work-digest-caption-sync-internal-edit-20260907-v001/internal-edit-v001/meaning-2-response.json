@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "candidate-internal-retention-response-v001",
+  "requestFileSha256": "f670b38ea80b08cb76b0f4ee9b9cfbfcc1224a965d5257b980e5df03f2756bbc",
+  "answer": {
+    "status": "complete",
+    "candidates": [
+      {
+        "candidateId": "candidate-0001",
+        "meaningPreserved": "相手の存在を疑う導入、見つけて慌てる反応、覗き方への抗議、世界一嫌いという結びを残す。反復する悲鳴は驚きが膨らむ表現として保持する。",
+        "blocks": [
+          {
+            "action": "keep",
+            "startSourceSegmentId": 2595,
+            "endSourceSegmentId": 2660,
+            "roles": [
+              "lead-in",
+              "development",
+              "reaction"
+            ],
+            "reason": "存在確認から発見、リカへの呼びかけ、覗き方への抗議までが一つの反応として続く。『いるやん』の反復は同じ説明の繰り返しではなく、慌て方そのものなので連続して残す。"
+          },
+          {
+            "action": "drop",
+            "startSourceSegmentId": 2661,
+            "endSourceSegmentId": 2669,
+            "roles": [
+              "dispensable"
+            ],
+            "reason": "上へ行くよう促す操作上の呼びかけは、覗き方が怖いという場面の意味や最後の抗議に必要ない。"
+          },
+          {
+            "action": "keep",
+            "startSourceSegmentId": 2670,
+            "endSourceSegmentId": 2693,
+            "roles": [
+              "payoff",
+              "reaction"
+            ],
+            "reason": "直前の覗き方への抗議から『世界一嫌い』という強い結びへつながる。移動の指示を挟まなくても、対象と反応が維持される。"
+          }
+        ]
+      },
+      {
+        "candidateId": "candidate-0002",
+        "meaningPreserved": "逃走と遅い走りの前提、急加速に驚く発言、捕まって棺のような場所へ入れられた結果を保持する。急加速への同文の反応は後半の発話を一度残し、捕縛後の戸惑いまで連続させる。",
+        "blocks": [
+          {
+            "action": "keep",
+            "startSourceSegmentId": 3877,
+            "endSourceSegmentId": 3899,
+            "roles": [
+              "lead-in",
+              "development"
+            ],
+            "reason": "逃げる必要に気づき、走ってもこの速さだと確かめる部分を残す。後の急加速との対比を理解する前提になる。"
+          },
+          {
+            "action": "drop",
+            "startSourceSegmentId": 3900,
+            "endSourceSegmentId": 3941,
+            "roles": [
+              "duplicate",
+              "dispensable"
+            ],
+            "reason": "走りの速さの繰り返しと進行方向の自己確認を除く。急加速への同じ言葉は続く発話にもあるため、ここでの一度目を除いても驚き自体を失わない。"
+          },
+          {
+            "action": "keep",
+            "startSourceSegmentId": 3942,
+            "endSourceSegmentId": 3992,
+            "roles": [
+              "reaction",
+              "development",
+              "payoff"
+            ],
+            "reason": "『おい、急に速くなった!』という後半の反応から、捕まった状況、場所への戸惑い、棺のような場所の説明までを一続きで残す。遅い走りから急加速への落差と、逃走の結末の両方を伝えられる。"
+          }
+        ]
+      },
+      {
+        "candidateId": "candidate-0003",
+        "meaningPreserved": "怖かったという感想から、カメラの角度と予想を外す時間差の巧さを説明し、覗くだけでも怖い、今年一だったという感想で締める。",
+        "blocks": [
+          {
+            "action": "drop",
+            "startSourceSegmentId": 9763,
+            "endSourceSegmentId": 9778,
+            "roles": [
+              "digression"
+            ],
+            "reason": "ペコラだったかという冒頭の確認は、ここで残す怖さや演出の振り返りへ必要な前提を与えない。"
+          },
+          {
+            "action": "keep",
+            "startSourceSegmentId": 9779,
+            "endSourceSegmentId": 9845,
+            "roles": [
+              "lead-in",
+              "reaction",
+              "development"
+            ],
+            "reason": "怖かったという全体感想から、角度を使う怖がらせ方への抗議と評価までを残す。単なる称賛ではなく具体的に何が怖いかを示す導入になる。"
+          },
+          {
+            "action": "drop",
+            "startSourceSegmentId": 9846,
+            "endSourceSegmentId": 9886,
+            "roles": [
+              "digression",
+              "dispensable"
+            ],
+            "reason": "ボタン連打という操作の説明と、その後の言い出しの『いや』を除く。次の『カメラワークと今回時間差怖かった』が演出の話題を自分で明示するので、操作説明を前提にしない。"
+          },
+          {
+            "action": "keep",
+            "startSourceSegmentId": 9887,
+            "endSourceSegmentId": 10020,
+            "roles": [
+              "development"
+            ],
+            "reason": "『カメラワークと今回時間差怖かった』という明確な主題から、ホラーに慣れると来そうな場所が分かるという前提、その予想と異なる場所で驚かされるという説明までを連続して残す。言い出しの『いや』が無くても意味と接続は保たれる。"
+          },
+          {
+            "action": "drop",
+            "startSourceSegmentId": 10021,
+            "endSourceSegmentId": 10123,
+            "roles": [
+              "digression",
+              "duplicate"
+            ],
+            "reason": "別作品の思い出とトイレの細部についての長い例示は、予想を外して怖がらせるという説明に新しい結論を加えない。覗く怖さは最初の候補とこの候補の角度への感想で既に示されている。"
+          },
+          {
+            "action": "keep",
+            "startSourceSegmentId": 10124,
+            "endSourceSegmentId": 10182,
+            "roles": [
+              "payoff",
+              "reaction"
+            ],
+            "reason": "『ただ覗くだけ』から怖がらされた感想と『今年一』、驚かせ方が上手いという結びを残す。覗き方への反応を回収する言葉として独立して意味が通る。"
+          },
+          {
+            "action": "drop",
+            "startSourceSegmentId": 10183,
+            "endSourceSegmentId": 10240,
+            "roles": [
+              "digression"
+            ],
+            "reason": "赤ちゃんを盾にできたゲーム上の事情は、今回の演出の怖さを締めくくった後の別の論点なので除く。"
+          }
+        ]
+      }
+    ]
+  },
+  "judgmentNote": "第1案の未確定境界による不採用を受けた新規の意味判断。急加速の同文発話を後半の一度へ置き換え、捕縛後の説明まで一つの保持範囲とした。感想の再開は主題を明示する『カメラワークと』からとした。前提・急加速への驚き・捕縛の結末・演出への感想は削っていない。新しい時刻や切断可能位置の一覧は使わず、本文として同等に意味が通る既存ID範囲を選び直した。"
+}

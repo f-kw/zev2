@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "candidate-internal-edit-received-instruction-record-v001",
+  "recordId": "received-internal-edit-instructions-002-004-20260907",
+  "instructions": [
+    "ZEV進行管理２ 指示-002",
+    "ZEV進行管理２ 指示-003",
+    "ZEV進行管理２ 指示-004"
+  ],
+  "origin": {
+    "kind": "record-of-received-instructions; not-new-approval",
+    "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6a9d1cb7-b3c0-83ee-ae3a-613c9dc53f08"
+  },
+  "instruction002": "人間レビューを正式記録し、字幕ずれ調査・修正と同一映像QCの後、採用済み3候補内部の新規意味判断、ID検査、決定的昇格、既存字幕表示区切りSkillの無変更利用、Core、新版動画、technical QC、来歴、旧新版比較、report、commit/push、Drive/MANIFEST同期、最終AUDIT_ONLYまで自律続行。候補再探索、自由Planner、API通信、新素材、Gemini追加実験、Goal改訂、規約緩和、固定尺短縮、導入自由生成は禁止。",
+  "instruction003": "decision: continue。同じ映像での字幕修正に、事前固定したローカルモデルと既存確定本文の音響観測を使用。観測、ID対応検査、時刻正本への決定的昇格を分け、未確定境界は補正しない。旧版を保持し、同一映像のrenderer/QC完了後に内部編集へ続行。",
+  "instruction004": "decision: continue。同じ音響観測を新しい内部切断にも使用可。意味判断で既存IDを選ぶ→存在・所属・順序・保持範囲の検査→音響時刻解決の順序。音響時刻や切断可能位置を意味判断へ渡さない。未確定の新切断は採用せず、意味上必要な内容を失わない別IDの新規判断へ戻る。近傍移動・補間・平均は禁止。旧候補外端継承は音響補正未適用と明記。同一映像QCを先に完了し、新版動画・QC・最終監査まで進める。",
+  "humanQuality": "pending-final-five-question-review"
+}
