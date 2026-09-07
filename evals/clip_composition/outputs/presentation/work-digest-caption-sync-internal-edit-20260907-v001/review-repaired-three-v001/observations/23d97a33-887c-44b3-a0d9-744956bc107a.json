@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "digest-three-caption-human-review-v001",
+  "instruction": "ZEV進行管理２ 指示-008",
+  "request": {
+    "targetId": "place",
+    "answers": {
+      "start": "問題なし",
+      "end": "問題なし"
+    },
+    "memo": "",
+    "requestId": "23d97a33-887c-44b3-a0d9-744956bc107a"
+  },
+  "targetBinding": {
+    "id": "place",
+    "title": "3. どこ？",
+    "question": "「どこ?」の出始めが変わらず、消え方が自然になったか。",
+    "startFrame": 2550,
+    "endFrame": 3150,
+    "fields": [
+      {
+        "id": "start",
+        "label": "出始め"
+      },
+      {
+        "id": "end",
+        "label": "消え方"
+      }
+    ],
+    "originalInstructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000016",
+    "text": "どこ?",
+    "originalAtomOccurrenceIds": [
+      "digest-internal-edit-20260907-v002-atom-000139",
+      "digest-internal-edit-20260907-v002-atom-000140",
+      "digest-internal-edit-20260907-v002-atom-000141"
+    ],
+    "originalOutputFrames": {
+      "startFrame": 2673,
+      "endFrameExclusive": 2918
+    },
+    "durationSeconds": 20.0,
+    "repairedInstructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+    "repairedOutputFrames": {
+      "startFrame": 2673,
+      "endFrameExclusive": 2708
+    },
+    "sourceSegmentIds": [
+      3967,
+      3968,
+      3969
+    ],
+    "repair": "human-end-only"
+  },
+  "completedMediaBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/render/presentation-rendered-v002.mp4",
+    "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+  },
+  "technicalManifestBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/manifest.json",
+    "fileSha256": "16b4d341adf2a747b8f1f055eace17d1dad0da3ba6085698580eec8f7d97e76d"
+  },
+  "status": "all-items-no-issue",
+  "observedAt": "2026-09-07T13:03:16.857954+00:00"
+}
