@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: only acoustic evidence changes; all 37 captions, current frames and identities are preserved
+ok 1 - only acoustic evidence changes; all 37 captions, current frames and identities are preserved
+  ---
+  duration_ms: 20.16475
+  ...
+# Subtest: unresolved observed onset fires the unchanged selector; it does not imply a human defect or fix
+ok 2 - unresolved observed onset fires the unchanged selector; it does not imply a human defect or fix
+  ---
+  duration_ms: 2.840125
+  ...
+# Subtest: observation text, identity and duplicate records fail closed
+ok 3 - observation text, identity and duplicate records fail closed
+  ---
+  duration_ms: 8.327625
+  ...
+# Subtest: source timing drift and human approval injection are rejected
+ok 4 - source timing drift and human approval injection are rejected
+  ---
+  duration_ms: 6.359125
+  ...
+# Subtest: failed observation stays unavailable and is not silently converted to review success
+ok 5 - failed observation stays unavailable and is not silently converted to review success
+  ---
+  duration_ms: 2.572542
+  ...
+# Subtest: absolute sensor bindings are streamed and byte/hash changes are rejected
+ok 6 - absolute sensor bindings are streamed and byte/hash changes are rejected
+  ---
+  duration_ms: 11.657416
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 423.758625

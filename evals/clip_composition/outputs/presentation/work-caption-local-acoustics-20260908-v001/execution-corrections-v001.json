@@ -1,0 +1,25 @@
+{
+  "frozenModelWindowsSourceCaptionsAndSelectorUnchangedAcrossRepairs": true,
+  "groundTruthReadBeforeObservation": false,
+  "sensorImplementationRepairs": [
+    {
+      "ordinal": 1,
+      "failure": "Alignment was given padded feature length for a short local audio window. Raw model units extended into the padded silence.",
+      "change": "Pass floor(actual decoded audio samples / installed hop length); preserve raw alignment before validation.",
+      "failingLog": "observation-execution-v001.log",
+      "rawDiagnostic": "diagnostic-v001/first-window-raw-v001.json",
+      "beforeImplementation": "observer-before-local-frame-fix-v001.py"
+    },
+    {
+      "ordinal": 2,
+      "failure": "numpy.bool_ from acoustic comparisons could not be serialized.",
+      "change": "Convert returned scalar times/probabilities to Python floats; serialize fully before opening a new output file. Use a fresh observations-v003 directory.",
+      "failingLog": "observation-execution-v002.log",
+      "partialFailedFile": "digest-before-caption-0001-observation-v001.json",
+      "beforeImplementation": "observer-before-json-scalar-fix-v002.py"
+    }
+  ],
+  "otherSetupCorrection": "Typecheck command initially omitted the installed Node declaration path; corrected without installation. Adapter parameter type corrected during ordinary development.",
+  "initialModelRunsNotInEvaluation": 3,
+  "modelRunAccounting": "Two failed formal attempts plus one exact-window raw diagnostic; observations-v003 is the only admitted result set. No best-result selection."
+}

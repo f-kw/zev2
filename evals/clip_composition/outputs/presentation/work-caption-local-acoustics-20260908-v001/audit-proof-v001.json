@@ -1,0 +1,1846 @@
+{
+  "instruction": "ZEV進行管理２ 指示-018",
+  "baselineCommit": "fff354a39d805f3436121ea86784ff0d029f7ba9",
+  "purpose": "AUDIT_ONLY: automatic sensor evidence and unchanged review selector; no automatic repair",
+  "conclusion": "遠方接続の観測不足4→0、既知問題3/3を要確認へ。遠方4/4要確認、ダイジェスト8→12要確認で、さらなる確認件数削減は未実証。",
+  "report": {
+    "path": "docs/reports/caption-local-acoustic-observation-v001.md",
+    "bytes": 15467,
+    "fileSha256": "b02aa8cc1ef9bd05f01963a73db9dc3c056e42cea4e4a8d91f59d47ef4f95c8b"
+  },
+  "implementation": [
+    {
+      "path": "evals/clip_composition/caption_local_acoustics_v001.py",
+      "bytes": 20396,
+      "fileSha256": "258fd83dfb82886e5edadbc5b94b6768b9b9060e52e9262173a4e73743d3568f"
+    },
+    {
+      "path": "evals/clip_composition/test_caption_local_acoustics_v001.py",
+      "bytes": 4863,
+      "fileSha256": "c7addc12e4da81a074d2d3a805707cb8cb84c90392ba2123c6ed1e927a5a64d7"
+    },
+    {
+      "path": "evals/clip_composition/caption_local_acoustics_evaluation_v001.mts",
+      "bytes": 7884,
+      "fileSha256": "bbca584c8183b9387cf5346813a1eab04393ef25e321d69a7902b1ce39d578b6"
+    },
+    {
+      "path": "evals/clip_composition/caption_local_acoustics_evaluation_v001.test.mts",
+      "bytes": 4024,
+      "fileSha256": "39c7328b86d4b0c2b82c2ff23efeff5082757a66d2cf4ccbd59a5b1468130816"
+    }
+  ],
+  "freezeBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-caption-local-acoustics-20260908-v001/pre-observation-freeze-v003.json",
+    "bytes": 888569,
+    "fileSha256": "a65a52b05c824b27a7d310b155363b40b42bba2facf2fdf3a2f907112d4c88c1"
+  },
+  "selectorBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/packages/shared/src/caption-review-selector-v001.ts",
+    "bytes": 2752,
+    "fileSha256": "3b0e9b7d5ff1cd1eb599c4635c264e8c3a430307d9a7fe530f9453819998fbed"
+  },
+  "modelBindings": [
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/snapshots/f0fe81560cb8b68660e564f55dd99207059c092e/config.json",
+      "bytes": 2796,
+      "fileSha256": "d86b7a7664a12559d644aa210a32ce9a7e03913e794b7ea4fb7182de69e273a7"
+    },
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/snapshots/f0fe81560cb8b68660e564f55dd99207059c092e/model.bin",
+      "bytes": 3086912962,
+      "fileSha256": "bf2a9746382e1aa7ffff6b3a0d137ed9edbd9670c3b87e5d35f5e85e70d0333a"
+    },
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/snapshots/f0fe81560cb8b68660e564f55dd99207059c092e/tokenizer.json",
+      "bytes": 2203239,
+      "fileSha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/snapshots/f0fe81560cb8b68660e564f55dd99207059c092e/vocabulary.txt",
+      "bytes": 459861,
+      "fileSha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    }
+  ],
+  "rule": {
+    "version": "caption-local-acoustics-window-v001",
+    "modelSelection": "Same cached large-v2 CT2 model and CPU float32 as the existing fixed-text observer; no comparison.",
+    "initial": "For each original STT chunk containing target IDs, hull of adopted-media intersection, original target STT intervals and current display mapped to the source, clipped to that chunk. Outward conversion to audio samples only.",
+    "context": "Ordered original STT units intersecting the window, plus all target units in that chunk, closed to a contiguous original ID range. Text and IDs are fixed; no transcription.",
+    "retry": "If either target endpoint contacts the window edge, retry once with the complete original chunk and all its fixed text. If already the full chunk, do not retry. No other retry condition.",
+    "edge": "The first/last attention time-grid cell (one model alignment stride) is edge contact. Also unresolved: zero-duration group, target boundary inside a token group, incomplete coverage, nonpositive target interval.",
+    "resolution": "Unique means one exact structural token boundary away from the window edge, not perceptual certainty. No interpolation, offsets, averaging, clipping or timing promotion.",
+    "limit": "Existing model maximum audio window; never silently truncate oversized chunks. At most two observations per caption/chunk."
+  },
+  "summaries": [
+    {
+      "caseId": "digest-before",
+      "phase": "before",
+      "total": 33,
+      "evaluated": 8,
+      "issues": 3,
+      "noIssues": 5,
+      "reviewRequired": 12,
+      "insufficientEvidence": 0,
+      "caughtIssues": 3,
+      "extraNoIssues": 5,
+      "missedIssues": [],
+      "bySignal": [
+        {
+          "signal": "nonpositive-recognition",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "unresolved-acoustic-boundary",
+          "selected": 11,
+          "issues": 3,
+          "noIssues": 4
+        },
+        {
+          "signal": "acoustic-outside-adopted-media",
+          "selected": 1,
+          "issues": 0,
+          "noIssues": 1
+        },
+        {
+          "signal": "acoustic-display-disjoint",
+          "selected": 1,
+          "issues": 0,
+          "noIssues": 1
+        },
+        {
+          "signal": "caption-overlap",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        }
+      ],
+      "audioObserved": 33,
+      "uniqueBoundaryPairs": 22,
+      "startResolved": 25,
+      "endResolved": 29,
+      "retriedCaptions": 9,
+      "unresolvedBoundaryReviews": 11,
+      "previous": {
+        "reviewRequired": 8,
+        "insufficientEvidence": 0,
+        "caughtIssues": 3,
+        "extraNoIssues": 5
+      },
+      "insufficientEvidenceReduction": 0,
+      "transitions": [
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000001",
+          "text": "え?いるんでしょ?",
+          "previous": {
+            "status": "review-required",
+            "signals": [
+              "acoustic-outside-adopted-media",
+              "acoustic-display-disjoint"
+            ],
+            "reasons": [
+              "対応する音響観測の区間が、採用映像の区間外にあります。",
+              "確定できた音響観測の区間と、字幕表示の区間が重なりません。"
+            ],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "issue",
+          "startBoundary": {
+            "resolved": false,
+            "candidateMs": 1268606.625,
+            "edgeContact": false,
+            "reason": "nonpositive-cross-chunk-target-interval",
+            "unitOrdinal": 2
+          },
+          "endBoundary": {
+            "resolved": false,
+            "candidateMs": 1268606.625,
+            "edgeContact": false,
+            "reason": "nonpositive-cross-chunk-target-interval",
+            "unitOrdinal": 7
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000002",
+          "text": "あーもういるやん",
+          "previous": {
+            "status": "review-required",
+            "signals": [
+              "acoustic-outside-adopted-media"
+            ],
+            "reasons": [
+              "対応する音響観測の区間が、採用映像の区間外にあります。"
+            ],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "no-issue",
+          "startBoundary": {
+            "resolved": false,
+            "candidateMs": 1268881,
+            "edgeContact": false,
+            "reason": "nonpositive-token-group",
+            "unitOrdinal": 7
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1269001,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 11
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000003",
+          "text": "これもういるやん",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1269001,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 12
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1269821,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 16
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000004",
+          "text": "いるやんいるやん",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1269821,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 17
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1271041,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 22
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000005",
+          "text": "もうリカちゃんやめてー!",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": false,
+            "candidateMs": 1271041,
+            "edgeContact": false,
+            "reason": "nonpositive-token-group",
+            "unitOrdinal": 23
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1273741,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 30
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000006",
+          "text": "リカー!",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1273741,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 31
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1275141,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 34
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000007",
+          "text": "もう勘弁してーよ",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1275141,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 35
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1277981,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 40
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000008",
+          "text": "この覗き方やめろ!",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1277981,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 41
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1279621,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 48
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000009",
+          "text": "え、もうやだー",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1283520,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 66
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1284620,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 71
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000010",
+          "text": "もうこいつの覗き方もう世界一嫌い!",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1284000,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 3
+          },
+          "endBoundary": {
+            "resolved": false,
+            "candidateMs": 1287560,
+            "edgeContact": false,
+            "reason": "nonpositive-token-group",
+            "unitOrdinal": 15
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000011",
+          "text": "逃げるやつ?",
+          "previous": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary",
+              "acoustic-outside-adopted-media"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。",
+              "対応する音響観測の区間が、採用映像の区間外にあります。"
+            ],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary",
+              "acoustic-outside-adopted-media"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。",
+              "対応する音響観測の区間が、採用映像の区間外にあります。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "no-issue",
+          "startBoundary": {
+            "resolved": false,
+            "candidateMs": 1950000,
+            "edgeContact": true,
+            "reason": "window-edge-does-not-establish-speech-boundary",
+            "unitOrdinal": 1
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1961140,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 6
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000012",
+          "text": "逃げるんだ",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1960902,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 7
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1963482,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 10
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000013",
+          "text": "でもこいつ走りでこれだよ",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1963482,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 11
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1967802,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 19
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000014",
+          "text": "おい、急に速くなった!",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1990580,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 10
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1995960,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 18
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000015",
+          "text": "なんかグロいやつに捕まってる",
+          "previous": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "issue",
+          "startBoundary": {
+            "resolved": false,
+            "candidateMs": 2010000,
+            "edgeContact": true,
+            "reason": "window-edge-does-not-establish-speech-boundary",
+            "unitOrdinal": 1
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 2025180,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 9
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000016",
+          "text": "どこ?",
+          "previous": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "issue",
+          "startBoundary": {
+            "resolved": false,
+            "candidateMs": 2040000,
+            "edgeContact": true,
+            "reason": "window-edge-does-not-establish-speech-boundary",
+            "unitOrdinal": 1
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 2053840,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 3
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000017",
+          "text": "何これ?",
+          "previous": {
+            "status": "review-required",
+            "signals": [
+              "acoustic-display-disjoint"
+            ],
+            "reasons": [
+              "確定できた音響観測の区間と、字幕表示の区間が重なりません。"
+            ],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "acoustic-display-disjoint"
+            ],
+            "reasons": [
+              "確定できた音響観測の区間と、字幕表示の区間が重なりません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "no-issue",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 2053840,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 4
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 2058860,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 6
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000018",
+          "text": "なんか棺みたいなところに入れられてる!",
+          "previous": {
+            "status": "review-required",
+            "signals": [
+              "acoustic-outside-adopted-media"
+            ],
+            "reasons": [
+              "対応する音響観測の区間が、採用映像の区間外にあります。"
+            ],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "no-issue",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 2058860,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 7
+          },
+          "endBoundary": {
+            "resolved": false,
+            "candidateMs": 2065260,
+            "edgeContact": false,
+            "reason": "nonpositive-token-group",
+            "unitOrdinal": 18
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000019",
+          "text": "まぁでも怖かったね",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 5919080,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 31
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5923540,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 35
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000020",
+          "text": "やっぱここの会社さ、アングル攻めんのやめてほしい",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 5923380,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 6
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5928740,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 24
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000021",
+          "text": "マジで怖い",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 5928740,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 25
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5930520,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 29
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000022",
+          "text": "なんかさぁアングルで怖がらせんのマジ上手いと思うここの会社",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 5930720,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 60
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5937940,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 83
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000023",
+          "text": "カメラワークと今回時間差怖かった",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": false,
+            "candidateMs": 5949280,
+            "edgeContact": false,
+            "reason": "nonpositive-token-group",
+            "unitOrdinal": 4
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5952580,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 15
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000024",
+          "text": "いや分かってるよ",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 5952580,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 16
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5955500,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 20
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000025",
+          "text": "なんかやっぱさ",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 5955500,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 21
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5956160,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 24
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000026",
+          "text": "ホラーゲーやってるとさなんか分かってくるじゃん",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 5956160,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 25
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5959740,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 41
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000027",
+          "text": "あーここ来そうだなみたいなの",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 5959740,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 42
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5961920,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 49
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000028",
+          "text": "ここの会社すごいのがさ",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 5961920,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 50
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5964640,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 57
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000029",
+          "text": "いやもうなんか来るよなっていうところじゃないところで",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 5964760,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 87
+          },
+          "endBoundary": {
+            "resolved": false,
+            "candidateMs": 5969980,
+            "edgeContact": true,
+            "reason": "window-edge-does-not-establish-speech-boundary",
+            "unitOrdinal": 98
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000030",
+          "text": "油断させてビビらせてくるのがマジでここの会社多いなって思う",
+          "previous": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "no-issue",
+          "startBoundary": {
+            "resolved": false,
+            "candidateMs": 5970000,
+            "edgeContact": true,
+            "reason": "window-edge-does-not-establish-speech-boundary",
+            "unitOrdinal": 1
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 5976400,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 25
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000031",
+          "text": "ただ覗くだけであんな毎回さ怖がらさせられてとんでもねえ",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 6001560,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 5
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 6007200,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 26
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000032",
+          "text": "今年一でしたわ今年一",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 6007200,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 24
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 6011100,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 29
+          }
+        },
+        {
+          "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000033",
+          "text": "いやびっくりポイントマジうまいと思うほんとに",
+          "previous": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "current": {
+            "status": "no-review-signal",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 6011100,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 30
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 6016580,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 47
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "distant-before",
+      "phase": "before",
+      "total": 4,
+      "evaluated": 3,
+      "issues": 3,
+      "noIssues": 0,
+      "reviewRequired": 4,
+      "insufficientEvidence": 0,
+      "caughtIssues": 3,
+      "extraNoIssues": 0,
+      "missedIssues": [],
+      "bySignal": [
+        {
+          "signal": "nonpositive-recognition",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "unresolved-acoustic-boundary",
+          "selected": 3,
+          "issues": 2,
+          "noIssues": 0
+        },
+        {
+          "signal": "acoustic-outside-adopted-media",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "acoustic-display-disjoint",
+          "selected": 1,
+          "issues": 1,
+          "noIssues": 0
+        },
+        {
+          "signal": "caption-overlap",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        }
+      ],
+      "audioObserved": 4,
+      "uniqueBoundaryPairs": 1,
+      "startResolved": 2,
+      "endResolved": 3,
+      "retriedCaptions": 2,
+      "unresolvedBoundaryReviews": 3,
+      "previous": {
+        "reviewRequired": 0,
+        "insufficientEvidence": 4,
+        "caughtIssues": 0,
+        "extraNoIssues": 0
+      },
+      "insufficientEvidenceReduction": 4,
+      "transitions": [
+        {
+          "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000001",
+          "text": "え、このカメラもさね、ビビらせる感じやめてほしい",
+          "previous": {
+            "status": "insufficient-evidence",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": [
+              "saved-acoustic-observation-missing"
+            ]
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "unevaluated",
+          "startBoundary": {
+            "resolved": false,
+            "candidateMs": 660000,
+            "edgeContact": true,
+            "reason": "window-edge-does-not-establish-speech-boundary",
+            "unitOrdinal": 1
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 668500,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 20
+          }
+        },
+        {
+          "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000002",
+          "text": "マジ今んところ今年一怖すぎて笑った",
+          "previous": {
+            "status": "insufficient-evidence",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": [
+              "saved-acoustic-observation-missing"
+            ]
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "issue",
+          "startBoundary": {
+            "resolved": false,
+            "candidateMs": 1410000,
+            "edgeContact": true,
+            "reason": "window-edge-does-not-establish-speech-boundary",
+            "unitOrdinal": 1
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1414880,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 13
+          }
+        },
+        {
+          "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000003",
+          "text": "ビデオ見る気?",
+          "previous": {
+            "status": "insufficient-evidence",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": [
+              "saved-acoustic-observation-missing"
+            ]
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "acoustic-display-disjoint"
+            ],
+            "reasons": [
+              "確定できた音響観測の区間と、字幕表示の区間が重なりません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "issue",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1414900,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 14
+          },
+          "endBoundary": {
+            "resolved": true,
+            "candidateMs": 1422560,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 20
+          }
+        },
+        {
+          "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000004",
+          "text": "もう勘弁してよ夜中になんか映るようなやつ",
+          "previous": {
+            "status": "insufficient-evidence",
+            "signals": [],
+            "reasons": [],
+            "missingEvidence": [
+              "saved-acoustic-observation-missing"
+            ]
+          },
+          "current": {
+            "status": "review-required",
+            "signals": [
+              "unresolved-acoustic-boundary"
+            ],
+            "reasons": [
+              "保存済み音響観測から、この字幕の開始または終了を個別に確定できません。"
+            ],
+            "missingEvidence": []
+          },
+          "humanEvaluation": "issue",
+          "startBoundary": {
+            "resolved": true,
+            "candidateMs": 1422560,
+            "edgeContact": false,
+            "reason": null,
+            "unitOrdinal": 21
+          },
+          "endBoundary": {
+            "resolved": false,
+            "candidateMs": 1426620,
+            "edgeContact": false,
+            "reason": "nonpositive-token-group",
+            "unitOrdinal": 35
+          }
+        }
+      ]
+    }
+  ],
+  "tests": {
+    "python": 12,
+    "typescriptFinal": 64,
+    "total": 76,
+    "failed": 0,
+    "typecheck": {
+      "baselineCommit": "fff354a39d805f3436121ea86784ff0d029f7ba9",
+      "baselineEntry": "caption_review_selector_v001.mts and its test (unchanged)",
+      "diagnosticsExactlyIdentical": true,
+      "existingErrors": 121,
+      "newFileErrors": 0,
+      "typecheckPass": false,
+      "command": "node node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/tsc.js --noEmit --strict --skipLibCheck --allowImportingTsExtensions --target es2022 --module nodenext --moduleResolution nodenext --types node --typeRoots node_modules/.pnpm/@types+node@25.9.1/node_modules/@types <entry and test>",
+      "currentLog": "typecheck-current-v004.log",
+      "baselineLog": "typecheck-baseline-v001.log",
+      "diagnosticsSha256": "82eeff30482b7ac52be519daea8b239a222fae1e6d01745fddd661d9a8df3e22"
+    },
+    "diffCheck": {
+      "implementationAndAllOtherFiles": "passed",
+      "fullDiffExitCode": 2,
+      "onlyException": "evals/clip_composition/outputs/presentation/work-caption-local-acoustics-20260908-v001/digest-before-caption-0001-observation-v001.json",
+      "reason": "Original failed JSON serialization stopped immediately after a colon and space. Preserve the incomplete raw bytes as failure evidence; never consume this file as sensor input.",
+      "output": "evals/clip_composition/outputs/presentation/work-caption-local-acoustics-20260908-v001/digest-before-caption-0001-observation-v001.json:1120: trailing whitespace.\n+          \"startEdgeContact\": \n"
+    }
+  },
+  "preservation": {
+    "baselineBinding": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-caption-local-acoustics-20260908-v001/preservation-baseline-v001.json",
+      "bytes": 1868397,
+      "fileSha256": "155b87a3f1b338dbbc651f25d93d72e8c8460def3b00072d279e9acaace4a665"
+    },
+    "verifiedFiles": 5546,
+    "unchangedFiles": 5546,
+    "changes": [],
+    "checkedAt": "2026-09-08T10:13:50.399298+00:00"
+  },
+  "ui": {
+    "purpose": "ui-verification",
+    "browser": "Microsoft Edge",
+    "url": "http://127.0.0.1:49573/",
+    "digestVisibleTargetCount": 12,
+    "distantVisibleTargetCount": 4,
+    "selectedText": "ビデオ見る気?",
+    "reason": "確定できた音響観測の区間と、字幕表示の区間が重なりません。",
+    "currentFormalFrames": {
+      "startFrame": 1598,
+      "endFrameExclusive": 1628
+    },
+    "technicalSeekObservedFrame": 1569,
+    "videoReadyState": 4,
+    "videoPaused": true,
+    "repairControlsHiddenUntilHumanIssueAnswer": true,
+    "saveDisabled": true,
+    "approvalHidden": true,
+    "savedChanges": 0,
+    "renderStatus": "",
+    "newHumanJudgments": 0,
+    "renderCount": 0,
+    "savedReviewFiles": 0,
+    "verification": "Native Edge UI selected both cases and a distant target; one-frame forward acknowledged by video frame callback. No review answer, boundary selection, repair save, approval or render."
+  },
+  "observerRepairs": {
+    "frozenModelWindowsSourceCaptionsAndSelectorUnchangedAcrossRepairs": true,
+    "groundTruthReadBeforeObservation": false,
+    "sensorImplementationRepairs": [
+      {
+        "ordinal": 1,
+        "failure": "Alignment was given padded feature length for a short local audio window. Raw model units extended into the padded silence.",
+        "change": "Pass floor(actual decoded audio samples / installed hop length); preserve raw alignment before validation.",
+        "failingLog": "observation-execution-v001.log",
+        "rawDiagnostic": "diagnostic-v001/first-window-raw-v001.json",
+        "beforeImplementation": "observer-before-local-frame-fix-v001.py"
+      },
+      {
+        "ordinal": 2,
+        "failure": "numpy.bool_ from acoustic comparisons could not be serialized.",
+        "change": "Convert returned scalar times/probabilities to Python floats; serialize fully before opening a new output file. Use a fresh observations-v003 directory.",
+        "failingLog": "observation-execution-v002.log",
+        "partialFailedFile": "digest-before-caption-0001-observation-v001.json",
+        "beforeImplementation": "observer-before-json-scalar-fix-v002.py"
+      }
+    ],
+    "otherSetupCorrection": "Typecheck command initially omitted the installed Node declaration path; corrected without installation. Adapter parameter type corrected during ordinary development.",
+    "initialModelRunsNotInEvaluation": 3,
+    "modelRunAccounting": "Two failed formal attempts plus one exact-window raw diagnostic; observations-v003 is the only admitted result set. No best-result selection."
+  },
+  "execution": {
+    "freezeBinding": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-caption-local-acoustics-20260908-v001/pre-observation-freeze-v003.json",
+      "bytes": 888569,
+      "fileSha256": "a65a52b05c824b27a7d310b155363b40b42bba2facf2fdf3a2f907112d4c88c1"
+    },
+    "verificationScriptBinding": {
+      "path": "/tmp/zev018-verify-evidence.py",
+      "bytes": 4644,
+      "fileSha256": "513e346e824235b2f9e4c3993ae5837c616446119585e5c8ba4d0d8bdf8e2bcf"
+    },
+    "captionCount": 37,
+    "fixedInputsReconstructedExactly": true,
+    "humanInputFilesRead": 0,
+    "modelSelectorAndWindowRulesUnchanged": true,
+    "rawAlignmentReplay": "all saved raw words/tokens match interpreted groups and candidates",
+    "windowRetries": "exact frozen expansion; at most two per caption/chunk; final attempt always used",
+    "alignmentCalls": 48,
+    "alignmentElapsedSeconds": 456.3369976239992,
+    "inferenceApiCalls": 0,
+    "downloads": 0,
+    "costUsd": 0,
+    "formalArtifactChanges": 0
+  },
+  "distantEvidence": [
+    {
+      "caseId": "distant-before",
+      "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000001",
+      "text": "え、このカメラもさね、ビビらせる感じやめてほしい",
+      "textIds": [
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000001",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000002",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000003",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000004",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000005",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000006",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000007",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000008",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000009",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000010",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000011",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000012",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000013",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000014",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000015",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000016",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000017",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000018",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000019",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000020",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000021",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000022",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000023",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000024"
+      ],
+      "observationBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-caption-local-acoustics-20260908-v001/observations-v003/distant-before-caption-0001-observation-v001.json",
+        "bytes": 72274,
+        "fileSha256": "5de6c09c46bdd512ca94a7537411a85cd59d3a2a6cb456de9127c968bfd4c425"
+      },
+      "start": {
+        "resolved": false,
+        "candidateMs": 660000.0,
+        "edgeContact": true,
+        "reason": "window-edge-does-not-establish-speech-boundary",
+        "unitOrdinal": 1
+      },
+      "end": {
+        "resolved": true,
+        "candidateMs": 668500.0,
+        "edgeContact": false,
+        "reason": null,
+        "unitOrdinal": 20
+      },
+      "uniqueBoundaryPair": false,
+      "attempts": [
+        {
+          "chunkIndex": 22,
+          "attempts": 2,
+          "windows": [
+            {
+              "startMs": 664333.3125,
+              "endMs": 671316.0,
+              "edgeContact": true
+            },
+            {
+              "startMs": 660000.0,
+              "endMs": 690000.0,
+              "edgeContact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "distant-before",
+      "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000002",
+      "text": "マジ今んところ今年一怖すぎて笑った",
+      "textIds": [
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000025",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000026",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000027",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000028",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000029",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000030",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000031",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000032",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000033",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000034",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000035",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000036",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000037",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000038",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000039",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000040",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000041"
+      ],
+      "observationBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-caption-local-acoustics-20260908-v001/observations-v003/distant-before-caption-0002-observation-v001.json",
+        "bytes": 105543,
+        "fileSha256": "6c56d7d75087fa95d539819483019bc609e3036c1e0344da5d72c50cf29a9353"
+      },
+      "start": {
+        "resolved": false,
+        "candidateMs": 1410000.0,
+        "edgeContact": true,
+        "reason": "window-edge-does-not-establish-speech-boundary",
+        "unitOrdinal": 1
+      },
+      "end": {
+        "resolved": true,
+        "candidateMs": 1414880.0,
+        "edgeContact": false,
+        "reason": null,
+        "unitOrdinal": 13
+      },
+      "uniqueBoundaryPair": false,
+      "attempts": [
+        {
+          "chunkIndex": 47,
+          "attempts": 2,
+          "windows": [
+            {
+              "startMs": 1410000.0,
+              "endMs": 1426649.0,
+              "edgeContact": true
+            },
+            {
+              "startMs": 1410000.0,
+              "endMs": 1440000.0,
+              "edgeContact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "distant-before",
+      "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000003",
+      "text": "ビデオ見る気?",
+      "textIds": [
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000042",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000043",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000044",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000045",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000046",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000047",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000048"
+      ],
+      "observationBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-caption-local-acoustics-20260908-v001/observations-v003/distant-before-caption-0003-observation-v001.json",
+        "bytes": 33547,
+        "fileSha256": "4a20efb5f4492cd1d537855ab58994cace8f1e0e42675982d494fcbe9a5977ba"
+      },
+      "start": {
+        "resolved": true,
+        "candidateMs": 1414900.0,
+        "edgeContact": false,
+        "reason": null,
+        "unitOrdinal": 14
+      },
+      "end": {
+        "resolved": true,
+        "candidateMs": 1422560.0,
+        "edgeContact": false,
+        "reason": null,
+        "unitOrdinal": 20
+      },
+      "uniqueBoundaryPair": true,
+      "attempts": [
+        {
+          "chunkIndex": 47,
+          "attempts": 1,
+          "windows": [
+            {
+              "startMs": 1410000.0,
+              "endMs": 1426649.0,
+              "edgeContact": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "distant-before",
+      "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000004",
+      "text": "もう勘弁してよ夜中になんか映るようなやつ",
+      "textIds": [
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000049",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000050",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000051",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000052",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000053",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000054",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000055",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000056",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000057",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000058",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000059",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000060",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000061",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000062",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000063",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000064",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000065",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000066",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000067",
+        "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000068"
+      ],
+      "observationBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-caption-local-acoustics-20260908-v001/observations-v003/distant-before-caption-0004-observation-v001.json",
+        "bytes": 34612,
+        "fileSha256": "c47a5b129973c28772620a4d88f1e08c371a75aad65d2d39ff8c84be8d862ce3"
+      },
+      "start": {
+        "resolved": true,
+        "candidateMs": 1422560.0,
+        "edgeContact": false,
+        "reason": null,
+        "unitOrdinal": 21
+      },
+      "end": {
+        "resolved": false,
+        "candidateMs": 1426620.0,
+        "edgeContact": false,
+        "reason": "nonpositive-token-group",
+        "unitOrdinal": 35
+      },
+      "uniqueBoundaryPair": false,
+      "attempts": [
+        {
+          "chunkIndex": 47,
+          "attempts": 1,
+          "windows": [
+            {
+              "startMs": 1410000.0,
+              "endMs": 1426649.0,
+              "edgeContact": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "leakageChecks": {
+    "observationInputFiles": [
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/local-stt-response.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/manifest.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/meaning-input.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/instruction.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/renderer-job.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/timeline.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/transcript.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0042.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0042.flac",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0065.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0065.flac",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0066.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0066.flac",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0067.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0067.flac",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0068.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0068.flac",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0197.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0197.flac",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0198.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0198.flac",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0199.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0199.flac",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0200.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0200.flac",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/verification.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/meaning-input.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/instruction.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/renderer-job.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/base-media/timeline.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0022.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0022.flac",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0047.raw.json",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/chunks/chunk-0047.flac"
+    ],
+    "humanAnswerFilesReadForGeneration": 0,
+    "nonAcousticFeaturesComparedTo017": "all 37 exact",
+    "humanAnswersOnlyReadAfterObservationIndexWritten": true
+  },
+  "delivery": "Existing Drive folder; report, summary, this audit packet and repository manifest only. Actual commit and Drive readback recorded in external Drive manifest."
+}

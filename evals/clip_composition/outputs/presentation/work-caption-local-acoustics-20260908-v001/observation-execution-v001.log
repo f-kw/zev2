@@ -1,0 +1,9 @@
+Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+Traceback (most recent call last):
+  File "/Users/kawafmm/workspace/zev2/evals/clip_composition/caption_local_acoustics_v001.py", line 297, in <module>
+    {'freeze': freeze, 'observe': observe}[sys.argv[1]]()
+  File "/Users/kawafmm/workspace/zev2/evals/clip_composition/caption_local_acoustics_v001.py", line 261, in observe
+    interpreted = interpret(effective, words, tokens, plan['targetIds'], stride_ms)
+  File "/Users/kawafmm/workspace/zev2/evals/clip_composition/caption_local_acoustics_v001.py", line 177, in interpret
+    assert math.isfinite(start) and math.isfinite(end) and start >= prior_end and end >= start and end <= duration, 'INVALID_ACOUSTIC_INTERVAL'
+AssertionError: INVALID_ACOUSTIC_INTERVAL
