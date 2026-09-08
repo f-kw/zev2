@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>何を、なぜ削ったのか — 候補採否の確認</title>
+<style>
+:root{color-scheme:light;--ink:#182c30;--muted:#51676b;--line:#d5e0de;--green:#17635a;--red:#9d4236}*{box-sizing:border-box}body{margin:0;background:#f5f7f5;color:var(--ink);font:16px/1.75 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:32px 24px 70px}h1{font-size:clamp(26px,4vw,38px);line-height:1.45;letter-spacing:-.02em;max-width:900px;margin:16px 0}h2{font-size:23px;line-height:1.5;margin:0 0 16px}h3{font-size:18px;line-height:1.6;margin:0 0 12px}p{margin:10px 0}.eyebrow{font-size:13px;letter-spacing:.06em;color:var(--muted)}.intro{font-size:18px;max-width:900px}.status{font-size:13px;border:1px solid var(--line);background:#fff;padding:5px 10px;border-radius:5px;display:inline-block}.panel{background:#fff;border:1px solid var(--line);padding:26px;border-radius:12px;margin:26px 0}.muted,small{color:var(--muted)}.flowrow{display:grid;grid-template-columns:90px 1fr;gap:14px;align-items:center;margin:14px 0}.flow{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}.block{padding:12px 15px;border:1px solid var(--line);border-radius:7px;flex:1;min-width:170px}.keep{background:#edf5f1}.drop{background:#fff0eb;border-color:#dfa99e}.end{background:#f0f1ef}.block b{display:block}.arrow{align-self:center;color:#718282}.legend{font-size:14px}.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}.reason{border-left:4px solid var(--green);padding-left:18px}.loss{border-left:4px solid var(--red);padding-left:18px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid var(--line);padding:20px;border-radius:9px;background:#fff}.num{font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px}.card blockquote{margin:14px 0;padding:12px;background:#f5f6f3;font-size:17px;line-height:1.75;border-radius:5px}.card p{font-size:15px}.key{font-weight:700;color:var(--red)}button{font:inherit;font-size:14px;font-weight:650;color:var(--green);border:1px solid #80a9a1;background:#fff;padding:10px 14px;border-radius:7px;cursor:pointer}button:hover{background:#eaf4ef}button:focus-visible,summary:focus-visible{outline:3px solid #317f75;outline-offset:3px}.watch{margin-top:16px;width:100%;text-align:left}.question{background:#e9f3ed;border-color:#abcbbb}.question h2{font-size:25px}.verdict{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.verdict>div{background:#fff;padding:18px;border-radius:8px}.verdict b{display:block}.player[hidden]{display:none}.player{background:#fff;border:2px solid #85aaa2;border-radius:10px;padding:22px;margin:20px 0;scroll-margin-top:16px}.player h3{font-size:20px}.player video{display:block;width:100%;max-height:510px;background:#111;margin:18px 0;border-radius:6px}.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.playing{font-size:14px;color:var(--muted)}details{border-top:1px solid var(--line);padding:18px 0}summary{font-weight:700;cursor:pointer;font-size:17px}.support{padding-top:18px}.support article{margin:0 0 24px}.support blockquote{margin:8px 0;padding:12px 18px;background:#f0f4f1}.support .watch{width:auto}.footer{font-size:13px;color:var(--muted);margin-top:28px}a{color:var(--green)}@media(max-width:780px){main{padding:20px 16px 48px}.panel{padding:20px}.cards,.two,.verdict{grid-template-columns:1fr}.flowrow{grid-template-columns:1fr}.flow{gap:6px}.block{min-width:120px}.arrow{display:none}}
+</style>
+<main>
+<div class="eyebrow">候補を削った判断の説明</div>
+<h1>実況者の「怖かった理由と感想」を、<br>全部削ってよいか。</h1>
+<p class="intro">AIは、<strong>怖がって反応する2場面を残し、その後に本人が怖さを解説する部分を丸ごと削除</strong>しました。この画面では、何を失う変更なのかと、AIがそう選んだ理由を示します。</p>
+<span class="status">技術検査は完了 · この採否が良い編集かは未判定</span>
+
+<section class="panel" aria-labelledby="change-title">
+<h2 id="change-title">変えたのは、最後のまとまりを残すかどうか</h2>
+<div class="flowrow"><b>変更前</b><div class="flow"><div class="block keep"><b>A 覗かれて嫌がる</b>拒否反応と抗議</div><span class="arrow">→</span><div class="block keep"><b>B 逃げて捕まる</b>予想外の急加速と捕縛</div><span class="arrow">→</span><div class="block drop"><b>C 怖さを語る</b>怖がらせ方の解説と総評</div></div></div>
+<div class="flowrow"><b>今回の案</b><div class="flow"><div class="block keep"><b>A そのまま残す</b>覗かれて嫌がる</div><span class="arrow">→</span><div class="block keep"><b>B そのまま残す</b>逃げて捕まる</div><span class="arrow">→</span><div class="block end"><b>ここで終了</b>Cは全削除</div></div></div>
+<p class="legend">AとBの内容・順序は同じです。Cの約61秒を外し、全体は約161秒から約100秒になりました。短縮量を達成するための選択ではありません。</p>
+</section>
+
+<section class="panel"><h2>AIが削った理由と、その判断で失うもの</h2><div class="two"><div class="reason"><h3>AIの判断</h3><p>「覗かれて嫌がる」「急に速くなって捕まる」という出来事で、怖がる様子と見どころは伝わる。後から怖さを説明しなくても、その2場面は理解できるので、Cは必須ではない。</p></div><div class="loss"><h3>ただし、削る代償がある</h3><p>本人が<strong>なぜ怖かったのかを言葉にする面白さ</strong>と、<strong>「今年一」と振り返る締め</strong>を失う。Cには独自の内容があり、同じ話の繰り返しとして削ったわけではない。</p></div></div></section>
+
+<section aria-labelledby="removed-title"><h2 id="removed-title">削除したCには、実際にこの話が入っていました</h2><p class="muted">以下は保存済みの完成字幕からの抜粋です。説明のため3つに分けていますが、AIが不採用にしたのはC全体です。</p>
+<div class="cards">
+<article class="card"><div class="num">削除内容 1 / 怖がらせる角度への感想</div><h3>怖がるだけでなく、作り手の見せ方を褒める</h3><blockquote>「アングルで怖がらせんのマジ上手いと思うここの会社」</blockquote><p><span class="key">失うもの：</span>映し方の工夫に気づいて、本人が感想を話す部分。</p><p><strong>AIの考え：</strong>怖さ自体はAの拒否反応で伝わるので、後からの説明は必須ではない。</p><button class="watch" data-clip="angle">この発言を動画で確認 · 18.87秒</button></article>
+<article class="card"><div class="num">削除内容 2 / 予想を外す怖がらせ方の分析</div><h3>来ると思った時には来ず、油断した時に来る</h3><blockquote>「油断させてビビらせてくるのがマジでここの会社多いなって思う」</blockquote><p><span class="key">失うもの：</span>ホラーゲームに慣れた本人の予想まで外される、という解説。</p><p><strong>AIの考え：</strong>Bで予想が外れる出来事を見せれば、解説を付けなくても見どころは成立する。</p><button class="watch" data-clip="timing">この発言を動画で確認 · 27.30秒</button></article>
+<article class="card"><div class="num">削除内容 3 / 遊んだ後の評価</div><h3>「今年一」と感想をまとめて終わる</h3><blockquote>「今年一でしたわ今年一」<br>「いやびっくりポイントマジうまいと思うほんとに」</blockquote><p><span class="key">失うもの：</span>体験を振り返る本人の評価と、感想で締める終わり方。</p><p><strong>AIの考え：</strong>今回の見どころ中心の動画では、この総評を必須の締めとしては残さない。</p><button class="watch" data-clip="closing">この総評を動画で確認 · 14.97秒</button></article>
+</div></section>
+
+<section class="panel question"><h2>確かめたいのは、AIのこの削除理由でよいか</h2><p>「AとBだけで出来事は理解できる」ことを理由に、<strong>本人が怖さを語る面白さと総評まで捨ててよいのか</strong>。ここが今回の判断の分かれ目です。</p><div class="verdict"><div><b>怖がる反応を見せる動画にしたいなら</b><p>AとBで十分に楽しめ、そこで終わっても物足りなくないなら、Cを外す判断に意味があります。</p></div><div><b>本人の語りや感想も楽しむ動画にしたいなら</b><p>Cも見どころです。「出来事の理解には不要」という理由だけで外すのは、目的に合わない可能性があります。</p></div></div><p><strong>感想は「角度の話も面白いから残したい」「反応だけで十分」「総評がないと途中で切れた感じ」など、内容を指した一言で構いません。</strong>採否の正解を当てる必要はありません。</p></section>
+
+<section id="player" class="player" hidden aria-labelledby="player-title"><div class="eyebrow">説明に対応する箇所だけを確認</div><h3 id="player-title"></h3><p id="player-context"></p><video id="evidence-video" controls preload="metadata" playsinline></video><div class="controls"><button id="replay">この区間を最初から再生</button><button id="pause">停止</button><button id="close-player">動画を閉じて説明へ戻る</button><span class="playing" id="play-state" role="status"></span></div></section>
+
+<section class="panel"><h2>必要になった箇所だけ、追加で確かめる</h2>
+<details><summary>Cを外した終わり方が、途中で切れた感じになっていないか</summary><div class="support"><p>新しい動画は、捕まった後に「どこ？」「何これ？」「なんか棺みたいなところに入れられてる！」と反応するところで終わります。その後の感想はありません。</p><p><strong>見る点：</strong>出来事の驚きで終われるか、それとも本人の感想がなくて締まらないか。</p><button class="watch" data-clip="ending">感想を削った後の末尾を確認 · 10.80秒</button><button class="watch" data-clip="closing">削除した総評を確認 · 14.97秒</button></div></details>
+<details><summary>残したAとBは、それぞれ見どころとして十分か</summary><div class="support"><article><h3>A：覗く相手への拒否反応と抗議</h3><blockquote>「この覗き方やめろ！」<br>「もうこいつの覗き方もう世界一嫌い！」</blockquote><p>AIはこの強い拒否反応を独立した見どころとして残しました。<strong>この反応自体を見せる価値があるか</strong>が確認点です。</p><p class="muted">元の判断理由には冒頭の確認文も含まれますが、その発話は完成動画で確認されず、字幕を除外済みです。ここでは実際に残った反応を根拠に確認します。</p><button class="watch" data-clip="first">Aの残した場面を確認 · 15.40秒</button></article><article><h3>B：走る速さを確かめた直後、急加速して捕まる</h3><blockquote>「でもこいつ走りでこれだよ」→「おい、急に速くなった！」→「なんかグロいやつに捕まってる」</blockquote><p>AIは予想が外れて捕まる展開を残しました。<strong>予想から驚きへの流れが伝わり、見せたい場面になっているか</strong>が確認点です。</p><button class="watch" data-clip="second">Bの残した場面を確認 · 84.50秒</button></article></div></details>
+<details><summary>前後を通して見ないと判断できない場合</summary><div class="support"><p>個別の発言だけでは決められない時に使えます。全編の確認は必須ではありません。</p><button class="watch" data-clip="removed">削除したC全体 · 61.13秒</button><button class="watch" data-clip="oldfull">変更前の全体 · 161.03秒</button><button class="watch" data-clip="newfull">今回の案の全体 · 99.90秒</button></div></details>
+</section>
+<p class="footer">この画面は説明と確認用です。再生しても品質合格・採用変更は記録されません。<br><a href="review.md">変更と説明の記録</a> · <a href="report.md">技術検証レポート</a></p>
+</main>
+<script>
+'use strict';
+const clips={
+angle:{src:'old.mp4',start:2997,end:3563,title:'削除した内容1：怖がらせる角度への感想',context:'AIは「怖さはAの反応で伝わる」として外しました。本人が見せ方を語る面白さまで失ってよいかを確かめる箇所です。'},
+timing:{src:'old.mp4',start:3563,end:4382,title:'削除した内容2：予想を外す怖がらせ方の分析',context:'AIは「予想が外れる出来事はBで伝わる」として外しました。本人の分析にも残す価値があるかを確かめる箇所です。'},
+closing:{src:'old.mp4',start:4382,end:4831,title:'削除した内容3：「今年一」という総評',context:'変更前はこの感想がありました。本人の評価を聞くことや、感想で締めることが必要かを確かめる箇所です。'},
+ending:{src:'edited.mp4',start:2673,end:2997,title:'今回の案：感想を削った後の終わり方',context:'「棺みたいなところに入れられてる！」という反応で終わります。驚きで終われるか、感想がなくて物足りないかを確かめる箇所です。'},
+first:{src:'edited.mp4',start:0,end:462,title:'残したA：覗く相手への拒否反応と抗議',context:'実際に残った拒否反応そのものが、独立した見どころとして成立するかを確認します。'},
+second:{src:'edited.mp4',start:462,end:2997,title:'残したB：予想外の急加速から捕縛へ',context:'走る速さへの予想が外れて捕まる展開を、見どころとして残す価値があるかを確認します。'},
+removed:{src:'old.mp4',start:2997,end:4831,title:'削除したC全体：怖かった理由と感想',context:'今回の不採用判断はこのまとまり全体に対するものです。本人の語りと総評を丸ごと外してよいかを確認します。'},
+oldfull:{src:'old.mp4',start:0,end:4831,title:'変更前：A → B → C',context:'怖がる場面2つのあとに、本人の解説と総評があります。'},
+newfull:{src:'edited.mp4',start:0,end:2997,title:'今回の案：A → Bで終了',context:'怖がる場面2つだけを残し、その後の解説と総評を外しています。'}
+};
+const panel=document.getElementById('player'),video=document.getElementById('evidence-video'),state=document.getElementById('play-state');let active=null,opener=null,finished=false;
+function seekStart(){if(active&&video.readyState>=1){finished=false;video.currentTime=active.start/30;state.textContent='確認する箇所を読み込みました。再生で開始します。'}}
+video.addEventListener('loadedmetadata',seekStart);
+for(const b of document.querySelectorAll('[data-clip]'))b.addEventListener('click',()=>{video.pause();active=clips[b.dataset.clip];opener=b;panel.hidden=false;document.getElementById('player-title').textContent=active.title;document.getElementById('player-context').textContent=active.context;video.setAttribute('aria-label',active.title);state.textContent='読み込み中';if(video.getAttribute('src')!==active.src){video.src=active.src;video.load()}else seekStart();panel.scrollIntoView({block:'start',behavior:'instant'});document.getElementById('replay').focus({preventScroll:true})});
+document.getElementById('replay').onclick=async()=>{if(!active)return;seekStart();try{await video.play()}catch{state.textContent='再生できませんでした。もう一度再生してください。'}};
+document.getElementById('pause').onclick=()=>video.pause();
+document.getElementById('close-player').onclick=()=>{video.pause();panel.hidden=true;opener?.focus()};
+video.addEventListener('play',()=>{if(active&&(finished||video.currentTime<active.start/30||video.currentTime>=active.end/30))seekStart();state.textContent='選んだ箇所を再生中 · 区間の終わりで止まります'});
+video.addEventListener('pause',()=>{state.textContent=finished?'この区間はここまでです。説明に戻れます。':'停止中'});
+video.addEventListener('ended',()=>{finished=true;state.textContent='この区間はここまでです。説明に戻れます。'});
+function finish(){if(active&&!video.paused&&video.currentTime>=active.end/30){finished=true;video.pause();video.currentTime=Math.max(active.start/30,(active.end-1)/30);state.textContent='この区間はここまでです。説明に戻れます。'}}
+video.addEventListener('timeupdate',finish);if('requestVideoFrameCallback'in video){const tick=()=>{finish();video.requestVideoFrameCallback(tick)};video.requestVideoFrameCallback(tick)}
+</script></html>
