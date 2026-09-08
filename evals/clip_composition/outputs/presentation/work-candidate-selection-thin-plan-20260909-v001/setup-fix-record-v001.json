@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "thin-plan-setup-fix-record-v0",
+  "count": 1,
+  "cause": "追加した単体検査の疑似文書に文書形式識別子がなく、既存のSHA生成が未定義値を拒否した。",
+  "scope": "新規検査の疑似文書定義のみ。production、契約、素材、候補本文、判定基準は変更していない。",
+  "beforeEvidence": "selection-tests-v001.tap",
+  "afterEvidence": "selection-tests-v002.tap",
+  "afterTests": {
+    "pass": 27,
+    "fail": 0
+  }
+}

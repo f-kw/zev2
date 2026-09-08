@@ -1,0 +1,800 @@
+{
+  "schemaVersion": "thin-plan-existing-media-reuse-input-v0",
+  "planBinding": {
+    "schemaVersion": "thin-plan-candidate-selection-evaluation-v0",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/fixed-plan.json",
+    "fileSha256": "39542e19d84f4df180f0257f4d42dcb8667285f425fcb14ab6393b03f658d71a",
+    "canonicalSha256": "987488e3018adc98651e6b5b01816d198928ce03db6ecc469a7becd20beae311"
+  },
+  "authorizationBinding": {
+    "schemaVersion": "thin-plan-selection-received-instruction-v0",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/received-instruction.json",
+    "fileSha256": "2b891702d48f59818a1372c2e28419c20b7cc3aa01ecd62f8beb35577e82325b",
+    "canonicalSha256": "7d981fa46b36697d8a28f2d54c0396920e21136a2157d3f063b8c004d693f1f3"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "candidate-selection-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/machine-adoption.json",
+    "fileSha256": "62700732ce35391d6e36549e90ec61d884f1740cc6f509d8e3d367f49553de53",
+    "canonicalSha256": "3bb4eaa2a8858a015752702ad6610412d647b1d233e2cfe53a33461f710a7c19"
+  },
+  "editPlanBinding": {
+    "schemaVersion": "candidate-selection-edit-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/edit-plan.json",
+    "fileSha256": "b38309151f6c71267a806e0db218a3055c6d0887b98273691a21d6e3da1baf67",
+    "canonicalSha256": "68fc098ae3181171fe26b9a0bedfb2efb3e8a7de9330227a4d20fe88253c6564"
+  },
+  "currentSelectionValidation": {
+    "schemaVersion": "candidate-selection-validation-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/selection-validation.json",
+    "fileSha256": "892a6e4e603ca6aca09f2243538e87f8aeab2ddc7590db0bcc3a464d75c23f40",
+    "canonicalSha256": "985d089bb8e3d4739c546259647165d7330067883d778fbb8b235b06d79a8a9f"
+  },
+  "sourceCoreProofBinding": {
+    "schemaVersion": "candidate-selection-provenance-verification-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/reused-source-core-verification.json",
+    "fileSha256": "6ea62de4186c865899f7f4ca7f1e6e548f3a9b4cca3364532ac20bee6092b06f",
+    "canonicalSha256": "22e9b5ad6fb582cdce2b2d18103c28690c6d3a9c677ab55f50d5a2daeb8ed02a"
+  },
+  "sourceFinalVerificationBinding": {
+    "schemaVersion": "candidate-selection-final-verification-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/final-verification.json",
+    "fileSha256": "656d34cbaa1a35c25f5ccb60ea2b197b9d80a1ec1b278e49759ee3a7b99461f0",
+    "canonicalSha256": "70025448b20e0ed2aa349759c21ba1a194558944a5a8ae3b7f9de9b4d7126850"
+  },
+  "resolvedMediaMappings": [
+    {
+      "segmentId": "segment-0001",
+      "sourceStartMs": 1268581,
+      "sourceEndMs": 1279920,
+      "sourceStartFrame30": 38057,
+      "sourceEndFrame30": 38397,
+      "outputStartFrame": 0,
+      "outputEndFrame": 340,
+      "audioSamples": {
+        "sourceStart": 55944496,
+        "sourceEnd": 56444296,
+        "outputStart": 0,
+        "outputEnd": 499800
+      }
+    },
+    {
+      "segmentId": "segment-0002",
+      "sourceStartMs": 1283520,
+      "sourceEndMs": 1287598,
+      "sourceStartFrame30": 38505,
+      "sourceEndFrame30": 38627,
+      "outputStartFrame": 340,
+      "outputEndFrame": 462,
+      "audioSamples": {
+        "sourceStart": 56603056,
+        "sourceEnd": 56782396,
+        "outputStart": 499800,
+        "outputEnd": 679140
+      }
+    },
+    {
+      "segmentId": "segment-0003",
+      "sourceStartMs": 1958422,
+      "sourceEndMs": 1968200,
+      "sourceStartFrame30": 58752,
+      "sourceEndFrame30": 59046,
+      "outputStartFrame": 462,
+      "outputEndFrame": 756,
+      "audioSamples": {
+        "sourceStart": 86366146,
+        "sourceEnd": 86798326,
+        "outputStart": 679140,
+        "outputEnd": 1111320
+      }
+    },
+    {
+      "segmentId": "segment-0004",
+      "sourceStartMs": 1990580,
+      "sourceEndMs": 2065294,
+      "sourceStartFrame30": 59717,
+      "sourceEndFrame30": 61958,
+      "outputStartFrame": 756,
+      "outputEndFrame": 2997,
+      "audioSamples": {
+        "sourceStart": 87784696,
+        "sourceEnd": 91078966,
+        "outputStart": 1111320,
+        "outputEnd": 4405590
+      }
+    }
+  ],
+  "unchangedCaptionPayload": {
+    "styleProfileId": "normal-landscape-readable-pop-v001",
+    "instructions": [
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "あーもういるやん"
+        },
+        "sourceSegmentIds": [
+          2604,
+          2605,
+          2606,
+          2607,
+          2608,
+          2609,
+          2610,
+          2611
+        ],
+        "frames": {
+          "startFrame": 8,
+          "endFrameExclusive": 13
+        },
+        "cueEndSourceSegmentId": 2611,
+        "lineEndSourceSegmentIds": [
+          2611
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "これもういるやん"
+        },
+        "sourceSegmentIds": [
+          2612,
+          2613,
+          2614,
+          2615,
+          2616,
+          2617,
+          2618,
+          2619
+        ],
+        "frames": {
+          "startFrame": 13,
+          "endFrameExclusive": 37
+        },
+        "cueEndSourceSegmentId": 2619,
+        "lineEndSourceSegmentIds": [
+          2619
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "いるやんいるやん"
+        },
+        "sourceSegmentIds": [
+          2620,
+          2621,
+          2622,
+          2623,
+          2624,
+          2625,
+          2626,
+          2627
+        ],
+        "frames": {
+          "startFrame": 37,
+          "endFrameExclusive": 71
+        },
+        "cueEndSourceSegmentId": 2627,
+        "lineEndSourceSegmentIds": [
+          2627
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "もうリカちゃんやめてー!"
+        },
+        "sourceSegmentIds": [
+          2628,
+          2629,
+          2630,
+          2631,
+          2632,
+          2633,
+          2634,
+          2635,
+          2636,
+          2637,
+          2638,
+          2639
+        ],
+        "frames": {
+          "startFrame": 71,
+          "endFrameExclusive": 154
+        },
+        "cueEndSourceSegmentId": 2639,
+        "lineEndSourceSegmentIds": [
+          2639
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "リカー!"
+        },
+        "sourceSegmentIds": [
+          2640,
+          2641,
+          2642,
+          2643
+        ],
+        "frames": {
+          "startFrame": 154,
+          "endFrameExclusive": 197
+        },
+        "cueEndSourceSegmentId": 2643,
+        "lineEndSourceSegmentIds": [
+          2643
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "もう勘弁してーよ"
+        },
+        "sourceSegmentIds": [
+          2644,
+          2645,
+          2646,
+          2647,
+          2648,
+          2649,
+          2650,
+          2651
+        ],
+        "frames": {
+          "startFrame": 197,
+          "endFrameExclusive": 282
+        },
+        "cueEndSourceSegmentId": 2651,
+        "lineEndSourceSegmentIds": [
+          2651
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "この覗き方やめろ!"
+        },
+        "sourceSegmentIds": [
+          2652,
+          2653,
+          2654,
+          2655,
+          2656,
+          2657,
+          2658,
+          2659,
+          2660
+        ],
+        "frames": {
+          "startFrame": 282,
+          "endFrameExclusive": 340
+        },
+        "cueEndSourceSegmentId": 2660,
+        "lineEndSourceSegmentIds": [
+          2660
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "え、もうやだー"
+        },
+        "sourceSegmentIds": [
+          2670,
+          2671,
+          2672,
+          2673,
+          2674,
+          2675,
+          2676
+        ],
+        "frames": {
+          "startFrame": 340,
+          "endFrameExclusive": 373
+        },
+        "cueEndSourceSegmentId": 2676,
+        "lineEndSourceSegmentIds": [
+          2676
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "もうこいつの覗き方もう世界一嫌い!"
+        },
+        "sourceSegmentIds": [
+          2677,
+          2678,
+          2679,
+          2680,
+          2681,
+          2682,
+          2683,
+          2684,
+          2685,
+          2686,
+          2687,
+          2688,
+          2689,
+          2690,
+          2691,
+          2692,
+          2693
+        ],
+        "frames": {
+          "startFrame": 373,
+          "endFrameExclusive": 462
+        },
+        "cueEndSourceSegmentId": 2693,
+        "lineEndSourceSegmentIds": [
+          2693
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "逃げるやつ?"
+        },
+        "sourceSegmentIds": [
+          3877,
+          3878,
+          3879,
+          3880,
+          3881,
+          3882
+        ],
+        "frames": {
+          "startFrame": 462,
+          "endFrameExclusive": 544
+        },
+        "cueEndSourceSegmentId": 3882,
+        "lineEndSourceSegmentIds": [
+          3882
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "逃げるんだ"
+        },
+        "sourceSegmentIds": [
+          3883,
+          3884,
+          3885,
+          3886,
+          3887
+        ],
+        "frames": {
+          "startFrame": 544,
+          "endFrameExclusive": 614
+        },
+        "cueEndSourceSegmentId": 3887,
+        "lineEndSourceSegmentIds": [
+          3887
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "でもこいつ走りでこれだよ"
+        },
+        "sourceSegmentIds": [
+          3888,
+          3889,
+          3890,
+          3891,
+          3892,
+          3893,
+          3894,
+          3895,
+          3896,
+          3897,
+          3898,
+          3899
+        ],
+        "frames": {
+          "startFrame": 614,
+          "endFrameExclusive": 756
+        },
+        "cueEndSourceSegmentId": 3899,
+        "lineEndSourceSegmentIds": [
+          3899
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "おい、急に速くなった!"
+        },
+        "sourceSegmentIds": [
+          3942,
+          3943,
+          3944,
+          3945,
+          3946,
+          3947,
+          3948,
+          3949,
+          3950,
+          3951,
+          3952
+        ],
+        "frames": {
+          "startFrame": 756,
+          "endFrameExclusive": 917
+        },
+        "cueEndSourceSegmentId": 3952,
+        "lineEndSourceSegmentIds": [
+          3952
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "なんかグロいやつに捕まってる"
+        },
+        "sourceSegmentIds": [
+          3953,
+          3954,
+          3955,
+          3956,
+          3957,
+          3958,
+          3959,
+          3960,
+          3961,
+          3962,
+          3963,
+          3964,
+          3965,
+          3966
+        ],
+        "frames": {
+          "startFrame": 1723,
+          "endFrameExclusive": 1794
+        },
+        "cueEndSourceSegmentId": 3966,
+        "lineEndSourceSegmentIds": [
+          3966
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "どこ?"
+        },
+        "sourceSegmentIds": [
+          3967,
+          3968,
+          3969
+        ],
+        "frames": {
+          "startFrame": 2673,
+          "endFrameExclusive": 2708
+        },
+        "cueEndSourceSegmentId": 3969,
+        "lineEndSourceSegmentIds": [
+          3969
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "何これ?"
+        },
+        "sourceSegmentIds": [
+          3970,
+          3971,
+          3972,
+          3973
+        ],
+        "frames": {
+          "startFrame": 2918,
+          "endFrameExclusive": 2929
+        },
+        "cueEndSourceSegmentId": 3973,
+        "lineEndSourceSegmentIds": [
+          3973
+        ],
+        "materialRefs": []
+      },
+      {
+        "semanticKind": "speech-caption",
+        "content": {
+          "text": "なんか棺みたいなところに入れられてる!"
+        },
+        "sourceSegmentIds": [
+          3974,
+          3975,
+          3976,
+          3977,
+          3978,
+          3979,
+          3980,
+          3981,
+          3982,
+          3983,
+          3984,
+          3985,
+          3986,
+          3987,
+          3988,
+          3989,
+          3990,
+          3991,
+          3992
+        ],
+        "frames": {
+          "startFrame": 2929,
+          "endFrameExclusive": 2997
+        },
+        "cueEndSourceSegmentId": 3992,
+        "lineEndSourceSegmentIds": [
+          3981,
+          3992
+        ],
+        "materialRefs": []
+      }
+    ]
+  },
+  "selectedOutput": {
+    "artifacts": {
+      "meaning": {
+        "schemaVersion": "caption-local-repair-meaning-input-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/meaning-input.json",
+        "fileSha256": "65532c03fab64144c2dada4c338391d7539717a8da61e0f0fa887f98aaccfeb0",
+        "canonicalSha256": "b9d86af677f22f3a8ffa7475bf00965f69c119d43602ed441893528690df58ca"
+      },
+      "sourcePackage": {
+        "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/source-package.json",
+        "fileSha256": "5aadc1d8c9efb1a7d4e744b4a22efd1bfd461d62618d44681d3055a4584e44f7",
+        "canonicalSha256": "401434a9605001f0526ad93cf4217f634771c8b28c2dee0f2b0eb1e951e01eb1"
+      },
+      "selection": {
+        "schemaVersion": "presentation-output-caption-cue-selection-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/selection.json",
+        "fileSha256": "80d9bd9767912068025da1736a60488cef0171a022931f8851cb366789dd3af9",
+        "canonicalSha256": "232d63c5ebf69d35845d2c5fa4ddf27be7696d5e615d66f74edfc9b1972f1629"
+      },
+      "instruction": {
+        "schemaVersion": "presentation-instruction-artifact-v002",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/instruction.json",
+        "fileSha256": "436f644daa8e2b9cff6404222443a9e5d09bdd1317ad6bac8fcf16a8d73b1079",
+        "canonicalSha256": "cc61ae62a25cc8549742a1c8b4f7f07ba8d5a788a809c226a4d344f2a4203bb6"
+      },
+      "rendererJob": {
+        "schemaVersion": "presentation-instruction-renderer-job-v002",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/renderer-job.json",
+        "fileSha256": "857c1a5892f666a14ecca0669fa01ca268ac2044078738f11593e11e18f25ad2",
+        "canonicalSha256": "bf466ba494f3d9d996370436ca953e64447663c5c923a3904d196af28646d23d"
+      },
+      "lineEndProjection": {
+        "schemaVersion": "presentation-semantic-line-end-projection-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/line-end-projection.json",
+        "fileSha256": "44941953bb011720d5dbe436a43254d66abb4db7344199a2feaffd572a778593",
+        "canonicalSha256": "6aca5866e7ec8c303084a2459c144bab40516140d60adf26a1f458de20392d9b"
+      },
+      "cueEndProjection": {
+        "schemaVersion": "presentation-cue-end-projection-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/cue-end-projection.json",
+        "fileSha256": "a91306c5d918bc8dc3cc0bdfc5ad8a2adbc4d1d88c744157b298c9483aea9652",
+        "canonicalSha256": "d18240e51fc316dd93bbe9061faee132a7c83fac8d5b54d148b9e0291a7baa59"
+      },
+      "captionAdoption": {
+        "schemaVersion": "caption-local-repair-adoption-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/caption-adoption.json",
+        "fileSha256": "1eb30c5af2a1251e8cddb2a16942a6a116368bbee12ebcc33847d037884f160e",
+        "canonicalSha256": "5403ca17cac6ad0cf066f6f530677f80a383fd0d6455a6e54200fca77e4e6e95"
+      }
+    },
+    "base": {
+      "baseMedia": {
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/base-media/base-media.mp4",
+        "fileSha256": "5127512b58262f8d86e9d82d077de661f9fcb4cf7d0a0ac1cb0b6416b69c89f9"
+      },
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v003",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/base-media/timeline.json",
+        "fileSha256": "a8719000e271dba3f4e5589afb576c4532d3651144ad4e11b7aff287ee521614",
+        "canonicalSha256": "4f8a9a81b947f9c6ec05836711bd636e9ec381acf4efa2cdbe579f5c40fedbef"
+      },
+      "generationManifest": {
+        "schemaVersion": "presentation-base-media-generation-manifest-v003",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/base-media/generation-manifest.json",
+        "fileSha256": "d58312b8f82a875d8843a8a83760375367f0609bd7f0ae668b81dcbc5b2c4387",
+        "canonicalSha256": "483dedb84f8da57b05025cfb93587e2e7409dd6ceeec58f9f8850b860e058f4f"
+      },
+      "validationReceipt": {
+        "schemaVersion": "candidate-selection-base-media-validation-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/base-media/validation-receipt.json",
+        "fileSha256": "4670d99052d2435a386a446ab032ef427ebf6e398fa2b7198734d5a783cff28b",
+        "canonicalSha256": "adc2f4e85328036e4f4ae6a675453944e69c9ff870000c7b5acb2e8778df6f77"
+      }
+    },
+    "video": {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/render/presentation-rendered-v002.mp4",
+      "fileSha256": "1c91f282bd008777764a6d8f720577eef2845d3a2b521f415dead5e672b0265f"
+    },
+    "media": {
+      "durationMs": 99900,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 2997
+      },
+      "audio": {
+        "codecName": "aac",
+        "packetPayloadSha256": "6d4fd024f0d6eb0683a0ae804a462c8bf78d4e8424befe22b6ca30c90fb80114"
+      }
+    },
+    "executionBinding": {
+      "schemaVersion": "caption-local-repair-renderer-execution-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/renderer-result.json",
+      "fileSha256": "cd068ebf30d701ad333b0895dbac45d519308a465071fc474d2efbae6a3a4f04",
+      "canonicalSha256": "eae1a9079a3600d8e32fdf7dc12975845254c2c441a1271a5638a23a4dba6252"
+    },
+    "admissionBinding": {
+      "schemaVersion": "presentation-renderer-admission-receipt-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/admission-receipt.json",
+      "fileSha256": "7069fb1584fd833d345e2807a789ce6dd0d74d323b9ee5acf90c4a40b07d284e",
+      "canonicalSha256": "2792a45110be09bcf7b4cd6ff437147f0635016d02333a75ff4edf406ae662fe"
+    },
+    "lineLayoutBinding": {
+      "schemaVersion": "presentation-renderer-line-layout-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/line-layout.json",
+      "fileSha256": "20ddde66742248326f36bbabe90703bca3851eea148e4e3b66372f38a8751b1e",
+      "canonicalSha256": "386712baee094a388172eba55d4f9cfc03d30b48c9ddb13a4626304c18455946"
+    },
+    "scopeBinding": {
+      "schemaVersion": "caption-local-repair-scope-verification-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/scope-verification.json",
+      "fileSha256": "128d961b01683b837f4b559dc49682fd87b4c75389041f48c1653c4ca9eb3fe5",
+      "canonicalSha256": "4149a6f7171464e84b0f921b7393fab4e97ff3e6090fe39364eb871a50592a54"
+    },
+    "technicalQc": "passed",
+    "humanQuality": "not-evaluated"
+  },
+  "comparisonOutput": {
+    "artifacts": {
+      "meaning": {
+        "schemaVersion": "caption-local-repair-meaning-input-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/meaning-input.json",
+        "fileSha256": "b276ec9533a96922bedfe0a655a4b56da4e24bf7caae3c1c58cc4bd059aac4a3",
+        "canonicalSha256": "8289f2a004beb534b7156e8c66f13d06cef84416595d0d7397a83761d11f451e"
+      },
+      "sourcePackage": {
+        "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/source-package.json",
+        "fileSha256": "654b2479c6e951631456ce745647807dfc9a769f0ff7dc480d7a325e3ceea961",
+        "canonicalSha256": "a0b2b8c203f26343ab00e0e2185afa7eb092f140c7e053c73e144ca92efdd2ba"
+      },
+      "selection": {
+        "schemaVersion": "presentation-output-caption-cue-selection-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/selection.json",
+        "fileSha256": "377bb28ba58964f431883a09186b9cce515d474ef54f84fbce1dbff4f58db7e9",
+        "canonicalSha256": "d66ea94328dedadb6e2d684515837555952a270db86ef13b6593e4689febf08d"
+      },
+      "instruction": {
+        "schemaVersion": "presentation-instruction-artifact-v002",
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/instruction.json",
+        "fileSha256": "f4513a8754b4a31ac929b5f6b22f0b10251c27dfec37db7325b9c6747585d992",
+        "canonicalSha256": "0503264e5a995d7e4ec09448088add47d35c611caab4a4ea6a8cd49dc2f58404"
+      },
+      "rendererJob": {
+        "schemaVersion": "presentation-instruction-renderer-job-v002",
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/renderer-job.json",
+        "fileSha256": "54ec60e4665d185df054bb8ea7155ea843795c9073ad42d7f5ffa4f547a53bbf",
+        "canonicalSha256": "9d6325bbe588a29f70521e8187106e9656a191661e6e1ea8f162fd955f9f9050"
+      },
+      "lineEndProjection": {
+        "schemaVersion": "presentation-semantic-line-end-projection-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/line-end-projection.json",
+        "fileSha256": "7469610584d33b446015932b533ac55fb52483a3d5a631ce0a53e8e4bbf7e3a5",
+        "canonicalSha256": "5b3787005d4eae8814d80c76c6bf0e2924520104851bd56b1041dd9832397171"
+      },
+      "cueEndProjection": {
+        "schemaVersion": "presentation-cue-end-projection-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/cue-end-projection.json",
+        "fileSha256": "2989c8028ced55b3bac4279a2b6cd875adf8c0836a85bef584b756d801ce7d9d",
+        "canonicalSha256": "e47b1153ed2e1f07ab672aa2ad73d554ab4869b2c2343a5918c5eae6eaf27f26"
+      },
+      "captionAdoption": {
+        "schemaVersion": "caption-local-repair-adoption-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/caption-adoption.json",
+        "fileSha256": "09850ec6dab93c6171892e5a15de554d99c080eb61f5aeedd2e0b897fc79257e",
+        "canonicalSha256": "00b198dd1e9614d4219e4914227f30d0e29ce9d6dc57912ac5d7f67913170436"
+      }
+    },
+    "base": {
+      "baseMedia": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+        "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d"
+      },
+      "timeline": {
+        "schemaVersion": "presentation-base-media-timeline-v003",
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/timeline.json",
+        "fileSha256": "dd4ebac277c0f3da73765457ea7812cfc801a16231d35a1cd0a0c4c1b0e61aef",
+        "canonicalSha256": "506622f38cdf6695b0db2db3ae9a8a97f141d0d380c114684ef270d2fd9467ce"
+      },
+      "generationManifest": {
+        "schemaVersion": "presentation-base-media-generation-manifest-v003",
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/generation-manifest.json",
+        "fileSha256": "95d22643436fcc5b3a0c464e35921606827bceed5a11bd3fba9f28517cc7ee51",
+        "canonicalSha256": "e4d9e8e923aac162f816a432c6164b900de03c03ccbbe8c33795f764e1b0bc60"
+      },
+      "validationReceipt": {
+        "schemaVersion": "candidate-internal-edit-base-media-validation-v001",
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/validation-receipt.json",
+        "fileSha256": "bffbda9c628aac7e15eb5a5c7761a1ab5b2c61394fb047e2126d8ac467b3419a",
+        "canonicalSha256": "9a5fb9a1d30a20f9f50be906d4db2ee8d57a2b923b9508493b06464a135af472"
+      }
+    },
+    "video": {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/presentation-rendered-v002.mp4",
+      "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+    },
+    "media": {
+      "durationMs": 161033,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 4831
+      },
+      "audio": {
+        "codecName": "aac",
+        "packetPayloadSha256": "475233b0648161e3014ef52ffa1d7f4400b8dca1b0dc66214a2d66af9cd1b56e"
+      }
+    },
+    "executionBinding": {
+      "schemaVersion": "caption-local-repair-renderer-execution-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/renderer-result.json",
+      "fileSha256": "fddd7f9a0b4fbb527490ec61f0b6e80148d7ed5a39f55b95725ffed393ce2a30",
+      "canonicalSha256": "55d45b60ec4c1f2271557ec8c1f94e9e6d61ffd9b4a0b3df969ca7d471818b68"
+    },
+    "admissionBinding": {
+      "schemaVersion": "presentation-renderer-admission-receipt-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/admission-receipt.json",
+      "fileSha256": "563609dbae8837eed1612522a78df035ec9f2ab829166f881996efcc19e5d50f",
+      "canonicalSha256": "85a82369734d3b74cfb18724ac3031d22774325f9b5ab3a2440812479de998c5"
+    },
+    "lineLayoutBinding": {
+      "schemaVersion": "presentation-renderer-line-layout-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/line-layout.json",
+      "fileSha256": "f5bcd0623972e2b0a6bfa99b824348f99b2da86af156280493ec4dfa01afae19",
+      "canonicalSha256": "e81fc08ed1d7b0bcb556fad3dec576aaf098f46423bc35d1e2d335e10fbd19d3"
+    },
+    "scopeBinding": {
+      "schemaVersion": "caption-local-repair-scope-verification-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/scope-verification.json",
+      "fileSha256": "9f5a62a81a3f5873e093878d11ad1027743c17f706d317606bfcbbbd07f74cef",
+      "canonicalSha256": "0b3ffa0b936aa549bf00c6094f54e56826b2e9b989039edbd18c165c069a6f6d"
+    },
+    "technicalQc": "passed",
+    "humanQuality": "not-evaluated"
+  },
+  "mode": "reuse-existing-bytes-after-current-composition-and-payload-equivalence",
+  "newRendererExecution": false,
+  "inheritedHumanQuality": false
+}

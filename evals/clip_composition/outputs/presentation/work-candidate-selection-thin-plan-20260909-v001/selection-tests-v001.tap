@@ -1,0 +1,227 @@
+TAP version 13
+# Subtest: all decisions are preserved and adoption carries SHA-bound evidence; promotion needs its actual token
+ok 1 - all decisions are preserved and adoption carries SHA-bound evidence; promotion needs its actual token
+  ---
+  duration_ms: 3.656542
+  ...
+# Subtest: zero, one and all candidates can be selected; no quota or forced rejection
+ok 2 - zero, one and all candidates can be selected; no quota or forced rejection
+  ---
+  duration_ms: 3.114709
+  ...
+# Subtest: closed input rejects human adoption, final-use flags, timing and scores
+ok 3 - closed input rejects human adoption, final-use flags, timing and scores
+  ---
+  duration_ms: 1.237083
+  ...
+# Subtest: skill runs its supplied judgment anew and does not mutate input or promote the result
+ok 4 - skill runs its supplied judgment anew and does not mutate input or promote the result
+  ---
+  duration_ms: 0.505375
+  ...
+# Subtest: unknown candidate rejected
+ok 5 - unknown candidate rejected
+  ---
+  duration_ms: 0.726417
+  ...
+# Subtest: missing candidate rejected
+ok 6 - missing candidate rejected
+  ---
+  duration_ms: 0.648708
+  ...
+# Subtest: duplicate candidate rejected
+ok 7 - duplicate candidate rejected
+  ---
+  duration_ms: 0.743916
+  ...
+# Subtest: candidate order change rejected
+ok 8 - candidate order change rejected
+  ---
+  duration_ms: 0.653333
+  ...
+# Subtest: wrong source rejected
+ok 9 - wrong source rejected
+  ---
+  duration_ms: 0.651333
+  ...
+# Subtest: evidence from another candidate rejected
+ok 10 - evidence from another candidate rejected
+  ---
+  duration_ms: 1.025125
+  ...
+# Subtest: reversed own evidence rejected
+ok 11 - reversed own evidence rejected
+  ---
+  duration_ms: 0.5145
+  ...
+# Subtest: duplicate own evidence rejected
+ok 12 - duplicate own evidence rejected
+  ---
+  duration_ms: 0.323792
+  ...
+# Subtest: unknown comparison rejected
+ok 13 - unknown comparison rejected
+  ---
+  duration_ms: 0.5595
+  ...
+# Subtest: comparison with self rejected
+ok 14 - comparison with self rejected
+  ---
+  duration_ms: 0.63225
+  ...
+# Subtest: comparison evidence must belong to its named candidate
+ok 15 - comparison evidence must belong to its named candidate
+  ---
+  duration_ms: 0.697791
+  ...
+# Subtest: comparison is required and must be unique
+ok 16 - comparison is required and must be unique
+  ---
+  duration_ms: 1.160708
+  ...
+# Subtest: duplicate rejection requires a retained comparison; cannot remove every copy as redundant
+ok 17 - duplicate rejection requires a retained comparison; cannot remove every copy as redundant
+  ---
+  duration_ms: 0.6375
+  ...
+# Subtest: candidate bounds, order and source transcript membership are deterministic
+ok 18 - candidate bounds, order and source transcript membership are deterministic
+  ---
+  duration_ms: 0.939125
+  ...
+# Subtest: overlapping candidates may be compared but cannot both pass the disjoint executor
+ok 19 - overlapping candidates may be compared but cannot both pass the disjoint executor
+  ---
+  duration_ms: 1.30625
+  ...
+# Subtest: SHA changes to request, answer, candidate set or plan reject the result
+ok 20 - SHA changes to request, answer, candidate set or plan reject the result
+  ---
+  duration_ms: 2.85725
+  ...
+# Subtest: renamed IDs and unrelated fixture text do not change validation or promotion rules
+ok 21 - renamed IDs and unrelated fixture text do not change validation or promotion rules
+  ---
+  duration_ms: 0.759833
+  ...
+# Subtest: abstention has no adoption authority; free times and executable fields are invalid output
+ok 22 - abstention has no adoption authority; free times and executable fields are invalid output
+  ---
+  duration_ms: 0.865292
+  ...
+# Subtest: transport rejects duplicate JSON keys
+ok 23 - transport rejects duplicate JSON keys
+  ---
+  duration_ms: 0.369917
+  ...
+# Subtest: thin plan rejects adopted IDs, duration targets, roles and human answers
+ok 24 - thin plan rejects adopted IDs, duration targets, roles and human answers
+  ---
+  duration_ms: 2.641208
+  ...
+# Subtest: intent projection retains candidate references and rules without mutating the source
+not ok 25 - intent projection retains candidate references and rules without mutating the source
+  ---
+  duration_ms: 0.477917
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/thin_plan_candidate_selection_v0.test.mts:1:1473'
+  failureType: 'testCodeFailure'
+  error: 'crop application canonical JSON is invalid'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    canonicalSha256PresentationOutputFiniteJsonV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_crop_application_v001.mjs:187:33)
+    same (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts:62:49)
+    projectThinPlanV0 (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_thin_plan_candidate_selection_v0.mts:36:10)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/thin_plan_candidate_selection_v0.test.mts:24:18)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: a changed purpose cannot keep a previous thin-plan binding
+not ok 26 - a changed purpose cannot keep a previous thin-plan binding
+  ---
+  duration_ms: 0.688375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/thin_plan_candidate_selection_v0.test.mts:1:2109'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /THIN_PLAN_BINDING_CHANGED/. Input:
+    
+    'TypeError: crop application canonical JSON is invalid'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: 'crop application canonical JSON is invalid'
+  name: 'TypeError'
+  stack: |-
+    canonicalSha256PresentationOutputFiniteJsonV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_crop_application_v001.mjs:187:33)
+    same (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts:62:49)
+    projectThinPlanV0 (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_thin_plan_candidate_selection_v0.mts:36:10)
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/thin_plan_candidate_selection_v0.test.mts:36:23)
+    getActual (node:assert:498:5)
+    Function.throws (node:assert:644:24)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/thin_plan_candidate_selection_v0.test.mts:36:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/thin_plan_candidate_selection_v0.test.mts:36:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: a substituted source context cannot inherit the recorded source binding
+not ok 27 - a substituted source context cannot inherit the recorded source binding
+  ---
+  duration_ms: 0.277791
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/thin_plan_candidate_selection_v0.test.mts:1:2351'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /SOURCE_CONTEXT_BINDING_CHANGED/. Input:
+    
+    'TypeError: crop application canonical JSON is invalid'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: 'crop application canonical JSON is invalid'
+  name: 'TypeError'
+  stack: |-
+    canonicalSha256PresentationOutputFiniteJsonV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_crop_application_v001.mjs:187:33)
+    same (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts:62:49)
+    projectThinPlanV0 (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_thin_plan_candidate_selection_v0.mts:36:10)
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/thin_plan_candidate_selection_v0.test.mts:40:23)
+    getActual (node:assert:498:5)
+    Function.throws (node:assert:644:24)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/thin_plan_candidate_selection_v0.test.mts:40:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/thin_plan_candidate_selection_v0.test.mts:40:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 24
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 278.477375

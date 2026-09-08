@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "thin-plan-evaluation-summary-v0",
+  "instruction": "ZEV進行管理２ 指示-021（改訂版）",
+  "productionIntent": "ぺこらが本気で怖がって絶叫しているところと、怖がっている姿が可愛く見えるところを中心に見せる。",
+  "technicalStatus": "passed",
+  "humanQuality": "not-evaluated",
+  "beforeAfterDecisions": [
+    {
+      "candidateId": "candidate-0001",
+      "before": "adopt",
+      "after": "adopt",
+      "beforeBasis": "distinct-highlight",
+      "afterBasis": "distinct-highlight",
+      "reasonChanged": true
+    },
+    {
+      "candidateId": "candidate-0002",
+      "before": "adopt",
+      "after": "adopt",
+      "beforeBasis": "distinct-highlight",
+      "afterBasis": "distinct-highlight",
+      "reasonChanged": true
+    },
+    {
+      "candidateId": "candidate-0003",
+      "before": "reject",
+      "after": "reject",
+      "beforeBasis": "weak",
+      "afterBasis": "weak",
+      "reasonChanged": true
+    }
+  ],
+  "inputOnlyImprovementEstablished": false,
+  "selectionSkillModified": false,
+  "selectionReasonCoverage": [
+    "制作意図への価値",
+    "見せられる内容",
+    "独自の追加価値",
+    "意味的重複",
+    "外した場合の損失",
+    "採否",
+    "残存候補の充足見込みと視聴未判定点"
+  ],
+  "candidateCTreatment": "不採用。本人の振り返りには独自の価値があるが、直接反応を中心とする今回の意図への追加価値は弱いと判断した。",
+  "partialUseRequired": false,
+  "newInternalRetentionRequest": false,
+  "purposeConditionedInternalRetentionDemonstrated": false,
+  "reusedInternalRetentionReconstructed": true,
+  "newRenderCount": 0,
+  "currentOutput": {
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/render/presentation-rendered-v002.mp4",
+    "fileSha256": "1c91f282bd008777764a6d8f720577eef2845d3a2b521f415dead5e672b0265f"
+  },
+  "currentFrames": 2997,
+  "comparisonOutput": {
+    "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/presentation-rendered-v002.mp4",
+    "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+  },
+  "comparisonFrames": 4831,
+  "unitTests": {
+    "passed": 27,
+    "failed": 0
+  },
+  "integrationTests": {
+    "passed": 5,
+    "failed": 0
+  },
+  "typecheck": {
+    "status": "failed-existing-dependency-diagnostics",
+    "existingDiagnostics": 135,
+    "newFileDiagnostics": 0,
+    "sameDiagnosticsAsExistingDependencyEntries": true
+  },
+  "humanReview": {
+    "url": "http://127.0.0.1:51282/",
+    "axes": [
+      "制作意図への適合",
+      "不要な長さ・流れ・終わり方・見どころの連続・全体の見心地"
+    ],
+    "humanQualityInherited": false
+  },
+  "paidApiCostUsd": 0,
+  "newMaterialCount": 0,
+  "newGeminiExperiments": 0,
+  "scope": "人手固定の較正中v0。Planner、候補選定Skill、製造契約、renderer、Goal、architectureは変更しない。",
+  "preservation": {
+    "status": "passed",
+    "checkedFiles": 5952,
+    "changed": []
+  },
+  "setupFixCount": 2,
+  "captionInputLimitation": "Aの冒頭確認文は本文にあるが、既存の発話確認により字幕除外済み。新規判断を書き換えず、完成映像の拒否反応・抗議で人間確認する。",
+  "integratedRemoteCommit": "ad68f55c303ce8d6b06cd67d8db7cc533142152d",
+  "additionalRemoteIntegration": {
+    "onlyAddedRecoveryDocument": true,
+    "preservedUncommittedFiles": 97
+  }
+}

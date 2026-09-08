@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "thin-plan-setup-fix-record-v0",
+  "count": 2,
+  "previous": "setup-fix-record-v001.json",
+  "cause": "保存確認用の測定commandが、リンクの基準記録に存在しないtarget欄を参照した。基準記録はリンク先文字列のbyte長とSHAを持っている。",
+  "scope": "測定commandのみ。基準記録と対象外成果物は変更しない。",
+  "beforeEvidence": "preservation-verification-v001.json",
+  "correctedVerifier": "verify-preservation.py",
+  "afterEvidence": "preservation-verification-v002.json"
+}

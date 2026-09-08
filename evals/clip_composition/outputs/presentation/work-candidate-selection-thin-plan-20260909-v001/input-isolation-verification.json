@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "thin-plan-input-isolation-verification-v0",
+  "status": "passed",
+  "planBinding": {
+    "schemaVersion": "thin-plan-candidate-selection-evaluation-v0",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/fixed-plan.json",
+    "fileSha256": "39542e19d84f4df180f0257f4d42dcb8667285f425fcb14ab6393b03f658d71a",
+    "canonicalSha256": "987488e3018adc98651e6b5b01816d198928ce03db6ecc469a7becd20beae311"
+  },
+  "thinPlanBinding": {
+    "schemaVersion": "production-intent-plan-v0",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/thin-plan-v0.json",
+    "fileSha256": "1f084b48a6cf16fb50a48955e72efc02ab6809b1af2f1c330da833cb60e976f6",
+    "canonicalSha256": "961e53e48f1a25c3f17663830860a6591861aa2f58d75e32eeaef0197c2d6b85"
+  },
+  "candidateSetBinding": {
+    "schemaVersion": "candidate-selection-candidate-set-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/candidate-set.json",
+    "fileSha256": "a99f05de6029a68d085cc48a5177b95f81f29514412f69435ac8c73499ea87d4",
+    "canonicalSha256": "3d32c1296d8f4ee1ad67bf83741cd4eb6424d17c1195f07d25a74b073ced5730"
+  },
+  "candidateCount": 3,
+  "candidateInputUnchanged": true,
+  "existingSkillAndValidatorUnchanged": true,
+  "existingCriteriaUnchanged": true,
+  "changedInputFields": [
+    "productionRequest",
+    "structureConditions"
+  ],
+  "changeMeaning": "制作要求を今回の具体的意図へ置換。旧ダイジェストという一般目標とその重複説明を外し、構造条件は元順と結果の事前指定禁止だけにした。過去の感想採否や構成上の正解を入力していない。",
+  "previousProductionRequest": "既存素材の確定発話から、内容上重要または見どころになる複数箇所を選び、必要な文脈を残して短いダイジェスト動画にする。",
+  "currentProductionRequest": "ぺこらが本気で怖がって絶叫しているところと、怖がっている姿が可愛く見えるところを中心に見せる。",
+  "previousStructureConditions": [
+    "内容上重要または見どころになる場面を、必要な文脈を残してダイジェストにする。",
+    "採用候補の元素材順を維持する。候補内の保持は既存の検査済み意味判断を再検査して再利用する。",
+    "振り返りや締めの有無も、制作要求と他候補との関係から必要性を判断する。採用件数は指定しない。"
+  ],
+  "currentStructureConditions": [
+    "採用候補の元素材順を維持する。候補内部の編集はこの判断では指定しない。",
+    "採用件数・目標尺・採用候補を事前に指定しない。"
+  ],
+  "visibleInputKeys": [
+    "schemaVersion",
+    "productionRequest",
+    "structureConditions",
+    "criteria",
+    "sourceId",
+    "candidates"
+  ],
+  "historicalHumanLabelsInJudgmentInput": false,
+  "previousSelectionAnswerReadForJudgment": false,
+  "priorOutputUseInformationInJudgmentInput": false,
+  "perceptualQualityFromTextNotEstablished": [
+    "実際の声の絶叫の強さ",
+    "本気で怖がっている印象",
+    "怖がる姿の可愛さ"
+  ],
+  "humanQuality": "not-evaluated"
+}

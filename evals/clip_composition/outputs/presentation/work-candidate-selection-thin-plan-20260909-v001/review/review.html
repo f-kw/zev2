@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>制作意図と見心地の比較 · ZEV 指示-021</title>
+<style>
+body{margin:0;background:#f4f5f7;color:#172b3a;font:16px/1.8 system-ui,sans-serif}main{max-width:1040px;margin:auto;padding:28px 24px 64px}h1{font-size:28px;line-height:1.5}h2{font-size:22px}h3{font-size:18px}section{background:white;border:1px solid #dae1e6;border-radius:12px;padding:24px;margin:24px 0}.intent{font-size:20px;font-weight:600;border-left:4px solid #21736b;padding:16px 22px;background:#edf7f4}.status{display:inline-block;padding:5px 12px;background:#fff0cf;border-radius:5px}.muted{color:#4c606e}table{width:100%;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid #dde4ea;padding:12px;vertical-align:top}.axes{display:grid;grid-template-columns:1fr 1fr;gap:24px}.choices{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}button{padding:10px 14px;border:1px solid #9fb1bf;border-radius:7px;background:white;color:#172b3a;font:inherit;cursor:pointer}button:hover,button[aria-pressed=true]{background:#e4f2ef;border-color:#21736b}button:focus-visible{outline:3px solid #21736b}video{width:100%;max-height:540px;background:#111;border-radius:8px}a{color:#086457}.range{font-weight:600}li{margin:7px 0}@media(max-width:650px){main{padding:20px 14px}.axes{grid-template-columns:1fr}section{padding:18px}h1{font-size:24px}}
+</style>
+<main>
+<p class="muted">ZEV · 指示-021 · 制作意図を明示した候補選定の検証</p>
+<h1>怖がる反応を中心に見せるなら、どちらがよいか</h1>
+<p class="status">技術検証済み・今回の人間品質は未判定</p>
+<p>今回の制作意図は、次の一文です。</p>
+<p class="intent">ぺこらが本気で怖がって絶叫しているところと、怖がっている姿が可愛く見えるところを中心に見せる。</p>
+<p>この意図と同じ3候補の本文から、新しく採否を判断しました。結果はA・Bを残し、Cを外す構成です。採否と動画の内容は前回と同じになったため、<strong>入力変更による品質改善はまだ確認できていません。</strong></p>
+<section aria-labelledby="difference">
+<h2 id="difference">まず、2本の違い</h2>
+<table><thead><tr><th>比較する版</th><th>残した内容と、外した内容</th></tr></thead><tbody>
+<tr><td><strong>A・B版</strong><br>1分39.90秒</td><td>A：覗く相手に気づき、怖がって抗議する反応。<br>B：走る速さの予想が外れ、慌てて捕まる反応。<br>Cの振り返りを外しています。</td></tr>
+<tr><td><strong>A・B・C版</strong><br>2分41.03秒</td><td>A・Bと同じ場面に、C：カメラの角度や時間差の怖さを本人が振り返る語りと総評が続きます。</td></tr>
+</tbody></table>
+<p>Cには、怖かった体験を本人の言葉で総括する価値があります。今回の判断では、怖がる直接反応を中心に見せる目的への追加価値が弱いとして外しました。Cを一部使う案は今回の判断から必要にならず、作っていません。</p>
+<p class="muted">両方とも既存の字幕補修済み動画を再利用しています。今回の制作意図を明示する前に作られた動画です。短い方を選ぶこと自体が目的ではありません。</p>
+</section>
+<section aria-labelledby="questions">
+<h2 id="questions">見てほしいのは、二つの軸です</h2>
+<div class="axes"><div><h3>A. 制作意図に合うか</h3><p>本気で怖がって絶叫するところと、怖がる姿が可愛く見えるところを、中心に見せられていますか。</p><p>声の強さや可愛さは、本文だけでは判断できていません。</p></div>
+<div><h3>B. 実際の見心地はよいか</h3><ul><li>不要に長くないか</li><li>必要な流れを失っていないか</li><li>終わり方がよいか</li><li>見どころが気持ちよく続くか</li><li>全体としてどちらがよいか</li></ul></div></div>
+<p><strong>意図に合うことだけでも、短いことだけでも、品質合格にはしません。</strong>同程度、どちらも不足、判断保留という回答でも構いません。</p>
+</section>
+<section>
+<h2>A・B版 · 怖がる二つの場面</h2>
+<div class="choices" id="afterChoices"><button data-start="0" data-end="2997" aria-pressed="true">全体 · 99.90秒</button><button data-start="0" data-end="462" aria-pressed="false">A：覗かれる場面 · 15.40秒</button><button data-start="462" data-end="2997" aria-pressed="false">B：逃走と捕縛 · 84.50秒</button><button data-start="2673" data-end="2997" aria-pressed="false">終わり方 · 10.80秒</button></div>
+<p class="range" id="afterLabel">選択中：全体 · 99.90秒</p>
+<video id="after" src="edited.mp4" aria-label="A・B版・怖がる二つの場面" controls preload="metadata" playsinline></video>
+<div class="choices"><button id="playAfter">選んだ範囲を再生</button><button id="pauseAfter">停止</button></div>
+</section>
+<section>
+<h2>A・B・C版 · 二つの場面と振り返り</h2>
+<div class="choices" id="beforeChoices"><button data-start="0" data-end="4831" aria-pressed="true">全体 · 161.03秒</button><button data-start="2997" data-end="4831" aria-pressed="false">C：振り返り全体 · 61.13秒</button><button data-start="2997" data-end="3563" aria-pressed="false">角度の怖さ · 18.87秒</button><button data-start="3563" data-end="4382" aria-pressed="false">時間差の怖さ · 27.30秒</button><button data-start="4382" data-end="4831" aria-pressed="false">総評 · 14.97秒</button></div>
+<p class="range" id="beforeLabel">選択中：全体 · 161.03秒</p>
+<video id="before" src="old.mp4" aria-label="A・B・C版・二つの場面と振り返り" controls preload="metadata" playsinline></video>
+<div class="choices"><button id="playBefore">選んだ範囲を再生</button><button id="pauseBefore">停止</button></div>
+<p class="muted">区切りは既存動画の該当箇所を再生するためのものです。Cの部分採用版ではありません。</p>
+</section>
+<section>
+<h2>回答は短くて構いません</h2>
+<p>「意図への適合：A・B版／A・B・C版／同程度／どちらも不足」「見心地：どちらがよいか、気になる箇所」を、相談役セッション「ZEV進行管理２」へ伝えてください。</p>
+<p>この画面は評価を自動送信しません。視聴や再生操作だけで合格を記録することもありません。</p>
+<p><a href="review.md">比較の説明</a> · <a href="report.md">検証レポート</a></p>
+</section>
+</main>
+<script>
+'use strict';
+function attach(which,initialStart,initialEnd){
+ const video=document.getElementById(which),other=document.getElementById(which==='before'?'after':'before');
+ let start=initialStart/30,end=initialEnd/30,finished=false;
+ const choices=document.getElementById(which+'Choices'),label=document.getElementById(which+'Label');
+ const setStart=()=>{finished=false;if(video.readyState>=1)video.currentTime=start};
+ video.addEventListener('loadedmetadata',setStart,{once:true});
+ choices.addEventListener('click',e=>{const button=e.target.closest('button');if(!button)return;video.pause();start=Number(button.dataset.start)/30;end=Number(button.dataset.end)/30;setStart();for(const b of choices.querySelectorAll('button'))b.setAttribute('aria-pressed',String(b===button));label.textContent='選択中：'+button.textContent});
+ document.getElementById('play'+(which==='before'?'Before':'After')).onclick=async()=>{other.pause();setStart();try{await video.play()}catch(error){label.textContent='再生できませんでした。動画の読み込み状態を確認してください。'}};
+ document.getElementById('pause'+(which==='before'?'Before':'After')).onclick=()=>video.pause();
+ video.addEventListener('play',()=>{other.pause();if(finished||video.currentTime<start||video.currentTime>=end)setStart()});
+ const finish=()=>{if(!video.paused&&video.currentTime>=end){video.pause();finished=true;video.currentTime=Math.max(start,end-1/30)}};
+ video.addEventListener('timeupdate',finish);
+ if('requestVideoFrameCallback'in video){const tick=()=>{finish();video.requestVideoFrameCallback(tick)};video.requestVideoFrameCallback(tick)}
+}
+attach('before',0,4831);attach('after',0,2997);
+</script></html>

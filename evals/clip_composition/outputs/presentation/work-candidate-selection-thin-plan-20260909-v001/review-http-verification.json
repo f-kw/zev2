@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "thin-plan-review-http-verification-v0",
+  "status": "passed",
+  "origin": "http://127.0.0.1:51282/",
+  "checks": [
+    {
+      "name": "review.html",
+      "status": 200,
+      "bodyMatchesLocal": true
+    },
+    {
+      "name": "review.md",
+      "status": 200,
+      "bodyMatchesLocal": true
+    },
+    {
+      "name": "report.md",
+      "status": 200,
+      "bodyMatchesLocal": true
+    },
+    {
+      "name": "old.mp4",
+      "status": 206,
+      "rangeBytesMatch": true
+    },
+    {
+      "name": "edited.mp4",
+      "status": 206,
+      "rangeBytesMatch": true
+    },
+    {
+      "name": "DECISIONS.md",
+      "status": 404
+    },
+    {
+      "name": "../DECISIONS.md",
+      "status": 404
+    }
+  ]
+}
