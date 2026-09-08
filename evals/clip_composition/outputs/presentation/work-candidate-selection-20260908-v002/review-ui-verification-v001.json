@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-09-08T12:35:29.007228+00:00",
+  "origin": "http://127.0.0.1:50807/",
+  "browser": "Microsoft Edge",
+  "humanQuality": "not-evaluated",
+  "method": "Actual UI clicks; read-only DOM media metadata and playback state. No video content analysis or human quality judgment.",
+  "before": {
+    "width": 1920,
+    "height": 1080,
+    "browserDurationSeconds": 161.033008,
+    "formalFrames": 4831,
+    "selectionsObservedSeconds": [
+      99.9,
+      118.766666,
+      146.066666,
+      99.9
+    ],
+    "internalEndObservedSeconds": 118.733333,
+    "internalEndPaused": true,
+    "physicalEndObservedSeconds": 161.033008,
+    "physicalEndPaused": true
+  },
+  "after": {
+    "width": 1920,
+    "height": 1080,
+    "browserDurationSeconds": 99.9,
+    "formalFrames": 2997,
+    "selectionsObservedSeconds": [
+      0,
+      15.4,
+      89.1,
+      0
+    ],
+    "endingObservedSeconds": 99.866666,
+    "endingPaused": true
+  },
+  "controlsVerified": [
+    "all eight range buttons",
+    "range labels follow selections",
+    "explicit play restarts selected range",
+    "manual pause",
+    "internal end pauses at last included frame",
+    "physical media end pauses",
+    "playing one video pauses the other",
+    "initial positions restored with both paused"
+  ],
+  "simultaneousPlaybackObservation": {
+    "beforePaused": true,
+    "afterPaused": false
+  },
+  "qualityQuestionsVisible": 5,
+  "writesHumanApproval": false
+}

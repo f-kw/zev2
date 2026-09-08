@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "candidate-selection-core-invocation-v001",
+  "planBinding": {
+    "schemaVersion": "candidate-selection-fixed-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/fixed-plan.json",
+    "fileSha256": "d95e9828e4e78672bc2eacb2f3b899ed6a6d6d062155e0ff5262563c3acd6e12",
+    "canonicalSha256": "4d87709d5db56d19a22143ea04000b448fcb0ef567b37f39ccbf35d07455dcf8"
+  },
+  "authorizationBinding": {
+    "schemaVersion": "candidate-selection-received-instruction-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/received-instruction.json",
+    "fileSha256": "e66d3af95b7d176e033f1cbd0cbdfff386e2da1fca2a614ecb3682110d6c7635",
+    "canonicalSha256": "3addb57d7251d0935351ddc7fb90b9c3475a967431367023ab9c8c37b128ac82"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "candidate-selection-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/machine-adoption.json",
+    "fileSha256": "39f3a528f44e0303bfd850930cc535bce05b83648658b3d88a5fe1cdb021af6a",
+    "canonicalSha256": "5df0f63d959e512e7047cc71312e6da35d659bf408cc8dde6464d56b58d6f51e"
+  },
+  "editPlanBinding": {
+    "schemaVersion": "candidate-selection-edit-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/edit-plan.json",
+    "fileSha256": "35af48911feac909fe523c84b17f3e95867b9eddfde169d80b5f78df03888030",
+    "canonicalSha256": "58dc0fd3b761ae5ba6c2eba7a8e9c515268a66235c1f607533eb34fe70e255ca"
+  },
+  "validatorResultBinding": {
+    "schemaVersion": "candidate-selection-validation-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/selection-validation.json",
+    "fileSha256": "0efb1c8882bcc24b8545824be36cf21f6cacdd2043e4e28c44f633f34468c821",
+    "canonicalSha256": "0315c6ba653a0180295fe301c20c86da35900f6c8c130e9fdbaa3e666c7710c6"
+  },
+  "manufacturingValuesBinding": {
+    "schemaVersion": "presentation-base-media-build-job-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/manufacturing-values.json",
+    "fileSha256": "e344bfcd264d0e2fb8a9b8749fd47aaf3841af60a4f6aafa03c1cafe087d5602",
+    "canonicalSha256": "d07d036d75e79d24edaccbe0c8f193c571690a118a42ad147e0a48e1859b1ad6"
+  },
+  "admission": "reconstructed-candidate-selection-and-existing-retention",
+  "implementationBindings": [
+    {
+      "path": "runner/src/skills/candidate-selection-v001.ts",
+      "fileSha256": "1fc8a464ade963e49e26f2eba1bd8b6c0d77c30054308684159078847ab90a8d"
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "fileSha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_selection_e2e_v001.mts",
+      "fileSha256": "1018e0ff3e3fd84273fbb915bfb6d29a6ffb16e45cfd9875668331c8acfa86b8"
+    },
+    {
+      "path": "runner/src/skills/candidate-discovery-v001.ts",
+      "fileSha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e"
+    },
+    {
+      "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+      "fileSha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291"
+    },
+    {
+      "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3"
+    },
+    {
+      "path": "runner/src/distant-connection-common-utterance-artifact-v001.ts",
+      "fileSha256": "e3d2792913b284ba2b2f3cee5e1371a15d2fd3ee54ce6b1615041dfd7217562b"
+    },
+    {
+      "path": "runner/src/transcript-utils.ts",
+      "fileSha256": "9604833fd62d3c52ca5d6dd1ef0f7136d342511901de13ae80f31570e8cecd17"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_internal_edit_v001.mts",
+      "fileSha256": "cb336bd5000e39015cf830ed17e483cd74bdb73f235f895331c6feb26207f000"
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+      "fileSha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac"
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_edit_core_v001.mts",
+      "fileSha256": "f413494132a04f55a3eb9c8d5c90812745848c1a009fdac772d0e4ef578ba2b5"
+    },
+    {
+      "path": "evals/clip_composition/digest_acoustic_timing_validation_v001.mts",
+      "fileSha256": "efde9b9d009711eed8433ecba94b8ff7ff92e1b06fe99165f689cddc6e09d754"
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f"
+    }
+  ],
+  "humanQuality": "not-evaluated"
+}

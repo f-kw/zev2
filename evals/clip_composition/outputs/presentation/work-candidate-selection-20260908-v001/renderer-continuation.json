@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "candidate-selection-renderer-continuation-v001",
+  "category": "inspection-setup",
+  "reason": "tsx-local-ipc-socket-denied-by-execution-sandbox",
+  "planBinding": {
+    "schemaVersion": "candidate-selection-fixed-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/fixed-plan-v002.json",
+    "fileSha256": "852973e13d28d73afc969c882eb6541005c75bee08c6c8c3dabe452b26f8f2fa",
+    "canonicalSha256": "b100ff8c61c4fcb08b8c61d359f65a762f14a4a89107337d857a40ac05007169"
+  },
+  "failedExecutionBinding": {
+    "schemaVersion": "candidate-selection-renderer-execution-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/renderer-result.json",
+    "fileSha256": "83797bd669306826a47a0cef19ff09aafbd4efe31ae19e3f4d19654cf2ed6122",
+    "canonicalSha256": "495898cd143269f6ab58fc0dbb70aacf5946dabc615dc7df0ff09cc46c564899"
+  },
+  "stderrBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/process-observations/candidate-selection-ymUsGrT6EaA-20260908-v001/0003-layout-inspection/stderr.txt",
+    "fileSha256": "0a813f96b9062e98656c02639cd7a9a524cafb026e3efbad27a4c06334b7c67a"
+  },
+  "sourceJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/renderer-job.json",
+    "fileSha256": "f73da31d17115290dff90328085592305ea1077406aecd532490de647fce8a99",
+    "canonicalSha256": "beeb0cae9e99a6efdceaf90fa8943c2d518c93de42b0dfdbee1961a1b630ef6c"
+  },
+  "executionJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/renderer-resume-v001/renderer-job.json",
+    "fileSha256": "7ea0fce95d0c5a514adcff4f9f3675090cf23210d7cfd1352127c0d4fd897672",
+    "canonicalSha256": "3641d9961a1f4085fec4da65af4fba91d029a3c83ec89a3aa8f7e4482b635114"
+  },
+  "changedFields": [
+    "attemptId",
+    "publication"
+  ],
+  "semanticOrStyleChanges": false,
+  "preservedFailedOutput": "kept-at-original-path",
+  "newOutputRoot": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/renderer-resume-v001",
+  "implementationBinding": {
+    "path": "evals/clip_composition/resume_candidate_selection_renderer_v001.mts",
+    "fileSha256": "1b47f002073fd748dfaf79c338552bd03d59fc311e6b8bd7f4896d44bb53331d"
+  }
+}

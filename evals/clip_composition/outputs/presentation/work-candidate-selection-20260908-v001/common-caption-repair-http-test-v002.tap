@@ -1,0 +1,245 @@
+TAP version 13
+# Subtest: both historical fixtures reconstruct every final caption field, text ID, frame and line end
+ok 1 - both historical fixtures reconstruct every final caption field, text ID, frame and line end # SKIP test name does not match pattern
+  ---
+  duration_ms: 750.763459
+  ...
+# Subtest: final frame endpoint and explicitly kept endpoints preserve the existing Core clock
+ok 2 - final frame endpoint and explicitly kept endpoints preserve the existing Core clock # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.109875
+  ...
+# Subtest: common validator rejects other video SHA
+ok 3 - common validator rejects other video SHA # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.03975
+  ...
+# Subtest: common validator rejects base video SHA
+ok 4 - common validator rejects base video SHA # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.029209
+  ...
+# Subtest: common validator rejects other subtitle ID
+ok 5 - common validator rejects other subtitle ID # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.027334
+  ...
+# Subtest: common validator rejects different text IDs
+ok 6 - common validator rejects different text IDs # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.098917
+  ...
+# Subtest: common validator rejects different caption text
+ok 7 - common validator rejects different caption text # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.022542
+  ...
+# Subtest: common validator rejects audio packet SHA
+ok 8 - common validator rejects audio packet SHA # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.0245
+  ...
+# Subtest: common validator rejects original formal input SHA
+ok 9 - common validator rejects original formal input SHA # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.084542
+  ...
+# Subtest: common validator rejects unobserved receipt
+ok 10 - common validator rejects unobserved receipt # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.032125
+  ...
+# Subtest: common validator rejects unobserved frame substitution
+ok 11 - common validator rejects unobserved frame substitution # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.029333
+  ...
+# Subtest: common validator rejects unobserved presented frame
+ok 12 - common validator rejects unobserved presented frame # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.03875
+  ...
+# Subtest: common validator rejects wrong output audio sample
+ok 13 - common validator rejects wrong output audio sample # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.080625
+  ...
+# Subtest: common validator rejects wrong source audio sample
+ok 14 - common validator rejects wrong source audio sample # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.079625
+  ...
+# Subtest: common validator rejects wrong source frame
+ok 15 - common validator rejects wrong source frame # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.272083
+  ...
+# Subtest: common validator rejects fixture disguised as human frame
+ok 16 - common validator rejects fixture disguised as human frame # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.058167
+  ...
+# Subtest: common validator rejects extra exclusion field on boundary operation
+ok 17 - common validator rejects extra exclusion field on boundary operation # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.031417
+  ...
+# Subtest: common validator rejects hidden value on kept boundary
+ok 18 - common validator rejects hidden value on kept boundary # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.028292
+  ...
+# Subtest: common validator rejects boundary fields on exclusion
+ok 19 - common validator rejects boundary fields on exclusion # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.071334
+  ...
+# Subtest: common validator rejects exclusion disguised as zero interval
+ok 20 - common validator rejects exclusion disguised as zero interval # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.02975
+  ...
+# Subtest: common validator rejects unconfirmed excluded text
+ok 21 - common validator rejects unconfirmed excluded text # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.024209
+  ...
+# Subtest: common validator rejects missing explicit exclusion reason
+ok 22 - common validator rejects missing explicit exclusion reason # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.021208
+  ...
+# Subtest: exclusion permission is distinct from boundary permission
+ok 23 - exclusion permission is distinct from boundary permission # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.019542
+  ...
+# Subtest: reject invalid or unseen presentation frame -1
+ok 24 - reject invalid or unseen presentation frame -1 # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.021042
+  ...
+# Subtest: reject invalid or unseen presentation frame 1505.5
+ok 25 - reject invalid or unseen presentation frame 1505.5 # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.019041
+  ...
+# Subtest: reject invalid or unseen presentation frame NaN
+ok 26 - reject invalid or unseen presentation frame NaN # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.036917
+  ...
+# Subtest: reject invalid or unseen presentation frame Infinity
+ok 27 - reject invalid or unseen presentation frame Infinity # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.039208
+  ...
+# Subtest: reject invalid or unseen presentation frame 900
+ok 28 - reject invalid or unseen presentation frame 900 # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.020875
+  ...
+# Subtest: reject invalid or unseen presentation frame 1671
+ok 29 - reject invalid or unseen presentation frame 1671 # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.018208
+  ...
+# Subtest: reject start >= end even when both frame receipts were issued
+ok 30 - reject start >= end even when both frame receipts were issued # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017959
+  ...
+# Subtest: reject overlap with untouched caption instead of moving that caption
+ok 31 - reject overlap with untouched caption instead of moving that caption # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.018084
+  ...
+# Subtest: validation does not accept a replaced or relabeled saved fixture
+ok 32 - validation does not accept a replaced or relabeled saved fixture # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.020791
+  ...
+# Subtest: fixture receipt cannot cross into a live human session
+ok 33 - fixture receipt cannot cross into a live human session # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.100625
+  ...
+# Subtest: observation and validation have no formal execution authority
+ok 34 - observation and validation have no formal execution authority # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.019541
+  ...
+# Subtest: historical file substitution fails against the separately pinned evidence binding
+ok 35 - historical file substitution fails against the separately pinned evidence binding # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.018333
+  ...
+# Subtest: scope rejects untargeted caption frame
+ok 36 - scope rejects untargeted caption frame # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017209
+  ...
+# Subtest: scope rejects other caption text
+ok 37 - scope rejects other caption text # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017958
+  ...
+# Subtest: scope rejects caption line ending
+ok 38 - scope rejects caption line ending # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017625
+  ...
+# Subtest: scope rejects retained media segment
+ok 39 - scope rejects retained media segment # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017542
+  ...
+# Subtest: scope rejects base media
+ok 40 - scope rejects base media # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017042
+  ...
+# Subtest: scope rejects audio/media generation
+ok 41 - scope rejects audio/media generation # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017625
+  ...
+# Subtest: scope rejects timeline
+ok 42 - scope rejects timeline # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017042
+  ...
+# Subtest: scope rejects style
+ok 43 - scope rejects style # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017292
+  ...
+# Subtest: scope rejects renderer
+ok 44 - scope rejects renderer # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.019625
+  ...
+# Subtest: scope rejects QC rules
+ok 45 - scope rejects QC rules # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.017583
+  ...
+# Subtest: publication rejects tampering with an already reconstructed provenance graph or destination
+ok 46 - publication rejects tampering with an already reconstructed provenance graph or destination # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.021417
+  ...
+# Subtest: shared HTTP UI saves, reloads, validates and explicitly approves through the same render path
+ok 47 - shared HTTP UI saves, reloads, validates and explicitly approves through the same render path
+  ---
+  duration_ms: 296.638791
+  ...
+1..47
+# tests 47
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 46
+# todo 0
+# duration_ms 1348.609

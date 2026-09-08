@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "candidate-selection-base-media-validation-v001",
+  "status": "passed",
+  "coreInvocationBinding": {
+    "schemaVersion": "candidate-selection-core-invocation-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/core-invocation.json",
+    "fileSha256": "047cec0d25d3745d4ae6789d8c19d1f366cd807b6e0de3bd4df2464358dac17b",
+    "canonicalSha256": "fd4f2b4e6eea561db0c6be50aed50077d367a4a6d116ab6d926cf89174d6a2f0"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "candidate-selection-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/machine-adoption.json",
+    "fileSha256": "8a1e1713ff5fb7c0119e38fecb7f016490b20463a6956e55cba317045b6b3625",
+    "canonicalSha256": "ea838a6315c284990df5a5822217097bca776ae65ac76c3b156424ea4725d62e"
+  },
+  "editPlanBinding": {
+    "schemaVersion": "candidate-selection-edit-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/edit-plan.json",
+    "fileSha256": "dd46b0266a22708f0a13547428f1786b4b277f622fc94430e2af1d302fda1ced",
+    "canonicalSha256": "48d54983de6c47a13ac664f2aaca2faf7f8815c65a22d080780e080fc3d39076"
+  },
+  "checks": {
+    "machineAdoptionReconstruction": "passed",
+    "sourceSnapshotSha": "passed",
+    "formalRangeProjection": "passed",
+    "videoQc": "passed",
+    "audioQc": "passed",
+    "timelineQc": "passed"
+  },
+  "individualCandidateHumanApproval": "not-performed",
+  "humanQuality": "not-evaluated",
+  "outputs": {
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/base-media/base-media.mp4",
+      "fileSha256": "5127512b58262f8d86e9d82d077de661f9fcb4cf7d0a0ac1cb0b6416b69c89f9"
+    },
+    "timeline": {
+      "schemaVersion": "presentation-base-media-timeline-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/base-media/timeline.json",
+      "fileSha256": "65da9c31b04d91151ff7057c9ec360ef3dab8fb15fb4e3528d9088c3a57b2150",
+      "canonicalSha256": "92f21e3690c719d7f50c0e3755646af821a3b7d9b68ed22ae200ea50f152b97d"
+    },
+    "generationManifest": {
+      "schemaVersion": "presentation-base-media-generation-manifest-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/base-media/generation-manifest.json",
+      "fileSha256": "d6ee16e25bf308e559fcad1e11e33fa7a302966fe1a75a08c7a91bd3c74c43de",
+      "canonicalSha256": "1988909ade9dc536298a7a5e95d8f81ed7755758ac44abf67fbc2fc2765724ca"
+    }
+  },
+  "decodedFramePayloadSha256": "283639868fdc858bff82e9a2283b395f8fb8b5c9d82b32d630684d08f437d8be",
+  "encodeInputPayloadSha256": "88a46d146fc73f9433167cdc4342be6d5d943b6814cab8e1fd719f0deb4f3fc6"
+}

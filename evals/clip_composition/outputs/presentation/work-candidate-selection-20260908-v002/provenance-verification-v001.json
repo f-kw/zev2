@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "candidate-selection-provenance-verification-v001",
+  "status": "passed",
+  "planBinding": {
+    "schemaVersion": "candidate-selection-fixed-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/fixed-plan.json",
+    "fileSha256": "d95e9828e4e78672bc2eacb2f3b899ed6a6d6d062155e0ff5262563c3acd6e12",
+    "canonicalSha256": "4d87709d5db56d19a22143ea04000b448fcb0ef567b37f39ccbf35d07455dcf8"
+  },
+  "verificationBinding": {
+    "schemaVersion": "candidate-selection-e2e-verification-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/verification.json",
+    "fileSha256": "60ca481ac0fe74202318bf547c8689d5aec4f6f079de5b346d0975c6aa072898",
+    "canonicalSha256": "5aafc38c201d15e74563e638f6a03ad92061ed16138da5ff7317f4bb1ec53537"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/verify_candidate_selection_e2e_v001.mts",
+    "fileSha256": "8f86dfacebffa4643d8437165deae42fdf0ae846bccef77a7b9a9a65298d6bc5"
+  },
+  "checks": {
+    "sourceInputs": "passed",
+    "candidateSetReconstruction": "passed",
+    "judgmentValidationAndPromotion": "passed",
+    "retainedContentAndCutEvidence": "passed",
+    "selectedCandidatesOnly": "passed",
+    "commonCoreInvocation": "passed",
+    "formalRangeProjection": "passed",
+    "baseMediaHashGraph": "passed",
+    "captionCoreReconstruction": "passed",
+    "renderedBytesAndFrames": "passed",
+    "audioPacketPreservation": "passed"
+  },
+  "counts": {
+    "candidates": 3,
+    "adopted": 2,
+    "rejected": 1
+  },
+  "media": {
+    "durationMs": 99900,
+    "video": {
+      "codecName": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frameCount": 2997
+    },
+    "audio": {
+      "codecName": "aac",
+      "packetPayloadSha256": "6d4fd024f0d6eb0683a0ae804a462c8bf78d4e8424befe22b6ca30c90fb80114"
+    }
+  },
+  "humanQuality": "not-evaluated",
+  "finalDecisionOwner": "human"
+}

@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: actual input is reconstructed from every existing discovery candidate, without historical labels
+ok 1 - actual input is reconstructed from every existing discovery candidate, without historical labels
+  ---
+  duration_ms: 8.526625
+  ...
+# Subtest: actual new judgment, validator, machine adoption and edit plan reconstruct from their original inputs
+ok 2 - actual new judgment, validator, machine adoption and edit plan reconstruct from their original inputs
+  ---
+  duration_ms: 51.752375
+  ...
+# Subtest: only selected candidate materializations enter Core; retained content and cut evidence are unchanged
+ok 3 - only selected candidate materializations enter Core; retained content and cut evidence are unchanged
+  ---
+  duration_ms: 50.109083
+  ...
+# Subtest: retention result or formal cut evidence cannot be replaced by an unchecked segment list
+ok 4 - retention result or formal cut evidence cannot be replaced by an unchecked segment list
+  ---
+  duration_ms: 29.8385
+  ...
+# Subtest: the fixed plan rejects a chosen-ID list, an adoption quota and different order policy
+ok 5 - the fixed plan rejects a chosen-ID list, an adoption quota and different order policy
+  ---
+  duration_ms: 0.268583
+  ...
+# Subtest: formal candidate ID reassignment without discovery identity correspondence is rejected
+ok 6 - formal candidate ID reassignment without discovery identity correspondence is rejected
+  ---
+  duration_ms: 3.978417
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2269.64675

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "candidate-selection-transport-recovery-v001",
+  "category": "inspection-setup",
+  "newSemanticJudgmentCount": 1,
+  "inputSubmissionCount": 2,
+  "issue": "TTY canonical input kept only the prefix of the JSON; no response artifact or newline was delivered",
+  "evidence": {
+    "pid": 13882,
+    "tty": "/dev/ttys000",
+    "pendingRequest": "selection-request.json",
+    "requestFileSha256": "b877e66f1b7db514df4c9171da1344e62186a33494cf2a92c5eac18233e0c5fb",
+    "responseArtifactBeforeRecovery": "absent"
+  },
+  "recovery": "Cleared unsubmitted terminal input; disabled canonical buffering and echo only on the task-owned terminal; resent the identical full response to the same waiting request",
+  "implementationChanged": false,
+  "planChanged": false,
+  "semanticAnswerChanged": false,
+  "newAPICommunication": false
+}

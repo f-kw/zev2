@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "candidate-selection-fixed-plan-v001",
+  "planId": "candidate-selection-ymUsGrT6EaA-20260908-v001",
+  "authorization": {
+    "schemaVersion": "candidate-selection-received-instruction-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/received-instruction.json",
+    "fileSha256": "e66d3af95b7d176e033f1cbd0cbdfff386e2da1fca2a614ecb3682110d6c7635",
+    "canonicalSha256": "3addb57d7251d0935351ddc7fb90b9c3475a967431367023ab9c8c37b128ac82"
+  },
+  "request": {
+    "purpose": "既存素材の確定発話から、内容上重要または見どころになる複数箇所を選び、必要な文脈を残して短いダイジェスト動画にする。",
+    "sourceId": "ymUsGrT6EaA",
+    "sourceVideo": {
+      "path": "evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+      "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+    },
+    "transcript": {
+      "path": "evals/clip_composition/stt/ymUsGrT6EaA_local30_v001/source/transcript.json",
+      "fileSha256": "28938e70d267c617a50568f2782c541c9d6814eda7537349fefae1b45053960f"
+    },
+    "utterances": {
+      "schemaVersion": "distant-connection-common-utterance-artifact-v001",
+      "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-ymUsGrT6EaA-v001/common-utterance-artifact-v001.json",
+      "fileSha256": "dae20487328216beb7ec96398f79849fbe60910b33823f10dce6c628ce403523",
+      "canonicalSha256": "d8bff64b0b3775dc04d44376f8470d9ab76b7ec88c57055616ae2b4b0ec084c0"
+    },
+    "rendererTemplate": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-template-v002.json",
+      "fileSha256": "cfdb4c6e18e47cde8ea9fe2302d35993a7795ad804586adc36ff601c8ddfca5e",
+      "canonicalSha256": "3b72513981982691439d1dcc2d7cb3f200c4ce04663316edcef35bf260185703"
+    },
+    "captionStyleTemplate": {
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+      "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+      "canonicalSha256": "5594ddf2d1aa08660d893b7b8de7f37954f760981f76d615d13187034c5e3c8a"
+    },
+    "candidateSet": {
+      "schemaVersion": "candidate-selection-candidate-set-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/candidate-set.json",
+      "fileSha256": "a99f05de6029a68d085cc48a5177b95f81f29514412f69435ac8c73499ea87d4",
+      "canonicalSha256": "3d32c1296d8f4ee1ad67bf83741cd4eb6424d17c1195f07d25a74b073ced5730"
+    }
+  },
+  "structureConditions": [
+    "内容上重要または見どころになる場面を、必要な文脈を残してダイジェストにする。",
+    "採用候補の元素材順を維持する。候補内の保持は既存の検査済み意味判断を再検査して再利用する。",
+    "振り返りや締めの有無も、制作要求と他候補との関係から必要性を判断する。採用件数は指定しない。"
+  ],
+  "policy": {
+    "judgment": "new-current-codex-semantic-candidate-comparison",
+    "order": "source-order-without-reordering",
+    "adoptionCountTarget": null,
+    "authority": "validation-then-deterministic-promotion-then-executor",
+    "internalRetention": "revalidate-and-reuse-existing-meaning-result-and-cut-evidence",
+    "captionDisplay": "existing-skill",
+    "manufacturing": "existing-common-core-and-renderer",
+    "humanQuality": "pending-review",
+    "apiCommunication": false
+  },
+  "skills": [
+    {
+      "id": "candidate-selection",
+      "version": "v001",
+      "mode": "current-codex-stdin-v001"
+    },
+    {
+      "id": "candidate-internal-retention",
+      "version": "v001",
+      "mode": "existing-result-revalidation"
+    },
+    {
+      "id": "caption-display-boundaries",
+      "version": "v001",
+      "mode": "current-codex-stdin-v001"
+    }
+  ],
+  "reuseInternalRetention": {
+    "schemaVersion": "candidate-internal-edit-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/machine-adoption.json",
+    "fileSha256": "32264e9b6ef7a0bc9332b9dab8622113da6797f7617f4d93b05ec7e780bcfec6",
+    "canonicalSha256": "db09071816166cbca05f5d4b9e0e2d4a0ed28dc1776949e1d83ea8075c79789f"
+  },
+  "acousticValidation": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/acoustic-correspondence-validation-v003.json",
+    "fileSha256": "651876378d7113708c455f416721084e354cc339e0a496095ea75d4b458f5042"
+  },
+  "implementationBindings": [
+    {
+      "path": "runner/src/skills/candidate-selection-v001.ts",
+      "fileSha256": "a3ce8d72c410c58d7c6bf7eb22f302693f23d67a9787963d001ed96d6e948e68"
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "fileSha256": "e099ddc1c266b13e42d9061ca22e1998a00234df0323074cc76e5d64f3a13a73"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_selection_e2e_v001.mts",
+      "fileSha256": "6f2f8de8788ad46137257f295378baa9a8f991ece9fffd056f94a397527b35a2"
+    },
+    {
+      "path": "runner/src/skills/candidate-discovery-v001.ts",
+      "fileSha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e"
+    },
+    {
+      "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+      "fileSha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291"
+    },
+    {
+      "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3"
+    },
+    {
+      "path": "runner/src/distant-connection-common-utterance-artifact-v001.ts",
+      "fileSha256": "e3d2792913b284ba2b2f3cee5e1371a15d2fd3ee54ce6b1615041dfd7217562b"
+    },
+    {
+      "path": "runner/src/transcript-utils.ts",
+      "fileSha256": "9604833fd62d3c52ca5d6dd1ef0f7136d342511901de13ae80f31570e8cecd17"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_internal_edit_v001.mts",
+      "fileSha256": "cb336bd5000e39015cf830ed17e483cd74bdb73f235f895331c6feb26207f000"
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+      "fileSha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac"
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_edit_core_v001.mts",
+      "fileSha256": "f413494132a04f55a3eb9c8d5c90812745848c1a009fdac772d0e4ef578ba2b5"
+    },
+    {
+      "path": "evals/clip_composition/digest_acoustic_timing_validation_v001.mts",
+      "fileSha256": "efde9b9d009711eed8433ecba94b8ff7ff92e1b06fe99165f689cddc6e09d754"
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f"
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001"
+}

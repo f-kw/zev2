@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "candidate-selection-provenance-verification-v001",
+  "status": "passed",
+  "planBinding": {
+    "schemaVersion": "candidate-selection-fixed-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/fixed-plan-v002.json",
+    "fileSha256": "852973e13d28d73afc969c882eb6541005c75bee08c6c8c3dabe452b26f8f2fa",
+    "canonicalSha256": "b100ff8c61c4fcb08b8c61d359f65a762f14a4a89107337d857a40ac05007169"
+  },
+  "verificationBinding": {
+    "schemaVersion": "candidate-selection-e2e-verification-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/verification.json",
+    "fileSha256": "2411426287cc3adaf89b1dcf338082f47841cb6320b8246ff6d456d555df106c",
+    "canonicalSha256": "5c9b2658eba2becb449e5493bfb2bd9f0c9803754a21f92709c7bd8076228f0f"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/verify_candidate_selection_e2e_v001.mts",
+    "fileSha256": "7a6e5b93afa4b5d32b62dffe5d1a36d7a88b5f84593e564bae7377c1ed33480f"
+  },
+  "checks": {
+    "sourceInputs": "passed",
+    "candidateSetReconstruction": "passed",
+    "judgmentValidationAndPromotion": "passed",
+    "retainedContentAndCutEvidence": "passed",
+    "selectedCandidatesOnly": "passed",
+    "commonCoreInvocation": "passed",
+    "formalRangeProjection": "passed",
+    "baseMediaHashGraph": "passed",
+    "captionCoreReconstruction": "passed",
+    "renderedBytesAndFrames": "passed",
+    "audioPacketPreservation": "passed"
+  },
+  "counts": {
+    "candidates": 3,
+    "adopted": 2,
+    "rejected": 1
+  },
+  "media": {
+    "durationMs": 99900,
+    "video": {
+      "codecName": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frameCount": 2997
+    },
+    "audio": {
+      "codecName": "aac",
+      "packetPayloadSha256": "6d4fd024f0d6eb0683a0ae804a462c8bf78d4e8424befe22b6ca30c90fb80114"
+    }
+  },
+  "humanQuality": "not-evaluated",
+  "finalDecisionOwner": "human"
+}

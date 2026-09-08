@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "candidate-selection-type-fix-reexecution-proof-v001",
+  "status": "passed",
+  "previousRoot": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001",
+  "finalRoot": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002",
+  "reason": "Resolve new strict control-flow/type inference diagnostics; preserve immutable earlier execution.",
+  "implementationComparison": [
+    {
+      "path": "runner/src/skills/candidate-selection-v001.ts",
+      "originalFileSha256": "1fc8a464ade963e49e26f2eba1bd8b6c0d77c30054308684159078847ab90a8d",
+      "currentFileSha256": "1fc8a464ade963e49e26f2eba1bd8b6c0d77c30054308684159078847ab90a8d",
+      "emittedRuntimeSha256": "4e64a5c4652cb0f80ee73fefeed333c79eae603b7a71525892bf12890ee6729f",
+      "runtimeUnchanged": true,
+      "permittedMetadataChanges": []
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "originalFileSha256": "e099ddc1c266b13e42d9061ca22e1998a00234df0323074cc76e5d64f3a13a73",
+      "currentFileSha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "emittedRuntimeSha256": "3011343c11c2adea802bea42145a743d1191195d6ed7d4102883a88352d3754c",
+      "runtimeUnchanged": true,
+      "permittedMetadataChanges": []
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_selection_e2e_v001.mts",
+      "originalFileSha256": "6f2f8de8788ad46137257f295378baa9a8f991ece9fffd056f94a397527b35a2",
+      "currentFileSha256": "1018e0ff3e3fd84273fbb915bfb6d29a6ffb16e45cfd9875668331c8acfa86b8",
+      "emittedRuntimeSha256": "f7a545d47be51f216ecdd56823c1a13d89e9b937c4cf4cf87cc16e1e13a613b7",
+      "runtimeUnchanged": true,
+      "permittedMetadataChanges": [
+        "demo output root",
+        "demo plan ID"
+      ]
+    }
+  ],
+  "comparisonCompiler": {
+    "name": "esbuild",
+    "version": "0.28.0",
+    "options": {
+      "loader": "ts",
+      "target": "es2022",
+      "format": "esm",
+      "legalComments": "none"
+    }
+  },
+  "strictTypecheck": {
+    "existingDiagnosticCount": 135,
+    "currentDiagnosticCount": 135,
+    "existingDiagnosticsExact": true,
+    "newFileDiagnostics": 0,
+    "wholeProjectTypecheckPass": false,
+    "missingJavaScriptDeclarationsAtNewCallSites": "Four explicit @ts-expect-error annotations only for existing untyped JS imports; runtime validators unchanged."
+  },
+  "judgmentInputExact": true,
+  "semanticConditionsChanged": false,
+  "newSemanticSearchOrBestSelection": false,
+  "measurementNote": "An exploratory TypeScript printer comparison differed in optional single-arrow-parameter parentheses. Compare canonical output of the installed esbuild instead. A subsequent inline command had a quote typo and did not execute; this saved script is the final measurement."
+}

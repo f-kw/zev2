@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "candidate-selection-preflight-v001",
+  "status": "passed",
+  "planBinding": {
+    "schemaVersion": "candidate-selection-fixed-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/fixed-plan-v002.json",
+    "fileSha256": "852973e13d28d73afc969c882eb6541005c75bee08c6c8c3dabe452b26f8f2fa",
+    "canonicalSha256": "b100ff8c61c4fcb08b8c61d359f65a762f14a4a89107337d857a40ac05007169"
+  },
+  "candidateCount": 3,
+  "sourceCandidateSetReconstruction": "passed",
+  "retentionReconstruction": "passed",
+  "newSelectionJudgmentStarted": false,
+  "previousPlanBinding": {
+    "schemaVersion": "candidate-selection-fixed-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/fixed-plan.json",
+    "fileSha256": "ddb4686ec71502df86017ca5cfc92729cf4edad354e7bfe6f121860a05e8f1d6",
+    "canonicalSha256": "2e34cdeec2fb2e84f1c9757694e583673e9a8ec95c64877420f775feb4da5be6"
+  },
+  "prejudgmentRevisionReason": "TypeScript制御フローの型絞り込みを修正。候補・本文・条件・採用件数方針は不変。未使用の準備段階planを保存し、検査合格後の実装を新しい参照へ固定。",
+  "tests": {
+    "unit": 23,
+    "skillTypecheck": "passed"
+  },
+  "historicalHumanLabelsInJudgmentInput": false
+}

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "candidate-selection-judgment-reexecution-v001",
+  "status": "passed",
+  "checks": {
+    "candidate-set.json": {
+      "fileSha256": "a99f05de6029a68d085cc48a5177b95f81f29514412f69435ac8c73499ea87d4",
+      "bytesExact": true
+    },
+    "selection-result.json": {
+      "fileSha256": "cd718552c97c6316518e7019e4ba207c64647077abebbcc95a212db0f73ec0e3",
+      "bytesExact": true
+    }
+  },
+  "initialNewSemanticJudgment": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/selection-response.json",
+  "finalSameInputReconfirmation": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/selection-response.json",
+  "responseChanges": [
+    "requestFileSha256",
+    "judgmentNote"
+  ],
+  "decisionReasonEvidenceAndComparisonsExact": true,
+  "differentAlternativesSampled": false,
+  "historicalHumanCandidateLabelsRead": false,
+  "humanQuality": "not-evaluated"
+}

@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "candidate-selection-e2e-verification-v001",
+  "status": "passed",
+  "planBinding": {
+    "schemaVersion": "candidate-selection-fixed-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/fixed-plan-v002.json",
+    "fileSha256": "852973e13d28d73afc969c882eb6541005c75bee08c6c8c3dabe452b26f8f2fa",
+    "canonicalSha256": "b100ff8c61c4fcb08b8c61d359f65a762f14a4a89107337d857a40ac05007169"
+  },
+  "candidateSetBinding": {
+    "schemaVersion": "candidate-selection-candidate-set-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/candidate-set.json",
+    "fileSha256": "a99f05de6029a68d085cc48a5177b95f81f29514412f69435ac8c73499ea87d4",
+    "canonicalSha256": "3d32c1296d8f4ee1ad67bf83741cd4eb6424d17c1195f07d25a74b073ced5730"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "candidate-selection-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/machine-adoption.json",
+    "fileSha256": "8a1e1713ff5fb7c0119e38fecb7f016490b20463a6956e55cba317045b6b3625",
+    "canonicalSha256": "ea838a6315c284990df5a5822217097bca776ae65ac76c3b156424ea4725d62e"
+  },
+  "counts": {
+    "candidates": 3,
+    "adopted": 2,
+    "rejected": 1
+  },
+  "rejectedAsRedundant": [],
+  "rejectedAsWeak": [
+    "candidate-0003"
+  ],
+  "requiredRetained": [],
+  "finalFrames": 2997,
+  "finalDurationSeconds": 99.9,
+  "newSelectionJudgment": "executed-current-codex-stdin-once",
+  "existingInternalRetention": "reconstructed-unchanged",
+  "existingDisplaySkill": "unchanged",
+  "commonManufacturing": "passed",
+  "technicalQc": "passed",
+  "base": {
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/base-media/base-media.mp4",
+      "fileSha256": "5127512b58262f8d86e9d82d077de661f9fcb4cf7d0a0ac1cb0b6416b69c89f9"
+    },
+    "timeline": {
+      "schemaVersion": "presentation-base-media-timeline-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/base-media/timeline.json",
+      "fileSha256": "65da9c31b04d91151ff7057c9ec360ef3dab8fb15fb4e3528d9088c3a57b2150",
+      "canonicalSha256": "92f21e3690c719d7f50c0e3755646af821a3b7d9b68ed22ae200ea50f152b97d"
+    },
+    "generationManifest": {
+      "schemaVersion": "presentation-base-media-generation-manifest-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/base-media/generation-manifest.json",
+      "fileSha256": "d6ee16e25bf308e559fcad1e11e33fa7a302966fe1a75a08c7a91bd3c74c43de",
+      "canonicalSha256": "1988909ade9dc536298a7a5e95d8f81ed7755758ac44abf67fbc2fc2765724ca"
+    },
+    "validationReceipt": {
+      "schemaVersion": "candidate-selection-base-media-validation-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/base-media/validation-receipt.json",
+      "fileSha256": "516e43ab8661a7c36fdbd5458988e2f1c4215667fdddd576b7b48564d97297f8",
+      "canonicalSha256": "5d5bfdc5a9baf244317be9ae3a970c2e0387aadd685076221f96a785319b95ba"
+    }
+  },
+  "artifacts": {
+    "timing": {
+      "schemaVersion": "candidate-internal-edit-caption-timing-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/caption-timing.json",
+      "fileSha256": "78767afd747e30a988df786bce5eee7a003d3efcf663e019f876a0d77a68dee1",
+      "canonicalSha256": "3f1c248cb8247d58559acf2cd2d24e4c9e80a9eb5b228b55fcb7cfa0693451ee"
+    },
+    "meaning": {
+      "schemaVersion": "candidate-internal-edit-meaning-input-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/meaning-input.json",
+      "fileSha256": "abe336294ff5870343cb9e2d2e3c57c8a3357fda2eeb995a594421e4166ffb46",
+      "canonicalSha256": "67decdd3d63a5fac766cc39ea79f3f249e22cbfef1127938205fce0b1d2f0c91"
+    },
+    "sourcePackage": {
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/source-package.json",
+      "fileSha256": "bc614bb63ff46d5ba862f5f9c749f9fb9fe039f52e4fe6ddef131bc041ae3247",
+      "canonicalSha256": "74311f21142bd12689fc806edb29ebd67c3dd04a2899e75bd739c8a4caa3cc0e"
+    },
+    "captionAdoption": {
+      "schemaVersion": "candidate-internal-edit-caption-adoption-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/caption-adoption.json",
+      "fileSha256": "3fb322d3e731a688fc79240b90ebf247ac38f6e40830a977ed64e1b58aed586a",
+      "canonicalSha256": "22f725af73d3049617a8694a152532dfab07d90e2cedc56e67c158b3c0eb2b2e"
+    },
+    "selection": {
+      "schemaVersion": "presentation-output-caption-cue-selection-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/selection.json",
+      "fileSha256": "0816479aca533d46806563e98285eea45f8daaecd6620928794c81dce26fb8b8",
+      "canonicalSha256": "53c3e9bce1662d648a1a9540b418500fe4f50bc78e1a0b98102c1112b5b6b0d3"
+    },
+    "cueEndProjection": {
+      "schemaVersion": "presentation-cue-end-projection-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/cue-end-projection.json",
+      "fileSha256": "dc24c84bbc5dfbacee8b46beb01532481d4ec5482d6671081d20bcb7ba1367f5",
+      "canonicalSha256": "e84f49903ef0ac812673684793271105ca8d7159c2ab72158d14e439e20b4a53"
+    },
+    "lineEndProjection": {
+      "schemaVersion": "presentation-semantic-line-end-projection-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/line-end-projection.json",
+      "fileSha256": "448ae859820afe799e9c4eb938885ec96badd31ac92ea8dadcfd1ea16ca92070",
+      "canonicalSha256": "8c70eed57c7c93e40c8e023308b5eeea51022695bc7e263c1c6c103398476035"
+    },
+    "instruction": {
+      "schemaVersion": "presentation-instruction-artifact-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/instruction.json",
+      "fileSha256": "b0e74424d5fac6b8fdddf3dac503c082ada704ef99314c9fe664c8ca6a8c1e94",
+      "canonicalSha256": "38f618b544c9e8006003cbbb869c898be36e0ab713376759e5b9978c90d53ec5"
+    },
+    "rendererJob": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/renderer-job.json",
+      "fileSha256": "f73da31d17115290dff90328085592305ea1077406aecd532490de647fce8a99",
+      "canonicalSha256": "beeb0cae9e99a6efdceaf90fa8943c2d518c93de42b0dfdbee1961a1b630ef6c"
+    }
+  },
+  "renderer": {
+    "execution": {
+      "schemaVersion": "candidate-selection-renderer-execution-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/renderer-resume-v001/renderer-result.json",
+      "fileSha256": "496c6bc92e3258ca1879f3af6d6314991e25250ad222fb56f0b28686141ff24f",
+      "canonicalSha256": "114ccba174042cb2025467fa62befcafab7986de50e501674202c5d16a7920aa"
+    },
+    "admission": {
+      "schemaVersion": "presentation-renderer-admission-receipt-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/renderer-resume-v001/admission-receipt.json",
+      "fileSha256": "6ba620fb26682b204eac4f4487a9f8228648062d4b4df423b8c0fc4cbdd7d4f2",
+      "canonicalSha256": "f5c16b15f9a27fdfaf3b406f1173d9857d9661095f35c63b88e9438027b41182"
+    },
+    "lineLayout": {
+      "schemaVersion": "presentation-renderer-line-layout-v002",
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/renderer-resume-v001/line-layout.json",
+      "fileSha256": "835816120054507e90add472beb14e16dc3b2f6f2f17a258b51e60bfe6da91f9",
+      "canonicalSha256": "19c4d8cc17bf3633d1755a4afb064adc91e21922c699545c343848a750615ee7"
+    },
+    "qc": "passed",
+    "video": {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/renderer-resume-v001/render/presentation-rendered-v002.mp4",
+      "fileSha256": "f83eaeb1cc4fd9ec32b8f794b7556d83cb1f92de352394ec6015335805646f81"
+    }
+  },
+  "rendererContinuationBinding": {
+    "schemaVersion": "candidate-selection-renderer-continuation-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v001/renderer-continuation.json",
+    "fileSha256": "752275000aa73a8b75d3410e864120459fe46b22f5bd33f7017b9acf794d7ca1",
+    "canonicalSha256": "9d69ee601a20ff58bd7c5e3c0b1b007a28a3ecc9d225b39a0393e6604371cd0e"
+  },
+  "humanQuality": "not-evaluated",
+  "historicalHumanQualityInherited": false,
+  "newGeminiOrAcousticObservation": "none",
+  "apiCommunication": "none"
+}

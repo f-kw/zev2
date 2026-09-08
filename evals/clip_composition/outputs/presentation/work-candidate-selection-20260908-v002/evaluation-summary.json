@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "candidate-selection-evaluation-summary-v001",
+  "instruction": "ZEV進行管理２ 指示-019",
+  "technicalStatus": "passed",
+  "humanQuality": "not-evaluated",
+  "counts": {
+    "candidates": 3,
+    "adopted": 2,
+    "rejected": 1
+  },
+  "rejectedAsRedundant": [],
+  "rejectedAsWeak": [
+    "candidate-0003"
+  ],
+  "requiredRetained": [],
+  "decisions": [
+    {
+      "candidateId": "candidate-0001",
+      "sourceId": "ymUsGrT6EaA",
+      "decision": "adopt",
+      "basis": "distinct-highlight",
+      "reason": "相手の存在を疑う言葉から発見、覗き方への抗議、世界一嫌いという反応までが本文だけでつながる。急加速して捕まる候補とは、怖がる対象も反応を引き起こす出来事も異なる。振り返り候補が説明する覗く怖さを、この候補では本人の反応として直接示せるため、独立した見どころとして残す。",
+      "evidenceUtteranceIds": [
+        "common-utterance-000110",
+        "common-utterance-000111",
+        "common-utterance-000113",
+        "common-utterance-000115"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0002",
+          "evidenceUtteranceIds": [
+            "common-utterance-000175",
+            "common-utterance-000177",
+            "common-utterance-000181"
+          ]
+        },
+        {
+          "candidateId": "candidate-0003",
+          "evidenceUtteranceIds": [
+            "common-utterance-000421",
+            "common-utterance-000424"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0002",
+      "sourceId": "ymUsGrT6EaA",
+      "decision": "adopt",
+      "basis": "distinct-highlight",
+      "reason": "逃げる必要への気づきと走る速さの確認が、急加速への驚き、捕まって棺のような場所に入れられたという結末につながる。覗かれることを嫌がる候補と怖さの感情は共通するが、速度の予想が外れて逃走が失敗する展開は独自であり、同じ反応の置き換えではない。振り返りの説明を付けなくても前提から結末を理解できる見どころとして残す。",
+      "evidenceUtteranceIds": [
+        "common-utterance-000174",
+        "common-utterance-000175",
+        "common-utterance-000177",
+        "common-utterance-000178",
+        "common-utterance-000181"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0001",
+          "evidenceUtteranceIds": [
+            "common-utterance-000110",
+            "common-utterance-000113",
+            "common-utterance-000115"
+          ]
+        },
+        {
+          "candidateId": "candidate-0003",
+          "evidenceUtteranceIds": [
+            "common-utterance-000422",
+            "common-utterance-000423"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0003",
+      "sourceId": "ymUsGrT6EaA",
+      "decision": "reject",
+      "basis": "weak",
+      "reason": "角度や時間差を使う怖がらせ方の分析と今年一という評価には独自情報があり、他候補の完全な重複とは判断しない。ただし、今回の見どころを中心にしたダイジェストでは、既に本人の拒否反応や予想が外れた出来事で示される怖さを改めて解説する役割が中心で、追加の出来事としての見どころが採用する両候補より弱い。角度・時間差の分析を外しても、相手に気づいて抗議する流れと逃走から捕縛までの理解に必要な文脈は失われない。解説と総評を失うことは認めた上で、この制作要求では必須の締めとしては残さない。尺、本文量、元位置、ID、採用件数では判断していない。",
+      "evidenceUtteranceIds": [
+        "common-utterance-000421",
+        "common-utterance-000422",
+        "common-utterance-000423",
+        "common-utterance-000424"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0001",
+          "evidenceUtteranceIds": [
+            "common-utterance-000110",
+            "common-utterance-000111",
+            "common-utterance-000113",
+            "common-utterance-000115"
+          ]
+        },
+        {
+          "candidateId": "candidate-0002",
+          "evidenceUtteranceIds": [
+            "common-utterance-000174",
+            "common-utterance-000175",
+            "common-utterance-000177",
+            "common-utterance-000181"
+          ]
+        }
+      ]
+    }
+  ],
+  "beforeFrames": 4831,
+  "afterFrames": 2997,
+  "framesPerSecond": 30,
+  "beforeDurationSeconds": 161.03333333333333,
+  "afterDurationSeconds": 99.9,
+  "removedFrames": 1834,
+  "formalCaptionCount": 17,
+  "changeMeaning": "覗かれる場面と逃走・捕縛を残し、角度・時間差の振り返りと総評を外した。独自の解説を失う判断であり、完全な重複除去ではない。",
+  "qualityLimitations": [
+    "一候補群の限定実証。重複除去や必須文脈の維持を広く実証したとは扱わない。",
+    "採否は保存済み本文に基づく。冒頭の確認文は既存字幕補修で除外しており、理由の全発話が完成映像に存在することは保証しない。",
+    "短縮は改善の証明ではない。除外の妥当性、残した候補の強さ、文脈、見どころ、全体の改善は人間未判定。"
+  ],
+  "newHumanSubtitleJudgment": false,
+  "paidApiCalls": 0,
+  "paidApiCostUsd": 0,
+  "newMaterial": false,
+  "video": {
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/render/presentation-rendered-v002.mp4",
+    "fileSha256": "1c91f282bd008777764a6d8f720577eef2845d3a2b521f415dead5e672b0265f"
+  },
+  "review": {
+    "status": "passed",
+    "checkedAt": "2026-09-08T12:35:29.007228+00:00",
+    "origin": "http://127.0.0.1:50807/",
+    "browser": "Microsoft Edge",
+    "humanQuality": "not-evaluated",
+    "method": "Actual UI clicks; read-only DOM media metadata and playback state. No video content analysis or human quality judgment.",
+    "before": {
+      "width": 1920,
+      "height": 1080,
+      "browserDurationSeconds": 161.033008,
+      "formalFrames": 4831,
+      "selectionsObservedSeconds": [
+        99.9,
+        118.766666,
+        146.066666,
+        99.9
+      ],
+      "internalEndObservedSeconds": 118.733333,
+      "internalEndPaused": true,
+      "physicalEndObservedSeconds": 161.033008,
+      "physicalEndPaused": true
+    },
+    "after": {
+      "width": 1920,
+      "height": 1080,
+      "browserDurationSeconds": 99.9,
+      "formalFrames": 2997,
+      "selectionsObservedSeconds": [
+        0,
+        15.4,
+        89.1,
+        0
+      ],
+      "endingObservedSeconds": 99.866666,
+      "endingPaused": true
+    },
+    "controlsVerified": [
+      "all eight range buttons",
+      "range labels follow selections",
+      "explicit play restarts selected range",
+      "manual pause",
+      "internal end pauses at last included frame",
+      "physical media end pauses",
+      "playing one video pauses the other",
+      "initial positions restored with both paused"
+    ],
+    "simultaneousPlaybackObservation": {
+      "beforePaused": true,
+      "afterPaused": false
+    },
+    "qualityQuestionsVisible": 5,
+    "writesHumanApproval": false
+  },
+  "tests": {
+    "selection": 23,
+    "integration": 6,
+    "commonCaptionRepair": 47,
+    "uniqueTotal": 76
+  },
+  "finalEntry": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/final-independent-verification-v001.json"
+}
