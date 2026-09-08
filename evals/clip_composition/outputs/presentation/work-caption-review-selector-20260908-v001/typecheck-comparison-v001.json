@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "caption-review-typecheck-comparison-v001",
+  "baselineCommit": "e14f6caa905553927877fe4b35134be3e7643f19",
+  "baselineEntryOriginalPath": "evals/clip_composition/caption_local_repair_ui_v001.mts",
+  "baselineTemporaryEntrySha256": "66d49d90f6fb2a16d67e77477e0eaa49005e89da7d6c74cb2b7442f999e5b359",
+  "baselineErrorCount": 121,
+  "currentErrorCount": 121,
+  "diagnosticsExactlyIdentical": true,
+  "changedFileDiagnostics": 0,
+  "interpretation": "Scoped files have no diagnostics. Imported existing dependencies fail strict typecheck; repository typecheck is not claimed passed.",
+  "command": "corepack pnpm --dir runner exec tsc --noEmit --strict --allowImportingTsExtensions --skipLibCheck --target ES2022 --module NodeNext --moduleResolution NodeNext --types node --typeRoots node_modules/@types <entry .mts files>"
+}

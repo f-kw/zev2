@@ -1,0 +1,923 @@
+{
+  "schemaVersion": "caption-review-audit-proof-v001",
+  "newHumanJudgment": false,
+  "groundTruth": {
+    "labels": [
+      {
+        "caseId": "digest-before",
+        "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000001",
+        "textIds": [
+          "digest-internal-edit-20260907-v002-atom-000001",
+          "digest-internal-edit-20260907-v002-atom-000002",
+          "digest-internal-edit-20260907-v002-atom-000003",
+          "digest-internal-edit-20260907-v002-atom-000004",
+          "digest-internal-edit-20260907-v002-atom-000005",
+          "digest-internal-edit-20260907-v002-atom-000006",
+          "digest-internal-edit-20260907-v002-atom-000007",
+          "digest-internal-edit-20260907-v002-atom-000008",
+          "digest-internal-edit-20260907-v002-atom-000009"
+        ],
+        "text": "え?いるんでしょ?",
+        "display": {
+          "startFrame": 0,
+          "endFrameExclusive": 8
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+        },
+        "result": "issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/human-review.json",
+            "fileSha256": "291b347cb49ffda75e31899b4ab0f69f54c3641ee9cd44ac590fafcf56915151"
+          },
+          "pointer": "/captionReviews/0",
+          "answer": {
+            "id": "caption-1",
+            "ordinal": 1,
+            "text": "え?いるんでしょ?",
+            "start": "遅い",
+            "end": "遅い",
+            "memo": "え?いるんでしょ?は発話がない"
+          },
+          "targets": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/groups.json",
+            "fileSha256": "b604ee6b91f0ac68c84419dc2e5f727eb2196f61615d35c6778bb4372d071d1d"
+          }
+        }
+      },
+      {
+        "caseId": "digest-before",
+        "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000002",
+        "textIds": [
+          "digest-internal-edit-20260907-v002-atom-000010",
+          "digest-internal-edit-20260907-v002-atom-000011",
+          "digest-internal-edit-20260907-v002-atom-000012",
+          "digest-internal-edit-20260907-v002-atom-000013",
+          "digest-internal-edit-20260907-v002-atom-000014",
+          "digest-internal-edit-20260907-v002-atom-000015",
+          "digest-internal-edit-20260907-v002-atom-000016",
+          "digest-internal-edit-20260907-v002-atom-000017"
+        ],
+        "text": "あーもういるやん",
+        "display": {
+          "startFrame": 8,
+          "endFrameExclusive": 13
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+        },
+        "result": "no-issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/human-review.json",
+            "fileSha256": "291b347cb49ffda75e31899b4ab0f69f54c3641ee9cd44ac590fafcf56915151"
+          },
+          "pointer": "/captionReviews/1",
+          "answer": {
+            "id": "caption-2",
+            "ordinal": 2,
+            "text": "あーもういるやん",
+            "start": "問題なし",
+            "end": "問題なし",
+            "memo": ""
+          },
+          "targets": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/groups.json",
+            "fileSha256": "b604ee6b91f0ac68c84419dc2e5f727eb2196f61615d35c6778bb4372d071d1d"
+          }
+        }
+      },
+      {
+        "caseId": "digest-before",
+        "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000011",
+        "textIds": [
+          "digest-internal-edit-20260907-v002-atom-000091",
+          "digest-internal-edit-20260907-v002-atom-000092",
+          "digest-internal-edit-20260907-v002-atom-000093",
+          "digest-internal-edit-20260907-v002-atom-000094",
+          "digest-internal-edit-20260907-v002-atom-000095",
+          "digest-internal-edit-20260907-v002-atom-000096"
+        ],
+        "text": "逃げるやつ?",
+        "display": {
+          "startFrame": 462,
+          "endFrameExclusive": 544
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+        },
+        "result": "no-issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/human-review.json",
+            "fileSha256": "291b347cb49ffda75e31899b4ab0f69f54c3641ee9cd44ac590fafcf56915151"
+          },
+          "pointer": "/captionReviews/2",
+          "answer": {
+            "id": "caption-11",
+            "ordinal": 11,
+            "text": "逃げるやつ?",
+            "start": "問題なし",
+            "end": "問題なし",
+            "memo": ""
+          },
+          "targets": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/groups.json",
+            "fileSha256": "b604ee6b91f0ac68c84419dc2e5f727eb2196f61615d35c6778bb4372d071d1d"
+          }
+        }
+      },
+      {
+        "caseId": "digest-before",
+        "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000015",
+        "textIds": [
+          "digest-internal-edit-20260907-v002-atom-000125",
+          "digest-internal-edit-20260907-v002-atom-000126",
+          "digest-internal-edit-20260907-v002-atom-000127",
+          "digest-internal-edit-20260907-v002-atom-000128",
+          "digest-internal-edit-20260907-v002-atom-000129",
+          "digest-internal-edit-20260907-v002-atom-000130",
+          "digest-internal-edit-20260907-v002-atom-000131",
+          "digest-internal-edit-20260907-v002-atom-000132",
+          "digest-internal-edit-20260907-v002-atom-000133",
+          "digest-internal-edit-20260907-v002-atom-000134",
+          "digest-internal-edit-20260907-v002-atom-000135",
+          "digest-internal-edit-20260907-v002-atom-000136",
+          "digest-internal-edit-20260907-v002-atom-000137",
+          "digest-internal-edit-20260907-v002-atom-000138"
+        ],
+        "text": "なんかグロいやつに捕まってる",
+        "display": {
+          "startFrame": 1494,
+          "endFrameExclusive": 1794
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+        },
+        "result": "issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/human-review.json",
+            "fileSha256": "291b347cb49ffda75e31899b4ab0f69f54c3641ee9cd44ac590fafcf56915151"
+          },
+          "pointer": "/captionReviews/3",
+          "answer": {
+            "id": "caption-15",
+            "ordinal": 15,
+            "text": "なんかグロいやつに捕まってる",
+            "start": "早い",
+            "end": "判別できない",
+            "memo": "７秒くらい早い"
+          },
+          "targets": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/groups.json",
+            "fileSha256": "b604ee6b91f0ac68c84419dc2e5f727eb2196f61615d35c6778bb4372d071d1d"
+          }
+        }
+      },
+      {
+        "caseId": "digest-before",
+        "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000016",
+        "textIds": [
+          "digest-internal-edit-20260907-v002-atom-000139",
+          "digest-internal-edit-20260907-v002-atom-000140",
+          "digest-internal-edit-20260907-v002-atom-000141"
+        ],
+        "text": "どこ?",
+        "display": {
+          "startFrame": 2673,
+          "endFrameExclusive": 2918
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+        },
+        "result": "issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/human-review.json",
+            "fileSha256": "291b347cb49ffda75e31899b4ab0f69f54c3641ee9cd44ac590fafcf56915151"
+          },
+          "pointer": "/captionReviews/4",
+          "answer": {
+            "id": "caption-16",
+            "ordinal": 16,
+            "text": "どこ?",
+            "start": "問題なし",
+            "end": "遅い",
+            "memo": ""
+          },
+          "targets": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/groups.json",
+            "fileSha256": "b604ee6b91f0ac68c84419dc2e5f727eb2196f61615d35c6778bb4372d071d1d"
+          }
+        }
+      },
+      {
+        "caseId": "digest-before",
+        "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000017",
+        "textIds": [
+          "digest-internal-edit-20260907-v002-atom-000142",
+          "digest-internal-edit-20260907-v002-atom-000143",
+          "digest-internal-edit-20260907-v002-atom-000144",
+          "digest-internal-edit-20260907-v002-atom-000145"
+        ],
+        "text": "何これ?",
+        "display": {
+          "startFrame": 2918,
+          "endFrameExclusive": 2929
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+        },
+        "result": "no-issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/human-review.json",
+            "fileSha256": "291b347cb49ffda75e31899b4ab0f69f54c3641ee9cd44ac590fafcf56915151"
+          },
+          "pointer": "/captionReviews/5",
+          "answer": {
+            "id": "caption-17",
+            "ordinal": 17,
+            "text": "何これ?",
+            "start": "問題なし",
+            "end": "問題なし",
+            "memo": ""
+          },
+          "targets": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/groups.json",
+            "fileSha256": "b604ee6b91f0ac68c84419dc2e5f727eb2196f61615d35c6778bb4372d071d1d"
+          }
+        }
+      },
+      {
+        "caseId": "digest-before",
+        "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000018",
+        "textIds": [
+          "digest-internal-edit-20260907-v002-atom-000146",
+          "digest-internal-edit-20260907-v002-atom-000147",
+          "digest-internal-edit-20260907-v002-atom-000148",
+          "digest-internal-edit-20260907-v002-atom-000149",
+          "digest-internal-edit-20260907-v002-atom-000150",
+          "digest-internal-edit-20260907-v002-atom-000151",
+          "digest-internal-edit-20260907-v002-atom-000152",
+          "digest-internal-edit-20260907-v002-atom-000153",
+          "digest-internal-edit-20260907-v002-atom-000154",
+          "digest-internal-edit-20260907-v002-atom-000155",
+          "digest-internal-edit-20260907-v002-atom-000156",
+          "digest-internal-edit-20260907-v002-atom-000157",
+          "digest-internal-edit-20260907-v002-atom-000158",
+          "digest-internal-edit-20260907-v002-atom-000159",
+          "digest-internal-edit-20260907-v002-atom-000160",
+          "digest-internal-edit-20260907-v002-atom-000161",
+          "digest-internal-edit-20260907-v002-atom-000162",
+          "digest-internal-edit-20260907-v002-atom-000163",
+          "digest-internal-edit-20260907-v002-atom-000164"
+        ],
+        "text": "なんか棺みたいなところに入れられてる!",
+        "display": {
+          "startFrame": 2929,
+          "endFrameExclusive": 2997
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+        },
+        "result": "no-issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/human-review.json",
+            "fileSha256": "291b347cb49ffda75e31899b4ab0f69f54c3641ee9cd44ac590fafcf56915151"
+          },
+          "pointer": "/captionReviews/6",
+          "answer": {
+            "id": "caption-18",
+            "ordinal": 18,
+            "text": "なんか棺みたいなところに入れられてる!",
+            "start": "問題なし",
+            "end": "問題なし",
+            "memo": ""
+          },
+          "targets": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/groups.json",
+            "fileSha256": "b604ee6b91f0ac68c84419dc2e5f727eb2196f61615d35c6778bb4372d071d1d"
+          }
+        }
+      },
+      {
+        "caseId": "digest-before",
+        "instructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000030",
+        "textIds": [
+          "digest-internal-edit-20260907-v002-atom-000337",
+          "digest-internal-edit-20260907-v002-atom-000338",
+          "digest-internal-edit-20260907-v002-atom-000339",
+          "digest-internal-edit-20260907-v002-atom-000340",
+          "digest-internal-edit-20260907-v002-atom-000341",
+          "digest-internal-edit-20260907-v002-atom-000342",
+          "digest-internal-edit-20260907-v002-atom-000343",
+          "digest-internal-edit-20260907-v002-atom-000344",
+          "digest-internal-edit-20260907-v002-atom-000345",
+          "digest-internal-edit-20260907-v002-atom-000346",
+          "digest-internal-edit-20260907-v002-atom-000347",
+          "digest-internal-edit-20260907-v002-atom-000348",
+          "digest-internal-edit-20260907-v002-atom-000349",
+          "digest-internal-edit-20260907-v002-atom-000350",
+          "digest-internal-edit-20260907-v002-atom-000351",
+          "digest-internal-edit-20260907-v002-atom-000352",
+          "digest-internal-edit-20260907-v002-atom-000353",
+          "digest-internal-edit-20260907-v002-atom-000354",
+          "digest-internal-edit-20260907-v002-atom-000355",
+          "digest-internal-edit-20260907-v002-atom-000356",
+          "digest-internal-edit-20260907-v002-atom-000357",
+          "digest-internal-edit-20260907-v002-atom-000358",
+          "digest-internal-edit-20260907-v002-atom-000359",
+          "digest-internal-edit-20260907-v002-atom-000360",
+          "digest-internal-edit-20260907-v002-atom-000361",
+          "digest-internal-edit-20260907-v002-atom-000362",
+          "digest-internal-edit-20260907-v002-atom-000363",
+          "digest-internal-edit-20260907-v002-atom-000364",
+          "digest-internal-edit-20260907-v002-atom-000365"
+        ],
+        "text": "油断させてビビらせてくるのがマジでここの会社多いなって思う",
+        "display": {
+          "startFrame": 4231,
+          "endFrameExclusive": 4382
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/caption-revision-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "d51077915fc19eb459a876bea818b52cd72726acba3ebcfd8e47be990dbbc3e4"
+        },
+        "result": "no-issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/human-review.json",
+            "fileSha256": "291b347cb49ffda75e31899b4ab0f69f54c3641ee9cd44ac590fafcf56915151"
+          },
+          "pointer": "/captionReviews/7",
+          "answer": {
+            "id": "caption-30",
+            "ordinal": 30,
+            "text": "油断させてビビらせてくるのがマジでここの会社多いなって思う",
+            "start": "問題なし",
+            "end": "問題なし",
+            "memo": ""
+          },
+          "targets": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/groups.json",
+            "fileSha256": "b604ee6b91f0ac68c84419dc2e5f727eb2196f61615d35c6778bb4372d071d1d"
+          }
+        }
+      },
+      {
+        "caseId": "distant-before",
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000002",
+        "textIds": [
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000025",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000026",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000027",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000028",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000029",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000030",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000031",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000032",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000033",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000034",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000035",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000036",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000037",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000038",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000039",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000040",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000041"
+        ],
+        "text": "マジ今んところ今年一怖すぎて笑った",
+        "display": {
+          "startFrame": 1255,
+          "endFrameExclusive": 1598
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "8299565f47c5ec1f83928462fa2ef1a144ff1ef297778e2ba8a23036d6c5b4e4"
+        },
+        "result": "issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-caption-boundary-v001/human-review-result.json",
+            "fileSha256": "b79de0b61206457284a23a5ae72dfdd972c916d5ebb798828b85faad44511dde"
+          },
+          "pointer": "/captionTimingIssues/0",
+          "answer": {
+            "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000002",
+            "text": "マジ今んところ今年一怖すぎて笑った",
+            "finding": "長く表示されすぎている"
+          }
+        }
+      },
+      {
+        "caseId": "distant-before",
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000003",
+        "textIds": [
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000042",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000043",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000044",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000045",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000046",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000047",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000048"
+        ],
+        "text": "ビデオ見る気?",
+        "display": {
+          "startFrame": 1598,
+          "endFrameExclusive": 1628
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "8299565f47c5ec1f83928462fa2ef1a144ff1ef297778e2ba8a23036d6c5b4e4"
+        },
+        "result": "issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-caption-boundary-v001/human-review-result.json",
+            "fileSha256": "b79de0b61206457284a23a5ae72dfdd972c916d5ebb798828b85faad44511dde"
+          },
+          "pointer": "/captionTimingIssues/1",
+          "answer": {
+            "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000003",
+            "text": "ビデオ見る気?",
+            "finding": "タイミングが壊れている"
+          }
+        }
+      },
+      {
+        "caseId": "distant-before",
+        "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000004",
+        "textIds": [
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000049",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000050",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000051",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000052",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000053",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000054",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000055",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000056",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000057",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000058",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000059",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000060",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000061",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000062",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000063",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000064",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000065",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000066",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000067",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000068"
+        ],
+        "text": "もう勘弁してよ夜中になんか映るようなやつ",
+        "display": {
+          "startFrame": 1628,
+          "endFrameExclusive": 1671
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "8299565f47c5ec1f83928462fa2ef1a144ff1ef297778e2ba8a23036d6c5b4e4"
+        },
+        "result": "issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-caption-boundary-v001/human-review-result.json",
+            "fileSha256": "b79de0b61206457284a23a5ae72dfdd972c916d5ebb798828b85faad44511dde"
+          },
+          "pointer": "/captionTimingIssues/2",
+          "answer": {
+            "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000004",
+            "text": "もう勘弁してよ夜中になんか映るようなやつ",
+            "finding": "タイミングが壊れている"
+          }
+        }
+      },
+      {
+        "caseId": "digest-after",
+        "instructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+        "textIds": [
+          "digest-internal-edit-20260907-v002-atom-000125",
+          "digest-internal-edit-20260907-v002-atom-000126",
+          "digest-internal-edit-20260907-v002-atom-000127",
+          "digest-internal-edit-20260907-v002-atom-000128",
+          "digest-internal-edit-20260907-v002-atom-000129",
+          "digest-internal-edit-20260907-v002-atom-000130",
+          "digest-internal-edit-20260907-v002-atom-000131",
+          "digest-internal-edit-20260907-v002-atom-000132",
+          "digest-internal-edit-20260907-v002-atom-000133",
+          "digest-internal-edit-20260907-v002-atom-000134",
+          "digest-internal-edit-20260907-v002-atom-000135",
+          "digest-internal-edit-20260907-v002-atom-000136",
+          "digest-internal-edit-20260907-v002-atom-000137",
+          "digest-internal-edit-20260907-v002-atom-000138"
+        ],
+        "text": "なんかグロいやつに捕まってる",
+        "display": {
+          "startFrame": 1723,
+          "endFrameExclusive": 1794
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/render/presentation-rendered-v002.mp4",
+          "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+        },
+        "result": "no-issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-repaired-three-v001/confirmed-human-review.json",
+            "fileSha256": "6835d3e31436c61fb798565f6b07b66e472673a94a503eecf697b49241938a2c"
+          },
+          "pointer": "/confirmedReviews/1",
+          "answer": {
+            "start": "問題なし",
+            "end": "問題なし"
+          }
+        }
+      },
+      {
+        "caseId": "digest-after",
+        "instructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+        "textIds": [
+          "digest-internal-edit-20260907-v002-atom-000139",
+          "digest-internal-edit-20260907-v002-atom-000140",
+          "digest-internal-edit-20260907-v002-atom-000141"
+        ],
+        "text": "どこ?",
+        "display": {
+          "startFrame": 2673,
+          "endFrameExclusive": 2708
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/render/presentation-rendered-v002.mp4",
+          "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+        },
+        "result": "no-issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-repaired-three-v001/confirmed-human-review.json",
+            "fileSha256": "6835d3e31436c61fb798565f6b07b66e472673a94a503eecf697b49241938a2c"
+          },
+          "pointer": "/confirmedReviews/2",
+          "answer": {
+            "start": "問題なし",
+            "end": "問題なし"
+          }
+        }
+      },
+      {
+        "caseId": "distant-after",
+        "instructionId": "distant-human-caption-repair-20260908-v001-instruction-instruction-000002",
+        "textIds": [
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000025",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000026",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000027",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000028",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000029",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000030",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000031",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000032",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000033",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000034",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000035",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000036",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000037",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000038",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000039",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000040",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000041"
+        ],
+        "text": "マジ今んところ今年一怖すぎて笑った",
+        "display": {
+          "startFrame": 1255,
+          "endFrameExclusive": 1338
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "87ad00ae273471487cc6b90ef936dac0fa0f82072d5a74da8d03b328b03faabb"
+        },
+        "result": "no-issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-review-result-v002.json",
+            "fileSha256": "6a38246907bd888011fd3baede27080be1ad3d333a167fdc58db10090190ddb4"
+          },
+          "pointer": "/evaluations/0",
+          "answer": "問題なし"
+        }
+      },
+      {
+        "caseId": "distant-after",
+        "instructionId": "distant-human-caption-repair-20260908-v001-instruction-instruction-000003",
+        "textIds": [
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000042",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000043",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000044",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000045",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000046",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000047",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000048"
+        ],
+        "text": "ビデオ見る気?",
+        "display": {
+          "startFrame": 1505,
+          "endFrameExclusive": 1565
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "87ad00ae273471487cc6b90ef936dac0fa0f82072d5a74da8d03b328b03faabb"
+        },
+        "result": "no-issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-review-result-v002.json",
+            "fileSha256": "6a38246907bd888011fd3baede27080be1ad3d333a167fdc58db10090190ddb4"
+          },
+          "pointer": "/evaluations/1",
+          "answer": "問題なし"
+        }
+      },
+      {
+        "caseId": "distant-after",
+        "instructionId": "distant-human-caption-repair-20260908-v001-instruction-instruction-000004",
+        "textIds": [
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000049",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000050",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000051",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000052",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000053",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000054",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000055",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000056",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000057",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000058",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000059",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000060",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000061",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000062",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000063",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000064",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000065",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000066",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000067",
+          "distant-pair-ymUsGrT6EaA-20260907-v001-atom-000068"
+        ],
+        "text": "もう勘弁してよ夜中になんか映るようなやつ",
+        "display": {
+          "startFrame": 1576,
+          "endFrameExclusive": 1671
+        },
+        "completedMedia": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/render/presentation-rendered-v002.mp4",
+          "fileSha256": "87ad00ae273471487cc6b90ef936dac0fa0f82072d5a74da8d03b328b03faabb"
+        },
+        "result": "no-issue",
+        "evidence": {
+          "file": {
+            "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-review-result-v002.json",
+            "fileSha256": "6a38246907bd888011fd3baede27080be1ad3d333a167fdc58db10090190ddb4"
+          },
+          "pointer": "/evaluations/2",
+          "answer": "問題なし"
+        }
+      }
+    ],
+    "nonCaptionFacts": [
+      {
+        "caseId": "digest-after",
+        "evidence": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-repaired-three-v001/confirmed-human-review.json",
+          "fileSha256": "6835d3e31436c61fb798565f6b07b66e472673a94a503eecf697b49241938a2c"
+        },
+        "pointer": "/confirmedReviews/0",
+        "record": {
+          "targetBinding": {
+            "id": "opening",
+            "title": "1. 冒頭",
+            "question": "発話のない「え?いるんでしょ?」の字幕が消えて、問題ないか。",
+            "startFrame": 0,
+            "endFrame": 600,
+            "fields": [
+              {
+                "id": "absence",
+                "label": "字幕を消した冒頭の状態"
+              }
+            ],
+            "originalInstructionId": "digest-internal-edit-20260907-v002-instruction-instruction-000001",
+            "text": "え?いるんでしょ?",
+            "originalAtomOccurrenceIds": [
+              "digest-internal-edit-20260907-v002-atom-000001",
+              "digest-internal-edit-20260907-v002-atom-000002",
+              "digest-internal-edit-20260907-v002-atom-000003",
+              "digest-internal-edit-20260907-v002-atom-000004",
+              "digest-internal-edit-20260907-v002-atom-000005",
+              "digest-internal-edit-20260907-v002-atom-000006",
+              "digest-internal-edit-20260907-v002-atom-000007",
+              "digest-internal-edit-20260907-v002-atom-000008",
+              "digest-internal-edit-20260907-v002-atom-000009"
+            ],
+            "originalOutputFrames": {
+              "startFrame": 0,
+              "endFrameExclusive": 8
+            },
+            "durationSeconds": 20,
+            "repairedInstructionId": null,
+            "repairedOutputFrames": null,
+            "repair": "caption-track-omission-only",
+            "sourceSegmentIds": [
+              2595,
+              2596,
+              2597,
+              2598,
+              2599,
+              2600,
+              2601,
+              2602,
+              2603
+            ]
+          },
+          "answers": {
+            "absence": "問題なし"
+          },
+          "source": "explicit-conversation-confirmation"
+        }
+      }
+    ],
+    "newHumanJudgment": false,
+    "unevaluatedPolicy": "Absent labels remain unevaluated; no quality or cross-version propagation."
+  },
+  "uiVerification": {
+    "schemaVersion": "caption-review-native-ui-verification-v001",
+    "recordedAt": "2026-09-08T04:19:25.859991+00:00",
+    "browser": "Microsoft Edge",
+    "url": "http://127.0.0.1:61133/",
+    "purpose": "ui-verification",
+    "newHumanJudgment": false,
+    "selectedCaptionCount": 8,
+    "unselectedDistantCase": "All four explicitly shown as insufficient evidence; no empty queue interpreted as correct.",
+    "nativeOperations": [
+      "Selected previously no-issue caption and recorded no-issue: no repair draft created.",
+      "Selected previously problematic opening caption and recorded issue: common boundary/exclusion controls became visible.",
+      "Selected exclusion, checked exact text, entered reason quoting existing saved human answer; saved to common repair observation.",
+      "Reloaded page and confirmed review answers and exclusion draft persisted.",
+      "Attempted no-issue after saved repair; rejected visibly in Japanese; draft preserved."
+    ],
+    "playback": {
+      "windowStartFrame": 0,
+      "windowEndFrameExclusive": 660,
+      "observedPaused": true,
+      "observedCurrentTimeSeconds": 21.983333,
+      "meaning": "Playback stopped inside frame 659 of existing completed video. No perceptual sync verdict."
+    },
+    "finalDom": {
+      "candidateCount": 8,
+      "reviewAnswer": "この字幕には補修指定を保存済みです。問題なしへ変更できません。",
+      "renderStatus": "",
+      "approveHidden": true
+    },
+    "records": [
+      {
+        "path": "evals/clip_composition/outputs/presentation/work-caption-review-selector-20260908-v001/ui-verification-v001/1500e47f-5907-4abd-a0f6-119343e8186f.json",
+        "fileSha256": "6d91c0b0f7b5afb863db018d0f721236582f3b8a209e8e43adcd853f0cec076e",
+        "sizeBytes": 1773
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/work-caption-review-selector-20260908-v001/ui-verification-v001/6cce803b-a28f-42c4-9dde-613f85d6bf93.json",
+        "fileSha256": "f081fa951a0463fd5dfd0383614b716016a007cf0a141669a0b9131f6476883b",
+        "sizeBytes": 1501
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/work-caption-review-selector-20260908-v001/ui-verification-v001/2fa757ff-e87c-4dc3-897c-0d643c640366.json",
+        "fileSha256": "e65349e94f53a1581e56a2b532af241f20016846348c3261aa8140454cf13e1e",
+        "sizeBytes": 1450
+      }
+    ],
+    "actualRenders": 0,
+    "formalCaptionChanges": 0,
+    "apiExperiments": 0,
+    "newMedia": 0
+  },
+  "preservation": {
+    "schemaVersion": "caption-review-preservation-verification-v001",
+    "checkedAt": "2026-09-08T04:18:29.009145+00:00",
+    "baselineCommit": "e14f6caa905553927877fe4b35134be3e7643f19",
+    "checkedFiles": 5525,
+    "unchangedFiles": 5523,
+    "authorizedEdits": [
+      {
+        "path": "evals/clip_composition/caption_local_repair_ui_v001.mjs",
+        "before": "fe5532daeef290ca9a537b911dcef86f9148ca895980b17730f2d7f5acd63fe3",
+        "after": "4b911b3801cf8ced2b95c54ee688918bba42094de3cef3e54ef8672af62ae8e0"
+      },
+      {
+        "path": "evals/clip_composition/caption_local_repair_ui_v001.mts",
+        "before": "66d49d90f6fb2a16d67e77477e0eaa49005e89da7d6c74cb2b7442f999e5b359",
+        "after": "5f19b8182a312461115c54bcbf2965e66bf0cfe1eeed3128f4bff39c78f771dc"
+      }
+    ],
+    "unexpectedDifferences": [],
+    "status": "passed"
+  },
+  "typecheck": {
+    "schemaVersion": "caption-review-typecheck-comparison-v001",
+    "baselineCommit": "e14f6caa905553927877fe4b35134be3e7643f19",
+    "baselineEntryOriginalPath": "evals/clip_composition/caption_local_repair_ui_v001.mts",
+    "baselineTemporaryEntrySha256": "66d49d90f6fb2a16d67e77477e0eaa49005e89da7d6c74cb2b7442f999e5b359",
+    "baselineErrorCount": 121,
+    "currentErrorCount": 121,
+    "diagnosticsExactlyIdentical": true,
+    "changedFileDiagnostics": 0,
+    "interpretation": "Scoped files have no diagnostics. Imported existing dependencies fail strict typecheck; repository typecheck is not claimed passed.",
+    "command": "corepack pnpm --dir runner exec tsc --noEmit --strict --allowImportingTsExtensions --skipLibCheck --target ES2022 --module NodeNext --moduleResolution NodeNext --types node --typeRoots node_modules/@types <entry .mts files>"
+  },
+  "tests": {
+    "selector": {
+      "passed": 11,
+      "failed": 0,
+      "evidence": {
+        "path": "evals/clip_composition/outputs/presentation/work-caption-review-selector-20260908-v001/selector-tests-v001.tap",
+        "fileSha256": "4d51c0aa15daa97d5f4a07aed1a6aaf40e994adc76500181fbb840c80838358b",
+        "sizeBytes": 2770
+      }
+    },
+    "commonRegression": {
+      "passed": 47,
+      "failed": 0,
+      "evidence": {
+        "path": "evals/clip_composition/outputs/presentation/work-caption-review-selector-20260908-v001/common-regression-v001.tap",
+        "fileSha256": "f9ed32e0cf3add5a18bb76bb89dc81fdc18a43fd27474d81f28c5783581a6034",
+        "sizeBytes": 7526
+      }
+    }
+  },
+  "frozenSelector": {
+    "schemaVersion": "caption-review-signal-freeze-v001",
+    "frozenAt": "2026-09-08T04:02:31.255761+00:00",
+    "selector": {
+      "path": "packages/shared/src/caption-review-selector-v001.ts",
+      "fileSha256": "3b0e9b7d5ff1cd1eb599c4635c264e8c3a430307d9a7fe530f9453819998fbed"
+    },
+    "signalPolicy": "Five independent technical signals; union, no score or ranking. Freeze before first fixture evaluation. No condition additions in response to misses.",
+    "signals": [
+      "nonpositive-recognition",
+      "unresolved-acoustic-boundary",
+      "acoustic-outside-adopted-media",
+      "acoustic-display-disjoint",
+      "caption-overlap"
+    ],
+    "unused": {
+      "duration": "Descriptive only; no short-caption or fixed-second threshold.",
+      "gap": "Descriptive only; no empirically justified naturalness threshold.",
+      "exactTimestampDisagreement": "Not alone a review flag: token observations and perceptual timing are not identical.",
+      "zeroVideoFrameRecognition": "Not used: positive sub-frame character times do not alone imply cue failure.",
+      "repairProvenance": "Human-derived; excluded from features.",
+      "humanLabels": "Evaluation-only separate file.",
+      "weights": "No weighted score."
+    }
+  },
+  "implementation": [
+    {
+      "path": "packages/shared/src/caption-review-selector-v001.ts",
+      "fileSha256": "3b0e9b7d5ff1cd1eb599c4635c264e8c3a430307d9a7fe530f9453819998fbed",
+      "sizeBytes": 2752
+    },
+    {
+      "path": "evals/clip_composition/caption_review_selector_v001.mts",
+      "fileSha256": "ae542144f7a3bd98588963ab8eaf8da07e27df5de0aa67a7eae05be7f6787cae",
+      "sizeBytes": 16570
+    },
+    {
+      "path": "evals/clip_composition/caption_review_selector_v001.test.mts",
+      "fileSha256": "dc0b8f4345d0b921e840923cf458eae7ee9011c431bc30c3658fc6e298399649",
+      "sizeBytes": 11191
+    },
+    {
+      "path": "evals/clip_composition/fixtures/caption-review-selector-v001.json",
+      "fileSha256": "429cffc94670437144bbb15c8d1707749c3edcafbb0e849c72756e17271038a6",
+      "sizeBytes": 3307
+    },
+    {
+      "path": "evals/clip_composition/caption_local_repair_ui_v001.mts",
+      "fileSha256": "5f19b8182a312461115c54bcbf2965e66bf0cfe1eeed3128f4bff39c78f771dc",
+      "sizeBytes": 19987
+    },
+    {
+      "path": "evals/clip_composition/caption_local_repair_ui_v001.mjs",
+      "fileSha256": "4b911b3801cf8ced2b95c54ee688918bba42094de3cef3e54ef8672af62ae8e0",
+      "sizeBytes": 16693
+    }
+  ],
+  "actualRenders": 0,
+  "formalCaptionModifications": 0,
+  "additionalAiExperiments": 0,
+  "additionalCostUsd": 0
+}

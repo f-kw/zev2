@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "caption-review-fixtures-v001",
+  "cases": [
+    {
+      "id": "digest-before",
+      "family": "digest",
+      "phase": "before",
+      "manifest": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/manifest.json",
+        "fileSha256": "7097cec82c6a9907a7c21ec340177890ca7b25b1c6c5ae0383225e0c09eb3692"
+      },
+      "human": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/human-review.json",
+        "fileSha256": "291b347cb49ffda75e31899b4ab0f69f54c3641ee9cd44ac590fafcf56915151"
+      },
+      "humanTargets": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-final-two-points-v001/groups.json",
+        "fileSha256": "b604ee6b91f0ac68c84419dc2e5f727eb2196f61615d35c6778bb4372d071d1d"
+      }
+    },
+    {
+      "id": "distant-before",
+      "family": "distant",
+      "phase": "before",
+      "manifest": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/verification.json",
+        "fileSha256": "fe5c797f0f57507a25e66ab3d009e6d7919bf93843e67105feb73e6869d42473"
+      },
+      "human": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-caption-boundary-v001/human-review-result.json",
+        "fileSha256": "b79de0b61206457284a23a5ae72dfdd972c916d5ebb798828b85faad44511dde"
+      }
+    },
+    {
+      "id": "digest-after",
+      "family": "digest",
+      "phase": "after",
+      "manifest": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/manifest.json",
+        "fileSha256": "16b4d341adf2a747b8f1f055eace17d1dad0da3ba6085698580eec8f7d97e76d"
+      },
+      "human": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/review-repaired-three-v001/confirmed-human-review.json",
+        "fileSha256": "6835d3e31436c61fb798565f6b07b66e472673a94a503eecf697b49241938a2c"
+      }
+    },
+    {
+      "id": "distant-after",
+      "family": "distant",
+      "phase": "after",
+      "manifest": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/final-verification.json",
+        "fileSha256": "36ef1d247662198ae4ea5e7c73a090be70d8c6f8f2d94cdcfbed45089d57cd28"
+      },
+      "human": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-review-result-v002.json",
+        "fileSha256": "6a38246907bd888011fd3baede27080be1ad3d333a167fdc58db10090190ddb4"
+      }
+    }
+  ],
+  "acoustic": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/acoustic-correspondence-validation-v003.json",
+    "fileSha256": "651876378d7113708c455f416721084e354cc339e0a496095ea75d4b458f5042"
+  },
+  "labelPolicy": "Only explicit saved caption judgments, scoped to exact video state; no propagation across versions or from overall quality."
+}

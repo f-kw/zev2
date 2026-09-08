@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "caption-review-native-ui-verification-v001",
+  "recordedAt": "2026-09-08T04:19:25.859991+00:00",
+  "browser": "Microsoft Edge",
+  "url": "http://127.0.0.1:61133/",
+  "purpose": "ui-verification",
+  "newHumanJudgment": false,
+  "selectedCaptionCount": 8,
+  "unselectedDistantCase": "All four explicitly shown as insufficient evidence; no empty queue interpreted as correct.",
+  "nativeOperations": [
+    "Selected previously no-issue caption and recorded no-issue: no repair draft created.",
+    "Selected previously problematic opening caption and recorded issue: common boundary/exclusion controls became visible.",
+    "Selected exclusion, checked exact text, entered reason quoting existing saved human answer; saved to common repair observation.",
+    "Reloaded page and confirmed review answers and exclusion draft persisted.",
+    "Attempted no-issue after saved repair; rejected visibly in Japanese; draft preserved."
+  ],
+  "playback": {
+    "windowStartFrame": 0,
+    "windowEndFrameExclusive": 660,
+    "observedPaused": true,
+    "observedCurrentTimeSeconds": 21.983333,
+    "meaning": "Playback stopped inside frame 659 of existing completed video. No perceptual sync verdict."
+  },
+  "finalDom": {
+    "candidateCount": 8,
+    "reviewAnswer": "この字幕には補修指定を保存済みです。問題なしへ変更できません。",
+    "renderStatus": "",
+    "approveHidden": true
+  },
+  "records": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-review-selector-20260908-v001/ui-verification-v001/1500e47f-5907-4abd-a0f6-119343e8186f.json",
+      "fileSha256": "6d91c0b0f7b5afb863db018d0f721236582f3b8a209e8e43adcd853f0cec076e",
+      "sizeBytes": 1773
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-review-selector-20260908-v001/ui-verification-v001/6cce803b-a28f-42c4-9dde-613f85d6bf93.json",
+      "fileSha256": "f081fa951a0463fd5dfd0383614b716016a007cf0a141669a0b9131f6476883b",
+      "sizeBytes": 1501
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-review-selector-20260908-v001/ui-verification-v001/2fa757ff-e87c-4dc3-897c-0d643c640366.json",
+      "fileSha256": "e65349e94f53a1581e56a2b532af241f20016846348c3261aa8140454cf13e1e",
+      "sizeBytes": 1450
+    }
+  ],
+  "actualRenders": 0,
+  "formalCaptionChanges": 0,
+  "apiExperiments": 0,
+  "newMedia": 0
+}

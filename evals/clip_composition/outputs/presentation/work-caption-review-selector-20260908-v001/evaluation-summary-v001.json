@@ -1,0 +1,217 @@
+{
+  "schemaVersion": "caption-review-evaluation-summary-v001",
+  "results": [
+    {
+      "caseId": "digest-before",
+      "phase": "before",
+      "total": 33,
+      "evaluated": 8,
+      "issues": 3,
+      "noIssues": 5,
+      "reviewRequired": 8,
+      "insufficientEvidence": 0,
+      "caughtIssues": 3,
+      "extraNoIssues": 5,
+      "bySignal": [
+        {
+          "signal": "nonpositive-recognition",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "unresolved-acoustic-boundary",
+          "selected": 4,
+          "issues": 2,
+          "noIssues": 2
+        },
+        {
+          "signal": "acoustic-outside-adopted-media",
+          "selected": 4,
+          "issues": 1,
+          "noIssues": 3
+        },
+        {
+          "signal": "acoustic-display-disjoint",
+          "selected": 2,
+          "issues": 1,
+          "noIssues": 1
+        },
+        {
+          "signal": "caption-overlap",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        }
+      ],
+      "missedIssues": []
+    },
+    {
+      "caseId": "distant-before",
+      "phase": "before",
+      "total": 4,
+      "evaluated": 3,
+      "issues": 3,
+      "noIssues": 0,
+      "reviewRequired": 0,
+      "insufficientEvidence": 4,
+      "caughtIssues": 0,
+      "extraNoIssues": 0,
+      "bySignal": [
+        {
+          "signal": "nonpositive-recognition",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "unresolved-acoustic-boundary",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "acoustic-outside-adopted-media",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "acoustic-display-disjoint",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "caption-overlap",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        }
+      ],
+      "missedIssues": [
+        {
+          "text": "マジ今んところ今年一怖すぎて笑った",
+          "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000002",
+          "status": "insufficient-evidence",
+          "missingEvidence": [
+            "saved-acoustic-observation-missing"
+          ]
+        },
+        {
+          "text": "ビデオ見る気?",
+          "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000003",
+          "status": "insufficient-evidence",
+          "missingEvidence": [
+            "saved-acoustic-observation-missing"
+          ]
+        },
+        {
+          "text": "もう勘弁してよ夜中になんか映るようなやつ",
+          "instructionId": "distant-pair-ymUsGrT6EaA-20260907-v001-instruction-instruction-000004",
+          "status": "insufficient-evidence",
+          "missingEvidence": [
+            "saved-acoustic-observation-missing"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "digest-after",
+      "phase": "after",
+      "total": 32,
+      "evaluated": 2,
+      "issues": 0,
+      "noIssues": 2,
+      "reviewRequired": 7,
+      "insufficientEvidence": 0,
+      "caughtIssues": 0,
+      "extraNoIssues": 2,
+      "bySignal": [
+        {
+          "signal": "nonpositive-recognition",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "unresolved-acoustic-boundary",
+          "selected": 4,
+          "issues": 0,
+          "noIssues": 2
+        },
+        {
+          "signal": "acoustic-outside-adopted-media",
+          "selected": 3,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "acoustic-display-disjoint",
+          "selected": 1,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "caption-overlap",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        }
+      ],
+      "missedIssues": []
+    },
+    {
+      "caseId": "distant-after",
+      "phase": "after",
+      "total": 4,
+      "evaluated": 3,
+      "issues": 0,
+      "noIssues": 3,
+      "reviewRequired": 0,
+      "insufficientEvidence": 4,
+      "caughtIssues": 0,
+      "extraNoIssues": 0,
+      "bySignal": [
+        {
+          "signal": "nonpositive-recognition",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "unresolved-acoustic-boundary",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "acoustic-outside-adopted-media",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "acoustic-display-disjoint",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        },
+        {
+          "signal": "caption-overlap",
+          "selected": 0,
+          "issues": 0,
+          "noIssues": 0
+        }
+      ],
+      "missedIssues": []
+    }
+  ],
+  "source": {
+    "path": "evals/clip_composition/outputs/presentation/work-caption-review-selector-20260908-v001/evaluation-v001.json",
+    "fileSha256": "384732720e4ba5e219cd439e6bd358e680afb79362928b62f9e3435af3abaec6",
+    "sizeBytes": 1029865
+  },
+  "labelPolicy": "Counts are caption instances in specific video versions, not general accuracy.",
+  "technicalOutcome": "digest proof only; distant selection not established"
+}

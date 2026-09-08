@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "caption-review-signal-freeze-v001",
+  "frozenAt": "2026-09-08T04:02:31.255761+00:00",
+  "selector": {
+    "path": "packages/shared/src/caption-review-selector-v001.ts",
+    "fileSha256": "3b0e9b7d5ff1cd1eb599c4635c264e8c3a430307d9a7fe530f9453819998fbed"
+  },
+  "signalPolicy": "Five independent technical signals; union, no score or ranking. Freeze before first fixture evaluation. No condition additions in response to misses.",
+  "signals": [
+    "nonpositive-recognition",
+    "unresolved-acoustic-boundary",
+    "acoustic-outside-adopted-media",
+    "acoustic-display-disjoint",
+    "caption-overlap"
+  ],
+  "unused": {
+    "duration": "Descriptive only; no short-caption or fixed-second threshold.",
+    "gap": "Descriptive only; no empirically justified naturalness threshold.",
+    "exactTimestampDisagreement": "Not alone a review flag: token observations and perceptual timing are not identical.",
+    "zeroVideoFrameRecognition": "Not used: positive sub-frame character times do not alone imply cue failure.",
+    "repairProvenance": "Human-derived; excluded from features.",
+    "humanLabels": "Evaluation-only separate file.",
+    "weights": "No weighted score."
+  }
+}

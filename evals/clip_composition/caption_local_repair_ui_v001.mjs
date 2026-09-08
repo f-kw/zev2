@@ -1,7 +1,7 @@
 const $ = id => document.getElementById(id);
 const video = $('video');
 let state, current, target, allowed, frame = null, desired = null, seeking = false, observed = false;
-let draftStart = null, draftEnd = null, busy = false, preview = null;
+let draftStart = null, draftEnd = null, busy = false, preview = null, reviewError = null;
 const latest = () => new Map(current.records.map(row => [row.operation.target.instructionId, row]));
 const base = () => ({caseId: current.id, sourceSha256: current.sourceSha256});
 async function post(route, data) {
@@ -13,9 +13,15 @@ const selectedFrame = endpoint => endpoint?.observation?.selectedVideoFrame;
 function update() {
   if(!target)return;
   for(const id of ['case','target','reload'])$(id).disabled=busy;
+  const candidate=current.reviewCandidates?.find(r=>r.instructionId===target.instructionId);
+  const answer=current.reviewAnswers?.find(r=>r.target.instructionId===target.instructionId)?.answer;
+  $('candidate-review').hidden=!candidate;
+  $('repair-controls').hidden=!!candidate&&answer!=='issue';
+  $('no-issue').disabled=busy||current.run?.status==='running';$('has-issue').disabled=$('no-issue').disabled;
+  $('candidate-answer').textContent=reviewError??(answer==='no-issue'?'問題なしを記録しました。字幕や動画は変更しません。':answer==='issue'?'問題ありを記録しました。下の共通補修で境界指定・除外を選べます。':'動画を確認して判断してください。');
   const exclusion=$('exclude-mode').checked;
   $('boundary-controls').hidden=exclusion;$('exclude-controls').hidden=!exclusion;
-  const locked=busy||current.run?.status==='running';
+  const locked=busy||current.run?.status==='running'||!!candidate&&answer!=='issue';
   const ready=!locked&&!seeking&&video.paused&&observed&&frame!==null;
   $('pick-start').disabled=!ready||$('keep-start').checked||!allowed.operations.includes('change-start');
   $('pick-end').disabled=!ready||$('keep-end').checked||!allowed.operations.includes('change-end');
@@ -83,10 +89,14 @@ function updateReviewText() {
   for(const v of [$('before'),$('after')]) {v.pause();if(v.readyState>=1)v.currentTime=allowed.reviewWindow.startFrame/current.framesPerSecond;}
 }
 function chooseTarget(instructionId) {
-  video.pause();target=current.targets.find(t=>t.instructionId===instructionId)??current.targets[0];
+  video.pause();reviewError=null;target=current.targets.find(t=>t.instructionId===instructionId)??current.targets[0];
   allowed=current.allowedTargets.find(t=>t.instructionId===target.instructionId);
+  $('candidate-reasons').replaceChildren();for(const reason of current.reviewCandidates?.find(r=>r.instructionId===target.instructionId)?.reasons??[]){const li=document.createElement('li');li.textContent=reason;$('candidate-reasons').append(li);}
   $('target').value=target.instructionId;$('text').textContent=target.text;$('excluded-text').textContent=`「${target.text}」`;
   $('current').textContent=`現在：開始 ${target.currentFrames.startFrame} コマ ／ 終了 ${target.currentFrames.endFrameExclusive} コマ（このコマから消える）`;
+  if(current.reviewCandidates){const sameWindow=current.allowedTargets.filter(t=>t.reviewWindow.startFrame===allowed.reviewWindow.startFrame&&t.reviewWindow.endFrameExclusive===allowed.reviewWindow.endFrameExclusive);
+    const texts=sameWindow.map(t=>current.targets.find(row=>row.instructionId===t.instructionId).text);
+    $('current').textContent+=`。この再生範囲の確認対象：${texts.map(text=>`「${text}」`).join('、')}。同じ範囲は一度の再生で確認でき、回答は字幕ごとに保存します。`;}
   const saved=latest().get(target.instructionId)?.operation;
   draftStart=saved?.kind==='change-boundaries'&&saved.start.mode==='observed'?saved.start:null;
   draftEnd=saved?.kind==='change-boundaries'&&saved.end.mode==='observed'?saved.end:null;
@@ -106,7 +116,8 @@ function chooseTarget(instructionId) {
 function chooseCase(id) {
   current=state.cases.find(c=>c.id===id)??state.cases[0];$('case').value=current.id;
   preview=null;$('preview').textContent='';$('approve').hidden=true;
-  $('purpose').textContent=current.purpose==='human-observation'?'問題のある字幕だけ指定し、保存した変更を確認してから再生成します。':'既存の人間指定を使う共通化の操作検証です。今回の操作を新しい人間判断や品質評価として保存しません。';
+  $('selection-summary').hidden=!state.reviewSummary;$('selection-summary').textContent=state.reviewSummary??'';
+  $('purpose').textContent=current.reviewCandidates?(current.purpose==='human-observation'?'選ばれた字幕だけを確認し、問題がある場合に共通補修へ進みます。':'レビュー導線の技術検証です。この操作を新しい人間品質判断として扱いません。'):current.purpose==='human-observation'?'問題のある字幕だけ指定し、保存した変更を確認してから再生成します。':'既存の人間指定を使う共通化の操作検証です。今回の操作を新しい人間判断や品質評価として保存しません。';
   $('target').replaceChildren();for(const t of current.targets){const o=document.createElement('option');o.value=t.instructionId;o.textContent=t.text;$('target').append(o);}
   video.src=current.mediaUrl;chooseTarget(current.targets[0].instructionId);
 }
@@ -167,3 +178,6 @@ setInterval(async()=>{
   try{const response=await fetch('/api/state');const fresh=await response.json();const next=fresh.cases.find(c=>c.id===current.id);current.run=next.run;summary();update();}catch(error){$('render-status').textContent=error.message;}
 },1000);
 reload(false).catch(error=>$('message').textContent=error.message);
+
+async function recordReview(answer){if(busy)return;reviewError=null;busy=true;update();try{const row=await post('/api/review',{instructionId:target.instructionId,answer});current.reviewAnswers=current.reviewAnswers.filter(r=>r.target.instructionId!==target.instructionId);current.reviewAnswers.push(row);}catch(error){reviewError=error.message==='SAVED_REPAIR_ALREADY_EXISTS'?'この字幕には補修指定を保存済みです。問題なしへ変更できません。':`回答を保存できませんでした：${error.message}`;}finally{busy=false;update();}}
+$('no-issue').onclick=()=>recordReview('no-issue');$('has-issue').onclick=()=>recordReview('issue');

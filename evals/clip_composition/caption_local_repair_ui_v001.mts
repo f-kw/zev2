@@ -19,19 +19,22 @@ import {
 export interface RepairUICaseV001 {
   id: string; title: string; context: CaptionRepairContextV001;
   seed?: CaptionLocalRepairObservationV001[];
+  reviewCandidates?: {instructionId: string; reasons: string[]}[];
 }
 export interface RepairUIOptionsV001 {
   cases: RepairUICaseV001[]; purpose: CaptionRepairPurposeV001; outputRoot: string;
   render?: typeof renderCaptionLocalRepairV001;
+  reviewSummary?: string;
 }
 const HTML = `<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>字幕の局所補修</title>
 <style>
 :root{color-scheme:dark;font-family:system-ui,-apple-system,sans-serif;background:#10151c;color:#e7edf6}*{box-sizing:border-box}body{max-width:1160px;margin:auto;padding:24px}h1{font-size:26px;margin:0 0 8px}p{line-height:1.7}button,select,input,textarea{font:inherit}button,select{padding:10px 14px;border:1px solid #546174;background:#243245;color:#f4f7fc;border-radius:7px}button{cursor:pointer}button:disabled{opacity:.4;cursor:default}button.primary{background:#356ce0;border-color:#6597ff}button.danger{border-color:#efaa73}select{max-width:100%}.top,.buttons{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.card{background:#1a222e;border:1px solid #354151;border-radius:12px;padding:18px;margin-top:18px}.grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:18px}.muted{color:#afbed0;font-size:14px}video{display:block;width:100%;background:black;border-radius:7px;max-height:440px}.text{font-size:20px;line-height:1.6;overflow-wrap:anywhere}input[type=range]{width:100%;margin:14px 0}label{display:block;margin:12px 0}input[type=checkbox],input[type=radio]{margin-right:8px;accent-color:#79a8ff}textarea{display:block;width:100%;min-height:72px;background:#111a25;border:1px solid #5d6b7c;color:#fff;padding:9px;border-radius:5px}.notice{border-left:3px solid #e6b765;padding:8px 12px;background:#2b2a24}#message{min-height:1.7em;white-space:pre-wrap}#summary li{margin:9px 0;line-height:1.5}#preview{white-space:pre-wrap;line-height:1.7}button[aria-pressed=true]{background:#37649e}#review{border-color:#6aaa88}.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}[hidden]{display:none!important}@media(max-width:760px){body{padding:12px}.grid,.compare{grid-template-columns:1fr}.card{padding:14px}}
 </style><body><h1>字幕の局所補修</h1><p id="purpose" class="muted"></p>
-<div class="top"><label>動画 <select id="case"></select></label><button id="reload">保存内容を再読込</button></div>
-<div class="card"><label>補修する字幕 <select id="target"></select></label><div id="text" class="text"></div><p id="current" class="muted"></p></div>
+<p id="selection-summary" class="notice" hidden></p><div class="top"><label>動画 <select id="case"></select></label><button id="reload">保存内容を再読込</button></div>
+<div class="card"><label>確認する字幕 <select id="target"></select></label><div id="text" class="text"></div><p id="current" class="muted"></p></div>
+<section class="card" id="candidate-review" hidden><h2>確認する理由</h2><ul id="candidate-reasons"></ul><div class="buttons"><button id="no-issue">問題なし</button><button id="has-issue">問題あり → 境界指定・除外</button></div><p id="candidate-answer" role="status"></p></section>
 <div class="grid"><section class="card"><video id="video" preload="metadata" playsinline></video><p id="position" class="muted">映像を読み込んでいます</p><input id="seek" type="range" step="1" aria-label="確認範囲のコマ位置"><div class="buttons"><button id="play">短時間再生</button><button id="restart">確認範囲の先頭</button><button id="previous-frame">1コマ戻る</button><button id="next-frame">1コマ進む</button></div><p class="muted">音声を聞き、映像を止めて位置を選びます。終了は、そのコマから字幕が消える位置です。</p></section>
-<section class="card"><label><input type="radio" name="operation" id="boundary-mode" value="boundary" checked>開始・終了を直す</label><label><input type="radio" name="operation" id="exclude-mode" value="exclude">この字幕を除外する</label>
+<section class="card" id="repair-controls"><label><input type="radio" name="operation" id="boundary-mode" value="boundary" checked>開始・終了を直す</label><label><input type="radio" name="operation" id="exclude-mode" value="exclude">この字幕を除外する</label>
 <div id="boundary-controls"><label><input id="keep-start" type="checkbox" checked>開始維持</label><button id="pick-start">表示中のコマを開始に指定</button><p id="start-value" class="muted"></p><label><input id="keep-end" type="checkbox" checked>終了維持</label><button id="pick-end">表示中のコマを終了に指定</button><button id="pick-final">最終コマの直後を終了に指定</button><p id="end-value" class="muted"></p></div>
 <div id="exclude-controls" hidden><p class="notice">動画と音声は残し、次の字幕だけを完成版から除外します。</p><p id="excluded-text" class="text"></p><label>除外する理由<textarea id="reason" placeholder="例：この箇所には対応する発話がない"></textarea></label><label><input id="confirm-exclude" type="checkbox">上の本文の字幕を除外することを確認した</label></div>
 <button id="save" class="primary">この指定を保存</button><p id="message" role="status" aria-live="polite"></p></section></div>
@@ -51,8 +54,13 @@ export async function startCaptionRepairUIV001(options: RepairUIOptionsV001) {
     assert(/^[A-Za-z0-9._-]+$/u.test(c.id));
     // A fixture-fed UI is always marked as verification, never live human input.
     if (c.seed?.length) assert.equal(options.purpose, 'ui-verification', 'FIXTURE_UI_CANNOT_CREATE_HUMAN_OBSERVATIONS');
+    if(c.reviewCandidates) {
+      assert(!c.seed?.length, 'REVIEW_STARTS_WITHOUT_REPAIR_OBSERVATIONS');
+      assert.deepEqual(c.reviewCandidates.map(r=>r.instructionId),describeCaptionRepairV001(c.context).allowedTargets.map(t=>t.instructionId),'REVIEW_TARGET_SCOPE_MISMATCH');
+      assert(c.reviewCandidates.every(r=>r.reasons.length>0&&r.reasons.every(s=>typeof s==='string'&&s.trim())),'REVIEW_REASON_REQUIRED');
+    }
     const session = await createCaptionRepairSessionV001(c.context, options.purpose);
-    const state = {definition: c, session, files: new Map(), preview: null, run: null}; states.set(c.id, state);
+    const state = {definition: c, session, files: new Map(), preview: null, run: null, reviews: new Map()}; states.set(c.id, state);
     for (const previous of c.seed ?? []) {
       const op = structuredClone(previous.operation);
       if (op.kind === 'change-boundaries') for (const side of ['start','end'] as const) if (op[side].mode === 'observed') {
@@ -108,8 +116,8 @@ export async function startCaptionRepairUIV001(options: RepairUIOptionsV001) {
       if(request.method==='GET' && url.pathname==='/api/state') {
         const cases=[];
         for(const [id,state] of states) cases.push({id,title:state.definition.title,...describeCaptionRepairV001(state.definition.context),
-          purpose:options.purpose,records:await saved(state),run:state.run,mediaUrl:`/media/${id}/before`});
-        reply(response,{cases});return;
+          purpose:options.purpose,reviewCandidates:state.definition.reviewCandidates,reviewAnswers:[...state.reviews.values()],records:await saved(state),run:state.run,mediaUrl:`/media/${id}/before`});
+        reply(response,{cases,reviewSummary:options.reviewSummary??null});return;
       }
       const media=/^\/media\/([A-Za-z0-9._-]+)\/(before|after)$/u.exec(url.pathname);
       if(['GET','HEAD'].includes(request.method!) && media) {
@@ -120,12 +128,25 @@ export async function startCaptionRepairUIV001(options: RepairUIOptionsV001) {
       if(request.method!=='POST'||request.headers.origin!==origin) {reply(response,{error:'操作元が一致しません。'},403);return;}
       const input=await body(request), state=states.get(input.caseId); assert(state,'UNKNOWN_CASE');
       assert.equal(input.sourceSha256,describeCaptionRepairV001(state.definition.context).sourceSha256,'STALE_SOURCE');
+      if(url.pathname==='/api/review') {
+        assert(keys(input,['caseId','sourceSha256','instructionId','answer']));
+        assert(state.definition.reviewCandidates?.some((r:any)=>r.instructionId===input.instructionId),'NOT_A_REVIEW_CANDIDATE');
+        assert(['issue','no-issue'].includes(input.answer),'INVALID_REVIEW_ANSWER');
+        assert(state.run?.status!=='running','REPAIR_RUNNING');
+        if(input.answer==='no-issue')assert(!(await saved(state)).some(r=>r.operation.target.instructionId===input.instructionId),'SAVED_REPAIR_ALREADY_EXISTS');
+        const target=describeCaptionRepairV001(state.definition.context).targets.find(t=>t.instructionId===input.instructionId)!;
+        const row={schemaVersion:'caption-review-answer-v001',reviewId:randomUUID(),sourceSha256:input.sourceSha256,target,
+          answer:input.answer,purpose:options.purpose,newHumanJudgment:options.purpose==='human-observation',status:'review-recorded-no-repair-adopted'};
+        await writeFile(path.join(ROOT,options.outputRoot,`${row.reviewId}.json`),JSON.stringify(row,null,2)+'\n',{flag:'wx'});
+        state.reviews.set(input.instructionId,row);reply(response,row);return;
+      }
       if(url.pathname==='/api/frame') {
         assert(keys(input,['caseId','sourceSha256','instructionId','presentedVideoFrame','boundaryKind']));
         reply(response,observeCaptionRepairFrameV001(state.session,input.instructionId,input.presentedVideoFrame,input.boundaryKind));return;
       }
       if(url.pathname==='/api/save') {
         assert(keys(input,['caseId','sourceSha256','operation'])); assert(state.run?.status!=='running','REPAIR_RUNNING');
+        if(state.definition.reviewCandidates)assert(state.reviews.get(input.operation?.target?.instructionId)?.answer==='issue','HUMAN_ISSUE_REVIEW_REQUIRED');
         const row=saveCaptionRepairObservationV001(state.session,input.operation);await persist(state,row);state.preview=null;state.run=null;
         reply(response,row);return;
       }

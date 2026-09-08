@@ -1,0 +1,65 @@
+TAP version 13
+# Subtest: short duration and contiguous neighbors alone do not trigger review
+ok 1 - short duration and contiguous neighbors alone do not trigger review
+  ---
+  duration_ms: 58.670125
+  ...
+# Subtest: missing observations never become a synchronization approval or fabricated boundary
+ok 2 - missing observations never become a synchronization approval or fabricated boundary
+  ---
+  duration_ms: 0.40075
+  ...
+# Subtest: unobserved window origin cannot be interpreted as a resolved speech onset
+ok 3 - unobserved window origin cannot be interpreted as a resolved speech onset
+  ---
+  duration_ms: 0.10175
+  ...
+# Subtest: nonpositive recognition remains a distinct technical signal even without acoustics
+ok 4 - nonpositive recognition remains a distinct technical signal even without acoustics
+  ---
+  duration_ms: 0.129708
+  ...
+# Subtest: touching, overlapping and disjoint half-open intervals are distinguished without a seconds threshold
+ok 5 - touching, overlapping and disjoint half-open intervals are distinguished without a seconds threshold
+  ---
+  duration_ms: 0.088333
+  ...
+# Subtest: signals are independent and the selector is pure, translation invariant and insensitive to identity or labels
+ok 6 - signals are independent and the selector is pure, translation invariant and insensitive to identity or labels
+  ---
+  duration_ms: 0.202208
+  ...
+# Subtest: all 73 caption instances retain exact independent features and only 16 explicit state-bound labels
+ok 7 - all 73 caption instances retain exact independent features and only 16 explicit state-bound labels
+  ---
+  duration_ms: 12.003166
+  ...
+# Subtest: frozen detector and first evaluation remain byte-bound; label inversion cannot change selected captions
+ok 8 - frozen detector and first evaluation remain byte-bound; label inversion cannot change selected captions
+  ---
+  duration_ms: 8.506375
+  ...
+# Subtest: post-repair controls keep original STT and acoustic evidence; repair provenance cannot act as a feature
+ok 9 - post-repair controls keep original STT and acoustic evidence; repair provenance cannot act as a feature
+  ---
+  duration_ms: 2.065291
+  ...
+# Subtest: only machine-selected captions enter the common UI, and insufficient evidence is disclosed
+ok 10 - only machine-selected captions enter the common UI, and insufficient evidence is disclosed
+  ---
+  duration_ms: 107.792917
+  ...
+# Subtest: review UI saves no-issue without repair and requires explicit issue before common boundary/exclusion save
+ok 11 - review UI saves no-issue without repair and requires explicit issue before common boundary/exclusion save
+  ---
+  duration_ms: 283.291208
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 683.420833
