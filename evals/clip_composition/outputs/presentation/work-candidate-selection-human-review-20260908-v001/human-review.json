@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "candidate-selection-human-review-v001",
+  "recordedAt": "2026-09-08T14:06:30.248070+00:00",
+  "instruction": "指示-019の実動画に対する人間レビュー（相談役の指示-020）",
+  "reviewedVideoCommit": "a4b6387346055d9388f20100efc3551c0c378574",
+  "reviewPageCommit": "21cecbd4497a1e073b1794150f0465c0b7fb1a85",
+  "videoSha256": "1c91f282bd008777764a6d8f720577eef2845d3a2b521f415dead5e672b0265f",
+  "reviewUrl": "http://127.0.0.1:50807/",
+  "verbatimUserResponse": "見た。尻切れにはなってない。\nCはどのような動画を作りかいかで残すかどうかが決まる。\nダイジェストなら残すし、ショートなら残らないと思う",
+  "humanFindings": {
+    "ending": "尻切れにはなっていない。",
+    "candidateC": "残すかどうかは作りたい動画によって決まる。",
+    "digest": "Cを残す。",
+    "short": "Cは残らないと思う。"
+  },
+  "evaluationMeaning": "終わり方の不自然さは否定された。Cを外す品質判断は制作目的に依存する。今回の制作要求はダイジェストなので、Cを外した判断を一律に人間合格へ昇格しない。",
+  "unansweredSeparately": [
+    "A単独の見どころの強さ",
+    "B単独の見どころの強さ",
+    "候補群全般の文脈維持能力",
+    "今回の案が旧版より総合的に優れるか"
+  ],
+  "scope": "人間回答の記録と相談役への報告のみ。採否の変更・再判断・再探索・再描画・契約変更は実行していない。",
+  "allHumanQualityPassed": false,
+  "bindings": {
+    "selection": {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/selection-result.json",
+      "fileSha256": "cd718552c97c6316518e7019e4ba207c64647077abebbcc95a212db0f73ec0e3"
+    },
+    "request": {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/selection-request.json",
+      "fileSha256": "5077d844db0e81e1930b6800040d8e4d1c2e4b30eaf9cee89ddd54060d81c71f"
+    },
+    "review": {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-review-rebuild-20260908-v001/review/review.html",
+      "fileSha256": "e8b79b66266cab4ee479ed931f4dbf3559156df38ccf8b6e76b98b60da1789ad"
+    }
+  }
+}
