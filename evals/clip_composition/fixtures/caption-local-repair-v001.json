@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "caption-local-repair-historical-fixtures-v001",
+  "authorization": "ZEV進行管理２ 指示-016",
+  "purpose": "fixture-replay",
+  "newHumanJudgment": false,
+  "cases": [
+    {
+      "id": "digest",
+      "parent": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/manifest.json",
+        "fileSha256": "7097cec82c6a9907a7c21ec340177890ca7b25b1c6c5ae0383225e0c09eb3692"
+      },
+      "human": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/human-boundary-review-v001/confirmed-observations.json",
+        "fileSha256": "527d45cf0d1136c48dfe5e63962f634f41f6bdfd88b6651a2ce6a4f7caf79d7a"
+      },
+      "config": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/human-boundary-review-v001/config.json",
+        "fileSha256": "2d63e45158948bf5c8c830c778d8f23d73d895bef1cacbcd12d3a4afc0927e19"
+      },
+      "diagnosis": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-local-repair-v001/diagnosis.json",
+        "fileSha256": "0cfbd17e1b4289c9e59520ffb48616ad3981500bc2073e5682c9ebbb94d75d94"
+      },
+      "expected": {
+        "meaning": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/meaning-input.json",
+          "fileSha256": "a7f615fb33261dd2e8956c155c11792c70c2559655a8e0583897bf3f4e17a193"
+        },
+        "sourcePackage": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/source-package.json",
+          "fileSha256": "00da4abf1d9c8a962bab393a22c3fc070c4b9608d51ac97a44f92ea6005ee032"
+        },
+        "selection": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/selection.json",
+          "fileSha256": "09f53a43873110704a745c1b8b3e4460692c8d9ab4f86739f96a873a47957f57"
+        },
+        "instruction": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/instruction.json",
+          "fileSha256": "28de8e76506d72d75d33e8c1e2a4aa9b1acc0051a8920d3b7735133d107d15dc"
+        },
+        "rendererJob": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/renderer-job.json",
+          "fileSha256": "805e620999a7360d1ce592448812389b278d9bea217a23b8948891eeb7984ed7"
+        }
+      },
+      "expectedVideo": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/render/presentation-rendered-v002.mp4",
+        "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+      },
+      "expectedRendererResult": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/renderer-result.json",
+        "fileSha256": "8aae80c6da6f2a8a69238942a756f34275fd4d85921fa0fb6e119f2ce1574d64"
+      }
+    },
+    {
+      "id": "distant",
+      "parent": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/run-v001/verification.json",
+        "fileSha256": "fe5c797f0f57507a25e66ab3d009e6d7919bf93843e67105feb73e6869d42473"
+      },
+      "human": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-caption-boundary-v001/confirmed-observations.json",
+        "fileSha256": "6425cc8791070b9fd9411201f910c662a4bd96d2eb117895dffc6683ccbef38b"
+      },
+      "config": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/human-caption-boundary-v001/config.json",
+        "fileSha256": "221e6b50aa131a26042f26906ee52dfb2d7c4a90c441b24df23bd9d88e20c822"
+      },
+      "expected": {
+        "meaning": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/meaning-input.json",
+          "fileSha256": "01052cf490449c77f57e0e828596691c45d61a2b860b7c001fa9debfde47c318"
+        },
+        "sourcePackage": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/source-package.json",
+          "fileSha256": "3b6773b8b46dee23068198878c2ed2580f387d6a8cf6685d207b6e8c05440bf2"
+        },
+        "selection": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/selection.json",
+          "fileSha256": "37339dd7021dc17e253805af210559fbe025762c32f31e98dd45d75b34cf97bd"
+        },
+        "instruction": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/instruction.json",
+          "fileSha256": "9ea234e4b1a45dc445031d249728822ee10a6a1c5768ad39af15928e82f85724"
+        },
+        "rendererJob": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/renderer-job.json",
+          "fileSha256": "e76666b5ac7ebea8b5e359fb778962e8a7535c440825acb2d764314f24c491a8"
+        }
+      },
+      "expectedVideo": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/render/presentation-rendered-v002.mp4",
+        "fileSha256": "87ad00ae273471487cc6b90ef936dac0fa0f82072d5a74da8d03b328b03faabb"
+      },
+      "expectedRendererResult": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/renderer-result.json",
+        "fileSha256": "1b7c12c9b2943e732a2109d59a7c1ea37a06aee83858d779ca51880f9367738e"
+      }
+    }
+  ]
+}

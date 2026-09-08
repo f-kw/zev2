@@ -2,6 +2,7 @@ import { findById, isStatusIn, lastMatching } from './common.js';
 import type { WebGeminiReviewState } from './web-gemini-review.js';
 
 export * from './common.js';
+export * from './caption-local-repair-v001.js';
 export * from './activity.js';
 export * from './web-gemini-review.js';
 

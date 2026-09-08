@@ -1,0 +1,576 @@
+{
+  "schemaVersion": "caption-local-repair-common-manifest-v001",
+  "purpose": "audit checkpoint for instruction-016; not a new human quality approval",
+  "baselineCommit": "a8e78bef7343e5c4024f6851a7f2a30dd772c2fc",
+  "files": [
+    {
+      "path": "docs/reports/caption-local-repair-common-equivalence-v001.md",
+      "fileSha256": "88e0ff37899e50bc243d38f5fca6e4720e797d4287c8010ee391080e1c66500b",
+      "sizeBytes": 16434
+    },
+    {
+      "path": "evals/clip_composition/caption_local_repair_common_v001.mts",
+      "fileSha256": "d45624c9f45224d422488437a07cfbb8208f7be906c353e3119e428bbf2af7a3",
+      "sizeBytes": 31232
+    },
+    {
+      "path": "evals/clip_composition/caption_local_repair_common_v001.test.mts",
+      "fileSha256": "2e28332c4b207263e72f244ad42910ca61fdc9a04599eced38bccdae63f7302f",
+      "sizeBytes": 13613
+    },
+    {
+      "path": "evals/clip_composition/caption_local_repair_ui_v001.mjs",
+      "fileSha256": "fe5532daeef290ca9a537b911dcef86f9148ca895980b17730f2d7f5acd63fe3",
+      "sizeBytes": 14060
+    },
+    {
+      "path": "evals/clip_composition/caption_local_repair_ui_v001.mts",
+      "fileSha256": "66d49d90f6fb2a16d67e77477e0eaa49005e89da7d6c74cb2b7442f999e5b359",
+      "sizeBytes": 17592
+    },
+    {
+      "path": "evals/clip_composition/fixtures/caption-local-repair-v001.json",
+      "fileSha256": "2b8adfc5129ac0bfe495da2c0c19769886a0b02f0848cc604b5e6e9434ebf7cf",
+      "sizeBytes": 6281
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/common-tests-v001.tap",
+      "fileSha256": "7e19c16ce48e2b59ed4c1decb4323fe743bd36fde94eace7d23089fc97796ad0",
+      "sizeBytes": 7533
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-temporary-evidence-v001.json",
+      "fileSha256": "df2f6373ceb6304894552f4d838b830a56a8698759f9784cd52a0215e071e78b",
+      "sizeBytes": 465778
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001/caption-adoption.json",
+      "fileSha256": "bd0b89be2479d6818ff22099a8224cfb057ed1d4b73040db35f44be20e631e3d",
+      "sizeBytes": 34333
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001/cue-end-projection.json",
+      "fileSha256": "ce53c1e934b21775f6c66cc45730879906c1c12157b84859cb42a2cc9f3ac741",
+      "sizeBytes": 8899
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001/equivalence-verification.json",
+      "fileSha256": "865aac38cb470d859b93d91a711b5ddfe56da26c4f2313a9c0a5c45df95ea647",
+      "sizeBytes": 2925
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001/instruction.json",
+      "fileSha256": "cd7c76c0bcfcaf930a9ec7169ecda649b2306beb36ad8ef4cbc9bd6f980813e6",
+      "sizeBytes": 56313
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001/line-end-projection.json",
+      "fileSha256": "df4bf89e07b400c7230747ec57f0afb98bdc41e09505c56269128f2e1e4fcd7e",
+      "sizeBytes": 13997
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001/meaning-input.json",
+      "fileSha256": "04a3d4b39a20678017c08ec1b42cf3abe74a4cda8df08ce2534dd9988d71bbd3",
+      "sizeBytes": 289960
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001/renderer-job.json",
+      "fileSha256": "142a73d4c2645a52ee9f6c713db91ecf29b9178d5e78c7a1aaae1870ca518c10",
+      "sizeBytes": 10830
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001/scope-verification.json",
+      "fileSha256": "b0894cce376899e601de546108d7b267a52b781da258c3e8c81ea89b96827ca6",
+      "sizeBytes": 50778
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001/selection.json",
+      "fileSha256": "c1dcdf094c63df68311f016735f4fc90d6be438f48fee920fc58183ce6833027",
+      "sizeBytes": 9568
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001/source-package.json",
+      "fileSha256": "08a75e21252414305d3f518154b91376881d182000d46ddb8a389ef9256dd957",
+      "sizeBytes": 194921
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-temporary-evidence-v001.json",
+      "fileSha256": "86d96e4f2c951749150c7bbde22e9bf3d1ffc471cdf33d2eb2446efeacbfa6b9",
+      "sizeBytes": 71491
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/caption-adoption.json",
+      "fileSha256": "73c3a33de39a76ad0936e57bc0e51eaad0b56834875819f10474b96fb3b85aba",
+      "sizeBytes": 56530
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/cue-end-projection.json",
+      "fileSha256": "f8b9985a995debd91a48adc277c60b219147da6822784f8592f8542f078fb8cc",
+      "sizeBytes": 2565
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/equivalence-verification.json",
+      "fileSha256": "a0f1c1b4e970d4dda8c1da603540e6cf61bc8df0c38b3fa58583768d49282c2b",
+      "sizeBytes": 2888
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/instruction.json",
+      "fileSha256": "2a6f5333c9380713a52b15c768d584ab5eec23fe2231dfe5ff4ed0952f511abe",
+      "sizeBytes": 10169
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/line-end-projection.json",
+      "fileSha256": "5af716d5c84a466095df56831b1bfab6176c2dce21036dcf7fc0496edce8b4e4",
+      "sizeBytes": 3680
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/meaning-input.json",
+      "fileSha256": "4ef601808a269ac4bdca2bea93dff6d2d328fb8c695a055d88a9f21fb4757028",
+      "sizeBytes": 38200
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/renderer-job.json",
+      "fileSha256": "212804e263fcebf9f6cece1ef402f43ce8831dce5868dc0b2f0c3898d3121ec6",
+      "sizeBytes": 10777
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/scope-verification.json",
+      "fileSha256": "8d1eb504282e2a3d1f90d154fb3de4fce5244e6fb041f0a900513ca639857a5f",
+      "sizeBytes": 11108
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/selection.json",
+      "fileSha256": "1e0e538df609ffb243df86821fd7ddecfd0ffd8a0567afc719a326501f9513f7",
+      "sizeBytes": 1954
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/source-package.json",
+      "fileSha256": "e4dd889fc680d6dc656cb692b1cdf7902dd786f6c3c6549b03e24d2a8a0de83f",
+      "sizeBytes": 43535
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/drive-sync-scope-v001.json",
+      "fileSha256": "e44641a86ba0e0be3151db6b86684a2bf358aaa83873d5fa991d7c4b705e75ed",
+      "sizeBytes": 505
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/existing-core-typecheck-diagnostic-v001.log",
+      "fileSha256": "cbbf47fbab5b3a4fd9b103ca5b52e9506a2238f2bb88329bc69d547f442e1e26",
+      "sizeBytes": 22214
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/final-equivalence-verification-v001.json",
+      "fileSha256": "c63cdfb536a59f244074a7a8e65542def54431ec2fdafc801b062884582663e6",
+      "sizeBytes": 7592
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/http-setup-evidence-v001.json",
+      "fileSha256": "a09f38282a4a7455c7fdd7e59e63c2fda9b7d84df2aa515cf3d27887021230cb",
+      "sizeBytes": 19053
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/implementation-inventory-v001.json",
+      "fileSha256": "b271fbc3a0ec956b29a2eac4a51a3b52d919418040bb37d1b87bdf06d8f7badf",
+      "sizeBytes": 1895
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/preservation-verification-v001.json",
+      "fileSha256": "3c3568cd57ee218a69fed50692e30a0c866469753e16d867c28c883964223222",
+      "sizeBytes": 2010280
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/07cdbe46-f97a-4927-aebb-245f1a9873ba.json",
+      "fileSha256": "6f2dce953eb0b8100c5e3e3bdb879385fa98cfac2f3de329352aed0194d52d53",
+      "sizeBytes": 4864
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/2ff37bcc-8c7c-4a79-a2cc-62ef2183c538.json",
+      "fileSha256": "219600e5edbcd3c95897882d917e6c543e781b4711722b26edf7e1f589d1fc2e",
+      "sizeBytes": 4598
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/49306448-f6c3-4608-9101-ef1f005b2de3.json",
+      "fileSha256": "564a05a7db5f1908e120044822142a7e7ea2d7a8954f5cd456cd6ed1992fa7e0",
+      "sizeBytes": 1731
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/4d544102-84de-40d3-95a4-248c159e59e1.json",
+      "fileSha256": "7028b13761b4e4aceba80c9af7cae137b6d8412512d5802516f343737f8bffa2",
+      "sizeBytes": 7515
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/73746a74-db34-442e-be34-7b4352a8a240.json",
+      "fileSha256": "33aa5ec7853bab2908b16141e5abe8a3ea74bb89ba887a9a60c6c6f6aa0830e7",
+      "sizeBytes": 4598
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/75027f11-527e-4c83-9bff-71d2c5212931.json",
+      "fileSha256": "c735db744d3f299f1e936562cb6a4ff4168bd95a996b83f6639d2a9c381c732d",
+      "sizeBytes": 4076
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/7b6e4196-bc61-43ff-b565-58e4febb4a57.json",
+      "fileSha256": "a083ef86cabcd8c137649c57c2fe68eefa73dd8888011202129823ad48b3afd6",
+      "sizeBytes": 4864
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/7fda2a5e-8c75-4a3c-8118-50a7d7e22160.json",
+      "fileSha256": "23af3096dc7b0d1fbb1033d4fecfceb2bd153fcb7b058bd61685cc44570059fa",
+      "sizeBytes": 4076
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/8653e81e-06a5-4e73-a571-35e6fb9734bd.json",
+      "fileSha256": "8933a1847c2ba3d7409e30bd7f33736ff8202d81a0054374c644cccf1290b98c",
+      "sizeBytes": 7515
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/925143f6-fe8f-49c8-b0ee-8a98b7952d3b.json",
+      "fileSha256": "d112efd4d66f5f28ed0cedae4f9277cc2e5f428a75004e560af0808fba914b67",
+      "sizeBytes": 2686
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/b87de129-a2d0-443b-9669-a9dbfe688d32.json",
+      "fileSha256": "d59b24c2f306c86e815e66553534a3f8d10dcc65b562f34ab6553c46dcf0a062",
+      "sizeBytes": 1731
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/admission-receipt.json",
+      "fileSha256": "563609dbae8837eed1612522a78df035ec9f2ab829166f881996efcc19e5d50f",
+      "sizeBytes": 17156
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/caption-adoption.json",
+      "fileSha256": "09850ec6dab93c6171892e5a15de554d99c080eb61f5aeedd2e0b897fc79257e",
+      "sizeBytes": 24910
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/cue-end-projection.json",
+      "fileSha256": "2989c8028ced55b3bac4279a2b6cd875adf8c0836a85bef584b756d801ce7d9d",
+      "sizeBytes": 9073
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/instruction.json",
+      "fileSha256": "f4513a8754b4a31ac929b5f6b22f0b10251c27dfec37db7325b9c6747585d992",
+      "sizeBytes": 57681
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/line-end-projection.json",
+      "fileSha256": "7469610584d33b446015932b533ac55fb52483a3d5a631ce0a53e8e4bbf7e3a5",
+      "sizeBytes": 14231
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/line-layout.json",
+      "fileSha256": "f5bcd0623972e2b0a6bfa99b824348f99b2da86af156280493ec4dfa01afae19",
+      "sizeBytes": 39853
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/meaning-input.json",
+      "fileSha256": "b276ec9533a96922bedfe0a655a4b56da4e24bf7caae3c1c58cc4bd059aac4a3",
+      "sizeBytes": 290038
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/01-6cc5ca91ac9d.png",
+      "fileSha256": "a8c4875e7d37a0fc08daead132073a0aba7eaba6c45885b73ac5081013ac9ece",
+      "sizeBytes": 103286
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/02-beb5d8120c3c.png",
+      "fileSha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142",
+      "sizeBytes": 109094
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/03-99f37453103b.png",
+      "fileSha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc",
+      "sizeBytes": 109969
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/04-644b072a42f4.png",
+      "fileSha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9",
+      "sizeBytes": 124582
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/05-77b3cc418faa.png",
+      "fileSha256": "02989dbda87e18443e3e414865d04e73ce4f9c6ca603ac778a65284b4f70e8cb",
+      "sizeBytes": 65209
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/06-903d2172333f.png",
+      "fileSha256": "dd2b8aa9b29ab95d8d37b21e8e92ae83e74c415fb73447da9e168260edfd9582",
+      "sizeBytes": 98186
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/07-8475bba0316c.png",
+      "fileSha256": "af091c6f7b36cd9851551e45589021f54ed53c5e2444a01f4e5bcfff1cf4ae1f",
+      "sizeBytes": 108877
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/08-97c00252fcaf.png",
+      "fileSha256": "5dca655e0adea5738de9caf7dd40c5da2a4cb1fe67f8b8d4b9ec69c3e09d8b21",
+      "sizeBytes": 95104
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/09-3c9c0f1d7b59.png",
+      "fileSha256": "e9246b3e4cb6d5b634700f6978d1a013a4e6a622999ffc02779f821629b6e362",
+      "sizeBytes": 140368
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/10-8c8bc63e8bab.png",
+      "fileSha256": "87e11f8d572d53d2ce352befb96eb54d9d337a2152e83697b584e95815005f7f",
+      "sizeBytes": 93336
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/11-cdcc1bdf53ab.png",
+      "fileSha256": "e4823c5ae9794209111e734b928e3f18697bc7e01e0be4ab7bf6edf48656fe80",
+      "sizeBytes": 89754
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/12-df8777253254.png",
+      "fileSha256": "e9c5808a102ace3df2f2aa3cc338405a409dd2e97038bb88f7c881e0e8a26234",
+      "sizeBytes": 126201
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/13-304f6ada63c6.png",
+      "fileSha256": "7ed56ed42269bf8c99f6d2b1ce2db41d1311cbe966d83913d0f8b57101c5d0fc",
+      "sizeBytes": 123901
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/14-14de16a76966.png",
+      "fileSha256": "c487a948d55ca5c784c5312086591e26b7bf44e9e0ad1d344f03eb758d3476aa",
+      "sizeBytes": 143669
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/15-70520870e134.png",
+      "fileSha256": "4ab20806476599fe7587b72cb35e5eee0c758ad6b823caa65c56dfdf0dea6b6b",
+      "sizeBytes": 69656
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/16-0ec0a3afdb61.png",
+      "fileSha256": "6bda9a5dd6638c4e348e7cd96a79e7f9a1f2ff7f8279a9ccb19889c09225282f",
+      "sizeBytes": 73588
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/17-8fc12fc6fc9e.png",
+      "fileSha256": "734c6a0c25b4cb8f730bfad3a72c806b43ad1886677e69dad5369ea497859008",
+      "sizeBytes": 174810
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/18-2da9e398d5ab.png",
+      "fileSha256": "f18ce9602742f150082e61a5da71577942d705a3d94736e714a9724c507c3b6b",
+      "sizeBytes": 111297
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/19-f186b33496ab.png",
+      "fileSha256": "7dabda54764e68ede6e3160bd27fd54611587b14e427126b2ad696837cba17c6",
+      "sizeBytes": 212714
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/20-1bca6112ca9d.png",
+      "fileSha256": "7ad0e37611c2ff45499686029f35a1de4d4efff8c5d0fba2bb1c70197e0647f0",
+      "sizeBytes": 84494
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/21-61bd1e84e535.png",
+      "fileSha256": "d836d1906283a4418977de37314d6d7399f4bde95e64dae2031f510b4b72cd15",
+      "sizeBytes": 245001
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/22-e8a5dbd6899e.png",
+      "fileSha256": "5a490d01fc6a059f6e99fedc5842daf3f900914c9f1cbe101b75ee636a2848fe",
+      "sizeBytes": 138229
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/23-dc402bba2d56.png",
+      "fileSha256": "8831460cba949aa092e20d1d1b0fe3d12757f21d96524bb99a53c0ae88f4d506",
+      "sizeBytes": 109671
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/24-6c75a0fb697a.png",
+      "fileSha256": "a901ec284a331412ce5be4f7901d7d9f366b9e1ca64a134e4bdf2a4d82b5fd86",
+      "sizeBytes": 104409
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/25-dc66a140def5.png",
+      "fileSha256": "fc3c0b5bbc7324ef593b502c16716a10585686ebef8026233777ee04893741a6",
+      "sizeBytes": 197108
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/26-bb74cc90be7e.png",
+      "fileSha256": "a6b20dd7eeffbc8c1f6b97011e6e1b971a0cddaf40d712ebb3d1fdf9503b9f06",
+      "sizeBytes": 141680
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/27-e36b4022f273.png",
+      "fileSha256": "121a4a7d5e9e85e0ee55ffd2e1dc4750e5f1c14a781e4e77d9e9285609056c89",
+      "sizeBytes": 117999
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/28-f42c1c285994.png",
+      "fileSha256": "d3cf9a1c6793bd3ed8cc85b815492c1f8c57b4c258f4bb3237772ff189752055",
+      "sizeBytes": 232760
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/29-579d1271d348.png",
+      "fileSha256": "ff53671f3533565baf27b0aad55b82ae7992ffdd581e438c454b85f41c89e080",
+      "sizeBytes": 230349
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/30-abc84d98fde5.png",
+      "fileSha256": "80b707a8d494278c2a27322138d5a93a4093687dc2ae458cf95b980993f5379c",
+      "sizeBytes": 225988
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/31-4d9a53c17eeb.png",
+      "fileSha256": "d34b858912117e60632733f3adc430ebfcdf4eb5b681673c6010baa7e2e25967",
+      "sizeBytes": 102630
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/overlays/32-d323f55f4560.png",
+      "fileSha256": "bd64fbf26cf06f22f230593a95ca526bc6efff1cac4814923f10c74be9ce2bc4",
+      "sizeBytes": 198040
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/presentation-rendered-v002.mp4",
+      "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+      "sizeBytes": 75458918
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/renderer-job.json",
+      "fileSha256": "54ec60e4665d185df054bb8ea7155ea843795c9073ad42d7f5ffa4f547a53bbf",
+      "sizeBytes": 11166
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/renderer-result.json",
+      "fileSha256": "fddd7f9a0b4fbb527490ec61f0b6e80148d7ed5a39f55b95725ffed393ce2a30",
+      "sizeBytes": 346773
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/scope-verification.json",
+      "fileSha256": "9f5a62a81a3f5873e093878d11ad1027743c17f706d317606bfcbbbd07f74cef",
+      "sizeBytes": 51259
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/selection.json",
+      "fileSha256": "377bb28ba58964f431883a09186b9cce515d474ef54f84fbce1dbff4f58db7e9",
+      "sizeBytes": 9646
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/source-package.json",
+      "fileSha256": "654b2479c6e951631456ce745647807dfc9a769f0ff7dc480d7a325e3ceea961",
+      "sizeBytes": 195137
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/admission-receipt.json",
+      "fileSha256": "1f595fcf66e5650cfb8e43b73d0e525ba8738e5d1688448227b71d1fb2f13857",
+      "sizeBytes": 17081
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/caption-adoption.json",
+      "fileSha256": "ae07491216b6a2deea791b0659cf05fdb97b29dd72dcde6d6b3ba482d1e561df",
+      "sizeBytes": 42712
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/cue-end-projection.json",
+      "fileSha256": "7f11fcda577d58208eab60bd08c7bf4af0bac54fad6bac4535d2c92294b2635c",
+      "sizeBytes": 2734
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/instruction.json",
+      "fileSha256": "bf82d200dd5ba12a7248b62363704f1064d976c46db7a09414ef0a46317af2d9",
+      "sizeBytes": 10516
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/line-end-projection.json",
+      "fileSha256": "3efcde8248939a428f755fbaf78152e1cf85d69ad3b5f73fb70e6badc49a20f8",
+      "sizeBytes": 3908
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/line-layout.json",
+      "fileSha256": "ce07a843f1b5bf221ed070bfbd6a22835ae5efc0a9a817c2a819fc537d58fd2a",
+      "sizeBytes": 7011
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/meaning-input.json",
+      "fileSha256": "40fb5359126bd4ad1d5ae43c8c71ee27fa2d998c03a3d5e21931e01348339a70",
+      "sizeBytes": 38276
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/render/overlays/01-591c87f86114.png",
+      "fileSha256": "c4970b7130abeba9baf778b45b834d179500c66440619817f7eb42a0d04b0f50",
+      "sizeBytes": 208196
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/render/overlays/02-fc6ce9dfb0f3.png",
+      "fileSha256": "0baed043524ce78a610da691d770a4b8d6b99995384d15741c640de8b624f7ec",
+      "sizeBytes": 158451
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/render/overlays/03-15a535a1a90f.png",
+      "fileSha256": "b9214d8deb57709df6627fdd2bb554a73839dc32d017cf1c6535be7340954271",
+      "sizeBytes": 93234
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/render/overlays/04-26d8fd989d1a.png",
+      "fileSha256": "1ccde235e95aa80ea38d708c8f1779e63f9ac538cf73f55b3dfa1dfe6c5b1845",
+      "sizeBytes": 181815
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/render/presentation-rendered-v002.mp4",
+      "fileSha256": "87ad00ae273471487cc6b90ef936dac0fa0f82072d5a74da8d03b328b03faabb",
+      "sizeBytes": 35674817
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/renderer-job.json",
+      "fileSha256": "ccd32c29c5234d2a3361b2d26d36e19e0933ce19373e441e9bb65d2fb2a6bce2",
+      "sizeBytes": 11106
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/renderer-result.json",
+      "fileSha256": "512c4a634251ff089e7cb26c7e89db24767ef11e50c976165a18243bcdba1936",
+      "sizeBytes": 72208
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/scope-verification.json",
+      "fileSha256": "aae9698bee1b94998afffda7c10d73b3ff01be46abae9b4fe37a4dbc8a0dff08",
+      "sizeBytes": 11581
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/selection.json",
+      "fileSha256": "04baaa3864c25a45c806c9147a567584030c29470c1edea896cfa0bc1b07e68a",
+      "sizeBytes": 2030
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/source-package.json",
+      "fileSha256": "c6da8b44a568a189ca256a7e5eb008d208538757de3ab4b0fcfabb347f8050b4",
+      "sizeBytes": 43746
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/verification-notes-v001.json",
+      "fileSha256": "b9e5610f0fac644f1299e883499fe01e0219290f5402eb297c28f70f277ccaaf",
+      "sizeBytes": 2640
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/verify-equivalence-v001.mts",
+      "fileSha256": "f3e176499ae87383b5bccd9f7a32f93f11b697bdec683a8e22793ef8e2a4993b",
+      "sizeBytes": 5519
+    },
+    {
+      "path": "evals/clip_composition/replay_caption_local_repair_v001.mts",
+      "fileSha256": "8e1016fee515adaaa3782621eb9b574bb8d67e4f1ec966348c4ae7708042e3b4",
+      "sizeBytes": 10485
+    },
+    {
+      "path": "packages/shared/src/caption-local-repair-v001.ts",
+      "fileSha256": "ee14b168922bf3c44bba82010b148796296aae897b94af9d3bedfe0d4366512f",
+      "sizeBytes": 3384
+    },
+    {
+      "path": "packages/shared/src/index.ts",
+      "fileSha256": "6da59652f1ce9dec031dfb5969bc4f152f262e8086157e4613af8f647e6dd722",
+      "sizeBytes": 19854
+    }
+  ],
+  "selfBinding": "external Drive synchronization MANIFEST binds this file and the checkpoint commit",
+  "finalVerification": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/final-equivalence-verification-v001.json",
+  "sourceDelivery": "GitHub checkpoint",
+  "driveDelivery": "report, final verification, implementation SHA inventory and MANIFEST only"
+}

@@ -1,0 +1,245 @@
+TAP version 13
+# Subtest: both historical fixtures reconstruct every final caption field, text ID, frame and line end
+ok 1 - both historical fixtures reconstruct every final caption field, text ID, frame and line end
+  ---
+  duration_ms: 711.4625
+  ...
+# Subtest: final frame endpoint and explicitly kept endpoints preserve the existing Core clock
+ok 2 - final frame endpoint and explicitly kept endpoints preserve the existing Core clock
+  ---
+  duration_ms: 0.157834
+  ...
+# Subtest: common validator rejects other video SHA
+ok 3 - common validator rejects other video SHA
+  ---
+  duration_ms: 2.813959
+  ...
+# Subtest: common validator rejects base video SHA
+ok 4 - common validator rejects base video SHA
+  ---
+  duration_ms: 0.273625
+  ...
+# Subtest: common validator rejects other subtitle ID
+ok 5 - common validator rejects other subtitle ID
+  ---
+  duration_ms: 0.158
+  ...
+# Subtest: common validator rejects different text IDs
+ok 6 - common validator rejects different text IDs
+  ---
+  duration_ms: 0.136125
+  ...
+# Subtest: common validator rejects different caption text
+ok 7 - common validator rejects different caption text
+  ---
+  duration_ms: 0.116167
+  ...
+# Subtest: common validator rejects audio packet SHA
+ok 8 - common validator rejects audio packet SHA
+  ---
+  duration_ms: 0.164291
+  ...
+# Subtest: common validator rejects original formal input SHA
+ok 9 - common validator rejects original formal input SHA
+  ---
+  duration_ms: 0.171125
+  ...
+# Subtest: common validator rejects unobserved receipt
+ok 10 - common validator rejects unobserved receipt
+  ---
+  duration_ms: 0.139708
+  ...
+# Subtest: common validator rejects unobserved frame substitution
+ok 11 - common validator rejects unobserved frame substitution
+  ---
+  duration_ms: 0.176917
+  ...
+# Subtest: common validator rejects unobserved presented frame
+ok 12 - common validator rejects unobserved presented frame
+  ---
+  duration_ms: 0.161041
+  ...
+# Subtest: common validator rejects wrong output audio sample
+ok 13 - common validator rejects wrong output audio sample
+  ---
+  duration_ms: 0.2115
+  ...
+# Subtest: common validator rejects wrong source audio sample
+ok 14 - common validator rejects wrong source audio sample
+  ---
+  duration_ms: 0.203292
+  ...
+# Subtest: common validator rejects wrong source frame
+ok 15 - common validator rejects wrong source frame
+  ---
+  duration_ms: 0.255333
+  ...
+# Subtest: common validator rejects fixture disguised as human frame
+ok 16 - common validator rejects fixture disguised as human frame
+  ---
+  duration_ms: 0.16825
+  ...
+# Subtest: common validator rejects extra exclusion field on boundary operation
+ok 17 - common validator rejects extra exclusion field on boundary operation
+  ---
+  duration_ms: 0.117625
+  ...
+# Subtest: common validator rejects hidden value on kept boundary
+ok 18 - common validator rejects hidden value on kept boundary
+  ---
+  duration_ms: 0.176458
+  ...
+# Subtest: common validator rejects boundary fields on exclusion
+ok 19 - common validator rejects boundary fields on exclusion
+  ---
+  duration_ms: 0.162166
+  ...
+# Subtest: common validator rejects exclusion disguised as zero interval
+ok 20 - common validator rejects exclusion disguised as zero interval
+  ---
+  duration_ms: 0.103709
+  ...
+# Subtest: common validator rejects unconfirmed excluded text
+ok 21 - common validator rejects unconfirmed excluded text
+  ---
+  duration_ms: 0.559125
+  ...
+# Subtest: common validator rejects missing explicit exclusion reason
+ok 22 - common validator rejects missing explicit exclusion reason
+  ---
+  duration_ms: 0.102667
+  ...
+# Subtest: exclusion permission is distinct from boundary permission
+ok 23 - exclusion permission is distinct from boundary permission
+  ---
+  duration_ms: 0.1335
+  ...
+# Subtest: reject invalid or unseen presentation frame -1
+ok 24 - reject invalid or unseen presentation frame -1
+  ---
+  duration_ms: 0.076833
+  ...
+# Subtest: reject invalid or unseen presentation frame 1505.5
+ok 25 - reject invalid or unseen presentation frame 1505.5
+  ---
+  duration_ms: 0.053958
+  ...
+# Subtest: reject invalid or unseen presentation frame NaN
+ok 26 - reject invalid or unseen presentation frame NaN
+  ---
+  duration_ms: 0.066834
+  ...
+# Subtest: reject invalid or unseen presentation frame Infinity
+ok 27 - reject invalid or unseen presentation frame Infinity
+  ---
+  duration_ms: 0.103833
+  ...
+# Subtest: reject invalid or unseen presentation frame 900
+ok 28 - reject invalid or unseen presentation frame 900
+  ---
+  duration_ms: 0.053792
+  ...
+# Subtest: reject invalid or unseen presentation frame 1671
+ok 29 - reject invalid or unseen presentation frame 1671
+  ---
+  duration_ms: 0.051917
+  ...
+# Subtest: reject start >= end even when both frame receipts were issued
+ok 30 - reject start >= end even when both frame receipts were issued
+  ---
+  duration_ms: 0.801208
+  ...
+# Subtest: reject overlap with untouched caption instead of moving that caption
+ok 31 - reject overlap with untouched caption instead of moving that caption
+  ---
+  duration_ms: 0.742083
+  ...
+# Subtest: validation does not accept a replaced or relabeled saved fixture
+ok 32 - validation does not accept a replaced or relabeled saved fixture
+  ---
+  duration_ms: 1.443875
+  ...
+# Subtest: fixture receipt cannot cross into a live human session
+ok 33 - fixture receipt cannot cross into a live human session
+  ---
+  duration_ms: 0.433333
+  ...
+# Subtest: observation and validation have no formal execution authority
+ok 34 - observation and validation have no formal execution authority
+  ---
+  duration_ms: 0.466625
+  ...
+# Subtest: historical file substitution fails against the separately pinned evidence binding
+ok 35 - historical file substitution fails against the separately pinned evidence binding
+  ---
+  duration_ms: 3.464042
+  ...
+# Subtest: scope rejects untargeted caption frame
+ok 36 - scope rejects untargeted caption frame
+  ---
+  duration_ms: 0.834792
+  ...
+# Subtest: scope rejects other caption text
+ok 37 - scope rejects other caption text
+  ---
+  duration_ms: 0.572791
+  ...
+# Subtest: scope rejects caption line ending
+ok 38 - scope rejects caption line ending
+  ---
+  duration_ms: 1.146417
+  ...
+# Subtest: scope rejects retained media segment
+ok 39 - scope rejects retained media segment
+  ---
+  duration_ms: 2.472791
+  ...
+# Subtest: scope rejects base media
+ok 40 - scope rejects base media
+  ---
+  duration_ms: 2.862834
+  ...
+# Subtest: scope rejects audio/media generation
+ok 41 - scope rejects audio/media generation
+  ---
+  duration_ms: 2.403125
+  ...
+# Subtest: scope rejects timeline
+ok 42 - scope rejects timeline
+  ---
+  duration_ms: 1.356541
+  ...
+# Subtest: scope rejects style
+ok 43 - scope rejects style
+  ---
+  duration_ms: 1.177584
+  ...
+# Subtest: scope rejects renderer
+ok 44 - scope rejects renderer
+  ---
+  duration_ms: 1.130083
+  ...
+# Subtest: scope rejects QC rules
+ok 45 - scope rejects QC rules
+  ---
+  duration_ms: 1.128292
+  ...
+# Subtest: publication rejects tampering with an already reconstructed provenance graph or destination
+ok 46 - publication rejects tampering with an already reconstructed provenance graph or destination
+  ---
+  duration_ms: 382.369708
+  ...
+# Subtest: shared HTTP UI saves, reloads, validates and explicitly approves through the same render path
+ok 47 - shared HTTP UI saves, reloads, validates and explicitly approves through the same render path
+  ---
+  duration_ms: 231.708333
+  ...
+1..47
+# tests 47
+# suites 0
+# pass 47
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1673.609917

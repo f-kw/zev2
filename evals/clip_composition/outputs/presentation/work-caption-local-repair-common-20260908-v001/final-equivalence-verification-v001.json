@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "caption-local-repair-final-equivalence-v001",
+  "status": "passed",
+  "cases": [
+    {
+      "id": "digest",
+      "status": "passed",
+      "purpose": "common-path-equivalence",
+      "newHumanJudgment": false,
+      "formalCaptionCount": 32,
+      "effectiveFormalCaptionInputs": "exact-content-textIds-frame-intervals-cue-and-line-end-textIds",
+      "wholeArtifactBytesIdentical": false,
+      "wholeArtifactDifferenceReason": "new artifact IDs, observation purpose, approval and provenance hashes",
+      "fixtureRoot": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/digest-v001",
+      "actualUiRenderRoot": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc",
+      "requestedFinalRenderCount": 1,
+      "scope": {
+        "remainingCaptions": 32,
+        "excludedCaptions": 1,
+        "changedCaptions": 2,
+        "mediaAudioAndAdoptedSegments": "unchanged",
+        "rendererStyleAndQc": "unchanged"
+      },
+      "observedMedia": {
+        "durationMs": 161033,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 4831
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "475233b0648161e3014ef52ffa1d7f4400b8dca1b0dc66214a2d66af9cd1b56e"
+        }
+      },
+      "qcStatus": "passed",
+      "qcViolations": [],
+      "completedVideo": {
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/presentation-rendered-v002.mp4",
+        "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+        "sizeBytes": 75458918
+      },
+      "historicalCompletedVideo": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/render/presentation-rendered-v002.mp4",
+        "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+      },
+      "completedVideoSha256Matches": true,
+      "expectedCaptionInputs": {
+        "meaning": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/meaning-input.json",
+          "fileSha256": "a7f615fb33261dd2e8956c155c11792c70c2559655a8e0583897bf3f4e17a193"
+        },
+        "sourcePackage": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/source-package.json",
+          "fileSha256": "00da4abf1d9c8a962bab393a22c3fc070c4b9608d51ac97a44f92ea6005ee032"
+        },
+        "selection": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/selection.json",
+          "fileSha256": "09f53a43873110704a745c1b8b3e4460692c8d9ab4f86739f96a873a47957f57"
+        },
+        "instruction": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/instruction.json",
+          "fileSha256": "28de8e76506d72d75d33e8c1e2a4aa9b1acc0051a8920d3b7735133d107d15dc"
+        },
+        "rendererJob": {
+          "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/renderer-job.json",
+          "fileSha256": "805e620999a7360d1ce592448812389b278d9bea217a23b8948891eeb7984ed7"
+        }
+      }
+    },
+    {
+      "id": "distant",
+      "status": "passed",
+      "purpose": "common-path-equivalence",
+      "newHumanJudgment": false,
+      "formalCaptionCount": 4,
+      "effectiveFormalCaptionInputs": "exact-content-textIds-frame-intervals-cue-and-line-end-textIds",
+      "wholeArtifactBytesIdentical": false,
+      "wholeArtifactDifferenceReason": "new artifact IDs, observation purpose, approval and provenance hashes",
+      "fixtureRoot": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001",
+      "actualUiRenderRoot": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70",
+      "requestedFinalRenderCount": 1,
+      "scope": {
+        "remainingCaptions": 4,
+        "excludedCaptions": 0,
+        "changedCaptions": 3,
+        "mediaAudioAndAdoptedSegments": "unchanged",
+        "rendererStyleAndQc": "unchanged"
+      },
+      "observedMedia": {
+        "durationMs": 55700,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 1671
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "fbe7dbfd23e208ca77248b67a96a17f86c83748be7bf6543f3a33f337637a08f"
+        }
+      },
+      "qcStatus": "passed",
+      "qcViolations": [],
+      "completedVideo": {
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-ca864fc4-93a7-4c98-8cc4-122f9804bf70/render/presentation-rendered-v002.mp4",
+        "fileSha256": "87ad00ae273471487cc6b90ef936dac0fa0f82072d5a74da8d03b328b03faabb",
+        "sizeBytes": 35674817
+      },
+      "historicalCompletedVideo": {
+        "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/render/presentation-rendered-v002.mp4",
+        "fileSha256": "87ad00ae273471487cc6b90ef936dac0fa0f82072d5a74da8d03b328b03faabb"
+      },
+      "completedVideoSha256Matches": true,
+      "expectedCaptionInputs": {
+        "meaning": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/meaning-input.json",
+          "fileSha256": "01052cf490449c77f57e0e828596691c45d61a2b860b7c001fa9debfde47c318"
+        },
+        "sourcePackage": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/source-package.json",
+          "fileSha256": "3b6773b8b46dee23068198878c2ed2580f387d6a8cf6685d207b6e8c05440bf2"
+        },
+        "selection": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/selection.json",
+          "fileSha256": "37339dd7021dc17e253805af210559fbe025762c32f31e98dd45d75b34cf97bd"
+        },
+        "instruction": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/instruction.json",
+          "fileSha256": "9ea234e4b1a45dc445031d249728822ee10a6a1c5768ad39af15928e82f85724"
+        },
+        "rendererJob": {
+          "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/renderer-job.json",
+          "fileSha256": "e76666b5ac7ebea8b5e359fb778962e8a7535c440825acb2d764314f24c491a8"
+        }
+      }
+    }
+  ],
+  "preservation": {
+    "checkedFiles": 5411,
+    "differences": [],
+    "freshlyCheckedAt": "2026-09-08T01:44:09.128Z"
+  },
+  "newHumanJudgment": false,
+  "paidApiCalls": 0,
+  "paidApiCostUsd": 0
+}

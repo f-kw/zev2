@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "caption-local-repair-verification-notes-v001",
+  "purpose": "common-path-equivalence",
+  "newHumanJudgment": false,
+  "tests": {
+    "command": "node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/caption_local_repair_common_v001.test.mts",
+    "passed": 47,
+    "failed": 0,
+    "sharedTypeCheck": "passed",
+    "clientSyntaxCheck": "passed",
+    "wholeClosureTypeCheck": {
+      "status": "failed-in-existing-transitive-files",
+      "newImplementationDiagnostics": 0,
+      "existingDiagnostics": {
+        "render_presentation_vertical_review_v001.ts": 46,
+        "presentation_output_style_resolver_v001.ts": 40,
+        "run_presentation_instruction_renderer_job_v002.ts": 13,
+        "adopted_media_manufacturing_v001.mts": 1
+      }
+    }
+  },
+  "developmentCorrections": [
+    "正式入力の組立前検査で不要な追加項目を検出して除去した。検査失敗時の正式公開は0件。",
+    "sandboxがHTTP listenを拒否した検査を、承認済みローカルサーバー権限で再実行し全47件合格。",
+    "映像の非同期シーク中にスライダー表示が戻る不具合を修正。",
+    "保存中の対象変更をロックし、応答を元の対象へ反映するよう修正。",
+    "補修前後の再生を指定範囲へ制限。",
+    "旧Pythonに存在しないhashlib.file_digestを使った一時照合コマンドは書込前に失敗。ストリーム読込によるSHA計算へ訂正。",
+    "再生成完了後の再保存では旧プレビューと旧承認を解除し、新指定と旧動画の取り違えを防止。HTTP検査で再生成0追加・旧承認拒否・旧after非公開を確認。"
+  ],
+  "requestedFinalRenders": 2,
+  "additionalPaidApiCalls": 0,
+  "additionalApiCostUsd": 0,
+  "existingPlanShaMaintenance": "untouched",
+  "rendererImplementationAndStyle": "unchanged",
+  "uiChecks": {
+    "browser": "Microsoft Edge",
+    "purpose": "ui-verification",
+    "pageReloadAndSavedRows": "passed",
+    "explicitExcludedText": "え?いるんでしょ?",
+    "beforeAfterPlayback": {
+      "case": "distant",
+      "windowStartFrame": 921,
+      "windowEndFrameExclusive": 1671,
+      "beforeStoppedSeconds": 55.666666,
+      "afterStoppedSeconds": 55.666666,
+      "bothPaused": true
+    },
+    "newHumanQualityJudgment": false,
+    "digestExclusionBeforeAfterPlayback": {
+      "windowStartFrame": 0,
+      "windowEndFrameExclusive": 340,
+      "beforeStoppedSeconds": 11.3,
+      "afterStoppedSeconds": 11.3,
+      "bothPaused": true,
+      "explicitText": "え?いるんでしょ?"
+    }
+  }
+}

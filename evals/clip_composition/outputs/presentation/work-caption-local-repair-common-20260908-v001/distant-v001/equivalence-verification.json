@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "caption-local-repair-equivalence-v001",
+  "status": "passed",
+  "purpose": "fixture-replay",
+  "newHumanJudgment": false,
+  "historicalFixture": {
+    "path": "evals/clip_composition/fixtures/caption-local-repair-v001.json",
+    "fileSha256": "2b8adfc5129ac0bfe495da2c0c19769886a0b02f0848cc604b5e6e9434ebf7cf"
+  },
+  "expectedInputs": {
+    "meaning": {
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/meaning-input.json",
+      "fileSha256": "01052cf490449c77f57e0e828596691c45d61a2b860b7c001fa9debfde47c318"
+    },
+    "sourcePackage": {
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/source-package.json",
+      "fileSha256": "3b6773b8b46dee23068198878c2ed2580f387d6a8cf6685d207b6e8c05440bf2"
+    },
+    "selection": {
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/selection.json",
+      "fileSha256": "37339dd7021dc17e253805af210559fbe025762c32f31e98dd45d75b34cf97bd"
+    },
+    "instruction": {
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/instruction.json",
+      "fileSha256": "9ea234e4b1a45dc445031d249728822ee10a6a1c5768ad39af15928e82f85724"
+    },
+    "rendererJob": {
+      "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/renderer-job.json",
+      "fileSha256": "e76666b5ac7ebea8b5e359fb778962e8a7535c440825acb2d764314f24c491a8"
+    }
+  },
+  "actualInputs": {
+    "schemaVersion": "presentation-instruction-artifact-v002",
+    "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/distant-v001/instruction.json",
+    "fileSha256": "2a6f5333c9380713a52b15c768d584ab5eec23fe2231dfe5ff4ed0952f511abe",
+    "canonicalSha256": "d1451814f54edbcecc245d5bbc1127f8bd3a5ac8a4a7ca48dd8ea3089415f482"
+  },
+  "effectiveCaptionInputs": "exact-text-textIds-frames-cue-end-and-line-end-textIds",
+  "scope": {
+    "status": "passed",
+    "remainingCaptions": 4,
+    "excludedCaptions": 0,
+    "changedCaptions": 3,
+    "mediaAudioAndAdoptedSegments": "unchanged",
+    "rendererStyleAndQc": "unchanged"
+  },
+  "provenance": "new artifact IDs, source hashes, approval and fixture purpose are preserved separately; full artifact bytes are not called identical",
+  "renderer": null,
+  "expectedVideo": {
+    "path": "evals/clip_composition/outputs/presentation/work-distant-connection-skill-e2e-20260907-v001/caption-human-repair-v001/render/presentation-rendered-v002.mp4",
+    "fileSha256": "87ad00ae273471487cc6b90ef936dac0fa0f82072d5a74da8d03b328b03faabb"
+  },
+  "completedVideoSha256Matches": null
+}
