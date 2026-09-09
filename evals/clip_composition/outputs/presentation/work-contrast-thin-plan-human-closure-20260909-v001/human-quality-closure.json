@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "contrast-plan-human-quality-closure-v0",
+  "receivedInstruction": "ZEV進行管理２ 指示-023",
+  "instructionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-contrast-thin-plan-human-closure-20260909-v001/received-instruction.md",
+    "fileSha256": "dffaefb1f0910abed5cd7e14cc53027586025cf68514254c95abc42b7cfaaa9d"
+  },
+  "recordedAt": "2026-09-09T00:39:47.045902+00:00",
+  "authority": "explicit-instruction-023-to-associate-existing-kawafmm-review",
+  "technicalCheckpoint": "62c7c27a818df49d478e1a6486ebce678954f341",
+  "originalHumanReviewBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-contrast-thin-plan-20260909-v001/human-review-021.json",
+    "fileSha256": "bab3f210b52bcdfd6f685cd5d1cc50372774d5851f04d0bac9220ea42d9d6fad"
+  },
+  "verbatimHumanResponse": "A/B版 の方がテーマにはあってたし見やすかった。\nもし、ぺこらと一緒にホラーゲームをプレイする擬似体験というテーマならA/B/C版になるだろう",
+  "priorViewing": "kawafmmは022着工前に同一A/B版・A/B/C版を実視聴済み。指示-023で正式対応付けを指示。",
+  "newViewingRequired": false,
+  "newViewingPerformed": false,
+  "productionIntent": "ぺこらと一緒にホラーゲームをプレイしているような疑似体験を見せる。",
+  "productionIntentBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-contrast-thin-plan-20260909-v001/thin-plan-v0.json",
+    "fileSha256": "9ee85d00f078726ccf5d1e64baa2f373e9d370b99ede9e218f962cd2c7ddc2bf"
+  },
+  "technicalVerificationBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-contrast-thin-plan-20260909-v001/output-reuse-verification-v002.json",
+    "fileSha256": "d3e8f25ba217e4ca2d573a7ac802061c4372b21b9f7b03e70b2d59150c513b70"
+  },
+  "videoIdentity": [
+    {
+      "variant": "ABC",
+      "reviewedVideo": {
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/presentation-rendered-v002.mp4",
+        "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+      },
+      "selectedOrComparedVideo": {
+        "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/presentation-rendered-v002.mp4",
+        "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+      },
+      "observedFileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+      "byteIdentity": "passed"
+    },
+    {
+      "variant": "AB",
+      "reviewedVideo": {
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/render/presentation-rendered-v002.mp4",
+        "fileSha256": "1c91f282bd008777764a6d8f720577eef2845d3a2b521f415dead5e672b0265f"
+      },
+      "selectedOrComparedVideo": {
+        "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/render/presentation-rendered-v002.mp4",
+        "fileSha256": "1c91f282bd008777764a6d8f720577eef2845d3a2b521f415dead5e672b0265f"
+      },
+      "observedFileSha256": "1c91f282bd008777764a6d8f720577eef2845d3a2b521f415dead5e672b0265f",
+      "byteIdentity": "passed"
+    }
+  ],
+  "humanAssessment022": {
+    "productionIntentFit": "passed",
+    "composition": "A/B/C",
+    "reflectionC": "今回の疑似体験という目的では構成上有効",
+    "contrastWith021": "制作意図によって適切な候補採否が変わる"
+  },
+  "closure": "指示-022を技術・人間品質の第一完成として閉じる。",
+  "supersedes": "022の技術checkpoint時点で残していた人間品質未判定。旧意味判断・検証原文の内容は変更しない。",
+  "limitations": {
+    "individualOmittedUtterancesInBHumanOptimalityConfirmed": false,
+    "independentBlindPerformanceEstablished": false,
+    "unseenMaterialGeneralizationEstablished": false,
+    "generalPlannerPerformanceEstablished": false,
+    "purposeConditionedInternalRetentionSuccessEstablished": false,
+    "qualityImprovementCausedByPlanProved": false
+  },
+  "execution": {
+    "newSelectionJudgment": 0,
+    "newInternalRetentionJudgment": 0,
+    "newRenderCount": 0,
+    "newMaterial": 0,
+    "paidApiCostUsd": 0
+  }
+}

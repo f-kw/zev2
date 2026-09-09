@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "contrast-plan-human-closure-verification-v0",
+  "status": "passed",
+  "baseCommit": "62c7c27a818df49d478e1a6486ebce678954f341",
+  "checks": {
+    "originalQuoteExact": true,
+    "receivedInstructionBound": true,
+    "reviewedVideosSameBytes": true,
+    "explicitHumanAssociation": true,
+    "noNewViewingOrJudgmentOrRendering": true,
+    "individualBOptimalityNotClaimed": true,
+    "noGeneralizationClaims": true,
+    "originalTechnicalArtifactsUnchanged": true,
+    "reviewPlaybackAndStyleUnchanged": true,
+    "reportsIdentical": true,
+    "modifiedScopeExact": true,
+    "preexistingWorkUnchanged": 46,
+    "completionStatusAndNoRewatchRequestObservedInEdge": true
+  },
+  "implementationTestsRerun": false,
+  "reason": "人間回答の対応付けと文書状態更新のみ。技術実装を変更していないため、対応付け・原文・SHA・差分範囲を検証。"
+}
