@@ -909,9 +909,18 @@ export const buildPresentationCompositeArgumentsV001 = ({
   plan,
   overlayRecords,
   expectedFrameCount,
+  serializePngAndFilters = false,
 }) => {
-  const args = ['-hide_banner', '-loglevel', 'error', '-y', '-i', baseMediaPath];
+  if (typeof serializePngAndFilters !== 'boolean') {
+    throw new TypeError('PNG and filter execution control must be boolean');
+  }
+  const args = ['-hide_banner', '-loglevel', 'error', '-y'];
+  if (serializePngAndFilters) args.push('-filter_complex_threads', '1');
+  args.push('-i', baseMediaPath);
   for (const record of overlayRecords) {
+    // This is an input decoder option. FFmpeg consumes it at the following
+    // PNG -i; it must never become a base decoder or output encoder option.
+    if (serializePngAndFilters) args.push('-threads', '1');
     args.push('-loop', '1', '-framerate', String(plan.canvas.fps), '-i', record.pngPath);
   }
   const filters = [];
@@ -946,8 +955,9 @@ const composite = async ({
   baseMediaPath, plan, overlayRecords, expectedFrameCount, outputPath,
   ffmpegPath = 'ffmpeg', fatalInnerStage = 'overlay-render',
   processObserver = null, observationLabel = 'video-composite',
+  serializePngAndFilters = false,
 }) => {
-  const args = buildPresentationCompositeArgumentsV001({baseMediaPath, plan, overlayRecords, expectedFrameCount});
+  const args = buildPresentationCompositeArgumentsV001({baseMediaPath, plan, overlayRecords, expectedFrameCount, serializePngAndFilters});
   await runPresentationRendererChildProcessV001(ffmpegPath, [...args, '-movflags', '+faststart', outputPath], {
     fatalInnerStage,
     processObserver,
@@ -1545,7 +1555,11 @@ export async function executeValidatedPresentationDrawAndQcV001({
   toolPaths = DEFAULT_PRESENTATION_DRAW_TOOL_PATHS_V001,
   validatedLayoutInspection = null,
   processObserver = null,
+  serializePngAndFilters = false,
 }) {
+  if (typeof serializePngAndFilters !== 'boolean') {
+    throw new TypeError('PNG and filter execution control must be boolean');
+  }
   if (
     !isObject(overlayAdapter)
     || typeof overlayAdapter.buildProps !== 'function'
@@ -1783,6 +1797,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       fatalInnerStage: 'overlay-render',
       processObserver,
       observationLabel: 'video-composite',
+      serializePngAndFilters,
     });
     const outputMedia = await inspectRenderedMediaWithToolsV001(workVideo, {
       ffprobePath: toolPaths.ffprobePath,
@@ -1823,6 +1838,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
         ffmpegPath: toolPaths.ffmpegPath,
         compositeArguments: buildPresentationCompositeArgumentsV001({
           baseMediaPath, plan, overlayRecords: counterfactualRecords, expectedFrameCount,
+          serializePngAndFilters,
         }),
         representativeFrame,
         expectedFrameCount,

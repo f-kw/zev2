@@ -42,6 +42,13 @@ def main():
     assert optimization['status'] == 'passed'
     assert optimization['omittedFramesPixelIdentical'] and optimization['mainEncodingArgumentsUnchanged']
     assert optimization['allRequiredNegativeCasesVerified']
+    resources = check(setup['resourceEquivalenceBinding'])
+    assert resources['status'] == 'passed'
+    assert resources['defaultArgumentsUnchanged'] and resources['allDecodedFramesIdentical']
+    assert resources['streamedQcFramesIdentical'] and resources['baseDecoderAndEncoderThreadsUnchanged']
+    assert setup['executionControl'] == {'serializePngAndFilters': True}
+    for ref in [*resources['implementationBindings'], *resources['artifacts']]:
+        assert digest(ROOT / ref['path']) == ref['fileSha256'], ref['path']
     job = check(execution['rendererJobBinding'])
     admission = check(completion['admission'])
     layout = check(completion['lineLayout'])
@@ -64,15 +71,22 @@ def main():
                 'cropAppliedBaseMedia', 'runtimeBindings', 'approvedContractBindings']:
         assert job[key] == before[key], key
     implementation_changes = []
+    permitted = {row['path']: row for row in resources['implementationBindings']}
+    previous = {row['path']: row for row in resources['priorImplementationBindings']}
     assert len(job['rendererImplementationBindings']) == len(before['rendererImplementationBindings'])
     for old, new in zip(before['rendererImplementationBindings'], job['rendererImplementationBindings']):
         assert old['role'] == new['role'] and old['path'] == new['path']
         assert digest(ROOT / new['path']) == new['fileSha256']
         if old != new:
-            assert new['path'] == optimization['implementationBinding']['path']
-            assert new['fileSha256'] == optimization['implementationBinding']['fileSha256']
+            assert new['fileSha256'] == permitted[new['path']]['fileSha256']
+            if new['path'] == optimization['implementationBinding']['path']:
+                assert old['fileSha256'] == optimization['legacyImplementationFileSha256']
+                assert previous[new['path']]['fileSha256'] == optimization['implementationBinding']['fileSha256']
+            else:
+                assert new['path'] == 'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts'
+                assert old['fileSha256'] == previous[new['path']]['fileSha256']
             implementation_changes.append({'before': old, 'after': new})
-    assert len(implementation_changes) == 1
+    assert len(implementation_changes) == 2
     original = check(before['registryBindings']['styleProfileRegistry'])
     adjusted = check(job['registryBindings']['styleProfileRegistry'])
 
@@ -114,6 +128,26 @@ def main():
     assert digest(video) == completion['video']['fileSha256']
     output_qc = video.parent / 'presentation-render-qc-v002.json'
     assert read(output_qc) == qc
+    retained = check(setup['retainedPngVerificationBinding'])
+    assert retained['status'] == 'passed' and retained['actualPngCount'] == 343
+    reused = check(execution['overlayRestartProvenanceBinding'])
+    assert reused['mode'] == 'one-time-restart-with-verified-retained-artifacts'
+    assert reused['newlyRenderedPngs'] == 0
+    assert reused['verifiedDrawInputCount'] == 343 and reused['drawInputsExactlyVerified']
+    assert reused['sourceRendererJobBinding'] == setup['priorRendererJobBinding']
+    assert reused['sourcePngVerificationBinding'] == setup['retainedPngVerificationBinding']
+    expected_copies = 343 * 2 + sum(len(row['lines']) for row in layout['entries'])
+    assert len(reused['copiedArtifacts']) == expected_copies
+    assert len({row['destination'] for row in reused['copiedArtifacts']}) == expected_copies
+    main_copies = [row for row in reused['copiedArtifacts'] if row['kind'] == 'retained-v007-main']
+    repeat_copies = [row for row in reused['copiedArtifacts'] if row['kind'] == 'retained-v007-repeat']
+    assert [row['instructionId'] for row in main_copies] == ids
+    assert [row['instructionId'] for row in repeat_copies] == ids
+    for copied in reused['copiedArtifacts']:
+        assert digest(ROOT / copied['source']['path']) == copied['source']['fileSha256'] == copied['fileSha256']
+    for main_copy, repeat_copy in zip(main_copies, repeat_copies):
+        assert main_copy['fileSha256'] == repeat_copy['fileSha256']
+        assert digest(video.parent / 'overlays' / Path(main_copy['destination']).name) == main_copy['fileSha256']
     timeline = read(FORMAL / 'base-media/timeline.json')
     assert qc['mediaEvidence']['expectedFrameCount'] == timeline['baseMedia']['expectedFrameCount'] == 65363
     assert qc['mediaEvidence']['observed']['video']['frameCount'] == 65363
@@ -130,12 +164,15 @@ def main():
               'approvedDisplayChange': changed, 'preexistingFilesUnchanged': len(preexisting['files']),
               'approvedQcImplementationChange': implementation_changes,
               'qcOptimization': setup['qcEquivalenceBinding'],
+              'executionResources': setup['resourceEquivalenceBinding'],
+              'overlayRestartProvenance': execution['overlayRestartProvenanceBinding'],
               'fontSizeSelection': setup['fontSizeSelectionBinding'],
               'actualPngSafeAreaPassed': len(qc['instructionEvidence']),
               'checks': ['original-caption-artifacts-same-bytes', 'all-cues-and-lines-exact',
-                         'unchanged-renderer-inputs', 'only-approved-qc-implementation-change', 'only-approved-font-size-change',
+                         'unchanged-renderer-inputs', 'only-approved-qc-and-execution-resource-changes', 'only-approved-font-size-change',
                          'trust-rules-font-assets-dependencies-unchanged', 'all-pre-render-layout-calculations-passed',
                          'all-343-actual-png-safe-areas-passed', 'all-final-render-qc-passed', 'all-instructions-applied-once',
+                         'v007-retained-overlay-provenance-exact-and-no-new-render-claim',
                          'rendered-frames-match-adopted-timeline', 'final-video-sha256-exact'],
               'humanQuality': 'not-evaluated', 'independentBlindTrialClaim': False}
     target = WORK / 'final-render-verification-v001.json'

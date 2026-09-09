@@ -329,6 +329,8 @@ export async function executePresentationInstructionRendererJobV002({
   outputPathsUnused,
   processObserver = null,
   capabilities = {},
+  serializePngAndFilters = false,
+  suppliedOverlayAdapter = undefined as ReturnType<typeof buildPresentationRendererOverlayAdapterV001> | undefined,
 }) {
   const admission = inspectPresentationRendererAdmissionV002({
     job,
@@ -420,7 +422,7 @@ export async function executePresentationInstructionRendererJobV002({
   if (common.status !== 'built') return {exitCode: 1, result: common};
   const executeDraw = capabilities.executeDraw ?? executeValidatedPresentationDrawAndQcV001;
   const overlayAdapter = capabilities.executeDraw === undefined
-    ? buildPresentationRendererOverlayAdapterV001({
+    ? suppliedOverlayAdapter ?? buildPresentationRendererOverlayAdapterV001({
       remotionPath: receiptBuilt.receipt.runtimeBindings.remotion.path,
       chromiumPath: receiptBuilt.receipt.runtimeBindings.chromium.path,
       processObserver,
@@ -448,6 +450,7 @@ export async function executePresentationInstructionRendererJobV002({
       ),
     },
     ...(overlayAdapter === undefined ? {} : {overlayAdapter}),
+    ...(serializePngAndFilters ? {serializePngAndFilters: true} : {}),
     processObserver,
   });
   if (draw.exitCode !== 0 || draw.finalQc?.status !== 'passed') {
@@ -476,7 +479,9 @@ export async function executePresentationInstructionRendererJobV002({
 
 export async function runPresentationInstructionRendererJobFileV002(
   jobPath,
-  {workspaceRoot = DEFAULT_WORKSPACE_ROOT} = {},
+  {workspaceRoot = DEFAULT_WORKSPACE_ROOT, serializePngAndFilters = false,
+    overlayAdapter}: {workspaceRoot?: string; serializePngAndFilters?: boolean;
+      overlayAdapter?: ReturnType<typeof buildPresentationRendererOverlayAdapterV001>} = {},
 ) {
   const root = await realpath(workspaceRoot);
   const relativeJobPath = path.isAbsolute(jobPath) ? path.relative(root, jobPath) : jobPath;
@@ -597,6 +602,8 @@ export async function runPresentationInstructionRendererJobFileV002(
     observedImplementationBindings,
     outputPathsUnused: await outputUnused(root, job),
     processObserver,
+    serializePngAndFilters,
+    suppliedOverlayAdapter: overlayAdapter,
   });
 }
 

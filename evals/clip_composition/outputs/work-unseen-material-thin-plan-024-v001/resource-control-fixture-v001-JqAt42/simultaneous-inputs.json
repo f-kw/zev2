@@ -1,0 +1,113 @@
+{
+  "input": {
+    "baseMediaPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/base.mp4",
+    "plan": {
+      "canvas": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30
+      }
+    },
+    "expectedFrameCount": 900,
+    "overlayRecords": [
+      {
+        "element": {
+          "instructionId": "target",
+          "startFrame": 280,
+          "displayFrameCount": 41
+        },
+        "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/target.png"
+      },
+      {
+        "element": {
+          "instructionId": "other",
+          "startFrame": 270,
+          "displayFrameCount": 61
+        },
+        "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/other.png"
+      }
+    ]
+  },
+  "legacyArgs": [
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-y",
+    "-i",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/base.mp4",
+    "-loop",
+    "1",
+    "-framerate",
+    "30",
+    "-i",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/target.png",
+    "-loop",
+    "1",
+    "-framerate",
+    "30",
+    "-i",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/other.png",
+    "-filter_complex",
+    "[1:v]format=rgba,trim=end_frame=41,setpts=PTS-STARTPTS,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='alpha(X,Y)*min(1,min((N+1)/4,(41-N)/4))',setpts=PTS+280/30/TB[overlay0];[0:v][overlay0]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[video1];[2:v]format=rgba,trim=end_frame=61,setpts=PTS-STARTPTS,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='alpha(X,Y)*min(1,min((N+1)/4,(61-N)/4))',setpts=PTS+270/30/TB[overlay1];[video1][overlay1]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[video2];[video2]fps=30,format=yuv420p[video]",
+    "-map",
+    "[video]",
+    "-map",
+    "0:a?",
+    "-frames:v",
+    "900",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "fast",
+    "-crf",
+    "20",
+    "-pix_fmt",
+    "yuv420p",
+    "-c:a",
+    "copy"
+  ],
+  "controlledArgs": [
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-y",
+    "-filter_complex_threads",
+    "1",
+    "-i",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/base.mp4",
+    "-threads",
+    "1",
+    "-loop",
+    "1",
+    "-framerate",
+    "30",
+    "-i",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/target.png",
+    "-threads",
+    "1",
+    "-loop",
+    "1",
+    "-framerate",
+    "30",
+    "-i",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/other.png",
+    "-filter_complex",
+    "[1:v]format=rgba,trim=end_frame=41,setpts=PTS-STARTPTS,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='alpha(X,Y)*min(1,min((N+1)/4,(41-N)/4))',setpts=PTS+280/30/TB[overlay0];[0:v][overlay0]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[video1];[2:v]format=rgba,trim=end_frame=61,setpts=PTS-STARTPTS,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='alpha(X,Y)*min(1,min((N+1)/4,(61-N)/4))',setpts=PTS+270/30/TB[overlay1];[video1][overlay1]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[video2];[video2]fps=30,format=yuv420p[video]",
+    "-map",
+    "[video]",
+    "-map",
+    "0:a?",
+    "-frames:v",
+    "900",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "fast",
+    "-crf",
+    "20",
+    "-pix_fmt",
+    "yuv420p",
+    "-c:a",
+    "copy"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "unseen-material-input-read-progress-observation-v001",
+  "observedAt": "2026-09-09T17:12:00.819247+00:00",
+  "pid": 29494,
+  "sourceBinding": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/base-media/base-media.mp4",
+    "fileSha256": "3006f087046dc304227103eab9615c782bfc1838d4a576769960e2d67afde73e"
+  },
+  "lsofReadOffsetHex": "0x8f17d19",
+  "lsofReadOffsetBytes": 150043929,
+  "nearestVideoPacket": {
+    "timeSeconds": 250.333333,
+    "bytePosition": 150043217
+  },
+  "indexedVideoPackets": 65363,
+  "packetIndexCommand": [
+    "/opt/homebrew/bin/ffprobe",
+    "-v",
+    "error",
+    "-select_streams",
+    "v:0",
+    "-show_packets",
+    "-show_entries",
+    "packet=pos,pts_time",
+    "-of",
+    "csv=p=0",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/base-media/base-media.mp4"
+  ],
+  "packetIndexLocalPath": "/private/tmp/zev024-base-packet-progress.csv",
+  "packetIndexSha256": "b22f0da3194069c3f264fb0a56058453d63afbce10d125facce9d59b6205ccff",
+  "interpretation": "input demux read position only; buffering means this is not completed encoded frame count",
+  "currentMainEncodeStart": "2026-09-10T02:01:07+09:00"
+}

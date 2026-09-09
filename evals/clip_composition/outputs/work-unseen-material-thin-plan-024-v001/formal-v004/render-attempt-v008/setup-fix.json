@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "unseen-material-execution-resources-preflight-v001",
+  "status": "preflight-passed",
+  "decisionBinding": {
+    "schemaVersion": "unseen-material-advisor-execution-resources-decision-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/advisor-execution-resources-decision-v001.json",
+    "fileSha256": "027528123707a3ca35341efc2b6a7901c9f42d59d89275a55137f7724fede938",
+    "canonicalSha256": "38805bfed34e3fef2f99a4802486792d1c624a30b19853948216694e6c0c78fc"
+  },
+  "priorRendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v007/renderer-job.json",
+    "fileSha256": "94be68489cb915161d20f1c16ea62ea94bc7c3b58e3dba4152c1411aac814110",
+    "canonicalSha256": "99f990a0c59cc694a1882a09c4f8fc7a5dc2dd33e3a7b1cdf56719cc1aa8b104"
+  },
+  "priorFailureBinding": {
+    "schemaVersion": "unseen-material-renderer-execution-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v007/renderer-result.json",
+    "fileSha256": "2bdd539f83205809f5006afa27eeb3992e08cf014edffd27fd5640d3eba5ab11",
+    "canonicalSha256": "88978aa68284f67b8c70f6aca437986d99190910c453ff6ad0c1732b840fd059"
+  },
+  "coreCaptionVerificationBinding": {
+    "schemaVersion": "unseen-material-core-caption-linkage-verification-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/core-caption-linkage-verification-v001.json",
+    "fileSha256": "56347fa7640814c28006def56ac5dc4a1bd3b9c0a1d0e00e7a87a3b1ac6b69ae",
+    "canonicalSha256": "2a8860bdadd62eacf452c795d78a84969649e5525e10c82357817e9d0963f840"
+  },
+  "qcEquivalenceBinding": {
+    "schemaVersion": "unseen-material-qc-optimization-verification-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-optimization-verification-v001.json",
+    "fileSha256": "c8901e0d5712cccb1680c25110427bf400eb3f0f699e306e9b8b7d595cebc27c",
+    "canonicalSha256": "8a0451c45aa20b788c1c62dc3809d0b54b2a5e429c4fc85e0e8d7d3741ea8fee"
+  },
+  "fontSizeSelectionBinding": {
+    "schemaVersion": "unseen-material-actual-font-size-selection-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/font-size-selection-v001.json",
+    "fileSha256": "7baa89c395be2042c79f7c0e32aed07ea07b7e5ea8f756547237e05c117ff056",
+    "canonicalSha256": "78462807659ebf4252db854087f0542ed534b27cbaee710c698e6cfd092b7323"
+  },
+  "resourceEquivalenceBinding": {
+    "schemaVersion": "unseen-material-resource-control-verification-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-verification-v001.json",
+    "fileSha256": "c7ebe38e3588663b450a31b4f0dbe9b8525148bc22776268bc934895a38ba778",
+    "canonicalSha256": "f7a58922ea1493a8bab43abd6b995fc1ba855767e779e062d8fc706fe5ffb338"
+  },
+  "retainedPngVerificationBinding": {
+    "schemaVersion": "unseen-material-all-retained-font94-png-verification-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/font94-all-actual-png-verification-v001.json",
+    "fileSha256": "4f3a81c319d2260aaaf3ed5ddc81b236df4dc8c556bfcc0ffe17b68cd775be8c",
+    "canonicalSha256": "7341b93ea7659218776701db931777dd8b1a085e317a9a4e2e60dd91fc035bbb"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/run_unseen_material_render_v007.mts",
+    "fileSha256": "b81bfebc1441b99eb0f6cad90f0614357cf56cdafce41792695dc0bd72793659"
+  },
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v008/renderer-job.json",
+    "fileSha256": "de163cef57fbf6901815af5a4c824b104341805b06a0fcfd0bdef54941629699",
+    "canonicalSha256": "19e14ae6095872ef8b3750a82dcbffe3f22d284e24b72d29b3a959520a1bb741"
+  },
+  "executionControl": {
+    "serializePngAndFilters": true
+  },
+  "overlayProvenance": {
+    "mode": "one-time-restart-with-verified-retained-artifacts",
+    "sourceAttempt": "render-attempt-v007",
+    "sourceRendererJobBinding": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v007/renderer-job.json",
+      "fileSha256": "94be68489cb915161d20f1c16ea62ea94bc7c3b58e3dba4152c1411aac814110",
+      "canonicalSha256": "99f990a0c59cc694a1882a09c4f8fc7a5dc2dd33e3a7b1cdf56719cc1aa8b104"
+    },
+    "inventoryBinding": {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/render-v007-retained-artifacts-v001.json",
+      "bytes": 341537,
+      "fileSha256": "e281a30ae07272c854ed9bc81839e4a181478178cdc72cc0338f17a089e67729"
+    },
+    "newlyRenderedInThisAttempt": false,
+    "sourceNewRenderAndRepeatVerified": true
+  },
+  "unchanged": [
+    "candidate-selection-retention",
+    "all-caption-content-boundaries-timing",
+    "font94-and-visual-style",
+    "base-media",
+    "overlay-pixels-order-and-fade",
+    "base-decoder-and-video-encoder-threads",
+    "video-encoding-quality-audio-copy",
+    "formal-schema",
+    "all343-final-qc-criteria",
+    "other-callers-defaults"
+  ],
+  "note": "The v007 images were freshly rendered at 94px and passed actual PNG QC. This attempt copies those exact bound artifacts as an explicitly approved one-time restart input; no new PNG rendering is claimed. Only PNG decoder and complex-filter threading changes."
+}

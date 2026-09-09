@@ -39,7 +39,15 @@ def main():
             data-title="{html.escape(p['title'], quote=True)}">元動画でこの場面を見る</button>
         </article>''')
         markdown.extend([f'## 場面{i}：{p["title"]} — {label}', '', reason, '', '判断に使った発話：', text, ''])
-    composition = ''.join(f'<li>{html.escape(p["title"])}</li>' for p in execution['selectedCandidates'])
+    timeline = read(FORMAL / 'base-media/timeline.json')
+    assert len(timeline['segments']) == len(execution['selectedCandidates'])
+    fps = int(timeline['baseMedia']['frameRate'].split('/')[0])
+    duration = timeline['baseMedia']['expectedFrameCount'] / fps
+    duration_label = f'{int(duration // 60)}分{round(duration % 60)}秒'
+    composition = ''.join(
+        f'<li>{html.escape(p["title"])} '
+        f'<button type="button" class="finished-seek" data-start="{segment["outputStartFrame"] / fps}">この場面から再生</button></li>'
+        for p, segment in zip(execution['selectedCandidates'], timeline['segments']))
     limits = ''.join(f'<li>{html.escape(s)}</li>' for s in assessment['perceptualLimitations'])
     review = WORK / 'review-v001'
     review.mkdir()
@@ -70,7 +78,7 @@ def main():
     <div class="eyebrow">ZEV · 新しい素材での制作意図の検証</div><h1>初見の鬼武者：理解と予想の変化</h1>
     <section class="panel"><h2>今回見せたいもの</h2><p class="intent">__INTENT__</p>
       <p>元配信全体の発話から場面を新しく探し、上の意図に沿って採用を判断しました。先に人間の正解区間や採用件数を決めていません。</p>
-      <p class="muted">今回は初めて生成した動画です。以下に、見つかった全候補と採否の理由、完成した構成を示します。</p>
+      <p class="muted">今回は初めて生成した動画です。探索17場面のうち10場面を採用し、完成動画は__DURATION__です。以下に全候補の採否理由と完成構成を示します。構成一覧から各場面へ移動できます。</p>
       <nav class="intro-links"><a href="#decisions">候補と判断を見る</a><a href="#composition">完成構成を見る</a><a href="#finished">完成動画へ進む</a></nav>
     </section>
     <section id="decisions"><h2>見つかった候補と採否</h2>__CARDS__</section>
@@ -78,7 +86,7 @@ def main():
       <p>採用場面を元配信の順に並べています。今回は各場面の文脈をそのまま保持しています。</p>
       <div class="note"><strong>発話本文だけでは確定できなかった点</strong><ul>__LIMITS__</ul></div>
     </section>
-    <section class="panel" id="finished"><h2>完成動画</h2><video id="finished-video" controls preload="none" src="edited.mp4"></video>
+    <section class="panel" id="finished"><h2>完成動画 · __DURATION__</h2><video id="finished-video" controls preload="none" src="edited.mp4"></video>
       <p class="muted">技術検査は合格しています。制作意図への適合や見心地は、今回初めて確認をお願いします。</p>
     </section>
     <section class="panel" id="source-panel" hidden><h2>元動画の候補場面</h2><p id="source-status" class="source-status" aria-live="polite"></p>
@@ -94,6 +102,11 @@ def main():
       const finished=document.getElementById('finished-video'),source=document.getElementById('source-video');
       const panel=document.getElementById('source-panel'),status=document.getElementById('source-status');let end=null;
       finished.addEventListener('play',()=>source.pause());source.addEventListener('play',()=>finished.pause());
+      document.querySelectorAll('.finished-seek').forEach(button=>button.addEventListener('click',async()=>{
+        source.pause();finished.currentTime=Number(button.dataset.start);
+        document.getElementById('finished').scrollIntoView({behavior:'smooth',block:'start'});
+        try{await finished.play()}catch(error){finished.focus();}
+      }));
       document.querySelectorAll('.source-play').forEach(button=>button.addEventListener('click',async()=>{
         finished.pause();source.pause();panel.hidden=false;end=Number(button.dataset.end);
         status.textContent=button.dataset.title+'（候補の終わりで停止します）';source.currentTime=Number(button.dataset.start);
@@ -105,6 +118,7 @@ def main():
     </script></html>'''
     page = page.replace('__INTENT__', html.escape(intent)).replace('__CARDS__', ''.join(cards))
     page = page.replace('__COMPOSITION__', composition).replace('__LIMITS__', limits)
+    page = page.replace('__DURATION__', duration_label)
     (review / 'review.html').write_text(page, encoding='utf-8')
     print(str(review))
 

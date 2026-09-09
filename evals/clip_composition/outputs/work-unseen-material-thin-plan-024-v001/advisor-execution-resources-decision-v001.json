@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "unseen-material-advisor-execution-resources-decision-v001",
+  "decision": "continue",
+  "auditedCheckpoint": "91b740d7707b812fdf22de4129e157309e0f9155",
+  "advisorSession": "ZEV進行管理２",
+  "advisorUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6a9d1cb7-b3c0-83ee-ae3a-613c9dc53f08",
+  "responseState": "レスポンス確認済み",
+  "modelDisplay": "高",
+  "recordedAt": "2026-09-09T16:40:23.754786+00:00",
+  "allowedExecutionResources": {
+    "pngDecoderThreads": 1,
+    "filterComplexThreads": 1
+  },
+  "encoderThreadsMayChange": false,
+  "baseDecoderMayChange": false,
+  "formalJobSchemaMayChange": false,
+  "defaultBehaviorMayChange": false,
+  "requiredEquivalence": "decoded pixels of final encoded fixture videos identical before and after",
+  "allowSingleRestartOfVerifiedFont94Pngs": true,
+  "response": "GPT_DECISION：\n条件付き続行可。\n今回の資源不足に対し、024限定のexecution resource controlとして以下を許可する。\n・各PNG入力のdecoderを1 threadへ制限\n・filter_complexを1 threadへ制限\n・主動画合成とcounterfactual合成の双方へ同じ制御を適用\nこれは映像内容・品質条件・QC意味の変更ではなく、並列資源使用だけを制御する限定修正として扱う。\nただし、thread指定がlibx264 encoderへ作用してはいけない。encoder thread設定、base decoder、libx264/preset fast/CRF20/yuv420p、65363 frames、audio copyは変更しない。\n可能ならformal job schemaへ新項目を追加せず、renderer内部のexecution-only resource controlとして024だけで明示的に有効化し、他の既存呼び出しのdefault挙動は変えないこと。\n正式再実行前に短いfixtureで変更前後を比較し、通常字幕、短いfade、同時字幕、透明字幕、別字幕除去、座標変更について、符号化後に復号した画素一致と既存QC意味の一致を確認する。\n画素一致しなければ正式実行へ使用せず再度GPT_DECISION。\n94pxで生成済みの343 overlay PNGは、一回限りのrestart inputとして再利用してよい。\n条件：\n・現行jobから復元した全描画入力との一致を再確認\n・PNG/repeat/必要な関連artifactのSHAを固定\n・343/343の実alpha QC合格を束縛\n・render-attempt-v007で生成済みのartifactを再利用したと明記\n・新jobで新規生成したとは記録しない\n・汎用cache契約を作らない\n既存formal経路でこの来歴を正直に表現できない場合は、契約を変更せず同じ94pxで全343件を再描画する。\n固定：candidate採否10/7、internal retention、343本文・本文片・cue終端・行末・時刻、94px、位置・縁・glow・safe area、overlay順序・期間・4frame fade、base動画、主動画encode条件、QC対象343件とQC条件。\ndecoder/filter並列指定だけで解消しない場合、画素一致しない場合、encoder設定・合成方式・formal contract・QC意味の変更が必要になる場合のみ再度GPT_DECISION。\n第一完成・最終QC・人間品質はまだ成立しない。",
+  "humanQuality": "not-evaluated"
+}

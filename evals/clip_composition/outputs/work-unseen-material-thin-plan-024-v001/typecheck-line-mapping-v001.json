@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "unseen-material-typecheck-line-relocation-comparison-v001",
+  "status": "passed",
+  "baseline": "typecheck-attempt-0012.log",
+  "attempt": "typecheck-attempt-0013.log",
+  "rawTextEqual": false,
+  "exactAfterUnchangedSourceLineMapping": true,
+  "diagnosticCount": 132,
+  "addedDiagnostics": 0,
+  "removedDiagnostics": 0,
+  "newEntryDiagnostics": 0,
+  "source": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+  "sourceFileSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388",
+  "relocatedDiagnostics": [
+    {
+      "beforeLine": 361,
+      "afterLine": 363,
+      "column": 39,
+      "sourceText": "  const publishReceipt = capabilities.publishReceipt",
+      "diagnostic": ": error TS2339: Property 'publishReceipt' does not exist on type '{}'."
+    },
+    {
+      "beforeLine": 407,
+      "afterLine": 409,
+      "column": 53,
+      "sourceText": "  const lineLayoutPublication = await (capabilities.publishLineLayout ?? publishLineLayout)({",
+      "diagnostic": ": error TS2339: Property 'publishLineLayout' does not exist on type '{}'."
+    },
+    {
+      "beforeLine": 421,
+      "afterLine": 423,
+      "column": 36,
+      "sourceText": "  const executeDraw = capabilities.executeDraw ?? executeValidatedPresentationDrawAndQcV001;",
+      "diagnostic": ": error TS2339: Property 'executeDraw' does not exist on type '{}'."
+    },
+    {
+      "beforeLine": 422,
+      "afterLine": 424,
+      "column": 39,
+      "sourceText": "  const overlayAdapter = capabilities.executeDraw === undefined",
+      "diagnostic": ": error TS2339: Property 'executeDraw' does not exist on type '{}'."
+    },
+    {
+      "beforeLine": 436,
+      "afterLine": 438,
+      "column": 17,
+      "sourceText": "    evaluateQc: input => evaluatePresentationRendererQcWithProfileV001(input, {",
+      "diagnostic": ": error TS7006: Parameter 'input' implicitly has an 'any' type."
+    },
+    {
+      "beforeLine": 456,
+      "afterLine": 459,
+      "column": 43,
+      "sourceText": "  const publication = await (capabilities.commitDraw ?? commitValidatedPresentationArtifactsV002)({",
+      "diagnostic": ": error TS2339: Property 'commitDraw' does not exist on type '{}'."
+    },
+    {
+      "beforeLine": 478,
+      "afterLine": 481,
+      "column": 3,
+      "sourceText": "  jobPath,",
+      "diagnostic": ": error TS7006: Parameter 'jobPath' implicitly has an 'any' type."
+    },
+    {
+      "beforeLine": 533,
+      "afterLine": 538,
+      "column": 41,
+      "sourceText": "    ...job.approvedContractBindings.map(row => observeByteBinding(root, row)),",
+      "diagnostic": ": error TS7006: Parameter 'row' implicitly has an 'any' type."
+    },
+    {
+      "beforeLine": 536,
+      "afterLine": 541,
+      "column": 50,
+      "sourceText": "    job.rendererImplementationBindings.map(async row => {",
+      "diagnostic": ": error TS7006: Parameter 'row' implicitly has an 'any' type."
+    },
+    {
+      "beforeLine": 551,
+      "afterLine": 556,
+      "column": 83,
+      "sourceText": "  const fontAssetInspections = await Promise.all(trust.value.fontAssets.map(async row => ({",
+      "diagnostic": ": error TS7006: Parameter 'row' implicitly has an 'any' type."
+    },
+    {
+      "beforeLine": 556,
+      "afterLine": 561,
+      "column": 48,
+      "sourceText": "    trust.value.rendererDependencies.map(async row => ({",
+      "diagnostic": ": error TS7006: Parameter 'row' implicitly has an 'any' type."
+    },
+    {
+      "beforeLine": 603,
+      "afterLine": 610,
+      "column": 72,
+      "sourceText": "if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {",
+      "diagnostic": ": error TS1470: The 'import.meta' meta-property is not allowed in files which will build into CommonJS output."
+    }
+  ]
+}

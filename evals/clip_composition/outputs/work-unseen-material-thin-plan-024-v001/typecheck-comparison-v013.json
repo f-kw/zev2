@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "unseen-material-typecheck-resource-entry-v001",
+  "status": "passed-with-existing-diagnostics",
+  "command": [
+    "node",
+    "node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/tsc.js",
+    "--noEmit",
+    "--strict",
+    "--skipLibCheck",
+    "--allowImportingTsExtensions",
+    "--target",
+    "es2022",
+    "--module",
+    "nodenext",
+    "--moduleResolution",
+    "nodenext",
+    "--types",
+    "node",
+    "--typeRoots",
+    "node_modules/.pnpm/@types+node@25.9.1/node_modules/@types",
+    "evals/clip_composition/run_unseen_material_thin_plan_v001.mts",
+    "evals/clip_composition/unseen_material_thin_plan_v001.mts",
+    "evals/clip_composition/unseen_material_thin_plan_v001.test.mts",
+    "evals/clip_composition/run_unseen_material_render_v002.mts",
+    "evals/clip_composition/run_unseen_material_render_v003.mts",
+    "evals/clip_composition/run_unseen_material_render_v004.mts",
+    "evals/clip_composition/run_unseen_material_render_v005.mts",
+    "evals/clip_composition/run_unseen_material_render_v006.mts",
+    "evals/clip_composition/run_unseen_material_render_v007.mts"
+  ],
+  "attemptExitCode": 2,
+  "currentDiagnosticLines": 132,
+  "newRenderEntryDiagnostics": [],
+  "sameAsPriorResourceCheck": true,
+  "exactExistingDiagnosticsAfterUnchangedSourceLineMapping": true,
+  "lineMapping": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/typecheck-line-mapping-v001.json",
+    "fileSha256": "5e8726645ed9a6522b6ba36988f04778e6c4861a621451134fc81e759c94f62c"
+  }
+}

@@ -1,0 +1,27 @@
+TAP version 13
+# Subtest: execution control applies only to PNG decoders and the complex filter graph
+ok 1 - execution control applies only to PNG decoders and the complex filter graph
+  ---
+  duration_ms: 0.7805
+  ...
+# \# regular: all 900 decoded frames and streamed QC frame identical
+# \# short-fade: all 900 decoded frames and streamed QC frame identical
+# \# simultaneous: all 900 decoded frames and streamed QC frame identical
+# \# transparent: all 900 decoded frames and streamed QC frame identical
+# \# wrong-omission: all 900 decoded frames and streamed QC frame identical
+# \# moved-target: all 900 decoded frames and streamed QC frame identical
+# \# evidence: /Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-JqAt42
+# Subtest: all decoded fixture frames and streamed QC frames match before resource control
+ok 2 - all decoded fixture frames and streamed QC frames match before resource control
+  ---
+  duration_ms: 323033.474125
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 323140.641541
