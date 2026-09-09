@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "unseen-material-render-qc-optimization-preflight-v001",
+  "status": "preflight-passed",
+  "decisionBinding": {
+    "schemaVersion": "unseen-material-advisor-qc-scaling-decision-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/advisor-qc-scaling-decision-v001.json",
+    "fileSha256": "eeeef195eaf30ad1d6c919bfe3f65c6b68076b6c7a376384cbce16e6833cfeda",
+    "canonicalSha256": "f4b0d711564c1754952672ab219222ce129d2e1945e05ef25b676b7ebfe39b45"
+  },
+  "priorRendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v005/renderer-job.json",
+    "fileSha256": "ea1eea39852ef53deb390f0a2d0a61aa57854c220ae25c0c353c9325a4764aa1",
+    "canonicalSha256": "005d7678066deed93690f082705cd887b7e70090c8f153aa7997ba6c8d92ff22"
+  },
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v006/renderer-job.json",
+    "fileSha256": "6ba5d302335ec5a17bfee41f04c535109c46dbec43cb4e9bfecbbc3be83c2300",
+    "canonicalSha256": "23152f79120313d5df66b110be1b92c1c62a4023eaec93fd83489ca2695fd0b0"
+  },
+  "qcEquivalenceBinding": {
+    "schemaVersion": "unseen-material-qc-optimization-verification-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-optimization-verification-v001.json",
+    "fileSha256": "c8901e0d5712cccb1680c25110427bf400eb3f0f699e306e9b8b7d595cebc27c",
+    "canonicalSha256": "8a0451c45aa20b788c1c62dc3809d0b54b2a5e429c4fc85e0e8d7d3741ea8fee"
+  },
+  "coreCaptionVerificationBinding": {
+    "schemaVersion": "unseen-material-core-caption-linkage-verification-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/core-caption-linkage-verification-v001.json",
+    "fileSha256": "56347fa7640814c28006def56ac5dc4a1bd3b9c0a1d0e00e7a87a3b1ac6b69ae",
+    "canonicalSha256": "2a8860bdadd62eacf452c795d78a84969649e5525e10c82357817e9d0963f840"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/run_unseen_material_render_v005.mts",
+    "fileSha256": "ca30446e767798509e7be29bd7a4c7a3c49aaff4a2a8271e464f588031fe5d1e"
+  },
+  "changedRendererImplementation": {
+    "path": "evals/clip_composition/render_presentation_v002.mjs",
+    "fileSha256": "b5670f2e9a665fddf7082fee107b322181f6a2c6a89edb6c1d77fcebce38a61b"
+  },
+  "unchanged": [
+    "source",
+    "transcript",
+    "discovery",
+    "selection",
+    "retention",
+    "base-media",
+    "all-343-caption-instructions-cue-ends-line-ends-text-and-times",
+    "font95-setting-and-trust",
+    "main-video-composite-and-encode-arguments",
+    "qc-schema-criteria-and-coverage"
+  ],
+  "operation": "Feed the complete unchanged counterfactual encoder timeline. Deliver encoded MP4 packets to a decoder; request normal encoder shutdown only after the representative encoded frame exists. No full counterfactual MP4 is retained. Extract the main encoded frame with frame-exact integer-second seeking.",
+  "previousAttempt": "v005 was terminated after preserving its partial state; no final video or QC was published from it."
+}

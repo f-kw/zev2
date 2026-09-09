@@ -37,7 +37,11 @@ def main():
     assert len(adoption['selectedCandidates']) == 10
     execution = check(completion['execution'])
     assert execution['exitCode'] == 0 and execution['result']['status'] == 'completed'
-    check(execution['setupFixBinding'])
+    setup = check(execution['setupFixBinding'])
+    optimization = check(setup['qcEquivalenceBinding'])
+    assert optimization['status'] == 'passed'
+    assert optimization['omittedFramesPixelIdentical'] and optimization['mainEncodingArgumentsUnchanged']
+    assert optimization['allRequiredNegativeCasesVerified']
     job = check(execution['rendererJobBinding'])
     admission = check(completion['admission'])
     layout = check(completion['lineLayout'])
@@ -57,9 +61,18 @@ def main():
         assert [unit for line in entry['lines'] for unit in line['sourceUnitIds']] == row['targetProvenance']['atomOccurrenceIds']
     before = read(FORMAL / 'render-attempt-v003/renderer-job.json')
     for key in ['instructionArtifactBinding', 'lineEndProjectionBinding', 'executionInputs',
-                'cropAppliedBaseMedia', 'runtimeBindings', 'rendererImplementationBindings',
-                'approvedContractBindings']:
+                'cropAppliedBaseMedia', 'runtimeBindings', 'approvedContractBindings']:
         assert job[key] == before[key], key
+    implementation_changes = []
+    assert len(job['rendererImplementationBindings']) == len(before['rendererImplementationBindings'])
+    for old, new in zip(before['rendererImplementationBindings'], job['rendererImplementationBindings']):
+        assert old['role'] == new['role'] and old['path'] == new['path']
+        assert digest(ROOT / new['path']) == new['fileSha256']
+        if old != new:
+            assert new['path'] == optimization['implementationBinding']['path']
+            assert new['fileSha256'] == optimization['implementationBinding']['fileSha256']
+            implementation_changes.append({'before': old, 'after': new})
+    assert len(implementation_changes) == 1
     original = check(before['registryBindings']['styleProfileRegistry'])
     adjusted = check(job['registryBindings']['styleProfileRegistry'])
 
@@ -79,9 +92,9 @@ def main():
     new_trust = check(job['registryBindings']['rendererTrust'])
     assert {**new_trust, 'presetRegistry': old_trust['presetRegistry']} == old_trust
     assert new_trust['presetRegistry']['fileSha256'] == job['registryBindings']['styleProfileRegistry']['fileSha256']
-    browser = read(WORK / 'layout-browser-font95-verification-v001.json')
-    assert browser['status'] == 'passed' and browser['inspectedCaptions'] == len(ids)
-    assert browser['violationCount'] == 0 and browser['maximumWrapperWidthPx'] <= 1760
+    pre_render_layout = read(WORK / 'layout-browser-font95-verification-v002.json')
+    assert pre_render_layout['status'] == 'passed' and pre_render_layout['inspectedCaptions'] == len(ids)
+    assert pre_render_layout['violationCount'] == 0 and pre_render_layout['maximumWrapperWidthPx'] <= 1760
     qc = execution['result']['qc']
     assert qc['status'] == 'passed' and not qc['violations']
     assert qc['instructionCount'] == len(ids)
@@ -103,11 +116,13 @@ def main():
               'video': binding(video), 'qc': binding(output_qc),
               'completion': binding(FORMAL / 'render-completion.json'),
               'coreLinkage': binding(WORK / 'core-caption-linkage-verification-v001.json'),
-              'browserLayout': binding(WORK / 'layout-browser-font95-verification-v001.json'),
+              'preRenderLayoutCalculation': binding(WORK / 'layout-browser-font95-verification-v002.json'),
               'approvedDisplayChange': changed, 'preexistingFilesUnchanged': len(preexisting['files']),
+              'approvedQcImplementationChange': implementation_changes,
+              'qcOptimization': setup['qcEquivalenceBinding'],
               'checks': ['original-caption-artifacts-same-bytes', 'all-cues-and-lines-exact',
-                         'unchanged-renderer-inputs-and-implementations', 'only-approved-font-size-change',
-                         'trust-rules-font-assets-dependencies-unchanged', 'all-browser-layouts-passed',
+                         'unchanged-renderer-inputs', 'only-approved-qc-implementation-change', 'only-approved-font-size-change',
+                         'trust-rules-font-assets-dependencies-unchanged', 'all-pre-render-layout-calculations-passed',
                          'all-final-render-qc-passed', 'all-instructions-applied-once',
                          'rendered-frames-match-adopted-timeline', 'final-video-sha256-exact'],
               'humanQuality': 'not-evaluated', 'independentBlindTrialClaim': False}

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "unseen-material-qc-optimization-verification-v001",
+  "status": "passed",
+  "implementationBinding": {
+    "path": "evals/clip_composition/render_presentation_v002.mjs",
+    "fileSha256": "b5670f2e9a665fddf7082fee107b322181f6a2c6a89edb6c1d77fcebce38a61b"
+  },
+  "legacyImplementationFileSha256": "666907c3ff9f045b2141d62a41eb9b746cdad1f5102fe4500e5cb8036c77ce59",
+  "mainEncodingArgumentsUnchanged": true,
+  "omittedFramesPixelIdentical": true,
+  "allRequiredNegativeCasesVerified": true,
+  "artifacts": [
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/result.json",
+      "fileSha256": "802ab7d82024653fe39c901a38250d0f536993f18706d6303d05abcbf4a9ee3f",
+      "bytes": 11477
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_counterfactual_frame_v001.test.mjs",
+      "fileSha256": "fe15cbb67824eb41357d7b6e5549bc8227ac9d29071dae6cc0aaab6481489fc5",
+      "bytes": 12643
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/advisor-qc-scaling-decision-v001.json",
+      "fileSha256": "eeeef195eaf30ad1d6c919bfe3f65c6b68076b6c7a376384cbce16e6833cfeda",
+      "bytes": 2523
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-tests-attempt-0002.tap",
+      "fileSha256": "db22ded00254915982cc0b9d71cdd4bbdd400a4a056b309b03235e818fb76d02",
+      "bytes": 923
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/separated-renderer-tests-attempt-0001.tap",
+      "fileSha256": "782f0da7fca864e80a36b18b98e35c3c9606d944d1ec320c98d8900437c903fc",
+      "bytes": 3908
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/renderer-regression-comparison-v001.json",
+      "fileSha256": "fb6fc6d4e3236579b93f55fc093d2e9d5e035d690873c4f77970eb5cd1ba4a69",
+      "bytes": 4330
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/renderer-regression-attempt-0001.tap",
+      "fileSha256": "6f2c8678029cbd014b83e1be4256dec458102e2c7d21cf44bdc8ce638fc9bee9",
+      "bytes": 27937
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/renderer-regression-existing-baseline.tap",
+      "fileSha256": "34de59d810521eab1201eed38285b1228396ba830b918f14a4b87baec5a6a98e",
+      "bytes": 29883
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/typecheck-comparison-v010.json",
+      "fileSha256": "3b4e6a91de5a72dea06626e7dee4e59efc202112e3802ac78bfdc00e40b40521",
+      "bytes": 1013
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/typecheck-attempt-0011.log",
+      "fileSha256": "79656fddf54fab5243b7b427e6e82fc3af4a0d1859c78b70ba17a5fe6e674620",
+      "bytes": 24749
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-seek-boundary-verification-v001.json",
+      "fileSha256": "07ea23711220fda09a8c1d8862fb2f239c0c6a5b38f0f38ae3abdf4f6c5b81be",
+      "bytes": 1903
+    }
+  ],
+  "fixtureCases": [
+    "regular",
+    "short-fade",
+    "simultaneous",
+    "transparent"
+  ],
+  "additionalSeekBoundaryFrames": 10,
+  "actualNewTestsPassed": 2,
+  "separatedRendererTestsPassed": 18,
+  "legacyRendererRegression": {
+    "passed": 12,
+    "failed": 7,
+    "allVerdictsMatchCapturedPreChangeRenderer": true
+  },
+  "typecheck": {
+    "existingDiagnosticLines": 132,
+    "exactBaseline": true,
+    "newEntryDiagnosticLines": 0
+  },
+  "algorithm": "Encode the complete unchanged counterfactual input; stream encoded MP4 packets; stop normally only after the required encoded frame has been decoded. No comparison MP4 is accumulated. Extract the final main-video frame by exact integer-second seeking.",
+  "limits": [
+    "Still encodes the prefix up to the representative frame and normal codec buffering. It does not claim constant-time per-caption QC.",
+    "Synthetic pixel equivalence is verified; all 343 real-source final QC checks still must run."
+  ],
+  "humanQuality": "not-evaluated"
+}

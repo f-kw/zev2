@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "unseen-material-advisor-qc-scaling-decision-v001",
+  "kind": "GPT_DECISION",
+  "decision": "conditional-continue",
+  "auditedCheckpoint": "174b30716a1808dc3304756d9a0e0189576144ed",
+  "session": "ZEV進行管理２",
+  "modelDisplay": "高",
+  "responseStatus": "complete-and-read",
+  "url": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6a9d1cb7-b3c0-83ee-ae3a-613c9dc53f08",
+  "note": "相談役回答のCodex向け指示部分を転記。前後の説明は省略。",
+  "answerTranscription": "GPT_DECISION：\n限定修正として続行可。\n検査完了済みcounterfactual中間MP4の逐次解放は許可する。これはQC意味を変更しない一時成果物管理の修正として扱う。\n全編343回のcounterfactual再エンコードを避ける実装も、現行QCの same-composite-with-instruction-omitted を完全に維持できる場合に限り許可する。\n新方式でも代表frameについて以下を固定すること。\n同一base frame\n同一representativeFrame\n同一の他overlay集合\n同一overlay順序\n同一座標\n同一表示時刻\n同一4frame fade計算\n対象instructionだけを除外\n既存 imageDifferencePixelsWithinBounds の比較意味\n時間切り出し・codec・GOP等の差を字幕可視性の証拠にしてはいけない。\n同等性fixtureでは、legacyの全編counterfactual方式から得たrepresentative omitted frameと、新方式から得たomitted frameのpixel-identicalを確認すること。単なるpass/fail一致だけでは同等性成立としない。\nfixtureには最低限、通常表示、representative frameがfadeに掛かる短い字幕、他字幕が同時刻に存在するケース、字幕なし負例、別字幕除去の負例、座標変更の負例を含める。\n許可しない変更：QC対象343件の間引き、changedPixels判定条件の緩和、threshold追加でcodec差を吸収、基礎映像との差だけへの置換、pre-encode overlayだけを最終可視性証拠にする変更、QC schema / violation意味の変更、主動画の合成・encode設定変更、candidate / caption / 95px設定の変更。\npixel-identicalを維持できる新方式が成立すれば、今回の既存QC経路の計算量最適化として続行してよい。\npixel-identicalが成立せず比較意味の変更が必要になる場合のみ再度GPT_DECISION。\nこの判断で第一完成・QC合格・人間品質はまだ成立しない。"
+}

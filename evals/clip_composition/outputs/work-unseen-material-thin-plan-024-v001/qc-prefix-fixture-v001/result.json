@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "unseen-material-qc-prefix-stream-equivalence-v001",
+  "status": "passed",
+  "algorithm": "same full input and encode; fragmented MP4 delivery; request q only after target decoded",
+  "mainVideoEncodingChanged": false,
+  "cases": [
+    {
+      "case": "regular",
+      "representativeFrame": 120,
+      "omittedPixelsIdentical": true,
+      "legacyWallSeconds": 0.3764192499947967,
+      "streamObservation": {
+        "encoderExit": 0,
+        "decoderExit": 0,
+        "requestedQuitAfterDecodedTarget": true,
+        "encodedFrames": 900,
+        "expectedFullFrames": 900,
+        "wallSeconds": 0.34524587499618065,
+        "pngSha256": "38bf83d1670e21645e23e74401340a9c829a0039a09563cdf7e106ac4ec1a552"
+      }
+    },
+    {
+      "case": "short-fade",
+      "representativeFrame": 191,
+      "omittedPixelsIdentical": true,
+      "legacyWallSeconds": 0.35448429199459497,
+      "streamObservation": {
+        "encoderExit": 0,
+        "decoderExit": 0,
+        "requestedQuitAfterDecodedTarget": true,
+        "encodedFrames": 900,
+        "expectedFullFrames": 900,
+        "wallSeconds": 0.30355591599072795,
+        "pngSha256": "e9de21b53a035da87de72158d8c7ba8f978c1db053a733379fdb156a789ff78c"
+      }
+    },
+    {
+      "case": "simultaneous",
+      "representativeFrame": 300,
+      "omittedPixelsIdentical": true,
+      "legacyWallSeconds": 0.4060042500059353,
+      "streamObservation": {
+        "encoderExit": 0,
+        "decoderExit": 0,
+        "requestedQuitAfterDecodedTarget": true,
+        "encodedFrames": 900,
+        "expectedFullFrames": 900,
+        "wallSeconds": 0.3917395000025863,
+        "pngSha256": "2725c651ff73b75d953aecc449a34c85727ffde8ff8b425f762923b48e6badce"
+      },
+      "fullPixelsIdentical": true,
+      "wrongOmissionDetectedByCanonicalComparison": true,
+      "changedTargetPositionDetectedByFullFrameComparison": true
+    },
+    {
+      "case": "transparent",
+      "representativeFrame": 425,
+      "omittedPixelsIdentical": true,
+      "legacyWallSeconds": 0.4286965000064811,
+      "streamObservation": {
+        "encoderExit": 0,
+        "decoderExit": 0,
+        "requestedQuitAfterDecodedTarget": true,
+        "encodedFrames": 900,
+        "expectedFullFrames": 900,
+        "wallSeconds": 0.35795229198993184,
+        "pngSha256": "ad0d19d0f2649c587c614517704639b67d61f7aa743539620bde27c2a33aed16"
+      },
+      "fullPixelsIdentical": true,
+      "transparentTargetNotVisible": true
+    }
+  ],
+  "limitations": "This probe proves these dynamic synthetic fixtures. Production integration and all 343 final checks remain unexecuted."
+}

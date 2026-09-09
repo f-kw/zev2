@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "unseen-material-renderer-regression-comparison-v001",
+  "status": "existing-baseline-exact",
+  "passed": 12,
+  "failed": 7,
+  "verdicts": [
+    {
+      "status": "ok",
+      "id": "1",
+      "name": "01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する"
+    },
+    {
+      "status": "ok",
+      "id": "2",
+      "name": "01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない"
+    },
+    {
+      "status": "ok",
+      "id": "3",
+      "name": "01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない"
+    },
+    {
+      "status": "not ok",
+      "id": "4",
+      "name": "02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する"
+    },
+    {
+      "status": "not ok",
+      "id": "5",
+      "name": "03 v002だけを受理しv001と旧telopPlanを描画前に拒否する"
+    },
+    {
+      "status": "not ok",
+      "id": "6",
+      "name": "04 外枠passedだけを通しpartialとfailedを異なるコードで停止する"
+    },
+    {
+      "status": "ok",
+      "id": "7",
+      "name": "05 正式空素材で到達可能な9種類を1指示1要素へ解決する"
+    },
+    {
+      "status": "ok",
+      "id": "8",
+      "name": "06 caption本文・明示行・開始終了anchorを一文字も変えず保持する"
+    },
+    {
+      "status": "ok",
+      "id": "9",
+      "name": "07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する"
+    },
+    {
+      "status": "ok",
+      "id": "10",
+      "name": "08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない"
+    },
+    {
+      "status": "ok",
+      "id": "11",
+      "name": "09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める"
+    },
+    {
+      "status": "ok",
+      "id": "12",
+      "name": "10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する"
+    },
+    {
+      "status": "ok",
+      "id": "13",
+      "name": "11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する"
+    },
+    {
+      "status": "ok",
+      "id": "14",
+      "name": "12 行数・行の正の交差・安全領域・空alphaを独立して検出する"
+    },
+    {
+      "status": "ok",
+      "id": "15",
+      "name": "13 時間と空間の正の交差だけを衝突とし境界接触は許容する"
+    },
+    {
+      "status": "not ok",
+      "id": "16",
+      "name": "14 空素材indexのG7を外枠で停止しpreviewカードを代用しない"
+    },
+    {
+      "status": "not ok",
+      "id": "17",
+      "name": "15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する"
+    },
+    {
+      "status": "not ok",
+      "id": "18",
+      "name": "16 合成MP4の映像・代表frame差分・基礎音声packetを保全する"
+    },
+    {
+      "status": "not ok",
+      "id": "19",
+      "name": "17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する"
+    }
+  ],
+  "unrelatedExistingTrustMismatches": [
+    {
+      "path": "runner/src/remotion/Root.tsx",
+      "fileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+      "unchangedSinceCheckpoint": true
+    },
+    {
+      "path": "runner/src/remotion/renderer/TelopRenderer.tsx",
+      "fileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+      "unchangedSinceCheckpoint": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7",
+      "unchangedSinceCheckpoint": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+      "unchangedSinceCheckpoint": true
+    }
+  ],
+  "baselineMethod": "Test-only ESM loader provides the hash-verified captured pre-change renderer source at its original module URL; all dependencies and filesystem paths stay current. No production source was swapped."
+}

@@ -1,0 +1,25 @@
+TAP version 13
+# Subtest: counterfactual frame input refuses an out-of-range frame before any process
+ok 1 - counterfactual frame input refuses an out-of-range frame before any process
+  ---
+  duration_ms: 0.837792
+  ...
+# \# regular: pixel-identical, encoder 515/900 frames
+# \# short-fade: pixel-identical, encoder 476/900 frames
+# \# simultaneous: pixel-identical, encoder 697/900 frames
+# \# transparent: pixel-identical, encoder 748/900 frames
+# \# evidence: /Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-HSJuxL
+# Subtest: real encoded frames remain pixel-identical to the captured full-length renderer
+ok 2 - real encoded frames remain pixel-identical to the captured full-length renderer
+  ---
+  duration_ms: 74732.519584
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 74782.222542

@@ -880,29 +880,35 @@ const extractFrame = async (
   inputPath,
   frame,
   outputPath,
+  fps,
   ffmpegPath = 'ffmpeg',
   processObserver = null,
 ) => {
-  await runPresentationRendererChildProcessV001(ffmpegPath, [
-    '-hide_banner', '-loglevel', 'error', '-y', '-i', inputPath,
-    '-vf', `select=eq(n\\,${frame})`, '-frames:v', '1', outputPath,
-  ], {
+  await runPresentationRendererChildProcessV001(ffmpegPath,
+    buildPresentationFrameExtractionArgumentsV001({inputPath, frame, outputPath, fps}), {
     fatalInnerStage: 'post-render-qc',
     processObserver,
     observationLabel: 'qc-frame-extract',
   });
 };
 
-const composite = async ({
+export const buildPresentationFrameExtractionArgumentsV001 = ({inputPath, frame, outputPath, fps}) => {
+  if (!Number.isInteger(frame) || frame < 0 || !Number.isInteger(fps) || fps <= 0) {
+    throw new TypeError('frame extraction requires nonnegative frame and integer frame rate');
+  }
+  // The rendered media is CFR and starts at zero. Integer seconds avoid rounding
+  // a rational frame timestamp; select the remaining frame after accurate seek.
+  const seconds = Math.floor(frame / fps);
+  const remainingFrame = frame - seconds * fps;
+  return ['-hide_banner', '-loglevel', 'error', '-y', '-ss', String(seconds), '-i', inputPath,
+    '-vf', `select=eq(n\\,${remainingFrame})`, '-frames:v', '1', outputPath];
+};
+
+export const buildPresentationCompositeArgumentsV001 = ({
   baseMediaPath,
   plan,
   overlayRecords,
   expectedFrameCount,
-  outputPath,
-  ffmpegPath = 'ffmpeg',
-  fatalInnerStage = 'overlay-render',
-  processObserver = null,
-  observationLabel = 'video-composite',
 }) => {
   const args = ['-hide_banner', '-loglevel', 'error', '-y', '-i', baseMediaPath];
   for (const record of overlayRecords) {
@@ -931,13 +937,100 @@ const composite = async ({
     '-map', '[video]', '-map', '0:a?',
     '-frames:v', String(expectedFrameCount),
     '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p',
-    '-c:a', 'copy', '-movflags', '+faststart', outputPath,
+    '-c:a', 'copy',
   );
-  await runPresentationRendererChildProcessV001(ffmpegPath, args, {
+  return args;
+};
+
+const composite = async ({
+  baseMediaPath, plan, overlayRecords, expectedFrameCount, outputPath,
+  ffmpegPath = 'ffmpeg', fatalInnerStage = 'overlay-render',
+  processObserver = null, observationLabel = 'video-composite',
+}) => {
+  const args = buildPresentationCompositeArgumentsV001({baseMediaPath, plan, overlayRecords, expectedFrameCount});
+  await runPresentationRendererChildProcessV001(ffmpegPath, [...args, '-movflags', '+faststart', outputPath], {
     fatalInnerStage,
     processObserver,
     observationLabel,
   });
+};
+
+/**
+ * Encode the unchanged full timeline, then stop only after its requested encoded
+ * frame has been decoded. Fragmented MP4 changes delivery, not video encoding.
+ * In particular this does not trim encoder input or flush it at the target frame.
+ */
+export const renderPresentationCounterfactualEncodedFrameV001 = async (input) => {
+  const keys = ['instructionId', 'ffmpegPath', 'compositeArguments', 'representativeFrame',
+    'expectedFrameCount', 'outputPath'];
+  if (!isObject(input) || Object.keys(input).sort().join('\0') !== keys.sort().join('\0')
+    || typeof input.instructionId !== 'string' || input.instructionId.length === 0
+    || typeof input.ffmpegPath !== 'string' || input.ffmpegPath.length === 0
+    || !Array.isArray(input.compositeArguments) || !input.compositeArguments.every(value => typeof value === 'string')
+    || !Number.isInteger(input.representativeFrame) || input.representativeFrame < 0
+    || !Number.isInteger(input.expectedFrameCount) || input.representativeFrame >= input.expectedFrameCount
+    || typeof input.outputPath !== 'string' || !path.isAbsolute(input.outputPath)) {
+    throw new TypeError('encoded counterfactual frame input is invalid');
+  }
+  const encoderArgs = [...input.compositeArguments, '-progress', 'pipe:2',
+    '-movflags', 'frag_keyframe+empty_moov+default_base_moof', '-f', 'mp4', 'pipe:1'];
+  const decoderArgs = ['-hide_banner', '-loglevel', 'error', '-y', '-i', 'pipe:0',
+    '-vf', `select=eq(n\\,${input.representativeFrame})`, '-frames:v', '1', input.outputPath];
+  const create = (args, stdio) => {
+    const stderr = [];
+    const child = spawn(input.ffmpegPath, args, {stdio});
+    const errors = [];
+    child.stderr.on('data', value => stderr.push(value));
+    child.on('error', error => errors.push({code: error.code ?? null, message: error.message}));
+    const closed = new Promise(resolve => child.once('close', (code, signal) => resolve({
+      code, signal, errors, stderr: Buffer.concat(stderr).toString('utf8'),
+    })));
+    return {child, closed};
+  };
+  const encoder = create(encoderArgs, ['pipe', 'pipe', 'pipe']);
+  const decoder = create(decoderArgs, ['pipe', 'ignore', 'pipe']);
+  const pipeErrors = [];
+  decoder.child.stdin.on('error', error => pipeErrors.push(error.code ?? error.message));
+  encoder.child.stdin.on('error', error => pipeErrors.push(error.code ?? error.message));
+  encoder.child.stdout.pipe(decoder.child.stdin);
+  const decoderResult = await decoder.closed;
+  encoder.child.stdout.unpipe(decoder.child.stdin);
+  // Always drain the producer after the decoder exits, including failure paths.
+  // This prevents a broken output pipe from substituting for a successful exit.
+  encoder.child.stdout.resume();
+  let targetDecoded = false;
+  if (decoderResult.code === 0 && decoderResult.signal === null && decoderResult.errors.length === 0) {
+    try {
+      const output = await lstat(input.outputPath);
+      targetDecoded = output.isFile() && !output.isSymbolicLink() && output.size > 0;
+    } catch {}
+  }
+  const quitRequested = encoder.child.exitCode === null && encoder.child.signalCode === null;
+  if (quitRequested && !encoder.child.stdin.destroyed) encoder.child.stdin.end('q\n');
+  const encoderResult = await encoder.closed;
+  const frameLines = [...encoderResult.stderr.matchAll(/^frame=(\d+)\s*$/gmu)];
+  const evidence = {
+    instructionId: input.instructionId,
+    representativeFrame: input.representativeFrame,
+    expectedFrameCount: input.expectedFrameCount,
+    encodedFrames: frameLines.length === 0 ? null : Number(frameLines.at(-1)[1]),
+    targetDecodedBeforeQuit: targetDecoded,
+    quitRequestedAfterDecoderExit: quitRequested,
+    inputCanonicalSha256: sha256Canonical(input),
+    encoderArgumentsCanonicalSha256: sha256Canonical(encoderArgs),
+    decoderArgumentsCanonicalSha256: sha256Canonical(decoderArgs),
+    encoder: encoderResult,
+    decoder: decoderResult,
+    pipeErrors,
+  };
+  // EPIPE on the decoder's stdin is expected only after it successfully decoded
+  // its single requested output. Both ffmpeg processes must still exit zero.
+  if (!targetDecoded || encoderResult.code !== 0 || encoderResult.signal !== null
+    || encoderResult.errors.length !== 0 || pipeErrors.some(code => code !== 'EPIPE')) {
+    console.error(JSON.stringify({status: 'failed', ...evidence}));
+    throw new Error('encoded counterfactual frame pipeline did not complete successfully');
+  }
+  return {status: 'completed', ...evidence, outputFileSha256: await fileSha256V002(input.outputPath)};
 };
 
 const DEFAULT_PRESENTATION_OVERLAY_ADAPTER_V001 = Object.freeze({
@@ -1722,32 +1815,39 @@ export async function executeValidatedPresentationDrawAndQcV001({
         + Math.floor(record.element.displayFrameCount / 2);
       const outputFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-output.png`);
       const omittedFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-omitted.png`);
-      const omittedVideo = path.join(scratchDirectory, 'frames', `${record.fileStem}-omitted.mp4`);
       const counterfactualRecords = overlayRecords.map((entry) => (
         entry === record ? {...entry, pngPath: transparentOverlayPath} : entry
       ));
-      await composite({
-        baseMediaPath,
-        plan,
-        overlayRecords: counterfactualRecords,
-        expectedFrameCount,
-        outputPath: omittedVideo,
+      const counterfactualInput = {
+        instructionId: record.element.instructionId,
         ffmpegPath: toolPaths.ffmpegPath,
+        compositeArguments: buildPresentationCompositeArgumentsV001({
+          baseMediaPath, plan, overlayRecords: counterfactualRecords, expectedFrameCount,
+        }),
+        representativeFrame,
+        expectedFrameCount,
+        outputPath: omittedFrame,
+      };
+      const counterfactualInputPath = path.join(scratchDirectory, 'frames', `${record.fileStem}-counterfactual-input.json`);
+      await writeFile(counterfactualInputPath, JSON.stringify(counterfactualInput), {flag: 'wx'});
+      const counterfactual = await runPresentationRendererChildProcessV001(toolPaths.tsxPath, [
+        fileURLToPath(import.meta.url), '--counterfactual-frame', counterfactualInputPath,
+      ], {
         fatalInnerStage: 'post-render-qc',
         processObserver,
-        observationLabel: 'counterfactual-composite',
+        observationLabel: 'counterfactual-encoded-frame',
       });
+      const counterfactualResult = JSON.parse(counterfactual.stdout.toString('utf8'));
+      if (counterfactualResult.status !== 'completed'
+        || counterfactualResult.inputCanonicalSha256 !== sha256Canonical(counterfactualInput)
+        || counterfactualResult.outputFileSha256 !== await fileSha256V002(omittedFrame)) {
+        throw new Error('encoded counterfactual frame evidence does not match its input and output');
+      }
       await extractFrame(
         workVideo,
         representativeFrame,
         outputFrame,
-        toolPaths.ffmpegPath,
-        processObserver,
-      );
-      await extractFrame(
-        omittedVideo,
-        representativeFrame,
-        omittedFrame,
+        plan.canvas.fps,
         toolPaths.ffmpegPath,
         processObserver,
       );
@@ -2203,6 +2303,15 @@ export async function runPresentationRendererJobFileV002(jobPath) {
 
 const isDirectExecution = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 const main = async () => {
+  if (process.argv[2] === '--counterfactual-frame' && process.argv.length === 4) {
+    const input = JSON.parse(await readFile(process.argv[3], 'utf8'));
+    const result = await renderPresentationCounterfactualEncodedFrameV001(input);
+    // The observed subprocess records stderr, so preserve the real outcomes of
+    // both ffmpeg children there as well as returning structured stdout.
+    console.error(JSON.stringify(result));
+    console.log(JSON.stringify(result));
+    return;
+  }
   const [, , jobPath] = process.argv;
   if (!jobPath || process.argv.length !== 3) {
     console.error('使い方: node render_presentation_v002.mjs <presentation-render-job-v002.json>');

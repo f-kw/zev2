@@ -1,0 +1,100 @@
+TAP version 13
+# Subtest: PRA2-001 実候補のtimeline v003と+16msを正式admissionへ通す
+ok 1 - PRA2-001 実候補のtimeline v003と+16msを正式admissionへ通す
+  ---
+  duration_ms: 50.291291
+  ...
+# Subtest: PRA2-002 job/receipt formal byteは決定的でschema外fieldを拒否する
+ok 2 - PRA2-002 job/receipt formal byteは決定的でschema外fieldを拒否する
+  ---
+  duration_ms: 118.219292
+  ...
+# Subtest: PRA2-003 instruction/timeline/line projectionのSHA差をfail-closedにする
+ok 3 - PRA2-003 instruction/timeline/line projectionのSHA差をfail-closedにする
+  ---
+  duration_ms: 88.435333
+  ...
+# Subtest: PRA2-004 timeline v002と旧manifestをrenderer jobへ混入させない
+ok 4 - PRA2-004 timeline v002と旧manifestをrenderer jobへ混入させない
+  ---
+  duration_ms: 68.287125
+  ...
+# Subtest: PRA2-005 receipt no-replace公開と再読検査
+ok 5 - PRA2-005 receipt no-replace公開と再読検査
+  ---
+  duration_ms: 123.045875
+  ...
+# Subtest: PRA2-006 receipt bindingと候補完全被覆を保持する
+ok 6 - PRA2-006 receipt bindingと候補完全被覆を保持する
+  ---
+  duration_ms: 37.717792
+  ...
+# Subtest: PRA2-007 旧admission v001実装byteを不変保持する
+ok 7 - PRA2-007 旧admission v001実装byteを不変保持する
+  ---
+  duration_ms: 0.285875
+  ...
+# Subtest: renderer runner title planは新line layoutから旧共通planと同じ表示値を作る
+ok 8 - renderer runner title planは新line layoutから旧共通planと同じ表示値を作る
+  ---
+  duration_ms: 9.045042
+  ...
+# Subtest: renderer runner v002はtimeline v003 mapping実装を明示bindingする
+ok 9 - renderer runner v002はtimeline v003 mapping実装を明示bindingする
+  ---
+  duration_ms: 0.13725
+  ...
+# Subtest: renderer runner v001実装byteを不変保持する
+ok 10 - renderer runner v001実装byteを不変保持する
+  ---
+  duration_ms: 1.658042
+  ...
+# Subtest: renderer runnerは明示visualStateIdだけを選び暗黙defaultを使わない
+ok 11 - renderer runnerは明示visualStateIdだけを選び暗黙defaultを使わない
+  ---
+  duration_ms: 0.880916
+  ...
+# Subtest: renderer runnerは外部実行体6件をpath実体とSHAで再読する
+ok 12 - renderer runnerは外部実行体6件をpath実体とSHAで再読する
+  ---
+  duration_ms: 378.973875
+  ...
+# Subtest: renderer overlayはjobとreceiptで確定したRemotionとChromiumだけを明示使用する
+ok 13 - renderer overlayはjobとreceiptで確定したRemotionとChromiumだけを明示使用する
+  ---
+  duration_ms: 0.389708
+  ...
+# Subtest: renderer child観測は終了code・stderr・signalを出力読取前に独立保存する
+ok 14 - renderer child観測は終了code・stderr・signalを出力読取前に独立保存する
+  ---
+  duration_ms: 24.646042
+  ...
+# Subtest: PRM001: voice-013横型はprojectionから注文書・receipt・line layout・描画・QCまで完走する
+ok 15 - PRM001: voice-013横型はprojectionから注文書・receipt・line layout・描画・QCまで完走する
+  ---
+  duration_ms: 37.012667
+  ...
+# Subtest: PRM002: voice-013の注文書は旧render planなしで描画できる
+ok 16 - PRM002: voice-013の注文書は旧render planなしで描画できる
+  ---
+  duration_ms: 8.256125
+  ...
+# Subtest: PRM003: 工事前後でvoice-013の本文・cue終端・frame・行分割projectionがbyte一致する
+ok 17 - PRM003: 工事前後でvoice-013の本文・cue終端・frame・行分割projectionがbyte一致する
+  ---
+  duration_ms: 1.113959
+  ...
+# Subtest: PRM004: voice-013は注文一件ごとのapplication resultとoverlay・QCが一対一になる
+ok 18 - PRM004: voice-013は注文一件ごとのapplication resultとoverlay・QCが一対一になる
+  ---
+  duration_ms: 4.482792
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 716.860542

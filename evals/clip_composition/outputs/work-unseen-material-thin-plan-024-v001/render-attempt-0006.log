@@ -1,0 +1,19 @@
+{"status":"qc-optimized-render-started","jobPath":"evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v006/renderer-job.json"}
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: QC_OPTIMIZED_RENDER_FAILED
+
+1 !== 0
+
+    at execute (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_unseen_material_render_v005.mts:96:10)
+    at async <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_unseen_material_render_v005.mts:110:40) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual'
+}
+
+Node.js v20.19.6

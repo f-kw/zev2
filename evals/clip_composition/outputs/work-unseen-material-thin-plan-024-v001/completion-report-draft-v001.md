@@ -14,7 +14,7 @@ ZEV本体のUIを起動する工事ではなく、承認済みの評価実行経
 
 事前に人間の正解区間を作らず、新素材の全2,297発話から17候補を探索し、固定した制作意図に沿って10候補を採用、7候補を不採用とした。
 全候補を既存の採否処理へ渡し、その結果から動画の編集区間まで接続できた。結合済み媒体のQCと字幕のCore接続まで合格した。現在、字幕付き動画の製造と最終QCは未完了である。
-字幕3,194片を343の表示単位にまとめ、全量保持・順序・既存の表示幅は事前検査に合格した。実製造入力との一致は製造完了後に確認する。
+字幕3,194片を343の表示単位にまとめ、全量保持・順序・既存の表示幅は事前検査に合格した。実際のCore入力10件との完全一致と、343表示単位が最終注文書へ一度ずつ渡ることも確認した。
 人間による候補探索・採否・内部保持・見心地の評価は未実施であり、品質較正の成功をまだ主張しない。
 
 ## 2. ユーザーから見た変化
@@ -47,6 +47,21 @@ AIが発話の意味から候補を探し、各候補の寄与、独自価値、
 
 完成構成は上表の採用10場面を元配信の順に並べる。各場面の文脈を全体保持する別の意味判断を記録してから製造へ渡した。用途条件付きの部分保持を必要とする事例が確定したとは扱っておらず、既存の候補内部保持Skillを実行・合格したとも扱わない。
 
+完成動画の場面位置は次のとおり。元動画の連続範囲を保持し、採用場面の内側を追加で間引いていない。
+
+| 場面 | 完成動画の開始 | 元動画の保持範囲 |
+| --- | --- | --- |
+| ライバル登場の予想から、突然の死と鬼武者への変化に追いつけなくなる | 00:00:00.00 | 00:26:47.17〜00:32:22.62 |
+| 700年守り続けた老人だと知り、化け物扱いから敬意に変わる | 00:05:35.47 | 00:43:36.80〜00:47:50.70 |
+| 運ばれていたものが人間だと気づき、清水の舞台を探る理由を理解する | 00:09:49.37 | 01:01:36.32〜01:03:49.34 |
+| 小次郎が力に溺れる様子から、白い男の正体と再戦を予想する | 00:12:02.37 | 01:33:30.59〜01:37:27.30 |
+| 無限に使える弓を試し、「弓最強説」に驚く | 00:15:59.07 | 01:42:35.91〜01:44:50.90 |
+| 鬼を見下す言葉が、自分も半鬼だという気づきに返ってくる | 00:18:14.07 | 01:50:38.50〜01:52:51.16 |
+| 白い男が義経だと判明し、静かとの夫婦関係にも驚く | 00:20:26.73 | 02:21:14.31〜02:24:58.85 |
+| 縁切りの救いが身体を傷つけることだと知り、浄化が必要だと理解する | 00:24:11.30 | 02:39:53.01〜02:43:03.06 |
+| 八大力尊を頼ったら五体しかおらず、三体の捜索を頼まれる | 00:27:21.37 | 02:43:49.58〜02:45:49.51 |
+| 「次は弾き」と切り替え、強敵を「対策済み」にして力を授かる | 00:29:21.30 | 03:16:05.66〜03:23:03.13 |
+
 ## 3. 実行した操作
 
 1. 承認された元配信を取得し、探索前の制作意図と取得したファイルを固定した。
@@ -77,7 +92,7 @@ ZEV本体UI: 未実行。専用の説明・視聴ページ: 生成と技術確�
 
 ## 6. 出力動画の確認
 
-元素材の全818,056フレーム（60fps）と44.1kHzステレオ音声の時刻対応を検査し、採用10区間の映像を製造中。採用区間合計は2,178.72秒（36分18.72秒）。完成ファイルの尺・ハッシュ・映像と音声の検査結果は未確定。
+元素材の全818,056フレーム（60fps）と44.1kHzステレオ音声の時刻対応を検査した。採用区間合計は2,178.72秒（36分18.72秒）、既存のフレーム境界へ写した結合動画は65,363フレーム（30fps）、2,178.7667秒。結合動画の映像・音声・タイムラインを含む既存QC6項目は合格。結合動画のSHA-256は3006f087046dc304227103eab9615c782bfc1838d4a576769960e2d67afde73e。字幕付き最終動画と最終QCは未完了。
 各候補の連続した元範囲を保持し、内部の無発話・戦闘・待ち時間を自動削除していない。人間によるカット指定は0件。プレビューと本番の同一ファイル確認は未実施。
 
 ## 7. 正本の分離確認
@@ -106,7 +121,9 @@ ZEV本体UI: 未実行。専用の説明・視聴ページ: 生成と技術確�
 
 技術的な完成動画はまだ未確認。認識結果の表示不能な長い反復、時刻幅0の語は同じローカル認識と本文保存による正規化で処理した。音声に対する文字の正しさを検査済みとはしない。
 
-最終描画の初回は保存先が既存の許可された描画用フォルダ配下にないため、描画前に拒否された。保存先だけを既存規則へ合わせ、新しい実行先を作った。その後、既存のレイアウト検査のローカルIPCソケットが実行環境の制限で拒否されたため、入力と処理を変えず必要なプロセス権限で再実行している。失敗した記録・保存物・ログは残し、元の採否や字幕へ遡って変更を入れていない。
+最終描画の初回は保存先が既存の許可された描画用フォルダ配下にないため、描画前に拒否された。保存先だけを既存規則へ合わせ、新しい実行先を作った。その後、既存のレイアウト検査のローカルIPCソケットが実行環境の制限で拒否されたため、入力と処理を変えず必要なプロセス権限で再実行した。失敗した記録・保存物・ログは残し、元の採否や字幕へ遡って変更を入れていない。
+
+実寸検査は343字幕中21件で横の安全領域を16px超過して拒否した。既存の一行論理幅36では、文字幅1,728pxに縁・光彩40pxと安全余白8pxが加わり1,776pxとなり、許容1,760pxに収まらなかった。幅35へ変更する初案は既存本文片の全境界照合により1字幕で二行分割不能と判明したため、未実施のまま撤回した。相談役はGPT_DECISIONで、今回専用の表示設定の文字サイズだけ96pxから95pxへ変更する限定修正を許可した。字幕の全cue終端・行末・本文・時刻、論理幅36、採否、保持、base動画を不変にし、全343字幕は描画前の幅計算に合格した。計算上の横幅最大は1,758px、同計算での安全領域の違反は0件。この処理を以前「ブラウザ実寸検査」と説明したが、実装はNode上で文字重みから幅を推定しており、実画像の測定ではなかったため訂正する。その後の字幕画像生成中に、描画後検査が全編比較動画を343本作り全件保持する実装を確認した。合計22,419,509フレーム（内容時間207.588時間分）の比較を要する。これは処理時間の実測ではない。既存の比較意味を保持した処理量削減についてGPT_DECISIONを依頼し、親プロセスを一時停止して248件までの字幕画像を保存した。その後、相談役の条件付き許可により、従来の比較画像との画素単位の一致を確認してから、全入力を同じエンコーダーへ送り、対象フレームが符号化済み動画から取り出せた後に正常終了する検査処理へ限定修正した。比較用MP4を全件蓄積しない。元動画の途中からエンコードを始める方法や比較閾値の緩和は行っていない。必要な位置までの前半のエンコード処理は残り、定数時間の検査とは主張しない。新しいjobで全343字幕の画像を生成したが、実PNGのalpha領域を測る後続検査では1件の右端が1,850pxとなり、安全境界1,840pxを10px超過して拒否された。342件は同検査を満たすが、主動画の合成・最終可視性検査には到達していない。相談役へ今回専用文字サイズの追加調整をGPT_DECISIONで確認する。共通registry・selectorの実装は変更していない。後段の可視性検査に対する限定修正は以下に記す。参照文書の形式を合わせる準備修正も旧版の証拠を残して描画前に訂正した。
 
 今回の分類は次のとおり。人間との一致を確認するまで、Aを品質合格、B/C/Eを問題なしとはしない。
 
@@ -120,7 +137,7 @@ ZEV本体UI: 未実行。専用の説明・視聴ページ: 生成と技術確�
 
 ## 10. まだ未実装のこと
 
-Planner本体、自由agent、複数話者の分離、映像理解、用途条件付きの内部保持の新仕様は今回実装していない。既存Skill・criteria・validator、Core、renderer、styleを変更する工事には拡大していない。
+Planner本体、自由agent、複数話者の分離、映像理解、用途条件付きの内部保持の新仕様は今回実装していない。既存Skill・criteria・validatorと字幕のCore入力は変更していない。描画部は相談役の許可に基づく可視性検査の計算量削減だけを変更し、主動画の合成・エンコード引数が従来実装と一致することを確認した。今回専用の文字サイズ96px→95pxは相談役が許可した表示設定の変更であり、「style完全不変」とは扱わない。共通設定の変更には拡大していない。
 
 ## 11. 参考: 不足している可能性のある機能
 
@@ -141,7 +158,9 @@ Planner本体、自由agent、複数話者の分離、映像理解、用途条�
 型検査: 共通依存先に既存の診断132行があり、比較対象と完全一致。今回の新規ファイルからの診断は0。repository全体の型検査合格とは表現しない。
 未実行: 人間の品質判定、stable/tag/release/公開、追加Gemini、Planner。
 
-主な実行コマンド（最後の製造は進行中）：
+追加検証: 実符号化画像の同等性と入力拒否の2テスト、分離renderer経路18テストが合格。旧rendererの19テストは12合格・7不合格で、変更前コードを同じ環境に読み込んだ検査とも全件同じ結果だった。7件は今回変更していない旧信頼台帳の4参照の不一致による。秒境界・キーフレーム境界・末尾を含む10フレームの取り出しも画素単位で一致。型検査は新入口込みで既存132診断と完全一致（typecheck-comparison-v010.json）。
+
+主な実行コマンド（字幕付き最終描画は進行中）：
 
 ```sh
 python3 evals/clip_composition/verify_unseen_material_stt_v001.py
@@ -153,10 +172,17 @@ node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/r
 node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_thin_plan_v001.mts select evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/judgments/selection-response-v003.json
 node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_thin_plan_v001.mts base evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/judgments/retention-assessment-v003.json > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/base-media-attempt-0003.log 2>&1
 node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/unseen_material_thin_plan_v001.test.mts evals/clip_composition/candidate_selection_v001.test.mts > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/tests-attempt-0005.tap 2>&1
-node node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/tsc.js --noEmit --strict --skipLibCheck --allowImportingTsExtensions --target es2022 --module nodenext --moduleResolution nodenext --types node --typeRoots node_modules/.pnpm/@types+node@25.9.1/node_modules/@types evals/clip_composition/run_unseen_material_thin_plan_v001.mts evals/clip_composition/unseen_material_thin_plan_v001.mts evals/clip_composition/unseen_material_thin_plan_v001.test.mts
+node node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/tsc.js --noEmit --strict --skipLibCheck --allowImportingTsExtensions --target es2022 --module nodenext --moduleResolution nodenext --types node --typeRoots node_modules/.pnpm/@types+node@25.9.1/node_modules/@types evals/clip_composition/run_unseen_material_thin_plan_v001.mts evals/clip_composition/unseen_material_thin_plan_v001.mts evals/clip_composition/unseen_material_thin_plan_v001.test.mts evals/clip_composition/run_unseen_material_render_v002.mts evals/clip_composition/run_unseen_material_render_v003.mts evals/clip_composition/run_unseen_material_render_v004.mts evals/clip_composition/run_unseen_material_render_v005.mts
+python3 evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/publish-caption-answers-v001.py
+node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_thin_plan_v001.mts captions evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/judgments/caption-responses-v001.json
+node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_render_v004.mts prepare
+node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_render_v004.mts render > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/render-attempt-0005.log 2>&1
+node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/presentation_renderer_counterfactual_frame_v001.test.mjs > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-tests-attempt-0002.tap 2>&1
+node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_render_v005.mts prepare
+node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_render_v005.mts render > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/render-attempt-0006.log 2>&1
 ```
 
-ChatGPT監査先はユーザー指定の「ZEV進行管理２」。投稿・応答確認は未実施。今回の個別指示が指定した順序（report → commit → push → main一致 → Drive/MANIFEST → AUDIT_ONLY）で行う。
+ChatGPT監査先はユーザー指定の「ZEV進行管理２」。字幕幅についてGPT_DECISIONを2回行い、35案の未実施撤回と今回専用95px設定での続行許可を確認済み。モデル表示は「高」を維持した。監査用checkpoint 709c9933とbe390574をcommit/push済み。可視性検査の処理量について174b3071へ追加checkpointを固定し、3回目のGPT_DECISIONで、画素単位の同等性を条件とするQC限定修正の許可を受領した。第一完成のAUDIT_ONLYは未実施で、最終完成後にreport → commit → push → main一致 → Drive/MANIFEST → AUDIT_ONLYの順に行う。
 
 ## 14. 証拠
 
@@ -166,6 +192,6 @@ ChatGPT監査先はユーザー指定の「ZEV進行管理２」。投稿・応�
 - `stt-completion-verification-v004.json` と `stt-zero-duration-normalization-v003.json`: 認識全編と正規化の検査。
 - `stt-chunk-0126-retry-v001.json`、`stt-chunk-0221-retry-v001.json`: 同じモデルによる限定再認識。
 - `caption-source-readiness-v003.json`: 全字幕片の保持と表示境界の事前検査。
-- `tests-attempt-0005.tap`、`typecheck-comparison-v004.json`: テストと型検査の比較。
+- `tests-attempt-0005.tap`、`typecheck-comparison-v010.json`: テストと型検査の比較。
 
 費用と外部作用: ローカル認識・ローカル製造。有料推論APIの使用なし、追加API費用US$0。動画取得に必要な承認済み通信はある。動画・音声の大容量実体はローカル参照とハッシュを保存し、GitやDriveへの収録有無は最終ミラー記録に明記する。
