@@ -1,0 +1,113 @@
+{
+  "status": "passed",
+  "all900PreEncodeAndDecodedPixelsIdentical": true,
+  "executions": [
+    {
+      "args": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-y",
+        "-filter_complex_threads",
+        "1",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/base.mp4",
+        "-threads",
+        "1",
+        "-loop",
+        "1",
+        "-framerate",
+        "30",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/target.png",
+        "-threads",
+        "1",
+        "-loop",
+        "1",
+        "-framerate",
+        "30",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/other.png",
+        "-filter_complex",
+        "[1:v]format=rgba,trim=end_frame=61,setpts=PTS-STARTPTS,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='alpha(X,Y)*min(1,min((N+1)/4,(61-N)/4))',setpts=PTS+90/30/TB[overlay0];[0:v][overlay0]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[video1];[2:v]format=rgba,trim=end_frame=25,setpts=PTS-STARTPTS,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='alpha(X,Y)*min(1,min((N+1)/4,(25-N)/4))',setpts=PTS+10/30/TB[overlay1];[video1][overlay1]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[video2];[video2]fps=30,format=yuv420p[video];[video]split=2[cache][proof]",
+        "-map",
+        "[cache]",
+        "-frames:v",
+        "900",
+        "-c:v",
+        "ffv1",
+        "-level",
+        "3",
+        "-g",
+        "1",
+        "-slicecrc",
+        "1",
+        "-pix_fmt",
+        "yuv420p",
+        "-an",
+        "-f",
+        "nut",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-capture-fixture-v001-7JdLRC/cache.nut",
+        "-map",
+        "[proof]",
+        "-frames:v",
+        "900",
+        "-an",
+        "-pix_fmt",
+        "yuv420p",
+        "-f",
+        "framehash",
+        "-hash",
+        "sha256",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-capture-fixture-v001-7JdLRC/encoder-input.framehash.txt"
+      ],
+      "code": 0,
+      "signal": null,
+      "stderr": "",
+      "elapsedMs": 22494
+    },
+    {
+      "args": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-capture-fixture-v001-7JdLRC/cache.nut",
+        "-map",
+        "0:v:0",
+        "-pix_fmt",
+        "yuv420p",
+        "-f",
+        "framehash",
+        "-hash",
+        "sha256",
+        "-"
+      ],
+      "code": 0,
+      "signal": null,
+      "stderr": "",
+      "elapsedMs": 6275
+    }
+  ],
+  "implementation": {
+    "path": "evals/clip_composition/run_unseen_material_qc_only_v001.mjs",
+    "fileSha256": "61cd392522e1ca31a87490eeb69c0d9e013ae42c735a598abdcac0eb9803f124",
+    "bytes": 24989
+  },
+  "helperSource": "function buildCacheAndFrameHashArgumentsV001(input, cachePath, frameHashPath) {\n  const args = buildLosslessCompositeCacheArgumentsV001(input), graph = args.indexOf('-filter_complex');\n  assert(graph > 0);\n  // split copies frame references and preserves the original graph output.\n  // The second output records the encoder input before FFV1 compression.\n  args[graph + 1] += ';[video]split=2[cache][proof]';\n  const map = args.indexOf('-map'); assert.equal(args[map + 1], '[video]'); args[map + 1] = '[cache]';\n  return [...args, cachePath, '-map', '[proof]', '-frames:v', String(input.expectedFrameCount),\n    '-an', '-pix_fmt', 'yuv420p', '-f', 'framehash', '-hash', 'sha256', frameHashPath];\n}",
+  "cache": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-capture-fixture-v001-7JdLRC/cache.nut",
+    "fileSha256": "cddee18776a4a0e025ac42ecad605f8e3c3cb105a00afa30827dcd552cf16c45",
+    "bytes": 135635500
+  },
+  "encoderInputFrameHash": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-capture-fixture-v001-7JdLRC/encoder-input.framehash.txt",
+    "fileSha256": "19dd213e4b882aade54491a9c476dbb59f6e147ed7ed21ea200da7c1f51f112c",
+    "bytes": 101019
+  },
+  "originalFrameHash": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-baseline-before-cache.framehash.txt",
+    "fileSha256": "19dd213e4b882aade54491a9c476dbb59f6e147ed7ed21ea200da7c1f51f112c",
+    "bytes": 101019
+  }
+}

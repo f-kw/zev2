@@ -1,0 +1,26 @@
+TAP version 13
+# Subtest: 024 lossless fast path refuses simultaneous captions and unknown targets before execution
+ok 1 - 024 lossless fast path refuses simultaneous captions and unknown targets before execution
+  ---
+  duration_ms: 2.122417
+  ...
+# \# regular: cache pixels, 900 encoder input/decoded frames, representative PNG identical
+# \# short-fade: cache pixels, 900 encoder input/decoded frames, representative PNG identical
+# \# transparent: cache pixels, 900 encoder input/decoded frames, representative PNG identical
+# \# wrong-omission: cache pixels, 900 encoder input/decoded frames, representative PNG identical
+# \# moved-target: cache pixels, 900 encoder input/decoded frames, representative PNG identical
+# \# evidence: /Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT
+# Subtest: lossless cached counterfactuals preserve every encoder input pixel and encoded frame
+ok 2 - lossless cached counterfactuals preserve every encoder input pixel and encoded frame
+  ---
+  duration_ms: 784164.547125
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 784222.591875

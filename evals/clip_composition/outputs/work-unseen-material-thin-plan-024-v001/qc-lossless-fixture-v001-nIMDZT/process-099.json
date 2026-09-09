@@ -1,0 +1,24 @@
+{
+  "command": "/opt/homebrew/bin/ffmpeg",
+  "arguments": [
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-y",
+    "-ss",
+    "4",
+    "-i",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-full.mp4",
+    "-vf",
+    "select=eq(n\\,0)",
+    "-frames:v",
+    "1",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-full.png"
+  ],
+  "code": 0,
+  "signal": null,
+  "elapsedMs": 122,
+  "stdoutBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr": ""
+}

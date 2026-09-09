@@ -1,0 +1,342 @@
+{
+  "schemaVersion": "unseen-material-qc-cache-color-diagnostic-v001",
+  "status": "diagnostic-completed",
+  "implementation": {
+    "path": "evals/clip_composition/diagnose_unseen_material_qc_cache_color_v001.mjs",
+    "fileSha256": "0bedf48d3b72494997fa14fe2da0e88a6b68df029758fd12a092cbc656e1aba8",
+    "bytes": 5776
+  },
+  "mainCompletion": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/render-v008-completed-main-verification-v001.json",
+    "fileSha256": "0146e4e48ef051de734a1febfaa50d44eb234466395359730cf8d76f7eccc642",
+    "bytes": 252072
+  },
+  "originalFullGraphInput": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v001/cache/baseline-generation-input.json",
+    "fileSha256": "feec409bb93e3c0c8a8b13e4d186e6a0a48085c4c2d911e7799f94cc111cac3a",
+    "bytes": 7235648
+  },
+  "originalFullGraphFirst900": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/actual-full-graph-first900.framehash.txt",
+    "fileSha256": "3af54a610feda94222176157996b6973bb6fc415ea4fa69d4321633e558d2452",
+    "bytes": 80999
+  },
+  "sampledPreEncodeFirst900ExactFullGraphMatch": true,
+  "cache": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/baseline.nut",
+    "fileSha256": "b13255b96bb9f8108ad244a041c610db22ddb157d5b2909c0cd23e8bd48540dd",
+    "bytes": 241088765
+  },
+  "replay": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/baseline-first900-without-restored-color.mp4",
+    "fileSha256": "e8818cf2e4a9d1430656bc9551a5f654d8d97de35db95327f1c4d0667793a477",
+    "bytes": 41250262
+  },
+  "replayFrames": 900,
+  "comparedPrefixFrames": 600,
+  "scope": "Actual full-graph first 900 pre-encode frames match the earlier sample. Compare the first 600 decoded frames with the completed full main; report YUV and RGBA separately. No color correction or main mutation.",
+  "comparisons": [
+    {
+      "pixelFormat": "yuv420p",
+      "framesCompared": 600,
+      "identicalFrames": 600,
+      "differentFrames": 0,
+      "artifacts": [
+        {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/main-yuv420p.framehash.txt",
+          "fileSha256": "53a28638ea98ecd7d3581cf4291f967e3ac1396e484d5a09fb47a4988f9940b0",
+          "bytes": 67419
+        },
+        {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/cache-replay-yuv420p.framehash.txt",
+          "fileSha256": "53a28638ea98ecd7d3581cf4291f967e3ac1396e484d5a09fb47a4988f9940b0",
+          "bytes": 67419
+        }
+      ]
+    },
+    {
+      "pixelFormat": "rgba",
+      "framesCompared": 600,
+      "identicalFrames": 0,
+      "differentFrames": 600,
+      "artifacts": [
+        {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/main-rgba.framehash.txt",
+          "fileSha256": "6a629b17e81596a16352f935fc21757343675aca8361861cce9fe3c298a53598",
+          "bytes": 67419
+        },
+        {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/cache-replay-rgba.framehash.txt",
+          "fileSha256": "c60966c3bbf723369e6bd6909937338004673d826f7ac24fafd5ec50212de549",
+          "bytes": 67419
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+      "name": "main",
+      "file": {
+        "path": "evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4",
+        "fileSha256": "58744717f3d03a19f004fdca76a7199674a6b97a3f2f26e60d1b86b0ee8bf1cd",
+        "bytes": 1860839383
+      },
+      "value": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "sample_aspect_ratio": "1:1",
+            "pix_fmt": "yuv420p",
+            "color_range": "tv",
+            "color_space": "bt709",
+            "color_transfer": "bt709",
+            "color_primaries": "bt709",
+            "chroma_location": "left",
+            "avg_frame_rate": "30/1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "cache",
+      "file": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/baseline.nut",
+        "fileSha256": "b13255b96bb9f8108ad244a041c610db22ddb157d5b2909c0cd23e8bd48540dd",
+        "bytes": 241088765
+      },
+      "value": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "ffv1",
+            "sample_aspect_ratio": "1:1",
+            "pix_fmt": "yuv420p",
+            "avg_frame_rate": "30/1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "cache-replay",
+      "file": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/baseline-first900-without-restored-color.mp4",
+        "fileSha256": "e8818cf2e4a9d1430656bc9551a5f654d8d97de35db95327f1c4d0667793a477",
+        "bytes": 41250262
+      },
+      "value": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "sample_aspect_ratio": "1:1",
+            "pix_fmt": "yuv420p",
+            "chroma_location": "left",
+            "avg_frame_rate": "30/1"
+          }
+        ]
+      }
+    }
+  ],
+  "executions": [
+    {
+      "command": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-y",
+        "-filter_complex_threads",
+        "1",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/baseline.nut",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/baseline.nut",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/base-media/base-media.mp4",
+        "-filter_complex",
+        "[0:v][1:v]blend=all_expr='B':enable='between(n,0,21)':eof_action=endall:shortest=1:repeatlast=0,fps=30,format=yuv420p[video]",
+        "-map",
+        "[video]",
+        "-map",
+        "2:a?",
+        "-frames:v",
+        "900",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-crf",
+        "20",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "copy",
+        "-movflags",
+        "+faststart",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/baseline-first900-without-restored-color.mp4"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 10061,
+      "stderr": ""
+    },
+    {
+      "command": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4",
+        "-map",
+        "0:v:0",
+        "-frames:v",
+        "600",
+        "-pix_fmt",
+        "yuv420p",
+        "-f",
+        "framehash",
+        "-hash",
+        "sha256",
+        "-"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 4175,
+      "stderr": ""
+    },
+    {
+      "command": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/baseline-first900-without-restored-color.mp4",
+        "-map",
+        "0:v:0",
+        "-frames:v",
+        "600",
+        "-pix_fmt",
+        "yuv420p",
+        "-f",
+        "framehash",
+        "-hash",
+        "sha256",
+        "-"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 4161,
+      "stderr": ""
+    },
+    {
+      "command": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4",
+        "-map",
+        "0:v:0",
+        "-frames:v",
+        "600",
+        "-pix_fmt",
+        "rgba",
+        "-f",
+        "framehash",
+        "-hash",
+        "sha256",
+        "-"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 10948,
+      "stderr": ""
+    },
+    {
+      "command": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/baseline-first900-without-restored-color.mp4",
+        "-map",
+        "0:v:0",
+        "-frames:v",
+        "600",
+        "-pix_fmt",
+        "rgba",
+        "-f",
+        "framehash",
+        "-hash",
+        "sha256",
+        "-"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 10955,
+      "stderr": ""
+    },
+    {
+      "command": "/opt/homebrew/bin/ffprobe",
+      "args": [
+        "-v",
+        "error",
+        "-select_streams",
+        "v:0",
+        "-show_entries",
+        "stream=codec_name,pix_fmt,color_range,color_space,color_transfer,color_primaries,chroma_location,sample_aspect_ratio,avg_frame_rate",
+        "-of",
+        "json",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 35,
+      "stderr": ""
+    },
+    {
+      "command": "/opt/homebrew/bin/ffprobe",
+      "args": [
+        "-v",
+        "error",
+        "-select_streams",
+        "v:0",
+        "-show_entries",
+        "stream=codec_name,pix_fmt,color_range,color_space,color_transfer,color_primaries,chroma_location,sample_aspect_ratio,avg_frame_rate",
+        "-of",
+        "json",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/baseline.nut"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 21,
+      "stderr": ""
+    },
+    {
+      "command": "/opt/homebrew/bin/ffprobe",
+      "args": [
+        "-v",
+        "error",
+        "-select_streams",
+        "v:0",
+        "-show_entries",
+        "stream=codec_name,pix_fmt,color_range,color_space,color_transfer,color_primaries,chroma_location,sample_aspect_ratio,avg_frame_rate",
+        "-of",
+        "json",
+        "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/baseline-first900-without-restored-color.mp4"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 27,
+      "stderr": ""
+    }
+  ]
+}

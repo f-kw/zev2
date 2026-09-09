@@ -1,0 +1,21 @@
+{
+  "status": "waiting-for-unchanged-main-completion",
+  "entrypoint": "/private/tmp/zev024-capture-main-and-switch-qc.py",
+  "preservedSource": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/capture-main-and-switch-qc-v001.py",
+    "fileSha256": "b4ad1f442ab24ee88bdb9b8f26d51d9eb40b7e24704064267d54321b4875d07d",
+    "bytes": 4688
+  },
+  "ownedParentPid": 26979,
+  "mainFfmpegPid": 29494,
+  "proofPath": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-verification-v001.json",
+  "actionsAfterMainCompletion": [
+    "require original main FFmpeg exit 0 and signal none",
+    "inspect every main video frame and original audio plus bindings",
+    "save verified main record",
+    "locate only the owned legacy QC encoder by parent and fragment output arguments",
+    "save planned-switch evidence before SIGINT",
+    "save source execution result and preserve all files"
+  ],
+  "separateQcStartedByThisScript": false
+}

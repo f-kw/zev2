@@ -1,0 +1,25 @@
+{
+  "command": "/opt/homebrew/bin/ffmpeg",
+  "arguments": [
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-i",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-baseline.nut",
+    "-map",
+    "0:v:0",
+    "-pix_fmt",
+    "yuv420p",
+    "-f",
+    "framehash",
+    "-hash",
+    "sha256",
+    "-"
+  ],
+  "code": 0,
+  "signal": null,
+  "elapsedMs": 6182,
+  "stdoutBytes": 101019,
+  "stdoutSha256": "19dd213e4b882aade54491a9c476dbb59f6e147ed7ed21ea200da7c1f51f112c",
+  "stderr": ""
+}

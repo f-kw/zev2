@@ -1,0 +1,360 @@
+{
+  "status": "passed",
+  "implementations": [
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 93860,
+      "fileSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94"
+    },
+    {
+      "path": "evals/clip_composition/unseen_material_qc_lossless_cache_v001.mjs",
+      "bytes": 4230,
+      "fileSha256": "78fb297b01d118eedffefac31008ffe578c18f3e60711407f32576ffc8de9418"
+    }
+  ],
+  "fixtureBindings": [
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/base.mp4",
+      "bytes": 31417882,
+      "fileSha256": "375c8f2594cd07ff1b9080aa08125444349486064563de8430973ac02460a6b4"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/target.png",
+      "bytes": 8721,
+      "fileSha256": "f367c93858ea5994bde7450130c7a3fd16894ebdf75a518d2d10e0fe668769a9"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/other.png",
+      "bytes": 8742,
+      "fileSha256": "c3e192749d72d8d8373e8c632aba24d04bf7ba94654c165dd64daab9c041f233"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/transparent.png",
+      "bytes": 8329,
+      "fileSha256": "0c769e30958eec259d9e7143266d689641688b71bb71612e19ac1f0d1b19e386"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/moved.png",
+      "bytes": 8723,
+      "fileSha256": "d4f0b45baccdd08b7a8adf2216c71d6e2d6df7a05eb35cb12c01a86dbdc5a410"
+    }
+  ],
+  "admission": {
+    "simultaneousCaptionsRejected": true,
+    "adjacentCaptionsAllowed": true
+  },
+  "preEncodePixelsIdentical": true,
+  "decodedFramesIdentical": true,
+  "representativePngsIdentical": true,
+  "transparentDifferenceZero": true,
+  "wrongOmissionDistinguished": true,
+  "positionChangeDistinguished": true,
+  "totalDecodedFramesCompared": 4500,
+  "results": [
+    {
+      "name": "regular",
+      "frames": 900,
+      "allPreEncodePixelsIdentical": true,
+      "allDecodedFramesIdentical": true,
+      "representativePngIdentical": true,
+      "streamedPngIdentical": true,
+      "input": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-input.json",
+        "bytes": 4496,
+        "fileSha256": "45b8843f4688f3265ec75460ef7589ea0b41013c281c86e6b7a299e86750728e"
+      },
+      "baselineCache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-baseline.nut",
+        "bytes": 135635500,
+        "fileSha256": "cddee18776a4a0e025ac42ecad605f8e3c3cb105a00afa30827dcd552cf16c45"
+      },
+      "transparentCache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-transparent.nut",
+        "bytes": 135681386,
+        "fileSha256": "9c518cd35ff6b42f8c4ff408742958af96616f64d857435abffba4d11ec76f70"
+      },
+      "oldVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-legacy.mp4",
+        "bytes": 30593513,
+        "fileSha256": "1f35a774513696c019fff1cd96ef98544ba53f98ccfab1d3ccb05b2c4c5aee22"
+      },
+      "newVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-cached.mp4",
+        "bytes": 30593513,
+        "fileSha256": "1f35a774513696c019fff1cd96ef98544ba53f98ccfab1d3ccb05b2c4c5aee22"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "target",
+        "representativeFrame": 120,
+        "expectedFrameCount": 900,
+        "encodedFrames": 361,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "1a4497ab9a158d4d8f2641ff645005854697c69fdd9afa9ed72ef562e2d39150",
+        "encoderArgumentsCanonicalSha256": "a6bd53a246e5fc3ad90e90e8256829cb8c5d75722e25abdeeab5510c64c87e22",
+        "decoderArgumentsCanonicalSha256": "5e3fe096d2ae3a2052ab370a472b07a72517e2b0967ebdaf53127368aeafab90",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=46\nfps=0.00\nstream_0_0_q=26.0\nbitrate=   4.3kbits/s\ntotal_size=780\nout_time_us=1466667\nout_time_ms=1466667\nout_time=00:00:01.466667\ndup_frames=0\ndrop_frames=0\nspeed=2.87x\nprogress=continue\nframe=81\nfps=79.78\nstream_0_0_q=26.0\nbitrate=   2.4kbits/s\ntotal_size=780\nout_time_us=2633333\nout_time_ms=2633333\nout_time=00:00:02.633333\ndup_frames=0\ndrop_frames=0\nspeed=2.59x\nprogress=continue\nframe=169\nfps=111.40\nstream_0_0_q=26.0\nbitrate=   1.1kbits/s\ntotal_size=780\nout_time_us=5566667\nout_time_ms=5566667\nout_time=00:00:05.566667\ndup_frames=0\ndrop_frames=0\nspeed=3.67x\nprogress=continue\nframe=361\nfps=160.39\nstream_0_0_q=-1.0\nbitrate=8211.3kbits/s\ntotal_size=12282781\nout_time_us=11966667\nout_time_ms=11966667\nout_time=00:00:11.966667\ndup_frames=0\ndrop_frames=0\nspeed=5.32x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "75a4414995b7299dc96eb609c31ff4876e173d4afa864d19e30450e2f381dd39"
+      }
+    },
+    {
+      "name": "short-fade",
+      "frames": 900,
+      "allPreEncodePixelsIdentical": true,
+      "allDecodedFramesIdentical": true,
+      "representativePngIdentical": true,
+      "streamedPngIdentical": true,
+      "input": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-input.json",
+        "bytes": 4502,
+        "fileSha256": "93ca4d2e3aae4b9e079808df27fc90e0d15263e5be5d212d74da3f3bd76acfb9"
+      },
+      "baselineCache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-baseline.nut",
+        "bytes": 135615729,
+        "fileSha256": "47b0739ae29164b5daee495e628d6fa2dbb7a11f4c457196719a540e178fa332"
+      },
+      "transparentCache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-transparent.nut",
+        "bytes": 135681386,
+        "fileSha256": "9c518cd35ff6b42f8c4ff408742958af96616f64d857435abffba4d11ec76f70"
+      },
+      "oldVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-legacy.mp4",
+        "bytes": 30593513,
+        "fileSha256": "1f35a774513696c019fff1cd96ef98544ba53f98ccfab1d3ccb05b2c4c5aee22"
+      },
+      "newVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-cached.mp4",
+        "bytes": 30593513,
+        "fileSha256": "1f35a774513696c019fff1cd96ef98544ba53f98ccfab1d3ccb05b2c4c5aee22"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "target",
+        "representativeFrame": 191,
+        "expectedFrameCount": 900,
+        "encodedFrames": 365,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "215244820482a3f3b78b6f864e8256c6ccf262fe4c7d8ece91698c2620b4d94e",
+        "encoderArgumentsCanonicalSha256": "ce59ed4257cb0ab06b5be7bbbdc7b6d9cb179a014cdf062b7ba9215f429abe4f",
+        "decoderArgumentsCanonicalSha256": "717c0755c15341b3778a7cbaa390ffdbd3da203cd62bacf2c7f183da8872f3b4",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=69\nfps=0.00\nstream_0_0_q=26.0\nbitrate=   2.8kbits/s\ntotal_size=780\nout_time_us=2233333\nout_time_ms=2233333\nout_time=00:00:02.233333\ndup_frames=0\ndrop_frames=0\nspeed=4.42x\nprogress=continue\nframe=179\nfps=177.16\nstream_0_0_q=26.0\nbitrate=   1.1kbits/s\ntotal_size=780\nout_time_us=5900000\nout_time_ms=5900000\nout_time=00:00:05.900000\ndup_frames=0\ndrop_frames=0\nspeed=5.84x\nprogress=continue\nframe=365\nfps=211.58\nstream_0_0_q=-1.0\nbitrate=8208.1kbits/s\ntotal_size=12414820\nout_time_us=12100000\nout_time_ms=12100000\nout_time=00:00:12.100000\ndup_frames=0\ndrop_frames=0\nspeed=7.01x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "51a76ca1e92ebb0a25b1a22b84c5cebafadc9d074109c9b72db1ba59140acb1e"
+      }
+    },
+    {
+      "name": "transparent",
+      "frames": 900,
+      "allPreEncodePixelsIdentical": true,
+      "allDecodedFramesIdentical": true,
+      "representativePngIdentical": true,
+      "streamedPngIdentical": true,
+      "input": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-input.json",
+        "bytes": 4513,
+        "fileSha256": "84ea8b3e0dd81a43d21bf00ff518022b09014cb8b7d978ae49ee1370e4c27858"
+      },
+      "baselineCache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-baseline.nut",
+        "bytes": 135614731,
+        "fileSha256": "80174c58ce55f7088d1eab1a2ac275aee6db23d873c94023e9d221edcc013b06"
+      },
+      "transparentCache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-transparent.nut",
+        "bytes": 135681386,
+        "fileSha256": "9c518cd35ff6b42f8c4ff408742958af96616f64d857435abffba4d11ec76f70"
+      },
+      "oldVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-legacy.mp4",
+        "bytes": 30593513,
+        "fileSha256": "1f35a774513696c019fff1cd96ef98544ba53f98ccfab1d3ccb05b2c4c5aee22"
+      },
+      "newVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-cached.mp4",
+        "bytes": 30593513,
+        "fileSha256": "1f35a774513696c019fff1cd96ef98544ba53f98ccfab1d3ccb05b2c4c5aee22"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "target",
+        "representativeFrame": 425,
+        "expectedFrameCount": 900,
+        "encodedFrames": 645,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "c9c473e500d5f8786069260a3da14425923c3e7f01e13eb4385f1528793342d6",
+        "encoderArgumentsCanonicalSha256": "9ded4b332109ed172de5a98ae15d02a2d1a3f8b627933eb9d0c80a0b96df7558",
+        "decoderArgumentsCanonicalSha256": "322c1c289432b8d1886ba454d640d5da2785c231fa8bbf7a3f82d0560bafda59",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=32\nfps=0.00\nstream_0_0_q=26.0\nbitrate=   6.2kbits/s\ntotal_size=780\nout_time_us=1000000\nout_time_ms=1000000\nout_time=00:00:01.000000\ndup_frames=0\ndrop_frames=0\nspeed=1.98x\nprogress=continue\nframe=101\nfps=100.43\nstream_0_0_q=26.0\nbitrate=   1.9kbits/s\ntotal_size=780\nout_time_us=3300000\nout_time_ms=3300000\nout_time=00:00:03.300000\ndup_frames=0\ndrop_frames=0\nspeed=3.28x\nprogress=continue\nframe=179\nfps=118.52\nstream_0_0_q=26.0\nbitrate=   1.1kbits/s\ntotal_size=780\nout_time_us=5900000\nout_time_ms=5900000\nout_time=00:00:05.900000\ndup_frames=0\ndrop_frames=0\nspeed=3.91x\nprogress=continue\nframe=278\nfps=137.99\nstream_0_0_q=26.0\nbitrate=7408.9kbits/s\ntotal_size=8520236\nout_time_us=9200000\nout_time_ms=9200000\nout_time=00:00:09.200000\ndup_frames=0\ndrop_frames=0\nspeed=4.57x\nprogress=continue\nframe=369\nfps=146.70\nstream_0_0_q=26.0\nbitrate=5571.8kbits/s\ntotal_size=8520236\nout_time_us=12233333\nout_time_ms=12233333\nout_time=00:00:12.233333\ndup_frames=0\ndrop_frames=0\nspeed=4.86x\nprogress=continue\nframe=454\nfps=150.31\nstream_0_0_q=26.0\nbitrate=4524.0kbits/s\ntotal_size=8520236\nout_time_us=15066667\nout_time_ms=15066667\nout_time=00:00:15.066667\ndup_frames=0\ndrop_frames=0\nspeed=4.99x\nprogress=continue\nframe=645\nfps=172.18\nstream_0_0_q=-1.0\nbitrate=8180.3kbits/s\ntotal_size=21916381\nout_time_us=21433333\nout_time_ms=21433333\nout_time=00:00:21.433333\ndup_frames=0\ndrop_frames=0\nspeed=5.72x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "29472a62b6f752d2bdf9ac2efaaa88ebcb2fc5b436bc584892a228063936bc4d"
+      }
+    },
+    {
+      "name": "wrong-omission",
+      "frames": 900,
+      "allPreEncodePixelsIdentical": true,
+      "allDecodedFramesIdentical": true,
+      "representativePngIdentical": true,
+      "streamedPngIdentical": true,
+      "input": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-input.json",
+        "bytes": 4511,
+        "fileSha256": "e9929f57bf9099515146e85f6e435a73460840f6af70037ad2c90b1dffc6a81f"
+      },
+      "baselineCache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-baseline.nut",
+        "bytes": 135635500,
+        "fileSha256": "cddee18776a4a0e025ac42ecad605f8e3c3cb105a00afa30827dcd552cf16c45"
+      },
+      "transparentCache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-transparent.nut",
+        "bytes": 135681386,
+        "fileSha256": "9c518cd35ff6b42f8c4ff408742958af96616f64d857435abffba4d11ec76f70"
+      },
+      "oldVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-legacy.mp4",
+        "bytes": 30589014,
+        "fileSha256": "a4e278e8a5559ee693d7256e386d2bb6092564e51e38ced96db5cf88fd5f9d64"
+      },
+      "newVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-cached.mp4",
+        "bytes": 30589014,
+        "fileSha256": "a4e278e8a5559ee693d7256e386d2bb6092564e51e38ced96db5cf88fd5f9d64"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "other",
+        "representativeFrame": 120,
+        "expectedFrameCount": 900,
+        "encodedFrames": 422,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "1bb7f9e026482630546ab0a9fe117a3fe48d3152174981b91f053fef8412f8d7",
+        "encoderArgumentsCanonicalSha256": "b39be2ffc0c12849032cb30edc92141891407e283843a0bd5255b8961293f2d3",
+        "decoderArgumentsCanonicalSha256": "f8709b9b57ffa3aec0c9193bc993d4d0b23251ab2ec17ec38184f8f52fd45fb4",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=112\nfps=110.27\nstream_0_0_q=26.0\nbitrate=   1.7kbits/s\ntotal_size=780\nout_time_us=3666667\nout_time_ms=3666667\nout_time=00:00:03.666667\ndup_frames=0\ndrop_frames=0\nspeed=3.61x\nprogress=continue\nframe=235\nfps=154.43\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7766667\nout_time_ms=7766667\nout_time=00:00:07.766667\ndup_frames=0\ndrop_frames=0\nspeed= 5.1x\nprogress=continue\nframe=422\nfps=188.19\nstream_0_0_q=-1.0\nbitrate=8162.6kbits/s\ntotal_size=14284518\nout_time_us=14000000\nout_time_ms=14000000\nout_time=00:00:14.000000\ndup_frames=0\ndrop_frames=0\nspeed=6.24x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "204082b0d54db4175e4ed058758b20898c85d533577f7fd5c06bd3006d48f53e"
+      }
+    },
+    {
+      "name": "moved-target",
+      "frames": 900,
+      "allPreEncodePixelsIdentical": true,
+      "allDecodedFramesIdentical": true,
+      "representativePngIdentical": true,
+      "streamedPngIdentical": true,
+      "input": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-input.json",
+        "bytes": 4505,
+        "fileSha256": "49f86f2a4ba299d4844125cc5b500e8ef67df1802da4fdd28d6739aa97ec52a6"
+      },
+      "baselineCache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-baseline.nut",
+        "bytes": 134760400,
+        "fileSha256": "5f920b8ae2dd0d64efa95e4d619af46609e5e6e1afba77ec58f8ab32b7c5003c"
+      },
+      "transparentCache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-transparent.nut",
+        "bytes": 135681386,
+        "fileSha256": "9c518cd35ff6b42f8c4ff408742958af96616f64d857435abffba4d11ec76f70"
+      },
+      "oldVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-legacy.mp4",
+        "bytes": 30593513,
+        "fileSha256": "1f35a774513696c019fff1cd96ef98544ba53f98ccfab1d3ccb05b2c4c5aee22"
+      },
+      "newVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-cached.mp4",
+        "bytes": 30593513,
+        "fileSha256": "1f35a774513696c019fff1cd96ef98544ba53f98ccfab1d3ccb05b2c4c5aee22"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "target",
+        "representativeFrame": 120,
+        "expectedFrameCount": 900,
+        "encodedFrames": 345,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "2931bb118c59679fc66495ae54cccda1955baa1e1581ea8c5383d40c4ef47af0",
+        "encoderArgumentsCanonicalSha256": "2c4de385b66abc5a1fac4c68bc8a51f178fc72f3ae6f221ee106f751f4166f73",
+        "decoderArgumentsCanonicalSha256": "4185a67cc6ed120b96f12d15c4f3d9219adef3e971482cd4f0393bfa4714c1e4",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=46\nfps=0.00\nstream_0_0_q=26.0\nbitrate=   4.3kbits/s\ntotal_size=780\nout_time_us=1466667\nout_time_ms=1466667\nout_time=00:00:01.466667\ndup_frames=0\ndrop_frames=0\nspeed= 2.9x\nprogress=continue\nframe=80\nfps=79.20\nstream_0_0_q=26.0\nbitrate=   2.4kbits/s\ntotal_size=780\nout_time_us=2600000\nout_time_ms=2600000\nout_time=00:00:02.600000\ndup_frames=0\ndrop_frames=0\nspeed=2.57x\nprogress=continue\nframe=159\nfps=104.72\nstream_0_0_q=26.0\nbitrate=   1.2kbits/s\ntotal_size=780\nout_time_us=5233333\nout_time_ms=5233333\nout_time=00:00:05.233333\ndup_frames=0\ndrop_frames=0\nspeed=3.45x\nprogress=continue\nframe=345\nfps=157.30\nstream_0_0_q=-1.0\nbitrate=8229.4kbits/s\ntotal_size=11761160\nout_time_us=11433333\nout_time_ms=11433333\nout_time=00:00:11.433333\ndup_frames=0\ndrop_frames=0\nspeed=5.21x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "75a4414995b7299dc96eb609c31ff4876e173d4afa864d19e30450e2f381dd39"
+      }
+    }
+  ]
+}

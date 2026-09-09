@@ -1,0 +1,25 @@
+{
+  "command": "/opt/homebrew/bin/ffmpeg",
+  "arguments": [
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-i",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-transparent.nut",
+    "-map",
+    "0:v:0",
+    "-pix_fmt",
+    "yuv420p",
+    "-f",
+    "framehash",
+    "-hash",
+    "sha256",
+    "-"
+  ],
+  "code": 0,
+  "signal": null,
+  "elapsedMs": 6153,
+  "stdoutBytes": 101019,
+  "stdoutSha256": "66c05e51a263f4072afa4b2ea07e8625ea8576a8b0bc720e175284a983472dfb",
+  "stderr": ""
+}

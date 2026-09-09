@@ -1,0 +1,1662 @@
+{
+  "status": "sample-measured",
+  "rendererJob": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v008/renderer-job.json",
+    "fileSha256": "de163cef57fbf6901815af5a4c824b104341805b06a0fcfd0bdef54941629699",
+    "bytes": 10766
+  },
+  "baseBinding": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/base-media/base-media.mp4",
+    "fileSha256": "3006f087046dc304227103eab9615c782bfc1838d4a576769960e2d67afde73e",
+    "bytes": 1930726164
+  },
+  "implementation": {
+    "path": "evals/clip_composition/measure_unseen_material_qc_cache_v001.mjs",
+    "fileSha256": "dca8f99a3dc5283ea42325fb3b39bc266aecf33f06f4bb90c4cc99ebb9c6bd73",
+    "bytes": 8559
+  },
+  "cacheImplementation": {
+    "path": "evals/clip_composition/unseen_material_qc_lossless_cache_v001.mjs",
+    "fileSha256": "78fb297b01d118eedffefac31008ffe578c18f3e60711407f32576ffc8de9418",
+    "bytes": 4230
+  },
+  "sampleStartFrame": 0,
+  "sampleFrameCount": 900,
+  "fullFrameCount": 65363,
+  "sampledCaptionCount": 9,
+  "scope": "capacity and throughput measurement on the first 900 actual base frames and captions intersecting them; later inactive inputs omitted only in this measurement, not a formal full-graph identity proof",
+  "unchangedCaptionInputs": [
+    {
+      "element": {
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000001",
+        "kind": "speech-caption",
+        "text": "待って、誰かいる",
+        "indexedLines": [
+          {
+            "lineIndex": 0,
+            "characters": [
+              {
+                "sourceIndex": 0,
+                "character": "待",
+                "codePoint": 24453,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 1,
+                "character": "っ",
+                "codePoint": 12387,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 2,
+                "character": "て",
+                "codePoint": 12390,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 3,
+                "character": "、",
+                "codePoint": 12289,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 4,
+                "character": "誰",
+                "codePoint": 35504,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 5,
+                "character": "か",
+                "codePoint": 12363,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 6,
+                "character": "い",
+                "codePoint": 12356,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 7,
+                "character": "る",
+                "codePoint": 12427,
+                "role": "visible"
+              }
+            ],
+            "renderedText": "待って、誰かいる",
+            "text": "待って、誰かいる",
+            "codePointIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "sourceUnitIds": [
+              "unseen-SsdxVhwxyYo-024-v001-atom-000001",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000002",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000003",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000004"
+            ],
+            "logicalWidth": 16
+          }
+        ],
+        "sourceStartMs": null,
+        "sourceEndMs": null,
+        "startFrame": 0,
+        "endFrameExclusive": 22,
+        "displayFrameCount": 22,
+        "requestedProfileId": "normal-landscape-readable-pop-v001",
+        "appliedProfileId": "normal-landscape-readable-pop-v001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "presetId": "normal-landscape-readable-pop-v001",
+        "registryVersion": "normal-landscape-preset-registry-v001",
+        "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "stateId": "caption-core-v001",
+        "visualState": {
+          "stateId": "caption-core-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 94,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 8,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 12,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 36,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        "transition": {
+          "transitionId": "quick-fade-4f-v001",
+          "entry": {
+            "type": "alpha-fade",
+            "frames": 4
+          },
+          "exit": {
+            "type": "alpha-fade",
+            "frames": 4
+          }
+        },
+        "timelineSegmentId": null,
+        "targetProvenance": {
+          "targetRefId": "unseen-SsdxVhwxyYo-024-v001-caption",
+          "targetType": "semantic-caption",
+          "sourceAtomIds": [
+            "unseen-SsdxVhwxyYo-024-v001-atom-000001",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000002",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000003",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000004"
+          ]
+        },
+        "materialRefs": []
+      },
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002-work-94CMqV/publish/overlays/01-123c1e80d6fb.png"
+    },
+    {
+      "element": {
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000002",
+        "kind": "speech-caption",
+        "text": "はい、佐々木小次郎じゃない?",
+        "indexedLines": [
+          {
+            "lineIndex": 0,
+            "characters": [
+              {
+                "sourceIndex": 0,
+                "character": "は",
+                "codePoint": 12399,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 1,
+                "character": "い",
+                "codePoint": 12356,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 2,
+                "character": "、",
+                "codePoint": 12289,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 3,
+                "character": "佐",
+                "codePoint": 20304,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 4,
+                "character": "々",
+                "codePoint": 12293,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 5,
+                "character": "木",
+                "codePoint": 26408,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 6,
+                "character": "小",
+                "codePoint": 23567,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 7,
+                "character": "次",
+                "codePoint": 27425,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 8,
+                "character": "郎",
+                "codePoint": 37070,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 9,
+                "character": "じ",
+                "codePoint": 12376,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 10,
+                "character": "ゃ",
+                "codePoint": 12419,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 11,
+                "character": "な",
+                "codePoint": 12394,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 12,
+                "character": "い",
+                "codePoint": 12356,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 13,
+                "character": "?",
+                "codePoint": 63,
+                "role": "visible"
+              }
+            ],
+            "renderedText": "はい、佐々木小次郎じゃない?",
+            "text": "はい、佐々木小次郎じゃない?",
+            "codePointIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ],
+            "sourceUnitIds": [
+              "unseen-SsdxVhwxyYo-024-v001-atom-000005",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000006",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000007",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000008",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000009",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000010",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000011",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000012"
+            ],
+            "logicalWidth": 27
+          }
+        ],
+        "sourceStartMs": null,
+        "sourceEndMs": null,
+        "startFrame": 75,
+        "endFrameExclusive": 120,
+        "displayFrameCount": 45,
+        "requestedProfileId": "normal-landscape-readable-pop-v001",
+        "appliedProfileId": "normal-landscape-readable-pop-v001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "presetId": "normal-landscape-readable-pop-v001",
+        "registryVersion": "normal-landscape-preset-registry-v001",
+        "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "stateId": "caption-core-v001",
+        "visualState": {
+          "stateId": "caption-core-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 94,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 8,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 12,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 36,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        "transition": {
+          "transitionId": "quick-fade-4f-v001",
+          "entry": {
+            "type": "alpha-fade",
+            "frames": 4
+          },
+          "exit": {
+            "type": "alpha-fade",
+            "frames": 4
+          }
+        },
+        "timelineSegmentId": null,
+        "targetProvenance": {
+          "targetRefId": "unseen-SsdxVhwxyYo-024-v001-caption",
+          "targetType": "semantic-caption",
+          "sourceAtomIds": [
+            "unseen-SsdxVhwxyYo-024-v001-atom-000005",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000006",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000007",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000008",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000009",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000010",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000011",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000012"
+          ]
+        },
+        "materialRefs": []
+      },
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002-work-94CMqV/publish/overlays/02-7f11333e9694.png"
+    },
+    {
+      "element": {
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000003",
+        "kind": "speech-caption",
+        "text": "これ佐々木小次郎なんちゃう?",
+        "indexedLines": [
+          {
+            "lineIndex": 0,
+            "characters": [
+              {
+                "sourceIndex": 0,
+                "character": "こ",
+                "codePoint": 12371,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 1,
+                "character": "れ",
+                "codePoint": 12428,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 2,
+                "character": "佐",
+                "codePoint": 20304,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 3,
+                "character": "々",
+                "codePoint": 12293,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 4,
+                "character": "木",
+                "codePoint": 26408,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 5,
+                "character": "小",
+                "codePoint": 23567,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 6,
+                "character": "次",
+                "codePoint": 27425,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 7,
+                "character": "郎",
+                "codePoint": 37070,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 8,
+                "character": "な",
+                "codePoint": 12394,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 9,
+                "character": "ん",
+                "codePoint": 12435,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 10,
+                "character": "ち",
+                "codePoint": 12385,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 11,
+                "character": "ゃ",
+                "codePoint": 12419,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 12,
+                "character": "う",
+                "codePoint": 12358,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 13,
+                "character": "?",
+                "codePoint": 63,
+                "role": "visible"
+              }
+            ],
+            "renderedText": "これ佐々木小次郎なんちゃう?",
+            "text": "これ佐々木小次郎なんちゃう?",
+            "codePointIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ],
+            "sourceUnitIds": [
+              "unseen-SsdxVhwxyYo-024-v001-atom-000013",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000014",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000015",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000016",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000017",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000018",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000019",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000020",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000021",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000022"
+            ],
+            "logicalWidth": 27
+          }
+        ],
+        "sourceStartMs": null,
+        "sourceEndMs": null,
+        "startFrame": 131,
+        "endFrameExclusive": 236,
+        "displayFrameCount": 105,
+        "requestedProfileId": "normal-landscape-readable-pop-v001",
+        "appliedProfileId": "normal-landscape-readable-pop-v001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "presetId": "normal-landscape-readable-pop-v001",
+        "registryVersion": "normal-landscape-preset-registry-v001",
+        "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "stateId": "caption-core-v001",
+        "visualState": {
+          "stateId": "caption-core-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 94,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 8,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 12,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 36,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        "transition": {
+          "transitionId": "quick-fade-4f-v001",
+          "entry": {
+            "type": "alpha-fade",
+            "frames": 4
+          },
+          "exit": {
+            "type": "alpha-fade",
+            "frames": 4
+          }
+        },
+        "timelineSegmentId": null,
+        "targetProvenance": {
+          "targetRefId": "unseen-SsdxVhwxyYo-024-v001-caption",
+          "targetType": "semantic-caption",
+          "sourceAtomIds": [
+            "unseen-SsdxVhwxyYo-024-v001-atom-000013",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000014",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000015",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000016",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000017",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000018",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000019",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000020",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000021",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000022"
+          ]
+        },
+        "materialRefs": []
+      },
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002-work-94CMqV/publish/overlays/03-24e68ee9482a.png"
+    },
+    {
+      "element": {
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000004",
+        "kind": "speech-caption",
+        "text": "なんかイケメン来た",
+        "indexedLines": [
+          {
+            "lineIndex": 0,
+            "characters": [
+              {
+                "sourceIndex": 0,
+                "character": "な",
+                "codePoint": 12394,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 1,
+                "character": "ん",
+                "codePoint": 12435,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 2,
+                "character": "か",
+                "codePoint": 12363,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 3,
+                "character": "イ",
+                "codePoint": 12452,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 4,
+                "character": "ケ",
+                "codePoint": 12465,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 5,
+                "character": "メ",
+                "codePoint": 12513,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 6,
+                "character": "ン",
+                "codePoint": 12531,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 7,
+                "character": "来",
+                "codePoint": 26469,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 8,
+                "character": "た",
+                "codePoint": 12383,
+                "role": "visible"
+              }
+            ],
+            "renderedText": "なんかイケメン来た",
+            "text": "なんかイケメン来た",
+            "codePointIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "sourceUnitIds": [
+              "unseen-SsdxVhwxyYo-024-v001-atom-000023",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000024",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000025",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000026",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000027",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000028",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000029"
+            ],
+            "logicalWidth": 18
+          }
+        ],
+        "sourceStartMs": null,
+        "sourceEndMs": null,
+        "startFrame": 254,
+        "endFrameExclusive": 289,
+        "displayFrameCount": 35,
+        "requestedProfileId": "normal-landscape-readable-pop-v001",
+        "appliedProfileId": "normal-landscape-readable-pop-v001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "presetId": "normal-landscape-readable-pop-v001",
+        "registryVersion": "normal-landscape-preset-registry-v001",
+        "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "stateId": "caption-core-v001",
+        "visualState": {
+          "stateId": "caption-core-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 94,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 8,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 12,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 36,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        "transition": {
+          "transitionId": "quick-fade-4f-v001",
+          "entry": {
+            "type": "alpha-fade",
+            "frames": 4
+          },
+          "exit": {
+            "type": "alpha-fade",
+            "frames": 4
+          }
+        },
+        "timelineSegmentId": null,
+        "targetProvenance": {
+          "targetRefId": "unseen-SsdxVhwxyYo-024-v001-caption",
+          "targetType": "semantic-caption",
+          "sourceAtomIds": [
+            "unseen-SsdxVhwxyYo-024-v001-atom-000023",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000024",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000025",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000026",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000027",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000028",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000029"
+          ]
+        },
+        "materialRefs": []
+      },
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002-work-94CMqV/publish/overlays/04-4f9251ed9338.png"
+    },
+    {
+      "element": {
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000005",
+        "kind": "speech-caption",
+        "text": "大柄な戦士誰?",
+        "indexedLines": [
+          {
+            "lineIndex": 0,
+            "characters": [
+              {
+                "sourceIndex": 0,
+                "character": "大",
+                "codePoint": 22823,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 1,
+                "character": "柄",
+                "codePoint": 26564,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 2,
+                "character": "な",
+                "codePoint": 12394,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 3,
+                "character": "戦",
+                "codePoint": 25126,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 4,
+                "character": "士",
+                "codePoint": 22763,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 5,
+                "character": "誰",
+                "codePoint": 35504,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 6,
+                "character": "?",
+                "codePoint": 63,
+                "role": "visible"
+              }
+            ],
+            "renderedText": "大柄な戦士誰?",
+            "text": "大柄な戦士誰?",
+            "codePointIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "sourceUnitIds": [
+              "unseen-SsdxVhwxyYo-024-v001-atom-000030",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000031",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000032",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000033",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000034",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000035"
+            ],
+            "logicalWidth": 13
+          }
+        ],
+        "sourceStartMs": null,
+        "sourceEndMs": null,
+        "startFrame": 317,
+        "endFrameExclusive": 371,
+        "displayFrameCount": 54,
+        "requestedProfileId": "normal-landscape-readable-pop-v001",
+        "appliedProfileId": "normal-landscape-readable-pop-v001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "presetId": "normal-landscape-readable-pop-v001",
+        "registryVersion": "normal-landscape-preset-registry-v001",
+        "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "stateId": "caption-core-v001",
+        "visualState": {
+          "stateId": "caption-core-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 94,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 8,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 12,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 36,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        "transition": {
+          "transitionId": "quick-fade-4f-v001",
+          "entry": {
+            "type": "alpha-fade",
+            "frames": 4
+          },
+          "exit": {
+            "type": "alpha-fade",
+            "frames": 4
+          }
+        },
+        "timelineSegmentId": null,
+        "targetProvenance": {
+          "targetRefId": "unseen-SsdxVhwxyYo-024-v001-caption",
+          "targetType": "semantic-caption",
+          "sourceAtomIds": [
+            "unseen-SsdxVhwxyYo-024-v001-atom-000030",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000031",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000032",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000033",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000034",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000035"
+          ]
+        },
+        "materialRefs": []
+      },
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002-work-94CMqV/publish/overlays/05-3c151f5b71c0.png"
+    },
+    {
+      "element": {
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000006",
+        "kind": "speech-caption",
+        "text": "おしゃれやん仲良しか",
+        "indexedLines": [
+          {
+            "lineIndex": 0,
+            "characters": [
+              {
+                "sourceIndex": 0,
+                "character": "お",
+                "codePoint": 12362,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 1,
+                "character": "し",
+                "codePoint": 12375,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 2,
+                "character": "ゃ",
+                "codePoint": 12419,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 3,
+                "character": "れ",
+                "codePoint": 12428,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 4,
+                "character": "や",
+                "codePoint": 12420,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 5,
+                "character": "ん",
+                "codePoint": 12435,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 6,
+                "character": "仲",
+                "codePoint": 20210,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 7,
+                "character": "良",
+                "codePoint": 33391,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 8,
+                "character": "し",
+                "codePoint": 12375,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 9,
+                "character": "か",
+                "codePoint": 12363,
+                "role": "visible"
+              }
+            ],
+            "renderedText": "おしゃれやん仲良しか",
+            "text": "おしゃれやん仲良しか",
+            "codePointIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "sourceUnitIds": [
+              "unseen-SsdxVhwxyYo-024-v001-atom-000036",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000037",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000038",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000039",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000040",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000041",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000042",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000043"
+            ],
+            "logicalWidth": 20
+          }
+        ],
+        "sourceStartMs": null,
+        "sourceEndMs": null,
+        "startFrame": 373,
+        "endFrameExclusive": 494,
+        "displayFrameCount": 121,
+        "requestedProfileId": "normal-landscape-readable-pop-v001",
+        "appliedProfileId": "normal-landscape-readable-pop-v001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "presetId": "normal-landscape-readable-pop-v001",
+        "registryVersion": "normal-landscape-preset-registry-v001",
+        "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "stateId": "caption-core-v001",
+        "visualState": {
+          "stateId": "caption-core-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 94,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 8,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 12,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 36,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        "transition": {
+          "transitionId": "quick-fade-4f-v001",
+          "entry": {
+            "type": "alpha-fade",
+            "frames": 4
+          },
+          "exit": {
+            "type": "alpha-fade",
+            "frames": 4
+          }
+        },
+        "timelineSegmentId": null,
+        "targetProvenance": {
+          "targetRefId": "unseen-SsdxVhwxyYo-024-v001-caption",
+          "targetType": "semantic-caption",
+          "sourceAtomIds": [
+            "unseen-SsdxVhwxyYo-024-v001-atom-000036",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000037",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000038",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000039",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000040",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000041",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000042",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000043"
+          ]
+        },
+        "materialRefs": []
+      },
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002-work-94CMqV/publish/overlays/06-fa66d63a3894.png"
+    },
+    {
+      "element": {
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000007",
+        "kind": "speech-caption",
+        "text": "淡くて誰だこいつなんかおしゃれすぎ",
+        "indexedLines": [
+          {
+            "lineIndex": 0,
+            "characters": [
+              {
+                "sourceIndex": 0,
+                "character": "淡",
+                "codePoint": 28129,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 1,
+                "character": "く",
+                "codePoint": 12367,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 2,
+                "character": "て",
+                "codePoint": 12390,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 3,
+                "character": "誰",
+                "codePoint": 35504,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 4,
+                "character": "だ",
+                "codePoint": 12384,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 5,
+                "character": "こ",
+                "codePoint": 12371,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 6,
+                "character": "い",
+                "codePoint": 12356,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 7,
+                "character": "つ",
+                "codePoint": 12388,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 8,
+                "character": "な",
+                "codePoint": 12394,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 9,
+                "character": "ん",
+                "codePoint": 12435,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 10,
+                "character": "か",
+                "codePoint": 12363,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 11,
+                "character": "お",
+                "codePoint": 12362,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 12,
+                "character": "し",
+                "codePoint": 12375,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 13,
+                "character": "ゃ",
+                "codePoint": 12419,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 14,
+                "character": "れ",
+                "codePoint": 12428,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 15,
+                "character": "す",
+                "codePoint": 12377,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 16,
+                "character": "ぎ",
+                "codePoint": 12366,
+                "role": "visible"
+              }
+            ],
+            "renderedText": "淡くて誰だこいつなんかおしゃれすぎ",
+            "text": "淡くて誰だこいつなんかおしゃれすぎ",
+            "codePointIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16
+            ],
+            "sourceUnitIds": [
+              "unseen-SsdxVhwxyYo-024-v001-atom-000044",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000045",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000046",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000047",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000048",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000049",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000050",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000051",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000052",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000053",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000054",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000055",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000056"
+            ],
+            "logicalWidth": 34
+          }
+        ],
+        "sourceStartMs": null,
+        "sourceEndMs": null,
+        "startFrame": 506,
+        "endFrameExclusive": 735,
+        "displayFrameCount": 229,
+        "requestedProfileId": "normal-landscape-readable-pop-v001",
+        "appliedProfileId": "normal-landscape-readable-pop-v001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "presetId": "normal-landscape-readable-pop-v001",
+        "registryVersion": "normal-landscape-preset-registry-v001",
+        "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "stateId": "caption-core-v001",
+        "visualState": {
+          "stateId": "caption-core-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 94,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 8,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 12,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 36,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        "transition": {
+          "transitionId": "quick-fade-4f-v001",
+          "entry": {
+            "type": "alpha-fade",
+            "frames": 4
+          },
+          "exit": {
+            "type": "alpha-fade",
+            "frames": 4
+          }
+        },
+        "timelineSegmentId": null,
+        "targetProvenance": {
+          "targetRefId": "unseen-SsdxVhwxyYo-024-v001-caption",
+          "targetType": "semantic-caption",
+          "sourceAtomIds": [
+            "unseen-SsdxVhwxyYo-024-v001-atom-000044",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000045",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000046",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000047",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000048",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000049",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000050",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000051",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000052",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000053",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000054",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000055",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000056"
+          ]
+        },
+        "materialRefs": []
+      },
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002-work-94CMqV/publish/overlays/07-6d22085c133f.png"
+    },
+    {
+      "element": {
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000008",
+        "kind": "speech-caption",
+        "text": "佐々木玄龍え、佐々木小次郎?",
+        "indexedLines": [
+          {
+            "lineIndex": 0,
+            "characters": [
+              {
+                "sourceIndex": 0,
+                "character": "佐",
+                "codePoint": 20304,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 1,
+                "character": "々",
+                "codePoint": 12293,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 2,
+                "character": "木",
+                "codePoint": 26408,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 3,
+                "character": "玄",
+                "codePoint": 29572,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 4,
+                "character": "龍",
+                "codePoint": 40845,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 5,
+                "character": "え",
+                "codePoint": 12360,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 6,
+                "character": "、",
+                "codePoint": 12289,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 7,
+                "character": "佐",
+                "codePoint": 20304,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 8,
+                "character": "々",
+                "codePoint": 12293,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 9,
+                "character": "木",
+                "codePoint": 26408,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 10,
+                "character": "小",
+                "codePoint": 23567,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 11,
+                "character": "次",
+                "codePoint": 27425,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 12,
+                "character": "郎",
+                "codePoint": 37070,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 13,
+                "character": "?",
+                "codePoint": 63,
+                "role": "visible"
+              }
+            ],
+            "renderedText": "佐々木玄龍え、佐々木小次郎?",
+            "text": "佐々木玄龍え、佐々木小次郎?",
+            "codePointIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ],
+            "sourceUnitIds": [
+              "unseen-SsdxVhwxyYo-024-v001-atom-000057",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000058",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000059",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000060",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000061",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000062",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000063",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000064",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000065",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000066",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000067",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000068"
+            ],
+            "logicalWidth": 27
+          }
+        ],
+        "sourceStartMs": null,
+        "sourceEndMs": null,
+        "startFrame": 750,
+        "endFrameExclusive": 837,
+        "displayFrameCount": 87,
+        "requestedProfileId": "normal-landscape-readable-pop-v001",
+        "appliedProfileId": "normal-landscape-readable-pop-v001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "presetId": "normal-landscape-readable-pop-v001",
+        "registryVersion": "normal-landscape-preset-registry-v001",
+        "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "stateId": "caption-core-v001",
+        "visualState": {
+          "stateId": "caption-core-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 94,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 8,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 12,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 36,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        "transition": {
+          "transitionId": "quick-fade-4f-v001",
+          "entry": {
+            "type": "alpha-fade",
+            "frames": 4
+          },
+          "exit": {
+            "type": "alpha-fade",
+            "frames": 4
+          }
+        },
+        "timelineSegmentId": null,
+        "targetProvenance": {
+          "targetRefId": "unseen-SsdxVhwxyYo-024-v001-caption",
+          "targetType": "semantic-caption",
+          "sourceAtomIds": [
+            "unseen-SsdxVhwxyYo-024-v001-atom-000057",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000058",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000059",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000060",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000061",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000062",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000063",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000064",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000065",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000066",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000067",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000068"
+          ]
+        },
+        "materialRefs": []
+      },
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002-work-94CMqV/publish/overlays/08-c0befa3e5fcd.png"
+    },
+    {
+      "element": {
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000009",
+        "kind": "speech-caption",
+        "text": "これ小次郎じゃない?",
+        "indexedLines": [
+          {
+            "lineIndex": 0,
+            "characters": [
+              {
+                "sourceIndex": 0,
+                "character": "こ",
+                "codePoint": 12371,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 1,
+                "character": "れ",
+                "codePoint": 12428,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 2,
+                "character": "小",
+                "codePoint": 23567,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 3,
+                "character": "次",
+                "codePoint": 27425,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 4,
+                "character": "郎",
+                "codePoint": 37070,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 5,
+                "character": "じ",
+                "codePoint": 12376,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 6,
+                "character": "ゃ",
+                "codePoint": 12419,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 7,
+                "character": "な",
+                "codePoint": 12394,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 8,
+                "character": "い",
+                "codePoint": 12356,
+                "role": "visible"
+              },
+              {
+                "sourceIndex": 9,
+                "character": "?",
+                "codePoint": 63,
+                "role": "visible"
+              }
+            ],
+            "renderedText": "これ小次郎じゃない?",
+            "text": "これ小次郎じゃない?",
+            "codePointIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "sourceUnitIds": [
+              "unseen-SsdxVhwxyYo-024-v001-atom-000069",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000070",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000071",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000072",
+              "unseen-SsdxVhwxyYo-024-v001-atom-000073"
+            ],
+            "logicalWidth": 19
+          }
+        ],
+        "sourceStartMs": null,
+        "sourceEndMs": null,
+        "startFrame": 878,
+        "endFrameExclusive": 909,
+        "displayFrameCount": 31,
+        "requestedProfileId": "normal-landscape-readable-pop-v001",
+        "appliedProfileId": "normal-landscape-readable-pop-v001",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "presetId": "normal-landscape-readable-pop-v001",
+        "registryVersion": "normal-landscape-preset-registry-v001",
+        "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "stateId": "caption-core-v001",
+        "visualState": {
+          "stateId": "caption-core-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 94,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 8,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 12,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 36,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        "transition": {
+          "transitionId": "quick-fade-4f-v001",
+          "entry": {
+            "type": "alpha-fade",
+            "frames": 4
+          },
+          "exit": {
+            "type": "alpha-fade",
+            "frames": 4
+          }
+        },
+        "timelineSegmentId": null,
+        "targetProvenance": {
+          "targetRefId": "unseen-SsdxVhwxyYo-024-v001-caption",
+          "targetType": "semantic-caption",
+          "sourceAtomIds": [
+            "unseen-SsdxVhwxyYo-024-v001-atom-000069",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000070",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000071",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000072",
+            "unseen-SsdxVhwxyYo-024-v001-atom-000073"
+          ]
+        },
+        "materialRefs": []
+      },
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002-work-94CMqV/publish/overlays/09-0f08bab106fa.png"
+    }
+  ],
+  "transparentPng": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/transparent.png",
+    "fileSha256": "0c769e30958eec259d9e7143266d689641688b71bb71612e19ac1f0d1b19e386",
+    "bytes": 8329
+  },
+  "results": [
+    {
+      "name": "baseline",
+      "cache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/baseline.nut",
+        "fileSha256": "b13255b96bb9f8108ad244a041c610db22ddb157d5b2909c0cd23e8bd48540dd",
+        "bytes": 241088765
+      },
+      "generationMs": 137509,
+      "decodedFrameHashMs": 6192,
+      "all900CachePixelsIdentical": true
+    },
+    {
+      "name": "transparent",
+      "cache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/transparent.nut",
+        "fileSha256": "3e3033c75555891fb2eb05807d9ccc590be4987af423439106631840d5f59fce",
+        "bytes": 233418390
+      },
+      "generationMs": 138157,
+      "decodedFrameHashMs": 6203,
+      "all900CachePixelsIdentical": true
+    }
+  ],
+  "cachedEncode900FramesMs": 8051,
+  "availableBytes": 171338125312,
+  "observedPairBytes": 474507155,
+  "projectedPairBytes": 34461345747,
+  "projectionFitsObservedFreeSpace": true,
+  "projectionMeaning": "linear extrapolation from observed actual first-900-frame byte count, not a guaranteed bound on later scenes; no added reserve/limit/coefficient",
+  "formalFullScaleStarted": false
+}

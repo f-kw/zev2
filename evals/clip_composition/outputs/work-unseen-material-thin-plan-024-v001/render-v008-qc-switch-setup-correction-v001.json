@@ -1,0 +1,10 @@
+{
+  "status": "switch-watcher-setup-defect-before-any-qc-signal",
+  "ownedWatcherPid": 31466,
+  "mainParentPid": 26979,
+  "mainCompleted": true,
+  "mainCompletionSha256": "0146e4e48ef051de734a1febfaa50d44eb234466395359730cf8d76f7eccc642",
+  "defect": "The original renderer launches the counterfactual encoder through a separate TSX helper, so FFmpeg is a descendant rather than a direct child of the renderer parent. The initial watcher only searched direct children.",
+  "fix": "Stop only the waiting watcher, preserve its source/log, then use the already verified main record and inspect the exact owned helper ancestry before signalling the QC encoder.",
+  "mainOrQcProcessSignalledByThisCorrection": false
+}

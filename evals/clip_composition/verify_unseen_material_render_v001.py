@@ -30,14 +30,52 @@ def check(ref):
 
 def main():
     completion = read(FORMAL / 'render-completion.json')
+    assert completion['schemaVersion'] == 'unseen-material-render-completion-v002'
     assert completion['status'] == 'technical-render-complete'
     assert completion['qc'] == 'passed' and completion['humanQuality'] == 'not-evaluated'
     check(completion['planBinding'])
     adoption = check(completion['machineAdoptionBinding'])
     assert len(adoption['selectedCandidates']) == 10
     execution = check(completion['execution'])
-    assert execution['exitCode'] == 0 and execution['result']['status'] == 'completed'
-    setup = check(execution['setupFixBinding'])
+    assert execution['status'] == 'completed' and execution['mode'] == 'qc-only-existing-main'
+    main = check(completion['sourceMainCompletion'])
+    assert completion['sourceMainCompletion'] == execution['sourceMainCompletionBinding']
+    assert main['status'] == 'main-video-completed-and-verified'
+    source_execution = check(execution['sourceRendererExecutionBinding'])
+    assert source_execution['rendererJobBinding'] == execution['sourceRendererJobBinding'] == main['sourceRendererJobBinding']
+    switch_before_path = WORK / 'render-v008-qc-only-switch-before-signal-v001.json'
+    switch_after_path = WORK / 'render-v008-qc-only-switch-result-v001.json'
+    switch_before, switch_after = read(switch_before_path), read(switch_after_path)
+    assert switch_before['status'] == 'planned-qc-only-switch-main-complete'
+    assert switch_before['mainFfmpegExitCode'] == 0 and switch_before['mainProcessSignalled'] is False
+    assert switch_before['mainCompletionSha256'] == completion['sourceMainCompletion']['fileSha256']
+    assert switch_after['status'] == 'legacy-qc-ended-after-planned-switch'
+    assert switch_after['targetPid'] == switch_before['target']['pid']
+    assert switch_after['sourceExecutionSha256'] == execution['sourceRendererExecutionBinding']['fileSha256']
+    assert switch_after['sourceExecutionExitCode'] == source_execution['exitCode'] != 0
+    setup = check(source_execution['setupFixBinding'])
+    for ref in main['mainProcessEvidence']:
+        path = ROOT / ref['path']
+        assert digest(path) == ref['fileSha256']
+        if path.name == 'exit-code.txt':
+            assert path.read_text().strip() == '0'
+        if path.name == 'signal.txt':
+            assert path.read_text().strip() == 'none'
+    actual_args = check(main['sourceActualArguments'])
+    assert actual_args['commandRepresentation'] == ' '.join(main['expectedArguments'])
+    cache_proof = check(execution['equivalenceProofBinding'])
+    assert cache_proof['status'] == 'passed'
+    assert cache_proof['allPreEncodePixelsIdentical'] and cache_proof['allEncodedDecodedPixelsIdentical']
+    assert cache_proof['allRepresentativePngsIdentical'] and cache_proof['overlappingInputsRejected']
+    for ref in [*cache_proof['implementationBindings'], *cache_proof['artifacts']]:
+        assert digest(ROOT / ref['path']) == ref['fileSha256']
+    provenance = check(execution['provenanceBinding'])
+    assert provenance['mainVideoProducer'] == completion['sourceMainCompletion']
+    assert provenance['sourceRendererExecution'] == execution['sourceRendererExecutionBinding']
+    assert provenance['newMainVideoEncodes'] == provenance['newlyRenderedOverlayPngs'] == 0
+    actual_cache = check(provenance['cacheProof'])
+    assert actual_cache['status'] == 'passed' and actual_cache['actualEncodedFramesIdentical'] == 65363
+    assert actual_cache['decodedComparisonPixelFormat'] == 'rgba'
     optimization = check(setup['qcEquivalenceBinding'])
     assert optimization['status'] == 'passed'
     assert optimization['omittedFramesPixelIdentical'] and optimization['mainEncodingArgumentsUnchanged']
@@ -49,11 +87,12 @@ def main():
     assert setup['executionControl'] == {'serializePngAndFilters': True}
     for ref in [*resources['implementationBindings'], *resources['artifacts']]:
         assert digest(ROOT / ref['path']) == ref['fileSha256'], ref['path']
-    job = check(execution['rendererJobBinding'])
+    job = check(execution['sourceRendererJobBinding'])
+    assert job['rendererImplementationBindings'] == main['sourceImplementationBindings']
     admission = check(completion['admission'])
     layout = check(completion['lineLayout'])
     assert admission['status'] == 'accepted'
-    assert admission['rendererJobBinding'] == execution['rendererJobBinding']
+    assert admission['rendererJobBinding'] == execution['sourceRendererJobBinding']
     assert layout['instructionArtifactBinding'] == job['instructionArtifactBinding']
     instruction = check(job['instructionArtifactBinding'])
     linkage = read(WORK / 'core-caption-linkage-verification-v001.json')
@@ -70,6 +109,13 @@ def main():
     for key in ['instructionArtifactBinding', 'lineEndProjectionBinding', 'executionInputs',
                 'cropAppliedBaseMedia', 'runtimeBindings', 'approvedContractBindings']:
         assert job[key] == before[key], key
+    runtime_verification = []
+    for role, ref in job['runtimeBindings'].items():
+        resolved = Path(ref['path']).resolve(strict=True)
+        assert digest(resolved) == ref['fileSha256'], ref['path']
+        assert Path(ref['path']).resolve(strict=True) == resolved
+        runtime_verification.append({'role': role, 'path': ref['path'],
+                                     'resolvedPath': str(resolved), 'fileSha256': ref['fileSha256']})
     implementation_changes = []
     permitted = {row['path']: row for row in resources['implementationBindings']}
     previous = {row['path']: row for row in resources['priorImplementationBindings']}
@@ -112,7 +158,7 @@ def main():
     pre_render_layout = read(WORK / 'pre-render-layout-font94-verification-v001.json')
     assert pre_render_layout['status'] == 'passed' and pre_render_layout['inspectedCaptions'] == len(ids)
     assert pre_render_layout['violationCount'] == 0 and pre_render_layout['maximumWrapperWidthPx'] <= 1760
-    qc = execution['result']['qc']
+    qc = execution['qc']
     assert qc['status'] == 'passed' and not qc['violations']
     assert qc['instructionCount'] == len(ids)
     assert [row['instructionId'] for row in qc['instructionEvidence']] == ids
@@ -126,11 +172,24 @@ def main():
             assert bounds['bottom'] <= adjusted['canvas']['height'] - safe['bottom']
     video = ROOT / completion['video']['path']
     assert digest(video) == completion['video']['fileSha256']
+    assert completion['video']['fileSha256'] == main['video']['fileSha256']
+    assert digest(ROOT / main['video']['path']) == main['video']['fileSha256']
+    assert qc['mediaEvidence']['observed'] == main['media']
+    assert len(provenance['measuredCaptions']) == 343
+    for ref, instruction_id in zip(provenance['measuredCaptions'], ids):
+        measured = check(ref)
+        assert measured['instructionId'] == instruction_id and measured['changedPixels'] > 0
+        request = check(measured['request'])
+        assert request['instructionId'] == instruction_id
+        assert measured['outcome']['status'] == 'completed'
+        assert measured['outcome']['outputFileSha256'] == measured['omittedFrame']['fileSha256']
+        for frame in [measured['fullFrame'], measured['omittedFrame']]:
+            assert digest(ROOT / frame['path']) == frame['fileSha256']
     output_qc = video.parent / 'presentation-render-qc-v002.json'
     assert read(output_qc) == qc
     retained = check(setup['retainedPngVerificationBinding'])
     assert retained['status'] == 'passed' and retained['actualPngCount'] == 343
-    reused = check(execution['overlayRestartProvenanceBinding'])
+    reused = check(source_execution['overlayRestartProvenanceBinding'])
     assert reused['mode'] == 'one-time-restart-with-verified-retained-artifacts'
     assert reused['newlyRenderedPngs'] == 0
     assert reused['verifiedDrawInputCount'] == 343 and reused['drawInputsExactlyVerified']
@@ -165,7 +224,14 @@ def main():
               'approvedQcImplementationChange': implementation_changes,
               'qcOptimization': setup['qcEquivalenceBinding'],
               'executionResources': setup['resourceEquivalenceBinding'],
-              'overlayRestartProvenance': execution['overlayRestartProvenanceBinding'],
+              'overlayRestartProvenance': source_execution['overlayRestartProvenanceBinding'],
+              'mainVideoProducer': completion['sourceMainCompletion'],
+              'plannedQcSwitch': [binding(switch_before_path), binding(switch_after_path)],
+              'qcOnlyExecution': completion['execution'],
+              'losslessQcEquivalence': execution['equivalenceProofBinding'],
+              'twoStageProvenance': execution['provenanceBinding'],
+              'actualCacheVerification': provenance['cacheProof'],
+              'runtimeFilesVerifiedAtCompletion': runtime_verification,
               'fontSizeSelection': setup['fontSizeSelectionBinding'],
               'actualPngSafeAreaPassed': len(qc['instructionEvidence']),
               'checks': ['original-caption-artifacts-same-bytes', 'all-cues-and-lines-exact',

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "unseen-material-renderer-execution-v002",
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v008/renderer-job.json",
+    "fileSha256": "de163cef57fbf6901815af5a4c824b104341805b06a0fcfd0bdef54941629699",
+    "canonicalSha256": "19e14ae6095872ef8b3750a82dcbffe3f22d284e24b72d29b3a959520a1bb741"
+  },
+  "setupFixBinding": {
+    "schemaVersion": "unseen-material-execution-resources-preflight-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v008/setup-fix.json",
+    "fileSha256": "2805f93a1108af0c5ab62248b243a740c6bc94b84dd1c9285f884a05e3e679c4",
+    "canonicalSha256": "a199990af82f49289f656b898a2afdea622fd96b9d6da90f064b165db53ca233"
+  },
+  "overlayRestartProvenanceBinding": {
+    "schemaVersion": "unseen-material-overlay-restart-provenance-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v008/overlay-restart-provenance.json",
+    "fileSha256": "8da74e3bdbef49f1a12db3fc79e7c6ce50b5144d34b59992ad85c27c730861f4",
+    "canonicalSha256": "08090d52d923907d6ed573f881103b66abd0b4ecd1417f92978a25d30fd16fe2"
+  },
+  "exitCode": 2,
+  "result": {
+    "exitCode": 2,
+    "failure": {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "process_failed",
+      "stage": "execution",
+      "message": "presentation renderer child process failed",
+      "cleanupWarnings": [
+        {
+          "code": "RENDER_OUTPUT_LOCK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002.lock",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        },
+        {
+          "code": "RENDER_OUTPUT_WORK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        }
+      ]
+    }
+  }
+}
