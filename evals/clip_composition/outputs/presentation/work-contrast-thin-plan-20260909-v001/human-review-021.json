@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "thin-plan-021-human-quality-closure-v0",
+  "receivedInstruction": "ZEV進行管理２ 指示-022",
+  "approvalQuote": "kawafmm承認済み。",
+  "recordedAt": "2026-09-08T23:53:52.889617+00:00",
+  "verbatimResponse": "A/B版 の方がテーマにはあってたし見やすかった。\nもし、ぺこらと一緒にホラーゲームをプレイする擬似体験というテーマならA/B/C版になるだろう",
+  "reviewedExperimentCommit": "a72a893e7e18e7238ae29fbee0ef9f752a3636de",
+  "reviewedPlan": {
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/thin-plan-v0.json",
+    "fileSha256": "1f084b48a6cf16fb50a48955e72efc02ab6809b1af2f1c330da833cb60e976f6"
+  },
+  "reviewedFormalPlan": {
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/fixed-plan.json",
+    "fileSha256": "39542e19d84f4df180f0257f4d42dcb8667285f425fcb14ab6393b03f658d71a"
+  },
+  "reviewedDecision": {
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/selection-response.json",
+    "fileSha256": "56db6903dbcd2d43d7c050f3bcc7b9debd2c1d453339e57948795f4d034a7bc9"
+  },
+  "technicalVerification": {
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/output-reuse-verification-v002.json",
+    "fileSha256": "f18659cdd606a4bfc2052bc713a497da335bdbd6149ca53c502b1c3a299526d7"
+  },
+  "reviewedVideos": {
+    "AB": {
+      "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/render/presentation-rendered-v002.mp4",
+      "fileSha256": "1c91f282bd008777764a6d8f720577eef2845d3a2b521f415dead5e672b0265f"
+    },
+    "ABC": {
+      "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/presentation-rendered-v002.mp4",
+      "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+    }
+  },
+  "humanAssessment021": {
+    "productionIntentFit": "A/B版が良い",
+    "watchability": "A/B版が良い",
+    "humanQualityForThisProductionIntent": "passed",
+    "closure": "指示-021は今回の制作意図に対する技術・人間品質の第一完成として閉じる。"
+  },
+  "technicalFacts021": {
+    "newIntentDeliveredToUnchangedSkill": true,
+    "decisionsChangedFrom019": false,
+    "videoCompositionChangedFrom019": false,
+    "inputCausedQualityImprovementEstablished": false,
+    "purposeConditionedInternalRetentionDemonstrated": false
+  },
+  "counterfactualHumanExpectation": "疑似体験をテーマにするならA/B/C版になるだろう、という実行前に既知の較正上の期待。新しい判断の入力にも固定正解にも使用しない。",
+  "newContrastExperimentQuality": "not-evaluated",
+  "humanAnswerUsage022": "新規意味判断実行後の較正比較だけに使用する。独立blind testとは呼ばない。"
+}

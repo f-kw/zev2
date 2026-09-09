@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "contrast-plan-input-isolation-v0",
+  "status": "passed",
+  "planBinding": {
+    "schemaVersion": "thin-plan-candidate-selection-evaluation-v0",
+    "path": "evals/clip_composition/outputs/presentation/work-contrast-thin-plan-20260909-v001/fixed-plan.json",
+    "fileSha256": "8c004874d26bd6ceb2dd4cd2fbcdab1beaf3ec01f597b036bf594c707d78ab8d",
+    "canonicalSha256": "a826d26d51dcf97a4546025d51b201752fa880155333b754bfb978047480128c"
+  },
+  "previousPlanBinding": {
+    "schemaVersion": "thin-plan-candidate-selection-evaluation-v0",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-thin-plan-20260909-v001/fixed-plan.json",
+    "fileSha256": "39542e19d84f4df180f0257f4d42dcb8667285f425fcb14ab6393b03f658d71a",
+    "canonicalSha256": "987488e3018adc98651e6b5b01816d198928ce03db6ecc469a7becd20beae311"
+  },
+  "thinPlanBinding": {
+    "schemaVersion": "production-intent-plan-v0",
+    "path": "evals/clip_composition/outputs/presentation/work-contrast-thin-plan-20260909-v001/thin-plan-v0.json",
+    "fileSha256": "9ee85d00f078726ccf5d1e64baa2f373e9d370b99ede9e218f962cd2c7ddc2bf",
+    "canonicalSha256": "fa8092b1e10baf5fbd0ca23160b9c2b9579cc483a45e4a92a6effe47d65ce566"
+  },
+  "changedInputFields": [
+    "productionRequest"
+  ],
+  "previousIntent": "ぺこらが本気で怖がって絶叫しているところと、怖がっている姿が可愛く見えるところを中心に見せる。",
+  "currentIntent": "ぺこらと一緒にホラーゲームをプレイしているような疑似体験を見せる。",
+  "structureConditionsUnchanged": true,
+  "candidateSetAndTextUnchanged": true,
+  "skillCriteriaValidatorPromotionUnchanged": true,
+  "humanAnswerFileReadForInput": false,
+  "historicalOutputUsageInInput": false,
+  "experimentClass": "known-human-calibration-not-independent-blind",
+  "humanQuality": "not-evaluated"
+}

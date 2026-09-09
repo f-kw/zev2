@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "contrast-plan-existing-retention-adequacy-v0",
+  "status": "sufficient-for-current-expected-value",
+  "selectionResponseBinding": {
+    "schemaVersion": "candidate-selection-response-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-contrast-thin-plan-20260909-v001/selection-response.json",
+    "fileSha256": "a1f0f0980c4e4827a1d30fa9181ce7ef41f444172e9ca3ca12799e7e3fabf188",
+    "canonicalSha256": "87b2bc6ae52bceb5daa3b3e2222afda3ff479e4e0b0d53c16315e015e4ecdc4e"
+  },
+  "existingRetentionBinding": {
+    "schemaVersion": "candidate-internal-edit-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/machine-adoption.json",
+    "fileSha256": "32264e9b6ef7a0bc9332b9dab8622113da6797f7617f4d93b05ec7e780bcfec6",
+    "canonicalSha256": "db09071816166cbca05f5d4b9e0e2d4a0ed28dc1776949e1d83ea8075c79789f"
+  },
+  "candidates": [
+    {
+      "candidateId": "candidate-0001",
+      "expectedValue": "存在を予測し、気づいて抗議するまでを一緒に辿る。",
+      "retainedValue": "存在確認、発見、呼びかけ、覗き方への抗議と嫌悪の結びを保持。",
+      "omittedValue": "上へ行くよう促す発言は残らない。",
+      "adequacyReason": "今回選択が期待した、予感から確認・抵抗への変化は保持部分だけで揃う。移動指示を復元する必要は認めない。"
+    },
+    {
+      "candidateId": "candidate-0002",
+      "expectedValue": "逃走に気づいて状況を考え、予期しない加速と捕縛の結果を一緒に受ける。",
+      "retainedValue": "逃げる必要の認識、走ってもこの速さだという確認、急加速への反応、捕縛後の戸惑いと結果を保持。",
+      "omittedValue": "選択理由が例示した「だからこっちに」という具体的な方向の自己確認と、急加速への最初の反復は残らない。",
+      "adequacyReason": "具体的な進路選択の細部は減るが、「逃げるやつ？」「逃げるんだ」と速度確認が残り、状況判断から予想外の結果へ移る中心価値は実現できる。進路を説明すること自体を今回の必須条件にはしていない。選択時の全根拠発話を無欠損で保持したとは主張しない。"
+    },
+    {
+      "candidateId": "candidate-0003",
+      "expectedValue": "怖かったと共有し、予期・油断・覗き方の怖さを本人と振り返る締め。",
+      "retainedValue": "「まぁでも怖かったね」、アングル、来そうな場所の予期と時間差・油断、覗くだけで怖かったという結びを三つの保持部分で残す。",
+      "omittedValue": "冒頭の本人確認、連打、過去作・トイレへの脱線、赤ちゃんへの安堵は残らない。",
+      "adequacyReason": "今回採用の中心理由である共有への呼びかけ、怖さの解釈、覗き方の体験を振り返る結びは揃う。安堵を含む全回想や候補全文の採用ではない。今回新たに短い締めへ作り替える要求も必要も認めない。"
+    }
+  ],
+  "newPurposeConditionedRetentionJudgment": false,
+  "newCuts": false,
+  "assessmentKind": "post-selection-textual-adequacy-check-of-existing-retention-not-new-retention-skill-execution",
+  "humanQuality": "not-evaluated",
+  "limitation": "この確認は既存保持内容の用途上の充足確認であり、用途条件を入力した新規内部保持の実証ではない。候補単位の全件採用と候補全文の保持は異なる。"
+}

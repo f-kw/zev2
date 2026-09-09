@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "contrast-plan-review-ui-verification-v0",
+  "status": "passed",
+  "origin": "http://127.0.0.1:54363/",
+  "browser": "Microsoft Edge",
+  "serverUnchanged": true,
+  "playbackJavascriptUnchanged": true,
+  "explanationBeforePlayers": true,
+  "metadata": [
+    {
+      "variant": "AB",
+      "duration": 99.9,
+      "readyState": 4,
+      "error": null
+    },
+    {
+      "variant": "ABC",
+      "duration": 161.033008,
+      "readyState": 4,
+      "error": null
+    }
+  ],
+  "checks": [
+    "loaded both existing media",
+    "selected C final segment and observed completion pause",
+    "selected and played AB",
+    "started ABC then AB and observed ABC pause",
+    "explicit pause",
+    "no answer automatically recorded"
+  ],
+  "humanQuality": "not-evaluated"
+}

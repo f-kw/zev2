@@ -1,0 +1,78 @@
+import assert from 'node:assert/strict';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {access} from 'node:fs/promises';
+import {ROOT, bind, readJson, readBound, publish, same, fileSha, type Json, type Binding}
+  from './run_candidate_discovery_digest_skill_e2e_v001.mts';
+import {WORK, verifyContrastSelectionV0} from './run_contrast_thin_plan_v0.mts';
+import {WORK as PREVIOUS_WORK} from './run_thin_plan_candidate_selection_v0.mts';
+import {validateSelectionV001} from './candidate_selection_validation_v001.mts';
+import {promoteSelectionForExecutionV001} from './run_candidate_selection_e2e_v001.mts';
+import {projectAdoptedMediaRangesV001} from './adopted_media_manufacturing_v001.mts';
+import {verifyThinPlanOutputReuseV0} from './verify_thin_plan_output_reuse_v0.mts';
+
+async function retainExact(p: string, value: Json) {
+  try {await access(path.join(ROOT, p));}
+  catch (e) {if ((e as NodeJS.ErrnoException).code === 'ENOENT') return publish(p, value); throw e;}
+  assert(same(await readJson(p), value), 'SAVED_CONTRAST_EVIDENCE_CHANGED');
+  return bind(p, value);
+}
+
+export async function verifyContrastOutputV0() {
+  const {c, request, response, result} = await verifyContrastSelectionV0();
+  // 現在の正式採否から先に区間を再構築する。旧動画から今回の採否やカットを作らない。
+  const rebuilt = promoteSelectionForExecutionV001(c, validateSelectionV001(c, request, response, result));
+  const adoptionBinding = await retainExact(`${WORK}/machine-adoption.json`, rebuilt.adoption);
+  const editPlanBinding = await retainExact(`${WORK}/edit-plan.json`, rebuilt.editPlan);
+  const adequacy = await readJson(`${WORK}/retention-adequacy.json`);
+  assert(same(adequacy.selectionResponseBinding, bind(`${WORK}/selection-response.json`, response)));
+  assert(same(adequacy.existingRetentionBinding, c.plan.reuseInternalRetention));
+  assert.equal(adequacy.status, 'sufficient-for-current-expected-value');
+  assert.equal(adequacy.newPurposeConditionedRetentionJudgment, false);
+  assert(same(adequacy.candidates.map((r: Json) => r.candidateId), rebuilt.adoption.adoptedCandidates.map((r: Json) => r.candidateId)));
+  const previousProof = await verifyThinPlanOutputReuseV0(`${PREVIOUS_WORK}/fixed-plan.json`);
+  const previousReuse = await readBound(previousProof.formalReuseInputBinding);
+  const selected = previousReuse.comparisonOutput;
+  const generation = await readBound(selected.base.generationManifest);
+  const timeline = await readBound(selected.base.timeline);
+  const sourceRoot = path.posix.dirname(c.plan.sourceContextBinding.path);
+  const previousPlan = await readJson(`${sourceRoot}/fixed-plan.json`);
+  const originalRoot = path.posix.dirname(previousPlan.sourceContextBinding.path);
+  const inspection = await readJson(`${originalRoot}/source-media-inspection.json`);
+  assert(same(inspection.sourceVideoBinding, rebuilt.editPlan.sourceVideoBinding));
+  const currentProjection = projectAdoptedMediaRangesV001(rebuilt.editPlan, inspection.media);
+  assert(same(currentProjection.mappings, generation.segments), 'CURRENT_COMPOSITION_NEEDS_DIFFERENT_MEDIA');
+  assert(same(currentProjection.mappings.map(({audioSamples, ...s}: Json) => s), timeline.segments));
+  assert.equal(await fileSha(path.join(ROOT, selected.video.path)), selected.video.fileSha256);
+  const captionArtifacts: Json = {};
+  for (const [key, binding] of Object.entries(selected.artifacts)) captionArtifacts[key] = await readBound(binding as Binding);
+  assert.equal(selected.technicalQc, 'passed');
+  const reuse = {schemaVersion: 'contrast-plan-formal-output-reuse-input-v0',
+    planBinding: c.planBinding, authorizationBinding: c.plan.authorization,
+    machineAdoptionBinding: adoptionBinding, editPlanBinding,
+    retentionAdequacyBinding: bind(`${WORK}/retention-adequacy.json`, adequacy),
+    previousMediaReverificationBinding: bind(`${PREVIOUS_WORK}/output-reuse-verification-v002.json`, previousProof),
+    currentMediaMappings: currentProjection.mappings, selectedOutput: selected,
+    comparisonOutput: previousReuse.selectedOutput, unchangedCaptionArtifacts: selected.artifacts,
+    mode: 'existing-bytes-reused-after-new-selection-and-formal-range-reconstruction',
+    newRendererExecution: false, inheritedHumanQuality: false};
+  const reuseBinding = await retainExact(`${WORK}/formal-output-reuse-input.json`, reuse);
+  const proof = {schemaVersion: 'contrast-plan-output-reuse-verification-v0', status: 'passed',
+    planBinding: c.planBinding, formalReuseInputBinding: reuseBinding,
+    implementationBinding: {path: 'evals/clip_composition/verify_contrast_thin_plan_v0.mts',
+      fileSha256: await fileSha(path.join(ROOT, 'evals/clip_composition/verify_contrast_thin_plan_v0.mts'))},
+    selectedOutput: selected.video, comparisonOutput: previousReuse.selectedOutput.video,
+    adopted: rebuilt.adoption.adoptedCandidates.map((r: Json) => r.candidateId),
+    retainedSegments: rebuilt.editPlan.segments.length,
+    selectedFrames: timeline.baseMedia.expectedFrameCount,
+    comparisonFrames: previousProof.selectedFrames,
+    checks: {newSelectionValidatedAndPromoted: true, existingRetentionReconstructed: true,
+      currentRangesMatchExistingFramesAndAudio: true, previousCommonCoreAndCaptionRepairReverified: true,
+      rendererAdmissionAndQcBound: true, videoBytesAndObservedMediaReverified: true},
+    newRenderCount: 0, newInternalRetentionJudgment: false, humanQuality: 'not-evaluated'};
+  await retainExact(`${WORK}/output-reuse-verification-v002.json`, proof);
+  return proof;
+}
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  process.stdout.write(JSON.stringify(await verifyContrastOutputV0()) + '\n');
+}

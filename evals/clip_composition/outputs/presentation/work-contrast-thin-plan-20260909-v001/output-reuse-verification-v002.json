@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "contrast-plan-output-reuse-verification-v0",
+  "status": "passed",
+  "planBinding": {
+    "schemaVersion": "thin-plan-candidate-selection-evaluation-v0",
+    "path": "evals/clip_composition/outputs/presentation/work-contrast-thin-plan-20260909-v001/fixed-plan.json",
+    "fileSha256": "8c004874d26bd6ceb2dd4cd2fbcdab1beaf3ec01f597b036bf594c707d78ab8d",
+    "canonicalSha256": "a826d26d51dcf97a4546025d51b201752fa880155333b754bfb978047480128c"
+  },
+  "formalReuseInputBinding": {
+    "schemaVersion": "contrast-plan-formal-output-reuse-input-v0",
+    "path": "evals/clip_composition/outputs/presentation/work-contrast-thin-plan-20260909-v001/formal-output-reuse-input.json",
+    "fileSha256": "e0eb68bf9a5a32b98507ad8f30ad588377e7f94e571c5ad9fde7915f70316a71",
+    "canonicalSha256": "8ccc7f11377a2035ed79d245cedf1dde8c62d94df20faab150880e2a4b2cd273"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/verify_contrast_thin_plan_v0.mts",
+    "fileSha256": "d5a4fd5cb90cc64c77b6c53eb38990e007db1cf81692deae5bc065d4d90f8179"
+  },
+  "selectedOutput": {
+    "path": "evals/clip_composition/outputs/presentation/work-caption-local-repair-common-20260908-v001/ui-equivalence-v001/caption-repair-42ddb323-08da-44ef-bd2c-7780a95c13cc/render/presentation-rendered-v002.mp4",
+    "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+  },
+  "comparisonOutput": {
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/caption-repair-v001/render/presentation-rendered-v002.mp4",
+    "fileSha256": "1c91f282bd008777764a6d8f720577eef2845d3a2b521f415dead5e672b0265f"
+  },
+  "adopted": [
+    "candidate-0001",
+    "candidate-0002",
+    "candidate-0003"
+  ],
+  "retainedSegments": 7,
+  "selectedFrames": 4831,
+  "comparisonFrames": 2997,
+  "checks": {
+    "newSelectionValidatedAndPromoted": true,
+    "existingRetentionReconstructed": true,
+    "currentRangesMatchExistingFramesAndAudio": true,
+    "previousCommonCoreAndCaptionRepairReverified": true,
+    "rendererAdmissionAndQcBound": true,
+    "videoBytesAndObservedMediaReverified": true
+  },
+  "newRenderCount": 0,
+  "newInternalRetentionJudgment": false,
+  "humanQuality": "not-evaluated"
+}

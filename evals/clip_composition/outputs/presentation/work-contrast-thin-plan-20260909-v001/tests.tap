@@ -1,0 +1,210 @@
+TAP version 13
+# Subtest: actual input is reconstructed from every existing discovery candidate, without historical labels
+ok 1 - actual input is reconstructed from every existing discovery candidate, without historical labels
+  ---
+  duration_ms: 8.2685
+  ...
+# Subtest: actual new judgment, validator, machine adoption and edit plan reconstruct from their original inputs
+ok 2 - actual new judgment, validator, machine adoption and edit plan reconstruct from their original inputs
+  ---
+  duration_ms: 51.594208
+  ...
+# Subtest: only selected candidate materializations enter Core; retained content and cut evidence are unchanged
+ok 3 - only selected candidate materializations enter Core; retained content and cut evidence are unchanged
+  ---
+  duration_ms: 49.178459
+  ...
+# Subtest: retention result or formal cut evidence cannot be replaced by an unchecked segment list
+ok 4 - retention result or formal cut evidence cannot be replaced by an unchecked segment list
+  ---
+  duration_ms: 28.8385
+  ...
+# Subtest: the fixed plan rejects a chosen-ID list, an adoption quota and different order policy
+ok 5 - the fixed plan rejects a chosen-ID list, an adoption quota and different order policy
+  ---
+  duration_ms: 0.255834
+  ...
+# Subtest: formal candidate ID reassignment without discovery identity correspondence is rejected
+ok 6 - formal candidate ID reassignment without discovery identity correspondence is rejected
+  ---
+  duration_ms: 3.559875
+  ...
+# Subtest: all decisions are preserved and adoption carries SHA-bound evidence; promotion needs its actual token
+ok 7 - all decisions are preserved and adoption carries SHA-bound evidence; promotion needs its actual token
+  ---
+  duration_ms: 3.236792
+  ...
+# Subtest: zero, one and all candidates can be selected; no quota or forced rejection
+ok 8 - zero, one and all candidates can be selected; no quota or forced rejection
+  ---
+  duration_ms: 3.283292
+  ...
+# Subtest: closed input rejects human adoption, final-use flags, timing and scores
+ok 9 - closed input rejects human adoption, final-use flags, timing and scores
+  ---
+  duration_ms: 1.273416
+  ...
+# Subtest: skill runs its supplied judgment anew and does not mutate input or promote the result
+ok 10 - skill runs its supplied judgment anew and does not mutate input or promote the result
+  ---
+  duration_ms: 0.514458
+  ...
+# Subtest: unknown candidate rejected
+ok 11 - unknown candidate rejected
+  ---
+  duration_ms: 0.718875
+  ...
+# Subtest: missing candidate rejected
+ok 12 - missing candidate rejected
+  ---
+  duration_ms: 0.657667
+  ...
+# Subtest: duplicate candidate rejected
+ok 13 - duplicate candidate rejected
+  ---
+  duration_ms: 0.744541
+  ...
+# Subtest: candidate order change rejected
+ok 14 - candidate order change rejected
+  ---
+  duration_ms: 0.671083
+  ...
+# Subtest: wrong source rejected
+ok 15 - wrong source rejected
+  ---
+  duration_ms: 1.347125
+  ...
+# Subtest: evidence from another candidate rejected
+ok 16 - evidence from another candidate rejected
+  ---
+  duration_ms: 0.709583
+  ...
+# Subtest: reversed own evidence rejected
+ok 17 - reversed own evidence rejected
+  ---
+  duration_ms: 0.789333
+  ...
+# Subtest: duplicate own evidence rejected
+ok 18 - duplicate own evidence rejected
+  ---
+  duration_ms: 0.417958
+  ...
+# Subtest: unknown comparison rejected
+ok 19 - unknown comparison rejected
+  ---
+  duration_ms: 0.69075
+  ...
+# Subtest: comparison with self rejected
+ok 20 - comparison with self rejected
+  ---
+  duration_ms: 0.641625
+  ...
+# Subtest: comparison evidence must belong to its named candidate
+ok 21 - comparison evidence must belong to its named candidate
+  ---
+  duration_ms: 0.610167
+  ...
+# Subtest: comparison is required and must be unique
+ok 22 - comparison is required and must be unique
+  ---
+  duration_ms: 1.164
+  ...
+# Subtest: duplicate rejection requires a retained comparison; cannot remove every copy as redundant
+ok 23 - duplicate rejection requires a retained comparison; cannot remove every copy as redundant
+  ---
+  duration_ms: 0.596125
+  ...
+# Subtest: candidate bounds, order and source transcript membership are deterministic
+ok 24 - candidate bounds, order and source transcript membership are deterministic
+  ---
+  duration_ms: 0.956417
+  ...
+# Subtest: overlapping candidates may be compared but cannot both pass the disjoint executor
+ok 25 - overlapping candidates may be compared but cannot both pass the disjoint executor
+  ---
+  duration_ms: 2.03625
+  ...
+# Subtest: SHA changes to request, answer, candidate set or plan reject the result
+ok 26 - SHA changes to request, answer, candidate set or plan reject the result
+  ---
+  duration_ms: 1.976542
+  ...
+# Subtest: renamed IDs and unrelated fixture text do not change validation or promotion rules
+ok 27 - renamed IDs and unrelated fixture text do not change validation or promotion rules
+  ---
+  duration_ms: 0.922375
+  ...
+# Subtest: abstention has no adoption authority; free times and executable fields are invalid output
+ok 28 - abstention has no adoption authority; free times and executable fields are invalid output
+  ---
+  duration_ms: 0.910959
+  ...
+# Subtest: transport rejects duplicate JSON keys
+ok 29 - transport rejects duplicate JSON keys
+  ---
+  duration_ms: 0.368458
+  ...
+# Subtest: only production intent differs in the actual formal Skill input
+ok 30 - only production intent differs in the actual formal Skill input
+  ---
+  duration_ms: 2.8375
+  ...
+# Subtest: human judgments and previous outputs added to context do not enter the Skill
+ok 31 - human judgments and previous outputs added to context do not enter the Skill
+  ---
+  duration_ms: 10.691542
+  ...
+# Subtest: 021 response cannot authorize 022 adoption
+ok 32 - 021 response cannot authorize 022 adoption
+  ---
+  duration_ms: 24.92375
+  ...
+# Subtest: judgment wording cannot be rewritten after the bound response
+ok 33 - judgment wording cannot be rewritten after the bound response
+  ---
+  duration_ms: 11.536625
+  ...
+# Subtest: unvalidated retention edits cannot be promoted
+ok 34 - unvalidated retention edits cannot be promoted
+  ---
+  duration_ms: 54.251709
+  ...
+# Subtest: current adopted candidates alone deterministically reconstruct formal edit input
+ok 35 - current adopted candidates alone deterministically reconstruct formal edit input
+  ---
+  duration_ms: 46.906084
+  ...
+# Subtest: changing intention invalidates its existing binding
+ok 36 - changing intention invalidates its existing binding
+  ---
+  duration_ms: 2.52475
+  ...
+# Subtest: thin plan rejects adopted IDs, duration targets, roles and human answers
+ok 37 - thin plan rejects adopted IDs, duration targets, roles and human answers
+  ---
+  duration_ms: 3.182208
+  ...
+# Subtest: intent projection retains candidate references and rules without mutating the source
+ok 38 - intent projection retains candidate references and rules without mutating the source
+  ---
+  duration_ms: 0.853709
+  ...
+# Subtest: a changed purpose cannot keep a previous thin-plan binding
+ok 39 - a changed purpose cannot keep a previous thin-plan binding
+  ---
+  duration_ms: 0.234
+  ...
+# Subtest: a substituted source context cannot inherit the recorded source binding
+ok 40 - a substituted source context cannot inherit the recorded source binding
+  ---
+  duration_ms: 0.267417
+  ...
+1..40
+# tests 40
+# suites 0
+# pass 40
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2379.347875
