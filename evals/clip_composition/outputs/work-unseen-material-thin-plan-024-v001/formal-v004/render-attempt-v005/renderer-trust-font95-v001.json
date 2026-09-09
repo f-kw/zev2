@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "presentation-renderer-trust-v002",
+  "trustVersion": "presentation-renderer-trust-v002",
+  "rendererContractVersion": "zev-renderer-boundary-v002",
+  "presetRegistry": {
+    "registryVersion": "normal-landscape-preset-registry-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v005/display-setting-font95-v001.json",
+    "fileSha256": "9ddc0be83f15713e5e26a57c2dd2d44c6c06e080bc71721470dfdd4783b56174",
+    "canonicalSha256": "a95261c4fb235c88283a888d0a612ab050f1322054ccd32914723da4bfa7c18f"
+  },
+  "registryBinding": {
+    "schemaVersion": "presentation-registry-trust-v001",
+    "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+    "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff",
+    "canonicalSha256": "bfbbcb5c611313d368305e6e8d552ddcdaf41949ed8d8f074485c8ed0aa2d43e"
+  },
+  "approvedPreview": {
+    "previewId": "normal-landscape-readable-pop-preview-20260720-v002",
+    "path": "evals/clip_composition/outputs/presentation/initial-preset-registry-candidate-20260720-v002/preview-manifest.json",
+    "fileSha256": "75d4cb0cc95d7780b27b6007933845bb1daffccf28cb254f762bd4fa55825d7f",
+    "canonicalSha256": "df777e0801c907e20c80c39b3e2683a2eaf071f5f2a2b358440164b6211c2738",
+    "componentProvenance": [
+      {
+        "path": "runner/src/remotion/Root.tsx",
+        "fileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+      },
+      {
+        "path": "runner/src/remotion/renderer/TelopRenderer.tsx",
+        "fileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+      },
+      {
+        "path": "runner/src/remotion/components/TelopText.tsx",
+        "fileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+      },
+      {
+        "path": "runner/src/telop/telop-render-model.ts",
+        "fileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+      },
+      {
+        "path": "runner/src/telop/telop-line-break.ts",
+        "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+      },
+      {
+        "path": "runner/src/remotion/utils/telop-font.ts",
+        "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+      }
+    ]
+  },
+  "rendererDependencies": [
+    {
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0"
+    },
+    {
+      "path": "runner/src/remotion/components/TelopText.tsx",
+      "fileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+    },
+    {
+      "path": "runner/src/remotion/utils/telop-font.ts",
+      "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+    },
+    {
+      "path": "runner/src/telop/telop-render-model.ts",
+      "fileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+    },
+    {
+      "path": "runner/src/telop/telop-line-break.ts",
+      "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+    },
+    {
+      "path": "runner/src/telop/text-metrics.ts",
+      "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+    },
+    {
+      "path": "runner/src/shared/telop-glow.ts",
+      "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+    }
+  ],
+  "fontAssets": [
+    {
+      "fontAssetId": "line-seed-jp-extra-bold-v001",
+      "path": "runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+      "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb"
+    },
+    {
+      "fontAssetId": "shippori-mincho-bold-v001",
+      "path": "runner/public/font/ShipporiMincho-Bold.ttf",
+      "fileSha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f"
+    }
+  ],
+  "layoutRules": {
+    "layoutRuleVersion": "normal-landscape-render-layout-v001",
+    "fontWeight": 800,
+    "minimumFontSizePx": 12,
+    "textSafePaddingRatio": 0.04,
+    "horizontalSafeMarginRatio": 0.04,
+    "verticalSafeMarginRatio": 0.02,
+    "fallbackTextAreaRatio": 0.98,
+    "lowerThirdAnchorPercent": 67,
+    "renderScale": 1,
+    "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2",
+    "borderStrokeWidthRule": "2 * max(0, borderWidthPx)",
+    "glowStrokeWidthRule": "2 * max(0, glowWidthPx) + 2 * max(0, borderWidthPx)",
+    "marginRule": "max(glowStrokeWidth, borderStrokeWidth) / 2",
+    "safePaddingRule": "max(2, ceil(fontSizePx * textSafePaddingRatio))",
+    "placementClampRule": "clamp full alpha bounds inside canvas safe margins",
+    "humanReapprovalRule": "Any numeric or formula change requires a new rendered preview and human approval before a new trust and renderer version may be activated."
+  },
+  "toolVersions": {
+    "nodeVersion": "v20.19.6",
+    "remotionVersion": "4.0.481",
+    "browserVersion": "149.0.7790.0",
+    "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+    "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+  }
+}

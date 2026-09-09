@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "unseen-material-render-output-path-fix-v001",
+  "status": "preflight-passed",
+  "decisionBinding": {
+    "schemaVersion": "unseen-material-advisor-decision-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/advisor-layout-decision-v002.json",
+    "fileSha256": "cde7c7e3621042cd6d34674c4210864d274469a99c9aca3e26a1fa3a1e322164",
+    "canonicalSha256": "fe68d1095f2d012f4191f9e056388609d19cca0a272a4a36882d08b2bf354874"
+  },
+  "priorRendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v003/renderer-job.json",
+    "fileSha256": "73d4fa319e462974fbcf1b2945437b40829c4de955176a9a98b7abbd1bd49894",
+    "canonicalSha256": "8daf46664c1c51b9d52707b7e1beaa13e49831d7125b53a64a24612c93db14a9"
+  },
+  "priorFailureBinding": {
+    "schemaVersion": "unseen-material-renderer-execution-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v003/renderer-result.json",
+    "fileSha256": "f1c946cea725272adae3146162a78140fe911f7db873f2150a084397f9549489",
+    "canonicalSha256": "e07c8222300d24cef404cc1a9912941b44ca857bb84e694b85b87215e8ea0708"
+  },
+  "coreCaptionVerificationBinding": {
+    "schemaVersion": "unseen-material-core-caption-linkage-verification-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/core-caption-linkage-verification-v001.json",
+    "fileSha256": "56347fa7640814c28006def56ac5dc4a1bd3b9c0a1d0e00e7a87a3b1ac6b69ae",
+    "canonicalSha256": "2a8860bdadd62eacf452c795d78a84969649e5525e10c82357817e9d0963f840"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/run_unseen_material_render_v004.mts",
+    "fileSha256": "6ca5b8e051b5bbb9141d9ae263d84c1b7fcbf13dd6365a0ed99ed567257a03a6"
+  },
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v005/renderer-job.json",
+    "fileSha256": "ea1eea39852ef53deb390f0a2d0a61aa57854c220ae25c0c353c9325a4764aa1",
+    "canonicalSha256": "005d7678066deed93690f082705cd887b7e70090c8f153aa7997ba6c8d92ff22"
+  },
+  "previousStyleBinding": {
+    "schemaVersion": "presentation-preset-registry-v001",
+    "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+    "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+    "canonicalSha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4"
+  },
+  "previousTrustBinding": {
+    "schemaVersion": "presentation-renderer-trust-v002",
+    "path": "evals/clip_composition/registries/presentation/presentation-renderer-trust-v002/trust.json",
+    "fileSha256": "6e21352ff105e3b77acc351625fed22ff97486fb21d0ce9ee5b1821750a9047a",
+    "canonicalSha256": "03279ad65b94107408652a053aad689824782b97a90eaa9220f9d01d053cd94c"
+  },
+  "displaySettingBinding": {
+    "schemaVersion": "presentation-preset-registry-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v005/display-setting-font95-v001.json",
+    "fileSha256": "9ddc0be83f15713e5e26a57c2dd2d44c6c06e080bc71721470dfdd4783b56174",
+    "canonicalSha256": "a95261c4fb235c88283a888d0a612ab050f1322054ccd32914723da4bfa7c18f"
+  },
+  "rendererTrustBinding": {
+    "schemaVersion": "presentation-renderer-trust-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v005/renderer-trust-font95-v001.json",
+    "fileSha256": "ae9cfc3fc5bdc4dfc2e310ba130f9d31073bf847282fd4173ac1df3892fb09e9",
+    "canonicalSha256": "f1293e10b75cf090ca7e8ef6fdfacd5d2548768582374f3e3d9c150f217d1ee6"
+  },
+  "derivation": {
+    "safeWidthPx": 1760,
+    "maximumFullWidthCharacters": 18,
+    "strokeWidthPx": 40,
+    "paddingEachPx": 4,
+    "fontSizeBeforePx": 96,
+    "fontSizeAfterPx": 95,
+    "predictedMaximumWidthPx": 1758
+  },
+  "unchanged": [
+    "all-343-cue-and-line-answers",
+    "all-caption-core-artifacts",
+    "source-package",
+    "logical-width-36",
+    "source",
+    "transcript",
+    "discovery",
+    "selection",
+    "retention",
+    "base-media",
+    "shared-registry",
+    "renderer-code",
+    "trust-rules-assets-and-dependencies"
+  ],
+  "note": "Caption source and all projections remain the admitted original bytes. The existing separate renderer job binds the approved per-run display size; the trust copy changes only its preset reference. No legacy source-style resolver is invoked or represented as run. The inherited preview describes the original shared style only and does not constitute human approval of this95px rendering.",
+  "checks": {
+    "onlyApprovedFontSettingChanged": "passed",
+    "existingJobSchema": "passed",
+    "existingCaptionArtifactsUnchanged": "passed",
+    "completeTrustRulesUnchanged": "passed",
+    "freshAttemptPaths": "passed",
+    "actualBrowserLayout": "pending"
+  }
+}

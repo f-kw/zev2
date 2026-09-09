@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "unseen-material-advisor-decision-v001",
+  "questionType": "GPT_DECISION",
+  "decision": "continue",
+  "sessionName": "ZEV進行管理２",
+  "sessionUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6a9d1cb7-b3c0-83ee-ae3a-613c9dc53f08",
+  "modelSelectionObserved": "高",
+  "modelChanged": false,
+  "responseState": "レスポンス確認済み",
+  "auditedCheckpoint": "be390574ac9af11647dc3069f3defc62e33437d4",
+  "answerTranscription": "GPT_DECISION：\n訂正を受理します。先の幅35案は撤回し、適用しないでください。\n今回専用のversioned display settingで、論理幅36を維持したまま文字サイズのみ96px→95pxへ変更する案で続行可です。\nこれはcandidate/caption selectorの追加較正ではありません。正確にはwork-localな表示styleパラメータ変更ですが、既存schema・既存renderer経路内の物理的不整合修正として今回明示的に許可します。\n固定するもの：論理幅36、全343意味cue終端、既存行末回答、cue本文、本文片境界、字幕時刻、candidate採否、internal retention、base動画。\n変更してよいもの：今回専用表示設定の fontSize 96 → 95、その設定を参照するsource package / renderer jobの束縛。\n変更禁止：共通registryの既存設定、selector / Skill / prompt / criteria / validator、Core / renderer実装、cue分割・短縮、本文片分割、行末再判断、candidate discovery / selection。\n95pxは今回の現物最大18全角文字と既存safe area・縁・余白から導出したwork-local設定候補であり、一般的な安全値・共通preset修正とは扱わないこと。\n適用後は全343字幕を既存ブラウザ実寸検査へ再投入し、実測で安全領域を満たすことを確認してください。推定1758pxだけで合格にしないこと。\nその後、既存renderer/QCまで通してよいです。\nもし95pxでも実寸違反が残る、または既存schemaではwork-local設定を正式に束縛できず共通契約・registry・renderer変更が必要になる場合のみ、再度GPT_DECISION。\nこの判断で人間品質・第一完成・共通style変更は成立しません。",
+  "transcriptionNote": "回答内のCodex向け判断本文を転記。列挙改行は一行へまとめた。前後の説明段落は含まない。",
+  "priorProposal": "width35 withdrawn before any application",
+  "humanQuality": "not-evaluated"
+}
