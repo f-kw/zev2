@@ -123,7 +123,7 @@ ZEV本体UI: 未実行。専用の説明・視聴ページ: 生成と技術確�
 
 最終描画の初回は保存先が既存の許可された描画用フォルダ配下にないため、描画前に拒否された。保存先だけを既存規則へ合わせ、新しい実行先を作った。その後、既存のレイアウト検査のローカルIPCソケットが実行環境の制限で拒否されたため、入力と処理を変えず必要なプロセス権限で再実行した。失敗した記録・保存物・ログは残し、元の採否や字幕へ遡って変更を入れていない。
 
-実寸検査は343字幕中21件で横の安全領域を16px超過して拒否した。既存の一行論理幅36では、文字幅1,728pxに縁・光彩40pxと安全余白8pxが加わり1,776pxとなり、許容1,760pxに収まらなかった。幅35へ変更する初案は既存本文片の全境界照合により1字幕で二行分割不能と判明したため、未実施のまま撤回した。相談役はGPT_DECISIONで、今回専用の表示設定の文字サイズだけ96pxから95pxへ変更する限定修正を許可した。字幕の全cue終端・行末・本文・時刻、論理幅36、採否、保持、base動画を不変にし、全343字幕は描画前の幅計算に合格した。計算上の横幅最大は1,758px、同計算での安全領域の違反は0件。この処理を以前「ブラウザ実寸検査」と説明したが、実装はNode上で文字重みから幅を推定しており、実画像の測定ではなかったため訂正する。その後の字幕画像生成中に、描画後検査が全編比較動画を343本作り全件保持する実装を確認した。合計22,419,509フレーム（内容時間207.588時間分）の比較を要する。これは処理時間の実測ではない。既存の比較意味を保持した処理量削減についてGPT_DECISIONを依頼し、親プロセスを一時停止して248件までの字幕画像を保存した。その後、相談役の条件付き許可により、従来の比較画像との画素単位の一致を確認してから、全入力を同じエンコーダーへ送り、対象フレームが符号化済み動画から取り出せた後に正常終了する検査処理へ限定修正した。比較用MP4を全件蓄積しない。元動画の途中からエンコードを始める方法や比較閾値の緩和は行っていない。必要な位置までの前半のエンコード処理は残り、定数時間の検査とは主張しない。新しいjobで全343字幕の画像を生成したが、実PNGのalpha領域を測る後続検査では1件の右端が1,850pxとなり、安全境界1,840pxを10px超過して拒否された。342件は同検査を満たすが、主動画の合成・最終可視性検査には到達していない。相談役へ今回専用文字サイズの追加調整をGPT_DECISIONで確認する。共通registry・selectorの実装は変更していない。後段の可視性検査に対する限定修正は以下に記す。参照文書の形式を合わせる準備修正も旧版の証拠を残して描画前に訂正した。
+描画前の幅計算検査は343字幕中21件で横の安全領域を16px超過して拒否した。これはNode上で文字幅を推定した結果であり、実画像の測定ではない。既存の一行論理幅36では、文字幅1,728pxに縁・光彩40pxと安全余白8pxが加わり1,776pxとなり、許容1,760pxに収まらなかった。幅35へ変更する初案は既存本文片の全境界照合により1字幕で二行分割不能と判明したため、未実施のまま撤回した。相談役はGPT_DECISIONで、今回専用の表示設定の文字サイズだけ96pxから95pxへ変更する限定修正を許可した。字幕の全cue終端・行末・本文・時刻、論理幅36、採否、保持、base動画を不変にし、全343字幕は描画前の幅計算に合格した。計算上の横幅最大は1,758px、同計算での安全領域の違反は0件。この処理を以前「ブラウザ実寸検査」と説明したが、実装はNode上で文字重みから幅を推定しており、実画像の測定ではなかったため訂正する。その後の字幕画像生成中に、描画後検査が全編比較動画を343本作り全件保持する実装を確認した。合計22,419,509フレーム（内容時間207.588時間分）の比較を要する。これは処理時間の実測ではない。既存の比較意味を保持した処理量削減についてGPT_DECISIONを依頼し、親プロセスを一時停止して248件までの字幕画像を保存した。その後、相談役の条件付き許可により、従来の比較画像との画素単位の一致を確認してから、全入力を同じエンコーダーへ送り、対象フレームが符号化済み動画から取り出せた後に正常終了する検査処理へ限定修正した。比較用MP4を全件蓄積しない。元動画の途中からエンコードを始める方法や比較閾値の緩和は行っていない。必要な位置までの前半のエンコード処理は残り、定数時間の検査とは主張しない。新しいjobで全343字幕の画像を生成したが、実PNGのalpha領域を測る後続検査では1件の右端が1,850pxとなり、安全境界1,840pxを10px超過して拒否された。342件は同検査を満たすが、主動画の合成・最終可視性検査には到達していない。相談役は4回目のGPT_DECISIONで94pxから1px刻みの限定探索を許可した。問題の1字幕を94pxで新規描画すると、実領域は左90px〜右1,832pxで既存QCに合格し、同じ入力からの2画像も一致した。94pxを先に固定した新しい実行で、全343字幕の新規描画・再描画一致・実画像の表示範囲検査を通過した。本編の合成ではPNG入力・画像変換の自動並列が増大し、1秒サンプリングで9,226スレッド・72.9GBのphysical footprintを観測した。動画0 byteのまま資源不足が発生したため、証拠と全画像を保持して今回所有する合成プロセスを終了させた。主動画も最終可視性QCも未完了で、並列設定だけを限定する案について5回目のGPT_DECISIONを準備している。95pxの画像は別サイズの合格証拠へ流用していない。共通registry・selectorの実装は変更していない。後段の可視性検査に対する限定修正は以下に記す。参照文書の形式を合わせる準備修正も旧版の証拠を残して描画前に訂正した。
 
 今回の分類は次のとおり。人間との一致を確認するまで、Aを品質合格、B/C/Eを問題なしとはしない。
 
@@ -137,7 +137,7 @@ ZEV本体UI: 未実行。専用の説明・視聴ページ: 生成と技術確�
 
 ## 10. まだ未実装のこと
 
-Planner本体、自由agent、複数話者の分離、映像理解、用途条件付きの内部保持の新仕様は今回実装していない。既存Skill・criteria・validatorと字幕のCore入力は変更していない。描画部は相談役の許可に基づく可視性検査の計算量削減だけを変更し、主動画の合成・エンコード引数が従来実装と一致することを確認した。今回専用の文字サイズ96px→95pxは相談役が許可した表示設定の変更であり、「style完全不変」とは扱わない。共通設定の変更には拡大していない。
+Planner本体、自由agent、複数話者の分離、映像理解、用途条件付きの内部保持の新仕様は今回実装していない。既存Skill・criteria・validatorと字幕のCore入力は変更していない。描画部は相談役の許可に基づく可視性検査の計算量削減だけを変更し、主動画の合成・エンコード引数が従来実装と一致することを確認した。今回専用の文字サイズ96px→95px→94pxは相談役が許可した表示設定の変更であり、「style完全不変」とは扱わない。共通設定の変更には拡大していない。
 
 ## 11. 参考: 不足している可能性のある機能
 
@@ -158,7 +158,7 @@ Planner本体、自由agent、複数話者の分離、映像理解、用途条�
 型検査: 共通依存先に既存の診断132行があり、比較対象と完全一致。今回の新規ファイルからの診断は0。repository全体の型検査合格とは表現しない。
 未実行: 人間の品質判定、stable/tag/release/公開、追加Gemini、Planner。
 
-追加検証: 実符号化画像の同等性と入力拒否の2テスト、分離renderer経路18テストが合格。旧rendererの19テストは12合格・7不合格で、変更前コードを同じ環境に読み込んだ検査とも全件同じ結果だった。7件は今回変更していない旧信頼台帳の4参照の不一致による。秒境界・キーフレーム境界・末尾を含む10フレームの取り出しも画素単位で一致。型検査は新入口込みで既存132診断と完全一致（typecheck-comparison-v010.json）。
+追加検証: 実符号化画像の同等性と入力拒否の2テスト、分離renderer経路18テストが合格。旧rendererの19テストは12合格・7不合格で、変更前コードを同じ環境に読み込んだ検査とも全件同じ結果だった。7件は今回変更していない旧信頼台帳の4参照の不一致による。秒境界・キーフレーム境界・末尾を含む10フレームの取り出しも画素単位で一致。型検査は新入口込みで既存132診断と完全一致（typecheck-comparison-v011.json）。
 
 主な実行コマンド（字幕付き最終描画は進行中）：
 
@@ -172,7 +172,7 @@ node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/r
 node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_thin_plan_v001.mts select evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/judgments/selection-response-v003.json
 node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_thin_plan_v001.mts base evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/judgments/retention-assessment-v003.json > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/base-media-attempt-0003.log 2>&1
 node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/unseen_material_thin_plan_v001.test.mts evals/clip_composition/candidate_selection_v001.test.mts > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/tests-attempt-0005.tap 2>&1
-node node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/tsc.js --noEmit --strict --skipLibCheck --allowImportingTsExtensions --target es2022 --module nodenext --moduleResolution nodenext --types node --typeRoots node_modules/.pnpm/@types+node@25.9.1/node_modules/@types evals/clip_composition/run_unseen_material_thin_plan_v001.mts evals/clip_composition/unseen_material_thin_plan_v001.mts evals/clip_composition/unseen_material_thin_plan_v001.test.mts evals/clip_composition/run_unseen_material_render_v002.mts evals/clip_composition/run_unseen_material_render_v003.mts evals/clip_composition/run_unseen_material_render_v004.mts evals/clip_composition/run_unseen_material_render_v005.mts
+node node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/tsc.js --noEmit --strict --skipLibCheck --allowImportingTsExtensions --target es2022 --module nodenext --moduleResolution nodenext --types node --typeRoots node_modules/.pnpm/@types+node@25.9.1/node_modules/@types evals/clip_composition/run_unseen_material_thin_plan_v001.mts evals/clip_composition/unseen_material_thin_plan_v001.mts evals/clip_composition/unseen_material_thin_plan_v001.test.mts evals/clip_composition/run_unseen_material_render_v002.mts evals/clip_composition/run_unseen_material_render_v003.mts evals/clip_composition/run_unseen_material_render_v004.mts evals/clip_composition/run_unseen_material_render_v005.mts evals/clip_composition/run_unseen_material_render_v006.mts
 python3 evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/publish-caption-answers-v001.py
 node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_thin_plan_v001.mts captions evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/judgments/caption-responses-v001.json
 node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_render_v004.mts prepare
@@ -180,9 +180,12 @@ node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/r
 node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/presentation_renderer_counterfactual_frame_v001.test.mjs > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-tests-attempt-0002.tap 2>&1
 node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_render_v005.mts prepare
 node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_render_v005.mts render > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/render-attempt-0006.log 2>&1
+NODE_PATH=/Users/kawafmm/workspace/zev2/runner/node_modules node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/probe-caption213-font-size-v001.mjs > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/font-size-probe-attempt-0002.log 2>&1
+node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_render_v006.mts prepare
+node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_render_v006.mts render > evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/render-attempt-0007.log 2>&1
 ```
 
-ChatGPT監査先はユーザー指定の「ZEV進行管理２」。字幕幅についてGPT_DECISIONを2回行い、35案の未実施撤回と今回専用95px設定での続行許可を確認済み。モデル表示は「高」を維持した。監査用checkpoint 709c9933とbe390574をcommit/push済み。可視性検査の処理量について174b3071へ追加checkpointを固定し、3回目のGPT_DECISIONで、画素単位の同等性を条件とするQC限定修正の許可を受領した。第一完成のAUDIT_ONLYは未実施で、最終完成後にreport → commit → push → main一致 → Drive/MANIFEST → AUDIT_ONLYの順に行う。
+ChatGPT監査先はユーザー指定の「ZEV進行管理２」。字幕幅についてGPT_DECISIONを2回行い、35案の未実施撤回と今回専用95px設定での続行許可を確認済み。モデル表示は「高」を維持した。監査用checkpoint 709c9933とbe390574をcommit/push済み。可視性検査の処理量について174b3071へ追加checkpointを固定し、3回目のGPT_DECISIONで、画素単位の同等性を条件とするQC限定修正の許可を受領した。実画像1件の超過と幅計算の説明訂正を394edfb6へ固定し、4回目のGPT_DECISIONで文字サイズだけの単調探索と全量新規描画を許可された。94pxの実画像probeは合格。probe初回のReact依存先未指定は、既存描画と同じ依存先を指定して訂正し、初回ログも保存した。第一完成のAUDIT_ONLYは未実施で、最終完成後にreport → commit → push → main一致 → Drive/MANIFEST → AUDIT_ONLYの順に行う。
 
 ## 14. 証拠
 
@@ -192,6 +195,6 @@ ChatGPT監査先はユーザー指定の「ZEV進行管理２」。字幕幅に�
 - `stt-completion-verification-v004.json` と `stt-zero-duration-normalization-v003.json`: 認識全編と正規化の検査。
 - `stt-chunk-0126-retry-v001.json`、`stt-chunk-0221-retry-v001.json`: 同じモデルによる限定再認識。
 - `caption-source-readiness-v003.json`: 全字幕片の保持と表示境界の事前検査。
-- `tests-attempt-0005.tap`、`typecheck-comparison-v010.json`: テストと型検査の比較。
+- `tests-attempt-0005.tap`、`typecheck-comparison-v011.json`: テストと型検査の比較。
 
 費用と外部作用: ローカル認識・ローカル製造。有料推論APIの使用なし、追加API費用US$0。動画取得に必要な承認済み通信はある。動画・音声の大容量実体はローカル参照とハッシュを保存し、GitやDriveへの収録有無は最終ミラー記録に明記する。

@@ -1,0 +1,26 @@
+node:internal/modules/cjs/loader:1207
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'react'
+Require stack:
+- /Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_entry_v001.tsx
+- /Users/kawafmm/workspace/zev2/evals/clip_composition/inspect_presentation_render_layout_v001.ts
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at T._resolveFilename (file:///Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-D_B8UL5H.mjs:2:14812)
+    at nextResolveSimple (/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-BOkp8V6j.cjs:10:1017)
+    at /Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-BOkp8V6j.cjs:9:4388
+    at /Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-BOkp8V6j.cjs:9:3818
+    at resolveTsPaths (/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-BOkp8V6j.cjs:10:770)
+    at Function._resolveFilename (/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/register-BOkp8V6j.cjs:10:1155)
+    at Module._load (node:internal/modules/cjs/loader:1038:27)
+    at Module.require (node:internal/modules/cjs/loader:1289:19)
+    at require (node:internal/modules/helpers:182:18) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_entry_v001.tsx',
+    '/Users/kawafmm/workspace/zev2/evals/clip_composition/inspect_presentation_render_layout_v001.ts'
+  ]
+}
+
+Node.js v20.19.6

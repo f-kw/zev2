@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "unseen-material-renderer-execution-v002",
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v007/renderer-job.json",
+    "fileSha256": "94be68489cb915161d20f1c16ea62ea94bc7c3b58e3dba4152c1411aac814110",
+    "canonicalSha256": "99f990a0c59cc694a1882a09c4f8fc7a5dc2dd33e3a7b1cdf56719cc1aa8b104"
+  },
+  "setupFixBinding": {
+    "schemaVersion": "unseen-material-actual-font-size-preflight-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v007/setup-fix.json",
+    "fileSha256": "3a7aa11a8fbc1a550cc5b72a431f2fc25677884da8725ac435dd4e943a19b045",
+    "canonicalSha256": "c401ee0f3ba179a9ec724f643d932de815e5da18d8a282277aa211759e7cff36"
+  },
+  "exitCode": 2,
+  "result": {
+    "exitCode": 2,
+    "failure": {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "process_failed",
+      "stage": "execution",
+      "message": "presentation renderer child process failed",
+      "cleanupWarnings": [
+        {
+          "code": "RENDER_OUTPUT_LOCK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002.lock",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        },
+        {
+          "code": "RENDER_OUTPUT_WORK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v007.presentation-renderer-v002-work-94CMqV",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        }
+      ]
+    }
+  }
+}

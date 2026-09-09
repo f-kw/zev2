@@ -1,0 +1,458 @@
+{
+  "schemaVersion": "presentation-preset-registry-v001",
+  "registryVersion": "normal-landscape-preset-registry-v001",
+  "format": "normal-landscape",
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "safeAreaPx": {
+      "top": 40,
+      "right": 80,
+      "bottom": 40,
+      "left": 80
+    }
+  },
+  "fontAssets": [
+    {
+      "fontAssetId": "line-seed-jp-extra-bold-v001",
+      "fileName": "LINESeedJP_A_OTF_Eb.otf",
+      "path": "runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+      "sha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+      "licensePath": "runner/public/font/OFL_LINESeedJP.txt"
+    },
+    {
+      "fontAssetId": "shippori-mincho-bold-v001",
+      "fileName": "ShipporiMincho-Bold.ttf",
+      "path": "runner/public/font/ShipporiMincho-Bold.ttf",
+      "sha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f",
+      "licensePath": "runner/public/font/OFL_ShipporiMincho-Bold.txt"
+    }
+  ],
+  "componentProvenance": [
+    "runner/src/remotion/Root.tsx",
+    "runner/src/remotion/renderer/TelopRenderer.tsx",
+    "runner/src/remotion/components/TelopText.tsx",
+    "runner/src/telop/telop-render-model.ts",
+    "runner/src/telop/telop-line-break.ts",
+    "runner/src/remotion/utils/telop-font.ts"
+  ],
+  "transitions": [
+    {
+      "transitionId": "quick-fade-4f-v001",
+      "entry": {
+        "type": "alpha-fade",
+        "frames": 4
+      },
+      "exit": {
+        "type": "alpha-fade",
+        "frames": 4
+      }
+    }
+  ],
+  "endPolicies": [
+    {
+      "endPolicyId": "resolved-target-final-atom-v001",
+      "rule": "解決済み対象に含まれる最後のsource atomのendMsで表示を終了する",
+      "inventedDuration": false
+    }
+  ],
+  "presets": [
+    {
+      "presetId": "normal-landscape-readable-pop-v001",
+      "format": "normal-landscape",
+      "styleFamily": "readable-pop",
+      "visualStates": [
+        {
+          "stateId": "caption-core-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 94,
+            "fontColor": "#FFFDF8",
+            "borderColor": "#111827",
+            "borderWidthPx": 8,
+            "lineSpacingPercent": 150,
+            "glowColor": "#000000",
+            "glowWidthPx": 12,
+            "glowOpacityPercent": 82
+          },
+          "position": {
+            "preset": "bottom-center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -6
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 36,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        {
+          "stateId": "emphasis-important-warm-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 132,
+            "fontColor": "#FFE36E",
+            "borderColor": "#2B1820",
+            "borderWidthPx": 10,
+            "lineSpacingPercent": 150,
+            "glowColor": "#080407",
+            "glowWidthPx": 18,
+            "glowOpacityPercent": 86
+          },
+          "position": {
+            "preset": "center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": 5
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 28,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        {
+          "stateId": "emphasis-mistake-alert-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 136,
+            "fontColor": "#FFFFFF",
+            "borderColor": "#A51E42",
+            "borderWidthPx": 11,
+            "lineSpacingPercent": 150,
+            "glowColor": "#26000C",
+            "glowWidthPx": 18,
+            "glowOpacityPercent": 88
+          },
+          "position": {
+            "preset": "center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": 4
+          },
+          "background": {
+            "color": "rgba(30, 4, 14, 0.78)",
+            "borderRadiusPx": 18,
+            "paddingXPx": 34,
+            "paddingYPx": 20
+          },
+          "layout": {
+            "maxCharsPerLine": 28,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        {
+          "stateId": "emphasis-discovery-clear-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 128,
+            "fontColor": "#A8F5FF",
+            "borderColor": "#083B55",
+            "borderWidthPx": 10,
+            "lineSpacingPercent": 150,
+            "glowColor": "#00111B",
+            "glowWidthPx": 17,
+            "glowOpacityPercent": 86
+          },
+          "position": {
+            "preset": "center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": 3
+          },
+          "background": {
+            "color": "rgba(4, 28, 47, 0.76)",
+            "borderRadiusPx": 22,
+            "paddingXPx": 34,
+            "paddingYPx": 20
+          },
+          "layout": {
+            "maxCharsPerLine": 12,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        {
+          "stateId": "emphasis-emotion-impact-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 154,
+            "fontColor": "#FFF1A8",
+            "borderColor": "#C13A1D",
+            "borderWidthPx": 12,
+            "lineSpacingPercent": 152,
+            "glowColor": "#2B0700",
+            "glowWidthPx": 24,
+            "glowOpacityPercent": 90
+          },
+          "position": {
+            "preset": "center",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": 5
+          },
+          "background": null,
+          "layout": {
+            "maxCharsPerLine": 24,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        {
+          "stateId": "information-comment-card-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 72,
+            "fontColor": "#18243B",
+            "borderColor": "#18243B",
+            "borderWidthPx": 0,
+            "lineSpacingPercent": 128,
+            "glowColor": "transparent",
+            "glowWidthPx": 0,
+            "glowOpacityPercent": 0
+          },
+          "position": {
+            "preset": "lower-third",
+            "alignment": "left",
+            "offsetXPercent": 0,
+            "offsetYPercent": -4
+          },
+          "background": {
+            "color": "rgba(252, 249, 244, 0.96)",
+            "borderRadiusPx": 26,
+            "paddingXPx": 50,
+            "paddingYPx": 30
+          },
+          "layout": {
+            "maxCharsPerLine": 42,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        {
+          "stateId": "information-narration-card-v001",
+          "textStyle": {
+            "fontAssetId": "shippori-mincho-bold-v001",
+            "fontSizePx": 70,
+            "fontColor": "#FFFDF7",
+            "borderColor": "#101827",
+            "borderWidthPx": 0,
+            "lineSpacingPercent": 128,
+            "glowColor": "transparent",
+            "glowWidthPx": 0,
+            "glowOpacityPercent": 0
+          },
+          "position": {
+            "preset": "lower-third",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -3
+          },
+          "background": {
+            "color": "rgba(13, 20, 35, 0.88)",
+            "borderRadiusPx": 14,
+            "paddingXPx": 46,
+            "paddingYPx": 28
+          },
+          "layout": {
+            "maxCharsPerLine": 22,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        {
+          "stateId": "information-lyrics-card-v001",
+          "textStyle": {
+            "fontAssetId": "shippori-mincho-bold-v001",
+            "fontSizePx": 80,
+            "fontColor": "#FFF0FA",
+            "borderColor": "#5B174B",
+            "borderWidthPx": 3,
+            "lineSpacingPercent": 128,
+            "glowColor": "#1A0016",
+            "glowWidthPx": 10,
+            "glowOpacityPercent": 72
+          },
+          "position": {
+            "preset": "lower-third",
+            "alignment": "center",
+            "offsetXPercent": 0,
+            "offsetYPercent": -2
+          },
+          "background": {
+            "color": "rgba(67, 21, 72, 0.80)",
+            "borderRadiusPx": 20,
+            "paddingXPx": 46,
+            "paddingYPx": 26
+          },
+          "layout": {
+            "maxCharsPerLine": 19,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        {
+          "stateId": "speaker-nameplate-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 64,
+            "fontColor": "#FFFFFF",
+            "borderColor": "#FFFFFF",
+            "borderWidthPx": 0,
+            "lineSpacingPercent": 120,
+            "glowColor": "transparent",
+            "glowWidthPx": 0,
+            "glowOpacityPercent": 0
+          },
+          "position": {
+            "preset": "top-center",
+            "alignment": "center",
+            "offsetXPercent": -34,
+            "offsetYPercent": 4
+          },
+          "background": {
+            "color": "rgba(178, 47, 78, 0.95)",
+            "borderRadiusPx": 18,
+            "paddingXPx": 38,
+            "paddingYPx": 18
+          },
+          "layout": {
+            "maxCharsPerLine": 12,
+            "maxLines": 1,
+            "singleLine": true
+          },
+          "transitionId": "quick-fade-4f-v001"
+        },
+        {
+          "stateId": "reference-card-v001",
+          "textStyle": {
+            "fontAssetId": "line-seed-jp-extra-bold-v001",
+            "fontSizePx": 64,
+            "fontColor": "#F7FAFF",
+            "borderColor": "#F7FAFF",
+            "borderWidthPx": 0,
+            "lineSpacingPercent": 126,
+            "glowColor": "transparent",
+            "glowWidthPx": 0,
+            "glowOpacityPercent": 0
+          },
+          "position": {
+            "preset": "top-right",
+            "alignment": "left",
+            "offsetXPercent": -5,
+            "offsetYPercent": 6
+          },
+          "background": {
+            "color": "rgba(21, 36, 60, 0.94)",
+            "borderRadiusPx": 22,
+            "paddingXPx": 42,
+            "paddingYPx": 30
+          },
+          "layout": {
+            "maxCharsPerLine": 24,
+            "maxLines": 2,
+            "singleLine": false
+          },
+          "transitionId": "quick-fade-4f-v001"
+        }
+      ],
+      "kindPolicies": [
+        {
+          "kind": "speech-caption",
+          "stateId": "caption-core-v001",
+          "endResponsibility": "target-anchor",
+          "allowedMaterialRoles": [],
+          "requiredMaterialRoles": []
+        },
+        {
+          "kind": "emphasis-important-statement",
+          "stateId": "emphasis-important-warm-v001",
+          "endResponsibility": "preset-policy",
+          "endPolicyId": "resolved-target-final-atom-v001",
+          "allowedMaterialRoles": [],
+          "requiredMaterialRoles": []
+        },
+        {
+          "kind": "emphasis-mistake-realization",
+          "stateId": "emphasis-mistake-alert-v001",
+          "endResponsibility": "preset-policy",
+          "endPolicyId": "resolved-target-final-atom-v001",
+          "allowedMaterialRoles": [],
+          "requiredMaterialRoles": []
+        },
+        {
+          "kind": "emphasis-discovery",
+          "stateId": "emphasis-discovery-clear-v001",
+          "endResponsibility": "preset-policy",
+          "endPolicyId": "resolved-target-final-atom-v001",
+          "allowedMaterialRoles": [],
+          "requiredMaterialRoles": []
+        },
+        {
+          "kind": "emphasis-strong-emotion",
+          "stateId": "emphasis-emotion-impact-v001",
+          "endResponsibility": "preset-policy",
+          "endPolicyId": "resolved-target-final-atom-v001",
+          "allowedMaterialRoles": [],
+          "requiredMaterialRoles": []
+        },
+        {
+          "kind": "information-comment",
+          "stateId": "information-comment-card-v001",
+          "endResponsibility": "preset-policy",
+          "endPolicyId": "resolved-target-final-atom-v001",
+          "allowedMaterialRoles": [],
+          "requiredMaterialRoles": []
+        },
+        {
+          "kind": "information-narration",
+          "stateId": "information-narration-card-v001",
+          "endResponsibility": "preset-policy",
+          "endPolicyId": "resolved-target-final-atom-v001",
+          "allowedMaterialRoles": [],
+          "requiredMaterialRoles": []
+        },
+        {
+          "kind": "information-lyrics",
+          "stateId": "information-lyrics-card-v001",
+          "endResponsibility": "preset-policy",
+          "endPolicyId": "resolved-target-final-atom-v001",
+          "allowedMaterialRoles": [],
+          "requiredMaterialRoles": []
+        },
+        {
+          "kind": "speaker-identification",
+          "stateId": "speaker-nameplate-v001",
+          "endResponsibility": "preset-policy",
+          "endPolicyId": "resolved-target-final-atom-v001",
+          "allowedMaterialRoles": [],
+          "requiredMaterialRoles": []
+        },
+        {
+          "kind": "reference-supplement",
+          "stateId": "reference-card-v001",
+          "endResponsibility": "preset-policy",
+          "endPolicyId": "resolved-target-final-atom-v001",
+          "allowedMaterialRoles": [
+            "reference-image",
+            "reference-video"
+          ],
+          "requiredMaterialRoles": []
+        }
+      ]
+    }
+  ]
+}

@@ -87,12 +87,15 @@ def main():
 
     changed = changes(original, adjusted)
     assert len(changed) == 1 and changed[0]['path'].endswith('/textStyle/fontSizePx')
-    assert changed[0]['before'] == 96 and changed[0]['after'] == 95
+    font_selection = check(setup['fontSizeSelectionBinding'])
+    assert font_selection['status'] == 'single-caption-probe-passed'
+    assert changed[0]['before'] == 96
+    assert changed[0]['after'] == font_selection['selectedFontSizePx'] == 94
     old_trust = check(before['registryBindings']['rendererTrust'])
     new_trust = check(job['registryBindings']['rendererTrust'])
     assert {**new_trust, 'presetRegistry': old_trust['presetRegistry']} == old_trust
     assert new_trust['presetRegistry']['fileSha256'] == job['registryBindings']['styleProfileRegistry']['fileSha256']
-    pre_render_layout = read(WORK / 'layout-browser-font95-verification-v002.json')
+    pre_render_layout = read(WORK / 'pre-render-layout-font94-verification-v001.json')
     assert pre_render_layout['status'] == 'passed' and pre_render_layout['inspectedCaptions'] == len(ids)
     assert pre_render_layout['violationCount'] == 0 and pre_render_layout['maximumWrapperWidthPx'] <= 1760
     qc = execution['result']['qc']
@@ -100,6 +103,13 @@ def main():
     assert qc['instructionCount'] == len(ids)
     assert [row['instructionId'] for row in qc['instructionEvidence']] == ids
     assert all(row['status'] == 'passed' for row in qc['checks'].values())
+    safe = adjusted['canvas']['safeAreaPx']
+    for evidence in qc['instructionEvidence']:
+        for bounds in [evidence['alphaBounds'], *evidence['lineAlphaBounds']]:
+            assert bounds['left'] >= safe['left']
+            assert bounds['right'] <= adjusted['canvas']['width'] - safe['right']
+            assert bounds['top'] >= safe['top']
+            assert bounds['bottom'] <= adjusted['canvas']['height'] - safe['bottom']
     video = ROOT / completion['video']['path']
     assert digest(video) == completion['video']['fileSha256']
     output_qc = video.parent / 'presentation-render-qc-v002.json'
@@ -116,14 +126,16 @@ def main():
               'video': binding(video), 'qc': binding(output_qc),
               'completion': binding(FORMAL / 'render-completion.json'),
               'coreLinkage': binding(WORK / 'core-caption-linkage-verification-v001.json'),
-              'preRenderLayoutCalculation': binding(WORK / 'layout-browser-font95-verification-v002.json'),
+              'preRenderLayoutCalculation': binding(WORK / 'pre-render-layout-font94-verification-v001.json'),
               'approvedDisplayChange': changed, 'preexistingFilesUnchanged': len(preexisting['files']),
               'approvedQcImplementationChange': implementation_changes,
               'qcOptimization': setup['qcEquivalenceBinding'],
+              'fontSizeSelection': setup['fontSizeSelectionBinding'],
+              'actualPngSafeAreaPassed': len(qc['instructionEvidence']),
               'checks': ['original-caption-artifacts-same-bytes', 'all-cues-and-lines-exact',
                          'unchanged-renderer-inputs', 'only-approved-qc-implementation-change', 'only-approved-font-size-change',
                          'trust-rules-font-assets-dependencies-unchanged', 'all-pre-render-layout-calculations-passed',
-                         'all-final-render-qc-passed', 'all-instructions-applied-once',
+                         'all-343-actual-png-safe-areas-passed', 'all-final-render-qc-passed', 'all-instructions-applied-once',
                          'rendered-frames-match-adopted-timeline', 'final-video-sha256-exact'],
               'humanQuality': 'not-evaluated', 'independentBlindTrialClaim': False}
     target = WORK / 'final-render-verification-v001.json'

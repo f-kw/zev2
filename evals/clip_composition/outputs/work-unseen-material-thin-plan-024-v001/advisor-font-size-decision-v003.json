@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "unseen-material-advisor-font-size-decision-v001",
+  "questionType": "GPT_DECISION",
+  "decision": "continue",
+  "sessionName": "ZEV進行管理２",
+  "sessionUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6a9d1cb7-b3c0-83ee-ae3a-613c9dc53f08",
+  "modelSelectionObserved": "高",
+  "modelChanged": false,
+  "responseState": "レスポンス確認済み",
+  "auditedCheckpoint": "394edfb648ca25020635d5efc75811c83412af4f",
+  "startingFontSizePx": 94,
+  "decrementPx": 1,
+  "selectionRule": "first-actual-alpha-pass-in-monotonic-decreasing-integer-order",
+  "full343RedrawRequired": true,
+  "answerTranscription": "GPT_DECISION：\n続行可。\n今回の問題はcaption/selectionの意味判断ではなく、実PNGで確認されたwork-local表示styleの物理適合問題として扱う。\nまずfontSize 94pxでcaption 213を新規描画し、既存alpha safe-area検査を実施する。\n94pxで合格した場合：\n94pxを今回の正式候補値として先に固定\n全343字幕を94pxで新規描画\n全343実PNGを既存alpha領域検査へ通す\n全件合格後にのみ主動画合成・全343最終可視性QCへ進む\n94pxでもcaption 213が不合格の場合：\n93px、92px…と1pxずつ単調に下げてよい\n最初に実画像で合格した整数fontSizeで停止する\nその値を固定してから全343件を新規描画・全量実画像検査する\nこの1px刻み探索については追加GPT_DECISION不要。\n固定：\n論理幅36\n343本文\n本文片\ncue終端\n行末\n時刻\ncandidate採否10/7\ninternal retention\nbase動画\n位置・色・縁・glow\nsafe area\nQC条件\n変更可能：\n今回専用versioned display settingのfontSizeのみ\nその設定を参照するsource package / renderer job binding\n95px PNGは履歴として保持し、新しいサイズの検査証拠へ流用しない。\n選択したfontSizeは「今回の343字幕で実画像検査に通ったwork-local値」とだけ扱い、一般的安全値・共通presetへ昇格させない。\nfontSize以外の変更、意味・行分割変更、QC緩和、共通registry変更が必要になった場合のみ再度GPT_DECISION。\nこの判断では第一完成・最終QC合格・人間品質はまだ成立しない。",
+  "transcriptionNote": "相談役回答のCodex向け指示本文を転記。列挙の装飾は除去。",
+  "humanQuality": "not-evaluated"
+}
