@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "unseen-material-retention-assessment-v001",
+  "selectionAdoptionBinding": {
+    "schemaVersion": "candidate-selection-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/selection-adoption.json",
+    "fileSha256": "6b8c44352a0f457de81cf2692fd81c64f196d1b7febfe8f08b064a25c4160e56",
+    "canonicalSha256": "efdeee5c1bd5066100926fadcf0fce80fa51d2d6fbec76a2ea37f63e17f51394"
+  },
+  "candidates": [
+    {
+      "candidateId": "candidate-0002",
+      "status": "whole-context-sufficient",
+      "reason": "人物を小次郎だと考える導入、化け物と死への戸惑い、鬼武者になったという理解が連続する。問い直しや繰り返しも、その場で理解が追いつかない反応の文脈として保持する。本文から別の目的に応じて一部だけ選び直す必要は確定していない。"
+    },
+    {
+      "candidateId": "candidate-0004",
+      "status": "whole-context-sufficient",
+      "reason": "老人の年齢への反応、鬼門と守護の役割の説明、自分が引き受けることへの理解、老人への再評価が因果としてつながるため全体を保持する。途中の扉や強い敵への言及も同じ場所と説明を受け止める文脈に属する。"
+    },
+    {
+      "candidateId": "candidate-0005",
+      "status": "whole-context-sufficient",
+      "reason": "何を運んでいるのかという疑問、人や生贄だという認識、舞台を調べる目的の理解までを保持する。発話がない部分の映像の役割は未観測であり、探索範囲の連続した文脈として残す。"
+    },
+    {
+      "candidateId": "candidate-0007",
+      "status": "whole-context-sufficient",
+      "reason": "小次郎が力を欲するやり取り、白い男の正体について仮説が揺れる過程、再戦を想像する言葉がそれぞれ意味を持つ。末尾の予想の言い直しも確信していないことを示すため保持する。"
+    },
+    {
+      "candidateId": "candidate-0008",
+      "status": "whole-context-sufficient",
+      "reason": "弓の性質の理解から試行、強さへの反応と評価までを保持する。「強い」という繰り返しは、その場の受け止め方として残す。実際の攻撃間隔や映像のテンポは未判定である。"
+    },
+    {
+      "candidateId": "candidate-0009",
+      "status": "whole-context-sufficient",
+      "reason": "仕掛けを見て対応し、自信を持って鬼を見下す発言が、自分も半鬼だという気づきへ返る一連の文脈を保持する。途中の移動に関する発話も、同じ体験のつながりとして扱う。"
+    },
+    {
+      "candidateId": "candidate-0012",
+      "status": "whole-context-sufficient",
+      "reason": "人物の名、小手を与えた経緯、白い男との同定、静かとの過去の関係への反応までを保持する。人物関係の説明を切り分けると、何に驚いたかの根拠が薄くなるため、候補の文脈を残す。"
+    },
+    {
+      "candidateId": "candidate-0014",
+      "status": "whole-context-sufficient",
+      "reason": "女性の悩みの解放から異常な縁切りへの理解、浄化すべきという判断、老人の膝の例への反応までを保持する。二つの例は同じ場所の異常さを別の具体例で示し、その間の短い戦闘に関する発話を含め連続した地域体験として残す。"
+    },
+    {
+      "candidateId": "candidate-0015",
+      "status": "whole-context-sufficient",
+      "reason": "八体に助けを求める前提、五体しかいないという気づき、盗まれた三体を探す約束までを保持する。求めていた助力が捜索の行動に変わるため、説明と反応を一続きで残す。"
+    },
+    {
+      "candidateId": "candidate-0016",
+      "status": "whole-context-sufficient",
+      "reason": "対応できなかった発話、弾きへ方針を切り替える言葉、再挑戦中の自信の変化、戦いの後の評価と力の授与を保持する。無発話の戦闘部分の必要性や冗長さは本文だけでは確定できず、今回は連続した候補範囲として保持し、人間の内部保持評価へ残す。"
+    }
+  ],
+  "perceptualLimitations": [
+    "表情、声の強さ、動きの面白さ、映像としての怖さは評価していません。",
+    "ゲーム内台詞と配信者の発話を分離していないため、すべての発話の話者を確定できていません。",
+    "文字起こしには誤認識や反復の可能性があり、実際の音声との正確な一致は未確認です。",
+    "長さ0の認識語は同じ認識発話内の隣接語と結合し、認識本文をすべて保持しました。反復表記と字幕境界の問題がある30秒区間2件は同じローカルモデルでVADなし再認識し、修正後は382個の長さ0の語を隣接語と結合しています。再認識本文や語単独の発声時刻は人間未確認です。",
+    "内部の待ち時間、無発話の映像、戦闘の長さ、場面の出入りの見心地は未判定です。全候補範囲を保持した合計は2178.72秒で、目標尺から決めた長さではありません。"
+  ]
+}

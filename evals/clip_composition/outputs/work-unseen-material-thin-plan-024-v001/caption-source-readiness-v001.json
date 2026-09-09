@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "unseen-material-caption-source-readiness-v001",
+  "status": "requires-stt-boundary-repair",
+  "previewBinding": {
+    "schemaVersion": "unseen-material-caption-authoring-preview-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/caption-source-preview-v001.json",
+    "fileSha256": "262a7c9cea8c5b0dc0112fc949de61dc1f07603ff35bb73ded814c2e14e61d43",
+    "canonicalSha256": "17041da48f48d00c26c530a290e94767618d1125de7580de0197355e2b845f57"
+  },
+  "oversized": [
+    {
+      "candidateId": "candidate-0005",
+      "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000987",
+      "text": "いいかったかったかったかったかったかったかったかったかった",
+      "logicalWidth": 58,
+      "lineLimit": 36
+    }
+  ],
+  "limitation": "境界片の途中に行末を置けず、既存の一行上限を境界片単独で超えるため、そのままでは全本文を保持した字幕回答を作れない。"
+}

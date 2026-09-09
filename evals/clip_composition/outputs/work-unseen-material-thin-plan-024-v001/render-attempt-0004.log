@@ -1,0 +1,18 @@
+{"status":"render-runtime-retry-started","jobPath":"evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v003/renderer-job.json"}
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: RENDER_RUNTIME_RETRY_FAILED
+
+1 !== 0
+
+    at <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_unseen_material_render_v003.mts:42:8) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual'
+}
+
+Node.js v20.19.6

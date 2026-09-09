@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "unseen-material-stt-retry-transition-v001",
+  "status": "superseded-before-base-completion",
+  "priorFormalRoot": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v003",
+  "nextFormalRoot": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004",
+  "reason": "A single prolonged vowel occupies 19 full-width characters, exceeding the existing 18-character line without splitting the sound. Re-recognize its 30-second source chunk using the same offline model, then rebuild all transcript-dependent references.",
+  "retryBinding": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/stt-chunk-0221-retry-v001.json",
+    "fileSha256": "865ef3c5e83a9b221f48572cf53c6311c5835822358c92360fff76ef06ef3b82"
+  },
+  "priorPinnedCodeSnapshots": [
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/before-stt-vocalization-retry-run_unseen_material_thin_plan_v001.mts",
+      "fileSha256": "ef801e02060477c0bec12b67bb5ac2a8a328c0087233d3d5fc4fdcbbcb6e0d1e"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/before-stt-vocalization-retry-unseen_material_thin_plan_v001.mts",
+      "fileSha256": "9f19e0ea17201a7907c68dd59cf651af34c8d6a4e5703f8152d81e320c87a608"
+    }
+  ],
+  "baseAttemptLog": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/base-media-attempt-0002.log",
+  "priorBaseVideoCompleted": false,
+  "sourceMediaChanged": false
+}

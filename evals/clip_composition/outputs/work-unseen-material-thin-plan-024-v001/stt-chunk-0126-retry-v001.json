@@ -1,0 +1,492 @@
+{
+  "schemaVersion": "unseen-material-stt-boundary-retry-v001",
+  "reason": "音声区間末尾の長さ0の反復認識語を再検証するため、同じ音声全体をVADによる間引きなしで同じ既存モデルへ渡す。",
+  "audioBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v004/source/chunks/chunk-0126.flac",
+    "bytes": 590459,
+    "fileSha256": "4468b391a451cc513954d696f22b74e0794300a65bc4da11e41298a901ffc102"
+  },
+  "priorRecognitionBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v004/source/chunks/chunk-0126.recognition.json",
+    "bytes": 16560,
+    "fileSha256": "b643c4fa02a3d7750b163a8a6617d59470bfd7c7296e4c079f348e7fd8517dd6"
+  },
+  "modelPath": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/snapshots/f0fe81560cb8b68660e564f55dd99207059c092e",
+  "compute": {
+    "device": "cpu",
+    "compute_type": "float32",
+    "otherParameters": "installed defaults"
+  },
+  "recognition": {
+    "language": "ja",
+    "word_timestamps": true,
+    "vad_filter": false,
+    "otherParameters": "installed defaults"
+  },
+  "modelDownload": false,
+  "productionIntentInput": false,
+  "externalTextInput": false,
+  "recognitionSegments": [
+    {
+      "id": 1,
+      "seek": 2952,
+      "start": 5.540000000000001,
+      "end": 12.06,
+      "text": "だけどその清水の部隊になんでこれを運ばれてるかっていう理由を突き止めるってことだよね",
+      "tokens": [
+        50364,
+        5362,
+        21891,
+        20564,
+        21784,
+        15590,
+        2972,
+        13470,
+        33929,
+        4108,
+        11847,
+        2474,
+        9329,
+        5998,
+        32772,
+        13349,
+        26638,
+        4895,
+        3703,
+        46896,
+        13876,
+        23786,
+        5998,
+        40859,
+        7016,
+        30438,
+        11429,
+        4895,
+        6102,
+        13235,
+        5362,
+        30346,
+        50614
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.47306207510141224,
+      "compression_ratio": 1.3225806451612903,
+      "no_speech_prob": 0.0625559613108635,
+      "words": [
+        {
+          "start": 5.540000000000001,
+          "end": 5.9,
+          "word": "だ",
+          "probability": 0.12746794521808624
+        },
+        {
+          "start": 5.9,
+          "end": 6.04,
+          "word": "けど",
+          "probability": 0.28438135981559753
+        },
+        {
+          "start": 6.04,
+          "end": 6.22,
+          "word": "その",
+          "probability": 0.901278555393219
+        },
+        {
+          "start": 6.22,
+          "end": 6.82,
+          "word": "清",
+          "probability": 0.5655568242073059
+        },
+        {
+          "start": 6.82,
+          "end": 7.1,
+          "word": "水",
+          "probability": 0.99724280834198
+        },
+        {
+          "start": 7.1,
+          "end": 7.26,
+          "word": "の",
+          "probability": 0.9909857511520386
+        },
+        {
+          "start": 7.26,
+          "end": 7.48,
+          "word": "部",
+          "probability": 0.6486822962760925
+        },
+        {
+          "start": 7.48,
+          "end": 7.66,
+          "word": "隊",
+          "probability": 0.9791562557220459
+        },
+        {
+          "start": 7.66,
+          "end": 7.84,
+          "word": "に",
+          "probability": 0.9716675281524658
+        },
+        {
+          "start": 7.84,
+          "end": 8.04,
+          "word": "なん",
+          "probability": 0.6755467057228088
+        },
+        {
+          "start": 8.04,
+          "end": 8.18,
+          "word": "で",
+          "probability": 0.9970093369483948
+        },
+        {
+          "start": 8.18,
+          "end": 8.36,
+          "word": "これ",
+          "probability": 0.913970947265625
+        },
+        {
+          "start": 8.36,
+          "end": 8.48,
+          "word": "を",
+          "probability": 0.9865466356277466
+        },
+        {
+          "start": 8.48,
+          "end": 8.52,
+          "word": "運",
+          "probability": 0.8526159524917603
+        },
+        {
+          "start": 8.52,
+          "end": 8.76,
+          "word": "ば",
+          "probability": 0.9916564226150513
+        },
+        {
+          "start": 8.76,
+          "end": 8.88,
+          "word": "れて",
+          "probability": 0.986626923084259
+        },
+        {
+          "start": 8.88,
+          "end": 8.98,
+          "word": "る",
+          "probability": 0.8827604651451111
+        },
+        {
+          "start": 8.98,
+          "end": 9.18,
+          "word": "か",
+          "probability": 0.8260579705238342
+        },
+        {
+          "start": 9.18,
+          "end": 9.34,
+          "word": "っていう",
+          "probability": 0.6439609527587891
+        },
+        {
+          "start": 9.34,
+          "end": 9.58,
+          "word": "理",
+          "probability": 0.9002388119697571
+        },
+        {
+          "start": 9.58,
+          "end": 9.66,
+          "word": "由",
+          "probability": 0.9950534701347351
+        },
+        {
+          "start": 9.66,
+          "end": 9.78,
+          "word": "を",
+          "probability": 0.6322425603866577
+        },
+        {
+          "start": 9.78,
+          "end": 9.94,
+          "word": "突",
+          "probability": 0.7684889435768127
+        },
+        {
+          "start": 9.94,
+          "end": 9.98,
+          "word": "き",
+          "probability": 0.9953142404556274
+        },
+        {
+          "start": 9.98,
+          "end": 10.12,
+          "word": "止",
+          "probability": 0.9538372755050659
+        },
+        {
+          "start": 10.12,
+          "end": 10.22,
+          "word": "め",
+          "probability": 0.9990979433059692
+        },
+        {
+          "start": 10.22,
+          "end": 10.28,
+          "word": "る",
+          "probability": 0.9676191806793213
+        },
+        {
+          "start": 10.28,
+          "end": 10.4,
+          "word": "って",
+          "probability": 0.9812653660774231
+        },
+        {
+          "start": 10.4,
+          "end": 10.58,
+          "word": "こと",
+          "probability": 0.8889002203941345
+        },
+        {
+          "start": 10.58,
+          "end": 10.74,
+          "word": "だ",
+          "probability": 0.9898029565811157
+        },
+        {
+          "start": 10.74,
+          "end": 12.06,
+          "word": "よね",
+          "probability": 0.985888659954071
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 2952,
+      "start": 15.4,
+      "end": 19.64,
+      "text": "コテに話しかけてる宮本ミサシ",
+      "tokens": [
+        50864,
+        18066,
+        22985,
+        4108,
+        11103,
+        32156,
+        39736,
+        4895,
+        39194,
+        8802,
+        23196,
+        23607,
+        11054,
+        50964
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.47306207510141224,
+      "compression_ratio": 1.3225806451612903,
+      "no_speech_prob": 0.0625559613108635,
+      "words": [
+        {
+          "start": 15.4,
+          "end": 15.76,
+          "word": "コ",
+          "probability": 0.37952253222465515
+        },
+        {
+          "start": 15.76,
+          "end": 15.98,
+          "word": "テ",
+          "probability": 0.9696565270423889
+        },
+        {
+          "start": 15.98,
+          "end": 17.94,
+          "word": "に",
+          "probability": 0.9887159466743469
+        },
+        {
+          "start": 17.94,
+          "end": 18.14,
+          "word": "話",
+          "probability": 0.9962412118911743
+        },
+        {
+          "start": 18.14,
+          "end": 18.38,
+          "word": "しか",
+          "probability": 0.9877212643623352
+        },
+        {
+          "start": 18.38,
+          "end": 18.52,
+          "word": "けて",
+          "probability": 0.9112308621406555
+        },
+        {
+          "start": 18.52,
+          "end": 18.68,
+          "word": "る",
+          "probability": 0.8961560130119324
+        },
+        {
+          "start": 18.68,
+          "end": 18.9,
+          "word": "宮",
+          "probability": 0.2385745346546173
+        },
+        {
+          "start": 18.9,
+          "end": 19.1,
+          "word": "本",
+          "probability": 0.9868435263633728
+        },
+        {
+          "start": 19.1,
+          "end": 19.32,
+          "word": "ミ",
+          "probability": 0.17319415509700775
+        },
+        {
+          "start": 19.32,
+          "end": 19.38,
+          "word": "サ",
+          "probability": 0.8197641372680664
+        },
+        {
+          "start": 19.38,
+          "end": 19.64,
+          "word": "シ",
+          "probability": 0.6594663858413696
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 2952,
+      "start": 19.64,
+      "end": 21.12,
+      "text": "いいね",
+      "tokens": [
+        50964,
+        13806,
+        5555,
+        51014
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.47306207510141224,
+      "compression_ratio": 1.3225806451612903,
+      "no_speech_prob": 0.0625559613108635,
+      "words": [
+        {
+          "start": 19.64,
+          "end": 20.1,
+          "word": "いい",
+          "probability": 0.558116614818573
+        },
+        {
+          "start": 20.1,
+          "end": 21.12,
+          "word": "ね",
+          "probability": 0.34428831934928894
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 2952,
+      "start": 26.64,
+      "end": 29.52,
+      "text": "いや、眠る女だなぁ!",
+      "tokens": [
+        51364,
+        18524,
+        1231,
+        2862,
+        254,
+        4895,
+        17015,
+        5362,
+        3203,
+        11951,
+        0,
+        51464
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.47306207510141224,
+      "compression_ratio": 1.3225806451612903,
+      "no_speech_prob": 0.0625559613108635,
+      "words": [
+        {
+          "start": 26.64,
+          "end": 27.0,
+          "word": "いや、",
+          "probability": 0.19001702964305878
+        },
+        {
+          "start": 27.0,
+          "end": 27.36,
+          "word": "眠",
+          "probability": 0.9916793704032898
+        },
+        {
+          "start": 27.36,
+          "end": 28.9,
+          "word": "る",
+          "probability": 0.9860430955886841
+        },
+        {
+          "start": 28.9,
+          "end": 29.08,
+          "word": "女",
+          "probability": 0.9700292348861694
+        },
+        {
+          "start": 29.08,
+          "end": 29.26,
+          "word": "だ",
+          "probability": 0.9508177042007446
+        },
+        {
+          "start": 29.26,
+          "end": 29.48,
+          "word": "な",
+          "probability": 0.9944220185279846
+        },
+        {
+          "start": 29.48,
+          "end": 29.52,
+          "word": "ぁ!",
+          "probability": 0.2486525923013687
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 3000,
+      "start": 29.52,
+      "end": 29.7,
+      "text": "おい!",
+      "tokens": [
+        50364,
+        33261,
+        0,
+        50389
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.8040321350097657,
+      "compression_ratio": 0.4666666666666667,
+      "no_speech_prob": 0.8607384562492371,
+      "words": [
+        {
+          "start": 29.52,
+          "end": 29.7,
+          "word": "おい!",
+          "probability": 0.12289539724588394
+        }
+      ]
+    }
+  ],
+  "elapsedSeconds": 20.809759708994534
+}

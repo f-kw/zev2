@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "unseen-material-thin-plan-evaluation-v001",
+  "planId": "unseen-SsdxVhwxyYo-024-v001",
+  "stage": "candidate-selection",
+  "authorization": {
+    "schemaVersion": "unseen-material-received-instruction-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/received-instruction.json",
+    "fileSha256": "55b56d529ac29acfe25d5696eed0e7b5763074844c5043cc52c39f33c2e2d9a5",
+    "canonicalSha256": "170eae76c6bf61157daba61433ddfc81061d3c993bc7d04d40fc1481d8183d66"
+  },
+  "sourceAcquisitionBinding": {
+    "schemaVersion": "unseen-material-acquisition-completion-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/acquisition-completion-v001.json",
+    "fileSha256": "c7a3dd9c085d0229a58aaacfbee6aecc0748d3be5153ec2d70da9cea300a94e4",
+    "canonicalSha256": "dc03f5b727919aef8f4889c37151b585bff2137a6d0aad99f616687e72c436f6"
+  },
+  "sttVerificationBinding": {
+    "schemaVersion": "unseen-material-full-stt-verification-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/stt-completion-verification-v004.json",
+    "fileSha256": "726c9ddd93cc2abe10d9832c0eb8a692fe2a0e1dbcee3dea1cce0581c934475b",
+    "canonicalSha256": "860d4e93ae929630771cea0cfba4c730f50baa043f3b5ac443855188a9c5c700"
+  },
+  "thinPlanBinding": {
+    "schemaVersion": "production-intent-plan-v0",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/thin-plan-v0.json",
+    "fileSha256": "7b8e83b94b32d5c1e43cb3e1a7fb96795fab81d0da8e82cd687f06fd31021194",
+    "canonicalSha256": "168b03e3fddac4491cad9338eb21f53d3d83da4174e2b2b64d82c3cc6dae1b11"
+  },
+  "discoveryPlanBinding": {
+    "schemaVersion": "unseen-material-thin-plan-evaluation-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/discovery-plan.json",
+    "fileSha256": "27ed09aa4f2e8a57c39bfe1a15198a9ecc8c701762cfa08b60f846f808935ed2",
+    "canonicalSha256": "704cc1714d62068bc1b89931286a4cfbcd7b02b7eb088f50d4c315b966198c72"
+  },
+  "request": {
+    "purpose": "初見の鬼武者を進める中で、ぺこらが状況を理解したり予想を裏切られたりして、反応や展開が大きく動く場面を中心に見せる。",
+    "sourceId": "SsdxVhwxyYo",
+    "sourceVideo": {
+      "path": "evals/clip_composition/research/downloads/SsdxVhwxyYo/SsdxVhwxyYo.mp4",
+      "fileSha256": "01513b99032321ffa34817dff22bd5a128af88e4067fefb102e1d3b2bf187342"
+    },
+    "transcript": {
+      "path": "evals/clip_composition/stt/SsdxVhwxyYo_local30_v007/source/source-transcript.json",
+      "fileSha256": "2364a70c51bc0a1c06d1db9ab3780c382a63b60a1ba308031f865928babc2f55"
+    },
+    "utterances": {
+      "schemaVersion": "distant-connection-common-utterance-artifact-v001",
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/utterances.json",
+      "fileSha256": "9537024e69869ed4960ad611d8a92b5942dc9ddd8d74ca9348a5377479ffc3e2",
+      "canonicalSha256": "f04640d2e32a818f695668e3806c598af89a854f147202ded747ad84df25b33f"
+    },
+    "candidateSet": {
+      "schemaVersion": "candidate-selection-candidate-set-v001",
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/candidate-set.json",
+      "fileSha256": "ccb5fc06b9610033de1afe907536f76ec59b2f0816dd6e258bfee4fc68545f30",
+      "canonicalSha256": "07270abb6c57307732477ea8239cd031b7f69c9ac8a85d9ab4acf0d4f05c58b7"
+    },
+    "rendererTemplate": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-template-v002.json",
+      "fileSha256": "cfdb4c6e18e47cde8ea9fe2302d35993a7795ad804586adc36ff601c8ddfca5e",
+      "canonicalSha256": "3b72513981982691439d1dcc2d7cb3f200c4ce04663316edcef35bf260185703"
+    },
+    "captionStyleTemplate": {
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+      "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+      "canonicalSha256": "5594ddf2d1aa08660d893b7b8de7f37954f760981f76d615d13187034c5e3c8a"
+    }
+  },
+  "structureConditions": [
+    "採用候補の元素材順を維持する。候補内部の編集はこの判断では指定しない。",
+    "採用件数・目標尺・採用候補を事前に指定しない。"
+  ],
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/run_unseen_material_thin_plan_v001.mts",
+      "fileSha256": "911a86541e14442f37b0db7a3b0c9ac4785a619676c41bb4cfd909675ef33e4f"
+    },
+    {
+      "path": "evals/clip_composition/unseen_material_thin_plan_v001.mts",
+      "fileSha256": "76fd363d5cf9125f5e66ea44201e753da6c2b3466db62ae265f304a8cdb5b176"
+    },
+    {
+      "path": "runner/src/skills/candidate-discovery-v001.ts",
+      "fileSha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e"
+    },
+    {
+      "path": "runner/src/skills/candidate-selection-v001.ts",
+      "fileSha256": "1fc8a464ade963e49e26f2eba1bd8b6c0d77c30054308684159078847ab90a8d"
+    },
+    {
+      "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3"
+    },
+    {
+      "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+      "fileSha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291"
+    },
+    {
+      "path": "runner/src/distant-connection-common-utterance-artifact-v001.ts",
+      "fileSha256": "e3d2792913b284ba2b2f3cee5e1371a15d2fd3ee54ce6b1615041dfd7217562b"
+    },
+    {
+      "path": "runner/src/transcript-utils.ts",
+      "fileSha256": "9604833fd62d3c52ca5d6dd1ef0f7136d342511901de13ae80f31570e8cecd17"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+    },
+    {
+      "path": "evals/clip_composition/run_thin_plan_candidate_selection_v0.mts",
+      "fileSha256": "88abb651e704156d98b078e9916db675e99a756ca4a2831862f49116057dddb8"
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "fileSha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec"
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f"
+    }
+  ],
+  "outputRoot": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004"
+}

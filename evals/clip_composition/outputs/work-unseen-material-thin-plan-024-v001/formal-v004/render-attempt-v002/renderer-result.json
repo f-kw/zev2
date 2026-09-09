@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "unseen-material-renderer-execution-v002",
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v002/renderer-job.json",
+    "fileSha256": "ea6b7fe5a9b041c577591ba058f07e9b5c26ea840ce8857c2bacf8b64e0cf222",
+    "canonicalSha256": "18e696fb797e5674f9138e9535c52b4edbde51bb011e0fb00ad3a8414dd29e9f"
+  },
+  "setupFixBinding": {
+    "schemaVersion": "unseen-material-render-output-path-fix-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v002/setup-fix.json",
+    "fileSha256": "080cb2157851718f4d6df4707e9039cfbedfae43d9cbd09e5b6bdb3ba0f00968",
+    "canonicalSha256": "df1e3bb1916efcdec8684301ff11f6deedfbe358eb41a0dac6876330e82f9654"
+  },
+  "exitCode": 2,
+  "result": {
+    "exitCode": 2,
+    "failure": {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "process_failed",
+      "stage": "execution",
+      "message": "layout inspector produced no result",
+      "cleanupWarnings": [
+        {
+          "code": "RENDER_OUTPUT_LOCK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v002.presentation-renderer-v002.lock",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        },
+        {
+          "code": "RENDER_OUTPUT_WORK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v002.presentation-renderer-v002-work-STl1wO",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        }
+      ]
+    }
+  }
+}

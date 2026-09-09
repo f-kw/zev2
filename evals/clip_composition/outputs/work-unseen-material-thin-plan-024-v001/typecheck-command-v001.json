@@ -1,0 +1,24 @@
+{
+  "args": [
+    "node",
+    "node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/tsc.js",
+    "--noEmit",
+    "--strict",
+    "--skipLibCheck",
+    "--allowImportingTsExtensions",
+    "--target",
+    "es2022",
+    "--module",
+    "nodenext",
+    "--moduleResolution",
+    "nodenext",
+    "--types",
+    "node",
+    "--typeRoots",
+    "node_modules/.pnpm/@types+node@25.9.1/node_modules/@types",
+    "evals/clip_composition/run_unseen_material_thin_plan_v001.mts",
+    "evals/clip_composition/unseen_material_thin_plan_v001.mts",
+    "evals/clip_composition/unseen_material_thin_plan_v001.test.mts"
+  ],
+  "exitCode": 2
+}

@@ -1,0 +1,1885 @@
+{
+  "schemaVersion": "unseen-material-display-request-v001",
+  "requestId": "unseen-SsdxVhwxyYo-024-v001-display-1",
+  "planBinding": {
+    "schemaVersion": "unseen-material-thin-plan-evaluation-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/selection-plan.json",
+    "fileSha256": "53d76647948ec3f56d0e9bc67d7259c2113f283e7b05fa9c3c4512d7df3d125d",
+    "canonicalSha256": "a93fd275caffbb3db6e844ecbad4c1da26ab57589bfe4d3d0ea827c5699d60d9"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "unseen-material-execution-adoption-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/machine-adoption.json",
+    "fileSha256": "a2a69b5aed6c3aeaf47666fdc487ac262b96c732357b8dc23c6d65ef5a50308e",
+    "canonicalSha256": "882dfcd803d035fc6a8fe96f8199a90e25cfb8c8b3e10658f896e37698b80ea7"
+  },
+  "meaningInputBinding": {
+    "schemaVersion": "unseen-material-presentation-meaning-input-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/meaning-input.json",
+    "fileSha256": "89ea3e9f63fd5a54a117d0402ddb529ccaa2717a6414144d188879e0bbb8fee5",
+    "canonicalSha256": "e54a5cd6841b0b81c45245f7ad458660ae2d0fd52449de2f067461b2b71a9156"
+  },
+  "candidateId": "candidate-0002",
+  "timelineSegmentId": "segment-0001",
+  "input": {
+    "schemaVersion": "presentation-zevo-caption-selection-input-v001",
+    "taskDescription": "各captionの境界片を記載順に一度ずつ全量使用してください。cueは、直前から続く発話がそれだけで意味を読める短いまとまりになり、その末尾で発話の意味が一区切りつくように、cue終端を提示されたboundaryIdから選んでください。cue終端を意味の基準で先に決め、そのcueが一行に収まらない場合だけ行末を提示されたboundaryIdから選んでください。cue終端と行末は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。必要な行末候補が複数ある場合は、二行の幅が大きく偏らない候補を選んでください。各cueはstyleLimits.maxLinesPerCue以下とし、一行に収まるcueを改行しないでください。最後のcueはcaption最後のboundaryIdで終えてください。本文、境界片、ID、順序を変更しないでください。",
+    "captions": [
+      {
+        "captionId": "unseen-SsdxVhwxyYo-024-v001-input-caption-segment-1",
+        "boundaryCandidates": [
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000001",
+            "text": "待って、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000002",
+            "text": "誰"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000003",
+            "text": "か"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000004",
+            "text": "いる"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000005",
+            "text": "はい、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000006",
+            "text": "佐"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000007",
+            "text": "々"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000008",
+            "text": "木"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000009",
+            "text": "小"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000010",
+            "text": "次"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000011",
+            "text": "郎"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000012",
+            "text": "じゃない?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000013",
+            "text": "これ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000014",
+            "text": "佐"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000015",
+            "text": "々"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000016",
+            "text": "木"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000017",
+            "text": "小"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000018",
+            "text": "次"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000019",
+            "text": "郎"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000020",
+            "text": "なん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000021",
+            "text": "ちゃ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000022",
+            "text": "う?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000023",
+            "text": "なんか"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000024",
+            "text": "イ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000025",
+            "text": "ケ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000026",
+            "text": "メ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000027",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000028",
+            "text": "来"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000029",
+            "text": "た"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000030",
+            "text": "大"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000031",
+            "text": "柄"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000032",
+            "text": "な"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000033",
+            "text": "戦"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000034",
+            "text": "士"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000035",
+            "text": "誰?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000036",
+            "text": "お"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000037",
+            "text": "しゃ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000038",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000039",
+            "text": "やん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000040",
+            "text": "仲"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000041",
+            "text": "良"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000042",
+            "text": "し"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000043",
+            "text": "か"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000044",
+            "text": "淡"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000045",
+            "text": "く"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000046",
+            "text": "て"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000047",
+            "text": "誰"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000048",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000049",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000050",
+            "text": "いつ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000051",
+            "text": "なんか"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000052",
+            "text": "お"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000053",
+            "text": "しゃ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000054",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000055",
+            "text": "す"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000056",
+            "text": "ぎ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000057",
+            "text": "佐"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000058",
+            "text": "々"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000059",
+            "text": "木"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000060",
+            "text": "玄"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000061",
+            "text": "龍"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000062",
+            "text": "え、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000063",
+            "text": "佐"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000064",
+            "text": "々"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000065",
+            "text": "木"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000066",
+            "text": "小"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000067",
+            "text": "次"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000068",
+            "text": "郎?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000069",
+            "text": "これ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000070",
+            "text": "小"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000071",
+            "text": "次"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000072",
+            "text": "郎"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000073",
+            "text": "じゃない?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000074",
+            "text": "玄"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000075",
+            "text": "龍"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000076",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000077",
+            "text": "った"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000078",
+            "text": "よ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000079",
+            "text": "小"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000080",
+            "text": "次"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000081",
+            "text": "郎"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000082",
+            "text": "の"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000083",
+            "text": "息"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000084",
+            "text": "子?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000085",
+            "text": "も"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000086",
+            "text": "しか"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000087",
+            "text": "して"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000088",
+            "text": "え、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000089",
+            "text": "顔"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000090",
+            "text": "流"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000091",
+            "text": "小"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000092",
+            "text": "次"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000093",
+            "text": "郎"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000094",
+            "text": "お、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000095",
+            "text": "ちょ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000096",
+            "text": "ちょっと"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000097",
+            "text": "あれ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000098",
+            "text": "親"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000099",
+            "text": "戚"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000100",
+            "text": "が"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000101",
+            "text": "コ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000102",
+            "text": "ジ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000103",
+            "text": "ロ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000104",
+            "text": "ウ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000105",
+            "text": "の"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000106",
+            "text": "方"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000107",
+            "text": "!?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000108",
+            "text": "なん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000109",
+            "text": "で"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000110",
+            "text": "コ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000111",
+            "text": "ジ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000112",
+            "text": "ロ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000113",
+            "text": "ウ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000114",
+            "text": "にな"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000115",
+            "text": "った"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000116",
+            "text": "の?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000117",
+            "text": "ガ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000118",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000119",
+            "text": "リュ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000120",
+            "text": "ウ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000121",
+            "text": "か"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000122",
+            "text": "っこ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000123",
+            "text": "いいな"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000124",
+            "text": "サ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000125",
+            "text": "サ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000126",
+            "text": "キ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000127",
+            "text": "ガ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000128",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000129",
+            "text": "リ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000130",
+            "text": "ュ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000131",
+            "text": "ウ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000132",
+            "text": "…"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000133",
+            "text": "なんか"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000134",
+            "text": "オ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000135",
+            "text": "シ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000136",
+            "text": "ャ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000137",
+            "text": "レ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000138",
+            "text": "す"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000139",
+            "text": "ぎ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000140",
+            "text": "ライ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000141",
+            "text": "バ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000142",
+            "text": "ル"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000143",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000144",
+            "text": "よね"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000145",
+            "text": "お"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000146",
+            "text": "っけ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000147",
+            "text": "お"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000148",
+            "text": "っけ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000149",
+            "text": "ええ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000150",
+            "text": "ええ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000151",
+            "text": "ええええ!?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000152",
+            "text": "待って"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000153",
+            "text": "待って、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000154",
+            "text": "どう"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000155",
+            "text": "いう"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000156",
+            "text": "世界"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000157",
+            "text": "観?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000158",
+            "text": "どう"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000159",
+            "text": "いう"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000160",
+            "text": "世界"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000161",
+            "text": "観?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000162",
+            "text": "化"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000163",
+            "text": "け"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000164",
+            "text": "物"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000165",
+            "text": "いる"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000166",
+            "text": "や"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000167",
+            "text": "ん、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000168",
+            "text": "化"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000169",
+            "text": "け"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000170",
+            "text": "物"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000171",
+            "text": "いる"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000172",
+            "text": "や"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000173",
+            "text": "ん、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000174",
+            "text": "どう"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000175",
+            "text": "いうこと?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000176",
+            "text": "え、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000177",
+            "text": "なん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000178",
+            "text": "で"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000179",
+            "text": "佐"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000180",
+            "text": "々"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000181",
+            "text": "木"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000182",
+            "text": "小"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000183",
+            "text": "次"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000184",
+            "text": "郎"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000185",
+            "text": "が"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000186",
+            "text": "いき"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000187",
+            "text": "な"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000188",
+            "text": "り"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000189",
+            "text": "死"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000190",
+            "text": "んで"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000191",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000192",
+            "text": "の?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000193",
+            "text": "ど、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000194",
+            "text": "どう"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000195",
+            "text": "いうこと?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000196",
+            "text": "一"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000197",
+            "text": "つ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000198",
+            "text": "目、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000199",
+            "text": "傘?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000200",
+            "text": "音"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000201",
+            "text": "量?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000202",
+            "text": "化"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000203",
+            "text": "け"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000204",
+            "text": "物?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000205",
+            "text": "え、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000206",
+            "text": "な、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000207",
+            "text": "な、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000208",
+            "text": "な"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000209",
+            "text": "に"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000210",
+            "text": "この"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000211",
+            "text": "世界"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000212",
+            "text": "観?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000213",
+            "text": "味の"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000214",
+            "text": "分"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000215",
+            "text": "子"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000216",
+            "text": "も"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000217",
+            "text": "ない"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000218",
+            "text": "コ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000219",
+            "text": "イ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000220",
+            "text": "ツ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000221",
+            "text": "ら!"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000222",
+            "text": "待って、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000223",
+            "text": "主"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000224",
+            "text": "人"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000225",
+            "text": "公"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000226",
+            "text": "死"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000227",
+            "text": "亡?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000228",
+            "text": "地"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000229",
+            "text": "獄"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000230",
+            "text": "に"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000231",
+            "text": "して"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000232",
+            "text": "は"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000233",
+            "text": "綺"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000234",
+            "text": "麗"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000235",
+            "text": "す"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000236",
+            "text": "ぎ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000237",
+            "text": "か"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000238",
+            "text": "あ、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000239",
+            "text": "待って、"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000240",
+            "text": "死"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000241",
+            "text": "体"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000242",
+            "text": "か"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000243",
+            "text": "も"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000244",
+            "text": "子"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000245",
+            "text": "が"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000246",
+            "text": "地"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000247",
+            "text": "獄?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000248",
+            "text": "この"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000249",
+            "text": "声"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000250",
+            "text": "聞"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000251",
+            "text": "いた"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000252",
+            "text": "こと"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000253",
+            "text": "ある"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000254",
+            "text": "いや"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000255",
+            "text": "死"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000256",
+            "text": "んで"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000257",
+            "text": "る"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000258",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000259",
+            "text": "ろ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000260",
+            "text": "あれ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000261",
+            "text": "は"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000262",
+            "text": "確"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000263",
+            "text": "実"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000264",
+            "text": "に"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000265",
+            "text": "死"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000266",
+            "text": "んだ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000267",
+            "text": "よ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000268",
+            "text": "地"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000269",
+            "text": "獄"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000270",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000271",
+            "text": "や"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000272",
+            "text": "っぱ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000273",
+            "text": "り"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000274",
+            "text": "地"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000275",
+            "text": "獄"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000276",
+            "text": "っぽ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000277",
+            "text": "かった"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000278",
+            "text": "も"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000279",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000280",
+            "text": "見"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000281",
+            "text": "た"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000282",
+            "text": "目"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000283",
+            "text": "この"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000284",
+            "text": "ネ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000285",
+            "text": "ーナ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000286",
+            "text": "水"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000287",
+            "text": "しか"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000288",
+            "text": "ない"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000289",
+            "text": "じゃ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000290",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000291",
+            "text": "う"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000292",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000293",
+            "text": "え"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000294",
+            "text": "ぇ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000295",
+            "text": "!?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000296",
+            "text": "俺"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000297",
+            "text": "は"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000298",
+            "text": "な"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000299",
+            "text": "ぁ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000300",
+            "text": "惜"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000301",
+            "text": "しい"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000302",
+            "text": "と思"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000303",
+            "text": "って"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000304",
+            "text": "いる"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000305",
+            "text": "地"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000306",
+            "text": "獄"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000307",
+            "text": "に"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000308",
+            "text": "落"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000309",
+            "text": "ち"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000310",
+            "text": "る"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000311",
+            "text": "には"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000312",
+            "text": "まだ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000313",
+            "text": "早"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000314",
+            "text": "い"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000315",
+            "text": "今の"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000316",
+            "text": "男"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000317",
+            "text": "って"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000318",
+            "text": "ヨ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000319",
+            "text": "シ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000320",
+            "text": "オ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000321",
+            "text": "カ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000322",
+            "text": "・"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000323",
+            "text": "セ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000324",
+            "text": "イ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000325",
+            "text": "ジ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000326",
+            "text": "ュ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000327",
+            "text": "ロ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000328",
+            "text": "ー?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000329",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000330",
+            "text": "いつ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000331",
+            "text": "死"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000332",
+            "text": "な"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000333",
+            "text": "ない"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000334",
+            "text": "コ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000335",
+            "text": "テ?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000336",
+            "text": "鬼"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000337",
+            "text": "武"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000338",
+            "text": "者"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000339",
+            "text": "ね"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000340",
+            "text": "この"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000341",
+            "text": "お"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000342",
+            "text": "じ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000343",
+            "text": "さん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000344",
+            "text": "お"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000345",
+            "text": "か"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000346",
+            "text": "しく"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000347",
+            "text": "ない?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000348",
+            "text": "お"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000349",
+            "text": "前"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000350",
+            "text": "は"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000351",
+            "text": "なん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000352",
+            "text": "で"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000353",
+            "text": "普"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000354",
+            "text": "通"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000355",
+            "text": "に"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000356",
+            "text": "生き"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000357",
+            "text": "て"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000358",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000359",
+            "text": "の?"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000360",
+            "text": "力だけ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000361",
+            "text": "で"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000362",
+            "text": "剣"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000363",
+            "text": "の"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000364",
+            "text": "道"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000365",
+            "text": "を"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000366",
+            "text": "極"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000367",
+            "text": "め"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000368",
+            "text": "る"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000369",
+            "text": "化"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000370",
+            "text": "け"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000371",
+            "text": "物"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000372",
+            "text": "の"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000373",
+            "text": "力"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000374",
+            "text": "なん"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000375",
+            "text": "ざ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000376",
+            "text": "おい"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000377",
+            "text": "硬"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000378",
+            "text": "い"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000379",
+            "text": "こと"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000380",
+            "text": "言"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000381",
+            "text": "う"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000382",
+            "text": "な"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000383",
+            "text": "よ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000384",
+            "text": "も"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000385",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000386",
+            "text": "える"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000387",
+            "text": "も"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000388",
+            "text": "のは"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000389",
+            "text": "も"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000390",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000391",
+            "text": "って"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000392",
+            "text": "お"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000393",
+            "text": "け"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000394",
+            "text": "ば"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000395",
+            "text": "いい"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000396",
+            "text": "んだ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000397",
+            "text": "や"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000398",
+            "text": "め"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000399",
+            "text": "ろ!"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000400",
+            "text": "やめて"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000401",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000402",
+            "text": "ろう"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000403",
+            "text": "が!"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000404",
+            "text": "そんな"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000405",
+            "text": "顔"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000406",
+            "text": "を"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000407",
+            "text": "する"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000408",
+            "text": "な"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000409",
+            "text": "俺"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000410",
+            "text": "た"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000411",
+            "text": "ちは"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000412",
+            "text": "誰"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000413",
+            "text": "よ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000414",
+            "text": "り"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000415",
+            "text": "も"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000416",
+            "text": "分"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000417",
+            "text": "か"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000418",
+            "text": "り"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000419",
+            "text": "合"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000420",
+            "text": "える"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000421",
+            "text": "存"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000422",
+            "text": "在"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000423",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000424",
+            "text": "お"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000425",
+            "text": "前"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000426",
+            "text": "の"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000427",
+            "text": "こと"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000428",
+            "text": "知"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000429",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000430",
+            "text": "ない"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000431",
+            "text": "よ!"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000432",
+            "text": "一"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000433",
+            "text": "人"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000434",
+            "text": "だけ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000435",
+            "text": "の"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000436",
+            "text": "白"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000437",
+            "text": "い"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000438",
+            "text": "衣"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000439",
+            "text": "装"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000440",
+            "text": "で"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000441",
+            "text": "始"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000442",
+            "text": "ま"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000443",
+            "text": "った"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000444",
+            "text": "鬼"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000445",
+            "text": "武"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000446",
+            "text": "者"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000447",
+            "text": "こう"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000448",
+            "text": "な"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000449",
+            "text": "って"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000450",
+            "text": "宮"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000451",
+            "text": "本"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000452",
+            "text": "武"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000453",
+            "text": "士"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000454",
+            "text": "は"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000455",
+            "text": "鬼"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000456",
+            "text": "武"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000457",
+            "text": "者"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000458",
+            "text": "にな"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000459",
+            "text": "った"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000460",
+            "text": "ということ"
+          },
+          {
+            "boundaryId": "unseen-SsdxVhwxyYo-024-v001-input-caption-boundary-000461",
+            "text": "ね"
+          }
+        ]
+      }
+    ],
+    "styleLimits": {
+      "maxLogicalWidthPerLine": 36,
+      "maxLinesPerCue": 2,
+      "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+    }
+  },
+  "inputCanonicalSha256": "c3099cde0630f1570227fbe13df0c5a1c34f652237fd020e9b527bad5f87b6a5"
+}

@@ -1,0 +1,18 @@
+{"status":"renderer-path-preflight-passed","jobPath":"evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v002/renderer-job.json","outputRoot":"evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/render-v002"}
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: RENDER_RETRY_FAILED
+
+2 !== 0
+
+    at <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_unseen_material_render_v002.mts:85:8) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 2,
+  expected: 0,
+  operator: 'strictEqual'
+}
+
+Node.js v20.19.6

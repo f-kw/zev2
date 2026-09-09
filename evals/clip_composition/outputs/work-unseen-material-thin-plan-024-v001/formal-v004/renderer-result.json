@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "unseen-material-renderer-execution-v001",
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/renderer-job.json",
+    "fileSha256": "fdbccd36b2b451aa4cb91e2d97fb7ea03c8ad89d30ff5a8fb94311bec7871d49",
+    "canonicalSha256": "c4eda9c82d0a2d6c3f13f363f0567a485174b9ef7a04d89f7c892f4d97605a6d"
+  },
+  "exitCode": 1,
+  "result": {
+    "exitCode": 1,
+    "failure": {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "output-reservation",
+      "violations": [
+        {
+          "code": "RENDER_JOB_SCHEMA_INVALID",
+          "path": "$.outputDirectory",
+          "relatedIds": [],
+          "details": {
+            "reason": "UNSAFE_PRESENTATION_OUTPUT_DIRECTORY"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "instruction-024-source-authorization-v001",
+  "instruction": "ZEV進行管理２ 指示-024 続行",
+  "authorizationQuote": "新素材を承認します。",
+  "sourceUrl": "https://www.youtube.com/watch?v=SsdxVhwxyYo",
+  "sourceId": "SsdxVhwxyYo",
+  "productionIntent": "初見の鬼武者を進める中で、ぺこらが状況を理解したり予想を裏切られたりして、反応や展開が大きく動く場面を中心に見せる。",
+  "sourceScope": "元配信全体",
+  "fixedBeforeAcquisitionAndDiscovery": true,
+  "sourceSelectionAnswer": null,
+  "conditions": [
+    "外部切り抜き、チャプター、コメント、タイムスタンプ、まとめ記事等を候補探索・採否の正解として参照しない",
+    "人間による正解区間を探索前に作らない",
+    "candidate-discoveryを全発話から新規実行する",
+    "discovery結果を既存candidate-selectionへ渡す",
+    "thin plan以外に期待採否・採用件数・目標尺・期待区間を入れない",
+    "必要に応じて既存candidate-internal-retentionを使う",
+    "既存Core / renderer / caption系を再利用する",
+    "追加の映像理解・Gemini実験は行わない",
+    "複数話者前提の処理は追加しない",
+    "Planner本体は作らない"
+  ],
+  "ordinaryWorkInstruction": "通常の取得・STT・実装・検証上の問題では停止しないこと。",
+  "decisionBoundary": "新しいarchitecture/contract境界だけGPT_DECISION。最終的な動画品質だけHUMAN_DECISION。"
+}

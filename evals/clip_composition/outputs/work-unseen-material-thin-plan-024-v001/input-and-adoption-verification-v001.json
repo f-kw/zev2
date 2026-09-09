@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "unseen-material-input-and-adoption-verification-v001",
+  "status": "passed",
+  "planBinding": {
+    "schemaVersion": "unseen-material-thin-plan-evaluation-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/selection-plan.json",
+    "fileSha256": "53d76647948ec3f56d0e9bc67d7259c2113f283e7b05fa9c3c4512d7df3d125d",
+    "canonicalSha256": "a93fd275caffbb3db6e844ecbad4c1da26ab57589bfe4d3d0ea827c5699d60d9"
+  },
+  "sourceId": "SsdxVhwxyYo",
+  "transcriptBinding": {
+    "path": "evals/clip_composition/stt/SsdxVhwxyYo_local30_v007/source/source-transcript.json",
+    "fileSha256": "2364a70c51bc0a1c06d1db9ab3780c382a63b60a1ba308031f865928babc2f55"
+  },
+  "utteranceCount": 2297,
+  "discoveredCandidates": 17,
+  "selectionInputCandidates": 17,
+  "adoptedCandidates": 10,
+  "rejectedCandidates": 7,
+  "inputFields": {
+    "discovery": [
+      "schemaVersion",
+      "productionRequest",
+      "editorialCriteria",
+      "sourceId",
+      "utterances"
+    ],
+    "selection": [
+      "schemaVersion",
+      "productionRequest",
+      "structureConditions",
+      "criteria",
+      "sourceId",
+      "candidates"
+    ],
+    "candidate": [
+      "candidateId",
+      "sourceId",
+      "title",
+      "utterances"
+    ],
+    "utterance": [
+      "utteranceId",
+      "text"
+    ]
+  },
+  "checks": {
+    "allFullSourceUtterances": "passed",
+    "unchangedProductionIntent": "passed",
+    "allDiscoveredCandidatesWithoutPrefilter": "passed",
+    "existingClosedInputSchema": "passed",
+    "allCandidatesJudgedExactlyOnce": "passed",
+    "adoptionMembershipAndOrder": "passed",
+    "adoptionToEditRangesAndPreview": "passed",
+    "sourceAndImplementationHashes": "passed"
+  },
+  "scopeOfLeakageCheck": "Closed request fields and saved provenance; does not claim that the active agent has never seen its earlier attempts or their resulting durations.",
+  "humanAnswerProvidedBeforeSelection": false,
+  "externalEditorialAnswerProvided": false,
+  "priorSelfJudgmentSeenDuringSttRepair": true,
+  "independentBlindTrialClaim": false,
+  "technicalVideoQc": "pending",
+  "humanQuality": "pending"
+}

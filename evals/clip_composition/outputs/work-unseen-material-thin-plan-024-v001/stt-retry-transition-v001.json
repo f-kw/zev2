@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "unseen-material-stt-retry-transition-v001",
+  "status": "supersede-previous-discovery-and-selection",
+  "reason": "音声末尾の長さ0の反復認識を含むため、一つの音声区間を同じ既存モデルで再認識した。字幕の文字削除・幅上限変更・時刻の創作は行わない。",
+  "supersededFormalRoot": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v002",
+  "nextFormalRoot": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v003",
+  "scope": "通常のSTT・実装・検証問題では停止しないという指示-024続行の範囲。",
+  "stoppedOwnSourceInspectionProcess": 56587,
+  "oldBaseMediaExecutionStatus": "interrupted-before-base-video-manufacture",
+  "requiredNextSteps": [
+    "修正した全発話を再構築",
+    "全発話から新規探索を再実行",
+    "全候補を既存候補選択へ渡して再判断",
+    "新しい正式採用から共通製造を再実行"
+  ],
+  "humanExpectedAnswersUsed": false
+}

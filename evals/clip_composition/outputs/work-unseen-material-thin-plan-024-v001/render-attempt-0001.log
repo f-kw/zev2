@@ -1,0 +1,12 @@
+/Users/kawafmm/workspace/zev2/evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts:63
+export function fail(code: string): never {throw new Error(`DIGEST_SKILL_E2E: ${code}`);}
+                                                 ^
+
+
+Error: DIGEST_SKILL_E2E: RENDER_OR_QC_FAILED
+    at fail (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts:63:50)
+    at renderAdoptedVideoV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/adopted_media_manufacturing_v001.mts:348:113)
+    at async Object.executeUnseenRenderV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_unseen_material_thin_plan_v001.mts:298:20)
+    at async <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_unseen_material_thin_plan_v001.mts:317:30)
+
+Node.js v20.19.6

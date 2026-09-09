@@ -1,0 +1,2339 @@
+{
+  "schemaVersion": "unseen-material-offline-stt-runtime-v001",
+  "method": "installed faster-whisper full audio transcription, word timestamps, no diarization",
+  "preparationBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/audio-preparation.json",
+    "bytes": 98737,
+    "fileSha256": "f5b74ccf2e14b553d2e529895e814a4b45f5f4d572c5373801cfb169c10f431d"
+  },
+  "implementationBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/transcribe_unseen_material_local_v001.py",
+    "bytes": 5580,
+    "fileSha256": "780102c04243a0fcd01eaea86d1d565b7045a76b367c65d2840d442b39190d70"
+  },
+  "runtimeBinding": {
+    "path": "/Users/kawafmm/.pyenv/versions/3.10.14/bin/python3.10",
+    "bytes": 8832,
+    "fileSha256": "b7f18b46702963062baaef4e5d9a71942d56add60ca5b845b9077a6e4558fb56"
+  },
+  "modelBindings": [
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/blobs/346bb8684801a61c15ce82bcb80c29a63c2d1f94",
+      "bytes": 2796,
+      "fileSha256": "d86b7a7664a12559d644aa210a32ce9a7e03913e794b7ea4fb7182de69e273a7"
+    },
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/blobs/bf2a9746382e1aa7ffff6b3a0d137ed9edbd9670c3b87e5d35f5e85e70d0333a",
+      "bytes": 3086912962,
+      "fileSha256": "bf2a9746382e1aa7ffff6b3a0d137ed9edbd9670c3b87e5d35f5e85e70d0333a"
+    },
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/blobs/7818adb6de9fa3064d3ff81226fdd675be1f6344",
+      "bytes": 2203239,
+      "fileSha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/blobs/c9074644d9d1205686f16d411564729461324b75",
+      "bytes": 459861,
+      "fileSha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    }
+  ],
+  "versions": {
+    "faster-whisper": "1.0.3",
+    "ctranslate2": "4.3.1",
+    "tokenizers": "0.19.1",
+    "av": "12.3.0",
+    "numpy": "1.26.4"
+  },
+  "compute": {
+    "device": "cpu",
+    "compute_type": "float32",
+    "otherParameters": "installed defaults"
+  },
+  "recognition": {
+    "language": "ja",
+    "word_timestamps": true,
+    "otherParameters": "installed defaults"
+  },
+  "productionIntentInput": false,
+  "externalTextInput": false,
+  "speakerAttribution": false,
+  "modelDownload": false,
+  "audioChunks": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0000.flac",
+      "bytes": 535589,
+      "fileSha256": "8843e3ec2dda95c440f5deee6aac4b151f2a7c305696534bef25dffe407e5061"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0001.flac",
+      "bytes": 542015,
+      "fileSha256": "ebbb59ef462b95ec7e3e3fdf63db095cb9a9c5861c6aef0a1e84c6df461bbcf1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0002.flac",
+      "bytes": 538332,
+      "fileSha256": "1824d73477c18cfd042ebd8e3aff5aee207448ac7529a6a4d2b0c3e99ed49676"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0003.flac",
+      "bytes": 536310,
+      "fileSha256": "3e4bf77a6065d6a546a66911a5d9df39a04655615dce754dc2043032d1ddf0d0"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0004.flac",
+      "bytes": 538082,
+      "fileSha256": "74c467a4e6fc42879a3aa488d77d256e7138d7d2a0ca155aa2633dbb187fdc5c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0005.flac",
+      "bytes": 679889,
+      "fileSha256": "1fbd1408d6152d0dcb6528af3549ad3f410c15db0607496dcaf9a6de217240af"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0006.flac",
+      "bytes": 555002,
+      "fileSha256": "570f6b1e00a8e41acf5127631cd0dfd2099180eea57e96710f128c9724ee7521"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0007.flac",
+      "bytes": 641394,
+      "fileSha256": "aab389699d676b50cb60583425a885a42af784fa074903936d2f3bf13f8af613"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0008.flac",
+      "bytes": 635498,
+      "fileSha256": "44be1fab6b08e06999a385854d2c24dd632916bb664f614f425ab2b6f691e7aa"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0009.flac",
+      "bytes": 570828,
+      "fileSha256": "d809b672aaf5b994025eae7b5e03cef25eb28cae33eec5e724e3f1d394746fc3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0010.flac",
+      "bytes": 587494,
+      "fileSha256": "f7266eb9156deeb6fe5277a61a37399a761071c1c2ea62e6df33931baba55807"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0011.flac",
+      "bytes": 607951,
+      "fileSha256": "34fbec7053dea1832255e3169d1edfcc7e32a68eeb19e7281f87a5db00aececd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0012.flac",
+      "bytes": 593985,
+      "fileSha256": "9878a07a5fb8b8aafafbaf8ef3eb7961397f75ec5482285054d479fb0482ab34"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0013.flac",
+      "bytes": 566738,
+      "fileSha256": "b98239f5bab3fa2ef895b3910abaf41398ea06cf04f13c51a8831bf092a46fdd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0014.flac",
+      "bytes": 595475,
+      "fileSha256": "13fca863f60a21105c1f9f27aed8faa84d9f111d39937caa1cee4e1f39f6d0ef"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0015.flac",
+      "bytes": 603714,
+      "fileSha256": "fdd18c03b964ca470678feb3444a8e364fe900256e8203d0612ef19de541bdcd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0016.flac",
+      "bytes": 618108,
+      "fileSha256": "70823dbf07d88b2c9f9099de6b347bd3feef903a3ef4366f6e7b8b6214665224"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0017.flac",
+      "bytes": 545451,
+      "fileSha256": "30df912c3b5eaa6f3ba0fe20a5e3f0c0d7092179af9316d76b3184c953f8a7bd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0018.flac",
+      "bytes": 548250,
+      "fileSha256": "3875d52a39f0b610646bc85f1b7fc93bf0974bcfb505a524a28c5ca899f13260"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0019.flac",
+      "bytes": 519838,
+      "fileSha256": "079296b86157db0c5673b8bb76c79aebcc8c419c7463f00ccfb79e6baef29a78"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0020.flac",
+      "bytes": 568903,
+      "fileSha256": "92cec90e81cb33e89831c02b1583a43a83bad5a0fa0fff44ad503104fe73e592"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0021.flac",
+      "bytes": 547821,
+      "fileSha256": "b597f7e7da961dee357e5efefc9a4e8d7941f56a89753ff0913a1ffaa3b0d8d1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0022.flac",
+      "bytes": 558714,
+      "fileSha256": "d25332d461d54521174518d7d99685227e99fe9319caa63ff77818d437febde5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0023.flac",
+      "bytes": 552543,
+      "fileSha256": "b64891ca14eb85ca0975ce8079c2a16b208c3ce8f2d6130019e54549f1bec03a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0024.flac",
+      "bytes": 425199,
+      "fileSha256": "783d6f6b9065740a3cadae360b8b322165c04fff4fb30abdf38785bc94fb4432"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0025.flac",
+      "bytes": 559975,
+      "fileSha256": "14566a5436bde62ffcbe2a65a400ac70af711cb00a55badb2cc59b680e15a0b7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0026.flac",
+      "bytes": 513980,
+      "fileSha256": "0892ec8107da5498512f348866d79d5f4b6fee01f0f495654c088e15d04a1e2b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0027.flac",
+      "bytes": 534650,
+      "fileSha256": "d9d8820da7e6249f5f1bc9259a5c03e41bd32d23484fbe6500847b011b6b0ea2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0028.flac",
+      "bytes": 529627,
+      "fileSha256": "ac465b8cd9e9b3ee0e19533a53a04d72a5cd0dc280d81890a57e186a0eb844ae"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0029.flac",
+      "bytes": 514284,
+      "fileSha256": "0040b89ede2f0f8cd421789bcadea915f022e0b198dd7e4e072db863a481cf32"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0030.flac",
+      "bytes": 538365,
+      "fileSha256": "9fe6d6139f0371677476929df5e31048c493ab7fba3ec6f7e37833ce4c31877b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0031.flac",
+      "bytes": 521870,
+      "fileSha256": "ec85116274620c6468f7ba1fc72a8bc8ca7e0d1ae738714e58d0e9c2a665c86d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0032.flac",
+      "bytes": 599898,
+      "fileSha256": "861887b5ed210966d88a273ad2a10afb9bcf34351cb41cb195c8ccc18ff106cd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0033.flac",
+      "bytes": 628512,
+      "fileSha256": "c16f753b09133a557de7a3edfec7c81ad2fe28b030ccdad96ccaf74778280dd7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0034.flac",
+      "bytes": 542889,
+      "fileSha256": "3b1b949a589faa62fddd92183becd355d2153660d3ace4d36c77e02b195a5ad4"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0035.flac",
+      "bytes": 597184,
+      "fileSha256": "ef2bb7db721d78c1c6ed28d04a02b1cfaef48f7e8c81f4518088bc55205d500f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0036.flac",
+      "bytes": 571486,
+      "fileSha256": "618934f0ba0ab8e763d723f6916484dc684216c641c20c1a9a0544f98be34173"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0037.flac",
+      "bytes": 582147,
+      "fileSha256": "8f8fedacd606f67bef2ad6ad62f3343aa2b2202b041e4b8103110ecf1a7f4caa"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0038.flac",
+      "bytes": 658286,
+      "fileSha256": "01966d14e5dce7d95494dba7c0bf76606f2a06b89a5df8f687a3252e02062231"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0039.flac",
+      "bytes": 567932,
+      "fileSha256": "fa31c1a2260826e049f206a2f0a5445e59ee53db4802f633a0ae1902aa4e8d41"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0040.flac",
+      "bytes": 595308,
+      "fileSha256": "470e2d47fc57e99e6dce31721601b0bb23679dc77e5eb1e4fcf540f436b0ef9a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0041.flac",
+      "bytes": 595105,
+      "fileSha256": "27330a9eec24666ea522b8091451de2664faea74caa2757ec3be6da189f37358"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0042.flac",
+      "bytes": 613890,
+      "fileSha256": "5211a04bc33660c3fe1cb63d167e1fa6867f2006500f52c1d4b7f1a3a78b9bbb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0043.flac",
+      "bytes": 556898,
+      "fileSha256": "6c3a410440a4ecf8525de6ceef15431ac9b64aa1bf55de9ccc08d25b78cd65c6"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0044.flac",
+      "bytes": 600503,
+      "fileSha256": "af7d68413c1a9c33f8b6f9fa82cc2f2bb95e34b4d651531d3dd0589cc27858db"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0045.flac",
+      "bytes": 634140,
+      "fileSha256": "ba2c3b0114e8522c19f8aaaa597cc919e61b8854d18268e7629a9145fdafc8a8"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0046.flac",
+      "bytes": 671241,
+      "fileSha256": "dd4ac600a18b5a988bf498ea1726dad0a842860f3f78639ab19c8a976e3c41e9"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0047.flac",
+      "bytes": 632495,
+      "fileSha256": "4b534d287acdb6269ba57d011b9ff388118bfc1ebd209eb9a74c2449ad3c4ae1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0048.flac",
+      "bytes": 612937,
+      "fileSha256": "15a9f1de950d819cd7cb101ddbbc5f9554a096f16781ade87e03da6a119449e3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0049.flac",
+      "bytes": 672426,
+      "fileSha256": "9eb784963fdd958651d74307e392d528bd273cc7f527a77bc7ae38fa273550e6"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0050.flac",
+      "bytes": 671943,
+      "fileSha256": "5acbbe640d2b124805c34e6ff65e913391cd770365321c9e2cb100fed226fa43"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0051.flac",
+      "bytes": 694678,
+      "fileSha256": "13e393791bacb0ddbf3e86fb34c85fcf519a6a7ebe00dccc653f02fd2e7be9e4"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0052.flac",
+      "bytes": 658169,
+      "fileSha256": "0b68d33eb5d7b7fd296e855812256011f9ef88dca04e96e7f176162db5cb3f1d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0053.flac",
+      "bytes": 510457,
+      "fileSha256": "c8f11522fcc5e39994988da49c594a02ced4866cedbab17b7773c69473899d78"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0054.flac",
+      "bytes": 545818,
+      "fileSha256": "887172ce63f00b291ccb691de57afbda21a363eb9f71a5233a6e412fcd770b28"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0055.flac",
+      "bytes": 543300,
+      "fileSha256": "8ecdc4be86689546bf137c8b810eaeba8a1f1d085570c4946b3fd7096b3205a7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0056.flac",
+      "bytes": 626655,
+      "fileSha256": "aa5d7029d20d6e8501beea9e8d388b4932c19ec7040054965cc9fc822d91c782"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0057.flac",
+      "bytes": 671602,
+      "fileSha256": "95e4e88fc48a07a778e6b270c69c95ebb82f0999dc0ba1be719fa84fe9098182"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0058.flac",
+      "bytes": 590704,
+      "fileSha256": "eeb805c771d1e86f1fe570403f51432b95d24bebc5d407d21b7a603b5391b656"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0059.flac",
+      "bytes": 511564,
+      "fileSha256": "73cb91ef666ef818f15c21c06e70b292c769b30fafc0c3925ce3c953675d9936"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0060.flac",
+      "bytes": 544428,
+      "fileSha256": "776b0bfd18f6391fb792da180eea1eafbb6226cc379a438bfa3ab8fa15af4afa"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0061.flac",
+      "bytes": 576068,
+      "fileSha256": "4fb98b98d8752ea6be63dd050f2addeb4955436c2134fb89decabe6795f4e37a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0062.flac",
+      "bytes": 553158,
+      "fileSha256": "ef021d372991bec55fb08c57328b1e3ebf925864226c52dccd8c6fcbce8ed84f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0063.flac",
+      "bytes": 593281,
+      "fileSha256": "9176681b06e5c12ce6d1c6c247be8a36106c4e82c5d9ba75b8cf2da31ecd749a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0064.flac",
+      "bytes": 603901,
+      "fileSha256": "ac078e8bfdd5467d56479267191a8c3e3622c13af7c2bbd684095850e2b4fa1c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0065.flac",
+      "bytes": 610201,
+      "fileSha256": "e3acb5fcecd9818e4cf655cd6017d566049757f8919dd778b1fab77c456cd100"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0066.flac",
+      "bytes": 652438,
+      "fileSha256": "5ccea677e2126c213c583aded09647bf5edf2d02f8b071d3239dd22b0344ec6b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0067.flac",
+      "bytes": 522435,
+      "fileSha256": "2aeebb6a2a1f04b456933f2996ac726e14c13208479ea7ef0797a07b73a58d54"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0068.flac",
+      "bytes": 634573,
+      "fileSha256": "ec55d59f881736ba8038711c19a0eb6b6b141cc61ff88fa2cd0ac6a98f9de43b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0069.flac",
+      "bytes": 606273,
+      "fileSha256": "e7bb19b40fa63eeb1c2b98d07f0c8624d94b8dea19c41b4d95ed11a1c947af27"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0070.flac",
+      "bytes": 563738,
+      "fileSha256": "e37f5fc9aa1c991b2575af7b319f21535070a7688ab821c6ef33382ee9e44ee0"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0071.flac",
+      "bytes": 622199,
+      "fileSha256": "58a780cdaf7baf3fc6f52634bb6cd5e113faffeb92f892a05c9eace68a747427"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0072.flac",
+      "bytes": 568490,
+      "fileSha256": "a1b2f64a15686d566715ec7e1411297c19e70c7e16f4713c94357c749f92f0f2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0073.flac",
+      "bytes": 529885,
+      "fileSha256": "179b8c475cd16cc786383dd1a644b24614cf3d73043daa7bb2f07e87e3116631"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0074.flac",
+      "bytes": 565345,
+      "fileSha256": "d2f935b7860cab69af81bb4ca335bfbb3d8f6d3d99fd798475e6865bcbeb0e8b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0075.flac",
+      "bytes": 628181,
+      "fileSha256": "675c1913eca04f2747dba8105e34337b0f60f4ce7b6d14dc351fef561e840b15"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0076.flac",
+      "bytes": 661956,
+      "fileSha256": "2ed4c558eef42320d83cce62546a66dea444232a071fa726b6a74ac78308cd60"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0077.flac",
+      "bytes": 624496,
+      "fileSha256": "be80332bb58c914f9fd46a668902b1e7d72dc12f85536a561c4ee28b9452d885"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0078.flac",
+      "bytes": 595899,
+      "fileSha256": "b989598a7a9f40acb214d656babfe64f91576e677217747ae475d2f747e3a489"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0079.flac",
+      "bytes": 635918,
+      "fileSha256": "6c2c3910111b338408c7e27ab39a4996970ab9dc06791f7b856f9dd1e06c954b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0080.flac",
+      "bytes": 597137,
+      "fileSha256": "a17f2e357e64a639962daa138b75364b2f39b295b5552cfc7f5222fb3857e25d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0081.flac",
+      "bytes": 528744,
+      "fileSha256": "97c68136dc70854419448c0ea03433f7896a5dd01a117071a44f2fef203fa9e1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0082.flac",
+      "bytes": 443497,
+      "fileSha256": "4a124dc378cb75218fbdc60d20c9738fed3a97d7388350cde1946d1c16d0bada"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0083.flac",
+      "bytes": 437834,
+      "fileSha256": "92565ce96a1896a729484bf9d36d5745e8e53128cf68aff83cdfbd4b48f28e2e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0084.flac",
+      "bytes": 475149,
+      "fileSha256": "bc051b0e28abf9d207aeed7ea302c3c887b547155bb10622159bea4a0e37e6eb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0085.flac",
+      "bytes": 498123,
+      "fileSha256": "2b39390aa02c8b04ec4e15320c606b8a48886b101b0040bb4daa3c993dabf2cf"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0086.flac",
+      "bytes": 572769,
+      "fileSha256": "f8fc1374e2255a477ae0f787da08230adab0b0682af242371a050f3b451d9d6a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0087.flac",
+      "bytes": 504361,
+      "fileSha256": "1dd8e359cf3f8ed472ac63960efe0e0a1e15cf5367f6954266266882b7586e4a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0088.flac",
+      "bytes": 532360,
+      "fileSha256": "4735ef4cdc966f3dca2b9ffca180aadcb8e907f5e5d8d4a12ca3b945ec100465"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0089.flac",
+      "bytes": 525005,
+      "fileSha256": "c1107f71418862950f604153a51a401e8c3e47d6006e3f4e766fddd62c07357c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0090.flac",
+      "bytes": 506044,
+      "fileSha256": "54af95460b9a91a0ed25b89e6928d3612cec392df7e0c1459d4e89afd33eb34b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0091.flac",
+      "bytes": 517042,
+      "fileSha256": "4b66bf10669df578c1d36f93a123c54cddc163acea23fa46f5f89157e2adf548"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0092.flac",
+      "bytes": 500356,
+      "fileSha256": "89f4f00f760df92acbc6293050fe7c8107932a9db5cd6c9e99fbf64d006f2955"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0093.flac",
+      "bytes": 559783,
+      "fileSha256": "d65bc6d4c35c42b3714a9c045b5174df577a9fc8458e3885f604c0c03900b0c4"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0094.flac",
+      "bytes": 481257,
+      "fileSha256": "a0639b03faa53680a509970a270747a3c4e79d6ed0fb9247e077afd70a4f1a0f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0095.flac",
+      "bytes": 458311,
+      "fileSha256": "2881e97665ab5ed49c9fcb20316b88b73dba44a4ddebe35206b60ad4a911bc50"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0096.flac",
+      "bytes": 554656,
+      "fileSha256": "ed2f647d32458e1534639e852115e3a4338868f0600452c0625f8f2fe2155382"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0097.flac",
+      "bytes": 433349,
+      "fileSha256": "77b14dba56c0a9285e95f4f0873b4443b29d1a26d51210cee3e3ab76a6fceab9"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0098.flac",
+      "bytes": 447058,
+      "fileSha256": "f087780ce97a9b7b00fb0e10e92f86d6e1681396b4ff4daf9dee966da82f38a3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0099.flac",
+      "bytes": 447583,
+      "fileSha256": "e198671a988f519bb127d89801a5185b344bbb64435d127b0b5ec6b6faed309b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0100.flac",
+      "bytes": 480533,
+      "fileSha256": "e94641e50e67488ba6a7849de6d87e0c17db715d89b45abf35dcc21dca4f0508"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0101.flac",
+      "bytes": 491012,
+      "fileSha256": "66a6ff0208976744b7920da725f3857d6fe5010c8ae4b610bde6dd693ca3ca1f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0102.flac",
+      "bytes": 545458,
+      "fileSha256": "c26e0fec6cd21ac11e01010836ca3363739a89678c762e35beaa804cd7631a63"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0103.flac",
+      "bytes": 551066,
+      "fileSha256": "7698e501e1b9116b7106a34239017003b4f3c5d71ee0b3650bfc75ba6a9467c1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0104.flac",
+      "bytes": 610942,
+      "fileSha256": "8a5890d985be5e2b5d859194f70798be36576692fefc48eefb2325ea183c4b78"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0105.flac",
+      "bytes": 582688,
+      "fileSha256": "a0da88c2689f715be3f51e388c09f1fdb407c8ceba1cb828145a0487eaf5d844"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0106.flac",
+      "bytes": 634999,
+      "fileSha256": "c34ba39c109f2414c53fe643ab12e525e41da096f61f6e3360e86cbb6d6d8810"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0107.flac",
+      "bytes": 534854,
+      "fileSha256": "f56d71f3c234e5e4ce2ed25b3bdd959ae51c7e59bcf594f5c1467a91fb288dd6"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0108.flac",
+      "bytes": 541406,
+      "fileSha256": "2145d6a17a55e6411ce1116f22c51188e57c64a964b153f0a6948af73ac47500"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0109.flac",
+      "bytes": 583490,
+      "fileSha256": "b0276f82532633a60888506dde38d0b8bd9b8b5a343ab9dea87554270f0f4b7b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0110.flac",
+      "bytes": 528947,
+      "fileSha256": "31f2cfb84472fc039235e8eb1f5a252aeaef293e4b5d730de7511aebfb8fb5da"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0111.flac",
+      "bytes": 448791,
+      "fileSha256": "e0d24289ac947b0fd3fbca0000b036906ef401694163f3775088c50b65c037e3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0112.flac",
+      "bytes": 458525,
+      "fileSha256": "a4420ffba7f7dcf2f7d3cc7467351aa4d8861ba284ded7950e41cd0c4026b587"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0113.flac",
+      "bytes": 577969,
+      "fileSha256": "1e33cd07a020cb271295252788f7e38075d7d167e93e6f3f5bffb85a3dbca870"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0114.flac",
+      "bytes": 496955,
+      "fileSha256": "71eff07d659ba80a046724b7fd6e5c6724404222e0df72dc3cb87dc1d03640ab"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0115.flac",
+      "bytes": 643429,
+      "fileSha256": "eee49fc1dbfca1d642ce27c90cdf9fea757cd78a1409e5ffc877c2f63435df28"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0116.flac",
+      "bytes": 558173,
+      "fileSha256": "f24c0613e10e7686f91b08b5a76f2695c39f611ba9d0d8e0624e25bc2253721b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0117.flac",
+      "bytes": 625775,
+      "fileSha256": "d7efbc6ded19f58788ae92cfb11aa4254494083bb8219477e9e5e3d5e0231a91"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0118.flac",
+      "bytes": 469080,
+      "fileSha256": "75b31d6aba7e6bde3b4f48ffd39bdf2fddf0087d7ff787d1dcb0ab01dbe1141b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0119.flac",
+      "bytes": 535858,
+      "fileSha256": "2269ec61fc02df26846ebbe552dec7994e2bc9161178349754d853794482c5a2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0120.flac",
+      "bytes": 623405,
+      "fileSha256": "6c8a902d36c161cba9fa433837aa22d0a75cf642120a07009203365e4508eb66"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0121.flac",
+      "bytes": 592943,
+      "fileSha256": "273a8cbd2c077dacc7cdc81ec23d691f79296f84a5c1ead37a56fff29fb27944"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0122.flac",
+      "bytes": 505519,
+      "fileSha256": "f565349f097b4ce51b5e5804aff2ad0b31d909455fd7b2261411e3c401688d15"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0123.flac",
+      "bytes": 560802,
+      "fileSha256": "ac2146d89a04e0682ee63c67001faf97a351ad9e9f03c3b68144a5c248c45f1f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0124.flac",
+      "bytes": 645598,
+      "fileSha256": "03bfae45069b80fd8a9c7177f5b138e9d54beb008fb8d555a6f49fe5c581c1e6"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0125.flac",
+      "bytes": 591266,
+      "fileSha256": "5656335cda37775bcd396213529b237a1c42fc2ec8d3f23756219eec54c64beb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0126.flac",
+      "bytes": 590459,
+      "fileSha256": "4468b391a451cc513954d696f22b74e0794300a65bc4da11e41298a901ffc102"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0127.flac",
+      "bytes": 541293,
+      "fileSha256": "ddc7873240c3807d224d2efdfeb57de2f80fe808528552f0959759d44a4f508f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0128.flac",
+      "bytes": 499133,
+      "fileSha256": "4fd4c75a144b8d2c9df6da9d283002b90a4cb3b13453387cf86a634553e9887c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0129.flac",
+      "bytes": 631260,
+      "fileSha256": "f2f36a598fb0d89ac46f5558df97c0ac892105c75228652a87ebb1218317e047"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0130.flac",
+      "bytes": 618701,
+      "fileSha256": "248911af3ad9a604cbf19276442751994bc0062562eefb41eccee1274cd279f3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0131.flac",
+      "bytes": 530020,
+      "fileSha256": "ff5d9993fc955e09973a5e10e2fd5280d5f9c9ed628457022d6212da81f90b4b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0132.flac",
+      "bytes": 540607,
+      "fileSha256": "701cdb88ba940ace9e9b9f1c55ac6587aa67cc0cba91fa28a4cc15fd9da87909"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0133.flac",
+      "bytes": 474384,
+      "fileSha256": "5ebfb1a7f68243e49f8520fd0eef42f1c3fc73dfd44eec88710098bfa08c12ad"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0134.flac",
+      "bytes": 606656,
+      "fileSha256": "4217aca2f03d08ebf8892fda1ecb9419d09e174df6b17388f900b7e37e6f9bdb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0135.flac",
+      "bytes": 611540,
+      "fileSha256": "60fdf8a40f4c61cf10ecf28db9e427d670b223621f3b971e48089bae1c011fe5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0136.flac",
+      "bytes": 497533,
+      "fileSha256": "d6c3a3f9646a941ec5931879fdcc96d6357631ce6471425b646c9a8133f649e1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0137.flac",
+      "bytes": 534994,
+      "fileSha256": "750ad78ee7ba59dd562a0643d8cb847c5c305c2a925e93c230d9516496d8d584"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0138.flac",
+      "bytes": 625039,
+      "fileSha256": "0d3ee25ab64e43d95783c10c5446301cf4c4ab3467752f3ccfc7e5380f98a68e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0139.flac",
+      "bytes": 534537,
+      "fileSha256": "85ba67e7d0ac4e57db441909836f9e2a4df6ff6bf5f575278c36a5897f50db8a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0140.flac",
+      "bytes": 646624,
+      "fileSha256": "cb152e80af8872626ed2d9113b0063b02bcdc826964478fb8b984ffa8b3e54ce"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0141.flac",
+      "bytes": 598467,
+      "fileSha256": "aa6ec66caf1836ae7e7b6f848ec64890badc96d723107f351462080ec16a1908"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0142.flac",
+      "bytes": 519720,
+      "fileSha256": "2e693d00fb8b6471e2864a775ff8bf533b98d1eeccaff292d65bca1e7689d3ff"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0143.flac",
+      "bytes": 534444,
+      "fileSha256": "d82d618492133105f40c6ec1bc5a6c48512cb6d8763126564205646b25678434"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0144.flac",
+      "bytes": 597166,
+      "fileSha256": "1ffe780155bacc658bfb0e17032109035f3e4e6a7fa59e5425e0d8a8e8478f3b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0145.flac",
+      "bytes": 467475,
+      "fileSha256": "9b80f2067d867588e6420356f09c945dc1f03581b631f086593cb87c19cef683"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0146.flac",
+      "bytes": 578476,
+      "fileSha256": "e6346d69bede73bdc58f394cd82f3983d9ee8d835e44bb1f3f23013af463805d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0147.flac",
+      "bytes": 589311,
+      "fileSha256": "8e2a81f98555cc2908d8d2cf1debe6bfc58d678375940fdfda4a981fa8e0aea7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0148.flac",
+      "bytes": 639561,
+      "fileSha256": "77b3e023744d5399ca3166d22aeff13943754c450ea296340360e2215da4fe29"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0149.flac",
+      "bytes": 660027,
+      "fileSha256": "cf5abc7e114a7c99d172bea87a2c390bb653daa9ffd11ffce61da516a6f28547"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0150.flac",
+      "bytes": 648773,
+      "fileSha256": "70a0ac5e98ac217337df12191f780f686f1824b82fea636ffdca7f4e737a6145"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0151.flac",
+      "bytes": 631719,
+      "fileSha256": "d2361a1a74889fd842d13057641c78e252e057c11c05246396e3aa21e30a998f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0152.flac",
+      "bytes": 476044,
+      "fileSha256": "5fc530e1aa59b0c40718860e11cc109a268bd2b459cf26bbf6986f9e71d3fb66"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0153.flac",
+      "bytes": 525773,
+      "fileSha256": "802241e1dc60866128c54a595d2c9d317f4e704d6f089492ef3c386cc19e534f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0154.flac",
+      "bytes": 536934,
+      "fileSha256": "f263a6b5af81fad57dad678ee1cb48d30b1bd500ad0f3d2d148d3247b2c7a736"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0155.flac",
+      "bytes": 428650,
+      "fileSha256": "7fe8e9fab988c342fcae8b97ceb57c4bcfb2ab38ac6cbd0ea91cf9a5f998e2ce"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0156.flac",
+      "bytes": 543055,
+      "fileSha256": "e5612d8966e9c3cc8d2adf8fcae5843257560f77e462cdfba1aa6f59934ee3f0"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0157.flac",
+      "bytes": 603817,
+      "fileSha256": "61df57031e0bad0fd7c210703d324307749ee6b548939a68189ea83953e87ed1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0158.flac",
+      "bytes": 642582,
+      "fileSha256": "9ff95ba30c9502cd3eead6a8a1442fce04c88c2145be4910b8179e411232b7e1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0159.flac",
+      "bytes": 586361,
+      "fileSha256": "47f8cb6d38a3d3eb7beb8b6bd731681b06cf382e4a6454b367a643a1fb3e1e34"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0160.flac",
+      "bytes": 645659,
+      "fileSha256": "44dabb9f28932cfb780e1c436a8c2202182ead876679509849ea9e6eb87250cc"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0161.flac",
+      "bytes": 534061,
+      "fileSha256": "75e9dafc6186fa56bcd62c9b5d602042fa5a17653832630eb1ac46990c085052"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0162.flac",
+      "bytes": 574048,
+      "fileSha256": "549436d0220532dfbf2404cd13feb2dd3e71b7da9d0e03b3a3c970f1ee24fa3e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0163.flac",
+      "bytes": 498916,
+      "fileSha256": "07bc1ad757bef1315444d1996c65c89bcb26bd090e9caddf906378da7bc81232"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0164.flac",
+      "bytes": 588521,
+      "fileSha256": "6a4508cf5428f92e12f8ebe2742cc2f760f5c4d4c7431eda324493c45d9e4fd3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0165.flac",
+      "bytes": 603160,
+      "fileSha256": "b31b0c245237df78413f4eef4303d647ea2c97696bc7a90fc688e4a71f7357d1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0166.flac",
+      "bytes": 453938,
+      "fileSha256": "2d716b2c76134bb569a9ded33a49a79c26c1963b1206af276dbcf1313a87f9dc"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0167.flac",
+      "bytes": 503894,
+      "fileSha256": "3788e3655a189d560c7b0cccc72f5963aba4d5e84d7e4f09bde8cceaf868e762"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0168.flac",
+      "bytes": 601972,
+      "fileSha256": "34ab7985acac05f09c721967128e467bea9d7b7e415283f60526c554f0617150"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0169.flac",
+      "bytes": 609261,
+      "fileSha256": "ed11d63df4ce4ea0edf904870b93f0ccff77e37a4ceb0df32bcf849be06280ce"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0170.flac",
+      "bytes": 621534,
+      "fileSha256": "58f5092b16d155da2253e552006fd2387972555c46c59b7c2c3715898f783e72"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0171.flac",
+      "bytes": 644292,
+      "fileSha256": "060c4d59295727e6a0b1138a2eef4ef9002dae8f36b14e78ecc3606fffe13e9d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0172.flac",
+      "bytes": 571306,
+      "fileSha256": "f31365b37129acac907a004a05194fa26e7fd468ba6ad8bf02c281881b811b52"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0173.flac",
+      "bytes": 659342,
+      "fileSha256": "99caeb8ac858fdeafd1e65936d83b0e3754165a5d8502a6d869e457fbe38a561"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0174.flac",
+      "bytes": 633490,
+      "fileSha256": "4002f52acfad3822a335b1266db250552160cb3f6e3282fb08070dcee32d859c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0175.flac",
+      "bytes": 631080,
+      "fileSha256": "1d8bce63e11835e29f276723e2d93cf4f14ed245c1c87824c01f79f898c744a0"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0176.flac",
+      "bytes": 605952,
+      "fileSha256": "3ee02ae772d484864734fe36053454bb7f26c8e4818d902eeec3f200e14ff30c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0177.flac",
+      "bytes": 642811,
+      "fileSha256": "35e15d0b600d8f7355d0985be9384d4609f4ab09f916093456abcafb7f145332"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0178.flac",
+      "bytes": 611460,
+      "fileSha256": "a56f71d73451b2af9ec6e7264b1ad2ea3db683f5b9987a8fd44ea612482ee318"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0179.flac",
+      "bytes": 677816,
+      "fileSha256": "ece0a15478ed9820995694decf87aec92b258e22845916b145322f8564f74840"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0180.flac",
+      "bytes": 610808,
+      "fileSha256": "1ef2ca1e4143414d5e64ee66c68d66c828716612aa2dbdb7e3d81fe4032a8a92"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0181.flac",
+      "bytes": 636707,
+      "fileSha256": "7ea7b9ca3ecc8a9870d516526a9d8a38d165c3bd0dbd2428fb38db291e75ccde"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0182.flac",
+      "bytes": 675245,
+      "fileSha256": "0998de7facbfe5ccefed74c56847c46a77cbd45e13f8f718bcbc53b1dee2290d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0183.flac",
+      "bytes": 611184,
+      "fileSha256": "4594b4fec106d8b35e759ced88fe165d1c1cb5035d9d477610c72201a448b47a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0184.flac",
+      "bytes": 660961,
+      "fileSha256": "4e47633b5b0a452c1de8af10a83f54b9ca9e86bb3b03d76e7143a818fe08e09c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0185.flac",
+      "bytes": 631385,
+      "fileSha256": "113f439e87a84daa1a5269e271936127f41c000ec5f00bb4d1a79c5f152cb963"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0186.flac",
+      "bytes": 666395,
+      "fileSha256": "997d21c02a697a23304c8657c322acd5f60f483473db3fb46e72c35625a9db93"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0187.flac",
+      "bytes": 543596,
+      "fileSha256": "649bc0604ca79bf43b9daa2a4166b126814b5e751471d7a5b2b6f9c7bd794fbb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0188.flac",
+      "bytes": 521726,
+      "fileSha256": "eeb320a809c4209bfeda0442bfc854dc88d046bf69a7d4e489549b67a5bcbdfe"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0189.flac",
+      "bytes": 629713,
+      "fileSha256": "73a4a2c091d415063ced8e75594cfe9992a080e2d280af66caf922c2f205161a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0190.flac",
+      "bytes": 636318,
+      "fileSha256": "29f7f369f73fdb66c1a1c61ca2506108c36253cc48a52a84942d43c4a3b80b8b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0191.flac",
+      "bytes": 570264,
+      "fileSha256": "c54c2169e8a5e86950bcee80d3d3a5d3d53fb3648b7e5959dae2677d500b6da5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0192.flac",
+      "bytes": 612053,
+      "fileSha256": "189717f571d4850d368e8cf2d08776960d9f5a013b61f8d4f4fe3ce29d7c1fc1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0193.flac",
+      "bytes": 601547,
+      "fileSha256": "70c5f95391d84a48a46427dacfaafb41ef3da53537bf25411504a8f2a82afe8a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0194.flac",
+      "bytes": 589063,
+      "fileSha256": "65e0e4e952c80b36462a903d9605541d2cfddd0442c735f620cc78df3bee60eb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0195.flac",
+      "bytes": 526420,
+      "fileSha256": "2d7a7e67ffba828fad6f47ca1fce03f4472b1be08dd76024fdccbe4fe25b85b2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0196.flac",
+      "bytes": 510378,
+      "fileSha256": "4f6cb4d94c8bb54a7da3c8477a07ffeb485cb8067c4a3af23ae7e6891060dabc"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0197.flac",
+      "bytes": 595011,
+      "fileSha256": "e58cffb32e163b24156104ad29c0f5a6f74cd8d354d0c6b4f77c4fa2d4e64524"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0198.flac",
+      "bytes": 638897,
+      "fileSha256": "4f9b12eb8ad5c26ae9374cf0f5a7683b3bd8449ffb9fd658f4be89c7ef85703b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0199.flac",
+      "bytes": 596699,
+      "fileSha256": "e9c09bad861e6511ea65b1164f7fb937c8432bac1ae6b2a1169a60ace45d9dbf"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0200.flac",
+      "bytes": 560721,
+      "fileSha256": "26b9d3dc81742c4f0b5f752ee3f57d198f068cd6a53b657ee074ae60ffb0443a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0201.flac",
+      "bytes": 520968,
+      "fileSha256": "6ba264dbf32703d4698366eb3eb8a370833ab31a95eb0c951238799710df0be9"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0202.flac",
+      "bytes": 513676,
+      "fileSha256": "9ed5a9b5f6ded7529f20b669628b47910ded86b8c2fc86037c3741368f8a8d84"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0203.flac",
+      "bytes": 473229,
+      "fileSha256": "691456b47dfbe200d5b3a8bf001042ee1a1c426d7abe2c8e00161a701821b5ce"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0204.flac",
+      "bytes": 510969,
+      "fileSha256": "b6997f86a71cc0bc34134d854f1410d458373fe923a21d4ce7177467bb61e8d5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0205.flac",
+      "bytes": 444177,
+      "fileSha256": "10e2336f1ca171e2f772a8bde38ad29d5443844a15571dc55b7700bfdcd09df6"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0206.flac",
+      "bytes": 560642,
+      "fileSha256": "02cd07251fdb7b9d70edbaf27d6a79536366e5ef14c1ebdd501765544000b311"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0207.flac",
+      "bytes": 602157,
+      "fileSha256": "a50cef7fc7bc20196a1dbfc7a210e650cb360e79fcc5841919bae1243ddcfc3f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0208.flac",
+      "bytes": 548864,
+      "fileSha256": "c433629da5e47cf31775bc484fc3948046446866a42138ea440ae8bc1a782800"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0209.flac",
+      "bytes": 574000,
+      "fileSha256": "1ffcc8364974a5d78817f226e404dc7655b21be61b210d237927f622033861ae"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0210.flac",
+      "bytes": 573621,
+      "fileSha256": "10674cbcdc6c874cb16fc38a0c2b7bc7358a62f26f2d083b705bcb65b3bafae2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0211.flac",
+      "bytes": 597470,
+      "fileSha256": "75d95c1f6f41c434e7d1cc3301dc5e765ea27b9f7893eb34cc3bc222ca35e9b4"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0212.flac",
+      "bytes": 657736,
+      "fileSha256": "78e16ea00b830f8943557590ce76876c9ae5119dce25ce9b31f7adee5ed4a0c3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0213.flac",
+      "bytes": 597605,
+      "fileSha256": "7968a4857fc08611144b2cf421d1a7b6647284de9023e151644fc0dd8a9edb83"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0214.flac",
+      "bytes": 580480,
+      "fileSha256": "c6edab345474967b833c3658f902f76378d24bc55a765d721817b9e6cbd5a14b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0215.flac",
+      "bytes": 532332,
+      "fileSha256": "7b06b0ca86c6986e7351dd0410a24507f7c722c6388e7b3d35b1ad7a43d9dff9"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0216.flac",
+      "bytes": 503145,
+      "fileSha256": "3e50e767742ae903723a8fc202088c7eda85876451a0142b5ba9113cdffebb06"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0217.flac",
+      "bytes": 563972,
+      "fileSha256": "6af4e6a14ee630d7eec8b2a27c2be95f1296614cc4d661d7a1720137e1544c8b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0218.flac",
+      "bytes": 589926,
+      "fileSha256": "2041015111fc3ec143dfee012078828bde69b882df5988eb57224fb698a020f9"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0219.flac",
+      "bytes": 619492,
+      "fileSha256": "1c440738354003120cbac74754e43113dc5057f74267e22eaba5316473aa50fd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0220.flac",
+      "bytes": 532786,
+      "fileSha256": "ff92356f0350eb0be49276e7a564d6da1255c031a70a1d8d781ae1128af762c5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0221.flac",
+      "bytes": 560583,
+      "fileSha256": "d6afc01b544ff6fe0867c88d928834f2f8c5b448a25c5bcacc681fa30418f814"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0222.flac",
+      "bytes": 552396,
+      "fileSha256": "5f9645194edb4320ba0c327fb782cecc51e74d7ccd032c6f8aa20588cb126a17"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0223.flac",
+      "bytes": 565027,
+      "fileSha256": "00a4df231a5a6338e108cefb3d785af64d7d5bdb5de727829135087b539f48e3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0224.flac",
+      "bytes": 587991,
+      "fileSha256": "c6b03dd08d44e4bdeea2b22863366c52657f42e3877d11f52862a66b72313af3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0225.flac",
+      "bytes": 547191,
+      "fileSha256": "1edc64e1278b2e5bd87cae33242ab31dad9d4d35ea9b509e6cbd30c1fd42bd79"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0226.flac",
+      "bytes": 632814,
+      "fileSha256": "6e0d341f0963fac64ed84f0f51e6cb8c135b2edc75906cacf9c9501bff091636"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0227.flac",
+      "bytes": 654944,
+      "fileSha256": "f07ee1aa36ee9eb0540fcdb1cfc5a4bd62ca2b6f35c7257fd111929cf33851d1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0228.flac",
+      "bytes": 661648,
+      "fileSha256": "2f7f40e6d9506f28d09b92c261763962694403284122270cdb4cb9bdd6f30223"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0229.flac",
+      "bytes": 672265,
+      "fileSha256": "e1c91d06bac1496c72f09268d4b2ab75174a2e4c8025e899da8835085a99f664"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0230.flac",
+      "bytes": 662131,
+      "fileSha256": "a55eb5a34d9823ede3658e8a0c89a45ddb912baaeead8a528adb23649dd07e7e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0231.flac",
+      "bytes": 675594,
+      "fileSha256": "3c2d9e257a1432b84f645667575c947feda296a2c0b0e38872e77c65bb96b302"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0232.flac",
+      "bytes": 702637,
+      "fileSha256": "ac65e21876e915711abe4a7e0f1dcf81910384312e0bcb7ca18def660cdd9361"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0233.flac",
+      "bytes": 628583,
+      "fileSha256": "81bf1e127f805c508f95029928f006af090a7c62915a3ff973cf607d3e61941e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0234.flac",
+      "bytes": 667126,
+      "fileSha256": "70867f7fb27b9ec48d215f1cc26992c0082338b11ab715433e41e2e0e8f6fc06"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0235.flac",
+      "bytes": 684391,
+      "fileSha256": "3060552ab995ffaeeba69b2f345431a1564d85e28d43db61b90ef5640b9b70d7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0236.flac",
+      "bytes": 688141,
+      "fileSha256": "5761fc6526b1b7ed6f9a423ae58292daf21924284c66e9d7f1a1da2f279c3ff3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0237.flac",
+      "bytes": 681117,
+      "fileSha256": "98f20f9ddaca3a3f5575364c4212622c5d407482ee03c7939e7bf091b4c05d8a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0238.flac",
+      "bytes": 553251,
+      "fileSha256": "e48cc124e3eedbec7b1ae930c27d4784ebd37c74096d35e3daf8cccbc8e64372"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0239.flac",
+      "bytes": 521691,
+      "fileSha256": "239fa4c0074a385495651dbf1676f491d229f97f91c080ac9472294483716a8a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0240.flac",
+      "bytes": 534243,
+      "fileSha256": "46e6eea58e40f8a3854b2bd339e6017bcef2633dc5ed63a1864389aacd6bc77b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0241.flac",
+      "bytes": 479939,
+      "fileSha256": "dcbfae30acd8a277c6b88747de97b7853c0b652664b93c39655c1ff4baeccf28"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0242.flac",
+      "bytes": 436431,
+      "fileSha256": "bf5b016bf14d748aa2708a36b035407b38ca22f678e010391435a3907ac3a403"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0243.flac",
+      "bytes": 499764,
+      "fileSha256": "90163b08774d7b7efd3f51b8977a7539fc5508252a54d1da3c47e38102097449"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0244.flac",
+      "bytes": 499973,
+      "fileSha256": "7282630c3dfd992e730e5f2071b260ae9b42da55190b115a7e20d4ab8f897a6e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0245.flac",
+      "bytes": 499862,
+      "fileSha256": "052238c1fc9e1a1d4cefab928a85bfac0c562c86b351d9d2f5001edf83891d4d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0246.flac",
+      "bytes": 509192,
+      "fileSha256": "7f974caed334157b1ae03d809fdd293fb90245c46f8124e5d77732b68bd329fb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0247.flac",
+      "bytes": 463490,
+      "fileSha256": "39e718edad57776d80e3ffd06103649aa7d521bb63ce1910269f1b8081815ae5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0248.flac",
+      "bytes": 462454,
+      "fileSha256": "cae96be0a3a2a25aaf2da4b350db4012bacf2f3eb8346adceca4f1cba46e6049"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0249.flac",
+      "bytes": 465963,
+      "fileSha256": "9f11eb18a7c8a23e20c36473f575031a0524850b319681724a7fb9cc2efd29b5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0250.flac",
+      "bytes": 541056,
+      "fileSha256": "2d86a32d90979bfdd5f3d0646a0157c24b852cabb5e8198542ab04a6f526d0b3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0251.flac",
+      "bytes": 579450,
+      "fileSha256": "d1b6cde862b5285357f41729b6f1c7be695cebe9586fb257cd0285b79477df1c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0252.flac",
+      "bytes": 551463,
+      "fileSha256": "a7d49f3d5bf4223b9282efd02d1a063d6e2dac6867d049dc4998350b1c7e3876"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0253.flac",
+      "bytes": 629502,
+      "fileSha256": "c0107a57a747524b8da5ded3904bf545365db64decb1f5959f5c474b868e7b58"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0254.flac",
+      "bytes": 554182,
+      "fileSha256": "e15db413a1baf111d30f537b2163290fb30491bbe3b08ce67167dfb9778f29d3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0255.flac",
+      "bytes": 533090,
+      "fileSha256": "4384accdabcd5ab4fe6860e7f9f0e1429ea8fcae44267538e65c14023542dc3a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0256.flac",
+      "bytes": 609131,
+      "fileSha256": "b8497b4202d9034415aa8b7e9c254b7e23302143685525166ffc7c935fedd60f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0257.flac",
+      "bytes": 537009,
+      "fileSha256": "3387d801daf569ed1c44ba8fe7f425a9462f35a5a2bb9a69062f8f8d81abbced"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0258.flac",
+      "bytes": 622302,
+      "fileSha256": "cc17c0ff47a2906e500dd6daeaf3d0c132266095e4d483aef5e645518005dd71"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0259.flac",
+      "bytes": 604684,
+      "fileSha256": "660151e9d1eacf324843ebc8ed4b73cbfb2ab1f94f689dcba025f1ca1b6914bd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0260.flac",
+      "bytes": 607893,
+      "fileSha256": "b85d7e1fe0e9fbd18178c250b71c67e6f25b2e55eb8614d75d8dfe9e7193efcb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0261.flac",
+      "bytes": 659867,
+      "fileSha256": "8e8765f2b9d17e8c90f012578d0b56d2d2cf610d7c45b966600a006377ed3439"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0262.flac",
+      "bytes": 636542,
+      "fileSha256": "fd17baae15a132c887efe825049f8d019aaf550518600513d149e53d92c5ea11"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0263.flac",
+      "bytes": 564024,
+      "fileSha256": "012ab3bce21d93f36151b0e5fa75aa785e0953abb039f143e32c6bb8d4de1dd0"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0264.flac",
+      "bytes": 544213,
+      "fileSha256": "e480e8dc01cc6e64d8ff62b02c846e433e4a2633a06c8894609ceab2d6c12205"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0265.flac",
+      "bytes": 607070,
+      "fileSha256": "6edf191dc21203a56e53eeccbae837ea4e246a3f8b009fc90a42e7064a1efd4a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0266.flac",
+      "bytes": 513839,
+      "fileSha256": "576bf08beff371d1e7344c12acff16dfdb1c2f03801ff63381daee9bcd62b6c4"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0267.flac",
+      "bytes": 583460,
+      "fileSha256": "2eea0c67bd7d466408ace1a6a607d8e3da4fa029690bc63dcf11dddba372bfd7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0268.flac",
+      "bytes": 489682,
+      "fileSha256": "ea7800281ad8cae6b5431b0768a6f5049c6f3f2bb9b04416fbb69eebc9205506"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0269.flac",
+      "bytes": 532389,
+      "fileSha256": "0073aa310ad228f5979de87d75d072b69d9024150bd2c3b58dc493618c3cd35c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0270.flac",
+      "bytes": 523447,
+      "fileSha256": "0bf17d2b3a9005676a144addc080ed0fdb50c700598c22586b7e3958d4c3dbb7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0271.flac",
+      "bytes": 510975,
+      "fileSha256": "b3fa78f6d651c4bae5d9827213bf2ff773ce0da40426104e20179871244fa455"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0272.flac",
+      "bytes": 521878,
+      "fileSha256": "6381964dfb61bdf1e0bc93dec76537219f2ed71bc08a93d0422ddcf54d2ce17d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0273.flac",
+      "bytes": 549295,
+      "fileSha256": "b55a6e815a18b6ddfedfaca6dd0fcc9408cfe2af98641ec62a747ef405a23083"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0274.flac",
+      "bytes": 633466,
+      "fileSha256": "d9554573fd87d522caad6f19ad9bd17bfcd83a0d4d71d923ce9387531aa9512a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0275.flac",
+      "bytes": 524120,
+      "fileSha256": "ad2eea903363f1181236e5fcd0f4f786c868c9d804d3c5cfa7bc884f4b9fda49"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0276.flac",
+      "bytes": 488684,
+      "fileSha256": "9be6aa5ecb7eebb739bfcba0a958e317fa6d783bfc54cf91d9e971500c174b32"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0277.flac",
+      "bytes": 667935,
+      "fileSha256": "f6defb0802c4a073a873a225d48130ddbeba6db2f6f34dc3c39b6864d4d62fe8"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0278.flac",
+      "bytes": 669994,
+      "fileSha256": "41d41d69c6e5c4bbc1e6a749afaced030fe915d0c2c545dd7662fea2735f1d28"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0279.flac",
+      "bytes": 612243,
+      "fileSha256": "fbfac6488102482f9759df1cf3ae724cf758a7cf16f73a217c646167253629c1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0280.flac",
+      "bytes": 511304,
+      "fileSha256": "e94a551a7e5c179eb013cc896f74091f928525777e6728a5f7b8ec0d7acbf96b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0281.flac",
+      "bytes": 592475,
+      "fileSha256": "c07f51a3d83a2eed378914cc5c836c79fb45ac9006edfb23ad272edb04339ffb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0282.flac",
+      "bytes": 519325,
+      "fileSha256": "7cad791e223fcbe4217027b5c50ee83623bfd1820a803247f141d38fe0984552"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0283.flac",
+      "bytes": 495373,
+      "fileSha256": "7445b8293301f8fc9a97c9a476b6202062eb6d5f0e673b1a9b5e65d9994c944b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0284.flac",
+      "bytes": 468146,
+      "fileSha256": "b7e16749fc6d34dc77528735690b2967686a1a34be92d5217da304cf26c828d1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0285.flac",
+      "bytes": 504308,
+      "fileSha256": "ae94c474cad58315bdbc858a8b77661f842b644462c622898fea559c96018809"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0286.flac",
+      "bytes": 504750,
+      "fileSha256": "428716ecdefa2b1fa604e86a9f58623ae3d0e4e262d79793a8042d61a3145ed7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0287.flac",
+      "bytes": 464474,
+      "fileSha256": "0992356cfd827ec940b962192bd3ed369d39f674c3256e5f4ee054e67569ef75"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0288.flac",
+      "bytes": 442242,
+      "fileSha256": "0fe1c72efbc220042562819551bc58cc1b2c6721a3c473a2acea88a544adbdbe"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0289.flac",
+      "bytes": 500292,
+      "fileSha256": "2dbaf2158f995caf8ca889ccd86b44f81754f193599104d061a6c08aac397d8d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0290.flac",
+      "bytes": 532048,
+      "fileSha256": "d5de1ef8f74700e2d1937e7e93c59cf8a6fb37fd13da0f12fb755f4c07e9b884"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0291.flac",
+      "bytes": 485987,
+      "fileSha256": "ab462f316c034283a4fe38f231b993aea5329ee2a30fdef2d88f7a300f589c09"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0292.flac",
+      "bytes": 437173,
+      "fileSha256": "5669bd6fb872099be61b94a22e8ea10fc5c0bf3968135535b302576962a780c7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0293.flac",
+      "bytes": 443059,
+      "fileSha256": "dac691d1f65737eccb48dec27c39733f86f860d402f09b0174e71e2820adede8"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0294.flac",
+      "bytes": 452413,
+      "fileSha256": "a21e73cb7ac3f8059c6dbf7d7669dff967bf2ee8b35582e864e5ed24995f67d9"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0295.flac",
+      "bytes": 448964,
+      "fileSha256": "5427a71509fb623fd69c5379151b5b688c3804ed07a2793c3ae4d26d26a0aebd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0296.flac",
+      "bytes": 397781,
+      "fileSha256": "d09ed218523cd912d84463020510d9dc27fed8b08323cc3df6bddcbecd20b69a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0297.flac",
+      "bytes": 437441,
+      "fileSha256": "ed0c1b3d8e164f516dea683e959ba7385416871829cee0d7b1d310510ce54b37"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0298.flac",
+      "bytes": 444988,
+      "fileSha256": "0cc390232731d041c94202a074dd679d7d29dc70c3f1b0a47826245549eac402"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0299.flac",
+      "bytes": 498790,
+      "fileSha256": "eaa16912bde5b37906ce3a9ca6cc64bc051468c8b9bea49cd523bdf536effa88"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0300.flac",
+      "bytes": 480895,
+      "fileSha256": "865866904984d9841c5fde85f3374ee44926967735728d3489c4b38191fc068c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0301.flac",
+      "bytes": 469150,
+      "fileSha256": "901225e8ce632353c4b133feb5df0b30d4b06e28746210aa0463959c8060df57"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0302.flac",
+      "bytes": 467752,
+      "fileSha256": "02b909b4833605eccec30d8f0984ba10c87b03de347df6ba66537ffad6b03cab"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0303.flac",
+      "bytes": 570862,
+      "fileSha256": "87a047802cd5e6732e28815de0b769a6eaf16209fb2d64fe2347894c6baa8107"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0304.flac",
+      "bytes": 524743,
+      "fileSha256": "2f00a1d0697857926623841c30ecd1edd9e6dc552eca7c9c067896775bf9af31"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0305.flac",
+      "bytes": 515230,
+      "fileSha256": "6e1290fd0a4c2cc0386f2c350158204e91ab201805440a02386929f166003d80"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0306.flac",
+      "bytes": 548665,
+      "fileSha256": "d783f266196f69939b553b7d27b84e9a68299225a899f4ca0289db5b52dfc42a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0307.flac",
+      "bytes": 621750,
+      "fileSha256": "9b6e8ecfbc3ee809bcfea674a0a3a01efb6d3c73338a73d6ff574cc8c89519e5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0308.flac",
+      "bytes": 613259,
+      "fileSha256": "74ea9aaf2d21a1de6256e9ccdef29512c2d89e219d47921c4799299df6d6ba15"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0309.flac",
+      "bytes": 500915,
+      "fileSha256": "bc94ffb2207636601f5ac47c1d2f482593378692ebf04401c7c5722310b6bc49"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0310.flac",
+      "bytes": 512820,
+      "fileSha256": "5ec23efc9e164f50e3e002da0dce93063e90fb8a9ec24dc497f26fc46a64bea7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0311.flac",
+      "bytes": 495397,
+      "fileSha256": "3d60d3102d0850bf02c0315cc21d6e803e6db994ea54d480b0a9020ada5db0b6"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0312.flac",
+      "bytes": 507045,
+      "fileSha256": "46309273d62586276256174124b083f5393e75dce703548b9e2ea7bdb7c4c4b7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0313.flac",
+      "bytes": 434856,
+      "fileSha256": "931449eabdd3e5c331a33e6512d33010b4e43f50f6698c34aff6b2e73638d4b7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0314.flac",
+      "bytes": 473687,
+      "fileSha256": "c0a1c80a6ecb8512f5d828459e3a6e216796760f3e265cf14044f5e608d47d19"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0315.flac",
+      "bytes": 563132,
+      "fileSha256": "b1f4d154195540d14b3c8d4101e893b5735b83755da9b06c460e049f80824b4a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0316.flac",
+      "bytes": 639287,
+      "fileSha256": "2e6676191706175ff044082180a607ec996ac0af4da3c41c62240dacbf9fedbe"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0317.flac",
+      "bytes": 506302,
+      "fileSha256": "285db330a7a9e6ae352785dedca6867f736780d96a5faf31ecb338d59f2561b2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0318.flac",
+      "bytes": 590796,
+      "fileSha256": "eb8a998749c1883092895ca9fbe8c431deb5affb65966194d542f2a70804ee2f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0319.flac",
+      "bytes": 502034,
+      "fileSha256": "ed153c676764c23e6aece5082a556777686e32bd1f006e70686438c710a6b53d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0320.flac",
+      "bytes": 482893,
+      "fileSha256": "3130592bf9e9a6a0519e199ede8976dbbd87aec6a0b1fc732a6f05b70e4d1216"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0321.flac",
+      "bytes": 484386,
+      "fileSha256": "b73428e8229d627e77a5ae694aec3724979aa35a3dbc698d6fee00377dfbc424"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0322.flac",
+      "bytes": 488072,
+      "fileSha256": "aff4aa4472faa58935f72c5d0a7664feb0952ec9726fe07815cb7597a1e06059"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0323.flac",
+      "bytes": 601919,
+      "fileSha256": "24661e2508b9b8ec643c6acc803b0b2fe7fea12ca3668b972f82c0487a754551"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0324.flac",
+      "bytes": 510799,
+      "fileSha256": "d1639d552cac5f784f6475a9dd039e707c13622e45abf67ad42b6811ce65b0cf"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0325.flac",
+      "bytes": 545878,
+      "fileSha256": "1fbed7c425b61272c542b24a47395b860c59c6876e316e08616a4c1e216c62c5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0326.flac",
+      "bytes": 503675,
+      "fileSha256": "8265ece400526d117166c96aac62b71cd8d8e58efba5428b19d5cc38aab890ab"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0327.flac",
+      "bytes": 515058,
+      "fileSha256": "41defce3814f63d799ec32572fee2ac50762330b3a42de67d1c4d71b6ead5ff1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0328.flac",
+      "bytes": 499189,
+      "fileSha256": "507d55265c7cb4ad6ea99e9b55c9a7bf522ae3ab04294402e545b5a1b398f996"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0329.flac",
+      "bytes": 508770,
+      "fileSha256": "8cb48dcef4278c142bbe8d7cd3fd64b615523819771e9764c13a78b3ab2562bf"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0330.flac",
+      "bytes": 560572,
+      "fileSha256": "1f04664209e70355491c64879b7746e7de47402e42019d0e5e7e203c2a3a80ce"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0331.flac",
+      "bytes": 525158,
+      "fileSha256": "dc9e915c50409db863108c021df4e0a473620cad8fdbde565432f1304b2538b8"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0332.flac",
+      "bytes": 656269,
+      "fileSha256": "3e446dfe2ad0a1c513d6cc7a794f400b2ab8fdfd69d0b1a708eefde05465cdd1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0333.flac",
+      "bytes": 502862,
+      "fileSha256": "2fa5275574b20bdcaf0f4b13657c2c221d0ed657f180819b514a57ff744a60ee"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0334.flac",
+      "bytes": 671763,
+      "fileSha256": "bf47f576f00145f5affd5fb7e044640cd536457de56c161e82d9beb968edda23"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0335.flac",
+      "bytes": 530017,
+      "fileSha256": "9dfdf39b1e397e727e20cef6fbc82dc71fd8a473cd3426eb5ca67786fbe463d2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0336.flac",
+      "bytes": 578327,
+      "fileSha256": "e3f3f21ea9962c0d18bda591f6bd7f464ca63e0ae99d7baa57be0b60684615ef"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0337.flac",
+      "bytes": 567672,
+      "fileSha256": "b09dabacb1ca286168a731e696ae7b0f2dce9ae4192fb28cb6125e85730db884"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0338.flac",
+      "bytes": 543505,
+      "fileSha256": "8ebc6e29f2ac0b5bb3e41aa0bd42dd1042a7f11d0b1a1512a35604c36018083c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0339.flac",
+      "bytes": 561482,
+      "fileSha256": "e3c9e28d650b03a6919d7165e9638b69515e5c0eb0d1fcb985d380fe3f04ca5f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0340.flac",
+      "bytes": 584888,
+      "fileSha256": "9d6af51365721ea6c1650819b7abe04fd03b84777ee6902953bb9ad9029042ea"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0341.flac",
+      "bytes": 677626,
+      "fileSha256": "8231377d7c167e844fa5783614c84973969d195702664cd01f79a9d282ed90ef"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0342.flac",
+      "bytes": 540406,
+      "fileSha256": "377a5612bb5bca21e7b28da164951b886d80e6bc089a50a0c3ff123b80ed08c4"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0343.flac",
+      "bytes": 474866,
+      "fileSha256": "e2cf751eca82f59452b99ccad2321ab62a71700cfc22f7fe2722c8ab23ed8e8c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0344.flac",
+      "bytes": 591736,
+      "fileSha256": "97872d25a6a4ce0188467847e5390fd872f78c0c7b642eb256d4732b02f5d161"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0345.flac",
+      "bytes": 457932,
+      "fileSha256": "3cf84476d4ea7f2086ba0d921c5bf971686926fc9346d393c4e56cee6302b0dc"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0346.flac",
+      "bytes": 528347,
+      "fileSha256": "cee8a45dcb334972e581547543c458ff6114660f6bf525e8887076745d74e935"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0347.flac",
+      "bytes": 619277,
+      "fileSha256": "a53d017e7572a580e35ef246e8aa3ee3d7e3723ef89c5c89cb0f6b4b72e0c543"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0348.flac",
+      "bytes": 477716,
+      "fileSha256": "7b5f3b15a1c1a7438556ff80d9c914a9e26e0f6e8e10cc716eafc6192365f2f7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0349.flac",
+      "bytes": 533977,
+      "fileSha256": "5d977603c706337e9ae4bb537a9a7071c42651a4025c9bf89a489d872c9d2a6b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0350.flac",
+      "bytes": 469829,
+      "fileSha256": "2826533b2d64ffba66af2154fdec191243554198fa944878be1679cf1fa86dda"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0351.flac",
+      "bytes": 541124,
+      "fileSha256": "b7f961402ade64c6dc0dac2cc8c7d09eab3f7e942b2e194c726f088056ce9a11"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0352.flac",
+      "bytes": 512769,
+      "fileSha256": "bb59d7dee80d50f2add3bea1c10698f193c9b9ac50483766e6b7123080be0c36"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0353.flac",
+      "bytes": 526888,
+      "fileSha256": "f4dbc37168619ffd7f498437029f9d4dc19bc13d3c755aa8a01721cd6a35efa1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0354.flac",
+      "bytes": 544626,
+      "fileSha256": "c4fe19d5cfe78c838d32154f157b5cddbed24d569b36b543667226d9eba96070"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0355.flac",
+      "bytes": 599840,
+      "fileSha256": "dea6896196205b5434c0a5bc222ee5c7edc7e6763fc14ebfce5fddc6ee23a502"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0356.flac",
+      "bytes": 616539,
+      "fileSha256": "3b69f28c30616168b5491273037d64c178a34169d104418dc865a01d64dfade5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0357.flac",
+      "bytes": 571270,
+      "fileSha256": "e1e0672dfdb85231e54c05fa02f290231819b11c4094356e4efd37e54d7e5f27"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0358.flac",
+      "bytes": 647506,
+      "fileSha256": "896ad758633531f662d6c4b6cb48825ab052b014957bcdc51bb993a834732376"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0359.flac",
+      "bytes": 658735,
+      "fileSha256": "f1acf8698475d5d2ba8a9414a4b372ecef454f87cc55b92fb6554cda102bf517"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0360.flac",
+      "bytes": 637879,
+      "fileSha256": "987d7cfd68337d69520a998148c982483a10f071fec52977529fc6008c2501c1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0361.flac",
+      "bytes": 651021,
+      "fileSha256": "eef378c033bffcec2b470d9d790d8ebb26f36c4d2f74cf8d07620d6e884e17c2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0362.flac",
+      "bytes": 611767,
+      "fileSha256": "793d941ad8d42459d47755b5767298c946f26a944e103f3ce68c6850499ecb59"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0363.flac",
+      "bytes": 673797,
+      "fileSha256": "4475f44804a7ff8d757dac06398b39cfd61b31605b3c87018641b6386e0cb33f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0364.flac",
+      "bytes": 659331,
+      "fileSha256": "5330912b1d7e121df69406189e2633580d3e84fcf1f95f7132cdd02c6e024dbf"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0365.flac",
+      "bytes": 645772,
+      "fileSha256": "0e29f43b43a291a153573d0c223d3fbe58ba2c9739285f62dbc36f60eb85ba18"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0366.flac",
+      "bytes": 683126,
+      "fileSha256": "7e84274ee5534bcb344c8afa541a1798589f3c2ac4076b3dda9b85b0422426d5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0367.flac",
+      "bytes": 680778,
+      "fileSha256": "25600581a694c9e75bcd1f4bf73c5b7749e16f156e2fff2a993bb865509f1384"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0368.flac",
+      "bytes": 601648,
+      "fileSha256": "15c2abe98f50ef524723fcf17d5d810168e6df71ed95f7ca51c63472bdcf409c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0369.flac",
+      "bytes": 640849,
+      "fileSha256": "ec8c80d46d092a4ff5e7d34fb3a51edc80afcbba57068b93a531e690a95a2011"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0370.flac",
+      "bytes": 661544,
+      "fileSha256": "589fa69fca6b17f8a2abe44e7e813ec6ec7a7d6820b5a5c04f914d5196480b0c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0371.flac",
+      "bytes": 587512,
+      "fileSha256": "f476496575b32e975cc7caf9dca645829e96bcfffc86b5549eebefad64a13504"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0372.flac",
+      "bytes": 642345,
+      "fileSha256": "bcfebe035cb6e72011cf0aa39c80b9878d8b239063727aaaf8b1b886b115071d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0373.flac",
+      "bytes": 654180,
+      "fileSha256": "aefbed9d433b1c7dca946833a753aa068118f071a6d95f05d7fc2806ebd60eed"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0374.flac",
+      "bytes": 659563,
+      "fileSha256": "3418a66a47f0627fbb6adbc13b1c053bfebe023b627ddc25638ab8d4ea0de2a5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0375.flac",
+      "bytes": 634887,
+      "fileSha256": "5a2237325e0e27b1d8bc229544cb57bee6581292eefb4bc7f01fb9f0bf6f2f85"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0376.flac",
+      "bytes": 610564,
+      "fileSha256": "968362d6fb581c90547dda96b0adb5e0db498fe766a67530119f1ecae532ecea"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0377.flac",
+      "bytes": 640718,
+      "fileSha256": "b48f09e4e2f0ecc92f4aef8e3f8f54fe7df72cf225db91280e6073fb08439213"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0378.flac",
+      "bytes": 656070,
+      "fileSha256": "97333146b3ccc21035beb1ecce168f61dbd3927a4f1903f20998a96dcf5dc2aa"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0379.flac",
+      "bytes": 664150,
+      "fileSha256": "bf8a2d80d1b47cd8ddf90e88259886241c8f520c4aa2c6b33b039a62f9a3f4a2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0380.flac",
+      "bytes": 596679,
+      "fileSha256": "14171796e34377bdc57731e70e5be913d24b85a6afa785270632e60d4013424a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0381.flac",
+      "bytes": 645438,
+      "fileSha256": "741c25e8df3c22590cf5781b7e8aeac1138d0ea6a1f301f4e3a615657c4b2485"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0382.flac",
+      "bytes": 664365,
+      "fileSha256": "4f1987d69d05a6be11073f84e7aadf77ef09692b89e5328eb86a1a5c3dd733b1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0383.flac",
+      "bytes": 672326,
+      "fileSha256": "dead5e5bf0fc1bcb510b028e8a73dd5bf7ad772d59e7cd9ed259f19a9cde4926"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0384.flac",
+      "bytes": 659431,
+      "fileSha256": "eb1fd2c787edb906d14c8f1c70bebe0d3d7b094c2deebfa6cf42120a2cffd706"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0385.flac",
+      "bytes": 658407,
+      "fileSha256": "c7700f1d4d7507c8697beeee160928f8bbc831a20bc9ece3c27380ba660d361d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0386.flac",
+      "bytes": 669180,
+      "fileSha256": "c71f4f7052e488de6615ad58a447fa3cbde9fdbcf43a78f0e5970f59085f492b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0387.flac",
+      "bytes": 655194,
+      "fileSha256": "3a62101b2bff3432de365cde1fc12ab19248480cebc7d77dd9b6f52c5dab66cf"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0388.flac",
+      "bytes": 581703,
+      "fileSha256": "70cb97fc42898910558193f53f6e893ca9731adf828a08b2272960cdff39dd1b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0389.flac",
+      "bytes": 676865,
+      "fileSha256": "81568a45fcb1e75042ef5916483c9e7b4e419f2ca85bb3f57285daf8c87a7fdb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0390.flac",
+      "bytes": 645226,
+      "fileSha256": "501349ad2a81bbc0fd732185ee95e8c9c594b322ba6eff93c9b4eb5b9764cac0"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0391.flac",
+      "bytes": 642771,
+      "fileSha256": "00576cb06758634fda2ac303ab418981199d353cbfc0acbc77f8377ae8dd8fb2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0392.flac",
+      "bytes": 679914,
+      "fileSha256": "3c401ff276aeb7c160989ef4e58653926413fed2c70341499729664f732eef77"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0393.flac",
+      "bytes": 669108,
+      "fileSha256": "c7911663da7a37983e5cfea47cd734eb6aa8d57c55847bc1ebafd01c2858cd1f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0394.flac",
+      "bytes": 642543,
+      "fileSha256": "b69f02009e0ce4e53b2c600fe3bfd647f0ac0402b96fe6d1acd92e3252dbf1cb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0395.flac",
+      "bytes": 635568,
+      "fileSha256": "13e8843bb1b7fb0c6f778a87ce88caa23b172ecea1c532a3f9a3dd937d0c33fa"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0396.flac",
+      "bytes": 649579,
+      "fileSha256": "83944eb2417b09a431467859a31890caaa623c038584d7b4b2d5c8033c443e3a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0397.flac",
+      "bytes": 657999,
+      "fileSha256": "fa98c4cf98163859b8df1907d10c8ac517abb733e5f347203ea8b06d702d486e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0398.flac",
+      "bytes": 664325,
+      "fileSha256": "176bfddd79adb5c956423c0d01f7b1470917e32a9023e4d4b0aad60505481145"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0399.flac",
+      "bytes": 691823,
+      "fileSha256": "8f327a01a6626ac5bb0ce1938ca333033e76726f11d9bc410bcd9e0d4d34488a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0400.flac",
+      "bytes": 670702,
+      "fileSha256": "3fb8ab20d543d74b3d50d10c0b6222cb04dff0111822bd19fe725b1ffa81a5e9"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0401.flac",
+      "bytes": 675780,
+      "fileSha256": "bf5a19d3f3d0f03b95d136b6bbaf91691c56457593d0244098990fbee3054998"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0402.flac",
+      "bytes": 654657,
+      "fileSha256": "3a9e094229f58c6441368702dcc25a00740561547d11c97f49bd7adc2ba47608"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0403.flac",
+      "bytes": 689336,
+      "fileSha256": "925b4f990dec4745148f33069ac169bcfc51c7d172960d87da7df0959f4b1574"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0404.flac",
+      "bytes": 632579,
+      "fileSha256": "6bf9bb1eea5f7e4bf7bfe4ab01d264067011586c97b687403acf3e79d00de217"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0405.flac",
+      "bytes": 577045,
+      "fileSha256": "b9bc3fe08f2c4c42d6173659c997c0a088d3f4136016e958fddf74cde4bbe211"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0406.flac",
+      "bytes": 592574,
+      "fileSha256": "6380f3891d5acbf7fb4d19d63d5936b1f74101a41491e234c333f0dd980dead5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0407.flac",
+      "bytes": 526487,
+      "fileSha256": "babbcca151fd6a083c7bfe9f84e40a1ce5ad902b5e77ec645fddf2995d2c5dc2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0408.flac",
+      "bytes": 488552,
+      "fileSha256": "06c6162914199144fcfc17737b41dafe7ec4efd27598ac5a15c376ddd675d52d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0409.flac",
+      "bytes": 476928,
+      "fileSha256": "98c81029102d801b4251981311f426ad1d0c01e952c7ace65a67dc2a2165907e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0410.flac",
+      "bytes": 611549,
+      "fileSha256": "501cd3b6a70b06639e97510d013f1bea7039475fedf029b4223654e0bf24a4db"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0411.flac",
+      "bytes": 515909,
+      "fileSha256": "12e4cb4f0d237a0ef857c767db757ca621c770167c99806a6f486c990fc8a3ac"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0412.flac",
+      "bytes": 435870,
+      "fileSha256": "a292c9e0584a2bb82ea4c59e371f3c3ad518acfb4c1c6bb6d2a64e8e87f96e13"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0413.flac",
+      "bytes": 491179,
+      "fileSha256": "58579db00eb91cb6c49da4e4d092ab1ef9d7945c379d67bcd9c986442cba0583"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0414.flac",
+      "bytes": 648428,
+      "fileSha256": "0f4b8b66fad46f97e3e542f291035ce3fbd61e8f978387dec11ac7b018819788"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0415.flac",
+      "bytes": 632844,
+      "fileSha256": "92b669e9bfeb9ca479a96c11309282b641436b05b003397a1de24133db192818"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0416.flac",
+      "bytes": 397073,
+      "fileSha256": "fee5664b0fea49c87c6aa386635af365b5a51a4b52351a35fbbf945cc1a45379"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0417.flac",
+      "bytes": 470199,
+      "fileSha256": "567d2cb06d19bd1d4158f9d79f9cacd6688e734a737b8d2b540269db5aa3b1d3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0418.flac",
+      "bytes": 499865,
+      "fileSha256": "ea37530f133612df4620f49fcf02a5c4a68b719acf39cc256f0dee4b1304abcf"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0419.flac",
+      "bytes": 570177,
+      "fileSha256": "360d116faf5b9694b6537e1ef39a3a2f133641a51be8b100505e2f6462e88361"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0420.flac",
+      "bytes": 490943,
+      "fileSha256": "cca798c22e77ac00b7c5a82504fe874209d95253a78cb3b16659361b28f75316"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0421.flac",
+      "bytes": 523048,
+      "fileSha256": "bab0673bfa9df3e37eaea59dd660702da299050144bdbdeddc753907e6d5fdcd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0422.flac",
+      "bytes": 476591,
+      "fileSha256": "e068069dafab7eb72b227bfd1d60b086383cd0632b0c84de16ac60260976cc6c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0423.flac",
+      "bytes": 503561,
+      "fileSha256": "859e61a8a1fbd7aeeab8d41903e519a8c27a9745dd5bf4d2788682ebef44e8c9"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0424.flac",
+      "bytes": 458463,
+      "fileSha256": "d5ec01be3f0b97ca0a08511625be3b5ab3739334cd2afcafd6d29ee37168f3dd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0425.flac",
+      "bytes": 540834,
+      "fileSha256": "92eafe251eb1f652b0c5793bc7b218829af940fb6e1d37901e5ba734879790a6"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0426.flac",
+      "bytes": 497698,
+      "fileSha256": "834737a2ad1643dbbc36919c729c5a71ec4ffd11589c0ab28ab677a8865f5581"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0427.flac",
+      "bytes": 520805,
+      "fileSha256": "f3051bc69f1cc2ae18a5fa528004396da834bfdc57bff57a6b9d2d8a5a931228"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0428.flac",
+      "bytes": 474698,
+      "fileSha256": "a7db09fd9733d66c62f49c192770b6d917ae70877bdd90ef025fe5ff606e4a34"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0429.flac",
+      "bytes": 524936,
+      "fileSha256": "5ca398410c46ebe07f2338a044e269bd0b9554ba7c4d14bb8aa6b291e13816b1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0430.flac",
+      "bytes": 471332,
+      "fileSha256": "d0c9afad95c20598558108e3243e5e96c8976290450c75f1461914dce950ea53"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0431.flac",
+      "bytes": 601370,
+      "fileSha256": "0d6f3b8c97018dfabd0385af81e80dd92d24c634025bf3228c56c850c1855ef4"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0432.flac",
+      "bytes": 506693,
+      "fileSha256": "06f4527e643a0f1505bdc1b76f720a051f6f1d2c3fbe70ba63b08c2a8a33b637"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0433.flac",
+      "bytes": 502083,
+      "fileSha256": "0b6987b25e64c31d34c4f67f501199c3c35af86e79d073e6d719f19135c3e264"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0434.flac",
+      "bytes": 509362,
+      "fileSha256": "be77fd17ff55308b674b3efbd0ac3ce4ec09d4046f1c7205dcb0ec282c35bddf"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0435.flac",
+      "bytes": 532976,
+      "fileSha256": "c2c19297a9aeea5345405bb9879185d4d9e37242c6ee5cacd90a89be3997212d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0436.flac",
+      "bytes": 471758,
+      "fileSha256": "c8535ab926a80e87cba8933eb3cb60a5ee6714d3b1c4982f504569e70efc0d56"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0437.flac",
+      "bytes": 471298,
+      "fileSha256": "9f1588c62f4a4cc49827c035cbd2e6136ffc2861d35c6caf6c5b4255839fcee8"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0438.flac",
+      "bytes": 538206,
+      "fileSha256": "72fcc9da844cfbcea4cd87c60b91c634678ebcb841f92a69cb7ea06e70385c11"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0439.flac",
+      "bytes": 476430,
+      "fileSha256": "ec8356648f96e0dfafdf7370a3db62d192bf722fb248c0e99c15ed439eab6428"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0440.flac",
+      "bytes": 537599,
+      "fileSha256": "8f1790558a842a9d149de332313560001acd6b8d838249722bfb18272aa2cdd5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0441.flac",
+      "bytes": 481247,
+      "fileSha256": "05467806a05fc7bceacad3167300ce82aee329c849cd9b5fca0811962833b72c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0442.flac",
+      "bytes": 501216,
+      "fileSha256": "173af2bc07b6c1e2185068e64c63a9675a503ade4d6231fda97930dd2f58344c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0443.flac",
+      "bytes": 538133,
+      "fileSha256": "695269cfa8543dc0e866a137135c65736fa7f0a5230278e5398fbe836d9ac630"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0444.flac",
+      "bytes": 541688,
+      "fileSha256": "3112289a636efd80f574d52b078466cd93c114a10c2d2f17a2910dcf0069d794"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0445.flac",
+      "bytes": 517990,
+      "fileSha256": "9c8cfa8898caddd95426abbdc19cbd45d1d66951fe7dc5b9afde8297b41a5110"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0446.flac",
+      "bytes": 600740,
+      "fileSha256": "5bb4e219ba9a18e9e7858872f26e1ae2a521925c7fc01a710cf0c642de4772be"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0447.flac",
+      "bytes": 515610,
+      "fileSha256": "a2a6faff2878fb9336d98bd10a3f9ac11a171adaae3ea1e467e35564b3a5c6ad"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0448.flac",
+      "bytes": 585131,
+      "fileSha256": "cf848e44e83dd90ffc34efcfde3b3eb28af566c8985818c1eb15bdef429e0713"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0449.flac",
+      "bytes": 522124,
+      "fileSha256": "0eacacfa761921accd461afb473b118f95ffc7cc7e97d344570ff7f1063e0d32"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0450.flac",
+      "bytes": 595060,
+      "fileSha256": "9893331c9f0ab88a6b11b88ac65b411d3a822534d24314498c11f5bc23902079"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0451.flac",
+      "bytes": 595741,
+      "fileSha256": "4deed7f7ba89ff45e9edfed67ff24495d69bf9364fbf4d07b25091809fd082ed"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0452.flac",
+      "bytes": 491645,
+      "fileSha256": "fdf2e3f81eedcc810eb6ce6362ddf2f678d2d34c2b1b4c22a8e13a882121803e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0453.flac",
+      "bytes": 598551,
+      "fileSha256": "064f319604a6b177c795d6fb96a4e06ca10c6077a6b70acd2b06f151af35c750"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v001/source/chunks/chunk-0454.flac",
+      "bytes": 250855,
+      "fileSha256": "0e69ca53838941ad126f4a46cade135107a48139af82be436653031dec8d8e30"
+    }
+  ]
+}

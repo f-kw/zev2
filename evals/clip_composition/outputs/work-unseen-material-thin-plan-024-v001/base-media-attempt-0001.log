@@ -1,0 +1,11 @@
+file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v003.mjs:846
+    else reject(new Error(`ffprobe failed (${code ?? 'unknown'}): ${Buffer.concat(stderr).toString()}`));
+                ^
+
+Error: ffprobe failed (unknown): 
+    at ChildProcess.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_base_media_build_v003.mjs:846:17)
+    at ChildProcess.emit (node:events:524:28)
+    at maybeClose (node:internal/child_process:1104:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5)
+
+Node.js v20.19.6

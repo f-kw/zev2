@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "unseen-material-acquisition-completion-v001",
+  "status": "passed",
+  "sourceId": "SsdxVhwxyYo",
+  "sourceUrl": "https://www.youtube.com/watch?v=SsdxVhwxyYo",
+  "authorization": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/source-acquisition-authorization-v001.json",
+    "bytes": 1572,
+    "fileSha256": "1976e19e53309af2ba952a5195d3899dee676f012e6b92f1db2cce3c1c810809"
+  },
+  "thinPlanFixedBeforeAcquisition": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/thin-plan-v0.json",
+    "bytes": 251,
+    "fileSha256": "7b8e83b94b32d5c1e43cb3e1a7fb96795fab81d0da8e82cd687f06fd31021194"
+  },
+  "sourceVideo": {
+    "path": "evals/clip_composition/research/downloads/SsdxVhwxyYo/SsdxVhwxyYo.mp4",
+    "bytes": 5068543310,
+    "fileSha256": "01513b99032321ffa34817dff22bd5a128af88e4067fefb102e1d3b2bf187342"
+  },
+  "sttAudio": {
+    "path": "evals/clip_composition/research/downloads/SsdxVhwxyYo/SsdxVhwxyYo.stt-audio.m4a",
+    "bytes": 220501201,
+    "fileSha256": "faf81542672b2ac0f0fc21b112d9562865552c4769ba984b3ecf405e48f3ba55"
+  },
+  "sourceProbe": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/source-media-probe-v001.json",
+    "bytes": 740,
+    "fileSha256": "e15d0b16d86380e8d973229487110fb8986791f92f90704b19c36a05be1fdb94"
+  },
+  "audioPacketHashMethod": "ffmpeg -map 0:a:0 -c copy -f hash -hash sha256",
+  "sourceVideoAudioPacketSha256": "3f894d396d8d81ab8013cda48c9766b16288ca3cf64af971755a67e6c2fbc591",
+  "sttAudioPacketSha256": "3f894d396d8d81ab8013cda48c9766b16288ca3cf64af971755a67e6c2fbc591",
+  "audioPacketEquality": "passed",
+  "externalEditorialMetadataUsed": false,
+  "scope": "元配信の映像と音声を全体取得。コメント・外部切り抜き・チャプター・まとめ記事・期待区間は探索入力へ取得していない。",
+  "runtime": "/opt/homebrew/bin/yt-dlp 2026.08.19; deno",
+  "initialFailure": "PATHのyt-dlp 2026.07.04が動画データHTTP 403。既存の新しい版への変更で解消。"
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "unseen-material-received-instruction-v001",
+  "recordId": "instruction-024-continue-SsdxVhwxyYo",
+  "receivedAuthorizationBinding": {
+    "schemaVersion": "instruction-024-source-authorization-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/source-acquisition-authorization-v001.json",
+    "fileSha256": "1976e19e53309af2ba952a5195d3899dee676f012e6b92f1db2cce3c1c810809",
+    "canonicalSha256": "dad912c1a18a95e1740b8b8b6e08fe2d892d06abb014263f88471f697c95a439"
+  },
+  "instruction": "ZEV進行管理２ 指示-024 続行",
+  "sourceId": "SsdxVhwxyYo",
+  "sourceUrl": "https://www.youtube.com/watch?v=SsdxVhwxyYo",
+  "authorizationQuote": "新素材を承認します。",
+  "scope": [
+    "外部切り抜き、チャプター、コメント、タイムスタンプ、まとめ記事等を候補探索・採否の正解として参照しない",
+    "人間による正解区間を探索前に作らない",
+    "candidate-discoveryを全発話から新規実行する",
+    "discovery結果を既存candidate-selectionへ渡す",
+    "thin plan以外に期待採否・採用件数・目標尺・期待区間を入れない",
+    "必要に応じて既存candidate-internal-retentionを使う",
+    "既存Core / renderer / caption系を再利用する",
+    "追加の映像理解・Gemini実験は行わない",
+    "複数話者前提の処理は追加しない",
+    "Planner本体は作らない"
+  ]
+}

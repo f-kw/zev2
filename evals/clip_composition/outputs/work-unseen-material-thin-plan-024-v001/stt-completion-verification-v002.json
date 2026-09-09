@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "unseen-material-full-stt-verification-v001",
+  "status": "passed",
+  "runtimeReceiptBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/stt-runtime-receipt-v004.json",
+    "bytes": 117355,
+    "fileSha256": "e6591c61bb4cfae41ce523687a330e5882fa1c4cc2bbc8b751ee3dfb1e5fc8db"
+  },
+  "installedPackageSupplementBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/stt-package-supplement-v001.json",
+    "bytes": 4838,
+    "fileSha256": "786f5f27afb7514d598ef6fd991c2a6ec5118ce5ab7a1c150adfc63604a977e5"
+  },
+  "rawRecognitionVerificationBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/stt-completion-verification-v001.json",
+    "bytes": 406665,
+    "fileSha256": "1d16578a482b9c374ea3463b5d29ad08b8b4c4f9e5d189f273badf5b029ef6ac"
+  },
+  "normalizationBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/stt-zero-duration-normalization-v001.json",
+    "bytes": 2442305,
+    "fileSha256": "77ed9ac3620b1940f6692d0533093c7138bfe69eef1528aae6bc98472cf124e2"
+  },
+  "preparationBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v005/source/audio-preparation.json",
+    "bytes": 98939,
+    "fileSha256": "b446367e0b27b4af7f8427237a4496a98dad09b4bd4e203fd107fc1ee49280ba"
+  },
+  "assemblerImplementationBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/run_local_stt_chunked.ts",
+    "bytes": 23508,
+    "fileSha256": "0ad34afb6d49b29904020dbecd8f4940cf0a5fd4ad40e7bde5e975a40f0cc039"
+  },
+  "assemblyCommand": [
+    "node",
+    "--import",
+    "./runner/node_modules/tsx/dist/loader.mjs",
+    "evals/clip_composition/run_local_stt_chunked.ts",
+    "--input",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/SsdxVhwxyYo/SsdxVhwxyYo.mp4",
+    "--id",
+    "SsdxVhwxyYo_local30_v005",
+    "--role",
+    "source",
+    "--chunkSec",
+    "30",
+    "--reuseChunkDir",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v005/source/chunks"
+  ],
+  "assembledTranscriptBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v005/source/transcript.json",
+    "bytes": 2224030,
+    "fileSha256": "9581b3ddcaa61a0dab34e5509b8311f62df3d8538882f716471530cb13a6258a"
+  },
+  "formalTranscriptBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v005/source/source-transcript.json",
+    "bytes": 2224242,
+    "fileSha256": "cc40da786b69dbec65d2dd54d2bb3c118e0bdc16f68847de5b80680bae914e0c"
+  },
+  "assemblerManifestBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/SsdxVhwxyYo_local30_v005/source/manifest.json",
+    "bytes": 269648,
+    "fileSha256": "36c5b670314bc573370e187178c3dac2ff2037dd4ae0441197afc0e0fbaa7cd6"
+  },
+  "formalTranscriptChange": "Only notes differ from the assembled normalized transcript; all raw recognition text is preserved.",
+  "fullChunkCount": 455,
+  "verifiedChunkCount": 455,
+  "sourceSegmentCount": 17514,
+  "rawRecognitionAtomCount": 17931,
+  "zeroDurationRawAtomCount": 417,
+  "discardedBoundaryAtomCount": 0,
+  "humanExpectedAnswersUsed": false,
+  "newSttServerCallsDuringAssembly": 0,
+  "checks": {
+    "fullAudioCoverage": "passed",
+    "allRecognizedTextPreserved": "passed",
+    "rawAtomMembershipExactlyOnce": "passed",
+    "positiveDurationAndSourceOrder": "passed",
+    "onlyObservedOuterBoundaries": "passed"
+  }
+}

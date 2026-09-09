@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "unseen-material-source-inspection-performance-observation-v001",
+  "command": [
+    "/opt/homebrew/bin/ffprobe",
+    "-v",
+    "error",
+    "-read_intervals",
+    "6817%+5",
+    "-show_frames",
+    "-show_entries",
+    "frame=media_type,pts,best_effort_timestamp,nb_samples",
+    "-of",
+    "compact=p=0",
+    "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/base-media-work/source-snapshot.mp4"
+  ],
+  "elapsedSeconds": 1.1211885420052567,
+  "exitCode": 0,
+  "videoFrames": 300,
+  "audioFrames": 216,
+  "stderr": "",
+  "scope": "five-second technical decoding observation near the full-source temporal midpoint; no meaning or candidate judgment; active manufacturing unchanged"
+}

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "unseen-material-render-output-path-fix-v001",
+  "status": "preflight-passed",
+  "classification": "evaluation-job-wiring",
+  "reason": "The original rendering destination was outside the existing presentation subtree.",
+  "priorRendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/renderer-job.json",
+    "fileSha256": "fdbccd36b2b451aa4cb91e2d97fb7ea03c8ad89d30ff5a8fb94311bec7871d49",
+    "canonicalSha256": "c4eda9c82d0a2d6c3f13f363f0567a485174b9ef7a04d89f7c892f4d97605a6d"
+  },
+  "priorFailureBinding": {
+    "schemaVersion": "unseen-material-renderer-execution-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/renderer-result.json",
+    "fileSha256": "f1787238180fbfa176ac0b34b7e96ba54e809e0a6bfdd23989eb466e43477a86",
+    "canonicalSha256": "36430cffe96d95c3f0a95abbc58894375258bbdebee3b841c3f432fc0389e4b4"
+  },
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v002/renderer-job.json",
+    "fileSha256": "ea6b7fe5a9b041c577591ba058f07e9b5c26ea840ce8857c2bacf8b64e0cf222",
+    "canonicalSha256": "18e696fb797e5674f9138e9535c52b4edbde51bb011e0fb00ad3a8414dd29e9f"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/run_unseen_material_render_v002.mts",
+    "fileSha256": "1735999f2228f124a4e1d759b3102a92f2cfb273271619f6b37273d1b260cabb"
+  },
+  "unchanged": [
+    "source",
+    "transcript",
+    "thin-plan",
+    "candidate-discovery",
+    "candidate-selection",
+    "adoption",
+    "retention",
+    "base-media",
+    "caption-instructions",
+    "line-end-projection",
+    "renderer",
+    "style",
+    "output-policy"
+  ],
+  "changedFields": [
+    "jobId",
+    "attemptId",
+    "publication"
+  ],
+  "existingOutputSubtree": "evals/clip_composition/outputs/presentation",
+  "newOutputRoot": "evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/render-v002",
+  "checks": {
+    "onlyDestinationAndAttemptIdentityChanged": "passed",
+    "existingJobValidator": "passed",
+    "admittedCoreRecordsUnchanged": "passed",
+    "existingOutputPolicyMembership": "passed",
+    "freshAttemptPaths": "passed"
+  }
+}

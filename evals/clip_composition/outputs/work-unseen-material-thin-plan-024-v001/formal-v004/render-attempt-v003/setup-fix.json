@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "unseen-material-render-runtime-fix-v001",
+  "status": "preflight-passed",
+  "classification": "execution-environment",
+  "reason": "The sandbox denied the existing tsx layout inspector local IPC socket; rerun the same admitted content with the required process permissions.",
+  "priorRendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v002/renderer-job.json",
+    "fileSha256": "ea6b7fe5a9b041c577591ba058f07e9b5c26ea840ce8857c2bacf8b64e0cf222",
+    "canonicalSha256": "18e696fb797e5674f9138e9535c52b4edbde51bb011e0fb00ad3a8414dd29e9f"
+  },
+  "priorFailureBinding": {
+    "schemaVersion": "unseen-material-renderer-execution-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v002/renderer-result.json",
+    "fileSha256": "e038133cccfae6fa9d8b80bdc264538f74cd0a76c5b2824759d4dd5fcd3e180f",
+    "canonicalSha256": "086b0bd305312bb8aba961c3a1dd2db53dd5a48dd894f14f37056117225c813e"
+  },
+  "processFailureBinding": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v002/process-observations/unseen-SsdxVhwxyYo-024-v001-render-v002/0003-layout-inspection/stderr.txt",
+    "fileSha256": "487d415e7303d8cff6f73e15a3bacba5b7bfcbc5811b950a03b13c0f24aefea0"
+  },
+  "rendererJobBinding": {
+    "schemaVersion": "presentation-instruction-renderer-job-v002",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v003/renderer-job.json",
+    "fileSha256": "73d4fa319e462974fbcf1b2945437b40829c4de955176a9a98b7abbd1bd49894",
+    "canonicalSha256": "8daf46664c1c51b9d52707b7e1beaa13e49831d7125b53a64a24612c93db14a9"
+  },
+  "coreCaptionVerificationBinding": {
+    "schemaVersion": "unseen-material-core-caption-linkage-verification-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/core-caption-linkage-verification-v001.json",
+    "fileSha256": "56347fa7640814c28006def56ac5dc4a1bd3b9c0a1d0e00e7a87a3b1ac6b69ae",
+    "canonicalSha256": "2a8860bdadd62eacf452c795d78a84969649e5525e10c82357817e9d0963f840"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/run_unseen_material_render_v003.mts",
+    "fileSha256": "6b2f8c0ed05818bff9cb07e7ff6d7c0e362b3177d0f34dbbd6734f10127b152d"
+  },
+  "changedJobFields": [
+    "jobId",
+    "attemptId",
+    "publication"
+  ],
+  "contentAndCoreChanged": false,
+  "checks": {
+    "existingJobValidator": "passed",
+    "onlyAttemptIdentityAndFreshDestinationsChanged": "passed",
+    "existingOutputSubtree": "passed",
+    "noExistingOutputReplacement": "passed"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "unseen-material-discovery-validation-v001",
+  "status": "passed",
+  "planBinding": {
+    "schemaVersion": "unseen-material-thin-plan-evaluation-v001",
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/discovery-plan.json",
+    "fileSha256": "27ed09aa4f2e8a57c39bfe1a15198a9ecc8c701762cfa08b60f846f808935ed2",
+    "canonicalSha256": "704cc1714d62068bc1b89931286a4cfbcd7b02b7eb088f50d4c315b966198c72"
+  },
+  "origins": {
+    "discoveryRequest": {
+      "schemaVersion": "candidate-discovery-judgment-request-v001",
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/candidate-request.json",
+      "fileSha256": "35af27a82c0f395ba1dc35a1db7e844585b7c195a2f86c4bc69a48a0f88f3a5a",
+      "canonicalSha256": "b1f74c11421da3f2e3491933f2673476220c89c73d5177af6fe2a30349494e62"
+    },
+    "discoveryResponse": {
+      "schemaVersion": "candidate-discovery-judgment-response-v001",
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/candidate-response.json",
+      "fileSha256": "e0dbc93281a942ae245c0bc1a7774f13402b5feeb678c4963a86e264c21a3721",
+      "canonicalSha256": "08bdb0051af458a00e0462dd786d9901fbe27c5c5132349ded2450a4203126ad"
+    },
+    "discoveryResult": {
+      "schemaVersion": "candidate-discovery-skill-result-v001",
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/candidate-result.json",
+      "fileSha256": "4f786653cb9f8f1facbf409e3305ec011adb3776f9bc9fca6fb4d838e6b3f449",
+      "canonicalSha256": "265b5d7747c39528cefa1e2ca2cc951c066b5ade5f007419e7238defd4d358c3"
+    }
+  },
+  "sourceUtteranceCount": 2297,
+  "responseCandidateCount": 17,
+  "projectedCandidateCount": 17,
+  "checks": {
+    "fullSourceInput": "passed",
+    "intentUnchanged": "passed",
+    "responseProvenance": "passed",
+    "idMembershipAndOrder": "passed",
+    "evidenceContained": "passed",
+    "disjointContexts": "passed",
+    "allDiscoveredCandidatesPassedWithoutFiltering": "passed"
+  },
+  "humanExpectedSelectionProvided": false,
+  "discoveryMeaningQuality": "human-review-pending"
+}

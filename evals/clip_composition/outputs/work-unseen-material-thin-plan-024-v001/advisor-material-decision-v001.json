@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "instruction-024-advisor-material-decision-v001",
+  "instruction": "ZEV進行管理２ 指示-024",
+  "observedDate": "2026-09-09",
+  "sourceUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6a9d1cb7-b3c0-83ee-ae3a-613c9dc53f08",
+  "sourceSession": "ZEV進行管理２",
+  "checkpointCommit": "f62f8ec4fac44e2ebcb0cb96e59f37ee01c54090",
+  "requestKind": "GPT_DECISION",
+  "responseStatus": "レスポンス確認済み",
+  "browser": "Microsoft Edge",
+  "modelCondition": "今回の指定なし。UI表示「高」を維持し、モデル変更なし。",
+  "resendOrRegenerate": false,
+  "decision": "human_decision",
+  "verbatimInstruction": "GPT_DECISION：\n\n指示-024の主目的を満たすには、新しい未評価のフル元動画が必要です。\n\no8rZAhARXAc は、既存の人間採否・公開可否評価が存在し、今回同じ実行主体がその履歴の一部を既に読んでいるため、正式Skill入力から過去回答を除外しても「別素材・事前正解なし」の第一完成とは扱いません。\n\no8rZAhARXAc を使う場合は、既知素材に対する補助較正に限定してください。指示-024の代替完了条件にはしません。\n\n既に編集済みの参照切り抜き4種も、新しい未選別元素材としては使用しません。\n\nしたがって指示-024は、新しいフル元動画の対象と取得許可を HUMAN_DECISION へ上げて停止してください。許可前の取得・API通信・費用発生は禁止です。",
+  "materialConditions": [
+    "ymUsGrT6EaAではない",
+    "フル元動画である",
+    "repositoryに最終候補採否・正解構成・公開可否などの人間正解が保存されていない",
+    "過去に候補選別済みの切り抜きではない",
+    "取得後、制作意図を先に固定してからcandidate-discoveryを全発話に対して実行する",
+    "探索前に正解区間や期待採否を作らない"
+  ],
+  "state": "新素材の対象と取得許可の指示待ち。第一完成ではない。",
+  "newExternalAcquisition": false,
+  "newApiCalls": 0,
+  "newCostUsd": 0,
+  "newDiscoveryExecuted": false,
+  "newSelectionExecuted": false,
+  "newRenderExecuted": false,
+  "recordCommitState": "停止時の裁定証拠としてローカル保存。このファイルの追加commit/pushは未実施。"
+}

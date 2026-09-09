@@ -1,0 +1,160 @@
+TAP version 13
+# Subtest: all decisions are preserved and adoption carries SHA-bound evidence; promotion needs its actual token
+ok 1 - all decisions are preserved and adoption carries SHA-bound evidence; promotion needs its actual token
+  ---
+  duration_ms: 3.47175
+  ...
+# Subtest: zero, one and all candidates can be selected; no quota or forced rejection
+ok 2 - zero, one and all candidates can be selected; no quota or forced rejection
+  ---
+  duration_ms: 3.067375
+  ...
+# Subtest: closed input rejects human adoption, final-use flags, timing and scores
+ok 3 - closed input rejects human adoption, final-use flags, timing and scores
+  ---
+  duration_ms: 1.190083
+  ...
+# Subtest: skill runs its supplied judgment anew and does not mutate input or promote the result
+ok 4 - skill runs its supplied judgment anew and does not mutate input or promote the result
+  ---
+  duration_ms: 0.47875
+  ...
+# Subtest: unknown candidate rejected
+ok 5 - unknown candidate rejected
+  ---
+  duration_ms: 0.700666
+  ...
+# Subtest: missing candidate rejected
+ok 6 - missing candidate rejected
+  ---
+  duration_ms: 0.64925
+  ...
+# Subtest: duplicate candidate rejected
+ok 7 - duplicate candidate rejected
+  ---
+  duration_ms: 0.757708
+  ...
+# Subtest: candidate order change rejected
+ok 8 - candidate order change rejected
+  ---
+  duration_ms: 0.665
+  ...
+# Subtest: wrong source rejected
+ok 9 - wrong source rejected
+  ---
+  duration_ms: 0.676166
+  ...
+# Subtest: evidence from another candidate rejected
+ok 10 - evidence from another candidate rejected
+  ---
+  duration_ms: 0.603375
+  ...
+# Subtest: reversed own evidence rejected
+ok 11 - reversed own evidence rejected
+  ---
+  duration_ms: 1.327666
+  ...
+# Subtest: duplicate own evidence rejected
+ok 12 - duplicate own evidence rejected
+  ---
+  duration_ms: 0.422125
+  ...
+# Subtest: unknown comparison rejected
+ok 13 - unknown comparison rejected
+  ---
+  duration_ms: 0.626666
+  ...
+# Subtest: comparison with self rejected
+ok 14 - comparison with self rejected
+  ---
+  duration_ms: 0.572584
+  ...
+# Subtest: comparison evidence must belong to its named candidate
+ok 15 - comparison evidence must belong to its named candidate
+  ---
+  duration_ms: 0.555334
+  ...
+# Subtest: comparison is required and must be unique
+ok 16 - comparison is required and must be unique
+  ---
+  duration_ms: 1.083667
+  ...
+# Subtest: duplicate rejection requires a retained comparison; cannot remove every copy as redundant
+ok 17 - duplicate rejection requires a retained comparison; cannot remove every copy as redundant
+  ---
+  duration_ms: 0.588666
+  ...
+# Subtest: candidate bounds, order and source transcript membership are deterministic
+ok 18 - candidate bounds, order and source transcript membership are deterministic
+  ---
+  duration_ms: 0.890375
+  ...
+# Subtest: overlapping candidates may be compared but cannot both pass the disjoint executor
+ok 19 - overlapping candidates may be compared but cannot both pass the disjoint executor
+  ---
+  duration_ms: 1.598792
+  ...
+# Subtest: SHA changes to request, answer, candidate set or plan reject the result
+ok 20 - SHA changes to request, answer, candidate set or plan reject the result
+  ---
+  duration_ms: 2.91025
+  ...
+# Subtest: renamed IDs and unrelated fixture text do not change validation or promotion rules
+ok 21 - renamed IDs and unrelated fixture text do not change validation or promotion rules
+  ---
+  duration_ms: 0.789
+  ...
+# Subtest: abstention has no adoption authority; free times and executable fields are invalid output
+ok 22 - abstention has no adoption authority; free times and executable fields are invalid output
+  ---
+  duration_ms: 0.870416
+  ...
+# Subtest: transport rejects duplicate JSON keys
+ok 23 - transport rejects duplicate JSON keys
+  ---
+  duration_ms: 0.38975
+  ...
+# Subtest: full transcript enters discovery, and all proposed candidates reach the unchanged selection input
+ok 24 - full transcript enters discovery, and all proposed candidates reach the unchanged selection input
+  ---
+  duration_ms: 3.236166
+  ...
+# Subtest: partial discovery input and stale intent fail before candidate projection
+ok 25 - partial discovery input and stale intent fail before candidate projection
+  ---
+  duration_ms: 2.231709
+  ...
+# Subtest: discovery answer cannot be detached from its request or replaced during validation
+ok 26 - discovery answer cannot be detached from its request or replaced during validation
+  ---
+  duration_ms: 0.854708
+  ...
+# Subtest: unknown IDs, cross-candidate evidence, wrong source and overlapping discovery are rejected
+ok 27 - unknown IDs, cross-candidate evidence, wrong source and overlapping discovery are rejected
+  ---
+  duration_ms: 2.361084
+  ...
+# Subtest: selection does not impose a count or force a rejection
+ok 28 - selection does not impose a count or force a rejection
+  ---
+  duration_ms: 4.778791
+  ...
+# Subtest: selection remains attached to every discovered candidate and the fixed structure conditions
+ok 29 - selection remains attached to every discovered candidate and the fixed structure conditions
+  ---
+  duration_ms: 1.557875
+  ...
+# Subtest: renderable ranges come only from the new formal selection with explicit retention assessment
+ok 30 - renderable ranges come only from the new formal selection with explicit retention assessment
+  ---
+  duration_ms: 2.530125
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 242.992791
