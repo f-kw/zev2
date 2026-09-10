@@ -1,0 +1,2774 @@
+{
+  "recordType": "instruction-024-owner-stop-recovery",
+  "recordedAt": "2026-09-10T09:46:02.123812+00:00",
+  "instructionStatus": "動画生成済み・検査途中でオーナー判断により終了",
+  "videoRole": "人間評価用候補",
+  "authority": "ZEV 指示-024中止後のリカバリー指示（今回のユーザー指示）",
+  "processObservation": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/owner-stop-process-observation-v001.json",
+    "bytes": 389,
+    "fileSha256": "07bcd8f1862a74a03d44f129c06ed7472d70d7fc31e3e8407e75298c62df73b4"
+  },
+  "relatedProcessesRemaining": 0,
+  "hostExitObservation": {
+    "sessionId": 57315,
+    "exitCode": 143,
+    "observationSource": "2026-09-10のwrite_stdinによる終了結果",
+    "exactTerminationTime": null,
+    "terminationSender": null
+  },
+  "video": {
+    "path": "evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4",
+    "bytes": 1860839383,
+    "fileSha256": "58744717f3d03a19f004fdca76a7199674a6b97a3f2f26e60d1b86b0ee8bf1cd"
+  },
+  "videoAbsolutePath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4",
+  "identityMatchesSavedVideo": true,
+  "mediaFromExistingRecord": {
+    "durationMs": 2178766,
+    "video": {
+      "codecName": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frameCount": 65363
+    },
+    "audio": {
+      "codecName": "aac",
+      "packetPayloadSha256": "0d2ae482cfd4f23dc8537389d853be6ccd005c1c88f266151d72f7edac3db970"
+    }
+  },
+  "mainVideoEvidence": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/render-v008-completed-main-verification-v001.json",
+    "bytes": 252072,
+    "fileSha256": "0146e4e48ef051de734a1febfaa50d44eb234466395359730cf8d76f7eccc642"
+  },
+  "mainProcessEvidence": [
+    {
+      "record": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v008/process-observations/unseen-SsdxVhwxyYo-024-v001-render-v008/1464-video-composite/exit-code.txt",
+        "bytes": 2,
+        "fileSha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "contents": "0\n"
+    },
+    {
+      "record": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v008/process-observations/unseen-SsdxVhwxyYo-024-v001-render-v008/1464-video-composite/signal.txt",
+        "bytes": 5,
+        "fileSha256": "fcf33dfbe13c2354bf0e1b063f9fb422747a46cee00b7420bceff2b81457b345"
+      },
+      "contents": "none\n"
+    },
+    {
+      "record": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v008/process-observations/unseen-SsdxVhwxyYo-024-v001-render-v008/1464-video-composite/stderr.txt",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "contents": ""
+    }
+  ],
+  "completedChecks": {
+    "mainFrameCount": 65363,
+    "audioPayloadMatchesExpected": true,
+    "pngActualCount": 343,
+    "pngMeasurementStatus": "passed",
+    "pngMeasurementRecord": {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/font94-all-actual-png-verification-v001.json",
+      "bytes": 482763,
+      "fileSha256": "4f3a81c319d2260aaaf3ed5ddc81b236df4dc8c556bfcc0ffe17b68cd775be8c"
+    },
+    "wholeFrameComparisonStatus": "passed",
+    "wholeFrameComparisonFrames": 65363,
+    "wholeFrameComparisonFormats": [
+      "yuv420p",
+      "rgba"
+    ],
+    "wholeFrameComparisonRecord": {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/cache-verification.json",
+      "bytes": 5016,
+      "fileSha256": "bfb30972ed637187dba08cbdf7768f6b501581224be09146111618fd89b74df4"
+    },
+    "captionResults": [
+      {
+        "ordinal": 1,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000001",
+        "changedPixels": 99562,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/01-123c1e80d6fb-result.json",
+          "bytes": 2884,
+          "fileSha256": "7633adbfd9a76fe258357a4bfe26ba9c4be82f5c61d278f67851ffcc2dffb1db"
+        }
+      },
+      {
+        "ordinal": 2,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000002",
+        "changedPixels": 168230,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/02-7f11333e9694-result.json",
+          "bytes": 3356,
+          "fileSha256": "e026ba629499405ee2e8a6401e4b4cc34024783fa73f1ab94c45dcfcd79df235"
+        }
+      },
+      {
+        "ordinal": 3,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000003",
+        "changedPixels": 167429,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/03-24e68ee9482a-result.json",
+          "bytes": 3132,
+          "fileSha256": "71a5268753b10fa39d1410576372b4e45d7b46d36f897679e488d7d7e5c66ef4"
+        }
+      },
+      {
+        "ordinal": 4,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000004",
+        "changedPixels": 109986,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/04-4f9251ed9338-result.json",
+          "bytes": 3790,
+          "fileSha256": "fb488026b21d231718c5881567430ca2fe3e8490d3a721f742697f1b3c053f93"
+        }
+      },
+      {
+        "ordinal": 5,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000005",
+        "changedPixels": 84418,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/05-3c151f5b71c0-result.json",
+          "bytes": 4006,
+          "fileSha256": "a408959d1c497ab8fe729fea7c885db5a0f9992cc5233a3fa42b8660ff3a5966"
+        }
+      },
+      {
+        "ordinal": 6,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000006",
+        "changedPixels": 120960,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/06-fa66d63a3894-result.json",
+          "bytes": 3793,
+          "fileSha256": "78e812179d13517cc04caf1795a1fbf567242be43fea343b9d675c0dcf6f1339"
+        }
+      },
+      {
+        "ordinal": 7,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000007",
+        "changedPixels": 209457,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/07-6d22085c133f-result.json",
+          "bytes": 4880,
+          "fileSha256": "2a8f1ca0f7e838466212c69eeb230fc8d7c30762824051b37754486c44b5d51d"
+        }
+      },
+      {
+        "ordinal": 8,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000008",
+        "changedPixels": 170808,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/08-c0befa3e5fcd-result.json",
+          "bytes": 4879,
+          "fileSha256": "068101bd02f6ea728b9e6820c38fadf663f0aee7728c5dd35ba9a843d79aff85"
+        }
+      },
+      {
+        "ordinal": 9,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000009",
+        "changedPixels": 118835,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/09-0f08bab106fa-result.json",
+          "bytes": 5751,
+          "fileSha256": "3c17f2dc9b755178b1fc7fd78ae68f17212c09077f9247341fd6d63f493c4ad8"
+        }
+      },
+      {
+        "ordinal": 10,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000010",
+        "changedPixels": 75597,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/10-cc2d0fa1a900-result.json",
+          "bytes": 5968,
+          "fileSha256": "52109b1e2dcf57edb939594a156aba360597f7da6596f7dc8386701cf62a0d9e"
+        }
+      },
+      {
+        "ordinal": 11,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000011",
+        "changedPixels": 142668,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/11-d48f5c47bd10-result.json",
+          "bytes": 6405,
+          "fileSha256": "629993a1b49efb14f3cc873ef830720245fda13ca8242bc71b93360a6a4d1698"
+        }
+      },
+      {
+        "ordinal": 12,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000012",
+        "changedPixels": 105731,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/12-c6e1157818b5-result.json",
+          "bytes": 6842,
+          "fileSha256": "5f7f8b7076a91797ac6b357b2212cc2412b153723e59a6c1080f3a4ae0536a3b"
+        }
+      },
+      {
+        "ordinal": 13,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000013",
+        "changedPixels": 222472,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/13-09d7a33b7ac1-result.json",
+          "bytes": 6624,
+          "fileSha256": "eb95cf09a85bd0ba244e856b0f8fddeaa9deaccb550903d3fa46223988cb045e"
+        }
+      },
+      {
+        "ordinal": 14,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000014",
+        "changedPixels": 153276,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/14-407ba20b8e7d-result.json",
+          "bytes": 7060,
+          "fileSha256": "3e55e4263c9127e057076892a7bbafdbd969b873bd1b17d4417a39acd3de011e"
+        }
+      },
+      {
+        "ordinal": 15,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000015",
+        "changedPixels": 134296,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/15-fed084dc4b0c-result.json",
+          "bytes": 7060,
+          "fileSha256": "a66a71cc7a0695b430670dfb610418d1c15f0cf6d6c31fdb07e0a8c75f38a037"
+        }
+      },
+      {
+        "ordinal": 16,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000016",
+        "changedPixels": 225123,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/16-cce1a1e50835-result.json",
+          "bytes": 7715,
+          "fileSha256": "94b7910e0b93f8360be8dddc48c8bf46628212752c0730b352fc21a1b4422b20"
+        }
+      },
+      {
+        "ordinal": 17,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000017",
+        "changedPixels": 86820,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/17-c6fe2639f663-result.json",
+          "bytes": 8585,
+          "fileSha256": "1a585945be09fecaac29cef700c4e947ef0fbcbab019b2d2ec43f4cc2cb6db0e"
+        }
+      },
+      {
+        "ordinal": 18,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000018",
+        "changedPixels": 72310,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/18-7de3f2f024b3-result.json",
+          "bytes": 8804,
+          "fileSha256": "ca568ce88e71d0933fd5e63b4bb551aefc0610a518598f8ba1f9d55f3079323f"
+        }
+      },
+      {
+        "ordinal": 19,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000019",
+        "changedPixels": 107310,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/19-77f0b45b713c-result.json",
+          "bytes": 9674,
+          "fileSha256": "033cfbcaf71feb7ee8f03db4934dedc6d11c142992ee93f821763ee23eb3e247"
+        }
+      },
+      {
+        "ordinal": 20,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000020",
+        "changedPixels": 80902,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/20-b256dc3da1c0-result.json",
+          "bytes": 10328,
+          "fileSha256": "982919be3bd029aecc678d6e6c59beabf556c0fad1ab0ee485b36846927904f2"
+        }
+      },
+      {
+        "ordinal": 21,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000021",
+        "changedPixels": 187762,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/21-deea437a66a5-result.json",
+          "bytes": 10539,
+          "fileSha256": "9a9497e2c4778ba5aa61f00a307ae0107e8642876a88dfff1872805dbb1492df"
+        }
+      },
+      {
+        "ordinal": 22,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000022",
+        "changedPixels": 188552,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/22-aa3f6e069b96-result.json",
+          "bytes": 10984,
+          "fileSha256": "b9e61fe438c76b3514a938cab33800c68f96842cd588f9778643c18e1f05baf7"
+        }
+      },
+      {
+        "ordinal": 23,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000023",
+        "changedPixels": 81712,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/23-cb5c1bd344f6-result.json",
+          "bytes": 10756,
+          "fileSha256": "b3efa81c3b206157dfabec22bfcd19b00e8a13f2d24e6274ed41d7a13643336b"
+        }
+      },
+      {
+        "ordinal": 24,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000024",
+        "changedPixels": 308571,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/24-f13c6c48d28c-result.json",
+          "bytes": 10766,
+          "fileSha256": "7c46dca9d556116fee5985fb0adbb2e3138e9b2729187bfa0f6b1913a1ec68b4"
+        }
+      },
+      {
+        "ordinal": 25,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000025",
+        "changedPixels": 104704,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/25-7a24d0f11738-result.json",
+          "bytes": 10983,
+          "fileSha256": "3c61b173704daa3bb32d9e23c4a4660ef12b2235a096b059754dda88be85ad3e"
+        }
+      },
+      {
+        "ordinal": 26,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000026",
+        "changedPixels": 147127,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/26-1999a0b79ef9-result.json",
+          "bytes": 10984,
+          "fileSha256": "39b0ba4ab905fc901a9f9c11b9cfb98c2f2087574f643a661f227027012998bb"
+        }
+      },
+      {
+        "ordinal": 27,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000027",
+        "changedPixels": 170051,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/27-6d7a195ede93-result.json",
+          "bytes": 11422,
+          "fileSha256": "d44c89515cf1957caf7f87f9c80013979af7b66049b1ae9dcbbc2de3297cdf6c"
+        }
+      },
+      {
+        "ordinal": 28,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000028",
+        "changedPixels": 140241,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/28-7fb6666e4ef7-result.json",
+          "bytes": 15602,
+          "fileSha256": "35de1de941d28eb548c2e4ad660001828d279415b3b6bbd2e17e7044192ca110"
+        }
+      },
+      {
+        "ordinal": 29,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000029",
+        "changedPixels": 121151,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/29-3a9f4b515851-result.json",
+          "bytes": 17810,
+          "fileSha256": "4611d014efe7e92fbd7eb0d2d8bcf8a649de5c994200c47aee53637204a47702"
+        }
+      },
+      {
+        "ordinal": 30,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000030",
+        "changedPixels": 136167,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/30-187010ac8e74-result.json",
+          "bytes": 19129,
+          "fileSha256": "7d119e0c72046e47b2f8d92388e7d3818ad61b0e7ee178836ecf563da6e58aab"
+        }
+      },
+      {
+        "ordinal": 31,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000031",
+        "changedPixels": 122768,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/31-85f479edec1a-result.json",
+          "bytes": 19134,
+          "fileSha256": "77d4c8af953db52b3ffde6ecd7fec5abed3a76473627d31137d0693f772ace7c"
+        }
+      },
+      {
+        "ordinal": 32,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000032",
+        "changedPixels": 60789,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/32-9f27518e7d4e-result.json",
+          "bytes": 19794,
+          "fileSha256": "8eedb3bc2ec2bffb37ffee3e2c1838984b3cb16ed05368710dc0ffff103ddbb7"
+        }
+      },
+      {
+        "ordinal": 33,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000033",
+        "changedPixels": 122221,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/33-b5f019ca2a3f-result.json",
+          "bytes": 20021,
+          "fileSha256": "cdfc9f0368066fb3e6e8288cf750415ca67b34ad93274aca600253d38c421dce"
+        }
+      },
+      {
+        "ordinal": 34,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000034",
+        "changedPixels": 169460,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/34-594719583439-result.json",
+          "bytes": 20902,
+          "fileSha256": "e1c642babecc99232645d15c466d42b3d489749cefc5d5dfab67225ead433ab5"
+        }
+      },
+      {
+        "ordinal": 35,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000035",
+        "changedPixels": 51529,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/35-7cd2b68fb68e-result.json",
+          "bytes": 21934,
+          "fileSha256": "41ecaf102f02035f5c80e0b3fcf52a9ea2aec5ba56661f2da72e05112050b05a"
+        }
+      },
+      {
+        "ordinal": 36,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000036",
+        "changedPixels": 89601,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/36-432c0c37e368-result.json",
+          "bytes": 23101,
+          "fileSha256": "44d4635a8e3579c8944315e39a6a6e71c2ba1423d7afa354b4d4b66bf70ff2d0"
+        }
+      },
+      {
+        "ordinal": 37,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000037",
+        "changedPixels": 148946,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/37-99052b5edcbb-result.json",
+          "bytes": 22231,
+          "fileSha256": "3ef083355fc3822dcd6227d826f7c5b719522f0f31f33e29d737faaa256016a1"
+        }
+      },
+      {
+        "ordinal": 38,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000038",
+        "changedPixels": 157043,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/38-80444abd0315-result.json",
+          "bytes": 23328,
+          "fileSha256": "61382d78c595300c604fd9da07f018017ea84275e88f5ba30512153f5aeed102"
+        }
+      },
+      {
+        "ordinal": 39,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000039",
+        "changedPixels": 60788,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/39-6fd3aadab6f1-result.json",
+          "bytes": 24442,
+          "fileSha256": "f03d9b78ce24ba15d7096e104e935ef673322b2913b49e6be54626af1fc823cb"
+        }
+      },
+      {
+        "ordinal": 40,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000040",
+        "changedPixels": 159460,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/40-087637624d5b-result.json",
+          "bytes": 23560,
+          "fileSha256": "8df3d4ba397f0340941cd1601df5d062bb7852429e4a40499c496050beec1287"
+        }
+      },
+      {
+        "ordinal": 41,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000041",
+        "changedPixels": 149433,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/41-fc5dbd5bd980-result.json",
+          "bytes": 24003,
+          "fileSha256": "2cc8569436419510a0153cf61226a48265a5b335523d1174d4a45266ab9d55ef"
+        }
+      },
+      {
+        "ordinal": 42,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000042",
+        "changedPixels": 206639,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/42-67e24d4e2fd0-result.json",
+          "bytes": 24444,
+          "fileSha256": "9d354acf7fb2a45c13e576b220ccccc78913f97aad510fb4405042e69d77b536"
+        }
+      },
+      {
+        "ordinal": 43,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000043",
+        "changedPixels": 115660,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/43-6378cced00b9-result.json",
+          "bytes": 25105,
+          "fileSha256": "2489481e7cd1190b6d1ea2c4781faa29761f3e73a3e8dc415f5504a875b6f5e6"
+        }
+      },
+      {
+        "ordinal": 44,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000044",
+        "changedPixels": 53772,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/44-a049dda31b8a-result.json",
+          "bytes": 25325,
+          "fileSha256": "1dcc0224c82e517157df7c284a195d5ad85ea37be0956b8433b9833c1eb483bb"
+        }
+      },
+      {
+        "ordinal": 45,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000045",
+        "changedPixels": 147874,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/45-d4955a385c5c-result.json",
+          "bytes": 26431,
+          "fileSha256": "bf5b21094359cd56f6b1a7abaacce4b732a07f74f62602b173c5db11bedc3d38"
+        }
+      },
+      {
+        "ordinal": 46,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000046",
+        "changedPixels": 178342,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/46-b7d644a20d3e-result.json",
+          "bytes": 26873,
+          "fileSha256": "f0a9eceaa3fff5ef1b770e7a94914c79f0629d5b6fe2f61ce4852b06790ab518"
+        }
+      },
+      {
+        "ordinal": 47,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000047",
+        "changedPixels": 136174,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/47-1fa30c750bd2-result.json",
+          "bytes": 27535,
+          "fileSha256": "be2cfce95e2ada188efc07fb05f04032194c935620d9b6eb2b53ba9890f250b8"
+        }
+      },
+      {
+        "ordinal": 48,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000048",
+        "changedPixels": 125952,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/48-aa8e90243b84-result.json",
+          "bytes": 27967,
+          "fileSha256": "60659e4f4886f54a9aee191ee62e9a757721a2121bbc0bbf31e447635a04f4ef"
+        }
+      },
+      {
+        "ordinal": 49,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000049",
+        "changedPixels": 96839,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/49-615185cd92d1-result.json",
+          "bytes": 28195,
+          "fileSha256": "b2c46591053108f88220a015a28145d03b5de287cb88b445676c4e8d5518c7bc"
+        }
+      },
+      {
+        "ordinal": 50,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000050",
+        "changedPixels": 219489,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/50-41a0fef5e568-result.json",
+          "bytes": 29079,
+          "fileSha256": "a7d5c7830e38adfe9603460dbd5480d8be69b098617b7df7cb76b8638a65b646"
+        }
+      },
+      {
+        "ordinal": 51,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000051",
+        "changedPixels": 43449,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/51-2105356a5644-result.json",
+          "bytes": 28854,
+          "fileSha256": "e48929f5cc8ef3d2f97c2ea15c03428fb54a29ab0e41231d0ee3cd37b420ab71"
+        }
+      },
+      {
+        "ordinal": 52,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000052",
+        "changedPixels": 90040,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/52-a1020eea3b75-result.json",
+          "bytes": 28200,
+          "fileSha256": "3149b0b017045f5568255b83f629312d2392982d5f028c811418312672b5ab13"
+        }
+      },
+      {
+        "ordinal": 53,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000053",
+        "changedPixels": 98571,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/53-9b45822bf108-result.json",
+          "bytes": 28863,
+          "fileSha256": "f0d494dd7655b07e8f1cd2767085e20836e5d1b693e038f7c94ab47b854292da"
+        }
+      },
+      {
+        "ordinal": 54,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000054",
+        "changedPixels": 208027,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/54-3dbe23011207-result.json",
+          "bytes": 28864,
+          "fileSha256": "fd9ac8a62d5be6042db23ac0598825064872606bf39c088131b7ffb1a38557c7"
+        }
+      },
+      {
+        "ordinal": 55,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000055",
+        "changedPixels": 128192,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/55-eda3e2d9b818-result.json",
+          "bytes": 29961,
+          "fileSha256": "9ab1d1dceabda0145ba5f1698abb44ffe79d97eb02661bdbc82638162e87de9f"
+        }
+      },
+      {
+        "ordinal": 56,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000056",
+        "changedPixels": 209910,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/56-b9c69405a1cb-result.json",
+          "bytes": 30849,
+          "fileSha256": "3f79fd72edad54185332d9b52a94046dbcd5f47f451ce1759600c1c71ebbd12b"
+        }
+      },
+      {
+        "ordinal": 57,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000057",
+        "changedPixels": 335929,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/57-42dd566942c0-result.json",
+          "bytes": 31071,
+          "fileSha256": "4566e4e5f73c37dddedb012bb799628fafe2b8e60ba4c588ef2adb93b704df0b"
+        }
+      },
+      {
+        "ordinal": 58,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000058",
+        "changedPixels": 46341,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/58-eb5dfe0bbe70-result.json",
+          "bytes": 31517,
+          "fileSha256": "e61ec403aacdcc0455da320bbc328f513caa3c70838895ce32a107fa7255e470"
+        }
+      },
+      {
+        "ordinal": 59,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000059",
+        "changedPixels": 58565,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/59-e445cb55cc4c-result.json",
+          "bytes": 31299,
+          "fileSha256": "602fc8f910e022043ed9d29e170ccebe336dcf3f3783a891fd76002c5fafa0fd"
+        }
+      },
+      {
+        "ordinal": 60,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000060",
+        "changedPixels": 134804,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/60-2b55f08d2875-result.json",
+          "bytes": 31745,
+          "fileSha256": "f4c027fd9bd7d0eb4a26215e699ad9835866f96af3677636ce8c26fa900846d4"
+        }
+      },
+      {
+        "ordinal": 61,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000061",
+        "changedPixels": 122139,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/61-3d588355cbd3-result.json",
+          "bytes": 32188,
+          "fileSha256": "35e2896bf770982d9d12628105c5ba047a28afca8929a7531d69b9fe18cef672"
+        }
+      },
+      {
+        "ordinal": 62,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000062",
+        "changedPixels": 100443,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/62-35891a7e3261-result.json",
+          "bytes": 34187,
+          "fileSha256": "de1368a465fcf6b31a7640a46d4eb186a95eaf21621224868b3c0bbcfd3ea99b"
+        }
+      },
+      {
+        "ordinal": 63,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000063",
+        "changedPixels": 332877,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/63-96197a9d9164-result.json",
+          "bytes": 34187,
+          "fileSha256": "110bd58c476bc79744d9ca5275689964595db79ecc4b2df45639a8926288e5cc"
+        }
+      },
+      {
+        "ordinal": 64,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000064",
+        "changedPixels": 35134,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/64-c2121b14c8f0-result.json",
+          "bytes": 35296,
+          "fileSha256": "aee5e0c473596ab0edb89b9a5bf008675ad41c983a2257efc0d838ede16f0d1d"
+        }
+      },
+      {
+        "ordinal": 65,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000065",
+        "changedPixels": 283248,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/65-8f7d0e5ed16f-result.json",
+          "bytes": 35519,
+          "fileSha256": "2345f9a9630f227d3151988b6a893ec6adb640175b3795c4488f6a3cd9d58fc0"
+        }
+      },
+      {
+        "ordinal": 66,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000066",
+        "changedPixels": 67386,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/66-6d69f5145e34-result.json",
+          "bytes": 36403,
+          "fileSha256": "b90a8ea86ae893846df5f205883b44e0fafe85825430827b059aba9de07bbc9c"
+        }
+      },
+      {
+        "ordinal": 67,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000067",
+        "changedPixels": 248255,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/67-527cc631fdf2-result.json",
+          "bytes": 37073,
+          "fileSha256": "35dc3e30a6de01a198e41b7463ac3b856d4b5318449faff6e922a694aceb2734"
+        }
+      },
+      {
+        "ordinal": 68,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000068",
+        "changedPixels": 177096,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/68-a5a7a577bcbc-result.json",
+          "bytes": 37295,
+          "fileSha256": "295870faa54202a0a63695bfff53da74922731d9ad2c7ae115a238657e0a6b96"
+        }
+      },
+      {
+        "ordinal": 69,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000069",
+        "changedPixels": 93278,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/69-aa3f73f80108-result.json",
+          "bytes": 37516,
+          "fileSha256": "ce2a8edec0f957be878e253b173c5294fcb127dc2e587385918309533d8bde50"
+        }
+      },
+      {
+        "ordinal": 70,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000070",
+        "changedPixels": 134847,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/70-25639208ecca-result.json",
+          "bytes": 37738,
+          "fileSha256": "623cd36a48cd8f3cd9fe862fa418a5da38bf1b17cb1059505351afcf89a0bf4a"
+        }
+      },
+      {
+        "ordinal": 71,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000071",
+        "changedPixels": 100624,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/71-03568b2b1e74-result.json",
+          "bytes": 38402,
+          "fileSha256": "a3580fac615d04c20c4bcd049435d0bc2c5e0b55933d2281c1761e9361538969"
+        }
+      },
+      {
+        "ordinal": 72,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000072",
+        "changedPixels": 356968,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/72-556b46020689-result.json",
+          "bytes": 38626,
+          "fileSha256": "0460b4f2c22ecad62a47637f98b3facfa9d37502b7083b1d0ae8fd8820252c0c"
+        }
+      },
+      {
+        "ordinal": 73,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000073",
+        "changedPixels": 37709,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/73-6062ee90d24e-result.json",
+          "bytes": 39068,
+          "fileSha256": "8038195a46130b5735f933a9f20670154e86fd7116ef250846c8e8873e3fabb4"
+        }
+      },
+      {
+        "ordinal": 74,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000074",
+        "changedPixels": 359826,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/74-27bb7ab87686-result.json",
+          "bytes": 39735,
+          "fileSha256": "5d92f2edcd69f95fc3dfcf0f58904d09917a185209bbd0f5ca91274bf6a8ec6f"
+        }
+      },
+      {
+        "ordinal": 75,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000075",
+        "changedPixels": 150685,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/75-526a8ef31404-result.json",
+          "bytes": 39293,
+          "fileSha256": "e3c12e9435cebca4f3192bfe98b444f3fcbf78810a3d9966f2f18cafa3d34576"
+        }
+      },
+      {
+        "ordinal": 76,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000076",
+        "changedPixels": 383890,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/76-922d9bdd1556-result.json",
+          "bytes": 40177,
+          "fileSha256": "3b46fa0af33059fab86aca7322205a1d792e6d5ee6c628a07b095abe18c71b2e"
+        }
+      },
+      {
+        "ordinal": 77,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000077",
+        "changedPixels": 53334,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/77-deb5e6298e0e-result.json",
+          "bytes": 40175,
+          "fileSha256": "47a84cf3b00ee7f4d3f7c93415ca20a732bbc24eb8a1701eef7403fd52bee12f"
+        }
+      },
+      {
+        "ordinal": 78,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000078",
+        "changedPixels": 361067,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/78-1cbfd155af1f-result.json",
+          "bytes": 41954,
+          "fileSha256": "77beaa9e78c7089fc7bc5afe6d5f5038fd7169dbc58bb5fad5acd6d398a96d0c"
+        }
+      },
+      {
+        "ordinal": 79,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000079",
+        "changedPixels": 24740,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/79-4296a87251b3-result.json",
+          "bytes": 42843,
+          "fileSha256": "c9ad7e88cde4af37944cf40e700ff35265abeba0b7cccad53c64986ad524ed5a"
+        }
+      },
+      {
+        "ordinal": 80,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000080",
+        "changedPixels": 435308,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/80-0c16053015f0-result.json",
+          "bytes": 43953,
+          "fileSha256": "7a655f3f282befde5967d48507884f762006bae0c04fa6c9aba4118b2b758342"
+        }
+      },
+      {
+        "ordinal": 81,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000081",
+        "changedPixels": 147356,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/81-d64dc29bc202-result.json",
+          "bytes": 43954,
+          "fileSha256": "36f742805e7322d86a19b6665d4ee1c800c5eb06de737daf87be98db9cf3d246"
+        }
+      },
+      {
+        "ordinal": 82,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000082",
+        "changedPixels": 197349,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/82-063cb398b5e8-result.json",
+          "bytes": 43516,
+          "fileSha256": "2130459e83eddfe92f8d1514ab38da1471b7548f05c887fabea3113b8804139e"
+        }
+      },
+      {
+        "ordinal": 83,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000083",
+        "changedPixels": 456545,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/83-aea653700333-result.json",
+          "bytes": 43076,
+          "fileSha256": "d02828226afa19d180af88b10eab0ad1eea95de53c5ea1e2ab254bd0996b7477"
+        }
+      },
+      {
+        "ordinal": 84,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000084",
+        "changedPixels": 133762,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/84-8a39268a3f14-result.json",
+          "bytes": 43962,
+          "fileSha256": "1fe23246249d5e406bf38b75f6fe3b4fdde86b4167b0ae9a395973d7bad27505"
+        }
+      },
+      {
+        "ordinal": 85,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000085",
+        "changedPixels": 322797,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/85-a314f2cfd106-result.json",
+          "bytes": 44628,
+          "fileSha256": "33e301237c040e2ea9369613a2a7a60c00b741dfcf584ffc5b2f5292d726d04c"
+        }
+      },
+      {
+        "ordinal": 86,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000086",
+        "changedPixels": 125288,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/86-1e8c2fc37b8e-result.json",
+          "bytes": 46626,
+          "fileSha256": "2d928c733f1d8443487664b983f9df263d429935f8d3409c2c1a357e521bcbf2"
+        }
+      },
+      {
+        "ordinal": 87,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000087",
+        "changedPixels": 85879,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/87-dfc9c3de8c07-result.json",
+          "bytes": 46849,
+          "fileSha256": "d7fbc8d79e7e3f4c0641c27c9e3c963c5b0c3a55ba103accdae233dab275a18a"
+        }
+      },
+      {
+        "ordinal": 88,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000088",
+        "changedPixels": 199600,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/88-ff057ff6faf4-result.json",
+          "bytes": 46850,
+          "fileSha256": "03f99d788eb9d930d2c178efb681a58a9c5261bd9ac967f0e919e5446dea7700"
+        }
+      },
+      {
+        "ordinal": 89,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000089",
+        "changedPixels": 125819,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/89-766d2aec1c82-result.json",
+          "bytes": 325819,
+          "fileSha256": "679bc72bdcb095362421fae895927118070105ee507cdac784b84b336bc1c17c"
+        }
+      },
+      {
+        "ordinal": 90,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000090",
+        "changedPixels": 161776,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/90-78e55d136011-result.json",
+          "bytes": 508872,
+          "fileSha256": "383b0dd38a8b1078ad4f484ee5f8c0e671cbde2f868a6c9a8c01e16884cf4be1"
+        }
+      },
+      {
+        "ordinal": 91,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000091",
+        "changedPixels": 377665,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/91-1bdc3b2d0709-result.json",
+          "bytes": 48848,
+          "fileSha256": "81a7b5fd5fd1f8cbd63472d5635d0a1bee19ad8e900502d08675cd37f8042835"
+        }
+      },
+      {
+        "ordinal": 92,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000092",
+        "changedPixels": 173238,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/92-49b6641bef88-result.json",
+          "bytes": 49726,
+          "fileSha256": "6710c60b5415760d96ac2ee24c8fa367744d27e49736fa7f2071c6d2c8cca262"
+        }
+      },
+      {
+        "ordinal": 93,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000093",
+        "changedPixels": 171430,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/93-dd05bbb465bd-result.json",
+          "bytes": 49948,
+          "fileSha256": "fbedc6d2446e07f27d438b19eff8b52ce9a0ad23245b18995f03ffdda90e53d0"
+        }
+      },
+      {
+        "ordinal": 94,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000094",
+        "changedPixels": 82119,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/94-cbba00984d11-result.json",
+          "bytes": 50613,
+          "fileSha256": "ca0d5ac970ad87980620977d895c52c9abc22a5f50caa40de78de0478eeb84b0"
+        }
+      },
+      {
+        "ordinal": 95,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000095",
+        "changedPixels": 111181,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/95-13290f935eae-result.json",
+          "bytes": 50614,
+          "fileSha256": "20889e9ff784ebc150b229157b792550131c1f6ec32e85845c2f6c652ddf743b"
+        }
+      },
+      {
+        "ordinal": 96,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000096",
+        "changedPixels": 108624,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/96-6b186c1424da-result.json",
+          "bytes": 51275,
+          "fileSha256": "3a73df6424430569ba29937680fe896db5b669457f1100866434d26c2b645fa2"
+        }
+      },
+      {
+        "ordinal": 97,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000097",
+        "changedPixels": 205271,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/97-82883915b8ef-result.json",
+          "bytes": 51501,
+          "fileSha256": "a1edb7a7d925da8eb788c7112b5add59ba7d9dc62e86219afb8745fb885c6876"
+        }
+      },
+      {
+        "ordinal": 98,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000098",
+        "changedPixels": 378891,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/98-a256f7112983-result.json",
+          "bytes": 51502,
+          "fileSha256": "4209f654322e1cce4056f1b7e0958cc6024c83591a2fb2e6557b6f176c0033c4"
+        }
+      },
+      {
+        "ordinal": 99,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000099",
+        "changedPixels": 184238,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/99-747253353130-result.json",
+          "bytes": 51724,
+          "fileSha256": "e8ecc724a5b3667e0da7341aca478962c1391790268699db5c6c9b006acf6186"
+        }
+      },
+      {
+        "ordinal": 100,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000100",
+        "changedPixels": 147284,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/100-2c5d0cf3d7ca-result.json",
+          "bytes": 52615,
+          "fileSha256": "c033742fd972d2239a0ca6cfef7a55a5b5fc4c5ba56237799afda177a7883d65"
+        }
+      },
+      {
+        "ordinal": 101,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000101",
+        "changedPixels": 81136,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/101-d6335c5cd106-result.json",
+          "bytes": 52614,
+          "fileSha256": "fcd21a7b11f8d24a499c7f0f538d252557be2514d73ddc318883cbc2d2520986"
+        }
+      },
+      {
+        "ordinal": 102,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000102",
+        "changedPixels": 102113,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/102-4a5769f81b49-result.json",
+          "bytes": 54613,
+          "fileSha256": "52058971c28eab78c40d5248cf63b4fa604ee35bfced01c7e82d0238adef2923"
+        }
+      },
+      {
+        "ordinal": 103,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000103",
+        "changedPixels": 195854,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/103-d0a2e766fcd8-result.json",
+          "bytes": 58610,
+          "fileSha256": "13169fd938dd5fd08d3f1848c8e7b662393becd784e5cf26fc041819efb245d2"
+        }
+      },
+      {
+        "ordinal": 104,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000104",
+        "changedPixels": 219893,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/104-b867757726bd-result.json",
+          "bytes": 58609,
+          "fileSha256": "92ec8771a86908507b93a0fc772abf604acfdcf1df10c82a95ac6b356eb61c42"
+        }
+      },
+      {
+        "ordinal": 105,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000105",
+        "changedPixels": 88610,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/105-1acea9563db9-result.json",
+          "bytes": 59494,
+          "fileSha256": "36a310315c22ba7f7cd8c8f17efb91719685fdba7543f1c84f5845e216020f2c"
+        }
+      },
+      {
+        "ordinal": 106,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000106",
+        "changedPixels": 36308,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/106-d2714f450bbe-result.json",
+          "bytes": 59719,
+          "fileSha256": "26943411f9dbdcbdf2a1b3c291c28ec4a03bd9daf4fa19b9c82ef184ec02364f"
+        }
+      },
+      {
+        "ordinal": 107,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000107",
+        "changedPixels": 305354,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/107-cc47dab5dfd0-result.json",
+          "bytes": 61273,
+          "fileSha256": "16545e8ed61b5b91c21fc719f2efec5084305f0c3ec8a39f8300ea4d6fa1c865"
+        }
+      },
+      {
+        "ordinal": 108,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000108",
+        "changedPixels": 310386,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/108-7e63386fbfdf-result.json",
+          "bytes": 62162,
+          "fileSha256": "9aca9b2c9983140922e8e5fcfbac7a3930e83694397c4c6440c4647621e582af"
+        }
+      },
+      {
+        "ordinal": 109,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000109",
+        "changedPixels": 207849,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/109-f4003f5be006-result.json",
+          "bytes": 62383,
+          "fileSha256": "da42e36a934499d2a07c6a8419ee00baffe92a45d2d7a066493493845e829025"
+        }
+      },
+      {
+        "ordinal": 110,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000110",
+        "changedPixels": 142669,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/110-369ea79848c0-result.json",
+          "bytes": 63272,
+          "fileSha256": "16296849697de2812b35eb5636e1bc988b452dcb438cafa8f388d70c59a7ead4"
+        }
+      },
+      {
+        "ordinal": 111,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000111",
+        "changedPixels": 221722,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/111-efc7005045f6-result.json",
+          "bytes": 65711,
+          "fileSha256": "9f52d4557b91f6485170ac6bc70602c069447affcff1ce788ce11a738ef992cf"
+        }
+      },
+      {
+        "ordinal": 112,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000112",
+        "changedPixels": 184425,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/112-4de7f17a64c8-result.json",
+          "bytes": 65270,
+          "fileSha256": "c60ec16d1277cc5e4c3ad0922a778ebda22d712f3eae78c5b10bf74dc175ae63"
+        }
+      },
+      {
+        "ordinal": 113,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000113",
+        "changedPixels": 123740,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/113-1aa79c0c63ab-result.json",
+          "bytes": 65930,
+          "fileSha256": "b771b0d6950203c800ea675db5836d0a85b9530c579dcd20fcb8defbceffc11b"
+        }
+      },
+      {
+        "ordinal": 114,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000114",
+        "changedPixels": 142277,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/114-c64a51c6eef5-result.json",
+          "bytes": 65714,
+          "fileSha256": "c0e907e7abfb72d0fe216413a8ef6b7fd0d1c01290e039918a945962366b6ec6"
+        }
+      },
+      {
+        "ordinal": 115,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000115",
+        "changedPixels": 173262,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/115-7194d027b6cb-result.json",
+          "bytes": 67267,
+          "fileSha256": "a519fae7029ea87f202cdc82c6832ec1a850c9a852aca5fc73f368e15548010c"
+        }
+      },
+      {
+        "ordinal": 116,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000116",
+        "changedPixels": 161502,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/116-218c848e8ff6-result.json",
+          "bytes": 67931,
+          "fileSha256": "a568faf8f98d134b49d3cfe7b2158e4395b3f9f232becf9e8c3901f5b1a1be3a"
+        }
+      },
+      {
+        "ordinal": 117,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000117",
+        "changedPixels": 167864,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/117-00c8cfa6a607-result.json",
+          "bytes": 68377,
+          "fileSha256": "dcd4df9af770bfa6ed269417966ad5669fcc2d36277f23cf338fe746090ae43a"
+        }
+      },
+      {
+        "ordinal": 118,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000118",
+        "changedPixels": 106044,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/118-e02f766651bb-result.json",
+          "bytes": 68377,
+          "fileSha256": "e9fe140b72cb819f2c7fafca8f09764ef0fd0a57d5f7048a2cd7151206582ef9"
+        }
+      },
+      {
+        "ordinal": 119,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000119",
+        "changedPixels": 163975,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/119-23fcb6f99021-result.json",
+          "bytes": 68819,
+          "fileSha256": "43a6e5ab1164525c0b2fce4e97dbc500f1919ec1610ae3dc7105e81fa0508546"
+        }
+      },
+      {
+        "ordinal": 120,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000120",
+        "changedPixels": 47321,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/120-d217cc9730eb-result.json",
+          "bytes": 68820,
+          "fileSha256": "0eef73a5264c541234a52136a8077c30f324bd6b0d5effa008a91f851b0e7cce"
+        }
+      },
+      {
+        "ordinal": 121,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000121",
+        "changedPixels": 53823,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/121-4a98e60e566f-result.json",
+          "bytes": 70152,
+          "fileSha256": "d07de47694799a2ee5d85ffcc4dd7f113cda5464f2adeb3263328f181ec12252"
+        }
+      },
+      {
+        "ordinal": 122,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000122",
+        "changedPixels": 230079,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/122-b611ea609408-result.json",
+          "bytes": 71262,
+          "fileSha256": "0703f6927289904c7e5684b43701de958576bb6de13e51c9656bc458bea0db45"
+        }
+      },
+      {
+        "ordinal": 123,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000123",
+        "changedPixels": 217535,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/123-b59e4f5c7028-result.json",
+          "bytes": 71041,
+          "fileSha256": "74a7cfb258fbb19fbe38e9c2ab31aaa51f0aa5bde27758340af4a4d970eafe63"
+        }
+      },
+      {
+        "ordinal": 124,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000124",
+        "changedPixels": 148357,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/124-8ed042df29c0-result.json",
+          "bytes": 75037,
+          "fileSha256": "4f2a789ebc771adf0fd1197dba91d9fa4ff4369c0e52d9516650583141d4c518"
+        }
+      },
+      {
+        "ordinal": 125,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000125",
+        "changedPixels": 429404,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/125-9818db3d111d-result.json",
+          "bytes": 75926,
+          "fileSha256": "1bff1019d7a129ac39c5c22c0c459460ef39a78c08a6ebf6cf3451b683e9fda6"
+        }
+      },
+      {
+        "ordinal": 126,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000126",
+        "changedPixels": 171208,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/126-87fa84c9b591-result.json",
+          "bytes": 75256,
+          "fileSha256": "6fe09dafaaa0f6c59de41fd8cc9277ee3b6286e59b0b86e2e276c88d4eab6b42"
+        }
+      },
+      {
+        "ordinal": 127,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000127",
+        "changedPixels": 195260,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/127-3c9fac3c4669-result.json",
+          "bytes": 76144,
+          "fileSha256": "c7329b04d93b84609afd7c084a4bcaa792759c811a78ee7565c0a72c136bafc7"
+        }
+      },
+      {
+        "ordinal": 128,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000128",
+        "changedPixels": 63834,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/128-3c67b175afa8-result.json",
+          "bytes": 77257,
+          "fileSha256": "ab194c789afd49d7de330402d4cd67bde10b83b7239f7253ccac142a07d6e5ac"
+        }
+      },
+      {
+        "ordinal": 129,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000129",
+        "changedPixels": 138813,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/129-1e52d80c07dd-result.json",
+          "bytes": 79033,
+          "fileSha256": "4c34a381437b16f3788266fa2e24b156f90102a60238261637279f3d9d837d77"
+        }
+      },
+      {
+        "ordinal": 130,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000130",
+        "changedPixels": 158914,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/130-49b5ce741ddd-result.json",
+          "bytes": 78812,
+          "fileSha256": "97df222c9e35773f85bd75e4edfb751c7bb5f276d8502f091fe412bf6b68269a"
+        }
+      },
+      {
+        "ordinal": 131,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000131",
+        "changedPixels": 412811,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/131-29f6cc94c520-result.json",
+          "bytes": 80366,
+          "fileSha256": "6468efc37777407147fa90eca742f32b81ee6eefe2807d052d937ea748a08b47"
+        }
+      },
+      {
+        "ordinal": 132,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000132",
+        "changedPixels": 406339,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/132-3d71f0d7d8e3-result.json",
+          "bytes": 80142,
+          "fileSha256": "d4d62719d690e6a128c235dd3dd13f94c813fdd95698e7e079918a54e04b6cb0"
+        }
+      },
+      {
+        "ordinal": 133,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000133",
+        "changedPixels": 303028,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/133-b38fe499c106-result.json",
+          "bytes": 80583,
+          "fileSha256": "2baa3bab4fb03f955cf7928a6f5f96ca9fe7c6d484302522633c73aad414cc12"
+        }
+      },
+      {
+        "ordinal": 134,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000134",
+        "changedPixels": 456199,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/134-0789935b4d93-result.json",
+          "bytes": 81476,
+          "fileSha256": "9db575abd51c0ea97692abf187d77482d959541793c9d01d5e7966e92ae3c203"
+        }
+      },
+      {
+        "ordinal": 135,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000135",
+        "changedPixels": 196154,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/135-2ae7dee2bfac-result.json",
+          "bytes": 81918,
+          "fileSha256": "f8aa6fb3027afb4b36796fdd2db402ca6f22a34acbe013b23c4a0934eb8aca4c"
+        }
+      },
+      {
+        "ordinal": 136,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000136",
+        "changedPixels": 163955,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/136-c9a353d3668c-result.json",
+          "bytes": 82364,
+          "fileSha256": "d7e3e70a3671481628efa0a6b00e8ded52340d311c121c862911e5ea59e19377"
+        }
+      },
+      {
+        "ordinal": 137,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000137",
+        "changedPixels": 296619,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/137-fd5c685de0e6-result.json",
+          "bytes": 83249,
+          "fileSha256": "3f6b30dfa74f2f697695c74b4a5c35ebe6d6a95a0d50d8fb11d575d73c79c919"
+        }
+      },
+      {
+        "ordinal": 138,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000138",
+        "changedPixels": 136453,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/138-7e2588dfffb9-result.json",
+          "bytes": 83252,
+          "fileSha256": "9bbdfb75735b7f83dff301a17cb2007c14c7bc5852dd130be8660b6e9aa7c46f"
+        }
+      },
+      {
+        "ordinal": 139,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000139",
+        "changedPixels": 306744,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/139-9af81b31a17f-result.json",
+          "bytes": 83473,
+          "fileSha256": "50b312e09a1237c23636263153f996757218a932ed60d0dd7cb0cef140d452c7"
+        }
+      },
+      {
+        "ordinal": 140,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000140",
+        "changedPixels": 186719,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/140-e6ebfeb6b34c-result.json",
+          "bytes": 83915,
+          "fileSha256": "9340588fc728e523e40cda19e190eeae87244900140ebcafba35a74fd4ea9387"
+        }
+      },
+      {
+        "ordinal": 141,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000141",
+        "changedPixels": 122672,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/141-a8597e928fdc-result.json",
+          "bytes": 84805,
+          "fileSha256": "6f3a441e4ad2dbf567ee0c49dd79ae8a5f3f9bd9ee7f572bcda9673161f9b54a"
+        }
+      },
+      {
+        "ordinal": 142,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000142",
+        "changedPixels": 455132,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/142-821703fdbacb-result.json",
+          "bytes": 84806,
+          "fileSha256": "ff78ee97de6328ea67d52429b47b7c1a4a7711845c91954606e077b81e1e3e76"
+        }
+      },
+      {
+        "ordinal": 143,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000143",
+        "changedPixels": 136943,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/143-aefd219593e7-result.json",
+          "bytes": 86136,
+          "fileSha256": "12b319023918bc7e075524ef0043b6ccd5d2b6934cdca8705296753fc839a2ad"
+        }
+      },
+      {
+        "ordinal": 144,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000144",
+        "changedPixels": 159871,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/144-18928bb91f2f-result.json",
+          "bytes": 85471,
+          "fileSha256": "c8e665f846f4c777f322809392ca9ed3e80fadae53b7623e314672b382491c8e"
+        }
+      },
+      {
+        "ordinal": 145,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000145",
+        "changedPixels": 112247,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/145-e4ed621152c4-result.json",
+          "bytes": 86358,
+          "fileSha256": "7dfc7cb8dc889c2fb5005e3d57e9d0e342d05360e6eef5e78c8673d300d218cc"
+        }
+      },
+      {
+        "ordinal": 146,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000146",
+        "changedPixels": 280637,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/146-09f7459bdf45-result.json",
+          "bytes": 86137,
+          "fileSha256": "66b3282752bc330316cdec7c73ff3c6cd28223baa22c5f7b7cf2cc48be9c2c11"
+        }
+      },
+      {
+        "ordinal": 147,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000147",
+        "changedPixels": 145346,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/147-f0aecca08412-result.json",
+          "bytes": 87026,
+          "fileSha256": "49e9d0d989a940eb87b1872867d8f103b3852bcd08c625986588712eb86f9e82"
+        }
+      },
+      {
+        "ordinal": 148,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000148",
+        "changedPixels": 216623,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/148-06e10b78eb4a-result.json",
+          "bytes": 86801,
+          "fileSha256": "83aa3e00bd612e570f53160ec8748a5d15e0751696a1d81a69b83bcc50dd88a4"
+        }
+      },
+      {
+        "ordinal": 149,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000149",
+        "changedPixels": 190463,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/149-7818bda3d246-result.json",
+          "bytes": 87026,
+          "fileSha256": "8282ee67333c7e8d81f985c30d0978dd2d14cd145d72fdb12ee642a4cb54e9f3"
+        }
+      },
+      {
+        "ordinal": 150,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000150",
+        "changedPixels": 218638,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/150-66bb4eabb190-result.json",
+          "bytes": 87689,
+          "fileSha256": "4376ef550d8052347bf7c74a2d3cebf92161c28b0a4ab0c4def1ac8e05588627"
+        }
+      },
+      {
+        "ordinal": 151,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000151",
+        "changedPixels": 208529,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/151-cbdcdc0b06e6-result.json",
+          "bytes": 87691,
+          "fileSha256": "51505e1a30fa968d78b36f29aef257ba2385dfe39d95e3aa77418da54dee8f3b"
+        }
+      },
+      {
+        "ordinal": 152,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000152",
+        "changedPixels": 116083,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/152-1664fa281096-result.json",
+          "bytes": 88133,
+          "fileSha256": "d482c88ec9f8eebd6e631d9ef5d830d376ffc75cc51da4f608a676787a00da08"
+        }
+      },
+      {
+        "ordinal": 153,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000153",
+        "changedPixels": 159793,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/153-118024d62c13-result.json",
+          "bytes": 88800,
+          "fileSha256": "ca01025775278ceae7fb084469c3462d32a859f308a77337d1b40dde3754253a"
+        }
+      },
+      {
+        "ordinal": 154,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000154",
+        "changedPixels": 134375,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/154-a4421df381e6-result.json",
+          "bytes": 88796,
+          "fileSha256": "102071735e77cd9e66da09e646ccc27b2f37db83b40e19e9b84a8e0d2d63444c"
+        }
+      },
+      {
+        "ordinal": 155,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000155",
+        "changedPixels": 159442,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/155-2164de8437de-result.json",
+          "bytes": 88799,
+          "fileSha256": "7b7804f331eb97a66848826831b05273926bccaa5813e552295231ef315b8d5b"
+        }
+      },
+      {
+        "ordinal": 156,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000156",
+        "changedPixels": 117786,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/156-f9036365d681-result.json",
+          "bytes": 89467,
+          "fileSha256": "3fb545a032c1e643f39932560fe6ae0de4c3c3565d560fa48225f1ba67275be7"
+        }
+      },
+      {
+        "ordinal": 157,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000157",
+        "changedPixels": 28931,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/157-5d5caaf5ce97-result.json",
+          "bytes": 89244,
+          "fileSha256": "c0eae07796bcf2fdd2fc3de1cd2d2f3840088ba7ca3c03fb71b07b4f70b1022f"
+        }
+      },
+      {
+        "ordinal": 158,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000158",
+        "changedPixels": 156855,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/158-baad901638e1-result.json",
+          "bytes": 92352,
+          "fileSha256": "19d2d4ff1070ede1657872b17317df81ee74957354460a2b4ea5422afbe2b9fd"
+        }
+      },
+      {
+        "ordinal": 159,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000159",
+        "changedPixels": 176195,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/159-39ec334bc9cb-result.json",
+          "bytes": 95052,
+          "fileSha256": "68943cc01313f2a6b15ae2a4225489f39e7c78654303d9e311e92e1b22974a43"
+        }
+      },
+      {
+        "ordinal": 160,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000160",
+        "changedPixels": 104317,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/160-cdd9cb734118-result.json",
+          "bytes": 95276,
+          "fileSha256": "df365899e69743d8f049b8b88611bb9359cbfb94b4f9b43ad0d8413961480dd9"
+        }
+      },
+      {
+        "ordinal": 161,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000161",
+        "changedPixels": 167071,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/161-712f410485b5-result.json",
+          "bytes": 95052,
+          "fileSha256": "32115c89456fb33f4cecc0d20d80954378ca6277d5e9de126ee8202970ffd305"
+        }
+      },
+      {
+        "ordinal": 162,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000162",
+        "changedPixels": 56021,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/162-cb38c4dddda8-result.json",
+          "bytes": 97289,
+          "fileSha256": "b091bf6578dc9edda2abd2f3314ef454804f44929f331732f1ef948498a331c4"
+        }
+      },
+      {
+        "ordinal": 163,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000163",
+        "changedPixels": 262965,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/163-8526be9f1a4b-result.json",
+          "bytes": 98633,
+          "fileSha256": "0e9f7ce7d38383e497aa65e9e484886aff82d73d7104e12c4629c3a295cda437"
+        }
+      },
+      {
+        "ordinal": 164,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000164",
+        "changedPixels": 221277,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/164-09670b83e56b-result.json",
+          "bytes": 99752,
+          "fileSha256": "a1c1e41d7a2e7b2b677687b84e05a5e02cf7d0d3e5ff9f743eab0f14c241dd87"
+        }
+      },
+      {
+        "ordinal": 165,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000165",
+        "changedPixels": 129651,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/165-bbdccac8bf77-result.json",
+          "bytes": 100650,
+          "fileSha256": "19343e138e66f4540f67093c89200c28cab6fd0a7ea7452f4d7f56f243205bae"
+        }
+      },
+      {
+        "ordinal": 166,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000166",
+        "changedPixels": 107513,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/166-10869733d5fa-result.json",
+          "bytes": 101098,
+          "fileSha256": "fcd1a24471eda66d00de8fa756c08b1a7f798a252b39e99a26632d34d3ef0b2b"
+        }
+      },
+      {
+        "ordinal": 167,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000167",
+        "changedPixels": 127469,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/167-65b137dd6cea-result.json",
+          "bytes": 101319,
+          "fileSha256": "75baf4f022ac6a004d89f9bc6acd3bc501f9a93bd936d932a70984dc6d12e823"
+        }
+      },
+      {
+        "ordinal": 168,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000168",
+        "changedPixels": 122677,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/168-29471496ac7a-result.json",
+          "bytes": 102439,
+          "fileSha256": "edfa0e1d652fe017a5b3347de4e4f207cabfed0f46c3caf7e711500394c0b58e"
+        }
+      },
+      {
+        "ordinal": 169,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000169",
+        "changedPixels": 355941,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/169-a3f1c27e9709-result.json",
+          "bytes": 102438,
+          "fileSha256": "1cf10b61b1c6d6ebd9e28f4d888ca105e69423102c363cf4612b455787198b80"
+        }
+      },
+      {
+        "ordinal": 170,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000170",
+        "changedPixels": 119203,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/170-682e1a0f2fc1-result.json",
+          "bytes": 105580,
+          "fileSha256": "a0eb8080d7eb56c982973bcf7202eece358e4a85ddb44eb0748e5aa24bb97aaf"
+        }
+      },
+      {
+        "ordinal": 171,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000171",
+        "changedPixels": 162420,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/171-a268989893f2-result.json",
+          "bytes": 105132,
+          "fileSha256": "d4daac453d77a733d380f149466ac7f6ec438e72b3bfb9b32e8143c899559dd3"
+        }
+      },
+      {
+        "ordinal": 172,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000172",
+        "changedPixels": 48494,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/172-55912336041d-result.json",
+          "bytes": 107369,
+          "fileSha256": "a89657cb899ed070a9bd4b45bb090b9396f82e6e7dd7da964c205b67ec4f7918"
+        }
+      },
+      {
+        "ordinal": 173,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000173",
+        "changedPixels": 43845,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/173-544008688cc2-result.json",
+          "bytes": 108259,
+          "fileSha256": "cc6f993c293e78f5b065034c6625e81eabd3260ce1bd6a71c175cf8d05ecbbff"
+        }
+      },
+      {
+        "ordinal": 174,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000174",
+        "changedPixels": 62493,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/174-5f83bd7e8c63-result.json",
+          "bytes": 108265,
+          "fileSha256": "d36f6099d289fdf49bdd2672492c73b9ab495e6da89a0c6fe8c99561c66f85c6"
+        }
+      },
+      {
+        "ordinal": 175,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000175",
+        "changedPixels": 171766,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/175-ed1ace6c3726-result.json",
+          "bytes": 109159,
+          "fileSha256": "a32a6a29188438c0f1c9ae263539e7b17cac39e59c53e448f09251c98c814f28"
+        }
+      },
+      {
+        "ordinal": 176,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000176",
+        "changedPixels": 118945,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/176-13a622f71450-result.json",
+          "bytes": 109830,
+          "fileSha256": "f9024caa4a11ab44af25c7580b7fcd8811f0568cf94a218f88dd5511c127c21d"
+        }
+      },
+      {
+        "ordinal": 177,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000177",
+        "changedPixels": 100200,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/177-c84b8de0a9ee-result.json",
+          "bytes": 110503,
+          "fileSha256": "fe9ccdbcd3145e113399c6986adedb2b35d538181a3c017126e38fc0c911c145"
+        }
+      },
+      {
+        "ordinal": 178,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000178",
+        "changedPixels": 202734,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/178-d9935faf48e3-result.json",
+          "bytes": 114988,
+          "fileSha256": "9764d282e75eb780e99be72c0d72fe36a091195c18101ff83035d2e8123cb44f"
+        }
+      },
+      {
+        "ordinal": 179,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000179",
+        "changedPixels": 147573,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/179-f2eb105e5fd5-result.json",
+          "bytes": 117446,
+          "fileSha256": "1a747f681e2d5e7886d5113f066b49c1a7b445d6ae5f807ae060b00fed8e8c58"
+        }
+      },
+      {
+        "ordinal": 180,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000180",
+        "changedPixels": 88072,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/180-1f11b5f8fac9-result.json",
+          "bytes": 118568,
+          "fileSha256": "b743d793b42817c5909646d18c5019ec7319aa85fe3298f24c4d5607d889c284"
+        }
+      },
+      {
+        "ordinal": 181,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000181",
+        "changedPixels": 160970,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/181-4142519ce15f-result.json",
+          "bytes": 118343,
+          "fileSha256": "6711ddd54979cf9e60b4116965dc40ea1235bf1cf58cbaf3c4481e9b6b3d62f8"
+        }
+      },
+      {
+        "ordinal": 182,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000182",
+        "changedPixels": 76286,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/182-f2084b78d642-result.json",
+          "bytes": 119688,
+          "fileSha256": "9358df807d4c0b73203757426b678f61c44ba4d5bfa61c0ba7627e6eb8d417ae"
+        }
+      },
+      {
+        "ordinal": 183,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000183",
+        "changedPixels": 41281,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/183-7932e98e116d-result.json",
+          "bytes": 120358,
+          "fileSha256": "f47605ada9f74d0c3bfed2b861a5511e691a4c0e65c200233439da918f462e29"
+        }
+      },
+      {
+        "ordinal": 184,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000184",
+        "changedPixels": 111586,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/184-7e063a5d94a0-result.json",
+          "bytes": 120804,
+          "fileSha256": "d81ede156135ab133ad5a88954951da210439b6dd2b925fd4f6a66bd1e9e5242"
+        }
+      },
+      {
+        "ordinal": 185,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000185",
+        "changedPixels": 210197,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/185-437742703c8c-result.json",
+          "bytes": 118803,
+          "fileSha256": "3ebe56b2fc851fbee869c8d934cb4e7653187febb90022d344ab925793e0549d"
+        }
+      },
+      {
+        "ordinal": 186,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000186",
+        "changedPixels": 181384,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/186-c078c019f7dd-result.json",
+          "bytes": 119931,
+          "fileSha256": "3b74a895a5c02b142cff1b88b665f03db496f944d76444df1c91d36d39637b67"
+        }
+      },
+      {
+        "ordinal": 187,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000187",
+        "changedPixels": 138081,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/187-0205b8cf5229-result.json",
+          "bytes": 120827,
+          "fileSha256": "a7c821231c555962538b1b6130fc1b7fd9e07e30de30f72c714d33fdb58c2288"
+        }
+      },
+      {
+        "ordinal": 188,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000188",
+        "changedPixels": 109680,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/188-071fe75a9a24-result.json",
+          "bytes": 121723,
+          "fileSha256": "930695040e3a4ea74a137b737b4cca8a91344141de67ef1dbfeb9d24be758583"
+        }
+      },
+      {
+        "ordinal": 189,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000189",
+        "changedPixels": 205828,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/189-73bc8ffc8bbf-result.json",
+          "bytes": 121721,
+          "fileSha256": "5cb15f8ac0efb2b6349080fc4ec8d6323c7c0ac23717d383b282cf83c9a725f5"
+        }
+      },
+      {
+        "ordinal": 190,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000190",
+        "changedPixels": 99764,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/190-57f549d07947-result.json",
+          "bytes": 122170,
+          "fileSha256": "204778f520c69dba355de35e0bd3bb7aba4cf155ce6e19b1ed1ff058a3f8f54b"
+        }
+      },
+      {
+        "ordinal": 191,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000191",
+        "changedPixels": 355615,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/191-d243dd67bb1e-result.json",
+          "bytes": 122393,
+          "fileSha256": "653d042760c399299f1d2b4aedbc3d8fe1d28ef5629a97a1811845feef865b31"
+        }
+      },
+      {
+        "ordinal": 192,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000192",
+        "changedPixels": 83442,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/192-d3e7e476cbc1-result.json",
+          "bytes": 122837,
+          "fileSha256": "3639803dafd8d7c16ae41b6c7d4c086b9f0ac72b9a4b7324a0b9233f25c436fc"
+        }
+      },
+      {
+        "ordinal": 193,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000193",
+        "changedPixels": 95467,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/193-8a83876fd5c9-result.json",
+          "bytes": 124407,
+          "fileSha256": "c33151c1f968a0bb4b7467d2b02b26ffda2e2a0ecf59d93cadd80af6237c18b0"
+        }
+      },
+      {
+        "ordinal": 194,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000194",
+        "changedPixels": 75224,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/194-ef7a185697c5-result.json",
+          "bytes": 121074,
+          "fileSha256": "115abde8c21a5a09141c4f48951d9e795100d6ccc29944216aadc0d21b9b8cd1"
+        }
+      },
+      {
+        "ordinal": 195,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000195",
+        "changedPixels": 100336,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/195-af25e8f49600-result.json",
+          "bytes": 121095,
+          "fileSha256": "1e35fafb72015c1ca338a9fa78101adc1734ecbf6db8ebbdff7ff3ec7ffb5e88"
+        }
+      },
+      {
+        "ordinal": 196,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000196",
+        "changedPixels": 382546,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/196-63cfd70e4765-result.json",
+          "bytes": 121319,
+          "fileSha256": "6bb73d0512e615444ec2e49f4e5dce973335e97b9cc52a4b62bbc32a683c1cb8"
+        }
+      },
+      {
+        "ordinal": 197,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000197",
+        "changedPixels": 48296,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/197-19da3b94cffc-result.json",
+          "bytes": 122212,
+          "fileSha256": "f4ffba993e6cc95b0329c5969064eb18d79ac86d954cd6b9a452249ed5cf9fdd"
+        }
+      },
+      {
+        "ordinal": 198,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000198",
+        "changedPixels": 172096,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/198-8027a3f1caf3-result.json",
+          "bytes": 122886,
+          "fileSha256": "0efe18d75d6cfbcd2398077b4602a1a618b7c358ede0ddf32e33717833587550"
+        }
+      },
+      {
+        "ordinal": 199,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000199",
+        "changedPixels": 87961,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/199-e06cb64cf74e-result.json",
+          "bytes": 123334,
+          "fileSha256": "c8ee7793229cce933ad77043897b39cd05b1700fe4538a9b3a3981c725742390"
+        }
+      },
+      {
+        "ordinal": 200,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000200",
+        "changedPixels": 49843,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/200-e4ebab832d5f-result.json",
+          "bytes": 124675,
+          "fileSha256": "e528334c5281447804d79ff24282c1721985f293adc2942601709312341a7958"
+        }
+      },
+      {
+        "ordinal": 201,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000201",
+        "changedPixels": 69585,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/201-9a5f30e5279a-result.json",
+          "bytes": 131790,
+          "fileSha256": "f8f280c4435afa742187ca0905760806161b369463518914d6c6c85343ab7600"
+        }
+      },
+      {
+        "ordinal": 202,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000202",
+        "changedPixels": 137208,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/202-acc732ef2556-result.json",
+          "bytes": 132453,
+          "fileSha256": "aebd1d06b93fda02fa68351e88077806fbf221a0709ac0e609733d93fe7f192b"
+        }
+      },
+      {
+        "ordinal": 203,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000203",
+        "changedPixels": 130147,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/203-1465146f3a8a-result.json",
+          "bytes": 134474,
+          "fileSha256": "02429f56c63148e9c98f07ec01a25ff03b57b07b1e4cfbabd48009d900781be5"
+        }
+      },
+      {
+        "ordinal": 204,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000204",
+        "changedPixels": 140821,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/204-ca19a28d69f5-result.json",
+          "bytes": 133798,
+          "fileSha256": "5a3f139e0e9a3c46ec83ebff23325ecccd99df22a6dc3d80e6713911e8ba9f07"
+        }
+      },
+      {
+        "ordinal": 205,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000205",
+        "changedPixels": 139593,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/205-c78358b6170a-result.json",
+          "bytes": 134249,
+          "fileSha256": "b577b786d505738504eaa86f6769a5312bbccfe19111d3a52966046b382cbc99"
+        }
+      },
+      {
+        "ordinal": 206,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000206",
+        "changedPixels": 358955,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/206-67e73f2d47e9-result.json",
+          "bytes": 134246,
+          "fileSha256": "204078953e50313b40b595d90395173eb2a815b87f8a1079002214591d233804"
+        }
+      },
+      {
+        "ordinal": 207,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000207",
+        "changedPixels": 87473,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/207-cfe0b315cbd1-result.json",
+          "bytes": 134251,
+          "fileSha256": "a3a9a680c2da9e34aed85c6ba7630063562dafe678ecee087224746fcfe7e971"
+        }
+      },
+      {
+        "ordinal": 208,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000208",
+        "changedPixels": 199219,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/208-8be114a29677-result.json",
+          "bytes": 135369,
+          "fileSha256": "d65953de1a937b7c7846a71930d7f7c3de5af4579d2a5d4a3b232dd3bb14c62f"
+        }
+      },
+      {
+        "ordinal": 209,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000209",
+        "changedPixels": 53954,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/209-61eebf3fe04b-result.json",
+          "bytes": 135144,
+          "fileSha256": "45c924011165354e33c5a2bca3401628ca285d2fdacdcd8385467a8f892d92c9"
+        }
+      },
+      {
+        "ordinal": 210,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000210",
+        "changedPixels": 159014,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/210-6f64dc42c0c0-result.json",
+          "bytes": 135814,
+          "fileSha256": "25b6cda12853bbb3684b7077f8f64417ecbc292721ad4e4d25f8694aca28d262"
+        }
+      },
+      {
+        "ordinal": 211,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000211",
+        "changedPixels": 410786,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/211-1f9edce3f84a-result.json",
+          "bytes": 136034,
+          "fileSha256": "71e15e5b891e310ed0dc89adb49bee7798c46b3fa93e9034e7800124350f5956"
+        }
+      },
+      {
+        "ordinal": 212,
+        "instructionId": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000212",
+        "changedPixels": 106482,
+        "comparisonStatus": "completed",
+        "record": {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/frames/212-bea3401c1c54-result.json",
+          "bytes": 136261,
+          "fileSha256": "6cc46d0be06493d0e7eedd9033b6059d68c336b3e138e294ea70a62ccfbce27f"
+        }
+      }
+    ],
+    "captionResultCount": 212,
+    "positivePixelDifferenceCount": 212,
+    "nonPositiveDifferenceOrdinals": [],
+    "minimumChangedPixels": 24740,
+    "maximumChangedPixels": 456545,
+    "logMeasuredCount": 212,
+    "logRecord": {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-only-color-attempt-0001.log",
+      "bytes": 19778,
+      "fileSha256": "9102bb11909f6e2f9f7d69b2f24a5979ffb64ee67c421dd4c6306dff31269856"
+    }
+  },
+  "unfinished": {
+    "captionOrdinals": [
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219,
+      220,
+      221,
+      222,
+      223,
+      224,
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252,
+      253,
+      254,
+      255,
+      256,
+      257,
+      258,
+      259,
+      260,
+      261,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
+      273,
+      274,
+      275,
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288,
+      289,
+      290,
+      291,
+      292,
+      293,
+      294,
+      295,
+      296,
+      297,
+      298,
+      299,
+      300,
+      301,
+      302,
+      303,
+      304,
+      305,
+      306,
+      307,
+      308,
+      309,
+      310,
+      311,
+      312,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318,
+      319,
+      320,
+      321,
+      322,
+      323,
+      324,
+      325,
+      326,
+      327,
+      328,
+      329,
+      330,
+      331,
+      332,
+      333,
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342,
+      343
+    ],
+    "count": 131,
+    "startedWithoutResult": [
+      213
+    ],
+    "noStartRecordOrdinals": [
+      214,
+      215,
+      216,
+      217,
+      218,
+      219,
+      220,
+      221,
+      222,
+      223,
+      224,
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252,
+      253,
+      254,
+      255,
+      256,
+      257,
+      258,
+      259,
+      260,
+      261,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
+      273,
+      274,
+      275,
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288,
+      289,
+      290,
+      291,
+      292,
+      293,
+      294,
+      295,
+      296,
+      297,
+      298,
+      299,
+      300,
+      301,
+      302,
+      303,
+      304,
+      305,
+      306,
+      307,
+      308,
+      309,
+      310,
+      311,
+      312,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318,
+      319,
+      320,
+      321,
+      322,
+      323,
+      324,
+      325,
+      326,
+      327,
+      328,
+      329,
+      330,
+      331,
+      332,
+      333,
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342,
+      343
+    ],
+    "finalQcRecordExists": false,
+    "qcExecutionRecordExists": false,
+    "renderCompletionRecordExists": false
+  },
+  "unknown": [
+    "正確な終了時刻と終了シグナル送信元は保存済み実行記録から特定不能。中止の意思決定者は今回のkawafmm指示に基づく。",
+    "213件目の比較用処理の最終到達点と子処理の終了コードは完了結果がないため不明。",
+    "未完了131件の可視性合否は不明。",
+    "内容選択、順序、不要部分、字幕本文・同期・読みやすさ、場面のつながり、制作意図への適合と見心地は人間評価待ち。"
+  ],
+  "humanEvaluation": {
+    "status": "評価待ち",
+    "axes": [
+      {
+        "aspect": "全体として見続けられるか",
+        "assessment": "未評価",
+        "timecode": null,
+        "requestedChange": null
+      },
+      {
+        "aspect": "内容の選択と順序が自然か",
+        "assessment": "未評価",
+        "timecode": null,
+        "requestedChange": null
+      },
+      {
+        "aspect": "不要部分が残っていないか",
+        "assessment": "未評価",
+        "timecode": null,
+        "requestedChange": null
+      },
+      {
+        "aspect": "字幕の内容・同期・読みやすさに問題がないか",
+        "assessment": "未評価",
+        "timecode": null,
+        "requestedChange": null
+      },
+      {
+        "aspect": "場面間のつながりに違和感がないか",
+        "assessment": "未評価",
+        "timecode": null,
+        "requestedChange": null
+      },
+      {
+        "aspect": "修正箇所と該当時刻",
+        "assessment": "未評価",
+        "timecode": null,
+        "requestedChange": null
+      }
+    ],
+    "productionFixCandidates": []
+  },
+  "stopReason": "字幕ごとに比較用動画を生成して画素差を確認する構造であり、処理時間に対して制作判断への寄与が小さかったため、kawafmm判断で中止した。",
+  "followUp": "人間の指摘を時刻付きの制作上の修正候補として整理する。恒久的な検査合理化は独立した後続工程とし、今回着手しない。",
+  "recoveryActions": {
+    "videoRegenerations": 0,
+    "videoOverwrites": 0,
+    "inspectionRestarts": 0,
+    "additionalImplementationFiles": 0,
+    "newQualityGates": 0
+  },
+  "presentation": {
+    "method": "既存MP4への直接リンクを会話で提示。Codexファイルパネルへの表示要求はqueued。",
+    "actualUserViewingConfirmed": false
+  }
+}
