@@ -1,0 +1,1403 @@
+{
+  "schemaVersion": "candidate-internal-edit-display-request-v001",
+  "requestId": "digest-v1-phase2-20260913-v001-display-1-policy-v002",
+  "planBinding": {
+    "schemaVersion": "digest-v1-phase2-input-job-v001",
+    "path": "evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/job.json",
+    "fileSha256": "4f445a2e7a360365d6eeb1ffaf8f0a28c7e51bbbdb5bebb6e44548118f5f157f",
+    "canonicalSha256": "8ce288c27e732fadf73dc18a1613cd59bc056c9d454619790fbedc5922c81e4b"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "candidate-digest-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/machine-adoption.json",
+    "fileSha256": "48d8a351777849a7db7588c045e6ec27d54232066b3fca5400b06f985b45e8fb",
+    "canonicalSha256": "6844706b7b4be1cf4bc2b73b7e938271d68a11e8548d3bb6421fdfda84bc9c0a"
+  },
+  "textInputBinding": {
+    "schemaVersion": "candidate-internal-edit-caption-text-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-text-input.json",
+    "fileSha256": "7f2aa2044e737ba4d661e3f32ec33fc9151d946c594aef9b72d408d2cbba35ef",
+    "canonicalSha256": "7268e90a24f85b410245c94604d98ed9640aaaa567a7e05015131d650372e7c1"
+  },
+  "timelineSegmentId": "segment-0001",
+  "input": {
+    "schemaVersion": "presentation-zevo-caption-selection-input-v001",
+    "taskDescription": "各captionの境界片を記載順に一度ずつ全量使用してください。cueは、直前から続く発話がそれだけで意味を読める短いまとまりになり、その末尾で発話の意味が一区切りつくように、cue終端を提示されたboundaryIdから選んでください。cue終端を意味の基準で先に決め、そのcueが一行に収まらない場合だけ行末を提示されたboundaryIdから選んでください。cue終端と行末は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。必要な行末候補が複数ある場合は、二行の幅が大きく偏らない候補を選んでください。各cueはstyleLimits.maxLinesPerCue以下とし、一行に収まるcueを改行しないでください。最後のcueはcaption最後のboundaryIdで終えてください。本文、境界片、ID、順序を変更しないでください。\n\n【kawafmm承認による限定的な表示方針改訂】通常の反復表現の途中では区切らない方針は維持する。ただし、意味上の区切りを持たない長い非語彙的な持続発声が既存styleの最大表示容量へ収まらない場合に限り、表示容量を優先して継続分割してよい。現在位置から既存表示容量に収まる最も後ろの有効な正式本文境界を選び、残りについて同じ処理を繰り返す。これは表示上の分割だけであり、新しい意味境界とは扱わない。読みとして一続きの最小発声表記は分断しない。原本文、正式本文ID、本文順序、全量被覆、retention結果、12保持区間、元動画時刻、style、論理幅計算、最大行数、通常の語彙的反復表現に対する方針は変更しない。圧縮・省略・置換・要約・文字削除・別表現への変換・retentionやcut境界への流用・通常発話や通常の反復語への一般化は禁止する。この例外は既存容量では一表示に収まらず、かつ意味境界による分割が成立しない非語彙的な持続発声だけに適用する。",
+    "captions": [
+      {
+        "captionId": "digest-v1-phase2-20260913-v001-input-caption-segment-1",
+        "boundaryCandidates": [
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000001",
+            "text": "チ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000002",
+            "text": "ョ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000003",
+            "text": "プ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000004",
+            "text": "テ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000005",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000006",
+            "text": "何"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000007",
+            "text": "く"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000008",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000009",
+            "text": "た"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000010",
+            "text": "の"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000011",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000012",
+            "text": "何"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000013",
+            "text": "く"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000014",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000015",
+            "text": "た"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000016",
+            "text": "の"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000017",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000018",
+            "text": "オ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000019",
+            "text": "リ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000020",
+            "text": "ジ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000021",
+            "text": "ナ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000022",
+            "text": "ル"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000023",
+            "text": "球"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000024",
+            "text": "種"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000025",
+            "text": "習"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000026",
+            "text": "得"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000027",
+            "text": "ボ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000028",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000029",
+            "text": "ル"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000030",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000031",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000032",
+            "text": "て"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000033",
+            "text": "何"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000034",
+            "text": "そ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000035",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000036",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000037",
+            "text": "お"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000038",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000039",
+            "text": "夏"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000040",
+            "text": "休"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000041",
+            "text": "み"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000042",
+            "text": "入"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000043",
+            "text": "り"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000044",
+            "text": "ま"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000045",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000046",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000047",
+            "text": "使"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000048",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000049",
+            "text": "た"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000050",
+            "text": "方"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000051",
+            "text": "が"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000052",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000053",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000054",
+            "text": "の"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000055",
+            "text": "か"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000056",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000057",
+            "text": "取"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000058",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000059",
+            "text": "と"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000060",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000061",
+            "text": "た"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000062",
+            "text": "方"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000063",
+            "text": "が"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000064",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000065",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000066",
+            "text": "の"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000067",
+            "text": "か"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000068",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000069",
+            "text": "え"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000070",
+            "text": "、"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000071",
+            "text": "ち"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000072",
+            "text": "ょ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000073",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000074",
+            "text": "と"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000075",
+            "text": "待"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000076",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000077",
+            "text": "て"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000078",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000079",
+            "text": "湧"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000080",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000081",
+            "text": "て"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000082",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000083",
+            "text": "コ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000084",
+            "text": "メ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000085",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000086",
+            "text": "ト"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000087",
+            "text": "が"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000088",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000089",
+            "text": "や"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000090",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000091",
+            "text": "た"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000092",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000093",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000094",
+            "text": "わ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000095",
+            "text": "か"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000096",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000097",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000098",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000099",
+            "text": "け"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000100",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000101",
+            "text": "や"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000102",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000103",
+            "text": "た"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000104",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000105",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000106",
+            "text": "キ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000107",
+            "text": "ム"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000108",
+            "text": "チ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000109",
+            "text": "が"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000110",
+            "text": "湧"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000111",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000112",
+            "text": "て"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000113",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000114",
+            "text": "か"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000115",
+            "text": "ら"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000116",
+            "text": "一"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000117",
+            "text": "緒"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000118",
+            "text": "に"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000119",
+            "text": "湧"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000120",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000121",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000122",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000123",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000124",
+            "text": "や"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000125",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000126",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000127",
+            "text": "や"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000128",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000129",
+            "text": "た"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000130",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000131",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000132",
+            "text": "キ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000133",
+            "text": "ム"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000134",
+            "text": "チ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000135",
+            "text": "が"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000136",
+            "text": "湧"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000137",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000138",
+            "text": "て"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000139",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000140",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000141",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000142",
+            "text": "マ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000143",
+            "text": "リ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000144",
+            "text": "ン"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000145",
+            "text": "も"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000146",
+            "text": "湧"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000147",
+            "text": "く"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000148",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000149",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000150",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000151",
+            "text": "や"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000152",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000153",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000154",
+            "text": "や"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000155",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000156",
+            "text": "た"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000157",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000158",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000159",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000160",
+            "text": "わ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000161",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000162",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000163",
+            "text": "強"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000164",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000165",
+            "text": "ぎ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000166",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000167",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000168",
+            "text": "に"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000169",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000170",
+            "text": "に"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000171",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000172",
+            "text": "に"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000173",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000174",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000175",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000176",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000177",
+            "text": "に"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000178",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000179",
+            "text": "に"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000180",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000181",
+            "text": "に"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000182",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000183",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000184",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000185",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000186",
+            "text": "に"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000187",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000188",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000189",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000190",
+            "text": "粉"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000191",
+            "text": "落"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000192",
+            "text": "と"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000193",
+            "text": "し"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000194",
+            "text": "ま"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000195",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000196",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000197",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000198",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000199",
+            "text": "粉"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000200",
+            "text": "落"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000201",
+            "text": "と"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000202",
+            "text": "し"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000203",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000204",
+            "text": "の"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000205",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000206",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000207",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000208",
+            "text": "ま"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000209",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000210",
+            "text": "!"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000211",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000212",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000213",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000214",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000215",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000216",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000217",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000218",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000219",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000220",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000221",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000222",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000223",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000224",
+            "text": "え"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000225",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000226",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000227",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000228",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000229",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000230",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000231",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000232",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000233",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000234",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000235",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000236",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000237",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000238",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000239",
+            "text": "誰"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000240",
+            "text": "に"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000241",
+            "text": "使"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000242",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000243",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000244",
+            "text": "え"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000245",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000246",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000247",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000248",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000249",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000250",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000251",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000252",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000253",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000254",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000255",
+            "text": "え"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000256",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000257",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000258",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000259",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000260",
+            "text": "る"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000261",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000262",
+            "text": "え"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000263",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000264",
+            "text": "待"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000265",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000266",
+            "text": "て"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000267",
+            "text": "新"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000268",
+            "text": "旧"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000269",
+            "text": "種"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000270",
+            "text": "開"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000271",
+            "text": "発"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000272",
+            "text": "モ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000273",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000274",
+            "text": "ド"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000275",
+            "text": "で"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000276",
+            "text": "作"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000277",
+            "text": "成"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000278",
+            "text": "し"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000279",
+            "text": "た"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000280",
+            "text": "オ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000281",
+            "text": "リ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000282",
+            "text": "ジ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000283",
+            "text": "ナ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000284",
+            "text": "ル"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000285",
+            "text": "喧"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000286",
+            "text": "嘩"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000287",
+            "text": "機"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000288",
+            "text": "を"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000289",
+            "text": "中"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000290",
+            "text": "毒"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000291",
+            "text": "し"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000292",
+            "text": "ま"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000293",
+            "text": "す"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000294",
+            "text": "え"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000295",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000296",
+            "text": "え"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000297",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000298",
+            "text": "待"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000299",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000300",
+            "text": "て"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000301",
+            "text": "新"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000302",
+            "text": "旧"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000303",
+            "text": "種"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000304",
+            "text": "開"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000305",
+            "text": "発"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000306",
+            "text": "モ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000307",
+            "text": "ー"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000308",
+            "text": "ド"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000309",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000310",
+            "text": "て"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000311",
+            "text": "何"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000312",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000313",
+            "text": "何"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000314",
+            "text": "も"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000315",
+            "text": "作"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000316",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000317",
+            "text": "て"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000318",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000319",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000320",
+            "text": "け"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000321",
+            "text": "ど"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000322",
+            "text": "大"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000323",
+            "text": "丈"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000324",
+            "text": "夫"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000325",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000326",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000327",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000328",
+            "text": "こ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000329",
+            "text": "れ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000330",
+            "text": "何"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000331",
+            "text": "も"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000332",
+            "text": "作"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000333",
+            "text": "っ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000334",
+            "text": "て"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000335",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000336",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000337",
+            "text": "ん"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000338",
+            "text": "だ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000339",
+            "text": "け"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-000340",
+            "text": "ど"
+          }
+        ]
+      }
+    ],
+    "styleLimits": {
+      "maxLogicalWidthPerLine": 36,
+      "maxLinesPerCue": 2,
+      "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+    }
+  },
+  "inputCanonicalSha256": "cacec70e6cb7042958609cbc99a9bd385c2f0887bfaacb6763693d2facd5be80",
+  "candidateIds": [
+    "candidate-0001"
+  ]
+}

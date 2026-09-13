@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "digest-v1-phase2-caption-revision-setup-limit-stop-v001",
+  "status": "stopped-before-sixth-setup-correction",
+  "reason": "A regression test compares separately-created Buffer objects by reference instead of comparing their bytes. This is a new test defect; changing it would be the sixth setup correction in Phase 2.",
+  "priorSetupCorrections": 5,
+  "proposedAdditionalSetupCorrections": 1,
+  "correctionExecuted": false,
+  "proposedTestDiff": {
+    "path": "evals/clip_composition/digest_v1_phase2_caption_revision.test.mts",
+    "line": 16,
+    "before": "assert.equal(formal(original), bytes);",
+    "after": "assert.deepEqual(formal(original), bytes);"
+  },
+  "previousCorrectionRecord": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-adapter-development-correction-v001.json",
+  "tests": {
+    "passed": 3,
+    "failed": 1
+  },
+  "captionDisplay": {
+    "ranges": 12,
+    "captions": 325,
+    "atoms": 4437,
+    "firstJudgment": "abstained-preserved",
+    "additionalJudgment": "complete-validated",
+    "additionalCalls": 1,
+    "furtherCallsAllowed": false
+  },
+  "timingDiagnostic": {
+    "manufacturingIntervals": "325-positive-contained-and-nonoverlapping",
+    "resolvedBothAcousticEndpoints": 271,
+    "partiallyObserved": 43,
+    "unresolvedAcousticFallback": 11,
+    "fallbackPolicy": "existing explicit transcript-endpoint fallback; human sync not evaluated",
+    "savedAsDiagnosticOnly": true
+  },
+  "serializationAdapter": {
+    "implemented": true,
+    "executed": false,
+    "testsForOptionalObservationOmission": "2 passed",
+    "timeValuesChanged": false
+  },
+  "notExecuted": [
+    "base-media",
+    "caption-core",
+    "renderer",
+    "technical-QC",
+    "completed-MP4"
+  ],
+  "evidence": {
+    "display-all-request-v002.json": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/display-all-request-v002.json",
+      "fileSha256": "a8135df67b2eddbded197d4746a56bd57f93a9d87de34ec5a652aa8ccc8bfb52"
+    },
+    "display-all-response-v002.json": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/display-all-response-v002.json",
+      "fileSha256": "528562c793318fc30367c6c2cc6547aededb33c39d589c2e1e29dad6e966fb0b"
+    },
+    "display-all-result-v002.json": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/display-all-result-v002.json",
+      "fileSha256": "bf27c706baecf89a550c189c216a032ef60711677ba5d7ed9f9eb5473859ee19"
+    },
+    "display-validation-v002.json": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/display-validation-v002.json",
+      "fileSha256": "4bcecc87061f1ab146bb551d13ef7a4a9da8b802f3765cf74798ce28ee5c9105"
+    },
+    "caption-timing-diagnostic-v002.json": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-timing-diagnostic-v002.json",
+      "fileSha256": "4ae1fcb0e48beba15b3fdd7d206441d91b66dfe3098be71084eb2d1ffe59f205"
+    },
+    "caption-revision-tests-v002.tap": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-revision-tests-v002.tap",
+      "fileSha256": "4e273611c9ae99a1477c2ea0cd1b0847c54fb0ecb60856bcae4401628b2dea42"
+    }
+  },
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

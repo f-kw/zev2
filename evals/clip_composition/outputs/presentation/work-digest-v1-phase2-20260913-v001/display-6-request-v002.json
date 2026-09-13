@@ -1,0 +1,671 @@
+{
+  "schemaVersion": "candidate-internal-edit-display-request-v001",
+  "requestId": "digest-v1-phase2-20260913-v001-display-6-policy-v002",
+  "planBinding": {
+    "schemaVersion": "digest-v1-phase2-input-job-v001",
+    "path": "evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/job.json",
+    "fileSha256": "4f445a2e7a360365d6eeb1ffaf8f0a28c7e51bbbdb5bebb6e44548118f5f157f",
+    "canonicalSha256": "8ce288c27e732fadf73dc18a1613cd59bc056c9d454619790fbedc5922c81e4b"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "candidate-digest-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/machine-adoption.json",
+    "fileSha256": "48d8a351777849a7db7588c045e6ec27d54232066b3fca5400b06f985b45e8fb",
+    "canonicalSha256": "6844706b7b4be1cf4bc2b73b7e938271d68a11e8548d3bb6421fdfda84bc9c0a"
+  },
+  "textInputBinding": {
+    "schemaVersion": "candidate-internal-edit-caption-text-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-text-input.json",
+    "fileSha256": "7f2aa2044e737ba4d661e3f32ec33fc9151d946c594aef9b72d408d2cbba35ef",
+    "canonicalSha256": "7268e90a24f85b410245c94604d98ed9640aaaa567a7e05015131d650372e7c1"
+  },
+  "timelineSegmentId": "segment-0006",
+  "input": {
+    "schemaVersion": "presentation-zevo-caption-selection-input-v001",
+    "taskDescription": "各captionの境界片を記載順に一度ずつ全量使用してください。cueは、直前から続く発話がそれだけで意味を読める短いまとまりになり、その末尾で発話の意味が一区切りつくように、cue終端を提示されたboundaryIdから選んでください。cue終端を意味の基準で先に決め、そのcueが一行に収まらない場合だけ行末を提示されたboundaryIdから選んでください。cue終端と行末は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。必要な行末候補が複数ある場合は、二行の幅が大きく偏らない候補を選んでください。各cueはstyleLimits.maxLinesPerCue以下とし、一行に収まるcueを改行しないでください。最後のcueはcaption最後のboundaryIdで終えてください。本文、境界片、ID、順序を変更しないでください。\n\n【kawafmm承認による限定的な表示方針改訂】通常の反復表現の途中では区切らない方針は維持する。ただし、意味上の区切りを持たない長い非語彙的な持続発声が既存styleの最大表示容量へ収まらない場合に限り、表示容量を優先して継続分割してよい。現在位置から既存表示容量に収まる最も後ろの有効な正式本文境界を選び、残りについて同じ処理を繰り返す。これは表示上の分割だけであり、新しい意味境界とは扱わない。読みとして一続きの最小発声表記は分断しない。原本文、正式本文ID、本文順序、全量被覆、retention結果、12保持区間、元動画時刻、style、論理幅計算、最大行数、通常の語彙的反復表現に対する方針は変更しない。圧縮・省略・置換・要約・文字削除・別表現への変換・retentionやcut境界への流用・通常発話や通常の反復語への一般化は禁止する。この例外は既存容量では一表示に収まらず、かつ意味境界による分割が成立しない非語彙的な持続発声だけに適用する。",
+    "captions": [
+      {
+        "captionId": "digest-v1-phase2-20260913-v001-input-caption-segment-6",
+        "boundaryCandidates": [
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001973",
+            "text": "え"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001974",
+            "text": "、"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001975",
+            "text": "も"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001976",
+            "text": "う"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001977",
+            "text": "次"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001978",
+            "text": "で"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001979",
+            "text": "最"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001980",
+            "text": "後"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001981",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001982",
+            "text": "や"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001983",
+            "text": "ば"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001984",
+            "text": "く"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001985",
+            "text": "な"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001986",
+            "text": "い"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001987",
+            "text": "?"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001988",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001989",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001990",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001991",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001992",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001993",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001994",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001995",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001996",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001997",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001998",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-001999",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002000",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002001",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002002",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002003",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002004",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002005",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002006",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002007",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002008",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002009",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002010",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002011",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002012",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002013",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002014",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002015",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002016",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002017",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002018",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002019",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002020",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002021",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002022",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002023",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002024",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002025",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002026",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002027",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002028",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002029",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002030",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002031",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002032",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002033",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002034",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002035",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002036",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002037",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002038",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002039",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002040",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002041",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002042",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002043",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002044",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002045",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002046",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002047",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002048",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002049",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002050",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002051",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002052",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002053",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002054",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002055",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002056",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002057",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002058",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002059",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002060",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002061",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002062",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002063",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002064",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002065",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002066",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002067",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002068",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002069",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002070",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002071",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002072",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002073",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002074",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002075",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002076",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002077",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002078",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002079",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002080",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002081",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002082",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002083",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002084",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002085",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002086",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002087",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002088",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002089",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002090",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002091",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002092",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002093",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002094",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002095",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002096",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002097",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002098",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002099",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002100",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002101",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002102",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002103",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002104",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002105",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002106",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002107",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002108",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002109",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002110",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002111",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002112",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002113",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002114",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002115",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002116",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002117",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002118",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002119",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002120",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002121",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002122",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002123",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002124",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002125",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002126",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002127",
+            "text": "゛"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002128",
+            "text": "あ"
+          },
+          {
+            "boundaryId": "digest-v1-phase2-20260913-v001-input-caption-boundary-002129",
+            "text": "�"
+          }
+        ]
+      }
+    ],
+    "styleLimits": {
+      "maxLogicalWidthPerLine": 36,
+      "maxLinesPerCue": 2,
+      "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+    }
+  },
+  "inputCanonicalSha256": "0e1664674e9dbd33f2f7310fca10642d9a0bb9e8d445700f5358c0acaa4f4a10",
+  "candidateIds": [
+    "candidate-0004"
+  ]
+}

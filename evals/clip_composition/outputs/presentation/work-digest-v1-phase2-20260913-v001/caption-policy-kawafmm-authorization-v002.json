@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "digest-v1-phase2-caption-policy-authorization-v002",
+  "authorization": "kawafmm承認",
+  "receivedAt": "2026-09-13T12:16:13Z",
+  "scope": "all-existing-12-retained-ranges",
+  "additionalCaptionDisplayCalls": 1,
+  "authorityMessage": "kawafmm承認。\nPhase 2で停止している字幕表示について、以下の限定的な契約改訂を承認する。\n通常の「反復表現の途中では区切らない」という字幕表示方針は維持する。\n意味上の区切りを持たない長い非語彙的な持続発声が、既存styleの最大表示容量へ収まらない場合に限り、表示容量を優先して継続分割してよい。\n分割は、現在位置から既存表示容量に収まる最も後ろの有効な正式本文境界を選び、残りについて同じ処理を繰り返す。\nこれは表示上の分割だけであり、新しい意味境界とは扱わない。\n原本文、正式本文ID、本文順序、本文の全量被覆、retention結果、12保持区間、元動画時刻、style、既存の論理幅計算、最大行数、通常の語彙的な反復表現に対する既存方針は変更しない。\n叫び声の圧縮、省略、…等への置換、要約、文字の削除、任意の別表現への変換、retention/cut境界への流用、この例外を通常発話・通常の反復語へ一般化することは禁止。\n今回の例外は、既存容量では一表示に収まらず、かつ意味境界による分割が成立しない非語彙的な持続発声だけを対象とする。\n既存の棄権回答・証拠は履歴として変更せず保存する。\n上記改訂を反映した正式requestを新規作成し、caption-display-boundariesを全12保持区間に対して追加で1回だけ実行してよい。\nこれは棄権後の契約改訂に基づく追加判断であり、過去回答の修正・再生成とは扱わない。\nこの追加判断後は、結果が気に入らないという理由で再実行しない。\n再度棄権または契約違反になった場合は、3回目を実行せず停止してZEV進行管理３へ報告する。\n追加字幕判断が正式に成立した場合は、既存Phase 2 scope内で字幕採用→既存字幕時刻処理→ZEV Core→renderer→technical QC→完成MP4まで続行してよい。\n新Skill、本文圧縮、style変更、retention変更、A/B、Goal変更、main merge、tag、stable、releaseは承認していない。\n完成MP4生成後はhumanQuality = not-evaluated、completionApproval = not-claimedのままZEV進行管理３へAUDIT_ONLYで提出すること。",
+  "authorityTextRendering": "user-message-plain-text; markdown-headings-and-emphasis-omitted",
+  "priorStopCheckpoint": "7479d6144b75e03170eae7be1785c14444b6cd31",
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}
