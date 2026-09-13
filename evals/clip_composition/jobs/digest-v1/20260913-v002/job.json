@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "digest-execution-job-v1",
+  "jobId": "digest-v1-20260913-v002",
+  "mode": "C",
+  "outputRoot": "evals/clip_composition/outputs/presentation/work-digest-v1-20260913-v002",
+  "candidateContext": {
+    "schemaVersion": "candidate-selection-fixed-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/fixed-plan.json",
+    "fileSha256": "d95e9828e4e78672bc2eacb2f3b899ed6a6d6d062155e0ff5262563c3acd6e12",
+    "canonicalSha256": "4d87709d5db56d19a22143ea04000b448fcb0ef567b37f39ccbf35d07455dcf8"
+  },
+  "authorization": {
+    "schemaVersion": "digest-v1-received-instruction",
+    "path": "evals/clip_composition/jobs/digest-v1/20260913-v002/received-instruction.json",
+    "fileSha256": "736dace7158dc6eeb6af7305a1823652ff1758cdce976755ea52d32a6da0637a",
+    "canonicalSha256": "f2445766ff0e35818baa312e18790a225a1566815517f29a0160e53fd2e4fb6b"
+  },
+  "captionReuse": {
+    "meaning": {
+      "schemaVersion": "candidate-internal-edit-meaning-input-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/meaning-input.json",
+      "fileSha256": "a7f615fb33261dd2e8956c155c11792c70c2559655a8e0583897bf3f4e17a193",
+      "canonicalSha256": "f0ed7f8bad99c22b2f50e38c2871b240245e08480c4d123b4d39e43d31a23def"
+    },
+    "sourcePackage": {
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/source-package.json",
+      "fileSha256": "00da4abf1d9c8a962bab393a22c3fc070c4b9608d51ac97a44f92ea6005ee032",
+      "canonicalSha256": "efacbd8ca43d8a8d6ec2d81f8d418688e4593c89870dca596aede82203b9d03a"
+    },
+    "selection": {
+      "schemaVersion": "presentation-output-caption-cue-selection-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/selection.json",
+      "fileSha256": "09f53a43873110704a745c1b8b3e4460692c8d9ab4f86739f96a873a47957f57",
+      "canonicalSha256": "adf1c72116336451000a7d08345883a24b254564beba3e55a448a6ccc2e7f358"
+    },
+    "omission": {
+      "schemaVersion": "digest-human-caption-local-repair-adoption-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-v001/repair-adoption.json",
+      "fileSha256": "439a32cf2dd910843570b8a459ccfa098fe92973e41ebe6ee98c57ad979451b8",
+      "canonicalSha256": "31655a051b681329b50c619f6ff4a9b5dd6087782171ccd6b9c326ffdc60b895"
+    }
+  },
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/digest_v1.mts",
+      "fileSha256": "3cf03e64af8cbe47f22f1c341cbe6cf2c2b1ad570d12cdcee1f448c874c62f27"
+    },
+    {
+      "path": "evals/clip_composition/run_digest_v1.mts",
+      "fileSha256": "053a58da830817a03fa7cc846468218b5068d4659090359769bf504161866bcf"
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f"
+    }
+  ],
+  "rendererImplementationBindings": [
+    {
+      "role": "instruction-renderer-runner-v002",
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388"
+    },
+    {
+      "role": "instruction-artifact-v002",
+      "path": "evals/clip_composition/presentation_instruction_artifact_v002.mjs",
+      "fileSha256": "44f67d3297330f339edde9487dd34222584e064b4c1352cfbc3bacdb394ac6c4"
+    },
+    {
+      "role": "renderer-admission-v002",
+      "path": "evals/clip_composition/presentation_renderer_admission_receipt_v002.mjs",
+      "fileSha256": "04bab61032904638964b2c1101b7e12ce02ecdbf898e4eac5637ac9d2e46a4ee"
+    },
+    {
+      "role": "base-media-timeline-mapper-v004",
+      "path": "evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+      "fileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32"
+    },
+    {
+      "role": "renderer-line-layout-v002",
+      "path": "evals/clip_composition/presentation_renderer_line_layout_rule_v002.mjs",
+      "fileSha256": "7b9926fe8391b324f002276a1ea7c0dfb83e9cb848d8ab85393ab61d91d08af6"
+    },
+    {
+      "role": "renderer-text-layout-v001",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0"
+    },
+    {
+      "role": "renderer-qc-v002",
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "b20992c6756f4c5e460af79a7b7d5872f7b6f4a23b41700023c7bd51b14c4837"
+    },
+    {
+      "role": "renderer-core-v002",
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94"
+    },
+    {
+      "role": "renderer-process-observation-v001",
+      "path": "evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+      "fileSha256": "957952952fc736f21d7de59aedd8add53d9f12e211ed3db9f3d65e38f24bf030"
+    },
+    {
+      "role": "renderer-overlay-v001",
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7"
+    },
+    {
+      "role": "renderer-layout-inspector-v001",
+      "path": "evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c"
+    },
+    {
+      "role": "renderer-atomic-publisher-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+      "fileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af"
+    }
+  ]
+}

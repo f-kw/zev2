@@ -1,0 +1,124 @@
+{
+  "kind": "digest-v1-renderer-setup-correction",
+  "failedJob": "evals/clip_composition/jobs/digest-v1/20260913-v001/job.json",
+  "failure": "byte-binding-mismatch",
+  "stage": "renderer-implementation-input-verification",
+  "baseMediaManufacturing": "passed",
+  "renderedVideoCreated": false,
+  "failureLog": {
+    "path": "/private/tmp/zev-digest-v1-phase0-20260913/execution.log",
+    "fileSha256": "fdbfc95ddda5ee8d07f606c161e21cce4a0d3d7ef8f867decc660d0d5212acb7"
+  },
+  "baselineHead": "0a4c28419ec952453f3eadc7cdc1d4c642abf012",
+  "rendererBindings": [
+    {
+      "role": "instruction-renderer-runner-v002",
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "21ce2a8e7dae02c11ef137948383ba35bd962314e6bb1a066c523d73bcb53675",
+      "observedFileSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388",
+      "baselineFileSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388",
+      "matches": false
+    },
+    {
+      "role": "instruction-artifact-v002",
+      "path": "evals/clip_composition/presentation_instruction_artifact_v002.mjs",
+      "fileSha256": "44f67d3297330f339edde9487dd34222584e064b4c1352cfbc3bacdb394ac6c4",
+      "observedFileSha256": "44f67d3297330f339edde9487dd34222584e064b4c1352cfbc3bacdb394ac6c4",
+      "baselineFileSha256": "44f67d3297330f339edde9487dd34222584e064b4c1352cfbc3bacdb394ac6c4",
+      "matches": true
+    },
+    {
+      "role": "renderer-admission-v002",
+      "path": "evals/clip_composition/presentation_renderer_admission_receipt_v002.mjs",
+      "fileSha256": "04bab61032904638964b2c1101b7e12ce02ecdbf898e4eac5637ac9d2e46a4ee",
+      "observedFileSha256": "04bab61032904638964b2c1101b7e12ce02ecdbf898e4eac5637ac9d2e46a4ee",
+      "baselineFileSha256": "04bab61032904638964b2c1101b7e12ce02ecdbf898e4eac5637ac9d2e46a4ee",
+      "matches": true
+    },
+    {
+      "role": "base-media-timeline-mapper-v004",
+      "path": "evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+      "fileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32",
+      "observedFileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32",
+      "baselineFileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32",
+      "matches": true
+    },
+    {
+      "role": "renderer-line-layout-v002",
+      "path": "evals/clip_composition/presentation_renderer_line_layout_rule_v002.mjs",
+      "fileSha256": "7b9926fe8391b324f002276a1ea7c0dfb83e9cb848d8ab85393ab61d91d08af6",
+      "observedFileSha256": "7b9926fe8391b324f002276a1ea7c0dfb83e9cb848d8ab85393ab61d91d08af6",
+      "baselineFileSha256": "7b9926fe8391b324f002276a1ea7c0dfb83e9cb848d8ab85393ab61d91d08af6",
+      "matches": true
+    },
+    {
+      "role": "renderer-text-layout-v001",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+      "observedFileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+      "baselineFileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0",
+      "matches": true
+    },
+    {
+      "role": "renderer-qc-v002",
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "b20992c6756f4c5e460af79a7b7d5872f7b6f4a23b41700023c7bd51b14c4837",
+      "observedFileSha256": "b20992c6756f4c5e460af79a7b7d5872f7b6f4a23b41700023c7bd51b14c4837",
+      "baselineFileSha256": "b20992c6756f4c5e460af79a7b7d5872f7b6f4a23b41700023c7bd51b14c4837",
+      "matches": true
+    },
+    {
+      "role": "renderer-core-v002",
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "666907c3ff9f045b2141d62a41eb9b746cdad1f5102fe4500e5cb8036c77ce59",
+      "observedFileSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94",
+      "baselineFileSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94",
+      "matches": false
+    },
+    {
+      "role": "renderer-process-observation-v001",
+      "path": "evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+      "fileSha256": "957952952fc736f21d7de59aedd8add53d9f12e211ed3db9f3d65e38f24bf030",
+      "observedFileSha256": "957952952fc736f21d7de59aedd8add53d9f12e211ed3db9f3d65e38f24bf030",
+      "baselineFileSha256": "957952952fc736f21d7de59aedd8add53d9f12e211ed3db9f3d65e38f24bf030",
+      "matches": true
+    },
+    {
+      "role": "renderer-overlay-v001",
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7",
+      "observedFileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7",
+      "baselineFileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7",
+      "matches": true
+    },
+    {
+      "role": "renderer-layout-inspector-v001",
+      "path": "evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c",
+      "observedFileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c",
+      "baselineFileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c",
+      "matches": true
+    },
+    {
+      "role": "renderer-atomic-publisher-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+      "fileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af",
+      "observedFileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af",
+      "baselineFileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af",
+      "matches": true
+    }
+  ],
+  "correction": "開始時の正本と一致する既存rendererの実装を今回の実行設定へ結び付け、製造開始前に照合する。初回jobと生成物は保持する。",
+  "correctedJob": "evals/clip_composition/jobs/digest-v1/20260913-v002/job.json",
+  "correctedIntegration": {
+    "passed": 6,
+    "failed": 0,
+    "output": "docs/reports/digest-v1-phase1-evidence-20260913/integration-v002.tap"
+  },
+  "preflight": {
+    "rendererContractRuntimeFontDependencyBindingsChecked": 33,
+    "matched": 33,
+    "rendererImplementationChanged": false,
+    "qcChanged": false
+  }
+}

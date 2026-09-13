@@ -1,0 +1,77 @@
+{
+  "kind": "digest-v1-existing-output-comparison",
+  "newExecution": "evals/clip_composition/outputs/presentation/work-digest-v1-20260913-v002/verification.json",
+  "oldManifest": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/manifest.json",
+  "counts": {
+    "prospects": 3,
+    "adopted": 3,
+    "retainedRanges": 7,
+    "captionAtoms": 415,
+    "captions": 32,
+    "explicitlyOmittedAtoms": 9
+  },
+  "frameCount": 4831,
+  "durationSeconds": 161.03333333333333,
+  "newVideo": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-20260913-v002/render/presentation-rendered-v002.mp4",
+    "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+    "bytes": 75458918
+  },
+  "oldVideo": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/render/presentation-rendered-v002.mp4",
+    "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+    "bytes": 75458918
+  },
+  "newBaseMedia": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-20260913-v002/base-media/base-media.mp4",
+    "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d",
+    "bytes": 78398378
+  },
+  "oldBaseMedia": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+    "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d",
+    "bytes": 78398378
+  },
+  "checks": {
+    "normalizedSourceRangesAndFramesEqual": true,
+    "captionTextTimingLinesAndFormalAtomIdsEqual": true,
+    "captionOverlayImagesEqual": true,
+    "appliedStylePresetsEqual": true,
+    "baseMediaBytesEqual": true,
+    "renderedVideoBytesEqual": true,
+    "renderedAudioPacketsEqual": true,
+    "technicalMediaPropertiesEqual": true
+  },
+  "technicalQc": {
+    "status": "passed",
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "instructionCount": 32,
+    "violations": [],
+    "observedMedia": {
+      "durationMs": 161033,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 4831
+      },
+      "audio": {
+        "codecName": "aac",
+        "packetPayloadSha256": "475233b0648161e3014ef52ffa1d7f4400b8dca1b0dc66214a2d66af9cd1b56e"
+      }
+    }
+  },
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}
