@@ -1,0 +1,30 @@
+TAP version 13
+# /Users/kawafmm/workspace/zev2/evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts:63
+# export function fail(code: string): never {throw new Error(`DIGEST_SKILL_E2E: ${code}`);}
+#                                                  ^
+# Error: DIGEST_SKILL_E2E: JSON_INVALID
+#     at fail (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts:63:50)
+#     at readJson (/Users/kawafmm/workspace/zev2/evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts:90:31)
+#     at async loadPhase2BridgeContext (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_caption_bridge.mts:83:20)
+#     at async <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_caption_bridge.test.mts:11:17)
+# Node.js v20.19.6
+# Subtest: /Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_caption_bridge.test.mts
+not ok 1 - /Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_caption_bridge.test.mts
+  ---
+  duration_ms: 2951.176833
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_caption_bridge.test.mts:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2953.388083

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "digest-v1-phase2-bridge-render-permission-stop-v001",
+  "status": "stopped-execution-permission-rejected",
+  "observedAt": "2026-09-13T17:07:59.841Z",
+  "stage": "local-layout-inspector-startup",
+  "error": "listen EPERM: operation not permitted /private/tmp/tsx-501/10874.pipe",
+  "preflightBinding": {
+    "schemaVersion": "digest-v1-phase2-bridge-preflight-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-preflight-v001.json",
+    "fileSha256": "53fa95b659bb06c1e9915ea4759329b91f2c6e0805669020df2d58de9c6a53af",
+    "canonicalSha256": "fa68ba63e43f4f8a6f7eb4014f58e964108a505099309051e96a966b66ea9609"
+  },
+  "admissionBinding": {
+    "schemaVersion": "digest-v1-phase2-renderer-admission-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-admission-v001.json",
+    "fileSha256": "95e5c592d598a4abe2880c0a53bddbe5ddac5f100b6223d52268785d9ed13c9d",
+    "canonicalSha256": "f16680f7477e9fbfeeff7b4dc4781811775b087b1e63685b3805d2ab8e114c95"
+  },
+  "rendererFailureBinding": {
+    "schemaVersion": "digest-v1-phase2-bridge-renderer-result-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/renderer-result.json",
+    "fileSha256": "6f9e679b967f6083d0b4044d1dde6cd4e7f5e0bce579c2e901b11d8f2ffc0c9d",
+    "canonicalSha256": "a64b2b45401298170b6b02d2ced532fdc8dbe09eb9a6a51cd697df57ea09e340"
+  },
+  "processError": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/process-observations/phase2-caption-bridge-v001/0003-layout-inspection/stderr.txt",
+    "fileSha256": "53d5d24e3768e848c5c705ec7fc989ee6ccd77c487d73e5e6a6e507acbc56446"
+  },
+  "replayImplementation": {
+    "path": "evals/clip_composition/digest_v1_phase2_bridge_draw_replay.mts",
+    "fileSha256": "85e9ea6430665d85a8afa694ea2a121cf608a61edb9ca6858d0a4fdb7e424d00"
+  },
+  "ownerDelegationQuote": "ZEV進行管理３が既存work-order・既存契約内の限定修正と判断できる場合は同セッションで判断する。新たな第1層事項が発生した場合のみkawafmm判断へ戻す。",
+  "advisorDecisionBinding": {
+    "schemaVersion": "digest-v1-phase2-core-caption-bridge-advisor-decision-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/core-caption-bridge-advisor-decision-v001.json",
+    "fileSha256": "ccb56f374e4a9be2ab8a0775036346a0adffaf27ca08b51a25b07167877beabf",
+    "canonicalSha256": "99651eb1e30768d9d4c12bee74b9fbfb5dcb403cd33b7a13f05d5e815ecf1462"
+  },
+  "permissionReviews": [
+    {
+      "result": "rejected",
+      "reason": "限定的なPhase 2製造自体は可逆的ですが、字幕接続後の新たな再実行・権限昇格であり、ZEV進行管理３の承認がユーザー発言として確認できないまま、追加設営修正後の続行禁止に抵触するためです。"
+    },
+    {
+      "result": "rejected",
+      "additionalEvidence": "受領済みユーザー委任指示と相談役の第8回承認原文を照合して提示",
+      "reason": "ローカル描画は限定的ですが、前回拒否後の同一権限昇格リトライであり、続行を許可したとされる相談役の回答は信頼できるユーザー承認ではないため、明示された第8回停止条件を満たしていません。"
+    }
+  ],
+  "preparedReplay": {
+    "command": "node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/digest_v1_phase2_bridge_draw_replay.mts evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/job.json",
+    "outputRoot": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/render-bridge-v002",
+    "scope": "saved bridge and base-media exact revalidation; same local renderer and QC; no old output overwrite"
+  },
+  "replayNotStarted": true,
+  "replayLogAbsent": true,
+  "completedVideoAbsent": true,
+  "verificationAbsent": true,
+  "newMeaningJudgments": 0,
+  "newAcousticObservations": 0,
+  "paidApiCalls": 0,
+  "newMaterials": 0,
+  "costUsd": 0,
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}
