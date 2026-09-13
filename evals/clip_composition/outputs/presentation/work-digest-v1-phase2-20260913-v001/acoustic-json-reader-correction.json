@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "digest-v1-phase2-setup-correction-v001",
+  "stage": "acoustic-result-reading-before-range-resolution",
+  "failureLog": "retention-range-resolution.log",
+  "savedImplementation": "before-acoustic-json-reader-correction.mts",
+  "cause": "新しい接続処理が、Python音響観測の原本へ正式JSON byte表記の一致を要求するreaderを使った。0.0などの小数表記をnon-formal-bytesとして拒否した。",
+  "correction": "Phase 1の音響読取と同じJSON byte読取を使い、本文・ID・時刻・観測元の検証は既存validatorのまま維持する。",
+  "diagnosticInvocationCorrection": "初回の読取診断commandに既存TS loader指定がなく起動できなかったため、通常のnode --import指定で診断を実行した。",
+  "phase2SetupCorrectionCountIncludingDiagnosticCommand": 3,
+  "observationsChanged": false,
+  "observationsRepeated": false,
+  "semanticAnswersChanged": false,
+  "semanticJudgmentsRepeated": false
+}

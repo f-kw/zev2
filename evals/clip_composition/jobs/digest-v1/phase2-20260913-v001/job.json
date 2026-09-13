@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "digest-v1-phase2-input-job-v001",
+  "planId": "digest-v1-phase2-20260913-v001",
+  "authorization": {
+    "schemaVersion": "digest-v1-phase2-received-instruction-v001",
+    "path": "evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/received-instruction.json",
+    "fileSha256": "9c9ce640f2244684e76f51f9111dcccf801491d4e37a07d760dde986645862cc",
+    "canonicalSha256": "7f29f9cf7a4359bfd136bf85aa8a537b6426ce4afb1fc7119b5981d347def07b"
+  },
+  "request": {
+    "purpose": "元配信の確定発話から、各場面の見どころと必要な文脈が伝わるダイジェスト候補を提案する。",
+    "sourceId": "o8rZAhARXAc",
+    "sourceVideo": {
+      "path": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+      "fileSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06"
+    },
+    "transcript": {
+      "path": "evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/transcript.json",
+      "fileSha256": "cd79fbf244bdb73b2eb7ddcffa3fca55e087046b72cbf26b69b87856dae01389"
+    },
+    "wordTimestamps": {
+      "path": "evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/word-timestamps.json",
+      "fileSha256": "fa43146d457125d8768cf11b7e9cbcd51c9a242ebc16d25ab77f998afe9ec950"
+    },
+    "sttManifest": {
+      "path": "evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/manifest.json",
+      "fileSha256": "60320907a4ec7754e103a2c4af0d5bcef072363e93a06d1f60b2516bdea1ed33"
+    },
+    "utterances": {
+      "schemaVersion": "distant-connection-common-utterance-artifact-v001",
+      "path": "evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/utterances.json",
+      "fileSha256": "ebc394fdc848d4d89d5de168eeeac191e07d2aa53d11238a14a3973c53995aa2",
+      "canonicalSha256": "722fb86e15d72a183352aa28db5c94d2ad89b48ba9a5ec1cabf1f813f4ab4550"
+    },
+    "rendererTemplate": {
+      "schemaVersion": "presentation-instruction-renderer-job-v002",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-template-v002.json",
+      "fileSha256": "cfdb4c6e18e47cde8ea9fe2302d35993a7795ad804586adc36ff601c8ddfca5e",
+      "canonicalSha256": "3b72513981982691439d1dcc2d7cb3f200c4ce04663316edcef35bf260185703"
+    },
+    "captionStyleTemplate": {
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+      "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+      "canonicalSha256": "5594ddf2d1aa08660d893b7b8de7f37954f760981f76d615d13187034c5e3c8a"
+    }
+  },
+  "outputRoot": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001",
+  "implementationBindings": [
+    {
+      "path": "runner/src/skills/candidate-discovery-v001.ts",
+      "fileSha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e"
+    },
+    {
+      "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+      "fileSha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291"
+    },
+    {
+      "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3"
+    },
+    {
+      "path": "runner/src/distant-connection-common-utterance-artifact-v001.ts",
+      "fileSha256": "e3d2792913b284ba2b2f3cee5e1371a15d2fd3ee54ce6b1615041dfd7217562b"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "fileSha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec"
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+      "fileSha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac"
+    },
+    {
+      "path": "evals/clip_composition/digest_v1_retention.mts",
+      "fileSha256": "30fb482124c613ec1a794b13fe5f93a962265ab37e01c0059e58ba959e12c01e"
+    },
+    {
+      "path": "evals/clip_composition/digest_v1.mts",
+      "fileSha256": "3cf03e64af8cbe47f22f1c341cbe6cf2c2b1ad570d12cdcee1f448c874c62f27"
+    },
+    {
+      "path": "evals/clip_composition/run_digest_v1.mts",
+      "fileSha256": "40ce1051e53ed02c6d13c08555597c52bb3691ba53f5b2a4d4c11e3ad2789b4e"
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f"
+    }
+  ],
+  "rendererImplementationBindings": [
+    {
+      "role": "instruction-renderer-runner-v002",
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388"
+    },
+    {
+      "role": "instruction-artifact-v002",
+      "path": "evals/clip_composition/presentation_instruction_artifact_v002.mjs",
+      "fileSha256": "44f67d3297330f339edde9487dd34222584e064b4c1352cfbc3bacdb394ac6c4"
+    },
+    {
+      "role": "renderer-admission-v002",
+      "path": "evals/clip_composition/presentation_renderer_admission_receipt_v002.mjs",
+      "fileSha256": "04bab61032904638964b2c1101b7e12ce02ecdbf898e4eac5637ac9d2e46a4ee"
+    },
+    {
+      "role": "base-media-timeline-mapper-v004",
+      "path": "evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+      "fileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32"
+    },
+    {
+      "role": "renderer-line-layout-v002",
+      "path": "evals/clip_composition/presentation_renderer_line_layout_rule_v002.mjs",
+      "fileSha256": "7b9926fe8391b324f002276a1ea7c0dfb83e9cb848d8ab85393ab61d91d08af6"
+    },
+    {
+      "role": "renderer-text-layout-v001",
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "8c62f3bbc63a3f5292b4a079f9bfda21128514b19305976bcb29de5d1051aea0"
+    },
+    {
+      "role": "renderer-qc-v002",
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "b20992c6756f4c5e460af79a7b7d5872f7b6f4a23b41700023c7bd51b14c4837"
+    },
+    {
+      "role": "renderer-core-v002",
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94"
+    },
+    {
+      "role": "renderer-process-observation-v001",
+      "path": "evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+      "fileSha256": "957952952fc736f21d7de59aedd8add53d9f12e211ed3db9f3d65e38f24bf030"
+    },
+    {
+      "role": "renderer-overlay-v001",
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "5047dc3bcd51e8623cd090a443955828d38986db8338f53f2c9030e07cc952b7"
+    },
+    {
+      "role": "renderer-layout-inspector-v001",
+      "path": "evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c"
+    },
+    {
+      "role": "renderer-atomic-publisher-v001",
+      "path": "evals/clip_composition/presentation_atomic_directory_publish_v001.mjs",
+      "fileSha256": "42382636b25798b6f1ba70bff0052be1fdfe64d9c123fdcfd11e96c5e1bdf5af"
+    }
+  ]
+}

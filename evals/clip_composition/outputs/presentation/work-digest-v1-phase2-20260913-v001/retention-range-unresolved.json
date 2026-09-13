@@ -1,0 +1,368 @@
+{
+  "schemaVersion": "digest-v1-phase2-retention-range-resolution-v001",
+  "status": "unresolved",
+  "acousticValidationBinding": {
+    "schemaVersion": "digest-v1-phase2-acoustic-validation-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustic-validation.json",
+    "fileSha256": "f147ba7a9245ae6b398976c5f72fb50737196d1844881316bcdcae2faa05d5a0",
+    "canonicalSha256": "54b424240cad0ef0388ed1ecd3773b43e32d0a9db54c9c39a583f17d1380881d"
+  },
+  "originalResponse": {
+    "schemaVersion": "candidate-internal-retention-response-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-response.json",
+    "fileSha256": "ed2bae4c9cf59eea3fa405f039db0a5fa1b27c53e9c682ea1be219ceff40d876",
+    "canonicalSha256": "c5dc42d84f2958827ac2374649bb9a881623ded59c2cb875ceeba127d9233056"
+  },
+  "result": {
+    "status": "unresolved",
+    "unresolved": [
+      {
+        "candidateId": "candidate-0002",
+        "blockOrdinal": 3,
+        "endpoints": [
+          {
+            "status": "unresolved",
+            "sourceSegmentId": 7464,
+            "side": "start",
+            "reason": "window-origin-is-not-speech-onset"
+          }
+        ]
+      },
+      {
+        "candidateId": "candidate-0004",
+        "blockOrdinal": 1,
+        "endpoints": [
+          {
+            "status": "unresolved",
+            "sourceSegmentId": 15110,
+            "side": "end",
+            "reason": "observed-boundary-not-inside-parent-or-nonpositive-unit"
+          }
+        ]
+      },
+      {
+        "candidateId": "candidate-0004",
+        "blockOrdinal": 3,
+        "endpoints": [
+          {
+            "status": "unresolved",
+            "sourceSegmentId": 15218,
+            "side": "start",
+            "reason": "window-origin-is-not-speech-onset"
+          }
+        ]
+      },
+      {
+        "candidateId": "candidate-0007",
+        "blockOrdinal": 1,
+        "endpoints": [
+          {
+            "status": "unresolved",
+            "sourceSegmentId": 31419,
+            "side": "end",
+            "reason": "observed-boundary-not-inside-parent-or-nonpositive-unit"
+          }
+        ]
+      },
+      {
+        "candidateId": "candidate-0007",
+        "blockOrdinal": 3,
+        "endpoints": [
+          {
+            "status": "unresolved",
+            "sourceSegmentId": 31563,
+            "side": "start",
+            "reason": "window-origin-is-not-speech-onset"
+          }
+        ]
+      }
+    ],
+    "promotedSegments": []
+  },
+  "issues": [
+    {
+      "candidateId": "candidate-0002",
+      "blockOrdinal": 3,
+      "endpoints": [
+        {
+          "status": "unresolved",
+          "sourceSegmentId": 7464,
+          "side": "start",
+          "reason": "window-origin-is-not-speech-onset",
+          "adjacentText": [
+            {
+              "sourceSegmentId": 7462,
+              "text": "う"
+            },
+            {
+              "sourceSegmentId": 7463,
+              "text": "!"
+            },
+            {
+              "sourceSegmentId": 7464,
+              "text": "ま"
+            },
+            {
+              "sourceSegmentId": 7465,
+              "text": "あ"
+            },
+            {
+              "sourceSegmentId": 7466,
+              "text": "リ"
+            }
+          ],
+          "adjacentObservations": [
+            {
+              "unitId": "chunk-76-unit-1",
+              "text": "まあ",
+              "sourceSegmentIds": [
+                7464,
+                7465
+              ],
+              "startBoundary": {
+                "before": null,
+                "after": 7464
+              },
+              "endBoundary": {
+                "before": 7465,
+                "after": 7466
+              },
+              "startTimeRole": "alignment-window-origin-not-speech-onset",
+              "startMs": 2280000,
+              "endMs": 2282320,
+              "timeOrigin": "fixed-text-acoustic-token-group",
+              "individualCharacterTimes": "not-observed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0004",
+      "blockOrdinal": 1,
+      "endpoints": [
+        {
+          "status": "unresolved",
+          "sourceSegmentId": 15110,
+          "side": "end",
+          "reason": "observed-boundary-not-inside-parent-or-nonpositive-unit",
+          "adjacentText": [
+            {
+              "sourceSegmentId": 15108,
+              "text": "゛"
+            },
+            {
+              "sourceSegmentId": 15109,
+              "text": "あ"
+            },
+            {
+              "sourceSegmentId": 15110,
+              "text": "�"
+            },
+            {
+              "sourceSegmentId": 15111,
+              "text": "ど"
+            },
+            {
+              "sourceSegmentId": 15112,
+              "text": "う"
+            }
+          ],
+          "adjacentObservations": [
+            {
+              "unitId": "chunk-165-unit-154",
+              "text": "�",
+              "sourceSegmentIds": [
+                15110
+              ],
+              "startBoundary": {
+                "before": 15109,
+                "after": 15110
+              },
+              "endBoundary": {
+                "before": 15110,
+                "after": null
+              },
+              "startTimeRole": "acoustic-token-boundary",
+              "startMs": 4979980,
+              "endMs": 4979980,
+              "timeOrigin": "fixed-text-acoustic-token-group",
+              "individualCharacterTimes": "not-observed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0004",
+      "blockOrdinal": 3,
+      "endpoints": [
+        {
+          "status": "unresolved",
+          "sourceSegmentId": 15218,
+          "side": "start",
+          "reason": "window-origin-is-not-speech-onset",
+          "adjacentText": [
+            {
+              "sourceSegmentId": 15216,
+              "text": "る"
+            },
+            {
+              "sourceSegmentId": 15217,
+              "text": "か"
+            },
+            {
+              "sourceSegmentId": 15218,
+              "text": "や"
+            },
+            {
+              "sourceSegmentId": 15219,
+              "text": "ば"
+            },
+            {
+              "sourceSegmentId": 15220,
+              "text": "い"
+            }
+          ],
+          "adjacentObservations": [
+            {
+              "unitId": "chunk-168-unit-1",
+              "text": "や",
+              "sourceSegmentIds": [
+                15218
+              ],
+              "startBoundary": {
+                "before": null,
+                "after": 15218
+              },
+              "endBoundary": {
+                "before": 15218,
+                "after": 15219
+              },
+              "startTimeRole": "alignment-window-origin-not-speech-onset",
+              "startMs": 5040000,
+              "endMs": 5047140,
+              "timeOrigin": "fixed-text-acoustic-token-group",
+              "individualCharacterTimes": "not-observed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0007",
+      "blockOrdinal": 1,
+      "endpoints": [
+        {
+          "status": "unresolved",
+          "sourceSegmentId": 31419,
+          "side": "end",
+          "reason": "observed-boundary-not-inside-parent-or-nonpositive-unit",
+          "adjacentText": [
+            {
+              "sourceSegmentId": 31417,
+              "text": "く"
+            },
+            {
+              "sourceSegmentId": 31418,
+              "text": "ん"
+            },
+            {
+              "sourceSegmentId": 31419,
+              "text": "!"
+            },
+            {
+              "sourceSegmentId": 31420,
+              "text": "あ"
+            },
+            {
+              "sourceSegmentId": 31421,
+              "text": "ー"
+            }
+          ],
+          "adjacentObservations": [
+            {
+              "unitId": "chunk-349-unit-78",
+              "text": "!",
+              "sourceSegmentIds": [
+                31419
+              ],
+              "startBoundary": {
+                "before": 31418,
+                "after": 31419
+              },
+              "endBoundary": {
+                "before": 31419,
+                "after": 31420
+              },
+              "startTimeRole": "acoustic-token-boundary",
+              "startMs": 10488860,
+              "endMs": 10488860,
+              "timeOrigin": "fixed-text-acoustic-token-group",
+              "individualCharacterTimes": "not-observed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0007",
+      "blockOrdinal": 3,
+      "endpoints": [
+        {
+          "status": "unresolved",
+          "sourceSegmentId": 31563,
+          "side": "start",
+          "reason": "window-origin-is-not-speech-onset",
+          "adjacentText": [
+            {
+              "sourceSegmentId": 31561,
+              "text": "ー"
+            },
+            {
+              "sourceSegmentId": 31562,
+              "text": "ナ"
+            },
+            {
+              "sourceSegmentId": 31563,
+              "text": "肩"
+            },
+            {
+              "sourceSegmentId": 31564,
+              "text": "D"
+            },
+            {
+              "sourceSegmentId": 31565,
+              "text": "の"
+            }
+          ],
+          "adjacentObservations": [
+            {
+              "unitId": "chunk-350-unit-1",
+              "text": "肩",
+              "sourceSegmentIds": [
+                31563
+              ],
+              "startBoundary": {
+                "before": null,
+                "after": 31563
+              },
+              "endBoundary": {
+                "before": 31563,
+                "after": 31564
+              },
+              "startTimeRole": "alignment-window-origin-not-speech-onset",
+              "startMs": 10500000,
+              "endMs": 10504140,
+              "timeOrigin": "fixed-text-acoustic-token-group",
+              "individualCharacterTimes": "not-observed"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "answerChanged": false,
+  "promotedSegments": [],
+  "next": "GPT_DECISION"
+}

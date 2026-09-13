@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "digest-v1-phase2-input-setup-correction-v001",
+  "stage": "job-preparation-before-any-judgment",
+  "failedCommand": "initial job manufacture using hashAbsoluteStableStreaming for sourceVideo",
+  "error": "unsafe-file",
+  "cause": "Existing MP4 has two hard links. The selected helper requires exactly one link.",
+  "sourceVideo": {
+    "path": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+    "fileSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06"
+  },
+  "correction": "Use existing verifyPresentationFirstRealDataFileReferenceV001, as the existing candidate-discovery loader already does. Verify non-symlink regular file and stable byte hash. Do not change the media or Core.",
+  "implementation": "evals/clip_composition/digest_v1_phase2_semantics.mts",
+  "result": "existing-source-verifier-passed",
+  "meaningJudgmentsBeforeCorrection": 0,
+  "meaningAnswerChanges": 0,
+  "sourceMediaChanges": 0
+}
