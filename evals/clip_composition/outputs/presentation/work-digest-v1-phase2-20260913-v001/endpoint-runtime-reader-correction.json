@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "digest-v1-phase2-setup-correction-v001",
+  "stage": "supplemental-evidence-runtime-binding-reading",
+  "failureLog": "retention-endpoint-resolution.log",
+  "savedImplementation": "before-endpoint-runtime-reader-correction.mts",
+  "cause": "新しい照合処理が既存runtimeのPython symlinkを一般ファイル用readerで拒否した。",
+  "rejectedPath": "/private/tmp/zev024-stt-arm64/bin/python",
+  "correction": "既存observerが検証するruntime実装のbyteを同じ参照pathから読み、固定hashと照合する。素材・回答・音声の照合は維持。",
+  "phase2SetupCorrectionCountIncludingDiagnosticCommand": 4,
+  "observationsRepeated": false,
+  "observationsChanged": false,
+  "semanticAnswersChanged": false,
+  "semanticJudgmentsRepeated": false
+}

@@ -1,0 +1,4003 @@
+{
+  "schemaVersion": "digest-fixed-text-acoustic-preflight-v001",
+  "instruction": "ZEV進行管理３ Phase 2 保持端点 GPT_DECISION",
+  "method": "existing faster_whisper.WhisperModel.find_alignment; known text only; no transcription",
+  "modelPath": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/snapshots/f0fe81560cb8b68660e564f55dd99207059c092e",
+  "modelBindings": [
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/snapshots/f0fe81560cb8b68660e564f55dd99207059c092e/config.json",
+      "bytes": 2796,
+      "fileSha256": "d86b7a7664a12559d644aa210a32ce9a7e03913e794b7ea4fb7182de69e273a7"
+    },
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/snapshots/f0fe81560cb8b68660e564f55dd99207059c092e/model.bin",
+      "bytes": 3086912962,
+      "fileSha256": "bf2a9746382e1aa7ffff6b3a0d137ed9edbd9670c3b87e5d35f5e85e70d0333a"
+    },
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/snapshots/f0fe81560cb8b68660e564f55dd99207059c092e/tokenizer.json",
+      "bytes": 2203239,
+      "fileSha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    {
+      "path": "/Users/kawafmm/.cache/huggingface/hub/models--Systran--faster-whisper-large-v2/snapshots/f0fe81560cb8b68660e564f55dd99207059c092e/vocabulary.txt",
+      "bytes": 459861,
+      "fileSha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    }
+  ],
+  "compute": {
+    "device": "cpu",
+    "compute_type": "float32",
+    "otherParameters": "installed defaults"
+  },
+  "versions": {
+    "faster-whisper": "1.0.3",
+    "ctranslate2": "4.3.1",
+    "tokenizers": "0.19.1",
+    "av": "12.3.0",
+    "numpy": "1.26.4"
+  },
+  "implementationBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_acoustics.py",
+      "bytes": 7366,
+      "fileSha256": "76a1aed52a6e5e79d849b7662b60555dd24cf4bbac6d8a2bf09e2249fdcf39f2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/observe_digest_caption_acoustics_v001.py",
+      "bytes": 6273,
+      "fileSha256": "d70caa42e90fb8865ecc5186ef72744a201daf00611484de6e3a5e13aeadd68d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/caption_local_acoustics_v001.py",
+      "bytes": 20396,
+      "fileSha256": "258fd83dfb82886e5edadbc5b94b6768b9b9060e52e9262173a4e73743d3568f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/bin/python",
+      "bytes": 18041888,
+      "fileSha256": "ac60cfe0268614638d0ffa35f3b0284fc7b3a11482723793455e17eeb278509e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/__init__.py",
+      "bytes": 372,
+      "fileSha256": "4902b4653e8074eaef23eceec9cff34945b02d20136ac24afc90fa9b1c117436"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/assets/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/audio.py",
+      "bytes": 3230,
+      "fileSha256": "7bec5600e5567ac4c314470be68dfd67ebca48a20a4386ef3ea5466755c8a0f5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/feature_extractor.py",
+      "bytes": 6108,
+      "fileSha256": "5509a21380cc933327bcb01f1d3d2d5ee2e242a7664e672006796ed4f4491b55"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/tokenizer.py",
+      "bytes": 6599,
+      "fileSha256": "f86379fba9f302fc903f2a9189fe136d17497adae77757a0d3a02af78e544470"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/transcribe.py",
+      "bytes": 52584,
+      "fileSha256": "3356e6a48c801d97719cf0d16d785b8880e7cf2a5c642efb4434951c3cc485a5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/utils.py",
+      "bytes": 4889,
+      "fileSha256": "0da077f09077bb428a380a5ca1ea909a04d8d9379de3eb632252d7d40ec22647"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/vad.py",
+      "bytes": 10037,
+      "fileSha256": "af7bf3eb3f140222004f41185856cd3bb5aeb822588aef6fa41c4fdcf15ffd24"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/version.py",
+      "bytes": 50,
+      "fileSha256": "a9b59c80f4308c78b9297d42640e59107e4e4864db2ab905f0638b70ec59fed5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/.dylibs/libctranslate2.4.3.1.dylib",
+      "bytes": 2881872,
+      "fileSha256": "2e359199f0a0b83021d596f0db25501355887d4fafab2d2e90d7ea5f0373c0a5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/__init__.py",
+      "bytes": 1452,
+      "fileSha256": "a34e35cf85e736d9d517e099a15faf51a90745c14139f8aa3ad403389b4774d5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-darwin.so",
+      "bytes": 2067568,
+      "fileSha256": "7aacd9f70e95ca487f8a17a2fd8c13c5a12b228c5abb4cdc12b118d45a8a03f3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/__init__.py",
+      "bytes": 499,
+      "fileSha256": "4ffc89327b3f5d757aa49cb7496a53b60aef6d3d28c119f170c9ffee2e6aa29e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/converter.py",
+      "bytes": 3492,
+      "fileSha256": "c44dc260f0ef37352778157f36e3c9e7d4b178d29151cc819d2fccb31383dc83"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/fairseq.py",
+      "bytes": 12420,
+      "fileSha256": "b52222d9883f53ac3015c32aea0fe106aa29628af60271e94d2700d727b1d81b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/marian.py",
+      "bytes": 10959,
+      "fileSha256": "8b9a624bfe3348cf459a9d76170207ba8b74a4cf953e1ab630dc6eb7ee146bcd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/openai_gpt2.py",
+      "bytes": 3209,
+      "fileSha256": "466bf1cba52a6b97fd616f514097c5e1709e35b5e1f80c3ad69e4dfc4d77f613"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/opennmt_py.py",
+      "bytes": 12824,
+      "fileSha256": "3a46a3304fb6a8a69dd5da68854e2861821f9a343ae9a658c4322e0bca203ccb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/opennmt_tf.py",
+      "bytes": 15727,
+      "fileSha256": "5cdc801c2a7c3e6d940e6477fb770607ce0ae86334d3d26ef7f191fca543f1ea"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/opus_mt.py",
+      "bytes": 1210,
+      "fileSha256": "5c201bdd7e1a7d10ad69912b6fb6ef22f24199f5600bd3566bf205e6d3814a64"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/transformers.py",
+      "bytes": 84804,
+      "fileSha256": "af85755c5d2273800c4c8cb11e5822e90e16db9e9fc898c4e920f8c177480965"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/utils.py",
+      "bytes": 3113,
+      "fileSha256": "88b504cd8322f9442818036fac54ec07b9bc2f90e1f48548a3478eaf8b6c4bf2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/extensions.py",
+      "bytes": 21197,
+      "fileSha256": "77a0f38f5efae3d98d02625ac462bb8902f9eed709b1ab5d8ca08891891c7e9b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/logging.py",
+      "bytes": 1176,
+      "fileSha256": "c66c762e5af23a100f6cc989c0c02bf89b97659a2047d8fad8e34d659d9f14e4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/models/__init__.py",
+      "bytes": 457,
+      "fileSha256": "ace696282fba15435a67484babb772ba19d8dd1115784056813ef49ca63e4178"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/__init__.py",
+      "bytes": 570,
+      "fileSha256": "d825793c5694de315559040d0e757fa4b4ca67847e2f5e452443dfe610113da8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/attention_spec.py",
+      "bytes": 2697,
+      "fileSha256": "af4632428f64a4fcaa07f130b64bd84cae173357105c166e037602b7fecc9d23"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/common_spec.py",
+      "bytes": 1369,
+      "fileSha256": "6292be5e342a0cc3e450115beb77c46a537710956c13f6f5038bd1a0bf474c0b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/model_spec.py",
+      "bytes": 24969,
+      "fileSha256": "565dc4766f3e39e8f78ba994544e9175ae3a7b9e771928b603f5395289a753cb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/transformer_spec.py",
+      "bytes": 27237,
+      "fileSha256": "0d1ff0fab42071479fed66c6882cd36e9e333f383e5eef5ff29ab56832cf9a40"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/wav2vec2_spec.py",
+      "bytes": 1202,
+      "fileSha256": "7c0797e54cb54ab6b7917ee34f76ae78143a5c59195e40c1fddba8affe26d111"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/whisper_spec.py",
+      "bytes": 2370,
+      "fileSha256": "bf1c6b02c1d8188b580b62bd630da07851146d799e1ad72a1585c332a71ad250"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/version.py",
+      "bytes": 50,
+      "fileSha256": "2afa1971f096dc8feb009212e2b0aec7f3c53e60662699c8d9185e07c7a30211"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/__init__.py",
+      "bytes": 2615,
+      "fileSha256": "644e596a052fa1b05272b1c141d1286e1c78c2a3346ecabd17d68b62404d8d84"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/decoders/__init__.py",
+      "bytes": 335,
+      "fileSha256": "946a77da1f2a7ab134178f20c992fcc0699e4159668d5a5e22c45bd5233d91fe"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/__init__.py",
+      "bytes": 310,
+      "fileSha256": "57302ca65688a3bae5e0014ef0c8aeee283b31f663be89f055b959c34d7347a3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/base_tokenizer.py",
+      "bytes": 14206,
+      "fileSha256": "d9315984bba968988c0d8189b94366c5826ff9c9d1f1b0c799b333698a4544eb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/bert_wordpiece.py",
+      "bytes": 5520,
+      "fileSha256": "b0a0ae9b414a3d875280914937c2c37ab541a130d14aacaa49dadc9be96f42a2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/byte_level_bpe.py",
+      "bytes": 4289,
+      "fileSha256": "380fe3cb2dc44266136ba8677fe10ac0b385bb2ae8a8560e273db9cac3360549"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/char_level_bpe.py",
+      "bytes": 5466,
+      "fileSha256": "436644016d313101c5ed8094b66a65c1ac5b53e2743f634ae0f24633151bfbf7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/sentencepiece_bpe.py",
+      "bytes": 3738,
+      "fileSha256": "2f0ae87e8a219d47cc13694ada5418a3240884ff3844fd022251d16a3d21c8db"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/sentencepiece_unigram.py",
+      "bytes": 7580,
+      "fileSha256": "4988955cbf19b6a2d72a9baac27c26adfc601a8b6ef320243aeedd2f3b445c8a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/models/__init__.py",
+      "bytes": 176,
+      "fileSha256": "7896781d3010669c672882cdca559a4c5ab15f2f816ba38ab3058de3b7de795f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/normalizers/__init__.py",
+      "bytes": 808,
+      "fileSha256": "84a3b09ea58cf8895c56fec70d64fd4988657337afb82343409634e591719339"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/pre_tokenizers/__init__.py",
+      "bytes": 557,
+      "fileSha256": "c1de8a61003f46c19240af87786f68a53461bf8b6d4919329e8d9d93a6b3f8f3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/processors/__init__.py",
+      "bytes": 307,
+      "fileSha256": "c4cd8310ac0ab4722e987b2ccccf00324abe0256aabc16455d680b53c48d84e6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/tokenizers.cpython-312-darwin.so",
+      "bytes": 7093656,
+      "fileSha256": "ee4974d908c2f8bc1b81c2941d393824bd0e05be5f6951e4fe9eaf95c6cb18f5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/tools/__init__.py",
+      "bytes": 55,
+      "fileSha256": "c46f1c681f4e1c2f1c6c1d354b9bd8575e0767184ee9e59b2de86c6fbd29a62a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/tools/visualizer.py",
+      "bytes": 14625,
+      "fileSha256": "822f84d8d08fec5b86eae8e940e75a9524d7525695f3957a348f993cf4ef03fe"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/trainers/__init__.py",
+      "bytes": 248,
+      "fileSha256": "513bb6d8019ca7be88be95b8e712d16c95844f4e0dc4f5ba35f09bd98633d043"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libaom.3.2.0.dylib",
+      "bytes": 5579360,
+      "fileSha256": "7a5b7e3a898081ed1e63c86cf4b39cacf36efd74241a4c0403d9b56d83970ae1"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libavcodec.60.31.102.dylib",
+      "bytes": 12101184,
+      "fileSha256": "9ba689962501dad8a4b404bb83d4d8eeb6b9937d5e7a1ced3f36ec31247bc660"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libavdevice.60.3.100.dylib",
+      "bytes": 117216,
+      "fileSha256": "520a4bce87062d75c343d2817c2bbb4115436f58ee9852eb8d9d87dbf2750bf3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libavfilter.9.12.100.dylib",
+      "bytes": 3977888,
+      "fileSha256": "c3810a411db98cc0985a154005294bb1482d95e619b39abf15a849cfbc624a11"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libavformat.60.16.100.dylib",
+      "bytes": 2430512,
+      "fileSha256": "656c6d92607149ccb8490231596cc7168b2ad6196315588d86695190d00dba1d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libavutil.58.29.100.dylib",
+      "bytes": 709648,
+      "fileSha256": "7e21389afd54fb17e4d36def34715411cd187291191581fd7d6b86286720c614"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libbluray.2.dylib",
+      "bytes": 377504,
+      "fileSha256": "b637724d87324b9b0c714e4394f80633560de17f29d3784b35b3fccbbdb30fb3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libdav1d.7.dylib",
+      "bytes": 867664,
+      "fileSha256": "05d6807b4e72f0c3c203fe5db21514a57d6c48c83a7ed3b080759d334afeccc7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libfontconfig.1.dylib",
+      "bytes": 444576,
+      "fileSha256": "c9c12035e14e6f1421e4367d80d7a41db74753fc67853e6fbe45c68184bef6fd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libfreetype.6.dylib",
+      "bytes": 1119680,
+      "fileSha256": "65b9f9dcb65c2660022608253d07b2e25a6c360189aede123082e425d5a63d24"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libgmp.10.dylib",
+      "bytes": 786592,
+      "fileSha256": "f415877efc5ecde2a50a52d71ca9de993fd2c09c306de88670d6e5b6b9a09e4b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/liblzma.5.dylib",
+      "bytes": 340784,
+      "fileSha256": "874688b99086863e63c35d4a55af89fbcd91800bad6ab6cdf89b6e1563b3c08f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libmp3lame.0.dylib",
+      "bytes": 387280,
+      "fileSha256": "fb479cc7d24daa7f0530d405369d1d3b2c36a85c419be381ab7d48acea0d9e4e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libogg.0.dylib",
+      "bytes": 88608,
+      "fileSha256": "8f71f6fb720b5c7265ec560643be47e94e2530f5d7ae8f2c32cb5c989415f804"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libopencore-amrnb.0.dylib",
+      "bytes": 299680,
+      "fileSha256": "d393c8923a027b61ea73fc0c3fdb0011ee679430eaf026e196345a1b0f6cf08e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libopencore-amrwb.0.dylib",
+      "bytes": 175888,
+      "fileSha256": "7890d9d569f7be7040764171c36741793ef50d91aababf37adf57ee0f7713299"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libopenjp2.2.5.2.dylib",
+      "bytes": 699376,
+      "fileSha256": "2503cc7058590626b77801eeb1f9c90f0ddfdf6d60a3cccb288183799b82ad74"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libopus.0.dylib",
+      "bytes": 629552,
+      "fileSha256": "78ddd594daac8b256e4f3fd84d47ab254037e313288b1b69bf98b5d60bdc1ee5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libpng16.16.dylib",
+      "bytes": 361472,
+      "fileSha256": "0503df2e1d3c0f5290f4ef93fb166a6434101ba660ebe4df85a06a521ad880d0"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libpostproc.57.3.100.dylib",
+      "bytes": 102448,
+      "fileSha256": "712f0b00c04c7973867c1b15c29ec43d9b9daa497b2370deb0244d0a3d38ee3f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libsharpyuv.0.1.0.dylib",
+      "bytes": 86256,
+      "fileSha256": "6a03bda0d1790b70cfaf42a87b04ddb4461d70cad12319cb347267ebb5711145"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libspeex.1.dylib",
+      "bytes": 176976,
+      "fileSha256": "3114c3c6aadecc02f368711f20458ee32fcc56dfa2a9d4a518762eaa5ba97194"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libswresample.4.12.100.dylib",
+      "bytes": 138624,
+      "fileSha256": "f2bac73128cff08384b5a4ac666f55166ac08dd6f7751a1995777144a03d55fc"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libswscale.7.5.100.dylib",
+      "bytes": 635456,
+      "fileSha256": "d99ce81646ce1bcfc34dd511f3b8cc53d73ab493394197350c4e03868e9f206d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libtwolame.0.dylib",
+      "bytes": 211792,
+      "fileSha256": "7e89d79fcc5123c89e64bb78801ce832d9421cd9ed4b8cedbbd8a8b6a8aa57bd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libvorbis.0.dylib",
+      "bytes": 260240,
+      "fileSha256": "11e32dee6078da18ed6f065a931e45e953c800404f9db795653d130f21b3f072"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libvorbisenc.2.dylib",
+      "bytes": 731472,
+      "fileSha256": "95c425e5d00a242f77576935a4ccc68bfbf94d9dcef43f8197fff123b380dc38"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libvpx.9.dylib",
+      "bytes": 1787648,
+      "fileSha256": "2e793e67ca1b2eaefdd1035c7335993ae6235b12fc4e1d9a08c4dfb8ec719bde"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libwebp.7.1.9.dylib",
+      "bytes": 515104,
+      "fileSha256": "97b6c7aa11bd6329fae8ddbf4839ba5dbddb4327b1b768b5aa7a1a2aafd52e27"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libwebpmux.3.1.0.dylib",
+      "bytes": 106384,
+      "fileSha256": "2e1df58ae4cc22b87af5de10ef254a4cc4202419a0091c945102aa93a9306b6f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libx264.164.dylib",
+      "bytes": 1688288,
+      "fileSha256": "52f44107fa9647c96335afbfbd498c2f137604f685075743855bb887a6f9ada8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libx265.199.dylib",
+      "bytes": 4959600,
+      "fileSha256": "b841a04fb25d14a20be41f62061aa317c85373ccd674c0ba54cb2df2109d277f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libxml2.2.dylib",
+      "bytes": 2163600,
+      "fileSha256": "b15927c0ac7c6101d143a3e100a930da1da9b8ae7db935dbd407c688a9428784"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/__init__.py",
+      "bytes": 2002,
+      "fileSha256": "47cfd2f6593add137ff630b31e72c8aaa368467e8cd9a0aee49f011674180ab5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/__main__.py",
+      "bytes": 1108,
+      "fileSha256": "1dceae7863f0a4933081b5f87657af9e5742f49ae562609152de340bf9380d99"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/_core.cpython-312-darwin.so",
+      "bytes": 95936,
+      "fileSha256": "53cfd89b383a50fedbc29fa3cc539250613345aa8e33bf3e1b0904e32accd85c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/about.py",
+      "bytes": 23,
+      "fileSha256": "8e8a2f2ce8eb7b3cf2a3b133a4277f1a6b6ac05cd15a7aa38133fec2efa2739c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/__init__.py",
+      "bytes": 62,
+      "fileSha256": "8aa6bc1873865b3fc2bd51a9d566a18204fbed67b3d2f5f1051498481136af33"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/codeccontext.cpython-312-darwin.so",
+      "bytes": 121648,
+      "fileSha256": "f982cbc7fe4dd16e076a53940443e375b6de5e464a91e4c09951910a4da465ce"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/fifo.cpython-312-darwin.so",
+      "bytes": 140000,
+      "fileSha256": "329ff61b3f3c5c682cca054cd6bd2bc79199a69190bdbba7e07586967cf387d7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/format.cpython-312-darwin.so",
+      "bytes": 121632,
+      "fileSha256": "f3f757c979db8066487a6d8cbef85828943939447264f91a622595803cf40bff"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/frame.cpython-312-darwin.so",
+      "bytes": 161488,
+      "fileSha256": "58f92bb083af8774de862fda2c805dd023b3b3192c88baee928aebfaba44a851"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/layout.cpython-312-darwin.so",
+      "bytes": 166736,
+      "fileSha256": "3fa64a1e98ce515e65acf811786fbab36eaef11a002a2e0b5f22a8baddf2e002"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/plane.cpython-312-darwin.so",
+      "bytes": 117856,
+      "fileSha256": "50f7602d8a7b4447e4e359bc71c62bf68e6e6831c9f014ec7c65f1eb6d6114c7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/resampler.cpython-312-darwin.so",
+      "bytes": 157104,
+      "fileSha256": "cbc5d06b7bf0d04986816afce06d87b230ff22aad6e00d4b36a848ba3f626fe3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/stream.cpython-312-darwin.so",
+      "bytes": 137056,
+      "fileSha256": "175dbee72b894d1504f23dff7f75ba87cdc88b221a46c3ec2dc3e9336e35d5fc"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/bitstream.cpython-312-darwin.so",
+      "bytes": 120128,
+      "fileSha256": "bffeb17583d8e74dbabf05f78656c5a958cf0bd6bb142a904a596e050bb4a2fc"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/buffer.cpython-312-darwin.so",
+      "bytes": 138416,
+      "fileSha256": "72ddc3a73974869ad5f434343e6188ced99e59c0822a52ebd16a9db0b148e53e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/bytesource.cpython-312-darwin.so",
+      "bytes": 117792,
+      "fileSha256": "7a51c9b6bd3687855793e1b5c91b7157998eec008b2420a5b73f8ca7be404d1c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/codec/__init__.py",
+      "bytes": 121,
+      "fileSha256": "64355c1a45f468003b400d171ab553cff050a3a88b39c8bf530f5987b608845b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/codec/codec.cpython-312-darwin.so",
+      "bytes": 198128,
+      "fileSha256": "38f5ec87f0908083d1b15b396ada1d4c455717b7186afeb689d736d50aa57470"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/codec/context.cpython-312-darwin.so",
+      "bytes": 265120,
+      "fileSha256": "c82d8daf4b04a4b072317a71d8599a8603f971304de0edafc1fa0729626689e5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/__init__.py",
+      "bytes": 111,
+      "fileSha256": "ef5504c479a35f35e356f5250f68af5bbd956fb1545bdf2885b07838bb4c43d2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/core.cpython-312-darwin.so",
+      "bytes": 220912,
+      "fileSha256": "6314740a2da33c82894ceadf163d49a0e1aa9d65c7824dcde4c872531f97dd29"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/input.cpython-312-darwin.so",
+      "bytes": 164336,
+      "fileSha256": "ea8db18f086ac1b2bdbb89a4ebd78ffb3b3eb8d840b71997b007b89a1ff6f285"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/output.cpython-312-darwin.so",
+      "bytes": 162208,
+      "fileSha256": "a2672dd09d19de2f5dc4fbd446402f66fbfb55ac439ccba95d5a57aa9eb070c2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/pyio.cpython-312-darwin.so",
+      "bytes": 137584,
+      "fileSha256": "a8280589d2ba9165f628de4dd17f6992e6023a025f5829ddf7e4a6781d7f97c6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/streams.cpython-312-darwin.so",
+      "bytes": 160272,
+      "fileSha256": "301d3bb9f67d731d47f9274e3130835344b86dd2e156a88c183f3f86a17f7423"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/data/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/data/stream.cpython-312-darwin.so",
+      "bytes": 118512,
+      "fileSha256": "31c3fd5c9de52bc059b88f9aa19025f926813a160a6fcc7b3a03310e8c1b53d0"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/datasets.py",
+      "bytes": 3094,
+      "fileSha256": "72bc4de3e530192386e9e1cd7e58bb9129ce83073748af1f9d8fa9f078dee027"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/deprecation.py",
+      "bytes": 2313,
+      "fileSha256": "7f8dab1a075d9a90c4272269ca410e9c499414f975cdb2ee00b6be45db83dec6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/descriptor.cpython-312-darwin.so",
+      "bytes": 119120,
+      "fileSha256": "447dfd61851b8076f73cdcec05f96cae4e4f412bb72a48877172418a7d1487cc"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/dictionary.cpython-312-darwin.so",
+      "bytes": 143872,
+      "fileSha256": "6bb3a64df4ddfdd99bcd5a34932c441d109a2dc9049f1f67a7a483415ec2d066"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/enum.cpython-312-darwin.so",
+      "bytes": 240160,
+      "fileSha256": "b973b56184feed884f9cc3c76577eb8d3a72b09bb0253496a019554389b9b878"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/error.cpython-312-darwin.so",
+      "bytes": 214832,
+      "fileSha256": "7b2aba269e707508e0c02dc9e48a8ff7839a775f6670dadcfd82fefb5d473b80"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/__init__.py",
+      "bytes": 103,
+      "fileSha256": "697d987744935cc2ce83cc7d7086117aea343a1da1bd33b94321ba6b6cf4f8c1"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/context.cpython-312-darwin.so",
+      "bytes": 159296,
+      "fileSha256": "b9d9782f134763daaabddfbc16307e468090ab8a967b49a6ccfe8de46a6f696b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/filter.cpython-312-darwin.so",
+      "bytes": 163184,
+      "fileSha256": "fb89dadba2338e910eb520114bc2031c076c2cfddcf24ebc8b4f4aaf3dbe5540"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/graph.cpython-312-darwin.so",
+      "bytes": 178352,
+      "fileSha256": "ba573848d3de5e5f1965afb9ed74e3ac8705046447073620343542cb9e6b5ef1"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/link.cpython-312-darwin.so",
+      "bytes": 119056,
+      "fileSha256": "2999d7b71e041f43b509959906fbaf1cfb2662d7f56fab7b22d3490143ba1fe9"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/pad.cpython-312-darwin.so",
+      "bytes": 139552,
+      "fileSha256": "4e784f4de68985ee11318cd2043a2ec513f1295cd1e75a8a227808a0a010d7c6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/format.cpython-312-darwin.so",
+      "bytes": 158816,
+      "fileSha256": "2843ecfb6c9931f7fab010d4bf6683c7aeba99b7ff93c5f2ca4348ee1c6db2ac"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/frame.cpython-312-darwin.so",
+      "bytes": 138688,
+      "fileSha256": "bf18c5c4a4af9c495ae07ec072c5902b168ab6b65a474cf534c2341337fad320"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/logging.cpython-312-darwin.so",
+      "bytes": 161248,
+      "fileSha256": "36a28c119edaf9d2b8ffde2c3cf010205e15af94354a6fcf223a822e551a84f4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/option.cpython-312-darwin.so",
+      "bytes": 142704,
+      "fileSha256": "03df0abe7ffda0b2fc284c66b3be85e067f5e8f90df0f0877464ed92562441c2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/packet.cpython-312-darwin.so",
+      "bytes": 140656,
+      "fileSha256": "76a9480db92b455ea9b4eab4f0e30336de950ccea21a6c560c0a91bdec4ef857"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/plane.cpython-312-darwin.so",
+      "bytes": 119216,
+      "fileSha256": "e036c8fb7d92b9c8a6c3c07ed7332a409570d812dc305c5d2cdcbe4de35ee92b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/sidedata/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/sidedata/motionvectors.cpython-312-darwin.so",
+      "bytes": 145360,
+      "fileSha256": "d93e618177641d6a5f825b58de9414f5b16f2d28c546ae079ea6ef5618c8398c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/sidedata/sidedata.cpython-312-darwin.so",
+      "bytes": 162320,
+      "fileSha256": "53bd627e812dde333b216cb8c04387d62d14be6db1a793d63044e8def8ade497"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/stream.cpython-312-darwin.so",
+      "bytes": 142128,
+      "fileSha256": "f37a4c4cae7897bd88d19b94acda7384faac786a4f5e51fbf3f204f258158c67"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/subtitles/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/subtitles/codeccontext.cpython-312-darwin.so",
+      "bytes": 117888,
+      "fileSha256": "7720d0a3cf45c0eceb968b387fa3b23c31548eb040a97c900c2537c74dfc05b4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/subtitles/stream.cpython-312-darwin.so",
+      "bytes": 118368,
+      "fileSha256": "903f5efa5825fbbc11aeb351deaf54d2ba5ecb137ff54c735bbd81202de38828"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/subtitles/subtitle.cpython-312-darwin.so",
+      "bytes": 190384,
+      "fileSha256": "2e829983bf5ab26b0404d7fd20035c4aabe651ac42c506b19e7e75adf3d441d8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/utils.cpython-312-darwin.so",
+      "bytes": 114432,
+      "fileSha256": "92ff20499c0dc74d9dffa7ccd3ba7176d96448b3bc6e4b7fa1de7294cb4838c1"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/__init__.py",
+      "bytes": 62,
+      "fileSha256": "0511ffaaee95acb2a71aad61a665e661054efe8fabdf67e7b11f95e8d99b2e2b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/codeccontext.cpython-312-darwin.so",
+      "bytes": 143872,
+      "fileSha256": "addac1f30c0ae42a8cd19b809a9843563fd6c1639e909aa1417507535d284f49"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/format.cpython-312-darwin.so",
+      "bytes": 165968,
+      "fileSha256": "5d05bcc40674efa7c11c4a3041c900dbb4b3e60eb165f3b7d7040dd95a577be4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/frame.cpython-312-darwin.so",
+      "bytes": 388992,
+      "fileSha256": "2beebc524529be65745d3cdde64c7495660e0e5cf5e4d4ad79a0d040517e9c2c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/plane.cpython-312-darwin.so",
+      "bytes": 120032,
+      "fileSha256": "aa1a7c3b45dda3699c965e284293497277ae06c3f9aaf16db1329de5cd157855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/reformatter.cpython-312-darwin.so",
+      "bytes": 140112,
+      "fileSha256": "22a03765e5b5611754c0855558efad5b152f89df34a3ed3d7586c0d265b1816f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/stream.cpython-312-darwin.so",
+      "bytes": 139152,
+      "fileSha256": "43309cb28591f67a28ab9e68e13dc04215f88a80c251fce7452bf7eae73fa54f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/.dylibs/libgcc_s.1.1.dylib",
+      "bytes": 158976,
+      "fileSha256": "baee2e6118dd54c0852f881d718516d70884de84bfaa085de5d8d8f90baa3b06"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/.dylibs/libgfortran.5.dylib",
+      "bytes": 3700784,
+      "fileSha256": "5eb02fa55064ff8ae537dbdb1b0ae0b2175c845adbba089bd44616c06ec321eb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/.dylibs/libopenblas64_.0.dylib",
+      "bytes": 23198400,
+      "fileSha256": "dde2b735d01caa531885115ea853b5a4172b935167b95a1acb2a10243e0d97e7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/.dylibs/libquadmath.0.dylib",
+      "bytes": 371440,
+      "fileSha256": "1b341ae276c4adcb30c070b774ec6e68e819c883e897f0de8941d553f7989a0d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/__config__.py",
+      "bytes": 5142,
+      "fileSha256": "5f03da9aecc8f3896d0e041662f7630b1ce7569dd32e9022bcca65415e9ceaca"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/__init__.py",
+      "bytes": 17005,
+      "fileSha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/__init__.py",
+      "bytes": 136,
+      "fileSha256": "0bcffbc1b1ea524077e49a2e63f5cab1ab3528ba5167b2475ae67b54638f5695"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/_dtype.py",
+      "bytes": 126,
+      "fileSha256": "bc4d7afb28b051262c0086eaec594463519b5d9029f308c00c3c498377815fe5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/_dtype_ctypes.py",
+      "bytes": 147,
+      "fileSha256": "8b9121a163d486ee2495add7bb866f5c5d6554b3e223a660e21ea8f236a26a6a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/_internal.py",
+      "bytes": 135,
+      "fileSha256": "839ba09aa0e05214a589ee7ea2739cb5c9b8a7481c30748844b1d562d1539353"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/_multiarray_umath.py",
+      "bytes": 159,
+      "fileSha256": "54fb684f6b879f2537aca2f41b6ec28263660755911ccd26b5ced8f4bf390b75"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/multiarray.py",
+      "bytes": 138,
+      "fileSha256": "919c42ffb3f7270cf5440a73414d901a6a92ab830012f2a66891189c0b1b48eb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/umath.py",
+      "bytes": 123,
+      "fileSha256": "61c57471d6c671e9ba0f93f7c97edc47d1c6601ad3f15328020081cc6c0f8608"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_distributor_init.py",
+      "bytes": 407,
+      "fileSha256": "20acb64c7c26bb9520063b556f06c3f47f80a7cb9a509a0f2766ed43825ab5da"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_globals.py",
+      "bytes": 3094,
+      "fileSha256": "9de11d71f2d9a072f06deaffd57cab9f6e8b717cb432b4ad6b4dd97bb68a6ba8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_pyinstaller/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_pyinstaller/hook-numpy.py",
+      "bytes": 1409,
+      "fileSha256": "3d443e98d5a37ba6c500b07e98b54544f92f6cce09a4b5ee9c1eac8c16d3cb98"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_pyinstaller/pyinstaller-smoke.py",
+      "bytes": 1143,
+      "fileSha256": "ea22fe787310686debc674b912072fac2a84966f5a28bd3b0a3af51592525e5b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_pyinstaller/test_pyinstaller.py",
+      "bytes": 1135,
+      "fileSha256": "f0afbb43199fa17086d0dc11d1b84880236b0e31a5ad3cd69eb475b11f1bb605"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_pytesttester.py",
+      "bytes": 6731,
+      "fileSha256": "950513bca573ea44fc6f8ca2315fae5bebc6f4a4aff54cea026c5a10c7b34ddf"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/__init__.py",
+      "bytes": 7003,
+      "fileSha256": "eb0f44f55f55693eef4ccfaf7ae6bc5dcc92bf9d097b9a923c9ccaf474e87088"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_add_docstring.py",
+      "bytes": 3922,
+      "fileSha256": "c508505f7ef668dfe6dd737de429de3313924f615d3dca2f47e31733ef5ea79f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_array_like.py",
+      "bytes": 4298,
+      "fileSha256": "2f8827c762961bcc98728bb3e5bf5ba0922490536d38957a423727182adb9d16"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_char_codes.py",
+      "bytes": 5916,
+      "fileSha256": "2d1e753b90140436c2989be5328c7252fb1fbdbd69ed61eb7b182d4c6b6e5937"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_dtype_like.py",
+      "bytes": 5661,
+      "fileSha256": "db5531cb452021ac0633cdb18c317f89f32afa73fe064867fcba622bf1ef582e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_extended_precision.py",
+      "bytes": 777,
+      "fileSha256": "7468a8b3ed64f900467b0ed817338d653cd55b1cfe69801aaa571c976fe1e41a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_nbit.py",
+      "bytes": 345,
+      "fileSha256": "f8440e4a11e9077af7d1be1154472bb90453713685019c2da8227806cbe91330"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_nested_sequence.py",
+      "bytes": 2566,
+      "fileSha256": "e5e35a559015f6d6502c558760eb95b37dfa263a22696c72650edc30a6fa9b52"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_scalars.py",
+      "bytes": 980,
+      "fileSha256": "7953fc3e395c4c8958eefd1f448ded1573e8816b692c967c9c5bd146b2e30eab"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_shape.py",
+      "bytes": 211,
+      "fileSha256": "24fcbb8c93242121854e792088489f60cfb8c537236fb24c4642c822364bc34f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/setup.py",
+      "bytes": 337,
+      "fileSha256": "484d10e873ea0e35947dc780e325e090823ccb7cfb122485d19f8c370388c86e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_utils/__init__.py",
+      "bytes": 723,
+      "fileSha256": "1e17adc2c8b779305ef077566c6e75cd799cad7d4388f2f19184abb2530b61c7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_utils/_convertions.py",
+      "bytes": 329,
+      "fileSha256": "d3133175e2cece20e61ec44cffc96e121e12fa441d328320e86c4d0c36acebd9"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_utils/_inspect.py",
+      "bytes": 7447,
+      "fileSha256": "f0c6bb4014707d258a78ad52849a4535cec20e113a7e4204ff0af5171ac6d40f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_utils/_pep440.py",
+      "bytes": 14069,
+      "fileSha256": "56bec1dd0b228d1e69ea1f18033d8b8cd194cb31d4279819e2fdba3696402837"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/__init__.py",
+      "bytes": 10375,
+      "fileSha256": "5edb6d59b0dfe98874fe6e33a7e2ffbace072a7577a06c1d941ea7fb4d50f4cf"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_array_object.py",
+      "bytes": 43794,
+      "fileSha256": "adf081cc4eaf5239381c49501935707ba4f0dafc62531eed981a501269b58819"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_constants.py",
+      "bytes": 87,
+      "fileSha256": "0186b23768dfd43a79ad767b58f05d521b4f068fc93028bea43f685b9ce61642"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_creation_functions.py",
+      "bytes": 10050,
+      "fileSha256": "e92a8777366a1ce245132585b6a9e3e8a20a462beb197c513a58277b3ff732dd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_data_type_functions.py",
+      "bytes": 6288,
+      "fileSha256": "3f9ec53ac35d5da84d52b895b5d95da276ef050aeb664573c596dcaa447ff000"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_dtypes.py",
+      "bytes": 4823,
+      "fileSha256": "90353534bbc440df96d873e6276c063f1f2388d9056ebbd3083d53d514fc3f0a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_elementwise_functions.py",
+      "bytes": 25992,
+      "fileSha256": "d241ae0d7dd4aff429ead04c0564ceecb3d4c735cd180940d9248985d029e035"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_indexing_functions.py",
+      "bytes": 715,
+      "fileSha256": "77e833ab3caf478e4541ead1609adb0730961670ec656488f6982003941644ee"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_manipulation_functions.py",
+      "bytes": 3317,
+      "fileSha256": "a82a16e41e455dc14e58a3d4f43f4c5c774c79722ecef9c7514be9acd9707e37"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_searching_functions.py",
+      "bytes": 1715,
+      "fileSha256": "986662aa17985c65a20caf6ba971620ca5f4fc1d262753a3740fbd142da8e650"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_set_functions.py",
+      "bytes": 2948,
+      "fileSha256": "50ba5f2b5cf39d6f63a17d435d288fd11dda85c0c1fe9a3b999969b11aa2ec5b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_sorting_functions.py",
+      "bytes": 2031,
+      "fileSha256": "ee9b3397134defe0cda84665a2718b150ae55cf3fb7af540f23377d4d4a1834d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_statistical_functions.py",
+      "bytes": 3584,
+      "fileSha256": "1eca5f62d7995926b722732cd74299cfeb24dd9b96ead797e9f35da3cdbd4fce"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_typing.py",
+      "bytes": 1347,
+      "fileSha256": "b8a89d469ea76318079c43daa975d9b030d9eadc352ec8696f02efcbed3d79e3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_utility_functions.py",
+      "bytes": 824,
+      "fileSha256": "1f0c9cca56cf020455cf89d9be3bf0a8dde642725ba8a03e35131a02f20ff821"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/linalg.py",
+      "bytes": 18411,
+      "fileSha256": "40fa46dad1b5a598338ebb538e33aed860eeddc23a5294ac2ebb06fe8d635d89"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/setup.py",
+      "bytes": 341,
+      "fileSha256": "5b1eaa0fb194fc03e2a8aa2560f3b4387bf8787198ae33d99830208d684e1213"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/__init__.py",
+      "bytes": 282,
+      "fileSha256": "b7fd8667794a72cbb879ce0630a3d40d869e3142720eab8195001c3e08fb9051"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_array_object.py",
+      "bytes": 17035,
+      "fileSha256": "150a00c4fe022c38afea28a1f0a2940d22ee60ce9db670dc0757f4a4c1f0e3e3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_creation_functions.py",
+      "bytes": 5023,
+      "fileSha256": "b3703508e5a65c8009761cddf2fed5b4bfa36e24aca6c913ab0632d014e99a9c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_data_type_functions.py",
+      "bytes": 1018,
+      "fileSha256": "a9cf24b519555d60b73ca8713d5588fd417d7f5cd9b699b31e3742b5fdded7a1"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_elementwise_functions.py",
+      "bytes": 3800,
+      "fileSha256": "0938f82cbc2dbac239d47929cc3d093e884fd5f7cdc68800545cfc58bb961733"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_indexing_functions.py",
+      "bytes": 627,
+      "fileSha256": "01bb811b212e7c401fdb86fb7f2f09421749b463dd3fd5c42313d32407c0145a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_manipulation_functions.py",
+      "bytes": 1087,
+      "fileSha256": "c1c7b6e5d4898ee6eb1a11719a26adcd1fc8a66358a7d20227d3d90419d94ce4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_set_functions.py",
+      "bytes": 546,
+      "fileSha256": "0f4d7a1bbbf7928e3d6cd0f9b151113fc22a417662c2bfb6cab29b04f27ea2a8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_sorting_functions.py",
+      "bytes": 602,
+      "fileSha256": "20d3e2627b8605cb265ad62a7534d7dc434798ce22531e33b3d29dc0369299d0"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_validation.py",
+      "bytes": 676,
+      "fileSha256": "4141bdc960b742190fc4d85b41e6a4c016e5fb446bd224ee678d7fd2c7d52065"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/compat/__init__.py",
+      "bytes": 448,
+      "fileSha256": "8801eb9ac656ce8b8e312c83f5b75213400f58c951a6a5bdd8c42017ccbac771"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/compat/py3k.py",
+      "bytes": 3833,
+      "fileSha256": "25eef809593feea23fa97ee92db61cb9026cc6532ad69a0621f448ac7f7d9194"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/compat/setup.py",
+      "bytes": 335,
+      "fileSha256": "dfa5f5905d02fcd5513977c9ef0dd241e066e4020306e25b339a93edcbd20e05"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/compat/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/compat/tests/test_compat.py",
+      "bytes": 579,
+      "fileSha256": "62a57aee948df275cf6d7684763866c9aa157ad37216ea55bf9ece304802c0a0"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/conftest.py",
+      "bytes": 4623,
+      "fileSha256": "1d9c96a3fc09cab6e09f25f123cb74e563a0fc8af3340327115ecef24a07a2eb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/__init__.py",
+      "bytes": 5780,
+      "fileSha256": "08db0ef806f8cb03365b3dc06ea58e1f78a0d6ae419e8f4fb1432b0aff87352e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_add_newdocs.py",
+      "bytes": 208972,
+      "fileSha256": "dfd24569e0cf376390952c1fa58ebf26af5f3b9bcc2fc64c17c278653c7f9ebb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_add_newdocs_scalars.py",
+      "bytes": 12106,
+      "fileSha256": "3c5f6ff0f39c48d1fa10b625b64c7d7b4ec35a03267ede8d272f73111dc9938e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_asarray.py",
+      "bytes": 3884,
+      "fileSha256": "3f675d95902c83588695e4517e842ffda2acd8dec01b0a68e4ae1942fe148e59"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_dtype.py",
+      "bytes": 10606,
+      "fileSha256": "4a2854cf8d691d10774362e261892e83a2e03012a1e9557cf4c3a92f19d741da"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_dtype_ctypes.py",
+      "bytes": 3673,
+      "fileSha256": "56e8388bbc4a8739cadad7488e69f879b7250a5a5a089c1265496f128625d048"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_exceptions.py",
+      "bytes": 5379,
+      "fileSha256": "75958aa9f74b46f26f6c0106fdfa1fffc8a410ac636a400332dcb590b0bf97f3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_internal.py",
+      "bytes": 28348,
+      "fileSha256": "7fd90d0ee4fe146c45d44b553952315d69c7f6033d9fe279576cf01ccbf81c49"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_machar.py",
+      "bytes": 11565,
+      "fileSha256": "1b76b74d7bbc5435bfd4433128a2e718c6ef51284421412f7b779a9419492771"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_methods.py",
+      "bytes": 8613,
+      "fileSha256": "9b7d69d168dc15419c91b2621e70a949a2101aabfe2eae6788862475ddf760ca"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_multiarray_tests.cpython-312-darwin.so",
+      "bytes": 122468,
+      "fileSha256": "1bde96789a338c081e54596d43a69e3e966cfb2121721660a33a851c7897b29b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_multiarray_umath.cpython-312-darwin.so",
+      "bytes": 3180800,
+      "fileSha256": "a51276f3aab2d91051aa0ced3ddaa39a776ae60132ca4c07a91b82a8b7a92ea7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_operand_flag_tests.cpython-312-darwin.so",
+      "bytes": 50982,
+      "fileSha256": "7ce8ff02611b3c24acea6e32af816f03aee2d0424b775e5bd0f6b885c3b3b0aa"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_rational_tests.cpython-312-darwin.so",
+      "bytes": 72674,
+      "fileSha256": "70f2050c9837f6fb35338ee11da2057b188dd9e243eb4bdcc7b207dbe2812e54"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_simd.cpython-312-darwin.so",
+      "bytes": 339720,
+      "fileSha256": "fb50e65a0d91275615500d72e8d7bc9d4ab0ea53a2fbaee2724fadf3248ecd17"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_string_helpers.py",
+      "bytes": 2852,
+      "fileSha256": "f9f40cf33e6cf3fc97e38d0f9a03441f74948c4a1730fa4f4b2b19c1664d6eea"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_struct_ufunc_tests.cpython-312-darwin.so",
+      "bytes": 51270,
+      "fileSha256": "62f443322b89973ca8187354be5de633851ccba6d716d19b7147edf4cf166c1f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_type_aliases.py",
+      "bytes": 7534,
+      "fileSha256": "a95e80665b145873164f27666726bbdf1b8190a5e250aabf5972e3eead826d9d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_ufunc_config.py",
+      "bytes": 13944,
+      "fileSha256": "f93c297bc767778e5c7171fec3e07d9ef53cc8239dd44d1edd6a6cb6cde0fdb4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_umath_tests.cpython-312-darwin.so",
+      "bytes": 70847,
+      "fileSha256": "83768e8b31bbb9ec5e50015d9ff41c62bc089f0b70096cbcf535e03e2891814c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/arrayprint.py",
+      "bytes": 63608,
+      "fileSha256": "c92663e1364515509ae7284c989285610621b904da6d94d105bd58a22083f9a7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/cversions.py",
+      "bytes": 347,
+      "fileSha256": "1ff88d229c7dfa1635710371aa34f677fe525d98496cca3f71aab8feae8b07b2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/defchararray.py",
+      "bytes": 73617,
+      "fileSha256": "1b52c4c64f9d31e55361186d620702644b07939b646b093b8225dc2b84392953"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/einsumfunc.py",
+      "bytes": 51868,
+      "fileSha256": "4eb2fab7bf45d07d00407d32e428fb4ead3fa739387d5162fb8ab88c99ae8d84"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/fromnumeric.py",
+      "bytes": 128821,
+      "fileSha256": "60cb71381839d5531e9b7f401d716cfb8fef39bd69e3c7a2ee78d77584d127f4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/function_base.py",
+      "bytes": 19836,
+      "fileSha256": "b47835a921d3cf578eff01d734546ddd0e34baa56d3d3d9ec9076b59b222e304"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/getlimits.py",
+      "bytes": 25865,
+      "fileSha256": "028a5c4d90c251730f704288644d5ba2d7379848662dbda9d7f7a396ad422ea6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/memmap.py",
+      "bytes": 11771,
+      "fileSha256": "c960492de542947b03f0162eb277fd6ddab2a4e30fae3dffce83bf950db354c7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/multiarray.py",
+      "bytes": 56097,
+      "fileSha256": "cd76967ff0d29051168d442a55108679ebf0b08ea48d0df1ebf314c00d58f1f9"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/numeric.py",
+      "bytes": 77014,
+      "fileSha256": "0e06a36820d78a2411fb3b96febaf1fd0840a52b1ae64e4538d2b7524f667d3b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/numerictypes.py",
+      "bytes": 18098,
+      "fileSha256": "a887fdbf53a93638d54335e72a90fedd5d35cb9063f61bb0e45f94e566b88257"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/overrides.py",
+      "bytes": 7093,
+      "fileSha256": "6146454bc44206f389dbbb07fa30d17323233829fd56280ccae418e09db52412"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/records.py",
+      "bytes": 37533,
+      "fileSha256": "e26a488d4a765ed671639703d92f2681f9fc182cd0186aeb92a2c1a8027033e4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/shape_base.py",
+      "bytes": 29743,
+      "fileSha256": "44f30ac40eff14202083f0abb84c65d0b7a19dccd24c56b103a86b71fad4ce7b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/_locales.py",
+      "bytes": 2206,
+      "fileSha256": "4b8c79b28a85d28c69058384f09f48932ef63bd276e48899f37e3d9bdde9582e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/examples/cython/setup.py",
+      "bytes": 496,
+      "fileSha256": "68047e4ef41a6d469b9c2cee07a51d59d9915da68f7c81bb3334c87cc17ed2d9"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/examples/limited_api/setup.py",
+      "bytes": 435,
+      "fileSha256": "a76c3b1756ab762fc64574ab9cd211f16d68787fe9826c3fd4fdb04b403623a3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test__exceptions.py",
+      "bytes": 2846,
+      "fileSha256": "42ac5048b5dba0f5c45701f3f93c84d8978897f4c2fab3ee8337e8db99db727b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_abc.py",
+      "bytes": 2220,
+      "fileSha256": "15f81803f1e36008bc5d618afe83a1e99c3ce9c841fca1bf5e85bfed9945a787"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_api.py",
+      "bytes": 22995,
+      "fileSha256": "50c73b4af733010e67807c44f8da1756f369573611ae7f2833014db5ad72312d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_argparse.py",
+      "bytes": 1969,
+      "fileSha256": "0b4cc16f043dc73cf29977bf847a569e75903f03a2d9975007bf200408091ef5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_array_coercion.py",
+      "bytes": 34379,
+      "fileSha256": "cd8e0f8e5b78419d30ef55b15862c772b3e79e1105e75c976152e0e47308cb97"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_array_interface.py",
+      "bytes": 7774,
+      "fileSha256": "f2d1a08f53738bbe87fd61791942e4c6a58bed8bbf5dfd25bd32593b03812ac2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_arraymethod.py",
+      "bytes": 3244,
+      "fileSha256": "5698c36139a83034d9718ec2b06ce29c187447f3880aec0eca45826e60914195"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_arrayprint.py",
+      "bytes": 40462,
+      "fileSha256": "70a688a03f59bec8c91f43c7c19c8ec66711701b7590dd567c59dea95aacd1bf"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_casting_floatingpoint_errors.py",
+      "bytes": 5063,
+      "fileSha256": "5b7160934a0ab5716febce1f119ecf3b08fa0c74d82b4263fe81912d9f147720"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_casting_unittests.py",
+      "bytes": 34298,
+      "fileSha256": "f7ebe4474a17733433f040fc0f11953e66a50bc2195deda32a0382306afc8488"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_conversion_utils.py",
+      "bytes": 6559,
+      "fileSha256": "8cd85b34d23e4fcaad427b083046b1eca14ddf49238742029ed2ccc13cb12794"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_cpu_dispatcher.py",
+      "bytes": 1542,
+      "fileSha256": "bff4a5854a4436ea1eed06178b3cd82132c65daed67d9ee3a9caa66d2060ec95"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_cpu_features.py",
+      "bytes": 14892,
+      "fileSha256": "9a2786c7b7715c58b24d86ad6dc0828c88d1ebb527da155c6c9c781847f6c85a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_custom_dtypes.py",
+      "bytes": 9401,
+      "fileSha256": "2688119adb432f07d0dcf4db7b012718b29ca3dcd5d8dbb7c887eb31e0acc7f2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_cython.py",
+      "bytes": 3755,
+      "fileSha256": "b79fa1e1748814d2f2c3ff41200403625f3ff34b7fa47d1209f11ad557ffdda2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_datetime.py",
+      "bytes": 116211,
+      "fileSha256": "daf0066eb0909acad63570955ce319a941999f673e7104fe799d704e9ad86dc3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_defchararray.py",
+      "bytes": 24997,
+      "fileSha256": "17cf0752407210fe07e9c27f213bc87b46bf4f5047d8939d472b0c0aed57227d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_deprecations.py",
+      "bytes": 31076,
+      "fileSha256": "c369611dbf96f2187b46813fd05b60f2d8691bcea3bdb1402608a8af6d836364"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_dlpack.py",
+      "bytes": 3522,
+      "fileSha256": "7039701664e899b6f6ac3781f111c4009e1e54c5220dbc3c3b3e49a35350c24d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_dtype.py",
+      "bytes": 75702,
+      "fileSha256": "274f69245e7dbfb50eea236e24521228fd832cf81d910fdd7f938030344b8a45"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_einsum.py",
+      "bytes": 53712,
+      "fileSha256": "4334003c80be2234d5dc3c73f7b8419ef2c10a617c929b014c17244e18604634"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_errstate.py",
+      "bytes": 2219,
+      "fileSha256": "537193f48d39f23905ef6e66c7819d594afd46871e0a418357b1a8efd540e306"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_extint128.py",
+      "bytes": 5643,
+      "fileSha256": "80265f0303ce6fe1754cbb0411e0c8d1a9906301e4fbad3e3978b471c66bad9f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_function_base.py",
+      "bytes": 15595,
+      "fileSha256": "21bb3af965d913986c471e150a75fe71939660a53ee4f1578e8bb0010ce09ea4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_getlimits.py",
+      "bytes": 6718,
+      "fileSha256": "6a9771af4cca9316951c85292eba80bcedfdab9e0928dd78b15e3149b2b621fb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_half.py",
+      "bytes": 24593,
+      "fileSha256": "5583f26a9f4660e599ba986c7c5a1f708465fa86b951faedbfcdce4e9e9acdd5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_hashtable.py",
+      "bytes": 1011,
+      "fileSha256": "655f072fc3640e7a1065f9e37bb04fd1fc88a787d216a8cab10738d0f6938207"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_indexerrors.py",
+      "bytes": 5130,
+      "fileSha256": "90df712e5e85553ce623b7ee9a7fdcb99de4d289979d37ad82d0a73d8e3872fc"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_indexing.py",
+      "bytes": 54314,
+      "fileSha256": "c74a235ae84ec160f9319ba227d35c8a6dc2824c08f8695d5b1ad20a68e61493"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_item_selection.py",
+      "bytes": 6458,
+      "fileSha256": "908df49225fc988ad960f9f48f0de5186c35aee645e0fa44f73c3e69a8bd10f0"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_limited_api.py",
+      "bytes": 1172,
+      "fileSha256": "e723b49c6982299f5bdd2eba40feef63e1c8800a323ad1d99a9f26bf32ae3872"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_longdouble.py",
+      "bytes": 13905,
+      "fileSha256": "8cef18326fc7b33f973ca6e6bfa88c70e747813948164293c00b71a72dd0d691"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_machar.py",
+      "bytes": 1067,
+      "fileSha256": "ff9fd30d456d009bc92398c17c414aa4266d01f282b0216deed5e5592916cf37"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_mem_overlap.py",
+      "bytes": 29086,
+      "fileSha256": "409d2e9d60ff2cea00180a38adad08bd87a78f9e88614b62cf57c424499363d4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_mem_policy.py",
+      "bytes": 16801,
+      "fileSha256": "0976b5d05430d908fa32a26e682f059b8b25b288a92858c2229605e9ce482005"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_memmap.py",
+      "bytes": 7477,
+      "fileSha256": "b59e6526cff8645b099a0dfdd99437ddf5f49bcb5d7d9f19b58f4bab8d4b36d9"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_multiarray.py",
+      "bytes": 380106,
+      "fileSha256": "18fbf820947d7628cd1be89c52c42c5f6b410f645d3f712151e858e1cc6f5505"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_nditer.py",
+      "bytes": 130818,
+      "fileSha256": "9d5434d1a3713c7a9fe19705b377bd0150caeb84c2aa53b44f37e87130000994"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_nep50_promotions.py",
+      "bytes": 8840,
+      "fileSha256": "d93c2d16f8f52c1a584ed751e8d15ed5100019720996d2eac29035be1402558e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_numeric.py",
+      "bytes": 137294,
+      "fileSha256": "646356e4d2a04a1123642fd370f3ad4ee45a4ccfc66ee336d6ef360f6d3950fb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_numerictypes.py",
+      "bytes": 21687,
+      "fileSha256": "7ffc4c8d9267c83c2573a5c2addef56fac75ffa74058ebfe919dfe344ab7ee15"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_numpy_2_0_compat.py",
+      "bytes": 1630,
+      "fileSha256": "915093017b246bb5e2e70fd361db968627749e50aa23a36f9adfa00e762cb8a2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_overrides.py",
+      "bytes": 26080,
+      "fileSha256": "b7480e64eceeee97af139f0703e9e915826a9c89c747e2cb064967cca2561eaa"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_print.py",
+      "bytes": 6837,
+      "fileSha256": "12b64059df3c6f4ca0484a18a5dd012f6b458e47ab32d9f5bd9edd5af68da937"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_protocols.py",
+      "bytes": 1168,
+      "fileSha256": "7c45c4f4af6cdb6a22556917f76058fa0d34fae5c22be1f18d9859c716002857"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_records.py",
+      "bytes": 20269,
+      "fileSha256": "a65ba2b79c7a8e45a83c422b1d7335dcbdf166eb924a26b1a1716c39d91a9025"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_regression.py",
+      "bytes": 91595,
+      "fileSha256": "489a3d70f4d5af648d8e182d5bb6e850cc8d4255f1ca0b19e60d28caa0bc124b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalar_ctors.py",
+      "bytes": 6115,
+      "fileSha256": "a8321957eb41ba4c00c4d0e15261ad1f709e9835e54b7c5dfeadcbe76b68bae0"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalar_methods.py",
+      "bytes": 7541,
+      "fileSha256": "523fb3534cf3cca023301769933b166779d2163e60264525aa2fdeba13987675"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalarbuffer.py",
+      "bytes": 5580,
+      "fileSha256": "1522fde21ae2597d7fb95e99df7c01dd95d4ae99a65f6fb1f3b90d8c8c547819"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalarinherit.py",
+      "bytes": 2368,
+      "fileSha256": "7cc2270c62ac887dc84bfd9e8d9b48726259d11cbc73b915b07c7bc29e570e83"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalarmath.py",
+      "bytes": 43247,
+      "fileSha256": "5d98ff9b62364cb92d25d143d525a3d97b55f214f6e952316ac0f3ddc005be00"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalarprint.py",
+      "bytes": 18771,
+      "fileSha256": "d79f7d5b95f4b631a10674908da957920e8063c7875e7afa3ccaace2f61942ab"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_shape_base.py",
+      "bytes": 29723,
+      "fileSha256": "0fd85a7ae515c77c77a4e2e6150f6f533ee25384f66c54ec3e823c1e04a77055"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_simd.py",
+      "bytes": 48696,
+      "fileSha256": "f8bd548489fd12efdeb8bc1a494edb3d17d8a5658e4dbe37aa8be8252ed6b3bc"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_simd_module.py",
+      "bytes": 3902,
+      "fileSha256": "392a58847ff7403c48b7241c696e928d75b9ee4da6fb0791c2960e9c98c2a8dd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_strings.py",
+      "bytes": 3835,
+      "fileSha256": "03db7507ae6516b6112d780325283798c0c07bf872a483dc4cc54e7406086d4d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_ufunc.py",
+      "bytes": 124907,
+      "fileSha256": "e694b6c772c00879fc1a881861a77c2d10230722bb1a0f714c3f62937774166d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_umath.py",
+      "bytes": 186482,
+      "fileSha256": "86e1e972526a90edf693b0537e54478fc9c89b3837a7acb2af2792f4bc872965"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_umath_accuracy.py",
+      "bytes": 3897,
+      "fileSha256": "9857157735e1843f66aa1ccb0c9559b167c21db8db150e977849791bc97e3d37"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_umath_complex.py",
+      "bytes": 23247,
+      "fileSha256": "5af6596567a28e8e7646239fc7e1bcddbc7340ea7f209de2f5f12750356e90b4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_unicode.py",
+      "bytes": 12775,
+      "fileSha256": "8545c8c0c9a8abcf72fca5d6cee5d5c90697bd1c068df6384ef289b026f28042"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/umath.py",
+      "bytes": 2040,
+      "fileSha256": "25b4ff4b19d9ff73049a3388f54b57dc2700cd7e50fb84439679e10c0109e55a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/umath_tests.py",
+      "bytes": 389,
+      "fileSha256": "4c8cda0dfac41c781273627993114489babc30e3e1c12bb239939406c64d5523"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ctypeslib.py",
+      "bytes": 17247,
+      "fileSha256": "3e8e170967f1870150d50f31f0379ac8688c0892f14446820e45727a569dc415"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/doc/__init__.py",
+      "bytes": 508,
+      "fileSha256": "398984f85eb1d020f4e4f0836363225b51cb97007a8bdbe10e993e6b7af89476"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/doc/constants.py",
+      "bytes": 9155,
+      "fileSha256": "3e55e88fb6f803c01af670036e0f37bb34c1449697f1dbc998475b9f81433cfa"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/doc/ufuncs.py",
+      "bytes": 5357,
+      "fileSha256": "8b56a52e0d7d98dc82159d8b6123991a6fbe46c44dd71eb753f51853e377c7ad"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/dtypes.py",
+      "bytes": 2229,
+      "fileSha256": "06e073b6b3d045ab149956615ebdbf36026e8dd513361370779f696591e4de50"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/exceptions.py",
+      "bytes": 7339,
+      "fileSha256": "ee3eedbfc7305c6658825772322b069a7031025dace18534bdec4c13cd726250"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/__init__.py",
+      "bytes": 5565,
+      "fileSha256": "9beb72fd68896781957d5e7efa427730525a2d77acb73e44a3ee07d053ec70ae"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/__main__.py",
+      "bytes": 130,
+      "fileSha256": "ea2da3547d9f3eb895d5aa1c4d8fdd505bd62b5f2a6bece3a6721203e3a9177c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/__version__.py",
+      "bytes": 34,
+      "fileSha256": "ec71dd8d1f361420667edc0c472ae585c123fbc98641bea8087fb09543c7e0dc"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_backends/__init__.py",
+      "bytes": 299,
+      "fileSha256": "eff6c0edcff10e92dce3ff2f3df1f7dbe2f19fd7dc513823436e6caddbf0bc03"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_backends/_backend.py",
+      "bytes": 1187,
+      "fileSha256": "18a6fdf94685b334f4e39bd4815ba43ecd67f7b8b2ca3a9a86b58ac4b38a358a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_backends/_distutils.py",
+      "bytes": 2383,
+      "fileSha256": "a718766144456184b29083af045c15be1a0d5f5a1293e737d083cf873964a3ed"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_backends/_meson.py",
+      "bytes": 6916,
+      "fileSha256": "822fa76e73c50c2dfcb2e99f02383e43914fbba9cd9324174e312e55ff56f427"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_isocbind.py",
+      "bytes": 2360,
+      "fileSha256": "cda060a5f3cd466c551b776850895b6488b207df7432c5e2c0369bad28fd1e74"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_src_pyf.py",
+      "bytes": 7654,
+      "fileSha256": "e2de9337864a59c882e1fd73e9fc1a1aba481a11ca462c077dcacd8f8148cc28"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/auxfuncs.py",
+      "bytes": 26539,
+      "fileSha256": "74db386f628321c1b833584f06f0f4f7e561ec20f394f22b16c70e76f2f7a75a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/capi_maps.py",
+      "bytes": 30563,
+      "fileSha256": "10d8d8c9e67708225c2f024982628e498ac3d4a3ee869c1ab97a9e8b3755e79a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/cb_rules.py",
+      "bytes": 24992,
+      "fileSha256": "e53b876c95868ec17ac953732ae576b409f074bca171696676c8d89433993afe"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/cfuncs.py",
+      "bytes": 51913,
+      "fileSha256": "289c96ee67639854a6c6cb1f79e80626ce4d67217799932036f3b137dfaf6074"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/common_rules.py",
+      "bytes": 5131,
+      "fileSha256": "80707be96ca96e456685a0ff456872f0e778cc34e08fc71b0ce754748a7a3c84"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/crackfortran.py",
+      "bytes": 148553,
+      "fileSha256": "12b2dd9163fc3317b25b9bd53c65f0cafaf1640c329a5bc8042d2d876aef2bbe"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/diagnose.py",
+      "bytes": 5197,
+      "fileSha256": "d12457044da126028937f45fe199f4d282970bf4e46b779f3d6338ef383a0686"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/f2py2e.py",
+      "bytes": 27717,
+      "fileSha256": "e6dd3ddd9438c6cd3fd146f269855ddb203611539a38072e536f4923e214d808"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/f90mod_rules.py",
+      "bytes": 9594,
+      "fileSha256": "a2d9b7fdd9952276b47815472eeffaf77b376bff36954de9a9ea8369c588dfbb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/func2subr.py",
+      "bytes": 10298,
+      "fileSha256": "e9dd91e5ac2e1d14f8c7381f51fc12ec91d3aa184089e497704365b2c0ffd9ce"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/rules.py",
+      "bytes": 62727,
+      "fileSha256": "07817149811f67fd63ff3f46ba540d67504dacfad4be5537c9bc704e4ac8c632"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/setup.py",
+      "bytes": 2422,
+      "fileSha256": "326015b294fc0c34ea0ee2fc6498712bada0d2572ca38bea23a40d43d0ac7e84"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/symbolic.py",
+      "bytes": 53270,
+      "fileSha256": "8d60680301020b145d59ccd1f6becee94111718987fc66dd70045e369edc9896"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_abstract_interface.py",
+      "bytes": 832,
+      "fileSha256": "0bcfa5cb4fd3aa49a940d666c0f1f0a36215d8c047d234048c0869a87ae0f18e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_array_from_pyobj.py",
+      "bytes": 24049,
+      "fileSha256": "4f17dff3d554784856a940915726c8aaca87e1842fa64e14ca39a1fd78f2322d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_assumed_shape.py",
+      "bytes": 1466,
+      "fileSha256": "15e6aab6b5b205fe6ec80adc988d03d9efdfefadda48ca605374267435defad0"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_block_docstring.py",
+      "bytes": 564,
+      "fileSha256": "484a6eabbdd3f6856d1e14558a515fd7117b9dbebcddde3e2afed5d247cbe000"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_callback.py",
+      "bytes": 6494,
+      "fileSha256": "7117929558e09e84fbe309ad367fa81086622544df457ee58e396a262ef5e884"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_character.py",
+      "bytes": 21868,
+      "fileSha256": "dee823335962ca63116d8f30b9bd5e89aa7e8ddc8d6151f194d641a8da112dee"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_common.py",
+      "bytes": 896,
+      "fileSha256": "9bb4d3489b79cd464a245f8c414793b42cb15bb6304414844c835718f16ef12e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_compile_function.py",
+      "bytes": 4186,
+      "fileSha256": "f5dfc567c3f6c1b225436a8f0d1aec16a3dbe27307f2d896a9864df8ffec842b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_crackfortran.py",
+      "bytes": 13441,
+      "fileSha256": "cb5c7753e8e54160f9ae64d7cf52364654f3ecb11f6c8eaac420e44797f33f06"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_data.py",
+      "bytes": 2876,
+      "fileSha256": "1c57263d86e2bde29afacc09f31f1795147db0cd04481f4510dfadc599c74e89"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_docs.py",
+      "bytes": 1662,
+      "fileSha256": "8eab6e1c4e598f13f80fc39fdc5933cf7e85f3fd2a29b792d38d3f9b469ce2fe"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_f2cmap.py",
+      "bytes": 391,
+      "fileSha256": "a7e4b295baf772d74a4f751057d173a42b983c7e54ed5ca7f307971408e223da"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_f2py2e.py",
+      "bytes": 25423,
+      "fileSha256": "7a8b301fe75a304065b9ea15a715eb0e5a1a842a6bd112f31dbaf7cc11ceb239"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_isoc.py",
+      "bytes": 1406,
+      "fileSha256": "fe73d33f134411a8222ab89905e14d7ac39ab6d2251c3cda34a9a3df9c710c16"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_kind.py",
+      "bytes": 1671,
+      "fileSha256": "68e310481a03fddc38f5a70a376e7f69b12f4012c8dbb0ec9d621bf423694801"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_mixed.py",
+      "bytes": 848,
+      "fileSha256": "0adbb0f87ec3c613e34adef065d276c5f7dac08a040423d673917b3d2918e076"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_module_doc.py",
+      "bytes": 863,
+      "fileSha256": "b230975882aba8c0f5350d43500ce042a9234b9c3d87d82f33f2e3dbd45d72b8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_parameter.py",
+      "bytes": 3941,
+      "fileSha256": "00323b115fc2338ced202a6a1ea7aaf0b23e59d07a717d2db5ab5d45d8dbb140"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_pyf_src.py",
+      "bytes": 1135,
+      "fileSha256": "783d1b66efc659fa02abefb05aa10a45ff85da1e40c284f23ba18c03dc093ebe"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_quoted_character.py",
+      "bytes": 454,
+      "fileSha256": "7298cc76b1f08a69e4a0991777f5bf152961e37a16cad639547c925bda2c90ee"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_regression.py",
+      "bytes": 2532,
+      "fileSha256": "bffe910d0afa21c3266c230495fcd148b3e06611e71f997df6ecedadb240cea1"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_return_character.py",
+      "bytes": 1493,
+      "fileSha256": "d7c1c9b6247043b6bfda674f5289c3e5fa2b29664911aa43f958b50ec6d38d5b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_return_complex.py",
+      "bytes": 2397,
+      "fileSha256": "059208a90d5a6dd88f2e0566bb4dffab7ef20ad343d228f11923211b3d967fea"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_return_integer.py",
+      "bytes": 1758,
+      "fileSha256": "b7efbd52c74b17d7e52d342fedad0a4d256806ea03b539e6386d902053c83557"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_return_logical.py",
+      "bytes": 2017,
+      "fileSha256": "5c29a9f04f08e8139e358179f478d214076fd6133d59a0ef97c5034b5d3fd39a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_return_real.py",
+      "bytes": 3235,
+      "fileSha256": "0137a4e4033b74208f788be830e408b79c85345ccaac56f52a7a3c078334ae7e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_semicolon_split.py",
+      "bytes": 1635,
+      "fileSha256": "fcc76c8bce25112d7ca4f8e5f49f90b1b1adb55e2d3c516366f26f7a335ca8f7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_size.py",
+      "bytes": 1164,
+      "fileSha256": "aba62a42f732a9d5c97966c68a34e209bc72106dc490f72f4fc025016e9108ca"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_string.py",
+      "bytes": 2962,
+      "fileSha256": "e7164e7dd45ea079c8774f79d177e6b5f76e3cf7c16ed324cc1a1732dca0bcc9"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_symbolic.py",
+      "bytes": 18341,
+      "fileSha256": "dbcaae93691329f5a129ee7a9f8bc8349f06f7078a05f73b1f2b0c944f49dff8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_value_attrspec.py",
+      "bytes": 323,
+      "fileSha256": "ad6c0905f136a86cea8a5659bab27eeee70da090c80b27ba94b7ad4122c579eb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/util.py",
+      "bytes": 11167,
+      "fileSha256": "6c4846ebdf5ce1b2d53d1d9647c7d5ebb6af817ea41f923be1289c19bed9ed3e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/use_rules.py",
+      "bytes": 3527,
+      "fileSha256": "de94c338fbabea06cf1cfb70b8c24f42fa6750cc37f4b6b0d4a1521f472807fd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/__init__.py",
+      "bytes": 8175,
+      "fileSha256": "1ea8e617ab3f761d118b8519cd40ed38a6cd5327c07c90167b0ddedc42ff2949"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/_pocketfft.py",
+      "bytes": 52897,
+      "fileSha256": "5e49bcc1c3f827204d31ba746681c85a13439609625f6e11ceb0eea36f6e464b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/_pocketfft_internal.cpython-312-darwin.so",
+      "bytes": 102310,
+      "fileSha256": "cb0d6746e9435b5f24509a00ce3b659f6d82b819195fc031ae61a3e4f94029dd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/helper.py",
+      "bytes": 6154,
+      "fileSha256": "68d8f501c2efb5fa17dba4622cec1c47e93641232e0599068f616ed027853c9b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/tests/test_helper.py",
+      "bytes": 6148,
+      "fileSha256": "c2181e690f0fcc57f7075c246d7a1b199e6c1785b13e9e207f550f51565eb2df"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/tests/test_pocketfft.py",
+      "bytes": 12895,
+      "fileSha256": "45d7820af510989615bdc70e2704e8a1b4ca0e0f72cd42f4ea8f4c90f9917e62"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/__init__.py",
+      "bytes": 2713,
+      "fileSha256": "5cc3cd2641bf990fffc6ebdb7f439ca68b6031b03da30b75d191d8567607abc1"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/_datasource.py",
+      "bytes": 22631,
+      "fileSha256": "0831778a6e88c5d63732ee9fc114269121019974b79105489d0e29957b285fd7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/_iotools.py",
+      "bytes": 30868,
+      "fileSha256": "620f4709f3e0e2d6e16dd80b3dcc52322657ab5c43a6bbc928b79b2f0843b336"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/_version.py",
+      "bytes": 4855,
+      "fileSha256": "eaf2bb73335207f2ab5b1dab649cc9d69c8e73bdd0d3b84081f2c1e48b540a75"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/arraypad.py",
+      "bytes": 31803,
+      "fileSha256": "6ca3fb652f4d605633a9293c3a7a452c5accb2e6b89bf85ca85b22edc1a4ac91"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/arraysetops.py",
+      "bytes": 33655,
+      "fileSha256": "189d91864cc826621bc321ba8772ce1533d783ada433db5c5756beeed75b56e5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/arrayterator.py",
+      "bytes": 7063,
+      "fileSha256": "050f7b4b4d33bdf5115197deb34199a3ee61c9d60d46ebf05f52356cbcde4629"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/format.py",
+      "bytes": 34769,
+      "fileSha256": "4fca893321b60c35638d834da54bc181f03db42a36dc84b4c3d6f2441eadc304"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/function_base.py",
+      "bytes": 189172,
+      "fileSha256": "2218607d2998244f9d1e850e3171cf886617b28f8d7573e92d717dcb480403a2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/histograms.py",
+      "bytes": 37778,
+      "fileSha256": "c6c8ffaa9699a08d81bf5141a58f2620c3c9ad8462b8806cce7ffa90eed81510"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/index_tricks.py",
+      "bytes": 31346,
+      "fileSha256": "e0f12f5e4e9515392db4c562601542e320e1c8e88a2289fa269226d1dfc298d8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/mixins.py",
+      "bytes": 7071,
+      "fileSha256": "cbafcccd0ba2363bfed4415544eaafdb2d9c0098b95f8ad06336d90b25325e0c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/nanfunctions.py",
+      "bytes": 65775,
+      "fileSha256": "e848f3c9d665ba02337e210d2ad0b8c9c67635c92df19420e6fe83ead5f54a25"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/npyio.py",
+      "bytes": 97316,
+      "fileSha256": "3548ed16f0263dd4e3c0943e89afb16c2afce3d33f33a36294fe481df90a6918"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/polynomial.py",
+      "bytes": 44133,
+      "fileSha256": "e80c37ff6bdd6e1e2eac4450e8d68f85ff5afd3d68d68e9c8e6ddf6f9677fd81"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/recfunctions.py",
+      "bytes": 59423,
+      "fileSha256": "fbdd006d65af5453aa5543cb87d2bd35874a507608812132836637e4c9ce5540"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/scimath.py",
+      "bytes": 15037,
+      "fileSha256": "4f8213cac660aa163527c231c970ad8a81e3313836722fb88b79abf53045d940"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/setup.py",
+      "bytes": 405,
+      "fileSha256": "d0ae4d24abaf2af3445a9f845fb8f43838b765042020c1e86f348526adc6ef23"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/shape_base.py",
+      "bytes": 38947,
+      "fileSha256": "02108ef43132cac13e3fe40917daf252d275821538ff498e461009e7da6839b5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/stride_tricks.py",
+      "bytes": 17911,
+      "fileSha256": "6eb6396fed18409b881f609abdfa488a73289724d4bf993d0d4bcba19fa29a2b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test__datasource.py",
+      "bytes": 10571,
+      "fileSha256": "eb92977d452fa7cc174aa8108acb98964860faa1e3055e455d87ad2fc05afab7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test__iotools.py",
+      "bytes": 13743,
+      "fileSha256": "1deac2aaf0c4d3b2718c54255847e964eee50bdcf449baf7cf6d064aeb6808fb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test__version.py",
+      "bytes": 1999,
+      "fileSha256": "68edd882402884bb0bcc2350eef8c8c1da4550ccf470f2db72ebb12248ee37be"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_arraypad.py",
+      "bytes": 54830,
+      "fileSha256": "a1ba211dbc8cd203d83d491dee2252392883ab2aad26c8c336d417ebc342e253"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_arraysetops.py",
+      "bytes": 35912,
+      "fileSha256": "e7e4f531585f20c8af6adf19e3b199c3465a47cd755bf16c90cd5b0179c5c8b5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_arrayterator.py",
+      "bytes": 1291,
+      "fileSha256": "018b364b05796a7920c27bca23d4523b58d9724d75f27bb74b26789e0cd936ca"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_financial_expired.py",
+      "bytes": 247,
+      "fileSha256": "caae66a8632faa99228b0f42b9984982b61aed2aae8f5997aff1be22f0058302"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_format.py",
+      "bytes": 41028,
+      "fileSha256": "c55d288b57a846757000085239c3c540741617b4dfb113ad0d84a140b3ed75a0"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_function_base.py",
+      "bytes": 157830,
+      "fileSha256": "0c12ae80850415330fee0ea22f56e4f7ce84ea5742adc35d04258e25b4256bf6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_histograms.py",
+      "bytes": 32815,
+      "fileSha256": "d7afd7269f9e160b2e33c078983429438c3f21bdbd1e0d043cef9616c75a1560"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_index_tricks.py",
+      "bytes": 20256,
+      "fileSha256": "563cf6e58e87fe2874884136006d246b13bd53c3f07174aba1fcea9cde170702"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_io.py",
+      "bytes": 107891,
+      "fileSha256": "dd3a30d69b9cad0ef3ee8b0d3786b682b0585280463644048639828d74fa55a8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_loadtxt.py",
+      "bytes": 38560,
+      "fileSha256": "8307032432662c944c2e9837db6ca3435233239d39c3d12a268ab80e60cf09d2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_mixins.py",
+      "bytes": 7030,
+      "fileSha256": "5a2bf0cf75c15ac128cc6cebceccb2bcbdea02e135e2dd411e4d8b3e6f59f597"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_nanfunctions.py",
+      "bytes": 47609,
+      "fileSha256": "d35aff9a64c2bca55d66e3864c41cd0d95eb312ef6e2eb3f8f064037309def80"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_packbits.py",
+      "bytes": 17546,
+      "fileSha256": "396180779839186d2097b587a8d7f0919ec6fb6aebb4bb76b08f39e0f1b89e7c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_polynomial.py",
+      "bytes": 11395,
+      "fileSha256": "511a2ec49a6bf054398622b26ea86d39c2c0edefb7863e245b38cb051381cb20"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_recfunctions.py",
+      "bytes": 44001,
+      "fileSha256": "ea3ce8b8f110ed486d8fcffe5b9c9323aca6369da72e099d1f3c5d77be2356e3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_regression.py",
+      "bytes": 8257,
+      "fileSha256": "2b31859214dcbc41bdee6ca6a0e43684fd8212bda73d9a2ed19b5fe3e59a5c2b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_shape_base.py",
+      "bytes": 26817,
+      "fileSha256": "da240210547a7af56917cc2869e9f150ece8a0791fb8c62405a523f1e73227e1"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_stride_tricks.py",
+      "bytes": 22849,
+      "fileSha256": "c29ae95961f97aad3b0d8eebcc6d160efe5f32d2f1cd1433e9f9ba4d95a549c4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_twodim_base.py",
+      "bytes": 18841,
+      "fileSha256": "965fbbd9186a088b483c1f7b9ce5a11fb1f6f768789d5217ff0d6da0a4cf3148"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_type_check.py",
+      "bytes": 15114,
+      "fileSha256": "971087e5a029595621852a034122c34c21cb547b8ad9cfa305b9df9d952b39a0"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_ufunclike.py",
+      "bytes": 2982,
+      "fileSha256": "e214a75c69520bc1c4fbfa5144ccc3f3e1c8e21187aac016bb5a43d28da43c8d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_utils.py",
+      "bytes": 6218,
+      "fileSha256": "455031af3485bba3770b8fe32200254c339617f07bc2bdafd58db4757e6ea583"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/twodim_base.py",
+      "bytes": 32947,
+      "fileSha256": "32fce7fcfc928486fd9bb9c98c9e087ad771c262d812c08f1ef2682bb9f6be25"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/type_check.py",
+      "bytes": 19954,
+      "fileSha256": "fc43ad076f7a9c5625353ef3b416280bfc8af5ac9c21bd0a4e6463bf355d64d8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/ufunclike.py",
+      "bytes": 6325,
+      "fileSha256": "fdc78119b18230e777bbf876515cf26912ba658eebca827418907bcea7091b7c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/user_array.py",
+      "bytes": 7721,
+      "fileSha256": "2c4f79f3ef82324048dabde5d524319821dd092c3a1d8ebe4615829ddbb3180e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/utils.py",
+      "bytes": 37804,
+      "fileSha256": "e8d76579a10b662a8045d8fe102663c6dc0b7f56ea92539c2b8de6f72a1979fb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/__init__.py",
+      "bytes": 1813,
+      "fileSha256": "9a97651175ad4efa45ec89fbefa38d2f0a7a448ca8e14fc62cf4f52f5788267c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/_umath_linalg.cpython-312-darwin.so",
+      "bytes": 173040,
+      "fileSha256": "86f6ed1fc4db4ff11231795e78656dfa158e624fd9655916329a8695ea0448f7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/lapack_lite.cpython-312-darwin.so",
+      "bytes": 70640,
+      "fileSha256": "f220d5799269974b4187ed31550479616b9f26b1e0ff33e93089fe17e24312d5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+      "bytes": 90923,
+      "fileSha256": "90354ad460716d48e5460c570a811f911266f32acdaf522eee1327dab28af111"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/tests/test_deprecations.py",
+      "bytes": 640,
+      "fileSha256": "f69fd2466b718f6cdcd5da18f487b7772cb92735b2fad090585a1a8dc0095263"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/tests/test_linalg.py",
+      "bytes": 78085,
+      "fileSha256": "ae0be62ba3abef4bbc98dd38a6e7ad2f71604b167c7c9ace948e69b538025399"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/tests/test_regression.py",
+      "bytes": 5434,
+      "fileSha256": "a9bba0526ac43726e411a3351a17c0d35457414cbc024cda95badfcd22205263"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/__init__.py",
+      "bytes": 1404,
+      "fileSha256": "7603f459d9cea69876f0577a522aa8c832a17eb72dd07e905aa6c27044ec93a3"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/core.py",
+      "bytes": 278213,
+      "fileSha256": "e0c82555126d990f7f88855a4366fefd59b0d538c0844b0c25db4a3a1c811574"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/extras.py",
+      "bytes": 64383,
+      "fileSha256": "302ed03d2df83c2e30c4d6cea7ba53cb9edda85f41f8be8bd4a308eabadf7b6c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/mrecords.py",
+      "bytes": 27232,
+      "fileSha256": "75e81de9d2da0c4bc458d1e6bd29d4657a2cd5cb08cdaaa347f8c0bad9bc25f2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/setup.py",
+      "bytes": 418,
+      "fileSha256": "32a98c89caffc479001a81be4fb349e1875464824b3b8645a7a0261090e5ca1c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_core.py",
+      "bytes": 215100,
+      "fileSha256": "c5de52de86b48ce6e8f239ec264d3ea38e9df8a342dd1b603512a29c9798fe41"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_deprecations.py",
+      "bytes": 2566,
+      "fileSha256": "9eaff0155b761011dc4f7007c5ab6d7ca5f1d890dfd4ae43f90073514d3fd790"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_extras.py",
+      "bytes": 74858,
+      "fileSha256": "957e1c6dd1831176811f3037abc849c6f7b8eb7e57089c3800fec53bbce139f9"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_mrecords.py",
+      "bytes": 19890,
+      "fileSha256": "3ec26152500181da52b0f51e8a3a277f214dab3e407cd486413b4952d7bbcadb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_old_ma.py",
+      "bytes": 32690,
+      "fileSha256": "87806771ec417018a0aaf64c03a4630e3a473eead6b6df7d03b2936a0dab98eb"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_regression.py",
+      "bytes": 3287,
+      "fileSha256": "7e832923496e02fc24911a407cf0d5ffcd748755112125c366199a361c5be749"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_subclassing.py",
+      "bytes": 16967,
+      "fileSha256": "1de4c813f9f523c6adc3317cb69bcdb461e9fb476633c3d3f004b820359b72ca"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/testutils.py",
+      "bytes": 10235,
+      "fileSha256": "450c344724bb84e4954e4e0aac21a57aad151e59c3ab3c3068bb6e65b444e3f2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/timer_comparison.py",
+      "bytes": 15658,
+      "fileSha256": "a48192646faa6186254564938333e5c8200835b18a857ad9ac364106388cd3cd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matlib.py",
+      "bytes": 10465,
+      "fileSha256": "fb9e2f4ee18881e4cc83d6549849513d9e07afe5d9fa89bdc4bcc0b12a13be77"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/__init__.py",
+      "bytes": 242,
+      "fileSha256": "04706940aa10bf81234f452958103e0a4e0be4eb0ca9323622e636e29fae7179"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/defmatrix.py",
+      "bytes": 30656,
+      "fileSha256": "2577491a6d4b6b238e5df2a9a7b39565f6f4a73ccfe0bc21e39b1326b95e00b7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/setup.py",
+      "bytes": 426,
+      "fileSha256": "d6bec946448ce07c95a2b82d8e82891962dc39c3cedf09af8afa5e12c56d0048"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_defmatrix.py",
+      "bytes": 14982,
+      "fileSha256": "f04ffecbb543dafb2ad72f02708f249b7ee9a79a9c02d91c88ed7ac6a7f6508b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_interaction.py",
+      "bytes": 11875,
+      "fileSha256": "3e98e682310a8a08435efb77f2569b284e8bedfda33fbe14126a772516ff88e6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_masked_matrix.py",
+      "bytes": 8932,
+      "fileSha256": "ed83bf2c23bc0ce856dc2b9726ec47f77ae79adb5fbc79d4ec497e301cf1cc5c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_matrix_linalg.py",
+      "bytes": 2059,
+      "fileSha256": "39b6d2517538476a566a31ffff101d8b3003ad4da404a0c30b190357ea150577"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_multiarray.py",
+      "bytes": 554,
+      "fileSha256": "8c1dd7081980b5ca9ff966fd3f0056eae23290fa4c3ed86e5cb2748224cacd91"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_numeric.py",
+      "bytes": 441,
+      "fileSha256": "30fef4a94c20b214ed4e12996990e9effe94f99eba34857581e5616ac1977a34"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_regression.py",
+      "bytes": 927,
+      "fileSha256": "f2c1c3b4ef198bca776b57902845b1b4298aad7987a03deac65228920d802005"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/__init__.py",
+      "bytes": 6781,
+      "fileSha256": "6eb68b87accfd90c2e34a44a01a646742fea29667eb4995cdc137cdcb7ae13fd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/_polybase.py",
+      "bytes": 39271,
+      "fileSha256": "6049e743095381b9f77720fcf6e7ab694c799f1c77c7fa47e8aea69b2126862f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/chebyshev.py",
+      "bytes": 62796,
+      "fileSha256": "35908a8c86e5717f7d7e8a99ca9e758b4febf29d2bd55295199166435fff9049"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/hermite.py",
+      "bytes": 52514,
+      "fileSha256": "b7908533ea84e2db33609890677d3555c327ec833aef2dab5193c53ed9d54407"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/hermite_e.py",
+      "bytes": 52642,
+      "fileSha256": "8d14777fc3ad87ca68576231f1cd1e2c4411dd465aaf2fb646ea4eac400450c6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/laguerre.py",
+      "bytes": 50858,
+      "fileSha256": "99c570d1c916557fa4cc9d5022175cbaec733e3b85980de99502e496840c3983"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/legendre.py",
+      "bytes": 51550,
+      "fileSha256": "c23b6015a8e62846d8912524def5920af78c1c33fa53298adbc6cd524e0ebf4b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/polynomial.py",
+      "bytes": 49112,
+      "fileSha256": "5ec6993c798b18916aa49b3bacfbcee44d25a164352f76072c85326d5bb8754f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/polyutils.py",
+      "bytes": 23237,
+      "fileSha256": "5f2e6a8ddae39d16aa4a50a51b544e9b059c70b9003c2ec870768d24bbe109fe"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/setup.py",
+      "bytes": 373,
+      "fileSha256": "75741fcd550c3fd39c07a88abf9ca8d462c4c05077809e3ca61220a3837e78cd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_chebyshev.py",
+      "bytes": 20522,
+      "fileSha256": "ead32c14fd61ecaf197fbda634eb5ae93bf9dbf7d54e55e49ec7ae7df8f4f347"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_classes.py",
+      "bytes": 18331,
+      "fileSha256": "0c5c98d884018f7af619992f6d121e64ed84118e3aeb16eec1ce0f4a1025e12c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_hermite.py",
+      "bytes": 18577,
+      "fileSha256": "37d6f6771d9458fca36b9bf4d9d4a85983e72af6fa1fe3b382daf1fb18d6cf69"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_hermite_e.py",
+      "bytes": 18911,
+      "fileSha256": "fc0de8840592e075eb406d3a4bc2f8edd226759193c18a2c0979e8cb0ecbe39a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_laguerre.py",
+      "bytes": 17511,
+      "fileSha256": "0593a0b38f5505738505ea47a29c6e10390844e1c4bc505f59ee17ef7519867f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_legendre.py",
+      "bytes": 18673,
+      "fileSha256": "6ff6db947b3417f056c3d112b92ab9d99b0b29c40a151e5ea8f7ff4a9a5616aa"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_polynomial.py",
+      "bytes": 20529,
+      "fileSha256": "e1cb8ef3ee70748c5ccf90abb9c079231ef24ae3113a8914175d85ee8810fe17"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_polyutils.py",
+      "bytes": 3579,
+      "fileSha256": "23191b55fa5c06a7b994e665b871543db2c04cbbb5af0560ee084b012a5f62b6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_printing.py",
+      "bytes": 20525,
+      "fileSha256": "adf3f831a41b8c670ee767da1e662b82c69aae49b735d8b7a27c2be830ee6a91"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_symbol.py",
+      "bytes": 5371,
+      "fileSha256": "9ac4cfbfb0759e268aba3537de4b9999dc49bcb62f3a37e5d68ca49a52f4757a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/__init__.py",
+      "bytes": 7506,
+      "fileSha256": "f354e19dec60e6e98de566700f94d1cb335cd98a7e775e01e940bb3418152a1f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_bounded_integers.cpython-312-darwin.so",
+      "bytes": 331636,
+      "fileSha256": "fd071d0f62a76d4642b3eac399872beb05f2e19ca0dbb649537d30d834a3c70d"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_common.cpython-312-darwin.so",
+      "bytes": 234234,
+      "fileSha256": "154bac74a2b55ff825da6b39c858c0ef548bc902d88a219719c6f8f4ec15c96c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_examples/cffi/extending.py",
+      "bytes": 880,
+      "fileSha256": "c5295adf35aac62e878f8f04be761f0f75877c4d7cf55bc2e17b0abb8fd3fc8c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_examples/cffi/parse.py",
+      "bytes": 1771,
+      "fileSha256": "0676fbb7fe92fdce7eddd66b43e5d7f446b338a85fb547dc09e8d75d6c9dd445"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_examples/numba/extending.py",
+      "bytes": 1957,
+      "fileSha256": "229cb37a5fe1e6253f0cc27fbe75d48100b7f2e303327eda754a5649e1102c51"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_examples/numba/extending_distributions.py",
+      "bytes": 2034,
+      "fileSha256": "267afd696907c885b280d6dd69edf61955112bee53f414c686e131469bef7bdf"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_generator.cpython-312-darwin.so",
+      "bytes": 810333,
+      "fileSha256": "0295669c7840dc1c42009d800658e047516af89e8a639e85c4d10907dec296b1"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_mt19937.cpython-312-darwin.so",
+      "bytes": 112315,
+      "fileSha256": "9d59ab74ca36a6fe6ae56dab2a17eaf7244f70bc03106d24db7f47bf1f78d59b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_pcg64.cpython-312-darwin.so",
+      "bytes": 129337,
+      "fileSha256": "dda7ccc6b5f83a05644c29783bb99cc1aade60c5ee5db5cb64a22d4416ec7229"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_philox.cpython-312-darwin.so",
+      "bytes": 111706,
+      "fileSha256": "860e0f097b25f2c8aaca091ce6323ef6f407360f594c3e14684b7823ecca8bd2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_pickle.py",
+      "bytes": 2318,
+      "fileSha256": "e0d85d4feca4ec2d26dedc995a6a2e600b3764634f74f54d19f508cae87c1c36"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_sfc64.cpython-312-darwin.so",
+      "bytes": 93545,
+      "fileSha256": "1ac2e80b026a43a3aba66a7ce148f39260dc7a9447524125c21d0a9e5d50a5a1"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/bit_generator.cpython-312-darwin.so",
+      "bytes": 207856,
+      "fileSha256": "bff6147d617fe179e4fda2fa799b2aa929d1d2c728b7e4622cc5ee44c0950494"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/mtrand.cpython-312-darwin.so",
+      "bytes": 683673,
+      "fileSha256": "f79ca82d8dcc5d0706beee30dd0959482367f197bf3d83da73256478722323da"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/data/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_direct.py",
+      "bytes": 17779,
+      "fileSha256": "eaf2e90b278a9c05851197a2ee5d988a154b434ad27b03b5849056b7b0397f24"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_extending.py",
+      "bytes": 4038,
+      "fileSha256": "4b75abceeddd8b8b8186bf8fc67c7974e3ef941634151759a955fa082d4837ab"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_generator_mt19937.py",
+      "bytes": 115477,
+      "fileSha256": "df92c1c15e93b563e7c6179fbadc5342684bcc043911ee18898f338835ccf9e4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_generator_mt19937_regressions.py",
+      "bytes": 6387,
+      "fileSha256": "c4691dcfbe81317d442b440f7da6d5c69371f6a43d382fb5652b563ace8dfccf"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_random.py",
+      "bytes": 70087,
+      "fileSha256": "904910b378bbcdca66f4ca33211233d45231e41e9f99793442a5f497a97ebbf6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_randomstate.py",
+      "bytes": 85031,
+      "fileSha256": "0f117bacc512c5a0252f8875a82de89c770747b4ffeab2963dbaf49c91fce271"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_randomstate_regression.py",
+      "bytes": 7917,
+      "fileSha256": "56e7185888c0eec02ab96b1a96f64c9df92660b3353bacacc969cb97ddf5fa50"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_regression.py",
+      "bytes": 5439,
+      "fileSha256": "b6b9ed2b9d54bda8ce5442e296e10ef3997ae02292c399ef0527394aa632afdc"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_seed_sequence.py",
+      "bytes": 3311,
+      "fileSha256": "18d449e23cb3aed7e894e343de05166a69dbbcaebe6ffa756c12bf4481b4b1f5"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_smoke.py",
+      "bytes": 28183,
+      "fileSha256": "8e3373d1a1060f5fe8425f5af545ade8ccffdbdf1a946ecaaf22d3d69807963c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/__init__.py",
+      "bytes": 595,
+      "fileSha256": "227a552a80c0ccc28efe5fc735c6adce25bfbb593dfc96737bffedda7c9bacbd"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/_private/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/_private/extbuild.py",
+      "bytes": 8017,
+      "fileSha256": "9c6d9dc0fe27526412ddee5e2118a7c6dd2cfdfe2cc7103561fa210a0fa76afa"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/_private/utils.py",
+      "bytes": 85242,
+      "fileSha256": "dc5ad24cc8b439da43383043a27720883433768e4d280e9855f437b8a4524277"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/overrides.py",
+      "bytes": 2123,
+      "fileSha256": "bba7dc292042f0723330f58a01b772a3053bd61d85c767a40d0c691b936122bf"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/print_coercion_tables.py",
+      "bytes": 6180,
+      "fileSha256": "9ddc4eb12e177eb678518ffd9ea4530a7c6193381da9cb941cbf277b377b3a9e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/setup.py",
+      "bytes": 709,
+      "fileSha256": "18f280b534c146c356e24991ecd8cfea698147f193769693be44e6d74fd570b8"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/tests/test_utils.py",
+      "bytes": 55740,
+      "fileSha256": "2033abf865ee34696bb1bf97cc64985075c4a9c19827bf29eb48cea41ab23cce"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test__all__.py",
+      "bytes": 221,
+      "fileSha256": "2f79829d83d3a7302035f79d56eabd83bc4f59b7347353e8b7de24f6367d3692"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_ctypeslib.py",
+      "bytes": 12257,
+      "fileSha256": "074e9029e1518032046e410f072ff3600d47e44d9ec6e8538bb20393357c81fa"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_lazyloading.py",
+      "bytes": 1162,
+      "fileSha256": "6044eb6220cb02a2d7d382bfbb9ff7355c407f10e87a0bb1c242117f3eaa29c6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_matlib.py",
+      "bytes": 1852,
+      "fileSha256": "8308485eb249a3d0e279c6862c21cb2418e1c769d51a5eb21eaf3400e5104913"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_numpy_config.py",
+      "bytes": 1241,
+      "fileSha256": "a87bdea608bda3201b42e643d3a93b8697020b631885dcdc63a0f58900cf34c2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_numpy_version.py",
+      "bytes": 1479,
+      "fileSha256": "03c717173a7893ea7a279ce43b19437c3be4a053310d6da1a531555dc690455a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_public_api.py",
+      "bytes": 18170,
+      "fileSha256": "0d3abb48ef38b818c2dad28fa2a5f5ef16b373e48b91301b4367cb67018cda37"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_reloading.py",
+      "bytes": 2354,
+      "fileSha256": "42e55a3d0ba570d2e0e05977d4bc3e3bcf4be3629c95808aebc9f9195cb43cd4"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_scripts.py",
+      "bytes": 1645,
+      "fileSha256": "8e5b822df1bde1533572e5fee5170b141962ff268966922f995b8cc5129126b7"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_warnings.py",
+      "bytes": 2284,
+      "fileSha256": "644b57a872358b279578b7d5c4370c7cde6ac3aed38b6bb9e3bd3d86f046e1e6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/__init__.py",
+      "bytes": 5234,
+      "fileSha256": "5684c82cd0eb516bd9c742caf7ff7b9412d014ab521a60ede102ce1fccd8be5a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/mypy_plugin.py",
+      "bytes": 6376,
+      "fileSha256": "db8cd5938122dea1f81dcdd24b3defd17b48b32713a3c1caa18ea296107fec04"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/setup.py",
+      "bytes": 374,
+      "fileSha256": "0a7cfdab9df0faf24dc84eaf631a98bd05f1d2925bac6f6ab87cb3f6cab17de9"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/__init__.py",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/arithmetic.py",
+      "bytes": 7455,
+      "fileSha256": "db3ddd9aecac4109a23f3f31d1b83c48e38a5bada65499fdeee31af53d0bed59"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/array_constructors.py",
+      "bytes": 2419,
+      "fileSha256": "dc6ae17c1726597e77a491c3d0dbe15e3c2bdbeb8d29111b47523d582719eeb2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/array_like.py",
+      "bytes": 916,
+      "fileSha256": "71efc856e6c177b27a1644a92660fba8c9512eec268a27613aa8587d96f5e96a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/arrayprint.py",
+      "bytes": 766,
+      "fileSha256": "cbf2a4b8bcf5b8cee9bf9dea7eaec640ebae7782e85c4ddaa4ad70b4045d5723"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/arrayterator.py",
+      "bytes": 393,
+      "fileSha256": "16a72929d510050d056b31c5c6bf4cb0b1191be8e725518a5995f6a3046be034"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/bitwise_ops.py",
+      "bytes": 970,
+      "fileSha256": "5279b156bf47c08f227ddaeeb469bfbb711953888e38f421ace92eee14da1f47"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/comparisons.py",
+      "bytes": 2992,
+      "fileSha256": "9d313e7efada2caeb14d970fe2e3d5d36c0e4a1cd82960daa1aa71df901e0ce6"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/dtype.py",
+      "bytes": 1069,
+      "fileSha256": "32a0ca0ba630bfa8cd916b11f2b74bb9a6f31d4728e70d4eca50c711dc6f7bf2"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/einsumfunc.py",
+      "bytes": 1370,
+      "fileSha256": "7978f92f93163ed40782b1cfb09dfaaaaae6047a9cb7d528ba38c90af1e71759"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/flatiter.py",
+      "bytes": 174,
+      "fileSha256": "d019dbb8b3010bb310969acd674421352b1c7d8c0f8448573a15a8ca24400965"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/fromnumeric.py",
+      "bytes": 3742,
+      "fileSha256": "5ddfe7255543a0e35dced517f1d760a3b117276143f005f9d4c3bf62e8e79a88"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/index_tricks.py",
+      "bytes": 1492,
+      "fileSha256": "a1a143f6f634d7f448e4e92b5edfb14e4d67fdd77e4a9b8fa7e799e7c5d1ddcf"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/lib_utils.py",
+      "bytes": 434,
+      "fileSha256": "b034028c754653072dd1142a02d1f9ff5eb2db8d6c8926386d729946cb89f310"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/lib_version.py",
+      "bytes": 299,
+      "fileSha256": "1e7b863b1eed400fdb731148277751a0c011d1fa1c931838946a90e20ecb188c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/literal.py",
+      "bytes": 1331,
+      "fileSha256": "0cbcdd5870fab6d5b84b4344bc641bb07fd41098e167286f3b8397263a32bd94"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/mod.py",
+      "bytes": 1578,
+      "fileSha256": "1c1f5a2b8ff01896dce38b6899aa2ba0dcb47e820be5c23d2888e49ef3136e49"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/modules.py",
+      "bytes": 576,
+      "fileSha256": "b74289c5859bad677b1db6e020315bdcb02124188d35be903e38c50c0802da65"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/multiarray.py",
+      "bytes": 1331,
+      "fileSha256": "3311dac7a97de32aa54d5665780a86efb20b11b5bac14e68b0f707cf127ce67b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ndarray_conversion.py",
+      "bytes": 1626,
+      "fileSha256": "c8f8335c6ea9698d6e17fcfe4321d8adc9ab66f857eeab6f4d487b00d2ec7820"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ndarray_misc.py",
+      "bytes": 2715,
+      "fileSha256": "cf79ae71b9fd7cb33583199b5215a5a7695cacebf8cc58ea645cded1c684d840"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ndarray_shape_manipulation.py",
+      "bytes": 640,
+      "fileSha256": "dfb798c0c36a30bc1a9c85bdfbade1ae891a7274b3d8afeab4f52591da6c4e3a"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/numeric.py",
+      "bytes": 1490,
+      "fileSha256": "49d9ec0f9cefd309bc4f68672329724b5e2283631c4b3eab1bd62c95c91b350e"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/numerictypes.py",
+      "bytes": 750,
+      "fileSha256": "af4fecf9ad3e1f631d5889f85383fa5bd4503b4575c6b0eeb20a1d1cd65e2183"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/random.py",
+      "bytes": 61881,
+      "fileSha256": "b890a7ce5b0e9fd86bfc6d53a472ddb3078923811d85448443877144e3e3a80b"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/scalars.py",
+      "bytes": 3479,
+      "fileSha256": "127d1a742640c048a066bcdd434250c03126ad2d1bf8331dd6fbe390572fc28f"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/simple.py",
+      "bytes": 2676,
+      "fileSha256": "1e601f08e759056405db5d5869916b2068ac320bb91734c42c0a4a9f2d3c9f76"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/simple_py3.py",
+      "bytes": 96,
+      "fileSha256": "1ee2eb7396a985385090b8d4dbfd7d2a0185697c0a39f4b35ded29db1326f192"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ufunc_config.py",
+      "bytes": 1204,
+      "fileSha256": "fccf2ff90580793d7ed8c91f49e01b365fd9c323ef61f3d3b0b97a7355fc77fc"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ufunclike.py",
+      "bytes": 1039,
+      "fileSha256": "1af7ba709d804f74c0c0e8d43904032149eab1108662aef4fedbffb203838a20"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ufuncs.py",
+      "bytes": 462,
+      "fileSha256": "c46b8abaa3deb544d2e22a396031da922e676d846efb00b6f52194df6b735488"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/warnings_and_errors.py",
+      "bytes": 150,
+      "fileSha256": "3dc83e4167d8e0f0214cac9e85a7bcaba2e1b5b5000716b661eeb7fb78757f8c"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/test_isfile.py",
+      "bytes": 864,
+      "fileSha256": "061299b38f8bae11547ca8dc1b4c9e9724a313a6484ccc462016161831cc45bf"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/test_runtime.py",
+      "bytes": 3275,
+      "fileSha256": "daabbc2449622139d908127f409a6885a723fce434f28ef78b14b6c36a283572"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/test_typing.py",
+      "bytes": 8743,
+      "fileSha256": "0dad593858ed3e1fccbdbe7086923ea240497602ce01f26d24dc86ea57861684"
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/version.py",
+      "bytes": 216,
+      "fileSha256": "3932e74a1d0d19f5b22fc56b9c88f435db7f29939397567e903f427fe8d13266"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_supplemental_acoustics.py",
+      "bytes": 6675,
+      "fileSha256": "65cecae9f3928a45bfee0e4f6192a4c36cb13627141b3444c2ec066ca9135977"
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/transcript.json",
+      "bytes": 5416069,
+      "fileSha256": "cd79fbf244bdb73b2eb7ddcffa3fca55e087046b72cbf26b69b87856dae01389"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/local-stt-response.raw.json",
+      "bytes": 243977,
+      "fileSha256": "9e57d7e574a20470208370202b44b8e2dad8f9eb05c76897dadae548cd8ef7a9"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-request.json",
+      "bytes": 615981,
+      "fileSha256": "b5699b27d791a8195e510bd776600b1108c4bfcf7c99462b0639714b2460b745"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-result.json",
+      "bytes": 11502,
+      "fileSha256": "cd3c03998cc327ca3a7aea6ffa68aa73ae7f680df63f93d7edee6f6d31567b70"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/job.json",
+      "bytes": 7669,
+      "fileSha256": "4f445a2e7a360365d6eeb1ffaf8f0a28c7e51bbbdb5bebb6e44548118f5f157f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/audio-preparation.json",
+      "bytes": 35542,
+      "fileSha256": "48c9f33638a22a69151b238a84cfc3e1d846bff5a650b9fd1da192e9a68476fb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/acoustic-preflight-v001.json",
+      "bytes": 663016,
+      "fileSha256": "73556f12af3fc35d5f95d397109abd0b52af378cdcd9b8b453629d6c40f759b8"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-range-unresolved.json",
+      "bytes": 10236,
+      "fileSha256": "bef4a400d9b039bfbe12ba8aeb03ee287ceaf4c3b0933ea17f50555634b5740b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-boundary-advisor-decision.json",
+      "bytes": 4012,
+      "fileSha256": "98ab8044a972e70502132e56676e7e9034525418707b8150a26f21aee37fc582"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/audio-preparation.json",
+      "bytes": 9450,
+      "fileSha256": "c09ded797b9e2d0fa455b935c2571fcd04e96b0196de4f9fef6816a502186501"
+    }
+  ],
+  "chunks": [
+    {
+      "index": 0,
+      "startMs": 2273466,
+      "endMs": 2294802,
+      "atoms": [
+        {
+          "sourceSegmentId": 7444,
+          "text": "結"
+        },
+        {
+          "sourceSegmentId": 7445,
+          "text": "構"
+        },
+        {
+          "sourceSegmentId": 7446,
+          "text": "も"
+        },
+        {
+          "sourceSegmentId": 7447,
+          "text": "う"
+        },
+        {
+          "sourceSegmentId": 7448,
+          "text": "カ"
+        },
+        {
+          "sourceSegmentId": 7449,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 7450,
+          "text": "ブ"
+        },
+        {
+          "sourceSegmentId": 7451,
+          "text": "育"
+        },
+        {
+          "sourceSegmentId": 7452,
+          "text": "て"
+        },
+        {
+          "sourceSegmentId": 7453,
+          "text": "て"
+        },
+        {
+          "sourceSegmentId": 7454,
+          "text": "…"
+        },
+        {
+          "sourceSegmentId": 7455,
+          "text": "う"
+        },
+        {
+          "sourceSegmentId": 7456,
+          "text": "わ"
+        },
+        {
+          "sourceSegmentId": 7457,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 7458,
+          "text": "ど"
+        },
+        {
+          "sourceSegmentId": 7459,
+          "text": "う"
+        },
+        {
+          "sourceSegmentId": 7460,
+          "text": "し"
+        },
+        {
+          "sourceSegmentId": 7461,
+          "text": "よ"
+        },
+        {
+          "sourceSegmentId": 7462,
+          "text": "う"
+        },
+        {
+          "sourceSegmentId": 7463,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 7464,
+          "text": "ま"
+        },
+        {
+          "sourceSegmentId": 7465,
+          "text": "あ"
+        },
+        {
+          "sourceSegmentId": 7466,
+          "text": "リ"
+        },
+        {
+          "sourceSegmentId": 7467,
+          "text": "リ"
+        },
+        {
+          "sourceSegmentId": 7468,
+          "text": "カ"
+        },
+        {
+          "sourceSegmentId": 7469,
+          "text": "的"
+        },
+        {
+          "sourceSegmentId": 7470,
+          "text": "に"
+        },
+        {
+          "sourceSegmentId": 7471,
+          "text": "は"
+        },
+        {
+          "sourceSegmentId": 7472,
+          "text": "エ"
+        },
+        {
+          "sourceSegmentId": 7473,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 7474,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 7475,
+          "text": "に"
+        },
+        {
+          "sourceSegmentId": 7476,
+          "text": "し"
+        },
+        {
+          "sourceSegmentId": 7477,
+          "text": "た"
+        },
+        {
+          "sourceSegmentId": 7478,
+          "text": "い"
+        },
+        {
+          "sourceSegmentId": 7479,
+          "text": "と"
+        },
+        {
+          "sourceSegmentId": 7480,
+          "text": "か"
+        },
+        {
+          "sourceSegmentId": 7481,
+          "text": "思"
+        },
+        {
+          "sourceSegmentId": 7482,
+          "text": "っ"
+        },
+        {
+          "sourceSegmentId": 7483,
+          "text": "た"
+        },
+        {
+          "sourceSegmentId": 7484,
+          "text": "ら"
+        },
+        {
+          "sourceSegmentId": 7485,
+          "text": "好"
+        },
+        {
+          "sourceSegmentId": 7486,
+          "text": "き"
+        },
+        {
+          "sourceSegmentId": 7487,
+          "text": "な"
+        },
+        {
+          "sourceSegmentId": 7488,
+          "text": "キ"
+        },
+        {
+          "sourceSegmentId": 7489,
+          "text": "ャ"
+        },
+        {
+          "sourceSegmentId": 7490,
+          "text": "ラ"
+        },
+        {
+          "sourceSegmentId": 7491,
+          "text": "に"
+        },
+        {
+          "sourceSegmentId": 7492,
+          "text": "覚"
+        },
+        {
+          "sourceSegmentId": 7493,
+          "text": "え"
+        },
+        {
+          "sourceSegmentId": 7494,
+          "text": "さ"
+        },
+        {
+          "sourceSegmentId": 7495,
+          "text": "せ"
+        },
+        {
+          "sourceSegmentId": 7496,
+          "text": "た"
+        },
+        {
+          "sourceSegmentId": 7497,
+          "text": "の"
+        },
+        {
+          "sourceSegmentId": 7498,
+          "text": "も"
+        },
+        {
+          "sourceSegmentId": 7499,
+          "text": "い"
+        },
+        {
+          "sourceSegmentId": 7500,
+          "text": "い"
+        },
+        {
+          "sourceSegmentId": 7501,
+          "text": "し"
+        },
+        {
+          "sourceSegmentId": 7502,
+          "text": "そ"
+        },
+        {
+          "sourceSegmentId": 7503,
+          "text": "う"
+        },
+        {
+          "sourceSegmentId": 7504,
+          "text": "だ"
+        },
+        {
+          "sourceSegmentId": 7505,
+          "text": "よ"
+        },
+        {
+          "sourceSegmentId": 7506,
+          "text": "ね"
+        }
+      ],
+      "text": "結構もうカーブ育てて…うわ!どうしよう!まあリリカ的にはエースにしたいとか思ったら好きなキャラに覚えさせたのもいいしそうだよね",
+      "audioBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/inputs/chunk-0000.flac",
+        "bytes": 758966,
+        "fileSha256": "7fda2ae8c85f3275f3e19f9f08d7a65766a6457f2ff38d572e0946cda916dcc5"
+      },
+      "rawTextBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/inputs/chunk-0000.formal-text.json",
+        "bytes": 4532,
+        "fileSha256": "f4d4b6be5511986c41fc93e697fd350223897f7e103f151b44e62ecae15b10e2"
+      }
+    },
+    {
+      "index": 1,
+      "startMs": 5026216,
+      "endMs": 5054828,
+      "atoms": [
+        {
+          "sourceSegmentId": 15193,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 15194,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 15195,
+          "text": "ア"
+        },
+        {
+          "sourceSegmentId": 15196,
+          "text": "ア"
+        },
+        {
+          "sourceSegmentId": 15197,
+          "text": "ン"
+        },
+        {
+          "sourceSegmentId": 15198,
+          "text": "ダ"
+        },
+        {
+          "sourceSegmentId": 15199,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 15200,
+          "text": "が"
+        },
+        {
+          "sourceSegmentId": 15201,
+          "text": "良"
+        },
+        {
+          "sourceSegmentId": 15202,
+          "text": "い"
+        },
+        {
+          "sourceSegmentId": 15203,
+          "text": "?"
+        },
+        {
+          "sourceSegmentId": 15204,
+          "text": "じ"
+        },
+        {
+          "sourceSegmentId": 15205,
+          "text": "ゃ"
+        },
+        {
+          "sourceSegmentId": 15206,
+          "text": "あ"
+        },
+        {
+          "sourceSegmentId": 15207,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 15208,
+          "text": "ン"
+        },
+        {
+          "sourceSegmentId": 15209,
+          "text": "タ"
+        },
+        {
+          "sourceSegmentId": 15210,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 15211,
+          "text": "バ"
+        },
+        {
+          "sourceSegmentId": 15212,
+          "text": "ル"
+        },
+        {
+          "sourceSegmentId": 15213,
+          "text": "搭"
+        },
+        {
+          "sourceSegmentId": 15214,
+          "text": "載"
+        },
+        {
+          "sourceSegmentId": 15215,
+          "text": "す"
+        },
+        {
+          "sourceSegmentId": 15216,
+          "text": "る"
+        },
+        {
+          "sourceSegmentId": 15217,
+          "text": "か"
+        },
+        {
+          "sourceSegmentId": 15218,
+          "text": "や"
+        },
+        {
+          "sourceSegmentId": 15219,
+          "text": "ば"
+        },
+        {
+          "sourceSegmentId": 15220,
+          "text": "い"
+        },
+        {
+          "sourceSegmentId": 15221,
+          "text": "、"
+        },
+        {
+          "sourceSegmentId": 15222,
+          "text": "ホ"
+        },
+        {
+          "sourceSegmentId": 15223,
+          "text": "ロ"
+        },
+        {
+          "sourceSegmentId": 15224,
+          "text": "メ"
+        },
+        {
+          "sourceSegmentId": 15225,
+          "text": "ン"
+        },
+        {
+          "sourceSegmentId": 15226,
+          "text": "…"
+        },
+        {
+          "sourceSegmentId": 15227,
+          "text": "3"
+        },
+        {
+          "sourceSegmentId": 15228,
+          "text": "年"
+        },
+        {
+          "sourceSegmentId": 15229,
+          "text": "生"
+        },
+        {
+          "sourceSegmentId": 15230,
+          "text": "ば"
+        },
+        {
+          "sourceSegmentId": 15231,
+          "text": "っ"
+        },
+        {
+          "sourceSegmentId": 15232,
+          "text": "か"
+        },
+        {
+          "sourceSegmentId": 15233,
+          "text": "り"
+        },
+        {
+          "sourceSegmentId": 15234,
+          "text": "じ"
+        },
+        {
+          "sourceSegmentId": 15235,
+          "text": "ゃ"
+        },
+        {
+          "sourceSegmentId": 15236,
+          "text": "ん"
+        },
+        {
+          "sourceSegmentId": 15237,
+          "text": "ホ"
+        },
+        {
+          "sourceSegmentId": 15238,
+          "text": "ロ"
+        },
+        {
+          "sourceSegmentId": 15239,
+          "text": "メ"
+        }
+      ],
+      "text": "ナイアアンダーが良い?じゃあインターバル搭載するかやばい、ホロメン…3年生ばっかりじゃんホロメ",
+      "audioBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/inputs/chunk-0001.flac",
+        "bytes": 1040947,
+        "fileSha256": "33a7a6169cc8df99b502fef7d4f1b504f4b1743603e8bfb1818a5d1d988097c0"
+      },
+      "rawTextBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/inputs/chunk-0001.formal-text.json",
+        "bytes": 3507,
+        "fileSha256": "f1af76ddf981655a35c96f38abba1ef705e737a3e77a860323aefa4ce37e7eac"
+      }
+    },
+    {
+      "index": 2,
+      "startMs": 10489558,
+      "endMs": 10514990,
+      "atoms": [
+        {
+          "sourceSegmentId": 31461,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31462,
+          "text": "あ"
+        },
+        {
+          "sourceSegmentId": 31463,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 31464,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31465,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31466,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31467,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31468,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31469,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31470,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31471,
+          "text": "天"
+        },
+        {
+          "sourceSegmentId": 31472,
+          "text": "野"
+        },
+        {
+          "sourceSegmentId": 31473,
+          "text": "く"
+        },
+        {
+          "sourceSegmentId": 31474,
+          "text": "ん"
+        },
+        {
+          "sourceSegmentId": 31475,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31476,
+          "text": "あ"
+        },
+        {
+          "sourceSegmentId": 31477,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 31478,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31479,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31480,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31481,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31482,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31483,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31484,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31485,
+          "text": "天"
+        },
+        {
+          "sourceSegmentId": 31486,
+          "text": "野"
+        },
+        {
+          "sourceSegmentId": 31487,
+          "text": "く"
+        },
+        {
+          "sourceSegmentId": 31488,
+          "text": "ん"
+        },
+        {
+          "sourceSegmentId": 31489,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31490,
+          "text": "あ"
+        },
+        {
+          "sourceSegmentId": 31491,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 31492,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31493,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31494,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31495,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31496,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31497,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31498,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31499,
+          "text": "天"
+        },
+        {
+          "sourceSegmentId": 31500,
+          "text": "野"
+        },
+        {
+          "sourceSegmentId": 31501,
+          "text": "く"
+        },
+        {
+          "sourceSegmentId": 31502,
+          "text": "ん"
+        },
+        {
+          "sourceSegmentId": 31503,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31504,
+          "text": "あ"
+        },
+        {
+          "sourceSegmentId": 31505,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 31506,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31507,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31508,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31509,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31510,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31511,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31512,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31513,
+          "text": "天"
+        },
+        {
+          "sourceSegmentId": 31514,
+          "text": "野"
+        },
+        {
+          "sourceSegmentId": 31515,
+          "text": "く"
+        },
+        {
+          "sourceSegmentId": 31516,
+          "text": "ん"
+        },
+        {
+          "sourceSegmentId": 31517,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31518,
+          "text": "あ"
+        },
+        {
+          "sourceSegmentId": 31519,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 31520,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31521,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31522,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31523,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31524,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31525,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31526,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31527,
+          "text": "天"
+        },
+        {
+          "sourceSegmentId": 31528,
+          "text": "野"
+        },
+        {
+          "sourceSegmentId": 31529,
+          "text": "く"
+        },
+        {
+          "sourceSegmentId": 31530,
+          "text": "ん"
+        },
+        {
+          "sourceSegmentId": 31531,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31532,
+          "text": "あ"
+        },
+        {
+          "sourceSegmentId": 31533,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 31534,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31535,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31536,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31537,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31538,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31539,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31540,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31541,
+          "text": "天"
+        },
+        {
+          "sourceSegmentId": 31542,
+          "text": "野"
+        },
+        {
+          "sourceSegmentId": 31543,
+          "text": "く"
+        },
+        {
+          "sourceSegmentId": 31544,
+          "text": "ん"
+        },
+        {
+          "sourceSegmentId": 31545,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31546,
+          "text": "あ"
+        },
+        {
+          "sourceSegmentId": 31547,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 31548,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31549,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31550,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31551,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31552,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31553,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31554,
+          "text": "ス"
+        },
+        {
+          "sourceSegmentId": 31555,
+          "text": "天"
+        },
+        {
+          "sourceSegmentId": 31556,
+          "text": "野"
+        },
+        {
+          "sourceSegmentId": 31557,
+          "text": "く"
+        },
+        {
+          "sourceSegmentId": 31558,
+          "text": "ん"
+        },
+        {
+          "sourceSegmentId": 31559,
+          "text": "!"
+        },
+        {
+          "sourceSegmentId": 31560,
+          "text": "あ"
+        },
+        {
+          "sourceSegmentId": 31561,
+          "text": "ー"
+        },
+        {
+          "sourceSegmentId": 31562,
+          "text": "ナ"
+        },
+        {
+          "sourceSegmentId": 31563,
+          "text": "肩"
+        },
+        {
+          "sourceSegmentId": 31564,
+          "text": "D"
+        },
+        {
+          "sourceSegmentId": 31565,
+          "text": "の"
+        },
+        {
+          "sourceSegmentId": 31566,
+          "text": "ク"
+        },
+        {
+          "sourceSegmentId": 31567,
+          "text": "イ"
+        },
+        {
+          "sourceSegmentId": 31568,
+          "text": "ッ"
+        },
+        {
+          "sourceSegmentId": 31569,
+          "text": "ク"
+        },
+        {
+          "sourceSegmentId": 31570,
+          "text": "C"
+        },
+        {
+          "sourceSegmentId": 31571,
+          "text": "そ"
+        },
+        {
+          "sourceSegmentId": 31572,
+          "text": "し"
+        },
+        {
+          "sourceSegmentId": 31573,
+          "text": "て"
+        },
+        {
+          "sourceSegmentId": 31574,
+          "text": "内"
+        },
+        {
+          "sourceSegmentId": 31575,
+          "text": "は"
+        },
+        {
+          "sourceSegmentId": 31576,
+          "text": "投"
+        },
+        {
+          "sourceSegmentId": 31577,
+          "text": "類"
+        },
+        {
+          "sourceSegmentId": 31578,
+          "text": "C"
+        },
+        {
+          "sourceSegmentId": 31579,
+          "text": "総"
+        },
+        {
+          "sourceSegmentId": 31580,
+          "text": "力"
+        },
+        {
+          "sourceSegmentId": 31581,
+          "text": "C"
+        },
+        {
+          "sourceSegmentId": 31582,
+          "text": "さ"
+        },
+        {
+          "sourceSegmentId": 31583,
+          "text": "す"
+        },
+        {
+          "sourceSegmentId": 31584,
+          "text": "が"
+        },
+        {
+          "sourceSegmentId": 31585,
+          "text": "に"
+        },
+        {
+          "sourceSegmentId": 31586,
+          "text": "投"
+        },
+        {
+          "sourceSegmentId": 31587,
+          "text": "類"
+        }
+      ],
+      "text": "!あーナイス!ナイス天野くん!あーナイス!ナイス天野くん!あーナイス!ナイス天野くん!あーナイス!ナイス天野くん!あーナイス!ナイス天野くん!あーナイス!ナイス天野くん!あーナイス!ナイス天野くん!あーナ肩DのクイックCそして内は投類C総力Cさすがに投類",
+      "audioBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/inputs/chunk-0002.flac",
+        "bytes": 955235,
+        "fileSha256": "8518b94cc063c6097f8ec9ba44aa700a35bcf14c595e44ee0baad466d1cd9d43"
+      },
+      "rawTextBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/inputs/chunk-0002.formal-text.json",
+        "bytes": 8879,
+        "fileSha256": "ad282c081b72878f0431c6e72820b72f5b40441385b3f9423057f77f878e3f25"
+      }
+    }
+  ]
+}

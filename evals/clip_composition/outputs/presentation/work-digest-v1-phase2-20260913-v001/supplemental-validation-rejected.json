@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "digest-v1-phase2-supplemental-validation-rejected-v001",
+  "status": "rejected",
+  "preflightBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/acoustic-preflight-v001.json",
+    "fileSha256": "573d63e36e234c294c119b1e44ef5845c1bd446feba8e1447130ad404d95d660"
+  },
+  "advisorDecisionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-boundary-advisor-decision.json",
+    "fileSha256": "98ab8044a972e70502132e56676e7e9034525418707b8150a26f21aee37fc582"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/digest_acoustic_timing_validation_v001.mts",
+    "fileSha256": "efde9b9d009711eed8433ecba94b8ff7ff92e1b06fe99165f689cddc6e09d754"
+  },
+  "results": [
+    {
+      "chunkIndex": 0,
+      "targetSourceSegmentId": 7464,
+      "status": "validated",
+      "unitCount": 49,
+      "audioStartMs": 2273466,
+      "audioEndMs": 2294802,
+      "observationBinding": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/acoustic-observation-chunk-0000-v001.json",
+        "fileSha256": "4f74045fe286347aefa9288dcf230f41ca183cc7d0882a22b43d30ce0ab0dc33"
+      },
+      "violations": []
+    },
+    {
+      "chunkIndex": 1,
+      "targetSourceSegmentId": 15218,
+      "status": "rejected",
+      "reason": "AssertionError [ERR_ASSERTION]: ACOUSTIC_TIME_ORDER_INVALID",
+      "audioStartMs": 5026216,
+      "audioEndMs": 5054828,
+      "observationBinding": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/acoustic-observation-chunk-0001-v001.json",
+        "fileSha256": "79f0fba6980cbe86e42c6a88a414589922ebf291da3ba2532ef4fa8b7680e25a"
+      },
+      "violations": [
+        {
+          "ordinal": 39,
+          "word": {
+            "word": "メ",
+            "tokens": [
+              21647
+            ],
+            "start": 28.54,
+            "end": 28.62,
+            "probability": 0.986375629901886
+          },
+          "priorEndSeconds": 28.54,
+          "audioDurationMs": 28612,
+          "observedEndMsRelativeToWindow": 28620,
+          "overrunMs": 8,
+          "timeReversed": false
+        }
+      ]
+    },
+    {
+      "chunkIndex": 2,
+      "targetSourceSegmentId": 31563,
+      "status": "validated",
+      "unitCount": 116,
+      "audioStartMs": 10489558,
+      "audioEndMs": 10514990,
+      "observationBinding": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics-supplemental-v001/acoustic-observation-chunk-0002-v001.json",
+        "fileSha256": "b5749753755bd0260a42cad77b44cd580bc80b9ee1d166c8cf5c6dbba4e9f160"
+      },
+      "violations": []
+    }
+  ],
+  "observationsChanged": false,
+  "observationsRepeated": false,
+  "semanticAnswersChanged": false,
+  "promotedSegments": [],
+  "next": "GPT_DECISION"
+}

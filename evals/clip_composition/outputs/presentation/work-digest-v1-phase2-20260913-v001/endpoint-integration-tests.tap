@@ -1,0 +1,56 @@
+TAP version 13
+# Subtest: window-origin stays unresolved without evidence; one valid centered start resolves
+ok 1 - window-origin stays unresolved without evidence; one valid centered start resolves
+  ---
+  duration_ms: 0.678208
+  ...
+# Subtest: unique zero-duration end uses the observed boundary; zero-duration start is never rescued
+ok 2 - unique zero-duration end uses the observed boundary; zero-duration start is never rescued
+  ---
+  duration_ms: 0.092916
+  ...
+# Subtest: nonfinite and outside-parent boundaries fail; other failures do not gain a fallback
+ok 3 - nonfinite and outside-parent boundaries fail; other failures do not gain a fallback
+  ---
+  duration_ms: 2.522125
+  ...
+# Subtest: ordinary valid endpoints and inherited parent edges retain their original times
+ok 4 - ordinary valid endpoints and inherited parent edges retain their original times
+  ---
+  duration_ms: 0.216417
+  ...
+# Subtest: validated whole-text blocks survive endpoint resolution; nonpositive blocks prevent all promotion
+ok 5 - validated whole-text blocks survive endpoint resolution; nonpositive blocks prevent all promotion
+  ---
+  duration_ms: 5.235458
+  ...
+# Subtest: saved Phase 2 evidence resolves every rejected endpoint without changing any semantic bytes
+not ok 6 - saved Phase 2 evidence resolves every rejected endpoint without changing any semantic bytes
+  ---
+  duration_ms: 2404.679
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_endpoints.test.mts:1:8203'
+  failureType: 'testCodeFailure'
+  error: 'ACOUSTIC_TIME_ORDER_INVALID'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_acoustic_timing_validation_v001.mts:25:5)
+    Array.map (<anonymous>)
+    validateAcousticChunkV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_acoustic_timing_validation_v001.mts:22:35)
+    loadPhase2EndpointEvidence (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_endpoints.mts:178:33)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_endpoints.test.mts:117:15)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 5
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2634.000417

@@ -16,7 +16,7 @@ async function checkBytes(ref: Json) {
 }
 
 /** 既存STTの窓・本文・IDと、今回の固定本文観測を照合する。 */
-async function reconstructAcoustics(c: Json) {
+export async function reconstructAcoustics(c: Json) {
   const prefix = out(c, 'acoustics'), preflightPath = `${prefix}/acoustic-preflight-v001.json`;
   const preflight = await readJson(preflightPath), runtime = await readJson(`${prefix}/runtime.json`);
   const preflightSha = await fileSha(path.join(ROOT, preflightPath));
@@ -62,7 +62,7 @@ async function reconstructAcoustics(c: Json) {
     chunks, individualCharacterAcousticTimes: 'not-claimed'};
 }
 
-async function withRetention(c: Json) {
+export async function withRetention(c: Json) {
   const [retentionResponse, retentionResult, executor] = await Promise.all([
     readJson(out(c, 'retention-response.json')), readJson(out(c, 'retention-result.json')),
     readJson(out(c, 'retention-executor.json'))]);

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "digest-v1-phase2-endpoint-advisor-decision-v001",
+  "receivedAt": "2026-09-13T10:33:40.915821+00:00",
+  "origin": "ZEV進行管理３",
+  "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+  "auditedCheckpoint": "8915cfaef021fbc4e95cf46ce41909c99b7a5e3a",
+  "decision": "continue",
+  "decisionQuote": "Phase 2を続行してよい。保持回答7候補・12保持ブロックは変更しない。",
+  "responseState": "レスポンス確認済み",
+  "regenerationOrResend": false,
+  "scope": "承認済みPhase 2の素材非依存な限定端点接続修正。既存validatorとPhase 1は変更しない。",
+  "fallbacks": {
+    "start": {
+      "originalFailureReason": "window-origin-is-not-speech-onset",
+      "method": "supplemental-centered-fixed-text-acoustic-boundary",
+      "windowBeforeMs": 15000,
+      "windowAfterMs": 15000,
+      "selectAtoms": "基準窓に完全に含まれる連続した正式本文片だけ。抽出は最初の本文片の既存開始から最後の本文片の既存終了まで。",
+      "existingTimesRole": "観測入力窓の準備だけに使用。最終cut時刻には採用しない。",
+      "currentAffectedBoundaryCount": 3,
+      "observationsPerBoundary": 1,
+      "criteria": [
+        "対象IDのstart boundaryが一意",
+        "acoustic-token-boundary",
+        "finite",
+        "parent内部"
+      ],
+      "keepCollectionsSeparate": true,
+      "noRetryIfUnresolved": true
+    },
+    "end": {
+      "originalFailureReason": "observed-boundary-not-inside-parent-or-nonpositive-unit",
+      "method": "zero-duration-unit-end-boundary",
+      "criteria": [
+        "side=endだけ",
+        "既存観測unitが一意",
+        "startMs=endMs",
+        "endBoundary.beforeが対象ID",
+        "endMsがfinite",
+        "parent開始 < endMs < parent終了"
+      ],
+      "newObservation": false,
+      "individualCharacterAcousticTime": "not-claimed"
+    }
+  },
+  "requiredTests": [
+    "元観測だけのwindow-origin startは未解決",
+    "補助startが一意なら解決",
+    "補助startが0件または複数なら未解決",
+    "長さ0のendは一意な終了境界なら解決",
+    "長さ0のstartは救済しない",
+    "nonfinite拒否",
+    "parent外拒否",
+    "最終blockが非正値なら拒否",
+    "未知ID拒否",
+    "原回答hash不変",
+    "全7候補12保持ブロック不変",
+    "実データの5端点を証拠付きで検証"
+  ],
+  "stopConditions": [
+    "補助観測で一意な開始境界を確定できない",
+    "終了境界が一意でない",
+    "端点がparent外",
+    "2つのfallback以外の新規failure",
+    "意味回答変更が必要",
+    "別model・ASR・外部API・素材専用ruleが必要"
+  ],
+  "afterAllResolved": "正式保持区間を採用し、既定の字幕表示判断を新規1回だけ実行、その後Phase 1共通sort/union・Core・renderer・technical QCまで続行。",
+  "frozenArtifacts": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/candidate-response.json",
+      "fileSha256": "6555adbef3d42bba5032ab5695d73fb26dff9ac0ff00573d565151e24276d831"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-response.json",
+      "fileSha256": "ed2bae4c9cf59eea3fa405f039db0a5fa1b27c53e9c682ea1be219ceff40d876"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-result.json",
+      "fileSha256": "cd3c03998cc327ca3a7aea6ffa68aa73ae7f680df63f93d7edee6f6d31567b70"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-range-unresolved.json",
+      "fileSha256": "bef4a400d9b039bfbe12ba8aeb03ee287ceaf4c3b0933ea17f50555634b5740b"
+    }
+  ],
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}
