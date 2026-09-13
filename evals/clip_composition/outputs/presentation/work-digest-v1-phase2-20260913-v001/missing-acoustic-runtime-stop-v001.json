@@ -1,0 +1,3749 @@
+{
+  "schemaVersion": "digest-v1-phase2-missing-acoustic-runtime-stop-v001",
+  "status": "stopped",
+  "stage": "caption-timing-context-reconstruction-before-formal-output",
+  "completed": {
+    "authorizedSixthCorrection": "one-line-only",
+    "testsPassed": 4,
+    "testsFailed": 0
+  },
+  "failedCommand": "node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/digest_v1_phase2_manufacturing.mts timing evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/job.json",
+  "error": "Error: ENOENT: no such file or directory, open '/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/__init__.py'",
+  "missingFilesCause": "not established; observed filesystem absence only",
+  "runtimeBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_acoustics.py",
+      "expectedFileSha256": "76a1aed52a6e5e79d849b7662b60555dd24cf4bbac6d8a2bf09e2249fdcf39f2",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "76a1aed52a6e5e79d849b7662b60555dd24cf4bbac6d8a2bf09e2249fdcf39f2",
+      "bytesMatch": true
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/observe_digest_caption_acoustics_v001.py",
+      "expectedFileSha256": "d70caa42e90fb8865ecc5186ef72744a201daf00611484de6e3a5e13aeadd68d",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "d70caa42e90fb8865ecc5186ef72744a201daf00611484de6e3a5e13aeadd68d",
+      "bytesMatch": true
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/caption_local_acoustics_v001.py",
+      "expectedFileSha256": "258fd83dfb82886e5edadbc5b94b6768b9b9060e52e9262173a4e73743d3568f",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "258fd83dfb82886e5edadbc5b94b6768b9b9060e52e9262173a4e73743d3568f",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/bin/python",
+      "expectedFileSha256": "ac60cfe0268614638d0ffa35f3b0284fc7b3a11482723793455e17eeb278509e",
+      "exists": true,
+      "isSymlink": true,
+      "actualFileSha256": "ac60cfe0268614638d0ffa35f3b0284fc7b3a11482723793455e17eeb278509e",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/__init__.py",
+      "expectedFileSha256": "4902b4653e8074eaef23eceec9cff34945b02d20136ac24afc90fa9b1c117436",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/assets/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/audio.py",
+      "expectedFileSha256": "7bec5600e5567ac4c314470be68dfd67ebca48a20a4386ef3ea5466755c8a0f5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/feature_extractor.py",
+      "expectedFileSha256": "5509a21380cc933327bcb01f1d3d2d5ee2e242a7664e672006796ed4f4491b55",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/tokenizer.py",
+      "expectedFileSha256": "f86379fba9f302fc903f2a9189fe136d17497adae77757a0d3a02af78e544470",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/transcribe.py",
+      "expectedFileSha256": "3356e6a48c801d97719cf0d16d785b8880e7cf2a5c642efb4434951c3cc485a5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/utils.py",
+      "expectedFileSha256": "0da077f09077bb428a380a5ca1ea909a04d8d9379de3eb632252d7d40ec22647",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/vad.py",
+      "expectedFileSha256": "af7bf3eb3f140222004f41185856cd3bb5aeb822588aef6fa41c4fdcf15ffd24",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/faster_whisper/version.py",
+      "expectedFileSha256": "a9b59c80f4308c78b9297d42640e59107e4e4864db2ab905f0638b70ec59fed5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/.dylibs/libctranslate2.4.3.1.dylib",
+      "expectedFileSha256": "2e359199f0a0b83021d596f0db25501355887d4fafab2d2e90d7ea5f0373c0a5",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "2e359199f0a0b83021d596f0db25501355887d4fafab2d2e90d7ea5f0373c0a5",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/__init__.py",
+      "expectedFileSha256": "a34e35cf85e736d9d517e099a15faf51a90745c14139f8aa3ad403389b4774d5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-darwin.so",
+      "expectedFileSha256": "7aacd9f70e95ca487f8a17a2fd8c13c5a12b228c5abb4cdc12b118d45a8a03f3",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "7aacd9f70e95ca487f8a17a2fd8c13c5a12b228c5abb4cdc12b118d45a8a03f3",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/__init__.py",
+      "expectedFileSha256": "4ffc89327b3f5d757aa49cb7496a53b60aef6d3d28c119f170c9ffee2e6aa29e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/converter.py",
+      "expectedFileSha256": "c44dc260f0ef37352778157f36e3c9e7d4b178d29151cc819d2fccb31383dc83",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/fairseq.py",
+      "expectedFileSha256": "b52222d9883f53ac3015c32aea0fe106aa29628af60271e94d2700d727b1d81b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/marian.py",
+      "expectedFileSha256": "8b9a624bfe3348cf459a9d76170207ba8b74a4cf953e1ab630dc6eb7ee146bcd",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/openai_gpt2.py",
+      "expectedFileSha256": "466bf1cba52a6b97fd616f514097c5e1709e35b5e1f80c3ad69e4dfc4d77f613",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/opennmt_py.py",
+      "expectedFileSha256": "3a46a3304fb6a8a69dd5da68854e2861821f9a343ae9a658c4322e0bca203ccb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/opennmt_tf.py",
+      "expectedFileSha256": "5cdc801c2a7c3e6d940e6477fb770607ce0ae86334d3d26ef7f191fca543f1ea",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/opus_mt.py",
+      "expectedFileSha256": "5c201bdd7e1a7d10ad69912b6fb6ef22f24199f5600bd3566bf205e6d3814a64",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/transformers.py",
+      "expectedFileSha256": "af85755c5d2273800c4c8cb11e5822e90e16db9e9fc898c4e920f8c177480965",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/converters/utils.py",
+      "expectedFileSha256": "88b504cd8322f9442818036fac54ec07b9bc2f90e1f48548a3478eaf8b6c4bf2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/extensions.py",
+      "expectedFileSha256": "77a0f38f5efae3d98d02625ac462bb8902f9eed709b1ab5d8ca08891891c7e9b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/logging.py",
+      "expectedFileSha256": "c66c762e5af23a100f6cc989c0c02bf89b97659a2047d8fad8e34d659d9f14e4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/models/__init__.py",
+      "expectedFileSha256": "ace696282fba15435a67484babb772ba19d8dd1115784056813ef49ca63e4178",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/__init__.py",
+      "expectedFileSha256": "d825793c5694de315559040d0e757fa4b4ca67847e2f5e452443dfe610113da8",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/attention_spec.py",
+      "expectedFileSha256": "af4632428f64a4fcaa07f130b64bd84cae173357105c166e037602b7fecc9d23",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/common_spec.py",
+      "expectedFileSha256": "6292be5e342a0cc3e450115beb77c46a537710956c13f6f5038bd1a0bf474c0b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/model_spec.py",
+      "expectedFileSha256": "565dc4766f3e39e8f78ba994544e9175ae3a7b9e771928b603f5395289a753cb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/transformer_spec.py",
+      "expectedFileSha256": "0d1ff0fab42071479fed66c6882cd36e9e333f383e5eef5ff29ab56832cf9a40",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/wav2vec2_spec.py",
+      "expectedFileSha256": "7c0797e54cb54ab6b7917ee34f76ae78143a5c59195e40c1fddba8affe26d111",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/specs/whisper_spec.py",
+      "expectedFileSha256": "bf1c6b02c1d8188b580b62bd630da07851146d799e1ad72a1585c332a71ad250",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/ctranslate2/version.py",
+      "expectedFileSha256": "2afa1971f096dc8feb009212e2b0aec7f3c53e60662699c8d9185e07c7a30211",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/__init__.py",
+      "expectedFileSha256": "644e596a052fa1b05272b1c141d1286e1c78c2a3346ecabd17d68b62404d8d84",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/decoders/__init__.py",
+      "expectedFileSha256": "946a77da1f2a7ab134178f20c992fcc0699e4159668d5a5e22c45bd5233d91fe",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/__init__.py",
+      "expectedFileSha256": "57302ca65688a3bae5e0014ef0c8aeee283b31f663be89f055b959c34d7347a3",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/base_tokenizer.py",
+      "expectedFileSha256": "d9315984bba968988c0d8189b94366c5826ff9c9d1f1b0c799b333698a4544eb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/bert_wordpiece.py",
+      "expectedFileSha256": "b0a0ae9b414a3d875280914937c2c37ab541a130d14aacaa49dadc9be96f42a2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/byte_level_bpe.py",
+      "expectedFileSha256": "380fe3cb2dc44266136ba8677fe10ac0b385bb2ae8a8560e273db9cac3360549",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/char_level_bpe.py",
+      "expectedFileSha256": "436644016d313101c5ed8094b66a65c1ac5b53e2743f634ae0f24633151bfbf7",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/sentencepiece_bpe.py",
+      "expectedFileSha256": "2f0ae87e8a219d47cc13694ada5418a3240884ff3844fd022251d16a3d21c8db",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/implementations/sentencepiece_unigram.py",
+      "expectedFileSha256": "4988955cbf19b6a2d72a9baac27c26adfc601a8b6ef320243aeedd2f3b445c8a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/models/__init__.py",
+      "expectedFileSha256": "7896781d3010669c672882cdca559a4c5ab15f2f816ba38ab3058de3b7de795f",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/normalizers/__init__.py",
+      "expectedFileSha256": "84a3b09ea58cf8895c56fec70d64fd4988657337afb82343409634e591719339",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/pre_tokenizers/__init__.py",
+      "expectedFileSha256": "c1de8a61003f46c19240af87786f68a53461bf8b6d4919329e8d9d93a6b3f8f3",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/processors/__init__.py",
+      "expectedFileSha256": "c4cd8310ac0ab4722e987b2ccccf00324abe0256aabc16455d680b53c48d84e6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/tokenizers.cpython-312-darwin.so",
+      "expectedFileSha256": "ee4974d908c2f8bc1b81c2941d393824bd0e05be5f6951e4fe9eaf95c6cb18f5",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "ee4974d908c2f8bc1b81c2941d393824bd0e05be5f6951e4fe9eaf95c6cb18f5",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/tools/__init__.py",
+      "expectedFileSha256": "c46f1c681f4e1c2f1c6c1d354b9bd8575e0767184ee9e59b2de86c6fbd29a62a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/tools/visualizer.py",
+      "expectedFileSha256": "822f84d8d08fec5b86eae8e940e75a9524d7525695f3957a348f993cf4ef03fe",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/tokenizers/trainers/__init__.py",
+      "expectedFileSha256": "513bb6d8019ca7be88be95b8e712d16c95844f4e0dc4f5ba35f09bd98633d043",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libaom.3.2.0.dylib",
+      "expectedFileSha256": "7a5b7e3a898081ed1e63c86cf4b39cacf36efd74241a4c0403d9b56d83970ae1",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "7a5b7e3a898081ed1e63c86cf4b39cacf36efd74241a4c0403d9b56d83970ae1",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libavcodec.60.31.102.dylib",
+      "expectedFileSha256": "9ba689962501dad8a4b404bb83d4d8eeb6b9937d5e7a1ced3f36ec31247bc660",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "9ba689962501dad8a4b404bb83d4d8eeb6b9937d5e7a1ced3f36ec31247bc660",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libavdevice.60.3.100.dylib",
+      "expectedFileSha256": "520a4bce87062d75c343d2817c2bbb4115436f58ee9852eb8d9d87dbf2750bf3",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "520a4bce87062d75c343d2817c2bbb4115436f58ee9852eb8d9d87dbf2750bf3",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libavfilter.9.12.100.dylib",
+      "expectedFileSha256": "c3810a411db98cc0985a154005294bb1482d95e619b39abf15a849cfbc624a11",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "c3810a411db98cc0985a154005294bb1482d95e619b39abf15a849cfbc624a11",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libavformat.60.16.100.dylib",
+      "expectedFileSha256": "656c6d92607149ccb8490231596cc7168b2ad6196315588d86695190d00dba1d",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "656c6d92607149ccb8490231596cc7168b2ad6196315588d86695190d00dba1d",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libavutil.58.29.100.dylib",
+      "expectedFileSha256": "7e21389afd54fb17e4d36def34715411cd187291191581fd7d6b86286720c614",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "7e21389afd54fb17e4d36def34715411cd187291191581fd7d6b86286720c614",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libbluray.2.dylib",
+      "expectedFileSha256": "b637724d87324b9b0c714e4394f80633560de17f29d3784b35b3fccbbdb30fb3",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "b637724d87324b9b0c714e4394f80633560de17f29d3784b35b3fccbbdb30fb3",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libdav1d.7.dylib",
+      "expectedFileSha256": "05d6807b4e72f0c3c203fe5db21514a57d6c48c83a7ed3b080759d334afeccc7",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "05d6807b4e72f0c3c203fe5db21514a57d6c48c83a7ed3b080759d334afeccc7",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libfontconfig.1.dylib",
+      "expectedFileSha256": "c9c12035e14e6f1421e4367d80d7a41db74753fc67853e6fbe45c68184bef6fd",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "c9c12035e14e6f1421e4367d80d7a41db74753fc67853e6fbe45c68184bef6fd",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libfreetype.6.dylib",
+      "expectedFileSha256": "65b9f9dcb65c2660022608253d07b2e25a6c360189aede123082e425d5a63d24",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "65b9f9dcb65c2660022608253d07b2e25a6c360189aede123082e425d5a63d24",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libgmp.10.dylib",
+      "expectedFileSha256": "f415877efc5ecde2a50a52d71ca9de993fd2c09c306de88670d6e5b6b9a09e4b",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "f415877efc5ecde2a50a52d71ca9de993fd2c09c306de88670d6e5b6b9a09e4b",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/liblzma.5.dylib",
+      "expectedFileSha256": "874688b99086863e63c35d4a55af89fbcd91800bad6ab6cdf89b6e1563b3c08f",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "874688b99086863e63c35d4a55af89fbcd91800bad6ab6cdf89b6e1563b3c08f",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libmp3lame.0.dylib",
+      "expectedFileSha256": "fb479cc7d24daa7f0530d405369d1d3b2c36a85c419be381ab7d48acea0d9e4e",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "fb479cc7d24daa7f0530d405369d1d3b2c36a85c419be381ab7d48acea0d9e4e",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libogg.0.dylib",
+      "expectedFileSha256": "8f71f6fb720b5c7265ec560643be47e94e2530f5d7ae8f2c32cb5c989415f804",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "8f71f6fb720b5c7265ec560643be47e94e2530f5d7ae8f2c32cb5c989415f804",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libopencore-amrnb.0.dylib",
+      "expectedFileSha256": "d393c8923a027b61ea73fc0c3fdb0011ee679430eaf026e196345a1b0f6cf08e",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "d393c8923a027b61ea73fc0c3fdb0011ee679430eaf026e196345a1b0f6cf08e",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libopencore-amrwb.0.dylib",
+      "expectedFileSha256": "7890d9d569f7be7040764171c36741793ef50d91aababf37adf57ee0f7713299",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "7890d9d569f7be7040764171c36741793ef50d91aababf37adf57ee0f7713299",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libopenjp2.2.5.2.dylib",
+      "expectedFileSha256": "2503cc7058590626b77801eeb1f9c90f0ddfdf6d60a3cccb288183799b82ad74",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "2503cc7058590626b77801eeb1f9c90f0ddfdf6d60a3cccb288183799b82ad74",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libopus.0.dylib",
+      "expectedFileSha256": "78ddd594daac8b256e4f3fd84d47ab254037e313288b1b69bf98b5d60bdc1ee5",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "78ddd594daac8b256e4f3fd84d47ab254037e313288b1b69bf98b5d60bdc1ee5",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libpng16.16.dylib",
+      "expectedFileSha256": "0503df2e1d3c0f5290f4ef93fb166a6434101ba660ebe4df85a06a521ad880d0",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "0503df2e1d3c0f5290f4ef93fb166a6434101ba660ebe4df85a06a521ad880d0",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libpostproc.57.3.100.dylib",
+      "expectedFileSha256": "712f0b00c04c7973867c1b15c29ec43d9b9daa497b2370deb0244d0a3d38ee3f",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "712f0b00c04c7973867c1b15c29ec43d9b9daa497b2370deb0244d0a3d38ee3f",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libsharpyuv.0.1.0.dylib",
+      "expectedFileSha256": "6a03bda0d1790b70cfaf42a87b04ddb4461d70cad12319cb347267ebb5711145",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "6a03bda0d1790b70cfaf42a87b04ddb4461d70cad12319cb347267ebb5711145",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libspeex.1.dylib",
+      "expectedFileSha256": "3114c3c6aadecc02f368711f20458ee32fcc56dfa2a9d4a518762eaa5ba97194",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "3114c3c6aadecc02f368711f20458ee32fcc56dfa2a9d4a518762eaa5ba97194",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libswresample.4.12.100.dylib",
+      "expectedFileSha256": "f2bac73128cff08384b5a4ac666f55166ac08dd6f7751a1995777144a03d55fc",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "f2bac73128cff08384b5a4ac666f55166ac08dd6f7751a1995777144a03d55fc",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libswscale.7.5.100.dylib",
+      "expectedFileSha256": "d99ce81646ce1bcfc34dd511f3b8cc53d73ab493394197350c4e03868e9f206d",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "d99ce81646ce1bcfc34dd511f3b8cc53d73ab493394197350c4e03868e9f206d",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libtwolame.0.dylib",
+      "expectedFileSha256": "7e89d79fcc5123c89e64bb78801ce832d9421cd9ed4b8cedbbd8a8b6a8aa57bd",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "7e89d79fcc5123c89e64bb78801ce832d9421cd9ed4b8cedbbd8a8b6a8aa57bd",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libvorbis.0.dylib",
+      "expectedFileSha256": "11e32dee6078da18ed6f065a931e45e953c800404f9db795653d130f21b3f072",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "11e32dee6078da18ed6f065a931e45e953c800404f9db795653d130f21b3f072",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libvorbisenc.2.dylib",
+      "expectedFileSha256": "95c425e5d00a242f77576935a4ccc68bfbf94d9dcef43f8197fff123b380dc38",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "95c425e5d00a242f77576935a4ccc68bfbf94d9dcef43f8197fff123b380dc38",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libvpx.9.dylib",
+      "expectedFileSha256": "2e793e67ca1b2eaefdd1035c7335993ae6235b12fc4e1d9a08c4dfb8ec719bde",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "2e793e67ca1b2eaefdd1035c7335993ae6235b12fc4e1d9a08c4dfb8ec719bde",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libwebp.7.1.9.dylib",
+      "expectedFileSha256": "97b6c7aa11bd6329fae8ddbf4839ba5dbddb4327b1b768b5aa7a1a2aafd52e27",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "97b6c7aa11bd6329fae8ddbf4839ba5dbddb4327b1b768b5aa7a1a2aafd52e27",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libwebpmux.3.1.0.dylib",
+      "expectedFileSha256": "2e1df58ae4cc22b87af5de10ef254a4cc4202419a0091c945102aa93a9306b6f",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "2e1df58ae4cc22b87af5de10ef254a4cc4202419a0091c945102aa93a9306b6f",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libx264.164.dylib",
+      "expectedFileSha256": "52f44107fa9647c96335afbfbd498c2f137604f685075743855bb887a6f9ada8",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "52f44107fa9647c96335afbfbd498c2f137604f685075743855bb887a6f9ada8",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libx265.199.dylib",
+      "expectedFileSha256": "b841a04fb25d14a20be41f62061aa317c85373ccd674c0ba54cb2df2109d277f",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "b841a04fb25d14a20be41f62061aa317c85373ccd674c0ba54cb2df2109d277f",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/.dylibs/libxml2.2.dylib",
+      "expectedFileSha256": "b15927c0ac7c6101d143a3e100a930da1da9b8ae7db935dbd407c688a9428784",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "b15927c0ac7c6101d143a3e100a930da1da9b8ae7db935dbd407c688a9428784",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/__init__.py",
+      "expectedFileSha256": "47cfd2f6593add137ff630b31e72c8aaa368467e8cd9a0aee49f011674180ab5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/__main__.py",
+      "expectedFileSha256": "1dceae7863f0a4933081b5f87657af9e5742f49ae562609152de340bf9380d99",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/_core.cpython-312-darwin.so",
+      "expectedFileSha256": "53cfd89b383a50fedbc29fa3cc539250613345aa8e33bf3e1b0904e32accd85c",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "53cfd89b383a50fedbc29fa3cc539250613345aa8e33bf3e1b0904e32accd85c",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/about.py",
+      "expectedFileSha256": "8e8a2f2ce8eb7b3cf2a3b133a4277f1a6b6ac05cd15a7aa38133fec2efa2739c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/__init__.py",
+      "expectedFileSha256": "8aa6bc1873865b3fc2bd51a9d566a18204fbed67b3d2f5f1051498481136af33",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/codeccontext.cpython-312-darwin.so",
+      "expectedFileSha256": "f982cbc7fe4dd16e076a53940443e375b6de5e464a91e4c09951910a4da465ce",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "f982cbc7fe4dd16e076a53940443e375b6de5e464a91e4c09951910a4da465ce",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/fifo.cpython-312-darwin.so",
+      "expectedFileSha256": "329ff61b3f3c5c682cca054cd6bd2bc79199a69190bdbba7e07586967cf387d7",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "329ff61b3f3c5c682cca054cd6bd2bc79199a69190bdbba7e07586967cf387d7",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/format.cpython-312-darwin.so",
+      "expectedFileSha256": "f3f757c979db8066487a6d8cbef85828943939447264f91a622595803cf40bff",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "f3f757c979db8066487a6d8cbef85828943939447264f91a622595803cf40bff",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/frame.cpython-312-darwin.so",
+      "expectedFileSha256": "58f92bb083af8774de862fda2c805dd023b3b3192c88baee928aebfaba44a851",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "58f92bb083af8774de862fda2c805dd023b3b3192c88baee928aebfaba44a851",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/layout.cpython-312-darwin.so",
+      "expectedFileSha256": "3fa64a1e98ce515e65acf811786fbab36eaef11a002a2e0b5f22a8baddf2e002",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "3fa64a1e98ce515e65acf811786fbab36eaef11a002a2e0b5f22a8baddf2e002",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/plane.cpython-312-darwin.so",
+      "expectedFileSha256": "50f7602d8a7b4447e4e359bc71c62bf68e6e6831c9f014ec7c65f1eb6d6114c7",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "50f7602d8a7b4447e4e359bc71c62bf68e6e6831c9f014ec7c65f1eb6d6114c7",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/resampler.cpython-312-darwin.so",
+      "expectedFileSha256": "cbc5d06b7bf0d04986816afce06d87b230ff22aad6e00d4b36a848ba3f626fe3",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "cbc5d06b7bf0d04986816afce06d87b230ff22aad6e00d4b36a848ba3f626fe3",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/audio/stream.cpython-312-darwin.so",
+      "expectedFileSha256": "175dbee72b894d1504f23dff7f75ba87cdc88b221a46c3ec2dc3e9336e35d5fc",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "175dbee72b894d1504f23dff7f75ba87cdc88b221a46c3ec2dc3e9336e35d5fc",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/bitstream.cpython-312-darwin.so",
+      "expectedFileSha256": "bffeb17583d8e74dbabf05f78656c5a958cf0bd6bb142a904a596e050bb4a2fc",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "bffeb17583d8e74dbabf05f78656c5a958cf0bd6bb142a904a596e050bb4a2fc",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/buffer.cpython-312-darwin.so",
+      "expectedFileSha256": "72ddc3a73974869ad5f434343e6188ced99e59c0822a52ebd16a9db0b148e53e",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "72ddc3a73974869ad5f434343e6188ced99e59c0822a52ebd16a9db0b148e53e",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/bytesource.cpython-312-darwin.so",
+      "expectedFileSha256": "7a51c9b6bd3687855793e1b5c91b7157998eec008b2420a5b73f8ca7be404d1c",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "7a51c9b6bd3687855793e1b5c91b7157998eec008b2420a5b73f8ca7be404d1c",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/codec/__init__.py",
+      "expectedFileSha256": "64355c1a45f468003b400d171ab553cff050a3a88b39c8bf530f5987b608845b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/codec/codec.cpython-312-darwin.so",
+      "expectedFileSha256": "38f5ec87f0908083d1b15b396ada1d4c455717b7186afeb689d736d50aa57470",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "38f5ec87f0908083d1b15b396ada1d4c455717b7186afeb689d736d50aa57470",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/codec/context.cpython-312-darwin.so",
+      "expectedFileSha256": "c82d8daf4b04a4b072317a71d8599a8603f971304de0edafc1fa0729626689e5",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "c82d8daf4b04a4b072317a71d8599a8603f971304de0edafc1fa0729626689e5",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/__init__.py",
+      "expectedFileSha256": "ef5504c479a35f35e356f5250f68af5bbd956fb1545bdf2885b07838bb4c43d2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/core.cpython-312-darwin.so",
+      "expectedFileSha256": "6314740a2da33c82894ceadf163d49a0e1aa9d65c7824dcde4c872531f97dd29",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "6314740a2da33c82894ceadf163d49a0e1aa9d65c7824dcde4c872531f97dd29",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/input.cpython-312-darwin.so",
+      "expectedFileSha256": "ea8db18f086ac1b2bdbb89a4ebd78ffb3b3eb8d840b71997b007b89a1ff6f285",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "ea8db18f086ac1b2bdbb89a4ebd78ffb3b3eb8d840b71997b007b89a1ff6f285",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/output.cpython-312-darwin.so",
+      "expectedFileSha256": "a2672dd09d19de2f5dc4fbd446402f66fbfb55ac439ccba95d5a57aa9eb070c2",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "a2672dd09d19de2f5dc4fbd446402f66fbfb55ac439ccba95d5a57aa9eb070c2",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/pyio.cpython-312-darwin.so",
+      "expectedFileSha256": "a8280589d2ba9165f628de4dd17f6992e6023a025f5829ddf7e4a6781d7f97c6",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "a8280589d2ba9165f628de4dd17f6992e6023a025f5829ddf7e4a6781d7f97c6",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/container/streams.cpython-312-darwin.so",
+      "expectedFileSha256": "301d3bb9f67d731d47f9274e3130835344b86dd2e156a88c183f3f86a17f7423",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "301d3bb9f67d731d47f9274e3130835344b86dd2e156a88c183f3f86a17f7423",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/data/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/data/stream.cpython-312-darwin.so",
+      "expectedFileSha256": "31c3fd5c9de52bc059b88f9aa19025f926813a160a6fcc7b3a03310e8c1b53d0",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "31c3fd5c9de52bc059b88f9aa19025f926813a160a6fcc7b3a03310e8c1b53d0",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/datasets.py",
+      "expectedFileSha256": "72bc4de3e530192386e9e1cd7e58bb9129ce83073748af1f9d8fa9f078dee027",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/deprecation.py",
+      "expectedFileSha256": "7f8dab1a075d9a90c4272269ca410e9c499414f975cdb2ee00b6be45db83dec6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/descriptor.cpython-312-darwin.so",
+      "expectedFileSha256": "447dfd61851b8076f73cdcec05f96cae4e4f412bb72a48877172418a7d1487cc",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "447dfd61851b8076f73cdcec05f96cae4e4f412bb72a48877172418a7d1487cc",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/dictionary.cpython-312-darwin.so",
+      "expectedFileSha256": "6bb3a64df4ddfdd99bcd5a34932c441d109a2dc9049f1f67a7a483415ec2d066",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "6bb3a64df4ddfdd99bcd5a34932c441d109a2dc9049f1f67a7a483415ec2d066",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/enum.cpython-312-darwin.so",
+      "expectedFileSha256": "b973b56184feed884f9cc3c76577eb8d3a72b09bb0253496a019554389b9b878",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "b973b56184feed884f9cc3c76577eb8d3a72b09bb0253496a019554389b9b878",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/error.cpython-312-darwin.so",
+      "expectedFileSha256": "7b2aba269e707508e0c02dc9e48a8ff7839a775f6670dadcfd82fefb5d473b80",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "7b2aba269e707508e0c02dc9e48a8ff7839a775f6670dadcfd82fefb5d473b80",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/__init__.py",
+      "expectedFileSha256": "697d987744935cc2ce83cc7d7086117aea343a1da1bd33b94321ba6b6cf4f8c1",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/context.cpython-312-darwin.so",
+      "expectedFileSha256": "b9d9782f134763daaabddfbc16307e468090ab8a967b49a6ccfe8de46a6f696b",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "b9d9782f134763daaabddfbc16307e468090ab8a967b49a6ccfe8de46a6f696b",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/filter.cpython-312-darwin.so",
+      "expectedFileSha256": "fb89dadba2338e910eb520114bc2031c076c2cfddcf24ebc8b4f4aaf3dbe5540",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "fb89dadba2338e910eb520114bc2031c076c2cfddcf24ebc8b4f4aaf3dbe5540",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/graph.cpython-312-darwin.so",
+      "expectedFileSha256": "ba573848d3de5e5f1965afb9ed74e3ac8705046447073620343542cb9e6b5ef1",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "ba573848d3de5e5f1965afb9ed74e3ac8705046447073620343542cb9e6b5ef1",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/link.cpython-312-darwin.so",
+      "expectedFileSha256": "2999d7b71e041f43b509959906fbaf1cfb2662d7f56fab7b22d3490143ba1fe9",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "2999d7b71e041f43b509959906fbaf1cfb2662d7f56fab7b22d3490143ba1fe9",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/filter/pad.cpython-312-darwin.so",
+      "expectedFileSha256": "4e784f4de68985ee11318cd2043a2ec513f1295cd1e75a8a227808a0a010d7c6",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "4e784f4de68985ee11318cd2043a2ec513f1295cd1e75a8a227808a0a010d7c6",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/format.cpython-312-darwin.so",
+      "expectedFileSha256": "2843ecfb6c9931f7fab010d4bf6683c7aeba99b7ff93c5f2ca4348ee1c6db2ac",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "2843ecfb6c9931f7fab010d4bf6683c7aeba99b7ff93c5f2ca4348ee1c6db2ac",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/frame.cpython-312-darwin.so",
+      "expectedFileSha256": "bf18c5c4a4af9c495ae07ec072c5902b168ab6b65a474cf534c2341337fad320",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "bf18c5c4a4af9c495ae07ec072c5902b168ab6b65a474cf534c2341337fad320",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/logging.cpython-312-darwin.so",
+      "expectedFileSha256": "36a28c119edaf9d2b8ffde2c3cf010205e15af94354a6fcf223a822e551a84f4",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "36a28c119edaf9d2b8ffde2c3cf010205e15af94354a6fcf223a822e551a84f4",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/option.cpython-312-darwin.so",
+      "expectedFileSha256": "03df0abe7ffda0b2fc284c66b3be85e067f5e8f90df0f0877464ed92562441c2",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "03df0abe7ffda0b2fc284c66b3be85e067f5e8f90df0f0877464ed92562441c2",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/packet.cpython-312-darwin.so",
+      "expectedFileSha256": "76a9480db92b455ea9b4eab4f0e30336de950ccea21a6c560c0a91bdec4ef857",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "76a9480db92b455ea9b4eab4f0e30336de950ccea21a6c560c0a91bdec4ef857",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/plane.cpython-312-darwin.so",
+      "expectedFileSha256": "e036c8fb7d92b9c8a6c3c07ed7332a409570d812dc305c5d2cdcbe4de35ee92b",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "e036c8fb7d92b9c8a6c3c07ed7332a409570d812dc305c5d2cdcbe4de35ee92b",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/sidedata/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/sidedata/motionvectors.cpython-312-darwin.so",
+      "expectedFileSha256": "d93e618177641d6a5f825b58de9414f5b16f2d28c546ae079ea6ef5618c8398c",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "d93e618177641d6a5f825b58de9414f5b16f2d28c546ae079ea6ef5618c8398c",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/sidedata/sidedata.cpython-312-darwin.so",
+      "expectedFileSha256": "53bd627e812dde333b216cb8c04387d62d14be6db1a793d63044e8def8ade497",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "53bd627e812dde333b216cb8c04387d62d14be6db1a793d63044e8def8ade497",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/stream.cpython-312-darwin.so",
+      "expectedFileSha256": "f37a4c4cae7897bd88d19b94acda7384faac786a4f5e51fbf3f204f258158c67",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "f37a4c4cae7897bd88d19b94acda7384faac786a4f5e51fbf3f204f258158c67",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/subtitles/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/subtitles/codeccontext.cpython-312-darwin.so",
+      "expectedFileSha256": "7720d0a3cf45c0eceb968b387fa3b23c31548eb040a97c900c2537c74dfc05b4",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "7720d0a3cf45c0eceb968b387fa3b23c31548eb040a97c900c2537c74dfc05b4",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/subtitles/stream.cpython-312-darwin.so",
+      "expectedFileSha256": "903f5efa5825fbbc11aeb351deaf54d2ba5ecb137ff54c735bbd81202de38828",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "903f5efa5825fbbc11aeb351deaf54d2ba5ecb137ff54c735bbd81202de38828",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/subtitles/subtitle.cpython-312-darwin.so",
+      "expectedFileSha256": "2e829983bf5ab26b0404d7fd20035c4aabe651ac42c506b19e7e75adf3d441d8",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "2e829983bf5ab26b0404d7fd20035c4aabe651ac42c506b19e7e75adf3d441d8",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/utils.cpython-312-darwin.so",
+      "expectedFileSha256": "92ff20499c0dc74d9dffa7ccd3ba7176d96448b3bc6e4b7fa1de7294cb4838c1",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "92ff20499c0dc74d9dffa7ccd3ba7176d96448b3bc6e4b7fa1de7294cb4838c1",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/__init__.py",
+      "expectedFileSha256": "0511ffaaee95acb2a71aad61a665e661054efe8fabdf67e7b11f95e8d99b2e2b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/codeccontext.cpython-312-darwin.so",
+      "expectedFileSha256": "addac1f30c0ae42a8cd19b809a9843563fd6c1639e909aa1417507535d284f49",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "addac1f30c0ae42a8cd19b809a9843563fd6c1639e909aa1417507535d284f49",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/format.cpython-312-darwin.so",
+      "expectedFileSha256": "5d05bcc40674efa7c11c4a3041c900dbb4b3e60eb165f3b7d7040dd95a577be4",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "5d05bcc40674efa7c11c4a3041c900dbb4b3e60eb165f3b7d7040dd95a577be4",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/frame.cpython-312-darwin.so",
+      "expectedFileSha256": "2beebc524529be65745d3cdde64c7495660e0e5cf5e4d4ad79a0d040517e9c2c",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "2beebc524529be65745d3cdde64c7495660e0e5cf5e4d4ad79a0d040517e9c2c",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/plane.cpython-312-darwin.so",
+      "expectedFileSha256": "aa1a7c3b45dda3699c965e284293497277ae06c3f9aaf16db1329de5cd157855",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "aa1a7c3b45dda3699c965e284293497277ae06c3f9aaf16db1329de5cd157855",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/reformatter.cpython-312-darwin.so",
+      "expectedFileSha256": "22a03765e5b5611754c0855558efad5b152f89df34a3ed3d7586c0d265b1816f",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "22a03765e5b5611754c0855558efad5b152f89df34a3ed3d7586c0d265b1816f",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/av/video/stream.cpython-312-darwin.so",
+      "expectedFileSha256": "43309cb28591f67a28ab9e68e13dc04215f88a80c251fce7452bf7eae73fa54f",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "43309cb28591f67a28ab9e68e13dc04215f88a80c251fce7452bf7eae73fa54f",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/.dylibs/libgcc_s.1.1.dylib",
+      "expectedFileSha256": "baee2e6118dd54c0852f881d718516d70884de84bfaa085de5d8d8f90baa3b06",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "baee2e6118dd54c0852f881d718516d70884de84bfaa085de5d8d8f90baa3b06",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/.dylibs/libgfortran.5.dylib",
+      "expectedFileSha256": "5eb02fa55064ff8ae537dbdb1b0ae0b2175c845adbba089bd44616c06ec321eb",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "5eb02fa55064ff8ae537dbdb1b0ae0b2175c845adbba089bd44616c06ec321eb",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/.dylibs/libopenblas64_.0.dylib",
+      "expectedFileSha256": "dde2b735d01caa531885115ea853b5a4172b935167b95a1acb2a10243e0d97e7",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "dde2b735d01caa531885115ea853b5a4172b935167b95a1acb2a10243e0d97e7",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/.dylibs/libquadmath.0.dylib",
+      "expectedFileSha256": "1b341ae276c4adcb30c070b774ec6e68e819c883e897f0de8941d553f7989a0d",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "1b341ae276c4adcb30c070b774ec6e68e819c883e897f0de8941d553f7989a0d",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/__config__.py",
+      "expectedFileSha256": "5f03da9aecc8f3896d0e041662f7630b1ce7569dd32e9022bcca65415e9ceaca",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/__init__.py",
+      "expectedFileSha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/__init__.py",
+      "expectedFileSha256": "0bcffbc1b1ea524077e49a2e63f5cab1ab3528ba5167b2475ae67b54638f5695",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/_dtype.py",
+      "expectedFileSha256": "bc4d7afb28b051262c0086eaec594463519b5d9029f308c00c3c498377815fe5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/_dtype_ctypes.py",
+      "expectedFileSha256": "8b9121a163d486ee2495add7bb866f5c5d6554b3e223a660e21ea8f236a26a6a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/_internal.py",
+      "expectedFileSha256": "839ba09aa0e05214a589ee7ea2739cb5c9b8a7481c30748844b1d562d1539353",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/_multiarray_umath.py",
+      "expectedFileSha256": "54fb684f6b879f2537aca2f41b6ec28263660755911ccd26b5ced8f4bf390b75",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/multiarray.py",
+      "expectedFileSha256": "919c42ffb3f7270cf5440a73414d901a6a92ab830012f2a66891189c0b1b48eb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_core/umath.py",
+      "expectedFileSha256": "61c57471d6c671e9ba0f93f7c97edc47d1c6601ad3f15328020081cc6c0f8608",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_distributor_init.py",
+      "expectedFileSha256": "20acb64c7c26bb9520063b556f06c3f47f80a7cb9a509a0f2766ed43825ab5da",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_globals.py",
+      "expectedFileSha256": "9de11d71f2d9a072f06deaffd57cab9f6e8b717cb432b4ad6b4dd97bb68a6ba8",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_pyinstaller/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_pyinstaller/hook-numpy.py",
+      "expectedFileSha256": "3d443e98d5a37ba6c500b07e98b54544f92f6cce09a4b5ee9c1eac8c16d3cb98",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_pyinstaller/pyinstaller-smoke.py",
+      "expectedFileSha256": "ea22fe787310686debc674b912072fac2a84966f5a28bd3b0a3af51592525e5b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_pyinstaller/test_pyinstaller.py",
+      "expectedFileSha256": "f0afbb43199fa17086d0dc11d1b84880236b0e31a5ad3cd69eb475b11f1bb605",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_pytesttester.py",
+      "expectedFileSha256": "950513bca573ea44fc6f8ca2315fae5bebc6f4a4aff54cea026c5a10c7b34ddf",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/__init__.py",
+      "expectedFileSha256": "eb0f44f55f55693eef4ccfaf7ae6bc5dcc92bf9d097b9a923c9ccaf474e87088",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_add_docstring.py",
+      "expectedFileSha256": "c508505f7ef668dfe6dd737de429de3313924f615d3dca2f47e31733ef5ea79f",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_array_like.py",
+      "expectedFileSha256": "2f8827c762961bcc98728bb3e5bf5ba0922490536d38957a423727182adb9d16",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_char_codes.py",
+      "expectedFileSha256": "2d1e753b90140436c2989be5328c7252fb1fbdbd69ed61eb7b182d4c6b6e5937",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_dtype_like.py",
+      "expectedFileSha256": "db5531cb452021ac0633cdb18c317f89f32afa73fe064867fcba622bf1ef582e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_extended_precision.py",
+      "expectedFileSha256": "7468a8b3ed64f900467b0ed817338d653cd55b1cfe69801aaa571c976fe1e41a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_nbit.py",
+      "expectedFileSha256": "f8440e4a11e9077af7d1be1154472bb90453713685019c2da8227806cbe91330",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_nested_sequence.py",
+      "expectedFileSha256": "e5e35a559015f6d6502c558760eb95b37dfa263a22696c72650edc30a6fa9b52",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_scalars.py",
+      "expectedFileSha256": "7953fc3e395c4c8958eefd1f448ded1573e8816b692c967c9c5bd146b2e30eab",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/_shape.py",
+      "expectedFileSha256": "24fcbb8c93242121854e792088489f60cfb8c537236fb24c4642c822364bc34f",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_typing/setup.py",
+      "expectedFileSha256": "484d10e873ea0e35947dc780e325e090823ccb7cfb122485d19f8c370388c86e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_utils/__init__.py",
+      "expectedFileSha256": "1e17adc2c8b779305ef077566c6e75cd799cad7d4388f2f19184abb2530b61c7",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_utils/_convertions.py",
+      "expectedFileSha256": "d3133175e2cece20e61ec44cffc96e121e12fa441d328320e86c4d0c36acebd9",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_utils/_inspect.py",
+      "expectedFileSha256": "f0c6bb4014707d258a78ad52849a4535cec20e113a7e4204ff0af5171ac6d40f",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/_utils/_pep440.py",
+      "expectedFileSha256": "56bec1dd0b228d1e69ea1f18033d8b8cd194cb31d4279819e2fdba3696402837",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/__init__.py",
+      "expectedFileSha256": "5edb6d59b0dfe98874fe6e33a7e2ffbace072a7577a06c1d941ea7fb4d50f4cf",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_array_object.py",
+      "expectedFileSha256": "adf081cc4eaf5239381c49501935707ba4f0dafc62531eed981a501269b58819",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_constants.py",
+      "expectedFileSha256": "0186b23768dfd43a79ad767b58f05d521b4f068fc93028bea43f685b9ce61642",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_creation_functions.py",
+      "expectedFileSha256": "e92a8777366a1ce245132585b6a9e3e8a20a462beb197c513a58277b3ff732dd",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_data_type_functions.py",
+      "expectedFileSha256": "3f9ec53ac35d5da84d52b895b5d95da276ef050aeb664573c596dcaa447ff000",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_dtypes.py",
+      "expectedFileSha256": "90353534bbc440df96d873e6276c063f1f2388d9056ebbd3083d53d514fc3f0a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_elementwise_functions.py",
+      "expectedFileSha256": "d241ae0d7dd4aff429ead04c0564ceecb3d4c735cd180940d9248985d029e035",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_indexing_functions.py",
+      "expectedFileSha256": "77e833ab3caf478e4541ead1609adb0730961670ec656488f6982003941644ee",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_manipulation_functions.py",
+      "expectedFileSha256": "a82a16e41e455dc14e58a3d4f43f4c5c774c79722ecef9c7514be9acd9707e37",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_searching_functions.py",
+      "expectedFileSha256": "986662aa17985c65a20caf6ba971620ca5f4fc1d262753a3740fbd142da8e650",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_set_functions.py",
+      "expectedFileSha256": "50ba5f2b5cf39d6f63a17d435d288fd11dda85c0c1fe9a3b999969b11aa2ec5b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_sorting_functions.py",
+      "expectedFileSha256": "ee9b3397134defe0cda84665a2718b150ae55cf3fb7af540f23377d4d4a1834d",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_statistical_functions.py",
+      "expectedFileSha256": "1eca5f62d7995926b722732cd74299cfeb24dd9b96ead797e9f35da3cdbd4fce",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_typing.py",
+      "expectedFileSha256": "b8a89d469ea76318079c43daa975d9b030d9eadc352ec8696f02efcbed3d79e3",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/_utility_functions.py",
+      "expectedFileSha256": "1f0c9cca56cf020455cf89d9be3bf0a8dde642725ba8a03e35131a02f20ff821",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/linalg.py",
+      "expectedFileSha256": "40fa46dad1b5a598338ebb538e33aed860eeddc23a5294ac2ebb06fe8d635d89",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/setup.py",
+      "expectedFileSha256": "5b1eaa0fb194fc03e2a8aa2560f3b4387bf8787198ae33d99830208d684e1213",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/__init__.py",
+      "expectedFileSha256": "b7fd8667794a72cbb879ce0630a3d40d869e3142720eab8195001c3e08fb9051",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_array_object.py",
+      "expectedFileSha256": "150a00c4fe022c38afea28a1f0a2940d22ee60ce9db670dc0757f4a4c1f0e3e3",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_creation_functions.py",
+      "expectedFileSha256": "b3703508e5a65c8009761cddf2fed5b4bfa36e24aca6c913ab0632d014e99a9c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_data_type_functions.py",
+      "expectedFileSha256": "a9cf24b519555d60b73ca8713d5588fd417d7f5cd9b699b31e3742b5fdded7a1",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_elementwise_functions.py",
+      "expectedFileSha256": "0938f82cbc2dbac239d47929cc3d093e884fd5f7cdc68800545cfc58bb961733",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_indexing_functions.py",
+      "expectedFileSha256": "01bb811b212e7c401fdb86fb7f2f09421749b463dd3fd5c42313d32407c0145a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_manipulation_functions.py",
+      "expectedFileSha256": "c1c7b6e5d4898ee6eb1a11719a26adcd1fc8a66358a7d20227d3d90419d94ce4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_set_functions.py",
+      "expectedFileSha256": "0f4d7a1bbbf7928e3d6cd0f9b151113fc22a417662c2bfb6cab29b04f27ea2a8",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_sorting_functions.py",
+      "expectedFileSha256": "20d3e2627b8605cb265ad62a7534d7dc434798ce22531e33b3d29dc0369299d0",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/array_api/tests/test_validation.py",
+      "expectedFileSha256": "4141bdc960b742190fc4d85b41e6a4c016e5fb446bd224ee678d7fd2c7d52065",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/compat/__init__.py",
+      "expectedFileSha256": "8801eb9ac656ce8b8e312c83f5b75213400f58c951a6a5bdd8c42017ccbac771",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/compat/py3k.py",
+      "expectedFileSha256": "25eef809593feea23fa97ee92db61cb9026cc6532ad69a0621f448ac7f7d9194",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/compat/setup.py",
+      "expectedFileSha256": "dfa5f5905d02fcd5513977c9ef0dd241e066e4020306e25b339a93edcbd20e05",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/compat/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/compat/tests/test_compat.py",
+      "expectedFileSha256": "62a57aee948df275cf6d7684763866c9aa157ad37216ea55bf9ece304802c0a0",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/conftest.py",
+      "expectedFileSha256": "1d9c96a3fc09cab6e09f25f123cb74e563a0fc8af3340327115ecef24a07a2eb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/__init__.py",
+      "expectedFileSha256": "08db0ef806f8cb03365b3dc06ea58e1f78a0d6ae419e8f4fb1432b0aff87352e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_add_newdocs.py",
+      "expectedFileSha256": "dfd24569e0cf376390952c1fa58ebf26af5f3b9bcc2fc64c17c278653c7f9ebb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_add_newdocs_scalars.py",
+      "expectedFileSha256": "3c5f6ff0f39c48d1fa10b625b64c7d7b4ec35a03267ede8d272f73111dc9938e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_asarray.py",
+      "expectedFileSha256": "3f675d95902c83588695e4517e842ffda2acd8dec01b0a68e4ae1942fe148e59",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_dtype.py",
+      "expectedFileSha256": "4a2854cf8d691d10774362e261892e83a2e03012a1e9557cf4c3a92f19d741da",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_dtype_ctypes.py",
+      "expectedFileSha256": "56e8388bbc4a8739cadad7488e69f879b7250a5a5a089c1265496f128625d048",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_exceptions.py",
+      "expectedFileSha256": "75958aa9f74b46f26f6c0106fdfa1fffc8a410ac636a400332dcb590b0bf97f3",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_internal.py",
+      "expectedFileSha256": "7fd90d0ee4fe146c45d44b553952315d69c7f6033d9fe279576cf01ccbf81c49",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_machar.py",
+      "expectedFileSha256": "1b76b74d7bbc5435bfd4433128a2e718c6ef51284421412f7b779a9419492771",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_methods.py",
+      "expectedFileSha256": "9b7d69d168dc15419c91b2621e70a949a2101aabfe2eae6788862475ddf760ca",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_multiarray_tests.cpython-312-darwin.so",
+      "expectedFileSha256": "1bde96789a338c081e54596d43a69e3e966cfb2121721660a33a851c7897b29b",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "1bde96789a338c081e54596d43a69e3e966cfb2121721660a33a851c7897b29b",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_multiarray_umath.cpython-312-darwin.so",
+      "expectedFileSha256": "a51276f3aab2d91051aa0ced3ddaa39a776ae60132ca4c07a91b82a8b7a92ea7",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "a51276f3aab2d91051aa0ced3ddaa39a776ae60132ca4c07a91b82a8b7a92ea7",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_operand_flag_tests.cpython-312-darwin.so",
+      "expectedFileSha256": "7ce8ff02611b3c24acea6e32af816f03aee2d0424b775e5bd0f6b885c3b3b0aa",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "7ce8ff02611b3c24acea6e32af816f03aee2d0424b775e5bd0f6b885c3b3b0aa",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_rational_tests.cpython-312-darwin.so",
+      "expectedFileSha256": "70f2050c9837f6fb35338ee11da2057b188dd9e243eb4bdcc7b207dbe2812e54",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "70f2050c9837f6fb35338ee11da2057b188dd9e243eb4bdcc7b207dbe2812e54",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_simd.cpython-312-darwin.so",
+      "expectedFileSha256": "fb50e65a0d91275615500d72e8d7bc9d4ab0ea53a2fbaee2724fadf3248ecd17",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "fb50e65a0d91275615500d72e8d7bc9d4ab0ea53a2fbaee2724fadf3248ecd17",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_string_helpers.py",
+      "expectedFileSha256": "f9f40cf33e6cf3fc97e38d0f9a03441f74948c4a1730fa4f4b2b19c1664d6eea",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_struct_ufunc_tests.cpython-312-darwin.so",
+      "expectedFileSha256": "62f443322b89973ca8187354be5de633851ccba6d716d19b7147edf4cf166c1f",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "62f443322b89973ca8187354be5de633851ccba6d716d19b7147edf4cf166c1f",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_type_aliases.py",
+      "expectedFileSha256": "a95e80665b145873164f27666726bbdf1b8190a5e250aabf5972e3eead826d9d",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_ufunc_config.py",
+      "expectedFileSha256": "f93c297bc767778e5c7171fec3e07d9ef53cc8239dd44d1edd6a6cb6cde0fdb4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/_umath_tests.cpython-312-darwin.so",
+      "expectedFileSha256": "83768e8b31bbb9ec5e50015d9ff41c62bc089f0b70096cbcf535e03e2891814c",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "83768e8b31bbb9ec5e50015d9ff41c62bc089f0b70096cbcf535e03e2891814c",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/arrayprint.py",
+      "expectedFileSha256": "c92663e1364515509ae7284c989285610621b904da6d94d105bd58a22083f9a7",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/cversions.py",
+      "expectedFileSha256": "1ff88d229c7dfa1635710371aa34f677fe525d98496cca3f71aab8feae8b07b2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/defchararray.py",
+      "expectedFileSha256": "1b52c4c64f9d31e55361186d620702644b07939b646b093b8225dc2b84392953",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/einsumfunc.py",
+      "expectedFileSha256": "4eb2fab7bf45d07d00407d32e428fb4ead3fa739387d5162fb8ab88c99ae8d84",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/fromnumeric.py",
+      "expectedFileSha256": "60cb71381839d5531e9b7f401d716cfb8fef39bd69e3c7a2ee78d77584d127f4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/function_base.py",
+      "expectedFileSha256": "b47835a921d3cf578eff01d734546ddd0e34baa56d3d3d9ec9076b59b222e304",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/getlimits.py",
+      "expectedFileSha256": "028a5c4d90c251730f704288644d5ba2d7379848662dbda9d7f7a396ad422ea6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/memmap.py",
+      "expectedFileSha256": "c960492de542947b03f0162eb277fd6ddab2a4e30fae3dffce83bf950db354c7",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/multiarray.py",
+      "expectedFileSha256": "cd76967ff0d29051168d442a55108679ebf0b08ea48d0df1ebf314c00d58f1f9",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/numeric.py",
+      "expectedFileSha256": "0e06a36820d78a2411fb3b96febaf1fd0840a52b1ae64e4538d2b7524f667d3b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/numerictypes.py",
+      "expectedFileSha256": "a887fdbf53a93638d54335e72a90fedd5d35cb9063f61bb0e45f94e566b88257",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/overrides.py",
+      "expectedFileSha256": "6146454bc44206f389dbbb07fa30d17323233829fd56280ccae418e09db52412",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/records.py",
+      "expectedFileSha256": "e26a488d4a765ed671639703d92f2681f9fc182cd0186aeb92a2c1a8027033e4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/shape_base.py",
+      "expectedFileSha256": "44f30ac40eff14202083f0abb84c65d0b7a19dccd24c56b103a86b71fad4ce7b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/_locales.py",
+      "expectedFileSha256": "4b8c79b28a85d28c69058384f09f48932ef63bd276e48899f37e3d9bdde9582e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/examples/cython/setup.py",
+      "expectedFileSha256": "68047e4ef41a6d469b9c2cee07a51d59d9915da68f7c81bb3334c87cc17ed2d9",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/examples/limited_api/setup.py",
+      "expectedFileSha256": "a76c3b1756ab762fc64574ab9cd211f16d68787fe9826c3fd4fdb04b403623a3",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test__exceptions.py",
+      "expectedFileSha256": "42ac5048b5dba0f5c45701f3f93c84d8978897f4c2fab3ee8337e8db99db727b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_abc.py",
+      "expectedFileSha256": "15f81803f1e36008bc5d618afe83a1e99c3ce9c841fca1bf5e85bfed9945a787",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_api.py",
+      "expectedFileSha256": "50c73b4af733010e67807c44f8da1756f369573611ae7f2833014db5ad72312d",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_argparse.py",
+      "expectedFileSha256": "0b4cc16f043dc73cf29977bf847a569e75903f03a2d9975007bf200408091ef5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_array_coercion.py",
+      "expectedFileSha256": "cd8e0f8e5b78419d30ef55b15862c772b3e79e1105e75c976152e0e47308cb97",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_array_interface.py",
+      "expectedFileSha256": "f2d1a08f53738bbe87fd61791942e4c6a58bed8bbf5dfd25bd32593b03812ac2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_arraymethod.py",
+      "expectedFileSha256": "5698c36139a83034d9718ec2b06ce29c187447f3880aec0eca45826e60914195",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_arrayprint.py",
+      "expectedFileSha256": "70a688a03f59bec8c91f43c7c19c8ec66711701b7590dd567c59dea95aacd1bf",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_casting_floatingpoint_errors.py",
+      "expectedFileSha256": "5b7160934a0ab5716febce1f119ecf3b08fa0c74d82b4263fe81912d9f147720",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_casting_unittests.py",
+      "expectedFileSha256": "f7ebe4474a17733433f040fc0f11953e66a50bc2195deda32a0382306afc8488",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_conversion_utils.py",
+      "expectedFileSha256": "8cd85b34d23e4fcaad427b083046b1eca14ddf49238742029ed2ccc13cb12794",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_cpu_dispatcher.py",
+      "expectedFileSha256": "bff4a5854a4436ea1eed06178b3cd82132c65daed67d9ee3a9caa66d2060ec95",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_cpu_features.py",
+      "expectedFileSha256": "9a2786c7b7715c58b24d86ad6dc0828c88d1ebb527da155c6c9c781847f6c85a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_custom_dtypes.py",
+      "expectedFileSha256": "2688119adb432f07d0dcf4db7b012718b29ca3dcd5d8dbb7c887eb31e0acc7f2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_cython.py",
+      "expectedFileSha256": "b79fa1e1748814d2f2c3ff41200403625f3ff34b7fa47d1209f11ad557ffdda2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_datetime.py",
+      "expectedFileSha256": "daf0066eb0909acad63570955ce319a941999f673e7104fe799d704e9ad86dc3",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_defchararray.py",
+      "expectedFileSha256": "17cf0752407210fe07e9c27f213bc87b46bf4f5047d8939d472b0c0aed57227d",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_deprecations.py",
+      "expectedFileSha256": "c369611dbf96f2187b46813fd05b60f2d8691bcea3bdb1402608a8af6d836364",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_dlpack.py",
+      "expectedFileSha256": "7039701664e899b6f6ac3781f111c4009e1e54c5220dbc3c3b3e49a35350c24d",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_dtype.py",
+      "expectedFileSha256": "274f69245e7dbfb50eea236e24521228fd832cf81d910fdd7f938030344b8a45",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_einsum.py",
+      "expectedFileSha256": "4334003c80be2234d5dc3c73f7b8419ef2c10a617c929b014c17244e18604634",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_errstate.py",
+      "expectedFileSha256": "537193f48d39f23905ef6e66c7819d594afd46871e0a418357b1a8efd540e306",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_extint128.py",
+      "expectedFileSha256": "80265f0303ce6fe1754cbb0411e0c8d1a9906301e4fbad3e3978b471c66bad9f",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_function_base.py",
+      "expectedFileSha256": "21bb3af965d913986c471e150a75fe71939660a53ee4f1578e8bb0010ce09ea4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_getlimits.py",
+      "expectedFileSha256": "6a9771af4cca9316951c85292eba80bcedfdab9e0928dd78b15e3149b2b621fb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_half.py",
+      "expectedFileSha256": "5583f26a9f4660e599ba986c7c5a1f708465fa86b951faedbfcdce4e9e9acdd5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_hashtable.py",
+      "expectedFileSha256": "655f072fc3640e7a1065f9e37bb04fd1fc88a787d216a8cab10738d0f6938207",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_indexerrors.py",
+      "expectedFileSha256": "90df712e5e85553ce623b7ee9a7fdcb99de4d289979d37ad82d0a73d8e3872fc",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_indexing.py",
+      "expectedFileSha256": "c74a235ae84ec160f9319ba227d35c8a6dc2824c08f8695d5b1ad20a68e61493",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_item_selection.py",
+      "expectedFileSha256": "908df49225fc988ad960f9f48f0de5186c35aee645e0fa44f73c3e69a8bd10f0",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_limited_api.py",
+      "expectedFileSha256": "e723b49c6982299f5bdd2eba40feef63e1c8800a323ad1d99a9f26bf32ae3872",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_longdouble.py",
+      "expectedFileSha256": "8cef18326fc7b33f973ca6e6bfa88c70e747813948164293c00b71a72dd0d691",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_machar.py",
+      "expectedFileSha256": "ff9fd30d456d009bc92398c17c414aa4266d01f282b0216deed5e5592916cf37",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_mem_overlap.py",
+      "expectedFileSha256": "409d2e9d60ff2cea00180a38adad08bd87a78f9e88614b62cf57c424499363d4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_mem_policy.py",
+      "expectedFileSha256": "0976b5d05430d908fa32a26e682f059b8b25b288a92858c2229605e9ce482005",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_memmap.py",
+      "expectedFileSha256": "b59e6526cff8645b099a0dfdd99437ddf5f49bcb5d7d9f19b58f4bab8d4b36d9",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_multiarray.py",
+      "expectedFileSha256": "18fbf820947d7628cd1be89c52c42c5f6b410f645d3f712151e858e1cc6f5505",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_nditer.py",
+      "expectedFileSha256": "9d5434d1a3713c7a9fe19705b377bd0150caeb84c2aa53b44f37e87130000994",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_nep50_promotions.py",
+      "expectedFileSha256": "d93c2d16f8f52c1a584ed751e8d15ed5100019720996d2eac29035be1402558e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_numeric.py",
+      "expectedFileSha256": "646356e4d2a04a1123642fd370f3ad4ee45a4ccfc66ee336d6ef360f6d3950fb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_numerictypes.py",
+      "expectedFileSha256": "7ffc4c8d9267c83c2573a5c2addef56fac75ffa74058ebfe919dfe344ab7ee15",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_numpy_2_0_compat.py",
+      "expectedFileSha256": "915093017b246bb5e2e70fd361db968627749e50aa23a36f9adfa00e762cb8a2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_overrides.py",
+      "expectedFileSha256": "b7480e64eceeee97af139f0703e9e915826a9c89c747e2cb064967cca2561eaa",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_print.py",
+      "expectedFileSha256": "12b64059df3c6f4ca0484a18a5dd012f6b458e47ab32d9f5bd9edd5af68da937",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_protocols.py",
+      "expectedFileSha256": "7c45c4f4af6cdb6a22556917f76058fa0d34fae5c22be1f18d9859c716002857",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_records.py",
+      "expectedFileSha256": "a65ba2b79c7a8e45a83c422b1d7335dcbdf166eb924a26b1a1716c39d91a9025",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_regression.py",
+      "expectedFileSha256": "489a3d70f4d5af648d8e182d5bb6e850cc8d4255f1ca0b19e60d28caa0bc124b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalar_ctors.py",
+      "expectedFileSha256": "a8321957eb41ba4c00c4d0e15261ad1f709e9835e54b7c5dfeadcbe76b68bae0",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalar_methods.py",
+      "expectedFileSha256": "523fb3534cf3cca023301769933b166779d2163e60264525aa2fdeba13987675",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalarbuffer.py",
+      "expectedFileSha256": "1522fde21ae2597d7fb95e99df7c01dd95d4ae99a65f6fb1f3b90d8c8c547819",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalarinherit.py",
+      "expectedFileSha256": "7cc2270c62ac887dc84bfd9e8d9b48726259d11cbc73b915b07c7bc29e570e83",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalarmath.py",
+      "expectedFileSha256": "5d98ff9b62364cb92d25d143d525a3d97b55f214f6e952316ac0f3ddc005be00",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_scalarprint.py",
+      "expectedFileSha256": "d79f7d5b95f4b631a10674908da957920e8063c7875e7afa3ccaace2f61942ab",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_shape_base.py",
+      "expectedFileSha256": "0fd85a7ae515c77c77a4e2e6150f6f533ee25384f66c54ec3e823c1e04a77055",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_simd.py",
+      "expectedFileSha256": "f8bd548489fd12efdeb8bc1a494edb3d17d8a5658e4dbe37aa8be8252ed6b3bc",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_simd_module.py",
+      "expectedFileSha256": "392a58847ff7403c48b7241c696e928d75b9ee4da6fb0791c2960e9c98c2a8dd",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_strings.py",
+      "expectedFileSha256": "03db7507ae6516b6112d780325283798c0c07bf872a483dc4cc54e7406086d4d",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_ufunc.py",
+      "expectedFileSha256": "e694b6c772c00879fc1a881861a77c2d10230722bb1a0f714c3f62937774166d",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_umath.py",
+      "expectedFileSha256": "86e1e972526a90edf693b0537e54478fc9c89b3837a7acb2af2792f4bc872965",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_umath_accuracy.py",
+      "expectedFileSha256": "9857157735e1843f66aa1ccb0c9559b167c21db8db150e977849791bc97e3d37",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_umath_complex.py",
+      "expectedFileSha256": "5af6596567a28e8e7646239fc7e1bcddbc7340ea7f209de2f5f12750356e90b4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/tests/test_unicode.py",
+      "expectedFileSha256": "8545c8c0c9a8abcf72fca5d6cee5d5c90697bd1c068df6384ef289b026f28042",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/umath.py",
+      "expectedFileSha256": "25b4ff4b19d9ff73049a3388f54b57dc2700cd7e50fb84439679e10c0109e55a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/core/umath_tests.py",
+      "expectedFileSha256": "4c8cda0dfac41c781273627993114489babc30e3e1c12bb239939406c64d5523",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ctypeslib.py",
+      "expectedFileSha256": "3e8e170967f1870150d50f31f0379ac8688c0892f14446820e45727a569dc415",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/doc/__init__.py",
+      "expectedFileSha256": "398984f85eb1d020f4e4f0836363225b51cb97007a8bdbe10e993e6b7af89476",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/doc/constants.py",
+      "expectedFileSha256": "3e55e88fb6f803c01af670036e0f37bb34c1449697f1dbc998475b9f81433cfa",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/doc/ufuncs.py",
+      "expectedFileSha256": "8b56a52e0d7d98dc82159d8b6123991a6fbe46c44dd71eb753f51853e377c7ad",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/dtypes.py",
+      "expectedFileSha256": "06e073b6b3d045ab149956615ebdbf36026e8dd513361370779f696591e4de50",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/exceptions.py",
+      "expectedFileSha256": "ee3eedbfc7305c6658825772322b069a7031025dace18534bdec4c13cd726250",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/__init__.py",
+      "expectedFileSha256": "9beb72fd68896781957d5e7efa427730525a2d77acb73e44a3ee07d053ec70ae",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/__main__.py",
+      "expectedFileSha256": "ea2da3547d9f3eb895d5aa1c4d8fdd505bd62b5f2a6bece3a6721203e3a9177c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/__version__.py",
+      "expectedFileSha256": "ec71dd8d1f361420667edc0c472ae585c123fbc98641bea8087fb09543c7e0dc",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_backends/__init__.py",
+      "expectedFileSha256": "eff6c0edcff10e92dce3ff2f3df1f7dbe2f19fd7dc513823436e6caddbf0bc03",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_backends/_backend.py",
+      "expectedFileSha256": "18a6fdf94685b334f4e39bd4815ba43ecd67f7b8b2ca3a9a86b58ac4b38a358a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_backends/_distutils.py",
+      "expectedFileSha256": "a718766144456184b29083af045c15be1a0d5f5a1293e737d083cf873964a3ed",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_backends/_meson.py",
+      "expectedFileSha256": "822fa76e73c50c2dfcb2e99f02383e43914fbba9cd9324174e312e55ff56f427",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_isocbind.py",
+      "expectedFileSha256": "cda060a5f3cd466c551b776850895b6488b207df7432c5e2c0369bad28fd1e74",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/_src_pyf.py",
+      "expectedFileSha256": "e2de9337864a59c882e1fd73e9fc1a1aba481a11ca462c077dcacd8f8148cc28",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/auxfuncs.py",
+      "expectedFileSha256": "74db386f628321c1b833584f06f0f4f7e561ec20f394f22b16c70e76f2f7a75a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/capi_maps.py",
+      "expectedFileSha256": "10d8d8c9e67708225c2f024982628e498ac3d4a3ee869c1ab97a9e8b3755e79a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/cb_rules.py",
+      "expectedFileSha256": "e53b876c95868ec17ac953732ae576b409f074bca171696676c8d89433993afe",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/cfuncs.py",
+      "expectedFileSha256": "289c96ee67639854a6c6cb1f79e80626ce4d67217799932036f3b137dfaf6074",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/common_rules.py",
+      "expectedFileSha256": "80707be96ca96e456685a0ff456872f0e778cc34e08fc71b0ce754748a7a3c84",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/crackfortran.py",
+      "expectedFileSha256": "12b2dd9163fc3317b25b9bd53c65f0cafaf1640c329a5bc8042d2d876aef2bbe",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/diagnose.py",
+      "expectedFileSha256": "d12457044da126028937f45fe199f4d282970bf4e46b779f3d6338ef383a0686",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/f2py2e.py",
+      "expectedFileSha256": "e6dd3ddd9438c6cd3fd146f269855ddb203611539a38072e536f4923e214d808",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/f90mod_rules.py",
+      "expectedFileSha256": "a2d9b7fdd9952276b47815472eeffaf77b376bff36954de9a9ea8369c588dfbb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/func2subr.py",
+      "expectedFileSha256": "e9dd91e5ac2e1d14f8c7381f51fc12ec91d3aa184089e497704365b2c0ffd9ce",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/rules.py",
+      "expectedFileSha256": "07817149811f67fd63ff3f46ba540d67504dacfad4be5537c9bc704e4ac8c632",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/setup.py",
+      "expectedFileSha256": "326015b294fc0c34ea0ee2fc6498712bada0d2572ca38bea23a40d43d0ac7e84",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/symbolic.py",
+      "expectedFileSha256": "8d60680301020b145d59ccd1f6becee94111718987fc66dd70045e369edc9896",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_abstract_interface.py",
+      "expectedFileSha256": "0bcfa5cb4fd3aa49a940d666c0f1f0a36215d8c047d234048c0869a87ae0f18e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_array_from_pyobj.py",
+      "expectedFileSha256": "4f17dff3d554784856a940915726c8aaca87e1842fa64e14ca39a1fd78f2322d",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_assumed_shape.py",
+      "expectedFileSha256": "15e6aab6b5b205fe6ec80adc988d03d9efdfefadda48ca605374267435defad0",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_block_docstring.py",
+      "expectedFileSha256": "484a6eabbdd3f6856d1e14558a515fd7117b9dbebcddde3e2afed5d247cbe000",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_callback.py",
+      "expectedFileSha256": "7117929558e09e84fbe309ad367fa81086622544df457ee58e396a262ef5e884",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_character.py",
+      "expectedFileSha256": "dee823335962ca63116d8f30b9bd5e89aa7e8ddc8d6151f194d641a8da112dee",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_common.py",
+      "expectedFileSha256": "9bb4d3489b79cd464a245f8c414793b42cb15bb6304414844c835718f16ef12e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_compile_function.py",
+      "expectedFileSha256": "f5dfc567c3f6c1b225436a8f0d1aec16a3dbe27307f2d896a9864df8ffec842b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_crackfortran.py",
+      "expectedFileSha256": "cb5c7753e8e54160f9ae64d7cf52364654f3ecb11f6c8eaac420e44797f33f06",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_data.py",
+      "expectedFileSha256": "1c57263d86e2bde29afacc09f31f1795147db0cd04481f4510dfadc599c74e89",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_docs.py",
+      "expectedFileSha256": "8eab6e1c4e598f13f80fc39fdc5933cf7e85f3fd2a29b792d38d3f9b469ce2fe",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_f2cmap.py",
+      "expectedFileSha256": "a7e4b295baf772d74a4f751057d173a42b983c7e54ed5ca7f307971408e223da",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_f2py2e.py",
+      "expectedFileSha256": "7a8b301fe75a304065b9ea15a715eb0e5a1a842a6bd112f31dbaf7cc11ceb239",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_isoc.py",
+      "expectedFileSha256": "fe73d33f134411a8222ab89905e14d7ac39ab6d2251c3cda34a9a3df9c710c16",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_kind.py",
+      "expectedFileSha256": "68e310481a03fddc38f5a70a376e7f69b12f4012c8dbb0ec9d621bf423694801",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_mixed.py",
+      "expectedFileSha256": "0adbb0f87ec3c613e34adef065d276c5f7dac08a040423d673917b3d2918e076",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_module_doc.py",
+      "expectedFileSha256": "b230975882aba8c0f5350d43500ce042a9234b9c3d87d82f33f2e3dbd45d72b8",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_parameter.py",
+      "expectedFileSha256": "00323b115fc2338ced202a6a1ea7aaf0b23e59d07a717d2db5ab5d45d8dbb140",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_pyf_src.py",
+      "expectedFileSha256": "783d1b66efc659fa02abefb05aa10a45ff85da1e40c284f23ba18c03dc093ebe",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_quoted_character.py",
+      "expectedFileSha256": "7298cc76b1f08a69e4a0991777f5bf152961e37a16cad639547c925bda2c90ee",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_regression.py",
+      "expectedFileSha256": "bffe910d0afa21c3266c230495fcd148b3e06611e71f997df6ecedadb240cea1",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_return_character.py",
+      "expectedFileSha256": "d7c1c9b6247043b6bfda674f5289c3e5fa2b29664911aa43f958b50ec6d38d5b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_return_complex.py",
+      "expectedFileSha256": "059208a90d5a6dd88f2e0566bb4dffab7ef20ad343d228f11923211b3d967fea",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_return_integer.py",
+      "expectedFileSha256": "b7efbd52c74b17d7e52d342fedad0a4d256806ea03b539e6386d902053c83557",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_return_logical.py",
+      "expectedFileSha256": "5c29a9f04f08e8139e358179f478d214076fd6133d59a0ef97c5034b5d3fd39a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_return_real.py",
+      "expectedFileSha256": "0137a4e4033b74208f788be830e408b79c85345ccaac56f52a7a3c078334ae7e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_semicolon_split.py",
+      "expectedFileSha256": "fcc76c8bce25112d7ca4f8e5f49f90b1b1adb55e2d3c516366f26f7a335ca8f7",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_size.py",
+      "expectedFileSha256": "aba62a42f732a9d5c97966c68a34e209bc72106dc490f72f4fc025016e9108ca",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_string.py",
+      "expectedFileSha256": "e7164e7dd45ea079c8774f79d177e6b5f76e3cf7c16ed324cc1a1732dca0bcc9",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_symbolic.py",
+      "expectedFileSha256": "dbcaae93691329f5a129ee7a9f8bc8349f06f7078a05f73b1f2b0c944f49dff8",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/test_value_attrspec.py",
+      "expectedFileSha256": "ad6c0905f136a86cea8a5659bab27eeee70da090c80b27ba94b7ad4122c579eb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/tests/util.py",
+      "expectedFileSha256": "6c4846ebdf5ce1b2d53d1d9647c7d5ebb6af817ea41f923be1289c19bed9ed3e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/f2py/use_rules.py",
+      "expectedFileSha256": "de94c338fbabea06cf1cfb70b8c24f42fa6750cc37f4b6b0d4a1521f472807fd",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/__init__.py",
+      "expectedFileSha256": "1ea8e617ab3f761d118b8519cd40ed38a6cd5327c07c90167b0ddedc42ff2949",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/_pocketfft.py",
+      "expectedFileSha256": "5e49bcc1c3f827204d31ba746681c85a13439609625f6e11ceb0eea36f6e464b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/_pocketfft_internal.cpython-312-darwin.so",
+      "expectedFileSha256": "cb0d6746e9435b5f24509a00ce3b659f6d82b819195fc031ae61a3e4f94029dd",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "cb0d6746e9435b5f24509a00ce3b659f6d82b819195fc031ae61a3e4f94029dd",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/helper.py",
+      "expectedFileSha256": "68d8f501c2efb5fa17dba4622cec1c47e93641232e0599068f616ed027853c9b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/tests/test_helper.py",
+      "expectedFileSha256": "c2181e690f0fcc57f7075c246d7a1b199e6c1785b13e9e207f550f51565eb2df",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/fft/tests/test_pocketfft.py",
+      "expectedFileSha256": "45d7820af510989615bdc70e2704e8a1b4ca0e0f72cd42f4ea8f4c90f9917e62",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/__init__.py",
+      "expectedFileSha256": "5cc3cd2641bf990fffc6ebdb7f439ca68b6031b03da30b75d191d8567607abc1",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/_datasource.py",
+      "expectedFileSha256": "0831778a6e88c5d63732ee9fc114269121019974b79105489d0e29957b285fd7",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/_iotools.py",
+      "expectedFileSha256": "620f4709f3e0e2d6e16dd80b3dcc52322657ab5c43a6bbc928b79b2f0843b336",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/_version.py",
+      "expectedFileSha256": "eaf2bb73335207f2ab5b1dab649cc9d69c8e73bdd0d3b84081f2c1e48b540a75",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/arraypad.py",
+      "expectedFileSha256": "6ca3fb652f4d605633a9293c3a7a452c5accb2e6b89bf85ca85b22edc1a4ac91",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/arraysetops.py",
+      "expectedFileSha256": "189d91864cc826621bc321ba8772ce1533d783ada433db5c5756beeed75b56e5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/arrayterator.py",
+      "expectedFileSha256": "050f7b4b4d33bdf5115197deb34199a3ee61c9d60d46ebf05f52356cbcde4629",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/format.py",
+      "expectedFileSha256": "4fca893321b60c35638d834da54bc181f03db42a36dc84b4c3d6f2441eadc304",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/function_base.py",
+      "expectedFileSha256": "2218607d2998244f9d1e850e3171cf886617b28f8d7573e92d717dcb480403a2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/histograms.py",
+      "expectedFileSha256": "c6c8ffaa9699a08d81bf5141a58f2620c3c9ad8462b8806cce7ffa90eed81510",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/index_tricks.py",
+      "expectedFileSha256": "e0f12f5e4e9515392db4c562601542e320e1c8e88a2289fa269226d1dfc298d8",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/mixins.py",
+      "expectedFileSha256": "cbafcccd0ba2363bfed4415544eaafdb2d9c0098b95f8ad06336d90b25325e0c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/nanfunctions.py",
+      "expectedFileSha256": "e848f3c9d665ba02337e210d2ad0b8c9c67635c92df19420e6fe83ead5f54a25",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/npyio.py",
+      "expectedFileSha256": "3548ed16f0263dd4e3c0943e89afb16c2afce3d33f33a36294fe481df90a6918",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/polynomial.py",
+      "expectedFileSha256": "e80c37ff6bdd6e1e2eac4450e8d68f85ff5afd3d68d68e9c8e6ddf6f9677fd81",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/recfunctions.py",
+      "expectedFileSha256": "fbdd006d65af5453aa5543cb87d2bd35874a507608812132836637e4c9ce5540",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/scimath.py",
+      "expectedFileSha256": "4f8213cac660aa163527c231c970ad8a81e3313836722fb88b79abf53045d940",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/setup.py",
+      "expectedFileSha256": "d0ae4d24abaf2af3445a9f845fb8f43838b765042020c1e86f348526adc6ef23",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/shape_base.py",
+      "expectedFileSha256": "02108ef43132cac13e3fe40917daf252d275821538ff498e461009e7da6839b5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/stride_tricks.py",
+      "expectedFileSha256": "6eb6396fed18409b881f609abdfa488a73289724d4bf993d0d4bcba19fa29a2b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test__datasource.py",
+      "expectedFileSha256": "eb92977d452fa7cc174aa8108acb98964860faa1e3055e455d87ad2fc05afab7",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test__iotools.py",
+      "expectedFileSha256": "1deac2aaf0c4d3b2718c54255847e964eee50bdcf449baf7cf6d064aeb6808fb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test__version.py",
+      "expectedFileSha256": "68edd882402884bb0bcc2350eef8c8c1da4550ccf470f2db72ebb12248ee37be",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_arraypad.py",
+      "expectedFileSha256": "a1ba211dbc8cd203d83d491dee2252392883ab2aad26c8c336d417ebc342e253",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_arraysetops.py",
+      "expectedFileSha256": "e7e4f531585f20c8af6adf19e3b199c3465a47cd755bf16c90cd5b0179c5c8b5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_arrayterator.py",
+      "expectedFileSha256": "018b364b05796a7920c27bca23d4523b58d9724d75f27bb74b26789e0cd936ca",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_financial_expired.py",
+      "expectedFileSha256": "caae66a8632faa99228b0f42b9984982b61aed2aae8f5997aff1be22f0058302",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_format.py",
+      "expectedFileSha256": "c55d288b57a846757000085239c3c540741617b4dfb113ad0d84a140b3ed75a0",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_function_base.py",
+      "expectedFileSha256": "0c12ae80850415330fee0ea22f56e4f7ce84ea5742adc35d04258e25b4256bf6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_histograms.py",
+      "expectedFileSha256": "d7afd7269f9e160b2e33c078983429438c3f21bdbd1e0d043cef9616c75a1560",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_index_tricks.py",
+      "expectedFileSha256": "563cf6e58e87fe2874884136006d246b13bd53c3f07174aba1fcea9cde170702",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_io.py",
+      "expectedFileSha256": "dd3a30d69b9cad0ef3ee8b0d3786b682b0585280463644048639828d74fa55a8",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_loadtxt.py",
+      "expectedFileSha256": "8307032432662c944c2e9837db6ca3435233239d39c3d12a268ab80e60cf09d2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_mixins.py",
+      "expectedFileSha256": "5a2bf0cf75c15ac128cc6cebceccb2bcbdea02e135e2dd411e4d8b3e6f59f597",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_nanfunctions.py",
+      "expectedFileSha256": "d35aff9a64c2bca55d66e3864c41cd0d95eb312ef6e2eb3f8f064037309def80",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_packbits.py",
+      "expectedFileSha256": "396180779839186d2097b587a8d7f0919ec6fb6aebb4bb76b08f39e0f1b89e7c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_polynomial.py",
+      "expectedFileSha256": "511a2ec49a6bf054398622b26ea86d39c2c0edefb7863e245b38cb051381cb20",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_recfunctions.py",
+      "expectedFileSha256": "ea3ce8b8f110ed486d8fcffe5b9c9323aca6369da72e099d1f3c5d77be2356e3",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_regression.py",
+      "expectedFileSha256": "2b31859214dcbc41bdee6ca6a0e43684fd8212bda73d9a2ed19b5fe3e59a5c2b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_shape_base.py",
+      "expectedFileSha256": "da240210547a7af56917cc2869e9f150ece8a0791fb8c62405a523f1e73227e1",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_stride_tricks.py",
+      "expectedFileSha256": "c29ae95961f97aad3b0d8eebcc6d160efe5f32d2f1cd1433e9f9ba4d95a549c4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_twodim_base.py",
+      "expectedFileSha256": "965fbbd9186a088b483c1f7b9ce5a11fb1f6f768789d5217ff0d6da0a4cf3148",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_type_check.py",
+      "expectedFileSha256": "971087e5a029595621852a034122c34c21cb547b8ad9cfa305b9df9d952b39a0",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_ufunclike.py",
+      "expectedFileSha256": "e214a75c69520bc1c4fbfa5144ccc3f3e1c8e21187aac016bb5a43d28da43c8d",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/tests/test_utils.py",
+      "expectedFileSha256": "455031af3485bba3770b8fe32200254c339617f07bc2bdafd58db4757e6ea583",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/twodim_base.py",
+      "expectedFileSha256": "32fce7fcfc928486fd9bb9c98c9e087ad771c262d812c08f1ef2682bb9f6be25",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/type_check.py",
+      "expectedFileSha256": "fc43ad076f7a9c5625353ef3b416280bfc8af5ac9c21bd0a4e6463bf355d64d8",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/ufunclike.py",
+      "expectedFileSha256": "fdc78119b18230e777bbf876515cf26912ba658eebca827418907bcea7091b7c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/user_array.py",
+      "expectedFileSha256": "2c4f79f3ef82324048dabde5d524319821dd092c3a1d8ebe4615829ddbb3180e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/lib/utils.py",
+      "expectedFileSha256": "e8d76579a10b662a8045d8fe102663c6dc0b7f56ea92539c2b8de6f72a1979fb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/__init__.py",
+      "expectedFileSha256": "9a97651175ad4efa45ec89fbefa38d2f0a7a448ca8e14fc62cf4f52f5788267c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/_umath_linalg.cpython-312-darwin.so",
+      "expectedFileSha256": "86f6ed1fc4db4ff11231795e78656dfa158e624fd9655916329a8695ea0448f7",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "86f6ed1fc4db4ff11231795e78656dfa158e624fd9655916329a8695ea0448f7",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/lapack_lite.cpython-312-darwin.so",
+      "expectedFileSha256": "f220d5799269974b4187ed31550479616b9f26b1e0ff33e93089fe17e24312d5",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "f220d5799269974b4187ed31550479616b9f26b1e0ff33e93089fe17e24312d5",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+      "expectedFileSha256": "90354ad460716d48e5460c570a811f911266f32acdaf522eee1327dab28af111",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/tests/test_deprecations.py",
+      "expectedFileSha256": "f69fd2466b718f6cdcd5da18f487b7772cb92735b2fad090585a1a8dc0095263",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/tests/test_linalg.py",
+      "expectedFileSha256": "ae0be62ba3abef4bbc98dd38a6e7ad2f71604b167c7c9ace948e69b538025399",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/linalg/tests/test_regression.py",
+      "expectedFileSha256": "a9bba0526ac43726e411a3351a17c0d35457414cbc024cda95badfcd22205263",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/__init__.py",
+      "expectedFileSha256": "7603f459d9cea69876f0577a522aa8c832a17eb72dd07e905aa6c27044ec93a3",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/core.py",
+      "expectedFileSha256": "e0c82555126d990f7f88855a4366fefd59b0d538c0844b0c25db4a3a1c811574",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/extras.py",
+      "expectedFileSha256": "302ed03d2df83c2e30c4d6cea7ba53cb9edda85f41f8be8bd4a308eabadf7b6c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/mrecords.py",
+      "expectedFileSha256": "75e81de9d2da0c4bc458d1e6bd29d4657a2cd5cb08cdaaa347f8c0bad9bc25f2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/setup.py",
+      "expectedFileSha256": "32a98c89caffc479001a81be4fb349e1875464824b3b8645a7a0261090e5ca1c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_core.py",
+      "expectedFileSha256": "c5de52de86b48ce6e8f239ec264d3ea38e9df8a342dd1b603512a29c9798fe41",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_deprecations.py",
+      "expectedFileSha256": "9eaff0155b761011dc4f7007c5ab6d7ca5f1d890dfd4ae43f90073514d3fd790",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_extras.py",
+      "expectedFileSha256": "957e1c6dd1831176811f3037abc849c6f7b8eb7e57089c3800fec53bbce139f9",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_mrecords.py",
+      "expectedFileSha256": "3ec26152500181da52b0f51e8a3a277f214dab3e407cd486413b4952d7bbcadb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_old_ma.py",
+      "expectedFileSha256": "87806771ec417018a0aaf64c03a4630e3a473eead6b6df7d03b2936a0dab98eb",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_regression.py",
+      "expectedFileSha256": "7e832923496e02fc24911a407cf0d5ffcd748755112125c366199a361c5be749",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/tests/test_subclassing.py",
+      "expectedFileSha256": "1de4c813f9f523c6adc3317cb69bcdb461e9fb476633c3d3f004b820359b72ca",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/testutils.py",
+      "expectedFileSha256": "450c344724bb84e4954e4e0aac21a57aad151e59c3ab3c3068bb6e65b444e3f2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/ma/timer_comparison.py",
+      "expectedFileSha256": "a48192646faa6186254564938333e5c8200835b18a857ad9ac364106388cd3cd",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matlib.py",
+      "expectedFileSha256": "fb9e2f4ee18881e4cc83d6549849513d9e07afe5d9fa89bdc4bcc0b12a13be77",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/__init__.py",
+      "expectedFileSha256": "04706940aa10bf81234f452958103e0a4e0be4eb0ca9323622e636e29fae7179",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/defmatrix.py",
+      "expectedFileSha256": "2577491a6d4b6b238e5df2a9a7b39565f6f4a73ccfe0bc21e39b1326b95e00b7",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/setup.py",
+      "expectedFileSha256": "d6bec946448ce07c95a2b82d8e82891962dc39c3cedf09af8afa5e12c56d0048",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_defmatrix.py",
+      "expectedFileSha256": "f04ffecbb543dafb2ad72f02708f249b7ee9a79a9c02d91c88ed7ac6a7f6508b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_interaction.py",
+      "expectedFileSha256": "3e98e682310a8a08435efb77f2569b284e8bedfda33fbe14126a772516ff88e6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_masked_matrix.py",
+      "expectedFileSha256": "ed83bf2c23bc0ce856dc2b9726ec47f77ae79adb5fbc79d4ec497e301cf1cc5c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_matrix_linalg.py",
+      "expectedFileSha256": "39b6d2517538476a566a31ffff101d8b3003ad4da404a0c30b190357ea150577",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_multiarray.py",
+      "expectedFileSha256": "8c1dd7081980b5ca9ff966fd3f0056eae23290fa4c3ed86e5cb2748224cacd91",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_numeric.py",
+      "expectedFileSha256": "30fef4a94c20b214ed4e12996990e9effe94f99eba34857581e5616ac1977a34",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/matrixlib/tests/test_regression.py",
+      "expectedFileSha256": "f2c1c3b4ef198bca776b57902845b1b4298aad7987a03deac65228920d802005",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/__init__.py",
+      "expectedFileSha256": "6eb68b87accfd90c2e34a44a01a646742fea29667eb4995cdc137cdcb7ae13fd",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/_polybase.py",
+      "expectedFileSha256": "6049e743095381b9f77720fcf6e7ab694c799f1c77c7fa47e8aea69b2126862f",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/chebyshev.py",
+      "expectedFileSha256": "35908a8c86e5717f7d7e8a99ca9e758b4febf29d2bd55295199166435fff9049",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/hermite.py",
+      "expectedFileSha256": "b7908533ea84e2db33609890677d3555c327ec833aef2dab5193c53ed9d54407",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/hermite_e.py",
+      "expectedFileSha256": "8d14777fc3ad87ca68576231f1cd1e2c4411dd465aaf2fb646ea4eac400450c6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/laguerre.py",
+      "expectedFileSha256": "99c570d1c916557fa4cc9d5022175cbaec733e3b85980de99502e496840c3983",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/legendre.py",
+      "expectedFileSha256": "c23b6015a8e62846d8912524def5920af78c1c33fa53298adbc6cd524e0ebf4b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/polynomial.py",
+      "expectedFileSha256": "5ec6993c798b18916aa49b3bacfbcee44d25a164352f76072c85326d5bb8754f",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/polyutils.py",
+      "expectedFileSha256": "5f2e6a8ddae39d16aa4a50a51b544e9b059c70b9003c2ec870768d24bbe109fe",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/setup.py",
+      "expectedFileSha256": "75741fcd550c3fd39c07a88abf9ca8d462c4c05077809e3ca61220a3837e78cd",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_chebyshev.py",
+      "expectedFileSha256": "ead32c14fd61ecaf197fbda634eb5ae93bf9dbf7d54e55e49ec7ae7df8f4f347",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_classes.py",
+      "expectedFileSha256": "0c5c98d884018f7af619992f6d121e64ed84118e3aeb16eec1ce0f4a1025e12c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_hermite.py",
+      "expectedFileSha256": "37d6f6771d9458fca36b9bf4d9d4a85983e72af6fa1fe3b382daf1fb18d6cf69",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_hermite_e.py",
+      "expectedFileSha256": "fc0de8840592e075eb406d3a4bc2f8edd226759193c18a2c0979e8cb0ecbe39a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_laguerre.py",
+      "expectedFileSha256": "0593a0b38f5505738505ea47a29c6e10390844e1c4bc505f59ee17ef7519867f",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_legendre.py",
+      "expectedFileSha256": "6ff6db947b3417f056c3d112b92ab9d99b0b29c40a151e5ea8f7ff4a9a5616aa",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_polynomial.py",
+      "expectedFileSha256": "e1cb8ef3ee70748c5ccf90abb9c079231ef24ae3113a8914175d85ee8810fe17",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_polyutils.py",
+      "expectedFileSha256": "23191b55fa5c06a7b994e665b871543db2c04cbbb5af0560ee084b012a5f62b6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_printing.py",
+      "expectedFileSha256": "adf3f831a41b8c670ee767da1e662b82c69aae49b735d8b7a27c2be830ee6a91",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/polynomial/tests/test_symbol.py",
+      "expectedFileSha256": "9ac4cfbfb0759e268aba3537de4b9999dc49bcb62f3a37e5d68ca49a52f4757a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/__init__.py",
+      "expectedFileSha256": "f354e19dec60e6e98de566700f94d1cb335cd98a7e775e01e940bb3418152a1f",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_bounded_integers.cpython-312-darwin.so",
+      "expectedFileSha256": "fd071d0f62a76d4642b3eac399872beb05f2e19ca0dbb649537d30d834a3c70d",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "fd071d0f62a76d4642b3eac399872beb05f2e19ca0dbb649537d30d834a3c70d",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_common.cpython-312-darwin.so",
+      "expectedFileSha256": "154bac74a2b55ff825da6b39c858c0ef548bc902d88a219719c6f8f4ec15c96c",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "154bac74a2b55ff825da6b39c858c0ef548bc902d88a219719c6f8f4ec15c96c",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_examples/cffi/extending.py",
+      "expectedFileSha256": "c5295adf35aac62e878f8f04be761f0f75877c4d7cf55bc2e17b0abb8fd3fc8c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_examples/cffi/parse.py",
+      "expectedFileSha256": "0676fbb7fe92fdce7eddd66b43e5d7f446b338a85fb547dc09e8d75d6c9dd445",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_examples/numba/extending.py",
+      "expectedFileSha256": "229cb37a5fe1e6253f0cc27fbe75d48100b7f2e303327eda754a5649e1102c51",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_examples/numba/extending_distributions.py",
+      "expectedFileSha256": "267afd696907c885b280d6dd69edf61955112bee53f414c686e131469bef7bdf",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_generator.cpython-312-darwin.so",
+      "expectedFileSha256": "0295669c7840dc1c42009d800658e047516af89e8a639e85c4d10907dec296b1",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "0295669c7840dc1c42009d800658e047516af89e8a639e85c4d10907dec296b1",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_mt19937.cpython-312-darwin.so",
+      "expectedFileSha256": "9d59ab74ca36a6fe6ae56dab2a17eaf7244f70bc03106d24db7f47bf1f78d59b",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "9d59ab74ca36a6fe6ae56dab2a17eaf7244f70bc03106d24db7f47bf1f78d59b",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_pcg64.cpython-312-darwin.so",
+      "expectedFileSha256": "dda7ccc6b5f83a05644c29783bb99cc1aade60c5ee5db5cb64a22d4416ec7229",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "dda7ccc6b5f83a05644c29783bb99cc1aade60c5ee5db5cb64a22d4416ec7229",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_philox.cpython-312-darwin.so",
+      "expectedFileSha256": "860e0f097b25f2c8aaca091ce6323ef6f407360f594c3e14684b7823ecca8bd2",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "860e0f097b25f2c8aaca091ce6323ef6f407360f594c3e14684b7823ecca8bd2",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_pickle.py",
+      "expectedFileSha256": "e0d85d4feca4ec2d26dedc995a6a2e600b3764634f74f54d19f508cae87c1c36",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/_sfc64.cpython-312-darwin.so",
+      "expectedFileSha256": "1ac2e80b026a43a3aba66a7ce148f39260dc7a9447524125c21d0a9e5d50a5a1",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "1ac2e80b026a43a3aba66a7ce148f39260dc7a9447524125c21d0a9e5d50a5a1",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/bit_generator.cpython-312-darwin.so",
+      "expectedFileSha256": "bff6147d617fe179e4fda2fa799b2aa929d1d2c728b7e4622cc5ee44c0950494",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "bff6147d617fe179e4fda2fa799b2aa929d1d2c728b7e4622cc5ee44c0950494",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/mtrand.cpython-312-darwin.so",
+      "expectedFileSha256": "f79ca82d8dcc5d0706beee30dd0959482367f197bf3d83da73256478722323da",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "f79ca82d8dcc5d0706beee30dd0959482367f197bf3d83da73256478722323da",
+      "bytesMatch": true
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/data/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_direct.py",
+      "expectedFileSha256": "eaf2e90b278a9c05851197a2ee5d988a154b434ad27b03b5849056b7b0397f24",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_extending.py",
+      "expectedFileSha256": "4b75abceeddd8b8b8186bf8fc67c7974e3ef941634151759a955fa082d4837ab",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_generator_mt19937.py",
+      "expectedFileSha256": "df92c1c15e93b563e7c6179fbadc5342684bcc043911ee18898f338835ccf9e4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_generator_mt19937_regressions.py",
+      "expectedFileSha256": "c4691dcfbe81317d442b440f7da6d5c69371f6a43d382fb5652b563ace8dfccf",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_random.py",
+      "expectedFileSha256": "904910b378bbcdca66f4ca33211233d45231e41e9f99793442a5f497a97ebbf6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_randomstate.py",
+      "expectedFileSha256": "0f117bacc512c5a0252f8875a82de89c770747b4ffeab2963dbaf49c91fce271",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_randomstate_regression.py",
+      "expectedFileSha256": "56e7185888c0eec02ab96b1a96f64c9df92660b3353bacacc969cb97ddf5fa50",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_regression.py",
+      "expectedFileSha256": "b6b9ed2b9d54bda8ce5442e296e10ef3997ae02292c399ef0527394aa632afdc",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_seed_sequence.py",
+      "expectedFileSha256": "18d449e23cb3aed7e894e343de05166a69dbbcaebe6ffa756c12bf4481b4b1f5",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/random/tests/test_smoke.py",
+      "expectedFileSha256": "8e3373d1a1060f5fe8425f5af545ade8ccffdbdf1a946ecaaf22d3d69807963c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/__init__.py",
+      "expectedFileSha256": "227a552a80c0ccc28efe5fc735c6adce25bfbb593dfc96737bffedda7c9bacbd",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/_private/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/_private/extbuild.py",
+      "expectedFileSha256": "9c6d9dc0fe27526412ddee5e2118a7c6dd2cfdfe2cc7103561fa210a0fa76afa",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/_private/utils.py",
+      "expectedFileSha256": "dc5ad24cc8b439da43383043a27720883433768e4d280e9855f437b8a4524277",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/overrides.py",
+      "expectedFileSha256": "bba7dc292042f0723330f58a01b772a3053bd61d85c767a40d0c691b936122bf",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/print_coercion_tables.py",
+      "expectedFileSha256": "9ddc4eb12e177eb678518ffd9ea4530a7c6193381da9cb941cbf277b377b3a9e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/setup.py",
+      "expectedFileSha256": "18f280b534c146c356e24991ecd8cfea698147f193769693be44e6d74fd570b8",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/testing/tests/test_utils.py",
+      "expectedFileSha256": "2033abf865ee34696bb1bf97cc64985075c4a9c19827bf29eb48cea41ab23cce",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test__all__.py",
+      "expectedFileSha256": "2f79829d83d3a7302035f79d56eabd83bc4f59b7347353e8b7de24f6367d3692",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_ctypeslib.py",
+      "expectedFileSha256": "074e9029e1518032046e410f072ff3600d47e44d9ec6e8538bb20393357c81fa",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_lazyloading.py",
+      "expectedFileSha256": "6044eb6220cb02a2d7d382bfbb9ff7355c407f10e87a0bb1c242117f3eaa29c6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_matlib.py",
+      "expectedFileSha256": "8308485eb249a3d0e279c6862c21cb2418e1c769d51a5eb21eaf3400e5104913",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_numpy_config.py",
+      "expectedFileSha256": "a87bdea608bda3201b42e643d3a93b8697020b631885dcdc63a0f58900cf34c2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_numpy_version.py",
+      "expectedFileSha256": "03c717173a7893ea7a279ce43b19437c3be4a053310d6da1a531555dc690455a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_public_api.py",
+      "expectedFileSha256": "0d3abb48ef38b818c2dad28fa2a5f5ef16b373e48b91301b4367cb67018cda37",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_reloading.py",
+      "expectedFileSha256": "42e55a3d0ba570d2e0e05977d4bc3e3bcf4be3629c95808aebc9f9195cb43cd4",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_scripts.py",
+      "expectedFileSha256": "8e5b822df1bde1533572e5fee5170b141962ff268966922f995b8cc5129126b7",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/tests/test_warnings.py",
+      "expectedFileSha256": "644b57a872358b279578b7d5c4370c7cde6ac3aed38b6bb9e3bd3d86f046e1e6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/__init__.py",
+      "expectedFileSha256": "5684c82cd0eb516bd9c742caf7ff7b9412d014ab521a60ede102ce1fccd8be5a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/mypy_plugin.py",
+      "expectedFileSha256": "db8cd5938122dea1f81dcdd24b3defd17b48b32713a3c1caa18ea296107fec04",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/setup.py",
+      "expectedFileSha256": "0a7cfdab9df0faf24dc84eaf631a98bd05f1d2925bac6f6ab87cb3f6cab17de9",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/__init__.py",
+      "expectedFileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/arithmetic.py",
+      "expectedFileSha256": "db3ddd9aecac4109a23f3f31d1b83c48e38a5bada65499fdeee31af53d0bed59",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/array_constructors.py",
+      "expectedFileSha256": "dc6ae17c1726597e77a491c3d0dbe15e3c2bdbeb8d29111b47523d582719eeb2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/array_like.py",
+      "expectedFileSha256": "71efc856e6c177b27a1644a92660fba8c9512eec268a27613aa8587d96f5e96a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/arrayprint.py",
+      "expectedFileSha256": "cbf2a4b8bcf5b8cee9bf9dea7eaec640ebae7782e85c4ddaa4ad70b4045d5723",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/arrayterator.py",
+      "expectedFileSha256": "16a72929d510050d056b31c5c6bf4cb0b1191be8e725518a5995f6a3046be034",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/bitwise_ops.py",
+      "expectedFileSha256": "5279b156bf47c08f227ddaeeb469bfbb711953888e38f421ace92eee14da1f47",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/comparisons.py",
+      "expectedFileSha256": "9d313e7efada2caeb14d970fe2e3d5d36c0e4a1cd82960daa1aa71df901e0ce6",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/dtype.py",
+      "expectedFileSha256": "32a0ca0ba630bfa8cd916b11f2b74bb9a6f31d4728e70d4eca50c711dc6f7bf2",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/einsumfunc.py",
+      "expectedFileSha256": "7978f92f93163ed40782b1cfb09dfaaaaae6047a9cb7d528ba38c90af1e71759",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/flatiter.py",
+      "expectedFileSha256": "d019dbb8b3010bb310969acd674421352b1c7d8c0f8448573a15a8ca24400965",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/fromnumeric.py",
+      "expectedFileSha256": "5ddfe7255543a0e35dced517f1d760a3b117276143f005f9d4c3bf62e8e79a88",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/index_tricks.py",
+      "expectedFileSha256": "a1a143f6f634d7f448e4e92b5edfb14e4d67fdd77e4a9b8fa7e799e7c5d1ddcf",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/lib_utils.py",
+      "expectedFileSha256": "b034028c754653072dd1142a02d1f9ff5eb2db8d6c8926386d729946cb89f310",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/lib_version.py",
+      "expectedFileSha256": "1e7b863b1eed400fdb731148277751a0c011d1fa1c931838946a90e20ecb188c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/literal.py",
+      "expectedFileSha256": "0cbcdd5870fab6d5b84b4344bc641bb07fd41098e167286f3b8397263a32bd94",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/mod.py",
+      "expectedFileSha256": "1c1f5a2b8ff01896dce38b6899aa2ba0dcb47e820be5c23d2888e49ef3136e49",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/modules.py",
+      "expectedFileSha256": "b74289c5859bad677b1db6e020315bdcb02124188d35be903e38c50c0802da65",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/multiarray.py",
+      "expectedFileSha256": "3311dac7a97de32aa54d5665780a86efb20b11b5bac14e68b0f707cf127ce67b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ndarray_conversion.py",
+      "expectedFileSha256": "c8f8335c6ea9698d6e17fcfe4321d8adc9ab66f857eeab6f4d487b00d2ec7820",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ndarray_misc.py",
+      "expectedFileSha256": "cf79ae71b9fd7cb33583199b5215a5a7695cacebf8cc58ea645cded1c684d840",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ndarray_shape_manipulation.py",
+      "expectedFileSha256": "dfb798c0c36a30bc1a9c85bdfbade1ae891a7274b3d8afeab4f52591da6c4e3a",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/numeric.py",
+      "expectedFileSha256": "49d9ec0f9cefd309bc4f68672329724b5e2283631c4b3eab1bd62c95c91b350e",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/numerictypes.py",
+      "expectedFileSha256": "af4fecf9ad3e1f631d5889f85383fa5bd4503b4575c6b0eeb20a1d1cd65e2183",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/random.py",
+      "expectedFileSha256": "b890a7ce5b0e9fd86bfc6d53a472ddb3078923811d85448443877144e3e3a80b",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/scalars.py",
+      "expectedFileSha256": "127d1a742640c048a066bcdd434250c03126ad2d1bf8331dd6fbe390572fc28f",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/simple.py",
+      "expectedFileSha256": "1e601f08e759056405db5d5869916b2068ac320bb91734c42c0a4a9f2d3c9f76",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/simple_py3.py",
+      "expectedFileSha256": "1ee2eb7396a985385090b8d4dbfd7d2a0185697c0a39f4b35ded29db1326f192",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ufunc_config.py",
+      "expectedFileSha256": "fccf2ff90580793d7ed8c91f49e01b365fd9c323ef61f3d3b0b97a7355fc77fc",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ufunclike.py",
+      "expectedFileSha256": "1af7ba709d804f74c0c0e8d43904032149eab1108662aef4fedbffb203838a20",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/ufuncs.py",
+      "expectedFileSha256": "c46b8abaa3deb544d2e22a396031da922e676d846efb00b6f52194df6b735488",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/data/pass/warnings_and_errors.py",
+      "expectedFileSha256": "3dc83e4167d8e0f0214cac9e85a7bcaba2e1b5b5000716b661eeb7fb78757f8c",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/test_isfile.py",
+      "expectedFileSha256": "061299b38f8bae11547ca8dc1b4c9e9724a313a6484ccc462016161831cc45bf",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/test_runtime.py",
+      "expectedFileSha256": "daabbc2449622139d908127f409a6885a723fce434f28ef78b14b6c36a283572",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/typing/tests/test_typing.py",
+      "expectedFileSha256": "0dad593858ed3e1fccbdbe7086923ea240497602ce01f26d24dc86ea57861684",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/private/tmp/zev024-stt-arm64/lib/python3.12/site-packages/numpy/version.py",
+      "expectedFileSha256": "3932e74a1d0d19f5b22fc56b9c88f435db7f29939397567e903f427fe8d13266",
+      "exists": false,
+      "isSymlink": false
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_supplemental_acoustics.py",
+      "expectedFileSha256": "65cecae9f3928a45bfee0e4f6192a4c36cb13627141b3444c2ec066ca9135977",
+      "exists": true,
+      "isSymlink": false,
+      "actualFileSha256": "65cecae9f3928a45bfee0e4f6192a4c36cb13627141b3444c2ec066ca9135977",
+      "bytesMatch": true
+    }
+  ],
+  "liveRuntimeReadLocation": "evals/clip_composition/digest_v1_phase2_endpoints.mts:144",
+  "scopeImpact": "Saved caption meaning and timing diagnostic remain unchanged. Reconstructing retention evidence currently re-reads the runtime implementation files used for the saved auxiliary acoustic observation, and fails before the formal caption time artifact can be stored.",
+  "notPerformed": [
+    "runtime restoration",
+    "package install",
+    "dependency rewrite",
+    "runtime-path substitution",
+    "bypass runtime validation",
+    "new acoustic observation",
+    "third caption judgment",
+    "formal caption timing storage",
+    "base media",
+    "Core",
+    "renderer",
+    "technical QC",
+    "completed MP4"
+  ],
+  "setupCorrectionsCompleted": 6,
+  "furtherSetupCorrectionAuthorized": false,
+  "frozenCaptionCount": 325,
+  "retainedCandidates": 7,
+  "retainedRanges": 12,
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

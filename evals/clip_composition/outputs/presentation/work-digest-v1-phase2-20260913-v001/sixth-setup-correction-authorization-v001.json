@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "digest-v1-phase2-sixth-setup-correction-authorization-v001",
+  "authorization": "kawafmm承認",
+  "receivedDateJst": "2026-09-14",
+  "approvalQuote": "ZEV ダイジェストv1 Phase 2について、今回に限り、検査設営起因の修正6回目を一回限りの例外として承認する。",
+  "scope": {
+    "path": "evals/clip_composition/digest_v1_phase2_caption_revision.test.mts",
+    "before": "assert.equal(formal(original), bytes);",
+    "after": "assert.deepEqual(formal(original), bytes);",
+    "purpose": "同内容のbyte列について参照同一性ではなく内容一致を検査すること。",
+    "applied": true,
+    "setupCorrectionNumber": 6,
+    "oneTimeExceptionConsumed": true,
+    "permanentLimitUnchanged": 5,
+    "additionalSetupCorrectionAllowed": false
+  },
+  "testResult": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-revision-tests-v003.tap",
+    "fileSha256": "ab4a3382c68e0fef80e9edcf8195262e4a9ea87afd598e4dd6c27fa30c5efce9",
+    "passed": 4,
+    "failed": 0
+  },
+  "afterPassingAllowed": [
+    "formal caption timing storage",
+    "unchanged Phase 1 common Core",
+    "renderer",
+    "technical QC",
+    "completed MP4",
+    "AUDIT_ONLY to ZEV進行管理３"
+  ],
+  "unchanged": [
+    "325 captions",
+    "text and formal IDs and order",
+    "7 prospects",
+    "12 retained ranges",
+    "style"
+  ],
+  "notAuthorized": [
+    "seventh setup correction",
+    "third caption judgment",
+    "new Skill",
+    "new contract",
+    "A/B",
+    "Goal change",
+    "main merge",
+    "tag",
+    "stable",
+    "release"
+  ],
+  "failureInstruction": "この修正後にさらに設営起因の訂正が必要になった場合は、7回目を自走せず停止して報告すること。",
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

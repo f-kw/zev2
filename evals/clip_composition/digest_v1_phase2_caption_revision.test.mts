@@ -13,7 +13,7 @@ test('限定改訂は入力指示だけを変更し、本文・正式ID・順序
     requests: [{requestId: 'range', input, inputCanonicalSha256: canonicalSha(input)}],
     request: {requestId: 'all', input, inputCanonicalSha256: canonicalSha(input)}};
   const bytes = formal(original), revised = revisePhase2DisplayInput(original, {path: 'authority'}, {path: 'previous'});
-  assert.equal(formal(original), bytes);
+  assert.deepEqual(formal(original), bytes);
   for (const r of [revised.promptInput, revised.request.input, revised.requests[0].input]) {
     assert.deepEqual(r.captions, input.captions); assert.deepEqual(r.styleLimits, input.styleLimits);
     assert(r.taskDescription.startsWith(input.taskDescription));
