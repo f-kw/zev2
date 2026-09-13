@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "digest-v1-phase2-caption-timing-serialization-recovery-v002",
+  "status": "passed",
+  "failure": "formal JSON rejected undefined optional observedStartMs/observedEndMs diagnostics after display validation had passed",
+  "failedExecutionLog": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/display-execution-v002.log",
+    "fileSha256": "84241079a163367bfa8eb0112bbd733a49b462e247ee1db8a4c1e3dbc238f015"
+  },
+  "diagnosticBinding": {
+    "schemaVersion": "digest-v1-phase2-caption-timing-diagnostic-v002",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-timing-diagnostic-v002.json",
+    "fileSha256": "4ae1fcb0e48beba15b3fdd7d206441d91b66dfe3098be71084eb2d1ffe59f205",
+    "canonicalSha256": "2920930870a6b5e3220d87933917f77aaf4c49e1f09cb9c34de0af39f102ddad"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/digest_v1_phase2_manufacturing.mts",
+    "fileSha256": "d43cfe13c509af74eb94da74e1a25f9eab987b602ffeb96575c401965df9bb6d"
+  },
+  "timingBinding": {
+    "schemaVersion": "digest-v1-phase2-caption-timing-resolution-v002",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-timing-resolution-v002.json",
+    "fileSha256": "288dd18230b1bb0e59cd6ff2b1ec47bf86dc916026f8e9c77cb219ed275847e1",
+    "canonicalSha256": "9759dfbbd494f9e936b074170e6d28a54613b8d225e5b1b40f0894b39f6b0aac"
+  },
+  "correctionScope": "new-adapter-output-serialization; existing-timing-functions-unchanged",
+  "semanticJudgmentCallsDuringRecovery": 0,
+  "newAcousticObservations": 0,
+  "changedTimeValues": 0,
+  "unresolvedOrOutsideIntervals": 0,
+  "absentOptionalObservationPaths": [
+    "timing.originalRows.73.resolution.observedEndMs",
+    "timing.originalRows.74.resolution.observedStartMs",
+    "timing.originalRows.133.resolution.observedEndMs",
+    "timing.originalRows.134.resolution.observedStartMs",
+    "timing.cues.73.resolution.observedEndMs",
+    "timing.cues.74.resolution.observedStartMs",
+    "timing.cues.133.resolution.observedEndMs",
+    "timing.cues.134.resolution.observedStartMs"
+  ]
+}
