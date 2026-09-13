@@ -1,0 +1,170 @@
+TAP version 13
+# Subtest: new judgment receives only text and IDs; result cannot mutate input
+ok 1 - new judgment receives only text and IDs; result cannot mutate input
+  ---
+  duration_ms: 0.471917
+  ...
+# Subtest: input rejects startMs
+ok 2 - input rejects startMs
+  ---
+  duration_ms: 0.192958
+  ...
+# Subtest: input rejects durationMs
+ok 3 - input rejects durationMs
+  ---
+  duration_ms: 0.056709
+  ...
+# Subtest: input rejects cuttableBoundaries
+ok 4 - input rejects cuttableBoundaries
+  ---
+  duration_ms: 0.046917
+  ...
+# Subtest: ordered full accounting promotes exact observed cuts and inherited old edges
+ok 5 - ordered full accounting promotes exact observed cuts and inherited old edges
+  ---
+  duration_ms: 0.790417
+  ...
+# Subtest: detached token and later result mutation cannot change validated ranges
+ok 6 - detached token and later result mutation cannot change validated ranges
+  ---
+  duration_ms: 1.544667
+  ...
+# Subtest: refuses unknown ID
+ok 7 - refuses unknown ID
+  ---
+  duration_ms: 0.190625
+  ...
+# Subtest: refuses unexplained gap
+ok 8 - refuses unexplained gap
+  ---
+  duration_ms: 0.605791
+  ...
+# Subtest: refuses overlap
+ok 9 - refuses overlap
+  ---
+  duration_ms: 0.2895
+  ...
+# Subtest: refuses reversed range
+ok 10 - refuses reversed range
+  ---
+  duration_ms: 0.219583
+  ...
+# Subtest: refuses missing tail
+ok 11 - refuses missing tail
+  ---
+  duration_ms: 0.25525
+  ...
+# Subtest: refuses different candidate
+ok 12 - refuses different candidate
+  ---
+  duration_ms: 0.60425
+  ...
+# Subtest: refuses whole candidate dropped
+ok 13 - refuses whole candidate dropped
+  ---
+  duration_ms: 0.123375
+  ...
+# Subtest: refuses free absolute time
+ok 14 - refuses free absolute time
+  ---
+  duration_ms: 0.109875
+  ...
+# Subtest: token interior refuses the whole proposal, without dropping necessary block or moving cut
+ok 15 - token interior refuses the whole proposal, without dropping necessary block or moving cut
+  ---
+  duration_ms: 0.182958
+  ...
+# Subtest: window origin, duplicate observation, zero-length unit and outside-parent observation are unresolved
+ok 16 - window origin, duplicate observation, zero-length unit and outside-parent observation are unresolved
+  ---
+  duration_ms: 0.12
+  ...
+# Subtest: source membership cannot be changed after meaning validation
+ok 17 - source membership cannot be changed after meaning validation
+  ---
+  duration_ms: 0.189084
+  ...
+# Subtest: judgment envelope must bind exact request bytes and exact answer
+ok 18 - judgment envelope must bind exact request bytes and exact answer
+  ---
+  duration_ms: 0.857459
+  ...
+# Subtest: display validation requires complete grounded cues with exact provenance
+ok 19 - display validation requires complete grounded cues with exact provenance
+  ---
+  duration_ms: 1.431625
+  ...
+# Subtest: original acoustic raw JSON is read without changing numeric representation and rejects changed SHA
+ok 20 - original acoustic raw JSON is read without changing numeric representation and rejects changed SHA
+  ---
+  duration_ms: 7.623584
+  ...
+# Subtest: actual input is reconstructed from every existing discovery candidate, without historical labels
+ok 21 - actual input is reconstructed from every existing discovery candidate, without historical labels
+  ---
+  duration_ms: 8.85375
+  ...
+# Subtest: actual new judgment, validator, machine adoption and edit plan reconstruct from their original inputs
+ok 22 - actual new judgment, validator, machine adoption and edit plan reconstruct from their original inputs
+  ---
+  duration_ms: 55.600791
+  ...
+# Subtest: only selected candidate materializations enter Core; retained content and cut evidence are unchanged
+ok 23 - only selected candidate materializations enter Core; retained content and cut evidence are unchanged
+  ---
+  duration_ms: 54.608625
+  ...
+# Subtest: retention result or formal cut evidence cannot be replaced by an unchecked segment list
+ok 24 - retention result or formal cut evidence cannot be replaced by an unchecked segment list
+  ---
+  duration_ms: 32.335917
+  ...
+# Subtest: the fixed plan rejects a chosen-ID list, an adoption quota and different order policy
+ok 25 - the fixed plan rejects a chosen-ID list, an adoption quota and different order policy
+  ---
+  duration_ms: 0.28575
+  ...
+# Subtest: formal candidate ID reassignment without discovery identity correspondence is rejected
+ok 26 - formal candidate ID reassignment without discovery identity correspondence is rejected
+  ---
+  duration_ms: 3.344
+  ...
+# Subtest: 既存の本文だけの入力と境界だけの回答を受理する
+ok 27 - 既存の本文だけの入力と境界だけの回答を受理する
+  ---
+  duration_ms: 0.708208
+  ...
+# Subtest: 入力へ時刻・素材path・空文字・重複ID・欠けた配列を混入できない
+ok 28 - 入力へ時刻・素材path・空文字・重複ID・欠けた配列を混入できない
+  ---
+  duration_ms: 1.214625
+  ...
+# Subtest: 回答へ本文・frame・採用宣言・余分field・空cueを混入できない
+ok 29 - 回答へ本文・frame・採用宣言・余分field・空cueを混入できない
+  ---
+  duration_ms: 0.149625
+  ...
+# Subtest: 判断手段へ実際に一回渡し、呼出元の入力を変更させない
+ok 30 - 判断手段へ実際に一回渡し、呼出元の入力を変更させない
+  ---
+  duration_ms: 0.975333
+  ...
+# Subtest: 辞退と例外を採用値に救済しない
+ok 31 - 辞退と例外を採用値に救済しない
+  ---
+  duration_ms: 0.244542
+  ...
+# Subtest: 同じ入力と同じ判断回答から同じ権限なしresultを返す
+ok 32 - 同じ入力と同じ判断回答から同じ権限なしresultを返す
+  ---
+  duration_ms: 0.228292
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 32
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2234.679667

@@ -6,8 +6,7 @@ import {
   ROOT, bind, readJson, readBound, publish, pass, same, keys, fileSha, sha,
   assertBinding, assertByteBinding, type Binding, type Json,
 } from './run_candidate_discovery_digest_skill_e2e_v001.mts';
-import {loadSelectionContextV001, reconstructReusedRetentionV001}
-  from './run_candidate_selection_e2e_v001.mts';
+import {loadDigestRetentionContextV1, reconstructDigestRetentionV1} from './digest_v1_retention.mts';
 import {validateInternalDisplayV001} from './candidate_internal_edit_core_v001.mts';
 import {
   buildAdoptedBaseMediaV001, assembleAdoptedCaptionCoreV001, renderAdoptedVideoV001, CORE_FILES,
@@ -24,6 +23,7 @@ import {composeSelectedDigestRangesV1, selectAllCandidatesV1, projectSavedDigest
 const IMPLEMENTATIONS = [
   'evals/clip_composition/digest_v1.mts',
   'evals/clip_composition/run_digest_v1.mts',
+  'evals/clip_composition/digest_v1_retention.mts',
   'evals/clip_composition/adopted_media_manufacturing_v001.mts',
 ];
 const out = (c: Json, name: string) => `${c.plan.outputRoot}/${name}`;
@@ -59,7 +59,7 @@ function assertJob(v: Json): asserts v is DigestJobV1 {
 export async function loadDigestJobV1(jobPath: string) {
   const job = await readJson(jobPath); assertJob(job);
   const sourcePlan = await readBound(job.candidateContext);
-  const source = await loadSelectionContextV001(job.candidateContext.path);
+  const source = await loadDigestRetentionContextV1(job.candidateContext.path);
   assert(same(source.plan, sourcePlan), 'DIGEST_CANDIDATE_CONTEXT_CHANGED');
   const authorization = await readBound(job.authorization);
   assert(authorization.schemaVersion === 'digest-v1-received-instruction'
@@ -132,7 +132,7 @@ export async function readSavedDigestCaptionsV1(c: Json) {
 /** 全採用と後段を分離する。後段へ渡すのは既存のcandidate IDだけ。 */
 export function buildDigestAdoptionV1(c: Json, adoptedIds: string[]) {
   const candidates = c.candidateSet.candidates;
-  const retained = reconstructReusedRetentionV001(c.sourceContext);
+  const retained = reconstructDigestRetentionV1(c.sourceContext);
   const segments = composeSelectedDigestRangesV1(candidates.map((r: Json) => r.candidateId), adoptedIds,
     retained.segments as RetainedRangeV1[], c.transcript.segments);
   const adoption = {schemaVersion: 'candidate-digest-machine-adoption-v001', artifactId: `${c.plan.planId}-adoption`,
@@ -226,7 +226,7 @@ export async function prepareDigestJobV1(sourcePlanPath: string, captionManifest
   outputRoot: string, jobId: string) {
   await assertAbsent(path.join(ROOT, outputRoot));
   const sourcePlan = await readJson(sourcePlanPath), captionManifest = await readJson(captionManifestPath);
-  const source = await loadSelectionContextV001(sourcePlanPath);
+  const source = await loadDigestRetentionContextV1(sourcePlanPath);
   const authorizationPath = `${path.posix.dirname(jobPath)}/received-instruction.json`;
   const authorization = await publish(authorizationPath, {schemaVersion: 'digest-v1-received-instruction',
     recordId: 'zev-digest-v1-start-20260913', instruction: 'ZEV ダイジェストv1 実装開始指示',

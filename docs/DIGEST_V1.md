@@ -4,7 +4,7 @@
 
 ## 処理
 
-1. 保存済みcandidate一覧・探索判断・正式IDの対応・保持判断・切断位置の根拠を、既存の読取／検証入口で照合する。
+1. 保存済みcandidate一覧・探索判断・正式IDの対応・保持判断・切断位置の根拠を、候補ごとに既存の検証入口へ渡して照合する。候補間の重複と入力順はこの段階で拒否せず、後段の整列・統合に渡す。
 2. Cは一覧のcandidate IDを全件採用する。採用IDから先は共通処理とし、A/Bの採否判断は今回接続しない。
 3. 各候補の保持後の元動画区間へ展開し、実際の開始・終了時刻で並べる。
 4. 同一・包含・連鎖する重複を区間の和集合にする。元のcandidate IDと保持根拠はすべて残す。半開区間の接点と離れた隙間は統合しない。
@@ -22,25 +22,25 @@ pnpm exec node --import ./runner/node_modules/tsx/dist/loader.mjs \
   evals/clip_composition/run_digest_v1.mts prepare \
   evals/clip_composition/outputs/presentation/work-candidate-selection-20260908-v002/fixed-plan.json \
   evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/manifest.json \
-  evals/clip_composition/jobs/digest-v1/20260913-v002/job.json \
-  evals/clip_composition/outputs/presentation/work-digest-v1-20260913-v002 \
-  digest-v1-20260913-v002
+  evals/clip_composition/jobs/digest-v1/20260913-v003/job.json \
+  evals/clip_composition/outputs/presentation/work-digest-v1-20260913-v003 \
+  digest-v1-20260913-v003
 
 pnpm exec node --import ./runner/node_modules/tsx/dist/loader.mjs \
   evals/clip_composition/run_digest_v1.mts run \
-  evals/clip_composition/jobs/digest-v1/20260913-v002/job.json
+  evals/clip_composition/jobs/digest-v1/20260913-v003/job.json
 ```
 
 実行設定は入力ファイルと実装のhashを結び付けた製造用設定であり、新しいProspect正本ではない。受領指示の記録だけで、新しい承認を作るものではない。実行は承認済み範囲に限る。
 
-入口のadapterは、既存candidate-selectionの保存済みcontextと、完成字幕manifestから必要な入力参照を取り出す。旧工事のplanや実行証拠を上書きしない。共通処理自体は素材名・候補数・区間数・字幕数を固定していない。
+入口のadapterは、既存candidate-selectionの保存済みcontextと、完成字幕manifestから必要な入力参照を取り出す。候補ごとの保持検証は既存の処理をそのまま使い、候補間の時間順・重複は共通の整列・統合だけで処理する。旧工事のplanや実行証拠を上書きしない。共通処理自体は素材名・候補数・区間数・字幕数を固定していない。
 
 `verification.json`には、入力参照、保持区間、基礎映像、Core出力、rendererの結果、technical QC、完成MP4の参照が残る。人間の採否や完成承認は自動付与しない。
 
 ## 検査
 
 ```sh
-ZEV_DIGEST_V1_TEST_JOB=evals/clip_composition/jobs/digest-v1/20260913-v002/job.json \
+ZEV_DIGEST_V1_TEST_JOB=evals/clip_composition/jobs/digest-v1/20260913-v003/job.json \
   pnpm exec node --import ./runner/node_modules/tsx/dist/loader.mjs --test \
   evals/clip_composition/digest_v1.test.mts
 
