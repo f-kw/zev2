@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "digest-v1-phase2-core-caption-task-stop-v001",
+  "observedAt": "2026-09-13T16:35:23.428920+00:00",
+  "status": "stopped-awaiting-gpt-decision",
+  "stage": "formal-caption-source-package-before-core-publication",
+  "failure": "PHASE2_CAPTION_SOURCE_INVALID",
+  "validatorResult": {
+    "status": "rejected",
+    "violations": [
+      {
+        "path": "/promptInput/taskDescription",
+        "rule": "task-description"
+      }
+    ]
+  },
+  "failedExecution": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/renderer-execution-v001.log",
+    "fileSha256": "aff9ab5ac368cdf499bbb958930f03048d407464b5afb0c90ba4b4b4d8f9b1a3"
+  },
+  "manufacturingImplementation": {
+    "path": "evals/clip_composition/digest_v1_phase2_manufacturing.mts",
+    "fileSha256": "d43cfe13c509af74eb94da74e1a25f9eab987b602ffeb96575c401965df9bb6d"
+  },
+  "validatorImplementation": {
+    "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+    "fileSha256": "954f4ed77638c5ff5ffc837bc67014220ebf6d9611e349aade10a7c0bebf8d70"
+  },
+  "actualJudgmentRequest": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/display-all-request-v002.json",
+    "fileSha256": "a8135df67b2eddbded197d4746a56bd57f93a9d87de34ec5a652aa8ccc8bfb52"
+  },
+  "actualTaskDescription": "各captionの境界片を記載順に一度ずつ全量使用してください。cueは、直前から続く発話がそれだけで意味を読める短いまとまりになり、その末尾で発話の意味が一区切りつくように、cue終端を提示されたboundaryIdから選んでください。cue終端を意味の基準で先に決め、そのcueが一行に収まらない場合だけ行末を提示されたboundaryIdから選んでください。cue終端と行末は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。必要な行末候補が複数ある場合は、二行の幅が大きく偏らない候補を選んでください。各cueはstyleLimits.maxLinesPerCue以下とし、一行に収まるcueを改行しないでください。最後のcueはcaption最後のboundaryIdで終えてください。本文、境界片、ID、順序を変更しないでください。\n\n【kawafmm承認による限定的な表示方針改訂】通常の反復表現の途中では区切らない方針は維持する。ただし、意味上の区切りを持たない長い非語彙的な持続発声が既存styleの最大表示容量へ収まらない場合に限り、表示容量を優先して継続分割してよい。現在位置から既存表示容量に収まる最も後ろの有効な正式本文境界を選び、残りについて同じ処理を繰り返す。これは表示上の分割だけであり、新しい意味境界とは扱わない。読みとして一続きの最小発声表記は分断しない。原本文、正式本文ID、本文順序、全量被覆、retention結果、12保持区間、元動画時刻、style、論理幅計算、最大行数、通常の語彙的反復表現に対する方針は変更しない。圧縮・省略・置換・要約・文字削除・別表現への変換・retentionやcut境界への流用・通常発話や通常の反復語への一般化は禁止する。この例外は既存容量では一表示に収まらず、かつ意味境界による分割が成立しない非語彙的な持続発声だけに適用する。",
+  "expectedTaskDescription": "各captionの境界片を記載順に一度ずつ全量使用してください。cueは、直前から続く発話がそれだけで意味を読める短いまとまりになり、その末尾で発話の意味が一区切りつくように、cue終端を提示されたboundaryIdから選んでください。cue終端を意味の基準で先に決め、そのcueが一行に収まらない場合だけ行末を提示されたboundaryIdから選んでください。cue終端と行末は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。必要な行末候補が複数ある場合は、二行の幅が大きく偏らない候補を選んでください。各cueはstyleLimits.maxLinesPerCue以下とし、一行に収まるcueを改行しないでください。最後のcueはcaption最後のboundaryIdで終えてください。本文、境界片、ID、順序を変更しないでください。",
+  "expectedTaskSource": {
+    "schemaVersion": "presentation-output-caption-cue-source-package-v001",
+    "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+    "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+    "canonicalSha256": "5594ddf2d1aa08660d893b7b8de7f37954f760981f76d615d13187034c5e3c8a"
+  },
+  "oldRequestTaskEqualsExistingTemplate": true,
+  "difference": "approved nonlexical sustained-vocalization continuation policy appended to original fixed description",
+  "approval": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-policy-kawafmm-authorization-v002.json",
+    "fileSha256": "00a69ab03169d0ff3fe6336aab55c6b44ee641bc42e6cf72485c8dd39531c5d1"
+  },
+  "baseMedia": {
+    "schemaVersion": "candidate-digest-base-media-bindings-v001",
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/base-media.mp4",
+      "fileSha256": "0de24b8c9b18d33d38e163f0e1eaed8a35aaeea4b2411c507d7947c992545c04"
+    },
+    "timeline": {
+      "schemaVersion": "presentation-base-media-timeline-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/timeline.json",
+      "fileSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e",
+      "canonicalSha256": "5b1e6c94a55485aa6632d1b087c4bb70ffe2631f1853981942a7ef1be9048f8d"
+    },
+    "generationManifest": {
+      "schemaVersion": "presentation-base-media-generation-manifest-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/generation-manifest.json",
+      "fileSha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053",
+      "canonicalSha256": "13aa3488ea8733d54f493f0572a8f66b1472283a16dc38e39f711e50e4997ec8"
+    },
+    "validationReceipt": {
+      "schemaVersion": "candidate-digest-base-media-validation-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/validation-receipt.json",
+      "fileSha256": "3155983a8fdd36b97e0b8ae46ad297ff030c8b4001e56abe264f667d98e5aafc",
+      "canonicalSha256": "936b8364c1699e54bc85d356816e24bd7b66d9578b4c10b0faba92fb33edd99e"
+    }
+  },
+  "baseMediaChecks": {
+    "machineAdoptionReconstruction": "passed",
+    "sourceSnapshotSha": "passed",
+    "formalRangeProjection": "passed",
+    "videoQc": "passed",
+    "audioQc": "passed",
+    "timelineQc": "passed"
+  },
+  "baseVideoFrames": 44408,
+  "baseVideoDurationSeconds": 1480.2666666666667,
+  "coreOutputsAbsent": [
+    "meaning-input.json",
+    "source-package.json",
+    "caption-adoption.json",
+    "selection.json",
+    "cue-end-projection.json",
+    "line-end-projection.json",
+    "instruction.json",
+    "renderer-job.json",
+    "admission-receipt.json",
+    "line-layout.json",
+    "render",
+    "renderer-result.json",
+    "verification.json"
+  ],
+  "actualRendererCalls": 0,
+  "newMeaningJudgments": 0,
+  "newObservations": 0,
+  "sourceChangesForThisFailure": 0,
+  "setupCorrectionRequiresAdvisorDecision": 8,
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "candidate-digest-base-media-validation-v001",
+  "status": "passed",
+  "coreInvocationBinding": {
+    "schemaVersion": "candidate-digest-core-invocation-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/core-invocation.json",
+    "fileSha256": "bb98440ccb8bfaf499bb7db26aa032ac7561631a27a6e71c2a5825c554cead12",
+    "canonicalSha256": "e95fdf7f1581d1db9181b0fa3bf932335150f1081ea7cb8a44c817377edb2574"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "candidate-digest-machine-adoption-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/machine-adoption.json",
+    "fileSha256": "48d8a351777849a7db7588c045e6ec27d54232066b3fca5400b06f985b45e8fb",
+    "canonicalSha256": "6844706b7b4be1cf4bc2b73b7e938271d68a11e8548d3bb6421fdfda84bc9c0a"
+  },
+  "editPlanBinding": {
+    "schemaVersion": "candidate-digest-edit-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/edit-plan.json",
+    "fileSha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d",
+    "canonicalSha256": "358ac7fbd0ff993c8b41a91c2c5795601dfdaa53fc92d07d1f4e372aacdb8a2c"
+  },
+  "checks": {
+    "machineAdoptionReconstruction": "passed",
+    "sourceSnapshotSha": "passed",
+    "formalRangeProjection": "passed",
+    "videoQc": "passed",
+    "audioQc": "passed",
+    "timelineQc": "passed"
+  },
+  "individualCandidateHumanApproval": "not-performed",
+  "humanQuality": "not-evaluated",
+  "outputs": {
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/base-media.mp4",
+      "fileSha256": "0de24b8c9b18d33d38e163f0e1eaed8a35aaeea4b2411c507d7947c992545c04"
+    },
+    "timeline": {
+      "schemaVersion": "presentation-base-media-timeline-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/timeline.json",
+      "fileSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e",
+      "canonicalSha256": "5b1e6c94a55485aa6632d1b087c4bb70ffe2631f1853981942a7ef1be9048f8d"
+    },
+    "generationManifest": {
+      "schemaVersion": "presentation-base-media-generation-manifest-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/generation-manifest.json",
+      "fileSha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053",
+      "canonicalSha256": "13aa3488ea8733d54f493f0572a8f66b1472283a16dc38e39f711e50e4997ec8"
+    }
+  },
+  "decodedFramePayloadSha256": "9d46737b3627a7bb0e7a43005e8359fc47908697613253c47e925afd52fed37c",
+  "encodeInputPayloadSha256": "d36b5e425ed355e987b36f3ebbf3c8ca1609dd065bc4de3c51ee81de7ebe87b5"
+}
