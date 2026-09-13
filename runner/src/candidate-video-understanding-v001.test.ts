@@ -5,6 +5,58 @@ import {tmpdir} from 'node:os';
 import {dirname, join} from 'node:path';
 
 import {
+  CANDIDATE_VIDEO_ID_ROLES_V003,
+  CANDIDATE_VIDEO_ID_PROMPT_V003,
+  CANDIDATE_VIDEO_ID_ARTIFACT_PATHS_V004,
+  CANDIDATE_VIDEO_ID_FIXED_TARGETS_V004,
+  CANDIDATE_VIDEO_ID_LIMITS_V004,
+  CANDIDATE_VIDEO_ID_TIMEOUTS_V004,
+  CANDIDATE_VIDEO_ID_INFERENCE_POLICY_V004,
+  CANDIDATE_VIDEO_ID_PROFILE_V005,
+  assertCandidateVideoIdProfileV005,
+  buildCandidateVideoIdFixedRequestsV005,
+  assertCandidateVideoIdFixedRequestsV005,
+  assertCandidateVideoIdRequestDeltaV005,
+  buildCandidateVideoIdPriceReviewV005,
+  assertCandidateVideoIdPriceReviewV005,
+  type CandidateVideoIdFixedRequestV005,
+  assertCandidateVideoIdInputTableV004,
+  buildCandidateVideoIdInputTableV004,
+  verifyCandidateVideoIdInputTableV004,
+  assertCandidateVideoIdExecutionPlanV004,
+  buildCandidateVideoIdFixedRequestsV004,
+  assertCandidateVideoIdFixedRequestsV004,
+  assertCandidateVideoIdCostConditionsV004,
+  assertCandidateVideoIdPrepareCostConditionsV004,
+  assertCandidateVideoIdPriceSnapshotV004,
+  assertCandidateVideoIdPreparePriceSnapshotV004,
+  assertCandidateVideoIdPrepareApprovalV004,
+  assertCandidateVideoIdInferenceApprovalV004,
+  assertCandidateVideoIdInferencePolicyV004,
+  assertCandidateVideoIdInferenceCostContinuationV004,
+  createCandidateVideoIdCacheBillingReviewV004,
+  assertCandidateVideoIdCacheBillingReviewV004,
+  deriveCandidateVideoIdCacheUsageV004,
+  createCandidateVideoIdUsageScalarReviewV004,
+  assertCandidateVideoIdUsageScalarReviewV004,
+  deriveCandidateVideoIdScalarUsageV004,
+  assertCandidateVideoIdComparisonApprovalV004,
+  type CandidateVideoIdExecutionPlanV004,
+  type CandidateVideoIdCostConditionsV004,
+  type CandidateVideoIdPrepareCostConditionsV004,
+  type CandidateVideoIdPreparationBillingReviewV004,
+  type CandidateVideoIdPrepareApprovalV004,
+  type CandidateVideoIdInferenceApprovalV004,
+  type CandidateVideoIdComparisonApprovalV004,
+  assertCandidateVideoIdInputV003,
+  assertCandidateVideoIdOutputV003,
+  buildCandidateVideoIdRequestV003,
+  candidateVideoIdSchemaV003,
+  loadCandidateVideoIdInputsV003,
+  resolveCandidateVideoIdEvidenceV003,
+  type CandidateVideoIdInputV003,
+  type CandidateVideoIdProviderOutputV003,
+  type CandidateVideoIdObservationV003,
   assertCandidateVideoJobV002, assertCandidateVideoOutputV002,
   CANDIDATE_VIDEO_COMPARISON_EXPERIMENT_PLAN_SCHEMA_V002,
   CANDIDATE_VIDEO_SOURCE_MAPPING_SCHEMA_V001,
@@ -68,6 +120,682 @@ import {
   type CandidateVideoUnderstandingProviderOutputV001,
   type CandidateVideoUnderstandingResultV001
 } from './candidate-video-understanding-v001.js';
+
+// These entry points exit before all historical temporary-fixture and human
+// evaluation loaders. The request branch reads unchanged source artifacts only.
+if (process.argv.includes('--task035-profile-only') || process.argv.includes('--task035-request-only')) {
+  let checks = 0;
+  const check = (fn: () => void) => {fn(); checks += 1;};
+  const digest = (value: unknown) => createHash('sha256').update(canonicalJsonBytesV001(value)).digest('hex');
+  const profile = CANDIDATE_VIDEO_ID_PROFILE_V005;
+  const context = {origin: 'mock' as const, experimentId: 'task-035',
+    approvalReference: 'synthetic-task-035-preparation-only', checkedAt: '2026-09-06T03:31:07.000Z'};
+  const review = buildCandidateVideoIdPriceReviewV005(context);
+  const original = canonicalJsonBytesV001({profile, review});
+  check(() => assertCandidateVideoIdProfileV005(profile));
+  check(() => assert.deepEqual(profile, {
+    schemaVersion: 'candidate-video-understanding-id-profile-v005', workOrderId: 'task-035', experimentId: 'task-035',
+    model: 'gemini-3.8-flash', maxOutputTokens: 8192, thinkingLevel: 'MEDIUM',
+    executionRecordPath: 'evals/clip_composition/outputs/work-candidate-video-understanding-recalibration-v001/execution-record-v002.jsonl',
+    timeouts: {metadataGetMs: 30000, countTokensMs: 180000}, limits: {metadataGet: 5, countTokens: 10, inference: 0, total: 15},
+    retry: 0, repair: 0, resend: 0, reupload: 0, extraPoll: 0,
+    futureInference: {approvalStatus: 'requires-separate-kawafmm-approval', perConditionInference: 1,
+      modelAnswerContractFailure: 'persist-rejected-condition-and-continue', infrastructureFailure: 'stop-all', expenseBudget: 'not-approved'}
+  }));
+  for (const frozen of [profile, profile.timeouts, profile.limits, profile.futureInference]) {
+    check(() => assert.equal(Object.isFrozen(frozen), true));
+  }
+  for (const key of Object.keys(profile)) {
+    const missing: Record<string, unknown> = structuredClone(profile); delete missing[key];
+    check(() => assert.throws(() => assertCandidateVideoIdProfileV005(missing)));
+  }
+  for (const changed of [null, {}, {...profile, experimentId: 'task-029'}, {...profile, workOrderId: 'task-030'},
+    {...profile, schemaVersion: 'candidate-video-understanding-id-profile-v004'}, {...profile, model: 'gemini-3.6-flash'},
+    {...profile, thinkingLevel: 'LOW'}, {...profile, maxOutputTokens: 4096}, {...profile, maxOutputTokens: 8193},
+    {...profile, executionRecordPath: CANDIDATE_VIDEO_ID_ARTIFACT_PATHS_V004.executionRecord},
+    ...['retry', 'repair', 'resend', 'reupload', 'extraPoll'].map(key => ({...profile, [key]: 1})),
+    {...profile, timeouts: {...profile.timeouts, metadataGetMs: 30001}},
+    {...profile, timeouts: {...profile.timeouts, countTokensMs: 180001}},
+    {...profile, limits: {...profile.limits, inference: 1}}, {...profile, limits: {...profile.limits, metadataGet: 6}},
+    {...profile, limits: {...profile.limits, countTokens: 11}}, {...profile, limits: {...profile.limits, total: 16}},
+    {...profile, futureInference: {...profile.futureInference, perConditionInference: 2}},
+    {...profile, futureInference: {...profile.futureInference, approvalStatus: 'approved'}},
+    {...profile, futureInference: {...profile.futureInference, expenseBudget: '1000000000'}},
+    {...profile, futureInference: {...profile.futureInference, modelAnswerContractFailure: 'stop-all'}},
+    {...profile, futureInference: {...profile.futureInference, infrastructureFailure: 'continue'}},
+    {...profile, maximumNanoUsd: '0'}, {...profile, maximumNanoUsd: '1000000000'}, {...profile, fallbackOutputTokens: 4096}]) {
+    check(() => assert.throws(() => assertCandidateVideoIdProfileV005(changed)));
+  }
+  check(() => assertCandidateVideoIdPriceReviewV005(review));
+  check(() => assert.equal(review.origin, 'mock'));
+  check(() => assert.equal(review.experimentId, 'task-035'));
+  check(() => assert.deepEqual(review.standardPrice,
+    {inputNanoUsdPerToken: 750, outputIncludingThinkingNanoUsdPerToken: 3750, validThrough: '2026-12-31'}));
+  check(() => assert.equal(review.preparationBilling.filesApi, 'documented-free'));
+  check(() => assert.equal(review.preparationBilling.countTokens, 'independent-pricing-not-found-not-an-explicit-free-guarantee'));
+  check(() => assert.equal(review.preparationBilling.invoiceAmount, 'not-established'));
+  check(() => assert.equal(review.referenceEstimateOnly, true));
+  check(() => assert.equal(review.generationAllowanceIsGuaranteedBillableCap, false));
+  check(() => assert.equal(review.futureInferenceBudget, 'not-approved'));
+  check(() => assert.equal(Object.hasOwn(review, 'maximumNanoUsd'), false));
+  for (const source of review.sources) {
+    check(() => assert.equal(source.summaryUtf8Sha256, createHash('sha256').update(source.summary, 'utf8').digest('hex')));
+    check(() => assert.equal(new URL(source.url).origin, 'https://ai.google.dev'));
+  }
+  for (const key of Object.keys(review)) {
+    const missing: Record<string, unknown> = structuredClone(review); delete missing[key];
+    check(() => assert.throws(() => assertCandidateVideoIdPriceReviewV005(missing)));
+  }
+  for (const changed of [null, {}, {...review, workOrderId: 'task-032'}, {...review, experimentId: 'task-029'},
+    {...review, origin: 'unknown'}, {...review, approvalReference: ' '}, {...review, checkedAt: 'not-a-time'},
+    {...review, checkedAt: '2027-01-01T00:00:00Z'}, {...review, serviceTier: 'flex'}, {...review, model: 'gemini-3.6-flash'},
+    {...review, standardPrice: {...review.standardPrice, inputNanoUsdPerToken: 75}},
+    {...review, standardPrice: {...review.standardPrice, outputIncludingThinkingNanoUsdPerToken: 0}},
+    {...review, standardPrice: {...review.standardPrice, validThrough: '2027-12-31'}},
+    {...review, preparationBilling: {...review.preparationBilling, countTokens: 'free'}},
+    {...review, preparationBilling: {...review.preparationBilling, invoiceAmount: '0'}},
+    {...review, referenceEstimateOnly: false}, {...review, cacheDiscountAssumed: true}, {...review, thinkingTokensFixed: true},
+    {...review, generationAllowanceIsGuaranteedBillableCap: true}, {...review, futureInferenceBudget: '1000000000'},
+    {...review, maximumNanoUsd: '0'}, {...review, maximumNanoUsd: '1000000000'}, {...review, sources: review.sources.slice(1)},
+    {...review, unrelatedEvidence: undefined}]) {
+    check(() => assert.throws(() => assertCandidateVideoIdPriceReviewV005(changed)));
+  }
+  const changedSource = structuredClone(review); changedSource.sources[0].summary += ' altered';
+  changedSource.sources[0].summaryUtf8Sha256 = createHash('sha256').update(changedSource.sources[0].summary).digest('hex');
+  check(() => assert.throws(() => assertCandidateVideoIdPriceReviewV005(changedSource)));
+  const execution = {...context, now: '2026-09-06T03:31:08.000Z'};
+  check(() => assertCandidateVideoIdPriceReviewV005(review, execution));
+  for (const changed of [{origin: 'live'}, {experimentId: 'task-029'}, {approvalReference: 'another-approval'},
+    {now: '2026-09-06T03:31:06.999Z'}, {now: '2027-01-01T00:00:00.000Z'}]) {
+    check(() => assert.throws(() => assertCandidateVideoIdPriceReviewV005(review, {...execution, ...changed} as typeof execution)));
+  }
+  check(() => assert.throws(() => buildCandidateVideoIdPriceReviewV005({...context, experimentId: 'task-029'})));
+  const liveReview = buildCandidateVideoIdPriceReviewV005({...context, origin: 'live'});
+  check(() => assertCandidateVideoIdPriceReviewV005(liveReview, {...execution, origin: 'live'}));
+  check(() => assert.ok(original.equals(canonicalJsonBytesV001({profile, review}))));
+  const profileChecks = checks;
+  let requestSummary: Record<string, unknown> | null = null;
+  if (process.argv.includes('--task035-request-only')) {
+    const workspaceRoot = new URL('../..', import.meta.url).pathname.replace(/\/$/u, '');
+    const tableBytes = await readFile(join(workspaceRoot, CANDIDATE_VIDEO_ID_ARTIFACT_PATHS_V004.inputTable));
+    const planBytes = await readFile(join(workspaceRoot, CANDIDATE_VIDEO_ID_ARTIFACT_PATHS_V004.executionPlan));
+    const table: unknown = JSON.parse(tableBytes.toString('utf8'));
+    await verifyCandidateVideoIdInputTableV004(workspaceRoot, table, 'live');
+    assertCandidateVideoIdInputTableV004(table, 'live');
+    const plan: unknown = JSON.parse(planBytes.toString('utf8'));
+    assertCandidateVideoIdExecutionPlanV004(plan, table);
+    const previous = buildCandidateVideoIdFixedRequestsV004(table, plan);
+    const sourceBefore = canonicalJsonBytesV001({table, plan, previous});
+    const requests = buildCandidateVideoIdFixedRequestsV005(table, plan);
+    // Independent fixed expectations observed before task-035 edits. Do not
+    // regenerate these literals from whichever builder is currently installed.
+    const oldExpected = [
+      'adc192463042028430a8b8f00b71db0b51bba4b90fd715254016528c3a18a1fd',
+      '764670ecc37663720fabf0d3d570217451a529278f4196643b7ab357d03328a5',
+      'c26e2bcda45931961dd19944ac08547c35b88b16293bbeab49296a28e57eb296',
+      '60fd24e16e627e5d694dd24a91c83acf64d23d10df828a6287b66a3525d47181',
+      '27809c3289499f2d4458e890fa2553216567158f22ce1c2f93fdd113bf11c5dd',
+      'f0365123baa5be7544b02ad81c56f5451a01d91b06493d09734606ab4d104868',
+      '5d5ec754fd4760c56fb74b7c6748067054d762f5d79e1d8c4b0ceba142f4f575',
+      '3062e7f83b7335d7ffc24fa48618e9c367773fced96524a3ce6effe38bfa5081',
+      'b7239f74b4e561df48742fe6a8ab5423312f78863510de08f060ca03de9ad210',
+      '6f62ec4cc6d2059514b8418f64da3c56b54ef6e227d8cf6a560afae14fa54fa3'
+    ];
+    const wire = (request: typeof previous[number]['request'] | CandidateVideoIdFixedRequestV005['request']) =>
+      ({method: request.method, url: request.url, body: request.body});
+    const deltaPaths = (left: unknown, right: unknown, path = ''): string[] => {
+      if (Object.is(left, right)) return [];
+      if (left === null || right === null || typeof left !== 'object' || typeof right !== 'object'
+        || Array.isArray(left) !== Array.isArray(right)) return [path];
+      const a = left as Record<string, unknown>; const b = right as Record<string, unknown>;
+      return [...new Set([...Object.keys(a), ...Object.keys(b)])].sort().flatMap(key =>
+        Object.hasOwn(a, key) !== Object.hasOwn(b, key) ? [path + '/' + key] : deltaPaths(a[key], b[key], path + '/' + key));
+    };
+    check(() => assert.equal(previous.length, 10));
+    check(() => assert.equal(requests.length, 10));
+    check(() => assert.equal(new Set(requests.map(fixed => fixed.exactRequestSha256)).size, 10));
+    check(() => assertCandidateVideoIdFixedRequestsV004(previous, table, plan));
+    check(() => assertCandidateVideoIdFixedRequestsV005(requests, table, plan));
+    requests.forEach((fixed, index) => {
+      const old = previous[index]; const before = old.request; const after = fixed.request;
+      check(() => assert.equal(before.body.generationConfig.maxOutputTokens, 4096));
+      check(() => assert.equal(old.exactRequestSha256, oldExpected[index]));
+      check(() => assert.equal(digest(wire(before)), oldExpected[index]));
+      check(() => assert.equal(after.schemaVersion, 'candidate-video-understanding-id-request-v005'));
+      check(() => assert.equal(after.body.generationConfig.maxOutputTokens, 8192));
+      check(() => assert.deepEqual(deltaPaths(wire(before), wire(after)), ['/body/generationConfig/maxOutputTokens']));
+      check(() => assert.equal(fixed.exactRequestSha256, digest(wire(after))));
+      check(() => assert.notEqual(fixed.exactRequestSha256, oldExpected[index]));
+      check(() => assert.equal(fixed.previousExactRequestSha256, oldExpected[index]));
+      check(() => assert.equal(after.url, 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent'));
+      check(() => assert.equal(after.body.generationConfig.thinkingConfig.thinkingLevel, 'MEDIUM'));
+      check(() => assert.ok(canonicalJsonBytesV001(before.body.contents).equals(canonicalJsonBytesV001(after.body.contents))));
+      check(() => assert.ok(canonicalJsonBytesV001(before.body.generationConfig.responseJsonSchema)
+        .equals(canonicalJsonBytesV001(after.body.generationConfig.responseJsonSchema))));
+      check(() => assert.deepEqual(Object.keys(after.body).sort(), ['contents', 'generationConfig']));
+      check(() => assert.deepEqual(Object.keys(after.body.generationConfig).sort(),
+        ['maxOutputTokens', 'responseJsonSchema', 'responseMimeType', 'thinkingConfig']));
+      check(() => assert.equal(after.body.contents[0].parts.length, fixed.condition === 'A' ? 1 : 2));
+      check(() => assert.equal(after.mediaSha256, before.mediaSha256));
+      check(() => assertCandidateVideoIdRequestDeltaV005(before, after));
+      if (fixed.condition === 'B') {
+        const media = after.body.contents[0].parts[1] as {fileData: {fileUri: string}};
+        check(() => assert.equal(media.fileData.fileUri, plan.files.find(file => file.itemId === fixed.itemId)!.uri));
+        check(() => assert.ok(canonicalJsonBytesV001(before.body.contents[0].parts[0])
+          .equals(canonicalJsonBytesV001(requests[index - 1].request.body.contents[0].parts[0]))));
+      }
+    });
+    const rejectChanged = (mutate: (changed: CandidateVideoIdFixedRequestV005[]) => void, rehash = true) => {
+      const changed = structuredClone(requests); mutate(changed);
+      if (rehash) for (const fixed of changed) fixed.exactRequestSha256 = digest(wire(fixed.request));
+      check(() => assert.throws(() => assertCandidateVideoIdFixedRequestsV005(changed, table, plan)));
+    };
+    for (const maxOutputTokens of [4096, 8191, 8193, '8192', null, undefined]) {
+      rejectChanged(changed => {
+        const generation = changed[0].request.body.generationConfig as Record<string, unknown>;
+        if (maxOutputTokens === undefined) delete generation.maxOutputTokens; else generation.maxOutputTokens = maxOutputTokens;
+      });
+    }
+    rejectChanged(changed => {changed[0].request.url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent';});
+    rejectChanged(changed => {changed[0].request.body.generationConfig.thinkingConfig.thinkingLevel = 'LOW';});
+    rejectChanged(changed => {(changed[0].request.body.contents[0].parts[0] as {text: string}).text += ' changed';});
+    rejectChanged(changed => {changed[0].request.body.generationConfig.responseJsonSchema.properties.itemId.enum = ['item-9999'];});
+    rejectChanged(changed => {changed[0].request.body.contents[0].parts.push(structuredClone(changed[1].request.body.contents[0].parts[1]));});
+    rejectChanged(changed => {(changed[1].request.body.contents[0].parts[1] as {fileData: {fileUri: string}}).fileData.fileUri =
+      'https://generativelanguage.googleapis.com/v1beta/files/replaced';});
+    rejectChanged(changed => {Object.assign(changed[0].request.body, {humanEvaluation: 'not-provider-input'});});
+    rejectChanged(changed => {Object.assign(changed[0].request, {schemaVersion: previous[0].request.schemaVersion});});
+    rejectChanged(changed => {changed[0].request.body = structuredClone(previous[0].request.body);});
+    rejectChanged(changed => {changed.pop();});
+    rejectChanged(changed => {changed[1] = structuredClone(changed[0]);});
+    rejectChanged(changed => {changed.reverse();});
+    rejectChanged(changed => {changed[0].itemId = 'item-9999';});
+    rejectChanged(changed => {Object.assign(changed[0], {condition: 'C'});});
+    rejectChanged(changed => {changed[0].previousExactRequestSha256 = requests[0].exactRequestSha256;});
+    rejectChanged(changed => {changed[0].exactRequestSha256 = previous[0].exactRequestSha256;}, false);
+    rejectChanged(changed => {changed[0].exactRequestSha256 = '0'.repeat(64);}, false);
+    check(() => assert.throws(() => assertCandidateVideoIdFixedRequestsV005(previous, table, plan)));
+    check(() => assert.throws(() => assertCandidateVideoIdFixedRequestsV004(requests, table, plan)));
+    check(() => assert.throws(() => assertCandidateVideoIdRequestDeltaV005(previous[0].request, previous[0].request)));
+    check(() => assert.throws(() => assertCandidateVideoIdRequestDeltaV005(
+      {...previous[0].request, body: {...previous[0].request.body, generationConfig: {...previous[0].request.body.generationConfig, maxOutputTokens: 8192}}},
+      requests[0].request)));
+    check(() => assert.ok(sourceBefore.equals(canonicalJsonBytesV001({table, plan, previous}))));
+    check(() => assert.deepEqual(buildCandidateVideoIdFixedRequestsV004(table, plan).map(fixed => fixed.exactRequestSha256), oldExpected));
+    check(() => assert.notEqual(table.experimentId, profile.experimentId));
+    const tableAfter = await readFile(join(workspaceRoot, CANDIDATE_VIDEO_ID_ARTIFACT_PATHS_V004.inputTable));
+    const planAfter = await readFile(join(workspaceRoot, CANDIDATE_VIDEO_ID_ARTIFACT_PATHS_V004.executionPlan));
+    check(() => assert.ok(tableBytes.equals(tableAfter)));
+    check(() => assert.ok(planBytes.equals(planAfter)));
+    requestSummary = {fixedRequests: requests.length, old4096WireShasUnchanged: true, singleProviderFieldChange: true,
+      requestChecks: checks - profileChecks, newRequestShas: requests.map(({itemId, condition, exactRequestSha256}) =>
+        ({itemId, condition, exactRequestSha256}))};
+  }
+  process.stdout.write(JSON.stringify({suite: 'task-035-explicit-8192-core', status: 'passed', checks, profileChecks,
+    sourceVerification: requestSummary === null ? 'not-requested' : 'unchanged-formal-sources-read-only', requestSummary,
+    evaluationReads: 0, newFixturePaths: 0, apiCommunications: 0, formalArtifactsWritten: 0}) + '\n');
+  process.exit(0);
+}
+
+if (process.argv.includes('--task033-scalar-usage-only')) {
+  let checks = 0;
+  const check = (fn: () => void) => {fn(); checks += 1;};
+  const context = {origin: 'mock' as const, experimentId: 'synthetic-task-033-scalar-usage',
+    approvalReference: 'synthetic-task-033-approval', checkedAt: '2026-09-06T01:00:00.000Z'};
+  const cacheReview = createCandidateVideoIdCacheBillingReviewV004(context);
+  const scalarReview = createCandidateVideoIdUsageScalarReviewV004(context, cacheReview);
+  const request = {contents: [{role: 'user', parts: [{text: 'synthetic fixed nonempty input'}]}], generationConfig: {}};
+  const emptyRequest = {contents: [], generationConfig: {}};
+  const raw3A = {promptTokenCount: 51784, thoughtsTokenCount: 3565, totalTokenCount: 55349,
+    serviceTier: 'standard', promptTokensDetails: [{modality: 'TEXT', tokenCount: 51784}]};
+  const envelope = (usage: unknown) => ({modelVersion: 'gemini-3.8-flash', usageMetadata: usage});
+  const derive = (usage: unknown, body: unknown = request) =>
+    deriveCandidateVideoIdScalarUsageV004(envelope(usage), cacheReview, scalarReview, body);
+  const original = canonicalJsonBytesV001({raw3A, request, cacheReview, scalarReview});
+  const reassessed = derive(raw3A);
+  const independent = BigInt(raw3A.promptTokenCount) * 750n + BigInt(raw3A.thoughtsTokenCount) * 3750n;
+  check(() => assert.equal(raw3A.promptTokenCount + raw3A.thoughtsTokenCount, raw3A.totalTokenCount));
+  check(() => assert.equal(reassessed.estimatedNanoUsd, independent.toString()));
+  check(() => assert.equal(reassessed.estimatedNanoUsd, '52206750'));
+  check(() => assert.equal(reassessed.normalizedProviderUsage.candidatesTokenCount, 0));
+  check(() => assert.equal(reassessed.billingBreakdown.outputNanoUsd, '0'));
+  check(() => assert.deepEqual(reassessed.providerUsage, raw3A));
+  check(() => assert.equal(Object.hasOwn(reassessed.providerUsage, 'candidatesTokenCount'), false));
+  check(() => assert.deepEqual(reassessed.usageNormalization.omittedZeroFields,
+    ['cachedContentTokenCount', 'candidatesTokenCount', 'toolUsePromptTokenCount']));
+  check(() => assert.equal(reassessed.usageNormalization.schemaVersion, 'candidate-video-understanding-task-033-usage-normalization-v001'));
+  const digest = (value: unknown) => createHash('sha256').update(canonicalJsonBytesV001(value)).digest('hex');
+  check(() => assert.equal(reassessed.usageNormalization.normalizationReviewSha256, digest(scalarReview)));
+  check(() => assert.equal(reassessed.usageNormalization.rawUsageCanonicalSha256, digest(raw3A)));
+  check(() => assert.equal(reassessed.usageNormalization.normalizedUsageCanonicalSha256, digest(reassessed.normalizedProviderUsage)));
+  check(() => assertCandidateVideoIdUsageScalarReviewV004(scalarReview, cacheReview));
+  // The original evaluator still rejects the actual omitted scalar. Historical
+  // records have not been made to appear successful under the new rule.
+  check(() => assert.throws(() => deriveCandidateVideoIdCacheUsageV004(envelope(raw3A), cacheReview, request)));
+  check(() => assert.equal(derive({...raw3A, candidatesTokenCount: 0}).estimatedNanoUsd, reassessed.estimatedNanoUsd));
+  const zeroBase: Record<string, unknown> = {promptTokenCount: 0, cachedContentTokenCount: 0, candidatesTokenCount: 0,
+    thoughtsTokenCount: 0, totalTokenCount: 0, toolUsePromptTokenCount: 0, serviceTier: 'standard'};
+  const normalBase: Record<string, unknown> = {...zeroBase, promptTokenCount: 10, candidatesTokenCount: 2,
+    thoughtsTokenCount: 3, totalTokenCount: 15};
+  const omissions: Array<{field: string; usage: Record<string, unknown>; body: unknown}> = [
+    {field: 'promptTokenCount', usage: {...zeroBase, candidatesTokenCount: 2, totalTokenCount: 2}, body: emptyRequest},
+    {field: 'cachedContentTokenCount', usage: normalBase, body: request},
+    {field: 'candidatesTokenCount', usage: {...normalBase, candidatesTokenCount: 0, totalTokenCount: 13}, body: request},
+    {field: 'thoughtsTokenCount', usage: {...normalBase, thoughtsTokenCount: 0, totalTokenCount: 12}, body: request},
+    {field: 'totalTokenCount', usage: zeroBase, body: emptyRequest},
+    {field: 'toolUsePromptTokenCount', usage: normalBase, body: request}
+  ];
+  for (const {field, usage, body} of omissions) {
+    const omitted = {...usage}; delete omitted[field];
+    const explicit = derive(usage, body); const absent = derive(omitted, body);
+    check(() => assert.equal(absent.estimatedNanoUsd, explicit.estimatedNanoUsd));
+    check(() => assert.deepEqual(absent.normalizedProviderUsage, explicit.normalizedProviderUsage));
+    check(() => assert.deepEqual(absent.usageNormalization.omittedZeroFields, [field]));
+    check(() => assert.equal(Object.hasOwn(absent.providerUsage, field), false));
+  }
+  const oldA = {promptTokenCount: 30215, candidatesTokenCount: 150, thoughtsTokenCount: 3932,
+    totalTokenCount: 34297, serviceTier: 'standard'};
+  const oldB = {promptTokenCount: 60838, candidatesTokenCount: 954, thoughtsTokenCount: 3127,
+    totalTokenCount: 64919, cachedContentTokenCount: 27542, serviceTier: 'standard'};
+  for (const [usage, expected] of [[oldA, '37968750'], [oldB, '42341400']] as const) {
+    const previous = deriveCandidateVideoIdCacheUsageV004(envelope(usage), cacheReview, request);
+    const current = derive(usage);
+    check(() => assert.equal(current.estimatedNanoUsd, expected));
+    check(() => assert.equal(current.estimatedNanoUsd, previous.estimatedNanoUsd));
+    check(() => assert.deepEqual(current.billingBreakdown, previous.billingBreakdown));
+  }
+  for (const field of scalarReview.rules.fields) {
+    for (const invalid of [undefined, null, -1, 0.5, '0', false, {}, [], NaN, Infinity, 2147483648, Number.MAX_SAFE_INTEGER + 1]) {
+      check(() => assert.throws(() => derive({...normalBase, [field]: invalid})));
+    }
+  }
+  for (const usage of [null, undefined, [], 0, {}, {...normalBase, totalTokenCount: 14},
+    {...raw3A, totalTokenCount: 55350}, {...normalBase, candidatesTokenCount: undefined},
+    {...normalBase, cachedContentTokenCount: 11}, {...normalBase, cachedContentTokenCount: 1, totalTokenCount: 16},
+    {...normalBase, toolUsePromptTokenCount: 1}, {...normalBase, toolUsePromptTokenCount: 1, totalTokenCount: 16},
+    {...normalBase, futureBillableTokenCount: 0}, {...normalBase, futureBillableTokenCount: undefined},
+    {...normalBase, billableUsage: {}}, {...normalBase, serviceTier: 0}, {...normalBase, serviceTier: undefined},
+    {...normalBase, serviceTier: null}, {...normalBase, serviceTier: 'flex'}, {...normalBase, serviceTier: 'priority'},
+    {...normalBase, promptTokensDetails: 0}, {...normalBase, promptTokensDetails: undefined},
+    {...normalBase, promptTokensDetails: null}, {...normalBase, cacheTokensDetails: [{modality: 'TEXT', tokenCount: 1}]},
+    {...raw3A, candidatesTokensDetails: [{modality: 'TEXT', tokenCount: 1}]},
+    {...normalBase, toolUsePromptTokensDetails: [{modality: 'TEXT', tokenCount: 1}]},
+    {...normalBase, candidatesTokensDetails: [{modality: 'TEXT'}]},
+    {...normalBase, candidatesTokensDetails: [{modality: 'TEXT', tokenCount: 2, billableTokenCount: 0}]}]) {
+    check(() => assert.throws(() => derive(usage)));
+  }
+  for (const field of ['promptTokenCount', 'candidatesTokenCount', 'thoughtsTokenCount', 'totalTokenCount']) {
+    const contradictory = {...normalBase}; delete contradictory[field];
+    check(() => assert.throws(() => derive(contradictory)));
+  }
+  check(() => assert.throws(() => derive(zeroBase)));
+  check(() => assert.throws(() => derive(Object.create(raw3A))));
+  check(() => assert.throws(() => deriveCandidateVideoIdScalarUsageV004({}, cacheReview, scalarReview, request)));
+  check(() => assert.throws(() => deriveCandidateVideoIdScalarUsageV004(envelope(raw3A), cacheReview, undefined, request)));
+  check(() => assert.throws(() => deriveCandidateVideoIdScalarUsageV004({...envelope(raw3A), unknownBilling: 0}, cacheReview, scalarReview, request)));
+  const visibleOutput = {...envelope(raw3A), candidates: [{content: {parts: [{text: 'visible response'}]}}]};
+  check(() => assert.throws(() => deriveCandidateVideoIdScalarUsageV004(visibleOutput, cacheReview, scalarReview, request)));
+  check(() => assert.throws(() => deriveCandidateVideoIdScalarUsageV004({...visibleOutput,
+    usageMetadata: {...raw3A, candidatesTokenCount: 0}}, cacheReview, scalarReview, request)));
+  check(() => assert.equal(deriveCandidateVideoIdScalarUsageV004({...envelope(raw3A),
+    candidates: [{content: {parts: [{thought: true, text: 'thought-only content'}]}}]}, cacheReview, scalarReview, request)
+    .estimatedNanoUsd, reassessed.estimatedNanoUsd));
+  check(() => assert.throws(() => derive(raw3A, {...request, cachedContent: 'cachedContents/unapproved'})));
+  check(() => assert.throws(() => derive(raw3A, {...request, tools: []})));
+  const omittedTier = {...normalBase}; delete omittedTier.serviceTier;
+  const tierResult = derive(omittedTier);
+  check(() => assert.equal(Object.hasOwn(tierResult.normalizedProviderUsage, 'serviceTier'), false));
+  check(() => assert.deepEqual(tierResult.usageNormalization.omittedZeroFields, []));
+  check(() => assert.equal(Object.hasOwn(reassessed.normalizedProviderUsage, 'cacheTokensDetails'), false));
+  check(() => assert.equal(Object.hasOwn(reassessed.normalizedProviderUsage, 'candidatesTokensDetails'), false));
+  for (const key of Object.keys(scalarReview)) {
+    const missing: Record<string, unknown> = structuredClone(scalarReview); delete missing[key];
+    check(() => assert.throws(() => assertCandidateVideoIdUsageScalarReviewV004(missing, cacheReview)));
+  }
+  for (const altered of [{...scalarReview, workOrderId: 'task-032'}, {...scalarReview, cacheBillingReviewSha256: '0'.repeat(64)},
+    {...scalarReview, checkedAt: '2026-09-05T00:00:00.000Z'}, {...scalarReview, checkedAt: '2027-01-01T00:00:00.000Z'},
+    {...scalarReview, rules: {...scalarReview.rules, fields: [...scalarReview.rules.fields, 'serviceTier']}},
+    {...scalarReview, rules: {...scalarReview.rules, omittedDefault: 1}},
+    {...scalarReview, rules: {...scalarReview.rules, missingUsageMessage: 'zero'}},
+    {...scalarReview, rules: {...scalarReview.rules, nonzeroToolUsage: 'zero'}},
+    {...scalarReview, rules: {...scalarReview.rules, totalComposition: [...scalarReview.rules.totalComposition, 'cachedContentTokenCount']}},
+    {...scalarReview, rules: {...scalarReview.rules, semanticZeroConsistency: 'unchecked'}},
+    {...scalarReview, sources: scalarReview.sources.slice(1)}, {...scalarReview, unknownProof: undefined}]) {
+    check(() => assert.throws(() => assertCandidateVideoIdUsageScalarReviewV004(altered, cacheReview)));
+  }
+  const changedSource = structuredClone(scalarReview); changedSource.sources[0].summary += ' altered';
+  changedSource.sources[0].summaryUtf8Sha256 = createHash('sha256').update(changedSource.sources[0].summary).digest('hex');
+  check(() => assert.throws(() => assertCandidateVideoIdUsageScalarReviewV004(changedSource, cacheReview)));
+  const execution = {...context, now: '2026-09-06T01:00:01.000Z'};
+  check(() => assertCandidateVideoIdUsageScalarReviewV004(scalarReview, cacheReview, undefined, execution));
+  for (const changed of [{origin: 'live'}, {experimentId: 'another-experiment'}, {approvalReference: 'another-approval'},
+    {now: '2026-09-06T00:59:59.999Z'}, {now: '2027-01-01T00:00:00.000Z'}]) {
+    check(() => assert.throws(() => assertCandidateVideoIdUsageScalarReviewV004(scalarReview, cacheReview, undefined,
+      {...execution, ...changed} as typeof execution)));
+  }
+  check(() => assert.ok(original.equals(canonicalJsonBytesV001({raw3A, request, cacheReview, scalarReview}))));
+  process.stdout.write(JSON.stringify({suite: 'task-033-known-scalar-usage-core-mock-only', status: 'passed', checks,
+    syntheticOnly: true, item0003ADerivedNanoUsd: reassessed.estimatedNanoUsd, materialOrEvaluationReads: 0,
+    newFixturePaths: 0, apiCommunications: 0, formalArtifactsWritten: 0}) + '\n');
+  process.exit(0);
+}
+
+// Fee calculations are memory-only and never enter the historical fixture
+// loaders. Expected A/B amounts are independent assertions, not fee inputs.
+if (process.argv.includes('--task032-cache-billing-only')) {
+  let checks = 0;
+  const check = (fn: () => void) => {fn(); checks += 1;};
+  const context = {origin: 'mock' as const, experimentId: 'synthetic-task-032-cache-billing',
+    approvalReference: 'synthetic-task-032-approval', checkedAt: '2026-09-06T00:00:00.000Z'};
+  const review = createCandidateVideoIdCacheBillingReviewV004(context);
+  const request = {contents: [{role: 'user', parts: [{text: 'synthetic fixed request without human evaluation'}]}],
+    generationConfig: {responseMimeType: 'application/json'}};
+  const usageA = {promptTokenCount: 30215, candidatesTokenCount: 150, thoughtsTokenCount: 3932,
+    totalTokenCount: 34297, serviceTier: 'standard', promptTokensDetails: [{modality: 'TEXT', tokenCount: 30215}]};
+  const usageB = {promptTokenCount: 60838, candidatesTokenCount: 954, thoughtsTokenCount: 3127,
+    totalTokenCount: 64919, cachedContentTokenCount: 27542, serviceTier: 'standard',
+    promptTokensDetails: [{modality: 'TEXT', tokenCount: 30215}, {modality: 'VIDEO', tokenCount: 30623}],
+    cacheTokensDetails: [{modality: 'TEXT', tokenCount: 13679}, {modality: 'VIDEO', tokenCount: 13863}]};
+  const envelope = (usage: unknown) => ({usageMetadata: usage, modelVersion: 'gemini-3.8-flash',
+    candidates: [{finishReason: 'MAX_TOKENS', content: {role: 'model', parts: [{text: '{"incomplete":'}]}}]});
+  const derive = (usage: unknown, body: unknown = request) => deriveCandidateVideoIdCacheUsageV004(envelope(usage), review, body);
+  const savedBefore = canonicalJsonBytesV001({review, request, usageA, usageB});
+  const a = derive(usageA); const b = derive(usageB);
+  check(() => assertCandidateVideoIdCacheBillingReviewV004(review));
+  check(() => assert.equal(a.estimatedNanoUsd, (30215n * 750n + (150n + 3932n) * 3750n).toString()));
+  check(() => assert.equal(a.estimatedNanoUsd, '37968750'));
+  check(() => assert.equal(b.estimatedNanoUsd, ((60838n - 27542n) * 750n + 27542n * 75n + 954n * 3750n + 3127n * 3750n).toString()));
+  check(() => assert.equal(b.estimatedNanoUsd, '42341400'));
+  check(() => assert.equal(BigInt(a.estimatedNanoUsd) + BigInt(b.estimatedNanoUsd), 80310150n));
+  check(() => assert.equal(a.complete, true));
+  check(() => assert.equal(a.billingBreakdown.cachedInputTokens, 0));
+  check(() => assert.equal(derive({...usageA, cachedContentTokenCount: 0}).estimatedNanoUsd, a.estimatedNanoUsd));
+  check(() => assert.equal(derive({...usageA, toolUsePromptTokenCount: 0}).estimatedNanoUsd, a.estimatedNanoUsd));
+  check(() => assert.deepEqual(b.billingBreakdown, {uncachedInputTokens: 33296, cachedInputTokens: 27542,
+    outputTokens: 954, thinkingTokens: 3127, uncachedInputNanoUsd: '24972000', cachedInputNanoUsd: '2065650',
+    outputNanoUsd: '3577500', thinkingNanoUsd: '11726250', explicitCacheStorageNanoUsd: '0',
+    explicitCacheStorageBasis: 'no-explicit-cache-request'}));
+  check(() => assert.equal(b.billingBreakdown.uncachedInputTokens + b.billingBreakdown.cachedInputTokens, usageB.promptTokenCount));
+  check(() => assert.notEqual(b.estimatedNanoUsd, (60838n * 750n + 27542n * 75n + (954n + 3127n) * 3750n).toString()));
+  check(() => assert.equal(derive({promptTokenCount: 100, cachedContentTokenCount: 100, candidatesTokenCount: 0,
+    thoughtsTokenCount: 0, totalTokenCount: 100, serviceTier: 'standard'}).estimatedNanoUsd, '7500'));
+  check(() => assert.equal(derive({promptTokenCount: 0, candidatesTokenCount: 0, thoughtsTokenCount: 0,
+    totalTokenCount: 0, serviceTier: 'standard'}).estimatedNanoUsd, '0'));
+  const withoutTier: Record<string, unknown> = {...usageA}; delete withoutTier.serviceTier;
+  check(() => assert.equal(derive(withoutTier).estimatedNanoUsd, a.estimatedNanoUsd));
+  for (const key of ['promptTokenCount', 'candidatesTokenCount', 'thoughtsTokenCount', 'totalTokenCount']) {
+    const missing: Record<string, unknown> = {...usageA}; delete missing[key];
+    check(() => assert.throws(() => derive(missing)));
+  }
+  for (const key of ['promptTokenCount', 'candidatesTokenCount', 'thoughtsTokenCount', 'totalTokenCount',
+    'cachedContentTokenCount', 'toolUsePromptTokenCount']) {
+    for (const invalid of [undefined, null, -1, 0.5, '0', NaN, Infinity, 2147483648, Number.MAX_SAFE_INTEGER + 1]) {
+      check(() => assert.throws(() => derive({...usageA, [key]: invalid})));
+    }
+  }
+  for (const usage of [null, undefined, {}, [], {...usageB, cachedContentTokenCount: 60839},
+    {...usageB, totalTokenCount: 64919 + 27542}, {...usageA, toolUsePromptTokenCount: 1},
+    {...usageA, unknownBillableTokenCount: 0}, {...usageA, unknownBillableTokenCount: 1},
+    {...usageA, trafficType: 'ON_DEMAND'}, {...usageA, explicitCacheStorageHours: 0},
+    {...usageA, billableUsage: {charge: 0}}, {...usageA, promptTokensDetails: null},
+    {...usageA, promptTokensDetails: [{modality: 'TEXT', tokenCount: 30214}]},
+    {...usageB, cacheTokensDetails: [{modality: 'TEXT', tokenCount: 27541}]},
+    {...usageB, cachedContentTokenCount: 30624, cacheTokensDetails: [{modality: 'VIDEO', tokenCount: 30624}]},
+    {...usageA, cachedContentTokenCount: 1, cacheTokensDetails: [{modality: 'VIDEO', tokenCount: 1}]},
+    {...usageA, candidatesTokensDetails: [{modality: 'TEXT', tokenCount: 149}]},
+    {...usageA, toolUsePromptTokensDetails: [{modality: 'TEXT', tokenCount: 1}]},
+    {...usageA, promptTokensDetails: [{modality: 'TEXT', tokenCount: 30215, billableTokenCount: 0}]},
+    {...usageA, promptTokensDetails: [{modality: 'TEXT', tokenCount: 30215}, {modality: 'TEXT', tokenCount: 0}]},
+    {...usageA, promptTokensDetails: [{modality: 'UNKNOWN', tokenCount: 30215}]},
+    {...usageA, promptTokensDetails: [{modality: 'TEXT'}]}]) {
+    check(() => assert.throws(() => derive(usage)));
+  }
+  check(() => assert.throws(() => derive(Object.create(usageA))));
+  for (const serviceTier of ['flex', 'priority', 'unspecified', 'STANDARD', '', 0, null, undefined]) {
+    check(() => assert.throws(() => derive({...usageA, serviceTier})));
+  }
+  for (const body of [null, {}, {...request, cachedContent: 'cachedContents/synthetic-cache'},
+    {...request, cachedContent: undefined}, {...request, cached_content: 'cachedContents/synthetic-cache'},
+    {...request, ttl: '3600s'}, {...request, tools: []}, {...request, serviceTier: 'flex'}]) {
+    check(() => assert.throws(() => derive(usageB, body)));
+  }
+  check(() => assert.throws(() => deriveCandidateVideoIdCacheUsageV004(envelope(usageA), review, undefined)));
+  check(() => assert.throws(() => deriveCandidateVideoIdCacheUsageV004({...envelope(usageA), unknownBilling: 0}, review, request)));
+  check(() => assert.throws(() => deriveCandidateVideoIdCacheUsageV004({...envelope(usageA), modelVersion: 'another-model'}, review, request)));
+  check(() => assert.equal(derive({...usageA, candidatesTokensDetails: [{modality: 'TEXT', tokenCount: 150}],
+    toolUsePromptTokensDetails: [], cacheTokensDetails: []}).estimatedNanoUsd, a.estimatedNanoUsd));
+  for (const key of Object.keys(review)) {
+    const missing: Record<string, unknown> = structuredClone(review); delete missing[key];
+    check(() => assert.throws(() => assertCandidateVideoIdCacheBillingReviewV004(missing)));
+  }
+  for (const changed of [{...review, serviceTier: 'flex'}, {...review, workOrderId: 'task-030'},
+    {...review, checkedAt: '2027-01-01T00:00:00Z'}, {...review, checkedAt: '2026-02-30T00:00:00Z'},
+    {...review, standardPrice: {...review.standardPrice, cachedInputNanoUsdPerToken: 0}},
+    {...review, standardPrice: {...review.standardPrice, unknownRate: undefined}},
+    {...review, rules: {...review.rules, omittedZeroIntegerFields: ['cachedContentTokenCount', 'thoughtsTokenCount']}},
+    {...review, rules: {...review.rules, unknownRule: undefined}},
+    {...review, rules: {...review.rules, futureCacheDiscountAssumed: true}},
+    {...review, sources: review.sources.slice(1)}, {...review, sourcePageSha256: 'a'.repeat(64)}]) {
+    check(() => assert.throws(() => assertCandidateVideoIdCacheBillingReviewV004(changed)));
+  }
+  const changedSource = structuredClone(review); changedSource.sources[0].summary += 'altered';
+  changedSource.sources[0].summaryUtf8Sha256 = createHash('sha256').update(changedSource.sources[0].summary).digest('hex');
+  check(() => assert.throws(() => assertCandidateVideoIdCacheBillingReviewV004(changedSource)));
+  const {cost: preparationCost} = syntheticTask029PreparationPrice(context.experimentId, 'synthetic-preparation');
+  const cost: CandidateVideoIdCostConditionsV004 = {maximumNanoUsd: '1000000000', priceReference: preparationCost.priceReference,
+    inputNanoUsdPerToken: 750, outputIncludingThinkingNanoUsdPerToken: 3750, priceValidThrough: '2026-12-31',
+    acceptEstimateNotGuaranteedCap: true};
+  const execution = {origin: context.origin, experimentId: context.experimentId, approvalReference: context.approvalReference,
+    now: '2026-09-06T00:00:01.000Z'};
+  check(() => assertCandidateVideoIdCacheBillingReviewV004(review, cost, execution));
+  for (const changes of [{maximumNanoUsd: '1000000001'}, {inputNanoUsdPerToken: 751},
+    {outputIncludingThinkingNanoUsdPerToken: 3751}, {priceValidThrough: '2027-01-01'}]) {
+    check(() => assert.throws(() => assertCandidateVideoIdCacheBillingReviewV004(review, {...cost, ...changes}, execution)));
+  }
+  for (const changes of [{origin: 'live'}, {experimentId: 'another-experiment'}, {approvalReference: 'another-approval'},
+    {now: '2026-09-05T23:59:59.999Z'}, {now: '2027-01-01T00:00:00.000Z'}]) {
+    check(() => assert.throws(() => assertCandidateVideoIdCacheBillingReviewV004(review, cost, {...execution, ...changes} as typeof execution)));
+  }
+  check(() => assertCandidateVideoIdInferenceCostContinuationV004(cost, (BigInt(a.estimatedNanoUsd) + BigInt(b.estimatedNanoUsd)).toString()));
+  for (const stopped of ['1000000000', '1000000001', null]) {
+    check(() => assert.throws(() => assertCandidateVideoIdInferenceCostContinuationV004(cost, stopped)));
+  }
+  check(() => assert.ok(savedBefore.equals(canonicalJsonBytesV001({review, request, usageA, usageB}))));
+  process.stdout.write(JSON.stringify({suite: 'task-032-cache-billing-core-mock-only', status: 'passed', checks,
+    syntheticOnly: true, aDerivedNanoUsd: a.estimatedNanoUsd, bDerivedNanoUsd: b.estimatedNanoUsd,
+    materialOrEvaluationReads: 0, newFixturePaths: 0, apiCommunications: 0, formalArtifactsWritten: 0}) + '\n');
+  process.exit(0);
+}
+
+function syntheticTask029PreparationPrice(experimentId: string, approvalReference: string) {
+  const summaries = [
+    '合成検査専用。課金対象のinput token、output token、cached token、cached token storageを確認したという要旨。',
+    '合成検査専用。countTokensがtokenizerを実行してtoken数を返すAPIという要旨。',
+    '合成検査専用。準備2操作の独立料金項目を確認できず、現行Standard単価を確認したという要旨。永久無料の保証ではない。'
+  ];
+  const review: CandidateVideoIdPreparationBillingReviewV004 = {
+    schemaVersion: 'candidate-video-understanding-task-029-preparation-billing-review-v001',
+    workOrderId: 'task-029', origin: 'mock', experimentId, approvalReference,
+    checkedAt: '2026-09-06T00:00:00.000Z', evidenceType: 'japanese-verification-summary-not-source-quotation-or-full-page',
+    sources: ['https://ai.google.dev/gemini-api/docs/billing', 'https://ai.google.dev/api/tokens',
+      'https://ai.google.dev/gemini-api/docs/pricing'].map((url, index) => ({url, summary: summaries[index],
+        summaryUtf8Sha256: createHash('sha256').update(summaries[index], 'utf8').digest('hex')})),
+    model: 'gemini-3.8-flash', standardPrice: {inputNanoUsdPerToken: 750, outputIncludingThinkingNanoUsdPerToken: 3750,
+      validThrough: '2026-12-31'}, operations: ['metadata-get', 'count-tokens'],
+    independentPricing: 'not-found-in-reviewed-current-official-pricing', estimatedPreparationNanoUsd: '0',
+    permanentFreeGuarantee: false, otherOperationsCovered: false
+  };
+  const priceBytes = canonicalJsonBytesV001({schemaVersion: 'candidate-video-understanding-provider-spec-price-snapshot-v001',
+    origin: 'mock', model: review.model, checkedOn: '2026-09-05', standardPrice: review.standardPrice});
+  const cost: CandidateVideoIdPrepareCostConditionsV004 = {maximumNanoUsd: '100000000',
+    priceReference: {path: 'synthetic-task-029/price-not-a-real-file.json',
+      fileSha256: createHash('sha256').update(priceBytes).digest('hex')},
+    inputNanoUsdPerToken: 750, outputIncludingThinkingNanoUsdPerToken: 3750, priceValidThrough: '2026-12-31',
+    acceptEstimateNotGuaranteedCap: true, preparationBillingReview: review};
+  return {cost, priceBytes};
+}
+
+// task-030 contract regression runs before all historical fixture/source reads.
+// The exact cost boundary is tested directly because token prices need not
+// produce an invoice estimate of exactly US$1.00 for any integer token count.
+if (process.argv.includes('--task030-contract-only')) {
+  let checks = 0;
+  const check = (fn: () => void) => {fn(); checks += 1;};
+  const {cost: preparationCost, priceBytes} = syntheticTask029PreparationPrice(
+    'synthetic-task-029-existing-experiment', 'synthetic-task-029-preparation-approval');
+  const preparedBefore = canonicalJsonBytesV001(preparationCost);
+  const cost: CandidateVideoIdCostConditionsV004 = {
+    maximumNanoUsd: '1000000000', priceReference: {...preparationCost.priceReference},
+    inputNanoUsdPerToken: preparationCost.inputNanoUsdPerToken,
+    outputIncludingThinkingNanoUsdPerToken: preparationCost.outputIncludingThinkingNanoUsdPerToken,
+    priceValidThrough: preparationCost.priceValidThrough, acceptEstimateNotGuaranteedCap: true
+  };
+  const policy = {...CANDIDATE_VIDEO_ID_INFERENCE_POLICY_V004};
+  check(() => assert.deepEqual(policy, {
+    schemaVersion: 'candidate-video-understanding-task-030-inference-policy-v001', workOrderId: 'task-030',
+    modelAnswerContractFailure: 'persist-rejected-condition-and-continue',
+    continuationRequires: 'http-success-and-durable-raw-answer-usage-cost-and-rejection',
+    infrastructureFailure: 'stop-all', unknownUsageOrCost: 'stop-all', costAtOrAboveLimit: 'stop-all',
+    maximumNanoUsd: '1000000000', rejectedAnswerCreatesObservation: false, crossConditionFeedback: false,
+    retry: 0, repair: 0, resend: 0
+  }));
+  check(() => assert.ok(Object.isFrozen(CANDIDATE_VIDEO_ID_INFERENCE_POLICY_V004)));
+  check(() => assertCandidateVideoIdInferencePolicyV004(policy, cost));
+  check(() => assertCandidateVideoIdPriceSnapshotV004(priceBytes, cost));
+  check(() => assertCandidateVideoIdPrepareCostConditionsV004(preparationCost));
+  check(() => assertCandidateVideoIdPreparePriceSnapshotV004(priceBytes, preparationCost, '2026-09-06T00:00:01.000Z'));
+  check(() => assert.ok(preparedBefore.equals(canonicalJsonBytesV001(preparationCost))));
+  check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004(undefined, cost)));
+  check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004(null, cost)));
+  check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004({}, cost)));
+  check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004({...policy, requestPatch: 'rejected-answer'}, cost)));
+  for (const [key, value] of Object.entries(policy)) {
+    const missing: Record<string, unknown> = {...policy}; delete missing[key];
+    check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004(missing, cost)));
+    const altered = {...policy, [key]: typeof value === 'string' ? value + '-altered'
+      : typeof value === 'boolean' ? !value : value + 1};
+    check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004(altered, cost)));
+  }
+  for (const maximumNanoUsd of ['0', '100000000', '999999999', '1000000001', '', '-1', '1.00', '1e9']) {
+    check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004(policy, {...cost, maximumNanoUsd})));
+    check(() => assert.throws(() => assertCandidateVideoIdInferenceCostContinuationV004({...cost, maximumNanoUsd}, '0')));
+  }
+  for (const legacyFlag of [true, false, undefined]) {
+    const legacy = {...cost, acceptUnverifiedPreparationBilling: legacyFlag};
+    check(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004(legacy)));
+    check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004(policy, legacy)));
+  }
+  check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004(policy, preparationCost)));
+  check(() => assert.throws(() => assertCandidateVideoIdPrepareCostConditionsV004(cost)));
+  check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004(policy, {...cost, priceReference: undefined})));
+  check(() => assert.throws(() => assertCandidateVideoIdInferencePolicyV004(policy, {...cost, acceptEstimateNotGuaranteedCap: false})));
+  for (const knownUnderLimit of ['0', '1', '999999999']) {
+    check(() => assertCandidateVideoIdInferenceCostContinuationV004(cost, knownUnderLimit));
+  }
+  for (const unknownOrStopped of [null, undefined, false, 0, 1, '', '-1', '01', '1.5', '1e9', ' 1',
+    '1000000000', '1000000001', '1000000000000000000000']) {
+    check(() => assert.throws(() => assertCandidateVideoIdInferenceCostContinuationV004(cost, unknownOrStopped)));
+  }
+  check(() => assert.throws(() => assertCandidateVideoIdInferenceCostContinuationV004(undefined, '0')));
+  check(() => assert.throws(() => assertCandidateVideoIdInferenceCostContinuationV004(preparationCost, '0')));
+  check(() => assert.ok(preparedBefore.equals(canonicalJsonBytesV001(preparationCost))));
+  process.stdout.write(JSON.stringify({suite: 'task-030-inference-disposition-core-mock-only', status: 'passed', checks,
+    syntheticOnly: true, unknownCostAccepted: false, preparedApprovalUnchanged: true,
+    materialOrEvaluationReads: 0, newFixturePaths: 0, apiCommunications: 0, formalArtifactsWritten: 0}) + '\n');
+  process.exit(0);
+}
+
+// task-029 deliberately never enters the historical fixture-producing suites.
+// Every source, price, clock and approval below is synthetic and memory-only.
+if (process.argv.includes('--task029-billing-only')) {
+  let checks = 0;
+  const check = (fn: () => void) => {fn(); checks += 1;};
+  const {cost, priceBytes} = syntheticTask029PreparationPrice('synthetic-task-029-billing', 'synthetic-task-029-approval');
+  const now = '2026-09-06T00:00:01.000Z';
+  const modified = <T>(value: T, mutation: (copy: T) => void) => {
+    const copy = structuredClone(value); mutation(copy); return copy;
+  };
+  const inferenceCost: CandidateVideoIdCostConditionsV004 = {
+    maximumNanoUsd: cost.maximumNanoUsd, priceReference: {...cost.priceReference},
+    inputNanoUsdPerToken: cost.inputNanoUsdPerToken,
+    outputIncludingThinkingNanoUsdPerToken: cost.outputIncludingThinkingNanoUsdPerToken,
+    priceValidThrough: cost.priceValidThrough, acceptEstimateNotGuaranteedCap: true
+  };
+  check(() => assertCandidateVideoIdPrepareCostConditionsV004(cost));
+  check(() => assertCandidateVideoIdPreparePriceSnapshotV004(priceBytes, cost, now));
+  check(() => assertCandidateVideoIdCostConditionsV004(inferenceCost));
+  check(() => assertCandidateVideoIdPriceSnapshotV004(priceBytes, inferenceCost));
+  check(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004(cost)));
+  check(() => assert.throws(() => assertCandidateVideoIdPrepareCostConditionsV004(inferenceCost)));
+  check(() => assert.throws(() => assertCandidateVideoIdPrepareCostConditionsV004({...cost, acceptUnverifiedPreparationBilling: true})));
+  check(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...inferenceCost, acceptUnverifiedPreparationBilling: false})));
+  check(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...inferenceCost, acceptUnverifiedPreparationBilling: undefined})));
+  check(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...inferenceCost, priceReference: undefined})));
+  check(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...inferenceCost, maximumNanoUsd: undefined})));
+  check(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...inferenceCost, acceptEstimateNotGuaranteedCap: false})));
+  check(() => assert.throws(() => assertCandidateVideoIdPrepareCostConditionsV004({...cost, preparationBillingReview: undefined})));
+  check(() => assert.throws(() => assertCandidateVideoIdPrepareCostConditionsV004({...cost, acceptEstimateNotGuaranteedCap: false})));
+  for (const budget of ['', '0', '1', '99999999', '100000001', '1000000000', '-1', '01', '0.10', '1e8']) {
+    check(() => assert.throws(() => assertCandidateVideoIdPrepareCostConditionsV004({...cost, maximumNanoUsd: budget})));
+  }
+  const reviewMutations: Array<(review: CandidateVideoIdPreparationBillingReviewV004) => void> = [
+    review => {Object.assign(review, {schemaVersion: 'unrecognized'});},
+    review => {Object.assign(review, {workOrderId: 'task-030'});},
+    review => {Object.assign(review, {origin: 'unknown'});},
+    review => {review.experimentId = '';}, review => {review.approvalReference = ' ';},
+    review => {review.checkedAt = '2026-02-30T00:00:00Z';},
+    review => {review.checkedAt = '2026-09-06';},
+    review => {Object.assign(review, {evidenceType: 'official-page-byte-sha'});},
+    review => {review.sources.pop();}, review => {review.sources.reverse();},
+    review => {review.sources[1].url = review.sources[0].url;},
+    review => {review.sources[0].url = 'https://example.invalid/billing';},
+    review => {review.sources[0].summary += '差し替え';},
+    review => {review.sources[0].summaryUtf8Sha256 = 'a'.repeat(64);},
+    review => {review.sources[0].summary = '';},
+    review => {Object.assign(review.sources[0], {wholePageSha256: 'b'.repeat(64)});},
+    review => {Object.assign(review, {model: 'another-model'});},
+    review => {Object.assign(review.standardPrice, {inputNanoUsdPerToken: 0});},
+    review => {Object.assign(review.standardPrice, {outputIncludingThinkingNanoUsdPerToken: 0});},
+    review => {Object.assign(review.standardPrice, {validThrough: '2027-12-31'});},
+    review => {Object.assign(review, {operations: ['metadata-get', 'count-tokens', 'inference']});},
+    review => {Object.assign(review, {operations: ['metadata-get', 'count-tokens', 'upload']});},
+    review => {Object.assign(review, {operations: ['metadata-get']});},
+    review => {Object.assign(review, {independentPricing: 'unknown-is-zero'});},
+    review => {Object.assign(review, {estimatedPreparationNanoUsd: '1'});},
+    review => {Object.assign(review, {permanentFreeGuarantee: true});},
+    review => {Object.assign(review, {otherOperationsCovered: true});}
+  ];
+  for (const mutation of reviewMutations) {
+    check(() => assert.throws(() => assertCandidateVideoIdPrepareCostConditionsV004(modified(cost,
+      candidate => mutation(candidate.preparationBillingReview)))));
+  }
+  check(() => assert.throws(() => assertCandidateVideoIdPrepareCostConditionsV004({...cost, inputNanoUsdPerToken: 751})));
+  check(() => assert.throws(() => assertCandidateVideoIdPrepareCostConditionsV004({...cost, outputIncludingThinkingNanoUsdPerToken: 3751})));
+  check(() => assert.throws(() => assertCandidateVideoIdPrepareCostConditionsV004({...cost, priceValidThrough: '2027-01-01'})));
+  check(() => assert.throws(() => assertCandidateVideoIdPreparePriceSnapshotV004(Buffer.from('{}'), cost, now)));
+  check(() => assert.throws(() => assertCandidateVideoIdPriceSnapshotV004(Buffer.from('{}'), inferenceCost)));
+  check(() => assert.throws(() => assertCandidateVideoIdPreparePriceSnapshotV004(priceBytes, modified(cost, candidate => {
+    candidate.preparationBillingReview.checkedAt = '2026-09-07T00:00:00.000Z';
+  }), now)));
+  check(() => assert.throws(() => assertCandidateVideoIdPreparePriceSnapshotV004(priceBytes, modified(cost, candidate => {
+    candidate.preparationBillingReview.checkedAt = '2026-09-04T00:00:00.000Z';
+  }), now)));
+  check(() => assert.throws(() => assertCandidateVideoIdPreparePriceSnapshotV004(priceBytes, cost, '2027-01-01T00:00:00.000Z')));
+  check(() => assert.throws(() => assertCandidateVideoIdPreparePriceSnapshotV004(priceBytes, cost, 'not-a-clock')));
+  for (const replacement of [{model: 'another-model'}, {checkedOn: '2026-02-30'},
+    {standardPrice: {inputNanoUsdPerToken: 0, outputIncludingThinkingNanoUsdPerToken: 0, validThrough: '2026-12-31'}}]) {
+    const invalidPrice = canonicalJsonBytesV001({...JSON.parse(priceBytes.toString('utf8')), ...replacement});
+    const binding = {...cost.priceReference, fileSha256: createHash('sha256').update(invalidPrice).digest('hex')};
+    check(() => assert.throws(() => assertCandidateVideoIdPreparePriceSnapshotV004(invalidPrice, {...cost, priceReference: binding}, now)));
+    check(() => assert.throws(() => assertCandidateVideoIdPriceSnapshotV004(invalidPrice, {...inferenceCost, priceReference: binding})));
+  }
+  check(() => assert.equal(cost.preparationBillingReview.estimatedPreparationNanoUsd, '0'));
+  check(() => assert.equal(cost.preparationBillingReview.permanentFreeGuarantee, false));
+  process.stdout.write(JSON.stringify({suite: 'task-029-preparation-billing-core-mock-only', status: 'passed', checks,
+    syntheticOnly: true, unknownInferenceCostPolicyChanged: false, materialOrEvaluationReads: 0,
+    newFixturePaths: 0, apiCommunications: 0, formalArtifactsWritten: 0}) + '\n');
+  process.exit(0);
+}
 
 const WORKSPACE_ROOT = new URL('../..', import.meta.url).pathname.replace(/\/$/u, '');
 const SOURCE_VIDEO_PATH =
@@ -491,6 +1219,53 @@ function fifthJob(): CandidateVideoUnderstandingJobV001 {
 }
 
 const JOBS = [...CLOSED_FIXTURES.map(closedJob), fifthJob()];
+
+/** The existing PTS regression assertions are shared with the no-file task-032
+ * entry point. No original media, teacher answers or evaluation file is read. */
+function runCandidateVideoPtsRegressionV001(): number {
+  let assertions = 0;
+  const crossing = projectCandidateIntervalToSourceV001(JOBS[0], {startTimeMs: 6900, endTimeMs: 7100});
+  assert.equal(crossing.sourceIntervals.length, 2);
+  assert.deepEqual(crossing.sourceIntervals[0].sourceEndTimeMs, {numerator: 671316, denominator: 1});
+  assert.deepEqual(crossing.sourceIntervals[1].sourceStartTimeMs, {numerator: 1377918, denominator: 1});
+  assert.equal(crossing.unmappedCandidateIntervals.length, 0);
+  assertions += 4;
+  CLOSED_FIXTURES.forEach((fixture, index) => {
+    const interval = {startTimeMs: 100, endTimeMs: Math.floor(fixture.frameCount * 1000 / fixture.frameRate) - 100};
+    const ptsProjection = projectCandidateIntervalToSourceV001(JOBS[index], interval);
+    assert.equal(ptsProjection.unmappedCandidateIntervals.length, 0);
+    assert.deepEqual(
+      ptsProjection.sourceIntervals.map(({overlappingSemanticUtteranceIds: _ignored, ...rest}) => rest),
+      legacySourceProjection(fixture, interval), `${fixture.localCandidateId}のPTS-based投影が従来投影と一致しない`
+    );
+    assertions += 2;
+  });
+  const gapOnly = projectCandidateIntervalToSourceV001(JOBS[4], {startTimeMs: 5951, endTimeMs: 5966});
+  assert.equal(gapOnly.sourceIntervals.length, 0);
+  assert.equal(gapOnly.unmappedCandidateIntervals.length, 1);
+  assert.deepEqual(gapOnly.unmappedCandidateIntervals[0], {
+    candidateStartTimeMs: {numerator: 5951, denominator: 1}, candidateEndTimeMs: {numerator: 5966, denominator: 1},
+    reason: 'no-candidate-frame'
+  });
+  const crossingGap = projectCandidateIntervalToSourceV001(JOBS[4], {startTimeMs: 5940, endTimeMs: 5980});
+  assert.equal(crossingGap.sourceIntervals.length, 2);
+  assert.equal(crossingGap.unmappedCandidateIntervals.length, 1);
+  assert.deepEqual(crossingGap.sourceIntervals[0].candidateEndTimeMs, {numerator: 5950, denominator: 1});
+  assert.deepEqual(crossingGap.unmappedCandidateIntervals[0], {
+    candidateStartTimeMs: {numerator: 5950, denominator: 1}, candidateEndTimeMs: {numerator: 17900, denominator: 3},
+    reason: 'no-candidate-frame'
+  });
+  assert.deepEqual(crossingGap.sourceIntervals[1].candidateStartTimeMs, {numerator: 17900, denominator: 3});
+  assertions += 8;
+  return assertions;
+}
+
+if (process.argv.includes('--task032-pts-only')) {
+  const checks = runCandidateVideoPtsRegressionV001();
+  process.stdout.write(JSON.stringify({suite: 'task-032-existing-pts-regression-memory-only', status: 'passed', checks,
+    materialOrEvaluationReads: 0, newFixturePaths: 0, apiCommunications: 0, formalArtifactsWritten: 0}) + '\n');
+  process.exit(0);
+}
 
 function readyResultContractJobFixture(): CandidateVideoUnderstandingJobV001 {
   const job = clone(JOBS[0]);
@@ -2159,62 +2934,7 @@ async function main(): Promise<void> {
     assertions += 1;
   }
 
-  const crossing = projectCandidateIntervalToSourceV001(JOBS[0], {
-    startTimeMs: 6900,
-    endTimeMs: 7100
-  });
-  assert.equal(crossing.sourceIntervals.length, 2);
-  assert.deepEqual(crossing.sourceIntervals[0].sourceEndTimeMs, {numerator: 671316, denominator: 1});
-  assert.deepEqual(crossing.sourceIntervals[1].sourceStartTimeMs, {numerator: 1377918, denominator: 1});
-  assert.equal(crossing.unmappedCandidateIntervals.length, 0);
-  assertions += 4;
-
-  CLOSED_FIXTURES.forEach((fixture, index) => {
-    const interval = {
-      startTimeMs: 100,
-      endTimeMs: Math.floor(fixture.frameCount * 1000 / fixture.frameRate) - 100
-    };
-    const ptsProjection = projectCandidateIntervalToSourceV001(JOBS[index], interval);
-    assert.equal(ptsProjection.unmappedCandidateIntervals.length, 0);
-    assert.deepEqual(
-      ptsProjection.sourceIntervals.map(({overlappingSemanticUtteranceIds: _ignored, ...rest}) => rest),
-      legacySourceProjection(fixture, interval),
-      `${fixture.localCandidateId}のPTS-based投影が従来投影と一致しない`
-    );
-    assertions += 2;
-  });
-
-  const gapOnly = projectCandidateIntervalToSourceV001(JOBS[4], {
-    startTimeMs: 5951,
-    endTimeMs: 5966
-  });
-  assert.equal(gapOnly.sourceIntervals.length, 0);
-  assert.equal(gapOnly.unmappedCandidateIntervals.length, 1);
-  assert.deepEqual(gapOnly.unmappedCandidateIntervals[0], {
-    candidateStartTimeMs: {numerator: 5951, denominator: 1},
-    candidateEndTimeMs: {numerator: 5966, denominator: 1},
-    reason: 'no-candidate-frame'
-  });
-  const crossingGap = projectCandidateIntervalToSourceV001(JOBS[4], {
-    startTimeMs: 5940,
-    endTimeMs: 5980
-  });
-  assert.equal(crossingGap.sourceIntervals.length, 2);
-  assert.equal(crossingGap.unmappedCandidateIntervals.length, 1);
-  assert.deepEqual(crossingGap.sourceIntervals[0].candidateEndTimeMs, {
-    numerator: 5950,
-    denominator: 1
-  });
-  assert.deepEqual(crossingGap.unmappedCandidateIntervals[0], {
-    candidateStartTimeMs: {numerator: 5950, denominator: 1},
-    candidateEndTimeMs: {numerator: 17900, denominator: 3},
-    reason: 'no-candidate-frame'
-  });
-  assert.deepEqual(crossingGap.sourceIntervals[1].candidateStartTimeMs, {
-    numerator: 17900,
-    denominator: 3
-  });
-  assertions += 8;
+  assertions += runCandidateVideoPtsRegressionV001();
 
   const gapAssignedToFirst = clone(JOBS[4]);
   if (gapAssignedToFirst.sourceMapping.status !== 'closed') throw new Error('fixture must be closed');
@@ -3615,6 +4335,85 @@ async function main(): Promise<void> {
 
 await main();
 
+// task-015: synthetic output only; the saved live response is revalidated separately
+// after all suites and typechecks pass. No provider request or human artifact is read here.
+{
+  const {loadPreparationJobs} = await import('./candidate-video-understanding-transport-v001.js');
+  const {deriveCandidateVideoReviewV002, buildCandidateVideoRequestTemplateV002} =
+    await import('./candidate-video-understanding-v001.js');
+  const job = (await loadPreparationJobs(join(import.meta.dirname, '../..')))[0];
+  const beforeRequest = canonicalJsonBytesV001(buildCandidateVideoRequestTemplateV002(job));
+  const answered = () => ({
+    schemaVersion: 'candidate-video-understanding-provider-output-v002' as const,
+    itemId: job.itemId, status: 'answered' as 'answered' | 'partial' | 'abstain', summary: 'Synthetic observation.',
+    roleObservations: CANDIDATE_VIDEO_ROLE_VALUES_V001.map((role, index) => ({
+      role, status: 'observed' as 'observed' | 'notObserved', factualDescription: 'Synthetic role.',
+      intervals: [{observationId: `observation-${String(index + 1).padStart(3, '0')}`,
+        startTimeMs: 1000 + index * 1000, endTimeMs: 1500 + index * 1000,
+        factualDescription: 'Synthetic interval.', evidenceModalities: ['video' as const]}]
+    })),
+    visualCautions: [{kind: 'audioDependent' as const, startTimeMs: 1000, endTimeMs: 1500,
+      factualDescription: 'Synthetic caution.'}],
+    insufficientEvidence: {present: false, missingEvidence: [] as string[], factualDescription: ''}
+  });
+  let checks = 0;
+  function rejected(name: string, mutate: (o: ReturnType<typeof answered>) => void) {
+    const o = answered(); mutate(o);
+    assert.throws(() => assertCandidateVideoOutputV002(o, job), name); checks++;
+  }
+  for (const description of ['', 'No missing evidence reported.']) {
+    const o = answered(); o.insufficientEvidence.factualDescription = description;
+    const original = canonicalJsonBytesV001(o);
+    assertCandidateVideoOutputV002(o, job);
+    assert.deepEqual(canonicalJsonBytesV001(o), original);
+    assert.equal(deriveCandidateVideoReviewV002(job, o).status, 'established'); checks++;
+  }
+  for (const status of ['partial', 'abstain'] as const) rejected(status + ' empty', o => { o.status = status; });
+  rejected('present true', o => { o.insufficientEvidence.present = true; });
+  rejected('missing evidence field contradicts answered', o => { o.insufficientEvidence.missingEvidence = ['visualEvent']; });
+  rejected('coherent partial still needs explanation', o => {
+    o.status = 'partial'; o.insufficientEvidence.present = true; o.insufficientEvidence.missingEvidence = ['visualEvent'];
+  });
+  for (const index of [0, 1, 2, 3, 4, 5]) {
+    const o = answered(); o.status = 'partial';
+    o.roleObservations[index].status = 'notObserved'; o.roleObservations[index].intervals = [];
+    o.insufficientEvidence.present = true; o.insufficientEvidence.missingEvidence = [o.roleObservations[index].role];
+    let ordinal = 0; o.roleObservations.forEach(r => r.intervals.forEach(i => { i.observationId = `observation-${String(++ordinal).padStart(3, '0')}`; }));
+    assert.throws(() => assertCandidateVideoOutputV002(o, job));
+    o.insufficientEvidence.factualDescription = 'Synthetic reason for missing role.';
+    assertCandidateVideoOutputV002(o, job);
+    if (index < 3) {
+      const review = deriveCandidateVideoReviewV002(job, o);
+      assert.equal(review.status, 'not-established'); assert.equal(review.sourcePresentationDurationMs, null);
+    }
+    checks++;
+  }
+  {
+    const o = answered(); o.status = 'abstain'; o.roleObservations.forEach(r => { r.status = 'notObserved'; r.intervals = []; });
+    o.insufficientEvidence.present = true; o.insufficientEvidence.missingEvidence = [...CANDIDATE_VIDEO_ROLE_VALUES_V001];
+    assert.throws(() => assertCandidateVideoOutputV002(o, job));
+    o.insufficientEvidence.factualDescription = 'Synthetic abstention reason.';
+    assertCandidateVideoOutputV002(o, job); assert.equal(deriveCandidateVideoReviewV002(job, o).sourcePresentationDurationMs, null); checks++;
+  }
+  for (const value of [' ', '\n', null, 0, false, undefined]) rejected('not an exact empty string', o => {
+    (o.insufficientEvidence as any).factualDescription = value;
+  });
+  rejected('missing explanation field', o => { delete (o.insufficientEvidence as any).factualDescription; });
+  rejected('unknown failure status', o => { (o as any).status = 'failed'; });
+  rejected('unknown insufficiency field', o => { (o.insufficientEvidence as any).otherMissingEvidence = true; });
+  rejected('summary stays required', o => { o.summary = ''; });
+  rejected('visual caution stays required', o => { o.visualCautions[0].factualDescription = ''; });
+  for (let index = 0; index < 6; index++) {
+    rejected('role explanation stays required ' + index, o => { o.roleObservations[index].factualDescription = ''; });
+    rejected('interval explanation stays required ' + index, o => { o.roleObservations[index].intervals[0].factualDescription = ''; });
+  }
+  const legacy = validProviderOutput(); legacy.insufficientEvidence.factualDescription = '';
+  assert.throws(() => assertCandidateVideoUnderstandingProviderOutputV001(legacy, JOBS[0])); checks++;
+  assert.deepEqual(canonicalJsonBytesV001(buildCandidateVideoRequestTemplateV002(job)), beforeRequest); checks++;
+  process.stdout.write(JSON.stringify({suite: 'task-015-insufficiency-explanation', status: 'passed', checks,
+    apiCommunications: 0, savedResponseReads: 0, humanReviewArtifactReads: 0}) + '\n');
+}
+
 // Forward-only real exploration mappings; no human evaluation file is opened here.
 {
   const {loadPreparationJobs} = await import('./candidate-video-understanding-transport-v001.js');
@@ -3704,4 +4503,386 @@ await main();
   checks += 5;
   process.stdout.write(JSON.stringify({suite: 'v002-pts-roles-review-regression', status: 'passed', checks,
     realExplorationMappings: 5, humanReviewArtifactReads: 0, apiCommunications: 0}) + '\n');
+}
+
+// task-027: real fixed source bindings, synthetic answers, memory-only request/result construction.
+{
+  let checks = 0;
+  const check = (fn: () => void) => {fn(); checks += 1;};
+  const inputs = await loadCandidateVideoIdInputsV003(WORKSPACE_ROOT);
+  const formal = JSON.parse(await readFile(join(WORKSPACE_ROOT, SEMANTIC_PATH), 'utf8')) as {
+    utterances: Array<{utteranceId: string; ordinal: number; text: string; sourceStartMs: number; sourceEndMs: number}>};
+  const formalIndex = new Map(formal.utterances.map(u => [u.utteranceId, u]));
+  const allRows = inputs.flatMap(i => i.segments.flatMap(s => s.utterances));
+  check(() => assert.deepEqual(inputs.map(i => i.itemId), ['item-0001', 'item-0002', 'item-0003', 'item-0004', 'item-0005']));
+  check(() => assert.equal(allRows.length, 1287));
+  check(() => assert.equal(new Set(allRows.map(r => r.utteranceId)).size, 1241));
+  check(() => assert.equal(allRows.filter(r => r.frameCoverage === 'partial').length, 20));
+  check(() => assert.equal(allRows.filter(r => r.selectionCoverage === 'outside').length, 12));
+  check(() => assert.equal(allRows.filter(r => r.frameCoverage === 'full' && r.selectionCoverage === 'full').length, 1265));
+  check(() => assert.deepEqual(allRows.map(r => [r.utteranceId, r.ordinal, r.text, r.sourceStartMs, r.sourceEndMs]),
+    allRows.map(r => {const f = formalIndex.get(r.utteranceId)!; return [f.utteranceId, f.ordinal, f.text, f.sourceStartMs, f.sourceEndMs];})));
+  check(() => assert.equal(inputs.flatMap(i => i.segments).reduce((sum, s) => sum + s.targetUtteranceIds.length, 0), 286));
+  check(() => assert.deepEqual(inputs.map(i => i.segments.map(s => s.utterances.length)), [[141, 73], [174, 232], [187, 178], [44, 79], [44, 135]]));
+  check(() => assert.deepEqual(inputs[3].segments.map(s => s.targetText), ['今年一怖いと言われるホラーゲーム', 'おい、急に速くなった!おい、急に速くなった!']));
+  check(() => assert.deepEqual(inputs[4].segments[1].targetUtteranceIds,
+    [...formal.utterances.slice(10643, 10650), ...formal.utterances.slice(10657, 10664)].map(u => u.utteranceId)));
+  check(() => assert.ok(!inputs[4].segments[1].targetUtteranceIds.includes('semantic-utterance-010651')));
+  for (const input of inputs) {
+    check(() => assertCandidateVideoIdInputV003(structuredClone(input)));
+    const changed = structuredClone(input);
+    changed.segments[0].utterances[0].sourceStartMs += 1;
+    check(() => assert.throws(() => assertCandidateVideoIdInputV003(changed)));
+    const textChanged = structuredClone(input);
+    textChanged.segments[0].targetText = '人間の採用理由を混入';
+    check(() => assert.throws(() => buildCandidateVideoIdRequestV003(textChanged, 'A')));
+    const a = buildCandidateVideoIdRequestV003(input, 'A');
+    const b = buildCandidateVideoIdRequestV003(input, 'B', MOCK_FILES_URI);
+    check(() => assert.deepEqual(a.body, {...b.body, contents: [{...b.body.contents[0], parts: b.body.contents[0].parts.slice(0, 1)}]}));
+    check(() => assert.equal(a.body.contents[0].parts.length, 1));
+    check(() => assert.equal(b.body.contents[0].parts.length, 2));
+    check(() => assert.deepEqual(b.body.contents[0].parts[1], {fileData: {mimeType: 'video/mp4', fileUri: MOCK_FILES_URI},
+      mediaProcessing: 'STATIC', videoMetadata: {fps: 1}, mediaResolution: {level: 'MEDIA_RESOLUTION_HIGH'}}));
+    check(() => assert.deepEqual(a.body.generationConfig.responseJsonSchema, b.body.generationConfig.responseJsonSchema));
+    check(() => assertCandidateVideoProviderSchemaSupportedSubsetV001(candidateVideoIdSchemaV003(input)));
+    const text = (a.body.contents[0].parts[0] as {text: string}).text;
+    const payload = JSON.parse(text.slice(CANDIDATE_VIDEO_ID_PROMPT_V003.length + 1));
+    check(() => assert.deepEqual(payload.segments.map((s: {targetUtteranceIds: string[]}) => s.targetUtteranceIds), input.segments.map(s => s.targetUtteranceIds)));
+    check(() => assert.deepEqual(Object.keys(payload).sort(), ['itemId', 'segmentRelationship', 'segments', 'unmappedCandidateIntervals'].sort()));
+    check(() => assert.ok(!/candidateId|fileSha256|sourcePackage|humanApproval|humanReview|addedUnderstanding|direction|previousResponse|conversation|messages|answer/u.test(JSON.stringify(payload))));
+    const otherUniqueId = inputs.flatMap(i => i.segments.flatMap(s => s.utterances.map(r => r.utteranceId)))
+      .find(id => !input.segments.some(s => s.utterances.some(r => r.utteranceId === id)))!;
+    check(() => assert.ok(!text.includes(otherUniqueId)));
+    check(() => assert.throws(() => buildCandidateVideoIdRequestV003(input, 'A', MOCK_FILES_URI)));
+    check(() => assert.throws(() => buildCandidateVideoIdRequestV003(input, 'B')));
+    for (const [index, segment] of input.segments.entries()) {
+      const mapping = input.sourceMapping.segments[index];
+      for (const row of segment.utterances) for (const endpoint of ['startTimeMs', 'endTimeMs'] as const) {
+        // Independent cross multiplication of the PTS relation; no rounded milliseconds or chosen tolerance.
+        const c = row.candidateMs[endpoint];
+        const s = row.mappedSourceMs[endpoint];
+        const cb = input.sourceMapping.candidateTimeBase;
+        const sb = input.sourceMapping.sourceTimeBase;
+        const candidateOffsetN = BigInt(c.numerator) * BigInt(cb.denominator)
+          - BigInt(mapping.candidateStartPts) * BigInt(c.denominator) * 1000n * BigInt(cb.numerator);
+        const sourceOffsetN = BigInt(s.numerator) * BigInt(sb.denominator)
+          - BigInt(mapping.sourceStartPts) * BigInt(s.denominator) * 1000n * BigInt(sb.numerator);
+        check(() => assert.equal(candidateOffsetN * BigInt(s.denominator) * BigInt(sb.numerator)
+          * BigInt(mapping.sourceEndPtsExclusive - mapping.sourceStartPts),
+        sourceOffsetN * BigInt(c.denominator) * BigInt(cb.numerator)
+          * BigInt(mapping.candidateEndPtsExclusive - mapping.candidateStartPts)));
+      }
+    }
+  }
+  const edge = inputs[3].segments[0].utterances.find(u => u.utteranceId === 'semantic-utterance-000094')!;
+  check(() => assert.deepEqual(edge.mappedSourceMs, {startTimeMs: {numerator: 265015, denominator: 1}, endTimeMs: {numerator: 265016, denominator: 1}}));
+  check(() => assert.equal(edge.selectionCoverage, 'outside'));
+  check(() => assert.ok(inputs[0].segments[1].unannotatedMappedIntervals.some(g =>
+    g.sourceMs.startTimeMs.numerator === 1377918 && g.sourceMs.startTimeMs.denominator === 1
+    && g.sourceMs.endTimeMs.numerator === 1412798 && g.sourceMs.endTimeMs.denominator === 1)));
+  check(() => assert.equal(inputs[0].unmappedCandidateIntervals.length, 0));
+  check(() => assert.deepEqual(inputs[3].unmappedCandidateIntervals, [{
+    startTimeMs: {numerator: 50600, denominator: 1}, endTimeMs: {numerator: 151850, denominator: 3}}]));
+
+  const unconfirmed = (input: CandidateVideoIdInputV003): CandidateVideoIdProviderOutputV003 => ({
+    schemaVersion: 'candidate-video-understanding-id-provider-output-v003', itemId: input.itemId,
+    observations: input.segments.flatMap(segment => CANDIDATE_VIDEO_ID_ROLES_V003.map(role => ({
+      role, segmentId: segment.segmentId, status: 'notObserved', description: 'この入力からは確認できない',
+      evidenceUtteranceRanges: [], evidenceKinds: [], reactionKind: role === 'reaction' ? 'unknown' : 'notApplicable',
+      idLocation: 'segmentOnlyEventUnresolved', unconfirmedPoints: ['判断材料不足'], causalScope: 'notClaimed', causalEvidence: []
+    })))
+  });
+  const observe = (output: CandidateVideoIdProviderOutputV003, role: CandidateVideoIdObservationV003['role'], segmentIndex = 0) => {
+    const observation = output.observations[segmentIndex * CANDIDATE_VIDEO_ID_ROLES_V003.length + CANDIDATE_VIDEO_ID_ROLES_V003.indexOf(role)];
+    observation.status = 'observed'; observation.description = '元候補の発話内容を文字から確認した';
+    observation.evidenceKinds = ['transcript']; observation.idLocation = 'evidenceUtterancesOnly'; observation.unconfirmedPoints = [];
+    const id = inputs[3].segments[segmentIndex].targetUtteranceIds[0];
+    observation.evidenceUtteranceRanges = [{fromUtteranceId: id, throughUtteranceId: id}];
+    return observation;
+  };
+  const input = inputs[3];
+  const empty = unconfirmed(input);
+  check(() => assertCandidateVideoIdOutputV003(empty, input, 'A'));
+  check(() => assertCandidateVideoIdOutputV003(empty, input, 'B'));
+  check(() => assert.equal(empty.observations.find(o => o.role === 'visualCaution')!.status, 'notObserved'));
+  const unknownSchema = JSON.stringify(candidateVideoIdSchemaV003(input));
+  check(() => assert.ok(!/startTime|endTime|timestamp|offset|frameNumber|cut|selection|quality|condition|eventAbsent|"number"|"integer"/u.test(unknownSchema)));
+  const valid = unconfirmed(input);
+  observe(valid, 'coreEvent').description = '今年一怖いという紹介を文字から確認した';
+  check(() => assertCandidateVideoIdOutputV003(valid, input, 'A'));
+  const resolved = resolveCandidateVideoIdEvidenceV003(input, 'A', valid);
+  check(() => assert.deepEqual(resolved, resolveCandidateVideoIdEvidenceV003(structuredClone(input), 'A', structuredClone(valid))));
+  check(() => assert.equal(resolved.observations[0].evidenceGroups[0].utterances[0].sourceStartMs,
+    formalIndex.get(input.segments[0].targetUtteranceIds[0])!.sourceStartMs));
+  check(() => assert.ok(resolved.observations.every(o => o.eventPosition === 'unresolved')));
+  check(() => assert.deepEqual(Object.keys(resolved).sort(), ['schemaVersion', 'itemId', 'condition', 'scope', 'semanticArtifact', 'observations'].sort()));
+
+  const negativeMutations: Array<(o: CandidateVideoIdProviderOutputV003) => void> = [
+    o => {o.itemId = inputs[4].itemId;},
+    o => {o.observations[0].segmentId = 'segment-0003';},
+    o => {o.observations[0].evidenceUtteranceRanges[0].fromUtteranceId = 'semantic-utterance-999999';},
+    o => {o.observations[0].evidenceUtteranceRanges[0].throughUtteranceId = 'speech-67';},
+    o => {o.observations[0].evidenceUtteranceRanges[0] = {fromUtteranceId: 'semantic-utterance-003931', throughUtteranceId: 'semantic-utterance-003931'};},
+    o => {o.observations[0].evidenceUtteranceRanges[0] = {fromUtteranceId: 'semantic-utterance-001182', throughUtteranceId: 'semantic-utterance-001182'};},
+    o => {o.observations[0].evidenceUtteranceRanges[0] = {fromUtteranceId: 'semantic-utterance-000082', throughUtteranceId: 'semantic-utterance-000067'};},
+    o => {o.observations[0].evidenceUtteranceRanges.push({...o.observations[0].evidenceUtteranceRanges[0]});},
+    o => {o.observations[0].evidenceUtteranceRanges.push({fromUtteranceId: 'semantic-utterance-000060', throughUtteranceId: 'semantic-utterance-000060'});},
+    o => {o.observations[0].status = 'eventAbsent' as 'observed';},
+    o => {o.observations[0].status = 'notObserved';},
+    o => {o.observations[0].evidenceKinds = ['video'];},
+    o => {o.observations[0].evidenceKinds = ['audio'];},
+    o => {o.observations[0].evidenceKinds = ['transcript', 'transcript'];},
+    o => {o.observations[0].reactionKind = 'direct';},
+    o => {o.observations[0].idLocation = 'segmentOnlyEventUnresolved';},
+    o => {o.observations[0].causalScope = 'withinSegment';},
+    o => {o.observations.pop();},
+    o => {o.observations.push({...o.observations[0], status: 'notApplicable', evidenceKinds: [], evidenceUtteranceRanges: [], idLocation: 'segmentOnlyEventUnresolved'});},
+    o => {Object.assign(o, {startTimeMs: 0});},
+    o => {Object.assign(o.observations[0], {endTimeMs: 100});},
+    o => {Object.assign(o.observations[0].evidenceUtteranceRanges[0], {time: 100});},
+    o => {Object.assign(o, {selection: []});},
+    o => {Object.assign(o, {qualityScore: 1});},
+    o => {Object.assign(o, {condition: 'A'});},
+    o => {o.observations[0].description = '別のsegment-0002が原因だ';},
+    o => {o.observations[0].unconfirmedPoints = ['位置は00:02:03'];}
+  ];
+  for (const mutate of negativeMutations) {
+    const invalid = structuredClone(valid); mutate(invalid);
+    check(() => assert.throws(() => assertCandidateVideoIdOutputV003(invalid, input, 'A')));
+  }
+  for (const text of ['00:01:02', '12.5秒', '５秒', '三秒', '1000ms', '12 seconds', '12 s', 'frame 12', 'フレーム12', 'offset=12', 'time:12', '開始:12', '十分後', '10分', '十分時点', '時刻:三分']) {
+    const invalid = structuredClone(valid); invalid.observations[0].description = text;
+    check(() => assert.throws(() => assertCandidateVideoIdOutputV003(invalid, input, 'B')));
+  }
+  for (const text of ['十分な導入', '十分に確認できない', '三分割', '10分割', '判断材料が不十分', '導入は十分でしょう']) {
+    const ordinary = structuredClone(valid); ordinary.observations[0].description = text;
+    check(() => assertCandidateVideoIdOutputV003(ordinary, input, 'A'));
+  }
+  const direct = unconfirmed(input);
+  const reaction = observe(direct, 'reaction', 1);
+  reaction.reactionKind = 'direct'; reaction.causalScope = 'withinSegment';
+  reaction.causalEvidence = reaction.evidenceUtteranceRanges.map(r => ({...r, segmentId: reaction.segmentId}));
+  check(() => assertCandidateVideoIdOutputV003(direct, input, 'A'));
+  const crossed = structuredClone(direct);
+  crossed.observations[10].causalEvidence[0].segmentId = 'segment-0001';
+  check(() => assert.throws(() => assertCandidateVideoIdOutputV003(crossed, input, 'B')));
+  const noCausalEvidence = structuredClone(direct); noCausalEvidence.observations[10].causalEvidence = [];
+  check(() => assert.throws(() => assertCandidateVideoIdOutputV003(noCausalEvidence, input, 'B')));
+  const retrospective = structuredClone(direct);
+  retrospective.observations[10].reactionKind = 'retrospective'; retrospective.observations[10].causalScope = 'notClaimed';
+  retrospective.observations[10].causalEvidence = [];
+  check(() => assertCandidateVideoIdOutputV003(retrospective, input, 'A'));
+  retrospective.observations[10].causalScope = 'withinSegment';
+  check(() => assert.throws(() => assertCandidateVideoIdOutputV003(retrospective, input, 'B')));
+  const silent = unconfirmed(input);
+  const silentReaction = observe(silent, 'reaction', 1);
+  Object.assign(silentReaction, {description: '無言の表情変化が見えた', evidenceKinds: ['video'], evidenceUtteranceRanges: [],
+    reactionKind: 'silent', idLocation: 'segmentOnlyEventUnresolved', unconfirmedPoints: ['発話による位置限定ができない']});
+  check(() => assertCandidateVideoIdOutputV003(silent, input, 'B'));
+  check(() => assert.throws(() => assertCandidateVideoIdOutputV003(silent, input, 'A')));
+  const silentResolved = resolveCandidateVideoIdEvidenceV003(input, 'B', silent).observations[10];
+  check(() => assert.deepEqual(silentResolved.evidenceGroups, []));
+  check(() => assert.equal(silentResolved.eventPosition, 'unresolved'));
+  silentReaction.evidenceUtteranceRanges = [{fromUtteranceId: 'semantic-utterance-003931', throughUtteranceId: 'semantic-utterance-003931'}];
+  silentReaction.idLocation = 'evidenceUtterancesOnly';
+  check(() => assert.throws(() => assertCandidateVideoIdOutputV003(silent, input, 'B')));
+  const disjoint = unconfirmed(inputs[4]);
+  const comment = disjoint.observations[10];
+  Object.assign(comment, {status: 'observed', description: '後から叫んだと述べている', evidenceKinds: ['transcript'],
+    reactionKind: 'retrospective', idLocation: 'evidenceUtterancesOnly', unconfirmedPoints: [],
+    evidenceUtteranceRanges: [
+      {fromUtteranceId: 'semantic-utterance-010644', throughUtteranceId: 'semantic-utterance-010650'},
+      {fromUtteranceId: 'semantic-utterance-010658', throughUtteranceId: 'semantic-utterance-010664'}]});
+  const groups = resolveCandidateVideoIdEvidenceV003(inputs[4], 'A', disjoint).observations[10].evidenceGroups;
+  check(() => assert.deepEqual(groups.map(g => g.utterances.length), [7, 7]));
+  check(() => assert.ok(!groups.flatMap(g => g.utterances).some(r => r.utteranceId === 'semantic-utterance-010651')));
+  // A real but semantically unrelated in-segment ID can pass syntax. Do not claim semantic validation.
+  const unrelated = structuredClone(valid);
+  const unrelatedId = input.segments[0].utterances.find(r => !input.segments[0].targetUtteranceIds.includes(r.utteranceId))!.utteranceId;
+  unrelated.observations[0].evidenceUtteranceRanges = [{fromUtteranceId: unrelatedId, throughUtteranceId: unrelatedId}];
+  check(() => assertCandidateVideoIdOutputV003(unrelated, input, 'A'));
+  check(() => assert.deepEqual(buildCandidateVideoIdRequestV003(input, 'B', MOCK_FILES_URI).body,
+    buildCandidateVideoIdRequestV003(input, 'B', MOCK_FILES_URI).body));
+  process.stdout.write(JSON.stringify({suite: 'v003-id-reference-calibration-mock', status: 'passed', checks,
+    fixedItems: 5, conditions: 10, formalRowsCompared: 1287, exactMappingEndpointsCompared: 2574,
+    targetIdAppearances: 286, apiCommunications: 0, retries: 0, repairs: 0, formalArtifactsWritten: 0}) + '\n');
+
+  // task-028: synthetic approvals, references and price bytes; no new filesystem fixture.
+  // Separate-process source re-admission is exercised by the transport integration suite.
+  {
+    let admissionChecks = 0;
+    const verify = (fn: () => void) => {fn(); admissionChecks += 1;};
+    const digest = (value: unknown) => sha256(canonicalJsonBytesV001(value));
+    const changed = <T>(value: T, mutate: (copy: T) => void): T => {
+      const copy = structuredClone(value); mutate(copy); return copy;
+    };
+    const table = buildCandidateVideoIdInputTableV004('synthetic-task-028-core', 'mock', inputs);
+    verify(() => assertCandidateVideoIdInputTableV004(JSON.parse(JSON.stringify(table)), 'mock'));
+    verify(() => assert.throws(() => assertCandidateVideoIdInputTableV004(table, 'live')));
+    verify(() => assert.throws(() => buildCandidateVideoIdInputTableV004(' padded ', 'mock', inputs)));
+    verify(() => assert.throws(() => buildCandidateVideoIdInputTableV004('synthetic\nidentity', 'mock', inputs)));
+    verify(() => assert.throws(() => assertCandidateVideoIdInputTableV004(changed(table, t => t.inputs.reverse()))));
+    verify(() => assert.throws(() => assertCandidateVideoIdInputTableV004(changed(table, t => t.inputs.pop()))));
+    verify(() => assert.throws(() => assertCandidateVideoIdInputTableV004(changed(table, t => {
+      t.inputs[0].segments[0].utterances[0].text = '合成の差し替え';
+    }))));
+    verify(() => assert.throws(() => assertCandidateVideoIdInputTableV004(changed(table, t => {
+      Object.assign(t.inputs[0], {humanReview: '合成の混入'});
+    }))));
+    await assert.rejects(verifyCandidateVideoIdInputTableV004(WORKSPACE_ROOT, table, 'live'));
+    admissionChecks += 1;
+    const plan: CandidateVideoIdExecutionPlanV004 = {
+      schemaVersion: 'candidate-video-understanding-id-execution-plan-v004', experimentId: table.experimentId,
+      origin: 'mock', inputTableSha256: digest(table), targets: structuredClone([...CANDIDATE_VIDEO_ID_FIXED_TARGETS_V004]),
+      files: inputs.map((item, index) => ({itemId: item.itemId, name: 'files/synthetic-task028-' + index,
+        uri: 'https://generativelanguage.googleapis.com/v1beta/files/synthetic-task028-' + index,
+        expirationTime: '2026-12-31T00:00:00.000Z', mimeType: 'video/mp4', byteLength: item.mediaByteLength,
+        mediaSha256: item.bindings.explorationVideo.fileSha256})),
+      filesSourceBinding: {path: 'synthetic-task-028/files-reference.json', fileSha256: 'a'.repeat(64)},
+      timeouts: {...CANDIDATE_VIDEO_ID_TIMEOUTS_V004}, limits: {...CANDIDATE_VIDEO_ID_LIMITS_V004},
+      retry: 0, repair: 0, reupload: 0, extraPoll: 0
+    };
+    verify(() => assertCandidateVideoIdExecutionPlanV004(plan, table));
+    verify(() => assert.deepEqual(Object.values(CANDIDATE_VIDEO_ID_ARTIFACT_PATHS_V004), [
+      'input-id-table-v001.json', 'execution-plan-v001.json', 'execution-record-v001.jsonl', 'paired-comparison-v001.json'
+    ].map(name => 'evals/clip_composition/outputs/work-candidate-video-understanding-recalibration-v001/' + name)));
+    const badPlans: Array<(p: CandidateVideoIdExecutionPlanV004) => void> = [
+      p => {p.experimentId = 'another-synthetic-experiment';},
+      p => {p.origin = 'live';},
+      p => {p.inputTableSha256 = 'b'.repeat(64);},
+      p => {p.targets.pop();},
+      p => {p.targets[1] = {...p.targets[0]};},
+      p => {p.targets[0].itemId = 'item-0006';},
+      p => {Object.assign(p.targets[0], {condition: 'C'});},
+      p => {Object.assign(p.timeouts, {metadataGetMs: 30001});},
+      p => {Object.assign(p.timeouts, {countTokensMs: 180001});},
+      p => {Object.assign(p.timeouts, {inferenceMs: 600001});},
+      p => {Object.assign(p.timeouts, {extraPollMs: 0});},
+      p => {Object.assign(p.limits, {total: 26});},
+      p => {Object.assign(p.limits, {perConditionInference: 2});},
+      p => {Object.assign(p, {retry: 1});},
+      p => {Object.assign(p, {repair: 1});},
+      p => {Object.assign(p, {reupload: 1});},
+      p => {Object.assign(p, {extraPoll: 1});},
+      p => {p.files.reverse();},
+      p => {p.files.pop();},
+      p => {p.files[0].byteLength += 1;},
+      p => {p.files[0].mediaSha256 = p.files[1].mediaSha256;},
+      p => {p.files[0].name = p.files[1].name; p.files[0].uri = p.files[1].uri;},
+      p => {p.files[0].uri += '?key=synthetic-not-a-key';},
+      p => {p.files[0].uri = p.files[0].uri.replace('https://', 'https://synthetic@');},
+      p => {p.files[0].expirationTime = '2026-02-30T00:00:00.000Z';},
+      p => {p.filesSourceBinding.path = '../synthetic.json';},
+      p => {p.filesSourceBinding.fileSha256 = 'missing';},
+      p => {Object.assign(p, {humanEvaluation: '合成の混入'});}
+    ];
+    for (const mutate of badPlans) verify(() => assert.throws(() => assertCandidateVideoIdExecutionPlanV004(changed(plan, mutate), table)));
+    const requests = buildCandidateVideoIdFixedRequestsV004(table, plan);
+    verify(() => assertCandidateVideoIdFixedRequestsV004(requests, table, plan));
+    verify(() => assert.deepEqual(requests.map(({itemId, condition}) => ({itemId, condition})), plan.targets));
+    for (const item of inputs) {
+      const a = requests.find(r => r.itemId === item.itemId && r.condition === 'A')!;
+      const b = requests.find(r => r.itemId === item.itemId && r.condition === 'B')!;
+      verify(() => assert.deepEqual(a.request, buildCandidateVideoIdRequestV003(item, 'A')));
+      verify(() => assert.deepEqual(b.request, buildCandidateVideoIdRequestV003(item, 'B', plan.files.find(f => f.itemId === item.itemId)!.uri)));
+      verify(() => assert.deepEqual(a.request.body.contents[0].parts, b.request.body.contents[0].parts.slice(0, 1)));
+      verify(() => assert.equal(a.request.body.contents[0].parts.length, 1));
+      verify(() => assert.equal(b.request.body.contents[0].parts.length, 2));
+      verify(() => assert.equal(a.exactRequestSha256, digest({method: a.request.method, url: a.request.url, body: a.request.body})));
+      verify(() => assert.equal(b.exactRequestSha256, digest({method: b.request.method, url: b.request.url, body: b.request.body})));
+    }
+    verify(() => assert.throws(() => assertCandidateVideoIdFixedRequestsV004(requests.slice(0, 1), table, plan)));
+    verify(() => assert.throws(() => assertCandidateVideoIdFixedRequestsV004(changed(requests, r => {
+      Object.assign(r[0].request.body, {humanReview: '合成の混入'});
+      r[0].exactRequestSha256 = digest({method: r[0].request.method, url: r[0].request.url, body: r[0].request.body});
+    }), table, plan)));
+    const reversed = changed(plan, p => p.targets.reverse());
+    verify(() => assertCandidateVideoIdExecutionPlanV004(reversed, table));
+    verify(() => assert.deepEqual(buildCandidateVideoIdFixedRequestsV004(table, reversed).map(r => [r.itemId, r.condition]),
+      [...requests].reverse().map(r => [r.itemId, r.condition])));
+
+    // These rates and the budget are synthetic test values, not an approval for real expenditure.
+    const priceBytes = canonicalJsonBytesV001({schemaVersion: 'candidate-video-understanding-provider-spec-price-snapshot-v001',
+      model: 'gemini-3.8-flash', checkedOn: '2026-09-05', synthetic: true,
+      standardPrice: {inputNanoUsdPerToken: 1, outputIncludingThinkingNanoUsdPerToken: 2, validThrough: '2026-12-31'}});
+    const cost: CandidateVideoIdCostConditionsV004 = {maximumNanoUsd: '1000000000',
+      priceReference: {path: 'synthetic-task-028/price.json', fileSha256: sha256(priceBytes)},
+      inputNanoUsdPerToken: 1, outputIncludingThinkingNanoUsdPerToken: 2, priceValidThrough: '2026-12-31',
+      acceptEstimateNotGuaranteedCap: true};
+    verify(() => assertCandidateVideoIdPriceSnapshotV004(priceBytes, cost));
+    for (const budget of ['', '-1', '01', '1.5', '1e9', ' 1']) {
+      verify(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...cost, maximumNanoUsd: budget})));
+    }
+    verify(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...cost, priceValidThrough: '2026-02-30'})));
+    verify(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...cost, inputNanoUsdPerToken: -1})));
+    verify(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...cost, outputIncludingThinkingNanoUsdPerToken: 0.5})));
+    verify(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...cost, acceptUnverifiedPreparationBilling: false})));
+    verify(() => assert.throws(() => assertCandidateVideoIdCostConditionsV004({...cost, acceptEstimateNotGuaranteedCap: false})));
+    verify(() => assert.throws(() => assertCandidateVideoIdPriceSnapshotV004(Buffer.from('{}'), cost)));
+    verify(() => assert.throws(() => assertCandidateVideoIdPriceSnapshotV004(priceBytes, {...cost, inputNanoUsdPerToken: 2})));
+    for (const replacement of [{model: 'different-synthetic-model'}, {checkedOn: '2026-02-30'}, {checkedOn: '2027-01-01'}]) {
+      const invalidPrice = canonicalJsonBytesV001({...JSON.parse(priceBytes.toString('utf8')), ...replacement});
+      verify(() => assert.throws(() => assertCandidateVideoIdPriceSnapshotV004(invalidPrice, {
+        ...cost, priceReference: {...cost.priceReference, fileSha256: sha256(invalidPrice)}
+      })));
+    }
+    const preparePrice = syntheticTask029PreparationPrice(table.experimentId, 'synthetic-prepare-approval-not-live');
+    const prepare: CandidateVideoIdPrepareApprovalV004 = {
+      schemaVersion: 'candidate-video-understanding-id-approval-v004', experimentId: table.experimentId,
+      origin: 'mock', approvedBy: 'mock', phase: 'prepare', planSha256: digest(plan), inputTableSha256: digest(table),
+      approvalReference: 'synthetic-prepare-approval-not-live', timeouts: {...plan.timeouts}, costConditions: preparePrice.cost,
+      targets: structuredClone(plan.targets), limits: {metadataGet: 5, countTokens: 10, inference: 0, perConditionInference: 0, total: 15}
+    };
+    verify(() => assertCandidateVideoIdPrepareApprovalV004(prepare, table, plan));
+    const badPrepare: Array<(a: CandidateVideoIdPrepareApprovalV004) => void> = [
+      a => {Object.assign(a, {phase: 'inference'});}, a => {a.approvedBy = 'kawafmm';},
+      a => {a.origin = 'live';}, a => {a.experimentId += '-other';}, a => {a.planSha256 = 'c'.repeat(64);},
+      a => {a.inputTableSha256 = 'd'.repeat(64);}, a => {a.approvalReference = '';},
+      a => {a.targets.pop();}, a => {a.targets.reverse();},
+      a => {Object.assign(a.limits, {inference: 1, total: 16});},
+      a => {Object.assign(a.timeouts, {inferenceMs: 1});},
+      a => {Object.assign(a, {costConditions: undefined});},
+      a => {Object.assign(a, {inferenceAutoStart: true});}
+    ];
+    for (const mutate of badPrepare) verify(() => assert.throws(() => assertCandidateVideoIdPrepareApprovalV004(changed(prepare, mutate), table, plan)));
+    const recordSha = 'e'.repeat(64);
+    const inference: CandidateVideoIdInferenceApprovalV004 = {
+      ...prepare, phase: 'inference', costConditions: cost, expectedRecordSha256: recordSha,
+      approvalReference: 'synthetic-separate-inference-approval',
+      executionPolicy: {...CANDIDATE_VIDEO_ID_INFERENCE_POLICY_V004},
+      targets: [requests[0], requests[3], requests[8]].map(({itemId, condition, exactRequestSha256}) => ({itemId, condition, exactRequestSha256})),
+      limits: {metadataGet: 0, countTokens: 0, inference: 3, perConditionInference: 1, total: 3}
+    };
+    verify(() => assertCandidateVideoIdInferenceApprovalV004(inference, table, plan, requests, recordSha));
+    for (const selected of [requests.slice(0, 1), requests, requests.slice(6)]) {
+      verify(() => assertCandidateVideoIdInferenceApprovalV004({...inference,
+        targets: selected.map(({itemId, condition, exactRequestSha256}) => ({itemId, condition, exactRequestSha256})),
+        limits: {...inference.limits, inference: selected.length, total: selected.length}}, table, plan, requests, recordSha));
+    }
+    verify(() => assert.throws(() => assertCandidateVideoIdInferenceApprovalV004(undefined, table, plan, requests, recordSha)));
+    verify(() => assert.throws(() => assertCandidateVideoIdInferenceApprovalV004(prepare, table, plan, requests, recordSha)));
+    verify(() => assert.throws(() => assertCandidateVideoIdInferenceApprovalV004(inference, table, plan, requests.slice(0, 9), recordSha)));
+    const badInference: Array<(a: CandidateVideoIdInferenceApprovalV004) => void> = [
+      a => {a.targets = [];}, a => {a.targets.reverse();}, a => {a.targets[1] = {...a.targets[0]};},
+      a => {a.targets[0].itemId = 'item-0006';}, a => {a.targets[0].exactRequestSha256 = 'f'.repeat(64);},
+      a => {a.expectedRecordSha256 = 'f'.repeat(64);}, a => {Object.assign(a.targets[0], {request: requests[0].request});},
+      a => {Object.assign(a.limits, {metadataGet: 1});}, a => {Object.assign(a.limits, {countTokens: 1});},
+      a => {Object.assign(a.limits, {perConditionInference: 2});}, a => {a.limits.inference = 10; a.limits.total = 10;}
+    ];
+    for (const mutate of badInference) verify(() => assert.throws(() => assertCandidateVideoIdInferenceApprovalV004(changed(inference, mutate), table, plan, requests, recordSha)));
+    const comparisonSha = 'f'.repeat(64);
+    const comparison: CandidateVideoIdComparisonApprovalV004 = {
+      schemaVersion: 'candidate-video-understanding-id-comparison-approval-v004', experimentId: table.experimentId,
+      origin: 'mock', approvedBy: 'mock', approvalReference: 'synthetic-separate-comparison-approval',
+      planSha256: digest(plan), inputTableSha256: digest(table), expectedRecordSha256: recordSha, comparisonSha256: comparisonSha
+    };
+    verify(() => assertCandidateVideoIdComparisonApprovalV004(comparison, table, plan, recordSha, comparisonSha));
+    verify(() => assert.throws(() => assertCandidateVideoIdComparisonApprovalV004(undefined, table, plan, recordSha, comparisonSha)));
+    verify(() => assert.throws(() => assertCandidateVideoIdComparisonApprovalV004({...comparison, expectedRecordSha256: 'a'.repeat(64)}, table, plan, recordSha, comparisonSha)));
+    verify(() => assert.throws(() => assertCandidateVideoIdComparisonApprovalV004({...comparison, comparisonSha256: 'a'.repeat(64)}, table, plan, recordSha, comparisonSha)));
+    verify(() => assert.throws(() => assertCandidateVideoIdComparisonApprovalV004({...comparison, origin: 'live', approvedBy: 'kawafmm'}, table, plan, recordSha, comparisonSha)));
+    process.stdout.write(JSON.stringify({suite: 'v004-id-plan-approval-storage-contract-mock', status: 'passed', checks: admissionChecks,
+      syntheticApprovals: true, providerRequestContractChanged: false, newFixturePaths: 0,
+      apiCommunications: 0, formalArtifactsWritten: 0}) + '\n');
+  }
 }

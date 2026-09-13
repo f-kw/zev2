@@ -1,6 +1,8 @@
 """Verify the completed render against the already accepted new-source artifacts."""
 import hashlib
 import json
+import re
+from fractions import Fraction
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -28,6 +30,23 @@ def check(ref):
     return read(path)
 
 
+def checked_frame_rows(ref, pixel_bytes):
+    path = ROOT / ref['path']
+    assert digest(path) == ref['fileSha256']
+    text = path.read_text()
+    found = re.search(r'^#tb 0: (\d+)/(\d+)$', text, re.M)
+    assert found
+    timebase = Fraction(int(found[1]), int(found[2]))
+    rows = [list(map(str.strip, line.split(','))) for line in text.splitlines()
+            if line and not line.startswith('#')]
+    assert len(rows) == 65363
+    for i, row in enumerate(rows):
+        assert int(row[0]) == 0 and int(row[4]) == pixel_bytes
+        assert int(row[2]) * timebase == Fraction(i, 30)
+        assert int(row[3]) * timebase == Fraction(1, 30)
+    return [row[-1] for row in rows]
+
+
 def main():
     completion = read(FORMAL / 'render-completion.json')
     assert completion['schemaVersion'] == 'unseen-material-render-completion-v002'
@@ -37,6 +56,7 @@ def main():
     adoption = check(completion['machineAdoptionBinding'])
     assert len(adoption['selectedCandidates']) == 10
     execution = check(completion['execution'])
+    assert execution['schemaVersion'] == 'unseen-material-qc-only-execution-v002'
     assert execution['status'] == 'completed' and execution['mode'] == 'qc-only-existing-main'
     main = check(completion['sourceMainCompletion'])
     assert completion['sourceMainCompletion'] == execution['sourceMainCompletionBinding']
@@ -75,7 +95,38 @@ def main():
     assert provenance['newMainVideoEncodes'] == provenance['newlyRenderedOverlayPngs'] == 0
     actual_cache = check(provenance['cacheProof'])
     assert actual_cache['status'] == 'passed' and actual_cache['actualEncodedFramesIdentical'] == 65363
-    assert actual_cache['decodedComparisonPixelFormat'] == 'rgba'
+    assert actual_cache['decodedComparisonPixelFormats'] == ['yuv420p', 'rgba']
+    assert [row['name'] for row in actual_cache['cacheProofs']] == ['baseline', 'transparent']
+    for row in actual_cache['cacheProofs']:
+        assert digest(ROOT / row['cache']['path']) == row['cache']['fileSha256']
+        assert row['all65363PixelsAndTimesIdentical']
+        assert checked_frame_rows(row['encoderInputFrameHash'], 3110400) == checked_frame_rows(row['decodedFrameHash'], 3110400)
+    assert actual_cache['cacheProofs'][0]['inherited'] is True
+    assert actual_cache['cacheProofs'][1]['inherited'] is False
+    assert [row['pixelFormat'] for row in actual_cache['encodedVideoComparisons']] == ['yuv420p', 'rgba']
+    for row, pixel_bytes in zip(actual_cache['encodedVideoComparisons'], [3110400, 8294400]):
+        assert row['identicalFrames'] == 65363 and len(row['artifacts']) == 2
+        assert checked_frame_rows(row['artifacts'][0], pixel_bytes) == checked_frame_rows(row['artifacts'][1], pixel_bytes)
+    color = check(execution['colorMetadataEvidence'])
+    assert execution['colorMetadataEvidence'] == provenance['colorMetadataEvidence'] == actual_cache['colorEvidence']
+    color_decision = check(color['decision'])
+    assert color_decision['decision'] == 'continue' and color_decision['allowObservedColorMetadataRestoration']
+    assert color_decision['requireFullMainYuvAndRgbaEqualityBefore343Qc']
+    for row in color['metadataInspections']:
+        assert digest(ROOT / row['media']['path']) == row['media']['fileSha256']
+    restoration = color['restoration']
+    for row in restoration['differences']:
+        assert row['sourceObservedValue'] == restoration['observedMain'][row['field']] == restoration['observedBase'][row['field']]
+        assert row['cacheObservedValue'] == restoration['observedCache'].get(row['field'])
+        assert row['sourceObservedValue'] != row['cacheObservedValue']
+    inherited = check(execution['inheritedBaselineCache'])
+    assert execution['inheritedBaselineCache'] == provenance['inheritedBaselineCache'] == actual_cache['inheritedBaseline']
+    assert inherited['claimOldExecutionCompletedNormally'] is False and inherited['generatorExitCode'] is None
+    assert inherited['originalCache'] == actual_cache['cacheProofs'][0]['cache']
+    check(inherited['sourceGenerationInput'])
+    assert digest(ROOT / inherited['producerImplementation']['path']) == inherited['producerImplementation']['fileSha256']
+    for key in ['terminalBefore', 'terminalAfter']:
+        check(inherited[key])
     optimization = check(setup['qcEquivalenceBinding'])
     assert optimization['status'] == 'passed'
     assert optimization['omittedFramesPixelIdentical'] and optimization['mainEncodingArgumentsUnchanged']
@@ -231,6 +282,9 @@ def main():
               'losslessQcEquivalence': execution['equivalenceProofBinding'],
               'twoStageProvenance': execution['provenanceBinding'],
               'actualCacheVerification': provenance['cacheProof'],
+              'observedColorMetadataRestoration': execution['colorMetadataEvidence'],
+              'independentlyAdoptedBaselineCache': execution['inheritedBaselineCache'],
+              'fullYuvAndRgbaFramesIdentical': 65363,
               'runtimeFilesVerifiedAtCompletion': runtime_verification,
               'fontSizeSelection': setup['fontSizeSelectionBinding'],
               'actualPngSafeAreaPassed': len(qc['instructionEvidence']),
