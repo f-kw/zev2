@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "digest-v1-phase2-caption-adapter-development-correction-v001",
+  "unionProvenance": {
+    "initialFailure": "既存本文製造の単数候補欄へ集合来歴が未接続でundefinedを作り、正式JSON製造時の合成検査で拒否された。",
+    "resolution": "既存本文製造には候補集合を欠落なく運ばせ、公開前に集合欄へ写像する。内部の一時採用bindingを正式採用へ戻す。",
+    "snapshot": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/before-caption-union-carrier-correction.mts",
+      "fileSha256": "16c8bd167deeb75d2ea1fa4b7c9be8fc636c721245398259e91516508091aa6e"
+    },
+    "formalInputAffected": false
+  },
+  "fixtureWidthRule": {
+    "initialFailure": "合成検査の文字幅規則名が既存rendererの定義と一致しなかった。",
+    "resolution": "既存style入力の U+0000..U+00FF=1; other Unicode code point=2 へ合成fixtureの規則名だけを訂正した。",
+    "failedTap": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-adapter-tests-v001.tap",
+      "fileSha256": "30be303ea36d84a092d814be670058bc3e8479f611f2ef2424e70bb4be4a3e25"
+    },
+    "passedTap": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-adapter-tests-v002.tap",
+      "fileSha256": "12bcbf09a31d700e816a9d447fe81f43d01764703da62e09732c0e3f5eeee886"
+    },
+    "setupCorrectionCumulative": 5
+  },
+  "meaningJudgmentReexecuted": false,
+  "productionValidatorChanged": false
+}

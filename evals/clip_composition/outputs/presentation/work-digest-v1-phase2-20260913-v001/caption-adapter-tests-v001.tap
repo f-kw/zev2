@@ -1,0 +1,79 @@
+TAP version 13
+# Subtest: unionした本文全量と全候補の来歴を一回の回答から既存検査へ渡す
+not ok 1 - unionした本文全量と全候補の来歴を一回の回答から既存検査へ渡す
+  ---
+  duration_ms: 2.8075
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_captions.test.mts:1:2215'
+  failureType: 'testCodeFailure'
+  error: 'unsupported renderer character width rule'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    codePointWeightV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_text_layout_v001.mjs:289:17)
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/candidate_internal_edit_core_v001.mts:253:59)
+    Array.reduce (<anonymous>)
+    validateInternalDisplayV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/candidate_internal_edit_core_v001.mts:253:31)
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_captions.mts:73:12)
+    Array.map (<anonymous>)
+    validatePhase2Display (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_captions.mts:68:24)
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_captions.test.mts:31:16)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+  ...
+# Subtest: 全体回答の欠落・重複・別字幕を投影前に拒否する
+ok 2 - 全体回答の欠落・重複・別字幕を投影前に拒否する
+  ---
+  duration_ms: 3.727292
+  ...
+# Subtest: 本文欠落と幅超過を既存validatorで拒否する
+not ok 3 - 本文欠落と幅超過を既存validatorで拒否する
+  ---
+  duration_ms: 0.964167
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_captions.test.mts:1:3185'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /FULL_COVERAGE_REQUIRED/. Input:
+    
+    'TypeError: unsupported renderer character width rule'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: 'unsupported renderer character width rule'
+  name: 'TypeError'
+  stack: |-
+    codePointWeightV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_text_layout_v001.mjs:289:17)
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/candidate_internal_edit_core_v001.mts:253:59)
+    Array.reduce (<anonymous>)
+    validateInternalDisplayV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/candidate_internal_edit_core_v001.mts:253:31)
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_captions.mts:73:12)
+    Array.map (<anonymous>)
+    validatePhase2Display (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_captions.mts:68:24)
+    <anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_captions.test.mts:47:23)
+    getActual (node:assert:498:5)
+    Function.throws (node:assert:644:24)
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_v1_phase2_captions.test.mts:47:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 保存前の全体回答binding改変を拒否する
+ok 4 - 保存前の全体回答binding改変を拒否する
+  ---
+  duration_ms: 0.588708
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 2
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 227.330125

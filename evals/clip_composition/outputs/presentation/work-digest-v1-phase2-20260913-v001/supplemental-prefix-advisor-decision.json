@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "digest-v1-phase2-prefix-advisor-decision-v001",
+  "receivedAt": "2026-09-13T10:54:56.823820+00:00",
+  "origin": "ZEV進行管理３",
+  "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+  "auditedCheckpoint": "60c0d85f5297d2fb38095fbf34132c5d38556f02",
+  "decision": "continue",
+  "decisionQuote": "Phase 2を続行してよい。再alignmentは不要。",
+  "finalDecisionQuote": "既存contractを緩和せずに続行可能。full observationはrejectのまま、最初の違反より前の最大有効prefixを既存validatorで独立検証し、ID15218の開始端点だけをendpoint evidenceとして利用する。",
+  "responseState": "レスポンス確認済み",
+  "regenerationOrResend": false,
+  "sourceFailureBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/supplemental-validation-rejected.json",
+    "fileSha256": "79922943f5f09e41d3fbbad1e2c0dc2d3d1e418556650ce3ce54bedec4542499"
+  },
+  "allowedTargetSourceSegmentIds": [
+    15218
+  ],
+  "evidenceScope": "start endpoint only",
+  "rules": [
+    "原観測を先頭から検査して最初の契約違反wordを導出する",
+    "その直前までの最大有効prefixを採り、targetだけの抜粋や固定件数にしない",
+    "prefixの全文と先頭から連続する正式本文片の完全連結が一意に一致すること",
+    "prefixを同じ音声長・同じ窓位置・同じ音声参照で既存validatorへ渡す",
+    "元wordのtext/token/start/end/probabilityはすべて不変",
+    "targetは最初の違反より前で、一意な非window-origin start、有限で正の単位長、parent内部でなければ採用しない",
+    "原観測全体のrejectと末尾の不正値を保存し、全体の合格は主張しない"
+  ],
+  "forbidden": [
+    "再alignment",
+    "別窓",
+    "音声再抽出",
+    "音声延長・切詰め",
+    "観測・正式本文・意味回答変更",
+    "8ms tolerance",
+    "clamp",
+    "epsilon",
+    "既存validator変更",
+    "Phase 1変更",
+    "部分的な保持区間昇格"
+  ],
+  "requiredTests": [
+    "実データのfull観測は拒否のまま",
+    "最初の違反の原値再構築",
+    "targetのraw start/endから同一の元素材時刻を導出",
+    "target自体または前方が不正なら拒否",
+    "時刻逆順のあるprefix拒否",
+    "atom境界不成立・text不一致・不連続ID拒否",
+    "target多重・window-origin・非有限・非正値・parent外拒否",
+    "raw観測と正式本文binding改変拒否",
+    "意味回答変更拒否",
+    "5端点全部を再検証し全7候補12ブロックを保持"
+  ],
+  "afterValidated": "5端点すべてを正式解決した場合、既承認のPhase 2を続行する。字幕表示を新規1回、共通製造とtechnical QC、AUDIT_ONLYまで。"
+}

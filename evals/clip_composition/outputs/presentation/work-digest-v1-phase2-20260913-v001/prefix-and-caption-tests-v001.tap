@@ -1,0 +1,90 @@
+TAP version 13
+# Subtest: unionした本文全量と全候補の来歴を一回の回答から既存検査へ渡す
+ok 1 - unionした本文全量と全候補の来歴を一回の回答から既存検査へ渡す
+  ---
+  duration_ms: 2.486875
+  ...
+# Subtest: 全体回答の欠落・重複・別字幕を投影前に拒否する
+ok 2 - 全体回答の欠落・重複・別字幕を投影前に拒否する
+  ---
+  duration_ms: 3.432041
+  ...
+# Subtest: 本文欠落と幅超過を既存validatorで拒否する
+ok 3 - 本文欠落と幅超過を既存validatorで拒否する
+  ---
+  duration_ms: 2.051625
+  ...
+# Subtest: 保存前の全体回答binding改変を拒否する
+ok 4 - 保存前の全体回答binding改変を拒否する
+  ---
+  duration_ms: 0.652417
+  ...
+# Subtest: window-origin stays unresolved without evidence; one valid centered start resolves
+ok 5 - window-origin stays unresolved without evidence; one valid centered start resolves
+  ---
+  duration_ms: 0.730416
+  ...
+# Subtest: unique zero-duration end uses the observed boundary; zero-duration start is never rescued
+ok 6 - unique zero-duration end uses the observed boundary; zero-duration start is never rescued
+  ---
+  duration_ms: 0.160875
+  ...
+# Subtest: nonfinite and outside-parent boundaries fail; other failures do not gain a fallback
+ok 7 - nonfinite and outside-parent boundaries fail; other failures do not gain a fallback
+  ---
+  duration_ms: 2.565875
+  ...
+# Subtest: ordinary valid endpoints and inherited parent edges retain their original times
+ok 8 - ordinary valid endpoints and inherited parent edges retain their original times
+  ---
+  duration_ms: 0.14375
+  ...
+# Subtest: validated whole-text blocks survive endpoint resolution; nonpositive blocks prevent all promotion
+ok 9 - validated whole-text blocks survive endpoint resolution; nonpositive blocks prevent all promotion
+  ---
+  duration_ms: 5.206875
+  ...
+# Subtest: saved Phase 2 evidence resolves every rejected endpoint without changing any semantic bytes
+ok 10 - saved Phase 2 evidence resolves every rejected endpoint without changing any semantic bytes
+  ---
+  duration_ms: 2692.128833
+  ...
+# Subtest: derives maximal complete prefix from original rejection without changing audio, words, text, or time
+ok 11 - derives maximal complete prefix from original rejection without changing audio, words, text, or time
+  ---
+  duration_ms: 3.808125
+  ...
+# Subtest: refuses a target at or after the first invalid word, including earlier time reversal
+ok 12 - refuses a target at or after the first invalid word, including earlier time reversal
+  ---
+  duration_ms: 12.854167
+  ...
+# Subtest: refuses incomplete atom boundaries, changed text or tokens, missing and duplicated source IDs
+ok 13 - refuses incomplete atom boundaries, changed text or tokens, missing and duplicated source IDs
+  ---
+  duration_ms: 1.810708
+  ...
+# Subtest: refuses window-origin, nonpositive targets, outside-parent starts and altered evidence bindings
+ok 14 - refuses window-origin, nonpositive targets, outside-parent starts and altered evidence bindings
+  ---
+  duration_ms: 1.140917
+  ...
+# Subtest: endpoint resolver limits prefix evidence to its authorized start and rejects duplicate targets
+ok 15 - endpoint resolver limits prefix evidence to its authorized start and rejects duplicate targets
+  ---
+  duration_ms: 0.470334
+  ...
+# Subtest: saved data keeps full rejection and resolves all endpoints from unchanged raw evidence
+ok 16 - saved data keeps full rejection and resolves all endpoints from unchanged raw evidence
+  ---
+  duration_ms: 2689.509208
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2944.413542

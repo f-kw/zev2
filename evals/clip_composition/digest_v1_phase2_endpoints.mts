@@ -11,12 +11,16 @@ import {resolveDigestRetentionParentsV1} from './digest_v1_retention.mts';
 import {resolveInternalCutEndpointV001, resolveInternalRetentionV001}
   from './candidate_internal_retention_validation_v001.mts';
 import {validateAcousticChunkV001} from './digest_acoustic_timing_validation_v001.mts';
+import {validateSupplementalEndpointPrefixEvidenceV1} from './digest_v1_phase2_prefix.mts';
 
 export type EndpointCollection = {kind: 'original' | 'supplemental'; chunks: Json[]};
 const matching = (collection: EndpointCollection, id: number, side: 'start' | 'end') =>
   collection.chunks.flatMap(chunk => chunk.units.filter((u: Json) => side === 'start'
     ? u.startBoundary?.after === id : u.endBoundary?.before === id)
-    .map((unit: Json) => ({unit, observationBinding: chunk.observationBinding})));
+    .filter((u: Json) => !chunk.endpointPrefixEvidence
+      || (side === 'start' && chunk.endpointPrefixEvidence.targetSourceSegmentId === id))
+    .map((unit: Json) => ({unit, observationBinding: chunk.observationBinding,
+      ...(chunk.endpointPrefixEvidence ? {endpointPrefixEvidence: chunk.endpointPrefixEvidence} : {})})));
 const inside = (ms: number, parent: Json) => Number.isFinite(ms)
   && parent.sourceInterval.sourceStartMs < ms && ms < parent.sourceInterval.sourceEndMs;
 
@@ -39,7 +43,8 @@ export function resolvePhase2CutEndpoint(id: number, side: 'start' | 'end', pare
       originalObservationBindings: originalMatches.map(x => x.observationBinding),
       supplementalObservation: supplementary, unitStartMs: u.startMs, unitEndMs: u.endMs,
       unitDurationMs: u.endMs - u.startMs, zeroDuration: u.startMs === u.endMs,
-      individualCharacterAcousticTime: 'not-claimed'};
+      individualCharacterAcousticTime: 'not-claimed',
+      ...(match.endpointPrefixEvidence ? {endpointPrefixEvidence: match.endpointPrefixEvidence} : {})};
   };
   if (initial.status === 'resolved-acoustic-boundary') {
     assert.equal(originalMatches.length, 1);
@@ -53,7 +58,8 @@ export function resolvePhase2CutEndpoint(id: number, side: 'start' | 'end', pare
     const u = matches[0].unit;
     if (!Number.isFinite(u.endMs) || !(u.startMs < u.endMs) || !inside(u.startMs, parent))
       return {...initial, supplementalFailure: 'supplemental-start-nonpositive-nonfinite-or-outside-parent'};
-    return evidence(matches[0], 'supplemental-centered-fixed-text-acoustic-boundary', true);
+    return evidence(matches[0], matches[0].endpointPrefixEvidence
+      ? 'rejected-window-maximal-valid-prefix-start-boundary' : 'supplemental-centered-fixed-text-acoustic-boundary', true);
   }
   if (side === 'end' && initial.reason === 'observed-boundary-not-inside-parent-or-nonpositive-unit'
     && originalMatches.length === 1) {
@@ -148,7 +154,15 @@ export async function loadPhase2EndpointEvidence(jobPath: string) {
   assert.equal(preflight.chunks.length, targets.length); assert.equal(preparation.windows.length, targets.length);
   assert.deepEqual([...preparation.windows.map((r: Json) => r.sourceSegmentId)].sort((a, b) => a - b),
     [...targets].sort((a, b) => a - b));
-  const supplementalChunks: Json[] = [], observationBindings: Json[] = [];
+  const prefixDecisionPath = out(c, 'supplemental-prefix-advisor-decision.json');
+  const prefixDecision = await readJson(prefixDecisionPath);
+  assert.equal(prefixDecision.schemaVersion, 'digest-v1-phase2-prefix-advisor-decision-v001');
+  assert.equal(prefixDecision.decision, 'continue');
+  await checkBytes(prefixDecision.sourceFailureBinding);
+  const prefixFailure = await readJson(prefixDecision.sourceFailureBinding.path);
+  assert.equal(prefixFailure.preflightBinding.fileSha256, execution.preflightBinding.fileSha256);
+  const parents = resolveDigestRetentionParentsV1(c);
+  const supplementalChunks: Json[] = [], observationBindings: Json[] = [], prefixArtifacts: Json[] = [];
   for (const [i, window] of preparation.windows.entries()) {
     const oldUnits = original.chunks.flatMap((chunk: Json) => chunk.units)
       .filter((u: Json) => u.startBoundary?.after === window.sourceSegmentId);
@@ -175,7 +189,38 @@ export async function loadPhase2EndpointEvidence(jobPath: string) {
     assert.equal(observation.preflightBinding.fileSha256, execution.preflightBinding.fileSha256);
     const observationBinding = {path: p, fileSha256: await fileSha(path.join(ROOT, p))};
     observationBindings.push(observationBinding);
-    supplementalChunks.push({...validateAcousticChunkV001(chunk, observation), observationBinding});
+    const savedResult = prefixFailure.results.find((r: Json) => r.chunkIndex === i);
+    assert(savedResult && same(savedResult.observationBinding, observationBinding), 'PHASE2_RAW_OBSERVATION_BINDING_CHANGED');
+    let validatedChunk: Json | null = null;
+    try {validatedChunk = validateAcousticChunkV001(chunk, observation);} catch (error) {
+      assert.equal(String(error), savedResult.reason, 'PHASE2_FULL_REJECTION_CHANGED');
+    }
+    if (validatedChunk) {
+      assert.equal(savedResult.status, 'validated');
+      supplementalChunks.push({...validatedChunk, observationBinding});
+    } else {
+      assert(prefixDecision.allowedTargetSourceSegmentIds.includes(window.sourceSegmentId), 'PHASE2_PREFIX_TARGET_NOT_AUTHORIZED');
+      const affectedParents = parents.filter((parent: Json) => parent.sourceSegmentIds.includes(window.sourceSegmentId));
+      assert(affectedParents.length > 0);
+      const proofs = affectedParents.map((parent: Json) => validateSupplementalEndpointPrefixEvidenceV1(
+        chunk, observation, window.sourceSegmentId, parent, savedResult,
+        {observation: observationBinding, formalText: chunk.rawTextBinding}));
+      assert(proofs.every(proof => same(proof, proofs[0])), 'PHASE2_PREFIX_PARENT_EVIDENCE_DIFFERS');
+      const proof = {...proofs[0], rawObservationBinding: observationBinding,
+        rawPreflightBinding: {path: preflightPath, fileSha256: execution.preflightBinding.fileSha256},
+        formalTextBinding: chunk.rawTextBinding, originalFullRejectionBinding: prefixDecision.sourceFailureBinding,
+        advisorDecisionBinding: bind(prefixDecisionPath, prefixDecision),
+        validatorImplementationBinding: {path: 'evals/clip_composition/digest_acoustic_timing_validation_v001.mts',
+          fileSha256: await fileSha(path.join(ROOT, 'evals/clip_composition/digest_acoustic_timing_validation_v001.mts'))},
+        projectionImplementationBinding: {path: 'evals/clip_composition/digest_v1_phase2_prefix.mts',
+          fileSha256: await fileSha(path.join(ROOT, 'evals/clip_composition/digest_v1_phase2_prefix.mts'))}};
+      const proofPath = out(c, `supplemental-prefix-evidence-chunk-${String(i).padStart(4, '0')}-v001.json`);
+      const proofBinding = bind(proofPath, proof);
+      prefixArtifacts.push({path: proofPath, artifact: proof, binding: proofBinding});
+      supplementalChunks.push({...proof.prefixValidatorResult, observationBinding,
+        endpointPrefixEvidence: {binding: proofBinding, targetSourceSegmentId: window.sourceSegmentId,
+          evidenceScope: proof.evidenceScope, fullValidationStatus: proof.fullValidationStatus}});
+    }
   }
   const originalChunks = original.chunks.map((chunk: Json) => {
     const p = out(c, `acoustics/acoustic-observation-chunk-${String(chunk.chunkIndex).padStart(4, '0')}-v001.json`);
@@ -183,7 +228,7 @@ export async function loadPhase2EndpointEvidence(jobPath: string) {
     assert(binding, 'PHASE2_ORIGINAL_OBSERVATION_BINDING_MISSING');
     return {...chunk, observationBinding: binding};
   });
-  return {...c, decision, decisionBinding: bind(decisionPath, decision), failure,
+  return {...c, decision, decisionBinding: bind(decisionPath, decision), failure, prefixArtifacts,
     original: {kind: 'original' as const, chunks: originalChunks},
     supplemental: {kind: 'supplemental' as const, chunks: supplementalChunks},
     supplementalBindings: {preflight: {path: preflightPath, fileSha256: execution.preflightBinding.fileSha256},
@@ -195,16 +240,57 @@ export async function loadPhase2EndpointEvidence(jobPath: string) {
 export async function executePhase2Endpoints(jobPath: string) {
   const c = await loadPhase2EndpointEvidence(jobPath);
   await requireAbsent(out(c, 'retention-endpoint-resolution-v001.json'));
+  await requireAbsent(out(c, 'retention-adoption.json'));
   const result = resolvePhase2EndpointRanges(c, c.original, c.supplemental);
+  for (const proof of c.prefixArtifacts) await publish(proof.path, proof.artifact);
   const artifact = {schemaVersion: 'digest-v1-phase2-endpoint-resolution-v001', ...result,
     advisorDecisionBinding: c.decisionBinding, originalFailureBinding: bind(out(c, 'retention-range-unresolved.json'), c.failure),
     originalAcousticBinding: c.originalAcousticBinding, supplementalBindings: c.supplementalBindings,
     implementationBinding: {path: implementationPath, fileSha256: await fileSha(path.join(ROOT, implementationPath))},
     answerChanged: false, humanQuality: 'not-evaluated'};
-  await publish(out(c, 'retention-endpoint-resolution-v001.json'), artifact);
+  const resolutionBinding = await publish(out(c, 'retention-endpoint-resolution-v001.json'), artifact);
+  if (result.status === 'resolved')
+    await publish(out(c, 'retention-adoption.json'), buildPhase2RetentionAdoption(c, result, resolutionBinding));
   process.stdout.write(JSON.stringify({status: result.status, unresolved: result.unresolved ?? [],
     candidates: result.candidates?.length ?? 0, ranges: result.segments?.length ?? 0}) + '\n');
   return artifact;
+}
+
+function buildPhase2RetentionAdoption(c: Json, result: Json, resolutionBinding: Json) {
+  assert.equal(result.status, 'resolved');
+  return {schemaVersion: 'candidate-internal-edit-machine-adoption-v001',
+    artifactId: `${c.plan.planId}-retention`, authorityKind: 'C-all-new-retention-validated-source-ranges',
+    planBinding: c.planBinding, authorizationBinding: c.plan.authorization,
+    parentAdoptionBinding: c.candidateSet.origins.formalIdentityCatalog,
+    acousticValidationBinding: c.originalAcousticBinding, endpointResolutionBinding: resolutionBinding,
+    sourceVideoBinding: c.plan.request.sourceVideo, transcriptBinding: c.plan.request.transcript,
+    utteranceBinding: c.plan.request.utterances,
+    judgment: {request: bind(out(c, 'retention-request.json'), c.retentionRequest),
+      response: bind(out(c, 'retention-response.json'), c.retentionResponse),
+      result: bind(out(c, 'retention-result.json'), c.retentionResult)},
+    candidates: result.candidates, segments: result.segments, humanQuality: 'not-evaluated'};
+}
+
+/** 保存済み正式区間を原回答・元観測・限定証拠から再構築して共通後段へ渡す。 */
+export async function loadPhase2ResolvedEndpointContext(jobPath: string) {
+  const c = await loadPhase2EndpointEvidence(jobPath);
+  const resolution = await readJson(out(c, 'retention-endpoint-resolution-v001.json'));
+  await checkBytes(resolution.implementationBinding);
+  const reconstructed = resolvePhase2EndpointRanges(c, c.original, c.supplemental);
+  assert.equal(reconstructed.status, 'resolved');
+  assert(resolution.status === 'resolved' && same(resolution.candidates, reconstructed.candidates)
+    && same(resolution.segments, reconstructed.segments), 'PHASE2_SAVED_ENDPOINT_RESOLUTION_CHANGED');
+  assert(same(resolution.advisorDecisionBinding, c.decisionBinding)
+    && same(resolution.originalFailureBinding, bind(out(c, 'retention-range-unresolved.json'), c.failure))
+    && same(resolution.originalAcousticBinding, c.originalAcousticBinding)
+    && same(resolution.supplementalBindings, c.supplementalBindings), 'PHASE2_ENDPOINT_PROVENANCE_CHANGED');
+  for (const proof of c.prefixArtifacts) assert(same(await readJson(proof.path), proof.artifact), 'PHASE2_PREFIX_ARTIFACT_CHANGED');
+  const retention = await readJson(out(c, 'retention-adoption.json'));
+  assert(same(retention, buildPhase2RetentionAdoption(c, reconstructed,
+    bind(out(c, 'retention-endpoint-resolution-v001.json'), resolution))), 'PHASE2_RETENTION_ADOPTION_CHANGED');
+  return {...c, retention, endpointResolution: resolution,
+    retentionBinding: bind(out(c, 'retention-adoption.json'), retention),
+    candidateSetBinding: bind(out(c, 'candidate-set.json'), c.candidateSet)};
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
