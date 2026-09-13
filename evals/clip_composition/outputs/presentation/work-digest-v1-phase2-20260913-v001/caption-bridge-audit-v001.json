@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "digest-v1-phase2-caption-bridge-audit-v001",
+  "origin": "ZEV進行管理３",
+  "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+  "checkpoint": "a38bd2ea0159e2bbdc6b3c85d1456c0239994139",
+  "responseConfirmedAt": "2026-09-13T17:15:26.596Z",
+  "responseStatus": "レスポンス確認済み",
+  "modelSetting": "既存選択を維持。UI表示は極高。モデル変更なし。",
+  "resendOrRegeneration": false,
+  "decision": {
+    "bridge": "PASS",
+    "rendererAdmission": "PASS",
+    "replayPreparation": "PASS / NOT YET EXECUTED"
+  },
+  "quotes": [
+    "追加のbridge修正は要求しない。",
+    "ただし、このローカル実行権限については実行環境側がkawafmm本人の明示承認を要求しており、ZEV進行管理３の承認では代替できない。",
+    "kawafmm本人からローカル描画再実行の明示承認を受領した場合のみ、準備済み digest_v1_phase2_bridge_draw_replay.mts を1回実行してよい。"
+  ],
+  "recordKind": "監査回答の要点記録。相談役が提示した本人承認文案は、本人承認の受領として扱わない。",
+  "reviewed": [
+    "実815文字の判断来歴",
+    "325字幕・4437本文片・12区間不変",
+    "18/18検査",
+    "12描画前条件",
+    "既存renderer入場条件の維持",
+    "共通描画計画への決定的変換",
+    "再実行設計",
+    "自動審査拒否後の停止"
+  ],
+  "remaining": "本人の明示承認を受領後、同一入力・同一処理を未使用render-bridge-v002へ一回実行し、成功時だけ完成動画・検証保存・最終AUDIT_ONLYへ進む。",
+  "ownerExecutionApprovalReceived": false,
+  "replayStarted": false,
+  "completedVideo": false,
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

@@ -4,6 +4,8 @@
 
 ## 第8回判断と適用範囲
 
+監査用checkpoint `a38bd2ea0159e2bbdc6b3c85d1456c0239994139` をcommit/pushし、ZEV進行管理３へAUDIT_ONLYを送信した。完了した回答を全文確認し、専用接続PASS、描画前入場検査PASS、再実行準備PASS／未実走となった。追加のコード修正要求はない。監査側も、実行環境が本人の明示承認を要求しており、相談役の承認では代替できないと確認した。本人の許可を受領するまで再実行しない。回答要点は `caption-bridge-audit-v001.json` に保存した。既存のモデル選択を維持し、UI表示は「極高」。再送・再生成は不要だった。
+
 ZEV進行管理３はcheckpoint `2e6833329b2418570e85d05b6a6b5e30c1666887` に対して `REJECT-AS-WRITTEN / APPROVE-MODIFIED-BRIDGE` と回答した。「説明文だけ旧384文字へ戻す」当初案は不承認とし、実815文字の指示を正本とする小さいversioned bridgeを承認した。判断の要点は作業出力の `core-caption-bridge-advisor-decision-v001.json` に保存した。
 
 この接続は着工済みPhase 2の内部処理である。既存のsource package・provider selection・instruction・renderer jobの契約は改訂しない。旧provider用のsource packageやselectionを今回の回答について生成しない。旧templateの再利用箇所は表示様式と構造に限定し、実判断の指示として扱わない。
