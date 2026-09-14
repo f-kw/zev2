@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "digest-v1-phase2-style95-preflight-v001",
+  "status": "passed",
+  "implementationBinding": {
+    "path": "evals/clip_composition/digest_v1_phase2_style95.mts",
+    "fileSha256": "6cdeeb1fddcabd0c789b5fdf1b7911159fe9cf86e11424a0a5087556e7982db5"
+  },
+  "decisionBinding": {
+    "schemaVersion": "digest-v1-phase2-style95-application-decision-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/application-decision.json",
+    "fileSha256": "d13adf7e5808ce84cbf20a225c65782afa3c4afca32db37f342c5540013ff086",
+    "canonicalSha256": "fbf226350832c25e919d0a3e49edcfc7d30ae42e8151707630288730b0f67437"
+  },
+  "styleBinding": {
+    "schemaVersion": "presentation-preset-registry-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/preset-registry.json",
+    "fileSha256": "9ddc0be83f15713e5e26a57c2dd2d44c6c06e080bc71721470dfdd4783b56174",
+    "canonicalSha256": "a95261c4fb235c88283a888d0a612ab050f1322054ccd32914723da4bfa7c18f"
+  },
+  "derivationBinding": {
+    "schemaVersion": "digest-v1-phase2-style-derivation-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/derivation.json",
+    "fileSha256": "8329e56b8ebc7ee02c2a810a430dec38644f0d0c06bae3d1c2e49bb8b9719c07",
+    "canonicalSha256": "62beb1f3a0839b8fae0899488ed1a7749b20481c7219e606d1dbc030ecdf8ab5"
+  },
+  "admissionBinding": {
+    "schemaVersion": "digest-v1-phase2-approved-style-admission-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/application-admission.json",
+    "fileSha256": "d1d44c576ae8f82e995b6e738ae0d636d1a12f9bb612e91433019f06c737dd56",
+    "canonicalSha256": "eb7d95ba7cdc72bc22c40218c0a94f21bb03d3d482a17ba25f997467e436903d"
+  },
+  "bridgeBinding": {
+    "schemaVersion": "digest-v1-phase2-caption-bridge-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-v001.json",
+    "fileSha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60",
+    "canonicalSha256": "66fe8faea078d5c6a42dc7ba87aacbac6116610d87b51c9139755eaa78b9ed56"
+  },
+  "planBinding": {
+    "schemaVersion": "presentation-output-common-core-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/common-plan.json",
+    "fileSha256": "9cac7d669eae1f605b7315cf87b0688a1ab6c5d80a255f28f478a6f8224f1b68",
+    "canonicalSha256": "b520563e58af478dd15f889f74bb205e33de8d3ba6acc764f051b23c214710e3"
+  },
+  "layoutInputBinding": {
+    "schemaVersion": "digest-v1-phase2-style95-layout-input-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/layout-input.json",
+    "fileSha256": "8d087b20a58f63822bd6211f627a6167b39fb86d510e0475ecbd899c64f2c333",
+    "canonicalSha256": "99eb2c10fe39a0d86d72b4f270aefe2fce4521aeba63ad813b67ae684feb855d"
+  },
+  "layoutBinding": {
+    "schemaVersion": "presentation-render-layout-inspection-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/layout-result.json",
+    "fileSha256": "803081db1c5448ebae9389b93839e9237afc508858d270f4530302feeeefdb90",
+    "canonicalSha256": "6dff9d9fbbac013d04f118efa881fa52a969597eeb56b2b9bc9af78d8e340b19"
+  },
+  "checks": {
+    "layout325": "passed",
+    "original23": "passed",
+    "original302NewViolations": 0,
+    "bridgeBytes": "unchanged",
+    "commonTextIdsLinesTiming": "unchanged",
+    "baseMediaSha": "unchanged",
+    "styleOnlyFontSizeChanged": "passed"
+  },
+  "rendererOutputRoot": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/render-v001",
+  "rendererStarted": false,
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

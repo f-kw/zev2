@@ -1,0 +1,240 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+import {pathToFileURL} from 'node:url';
+import {ROOT, bind, readJson, readBound, publish, same, fileSha, type Json}
+  from './run_candidate_discovery_digest_skill_e2e_v001.mts';
+import {phase2Out as out, requireAbsent} from './digest_v1_phase2_retention.mts';
+import {loadPhase2BridgeContext, validatePhase2Bridge, inspectPhase2BridgeRenderer} from './digest_v1_phase2_caption_bridge.mts';
+import {buildPresentationInstructionCommonCorePlanV001} from './run_presentation_instruction_renderer_job_v002.ts';
+import {evaluatePresentationRendererQcWithProfileV001} from './presentation_renderer_qc_v002.mjs';
+import {buildPresentationRendererOverlayAdapterV001, executeValidatedPresentationDrawAndQcV001,
+  commitValidatedPresentationArtifactsV002} from './render_presentation_v002.mjs';
+import {createPresentationRendererProcessObserverV001} from './presentation_renderer_process_observation_v001.mjs';
+
+const require = createRequire(import.meta.url);
+const {inspectPresentationRenderLayoutV001} = require('./inspect_presentation_render_layout_v001.ts');
+const sourcePath = 'evals/clip_composition/digest_v1_phase2_style95.mts';
+const styleRoot = (c: Json, name: string) => out(c, `style-95-v001/${name}`);
+const equal = (a: any, b: any, reason: string) => assert(same(a, b), reason);
+const byteBinding = async (p: string) => ({path: p, fileSha256: await fileSha(path.resolve(ROOT, p))});
+const checkBytes = async (b: Json) => assert.equal((await byteBinding(b.path)).fileSha256, b.fileSha256, b.path);
+const readEvidence = async (p: string) => JSON.parse(await readFile(path.resolve(ROOT, p), 'utf8'));
+
+const applicationDecision = Object.freeze({
+  schemaVersion: 'digest-v1-phase2-style95-application-decision-v001', decision: 'APPROVE',
+  source: 'ユーザー発言として受領したZEV進行管理３の適用判断とkawafmm指示',
+  conversationUrl: 'https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4',
+  quotes: ['Phase 2の通常字幕について、fontSizePx: 96 → 95 の正式適用を承認する。',
+    '現在の正式96px styleを正本として保持したまま、Phase 2用にversionedなstyle snapshotまたは派生styleを作成する。',
+    '上記がPASSした場合は、未使用rootへ1回描画する。',
+    'それ以外の、この95px適用に必要な機械的接続修正は承認範囲内で進めてよい。'],
+  visualStateId: 'caption-core-v001', beforeFontSizePx: 96, afterFontSizePx: 95,
+  allowedRenderAttempts: 1, newMeaningJudgments: 0, newAcousticObservations: 0,
+  apiCalls: 0, newMaterials: 0, costUsd: 0, humanQuality: 'not-evaluated', completionApproval: 'not-claimed',
+});
+
+export function derivePhase295Style(parent: Json, profileId: string) {
+  const derived = structuredClone(parent);
+  const profiles = derived.presets.filter((p: Json) => p.presetId === profileId);
+  assert.equal(profiles.length, 1);
+  const states = profiles[0].visualStates.filter((s: Json) => s.stateId === 'caption-core-v001');
+  assert.equal(states.length, 1);
+  assert.equal(states[0].textStyle.fontSizePx, 96);
+  states[0].textStyle.fontSizePx = 95;
+  return derived;
+}
+
+export function validatePhase295Style(parent: Json, derived: Json, profileId: string) {
+  equal(derived, derivePhase295Style(parent, profileId), 'ONLY_APPROVED_FONT_SIZE_CHANGE_IS_ALLOWED');
+}
+
+export function validatePhase295Plan(original: Json, changed: Json) {
+  const reverted = structuredClone(changed);
+  assert.equal(reverted.elements.length, 325);
+  for (const element of reverted.elements) {
+    assert.equal(element.kind, 'speech-caption');
+    assert.equal(element.visualState.stateId, 'caption-core-v001');
+    assert.equal(element.visualState.textStyle.fontSizePx, 95);
+    element.visualState.textStyle.fontSizePx = 96;
+  }
+  equal(reverted, original, 'COMMON_PLAN_CHANGED_OUTSIDE_FONT_SIZE');
+}
+
+async function context(job: string) {
+  const c = await loadPhase2BridgeContext(job);
+  const previousPreflight = await readJson(out(c, 'caption-bridge-preflight-v001.json'));
+  assert.equal(previousPreflight.status, 'passed');
+  await checkBytes(previousPreflight.implementationBinding);
+  const originalTests = await readBound(previousPreflight.negativeTestsBinding);
+  assert.equal(originalTests.status, 'passed');
+  assert(originalTests.cases.every((t: Json) => t.status === 'passed'));
+  await checkBytes(originalTests.testImplementationBinding);
+  const bridge = await readBound(previousPreflight.bridgeBinding);
+  validatePhase2Bridge(bridge, c);
+  equal(originalTests.bridgeBinding, previousPreflight.bridgeBinding, 'BRIDGE_TEST_BINDING_CHANGED');
+  const oldAdmission = await readJson(out(c, 'caption-bridge-admission-v001.json'));
+  equal(await inspectPhase2BridgeRenderer(c, bridge, oldAdmission.mediaInspection), oldAdmission, 'ORIGINAL_ADMISSION_CHANGED');
+  const originalPlan = await readJson(out(c, 'caption-bridge-common-plan-v001.json'));
+  const rebuilt = buildPresentationInstructionCommonCorePlanV001({job: {executionInputs: bridge.executionInputs},
+    visualStateId: bridge.executionInputs.visualStateId, instructionArtifact: bridge.instructionArtifact,
+    lineLayout: bridge.lineLayout, styleProfileRegistry: c.style, rendererTrust: c.trust});
+  assert.equal(rebuilt.status, 'built');
+  equal(rebuilt.plan, originalPlan, 'ORIGINAL_PLAN_CHANGED');
+  const diagnosticPath = out(c, 'physical-fit-probe-v001/summary.json');
+  const diagnostic = await readEvidence(diagnosticPath);
+  assert.equal(diagnostic.status, 'maximum-safe-integer-found');
+  assert.equal(diagnostic.selected.fontSize, 95);
+  assert.equal(diagnostic.selected.original23Resolved, 23);
+  assert.equal(diagnostic.selected.original302NewViolations, 0);
+  for (const b of [diagnostic.implementation, ...diagnostic.immutableFiles]) await checkBytes(b);
+  const diagnostic95Binding = diagnostic.candidates.find((v: Json) => v.fontSize === 95).binding;
+  await checkBytes(diagnostic95Binding);
+  const diagnostic95 = await readEvidence(diagnostic95Binding.path);
+  const originalLayoutPath = out(c, '.render-bridge-v002.presentation-renderer-v002-work-Ahau9u/scratch/layout-input.json');
+  const originalLayout = await readEvidence(originalLayoutPath);
+  return {...c, bridge, bridgeBinding: previousPreflight.bridgeBinding, previousPreflight, oldAdmission,
+    originalPlan, diagnostic, diagnostic95, diagnosticBinding: await byteBinding(diagnosticPath),
+    originalLayout, originalLayoutBinding: await byteBinding(originalLayoutPath)};
+}
+
+function build(c: Json, style: Json) {
+  validatePhase295Style(c.style, style, c.styleProfileId);
+  const common = buildPresentationInstructionCommonCorePlanV001({job: {executionInputs: c.bridge.executionInputs},
+    visualStateId: c.bridge.executionInputs.visualStateId, instructionArtifact: c.bridge.instructionArtifact,
+    lineLayout: c.bridge.lineLayout, styleProfileRegistry: style, rendererTrust: c.trust});
+  assert.equal(common.status, 'built');
+  validatePhase295Plan(c.originalPlan, common.plan);
+  // この段階ではadapterのprops生成だけを使う。runは呼ばれない。
+  const observer = {run: () => {throw new Error('PREFLIGHT_MUST_NOT_RENDER');}};
+  const runtime = c.rendererTemplate.runtimeBindings;
+  const adapter = buildPresentationRendererOverlayAdapterV001({remotionPath: runtime.remotion.path,
+    chromiumPath: runtime.chromium.path, processObserver: observer});
+  const layoutInput = {canvas: common.plan.canvas,
+    overlays: common.plan.elements.map((e: Json) => adapter.buildProps(e, common.plan, style))};
+  const restoredInput = structuredClone(layoutInput);
+  for (const overlay of restoredInput.overlays) overlay.visualState.textStyle.fontSizePx = 96;
+  equal(restoredInput, c.originalLayout, 'LAYOUT_INPUT_CHANGED_OUTSIDE_FONT_SIZE');
+  const layout = inspectPresentationRenderLayoutV001(layoutInput);
+  assert.equal(layout.status, 'passed');
+  assert.equal(layout.items.length, 325);
+  assert.equal(layout.violations.length, 0);
+  equal(layout, c.diagnostic95.result, 'FORMAL_STYLE_LAYOUT_DIFFERS_FROM_DIAGNOSTIC');
+  return {plan: common.plan, layoutInput, layout};
+}
+
+async function prepare(job: string) {
+  const c = await context(job);
+  await requireAbsent(styleRoot(c, ''));
+  const style = derivePhase295Style(c.style, c.styleProfileId);
+  const built = build(c, style);
+  const decisionBinding = await publish(styleRoot(c, 'application-decision.json'), applicationDecision);
+  const styleBinding = await publish(styleRoot(c, 'preset-registry.json'), style);
+  const derivationBinding = await publish(styleRoot(c, 'derivation.json'), {
+    schemaVersion: 'digest-v1-phase2-style-derivation-v001', snapshotId: 'digest-v1-phase2-caption-95px-v001',
+    sourceStyleBinding: c.bridge.registryBindings.styleProfileRegistry, derivedStyleBinding: styleBinding,
+    change: {presetId: c.styleProfileId, visualStateId: 'caption-core-v001', property: 'fontSizePx', before: 96, after: 95},
+    physicalFitDiagnosticBinding: c.diagnosticBinding, applicationDecisionBinding: decisionBinding,
+    sourceRendererTrustBinding: c.bridge.registryBindings.rendererTrust,
+    sourceRendererTrustRole: 'unchanged-layout-rules-fonts-runtime-and-implementation; source-approved-preview-remains-96px',
+    identityPolicy: 'versioned-snapshot-path-and-hash; retained-schema-and-preset-identifiers-do-not-reassign-source-style-bytes',
+    humanQuality: 'not-evaluated', completionApproval: 'not-claimed'});
+  const planBinding = await publish(styleRoot(c, 'common-plan.json'), built.plan);
+  const layoutInputBinding = await publish(styleRoot(c, 'layout-input.json'), {schemaVersion: 'digest-v1-phase2-style95-layout-input-v001', ...built.layoutInput});
+  const layoutBinding = await publish(styleRoot(c, 'layout-result.json'), built.layout);
+  const admissionBinding = await publish(styleRoot(c, 'application-admission.json'), {
+    schemaVersion: 'digest-v1-phase2-approved-style-admission-v001', status: 'passed',
+    originalAdmissionBinding: bind(out(c, 'caption-bridge-admission-v001.json'), c.oldAdmission),
+    bridgeBinding: c.bridgeBinding, semanticProvenance: c.bridge.semanticProvenance,
+    derivedStyleBinding: styleBinding, derivationBinding, applicationDecisionBinding: decisionBinding,
+    planBinding, layoutBinding, baseMediaBinding: c.base.baseMedia,
+    acceptanceBasis: 'unchanged-original-admission-plus-exact-owner-approved-style-derivation-and-all-caption-layout',
+    source96PreviewReinterpretedAs95: false, oldRendererTrustRetargeted: false,
+    humanQuality: 'not-evaluated', completionApproval: 'not-claimed'});
+  await publish(styleRoot(c, 'preflight.json'), {schemaVersion: 'digest-v1-phase2-style95-preflight-v001', status: 'passed',
+    implementationBinding: await byteBinding(sourcePath), decisionBinding, styleBinding, derivationBinding,
+    admissionBinding, bridgeBinding: c.bridgeBinding, planBinding, layoutInputBinding, layoutBinding,
+    checks: {layout325: 'passed', original23: 'passed', original302NewViolations: 0, bridgeBytes: 'unchanged',
+      commonTextIdsLinesTiming: 'unchanged', baseMediaSha: 'unchanged', styleOnlyFontSizeChanged: 'passed'},
+    rendererOutputRoot: styleRoot(c, 'render-v001'), rendererStarted: false,
+    humanQuality: 'not-evaluated', completionApproval: 'not-claimed'});
+  process.stdout.write('95px正式派生style: 325/325配置検査PASS。旧23件解消・302件新規違反0。描画未開始。\n');
+}
+
+async function draw(job: string) {
+  const c = await context(job);
+  const preflight = await readJson(styleRoot(c, 'preflight.json'));
+  assert.equal(preflight.status, 'passed');
+  await checkBytes(preflight.implementationBinding);
+  equal(await readBound(preflight.decisionBinding), applicationDecision, 'APPLICATION_DECISION_CHANGED');
+  const style = await readBound(preflight.styleBinding);
+  const built = build(c, style);
+  equal(await readBound(preflight.planBinding), built.plan, 'APPROVED_PLAN_CHANGED');
+  equal(await readBound(preflight.layoutBinding), built.layout, 'APPROVED_LAYOUT_CHANGED');
+  equal(await readBound(preflight.layoutInputBinding), {schemaVersion: 'digest-v1-phase2-style95-layout-input-v001', ...built.layoutInput}, 'APPROVED_LAYOUT_INPUT_CHANGED');
+  equal(preflight.bridgeBinding, c.bridgeBinding, 'ORIGINAL_BRIDGE_CHANGED');
+  const derivation = await readBound(preflight.derivationBinding);
+  equal(derivation.sourceStyleBinding, c.bridge.registryBindings.styleProfileRegistry, 'SOURCE_STYLE_BINDING_CHANGED');
+  equal(derivation.derivedStyleBinding, preflight.styleBinding, 'DERIVED_STYLE_BINDING_CHANGED');
+  equal(derivation.applicationDecisionBinding, preflight.decisionBinding, 'DERIVATION_APPROVAL_CHANGED');
+  equal(derivation.physicalFitDiagnosticBinding, c.diagnosticBinding, 'DIAGNOSTIC_BINDING_CHANGED');
+  const admission = await readBound(preflight.admissionBinding);
+  assert.equal(admission.status, 'passed');
+  equal(admission.derivedStyleBinding, preflight.styleBinding, 'STYLE_ADMISSION_CHANGED');
+  equal(admission.planBinding, preflight.planBinding, 'PLAN_ADMISSION_CHANGED');
+  equal(admission.semanticProvenance, c.bridge.semanticProvenance, 'SEMANTIC_PROVENANCE_CHANGED');
+  const tests = await readJson(styleRoot(c, 'tests.json'));
+  assert.equal(tests.status, 'passed');
+  assert(tests.cases.every((t: Json) => t.status === 'passed'));
+  await checkBytes(tests.testImplementationBinding);
+  equal(tests.implementationBinding, preflight.implementationBinding, 'TEST_IMPLEMENTATION_CHANGED');
+  equal(tests.styleBinding, preflight.styleBinding, 'TEST_STYLE_CHANGED');
+  for (const n of ['render-v001', 'draw-start.json', 'renderer-result.json', 'verification.json']) await requireAbsent(styleRoot(c, n));
+  const startBinding = await publish(styleRoot(c, 'draw-start.json'), {
+    schemaVersion: 'digest-v1-phase2-style95-draw-start-v001', preflightBinding: bind(styleRoot(c, 'preflight.json'), preflight),
+    testsBinding: bind(styleRoot(c, 'tests.json'), tests), styleBinding: preflight.styleBinding, bridgeBinding: c.bridgeBinding,
+    rendererOutputRoot: preflight.rendererOutputRoot, attempts: 1, oldFailureArtifactsRetained: true});
+  const runtime = c.rendererTemplate.runtimeBindings;
+  const processObserver = createPresentationRendererProcessObserverV001({observationDirectory: path.join(ROOT, styleRoot(c, 'process-observations'))});
+  process.stdout.write('95px正式派生style: 325字幕の描画を1回開始。\n');
+  const result = await executeValidatedPresentationDrawAndQcV001({outputDirectory: path.join(ROOT, preflight.rendererOutputRoot),
+    plan: built.plan, presetRegistry: style, baseMediaPath: path.join(ROOT, c.base.baseMedia.path),
+    baseMediaInspection: {media: c.oldAdmission.mediaInspection}, expectedFrameCount: c.timeline.baseMedia.expectedFrameCount,
+    evaluateQc: (input: Json) => evaluatePresentationRendererQcWithProfileV001(input, {
+      schemaVersion: 'presentation-render-qc-v002', planFile: 'presentation-render-plan-v002.json'}),
+    toolPaths: {ffmpegPath: runtime.ffmpeg.path, ffprobePath: runtime.ffprobe.path, imageMagickPath: runtime.imageMagick.path,
+      tsxPath: runtime.tsx.path, layoutInspectorPath: path.join(ROOT, 'evals/clip_composition/inspect_presentation_render_layout_v001.ts')},
+    overlayAdapter: buildPresentationRendererOverlayAdapterV001({remotionPath: runtime.remotion.path,
+      chromiumPath: runtime.chromium.path, processObserver}), processObserver});
+  if (result.exitCode !== 0 || result.finalQc?.status !== 'passed') {
+    await publish(styleRoot(c, 'renderer-result.json'), {schemaVersion: 'digest-v1-phase2-style95-renderer-result-v001',
+      status: 'failed', startBinding, styleBinding: preflight.styleBinding, exitCode: result.exitCode, result});
+    throw new Error('PHASE2_STYLE95_RENDER_OR_QC_FAILED');
+  }
+  const publication = await commitValidatedPresentationArtifactsV002({stagingDirectory: result.stagingDirectory,
+    outputDirectory: result.outputDirectory, reservation: result.reservation});
+  const video = await byteBinding(styleRoot(c, 'render-v001/presentation-rendered-v002.mp4'));
+  const executionBinding = await publish(styleRoot(c, 'renderer-result.json'), {
+    schemaVersion: 'digest-v1-phase2-style95-renderer-result-v001', status: 'completed', startBinding,
+    styleBinding: preflight.styleBinding, derivationBinding: preflight.derivationBinding, bridgeBinding: c.bridgeBinding,
+    planBinding: preflight.planBinding, layoutBinding: preflight.layoutBinding, exitCode: 0, qc: result.finalQc, publication, video});
+  await publish(styleRoot(c, 'verification.json'), {schemaVersion: 'digest-v1-phase2-style95-verification-v001', status: 'technical-checkpoint',
+    jobBinding: c.planBinding, styleBinding: preflight.styleBinding, derivationBinding: preflight.derivationBinding,
+    bridgeBinding: c.bridgeBinding, semanticProvenance: c.bridge.semanticProvenance,
+    planBinding: preflight.planBinding, layoutBinding: preflight.layoutBinding, renderer: {executionBinding, video, qc: 'passed'},
+    baseMediaBinding: c.base.baseMedia, counts: {prospects: c.candidateSet.candidates.length,
+      retainedRanges: c.adoption.segments.length, captions: c.timing.cues.length, atoms: c.text.textInput.atomOccurrences.length},
+    frameCount: c.timeline.baseMedia.expectedFrameCount, durationSeconds: c.timeline.baseMedia.expectedFrameCount / built.plan.canvas.fps,
+    operations: {newMeaningJudgments: 0, newAcousticObservations: 0, apiCalls: 0, newMaterials: 0, costUsd: 0},
+    humanQuality: 'not-evaluated', completionApproval: 'not-claimed'});
+  process.stdout.write(`95px正式派生style: technical QC PASS。${JSON.stringify(video)}\n`);
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  const [mode, job] = process.argv.slice(2);
+  assert(['prepare', 'draw'].includes(mode) && job, 'usage: style95.mts prepare|draw <job>');
+  (mode === 'prepare' ? prepare(job) : draw(job)).catch(error => {
+    process.stderr.write(`${error.stack ?? error}\n`); process.exitCode = 1;
+  });
+}

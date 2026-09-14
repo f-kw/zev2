@@ -1,0 +1,110 @@
+TAP version 13
+# Subtest: 正式派生styleは元styleの文字サイズ1項目だけを変更する
+ok 1 - 正式派生styleは元styleの文字サイズ1項目だけを変更する
+  ---
+  duration_ms: 33.493959
+  ...
+# Subtest: 派生styleの旧96px改変を拒否する
+ok 2 - 派生styleの旧96px改変を拒否する
+  ---
+  duration_ms: 2.254292
+  ...
+# Subtest: 派生styleの未承認94px改変を拒否する
+ok 3 - 派生styleの未承認94px改変を拒否する
+  ---
+  duration_ms: 0.409375
+  ...
+# Subtest: 派生styleの書体改変を拒否する
+ok 4 - 派生styleの書体改変を拒否する
+  ---
+  duration_ms: 0.379375
+  ...
+# Subtest: 派生styleの縁取り改変を拒否する
+ok 5 - 派生styleの縁取り改変を拒否する
+  ---
+  duration_ms: 0.316167
+  ...
+# Subtest: 派生styleのglow改変を拒否する
+ok 6 - 派生styleのglow改変を拒否する
+  ---
+  duration_ms: 0.300166
+  ...
+# Subtest: 派生styleの行間隔改変を拒否する
+ok 7 - 派生styleの行間隔改変を拒否する
+  ---
+  duration_ms: 0.341292
+  ...
+# Subtest: 派生styleの配置改変を拒否する
+ok 8 - 派生styleの配置改変を拒否する
+  ---
+  duration_ms: 0.342083
+  ...
+# Subtest: 派生styleのsafe area改変を拒否する
+ok 9 - 派生styleのsafe area改変を拒否する
+  ---
+  duration_ms: 0.401458
+  ...
+# Subtest: 派生styleの行上限改変を拒否する
+ok 10 - 派生styleの行上限改変を拒否する
+  ---
+  duration_ms: 0.403709
+  ...
+# Subtest: 派生styleのtransition改変を拒否する
+ok 11 - 派生styleのtransition改変を拒否する
+  ---
+  duration_ms: 0.362333
+  ...
+# Subtest: 派生styleの別stateの変更改変を拒否する
+ok 12 - 派生styleの別stateの変更改変を拒否する
+  ---
+  duration_ms: 0.373458
+  ...
+# Subtest: 描画計画の本文改変を拒否する
+ok 13 - 描画計画の本文改変を拒否する
+  ---
+  duration_ms: 32.825
+  ...
+# Subtest: 描画計画の正式ID改変を拒否する
+ok 14 - 描画計画の正式ID改変を拒否する
+  ---
+  duration_ms: 33.303584
+  ...
+# Subtest: 描画計画の順序改変を拒否する
+ok 15 - 描画計画の順序改変を拒否する
+  ---
+  duration_ms: 33.162209
+  ...
+# Subtest: 描画計画の改行改変を拒否する
+ok 16 - 描画計画の改行改変を拒否する
+  ---
+  duration_ms: 32.515667
+  ...
+# Subtest: 描画計画の字幕時刻改変を拒否する
+ok 17 - 描画計画の字幕時刻改変を拒否する
+  ---
+  duration_ms: 32.836583
+  ...
+# Subtest: 描画計画のfont weight改変を拒否する
+ok 18 - 描画計画のfont weight改変を拒否する
+  ---
+  duration_ms: 33.054792
+  ...
+# Subtest: 描画計画のcanvas改変を拒否する
+ok 19 - 描画計画のcanvas改変を拒否する
+  ---
+  duration_ms: 33.885292
+  ...
+# Subtest: 正式layout325件合格と改変拒否検査を実装へ束縛して保存する
+ok 20 - 正式layout325件合格と改変拒否検査を実装へ束縛して保存する
+  ---
+  duration_ms: 9.994083
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 647.599417
