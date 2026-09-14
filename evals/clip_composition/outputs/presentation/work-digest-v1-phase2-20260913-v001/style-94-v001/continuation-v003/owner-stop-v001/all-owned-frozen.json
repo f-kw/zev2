@@ -1,0 +1,35 @@
+{
+  "at": "2026-09-14T06:14:40.924034+00:00",
+  "action": "SIGSTOP to verified owned process group only",
+  "pgid": 80314,
+  "processes": [
+    {
+      "pid": "5178",
+      "ppid": "80314",
+      "pgid": "80314",
+      "state": "S",
+      "executable": "node"
+    },
+    {
+      "pid": "5181",
+      "ppid": "5178",
+      "pgid": "80314",
+      "state": "S",
+      "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node"
+    },
+    {
+      "pid": "5182",
+      "ppid": "5181",
+      "pgid": "80314",
+      "state": "R",
+      "executable": "/opt/homebrew/bin/ffmpeg"
+    },
+    {
+      "pid": "80314",
+      "ppid": "2062",
+      "pgid": "80314",
+      "state": "Ts",
+      "executable": "node"
+    }
+  ]
+}

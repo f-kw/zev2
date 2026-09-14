@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "digest-v1-phase2-final-visibility-owner-stop-request-v001",
+  "authority": "kawafmmによる今回の明示user指示",
+  "decision": "STOP CURRENT FINAL VISIBILITY QC",
+  "reasonAsStatedByOwner": "現行方式では完了まで100時間以上かかる見込みであり、Digest v1の完成工程として実用的でない。",
+  "reasonAttribution": "上記時間見込みはkawafmmの中止判断の引用であり、Codexが今回独自に算出した見積りではない。",
+  "stopScope": [
+    "字幕ごとのcounterfactual encode",
+    "representative frame decode",
+    "final visibility comparison"
+  ],
+  "retention": "94px style、配置・実画像全件合格、決定性・保存byte証拠、正常終了した主MP4とSHA、完了比較、全process log、work、lock、診断、過去証拠を削除・上書きしない。自動cleanup禁止。",
+  "nextAction": "停止証拠をcommit/push後、Digest v1で325回counterfactual検査を必須条件から外し実用的最終QCへ置き換える設計をZEV進行管理３へGPT_DECISION。判断前のQC再開・sampling変更・省略を合格扱い・renderer変更・再描画は禁止。",
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

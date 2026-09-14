@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "digest-v1-phase2-static-diagnosis-close-decision-v001",
+  "sourceSession": "ZEV進行管理３",
+  "sourceUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+  "browser": "Microsoft Edge",
+  "modelSelection": "極高を維持。モデル変更なし。",
+  "responseStatus": "レスポンス確認済み",
+  "resendCount": 0,
+  "checkpoint": "08b32b0b5877e7c7398c47f767703ca5f994fea7",
+  "diagnosisBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/final-qc-static-equivalence-diagnosis-v001.json",
+    "fileSha256": "dbf0cc5f9454f59feb22a536fd8ca147d2388f46c83d6e29af021cd4223dab16"
+  },
+  "mainCompletionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/main-composite-completion-v001.json",
+    "fileSha256": "eb23731782e7906abbb90b5949b395733647d2fc2cb0d579847c0a75c0b64c58"
+  },
+  "decision": "CONTINUE CURRENT RUN / CLOSE STATIC DIAGNOSIS",
+  "instructions": [
+    "現在実行中の同一processで出力検査・全325件の最終可視性検査・最終技術QCを最後まで続行する。signal送信・設定変更・方式変更・別run起動は行わない。",
+    "静的診断は完了。独立した325回の符号化を減らし同じ結果を保証する方法は未証明。旧024の無損失方式を今回へ適用しない。欠けているsourceの復旧、新probe、renderer/QC変更、追加encodeは行わない。",
+    "全件PASS後は、最終QC保存・byte readback・MP4正式出力確定・frame count/video/audio確認・MP4 SHA保存・verification・監査checkpoint commit/pushまで自律続行する。",
+    "その後にPhase 2第一完成 AUDIT_ONLYをZEV進行管理３へ自動提出する。途中の追加確認は不要。",
+    "機械的失敗の場合だけ、診断・失敗段階・完了した可視性検査件数・process証拠・MP4と中間成果物の状態を保存し、ZEV進行管理３へ自動GPT_DECISION。QCの削減・省略・sampling化は行わない。"
+  ],
+  "performanceDebt": "長尺・多数字幕の最終可視性検査は325回の独立counterfactual encodeを必要とし、実行量が大きい。同値な削減方式は未証明。旧024の無損失保存系をDigest v1後の候補として残す。この課題をPhase 2完成条件へ追加しない。",
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

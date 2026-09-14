@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "digest-v1-phase2-final-visibility-owner-stop-v001",
+  "status": "render-completed / raster-qc-passed / exhaustive-final-visibility-qc-stopped-by-owner",
+  "ownerDecision": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/owner-stop-v001/owner-decision.json",
+    "fileSha256": "38528ecd080472ae6de421aae6ef7531908eae79f32ad06e5b1298b0e12289c7",
+    "bytes": 1265
+  },
+  "newProcessLaunchBlockedAt": "2026-09-14T06:13:18.558487+00:00",
+  "terminationSignalsSentAt": "2026-09-14T06:15:41.043039+00:00",
+  "allTargetProcessesEndedBy": "2026-09-14T06:16:21.728242+00:00",
+  "recordedAt": "2026-09-14T06:19:19.890226+00:00",
+  "counts": {
+    "total": 325,
+    "finalVisibilityCompleted": 6,
+    "completedPositive": 6,
+    "incomplete": 319,
+    "interruptedInProgress": 1,
+    "notStarted": 318
+  },
+  "instructionInProgress": "digest-v1-phase2-20260913-v001-bridge-caption-000007",
+  "representativeFrameInProgress": 547,
+  "main": {
+    "status": "normally-completed-before-owner-stop",
+    "video": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+      "bytes": 616632321
+    },
+    "processExitCode": 0,
+    "signal": null,
+    "completionProof": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/main-composite-completion-v001.json",
+      "fileSha256": "eb23731782e7906abbb90b5949b395733647d2fc2cb0d579847c0a75c0b64c58",
+      "bytes": 2681
+    }
+  },
+  "rasterQc": {
+    "status": "passed",
+    "instructionCount": 325,
+    "binding": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/raster-qc.json",
+      "fileSha256": "1910bcfc150a8a186ac0ba39c3b314fd60e15b151877058dc8dd51e976e19085",
+      "bytes": 456963
+    },
+    "savedByteReadback": "passed-before-owner-stop",
+    "deterministicAndRetainedImageHashCheck": "all1022-unchanged-after-stop"
+  },
+  "layoutQc": {
+    "status": "passed",
+    "instructionCount": 325,
+    "binding": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/layout-result.json",
+      "fileSha256": "a7e8413e324bd697005536bb27e652fac574db74a72449123c9a2dec8f9f4b93",
+      "bytes": 141197
+    }
+  },
+  "styleBinding": {
+    "schemaVersion": "presentation-preset-registry-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/preset-registry.json",
+    "fileSha256": "9ae9208bccc8b75d798ab1ae2f2f21ea275d96121a844c04b4dae1889bcd4c7d",
+    "canonicalSha256": "e83b65c8416231d65663a87a91eac583db34ac79efd8bf6161f32ad08b53ecb8"
+  },
+  "processClosure": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/owner-stop-v001/process-closure.json",
+    "fileSha256": "25f67ae3b0dd79d58f2f87ba642a44f492977fde9a0f95ead90e05d1c5a94996",
+    "bytes": 594
+  },
+  "rootExitCode": 143,
+  "requestedTerminationSignal": "SIGTERM",
+  "individualChildExitCodes": "not-observed; do not fabricate",
+  "preservedEvidence": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/owner-stop-v001/retained-raster-and-qc-evidence.json",
+    "fileSha256": "23b4aa2835debfcf21e8e54347918fb6dc8892918a0ffd534cc4e46020c19098",
+    "bytes": 477629
+  },
+  "exhaustiveFinalVisibilityQc": "incomplete-stopped-by-owner",
+  "technicalFinalVisibilityQcComplete": false,
+  "finalQcSnapshotExists": false,
+  "formalPublicationPerformed": false,
+  "verificationExists": false,
+  "automaticCleanupPerformed": false,
+  "mainVideoInvalidated": false,
+  "newEncodeOrDecodeAfterParentFreeze": 0,
+  "newRendererChanges": 0,
+  "newDrawing": 0,
+  "apiCalls": 0,
+  "costUsd": 0,
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

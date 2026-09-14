@@ -1,0 +1,42 @@
+{
+  "at": "2026-09-14T06:15:41.041687+00:00",
+  "authority": "kawafmm STOP CURRENT FINAL VISIBILITY QC",
+  "verifiedProcessGroup": 80314,
+  "processesBeforeTermination": [
+    {
+      "pid": "5178",
+      "ppid": "80314",
+      "pgid": "80314",
+      "state": "T",
+      "executable": "node"
+    },
+    {
+      "pid": "5181",
+      "ppid": "5178",
+      "pgid": "80314",
+      "state": "T",
+      "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node"
+    },
+    {
+      "pid": "5182",
+      "ppid": "5181",
+      "pgid": "80314",
+      "state": "T",
+      "executable": "/opt/homebrew/bin/ffmpeg"
+    },
+    {
+      "pid": "80314",
+      "ppid": "2062",
+      "pgid": "80314",
+      "state": "Ts",
+      "executable": "node"
+    }
+  ],
+  "terminationSequence": [
+    "SIGTERM to stopped owned group",
+    "SIGCONT to deliver pending termination only"
+  ],
+  "purpose": "停止済み検査processに終了signalを配送するためだけにSIGCONTを送る。325件QCの再開ではない。親NodeへもSIGTERMを先にpendingにし、新しいencode/decodeへ進めない。",
+  "automaticCleanup": "not-invoked",
+  "bufferedUnsavedDiagnostics": "中止時にprocess内メモリだけにあった未保存bufferの回収は保証しない。既存の全保存ログと部分成果物は不変保持する。"
+}

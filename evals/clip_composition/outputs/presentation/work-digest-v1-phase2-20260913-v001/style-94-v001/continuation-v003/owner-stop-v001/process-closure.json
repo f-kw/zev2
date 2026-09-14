@@ -1,0 +1,15 @@
+{
+  "observedAt": "2026-09-14T06:16:21.728242+00:00",
+  "remainingTargetProcesses": [],
+  "unifiedExecSession": 58422,
+  "observedRootExitCode": 143,
+  "rootExitMeaning": "128 + SIGTERM(15)。実行session終了値の実観測。",
+  "signalsSent": [
+    "SIGSTOP to parent80314",
+    "SIGSTOP to verified group80314",
+    "SIGTERM to group80314",
+    "SIGCONT to deliver pending SIGTERM"
+  ],
+  "descendantExitCodes": "直接waitできる子ではないため個別の実終了値は未観測。送信signalとprocess不在確認を区別する。",
+  "status": "all-target-processes-ended"
+}

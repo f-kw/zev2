@@ -1,5 +1,7 @@
 # ダイジェストv1 Phase 2 — 94px正式派生styleと実画像検査
 
+2026-09-14 JST。**kawafmm判断で全325件の最終可視性検査を中止し、対象processはすべて終了した。比較完了6件、中止1件、未着手318件。主合成済みMP4と配置・実画像325/325 PASSは保持している。** 状態は render-completed / raster-qc-passed / exhaustive-final-visibility-qc-stopped-by-owner。人間品質は未評価、完成承認は未申告。[停止・保持の記録](digest-v1-phase2-final-visibility-owner-stop-20260914.md)を現在地とする。以下の続行記述は中止前の判断履歴として保持する。
+
 2026-09-14 JST。ZEV進行管理３の **APPROVE / CONTINUE** に基づき、通常字幕325件の文字サイズを一律94pxにした新しい派生版を作成した。配置計算は325/325 PASS、正常経路・改変拒否・記録保存のテストは20/20 PASS。全325件の実画像QCもPASSし、字幕282のはみ出しは解消した。初回は追加したQC保存処理が保存後の文字列とBufferを誤比較して合成前停止した。その後、ZEV進行管理３の限定修正・全再描画承認を受け、新しい継続処理の局所8/8検査と配置325/325を通過し、第2出力先へ全件を再描画した。実画像325/325と保存後byte照合も合格したが、動画合成の画像変換初期化が資源不足で停止した。その停止を相談役へ提出し、既存のPNG復号・複合filterの並列数を抑える実行設定が承認された。命令差分の限定検査・局所9/9・配置325/325を通過し、第3出力先への全325字幕の新規描画・実画像QC・保存後byte照合も通過した。主合成は終了0・signalなしで完了し、616,632,321byteの字幕付きMP4とSHAを保存した。既存の出力検査・全325件の最終可視性検査へ続行している。最終QC・正式出力先への確定・verificationは未完了。
 
 ## 判断と変更範囲
@@ -116,3 +118,5 @@ checkpoint `0d5673bdcd080e416246a20449cebb1d6cc5a26c` でZEV進行管理３へ�
 ## 主合成の正常終了
 
 静的診断中に第3回の主合成が終了0・signalなしで完了した。字幕付きMP4は616,632,321byte、SHA-256は `665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34`。終了記録と固定後の映像SHAを `continuation-v003/main-composite-completion-v001.json` に保存した。同じ実行processが出力映像・音声の検査と既存325件の最終可視性検査へ続行する。最終QC・正式出力先への確定・verificationはまだ未完了で、主合成の完了をPhase 2完成とは扱わない。
+
+checkpoint `08b32b0b5877e7c7398c47f767703ca5f994fea7` をpushして静的診断を提出し、ZEV進行管理３の **CONTINUE CURRENT RUN / CLOSE STATIC DIAGNOSIS** を受領した。今回は再送なしで生成完了と全文を確認した。診断は終了し、旧024の方式や欠落sourceの復旧・追加試験へは進まない。現行の同一processで全件検査を続行し、全件PASS後の正式出力確定・verification・最終監査までの途中確認は不要とされた。性能改善の候補はDigest v1後の課題としてこの記録へ残し、Phase 2完成条件へ追加しない。判断記録は `continuation-v003/final-qc-static-diagnosis-close-decision-v001.json`。

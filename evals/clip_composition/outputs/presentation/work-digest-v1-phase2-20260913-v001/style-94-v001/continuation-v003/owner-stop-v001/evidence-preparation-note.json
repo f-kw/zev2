@@ -1,0 +1,6 @@
+{
+  "cause": "最初の証拠一覧製造でlockを通常fileとしてhashしようとしてIsADirectoryError。",
+  "correction": "現物は3個ともdirectoryであり、directoryとして保持し、内部fileだけをhashする。",
+  "effect": "検査processは既に終了済み。主MP4・画像・ログ・work・lockの変更やcleanupはなし。owner-decision.jsonは初回作成済みのbyteを再使用し、上書きなし。",
+  "status": "evidence-record-created-after-correction"
+}
