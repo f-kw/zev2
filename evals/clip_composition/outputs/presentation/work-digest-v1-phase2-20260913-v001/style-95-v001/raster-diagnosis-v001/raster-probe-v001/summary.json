@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "digest-v1-phase2-isolated-raster-probe-v001",
+  "status": "maximum-safe-integer-found",
+  "diagnosticOnly": true,
+  "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000282",
+  "diagnosisDecisionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/diagnosis-decision-v001.json",
+    "fileSha256": "c73c3785339e868bb1369b88ed3cc99ef4832c9cb4cc1d371ac0153d5477025a"
+  },
+  "causeMeasurementBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/measurement.json",
+    "fileSha256": "9ec395c203f00de276435137bf44e6a1f523d5b6fa052cf58d850985f0287990"
+  },
+  "svgMeasurementBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/svg-measurement.json",
+    "fileSha256": "f2ad78444a44de24d9182cf0ff0ef95fc458ab2d51912e54417e9c44f194fd61"
+  },
+  "existing95RasterFailureBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/renderer-result.json",
+    "fileSha256": "a0c406cf57469ef5c266203f7c7d236af8627d79914b0d360876a365db94b111"
+  },
+  "sourceFormalStyleBinding": {
+    "schemaVersion": "presentation-preset-registry-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/preset-registry.json",
+    "fileSha256": "9ddc0be83f15713e5e26a57c2dd2d44c6c06e080bc71721470dfdd4783b56174",
+    "canonicalSha256": "a95261c4fb235c88283a888d0a612ab050f1322054ccd32914723da4bfa7c18f"
+  },
+  "implementationBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/isolated-probe.mts",
+    "fileSha256": "4e00f8f82c89e12bc97441d5e77af47f335481c6688da6db4b18560bcd17dfe0"
+  },
+  "probes": [
+    {
+      "fontSizePx": 94,
+      "status": "passed",
+      "bounds": {
+        "left": 88,
+        "top": 844,
+        "right": 1834,
+        "bottom": 975,
+        "width": 1746,
+        "height": 131
+      },
+      "resultBinding": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/raster-probe-v001/font-94-result.json",
+        "fileSha256": "a0c91ed65001e63871a210757e1d81964164747c3654cd4a651ee966b9d1631c"
+      }
+    }
+  ],
+  "selectedFontSizePx": 94,
+  "maximality": "95pxの既存実画像不合格を上限根拠にし、94pxから1pxずつ降順に同じ字幕だけを描画。既存QCの最初のPASSで停止。",
+  "operations": {
+    "isolatedProbeSizes": 1,
+    "fullCaptionDraws": 0,
+    "videoComposites": 0,
+    "formalStyleChanges": 0,
+    "newMeaningJudgments": 0,
+    "newAcousticObservations": 0,
+    "apiCalls": 0,
+    "newMaterials": 0,
+    "costUsd": 0
+  },
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

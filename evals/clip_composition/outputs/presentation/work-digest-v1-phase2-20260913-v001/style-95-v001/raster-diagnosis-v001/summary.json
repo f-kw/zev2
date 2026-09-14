@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "digest-v1-phase2-raster-diagnosis-summary-v001",
+  "status": "cause-isolated-and-single-caption-maximum-safe-size-measured",
+  "decisionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/diagnosis-decision-v001.json",
+    "fileSha256": "c73c3785339e868bb1369b88ed3cc99ef4832c9cb4cc1d371ac0153d5477025a"
+  },
+  "metricMeasurementBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/measurement.json",
+    "fileSha256": "9ec395c203f00de276435137bf44e6a1f523d5b6fa052cf58d850985f0287990"
+  },
+  "svgMeasurementBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/svg-measurement.json",
+    "fileSha256": "f2ad78444a44de24d9182cf0ff0ef95fc458ab2d51912e54417e9c44f194fd61"
+  },
+  "isolatedProbeBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/raster-probe-v001/summary.json",
+    "fileSha256": "09253f19306cf6b7f6655e5b2bfb4623ccbe4566970507364e7da5c809514db8"
+  },
+  "permissionResolutionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-probe-permission-resolution-v001.json",
+    "fileSha256": "54c7caff6809b799c82d02fbdbb92ee2fceed89adb2dfe96592b27da3518b26b"
+  },
+  "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000282",
+  "text": "なにする?どうする?なにする?どうする?",
+  "finding": "Nodeで文字種から求める推定幅が、同じ正式フォントを使うbrowser/SVGの実幅を下回った。実描画の文字幅と既存の縁取り・glowを合わせると安全領域を超える。font読込み正常、同一font・文字サイズ・太さを確認。既存の位置・transform・描画コードは変更していない。",
+  "measurements95": {
+    "logicalWidth": 36,
+    "nodeEstimatedWidthPx": 1710,
+    "canvasAdvanceWidthPx": 1762.06005859375,
+    "canvasInkWidthPx": 1753.2249755859375,
+    "svgAdvanceWidthPx": 1731.671875,
+    "nodeWrapper": {
+      "top": 813.2,
+      "left": 81,
+      "width": 1758,
+      "height": 162,
+      "contentOffsetX": 0,
+      "contentOffsetY": 0
+    },
+    "browserWrapper": {
+      "top": 813.2,
+      "left": 80,
+      "width": 1811,
+      "height": 162,
+      "contentOffsetX": 0,
+      "contentOffsetY": 0
+    },
+    "rasterAlphaBounds": {
+      "left": 88,
+      "top": 843,
+      "right": 1853,
+      "bottom": 975,
+      "width": 1765,
+      "height": 132
+    },
+    "fontStatus": "loaded",
+    "fontCheck": true
+  },
+  "probe94": {
+    "fullPropsMatchAfterRestoring95": true,
+    "alphaBounds": {
+      "left": 88,
+      "top": 844,
+      "right": 1834,
+      "bottom": 975,
+      "width": 1746,
+      "height": 131
+    },
+    "lineAlphaBounds": [
+      {
+        "lineIndex": 0,
+        "left": 88,
+        "top": 844,
+        "right": 1834,
+        "bottom": 975,
+        "width": 1746,
+        "height": 131
+      }
+    ],
+    "existingQc": "passed",
+    "violations": [],
+    "pngBinding": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/raster-probe-v001/overlays/font-94.png",
+      "fileSha256": "892b96363c7d21300dd1bf0f7e35789dcb0375555daeb46dfc88e2571ea673d6"
+    },
+    "linePngBinding": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/raster-probe-v001/font-94-line-01.png",
+      "fileSha256": "892b96363c7d21300dd1bf0f7e35789dcb0375555daeb46dfc88e2571ea673d6"
+    },
+    "observedProcessCount": 6,
+    "allExitZeroAndSignalNone": true
+  },
+  "maxSafeIntegerForThisCaptionAtOrBelow95": 94,
+  "generalizationLimit": "94pxで実画像を検査したのは字幕282だけ。残324字幕や完成MP4の合格を主張しない。Nodeの配置計算と実画像のQCは別々に確認する必要がある。",
+  "formalStyleStill95": true,
+  "next": "ZEV進行管理３へGPT_DECISIONを自動提出し、新しい正式派生style・325全実画像検査・MP4製造へ進めるか判断を受ける。",
+  "operations": {
+    "diagnosticFontSizes": 1,
+    "newPngs": 2,
+    "fullCaptionDraws": 0,
+    "videoComposites": 0,
+    "formalStyleChanges": 0,
+    "newMeaningJudgments": 0,
+    "newAcousticObservations": 0,
+    "apiCalls": 0,
+    "newMaterials": 0,
+    "costUsd": 0
+  },
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

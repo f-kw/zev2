@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "digest-v1-phase2-raster-diagnosis-decision-v001",
+  "questionType": "GPT_DECISION",
+  "conversationTitle": "ZEV進行管理３",
+  "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+  "checkpoint": "8da60f2260b4152716c657c739a4f1b705153ead",
+  "decision": "DIAGNOSE / CONTINUE",
+  "responseConfirmed": true,
+  "responseRegenerated": false,
+  "selectedReasoningUi": "極高",
+  "modelChanged": false,
+  "scope": {
+    "A": "字幕282の同一overlay propsと同一fontでNode推定幅・browser CanvasTextMetrics・既存measureTextLine・buildExactTextModel・SVGと外枠・行範囲・既存PNG alphaを比較する。",
+    "B": "Aでfont-size依存の実字幅差が原因と確定した場合のみ、字幕282だけを95pxより1pxずつ小さい診断値で既存renderer描画し、最初に実PNGがsafe-area PASSする最大整数を求める。PNG SHA・alpha・propsを保存。",
+    "after": "原因と必要最小限の診断結果をZEV進行管理３へGPT_DECISIONで自動提出する。正式style追加変更・325全件再描画・映像合成は開始しない。"
+  },
+  "prohibited": [
+    "本文・ID・cue境界・line境界・字幕時刻変更",
+    "safe area・border・glow・font・position・renderer/QC変更",
+    "815文字request・bridge・base変更",
+    "shared registry・formal style変更",
+    "全件再描画・video composite",
+    "意味判断・音響再観測・API通信・新素材・費用"
+  ],
+  "quotes": [
+    "字幕282だけを対象とする費用0の限定診断を承認する。",
+    "Node layout PASSを実画素PASSとして扱わない。",
+    "正式styleは変更しない。",
+    "Phase 2完成を優先し、この場で汎用renderer architecture改修へ拡大しない。"
+  ],
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

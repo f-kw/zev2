@@ -1,0 +1,907 @@
+{
+  "schemaVersion": "digest-v1-phase2-existing-svg-measurement-v001",
+  "status": "measured",
+  "priorMeasurementBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/measurement.json",
+    "fileSha256": "9ec395c203f00de276435137bf44e6a1f523d5b6fa052cf58d850985f0287990"
+  },
+  "propsBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/overlay-props.json",
+    "fileSha256": "928fd6dffcfd7402816e1073730eed69bee2490e7f84f05a53c70a3c24a35ec8"
+  },
+  "sourceBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/svg-metrics.mjs",
+    "fileSha256": "3e56aeecafbd9b1428de2537f7a680c505fb6e6b923849ce7eda7ea51c3773e7"
+  },
+  "sourceBindings": [
+    {
+      "path": "node_modules/.pnpm/react@18.3.1/node_modules/react/cjs/react.production.min.js",
+      "fileSha256": "4b35e378f469c4f492c7514bb106b5833746dbbae80496bd4aa9acc6e9ac4b42"
+    },
+    {
+      "path": "node_modules/.pnpm/react@18.3.1/node_modules/react/index.js",
+      "fileSha256": "a216c390bf956cbb906c66d29fdb2e2ad6999464a5ca83e476533a6f25ad0ef3"
+    },
+    {
+      "path": "node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.min.js",
+      "fileSha256": "55f08e1c365fa1525359467e68f72bf50f901a7c0b59685df168fdceb01593cb"
+    },
+    {
+      "path": "node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom-server.browser.production.min.js",
+      "fileSha256": "89bde1aa0fb045330419c7d8900e33d43e693ae33a5baae5fdb6b126160fe292"
+    },
+    {
+      "path": "node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/server.browser.js",
+      "fileSha256": "25b2a8fbe5dbf5e38f32fb11db0af0c67f6c61abb3ef22a7c71473202cabf653"
+    },
+    {
+      "path": "node_modules/.pnpm/scheduler@0.23.2/node_modules/scheduler/cjs/scheduler.production.min.js",
+      "fileSha256": "f6cb8cf42696980c702f6b879417ab8bd489660485eb012b46f67e92e18a78ee"
+    },
+    {
+      "path": "node_modules/.pnpm/scheduler@0.23.2/node_modules/scheduler/index.js",
+      "fileSha256": "b413b3aac7bd209fd82cbe2241fda1467558daaef830744f45ed8396fac9185e"
+    },
+    {
+      "path": "node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.production.min.js",
+      "fileSha256": "cbf7fe6b9726ee65f8bcd5715289cc5161c8dacf74d0b8aaa0d29412516f5f47"
+    },
+    {
+      "path": "node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/index.js",
+      "fileSha256": "f26fcb81b5d1dc32c6edea34645c75b60d259916293d3208c8be48ac33e882e4"
+    },
+    {
+      "path": "node_modules/.pnpm/react@18.3.1/node_modules/react/cjs/react-jsx-runtime.production.min.js",
+      "fileSha256": "76e3364c46895ed2c4a8d5cc332e5e4ef31d6f732d35b1e56826dc5895245452"
+    },
+    {
+      "path": "node_modules/.pnpm/react@18.3.1/node_modules/react/jsx-runtime.js",
+      "fileSha256": "28170e60f2ff0bc045bc7d175f5849e86f68dd02d76d7255369420718b30295a"
+    },
+    {
+      "path": "node_modules/.pnpm/remotion@4.0.481_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/remotion/dist/esm/index.mjs",
+      "fileSha256": "0bc98207782bc5c0d79e58cedf53fa0e9bacdb6dc083a284a29059fafed4eaaf"
+    },
+    {
+      "path": "runner/src/remotion/utils/telop-font.ts",
+      "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+    },
+    {
+      "path": "runner/src/shared/telop-glow.ts",
+      "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+    },
+    {
+      "path": "runner/src/telop/telop-line-break.ts",
+      "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+    },
+    {
+      "path": "runner/src/telop/text-metrics.ts",
+      "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+    },
+    {
+      "path": "runner/src/telop/telop-render-model.ts",
+      "fileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+    },
+    {
+      "path": "runner/src/remotion/components/TelopText.tsx",
+      "fileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+    }
+  ],
+  "result": {
+    "fontLoaded": "loaded",
+    "fontCheck": true,
+    "exact": {
+      "textModel": {
+        "lines": [
+          {
+            "text": "なにする?どうする?なにする?どうする?",
+            "x": 24,
+            "y": 24,
+            "width": 1762.06005859375
+          }
+        ],
+        "svgWidth": 1811,
+        "svgHeight": 162,
+        "fontFamily": "zev-renderer-line-seed-jp-extra-bold-v001",
+        "cssFontFamily": "'zev-renderer-line-seed-jp-extra-bold-v001'",
+        "fontWeight": 800,
+        "fontSize": 95,
+        "fontColor": "#FFFDF8",
+        "borderColor": "#111827",
+        "borderWidth": 8,
+        "borderStrokeWidth": 16,
+        "glowColor": "rgba(0, 0, 0, 0.82)",
+        "glowWidth": 12,
+        "glowStrokeWidth": 40,
+        "hasGlow": true,
+        "hasBorder": true,
+        "lineHeight": 142.5,
+        "margin": 20,
+        "safePadding": 4,
+        "maxLineWidth": 1762.06005859375
+      },
+      "wrapper": {
+        "top": 813.2,
+        "left": 80,
+        "width": 1811,
+        "height": 162,
+        "contentOffsetX": 0,
+        "contentOffsetY": 0
+      }
+    },
+    "wrapper": {
+      "x": 80,
+      "y": 813.1875,
+      "width": 1811,
+      "height": 162,
+      "top": 813.1875,
+      "left": 80,
+      "right": 1891,
+      "bottom": 975.1875
+    },
+    "svg": {
+      "x": 80,
+      "y": 813.1875,
+      "width": 1811,
+      "height": 162,
+      "top": 813.1875,
+      "left": 80,
+      "right": 1891,
+      "bottom": 975.1875
+    },
+    "texts": [
+      {
+        "text": "なにする?どうする?なにする?どうする?",
+        "attributes": [
+          [
+            "x",
+            "24"
+          ],
+          [
+            "y",
+            "24"
+          ],
+          [
+            "font-family",
+            "'zev-renderer-line-seed-jp-extra-bold-v001'"
+          ],
+          [
+            "font-size",
+            "95"
+          ],
+          [
+            "font-weight",
+            "800"
+          ],
+          [
+            "fill",
+            "none"
+          ],
+          [
+            "stroke",
+            "rgba(0, 0, 0, 0.82)"
+          ],
+          [
+            "stroke-width",
+            "40"
+          ],
+          [
+            "stroke-linejoin",
+            "round"
+          ],
+          [
+            "dominant-baseline",
+            "text-before-edge"
+          ]
+        ],
+        "computedStyle": {
+          "font": "800 95px zev-renderer-line-seed-jp-extra-bold-v001",
+          "fontFamily": "zev-renderer-line-seed-jp-extra-bold-v001",
+          "fontWeight": "800",
+          "fontSize": "95px",
+          "fontKerning": "auto",
+          "fontFeatureSettings": "normal",
+          "fontVariantLigatures": "normal",
+          "letterSpacing": "normal",
+          "textRendering": "auto",
+          "transform": "none"
+        },
+        "computedTextLength": 1731.671875,
+        "bbox": {
+          "x": 24,
+          "y": 24,
+          "width": 1731.671875,
+          "height": 153
+        },
+        "clientRect": {
+          "x": 104,
+          "y": 837.1875,
+          "width": 1731.671875,
+          "height": 153,
+          "top": 837.1875,
+          "left": 104,
+          "right": 1835.671875,
+          "bottom": 990.1875
+        },
+        "canvasWithSvgComputedFont": {
+          "width": 1762.06005859375,
+          "left": -4.75,
+          "right": 1757.9749755859375
+        },
+        "characters": [
+          {
+            "char": "な",
+            "index": 0,
+            "svgLength": 95,
+            "svgStartX": 24,
+            "svgEndX": 119,
+            "canvasWidth": 95
+          },
+          {
+            "char": "に",
+            "index": 1,
+            "svgLength": 94.0625,
+            "svgStartX": 119,
+            "svgEndX": 213.0625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 2,
+            "svgLength": 89.3125,
+            "svgStartX": 213.046875,
+            "svgEndX": 302.359375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 3,
+            "svgLength": 95.015625,
+            "svgStartX": 302.34375,
+            "svgEndX": 397.359375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 4,
+            "svgLength": 60.53125,
+            "svgStartX": 397.34375,
+            "svgEndX": 457.875,
+            "canvasWidth": 60.51499938964844
+          },
+          {
+            "char": "ど",
+            "index": 5,
+            "svgLength": 94.0625,
+            "svgStartX": 457.859375,
+            "svgEndX": 551.921875,
+            "canvasWidth": 95
+          },
+          {
+            "char": "う",
+            "index": 6,
+            "svgLength": 93.109375,
+            "svgStartX": 551.90625,
+            "svgEndX": 645.015625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 7,
+            "svgLength": 89.328125,
+            "svgStartX": 645,
+            "svgEndX": 734.328125,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 8,
+            "svgLength": 95.015625,
+            "svgStartX": 734.3125,
+            "svgEndX": 829.328125,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 9,
+            "svgLength": 60.53125,
+            "svgStartX": 829.3125,
+            "svgEndX": 889.84375,
+            "canvasWidth": 60.51499938964844
+          },
+          {
+            "char": "な",
+            "index": 10,
+            "svgLength": 95.015625,
+            "svgStartX": 889.828125,
+            "svgEndX": 984.84375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "に",
+            "index": 11,
+            "svgLength": 94.0625,
+            "svgStartX": 984.828125,
+            "svgEndX": 1078.890625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 12,
+            "svgLength": 89.3125,
+            "svgStartX": 1078.875,
+            "svgEndX": 1168.1875,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 13,
+            "svgLength": 95.015625,
+            "svgStartX": 1168.171875,
+            "svgEndX": 1263.1875,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 14,
+            "svgLength": 60.53125,
+            "svgStartX": 1263.171875,
+            "svgEndX": 1323.703125,
+            "canvasWidth": 60.51499938964844
+          },
+          {
+            "char": "ど",
+            "index": 15,
+            "svgLength": 94.0625,
+            "svgStartX": 1323.6875,
+            "svgEndX": 1417.75,
+            "canvasWidth": 95
+          },
+          {
+            "char": "う",
+            "index": 16,
+            "svgLength": 93.125,
+            "svgStartX": 1417.734375,
+            "svgEndX": 1510.859375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 17,
+            "svgLength": 89.3125,
+            "svgStartX": 1510.84375,
+            "svgEndX": 1600.15625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 18,
+            "svgLength": 95.015625,
+            "svgStartX": 1600.140625,
+            "svgEndX": 1695.15625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 19,
+            "svgLength": 60.53125,
+            "svgStartX": 1695.140625,
+            "svgEndX": 1755.671875,
+            "canvasWidth": 60.51499938964844
+          }
+        ]
+      },
+      {
+        "text": "なにする?どうする?なにする?どうする?",
+        "attributes": [
+          [
+            "x",
+            "24"
+          ],
+          [
+            "y",
+            "24"
+          ],
+          [
+            "font-family",
+            "'zev-renderer-line-seed-jp-extra-bold-v001'"
+          ],
+          [
+            "font-size",
+            "95"
+          ],
+          [
+            "font-weight",
+            "800"
+          ],
+          [
+            "fill",
+            "none"
+          ],
+          [
+            "stroke",
+            "#111827"
+          ],
+          [
+            "stroke-width",
+            "16"
+          ],
+          [
+            "stroke-linejoin",
+            "round"
+          ],
+          [
+            "dominant-baseline",
+            "text-before-edge"
+          ]
+        ],
+        "computedStyle": {
+          "font": "800 95px zev-renderer-line-seed-jp-extra-bold-v001",
+          "fontFamily": "zev-renderer-line-seed-jp-extra-bold-v001",
+          "fontWeight": "800",
+          "fontSize": "95px",
+          "fontKerning": "auto",
+          "fontFeatureSettings": "normal",
+          "fontVariantLigatures": "normal",
+          "letterSpacing": "normal",
+          "textRendering": "auto",
+          "transform": "none"
+        },
+        "computedTextLength": 1731.671875,
+        "bbox": {
+          "x": 24,
+          "y": 24,
+          "width": 1731.671875,
+          "height": 153
+        },
+        "clientRect": {
+          "x": 104,
+          "y": 837.1875,
+          "width": 1731.671875,
+          "height": 153,
+          "top": 837.1875,
+          "left": 104,
+          "right": 1835.671875,
+          "bottom": 990.1875
+        },
+        "canvasWithSvgComputedFont": {
+          "width": 1762.06005859375,
+          "left": -4.75,
+          "right": 1757.9749755859375
+        },
+        "characters": [
+          {
+            "char": "な",
+            "index": 0,
+            "svgLength": 95,
+            "svgStartX": 24,
+            "svgEndX": 119,
+            "canvasWidth": 95
+          },
+          {
+            "char": "に",
+            "index": 1,
+            "svgLength": 94.0625,
+            "svgStartX": 119,
+            "svgEndX": 213.0625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 2,
+            "svgLength": 89.3125,
+            "svgStartX": 213.046875,
+            "svgEndX": 302.359375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 3,
+            "svgLength": 95.015625,
+            "svgStartX": 302.34375,
+            "svgEndX": 397.359375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 4,
+            "svgLength": 60.53125,
+            "svgStartX": 397.34375,
+            "svgEndX": 457.875,
+            "canvasWidth": 60.51499938964844
+          },
+          {
+            "char": "ど",
+            "index": 5,
+            "svgLength": 94.0625,
+            "svgStartX": 457.859375,
+            "svgEndX": 551.921875,
+            "canvasWidth": 95
+          },
+          {
+            "char": "う",
+            "index": 6,
+            "svgLength": 93.109375,
+            "svgStartX": 551.90625,
+            "svgEndX": 645.015625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 7,
+            "svgLength": 89.328125,
+            "svgStartX": 645,
+            "svgEndX": 734.328125,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 8,
+            "svgLength": 95.015625,
+            "svgStartX": 734.3125,
+            "svgEndX": 829.328125,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 9,
+            "svgLength": 60.53125,
+            "svgStartX": 829.3125,
+            "svgEndX": 889.84375,
+            "canvasWidth": 60.51499938964844
+          },
+          {
+            "char": "な",
+            "index": 10,
+            "svgLength": 95.015625,
+            "svgStartX": 889.828125,
+            "svgEndX": 984.84375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "に",
+            "index": 11,
+            "svgLength": 94.0625,
+            "svgStartX": 984.828125,
+            "svgEndX": 1078.890625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 12,
+            "svgLength": 89.3125,
+            "svgStartX": 1078.875,
+            "svgEndX": 1168.1875,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 13,
+            "svgLength": 95.015625,
+            "svgStartX": 1168.171875,
+            "svgEndX": 1263.1875,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 14,
+            "svgLength": 60.53125,
+            "svgStartX": 1263.171875,
+            "svgEndX": 1323.703125,
+            "canvasWidth": 60.51499938964844
+          },
+          {
+            "char": "ど",
+            "index": 15,
+            "svgLength": 94.0625,
+            "svgStartX": 1323.6875,
+            "svgEndX": 1417.75,
+            "canvasWidth": 95
+          },
+          {
+            "char": "う",
+            "index": 16,
+            "svgLength": 93.125,
+            "svgStartX": 1417.734375,
+            "svgEndX": 1510.859375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 17,
+            "svgLength": 89.3125,
+            "svgStartX": 1510.84375,
+            "svgEndX": 1600.15625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 18,
+            "svgLength": 95.015625,
+            "svgStartX": 1600.140625,
+            "svgEndX": 1695.15625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 19,
+            "svgLength": 60.53125,
+            "svgStartX": 1695.140625,
+            "svgEndX": 1755.671875,
+            "canvasWidth": 60.51499938964844
+          }
+        ]
+      },
+      {
+        "text": "なにする?どうする?なにする?どうする?",
+        "attributes": [
+          [
+            "x",
+            "24"
+          ],
+          [
+            "y",
+            "24"
+          ],
+          [
+            "font-family",
+            "'zev-renderer-line-seed-jp-extra-bold-v001'"
+          ],
+          [
+            "font-size",
+            "95"
+          ],
+          [
+            "font-weight",
+            "800"
+          ],
+          [
+            "fill",
+            "#FFFDF8"
+          ],
+          [
+            "dominant-baseline",
+            "text-before-edge"
+          ]
+        ],
+        "computedStyle": {
+          "font": "800 95px zev-renderer-line-seed-jp-extra-bold-v001",
+          "fontFamily": "zev-renderer-line-seed-jp-extra-bold-v001",
+          "fontWeight": "800",
+          "fontSize": "95px",
+          "fontKerning": "auto",
+          "fontFeatureSettings": "normal",
+          "fontVariantLigatures": "normal",
+          "letterSpacing": "normal",
+          "textRendering": "auto",
+          "transform": "none"
+        },
+        "computedTextLength": 1731.671875,
+        "bbox": {
+          "x": 24,
+          "y": 24,
+          "width": 1731.671875,
+          "height": 153
+        },
+        "clientRect": {
+          "x": 104,
+          "y": 837.1875,
+          "width": 1731.671875,
+          "height": 153,
+          "top": 837.1875,
+          "left": 104,
+          "right": 1835.671875,
+          "bottom": 990.1875
+        },
+        "canvasWithSvgComputedFont": {
+          "width": 1762.06005859375,
+          "left": -4.75,
+          "right": 1757.9749755859375
+        },
+        "characters": [
+          {
+            "char": "な",
+            "index": 0,
+            "svgLength": 95,
+            "svgStartX": 24,
+            "svgEndX": 119,
+            "canvasWidth": 95
+          },
+          {
+            "char": "に",
+            "index": 1,
+            "svgLength": 94.0625,
+            "svgStartX": 119,
+            "svgEndX": 213.0625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 2,
+            "svgLength": 89.3125,
+            "svgStartX": 213.046875,
+            "svgEndX": 302.359375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 3,
+            "svgLength": 95.015625,
+            "svgStartX": 302.34375,
+            "svgEndX": 397.359375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 4,
+            "svgLength": 60.53125,
+            "svgStartX": 397.34375,
+            "svgEndX": 457.875,
+            "canvasWidth": 60.51499938964844
+          },
+          {
+            "char": "ど",
+            "index": 5,
+            "svgLength": 94.0625,
+            "svgStartX": 457.859375,
+            "svgEndX": 551.921875,
+            "canvasWidth": 95
+          },
+          {
+            "char": "う",
+            "index": 6,
+            "svgLength": 93.109375,
+            "svgStartX": 551.90625,
+            "svgEndX": 645.015625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 7,
+            "svgLength": 89.328125,
+            "svgStartX": 645,
+            "svgEndX": 734.328125,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 8,
+            "svgLength": 95.015625,
+            "svgStartX": 734.3125,
+            "svgEndX": 829.328125,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 9,
+            "svgLength": 60.53125,
+            "svgStartX": 829.3125,
+            "svgEndX": 889.84375,
+            "canvasWidth": 60.51499938964844
+          },
+          {
+            "char": "な",
+            "index": 10,
+            "svgLength": 95.015625,
+            "svgStartX": 889.828125,
+            "svgEndX": 984.84375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "に",
+            "index": 11,
+            "svgLength": 94.0625,
+            "svgStartX": 984.828125,
+            "svgEndX": 1078.890625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 12,
+            "svgLength": 89.3125,
+            "svgStartX": 1078.875,
+            "svgEndX": 1168.1875,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 13,
+            "svgLength": 95.015625,
+            "svgStartX": 1168.171875,
+            "svgEndX": 1263.1875,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 14,
+            "svgLength": 60.53125,
+            "svgStartX": 1263.171875,
+            "svgEndX": 1323.703125,
+            "canvasWidth": 60.51499938964844
+          },
+          {
+            "char": "ど",
+            "index": 15,
+            "svgLength": 94.0625,
+            "svgStartX": 1323.6875,
+            "svgEndX": 1417.75,
+            "canvasWidth": 95
+          },
+          {
+            "char": "う",
+            "index": 16,
+            "svgLength": 93.125,
+            "svgStartX": 1417.734375,
+            "svgEndX": 1510.859375,
+            "canvasWidth": 95
+          },
+          {
+            "char": "す",
+            "index": 17,
+            "svgLength": 89.3125,
+            "svgStartX": 1510.84375,
+            "svgEndX": 1600.15625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "る",
+            "index": 18,
+            "svgLength": 95.015625,
+            "svgStartX": 1600.140625,
+            "svgEndX": 1695.15625,
+            "canvasWidth": 95
+          },
+          {
+            "char": "?",
+            "index": 19,
+            "svgLength": 60.53125,
+            "svgStartX": 1695.140625,
+            "svgEndX": 1755.671875,
+            "canvasWidth": 60.51499938964844
+          }
+        ]
+      }
+    ],
+    "markup": "<div id=\"diagnostic-wrapper\" style=\"position:absolute;top:813.2px;left:80px;transform:scale(1);transform-origin:top left\"><div style=\"position:relative;display:inline-block;width:1811px;height:162px\"><style>\n  @font-face {\n    font-family: 'LINESeedJP_A_OTF_Bd.otf';\n    src: url('/font/LINESeedJP_A_OTF_Bd.otf');\n    font-display: block;\n  }\n\n\n  @font-face {\n    font-family: 'LINESeedJP_A_OTF_Eb.otf';\n    src: url('/font/LINESeedJP_A_OTF_Eb.otf');\n    font-display: block;\n  }\n\n\n  @font-face {\n    font-family: 'LINESeedJP_A_OTF_Rg.otf';\n    src: url('/font/LINESeedJP_A_OTF_Rg.otf');\n    font-display: block;\n  }\n\n\n  @font-face {\n    font-family: 'LINESeedJP_A_OTF_Th.otf';\n    src: url('/font/LINESeedJP_A_OTF_Th.otf');\n    font-display: block;\n  }\n\n\n  @font-face {\n    font-family: 'MochiyPopOne-Regular.ttf';\n    src: url('/font/MochiyPopOne-Regular.ttf');\n    font-display: block;\n  }\n\n\n  @font-face {\n    font-family: 'ShipporiMincho-Bold.ttf';\n    src: url('/font/ShipporiMincho-Bold.ttf');\n    font-display: block;\n  }\n</style><svg width=\"1811\" height=\"162\" viewBox=\"0 0 1811 162\" style=\"display:block;overflow:visible;position:relative;z-index:1\"><g><text x=\"24\" y=\"24\" font-family=\"'zev-renderer-line-seed-jp-extra-bold-v001'\" font-size=\"95\" font-weight=\"800\" fill=\"none\" stroke=\"rgba(0, 0, 0, 0.82)\" stroke-width=\"40\" stroke-linejoin=\"round\" dominant-baseline=\"text-before-edge\">なにする?どうする?なにする?どうする?</text><text x=\"24\" y=\"24\" font-family=\"'zev-renderer-line-seed-jp-extra-bold-v001'\" font-size=\"95\" font-weight=\"800\" fill=\"none\" stroke=\"#111827\" stroke-width=\"16\" stroke-linejoin=\"round\" dominant-baseline=\"text-before-edge\">なにする?どうする?なにする?どうする?</text><text x=\"24\" y=\"24\" font-family=\"'zev-renderer-line-seed-jp-extra-bold-v001'\" font-size=\"95\" font-weight=\"800\" fill=\"#FFFDF8\" dominant-baseline=\"text-before-edge\">なにする?どうする?なにする?どうする?</text></g></svg></div></div>"
+  },
+  "existingRaster": {
+    "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000282",
+    "requestedPresetId": "normal-landscape-readable-pop-v001",
+    "appliedPresetId": "normal-landscape-readable-pop-v001",
+    "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+    "alphaMax": 1,
+    "alphaBounds": {
+      "left": 88,
+      "top": 843,
+      "right": 1853,
+      "bottom": 975,
+      "width": 1765,
+      "height": 132
+    },
+    "lineCount": 1,
+    "lineAlphaBounds": [
+      {
+        "lineIndex": 0,
+        "left": 88,
+        "top": 843,
+        "right": 1853,
+        "bottom": 975,
+        "width": 1765,
+        "height": 132
+      }
+    ],
+    "visibilityComparisonBasis": null,
+    "representativeFrame": null,
+    "changedPixelsAgainstInstructionOmittedFrame": null,
+    "appliedOverlayPropsCanonicalSha256": "d2539bbab4c00aadd38836a55f258d5bb51b440f6aeaddafc6eba530700b837e",
+    "applicationOverlayFile": "overlays/282-6aa73c37776a.png",
+    "inspectedOverlayFile": "overlays/282-6aa73c37776a.png",
+    "applicationOverlaySha256": "561e68d5706591686bfaef4f3a979734b3711c7d979c27a9f603df0662fd0c92",
+    "overlaySha256": "561e68d5706591686bfaef4f3a979734b3711c7d979c27a9f603df0662fd0c92"
+  },
+  "newPngs": 0,
+  "formalStyleChanges": 0,
+  "newMeaningJudgments": 0,
+  "apiCalls": 0,
+  "costUsd": 0
+}

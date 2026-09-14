@@ -1,0 +1,167 @@
+{
+  "fontSizePx": 94,
+  "propsBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/raster-probe-v001/font-94-props.json",
+    "fileSha256": "8eb2313b545ddba02762e190e819b78e5bf57104ebd889c7fe65ebbfa9ab26bf"
+  },
+  "pngBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/raster-probe-v001/overlays/font-94.png",
+    "fileSha256": "892b96363c7d21300dd1bf0f7e35789dcb0375555daeb46dfc88e2571ea673d6"
+  },
+  "linePngBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/raster-probe-v001/font-94-line-01.png",
+    "fileSha256": "892b96363c7d21300dd1bf0f7e35789dcb0375555daeb46dfc88e2571ea673d6"
+  },
+  "layout": {
+    "schemaVersion": "presentation-render-layout-inspection-v001",
+    "status": "passed",
+    "canvas": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "safeAreaPx": {
+        "top": 40,
+        "right": 80,
+        "bottom": 40,
+        "left": 80
+      }
+    },
+    "items": [
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000282",
+        "stateId": "caption-core-v001",
+        "lineCount": 1,
+        "lineRects": [
+          {
+            "left": 94,
+            "top": 818.2,
+            "right": 1826,
+            "bottom": 952.2
+          }
+        ],
+        "wrapper": {
+          "top": 814.2,
+          "left": 90,
+          "width": 1740,
+          "height": 161
+        }
+      }
+    ],
+    "violations": []
+  },
+  "inspection": {
+    "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000282",
+    "alphaMax": 1,
+    "alphaBounds": {
+      "left": 88,
+      "top": 844,
+      "right": 1834,
+      "bottom": 975,
+      "width": 1746,
+      "height": 131
+    },
+    "lineCount": 1,
+    "lineRects": [
+      {
+        "left": 94,
+        "top": 818.2,
+        "right": 1826,
+        "bottom": 952.2
+      }
+    ],
+    "lineAlphaBounds": [
+      {
+        "lineIndex": 0,
+        "left": 88,
+        "top": 844,
+        "right": 1834,
+        "bottom": 975,
+        "width": 1746,
+        "height": 131
+      }
+    ],
+    "visibilityComparisonBasis": null,
+    "representativeFrame": null,
+    "changedPixelsAgainstInstructionOmittedFrame": null,
+    "appliedOverlayPropsCanonicalSha256": "eb513e41ceea0450bdd578fbee8236ae5c18299c4af235c334985472bf8df497",
+    "overlayFile": "overlays/font-94.png",
+    "overlaySha256": "892b96363c7d21300dd1bf0f7e35789dcb0375555daeb46dfc88e2571ea673d6"
+  },
+  "qc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 1,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "instructionEvidence": [
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000282",
+        "requestedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetId": "normal-landscape-readable-pop-v001",
+        "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 88,
+          "top": 844,
+          "right": 1834,
+          "bottom": 975,
+          "width": 1746,
+          "height": 131
+        },
+        "lineCount": 1,
+        "lineAlphaBounds": [
+          {
+            "lineIndex": 0,
+            "left": 88,
+            "top": 844,
+            "right": 1834,
+            "bottom": 975,
+            "width": 1746,
+            "height": 131
+          }
+        ],
+        "visibilityComparisonBasis": null,
+        "representativeFrame": null,
+        "changedPixelsAgainstInstructionOmittedFrame": null,
+        "appliedOverlayPropsCanonicalSha256": "eb513e41ceea0450bdd578fbee8236ae5c18299c4af235c334985472bf8df497",
+        "applicationOverlayFile": "overlays/font-94.png",
+        "inspectedOverlayFile": "overlays/font-94.png",
+        "applicationOverlaySha256": "892b96363c7d21300dd1bf0f7e35789dcb0375555daeb46dfc88e2571ea673d6",
+        "overlaySha256": "892b96363c7d21300dd1bf0f7e35789dcb0375555daeb46dfc88e2571ea673d6"
+      }
+    ],
+    "mediaEvidence": {
+      "observed": {
+        "durationMs": 1480267,
+        "video": {
+          "codecName": "h264",
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "frameCount": 44408
+        },
+        "audio": {
+          "codecName": "aac",
+          "packetPayloadSha256": "0bc96d57e86ae04b6640e631af7cffb5d6b506d204dd252d64f87809f1f4f92f"
+        }
+      },
+      "expectedAudio": {
+        "present": true,
+        "codecName": "aac",
+        "packetPayloadSha256": "0bc96d57e86ae04b6640e631af7cffb5d6b506d204dd252d64f87809f1f4f92f"
+      },
+      "expectedFrameCount": null
+    },
+    "violations": []
+  },
+  "diagnosticOnly": true
+}

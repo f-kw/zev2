@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "digest-v1-phase2-raster-probe-authorization-scope-v001",
+  "purpose": "自動審査が参照した旧診断の描画禁止と、最新の委任指示・新しい1字幕診断承認の適用段階を照合する。",
+  "priorRestriction": {
+    "scope": "96pxで計算上23件不合格だった時点のNode計算だけの診断",
+    "quote": "このprobeは診断であり、正式style変更・描画・成果物公開ではない。",
+    "status": "診断は既に完了し、その後の95px正式適用APPROVEと1回描画を経て、新しい実画像1件の停止が発生した。"
+  },
+  "latestUserDelegationQuotes": [
+    "以下は停止記録を保存した上で、GPT_DECISIONまたは必要に応じてAUDIT_ONLYとしてZEV進行管理３へ自動提出してよい。",
+    "validatorに正しく拒否された場合の原因切り分け",
+    "追加費用0の診断",
+    "ZEV進行管理３が既存Goal・work-order・契約内と判断した場合、その回答を受けて自律的に続行すること。",
+    "費用0・既存scope内・可逆的な開発判断は、ZEV進行管理３へ自動問い合わせ → 判断後そのまま続行。"
+  ],
+  "newAdvisorDecision": {
+    "title": "ZEV進行管理３",
+    "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+    "checkpoint": "8da60f2260b4152716c657c739a4f1b705153ead",
+    "decision": "DIAGNOSE / CONTINUE",
+    "quotes": [
+      "95pxの全件再描画や追加style変更にはまだ進まず、字幕282だけを対象とする費用0の限定診断を承認する。",
+      "診断Aでfont-size依存の実文字幅差が原因と確認できた場合のみ実施する。",
+      "字幕282だけを、同一font・border・glow・position・safe area・rendererで描画する。",
+      "正式styleは変更しない。",
+      "95pxより1pxずつ小さい診断値について、最初に実PNGがsafe-area PASSする最大整数値を求める。",
+      "各probeについてPNG SHA・alpha bounds・実行propsを保存する。"
+    ]
+  },
+  "conditionEvidence": {
+    "nodeEstimatedWidth": 1710,
+    "browserLoadedFontCanvasWidth": 1762.06005859375,
+    "sameFontSvgTextLength": 1731.671875,
+    "fontLoadedAndChecked": true,
+    "fontFamilyWeightAndSizeMatch": true,
+    "svgTransform": "none",
+    "wrapperRenderScale": 1,
+    "conclusion": "同じ正式fontの実字幅がNode文字種推定を上回る。診断A完了後、承認された診断Bの開始条件として照合した。"
+  },
+  "proposedAction": "拒否されたものと同じisolated-probe.mtsを、追加根拠を添えて再審査する。実行方法の迂回やformal styleの95→94変更ではない。1字幕の診断入力だけ94pxから降順。最初の既存QC合格で終了しZEV進行管理３へ戻す。",
+  "formalStyleChanges": 0,
+  "fullCaptionDraws": 0,
+  "videoComposites": 0,
+  "apiCalls": 0,
+  "newMaterials": 0,
+  "costUsd": 0,
+  "priorRejectedCommandStarted": false
+}
