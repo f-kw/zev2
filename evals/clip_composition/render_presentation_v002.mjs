@@ -7,6 +7,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+import {resolvePresentationEffectsV001, buildPresentationTimelineFiltersV001} from './presentation_effects_v001.mjs';
 import {validatePresentationInstructionContract} from './presentation_instruction_contract_v002.mjs';
 import {
   PRESENTATION_BASE_MEDIA_TIMELINE_VIOLATION_CODES,
@@ -910,6 +911,8 @@ export const buildPresentationCompositeArgumentsV001 = ({
   overlayRecords,
   expectedFrameCount,
   serializePngAndFilters = false,
+  presentationTimeline = null,
+  timelineAudio = null,
 }) => {
   if (typeof serializePngAndFilters !== 'boolean') {
     throw new TypeError('PNG and filter execution control must be boolean');
@@ -923,8 +926,9 @@ export const buildPresentationCompositeArgumentsV001 = ({
     if (serializePngAndFilters) args.push('-threads', '1');
     args.push('-loop', '1', '-framerate', String(plan.canvas.fps), '-i', record.pngPath);
   }
-  const filters = [];
-  let previous = '0:v';
+  const filters = presentationTimeline
+    ? buildPresentationTimelineFiltersV001({presentationTimeline, canvas: plan.canvas, audio: timelineAudio}) : [];
+  let previous = presentationTimeline ? 'timelineVideo' : '0:v';
   overlayRecords.forEach((record, index) => {
     const element = record.element;
     const inputIndex = index + 1;
@@ -943,21 +947,23 @@ export const buildPresentationCompositeArgumentsV001 = ({
   filters.push(`[${previous}]fps=${plan.canvas.fps},format=yuv420p[video]`);
   args.push(
     '-filter_complex', filters.join(';'),
-    '-map', '[video]', '-map', '0:a?',
+    '-map', '[video]', ...(presentationTimeline
+      ? (timelineAudio ? ['-map', '[timelineAudio]'] : []) : ['-map', '0:a?']),
     '-frames:v', String(expectedFrameCount),
     '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p',
-    '-c:a', 'copy',
+    '-c:a', presentationTimeline && timelineAudio ? 'aac' : 'copy',
   );
   return args;
 };
 
-const composite = async ({
+export const composePresentationMediaV001 = async ({
   baseMediaPath, plan, overlayRecords, expectedFrameCount, outputPath,
   ffmpegPath = 'ffmpeg', fatalInnerStage = 'overlay-render',
   processObserver = null, observationLabel = 'video-composite',
   serializePngAndFilters = false,
+  presentationTimeline = null, timelineAudio = null,
 }) => {
-  const args = buildPresentationCompositeArgumentsV001({baseMediaPath, plan, overlayRecords, expectedFrameCount, serializePngAndFilters});
+  const args = buildPresentationCompositeArgumentsV001({baseMediaPath, plan, overlayRecords, expectedFrameCount, serializePngAndFilters, presentationTimeline, timelineAudio});
   await runPresentationRendererChildProcessV001(ffmpegPath, [...args, '-movflags', '+faststart', outputPath], {
     fatalInnerStage,
     processObserver,
@@ -1556,7 +1562,22 @@ export async function executeValidatedPresentationDrawAndQcV001({
   validatedLayoutInspection = null,
   processObserver = null,
   serializePngAndFilters = false,
+  effects,
+  baseTimeline,
+  runCounterfactualQc = true,
 }) {
+  if (typeof runCounterfactualQc !== 'boolean') throw new TypeError('counterfactual QC control must be boolean');
+  const resolved = resolvePresentationEffectsV001({plan, expectedFrameCount, baseTimeline, effects});
+  if (validatedLayoutInspection !== null && resolved.plan.elements.some((element, index) =>
+    element.visualState !== plan.elements[index].visualState)) {
+    throw new TypeError('effect selections require layout inspection of the resolved plan');
+  }
+  plan = resolved.plan;
+  expectedFrameCount = resolved.expectedFrameCount;
+  const presentationTimeline = resolved.presentationTimeline;
+  const timelineAudio = presentationTimeline && baseMediaInspection.media.audio
+    ? {sampleRate: baseMediaInspection.media.audio.sampleRate,
+      channelLayout: baseMediaInspection.media.audio.channelLayout} : null;
   if (typeof serializePngAndFilters !== 'boolean') {
     throw new TypeError('PNG and filter execution control must be boolean');
   }
@@ -1787,7 +1808,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
     }
 
     const workVideo = path.join(stagingDirectory, artifactNames.video);
-    await composite({
+    await composePresentationMediaV001({
       baseMediaPath,
       plan,
       overlayRecords,
@@ -1798,6 +1819,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
       processObserver,
       observationLabel: 'video-composite',
       serializePngAndFilters,
+      presentationTimeline,
+      timelineAudio,
     });
     const outputMedia = await inspectRenderedMediaWithToolsV001(workVideo, {
       ffprobePath: toolPaths.ffprobePath,
@@ -1815,68 +1838,72 @@ export async function executeValidatedPresentationDrawAndQcV001({
       );
     }
 
-    const transparentOverlayPath = path.join(scratchDirectory, 'frames', 'transparent-overlay.png');
-    await runPresentationRendererChildProcessV001(toolPaths.imageMagickPath, [
-      '-size', `${plan.canvas.width}x${plan.canvas.height}`,
-      'xc:none',
-      transparentOverlayPath,
-    ], {
-      fatalInnerStage: 'post-render-qc',
-      processObserver,
-      observationLabel: 'transparent-overlay-create',
-    });
-    for (const record of overlayRecords) {
-      const representativeFrame = record.element.startFrame
-        + Math.floor(record.element.displayFrameCount / 2);
-      const outputFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-output.png`);
-      const omittedFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-omitted.png`);
-      const counterfactualRecords = overlayRecords.map((entry) => (
-        entry === record ? {...entry, pngPath: transparentOverlayPath} : entry
-      ));
-      const counterfactualInput = {
-        instructionId: record.element.instructionId,
-        ffmpegPath: toolPaths.ffmpegPath,
-        compositeArguments: buildPresentationCompositeArgumentsV001({
-          baseMediaPath, plan, overlayRecords: counterfactualRecords, expectedFrameCount,
-          serializePngAndFilters,
-        }),
-        representativeFrame,
-        expectedFrameCount,
-        outputPath: omittedFrame,
-      };
-      const counterfactualInputPath = path.join(scratchDirectory, 'frames', `${record.fileStem}-counterfactual-input.json`);
-      await writeFile(counterfactualInputPath, JSON.stringify(counterfactualInput), {flag: 'wx'});
-      const counterfactual = await runPresentationRendererChildProcessV001(toolPaths.tsxPath, [
-        fileURLToPath(import.meta.url), '--counterfactual-frame', counterfactualInputPath,
+    if (runCounterfactualQc) {
+      const transparentOverlayPath = path.join(scratchDirectory, 'frames', 'transparent-overlay.png');
+      await runPresentationRendererChildProcessV001(toolPaths.imageMagickPath, [
+        '-size', `${plan.canvas.width}x${plan.canvas.height}`,
+        'xc:none',
+        transparentOverlayPath,
       ], {
         fatalInnerStage: 'post-render-qc',
         processObserver,
-        observationLabel: 'counterfactual-encoded-frame',
+        observationLabel: 'transparent-overlay-create',
       });
-      const counterfactualResult = JSON.parse(counterfactual.stdout.toString('utf8'));
-      if (counterfactualResult.status !== 'completed'
-        || counterfactualResult.inputCanonicalSha256 !== sha256Canonical(counterfactualInput)
-        || counterfactualResult.outputFileSha256 !== await fileSha256V002(omittedFrame)) {
-        throw new Error('encoded counterfactual frame evidence does not match its input and output');
-      }
-      await extractFrame(
-        workVideo,
-        representativeFrame,
-        outputFrame,
-        plan.canvas.fps,
-        toolPaths.ffmpegPath,
-        processObserver,
-      );
-      record.inspection.visibilityComparisonBasis = 'same-composite-with-instruction-omitted';
-      record.inspection.representativeFrame = representativeFrame;
-      record.inspection.changedPixelsAgainstInstructionOmittedFrame =
-        await imageDifferencePixelsWithinBounds(
+      for (const record of overlayRecords) {
+        const representativeFrame = record.element.startFrame
+          + Math.floor(record.element.displayFrameCount / 2);
+        const outputFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-output.png`);
+        const omittedFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-omitted.png`);
+        const counterfactualRecords = overlayRecords.map((entry) => (
+          entry === record ? {...entry, pngPath: transparentOverlayPath} : entry
+        ));
+        const counterfactualInput = {
+          instructionId: record.element.instructionId,
+          ffmpegPath: toolPaths.ffmpegPath,
+          compositeArguments: buildPresentationCompositeArgumentsV001({
+            baseMediaPath, plan, overlayRecords: counterfactualRecords, expectedFrameCount,
+            serializePngAndFilters,
+            presentationTimeline,
+            timelineAudio,
+          }),
+          representativeFrame,
+          expectedFrameCount,
+          outputPath: omittedFrame,
+        };
+        const counterfactualInputPath = path.join(scratchDirectory, 'frames', `${record.fileStem}-counterfactual-input.json`);
+        await writeFile(counterfactualInputPath, JSON.stringify(counterfactualInput), {flag: 'wx'});
+        const counterfactual = await runPresentationRendererChildProcessV001(toolPaths.tsxPath, [
+          fileURLToPath(import.meta.url), '--counterfactual-frame', counterfactualInputPath,
+        ], {
+          fatalInnerStage: 'post-render-qc',
+          processObserver,
+          observationLabel: 'counterfactual-encoded-frame',
+        });
+        const counterfactualResult = JSON.parse(counterfactual.stdout.toString('utf8'));
+        if (counterfactualResult.status !== 'completed'
+          || counterfactualResult.inputCanonicalSha256 !== sha256Canonical(counterfactualInput)
+          || counterfactualResult.outputFileSha256 !== await fileSha256V002(omittedFrame)) {
+          throw new Error('encoded counterfactual frame evidence does not match its input and output');
+        }
+        await extractFrame(
+          workVideo,
+          representativeFrame,
           outputFrame,
-          omittedFrame,
-          record.inspection.alphaBounds,
-          toolPaths.imageMagickPath,
+          plan.canvas.fps,
+          toolPaths.ffmpegPath,
           processObserver,
         );
+        record.inspection.visibilityComparisonBasis = 'same-composite-with-instruction-omitted';
+        record.inspection.representativeFrame = representativeFrame;
+        record.inspection.changedPixelsAgainstInstructionOmittedFrame =
+          await imageDifferencePixelsWithinBounds(
+            outputFrame,
+            omittedFrame,
+            record.inspection.alphaBounds,
+            toolPaths.imageMagickPath,
+            processObserver,
+          );
+      }
     }
 
     const finalQc = evaluateQc({
@@ -1884,9 +1911,12 @@ export async function executeValidatedPresentationDrawAndQcV001({
       applicationResults,
       overlayInspections: overlayRecords.map((record) => record.inspection),
       mediaInspection: outputMedia,
-      expectedAudio: baseExpectedAudio,
+      expectedAudio: timelineAudio ? {present: true, codecName: 'aac',
+        mode: 'timeline-insertions', sampleRate: timelineAudio.sampleRate,
+        durationMs: expectedFrameCount * 1000 / plan.canvas.fps} : baseExpectedAudio,
       expectedFrameCount,
       canvas: plan.canvas,
+      requireFinalVisibility: runCounterfactualQc,
     });
     if (finalQc.status !== 'passed') {
       return failAfterWork(finalQc.violations, 'post-render-qc', finalQc);
@@ -1906,6 +1936,9 @@ export async function executeValidatedPresentationDrawAndQcV001({
       outputMedia,
       finalQc,
       workVideo,
+      resolvedPlan: plan,
+      presentationTimeline,
+      counterfactualQcExecuted: runCounterfactualQc,
     };
   } catch (error) {
     const rendererCode = error?.rendererViolationCode;

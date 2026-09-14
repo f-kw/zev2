@@ -1,0 +1,282 @@
+{
+  "sourcePlanSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+  "sourceTimelineSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e",
+  "sourceBaseMedia": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/base-media.mp4",
+  "counterfactualQcExecuted": false,
+  "comparisons": [
+    {
+      "id": "emphasis",
+      "baseWindow": {
+        "startFrame": 3197,
+        "endFrameExclusive": 3558
+      },
+      "effects": {
+        "captions": [
+          {
+            "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000045",
+            "preset": "emphasis"
+          }
+        ]
+      },
+      "clips": [
+        {
+          "side": "A",
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/digest-effects-step2-comparisons-v003/emphasis-A.mp4",
+          "fileSha256": "5e4f0d4780c49ec7f7949e79025318817cfe85f39c67f770591f4788d0184f9d",
+          "frames": 361,
+          "media": {
+            "durationMs": 12033,
+            "video": {
+              "codecName": "h264",
+              "width": 1920,
+              "height": 1080,
+              "fps": 30,
+              "frameCount": 361
+            },
+            "audio": {
+              "codecName": "aac",
+              "sampleRate": 48000,
+              "channelLayout": "stereo",
+              "durationMs": 12033,
+              "packetPayloadSha256": "ad2e0f89eaf9328c081b3b57e452dd987a6618a5ab81d7b184ac3b414e6047bf"
+            }
+          },
+          "presentationTimeline": null
+        },
+        {
+          "side": "B",
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/digest-effects-step2-comparisons-v003/emphasis-B.mp4",
+          "fileSha256": "8aa50618d02e682f7d3ccf397f84078ecf4921b961327e3a263a8d73567b6f7b",
+          "frames": 361,
+          "media": {
+            "durationMs": 12033,
+            "video": {
+              "codecName": "h264",
+              "width": 1920,
+              "height": 1080,
+              "fps": 30,
+              "frameCount": 361
+            },
+            "audio": {
+              "codecName": "aac",
+              "sampleRate": 48000,
+              "channelLayout": "stereo",
+              "durationMs": 12033,
+              "packetPayloadSha256": "ad2e0f89eaf9328c081b3b57e452dd987a6618a5ab81d7b184ac3b414e6047bf"
+            }
+          },
+          "presentationTimeline": null
+        }
+      ]
+    },
+    {
+      "id": "reaction",
+      "baseWindow": {
+        "startFrame": 562,
+        "endFrameExclusive": 723
+      },
+      "effects": {
+        "captions": [
+          {
+            "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000009",
+            "preset": "reaction"
+          }
+        ]
+      },
+      "clips": [
+        {
+          "side": "A",
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/digest-effects-step2-comparisons-v003/reaction-A.mp4",
+          "fileSha256": "44196ed3a72e65c28160da98a4edbf07df4dc0be31c8d3d55c1b111e7356246a",
+          "frames": 161,
+          "media": {
+            "durationMs": 5366,
+            "video": {
+              "codecName": "h264",
+              "width": 1920,
+              "height": 1080,
+              "fps": 30,
+              "frameCount": 161
+            },
+            "audio": {
+              "codecName": "aac",
+              "sampleRate": 48000,
+              "channelLayout": "stereo",
+              "durationMs": 5366,
+              "packetPayloadSha256": "aee02bc7b56dac072c8900d6df9ea811487bef024e8deda505e7933d0c6b5441"
+            }
+          },
+          "presentationTimeline": null
+        },
+        {
+          "side": "B",
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/digest-effects-step2-comparisons-v003/reaction-B.mp4",
+          "fileSha256": "7628b7438a170e9f643ce876f282a58284dd15fb8c4ca1bc0ae65572a89ceb21",
+          "frames": 161,
+          "media": {
+            "durationMs": 5366,
+            "video": {
+              "codecName": "h264",
+              "width": 1920,
+              "height": 1080,
+              "fps": 30,
+              "frameCount": 161
+            },
+            "audio": {
+              "codecName": "aac",
+              "sampleRate": 48000,
+              "channelLayout": "stereo",
+              "durationMs": 5366,
+              "packetPayloadSha256": "aee02bc7b56dac072c8900d6df9ea811487bef024e8deda505e7933d0c6b5441"
+            }
+          },
+          "presentationTimeline": null
+        }
+      ]
+    },
+    {
+      "id": "black",
+      "baseWindow": {
+        "startFrame": 1708,
+        "endFrameExclusive": 1919
+      },
+      "effects": {
+        "connections": [
+          {
+            "beforeSegmentId": "segment-0001",
+            "afterSegmentId": "segment-0002",
+            "transition": "black"
+          }
+        ]
+      },
+      "clips": [
+        {
+          "side": "A",
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/digest-effects-step2-comparisons-v003/black-A.mp4",
+          "fileSha256": "822741531a3899bfd42296f00649155a8f7b752e78b904aff134bb02704426d8",
+          "frames": 211,
+          "media": {
+            "durationMs": 7033,
+            "video": {
+              "codecName": "h264",
+              "width": 1920,
+              "height": 1080,
+              "fps": 30,
+              "frameCount": 211
+            },
+            "audio": {
+              "codecName": "aac",
+              "sampleRate": 48000,
+              "channelLayout": "stereo",
+              "durationMs": 7033,
+              "packetPayloadSha256": "5a269077727d7eb677737a6098ecf09e813eea6e428c7da824ff009b2ffd09da"
+            }
+          },
+          "presentationTimeline": null
+        },
+        {
+          "side": "B",
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/digest-effects-step2-comparisons-v003/black-B.mp4",
+          "fileSha256": "01c00df268ed08c7f9d59151635d000d0744289a4bb0058a307f015d4d943839",
+          "frames": 223,
+          "media": {
+            "durationMs": 7433,
+            "video": {
+              "codecName": "h264",
+              "width": 1920,
+              "height": 1080,
+              "fps": 30,
+              "frameCount": 223
+            },
+            "audio": {
+              "codecName": "aac",
+              "sampleRate": 48000,
+              "channelLayout": "stereo",
+              "durationMs": 7433,
+              "packetPayloadSha256": "f7ce5bc056007f942565c12d6ebd609aa805d91ca90e592dc74306599361154a"
+            }
+          },
+          "presentationTimeline": {
+            "spans": [
+              {
+                "kind": "base",
+                "baseStartFrame": 0,
+                "baseEndFrame": 81,
+                "startFrame": 0,
+                "endFrameExclusive": 81
+              },
+              {
+                "kind": "black",
+                "beforeSegmentId": "segment-0001",
+                "afterSegmentId": "segment-0002",
+                "startFrame": 81,
+                "endFrameExclusive": 93
+              },
+              {
+                "kind": "base",
+                "baseStartFrame": 81,
+                "baseEndFrame": 211,
+                "startFrame": 93,
+                "endFrameExclusive": 223
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "changedCaptionRasterChecks": [
+    {
+      "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000045",
+      "preset": "emphasis",
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/digest-effects-step2-comparisons-v003/scratch/518d3048554a5e949d397ce8d9bcd8d2f1bdac2afb5c52f22cdba5d2f102c886.png",
+      "inspection": {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000045",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 203,
+          "top": 846,
+          "right": 1699,
+          "bottom": 975,
+          "width": 1496,
+          "height": 129
+        },
+        "lineCount": 0,
+        "lineRects": [],
+        "lineAlphaBounds": [],
+        "visibilityComparisonBasis": null,
+        "representativeFrame": null,
+        "changedPixelsAgainstInstructionOmittedFrame": null,
+        "appliedOverlayPropsCanonicalSha256": null,
+        "overlayFile": null,
+        "overlaySha256": null
+      }
+    },
+    {
+      "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000009",
+      "preset": "reaction",
+      "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/digest-effects-step2-comparisons-v003/scratch/43e837a23b4dedcc8be83ed5b3aeec4ea33600c579d1512ca6b8d6e787adc9ea.png",
+      "inspection": {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000009",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 656,
+          "top": 814,
+          "right": 1239,
+          "bottom": 973,
+          "width": 583,
+          "height": 159
+        },
+        "lineCount": 0,
+        "lineRects": [],
+        "lineAlphaBounds": [],
+        "visibilityComparisonBasis": null,
+        "representativeFrame": null,
+        "changedPixelsAgainstInstructionOmittedFrame": null,
+        "appliedOverlayPropsCanonicalSha256": null,
+        "overlayFile": null,
+        "overlaySha256": null
+      }
+    }
+  ]
+}

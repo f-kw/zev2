@@ -385,9 +385,16 @@ function evaluatePresentationRendererQc({
       violations.push(makeViolation('OUTPUT_AUDIO_STREAM_MISSING'));
     } else if (
       mediaInspection.audio.codecName !== expectedAudio.codecName
-      || mediaInspection.audio.packetPayloadSha256 !== expectedAudio.packetPayloadSha256
+      || (expectedAudio.mode === 'timeline-insertions'
+        ? (mediaInspection.audio.sampleRate !== expectedAudio.sampleRate
+          || !Number.isFinite(mediaInspection.audio.durationMs)
+          // AAC packets contain 1024 samples; allow only one terminal packet.
+          || Math.abs(mediaInspection.audio.durationMs - expectedAudio.durationMs)
+            > 1024 * 1000 / expectedAudio.sampleRate)
+        : mediaInspection.audio.packetPayloadSha256 !== expectedAudio.packetPayloadSha256)
     ) {
-      violations.push(makeViolation('OUTPUT_AUDIO_PACKET_HASH_MISMATCH', [], {
+      violations.push(makeViolation(expectedAudio.mode === 'timeline-insertions'
+        ? 'OUTPUT_FORMAT_MISMATCH' : 'OUTPUT_AUDIO_PACKET_HASH_MISMATCH', [], {
         expected: expectedAudio,
         actual: mediaInspection.audio,
       }));
@@ -608,7 +615,7 @@ async function inspectRenderedMediaWithCommands(filePath, {
     ffprobePath,
     [
       '-v', 'error', '-count_frames',
-      '-show_entries', 'format=duration:stream=index,codec_type,codec_name,width,height,avg_frame_rate,nb_read_frames',
+      '-show_entries', 'format=duration:stream=index,codec_type,codec_name,width,height,avg_frame_rate,nb_read_frames,sample_rate,channels,channel_layout,duration',
       '-of', 'json',
       filePath,
     ],
@@ -632,6 +639,10 @@ async function inspectRenderedMediaWithCommands(filePath, {
     } : null,
     audio: audioStream ? {
       codecName: audioStream.codec_name,
+      sampleRate: Number(audioStream.sample_rate),
+      channelLayout: audioStream.channels === 1 ? 'mono'
+        : audioStream.channels === 2 ? 'stereo' : audioStream.channel_layout,
+      durationMs: Number(audioStream.duration) * 1000,
       packetPayloadSha256: await audioPacketPayloadSha256WithCommand(
         filePath,
         ffmpegPath,
