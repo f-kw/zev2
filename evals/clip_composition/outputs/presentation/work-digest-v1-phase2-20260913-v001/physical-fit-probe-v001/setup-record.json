@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "digest-v1-phase2-physical-fit-probe-setup-v001",
+  "status": "completed-after-diagnostic-bootstrap-correction",
+  "attempts": [
+    {
+      "number": 1,
+      "result": "module-import-failed-before-diagnosis",
+      "reason": "runner依存の検索環境を省略しreactを解決できなかった。"
+    },
+    {
+      "number": 2,
+      "result": "module-import-failed-before-diagnosis",
+      "reason": "既存inspector内のrequireと診断の直接importで同じentryが二重登録された。"
+    },
+    {
+      "number": 3,
+      "result": "passed",
+      "reason": "既存rendererと同じNODE_PATHを使用し、同じmodule cacheで配置関数を1回だけ読み込んだ。"
+    }
+  ],
+  "correctionScope": "診断の起動環境と新規診断scriptのimportだけ。既存renderer・validator・presetは変更0。",
+  "command": "NODE_PATH=/Users/kawafmm/workspace/zev2/runner/node_modules node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/digest_v1_phase2_physical_fit_probe.mts",
+  "logs": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/physical-fit-probe-execution-v001.log",
+      "fileSha256": "d91fc2b754d8f8cdd5d03b504808d6dcacad516e5d63e1620a22776c0c471a6f"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/physical-fit-probe-execution-v002.log",
+      "fileSha256": "5636a02a5c00c6ee5189a94a8273350bfbdc7133ed1e69189db50f59603bc6a8"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/physical-fit-probe-execution-v003.log",
+      "fileSha256": "289b9414e5b44f1f34602e64785826038e2926835723bac9bf4dbcfaf6d2d026"
+    }
+  ],
+  "initialSource": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/physical-fit-probe-setup-source-v001.txt",
+    "fileSha256": "a0174730bde87f77cd70774c40897eb3ee2a68f3fdc81bf18d18be1eddf066aa"
+  },
+  "finalSource": {
+    "path": "evals/clip_composition/digest_v1_phase2_physical_fit_probe.mts",
+    "fileSha256": "d3367f0a0eff40fa1f36a25723dbdb1e82aa1ffcd9535091d19b398a09c44be3"
+  },
+  "diagnosticDataProducedByAttempt": 3,
+  "rendererExecutions": 0,
+  "apiCalls": 0
+}

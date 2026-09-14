@@ -1,0 +1,672 @@
+{
+  "schemaVersion": "digest-v1-phase2-bridge-draw-replay-layout-stop-v001",
+  "status": "stopped-layout-preflight",
+  "recordedAt": "2026-09-13T23:48:30.879984+00:00",
+  "checkpoint": "8a5a6a1142448e0863fb53f20dd2615ce4808fcb",
+  "ownerExecutionApproval": {
+    "source": "今回のkawafmm本人によるユーザー指示",
+    "quote": "ローカル通信を許可した実行環境で描画処理を1回再実行することを明示的に承認する。",
+    "stopConditionQuote": "再実行でも別の実装修正・権限追加・契約変更が必要になった場合は、自動で迂回せず停止して報告すること。"
+  },
+  "execution": {
+    "attemptsUnderThisApproval": 1,
+    "command": "node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/digest_v1_phase2_bridge_draw_replay.mts evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/job.json",
+    "sandboxPermission": "require_escalated",
+    "permissionReview": "allowed",
+    "exitCode": 1,
+    "stage": "layout-preflight",
+    "log": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/renderer-execution-v003.log",
+      "fileSha256": "49f6d79a2cb330c9f88eeadbfab3059de21c3acde5deb65d62f3bef5aa97fa69",
+      "bytes": 218
+    },
+    "result": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/renderer-result-v002.json",
+      "fileSha256": "10ab5f7ebbdd31844346a3e0c80fdcb1026f04f8929d86e6aba745f0d7106037",
+      "bytes": 221169
+    },
+    "replay": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/bridge-draw-replay-v001.json",
+      "fileSha256": "ab808f834c52b71595afae9aad9bdbf4f67bdbaf7e90fdde1c2c7de451730cb1",
+      "bytes": 2637
+    }
+  },
+  "layout": {
+    "measuredCaptions": 325,
+    "violatingCaptions": 23,
+    "violationCode": "LAYOUT_SAFE_AREA_VIOLATION",
+    "canvas": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "safeAreaPx": {
+        "top": 40,
+        "right": 80,
+        "bottom": 40,
+        "left": 80
+      }
+    },
+    "rightSafeBoundaryPx": 1840,
+    "measuredRightPx": 1856,
+    "rightOverflowPx": 16,
+    "affected": [
+      {
+        "captionNumber": 61,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000061",
+        "text": "うーんいやーここに来て勉強になります",
+        "lines": [
+          "うーんいやーここに来て勉強になります"
+        ],
+        "lineLogicalWidths": [
+          36
+        ],
+        "startFrame": 5238,
+        "endFrameExclusive": 5353,
+        "bounds": {
+          "left": 80,
+          "top": 811.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 80,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000080",
+        "text": "オリジナル変化球来て嬉しいはずなのに",
+        "lines": [
+          "オリジナル変化球来て嬉しいはずなのに"
+        ],
+        "lineLogicalWidths": [
+          36
+        ],
+        "startFrame": 7328,
+        "endFrameExclusive": 7473,
+        "bounds": {
+          "left": 80,
+          "top": 811.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 94,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000094",
+        "text": "これがさっきやろうとしたやつがこれか",
+        "lines": [
+          "これがさっきやろうとしたやつがこれか"
+        ],
+        "lineLogicalWidths": [
+          36
+        ],
+        "startFrame": 8505,
+        "endFrameExclusive": 8575,
+        "bounds": {
+          "left": 80,
+          "top": 811.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 97,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000097",
+        "text": "じゃこれが重く重さ削ったバージョンね",
+        "lines": [
+          "じゃこれが重く重さ削ったバージョンね"
+        ],
+        "lineLogicalWidths": [
+          36
+        ],
+        "startFrame": 8749,
+        "endFrameExclusive": 8899,
+        "bounds": {
+          "left": 80,
+          "top": 811.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 150,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000150",
+        "text": "ふぶちゃんについに行っちゃいましょう",
+        "lines": [
+          "ふぶちゃんについに行っちゃいましょう"
+        ],
+        "lineLogicalWidths": [
+          36
+        ],
+        "startFrame": 15492,
+        "endFrameExclusive": 15588,
+        "bounds": {
+          "left": 80,
+          "top": 811.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 155,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000155",
+        "text": "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛",
+        "lines": [
+          "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛",
+          "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 16164,
+        "endFrameExclusive": 16238,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 156,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000156",
+        "text": "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛",
+        "lines": [
+          "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛",
+          "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 16238,
+        "endFrameExclusive": 16301,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 157,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000157",
+        "text": "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛",
+        "lines": [
+          "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛",
+          "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 16301,
+        "endFrameExclusive": 16353,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 158,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000158",
+        "text": "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ�",
+        "lines": [
+          "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛",
+          "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ�"
+        ],
+        "lineLogicalWidths": [
+          36,
+          32
+        ],
+        "startFrame": 16353,
+        "endFrameExclusive": 16962,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 258,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000258",
+        "text": "で、これでゲッツーだったらどうしよう",
+        "lines": [
+          "で、これでゲッツーだったらどうしよう"
+        ],
+        "lineLogicalWidths": [
+          36
+        ],
+        "startFrame": 28537,
+        "endFrameExclusive": 28610,
+        "bounds": {
+          "left": 80,
+          "top": 811.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 282,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000282",
+        "text": "なにする?どうする?なにする?どうする?",
+        "lines": [
+          "なにする?どうする?なにする?どうする?"
+        ],
+        "lineLogicalWidths": [
+          36
+        ],
+        "startFrame": 34750,
+        "endFrameExclusive": 34932,
+        "bounds": {
+          "left": 80,
+          "top": 811.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 311,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000311",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41514,
+        "endFrameExclusive": 41542,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 312,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000312",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41542,
+        "endFrameExclusive": 41568,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 313,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000313",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41568,
+        "endFrameExclusive": 41625,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 314,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000314",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41625,
+        "endFrameExclusive": 41648,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 315,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000315",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41789,
+        "endFrameExclusive": 41801,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 316,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000316",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41801,
+        "endFrameExclusive": 41837,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 317,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000317",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41837,
+        "endFrameExclusive": 41855,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 318,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000318",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41855,
+        "endFrameExclusive": 41860,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 319,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000319",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41860,
+        "endFrameExclusive": 41884,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 320,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000320",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41884,
+        "endFrameExclusive": 41890,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 321,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000321",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41890,
+        "endFrameExclusive": 41930,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      },
+      {
+        "captionNumber": 322,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000322",
+        "text": "ああああああああああああああああああああああああああああああああああああ",
+        "lines": [
+          "ああああああああああああああああああ",
+          "ああああああああああああああああああ"
+        ],
+        "lineLogicalWidths": [
+          36,
+          36
+        ],
+        "startFrame": 41930,
+        "endFrameExclusive": 42011,
+        "bounds": {
+          "left": 80,
+          "top": 667.2,
+          "right": 1856,
+          "bottom": 975.2
+        },
+        "rightSafeBoundaryPx": 1840,
+        "rightOverflowPx": 16
+      }
+    ]
+  },
+  "unchangedBindings": [
+    {
+      "binding": "previousFailureBinding",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/renderer-result.json",
+      "fileSha256": "6f9e679b967f6083d0b4044d1dde6cd4e7f5e0bce579c2e901b11d8f2ffc0c9d",
+      "bytes": 1837,
+      "status": "unchanged"
+    },
+    {
+      "binding": "bridgeBinding",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-v001.json",
+      "fileSha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60",
+      "bytes": 1035588,
+      "status": "unchanged"
+    },
+    {
+      "binding": "preflightBinding",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-preflight-v001.json",
+      "fileSha256": "53fa95b659bb06c1e9915ea4759329b91f2c6e0805669020df2d58de9c6a53af",
+      "bytes": 2128,
+      "status": "unchanged"
+    },
+    {
+      "binding": "admissionBinding",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-admission-v001.json",
+      "fileSha256": "95e5c592d598a4abe2880c0a53bddbe5ddac5f100b6223d52268785d9ed13c9d",
+      "bytes": 5048,
+      "status": "unchanged"
+    },
+    {
+      "binding": "commonPlanBinding",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-common-plan-v001.json",
+      "fileSha256": "32d4ee6f040e6e7340c0b976192bca6310d466756eef1e4cef8ebffdbe66e449",
+      "bytes": 2095671,
+      "status": "unchanged"
+    },
+    {
+      "binding": "implementationBinding",
+      "path": "evals/clip_composition/digest_v1_phase2_bridge_draw_replay.mts",
+      "fileSha256": "85e9ea6430665d85a8afa694ea2a121cf608a61edb9ca6858d0a4fdb7e424d00",
+      "bytes": 7595,
+      "status": "unchanged"
+    }
+  ],
+  "retainedFailureArtifacts": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/.render-bridge-v002.presentation-renderer-v002-work-Ahau9u/scratch/layout-input.json",
+      "fileSha256": "e956d06be31e257b8977ccab5edd951e3001f82f2074ea3aa04cdaccab6571ef",
+      "bytes": 1943455
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/.render-bridge-v002.presentation-renderer-v002-work-Ahau9u/scratch/layout-output.json",
+      "fileSha256": "880b2a461df016fc793623f5e666960ea7e1085c02a254882ffa188cb5c3f8ac",
+      "bytes": 157142
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/.render-bridge-v002.presentation-renderer-v002.lock/owner.json",
+      "fileSha256": "9912c42a2846f3cc9c464d1cd6d809e38934eb8e0eba016abe439fb2125b72b4",
+      "bytes": 293
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/.render.presentation-renderer-v002-work-g9tlgo/scratch/layout-input.json",
+      "fileSha256": "e956d06be31e257b8977ccab5edd951e3001f82f2074ea3aa04cdaccab6571ef",
+      "bytes": 1943455
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/.render.presentation-renderer-v002.lock/owner.json",
+      "fileSha256": "fa6155f7cddbbf9f04864c771125130fc69126014a7454352e4d65f6860727cf",
+      "bytes": 281
+    }
+  ],
+  "processObservations": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/process-observations/phase2-caption-bridge-v002/0001-layout-inspection/exit-code.txt",
+      "fileSha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytes": 2
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/process-observations/phase2-caption-bridge-v002/0001-layout-inspection/signal.txt",
+      "fileSha256": "fcf33dfbe13c2354bf0e1b063f9fb422747a46cee00b7420bceff2b81457b345",
+      "bytes": 5
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/process-observations/phase2-caption-bridge-v002/0001-layout-inspection/stderr.txt",
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "implementationChanges": 0,
+  "subsequentExecutionAttempts": 0,
+  "newMeaningJudgments": 0,
+  "newAcousticObservations": 0,
+  "paidApiCalls": 0,
+  "newMaterials": 0,
+  "costUsd": 0,
+  "captionOverlayRenderingReached": false,
+  "videoCompositionReached": false,
+  "technicalQcReached": false,
+  "completedVideo": false,
+  "verificationCreated": false,
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}
