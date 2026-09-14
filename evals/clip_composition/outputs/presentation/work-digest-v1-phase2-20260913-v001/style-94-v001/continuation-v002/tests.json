@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "digest-v1-phase2-style94-continuation-tests-v002",
+  "status": "passed",
+  "cases": [
+    {
+      "name": "serializer-buffer-and-original-bug-reproduction",
+      "status": "passed"
+    },
+    {
+      "name": "actual-callback-save-buffer-readback",
+      "status": "passed"
+    },
+    {
+      "name": "existing-formal-decoder-and-binding",
+      "status": "passed"
+    },
+    {
+      "name": "changed-byte-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "truncated-byte-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "binding-only-after-byte-match",
+      "status": "passed"
+    },
+    {
+      "name": "existing-qc-not-overwritten",
+      "status": "passed"
+    }
+  ],
+  "implementationBinding": {
+    "path": "evals/clip_composition/digest_v1_phase2_style94_continuation_v002.mts",
+    "fileSha256": "2434c7d55b7f035dc69bb1cfd61fba5048b98e1aa1a9eac8671350e49ab9e910"
+  },
+  "preflightBinding": {
+    "schemaVersion": "digest-v1-phase2-style94-continuation-preflight-v002",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v002/preflight.json",
+    "fileSha256": "d4d37c8e7bbd133bf3e040fb6b0205f64a2a83d595bc5f2ca54fe6453116c2c2",
+    "canonicalSha256": "59d2e634e880d1dcf66e5ee4c9c95ba4e620dfed85a7590b2bb971f46b38fb72"
+  },
+  "testImplementationBinding": {
+    "path": "evals/clip_composition/digest_v1_phase2_style94_continuation_v002.test.mts",
+    "fileSha256": "f8d72e119fd9f24249629acec9aa7e20af772482057e9aa0ea8b14248b00f11c"
+  },
+  "previousRasterBinding": {
+    "schemaVersion": "digest-v1-phase2-style94-raster-qc-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/raster-qc.json",
+    "fileSha256": "237c360d50e68508cefb47bc5addca68e753833b7e666c47b7ac6e1acaef36cd",
+    "canonicalSha256": "e1211104ecc77511422128207e84f786ed78dd0d17ba889da57994774e685cfe"
+  },
+  "savedQcBinding": {
+    "schemaVersion": "digest-v1-phase2-style94-raster-qc-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v002/local-test-evidence/saved-real-raster-qc.json",
+    "fileSha256": "237c360d50e68508cefb47bc5addca68e753833b7e666c47b7ac6e1acaef36cd",
+    "canonicalSha256": "e1211104ecc77511422128207e84f786ed78dd0d17ba889da57994774e685cfe"
+  },
+  "old20TestLimitation": "旧20件は保存callbackを呼んでいなかった。今回の局所検査は実callbackの保存関数を実際の325件QCで呼ぶ。",
+  "newRenderExecutions": 0
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "digest-v1-phase2-style94-continuation-result-v002",
+  "status": "failed",
+  "startBinding": {
+    "schemaVersion": "digest-v1-phase2-style94-continuation-start-v002",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v002/draw-start.json",
+    "fileSha256": "5a90c4cf32ca8799abc7eeaf98345822c50c818e32d726cc375d0f2dd2bbaa86",
+    "canonicalSha256": "93289bad5cc793d81e1e7a8d1df9c44a55eff3d3063aee85a98fc6bca69e26b0"
+  },
+  "rasterQcBinding": {
+    "schemaVersion": "digest-v1-phase2-style94-raster-qc-v002",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v002/raster-qc.json",
+    "fileSha256": "9b6f937b02f6736d58c532b23703ca0634a5cec5b84599e2d08f7521e735158c",
+    "canonicalSha256": "7649590d7b67e13ab0967e0f2b3bb0c3c0dfbaf86182c6d1c92fe79405287539"
+  },
+  "finalQcBinding": null,
+  "exitCode": 2,
+  "result": {
+    "exitCode": 2,
+    "failure": {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "process_failed",
+      "stage": "execution",
+      "message": "presentation renderer child process failed",
+      "cleanupWarnings": [
+        {
+          "code": "RENDER_OUTPUT_LOCK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v002.presentation-renderer-v002.lock",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        },
+        {
+          "code": "RENDER_OUTPUT_WORK_RETAINED_FOR_SAFETY",
+          "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v002.presentation-renderer-v002-work-1Pslqe",
+          "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+        }
+      ]
+    }
+  },
+  "fatalProcessEvidence": {
+    "innerStage": "overlay-render",
+    "innerCode": "CHILD_PROCESS_EXIT_NONZERO"
+  }
+}

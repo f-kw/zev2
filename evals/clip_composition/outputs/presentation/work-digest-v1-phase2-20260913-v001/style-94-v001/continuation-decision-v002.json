@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "digest-v1-phase2-style94-continuation-decision-v002",
+  "decision": "PASS / LIMITED FIX / FULL REDRAW",
+  "source": "kawafmmの自動相談委任に基づくZEV進行管理３のGPT_DECISION",
+  "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+  "checkpoint": "91e811a4b19f6cbe8bc2aea0382e254222c8c0e6",
+  "responseState": "レスポンス確認済み",
+  "acceptedEvidence": "94px Node325/325、実画像QC325/325、282合格、全325独立再描画SHA一致、違反0。映像合成とMP4は0。",
+  "quotes": [
+    "接続側の保存照合だけを修正してよい。",
+    "readFileSync(path) でBufferとして読む",
+    "formal(record) のBufferと .equals() でbyte一致を確認する",
+    "renderer、QC evaluator、formal serializerは変更しない。",
+    "旧実装・旧失敗証拠を不変保持する。",
+    "可能なら既存 digest_v1_phase2_style94.mts を上書きして過去のimplementation bindingを曖昧にせず、小さいversioned resume / continuation adapter を追加する。",
+    "既存325画像の再利用はしない。",
+    "style versionは94px v001のまま。render attemptだけを新しいversionとして区別する。",
+    "新たなZEV進行管理３確認は途中では不要。",
+    "画像再利用ではなく、修正済みcallbackを実際に通す325字幕の全再描画を未使用rootで1回行い、そのまま既存合成・final QC・完成MP4まで自律続行すること。",
+    "この件はもうユーザー判断へ戻す必要はありません。"
+  ],
+  "publicationStopBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/publication-stop-v001.json",
+    "fileSha256": "1eaad6b511d31c5bab0fef6986d43dcf702e91ea1a5dbb094aad043aa6c80626"
+  },
+  "requiredRechecks": [
+    "旧94px preflight",
+    "style binding",
+    "derivation",
+    "bridge",
+    "common plan",
+    "保存済み325/325 raster QC",
+    "publication-stop",
+    "既存入力・実装binding"
+  ],
+  "localTests": [
+    "serializerがBufferを返す",
+    "保存→Buffer再読→byte一致",
+    "既存formal decoder/readBound PASS",
+    "1byte改変拒否",
+    "切詰め拒否",
+    "byte一致後だけbinding成立"
+  ],
+  "rendererOutputRoot": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/render-v002",
+  "renderAttempts": 1,
+  "reuseOldImages": false,
+  "styleChange": false,
+  "pipeline": [
+    "全入力再照合",
+    "Node layout gate",
+    "全325overlay新規再生成",
+    "決定性検査",
+    "325raster QC",
+    "修正版callbackによる保存・byte再読照合",
+    "全PASS時のみ既存合成",
+    "output media inspection",
+    "final QC",
+    "final QC保存・byte再読照合",
+    "MP4 publication",
+    "verification",
+    "checkpoint commit/push",
+    "Phase2第一完成AUDIT_ONLY"
+  ],
+  "prohibited": [
+    "旧成果物上書き・削除",
+    "失敗画像コピーによる正式描画代替",
+    "renderer/QC弱体化",
+    "safe area/style/本文/ID/境界/改行/時刻変更",
+    "意味判断",
+    "音響再観測",
+    "API通信",
+    "新素材",
+    "追加費用"
+  ],
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}
