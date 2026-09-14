@@ -1,0 +1,2135 @@
+{
+  "schemaVersion": "digest-v1-phase2-human-sync-watchlist-v001",
+  "timingBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-timing-resolution-v002.json",
+    "fileSha256": "288dd18230b1bb0e59cd6ff2b1ec47bf86dc916026f8e9c77cb219ed275847e1"
+  },
+  "timelineBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/timeline.json",
+    "fileSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e"
+  },
+  "criteria": "保存済み音響境界の片側以上が未解決の全字幕。接続位置は各保持区間の最後と次区間の最初の字幕を列挙。近傍秒数や新規係数は使用しない。",
+  "twoSidedAcousticCaptionCount": 271,
+  "oneSidedAcousticCaptionCount": 43,
+  "bothSidesFallbackCaptionCount": 11,
+  "fallbackCaptionCount": 54,
+  "fallbackCaptions": [
+    {
+      "captionNumber": 4,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000004",
+      "text": "お!夏休み入ります!",
+      "startFrame": 338,
+      "endFrameExclusive": 434,
+      "timelineSegmentId": "segment-0001",
+      "candidateIds": [
+        "candidate-0001"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-17-unit-8",
+        "observedMs": 513540,
+        "sourceMs": 513540
+      }
+    },
+    {
+      "captionNumber": 23,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000023",
+      "text": "どうするどうするどうする?",
+      "startFrame": 1388,
+      "endFrameExclusive": 1416,
+      "timelineSegmentId": "segment-0001",
+      "candidateIds": [
+        "candidate-0001"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-18-unit-7",
+        "observedMs": 546280,
+        "sourceMs": 546280
+      }
+    },
+    {
+      "captionNumber": 33,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000033",
+      "text": "リリカがチャットくれてる",
+      "startFrame": 1789,
+      "endFrameExclusive": 1851,
+      "timelineSegmentId": "segment-0002",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-67-unit-9",
+        "observedMs": 2012920,
+        "sourceMs": 2012920
+      }
+    },
+    {
+      "captionNumber": 46,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000046",
+      "text": "他2人はえーっとスタミナとかコントロールとかからFみたいな感じ",
+      "startFrame": 4066,
+      "endFrameExclusive": 4400,
+      "timelineSegmentId": "segment-0002",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-unresolved-other-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-69-unit-21",
+          "observedMs": 2083940,
+          "sourceMs": 2083940
+        }
+      }
+    },
+    {
+      "captionNumber": 47,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000047",
+      "text": "なんだけどどうしよう",
+      "startFrame": 4400,
+      "endFrameExclusive": 4414,
+      "timelineSegmentId": "segment-0002",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-adjacent-unresolved-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-69-unit-22",
+          "observedMs": 2083940,
+          "sourceMs": 2083940
+        }
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-unresolved-other-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-69-unit-26",
+          "observedMs": 2085740,
+          "sourceMs": 2085740
+        }
+      }
+    },
+    {
+      "captionNumber": 48,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000048",
+      "text": "相談してみよう",
+      "startFrame": 4414,
+      "endFrameExclusive": 4422,
+      "timelineSegmentId": "segment-0002",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-adjacent-unresolved-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-69-unit-27",
+          "observedMs": 2085740,
+          "sourceMs": 2085740
+        }
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-unresolved-other-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-69-unit-31",
+          "observedMs": 2088740,
+          "sourceMs": 2088740
+        }
+      }
+    },
+    {
+      "captionNumber": 49,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000049",
+      "text": "ライバルなのに教えてくれる",
+      "startFrame": 4422,
+      "endFrameExclusive": 4436,
+      "timelineSegmentId": "segment-0002",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-adjacent-unresolved-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-69-unit-32",
+          "observedMs": 2088740,
+          "sourceMs": 2088740
+        }
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-unresolved-other-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-69-unit-41",
+          "observedMs": 2096780,
+          "sourceMs": 2096780
+        }
+      }
+    },
+    {
+      "captionNumber": 50,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000050",
+      "text": "いやライバルライバルって言いますけどね",
+      "startFrame": 4436,
+      "endFrameExclusive": 4456,
+      "timelineSegmentId": "segment-0002",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-adjacent-unresolved-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-69-unit-42",
+          "observedMs": 2096780,
+          "sourceMs": 2096780
+        }
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-unresolved-other-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-69-unit-53",
+          "observedMs": 2098980,
+          "sourceMs": 2098980
+        }
+      }
+    },
+    {
+      "captionNumber": 51,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000051",
+      "text": "俺たちは仲間",
+      "startFrame": 4456,
+      "endFrameExclusive": 4462,
+      "timelineSegmentId": "segment-0002",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-adjacent-unresolved-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-69-unit-54",
+          "observedMs": 2098980,
+          "sourceMs": 2098980
+        }
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-69-unit-58",
+        "observedMs": 2099980,
+        "sourceMs": 2099980
+      }
+    },
+    {
+      "captionNumber": 52,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000052",
+      "text": "忘れてるかもしれませんけどね",
+      "startFrame": 4521,
+      "endFrameExclusive": 4564,
+      "timelineSegmentId": "segment-0002",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-70-unit-9",
+        "observedMs": 2103360,
+        "sourceMs": 2103360
+      }
+    },
+    {
+      "captionNumber": 62,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000062",
+      "text": "知ってんよマリン",
+      "startFrame": 5401,
+      "endFrameExclusive": 5420,
+      "timelineSegmentId": "segment-0002",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-71-unit-7",
+        "observedMs": 2131900,
+        "sourceMs": 2131900
+      }
+    },
+    {
+      "captionNumber": 69,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000069",
+      "text": "まあリリカ的にはエースにしたいとか思ったら",
+      "startFrame": 6363,
+      "endFrameExclusive": 6528,
+      "timelineSegmentId": "segment-0003",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-76-unit-16",
+        "observedMs": 2289380,
+        "sourceMs": 2289380
+      }
+    },
+    {
+      "captionNumber": 74,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000074",
+      "text": "なるほど",
+      "startFrame": 6792,
+      "endFrameExclusive": 6869,
+      "timelineSegmentId": "segment-0003",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": true,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "end"
+      ],
+      "startEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-76-unit-59",
+        "observedMs": 2298160,
+        "sourceMs": 2298160
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "cue-boundary-inside-acoustic-token-or-not-unique"
+      }
+    },
+    {
+      "captionNumber": 75,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000075",
+      "text": "うわめっちゃむずいこれどうしよう",
+      "startFrame": 6869,
+      "endFrameExclusive": 6990,
+      "timelineSegmentId": "segment-0003",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "cue-boundary-inside-acoustic-token-or-not-unique"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-76-unit-71",
+        "observedMs": 2304760,
+        "sourceMs": 2304760
+      }
+    },
+    {
+      "captionNumber": 78,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000078",
+      "text": "もう一回選手見直すか",
+      "startFrame": 7179,
+      "endFrameExclusive": 7225,
+      "timelineSegmentId": "segment-0003",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-77-unit-9",
+        "observedMs": 2312600,
+        "sourceMs": 2312600
+      }
+    },
+    {
+      "captionNumber": 89,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000089",
+      "text": "今まで生言ってすみませんした!",
+      "startFrame": 8078,
+      "endFrameExclusive": 8172,
+      "timelineSegmentId": "segment-0003",
+      "candidateIds": [
+        "candidate-0002"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-78-unit-10",
+        "observedMs": 2344160,
+        "sourceMs": 2344160
+      }
+    },
+    {
+      "captionNumber": 94,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000094",
+      "text": "これがさっきやろうとしたやつがこれか",
+      "startFrame": 8505,
+      "endFrameExclusive": 8575,
+      "timelineSegmentId": "segment-0004",
+      "candidateIds": [
+        "candidate-0003"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-138-unit-14",
+        "observedMs": 4144560,
+        "sourceMs": 4144560
+      }
+    },
+    {
+      "captionNumber": 105,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000105",
+      "text": "1でどれくらいかマジ分からん",
+      "startFrame": 10259,
+      "endFrameExclusive": 10316,
+      "timelineSegmentId": "segment-0004",
+      "candidateIds": [
+        "candidate-0003"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-140-unit-12",
+        "observedMs": 4202600,
+        "sourceMs": 4202600
+      }
+    },
+    {
+      "captionNumber": 113,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000113",
+      "text": "さらに下行ってる",
+      "startFrame": 11222,
+      "endFrameExclusive": 11244,
+      "timelineSegmentId": "segment-0004",
+      "candidateIds": [
+        "candidate-0003"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-141-unit-6",
+        "observedMs": 4233520,
+        "sourceMs": 4233520
+      }
+    },
+    {
+      "captionNumber": 120,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000120",
+      "text": "同じにしか見えないけどまた違う",
+      "startFrame": 12051,
+      "endFrameExclusive": 12109,
+      "timelineSegmentId": "segment-0004",
+      "candidateIds": [
+        "candidate-0003"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-142-unit-10",
+        "observedMs": 4262360,
+        "sourceMs": 4262360
+      }
+    },
+    {
+      "captionNumber": 134,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000134",
+      "text": "はいちょっとマジでわかんないけど",
+      "startFrame": 13983,
+      "endFrameExclusive": 14317,
+      "timelineSegmentId": "segment-0004",
+      "candidateIds": [
+        "candidate-0003"
+      ],
+      "acousticStartResolved": true,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "end"
+      ],
+      "startEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-144-unit-11",
+        "observedMs": 4324840,
+        "sourceMs": 4324840
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "cue-boundary-inside-acoustic-token-or-not-unique"
+      }
+    },
+    {
+      "captionNumber": 135,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000135",
+      "text": "うーんまあこれでいいということで",
+      "startFrame": 14317,
+      "endFrameExclusive": 14407,
+      "timelineSegmentId": "segment-0004",
+      "candidateIds": [
+        "candidate-0003"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "cue-boundary-inside-acoustic-token-or-not-unique"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-144-unit-25",
+        "observedMs": 4338980,
+        "sourceMs": 4338980
+      }
+    },
+    {
+      "captionNumber": 138,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000138",
+      "text": "えー新旧宿発ボールを",
+      "startFrame": 14759,
+      "endFrameExclusive": 14817,
+      "timelineSegmentId": "segment-0004",
+      "candidateIds": [
+        "candidate-0003"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-145-unit-8",
+        "observedMs": 4352620,
+        "sourceMs": 4352620
+      }
+    },
+    {
+      "captionNumber": 154,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000154",
+      "text": "え、もう次で最後?やばくない?",
+      "startFrame": 16082,
+      "endFrameExclusive": 16164,
+      "timelineSegmentId": "segment-0006",
+      "candidateIds": [
+        "candidate-0004"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-165-unit-12",
+        "observedMs": 4953360,
+        "sourceMs": 4953360
+      }
+    },
+    {
+      "captionNumber": 159,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000159",
+      "text": "やばい、ホロメン…",
+      "startFrame": 17471,
+      "endFrameExclusive": 17517,
+      "timelineSegmentId": "segment-0007",
+      "candidateIds": [
+        "candidate-0004"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-168-unit-8",
+        "observedMs": 5051000,
+        "sourceMs": 5051000
+      }
+    },
+    {
+      "captionNumber": 176,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000176",
+      "text": "早く見せろビトどうなってんのか",
+      "startFrame": 18885,
+      "endFrameExclusive": 18952,
+      "timelineSegmentId": "segment-0008",
+      "candidateIds": [
+        "candidate-0005"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-254-unit-13",
+        "observedMs": 7622740,
+        "sourceMs": 7622740
+      }
+    },
+    {
+      "captionNumber": 183,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000183",
+      "text": "ムービングファースト来た",
+      "startFrame": 19897,
+      "endFrameExclusive": 19973,
+      "timelineSegmentId": "segment-0008",
+      "candidateIds": [
+        "candidate-0005"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-255-unit-9",
+        "observedMs": 7656780,
+        "sourceMs": 7656780
+      }
+    },
+    {
+      "captionNumber": 191,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000191",
+      "text": "なあ、ビトが魔物かどうかが見れないんだよ",
+      "startFrame": 20685,
+      "endFrameExclusive": 20866,
+      "timelineSegmentId": "segment-0008",
+      "candidateIds": [
+        "candidate-0005"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-256-unit-16",
+        "observedMs": 7686540,
+        "sourceMs": 7686540
+      }
+    },
+    {
+      "captionNumber": 198,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000198",
+      "text": "歩き出したか!",
+      "startFrame": 21578,
+      "endFrameExclusive": 21606,
+      "timelineSegmentId": "segment-0008",
+      "candidateIds": [
+        "candidate-0005"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-257-unit-6",
+        "observedMs": 7711200,
+        "sourceMs": 7711200
+      }
+    },
+    {
+      "captionNumber": 204,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000204",
+      "text": "これセンター返しがさすがにすごい",
+      "startFrame": 22099,
+      "endFrameExclusive": 22141,
+      "timelineSegmentId": "segment-0009",
+      "candidateIds": [
+        "candidate-0006"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-271-unit-12",
+        "observedMs": 8141140,
+        "sourceMs": 8141140
+      }
+    },
+    {
+      "captionNumber": 214,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000214",
+      "text": "7だし引っ張り?",
+      "startFrame": 22958,
+      "endFrameExclusive": 23060,
+      "timelineSegmentId": "segment-0010",
+      "candidateIds": [
+        "candidate-0006"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-275-unit-8",
+        "observedMs": 8254180,
+        "sourceMs": 8254180
+      }
+    },
+    {
+      "captionNumber": 220,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000220",
+      "text": "引っ張りの風が来てる?",
+      "startFrame": 23855,
+      "endFrameExclusive": 23912,
+      "timelineSegmentId": "segment-0010",
+      "candidateIds": [
+        "candidate-0006"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-276-unit-11",
+        "observedMs": 8282560,
+        "sourceMs": 8282560
+      }
+    },
+    {
+      "captionNumber": 231,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000231",
+      "text": "どうすんのよ1点取れば勝てる?",
+      "startFrame": 24802,
+      "endFrameExclusive": 24908,
+      "timelineSegmentId": "segment-0011",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-348-unit-14",
+        "observedMs": 10445080,
+        "sourceMs": 10445080
+      }
+    },
+    {
+      "captionNumber": 242,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000242",
+      "text": "肩DのクイックCそして内は投類C",
+      "startFrame": 26332,
+      "endFrameExclusive": 26576,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-350-unit-13",
+        "observedMs": 10512060,
+        "sourceMs": 10512060
+      }
+    },
+    {
+      "captionNumber": 248,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000248",
+      "text": "CCだとキツイか",
+      "startFrame": 27178,
+      "endFrameExclusive": 27211,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-351-unit-7",
+        "observedMs": 10533240,
+        "sourceMs": 10533240
+      }
+    },
+    {
+      "captionNumber": 254,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000254",
+      "text": "リターンの方がでかい?",
+      "startFrame": 28162,
+      "endFrameExclusive": 28219,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-352-unit-10",
+        "observedMs": 10566840,
+        "sourceMs": 10566840
+      }
+    },
+    {
+      "captionNumber": 265,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000265",
+      "text": "ああああああしかもセーフだー!",
+      "startFrame": 30078,
+      "endFrameExclusive": 32305,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-356-unit-7",
+        "observedMs": 10703040,
+        "sourceMs": 10703040
+      }
+    },
+    {
+      "captionNumber": 266,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000266",
+      "text": "スクイーズ2なんですけど",
+      "startFrame": 32850,
+      "endFrameExclusive": 32881,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-357-unit-8",
+        "observedMs": 10722220,
+        "sourceMs": 10722220
+      }
+    },
+    {
+      "captionNumber": 272,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000272",
+      "text": "ミートのやつないミートのやつない",
+      "startFrame": 33424,
+      "endFrameExclusive": 33587,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-358-unit-12",
+        "observedMs": 10745760,
+        "sourceMs": 10745760
+      }
+    },
+    {
+      "captionNumber": 273,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000273",
+      "text": "大激流かな?",
+      "startFrame": 34339,
+      "endFrameExclusive": 34387,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-359-unit-5",
+        "observedMs": 10772440,
+        "sourceMs": 10772440
+      }
+    },
+    {
+      "captionNumber": 286,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000286",
+      "text": "ミートじゃない走力BBトールEE",
+      "startFrame": 35218,
+      "endFrameExclusive": 35299,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-360-unit-9",
+        "observedMs": 10802840,
+        "sourceMs": 10802840
+      }
+    },
+    {
+      "captionNumber": 300,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000300",
+      "text": "クイズでバント職人だからいける?",
+      "startFrame": 37438,
+      "endFrameExclusive": 37538,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-362-unit-12",
+        "observedMs": 10877460,
+        "sourceMs": 10877460
+      }
+    },
+    {
+      "captionNumber": 302,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000302",
+      "text": "分かったバント職人に!",
+      "startFrame": 37967,
+      "endFrameExclusive": 38049,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-363-unit-8",
+        "observedMs": 10894500,
+        "sourceMs": 10894500
+      }
+    },
+    {
+      "captionNumber": 305,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000305",
+      "text": "マジで?",
+      "startFrame": 39045,
+      "endFrameExclusive": 39706,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-364-unit-4",
+        "observedMs": 10949720,
+        "sourceMs": 10949720
+      }
+    },
+    {
+      "captionNumber": 306,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000306",
+      "text": "やめろいいわまずい",
+      "startFrame": 39932,
+      "endFrameExclusive": 39976,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-365-unit-7",
+        "observedMs": 10958720,
+        "sourceMs": 10958720
+      }
+    },
+    {
+      "captionNumber": 311,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000311",
+      "text": "ああああああああああああああああああああああああああああああああああああ",
+      "startFrame": 41514,
+      "endFrameExclusive": 41542,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-adjacent-unresolved-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-367-unit-18",
+          "observedMs": 11017560,
+          "sourceMs": 11017560
+        }
+      }
+    },
+    {
+      "captionNumber": 312,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000312",
+      "text": "ああああああああああああああああああああああああああああああああああああ",
+      "startFrame": 41542,
+      "endFrameExclusive": 41568,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-unresolved-other-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-367-unit-19",
+          "observedMs": 11017560,
+          "sourceMs": 11017560
+        }
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-adjacent-unresolved-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-367-unit-36",
+          "observedMs": 11017860,
+          "sourceMs": 11017860
+        }
+      }
+    },
+    {
+      "captionNumber": 313,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000313",
+      "text": "ああああああああああああああああああああああああああああああああああああ",
+      "startFrame": 41568,
+      "endFrameExclusive": 41625,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-unresolved-other-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-367-unit-37",
+          "observedMs": 11017860,
+          "sourceMs": 11017860
+        }
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-adjacent-unresolved-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-367-unit-54",
+          "observedMs": 11019180,
+          "sourceMs": 11019180
+        }
+      }
+    },
+    {
+      "captionNumber": 314,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000314",
+      "text": "ああああああああああああああああああああああああああああああああああああ",
+      "startFrame": 41625,
+      "endFrameExclusive": 41648,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "nonpositive-acoustic-cue-interval"
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "nonpositive-acoustic-cue-interval"
+      }
+    },
+    {
+      "captionNumber": 320,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000320",
+      "text": "ああああああああああああああああああああああああああああああああああああ",
+      "startFrame": 41884,
+      "endFrameExclusive": 41890,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": true,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "end"
+      ],
+      "startEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-367-unit-163",
+        "observedMs": 11022340,
+        "sourceMs": 11022340
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-adjacent-unresolved-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-367-unit-180",
+          "observedMs": 11025380,
+          "sourceMs": 11025380
+        }
+      }
+    },
+    {
+      "captionNumber": 321,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000321",
+      "text": "ああああああああああああああああああああああああああああああああああああ",
+      "startFrame": 41890,
+      "endFrameExclusive": 41930,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "nonpositive-acoustic-cue-interval"
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "nonpositive-acoustic-cue-interval"
+      }
+    },
+    {
+      "captionNumber": 322,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000322",
+      "text": "ああああああああああああああああああああああああああああああああああああ",
+      "startFrame": 41930,
+      "endFrameExclusive": 42011,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": false,
+      "fallbackSides": [
+        "start",
+        "end"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "nonpositive-acoustic-cue-interval"
+      },
+      "endEvidence": {
+        "status": "unresolved",
+        "reason": "nonpositive-acoustic-cue-interval"
+      }
+    },
+    {
+      "captionNumber": 323,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000323",
+      "text": "ああああああああああああああああ",
+      "startFrame": 42011,
+      "endFrameExclusive": 42413,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "corrected-endpoint-conflicts-with-adjacent-unresolved-endpoint",
+        "notPromotedObservation": {
+          "status": "resolved",
+          "unitId": "chunk-367-unit-217",
+          "observedMs": 11025380,
+          "sourceMs": 11025380
+        }
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-367-unit-224",
+        "observedMs": 11039980,
+        "sourceMs": 11039980
+      }
+    },
+    {
+      "captionNumber": 324,
+      "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000324",
+      "text": "涙出た辛かった本当にもう嫌だ",
+      "startFrame": 43709,
+      "endFrameExclusive": 44366,
+      "timelineSegmentId": "segment-0012",
+      "candidateIds": [
+        "candidate-0007"
+      ],
+      "acousticStartResolved": false,
+      "acousticEndResolved": true,
+      "fallbackSides": [
+        "start"
+      ],
+      "startEvidence": {
+        "status": "unresolved",
+        "reason": "window-origin-does-not-observe-speech-onset"
+      },
+      "endEvidence": {
+        "status": "resolved",
+        "unitId": "chunk-370-unit-7",
+        "observedMs": 11105060,
+        "sourceMs": 11105060
+      }
+    }
+  ],
+  "prospectJunctions": [
+    {
+      "frame": 1789,
+      "candidateChanged": true,
+      "before": {
+        "captionNumber": 32,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000032",
+        "text": "これ何も作ってないんだけど",
+        "startFrame": 1748,
+        "endFrameExclusive": 1789,
+        "timelineSegmentId": "segment-0001",
+        "candidateIds": [
+          "candidate-0001"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-18-unit-84",
+          "observedMs": 557320,
+          "sourceMs": 557320
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-18-unit-91",
+          "observedMs": 558740,
+          "sourceMs": 558714
+        }
+      },
+      "after": {
+        "captionNumber": 33,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000033",
+        "text": "リリカがチャットくれてる",
+        "startFrame": 1789,
+        "endFrameExclusive": 1851,
+        "timelineSegmentId": "segment-0002",
+        "candidateIds": [
+          "candidate-0002"
+        ],
+        "acousticStartResolved": false,
+        "acousticEndResolved": true,
+        "fallbackSides": [
+          "start"
+        ],
+        "startEvidence": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-67-unit-9",
+          "observedMs": 2012920,
+          "sourceMs": 2012920
+        }
+      }
+    },
+    {
+      "frame": 8505,
+      "candidateChanged": true,
+      "before": {
+        "captionNumber": 93,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000093",
+        "text": "だってこんなことになると思わなかった!",
+        "startFrame": 8450,
+        "endFrameExclusive": 8498,
+        "timelineSegmentId": "segment-0003",
+        "candidateIds": [
+          "candidate-0002"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-78-unit-39",
+          "observedMs": 2353440,
+          "sourceMs": 2353440
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-78-unit-49",
+          "observedMs": 2355040,
+          "sourceMs": 2355040
+        }
+      },
+      "after": {
+        "captionNumber": 94,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000094",
+        "text": "これがさっきやろうとしたやつがこれか",
+        "startFrame": 8505,
+        "endFrameExclusive": 8575,
+        "timelineSegmentId": "segment-0004",
+        "candidateIds": [
+          "candidate-0003"
+        ],
+        "acousticStartResolved": false,
+        "acousticEndResolved": true,
+        "fallbackSides": [
+          "start"
+        ],
+        "startEvidence": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-138-unit-14",
+          "observedMs": 4144560,
+          "sourceMs": 4144560
+        }
+      }
+    },
+    {
+      "frame": 16082,
+      "candidateChanged": true,
+      "before": {
+        "captionNumber": 153,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000153",
+        "text": "スーパーノヴァ",
+        "startFrame": 15955,
+        "endFrameExclusive": 16082,
+        "timelineSegmentId": "segment-0005",
+        "candidateIds": [
+          "candidate-0003"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-147-unit-62",
+          "observedMs": 4435680,
+          "sourceMs": 4435680
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-147-unit-66",
+          "observedMs": 4439980,
+          "sourceMs": 4439900
+        }
+      },
+      "after": {
+        "captionNumber": 154,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000154",
+        "text": "え、もう次で最後?やばくない?",
+        "startFrame": 16082,
+        "endFrameExclusive": 16164,
+        "timelineSegmentId": "segment-0006",
+        "candidateIds": [
+          "candidate-0004"
+        ],
+        "acousticStartResolved": false,
+        "acousticEndResolved": true,
+        "fallbackSides": [
+          "start"
+        ],
+        "startEvidence": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-165-unit-12",
+          "observedMs": 4953360,
+          "sourceMs": 4953360
+        }
+      }
+    },
+    {
+      "frame": 18578,
+      "candidateChanged": true,
+      "before": {
+        "captionNumber": 172,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000172",
+        "text": "勝つなら許す",
+        "startFrame": 18494,
+        "endFrameExclusive": 18578,
+        "timelineSegmentId": "segment-0007",
+        "candidateIds": [
+          "candidate-0004"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-169-unit-55",
+          "observedMs": 5083580,
+          "sourceMs": 5083580
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-169-unit-59",
+          "observedMs": 5086380,
+          "sourceMs": 5086380
+        }
+      },
+      "after": {
+        "captionNumber": 173,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000173",
+        "text": "厳しいですねー",
+        "startFrame": 18578,
+        "endFrameExclusive": 18703,
+        "timelineSegmentId": "segment-0008",
+        "candidateIds": [
+          "candidate-0005"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-253-unit-30",
+          "observedMs": 7610280,
+          "sourceMs": 7610280
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-253-unit-33",
+          "observedMs": 7614420,
+          "sourceMs": 7614420
+        }
+      }
+    },
+    {
+      "frame": 22099,
+      "candidateChanged": true,
+      "before": {
+        "captionNumber": 203,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000203",
+        "text": "何がラッキーボーイやふざけんなお前!",
+        "startFrame": 21982,
+        "endFrameExclusive": 22081,
+        "timelineSegmentId": "segment-0008",
+        "candidateIds": [
+          "candidate-0005"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-257-unit-48",
+          "observedMs": 7723720,
+          "sourceMs": 7723720
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-257-unit-63",
+          "observedMs": 7727040,
+          "sourceMs": 7727040
+        }
+      },
+      "after": {
+        "captionNumber": 204,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000204",
+        "text": "これセンター返しがさすがにすごい",
+        "startFrame": 22099,
+        "endFrameExclusive": 22141,
+        "timelineSegmentId": "segment-0009",
+        "candidateIds": [
+          "candidate-0006"
+        ],
+        "acousticStartResolved": false,
+        "acousticEndResolved": true,
+        "fallbackSides": [
+          "start"
+        ],
+        "startEvidence": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-271-unit-12",
+          "observedMs": 8141140,
+          "sourceMs": 8141140
+        }
+      }
+    },
+    {
+      "frame": 24802,
+      "candidateChanged": true,
+      "before": {
+        "captionNumber": 230,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000230",
+        "text": "ツバお前はいつもマリンドキドキさせてくれるなぁ",
+        "startFrame": 24620,
+        "endFrameExclusive": 24802,
+        "timelineSegmentId": "segment-0010",
+        "candidateIds": [
+          "candidate-0006"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-276-unit-106",
+          "observedMs": 8306180,
+          "sourceMs": 8306180
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-277-unit-10",
+          "observedMs": 8312220,
+          "sourceMs": 8312220
+        }
+      },
+      "after": {
+        "captionNumber": 231,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000231",
+        "text": "どうすんのよ1点取れば勝てる?",
+        "startFrame": 24802,
+        "endFrameExclusive": 24908,
+        "timelineSegmentId": "segment-0011",
+        "candidateIds": [
+          "candidate-0007"
+        ],
+        "acousticStartResolved": false,
+        "acousticEndResolved": true,
+        "fallbackSides": [
+          "start"
+        ],
+        "startEvidence": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-348-unit-14",
+          "observedMs": 10445080,
+          "sourceMs": 10445080
+        }
+      }
+    }
+  ],
+  "intraProspectJunctions": [
+    {
+      "frame": 6121,
+      "candidateChanged": false,
+      "before": {
+        "captionNumber": 68,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000068",
+        "text": "かなって言ったかも",
+        "startFrame": 6033,
+        "endFrameExclusive": 6121,
+        "timelineSegmentId": "segment-0002",
+        "candidateIds": [
+          "candidate-0002"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-71-unit-70",
+          "observedMs": 2152320,
+          "sourceMs": 2152320
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-71-unit-75",
+          "observedMs": 2155280,
+          "sourceMs": 2155280
+        }
+      },
+      "after": {
+        "captionNumber": 69,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000069",
+        "text": "まあリリカ的にはエースにしたいとか思ったら",
+        "startFrame": 6363,
+        "endFrameExclusive": 6528,
+        "timelineSegmentId": "segment-0003",
+        "candidateIds": [
+          "candidate-0002"
+        ],
+        "acousticStartResolved": false,
+        "acousticEndResolved": true,
+        "fallbackSides": [
+          "start"
+        ],
+        "startEvidence": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-76-unit-16",
+          "observedMs": 2289380,
+          "sourceMs": 2289380
+        }
+      }
+    },
+    {
+      "frame": 15474,
+      "candidateChanged": false,
+      "before": {
+        "captionNumber": 148,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000148",
+        "text": "これをふぶちゃんに応募させます",
+        "startFrame": 15369,
+        "endFrameExclusive": 15474,
+        "timelineSegmentId": "segment-0004",
+        "candidateIds": [
+          "candidate-0003"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-145-unit-59",
+          "observedMs": 4371020,
+          "sourceMs": 4371020
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-145-unit-69",
+          "observedMs": 4374520,
+          "sourceMs": 4374520
+        }
+      },
+      "after": {
+        "captionNumber": 149,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000149",
+        "text": "行きましょう",
+        "startFrame": 15474,
+        "endFrameExclusive": 15492,
+        "timelineSegmentId": "segment-0005",
+        "candidateIds": [
+          "candidate-0003"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-147-unit-28",
+          "observedMs": 4419620,
+          "sourceMs": 4419620
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-147-unit-30",
+          "observedMs": 4420220,
+          "sourceMs": 4420220
+        }
+      }
+    },
+    {
+      "frame": 16962,
+      "candidateChanged": false,
+      "before": {
+        "captionNumber": 158,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000158",
+        "text": "あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ゛あ�",
+        "startFrame": 16353,
+        "endFrameExclusive": 16962,
+        "timelineSegmentId": "segment-0006",
+        "candidateIds": [
+          "candidate-0004"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-165-unit-121",
+          "observedMs": 4959660,
+          "sourceMs": 4959660
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-165-unit-154",
+          "observedMs": 4979980,
+          "sourceMs": 4979980
+        }
+      },
+      "after": {
+        "captionNumber": 159,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000159",
+        "text": "やばい、ホロメン…",
+        "startFrame": 17471,
+        "endFrameExclusive": 17517,
+        "timelineSegmentId": "segment-0007",
+        "candidateIds": [
+          "candidate-0004"
+        ],
+        "acousticStartResolved": false,
+        "acousticEndResolved": true,
+        "fallbackSides": [
+          "start"
+        ],
+        "startEvidence": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-168-unit-8",
+          "observedMs": 5051000,
+          "sourceMs": 5051000
+        }
+      }
+    },
+    {
+      "frame": 22405,
+      "candidateChanged": false,
+      "before": {
+        "captionNumber": 208,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000208",
+        "text": "なんでいつもお前やれる感じ出してくんの?",
+        "startFrame": 22297,
+        "endFrameExclusive": 22405,
+        "timelineSegmentId": "segment-0009",
+        "candidateIds": [
+          "candidate-0006"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-271-unit-41",
+          "observedMs": 8146320,
+          "sourceMs": 8146320
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-271-unit-55",
+          "observedMs": 8149920,
+          "sourceMs": 8149920
+        }
+      },
+      "after": {
+        "captionNumber": 209,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000209",
+        "text": "センター返し行きます!",
+        "startFrame": 22405,
+        "endFrameExclusive": 22546,
+        "timelineSegmentId": "segment-0010",
+        "candidateIds": [
+          "candidate-0006"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-274-unit-17",
+          "observedMs": 8232340,
+          "sourceMs": 8232340
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-274-unit-24",
+          "observedMs": 8237040,
+          "sourceMs": 8237040
+        }
+      }
+    },
+    {
+      "frame": 26222,
+      "candidateChanged": false,
+      "before": {
+        "captionNumber": 241,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000241",
+        "text": "あーナイス!ナイス天野くん!",
+        "startFrame": 26185,
+        "endFrameExclusive": 26222,
+        "timelineSegmentId": "segment-0011",
+        "candidateIds": [
+          "candidate-0007"
+        ],
+        "acousticStartResolved": true,
+        "acousticEndResolved": true,
+        "fallbackSides": [],
+        "startEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-349-unit-66",
+          "observedMs": 10487640,
+          "sourceMs": 10487640
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-349-unit-78",
+          "observedMs": 10488860,
+          "sourceMs": 10488860
+        }
+      },
+      "after": {
+        "captionNumber": 242,
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000242",
+        "text": "肩DのクイックCそして内は投類C",
+        "startFrame": 26332,
+        "endFrameExclusive": 26576,
+        "timelineSegmentId": "segment-0012",
+        "candidateIds": [
+          "candidate-0007"
+        ],
+        "acousticStartResolved": false,
+        "acousticEndResolved": true,
+        "fallbackSides": [
+          "start"
+        ],
+        "startEvidence": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endEvidence": {
+          "status": "resolved",
+          "unitId": "chunk-350-unit-13",
+          "observedMs": 10512060,
+          "sourceMs": 10512060
+        }
+      }
+    }
+  ],
+  "humanSync": "not-evaluated",
+  "newAcousticAnalyses": 0
+}

@@ -1,5 +1,7 @@
 # ダイジェストv1 Phase 2 — 製造・提出記録
 
+2026-09-14 JST。**必要な技術確認が合格し、Phase 2 human-review candidateとして完成動画を視聴できる状態になった。** 正式字幕325件、既存raster325/325、字幕282の完成MP4反映1/1、通常MP4検査がPASS。字幕ごとの全timeline再符号化はproduction QCとして不要と判断して設計から外した（removed from production acceptance; not required）。[視聴候補と検査結果](digest-v1-phase2-human-review-candidate-20260914.md)を現在地とし、次工程はkawafmmの実動画視聴とする。人間品質は未評価、完成承認は未申告。以下は過去の製造・停止判断の履歴として保持する。
+
 2026-09-14 JST。**kawafmm判断で全325件の最終可視性検査を中止し、対象processはすべて終了した。比較完了6件、中止1件、未着手318件。主合成済みMP4と配置・実画像325/325 PASSは保持している。** 状態は render-completed / raster-qc-passed / exhaustive-final-visibility-qc-stopped-by-owner。人間品質は未評価、完成承認は未申告。[停止・保持の記録](digest-v1-phase2-final-visibility-owner-stop-20260914.md)を現在地とする。以下の続行記述は中止前の判断履歴として保持する。
 
 2026-09-14 JST。**94px版の主合成が正常終了し、約616.6MBの字幕付きMP4が生成された。現在は同じ実行processで出力検査・全325件の最終可視性検査へ続行中。** 第3回は、既存のPNG復号・複合filterの並列設定だけを適用し、実325入力での命令差分検査、局所9/9、配置325/325、新規実画像325/325、保存後byte照合を通過した。最終QC・正式出力先への確定・verificationは未完了。後段の最終検査は最低5,922,296フレームの独立した比較用符号化・復号を伴う。相談役の判断どおり現行方式を維持し、許可された静的診断も完了した。土台は44,408フレーム、約24分40.267秒。[94px適用・現在地の記録](digest-v1-phase2-style94-application-20260914.md)を参照。人間品質は未評価、完成承認は未申告。

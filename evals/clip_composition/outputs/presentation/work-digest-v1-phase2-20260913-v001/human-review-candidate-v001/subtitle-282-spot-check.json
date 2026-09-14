@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "digest-v1-phase2-final-subtitle-spot-check-v001",
+  "status": "passed",
+  "scope": "final MP4 subtitle E2E spot check",
+  "passed": 1,
+  "required": 1,
+  "captionNumber": 282,
+  "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000282",
+  "representativeFrameZeroBased": 34841,
+  "observedPresentationTimestamp": 17838592,
+  "presentationTimeBase": "1/15360",
+  "presentationSecondsExact": "34841/30",
+  "presentationTime": "19:21.366667",
+  "expectedText": "なにする?どうする?なにする?どうする?",
+  "checks": {
+    "frameExtraction": "passed",
+    "correctTimeAndFrame": "passed",
+    "subtitlePresent": "passed",
+    "noClipping": "passed",
+    "noObviousPositionError": "passed"
+  },
+  "visualObservation": {
+    "method": "Codexによる抽出済み静止画1枚のローカル表示確認",
+    "observedText": "なにする?どうする?なにする?どうする?",
+    "result": "下部中央に一行の全文を確認。左右端と上下端の文字・縁取りが画面内に収まり、欠けや明らかな位置異常は見られない。",
+    "scopeLimit": "静止画の存在・欠け・配置のみ。音声同期、読みやすさ、文脈、テンポ、全体品質、人間合格は判定していない。"
+  },
+  "extractionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/subtitle-282-extraction.json",
+    "bytes": 1805,
+    "fileSha256": "63d36e8d78872d05475494852677d13d5d18c794b42e71c73c3a1aa4eeaf2c10"
+  },
+  "image": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/subtitle-282-frame-34841.png",
+    "bytes": 1945579,
+    "fileSha256": "6120aa5cca8875ac1d1f004f9465c6543713a20c737cf96fd597970af11e6666"
+  },
+  "extractionLogBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/subtitle-282-extraction-stderr.txt",
+    "bytes": 4184,
+    "fileSha256": "4981192592e7d6a24b95a98cc95fb44cf38b4e626b5e8f6d7c309cbe96830d7e"
+  },
+  "externalUpload": {
+    "attemptedService": "Web Gemini in Microsoft Edge",
+    "status": "blocked-before-upload-by-automatic-approval-review",
+    "reason": "外部送信の明示承認がないとして画像選択操作を拒否された。",
+    "action": "ファイル選択をキャンセルしGeminiタブを閉じた。画像送信・Gemini質問送信0。ローカルの静止画確認で完了。"
+  },
+  "newVideoEncodeRuns": 0,
+  "all325E2E": "not-claimed-and-not-required",
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-09-14T06:30:55.960349+00:00",
+  "arguments": [
+    "/opt/homebrew/bin/ffmpeg",
+    "-hide_banner",
+    "-v",
+    "error",
+    "-xerror",
+    "-nostdin",
+    "-i",
+    "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+    "-map",
+    "0:v:0",
+    "-map",
+    "0:a:0",
+    "-f",
+    "null",
+    "-",
+    "-progress",
+    "pipe:1",
+    "-stats_period",
+    "10"
+  ],
+  "scope": "one ordinary full audio/video decode to null; no encoded video file"
+}

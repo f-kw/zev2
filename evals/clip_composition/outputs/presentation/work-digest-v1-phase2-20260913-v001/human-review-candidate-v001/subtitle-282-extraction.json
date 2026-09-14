@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "digest-v1-phase2-one-frame-extraction-v001",
+  "video": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+    "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+    "bytes": 616632321
+  },
+  "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000282",
+  "captionNumber": 282,
+  "startFrame": 34750,
+  "endFrameExclusive": 34932,
+  "representativeFrame": 34841,
+  "frameIndexConvention": "zero-based",
+  "fps": 30,
+  "expectedPresentationSeconds": 1161.3666666666666,
+  "inputSeekSeconds": 1161,
+  "relativeSelectedFrame": 11,
+  "preserveOriginalTimestamps": true,
+  "arguments": [
+    "/opt/homebrew/bin/ffmpeg",
+    "-hide_banner",
+    "-nostdin",
+    "-loglevel",
+    "info",
+    "-n",
+    "-ss",
+    "1161",
+    "-copyts",
+    "-i",
+    "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+    "-map",
+    "0:v:0",
+    "-vf",
+    "select=eq(n\\,11),showinfo",
+    "-frames:v",
+    "1",
+    "-fps_mode",
+    "passthrough",
+    "-update",
+    "1",
+    "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/subtitle-282-frame-34841.png"
+  ],
+  "exitCode": 0,
+  "output": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/subtitle-282-frame-34841.png",
+    "bytes": 1945579,
+    "fileSha256": "6120aa5cca8875ac1d1f004f9465c6543713a20c737cf96fd597970af11e6666"
+  },
+  "videoEncodingExecutions": 0,
+  "extractedImageCount": 1
+}

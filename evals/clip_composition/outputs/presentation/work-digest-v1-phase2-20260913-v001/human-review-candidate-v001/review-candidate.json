@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "digest-v1-phase2-human-review-candidate-v001",
+  "recordedAt": "2026-09-14T06:38:13.310176+00:00",
+  "status": "Phase 2 human-review candidate",
+  "video": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+    "bytes": 616632321,
+    "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+  },
+  "durationSeconds": 1480.2666666666667,
+  "duration": "00:24:40.266667",
+  "checks": {
+    "source caption QC": "PASS",
+    "raster QC": "325 / 325 PASS",
+    "final MP4 subtitle spot check": "1 / 1 PASS",
+    "final MP4 technical check": "PASS",
+    "exhaustive per-caption counterfactual QC": "removed from production acceptance; not required"
+  },
+  "acceptanceDecision": "字幕ごとの全timeline再符号化はproduction QCとして不要と判断して設計から外した。旧325件counterfactual QCをPASSしたとは扱わない。",
+  "evidence": {
+    "source": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/source-caption-qc.json",
+      "fileSha256": "63e3ac1829da2f96beb112c2e9d1d580643ad5fff656433370ead11b9d2a2798",
+      "bytes": 3032
+    },
+    "raster": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/reused-raster-qc.json",
+      "fileSha256": "1c888b5c8a5179f843265eb03823c7cb8098a786c1b3c87cce437e58e4b3cdee",
+      "bytes": 1393
+    },
+    "spotCheck": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/subtitle-282-spot-check.json",
+      "fileSha256": "bb090a1a2c6920960a056773d0faf99e8519b6bff59cd1f2a78245cb96d36042",
+      "bytes": 2708
+    },
+    "technicalCheck": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/mp4-technical-qc.json",
+      "fileSha256": "60802e8f42762fd640c07e3831e22a6dfc302fe4a993cdb94f880b128640465a",
+      "bytes": 3012
+    },
+    "syncWatchlist": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/human-sync-watchlist.json",
+      "fileSha256": "442fcad9d21d47853205d4b29d57af4a58fa706c487f4663dfe68a7da702ddc7",
+      "bytes": 63930
+    },
+    "humanReadableSyncWatchlist": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/human-sync-watchlist.md",
+      "fileSha256": "c7e8161c9cb1c4b8de0f92bab22ba3daee38baba8296f527739fb518dde5679d",
+      "bytes": 6697
+    },
+    "ownerInstruction": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/owner-instruction.json",
+      "fileSha256": "02ea4a2d87658df09c2bee4d1e97fef5f45f5e1367038e94f084fa29fa225afd",
+      "bytes": 1747
+    }
+  },
+  "productionPolicy": {
+    "path": "docs/policies/PRODUCTION_QC_LAYER_POLICY_v001.md",
+    "fileSha256": "0e29d954d81ca571271bd1e8d1b546eb246544ef3aaeee496c37a3cb52f75530",
+    "bytes": 4725
+  },
+  "stoppedCounterfactualEvidence": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/owner-stop-v001/owner-stop.json",
+    "fileSha256": "9c5b131194a6e553a2934b5d815c82af20836cb315e4a7b5a0f3d16aa79bad67",
+    "bytes": 4227
+  },
+  "existingMainCompletionEvidence": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/main-composite-completion-v001.json",
+    "fileSha256": "eb23731782e7906abbb90b5949b395733647d2fc2cb0d579847c0a75c0b64c58",
+    "bytes": 2681
+  },
+  "artifactHandling": "既存主合成MP4を実在pathで参照。旧work、画像、ログ、途中証拠、停止状態を保持。正式renderer出力先へ移動・上書きはしていない。",
+  "performanceRegressionDebt": "counterfactual方式はrenderer regression / fixture verificationへ降格。完成動画ごとの全字幕へ実行しない。小さいfixtureへの整理は別作業。今回最適化・アルゴリズム変更なし。",
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed",
+  "humanReviewPriorities": {
+    "oneSidedFallbackCaptions": 43,
+    "bothSidesFallbackCaptions": 11,
+    "prospectJunctionCount": 6,
+    "intraProspectJunctionCount": 5
+  },
+  "nextStep": "kawafmmによる実動画視聴",
+  "newOperations": {
+    "videoEncoding": 0,
+    "captionRedrawing": 0,
+    "compositing": 0,
+    "newMeaningJudgment": 0,
+    "newAcousticAnalysis": 0,
+    "apiCalls": 0,
+    "newMaterialAcquisition": 0,
+    "ordinaryFullDecodeScans": 1,
+    "extractedFrames": 1
+  },
+  "checkpointPurpose": "技術確認と視聴候補の現状固定。人間合格・正式完成・stable昇格は主張しない。"
+}

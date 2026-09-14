@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "digest-v1-phase2-final-mp4-technical-qc-v001",
+  "observedAt": "2026-09-14T06:36:00.226200+00:00",
+  "status": "passed",
+  "video": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+    "bytes": 616632321,
+    "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+  },
+  "checks": {
+    "regularFile": "passed",
+    "nonZero": "passed",
+    "expectedSha256": "passed",
+    "readableMp4Container": "passed",
+    "h264": "passed",
+    "1920x1080": "passed",
+    "30fps": "passed",
+    "expectedFrameCount44408": "passed",
+    "expectedDurationConsistency": "passed",
+    "audioStreamPresent": "passed",
+    "ordinaryFullDecodeNoErrors": "passed"
+  },
+  "actualVideo": {
+    "codec_name": "h264",
+    "width": 1920,
+    "height": 1080,
+    "r_frame_rate": "30/1",
+    "avg_frame_rate": "30/1",
+    "nb_frames": "44408",
+    "time_base": "1/15360",
+    "duration_ts": 22736886,
+    "duration": "1480.266016"
+  },
+  "actualAudio": {
+    "codec_name": "aac",
+    "sample_rate": "48000",
+    "channels": 2,
+    "duration": "1480.266000"
+  },
+  "decodedFrameCount": 44408,
+  "expectedDurationSeconds": 1480.2666666666667,
+  "expectedDurationExact": "44408/30 seconds",
+  "decodedEndTime": "00:24:40.266667",
+  "containerDurationSeconds": 1480.266016,
+  "durationExplanation": "通常decodeは44408frame・終了24:40.266667。container/streamの末端は最終frame区間内で、映像streamの表示尺はframe数からの尺より10 time-base ticks（約0.651ms）短い。frame欠落・重複はなく、フレーム単位の予定尺と整合する。任意の許容係数は使わない。",
+  "videoStreamEndDifferenceTicks": 10,
+  "ordinaryFullDecodeRuns": 1,
+  "newVideoEncodeRuns": 0,
+  "ffprobeBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/mp4-ffprobe.json",
+    "bytes": 4693,
+    "fileSha256": "fecad7785cce707ebdaab440d55e5596c9e857f83c3c28918e3884fdd5f48e77"
+  },
+  "decodeExecutionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/decode-scan-execution.json",
+    "bytes": 612,
+    "fileSha256": "b21d387ee5c6b76ab7b2792d56f045ece4c2de1b0f22627d7700bad1b91f202a"
+  },
+  "decodeProgressBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/decode-scan-progress.txt",
+    "bytes": 387,
+    "fileSha256": "f0f188a5343d2c2b940376876ad08369ad64a0caedc2d565f99a80ec88d548f3"
+  },
+  "decodeStderrBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/decode-scan-stderr.txt",
+    "bytes": 0,
+    "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

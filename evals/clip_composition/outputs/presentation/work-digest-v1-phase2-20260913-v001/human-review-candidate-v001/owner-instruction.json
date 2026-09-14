@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "digest-v1-phase2-production-qc-owner-instruction-v001",
+  "source": "kawafmmからこの作業へ送信された「Digest v1 Phase 2 — QC方針修正と完成動画確認」",
+  "receivedDate": "2026-09-14",
+  "authority": "今回の指示を正本とする。直前にChatGPTが作成したがkawafmmから送信されていない二つの指示案はauthorityとして扱わない。",
+  "instruction": "字幕ごとの再符号化検査をproduction完成条件から外し、必要な低コストの技術確認を終えて完成動画を視聴できる状態にする。",
+  "approvedActions": [
+    "既存検査の停止と証拠・主合成MP4保持",
+    "恒久policy作成",
+    "正式325字幕のsource全件照合",
+    "既存94px raster QC全件合格の証拠再利用",
+    "字幕282の表示中央frame一枚抽出と存在・欠け・位置の確認",
+    "通常MP4検査と通常decode scan一回",
+    "保存済み時刻から人間用同期要注意一覧作成",
+    "Phase 2 human-review candidate記録",
+    "checkpoint commit / push"
+  ],
+  "prohibited": [
+    "counterfactual QC再開",
+    "字幕ごとの動画再encode",
+    "新しい複雑なsampling QC",
+    "renderer改修",
+    "QCアルゴリズム改修",
+    "style・字幕変更",
+    "再描画・再合成",
+    "API通信",
+    "新素材取得"
+  ],
+  "exhaustiveQcAcceptance": "removed from production acceptance; not required",
+  "nextStep": "kawafmmによる実動画視聴",
+  "additionalLongChatGptAudit": "not-required",
+  "policyBinding": {
+    "path": "docs/policies/PRODUCTION_QC_LAYER_POLICY_v001.md",
+    "fileSha256": "0e29d954d81ca571271bd1e8d1b546eb246544ef3aaeee496c37a3cb52f75530",
+    "bytes": 4725
+  }
+}
