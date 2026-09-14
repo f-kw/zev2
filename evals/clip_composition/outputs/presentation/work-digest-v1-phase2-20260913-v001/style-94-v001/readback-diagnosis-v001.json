@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "digest-v1-phase2-style94-qc-readback-diagnosis-v001",
+  "status": "cause-confirmed",
+  "qcBinding": {
+    "schemaVersion": "digest-v1-phase2-style94-raster-qc-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/raster-qc.json",
+    "fileSha256": "237c360d50e68508cefb47bc5addca68e753833b7e666c47b7ac6e1acaef36cd",
+    "canonicalSha256": "e1211104ecc77511422128207e84f786ed78dd0d17ba889da57994774e685cfe"
+  },
+  "actualReturnType": "Buffer",
+  "originalReadbackType": "string",
+  "originalStrictEqualRejectsIdenticalBytes": true,
+  "byteComparisonAcceptsIdenticalSavedQc": true,
+  "changedByteRejected": true,
+  "truncatedBytesRejected": true,
+  "existingFormalReadBoundPassed": true,
+  "existingQcStatus": "passed",
+  "instructionCount": 325,
+  "violations": [],
+  "proposedCorrection": "Compare readFileSync(path) Buffer using .equals(formal(record)), as existing publish() does.",
+  "productionChanges": 0,
+  "newRenders": 0,
+  "newMeaningJudgments": 0,
+  "newAcousticObservations": 0,
+  "apiCalls": 0,
+  "newMaterials": 0,
+  "costUsd": 0
+}

@@ -58,4 +58,4 @@ schema・presetの識別子は既存の構造を保持する。派生版の識�
 
 停止の正本は専用rootの `renderer-result.json`。計算と実画像の対照、全325画像と比較画像のSHA、停止後の入力・実装参照の再照合は `raster-stop-v001.json` に保存した。失敗画像は `.render-v001.presentation-renderer-v002-work-3VWBRZ/publish/overlays/282-6aa73c37776a.png`、SHA-256は `561e68d5706591686bfaef4f3a979734b3711c7d979c27a9f603df0662fd0c92`。
 
-この停止をcheckpoint `8da60f2260b4152716c657c739a4f1b705153ead` でZEV進行管理３へ提出した。続く限定診断の承認により、同じ正式フォントの実字幅がNodeの文字種推定を上回ることを確認し、当該1字幕だけの94px診断は既存QCに合格した。[実画像の幅診断](digest-v1-phase2-raster-diagnosis-20260914.md)を参照。正式95px style、全件描画、改行・境界・時刻・安全領域・renderer/QCは変更していない。94pxの正式適用と全件検査はZEV進行管理３の判断待ち。
+この停止をcheckpoint `8da60f2260b4152716c657c739a4f1b705153ead` でZEV進行管理３へ提出した。続く限定診断の承認により、同じ正式フォントの実字幅がNodeの文字種推定を上回ることを確認し、当該1字幕だけの94px診断は既存QCに合格した。[実画像の幅診断](digest-v1-phase2-raster-diagnosis-20260914.md)を参照。正式95px style、全件描画、改行・境界・時刻・安全領域・renderer/QCは変更していない。その後のZEV進行管理３は通常字幕全325件への94px正式適用と、全実画像QC合格時の完成MP4までの自動続行を承認した。新しい版の現在地は[94px適用記録](digest-v1-phase2-style94-application-20260914.md)に分離する。

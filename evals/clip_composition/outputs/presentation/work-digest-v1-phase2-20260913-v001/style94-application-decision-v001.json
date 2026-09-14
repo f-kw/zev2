@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "digest-v1-phase2-style94-application-decision-v001",
+  "decision": "APPROVE / CONTINUE",
+  "source": "kawafmmの自動相談委任に基づきZEV進行管理３から受領したGPT_DECISION。94pxをkawafmm本人が個別指定したとは扱わない。",
+  "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+  "checkpoint": "2b3d9f56df97cb1bd650a1df4113f8d696130658",
+  "responseState": "レスポンス確認済み",
+  "ownerDelegationQuotes": [
+    "費用0・既存scope内・可逆的な開発判断は、ZEV進行管理３へ自動問い合わせ → 判断後そのまま続行。",
+    "ZEV進行管理３が既存Goal・work-order・契約内と判断した場合、その回答を受けて自律的に続行すること。"
+  ],
+  "quotes": [
+    "Phase 2の通常字幕について、fontSizePx = 94を新しい正式派生styleとして適用することを承認する。",
+    "字幕282だけを94pxにする例外方式は採用しない。通常字幕 caption-core-v001 は325字幕すべてについて同じ94pxを使用する。",
+    "変更可能なのは、caption-core-v001.textStyle.fontSizePx: 95 → 94だけ。",
+    "94→95へ戻せば95px planとfont size以外全量一致",
+    "今回から実画像QCを正式な必須gateとする。",
+    "実画像325 / 325 PASSした場合のみ 映像合成へ進む。この時点で新たなZEV進行管理３への確認は不要。",
+    "325字幕を一律94pxで実画像化し、325 / 325 raster QC PASSの場合のみ、そのまま映像合成・technical QC・MP4生成まで続行してよい。",
+    "ここからは、また95→94の接続監査だけで止める必要はありません。94px版を作成 → 機械検査 → 325枚の実画像QC → 全PASSなら完成MP4まで自動続行 でいいです。"
+  ],
+  "visualStateId": "caption-core-v001",
+  "beforeFontSizePx": 95,
+  "afterFontSizePx": 94,
+  "derivationRequired": [
+    "parent95Binding",
+    "ancestor96Binding",
+    "95-to-94",
+    "rasterDiagnosisBinding",
+    "caption282Probe94QcBinding",
+    "applicationDecisionBinding"
+  ],
+  "gate1": [
+    "325 Node layout PASS",
+    "line count / intersection / safe area / canvas violations 0",
+    "95pxへ戻せばplan全量一致"
+  ],
+  "gate2": [
+    "全325 PNG生成成功",
+    "alpha boundsとline alpha bounds取得",
+    "既存overlay-preflight QC PASS",
+    "字幕282 PASS",
+    "残324件に新規違反0"
+  ],
+  "gate3": "実画像全件PASS後、既存映像合成・最終technical QC・MP4・verificationまで自律続行",
+  "preserved": [
+    "共有96px registryとpreview",
+    "95px正式snapshotと325画像・失敗証拠",
+    "94px isolated probe",
+    "font / weight / border / glow / spacing / position / safe area / canvas / limits / transition / other visual states",
+    "7 Prospect / 12保持区間 / 325字幕 / 4437本文片 / 815文字request",
+    "本文・ID・順序・cue / line境界・時刻・bridge・semantic provenance・base media・renderer / QC・runtime"
+  ],
+  "failureAction": "実画像FAILなら合成へ進まず証拠保存→自動GPT_DECISION。renderer / final QCの機械的問題も既存scope・費用0なら自動相談。本文・意味境界・時刻・safe area・renderer実質変更、新API・費用、人間品質判断はkawafmmへ戻す。",
+  "rasterDiagnosisBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/summary.json",
+    "fileSha256": "9c33aad4caad6241247a8fafd5dc0113bd00d76e28c2800a349103e4ae6e3d20"
+  },
+  "apiCalls": 0,
+  "newMaterials": 0,
+  "newMeaningJudgments": 0,
+  "newAcousticObservations": 0,
+  "costUsd": 0,
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}
