@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "digest-v1-phase2-physical-fit-audit-v001",
+  "origin": "ZEV進行管理３",
+  "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+  "checkpoint": "1f133e2c4ea12f1602a5f3fcf0c35d6388824eee",
+  "requestType": "AUDIT_ONLY",
+  "responseConfirmedAt": "2026-09-14T00:18:24.763513+00:00",
+  "responseStatus": "レスポンス確認済み",
+  "modelSetting": "今回のモデル条件指定なし。既存選択を維持し、送信前UIは極高。モデル変更なし。",
+  "requestCount": 1,
+  "resendOrRegeneration": false,
+  "decision": "PASS",
+  "findings": {
+    "saved325ResultReproduction": "PASS",
+    "sameCauseFor23": "PASS",
+    "maximumInteger95Below96": "PASS",
+    "original23Resolved": 23,
+    "original302NewViolations": 0,
+    "allOtherLayoutViolations": 0,
+    "immutability": "PASS"
+  },
+  "quotes": [
+    "AUDIT_ONLY結果：PASSです。",
+    "95pxは「既存Node layout inspector上での最大安全整数」であって、実ブラウザ上のfont輪郭や完成MP4まで安全だと証明した数字ではありません。",
+    "ただしこれは診断ではなく正式なvisual style変更になるので、このAUDIT_ONLY自体では適用承認までは出しません。"
+  ],
+  "recommendation": "通常字幕を96pxから95pxへ変更する案を候補とする。正式適用の承認は含まない。",
+  "diagnosticBootstrapFailuresReviewed": 2,
+  "diagnosticBootstrapOutcome": "診断前import失敗として確認し、既存の依存探索・module cacheへ合わせた3回目の成功を確認。",
+  "formalStyleFontSizePx": 96,
+  "diagnosticCandidateFontSizePx": 95,
+  "formalStyleChangeAuthorized": false,
+  "rerenderAuthorized": false,
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}
