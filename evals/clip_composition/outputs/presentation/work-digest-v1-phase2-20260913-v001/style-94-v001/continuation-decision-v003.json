@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "digest-v1-phase2-style94-continuation-decision-v003",
+  "decision": "APPROVE / CONTINUE",
+  "source": "kawafmmの自動相談委任に基づくZEV進行管理３のGPT_DECISION",
+  "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+  "checkpoint": "b6a786183ba6cda372e14a2a160fb0e4c9731aaa",
+  "responseState": "レスポンス確認済み",
+  "acceptedEvidence": "第2回の325画像・保存byte照合PASS。合成時の資源不足で終了187、MP4 0byte。既存coreは過去6fixture×900frame一致検証時と同一byte。",
+  "quotes": [
+    "既存rendererがすでに持つ serializePngAndFilters: true をPhase 2の次回実行へ明示適用することを承認する。",
+    "renderer本体の変更は不要。",
+    "実行前にPhase 2の実325入力から、serializePngAndFilters=false と serializePngAndFilters=true のFFmpeg argumentを実行せず生成し、差分を保存する。",
+    "許可する差分はexactに：-filter_complex_threads 1、overlay PNG入力ごとの -threads 1 だけ。",
+    "これ以外のargument差分が1件でもあれば実描画せず停止。",
+    "今回の正式authorityはこのGPT_DECISIONとする。",
+    "024 rootへ新規書込みを行わない。",
+    "今回も画像再利用はしない。同じ325字幕を全再描画する。",
+    "途中のZEV進行管理３確認は不要。",
+    "資源観測のために合成を中断したり、別のsampling工事を追加したりしない。",
+    "観測失敗はcompletion blockerにしない。",
+    "thread値やencoder設定をさらに場当たり的に変更して再試行しない。",
+    "未使用render-v003へ全325字幕を再描画。そのまま合成・final QC・完成MP4まで自律続行すること。"
+  ],
+  "publicationStopBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/publication-stop-v001.json",
+    "fileSha256": "1eaad6b511d31c5bab0fef6986d43dcf702e91ea1a5dbb094aad043aa6c80626"
+  },
+  "resourceStopBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v002/composite-resource-stop-v001.json",
+    "fileSha256": "8d60662b2dfc30064e459f1ff0b7d94b42864468dad8355216b935c667c25556"
+  },
+  "previousContinuationDecisionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-decision-v002.json",
+    "fileSha256": "25177d819e0cc647e52d8709c54bff7e2fc5a70191cfd6a96eda45d5f61e942c"
+  },
+  "serializePngAndFilters": true,
+  "rendererOutputRoot": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/render-v003",
+  "renderAttempts": 1,
+  "reuseOldImages": false,
+  "styleChange": false,
+  "requiredArgumentChecks": [
+    "base decoder threads unchanged",
+    "encoder threads unchanged",
+    "filter graph identical",
+    "overlay order identical",
+    "output mapping identical",
+    "44408 frames identical",
+    "codec/preset/CRF/pixel format identical",
+    "audio mapping/copy identical",
+    "only filter thread pair once and PNG decoder thread pair 325 times added"
+  ],
+  "prior024EvidenceUsage": "同renderer byteに対する技術証拠の読取りのみ。今回の承認根拠はこの相談役判断。旧工事再開と旧root書込みは禁止。",
+  "pipeline": [
+    "全入力再照合",
+    "Node layout gate",
+    "全325overlay新規再生成",
+    "決定性検査",
+    "325raster QC",
+    "修正版callbackによる保存・byte再読照合",
+    "全PASS時のみ既存合成",
+    "output media inspection",
+    "final QC",
+    "final QC保存・byte再読照合",
+    "MP4 publication",
+    "verification",
+    "checkpoint commit/push",
+    "Phase2第一完成AUDIT_ONLY"
+  ],
+  "prohibited": [
+    "旧成果物上書き・削除",
+    "失敗画像コピーによる正式描画代替",
+    "renderer/QC弱体化",
+    "safe area/style/本文/ID/境界/改行/時刻変更",
+    "意味判断",
+    "音響再観測",
+    "API通信",
+    "新素材",
+    "追加費用",
+    "codec/CRF/resolution/frame削減",
+    "overlay分割合成/multi-pass化",
+    "場当たり的な追加thread値変更",
+    "renderer本体変更"
+  ],
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

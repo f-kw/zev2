@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "digest-v1-phase2-style94-continuation-tests-v003",
+  "status": "passed",
+  "cases": [
+    {
+      "name": "actual-325-inputs-exact-resource-only-difference",
+      "status": "passed"
+    },
+    {
+      "name": "base-decoder-change-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "encoder-change-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "png-control-missing-or-changed-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "filter-graph-change-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "overlay-input-order-change-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "frame-codec-quality-audio-change-rejected",
+      "status": "passed"
+    },
+    {
+      "name": "mapping-change-rejected",
+      "status": "passed"
+    }
+  ],
+  "implementationBinding": {
+    "path": "evals/clip_composition/digest_v1_phase2_style94_continuation_v003.mts",
+    "fileSha256": "9e2c23261135019d2987dbbc9838aa15a841e6295826782cd78e7ba4e5148494"
+  },
+  "preflightBinding": {
+    "schemaVersion": "digest-v1-phase2-style94-continuation-preflight-v003",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/preflight.json",
+    "fileSha256": "ef19584c2fcd80cc31321d9292ae8acb60f0ce925c209cf1b50b7f2f26c146c7",
+    "canonicalSha256": "0fee37312bcc4740a2de96a2425264c4971d34de68e6c468e56ab25f52ee3f39"
+  },
+  "testImplementationBinding": {
+    "path": "evals/clip_composition/digest_v1_phase2_style94_continuation_v003.test.mts",
+    "fileSha256": "7928cd92d8de63f60a9eb6a5c48579a4e2be1fccceb0ac3243b65d3266ed1cba"
+  },
+  "argumentBinding": {
+    "schemaVersion": "digest-v1-phase2-resource-arguments-v003",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/resource-arguments.json",
+    "fileSha256": "28a5ed980bf6e2d7dab4af5f25616711ee67bf3d1907c2e191ea40f114bad5d3",
+    "canonicalSha256": "b62686c049379e507d06baef68ce26e969b11e1d1f55d14eef63b8f89ae87eae"
+  },
+  "priorPixelEquivalenceBinding": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-verification-v001.json",
+    "fileSha256": "c7ebe38e3588663b450a31b4f0dbe9b8525148bc22776268bc934895a38ba778"
+  },
+  "priorEvidenceUse": "renderer byte不変のため既存6fixture×900frame一致証拠を参照。024への書込みと再実行0。",
+  "qcReadbackUse": "前版8/8と実325件描画で通過した同一保存関数をimport。実装SHAと保存検査証拠をpreflightで再照合済み。",
+  "preparationCorrection": "初回に過去検証の名称配列を件数と比較した設営ミスを、配列lengthとの比較へ1箇所修正。失敗sourceとlogを別保存。",
+  "commandExecutions": 0,
+  "newRenderExecutions": 0
+}

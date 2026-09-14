@@ -1,0 +1,1689 @@
+{
+  "schemaVersion": "digest-v1-phase2-final-qc-workload-observation-v001",
+  "observedAt": "2026-09-14T05:22:55.695874+00:00",
+  "status": "main-composite-running-final-qc-not-started",
+  "purpose": "承認済み全325字幕の最終可視性検査の計算量を現行実装と正式計画から数える。新しい描画・検査は実行しない。",
+  "planBinding": {
+    "schemaVersion": "presentation-output-common-core-plan-v001",
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/common-plan.json",
+    "fileSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+    "canonicalSha256": "9ea51a9794c8f6ccc78c4aab6010ca2a4278adf71a49189a0c6e14e8e5a5bfbf"
+  },
+  "coreBinding": {
+    "path": "evals/clip_composition/render_presentation_v002.mjs",
+    "fileSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94"
+  },
+  "continuationSourceBinding": {
+    "path": "evals/clip_composition/digest_v1_phase2_style94_continuation_v003.mts",
+    "fileSha256": "9e2c23261135019d2987dbbc9838aa15a841e6295826782cd78e7ba4e5148494"
+  },
+  "rasterCompletionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/raster-completion-v001.json",
+    "fileSha256": "794306ed96bda3adece388ae224ea8716e1e7404918360c1720a4eb0c4f123d0"
+  },
+  "main": {
+    "pid": 649,
+    "parentPid": 80314,
+    "elapsed": "01:37:02",
+    "cpuPercent": 108.3,
+    "rssKiB": 10956272,
+    "state": "R",
+    "expectedFrameCount": 44408,
+    "incompleteMp4Bytes": 454557744,
+    "videoFileHash": "not-taken-incomplete-output"
+  },
+  "finalQc": {
+    "captionCount": 325,
+    "fps": 30,
+    "independentPrefixEncodes": 325,
+    "minimumPrefixFramesSum": 5922296,
+    "firstRepresentativeFrame": 74,
+    "medianRepresentativeFrame": 17821,
+    "lastRepresentativeFrame": 44387,
+    "captionsWithRepresentativeAtOrAfter30000": 61,
+    "items": [
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000001",
+        "representativeFrame": 74,
+        "minimumPrefixFrames": 75
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000002",
+        "representativeFrame": 191,
+        "minimumPrefixFrames": 192
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000003",
+        "representativeFrame": 257,
+        "minimumPrefixFrames": 258
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000004",
+        "representativeFrame": 386,
+        "minimumPrefixFrames": 387
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000005",
+        "representativeFrame": 463,
+        "minimumPrefixFrames": 464
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000006",
+        "representativeFrame": 512,
+        "minimumPrefixFrames": 513
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000007",
+        "representativeFrame": 547,
+        "minimumPrefixFrames": 548
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000008",
+        "representativeFrame": 581,
+        "minimumPrefixFrames": 582
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000009",
+        "representativeFrame": 609,
+        "minimumPrefixFrames": 610
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000010",
+        "representativeFrame": 671,
+        "minimumPrefixFrames": 672
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000011",
+        "representativeFrame": 745,
+        "minimumPrefixFrames": 746
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000012",
+        "representativeFrame": 807,
+        "minimumPrefixFrames": 808
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000013",
+        "representativeFrame": 868,
+        "minimumPrefixFrames": 869
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000014",
+        "representativeFrame": 904,
+        "minimumPrefixFrames": 905
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000015",
+        "representativeFrame": 959,
+        "minimumPrefixFrames": 960
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000016",
+        "representativeFrame": 1011,
+        "minimumPrefixFrames": 1012
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000017",
+        "representativeFrame": 1029,
+        "minimumPrefixFrames": 1030
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000018",
+        "representativeFrame": 1052,
+        "minimumPrefixFrames": 1053
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000019",
+        "representativeFrame": 1076,
+        "minimumPrefixFrames": 1077
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000020",
+        "representativeFrame": 1104,
+        "minimumPrefixFrames": 1105
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000021",
+        "representativeFrame": 1163,
+        "minimumPrefixFrames": 1164
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000022",
+        "representativeFrame": 1211,
+        "minimumPrefixFrames": 1212
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000023",
+        "representativeFrame": 1402,
+        "minimumPrefixFrames": 1403
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000024",
+        "representativeFrame": 1434,
+        "minimumPrefixFrames": 1435
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000025",
+        "representativeFrame": 1462,
+        "minimumPrefixFrames": 1463
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000026",
+        "representativeFrame": 1488,
+        "minimumPrefixFrames": 1489
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000027",
+        "representativeFrame": 1526,
+        "minimumPrefixFrames": 1527
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000028",
+        "representativeFrame": 1589,
+        "minimumPrefixFrames": 1590
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000029",
+        "representativeFrame": 1642,
+        "minimumPrefixFrames": 1643
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000030",
+        "representativeFrame": 1680,
+        "minimumPrefixFrames": 1681
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000031",
+        "representativeFrame": 1728,
+        "minimumPrefixFrames": 1729
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000032",
+        "representativeFrame": 1768,
+        "minimumPrefixFrames": 1769
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000033",
+        "representativeFrame": 1820,
+        "minimumPrefixFrames": 1821
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000034",
+        "representativeFrame": 1885,
+        "minimumPrefixFrames": 1886
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000035",
+        "representativeFrame": 1953,
+        "minimumPrefixFrames": 1954
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000036",
+        "representativeFrame": 2046,
+        "minimumPrefixFrames": 2047
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000037",
+        "representativeFrame": 2145,
+        "minimumPrefixFrames": 2146
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000038",
+        "representativeFrame": 2203,
+        "minimumPrefixFrames": 2204
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000039",
+        "representativeFrame": 2303,
+        "minimumPrefixFrames": 2304
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000040",
+        "representativeFrame": 2447,
+        "minimumPrefixFrames": 2448
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000041",
+        "representativeFrame": 2526,
+        "minimumPrefixFrames": 2527
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000042",
+        "representativeFrame": 2739,
+        "minimumPrefixFrames": 2740
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000043",
+        "representativeFrame": 3066,
+        "minimumPrefixFrames": 3067
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000044",
+        "representativeFrame": 3267,
+        "minimumPrefixFrames": 3268
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000045",
+        "representativeFrame": 3447,
+        "minimumPrefixFrames": 3448
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000046",
+        "representativeFrame": 4233,
+        "minimumPrefixFrames": 4234
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000047",
+        "representativeFrame": 4407,
+        "minimumPrefixFrames": 4408
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000048",
+        "representativeFrame": 4418,
+        "minimumPrefixFrames": 4419
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000049",
+        "representativeFrame": 4429,
+        "minimumPrefixFrames": 4430
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000050",
+        "representativeFrame": 4446,
+        "minimumPrefixFrames": 4447
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000051",
+        "representativeFrame": 4459,
+        "minimumPrefixFrames": 4460
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000052",
+        "representativeFrame": 4542,
+        "minimumPrefixFrames": 4543
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000053",
+        "representativeFrame": 4629,
+        "minimumPrefixFrames": 4630
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000054",
+        "representativeFrame": 4751,
+        "minimumPrefixFrames": 4752
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000055",
+        "representativeFrame": 4849,
+        "minimumPrefixFrames": 4850
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000056",
+        "representativeFrame": 4936,
+        "minimumPrefixFrames": 4937
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000057",
+        "representativeFrame": 5052,
+        "minimumPrefixFrames": 5053
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000058",
+        "representativeFrame": 5140,
+        "minimumPrefixFrames": 5141
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000059",
+        "representativeFrame": 5179,
+        "minimumPrefixFrames": 5180
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000060",
+        "representativeFrame": 5220,
+        "minimumPrefixFrames": 5221
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000061",
+        "representativeFrame": 5295,
+        "minimumPrefixFrames": 5296
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000062",
+        "representativeFrame": 5410,
+        "minimumPrefixFrames": 5411
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000063",
+        "representativeFrame": 5483,
+        "minimumPrefixFrames": 5484
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000064",
+        "representativeFrame": 5627,
+        "minimumPrefixFrames": 5628
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000065",
+        "representativeFrame": 5732,
+        "minimumPrefixFrames": 5733
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000066",
+        "representativeFrame": 5822,
+        "minimumPrefixFrames": 5823
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000067",
+        "representativeFrame": 5960,
+        "minimumPrefixFrames": 5961
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000068",
+        "representativeFrame": 6077,
+        "minimumPrefixFrames": 6078
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000069",
+        "representativeFrame": 6445,
+        "minimumPrefixFrames": 6446
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000070",
+        "representativeFrame": 6560,
+        "minimumPrefixFrames": 6561
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000071",
+        "representativeFrame": 6618,
+        "minimumPrefixFrames": 6619
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000072",
+        "representativeFrame": 6675,
+        "minimumPrefixFrames": 6676
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000073",
+        "representativeFrame": 6748,
+        "minimumPrefixFrames": 6749
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000074",
+        "representativeFrame": 6830,
+        "minimumPrefixFrames": 6831
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000075",
+        "representativeFrame": 6929,
+        "minimumPrefixFrames": 6930
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000076",
+        "representativeFrame": 7013,
+        "minimumPrefixFrames": 7014
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000077",
+        "representativeFrame": 7062,
+        "minimumPrefixFrames": 7063
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000078",
+        "representativeFrame": 7202,
+        "minimumPrefixFrames": 7203
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000079",
+        "representativeFrame": 7276,
+        "minimumPrefixFrames": 7277
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000080",
+        "representativeFrame": 7400,
+        "minimumPrefixFrames": 7401
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000081",
+        "representativeFrame": 7503,
+        "minimumPrefixFrames": 7504
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000082",
+        "representativeFrame": 7569,
+        "minimumPrefixFrames": 7570
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000083",
+        "representativeFrame": 7676,
+        "minimumPrefixFrames": 7677
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000084",
+        "representativeFrame": 7765,
+        "minimumPrefixFrames": 7766
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000085",
+        "representativeFrame": 7799,
+        "minimumPrefixFrames": 7800
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000086",
+        "representativeFrame": 7849,
+        "minimumPrefixFrames": 7850
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000087",
+        "representativeFrame": 7915,
+        "minimumPrefixFrames": 7916
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000088",
+        "representativeFrame": 7998,
+        "minimumPrefixFrames": 7999
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000089",
+        "representativeFrame": 8125,
+        "minimumPrefixFrames": 8126
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000090",
+        "representativeFrame": 8268,
+        "minimumPrefixFrames": 8269
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000091",
+        "representativeFrame": 8379,
+        "minimumPrefixFrames": 8380
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000092",
+        "representativeFrame": 8422,
+        "minimumPrefixFrames": 8423
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000093",
+        "representativeFrame": 8474,
+        "minimumPrefixFrames": 8475
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000094",
+        "representativeFrame": 8540,
+        "minimumPrefixFrames": 8541
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000095",
+        "representativeFrame": 8615,
+        "minimumPrefixFrames": 8616
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000096",
+        "representativeFrame": 8702,
+        "minimumPrefixFrames": 8703
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000097",
+        "representativeFrame": 8824,
+        "minimumPrefixFrames": 8825
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000098",
+        "representativeFrame": 8976,
+        "minimumPrefixFrames": 8977
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000099",
+        "representativeFrame": 9221,
+        "minimumPrefixFrames": 9222
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000100",
+        "representativeFrame": 9514,
+        "minimumPrefixFrames": 9515
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000101",
+        "representativeFrame": 9721,
+        "minimumPrefixFrames": 9722
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000102",
+        "representativeFrame": 9845,
+        "minimumPrefixFrames": 9846
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000103",
+        "representativeFrame": 9931,
+        "minimumPrefixFrames": 9932
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000104",
+        "representativeFrame": 10032,
+        "minimumPrefixFrames": 10033
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000105",
+        "representativeFrame": 10287,
+        "minimumPrefixFrames": 10288
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000106",
+        "representativeFrame": 10348,
+        "minimumPrefixFrames": 10349
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000107",
+        "representativeFrame": 10417,
+        "minimumPrefixFrames": 10418
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000108",
+        "representativeFrame": 10478,
+        "minimumPrefixFrames": 10479
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000109",
+        "representativeFrame": 10551,
+        "minimumPrefixFrames": 10552
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000110",
+        "representativeFrame": 10659,
+        "minimumPrefixFrames": 10660
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000111",
+        "representativeFrame": 10769,
+        "minimumPrefixFrames": 10770
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000112",
+        "representativeFrame": 10942,
+        "minimumPrefixFrames": 10943
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000113",
+        "representativeFrame": 11233,
+        "minimumPrefixFrames": 11234
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000114",
+        "representativeFrame": 11257,
+        "minimumPrefixFrames": 11258
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000115",
+        "representativeFrame": 11349,
+        "minimumPrefixFrames": 11350
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000116",
+        "representativeFrame": 11555,
+        "minimumPrefixFrames": 11556
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000117",
+        "representativeFrame": 11747,
+        "minimumPrefixFrames": 11748
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000118",
+        "representativeFrame": 11888,
+        "minimumPrefixFrames": 11889
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000119",
+        "representativeFrame": 11993,
+        "minimumPrefixFrames": 11994
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000120",
+        "representativeFrame": 12080,
+        "minimumPrefixFrames": 12081
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000121",
+        "representativeFrame": 12168,
+        "minimumPrefixFrames": 12169
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000122",
+        "representativeFrame": 12366,
+        "minimumPrefixFrames": 12367
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000123",
+        "representativeFrame": 12537,
+        "minimumPrefixFrames": 12538
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000124",
+        "representativeFrame": 12602,
+        "minimumPrefixFrames": 12603
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000125",
+        "representativeFrame": 12672,
+        "minimumPrefixFrames": 12673
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000126",
+        "representativeFrame": 12736,
+        "minimumPrefixFrames": 12737
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000127",
+        "representativeFrame": 12820,
+        "minimumPrefixFrames": 12821
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000128",
+        "representativeFrame": 12922,
+        "minimumPrefixFrames": 12923
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000129",
+        "representativeFrame": 13134,
+        "minimumPrefixFrames": 13135
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000130",
+        "representativeFrame": 13334,
+        "minimumPrefixFrames": 13335
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000131",
+        "representativeFrame": 13453,
+        "minimumPrefixFrames": 13454
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000132",
+        "representativeFrame": 13643,
+        "minimumPrefixFrames": 13644
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000133",
+        "representativeFrame": 13865,
+        "minimumPrefixFrames": 13866
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000134",
+        "representativeFrame": 14150,
+        "minimumPrefixFrames": 14151
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000135",
+        "representativeFrame": 14362,
+        "minimumPrefixFrames": 14363
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000136",
+        "representativeFrame": 14447,
+        "minimumPrefixFrames": 14448
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000137",
+        "representativeFrame": 14576,
+        "minimumPrefixFrames": 14577
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000138",
+        "representativeFrame": 14788,
+        "minimumPrefixFrames": 14789
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000139",
+        "representativeFrame": 14834,
+        "minimumPrefixFrames": 14835
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000140",
+        "representativeFrame": 14862,
+        "minimumPrefixFrames": 14863
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000141",
+        "representativeFrame": 14903,
+        "minimumPrefixFrames": 14904
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000142",
+        "representativeFrame": 14982,
+        "minimumPrefixFrames": 14983
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000143",
+        "representativeFrame": 15068,
+        "minimumPrefixFrames": 15069
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000144",
+        "representativeFrame": 15122,
+        "minimumPrefixFrames": 15123
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000145",
+        "representativeFrame": 15210,
+        "minimumPrefixFrames": 15211
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000146",
+        "representativeFrame": 15293,
+        "minimumPrefixFrames": 15294
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000147",
+        "representativeFrame": 15338,
+        "minimumPrefixFrames": 15339
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000148",
+        "representativeFrame": 15421,
+        "minimumPrefixFrames": 15422
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000149",
+        "representativeFrame": 15483,
+        "minimumPrefixFrames": 15484
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000150",
+        "representativeFrame": 15540,
+        "minimumPrefixFrames": 15541
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000151",
+        "representativeFrame": 15650,
+        "minimumPrefixFrames": 15651
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000152",
+        "representativeFrame": 15833,
+        "minimumPrefixFrames": 15834
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000153",
+        "representativeFrame": 16018,
+        "minimumPrefixFrames": 16019
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000154",
+        "representativeFrame": 16123,
+        "minimumPrefixFrames": 16124
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000155",
+        "representativeFrame": 16201,
+        "minimumPrefixFrames": 16202
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000156",
+        "representativeFrame": 16269,
+        "minimumPrefixFrames": 16270
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000157",
+        "representativeFrame": 16327,
+        "minimumPrefixFrames": 16328
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000158",
+        "representativeFrame": 16657,
+        "minimumPrefixFrames": 16658
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000159",
+        "representativeFrame": 17494,
+        "minimumPrefixFrames": 17495
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000160",
+        "representativeFrame": 17579,
+        "minimumPrefixFrames": 17580
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000161",
+        "representativeFrame": 17691,
+        "minimumPrefixFrames": 17692
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000162",
+        "representativeFrame": 17768,
+        "minimumPrefixFrames": 17769
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000163",
+        "representativeFrame": 17821,
+        "minimumPrefixFrames": 17822
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000164",
+        "representativeFrame": 17881,
+        "minimumPrefixFrames": 17882
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000165",
+        "representativeFrame": 17935,
+        "minimumPrefixFrames": 17936
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000166",
+        "representativeFrame": 17983,
+        "minimumPrefixFrames": 17984
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000167",
+        "representativeFrame": 18116,
+        "minimumPrefixFrames": 18117
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000168",
+        "representativeFrame": 18248,
+        "minimumPrefixFrames": 18249
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000169",
+        "representativeFrame": 18291,
+        "minimumPrefixFrames": 18292
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000170",
+        "representativeFrame": 18338,
+        "minimumPrefixFrames": 18339
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000171",
+        "representativeFrame": 18432,
+        "minimumPrefixFrames": 18433
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000172",
+        "representativeFrame": 18536,
+        "minimumPrefixFrames": 18537
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000173",
+        "representativeFrame": 18640,
+        "minimumPrefixFrames": 18641
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000174",
+        "representativeFrame": 18761,
+        "minimumPrefixFrames": 18762
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000175",
+        "representativeFrame": 18838,
+        "minimumPrefixFrames": 18839
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000176",
+        "representativeFrame": 18918,
+        "minimumPrefixFrames": 18919
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000177",
+        "representativeFrame": 18959,
+        "minimumPrefixFrames": 18960
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000178",
+        "representativeFrame": 19022,
+        "minimumPrefixFrames": 19023
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000179",
+        "representativeFrame": 19193,
+        "minimumPrefixFrames": 19194
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000180",
+        "representativeFrame": 19364,
+        "minimumPrefixFrames": 19365
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000181",
+        "representativeFrame": 19522,
+        "minimumPrefixFrames": 19523
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000182",
+        "representativeFrame": 19656,
+        "minimumPrefixFrames": 19657
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000183",
+        "representativeFrame": 19935,
+        "minimumPrefixFrames": 19936
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000184",
+        "representativeFrame": 20119,
+        "minimumPrefixFrames": 20120
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000185",
+        "representativeFrame": 20304,
+        "minimumPrefixFrames": 20305
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000186",
+        "representativeFrame": 20383,
+        "minimumPrefixFrames": 20384
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000187",
+        "representativeFrame": 20459,
+        "minimumPrefixFrames": 20460
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000188",
+        "representativeFrame": 20516,
+        "minimumPrefixFrames": 20517
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000189",
+        "representativeFrame": 20576,
+        "minimumPrefixFrames": 20577
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000190",
+        "representativeFrame": 20634,
+        "minimumPrefixFrames": 20635
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000191",
+        "representativeFrame": 20775,
+        "minimumPrefixFrames": 20776
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000192",
+        "representativeFrame": 20887,
+        "minimumPrefixFrames": 20888
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000193",
+        "representativeFrame": 20932,
+        "minimumPrefixFrames": 20933
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000194",
+        "representativeFrame": 21061,
+        "minimumPrefixFrames": 21062
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000195",
+        "representativeFrame": 21241,
+        "minimumPrefixFrames": 21242
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000196",
+        "representativeFrame": 21409,
+        "minimumPrefixFrames": 21410
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000197",
+        "representativeFrame": 21529,
+        "minimumPrefixFrames": 21530
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000198",
+        "representativeFrame": 21592,
+        "minimumPrefixFrames": 21593
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000199",
+        "representativeFrame": 21659,
+        "minimumPrefixFrames": 21660
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000200",
+        "representativeFrame": 21769,
+        "minimumPrefixFrames": 21770
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000201",
+        "representativeFrame": 21870,
+        "minimumPrefixFrames": 21871
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000202",
+        "representativeFrame": 21948,
+        "minimumPrefixFrames": 21949
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000203",
+        "representativeFrame": 22031,
+        "minimumPrefixFrames": 22032
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000204",
+        "representativeFrame": 22120,
+        "minimumPrefixFrames": 22121
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000205",
+        "representativeFrame": 22158,
+        "minimumPrefixFrames": 22159
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000206",
+        "representativeFrame": 22198,
+        "minimumPrefixFrames": 22199
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000207",
+        "representativeFrame": 22258,
+        "minimumPrefixFrames": 22259
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000208",
+        "representativeFrame": 22351,
+        "minimumPrefixFrames": 22352
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000209",
+        "representativeFrame": 22475,
+        "minimumPrefixFrames": 22476
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000210",
+        "representativeFrame": 22600,
+        "minimumPrefixFrames": 22601
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000211",
+        "representativeFrame": 22693,
+        "minimumPrefixFrames": 22694
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000212",
+        "representativeFrame": 22752,
+        "minimumPrefixFrames": 22753
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000213",
+        "representativeFrame": 22810,
+        "minimumPrefixFrames": 22811
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000214",
+        "representativeFrame": 23009,
+        "minimumPrefixFrames": 23010
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000215",
+        "representativeFrame": 23129,
+        "minimumPrefixFrames": 23130
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000216",
+        "representativeFrame": 23237,
+        "minimumPrefixFrames": 23238
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000217",
+        "representativeFrame": 23307,
+        "minimumPrefixFrames": 23308
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000218",
+        "representativeFrame": 23473,
+        "minimumPrefixFrames": 23474
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000219",
+        "representativeFrame": 23707,
+        "minimumPrefixFrames": 23708
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000220",
+        "representativeFrame": 23883,
+        "minimumPrefixFrames": 23884
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000221",
+        "representativeFrame": 23970,
+        "minimumPrefixFrames": 23971
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000222",
+        "representativeFrame": 24070,
+        "minimumPrefixFrames": 24071
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000223",
+        "representativeFrame": 24124,
+        "minimumPrefixFrames": 24125
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000224",
+        "representativeFrame": 24187,
+        "minimumPrefixFrames": 24188
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000225",
+        "representativeFrame": 24254,
+        "minimumPrefixFrames": 24255
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000226",
+        "representativeFrame": 24292,
+        "minimumPrefixFrames": 24293
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000227",
+        "representativeFrame": 24367,
+        "minimumPrefixFrames": 24368
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000228",
+        "representativeFrame": 24484,
+        "minimumPrefixFrames": 24485
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000229",
+        "representativeFrame": 24585,
+        "minimumPrefixFrames": 24586
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000230",
+        "representativeFrame": 24711,
+        "minimumPrefixFrames": 24712
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000231",
+        "representativeFrame": 24855,
+        "minimumPrefixFrames": 24856
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000232",
+        "representativeFrame": 24940,
+        "minimumPrefixFrames": 24941
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000233",
+        "representativeFrame": 25006,
+        "minimumPrefixFrames": 25007
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000234",
+        "representativeFrame": 25258,
+        "minimumPrefixFrames": 25259
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000235",
+        "representativeFrame": 25495,
+        "minimumPrefixFrames": 25496
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000236",
+        "representativeFrame": 25602,
+        "minimumPrefixFrames": 25603
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000237",
+        "representativeFrame": 25758,
+        "minimumPrefixFrames": 25759
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000238",
+        "representativeFrame": 25873,
+        "minimumPrefixFrames": 25874
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000239",
+        "representativeFrame": 25993,
+        "minimumPrefixFrames": 25994
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000240",
+        "representativeFrame": 26125,
+        "minimumPrefixFrames": 26126
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000241",
+        "representativeFrame": 26203,
+        "minimumPrefixFrames": 26204
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000242",
+        "representativeFrame": 26454,
+        "minimumPrefixFrames": 26455
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000243",
+        "representativeFrame": 26622,
+        "minimumPrefixFrames": 26623
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000244",
+        "representativeFrame": 26704,
+        "minimumPrefixFrames": 26705
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000245",
+        "representativeFrame": 26780,
+        "minimumPrefixFrames": 26781
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000246",
+        "representativeFrame": 26859,
+        "minimumPrefixFrames": 26860
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000247",
+        "representativeFrame": 27004,
+        "minimumPrefixFrames": 27005
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000248",
+        "representativeFrame": 27194,
+        "minimumPrefixFrames": 27195
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000249",
+        "representativeFrame": 27276,
+        "minimumPrefixFrames": 27277
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000250",
+        "representativeFrame": 27432,
+        "minimumPrefixFrames": 27433
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000251",
+        "representativeFrame": 27573,
+        "minimumPrefixFrames": 27574
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000252",
+        "representativeFrame": 27689,
+        "minimumPrefixFrames": 27690
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000253",
+        "representativeFrame": 27861,
+        "minimumPrefixFrames": 27862
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000254",
+        "representativeFrame": 28190,
+        "minimumPrefixFrames": 28191
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000255",
+        "representativeFrame": 28306,
+        "minimumPrefixFrames": 28307
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000256",
+        "representativeFrame": 28423,
+        "minimumPrefixFrames": 28424
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000257",
+        "representativeFrame": 28495,
+        "minimumPrefixFrames": 28496
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000258",
+        "representativeFrame": 28573,
+        "minimumPrefixFrames": 28574
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000259",
+        "representativeFrame": 28701,
+        "minimumPrefixFrames": 28702
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000260",
+        "representativeFrame": 28842,
+        "minimumPrefixFrames": 28843
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000261",
+        "representativeFrame": 29031,
+        "minimumPrefixFrames": 29032
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000262",
+        "representativeFrame": 29268,
+        "minimumPrefixFrames": 29269
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000263",
+        "representativeFrame": 29421,
+        "minimumPrefixFrames": 29422
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000264",
+        "representativeFrame": 29622,
+        "minimumPrefixFrames": 29623
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000265",
+        "representativeFrame": 31191,
+        "minimumPrefixFrames": 31192
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000266",
+        "representativeFrame": 32865,
+        "minimumPrefixFrames": 32866
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000267",
+        "representativeFrame": 32902,
+        "minimumPrefixFrames": 32903
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000268",
+        "representativeFrame": 32962,
+        "minimumPrefixFrames": 32963
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000269",
+        "representativeFrame": 33120,
+        "minimumPrefixFrames": 33121
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000270",
+        "representativeFrame": 33302,
+        "minimumPrefixFrames": 33303
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000271",
+        "representativeFrame": 33381,
+        "minimumPrefixFrames": 33382
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000272",
+        "representativeFrame": 33505,
+        "minimumPrefixFrames": 33506
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000273",
+        "representativeFrame": 34363,
+        "minimumPrefixFrames": 34364
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000274",
+        "representativeFrame": 34451,
+        "minimumPrefixFrames": 34452
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000275",
+        "representativeFrame": 34531,
+        "minimumPrefixFrames": 34532
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000276",
+        "representativeFrame": 34564,
+        "minimumPrefixFrames": 34565
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000277",
+        "representativeFrame": 34613,
+        "minimumPrefixFrames": 34614
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000278",
+        "representativeFrame": 34670,
+        "minimumPrefixFrames": 34671
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000279",
+        "representativeFrame": 34706,
+        "minimumPrefixFrames": 34707
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000280",
+        "representativeFrame": 34728,
+        "minimumPrefixFrames": 34729
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000281",
+        "representativeFrame": 34744,
+        "minimumPrefixFrames": 34745
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000282",
+        "representativeFrame": 34841,
+        "minimumPrefixFrames": 34842
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000283",
+        "representativeFrame": 34976,
+        "minimumPrefixFrames": 34977
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000284",
+        "representativeFrame": 35095,
+        "minimumPrefixFrames": 35096
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000285",
+        "representativeFrame": 35185,
+        "minimumPrefixFrames": 35186
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000286",
+        "representativeFrame": 35258,
+        "minimumPrefixFrames": 35259
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000287",
+        "representativeFrame": 35316,
+        "minimumPrefixFrames": 35317
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000288",
+        "representativeFrame": 35471,
+        "minimumPrefixFrames": 35472
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000289",
+        "representativeFrame": 35669,
+        "minimumPrefixFrames": 35670
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000290",
+        "representativeFrame": 35750,
+        "minimumPrefixFrames": 35751
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000291",
+        "representativeFrame": 35830,
+        "minimumPrefixFrames": 35831
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000292",
+        "representativeFrame": 35932,
+        "minimumPrefixFrames": 35933
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000293",
+        "representativeFrame": 36276,
+        "minimumPrefixFrames": 36277
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000294",
+        "representativeFrame": 36619,
+        "minimumPrefixFrames": 36620
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000295",
+        "representativeFrame": 36692,
+        "minimumPrefixFrames": 36693
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000296",
+        "representativeFrame": 36754,
+        "minimumPrefixFrames": 36755
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000297",
+        "representativeFrame": 36822,
+        "minimumPrefixFrames": 36823
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000298",
+        "representativeFrame": 36886,
+        "minimumPrefixFrames": 36887
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000299",
+        "representativeFrame": 36940,
+        "minimumPrefixFrames": 36941
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000300",
+        "representativeFrame": 37488,
+        "minimumPrefixFrames": 37489
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000301",
+        "representativeFrame": 37616,
+        "minimumPrefixFrames": 37617
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000302",
+        "representativeFrame": 38008,
+        "minimumPrefixFrames": 38009
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000303",
+        "representativeFrame": 38120,
+        "minimumPrefixFrames": 38121
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000304",
+        "representativeFrame": 38471,
+        "minimumPrefixFrames": 38472
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000305",
+        "representativeFrame": 39375,
+        "minimumPrefixFrames": 39376
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000306",
+        "representativeFrame": 39954,
+        "minimumPrefixFrames": 39955
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000307",
+        "representativeFrame": 40321,
+        "minimumPrefixFrames": 40322
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000308",
+        "representativeFrame": 40756,
+        "minimumPrefixFrames": 40757
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000309",
+        "representativeFrame": 40977,
+        "minimumPrefixFrames": 40978
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000310",
+        "representativeFrame": 41256,
+        "minimumPrefixFrames": 41257
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000311",
+        "representativeFrame": 41528,
+        "minimumPrefixFrames": 41529
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000312",
+        "representativeFrame": 41555,
+        "minimumPrefixFrames": 41556
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000313",
+        "representativeFrame": 41596,
+        "minimumPrefixFrames": 41597
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000314",
+        "representativeFrame": 41636,
+        "minimumPrefixFrames": 41637
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000315",
+        "representativeFrame": 41795,
+        "minimumPrefixFrames": 41796
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000316",
+        "representativeFrame": 41819,
+        "minimumPrefixFrames": 41820
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000317",
+        "representativeFrame": 41846,
+        "minimumPrefixFrames": 41847
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000318",
+        "representativeFrame": 41857,
+        "minimumPrefixFrames": 41858
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000319",
+        "representativeFrame": 41872,
+        "minimumPrefixFrames": 41873
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000320",
+        "representativeFrame": 41887,
+        "minimumPrefixFrames": 41888
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000321",
+        "representativeFrame": 41910,
+        "minimumPrefixFrames": 41911
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000322",
+        "representativeFrame": 41970,
+        "minimumPrefixFrames": 41971
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000323",
+        "representativeFrame": 42212,
+        "minimumPrefixFrames": 42213
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000324",
+        "representativeFrame": 44037,
+        "minimumPrefixFrames": 44038
+      },
+      {
+        "instructionId": "digest-v1-phase2-20260913-v001-bridge-caption-000325",
+        "representativeFrame": 44387,
+        "minimumPrefixFrames": 44388
+      }
+    ]
+  },
+  "method": "既存for(record of overlayRecords)で毎回1字幕だけ透明画像へ置換し、同じ全timeline入力のFFmpegを先頭から新規起動。representativeFrameを復号した後に既存処理で符号化器へqを送る。対象frameに至る最小prefix数を整数で全件加算。encoder先行処理・終了待ちの追加frameは含めない。",
+  "limitations": [
+    "合成途中のfile sizeを完了率へ換算しない。",
+    "主合成の途中経過と総prefix frame数から最終QCの所要時間を係数で算出しない。",
+    "現段階で実走3日上限超過を確定したとは扱わない。",
+    "既存の全件最終QC、符号化条件、比較意味は維持したまま実行計画を相談する。"
+  ],
+  "newActions": {
+    "renderExecutions": 0,
+    "coreChanges": 0,
+    "processInterruption": 0,
+    "threadSettingsChanged": 0,
+    "qualitySettingsChanged": 0,
+    "apiCalls": 0,
+    "costUsd": 0
+  },
+  "request": "主合成を中断せず保持したまま、既存最終QCをそのまま325件続行すべきか、同じ比較意味・同じ画素結果を維持する限定的な実行効率の診断を認めるか、ZEV進行管理３へGPT_DECISION。実走上限の延長は提案・仮置きしない。"
+}

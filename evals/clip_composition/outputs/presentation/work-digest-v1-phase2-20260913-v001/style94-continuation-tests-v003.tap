@@ -1,0 +1,55 @@
+TAP version 13
+# Subtest: 実325画像の命令差分はPNG復号325組と複合filter1組だけ
+ok 1 - 実325画像の命令差分はPNG復号325組と複合filter1組だけ
+  ---
+  duration_ms: 1.652459
+  ...
+# Subtest: 土台復号の並列変更を拒否する
+ok 2 - 土台復号の並列変更を拒否する
+  ---
+  duration_ms: 1.917042
+  ...
+# Subtest: 符号化器の並列変更を拒否する
+ok 3 - 符号化器の並列変更を拒否する
+  ---
+  duration_ms: 0.300291
+  ...
+# Subtest: PNG復号設定の欠落と未承認値を拒否する
+ok 4 - PNG復号設定の欠落と未承認値を拒否する
+  ---
+  duration_ms: 0.954583
+  ...
+# Subtest: 合成filter式の変更を拒否する
+ok 5 - 合成filter式の変更を拒否する
+  ---
+  duration_ms: 2.952875
+  ...
+# Subtest: 字幕画像の入力順序変更を拒否する
+ok 6 - 字幕画像の入力順序変更を拒否する
+  ---
+  duration_ms: 3.176
+  ...
+# Subtest: frame数・映像符号化・音声の変更を拒否する
+ok 7 - frame数・映像符号化・音声の変更を拒否する
+  ---
+  duration_ms: 9.42
+  ...
+# Subtest: 出力mappingの変更を拒否する
+ok 8 - 出力mappingの変更を拒否する
+  ---
+  duration_ms: 1.238208
+  ...
+# Subtest: 限定検査を今回の実装・描画前検査・命令差分へ結び付けて保存する
+ok 9 - 限定検査を今回の実装・描画前検査・命令差分へ結び付けて保存する
+  ---
+  duration_ms: 6.318958
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 343.626208

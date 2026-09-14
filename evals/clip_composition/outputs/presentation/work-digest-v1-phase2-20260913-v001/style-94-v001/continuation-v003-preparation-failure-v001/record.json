@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "digest-v1-phase2-resource-evidence-read-shape-fix-v001",
+  "status": "preparation-failed-before-output",
+  "cause": "過去検証のfixtureCasesは6件の名称配列。追加した読取り照合が配列そのものを件数6と比較した。",
+  "sourceBefore": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003-preparation-failure-v001/source-before-fix.mts",
+    "fileSha256": "6f54b3e3ab5b3408516c9b425d61e4d6577e2880bd8a34ae1ef8a12a0ebf553f"
+  },
+  "log": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style94-continuation-prepare-v003.log",
+    "fileSha256": "176e268f75a6270b747595f405d75f3dfb4058059c69623b9b8ceba7c2bc69c0"
+  },
+  "fix": "名称配列のlengthを6と比較する。旧検証データと描画本体は不変。",
+  "newOutputRootCreated": false,
+  "rendererExecutions": 0,
+  "argumentComparisonExecuted": false,
+  "apiCalls": 0,
+  "costUsd": 0
+}

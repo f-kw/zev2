@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "digest-v1-phase2-composite-resource-observation-v002",
+  "observedAt": "2026-09-14T03:57:21.920157+00:00",
+  "pid": 649,
+  "parentPid": 80314,
+  "elapsed": "11:28",
+  "cpuPercent": 115.6,
+  "rssKiB": 10857712,
+  "state": "R",
+  "threadCount": 644,
+  "threadCountSource": "現環境man ps: -M prints one line per thread。ヘッダーを除き、追加PID列が当該649に一致する全行を計数。",
+  "threadEvidence": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/composite-thread-list-v002.txt",
+    "fileSha256": "500796d2b4b9c56267eb4055bd1f8cedabf3722d695edeed1d1f498160f678c4"
+  },
+  "priorObservationFailure": "初回は -M が -o にかかわらず固定列・ヘッダーを併記する表示を想定せず、PIDだけの行との比較が失敗。現物表示を確認してヘッダーと追加PID列を照合した。描画は継続。",
+  "physicalFootprint": "not-measured",
+  "raw": "649 80314 11:28 115.6 10857712 R",
+  "agentTerminationSignals": 0
+}
