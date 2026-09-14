@@ -1,0 +1,355 @@
+{
+  "schemaVersion": "digest-v1-phase2-final-qc-static-equivalence-diagnosis-v001",
+  "observedAt": "2026-09-14T05:44:10.305815+00:00",
+  "status": "static-diagnosis-completed-no-run-change",
+  "purpose": "既存7候補・12保持区間・325字幕の完成MP4と全件技術検査を優先する。最適化を新しい製造目的にしない。",
+  "decisionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/final-qc-workload-decision-v001.json",
+    "fileSha256": "87ffafa6f7d5595591ce6ec0e4caf3af88c6ffbfb6f469933f232cc4e8e5efaf",
+    "bytes": 3357
+  },
+  "planBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/common-plan.json",
+    "fileSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+    "bytes": 2095671
+  },
+  "workloadBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/final-qc-workload-observation-v001.json",
+    "fileSha256": "c3201cd8f8728bbaa6d2a777a06bdf638a1ed179804c6aa7ea0b1a4e6e44e8ad",
+    "bytes": 59273
+  },
+  "currentCodeBindings": [
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94",
+      "bytes": 93860
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "b20992c6756f4c5e460af79a7b7d5872f7b6f4a23b41700023c7bd51b14c4837",
+      "bytes": 25667
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_counterfactual_frame_v001.test.mjs",
+      "fileSha256": "fe15cbb67824eb41357d7b6e5549bc8227ac9d29071dae6cc0aaab6481489fc5",
+      "bytes": 12643
+    },
+    {
+      "path": "evals/clip_composition/digest_v1_phase2_style94_continuation_v003.mts",
+      "fileSha256": "9e2c23261135019d2987dbbc9838aa15a841e6295826782cd78e7ba4e5148494",
+      "bytes": 22858
+    },
+    {
+      "path": "evals/clip_composition/unseen_material_qc_lossless_cache_v001.mjs",
+      "fileSha256": "78fb297b01d118eedffefac31008ffe578c18f3e60711407f32576ffc8de9418",
+      "bytes": 4230
+    }
+  ],
+  "currentSemantics": {
+    "captionCount": 325,
+    "representativeFrames": 325,
+    "canvas": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "safeAreaPx": {
+        "top": 40,
+        "right": 80,
+        "bottom": 40,
+        "left": 80
+      }
+    },
+    "overlapPairs": [],
+    "displayFrameSum": 36937,
+    "expectedFrameCount": 44408,
+    "minimumIndependentPrefixFrames": 5922296,
+    "comparison": "完成MP4の対象字幕中央frameと、対象字幕PNGだけを透明PNGへ換えた同じ全timelineの同条件H.264符号化結果を復号して比較。対象字幕の非透明領域を囲む矩形内のImageMagick AE差分が正であることを全325件に要求。",
+    "existingCoreLines": {
+      "compositeArguments": [
+        906,
+        952
+      ],
+      "encodedPrefix": [
+        967,
+        1045
+      ],
+      "allCaptionLoop": [
+        1828,
+        1893
+      ],
+      "qcEvaluator": [
+        330,
+        341
+      ]
+    },
+    "fullPrefixAlreadyOptimized": "既存実装は全長符号化完了を待たず、対象frame復号が成功した後にだけqを送り正常終了する。先頭入力を省いてはいない。"
+  },
+  "priorProofs": [
+    {
+      "source": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-optimization-verification-v001.json",
+        "fileSha256": "c8901e0d5712cccb1680c25110427bf400eb3f0f699e306e9b8b7d595cebc27c",
+        "bytes": 4233
+      },
+      "savedStatus": "passed",
+      "savedScope": "Encode the complete unchanged counterfactual input; stream encoded MP4 packets; stop normally only after the required encoded frame has been decoded. No comparison MP4 is accumulated. Extract the final main-video frame by exact integer-second seeking.",
+      "implementationChecks": [
+        {
+          "path": "evals/clip_composition/render_presentation_v002.mjs",
+          "expectedSha256": "b5670f2e9a665fddf7082fee107b322181f6a2c6a89edb6c1d77fcebce38a61b",
+          "currentState": "different-bytes",
+          "actualSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-verification-v001.json",
+        "fileSha256": "c7ebe38e3588663b450a31b4f0dbe9b8525148bc22776268bc934895a38ba778",
+        "bytes": 10204
+      },
+      "savedStatus": "passed",
+      "savedScope": null,
+      "implementationChecks": [
+        {
+          "path": "evals/clip_composition/render_presentation_v002.mjs",
+          "expectedSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94",
+          "currentState": "same-bytes",
+          "actualSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94"
+        },
+        {
+          "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+          "expectedSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388",
+          "currentState": "same-bytes",
+          "actualSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-verification-v001.json",
+        "fileSha256": "a420898a28cbca0e7ea1ef2ef1d25f91f3a37c403b4536fb911611685210d4dc",
+        "bytes": 45620
+      },
+      "savedStatus": "passed",
+      "savedScope": "024 only, non-overlapping captions, original full graph after fps=30/format=yuv420p before H.264; full prefix encoding from frame zero with unchanged encoder settings",
+      "implementationChecks": [
+        {
+          "path": "evals/clip_composition/render_presentation_v002.mjs",
+          "expectedSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94",
+          "currentState": "same-bytes",
+          "actualSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94"
+        },
+        {
+          "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+          "expectedSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388",
+          "currentState": "same-bytes",
+          "actualSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388"
+        },
+        {
+          "path": "evals/clip_composition/unseen_material_qc_lossless_cache_v001.mjs",
+          "expectedSha256": "78fb297b01d118eedffefac31008ffe578c18f3e60711407f32576ffc8de9418",
+          "currentState": "same-bytes",
+          "actualSha256": "78fb297b01d118eedffefac31008ffe578c18f3e60711407f32576ffc8de9418"
+        },
+        {
+          "path": "evals/clip_composition/run_unseen_material_qc_only_v001.mjs",
+          "expectedSha256": "61cd392522e1ca31a87490eeb69c0d9e013ae42c735a598abdcac0eb9803f124",
+          "currentState": "same-bytes",
+          "actualSha256": "61cd392522e1ca31a87490eeb69c0d9e013ae42c735a598abdcac0eb9803f124"
+        },
+        {
+          "path": "evals/clip_composition/unseen_material_qc_lossless_cache_v001.test.mjs",
+          "expectedSha256": "784dc847fadc5b42f73baa57314ea57c664c2a38dc5b74338cda185ef65e2e0e",
+          "currentState": "same-bytes",
+          "actualSha256": "784dc847fadc5b42f73baa57314ea57c664c2a38dc5b74338cda185ef65e2e0e"
+        },
+        {
+          "path": "evals/clip_composition/unseen_material_qc_cache_capture_v001.test.mjs",
+          "expectedSha256": "1d1cf0b569f66b8f6a10d62766c7a7d7d76f3a37b17e5244e1356603f5ce29a1",
+          "currentState": "same-bytes",
+          "actualSha256": "1d1cf0b569f66b8f6a10d62766c7a7d7d76f3a37b17e5244e1356603f5ce29a1"
+        },
+        {
+          "path": "evals/clip_composition/measure_unseen_material_qc_cache_v001.mjs",
+          "expectedSha256": "dca8f99a3dc5283ea42325fb3b39bc266aecf33f06f4bb90c4cc99ebb9c6bd73",
+          "currentState": "same-bytes",
+          "actualSha256": "dca8f99a3dc5283ea42325fb3b39bc266aecf33f06f4bb90c4cc99ebb9c6bd73"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-verification-v001.json",
+        "fileSha256": "eba25e19281988fc1b0bb2f526fb7676d2bfaa952f8523f7d1fcb3533c693b96",
+        "bytes": 98058
+      },
+      "savedStatus": "passed",
+      "savedScope": "指示-024限定。実測stream metadataをSHAで束縛し、失われた指定だけを復元。色変換・閾値追加なし。",
+      "implementationChecks": [
+        {
+          "path": "evals/clip_composition/render_presentation_v002.mjs",
+          "expectedSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94",
+          "currentState": "same-bytes",
+          "actualSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94"
+        },
+        {
+          "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+          "expectedSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388",
+          "currentState": "same-bytes",
+          "actualSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388"
+        },
+        {
+          "path": "evals/clip_composition/unseen_material_qc_lossless_cache_v001.mjs",
+          "expectedSha256": "78fb297b01d118eedffefac31008ffe578c18f3e60711407f32576ffc8de9418",
+          "currentState": "same-bytes",
+          "actualSha256": "78fb297b01d118eedffefac31008ffe578c18f3e60711407f32576ffc8de9418"
+        },
+        {
+          "path": "evals/clip_composition/run_unseen_material_qc_only_v001.mjs",
+          "expectedSha256": "61cd392522e1ca31a87490eeb69c0d9e013ae42c735a598abdcac0eb9803f124",
+          "currentState": "same-bytes",
+          "actualSha256": "61cd392522e1ca31a87490eeb69c0d9e013ae42c735a598abdcac0eb9803f124"
+        },
+        {
+          "path": "evals/clip_composition/unseen_material_qc_lossless_cache_v001.test.mjs",
+          "expectedSha256": "784dc847fadc5b42f73baa57314ea57c664c2a38dc5b74338cda185ef65e2e0e",
+          "currentState": "same-bytes",
+          "actualSha256": "784dc847fadc5b42f73baa57314ea57c664c2a38dc5b74338cda185ef65e2e0e"
+        },
+        {
+          "path": "evals/clip_composition/unseen_material_qc_cache_capture_v001.test.mjs",
+          "expectedSha256": "1d1cf0b569f66b8f6a10d62766c7a7d7d76f3a37b17e5244e1356603f5ce29a1",
+          "currentState": "same-bytes",
+          "actualSha256": "1d1cf0b569f66b8f6a10d62766c7a7d7d76f3a37b17e5244e1356603f5ce29a1"
+        },
+        {
+          "path": "evals/clip_composition/measure_unseen_material_qc_cache_v001.mjs",
+          "expectedSha256": "dca8f99a3dc5283ea42325fb3b39bc266aecf33f06f4bb90c4cc99ebb9c6bd73",
+          "currentState": "same-bytes",
+          "actualSha256": "dca8f99a3dc5283ea42325fb3b39bc266aecf33f06f4bb90c4cc99ebb9c6bd73"
+        },
+        {
+          "path": "evals/clip_composition/unseen_material_qc_color_metadata_v001.mjs",
+          "expectedSha256": "886dbe52683cb0afb4ca87f78a3605d884370071a4b8cc825e2bbf8c802215e2",
+          "currentState": "missing-in-current-worktree",
+          "actualSha256": null
+        },
+        {
+          "path": "evals/clip_composition/verify_unseen_material_qc_color_metadata_v001.mjs",
+          "expectedSha256": "4947267b50adceb01b2c70c60fc5cbabc33ba81ce75496a732683504ad87ad5f",
+          "currentState": "missing-in-current-worktree",
+          "actualSha256": null
+        },
+        {
+          "path": "evals/clip_composition/run_unseen_material_qc_only_v002.mjs",
+          "expectedSha256": "10329a7c9d2e1f72d1da708862d412a8f39c80c4b7d85acd19a7acbaefc27047",
+          "currentState": "missing-in-current-worktree",
+          "actualSha256": null
+        }
+      ]
+    }
+  ],
+  "priorIntegratedProof": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-pOjK6H/result.json",
+    "fileSha256": "3c52b546879848aa90e52a30dbbfd36c11922d4b722adb4fb08a08064838d7df",
+    "bytes": 11472
+  },
+  "priorFullCacheProof": {
+    "source": {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/cache-verification.json",
+      "fileSha256": "bfb30972ed637187dba08cbdf7768f6b501581224be09146111618fd89b74df4",
+      "bytes": 5016
+    },
+    "savedStatus": "passed",
+    "savedFrames": 65363,
+    "readOnlyRecheckedFrameHashes": [
+      {
+        "pixelFormat": "yuv420p",
+        "sourceAndReplayHashesEqual": true,
+        "artifacts": [
+          {
+            "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/source-encoded-yuv420p.framehash.txt",
+            "fileSha256": "80ba908b549275b54dbb39ce6824d339d3960779d69260acef70594d2ac80ea6",
+            "bytes": 7320875,
+            "observedFrameRows": 65363
+          },
+          {
+            "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/replay-encoded-yuv420p.framehash.txt",
+            "fileSha256": "80ba908b549275b54dbb39ce6824d339d3960779d69260acef70594d2ac80ea6",
+            "bytes": 7320875,
+            "observedFrameRows": 65363
+          }
+        ]
+      },
+      {
+        "pixelFormat": "rgba",
+        "sourceAndReplayHashesEqual": true,
+        "artifacts": [
+          {
+            "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/source-encoded-rgba.framehash.txt",
+            "fileSha256": "0542b4ca7dca2131d2737e9ab8396aa87b46d54356e1115071e8f588cfa4b316",
+            "bytes": 7320875,
+            "observedFrameRows": 65363
+          },
+          {
+            "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/replay-encoded-rgba.framehash.txt",
+            "fileSha256": "0542b4ca7dca2131d2737e9ab8396aa87b46d54356e1115071e8f588cfa4b316",
+            "bytes": 7320875,
+            "observedFrameRows": 65363
+          }
+        ]
+      }
+    ],
+    "scopeLimitation": "指示024の字幕付き主映像再符号化の全65363frame一致。現在のPhase 2・44,408frameや325件の除外検査の成立を示さない。旧024を再開しない。"
+  },
+  "candidateReview": [
+    {
+      "proposal": "代表frame前後だけを切り出して符号化、または符号化前seek",
+      "verdict": "not-proven-not-admissible",
+      "reason": "現在の全timeline先頭からの符号化入力とencoder stateを保持しない。参照frame・B-frame・lookahead・rate controlの同値性証拠がない。既存prefixの合格証拠は先頭を省く案を証明しない。"
+    },
+    {
+      "proposal": "全字幕なし動画1本から各代表frameを取る、または複数字幕をまとめて除外する",
+      "verdict": "does-not-preserve-required-input",
+      "reason": "各対象以外の字幕を保持する全timeline条件に違反。今回字幕の同時表示は0組でも、それ以前・以後の他字幕を消してよい根拠にならず、各符号化結果の同値性も未証明。"
+    },
+    {
+      "proposal": "完成MP4の復号画素から字幕を消す、または透明画像の画素検査だけで済ませる",
+      "verdict": "does-not-preserve-required-comparison",
+      "reason": "主合成前の全timelineを同条件で再符号化した対象字幕除外像を作れず、最終符号化で字幕が可視である条件の証明にならない。"
+    },
+    {
+      "proposal": "複数独立符号化器を同一processへ束ねる、復号入力だけを共有する",
+      "verdict": "no-reduction-of-independent-encoder-histories-proven",
+      "reason": "325種類の全timeline除外条件と各符号化履歴は残る。並行数や処理量の改善は測定していない。現在のrunに並行実行を加える権限もない。"
+    },
+    {
+      "proposal": "既存024方式の合成後・H.264前の無損失画素cacheと色metadata保持",
+      "verdict": "prior-technical-evidence-only-not-approved-for-phase2",
+      "reason": "字幕同時表示なしの場合、字幕ありと全透明の2系統を同じ全filterで生成し、対象字幕の全表示区間だけ後者を選択して先頭から同じH.264符号化を行う方式。現在の325字幕も重複0組という必要条件は成立。過去fixtureと024全長の画素証拠はあるが、今回のcache・色指定・全長・各除外像は未検証。最新の色metadata保持・検証・実行用3sourceは現在の作業ツリーに存在しない。旧承認や旧byteを今回へ自動転用しない。",
+      "reductionLimit": "字幕の合成filterを繰り返す作業は削減候補になるが、独立prefix符号化325回・最小5,922,296frameは残る。符号化回数削減の解としては扱わない。",
+      "evidenceBeforeAnyFutureAdoption": [
+        "実装取得・復旧と今回への適用範囲の別判断",
+        "今回のpixel plane・timestamp・color metadataの全長同値性",
+        "主MP4との全長復号画素一致",
+        "全325件の同じ対象除外と同じ代表frame・同じ比較関門",
+        "容量・実行方法を実測し、独自係数や新上限を置かない"
+      ]
+    }
+  ],
+  "conclusion": "保存済み証拠だけで、325件の独立prefix符号化を減らしながら現在と同じ結果を証明できる方式は確認できなかった。過去の無損失方式は合成繰返しの削減候補だが、今回への適用証明は未成立。現行runを変更・中断しない。",
+  "recommendation": "現在の主合成と既存325件QCを続行する。上記の結果をZEV進行管理３へGPT_DECISIONとして自動提出し、実装・試験・切替は行わない。先に現行runが完成した場合は完成を優先し、無損失方式はDigest v1後の性能課題として残す。",
+  "newActions": {
+    "encodeExecutions": 0,
+    "renderExecutions": 0,
+    "frameDecodeExecutions": 0,
+    "coreChanges": 0,
+    "processSignals": 0,
+    "runtimeChanges": 0,
+    "apiCalls": 0,
+    "costUsd": 0
+  },
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}

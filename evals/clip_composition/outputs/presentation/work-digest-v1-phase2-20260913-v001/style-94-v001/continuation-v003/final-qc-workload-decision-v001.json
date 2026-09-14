@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "digest-v1-phase2-final-qc-workload-decision-v001",
+  "source": {
+    "session": "ZEV進行管理３",
+    "url": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa2c259-596c-83ee-8764-f7467a54c1f4",
+    "browser": "Microsoft Edge",
+    "modelSelection": "極高を維持。モデル変更なし。",
+    "questionType": "GPT_DECISION",
+    "checkpoint": "0d5673bdcd080e416246a20449cebb1d6cc5a26c",
+    "responseStatus": "更新後にレスポンス確認済み",
+    "recovery": "初回応答で接続中断が表示されたため、直前の自己送信を編集状態にして文面無変更で1回再送。再送後の生成完了・全文・応答アクションを確認。追加再送・再生成・reloadなし。"
+  },
+  "evidence": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/final-qc-workload-observation-v001.json",
+    "fileSha256": "c3201cd8f8728bbaa6d2a777a06bdf638a1ed179804c6aa7ea0b1a4e6e44e8ad"
+  },
+  "decision": "CONTINUE CURRENT RUN / ALLOW STATIC EQUIVALENCE DIAGNOSIS",
+  "currentRun": "現在の主合成を中断せず、signalも設定変更も行わない。主合成後に同一processが既存325件final visibility QCへ進む場合もそのまま続行。性能懸念だけを理由に途中停止させない。既存final QCが正常完了した場合はその結果をPhase 2の結果として使用する。",
+  "allowedDiagnosis": "現在実行への負荷を増やさないread-only / staticな同値性診断のみ。既存code・plan・保存済みfixture・過去の同値性証拠だけを読む。新しいFFmpeg encode、Remotion描画、大量frame decodeは並行起動しない。",
+  "fixedMeaning": "完成動画と、同じ全timeline・同じ符号化条件で対象字幕だけを除外したcounterfactual動画の代表frameを比較し、その字幕による最終出力上の画素差を確認する。",
+  "equivalenceRequirements": [
+    "同じ対象字幕325件と同じrepresentative frame",
+    "対象字幕だけを除外し、他字幕は保持",
+    "同じoverlay計算とfade",
+    "同じcodec / preset / CRF / pixel format",
+    "同じ比較画素条件と325件すべて合格必須",
+    "H.264の参照frame、B-frame、lookahead、encoder state等により結果が変わり得る案は同値と証明できなければ採用候補にしない",
+    "見た目が同じ・たぶん同じ・十分近いを同値性根拠にしない"
+  ],
+  "implementationNotAuthorized": [
+    "renderer / QC / counterfactual algorithm変更",
+    "frame削減・sampling・一部字幕だけの検査・合格条件緩和",
+    "codec / CRF変更・分割合成"
+  ],
+  "nextDecision": "具体案と同値性根拠を保存し、ZEV進行管理３へGPT_DECISIONを自動提出する。現行runが先に全件QC・完成MP4・verificationまで成立すればPhase 2完成を優先し、最適化はDigest v1後の課題へ送る。最適化のためにPhase 2をやり直さない。",
+  "failureHandling": "現行runが機械的理由で停止した場合は、診断結果と停止証拠を合わせてZEV進行管理３へ自動相談し、その時点で初めて再開方式を判断する。",
+  "humanQuality": "not-evaluated",
+  "completionApproval": "not-claimed"
+}
