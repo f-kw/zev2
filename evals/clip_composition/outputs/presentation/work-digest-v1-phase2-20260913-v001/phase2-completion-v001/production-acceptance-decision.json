@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "digest-v1-phase2-production-acceptance-decision-v001",
+  "recordedAt": "2026-09-14T08:27:51.719712+00:00",
+  "authority": {
+    "speaker": "kawafmm",
+    "instructionTitle": "Digest v1 Phase 2 — 人間確認完了・Phase 2を閉じる",
+    "instructionDate": "2026-09-14",
+    "statements": [
+      "完成動画について、代表3箇所を人間確認した。",
+      "3箇所とも問題なし。",
+      "24分40秒の全編通し視聴は行っていない。",
+      "これ以上の人間確認・追加QCは要求しない。",
+      "Digest v1 Phase 2 = COMPLETED"
+    ],
+    "scope": "今回の実素材C-all経路を成立済みとして固定しPhase 2を閉じる。次工程は別work-order。"
+  },
+  "decision": "removed from production acceptance; not required",
+  "target": "325字幕のそれぞれを除外したcounterfactual動画を再符号化する検査",
+  "exhaustiveQcStatus": "not-completed",
+  "completedCaptionComparisons": 6,
+  "incompleteCaptionComparisons": 319,
+  "interruptedCaptionComparisons": 1,
+  "notStartedCaptionComparisons": 318,
+  "all325Passed": false,
+  "requiredForProductionAcceptance": false,
+  "phase2CompletionBlocker": false,
+  "futureUse": "renderer regression / fixture verification",
+  "futureWorkOrder": "separate work-order required; no automatic continuation",
+  "originalRemovalDecisionBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/owner-instruction.json",
+    "fileSha256": "02ea4a2d87658df09c2bee4d1e97fef5f45f5e1367038e94f084fa29fa225afd",
+    "bytes": 1747
+  },
+  "retainedStopEvidenceBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/owner-stop-v001/owner-stop.json",
+    "fileSha256": "9c5b131194a6e553a2934b5d815c82af20836cb315e4a7b5a0f3d16aa79bad67",
+    "bytes": 4227
+  },
+  "principles": [
+    "検証したい失敗モードは、それを直接確認できる最も低コストな層で検査する。",
+    "機械的リスク一覧を、そのまま人間の全件確認リストへ変換しない。",
+    "完成物の人間レビューは通常利用に近い形を基本とし、代表spot checkを必要以上に増やさない。"
+  ],
+  "decisionMeaning": "未完了の事実と途中証拠を保持したうえで、production acceptanceから除外済みと確定する。旧検査に全件合格したとは扱わない。",
+  "diagnosticListsRole": "問題発見後の原因調査用。全件目視要求ではない。"
+}

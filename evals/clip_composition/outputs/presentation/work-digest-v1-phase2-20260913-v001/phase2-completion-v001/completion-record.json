@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "digest-v1-phase2-completion-record-v001",
+  "completionId": "digest-v1-phase2-completed-20260914-v001",
+  "recordedAt": "2026-09-14T08:27:51.719712+00:00",
+  "phase2Status": "completed",
+  "completionLabel": "Digest v1 Phase 2 = COMPLETED",
+  "completionAuthority": {
+    "speaker": "kawafmm",
+    "instructionTitle": "Digest v1 Phase 2 — 人間確認完了・Phase 2を閉じる",
+    "instructionDate": "2026-09-14",
+    "statements": [
+      "完成動画について、代表3箇所を人間確認した。",
+      "3箇所とも問題なし。",
+      "24分40秒の全編通し視聴は行っていない。",
+      "これ以上の人間確認・追加QCは要求しない。",
+      "Digest v1 Phase 2 = COMPLETED"
+    ],
+    "scope": "今回の実素材C-all経路を成立済みとして固定しPhase 2を閉じる。次工程は別work-order。"
+  },
+  "humanReview": "representative-spot-check-accepted",
+  "reviewedSpots": 3,
+  "issuesFound": 0,
+  "fullLengthHumanViewing": "not-performed",
+  "humanReviewResult": "accepted",
+  "completionBasis": "保存済みの必要な技術確認と、kawafmmによる代表3箇所の人間確認・問題0をもって完成とする。全編未視聴を完成阻害条件にしない。",
+  "productionRoute": {
+    "realSourceProspectGeneration": "completed",
+    "candidateAdoptionPolicy": "C = all Prospects adopted",
+    "prospectCount": 7,
+    "retainedRangeCount": 12,
+    "connectionOrder": "retained-source-time",
+    "captionCount": 325,
+    "sourceTextAtomCount": 4437,
+    "formalDerivedStyleFontSizePx": 94,
+    "baseMedia": "completed",
+    "renderer": "completed",
+    "finalMp4": "completed",
+    "establishedPath": "real-material C-all Digest v1 path"
+  },
+  "technicalResults": {
+    "sourceCaptionQc": {
+      "status": "passed",
+      "passed": 325,
+      "required": 325
+    },
+    "rasterQc": {
+      "status": "passed",
+      "passed": 325,
+      "required": 325,
+      "safeAreaViolations": 0
+    },
+    "finalMp4TechnicalCheck": "passed",
+    "videoCodec": "h264",
+    "width": 1920,
+    "height": 1080,
+    "frameRate": "30/1",
+    "frameCount": 44408,
+    "audioPresent": true,
+    "decodeErrors": 0,
+    "decodeErrorEvidence": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/decode-scan-stderr.txt",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "finalMp4SubtitleE2eSpotCheck": {
+      "status": "passed",
+      "passed": 1,
+      "required": 1
+    }
+  },
+  "durationSeconds": 1480.2666666666667,
+  "duration": "00:24:40.266667",
+  "bindings": {
+    "finalMp4": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "bytes": 616632321,
+      "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+    },
+    "baseMedia": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/base-media.mp4",
+      "fileSha256": "0de24b8c9b18d33d38e163f0e1eaed8a35aaeea4b2411c507d7947c992545c04"
+    },
+    "baseMediaTimeline": {
+      "schemaVersion": "presentation-base-media-timeline-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/timeline.json",
+      "fileSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e",
+      "canonicalSha256": "5b1e6c94a55485aa6632d1b087c4bb70ffe2631f1853981942a7ef1be9048f8d"
+    },
+    "baseMediaGenerationManifest": {
+      "schemaVersion": "presentation-base-media-generation-manifest-v003",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/generation-manifest.json",
+      "fileSha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053",
+      "canonicalSha256": "13aa3488ea8733d54f493f0572a8f66b1472283a16dc38e39f711e50e4997ec8"
+    },
+    "baseMediaValidationReceipt": {
+      "schemaVersion": "candidate-digest-base-media-validation-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/validation-receipt.json",
+      "fileSha256": "3155983a8fdd36b97e0b8ae46ad297ff030c8b4001e56abe264f667d98e5aafc",
+      "canonicalSha256": "936b8364c1699e54bc85d356816e24bd7b66d9578b4c10b0faba92fb33edd99e"
+    },
+    "style94": {
+      "schemaVersion": "presentation-preset-registry-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/preset-registry.json",
+      "fileSha256": "9ae9208bccc8b75d798ab1ae2f2f21ea275d96121a844c04b4dae1889bcd4c7d",
+      "canonicalSha256": "e83b65c8416231d65663a87a91eac583db34ac79efd8bf6161f32ad08b53ecb8"
+    },
+    "style94Derivation": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/derivation.json",
+      "fileSha256": "c9eea1515edccf59574d19d7de59405405bb387e1c742ef91885dbba2954ab91",
+      "bytes": 4069
+    },
+    "commonPlan": {
+      "schemaVersion": "presentation-output-common-core-plan-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/common-plan.json",
+      "fileSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+      "canonicalSha256": "9ea51a9794c8f6ccc78c4aab6010ca2a4278adf71a49189a0c6e14e8e5a5bfbf"
+    },
+    "bridge": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-v001.json",
+      "fileSha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60",
+      "bytes": 1035588
+    },
+    "semanticProvenance": {
+      "artifactBinding": {
+        "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-v001.json",
+        "fileSha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60",
+        "bytes": 1035588
+      },
+      "jsonPointer": "/semanticProvenance"
+    },
+    "prospects": {
+      "schemaVersion": "candidate-selection-candidate-set-v001",
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/candidate-set.json",
+      "fileSha256": "92c86734b01aab91e2f15ae835729030767507e220fede4b119bf38788ed9946",
+      "canonicalSha256": "1117b8203c4bb7c2157035fadb3d058e94dfa7636bc4784c6453bb77bda07a0c"
+    },
+    "sourceMaterial": {
+      "path": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+      "fileSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06"
+    },
+    "machineAdoption": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/machine-adoption.json",
+      "fileSha256": "48d8a351777849a7db7588c045e6ec27d54232066b3fca5400b06f985b45e8fb",
+      "bytes": 197066
+    },
+    "sourceCaptionQc": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/source-caption-qc.json",
+      "fileSha256": "63e3ac1829da2f96beb112c2e9d1d580643ad5fff656433370ead11b9d2a2798",
+      "bytes": 3032
+    },
+    "rasterQc": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/raster-qc.json",
+      "fileSha256": "1910bcfc150a8a186ac0ba39c3b314fd60e15b151877058dc8dd51e976e19085",
+      "bytes": 456963
+    },
+    "rasterQcReuseRecord": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/reused-raster-qc.json",
+      "fileSha256": "1c888b5c8a5179f843265eb03823c7cb8098a786c1b3c87cce437e58e4b3cdee",
+      "bytes": 1393
+    },
+    "mp4TechnicalCheck": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/mp4-technical-qc.json",
+      "fileSha256": "60802e8f42762fd640c07e3831e22a6dfc302fe4a993cdb94f880b128640465a",
+      "bytes": 3012
+    },
+    "subtitleE2eSpotCheck": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v001/subtitle-282-spot-check.json",
+      "fileSha256": "bb090a1a2c6920960a056773d0faf99e8519b6bff59cd1f2a78245cb96d36042",
+      "bytes": 2708
+    },
+    "humanReviewResult": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/phase2-completion-v001/human-review-result.json",
+      "fileSha256": "8ded3297a1170f04d52e4b26f2d9f983021efaa716edc15c5c698cde38ac5672",
+      "bytes": 3218
+    },
+    "counterfactualRemovalDecision": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/phase2-completion-v001/production-acceptance-decision.json",
+      "fileSha256": "c21b7d67ad86968982086858c6bf06ac060a8b0b36f8addda24bb667026e6b7e",
+      "bytes": 2612
+    },
+    "mainCompositeCompletion": {
+      "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/continuation-v003/main-composite-completion-v001.json",
+      "fileSha256": "eb23731782e7906abbb90b5949b395733647d2fc2cb0d579847c0a75c0b64c58",
+      "bytes": 2681
+    },
+    "rendererImplementation": {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94",
+      "bytes": 93860
+    },
+    "drawExecutor": {
+      "path": "evals/clip_composition/digest_v1_phase2_style94_continuation_v003.mts",
+      "fileSha256": "9e2c23261135019d2987dbbc9838aa15a841e6295826782cd78e7ba4e5148494",
+      "bytes": 22858
+    }
+  },
+  "exhaustiveCounterfactualQc": {
+    "status": "not-completed",
+    "productionAcceptance": "removed from production acceptance; not required",
+    "phase2CompletionBlocker": false,
+    "futureUse": "renderer regression / fixture verification"
+  },
+  "principles": [
+    "検証したい失敗モードは、それを直接確認できる最も低コストな層で検査する。",
+    "機械的リスク一覧を、そのまま人間の全件確認リストへ変換しない。",
+    "完成物の人間レビューは通常利用に近い形を基本とし、代表spot checkを必要以上に増やさない。"
+  ],
+  "artifactHandling": "既存MP4、画像、技術確認、人間レビューUI、診断資料、停止・失敗履歴を保持。動画の移動・コピー・再符号化や旧証拠の上書きなし。",
+  "evidenceReadMethod": "完成記録の束縛に必要な保存文書だけを読み取る。媒体のSHAと技術結果は保存済み記録から参照し、追加QC・再decode・再描画・再視聴は実行しない。",
+  "closure": {
+    "additionalAudit": false,
+    "additionalQc": false,
+    "additionalDrawing": false,
+    "additionalHumanViewing": false,
+    "automaticContinuation": false,
+    "nextStep": "別work-orderによる指示を待つ"
+  },
+  "commitScope": "completion records and report updates only; large MP4 and existing review UI/policy working-tree changes excluded",
+  "mainMerge": false,
+  "tagCreated": false,
+  "stablePromotion": false,
+  "releasePerformed": false
+}

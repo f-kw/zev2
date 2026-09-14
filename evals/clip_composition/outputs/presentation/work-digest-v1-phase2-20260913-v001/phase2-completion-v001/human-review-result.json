@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "digest-v1-phase2-human-review-result-v001",
+  "recordedAt": "2026-09-14T08:27:51.719712+00:00",
+  "resultSource": {
+    "speaker": "kawafmm",
+    "instructionTitle": "Digest v1 Phase 2 — 人間確認完了・Phase 2を閉じる",
+    "instructionDate": "2026-09-14",
+    "statements": [
+      "完成動画について、代表3箇所を人間確認した。",
+      "3箇所とも問題なし。",
+      "24分40秒の全編通し視聴は行っていない。",
+      "これ以上の人間確認・追加QCは要求しない。",
+      "Digest v1 Phase 2 = COMPLETED"
+    ],
+    "scope": "今回の実素材C-all経路を成立済みとして固定しPhase 2を閉じる。次工程は別work-order。"
+  },
+  "humanReview": "representative-spot-check-accepted",
+  "reviewedBy": "kawafmm",
+  "reviewedSpots": 3,
+  "issuesFound": 0,
+  "fullLengthHumanViewing": "not-performed",
+  "humanReviewResult": "accepted",
+  "phase2CompletionAccepted": true,
+  "fullLengthHumanViewingRequiredForCompletion": false,
+  "videoBinding": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+    "bytes": 616632321,
+    "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+  },
+  "reviewedSpotSnapshot": [
+    {
+      "spotId": "prospect-join",
+      "kind": "Prospect間の接続",
+      "frameZeroBased": 1789,
+      "time": "00:59.633",
+      "seconds": 59.63333333333333,
+      "reviewStartSeconds": 55.63333333333333,
+      "reviewPrompt": "場面や会話が不自然に切れていないか。",
+      "humanReviewResult": "accepted",
+      "issuesFound": 0
+    },
+    {
+      "spotId": "internal-join",
+      "kind": "Prospect内部の接続",
+      "frameZeroBased": 6121,
+      "time": "03:24.033",
+      "seconds": 204.03333333333333,
+      "reviewStartSeconds": 200.03333333333333,
+      "reviewPrompt": "発話の頭や末尾が欠けず、会話がつながっているか。",
+      "humanReviewResult": "accepted",
+      "issuesFound": 0
+    },
+    {
+      "spotId": "caption-282",
+      "kind": "字幕の表示（字幕282・確認済み）",
+      "frameZeroBased": 34841,
+      "time": "19:21.367",
+      "seconds": 1161.3666666666666,
+      "reviewStartSeconds": 1157.3666666666666,
+      "reviewPrompt": "字幕が最終動画に表示され、画面内に収まっているか。",
+      "humanReviewResult": "accepted",
+      "issuesFound": 0
+    }
+  ],
+  "reviewUiReference": {
+    "path": "evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/human-review-candidate-v002/review.html",
+    "fileSha256": "d13df1a706869dd0dfa9deb94fda21d7a4fd46b89f3a5946664eb570163d7c6a",
+    "bytes": 13014,
+    "role": "ローカルに保持する人間レビュー補助UI。完成commitの対象外。上の3件のsnapshotはこの完成記録内に固定。"
+  },
+  "scopeNote": "問題0は代表3箇所に対するkawafmmの確認結果。全編を人間が視聴したとは記録せず、全編未視聴をPhase 2未完了の理由にしない。",
+  "additionalReviewRequested": false
+}

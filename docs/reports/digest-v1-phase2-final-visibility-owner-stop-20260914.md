@@ -1,5 +1,7 @@
 # ダイジェストv1 Phase 2 — オーナー判断による全件最終可視性検査の中止
 
+2026-09-14 JST。**Phase 2 COMPLETED**。kawafmmによる代表3箇所の人間確認で問題0。全編通し視聴は未実施と正確に記録したうえで、本人の裁定により実素材C-all経路を成立済みとして閉じた。旧counterfactual検査は未完了の事実を保持し、production acceptanceから除外済みで完成阻害条件にはしない。[最終完成記録](digest-v1-phase2-completion-20260914.md)を現在地とする。追加監査・QC・再描画・再視聴は開始しない。以下は完了前の製造・確認・停止履歴として保持する。
+
 2026-09-14 JST。**必要な技術確認が合格し、Phase 2 human-review candidateとして完成動画を視聴できる状態になった。** 正式字幕325件、既存raster325/325、字幕282の完成MP4反映1/1、通常MP4検査がPASS。字幕ごとの全timeline再符号化はproduction QCとして不要と判断して設計から外した（removed from production acceptance; not required）。[視聴候補と検査結果](digest-v1-phase2-human-review-candidate-20260914.md)を現在地とし、次工程はkawafmmの実動画視聴とする。人間品質は未評価、完成承認は未申告。以下は過去の製造・停止判断の履歴として保持する。
 
 2026-09-14 JST。kawafmmの **STOP CURRENT FINAL VISIBILITY QC** に従い、325字幕を1件ずつ除外して再符号化する検査を中止した。対象processはすべて終了している。主合成済みMP4と配置・画像検査の全件合格は有効な成果として保持した。動画や画像、work、lock、過去の証拠を削除・上書きせず、自動cleanupも行っていない。
