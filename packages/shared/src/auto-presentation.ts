@@ -1,5 +1,6 @@
 /** Phase 1: finite whole-caption presentation; no text, timing, or free drawing values. */
 export interface AutoPresentationFileRef {
+  /** Provenance location; content identity uses hashes, not this location. */
   path: string;
   fileSha256: string;
 }

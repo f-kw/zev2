@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   AUTO_PRESENTATION_RULES_REF_V001,
   sha256AutoPresentationV001,
+  sha256AutoPresentationStateV001,
   fixAutoPresentationProposalV001,
   createAutoPresentationOverridesV001,
   editAutoPresentationOverrideV001,
@@ -83,6 +84,8 @@ test('content identity ignores object-key order while preserving array order and
   assert.notEqual(sha256AutoPresentationV001(['caption-1', 'caption-2']),
     sha256AutoPresentationV001(['caption-2', 'caption-1']));
   assert.notEqual(sha256AutoPresentationV001({a: 1}), sha256AutoPresentationV001({a: 2}));
+  assert.notEqual(sha256AutoPresentationV001({path: 'first/location'}),
+    sha256AutoPresentationV001({path: 'second/location'}));
 });
 
 test('the same complete target set and effects fix to one saved proposal without changing display order', () => {
@@ -206,7 +209,7 @@ test('rendering provenance identifies its input versions and human revision with
     const {resolution} = resolve(f, autoProposal, overrides);
     assert.deepEqual(resolution.context, f.context);
     assert.equal(resolution.autoProposalSha256, autoProposal.proposalSha256);
-    assert.equal(resolution.overridesSha256, sha256AutoPresentationV001(overrides));
+    assert.equal(resolution.overridesSha256, sha256AutoPresentationStateV001(overrides));
   }
   assert.notEqual(resolve(f, autoProposal, normal).resolution.overridesSha256,
     resolve(f, autoProposal, added).resolution.overridesSha256);
@@ -311,14 +314,18 @@ test('a proposal is rejected before fixing for unknown targets, unsupported draw
 test('proposal and baseline references must agree with the current immutable inputs and installed rendering rules', async t => {
   const f = fixture();
   const cases = [
-    ['baseline path', p => {p.context.baselineRef.path = 'fixtures/other-plan.json';}],
     ['baseline file bytes', p => {p.context.baselineRef.fileSha256 = byteSha('other plan bytes');}],
     ['baseline content', p => {p.context.baselineRef.canonicalSha256 = byteSha('other plan content');}],
-    ['decision path', p => {p.context.decisionInputRef.path = 'fixtures/other-input.json';}],
     ['decision version', p => {p.context.decisionInputRef.fileSha256 = byteSha('other decision');}],
     ['drawing rule version', p => {p.context.renderingRulesRef.version = 'other-rules';}],
     ['drawing rule content', p => {p.context.renderingRulesRef.contentSha256 = byteSha('other drawing rules');}],
     ['unknown context field', p => {p.context.layout = 'free';}],
+    ['missing baseline locator', p => {delete p.context.baselineRef.path;}],
+    ['invalid baseline locator', p => {p.context.baselineRef.path = 42;}],
+    ['unknown baseline reference field', p => {p.context.baselineRef.extra = 'unrecognized';}],
+    ['missing decision locator', p => {delete p.context.decisionInputRef.path;}],
+    ['empty decision locator', p => {p.context.decisionInputRef.path = '  ';}],
+    ['unknown decision reference field', p => {p.context.decisionInputRef.extra = 'unrecognized';}],
   ];
   for (const [name, mutate] of cases) await t.test(name, () => {
     const candidate = proposal(f); mutate(candidate);
@@ -330,6 +337,41 @@ test('proposal and baseline references must agree with the current immutable inp
   const changedContext = clone(f.context);
   changedContext.renderingRulesRef.contentSha256 = byteSha('unregistered rules');
   assert.throws(() => resolve({...f, context: changedContext}));
+});
+
+test('moving identical inputs preserves the fixed judgment and human edits, and Reset still restores the saved automatic result', async t => {
+  const f = fixture(), autoProposal = fixed(f, {effects: [effect('caption-1')]});
+  const overrides = edit(f, autoProposal, emptyOverrides(f, autoProposal), 'caption-1', 'Normal');
+  const saved = clone({autoProposal, overrides});
+  const automatic = resolve(f, autoProposal);
+  const human = resolve(f, autoProposal, overrides);
+  for (const referenceKeys of [['baselineRef'], ['decisionInputRef'], ['baselineRef', 'decisionInputRef']]) {
+    await t.test(referenceKeys.join(' and '), () => {
+      const movedContext = clone(f.context);
+      for (const key of referenceKeys) movedContext[key].path = `relocated/${key}.json`;
+      const moved = freeze({baselinePlan: f.baselinePlan, context: movedContext});
+      const fixedAgain = fixed(moved, {effects: [effect('caption-1')]});
+      assert.equal(fixedAgain.proposalSha256, autoProposal.proposalSha256);
+      assert.equal(sha256AutoPresentationStateV001(fixedAgain.proposal),
+        sha256AutoPresentationStateV001(autoProposal.proposal));
+      assert.notEqual(sha256AutoPresentationV001(fixedAgain.proposal),
+        sha256AutoPresentationV001(autoProposal.proposal));
+      // The current input location and the previously saved proposal location may differ.
+      const priorLocationProposal = fixAutoPresentationProposalV001({...moved, proposal: autoProposal.proposal});
+      assert.equal(priorLocationProposal.proposalSha256, autoProposal.proposalSha256);
+      const reused = resolve(moved, fixedAgain, overrides);
+      assert.deepEqual(reused.plan, human.plan);
+      assert.deepEqual(reused.resolution.context, moved.context);
+      assert.equal(reused.resolution.autoProposalSha256, autoProposal.proposalSha256);
+      assert.equal(reused.resolution.overridesSha256, human.resolution.overridesSha256);
+      const equivalentEdit = edit(moved, fixedAgain, emptyOverrides(moved, fixedAgain), 'caption-1', 'Normal');
+      assert.equal(sha256AutoPresentationStateV001(equivalentEdit), sha256AutoPresentationStateV001(overrides));
+      const reset = edit(moved, fixedAgain, overrides, 'caption-1', 'Reset');
+      assert.deepEqual(reset.entries, []);
+      assert.deepEqual(resolve(moved, fixedAgain, reset).plan, automatic.plan);
+    });
+  }
+  assert.deepEqual({autoProposal, overrides}, saved);
 });
 
 test('invalid human selections and duplicate override entries cannot reach the renderer', async t => {
@@ -348,9 +390,18 @@ test('invalid human selections and duplicate override entries cannot reach the r
   assert.throws(() => resolve(f, autoProposal, duplicated));
   const unknown = clone(added); unknown.extra = true;
   assert.throws(() => resolve(f, autoProposal, unknown));
+  for (const mutate of [
+    value => {delete value.context.baselineRef.path;},
+    value => {value.context.decisionInputRef.path = '';},
+    value => {value.context.baselineRef.extra = 'unrecognized';},
+    value => {value.context.decisionInputRef.extra = 'unrecognized';},
+  ]) {
+    const malformed = clone(added); mutate(malformed);
+    assert.throws(() => resolve(f, autoProposal, malformed));
+  }
 });
 
-test('saved human edits cannot silently migrate to another automatic proposal or changed reference', () => {
+test('saved human edits cannot silently migrate to another automatic proposal or changed input content', () => {
   const f = fixture(), originalAuto = fixed(f, {effects: [effect('caption-1')]});
   const overrides = edit(f, originalAuto, emptyOverrides(f, originalAuto), 'caption-1', 'Normal');
   const otherAuto = fixed(f, {effects: [effect('caption-2')]});

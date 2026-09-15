@@ -18,6 +18,17 @@ const freeze = value => {
 };
 export const sha256AutoPresentationV001 = value => createHash('sha256').update(canonicalJson(value)).digest('hex');
 
+// Locations remain provenance. Moving the same bytes does not create a new
+// judgment or silently rebind a human edit to different content.
+const contextIdentity = context => ({
+  baselineRef: {fileSha256: context.baselineRef.fileSha256, canonicalSha256: context.baselineRef.canonicalSha256},
+  decisionInputRef: {fileSha256: context.decisionInputRef.fileSha256},
+  renderingRulesRef: context.renderingRulesRef,
+});
+export const sha256AutoPresentationStateV001 = value => sha256AutoPresentationV001({
+  ...value, context: contextIdentity(value.context),
+});
+
 // This is only the existing trial yellow used to test plumbing. It is not an
 // approved product theme, and selectors cannot provide drawing values.
 const rules = freeze({version: 'auto-presentation-rules-v001', role: 'Focus',
@@ -61,7 +72,8 @@ function checkProposal(baselinePlan, context, proposal) {
   const captions = checkContext(baselinePlan, context);
   if (!exact(proposal, ['schemaVersion', 'context', 'targetCaptionIds', 'completion', 'effects', 'exceptions'])
     || proposal.schemaVersion !== 'auto-presentation-proposal-v001') reject('invalid proposal');
-  if (!same(proposal.context, context)) reject('proposal reference version differs');
+  checkContext(baselinePlan, proposal.context);
+  if (!same(contextIdentity(proposal.context), contextIdentity(context))) reject('proposal reference version differs');
   if (proposal.completion !== 'complete') reject('judgment is incomplete');
   const targets = proposal.targetCaptionIds;
   if (!Array.isArray(targets) || targets.length === 0 || new Set(targets).size !== targets.length
@@ -91,7 +103,7 @@ export function fixAutoPresentationProposalV001({baselinePlan, context, proposal
   const normalized = {...clone(proposal), targetCaptionIds: captions.filter(id => proposal.targetCaptionIds.includes(id)),
     effects: clone(proposal.effects).sort(order), exceptions: clone(proposal.exceptions).sort(order)};
   return freeze({schemaVersion: 'fixed-auto-presentation-v001',
-    proposalSha256: sha256AutoPresentationV001(normalized), proposal: normalized});
+    proposalSha256: sha256AutoPresentationStateV001(normalized), proposal: normalized});
 }
 
 function checkFixed(baselinePlan, context, autoProposal) {
@@ -99,7 +111,7 @@ function checkFixed(baselinePlan, context, autoProposal) {
   if (!exact(autoProposal, ['schemaVersion', 'proposalSha256', 'proposal'])
     || autoProposal.schemaVersion !== 'fixed-auto-presentation-v001' || !digest(autoProposal.proposalSha256)) reject('expected validated fixed proposal');
   checkProposal(baselinePlan, context, autoProposal.proposal);
-  if (sha256AutoPresentationV001(autoProposal.proposal) !== autoProposal.proposalSha256) reject('fixed proposal content differs');
+  if (sha256AutoPresentationStateV001(autoProposal.proposal) !== autoProposal.proposalSha256) reject('fixed proposal content differs');
 }
 
 function checkOverrides(baselinePlan, context, autoProposal, overrides) {
@@ -108,7 +120,9 @@ function checkOverrides(baselinePlan, context, autoProposal, overrides) {
   if (overrides === undefined) return captions;
   if (!exact(overrides, ['schemaVersion', 'context', 'autoProposalSha256', 'entries'])
     || overrides.schemaVersion !== 'auto-presentation-overrides-v001' || !Array.isArray(overrides.entries)) reject('invalid overrides');
-  if (!same(overrides.context, context) || overrides.autoProposalSha256 !== (autoProposal?.proposalSha256 ?? null)) reject('override reference version differs');
+  checkContext(baselinePlan, overrides.context);
+  if (!same(contextIdentity(overrides.context), contextIdentity(context))
+    || overrides.autoProposalSha256 !== (autoProposal?.proposalSha256 ?? null)) reject('override reference version differs');
   const selected = new Set();
   for (const entry of overrides.entries) {
     if (entry?.role === 'Normal') {
@@ -163,7 +177,7 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
   return {plan: changed ? {...baselinePlan, elements} : baselinePlan, resolution: {
     context: clone(context),
     autoProposalSha256: autoProposal?.proposalSha256 ?? null,
-    overridesSha256: overrides === undefined ? null : sha256AutoPresentationV001(overrides),
+    overridesSha256: overrides === undefined ? null : sha256AutoPresentationStateV001(overrides),
     automaticStatus: autoProposal === undefined ? 'not-processed'
       : processed.size !== captions.length ? 'partially-processed'
       : exceptions.size ? 'complete-with-exceptions' : 'complete',

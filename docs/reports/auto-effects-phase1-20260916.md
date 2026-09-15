@@ -70,6 +70,8 @@ stash、reset、clean、既存物の削除・移動、元treeへの実装書込�
 
 保存時・読み直し時に通常計画と判断入力の実byteから参照を作り、提案・修正の参照と照合する。保存後にファイルを編集した場合も再検証する。保存は新しい出力pathだけに行い、既存ファイルを上書きしない。不正な入力では出力ファイルを作らない。
 
+中間監査後、同じbyteの正本を別配置へ移しただけで失効する制約を修正した。pathは読込場所・来歴として保持し、版の同一性と固定案・人修正の内容hashは、実byte hash、通常計画の内容hash、描画規則の版から判定する。内容や規則が変わった場合の拒否は維持する。移設先への現在参照と、固定案が保存された時点の参照位置は混同しない。
+
 ## 5. 検査
 
 依存を新規installせず、既存のroot・runner・sharedの依存を専用worktreeの無視対象領域へローカル複製した。元treeの依存は変更しない。コピー済み実行ラッパーの元tree絶対参照を避け、既存Node `v20.19.6` から新worktree内の実体を直接実行した。
@@ -111,7 +113,7 @@ TAP全文は `/private/tmp/zev-auto-effects-phase1-puocgzuv/phase1-contract-test
 
 7件を実際の保存前検証、固定保存、読み直し、解決処理へ通した。**全文Focus 3件、例外4件、対象外318件は未処理、Normal判断0件**。処理対象が部分集合であることを結果に残した。未対応の部分範囲を直接指定した案は保存前に拒否され、出力ファイルがないことを確認した。元記録5件のhashは不変だった。
 
-詳細な成立性記録は一時証拠 `/private/tmp/zev-auto-effects-phase1-puocgzuv/early-proposal-cases.md`（SHA-256 `f4433b03d1b9198a76699e056f3911e27b1ad4b4fa18eb294bfd6df6c4c42694`）。実入口の確認記録は同directoryの `early-contract-check-v001.json`（SHA-256 `6b14d2f7c0a214bc619f7f8775ddf1c522bee8de29e99b19aaa5e57c385e71d7`）。大きな生成物・素材・既存の未追跡物はcommitへ含めない。
+詳細な成立性記録は一時証拠 `/private/tmp/zev-auto-effects-phase1-puocgzuv/early-proposal-cases.md`（SHA-256 `f4433b03d1b9198a76699e056f3911e27b1ad4b4fa18eb294bfd6df6c4c42694`）。実入口の初回確認記録は同directoryの `early-contract-check-v001.json`（SHA-256 `6b14d2f7c0a214bc619f7f8775ddf1c522bee8de29e99b19aaa5e57c385e71d7`）。中間監査後の内容identity修正を使った再実行も同じ結果で合格し、`early-contract-check-v002.json`（SHA-256 `b659d907fb3d938a495007a58858bf37bccb23f911a2790f9ecd9a7e43f5691a`）へ保存した。大きな生成物・素材・既存の未追跡物はcommitへ含めない。
 
 この確認から、全体の表現不能率、見落とし率、自然さ、可読性、演出価値は算出していない。少数確認だけで未読字幕までNormal判断したことにもしていない。
 
@@ -132,3 +134,35 @@ TAP全文は `/private/tmp/zev-auto-effects-phase1-puocgzuv/phase1-contract-test
 5. Phase 1完了条件をすべて確認してから、最終監査checkpointをcommit/pushしZEV進行管理4へ返す。
 
 Phase 2の部分範囲描画・範囲修正・最小状態表示は未着工。反復語の出現位置、原文から描画文字への対応、書記素境界、改行越し、否定・条件を保つ意図判断が次の論点として残る。今回の一件の非連続範囲案を理由に、複数範囲へ製品範囲を広げていない。
+
+## 8. ZEV進行管理4の中間監査
+
+2026-09-16 08:18頃JST、Microsoft Edge上の指定会話へ監査checkpoint `c3191005d366ad60496a702c480d9dd32439b87e` とbaseとの差分・報告URLを送信した。GitHubからの報告読戻しblob `3271263118f961b2b6a3315b88f96e790efdafea` はlocalと一致。branch先頭も同commitで、push後の専用worktreeはclean・ahead/behind 0だった。
+
+`chatgpt-workflow`を用いた中間監査であり、新しい指示書の依頼ではない。モデルの固定指定はなく、現在の選択と「極高」を維持した。送信後に日本語本文の表示、生成終了、応答アクションの表示を確認した。送信は一回、再送・再生成なし。状態は「レスポンス確認済み」。
+
+相談役はコード・テスト・base差分を確認し、「基盤実装成立、production接続待ち」でありPhase 1完成扱いは不可と回答した。保存前・再読込時の検証、固定通常計画起点の解決、Normal/Reset分離、未処理を全Normalへ混ぜない構造を、v002/work-orderの意図と整合すると評価した。
+
+監査からの限定修正・接続条件は次の3点。
+
+1. 絶対pathを内容identityにしない。位置の来歴は保持し、同じbyte・同じ版なら移設だけで自動案・人修正を失効させない。
+2. 通常製造結果の共通計画は固定通常計画のまま保持し、実効描画計画は派生物として別に返す。
+3. 新しい自動演出と旧演出試作の二重適用を拒否する。
+
+1は拒否されていない独立coreの限定修正として進めた。保存前検証の配列欠陥に続く実装の限定修正2回目。移設検査では現在参照位置も元と同じであることを求めた検査側の期待を修正した（検査設営修正1回）。2・3は未適用の接続案に反映すべき条件である。
+
+限定修正後の最終検査は固定Node `v20.19.6` で **85/85合格、失敗0、skip 0**。共有型検査も再度成功した。TAP全文は `/private/tmp/zev-auto-effects-phase1-puocgzuv/phase1-contract-tests-attempt-0003.tap`、SHA-256は `cf8707e4938eb7a57d45bca7c06d09b717c08b706e1dc52369bf45a780caa5ca`。移設前後で描画計画・判断状態・固定案および人修正の内容hashは同一となり、移設先の内容変更は拒否された。早期7ケースも修正後の処理で再実行済み。
+
+相談役は対象2ファイルを明示した再開指示文も提示した。ただし、環境側の承認拒否を相談役の応答だけで迂回せず、Codex側で依頼したユーザーの明示承認待ちを維持している。最新着工指示の実装権限を取り消したという意味ではなく、拒否された操作を再実行するための環境上の確認である。
+
+## 9. このcheckpointまでの変更ファイル
+
+| ファイル | 作業内容 |
+| --- | --- |
+| `packages/shared/src/auto-presentation.ts` | 固定参照、有限提案、一件修正、解決来歴の最小型 |
+| `packages/shared/src/index.ts` | 共有型の公開 |
+| `evals/clip_composition/presentation_auto_effects_v001.mjs` | 保存前検証、固定化、一件修正、通常計画からの解決 |
+| `evals/clip_composition/presentation_auto_effects_io_v001.mjs` | 実byte参照の読取、検証後保存、再読込時の再検証 |
+| `evals/clip_composition/presentation_auto_effects_v001.test.mjs` | 局所性・冪等性・順序独立・復元・版束縛・不正案拒否 |
+| `evals/clip_composition/presentation_auto_effects_io_v001.test.mjs` | 保存・再読込・改変検知・移設・既存ファイル保全 |
+| `docs/reports/auto-effects-phase1-20260916.md` | 着工根拠、既存tree保全、検査、早期ケース、中間監査、停止境界 |

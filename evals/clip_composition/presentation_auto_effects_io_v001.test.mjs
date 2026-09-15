@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {mkdtemp, readFile, rm, writeFile} from 'node:fs/promises';
+import {copyFile, mkdtemp, readFile, rm, writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import test from 'node:test';
@@ -149,6 +149,66 @@ test('source byte changes invalidate saved judgment even when parsed JSON is unc
     assert.deepEqual(await readJson(f[property]), JSON.parse(original));
     await assert.rejects(readAuto(f, true), /proposal reference version differs/);
   });
+});
+
+test('identical files may relocate while saved proposal and override paths remain provenance', async t => {
+  const f = await fixture(t);
+  const fixed = await saveAuto(f);
+  let overrides = editOverride(f, fixed, newOverrides(f, fixed), 'caption-a', 'Normal');
+  overrides = editOverride(f, fixed, overrides, 'caption-b', focus());
+  await saveOverrides(f, overrides);
+  const originalResult = resolved(await readAuto(f, true));
+
+  const directory = await mkdtemp(join(tmpdir(), 'zev-auto-presentation-relocated-'));
+  t.after(() => rm(directory, {recursive: true, force: true}));
+  const relocated = {
+    baselinePath: join(directory, 'normal-plan.json'),
+    decisionInputPath: join(directory, 'confirmed-input.json'),
+    autoProposalPath: join(directory, 'fixed-auto.json'),
+    overridesPath: join(directory, 'human-overrides.json'),
+  };
+  const originalBytes = {};
+  for (const property of Object.keys(relocated)) {
+    originalBytes[property] = await readFile(f[property]);
+    await copyFile(f[property], relocated[property]);
+    assert.notEqual(relocated[property], f[property]);
+    assert.deepEqual(await readFile(relocated[property]), originalBytes[property]);
+  }
+
+  const loaded = await loadAutoPresentationV001(relocated);
+  assert.equal(loaded.autoPresentation.context.baselineRef.path, relocated.baselinePath);
+  assert.equal(loaded.autoPresentation.context.decisionInputRef.path, relocated.decisionInputPath);
+  assert.equal(loaded.autoPresentation.context.baselineRef.fileSha256, byteHash(originalBytes.baselinePath));
+  assert.equal(loaded.autoPresentation.context.decisionInputRef.fileSha256, byteHash(originalBytes.decisionInputPath));
+  assert.deepEqual(loaded.autoPresentation.autoProposal, fixed);
+  assert.deepEqual(loaded.autoPresentation.overrides, overrides);
+  for (const storedContext of [
+    loaded.autoPresentation.autoProposal.proposal.context,
+    loaded.autoPresentation.overrides.context,
+  ]) {
+    assert.equal(storedContext.baselineRef.path, f.baselinePath);
+    assert.equal(storedContext.decisionInputRef.path, f.decisionInputPath);
+  }
+  const expectedRelocatedResult = {
+    ...originalResult,
+    resolution: {...originalResult.resolution, context: loaded.autoPresentation.context},
+  };
+  assert.deepEqual(resolved(loaded), expectedRelocatedResult);
+
+  // The original files remain valid. Changing only the relocated bytes must
+  // still fail, proving that current input paths are read rather than old ones.
+  for (const property of ['baselinePath', 'decisionInputPath']) {
+    await writeFile(relocated[property], Buffer.concat([originalBytes[property], Buffer.from('\n')]));
+    assert.deepEqual(await readJson(relocated[property]), JSON.parse(originalBytes[property].toString('utf8')));
+    await assert.rejects(loadAutoPresentationV001(relocated), /proposal reference version differs/, property);
+    assert.deepEqual(resolved(await readAuto(f, true)), originalResult);
+    await writeFile(relocated[property], originalBytes[property]);
+  }
+  assert.deepEqual(resolved(await loadAutoPresentationV001(relocated)), expectedRelocatedResult);
+  for (const property of Object.keys(relocated)) {
+    assert.deepEqual(await readFile(f[property]), originalBytes[property]);
+    assert.deepEqual(await readFile(relocated[property]), originalBytes[property]);
+  }
 });
 
 test('malformed JSON in either saved file is rejected during reload', async t => {
