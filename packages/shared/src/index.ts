@@ -693,3 +693,6 @@ export function createAgentRequestsFromDraft(
   });
 }
 export type {PresentationEffects} from './presentation-effects.js';
+export type {AutoPresentationFileRef, AutoPresentationContext, AutoPresentationFocus,
+  AutoPresentationException, AutoPresentationProposal, FixedAutoPresentation,
+  AutoPresentationOverrides, AutoPresentationInput, AutoPresentationResolution} from './auto-presentation.js';
