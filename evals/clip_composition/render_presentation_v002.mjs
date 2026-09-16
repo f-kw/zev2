@@ -754,6 +754,9 @@ const overlayPropsFor = (element, plan, presetRegistry) => {
     instructionId: element.instructionId,
     text: element.text,
     indexedLines: structuredClone(element.indexedLines),
+    ...(element.presentationColorRange === undefined ? {} : {
+      presentationColorRange: structuredClone(element.presentationColorRange),
+    }),
     visualState: structuredClone(element.visualState),
     layoutRules: structuredClone(plan.layoutRules),
     fontFamilyName: `zev-renderer-${font.fontAssetId}`,
@@ -1596,7 +1599,9 @@ export async function executeValidatedPresentationDrawAndQcV001({
   if (validatedLayoutInspection !== null && resolved.plan.elements.some((element, index) =>
     autoPresentation === undefined
       ? element.visualState !== plan.elements[index].visualState
-      : canonicalJson(element.visualState) !== canonicalJson(plan.elements[index].visualState))) {
+      : canonicalJson({visualState: element.visualState, presentationColorRange: element.presentationColorRange ?? null})
+        !== canonicalJson({visualState: plan.elements[index].visualState,
+          presentationColorRange: plan.elements[index].presentationColorRange ?? null}))) {
     throw new TypeError('effect selections require layout inspection of the resolved plan');
   }
   plan = resolved.plan;

@@ -143,7 +143,9 @@ export const TelopText: React.FC<TelopTextProps> = (props) => {
                 fill={model.fontColor}
                 dominantBaseline="text-before-edge"
               >
-                {line.text}
+                {line.colorRuns.map((run, runIndex) => (
+                  <tspan key={runIndex} fill={run.fontColor}>{run.text}</tspan>
+                ))}
               </text>
             </g>
           );

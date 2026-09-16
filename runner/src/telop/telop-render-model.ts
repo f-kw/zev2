@@ -25,6 +25,7 @@ export type TelopLayoutPosition = {
 
 export type TelopSvgLine = {
   text: string;
+  colorRuns: {text: string; fontColor: string}[];
   x: number;
   y: number;
   width: number;
@@ -195,6 +196,7 @@ export const buildTelopTextRenderModel = ({
         : 0;
     return {
       text: line,
+      colorRuns: [{text: line, fontColor}],
       x: textStartX + alignOffset,
       y: safePadding + margin + index * lineHeight,
       width: lineWidth

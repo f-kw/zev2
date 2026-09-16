@@ -31,10 +31,14 @@ export const sha256AutoPresentationStateV001 = value => sha256AutoPresentationV0
 
 // This is only the existing trial yellow used to test plumbing. It is not an
 // approved product theme, and selectors cannot provide drawing values.
-const rules = freeze({version: 'auto-presentation-rules-v001', role: 'Focus',
-  presentation: 'provisional-focus', scope: 'whole-caption', textStyle: {fontColor: '#FFD65A'}});
-export const AUTO_PRESENTATION_RULES_REF_V001 = freeze({version: rules.version,
+const rules = freeze({version: 'auto-presentation-rules-v002', role: 'Focus',
+  presentation: 'provisional-focus', scopes: ['whole-caption', 'partial-caption'],
+  targetMatching: 'exact-text-overlapping-occurrences-one-based',
+  targetBoundary: 'unicode-grapheme-cluster',
+  canonicalRange: 'unicode-code-point-half-open', textStyle: {fontColor: '#FFD65A'}});
+export const AUTO_PRESENTATION_RULES_REF_V002 = freeze({version: rules.version,
   contentSha256: sha256AutoPresentationV001(rules)});
+const graphemeSegmenter = new Intl.Segmenter('ja', {granularity: 'grapheme'});
 
 function checkContext(baselinePlan, context) {
   if (!exact(context, ['baselineRef', 'decisionInputRef', 'renderingRulesRef'])) reject('invalid context');
@@ -44,7 +48,7 @@ function checkContext(baselinePlan, context) {
     || !digest(base.fileSha256) || !digest(base.canonicalSha256)) reject('invalid baseline reference');
   if (!exact(decision, ['path', 'fileSha256']) || !nonempty(decision.path)
     || !digest(decision.fileSha256)) reject('invalid decision input reference');
-  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V001)) reject('rendering rules version differs');
+  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V002)) reject('rendering rules version differs');
   if (!object(baselinePlan) || baselinePlan.schemaVersion !== 'presentation-output-common-core-plan-v001'
     || !Array.isArray(baselinePlan.elements)) reject('invalid baseline plan');
   if (sha256AutoPresentationV001(baselinePlan) !== base.canonicalSha256) reject('baseline content differs');
@@ -64,8 +68,48 @@ function checkContext(baselinePlan, context) {
 function checkFocus(entry, withId = true) {
   const keys = ['role', 'presentation', 'scope'];
   if (withId) keys.push('captionId');
+  if (entry?.scope === 'partial-caption') {
+    keys.push('targetText');
+    if (Object.hasOwn(entry, 'occurrence')) keys.push('occurrence');
+  }
   if (!exact(entry, keys) || entry.role !== rules.role || entry.presentation !== rules.presentation
-    || entry.scope !== rules.scope) reject('unknown role, presentation, scope, or drawing field');
+    || !rules.scopes.includes(entry.scope)) reject('unknown role, presentation, scope, or drawing field');
+  if (entry.scope === 'partial-caption') {
+    if (typeof entry.targetText !== 'string' || entry.targetText.length === 0) reject('partial target text is empty or invalid');
+    // Source line breaks have no drawable foreground. Match the renderer's
+    // existing character roles without treating ordinary spaces as invisible.
+    if (!/[^\r\n]/u.test(entry.targetText)) reject('partial target contains no visible characters');
+    if (Object.hasOwn(entry, 'occurrence')
+      && (!Number.isSafeInteger(entry.occurrence) || entry.occurrence < 1)) reject('partial occurrence must be a positive integer');
+  }
+}
+
+function focusRange(element, selection) {
+  const text = element.text;
+  if (typeof text !== 'string') reject('Focus requires the fixed caption text');
+  if (selection.scope === 'whole-caption') {
+    return {startCodePoint: 0, endCodePointExclusive: Array.from(text).length};
+  }
+  const matches = [];
+  // Count every literal occurrence, including overlaps. Do not normalize text,
+  // skip an invalid first occurrence, or silently choose another grapheme.
+  for (let from = 0; from <= text.length;) {
+    const found = text.indexOf(selection.targetText, from);
+    if (found < 0) break;
+    matches.push(found);
+    from = found + 1;
+  }
+  if (matches.length === 0) reject('partial target text was not found');
+  if (selection.occurrence === undefined && matches.length !== 1) reject('partial target text is ambiguous without occurrence');
+  const occurrence = selection.occurrence ?? 1;
+  if (occurrence > matches.length) reject('partial occurrence was not found');
+  const start = matches[occurrence - 1];
+  const end = start + selection.targetText.length;
+  const boundaries = new Set([text.length]);
+  for (const segment of graphemeSegmenter.segment(text)) boundaries.add(segment.index);
+  if (!boundaries.has(start) || !boundaries.has(end)) reject('partial target cuts a grapheme cluster');
+  return {startCodePoint: Array.from(text.slice(0, start)).length,
+    endCodePointExclusive: Array.from(text.slice(0, end)).length};
 }
 
 function checkProposal(baselinePlan, context, proposal) {
@@ -84,6 +128,7 @@ function checkProposal(baselinePlan, context, proposal) {
     checkFocus(effect);
     if (!targets.includes(effect.captionId)) reject('caption ID is outside the judgment target set');
     if (selected.has(effect.captionId)) reject('duplicate or conflicting judgment');
+    focusRange(baselinePlan.elements.find(element => element.instructionId === effect.captionId), effect);
     selected.add(effect.captionId);
   }
   for (const exception of proposal.exceptions) {
@@ -130,6 +175,9 @@ function checkOverrides(baselinePlan, context, autoProposal, overrides) {
     } else checkFocus(entry);
     if (!captions.includes(entry.captionId)) reject('unknown override caption ID');
     if (selected.has(entry.captionId)) reject('duplicate override');
+    if (entry.role === 'Focus') {
+      focusRange(baselinePlan.elements.find(element => element.instructionId === entry.captionId), entry);
+    }
     selected.add(entry.captionId);
   }
   return captions;
@@ -150,6 +198,7 @@ export function editAutoPresentationOverrideV001({baselinePlan, context, autoPro
   if (selection === 'Normal') entries.push({captionId, role: 'Normal'});
   else if (selection !== 'Reset') {
     checkFocus(selection, false);
+    focusRange(baselinePlan.elements.find(element => element.instructionId === captionId), selection);
     entries.push({captionId, ...clone(selection)});
   }
   entries.sort((left, right) => captions.indexOf(left.captionId) - captions.indexOf(right.captionId));
@@ -168,12 +217,24 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
   const exceptions = new Map((autoProposal?.proposal.exceptions ?? []).map(entry => [entry.captionId, entry]));
   const human = new Map((overrides?.entries ?? []).map(entry => [entry.captionId, entry]));
   const effective = new Map(captions.map(id => [id, human.get(id) ?? automatic.get(id)]));
+  const ranges = new Map();
   const elements = baselinePlan.elements.map(element => {
-    if (effective.get(element.instructionId)?.role !== 'Focus') return element;
+    const selection = effective.get(element.instructionId);
+    if (selection?.role !== 'Focus') return element;
+    const range = focusRange(element, selection);
+    ranges.set(element.instructionId, range);
+    if (selection.scope === 'partial-caption') {
+      return {...element, presentationColorRange: {...range, fontColor: rules.textStyle.fontColor}};
+    }
     return {...element, visualState: {...element.visualState,
       textStyle: {...element.visualState.textStyle, ...rules.textStyle}}};
   });
   const changed = elements.some((element, index) => element !== baselinePlan.elements[index]);
+  const selection = entry => {
+    if (entry === undefined) return {role: 'Normal'};
+    const {captionId, ...value} = entry;
+    return clone(value);
+  };
   return {plan: changed ? {...baselinePlan, elements} : baselinePlan, resolution: {
     context: clone(context),
     autoProposalSha256: autoProposal?.proposalSha256 ?? null,
@@ -187,6 +248,11 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
       role: effective.get(captionId)?.role ?? 'Normal',
       automaticStatus: !processed.has(captionId) ? 'not-processed' : exceptions.get(captionId)?.status
         ?? (automatic.has(captionId) ? 'selected' : 'normal'),
+      automaticSelection: processed.has(captionId) && !exceptions.has(captionId)
+        ? selection(automatic.get(captionId)) : null,
+      effectiveSelection: selection(effective.get(captionId)),
+      hasOverride: human.has(captionId),
+      canonicalRange: clone(ranges.get(captionId) ?? null),
     })),
   }};
 }

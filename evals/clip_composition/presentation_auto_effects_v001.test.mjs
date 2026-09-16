@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V001,
+  AUTO_PRESENTATION_RULES_REF_V002,
   sha256AutoPresentationV001,
   sha256AutoPresentationStateV001,
   fixAutoPresentationProposalV001,
@@ -59,7 +59,7 @@ function fixture() {
     baselineRef: {path: 'fixtures/normal-plan.json', fileSha256: byteSha(`${JSON.stringify(baselinePlan, null, 2)}\n`),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: 'fixtures/confirmed-caption-input.json', fileSha256: byteSha('saved caption decision input')},
-    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V001),
+    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V002),
   };
   return freeze({baselinePlan, context});
 }

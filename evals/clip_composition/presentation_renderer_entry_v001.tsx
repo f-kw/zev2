@@ -13,7 +13,7 @@ import {
 import {TelopText} from '../../runner/src/remotion/components/TelopText';
 import {measureTextLine} from '../../runner/src/telop/text-metrics';
 import type {TelopTextRenderModel} from '../../runner/src/telop/telop-render-model';
-import {resolveVisibleCenterOffsetsV001} from './presentation_renderer_text_layout_v001.mjs';
+import {buildPresentationColorRunsV001, resolveVisibleCenterOffsetsV001} from './presentation_renderer_text_layout_v001.mjs';
 
 export const PRESENTATION_RENDERER_OVERLAY_PROPS_SCHEMA_VERSION =
   'presentation-renderer-overlay-props-v001';
@@ -95,6 +95,7 @@ export type PresentationRendererOverlayPropsV001 = {
   instructionId: string;
   text: string;
   indexedLines: IndexedLine[];
+  presentationColorRange?: {startCodePoint: number; endCodePointExclusive: number; fontColor: string};
   visualState: VisualState;
   layoutRules: TrustedLayoutRules;
   fontFamilyName: string;
@@ -263,6 +264,12 @@ export const buildExactTextModel = (
   const measured = props.indexedLines.map((line) =>
     measureTextLine(line.renderedText, fontSize, props.fontFamilyName, layoutRules.fontWeight),
   );
+  const colorRuns = buildPresentationColorRunsV001({
+    text: props.text,
+    indexedLines: props.indexedLines,
+    fontColor: style.fontColor,
+    presentationColorRange: props.presentationColorRange,
+  });
   const maxLineWidth = measured.reduce((maximum, item) => Math.max(maximum, item.width), 0);
   const maxLineHeight = measured.reduce((maximum, item) => Math.max(maximum, item.height), fontSize);
   const textBlockHeight = maxLineHeight + (props.indexedLines.length - 1) * lineHeight;
@@ -278,6 +285,7 @@ export const buildExactTextModel = (
         : 0;
     return {
       text: line.renderedText,
+      colorRuns: colorRuns[index],
       x: textStartX + alignmentOffset,
       y: safePadding + margin + index * lineHeight,
       width: lineWidth,
