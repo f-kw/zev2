@@ -4,6 +4,8 @@ import {readFile} from 'node:fs/promises';
 import {PRESENTATION_PULSE_PRESET_V001, getPresentationPulseProgramV001,
   buildPresentationPulseStateElementsV001, assertPresentationPulseAnchorsV001,
 } from './presentation_pulse_v001.mjs';
+import {validatePresentationNativeFrameQcEvidenceV001}
+  from './presentation_native_frame_qc_v001.mjs';
 
 export const PRESENTATION_RENDERER_QC_SCHEMA_VERSION = 'presentation-render-qc-v002';
 export const PRESENTATION_REVIEW_RENDERER_QC_SCHEMA_VERSION_V003 =
@@ -27,6 +29,7 @@ export const PRESENTATION_RENDERER_QC_VIOLATION_CODES = Object.freeze([
   'OUTPUT_AUDIO_PACKET_HASH_MISMATCH',
   'OUTPUT_FORMAT_MISMATCH',
   'OUTPUT_ELEMENT_NOT_VISIBLE',
+  'NATIVE_FRAME_QC_INVALID',
   'PULSE_NATIVE_STATE_MISMATCH',
   'PULSE_FRAME_STATE_MISMATCH',
 ]);
@@ -248,7 +251,8 @@ function evaluatePresentationRendererQc({
             throw new TypeError('the three native states do not grow in both dimensions');
           }
         }
-        if (requireFinalVisibility) {
+        if (requireFinalVisibility
+          && inspection.visibilityComparisonBasis !== 'native-reference-state-identification-v001') {
           const frames = native.completedFrames;
           const expectedFrames = [
             {frame: program.normalBeforeFrame, state: 'normal'},
@@ -422,7 +426,14 @@ function evaluatePresentationRendererQc({
         }
       }
     }
-    if (
+    if (requireFinalVisibility
+      && inspection.visibilityComparisonBasis === 'native-reference-state-identification-v001') {
+      const nativeQc = validatePresentationNativeFrameQcEvidenceV001({plan, inspection});
+      if (nativeQc.status !== 'passed') {
+        violations.push(makeViolation('NATIVE_FRAME_QC_INVALID', [element.instructionId],
+          {reasons: nativeQc.violations}));
+      }
+    } else if (
       requireFinalVisibility
       && (
       inspection.visibilityComparisonBasis !== 'same-composite-with-instruction-omitted'
@@ -543,6 +554,7 @@ function evaluatePresentationRendererQc({
       applicationOverlaySha256: application?.overlaySha256 ?? null,
       overlaySha256: inspection?.overlaySha256 ?? null,
       ...(inspection?.pulse === undefined ? {} : {pulse: structuredClone(inspection.pulse)}),
+      ...(inspection?.nativeFrameQc === undefined ? {} : {nativeFrameQc: structuredClone(inspection.nativeFrameQc)}),
     };
   });
   return {

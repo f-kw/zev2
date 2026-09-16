@@ -1756,6 +1756,10 @@ test('17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成
   const invisible = clone(baseQc);
   invisible.overlayInspections[0].changedPixelsAgainstInstructionOmittedFrame = 0;
   assertHasCode(evaluatePresentationRendererQcV002(invisible), 'OUTPUT_ELEMENT_NOT_VISIBLE');
+  const forgedNative = clone(baseQc);
+  forgedNative.overlayInspections[0].visibilityComparisonBasis = 'native-reference-state-identification-v001';
+  forgedNative.overlayInspections[0].nativeFrameQc = {status: 'passed', visible: true};
+  assertHasCode(evaluatePresentationRendererQcV002(forgedNative), 'NATIVE_FRAME_QC_INVALID');
 
   const failureDirectory = path.join(rendered.fixture.directory, 'failure-output');
   await mkdir(failureDirectory);

@@ -154,6 +154,18 @@ test('caption visibility alone cannot pass Pulse frame identification, including
   assert.throws(() => absolutePresentationPulseRgbDifferenceV001(Buffer.from([0]), Buffer.from([])));
 });
 
+test('changing the QC basis cannot reuse cached Pulse success without native evidence', () => {
+  for (const forged of [undefined, {status: 'passed', visible: true, frames: []}]) {
+    const input = qcInput();
+    const inspection = input.overlayInspections[0];
+    inspection.visibilityComparisonBasis = 'native-reference-state-identification-v001';
+    if (forged !== undefined) inspection.nativeFrameQc = forged;
+    const result = evaluatePresentationRendererQcV002(input);
+    assert.equal(result.status, 'failed');
+    assert(result.violations.some(violation => violation.code === 'NATIVE_FRAME_QC_INVALID'));
+  }
+});
+
 test('Pulse refuses a normal precomputed layout and sends all native states to the real layout boundary', async t => {
   const source = element(), plan = {canvas, elements: [source]};
   await assert.rejects(executeValidatedPresentationDrawAndQcV001({plan, expectedFrameCount: 30,

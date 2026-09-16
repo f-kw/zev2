@@ -2,13 +2,16 @@
 
 import {createHash, randomUUID} from 'node:crypto';
 import {spawn} from 'node:child_process';
-import {lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, writeFile} from 'node:fs/promises';
+import {access, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, writeFile} from 'node:fs/promises';
+import {constants as fsConstants} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {resolvePresentationEffectsV001, buildPresentationTimelineFiltersV001} from './presentation_effects_v001.mjs';
 import {resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
+import {preparePresentationNativeFrameQcV001} from './presentation_native_frame_qc_preparation_v001.mjs';
+import {inspectPresentationNativeFrameQcV001} from './presentation_native_frame_qc_v001.mjs';
 import {PRESENTATION_PULSE_PRESET_V001, getPresentationPulseProgramV001,
   buildPresentationPulseStateElementsV001, assertPresentationPulseAnchorsV001,
 } from './presentation_pulse_v001.mjs';
@@ -813,6 +816,7 @@ export function buildPresentationRendererOverlayAdapterV001({
     throw new TypeError('renderer overlay process observer is required');
   }
   return Object.freeze({
+    nativeQcRuntimePaths: Object.freeze({remotionPath, chromiumPath, nodePath: process.execPath}),
     buildProps: overlayPropsFor,
     renderStill: (props, outputPath) => renderOverlayStillWithRuntimeV001({
       props,
@@ -1102,6 +1106,8 @@ export const renderPresentationCounterfactualEncodedFrameV001 = async (input) =>
 };
 
 const DEFAULT_PRESENTATION_OVERLAY_ADAPTER_V001 = Object.freeze({
+  nativeQcRuntimePaths: Object.freeze({remotionPath: REMOTION_BIN, chromiumPath: CHROME_BIN,
+    nodePath: process.execPath}),
   buildProps: overlayPropsFor,
   renderStill: renderOverlayStill,
   renderLineMask: (props, lineIndex, outputPath) => renderOverlayStill(
@@ -1613,6 +1619,203 @@ const processFailure = (stage, error, cleanupWarnings = []) => {
   return result;
 };
 
+/** Inspect existing completed media without composing or replacing it. The encoded
+ * method remains the explicit diagnostic oracle; native references are QC-only. */
+async function nativeQcExecutable(file) {
+  if (!isNonEmptyString(file)) throw new TypeError('native QC executable is missing');
+  const candidates = path.isAbsolute(file) || file.includes(path.sep)
+    ? [path.resolve(WORKSPACE_ROOT, file)]
+    : (process.env.PATH ?? '').split(path.delimiter).map(directory => path.resolve(directory || WORKSPACE_ROOT, file));
+  for (const candidate of candidates) {
+    try { await access(candidate, fsConstants.X_OK); return await realpath(candidate); } catch {}
+  }
+  throw new TypeError('native QC executable cannot be resolved');
+}
+
+async function nativeQcDrawingSourceRefs({plan, presetRegistry, overlayAdapter}) {
+  const runtime = overlayAdapter.nativeQcRuntimePaths;
+  if (!runtime || ['remotionPath', 'chromiumPath', 'nodePath'].some(key =>
+    typeof runtime[key] !== 'string' || !path.isAbsolute(runtime[key]))) {
+    throw new TypeError('native frame QC requires the actual native drawing runtime paths');
+  }
+  const cliMain = path.join(RENDER_NODE_MODULES, '@remotion/cli/remotion-cli.js');
+  const launcher = await realpath(runtime.remotionPath);
+  const isShim = launcher === await realpath(REMOTION_BIN);
+  if (!isShim && launcher !== await realpath(cliMain)) {
+    throw new TypeError('native QC requires the existing Remotion launcher');
+  }
+  // Both existing launch forms resolve Node via PATH, except the pnpm shim's
+  // documented adjacent-node branch. Bind what that child will actually use.
+  const candidates = [
+    ...(isShim ? [path.join(path.dirname(runtime.remotionPath), 'node')] : []),
+    ...(process.env.PATH ?? '').split(path.delimiter).map(directory => path.resolve(directory || '.', 'node')),
+  ];
+  let launchedNode;
+  for (const candidate of candidates) {
+    try { await access(candidate, fsConstants.X_OK); launchedNode = await realpath(candidate); break; } catch {}
+  }
+  if (launchedNode !== await realpath(runtime.nodePath)) {
+    throw new TypeError('native child Node differs from the bound runtime');
+  }
+  const files = [
+    [REMOTION_ENTRY, 'native-entry'],
+    [cliMain, 'native-cli-main'],
+    ...[
+      'runner/src/remotion/components/TelopText.tsx', 'runner/src/remotion/utils/telop-font.ts',
+      'runner/src/telop/telop-render-model.ts', 'runner/src/telop/telop-line-break.ts',
+      'runner/src/telop/text-metrics.ts', 'runner/src/shared/telop-glow.ts',
+      'evals/clip_composition/presentation_renderer_text_layout_v001.mjs',
+      'pnpm-lock.yaml', 'runner/node_modules/@remotion/cli/package.json',
+      'runner/node_modules/remotion/package.json', 'runner/node_modules/react/package.json',
+      'runner/node_modules/react-dom/package.json',
+    ].map(file => [path.join(WORKSPACE_ROOT, file), `native-source:${file}`]),
+    ...Object.entries(runtime).map(([role, file]) => [file, `native-runtime:${role}`]),
+  ];
+  const refs = [];
+  for (const [file, role] of files) {
+    const absolute = await realpath(file);
+    refs.push({role, path: absolute, fileSha256: await fileSha256V002(absolute)});
+  }
+  for (const fontId of new Set(plan.elements.map(element => element.visualState.textStyle.fontAssetId))) {
+    const font = presetRegistry.fontAssets.find(entry => entry.fontAssetId === fontId);
+    if (!font || path.basename(font.fileName) !== font.fileName) throw new TypeError('native font binding missing');
+    const fontPath = await realpath(path.join(REMOTION_PUBLIC, 'font', font.fileName));
+    const actual = await fileSha256V002(fontPath);
+    if (actual !== font.sha256 || fontPath !== await realpath(path.resolve(WORKSPACE_ROOT, font.path))) {
+      throw new TypeError('native font bytes differ from the fixed preset registry');
+    }
+    refs.push({role: `native-font:${fontId}`, path: fontPath, fileSha256: actual});
+  }
+  return refs;
+}
+
+export async function inspectPresentationCompletedFrameQcV001({
+  plan, records, baseMediaPath, completedMediaPath, expectedFrameCount,
+  scratchDirectory, presetRegistry, autoPresentation,
+  overlayAdapter = DEFAULT_PRESENTATION_OVERLAY_ADAPTER_V001,
+  toolPaths = DEFAULT_PRESENTATION_DRAW_TOOL_PATHS_V001,
+  processObserver = null, serializePngAndFilters = false,
+  presentationTimeline = null, timelineAudio = null,
+  counterfactualQcMethod = 'encoded',
+}) {
+  if (!['encoded', 'native'].includes(counterfactualQcMethod)) {
+    throw new TypeError('completed frame QC method must be encoded or native');
+  }
+  // QC adds evidence to a copy. The renderer's bound physical records remain
+  // suitable for either oracle, including an independent comparison run.
+  const overlayRecords = structuredClone(records);
+  const workVideo = completedMediaPath;
+  if (counterfactualQcMethod === 'native') {
+    const ffmpegPath = await nativeQcExecutable(toolPaths.ffmpegPath);
+    const imageMagickPath = await nativeQcExecutable(toolPaths.imageMagickPath);
+    const prepared = await preparePresentationNativeFrameQcV001({
+      plan, records: overlayRecords, autoPresentation, presentationTimeline, presetRegistry,
+      overlayAdapter,
+      sourceRefs: await nativeQcDrawingSourceRefs({plan, presetRegistry, overlayAdapter}),
+      inspectPng: input => inspectOverlayPngWithToolV001({...input,
+        imageMagickPath, processObserver,
+        observationLabelPrefix: 'native-qc-diagnostic-overlay-inspection'}),
+      scratchDirectory: path.join(scratchDirectory, 'native-qc-preparation'),
+    });
+    const native = await inspectPresentationNativeFrameQcV001({
+      plan, records: prepared.records, provenance: prepared.provenance,
+      media: {
+        base: {path: baseMediaPath, fileSha256: await fileSha256V002(baseMediaPath)},
+        completed: {path: workVideo, fileSha256: await fileSha256V002(workVideo)},
+      },
+      tools: {
+        ffmpeg: {path: ffmpegPath, fileSha256: await fileSha256V002(ffmpegPath)},
+        imageMagick: {path: imageMagickPath, fileSha256: await fileSha256V002(imageMagickPath)},
+      },
+      scratchDirectory: path.join(scratchDirectory, 'native-frame-qc'), processObserver,
+    });
+    if (!Array.isArray(native.inspections) || native.inspections.length !== records.length
+      || native.inspections.some((inspection, index) => inspection.instructionId !== records[index].element.instructionId)) {
+      throw new TypeError('native QC must return every caption exactly once in plan order');
+    }
+    return {method: 'native', inspections: native.inspections,
+      preparation: prepared.evidence, evidence: native.evidence,
+      performance: native.performance, status: native.status, violations: native.violations};
+  }
+  const transparentOverlayPath = path.join(scratchDirectory, 'frames', 'transparent-overlay.png');
+  await runPresentationRendererChildProcessV001(toolPaths.imageMagickPath, [
+    '-size', `${plan.canvas.width}x${plan.canvas.height}`,
+    'xc:none',
+    transparentOverlayPath,
+  ], {
+    fatalInnerStage: 'post-render-qc',
+    processObserver,
+    observationLabel: 'transparent-overlay-create',
+  });
+  for (const record of overlayRecords) {
+    const representativeFrame = record.pulseStates
+      ? getPresentationPulseProgramV001({element: record.element, canvas: plan.canvas}).maximumFrame
+      : record.element.startFrame + Math.floor(record.element.displayFrameCount / 2);
+    const outputFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-output.png`);
+    const omittedFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-omitted.png`);
+    const counterfactualRecords = overlayRecords.map((entry) => (
+      entry === record ? {...entry, pngPath: transparentOverlayPath,
+        ...(entry.pulseStates === undefined ? {} : {pulseStates: entry.pulseStates.map(state =>
+          ({...state, pngPath: transparentOverlayPath}))})} : entry
+    ));
+    const counterfactualInput = {
+      instructionId: record.element.instructionId,
+      ffmpegPath: toolPaths.ffmpegPath,
+      compositeArguments: buildPresentationCompositeArgumentsV001({
+        baseMediaPath, plan, overlayRecords: counterfactualRecords, expectedFrameCount,
+        serializePngAndFilters,
+        presentationTimeline,
+        timelineAudio,
+      }),
+      representativeFrame,
+      expectedFrameCount,
+      outputPath: omittedFrame,
+    };
+    const counterfactualInputPath = path.join(scratchDirectory, 'frames', `${record.fileStem}-counterfactual-input.json`);
+    await writeFile(counterfactualInputPath, JSON.stringify(counterfactualInput), {flag: 'wx'});
+    const counterfactual = await runPresentationRendererChildProcessV001(toolPaths.tsxPath, [
+      fileURLToPath(import.meta.url), '--counterfactual-frame', counterfactualInputPath,
+    ], {
+      fatalInnerStage: 'post-render-qc',
+      processObserver,
+      observationLabel: 'counterfactual-encoded-frame',
+    });
+    const counterfactualResult = JSON.parse(counterfactual.stdout.toString('utf8'));
+    if (counterfactualResult.status !== 'completed'
+      || counterfactualResult.inputCanonicalSha256 !== sha256Canonical(counterfactualInput)
+      || counterfactualResult.outputFileSha256 !== await fileSha256V002(omittedFrame)) {
+      throw new Error('encoded counterfactual frame evidence does not match its input and output');
+    }
+    await extractFrame(
+      workVideo,
+      representativeFrame,
+      outputFrame,
+      plan.canvas.fps,
+      toolPaths.ffmpegPath,
+      processObserver,
+    );
+    record.inspection.visibilityComparisonBasis = 'same-composite-with-instruction-omitted';
+    record.inspection.representativeFrame = representativeFrame;
+    record.inspection.changedPixelsAgainstInstructionOmittedFrame =
+      await imageDifferencePixelsWithinBounds(
+        outputFrame,
+        omittedFrame,
+        record.pulseStates ? presentationPulseAlphaUnionV001(record.pulseStates) : record.inspection.alphaBounds,
+        toolPaths.imageMagickPath,
+        processObserver,
+      );
+    if (record.pulseStates) {
+      record.inspection.pulse.completedFrames = await inspectPresentationPulseCompletedFramesV001({
+        record, canvas: plan.canvas, baseMediaPath, completedMediaPath: workVideo,
+        scratchDirectory: path.join(scratchDirectory, 'frames'),
+        ffmpegPath: toolPaths.ffmpegPath, imageMagickPath: toolPaths.imageMagickPath,
+        processObserver, runProcess: runPresentationRendererChildProcessV001, extractFrame,
+      });
+    }
+  }
+  return {method: 'encoded', inspections: overlayRecords.map(record => record.inspection)};
+}
+
 /**
  * 合格済みの論理描画計画を、現行v002描画エンジンとQCへ一度だけ通す共通入口。
  * 入力契約の判定と成果物manifestの組み立ては呼び出し側が所有し、
@@ -1636,8 +1839,12 @@ export async function executeValidatedPresentationDrawAndQcV001({
   autoPresentation = undefined,
   baseTimeline,
   runCounterfactualQc = true,
+  counterfactualQcMethod = 'encoded',
 }) {
   if (typeof runCounterfactualQc !== 'boolean') throw new TypeError('counterfactual QC control must be boolean');
+  if (!['encoded', 'native'].includes(counterfactualQcMethod)) {
+    throw new TypeError('completed frame QC method must be encoded or native');
+  }
   if (autoPresentation !== undefined && effects !== undefined) {
     throw new TypeError('automatic presentation and trial effects cannot be combined');
   }
@@ -1993,82 +2200,26 @@ export async function executeValidatedPresentationDrawAndQcV001({
       );
     }
 
+    let completedFrameQc;
     if (runCounterfactualQc) {
-      const transparentOverlayPath = path.join(scratchDirectory, 'frames', 'transparent-overlay.png');
-      await runPresentationRendererChildProcessV001(toolPaths.imageMagickPath, [
-        '-size', `${plan.canvas.width}x${plan.canvas.height}`,
-        'xc:none',
-        transparentOverlayPath,
-      ], {
-        fatalInnerStage: 'post-render-qc',
-        processObserver,
-        observationLabel: 'transparent-overlay-create',
+      completedFrameQc = await inspectPresentationCompletedFrameQcV001({
+        plan, records: overlayRecords, baseMediaPath, completedMediaPath: workVideo,
+        expectedFrameCount, scratchDirectory, presetRegistry, autoPresentation,
+        overlayAdapter, toolPaths, processObserver, serializePngAndFilters,
+        presentationTimeline, timelineAudio, counterfactualQcMethod,
       });
-      for (const record of overlayRecords) {
-        const representativeFrame = record.pulseStates
-          ? getPresentationPulseProgramV001({element: record.element, canvas: plan.canvas}).maximumFrame
-          : record.element.startFrame + Math.floor(record.element.displayFrameCount / 2);
-        const outputFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-output.png`);
-        const omittedFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-omitted.png`);
-        const counterfactualRecords = overlayRecords.map((entry) => (
-          entry === record ? {...entry, pngPath: transparentOverlayPath,
-            ...(entry.pulseStates === undefined ? {} : {pulseStates: entry.pulseStates.map(state =>
-              ({...state, pngPath: transparentOverlayPath}))})} : entry
-        ));
-        const counterfactualInput = {
-          instructionId: record.element.instructionId,
-          ffmpegPath: toolPaths.ffmpegPath,
-          compositeArguments: buildPresentationCompositeArgumentsV001({
-            baseMediaPath, plan, overlayRecords: counterfactualRecords, expectedFrameCount,
-            serializePngAndFilters,
-            presentationTimeline,
-            timelineAudio,
-          }),
-          representativeFrame,
-          expectedFrameCount,
-          outputPath: omittedFrame,
-        };
-        const counterfactualInputPath = path.join(scratchDirectory, 'frames', `${record.fileStem}-counterfactual-input.json`);
-        await writeFile(counterfactualInputPath, JSON.stringify(counterfactualInput), {flag: 'wx'});
-        const counterfactual = await runPresentationRendererChildProcessV001(toolPaths.tsxPath, [
-          fileURLToPath(import.meta.url), '--counterfactual-frame', counterfactualInputPath,
-        ], {
-          fatalInnerStage: 'post-render-qc',
-          processObserver,
-          observationLabel: 'counterfactual-encoded-frame',
-        });
-        const counterfactualResult = JSON.parse(counterfactual.stdout.toString('utf8'));
-        if (counterfactualResult.status !== 'completed'
-          || counterfactualResult.inputCanonicalSha256 !== sha256Canonical(counterfactualInput)
-          || counterfactualResult.outputFileSha256 !== await fileSha256V002(omittedFrame)) {
-          throw new Error('encoded counterfactual frame evidence does not match its input and output');
-        }
-        await extractFrame(
-          workVideo,
-          representativeFrame,
-          outputFrame,
-          plan.canvas.fps,
-          toolPaths.ffmpegPath,
-          processObserver,
-        );
-        record.inspection.visibilityComparisonBasis = 'same-composite-with-instruction-omitted';
-        record.inspection.representativeFrame = representativeFrame;
-        record.inspection.changedPixelsAgainstInstructionOmittedFrame =
-          await imageDifferencePixelsWithinBounds(
-            outputFrame,
-            omittedFrame,
-            record.pulseStates ? presentationPulseAlphaUnionV001(record.pulseStates) : record.inspection.alphaBounds,
-            toolPaths.imageMagickPath,
-            processObserver,
-          );
-        if (record.pulseStates) {
-          record.inspection.pulse.completedFrames = await inspectPresentationPulseCompletedFramesV001({
-            record, canvas: plan.canvas, baseMediaPath, completedMediaPath: workVideo,
-            scratchDirectory: path.join(scratchDirectory, 'frames'),
-            ffmpegPath: toolPaths.ffmpegPath, imageMagickPath: toolPaths.imageMagickPath,
-            processObserver, runProcess: runPresentationRendererChildProcessV001, extractFrame,
-          });
-        }
+      if (completedFrameQc.method === 'native'
+        && (completedFrameQc.status !== 'passed' || completedFrameQc.violations.length !== 0)) {
+        return failAfterWork([makeViolation('NATIVE_FRAME_QC_INVALID', '$completedFrames', [],
+          {violations: completedFrameQc.violations})], 'post-render-qc', completedFrameQc);
+      }
+      if (!Array.isArray(completedFrameQc.inspections) || completedFrameQc.inspections.length !== overlayRecords.length
+        || completedFrameQc.inspections.some((inspection, index) =>
+          inspection.instructionId !== overlayRecords[index].element.instructionId)) {
+        throw new TypeError('completed frame QC must cover every caption exactly once in plan order');
+      }
+      for (const [index, record] of overlayRecords.entries()) {
+        record.inspection = completedFrameQc.inspections[index];
       }
     }
 
@@ -2109,6 +2260,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       }),
       presentationTimeline,
       counterfactualQcExecuted: runCounterfactualQc,
+      ...(completedFrameQc === undefined ? {} : {completedFrameQc}),
     };
   } catch (error) {
     const rendererCode = error?.rendererViolationCode;
