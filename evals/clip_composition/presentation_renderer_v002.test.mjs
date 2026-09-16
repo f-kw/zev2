@@ -1815,9 +1815,14 @@ test('17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成
     'RENDER_OUTPUT_PUBLISH_FAILED',
   ]);
   assert.deepEqual(allExported, expectedUnion);
+  // This fixture owns the static renderer's violations. The two finite Pulse
+  // failures have dedicated fault cases in presentation_pulse_renderer_v001.test.mjs.
+  const pulseCodes = new Set(['PULSE_NATIVE_STATE_MISMATCH', 'PULSE_FRAME_STATE_MISMATCH']);
+  const staticExpected = new Set([...expectedUnion].filter(code => !pulseCodes.has(code)));
+  assert.deepEqual(allExported, new Set([...staticExpected, ...pulseCodes]));
   assert.deepEqual(
-    new Set([...observedCodes].filter((code) => allExported.has(code))),
-    allExported,
-    `未発火: ${[...allExported].filter((code) => !observedCodes.has(code)).join(', ')}`,
+    new Set([...observedCodes].filter((code) => staticExpected.has(code))),
+    staticExpected,
+    `静的fixtureで未発火: ${[...staticExpected].filter((code) => !observedCodes.has(code)).join(', ')}`,
   );
 });

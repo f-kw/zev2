@@ -1,6 +1,9 @@
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
+import {PRESENTATION_PULSE_PRESET_V001, getPresentationPulseProgramV001,
+  buildPresentationPulseStateElementsV001, assertPresentationPulseAnchorsV001,
+} from './presentation_pulse_v001.mjs';
 
 export const PRESENTATION_RENDERER_QC_SCHEMA_VERSION = 'presentation-render-qc-v002';
 export const PRESENTATION_REVIEW_RENDERER_QC_SCHEMA_VERSION_V003 =
@@ -24,6 +27,8 @@ export const PRESENTATION_RENDERER_QC_VIOLATION_CODES = Object.freeze([
   'OUTPUT_AUDIO_PACKET_HASH_MISMATCH',
   'OUTPUT_FORMAT_MISMATCH',
   'OUTPUT_ELEMENT_NOT_VISIBLE',
+  'PULSE_NATIVE_STATE_MISMATCH',
+  'PULSE_FRAME_STATE_MISMATCH',
 ]);
 
 const CODE_ORDER = new Map(PRESENTATION_RENDERER_QC_VIOLATION_CODES.map((code, index) => [code, index]));
@@ -135,10 +140,12 @@ function evaluatePresentationRendererQc({
 
   const overlayPaths = new Map();
   for (const result of applicationResults ?? []) {
-    if (!isNonEmptyString(result?.overlayFile)) continue;
-    const owners = overlayPaths.get(result.overlayFile) ?? [];
-    owners.push(result.instructionId);
-    overlayPaths.set(result.overlayFile, owners);
+    for (const state of Array.isArray(result?.pulse?.states) ? result.pulse.states : [result]) {
+      if (!isNonEmptyString(state?.overlayFile)) continue;
+      const owners = overlayPaths.get(state.overlayFile) ?? [];
+      owners.push(result.instructionId);
+      overlayPaths.set(state.overlayFile, owners);
+    }
   }
   for (const [overlayFile, owners] of overlayPaths) {
     if (owners.length > 1) {
@@ -186,6 +193,94 @@ function evaluatePresentationRendererQc({
       continue;
     }
     const inspection = inspections[0];
+    if (Object.hasOwn(element, 'presentationPulse')) {
+      try {
+        const program = getPresentationPulseProgramV001({element, canvas});
+        const expectedStates = buildPresentationPulseStateElementsV001({element, canvas});
+        const application = results[0]?.pulse;
+        const native = inspection.pulse;
+        const equal = (left, right) => sha256Canonical(left) === sha256Canonical(right);
+        const hash = value => typeof value === 'string' && /^[0-9a-f]{64}$/.test(value);
+        if (results.length !== 1 || !application || !native
+          || application.presetVersion !== PRESENTATION_PULSE_PRESET_V001.version
+          || native.presetVersion !== application.presetVersion
+          || !equal(application.metadata, element.presentationPulse)
+          || !equal(native.metadata, application.metadata)
+          || !equal(application.program, program) || !equal(native.program, program)
+          || !Array.isArray(application.states) || application.states.length !== 3
+          || !Array.isArray(native.states) || native.states.length !== 3) {
+          throw new TypeError('the finite native state set is missing or changed');
+        }
+        assertPresentationPulseAnchorsV001(native.states.map(state => ({wrapper: state.layoutWrapper})));
+        for (const [index, expected] of expectedStates.entries()) {
+          const binding = application.states[index];
+          const observed = native.states[index];
+          if (binding.state !== expected.state || observed.state !== expected.state
+            || observed.pixelWidth !== canvas.width || observed.pixelHeight !== canvas.height
+            || binding.overlayFile !== observed.overlayFile || !hash(binding.overlaySha256)
+            || binding.overlaySha256 !== observed.overlaySha256
+            || !hash(binding.appliedOverlayPropsCanonicalSha256)
+            || binding.appliedOverlayPropsCanonicalSha256 !== observed.appliedOverlayPropsCanonicalSha256
+            || (index === 0 && (binding.overlayFile !== inspection.overlayFile
+              || binding.overlaySha256 !== inspection.overlaySha256
+              || binding.appliedOverlayPropsCanonicalSha256 !== inspection.appliedOverlayPropsCanonicalSha256))) {
+            throw new TypeError('a native Pulse PNG or its drawing props are not bound');
+          }
+          const stateElement = expected.element;
+          const stateApplication = {...results[0], ...binding,
+            finalPlanElementReference: {planFile: outputProfile.planFile,
+              instructionId: element.instructionId,
+              canonicalSha256: sha256Canonical({...stateElement, overlaySha256: binding.overlaySha256})}};
+          delete stateApplication.pulse;
+          const stateQc = evaluatePresentationRendererQc({plan: {elements: [stateElement]},
+            applicationResults: [stateApplication], overlayInspections: [observed],
+            mediaInspection, expectedAudio, expectedFrameCount, canvas, requireFinalVisibility: false}, outputProfile);
+          violations.push(...stateQc.violations.map(violation => ({...violation,
+            details: {...(violation.details ?? {}), pulseState: expected.state}})));
+        }
+        for (let index = 1; index < native.states.length; index++) {
+          const smaller = native.states[index - 1];
+          const larger = native.states[index];
+          if (!smaller.alphaBounds || !larger.alphaBounds
+            || !(larger.alphaBounds.width > smaller.alphaBounds.width)
+            || !(larger.alphaBounds.height > smaller.alphaBounds.height)
+            || larger.overlaySha256 === smaller.overlaySha256) {
+            throw new TypeError('the three native states do not grow in both dimensions');
+          }
+        }
+        if (requireFinalVisibility) {
+          const frames = native.completedFrames;
+          const expectedFrames = [
+            {frame: program.normalBeforeFrame, state: 'normal'},
+            {frame: program.maximumFrame, state: 'maximum'},
+            {frame: program.normalAfterFrame, state: 'normal'},
+          ];
+          const frameValid = Array.isArray(frames) && frames.length === expectedFrames.length
+            && frames.every((frame, index) => {
+              const expected = expectedFrames[index];
+              const reference = application.states.find(state => state.state === expected.state);
+              const distances = frame?.stateDistances;
+              if (frame.frame !== expected.frame || frame.expectedState !== expected.state
+                || frame.comparisonBasis !== 'same-source-frame-three-native-pulse-states'
+                || frame.expectedOverlaySha256 !== reference.overlaySha256
+                || !hash(frame.outputFrameSha256) || !hash(frame.baseFrameSha256)
+                || !Array.isArray(distances) || distances.length !== 3
+                || distances.some((distance, stateIndex) => distance.state !== expectedStates[stateIndex].state
+                  || distance.overlaySha256 !== application.states[stateIndex].overlaySha256
+                  || !Number.isSafeInteger(distance.absoluteRgbDifference)
+                  || distance.absoluteRgbDifference < 0 || !hash(distance.referenceFrameSha256))) return false;
+              const wanted = distances.find(distance => distance.state === expected.state).absoluteRgbDifference;
+              return distances.every(distance => distance.state === expected.state
+                || wanted < distance.absoluteRgbDifference);
+            });
+          if (!frameValid) violations.push(makeViolation('PULSE_FRAME_STATE_MISMATCH', [element.instructionId]));
+        }
+      } catch (error) {
+        violations.push(makeViolation('PULSE_NATIVE_STATE_MISMATCH', [element.instructionId], {reason: error.message}));
+      }
+    } else if (results.some(result => Object.hasOwn(result, 'pulse')) || Object.hasOwn(inspection, 'pulse')) {
+      violations.push(makeViolation('PULSE_NATIVE_STATE_MISMATCH', [element.instructionId], {unexpectedPulseEvidence: true}));
+    }
     if (
       results.length === 1
       && (
@@ -347,12 +442,30 @@ function evaluatePresentationRendererQc({
       const leftInspection = inspectionByInstruction.get(left.instructionId)?.[0];
       const rightInspection = inspectionByInstruction.get(right.instructionId)?.[0];
       if (!leftInspection?.alphaBounds || !rightInspection?.alphaBounds) continue;
-      const intersection = overlap(leftInspection.alphaBounds, rightInspection.alphaBounds);
-      if (intersection.width > 0 && intersection.height > 0) {
-        violations.push(makeViolation('INSTRUCTION_TEMPORAL_SPATIAL_COLLISION', [left.instructionId, right.instructionId], {
-          overlappingFrames: timeOverlap(left, right),
-          ...intersection,
-        }));
+      const nativeSpans = (element, inspection) => {
+        if (!Object.hasOwn(element, 'presentationPulse')) return [{...element, bounds: inspection.alphaBounds}];
+        try {
+          const program = getPresentationPulseProgramV001({element, canvas});
+          return program.segments.map(segment => ({...segment,
+            bounds: inspection.pulse?.states?.find(state => state.state === segment.state)?.alphaBounds}))
+            .filter(segment => segment.bounds);
+        } catch { return []; } // Malformed Pulse evidence was rejected above.
+      };
+      for (const leftSpan of nativeSpans(left, leftInspection)) {
+        for (const rightSpan of nativeSpans(right, rightInspection)) {
+          const overlappingFrames = timeOverlap(leftSpan, rightSpan);
+          if (overlappingFrames <= 0) continue;
+          const intersection = overlap(leftSpan.bounds, rightSpan.bounds);
+          if (intersection.width > 0 && intersection.height > 0) {
+            violations.push(makeViolation('INSTRUCTION_TEMPORAL_SPATIAL_COLLISION', [left.instructionId, right.instructionId], {
+              overlappingFrames,
+              ...intersection,
+              ...(leftSpan.state === undefined && rightSpan.state === undefined ? {} : {
+                pulseStates: {left: leftSpan.state ?? null, right: rightSpan.state ?? null},
+              }),
+            }));
+          }
+        }
       }
     }
   }
@@ -429,6 +542,7 @@ function evaluatePresentationRendererQc({
       inspectedOverlayFile: inspection?.overlayFile ?? null,
       applicationOverlaySha256: application?.overlaySha256 ?? null,
       overlaySha256: inspection?.overlaySha256 ?? null,
+      ...(inspection?.pulse === undefined ? {} : {pulse: structuredClone(inspection.pulse)}),
     };
   });
   return {
@@ -450,6 +564,8 @@ function evaluatePresentationRendererQc({
         'OVERLAY_ALPHA_EMPTY',
         'INSTRUCTION_TEMPORAL_SPATIAL_COLLISION',
         'OUTPUT_ELEMENT_NOT_VISIBLE',
+        'PULSE_NATIVE_STATE_MISMATCH',
+        'PULSE_FRAME_STATE_MISMATCH',
       ].includes(item.code)) ? 'failed' : 'passed'},
       media: {status: violations.some((item) => item.code.startsWith('OUTPUT_') && item.code !== 'OUTPUT_ELEMENT_NOT_VISIBLE')
         ? 'failed'

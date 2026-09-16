@@ -9,6 +9,11 @@ import {fileURLToPath} from 'node:url';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {resolvePresentationEffectsV001, buildPresentationTimelineFiltersV001} from './presentation_effects_v001.mjs';
 import {resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
+import {PRESENTATION_PULSE_PRESET_V001, getPresentationPulseProgramV001,
+  buildPresentationPulseStateElementsV001, assertPresentationPulseAnchorsV001,
+} from './presentation_pulse_v001.mjs';
+import {presentationPulseAlphaUnionV001, inspectPresentationPulseCompletedFramesV001}
+  from './presentation_pulse_renderer_qc_v001.mjs';
 import {validatePresentationInstructionContract} from './presentation_instruction_contract_v002.mjs';
 import {
   PRESENTATION_BASE_MEDIA_TIMELINE_VIOLATION_CODES,
@@ -909,6 +914,21 @@ export const buildPresentationFrameExtractionArgumentsV001 = ({inputPath, frame,
     '-vf', `select=eq(n\\,${remainingFrame})`, '-frames:v', '1', outputPath];
 };
 
+const presentationPulseRecordsV001 = (record, canvas) => {
+  if (!Object.hasOwn(record.element, 'presentationPulse')) {
+    if (Object.hasOwn(record, 'pulseStates')) throw new TypeError('Pulse states require finite pulse metadata');
+    return [record];
+  }
+  const expected = buildPresentationPulseStateElementsV001({element: record.element, canvas});
+  if (!Array.isArray(record.pulseStates) || record.pulseStates.length !== expected.length
+    || record.pulseStates.some((row, index) => row.state !== expected[index].state
+      || typeof row.pngPath !== 'string' || row.pngPath.length === 0
+      || canonicalJson(row.element) !== canonicalJson(expected[index].element))) {
+    throw new TypeError('Pulse requires exactly its three bound native states');
+  }
+  return record.pulseStates;
+};
+
 export const buildPresentationCompositeArgumentsV001 = ({
   baseMediaPath,
   plan,
@@ -924,24 +944,52 @@ export const buildPresentationCompositeArgumentsV001 = ({
   const args = ['-hide_banner', '-loglevel', 'error', '-y'];
   if (serializePngAndFilters) args.push('-filter_complex_threads', '1');
   args.push('-i', baseMediaPath);
+  const inputIndexes = new Map();
+  let nextInputIndex = 1;
   for (const record of overlayRecords) {
-    // This is an input decoder option. FFmpeg consumes it at the following
-    // PNG -i; it must never become a base decoder or output encoder option.
-    if (serializePngAndFilters) args.push('-threads', '1');
-    args.push('-loop', '1', '-framerate', String(plan.canvas.fps), '-i', record.pngPath);
+    const states = presentationPulseRecordsV001(record, plan.canvas);
+    inputIndexes.set(record, states.map(() => nextInputIndex++));
+    for (const state of states) {
+      // This is an input decoder option. FFmpeg consumes it at the following
+      // PNG -i; it must never become a base decoder or output encoder option.
+      if (serializePngAndFilters) args.push('-threads', '1');
+      args.push('-loop', '1', '-framerate', String(plan.canvas.fps), '-i', state.pngPath);
+    }
   }
   const filters = presentationTimeline
     ? buildPresentationTimelineFiltersV001({presentationTimeline, canvas: plan.canvas, audio: timelineAudio}) : [];
   let previous = presentationTimeline ? 'timelineVideo' : '0:v';
   overlayRecords.forEach((record, index) => {
     const element = record.element;
-    const inputIndex = index + 1;
+    const inputIndex = inputIndexes.get(record)[0];
     const alpha = `alpha(X,Y)*min(1,min((N+1)/4,(${element.displayFrameCount}-N)/4))`;
-    filters.push(
-      `[${inputIndex}:v]format=rgba,trim=end_frame=${element.displayFrameCount},setpts=PTS-STARTPTS,`
-      + `geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='${alpha}',`
-      + `setpts=PTS+${element.startFrame}/${plan.canvas.fps}/TB[overlay${index}]`,
-    );
+    if (Object.hasOwn(element, 'presentationPulse')) {
+      const program = getPresentationPulseProgramV001({element, canvas: plan.canvas});
+      const states = presentationPulseRecordsV001(record, plan.canvas);
+      for (const [stateIndex, state] of states.entries()) {
+        const segments = program.segments.map((segment, segmentIndex) => ({...segment, segmentIndex}))
+          .filter(segment => segment.state === state.state);
+        const labels = segments.map(segment => `pulse${index}state${segment.segmentIndex}`);
+        filters.push(`[${inputIndexes.get(record)[stateIndex]}:v]format=rgba`
+          + (labels.length === 1 ? `[${labels[0]}]`
+            : `,split=${labels.length}${labels.map(label => `[${label}]`).join('')}`));
+        for (const segment of segments) {
+          filters.push(`[pulse${index}state${segment.segmentIndex}]`
+            + `trim=end_frame=${segment.endFrameExclusive - segment.startFrame},setpts=PTS-STARTPTS`
+            + `[pulse${index}segment${segment.segmentIndex}]`);
+        }
+      }
+      filters.push(program.segments.map((_segment, segmentIndex) => `[pulse${index}segment${segmentIndex}]`).join('')
+        + `concat=n=${program.segments.length}:v=1:a=0,settb=expr=1/${plan.canvas.fps},setpts=N,`
+        + `geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='${alpha}',`
+        + `setpts=PTS+${element.startFrame}/${plan.canvas.fps}/TB[overlay${index}]`);
+    } else {
+      filters.push(
+        `[${inputIndex}:v]format=rgba,trim=end_frame=${element.displayFrameCount},setpts=PTS-STARTPTS,`
+        + `geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='${alpha}',`
+        + `setpts=PTS+${element.startFrame}/${plan.canvas.fps}/TB[overlay${index}]`,
+      );
+    }
     const next = `video${index + 1}`;
     filters.push(
       `[${previous}][overlay${index}]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[${next}]`,
@@ -1102,6 +1150,15 @@ export function buildPresentationRenderApplicationResults(
       appliedOverlayPropsCanonicalSha256: sha256Canonical(record.props),
       overlayFile: path.posix.join(artifactNames.overlays, path.basename(record.pngPath)),
       overlaySha256: record.pngSha256,
+      ...(record.pulseStates === undefined ? {} : {pulse: {
+        presetVersion: PRESENTATION_PULSE_PRESET_V001.version,
+        metadata: structuredClone(record.element.presentationPulse),
+        program: structuredClone(record.inspection.pulse.program),
+        states: record.pulseStates.map(state => ({state: state.state,
+          overlayFile: path.posix.join(artifactNames.overlays, path.basename(state.pngPath)),
+          overlaySha256: state.pngSha256,
+          appliedOverlayPropsCanonicalSha256: sha256Canonical(state.props)})),
+      }}),
       finalPlanElementReference: {
         planFile: artifactNames.plan,
         instructionId: finalElement.instructionId,
@@ -1117,6 +1174,15 @@ export function buildPresentationRenderApplicationResultsV002(overlayRecords) {
     PRESENTATION_RENDERER_OUTPUT_NAMES,
   );
 }
+
+/** Every physical PNG stays bound to its one logical caption. */
+export const buildPresentationOverlayFileBindingsV001 = applicationResults => applicationResults
+  .flatMap(result => (result.pulse?.states ?? [result]).map(state => ({
+    instructionId: result.instructionId,
+    path: state.overlayFile,
+    fileSha256: state.overlaySha256,
+  })))
+  .sort((left, right) => left.path.localeCompare(right.path, 'en'));
 
 const successArtifactNamesFor = (artifactNames) => [
   artifactNames.video,
@@ -1596,6 +1662,15 @@ export async function executeValidatedPresentationDrawAndQcV001({
     autoPresentationResolution = automatic.resolution;
     autoPresentationInputs = structuredClone(autoPresentation);
   }
+  for (const element of resolved.plan.elements) {
+    if (Object.hasOwn(element, 'presentationPulse')) {
+      getPresentationPulseProgramV001({element, canvas: resolved.plan.canvas});
+      if (!runCounterfactualQc) throw new TypeError('Pulse requires completed-frame state identification QC');
+      if (validatedLayoutInspection !== null) {
+        throw new TypeError('Pulse selections require native layout inspection of all three states');
+      }
+    }
+  }
   if (validatedLayoutInspection !== null && resolved.plan.elements.some((element, index) =>
     autoPresentation === undefined
       ? element.visualState !== plan.elements[index].visualState
@@ -1679,8 +1754,13 @@ export async function executeValidatedPresentationDrawAndQcV001({
   );
 
   try {
-    const overlayProps = plan.elements.map(
-      (element) => overlayAdapter.buildProps(element, plan, presetRegistry),
+    const drawStates = plan.elements.flatMap((element, groupIndex) =>
+      Object.hasOwn(element, 'presentationPulse')
+        ? buildPresentationPulseStateElementsV001({element, canvas: plan.canvas})
+          .map(state => ({...state, groupIndex}))
+        : [{element, groupIndex}]);
+    const overlayProps = drawStates.map(
+      ({element}) => overlayAdapter.buildProps(element, plan, presetRegistry),
     );
     let layoutInspection = validatedLayoutInspection;
     if (layoutInspection === null) {
@@ -1708,16 +1788,32 @@ export async function executeValidatedPresentationDrawAndQcV001({
       return failAfterWork(layoutInspection.violations, 'layout-preflight', layoutInspection);
     }
 
-    const layoutByInstruction = new Map(
-      layoutInspection.items.map((item) => [item.instructionId, item]),
-    );
-    const overlayRecords = [];
-    for (const [index, element] of plan.elements.entries()) {
+    const hasPulse = drawStates.some(state => state.state !== undefined);
+    if (hasPulse && (layoutInspection.items.length !== drawStates.length
+      || layoutInspection.items.some((item, index) => item.instructionId !== drawStates[index].element.instructionId))) {
+      throw new TypeError('native layout inspection does not cover the exact draw states');
+    }
+    const layoutByInstruction = new Map(layoutInspection.items.map(item => [item.instructionId, item]));
+    for (const [groupIndex, element] of plan.elements.entries()) {
+      if (Object.hasOwn(element, 'presentationPulse')) {
+        try {
+          assertPresentationPulseAnchorsV001(layoutInspection.items.filter((_item, index) =>
+            drawStates[index].groupIndex === groupIndex));
+        } catch (error) {
+          return failAfterWork([makeViolation('PULSE_NATIVE_STATE_MISMATCH', '$layout',
+            [element.instructionId], {reason: error.message})], 'layout-preflight');
+        }
+      }
+    }
+    const physicalRecords = [];
+    for (const [index, drawState] of drawStates.entries()) {
+      const {element, groupIndex, state} = drawState;
       const baseName =
-        `${String(index + 1).padStart(2, '0')}-${sha256Bytes(element.instructionId).slice(0, 12)}`;
+        `${String(groupIndex + 1).padStart(2, '0')}-${sha256Bytes(element.instructionId).slice(0, 12)}`
+        + (state === undefined ? '' : `-${state}`);
       const pngPath = path.join(stagingDirectory, artifactNames.overlays, `${baseName}.png`);
       const repeatPath = path.join(scratchDirectory, 'frames', `${baseName}.repeat.png`);
-      const layoutItem = layoutByInstruction.get(element.instructionId);
+      const layoutItem = hasPulse ? layoutInspection.items[index] : layoutByInstruction.get(element.instructionId);
       if (element.visualState.position.preset === 'top-band') {
         const calibrationLineBounds = [];
         for (const line of element.indexedLines) {
@@ -1809,8 +1905,22 @@ export async function executeValidatedPresentationDrawAndQcV001({
         overlayFile: path.posix.join(artifactNames.overlays, path.basename(pngPath)),
         overlaySha256: pngSha256,
       });
-      overlayRecords.push({
+      if (state !== undefined) {
+        const dimensions = await runPresentationRendererChildProcessV001(toolPaths.imageMagickPath,
+          [pngPath, '-format', '%w %h', 'info:'], {fatalInnerStage: 'overlay-render', processObserver,
+            observationLabel: 'pulse-native-canvas-inspection'});
+        const size = dimensions.stdout.toString().trim().match(/^(\d+) (\d+)$/);
+        if (!size || Number(size[1]) !== plan.canvas.width || Number(size[2]) !== plan.canvas.height) {
+          return failAfterWork([makeViolation('PULSE_NATIVE_STATE_MISMATCH', '$overlays',
+            [element.instructionId], {state, reason: 'native Pulse PNG dimensions differ from the fixed canvas'})], 'overlay-preflight');
+        }
+        inspection.pixelWidth = Number(size[1]); inspection.pixelHeight = Number(size[2]);
+        inspection.layoutWrapper = structuredClone(layoutItem.wrapper);
+      }
+      physicalRecords.push({
         element,
+        groupIndex,
+        ...(state === undefined ? {} : {state}),
         props: overlayProps[index],
         fileStem: baseName,
         pngPath,
@@ -1818,6 +1928,19 @@ export async function executeValidatedPresentationDrawAndQcV001({
         inspection,
       });
     }
+
+    const overlayRecords = plan.elements.map((element, groupIndex) => {
+      const records = physicalRecords.filter(record => record.groupIndex === groupIndex)
+        .map(({groupIndex: _groupIndex, ...record}) => record);
+      if (!Object.hasOwn(element, 'presentationPulse')) return records[0];
+      const normal = records[0];
+      return {...normal, element, pulseStates: records,
+        inspection: {...normal.inspection,
+          pulse: {presetVersion: PRESENTATION_PULSE_PRESET_V001.version,
+            metadata: structuredClone(element.presentationPulse),
+            program: getPresentationPulseProgramV001({element, canvas: plan.canvas}),
+            states: records.map(record => ({state: record.state, ...record.inspection}))}}};
+    });
 
     const applicationResults = buildPresentationRenderApplicationResults(
       overlayRecords,
@@ -1882,12 +2005,15 @@ export async function executeValidatedPresentationDrawAndQcV001({
         observationLabel: 'transparent-overlay-create',
       });
       for (const record of overlayRecords) {
-        const representativeFrame = record.element.startFrame
-          + Math.floor(record.element.displayFrameCount / 2);
+        const representativeFrame = record.pulseStates
+          ? getPresentationPulseProgramV001({element: record.element, canvas: plan.canvas}).maximumFrame
+          : record.element.startFrame + Math.floor(record.element.displayFrameCount / 2);
         const outputFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-output.png`);
         const omittedFrame = path.join(scratchDirectory, 'frames', `${record.fileStem}-omitted.png`);
         const counterfactualRecords = overlayRecords.map((entry) => (
-          entry === record ? {...entry, pngPath: transparentOverlayPath} : entry
+          entry === record ? {...entry, pngPath: transparentOverlayPath,
+            ...(entry.pulseStates === undefined ? {} : {pulseStates: entry.pulseStates.map(state =>
+              ({...state, pngPath: transparentOverlayPath}))})} : entry
         ));
         const counterfactualInput = {
           instructionId: record.element.instructionId,
@@ -1931,10 +2057,18 @@ export async function executeValidatedPresentationDrawAndQcV001({
           await imageDifferencePixelsWithinBounds(
             outputFrame,
             omittedFrame,
-            record.inspection.alphaBounds,
+            record.pulseStates ? presentationPulseAlphaUnionV001(record.pulseStates) : record.inspection.alphaBounds,
             toolPaths.imageMagickPath,
             processObserver,
           );
+        if (record.pulseStates) {
+          record.inspection.pulse.completedFrames = await inspectPresentationPulseCompletedFramesV001({
+            record, canvas: plan.canvas, baseMediaPath, completedMediaPath: workVideo,
+            scratchDirectory: path.join(scratchDirectory, 'frames'),
+            ffmpegPath: toolPaths.ffmpegPath, imageMagickPath: toolPaths.imageMagickPath,
+            processObserver, runProcess: runPresentationRendererChildProcessV001, extractFrame,
+          });
+        }
       }
     }
 
@@ -2246,6 +2380,10 @@ export async function executePresentationRendererV002(jobInput) {
       path.join(MODULE_DIRECTORY, 'presentation_renderer_qc_v002.mjs'),
       fileURLToPath(import.meta.url),
       LAYOUT_INSPECTOR,
+      ...(plan.elements.some(element => Object.hasOwn(element, 'presentationPulse')) ? [
+        path.join(MODULE_DIRECTORY, 'presentation_pulse_v001.mjs'),
+        path.join(MODULE_DIRECTORY, 'presentation_pulse_renderer_qc_v001.mjs'),
+      ] : []),
     ]) {
       rendererFiles.push({path: repoPath(rendererFile), fileSha256: await fileSha256V002(rendererFile)});
     }
@@ -2268,13 +2406,7 @@ export async function executePresentationRendererV002(jobInput) {
       fileSha256V002(applicationResultsPath),
       fileSha256V002(qcPath),
     ]);
-    const overlayFiles = applicationResults
-      .map((result) => ({
-        instructionId: result.instructionId,
-        path: result.overlayFile,
-        fileSha256: result.overlaySha256,
-      }))
-      .sort((left, right) => left.path.localeCompare(right.path, 'en'));
+    const overlayFiles = buildPresentationOverlayFileBindingsV001(applicationResults);
     const manifest = {
       schemaVersion: PRESENTATION_RENDER_MANIFEST_SCHEMA_VERSION,
       rendererVersion: PRESENTATION_RENDERER_VERSION,

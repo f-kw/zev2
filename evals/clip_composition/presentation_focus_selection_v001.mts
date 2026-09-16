@@ -4,17 +4,18 @@ import {createReadStream} from 'node:fs';
 import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
-import {assertPresentationFocusSelectionInputV003, assertPresentationFocusSelectionResultV003,
-  assertPresentationFocusSelectionCoverageV003, assertVocalAsrSegmentV003, audioCandidateOverlapsCaptionV003,
-  runPresentationFocusSelectionV003} from '../../runner/src/skills/presentation-focus-selection-v001.js';
+import {assertPresentationFocusSelectionInputV004, assertPresentationFocusSelectionResultV004,
+  assertPresentationFocusSelectionCoverageV004, assertVocalAsrSegmentV004, audioCandidateOverlapsCaptionV004,
+  runPresentationFocusSelectionV004} from '../../runner/src/skills/presentation-focus-selection-v001.js';
 import {judgeThroughStdinV001} from './run_candidate_discovery_digest_skill_e2e_v001.mts';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {loadAutoPresentationContextV001, saveFixedAutoPresentationV001} from './presentation_auto_effects_io_v001.mjs';
 import {resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
+import {resolvePresentationPulseTimingV001} from './presentation_pulse_v001.mjs';
 
 type Json = Record<string, any>;
 type Ref = {path: string; fileSha256: string};
-export type BoundAudioEvidenceV003 = {audioEvidence: Json; candidates: Json[]; sourceRefs: Ref[]};
+export type BoundAudioEvidenceV004 = {audioEvidence: Json; candidates: Json[]; sourceRefs: Ref[]};
 const formal = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 const hash = (bytes: string | Buffer) => createHash('sha256').update(bytes).digest('hex');
 const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
@@ -76,7 +77,7 @@ function voiceAtSample(rows: Json[], sample: number) {
 }
 
 /** Read the independent, whole-audio probe output before any subtitle matching. */
-export async function loadBoundAudioEvidenceV003(audioCandidatesPath: string): Promise<BoundAudioEvidenceV003> {
+export async function loadBoundAudioEvidenceV004(audioCandidatesPath: string): Promise<BoundAudioEvidenceV004> {
   const candidateBytes = await readFile(audioCandidatesPath), a = JSON.parse(candidateBytes.toString('utf8'));
   assert(keys(a, ['schemaVersion', 'source', 'pcm', 'sampleRate', 'sampleCount', 'durationSec', 'parameters', 'coverage',
     'candidateCount', 'candidates', 'asrEvidence', 'measurementEvidence', 'limitations'])
@@ -119,7 +120,7 @@ export async function loadBoundAudioEvidenceV003(audioCandidatesPath: string): P
   const segments = asr.segments.map((s: Json) => {
     assert(keys(s, ['id', 'modelSegmentId', 'seek', 'startSec', 'endSec', 'text', 'tokens', 'avgLogprob',
       'noSpeechProbability', 'compressionRatio', 'temperature', 'words']), 'VOCAL_ASR_SEGMENT_INVALID');
-    const value = asrProjection(s); assertVocalAsrSegmentV003(value); return value;
+    const value = asrProjection(s); assertVocalAsrSegmentV004(value); return value;
   });
   assert(new Set(segments.map((s: Json) => s.id)).size === segments.length
     && asr.wordCount === segments.reduce((n: number, s: Json) => n + s.words.length, 0), 'VOCAL_ASR_COVERAGE_INVALID');
@@ -182,7 +183,7 @@ export async function loadBoundAudioEvidenceV003(audioCandidatesPath: string): P
 }
 
 /** The fixed normal plan owns text, order and time. Audio discovery never receives this plan. */
-export function buildPresentationFocusSelectionInputV003(baseline: Json, context: Json, audio: BoundAudioEvidenceV003) {
+export function buildPresentationFocusSelectionInputV004(baseline: Json, context: Json, audio: BoundAudioEvidenceV004) {
   assert.equal(baseline.schemaVersion, 'presentation-output-common-core-plan-v001');
   assert(Array.isArray(baseline.elements), 'FOCUS_BASELINE_INVALID');
   assert(keys(context, ['digestId', 'productionPurpose', 'contexts', 'captionContextIds', 'observations', 'evidenceRefs', 'digestAudioSourceRef'])
@@ -194,42 +195,65 @@ export function buildPresentationFocusSelectionInputV003(baseline: Json, context
   assert(Number.isSafeInteger(baseline.canvas?.fps) && baseline.canvas.fps > 0, 'FOCUS_BASELINE_CLOCK_INVALID');
   const captions = baseline.elements.filter((e: Json) => e.kind === 'speech-caption');
   assert(captions.length > 0 && captions.every((e: Json) => !Object.hasOwn(e, 'presentationColorRange')
-    && !Object.hasOwn(e, 'presentationPreset')), 'FOCUS_REQUIRES_NORMAL_BASELINE');
+    && !Object.hasOwn(e, 'presentationPreset') && !Object.hasOwn(e, 'presentationPulse')), 'FOCUS_REQUIRES_NORMAL_BASELINE');
   assert(Array.isArray(context.captionContextIds) && context.captionContextIds.every((r: Json) =>
     keys(r, ['captionId', 'contextId'])), 'FOCUS_CONTEXT_MEMBERSHIP_INVALID');
   assert.deepEqual(context.captionContextIds.map((r: Json) => r.captionId),
     captions.map((e: Json) => e.instructionId), 'FOCUS_CONTEXT_MEMBERSHIP_CHANGED');
-  const input = {schemaVersion: 'presentation-focus-selection-input-v003', digestId: context.digestId,
+  const observations = structuredClone(context.observations);
+  assert(Array.isArray(observations), 'FOCUS_OBSERVATION_INVALID');
+  const unavailablePulse = new Set(observations.filter((o: Json) => o.kind === 'pulse-unrepresentable')
+    .flatMap((o: Json) => o.captionIds));
+  const peaks = audio.candidates.flatMap(c => c.peaks);
+  const inputCaptions = captions.map((e: Json, i: number) => ({captionId: e.instructionId, text: e.text,
+    contextId: context.captionContextIds[i].contextId, startFrame: e.startFrame, endFrameExclusive: e.endFrameExclusive,
+    eligiblePulsePeakIds: unavailablePulse.has(e.instructionId) ? [] : peaks.filter((p: Json) => {
+      try {
+        resolvePresentationPulseTimingV001({element: e, canvas: baseline.canvas,
+          peakSample: p.peakSample, sampleRate: audio.audioEvidence.sampleRate});
+        return true;
+      } catch (error) {
+        if (!(error instanceof TypeError) || !error.message.startsWith('Pulse Accent:')) throw error;
+        return false;
+      }
+    }).map((p: Json) => p.id)}));
+  const noEligibleAnchor = inputCaptions.filter((c: Json) => !c.eligiblePulsePeakIds.length && !unavailablePulse.has(c.captionId));
+  if (noEligibleAnchor.length) {
+    const observationId = 'pulse-no-eligible-anchor';
+    assert(!observations.some((o: Json) => o.observationId === observationId), 'PULSE_OBSERVATION_ID_RESERVED');
+    observations.push({observationId, kind: 'pulse-unrepresentable', captionIds: noEligibleAnchor.map((c: Json) => c.captionId),
+      description: '固定通常表示と実在する各局所頂点を検査した結果、元の字幕内で有限Pulseの全期間と通常表示への復帰が成立する頂点がありません。時刻の移動や短縮は行いません。'});
+  }
+  const input = {schemaVersion: 'presentation-focus-selection-input-v004', digestId: context.digestId,
     productionPurpose: context.productionPurpose, fps: baseline.canvas.fps,
-    captions: captions.map((e: Json, i: number) => ({captionId: e.instructionId, text: e.text,
-      contextId: context.captionContextIds[i].contextId, startFrame: e.startFrame, endFrameExclusive: e.endFrameExclusive})),
-    contexts: structuredClone(context.contexts), observations: structuredClone(context.observations),
+    captions: inputCaptions, contexts: structuredClone(context.contexts), observations,
     audioEvidence: structuredClone(audio.audioEvidence), audioCandidates: audio.candidates.map(c => ({...structuredClone(c),
-      captionIds: captions.filter((caption: Json) => audioCandidateOverlapsCaptionV003(c as any, caption as any,
+      captionIds: captions.filter((caption: Json) => audioCandidateOverlapsCaptionV004(c as any, caption as any,
         audio.audioEvidence.sampleRate, baseline.canvas.fps)).map((caption: Json) => caption.instructionId)}))};
-  assertPresentationFocusSelectionInputV003(input);
+  assertPresentationFocusSelectionInputV004(input);
   return input;
 }
 
-export function validatePresentationFocusSelectionResponseV003(request: Json, response: Json, result: Json) {
-  assertPresentationFocusSelectionInputV003(request.input); assertPresentationFocusSelectionResultV003(result);
+export function validatePresentationFocusSelectionResponseV004(request: Json, response: Json, result: Json) {
+  assertPresentationFocusSelectionInputV004(request.input); assertPresentationFocusSelectionResultV004(result);
   assert(keys(response, ['schemaVersion', 'requestFileSha256', 'answer', 'judgmentNote'])
-    && response.schemaVersion === 'presentation-focus-selection-response-v003'
+    && response.schemaVersion === 'presentation-focus-selection-response-v004'
     && response.requestFileSha256 === hash(formal(request)) && same(response.answer, result.answer)
     && typeof response.judgmentNote === 'string' && response.judgmentNote.trim()
     && request.inputCanonicalSha256 === hash(canonicalJson(request.input)), 'FOCUS_RESPONSE_BINDING_CHANGED');
   assert.equal(result.answer.status, 'complete', 'FOCUS_JUDGMENT_ABSTAINED');
-  assertPresentationFocusSelectionCoverageV003(request.input, result.answer); return result.answer;
+  assertPresentationFocusSelectionCoverageV004(request.input, result.answer); return result.answer;
 }
 
 /** Map a single accepted role to a finite rendering preset. Evidence stays in the bound judgment. */
-export function projectPresentationFocusSelectionV003(input: any, answer: any, context: Json) {
-  assertPresentationFocusSelectionCoverageV003(input, answer);
+export function projectPresentationFocusSelectionV004(input: any, answer: any, context: Json) {
+  assertPresentationFocusSelectionCoverageV004(input, answer);
   assert.equal(answer.status, 'complete', 'FOCUS_JUDGMENT_ABSTAINED');
   const presets = new Map([
     ['Color Accent', {role: 'Focus', presentation: 'provisional-focus'}],
     ['Scale Accent', {role: 'Vocal accent', presentation: 'provisional-vocal'}],
     ['Panel Accent', {role: 'Panel accent', presentation: 'provisional-panel'}],
+    ['Pulse Accent', {role: 'Pulse accent', presentation: 'provisional-pulse'}],
   ]);
   return {schemaVersion: 'auto-presentation-proposal-v001', context,
     targetCaptionIds: input.captions.map((c: Json) => c.captionId), completion: 'complete',
@@ -243,7 +267,7 @@ export function projectPresentationFocusSelectionV003(input: any, answer: any, c
 }
 
 /** Existing current-Codex transport. No API, new recognition run, or rendering authority. */
-export async function executePresentationFocusSelectionV003(options: {
+export async function executePresentationFocusSelectionV004(options: {
   baselinePath: string; contextPath: string; audioCandidatesPath: string; outputDirectory: string;
   judge?: (request: Json) => Promise<Json>;
 }) {
@@ -251,47 +275,55 @@ export async function executePresentationFocusSelectionV003(options: {
   const [baseBytes, contextBytes, promptBytes] = await Promise.all([
     readFile(baselinePath), readFile(contextPath), readFile(promptPath)]);
   const baseline = JSON.parse(baseBytes.toString('utf8')), context = JSON.parse(contextBytes.toString('utf8'));
-  const audio = await loadBoundAudioEvidenceV003(options.audioCandidatesPath);
-  const input = buildPresentationFocusSelectionInputV003(baseline, context, audio);
+  const audio = await loadBoundAudioEvidenceV004(options.audioCandidatesPath);
+  const input = buildPresentationFocusSelectionInputV004(baseline, context, audio);
+  const peaksRefs = audio.sourceRefs.filter(ref => path.basename(ref.path) === 'acoustic-peaks.json');
+  assert.equal(peaksRefs.length, 1, 'PULSE_PEAK_SOURCE_REFERENCE_INVALID');
+  const pulseTimingEvidence = {schemaVersion: 'auto-presentation-pulse-timing-v001',
+    sourceRef: structuredClone(input.audioEvidence.sourceRef), candidatesRef: structuredClone(input.audioEvidence.candidatesRef),
+    peaksRef: structuredClone(peaksRefs[0]), sampleRate: input.audioEvidence.sampleRate, sampleCount: input.audioEvidence.sampleCount,
+    candidates: input.audioCandidates.map(c => ({candidateId: c.candidateId, peakIds: c.peaks.map(p => p.id)})),
+    peaks: input.audioCandidates.flatMap(c => c.peaks.map(p => ({peakId: p.id, startSample: p.startSample,
+      endSampleExclusive: p.endSampleExclusive, peakSample: p.peakSample})))};
   const contextEvidence: Ref[] = [...context.evidenceRefs, context.digestAudioSourceRef];
   for (const ref of contextEvidence) await verifyRef(ref);
   const sources = {baseline: binding(baselinePath, baseBytes), context: binding(contextPath, contextBytes),
     prompt: binding(promptPath, promptBytes), audio: audio.sourceRefs, contextEvidence};
   const sourceRefs = [sources.baseline, sources.context, sources.prompt, ...sources.audio, ...contextEvidence];
-  const request = {schemaVersion: 'presentation-focus-selection-request-v003',
+  const request = {schemaVersion: 'presentation-focus-selection-request-v004',
     judgmentMethod: 'current-codex-stdin-v001', sources, prompt: promptBytes.toString('utf8'),
     input, inputCanonicalSha256: hash(canonicalJson(input))};
   await mkdir(out);
   const requestRef = await save(path.join(out, 'request.json'), request);
   let response: Json | undefined, responseRef: Ref | undefined;
   try {
-    const result = await runPresentationFocusSelectionV003(input, async seen => {
+    const result = await runPresentationFocusSelectionV004(input, async seen => {
       assert(same(seen, input), 'FOCUS_SKILL_INPUT_CHANGED');
       response = await (options.judge ?? judgeThroughStdinV001)(structuredClone(request));
       responseRef = await save(path.join(out, 'response.json'), response);
       return response.answer;
     });
     const resultRef = await save(path.join(out, 'result.json'), result);
-    const answer = validatePresentationFocusSelectionResponseV003(request, response!, result);
+    const answer = validatePresentationFocusSelectionResponseV004(request, response!, result);
     for (const source of [...sourceRefs, requestRef, responseRef!, resultRef]) await verifyRef(source);
     const decisionInputPath = path.join(out, 'decision-input.json');
-    await save(decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v003', sources,
+    await save(decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v004', sources,
       requestRef, responseRef, resultRef, inputCanonicalSha256: request.inputCanonicalSha256,
-      decisionMethod: request.judgmentMethod, humanQuality: 'not-evaluated', answer});
+      decisionMethod: request.judgmentMethod, humanQuality: 'not-evaluated', pulseTimingEvidence, answer});
     const loaded = await loadAutoPresentationContextV001({baselinePath, decisionInputPath});
     assert(same(loaded.baselinePlan, baseline), 'FOCUS_BASELINE_CHANGED');
-    const proposal = projectPresentationFocusSelectionV003(input, answer, loaded.context);
+    const proposal = projectPresentationFocusSelectionV004(input, answer, loaded.context);
     const fixed = await saveFixedAutoPresentationV001({baselinePath, decisionInputPath, proposal,
       outputPath: path.join(out, 'fixed-auto.json')});
     const resolved = resolveAutoPresentationV001({...loaded, autoProposal: fixed});
     await save(path.join(out, 'resolution.json'), resolved.resolution);
     const counts = Object.fromEntries(['normal', 'selected', 'unrepresentable', 'unresolved']
       .map(s => [s, answer.decisions.filter((d: Json) => d.decision === s).length]));
-    const selectedRoles = Object.fromEntries(['Color Accent', 'Scale Accent', 'Panel Accent']
+    const selectedRoles = Object.fromEntries(['Color Accent', 'Scale Accent', 'Panel Accent', 'Pulse Accent']
       .map(role => [role, answer.decisions.filter((d: Json) => d.decision === 'selected' && d.role === role).length]));
     const candidateCounts = Object.fromEntries(['selected', 'discarded', 'unrepresentable', 'unresolved']
       .map(s => [s, answer.candidateDecisions.filter((d: Json) => d.decision === s).length]));
-    const validation = {schemaVersion: 'presentation-focus-selection-validation-v003', status: 'passed',
+    const validation = {schemaVersion: 'presentation-focus-selection-validation-v004', status: 'passed',
       requestRef, resultRef, proposalSha256: fixed.proposalSha256, captionCount: input.captions.length,
       audioCandidateCount: input.audioCandidates.length, counts, selectedRoles, candidateCounts,
       fullCaptionCoverage: 'passed', fullAudioCandidateCoverage: 'passed', exactAudioCaptionOverlap: 'passed',
@@ -308,7 +340,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   if (!baselinePath || !contextPath || !audioCandidatesPath || !outputDirectory) {
     process.stderr.write('usage: presentation_focus_selection_v001.mts normal-plan.json context.json audio-candidates.json new-output-directory\n');
     process.exitCode = 1;
-  } else executePresentationFocusSelectionV003({baselinePath, contextPath, audioCandidatesPath, outputDirectory})
+  } else executePresentationFocusSelectionV004({baselinePath, contextPath, audioCandidatesPath, outputDirectory})
     .then(result => process.stdout.write(JSON.stringify(result) + '\n'))
     .catch(error => {process.stderr.write(String(error) + '\n'); process.exitCode = 1;});
 }

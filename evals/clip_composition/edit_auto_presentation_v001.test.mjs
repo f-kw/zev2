@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {execFile} from 'node:child_process';
 import {mkdtemp, readFile, readdir, rm, writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
@@ -9,11 +10,12 @@ import {parseAutoPresentationEditArgsV001, inspectAutoPresentationCaptionsV001,
   runAutoPresentationEditV001, AUTO_PRESENTATION_EDIT_HELP} from './edit_auto_presentation_v001.mjs';
 import {loadAutoPresentationContextV001, loadAutoPresentationV001,
   saveFixedAutoPresentationV001} from './presentation_auto_effects_io_v001.mjs';
+import {resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 
 const exec = promisify(execFile);
 const writeJson = (file, value) => writeFile(file, `${JSON.stringify(value, null, 2)}\n`);
 async function fixture(t, auto = true, selection = {role: 'Focus', presentation: 'provisional-focus',
-  scope: 'partial-caption', targetText: '同じ語', occurrence: 2}) {
+  scope: 'partial-caption', targetText: '同じ語', occurrence: 2}, withPulseEvidence = false) {
   const directory = await mkdtemp(join(tmpdir(), 'zev-phase2-cli-'));
   t.after(() => rm(directory, {recursive: true, force: true}));
   const files = {baselinePath: join(directory, 'baseline.json'), decisionInputPath: join(directory, 'input.json'),
@@ -23,9 +25,42 @@ async function fixture(t, auto = true, selection = {role: 'Focus', presentation:
       ['a', '同じ語、同じ語。'], ['b', '同じ語は大切。'], ['c', '未解決の本文'], ['d', '未処理の本文'],
     ].map(([instructionId, text], index) => ({instructionId, text, kind: 'speech-caption',
       startFrame: index * 30, endFrameExclusive: (index + 1) * 30,
-      visualState: {textStyle: {fontColor: '#FFFFFF', fontSizePx: 94, fontAssetId: 'saved-font'}, position: {preset: 'bottom-center'}}}))};
+      ...(withPulseEvidence ? {displayFrameCount: 30} : {}),
+      visualState: {textStyle: {fontColor: '#FFFFFF', fontSizePx: withPulseEvidence ? 96 : 94,
+        fontAssetId: 'saved-font'}, position: {preset: 'bottom-center'}}}))};
   await writeJson(files.baselinePath, baselinePlan);
-  await writeJson(files.decisionInputPath, {purpose: 'CLI finite-operation fixture'});
+  const evidenceFiles = [];
+  if (withPulseEvidence) {
+    const bound = async (name, value, json = true) => {
+      const path = join(directory, name), bytes = Buffer.from(json ? `${JSON.stringify(value, null, 2)}\n` : value);
+      await writeFile(path, bytes); evidenceFiles.push(path);
+      return {path, fileSha256: createHash('sha256').update(bytes).digest('hex')};
+    };
+    const sourceRef = await bound('synthetic-source.bin', 'Synthetic source bytes for CLI binding only; not encoded media.', false);
+    const source = {path: sourceRef.path, sha256: sourceRef.fileSha256,
+      bytes: (await readFile(sourceRef.path)).length};
+    const sampleRate = 3000, sampleCount = 12000;
+    const peaks = [['peak-a-first', 1200], ['peak-a-second', 1800], ['peak-a-edge', 400],
+      ['peak-a-end', 3000], ['peak-b', 4500]].map(([peakId, peakSample]) => ({
+      peakId, startSample: peakSample - 20, endSampleExclusive: peakSample + 21, peakSample}));
+    const candidates = [{candidateId: 'candidate-union', peakIds: peaks.map(peak => peak.peakId)}];
+    const peaksRef = await bound('acoustic-peaks.json', {
+      schemaVersion: 'presentation-vocal-audio-measurements-v001', source, sampleRate, sampleCount,
+      rows: peaks.map(({peakId, ...peak}) => ({id: peakId, ...peak, qualifies: true})),
+    });
+    const candidatesRef = await bound('audio-candidates.json', {
+      schemaVersion: 'presentation-vocal-audio-candidates-v001', source, sampleRate, sampleCount,
+      candidateCount: 1,
+      candidates: [{id: 'candidate-union', startSample: 380, endSampleExclusive: 4521,
+        constituentPeakIds: peaks.map(peak => peak.peakId)}],
+      measurementEvidence: [{path: peaksRef.path, sha256: peaksRef.fileSha256,
+        bytes: (await readFile(peaksRef.path)).length}],
+    });
+    await writeJson(files.decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v004',
+      pulseTimingEvidence: {schemaVersion: 'auto-presentation-pulse-timing-v001',
+        sourceRef, candidatesRef, peaksRef, sampleRate, sampleCount, candidates, peaks}});
+  } else await writeJson(files.decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v004',
+    purpose: 'CLI finite-operation fixture', pulseTimingEvidence: null});
   const {context} = await loadAutoPresentationContextV001(files);
   if (auto) await saveFixedAutoPresentationV001({...files, outputPath: files.autoProposalPath,
     proposal: {schemaVersion: 'auto-presentation-proposal-v001', context, targetCaptionIds: ['a', 'b', 'c'],
@@ -33,7 +68,7 @@ async function fixture(t, auto = true, selection = {role: 'Focus', presentation:
       exceptions: [{captionId: 'c', status: 'unresolved', reason: 'fixture: selection unresolved'}]}});
   const args = ['--baseline', files.baselinePath, '--decision-input', files.decisionInputPath,
     ...(auto ? ['--auto', files.autoProposalPath] : [])];
-  return {directory, files, baselinePlan, args};
+  return {directory, files, baselinePlan, args, evidenceFiles};
 }
 
 test('CLI accepts exact identity/text and time, and rejects ambiguous argument contracts', () => {
@@ -59,9 +94,9 @@ test('CLI accepts exact identity/text and time, and rejects ambiguous argument c
   ]) assert.throws(() => parseAutoPresentationEditArgsV001(args), TypeError);
 });
 
-test('CLI uses Color, Scale and provisional Panel names and rejects the replaced action names', () => {
+test('CLI uses Color, Scale and provisional Panel/Pulse names and rejects the replaced action names', () => {
   const required = ['--baseline', 'base', '--decision-input', 'input', '--caption-id', 'a', '--output', 'new'];
-  for (const action of ['color', 'scale', 'panel']) {
+  for (const action of ['color', 'scale', 'panel', 'pulse']) {
     assert.equal(parseAutoPresentationEditArgsV001([action, ...required]).action, action);
   }
   for (const action of ['focus', 'vocal']) {
@@ -70,8 +105,124 @@ test('CLI uses Color, Scale and provisional Panel names and rejects the replaced
   assert.match(AUTO_PRESENTATION_EDIT_HELP, /color\s+全文Color Accent/);
   assert.match(AUTO_PRESENTATION_EDIT_HELP, /scale\s+全文Scale Accent/);
   assert.match(AUTO_PRESENTATION_EDIT_HELP, /panel\s+全文Panel Accent（仮称）/);
+  assert.match(AUTO_PRESENTATION_EDIT_HELP, /pulse\s+全文Pulse Accent（仮称）: --peak/);
   assert.match(AUTO_PRESENTATION_EDIT_HELP, /partial\s+部分Color Accent/);
   assert.doesNotMatch(AUTO_PRESENTATION_EDIT_HELP, /Focus|Vocal accent|\bfocus\b|\bvocal\b/);
+});
+
+test('Pulse accepts one measured peak ID and keeps time as caption search only', () => {
+  const required = ['--baseline', 'base', '--decision-input', 'input', '--time', '1.2', '--output', 'new'];
+  const parsed = parseAutoPresentationEditArgsV001(['pulse', ...required, '--peak', 'peak-b']);
+  assert.equal(parsed.anchorPeakId, 'peak-b');
+  assert.equal(parsed.timeSeconds, 1.2);
+  // An omitted ID reaches the bound input so the CLI can display eligible IDs.
+  assert.equal(parseAutoPresentationEditArgsV001(['pulse', ...required]).anchorPeakId, undefined);
+  for (const action of ['show', 'normal', 'color', 'scale', 'panel', 'partial', 'reset']) {
+    const args = [action, '--baseline', 'base', '--decision-input', 'input', '--caption-id', 'a',
+      ...(action === 'show' ? [] : ['--output', 'new']),
+      ...(action === 'partial' ? ['--target', '語'] : []), '--peak', 'peak-b'];
+    assert.throws(() => parseAutoPresentationEditArgsV001(args), /--peak は pulse 専用/);
+  }
+  for (const extra of [
+    ['--peak', 'peak-a', '--peak', 'peak-b'], ['--target', '語'], ['--occurrence', '1'],
+    ['--start-frame', '10'], ['--end-frame', '20'], ['--scale', '2'], ['--easing', 'linear'],
+    ['--keyframes', '[]'], ['--position', '0,0'], ['--color', '#ffffff'], ['--filter', 'null'],
+  ]) assert.throws(() => parseAutoPresentationEditArgsV001(['pulse', ...required, ...extra]), TypeError);
+});
+
+test('Pulse lists eligible IDs and never chooses one or writes for a missing, foreign or unfittable peak', async t => {
+  const f = await fixture(t, true, undefined, true), before = await readdir(f.directory);
+  for (const extra of [[], ['--peak', 'unknown'], ['--peak', 'peak-b'],
+    ['--peak', 'peak-a-edge'], ['--peak', 'peak-a-end']]) {
+    const output = [];
+    await assert.rejects(runAutoPresentationEditV001(['pulse', ...f.args, '--caption-id', 'a',
+      ...extra, '--output', join(f.directory, 'not-created.json')], text => output.push(text)), /保存しませんでした/);
+    const shown = output.join('\n');
+    assert.match(shown, /ID: peak-a-first /);
+    assert.match(shown, /ID: peak-a-second /);
+    assert.doesNotMatch(shown, /ID: peak-b |ID: peak-a-edge |ID: peak-a-end /);
+    assert.deepEqual(await readdir(f.directory), before);
+  }
+  // Caption b has exactly one eligible peak; it is still never auto-selected.
+  const output = [];
+  await assert.rejects(runAutoPresentationEditV001(['pulse', ...f.args, '--caption-id', 'b',
+    '--output', join(f.directory, 'not-created.json')], text => output.push(text)), /自動選択せず/);
+  assert.match(output.join('\n'), /ID: peak-b /);
+  assert.deepEqual(await readdir(f.directory), before);
+});
+
+test('Pulse cannot be saved without bound acoustic evidence', async t => {
+  const f = await fixture(t), before = await readdir(f.directory), output = [];
+  await assert.rejects(runAutoPresentationEditV001(['pulse', ...f.args, '--caption-id', 'a',
+    '--peak', 'invented', '--output', join(f.directory, 'not-created.json')], text => output.push(text)), /保存しませんでした/);
+  assert.match(output.join('\n'), /適格なピークはありません/);
+  assert.deepEqual(await readdir(f.directory), before);
+});
+
+test('Pulse overrides preserve other captions and Reset restores the saved automatic peak exactly', async t => {
+  const savedSelection = {role: 'Pulse accent', presentation: 'provisional-pulse',
+    scope: 'whole-caption', anchorPeakId: 'peak-a-first'};
+  const f = await fixture(t, true, savedSelection, true);
+  const unchangedFiles = [...Object.values(f.files), ...f.evidenceFiles];
+  const sourceBytes = await Promise.all(unchangedFiles.map(p => readFile(p)));
+  const original = await loadAutoPresentationV001(f.files);
+  const originalResolved = resolveAutoPresentationV001({baselinePlan: original.baselinePlan, ...original.autoPresentation});
+  const otherRows = inspectAutoPresentationCaptionsV001(original).slice(1);
+  let current;
+  const operations = [
+    ['pulse', ['--peak', 'peak-a-second'], 'Pulse accent'],
+    ['color', [], 'Focus'], ['scale', [], 'Vocal accent'], ['panel', [], 'Panel accent'],
+    ['normal', [], 'Normal'], ['reset', [], 'Pulse accent'],
+  ];
+  for (const [index, [action, extra, expectedRole]] of operations.entries()) {
+    const outputPath = join(f.directory, `pulse-edit-${index}.json`), output = [];
+    const result = await runAutoPresentationEditV001([action, ...f.args,
+      ...(current ? ['--overrides', current] : []), '--time', '0.8', ...extra, '--output', outputPath], text => output.push(text));
+    const loaded = await loadAutoPresentationV001({...f.files, overridesPath: outputPath});
+    const rows = inspectAutoPresentationCaptionsV001(loaded);
+    const resolved = resolveAutoPresentationV001({baselinePlan: loaded.baselinePlan, ...loaded.autoPresentation});
+    assert.equal(result.after.effective.role, expectedRole);
+    assert.equal(result.after.automatic.anchorPeakId, 'peak-a-first');
+    assert.deepEqual(rows.slice(1), otherRows);
+    assert.deepEqual(resolved.plan.elements.slice(1), originalResolved.plan.elements.slice(1));
+    assert.doesNotMatch(output.join('\n'), /Focus|Vocal accent|Panel accent|Pulse accent/);
+    assert.match(output.join('\n'), /Pulse Accent（仮称）.*根拠ピーク: peak-a-first/);
+    if (action === 'pulse') {
+      assert.equal(result.after.effective.anchorPeakId, 'peak-a-second');
+      assert.equal(resolved.plan.elements[0].presentationPulse.anchorFrame, 18);
+      assert.deepEqual(loaded.autoPresentation.overrides.entries, [{captionId: 'a',
+        ...savedSelection, anchorPeakId: 'peak-a-second'}]);
+    }
+    if (action === 'reset') {
+      assert.equal(result.after.effective.anchorPeakId, 'peak-a-first');
+      assert.equal(result.after.hasOverride, false);
+      assert.deepEqual(loaded.autoPresentation.overrides.entries, []);
+      assert.deepEqual(resolved.plan, originalResolved.plan);
+    }
+    current = outputPath;
+  }
+  for (const [index, file] of unchangedFiles.entries()) assert.deepEqual(await readFile(file), sourceBytes[index]);
+});
+
+test('Pulse direct CLI prints eligible IDs on refusal and the selected peak after an explicit save', async t => {
+  const f = await fixture(t, true, undefined, true);
+  const script = new URL('./edit_auto_presentation_v001.mjs', import.meta.url).pathname;
+  const outputPath = join(f.directory, 'explicit-pulse.json');
+  await assert.rejects(exec(process.execPath, [script, 'pulse', ...f.args, '--caption-id', 'a', '--output', outputPath]), error => {
+    assert.equal(error.code, 1);
+    assert.match(error.stdout, /ID: peak-a-first /);
+    assert.match(error.stdout, /ID: peak-a-second /);
+    assert.match(error.stderr, /自動選択せず/);
+    return true;
+  });
+  await assert.rejects(readFile(outputPath), {code: 'ENOENT'});
+  const saved = await exec(process.execPath, [script, 'pulse', ...f.args, '--caption-id', 'a',
+    '--peak', 'peak-a-second', '--output', outputPath]);
+  assert.match(saved.stdout, /現在: Pulse Accent（仮称）.*根拠ピーク: peak-a-second/);
+  const before = await readFile(outputPath);
+  await assert.rejects(exec(process.execPath, [script, 'pulse', ...f.args, '--caption-id', 'a',
+    '--peak', 'peak-a-first', '--output', outputPath]), error => error.code === 1);
+  assert.deepEqual(await readFile(outputPath), before);
 });
 
 test('all three accents can be overridden and Normal or Reset preserves every saved automatic role', async t => {

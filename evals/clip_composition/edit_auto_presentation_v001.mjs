@@ -3,6 +3,7 @@ import {resolve} from 'node:path';
 import {loadAutoPresentationV001, saveAutoPresentationOverridesV001} from './presentation_auto_effects_io_v001.mjs';
 import {createAutoPresentationOverridesV001, editAutoPresentationOverrideV001,
   resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
+import {resolvePresentationPulseTimingV001} from './presentation_pulse_v001.mjs';
 
 const fail = message => { throw new TypeError(message); };
 const own = (value, key) => Object.hasOwn(value, key);
@@ -22,23 +23,27 @@ node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
   color    全文Color Accent
   scale    全文Scale Accent
   panel    全文Panel Accent（仮称）
+  pulse    全文Pulse Accent（仮称）: --peak <既存の音響ピークID>
   partial  部分Color Accent: --target <原文どおりの連続文字列> [--occurrence <1からの出現番号>]
   reset    この一件のoverrideを削除し、保存済み自動案へ戻す
 
 修正には検索条件と --output <新しい人修正ファイル> が必要です。
 複数候補では候補一覧を表示して停止します。表示されたIDで再指定してください。
 既存ファイルは上書きしません。保存後は --overrides に新しいファイルを渡してください。
---text / --target は文字の正規化・近似一致を行いません。時刻の終了端は対象外です。`;
+--text / --target は文字の正規化・近似一致を行いません。時刻の終了端は対象外です。
+pulse の --peak が未指定・不適格なら、使えるIDを表示して保存せず停止します。
+--time は字幕検索専用です。Pulseの時刻・倍率・長さは指定できません。`;
 
 export function parseAutoPresentationEditArgsV001(argv) {
   if (argv.length === 1 && ['--help', '-h'].includes(argv[0])) return {help: true};
   const [action, ...args] = argv;
-  if (!['show', 'normal', 'color', 'scale', 'panel', 'partial', 'reset'].includes(action)) fail('操作は show / normal / color / scale / panel / partial / reset から指定してください。');
+  if (!['show', 'normal', 'color', 'scale', 'panel', 'pulse', 'partial', 'reset'].includes(action)) fail('操作は show / normal / color / scale / panel / pulse / partial / reset から指定してください。');
   const names = new Map([
     ['--baseline', 'baselinePath'], ['--decision-input', 'decisionInputPath'],
     ['--auto', 'autoProposalPath'], ['--overrides', 'overridesPath'], ['--output', 'outputPath'],
     ['--caption-id', 'captionId'], ['--time', 'time'], ['--text', 'text'],
     ['--target', 'targetText'], ['--occurrence', 'occurrence'],
+    ['--peak', 'anchorPeakId'],
   ]);
   const parsed = {action};
   for (let index = 0; index < args.length; index += 2) {
@@ -55,6 +60,7 @@ export function parseAutoPresentationEditArgsV001(argv) {
   if (action === 'show' && parsed.outputPath) fail('show は保存しません。--output を外してください。');
   if (action === 'partial' && !own(parsed, 'targetText')) fail('部分Color Accentには --target が必要です。');
   if (action !== 'partial' && (own(parsed, 'targetText') || own(parsed, 'occurrence'))) fail('--target と --occurrence は partial 専用です。');
+  if (action !== 'pulse' && own(parsed, 'anchorPeakId')) fail('--peak は pulse 専用です。');
   if (own(parsed, 'occurrence')) {
     if (!/^[1-9][0-9]*$/.test(parsed.occurrence) || !Number.isSafeInteger(Number(parsed.occurrence))) fail('出現番号は1以上の整数を指定してください。');
     parsed.occurrence = Number(parsed.occurrence);
@@ -78,6 +84,8 @@ const selectionDescription = selection => selection?.role === 'Vocal accent'
   ? {role: 'Vocal accent', scope: 'whole-caption'}
   : selection?.role === 'Panel accent'
   ? {role: 'Panel accent', scope: 'whole-caption'}
+  : selection?.role === 'Pulse accent'
+  ? {role: 'Pulse accent', scope: 'whole-caption', anchorPeakId: selection.anchorPeakId}
   : selection?.role === 'Focus'
   ? {role: 'Focus', scope: selection.scope,
     ...(selection.scope === 'partial-caption' ? {targetText: selection.targetText,
@@ -121,6 +129,7 @@ export function inspectAutoPresentationCaptionsV001({baselinePlan, autoPresentat
 const describe = selection => selection.role === 'Normal' ? 'Normal'
   : selection.role === 'Vocal accent' ? 'Scale Accent / whole（全文）'
   : selection.role === 'Panel accent' ? 'Panel Accent（仮称） / whole（全文）'
+  : selection.role === 'Pulse accent' ? `Pulse Accent（仮称） / whole（全文） / 根拠ピーク: ${selection.anchorPeakId}`
   : selection.scope === 'whole-caption' ? 'Color Accent / whole（全文）'
   : `Color Accent / partial（部分）${JSON.stringify(selection.targetText)} / occurrence=${selection.occurrence ?? '一意一致'}`;
 
@@ -134,6 +143,26 @@ export function formatAutoPresentationCaptionRowsV001(rows) {
     `現在: ${describe(row.effective)} / 由来: ${row.origin}`,
     `override: ${row.hasOverride ? 'あり' : 'なし'} / Reset: ${row.canReset ? '可能' : '不要（overrideなし）'}`,
   ].join('\n')).join('\n\n');
+}
+
+/** Only already-bound measured peaks can be chosen; never infer one from text or a query time. */
+function eligiblePulsePeaks({baselinePlan, autoPresentation, captionId}) {
+  const evidence = autoPresentation.context.pulseTimingEvidence;
+  if (evidence === null) return [];
+  const element = baselinePlan.elements.find(row => row.instructionId === captionId);
+  return evidence.peaks.flatMap(peak => {
+    const candidateIds = evidence.candidates.filter(candidate => candidate.peakIds.includes(peak.peakId))
+      .map(candidate => candidate.candidateId);
+    if (candidateIds.length === 0) return [];
+    try {
+      resolvePresentationPulseTimingV001({element, canvas: baselinePlan.canvas,
+        peakSample: peak.peakSample, sampleRate: evidence.sampleRate});
+    } catch (error) {
+      if (!(error instanceof TypeError)) throw error;
+      return [];
+    }
+    return [{peakId: peak.peakId, seconds: peak.peakSample / evidence.sampleRate, candidateIds}];
+  });
 }
 
 /** Existing validated IO owns binding checks and exclusive, immutable output creation. */
@@ -151,9 +180,18 @@ export async function runAutoPresentationEditV001(argv, write = text => process.
   if (rows.length !== 1) fail(rows.length === 0 ? '対象がありません。修正を保存しませんでした。'
     : '候補が複数あります。表示字幕IDを指定してください。修正を保存しませんでした。');
   const {baselinePlan, autoPresentation} = loaded;
+  if (parsed.action === 'pulse') {
+    const peaks = eligiblePulsePeaks({...loaded, captionId: rows[0].captionId});
+    write(`\nこの字幕でPulse Accent（仮称）に使える音響ピーク:\n${peaks.length === 0 ? '適格なピークはありません。'
+      : peaks.map(peak => `ID: ${peak.peakId} / 時刻: ${peak.seconds}秒 / 音声候補: ${peak.candidateIds.join(', ')}`).join('\n')}`);
+    if (!own(parsed, 'anchorPeakId')) fail('表示した適格IDを --peak で指定してください。自動選択せず、修正を保存しませんでした。');
+    if (!peaks.some(peak => peak.peakId === parsed.anchorPeakId)) fail('指定された --peak はこの字幕で使用できません。表示した適格IDを指定してください。修正を保存しませんでした。');
+  }
   const previous = autoPresentation.overrides ?? createAutoPresentationOverridesV001({baselinePlan, ...autoPresentation});
   const selection = parsed.action === 'normal' ? 'Normal' : parsed.action === 'reset' ? 'Reset'
     : parsed.action === 'scale' ? scaleSelection : parsed.action === 'panel' ? panelSelection
+    : parsed.action === 'pulse' ? {role: 'Pulse accent', presentation: 'provisional-pulse',
+      scope: 'whole-caption', anchorPeakId: parsed.anchorPeakId}
     : parsed.action === 'color' ? colorSelection : {...colorSelection, scope: 'partial-caption', targetText: parsed.targetText,
       ...(parsed.occurrence === undefined ? {} : {occurrence: parsed.occurrence})};
   const overrides = editAutoPresentationOverrideV001({baselinePlan, ...autoPresentation,

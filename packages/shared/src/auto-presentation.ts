@@ -7,7 +7,18 @@ export interface AutoPresentationFileRef {
 export interface AutoPresentationContext {
   baselineRef: AutoPresentationFileRef & {canonicalSha256: string};
   decisionInputRef: AutoPresentationFileRef;
-  renderingRulesRef: {version: 'auto-presentation-rules-v005'; contentSha256: string};
+  renderingRulesRef: {version: 'auto-presentation-rules-v006'; contentSha256: string};
+  pulseTimingEvidence: AutoPresentationPulseTimingEvidence | null;
+}
+export interface AutoPresentationPulseTimingEvidence {
+  schemaVersion: 'auto-presentation-pulse-timing-v001';
+  sourceRef: AutoPresentationFileRef;
+  candidatesRef: AutoPresentationFileRef;
+  peaksRef: AutoPresentationFileRef;
+  sampleRate: number;
+  sampleCount: number;
+  candidates: Array<{candidateId: string; peakIds: string[]}>;
+  peaks: Array<{peakId: string; startSample: number; endSampleExclusive: number; peakSample: number}>;
 }
 /** Internal saved token for Color Accent. Native color glyphs retain their original colors. */
 interface AutoPresentationFocusBase {
@@ -37,7 +48,14 @@ export interface AutoPresentationPanel {
   presentation: 'provisional-panel';
   scope: 'whole-caption';
 }
-export type AutoPresentationEffect = AutoPresentationFocus | AutoPresentationVocal | AutoPresentationPanel;
+/** One provisional finite pulse anchored to an existing measured peak. */
+export interface AutoPresentationPulse {
+  role: 'Pulse accent';
+  presentation: 'provisional-pulse';
+  scope: 'whole-caption';
+  anchorPeakId: string;
+}
+export type AutoPresentationEffect = AutoPresentationFocus | AutoPresentationVocal | AutoPresentationPanel | AutoPresentationPulse;
 export type AutoPresentationSelection = {role: 'Normal'} | AutoPresentationEffect;
 /** Derived from the fixed caption at resolution time; never accepted as a saved selector. */
 export interface AutoPresentationCanonicalRange {
@@ -83,7 +101,7 @@ export interface AutoPresentationResolution {
   captions: Array<{
     captionId: string;
     origin: 'baseline' | 'automatic' | 'human';
-    role: 'Normal' | 'Focus' | 'Vocal accent' | 'Panel accent';
+    role: 'Normal' | 'Focus' | 'Vocal accent' | 'Panel accent' | 'Pulse accent';
     automaticStatus: 'not-processed' | 'normal' | 'selected' | 'unrepresentable' | 'unresolved';
     /** Null means an unresolved, unrepresentable, or unprocessed automatic judgment. */
     automaticSelection: AutoPresentationSelection | null;

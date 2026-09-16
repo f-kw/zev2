@@ -4,11 +4,13 @@ import {mkdtemp, readFile, readdir, rm, writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import {executePresentationFocusSelectionV003, buildPresentationFocusSelectionInputV003, loadBoundAudioEvidenceV003}
+import {executePresentationFocusSelectionV004, buildPresentationFocusSelectionInputV004, loadBoundAudioEvidenceV004}
   from './presentation_focus_selection_v001.mts';
 import {loadAutoPresentationV001} from './presentation_auto_effects_io_v001.mjs';
 import {resolveAutoPresentationV001, createAutoPresentationOverridesV001, editAutoPresentationOverrideV001}
   from './presentation_auto_effects_v001.mjs';
+import {assertPresentationFocusSelectionInputV004, assertPresentationFocusSelectionCoverageV004,
+  audioPeakInsideCaptionV004} from '../../runner/src/skills/presentation-focus-selection-v001.js';
 const json = (v: any) => `${JSON.stringify(v, null, 2)}\n`;
 const sha = (v: string | Buffer) => createHash('sha256').update(v).digest('hex');
 const read = async (p: string) => JSON.parse(await readFile(p, 'utf8'));
@@ -102,14 +104,39 @@ async function fixture(t: any) {
         {captionId: 'c-2', role: 'Scale Accent', basis: 'vocal-energy-supported', evidencePeakIds: ['p-2']}]},
       {candidateId: 'a-2', decision: 'unresolved', reason: '音声認識が空で声の変化と断定できない', targets: []},
       {candidateId: 'a-3', decision: 'unrepresentable', reason: '字幕のない区間なので既存字幕に演出を付けられない', targets: []}]};
-  const response = (request: any) => ({schemaVersion: 'presentation-focus-selection-response-v003',
+  const response = (request: any) => ({schemaVersion: 'presentation-focus-selection-response-v004',
     requestFileSha256: sha(json(request)), answer: structuredClone(answer), judgmentNote: 'Explicit synthetic test only.'});
   return {dir, sourcePath, pcmPath, asrPath, plan, context, audio, asr, baselinePath, contextPath, audioCandidatesPath, answer, response};
 }
 
+/** A distinct native fixture for the finite Pulse profile; existing fixtures retain their original values. */
+async function pulseFixture(t: any) {
+  const f = await fixture(t);
+  for (const e of f.plan.elements) {
+    Object.assign(e, {displayFrameCount: e.endFrameExclusive - e.startFrame});
+    e.visualState.textStyle.fontSizePx = 96;
+    Object.assign(e.visualState, {position: {preset: 'bottom-center'}});
+  }
+  await save(f.baselinePath, f.plan);
+  const peaksPath = path.join(f.dir, 'acoustic-peaks.json'), measurement = await read(peaksPath);
+  // The first basin overlaps caption 2, but its actual peak stays in caption 1.
+  measurement.rows[0].endSampleExclusive = 3500;
+  const later = {...measurement.rows[1], id: 'p-later', startSample: 4200,
+    endSampleExclusive: 4800, peakSample: 4500, plateauStartSample: 4500, plateauEndSampleExclusive: 4520};
+  measurement.rows.splice(2, 0, later);
+  const changed = await save(peaksPath, measurement);
+  f.audio.measurementEvidence = f.audio.measurementEvidence.map(r => r.path === peaksPath ? changed : r);
+  f.audio.candidates[0].constituentPeakIds.push('p-later');
+  await save(f.audioCandidatesPath, f.audio);
+  Object.assign(f.answer.decisions[1], {role: 'Pulse Accent',
+    selection: {scope: 'whole-caption', anchorPeakId: 'p-2'}});
+  Object.assign(f.answer.candidateDecisions[0].targets[1], {role: 'Pulse Accent', evidencePeakIds: ['p-2', 'p-later']});
+  return f;
+}
+
 test('independent whole-audio evidence binds all captions/candidates and saves one role per caption', async t => {
   const f = await fixture(t), outputDirectory = path.join(f.dir, 'attempt');
-  const result = await executePresentationFocusSelectionV003({...f, outputDirectory, judge: async request => {
+  const result = await executePresentationFocusSelectionV004({...f, outputDirectory, judge: async request => {
     assert.deepEqual(request.input.captions.map((c: any) => c.text), f.plan.elements.map(c => c.text));
     assert.deepEqual(request.input.audioCandidates.map((c: any) => c.captionIds), [['c-1', 'c-2'], ['c-4'], []]);
     const first = request.input.audioCandidates[0];
@@ -121,7 +148,7 @@ test('independent whole-audio evidence binds all captions/candidates and saves o
     return f.response(request);
   }});
   assert.deepEqual(result.counts, {normal: 0, selected: 2, unrepresentable: 1, unresolved: 1});
-  assert.deepEqual(result.selectedRoles, {'Color Accent': 1, 'Scale Accent': 1, 'Panel Accent': 0});
+  assert.deepEqual(result.selectedRoles, {'Color Accent': 1, 'Scale Accent': 1, 'Panel Accent': 0, 'Pulse Accent': 0});
   assert.deepEqual(result.candidateCounts, {selected: 1, discarded: 0, unrepresentable: 1, unresolved: 1});
   assert.equal(result.automaticSelectionQuality, 'not-evaluated');
   const loaded = await loadAutoPresentationV001({baselinePath: f.baselinePath,
@@ -140,21 +167,21 @@ test('independent whole-audio evidence binds all captions/candidates and saves o
   const bothReset = editAutoPresentationOverrideV001({...args, overrides: focusReset, captionId: 'c-2', selection: 'Reset'});
   assert.deepEqual(resolveAutoPresentationV001({...args, overrides: bothReset}).plan, automatic.plan);
   assert.equal(await readFile(f.baselinePath, 'utf8'), json(f.plan));
-  await assert.rejects(executePresentationFocusSelectionV003({...f, outputDirectory, judge: async () => {throw Error('must not run');}}), {code: 'EEXIST'});
+  await assert.rejects(executePresentationFocusSelectionV004({...f, outputDirectory, judge: async () => {throw Error('must not run');}}), {code: 'EEXIST'});
 });
 
 test('three public roles map only to finite saved presets and all return to normal or the unchanged automatic plan', async t => {
   const f = await fixture(t), outputDirectory = path.join(f.dir, 'attempt');
-  const result = await executePresentationFocusSelectionV003({...f, outputDirectory, judge: async request => {
-    assert.equal(request.schemaVersion, 'presentation-focus-selection-request-v003');
-    assert.equal(request.input.schemaVersion, 'presentation-focus-selection-input-v003');
+  const result = await executePresentationFocusSelectionV004({...f, outputDirectory, judge: async request => {
+    assert.equal(request.schemaVersion, 'presentation-focus-selection-request-v004');
+    assert.equal(request.input.schemaVersion, 'presentation-focus-selection-input-v004');
     const r = f.response(request);
     r.answer.decisions[2] = {captionId: 'c-3', role: 'Panel Accent', decision: 'selected',
       reason: '要点を字幕全文のまとまりとして示す構造検証fixture', evidenceCaptionIds: ['c-1', 'c-3'],
       evidenceAudioCandidateIds: [], additionalObservation: null, selection: {scope: 'whole-caption'}};
     return r;
   }});
-  assert.deepEqual(result.selectedRoles, {'Color Accent': 1, 'Scale Accent': 1, 'Panel Accent': 1});
+  assert.deepEqual(result.selectedRoles, {'Color Accent': 1, 'Scale Accent': 1, 'Panel Accent': 1, 'Pulse Accent': 0});
   const fixedPath = path.join(outputDirectory, 'fixed-auto.json'), fixedBefore = await readFile(fixedPath, 'utf8');
   const loaded = await loadAutoPresentationV001({baselinePath: f.baselinePath,
     decisionInputPath: path.join(outputDirectory, 'decision-input.json'), autoProposalPath: fixedPath});
@@ -183,7 +210,7 @@ test('three public roles map only to finite saved presets and all return to norm
 
 test('Panel Accent can use a matching audio candidate for meaning without requiring a vocal peak', async t => {
   const f = await fixture(t), outputDirectory = path.join(f.dir, 'attempt');
-  const result = await executePresentationFocusSelectionV003({...f, outputDirectory, judge: async request => {
+  const result = await executePresentationFocusSelectionV004({...f, outputDirectory, judge: async request => {
     const r = f.response(request);
     r.answer.decisions[3] = {captionId: 'c-4', role: 'Panel Accent', decision: 'selected',
       reason: '候補に対応する字幕の要点をまとめる構造検証fixture', evidenceCaptionIds: ['c-4'],
@@ -194,6 +221,138 @@ test('Panel Accent can use a matching audio candidate for meaning without requir
   }});
   assert.equal(result.selectedRoles['Panel Accent'], 1);
   assert.equal(result.candidateCounts.selected, 2);
+});
+
+test('Pulse binds one eligible constituent peak and preserves it through Normal and Reset with all four roles', async t => {
+  const f = await pulseFixture(t), outputDirectory = path.join(f.dir, 'attempt');
+  Object.assign(f.answer.decisions[2], {role: 'Panel Accent', decision: 'selected',
+    selection: {scope: 'whole-caption'}});
+  Object.assign(f.answer.decisions[3], {decision: 'selected', additionalObservation: null,
+    selection: {scope: 'whole-caption'}});
+  Object.assign(f.answer.candidateDecisions[1], {decision: 'selected', targets: [
+    {captionId: 'c-4', role: 'Scale Accent', basis: 'vocal-energy-supported', evidencePeakIds: ['p-3']} ]});
+  const result = await executePresentationFocusSelectionV004({...f, outputDirectory, judge: async request => {
+    assert.deepEqual(request.input.captions.map((c: any) => c.eligiblePulsePeakIds), [['p-1'], ['p-2', 'p-later'], [], ['p-3']]);
+    assert.equal(request.input.audioCandidates[0].peakSample, 1500);
+    assert.equal(request.input.audioCandidates[0].peaks.find((p: any) => p.id === 'p-2').peakSample, 3500);
+    assert.deepEqual(request.input.observations.filter((o: any) => o.kind === 'pulse-unrepresentable').flatMap((o: any) => o.captionIds), ['c-3']);
+    return f.response(request);
+  }});
+  assert.deepEqual(result.selectedRoles, {'Color Accent': 1, 'Scale Accent': 1, 'Panel Accent': 1, 'Pulse Accent': 1});
+  assert.equal(result.automaticSelectionQuality, 'not-evaluated');
+  const fixedPath = path.join(outputDirectory, 'fixed-auto.json'), decisionInputPath = path.join(outputDirectory, 'decision-input.json');
+  const bytesBefore = await Promise.all([f.baselinePath, fixedPath, decisionInputPath].map(p => readFile(p, 'utf8')));
+  const saved = await read(decisionInputPath), table = saved.pulseTimingEvidence;
+  assert.equal(saved.schemaVersion, 'presentation-focus-decision-input-v004');
+  assert.deepEqual(table.candidates[0], {candidateId: 'a-1', peakIds: ['p-1', 'p-2', 'p-later']});
+  assert.deepEqual(table.peaks.find((p: any) => p.peakId === 'p-2'), {peakId: 'p-2', startSample: 2000, endSampleExclusive: 5000, peakSample: 3500});
+  assert.equal(table.peaksRef.fileSha256, sha(await readFile(path.join(f.dir, 'acoustic-peaks.json'))));
+  assert.equal(table.candidatesRef.fileSha256, sha(await readFile(f.audioCandidatesPath)));
+  assert.equal(table.sourceRef.fileSha256, sha(await readFile(f.sourcePath)));
+  assert.equal(Object.hasOwn(saved.answer, 'pulseTimingEvidence'), false);
+  const loaded = await loadAutoPresentationV001({baselinePath: f.baselinePath, decisionInputPath, autoProposalPath: fixedPath});
+  const args = {baselinePlan: loaded.baselinePlan, ...loaded.autoPresentation};
+  const effect = args.autoProposal.proposal.effects.find((e: any) => e.captionId === 'c-2');
+  assert.deepEqual(effect, {captionId: 'c-2', role: 'Pulse accent', presentation: 'provisional-pulse', scope: 'whole-caption', anchorPeakId: 'p-2'});
+  const automatic = resolveAutoPresentationV001(args), pulsed = automatic.plan.elements[1];
+  assert.deepEqual(pulsed.presentationPulse, {presentation: 'provisional-pulse', anchorPeakId: 'p-2', anchorFrame: 105});
+  assert.deepEqual(pulsed.visualState, f.plan.elements[1].visualState);
+  for (const key of ['text', 'indexedLines', 'startFrame', 'endFrameExclusive', 'displayFrameCount', 'sourceMapping'])
+    assert.deepEqual(automatic.plan.elements.map((e: any) => e[key]), f.plan.elements.map((e: any) => (e as any)[key]));
+  let overrides = createAutoPresentationOverridesV001(args);
+  for (const captionId of ['c-1', 'c-2', 'c-3', 'c-4'])
+    overrides = editAutoPresentationOverrideV001({...args, overrides, captionId, selection: 'Normal'});
+  assert.deepEqual(resolveAutoPresentationV001({...args, overrides}).plan, f.plan);
+  for (const captionId of ['c-1', 'c-2', 'c-3', 'c-4'])
+    overrides = editAutoPresentationOverrideV001({...args, overrides, captionId, selection: 'Reset'});
+  assert.deepEqual(resolveAutoPresentationV001({...args, overrides}).plan, automatic.plan);
+  assert.deepEqual(await Promise.all([f.baselinePath, fixedPath, decisionInputPath].map(p => readFile(p, 'utf8'))), bytesBefore);
+});
+
+for (const [name, mutate] of Object.entries({
+  missingAnchor: (r: any) => delete r.answer.decisions[1].selection.anchorPeakId,
+  multipleAnchors: (r: any) => r.answer.decisions[1].selection.anchorPeakId = ['p-2', 'p-later'],
+  alternateAnchorArray: (r: any) => r.answer.decisions[1].selection.anchorPeakIds = ['p-2'],
+  inventedAnchor: (r: any) => r.answer.decisions[1].selection.anchorPeakId = 'unknown',
+  representativeOutsideCaption: (r: any) => r.answer.decisions[1].selection.anchorPeakId = 'p-1',
+  uncitedAnchor: (r: any) => r.answer.candidateDecisions[0].targets[1].evidencePeakIds = ['p-later'],
+  peakFromDifferentCandidate: (r: any) => r.answer.candidateDecisions[0].targets[1].evidencePeakIds = ['p-2', 'p-3'],
+  overlappingBasinOutsidePeak: (r: any) => r.answer.candidateDecisions[0].targets[1].evidencePeakIds.push('p-1'),
+  noAudio: (r: any) => r.answer.decisions[1].evidenceAudioCandidateIds = [],
+  noPeak: (r: any) => r.answer.candidateDecisions[0].targets[1].evidencePeakIds = [],
+  meaningOnly: (r: any) => r.answer.candidateDecisions[0].targets[1].basis = 'meaning-supported',
+  partialCaption: (r: any) => {r.answer.decisions[1].selection.scope = 'partial-caption'; r.answer.decisions[1].selection.targetText = 'あああ';},
+  internalRole: (r: any) => r.answer.decisions[1].role = 'Pulse accent',
+  arrayRole: (r: any) => r.answer.decisions[1].role = ['Pulse Accent', 'Scale Accent'],
+  freeSize: (r: any) => r.answer.decisions[1].selection.fontSizePx = 160,
+  freeTime: (r: any) => r.answer.decisions[1].selection.anchorSec = 3.5,
+  freeFrame: (r: any) => r.answer.decisions[1].selection.anchorFrame = 105,
+  freeEasing: (r: any) => r.answer.decisions[1].selection.easing = 'ease-in-out',
+  freeFilter: (r: any) => r.answer.decisions[1].selection.filter = 'scale=2*iw:2*ih',
+  freeKeyframes: (r: any) => r.answer.decisions[1].selection.keyframes = [96, 128, 96],
+  decisionTimingTable: (r: any) => r.answer.pulseTimingEvidence = {},
+})) test(`invalid Pulse ${name} never creates a fixed automatic proposal`, async t => {
+  const f = await pulseFixture(t), outputDirectory = path.join(f.dir, 'attempt');
+  await assert.rejects(executePresentationFocusSelectionV004({...f, outputDirectory, judge: async request => {
+    const r = f.response(request); mutate(r); return r;
+  }}));
+  assert.equal((await readdir(outputDirectory)).includes('fixed-auto.json'), false);
+  assert.equal((await read(path.join(outputDirectory, 'rejection.json'))).status, 'rejected');
+  assert.equal(await readFile(f.baselinePath, 'utf8'), json(f.plan));
+});
+
+test('Pulse capability comes from fixed timing and layout while supporting evidence may use another in-caption peak', async t => {
+  const f = await pulseFixture(t), audio = await loadBoundAudioEvidenceV004(f.audioCandidatesPath);
+  const input = buildPresentationFocusSelectionInputV004(f.plan, f.context, audio);
+  assertPresentationFocusSelectionCoverageV004(input, f.answer);
+  // A near-end supporting peak remains legitimate evidence but cannot itself fire the complete excursion.
+  const nearEnd = structuredClone(audio), p = nearEnd.candidates[0].peaks.find((p: any) => p.id === 'p-later');
+  nearEnd.candidates[0].endSampleExclusive = 6000; nearEnd.candidates[0].endSec = 6;
+  nearEnd.candidates[0].metrics.durationSec = 5;
+  p.startSample = 5800; p.endSampleExclusive = 6000; p.peakSample = 5900;
+  p.plateauStartSample = 5900; p.plateauEndSampleExclusive = 5920;
+  p.voiceAtPeak = {startSample: 5632, endSampleExclusive: 6144, voiceProbability: 0.9, modelPaddingSamples: 0};
+  const limited = buildPresentationFocusSelectionInputV004(f.plan, f.context, nearEnd);
+  assert.deepEqual(limited.captions[1].eligiblePulsePeakIds, ['p-2']);
+  assertPresentationFocusSelectionCoverageV004(limited, f.answer);
+  const wrongAnchor = structuredClone(f.answer);
+  Object.assign(wrongAnchor.decisions[1].selection!, {anchorPeakId: 'p-later'});
+  assert.throws(() => assertPresentationFocusSelectionCoverageV004(limited, wrongAnchor), /PULSE_RENDERING_UNREPRESENTABLE/);
+  const blocked = structuredClone(f.context);
+  (blocked.observations as any[]).push({observationId: 'pulse-layout', kind: 'pulse-unrepresentable',
+    captionIds: ['c-2'], description: '有限三状態の配置が元のアンカーを保持できない'});
+  const blockedInput = buildPresentationFocusSelectionInputV004(f.plan, blocked, audio);
+  assert.deepEqual(blockedInput.captions[1].eligiblePulsePeakIds, []);
+  assert.throws(() => assertPresentationFocusSelectionCoverageV004(blockedInput, f.answer), /PULSE_RENDERING_UNREPRESENTABLE/);
+  const scale = structuredClone(f.answer);
+  Object.assign(scale.decisions[1], {role: 'Scale Accent', selection: {scope: 'whole-caption'}});
+  scale.candidateDecisions[0].targets[1].role = 'Scale Accent';
+  assertPresentationFocusSelectionCoverageV004(blockedInput, scale);
+});
+
+test('Pulse input rejects invented, duplicate, reordered and conflicting eligible peak declarations', async t => {
+  const f = await pulseFixture(t), audio = await loadBoundAudioEvidenceV004(f.audioCandidatesPath);
+  const input = buildPresentationFocusSelectionInputV004(f.plan, f.context, audio);
+  for (const mutate of [
+    (v: any) => v.captions[1].eligiblePulsePeakIds.push('unknown'),
+    (v: any) => v.captions[1].eligiblePulsePeakIds.push('p-2'),
+    (v: any) => v.captions[1].eligiblePulsePeakIds.reverse(),
+    (v: any) => v.captions[1].eligiblePulsePeakIds.unshift('p-1'),
+    (v: any) => v.captions[1].eligiblePulsePeakIds = [],
+    (v: any) => v.observations.push({observationId: 'blocked', kind: 'pulse-unrepresentable', captionIds: ['c-2'], description: 'blocked'}),
+    (v: any) => v.schemaVersion = 'presentation-focus-selection-input-v003',
+  ]) {
+    const invalid = structuredClone(input); mutate(invalid);
+    assert.throws(() => assertPresentationFocusSelectionInputV004(invalid));
+  }
+});
+
+test('Pulse uses the exact peak point with an inclusive start and exclusive end', () => {
+  const caption = {startFrame: 90, endFrameExclusive: 180};
+  assert.equal(audioPeakInsideCaptionV004(3000, caption, 1000, 30), true);
+  assert.equal(audioPeakInsideCaptionV004(5999, caption, 1000, 30), true);
+  assert.equal(audioPeakInsideCaptionV004(6000, caption, 1000, 30), false);
+  assert.equal(audioPeakInsideCaptionV004(2999, caption, 1000, 30), false);
 });
 
 for (const [name, mutate] of Object.entries({
@@ -230,6 +389,7 @@ for (const [name, mutate] of Object.entries({
   oldRequest: (r: any) => r.requestFileSha256 = '0'.repeat(64),
   oldSchema: (r: any) => r.schemaVersion = 'presentation-focus-selection-response-v001',
   previousSchema: (r: any) => r.schemaVersion = 'presentation-focus-selection-response-v002',
+  panelOnlySchema: (r: any) => r.schemaVersion = 'presentation-focus-selection-response-v003',
   abstained: (r: any) => r.answer = {status: 'abstained', reason: '入力が不十分'},
   nearestCaptionForNoCaptionAudio: (r: any) => {
     r.answer.decisions[3] = {captionId: 'c-4', role: 'Scale Accent', decision: 'selected', reason: '近いから',
@@ -239,7 +399,7 @@ for (const [name, mutate] of Object.entries({
   },
 })) test(`invalid ${name} never creates a fixed automatic proposal`, async t => {
   const f = await fixture(t), outputDirectory = path.join(f.dir, 'attempt');
-  await assert.rejects(executePresentationFocusSelectionV003({...f, outputDirectory, judge: async request => {
+  await assert.rejects(executePresentationFocusSelectionV004({...f, outputDirectory, judge: async request => {
     const r = f.response(request); mutate(r); return r;
   }}));
   assert.equal((await readdir(outputDirectory)).includes('fixed-auto.json'), false);
@@ -250,7 +410,7 @@ for (const [name, mutate] of Object.entries({
 for (const target of ['baselinePath', 'contextPath', 'audioCandidatesPath', 'asrPath', 'sourcePath', 'pcmPath'] as const)
   test(`changed ${target} during judgment cannot be rebound`, async t => {
     const f = await fixture(t), outputDirectory = path.join(f.dir, 'attempt');
-    await assert.rejects(executePresentationFocusSelectionV003({...f, outputDirectory, judge: async request => {
+    await assert.rejects(executePresentationFocusSelectionV004({...f, outputDirectory, judge: async request => {
       await writeFile(f[target], '{}\n'); return f.response(request);
     }}), /SOURCE_CHANGED/);
     assert.equal((await readdir(outputDirectory)).includes('fixed-auto.json'), false);
@@ -258,7 +418,7 @@ for (const target of ['baselinePath', 'contextPath', 'audioCandidatesPath', 'asr
 
 test('completed all-Normal and all-discarded is structural success without a quality claim', async t => {
   const f = await fixture(t), outputDirectory = path.join(f.dir, 'attempt');
-  const result = await executePresentationFocusSelectionV003({...f, outputDirectory, judge: async request => {
+  const result = await executePresentationFocusSelectionV004({...f, outputDirectory, judge: async request => {
     const r = f.response(request); r.answer.decisions = r.answer.decisions.map((d: any) => ({
       captionId: d.captionId, role: 'Normal', decision: 'normal', reason: '技術fixtureの通常指定',
       evidenceCaptionIds: [d.captionId], evidenceAudioCandidateIds: [], additionalObservation: null}));
@@ -271,7 +431,7 @@ test('completed all-Normal and all-discarded is structural success without a qua
 
 test('the judgment callback cannot change the saved request and rebind its response', async t => {
   const f = await fixture(t), outputDirectory = path.join(f.dir, 'attempt');
-  await assert.rejects(executePresentationFocusSelectionV003({...f, outputDirectory, judge: async request => {
+  await assert.rejects(executePresentationFocusSelectionV004({...f, outputDirectory, judge: async request => {
     request.input.captions[0].text = '条件は省略してよい'; request.inputCanonicalSha256 = '0'.repeat(64);
     return f.response(request);
   }}), /RESPONSE_BINDING_CHANGED/);
@@ -281,24 +441,24 @@ test('the judgment callback cannot change the saved request and rebind its respo
 
 test('the saved request bytes cannot change while an unchanged request is answered', async t => {
   const f = await fixture(t), outputDirectory = path.join(f.dir, 'attempt');
-  await assert.rejects(executePresentationFocusSelectionV003({...f, outputDirectory, judge: async request => {
+  await assert.rejects(executePresentationFocusSelectionV004({...f, outputDirectory, judge: async request => {
     await writeFile(path.join(outputDirectory, 'request.json'), '{}\n'); return f.response(request);
   }}), /SOURCE_CHANGED/);
   assert.equal((await readdir(outputDirectory)).includes('fixed-auto.json'), false);
 });
 
 test('layout capability, context membership, exact audio binding and original baseline remain mandatory', async t => {
-  const f = await fixture(t), audio = await loadBoundAudioEvidenceV003(f.audioCandidatesPath);
+  const f = await fixture(t), audio = await loadBoundAudioEvidenceV004(f.audioCandidatesPath);
   f.context.captionContextIds.reverse();
-  assert.throws(() => buildPresentationFocusSelectionInputV003(f.plan, f.context, audio), /MEMBERSHIP_CHANGED/);
+  assert.throws(() => buildPresentationFocusSelectionInputV004(f.plan, f.context, audio), /MEMBERSHIP_CHANGED/);
   f.context.captionContextIds.reverse();
   const wrong = structuredClone(f.context); wrong.digestAudioSourceRef.fileSha256 = '0'.repeat(64);
-  assert.throws(() => buildPresentationFocusSelectionInputV003(f.plan, wrong, audio), /DIGEST_AUDIO_SOURCE_MISMATCH/);
+  assert.throws(() => buildPresentationFocusSelectionInputV004(f.plan, wrong, audio), /DIGEST_AUDIO_SOURCE_MISMATCH/);
   (f.plan.elements[0] as any).presentationColorRange = {startCodePoint: 0, endCodePointExclusive: 1, fontColor: '#FFF000'};
-  assert.throws(() => buildPresentationFocusSelectionInputV003(f.plan, f.context, audio), /NORMAL_BASELINE/);
+  assert.throws(() => buildPresentationFocusSelectionInputV004(f.plan, f.context, audio), /NORMAL_BASELINE/);
   (f.context.observations as any[]).push({observationId: 'layout', kind: 'scale-unrepresentable', captionIds: ['c-2'], description: '固定サイズで安全領域を超える'});
   await save(f.contextPath, f.context);
-  await assert.rejects(executePresentationFocusSelectionV003({...f, outputDirectory: path.join(f.dir, 'attempt'), judge: async request => f.response(request)}), /RENDERING_UNREPRESENTABLE/);
+  await assert.rejects(executePresentationFocusSelectionV004({...f, outputDirectory: path.join(f.dir, 'attempt'), judge: async request => f.response(request)}), /RENDERING_UNREPRESENTABLE/);
 });
 
 test('Panel Accent rejects measured layout failure without blocking independent Color Accent', async t => {
@@ -307,22 +467,22 @@ test('Panel Accent rejects measured layout failure without blocking independent 
     captionIds: ['c-1'], description: '固定の板が字幕の安全領域を超える'});
   await save(f.contextPath, f.context);
   const panelOutput = path.join(f.dir, 'panel-attempt');
-  await assert.rejects(executePresentationFocusSelectionV003({...f, outputDirectory: panelOutput, judge: async request => {
+  await assert.rejects(executePresentationFocusSelectionV004({...f, outputDirectory: panelOutput, judge: async request => {
     const r = f.response(request);
     r.answer.decisions[0].role = 'Panel Accent'; r.answer.decisions[0].selection = {scope: 'whole-caption'};
     r.answer.candidateDecisions[0].targets[0].role = 'Panel Accent'; return r;
   }}), /PANEL_RENDERING_UNREPRESENTABLE/);
   assert.equal((await readdir(panelOutput)).includes('fixed-auto.json'), false);
-  const colorResult = await executePresentationFocusSelectionV003({...f, outputDirectory: path.join(f.dir, 'color-attempt'),
+  const colorResult = await executePresentationFocusSelectionV004({...f, outputDirectory: path.join(f.dir, 'color-attempt'),
     judge: async request => f.response(request)});
   assert.equal(colorResult.selectedRoles['Color Accent'], 1);
 });
 
 test('old layout observation names are rejected by the new input contract', async t => {
-  const f = await fixture(t), audio = await loadBoundAudioEvidenceV003(f.audioCandidatesPath);
+  const f = await fixture(t), audio = await loadBoundAudioEvidenceV004(f.audioCandidatesPath);
   (f.context.observations as any[]).push({observationId: 'old-layout', kind: 'vocal-unrepresentable',
     captionIds: ['c-2'], description: '旧入力の観測'});
-  assert.throws(() => buildPresentationFocusSelectionInputV003(f.plan, f.context, audio), /OBSERVATION_INVALID/);
+  assert.throws(() => buildPresentationFocusSelectionInputV004(f.plan, f.context, audio), /OBSERVATION_INVALID/);
 });
 
 for (const [name, mutate] of Object.entries({
@@ -335,7 +495,7 @@ for (const [name, mutate] of Object.entries({
 })) test(`whole-audio recognition rejects ${name} even after a consistent file rebinding`, async t => {
   const f = await fixture(t); mutate(f.asr);
   f.audio.asrEvidence = await save(f.asrPath, f.asr); await save(f.audioCandidatesPath, f.audio);
-  await assert.rejects(loadBoundAudioEvidenceV003(f.audioCandidatesPath));
+  await assert.rejects(loadBoundAudioEvidenceV004(f.audioCandidatesPath));
 });
 
 for (const [name, mutate] of Object.entries({
@@ -349,7 +509,7 @@ for (const [name, mutate] of Object.entries({
   sourceHash: (a: any) => a.source.sha256 = '0'.repeat(64),
 })) test(`native evidence rejects ${name}`, async t => {
   const f = await fixture(t); mutate(f.audio); await save(f.audioCandidatesPath, f.audio);
-  await assert.rejects(loadBoundAudioEvidenceV003(f.audioCandidatesPath));
+  await assert.rejects(loadBoundAudioEvidenceV004(f.audioCandidatesPath));
 });
 
 for (const name of ['rms.json', 'voice-probability.json', 'integrated-rms.json'])
@@ -359,5 +519,5 @@ for (const name of ['rms.json', 'voice-probability.json', 'integrated-rms.json']
     const changed = await save(p, measurement);
     f.audio.measurementEvidence = f.audio.measurementEvidence.map(r => r.path === p ? changed : r);
     await save(f.audioCandidatesPath, f.audio);
-    await assert.rejects(loadBoundAudioEvidenceV003(f.audioCandidatesPath), /MEASUREMENT_COVERAGE_CHANGED/);
+    await assert.rejects(loadBoundAudioEvidenceV004(f.audioCandidatesPath), /MEASUREMENT_COVERAGE_CHANGED/);
   });

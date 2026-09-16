@@ -1543,6 +1543,26 @@ test('ORP002: native page一件をcommon core element一件へ写す', () => {
   }
 });
 
+test('native static page publication rejects dynamic states without dropping their bindings', () => {
+  const bundle = applicationBundle('normal-landscape');
+  for (const location of ['record', 'element', 'finalElement']) {
+    const element = structuredClone(bundle.core.plan.elements[0]);
+    const finalElement = structuredClone(bundle.finalElements[0]);
+    const record = {element, finalElement, props: {text: element.text}, pngPath: 'work/0.png', pngSha256: H};
+    if (location === 'record') record.pulseStates = [];
+    else record[location].presentationPulse = {presentation: 'provisional-pulse', anchorPeakId: 'measured', anchorFrame: 15};
+    assert.throws(() => buildPresentationOutputRenderApplicationResultsV001({
+      outputId: bundle.built.requestValue.publication.outputId,
+      outputRequestBinding: binding('presentation-output-request-v001', 'request'),
+      renderPlanBinding: binding('presentation-output-render-plan-v001', 'render-plan'),
+      presetRegistryBinding: binding('presentation-preset-registry-v001', 'preset-registry'),
+      renderPlan: bundle.built.result.plan, overlayRecords: [record],
+      presetRegistryVersion: layoutContext('normal-landscape').presetRegistryVersion,
+      overlaysDirectory: `${bundle.built.requestValue.publication.renderOutputRoot}/overlays`,
+    }), /pulse overlays|final overlay element/);
+  }
+});
+
 test('ORP003: meaning projection 7 fieldは意味packageから不変導出される', () => {
   const {packageValue, result} = buildPlan();
   assert.equal(result.status, 'built');

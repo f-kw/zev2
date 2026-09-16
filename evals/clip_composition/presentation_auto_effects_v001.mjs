@@ -1,6 +1,8 @@
 import {createHash} from 'node:crypto';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001, PRESENTATION_PANEL_PRESET_V001} from './presentation_effects_v001.mjs';
+import {PRESENTATION_PULSE_PRESET_V001, resolvePresentationPulseTimingV001} from './presentation_pulse_v001.mjs';
+import {validatePresentationPulseEvidenceV001, presentationPulseEvidenceIdentityV001} from './presentation_pulse_evidence_v001.mjs';
 
 const reject = message => { throw new TypeError(`auto presentation: ${message}`); };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -25,6 +27,7 @@ const contextIdentity = context => ({
   baselineRef: {fileSha256: context.baselineRef.fileSha256, canonicalSha256: context.baselineRef.canonicalSha256},
   decisionInputRef: {fileSha256: context.decisionInputRef.fileSha256},
   renderingRulesRef: context.renderingRulesRef,
+  pulseTimingEvidence: presentationPulseEvidenceIdentityV001(context.pulseTimingEvidence),
 });
 export const sha256AutoPresentationStateV001 = value => sha256AutoPresentationV001({
   ...value, context: contextIdentity(value.context),
@@ -32,7 +35,7 @@ export const sha256AutoPresentationStateV001 = value => sha256AutoPresentationV0
 
 // Color Accent and Scale Accent are adopted. Their saved role tokens remain
 // internal identifiers. Panel Accent is provisional. Selectors supply no drawing values.
-const rules = freeze({version: 'auto-presentation-rules-v005', role: 'Focus',
+const rules = freeze({version: 'auto-presentation-rules-v006', role: 'Focus',
   presentation: 'provisional-focus', scopes: ['whole-caption', 'partial-caption'],
   targetMatching: 'exact-text-overlapping-occurrences-one-based',
   targetBoundary: 'unicode-grapheme-cluster',
@@ -43,20 +46,23 @@ const rules = freeze({version: 'auto-presentation-rules-v005', role: 'Focus',
   vocal: {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption',
     textStyle: {...PRESENTATION_EFFECT_TRIAL_PRESETS_V001.reaction}},
   panel: {role: 'Panel accent', presentation: 'provisional-panel', scope: 'whole-caption',
-    ...PRESENTATION_PANEL_PRESET_V001}});
-export const AUTO_PRESENTATION_RULES_REF_V005 = freeze({version: rules.version,
+    ...PRESENTATION_PANEL_PRESET_V001},
+  pulse: {role: 'Pulse accent', presentation: 'provisional-pulse', scope: 'whole-caption',
+    preset: PRESENTATION_PULSE_PRESET_V001}});
+export const AUTO_PRESENTATION_RULES_REF_V006 = freeze({version: rules.version,
   contentSha256: sha256AutoPresentationV001(rules)});
 const graphemeSegmenter = new Intl.Segmenter('ja', {granularity: 'grapheme'});
 
 function checkContext(baselinePlan, context) {
-  if (!exact(context, ['baselineRef', 'decisionInputRef', 'renderingRulesRef'])) reject('invalid context');
+  if (!exact(context, ['baselineRef', 'decisionInputRef', 'renderingRulesRef', 'pulseTimingEvidence'])) reject('invalid context');
+  validatePresentationPulseEvidenceV001(context.pulseTimingEvidence);
   const base = context.baselineRef;
   const decision = context.decisionInputRef;
   if (!exact(base, ['path', 'fileSha256', 'canonicalSha256']) || !nonempty(base.path)
     || !digest(base.fileSha256) || !digest(base.canonicalSha256)) reject('invalid baseline reference');
   if (!exact(decision, ['path', 'fileSha256']) || !nonempty(decision.path)
     || !digest(decision.fileSha256)) reject('invalid decision input reference');
-  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V005)) reject('rendering rules version differs');
+  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V006)) reject('rendering rules version differs');
   if (!object(baselinePlan) || baselinePlan.schemaVersion !== 'presentation-output-common-core-plan-v001'
     || !Array.isArray(baselinePlan.elements)) reject('invalid baseline plan');
   if (sha256AutoPresentationV001(baselinePlan) !== base.canonicalSha256) reject('baseline content differs');
@@ -67,7 +73,7 @@ function checkContext(baselinePlan, context) {
     ids.add(element.instructionId);
     if (element.kind === 'speech-caption') {
       if (!object(element.visualState?.textStyle)) reject('caption has no normal text style');
-      if (Object.hasOwn(element, 'presentationColorRange') || Object.hasOwn(element, 'presentationPreset')) {
+      if (['presentationColorRange', 'presentationPreset', 'presentationPulse'].some(key => Object.hasOwn(element, key))) {
         reject('baseline must be the fixed normal plan, not a resolved presentation');
       }
       captions.push(element.instructionId);
@@ -97,12 +103,28 @@ function checkFocus(entry, withId = true) {
 
 function checkSelection(entry, withId = true) {
   if (entry?.role === rules.role) return checkFocus(entry, withId);
+  if (entry?.role === rules.pulse.role) {
+    if (!exact(entry, ['role', 'presentation', 'scope', 'anchorPeakId', ...(withId ? ['captionId'] : [])])
+      || entry.presentation !== rules.pulse.presentation || entry.scope !== rules.pulse.scope
+      || !nonempty(entry.anchorPeakId)) reject('Pulse Accent requires one measured peak and no drawing fields');
+    return;
+  }
   const preset = entry?.role === rules.vocal.role ? rules.vocal
     : entry?.role === rules.panel.role ? rules.panel : null;
   if (preset === null || !exact(entry, ['role', 'presentation', 'scope', ...(withId ? ['captionId'] : [])])
     || entry.presentation !== preset.presentation || entry.scope !== preset.scope) {
     reject('Scale Accent / Panel Accent requires a finite whole-caption preset without drawing fields');
   }
+}
+
+function pulseProgram(baselinePlan, context, captionId, selection) {
+  const evidence = context.pulseTimingEvidence;
+  const peak = evidence?.peaks.find(row => row.peakId === selection.anchorPeakId);
+  if (!peak) reject('Pulse Accent peak is missing or unknown');
+  return resolvePresentationPulseTimingV001({
+    element: baselinePlan.elements.find(element => element.instructionId === captionId),
+    canvas: baselinePlan.canvas, peakSample: peak.peakSample, sampleRate: evidence.sampleRate,
+  });
 }
 
 function focusRange(element, selection) {
@@ -152,6 +174,7 @@ function checkProposal(baselinePlan, context, proposal) {
     if (effect.role === 'Focus') {
       focusRange(baselinePlan.elements.find(element => element.instructionId === effect.captionId), effect);
     }
+    if (effect.role === rules.pulse.role) pulseProgram(baselinePlan, context, effect.captionId, effect);
     selected.add(effect.captionId);
   }
   for (const exception of proposal.exceptions) {
@@ -201,6 +224,7 @@ function checkOverrides(baselinePlan, context, autoProposal, overrides) {
     if (entry.role === 'Focus') {
       focusRange(baselinePlan.elements.find(element => element.instructionId === entry.captionId), entry);
     }
+    if (entry.role === rules.pulse.role) pulseProgram(baselinePlan, context, entry.captionId, entry);
     selected.add(entry.captionId);
   }
   return captions;
@@ -224,6 +248,7 @@ export function editAutoPresentationOverrideV001({baselinePlan, context, autoPro
     if (selection.role === 'Focus') {
       focusRange(baselinePlan.elements.find(element => element.instructionId === captionId), selection);
     }
+    if (selection.role === rules.pulse.role) pulseProgram(baselinePlan, context, captionId, selection);
     entries.push({captionId, ...clone(selection)});
   }
   entries.sort((left, right) => captions.indexOf(left.captionId) - captions.indexOf(right.captionId));
@@ -245,6 +270,11 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
   const ranges = new Map();
   const elements = baselinePlan.elements.map(element => {
     const selection = effective.get(element.instructionId);
+    if (selection?.role === rules.pulse.role) {
+      const program = pulseProgram(baselinePlan, context, element.instructionId, selection);
+      return {...element, presentationPulse: {presentation: rules.pulse.presentation,
+        anchorPeakId: selection.anchorPeakId, anchorFrame: program.anchorFrame}};
+    }
     if (selection?.role === rules.panel.role) {
       return {...element, visualState: {...element.visualState,
         textStyle: {...element.visualState.textStyle, ...rules.panel.textStyle},

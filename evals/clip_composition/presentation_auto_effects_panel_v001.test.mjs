@@ -9,7 +9,7 @@ import path from 'node:path';
 import {promisify} from 'node:util';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V005, fixAutoPresentationProposalV001,
+  AUTO_PRESENTATION_RULES_REF_V006, fixAutoPresentationProposalV001,
   resolveAutoPresentationV001, sha256AutoPresentationV001,
 } from './presentation_auto_effects_v001.mjs';
 import {indexExplicitLinesV001} from './presentation_renderer_text_layout_v001.mjs';
@@ -44,7 +44,7 @@ function panelFixture(savedProps, fixture) {
   const context = {baselineRef: {path: '/test/panel-normal', fileSha256: 'a'.repeat(64),
     canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: '/test/panel-decision', fileSha256: 'b'.repeat(64)},
-    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V005};
+    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V006, pulseTimingEvidence: null};
   const autoProposal = fixAutoPresentationProposalV001({baselinePlan, context,
     proposal: {schemaVersion: 'auto-presentation-proposal-v001', context,
       targetCaptionIds: [fixture.name], completion: 'complete', effects: [{captionId: fixture.name,
