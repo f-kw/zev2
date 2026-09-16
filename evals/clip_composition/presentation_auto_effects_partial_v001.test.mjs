@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V002,
+  AUTO_PRESENTATION_RULES_REF_V003,
   createAutoPresentationOverridesV001,
   editAutoPresentationOverrideV001,
   fixAutoPresentationProposalV001,
@@ -61,7 +61,7 @@ function fixture(text = '先頭中間末尾', lines = [text]) {
     baselineRef: {path: 'normal.json', fileSha256: hash(JSON.stringify(baselinePlan)),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: 'input.json', fileSha256: hash('fixed input')},
-    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V002),
+    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V003),
   };
   return freeze({baselinePlan, context});
 }
@@ -90,6 +90,7 @@ const validRanges = [
   ['including complete CRLF grapheme and surrounding text', '前\r\n後', '前\r\n後', undefined, 0, 4],
   ['Japanese punctuation', '「本当？」、はい。', '？」、', undefined, 3, 6],
   ['emoji', '前😀後', '😀', undefined, 1, 2],
+  ['mixed ordinary text and native color glyph', '前成功😀後', '成功😀', undefined, 1, 4],
   ['ZWJ emoji', 'A👩‍💻B', '👩‍💻', undefined, 1, 4],
   ['combining character', 'Aか\u3099B', 'か\u3099', undefined, 1, 3],
   ['ideographic variation selector', 'A葛\u{E0100}B', '葛\u{E0100}', undefined, 1, 3],
@@ -280,8 +281,10 @@ test('partial selectors remain bound to baseline, saved proposal, and the curren
   assert.throws(() => resolve({...f, baselinePlan: changedBaseline}, auto, overrides), /baseline content differs/);
   assert.throws(() => resolve(f, fix(f, [effect(ids[0], partial('中間'))]), overrides), /override reference version differs/);
   const oldContext = clone(f.context);
-  oldContext.renderingRulesRef.version = 'auto-presentation-rules-v001';
-  assert.throws(() => resolve({...f, context: oldContext}, auto, overrides), /rendering rules version differs/);
+  for (const version of ['auto-presentation-rules-v001', 'auto-presentation-rules-v002']) {
+    oldContext.renderingRulesRef.version = version;
+    assert.throws(() => resolve({...f, context: oldContext}, auto, overrides), /rendering rules version differs/);
+  }
 });
 
 const writeJson = (path, value) => writeFile(path, `${JSON.stringify(value, null, 2)}\n`);
@@ -322,6 +325,32 @@ test('partial saved selectors reload exactly, range edits save separately, and R
   assert.deepEqual(await readFile(f.decisionInputPath), originalInput);
   assert.deepEqual(await readFile(f.autoProposalPath), originalAuto);
   assert.deepEqual(await readFile(f.overridesPath), originalOverride);
+});
+
+test('native color glyph selection remains saved Focus through mixed-range edit, Normal, and Reset', async t => {
+  const f = await ioFixture(t, '前成功😀後');
+  const auto = await saveAuto(f, proposal(f, [effect(ids[0], partial('😀'))]));
+  const originalAuto = await readFile(f.autoProposalPath);
+  const original = resolvedRead(await read({...f, overridesPath: undefined}));
+  assert.deepEqual(state(original).effectiveSelection, partial('😀'));
+  assert.deepEqual(state(original).canonicalRange, {startCodePoint: 3, endCodePointExclusive: 4});
+  let override = edit(f, auto, create(f, auto), ids[0], partial('成功😀'));
+  await saveOverride(f, override);
+  const mixed = resolvedRead(await read(f));
+  assert.deepEqual(state(mixed).effectiveSelection, partial('成功😀'));
+  assert.deepEqual(state(mixed).canonicalRange, {startCodePoint: 1, endCodePointExclusive: 4});
+  override = edit(f, auto, override, ids[0], 'Normal');
+  const normalPath = join(f.directory, 'normal-override.json');
+  await saveOverride(f, override, normalPath);
+  assert.deepEqual(resolvedRead(await read({...f, overridesPath: normalPath})).plan, f.baselinePlan);
+  override = edit(f, auto, override, ids[0], 'Reset');
+  const resetPath = join(f.directory, 'reset-override.json');
+  await saveOverride(f, override, resetPath);
+  const restored = resolvedRead(await read({...f, overridesPath: resetPath}));
+  assert.deepEqual(restored.plan, original.plan);
+  assert.deepEqual(state(restored).effectiveSelection, partial('😀'));
+  assert.equal(state(restored).hasOverride, false);
+  assert.deepEqual(await readFile(f.autoProposalPath), originalAuto);
 });
 
 test('invalid partial automatic and human documents create no completed output file', async t => {

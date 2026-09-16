@@ -7,8 +7,9 @@ export interface AutoPresentationFileRef {
 export interface AutoPresentationContext {
   baselineRef: AutoPresentationFileRef & {canonicalSha256: string};
   decisionInputRef: AutoPresentationFileRef;
-  renderingRulesRef: {version: 'auto-presentation-rules-v002'; contentSha256: string};
+  renderingRulesRef: {version: 'auto-presentation-rules-v003'; contentSha256: string};
 }
+/** Native color glyphs stay in the Focus range and retain their original colors. */
 interface AutoPresentationFocusBase {
   role: 'Focus';
   presentation: 'provisional-focus';

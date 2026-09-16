@@ -1,259 +1,206 @@
 # 自動演出＋後修正 Phase 2：実装・比較見本の検証記録
 
-2026-09-16。**Phase 2は未完成・停止中。** 範囲契約・保存・一件修正CLIと223件の検査は成立したが、最後の局所描画方式でもカラー絵文字の指定色への変化が0画素だった。ZEV進行管理4の回答に従って局所方式の探索を終了し、選択字形の取得と再着色を分ける新しい描画工程の採否をHUMAN_DECISIONへ戻す。実素材E2E・比較動画は未製造。人間による表現評価・改善・完成承認は主張しない。最終の判定根拠は第13節、そこへ至る検証と監査回答は第7〜12節に保存する。
+2026-09-16。**Phase 2の技術実装と比較見本が完成。実画像14 fixture、Phase 1の93件を含む225件、見出し48件、型検査3系統、実素材6状態が合格した。最終監査へ提出する。** 人間による動画の表現評価は未実施。技術検証と「見やすくなったか」の判断を区別する。
 
-## 1. 目的・根拠・範囲
+## 1. 目的・適用する指示
 
-- 最新個別指示「ZEV『自動演出＋後修正』のPhase 2へ着工してください」（2026-09-16）を着工根拠とする。
-- 正本は [ZEV_Phase2_実装work-order_v001.md](https://drive.google.com/file/d/1uxZYZJ6bmF6yxSOXrMj71dcS_KIVWkTy/view)。読取複写を作業証拠directoryに保存した。
-- baseは `75b4fd38d5fea51b43a8c1bc23944be63d3e821a`。branchは `codex/digest-effects-phase2`。
-- 専用worktreeは `/private/tmp/zev-auto-effects-phase2-9n461w4w/worktree`、証拠directoryはその親。
-- 固定通常計画、固定自動案、人間の一件overrideの三層を継続する。毎回通常計画から実効状態を派生し、既に変更した計画へ強調を重ねない。
-- 対象はNormal固定、全文Focus、部分Focus、Reset。新規依存、本番選択Agent、音声候補発見、動的演出、高機能UI、Digest正本変更、素材外部送信は範囲外。
+- 着工根拠は2026-09-16の個別指示「ZEV『自動演出＋後修正』のPhase 2へ着工してください」。[work-order](https://drive.google.com/file/d/1uxZYZJ6bmF6yxSOXrMj71dcS_KIVWkTy/view)を参照した。
+- baseは `75b4fd38d5fea51b43a8c1bc23944be63d3e821a`、branchは `codex/digest-effects-phase2`。
+- 専用worktreeは `/private/tmp/zev-auto-effects-phase2-9n461w4w/worktree`。以下の証拠名は、特記がなければその親directoryからの相対名。
+- 固定通常計画＋固定自動演出案＋一件ごとの人間修正という三層を維持し、一字幕内の一つの連続範囲を指定・変更・復元する。
+- 通常の実装、検査、限定修正、監査checkpoint commit/pushは今回の個別指示により許可されている。DECISIONS、Goal、work-orderは変更していない。
 
-## 2. 開始状態と作業保護
+### 最新HUMAN_DECISIONによるカラー字形の仕様
 
-| tree | 開始HEAD・branch | tracked差分 | 未追跡件数 |
-| --- | --- | --- | ---: |
-| 元作業tree | `43380006bc4f8e1c902c067dcb53669790b6ce2c` / `codex/digest-effects-step2` | 2,604 bytes、staged 0 | 59,153 |
-| Phase 1専用tree | `75b4fd38d5fea51b43a8c1bc23944be63d3e821a` / `codex/digest-effects-phase1` | 0、staged 0 | 254 |
-| Phase 2専用tree | 同base / `codex/digest-effects-phase2` | 開始時0、staged 0 | 開始時0 |
+同日の最新指示は、完成条件の「カラー絵文字もFocus色へ変える」だけを撤回・置換した。**native color glyphは元RGBAを保持し、通常の塗色に従う字形はFocus色へ変更する。** カラー絵文字だけのFocusが見た目上変わらなくても正常であり、範囲指定とFocus状態は保持する。monochromeの記号・絵文字を文字種で一律に除外する処理は作らない。
 
-元treeとPhase 1 treeの状態全文・差分・hashは `starting-git-inventory.json` と対応する記録に保存した。掃除・移動・削除を行わず、既存依存を専用treeへ複写した。新規依存の取得・追加はない。
+新しい複数pass描画工程は不承認。既存の一字幕overlay・一回の静止画像描画内のnative Selection方式で、既存13 fixture＋混在範囲、Phase 1回帰、実素材6状態、通常／部分Focusの比較動画まで進む指示に従う。通常描画、字形・alpha・本文・改行・位置・時刻・来歴を維持し、新renderer、新stage、新依存、字形処理基盤、pixel許容誤差は追加しない。
 
-監査前にも両treeのstatus全文・tracked差分・staged差分・HEAD・branchを再取得し、今回の開始記録とbyte一致を確認した（`pre-audit-git-preservation-v001.json`）。
+描画規則は `auto-presentation-rules-v003`、内容SHA-256は `2d0a8741ffb1f2a5f12fcd00fad16a347b99e1400c15b9558b865df74a44cec4`。通常の塗色とnative color glyphの扱いを規則に含め、旧版の保存入力を受け入れる互換分岐は設けない。
 
-未変更のPhase 2 treeで、Phase 1の契約・保存・描画接続 **93/93合格、skip 0**。旧renderer選定12件は9合格・既知3不合格（未選択7件）。不合格02/03/04の4箇所の診断、対象source、期待hash・実hashはPhase 1保存証拠と一致した。開始証拠は `phase2-start-test-evidence-v001.json`。
+## 2. 範囲指定・保存・描画
 
-## 3. 範囲契約と描画方法
+保存する指定は字幕ID、原文どおりの対象文字列、必要時の1始まり出現番号、有限のFocus指定。生の文字offsetや任意色を保存契約へ加えない。
 
-保存する部分Focusは、表示字幕ID、原文どおりの対象文字列、必要時の1始まり出現番号、有限のFocus指定を持つ。一字幕に一つの連続範囲だけを許可する。
+原文の完全一致から一意に解決する。Unicode正規化、近似適用、省略補完は行わず、重なる一致も出現順で扱う。複数一致で番号がない、番号が存在しない、書記素クラスタの途中、改行だけで可視文字がない指定は保存前に拒否する。原文改行をまたぎ可視文字を含む範囲は受理する。
 
-一致は大文字小文字・Unicode正規化・文字の省略を行わない完全一致。重なる一致も出現順に数え、複数一致で出現番号がない場合や番号が存在しない場合は拒否する。開始・終了はNode標準の書記素分割で検査し、絵文字や結合文字の途中を切らない。
+描画前に原文内のcode point半開区間へ確定し、既存の表示行対応からブラウザ文字ノード内の位置へ変換する。全文Focusも字幕全文の同じ範囲指定へ変換し、部分Focusと共通の描画処理を使う。常に固定通常計画から実効計画を派生するため、修正を既に着色済みの計画へ重ねない。
 
-保存案には生のoffsetや描画色を持たせない。固定本文から描画直前にcode pointの半開区間へ確定し、既存の原文と表示行の対応へ割り当てる。通常・全文Focus・部分Focusは同じ文字runからSVG spanを描く処理を使う。文字幅は行全文で測り、span側で位置や字間を設定しない。計画上は塗色だけを変更し、縁取り・glow・書体・大きさ・改行・位置・時刻の指定値を維持する。実描画の文字位置不変は第7節のとおり未達である。
+各行の塗り文字はPhase 1と同じ一つの全文文字ノードで描き、途中で分割しない。フォント読込と既存位置補正が確定してから、指定範囲をnative Selectionで選択する。選択の前景だけをFocus色、背景を透明にし、Focus時のみ描画反映を待って既存の静止画像を撮影する。縁取りとglowは選択描画から除く。
 
-描画規則を `auto-presentation-rules-v002` として内容hashへ束縛する。旧版の規則を受け入れるaliasや分岐は設けない。通常計画・判断入力・固定案の変更を検出した場合も保存・描画を拒否する。
+通常版の描画準備は追加フレーム待機なし。位置計測用の隠しコピーには選択を渡さない。終了時はこの字幕部品が所有する選択だけ解除する。既存productionは一字幕ごとに描画プロセスを分けており、複数字幕で選択状態を共有しない。途中mask画像の生成・再入力はない。
 
-## 4. 一件修正の導線
+## 3. 人間が一件を修正する導線
 
-`evals/clip_composition/edit_auto_presentation_v001.mjs` は次の操作を提供する。
+`evals/clip_composition/edit_auto_presentation_v001.mjs` による最小CLIを追加した。
 
 | 操作 | 処理 |
 | --- | --- |
-| `show` | ID、動画時刻、原文の完全一致部分から候補を表示する。検索なしなら全字幕 |
-| `normal` | 対象一件をNormal固定する |
-| `focus` | 対象一件を全文Focusへ置換する |
-| `partial` | 原文どおりの文字列と必要時の出現番号で部分Focusへ置換する |
-| `reset` | 対象一件のoverrideを削除し、保存済み自動案へ戻す |
+| `show` | ID、動画時刻、原文の完全一致部分から候補を表示。検索なしなら全字幕 |
+| `normal` | 対象を通常表示へ固定 |
+| `focus` | 対象を全文Focusへ置換 |
+| `partial` | 対象文字列と必要時の出現番号で部分Focusへ置換 |
+| `reset` | 対象の人間修正だけを削除して固定自動案へ戻す |
 
-表示内容はID、表示時刻、本文、固定自動案、実効状態、由来、全文／部分、部分文字列と出現番号、override有無、Reset可否。未解決・未処理も区別する。
+表示には本文・時刻、固定自動案、実効状態、由来、自動／人間修正／Normal固定／未解決／未処理、全文／部分、対象文字列と番号、人間修正の有無、Reset可否を含める。候補が複数なら一覧を示して保存を拒否する。
 
-修正候補が複数なら一覧を示して保存を拒否する。操作前と保存後の状態を表示し、検証済みの新しいoverrideファイルを排他的に作る。既存ファイルの上書きや内部JSONの手編集は不要。
+編集前後の状態を表示し、検証済みの新しい修正ファイルを排他的に作る。既存ファイルの上書きや内部JSONの手編集は不要。実素材から保存した入力でも、ID・時刻・本文の3検索と部分変更→Normal固定→全文Focus→Resetの4操作が成功した。Reset後は元の「やったー!」の部分Focusへ戻り、通常計画・判断入力・固定自動案のbyteは不変だった（`cli-demonstration-v002/summary.json`）。
 
-## 5. 検証経過
+## 4. 最終コードに対する検査
 
-| 検証 | 現在の結果 |
+| 検査 | 結果 |
 | --- | --- |
-| 開始時Phase 1の93件 | 93/93合格 |
-| 範囲契約拡張後のPhase 1の93件 | 93/93合格。既存assert・意味・件数を維持、規則定数参照だけ更新 |
-| CLIの対象検索・状態表示・4操作・保存拒否 | 9/9合格 |
-| 実字幕ファイルによるCLI実行 | 3検索＋4操作の7コマンド成功。Resetで元の保存済み部分指定へ復元 |
-| 共有型 | 合格 |
-| 共通描画用の型検査 | 合格 |
-| 既存の見出し・配置・共通文字モデル検査 | 48/48合格 |
-| Phase 2範囲・保存の追加検査 | **121/121合格**。親11＋正例20＋拒否core45＋拒否保存45 |
-| spanへの範囲割当・不正範囲の追加検査 | 14/14合格 |
-| 実画像検査 | 13 fixtureを実測し、不変条件違反を検出。テスト15件全体では14合格・実画像1不合格 |
-| 実素材6状態E2E・比較見本 | 入力保存・再読込・状態解決まで合格。描画は0件 |
+| Phase 1の契約・保存・描画接続 | 93/93合格、skip 0 |
+| Phase 2の範囲・Unicode・保存・四操作 | 123/123合格 |
+| CLI | 9/9合格 |
+| 上記統合実行 | **225/225合格、skip 0** |
+| 範囲の表示行割当と不正範囲拒否＋実画像 | **16/16合格、skip 0**。実画像は14 fixture |
+| 既存見出し・共通モデル | **48/48合格、skip 0** |
+| 共有型・共通描画型・描画入口型 | 3系統すべて合格 |
+| 二行見出しの通常描画と準備完了の接続 | Phase 1との全RGBA・alpha差0、字形と位置一致 |
+| 旧renderer選定12件 | 9合格・3不合格、未選択7。下記のとおり別途調査 |
 
-監査前の統合実行は、Phase 1の93件＋Phase 2 core/IOの121件＋CLIの9件＝**223/223合格、skip 0**。spanの実画像不合格をこの合計へ混ぜて合格扱いにはしていない。
+Phase 1の93件は開始時と最終コードで再実行した。全文Focusの接続検査は、通常styleを直接置換する期待値から全文の範囲指定へ更新し、通常計画と他字幕の不変検査を保持した。検査件数を減らしていない。カラー絵文字のみの自動Focusを保存・再読込し、混在範囲へ変更、Normal固定、Resetで元の絵文字範囲へ戻る検査も追加した。
 
-独立レビューで、改行だけの強調を保存できる一方、描画が「可視文字なし」で拒否する不一致を検出した。保存前にもLF/CRだけの指定を拒否する限定修正1件を実施し、121件と93件を再検査した。通常の空白を勝手に禁止せず、可視文字を含む原文改行またぎは受理する。
+### 実画像14 fixture
 
-原文改行の役割を揃えた描画処理については、baseの描画入口も以前からLF/CRを改行役割として要求していたことを確認した。旧行対応helperが可視文字扱いした入力は従来も描画前拒否であり、既に成功していた通常描画を変更する修正ではない。
+本番の描画入口をclient mountし、フォントと位置の確定、描画待機の解除後に撮影した。Phase 1 commitの描画sourceも独立してbundleし、現在の通常版の比較基準とした。既存フォント・Chromiumを使い、新規取得や依存追加はない。検査用の字形maskは独立した観測用であり、本番PNGの製造には使わない。
 
-見出し検査の初回は試験環境から既存React依存を解決できず開始前に失敗した。初回TAPを保存し、専用treeの既存runner依存を検索先に設定して再実行した結果48件合格。依存追加や本体変更はない（検査設営修正1件）。
+**全14例で、Phase 1通常版との全RGBA・文字位置・geometry差0。通常／Focus間の全文alpha・塗りalpha・指定外RGBA・縁取りRGBA・背景変色も差0。** 範囲文字列の一致、実際の選択、描画待機完了、隠しコピー撤去、終了時の選択解除も確認した。
 
-実画像検査の初回はmacOS sandbox内でChromiumの起動が拒否された。証拠を保持し、同一のローカル描画を正規の環境承認後に実行した。新規依存・外部通信・API費用はない。
+| # | fixture | 対象文字列 | 不透明な通常字のFocus色画素 | カラー字形 |
+| --- | --- | --- | ---: | --- |
+| 1 | start | 最初 | 11382 | — |
+| 2 | middle | 大事な | 13022 | — |
+| 3 | end | 強調する | 19282 | — |
+| 4 | repeated-second | はい | 6826 | — |
+| 5 | display-line-crossing | 大事な | 13022 | — |
+| 6 | source-newline-crossing | 半\n後 | 10312 | — |
+| 7 | japanese-punctuation | 「大事」。 | 13050 | — |
+| 8 | emoji | 😀 | 0 | 元RGBA保持 |
+| 9 | combining | é | 2614 | — |
+| 10 | variation-selector | ✈︎ | 672 | — |
+| 11 | whole | 全文を強調する | 32759 | — |
+| 12 | one-grapheme | 猫 | 6163 | — |
+| 13 | kerning-boundary | VATAR of | 19017 | — |
+| 14 | mixed-native-color | A😀猫 | 9170 | 元RGBA保持 |
 
-| 証拠（共通prefix：`/private/tmp/zev-auto-effects-phase2-9n461w4w/`） | SHA-256 |
-| --- | --- |
-| `checkpoint-unit-tests-v001.tap`（223合格） | `f0256457bafc3759af2bd8d197e35a270e6cd3c703ad0e4524a2397da2d06829` |
-| `phase2-partial-core-io-v002.tap`（121合格） | `ae2225371c45c907d4b0ce22a30d0c56ae2e1f3c40e80030b5c0be93238eb4de` |
-| `span-unit-v003.tap`（14合格・実画像1件を未選択） | `42707114a8892564f07c528d94b2e52accf185c6efe495f871a08201f9f8e138` |
-| `span-tests-v002.tap`（14合格・実画像1不合格） | `9ce5f36d6b1573b93971b71b63a7eec8fd7b4ea2b585e7e91e56a460b0bc86be` |
-| `title-renderer-regression-v002.tap`（48合格） | `d82bf04819a2af9d206c473ef225f6b5c1a50b745c28e294969b79f293d0715d` |
-| `cli-demonstration-v001/summary.json`（実字幕・7コマンド） | `a2974782ab4474d99a2c04a9074c0943891fadcf5d42eb11ee8b1aa4d8343d72` |
-| `short-e2e-v001/bound-inputs.json`（入力準備・描画未開始） | `6f37d34769dc0ba4d0c200fe3b6f152201a37f55043185fce60b436b6c1cb8a6` |
+カラー絵文字だけの例では6,525画素の字形が存在し、選択範囲を保持したまま画像全体が通常版と同一。混在例も絵文字6,525画素のRGBAは同一で、通常文字に9,170画素の不透明なFocus色を確認した。monochromeのvariation selector例は672画素がFocus色になり、一律の絵文字除外がないことを確認した。
 
-### 旧台帳3件の変化を調査した結果
+追加の二行見出し通常版は既存title検査の縦型fixtureをそのまま使用した。描画待機を解除する瞬間に、本文2行、隠し計測コピー0、選択0、待機中handle0を観測した。titleへの新しいFocus機能は追加していない。
 
-共通span実装後も不合格は同じ02/03/04の3テストだが、hash診断は4箇所から8箇所へ増えた。開始時と完全同一の例外としては扱わない。
+### 旧台帳3不合格の変化を調査
 
-追加4診断は、今回変更した文字描画部品と文字モデルの2ファイルが、旧previewと旧依存台帳の両方に登録されているためである。もともと不一致だった描画入口と行対応処理の2ファイルも、今回の変更で実hashが変わった。全8診断は同じcomponent hash不一致であり、新しい不合格テストや別の拒否理由はない。
+開始時の不合格は02／03／04、component hash診断4箇所。現在も同じ3テストだが、診断は8箇所となったため「開始時と同一の3件」として免除していない。
 
-期待値は旧台帳のまま維持し、現在の実ファイルhash、baseのhash、変更file一覧を照合した。意図した4ファイル変更だけが診断差分に対応する。台帳や既存fixtureを書き換えて合格にする処理は行わない。記録は `renderer-regression-change-investigation-v001.json`（SHA-256 `d4ec3a8f538509cf5e76a22cafd2623e1230d6494f571a5135b6a72f68874e42`）。描画動作そのものは追加検査・実画像・実素材E2Eで別に確認する。
+追加4診断は今回変更した文字描画部品と文字モデルが旧preview・依存台帳の両方に登録されているため。既存の描画入口・行対応処理も変更後の実hashに変わった。全8箇所の実hashをファイル現物・baseと照合し、意図した4 sourceの変更に対応することを確認した。最新のnative Selection組込み後も失敗テスト・診断数・診断種別・期待hashは前回調査と同じで、描画入口と文字描画部品の実hashだけが更新された。
 
-## 6. 実素材E2Eと比較設計
+旧台帳とfixtureを合格させるための変更はしていない。これら3件は合格数へ加えず、動作は上記の実画像・回帰と実素材検査で別に検証する（`renderer-regression-native-investigation-v001.json`）。
 
-保存済みDigestの既存比較区間、161フレーム・約5.37秒・3字幕を使う。対象は「わかんないけどやったー!」。字幕本文、時刻、順序、保持区間、元動画対応、通常計画、base mediaは変更しない。
+## 5. 実素材6状態と比較見本
 
-| 状態 | 処理・対象範囲 |
+既存Digestの同一区間、161フレーム・約5.37秒・3字幕を使う。対象本文は「わかんないけどやったー!」、対象の表示区間は57フレーム以上161フレーム未満。元動画、音声、本文、改行、表示順、時刻、位置と通常計画を維持する。
+
+| 状態 | 処理 |
 | --- | --- |
 | A | 固定通常版 |
-| B | 手配置した固定案で「やったー!」を部分Focus |
-| C | 一件の人修正で「わかんないけど」へ範囲を変更 |
-| D | 同じ一件をNormal固定 |
-| E | 同じ一件を全文Focus |
-| F | Eのoverrideを削除し、Bの保存済み部分範囲へReset |
+| B | 「やったー!」を手配置した固定部分Focus案 |
+| C | 一件修正で「わかんないけど」へ範囲変更 |
+| D | Normal固定 |
+| E | 全文Focus |
+| F | ResetでBの保存済み部分指定へ復元 |
 
-Bは依頼された比較用にCodexが明示配置した案であり、本番Agentの自動判断や人間の品質承認ではない。AとD、BとFの全フレーム一致、対象外字幕画像、全画像alpha、配置、音声、原本不変を照合する予定だったが、下記の描画問題のため実走前で停止した。
+Bは比較検証用にCodexが明示配置したもの。本番Agentの候補発見や意味判断ができたとは扱わない。保存・再読込・範囲解決から、本番描画と完成動画の物理QCまで合格した。
 
-[Production QCの責務とコスト](../policies/PRODUCTION_QC_LAYER_POLICY_v001.md)に従い、実フォント画像の配置・再現性・安全領域を検査し、完成MP4は通常のメディア検査と代表字幕中央の109フレーム目を用いる。字幕省略による全timeline再符号化は実施しない。
+### 完成動画で確認した結果
 
-## 7. 実画像で確認した停止理由
+- **全6状態・各161フレームでproduction QCが合格**。配置検査、字幕PNG、動画合成、媒体・音声検査を含む観測156プロセスが成功した。
+- A通常版とD Normal固定は動画file byte・全161フレーム・代表PNGが同一。B部分FocusとF Resetも同一。
+- A通常版の全161フレームはPhase 1通常版と一致（映像フレーム列SHA-256 `c5b8156eb4bda8f6c3950464c4a804553ae6e298e1c4fa8f3ec208e27e658481`）。
+- 全6状態で配置、全字幕PNGのalpha、他2字幕のPNG、元動画と保存入力のhashが不変。
+- 音声packetの内容SHA-256は全6状態と元素材で `aee02bc7b56dac072c8900d6df9ea811487bef024e8deda505e7933d0c6b5441`。AAC、48 kHz、stereo、5,366 ms。
+- 完成動画の109番フレームで、PNG上の通常色からFocus色へ変わる不透明な文字内部に限って比較した。部分Focus11,305画素、範囲変更23,155画素、全文Focus34,460画素すべてに完成映像の変化があり、通常映像は通常色、Focus映像はFocus色への距離が厳密に小さかった。
 
-既存の実フォントと既存Chromiumを使い、本物の共通文字モデルと文字描画部品を静的描画した。65枚のPNG、文字位置、透明度、塗色、縁取り、指定外画素を保存した。文字数・表示行・boxと縁取りは全13ケースで同一だが、範囲によって塗り文字の位置や画素が変わった。
+色の距離は確認済み文字内部全画素のRGB二乗距離の単純合計を比較し、独自重み・許容閾値はない。PNGのalpha差と配置外色差は0。圧縮動画では予測圧縮による周辺の画素差も観測されるため、完成MP4の全差分が字幕内だけに収まるとは主張しない。完成映像の色の実在は代表1フレームと不透明文字内部の確認であり、文字範囲の厳密さは前節の実画像検査で別に確認した。字幕一件を外した反実仮想動画の再encodeは実施していない。
 
-| ケース | 観測した不一致 |
+### 通常版／部分Focus版の比較
+
+共通directory：`/private/tmp/zev-auto-effects-phase2-9n461w4w/short-e2e-v004/comparison/`
+
+| 見本 | ファイル | SHA-256 |
+| --- | --- | --- |
+| 二本を並べた再生ページ | `local-comparison.html` | `7b4aadb1f48fc1a4d61b393d0c051119ffbce550985016369c560ab8a3e0a325` |
+| 固定通常版 | `normal.mp4` | `44196ed3a72e65c28160da98a4edbf07df4dc0be31c8d3d55c1b111e7356246a` |
+| 手配置部分Focus版 | `partial-focus.mp4` | `389c408fb4fd32898e3219888a280f0337a6f25bc17f72249e588ca12f7a1d6b` |
+
+1920×1080、30 fps、約5.37秒。両動画と代表画像はproduction出力からbyteを変えずに複写し、ページの相対参照6件の実在を確認した。比較のための再encode・外部素材送信はない。同時再生・一時停止の操作を持ち、同時再生時は通常版のみ音声を流す。
+
+
+比較は、見やすくなった箇所、邪魔になった箇所、変化が足りない箇所を人間が区間単位で判断するためのもの。技術検査の合格を動画表現の改善・正式採用へ読み替えない。
+
+## 6. 作業保護と検証範囲
+
+元treeは `43380006bc4f8e1c902c067dcb53669790b6ce2c`、tracked差分2,604 bytes・staged 0・未追跡59,153件。Phase 1 treeはbase `75b4fd38...`、tracked差分0・未追跡254件。両treeのstatus全文・tracked差分・staged差分・HEAD・branchの計10項目は開始時とbyte一致した。掃除・移動・削除は行っていない（`final-git-preservation-v001.json`）。
+
+旧い不合格証拠と入力は保持し、新仕様の入力・描画・検査を新しい証拠directoryへ保存した。検査で遭遇したローカルIPC・Chromium起動のsandbox制約は、同じローカル操作の通常の環境承認で解消した。Nodeは既存20.19.6、React等は既存runner依存を検索先へ指定した。診断用に別の選択へ置換した後に本番部品の解除を検査していた設営は、置換前の本番撮影直後に測るよう修正し、初回失敗証拠を残した。本番出力やfixture期待値を不合格に合わせて緩和していない。
+
+追加の外部AI・有料API・素材外部送信・費用支出は0。新依存、別renderer、追加描画stage、字形処理基盤、独自係数、pixel許容誤差は追加していない。main merge、tag、stable、releaseも行わない。
+
+## 7. 変更ファイル
+
+実装・検査15ファイル＋本報告1ファイル、計16ファイル。生成した動画・画像・素材・一時証拠はcommitへ含めない。
+
+- `docs/reports/auto-effects-phase2-20260916.md`
+- `evals/clip_composition/edit_auto_presentation_v001.mjs`
+- `evals/clip_composition/edit_auto_presentation_v001.test.mjs`
+- `evals/clip_composition/presentation_auto_effects_io_v001.mjs`
+- `evals/clip_composition/presentation_auto_effects_partial_v001.test.mjs`
+- `evals/clip_composition/presentation_auto_effects_renderer_v001.test.mjs`
+- `evals/clip_composition/presentation_auto_effects_span_v001.test.mjs`
+- `evals/clip_composition/presentation_auto_effects_v001.mjs`
+- `evals/clip_composition/presentation_auto_effects_v001.test.mjs`
+- `evals/clip_composition/presentation_renderer_entry_v001.tsx`
+- `evals/clip_composition/presentation_renderer_text_layout_v001.mjs`
+- `evals/clip_composition/render_presentation_v002.mjs`
+- `packages/shared/src/auto-presentation.ts`
+- `packages/shared/src/index.ts`
+- `runner/src/remotion/components/TelopText.tsx`
+- `runner/src/telop/telop-render-model.ts`
+
+## 8. 主要証拠
+
+共通prefix：`/private/tmp/zev-auto-effects-phase2-9n461w4w/`
+
+| 証拠 | SHA-256 |
 | --- | --- |
-| 「はい、はい、進めます」の2回目の「はい」 | 字形位置が変化、全体alpha 9画素、塗りalpha 2,141画素、指定外2,141画素が変化 |
-| `AVATAR office` の `VATAR of` | 字形位置が変化、塗りalpha 312画素、指定外16画素が変化 |
-| 結合文字・variation selector | PNGは同一輪郭だが、SVGの文字位置で1/64 pixelの差を観測 |
-| `😀` | 選択字形6,525画素は存在するが、変更画素0・Focus色画素0。カラーフォントがSVGの塗色指定に従わない |
+| `final-unit-tests-v001.tap` | `ae954683507d530917707d5a246a13ddede4f1b39b3e16b14544ce37bbab7ede` |
+| `span-native-tests-v004.tap` | `a4a97a2333f2a7a104c15735eb919858f810bf13ab6b54709648d555b8a29278` |
+| `span-native-raster-v004/summary.json` | `b419561a9633cc6541a9db79fdfd22292730610d82d49e63d99bbed5e04d737c` |
+| `top-band-readiness-v001/summary.json` | `5c18b703dd56890276cb8a0c7f4025e6fe763e898bcd242131d85283864f9989` |
+| `title-renderer-regression-v003.tap` | `b01c8e05acbfad33801018881129190f670af18546f8895e47a805476caf4aff` |
+| `renderer-regression-native-v001.tap` | `4bbe2a60c41733b48358ea39e5d1f654968c0546c41f466d49b611fc419a7650` |
+| `renderer-regression-native-investigation-v001.json` | `85f471351de1dbe5fe2b6567c59437c1cc324f2e5e05467cd1f259abc95a7f4d` |
+| `cli-demonstration-v002/summary.json` | `bc0a8f62b9f037fa3d3fbde00aa5282ae127d7c1dc1c76f5c62edb255e787484` |
+| `final-git-preservation-v001.json` | `9d9e72ce80ff3c49222f4dbc7baf37bea0d61de754c0daba80474746d26e1404` |
+| `short-e2e-v004/summary.json` | `bc00d2434032f977b782ec98eeea719aa928d222f22584e19bbf18d3e78681c9` |
+| `phase2-e2e-v004-final-integrity.json` | `8ceadfd2414622c1211cb7dc68bfd3c108b3f45b1d67f7628a0b0802cc1b03ec` |
+| `short-e2e-v004/comparison/local-comparison-record.json` | `7e8178cd70f6c5d0d904689fda319af1e5a04780c4041d776d1c8e734c278f78` |
 
-先頭・中央・末尾、日本語句読点、表示行またぎ、原文改行またぎ、全文、単一書記素のケースは、測定した文字位置・alpha・指定外画素の一致と選択色を確認した。ただし成功したケースだけで一般の部分Focusを合格にしない。
+型検査3系統の記録は `final-shared-typecheck-v001.log`、`final-remotion-typecheck-v001.log`、`final-entry-typecheck-v001.log`（いずれも終了0・出力空）。実行には既存のTypeScript compilerを使った。
 
-範囲境界でSVG spanを分ける前後で、1/64 pixel単位などの字形位置差を測定した。ブラウザ内部の丸めの影響が疑われるが、内部機構そのものを直接確認したわけではない。許容誤差の導入、通常版も一字ずつ分けて基準を変更する対応、絵文字の除外は行っていない。
+### 主な再現コマンド
 
-証拠は `span-raster-v002/summary.json`（SHA-256 `02ad63f873a7595b417efd449dd714cb3371ade56e1af74f0e11be6ef5d9e97b`）。同directoryの `compact-results.json` は結果表、各ケースの記録はPNGのpath/hashと全測定値を持つ。
+専用worktreeを作業directoryとし、Node20.19.6をPATH先頭、既存runner依存をNODE_PATH、TSX_DISABLE_CACHE=1に指定する。
 
-### 既存ブラウザ機能で閉じられるかの限定診断
+```sh
+node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/presentation_auto_effects_v001.test.mjs evals/clip_composition/presentation_auto_effects_io_v001.test.mjs evals/clip_composition/presentation_auto_effects_renderer_v001.test.mjs evals/clip_composition/presentation_auto_effects_partial_v001.test.mjs evals/clip_composition/edit_auto_presentation_v001.test.mjs
+node --test evals/clip_composition/presentation_auto_effects_span_v001.test.mjs
+node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/presentation_output_title_compositor_v001.test.mjs
+node --test --test-name-pattern='^(0[1-9]|1[013]) ' evals/clip_composition/presentation_renderer_v002.test.mjs
+```
 
-本体を変更せず、全文を分割しない状態でCSS Custom HighlightとSVG文字選択を各3ケースへ試した。Custom Highlightは対象範囲を登録できても目的の塗色を得られない。SVG文字選択は日本語と英字の2ケースでalphaと対象領域外を維持して塗色を変えられたが、絵文字の変更画素は依然0である。どちらも2種類の欠陥を同時に閉じる経路として成立していない。
+## 9. 監査履歴と今回の提出
 
-6 probeの結果と12枚のPNGは `highlight-feasibility-v001/summary.json`（SHA-256 `1d7c5d839ae084b8b1cf896fdd23bfa7cd166cc92867c4b91de68947a19a57ce`）。この診断によるproduction変更は0件。
+初期の分割span方式は字形・alphaを変え、局所mask/filter候補は英字の範囲外漏れ等が残ったため不採用。native Selection直接着色も当時の「カラー絵文字を再着色」条件では不合格で停止した。その証拠は[停止checkpointの報告](https://github.com/f-kw/zev2/blob/5f240ce737821b5930170ce287100aa34fb76120/docs/reports/auto-effects-phase2-20260916.md)に保持している。今回の最新HUMAN_DECISIONだけがカラー字形の条件を置換し、再開根拠となった。
 
-## 8. 判断依頼・残工程
-
-決めることは、既存の文字描画部品内で「全文の字形を一度だけ確定し、その輪郭を保持して指定範囲の色だけを重ねる」方法を検証する範囲を許可できるかである。現行span分割での不変条件違反とカラーフォントの制約があるため、色を重ねる描画方法へ進む場合はrenderer architecture変更の停止条件との整理が必要になる。
-
-推奨は、本文・配置・時刻・三層保存・通常描画結果を維持することを前提に、同じ描画部品の塗色処理に限定した実現可能性を判断すること。別renderer、汎用字形処理基盤、フォント置換、字幕変更、新規依存や許容誤差の追加は推奨しない。新しいmaskや字形処理の実装は未着手。
-
-相談役が既存work-order内の限定修正と判定できる場合は、その範囲を具体的に示してほしい。renderer architecture変更または完成条件の変更になる場合は、work-order第17節に従いkawafmmへHUMAN_DECISIONとして上げる。判断を待つ間、依存するrenderer変更・実素材E2E・比較動画製造は行わない。
-
-残工程は描画問題の解決、全追加検査の合格、6状態E2E、通常版と部分Focus版の比較見本、最終監査である。
-
-技術合格から「表現が改善した」とは推定しない。通常版と部分Focus版を同一区間で人間が確認した後に、成立見本の完了を判定する。Phase 3、本番Agent、main merge、tag、stable昇格、releaseは今回進めない。
-
-## 9. このcheckpointの変更ファイル
-
-| ファイル | 処理の変更 |
-| --- | --- |
-| `packages/shared/src/auto-presentation.ts` | 部分文字列指定・出現番号・解決範囲・表示状態の共有型 |
-| `packages/shared/src/index.ts` | 新しい部分指定の型を公開 |
-| `evals/clip_composition/presentation_auto_effects_v001.mjs` | 完全一致・書記素境界・一件修正の範囲解決、規則v002 |
-| `evals/clip_composition/presentation_auto_effects_io_v001.mjs` | 規則v002で保存入力を束縛 |
-| `evals/clip_composition/presentation_auto_effects_v001.test.mjs` | 既存93件のうち規則定数の参照名のみ更新 |
-| `evals/clip_composition/presentation_auto_effects_renderer_v001.test.mjs` | 続行後、全文Focusの描画接続期待値を全文範囲へ更新。通常計画と他字幕の不変検査を保持 |
-| `evals/clip_composition/presentation_auto_effects_partial_v001.test.mjs` | 部分範囲・Unicode・四操作・保存拒否の追加検査 |
-| `evals/clip_composition/presentation_renderer_text_layout_v001.mjs` | 原文範囲を表示行の塗色runへ割当、原文改行の役割検証 |
-| `evals/clip_composition/presentation_renderer_entry_v001.tsx` | 行全文の計測を維持して塗色runを描画部品へ渡す |
-| `evals/clip_composition/render_presentation_v002.mjs` | 派生範囲の描画受渡し・古い配置検査の使回しを拒否 |
-| `runner/src/telop/telop-render-model.ts` | 共通文字モデルへ塗色runを持たせる |
-| `runner/src/remotion/components/TelopText.tsx` | 通常・全文・部分を同じspan描画へ通す（実画像問題は第7節） |
-| `evals/clip_composition/presentation_auto_effects_span_v001.test.mjs` | 範囲割当と実フォント画像の厳密比較。不合格もそのまま保持 |
-| `evals/clip_composition/edit_auto_presentation_v001.mjs` | 対象特定・状態表示・四操作のCLI |
-| `evals/clip_composition/edit_auto_presentation_v001.test.mjs` | 検索・操作・再読込・拒否・既存ファイル不変を検査 |
-| `docs/reports/auto-effects-phase2-20260916.md` | 着工根拠、実装、検証、未完了と判断事項を記録 |
-
-生成画像・動画素材・テスト入力・一時証拠はcommitへ含めない。現状固定は完成承認や正式採用を意味しない。
-
-## 10. 監査回答受領と限定検証の再開
-
-2026-09-16、[ZEV進行管理4](https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa7f7e5-03d8-83ee-aae1-6c4b66fb8303)へcheckpoint `05785a4ef1e1ec8392064e04537a0f3da588eb83` と不合格証拠を提示した。応答生成の完了後、GPT_DECISIONとして、全文の字形と位置を一度確定し、同じ輪郭で指定範囲だけ着色する方法の実現可能性検証は既存Phase 2 work-order内の限定修正、と回答を受領した。現時点でHUMAN_DECISIONへ戻す必要はないという範囲判定である。
-
-許可範囲は、既存production経路、一行を分割しない全文の字形・配置計算、同じSVG内のmask・clipPath・全文字形再利用、既存文字描画部品と周辺への最小変更。通常の塗り、縁取り、glow、改行、書体、大きさ、太さ、位置、時刻と、原文範囲・表示行・書記素の対応は維持する。
-
-通常字幕の描画そのものの再定義、別renderer・別timeline・別字幕正本、新たな永続字形画像と描画工程、汎用字形・フォント処理基盤、新規依存やフォント置換、絵文字の対象外化、pixel許容誤差、複数範囲や字幕再分割が必要になった場合は再停止する。maskを使うこと自体はarchitecture変更に数えないとの回答だった。
-
-合格条件は緩和しない。通常版との全文alpha完全一致、指定外字形の色差0、指定範囲とカラー絵文字での実際の着色、改行・box・位置・時刻不変、全文Focusと部分Focusの共通経路、Phase 1回帰の維持を確認する。まず13 fixtureを閉じ、合格後に実素材6状態へ進む。
-
-監査送信は1回、再送・更新・再生成は0回。モデル条件の新指定はなく、UI上の選択（極高）を維持した。状態は「レスポンス確認済み」。次工事の指示は依頼していない。
-
-再開後、全文Focusも字幕全文の明示範囲として部分Focusと同じ経路へ渡し、元の通常styleを維持する形へ統一した。Phase 1の描画接続検査1箇所は、この全文範囲を期待する形に更新した。未編集字幕と通常計画の不変assertは継続し、検査数は削減していない。Phase 2の全範囲部分指定と全文指定の派生計画が一致するassertも追加した。Phase 1の93件＋Phase 2範囲・保存121件＋CLI 9件＝223/223合格、skip 0（`whole-range-unit-tests-v001.tap`、SHA-256 `7770b1fd1b81324e1f35bba5658acb753cdd752782dfe85919b75d6fc7b5ef21`）。これは実画像不変の合格を意味しない。
-
-## 11. 限定検証の実測結果と再判断事項
-
-監査回答の範囲に従い、全文を一つの文字要素で描いた実画像を使って、SVG内の塗色方法を診断した。以下のfilter・mask候補は本体へ採用していない。新規依存・通常描画の再定義・汎用字形基盤・フォント変更・新しい永続字形画像の工程は追加していない。
-
-| 診断 | 実測結果 |
-| --- | --- |
-| 全文の塗り画像を保持し、選択範囲の矩形内だけ色を置換 | 13ケースの塗りalphaと文字位置は一致。絵文字もFocus色5,666画素を得た。ただし縁取り等と合成した最終alphaは6ケースで各2画素が相違 |
-| 全文の合成画像を保持し、塗り画像のRGB寄与だけ置換 | 最終alphaは12/13一致。句読点の1ケースではfilterの描画範囲でglow端を切り、40画素相違。filter範囲の設営問題を特定したが、下記の範囲漏れが別に残るため合格とはしていない |
-| 前2方式の英字境界 | `AVATAR office` の `VATAR of` で、native文字選択なら変わらない174画素が着色された。うち159画素は左の隣接文字の輪郭が選択矩形へ入り込む範囲、15画素は右境界に集中 |
-| 透明な全文にnative文字選択で選択部分だけを描画 | 表示中の文字なら、日本語7,789画素・英字21,097画素・絵文字6,525画素の選択字形alphaを得られた |
-| その選択字形を同じSVG内で再利用 | `defs`から`use`、`mask`内の文字、`defs`から`feImage`の3方式すべてで、日本語・英字・絵文字のalphaが0。native選択情報が内部参照の描画へ伝わらない |
-
-初めの方式は、ブラウザが確定した全文の画像を保持し、原文範囲から得た文字矩形を使って、矩形内のalphaへ固定色を乗せ、矩形外の元画像と加算するもの。2番目は縁取り等を含む元の合成画像を保持し、元の塗り画像を差し引いて、同じalphaの着色済み塗り画像を加えるもの。どちらも文字のshape/layoutを再計算していないが、文字の占有矩形はその文字だけの輪郭ではない。そのため英字の隣接字形の張り出しを除けなかった。
-
-native文字選択は診断の比較基準として使った。ページ全体の選択状態を本番描画の状態として維持する案は、複数の独立字幕や検査用の複製に対し局所的に所有できる描画部品にならないため採用していない。選択文字の像を別段階で画像保存してから参照する実装も、前回回答の新しい描画工程に触れるため開始していない。
-
-| 証拠（第5節と同じprefix） | SHA-256 |
-| --- | --- |
-| `filter-feasibility-v001/summary.json`（13ケース・65 PNG） | `e8df3e6e2a0c3048f799a9a2d66807ec7bda8e478186132afefd64dce0d85ac3` |
-| `filter-feasibility-v002/summary.json`（13ケース・65 PNG） | `c966d40a5983307777ee68b2c698d0814b4d05b4f34df5e662476f40e520ecca` |
-| `selection-mask-feasibility-v001/summary.json`（3ケース×4方式・12 PNG） | `c3da2d3fcf88fe108c1f306a92622e83047421b853813ab36b723c7aded0a2ed` |
-| `range-mask-feasibility-audit-v002.json`（追加照合と上記の集約） | `468b12b39d4f02cc841611fa4a39f95256516b36cd916fb5f34ed73a688ed054` |
-| `kerning-range-leak-location-v001.json`（指定外174画素の位置をPNGから再集計） | `2a6b4156d5100800acb21995f133e6b443c0f8b070b565bf69da1633a4e5f494` |
-
-初期集計では最初の方式のalpha差を7ケースと報告したが、13行の再集計では相違6・一致7だったため訂正した。集約記録v002に訂正理由を残した。正確な選択字形maskと2番目の最終画像も追加照合し、日本語と絵文字はalpha差・対象外色差0、英字はalpha差0・対象外色差174と確認した。
-
-残っているのは、確定済み全文の輪郭のうち、隣接文字の張り出しを含めずに指定文字だけのalphaを得る処理である。局所SVG能力だけで不可能と証明したわけではないが、検証した方式は完成条件を満たさなかった。許容誤差・絵文字除外・英字除外・通常版の作り直しで合格に変えていない。
-
-独立した読取調査でも、既存の実使用処理は行幅・文字位置の計測と字幕全体／一行のPNG検査までであり、確定済み全文から指定文字の輪郭だけを取り出す既存処理は見つからなかった。推移的依存の存在だけを、新しい字形処理基盤を始める根拠にはしていない。
-
-再判断では、前回範囲内の具体的な次の局所方式があればその検証へ進むか、それではなく字形別の描画情報を得る基盤または新しい描画工程が必要として第1層へ戻すかを相談役へ求める。新方式の本体採用と実素材E2Eは判断待ちである。
-
-### 実素材検査側の準備補足
-
-E2Eハーネスv002を準備し、全文指定を全文範囲へ更新した6状態の保存・再読込・解決が合格した。v001の既存11ファイルはhash一致を維持。v002も描画0件である。
-
-完成動画の中央フレームは抽出だけで完了扱いにせず、字幕PNGで完全不透明かつ通常色からFocus色へ変わった文字内部の座標を使って、完成MP4の色が対応する色へ近づいたことを比較する。範囲変更・全文指定も各PNGに基づく座標を使う。重みや任意の許容閾値は設けず、2色へのRGB距離が同じなら不合格とする。圧縮された動画の全差分矩形は観測として残し、字幕内だけに収まるとの根拠にはしない。通常復元とResetの全フレーム一致、Phase 1通常版との一致、他字幕・alpha・配置・音声・原本の不変検査を維持する。
-
-測定器の7件は合格したが、実動画は未製造である。証拠 `phase2-e2e-harness-v002-preflight.json`（SHA-256 `f87462e27d7efa418f322228ecf3e7e3897baec8455672570d4e419730f74514`）。また、将来DOMで範囲を計測する場合は、フォント読込と位置補正後に計測し、着色反映後まで既存描画待機を維持する必要があることを読取監査で確認した。静的SSRだけの試験をその接続の証明には使わない。
-
-## 12. 第2監査回答：既存の一字幕描画内での直接選択着色
-
-checkpoint `94709dd75f373eb2b781792d942b956b2f78709a` をpushし、同じZEV進行管理4へ第11節の実測と次方式の判断を依頼した。回答はGPT_DECISIONの続行で、「overlay単位の一時的なnative Selectionを、そのまま最終fillの着色に使う方式」だけを最後の局所検証として許可するものだった。
-
-相談役は、現行productionでは全字幕を一つのページに置かず、各字幕overlayを既存のRemotion stillで一件ずつPNG化することを指摘した。ローカルでも、一件の描画入力ごとに静止画像を製造し、別工程で動画へ合成する既存呼出しを確認した。第11節の「全体選択を独立字幕の局所状態にできない」という懸念は、完成動画全体へ選択状態を共有させる必要があるとの前提に基づいており、現在の一件ごとの描画境界を使えばこの点だけでは除外理由にならないと訂正する。
-
-許可は既存字幕描画部品内に限る。全文を分割せず、最終塗り文字ノードだけを選択し、選択前景をFocus色・選択背景を透明にする。フォント読込と位置確定後、既存描画待機を解除する前に設定し、既存の一回の静止画像製造で撮影する。新しい途中PNGの製造・再入力、字形path抽出、別の文字生成基盤、永続選択状態は追加しない。
-
-まず英字・日本語・カラー絵文字の3例だけで、全文alpha一致、対象外色差0、対象内Focus色の実在、選択背景に由来する矩形着色0を確認する。3例が成立した場合だけ13例へ進む。複数行の塗り層DOMの最小整理は許可されるが、Normal描画の変化を検出したら停止する。
-
-この直接選択方式も不合格なら局所方式探索を終了し、「選択字形を別途画像化し、maskを受け渡して通常字幕へ着色を再合成する新しい描画工程」の採否をHUMAN_DECISIONへ上げる。相談役は、一時ファイルであっても既存の一回の字幕描画を複数passに変える場合は新しい描画stageと明示した。
-
-第2監査も1回送信し、応答完了を確認した。再送・更新・再生成0、現在のモデル選択を維持。初回のnative選択診断で絵文字の色変更0を既に観測しているため、その証拠と今回の3条件を照合して判定する。
-
-## 13. 最後の局所方式の判定と人間判断事項
-
-最終fillへnative Selectionで直接着色した保存済みPNGを、別の診断で得た正確な対象字形alphaと照合した。第12節で指定された3例と着色方式は既存証拠に揃っていたため、新しい描画は行わず実PNGのbyteから判定した。
-
-| 対象 | 全文alpha差 | 指定外RGBA差 | 指定内部の変化 | 不透明なFocus色 | 透明背景の変色 | 判定 |
-| --- | ---: | ---: | ---: | ---: | ---: | --- |
-| `AVATAR office` の `VATAR of` | 0 | 0 | 21,097画素 | 19,017画素 | 0 | 合格 |
-| 「はい、はい、進めます」の2回目 | 0 | 0 | 7,789画素 | 6,826画素 | 0 | 合格 |
-| `😀` | 0 | 0 | **0画素** | **0画素** | 0 | **不合格** |
-
-絵文字の対象字形は6,525画素存在する。通常PNGと選択着色PNGのhashも同じであり、選択位置が空なのではなく、実際の絵文字色が変わっていない。結果は2/3合格。3例の成立条件を満たさないため13例への展開、本体採用、実素材E2Eへは進まない。
-
-証拠は `final-native-selection-local-audit-v001.json`（SHA-256 `98140e3b8ecc364c8ab45309d5998bbea69027f0e4edf254562473d7ecba9eb7`）。元の描画scriptと全PNGのhash、各条件の件数を記録した。追加描画0、本体への直接選択方式の組込み0、外部通信・API費用0。
-
-**HUMAN_DECISION：一つの字幕を一回で画像化する現行の境界を、正確な選択字形の取得と色の再合成を行う複数passへ拡張してよいか。**
-
-承認を求める対象は、この新しい選択字形mask描画工程の採否である。既に得られている選択字形の実画像を処理間で渡す方法は、矩形の範囲漏れと絵文字の色変更不適用を分けて扱える次の候補だが、まだ実装も合格確認もしていない。採用する場合も、三層保存、固定通常計画、字幕本文・時刻・配置、既存の字形とalpha、全文／部分の同じ着色処理を維持する。対象外色差0・絵文字の実着色を含む13例、Phase 1回帰、実素材6状態、比較見本と最終監査は残工程のままとする。
-
-現在のwork-orderでこの新工程を自走実装することはしない。工事範囲や正本path枠等の必要な更新を含むkawafmmの指示が相談役経由で届くまで、追加実装・方式探索・描画を停止する。例外として許された監査checkpointと停止報告の保存・送信だけを行う。既存の失敗証拠、元tree、Phase 1 treeは保持する。
+技術実装と比較見本を監査checkpointとしてcommit/pushし、同じ[ZEV進行管理4の会話](https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4/c/6aa7f7e5-03d8-83ee-aae1-6c4b66fb8303)へ最終監査を依頼する。モデルの新条件は指定されていないため現在のUI選択（極高）を維持する。素材の外部送信を行わず、技術証拠、比較見本のローカルpath/hashを提示する。本checkpointは最終監査の提出対象であり、監査応答は受領後に別途報告する。人間の表現評価と正式採用は未確定。

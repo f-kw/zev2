@@ -31,12 +31,14 @@ export const sha256AutoPresentationStateV001 = value => sha256AutoPresentationV0
 
 // This is only the existing trial yellow used to test plumbing. It is not an
 // approved product theme, and selectors cannot provide drawing values.
-const rules = freeze({version: 'auto-presentation-rules-v002', role: 'Focus',
+const rules = freeze({version: 'auto-presentation-rules-v003', role: 'Focus',
   presentation: 'provisional-focus', scopes: ['whole-caption', 'partial-caption'],
   targetMatching: 'exact-text-overlapping-occurrences-one-based',
   targetBoundary: 'unicode-grapheme-cluster',
-  canonicalRange: 'unicode-code-point-half-open', textStyle: {fontColor: '#FFD65A'}});
-export const AUTO_PRESENTATION_RULES_REF_V002 = freeze({version: rules.version,
+  canonicalRange: 'unicode-code-point-half-open',
+  glyphColorPolicy: {fillPaintedGlyph: 'focus-color', nativeColorGlyph: 'preserve-original-rgba'},
+  textStyle: {fontColor: '#FFD65A'}});
+export const AUTO_PRESENTATION_RULES_REF_V003 = freeze({version: rules.version,
   contentSha256: sha256AutoPresentationV001(rules)});
 const graphemeSegmenter = new Intl.Segmenter('ja', {granularity: 'grapheme'});
 
@@ -48,7 +50,7 @@ function checkContext(baselinePlan, context) {
     || !digest(base.fileSha256) || !digest(base.canonicalSha256)) reject('invalid baseline reference');
   if (!exact(decision, ['path', 'fileSha256']) || !nonempty(decision.path)
     || !digest(decision.fileSha256)) reject('invalid decision input reference');
-  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V002)) reject('rendering rules version differs');
+  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V003)) reject('rendering rules version differs');
   if (!object(baselinePlan) || baselinePlan.schemaVersion !== 'presentation-output-common-core-plan-v001'
     || !Array.isArray(baselinePlan.elements)) reject('invalid baseline plan');
   if (sha256AutoPresentationV001(baselinePlan) !== base.canonicalSha256) reject('baseline content differs');
@@ -224,8 +226,8 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
     const range = focusRange(element, selection);
     ranges.set(element.instructionId, range);
     // Whole Focus is the complete canonical range of the same paint operation.
-    // Keep the normal style so the renderer can preserve the original glyphs,
-    // including color-font glyphs that do not obey a text fill override.
+    // Keep every selected glyph in the range. Native color glyphs retain their
+    // original RGBA; an all-color-glyph range can be visually unchanged.
     return {...element, presentationColorRange: {...range, fontColor: rules.textStyle.fontColor}};
   });
   const changed = elements.some((element, index) => element !== baselinePlan.elements[index]);
