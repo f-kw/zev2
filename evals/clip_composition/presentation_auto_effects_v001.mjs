@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001} from './presentation_effects_v001.mjs';
+import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001, PRESENTATION_PANEL_PRESET_V001} from './presentation_effects_v001.mjs';
 
 const reject = message => { throw new TypeError(`auto presentation: ${message}`); };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -30,20 +30,21 @@ export const sha256AutoPresentationStateV001 = value => sha256AutoPresentationV0
   ...value, context: contextIdentity(value.context),
 });
 
-// This is only the existing trial yellow used to test plumbing. It is not an
-// approved product theme, and selectors cannot provide drawing values.
-const rules = freeze({version: 'auto-presentation-rules-v004', role: 'Focus',
+// Color Accent and Scale Accent are adopted. Their saved role tokens remain
+// internal identifiers. Panel Accent is provisional. Selectors supply no drawing values.
+const rules = freeze({version: 'auto-presentation-rules-v005', role: 'Focus',
   presentation: 'provisional-focus', scopes: ['whole-caption', 'partial-caption'],
   targetMatching: 'exact-text-overlapping-occurrences-one-based',
   targetBoundary: 'unicode-grapheme-cluster',
   canonicalRange: 'unicode-code-point-half-open',
   glyphColorPolicy: {fillPaintedGlyph: 'focus-color', nativeColorGlyph: 'preserve-original-rgba'},
   textStyle: {fontColor: '#FFD65A'},
-  // Reuse the existing finite reaction size. This is a provisional size display,
-  // not an adopted Vocal theme or a new animation. Selectors supply no numbers.
+  // Keep the adopted Scale Accent size and lifetime.
   vocal: {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption',
-    textStyle: {...PRESENTATION_EFFECT_TRIAL_PRESETS_V001.reaction}}});
-export const AUTO_PRESENTATION_RULES_REF_V004 = freeze({version: rules.version,
+    textStyle: {...PRESENTATION_EFFECT_TRIAL_PRESETS_V001.reaction}},
+  panel: {role: 'Panel accent', presentation: 'provisional-panel', scope: 'whole-caption',
+    ...PRESENTATION_PANEL_PRESET_V001}});
+export const AUTO_PRESENTATION_RULES_REF_V005 = freeze({version: rules.version,
   contentSha256: sha256AutoPresentationV001(rules)});
 const graphemeSegmenter = new Intl.Segmenter('ja', {granularity: 'grapheme'});
 
@@ -55,7 +56,7 @@ function checkContext(baselinePlan, context) {
     || !digest(base.fileSha256) || !digest(base.canonicalSha256)) reject('invalid baseline reference');
   if (!exact(decision, ['path', 'fileSha256']) || !nonempty(decision.path)
     || !digest(decision.fileSha256)) reject('invalid decision input reference');
-  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V004)) reject('rendering rules version differs');
+  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V005)) reject('rendering rules version differs');
   if (!object(baselinePlan) || baselinePlan.schemaVersion !== 'presentation-output-common-core-plan-v001'
     || !Array.isArray(baselinePlan.elements)) reject('invalid baseline plan');
   if (sha256AutoPresentationV001(baselinePlan) !== base.canonicalSha256) reject('baseline content differs');
@@ -95,16 +96,18 @@ function checkFocus(entry, withId = true) {
 }
 
 function checkSelection(entry, withId = true) {
-  if (entry?.role !== 'Vocal accent') return checkFocus(entry, withId);
-  if (!exact(entry, ['role', 'presentation', 'scope', ...(withId ? ['captionId'] : [])])
-    || entry.presentation !== rules.vocal.presentation || entry.scope !== rules.vocal.scope) {
-    reject('Vocal accent requires the finite whole-caption preset without drawing fields');
+  if (entry?.role === rules.role) return checkFocus(entry, withId);
+  const preset = entry?.role === rules.vocal.role ? rules.vocal
+    : entry?.role === rules.panel.role ? rules.panel : null;
+  if (preset === null || !exact(entry, ['role', 'presentation', 'scope', ...(withId ? ['captionId'] : [])])
+    || entry.presentation !== preset.presentation || entry.scope !== preset.scope) {
+    reject('Scale Accent / Panel Accent requires a finite whole-caption preset without drawing fields');
   }
 }
 
 function focusRange(element, selection) {
   const text = element.text;
-  if (typeof text !== 'string') reject('Focus requires the fixed caption text');
+  if (typeof text !== 'string') reject('Color Accent requires the fixed caption text');
   if (selection.scope === 'whole-caption') {
     return {startCodePoint: 0, endCodePointExclusive: Array.from(text).length};
   }
@@ -242,6 +245,11 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
   const ranges = new Map();
   const elements = baselinePlan.elements.map(element => {
     const selection = effective.get(element.instructionId);
+    if (selection?.role === rules.panel.role) {
+      return {...element, visualState: {...element.visualState,
+        textStyle: {...element.visualState.textStyle, ...rules.panel.textStyle},
+        background: {...rules.panel.background}}};
+    }
     if (selection?.role === 'Vocal accent') {
       return {...element, visualState: {...element.visualState,
         textStyle: {...element.visualState.textStyle, ...rules.vocal.textStyle}}};

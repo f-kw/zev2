@@ -6,7 +6,7 @@ import {join} from 'node:path';
 import {promisify} from 'node:util';
 import test from 'node:test';
 import {parseAutoPresentationEditArgsV001, inspectAutoPresentationCaptionsV001,
-  runAutoPresentationEditV001} from './edit_auto_presentation_v001.mjs';
+  runAutoPresentationEditV001, AUTO_PRESENTATION_EDIT_HELP} from './edit_auto_presentation_v001.mjs';
 import {loadAutoPresentationContextV001, loadAutoPresentationV001,
   saveFixedAutoPresentationV001} from './presentation_auto_effects_io_v001.mjs';
 
@@ -49,33 +49,70 @@ test('CLI accepts exact identity/text and time, and rejects ambiguous argument c
     ['show', ...required, '--time', 'NaN'], ['show', ...required, '--caption-id', 'a', '--text', '語'],
     ['normal', ...required, '--caption-id', 'a'], ['normal', ...required, '--output', 'new'],
     ['partial', ...required, '--caption-id', 'a', '--output', 'new'],
-    ['focus', ...required, '--caption-id', 'a', '--output', 'new', '--target', '語'],
+    ['color', ...required, '--caption-id', 'a', '--output', 'new', '--target', '語'],
+    ['scale', ...required, '--caption-id', 'a', '--output', 'new', '--target', '語'],
+    ['panel', ...required, '--caption-id', 'a', '--output', 'new', '--target', '語'],
+    ['panel', ...required, '--caption-id', 'a', '--output', 'new', '--occurrence', '1'],
     ['show', ...required, '--caption-id', 'a', '--caption-id', 'b'],
     ['show', ...required, '--unknown', 'x'], ['show', ...required, '--output', 'new'],
     ['partial', ...required, '--caption-id', 'a', '--target', '語', '--output', 'new', '--occurrence', '1.5'],
   ]) assert.throws(() => parseAutoPresentationEditArgsV001(args), TypeError);
 });
 
-test('Vocal CLI reloads its own role, replaces Focus and Normal, and Reset recovers saved Vocal', async t => {
-  const f = await fixture(t, true, {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'});
-  const before = await Promise.all(Object.values(f.files).map(p => readFile(p)));
-  let current;
-  for (const [index, action] of ['focus', 'vocal', 'normal', 'reset'].entries()) {
-    const outputPath = join(f.directory, `vocal-edit-${index}.json`), output = [];
-    const result = await runAutoPresentationEditV001([action, ...f.args,
-      ...(current ? ['--overrides', current] : []), '--caption-id', 'a', '--output', outputPath], s => output.push(s));
-    const loaded = await loadAutoPresentationV001({...f.files, overridesPath: outputPath});
-    const row = inspectAutoPresentationCaptionsV001({...loaded, query: {captionId: 'a'}})[0];
-    assert.deepEqual(row, result.after);
-    assert.equal(row.automatic.role, 'Vocal accent');
-    assert.equal(row.effective.role, action === 'focus' ? 'Focus' : action === 'normal' ? 'Normal' : 'Vocal accent');
-    assert.match(output.join('\n'), /Vocal accent \/ whole/);
-    if (action === 'reset') assert.equal(row.hasOverride, false);
-    current = outputPath;
+test('CLI uses Color, Scale and provisional Panel names and rejects the replaced action names', () => {
+  const required = ['--baseline', 'base', '--decision-input', 'input', '--caption-id', 'a', '--output', 'new'];
+  for (const action of ['color', 'scale', 'panel']) {
+    assert.equal(parseAutoPresentationEditArgsV001([action, ...required]).action, action);
   }
-  for (const [i, file] of Object.values(f.files).entries()) assert.deepEqual(await readFile(file), before[i]);
-  assert.throws(() => parseAutoPresentationEditArgsV001(['vocal', ...f.args, '--caption-id', 'a',
-    '--target', '同じ語', '--output', join(f.directory, 'invalid.json')]), /partial 専用/);
+  for (const action of ['focus', 'vocal']) {
+    assert.throws(() => parseAutoPresentationEditArgsV001([action, ...required]), /color \/ scale \/ panel/);
+  }
+  assert.match(AUTO_PRESENTATION_EDIT_HELP, /color\s+全文Color Accent/);
+  assert.match(AUTO_PRESENTATION_EDIT_HELP, /scale\s+全文Scale Accent/);
+  assert.match(AUTO_PRESENTATION_EDIT_HELP, /panel\s+全文Panel Accent（仮称）/);
+  assert.match(AUTO_PRESENTATION_EDIT_HELP, /partial\s+部分Color Accent/);
+  assert.doesNotMatch(AUTO_PRESENTATION_EDIT_HELP, /Focus|Vocal accent|\bfocus\b|\bvocal\b/);
+});
+
+test('all three accents can be overridden and Normal or Reset preserves every saved automatic role', async t => {
+  const choices = [
+    {action: 'color', role: 'Focus', presentation: 'provisional-focus', label: 'Color Accent'},
+    {action: 'scale', role: 'Vocal accent', presentation: 'provisional-vocal', label: 'Scale Accent'},
+    {action: 'panel', role: 'Panel accent', presentation: 'provisional-panel', label: 'Panel Accent（仮称）'},
+  ];
+  for (const saved of choices) await t.test(`saved ${saved.label}`, async t => {
+    const f = await fixture(t, true, {role: saved.role, presentation: saved.presentation, scope: 'whole-caption'});
+    const before = await Promise.all(Object.values(f.files).map(p => readFile(p)));
+    let current;
+    for (const [index, action] of ['color', 'scale', 'panel', 'normal', 'reset'].entries()) {
+      const outputPath = join(f.directory, `accent-edit-${index}.json`), output = [];
+      const result = await runAutoPresentationEditV001([action, ...f.args,
+        ...(current ? ['--overrides', current] : []), '--caption-id', 'a', '--output', outputPath], s => output.push(s));
+      const loaded = await loadAutoPresentationV001({...f.files, overridesPath: outputPath});
+      const row = inspectAutoPresentationCaptionsV001({...loaded, query: {captionId: 'a'}})[0];
+      const expected = action === 'reset' ? saved : choices.find(choice => choice.action === action);
+      assert.deepEqual(row, result.after);
+      assert.equal(row.automatic.role, saved.role);
+      assert.equal(row.effective.role, action === 'normal' ? 'Normal' : expected.role);
+      assert.ok(output.join('\n').includes(`${saved.label} / whole`));
+      assert.doesNotMatch(output.join('\n'), /Focus|Vocal accent|Panel accent/);
+      const entries = loaded.autoPresentation.overrides.entries;
+      if (action === 'reset') {
+        assert.equal(row.hasOverride, false);
+        assert.equal(row.origin, 'auto');
+        assert.deepEqual(entries, []);
+      } else if (action === 'normal') {
+        assert.equal(row.origin, 'Normal fixed');
+        assert.deepEqual(entries, [{captionId: 'a', role: 'Normal'}]);
+      } else {
+        assert.equal(row.origin, 'human override');
+        assert.deepEqual(entries, [{captionId: 'a', role: expected.role,
+          presentation: expected.presentation, scope: 'whole-caption'}]);
+      }
+      current = outputPath;
+    }
+    for (const [i, file] of Object.values(f.files).entries()) assert.deepEqual(await readFile(file), before[i]);
+  });
 });
 
 test('ID, exact substring, and half-open video time return all matching candidates', async t => {
@@ -110,7 +147,7 @@ test('four CLI operations save, reload, display their origin, and Reset restores
   let current;
   const results = [];
   for (const [action, extra] of [['partial', ['--target', '同じ語', '--occurrence', '1']],
-    ['normal', []], ['focus', []], ['reset', []]]) {
+    ['normal', []], ['color', []], ['reset', []]]) {
     const outputPath = join(f.directory, `${action}.json`);
     const args = [action, ...f.args, ...(current ? ['--overrides', current] : []),
       '--caption-id', 'a', ...extra, '--output', outputPath];
@@ -130,7 +167,7 @@ test('four CLI operations save, reload, display their origin, and Reset restores
   for (const [index, path] of Object.values(f.files).entries()) assert.deepEqual(await readFile(path), before[index]);
 });
 
-test('human partial Focus can be added to automatic Normal and Reset restores Normal', async t => {
+test('human partial Color can be added to automatic Normal and Reset restores Normal', async t => {
   const f = await fixture(t), partial = join(f.directory, 'partial.json'), reset = join(f.directory, 'reset.json');
   const added = await runAutoPresentationEditV001(['partial', ...f.args, '--time', '1.2', '--target', '大切', '--output', partial], () => {});
   assert.equal(added.before.automatic.role, 'Normal');
@@ -146,7 +183,7 @@ test('several matches and missing matches show candidates without writing an ove
   const output = [];
   await assert.rejects(runAutoPresentationEditV001(['normal', ...f.args, '--text', '同じ語', '--output', join(f.directory, 'new.json')], text => output.push(text)), /候補が複数/);
   assert.match(output.join('\n'), /ID: a/); assert.match(output.join('\n'), /ID: b/);
-  await assert.rejects(runAutoPresentationEditV001(['focus', ...f.args, '--caption-id', 'missing', '--output', join(f.directory, 'new.json')], () => {}), /対象がありません/);
+  await assert.rejects(runAutoPresentationEditV001(['color', ...f.args, '--caption-id', 'missing', '--output', join(f.directory, 'new.json')], () => {}), /対象がありません/);
   assert.deepEqual(await readdir(f.directory), before);
 });
 
@@ -162,7 +199,7 @@ test('invalid exact range and existing output fail without modifying any saved s
 
 test('no automatic proposal remains visibly unprocessed and allows a bound one-caption edit', async t => {
   const f = await fixture(t, false), outputPath = join(f.directory, 'human.json');
-  const result = await runAutoPresentationEditV001(['focus', ...f.args, '--caption-id', 'a', '--output', outputPath], () => {});
+  const result = await runAutoPresentationEditV001(['color', ...f.args, '--caption-id', 'a', '--output', outputPath], () => {});
   assert.equal(result.before.origin, 'unprocessed');
   assert.equal(result.after.origin, 'human override');
   assert.equal(result.after.automatic.status, 'not-processed');

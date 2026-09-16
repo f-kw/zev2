@@ -1,8 +1,14 @@
-// Trial rendering values for the three owner-requested comparisons. Selection
-// supplies only finite names; typography and black duration belong to renderer.
+// Renderer-owned finite values. Selection supplies names, never drawing values.
+// Panel Accent is a provisional design: one opaque light rectangle with dark text.
 export const PRESENTATION_EFFECT_TRIAL_PRESETS_V001 = Object.freeze({
   emphasis: Object.freeze({fontColor: '#FFD65A'}),
   reaction: Object.freeze({fontSizePx: 128}),
+});
+export const PRESENTATION_PANEL_PRESET_V001 = Object.freeze({
+  // Use the existing light/dark caption palette. The plate provides contrast,
+  // so outline and glow are unnecessary. Font size and display times stay fixed.
+  textStyle: Object.freeze({fontColor: '#111827', borderWidthPx: 0, glowWidthPx: 0}),
+  background: Object.freeze({color: '#FFFDF8', borderRadiusPx: 0, paddingXPx: 24, paddingYPx: 16}),
 });
 export const PRESENTATION_BLACK_FRAME_COUNT_V001 = 12;
 

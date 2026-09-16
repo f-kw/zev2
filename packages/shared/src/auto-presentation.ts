@@ -7,9 +7,9 @@ export interface AutoPresentationFileRef {
 export interface AutoPresentationContext {
   baselineRef: AutoPresentationFileRef & {canonicalSha256: string};
   decisionInputRef: AutoPresentationFileRef;
-  renderingRulesRef: {version: 'auto-presentation-rules-v004'; contentSha256: string};
+  renderingRulesRef: {version: 'auto-presentation-rules-v005'; contentSha256: string};
 }
-/** Native color glyphs stay in the Focus range and retain their original colors. */
+/** Internal saved token for Color Accent. Native color glyphs retain their original colors. */
 interface AutoPresentationFocusBase {
   role: 'Focus';
   presentation: 'provisional-focus';
@@ -25,13 +25,19 @@ export interface AutoPresentationPartialFocus extends AutoPresentationFocusBase 
   occurrence?: number;
 }
 export type AutoPresentationFocus = AutoPresentationWholeFocus | AutoPresentationPartialFocus;
-/** One renderer-owned size preset for the fixed caption lifetime; no stacking or partial range. */
+/** Internal saved token for Scale Accent; no stacking or partial range. */
 export interface AutoPresentationVocal {
   role: 'Vocal accent';
   presentation: 'provisional-vocal';
   scope: 'whole-caption';
 }
-export type AutoPresentationEffect = AutoPresentationFocus | AutoPresentationVocal;
+/** Provisional Panel Accent: one renderer-owned light plate with dark text. */
+export interface AutoPresentationPanel {
+  role: 'Panel accent';
+  presentation: 'provisional-panel';
+  scope: 'whole-caption';
+}
+export type AutoPresentationEffect = AutoPresentationFocus | AutoPresentationVocal | AutoPresentationPanel;
 export type AutoPresentationSelection = {role: 'Normal'} | AutoPresentationEffect;
 /** Derived from the fixed caption at resolution time; never accepted as a saved selector. */
 export interface AutoPresentationCanonicalRange {
@@ -77,13 +83,13 @@ export interface AutoPresentationResolution {
   captions: Array<{
     captionId: string;
     origin: 'baseline' | 'automatic' | 'human';
-    role: 'Normal' | 'Focus' | 'Vocal accent';
+    role: 'Normal' | 'Focus' | 'Vocal accent' | 'Panel accent';
     automaticStatus: 'not-processed' | 'normal' | 'selected' | 'unrepresentable' | 'unresolved';
     /** Null means an unresolved, unrepresentable, or unprocessed automatic judgment. */
     automaticSelection: AutoPresentationSelection | null;
     effectiveSelection: AutoPresentationSelection;
     hasOverride: boolean;
-    /** The effective Focus range in Unicode code points; Normal and Vocal accent have no color range. */
+    /** The effective Color Accent range; other effects have no partial color range. */
     canonicalRange: AutoPresentationCanonicalRange | null;
   }>;
 }

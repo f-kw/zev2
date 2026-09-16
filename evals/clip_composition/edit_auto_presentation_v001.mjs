@@ -6,8 +6,9 @@ import {createAutoPresentationOverridesV001, editAutoPresentationOverrideV001,
 
 const fail = message => { throw new TypeError(message); };
 const own = (value, key) => Object.hasOwn(value, key);
-const focus = {role: 'Focus', presentation: 'provisional-focus', scope: 'whole-caption'};
-const vocal = {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'};
+const colorSelection = {role: 'Focus', presentation: 'provisional-focus', scope: 'whole-caption'};
+const scaleSelection = {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'};
+const panelSelection = {role: 'Panel accent', presentation: 'provisional-panel', scope: 'whole-caption'};
 
 export const AUTO_PRESENTATION_EDIT_HELP = `字幕一件の演出を確認・修正します。
 node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
@@ -18,9 +19,10 @@ node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
 操作:
   show     候補と現在状態を表示（検索なしなら全字幕）
   normal   Normal固定
-  focus    全文Focus
-  vocal    全文Vocal accent（既存の仮サイズ表示）
-  partial  部分Focus: --target <原文どおりの連続文字列> [--occurrence <1からの出現番号>]
+  color    全文Color Accent
+  scale    全文Scale Accent
+  panel    全文Panel Accent（仮称）
+  partial  部分Color Accent: --target <原文どおりの連続文字列> [--occurrence <1からの出現番号>]
   reset    この一件のoverrideを削除し、保存済み自動案へ戻す
 
 修正には検索条件と --output <新しい人修正ファイル> が必要です。
@@ -31,7 +33,7 @@ node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
 export function parseAutoPresentationEditArgsV001(argv) {
   if (argv.length === 1 && ['--help', '-h'].includes(argv[0])) return {help: true};
   const [action, ...args] = argv;
-  if (!['show', 'normal', 'focus', 'vocal', 'partial', 'reset'].includes(action)) fail('操作は show / normal / focus / vocal / partial / reset から指定してください。');
+  if (!['show', 'normal', 'color', 'scale', 'panel', 'partial', 'reset'].includes(action)) fail('操作は show / normal / color / scale / panel / partial / reset から指定してください。');
   const names = new Map([
     ['--baseline', 'baselinePath'], ['--decision-input', 'decisionInputPath'],
     ['--auto', 'autoProposalPath'], ['--overrides', 'overridesPath'], ['--output', 'outputPath'],
@@ -51,7 +53,7 @@ export function parseAutoPresentationEditArgsV001(argv) {
   if (queryKeys.length > 1) fail('検索方法は表示字幕ID、時刻、本文のいずれか一つを指定してください。');
   if (action !== 'show' && (queryKeys.length !== 1 || !parsed.outputPath)) fail('修正には検索条件一つと --output が必要です。');
   if (action === 'show' && parsed.outputPath) fail('show は保存しません。--output を外してください。');
-  if (action === 'partial' && !own(parsed, 'targetText')) fail('部分Focusには --target が必要です。');
+  if (action === 'partial' && !own(parsed, 'targetText')) fail('部分Color Accentには --target が必要です。');
   if (action !== 'partial' && (own(parsed, 'targetText') || own(parsed, 'occurrence'))) fail('--target と --occurrence は partial 専用です。');
   if (own(parsed, 'occurrence')) {
     if (!/^[1-9][0-9]*$/.test(parsed.occurrence) || !Number.isSafeInteger(Number(parsed.occurrence))) fail('出現番号は1以上の整数を指定してください。');
@@ -74,6 +76,8 @@ export function parseAutoPresentationEditArgsV001(argv) {
 
 const selectionDescription = selection => selection?.role === 'Vocal accent'
   ? {role: 'Vocal accent', scope: 'whole-caption'}
+  : selection?.role === 'Panel accent'
+  ? {role: 'Panel accent', scope: 'whole-caption'}
   : selection?.role === 'Focus'
   ? {role: 'Focus', scope: selection.scope,
     ...(selection.scope === 'partial-caption' ? {targetText: selection.targetText,
@@ -115,9 +119,10 @@ export function inspectAutoPresentationCaptionsV001({baselinePlan, autoPresentat
 }
 
 const describe = selection => selection.role === 'Normal' ? 'Normal'
-  : selection.role === 'Vocal accent' ? 'Vocal accent / whole（全文）'
-  : selection.scope === 'whole-caption' ? 'Focus / whole（全文）'
-  : `Focus / partial（部分）${JSON.stringify(selection.targetText)} / occurrence=${selection.occurrence ?? '一意一致'}`;
+  : selection.role === 'Vocal accent' ? 'Scale Accent / whole（全文）'
+  : selection.role === 'Panel accent' ? 'Panel Accent（仮称） / whole（全文）'
+  : selection.scope === 'whole-caption' ? 'Color Accent / whole（全文）'
+  : `Color Accent / partial（部分）${JSON.stringify(selection.targetText)} / occurrence=${selection.occurrence ?? '一意一致'}`;
 
 export function formatAutoPresentationCaptionRowsV001(rows) {
   if (rows.length === 0) return '一致する表示字幕はありません。';
@@ -148,7 +153,8 @@ export async function runAutoPresentationEditV001(argv, write = text => process.
   const {baselinePlan, autoPresentation} = loaded;
   const previous = autoPresentation.overrides ?? createAutoPresentationOverridesV001({baselinePlan, ...autoPresentation});
   const selection = parsed.action === 'normal' ? 'Normal' : parsed.action === 'reset' ? 'Reset'
-    : parsed.action === 'vocal' ? vocal : parsed.action === 'focus' ? focus : {...focus, scope: 'partial-caption', targetText: parsed.targetText,
+    : parsed.action === 'scale' ? scaleSelection : parsed.action === 'panel' ? panelSelection
+    : parsed.action === 'color' ? colorSelection : {...colorSelection, scope: 'partial-caption', targetText: parsed.targetText,
       ...(parsed.occurrence === undefined ? {} : {occurrence: parsed.occurrence})};
   const overrides = editAutoPresentationOverrideV001({baselinePlan, ...autoPresentation,
     overrides: previous, captionId: rows[0].captionId, selection});

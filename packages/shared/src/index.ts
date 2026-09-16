@@ -694,7 +694,7 @@ export function createAgentRequestsFromDraft(
 }
 export type {PresentationEffects} from './presentation-effects.js';
 export type {AutoPresentationFileRef, AutoPresentationContext, AutoPresentationFocus,
-  AutoPresentationWholeFocus, AutoPresentationPartialFocus, AutoPresentationVocal,
+  AutoPresentationWholeFocus, AutoPresentationPartialFocus, AutoPresentationVocal, AutoPresentationPanel,
   AutoPresentationEffect, AutoPresentationSelection,
   AutoPresentationCanonicalRange,
   AutoPresentationException, AutoPresentationProposal, FixedAutoPresentation,

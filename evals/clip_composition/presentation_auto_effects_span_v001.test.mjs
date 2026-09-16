@@ -9,7 +9,7 @@ import path from 'node:path';
 import {promisify} from 'node:util';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V004, fixAutoPresentationProposalV001,
+  AUTO_PRESENTATION_RULES_REF_V005, fixAutoPresentationProposalV001,
   createAutoPresentationOverridesV001, editAutoPresentationOverrideV001,
   resolveAutoPresentationV001, sha256AutoPresentationV001,
 } from './presentation_auto_effects_v001.mjs';
@@ -50,7 +50,7 @@ function resolveFixture(fixture, whole = false) {
   const context = {baselineRef: {path: '/test/baseline', fileSha256: 'a'.repeat(64),
     canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
   decisionInputRef: {path: '/test/decision', fileSha256: 'b'.repeat(64)},
-  renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V004};
+  renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V005};
   const selection = whole ? {scope: 'whole-caption'} : {scope: 'partial-caption',
     targetText: fixture.targetText, ...(fixture.occurrence ? {occurrence: fixture.occurrence} : {})};
   const autoProposal = fixAutoPresentationProposalV001({baselinePlan, context,
@@ -275,7 +275,7 @@ test('production overlay preserves normal and Focus pixels and renders finite Vo
     const context = {baselineRef: {path: '/test/vocal-normal', fileSha256: 'a'.repeat(64),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
       decisionInputRef: {path: '/test/vocal-decision', fileSha256: 'b'.repeat(64)},
-      renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V004};
+      renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V005};
     const autoProposal = fixAutoPresentationProposalV001({baselinePlan, context,
       proposal: {schemaVersion: 'auto-presentation-proposal-v001', context,
         targetCaptionIds: ['vocal-raster'], completion: 'complete', effects: [{captionId: 'vocal-raster',

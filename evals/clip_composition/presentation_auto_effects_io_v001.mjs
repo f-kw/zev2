@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import {readFile, writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {AUTO_PRESENTATION_RULES_REF_V004, sha256AutoPresentationV001,
+import {AUTO_PRESENTATION_RULES_REF_V005, sha256AutoPresentationV001,
   fixAutoPresentationProposalV001, resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 
 const bytesHash = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -17,7 +17,7 @@ export async function loadAutoPresentationContextV001({baselinePath, decisionInp
     baselineRef: {path: resolve(baselinePath), fileSha256: bytesHash(baselineBytes),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: resolve(decisionInputPath), fileSha256: bytesHash(decisionBytes)},
-    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V004,
+    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V005,
   };
   resolveAutoPresentationV001({baselinePlan, context});
   return {baselinePlan, context};

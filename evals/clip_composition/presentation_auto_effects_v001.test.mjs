@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V004,
+  AUTO_PRESENTATION_RULES_REF_V005,
   sha256AutoPresentationV001,
   sha256AutoPresentationStateV001,
   fixAutoPresentationProposalV001,
@@ -60,7 +60,7 @@ function fixture() {
     baselineRef: {path: 'fixtures/normal-plan.json', fileSha256: byteSha(`${JSON.stringify(baselinePlan, null, 2)}\n`),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: 'fixtures/confirmed-caption-input.json', fileSha256: byteSha('saved caption decision input')},
-    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V004),
+    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V005),
   };
   return freeze({baselinePlan, context});
 }
@@ -77,6 +77,77 @@ const edit = (f, autoProposal, overrides, captionId, selection) => editAutoPrese
 const resolve = (f, autoProposal, overrides) => resolveAutoPresentationV001({...f, autoProposal, overrides});
 const item = (result, id) => result.plan.elements.find(element => element.instructionId === id);
 const state = (result, id) => result.resolution.captions.find(caption => caption.captionId === id);
+
+const panel = () => ({role: 'Panel accent', presentation: 'provisional-panel', scope: 'whole-caption'});
+
+test('Panel creates a finite plate and preserves caption content, layout lines, font size, time and source identity', () => {
+  const f = fixture(), auto = fixed(f, {effects: [{captionId: 'caption-2', ...panel()}]});
+  const before = JSON.stringify(f), saved = JSON.stringify(auto);
+  const result = resolve(f, auto), expected = clone(f.baselinePlan);
+  Object.assign(expected.elements[1].visualState.textStyle, {fontColor: '#111827', borderWidthPx: 0, glowWidthPx: 0});
+  expected.elements[1].visualState.background = {color: '#FFFDF8', borderRadiusPx: 0, paddingXPx: 24, paddingYPx: 16};
+  assert.deepEqual(result.plan, expected);
+  assert.equal(state(result, 'caption-2').role, 'Panel accent');
+  assert.equal(state(result, 'caption-2').canonicalRange, null);
+  assert.equal(Object.hasOwn(item(result, 'caption-2'), 'presentationColorRange'), false);
+  assert.equal(JSON.stringify(f), before);
+  assert.equal(JSON.stringify(auto), saved);
+});
+
+test('all finite roles replace each other from Normal; Reset restores the fixed automatic role without stale plate or paint', () => {
+  for (const automatic of [focus(), vocal(), panel()]) {
+    const f = fixture(), auto = fixed(f, {effects: [{captionId: 'caption-2', ...automatic}]}), saved = JSON.stringify(auto);
+    const automaticPlan = resolve(f, auto).plan;
+    let overrides = emptyOverrides(f, auto);
+    for (const selection of [panel(), vocal(), {...focus(), scope: 'partial-caption', targetText: 'とは限りません'},
+      panel(), 'Normal', 'Reset']) {
+      overrides = edit(f, auto, overrides, 'caption-2', selection);
+      const result = resolve(f, auto, overrides);
+      const chosen = selection === 'Reset' ? automatic : selection === 'Normal' ? null : selection;
+      const fresh = chosen === null ? f.baselinePlan : resolve(f,
+        fixed(f, {effects: [{captionId: 'caption-2', ...chosen}]})).plan;
+      assert.deepEqual(result.plan, fresh);
+      assert.equal(JSON.stringify(auto), saved);
+      if (selection === 'Reset') {
+        assert.deepEqual(result.plan, automaticPlan);
+        assert.equal(state(result, 'caption-2').hasOverride, false);
+      }
+    }
+  }
+});
+
+test('Panel refuses partial text, free drawing values, stacking and unknown presets', () => {
+  const f = fixture(), auto = fixed(f), overrides = emptyOverrides(f, auto);
+  for (const selection of [
+    {...panel(), scope: 'partial-caption', targetText: '字幕'}, {...panel(), targetText: '字幕'},
+    {...panel(), duration: 1}, {...panel(), curve: 'ease-out'}, {...panel(), background: {color: '#000000'}},
+    {...panel(), paddingXPx: 24}, {...panel(), fontSizePx: 96}, {...panel(), css: 'color:red'},
+    {...panel(), jsx: '<div />'}, {...panel(), presentation: 'free-panel'},
+  ]) {
+    assert.throws(() => fixed(f, {effects: [{captionId: 'caption-1', ...selection}]}), /finite whole-caption/);
+    assert.throws(() => edit(f, auto, overrides, 'caption-1', selection), /finite whole-caption/);
+  }
+  for (const other of [focus(), vocal(), panel()]) {
+    assert.throws(() => fixed(f, {effects: [{captionId: 'caption-1', ...panel()},
+      {captionId: 'caption-1', ...other}]}), /conflicting/);
+  }
+});
+
+test('a Panel layout exception remains unresolved in the fixed plan and survives a temporary human edit', () => {
+  const f = fixture(), auto = fixed(f, {exceptions: [{captionId: 'caption-2', status: 'unrepresentable',
+    reason: 'The complete plate does not fit in the available safe area.'}]}), before = JSON.stringify(auto);
+  const first = resolve(f, auto);
+  assert.deepEqual(first.plan, f.baselinePlan);
+  assert.equal(state(first, 'caption-2').automaticStatus, 'unrepresentable');
+  let overrides = edit(f, auto, emptyOverrides(f, auto), 'caption-2', focus());
+  assert.equal(state(resolve(f, auto, overrides), 'caption-2').role, 'Focus');
+  overrides = edit(f, auto, overrides, 'caption-2', 'Reset');
+  const restored = resolve(f, auto, overrides);
+  assert.deepEqual(restored.plan, f.baselinePlan);
+  assert.deepEqual(restored.resolution.exceptions, first.resolution.exceptions);
+  assert.equal(state(restored, 'caption-2').automaticSelection, null);
+  assert.equal(JSON.stringify(auto), before);
+});
 
 test('Vocal changes only the selected caption size and preserves fixed text, lines, source, time and other elements', () => {
   const f = fixture(), auto = fixed(f, {effects: [{captionId: 'caption-2', ...vocal()}]});
@@ -123,8 +194,8 @@ test('Vocal cannot receive partial ranges, free drawing values, duplicate roles,
     {...vocal(), occurrence: 1}, {...vocal(), fontSizePx: 120}, {...vocal(), scale: 2},
     {...vocal(), presentation: 'dynamic-pop'}, {...vocal(), color: '#FFFF00'},
   ]) {
-    assert.throws(() => fixed(f, {effects: [{captionId: 'caption-1', ...selection}]}), /Vocal accent/);
-    assert.throws(() => edit(f, auto, overrides, 'caption-1', selection), /Vocal accent/);
+    assert.throws(() => fixed(f, {effects: [{captionId: 'caption-1', ...selection}]}), /Scale Accent/);
+    assert.throws(() => edit(f, auto, overrides, 'caption-1', selection), /Scale Accent/);
   }
   assert.throws(() => fixed(f, {effects: [effect('caption-1'), {captionId: 'caption-1', ...vocal()}]}), /conflicting/);
   const painted = resolve(f, fixed(f, {effects: [effect('caption-1')]})).plan;
@@ -135,11 +206,11 @@ test('Vocal cannot receive partial ranges, free drawing values, duplicate roles,
 
 test('forward-only rules reject an old revision even when its saved proposal hash is recomputed', () => {
   const f = fixture(), auto = clone(fixed(f, {effects: [{captionId: 'caption-1', ...vocal()}]}));
-  auto.proposal.context.renderingRulesRef.version = 'auto-presentation-rules-v003';
+  auto.proposal.context.renderingRulesRef.version = 'auto-presentation-rules-v004';
   auto.proposalSha256 = sha256AutoPresentationStateV001(auto.proposal);
   assert.throws(() => resolve(f, auto), /rendering rules version differs/);
   const context = clone(f.context);
-  context.renderingRulesRef.version = 'auto-presentation-rules-v003';
+  context.renderingRulesRef.version = 'auto-presentation-rules-v004';
   assert.throws(() => createAutoPresentationOverridesV001({baselinePlan: f.baselinePlan, context}), /rendering rules version differs/);
 });
 
