@@ -1,8 +1,15 @@
-// Trial rendering values for the three owner-requested comparisons. Selection
-// supplies only finite names; typography and black duration belong to renderer.
+// Trial rendering values for finite presentation effects. Selection supplies
+// only finite names; concrete drawing values belong to the renderer contract.
+// `panel` is a provisional internal id only. It is NOT an adopted product name.
 export const PRESENTATION_EFFECT_TRIAL_PRESETS_V001 = Object.freeze({
   emphasis: Object.freeze({fontColor: '#FFD65A'}),
   reaction: Object.freeze({fontSizePx: 128}),
+});
+export const PRESENTATION_EFFECT_TRIAL_PANEL_V001 = Object.freeze({
+  color: 'rgba(0, 0, 0, 0.76)',
+  borderRadiusPx: 18,
+  paddingXPx: 28,
+  paddingYPx: 14,
 });
 export const PRESENTATION_BLACK_FRAME_COUNT_V001 = 12;
 
@@ -31,7 +38,7 @@ export function resolvePresentationEffectsV001({plan, expectedFrameCount, baseTi
   const selected = new Map();
   for (const entry of captions) {
     if (!exact(entry, ['captionId', 'preset']) || typeof entry.captionId !== 'string'
-      || !['normal', 'emphasis', 'reaction'].includes(entry.preset)) reject('invalid caption selection');
+      || !['normal', 'emphasis', 'reaction', 'panel'].includes(entry.preset)) reject('invalid caption selection');
     if (!elements.has(entry.captionId) || elements.get(entry.captionId).kind !== 'speech-caption') {
       reject('unknown caption ID');
     }
@@ -79,14 +86,20 @@ export function resolvePresentationEffectsV001({plan, expectedFrameCount, baseTi
     const shift = cuts.filter(cut => cut.atBaseFrame <= element.startFrame).length
       * PRESENTATION_BLACK_FRAME_COUNT_V001;
     if (preset === 'normal' && shift === 0) return element;
+    const presentation = preset === 'normal' ? {} : preset === 'panel'
+      ? {presentationPreset: preset, visualState: {
+        ...element.visualState,
+        background: {...PRESENTATION_EFFECT_TRIAL_PANEL_V001},
+      }}
+      : {presentationPreset: preset, visualState: {
+        ...element.visualState,
+        textStyle: {...element.visualState.textStyle, ...PRESENTATION_EFFECT_TRIAL_PRESETS_V001[preset]},
+      }};
     return {
       ...element,
       ...(shift ? {startFrame: element.startFrame + shift,
         endFrameExclusive: element.endFrameExclusive + shift} : {}),
-      ...(preset !== 'normal' ? {presentationPreset: preset, visualState: {
-        ...element.visualState,
-        textStyle: {...element.visualState.textStyle, ...PRESENTATION_EFFECT_TRIAL_PRESETS_V001[preset]},
-      }} : {}),
+      ...presentation,
     };
   })};
   if (!cuts.length) return {...unchanged, plan: resolvedPlan};
