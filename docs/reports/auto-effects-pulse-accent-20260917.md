@@ -133,3 +133,11 @@ AIは、角度の使い方への抗議の直後に挟まる短い実感に、局
 - `/private/tmp/zev-pulse-accent-fswa9cuw/final-validation-v001.json` — `46007885d82bcb28317342e3105f5ac41a7bf67b2c3c139faf4265c89bab1ea1`
 
 ローカル素材と生判断はuploadしない。remoteから確認できる実装・検査・本報告と、ローカルで検証したMP4そのものを区別する。checkpoint push後、同じZEV進行管理4の会話へ結果を報告し、次タスクの明示指示を求める。
+
+## 8. 相談役の最終監査と次工程
+
+実装checkpoint `8f1bbd88b242ddb71366f5fae9bce52fee6181b8` をpushし、remoteの同branchが一致することを確認した。同じZEV進行管理4（現表示名ZEV Build Loop）へ報告し、完了した応答を取得した。相談役はPulseを技術第一完成として受理し、必須修正なしと判断した。人間の見心地・正式採用は未判定のまま維持する。
+
+応答全文は `/private/tmp/zev-pulse-accent-fswa9cuw/consultant-response-v001.txt`、SHA-256 `f055d60681b2142ab93b45dba468201f860853c7ff88737f47812d60c205e7d5` に保存した。送信後は停止せず、次工程「反実仮想QC高速化の技術第一完成」のGPT_DECISIONを受領した。
+
+次工程は今回の完成動画・描画・AI判断・保存三層を維持し、旧方式を比較用に残したまま、必要なframeを独立再構成するQC専用方式を調べる。全32字幕・Pulse3点の判定照合、指定された故障注入、専用timerによる同じ入力の時間・処理frame・子process比較が成立した場合だけ通常QCを切り替える。保証の低下や判定相違を未解決のまま採用しない。新演出、旧trust台帳更新、正式採用、main統合、tag、stable、releaseは範囲外である。
