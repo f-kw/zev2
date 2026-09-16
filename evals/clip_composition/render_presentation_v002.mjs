@@ -8,6 +8,7 @@ import {fileURLToPath} from 'node:url';
 
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {resolvePresentationEffectsV001, buildPresentationTimelineFiltersV001} from './presentation_effects_v001.mjs';
+import {resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {validatePresentationInstructionContract} from './presentation_instruction_contract_v002.mjs';
 import {
   PRESENTATION_BASE_MEDIA_TIMELINE_VIOLATION_CODES,
@@ -1563,13 +1564,39 @@ export async function executeValidatedPresentationDrawAndQcV001({
   processObserver = null,
   serializePngAndFilters = false,
   effects,
+  autoPresentation = undefined,
   baseTimeline,
   runCounterfactualQc = true,
 }) {
   if (typeof runCounterfactualQc !== 'boolean') throw new TypeError('counterfactual QC control must be boolean');
-  const resolved = resolvePresentationEffectsV001({plan, expectedFrameCount, baseTimeline, effects});
+  if (autoPresentation !== undefined && effects !== undefined) {
+    throw new TypeError('automatic presentation and trial effects cannot be combined');
+  }
+  let autoPresentationResolution;
+  let autoPresentationInputs;
+  let resolved;
+  if (autoPresentation === undefined) {
+    resolved = resolvePresentationEffectsV001({plan, expectedFrameCount, baseTimeline, effects});
+  } else {
+    if (!isObject(autoPresentation) || Object.keys(autoPresentation).some(
+      key => !['context', 'autoProposal', 'overrides'].includes(key),
+    )) {
+      throw new TypeError('automatic presentation only accepts context, autoProposal and overrides');
+    }
+    const automatic = resolveAutoPresentationV001({
+      baselinePlan: plan,
+      context: autoPresentation.context,
+      autoProposal: autoPresentation.autoProposal,
+      overrides: autoPresentation.overrides,
+    });
+    resolved = {plan: automatic.plan, expectedFrameCount, presentationTimeline: null};
+    autoPresentationResolution = automatic.resolution;
+    autoPresentationInputs = structuredClone(autoPresentation);
+  }
   if (validatedLayoutInspection !== null && resolved.plan.elements.some((element, index) =>
-    element.visualState !== plan.elements[index].visualState)) {
+    autoPresentation === undefined
+      ? element.visualState !== plan.elements[index].visualState
+      : canonicalJson(element.visualState) !== canonicalJson(plan.elements[index].visualState))) {
     throw new TypeError('effect selections require layout inspection of the resolved plan');
   }
   plan = resolved.plan;
@@ -1937,6 +1964,10 @@ export async function executeValidatedPresentationDrawAndQcV001({
       finalQc,
       workVideo,
       resolvedPlan: plan,
+      ...(autoPresentation === undefined ? {} : {
+        autoPresentationResolution,
+        autoPresentationInputs,
+      }),
       presentationTimeline,
       counterfactualQcExecuted: runCounterfactualQc,
     };

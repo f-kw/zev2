@@ -1,6 +1,6 @@
-# 自動演出＋後修正 Phase 1 — 状態・保存前検証の監査checkpoint
+# 自動演出＋後修正 Phase 1 — 実装・短尺検証報告
 
-2026-09-16。**Phase 1未完了**。固定通常計画からの解決、一件修正、保存前検証を実装した。通常描画入口への接続は環境側の自動承認レビューで拒否され、未適用である。短尺動画の往復描画・物理QCも未実行であり、これをPhase 1完成や機能完成とは扱わない。
+2026-09-16。固定通常計画からの解決、一件修正、保存前検証、通常描画入口への接続を実装した。接続後の契約・保存・接続テストは **93/93合格**。短尺映像の6状態は既存の物理QCを含めて全件合格し、通常復元・自動復元を161フレームすべての一致で確認した。通常ファイル入口からの25.3秒・2字幕の追加実走も、実描画・物理QC・ローカル公開まで合格した。Phase 1の第一完成として最終監査へ渡す。
 
 ## 1. 目的・着工根拠
 
@@ -33,13 +33,15 @@ OpenChatCut研究branchを実装baseにせず、演出試作の実HEADから専�
 
 stash、reset、clean、既存物の削除・移動、元treeへの実装書込はしていない。今回の新規commitの変更はbaseとの差分で示す。指定baseに含まれる既存未push文書commitは、新branchをpushする際に祖先として共有される。元branchのrefを書き換えたり、その既存文書を今回の新規実装として計上したりしない。
 
-## 3. 現行経路の再利用点と未接続点
+## 3. 通常の製造・描画経路への接続
 
 - 既存の通常共通計画は、確定本文、表示順、改行、時刻、通常の外観、素材・元記録への対応を既に持つ。この計画のpath、実byte hash、内容hashを参照し、演出専用の字幕本文正本を作らない。
 - 旧演出試作のNormalは渡された計画を返すだけなので、演出適用後の計画からの復元には使えない。新しい一件修正では旧試作を呼ばず、固定通常計画から毎回解決する。
 - 許可された静的表現は検証用の全文Focus一種類。既存試作の黄色 `#FFD65A` を配管確認用にだけ使う。正式な製品デザインへの採用ではなく、入力側から色・サイズ・位置等を渡すことは拒否する。
-- 既存の共通描画入口は配置検査、描画、物理QCを担う。ここへ実効計画を渡し、通常製造入口へ伝搬する変更案を準備したが、自動承認拒否により未適用である。
-- したがって、このcheckpointではproduction描画に接続済み、旧試作がproductionから分離済み、動画の通常表示が回帰検査済みとは主張しない。
+- 通常製造入口で生成した共通計画を固定通常計画として保持し、新しい解決処理が返す実効計画だけを既存の配置検査、描画、物理QCへ渡す。結果には通常計画と実効計画を別々に残す。
+- 新経路の入力と旧演出試作が同時に指定された場合、共通描画入口は出力予約や描画より前に拒否する。新経路では旧試作の解決処理を呼ばない。
+- 通常のファイル入力関数からも、通常計画・判断入力・固定自動案・人修正のファイル参照を渡せる。実byteの読込と版検証を通し、自動案・人修正の保存元pathと実byte hash、入力控え、解決結果を返す。通常計画と一致しない別の描画計画への流用も拒否する。
+- 描画前に作成済みの配置検査を渡す呼出しでは、外観が変わる演出の追加を拒否する。実効計画に対する配置検査を省略できない。
 
 ## 4. 実装した契約
 
@@ -72,28 +74,35 @@ stash、reset、clean、既存物の削除・移動、元treeへの実装書込�
 
 中間監査後、同じbyteの正本を別配置へ移しただけで失効する制約を修正した。pathは読込場所・来歴として保持し、版の同一性と固定案・人修正の内容hashは、実byte hash、通常計画の内容hash、描画規則の版から判定する。内容や規則が変わった場合の拒否は維持する。移設先への現在参照と、固定案が保存された時点の参照位置は混同しない。
 
-## 5. 検査
+## 5. 契約・接続・既存回帰検査
 
-依存を新規installせず、既存のroot・runner・sharedの依存を専用worktreeの無視対象領域へローカル複製した。元treeの依存は変更しない。コピー済み実行ラッパーの元tree絶対参照を避け、既存Node `v20.19.6` から新worktree内の実体を直接実行した。
+依存の新規installは行わず、既存のroot・runner・sharedの依存を専用worktreeの領域へローカル複製した。元treeの依存は変更していない。コピー済み実行ラッパーの元tree絶対参照を避け、既存Node `v20.19.6` と新worktree内の直接CLIを使った。
 
-| 検査 | 結果・範囲 |
+| 検査 | 最終結果・範囲 |
 | --- | --- |
-| 一件修正・検証境界の自動テスト | 初回52/52合格。局所性、冪等性、順序独立性、Normal/Reset、凍結入力不変、3通りの無演出一致、部分対象の未処理、例外、未知指定・版不一致を確認 |
-| 保存・読み直しの自動テスト | 21/21合格。独立担当のNode 23実行に加え、rootが固定Node 20で再確認。不正時未生成、再読込、同じJSON内容でもbyte変更の拒否、改変案の再検証、上書き拒否 |
-| 共有型 | 既存TypeScript 5.9.3による `--noEmit` が成功 |
-| 新規処理2ファイルの構文 | 固定Nodeの構文検査が成功 |
-| 通常描画入口・短尺動画E2E・物理QC | 未実行。接続変更が自動承認拒否で停止 |
+| 状態と一件修正 | 63/63合格。局所性、冪等性、順序独立、NormalとReset、通常案・固定自動案の不変、例外と未処理の分離、有限指定、版検証 |
+| 保存・再読込 | 25/25合格。実byte参照、検証前未保存、不正・改変・上書き拒否、同内容の移設、修正内容を渡さない保存の拒否 |
+| 通常描画接続 | 5/5合格。混在・未知版の描画前拒否、無演出3形の描画入力一致、対象一件だけ変更、通常計画と実効計画の分離、通常ファイル入口の実byte改変拒否 |
+| 統合最終再実行 | **93/93合格、失敗0、skip 0**。既存85件＋接続5件＋保存境界の回帰3件 |
+| 共有型 | 既存TypeScript 5.9.3の `--noEmit` 成功 |
+| 既存の通常製造入口 | 11/11合格 |
+| 既存rendererの軽量回帰 | 選定12件中9合格・3不合格。未選択7件はskip。以下に理由を明記 |
 
-独立レビューで、JavaScriptの空き要素だけの対象配列が固定前検証をすり抜ける欠陥を1件発見した。配列の全位置を検査するよう限定修正し、回帰ケースを追加した。これは保存前検証の実装欠陥修正1回として記録する。JSONから来る通常配列だけを想定して見逃さないようにした。
+既存rendererの3不合格は、既存の信頼台帳が要求する4個の描画ソースhashと現物との不一致である。該当ソース4件と台帳1件は、全件が今回のbase `43380006` とbyte一致した。今回の変更で発生した差分ではない。台帳を更新して通す処置は行っていない。このため「全リポジトリの検査が合格」とは報告しない。通常製造入口の回帰11件と、今回の物理描画は別に検証した。
 
-限定修正と来歴保持の確認を加えた最終再実行は、固定Node `v20.19.6` で **76/76合格、失敗0、skip 0**。共有型の再検査も成功した。
+不一致の対象は `runner/src/remotion/Root.tsx`、`runner/src/remotion/renderer/TelopRenderer.tsx`、`evals/clip_composition/presentation_renderer_entry_v001.tsx`、`evals/clip_composition/presentation_renderer_text_layout_v001.mjs`。比較対象台帳は `evals/clip_composition/registries/presentation/presentation-renderer-trust-v001/trust.json`。
 
-```sh
-/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --test evals/clip_composition/presentation_auto_effects_v001.test.mjs evals/clip_composition/presentation_auto_effects_io_v001.test.mjs
-/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node packages/shared/node_modules/typescript/bin/tsc -p packages/shared/tsconfig.json --noEmit
-```
+最終統合検査は固定Nodeへ既存TSX loaderを指定し、状態・保存・描画接続の3 test fileを一度に実行した。通常製造入口の既存回帰も同じNodeを使った。
 
-TAP全文は `/private/tmp/zev-auto-effects-phase1-puocgzuv/phase1-contract-tests-attempt-0002.tap`、SHA-256は `df2f065c25eb266388dcedc828550d0cfae15a3884b609e250528d82f85466ff`。共有型検査のログは同directoryの `phase1-shared-types-attempt-0002.log`、正常終了で出力なし。生成物をcommitへ追加せず、実行したテスト本体とこの結果記録を保存する。
+| 証拠（共通prefix: `/private/tmp/zev-auto-effects-phase1-puocgzuv/`） | SHA-256 |
+| --- | --- |
+| `phase1-tests-v0005.tap` | `22e88ebd486ac6046fd3afe35176a8907a0f2de289b84114bdc2ebcdfcef55cb` |
+| `shared-typecheck-v0005.log`（成功・出力なし） | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `instruction-runner-regression-v0001.tap` | `a9be5fcb4df6fe3e39d40b9359bbb854505928170ec9bdc577f3352d0191e3fb` |
+| `renderer-regression-v0001.tap` | `8899b07001a78dafc3274ef1108ea5e1e8bb064367485a68d7d9f9dd0a54a077` |
+| `renderer-regression-baseline-evidence-v0001.json` | `e9ae0556b17a504477cf212e97160d25f03600c0b31747a8626026cc2c66a405` |
+
+独立レビューと中間監査を受けた実装の限定修正は計3回。空き要素を含む対象配列の拒否、pathと内容の同一性の分離、修正内容を渡さない保存の拒否である。最後の修正では、描画時の「修正なし」は有効のまま、保存時には版へ束縛された有効な修正文書を必須にした。省略・明示undefinedの2条件（test集計では親を含む3件）を追加し、修正後の統合検査は合格した。
 
 ## 6. 少数の実字幕による早期成立性確認
 
@@ -117,23 +126,17 @@ TAP全文は `/private/tmp/zev-auto-effects-phase1-puocgzuv/phase1-contract-test
 
 この確認から、全体の表現不能率、見落とし率、自然さ、可読性、演出価値は算出していない。少数確認だけで未読字幕までNormal判断したことにもしていない。
 
-## 7. 接続停止と残作業
+## 7. 接続再開と残課題
 
-担当agentによる通常描画入口2ファイルの変更が、自動承認レビューで2回拒否された。理由は、以前の「静的OpenChatCut読取のみ・ZEVコード変更禁止」を認可根拠として扱い、後続の直接ユーザーによるPhase 1着工指示を認可根拠へ反映できないというものだった。
+初回は通常描画入口2ファイルへの変更が環境の自動承認レビューで拒否された。自動承認レビューが以前の静的調査限定を現在の許可範囲と判断したためで、拒否時は適用を止め、具体的な変更案を提示した。
 
-最新の直接ユーザー指示の原文を確認して再審査したが、結果は同じだった。拒否されたファイルには変更を適用せず、他tool・他agent等を使った迂回適用も行っていない。独立した新規状態・保存検証ファイルとテスト追加は自動承認レビューを通過している。
-
-未適用の接続案を `/private/tmp/zev-auto-effects-phase1-puocgzuv/renderer-wiring-review.md` へ保存し、通常描画入口への接続について明示承認を依頼した。
-
-残作業は次の通り。
-
-1. 許可が反映された状態で、通常描画入口と通常製造入口へ新しい解決処理を接続する。
-2. 実効計画へ既存配置検査・描画・物理QCを適用し、結果に実効計画と演出の解決来歴を残す。
-3. 既存約5.4秒の基礎映像と通常計画を使い、Auto Focus→Normal固定→Focus→Resetを同じ描画経路で確認する。
-4. 無演出3形態のrenderer入力・描画の回帰と通常入口の接続テストを確認する。
-5. Phase 1完了条件をすべて確認してから、最終監査checkpointをcommit/pushしZEV進行管理4へ返す。
+2026-09-16の最新ユーザー指示「ZEV Phase 1の未適用renderer接続を明示承認します」を受領後、指定2ファイルへ接続を適用した。今回の指示は以前の静的調査限定をPhase 1へ適用しないこと、通常計画の保持、二重適用禁止、検証・配置・物理QC・来歴・本文等の保持、短尺一往復までを明示している。承認待ちは解消済みである。
 
 Phase 2の部分範囲描画・範囲修正・最小状態表示は未着工。反復語の出現位置、原文から描画文字への対応、書記素境界、改行越し、否定・条件を保つ意図判断が次の論点として残る。今回の一件の非連続範囲案を理由に、複数範囲へ製品範囲を広げていない。
+
+通常ファイル入口の受付から最終公開までの未実測範囲は、第11節の追加実走で解消した。共通描画の6状態検査に加え、既存の短尺jobへ固定自動案と有効な空の人修正を渡し、実体の描画・物理QC・公開と来歴保持を確認した。
+
+既存の信頼台帳と描画ソースhashの不整合は第5節の通り残る。全編再生成、演出選択の精度・自然さ・製品デザインの目視判断は今回の検査結果から主張しない。Phase 1の成立は、部分範囲描画と最小状態表示を含むPhase 2までの機能完成を意味しない。
 
 ## 8. ZEV進行管理4の中間監査
 
@@ -149,13 +152,13 @@ Phase 2の部分範囲描画・範囲修正・最小状態表示は未着工。�
 2. 通常製造結果の共通計画は固定通常計画のまま保持し、実効描画計画は派生物として別に返す。
 3. 新しい自動演出と旧演出試作の二重適用を拒否する。
 
-1は拒否されていない独立coreの限定修正として進めた。保存前検証の配列欠陥に続く実装の限定修正2回目。移設検査では現在参照位置も元と同じであることを求めた検査側の期待を修正した（検査設営修正1回）。2・3は未適用の接続案に反映すべき条件である。
+1は拒否されていない独立coreの限定修正として進めた。保存前検証の配列欠陥に続く実装の限定修正2回目。移設検査では現在参照位置も元と同じであることを求めた検査側の期待を修正した（検査設営修正1回）。2・3は明示承認後の接続で実装し、描画前拒否と結果保持の試験を追加した。
 
-限定修正後の最終検査は固定Node `v20.19.6` で **85/85合格、失敗0、skip 0**。共有型検査も再度成功した。TAP全文は `/private/tmp/zev-auto-effects-phase1-puocgzuv/phase1-contract-tests-attempt-0003.tap`、SHA-256は `cf8707e4938eb7a57d45bca7c06d09b717c08b706e1dc52369bf45a780caa5ca`。移設前後で描画計画・判断状態・固定案および人修正の内容hashは同一となり、移設先の内容変更は拒否された。早期7ケースも修正後の処理で再実行済み。
+中間監査の修正後検査は固定Node `v20.19.6` で **85/85合格、失敗0、skip 0**。共有型検査も再度成功した。TAP全文は `/private/tmp/zev-auto-effects-phase1-puocgzuv/phase1-contract-tests-attempt-0003.tap`、SHA-256は `cf8707e4938eb7a57d45bca7c06d09b717c08b706e1dc52369bf45a780caa5ca`。移設前後で描画計画・判断状態・固定案および人修正の内容hashは同一となり、移設先の内容変更は拒否された。早期7ケースも修正後の処理で再実行済み。
 
-相談役は対象2ファイルを明示した再開指示文も提示した。ただし、環境側の承認拒否を相談役の応答だけで迂回せず、Codex側で依頼したユーザーの明示承認待ちを維持している。最新着工指示の実装権限を取り消したという意味ではなく、拒否された操作を再実行するための環境上の確認である。
+相談役は対象2ファイルを明示した再開指示文も提示した。その時点では環境側の拒否を応答だけで迂回せず、ユーザーの明示承認後に再開した。現在は第7節の通り接続済みである。
 
-## 9. このcheckpointまでの変更ファイル
+## 9. baseからの全変更一覧（10ファイル）
 
 | ファイル | 作業内容 |
 | --- | --- |
@@ -165,4 +168,113 @@ Phase 2の部分範囲描画・範囲修正・最小状態表示は未着工。�
 | `evals/clip_composition/presentation_auto_effects_io_v001.mjs` | 実byte参照の読取、検証後保存、再読込時の再検証 |
 | `evals/clip_composition/presentation_auto_effects_v001.test.mjs` | 局所性・冪等性・順序独立・復元・版束縛・不正案拒否 |
 | `evals/clip_composition/presentation_auto_effects_io_v001.test.mjs` | 保存・再読込・改変検知・移設・既存ファイル保全 |
-| `docs/reports/auto-effects-phase1-20260916.md` | 着工根拠、既存tree保全、検査、早期ケース、中間監査、停止境界 |
+| `evals/clip_composition/render_presentation_v002.mjs` | 旧試作との混在拒否、実効計画を既存配置・描画・物理QCへ接続、解決結果と入力控えを返却 |
+| `evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts` | 通常製造・ファイル入口への接続、固定通常計画を保持、保存元ファイルの来歴を返却 |
+| `evals/clip_composition/presentation_auto_effects_renderer_v001.test.mjs` | 通常入口への接続、無演出一致、一件だけ変更、実byte改変拒否の回帰 |
+| `docs/reports/auto-effects-phase1-20260916.md` | 着工根拠、元tree保全、実装・検査・短尺証拠、早期ケース、監査、残課題 |
+
+## 10. 保存済み短尺素材での一往復と物理QC
+
+### 入力と実行経路
+
+既存比較の約5.37秒・1920×1080・30fps・161フレームの基礎映像と、字幕3件の通常計画をそのまま使用した。追加の素材取得、切出し、字幕再分割、時刻変更は行っていない。既存の短尺結果ラッパーから計画部分だけを検査用ファイルへ保存して、実ファイル入力の検証に使った。検査用のコピーを新しい字幕正本とは扱わない。
+
+| 既存入力 | 実byte SHA-256 |
+| --- | --- |
+| 通常計画を含む `digest-effects-step2-comparisons-v003/scratch/reaction-A-resolved.json` | `b5c53ad8d91fc78d8182f1d6c81706da28b13b218ee1a021f085ec4f33b970f6` |
+| 同 `scratch/reaction-base.mp4` | `d20dc44ab0dc1b17ff80e6cc7b8ac76aa1974f8a8c153468b3c77e8c23d8b511` |
+| `work-digest-v1-phase2-20260913-v001/style-94-v001/preset-registry.json` | `9ae9208bccc8b75d798ab1ae2f2f21ea275d96121a844c04b4dae1889bcd4c7d` |
+
+表のpath prefixは元作業treeの `evals/clip_composition/outputs/presentation/`。実行後も3入力のhashは不変だった。選択対象は字幕000009「やったー!」一件で、字幕000008・000010は通常表示のまま。これは状態往復を調べる検査用の指定であり、第6節に記録した音声根拠不足を解消したり、Vocal accentの採用を判断したりしたものではない。
+
+自動案と各段階の人修正を、実際の保存前検証を通して新規ファイルへ保存し、描画のたびに実byte検証付きで読み直した。6状態をすべて、通常の製造入口が呼ぶ同一の共通描画処理へ渡した。配置検査、Remotionの字幕PNG、再描画の決定性検査、行ごとの実画素検査、FFmpeg合成、音声検査、字幕を省いた比較映像による最終可視性検査を実行した。検査基準や閾値は変更していない。
+
+### 6状態の結果
+
+| 状態 | 描画・物理QC | 全161フレームの一致関係 |
+| --- | --- | --- |
+| 自動案なし・人修正なし | 合格 | 既存の保存済みNormal映像と一致 |
+| 全件Normalの完了済み自動案 | 合格 | 上の無演出と一致 |
+| 一件に自動Focus | 合格 | 自動Focusの基準出力 |
+| その一件を人間がNormal固定 | 合格 | 無演出・従来Normalへ一致 |
+| その一件へ人間がFocus再指定 | 合格 | 保存済み自動Focusと一致 |
+| その一件をReset | 合格 | 保存済み自動Focusへ一致 |
+
+比較は復号した映像の全フレームhash列で行い、6出力のMP4ファイル自体も上記の二群でbyte一致した。
+
+| 一致する群 | MP4実byte SHA-256 | 全フレームhash列のSHA-256 |
+| --- | --- | --- |
+| 従来Normal・無演出・全Normal・人Normal | `44196ed3a72e65c28160da98a4edbf07df4dc0be31c8d3d55c1b111e7356246a` | `c5b8156eb4bda8f6c3950464c4a804553ae6e298e1c4fa8f3ec208e27e658481` |
+| 自動Focus・人Focus・Reset | `4f82d6dbb049d9326dbf3064259ecfbd0278978cbe4c048a5242d82416d92bb9` | `3e8e4389d60c3abfa1f4693905f4d546388ba72a8aedc7e2a05607973eb12f9f` |
+
+### 不変と実画素の確認
+
+- 元の通常計画は深い比較で不変。選択対象の文字色以外は、実効計画の全フィールドが一致した。本文、字幕順序、時刻、表示長、元動画対応、来歴も含む。
+- 全6状態の配置検査結果は完全一致。対象外の2字幕はPNGの実byte hashも一致した。選択対象のPNGだけが通常とFocusで変化した。
+- 全18個の字幕描画は、空画像、表示領域からの逸脱、行の重なり、時間と空間が重なる字幕衝突、代表フレームでの非表示の検査に合格した。同一入力から2回描いたPNGも一致した。可視性の比較フレームは字幕順に19・47・109であり、可視性検査そのものを全161フレームへ実施したという意味ではない。
+- 選択対象の通常表示とFocusは、1920×1080の透明度2,073,600画素が完全一致した。色変更によって基準の字形輪郭が欠けたり配置が変わったりしていない。透明度のSHA-256は両方 `7a2023e6ea01051d905962872fec78a685dda140a42c2c38615acc8194e56684`。対象外2字幕は画像全体が一致し、残る各状態もそれぞれ同じPNGへ一致する。
+- 音声は全出力で元のAAC packet payloadと一致。hashは `aee02bc7b56dac072c8900d6df9ea811487bef024e8deda505e7933d0c6b5441`。映像は全件161フレーム、音声を含む観測長は5366ms。
+- 旧試作との同時指定は第5節の接続試験で描画開始前に拒否し、6状態では新経路または無指定の通常経路を一度だけ通した。
+
+| 字幕ID末尾 | 実画素の外接範囲（左・上・右・下） | 安全領域・配置 |
+| --- | --- | --- |
+| 000008 | 495・845・1397・974 | 全状態で同一、合格 |
+| 000009 | 732・847・1171・974 | 全状態で同一、合格 |
+| 000010 | 402・844・1483・974 | 全状態で同一、合格 |
+
+既存の安全領域は左80、上40、右端1840、下端1040。既存QCは空描画、領域逸脱、行・字幕の交差、代表フレームの可視性を確認する。追加の透明度比較は、基準表示から字形輪郭の欠けが増えないことを確認する。これらを文字ごとの完全認識や、演出意図・自然さ・製品デザインの人間による目視承認とは扱わない。
+
+### 証拠
+
+集計は `/private/tmp/zev-auto-effects-phase1-puocgzuv/short-e2e-v002/summary.json`、SHA-256 `1a8c64e7259b6d82bf1934d8646ac03b41b3e72aa8e24518b5bbfbbd0800a640`。同directoryへ6状態の入力、描画返却結果、配置・画素・音声・可視性検査、全フレームhash列を保存した。透明度比較は `selected-caption-alpha-comparison.json`（SHA-256 `0cef2ced21e45fdab3e3f928fc2d2ad0f24c03fc1b25a2127f7dae8e1bdd0917`）。従来Normalとの比較は `previous-normal-comparison.json`（SHA-256 `0f80ffb05567d9a2ef52ad7b704801ccad6a04ff584a19402e781864ea32c47d`）。
+
+短尺実行の初回は、sandboxが既存TSXのローカルIPCを拒否し、配置検査の結果が生成されなかった。失敗出力とstderrを `short-e2e-v001`、`short-e2e-attempt-0001.log` に保存し、実行権限の承認後に別の出力版で同じ検査を再実行した。検査基準や実装を緩める修正はない。成功ログは `short-e2e-attempt-0002.log`。
+
+ローカルの検証映像:
+
+- [従来Normalと一致する無演出](/private/tmp/zev-auto-effects-phase1-puocgzuv/worktree/evals/clip_composition/outputs/presentation/.auto-effects-phase1-short-v002-none.presentation-renderer-v002-work-qje9ET/publish/presentation-rendered-v002.mp4)
+- [自動Focus](/private/tmp/zev-auto-effects-phase1-puocgzuv/worktree/evals/clip_composition/outputs/presentation/.auto-effects-phase1-short-v002-auto-focus.presentation-renderer-v002-work-AGdCJQ/publish/presentation-rendered-v002.mp4)
+- [人間によるNormal固定](/private/tmp/zev-auto-effects-phase1-puocgzuv/worktree/evals/clip_composition/outputs/presentation/.auto-effects-phase1-short-v002-normal.presentation-renderer-v002-work-xHXX2p/publish/presentation-rendered-v002.mp4)
+- [人間によるFocus再指定](/private/tmp/zev-auto-effects-phase1-puocgzuv/worktree/evals/clip_composition/outputs/presentation/.auto-effects-phase1-short-v002-human-focus.presentation-renderer-v002-work-qy6oHo/publish/presentation-rendered-v002.mp4)
+- [Reset後](/private/tmp/zev-auto-effects-phase1-puocgzuv/worktree/evals/clip_composition/outputs/presentation/.auto-effects-phase1-short-v002-reset.presentation-renderer-v002-work-ZOLH2f/publish/presentation-rendered-v002.mp4)
+
+## 11. 通常ファイル入口から公開までの追加E2E
+
+保存済みの `distant-connection-formal-render/candidate-horror-claim-to-speed-up-v003/renderer-job-v002.json` を元に、25.3秒・759フレーム・発話字幕2件の専用検査jobを作った。本文、字幕時刻、元動画対応、保持区間、意味入力、契約、台帳を変えず、出力先3箇所と実行環境・実装の実byte参照だけを更新した。基礎映像は専用worktreeへ既に存在する保存済みファイルを使用し、切出し・再取得は行っていない。
+
+実行前に、許可した箇所以外のjob全体が元と一致すること、正式な形式の読込、入力参照27件、元source29件のhashを照合した。固定通常計画を既存の生成処理で作り、固定Focus一件と版に束縛された空の人修正文書を、新しい保存前検証を通して保存した。
+
+その4つの入力ファイル参照を通常ファイル入口へ渡した。描画・検査・公開の差替えやmockは使わず、既存の本物の処理を一回実行した。
+
+| 確認項目 | 実測結果 |
+| --- | --- |
+| 通常の受付・製造・公開 | 終了コード0、製造完了、ローカル検査出力へ公開済み |
+| 動画 | 1920×1080、30fps、759フレーム、25,300ms |
+| 物理QC | 字幕2件とも配置、実画素、最終映像の比較、音声を含め合格・違反0 |
+| 通常計画 | 保存した固定通常計画と完全一致 |
+| 実効計画 | 一件の全文Focusだけが変更され、他の字幕と全ての本文・時刻・来歴は保持 |
+| 人修正 | 有効な空文書の保存・再読込を確認 |
+| 出力からの追跡 | 通常計画、実効計画、自動案・人修正の入力控え、解決結果、4入力の参照を保持。自動案と人修正の保存元path・実byte hashも一致 |
+| 保全 | 元source29件、専用入力5件が実行前後で不変 |
+
+音声のpacket payloadは元と一致し、SHA-256は `116c340067dd2ed0c2125878bd9c0de3c85bd48dc27c77214b81a0a174486e20`。字幕を一件ずつ省いた比較映像との差分はそれぞれ204,850画素と274,506画素で、最終出力上の可視性を確認した。これは既存の可視性検査の観測値であり、新しい合格閾値ではない。
+
+証拠は `/private/tmp/zev-auto-effects-phase1-puocgzuv/file-entry-e2e-v002/` に保存した。
+
+| 証拠 | SHA-256 |
+| --- | --- |
+| `summary.json` | `6b0f21320afead511760605c406c3162a471b469e0990286cb32524ed392c3c4` |
+| `result.json`（通常入口の全返却結果） | `24225339d7adfeba1e80b2928daf8f54781767ed603515e3dfd3af24d872650b` |
+| 公開された検査用MP4 | `2dfaf1cc6854653310ca447280253133a1f2bfaf0db840fbadb70ecab05d598b` |
+
+[通常ファイル入口を通った検査映像](/private/tmp/zev-auto-effects-phase1-puocgzuv/worktree/evals/clip_composition/outputs/presentation/auto-effects-phase1-file-entry-v001/render/presentation-rendered-v002.mp4)
+
+最初の実行前検査では、検査スクリプトが独自のcompact JSONをjobの正式形式とみなしていたため読込検査に失敗した。実描画前で止め、v001の証拠を保存し、既存の正式serializerでjobを書くよう設営だけを修正した。v002の実行前検査は合格し、正式描画は一回で成功。これは先の移設検査の期待値修正に続く検査設営修正2回目で、実装・契約・台帳・本文等を変更していない。
+
+## 12. 第一完成の範囲と保存方針
+
+固定通常計画の保持、保存前検証、修正なし・Normal固定・有限置換・Reset、固定通常計画からの再解決、局所性・冪等性・順序独立、版不一致拒否、Normal・未解決・技術失敗の分離、通常製造への接続、通常表示の不変、実字幕7件の早期成立性を確認した。
+
+Phase 1の基盤実装と必要な検証は第一完成。残る手続きは、この現物の監査checkpointをcommit/pushし、ZEV進行管理4の最終監査を受けること。Phase 2の着工や正式デザイン採用、main merge、tag、stable昇格、releaseをこの完成から自動的に開始しない。
+
+正本へ残すのは第9節の10ファイルのみ。動画・画像・入力fixture・プロセス記録などの検査証拠は専用の一時作業領域に保存し、commitへ混ぜない。元作業treeの既存tracked差分1件・未追跡59,153件・staged0は保全している。専用worktreeには今回作成した検査中間物が未追跡で残るため、tree全体がcleanだとは報告しない。新規API費用・契約追補は0。

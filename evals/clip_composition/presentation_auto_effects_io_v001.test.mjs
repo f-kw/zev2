@@ -107,6 +107,21 @@ test('invalid human overrides are rejected before their output is created', asyn
   });
 });
 
+test('human override saving rejects omitted and undefined documents without creating a file', async t => {
+  for (const explicit of [false, true]) await t.test(explicit ? 'explicit undefined' : 'omitted', async child => {
+    const f = await fixture(child);
+    const fixed = await saveAuto(f);
+    const input = {
+      baselinePath: f.baselinePath, decisionInputPath: f.decisionInputPath,
+      autoProposalPath: f.autoProposalPath, outputPath: f.overridesPath,
+      ...(explicit ? {overrides: undefined} : {}),
+    };
+    await assert.rejects(saveAutoPresentationOverridesV001(input), TypeError);
+    await expectMissing(f.overridesPath);
+    assert.deepEqual(await readJson(f.autoProposalPath), fixed);
+  });
+});
+
 test('saved automatic judgment and human edits survive a fresh read, and saved Reset restores the automatic result', async t => {
   const f = await fixture(t);
   const originalBaseline = await readFile(f.baselinePath);

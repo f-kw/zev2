@@ -46,6 +46,7 @@ export async function loadAutoPresentationV001({baselinePath, decisionInputPath,
 
 export async function saveAutoPresentationOverridesV001({baselinePath, decisionInputPath,
   autoProposalPath, overrides, outputPath}) {
+  if (overrides === undefined) throw new TypeError('saving overrides requires a bound override document');
   const {baselinePlan, autoPresentation} = await loadAutoPresentationV001({baselinePath, decisionInputPath, autoProposalPath});
   resolveAutoPresentationV001({baselinePlan, ...autoPresentation, overrides});
   await writeFile(outputPath, `${JSON.stringify(overrides, null, 2)}\n`, {flag: 'wx'});
