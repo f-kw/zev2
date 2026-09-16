@@ -107,3 +107,12 @@ AIの公開名はColor Accent / Scale Accent / Panel Accentのみ。公開名か
 - `/private/tmp/zev-visual-variation-v9c1j07h/reviews/completed-video-verifier-code-review-v001.json` — `6dcf4b5069c2568b1f4279c128c7d36c04c382b2e944ff58ce225e9b10b5dc46`
 - `/private/tmp/zev-visual-variation-v9c1j07h/judgment-verification-v001/summary.json` — `a818958d94d2574a317ec64bb42984baa1c7c66f87a8ee03f2e4353d8daa83d8`
 - `/private/tmp/zev-visual-variation-v9c1j07h/preservation-after-v002.json` — `da5c78a73cf488ddccc040603998ec67a2996f99138062fe464b052d143b73dc`
+
+## 8. 相談役の最終監査と次の指示
+
+同じZEV進行管理4の会話へcheckpoint `27530fff389884d5f6267beeceff6be2e77d75c8` を報告し、末尾で次のタスクを明示的に要求した。相談役の完了した回答は、本工程を技術完成として受理し、必須修正なしと判定した。Color / Scaleは採用済み、Panelは技術成立・正式採用未判定という区分を維持している。ローカルMP4の見心地や映像の覆い隠しを遠隔監査で承認したものではない。
+
+次は、実在する音声の局所頂点付近で字幕を一度だけ短く拡大して戻すPulse Accent（仮称）を、既存の字幕合成に最小限で接続する指示を受領した。汎用animation基盤を作らず、時刻は根拠の頂点から決定的に導き、全必要フレームの表示可否を検証する。今回の技術完成と次工程の指示は別であり、この記録でPanelやPulseの正式名称・デザイン採用を確定しない。
+
+- 完了した回答: `/private/tmp/zev-visual-variation-v9c1j07h/consultant-response-v001.txt` — `83786ed4b86774b074860db9be31fb0b527cad230cc815a55d2eacec08f6cf2d`
+- 送信記録: `/private/tmp/zev-visual-variation-v9c1j07h/consultant-transmission-v001.json`
