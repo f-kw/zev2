@@ -223,11 +223,10 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
     if (selection?.role !== 'Focus') return element;
     const range = focusRange(element, selection);
     ranges.set(element.instructionId, range);
-    if (selection.scope === 'partial-caption') {
-      return {...element, presentationColorRange: {...range, fontColor: rules.textStyle.fontColor}};
-    }
-    return {...element, visualState: {...element.visualState,
-      textStyle: {...element.visualState.textStyle, ...rules.textStyle}}};
+    // Whole Focus is the complete canonical range of the same paint operation.
+    // Keep the normal style so the renderer can preserve the original glyphs,
+    // including color-font glyphs that do not obey a text fill override.
+    return {...element, presentationColorRange: {...range, fontColor: rules.textStyle.fontColor}};
   });
   const changed = elements.some((element, index) => element !== baselinePlan.elements[index]);
   const selection = entry => {

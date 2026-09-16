@@ -219,12 +219,15 @@ test('range replacement is local, idempotent, commutative, and immutable; Reset 
   assert.deepEqual(edited.entries, [effect(ids[0], partial('末尾'))]);
 });
 
-test('whole to partial to whole clears prior range; Normal and Reset restore their distinct saved states', () => {
+test('whole to partial to whole replaces the range; Normal and Reset restore their distinct saved states', () => {
   const f = fixture(), auto = fix(f, [effect(ids[0], partial('中間'))]);
   let overrides = create(f, auto);
   overrides = edit(f, auto, overrides, ids[0], whole());
   const firstWhole = resolve(f, auto, overrides);
-  assert.equal(Object.hasOwn(caption(firstWhole), 'presentationColorRange'), false);
+  assert.deepEqual(caption(firstWhole), {...f.baselinePlan.elements[0],
+    presentationColorRange: {startCodePoint: 0, endCodePointExclusive: 6, fontColor: '#FFD65A'}});
+  assert.deepEqual(firstWhole.plan,
+    resolve(f, auto, edit(f, auto, create(f, auto), ids[0], partial('先頭中間末尾'))).plan);
   assert.deepEqual(state(firstWhole).canonicalRange, {startCodePoint: 0, endCodePointExclusive: 6});
   overrides = edit(f, auto, overrides, ids[0], partial('末尾'));
   assert.equal(caption(resolve(f, auto, overrides)).visualState.textStyle.fontColor, '#FFFDF8');

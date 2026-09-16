@@ -138,7 +138,8 @@ test('Focus reaches the existing layout only on its caption while the normal pla
   const {autoPresentation} = await savedInput(t, plan, {selected: true});
   const layout = await captureLayoutInput(t, plan, autoPresentation);
   const expected = structuredClone(plan.elements[0]);
-  expected.visualState.textStyle.fontColor = '#FFD65A';
+  expected.presentationColorRange = {startCodePoint: 0,
+    endCodePointExclusive: Array.from(expected.text).length, fontColor: '#FFD65A'};
   assert.deepEqual(layout.overlays[0].element, expected);
   assert.deepEqual(layout.overlays[1].element, before.elements[1]);
   assert.deepEqual(plan, before);
