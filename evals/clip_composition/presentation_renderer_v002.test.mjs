@@ -1476,6 +1476,26 @@ test('12 行数・行の正の交差・安全領域・空alphaを独立して検
   );
 });
 
+test('12b 保存済みnative証拠の欠落・成功フラグによる偽造を単独で拒否する', async () => {
+  const {planReport} = await logicalFixturePromise;
+  const plan = clone(planReport.plan);
+  const caption = plan.elements.find(element => element.kind === 'speech-caption');
+  assert.ok(caption);
+  plan.elements = [caption];
+  const base = makeValidQcInput(plan);
+  const positive = evaluatePresentationRendererQcV002(base);
+  assert.equal(positive.status, 'passed', JSON.stringify(positive));
+  for (const evidence of [undefined, {status: 'passed', visible: true}]) {
+    const invalid = clone(base);
+    invalid.overlayInspections[0].visibilityComparisonBasis = 'native-reference-state-identification-v001';
+    if (evidence !== undefined) invalid.overlayInspections[0].nativeFrameQc = evidence;
+    const rejected = evaluatePresentationRendererQcV002(invalid);
+    assert.equal(rejected.status, 'failed');
+    assertHasCode(rejected, 'NATIVE_FRAME_QC_INVALID');
+    assert.equal(rejected.violations.length, 1);
+  }
+});
+
 test('13 時間と空間の正の交差だけを衝突とし境界接触は許容する', async () => {
   const fixture = await logicalFixturePromise;
   const two = clone(fixture.planReport.plan);
@@ -1756,10 +1776,6 @@ test('17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成
   const invisible = clone(baseQc);
   invisible.overlayInspections[0].changedPixelsAgainstInstructionOmittedFrame = 0;
   assertHasCode(evaluatePresentationRendererQcV002(invisible), 'OUTPUT_ELEMENT_NOT_VISIBLE');
-  const forgedNative = clone(baseQc);
-  forgedNative.overlayInspections[0].visibilityComparisonBasis = 'native-reference-state-identification-v001';
-  forgedNative.overlayInspections[0].nativeFrameQc = {status: 'passed', visible: true};
-  assertHasCode(evaluatePresentationRendererQcV002(forgedNative), 'NATIVE_FRAME_QC_INVALID');
 
   const failureDirectory = path.join(rendered.fixture.directory, 'failure-output');
   await mkdir(failureDirectory);
