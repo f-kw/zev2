@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V003,
+  AUTO_PRESENTATION_RULES_REF_V004,
   createAutoPresentationOverridesV001,
   editAutoPresentationOverrideV001,
   fixAutoPresentationProposalV001,
@@ -61,7 +61,7 @@ function fixture(text = '先頭中間末尾', lines = [text]) {
     baselineRef: {path: 'normal.json', fileSha256: hash(JSON.stringify(baselinePlan)),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: 'input.json', fileSha256: hash('fixed input')},
-    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V003),
+    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V004),
   };
   return freeze({baselinePlan, context});
 }

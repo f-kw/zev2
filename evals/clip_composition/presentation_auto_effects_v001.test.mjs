@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V003,
+  AUTO_PRESENTATION_RULES_REF_V004,
   sha256AutoPresentationV001,
   sha256AutoPresentationStateV001,
   fixAutoPresentationProposalV001,
@@ -21,6 +21,7 @@ const freeze = value => {
   return value;
 };
 const focus = () => ({role: 'Focus', presentation: 'provisional-focus', scope: 'whole-caption'});
+const vocal = () => ({role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'});
 const effect = captionId => ({captionId, ...focus()});
 const captionIds = ['caption-1', 'caption-2', 'caption-3'];
 
@@ -59,7 +60,7 @@ function fixture() {
     baselineRef: {path: 'fixtures/normal-plan.json', fileSha256: byteSha(`${JSON.stringify(baselinePlan, null, 2)}\n`),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: 'fixtures/confirmed-caption-input.json', fileSha256: byteSha('saved caption decision input')},
-    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V003),
+    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V004),
   };
   return freeze({baselinePlan, context});
 }
@@ -76,6 +77,71 @@ const edit = (f, autoProposal, overrides, captionId, selection) => editAutoPrese
 const resolve = (f, autoProposal, overrides) => resolveAutoPresentationV001({...f, autoProposal, overrides});
 const item = (result, id) => result.plan.elements.find(element => element.instructionId === id);
 const state = (result, id) => result.resolution.captions.find(caption => caption.captionId === id);
+
+test('Vocal changes only the selected caption size and preserves fixed text, lines, source, time and other elements', () => {
+  const f = fixture(), auto = fixed(f, {effects: [{captionId: 'caption-2', ...vocal()}]});
+  const before = JSON.stringify(f), autoBefore = JSON.stringify(auto);
+  const result = resolve(f, auto);
+  const expected = clone(f.baselinePlan);
+  expected.elements[1].visualState.textStyle.fontSizePx = 128;
+  assert.deepEqual(result.plan, expected);
+  assert.equal(state(result, 'caption-2').role, 'Vocal accent');
+  assert.equal(state(result, 'caption-2').canonicalRange, null);
+  assert.equal(Object.hasOwn(item(result, 'caption-2'), 'presentationColorRange'), false);
+  assert.equal(JSON.stringify(f), before);
+  assert.equal(JSON.stringify(auto), autoBefore);
+});
+
+test('Focus, Vocal and Normal replace each other and Reset restores either saved automatic role', () => {
+  for (const automatic of [focus(), vocal()]) {
+    const f = fixture(), auto = fixed(f, {effects: [{captionId: 'caption-2', ...automatic}]});
+    const saved = JSON.stringify(auto), automaticPlan = resolve(f, auto).plan;
+    let overrides = emptyOverrides(f, auto);
+    for (const selection of [vocal(), {...focus(), scope: 'partial-caption', targetText: 'とは限りません'}, vocal(), 'Normal', 'Reset']) {
+      overrides = edit(f, auto, overrides, 'caption-2', selection);
+      const result = resolve(f, auto, overrides), target = item(result, 'caption-2');
+      const role = selection === 'Reset' ? automatic.role : selection === 'Normal' ? 'Normal' : selection.role;
+      assert.equal(state(result, 'caption-2').role, role);
+      assert.equal(target.visualState.textStyle.fontSizePx, role === 'Vocal accent' ? 128 : 71);
+      assert.equal(Object.hasOwn(target, 'presentationColorRange'), role === 'Focus');
+      assert.deepEqual(result.plan.elements.filter(e => e.instructionId !== 'caption-2'),
+        f.baselinePlan.elements.filter(e => e.instructionId !== 'caption-2'));
+      assert.equal(JSON.stringify(auto), saved);
+      if (selection === 'Normal') assert.deepEqual(result.plan, f.baselinePlan);
+      if (selection === 'Reset') {
+        assert.deepEqual(result.plan, automaticPlan);
+        assert.equal(state(result, 'caption-2').hasOverride, false);
+      }
+    }
+  }
+});
+
+test('Vocal cannot receive partial ranges, free drawing values, duplicate roles, or a prepainted baseline', () => {
+  const f = fixture(), auto = fixed(f), overrides = emptyOverrides(f, auto);
+  for (const selection of [
+    {...vocal(), scope: 'partial-caption', targetText: '字幕'},
+    {...vocal(), occurrence: 1}, {...vocal(), fontSizePx: 120}, {...vocal(), scale: 2},
+    {...vocal(), presentation: 'dynamic-pop'}, {...vocal(), color: '#FFFF00'},
+  ]) {
+    assert.throws(() => fixed(f, {effects: [{captionId: 'caption-1', ...selection}]}), /Vocal accent/);
+    assert.throws(() => edit(f, auto, overrides, 'caption-1', selection), /Vocal accent/);
+  }
+  assert.throws(() => fixed(f, {effects: [effect('caption-1'), {captionId: 'caption-1', ...vocal()}]}), /conflicting/);
+  const painted = resolve(f, fixed(f, {effects: [effect('caption-1')]})).plan;
+  const context = clone(f.context);
+  context.baselineRef.canonicalSha256 = sha256AutoPresentationV001(painted);
+  assert.throws(() => resolveAutoPresentationV001({baselinePlan: painted, context}), /fixed normal plan/);
+});
+
+test('forward-only rules reject an old revision even when its saved proposal hash is recomputed', () => {
+  const f = fixture(), auto = clone(fixed(f, {effects: [{captionId: 'caption-1', ...vocal()}]}));
+  auto.proposal.context.renderingRulesRef.version = 'auto-presentation-rules-v003';
+  auto.proposalSha256 = sha256AutoPresentationStateV001(auto.proposal);
+  assert.throws(() => resolve(f, auto), /rendering rules version differs/);
+  const context = clone(f.context);
+  context.renderingRulesRef.version = 'auto-presentation-rules-v003';
+  assert.throws(() => createAutoPresentationOverridesV001({baselinePlan: f.baselinePlan, context}), /rendering rules version differs/);
+});
 
 test('content identity ignores object-key order while preserving array order and values', () => {
   assert.equal(sha256AutoPresentationV001({b: 2, a: 1}), byteSha('{"a":1,"b":2}'));
@@ -283,7 +349,7 @@ test('a proposal is rejected before fixing for unknown targets, unsupported draw
     ['unknown caption', p => {p.effects = [effect('missing')];}],
     ['non-caption target', p => {p.effects = [effect('section-title')];}],
     ['unknown role', p => {p.effects = [{...effect('caption-1'), role: 'Emotion'}];}],
-    ['unsupported Vocal accent', p => {p.effects = [{...effect('caption-1'), role: 'Vocal accent'}];}],
+    ['Vocal cannot use the Focus preset', p => {p.effects = [{...effect('caption-1'), role: 'Vocal accent'}];}],
     ['unknown presentation', p => {p.effects = [{...effect('caption-1'), presentation: 'free-style'}];}],
     ['partial scope', p => {p.effects = [{...effect('caption-1'), scope: 'partial-range'}];}],
     ['extra drawing value', p => {p.effects = [{...effect('caption-1'), fontColor: '#FF0000'}];}],

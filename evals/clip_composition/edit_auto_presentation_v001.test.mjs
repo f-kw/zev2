@@ -12,7 +12,8 @@ import {loadAutoPresentationContextV001, loadAutoPresentationV001,
 
 const exec = promisify(execFile);
 const writeJson = (file, value) => writeFile(file, `${JSON.stringify(value, null, 2)}\n`);
-async function fixture(t, auto = true) {
+async function fixture(t, auto = true, selection = {role: 'Focus', presentation: 'provisional-focus',
+  scope: 'partial-caption', targetText: '同じ語', occurrence: 2}) {
   const directory = await mkdtemp(join(tmpdir(), 'zev-phase2-cli-'));
   t.after(() => rm(directory, {recursive: true, force: true}));
   const files = {baselinePath: join(directory, 'baseline.json'), decisionInputPath: join(directory, 'input.json'),
@@ -28,8 +29,7 @@ async function fixture(t, auto = true) {
   const {context} = await loadAutoPresentationContextV001(files);
   if (auto) await saveFixedAutoPresentationV001({...files, outputPath: files.autoProposalPath,
     proposal: {schemaVersion: 'auto-presentation-proposal-v001', context, targetCaptionIds: ['a', 'b', 'c'],
-      completion: 'complete', effects: [{captionId: 'a', role: 'Focus', presentation: 'provisional-focus',
-        scope: 'partial-caption', targetText: '同じ語', occurrence: 2}],
+      completion: 'complete', effects: [{captionId: 'a', ...selection}],
       exceptions: [{captionId: 'c', status: 'unresolved', reason: 'fixture: selection unresolved'}]}});
   const args = ['--baseline', files.baselinePath, '--decision-input', files.decisionInputPath,
     ...(auto ? ['--auto', files.autoProposalPath] : [])];
@@ -54,6 +54,28 @@ test('CLI accepts exact identity/text and time, and rejects ambiguous argument c
     ['show', ...required, '--unknown', 'x'], ['show', ...required, '--output', 'new'],
     ['partial', ...required, '--caption-id', 'a', '--target', '語', '--output', 'new', '--occurrence', '1.5'],
   ]) assert.throws(() => parseAutoPresentationEditArgsV001(args), TypeError);
+});
+
+test('Vocal CLI reloads its own role, replaces Focus and Normal, and Reset recovers saved Vocal', async t => {
+  const f = await fixture(t, true, {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'});
+  const before = await Promise.all(Object.values(f.files).map(p => readFile(p)));
+  let current;
+  for (const [index, action] of ['focus', 'vocal', 'normal', 'reset'].entries()) {
+    const outputPath = join(f.directory, `vocal-edit-${index}.json`), output = [];
+    const result = await runAutoPresentationEditV001([action, ...f.args,
+      ...(current ? ['--overrides', current] : []), '--caption-id', 'a', '--output', outputPath], s => output.push(s));
+    const loaded = await loadAutoPresentationV001({...f.files, overridesPath: outputPath});
+    const row = inspectAutoPresentationCaptionsV001({...loaded, query: {captionId: 'a'}})[0];
+    assert.deepEqual(row, result.after);
+    assert.equal(row.automatic.role, 'Vocal accent');
+    assert.equal(row.effective.role, action === 'focus' ? 'Focus' : action === 'normal' ? 'Normal' : 'Vocal accent');
+    assert.match(output.join('\n'), /Vocal accent \/ whole/);
+    if (action === 'reset') assert.equal(row.hasOverride, false);
+    current = outputPath;
+  }
+  for (const [i, file] of Object.values(f.files).entries()) assert.deepEqual(await readFile(file), before[i]);
+  assert.throws(() => parseAutoPresentationEditArgsV001(['vocal', ...f.args, '--caption-id', 'a',
+    '--target', '同じ語', '--output', join(f.directory, 'invalid.json')]), /partial 専用/);
 });
 
 test('ID, exact substring, and half-open video time return all matching candidates', async t => {

@@ -9,7 +9,8 @@ import path from 'node:path';
 import {promisify} from 'node:util';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V003, fixAutoPresentationProposalV001,
+  AUTO_PRESENTATION_RULES_REF_V004, fixAutoPresentationProposalV001,
+  createAutoPresentationOverridesV001, editAutoPresentationOverrideV001,
   resolveAutoPresentationV001, sha256AutoPresentationV001,
 } from './presentation_auto_effects_v001.mjs';
 import {buildPresentationColorRunsV001, indexExplicitLinesV001}
@@ -49,7 +50,7 @@ function resolveFixture(fixture, whole = false) {
   const context = {baselineRef: {path: '/test/baseline', fileSha256: 'a'.repeat(64),
     canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
   decisionInputRef: {path: '/test/decision', fileSha256: 'b'.repeat(64)},
-  renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V003};
+  renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V004};
   const selection = whole ? {scope: 'whole-caption'} : {scope: 'partial-caption',
     targetText: fixture.targetText, ...(fixture.occurrence ? {occurrence: fixture.occurrence} : {})};
   const autoProposal = fixAutoPresentationProposalV001({baselinePlan, context,
@@ -112,7 +113,7 @@ test('span rejects malformed, out of bounds, non-visible, and grapheme-splitting
 const sha = data => createHash('sha256').update(data).digest('hex');
 const execute = promisify(execFile);
 const phase1Commit = '75b4fd38d5fea51b43a8c1bc23944be63d3e821a';
-test('production client-mounted overlay preserves Phase 1 normal pixels and applies native foreground selection', async t => {
+test('production overlay preserves normal and Focus pixels and renders finite Vocal with exact Normal and Reset recovery', async t => {
   const root = process.cwd();
   const output = process.env.ZEV_SPAN_QC_OUTPUT
     ? path.resolve(process.env.ZEV_SPAN_QC_OUTPUT) : await mkdtemp(path.join(tmpdir(), 'zev-span-raster-'));
@@ -233,6 +234,7 @@ test('production client-mounted overlay preserves Phase 1 normal pixels and appl
   const browser = await openBrowser('chrome', {browserExecutable: chromePath,
     forceDeviceScaleFactor: 1, logLevel: 'error'});
   const results = [];
+  let vocalResult;
   const geometry = measurement => ({...measurement.exact,
     textModel: {...measurement.exact.textModel,
       lines: measurement.exact.textModel.lines.map(({colorRuns, ...line}) => line)}});
@@ -262,6 +264,62 @@ test('production client-mounted overlay preserves Phase 1 normal pixels and appl
     const measure = async (props, namespace = 'SpanQC') => page.evaluate(`${namespace}.draw(${JSON.stringify(props)})`);
     const onlyFill = () => page.evaluate("document.querySelectorAll('svg text[stroke]').forEach(el => el.style.visibility='hidden')");
     const onlyStroke = () => page.evaluate("document.querySelectorAll('svg text').forEach(el => el.style.visibility=el.hasAttribute('stroke')?'visible':'hidden')");
+    // One small caption exercises the finite size through the actual unchanged
+    // production SVG renderer. Its saved normal plan is reused for every role.
+    const indexed = indexExplicitLinesV001(['驚きの声']);
+    const baselinePlan = {schemaVersion: 'presentation-output-common-core-plan-v001',
+      canvas: savedProps.canvas, elements: [{instructionId: 'vocal-raster', kind: 'speech-caption',
+        text: indexed.sourceText, indexedLines: indexed.indexedLines,
+        startFrame: 0, endFrameExclusive: 30, displayFrameCount: 30,
+        visualState: structuredClone(savedProps.visualState)}]};
+    const context = {baselineRef: {path: '/test/vocal-normal', fileSha256: 'a'.repeat(64),
+      canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
+      decisionInputRef: {path: '/test/vocal-decision', fileSha256: 'b'.repeat(64)},
+      renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V004};
+    const autoProposal = fixAutoPresentationProposalV001({baselinePlan, context,
+      proposal: {schemaVersion: 'auto-presentation-proposal-v001', context,
+        targetCaptionIds: ['vocal-raster'], completion: 'complete', effects: [{captionId: 'vocal-raster',
+          role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'}], exceptions: []}});
+    const resolveVocal = overrides => resolveAutoPresentationV001({baselinePlan, context, autoProposal, overrides}).plan;
+    const empty = createAutoPresentationOverridesV001({baselinePlan, context, autoProposal});
+    const normalOverride = editAutoPresentationOverrideV001({baselinePlan, context, autoProposal, overrides: empty,
+      captionId: 'vocal-raster', selection: 'Normal'});
+    const resetOverride = editAutoPresentationOverrideV001({baselinePlan, context, autoProposal, overrides: normalOverride,
+      captionId: 'vocal-raster', selection: 'Reset'});
+    const rasterCases = [];
+    for (const [name, plan] of [['normal', baselinePlan], ['vocal', resolveVocal()],
+      ['human-normal', resolveVocal(normalOverride)], ['reset', resolveVocal(resetOverride)]]) {
+      const props = {...savedProps, ...plan.elements[0]};
+      const measurement = await measure(props);
+      rasterCases.push({name, plan, measurement, shot: await shot(`vocal-${name}`)});
+    }
+    const [normalCase, vocalCase, humanNormalCase, resetCase] = rasterCases;
+    let left = Infinity, top = Infinity, right = -1, bottom = -1;
+    for (let i = 0; i < vocalCase.shot.bytes.length; i += 4) if (vocalCase.shot.bytes[i + 3]) {
+      const x = (i / 4) % savedProps.canvas.width, y = Math.floor(i / 4 / savedProps.canvas.width);
+      left = Math.min(left, x); top = Math.min(top, y); right = Math.max(right, x); bottom = Math.max(bottom, y);
+    }
+    const safe = savedProps.canvas.safeAreaPx;
+    vocalResult = {normalToVocalRgbaDifferences: rgbaDifferences(normalCase.shot.bytes, vocalCase.shot.bytes),
+      humanNormalRgbaDifferences: rgbaDifferences(normalCase.shot.bytes, humanNormalCase.shot.bytes),
+      resetRgbaDifferences: rgbaDifferences(vocalCase.shot.bytes, resetCase.shot.bytes),
+      alphaBounds: {left, top, right, bottom}, insideSafeArea: left >= safe.left && top >= safe.top
+        && right < savedProps.canvas.width - safe.right && bottom < savedProps.canvas.height - safe.bottom,
+      cases: rasterCases.map(({name, plan, measurement, shot}) => ({name, plan, measurement, png: shot.png}))};
+    await writeFile(path.join(output, 'vocal-measurement.json'), `${JSON.stringify(vocalResult, null, 2)}\n`);
+    const expectedVocal = structuredClone(baselinePlan);
+    expectedVocal.elements[0].visualState.textStyle.fontSizePx = 128;
+    assert.deepEqual(vocalCase.plan, expectedVocal);
+    assert.deepEqual(humanNormalCase.plan, baselinePlan);
+    assert.deepEqual(resetCase.plan, vocalCase.plan);
+    assert.ok(vocalResult.normalToVocalRgbaDifferences > 0);
+    assert.equal(vocalResult.humanNormalRgbaDifferences, 0);
+    assert.equal(vocalResult.resetRgbaDifferences, 0);
+    assert.equal(vocalResult.insideSafeArea, true);
+    assert.equal(vocalCase.measurement.selection.count, 0);
+    assert.equal(vocalCase.measurement.readyMarker, 'true');
+    assert.ok(vocalCase.measurement.texts.filter(text => !text.stroke).every(text => text.fill === normalColor));
+    await page.evaluate('SpanQC.clear()');
     for (const fixture of fixtures) {
       const {baseline, focused} = resolveFixture(fixture);
       const propsFor = element => ({...savedProps, instructionId: fixture.name,
@@ -349,7 +407,7 @@ test('production client-mounted overlay preserves Phase 1 normal pixels and appl
     runtime: process.version, phase1Commit, phase1SourceBindings:phase1Sources,
     fontBinding:{path:fontPath,fileSha256:sha(fontBytes)},
     chromiumBinding:{path:chromePath,fileSha256:sha(await readFile(chromePath))}, sourceBindings:bindings,
-    results, externalApiCalls:0, costUsd:0}, null, 2)}\n`);
+    results, vocalResult, externalApiCalls:0, costUsd:0}, null, 2)}\n`);
   for (const result of results) {
     const message = `${result.name}: ${JSON.stringify({...result, pngs:undefined, phase1:undefined, normal:undefined, focus:undefined})}`;
     assert.equal(result.phase1NormalRgbaDifferences, 0, message);

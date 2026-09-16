@@ -7,6 +7,7 @@ import {createAutoPresentationOverridesV001, editAutoPresentationOverrideV001,
 const fail = message => { throw new TypeError(message); };
 const own = (value, key) => Object.hasOwn(value, key);
 const focus = {role: 'Focus', presentation: 'provisional-focus', scope: 'whole-caption'};
+const vocal = {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'};
 
 export const AUTO_PRESENTATION_EDIT_HELP = `字幕一件の演出を確認・修正します。
 node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
@@ -18,6 +19,7 @@ node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
   show     候補と現在状態を表示（検索なしなら全字幕）
   normal   Normal固定
   focus    全文Focus
+  vocal    全文Vocal accent（既存の仮サイズ表示）
   partial  部分Focus: --target <原文どおりの連続文字列> [--occurrence <1からの出現番号>]
   reset    この一件のoverrideを削除し、保存済み自動案へ戻す
 
@@ -29,7 +31,7 @@ node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
 export function parseAutoPresentationEditArgsV001(argv) {
   if (argv.length === 1 && ['--help', '-h'].includes(argv[0])) return {help: true};
   const [action, ...args] = argv;
-  if (!['show', 'normal', 'focus', 'partial', 'reset'].includes(action)) fail('操作は show / normal / focus / partial / reset から指定してください。');
+  if (!['show', 'normal', 'focus', 'vocal', 'partial', 'reset'].includes(action)) fail('操作は show / normal / focus / vocal / partial / reset から指定してください。');
   const names = new Map([
     ['--baseline', 'baselinePath'], ['--decision-input', 'decisionInputPath'],
     ['--auto', 'autoProposalPath'], ['--overrides', 'overridesPath'], ['--output', 'outputPath'],
@@ -70,7 +72,9 @@ export function parseAutoPresentationEditArgsV001(argv) {
   return parsed;
 }
 
-const selectionDescription = selection => selection?.role === 'Focus'
+const selectionDescription = selection => selection?.role === 'Vocal accent'
+  ? {role: 'Vocal accent', scope: 'whole-caption'}
+  : selection?.role === 'Focus'
   ? {role: 'Focus', scope: selection.scope,
     ...(selection.scope === 'partial-caption' ? {targetText: selection.targetText,
       ...(selection.occurrence === undefined ? {} : {occurrence: selection.occurrence})} : {})}
@@ -111,6 +115,7 @@ export function inspectAutoPresentationCaptionsV001({baselinePlan, autoPresentat
 }
 
 const describe = selection => selection.role === 'Normal' ? 'Normal'
+  : selection.role === 'Vocal accent' ? 'Vocal accent / whole（全文）'
   : selection.scope === 'whole-caption' ? 'Focus / whole（全文）'
   : `Focus / partial（部分）${JSON.stringify(selection.targetText)} / occurrence=${selection.occurrence ?? '一意一致'}`;
 
@@ -143,7 +148,7 @@ export async function runAutoPresentationEditV001(argv, write = text => process.
   const {baselinePlan, autoPresentation} = loaded;
   const previous = autoPresentation.overrides ?? createAutoPresentationOverridesV001({baselinePlan, ...autoPresentation});
   const selection = parsed.action === 'normal' ? 'Normal' : parsed.action === 'reset' ? 'Reset'
-    : parsed.action === 'focus' ? focus : {...focus, scope: 'partial-caption', targetText: parsed.targetText,
+    : parsed.action === 'vocal' ? vocal : parsed.action === 'focus' ? focus : {...focus, scope: 'partial-caption', targetText: parsed.targetText,
       ...(parsed.occurrence === undefined ? {} : {occurrence: parsed.occurrence})};
   const overrides = editAutoPresentationOverrideV001({baselinePlan, ...autoPresentation,
     overrides: previous, captionId: rows[0].captionId, selection});

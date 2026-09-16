@@ -39,7 +39,7 @@ const samplePlan = () => ({
   })),
 });
 
-async function savedInput(t, baselinePlan, {selected = false, normal = false} = {}) {
+async function savedInput(t, baselinePlan, {selected = false, normal = false, selection = focus} = {}) {
   const directory = await mkdtemp(path.join(tmpdir(), 'zev-auto-renderer-input-'));
   t.after(() => rm(directory, {recursive: true, force: true}));
   const files = Object.fromEntries(['baseline', 'decisionInput', 'autoProposal', 'overrides']
@@ -53,7 +53,7 @@ async function savedInput(t, baselinePlan, {selected = false, normal = false} = 
     .map(element => element.instructionId);
   const autoProposal = await saveFixedAutoPresentationV001({...files, outputPath: files.autoProposalPath,
     proposal: {schemaVersion: 'auto-presentation-proposal-v001', context, targetCaptionIds: captionIds,
-      completion: 'complete', effects: selected ? [{captionId: captionIds[0], ...focus}] : [], exceptions: []},
+      completion: 'complete', effects: selected ? [{captionId: captionIds[0], ...selection}] : [], exceptions: []},
   });
   if (normal) {
     const overrides = editAutoPresentationOverrideV001({baselinePlan, context, autoProposal,
@@ -140,6 +140,21 @@ test('Focus reaches the existing layout only on its caption while the normal pla
   const expected = structuredClone(plan.elements[0]);
   expected.presentationColorRange = {startCodePoint: 0,
     endCodePointExclusive: Array.from(expected.text).length, fontColor: '#FFD65A'};
+  assert.deepEqual(layout.overlays[0].element, expected);
+  assert.deepEqual(layout.overlays[1].element, before.elements[1]);
+  assert.deepEqual(plan, before);
+  await assert.rejects(executeValidatedPresentationDrawAndQcV001({plan, autoPresentation,
+    validatedLayoutInspection: {status: 'passed', items: []}}), /layout inspection/);
+});
+
+test('Vocal reaches the existing layout as size only and cannot reuse normal layout inspection', async t => {
+  const plan = samplePlan();
+  const before = structuredClone(plan);
+  const {autoPresentation} = await savedInput(t, plan, {selected: true,
+    selection: {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'}});
+  const layout = await captureLayoutInput(t, plan, autoPresentation);
+  const expected = structuredClone(plan.elements[0]);
+  expected.visualState.textStyle.fontSizePx = 128;
   assert.deepEqual(layout.overlays[0].element, expected);
   assert.deepEqual(layout.overlays[1].element, before.elements[1]);
   assert.deepEqual(plan, before);

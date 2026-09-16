@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001} from './presentation_effects_v001.mjs';
 
 const reject = message => { throw new TypeError(`auto presentation: ${message}`); };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -31,14 +32,18 @@ export const sha256AutoPresentationStateV001 = value => sha256AutoPresentationV0
 
 // This is only the existing trial yellow used to test plumbing. It is not an
 // approved product theme, and selectors cannot provide drawing values.
-const rules = freeze({version: 'auto-presentation-rules-v003', role: 'Focus',
+const rules = freeze({version: 'auto-presentation-rules-v004', role: 'Focus',
   presentation: 'provisional-focus', scopes: ['whole-caption', 'partial-caption'],
   targetMatching: 'exact-text-overlapping-occurrences-one-based',
   targetBoundary: 'unicode-grapheme-cluster',
   canonicalRange: 'unicode-code-point-half-open',
   glyphColorPolicy: {fillPaintedGlyph: 'focus-color', nativeColorGlyph: 'preserve-original-rgba'},
-  textStyle: {fontColor: '#FFD65A'}});
-export const AUTO_PRESENTATION_RULES_REF_V003 = freeze({version: rules.version,
+  textStyle: {fontColor: '#FFD65A'},
+  // Reuse the existing finite reaction size. This is a provisional size display,
+  // not an adopted Vocal theme or a new animation. Selectors supply no numbers.
+  vocal: {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption',
+    textStyle: {...PRESENTATION_EFFECT_TRIAL_PRESETS_V001.reaction}}});
+export const AUTO_PRESENTATION_RULES_REF_V004 = freeze({version: rules.version,
   contentSha256: sha256AutoPresentationV001(rules)});
 const graphemeSegmenter = new Intl.Segmenter('ja', {granularity: 'grapheme'});
 
@@ -50,7 +55,7 @@ function checkContext(baselinePlan, context) {
     || !digest(base.fileSha256) || !digest(base.canonicalSha256)) reject('invalid baseline reference');
   if (!exact(decision, ['path', 'fileSha256']) || !nonempty(decision.path)
     || !digest(decision.fileSha256)) reject('invalid decision input reference');
-  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V003)) reject('rendering rules version differs');
+  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V004)) reject('rendering rules version differs');
   if (!object(baselinePlan) || baselinePlan.schemaVersion !== 'presentation-output-common-core-plan-v001'
     || !Array.isArray(baselinePlan.elements)) reject('invalid baseline plan');
   if (sha256AutoPresentationV001(baselinePlan) !== base.canonicalSha256) reject('baseline content differs');
@@ -61,6 +66,9 @@ function checkContext(baselinePlan, context) {
     ids.add(element.instructionId);
     if (element.kind === 'speech-caption') {
       if (!object(element.visualState?.textStyle)) reject('caption has no normal text style');
+      if (Object.hasOwn(element, 'presentationColorRange') || Object.hasOwn(element, 'presentationPreset')) {
+        reject('baseline must be the fixed normal plan, not a resolved presentation');
+      }
       captions.push(element.instructionId);
     }
   }
@@ -83,6 +91,14 @@ function checkFocus(entry, withId = true) {
     if (!/[^\r\n]/u.test(entry.targetText)) reject('partial target contains no visible characters');
     if (Object.hasOwn(entry, 'occurrence')
       && (!Number.isSafeInteger(entry.occurrence) || entry.occurrence < 1)) reject('partial occurrence must be a positive integer');
+  }
+}
+
+function checkSelection(entry, withId = true) {
+  if (entry?.role !== 'Vocal accent') return checkFocus(entry, withId);
+  if (!exact(entry, ['role', 'presentation', 'scope', ...(withId ? ['captionId'] : [])])
+    || entry.presentation !== rules.vocal.presentation || entry.scope !== rules.vocal.scope) {
+    reject('Vocal accent requires the finite whole-caption preset without drawing fields');
   }
 }
 
@@ -127,10 +143,12 @@ function checkProposal(baselinePlan, context, proposal) {
   if (!Array.isArray(proposal.effects) || !Array.isArray(proposal.exceptions)) reject('invalid judgment lists');
   const selected = new Set();
   for (const effect of proposal.effects) {
-    checkFocus(effect);
+    checkSelection(effect);
     if (!targets.includes(effect.captionId)) reject('caption ID is outside the judgment target set');
     if (selected.has(effect.captionId)) reject('duplicate or conflicting judgment');
-    focusRange(baselinePlan.elements.find(element => element.instructionId === effect.captionId), effect);
+    if (effect.role === 'Focus') {
+      focusRange(baselinePlan.elements.find(element => element.instructionId === effect.captionId), effect);
+    }
     selected.add(effect.captionId);
   }
   for (const exception of proposal.exceptions) {
@@ -174,7 +192,7 @@ function checkOverrides(baselinePlan, context, autoProposal, overrides) {
   for (const entry of overrides.entries) {
     if (entry?.role === 'Normal') {
       if (!exact(entry, ['captionId', 'role'])) reject('Normal has extra fields');
-    } else checkFocus(entry);
+    } else checkSelection(entry);
     if (!captions.includes(entry.captionId)) reject('unknown override caption ID');
     if (selected.has(entry.captionId)) reject('duplicate override');
     if (entry.role === 'Focus') {
@@ -199,8 +217,10 @@ export function editAutoPresentationOverrideV001({baselinePlan, context, autoPro
   const entries = clone(overrides.entries).filter(entry => entry.captionId !== captionId);
   if (selection === 'Normal') entries.push({captionId, role: 'Normal'});
   else if (selection !== 'Reset') {
-    checkFocus(selection, false);
-    focusRange(baselinePlan.elements.find(element => element.instructionId === captionId), selection);
+    checkSelection(selection, false);
+    if (selection.role === 'Focus') {
+      focusRange(baselinePlan.elements.find(element => element.instructionId === captionId), selection);
+    }
     entries.push({captionId, ...clone(selection)});
   }
   entries.sort((left, right) => captions.indexOf(left.captionId) - captions.indexOf(right.captionId));
@@ -222,6 +242,10 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
   const ranges = new Map();
   const elements = baselinePlan.elements.map(element => {
     const selection = effective.get(element.instructionId);
+    if (selection?.role === 'Vocal accent') {
+      return {...element, visualState: {...element.visualState,
+        textStyle: {...element.visualState.textStyle, ...rules.vocal.textStyle}}};
+    }
     if (selection?.role !== 'Focus') return element;
     const range = focusRange(element, selection);
     ranges.set(element.instructionId, range);

@@ -7,7 +7,7 @@ export interface AutoPresentationFileRef {
 export interface AutoPresentationContext {
   baselineRef: AutoPresentationFileRef & {canonicalSha256: string};
   decisionInputRef: AutoPresentationFileRef;
-  renderingRulesRef: {version: 'auto-presentation-rules-v003'; contentSha256: string};
+  renderingRulesRef: {version: 'auto-presentation-rules-v004'; contentSha256: string};
 }
 /** Native color glyphs stay in the Focus range and retain their original colors. */
 interface AutoPresentationFocusBase {
@@ -25,7 +25,14 @@ export interface AutoPresentationPartialFocus extends AutoPresentationFocusBase 
   occurrence?: number;
 }
 export type AutoPresentationFocus = AutoPresentationWholeFocus | AutoPresentationPartialFocus;
-export type AutoPresentationSelection = {role: 'Normal'} | AutoPresentationFocus;
+/** One renderer-owned size preset for the fixed caption lifetime; no stacking or partial range. */
+export interface AutoPresentationVocal {
+  role: 'Vocal accent';
+  presentation: 'provisional-vocal';
+  scope: 'whole-caption';
+}
+export type AutoPresentationEffect = AutoPresentationFocus | AutoPresentationVocal;
+export type AutoPresentationSelection = {role: 'Normal'} | AutoPresentationEffect;
 /** Derived from the fixed caption at resolution time; never accepted as a saved selector. */
 export interface AutoPresentationCanonicalRange {
   startCodePoint: number;
@@ -41,7 +48,7 @@ export interface AutoPresentationProposal {
   context: AutoPresentationContext;
   targetCaptionIds: string[];
   completion: 'complete';
-  effects: Array<AutoPresentationFocus & {captionId: string}>;
+  effects: Array<AutoPresentationEffect & {captionId: string}>;
   exceptions: AutoPresentationException[];
 }
 /** Construct only through proposal validation; the renderer validates again. */
@@ -54,7 +61,7 @@ export interface AutoPresentationOverrides {
   schemaVersion: 'auto-presentation-overrides-v001';
   context: AutoPresentationContext;
   autoProposalSha256: string | null;
-  entries: Array<{captionId: string; role: 'Normal'} | (AutoPresentationFocus & {captionId: string})>;
+  entries: Array<{captionId: string; role: 'Normal'} | (AutoPresentationEffect & {captionId: string})>;
 }
 export interface AutoPresentationInput {
   context: AutoPresentationContext;
@@ -70,13 +77,13 @@ export interface AutoPresentationResolution {
   captions: Array<{
     captionId: string;
     origin: 'baseline' | 'automatic' | 'human';
-    role: 'Normal' | 'Focus';
+    role: 'Normal' | 'Focus' | 'Vocal accent';
     automaticStatus: 'not-processed' | 'normal' | 'selected' | 'unrepresentable' | 'unresolved';
     /** Null means an unresolved, unrepresentable, or unprocessed automatic judgment. */
     automaticSelection: AutoPresentationSelection | null;
     effectiveSelection: AutoPresentationSelection;
     hasOverride: boolean;
-    /** The effective Focus range in Unicode code points; Normal has no range. */
+    /** The effective Focus range in Unicode code points; Normal and Vocal accent have no color range. */
     canonicalRange: AutoPresentationCanonicalRange | null;
   }>;
 }
