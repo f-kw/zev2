@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import {readFile, writeFile} from 'node:fs/promises';
 import {basename, resolve} from 'node:path';
-import {AUTO_PRESENTATION_RULES_REF_V006, sha256AutoPresentationV001,
+import {AUTO_PRESENTATION_RULES_REF_V007, sha256AutoPresentationV001,
   fixAutoPresentationProposalV001, resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {validatePresentationPulseEvidenceV001} from './presentation_pulse_evidence_v001.mjs';
 
@@ -21,8 +21,8 @@ const nativeMatches = (native, bound, bytes) => native && native.path === bound.
 /** Reconstruct individual peaks from their native records. Candidate union maxima
  * are not timestamps for their constituent peaks. No saved table is trusted alone. */
 async function loadPulseTimingEvidence(decision) {
-  if (decision?.schemaVersion !== 'presentation-focus-decision-input-v004'
-    || !Object.hasOwn(decision, 'pulseTimingEvidence')) reject('expected forward-only decision input v004');
+  if (decision?.schemaVersion !== 'presentation-focus-decision-input-v005'
+    || !Object.hasOwn(decision, 'pulseTimingEvidence')) reject('expected forward-only decision input v005');
   const evidence = decision.pulseTimingEvidence;
   validatePresentationPulseEvidenceV001(evidence);
   if (evidence === null) return null;
@@ -78,7 +78,7 @@ export async function loadAutoPresentationContextV001({baselinePath, decisionInp
     baselineRef: {path: resolve(baselinePath), fileSha256: bytesHash(baselineBytes),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: resolve(decisionInputPath), fileSha256: bytesHash(decisionBytes)},
-    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V006,
+    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007,
     pulseTimingEvidence,
   };
   resolveAutoPresentationV001({baselinePlan, context});

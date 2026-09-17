@@ -12,6 +12,8 @@ export {
 };
 import {buildPresentationNativeQcAlternativeElementsV001} from './presentation_native_frame_qc_preparation_v001.mjs';
 import {getPresentationPulseProgramV001, buildPresentationPulseStateElementsV001} from './presentation_pulse_v001.mjs';
+import {getPresentationCaptionMotionProgramV001, buildPresentationCaptionMotionStateElementsV001}
+  from './presentation_caption_motion_v001.mjs';
 
 export const PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001 = 'presentation-native-frame-qc-v001';
 export const PRESENTATION_NATIVE_FRAME_QC_BASIS_V001 = 'native-reference-state-identification-v001';
@@ -60,7 +62,7 @@ function checkPlans(plan, baselinePlan) {
       && integer(element.displayFrameCount) && element.displayFrameCount > 0
       && element.endFrameExclusive - element.startFrame === element.displayFrameCount,
     'caption display frames are invalid');
-    requireValue(!['presentationColorRange', 'presentationPulse', 'presentationPreset']
+    requireValue(!['presentationColorRange', 'presentationPulse', 'presentationPreset', 'presentationMotion']
       .some(key => Object.hasOwn(normal, key)), 'the baseline is not the fixed normal plan');
     ids.add(element.instructionId);
   }
@@ -72,7 +74,7 @@ function finiteSpecifications(plan, baselinePlan, autoPresentation) {
   });
   const byId = new Map(rebuilt.resolution.captions.map(row => [row.captionId, row.effectiveSelection]));
   const kinds = new Map([['Normal', 'normal'], ['Focus', 'color'], ['Vocal accent', 'scale'],
-    ['Panel accent', 'panel'], ['Pulse accent', 'pulse']]);
+    ['Panel accent', 'panel'], ['Pulse accent', 'pulse'], ['Bounce accent', 'bounce'], ['Shake accent', 'shake']]);
   return rebuilt.alternatives.map(row => {
     const kind = kinds.get(byId.get(row.captionId)?.role);
     requireValue(kind !== undefined, 'automatic selection is outside the finite native profile');
@@ -111,14 +113,18 @@ function bindRecords(plan, baselinePlan, autoPresentation, records) {
     const selected = specifications[index];
     const expectedStates = selected.kind === 'pulse'
       ? buildPresentationPulseStateElementsV001({element, canvas: plan.canvas})
-      : [{state: 'static', element}];
-    const physical = selected.kind === 'pulse' ? record.pulseStates : [record];
+      : ['bounce', 'shake'].includes(selected.kind)
+        ? buildPresentationCaptionMotionStateElementsV001({element, canvas: plan.canvas})
+        : [{state: 'static', element}];
+    const motion = ['bounce', 'shake'].includes(selected.kind);
+    const physical = selected.kind === 'pulse' ? record.pulseStates : motion ? record.motionStates : [record];
     requireValue(Array.isArray(physical) && physical.length === expectedStates.length
-      && (selected.kind === 'pulse' || !Object.hasOwn(record, 'pulseStates')),
+      && (selected.kind === 'pulse' || !Object.hasOwn(record, 'pulseStates'))
+      && (motion || !Object.hasOwn(record, 'motionStates')),
     'native state coverage differs');
     const states = expectedStates.map((expected, stateIndex) => {
-      if (selected.kind === 'pulse') requireValue(physical[stateIndex]?.state === expected.state,
-        'Pulse native states are not in the fixed order');
+      if (selected.kind === 'pulse' || motion) requireValue(physical[stateIndex]?.state === expected.state,
+        'native expression states are not in the fixed order');
       return bindNativeRecord(physical[stateIndex], expected.element, expected.state,
         'caption-' + index + '-native-' + expected.state, plan.canvas);
     });
@@ -146,7 +152,9 @@ function checkSceneBindings(plan, baselinePlan, autoPresentation, sceneBindings)
     const selected = specifications[index];
     const expectedStates = selected.kind === 'pulse'
       ? buildPresentationPulseStateElementsV001({element, canvas: plan.canvas})
-      : [{state: 'static', element}];
+      : ['bounce', 'shake'].includes(selected.kind)
+        ? buildPresentationCaptionMotionStateElementsV001({element, canvas: plan.canvas})
+        : [{state: 'static', element}];
     requireValue(group?.instructionId === element.instructionId && group.selectedKind === selected.kind
       && group.elementCanonicalSha256 === hashJson(element)
       && Array.isArray(group.states) && group.states.length === expectedStates.length
@@ -171,10 +179,11 @@ function checkSceneBindings(plan, baselinePlan, autoPresentation, sceneBindings)
 }
 
 function stateAt(element, group, frame, canvas) {
-  if (group.selectedKind !== 'pulse') return group.states[0];
-  const program = getPresentationPulseProgramV001({element, canvas});
+  if (!['pulse', 'bounce', 'shake'].includes(group.selectedKind)) return group.states[0];
+  const program = group.selectedKind === 'pulse' ? getPresentationPulseProgramV001({element, canvas})
+    : getPresentationCaptionMotionProgramV001({element, canvas});
   const segment = program.segments.find(row => row.startFrame <= frame && frame < row.endFrameExclusive);
-  requireValue(segment !== undefined, 'active Pulse has no finite state at the sampled frame');
+  requireValue(segment !== undefined, 'active expression has no finite state at the sampled frame');
   return group.states.find(row => row.state === segment.state);
 }
 
@@ -205,7 +214,9 @@ function deriveRecipes(plan, baselinePlan, autoPresentation, sceneBindings) {
       return [{frame: pulse.normalBeforeFrame, expectedState: 'normal'},
         {frame: pulse.maximumFrame, expectedState: 'maximum'},
         {frame: pulse.normalAfterFrame, expectedState: 'normal'}];
-    })() : [{frame: element.startFrame + Math.floor(element.displayFrameCount / 2), expectedState: 'static'}];
+    })() : ['bounce', 'shake'].includes(group.selectedKind)
+      ? getPresentationCaptionMotionProgramV001({element, canvas: plan.canvas}).samples
+      : [{frame: element.startFrame + Math.floor(element.displayFrameCount / 2), expectedState: 'static'}];
     for (const sample of samples) {
       const active = plan.elements.map((entry, index) => ({element: entry, group: sceneBindings[index]}))
         .filter(row => row.element.startFrame <= sample.frame && sample.frame < row.element.endFrameExclusive);
@@ -220,8 +231,9 @@ function deriveRecipes(plan, baselinePlan, autoPresentation, sceneBindings) {
         layers: layers.map((row, index) => index === slot ? {...row, bindingId} : {...row})});
       for (const alternate of group.alternates) replace('alternate-' + alternate.kind,
         'target-alternate', alternate.bindingId);
-      if (group.selectedKind === 'pulse') for (const state of group.states) {
-        if (state.state !== sample.expectedState) replace('pulse-' + state.state, 'pulse-state', state.bindingId);
+      if (['pulse', 'bounce', 'shake'].includes(group.selectedKind)) for (const state of group.states) {
+        const prefix = group.selectedKind === 'pulse' ? 'pulse' : 'motion';
+        if (state.state !== sample.expectedState) replace(prefix + '-' + state.state, prefix + '-state', state.bindingId);
       }
       for (const foreign of allNative) {
         if (foreign.instructionId === element.instructionId) continue;
@@ -429,20 +441,23 @@ export function validatePresentationNativeFrameQcEvidenceV001({plan, inspection}
     const element = plan.elements[index];
     const representativeFrame = Object.hasOwn(element, 'presentationPulse')
       ? getPresentationPulseProgramV001({element, canvas: plan.canvas}).maximumFrame
-      : element.startFrame + Math.floor(element.displayFrameCount / 2);
+      : Object.hasOwn(element, 'presentationMotion')
+        ? getPresentationCaptionMotionProgramV001({element, canvas: plan.canvas}).representativeFrame
+        : element.startFrame + Math.floor(element.displayFrameCount / 2);
     requireValue(inspection.representativeFrame === representativeFrame && Array.isArray(evidence.samples)
       && evidence.samples.length === recipes.length, 'representative frame or sample coverage differs');
     const group = evidence.sceneBindings[index];
     requireValue(inspection.overlaySha256 === group.states[0].pngSha256
       && inspection.appliedOverlayPropsCanonicalSha256 === group.states[0].propsCanonicalSha256,
     'inspection and actual native PNG bindings differ');
-    if (group.selectedKind === 'pulse') {
-      requireValue(Array.isArray(inspection.pulse?.states) && inspection.pulse.states.length === group.states.length
+    if (['pulse', 'bounce', 'shake'].includes(group.selectedKind)) {
+      const expression = group.selectedKind === 'pulse' ? inspection.pulse : inspection.motion;
+      requireValue(Array.isArray(expression?.states) && expression.states.length === group.states.length
         && group.states.every((state, stateIndex) => {
-          const observed = inspection.pulse.states[stateIndex];
+          const observed = expression.states[stateIndex];
           return observed.state === state.state && observed.overlaySha256 === state.pngSha256
             && observed.appliedOverlayPropsCanonicalSha256 === state.propsCanonicalSha256;
-        }), 'Pulse inspection does not bind all three native state PNGs');
+        }), 'expression inspection does not bind every native state PNG');
     }
     for (const binding of evidence.sceneBindings.flatMap(row => [...row.states, ...row.alternates])) {
       const ref = evidence.inputManifest.inputRefs.find(row => row.role === 'png-' + binding.bindingId);
@@ -626,7 +641,9 @@ export async function inspectPresentationNativeFrameQcV001({
       const element = record.element;
       const representativeFrame = Object.hasOwn(element, 'presentationPulse')
         ? getPresentationPulseProgramV001({element, canvas: plan.canvas}).maximumFrame
-        : element.startFrame + Math.floor(element.displayFrameCount / 2);
+        : Object.hasOwn(element, 'presentationMotion')
+          ? getPresentationCaptionMotionProgramV001({element, canvas: plan.canvas}).representativeFrame
+          : element.startFrame + Math.floor(element.displayFrameCount / 2);
       const inspection = {...clone(record.inspection), visibilityComparisonBasis: PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
         representativeFrame, nativeFrameQc: {schemaVersion: PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001,
           instructionId: element.instructionId, baselinePlan, autoPresentation, inputManifest: manifest,

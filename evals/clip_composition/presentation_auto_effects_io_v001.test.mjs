@@ -45,7 +45,7 @@ async function fixture(t) {
     })),
   };
   await writeJson(baselinePath, baselinePlan);
-  await writeJson(decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v004', pulseTimingEvidence: null, captions: baselinePlan.elements.map(({instructionId, text}) => ({instructionId, text}))});
+  await writeJson(decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v005', pulseTimingEvidence: null, captions: baselinePlan.elements.map(({instructionId, text}) => ({instructionId, text}))});
   const loaded = await loadAutoPresentationContextV001({baselinePath, decisionInputPath});
   return {directory, baselinePath, decisionInputPath, autoProposalPath, overridesPath, ...loaded};
 }

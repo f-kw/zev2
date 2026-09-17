@@ -45,7 +45,7 @@ async function savedInput(t, baselinePlan, {selected = false, normal = false, se
   const files = Object.fromEntries(['baseline', 'decisionInput', 'autoProposal', 'overrides']
     .map(name => [`${name}Path`, path.join(directory, `${name}.json`)]));
   await writeJson(files.baselinePath, baselinePlan);
-  await writeJson(files.decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v004', pulseTimingEvidence: null, captions: baselinePlan.elements
+  await writeJson(files.decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v005', pulseTimingEvidence: null, captions: baselinePlan.elements
     .filter(element => element.kind === 'speech-caption')
     .map(({instructionId, text}) => ({instructionId, text}))});
   const {context} = await loadAutoPresentationContextV001(files);

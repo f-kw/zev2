@@ -5,16 +5,18 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V006, fixAutoPresentationProposalV001,
+  AUTO_PRESENTATION_RULES_REF_V007, fixAutoPresentationProposalV001,
   resolveAutoPresentationV001, sha256AutoPresentationV001,
 } from './presentation_auto_effects_v001.mjs';
 import {
   buildPresentationNativeQcAlternativeElementsV001, preparePresentationNativeFrameQcV001,
 } from './presentation_native_frame_qc_preparation_v001.mjs';
 
+import {buildPresentationCaptionMotionStateElementsV001} from './presentation_caption_motion_v001.mjs';
+
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const clone = value => structuredClone(value);
-function fixture(baselinePath = '/fixture/normal.json', withPulse = false) {
+function fixture(baselinePath = '/fixture/normal.json', withPulse = false, motion = null) {
   const baselinePlan = {schemaVersion: 'presentation-output-common-core-plan-v001',
     canvas: {width: 1920, height: 1080, fps: 30}, elements:
       ['条件を残す', '急に来た', '説明をまとめる', '通常の字幕'].map((text, index) => ({
@@ -32,7 +34,7 @@ function fixture(baselinePath = '/fixture/normal.json', withPulse = false) {
   const context = {baselineRef: {path: baselinePath, fileSha256: hash(bytes),
     canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: '/fixture/input.json', fileSha256: hash('input')},
-    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V006, pulseTimingEvidence: null};
+    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007, pulseTimingEvidence: null};
   if (withPulse) {
     const ref = name => ({path: `/fixture/${name}`, fileSha256: hash(name)});
     context.pulseTimingEvidence = {schemaVersion: 'auto-presentation-pulse-timing-v001',
@@ -45,7 +47,9 @@ function fixture(baselinePath = '/fixture/normal.json', withPulse = false) {
     schemaVersion: 'auto-presentation-proposal-v001', context,
     targetCaptionIds: baselinePlan.elements.map(element => element.instructionId), completion: 'complete',
     effects: [
-      withPulse ? {captionId: 'caption-1', role: 'Pulse accent', presentation: 'provisional-pulse',
+      motion ? {captionId: 'caption-1', role: motion === 'bounce' ? 'Bounce accent' : 'Shake accent',
+        presentation: 'provisional-' + motion, scope: 'whole-caption'}
+        : withPulse ? {captionId: 'caption-1', role: 'Pulse accent', presentation: 'provisional-pulse',
         scope: 'whole-caption', anchorPeakId: 'native-peak'}
         : {captionId: 'caption-1', role: 'Focus', presentation: 'provisional-focus', scope: 'partial-caption', targetText: '条件'},
       {captionId: 'caption-2', role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'},
@@ -93,10 +97,10 @@ test('unsupported timelines and positions require an explicit encoded oracle, wi
 
 // These IO tests exercise binding/immutability, not pixel quality. Native-font
 // drawing and real failure injection are covered by the separate native suite.
-async function ioFixture(t, withPulse = false) {
+async function ioFixture(t, withPulse = false, motion = null) {
   const directory = await mkdtemp(path.join(tmpdir(), 'zev-native-qc-prep-test-'));
   t.after(() => rm(directory, {recursive: true, force: true}));
-  const input = fixture(path.join(directory, 'baseline.json'), withPulse);
+  const input = fixture(path.join(directory, 'baseline.json'), withPulse, motion);
   await writeFile(input.autoPresentation.context.baselineRef.path, input.bytes);
   const calls = [];
   const propsFor = element => ({instructionId: element.instructionId, text: element.text,
@@ -106,11 +110,19 @@ async function ioFixture(t, withPulse = false) {
     overlaySha256: digest, appliedOverlayPropsCanonicalSha256: sha256AutoPresentationV001(props)});
   const records = [];
   for (const [index, element] of input.plan.elements.entries()) {
-    const props = propsFor(element), bytes = Buffer.from(JSON.stringify(props));
-    const pngPath = path.join(directory, `production-${index}.png`);
-    await writeFile(pngPath, bytes);
-    records.push({element: clone(element), props, fileStem: `caption-${index}`, pngPath,
-      pngSha256: hash(bytes), inspection: inspectionFor(props, hash(bytes))});
+    const physical = [];
+    const expected = element.presentationMotion
+      ? buildPresentationCaptionMotionStateElementsV001({element, canvas: input.plan.canvas})
+      : [{state: 'static', element}];
+    for (const row of expected) {
+      const props = propsFor(row.element), bytes = Buffer.from(JSON.stringify(props));
+      const pngPath = path.join(directory, `production-${index}-${row.state}.png`);
+      await writeFile(pngPath, bytes);
+      physical.push({state: row.state, element: clone(row.element), props, pngPath,
+        pngSha256: hash(bytes), inspection: inspectionFor(props, hash(bytes))});
+    }
+    records.push({...physical[0], element: clone(element), fileStem: `caption-${index}`,
+      ...(element.presentationMotion ? {motionStates: physical} : {})});
   }
   const options = {...input, records, presetRegistry: {version: 'test'},
     scratchDirectory: path.join(directory, 'qc-only'),
@@ -195,5 +207,36 @@ test('ordinary records cannot acquire an unrequested Pulse state array', async t
   const {options, calls} = await ioFixture(t);
   options.records[0].pulseStates = [];
   await assert.rejects(preparePresentationNativeFrameQcV001(options), /non-Pulse record has unexpected/);
+  assert.equal(calls.length, 0);
+});
+
+for (const motion of ['bounce', 'shake']) {
+  test(motion + ' preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing', async t => {
+    const {options, calls} = await ioFixture(t, false, motion);
+    const before = clone(options.records);
+    const result = await preparePresentationNativeFrameQcV001(options);
+    assert.deepEqual(options.records, before);
+    assert.equal(result.evidence.productionNativeInputs.length, motion === 'bounce' ? 7 : 10);
+    assert.equal(result.evidence.renderedDiagnosticStates, 3);
+    assert.equal(result.evidence.reusedDiagnosticStates, 2);
+    assert.equal(calls.length, 6);
+    assert.equal(result.records[0].alternates[0].pngPath, options.records[0].motionStates[0].pngPath);
+  });
+  test(motion + ' preparation rejects omitted states and altered production bytes before drawing', async t => {
+    const missing = await ioFixture(t, false, motion);
+    missing.options.records[0].motionStates.pop();
+    await assert.rejects(preparePresentationNativeFrameQcV001(missing.options), /motion native states differ/);
+    assert.equal(missing.calls.length, 0);
+    const altered = await ioFixture(t, false, motion);
+    await writeFile(altered.options.records[0].motionStates[1].pngPath, 'changed state image');
+    await assert.rejects(preparePresentationNativeFrameQcV001(altered.options), /native input PNG bytes changed/);
+    assert.equal(altered.calls.length, 0);
+  });
+}
+
+test('ordinary records cannot acquire an unrequested motion state array', async t => {
+  const {options, calls} = await ioFixture(t);
+  options.records[0].motionStates = [];
+  await assert.rejects(preparePresentationNativeFrameQcV001(options), /non-motion record has unexpected/);
   assert.equal(calls.length, 0);
 });

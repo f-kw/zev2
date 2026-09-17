@@ -10,6 +10,8 @@ const own = (value, key) => Object.hasOwn(value, key);
 const colorSelection = {role: 'Focus', presentation: 'provisional-focus', scope: 'whole-caption'};
 const scaleSelection = {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'};
 const panelSelection = {role: 'Panel accent', presentation: 'provisional-panel', scope: 'whole-caption'};
+const bounceSelection = {role: 'Bounce accent', presentation: 'provisional-bounce', scope: 'whole-caption'};
+const shakeSelection = {role: 'Shake accent', presentation: 'provisional-shake', scope: 'whole-caption'};
 
 export const AUTO_PRESENTATION_EDIT_HELP = `字幕一件の演出を確認・修正します。
 node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
@@ -23,6 +25,8 @@ node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
   color    全文Color Accent
   scale    全文Scale Accent
   panel    全文Panel Accent（仮称）
+  bounce   全文Bounce Accent（仮称）: 字幕出現時に弾み、通常表示へ戻る
+  shake    全文Shake Accent（仮称）: 字幕出現時に短く左右へ揺れ、通常位置へ戻る
   pulse    全文Pulse Accent（仮称）: --peak <既存の音響ピークID>
   partial  部分Color Accent: --target <原文どおりの連続文字列> [--occurrence <1からの出現番号>]
   reset    この一件のoverrideを削除し、保存済み自動案へ戻す
@@ -37,7 +41,7 @@ pulse の --peak が未指定・不適格なら、使えるIDを表示して保�
 export function parseAutoPresentationEditArgsV001(argv) {
   if (argv.length === 1 && ['--help', '-h'].includes(argv[0])) return {help: true};
   const [action, ...args] = argv;
-  if (!['show', 'normal', 'color', 'scale', 'panel', 'pulse', 'partial', 'reset'].includes(action)) fail('操作は show / normal / color / scale / panel / pulse / partial / reset から指定してください。');
+  if (!['show', 'normal', 'color', 'scale', 'panel', 'pulse', 'bounce', 'shake', 'partial', 'reset'].includes(action)) fail('操作は show / normal / color / scale / panel / pulse / bounce / shake / partial / reset から指定してください。');
   const names = new Map([
     ['--baseline', 'baselinePath'], ['--decision-input', 'decisionInputPath'],
     ['--auto', 'autoProposalPath'], ['--overrides', 'overridesPath'], ['--output', 'outputPath'],
@@ -82,8 +86,8 @@ export function parseAutoPresentationEditArgsV001(argv) {
 
 const selectionDescription = selection => selection?.role === 'Vocal accent'
   ? {role: 'Vocal accent', scope: 'whole-caption'}
-  : selection?.role === 'Panel accent'
-  ? {role: 'Panel accent', scope: 'whole-caption'}
+  : ['Panel accent', 'Bounce accent', 'Shake accent'].includes(selection?.role)
+  ? {role: selection.role, scope: 'whole-caption'}
   : selection?.role === 'Pulse accent'
   ? {role: 'Pulse accent', scope: 'whole-caption', anchorPeakId: selection.anchorPeakId}
   : selection?.role === 'Focus'
@@ -129,6 +133,8 @@ export function inspectAutoPresentationCaptionsV001({baselinePlan, autoPresentat
 const describe = selection => selection.role === 'Normal' ? 'Normal'
   : selection.role === 'Vocal accent' ? 'Scale Accent / whole（全文）'
   : selection.role === 'Panel accent' ? 'Panel Accent（仮称） / whole（全文）'
+  : selection.role === 'Bounce accent' ? 'Bounce Accent（仮称） / whole（全文） / 字幕出現時'
+  : selection.role === 'Shake accent' ? 'Shake Accent（仮称） / whole（全文） / 字幕出現時'
   : selection.role === 'Pulse accent' ? `Pulse Accent（仮称） / whole（全文） / 根拠ピーク: ${selection.anchorPeakId}`
   : selection.scope === 'whole-caption' ? 'Color Accent / whole（全文）'
   : `Color Accent / partial（部分）${JSON.stringify(selection.targetText)} / occurrence=${selection.occurrence ?? '一意一致'}`;
@@ -190,6 +196,7 @@ export async function runAutoPresentationEditV001(argv, write = text => process.
   const previous = autoPresentation.overrides ?? createAutoPresentationOverridesV001({baselinePlan, ...autoPresentation});
   const selection = parsed.action === 'normal' ? 'Normal' : parsed.action === 'reset' ? 'Reset'
     : parsed.action === 'scale' ? scaleSelection : parsed.action === 'panel' ? panelSelection
+    : parsed.action === 'bounce' ? bounceSelection : parsed.action === 'shake' ? shakeSelection
     : parsed.action === 'pulse' ? {role: 'Pulse accent', presentation: 'provisional-pulse',
       scope: 'whole-caption', anchorPeakId: parsed.anchorPeakId}
     : parsed.action === 'color' ? colorSelection : {...colorSelection, scope: 'partial-caption', targetText: parsed.targetText,

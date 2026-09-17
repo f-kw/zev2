@@ -2,10 +2,12 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import test from 'node:test';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {AUTO_PRESENTATION_RULES_REF_V006, fixAutoPresentationProposalV001,
+import {AUTO_PRESENTATION_RULES_REF_V007, fixAutoPresentationProposalV001,
   resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {buildPresentationNativeQcAlternativeElementsV001} from './presentation_native_frame_qc_preparation_v001.mjs';
 import {buildPresentationPulseStateElementsV001, getPresentationPulseProgramV001} from './presentation_pulse_v001.mjs';
+import {buildPresentationCaptionMotionStateElementsV001, getPresentationCaptionMotionProgramV001}
+  from './presentation_caption_motion_v001.mjs';
 import {PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
   buildPresentationNativeFrameQcRecipeV001, classifyPresentationNativeFrameRgbV001,
   validatePresentationNativeFrameQcEvidenceV001} from './presentation_native_frame_qc_v001.mjs';
@@ -15,7 +17,7 @@ const hashJson = value => hash(canonicalJson(value));
 const clone = value => structuredClone(value);
 const ref = role => ({role, path: '/fixture/' + role, fileSha256: hash(role)});
 
-function fixture({overlap = false, partialWhole = false} = {}) {
+function fixture({overlap = false, partialWhole = false, motion = null} = {}) {
   const texts = ['条件を残す', '急に来た', '説明をまとめる', '通常の字幕', 'マジで怖い'];
   const baselinePlan = {schemaVersion: 'presentation-output-common-core-plan-v001',
     canvas: {width: 1920, height: 1080, fps: 30}, elements: texts.map((text, index) => ({
@@ -27,7 +29,7 @@ function fixture({overlap = false, partialWhole = false} = {}) {
       position: {preset: 'bottom-center', alignment: 'center', offsetXPercent: 0, offsetYPercent: 0}, background: null},
     }))};
   const context = {baselineRef: {...ref('baseline-plan'), canonicalSha256: hashJson(baselinePlan)},
-    decisionInputRef: ref('decision'), renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V006,
+    decisionInputRef: ref('decision'), renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007,
     pulseTimingEvidence: {schemaVersion: 'auto-presentation-pulse-timing-v001',
       sourceRef: ref('source'), candidatesRef: ref('candidates'), peaksRef: ref('peaks'),
       sampleRate: 300, sampleCount: 4500,
@@ -44,6 +46,8 @@ function fixture({overlap = false, partialWhole = false} = {}) {
         targetText: partialWhole ? texts[0] : '条件'},
       {captionId: 'caption-1', role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption'},
       {captionId: 'caption-2', role: 'Panel accent', presentation: 'provisional-panel', scope: 'whole-caption'},
+      ...(motion ? [{captionId: 'caption-3', role: motion === 'bounce' ? 'Bounce accent' : 'Shake accent',
+        presentation: 'provisional-' + motion, scope: 'whole-caption'}] : []),
       {captionId: 'caption-4', role: 'Pulse accent', presentation: 'provisional-pulse', scope: 'whole-caption', anchorPeakId: 'central'},
     ],
   }});
@@ -72,6 +76,12 @@ function fixture({overlap = false, partialWhole = false} = {}) {
       record = {...pulseStates[0], element: clone(element), pulseStates,
         inspection: {...pulseStates[0].inspection,
           pulse: {states: pulseStates.map(row => ({state: row.state, ...row.inspection}))}}};
+    } else if (element.presentationMotion) {
+      const motionStates = buildPresentationCaptionMotionStateElementsV001({element, canvas: plan.canvas})
+        .map(row => ({...physical(row.element, index), state: row.state}));
+      record = {...motionStates[0], element: clone(element), motionStates,
+        inspection: {...motionStates[0].inspection,
+          motion: {states: motionStates.map(row => ({state: row.state, ...row.inspection}))}}};
     } else record = physical(element, index);
     record.alternates = alternatives[index].entries.map(row => ({...physical(row.element, index), kind: row.kind}));
     return record;
@@ -199,7 +209,9 @@ function syntheticEvidence(f) {
     visibilityComparisonBasis: PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
     representativeFrame: record.element.presentationPulse
       ? getPresentationPulseProgramV001({element: record.element, canvas: f.plan.canvas}).maximumFrame
-      : record.element.startFrame + Math.floor(record.element.displayFrameCount / 2),
+      : record.element.presentationMotion
+        ? getPresentationCaptionMotionProgramV001({element: record.element, canvas: f.plan.canvas}).representativeFrame
+        : record.element.startFrame + Math.floor(record.element.displayFrameCount / 2),
     nativeFrameQc: {schemaVersion: PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001,
       instructionId: record.element.instructionId, baselinePlan: clone(f.baselinePlan), autoPresentation: clone(f.autoPresentation),
       sceneBindings: clone(recipe.sceneBindings), inputManifest: clone(inputManifest),
@@ -233,3 +245,46 @@ test('the pure validator accepts complete synthetic evidence and independently r
   const pulse = clone(inspections[4]); pulse.nativeFrameQc.samples.pop();
   assert.equal(validatePresentationNativeFrameQcEvidenceV001({plan: f.plan, inspection: pulse}).status, 'failed');
 });
+
+for (const [motion, offsets, representativeState] of [
+  ['bounce', [0, 1, 2, 3, 4, 5, 6, 7, 8, 85], 'maximum'],
+  ['shake', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 85], 'left-8'],
+]) {
+  test(motion + ' native recipe covers every entrance frame and stable visibility with every wrong state as an adversary', () => {
+    const f = fixture({motion}), before = clone(f);
+    const result = buildPresentationNativeFrameQcRecipeV001(f);
+    const samples = result.samples.filter(row => row.instructionId === 'caption-3');
+    assert.deepEqual(samples.map(row => row.frame - 270), offsets);
+    assert.equal(samples.find(row => row.frame === 274).expectedState, representativeState);
+    assert.equal(samples.at(-2).expectedState, 'stable');
+    assert.equal(samples.at(-1).expectedState, 'stable');
+    const states = f.records[3].motionStates;
+    for (const sample of samples) {
+      assert.equal(sample.references.filter(row => row.kind === 'motion-state').length, states.length - 1);
+      assert.equal(sample.expectedOverlaySha256, states.find(row => row.state === sample.expectedState).pngSha256);
+      assert.equal(sample.references[0].layers[0].localFrame, sample.frame - 270);
+    }
+    assert.deepEqual(f, before);
+  });
+
+  test(motion + ' rejects a missing, reordered or mixed native state set and missing entrance/stable observations', () => {
+    for (const mutate of [
+      f => {f.records[3].motionStates.pop();},
+      f => {f.records[3].motionStates.reverse();},
+      f => {f.records[3].motionStates[1].element.text = '別の字幕';},
+      f => {f.records[3].pulseStates = [];},
+      f => {f.records[2].motionStates = [];},
+    ]) {const f = fixture({motion}); mutate(f); assert.throws(() => buildPresentationNativeFrameQcRecipeV001(f));}
+    const f = fixture({motion}), inspection = syntheticEvidence(f)[3];
+    assert.equal(validatePresentationNativeFrameQcEvidenceV001({plan: f.plan, inspection}).status, 'passed');
+    for (const mutate of [
+      row => {row.nativeFrameQc.samples.splice(2, 1);},
+      row => {row.nativeFrameQc.samples.pop();},
+      row => {row.nativeFrameQc.samples[4].expectedState = 'stable';},
+      row => {row.motion.states[1].overlaySha256 = hash('different-motion-png');},
+      row => {row.representativeFrame = 315;},
+      row => {row.nativeFrameQc.sceneBindings[3].states.reverse();},
+    ]) {const changed = clone(inspection); mutate(changed);
+      assert.equal(validatePresentationNativeFrameQcEvidenceV001({plan: f.plan, inspection: changed}).status, 'failed');}
+  });
+}

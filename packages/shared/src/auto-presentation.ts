@@ -7,7 +7,7 @@ export interface AutoPresentationFileRef {
 export interface AutoPresentationContext {
   baselineRef: AutoPresentationFileRef & {canonicalSha256: string};
   decisionInputRef: AutoPresentationFileRef;
-  renderingRulesRef: {version: 'auto-presentation-rules-v006'; contentSha256: string};
+  renderingRulesRef: {version: 'auto-presentation-rules-v007'; contentSha256: string};
   pulseTimingEvidence: AutoPresentationPulseTimingEvidence | null;
 }
 export interface AutoPresentationPulseTimingEvidence {
@@ -55,7 +55,17 @@ export interface AutoPresentationPulse {
   scope: 'whole-caption';
   anchorPeakId: string;
 }
-export type AutoPresentationEffect = AutoPresentationFocus | AutoPresentationVocal | AutoPresentationPanel | AutoPresentationPulse;
+export interface AutoPresentationBounce {
+  role: 'Bounce accent';
+  presentation: 'provisional-bounce';
+  scope: 'whole-caption';
+}
+export interface AutoPresentationShake {
+  role: 'Shake accent';
+  presentation: 'provisional-shake';
+  scope: 'whole-caption';
+}
+export type AutoPresentationEffect = AutoPresentationFocus | AutoPresentationVocal | AutoPresentationPanel | AutoPresentationPulse | AutoPresentationBounce | AutoPresentationShake;
 export type AutoPresentationSelection = {role: 'Normal'} | AutoPresentationEffect;
 /** Derived from the fixed caption at resolution time; never accepted as a saved selector. */
 export interface AutoPresentationCanonicalRange {
@@ -101,7 +111,7 @@ export interface AutoPresentationResolution {
   captions: Array<{
     captionId: string;
     origin: 'baseline' | 'automatic' | 'human';
-    role: 'Normal' | 'Focus' | 'Vocal accent' | 'Panel accent' | 'Pulse accent';
+    role: 'Normal' | 'Focus' | 'Vocal accent' | 'Panel accent' | 'Pulse accent' | 'Bounce accent' | 'Shake accent';
     automaticStatus: 'not-processed' | 'normal' | 'selected' | 'unrepresentable' | 'unresolved';
     /** Null means an unresolved, unrepresentable, or unprocessed automatic judgment. */
     automaticSelection: AutoPresentationSelection | null;

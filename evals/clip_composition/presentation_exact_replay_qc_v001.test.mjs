@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {AUTO_PRESENTATION_RULES_REF_V006, fixAutoPresentationProposalV001} from './presentation_auto_effects_v001.mjs';
+import {AUTO_PRESENTATION_RULES_REF_V007, fixAutoPresentationProposalV001} from './presentation_auto_effects_v001.mjs';
 import {PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
   buildPresentationNativeFrameQcRecipeV001, classifyPresentationNativeFrameRgbV001,
   buildPresentationNativeFrameExtractionArgumentsV001, buildPresentationNativeReferenceArgumentsV001,
@@ -16,6 +16,8 @@ import {combinePresentationIntegrityStateQcV001, PRESENTATION_INTEGRITY_STATE_QC
 import {PRESENTATION_ENCODED_OMISSION_QC_BASIS_V002} from './presentation_encoded_omission_qc_v002.mjs';
 import {buildPresentationPulseStateElementsV001, getPresentationPulseProgramV001,
   PRESENTATION_PULSE_PRESET_V001} from './presentation_pulse_v001.mjs';
+import {buildPresentationCaptionMotionStateElementsV001, getPresentationCaptionMotionProgramV001}
+  from './presentation_caption_motion_v001.mjs';
 import {buildPresentationCompositeArgumentsV001, buildPresentationRenderApplicationResultsV002,
   inspectPresentationCompletedFrameQcV001, executeValidatedPresentationDrawAndQcV001}
   from './render_presentation_v002.mjs';
@@ -248,7 +250,7 @@ function combinedEvidenceFixture(completedId = 'a') {
   const context = {baselineRef: {path: baselineRef.path, fileSha256: baselineRef.fileSha256,
     canonicalSha256: baselineRef.canonicalSha256},
   decisionInputRef: {path: '/fixture/decision.json', fileSha256: hash('decision')},
-  renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V006, pulseTimingEvidence: null};
+  renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007, pulseTimingEvidence: null};
   const autoPresentation = {context, autoProposal: fixAutoPresentationProposalV001({baselinePlan, context,
     proposal: {schemaVersion: 'auto-presentation-proposal-v001', context,
       targetCaptionIds: [f.plan.elements[0].instructionId], completion: 'complete', exceptions: [], effects: []}})};
@@ -870,14 +872,18 @@ test('mock I/O detects inputs changing during encode and rejects a missing produ
     error => /production PNG differs/u.test(error.message) && error.mockCalls.length === 0);
 });
 
-test('the replay binds all three production Pulse PNGs to their exact native states and order', () => {
+for (const expression of ['pulse', 'bounce', 'shake']) test(expression + ' replay binds every production PNG to its exact native state and order', () => {
   const f = syntheticEvidence(), element = f.plan.elements[0];
   element.endFrameExclusive = 90; element.displayFrameCount = 90; element.visualState.textStyle.fontSizePx = 96;
-  element.presentationPulse = {presentation: 'provisional-pulse', anchorPeakId: 'measured', anchorFrame: 45};
+  if (expression === 'pulse') element.presentationPulse = {presentation: 'provisional-pulse', anchorPeakId: 'measured', anchorFrame: 45};
+  else element.presentationMotion = {presentation: 'provisional-' + expression, presetVersion: 'presentation-caption-motion-v001'};
   f.expectedFrameCount = 90;
-  const states = buildPresentationPulseStateElementsV001({element, canvas: f.plan.canvas})
-    .map(row => ({...row, pngPath: '/fixture/pulse-' + row.state + '.png', pngSha256: hash('pulse-' + row.state)}));
-  f.records = [{...states[0], element: clone(element), pulseStates: states}];
+  const states = (expression === 'pulse' ? buildPresentationPulseStateElementsV001
+    : buildPresentationCaptionMotionStateElementsV001)({element, canvas: f.plan.canvas})
+    .map(row => ({...row, pngPath: '/fixture/' + expression + '-' + row.state + '.png',
+      pngSha256: hash(expression + '-' + row.state)}));
+  f.records = [{...states[0], element: clone(element),
+    ...(expression === 'pulse' ? {pulseStates: states} : {motionStates: states})}];
   const e = f.evidence; e.expectedFrameCount = 90; e.planCanonicalSha256 = hashJson(f.plan);
   e.recordBindings = [{instructionId: element.instructionId, elementCanonicalSha256: hashJson(element),
     states: states.map(row => ({state: row.state, elementCanonicalSha256: hashJson(row.element),
@@ -893,7 +899,7 @@ test('the replay binds all three production Pulse PNGs to their exact native sta
   e.encodeArguments = [...e.compositorArguments, '-movflags', '+faststart', '-progress', 'pipe:1', '-nostats', e.replay.path];
   e.encodeArgumentsCanonicalSha256 = hashJson(e.encodeArguments);
   e.inputManifest.refs = [...e.inputManifest.refs.filter(ref => !ref.role.startsWith('overlay:')),
-    ...states.map(row => fileRef('overlay:0:' + row.state, row.pngPath, 'pulse-' + row.state))];
+    ...states.map(row => fileRef('overlay:0:' + row.state, row.pngPath, expression + '-' + row.state))];
   e.inputManifest.refsCanonicalSha256 = hashJson(e.inputManifest.refs);
   e.inputManifest.before = clone(e.inputManifest.refs); e.inputManifest.after = clone(e.inputManifest.refs);
   e.encodeProgress.encodedFrames = 90;
@@ -972,3 +978,92 @@ test('sample/display aspect, color meaning and display side data must match desp
   const b = parsePresentationExactVideoFrameHashV001({text: frameHashText().replace('#sar 0: 1/1', '#sar 0: 2/1'), width: 2, height: 2});
   assert.notEqual(a.sampleAspectRatio, b.sampleAspectRatio);
 });
+
+// Synthetic layout/binding fixtures test rejection paths. They do not stand in
+// for the native-font fixture or certify the final video.
+function motionRendererFixture(expression) {
+  const canvas = {width: 1920, height: 1080, fps: 30,
+    safeAreaPx: {left: 80, right: 80, top: 40, bottom: 40}};
+  const element = fixture().plan.elements[0];
+  element.endFrameExclusive = 30; element.displayFrameCount = 30;
+  element.visualState.textStyle.fontSizePx = 96;
+  element.visualState.position.offsetYPercent = -6;
+  element.presentationMotion = {presentation: 'provisional-' + expression,
+    presetVersion: 'presentation-caption-motion-v001'};
+  const states = buildPresentationCaptionMotionStateElementsV001({element, canvas}).map(row => {
+    const width = row.element.visualState.textStyle.fontSizePx;
+    const offset = row.element.visualState.position.offsetXPercent * canvas.width / 100;
+    const bounds = {left: 960 + offset - width / 2, top: 980 - width,
+      right: 960 + offset + width / 2, bottom: 980, width, height: width};
+    const props = {text: row.element.text, visualState: row.element.visualState};
+    const pngSha256 = hashJson(row);
+    return {...row, props, pngPath: '/fixture/' + row.state + '.png', pngSha256,
+      inspection: {instructionId: element.instructionId, overlayFile: 'overlays/' + row.state + '.png',
+        overlaySha256: pngSha256, appliedOverlayPropsCanonicalSha256: hashJson(props),
+        pixelWidth: canvas.width, pixelHeight: canvas.height, alphaMax: 1, alphaBounds: bounds,
+        lineCount: 1, lineAlphaBounds: [{lineIndex: 0, ...bounds}],
+        layoutWrapper: {left: bounds.left, top: bounds.top, width, height: width}}};
+  });
+  const program = getPresentationCaptionMotionProgramV001({element, canvas});
+  const record = {...states[0], element, motionStates: states, inspection: {...states[0].inspection,
+    motion: {presetVersion: element.presentationMotion.presetVersion, metadata: element.presentationMotion,
+      program, states: states.map(row => ({state: row.state, ...row.inspection}))}}};
+  const input = {plan: {canvas, elements: [element]}, canvas,
+    applicationResults: buildPresentationRenderApplicationResultsV002([record]), overlayInspections: [record.inspection],
+    mediaInspection: {video: {...canvas, frameCount: 30}, durationMs: 1000},
+    expectedAudio: {present: false}, expectedFrameCount: 30};
+  return {input, record};
+}
+
+for (const expression of ['bounce', 'shake']) {
+  test(expression + ' native QC rejects clamping, unbound images, missing states and invalid static layouts', () => {
+    const {input} = motionRendererFixture(expression);
+    assert.equal(evaluatePresentationRendererQcV002({...input, requireFinalVisibility: false}).status, 'passed');
+    for (const mutate of [
+      f => {f.overlayInspections[0].motion.states[1].layoutWrapper.left++;},
+      f => {f.overlayInspections[0].motion.states[1].overlaySha256 = hash('substituted-image');},
+      f => {f.applicationResults[0].motion.states.pop();},
+      f => {f.overlayInspections[0].motion.states.reverse();},
+      f => {f.overlayInspections[0].motion.program.segments[0].endFrameExclusive++;},
+      f => {f.applicationResults[0].motion.metadata.presetVersion = 'unknown';},
+      f => {f.overlayInspections[0].motion.states[1].alphaBounds.width = 97;},
+    ]) {
+      const changed = clone(input); mutate(changed);
+      assert.ok(evaluatePresentationRendererQcV002({...changed, requireFinalVisibility: false}).violations
+        .some(row => row.code === 'CAPTION_MOTION_NATIVE_STATE_MISMATCH'));
+    }
+    const clipped = clone(input);
+    clipped.overlayInspections[0].motion.states[1].lineAlphaBounds[0].left = 0;
+    assert.ok(evaluatePresentationRendererQcV002({...clipped, requireFinalVisibility: false}).violations
+      .some(row => row.code === 'LAYOUT_SAFE_AREA_VIOLATION' && row.details.captionMotionState));
+    assertRendererCompletedFailure(evaluatePresentationRendererQcV002(input));
+    for (const basis of [PRESENTATION_NATIVE_FRAME_QC_BASIS_V001, PRESENTATION_ENCODED_OMISSION_QC_BASIS_V002]) {
+      const changed = clone(input); changed.overlayInspections[0].visibilityComparisonBasis = basis;
+      assertRendererCompletedFailure(evaluatePresentationRendererQcV002(changed));
+    }
+  });
+
+  test(expression + ' collision checks follow the moving state interval beyond the disjoint stable box', () => {
+    const {input, record} = motionRendererFixture(expression);
+    const stable = record.motionStates[0];
+    const element = {...clone(stable.element), instructionId: 'neighbor', startFrame: expression === 'bounce' ? 4 : 6,
+      endFrameExclusive: expression === 'bounce' ? 6 : 8, displayFrameCount: 2};
+    const bounds = {left: 1010, top: 884, right: 1018, bottom: 980, width: 8, height: 96};
+    const props = {...clone(stable.props), instructionId: 'neighbor'};
+    const pngSha256 = hash('neighbor');
+    const neighbor = {...stable, element, props, pngPath: '/fixture/neighbor.png', pngSha256,
+      inspection: {...clone(stable.inspection), instructionId: 'neighbor', overlayFile: 'overlays/neighbor.png',
+        overlaySha256: pngSha256, appliedOverlayPropsCanonicalSha256: hashJson(props), alphaBounds: bounds,
+        lineAlphaBounds: [{lineIndex: 0, ...bounds}]}};
+    input.plan.elements.push(element);
+    input.applicationResults.push(...buildPresentationRenderApplicationResultsV002([neighbor]));
+    input.overlayInspections.push(neighbor.inspection);
+    assert.ok(stable.inspection.alphaBounds.right < bounds.left);
+    const result = evaluatePresentationRendererQcV002({...input, requireFinalVisibility: false});
+    assert.ok(result.violations.some(row => row.code === 'INSTRUCTION_TEMPORAL_SPATIAL_COLLISION'
+      && row.details.overlappingFrames === 2 && row.details.captionMotionStates.left === (expression === 'bounce' ? 'maximum' : 'right-8')));
+    input.plan.elements[1].startFrame = 20; input.plan.elements[1].endFrameExclusive = 22;
+    assert.ok(!evaluatePresentationRendererQcV002({...input, requireFinalVisibility: false}).violations
+      .some(row => row.code === 'INSTRUCTION_TEMPORAL_SPATIAL_COLLISION'));
+  });
+}

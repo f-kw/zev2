@@ -1,4 +1,6 @@
 import {createHash} from 'node:crypto';
+import {PRESENTATION_CAPTION_MOTION_PRESETS_V001, getPresentationCaptionMotionProgramV001}
+  from './presentation_caption_motion_v001.mjs';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001, PRESENTATION_PANEL_PRESET_V001} from './presentation_effects_v001.mjs';
 import {PRESENTATION_PULSE_PRESET_V001, resolvePresentationPulseTimingV001} from './presentation_pulse_v001.mjs';
@@ -35,7 +37,7 @@ export const sha256AutoPresentationStateV001 = value => sha256AutoPresentationV0
 
 // Color Accent and Scale Accent are adopted. Their saved role tokens remain
 // internal identifiers. Panel Accent is provisional. Selectors supply no drawing values.
-const rules = freeze({version: 'auto-presentation-rules-v006', role: 'Focus',
+const rules = freeze({version: 'auto-presentation-rules-v007', role: 'Focus',
   presentation: 'provisional-focus', scopes: ['whole-caption', 'partial-caption'],
   targetMatching: 'exact-text-overlapping-occurrences-one-based',
   targetBoundary: 'unicode-grapheme-cluster',
@@ -48,8 +50,12 @@ const rules = freeze({version: 'auto-presentation-rules-v006', role: 'Focus',
   panel: {role: 'Panel accent', presentation: 'provisional-panel', scope: 'whole-caption',
     ...PRESENTATION_PANEL_PRESET_V001},
   pulse: {role: 'Pulse accent', presentation: 'provisional-pulse', scope: 'whole-caption',
-    preset: PRESENTATION_PULSE_PRESET_V001}});
-export const AUTO_PRESENTATION_RULES_REF_V006 = freeze({version: rules.version,
+    preset: PRESENTATION_PULSE_PRESET_V001},
+  bounce: {role: 'Bounce accent', presentation: 'provisional-bounce', scope: 'whole-caption',
+    preset: PRESENTATION_CAPTION_MOTION_PRESETS_V001.bounce},
+  shake: {role: 'Shake accent', presentation: 'provisional-shake', scope: 'whole-caption',
+    preset: PRESENTATION_CAPTION_MOTION_PRESETS_V001.shake}});
+export const AUTO_PRESENTATION_RULES_REF_V007 = freeze({version: rules.version,
   contentSha256: sha256AutoPresentationV001(rules)});
 const graphemeSegmenter = new Intl.Segmenter('ja', {granularity: 'grapheme'});
 
@@ -62,7 +68,7 @@ function checkContext(baselinePlan, context) {
     || !digest(base.fileSha256) || !digest(base.canonicalSha256)) reject('invalid baseline reference');
   if (!exact(decision, ['path', 'fileSha256']) || !nonempty(decision.path)
     || !digest(decision.fileSha256)) reject('invalid decision input reference');
-  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V006)) reject('rendering rules version differs');
+  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V007)) reject('rendering rules version differs');
   if (!object(baselinePlan) || baselinePlan.schemaVersion !== 'presentation-output-common-core-plan-v001'
     || !Array.isArray(baselinePlan.elements)) reject('invalid baseline plan');
   if (sha256AutoPresentationV001(baselinePlan) !== base.canonicalSha256) reject('baseline content differs');
@@ -73,7 +79,7 @@ function checkContext(baselinePlan, context) {
     ids.add(element.instructionId);
     if (element.kind === 'speech-caption') {
       if (!object(element.visualState?.textStyle)) reject('caption has no normal text style');
-      if (['presentationColorRange', 'presentationPreset', 'presentationPulse'].some(key => Object.hasOwn(element, key))) {
+      if (['presentationColorRange', 'presentationPreset', 'presentationPulse', 'presentationMotion'].some(key => Object.hasOwn(element, key))) {
         reject('baseline must be the fixed normal plan, not a resolved presentation');
       }
       captions.push(element.instructionId);
@@ -110,12 +116,22 @@ function checkSelection(entry, withId = true) {
     return;
   }
   const preset = entry?.role === rules.vocal.role ? rules.vocal
-    : entry?.role === rules.panel.role ? rules.panel : null;
+    : entry?.role === rules.panel.role ? rules.panel
+    : entry?.role === rules.bounce.role ? rules.bounce : entry?.role === rules.shake.role ? rules.shake : null;
   if (preset === null || !exact(entry, ['role', 'presentation', 'scope', ...(withId ? ['captionId'] : [])])
     || entry.presentation !== preset.presentation || entry.scope !== preset.scope) {
-    reject('Scale Accent / Panel Accent requires a finite whole-caption preset without drawing fields');
+    reject('Scale Accent / Panel Accent / Bounce Accent / Shake Accent requires a finite whole-caption preset without drawing fields');
   }
 }
+
+function motionElement(baselinePlan, captionId, selection) {
+  const preset = selection.role === rules.bounce.role ? rules.bounce : rules.shake;
+  const element = {...baselinePlan.elements.find(row => row.instructionId === captionId),
+    presentationMotion: {presentation: preset.presentation, presetVersion: preset.preset.version}};
+  getPresentationCaptionMotionProgramV001({element, canvas: baselinePlan.canvas});
+  return element;
+}
+const isMotion = selection => [rules.bounce.role, rules.shake.role].includes(selection?.role);
 
 function pulseProgram(baselinePlan, context, captionId, selection) {
   const evidence = context.pulseTimingEvidence;
@@ -175,6 +191,7 @@ function checkProposal(baselinePlan, context, proposal) {
       focusRange(baselinePlan.elements.find(element => element.instructionId === effect.captionId), effect);
     }
     if (effect.role === rules.pulse.role) pulseProgram(baselinePlan, context, effect.captionId, effect);
+    if (isMotion(effect)) motionElement(baselinePlan, effect.captionId, effect);
     selected.add(effect.captionId);
   }
   for (const exception of proposal.exceptions) {
@@ -225,6 +242,7 @@ function checkOverrides(baselinePlan, context, autoProposal, overrides) {
       focusRange(baselinePlan.elements.find(element => element.instructionId === entry.captionId), entry);
     }
     if (entry.role === rules.pulse.role) pulseProgram(baselinePlan, context, entry.captionId, entry);
+    if (isMotion(entry)) motionElement(baselinePlan, entry.captionId, entry);
     selected.add(entry.captionId);
   }
   return captions;
@@ -249,6 +267,7 @@ export function editAutoPresentationOverrideV001({baselinePlan, context, autoPro
       focusRange(baselinePlan.elements.find(element => element.instructionId === captionId), selection);
     }
     if (selection.role === rules.pulse.role) pulseProgram(baselinePlan, context, captionId, selection);
+    if (isMotion(selection)) motionElement(baselinePlan, captionId, selection);
     entries.push({captionId, ...clone(selection)});
   }
   entries.sort((left, right) => captions.indexOf(left.captionId) - captions.indexOf(right.captionId));
@@ -270,6 +289,7 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
   const ranges = new Map();
   const elements = baselinePlan.elements.map(element => {
     const selection = effective.get(element.instructionId);
+    if (isMotion(selection)) return motionElement(baselinePlan, element.instructionId, selection);
     if (selection?.role === rules.pulse.role) {
       const program = pulseProgram(baselinePlan, context, element.instructionId, selection);
       return {...element, presentationPulse: {presentation: rules.pulse.presentation,

@@ -8,6 +8,7 @@ import {
   resolveAutoPresentationV001, sha256AutoPresentationV001,
 } from './presentation_auto_effects_v001.mjs';
 import {buildPresentationPulseStateElementsV001} from './presentation_pulse_v001.mjs';
+import {buildPresentationCaptionMotionStateElementsV001} from './presentation_caption_motion_v001.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const same = (left, right) => canonicalJson(left) === canonicalJson(right);
@@ -120,7 +121,13 @@ export async function preparePresentationNativeFrameQcV001({
       || record.pulseStates.some((state, index) => state.state !== expectedStates[index].state
         || !same(state.element, expectedStates[index].element)))) reject('Pulse native states differ from the finite plan');
     if (!expectedStates && Object.hasOwn(record, 'pulseStates')) reject('non-Pulse record has unexpected native states');
-    const states = record.pulseStates ?? [record];
+    const motionStates = Object.hasOwn(record.element, 'presentationMotion')
+      ? buildPresentationCaptionMotionStateElementsV001({element: record.element, canvas: plan.canvas}) : null;
+    if (motionStates && (!Array.isArray(record.motionStates) || record.motionStates.length !== motionStates.length
+      || record.motionStates.some((state, index) => state.state !== motionStates[index].state
+        || !same(state.element, motionStates[index].element)))) reject('motion native states differ from the finite plan');
+    if (!motionStates && Object.hasOwn(record, 'motionStates')) reject('non-motion record has unexpected native states');
+    const states = record.pulseStates ?? record.motionStates ?? [record];
     for (const state of states) {
       const expectedProps = overlayAdapter.buildProps(state.element, plan, presetRegistry);
       const propsSha = sha256AutoPresentationV001(expectedProps);
@@ -153,7 +160,7 @@ export async function preparePresentationNativeFrameQcV001({
     for (const spec of specification.alternatives[index].entries) {
       const props = overlayAdapter.buildProps(spec.element, plan, presetRegistry);
       const propsSha = sha256AutoPresentationV001(props);
-      const reusable = (record.pulseStates ?? [record]).find(state =>
+      const reusable = (record.pulseStates ?? record.motionStates ?? [record]).find(state =>
         same(state.element, spec.element) && same(state.props, props));
       if (reusable) {
         alternates.push({kind: spec.kind, element: structuredClone(spec.element), props,

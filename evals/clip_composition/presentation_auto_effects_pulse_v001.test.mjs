@@ -4,7 +4,7 @@ import {mkdtemp, readFile, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import test from 'node:test';
-import {AUTO_PRESENTATION_RULES_REF_V006, sha256AutoPresentationV001, sha256AutoPresentationStateV001,
+import {AUTO_PRESENTATION_RULES_REF_V007, sha256AutoPresentationV001, sha256AutoPresentationStateV001,
   fixAutoPresentationProposalV001, createAutoPresentationOverridesV001,
   editAutoPresentationOverrideV001, resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {loadAutoPresentationContextV001, saveFixedAutoPresentationV001} from './presentation_auto_effects_io_v001.mjs';
@@ -25,7 +25,7 @@ function fixture() {
   const peaks = [['early', 10], ['central', 450], ['end', 900], ['other', 1200]].map(([peakId, peakSample]) => ({
     peakId, startSample: peakSample, endSampleExclusive: peakSample + 1, peakSample}));
   const context = {baselineRef: {...ref('baseline'), canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
-    decisionInputRef: ref('decision'), renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V006,
+    decisionInputRef: ref('decision'), renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007,
     pulseTimingEvidence: {schemaVersion: 'auto-presentation-pulse-timing-v001', sourceRef: ref('source'),
       candidatesRef: ref('candidates'), peaksRef: ref('peaks'), sampleRate: 300, sampleCount: 1800,
       candidates: [{candidateId: 'native-union', peakIds: peaks.map(row => row.peakId)}], peaks}};
@@ -124,7 +124,7 @@ async function nativeFixture(t) {
     evidence[key] = {path: native.path, fileSha256: native.sha256};
   }
   const baselinePath = (await write('normal.json', f.baselinePlan)).path;
-  const decision = {schemaVersion: 'presentation-focus-decision-input-v004', pulseTimingEvidence: evidence};
+  const decision = {schemaVersion: 'presentation-focus-decision-input-v005', pulseTimingEvidence: evidence};
   const decisionInputPath = (await write('decision.json', decision)).path;
   return {baselinePath, decisionInputPath, decision, write, source, candidates, peaks, directory};
 }

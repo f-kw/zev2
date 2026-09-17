@@ -7,6 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {performance} from 'node:perf_hooks';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {buildPresentationPulseStateElementsV001} from './presentation_pulse_v001.mjs';
+import {buildPresentationCaptionMotionStateElementsV001} from './presentation_caption_motion_v001.mjs';
 import {buildPresentationCompositeArgumentsV001} from './render_presentation_v002.mjs';
 
 export const PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V001 = 'presentation-exact-replay-qc-v001';
@@ -192,7 +193,9 @@ function parseEncodeProgress(text) {
 
 function physicalElements(element, canvas) {
   return Object.hasOwn(element, 'presentationPulse')
-    ? buildPresentationPulseStateElementsV001({element, canvas}) : [{state: 'static', element}];
+    ? buildPresentationPulseStateElementsV001({element, canvas})
+    : Object.hasOwn(element, 'presentationMotion')
+      ? buildPresentationCaptionMotionStateElementsV001({element, canvas}) : [{state: 'static', element}];
 }
 
 function checkPlan(plan, expectedFrameCount) {
@@ -216,9 +219,12 @@ function boundRecords(plan, records) {
   return records.map((record, index) => {
     const element = plan.elements[index]; requireValue(same(record?.element, element), 'logical overlay and fixed plan differ');
     const wanted = physicalElements(element, plan.canvas);
-    const actual = Object.hasOwn(element, 'presentationPulse') ? record.pulseStates : [record];
+    const pulse = Object.hasOwn(element, 'presentationPulse');
+    const motion = Object.hasOwn(element, 'presentationMotion');
+    const actual = pulse ? record.pulseStates : motion ? record.motionStates : [record];
     requireValue(Array.isArray(actual) && actual.length === wanted.length
-      && (wanted.length > 1 || !Object.hasOwn(record, 'pulseStates')), 'physical overlay coverage differs');
+      && (pulse || !Object.hasOwn(record, 'pulseStates'))
+      && (motion || !Object.hasOwn(record, 'motionStates')), 'physical overlay coverage differs');
     const states = wanted.map((state, stateIndex) => {
       const row = actual[stateIndex];
       requireValue(same(row?.element, state.element) && (state.state === 'static' || row.state === state.state)
@@ -250,7 +256,9 @@ function recordsFromBindings(plan, bindings) {
       'saved physical overlay binding differs');
       return {element: state.element, state: state.state, pngPath: row.pngPath, pngSha256: row.pngSha256};
     });
-    return {...states[0], element, ...(expected.length > 1 ? {pulseStates: states} : {})};
+    return {...states[0], element,
+      ...(Object.hasOwn(element, 'presentationPulse') ? {pulseStates: states} : {}),
+      ...(Object.hasOwn(element, 'presentationMotion') ? {motionStates: states} : {})};
   });
 }
 

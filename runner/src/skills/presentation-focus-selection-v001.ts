@@ -3,30 +3,30 @@ type FileRef = {path: string; fileSha256: string};
 type Caption = {captionId: string; text: string; contextId: string | null; startFrame: number; endFrameExclusive: number;
   eligiblePulsePeakIds: string[]};
 type Word = {startSec: number; endSec: number; text: string; probability: number};
-export type VocalAsrSegmentV004 = {id: string; startSec: number; endSec: number; text: string;
+export type VocalAsrSegmentV005 = {id: string; startSec: number; endSec: number; text: string;
   avgLogprob: number; noSpeechProbability: number; temperature: number; compressionRatio: number; words: Word[]};
-export type VocalPeakV004 = {id: string; startSample: number; endSampleExclusive: number; peakSample: number;
+export type VocalPeakV005 = {id: string; startSample: number; endSampleExclusive: number; peakSample: number;
   peakDbfs: number; baselineDbfs: number; leftBaselineDbfs: number; rightBaselineDbfs: number;
   prominenceDb: number; riseDb: number; fallDb: number; plateauStartSample: number; plateauEndSampleExclusive: number;
   qualifies: true; reasons: string[]; voiceAtPeak: {startSample: number; endSampleExclusive: number;
     voiceProbability: number; modelPaddingSamples: number}};
-export type VocalCandidateV004 = {candidateId: string; startSample: number; endSampleExclusive: number;
+export type VocalCandidateV005 = {candidateId: string; startSample: number; endSampleExclusive: number;
   peakSample: number; startSec: number; endSec: number; peakSec: number; captionIds: string[];
   metrics: {peakDbfs: number; baselineDbfs: number; prominenceDb: number; riseDb: number; fallDb: number;
     durationSec: number; voiceProbabilityMax: number; voiceProbabilityMean: number};
-  reasons: string[]; constituentPeakIds: string[]; peaks: VocalPeakV004[];
-  asrSegments: VocalAsrSegmentV004[]; asrContext: VocalAsrSegmentV004[]};
-export type PresentationFocusSelectionInputV004 = {
-  schemaVersion: 'presentation-focus-selection-input-v004'; digestId: string; productionPurpose: string | null;
+  reasons: string[]; constituentPeakIds: string[]; peaks: VocalPeakV005[];
+  asrSegments: VocalAsrSegmentV005[]; asrContext: VocalAsrSegmentV005[]};
+export type PresentationFocusSelectionInputV005 = {
+  schemaVersion: 'presentation-focus-selection-input-v005'; digestId: string; productionPurpose: string | null;
   fps: number; captions: Caption[]; contexts: Array<{contextId: string; description: string}>;
-  observations: Array<{observationId: string; kind: 'semantic' | 'video' | 'scale-unrepresentable' | 'panel-unrepresentable' | 'pulse-unrepresentable';
+  observations: Array<{observationId: string; kind: 'semantic' | 'video' | 'scale-unrepresentable' | 'panel-unrepresentable' | 'pulse-unrepresentable' | 'bounce-unrepresentable' | 'shake-unrepresentable';
     captionIds: string[]; description: string}>;
   audioEvidence: {sourceRef: FileRef; candidatesRef: FileRef; asrRef: FileRef; sampleRate: number; sampleCount: number;
     coverage: {startSample: 0; endSampleExclusive: number; coveredSamples: number; gapSamples: 0; overlapSamples: 0; rows: number};
     limitations: string[]};
-  audioCandidates: VocalCandidateV004[];
+  audioCandidates: VocalCandidateV005[];
 };
-const roles = ['Color Accent', 'Scale Accent', 'Panel Accent', 'Pulse Accent'] as const;
+const roles = ['Color Accent', 'Scale Accent', 'Panel Accent', 'Pulse Accent', 'Bounce Accent', 'Shake Accent'] as const;
 type Role = typeof roles[number];
 const role = (v: unknown): v is Role => roles.some(r => r === v);
 type Decision = {captionId: string; role: 'Normal' | Role | null;
@@ -38,10 +38,10 @@ type Decision = {captionId: string; role: 'Normal' | Role | null;
 type CandidateDecision = {candidateId: string; decision: 'selected' | 'discarded' | 'unresolved' | 'unrepresentable';
   reason: string; targets: Array<{captionId: string; role: Role;
     basis: 'meaning-supported' | 'vocal-energy-supported'; evidencePeakIds: string[]}>};
-export type PresentationFocusSelectionAnswerV004 = {status: 'abstained'; reason: string}
+export type PresentationFocusSelectionAnswerV005 = {status: 'abstained'; reason: string}
   | {status: 'complete'; summary: string; decisions: Decision[]; candidateDecisions: CandidateDecision[]};
-export type PresentationFocusSelectionResultV004 = {schemaVersion: 'presentation-focus-selection-result-v004';
-  skillId: 'presentation-focus-selection'; skillVersion: 'v004'; answer: unknown};
+export type PresentationFocusSelectionResultV005 = {schemaVersion: 'presentation-focus-selection-result-v005';
+  skillId: 'presentation-focus-selection'; skillVersion: 'v005'; answer: unknown};
 const object = (v: unknown): v is Record<string, any> => v !== null && typeof v === 'object' && !Array.isArray(v)
   && [Object.prototype, null].includes(Object.getPrototypeOf(v));
 const keys = (v: unknown, names: string[]): v is Record<string, any> => object(v)
@@ -60,20 +60,20 @@ const fileRef = (v: unknown) => keys(v, ['path', 'fileSha256']) && text(v.path)
 function fail(message: string): never {throw new TypeError(message);}
 
 /** Compare complete-audio samples to fixed output frames without rounding or proximity matching. */
-export function audioCandidateOverlapsCaptionV004(candidate: Pick<VocalCandidateV004, 'startSample' | 'endSampleExclusive'>,
+export function audioCandidateOverlapsCaptionV005(candidate: Pick<VocalCandidateV005, 'startSample' | 'endSampleExclusive'>,
   caption: Pick<Caption, 'startFrame' | 'endFrameExclusive'>, sampleRate: number, fps: number) {
   return BigInt(candidate.startSample) * BigInt(fps) < BigInt(caption.endFrameExclusive) * BigInt(sampleRate)
     && BigInt(candidate.endSampleExclusive) * BigInt(fps) > BigInt(caption.startFrame) * BigInt(sampleRate);
 }
 
 /** A pulse must use the measured peak itself, not an overlapping neighbouring basin. */
-export function audioPeakInsideCaptionV004(peakSample: number,
+export function audioPeakInsideCaptionV005(peakSample: number,
   caption: Pick<Caption, 'startFrame' | 'endFrameExclusive'>, sampleRate: number, fps: number) {
   const instant = BigInt(peakSample) * BigInt(fps), rate = BigInt(sampleRate);
   return instant >= BigInt(caption.startFrame) * rate && instant < BigInt(caption.endFrameExclusive) * rate;
 }
 
-export function assertVocalAsrSegmentV004(v: unknown): asserts v is VocalAsrSegmentV004 {
+export function assertVocalAsrSegmentV005(v: unknown): asserts v is VocalAsrSegmentV005 {
   if (!keys(v, ['id', 'startSec', 'endSec', 'text', 'avgLogprob', 'noSpeechProbability', 'temperature', 'compressionRatio', 'words'])
     || !id(v.id) || !finite(v.startSec) || v.startSec < 0 || !finite(v.endSec) || v.endSec < v.startSec
     || typeof v.text !== 'string' || !finite(v.avgLogprob) || !probability(v.noSpeechProbability)
@@ -86,9 +86,9 @@ export function assertVocalAsrSegmentV004(v: unknown): asserts v is VocalAsrSegm
   }
 }
 
-export function assertPresentationFocusSelectionInputV004(v: unknown): asserts v is PresentationFocusSelectionInputV004 {
+export function assertPresentationFocusSelectionInputV005(v: unknown): asserts v is PresentationFocusSelectionInputV005 {
   if (!keys(v, ['schemaVersion', 'digestId', 'productionPurpose', 'fps', 'captions', 'contexts', 'observations',
-    'audioEvidence', 'audioCandidates']) || v.schemaVersion !== 'presentation-focus-selection-input-v004'
+    'audioEvidence', 'audioCandidates']) || v.schemaVersion !== 'presentation-focus-selection-input-v005'
     || !id(v.digestId) || !(v.productionPurpose === null || text(v.productionPurpose)) || !positiveInteger(v.fps)
     || !list(v.captions) || !v.captions.length || !list(v.contexts) || !list(v.observations) || !list(v.audioCandidates))
     fail('FOCUS_INPUT_INVALID');
@@ -109,7 +109,7 @@ export function assertPresentationFocusSelectionInputV004(v: unknown): asserts v
   for (const o of v.observations) {
     if (!keys(o, ['observationId', 'kind', 'captionIds', 'description']) || !id(o.observationId)
       || observations.has(o.observationId)
-      || !['semantic', 'video', 'scale-unrepresentable', 'panel-unrepresentable', 'pulse-unrepresentable'].includes(o.kind)
+      || !['semantic', 'video', 'scale-unrepresentable', 'panel-unrepresentable', 'pulse-unrepresentable', 'bounce-unrepresentable', 'shake-unrepresentable'].includes(o.kind)
       || !ids(o.captionIds) || o.captionIds.some((c: string) => !captions.has(c)) || !text(o.description))
       fail('FOCUS_OBSERVATION_INVALID');
     observations.add(o.observationId);
@@ -144,10 +144,10 @@ export function assertPresentationFocusSelectionInputV004(v: unknown): asserts v
       'voiceProbabilityMax', 'voiceProbabilityMean']) || !Object.values(m).every(finite)
       || m.durationSec !== (c.endSampleExclusive - c.startSample) / a.sampleRate
       || !probability(m.voiceProbabilityMax) || !probability(m.voiceProbabilityMean)) fail('VOCAL_METRICS_INVALID');
-    const matching = v.captions.filter((caption: Caption) => audioCandidateOverlapsCaptionV004(c as VocalCandidateV004, caption, a.sampleRate, v.fps))
+    const matching = v.captions.filter((caption: Caption) => audioCandidateOverlapsCaptionV005(c as VocalCandidateV005, caption, a.sampleRate, v.fps))
       .map((caption: Caption) => caption.captionId);
     if (JSON.stringify(c.captionIds) !== JSON.stringify(matching)) fail('VOCAL_CAPTION_OVERLAP_CHANGED');
-    if (JSON.stringify(c.constituentPeakIds) !== JSON.stringify(c.peaks.map((p: VocalPeakV004) => p.id)))
+    if (JSON.stringify(c.constituentPeakIds) !== JSON.stringify(c.peaks.map((p: VocalPeakV005) => p.id)))
       fail('VOCAL_PEAK_COVERAGE_CHANGED');
     for (const p of c.peaks) {
       if (!keys(p, ['id', 'startSample', 'endSampleExclusive', 'peakSample', 'peakDbfs', 'baselineDbfs',
@@ -173,7 +173,7 @@ export function assertPresentationFocusSelectionInputV004(v: unknown): asserts v
     for (const [segments, direct] of [[c.asrSegments, true], [c.asrContext, false]] as const) {
       const asrIds = new Set<string>();
       for (const s of segments) {
-        assertVocalAsrSegmentV004(s);
+        assertVocalAsrSegmentV005(s);
         if (asrIds.has(s.id) || (direct && !(s.startSec < c.endSec && s.endSec > c.startSec)))
           fail('VOCAL_ASR_OVERLAP_INVALID');
         asrIds.add(s.id);
@@ -192,12 +192,12 @@ export function assertPresentationFocusSelectionInputV004(v: unknown): asserts v
     for (const peakId of c.eligiblePulsePeakIds) {
       const p = allPeaks.get(peakId);
       if (!p || !p.captionIds.includes(c.captionId)
-        || !audioPeakInsideCaptionV004(p.peakSample, c, a.sampleRate, v.fps)) fail('PULSE_ELIGIBLE_PEAK_INVALID');
+        || !audioPeakInsideCaptionV005(p.peakSample, c, a.sampleRate, v.fps)) fail('PULSE_ELIGIBLE_PEAK_INVALID');
     }
   }
 }
 
-export function assertPresentationFocusSelectionAnswerV004(v: unknown): asserts v is PresentationFocusSelectionAnswerV004 {
+export function assertPresentationFocusSelectionAnswerV005(v: unknown): asserts v is PresentationFocusSelectionAnswerV005 {
   if (keys(v, ['status', 'reason']) && v.status === 'abstained' && text(v.reason)) return;
   if (!keys(v, ['status', 'summary', 'decisions', 'candidateDecisions']) || v.status !== 'complete' || !text(v.summary)
     || !list(v.decisions) || !v.decisions.length || !list(v.candidateDecisions)) fail('FOCUS_ANSWER_INVALID');
@@ -218,6 +218,8 @@ export function assertPresentationFocusSelectionAnswerV004(v: unknown): asserts 
         || s.scope !== 'whole-caption')) fail('VOCAL_SELECTION_INVALID');
       if (d.role === 'Panel Accent' && (!keys(s, ['scope']) || s.scope !== 'whole-caption'))
         fail('PANEL_SELECTION_INVALID');
+      if (['Bounce Accent', 'Shake Accent'].includes(d.role) && (!keys(s, ['scope']) || s.scope !== 'whole-caption'))
+        fail('CAPTION_MOTION_SELECTION_INVALID');
       if (d.role === 'Pulse Accent') {
         if (!d.evidenceAudioCandidateIds.length || !keys(s, ['scope', 'anchorPeakId'])
           || s.scope !== 'whole-caption' || !id(s.anchorPeakId)) fail('PULSE_SELECTION_INVALID');
@@ -252,8 +254,8 @@ export function assertPresentationFocusSelectionAnswerV004(v: unknown): asserts 
   }
 }
 
-export function assertPresentationFocusSelectionCoverageV004(input: unknown, answer: unknown) {
-  assertPresentationFocusSelectionInputV004(input); assertPresentationFocusSelectionAnswerV004(answer);
+export function assertPresentationFocusSelectionCoverageV005(input: unknown, answer: unknown) {
+  assertPresentationFocusSelectionInputV005(input); assertPresentationFocusSelectionAnswerV005(answer);
   if (answer.status === 'abstained') fail('FOCUS_JUDGMENT_ABSTAINED');
   if (answer.decisions.length !== input.captions.length || answer.decisions.some((d, i) => d.captionId !== input.captions[i].captionId))
     fail('FOCUS_COVERAGE_CHANGED');
@@ -267,12 +269,16 @@ export function assertPresentationFocusSelectionCoverageV004(input: unknown, ans
   const unsupportedScale = new Set(input.observations.filter(o => o.kind === 'scale-unrepresentable').flatMap(o => o.captionIds));
   const unsupportedPanel = new Set(input.observations.filter(o => o.kind === 'panel-unrepresentable').flatMap(o => o.captionIds));
   const unsupportedPulse = new Set(input.observations.filter(o => o.kind === 'pulse-unrepresentable').flatMap(o => o.captionIds));
+  const unsupportedBounce = new Set(input.observations.filter(o => o.kind === 'bounce-unrepresentable').flatMap(o => o.captionIds));
+  const unsupportedShake = new Set(input.observations.filter(o => o.kind === 'shake-unrepresentable').flatMap(o => o.captionIds));
   for (const d of answer.decisions) {
     if (d.evidenceCaptionIds.some(id => !captions.has(id))) fail('FOCUS_EVIDENCE_UNKNOWN');
     if (d.evidenceAudioCandidateIds.some(id => !candidates.has(id))) fail('VOCAL_EVIDENCE_UNKNOWN');
     if (d.decision !== 'selected') continue;
     if (d.role === 'Scale Accent' && unsupportedScale.has(d.captionId)) fail('VOCAL_RENDERING_UNREPRESENTABLE');
     if (d.role === 'Panel Accent' && unsupportedPanel.has(d.captionId)) fail('PANEL_RENDERING_UNREPRESENTABLE');
+    if (d.role === 'Bounce Accent' && unsupportedBounce.has(d.captionId)) fail('BOUNCE_RENDERING_UNREPRESENTABLE');
+    if (d.role === 'Shake Accent' && unsupportedShake.has(d.captionId)) fail('SHAKE_RENDERING_UNREPRESENTABLE');
     if (d.role === 'Pulse Accent') {
       const anchorPeakId = (d.selection as {anchorPeakId: string}).anchorPeakId;
       if (unsupportedPulse.has(d.captionId) || !captions.get(d.captionId)!.eligiblePulsePeakIds.includes(anchorPeakId))
@@ -299,28 +305,28 @@ export function assertPresentationFocusSelectionCoverageV004(input: unknown, ans
         || !cd.evidenceAudioCandidateIds.includes(d.candidateId)) fail('VOCAL_SELECTION_EVIDENCE_CONFLICT');
       for (const peakId of target.evidencePeakIds) {
         const peak = c.peaks.find(p => p.id === peakId);
-        if (!peak || !audioCandidateOverlapsCaptionV004(peak, captions.get(captionId)!, input.audioEvidence.sampleRate, input.fps))
+        if (!peak || !audioCandidateOverlapsCaptionV005(peak, captions.get(captionId)!, input.audioEvidence.sampleRate, input.fps))
           fail('VOCAL_LOCAL_PEAK_EVIDENCE_CONFLICT');
         if (target.role === 'Pulse Accent'
-          && !audioPeakInsideCaptionV004(peak.peakSample, captions.get(captionId)!, input.audioEvidence.sampleRate, input.fps))
+          && !audioPeakInsideCaptionV005(peak.peakSample, captions.get(captionId)!, input.audioEvidence.sampleRate, input.fps))
           fail('PULSE_LOCAL_PEAK_INSTANT_CONFLICT');
       }
     }
   }
 }
 
-export function assertPresentationFocusSelectionResultV004(v: unknown): asserts v is PresentationFocusSelectionResultV004 & {
-  answer: PresentationFocusSelectionAnswerV004} {
+export function assertPresentationFocusSelectionResultV005(v: unknown): asserts v is PresentationFocusSelectionResultV005 & {
+  answer: PresentationFocusSelectionAnswerV005} {
   if (!keys(v, ['schemaVersion', 'skillId', 'skillVersion', 'answer'])
-    || v.schemaVersion !== 'presentation-focus-selection-result-v004' || v.skillId !== 'presentation-focus-selection'
-    || v.skillVersion !== 'v004') fail('FOCUS_RESULT_INVALID');
-  assertPresentationFocusSelectionAnswerV004(v.answer);
+    || v.schemaVersion !== 'presentation-focus-selection-result-v005' || v.skillId !== 'presentation-focus-selection'
+    || v.skillVersion !== 'v005') fail('FOCUS_RESULT_INVALID');
+  assertPresentationFocusSelectionAnswerV005(v.answer);
 }
 
-export async function runPresentationFocusSelectionV004(input: PresentationFocusSelectionInputV004,
-  judge: (input: PresentationFocusSelectionInputV004) => Promise<unknown>): Promise<PresentationFocusSelectionResultV004> {
-  assertPresentationFocusSelectionInputV004(input);
+export async function runPresentationFocusSelectionV005(input: PresentationFocusSelectionInputV005,
+  judge: (input: PresentationFocusSelectionInputV005) => Promise<unknown>): Promise<PresentationFocusSelectionResultV005> {
+  assertPresentationFocusSelectionInputV005(input);
   const answer = await judge(structuredClone(input));
-  return {schemaVersion: 'presentation-focus-selection-result-v004', skillId: 'presentation-focus-selection',
-    skillVersion: 'v004', answer: structuredClone(answer)};
+  return {schemaVersion: 'presentation-focus-selection-result-v005', skillId: 'presentation-focus-selection',
+    skillVersion: 'v005', answer: structuredClone(answer)};
 }

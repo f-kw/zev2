@@ -56,10 +56,10 @@ async function fixture(t, auto = true, selection = {role: 'Focus', presentation:
       measurementEvidence: [{path: peaksRef.path, sha256: peaksRef.fileSha256,
         bytes: (await readFile(peaksRef.path)).length}],
     });
-    await writeJson(files.decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v004',
+    await writeJson(files.decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v005',
       pulseTimingEvidence: {schemaVersion: 'auto-presentation-pulse-timing-v001',
         sourceRef, candidatesRef, peaksRef, sampleRate, sampleCount, candidates, peaks}});
-  } else await writeJson(files.decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v004',
+  } else await writeJson(files.decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v005',
     purpose: 'CLI finite-operation fixture', pulseTimingEvidence: null});
   const {context} = await loadAutoPresentationContextV001(files);
   if (auto) await saveFixedAutoPresentationV001({...files, outputPath: files.autoProposalPath,

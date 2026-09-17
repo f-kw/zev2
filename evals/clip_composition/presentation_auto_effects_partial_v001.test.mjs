@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V006,
+  AUTO_PRESENTATION_RULES_REF_V007,
   createAutoPresentationOverridesV001,
   editAutoPresentationOverrideV001,
   fixAutoPresentationProposalV001,
@@ -61,7 +61,7 @@ function fixture(text = '先頭中間末尾', lines = [text]) {
     baselineRef: {path: 'normal.json', fileSha256: hash(JSON.stringify(baselinePlan)),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: 'input.json', fileSha256: hash('fixed input')},
-    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V006), pulseTimingEvidence: null,
+    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V007), pulseTimingEvidence: null,
   };
   return freeze({baselinePlan, context});
 }
@@ -293,7 +293,7 @@ async function ioFixture(t, text = '先頭中間末尾') {
   t.after(() => rm(directory, {recursive: true, force: true}));
   const baselinePath = join(directory, 'normal.json'), decisionInputPath = join(directory, 'input.json');
   await writeJson(baselinePath, fixture(text).baselinePlan);
-  await writeJson(decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v004', pulseTimingEvidence: null, text, confirmed: true});
+  await writeJson(decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v005', pulseTimingEvidence: null, text, confirmed: true});
   return {directory, baselinePath, decisionInputPath, autoProposalPath: join(directory, 'auto.json'),
     overridesPath: join(directory, 'override.json'),
     ...await loadAutoPresentationContextV001({baselinePath, decisionInputPath})};
