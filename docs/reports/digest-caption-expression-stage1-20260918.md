@@ -1,6 +1,6 @@
 # 工程I：字幕表現の拡張 — 作業・引継ぎ記録
 
-開始日: 2026-09-18（日本時間）。状態: **工程Iの候補動画と技術検証が完了。監査用checkpointのcommit／pushと読戻しを続けて行う。** 人間の採用・視聴品質の判定とは分ける。
+開始日: 2026-09-18（日本時間）。状態: **工程Iの候補動画・技術検証・37ファイルのcheckpoint pushと読戻しが完了。八つの完成条件を満たし、同じ相談役へのAUDIT_ONLYへ進む。** 人間の採用・視聴品質の判定とは分ける。
 
 ## 最優先方針と今回の範囲
 
@@ -263,7 +263,7 @@ TSX_DISABLE_CACHE=1 "$STAGE1_NODE" --import "$STAGE1_LOADER" --test \
 | 5. 小型実frame・故障注入・関係する既存回帰 | 24観測frame、6本の実故障拒否、対象回帰・型検査 | 確認済み |
 | 6. 自動判断と共通描画を経た候補1本をQC付き提出 | 新判断を別版へ固定。新表現3箇所を含む候補v002と全編・67frameの検査通過 | 確認済み |
 | 7. 表現一覧と技術・採用・品質状態の区別 | 表現一覧、既存採用と技術試用の区別、小型と全編の出力参照 | 確認済み |
-| 8. 指示・実装・試験・報告を選別してcommit／push、読戻しと旧作業保全 | 専用branch、対象37ファイル確定、元treeの5記録は開始時と一致 | **checkpoint・remote読戻しは保留** |
+| 8. 指示・実装・試験・報告を選別してcommit／push、読戻しと旧作業保全 | 専用branchへ37ファイルを保存し、remoteの同一SHAを読戻し。push後も元treeの5記録が開始時と一致 | 確認済み |
 
 ## 出力例、採用状態と未検証事項
 
@@ -275,17 +275,19 @@ Color／Scaleの人間採用は上位計画の既存記録を維持した。Pane
 
 候補完成までの作業では、新素材・書体・依存取得、有料API、新たな外部素材送信は行っていない。技術試験の費用記録は0米ドル。正式trust・契約・Goal・DECISIONS・main merge・tag・stable・releaseを変更していない。
 
-## checkpointと次工程 — 保留
+## checkpointと次工程
 
 - branch: `codex/digest-caption-expression-stage1`
 - base: `43a9382bdac0dd2881777f2cd442c21158173da9`
-- checkpoint SHA／compare: **保留。対象は下記37ファイルへ固定した。**
-- remote読戻し: **保留。** 元workspaceは上記の保全記録でHEAD・branch・追跡差分・staged差分・未追跡一覧の一致を確認済み。
-- 同じ相談役会話へのAUDIT_ONLYと監査結果: **保留。動画・巨大な生証拠は送信せず、まとまった報告を一回送る。**
+- 実装checkpoint: [`53c25d3a1f51e1154524e9f4ea271ff4ac296ddf`](https://github.com/f-kw/zev2/commit/53c25d3a1f51e1154524e9f4ea271ff4ac296ddf)。[baseからの変更](https://github.com/f-kw/zev2/compare/43a9382bdac0dd2881777f2cd442c21158173da9...53c25d3a1f51e1154524e9f4ea271ff4ac296ddf)。下記37ファイルだけをcommit／pushした。
+- remote読戻し: 専用branchが同じ`53c25d3a1f51e1154524e9f4ea271ff4ac296ddf`を指すことを確認。[保存記録](/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/checkpoint-v001-remote-readback.json)。
+- push後の元workspace: 2026-09-18 01:29:15（日本時間）にも、HEAD・branch・追跡差分・staged差分・未追跡一覧の全5記録が開始時と一致。[push後の保全記録](/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v002/verification.json)。
+- この節と軽量証拠への読戻し結果の追記は、実装を変えない後続の記録commitへ保存する。監査依頼本文には、その最新SHAとremote読戻しを併記する。
+- 同じ相談役会話へのAUDIT_ONLYと次タスク要求: この報告を含む最新checkpointの読戻し後に送る。動画・巨大な生証拠は送信しない。
 
 ### 選別したcheckpoint対象37ファイル
 
-受領資料・表現一覧・この報告・軽量検証記録、実装、試験、再現helperを対象とする。候補動画、状態画像、巨大な生証拠、依存へのsymlinkを含めない。以下は対象一覧であり、commit／push完了の記録ではない。
+受領資料・表現一覧・この報告・軽量検証記録、実装、試験、再現helperを保存した。候補動画、状態画像、巨大な生証拠、依存へのsymlinkは含めていない。
 
 ```text
 docs/reports/digest-caption-expression-catalogue-20260918.md

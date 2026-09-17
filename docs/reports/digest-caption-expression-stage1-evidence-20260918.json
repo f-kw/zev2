@@ -86,7 +86,7 @@
       },
       {
         "id": "nativeMotion",
-        "meaning": "実native描画・24状態観測・6故障動画",
+        "meaning": "実native描画・24フレーム観測・6故障動画",
         "counts": {
           "tests": 1,
           "pass": 1,
@@ -1915,7 +1915,44 @@
     "automaticSelectionQuality": "not-evaluated",
     "paidApiCallsDuringCandidateRun": 0,
     "newExternalMediaTransfers": 0,
-    "finalOriginalTreePreservationAfterPush": "pending-parent-verification"
+    "finalOriginalTreePreservationAfterPush": {
+      "status": "passed",
+      "evidence": "originalTreePreservationAfterPush",
+      "recordedAt": "2026-09-17T16:29:15.005461+00:00",
+      "records": [
+        {
+          "name": "original-status.z",
+          "bytes": 10693537,
+          "sha256": "3d2edf1b0683e8c76d59baf100b59fcf6658e2d3d799a0b3ceebc1dfa3441b3b",
+          "unchanged": true
+        },
+        {
+          "name": "original-tracked.diff",
+          "bytes": 2604,
+          "sha256": "3e7877a0bee01a6796a7444aa3570fb6d1d3b390b902c3a3112084f92ee2c2bb",
+          "unchanged": true
+        },
+        {
+          "name": "original-staged.diff",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "unchanged": true
+        },
+        {
+          "name": "original-head.txt",
+          "bytes": 41,
+          "sha256": "203125c151b0a38e636ce58c4baa9228f845e0dc5d5f95dff0ec94a3dc6d1646",
+          "unchanged": true
+        },
+        {
+          "name": "original-branch.txt",
+          "bytes": 27,
+          "sha256": "d2d293869d375ba9ef2c557cb5e2c39dcf4bbf5136ef43bda0e7219679658458",
+          "unchanged": true
+        }
+      ],
+      "meaning": "元workspaceのHEAD・branch・追跡差分・staged差分・未追跡一覧が開始時と一致。未追跡本文の全件hash検査ではない。"
+    }
   },
   "rawEvidence": {
     "storageAndCliLog": {
@@ -2087,7 +2124,72 @@
       "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/candidate-v002/start.json",
       "bytes": 11443,
       "fileSha256": "7d66b4481619c576940b786bfe76e78af4bc62978d900a06351e4adb2ea675c3"
+    },
+    "originalTreePreservationAfterPush": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v002/verification.json",
+      "bytes": 987,
+      "fileSha256": "188f4c96623dd2cee08a001914af69d7910b08e1c641c2797ebcff8b3091e8c1"
+    },
+    "checkpointRemoteReadback": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/checkpoint-v001-remote-readback.json",
+      "bytes": 3409,
+      "fileSha256": "78b7aaa37478db0b632b9d4207808bc3e08d80fa1a46a1bafa646ac21847f550"
     }
   },
-  "fullCandidateEvidenceUpdatedAt": "2026-09-17T16:27:01.294Z"
+  "fullCandidateEvidenceUpdatedAt": "2026-09-17T16:27:01.294Z",
+  "checkpoint": {
+    "status": "passed",
+    "recordedAt": "2026-09-17T16:30:30.581655+00:00",
+    "branch": "codex/digest-caption-expression-stage1",
+    "base": "43a9382bdac0dd2881777f2cd442c21158173da9",
+    "checkpoint": "53c25d3a1f51e1154524e9f4ea271ff4ac296ddf",
+    "remoteReadback": {
+      "command": "git ls-remote --heads origin refs/heads/codex/digest-caption-expression-stage1",
+      "exitCode": 0,
+      "stdout": "53c25d3a1f51e1154524e9f4ea271ff4ac296ddf\trefs/heads/codex/digest-caption-expression-stage1\n",
+      "commitMatches": true
+    },
+    "selectedFiles": [
+      "docs/reports/digest-caption-expression-catalogue-20260918.md",
+      "docs/reports/digest-caption-expression-stage1-20260918.md",
+      "docs/reports/digest-caption-expression-stage1-evidence-20260918.json",
+      "docs/reports/digest-caption-expression-stage1-sources-20260918/implementation-instructions-v001.md",
+      "docs/reports/digest-caption-expression-stage1-sources-20260918/parent-plan-v001.md",
+      "evals/clip_composition/caption_expression_stage1_candidate_v001.mjs",
+      "evals/clip_composition/caption_expression_stage1_edit_check_v001.mjs",
+      "evals/clip_composition/caption_expression_stage1_prepare_v001.mts",
+      "evals/clip_composition/edit_auto_presentation_v001.mjs",
+      "evals/clip_composition/edit_auto_presentation_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_io_v001.mjs",
+      "evals/clip_composition/presentation_auto_effects_io_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_motion_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_panel_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_partial_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_pulse_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_renderer_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_span_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_v001.mjs",
+      "evals/clip_composition/presentation_auto_effects_v001.test.mjs",
+      "evals/clip_composition/presentation_caption_motion_renderer_native_v001.test.mjs",
+      "evals/clip_composition/presentation_caption_motion_renderer_v001.test.mjs",
+      "evals/clip_composition/presentation_caption_motion_v001.mjs",
+      "evals/clip_composition/presentation_caption_motion_v001.test.mjs",
+      "evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+      "evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs",
+      "evals/clip_composition/presentation_focus_selection_v001.mts",
+      "evals/clip_composition/presentation_focus_selection_v001.test.mts",
+      "evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+      "evals/clip_composition/presentation_native_frame_qc_preparation_v001.test.mjs",
+      "evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "evals/clip_composition/presentation_native_frame_qc_v001.test.mjs",
+      "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "evals/clip_composition/prompts/presentation_focus_selection_v001.md",
+      "evals/clip_composition/render_presentation_v002.mjs",
+      "packages/shared/src/auto-presentation.ts",
+      "runner/src/skills/presentation-focus-selection-v001.ts"
+    ],
+    "originalTreePreservation": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v002/verification.json",
+    "selectedFileCount": 37,
+    "evidence": "checkpointRemoteReadback"
+  }
 }
