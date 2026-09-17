@@ -199,8 +199,8 @@ frame252と504の連結は例を梱包するための接合であり、元Digest
 |---|---|
 | 元正本・保存短尺・原案byteの最終照合 | 描画の前後と独立媒体検査の前後で一致。元入力8件・原案保存byteを保持 |
 | 既存作業treeと工程I候補の保全 | 元treeのHEAD・branch・全status・差分・staged状態、工程Iの同項目と候補SHAが開始時に一致。元treeの既存差分は2,604bytesのまま |
-| 最終変更file一覧・commit漏れ確認 | **未記録・要追記** |
-| checkpoint・push・remote読戻し | **未記録・要追記** |
+| 最終変更file一覧・commit漏れ確認 | 開始baseとの差分は追加13file。実装・試験・実入力記録6件、報告・一覧・軽量証拠3件、指示・上位計画・来歴・試験log4件。既存tracked fileの変更0。実行source 6件のSHAを再照合し、全選別fileをcheckpointへ収録 |
+| checkpoint・push・remote読戻し | 実装checkpoint `4cc3a1f53e028c7dfdcf329ad85ea4ef92113bcd` を専用branchへpush済み。同remote branchの読戻しが同SHAと一致。push後も既存2作業treeと工程I候補を再照合し開始時と一致。この記録追記は実装・媒体を変更しない |
 | 通信・費用の集計 | 新素材・依存取得0、媒体upload0、有料API呼出0、API費用US$0。監査用Git pushと同じ相談役への報告だけを指示範囲で行う |
 
 実MP4、可逆媒体、巨大な生証拠をGitや外部サービスへ無断で追加しない。再現source、試験、指示・参照、文書、軽量証拠を選別して残す。正式成果物の上書き、main merge、tag、stable、releaseは今回の範囲に含めない。
@@ -243,3 +243,7 @@ cd /var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhy
 新Softの正式名称・デザイン採用、人間品質、音の自然さ、ローカルUIでの再生は未評価／未検証である。今回の小型媒体から、通常job全般、異なるfps・音声sample rate、全Digestの自動割当へ合格を一般化しない。
 
 工程IIの正常技術結果と相談役監査を得た後、同じ相談役会話へ工程IIIの指示書を求める。工程IIは接続能力を一種類増やして次へ渡す工程として完了条件を閉じる。
+
+## 13. 監査依頼時の記録
+
+実装checkpointは `4cc3a1f53e028c7dfdcf329ad85ea4ef92113bcd`。この後の記録追記を含めてpushし、同じ「ZEV Build Loop」へ `AUDIT_ONLY` と工程IIIの次タスク要求を送る。相談役の応答は受領後に本節へ追記する。工程IIIの着工は今回の完了作業に含めない。
