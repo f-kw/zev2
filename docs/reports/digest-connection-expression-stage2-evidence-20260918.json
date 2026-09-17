@@ -1,0 +1,2483 @@
+{
+  "schemaVersion": "digest-connection-expression-stage2-evidence-v001",
+  "status": "technical-validation-passed",
+  "purpose": "development-fixture; not formal-job admission or human quality acceptance",
+  "base": "29d7863b2e5f6aebc71b20310c50e742ae136e9e",
+  "branch": "codex/digest-connection-expression-stage2",
+  "actualAiSelections": 0,
+  "humanEvaluations": 0,
+  "preset": {
+    "name": "Soft Separator",
+    "id": "soft-separator",
+    "version": "v001",
+    "role": "separator",
+    "fadeOutNumeratorsOverFive": [
+      5,
+      4,
+      3,
+      2,
+      1,
+      0
+    ],
+    "fadeInNumeratorsOverFive": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "blackYuv": [
+      16,
+      128,
+      128
+    ],
+    "rounding": "floor((v*k+B*(5-k)+2)/5)",
+    "insertedFrames": 12,
+    "designedCompleteBlackFramesIncludingRetainedEndpoints": 14,
+    "pixelFormat": "yuv420p",
+    "inputColorRangeTags": "absent; no range conversion"
+  },
+  "unitTests": {
+    "passed": 12,
+    "failed": 0,
+    "log": {
+      "path": "docs/reports/digest-connection-expression-stage2-sources-20260918/unit-tests-v001.tap",
+      "bytes": 2865,
+      "sha256": "fdc75d53165e679a9cf9d312c7beb15f0b4d1f9eb1eec8621cf3e4f4fe524cd9"
+    }
+  },
+  "sourceBindings": [
+    {
+      "path": "evals/clip_composition/connection_expression_finish_v001.py",
+      "bytes": 11063,
+      "sha256": "02108452238e880e9bbc370dbe9317a33b7ef5fa9fb342c28bec128f7859c424"
+    },
+    {
+      "path": "evals/clip_composition/connection_expression_fixture_inputs_20260918.json",
+      "bytes": 5546,
+      "sha256": "cfcc01d060486dc5b9e91c2e8f7a97564adf0ae01730ea6865dc806d13aae4ae"
+    },
+    {
+      "path": "evals/clip_composition/connection_expression_fixture_v001.mjs",
+      "bytes": 16398,
+      "sha256": "04e3a8f66f281be95ab2d42879a38dfaedbef1fd55a0b89a61392a5cfbec030f"
+    },
+    {
+      "path": "evals/clip_composition/connection_expression_media_check_v001.py",
+      "bytes": 34121,
+      "sha256": "1f0e21848af633b675b418b2979992c4e7141bca3dca1f7e17ea6bdb2136f21f"
+    },
+    {
+      "path": "evals/clip_composition/connection_expression_v001.mjs",
+      "bytes": 23224,
+      "sha256": "1039d39f1a7147430b0cba9dcd47ed3fde7837d14e71c35bbc248143ba994bcc"
+    },
+    {
+      "path": "evals/clip_composition/connection_expression_v001.test.mjs",
+      "bytes": 22153,
+      "sha256": "3abc83f19be33d405598a89f79214b9d068c33dcb5a3ee6f4a4e93af5a927c74"
+    }
+  ],
+  "inputBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/timeline.json",
+      "bytes": 3711,
+      "sha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "bytes": 616632321,
+      "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/common-plan.json",
+      "bytes": 2095671,
+      "sha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778"
+    },
+    {
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "bytes": 442864,
+      "sha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    {
+      "path": "/opt/homebrew/bin/ffprobe",
+      "bytes": 238096,
+      "sha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    },
+    {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/observations/connection-01/baseline-lossless.nut",
+      "bytes": 159431350,
+      "sha256": "3cb2ff17bfa826194b7ebe0950242a27fe2e713fb362ea85cb2b68d6ec253232"
+    },
+    {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/observations/connection-02-v002/baseline-lossless.nut",
+      "bytes": 152588775,
+      "sha256": "36b66e025b3c34a553dfde96ebdfd8636fdb14ed9a10a3dc411cd0fe463a7173"
+    },
+    {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/observations/connection-11-v002/baseline-lossless.nut",
+      "bytes": 128890669,
+      "sha256": "7800f1fbe0d901117e7d4676cc2fd342f641622fcfe1799dccffe7e3fbacd8dc"
+    }
+  ],
+  "priorEvidence": {
+    "technicalBaseline": "543ec3356f5bf976a5378317c09249aac61bea0d",
+    "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/physical-fixture-result.json",
+    "sha256": "93e2509ee84c474fc3f3c4069fd13dfc8a0f835d057e83b52d8fb895d714d1c4",
+    "sourceIdentityProofReused": "Existing excerpt all-pixel/all-float-PCM equality against canonical windows; current input bytes rehashed unchanged, no new whole-Digest decode."
+  },
+  "retainedClockAndCaptionChecks": {
+    "schemaVersion": "connection-expression-real-fixture-v001",
+    "createdBy": "development-fixture",
+    "actualAiSelections": 0,
+    "humanEvaluations": 0,
+    "independentInputBindingsPreserved": true,
+    "originalSavedBytesPreserved": true,
+    "canonicalCaptionCount": 325,
+    "sourceFrameClock": {
+      "inputFrameRate": "60/1",
+      "logicalFrameRate": "30/1",
+      "extractionRuleId": "source-frame-60fps-global-even-v001",
+      "decodedFrameCount": 713904,
+      "containerStartTimeMs": 0,
+      "videoStreamTimeBase": "1/15360",
+      "videoFirstPts": 0,
+      "videoPtsStep": 256,
+      "videoPresentationOffsetMs": 0
+    },
+    "immutableOriginalAndSeparateOverrides": true,
+    "oneResetKeepsOtherOverride": true,
+    "softOriginalRestoredFromSavedOverrides": true,
+    "blackOriginalRestoredFromSavedOverrides": true,
+    "repeatedResolutionNoDoubleShift": true,
+    "captionContentsAndOriginalDurationsPreserved": true
+  },
+  "globalOriginalFrames": 44408,
+  "globalOriginalSoftDisplayFrames": 44444,
+  "globalTwoOverrideDisplayFrames": 44432,
+  "captionRowsCheckedPerState": 325,
+  "independentSavedClockRowsChecked": 650,
+  "mediaChecks": [
+    {
+      "label": "connection-01-soft-original",
+      "expectedRejection": false,
+      "status": "passed",
+      "violationCodes": [],
+      "commandFailures": [],
+      "frameCount": 252,
+      "matchedFrames": 252,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 114,
+          "matched": 114
+        },
+        "fade-out": {
+          "checked": 6,
+          "matched": 6
+        },
+        "inserted-black": {
+          "checked": 12,
+          "matched": 12
+        },
+        "fade-in": {
+          "checked": 6,
+          "matched": 6
+        },
+        "unchanged-after": {
+          "checked": 114,
+          "matched": 114
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132
+      ],
+      "firstMismatch": null,
+      "mismatchedFrameCount": 0,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 403200,
+        "actualSamplesPerChannel": 403200,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 19200,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "expectedPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "actualPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383168,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 252,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 514048,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 396,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 403200,
+          "expectedTimelineSamplesPerChannel": 403200,
+          "continuous": true,
+          "lastPacketPts": 402368,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/connection-01-soft-original-proof/result.json",
+        "bytes": 8583,
+        "sha256": "7212bf189e3cdf4bdc1884bd138b0336f16c01c1e22242852d2d5408a13cdecd"
+      },
+      "mediaSha256": "65f062764afc80ade51b170f4a6df5845fa597036e48807eb5823ba2719257d4"
+    },
+    {
+      "label": "connection-02-soft-original",
+      "expectedRejection": false,
+      "status": "passed",
+      "violationCodes": [],
+      "commandFailures": [],
+      "frameCount": 252,
+      "matchedFrames": 252,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 114,
+          "matched": 114
+        },
+        "fade-out": {
+          "checked": 6,
+          "matched": 6
+        },
+        "inserted-black": {
+          "checked": 12,
+          "matched": 12
+        },
+        "fade-in": {
+          "checked": 6,
+          "matched": 6
+        },
+        "unchanged-after": {
+          "checked": 114,
+          "matched": 114
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132
+      ],
+      "firstMismatch": null,
+      "mismatchedFrameCount": 0,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 403200,
+        "actualSamplesPerChannel": 403200,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 19200,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "8e14f9f698d203fc3589d0e59ac695c21222bccbfee7b2a36eba6d80fc01a935",
+        "expectedPcmSha256": "7e2656ac31996c4eb2a6236539ddd4fb01b89512dba4d5b13851cd49d697eddb",
+        "actualPcmSha256": "7e2656ac31996c4eb2a6236539ddd4fb01b89512dba4d5b13851cd49d697eddb",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383424,
+          "lastPacketDuration": 576,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 252,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 514048,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 396,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 403200,
+          "expectedTimelineSamplesPerChannel": 403200,
+          "continuous": true,
+          "lastPacketPts": 402624,
+          "lastPacketDuration": 576,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/connection-02-soft-original-proof/result.json",
+        "bytes": 8598,
+        "sha256": "b215f82fcbce6d6f41eb349db7a8cfd50fc4e39d77309e63576962896010a440"
+      },
+      "mediaSha256": "223eb91059f0a009b184936dc9a95cf2698c56bcb0c083fd41dc317700efab32"
+    },
+    {
+      "label": "connection-11-soft-original",
+      "expectedRejection": false,
+      "status": "passed",
+      "violationCodes": [],
+      "commandFailures": [],
+      "frameCount": 252,
+      "matchedFrames": 252,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 114,
+          "matched": 114
+        },
+        "fade-out": {
+          "checked": 6,
+          "matched": 6
+        },
+        "inserted-black": {
+          "checked": 12,
+          "matched": 12
+        },
+        "fade-in": {
+          "checked": 6,
+          "matched": 6
+        },
+        "unchanged-after": {
+          "checked": 114,
+          "matched": 114
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132
+      ],
+      "firstMismatch": null,
+      "mismatchedFrameCount": 0,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 403200,
+        "actualSamplesPerChannel": 403200,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 19200,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "a6037d7655bf89308101794b8ebea8728b686a8ac94f5b6682c07e349c763cf4",
+        "expectedPcmSha256": "12dfb08066f20629afc193d2b86044547f4979f1c280c6dbb8f463f81fac1477",
+        "actualPcmSha256": "12dfb08066f20629afc193d2b86044547f4979f1c280c6dbb8f463f81fac1477",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383616,
+          "lastPacketDuration": 384,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 252,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 514048,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 396,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 403200,
+          "expectedTimelineSamplesPerChannel": 403200,
+          "continuous": true,
+          "lastPacketPts": 402816,
+          "lastPacketDuration": 384,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/connection-11-soft-original-proof/result.json",
+        "bytes": 8598,
+        "sha256": "b22f3bca75f54d1592d64dbb45443cb6df1e059b3ef2b1de4ababde82aa33900"
+      },
+      "mediaSha256": "9684ad8c6dfc8128e44fe6e53a2270345a7e05a6cc62704c8d881779b70e6374"
+    },
+    {
+      "label": "connection-01-normal-override",
+      "expectedRejection": false,
+      "status": "passed",
+      "violationCodes": [],
+      "commandFailures": [],
+      "frameCount": 240,
+      "matchedFrames": 240,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 120,
+          "matched": 120
+        },
+        "unchanged-after": {
+          "checked": 120,
+          "matched": 120
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [],
+      "firstMismatch": null,
+      "mismatchedFrameCount": 0,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 384000,
+        "actualSamplesPerChannel": 384000,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 0,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "expectedPcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "actualPcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383168,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383168,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/connection-01-normal-override-proof/result.json",
+        "bytes": 8090,
+        "sha256": "2d4da769c9fbd643dbb3984ab6be7694e44c2a8acdbc701f4cb0c0e545fcf504"
+      },
+      "mediaSha256": "3cb2ff17bfa826194b7ebe0950242a27fe2e713fb362ea85cb2b68d6ec253232"
+    },
+    {
+      "label": "connection-01-soft-reset",
+      "expectedRejection": false,
+      "status": "passed",
+      "violationCodes": [],
+      "commandFailures": [],
+      "frameCount": 252,
+      "matchedFrames": 252,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 114,
+          "matched": 114
+        },
+        "fade-out": {
+          "checked": 6,
+          "matched": 6
+        },
+        "inserted-black": {
+          "checked": 12,
+          "matched": 12
+        },
+        "fade-in": {
+          "checked": 6,
+          "matched": 6
+        },
+        "unchanged-after": {
+          "checked": 114,
+          "matched": 114
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132
+      ],
+      "firstMismatch": null,
+      "mismatchedFrameCount": 0,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 403200,
+        "actualSamplesPerChannel": 403200,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 19200,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "expectedPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "actualPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383168,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 252,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 514048,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 396,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 403200,
+          "expectedTimelineSamplesPerChannel": 403200,
+          "continuous": true,
+          "lastPacketPts": 402368,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/connection-01-soft-reset-proof/result.json",
+        "bytes": 8568,
+        "sha256": "6b419853fe5fd8953cb109e9d70c3310ffd840e1fc219043c8467b9d6d6e343c"
+      },
+      "mediaSha256": "65f062764afc80ade51b170f4a6df5845fa597036e48807eb5823ba2719257d4"
+    },
+    {
+      "label": "connection-01-black-original",
+      "expectedRejection": false,
+      "status": "passed",
+      "violationCodes": [],
+      "commandFailures": [],
+      "frameCount": 252,
+      "matchedFrames": 252,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 120,
+          "matched": 120
+        },
+        "inserted-black": {
+          "checked": 12,
+          "matched": 12
+        },
+        "unchanged-after": {
+          "checked": 120,
+          "matched": 120
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131
+      ],
+      "firstMismatch": null,
+      "mismatchedFrameCount": 0,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 403200,
+        "actualSamplesPerChannel": 403200,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 19200,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "expectedPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "actualPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383168,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 252,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 514048,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 396,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 403200,
+          "expectedTimelineSamplesPerChannel": 403200,
+          "continuous": true,
+          "lastPacketPts": 402368,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/connection-01-black-original-proof/result.json",
+        "bytes": 8404,
+        "sha256": "d57781ee08d572de3231bb26f12c7706b76466558503898198c8ae87d8422343"
+      },
+      "mediaSha256": "d07f881cc8711287c705eddda7ce5c9110f5887d156a8ded960b0c39f3eb2a35"
+    },
+    {
+      "label": "connection-01-black-reset",
+      "expectedRejection": false,
+      "status": "passed",
+      "violationCodes": [],
+      "commandFailures": [],
+      "frameCount": 252,
+      "matchedFrames": 252,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 120,
+          "matched": 120
+        },
+        "inserted-black": {
+          "checked": 12,
+          "matched": 12
+        },
+        "unchanged-after": {
+          "checked": 120,
+          "matched": 120
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131
+      ],
+      "firstMismatch": null,
+      "mismatchedFrameCount": 0,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 403200,
+        "actualSamplesPerChannel": 403200,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 19200,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "expectedPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "actualPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383168,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 252,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 514048,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 396,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 403200,
+          "expectedTimelineSamplesPerChannel": 403200,
+          "continuous": true,
+          "lastPacketPts": 402368,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/connection-01-black-reset-proof/result.json",
+        "bytes": 8389,
+        "sha256": "5fbaf959102375d0126c5aeb1273d289f13a1a4cf9b85177350a20494c4dbdb1"
+      },
+      "mediaSha256": "d07f881cc8711287c705eddda7ce5c9110f5887d156a8ded960b0c39f3eb2a35"
+    },
+    {
+      "label": "fault-window-delayed-one-frame",
+      "expectedRejection": true,
+      "status": "failed",
+      "violationCodes": [
+        "VIDEO_FRAME_BYTES_MISMATCH"
+      ],
+      "commandFailures": [],
+      "frameCount": 252,
+      "matchedFrames": 241,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 114,
+          "matched": 114
+        },
+        "fade-out": {
+          "checked": 6,
+          "matched": 1
+        },
+        "inserted-black": {
+          "checked": 12,
+          "matched": 12
+        },
+        "fade-in": {
+          "checked": 6,
+          "matched": 0
+        },
+        "unchanged-after": {
+          "checked": 114,
+          "matched": 114
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        133
+      ],
+      "firstMismatch": {
+        "displayFrame": 115,
+        "sourceFrame": 115,
+        "phase": "fade-out",
+        "byteOffset": 0,
+        "expected": 136,
+        "actual": 166
+      },
+      "mismatchedFrameCount": 11,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 403200,
+        "actualSamplesPerChannel": 403200,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 19200,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "expectedPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "actualPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383168,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 252,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 514048,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 396,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 403200,
+          "expectedTimelineSamplesPerChannel": 403200,
+          "continuous": true,
+          "lastPacketPts": 402368,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/fault-window-delayed-one-frame-proof/result.json",
+        "bytes": 9147,
+        "sha256": "f45007e4e6c8f7c46dae7f10c98d99b67ce35e28f90138982741a49c0a0f3273"
+      },
+      "mediaSha256": "095671d8d944150d2853cb15d0b7af33a6d4cfb78725f2c76e8727811cc8af9f"
+    },
+    {
+      "label": "fault-no-fade",
+      "expectedRejection": true,
+      "status": "failed",
+      "violationCodes": [
+        "VIDEO_FRAME_BYTES_MISMATCH"
+      ],
+      "commandFailures": [],
+      "frameCount": 252,
+      "matchedFrames": 242,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 114,
+          "matched": 114
+        },
+        "fade-out": {
+          "checked": 6,
+          "matched": 1
+        },
+        "inserted-black": {
+          "checked": 12,
+          "matched": 12
+        },
+        "fade-in": {
+          "checked": 6,
+          "matched": 1
+        },
+        "unchanged-after": {
+          "checked": 114,
+          "matched": 114
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131
+      ],
+      "firstMismatch": {
+        "displayFrame": 115,
+        "sourceFrame": 115,
+        "phase": "fade-out",
+        "byteOffset": 0,
+        "expected": 136,
+        "actual": 166
+      },
+      "mismatchedFrameCount": 10,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 403200,
+        "actualSamplesPerChannel": 403200,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 19200,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "expectedPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "actualPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383168,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 252,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 514048,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 396,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 403200,
+          "expectedTimelineSamplesPerChannel": 403200,
+          "continuous": true,
+          "lastPacketPts": 402368,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/fault-no-fade-proof/result.json",
+        "bytes": 9081,
+        "sha256": "a9f264bee3018ec370c38a9fd1fe6a4f4652027f916184cc7af29ee1201b1633"
+      },
+      "mediaSha256": "d07f881cc8711287c705eddda7ce5c9110f5887d156a8ded960b0c39f3eb2a35"
+    },
+    {
+      "label": "fault-no-return",
+      "expectedRejection": true,
+      "status": "failed",
+      "violationCodes": [
+        "VIDEO_FRAME_BYTES_MISMATCH"
+      ],
+      "commandFailures": [],
+      "frameCount": 252,
+      "matchedFrames": 137,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 114,
+          "matched": 114
+        },
+        "fade-out": {
+          "checked": 6,
+          "matched": 6
+        },
+        "inserted-black": {
+          "checked": 12,
+          "matched": 12
+        },
+        "fade-in": {
+          "checked": 6,
+          "matched": 5
+        },
+        "unchanged-after": {
+          "checked": 114,
+          "matched": 0
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132
+      ],
+      "firstMismatch": {
+        "displayFrame": 137,
+        "sourceFrame": 125,
+        "phase": "fade-in",
+        "byteOffset": 0,
+        "expected": 131,
+        "actual": 108
+      },
+      "mismatchedFrameCount": 115,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 403200,
+        "actualSamplesPerChannel": 403200,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 19200,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "expectedPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "actualPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383168,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 252,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 514048,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 396,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 403200,
+          "expectedTimelineSamplesPerChannel": 403200,
+          "continuous": true,
+          "lastPacketPts": 402368,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/fault-no-return-proof/result.json",
+        "bytes": 10451,
+        "sha256": "5704b32bfc8f6989d5acd92c7bca292c6a653a950a8fd71d59c17519a5dcfe3f"
+      },
+      "mediaSha256": "39b8d7f40242ed5cb2d36aa1db99683b859b5663a67d5956390654be12f1e902"
+    },
+    {
+      "label": "fault-outside-window",
+      "expectedRejection": true,
+      "status": "failed",
+      "violationCodes": [
+        "VIDEO_FRAME_BYTES_MISMATCH"
+      ],
+      "commandFailures": [],
+      "frameCount": 252,
+      "matchedFrames": 251,
+      "phaseCounts": {
+        "unchanged-before": {
+          "checked": 114,
+          "matched": 113
+        },
+        "fade-out": {
+          "checked": 6,
+          "matched": 6
+        },
+        "inserted-black": {
+          "checked": 12,
+          "matched": 12
+        },
+        "fade-in": {
+          "checked": 6,
+          "matched": 6
+        },
+        "unchanged-after": {
+          "checked": 114,
+          "matched": 114
+        }
+      },
+      "actualCompletelyBlackDisplayFrames": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132
+      ],
+      "firstMismatch": {
+        "displayFrame": 20,
+        "sourceFrame": 20,
+        "phase": "unchanged-before",
+        "byteOffset": 0,
+        "expected": 165,
+        "actual": 166
+      },
+      "mismatchedFrameCount": 1,
+      "audio": {
+        "status": "passed",
+        "sourceSamplesPerChannel": 384000,
+        "expectedSamplesPerChannel": 403200,
+        "actualSamplesPerChannel": 403200,
+        "insertAtSamplePerChannel": 192000,
+        "insertedZeroSamplesPerChannel": 19200,
+        "allRetainedPcmBytesAndChannelOrderIdentical": true,
+        "sourcePcmSha256": "f4f893e49fa434f692f17824752c6c6e3b1b9259ceadf3fdcc4a3dd5970b616c",
+        "expectedPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "actualPcmSha256": "0c7813c21e6ef65e011398898bbcb9a05818630124e431c4e210c6afa8a8a486",
+        "firstMismatch": null
+      },
+      "inputClock": {
+        "video": {
+          "frameCount": 240,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 489472,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 376,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 384000,
+          "expectedTimelineSamplesPerChannel": 384000,
+          "continuous": true,
+          "lastPacketPts": 383168,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "outputClock": {
+        "video": {
+          "frameCount": 252,
+          "timeBase": "1/61440",
+          "firstPts": 0,
+          "lastPts": 514048,
+          "continuous": true,
+          "checkedBeforeTimestampRescaling": true
+        },
+        "audio": {
+          "packetCount": 396,
+          "timeBase": "1/48000",
+          "firstPacketSample": 0,
+          "firstSkipSamples": 0,
+          "presentedStartSample": 0,
+          "packetEndSampleExclusive": 403200,
+          "expectedTimelineSamplesPerChannel": 403200,
+          "continuous": true,
+          "lastPacketPts": 402368,
+          "lastPacketDuration": 832,
+          "sideData": []
+        },
+        "width": 1920,
+        "height": 1080,
+        "videoColorRange": null
+      },
+      "rawProof": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/fault-outside-window-proof/result.json",
+        "bytes": 9009,
+        "sha256": "214053d4ca0c8ab1aeda2d77cc6ec6c70812ae80ae8f50636c510af01ab8913f"
+      },
+      "mediaSha256": "cb03036e15a17be1a6700314aedadf0fc93937837c47e19655fd849d7dfcd04e"
+    }
+  ],
+  "savedResetRenders": [
+    {
+      "original": "connection-01-soft-original",
+      "reset": "connection-01-soft-reset",
+      "allFrameCount": 252,
+      "allFloatPcmBytes": 3225600,
+      "allFramesAndPcmEqual": true
+    },
+    {
+      "original": "connection-01-black-original",
+      "reset": "connection-01-black-reset",
+      "allFrameCount": 252,
+      "allFloatPcmBytes": 3225600,
+      "allFramesAndPcmEqual": true
+    }
+  ],
+  "candidate": {
+    "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/connection-expression-stage2-candidate-v001.mp4",
+    "bytes": 9765910,
+    "sha256": "38fe5cb7e5a4bd546a667926f71d98815af1dc848242d947d620f205ceb3d662",
+    "frameCount": 756,
+    "durationSeconds": 25.2,
+    "independentArithmeticOracleBeforeEncode": true,
+    "repeatEncodeFullDecodedVideoAndAudioEqual": true,
+    "repeatEncodeProves": "transport only; not the sole evidence of fade correctness",
+    "humanQuality": "not assessed",
+    "browserPlayback": "not verified; existing UI restriction not bypassed"
+  },
+  "bundleAllSourceFramesAndFloatPcmEqual": true,
+  "bundleFrames": 756,
+  "bundleLogicalSamplesPerChannel": 1209600,
+  "examples": [
+    {
+      "connectionId": "connection-01",
+      "candidateFrameRange": [
+        0,
+        252
+      ],
+      "candidateSecondsRange": [
+        0.0,
+        8.4
+      ],
+      "fadeOutFrames": [
+        114,
+        120
+      ],
+      "insertedBlackFrames": [
+        120,
+        132
+      ],
+      "fadeInFrames": [
+        132,
+        138
+      ],
+      "canonicalBoundaryFrame": 1789
+    },
+    {
+      "connectionId": "connection-02",
+      "candidateFrameRange": [
+        252,
+        504
+      ],
+      "candidateSecondsRange": [
+        8.4,
+        16.8
+      ],
+      "fadeOutFrames": [
+        366,
+        372
+      ],
+      "insertedBlackFrames": [
+        372,
+        384
+      ],
+      "fadeInFrames": [
+        384,
+        390
+      ],
+      "canonicalBoundaryFrame": 6121
+    },
+    {
+      "connectionId": "connection-11",
+      "candidateFrameRange": [
+        504,
+        756
+      ],
+      "candidateSecondsRange": [
+        16.8,
+        25.2
+      ],
+      "fadeOutFrames": [
+        618,
+        624
+      ],
+      "insertedBlackFrames": [
+        624,
+        636
+      ],
+      "fadeInFrames": [
+        636,
+        642
+      ],
+      "canonicalBoundaryFrame": 26222
+    }
+  ],
+  "packageJoinFrames": [
+    252,
+    504
+  ],
+  "packageJoinsAreActualDigestConnections": false,
+  "finalMediaStreams": [
+    {
+      "codec_type": "video",
+      "codec_name": "h264",
+      "width": 1920,
+      "height": 1080,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1",
+      "color_range": null,
+      "color_space": null,
+      "color_transfer": null,
+      "color_primaries": null,
+      "time_base": "1/15360",
+      "duration": "25.200000",
+      "duration_ts": 387072,
+      "sample_rate": null,
+      "channels": null,
+      "nb_frames": "756"
+    },
+    {
+      "codec_type": "audio",
+      "codec_name": "aac",
+      "width": null,
+      "height": null,
+      "pix_fmt": null,
+      "r_frame_rate": "0/0",
+      "color_range": null,
+      "color_space": null,
+      "color_transfer": null,
+      "color_primaries": null,
+      "time_base": "1/48000",
+      "duration": "25.200000",
+      "duration_ts": 1209600,
+      "sample_rate": "48000",
+      "channels": 2,
+      "nb_frames": "1183"
+    }
+  ],
+  "finalMediaObservation": {
+    "schemaVersion": "connection-expression-media-check-v001-review",
+    "status": "passed",
+    "inputBindings": [
+      {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/connection-expression-stage2-candidate-v001.mp4",
+        "realPath": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/connection-expression-stage2-candidate-v001.mp4",
+        "bytes": 9765910,
+        "fileSha256": "38fe5cb7e5a4bd546a667926f71d98815af1dc848242d947d620f205ceb3d662"
+      },
+      {
+        "path": "/opt/homebrew/bin/ffmpeg",
+        "realPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "bytes": 442864,
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      {
+        "path": "/opt/homebrew/bin/ffprobe",
+        "realPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+        "bytes": 238096,
+        "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+      },
+      {
+        "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/worktree/evals/clip_composition/connection_expression_media_check_v001.py",
+        "realPath": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/worktree/evals/clip_composition/connection_expression_media_check_v001.py",
+        "bytes": 34121,
+        "fileSha256": "1f0e21848af633b675b418b2979992c4e7141bca3dca1f7e17ea6bdb2136f21f"
+      },
+      {
+        "path": "/Users/kawafmm/miniforge3/bin/python3",
+        "realPath": "/Users/kawafmm/miniforge3/bin/python3.12",
+        "bytes": 7013192,
+        "fileSha256": "3a4ff356cb4238397d41e9506679bd729e27148f451b3c19ed47dc24a274d4a9"
+      }
+    ],
+    "scope": "Media clocks and decoded AAC observations; compressed pixel/fade equivalence needs the separate verified-intermediate encoding comparison.",
+    "expectedFrameCount": 756,
+    "insertedRanges": [
+      {
+        "startFrame": 120,
+        "endFrameExclusive": 132
+      },
+      {
+        "startFrame": 372,
+        "endFrameExclusive": 384
+      },
+      {
+        "startFrame": 624,
+        "endFrameExclusive": 636
+      }
+    ],
+    "videoClock": {
+      "frameCount": 756,
+      "timeBase": "1/15360",
+      "firstPts": 0,
+      "lastPts": 386560,
+      "continuous": true,
+      "checkedBeforeTimestampRescaling": true
+    },
+    "audioPacketClock": {
+      "packetCount": 1183,
+      "timeBase": "1/48000",
+      "firstPacketSample": -1024,
+      "firstSkipSamples": 1024,
+      "presentedStartSample": 0,
+      "packetEndSampleExclusive": 1209600,
+      "expectedTimelineSamplesPerChannel": 1209600,
+      "continuous": true,
+      "lastPacketPts": 1209344,
+      "lastPacketDuration": 256,
+      "sideData": [
+        {
+          "packetIndex": 0,
+          "data": {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        }
+      ]
+    },
+    "expectedTimelineSamplesPerChannel": 1209600,
+    "decodedSamplesPerChannel": 1210368,
+    "decodedTailDifferenceSamplesPerChannel": 768,
+    "decodedPcmSha256": "eeaf48127477cba523363861c17261c6d6f7f619993f8308394c488414ff3e6c",
+    "sampleIdentityClaim": false,
+    "decodedTail": {
+      "startSamplePerChannel": 1209600,
+      "endSamplePerChannelExclusive": 1210368,
+      "channels": [
+        {
+          "channel": 0,
+          "zeroSamples": 576,
+          "nonzeroSamples": 192,
+          "maximumAbsoluteSample": 0.004050149116665125,
+          "exactZeroRuns": [
+            [
+              1209792,
+              1210368
+            ]
+          ]
+        },
+        {
+          "channel": 1,
+          "zeroSamples": 576,
+          "nonzeroSamples": 192,
+          "maximumAbsoluteSample": 0.0055426801554858685,
+          "exactZeroRuns": [
+            [
+              1209792,
+              1210368
+            ]
+          ]
+        }
+      ]
+    },
+    "insertedIntervals": [
+      {
+        "startSamplePerChannel": 192000,
+        "endSamplePerChannelExclusive": 211200,
+        "channels": [
+          {
+            "channel": 0,
+            "zeroSamples": 18816,
+            "nonzeroSamples": 384,
+            "maximumAbsoluteSample": 0.018724560737609863,
+            "exactZeroRuns": [
+              [
+                192192,
+                211008
+              ]
+            ]
+          },
+          {
+            "channel": 1,
+            "zeroSamples": 18816,
+            "nonzeroSamples": 384,
+            "maximumAbsoluteSample": 0.013134146109223366,
+            "exactZeroRuns": [
+              [
+                192192,
+                211008
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "startSamplePerChannel": 595200,
+        "endSamplePerChannelExclusive": 614400,
+        "channels": [
+          {
+            "channel": 0,
+            "zeroSamples": 18816,
+            "nonzeroSamples": 384,
+            "maximumAbsoluteSample": 0.002007528906688094,
+            "exactZeroRuns": [
+              [
+                595392,
+                614208
+              ]
+            ]
+          },
+          {
+            "channel": 1,
+            "zeroSamples": 18816,
+            "nonzeroSamples": 384,
+            "maximumAbsoluteSample": 0.0035350844264030457,
+            "exactZeroRuns": [
+              [
+                595392,
+                614208
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "startSamplePerChannel": 998400,
+        "endSamplePerChannelExclusive": 1017600,
+        "channels": [
+          {
+            "channel": 0,
+            "zeroSamples": 18816,
+            "nonzeroSamples": 384,
+            "maximumAbsoluteSample": 0.004580433946102858,
+            "exactZeroRuns": [
+              [
+                998592,
+                1017408
+              ]
+            ]
+          },
+          {
+            "channel": 1,
+            "zeroSamples": 18816,
+            "nonzeroSamples": 384,
+            "maximumAbsoluteSample": 0.0006130273686721921,
+            "exactZeroRuns": [
+              [
+                998592,
+                1017408
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "insertionBoundaryObservations": [
+      {
+        "seamSamplePerChannel": 192000,
+        "before": {
+          "startSamplePerChannel": 190400,
+          "endSamplePerChannelExclusive": 192000,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.3078271746635437,
+              "exactZeroRuns": []
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.3019424080848694,
+              "exactZeroRuns": []
+            }
+          ]
+        },
+        "after": {
+          "startSamplePerChannel": 192000,
+          "endSamplePerChannelExclusive": 193600,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.018724560737609863,
+              "exactZeroRuns": [
+                [
+                  192192,
+                  193600
+                ]
+              ]
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.013134146109223366,
+              "exactZeroRuns": [
+                [
+                  192192,
+                  193600
+                ]
+              ]
+            }
+          ]
+        },
+        "endpoints": [
+          {
+            "channel": 0,
+            "left": 0.10146646201610565,
+            "right": 0.018724560737609863
+          },
+          {
+            "channel": 1,
+            "left": 0.09600511193275452,
+            "right": 0.013134146109223366
+          }
+        ]
+      },
+      {
+        "seamSamplePerChannel": 211200,
+        "before": {
+          "startSamplePerChannel": 209600,
+          "endSamplePerChannelExclusive": 211200,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.005356909241527319,
+              "exactZeroRuns": [
+                [
+                  209600,
+                  211008
+                ]
+              ]
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.0052957613952457905,
+              "exactZeroRuns": [
+                [
+                  209600,
+                  211008
+                ]
+              ]
+            }
+          ]
+        },
+        "after": {
+          "startSamplePerChannel": 211200,
+          "endSamplePerChannelExclusive": 212800,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.37642672657966614,
+              "exactZeroRuns": []
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.37864649295806885,
+              "exactZeroRuns": []
+            }
+          ]
+        },
+        "endpoints": [
+          {
+            "channel": 0,
+            "left": 0.005356909241527319,
+            "right": 0.015511727891862392
+          },
+          {
+            "channel": 1,
+            "left": 0.0052957613952457905,
+            "right": 0.0155976926907897
+          }
+        ]
+      },
+      {
+        "seamSamplePerChannel": 595200,
+        "before": {
+          "startSamplePerChannel": 593600,
+          "endSamplePerChannelExclusive": 595200,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.05172797664999962,
+              "exactZeroRuns": []
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.04834333434700966,
+              "exactZeroRuns": []
+            }
+          ]
+        },
+        "after": {
+          "startSamplePerChannel": 595200,
+          "endSamplePerChannelExclusive": 596800,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.0010775167029350996,
+              "exactZeroRuns": [
+                [
+                  595392,
+                  596800
+                ]
+              ]
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.0035350844264030457,
+              "exactZeroRuns": [
+                [
+                  595392,
+                  596800
+                ]
+              ]
+            }
+          ]
+        },
+        "endpoints": [
+          {
+            "channel": 0,
+            "left": 0.007232039235532284,
+            "right": 0.00010320923320250586
+          },
+          {
+            "channel": 1,
+            "left": 0.007249041926115751,
+            "right": 0.0035350844264030457
+          }
+        ]
+      },
+      {
+        "seamSamplePerChannel": 614400,
+        "before": {
+          "startSamplePerChannel": 612800,
+          "endSamplePerChannelExclusive": 614400,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.002007528906688094,
+              "exactZeroRuns": [
+                [
+                  612800,
+                  614208
+                ]
+              ]
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.0008995941025204957,
+              "exactZeroRuns": [
+                [
+                  612800,
+                  614208
+                ]
+              ]
+            }
+          ]
+        },
+        "after": {
+          "startSamplePerChannel": 614400,
+          "endSamplePerChannelExclusive": 616000,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.05694860592484474,
+              "exactZeroRuns": []
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.053121794015169144,
+              "exactZeroRuns": []
+            }
+          ]
+        },
+        "endpoints": [
+          {
+            "channel": 0,
+            "left": -0.002007528906688094,
+            "right": -0.011684312485158443
+          },
+          {
+            "channel": 1,
+            "left": -0.0006534371059387922,
+            "right": -0.0067672645673155785
+          }
+        ]
+      },
+      {
+        "seamSamplePerChannel": 998400,
+        "before": {
+          "startSamplePerChannel": 996800,
+          "endSamplePerChannelExclusive": 998400,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.09649866819381714,
+              "exactZeroRuns": []
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.11294173449277878,
+              "exactZeroRuns": []
+            }
+          ]
+        },
+        "after": {
+          "startSamplePerChannel": 998400,
+          "endSamplePerChannelExclusive": 1000000,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.004580433946102858,
+              "exactZeroRuns": [
+                [
+                  998592,
+                  1000000
+                ]
+              ]
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.0006130273686721921,
+              "exactZeroRuns": [
+                [
+                  998592,
+                  1000000
+                ]
+              ]
+            }
+          ]
+        },
+        "endpoints": [
+          {
+            "channel": 0,
+            "left": -0.03992633894085884,
+            "right": -0.004580433946102858
+          },
+          {
+            "channel": 1,
+            "left": 0.00015267905837390572,
+            "right": 0.00016199123638216406
+          }
+        ]
+      },
+      {
+        "seamSamplePerChannel": 1017600,
+        "before": {
+          "startSamplePerChannel": 1016000,
+          "endSamplePerChannelExclusive": 1017600,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.0010551278246566653,
+              "exactZeroRuns": [
+                [
+                  1016000,
+                  1017408
+                ]
+              ]
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 1408,
+              "nonzeroSamples": 192,
+              "maximumAbsoluteSample": 0.0004017740429844707,
+              "exactZeroRuns": [
+                [
+                  1016000,
+                  1017408
+                ]
+              ]
+            }
+          ]
+        },
+        "after": {
+          "startSamplePerChannel": 1017600,
+          "endSamplePerChannelExclusive": 1019200,
+          "channels": [
+            {
+              "channel": 0,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.019406359642744064,
+              "exactZeroRuns": []
+            },
+            {
+              "channel": 1,
+              "zeroSamples": 0,
+              "nonzeroSamples": 1600,
+              "maximumAbsoluteSample": 0.029723478481173515,
+              "exactZeroRuns": []
+            }
+          ]
+        },
+        "endpoints": [
+          {
+            "channel": 0,
+            "left": -0.0010551278246566653,
+            "right": 0.0037533233407884836
+          },
+          {
+            "channel": 1,
+            "left": -0.0001533597387606278,
+            "right": -0.00154928769916296
+          }
+        ]
+      }
+    ],
+    "audibility": "not-evaluated",
+    "compressedPixelIdentityClaim": false,
+    "fadeAppearanceVerification": "not-performed-by-media-observation-only",
+    "inputBindingsUnchanged": true,
+    "exitCode": 0
+  },
+  "preservationBefore": {
+    "original": {
+      "status": {
+        "bytes": 10693537,
+        "sha256": "3d2edf1b0683e8c76d59baf100b59fcf6658e2d3d799a0b3ceebc1dfa3441b3b"
+      },
+      "diff": {
+        "bytes": 2604,
+        "sha256": "3e7877a0bee01a6796a7444aa3570fb6d1d3b390b902c3a3112084f92ee2c2bb"
+      },
+      "staged": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "head": "43380006bc4f8e1c902c067dcb53669790b6ce2c",
+      "branch": "codex/digest-effects-step2"
+    },
+    "stage1": {
+      "status": {
+        "bytes": 1504758,
+        "sha256": "14dd986f1d3556b75d0abfef048f4794b4faf7c175cdb77baa786cdf82e014c5"
+      },
+      "diff": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "staged": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "head": "29d7863b2e5f6aebc71b20310c50e742ae136e9e",
+      "branch": "codex/digest-caption-expression-stage1"
+    },
+    "base": "29d7863b2e5f6aebc71b20310c50e742ae136e9e",
+    "stage1Candidate": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/render-v002/presentation-rendered-v002.mp4",
+      "bytes": 75378768,
+      "sha256": "36f3863fdd3c3c601459d5b5547e1a7c3df014dd8b026c3570c31d176a3e405b"
+    }
+  },
+  "preservationAfterTechnical": {
+    "original": {
+      "status": {
+        "bytes": 10693537,
+        "sha256": "3d2edf1b0683e8c76d59baf100b59fcf6658e2d3d799a0b3ceebc1dfa3441b3b"
+      },
+      "diff": {
+        "bytes": 2604,
+        "sha256": "3e7877a0bee01a6796a7444aa3570fb6d1d3b390b902c3a3112084f92ee2c2bb"
+      },
+      "staged": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "head": "43380006bc4f8e1c902c067dcb53669790b6ce2c",
+      "branch": "codex/digest-effects-step2"
+    },
+    "stage1": {
+      "status": {
+        "bytes": 1504758,
+        "sha256": "14dd986f1d3556b75d0abfef048f4794b4faf7c175cdb77baa786cdf82e014c5"
+      },
+      "diff": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "staged": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "head": "29d7863b2e5f6aebc71b20310c50e742ae136e9e",
+      "branch": "codex/digest-caption-expression-stage1"
+    },
+    "stage1Candidate": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/render-v002/presentation-rendered-v002.mp4",
+      "bytes": 75378768,
+      "sha256": "36f3863fdd3c3c601459d5b5547e1a7c3df014dd8b026c3570c31d176a3e405b"
+    },
+    "matchesBefore": true
+  },
+  "rawEvidenceBindings": [
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/fixture-result.json",
+      "bytes": 7630,
+      "sha256": "b8aa8b9c7e20611ba1c497b31ca4e3c1f3eff10ffa7f52a73f3933ff5b5f0af2"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/clock-original.json",
+      "bytes": 67843,
+      "sha256": "440db6f4f12a0eda578cd57ec089c49194131dd0ed1f7388ffda411b406aa6d5"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/clock-two-overrides.json",
+      "bytes": 67807,
+      "sha256": "3c5e63cdeffc44c6f44f8868198f06d74a6d9536d613ae6e11ca3d74c24ebbe1"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/completion.json",
+      "bytes": 140969,
+      "sha256": "ac7e1b52137cead90f8d709e63d3e588db1d9c2b7da0f2791337b763114311d1"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/candidate-review-proof/result.json",
+      "bytes": 16080,
+      "sha256": "ea195dbcbec135cb62b4526c28cb751cf6f0bd746265ec8e6e327ea3627cfa6c"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001/candidate-review-proof/review-metadata.json",
+      "bytes": 4492,
+      "sha256": "c7a00f39d8d9c1570a1e98514236e33987c57c220d923082de1415a701f748bf"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/preservation-before.json",
+      "bytes": 1423,
+      "sha256": "e46c90240c77a931edb94a48233d11ab70c7e575d60ca4a869bfbce17eae0ef1"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/preservation-after-technical.json",
+      "bytes": 1394,
+      "sha256": "96c49da8ce617ca5791f5a1196fded1f2467aa6da3a592d68cdd32d8d7a42ce3"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/saved-black-normal-override.json",
+      "bytes": 953,
+      "sha256": "cb1cd256e770597bc3de4aa98a4bb9d5321b35d145861298b5fe46bdb0d6d3f0"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/saved-black-original.json",
+      "bytes": 3401,
+      "sha256": "bcfb0c78571346ad63f2fe6083345c8808055a29a4af2a9df7ee5fa820386900"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/saved-black-reset.json",
+      "bytes": 811,
+      "sha256": "a02b938938af94792c77879a52b50701081a67cd25ab79a0d926d433717beffb"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/saved-original.json",
+      "bytes": 3400,
+      "sha256": "837152060329bb5b17cd4f64ae4d95462137784553a4ddc9fa54019d00af3f9d"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/saved-overrides-empty.json",
+      "bytes": 811,
+      "sha256": "bab357d5502057d16a12bd9b9d5155df506d8372e60a12dd95c6cd2e900b8193"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/saved-overrides-two.json",
+      "bytes": 1097,
+      "sha256": "c40414c65612e7eea2cbe6cfba5ec40c640ee5bef94f1dd084a953f4b8d9cec3"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/saved-reset-all.json",
+      "bytes": 811,
+      "sha256": "bab357d5502057d16a12bd9b9d5155df506d8372e60a12dd95c6cd2e900b8193"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/saved-reset-first-only.json",
+      "bytes": 957,
+      "sha256": "d0b4cdc69b792432775c8db03d5081001929887ad1f22a1ef789b9ffec197630"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/connection-01-black-original-source-clock.json",
+      "bytes": 37393,
+      "sha256": "313730a4265187f18baee4787338bc480608f4f5cbb218d7cd72cd03c021a88d"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/connection-01-black-reset-source-clock.json",
+      "bytes": 37393,
+      "sha256": "313730a4265187f18baee4787338bc480608f4f5cbb218d7cd72cd03c021a88d"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/connection-01-normal-override-source-clock.json",
+      "bytes": 36013,
+      "sha256": "7f2265a3c3bced33cbaaced68a9a96d3a24c98fc48ea71592ae04e23c8f7781b"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/connection-01-soft-original-source-clock.json",
+      "bytes": 37393,
+      "sha256": "313730a4265187f18baee4787338bc480608f4f5cbb218d7cd72cd03c021a88d"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/connection-01-soft-reset-source-clock.json",
+      "bytes": 37393,
+      "sha256": "313730a4265187f18baee4787338bc480608f4f5cbb218d7cd72cd03c021a88d"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/connection-02-soft-original-source-clock.json",
+      "bytes": 37513,
+      "sha256": "dd9caa7b8fccb9cced016c92625d069f271a8c0b5a07f201526f7701b494136f"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/connection-11-soft-original-source-clock.json",
+      "bytes": 37993,
+      "sha256": "dc4098c9221a7ee1b93322e85121e9eb3a0782ac5b666761cf44e652cec3f676"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001/fault-window-delayed-one-frame-source-clock.json",
+      "bytes": 37393,
+      "sha256": "313730a4265187f18baee4787338bc480608f4f5cbb218d7cd72cd03c021a88d"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/preflight-inputs-v001.json",
+      "bytes": 2522,
+      "sha256": "b611873cfbe0b45a6e4e5d53cce62aa6e622a9e2a430d80f21227ff6f0bd478c"
+    }
+  ],
+  "executionHistory": {
+    "realRenderRuns": 1,
+    "correctIntermediates": 7,
+    "intentionalDelayedWindowFaultDuringRender": 1,
+    "finishRuns": 1,
+    "expectedPixelFaultRejections": 4,
+    "unexpectedMediaOrImplementationFailures": 0,
+    "technicalSetupChangesBeforeFirstRealRun": [
+      "Preserve existing canonical safeArea while passing finite render dimensions",
+      "Bind full excerpt metadata to the old verified record",
+      "Check every global black span against original adjacency and boundary",
+      "Check decoder status before classifying truncated input",
+      "Record technical fixture author in both saved layers"
+    ],
+    "newDependencies": 0,
+    "newMaterials": 0,
+    "mediaUploads": 0,
+    "paidApiCalls": 0,
+    "apiCostUsd": 0
+  },
+  "formalIntegrationAndHumanQuality": "not established",
+  "auditCheckpointAndRemote": "Recorded in the checkpoint receipt after commit/push; not inferred from local validation",
+  "nodeRuntime": {
+    "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "version": "20.19.6",
+    "sha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+  },
+  "executionCommands": {
+    "cwd": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/worktree",
+    "unitTest": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "--test",
+      "evals/clip_composition/connection_expression_v001.test.mjs"
+    ],
+    "render": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "evals/clip_composition/connection_expression_fixture_v001.mjs",
+      "--manifest",
+      "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/worktree/evals/clip_composition/connection_expression_fixture_inputs_20260918.json",
+      "--output",
+      "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001"
+    ],
+    "finish": [
+      "/Users/kawafmm/miniforge3/bin/python3",
+      "evals/clip_composition/connection_expression_finish_v001.py",
+      "--fixture-directory",
+      "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/render-v001",
+      "--output",
+      "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/verification-v001"
+    ]
+  }
+}
