@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "digest-connection-hypothesis-package-evidence-v001",
+  "scope": "未検証の仮説と研究候補。人間評価・正式採用・本番統合なし。",
+  "technicalBaseline": "543ec3356f5bf976a5378317c09249aac61bea0d",
+  "consultation": {
+    "target": "ZEV相談役 - ZEV Build Loop",
+    "question": "GPT_DECISION：11接続の人間観測は今この時点で必須か",
+    "responseConfirmed": true,
+    "sentCount": 1,
+    "resendCount": 0,
+    "modelDisplay": "極高",
+    "summary": "停止撤回。人間観測を延期し事実profile・2仮説候補・3〜4技術代表・production設計まで続行。Geminiは使わない。完了時AUDIT_ONLY。",
+    "record": {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/consultant-human-timing-reconsideration-v001.md",
+      "bytes": 7382,
+      "sha256": "33e93614d2f5e02d400695dc7fa02cd19535708782f630eb4e9a66192e176332"
+    }
+  },
+  "objectiveProfileValidation": {
+    "profileCount": 11,
+    "physicalSummariesExactlyEqualPinnedInput": 11,
+    "structureFilesMatchedPinnedIndex": 11,
+    "allIndexedEvidenceFilesMatched": 139,
+    "nearestCaptionsAndBoundaryMappingsEqualOriginalRecords": 11,
+    "baselineReportFilesByteEqualCheckpoint": 2,
+    "readInputFilesUnchanged": 142
+  },
+  "candidatePackage": {
+    "package": {
+      "packageId": "digest-connection-candidates-20260917-v002",
+      "technicalBaseline": "543ec3356f5bf976a5378317c09249aac61bea0d",
+      "canonicalSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+      "scope": "未検証の2候補。人間の知覚・採用は未判定。既存媒体のみ再利用。",
+      "fixtureEvidence": {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/physical-fixture-result.json",
+        "sha256": "93e2509ee84c474fc3f3c4069fd13dfc8a0f835d057e83b52d8fb895d714d1c4"
+      },
+      "cases": [
+        {
+          "id": "connection-01",
+          "ordinal": 1,
+          "canonicalBoundaryFrame": 1789,
+          "beforeSegmentId": "segment-0001",
+          "afterSegmentId": "segment-0002",
+          "normal": {
+            "file": "connection-01-normal.mp4",
+            "sha256": "011d46285d6cb7c80b9a999b1574abafac464b911fda379c656c0a4a2cb229d5",
+            "sourcePath": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-01/baseline.mp4",
+            "frames": 240,
+            "logicalSamplesPerChannel": 384000,
+            "decodedSamplesPerChannel": 384000,
+            "decodedTailSamplesPerChannel": 0,
+            "identityScope": "可逆fixtureで全保持画素・floatPCM照合済み。AAC再圧縮は同一性を主張しない。"
+          },
+          "separator": {
+            "file": "connection-01-separator.mp4",
+            "sha256": "aa19d8db34b237a7211933a3f91f9a1e281150c989ec795855e38ddf13ee5975",
+            "sourcePath": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-01/black.mp4",
+            "frames": 252,
+            "logicalSamplesPerChannel": 403200,
+            "decodedSamplesPerChannel": 403456,
+            "decodedTailSamplesPerChannel": 256,
+            "identityScope": "可逆fixtureで全保持画素・floatPCM照合済み。AAC再圧縮は同一性を主張しない。"
+          },
+          "resetEvidence": {
+            "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-01/reset.nut",
+            "sha256": "3cb2ff17bfa826194b7ebe0950242a27fe2e713fb362ea85cb2b68d6ec253232"
+          }
+        },
+        {
+          "id": "connection-02",
+          "ordinal": 2,
+          "canonicalBoundaryFrame": 6121,
+          "beforeSegmentId": "segment-0002",
+          "afterSegmentId": "segment-0003",
+          "normal": {
+            "file": "connection-02-normal.mp4",
+            "sha256": "097398be0c0ef6b9dde464f53480483320dd85a309ca2ef69488ea35bfb2215e",
+            "sourcePath": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-02/baseline.mp4",
+            "frames": 240,
+            "logicalSamplesPerChannel": 384000,
+            "decodedSamplesPerChannel": 384000,
+            "decodedTailSamplesPerChannel": 0,
+            "identityScope": "可逆fixtureで全保持画素・floatPCM照合済み。AAC再圧縮は同一性を主張しない。"
+          },
+          "separator": {
+            "file": "connection-02-separator.mp4",
+            "sha256": "9cb0978f47a6b271848072bfb717d9721e746da0cb5e45a5fc56547d5d23cab0",
+            "sourcePath": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-02/black.mp4",
+            "frames": 252,
+            "logicalSamplesPerChannel": 403200,
+            "decodedSamplesPerChannel": 403456,
+            "decodedTailSamplesPerChannel": 256,
+            "identityScope": "可逆fixtureで全保持画素・floatPCM照合済み。AAC再圧縮は同一性を主張しない。"
+          },
+          "resetEvidence": {
+            "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-02/reset.nut",
+            "sha256": "36b66e025b3c34a553dfde96ebdfd8636fdb14ed9a10a3dc411cd0fe463a7173"
+          }
+        },
+        {
+          "id": "connection-11",
+          "ordinal": 11,
+          "canonicalBoundaryFrame": 26222,
+          "beforeSegmentId": "segment-0011",
+          "afterSegmentId": "segment-0012",
+          "normal": {
+            "file": "connection-11-normal.mp4",
+            "sha256": "acfd1c7dd353271bbe3b2f42ae99a1b3c6821e88beba19faf59c7b0ba41140ad",
+            "sourcePath": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-11/baseline.mp4",
+            "frames": 240,
+            "logicalSamplesPerChannel": 384000,
+            "decodedSamplesPerChannel": 384000,
+            "decodedTailSamplesPerChannel": 0,
+            "identityScope": "可逆fixtureで全保持画素・floatPCM照合済み。AAC再圧縮は同一性を主張しない。"
+          },
+          "separator": {
+            "file": "connection-11-separator.mp4",
+            "sha256": "56e5f4f9aa4dc5448aefcc961c23660442af32176d4584bca321064ed4ee6569",
+            "sourcePath": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-11/black.mp4",
+            "frames": 252,
+            "logicalSamplesPerChannel": 403200,
+            "decodedSamplesPerChannel": 403456,
+            "decodedTailSamplesPerChannel": 256,
+            "identityScope": "可逆fixtureで全保持画素・floatPCM照合済み。AAC再圧縮は同一性を主張しない。"
+          },
+          "resetEvidence": {
+            "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-11/reset.nut",
+            "sha256": "7800f1fbe0d901117e7d4676cc2fd342f641622fcfe1799dccffe7e3fbacd8dc"
+          }
+        }
+      ]
+    },
+    "page": {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/candidate-review-v002/review.html",
+      "sha256": "c94ecb9a16814c96b3532fe221029aab31741c9125b1111423701e8a8a7b4110"
+    },
+    "baselineEvidenceSha256": "5af4f139e8cef99819f6186379b39bbeae08e0dd9571cf7ac5333d9ed2bb74c5",
+    "mediaRendered": 0,
+    "mediaHardlinks": 6,
+    "preservedInputBindings": [
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-01/baseline.nut",
+        "sha256": "3cb2ff17bfa826194b7ebe0950242a27fe2e713fb362ea85cb2b68d6ec253232"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-01/baseline.mp4",
+        "sha256": "011d46285d6cb7c80b9a999b1574abafac464b911fda379c656c0a4a2cb229d5"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-01/black.nut",
+        "sha256": "d07f881cc8711287c705eddda7ce5c9110f5887d156a8ded960b0c39f3eb2a35"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-01/black.mp4",
+        "sha256": "aa19d8db34b237a7211933a3f91f9a1e281150c989ec795855e38ddf13ee5975"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-01/reset.nut",
+        "sha256": "3cb2ff17bfa826194b7ebe0950242a27fe2e713fb362ea85cb2b68d6ec253232"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-01/reset.mp4",
+        "sha256": "011d46285d6cb7c80b9a999b1574abafac464b911fda379c656c0a4a2cb229d5"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-02/baseline.nut",
+        "sha256": "36b66e025b3c34a553dfde96ebdfd8636fdb14ed9a10a3dc411cd0fe463a7173"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-02/baseline.mp4",
+        "sha256": "097398be0c0ef6b9dde464f53480483320dd85a309ca2ef69488ea35bfb2215e"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-02/black.nut",
+        "sha256": "981047af25cfcaa93c7cd267be6961dc7238f7df3cde1b933aa27f0bd68785df"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-02/black.mp4",
+        "sha256": "9cb0978f47a6b271848072bfb717d9721e746da0cb5e45a5fc56547d5d23cab0"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-02/reset.nut",
+        "sha256": "36b66e025b3c34a553dfde96ebdfd8636fdb14ed9a10a3dc411cd0fe463a7173"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-02/reset.mp4",
+        "sha256": "097398be0c0ef6b9dde464f53480483320dd85a309ca2ef69488ea35bfb2215e"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-11/baseline.nut",
+        "sha256": "7800f1fbe0d901117e7d4676cc2fd342f641622fcfe1799dccffe7e3fbacd8dc"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-11/baseline.mp4",
+        "sha256": "acfd1c7dd353271bbe3b2f42ae99a1b3c6821e88beba19faf59c7b0ba41140ad"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-11/black.nut",
+        "sha256": "e824f0e89166b331b380c34659e0cccb24f09c2ebb5aee517cecf724cf369127"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-11/black.mp4",
+        "sha256": "56e5f4f9aa4dc5448aefcc961c23660442af32176d4584bca321064ed4ee6569"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-11/reset.nut",
+        "sha256": "7800f1fbe0d901117e7d4676cc2fd342f641622fcfe1799dccffe7e3fbacd8dc"
+      },
+      {
+        "path": "/private/tmp/zev-connection-study-_ijhcn1e/technical-fixtures-v001/connection-11/reset.mp4",
+        "sha256": "acfd1c7dd353271bbe3b2f42ae99a1b3c6821e88beba19faf59c7b0ba41140ad"
+      }
+    ],
+    "browserExecution": "未実施。既存のfile URL拒否を迂回していない。",
+    "humanRecords": "未記入・未受領",
+    "scope": "研究候補パッケージ。production契約ではない。"
+  },
+  "staticValidation": {
+    "status": "passed",
+    "pageScriptSyntaxExit": 0,
+    "htmlIdsUnique": 6,
+    "externalStaticLinks": 0,
+    "embeddedPackageExactlyEqualsManifest": true,
+    "existingReviewMediaHardlinksMatched": 6,
+    "blankInitialHumanRecords": 3,
+    "technicalCoverageConditions": 4,
+    "profilesPhysicalSummariesExactlyEqual": 11,
+    "originalElevenPageUnchanged": true,
+    "reportCandidateVersion": "v002",
+    "browserExecuted": false,
+    "humanObservationPerformed": false,
+    "pageSha256": "c94ecb9a16814c96b3532fe221029aab31741c9125b1111423701e8a8a7b4110",
+    "manifestSha256": "6668fdd44be8400446ac4a19fc720f73304fcb9c40ffd0f064e8180ca60bdd26",
+    "scriptSha256": "1c96ca672fcf1b74bdcd89ecb70b3520a6d15c64fffaf320adf76821ab64740f"
+  },
+  "setupCorrection": {
+    "failure": {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/candidate-review-v001/syntax-check.json",
+      "bytes": 1903,
+      "sha256": "c995dcf6af3fa102207d8b6070250561f53b28a20978b10ba8eceaf93f38a56d"
+    },
+    "failedPage": {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/candidate-review-v001/review.html",
+      "bytes": 14020,
+      "sha256": "72255872e363f97ef79fa11a1b17d2b692412f5a06ca4e300a88f34ac8726241"
+    },
+    "cause": "Python通常文字列内のJS改行エスケープが実改行へ展開された。",
+    "fix": "HTMLをraw文字列にし、新版v002を別フォルダーへ生成。既存媒体の再描画なし。",
+    "fixedPage": {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/candidate-review-v002/review.html",
+      "bytes": 14024,
+      "sha256": "c94ecb9a16814c96b3532fe221029aab31741c9125b1111423701e8a8a7b4110"
+    }
+  },
+  "independentReviews": {
+    "objectiveProfile": "静的レビューP1/P2なし。142入力不変、139証拠実照合は生成処理が実施。",
+    "productionDesign": "自己点検・独立レビューP1/P2なし。三層Resetの未実装と焼込済fixtureの限界を明記。",
+    "candidatePage": "初版構文不備を独立レビューで検出しv002を再読。報告の旧参照もv002へ修正。残るP1/P2なし。"
+  },
+  "sourceBindings": [
+    {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/worktree/docs/reports/digest-connection-objective-profiles-20260917.json",
+      "bytes": 256687,
+      "sha256": "d4ecf121803b4abc3587f20e6bd1d81a0fdda112172ed49eea4a3d5b0a47b9b7",
+      "repositoryRelativePath": "docs/reports/digest-connection-objective-profiles-20260917.json"
+    },
+    {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/worktree/docs/reports/digest-connection-hypothesis-design-20260917.md",
+      "bytes": 11605,
+      "sha256": "1405c473864c6321a3a57330f6d131aae41242916f2632c5a20c1850f1ee5d38",
+      "repositoryRelativePath": "docs/reports/digest-connection-hypothesis-design-20260917.md"
+    },
+    {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/worktree/docs/reports/digest-connection-production-design-draft-20260917.md",
+      "bytes": 24572,
+      "sha256": "5cf32e2674f863d6971946dc30e14f0af79d0966740df3fc1b3f3112b9a7f6ef",
+      "repositoryRelativePath": "docs/reports/digest-connection-production-design-draft-20260917.md"
+    },
+    {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/worktree/evals/clip_composition/connection_objective_profiles_v001.py",
+      "bytes": 17713,
+      "sha256": "eeae22f03989a87db41cb6e6d8d17e5d59e4d353e5cd38661953f807dc661f38",
+      "repositoryRelativePath": "evals/clip_composition/connection_objective_profiles_v001.py"
+    },
+    {
+      "path": "/private/tmp/zev-connection-study-_ijhcn1e/worktree/evals/clip_composition/connection_candidate_package_v001.py",
+      "bytes": 14703,
+      "sha256": "71f54a04cfcd08863259ec2121b668261e1f9e5e74f0a19e6e4e8145ee383d80",
+      "repositoryRelativePath": "evals/clip_composition/connection_candidate_package_v001.py"
+    }
+  ],
+  "limitations": [
+    "実ブラウザーの表示・再生・記入・downloadは未検証。URL拒否を迂回していない。",
+    "人間の比較記録は未受領。知覚症状・効果・必要性・最適長さは未判定。",
+    "候補3件は指定技術条件の被覆であり、11件全体の意味上の代表性は未証明。",
+    "可逆fixtureのResetは元入力への再解決で、新三層override削除の本番統合は未実装。"
+  ],
+  "newMediaRenders": 0,
+  "newExternalMediaUploads": 0,
+  "newApiCalls": 0,
+  "productionFilesChanged": 0
+}
