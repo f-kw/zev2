@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Research-only physical audit of the existing 12-frame black prototype.
- * No transition is selected here. The caller supplies already observed cases.
+ * No transition is selected here. The caller supplies technical clock cases.
  *
  * node connection_physical_fixture_v001.mjs --manifest /absolute/input.json --output /absolute/new-directory
  * Manifest: {ffmpegPath, ffprobePath, encodeReviewMp4?: boolean, selectedCases: [{
@@ -251,13 +251,28 @@ function pcmPacketClock(probe, packets, expectedSamples) {
   return {packetCount: packets.packets.length, firstSample: 0, endSampleExclusive: end, gapOrOverlap: false};
 }
 
+function decodedVideoClock(probe, frames, expectedFrames) {
+  const stream = probe.streams.find(value => value.codec_type === 'video');
+  const [num, den] = stream.time_base.split('/').map(BigInt);
+  assert.equal(frames.frames.length, expectedFrames);
+  for (const [index, frame] of frames.frames.entries()) {
+    assert.equal(BigInt(frame.pts) * num * BigInt(FPS), BigInt(index) * den,
+      'decoded video PTS differs from exact frame grid');
+    const duration = frame.duration ?? frame.pkt_duration;
+    assert(duration !== undefined, 'decoded video frame duration is missing');
+    assert.equal(BigInt(duration) * num * BigInt(FPS), den, 'decoded frame duration differs from one frame');
+  }
+  return {frameCount: expectedFrames, timeBase: stream.time_base, firstFrame: 0,
+    endFrameExclusive: expectedFrames, gapOrOverlap: false, measuredBeforeTimestampRescaling: true};
+}
+
 export async function runConnectionPhysicalFixtureV001({manifestPath, output}) {
   absolute(manifestPath, 'manifest'); absolute(output, 'output');
   const manifest = await readJson(manifestPath);
   exactKeys(manifest, ['ffmpegPath', 'ffprobePath', 'selectedCases'], ['encodeReviewMp4']);
   if (manifest.encodeReviewMp4 !== undefined) assert.equal(typeof manifest.encodeReviewMp4, 'boolean');
   assert(Array.isArray(manifest.selectedCases) && manifest.selectedCases.length >= 2 && manifest.selectedCases.length <= 4,
-    'the study requires two to four caller-selected observed boundaries');
+    'the study requires two to four caller-selected technical boundaries');
   assert.equal(BLACK_FRAMES, 12, 'prototype changed; re-review the fixture');
   const bindings = new Map();
   const bind = async (file, name) => {
@@ -323,6 +338,9 @@ export async function runConnectionPhysicalFixtureV001({manifestPath, output}) {
   const probePackets = async file => JSON.parse((await run(ffprobe.resolvedPath,
     ['-v', 'error', '-select_streams', 'a:0', '-show_packets', '-show_entries',
       'packet=pts,dts,duration,pts_time,duration_time,side_data_list', '-of', 'json', file])).toString('utf8'));
+  const probeVideoFrames = async file => JSON.parse((await run(ffprobe.resolvedPath,
+    ['-v', 'error', '-select_streams', 'v:0', '-show_frames', '-show_entries',
+      'frame=pts,duration,pkt_duration', '-of', 'json', file])).toString('utf8'));
   const decodePcm = file => ff(['-i', file, '-map', '0:a:0', '-vn', '-c:a', 'pcm_f32le', '-f', 'f32le', '-']);
   const canonicalProbes = new Map();
   const verifyCanonicalWindow = async ({item, plan, timeline, directory, sourceHashes, sourcePcm}) => {
@@ -410,7 +428,10 @@ export async function runConnectionPhysicalFixtureV001({manifestPath, output}) {
       for (let offset = 0; offset < sourcePcm.length; offset += SAMPLE_BYTES) assert(Number.isFinite(sourcePcm.readFloatLE(offset)));
       const sourcePackets = await probePackets(item.losslessPath);
       const sourceAudioClock = pcmPacketClock(sourceProbe, sourcePackets, expectedSamples);
-      await save(path.join(directory, 'source-media.json'), {probe: sourceProbe, audioPackets: sourcePackets, audioClock: sourceAudioClock});
+      const sourceVideoFrames = await probeVideoFrames(item.losslessPath);
+      const sourceVideoClock = decodedVideoClock(sourceProbe, sourceVideoFrames, item.frameCount);
+      await save(path.join(directory, 'source-media.json'), {probe: sourceProbe, audioPackets: sourcePackets,
+        audioClock: sourceAudioClock, videoFrames: sourceVideoFrames, videoClock: sourceVideoClock});
       const canonicalWindowVerification = await verifyCanonicalWindow({item, plan, timeline, directory, sourceHashes, sourcePcm});
       const identitySpans = [{kind: 'base', baseStartFrame: 0, baseEndFrame: item.frameCount,
         startFrame: 0, endFrameExclusive: item.frameCount}];
@@ -458,6 +479,9 @@ export async function runConnectionPhysicalFixtureV001({manifestPath, output}) {
         assert(pcm.equals(isBlack ? expectedBlackPcm : sourcePcm), 'decoded PCM differs from exact retained samples and intended insertion');
         const packets = await probePackets(outputPath);
         const audioClock = pcmPacketClock(probe, packets, samples);
+        const videoFrames = await probeVideoFrames(outputPath);
+        const videoClock = decodedVideoClock(probe, videoFrames, frames);
+        await save(path.join(directory, `${variant}-video-frames.json`), videoFrames);
         const sourceMap = sourceMapping(timeline, item, spans);
         assert.equal(sourceMap.frames.filter(frame => frame.source === null).length, isBlack ? BLACK_FRAMES : 0);
         await save(path.join(directory, `${variant}-source-map.json`), sourceMap);
@@ -467,7 +491,7 @@ export async function runConnectionPhysicalFixtureV001({manifestPath, output}) {
           decodedPcmSha256: hash(pcm), completeRetainedFrameSequenceEqual: true,
           completeRetainedPcmEqual: true, insertedBlackFrameCount: isBlack ? BLACK_FRAMES : 0,
           insertedZeroSamplesPerChannel: isBlack ? BLACK_FRAMES * SAMPLES_PER_FRAME : 0,
-          extraInsertedSilenceSamples: 0, audioClock, waveform: seams.map(frame => waveformAt(pcm, frame * SAMPLES_PER_FRAME)),
+          extraInsertedSilenceSamples: 0, audioClock, videoClock, waveform: seams.map(frame => waveformAt(pcm, frame * SAMPLES_PER_FRAME)),
           probe, audioPackets: packets, reviewMp4: null};
         if (manifest.encodeReviewMp4) {
           const reviewPath = path.join(directory, `${variant}.mp4`);
@@ -484,6 +508,9 @@ export async function runConnectionPhysicalFixtureV001({manifestPath, output}) {
           assert.equal(reviewAudio.codec_name, 'aac'); assert.equal(Number(reviewAudio.sample_rate), SAMPLE_RATE);
           assert.equal(reviewAudio.channels, CHANNELS); assert.equal(Number(reviewAudio.start_time), 0);
           const reviewPcm = await decodePcm(reviewPath);
+          const reviewVideoFrames = await probeVideoFrames(reviewPath);
+          const reviewVideoClock = decodedVideoClock(reviewProbe, reviewVideoFrames, frames);
+          await save(path.join(directory, `${variant}-review-video-frames.json`), reviewVideoFrames);
           assert.equal(reviewPcm.length % (CHANNELS * SAMPLE_BYTES), 0);
           const decodedSamples = reviewPcm.length / (CHANNELS * SAMPLE_BYTES);
           record.reviewMp4 = {path: reviewPath, sha256: await fileHash(reviewPath),
@@ -491,7 +518,7 @@ export async function runConnectionPhysicalFixtureV001({manifestPath, output}) {
             decodedSamplesPerChannel: decodedSamples, decodedTailDifferenceSamplesPerChannel: decodedSamples - samples,
             decodedTailInterleavedSamplesAfterExpectedEnd: decodedSamples > samples
               ? Array.from({length: (decodedSamples - samples) * CHANNELS}, (_, index) => reviewPcm.readFloatLE((samples * CHANNELS + index) * SAMPLE_BYTES)) : [],
-            probe: reviewProbe, audioPackets: reviewPackets,
+            probe: reviewProbe, audioPackets: reviewPackets, videoClock: reviewVideoClock,
             waveform: seams.map(frame => waveformAt(reviewPcm, frame * SAMPLES_PER_FRAME)),
             audibleClickVerdict: 'requires separate observation of the rendered audio; not inferred from sample deltas'};
         }
@@ -520,7 +547,7 @@ export async function runConnectionPhysicalFixtureV001({manifestPath, output}) {
       inputBindingsUnchanged: true, blackFrames: BLACK_FRAMES, fps: FPS, sampleRate: SAMPLE_RATE, channels: CHANNELS,
       results};
     await save(path.join(output, 'physical-fixture-result.json'), report);
-    console.log(`${results.length} observed connections: physical fixture checks passed`);
+    console.log(`${results.length} technical connections: physical fixture checks passed`);
     return report;
   } catch (error) {
     await save(path.join(output, 'physical-fixture-failure.json'), {
