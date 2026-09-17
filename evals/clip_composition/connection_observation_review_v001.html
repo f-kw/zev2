@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; media-src 'self' file:; connect-src 'none'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+  <title>Digestの接続を確認する</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#182324;background:#f2f5f3;font-size:16px;line-height:1.65;--accent:#165d52;--muted:#566663;--line:#cdd7d2}
+    *{box-sizing:border-box}body{margin:0}button,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.45}
+    a{color:var(--accent)}button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid #ba6b19;outline-offset:3px}
+    main{max-width:1000px;margin:0 auto;padding:38px 24px 70px}header{margin-bottom:24px}.eyebrow{margin:0 0 7px;font-size:.8rem;font-weight:700;letter-spacing:.1em;color:var(--accent)}
+    h1{font-size:clamp(1.55rem,4vw,2.05rem);letter-spacing:.025em;margin:0 0 12px;line-height:1.4}h2{font-size:1.18rem;line-height:1.5;margin:0}p{margin:0 0 12px}.intro{max-width:820px;color:var(--muted)}
+    .instruction{background:#e7eeea;border-left:4px solid var(--accent);border-radius:3px;padding:15px 18px;margin:20px 0 0}.instruction p:last-child{margin:0}
+    .progress-row{display:flex;justify-content:space-between;gap:14px;align-items:baseline;margin:22px 0 7px}.progress-row strong{font-size:.95rem}.progress-row span{font-size:.83rem;color:var(--muted)}
+    progress{display:block;width:100%;height:9px;border:0;border-radius:5px;overflow:hidden;accent-color:var(--accent);background:#dce5df}progress::-webkit-progress-bar{background:#dce5df}progress::-webkit-progress-value{background:var(--accent)}
+    .jump-list{display:flex;gap:8px;flex-wrap:wrap;margin:17px 0 8px}.jump{width:40px;min-height:40px;padding:5px;border:1px solid var(--line);border-radius:8px;background:#fff;color:#263d37;position:relative}.jump[aria-current="step"]{color:#fff;background:var(--accent);border-color:var(--accent);font-weight:700}.jump.complete:not([aria-current]){background:#e4f1e9;border-color:#83af99}.jump.complete:after{content:"";position:absolute;right:4px;top:4px;width:5px;height:5px;border-radius:50%;background:currentColor}.jump-legend{font-size:.78rem;color:var(--muted);margin-bottom:18px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 5px 20px #1c403307}.card-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px}.context{font-size:.8rem;color:var(--muted)}
+    .video-wrap{background:#101815;line-height:0}video{display:block;width:100%;aspect-ratio:16/9;background:#000}video:focus-visible{outline:3px solid #ba6b19;outline-offset:-3px}
+    .video-guide{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 22px;background:#f7f9f7;color:var(--muted);font-size:.83rem;border-bottom:1px solid var(--line)}.marker{font-weight:700;color:var(--accent)}
+    .form-area{padding:23px 22px 20px}.field{margin-bottom:19px}.field label{display:block;font-weight:700;margin-bottom:8px}.field label small{font-size:.9em;font-weight:500}textarea{display:block;width:100%;resize:vertical;min-height:108px;padding:12px 13px;border:1px solid #afbfba;border-radius:8px;background:#fff;color:inherit;line-height:1.65}textarea:focus{border-color:var(--accent)}
+    .watch-check{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-weight:600;padding:13px 14px;background:#f4f7f5;border-radius:8px}.watch-check input{width:20px;height:20px;flex:0 0 auto;margin:4px 0 0;accent-color:var(--accent)}
+    .save-status{font-size:.8rem;color:var(--muted);min-height:1.65em;margin:11px 0 0}.save-status.warn{color:#804814}.navigation{display:flex;justify-content:space-between;gap:12px;margin-top:20px}.button{border:1px solid var(--line);border-radius:8px;padding:10px 18px;min-height:44px;background:#fff;color:#203f36;font-weight:600}.button.primary{background:var(--accent);border-color:var(--accent);color:#fff}.button:hover:not(:disabled){filter:brightness(.96)}
+    .finish{margin-top:25px;padding:23px 0;border-top:1px solid var(--line)}.finish p{color:var(--muted);font-size:.88rem}.finish .button{width:100%;padding:14px 20px}.status-note{font-size:.85rem;margin-top:12px;color:var(--muted)}
+    #summary{margin-top:28px;padding:26px;background:#fff;border:1px solid var(--line);border-radius:14px}#summary[hidden]{display:none}.summary-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap}.summary-top p{font-size:.85rem;color:var(--muted);margin:7px 0 0}.export-actions{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.export-actions .button{font-size:.85rem}.copy-status{min-height:1.65em;font-size:.85rem;color:var(--muted)}
+    .record{padding:20px 0;border-top:1px solid #dce3df}.record h3{font-size:1rem;margin:0 0 11px}.record h3 small{font-size:.78rem;color:var(--muted);font-weight:400;margin-left:10px}.record dl{margin:0}.record dt{font-size:.85rem;color:var(--muted);font-weight:600;margin:12px 0 3px}.record dd{white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.record .empty{color:#73827c;font-size:.9rem}.record-footer{font-size:.8rem;color:var(--muted);margin:13px 0 0}#copy-fallback{min-height:180px;font-size:.88rem;margin-top:12px}
+    .media-error{margin:0;padding:15px 22px;color:#804814;background:#fff4e8}.media-error[hidden]{display:none}.footer-note{font-size:.78rem;color:var(--muted);margin:20px 0 0}noscript p{padding:20px;background:#fff1df;border:1px solid #dfb578}
+    @media(max-width:600px){main{padding:25px 14px 45px}.card-heading,.form-area{padding-left:16px;padding-right:16px}.card-heading{align-items:flex-start;flex-direction:column;gap:3px}.video-guide{padding:10px 16px;font-size:.77rem}.progress-row{flex-wrap:wrap;gap:3px}.instruction{padding:13px 14px}.jump{width:37px;min-height:37px}#summary{padding:19px}.navigation .button{padding:10px 14px}.record h3 small{display:block;margin:3px 0 0}}
+    @media print{header,.progress-row,progress,.jump-list,.jump-legend,.card,.navigation,.finish,.export-actions,.copy-status,.footer-note{display:none}body,main,#summary{background:white;margin:0;padding:0;box-shadow:none;border:0;max-width:none}#summary[hidden]{display:block}.record{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">DIGEST · 接続の観測</p>
+    <h1>場面のつながりを、順に確認する</h1>
+    <p class="intro">11本を映像と音声で見て、気づいたことを自由に記録してください。見せ方を選ぶ前に、今の接続がどう感じられるかを確認します。</p>
+    <div class="instruction">
+      <p><strong>各動画は8秒。確認する接続は、中央の4秒の位置です。</strong><br>動画の最初と最後は、確認用に切り出した端です。この2か所は評価に含めないでください。</p>
+      <p>音が聞こえる状態で、通常の速さで再生してください。何度見直しても構いません。</p>
+    </div>
+  </header>
+  <noscript><p>この確認ページは、ブラウザーのJavaScriptを有効にして開いてください。</p></noscript>
+  <div class="progress-row">
+    <strong id="progress-label">確認・記入済み 0 / 11</strong>
+    <span>2つの記入欄と、映像・音声の確認チェックで数えます</span>
+  </div>
+  <progress id="progress" value="0" max="11" aria-labelledby="progress-label"></progress>
+  <nav id="jump-list" class="jump-list" aria-label="確認する接続"></nav>
+  <p class="jump-legend">●の付いた番号は確認・記入済みです。番号を押すと、その動画に戻れます。</p>
+
+  <section class="card" aria-labelledby="clip-heading">
+    <div class="card-heading">
+      <h2 id="clip-heading">接続 1 / 11</h2>
+      <span class="context" id="canonical-position"></span>
+    </div>
+    <div class="video-wrap"><video id="video" controls playsinline preload="metadata" aria-label="接続確認用の動画"></video></div>
+    <p id="media-error" class="media-error" role="alert" hidden>動画を読み込めませんでした。このページと動画11本を同じフォルダーに置いて開いてください。記入内容はそのまま残っています。</p>
+    <div class="video-guide"><span>通常速度 · 音声ありで確認</span><span class="marker">確認位置 0:04 / 全体 0:08</span></div>
+    <div class="form-area">
+      <div class="field">
+        <label for="observation">気づいたこと <small>（問題なければその旨）</small></label>
+        <textarea id="observation" rows="3" autocomplete="off"></textarea>
+      </div>
+      <div class="field">
+        <label for="reason">そう感じた理由</label>
+        <textarea id="reason" rows="3" autocomplete="off"></textarea>
+      </div>
+      <label class="watch-check" for="watched"><input id="watched" type="checkbox"><span>映像と音声を確認した</span></label>
+      <p id="save-status" class="save-status" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+  <nav class="navigation" aria-label="順に見る">
+    <button id="previous" type="button" class="button" disabled>← 前の接続</button>
+    <button id="next" type="button" class="button primary">次の接続 →</button>
+  </nav>
+  <section class="finish" aria-label="観測記録をまとめる">
+    <p>全11本を見終えたら、記録を一覧にまとめてください。記入した言葉がそのまま表示されます。</p>
+    <button id="summarize" type="button" class="button primary">観測記録をまとめる</button>
+    <p id="completion-note" class="status-note"></p>
+  </section>
+  <section id="summary" hidden aria-labelledby="summary-heading">
+    <div class="summary-top">
+      <div><h2 id="summary-heading" tabindex="-1">観測記録</h2><p id="summary-state"></p></div>
+    </div>
+    <div class="export-actions">
+      <button id="download" type="button" class="button">記録をダウンロード</button>
+      <button id="copy" type="button" class="button">記録をコピー</button>
+    </div>
+    <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+    <textarea id="copy-fallback" readonly hidden aria-label="コピー用の観測記録"></textarea>
+    <div id="records"></div>
+  </section>
+  <p class="footer-note">入力はこのブラウザーに保存します。別のブラウザーで開く場合や、記録を渡す場合はダウンロードを使ってください。</p>
+</main>
+<script>
+(() => {
+  'use strict';
+  const storageKey = 'zev-digest-connection-local-human-observation-_ijhcn1e-v001';
+  const boundaryFrames = [1789, 6121, 8505, 15474, 16082, 16962, 18578, 22099, 22405, 24802, 26222];
+  const clips = boundaryFrames.map((frame, index) => ({
+    id: `connection-${String(index + 1).padStart(2, '0')}`,
+    src: `connection-${String(index + 1).padStart(2, '0')}.mp4`,
+    frame,
+  }));
+  const byId = id => document.getElementById(id);
+  const video = byId('video');
+  const observation = byId('observation');
+  const reason = byId('reason');
+  const watched = byId('watched');
+  const status = byId('save-status');
+  let current = 0;
+  let storageProblem = false;
+  let records = clips.map(clip => ({connectionId: clip.id, observation: '', reason: '', watched: false, updatedAt: null}));
+  const isComplete = record => record.watched && record.observation.trim() !== '' && record.reason.trim() !== '';
+  const countComplete = () => records.filter(isComplete).length;
+  const time = frame => {
+    const totalMs = Math.round(frame * 1000 / 30);
+    const minutes = Math.floor(totalMs / 60000);
+    const seconds = Math.floor(totalMs / 1000) % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(totalMs % 1000).padStart(3, '0')}`;
+  };
+  const setSaveStatus = () => {
+    status.classList.toggle('warn', storageProblem);
+    status.textContent = storageProblem
+      ? 'このブラウザーには保存できません。入力はこのページに残っています。閉じる前に、記録をダウンロードしてください。'
+      : '入力内容はこのブラウザーに保存されます。';
+  };
+  try {
+    const raw = localStorage.getItem(storageKey);
+    if (raw !== null) {
+      const saved = JSON.parse(raw);
+      if (saved.version !== 1 || !Array.isArray(saved.records) || saved.records.length !== clips.length) throw new Error('invalid saved records');
+      const restored = saved.records.map((record, index) => {
+        if (!record || record.connectionId !== clips[index].id || typeof record.observation !== 'string'
+          || typeof record.reason !== 'string' || typeof record.watched !== 'boolean') throw new Error('invalid saved observation');
+        return {connectionId: record.connectionId, observation: record.observation, reason: record.reason,
+          watched: record.watched, updatedAt: typeof record.updatedAt === 'string' ? record.updatedAt : null};
+      });
+      records = restored;
+      if (Number.isInteger(saved.current) && saved.current >= 0 && saved.current < clips.length) current = saved.current;
+    }
+  } catch (_) {
+    storageProblem = true;
+  }
+  const persist = () => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify({version: 1, current, records}));
+      storageProblem = false;
+    } catch (_) {
+      storageProblem = true;
+    }
+    setSaveStatus();
+  };
+  const progress = () => {
+    const count = countComplete();
+    byId('progress').value = count;
+    byId('progress-label').textContent = `確認・記入済み ${count} / ${clips.length}`;
+    byId('completion-note').textContent = count === clips.length
+      ? '11本すべての確認と記入が揃いました。'
+      : `あと${clips.length - count}本の確認・記入が残っています。途中の記録も一覧で確認できます。`;
+    Array.from(byId('jump-list').children).forEach((button, index) => {
+      const complete = isComplete(records[index]);
+      button.classList.toggle('complete', complete);
+      if (index === current) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+      button.setAttribute('aria-label', `接続${index + 1}${complete ? '、確認・記入済み' : '、未完了'}`);
+    });
+  };
+  const textReport = () => {
+    const complete = countComplete();
+    const lines = ['Digestの接続 — 人間による観測記録', '', `確認・記入済み ${complete} / ${clips.length}`,
+      '各動画は8秒、確認対象は中央の4秒の接続。切り出した動画の開始・終了は評価対象外。',
+      `記録をまとめた日時：${new Date().toLocaleString('ja-JP')}`, ''];
+    records.forEach((record, index) => {
+      lines.push(`【接続 ${index + 1}】完成Digest ${time(clips[index].frame)}`,
+        `映像と音声を確認した：${record.watched ? 'はい' : '未確認'}`,
+        `確認・記入：${isComplete(record) ? '完了' : '途中'}`, '',
+        '気づいたこと（問題なければその旨）', record.observation.trim() ? record.observation : '（未記入）', '',
+        'そう感じた理由', record.reason.trim() ? record.reason : '（未記入）', '', '────────────', '');
+    });
+    return lines.join('\n');
+  };
+  const renderSummary = () => {
+    const count = countComplete();
+    byId('summary-state').textContent = `確認・記入済み ${count} / ${clips.length}${count === clips.length ? ' · 全件の記録' : ' · 入力途中の記録'}`;
+    const container = byId('records');
+    container.replaceChildren();
+    records.forEach((record, index) => {
+      const article = document.createElement('article');
+      article.className = 'record';
+      const heading = document.createElement('h3');
+      heading.append(document.createTextNode(`接続 ${index + 1}`));
+      const position = document.createElement('small');
+      position.textContent = `完成Digest ${time(clips[index].frame)}`;
+      heading.append(position);
+      const dl = document.createElement('dl');
+      [['気づいたこと（問題なければその旨）', record.observation], ['そう感じた理由', record.reason]].forEach(([label, value]) => {
+        const term = document.createElement('dt'); term.textContent = label;
+        const content = document.createElement('dd'); content.textContent = value.trim() ? value : '未記入';
+        if (!value.trim()) content.className = 'empty';
+        dl.append(term, content);
+      });
+      const foot = document.createElement('p'); foot.className = 'record-footer';
+      foot.textContent = `映像と音声：${record.watched ? '本人が確認済み' : '未確認'} ／ 記入：${isComplete(record) ? '完了' : '途中'}`;
+      article.append(heading, dl, foot); container.append(article);
+    });
+    byId('copy-fallback').value = textReport();
+  };
+  const capture = () => {
+    const record = records[current];
+    const changed = record.observation !== observation.value || record.reason !== reason.value || record.watched !== watched.checked;
+    if (changed) records[current] = {...record, observation: observation.value, reason: reason.value,
+      watched: watched.checked, updatedAt: new Date().toISOString()};
+    persist(); progress();
+    if (!byId('summary').hidden) renderSummary();
+  };
+  const normalSpeed = () => {
+    if (video.defaultPlaybackRate !== 1) video.defaultPlaybackRate = 1;
+    if (video.playbackRate !== 1) video.playbackRate = 1;
+  };
+  const renderClip = () => {
+    video.pause();
+    byId('media-error').hidden = true;
+    video.src = clips[current].src;
+    video.muted = false;
+    video.volume = 1;
+    normalSpeed();
+    video.load();
+    observation.value = records[current].observation;
+    reason.value = records[current].reason;
+    watched.checked = records[current].watched;
+    byId('clip-heading').textContent = `接続 ${current + 1} / ${clips.length}`;
+    byId('canonical-position').textContent = `完成Digest ${time(clips[current].frame)} の接続`;
+    video.setAttribute('aria-label', `接続${current + 1}の確認用動画。4秒の位置が確認対象`);
+    byId('previous').disabled = current === 0;
+    byId('next').disabled = current === clips.length - 1;
+    byId('next').textContent = current === clips.length - 1 ? '最後の接続です' : '次の接続 →';
+    progress(); setSaveStatus();
+  };
+  const go = index => {
+    if (index < 0 || index >= clips.length || index === current) return;
+    capture(); current = index; persist(); renderClip();
+  };
+  clips.forEach((clip, index) => {
+    const button = document.createElement('button'); button.type = 'button'; button.className = 'jump';
+    button.textContent = String(index + 1); button.addEventListener('click', () => go(index));
+    byId('jump-list').append(button);
+  });
+  observation.addEventListener('input', capture);
+  reason.addEventListener('input', capture);
+  watched.addEventListener('change', capture);
+  byId('previous').addEventListener('click', () => go(current - 1));
+  byId('next').addEventListener('click', () => go(current + 1));
+  video.addEventListener('loadedmetadata', normalSpeed);
+  video.addEventListener('ratechange', normalSpeed);
+  video.addEventListener('error', () => {byId('media-error').hidden = false;});
+  byId('summarize').addEventListener('click', () => {
+    capture(); video.pause(); byId('summary').hidden = false; renderSummary();
+    byId('summary-heading').focus({preventScroll: true});
+    byId('summary').scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
+  byId('download').addEventListener('click', () => {
+    capture();
+    const blob = new Blob(['\ufeff', textReport()], {type: 'text/plain;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a'); link.href = url; link.download = 'Digest接続の観測記録.txt';
+    document.body.append(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+    byId('copy-status').textContent = '観測記録のダウンロードを開始しました。';
+  });
+  byId('copy').addEventListener('click', async () => {
+    capture();
+    const text = textReport();
+    try {
+      if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') throw new Error('clipboard unavailable');
+      await navigator.clipboard.writeText(text);
+      byId('copy-status').textContent = '観測記録をコピーしました。';
+      byId('copy-fallback').hidden = true;
+    } catch (_) {
+      const field = byId('copy-fallback'); field.value = text; field.hidden = false; field.focus(); field.select();
+      byId('copy-status').textContent = '自動でコピーできないため、記録を選択しました。コピー操作を使うか、ダウンロードしてください。';
+    }
+  });
+  window.addEventListener('pagehide', capture);
+  renderClip();
+})();
+</script>
+</body>
+</html>
