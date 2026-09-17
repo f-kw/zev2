@@ -246,4 +246,18 @@ cd /var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhy
 
 ## 13. 監査依頼時の記録
 
-実装checkpointは `4cc3a1f53e028c7dfdcf329ad85ea4ef92113bcd`。この後の記録追記を含めてpushし、同じ「ZEV Build Loop」へ `AUDIT_ONLY` と工程IIIの次タスク要求を送る。相談役の応答は受領後に本節へ追記する。工程IIIの着工は今回の完了作業に含めない。
+実装checkpointは `4cc3a1f53e028c7dfdcf329ad85ea4ef92113bcd`。checkpointと保全確認を記録した `957e9f046fb1784c566ca344076505273fc38365` を同remote branchへpushし、同SHAの読戻しを確認した。この現物を同じ[ZEV Build Loop](https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6aa7f7e5-03d8-83ee-aae1-6c4b66fb8303)へ `AUDIT_ONLY` として報告し、工程IIIの次タスクを要求した。
+
+Microsoft Edgeの同一会話で送信済み本文と応答完了を確認した。相談役はremote SHA・追加13file・実装を変えない最終記録commitを照合したうえで、**工程IIを技術第一完成として受理、必須修正なし**と回答した。有限なフェード仕様、12frameだけを追加する時計、全325字幕の一回の投影、PCM保持、Soft／Black双方へのReset、4種類の実故障拒否を受理理由として挙げている。
+
+レスポンス確認済み。今回の明示モデル条件はなく、画面の選択表示「高」を維持した。特定のモデル名を推定していない。ブラウザ接続の不調後、対象tabの読込を一度行ったが、報告の再送・応答再生成は行っていない。
+
+工程III「全体の使い分け」のMarkdown指示書 v001を同じ応答から直接受領した。Google Driveへの新規保存は行っていない。
+
+- [受領した工程III指示書](/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-connection-stage2-r7ddhyxp/received-stage3-work-order-v001.md)
+- byte数：24,950
+- SHA256：`818da28ac91bd19747fc4ffa2cd55dab24082239b60f299b51aa0157a4cd2bb0`
+- 指定開始base：`957e9f046fb1784c566ca344076505273fc38365`
+- 次の中心：基礎映像へ接続を適用し、共通表示時計へ字幕・音響ピークを投影してから字幕を描画する。意味上の許容表現を固定し、複数許容時の再現可能な選択と、字幕／接続の保存・Resetの独立性を統合する。着工前の未commit／未追跡物の分類・保全方針も指示されている。
+
+本追記は監査と指示書の受領記録であり、工程IIの実装・媒体を変更しない。工程IIIの着工は今回の完了作業に含めず、受領ファイルをそのまま保持した。
