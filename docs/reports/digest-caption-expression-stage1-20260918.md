@@ -1,6 +1,6 @@
 # 工程I：字幕表現の拡張 — 作業・引継ぎ記録
 
-開始日: 2026-09-18（日本時間）。状態: **工程Iの候補動画・技術検証・37ファイルのcheckpoint pushと読戻しが完了。八つの完成条件を満たし、同じ相談役へのAUDIT_ONLYへ進む。** 人間の採用・視聴品質の判定とは分ける。
+開始日: 2026-09-18（日本時間）。状態: **工程Iの候補動画・技術検証・37ファイルのcheckpoint pushと読戻しが完了。同じ相談役の最終監査で、開発入口における技術第一完成として受理された。必須修正なし。** 人間の採用・視聴品質の判定とは分ける。
 
 ## 最優先方針と今回の範囲
 
@@ -283,7 +283,17 @@ Color／Scaleの人間採用は上位計画の既存記録を維持した。Pane
 - remote読戻し: 専用branchが同じ`53c25d3a1f51e1154524e9f4ea271ff4ac296ddf`を指すことを確認。[保存記録](/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/checkpoint-v001-remote-readback.json)。
 - push後の元workspace: 2026-09-18 01:29:15（日本時間）にも、HEAD・branch・追跡差分・staged差分・未追跡一覧の全5記録が開始時と一致。[push後の保全記録](/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v002/verification.json)。
 - この節と軽量証拠への読戻し結果の追記は、実装を変えない後続の記録commitへ保存する。監査依頼本文には、その最新SHAとremote読戻しを併記する。
-- 同じ相談役会話へのAUDIT_ONLYと次タスク要求: この報告を含む最新checkpointの読戻し後に送る。動画・巨大な生証拠は送信しない。
+- 監査提出checkpoint: [`93a8a551a625f50b4d2c7c64ab13af5ca384ba5d`](https://github.com/f-kw/zev2/commit/93a8a551a625f50b4d2c7c64ab13af5ca384ba5d)。remoteの同一SHAを読み戻してから、同じ相談役会話へAUDIT_ONLYと次タスク要求を一回送信した。動画・巨大な生証拠は送信していない。
+
+### 同じ相談役の最終監査と次指示書
+
+[ZEV相談役 - ZEV Build Loop](https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6aa7f7e5-03d8-83ee-aae1-6c4b66fb8303)の応答生成完了と本文を確認した。判定は「許可された共通rendererの開発入口における技術第一完成として受理」、工程Iへの必須修正なし。差分・主要実装・試験定義・軽量証拠・報告・remote branchを照合した受理であり、相談役側でローカル動画の再生、生ログの再実行、媒体の再hashを行った認定ではない。
+
+Web連携は[chatgpt-workflow](/Users/kawafmm/.codex/skills/chatgpt-workflow/SKILL.md)を使用した。モデル条件の追加指定がないため、UIの6 Proを維持。監査・次タスク要求とも送信済み、レスポンス確認済み。更新・再生成・再送は0回。
+
+次の[工程II：接続表現の拡張 — Codex実装指示書v001](https://drive.google.com/file/d/1vEpJmKmVSZkCQRM_XCza09jyA5sbxIt-/view)も受領し、Driveの実在・24,404 bytes・全文を確認した。短い黒経由フェード一種類を既存の接続1・2・11の短尺、保存／Reset、映像・音声・時計・故障検査、候補1本で閉じる指示である。指示書受領を工程IIの実装済み記録にせず、工程Iの完了時点では工程IIは未着工。工程IIの指示範囲と次の工程IIIへの引継ぎを保存した。
+
+[監査応答と次資料の受領記録](/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/advisor-audit-result-v001.json)。この監査結果の追記は文書だけの後続commitへ保存し、監査対象の実装・固定案・候補動画は変えない。
 
 ### 選別したcheckpoint対象37ファイル
 
@@ -329,4 +339,4 @@ packages/shared/src/auto-presentation.ts
 runner/src/skills/presentation-focus-selection-v001.ts
 ```
 
-工程Iの監査後、計画上の次は工程II「D：接続表現の拡張」である。次の指示書で着工範囲を切り出すまでは開始しない。黒の再確認、全11接続の人間採点、ショート移行へ主作業を戻さない。
+工程Iの監査後、計画上の次は受領した指示書による工程II「D：接続表現の拡張」である。工程Iの完了履歴と次工程の実行記録を分け、黒の再確認、全11接続の人間採点、ショート移行へ主作業を戻さない。

@@ -2134,6 +2134,16 @@
       "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/checkpoint-v001-remote-readback.json",
       "bytes": 3409,
       "fileSha256": "78b7aaa37478db0b632b9d4207808bc3e08d80fa1a46a1bafa646ac21847f550"
+    },
+    "advisorAuditResult": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/advisor-audit-result-v001.json",
+      "bytes": 2638,
+      "fileSha256": "91ac135fbd7dd868f0895918a60da4a6247bd2dd431dbba1d7af6b8e3107ea90"
+    },
+    "receivedNextWorkOrder": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/received-stage2-work-order-v001.md",
+      "bytes": 24404,
+      "fileSha256": "a5d36cab441558c53f274ab84d7cb05e7c251511d820a6b5da52b7f33bf17982"
     }
   },
   "fullCandidateEvidenceUpdatedAt": "2026-09-17T16:27:01.294Z",
@@ -2191,5 +2201,38 @@
     "originalTreePreservation": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v002/verification.json",
     "selectedFileCount": 37,
     "evidence": "checkpointRemoteReadback"
+  },
+  "advisorAudit": {
+    "status": "accepted-technical-first-completion",
+    "submittedCheckpoint": "93a8a551a625f50b4d2c7c64ab13af5ca384ba5d",
+    "requiredRevisions": [],
+    "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6aa7f7e5-03d8-83ee-aae1-6c4b66fb8303",
+    "conversationTitle": "ZEV相談役 - ZEV Build Loop",
+    "modelConditionSpecified": false,
+    "selectedModelMaintained": "6 Pro",
+    "auditRequestSent": true,
+    "nextTaskRequestSent": true,
+    "replyGenerationComplete": true,
+    "responseConfirmedAt": "2026-09-17T16:46:24.734953+00:00",
+    "sendCount": 1,
+    "refreshCount": 0,
+    "regenerationCount": 0,
+    "scope": "指定commitの差分、主要実装、試験定義、軽量証拠、報告、remote branchを照合。ローカル動画の再生、生ログの再実行、媒体の再hashは相談役環境では実施していない。",
+    "notAdoptedByThisAudit": [
+      "人間の見心地",
+      "正式名称・デザイン採用",
+      "通常file入口の正式受入",
+      "正式trust再発行"
+    ],
+    "nextWorkOrder": {
+      "title": "23_ZEV_工程II_接続表現拡張_Codex実装指示書_2026-09-18_v001.md",
+      "url": "https://drive.google.com/file/d/1vEpJmKmVSZkCQRM_XCza09jyA5sbxIt-/view",
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/received-stage2-work-order-v001.md",
+      "bytes": 24404,
+      "fileSha256": "a5d36cab441558c53f274ab84d7cb05e7c251511d820a6b5da52b7f33bf17982",
+      "readInFull": true,
+      "implementationStarted": false
+    },
+    "evidence": "advisorAuditResult"
   }
 }
