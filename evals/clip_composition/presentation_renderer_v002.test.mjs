@@ -1476,23 +1476,27 @@ test('12 行数・行の正の交差・安全領域・空alphaを独立して検
   );
 });
 
-test('12b 保存済みnative証拠の欠落・成功フラグによる偽造を単独で拒否する', async () => {
+test('12b 旧差分・native単独・成功フラグは新しい完成映像全体証拠の代わりにならない', async () => {
   const {planReport} = await logicalFixturePromise;
   const plan = clone(planReport.plan);
   const caption = plan.elements.find(element => element.kind === 'speech-caption');
   assert.ok(caption);
   plan.elements = [caption];
   const base = makeValidQcInput(plan);
-  const positive = evaluatePresentationRendererQcV002(base);
-  assert.equal(positive.status, 'passed', JSON.stringify(positive));
+  const legacyOnly = evaluatePresentationRendererQcV002(base);
+  assert.equal(legacyOnly.status, 'failed', JSON.stringify(legacyOnly));
+  assert(legacyOnly.violations.some(row => row.code === 'COMPLETED_FRAME_QC_INVALID'
+    && row.details?.missingGlobalEvidence === true));
+  assert.deepEqual([...new Set(codesOf(legacyOnly))], ['COMPLETED_FRAME_QC_INVALID']);
   for (const evidence of [undefined, {status: 'passed', visible: true}]) {
     const invalid = clone(base);
     invalid.overlayInspections[0].visibilityComparisonBasis = 'native-reference-state-identification-v001';
     if (evidence !== undefined) invalid.overlayInspections[0].nativeFrameQc = evidence;
     const rejected = evaluatePresentationRendererQcV002(invalid);
     assert.equal(rejected.status, 'failed');
-    assertHasCode(rejected, 'NATIVE_FRAME_QC_INVALID');
-    assert.equal(rejected.violations.length, 1);
+    assert(rejected.violations.some(row => row.code === 'COMPLETED_FRAME_QC_INVALID'
+      && row.details?.missingGlobalEvidence === true));
+    assert.deepEqual([...new Set(codesOf(rejected))], ['COMPLETED_FRAME_QC_INVALID']);
   }
 });
 
@@ -1502,14 +1506,16 @@ test('13 時間と空間の正の交差だけを衝突とし境界接触は許�
   two.elements = two.elements.slice(0, 2);
   two.elements[1].startFrame = two.elements[0].startFrame + 1;
   two.elements[1].endFrameExclusive = two.elements[0].endFrameExclusive;
-  const collisionInput = makeValidQcInput(two);
+  const collisionInput = {...makeValidQcInput(two), requireFinalVisibility: false};
   collisionInput.overlayInspections[1].alphaBounds = clone(collisionInput.overlayInspections[0].alphaBounds);
   assertHasCode(evaluatePresentationRendererQcV002(collisionInput), 'INSTRUCTION_TEMPORAL_SPATIAL_COLLISION');
 
   const touching = clone(two);
   touching.elements[1].startFrame = touching.elements[0].endFrameExclusive;
   touching.elements[1].endFrameExclusive = touching.elements[1].startFrame + 30;
-  const touchingReport = evaluatePresentationRendererQcV002(makeValidQcInput(touching));
+  const touchingReport = evaluatePresentationRendererQcV002({
+    ...makeValidQcInput(touching), requireFinalVisibility: false,
+  });
   assert.ok(!codesOf(touchingReport).includes('INSTRUCTION_TEMPORAL_SPATIAL_COLLISION'));
 });
 

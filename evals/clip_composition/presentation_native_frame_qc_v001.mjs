@@ -4,6 +4,12 @@ import {stat, mkdir, mkdtemp, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {performance} from 'node:perf_hooks';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+
+// Evidence validation reuses the actual executed command builders.
+export {
+  frameExtractionArguments as buildPresentationNativeFrameExtractionArgumentsV001,
+  nativeReferenceArguments as buildPresentationNativeReferenceArgumentsV001,
+};
 import {buildPresentationNativeQcAlternativeElementsV001} from './presentation_native_frame_qc_preparation_v001.mjs';
 import {getPresentationPulseProgramV001, buildPresentationPulseStateElementsV001} from './presentation_pulse_v001.mjs';
 

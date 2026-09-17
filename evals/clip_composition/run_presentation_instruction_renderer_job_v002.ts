@@ -455,6 +455,7 @@ export async function executePresentationInstructionRendererJobV002({
     ...(overlayAdapter === undefined ? {} : {overlayAdapter}),
     ...(serializePngAndFilters ? {serializePngAndFilters: true} : {}),
     ...(autoPresentation === undefined ? {} : {autoPresentation}),
+    counterfactualQcMethod: autoPresentation === undefined ? 'encoded-omission-v2' : 'exact-replay-native-v1',
     processObserver,
   });
   if (draw.exitCode !== 0 || draw.finalQc?.status !== 'passed') {

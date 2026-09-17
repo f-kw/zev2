@@ -75,7 +75,7 @@ async function captureLayoutInput(t, plan, autoPresentation) {
   let overlayCalls = 0;
   const outputDirectory = path.join(directory, 'render');
   const result = await executeValidatedPresentationDrawAndQcV001({
-    outputDirectory, plan, autoPresentation, presetRegistry: {},
+    outputDirectory, plan, autoPresentation, presetRegistry: {}, runCounterfactualQc: false,
     baseMediaPath: '/unused/base.mp4', baseMediaInspection: {media: {audio: null}}, expectedFrameCount: 60,
     overlayAdapter: {
       buildProps: (element, effectivePlan) => ({element: structuredClone(element), canvas: effectivePlan.canvas}),
@@ -111,7 +111,7 @@ test('common draw rejects unknown rules and mixed legacy effects before acquirin
     ['mixed-effects', {autoPresentation, effects: {}}, /auto.*effects|effects.*auto/i],
   ]) {
     await assert.rejects(executeValidatedPresentationDrawAndQcV001({
-      outputDirectory: path.join(directory, name), plan, ...options,
+      outputDirectory: path.join(directory, name), plan, ...options, runCounterfactualQc: false,
       overlayAdapter: {buildProps: () => { calls++; }, renderStill: async () => { calls++; },
         renderLineMask: async () => { calls++; }},
       processObserver: {run: async () => { calls++; }},
@@ -143,7 +143,7 @@ test('Focus reaches the existing layout only on its caption while the normal pla
   assert.deepEqual(layout.overlays[0].element, expected);
   assert.deepEqual(layout.overlays[1].element, before.elements[1]);
   assert.deepEqual(plan, before);
-  await assert.rejects(executeValidatedPresentationDrawAndQcV001({plan, autoPresentation,
+  await assert.rejects(executeValidatedPresentationDrawAndQcV001({plan, autoPresentation, runCounterfactualQc: false,
     validatedLayoutInspection: {status: 'passed', items: []}}), /layout inspection/);
 });
 
@@ -158,7 +158,7 @@ test('Vocal reaches the existing layout as size only and cannot reuse normal lay
   assert.deepEqual(layout.overlays[0].element, expected);
   assert.deepEqual(layout.overlays[1].element, before.elements[1]);
   assert.deepEqual(plan, before);
-  await assert.rejects(executeValidatedPresentationDrawAndQcV001({plan, autoPresentation,
+  await assert.rejects(executeValidatedPresentationDrawAndQcV001({plan, autoPresentation, runCounterfactualQc: false,
     validatedLayoutInspection: {status: 'passed', items: []}}), /layout inspection/);
 });
 
@@ -198,7 +198,7 @@ async function savedJobFixture() {
   };
 }
 
-test('the normal job keeps its normal plan separate from the resolved draw plan and judgment', async t => {
+test('the normal job explicitly selects both QC methods and keeps its normal plan separate from the resolved draw plan', async t => {
   const fixture = await savedJobFixture();
   const draws = [];
   const publications = [];
@@ -227,6 +227,10 @@ test('the normal job keeps its normal plan separate from the resolved draw plan 
   const selected = await executePresentationInstructionRendererJobV002({...fixture, capabilities, autoPresentation});
   assert.equal(selected.exitCode, 0, JSON.stringify(selected));
   assert.equal(draws.length, 2);
+  // These captured calls prove dispatch and plan separation only. The callback
+  // above does not simulate completed-video evidence or certify physical QC.
+  assert.deepEqual(draws.map(input => input.counterfactualQcMethod),
+    ['encoded-omission-v2', 'exact-replay-native-v1']);
   assert.equal(publications.length, 2);
   assert.deepEqual(draws[1].autoPresentation, autoPresentation);
   assert.deepEqual(draws[1].plan, baseline);

@@ -4,8 +4,10 @@ import {readFile} from 'node:fs/promises';
 import {PRESENTATION_PULSE_PRESET_V001, getPresentationPulseProgramV001,
   buildPresentationPulseStateElementsV001, assertPresentationPulseAnchorsV001,
 } from './presentation_pulse_v001.mjs';
-import {validatePresentationNativeFrameQcEvidenceV001}
-  from './presentation_native_frame_qc_v001.mjs';
+import {PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002, PRESENTATION_ENCODED_OMISSION_QC_BASIS_V002,
+  validatePresentationEncodedOmissionQcEvidenceV002} from './presentation_encoded_omission_qc_v002.mjs';
+import {PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001, PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001,
+  validatePresentationIntegrityStateQcEvidenceV001} from './presentation_integrity_state_qc_v001.mjs';
 
 export const PRESENTATION_RENDERER_QC_SCHEMA_VERSION = 'presentation-render-qc-v002';
 export const PRESENTATION_REVIEW_RENDERER_QC_SCHEMA_VERSION_V003 =
@@ -13,7 +15,9 @@ export const PRESENTATION_REVIEW_RENDERER_QC_SCHEMA_VERSION_V003 =
 export const PRESENTATION_VERTICAL_REVIEW_RENDERER_QC_SCHEMA_VERSION_V001 =
   'presentation-vertical-review-renderer-qc-v001';
 
-export const PRESENTATION_RENDERER_QC_VIOLATION_CODES = Object.freeze([
+// A hoisted accessor also permits either the renderer or this evaluator to be
+// imported first. Evidence validators reuse the unchanged compositor recipe.
+export function getPresentationRendererQcViolationCodesV001() { return [
   'LAYOUT_LINE_COUNT_EXCEEDED',
   'LAYOUT_LINE_POSITIVE_INTERSECTION',
   'LAYOUT_SAFE_AREA_VIOLATION',
@@ -32,7 +36,10 @@ export const PRESENTATION_RENDERER_QC_VIOLATION_CODES = Object.freeze([
   'NATIVE_FRAME_QC_INVALID',
   'PULSE_NATIVE_STATE_MISMATCH',
   'PULSE_FRAME_STATE_MISMATCH',
-]);
+  'COMPLETED_FRAME_QC_INVALID',
+]; }
+export const PRESENTATION_RENDERER_QC_VIOLATION_CODES = Object.freeze(
+  getPresentationRendererQcViolationCodesV001());
 
 const CODE_ORDER = new Map(PRESENTATION_RENDERER_QC_VIOLATION_CODES.map((code, index) => [code, index]));
 const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -108,8 +115,48 @@ function evaluatePresentationRendererQc({
   expectedFrameCount,
   canvas,
   requireFinalVisibility = true,
+  completedFrameQcEvidence,
+  currentCompletedMediaRef,
 }, outputProfile) {
   const violations = [];
+  const combinedMethod = completedFrameQcEvidence?.method === PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001;
+  const omissionMethod = completedFrameQcEvidence?.method === PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002;
+  if (requireFinalVisibility) {
+    if (combinedMethod) {
+      const combined = validatePresentationIntegrityStateQcEvidenceV001({plan, overlayInspections,
+        evidence: completedFrameQcEvidence, expectedFrameCount, currentCompletedMediaRef, mediaInspection});
+      if (combined.status !== 'passed') violations.push(makeViolation('COMPLETED_FRAME_QC_INVALID', [],
+        {reasons: combined.violations}));
+    } else if (omissionMethod) {
+      try {
+        const proof = completedFrameQcEvidence;
+        const same = (left, right) => sha256Canonical(left) === sha256Canonical(right);
+        const refs = proof.inputManifest?.before?.filter(ref => ref.role === 'completed-media');
+        if (!Array.isArray(refs) || refs.length !== 1
+          || refs[0].path !== currentCompletedMediaRef?.path
+          || refs[0].fileSha256 !== currentCompletedMediaRef?.fileSha256
+          || proof.context?.expectedFrameCount !== expectedFrameCount
+          || !Array.isArray(overlayInspections) || overlayInspections.length !== plan.elements.length
+          || !Array.isArray(proof.samples) || proof.samples.length !== plan.elements.length) {
+          throw new TypeError('logical omission evidence does not bind this completed video and all captions');
+        }
+        for (const [index, inspection] of overlayInspections.entries()) {
+          const local = inspection.encodedOmissionQc;
+          if (inspection.instructionId !== plan.elements[index].instructionId || !local
+            || !same(local.sample, proof.samples[index])
+            || ['schemaVersion', 'method', 'context', 'contextFile', 'inputManifest', 'outputArtifacts']
+              .some(key => !same(local[key], proof[key]))) {
+            throw new TypeError('caption omission evidence differs from the complete observation');
+          }
+          const omission = validatePresentationEncodedOmissionQcEvidenceV002({plan, inspection});
+          if (omission.status !== 'passed') violations.push(makeViolation('COMPLETED_FRAME_QC_INVALID',
+            [inspection.instructionId], {reasons: omission.violations}));
+        }
+      } catch (error) {
+        violations.push(makeViolation('COMPLETED_FRAME_QC_INVALID', [], {reason: error.message}));
+      }
+    } else violations.push(makeViolation('COMPLETED_FRAME_QC_INVALID', [], {missingGlobalEvidence: true}));
+  }
   const instructionIds = (plan?.elements ?? []).map((element) => element.instructionId);
   const resultsByInstruction = new Map();
   for (const result of applicationResults ?? []) {
@@ -252,7 +299,8 @@ function evaluatePresentationRendererQc({
           }
         }
         if (requireFinalVisibility
-          && inspection.visibilityComparisonBasis !== 'native-reference-state-identification-v001') {
+          && !['native-reference-state-identification-v001', PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001,
+            PRESENTATION_ENCODED_OMISSION_QC_BASIS_V002].includes(inspection.visibilityComparisonBasis)) {
           const frames = native.completedFrames;
           const expectedFrames = [
             {frame: program.normalBeforeFrame, state: 'normal'},
@@ -426,21 +474,13 @@ function evaluatePresentationRendererQc({
         }
       }
     }
-    if (requireFinalVisibility
-      && inspection.visibilityComparisonBasis === 'native-reference-state-identification-v001') {
-      const nativeQc = validatePresentationNativeFrameQcEvidenceV001({plan, inspection});
-      if (nativeQc.status !== 'passed') {
-        violations.push(makeViolation('NATIVE_FRAME_QC_INVALID', [element.instructionId],
-          {reasons: nativeQc.violations}));
+    if (requireFinalVisibility) {
+      const expectedBasis = combinedMethod ? PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001
+        : omissionMethod ? PRESENTATION_ENCODED_OMISSION_QC_BASIS_V002 : null;
+      if (inspection.visibilityComparisonBasis !== expectedBasis) {
+        violations.push(makeViolation('COMPLETED_FRAME_QC_INVALID', [element.instructionId],
+          {mixedComparisonMethods: true}));
       }
-    } else if (
-      requireFinalVisibility
-      && (
-      inspection.visibilityComparisonBasis !== 'same-composite-with-instruction-omitted'
-      || !(inspection.changedPixelsAgainstInstructionOmittedFrame > 0)
-      )
-    ) {
-      violations.push(makeViolation('OUTPUT_ELEMENT_NOT_VISIBLE', [element.instructionId]));
     }
   }
 
@@ -578,12 +618,18 @@ function evaluatePresentationRendererQc({
         'OUTPUT_ELEMENT_NOT_VISIBLE',
         'PULSE_NATIVE_STATE_MISMATCH',
         'PULSE_FRAME_STATE_MISMATCH',
+        'NATIVE_FRAME_QC_INVALID',
+        'COMPLETED_FRAME_QC_INVALID',
       ].includes(item.code)) ? 'failed' : 'passed'},
       media: {status: violations.some((item) => item.code.startsWith('OUTPUT_') && item.code !== 'OUTPUT_ELEMENT_NOT_VISIBLE')
         ? 'failed'
         : 'passed'},
     },
     instructionEvidence,
+    ...(requireFinalVisibility ? {
+      completedFrameQcEvidence: structuredClone(completedFrameQcEvidence ?? null),
+      currentCompletedMediaRef: structuredClone(currentCompletedMediaRef ?? null),
+    } : {}),
     mediaEvidence: {
       observed: structuredClone(mediaInspection ?? null),
       expectedAudio: structuredClone(expectedAudio ?? null),

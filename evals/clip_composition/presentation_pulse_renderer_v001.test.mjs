@@ -92,9 +92,10 @@ test('one Pulse application binds all three native PNGs and forward-only metadat
   assert.equal(Object.hasOwn(buildPresentationRenderApplicationResultsV002([staticRecord])[0], 'pulse'), false);
 });
 
-test('Pulse QC rejects missing, substituted, unsafe, clamped and colliding native states', () => {
-  assert.equal(evaluatePresentationRendererQcV002(qcInput()).status, 'passed');
-  const missingNative = qcInput();
+test('Pulse native geometry rejects missing, substituted, unsafe and clamped states without final visibility', () => {
+  const nativeInput = () => ({...qcInput(), requireFinalVisibility: false});
+  assert.equal(evaluatePresentationRendererQcV002(nativeInput()).status, 'passed');
+  const missingNative = nativeInput();
   missingNative.applicationResults[0].pulse.states.pop();
   assert(evaluatePresentationRendererQcV002(missingNative).violations.some(row => row.code === 'PULSE_NATIVE_STATE_MISMATCH'));
   const cases = [
@@ -108,14 +109,14 @@ test('Pulse QC rejects missing, substituted, unsafe, clamped and colliding nativ
     input => input.overlayInspections[0].pulse.states[2].alphaBounds = structuredClone(input.overlayInspections[0].pulse.states[0].alphaBounds),
   ];
   for (const mutate of cases) {
-    const input = qcInput(); mutate(input);
+    const input = nativeInput(); mutate(input);
     assert.equal(evaluatePresentationRendererQcV002(input).status, 'failed');
   }
 });
 
-test('cross-caption collision checks use the actual finite phase, including expanded-only intersections', () => {
+test('Pulse layout collision checks use the actual finite phase, including expanded-only intersections', () => {
   const check = (startFrame, endFrameExclusive) => {
-    const input = qcInput();
+    const input = {...qcInput(), requireFinalVisibility: false};
     const other = recordFor().pulseStates[0];
     other.element = {...other.element, instructionId: 'other-caption', startFrame, endFrameExclusive,
       displayFrameCount: endFrameExclusive - startFrame};
@@ -138,7 +139,12 @@ test('cross-caption collision checks use the actual finite phase, including expa
     && row.details.pulseStates.left === 'maximum' && row.details.overlappingFrames === 4));
 });
 
-test('caption visibility alone cannot pass Pulse frame identification, including ties and wrong return', () => {
+test('legacy Pulse frame diagnostics reject ties and wrong return without granting final acceptance', () => {
+  const validLocalFrames = evaluatePresentationRendererQcV002(qcInput());
+  assert.equal(validLocalFrames.status, 'failed');
+  assert(validLocalFrames.violations.some(row => row.code === 'COMPLETED_FRAME_QC_INVALID'
+    && row.details?.missingGlobalEvidence === true));
+  assert(!validLocalFrames.violations.some(row => row.code === 'PULSE_FRAME_STATE_MISMATCH'));
   for (const mutate of [
     input => delete input.overlayInspections[0].pulse.completedFrames,
     input => input.overlayInspections[0].pulse.completedFrames[1].stateDistances.forEach(row => row.absoluteRgbDifference = 0),
@@ -148,13 +154,15 @@ test('caption visibility alone cannot pass Pulse frame identification, including
     const input = qcInput(); mutate(input);
     const qc = evaluatePresentationRendererQcV002(input);
     assert.equal(qc.status, 'failed');
+    assert(qc.violations.some(row => row.code === 'COMPLETED_FRAME_QC_INVALID'
+      && row.details?.missingGlobalEvidence === true));
     assert(qc.violations.some(row => row.code === 'PULSE_FRAME_STATE_MISMATCH'));
   }
   assert.equal(absolutePresentationPulseRgbDifferenceV001(Buffer.from([0,255,20]), Buffer.from([1,253,25])), 8);
   assert.throws(() => absolutePresentationPulseRgbDifferenceV001(Buffer.from([0]), Buffer.from([])));
 });
 
-test('changing the QC basis cannot reuse cached Pulse success without native evidence', () => {
+test('native-only Pulse evidence cannot satisfy the final completed-video requirement', () => {
   for (const forged of [undefined, {status: 'passed', visible: true, frames: []}]) {
     const input = qcInput();
     const inspection = input.overlayInspections[0];
@@ -162,7 +170,10 @@ test('changing the QC basis cannot reuse cached Pulse success without native evi
     if (forged !== undefined) inspection.nativeFrameQc = forged;
     const result = evaluatePresentationRendererQcV002(input);
     assert.equal(result.status, 'failed');
-    assert(result.violations.some(violation => violation.code === 'NATIVE_FRAME_QC_INVALID'));
+    assert(result.violations.some(violation => violation.code === 'COMPLETED_FRAME_QC_INVALID'
+      && violation.details?.missingGlobalEvidence === true));
+    assert.deepEqual([...new Set(result.violations.map(violation => violation.code))],
+      ['COMPLETED_FRAME_QC_INVALID']);
   }
 });
 
@@ -171,11 +182,13 @@ test('Pulse refuses a normal precomputed layout and sends all native states to t
   await assert.rejects(executeValidatedPresentationDrawAndQcV001({plan, expectedFrameCount: 30,
     runCounterfactualQc: false}), /completed-frame state identification/);
   await assert.rejects(executeValidatedPresentationDrawAndQcV001({plan, expectedFrameCount: 30,
+    counterfactualQcMethod: 'encoded-omission-v2',
     validatedLayoutInspection: {status: 'passed', items: []}}), /all three states/);
   const directory = await mkdtemp(path.resolve('evals/clip_composition/outputs/presentation/pulse-layout-test-'));
   t.after(() => rm(directory, {recursive: true, force: true}));
   let observed;
   const outcome = await executeValidatedPresentationDrawAndQcV001({plan, expectedFrameCount: 30,
+    counterfactualQcMethod: 'encoded-omission-v2',
     outputDirectory: path.join(directory, 'render'), presetRegistry: {},
     overlayAdapter: {buildProps: element => structuredClone(element),
       renderStill: async () => assert.fail('layout failed before any draw'), renderLineMask: async () => assert.fail('layout failed before any mask')},

@@ -20,12 +20,13 @@ const baseTimeline = {segments: [0, 1, 2].map(i => ({segmentId: `s${i}`,
 const input = {plan, baseTimeline, expectedFrameCount: 90};
 const connection = (i, transition = 'black') => ({beforeSegmentId: `s${i}`, afterSegmentId: `s${i + 1}`, transition});
 
-test('audio copy still requires packet identity; timeline audio requires the new duration and codec', () => {
+test('audio-only QC requires packet identity for copies and the declared duration and codec after edits', () => {
   const canvas = plan.canvas;
   const mediaInspection = {durationMs: 3800, video: {...canvas, frameCount: 114},
     audio: {codecName: 'aac', sampleRate: 48000, durationMs: 3800, packetPayloadSha256: 'new'}};
   const check = expectedAudio => evaluatePresentationRendererQcV002({plan: {elements: [], canvas},
-    applicationResults: [], overlayInspections: [], canvas, expectedFrameCount: 114, mediaInspection, expectedAudio});
+    applicationResults: [], overlayInspections: [], canvas, expectedFrameCount: 114, mediaInspection, expectedAudio,
+    requireFinalVisibility: false});
   assert.equal(check({present: true, codecName: 'aac', packetPayloadSha256: 'old'}).status, 'failed');
   const edited = {present: true, mode: 'timeline-insertions', codecName: 'aac', sampleRate: 48000, durationMs: 3800};
   assert.equal(check(edited).status, 'passed');
