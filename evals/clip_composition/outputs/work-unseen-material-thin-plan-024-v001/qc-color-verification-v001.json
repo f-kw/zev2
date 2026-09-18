@@ -1,0 +1,1892 @@
+{
+  "schemaVersion": "unseen-material-qc-color-equivalence-verification-v001",
+  "status": "passed",
+  "scope": "指示-024限定。実測stream metadataをSHAで束縛し、失われた指定だけを復元。色変換・閾値追加なし。",
+  "implementationBindings": [
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94",
+      "bytes": 93860
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "a759fcf0988886ff84f8be32c13802d89b0e1a489b3a348c98bce48da565f388",
+      "bytes": 25129
+    },
+    {
+      "path": "evals/clip_composition/unseen_material_qc_lossless_cache_v001.mjs",
+      "fileSha256": "78fb297b01d118eedffefac31008ffe578c18f3e60711407f32576ffc8de9418",
+      "bytes": 4230
+    },
+    {
+      "path": "evals/clip_composition/run_unseen_material_qc_only_v001.mjs",
+      "fileSha256": "61cd392522e1ca31a87490eeb69c0d9e013ae42c735a598abdcac0eb9803f124",
+      "bytes": 24989
+    },
+    {
+      "path": "evals/clip_composition/unseen_material_qc_lossless_cache_v001.test.mjs",
+      "fileSha256": "784dc847fadc5b42f73baa57314ea57c664c2a38dc5b74338cda185ef65e2e0e",
+      "bytes": 12078
+    },
+    {
+      "path": "evals/clip_composition/unseen_material_qc_cache_capture_v001.test.mjs",
+      "fileSha256": "1d1cf0b569f66b8f6a10d62766c7a7d7d76f3a37b17e5244e1356603f5ce29a1",
+      "bytes": 3331
+    },
+    {
+      "path": "evals/clip_composition/measure_unseen_material_qc_cache_v001.mjs",
+      "fileSha256": "dca8f99a3dc5283ea42325fb3b39bc266aecf33f06f4bb90c4cc99ebb9c6bd73",
+      "bytes": 8559
+    },
+    {
+      "path": "evals/clip_composition/unseen_material_qc_color_metadata_v001.mjs",
+      "fileSha256": "886dbe52683cb0afb4ca87f78a3605d884370071a4b8cc825e2bbf8c802215e2",
+      "bytes": 3228
+    },
+    {
+      "path": "evals/clip_composition/verify_unseen_material_qc_color_metadata_v001.mjs",
+      "fileSha256": "4947267b50adceb01b2c70c60fc5cbabc33ba81ce75496a732683504ad87ad5f",
+      "bytes": 12998
+    },
+    {
+      "path": "evals/clip_composition/run_unseen_material_qc_only_v002.mjs",
+      "fileSha256": "10329a7c9d2e1f72d1da708862d412a8f39c80c4b7d85acd19a7acbaefc27047",
+      "bytes": 28376
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/advisor-qc-lossless-cache-decision-v001.json",
+      "fileSha256": "3231a8e5a22845a45218c54de0a43fb9461a56d68efa25c2118d7b5bc0a366be",
+      "bytes": 4356
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-capture-fixture-v001-7JdLRC/decoded.framehash.txt",
+      "fileSha256": "19dd213e4b882aade54491a9c476dbb59f6e147ed7ed21ea200da7c1f51f112c",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-capture-fixture-v001-7JdLRC/encoder-input.framehash.txt",
+      "fileSha256": "19dd213e4b882aade54491a9c476dbb59f6e147ed7ed21ea200da7c1f51f112c",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-capture-fixture-v001-7JdLRC/result.json",
+      "fileSha256": "0532eb095d6c2b5254bf5741676be5e5384a7ca95977e2cb582c852fa712da81",
+      "bytes": 4745
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-capture-tests-attempt-0002.tap",
+      "fileSha256": "4d137c9d7053d2aba7fcf4a8c391255ec31f4c2155f2abf6d733120daf3c5e90",
+      "bytes": 502
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-attempt-0002.log",
+      "fileSha256": "a6cc3caacaef51ade7014a98334860d3054bb135886b5fba5def86f8bc941279",
+      "bytes": 275
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/baseline-decoded.framehash.txt",
+      "fileSha256": "75c900fc98fe8ba01f80bb2cde61d505702f62052f003e3f2d64dffd47fa3b8f",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/baseline-media.json",
+      "fileSha256": "f9540ba82c0dfb98694d76261411455717a222e21d76e180f2a047da240e8690",
+      "bytes": 1867
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/baseline-original.framehash.txt",
+      "fileSha256": "75c900fc98fe8ba01f80bb2cde61d505702f62052f003e3f2d64dffd47fa3b8f",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/process-001.json",
+      "fileSha256": "2a06b0a70936b211c0b038f3f45bd204a862b84571b9af3ff6dda7a03b998644",
+      "bytes": 5589
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/process-002.json",
+      "fileSha256": "567065aba364a0703e1617ff39153f16f6c5ddf6a00338f010e57f5988b0284f",
+      "bytes": 5786
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/process-003.json",
+      "fileSha256": "1e3706dfb3fdce0aa74d0e61f67dd359f347ef1d1b0216d83332d871ca3b67fe",
+      "bytes": 575
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/process-004.json",
+      "fileSha256": "a5be0668ba9e13e419538e8ecf9741f84b3e383ea331832e9dfbe09f41f1afcc",
+      "bytes": 480
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/process-005.json",
+      "fileSha256": "132b9cf769b7aba533d8f3ad1977387ef53aae4bc98f2e61e623b95578c64ff0",
+      "bytes": 5121
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/process-006.json",
+      "fileSha256": "90b076d453e0bac59410cda3d132844c998378baf545139d1021c42e74b289c1",
+      "bytes": 5321
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/process-007.json",
+      "fileSha256": "696fcff709cb9491244564a54c156292b6ebe76458b2f45835210e6e3bba6c0b",
+      "bytes": 578
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/process-008.json",
+      "fileSha256": "cf33e5563fc312a9ecbaaf74f96c7f92662ad7badb8b4783ee26a4b80564d781",
+      "bytes": 483
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/process-009.json",
+      "fileSha256": "279586cbaf56a7ce71521425b64379dc656050a6bbbd8979090f62b72fcc7560",
+      "bytes": 1387
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/result.json",
+      "fileSha256": "704652907b2b6df52574bc4999459cff7aa0b497dd5b99c99175b04c5dd275e2",
+      "bytes": 56069
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/transparent-decoded.framehash.txt",
+      "fileSha256": "411021603fe58ebdabdbeaa9b5b8115151774feffefc2be89d5d512af094e14e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/transparent-media.json",
+      "fileSha256": "44a4f72be48307e641614e0fdeb16152fee6f2c074ca2173ed6b6c862f890da0",
+      "bytes": 1870
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/transparent-original.framehash.txt",
+      "fileSha256": "411021603fe58ebdabdbeaa9b5b8115151774feffefc2be89d5d512af094e14e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-baseline-before-cache.framehash.txt",
+      "fileSha256": "52372ac75dc257699189e50b6798fd7c8b7f24b018652566d1a82a66d00899e0",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-cached-decoded.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-cached-omitted.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-input.json",
+      "fileSha256": "49f86f2a4ba299d4844125cc5b500e8ef67df1802da4fdd28d6739aa97ec52a6",
+      "bytes": 4505
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-legacy-decoded.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-legacy-omitted.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/moved-target-transparent-before-cache.framehash.txt",
+      "fileSha256": "66c05e51a263f4072afa4b2ea07e8625ea8576a8b0bc720e175284a983472dfb",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-001.json",
+      "fileSha256": "fcacfb929d592b62a831321f9d3d4fda6bb67e3fade1f902a76d858057ae93a2",
+      "bytes": 1693
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-002.json",
+      "fileSha256": "aeabac17a0fddb4c2509bd960206f998a16c16bfdeb002998ed9515678c75395",
+      "bytes": 1704
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-003.json",
+      "fileSha256": "d1a55b83ed723f61c59a391302f83b6f4caec7a5ba290f92ef7544b50b82f392",
+      "bytes": 1899
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-004.json",
+      "fileSha256": "ebad6ff13cbe836427568bfec864aab408a86b5472d168a3642328cd05971697",
+      "bytes": 1913
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-005.json",
+      "fileSha256": "704a002b8f5bbcbe6b29edb0cfb9da6ec87275feffe05209f24c570fdfa04780",
+      "bytes": 584
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-006.json",
+      "fileSha256": "5d89b369253b346f1ac21b6d82e6507faeeb1fade200ee8dc0edfe5aa458720c",
+      "bytes": 587
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-007.json",
+      "fileSha256": "e2906290c6f504f44be6f4a93f13670e9b76c50717bd3cd78d06ed15b70423de",
+      "bytes": 1698
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-008.json",
+      "fileSha256": "2782782bfe17f33929505abbfb9c5590ab6b705a0c3e2eba903a494849b2c6f1",
+      "bytes": 1167
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-009.json",
+      "fileSha256": "acf05192d25ccdaf9e61fbab9de4da94863939a0eeffe1d199e1e958e087ae65",
+      "bytes": 1937
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-010.json",
+      "fileSha256": "a8454a83eeb8d923d81de4eb6a845991797c33986697383c516a030fd11a4e84",
+      "bytes": 1406
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-011.json",
+      "fileSha256": "87d73f42466931a8e1c570801890f5824d11c4b1bd68fa9aa7289837b58f2376",
+      "bytes": 582
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-012.json",
+      "fileSha256": "e0a9744536e3d58d23bd3c86932003962720702bfb46f7eea802c94ae602de08",
+      "bytes": 582
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-013.json",
+      "fileSha256": "40af53fd49480dcf78388d380de1fc56581a40695c58add170e305974a414197",
+      "bytes": 707
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-014.json",
+      "fileSha256": "0fd67503195b06e839a1fb3be89a8b2411366f4e072bc29e7c5bddd72aeb60bd",
+      "bytes": 707
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-015.json",
+      "fileSha256": "0e99b684084a7fc062c600179f47abeeced718291137dc61683dcfffc91dcaba",
+      "bytes": 439
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-016.json",
+      "fileSha256": "1d742366d79093dd0dc3014e5fd3fa8759265bc7d0b8e4d10c88f4cf06b44fe1",
+      "bytes": 439
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-017.json",
+      "fileSha256": "50de2cbb075a3627356fb6ccec182a27c22dfc317d72af74f25086e4b3f7ae47",
+      "bytes": 439
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-018.json",
+      "fileSha256": "4ca4941ab0f0f11018c2ccd7586e678610f63e85b7c0da31418fa88893997aac",
+      "bytes": 1930
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-019.json",
+      "fileSha256": "51a1e5ef8c98f5b86332dba18e38ea9c52e98e2e320dcd5e4afb25722a207de1",
+      "bytes": 703
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-020.json",
+      "fileSha256": "69adfb7f85b12f790d1c70ce8788a9e9256f9b89b9c75fff9d57acb503b9762e",
+      "bytes": 437
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-021.json",
+      "fileSha256": "5342d6fbc726250dfeb18683d9e84283c3226fad07787c23377b382578cca2fb",
+      "bytes": 1692
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-022.json",
+      "fileSha256": "07c2775b900d7e7eb97d524e3df90ffb22cbe3186223a9e07d60d3c6c5a94695",
+      "bytes": 1703
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-023.json",
+      "fileSha256": "a59b9baa0d46f7491b63797184372266578c3de64b673b02a2d3cfc216ee52e4",
+      "bytes": 1900
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-024.json",
+      "fileSha256": "db54e7248c995df780373a4d09a9e2009de5817383da3ff1437cf64c25f958b3",
+      "bytes": 1914
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-025.json",
+      "fileSha256": "9387a24ef28dcf9dbee4b44737d048de589938c6337140589dc35296b3c490e3",
+      "bytes": 587
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-026.json",
+      "fileSha256": "1e683cff3c5ec79bd0cc5306b3cf2b804516851ca08328ce388ced40d657f447",
+      "bytes": 590
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-027.json",
+      "fileSha256": "fa41b9f5d54b9117fd7dd16c9f49a0eb791dbc22168132bcf759a7a3aed5d3a2",
+      "bytes": 1697
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-028.json",
+      "fileSha256": "c54050e6b2911e2f7106335d0e32200d774db2a0a7776b638fc376acaba4bb4f",
+      "bytes": 1174
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-029.json",
+      "fileSha256": "07b768a4e6854a5da02849ffc5fdf058e4593e94f2259a2f902a8981bcd6cb72",
+      "bytes": 1938
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-030.json",
+      "fileSha256": "700cdbb45b4ff21c19b3dffcbc029e5cc959a056087a5ff76bf2df32a7ff7620",
+      "bytes": 1416
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-031.json",
+      "fileSha256": "65a95ab50b6c2740170ec3ca97d504fb82e0a91f5ab9623f63c60fc44be77d82",
+      "bytes": 585
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-032.json",
+      "fileSha256": "a371452cf209a5ed39032a1a1b2fc1dfa653af8aa15dac22778c421ded93b429",
+      "bytes": 585
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-033.json",
+      "fileSha256": "b232779412badcf74a60869ffbf070d4be108ed9423f0d1faba8925be789c19f",
+      "bytes": 714
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-034.json",
+      "fileSha256": "91a282423fa422633b962e237f7e619e0f7f919905cd203cb7991baa5083d67e",
+      "bytes": 714
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-035.json",
+      "fileSha256": "cb7a3fb73a6a1a9552f5aa20e07729f8aafad8c1f25f883db9a6a1cfe26f1b3d",
+      "bytes": 442
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-036.json",
+      "fileSha256": "14b0446bc705da1f651fa8d399d983d29f74f36000ac2a1b9facdcd4db447a73",
+      "bytes": 442
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-037.json",
+      "fileSha256": "fc54e75032c36f2eddf60ac93b2d726f7ca3aae82a93fcc441de4554a1d0572a",
+      "bytes": 442
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-038.json",
+      "fileSha256": "c800d1c9b56ce7e6a197971f50c2e8962fac41a301201e63f607c7c2e88f3eb2",
+      "bytes": 1931
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-039.json",
+      "fileSha256": "fd97971eb84b934780b8af1acbe36ca05dd9c6b401f72e6c64e2c2f3f8f7fcd0",
+      "bytes": 710
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-040.json",
+      "fileSha256": "75dc9359564e05b1dfbe95ae716821d55f1916f9b64ab2ceb0bb0a9b3d1ac7e7",
+      "bytes": 440
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-041.json",
+      "fileSha256": "3fa6a1922f0fedd0a40225d8fd63c351c4de9b7390a11c1cab1897e699b73f0d",
+      "bytes": 1699
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-042.json",
+      "fileSha256": "3b127593974714e8927f32a1474ce40a7644051f4a6d7e8f8cbab1f309fb7ea1",
+      "bytes": 1705
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-043.json",
+      "fileSha256": "446598aeab6fbae5db8e525d74d1da569da78c4883b7bed0e51202ac8f9e558f",
+      "bytes": 1909
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-044.json",
+      "fileSha256": "c04b1658ed373a21eadceabc4db94c0d8b9948bbe9f793167bb426a88fb6dbb3",
+      "bytes": 1918
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-045.json",
+      "fileSha256": "938061a08a704001a97854600f589ccd5405cd8f2dd896e17c3aece9e492904a",
+      "bytes": 588
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-046.json",
+      "fileSha256": "9d3867dd21116ac957831c0af6faf8b57550c17b8a5658300b9240c02d7da2d5",
+      "bytes": 591
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-047.json",
+      "fileSha256": "ced1fed6cf752e9789e70856980db7f7c2008d2fdd6093103d956cc782ebec2b",
+      "bytes": 1699
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-048.json",
+      "fileSha256": "e680c802b0b78109b71841de270e63ab32fd4e384a81c5e02594c494973b099a",
+      "bytes": 1176
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-049.json",
+      "fileSha256": "315c0f520b332173dcdc47014ed52ed2271205d9ace36814d095160af52e4213",
+      "bytes": 1942
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-050.json",
+      "fileSha256": "b033223876ab4f2a5b685768784d3aa30c9b3aba49051a3dd480a9ce34c6cb4c",
+      "bytes": 1419
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-051.json",
+      "fileSha256": "5908755274a23f7c785b5f25c3c8a0a4afd5452828a1229604747c059d75895b",
+      "bytes": 586
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-052.json",
+      "fileSha256": "22772da467953fb9c960d95a2018d93206436481f6a247264bbd3588bb2ac002",
+      "bytes": 586
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-053.json",
+      "fileSha256": "ff98fb0905816b537dce1211588233d5362b0b39c9d9cf104c82a0a21af4abe2",
+      "bytes": 716
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-054.json",
+      "fileSha256": "682fb7540db2fe81895ebd96e27cc73ef53c89229f3c507394c946de3de1a524",
+      "bytes": 716
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-055.json",
+      "fileSha256": "892affcb4fe04e8ac107e766588ad817762d3d7f012ac5c132f429be40fb15ac",
+      "bytes": 444
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-056.json",
+      "fileSha256": "94e4fee978a1e77ab4c1d1b51cc44763cdc5951e87672d04a79bb6c7733ca0bf",
+      "bytes": 444
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-057.json",
+      "fileSha256": "4a3cb85328cfa9e265a00ae13b0e3581ae6d89d02c250a230f794698eca4c908",
+      "bytes": 443
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-058.json",
+      "fileSha256": "194d9b01d5c39403f4b1b8955f461d6d72ce3040f9c9337a4a6765001ebf4cca",
+      "bytes": 1940
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-059.json",
+      "fileSha256": "82ac1122afe1f1d9b29387338d2e11a27ba543765e544c59c7a33b3f2147f9c5",
+      "bytes": 712
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-060.json",
+      "fileSha256": "5e511c2f6b68e8d62a87835c61a2f856bcd238e19c2c25041ee2b3ef4f325681",
+      "bytes": 441
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-061.json",
+      "fileSha256": "693feb8b5b144f5299a90acb96e44c2cfd9a4251bf990f23df2bf879b07d5342",
+      "bytes": 1693
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-062.json",
+      "fileSha256": "8045394225b407e60360ff9a82b1e001ce95e9372b6fb868dd9add4cb51fdf6d",
+      "bytes": 1704
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-063.json",
+      "fileSha256": "1c85bbcc0baa19710b4e91fef57a7b4ad75c6357a8a6289c6733b415a96800fb",
+      "bytes": 1906
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-064.json",
+      "fileSha256": "75b5dcda53aecb9da4e51067806ff780328193a3f60a505866288100aeda0350",
+      "bytes": 1920
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-065.json",
+      "fileSha256": "6a3f0ffb02fc78a58f9894cc1f56cd1dcb7e0a05f2f88faa5770e283695a4716",
+      "bytes": 591
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-066.json",
+      "fileSha256": "37971637678333f26383bba8183654c5f67cabe48f557a9f268b6b0f03e15a92",
+      "bytes": 594
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-067.json",
+      "fileSha256": "8b69e8898a1667fde3c2df96215045a5ee16a355e655a1665a275b60f8cf4782",
+      "bytes": 1699
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-068.json",
+      "fileSha256": "371865092f196491f149a0b56e08146d72703130f7582545e261106fb103b0ea",
+      "bytes": 1180
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-069.json",
+      "fileSha256": "5cf3b1afeab8c89b18b73f824a38a5f54e47cc6d286fdc74872f7834d50f8bf6",
+      "bytes": 1945
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-070.json",
+      "fileSha256": "b17c05753625335524c667b66a834fa264158249af799e73cace887c7edaaeae",
+      "bytes": 1426
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-071.json",
+      "fileSha256": "2aed44700ab6334c4d3a8a25dbaa75dd9d8af1f8f2e1368bcb0e88e4f1a63efb",
+      "bytes": 589
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-072.json",
+      "fileSha256": "1fbe0dc4f807f6d5704e1cf00e70faa15835790d75850f1779dfb12bf7541ef4",
+      "bytes": 589
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-073.json",
+      "fileSha256": "a0349c522e99dfb7319d60db8267d42d1547d0a4d040c1d4904760e5b0bcf8e7",
+      "bytes": 721
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-074.json",
+      "fileSha256": "b8291cdc6a23c767b2310a29c096d99eb5a628d444556c02c83dead94e7c09a9",
+      "bytes": 721
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-075.json",
+      "fileSha256": "e6506460430d3142967356bf4ed6665b9704fddabcc1a2d9e2b1d6775090bb7e",
+      "bytes": 446
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-076.json",
+      "fileSha256": "1ce236d634bb4cc0e8281c357e5404c62a4d1c575430ac37c63ff3947afc69ee",
+      "bytes": 446
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-077.json",
+      "fileSha256": "f941bcde665a7761dd0b4d1544e66d49cdfb7df6e0d0b08bf15c76bfa66f8219",
+      "bytes": 446
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-078.json",
+      "fileSha256": "b00d8ed8a1fd114f29689169ea27dac05e998a5cf5cddce7f75cfa9e46015394",
+      "bytes": 1937
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-079.json",
+      "fileSha256": "1ca4d9ffa2b91a42a79d09148b4e0f55bcc6e5d703834c2debcce201823dd37c",
+      "bytes": 717
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-080.json",
+      "fileSha256": "e266064c99e8ba8da039e7f491799af40d24f08ee3ca56ed6ecb2006b5126d94",
+      "bytes": 444
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-081.json",
+      "fileSha256": "8f52f909464c8b99287ab9ba5b4c289999cffaa30b1f50c9253498e63ae9ca8f",
+      "bytes": 1692
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-082.json",
+      "fileSha256": "18535371c34d21113fb9a88ac3f57e69e1c652f148510b008eb717b3f283a249",
+      "bytes": 1704
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-083.json",
+      "fileSha256": "0bbc61a784fb6b5259b599856c536a58b27a949d559177a500bbb893918d95d3",
+      "bytes": 1903
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-084.json",
+      "fileSha256": "bf5a614f33156b0738b2561e8baa8fdc83b3eaecc0c02bd4b3eded21c63344cc",
+      "bytes": 1918
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-085.json",
+      "fileSha256": "82aa8573e0c4a9850968f6499dbc7215526a9d0ad8d63a2cc84532b9bcd8eabc",
+      "bytes": 589
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-086.json",
+      "fileSha256": "bb0d527571f24ebae2eb85b6a39c872f5c30eccaeaf1b1dd45667d2f6a8b7925",
+      "bytes": 592
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-087.json",
+      "fileSha256": "c86e3a33598ef0fb8e5f906972f5a16fb7081c0487803df8d01e84df283f1aa5",
+      "bytes": 1698
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-088.json",
+      "fileSha256": "be1266149d429b3dd7efaf1572d107304bb1e90af46d8b6d714a0e0acf9cd405",
+      "bytes": 1177
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-089.json",
+      "fileSha256": "df6181b6de540f165caa9751e6fcfd96975314a61d90a218b8ac50b8c90236d2",
+      "bytes": 1942
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-090.json",
+      "fileSha256": "8ee4482f23d8703fc004c92ae6c2c0ffe334b6321a632e451b9ad2869a12622d",
+      "bytes": 1421
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-091.json",
+      "fileSha256": "3ddfef50efe122876ce8138733ddf83ec9ff50a9a4c00865aa5357be4023a852",
+      "bytes": 587
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-092.json",
+      "fileSha256": "afdda4e399acf122c114c9363a026aff6a464be2ae3f7ee3f6e5efa11b0ab96a",
+      "bytes": 587
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-093.json",
+      "fileSha256": "5e7331ccbdc2882b32ee1e5016b8ff1e2e6e1f6a3166e2138e6031b22473c1ec",
+      "bytes": 717
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-094.json",
+      "fileSha256": "36285b284d0d4faf6d689ef3580218fd3e42646e5d5ac0380b7ccb90a4628785",
+      "bytes": 717
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-095.json",
+      "fileSha256": "8d83a6d4b63223f0806979f06c5d8493a2783e9e449052e34188e14da047cb20",
+      "bytes": 444
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-096.json",
+      "fileSha256": "e3d8bae333de2885948e3b0d893ff9ef318fde3f20fd4b9aee8b658e765cdabe",
+      "bytes": 444
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-097.json",
+      "fileSha256": "72eb63ceb9b867ba13b71420160f5f81b4dcb53bcbc31746c1afe734e2df4743",
+      "bytes": 444
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-098.json",
+      "fileSha256": "0ef53f6745c205ea79a29d344059534965540c4981dd11630af300fdbd37e729",
+      "bytes": 1934
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-099.json",
+      "fileSha256": "39ae109c4994f053a668657b88bb5afa4d66b6644463ec0d87e359c9bf5dcce2",
+      "bytes": 713
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/process-100.json",
+      "fileSha256": "0e5b06f1aeb46e1336dd44c878755355a05e66361b0f272e044be1fa2f867dc8",
+      "bytes": 442
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-baseline-before-cache.framehash.txt",
+      "fileSha256": "19dd213e4b882aade54491a9c476dbb59f6e147ed7ed21ea200da7c1f51f112c",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-cached-decoded.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-cached-omitted.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-input.json",
+      "fileSha256": "45b8843f4688f3265ec75460ef7589ea0b41013c281c86e6b7a299e86750728e",
+      "bytes": 4496
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-legacy-decoded.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-legacy-omitted.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/regular-transparent-before-cache.framehash.txt",
+      "fileSha256": "66c05e51a263f4072afa4b2ea07e8625ea8576a8b0bc720e175284a983472dfb",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/result.json",
+      "fileSha256": "bb830e182255f39bb8bedbc4132195cf5f7096dbbbee719f4093ed9a0afa4f1e",
+      "bytes": 20183
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-baseline-before-cache.framehash.txt",
+      "fileSha256": "5efcd2b7ffb5b785c60354beb3955b315fecdc9c647ff88113404c786d4834ef",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-cached-decoded.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-cached-omitted.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-input.json",
+      "fileSha256": "93ca4d2e3aae4b9e079808df27fc90e0d15263e5be5d212d74da3f3bd76acfb9",
+      "bytes": 4502
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-legacy-decoded.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-legacy-omitted.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/short-fade-transparent-before-cache.framehash.txt",
+      "fileSha256": "66c05e51a263f4072afa4b2ea07e8625ea8576a8b0bc720e175284a983472dfb",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-baseline-before-cache.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-cached-decoded.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-cached-omitted.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-input.json",
+      "fileSha256": "84ea8b3e0dd81a43d21bf00ff518022b09014cb8b7d978ae49ee1370e4c27858",
+      "bytes": 4513
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-legacy-decoded.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-legacy-omitted.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/transparent-transparent-before-cache.framehash.txt",
+      "fileSha256": "66c05e51a263f4072afa4b2ea07e8625ea8576a8b0bc720e175284a983472dfb",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-baseline-before-cache.framehash.txt",
+      "fileSha256": "19dd213e4b882aade54491a9c476dbb59f6e147ed7ed21ea200da7c1f51f112c",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-cached-decoded.framehash.txt",
+      "fileSha256": "55e21bfe0f1370b75374ef3398e5aa35b38b3df8ba69eb39d30fcbb5384f7aa2",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-cached-omitted.framehash.txt",
+      "fileSha256": "45ecb037c12663d13933439a6d6e0d9282f2bdb067717ed4d09aaa88b7eb4b00",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-input.json",
+      "fileSha256": "e9929f57bf9099515146e85f6e435a73460840f6af70037ad2c90b1dffc6a81f",
+      "bytes": 4511
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-legacy-decoded.framehash.txt",
+      "fileSha256": "55e21bfe0f1370b75374ef3398e5aa35b38b3df8ba69eb39d30fcbb5384f7aa2",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-legacy-omitted.framehash.txt",
+      "fileSha256": "45ecb037c12663d13933439a6d6e0d9282f2bdb067717ed4d09aaa88b7eb4b00",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-fixture-v001-nIMDZT/wrong-omission-transparent-before-cache.framehash.txt",
+      "fileSha256": "66c05e51a263f4072afa4b2ea07e8625ea8576a8b0bc720e175284a983472dfb",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-tests-attempt-0001.tap",
+      "fileSha256": "8f6740463a6ae5b7910dfbf0cc2445454e9ddc9e1636e8c96d4afe0ed51af9ff",
+      "bytes": 1207
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-only-source-inspection-attempt-0003.log",
+      "fileSha256": "705df38494a3853a7a684923baef4db7c39d38c6392e4e10669070c3542d103b",
+      "bytes": 67
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-after-restoration.framehash.txt",
+      "fileSha256": "296f512352ddfe3d4362ffd36ae2dfe628f1a42d01ad982d157d5ed5edb271d9",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-base-metadata.json",
+      "fileSha256": "8159f74d82dba823e4b856719f21053ef9dda8f88223a000c6d62e024a707268",
+      "bytes": 2846
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-before-restoration.framehash.txt",
+      "fileSha256": "296f512352ddfe3d4362ffd36ae2dfe628f1a42d01ad982d157d5ed5edb271d9",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-cache-metadata.json",
+      "fileSha256": "68ddfdcc96acbb24cf3fb46d74fe0951dca63ae1baab8224871359a81b6156e8",
+      "bytes": 2150
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-input.json",
+      "fileSha256": "e068415cf2ddd1caa38c48eea586d2b8754e19422031875273cad60ffbb1eec8",
+      "bytes": 7237672
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-legacy-metadata.json",
+      "fileSha256": "f29c7fb7c56e02fbcf15f2777de91c1d310154bae5c02e0e093aeec1a3af5cb5",
+      "bytes": 2908
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-legacy-rgba.framehash.txt",
+      "fileSha256": "69242955e5fac111343788b07d13b1a013239f3573703614586544e6e03b9985",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-legacy-yuv420p.framehash.txt",
+      "fileSha256": "02758ad7d7d36032b8a8e0fe3cb7cdd447d1c5c871b1488ca12657a0b9318ef3",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-legacy.png",
+      "fileSha256": "fb708ced2fdb004cb7abfaaf02ff474d09e36f8bd929e58c024dfb478df3829d",
+      "bytes": 373989
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-original.framehash.txt",
+      "fileSha256": "296f512352ddfe3d4362ffd36ae2dfe628f1a42d01ad982d157d5ed5edb271d9",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-restoration.json",
+      "fileSha256": "edd3b2e80ee226d0e7b02ff4f3f66ef9ea561a63d75aa56c65c98944383c1351",
+      "bytes": 2776
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-restored-metadata.json",
+      "fileSha256": "f67b35e0341b214cfbc5fda67e6a9b3dfed89ca387f1ea26665edd76835d5617",
+      "bytes": 2912
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-restored-rgba.framehash.txt",
+      "fileSha256": "69242955e5fac111343788b07d13b1a013239f3573703614586544e6e03b9985",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-restored-yuv420p.framehash.txt",
+      "fileSha256": "02758ad7d7d36032b8a8e0fe3cb7cdd447d1c5c871b1488ca12657a0b9318ef3",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-restored.png",
+      "fileSha256": "fb708ced2fdb004cb7abfaaf02ff474d09e36f8bd929e58c024dfb478df3829d",
+      "bytes": 373989
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/actual-bt709-stream.png",
+      "fileSha256": "fb708ced2fdb004cb7abfaaf02ff474d09e36f8bd929e58c024dfb478df3829d",
+      "bytes": 373989
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-after-restoration.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-base-metadata.json",
+      "fileSha256": "af4d8ce389b2b96354d7275434bf8a5840c13964918dd9db69ebaa76e5888746",
+      "bytes": 2646
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-before-restoration.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-cache-metadata.json",
+      "fileSha256": "1585d9d774f5710945c57ffba34c150cc59774280db6b84b609a515d8016cb0e",
+      "bytes": 2178
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-input.json",
+      "fileSha256": "4e4566b09d9cb54c9527aedf8b7c61413e2b7a44eabdd68a6db6ebc4dc1fed3a",
+      "bytes": 5109
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-legacy-metadata.json",
+      "fileSha256": "71a990daad0d5f9677fb7c8bd37ef76f7accbfa9b4f13fd79b51be61c92f126d",
+      "bytes": 2672
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-legacy-rgba.framehash.txt",
+      "fileSha256": "95858dc190215fe5452dcdd1335b0a6f734006163952d164c7f6f288a7192b19",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-legacy-yuv420p.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-legacy.png",
+      "fileSha256": "75a4414995b7299dc96eb609c31ff4876e173d4afa864d19e30450e2f381dd39",
+      "bytes": 340781
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-restoration.json",
+      "fileSha256": "b8905b85a34c6bcd024030da48c9b11c747359c9bb2e21ec4245ebdaeb370ad9",
+      "bytes": 1751
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-restored-metadata.json",
+      "fileSha256": "07a8e2b68e510ab0fef79b22094241efdc43ad7bc5d52c28427508d5bbb8a802",
+      "bytes": 2664
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-restored-rgba.framehash.txt",
+      "fileSha256": "95858dc190215fe5452dcdd1335b0a6f734006163952d164c7f6f288a7192b19",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-restored-yuv420p.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-restored.png",
+      "fileSha256": "75a4414995b7299dc96eb609c31ff4876e173d4afa864d19e30450e2f381dd39",
+      "bytes": 340781
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/moved-target-stream.png",
+      "fileSha256": "75a4414995b7299dc96eb609c31ff4876e173d4afa864d19e30450e2f381dd39",
+      "bytes": 340781
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-001.json",
+      "fileSha256": "637c94c37b786b122250b2c5fa62f2bcb27ffaacd97ab29ec68a402c59c328ad",
+      "bytes": 294
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-002.json",
+      "fileSha256": "c688c9a97bcf5904faf0bca3dd363cd1fd3616aa156a8ea62640f33a26900133",
+      "bytes": 493
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-003.json",
+      "fileSha256": "c65169bb87cc5e04dcb20b9b308c7ca37d25518b2dc0ee811f5052ad2774ef14",
+      "bytes": 501
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-004.json",
+      "fileSha256": "d0cf9421fe76df49415567f40178eaef22c600b7444975b0075eff0a30fa5ef9",
+      "bytes": 503
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-005.json",
+      "fileSha256": "fa53f1886c4764420555750acda3cb5303646a5c7f998e4b1cbf4f76f17a1ea9",
+      "bytes": 1167
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-006.json",
+      "fileSha256": "1bea9be94b553b91b534a6745769aab7a16a1bccf6f73ceb8fa6ba2987342ab4",
+      "bytes": 1214
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-007.json",
+      "fileSha256": "0b95474ef634ce730acf86911229a2abc7e9270f94d6e6d578ac4da2ed288384",
+      "bytes": 1449
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-008.json",
+      "fileSha256": "9d2f1fc0bfbc60877c8aeeb57ca0cc3a6f080b781b69aa6652f4266546495f1e",
+      "bytes": 497
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-009.json",
+      "fileSha256": "c6f2e03a7fba96c863b8f07d19bb9c628526ecda75bb08afe5e8e0e706416d59",
+      "bytes": 582
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-010.json",
+      "fileSha256": "a3f825480c18061151c0c9fe4324953bb8e47d9a44ac2811ba20b97bcd4e48a9",
+      "bytes": 578
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-011.json",
+      "fileSha256": "393a6c6c7f5df0927a38eb4c2da2f7f0ef4b85a83b998a0991d42b04aa539a0a",
+      "bytes": 580
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-012.json",
+      "fileSha256": "774f840f75b2019ec9cd033c8f2ce1ab5204706f5e76e7069e5e4bab801eb82c",
+      "bytes": 576
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-013.json",
+      "fileSha256": "86ed22d8052c3dd4ec1669ea496693d90eadaad5da90c53c5c4992c885a9c6d5",
+      "bytes": 701
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-014.json",
+      "fileSha256": "c911ee2d1671fb38fabbf810b58e6cb78a4e8bcda6d05b477873d904a5872e3c",
+      "bytes": 699
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-015.json",
+      "fileSha256": "2ba679090e192f96be87a7083e3bccd9c822294f856e9e14c3e42e2c21093a28",
+      "bytes": 433
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-016.json",
+      "fileSha256": "bb4fbdd3036af376d87c5bbfa0e1a3e0e1b2141483a9ce8272cc795d0f83372c",
+      "bytes": 435
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-017.json",
+      "fileSha256": "6bf6410d8c96946f92617f3bc3a037916591f14df12c0c7cd20b376100b45c42",
+      "bytes": 433
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-018.json",
+      "fileSha256": "73ab41e3e6c31b72be134eb3c21d7041d55554f38c61cbeb58f3b5cc6ca1115c",
+      "bytes": 493
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-019.json",
+      "fileSha256": "42db82d448264476a5332a75faa1c93d4e1f37c1c30e7c1618bed0b084d89c1e",
+      "bytes": 504
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-020.json",
+      "fileSha256": "85a4ab6218ba6019fd47dfa268ace70cc1b4a0f377b6c90fd1f8a5bdbdc833cf",
+      "bytes": 506
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-021.json",
+      "fileSha256": "0c379ba502bfdaf06a97399ffca9e095fd52aa337447bf7816a2c2aece780291",
+      "bytes": 1174
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-022.json",
+      "fileSha256": "2b6d51463f102123fd36da8cbc81699de609da1bf108b4459044c016161a8291",
+      "bytes": 1221
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-023.json",
+      "fileSha256": "707b6fd937a604754b6fe4dfd1292c4dcf5afee03be463fac0672fe0ba4df44a",
+      "bytes": 1459
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-024.json",
+      "fileSha256": "aa680fc95198ed10c0775c9e497df404b1fcdd25f8473792f686559b711829a1",
+      "bytes": 500
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-025.json",
+      "fileSha256": "0f1300e7a5b7d56dc34a1b0109ad3034bffa0dd3bcd0ec06815bfe5676786291",
+      "bytes": 585
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-026.json",
+      "fileSha256": "c64d40fb0bd00dd09a276c012877577427881a60c4f118a119adc865c5e59a55",
+      "bytes": 581
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-027.json",
+      "fileSha256": "b2085eed272850931dd4187fc45e258825228c1aa4b7a777f609d3867ec87eeb",
+      "bytes": 583
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-028.json",
+      "fileSha256": "1bf509cc8b62eb53fc283ede255982a6110f44ad5f31e53e9a8ebb5cf7660cb5",
+      "bytes": 579
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-029.json",
+      "fileSha256": "9be1c9a1af45aa13c8b0490f85558dc15351ad944dc027c97d616e23d5564d36",
+      "bytes": 708
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-030.json",
+      "fileSha256": "d8ff920c6f021a78d6a686811510f16b76a15196bd69c6f430574df8c316b3f2",
+      "bytes": 706
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-031.json",
+      "fileSha256": "6f0ca06736b6d73386668b237df6de165f0fcd5cc573e6a306667843823a6643",
+      "bytes": 436
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-032.json",
+      "fileSha256": "89d024ec8dd958ce06b1af6db6b5887a26f09044eb04a40fa952c5be021fefec",
+      "bytes": 438
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-033.json",
+      "fileSha256": "73d57fee8393aa8de03b26b22c02935178a65fba9c15d7778942d51cb0eb7097",
+      "bytes": 436
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-034.json",
+      "fileSha256": "73ab41e3e6c31b72be134eb3c21d7041d55554f38c61cbeb58f3b5cc6ca1115c",
+      "bytes": 493
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-035.json",
+      "fileSha256": "7b797274eb1a9070dac81f6677931311577213dfadf4a33c3bfa37137a212cd3",
+      "bytes": 505
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-036.json",
+      "fileSha256": "2e745a825c5938849611bbef43eacb6541b99f4e3dd3ab5c35582d76ea56724f",
+      "bytes": 507
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-037.json",
+      "fileSha256": "b93b041068166e6892b9f433ecb37f8b28f476bccabc57a0fe78e18852454a69",
+      "bytes": 1176
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-038.json",
+      "fileSha256": "c02c16a7b04b048aa5cb58e3ffa4d6f2f2e5c8f4e78a7b32895ea19a78e3fd10",
+      "bytes": 1223
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-039.json",
+      "fileSha256": "7194f2cec21ff01a2ffbf361c06c95929f77271f97d730a8ec5701891afb1988",
+      "bytes": 1462
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-040.json",
+      "fileSha256": "2cd6e42fef966e470fc2864896ad07a290d3bb4c8b68a5523c82e44bc2048843",
+      "bytes": 501
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-041.json",
+      "fileSha256": "78268e7d86a05024a0ec3af9b27844ef43c4fa98ca275371bce9915b177a3214",
+      "bytes": 586
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-042.json",
+      "fileSha256": "cd58e01f4f6dbf63c91566e2eccbbe0764ec78a232eedd1a8154d211d96138ab",
+      "bytes": 582
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-043.json",
+      "fileSha256": "a7dc02db9da6aea7e826b941101d0b500b6f4e92a83617a70d1e3f322bd7aaf3",
+      "bytes": 584
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-044.json",
+      "fileSha256": "b97a6075ad0011d4cfe62566a27d57d33be0145c2931945640d055fed831c8ea",
+      "bytes": 580
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-045.json",
+      "fileSha256": "b06722f735a5e0c2cd59035ac9903ddadfe3f0b71522c8a453b61a9ec06a01e1",
+      "bytes": 710
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-046.json",
+      "fileSha256": "571a7a2ae7ef4b1167fba4a38dc2184420bdc7c1a4c7b2cd140fb1ce3801698f",
+      "bytes": 708
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-047.json",
+      "fileSha256": "2393168314370ed7d1aa96e801a147c4dafdd304ac988a0170702cf4c07733ca",
+      "bytes": 437
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-048.json",
+      "fileSha256": "3a3322ba6349b5a33de4b1f111739accd2fa1c1e4ca957539b9167474ea4f98a",
+      "bytes": 439
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-049.json",
+      "fileSha256": "64e68046ff2b27b0af02c764c1ae4eecd240a8a5fea0011e53eadd361169bea8",
+      "bytes": 437
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-050.json",
+      "fileSha256": "c688c9a97bcf5904faf0bca3dd363cd1fd3616aa156a8ea62640f33a26900133",
+      "bytes": 493
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-051.json",
+      "fileSha256": "b9bdd4d84a9d23168f15d3ba2056353e3dcd1fca85227b656a500b0a43e7c831",
+      "bytes": 508
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-052.json",
+      "fileSha256": "07b383ac3d1c0047e46639df9aa8149971fefd6c07e2bb54f12730b3cc053e94",
+      "bytes": 510
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-053.json",
+      "fileSha256": "fccc5630e97793ac0b6b166066f170a563f6e59e38739c82e2c5b4445336cc30",
+      "bytes": 1180
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-054.json",
+      "fileSha256": "3f49e650b1650251da6025988e07a24b954b4aececa7e16aa8d518d51a994e76",
+      "bytes": 1227
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-055.json",
+      "fileSha256": "177bbc9c4c2a1c757805d7cd6694875aa0ea6e512a5a4130615f22bcd28d4f5c",
+      "bytes": 1469
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-056.json",
+      "fileSha256": "fcd967fde17865bf839f78841f0aad843d8d6b67c0fd29026eac726751a2c93b",
+      "bytes": 504
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-057.json",
+      "fileSha256": "7682fed4c57f89a81c5d26a9ed03e85658a6a8136933a77c4e45de067e0b797c",
+      "bytes": 589
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-058.json",
+      "fileSha256": "3ea8eefa7874b139395f3ed6741cb3522b72d9e4f4e2036ae2c43282e896a123",
+      "bytes": 585
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-059.json",
+      "fileSha256": "45ab2c787436f25e7aaf6a5236ca5bc6040b973d782aac4f6f8174c1674fd3b5",
+      "bytes": 587
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-060.json",
+      "fileSha256": "a8d4902c597c6396a43027639ca65c44b9c7a4e123b1acefded995e1dab47b80",
+      "bytes": 583
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-061.json",
+      "fileSha256": "6d262b3bcd7c437bb4eb625ae3e06fed589863bcd76a78653bde2932b14f3620",
+      "bytes": 715
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-062.json",
+      "fileSha256": "e0e2e24ce6946b0a5ea3cd5ef512ba219cc725ed222c824382c2a8610e2d01d0",
+      "bytes": 713
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-063.json",
+      "fileSha256": "9a8f48fd5d8a22bdbf79634b0c5d2d1c6d47624d1e699be9cd4780947c533209",
+      "bytes": 440
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-064.json",
+      "fileSha256": "f21c19b0e1e4f169b50ed0f80797db6db882bd6ad99b2abe4136950785507147",
+      "bytes": 442
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-065.json",
+      "fileSha256": "8ef6580358ffddc980d5b85a6103d53e13c5de352d54c2f1046621a0f91c719e",
+      "bytes": 440
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-066.json",
+      "fileSha256": "c688c9a97bcf5904faf0bca3dd363cd1fd3616aa156a8ea62640f33a26900133",
+      "bytes": 493
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-067.json",
+      "fileSha256": "fc2f521b83ae5f6e1a4380ff870ebba012b02309318f329d5c8ab7ec1bf1f46a",
+      "bytes": 506
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-068.json",
+      "fileSha256": "c1ec0b19b35ab5c6c89f11e097702f79dc2ac6e786aedd1b2d6b76db71469e89",
+      "bytes": 508
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-069.json",
+      "fileSha256": "280dec27d23af48261e296a08007138943fcdb1229b5538820e2f265a8788b92",
+      "bytes": 1177
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-070.json",
+      "fileSha256": "ffc272cd561ae6b0b24c24d812ac0661a73f1748d979a83424f341e0d788501a",
+      "bytes": 1224
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-071.json",
+      "fileSha256": "86ba5e68f8b713c39f6b631f1936eb6b3a8290333f543fbd038b3f8d4744000d",
+      "bytes": 1464
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-072.json",
+      "fileSha256": "8af7c0fcfb46cc8e3ee9d257dc1a44ef4f7e84b24fe31f8af1db2fe55fd9164b",
+      "bytes": 502
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-073.json",
+      "fileSha256": "7d3d6eb83801c93840a8f4671500ab80641de78b383abad7b4bb337d1b77bb39",
+      "bytes": 587
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-074.json",
+      "fileSha256": "4222005aaa187ef975825779107690158c69913b7336929df12da52737835f2e",
+      "bytes": 583
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-075.json",
+      "fileSha256": "616c031064200584bb2081e8cc5e03798ad44ffeb3116317029ed74345f6eb29",
+      "bytes": 585
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-076.json",
+      "fileSha256": "70fa175feb5b7f42312eb20fe7f89316411a0c4a08c527482c9945814494a65c",
+      "bytes": 581
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-077.json",
+      "fileSha256": "d7c37735ebc4803774a1fbb25066f3e0e59596b371ca8714e5ee2fbf857cd91a",
+      "bytes": 711
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-078.json",
+      "fileSha256": "a625e221f5be0fb0d3dd8e4e0a7fbcca1f400ecf6e39f24e6489d81c3a6f2216",
+      "bytes": 709
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-079.json",
+      "fileSha256": "0f14e8bf730472f86b4efc75554e77979f4c7fe3b8bdecc58cd9d9c01af83c36",
+      "bytes": 438
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-080.json",
+      "fileSha256": "a657bb3a532b948ff76808760ce434af8d32b1c4367c777fda3a93fa5ff61788",
+      "bytes": 440
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-081.json",
+      "fileSha256": "71eaa45830a2aa95cda841780afa2a0ed51a39b19c93551a79a4a775e9237942",
+      "bytes": 438
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-082.json",
+      "fileSha256": "2d7db4abca7fc062ac40567491ff3a7b48fc125a1e6b74b28d28197b54a9e039",
+      "bytes": 441
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-083.json",
+      "fileSha256": "82db9c5cfb3847793c731e69406876810504d55b137a332bb3eb9a8f1f137331",
+      "bytes": 189826
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-084.json",
+      "fileSha256": "c84020441f52417a60f39570b07090d792a6f7970a4e5fd948b2521ed104183c",
+      "bytes": 190064
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-085.json",
+      "fileSha256": "7a2b74844c9882fb0f75398518623f7fffc49db5fc881c5ae1fe787d6941b272",
+      "bytes": 488
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-086.json",
+      "fileSha256": "70d5bd0b8da2dfda047d13ed33706d916adfcd315a8794af2def7b6b89235f57",
+      "bytes": 500
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-087.json",
+      "fileSha256": "5c9fe254dee6e75fa3396f5e463e8e877acaffd01a3d892a0a59e718ba546df8",
+      "bytes": 494
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-088.json",
+      "fileSha256": "e4e355fb196748a81d95b83ce07238434e02c596348f66b2c074068efd4e7c4f",
+      "bytes": 1142
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-089.json",
+      "fileSha256": "838548cea4edbf65e3d723b3c4afff6166c8d4ede2c8c1dc7716f12b511f0137",
+      "bytes": 1253
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-090.json",
+      "fileSha256": "2f080ce0352b62e8eb872af20a0e8f90f24c992d848e294cd0fa94b640b297d3",
+      "bytes": 1493
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-091.json",
+      "fileSha256": "3909abc145f39b14c17137e55e605a1e12b436b0b3b0c1ffe219c990df42cb5e",
+      "bytes": 502
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-092.json",
+      "fileSha256": "5dd045b98b01f1e5d3e43347c6c5f0a7a7ea71ad7781d14537d60217692435a2",
+      "bytes": 581
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-093.json",
+      "fileSha256": "b005678afd460102dcd06b96350eb10893ff7f237022fefa45c3243903443441",
+      "bytes": 583
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-094.json",
+      "fileSha256": "b1f2dce7c955fc0e663c545329df3aa7153c318b64cd5504b39b2aad054d3caf",
+      "bytes": 579
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-095.json",
+      "fileSha256": "50e0c3693ba81c1ea4288df6984ad46794423e54347dc350a101f84eb2b35f04",
+      "bytes": 581
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-096.json",
+      "fileSha256": "83ad2752527dd267c34675225e515f04ce9845957da283b129752e6dae7ecc7b",
+      "bytes": 706
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-097.json",
+      "fileSha256": "7566b2d8b77175265ea0c63b40ebbf644c9edb383ee48a7ada8312e7b8904f4c",
+      "bytes": 710
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-098.json",
+      "fileSha256": "f29ea616352e0827ad1c4dad3b4290de55ea71ef650c54df91cb62be94be8a9b",
+      "bytes": 438
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-099.json",
+      "fileSha256": "aa055a8aa7d068140b70854102ba2c2294d069d34d90ed05f29e2ab0e256526d",
+      "bytes": 440
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/process-100.json",
+      "fileSha256": "b4e6bbeb902c57206eb578bff64137febf44451a53077d6520054a1775ba48d3",
+      "bytes": 438
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-after-restoration.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-base-metadata.json",
+      "fileSha256": "af4d8ce389b2b96354d7275434bf8a5840c13964918dd9db69ebaa76e5888746",
+      "bytes": 2646
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-before-restoration.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-cache-metadata.json",
+      "fileSha256": "d36e160521e6dad47a93bc0c9b50c404cd8526a3f4a853ee3ee4529a5a776c56",
+      "bytes": 2168
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-input.json",
+      "fileSha256": "2b625fab876c138c4c7cd7fcd39ff436c0b27490f34472ad010107ca7d490cb5",
+      "bytes": 5080
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-legacy-metadata.json",
+      "fileSha256": "d23ae387d53de036d3c96eca0428b57ee11117ef64db9218509b67c647bd9ef0",
+      "bytes": 2662
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-legacy-rgba.framehash.txt",
+      "fileSha256": "95858dc190215fe5452dcdd1335b0a6f734006163952d164c7f6f288a7192b19",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-legacy-yuv420p.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-legacy.png",
+      "fileSha256": "75a4414995b7299dc96eb609c31ff4876e173d4afa864d19e30450e2f381dd39",
+      "bytes": 340781
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-restoration.json",
+      "fileSha256": "b8905b85a34c6bcd024030da48c9b11c747359c9bb2e21ec4245ebdaeb370ad9",
+      "bytes": 1751
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-restored-metadata.json",
+      "fileSha256": "33889ada243ca329edd3ae911af0b1e9d4840305800619f7145d4f11d5af86cc",
+      "bytes": 2654
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-restored-rgba.framehash.txt",
+      "fileSha256": "95858dc190215fe5452dcdd1335b0a6f734006163952d164c7f6f288a7192b19",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-restored-yuv420p.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-restored.png",
+      "fileSha256": "75a4414995b7299dc96eb609c31ff4876e173d4afa864d19e30450e2f381dd39",
+      "bytes": 340781
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/regular-stream.png",
+      "fileSha256": "75a4414995b7299dc96eb609c31ff4876e173d4afa864d19e30450e2f381dd39",
+      "bytes": 340781
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/result.json",
+      "fileSha256": "aaacd9a758083c21430002ca5568a49d62cc67e9852831b030d65b02877d7761",
+      "bytes": 21508
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/setparams-help.txt",
+      "fileSha256": "a7664a47a56dc5fe3288d39220c654baa246725f16d27baf86ca3928135ac30e",
+      "bytes": 4350
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-after-restoration.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-base-metadata.json",
+      "fileSha256": "af4d8ce389b2b96354d7275434bf8a5840c13964918dd9db69ebaa76e5888746",
+      "bytes": 2646
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-before-restoration.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-cache-metadata.json",
+      "fileSha256": "fbc271c259c7552f9e04c4e5beb3fa4ef43fca9c50a63c7a2958842b4afec115",
+      "bytes": 2174
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-input.json",
+      "fileSha256": "5945f12de04d741c391f6fa49ac6ecced56d84ee94034a9cdeabc50001679ab0",
+      "bytes": 5099
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-legacy-metadata.json",
+      "fileSha256": "3b7d436c5cd7687bd7dbfea454563cbbb95d1f2f9a17f9fe12dbe234aa20b591",
+      "bytes": 2668
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-legacy-rgba.framehash.txt",
+      "fileSha256": "95858dc190215fe5452dcdd1335b0a6f734006163952d164c7f6f288a7192b19",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-legacy-yuv420p.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-legacy.png",
+      "fileSha256": "51a76ca1e92ebb0a25b1a22b84c5cebafadc9d074109c9b72db1ba59140acb1e",
+      "bytes": 335254
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-restoration.json",
+      "fileSha256": "b8905b85a34c6bcd024030da48c9b11c747359c9bb2e21ec4245ebdaeb370ad9",
+      "bytes": 1751
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-restored-metadata.json",
+      "fileSha256": "68138964b15b58413a52f262585c0d9ecaf37706205db05bb14fb5526bd625b5",
+      "bytes": 2660
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-restored-rgba.framehash.txt",
+      "fileSha256": "95858dc190215fe5452dcdd1335b0a6f734006163952d164c7f6f288a7192b19",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-restored-yuv420p.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-restored.png",
+      "fileSha256": "51a76ca1e92ebb0a25b1a22b84c5cebafadc9d074109c9b72db1ba59140acb1e",
+      "bytes": 335254
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/short-fade-stream.png",
+      "fileSha256": "51a76ca1e92ebb0a25b1a22b84c5cebafadc9d074109c9b72db1ba59140acb1e",
+      "bytes": 335254
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-after-restoration.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-base-metadata.json",
+      "fileSha256": "af4d8ce389b2b96354d7275434bf8a5840c13964918dd9db69ebaa76e5888746",
+      "bytes": 2646
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-before-restoration.framehash.txt",
+      "fileSha256": "14f0ed6fe4bc46fcd4e3008db5b9618306f03d4a85231f93605e9432112eae0e",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-cache-metadata.json",
+      "fileSha256": "31d9ee8514e89daee0470f66b08794bc4d48f6752ad029863ade58cdf79cef22",
+      "bytes": 2176
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-input.json",
+      "fileSha256": "ccd08fa454d28af7bb1cbc55aa6a0fc1ef29c3929b091004b6365af69be1e8c9",
+      "bytes": 5113
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-legacy-metadata.json",
+      "fileSha256": "a9c1386a50a73356c7e6fe975a82e5ca32a252168c5b08f77a2d6430de4d935f",
+      "bytes": 2670
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-legacy-rgba.framehash.txt",
+      "fileSha256": "95858dc190215fe5452dcdd1335b0a6f734006163952d164c7f6f288a7192b19",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-legacy-yuv420p.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-legacy.png",
+      "fileSha256": "29472a62b6f752d2bdf9ac2efaaa88ebcb2fc5b436bc584892a228063936bc4d",
+      "bytes": 335564
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-restoration.json",
+      "fileSha256": "b8905b85a34c6bcd024030da48c9b11c747359c9bb2e21ec4245ebdaeb370ad9",
+      "bytes": 1751
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-restored-metadata.json",
+      "fileSha256": "7a9f7e931bea4fe3d07242de2db8c554b1933c0285b06d6712808c53a4777d88",
+      "bytes": 2662
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-restored-rgba.framehash.txt",
+      "fileSha256": "95858dc190215fe5452dcdd1335b0a6f734006163952d164c7f6f288a7192b19",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-restored-yuv420p.framehash.txt",
+      "fileSha256": "51bf3e30088b658abc87b65299e2d90eea5799ba6201a7cb854b5e7d6845a668",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-restored.png",
+      "fileSha256": "29472a62b6f752d2bdf9ac2efaaa88ebcb2fc5b436bc584892a228063936bc4d",
+      "bytes": 335564
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/transparent-stream.png",
+      "fileSha256": "29472a62b6f752d2bdf9ac2efaaa88ebcb2fc5b436bc584892a228063936bc4d",
+      "bytes": 335564
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-after-restoration.framehash.txt",
+      "fileSha256": "45ecb037c12663d13933439a6d6e0d9282f2bdb067717ed4d09aaa88b7eb4b00",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-base-metadata.json",
+      "fileSha256": "af4d8ce389b2b96354d7275434bf8a5840c13964918dd9db69ebaa76e5888746",
+      "bytes": 2646
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-before-restoration.framehash.txt",
+      "fileSha256": "45ecb037c12663d13933439a6d6e0d9282f2bdb067717ed4d09aaa88b7eb4b00",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-cache-metadata.json",
+      "fileSha256": "bcb0d409b2111d78621abb99a8c18cf3b6ee7439ee56da082bf349da366b4c90",
+      "bytes": 2182
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-input.json",
+      "fileSha256": "1cde562bac6602884db78527fe506b2caa3d18473bdc7e29fb2fa0dcd479d85c",
+      "bytes": 5121
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-legacy-metadata.json",
+      "fileSha256": "682b90227a43fdd8e981d84ffcb5c9169e5c9f5c9124f268e217ae466de1530e",
+      "bytes": 2676
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-legacy-rgba.framehash.txt",
+      "fileSha256": "ce19859a91583aebbb75cbd115ad7566f73277062804c436c29c0fb1ac427f91",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-legacy-yuv420p.framehash.txt",
+      "fileSha256": "55e21bfe0f1370b75374ef3398e5aa35b38b3df8ba69eb39d30fcbb5384f7aa2",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-legacy.png",
+      "fileSha256": "204082b0d54db4175e4ed058758b20898c85d533577f7fd5c06bd3006d48f53e",
+      "bytes": 341066
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-restoration.json",
+      "fileSha256": "b8905b85a34c6bcd024030da48c9b11c747359c9bb2e21ec4245ebdaeb370ad9",
+      "bytes": 1751
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-restored-metadata.json",
+      "fileSha256": "3d94479ac963f0355990bd3e79e2228d9920787c998ec573316cd95c29a17338",
+      "bytes": 2668
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-restored-rgba.framehash.txt",
+      "fileSha256": "ce19859a91583aebbb75cbd115ad7566f73277062804c436c29c0fb1ac427f91",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-restored-yuv420p.framehash.txt",
+      "fileSha256": "55e21bfe0f1370b75374ef3398e5aa35b38b3df8ba69eb39d30fcbb5384f7aa2",
+      "bytes": 101019
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-restored.png",
+      "fileSha256": "204082b0d54db4175e4ed058758b20898c85d533577f7fd5c06bd3006d48f53e",
+      "bytes": 341066
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/wrong-omission-stream.png",
+      "fileSha256": "204082b0d54db4175e4ed058758b20898c85d533577f7fd5c06bd3006d48f53e",
+      "bytes": 341066
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/advisor-qc-color-metadata-decision-v001.json",
+      "fileSha256": "a1e1758f44075c30c8a1de3b63f151262c5379bbe14d435e653180ba1fea0af0",
+      "bytes": 3670
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-metadata-observation-v001.json",
+      "fileSha256": "c1c211b04d5972c474277804115147ad2fc9b6dc6462a006171cf2fdf31d2c86",
+      "bytes": 5708
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-cache-color-diagnostic-v001/result.json",
+      "fileSha256": "34b5734fa0e20c1aa30fd0d93e2b28324c36aa5a66273a3f41e8a40199d6055c",
+      "bytes": 11602
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-only-v001-parent-closure-before-signal.json",
+      "fileSha256": "615f078c18feb13b0133faa57af244ad883eaac28b12f8c0c298ec3928f8127a",
+      "bytes": 1079
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-only-v001-parent-closure-result.json",
+      "fileSha256": "578b4653c07a597d7f7e53a1a8b406dbcab4df5f9f63443071cc952665885568",
+      "bytes": 358
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-only-v001-host-exit-observation.json",
+      "fileSha256": "56488741ba9911611825dc46f4b8eedff82310b07036ac4bdb4acc43bb2abfc4",
+      "bytes": 495
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-source-inspection-attempt-0001.log",
+      "fileSha256": "705df38494a3853a7a684923baef4db7c39d38c6392e4e10669070c3542d103b",
+      "bytes": 67
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-attempt-0001.log",
+      "fileSha256": "bb4ba1208cb5502648789542ec745daa7c1546de10452626524e6488e95525fd",
+      "bytes": 843
+    }
+  ],
+  "inheritedLosslessProof": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-verification-v001.json",
+    "fileSha256": "a420898a28cbca0e7ea1ef2ef1d25f91f3a37c403b4536fb911611685210d4dc",
+    "bytes": 45620
+  },
+  "colorFixtureBinding": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-color-equivalence-v001/result.json",
+    "fileSha256": "aaacd9a758083c21430002ca5568a49d62cc67e9852831b030d65b02877d7761",
+    "bytes": 21508
+  },
+  "actualSampleBinding": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-lossless-actual-sample-v001/result.json",
+    "fileSha256": "704652907b2b6df52574bc4999459cff7aa0b497dd5b99c99175b04c5dd275e2",
+    "bytes": 56069
+  },
+  "allPreEncodePixelsIdentical": true,
+  "allEncodedDecodedPixelsIdentical": true,
+  "allRepresentativePngsIdentical": true,
+  "allStreamedPngsIdentical": true,
+  "overlappingInputsRejected": true,
+  "metadataRestorationPreEncodeYuvUnchanged": true,
+  "allActualBt709ShortYuvAndRgbaIdentical": true,
+  "fullFixtureYuvFramesCompared": 5400,
+  "fullFixtureRgbaFramesCompared": 5400,
+  "actualMainFullYuvAndRgbaGateFrames": 65363,
+  "actualMainFullComparisonStatus": "required-in-new-QC-before-343-visibility-checks",
+  "qcCasesRequired": 343,
+  "qcSemanticsChanged": false
+}

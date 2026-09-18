@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "unseen-material-advisor-qc-color-metadata-decision-v001",
+  "decision": "continue",
+  "receivedAt": "2026-09-09T20:56:07.455763+00:00",
+  "advisorUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6a9d1cb7-b3c0-83ee-ae3a-613c9dc53f08",
+  "checkpoint": "4a48b19857365af9ffa1a2d1c1553e2fd5660aff",
+  "responseGenerationCompleted": true,
+  "responseReadCompletely": true,
+  "allowObservedColorMetadataRestoration": true,
+  "allowOneTimeIndependentCacheAdoption": true,
+  "requireFullMainYuvAndRgbaEqualityBefore343Qc": true,
+  "requireActualShortYuvRgbaAndPngEquality": true,
+  "requirePreEncodeYuvUnchangedByRestoration": true,
+  "formalContractChangeRequired": false,
+  "mainVideoSha256": "58744717f3d03a19f004fdca76a7199674a6b97a3f2f26e60d1b86b0ee8bf1cd",
+  "humanQuality": "not-evaluated",
+  "responseExcerptScope": "回答全文確認後、Codexへの返答部分を記録",
+  "responseExcerpt": "GPT_DECISION：\n条件付き続行可。\n\n024限定で、base/mainから実測したstream color metadataをSHA付き補助artifactへ束縛し、cacheからQC用符号化へ入る直前に同じ情報を復元する修正を許可する。\n値をBT.709の一般知識から作らず、今回の実媒体で観測した値だけを使用すること。\ncolor_range / color_space / color_transfer / color_primariesに限定して決め打ちせず、chroma_location・sample_aspect_ratioを含む実測stream metadataを記録し、cache経路で欠落または相違するものだけを復元対象とする。\n推測値・既定値補完は禁止。\nFFmpeg setparamsは候補として使用可。\nただし採用条件は実測同等性とする。\n\n必須検証：\nmetadata復元前後のpre-encode YUV全コマ一致\n実BT.709短尺でlegacyとcache経路の最終decoded YUV全コマ一致\n同RGBA全コマ一致\nrepresentative comparison PNG一致\nthresholdなし\n\n全編では343 QC前に、\n元graph pre-encode YUV = cache復号YUV：65363/65363\ncache復元後の最終decoded YUV = 完成本編：65363/65363\ncache復元後の最終decoded RGBA = 完成本編：65363/65363\nを必須gateとする。\n\n開始済み字幕付きcacheは、一回限りの継承を許可する。\nただし旧生成子のexit codeを親が回収していないなら「旧実行正常完了」と記録してはいけない。\n新QC execution側で独立して以下を再検証してからadmitする：\n元implementation SHA\n元job/input SHA\n実FFmpeg引数\ncache SHA\n65363 frame\n全frame YUV\nframe order\ntimestamp / 30fps対応\n元正式graphのpre-encode全frameとの一致\n\n来歴は、\n旧QC実行で生成されたcache\n→ 新QC executionが実体を独立検証して採用\n→ 新QC側で実測色情報を復元して使用\nと分離する。\n新実装がcacheを生成したように記録しない。\n観測していない旧process正常終了も補完しない。\n汎用cache契約は作らない。\n\n現時点ではFFV1/NUT保存形式やformal renderer/QC schemaの変更は不要。\nYUV平面自体は保持できているため、024限定の\n「cache bytes + 実測stream metadata」\nをQC execution evidenceとして束縛する。\nmetadata復元だけで65363全frameのYUV/RGBA同等性が成立しない場合、保存形式へのmetadata組込みやformal contract変更が必要になる場合のみ再度GPT_DECISION。\n本編MP4\n58744717f3d03a19f004fdca76a7199674a6b97a3f2f26e60d1b86b0ee8bf1cd\nは既存実行の完成物として固定し、再生成・変更しない。\n第一完成・343 QC合格・人間品質はまだ成立しない。"
+}

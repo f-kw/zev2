@@ -1,0 +1,36 @@
+{
+  "time": "2026-09-09T20:56:50.720426+00:00",
+  "parent": 32523,
+  "finishedUnreapedChild": 32535,
+  "processObservations": [
+    {
+      "argv": [
+        "ps",
+        "-p",
+        "32523,32535",
+        "-o",
+        "pid,ppid,state,etime,comm"
+      ],
+      "exitCode": 0,
+      "stdout": "  PID  PPID STAT  ELAPSED COMM\n32523  2062 Ts   01:55:50 node\n32535 32523 Z    01:55:47 <defunct>\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "ps",
+        "-p",
+        "32523",
+        "-o",
+        "command="
+      ],
+      "exitCode": 0,
+      "stdout": "node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_unseen_material_qc_only_v001.mjs qc\n",
+      "stderr": ""
+    }
+  ],
+  "intendedSignal": "SIGKILL",
+  "reason": "一時停止した旧QC親を再開せず終了し、未修正の後続工程への進行を確実に防ぐ。旧生成子の終了codeは未回収として残す。",
+  "childExitCode": null,
+  "claimOldExecutionCompletedNormally": false,
+  "decisionFile": "advisor-qc-color-metadata-decision-v001.json"
+}
