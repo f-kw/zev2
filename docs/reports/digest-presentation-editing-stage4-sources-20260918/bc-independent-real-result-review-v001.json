@@ -1,0 +1,815 @@
+{
+  "schemaVersion": "stage4-bc-independent-real-result-review-v001",
+  "speaker": "Codexの独立検証結果",
+  "createdAt": "2026-09-18T10:41:11.982497+00:00",
+  "status": "passed",
+  "scope": "本人指示のB/C改善について、既存の実媒体結果と比較証拠を読取り専用で照合。新規動画生成、RGB再計算、実装変更、検査再実行は行っていない。文書1件のみ追加。",
+  "method": [
+    "元結果、旧方式実行結果、比較記録、依頼、完成MP4、公開後PNG、描画規則57参照をSHA256とbyte数で再照合した。",
+    "新旧結果の全検査点を保存済み正規形へ射影し、比較記録と完全一致することを確認。参照候補順・重なり順・切出し・時刻・画素同値クラス・厳密距離・表示判定を含む。実画素の再計算は比較処理の既存証拠と先行ソース監査に依存する。",
+    "比較側の旧新実入力一覧は公開先への明示移動を反映した同一path・byte数・SHAで一致。全画面比較は各検査点の背景と完成画面の両方を含む。",
+    "HTTP記録の初回生成、同一完成媒体の再利用、32 byte配信、再起動状態を結果参照に結び付けた。",
+    "原本保全107参照・130 Git blobの保全記録を読取り、全一致と失敗0を確認。この独立検査で既存の4媒体全体や130 Git blobを再ハッシュしたという意味ではない。"
+  ],
+  "sourceCheckpointBeforeChanges": "efdee0aabea10b87d39203bee6f9f6e7460032d0",
+  "rows": [
+    {
+      "scenario": "caption",
+      "currentResult": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/result.json",
+        "bytes": 11041325,
+        "fileSha256": "c2dc553ca042bcd96f929d9f6589fa366d999729b015ad13a0d7ed37babde52f"
+      },
+      "comparison": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-comparison-caption-v001/comparison.json",
+        "bytes": 6050183,
+        "fileSha256": "807a7d4105bd5f75f0b7b6de66dbcf12a66345adbcc5b8ae1264a0d5ac37d771"
+      },
+      "legacyReproduction": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-before-sharing-caption-v001/reproduction.json",
+        "bytes": 17844,
+        "fileSha256": "f52f2ea6348049253008863baf383770d15ce4ea0429b4253086bc9a62fa78b7"
+      },
+      "range": {
+        "startFrame": 414,
+        "endFrameExclusive": 616
+      },
+      "frameCount": 202,
+      "candidateVideo": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/render/presentation-rendered-v002.mp4",
+        "bytes": 3921511,
+        "fileSha256": "74f5ac4df4c6c4acfc1d0bd52678b9613a8a04f81ecc0f6aa365f924b49638cc"
+      },
+      "viewSha256": "09ee0940e3597117ab69a9dbb646d08b9d7cad1af693314b9b804df0efe8ea57",
+      "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+      "drawingRulesCanonicalSha256": "e0e38e4f15a3b58dc151c8d3054a1f47c4e239639b77e1c2f021e81a96ef7778",
+      "inputReferencesPerSide": 34,
+      "exactComparisonCounts": {
+        "sampleCount": 12,
+        "logicalReferenceCount": 92,
+        "comparedCompletedRgbBytes": 9261216,
+        "comparedReferenceRgbBytes": 71002656
+      },
+      "classesCompared": 85,
+      "fullFrameComparisons": 24,
+      "fullFrameUniqueDecodes": 23,
+      "normalizedSamplesSha256": "92c3af1d69ed4db6a17750a62afb4bf0e33af49ad73f6cacff5726c6d7d727d0",
+      "nativeQcBefore": {
+        "wallClockMs": 17052.627833,
+        "childProcessCount": 50,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frame-extract": 12,
+          "completed-frame-extract": 12,
+          "completed-rgb-crop": 12,
+          "native-reference-composite": 12
+        },
+        "sourceFrameOutputs": 12,
+        "completedFrameOutputs": 12,
+        "completedRgbOutputs": 12,
+        "referenceRgbOutputs": 92,
+        "frameCountMeaning": "verified output frames; internal seek/decoder work is not inferred"
+      },
+      "nativeQcAfter": {
+        "wallClockMs": 5333.962209000005,
+        "phasesMilliseconds": {
+          "inputBinding": 257.3567500000063,
+          "frameExtraction": 693.9681249999994,
+          "nativeLayerPreparation": 1221.6410410000099,
+          "completedRgbCrop": 433.09670800001186,
+          "referenceComposition": 2017.5719589999935,
+          "rgbDistance": 251.1059130000067,
+          "evidenceWrite": 4.058000999968499,
+          "verification": 227.65604200000234,
+          "evidenceConstruction": 188.64583299998776
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 35,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 7,
+          "completed-rgb-crop": 12,
+          "native-reference-composite": 12
+        },
+        "sourceFrameOutputs": 12,
+        "completedFrameOutputs": 12,
+        "completedRgbOutputs": 12,
+        "logicalReferenceCount": 92,
+        "referenceRgbOutputs": 84,
+        "reusedReferenceRgbCount": 8,
+        "preparedLayerOutputs": 7,
+        "exactDistanceCalculations": 85,
+        "reusedExactDistances": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "nativePngPreparation": {
+        "nativeDraws": 15,
+        "bitmapReuses": 2,
+        "verifiedPairsAdded": 6,
+        "profileSha256": "2c224c5883be84ea363fc9f0e65d046a45c2f3bc075a75b4bf98fc26a4445d6c"
+      },
+      "httpInitialMilliseconds": 113844.42775,
+      "httpCompletedReuseMilliseconds": 450.0085000000108,
+      "workerElapsedMilliseconds": 111045.117292,
+      "cumulativeTimeFromWorkerStartToPreparationCompleteMilliseconds": 7491.413334,
+      "childProcessesForLayoutAndPngs": {
+        "layout-inspection": {
+          "processCount": 1,
+          "childMilliseconds": 219.4357089999994,
+          "evidenceWriteMilliseconds": 0.6163750000005166
+        },
+        "overlay-still": {
+          "processCount": 12,
+          "childMilliseconds": 13654.182749000005,
+          "evidenceWriteMilliseconds": 5.433667999997851
+        },
+        "overlay-line-mask": {
+          "processCount": 3,
+          "childMilliseconds": 3396.0330840000006,
+          "evidenceWriteMilliseconds": 1.2320830000007845
+        }
+      },
+      "fullRequestedRangeQcMilliseconds": 54076.398958000005,
+      "existingExactReplay": {
+        "mp4BytesIdentical": true,
+        "requestedRangeFrameCount": 202,
+        "decodedFrameCount": null,
+        "wallClockMilliseconds": 37912.979042
+      },
+      "audio": {
+        "sampleRate": 44100,
+        "channels": 2,
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 296940,
+        "rawDecodedSampleCount": 296960,
+        "logicalDecodedSampleCount": 296940,
+        "decodedTailSampleCount": 20,
+        "primingSkipSamples": 1024,
+        "packetPayloadSha256": "6a54559ae210165f2e1df2e2f9c4ba441c93db1c01af44b97f47ca5f7edf0608",
+        "logicalDecodedPayloadSha256": "3b824ca3ed6321544c253d32503b81649b8222fd105802fa771d38f616a666d8"
+      },
+      "background": {
+        "rangeOnly": true,
+        "fullBackgroundGenerated": false,
+        "fullQcExecuted": false,
+        "verifiedPriorBackgroundUsed": true,
+        "reuseReason": "verified-source-and-full-projection-match"
+      }
+    },
+    {
+      "scenario": "connection",
+      "currentResult": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/result.json",
+        "bytes": 23249639,
+        "fileSha256": "be63c9d5baafac2c75f34b41abac62b70bfc86545d3d7efcce85736876de3823"
+      },
+      "comparison": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-comparison-connection-v001/comparison.json",
+        "bytes": 15333189,
+        "fileSha256": "81c7e92d19d212cfe8a9cac2781a4bfbfb846c96aea1063fe844bfabc1b81ee5"
+      },
+      "legacyReproduction": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-before-sharing-connection-v001/reproduction.json",
+        "bytes": 49424,
+        "fileSha256": "ee915474f7ffa9433cf52940bcc43c2ed6818eb9c4691acd5d0a95899d6186f3"
+      },
+      "range": {
+        "startFrame": 222,
+        "endFrameExclusive": 445
+      },
+      "frameCount": 223,
+      "candidateVideo": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/presentation-rendered-v002.mp4",
+        "bytes": 5517173,
+        "fileSha256": "d5890a7c91d6481bc79b0106bcc34a50e15b28b5a23858e944da28bbc6fc8436"
+      },
+      "viewSha256": "6e48ecc7e9e03f48eac6fe843ae29503c05f8d0d23f75d939e72aa231327e5e9",
+      "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+      "drawingRulesCanonicalSha256": "e0e38e4f15a3b58dc151c8d3054a1f47c4e239639b77e1c2f021e81a96ef7778",
+      "inputReferencesPerSide": 45,
+      "exactComparisonCounts": {
+        "sampleCount": 41,
+        "logicalReferenceCount": 1051,
+        "comparedCompletedRgbBytes": 32033136,
+        "comparedReferenceRgbBytes": 821142096
+      },
+      "classesCompared": 1014,
+      "fullFrameComparisons": 82,
+      "fullFrameUniqueDecodes": 82,
+      "normalizedSamplesSha256": "bb5b62eb72c2f4a2aab6529927a26d4eeb51238e598794cc8cd102ba9278c129",
+      "nativeQcBefore": {
+        "wallClockMs": 153491.862,
+        "childProcessCount": 166,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frame-extract": 41,
+          "completed-frame-extract": 41,
+          "completed-rgb-crop": 41,
+          "native-reference-composite": 41
+        },
+        "sourceFrameOutputs": 41,
+        "completedFrameOutputs": 41,
+        "completedRgbOutputs": 41,
+        "referenceRgbOutputs": 1051,
+        "frameCountMeaning": "verified output frames; internal seek/decoder work is not inferred"
+      },
+      "nativeQcAfter": {
+        "wallClockMs": 31421.396542000002,
+        "phasesMilliseconds": {
+          "inputBinding": 273.06562499998836,
+          "frameExtraction": 1551.664959000016,
+          "nativeLayerPreparation": 6320.994084000005,
+          "completedRgbCrop": 1525.7269560000568,
+          "referenceComposition": 18743.42783500001,
+          "rgbDistance": 1874.543170000019,
+          "evidenceWrite": 13.05908599999384,
+          "verification": 773.6711249999935,
+          "evidenceConstruction": 274.81662500000675
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 102,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 16,
+          "completed-rgb-crop": 41,
+          "native-reference-composite": 41
+        },
+        "sourceFrameOutputs": 41,
+        "completedFrameOutputs": 41,
+        "completedRgbOutputs": 41,
+        "logicalReferenceCount": 1051,
+        "referenceRgbOutputs": 1014,
+        "reusedReferenceRgbCount": 37,
+        "preparedLayerOutputs": 44,
+        "exactDistanceCalculations": 1014,
+        "reusedExactDistances": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "nativePngPreparation": {
+        "nativeDraws": 40,
+        "bitmapReuses": 6,
+        "verifiedPairsAdded": 13,
+        "profileSha256": "2c224c5883be84ea363fc9f0e65d046a45c2f3bc075a75b4bf98fc26a4445d6c"
+      },
+      "httpInitialMilliseconds": 183915.271875,
+      "httpCompletedReuseMilliseconds": 436.7851250000531,
+      "workerElapsedMilliseconds": 181645.716625,
+      "cumulativeTimeFromWorkerStartToPreparationCompleteMilliseconds": 8811.106125,
+      "childProcessesForLayoutAndPngs": {
+        "layout-inspection": {
+          "processCount": 1,
+          "childMilliseconds": 216.1255000000001,
+          "evidenceWriteMilliseconds": 0.530957999999373
+        },
+        "overlay-still": {
+          "processCount": 26,
+          "childMilliseconds": 29404.296872,
+          "evidenceWriteMilliseconds": 11.053455999990547
+        },
+        "overlay-line-mask": {
+          "processCount": 14,
+          "childMilliseconds": 15852.657334999996,
+          "evidenceWriteMilliseconds": 6.157832999995662
+        }
+      },
+      "fullRequestedRangeQcMilliseconds": 75271.445792,
+      "existingExactReplay": {
+        "mp4BytesIdentical": true,
+        "requestedRangeFrameCount": 223,
+        "decodedFrameCount": null,
+        "wallClockMilliseconds": 42495.55241700001
+      },
+      "audio": {
+        "sampleRate": 44100,
+        "channels": 2,
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 327810,
+        "rawDecodedSampleCount": 328704,
+        "logicalDecodedSampleCount": 327810,
+        "decodedTailSampleCount": 894,
+        "primingSkipSamples": 1024,
+        "packetPayloadSha256": "3b86be5669a39f8f8e7dd64c2e3fb969c445721f65ea92aa525d9ab28dcd4ff1",
+        "logicalDecodedPayloadSha256": "0af355c7e3f7bda0b9bf15c9451c95895b6cf24f6d4e0494e71e676582f6ffba"
+      },
+      "background": {
+        "rangeOnly": true,
+        "fullBackgroundGenerated": false,
+        "fullQcExecuted": false,
+        "verifiedPriorBackgroundUsed": false,
+        "reuseReason": "different-full-projection"
+      }
+    }
+  ],
+  "preservationEvidence": {
+    "reference": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-preservation-v001.json",
+      "bytes": 82686,
+      "fileSha256": "dbd0c7cf9a79383cc23c299505aff1ab0190e515205814077d95f2b4f1319ab5"
+    },
+    "sectionCounts": {
+      "finalBackendReferences": 7,
+      "finalComponentReferences": 4,
+      "preservedEvidence": 7,
+      "originalEditing": 10,
+      "preservedVideos": 4,
+      "preservedRegistrations": 7,
+      "previousFailureAndAuditEvidence": 7
+    },
+    "protectedGitCounts": {
+      "priorStageTrackedInputsAndEvidence": 70,
+      "contractsAndPreexistingNonReportDocs": 59,
+      "automaticCandidateEntry": 1
+    },
+    "existingDrawingRulesFileCount": 57,
+    "approvedChangedRuleFiles": 4,
+    "originalRegistrationSetMatched": true,
+    "failures": []
+  },
+  "httpEvidence": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/http-current-audio-v001/completion.json",
+    "bytes": 120669,
+    "fileSha256": "1d5b28ce9a0a74cea0f375309d50c84ebdbe37ecdd5898400e4d73eca71763c3"
+  },
+  "timingMeaning": [
+    "初回HTTP完了は受付・2秒間隔の状態確認・登録・先頭32 byte配信確認を含む。完成媒体の再利用も同じHTTP経路の値。",
+    "描画前の準備完了時刻7491／8811msは処理開始から背景等を含む累積時間であり、PNG準備時間でも独立区間でもない。",
+    "レイアウト・PNG静止画・行マスクの時間は対応する子processの実測合計。PNG再利用コピー単体の所要時間は計測していない。",
+    "描画処理全体にQC全体が含まれ、QC全体に厳密再描画と有限参照検査が含まれる。これらを加算しない。",
+    "実媒体の距離計算再利用は両方0回。距離共有自体の実証は別の小型試験に限定する。"
+  ],
+  "limitations": [
+    "各1回の観測。時間保証や統計的benchmarkではない。",
+    "完成前の検査は元から要求範囲全体を再描画する。今回追加した旧新QC比較のための動画生成は0で、全Digest生成も0。",
+    "過去のプレビューMP4との全byte一致を合格条件にしていない。今回の旧新比較は同じ現行完成媒体を対象とする。",
+    "PNGの部分再利用が両方発生しているので、初回HTTP生成をPNG cacheが空の描画時間と呼ばない。",
+    "ブラウザー操作、人間による画質評価、正式採用、工程IV全体完成の判定を含まない。"
+  ],
+  "independentlyRehashedFileCount": 92,
+  "independentlyRehashedFiles": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/http-current-audio-v001/completion.json",
+      "bytes": 120669,
+      "fileSha256": "1d5b28ce9a0a74cea0f375309d50c84ebdbe37ecdd5898400e4d73eca71763c3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-real-preview-verification-v001.json",
+      "bytes": 77205,
+      "fileSha256": "21696da4e31f871deb6310e41fe5c86f35d21be4aaa5fd03235e5c48cf8701e1"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-comparison-caption-v001/comparison.json",
+      "bytes": 6050183,
+      "fileSha256": "807a7d4105bd5f75f0b7b6de66dbcf12a66345adbcc5b8ae1264a0d5ac37d771"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/result.json",
+      "bytes": 11041325,
+      "fileSha256": "c2dc553ca042bcd96f929d9f6589fa366d999729b015ad13a0d7ed37babde52f"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-before-sharing-caption-v001/reproduction.json",
+      "bytes": 17844,
+      "fileSha256": "f52f2ea6348049253008863baf383770d15ce4ea0429b4253086bc9a62fa78b7"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-before-sharing-caption-v001/legacy-native-qc.json",
+      "bytes": 5093681,
+      "fileSha256": "c97dbe46f4d3c35e5539991674ca87296723704616ef7f8eb17c0e47db9072bb"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-before-sharing-caption-v001/request.json",
+      "bytes": 147998,
+      "fileSha256": "be1249ed8fd17623eddc0d90edc544961cdb84144ecb3dcbb23ea52c8801d351"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_before_sharing_fixture_v001.mjs",
+      "bytes": 48920,
+      "fileSha256": "704992c891ee12685e6bb35abf535a9e2d851faead86a4ec5296cb67cc92f6b0"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_before_sharing_fixture_v001.mjs",
+      "bytes": 11520,
+      "fileSha256": "ee3b93f88c4a9ebd9ad81c0b41ae1f81d0caafe8f0337bb6c915021c6f60ee4e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/render/presentation-rendered-v002.mp4",
+      "bytes": 3921511,
+      "fileSha256": "74f5ac4df4c6c4acfc1d0bd52678b9613a8a04f81ecc0f6aa365f924b49638cc"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/render/overlays/01-70d128b99879.png",
+      "bytes": 143766,
+      "fileSha256": "7d277142ebcef5351d5e1adba58c9bb1b9426410ec78fd4d59d6b09c33c758fb"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/render/overlays/02-aca83bb4e738.png",
+      "bytes": 65565,
+      "fileSha256": "4d7772edb2189ff67af4cef12fa80b4ed474971defdbbc9405d0a62d2431a93a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/render/overlays/03-9cd9ed60c47d.png",
+      "bytes": 89754,
+      "fileSha256": "e4823c5ae9794209111e734b928e3f18697bc7e01e0be4ab7bf6edf48656fe80"
+    },
+    {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "bytes": 88501744,
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+cli@4.0.481_postcss@8.5.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@remotion/cli/remotion-cli.js",
+      "bytes": 225,
+      "fileSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/cli.mjs",
+      "bytes": 120402,
+      "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "bytes": 159972320,
+      "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8"
+    },
+    {
+      "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+      "bytes": 442864,
+      "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    {
+      "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+      "bytes": 238096,
+      "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+    },
+    {
+      "path": "/opt/homebrew/Cellar/imagemagick/7.1.2-12_1/bin/magick",
+      "bytes": 69952,
+      "fileSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs",
+      "bytes": 23254,
+      "fileSha256": "4092a3faa49aa360eed4f1b6ecaf4d743dc421d77ccc655d429b4907f5269de0"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "bytes": 5139,
+      "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_auto_effects_v001.mjs",
+      "bytes": 22194,
+      "fileSha256": "9e85733427c0cd48d40346fc8557df2f291c976ba16837c37bb7c2c116ba8ee5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+      "bytes": 56058,
+      "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_contract_v002.mjs",
+      "bytes": 4613,
+      "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_contract_v003.mjs",
+      "bytes": 32607,
+      "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_motion_v001.mjs",
+      "bytes": 7796,
+      "fileSha256": "300b9863cba5abf4f3f86d65b1e52b1aadfc10e08024a4df602db2bded376ad5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_effects_v001.mjs",
+      "bytes": 8849,
+      "fileSha256": "f15ce2adcf7dc93f029f8ed27fbf433c417ec0772356f629daa1b496696c4687"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_encoded_omission_qc_v002.mjs",
+      "bytes": 31730,
+      "fileSha256": "51d39ec8a4dc4c7acd46b9ed1194d3ddae0e425646eb1dd7521921b4d9a3aba8"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+      "bytes": 47306,
+      "fileSha256": "c8480c534fa2cd97949d5e74e829d0b4683c874cf15a2dc1f92980e0d84dd981"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_fatal_observation_v002.mjs",
+      "bytes": 12762,
+      "fileSha256": "cf95c2ba8785be681dcecc03dc4ec009d6f02b4161e3c39f7edbf431b92b6115"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_instruction_contract_v002.mjs",
+      "bytes": 60145,
+      "fileSha256": "11c80c40d4fd9cbe88bb40ed5a941e084e381b5646123edecad8f224926c3e20"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+      "bytes": 14144,
+      "fileSha256": "57e84c6636d7dd66000545bb4606a5d09e0581ad59bf787b3531852b02e5aab3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_asset_cache_v001.mjs",
+      "bytes": 4690,
+      "fileSha256": "73195d873efd26531b598547527272cf5e8e85862387e08ae0b767c5adc33518"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+      "bytes": 16014,
+      "fileSha256": "c607de4f6a9e5abdc011b9975395036833592684e71bd510d877ad41f73d37ac"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "bytes": 62164,
+      "fileSha256": "13f5778233feabd45c78c0b8bebe5ab10f0c7aba86caed0b33dc652316881e41"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs",
+      "bytes": 58086,
+      "fileSha256": "ad3020e7e7a464630b9733d5094cf62483f1917287fa627a1f850dedd62616f3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+      "bytes": 18021,
+      "fileSha256": "88e514122db173844af1cc74afb00af6dde49fd4792c6dd6ed3aba7aab98364c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_projection_v001.mjs",
+      "bytes": 19232,
+      "fileSha256": "350272ca2a0abc0082c69b302d3cee626c92aab51770aaf400e63a2526ae9bef"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_render_scope_v001.mjs",
+      "bytes": 3282,
+      "fileSha256": "fbff175a0b3397868031cf08908c490874f03297f3af286b28d09b0b2f955af3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_v001.mjs",
+      "bytes": 29560,
+      "fileSha256": "2eded3dbf718c5e006d80a9f604571fc7a86649aaca7d5d6d8eae8e92661e427"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_output_directory_v001.mjs",
+      "bytes": 2222,
+      "fileSha256": "58c31d77296a47355305931eb725323d8baf044aeb6e4e502d1878bf51812e16"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_evidence_v001.mjs",
+      "bytes": 2872,
+      "fileSha256": "2bd5522fb87e5951029b6bdeddf363d11b3f647b31712978a5e45b1117909968"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_renderer_qc_v001.mjs",
+      "bytes": 5108,
+      "fileSha256": "36794ffc1e0019783041c68944c218e1874c40430f7c45fa29f82ef4613171fb"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_v001.mjs",
+      "bytes": 6326,
+      "fileSha256": "4d4dd82b04737f691a1f6130605a69093e89f8febb7214584d88fa38fa6051d4"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "bytes": 27769,
+      "fileSha256": "ae053ad3ae1b602669a0bc22b6c0ecd05c720d1e83f70441d528bfc0fb2bd1f0"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_plan_v002.mjs",
+      "bytes": 25089,
+      "fileSha256": "3a77c7feb7005fa06d7e45a6364f76ab4bc40a8622370568cf557d5090f08b79"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+      "bytes": 4964,
+      "fileSha256": "97aa9b2cd584b2cea15f31f0e7a813cc6ba1e1a8cdbb31bdb5d675c03be7d47d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "bytes": 44594,
+      "fileSha256": "da356af0fb24b5b068a4bb0b5edb10ebc1b445f111a9ac931032a79af183f00c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "bytes": 14071,
+      "fileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+      "bytes": 6454,
+      "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "bytes": 14291,
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+      "bytes": 602,
+      "fileSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 131705,
+      "fileSha256": "b7afd3589bf97e84479b8a4723296b4317165d84a5a614fa68f49894bcb3acdf"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/pnpm-lock.yaml",
+      "bytes": 177485,
+      "fileSha256": "1bfb232ca8a693bebedc1fd84971800aad2f633b2595ed805f2078f1dad44812"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/@remotion/cli/package.json",
+      "bytes": 1985,
+      "fileSha256": "9dbefa4daf7f9c83b9131192ed176a7ecca71679a1e96d1c85219febffa0135a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/react-dom/package.json",
+      "bytes": 1353,
+      "fileSha256": "d2f29e31bd48b833e48cd7bbf41f192e8ee4ff8da249fdbe10d4ac4114b8b12e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/react/package.json",
+      "bytes": 999,
+      "fileSha256": "d4e68a5c96babb20cad1daafea8b78822eae45b341552cf5418d06a5304fa64c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/remotion/package.json",
+      "bytes": 2117,
+      "fileSha256": "965eb84ab06aa4acdbd9dc3751cf015eb13e3bd39e001779c7b5310f31e8b546"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+      "bytes": 4106788,
+      "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/OFL_LINESeedJP.txt",
+      "bytes": 4431,
+      "fileSha256": "8aa3e80c0d02c9f999756a5bb21258700edea4c727dab6169f6460245c4b6f0a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/OFL_ShipporiMincho-Bold.txt",
+      "bytes": 4399,
+      "fileSha256": "41fba056279be5f45ff9a99e44b7b53897b42732f5806d8e666e0ab49ac6bd38"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/ShipporiMincho-Bold.ttf",
+      "bytes": 18846492,
+      "fileSha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/components/TelopText.tsx",
+      "bytes": 7328,
+      "fileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/utils/telop-font.ts",
+      "bytes": 1723,
+      "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/shared/telop-glow.ts",
+      "bytes": 3060,
+      "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-line-break.ts",
+      "bytes": 8755,
+      "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-render-model.ts",
+      "bytes": 11392,
+      "fileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/text-metrics.ts",
+      "bytes": 2144,
+      "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+    },
+    {
+      "path": "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffmpeg",
+      "bytes": 429512,
+      "fileSha256": "f33afb2c1e6510138dd0dd22c25b09908c2ac55780ddd7c8e35c588f076b9493"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-comparison-connection-v001/comparison.json",
+      "bytes": 15333189,
+      "fileSha256": "81c7e92d19d212cfe8a9cac2781a4bfbfb846c96aea1063fe844bfabc1b81ee5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/result.json",
+      "bytes": 23249639,
+      "fileSha256": "be63c9d5baafac2c75f34b41abac62b70bfc86545d3d7efcce85736876de3823"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-before-sharing-connection-v001/reproduction.json",
+      "bytes": 49424,
+      "fileSha256": "ee915474f7ffa9433cf52940bcc43c2ed6818eb9c4691acd5d0a95899d6186f3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-before-sharing-connection-v001/legacy-native-qc.json",
+      "bytes": 10331038,
+      "fileSha256": "62b1d9e0a092c328bc812561fc5a5fc953c1c988d25c1d90c1975ae1480176e2"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/qc-before-sharing-connection-v001/request.json",
+      "bytes": 391841,
+      "fileSha256": "5b84fc9bf9b12352b5d7713168de268833f89bb44bc48adc4c6630321bf302b0"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/presentation-rendered-v002.mp4",
+      "bytes": 5517173,
+      "fileSha256": "d5890a7c91d6481bc79b0106bcc34a50e15b28b5a23858e944da28bbc6fc8436"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/01-245940ed77ce-normal.png",
+      "bytes": 98186,
+      "fileSha256": "dd2b8aa9b29ab95d8d37b21e8e92ae83e74c415fb73447da9e168260edfd9582"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/01-245940ed77ce-maximum.png",
+      "bytes": 117245,
+      "fileSha256": "23a4bff03759e8aa1749097d35ee7e59acc4cadf86a83116630c56b77d1e9450"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/01-245940ed77ce-middle.png",
+      "bytes": 107515,
+      "fileSha256": "d7d2f0e2755fc6087518ac41c7340e47176dcfd2589d04541d1202c2f35405c7"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/02-f33e63b13e46-normal.png",
+      "bytes": 108877,
+      "fileSha256": "af091c6f7b36cd9851551e45589021f54ed53c5e2444a01f4e5bcfff1cf4ae1f"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/02-f33e63b13e46-maximum.png",
+      "bytes": 131512,
+      "fileSha256": "7df7ad00b86c3c0ece1cbcc22ad2ffe09b560d00dc299eaa7774f8c8939090d5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/02-f33e63b13e46-middle.png",
+      "bytes": 121383,
+      "fileSha256": "1e01fc1538ae0230c26008e50ec28e67bd281eecb1cf799bc652c27e1b18a929"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/03-e6df788e576d-stable.png",
+      "bytes": 95104,
+      "fileSha256": "5dca655e0adea5738de9caf7dd40c5da2a4cb1fe67f8b8d4b9ec69c3e09d8b21"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/03-e6df788e576d-left-12.png",
+      "bytes": 95044,
+      "fileSha256": "991d11f14a1d9cadcb9934e804b674c329937c919ac7dcbc968a364550d49296"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/03-e6df788e576d-left-4.png",
+      "bytes": 95111,
+      "fileSha256": "b0891e627c949122a19d13eed05c1978658752e7effefef864f9636d43931823"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/03-e6df788e576d-left-8.png",
+      "bytes": 95133,
+      "fileSha256": "d48c5da686d94289be07a7b6efce24ca4964c4b67bb1e4759140cd6633d5cabf"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/03-e6df788e576d-right-12.png",
+      "bytes": 95091,
+      "fileSha256": "38662731732ee06fb3d9213564ac3b2c926f78c6378c0985c02f368e1533f651"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/03-e6df788e576d-right-4.png",
+      "bytes": 95071,
+      "fileSha256": "e585fdf025792b3bb6c93db4dcced97170829ae7ffe131ed70eb5a8d7108095a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/03-e6df788e576d-right-8.png",
+      "bytes": 95064,
+      "fileSha256": "3fac5c21532e4184882a9f3a4d805379ac1228219d77e5b3a38b7b55902f817e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/render/overlays/04-70d128b99879.png",
+      "bytes": 143766,
+      "fileSha256": "7d277142ebcef5351d5e1adba58c9bb1b9426410ec78fd4d59d6b09c33c758fb"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-preservation-v001.json",
+      "bytes": 82686,
+      "fileSha256": "dbd0c7cf9a79383cc23c299505aff1ab0190e515205814077d95f2b4f1319ab5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-independent-comparison-review-v001.json",
+      "bytes": 10797,
+      "fileSha256": "397d6ba42bd63dab0936efc6a26c3dba05b0c138e082704b9bfd23b9d5765aac"
+    }
+  ],
+  "findings": []
+}

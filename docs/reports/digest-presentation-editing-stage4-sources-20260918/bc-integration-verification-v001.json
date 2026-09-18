@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "stage4-bc-integration-regression-v001",
+  "speaker": "Codexの検証結果",
+  "createdAt": "2026-09-18T10:09:19.148Z",
+  "status": "passed-after-runner-corrections",
+  "uniquePassedTests": 23,
+  "coverage": [
+    {
+      "group": "範囲合成・背景音声時計・既存画像再利用・編集job",
+      "total": 19,
+      "initialPassed": 18,
+      "finalRemainingPassed": 1,
+      "first": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-integration-regression-v001.tap",
+        "bytes": 5722,
+        "fileSha256": "e133ae259d58e32d019ac25dc6829539e5dde39062778e37a64fa44daa55a058"
+      },
+      "remaining": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-job-retry-regression-v002.tap",
+        "bytes": 1736,
+        "fileSha256": "f2d7dad5a8d648e0af611af19ab13fe5585b151079024f81c7f7aec8a739aab1"
+      }
+    },
+    {
+      "group": "既存の子process観測と描画adapter配線",
+      "passed": 4,
+      "skippedUnrelatedTests": 16,
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v003.tap",
+        "bytes": 5317,
+        "fileSha256": "8582ae1348fa36ed998b1d523b50694d0cbb1932782aa442321b58a7e1a93617"
+      }
+    }
+  ],
+  "staticVerification": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-integration-static-v001.json",
+    "bytes": 1042,
+    "fileSha256": "a44bdb391f44de2c6502edee6d3e4b0fa804ca9d54b737d12aa5d7779056c0b5"
+  },
+  "setupHistory": [
+    {
+      "attempt": "bc-process-observation-regression-v001",
+      "result": "検査読込み前にTypeScript拡張子をNode単独では扱えず停止",
+      "change": "既存固定TSX CLIを用いる起動形へ訂正",
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v001.tap",
+        "bytes": 2651,
+        "fileSha256": "73aaef947c87375c530cdc2c2af0afcedfb198b547c03bed1faffffcb7ff33e8"
+      }
+    },
+    {
+      "attempt": "bc-process-observation-regression-v002",
+      "result": "sandboxが固定TSXのローカルIPCをEPERMで拒否",
+      "change": "同じコマンドを通常のrequire_escalated許可経路で実行して4件成功",
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v002.stderr",
+        "bytes": 936,
+        "fileSha256": "2696989276e8f09432fb0066a24a8ca0d12799d3275e4562471543f7a7f35913"
+      }
+    },
+    {
+      "attempt": "bc-integration-regression-v001",
+      "result": "sandbox内の保存後再試行一件が実書体の物理確認未成立で拒否。残り18件成功",
+      "change": "同じ未変更sourceで該当一件だけ通常の許可経路から実行し成功",
+      "limit": "内側の検査rootは既存test終了処理で削除されているため、内側stderrによる原因の独立確定は行っていない。TAPは保持した。",
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-integration-regression-v001.tap",
+        "bytes": 5722,
+        "fileSha256": "e133ae259d58e32d019ac25dc6829539e5dde39062778e37a64fa44daa55a058"
+      }
+    }
+  ],
+  "sourceChangesForTheseCorrections": 0,
+  "allEvidence": {
+    "bc-integration-static-v001.json": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-integration-static-v001.json",
+      "bytes": 1042,
+      "fileSha256": "a44bdb391f44de2c6502edee6d3e4b0fa804ca9d54b737d12aa5d7779056c0b5"
+    },
+    "bc-integration-regression-v001.tap": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-integration-regression-v001.tap",
+      "bytes": 5722,
+      "fileSha256": "e133ae259d58e32d019ac25dc6829539e5dde39062778e37a64fa44daa55a058"
+    },
+    "bc-integration-regression-v001.stderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-integration-regression-v001.stderr",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bc-job-retry-regression-v002.tap": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-job-retry-regression-v002.tap",
+      "bytes": 1736,
+      "fileSha256": "f2d7dad5a8d648e0af611af19ab13fe5585b151079024f81c7f7aec8a739aab1"
+    },
+    "bc-job-retry-regression-v002.stderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-job-retry-regression-v002.stderr",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bc-process-observation-regression-v001.tap": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v001.tap",
+      "bytes": 2651,
+      "fileSha256": "73aaef947c87375c530cdc2c2af0afcedfb198b547c03bed1faffffcb7ff33e8"
+    },
+    "bc-process-observation-regression-v001.stderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v001.stderr",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bc-process-observation-regression-v002.tap": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v002.tap",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bc-process-observation-regression-v002.stderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v002.stderr",
+      "bytes": 936,
+      "fileSha256": "2696989276e8f09432fb0066a24a8ca0d12799d3275e4562471543f7a7f35913"
+    },
+    "bc-process-observation-regression-v003.tap": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v003.tap",
+      "bytes": 5317,
+      "fileSha256": "8582ae1348fa36ed998b1d523b50694d0cbb1932782aa442321b58a7e1a93617"
+    },
+    "bc-process-observation-regression-v003.stderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v003.stderr",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "limits": [
+    "実ブラウザー受入ではない。",
+    "検証済み全編と旧周辺媒体は再生成していない。",
+    "無関係な旧正式renderer本走試験は名前filterで実行対象外とした。"
+  ]
+}

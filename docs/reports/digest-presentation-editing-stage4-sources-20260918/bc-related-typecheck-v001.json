@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "stage4-bc-related-typecheck-v001",
+  "speaker": "Codexの検証結果",
+  "createdAt": "2026-09-18T10:17:37.243018+00:00",
+  "status": "passed",
+  "scope": "既存のRemotion合成・表示関連型を変更せず、描画側の型整合を確認",
+  "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node runner/node_modules/typescript/bin/tsc -p runner/tsconfig.remotion.json",
+  "exitCode": 0,
+  "setupFailure": {
+    "attempt": "v001",
+    "exitCode": 1,
+    "cause": "root直下に公開されていないTypeScript実行pathを指定したため、型検査前に失敗",
+    "correction": "現存するrunner用の導入済みTypeScriptリンクを確認して指定。依存追加とsource変更は0"
+  },
+  "evidence": [
+    {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-remotion-typecheck-v001.stdout",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-remotion-typecheck-v001.stderr",
+      "bytes": 511,
+      "fileSha256": "c8a411e848f7d5ae0e5f48520cbdb61dd25f282e8406a6977df1e6a81facdc03"
+    },
+    {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-remotion-typecheck-v002.stdout",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-remotion-typecheck-v002.stderr",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

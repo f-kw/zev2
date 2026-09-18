@@ -1,0 +1,116 @@
+TAP version 13
+# Subtest: 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+not ok 1 - 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+  ---
+  duration_ms: 1134.276792
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:92:1'
+  failureType: 'testCodeFailure'
+  error: 'この表現の実際の書体・表示領域を確認できませんでした'
+  code: 'EDITING_APPLICABILITY_UNVERIFIED'
+  name: 'TypeError'
+  stack: |-
+    demand (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_state_v001.mjs:22:34)
+    saveEditingOverrideV001 (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_state_v001.mjs:281:3)
+    async TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:97:19)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+ok 2 - 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+  ---
+  duration_ms: 457.255583
+  ...
+# Subtest: 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+ok 3 - 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+  ---
+  duration_ms: 806.308041
+  ...
+# Subtest: 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+ok 4 - 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+  ---
+  duration_ms: 285.522416
+  ...
+# Subtest: 生成結果と描画証拠も検証cacheで改変を見逃さない
+ok 5 - 生成結果と描画証拠も検証cacheで改変を見逃さない
+  ---
+  duration_ms: 486.473667
+  ...
+# Subtest: service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+ok 6 - service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+  ---
+  duration_ms: 339.527208
+  ...
+# Subtest: native cache requires two independent equal draws, survives another process adapter and binds all props and rules
+ok 7 - native cache requires two independent equal draws, survives another process adapter and binds all props and rules
+  ---
+  duration_ms: 582.954709
+  ...
+# Subtest: native cache refuses damaged native bytes and unignored paths instead of accepting a saved pass
+ok 8 - native cache refuses damaged native bytes and unignored paths instead of accepting a saved pass
+  ---
+  duration_ms: 402.390916
+  ...
+# Subtest: disagreeing independent native draws never enter the reusable set
+ok 9 - disagreeing independent native draws never enter the reusable set
+  ---
+  duration_ms: 301.386333
+  ...
+# Subtest: caption-only edit reuses the SHA-bound full background and verifies exact range PCM/AAC clocks
+ok 10 - caption-only edit reuses the SHA-bound full background and verifies exact range PCM/AAC clocks
+  ---
+  duration_ms: 1121.259708
+  ...
+# Subtest: partial Soft fade, insertion-only range, insertion middle and logical tail equal full-clock decoded bytes
+ok 11 - partial Soft fade, insertion-only range, insertion middle and logical tail equal full-clock decoded bytes
+  ---
+  duration_ms: 2797.891458
+  ...
+# Subtest: same-duration Black-to-Soft refuses prior reuse and creates only the required new background range
+ok 12 - same-duration Black-to-Soft refuses prior reuse and creates only the required new background range
+  ---
+  duration_ms: 1358.973666
+  ...
+# Subtest: range checker rejects real changed PCM while source and every range video frame remain unchanged
+ok 13 - range checker rejects real changed PCM while source and every range video frame remain unchanged
+  ---
+  duration_ms: 109.964
+  ...
+# Subtest: invalid local ranges cannot acquire output directories or be passed as full-clock plans
+ok 14 - invalid local ranges cannot acquire output directories or be passed as full-clock plans
+  ---
+  duration_ms: 785.358083
+  ...
+# Subtest: a saved range can be reused only when its full-clock coverage includes the new range
+ok 15 - a saved range can be reused only when its full-clock coverage includes the new range
+  ---
+  duration_ms: 1288.650041
+  ...
+# Subtest: saved full reuse validates pixel/PCM proof, exact coverage and actual AAC instead of trusting saved status
+ok 16 - saved full reuse validates pixel/PCM proof, exact coverage and actual AAC instead of trusting saved status
+  ---
+  duration_ms: 633.309667
+  ...
+# Subtest: saved background reuse rejects failed, missing, mismatched and hashless verification evidence
+ok 17 - saved background reuse rejects failed, missing, mismatched and hashless verification evidence
+  ---
+  duration_ms: 370.143709
+  ...
+# Subtest: saved reuse rejects substituted AAC even when its file SHA and logical sample duration are updated correctly
+ok 18 - saved reuse rejects substituted AAC even when its file SHA and logical sample duration are updated correctly
+  ---
+  duration_ms: 131.6055
+  ...
+# Subtest: range compositing matches every precompression full-program frame through finite state and fade cuts
+ok 19 - range compositing matches every precompression full-program frame through finite state and fade cuts
+  ---
+  duration_ms: 1298.79825
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 18
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 15044.678791

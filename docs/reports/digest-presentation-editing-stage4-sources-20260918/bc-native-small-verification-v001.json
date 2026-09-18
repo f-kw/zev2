@@ -1,0 +1,574 @@
+{
+  "schemaVersion": "presentation-editing-native-qc-small-verification-v001",
+  "author": "Codex",
+  "status": "passed",
+  "startingCommit": "efdee0aa",
+  "finalCommit": null,
+  "finalSourceIdentity": "worktree file SHA-256 values below; no final commit is claimed",
+  "scope": "Approved stage IV B/C small-media equivalence and rejection tests; A unchanged; real preview generation excluded",
+  "implementation": [
+    {
+      "path": "evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "fileSha256": "13f5778233feabd45c78c0b8bebe5ab10f0c7aba86caed0b33dc652316881e41"
+    },
+    {
+      "path": "evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+      "fileSha256": "57e84c6636d7dd66000545bb4606a5d09e0581ad59bf787b3531852b02e5aab3"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+      "fileSha256": "97aa9b2cd584b2cea15f31f0e7a813cc6ba1e1a8cdbb31bdb5d675c03be7d47d"
+    },
+    {
+      "path": "evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+      "fileSha256": "88e514122db173844af1cc74afb00af6dde49fd4792c6dd6ed3aba7aab98364c"
+    },
+    {
+      "path": "evals/clip_composition/presentation_orchestration_physical_clock_probe_v001.mjs",
+      "fileSha256": "1a0a2ee0ec591668e4ab1f29d4b2a6134a0a7379a97220fc160b1d17ce8f0b44"
+    },
+    {
+      "path": "evals/clip_composition/presentation_orchestration_soft_overlay_probe_v001.mjs",
+      "fileSha256": "e22f1e91456fd880f3d28a719c49402bf298b74370ad865e48c389505cb6818a"
+    }
+  ],
+  "runs": [
+    {
+      "id": "bc-native-first-v001",
+      "tap": {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-native-first-v001.tap",
+        "fileSha256": "aaca83e26dd587f8d471c9d1e2ade128ebee1eb2afeea5451d0e4205acb47ddb",
+        "bytes": 18315
+      },
+      "originalPath": "/private/tmp/zev-stage4-editing-20260918/bc-native-first-v001.tap",
+      "tests": 75,
+      "passed": 75,
+      "failed": 0,
+      "elapsedMilliseconds": 2334.589333,
+      "stderr": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/bc-native-first-v001.stderr",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "id": "bc-native-boundaries-v002",
+      "tap": {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-native-boundaries-v002.tap",
+        "fileSha256": "e7315886b28e5c7a2ce09ddd09aba125c2fa216370ba985d28c0d47f05bf90c3",
+        "bytes": 5004
+      },
+      "originalPath": "/private/tmp/zev-stage4-editing-20260918/bc-native-boundaries-v002.tap",
+      "tests": 20,
+      "passed": 20,
+      "failed": 0,
+      "elapsedMilliseconds": 2605.030458,
+      "stderr": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/bc-native-boundaries-v002.stderr",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "id": "bc-native-faults-v003",
+      "tap": {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-native-faults-v003.tap",
+        "fileSha256": "4d19abaeea65b8ee4e6ab47830852349e24ea75677380cf4a326e3998d36cbbb",
+        "bytes": 11857
+      },
+      "originalPath": "/private/tmp/zev-stage4-editing-20260918/bc-native-faults-v003.tap",
+      "tests": 48,
+      "passed": 48,
+      "failed": 0,
+      "elapsedMilliseconds": 2696.354166,
+      "stderr": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/bc-native-faults-v003.stderr",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "uniqueTests": {
+    "count": 89,
+    "passed": 89,
+    "failed": 0,
+    "rule": "Adopt the latest successful recorded run for each test source; do not add repeated test executions",
+    "groups": [
+      {
+        "path": "evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs",
+        "run": "bc-native-faults-v003",
+        "fileSha256": "9272b64a189e373ff1d9c528a0944008818f49bd708b10d8040ce66366fdc90f",
+        "tests": [
+          {
+            "ordinal": 1,
+            "name": "production drawing rejects missing and standalone diagnostic QC methods before output or child processes"
+          },
+          {
+            "ordinal": 2,
+            "name": "diagnostic completed-frame QC also requires an explicitly selected method before any work"
+          },
+          {
+            "ordinal": 3,
+            "name": "public combined QC entry rejects an unsupported frame rate before every media child without fallback"
+          },
+          {
+            "ordinal": 4,
+            "name": "public combined QC entry rejects absent, relative or changed normal-plan references before every media child"
+          },
+          {
+            "ordinal": 5,
+            "name": "production evaluator accepts complete combined evidence with valid application, layout and media inputs"
+          },
+          {
+            "ordinal": 6,
+            "name": "production final QC rejects old pixel-count and valid native-only evidence without the new global proof"
+          },
+          {
+            "ordinal": 7,
+            "name": "production evaluator rejects missing global evidence or a missing whole-video proof"
+          },
+          {
+            "ordinal": 8,
+            "name": "production evaluator rejects a missing or substituted current completed-video path or hash"
+          },
+          {
+            "ordinal": 9,
+            "name": "production evaluator rejects whole-video corruption even when native state observations pass"
+          },
+          {
+            "ordinal": 10,
+            "name": "production evaluator rejects an omitted native caption even when whole-video equality passes"
+          },
+          {
+            "ordinal": 11,
+            "name": "production evaluator rejects detached finite-state evidence and a mixed comparison basis"
+          },
+          {
+            "ordinal": 12,
+            "name": "production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements"
+          },
+          {
+            "ordinal": 13,
+            "name": "combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs"
+          },
+          {
+            "ordinal": 14,
+            "name": "combined proof rejects missing whole-video evidence despite cached pass flags"
+          },
+          {
+            "ordinal": 15,
+            "name": "combined proof rejects mixing individually valid observations from different completed videos"
+          },
+          {
+            "ordinal": 16,
+            "name": "combined proof requires the current completed-video path and hash supplied by its caller"
+          },
+          {
+            "ordinal": 17,
+            "name": "combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain"
+          },
+          {
+            "ordinal": 18,
+            "name": "combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing"
+          },
+          {
+            "ordinal": 19,
+            "name": "all decoded frame hashes retain order and exact rational timestamps"
+          },
+          {
+            "ordinal": 20,
+            "name": "frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps"
+          },
+          {
+            "ordinal": 21,
+            "name": "audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS"
+          },
+          {
+            "ordinal": 22,
+            "name": "audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks"
+          },
+          {
+            "ordinal": 23,
+            "name": "byte equality and full decoded equality are independently valid exact gates"
+          },
+          {
+            "ordinal": 24,
+            "name": "one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests"
+          },
+          {
+            "ordinal": 25,
+            "name": "a cached pass cannot replace complete observations, stable input bindings or original encoder arguments"
+          },
+          {
+            "ordinal": 26,
+            "name": "byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison"
+          },
+          {
+            "ordinal": 27,
+            "name": "mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames"
+          },
+          {
+            "ordinal": 28,
+            "name": "mock I/O compares every decoded frame and audio packet when container bytes differ"
+          },
+          {
+            "ordinal": 29,
+            "name": "mock I/O preserves exact failure for an unknown one-pixel change"
+          },
+          {
+            "ordinal": 30,
+            "name": "mock I/O detects inputs changing during encode and rejects a missing production PNG before any child"
+          },
+          {
+            "ordinal": 31,
+            "name": "pulse replay binds every production PNG to its exact native state and order"
+          },
+          {
+            "ordinal": 32,
+            "name": "bounce replay binds every production PNG to its exact native state and order"
+          },
+          {
+            "ordinal": 33,
+            "name": "shake replay binds every production PNG to its exact native state and order"
+          },
+          {
+            "ordinal": 34,
+            "name": "current completed-file identity is mandatory and rejects a stale pass for another same-format video"
+          },
+          {
+            "ordinal": 35,
+            "name": "raw evidence, all observed commands, original stdout and artifact correspondence are mandatory"
+          },
+          {
+            "ordinal": 36,
+            "name": "parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes"
+          },
+          {
+            "ordinal": 37,
+            "name": "sample/display aspect, color meaning and display side data must match despite identical pixel hashes"
+          },
+          {
+            "ordinal": 38,
+            "name": "bounce native QC rejects clamping, unbound images, missing states and invalid static layouts"
+          },
+          {
+            "ordinal": 39,
+            "name": "bounce collision checks follow the moving state interval beyond the disjoint stable box"
+          },
+          {
+            "ordinal": 40,
+            "name": "shake native QC rejects clamping, unbound images, missing states and invalid static layouts"
+          },
+          {
+            "ordinal": 41,
+            "name": "shake collision checks follow the moving state interval beyond the disjoint stable box"
+          }
+        ]
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_frame_execution_v001.test.mjs",
+        "run": "bc-native-faults-v003",
+        "fileSha256": "a3e93d1382c80a78ccab3f82194a669b2c6445afdee0580e851674ddde37c538",
+        "tests": [
+          {
+            "ordinal": 42,
+            "name": "selected frames retain global/local clocks and reject duplicate local clocks or unsorted media requests"
+          },
+          {
+            "ordinal": 43,
+            "name": "an exited extraction cannot pass with missing or extra selected outputs"
+          },
+          {
+            "ordinal": 44,
+            "name": "an empty caption scope produces no extracted frame or prepared layer"
+          },
+          {
+            "ordinal": 45,
+            "name": "batch extraction matches original single-frame RGB for H264 and FFV1, including second-boundary and range offsets"
+          },
+          {
+            "ordinal": 46,
+            "name": "prepared alpha and shared prefixes retain all reference pixels, classes and strict decisions"
+          },
+          {
+            "ordinal": 47,
+            "name": "file-based exact distances match the pure classifier, reuse equal byte pairs and reject changed files"
+          },
+          {
+            "ordinal": 48,
+            "name": "process timing separates child completion from evidence write on success and failure"
+          }
+        ]
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_frame_qc_preparation_v001.test.mjs",
+        "run": "bc-native-first-v001",
+        "fileSha256": "90359d5e0789d915cc8d2ed7bc3c2c08328cdb20cbe790d82812c3882209c123",
+        "tests": [
+          {
+            "ordinal": 48,
+            "name": "diagnostic alternatives retain the saved decisions and distinguish partial-color overpaint, plate loss and absent scale"
+          },
+          {
+            "ordinal": 49,
+            "name": "an altered current plan cannot nominate its own expected reference"
+          },
+          {
+            "ordinal": 50,
+            "name": "unsupported timelines and positions require an explicit encoded oracle, with no fast fallback"
+          },
+          {
+            "ordinal": 51,
+            "name": "reference preparation binds source bytes, renders diagnostic states twice and reuses only the identical normal state"
+          },
+          {
+            "ordinal": 52,
+            "name": "changed baseline bytes are rejected before any diagnostic draw"
+          },
+          {
+            "ordinal": 53,
+            "name": "a native adapter that mutates the expected properties is rejected"
+          },
+          {
+            "ordinal": 54,
+            "name": "changed production PNG bytes cannot be treated as normal-state reuse"
+          },
+          {
+            "ordinal": 55,
+            "name": "diagnostic PNG modification during inspection is rejected before preparation succeeds"
+          },
+          {
+            "ordinal": 56,
+            "name": "saved expected plan modification during drawing is rejected before preparation succeeds"
+          },
+          {
+            "ordinal": 57,
+            "name": "Pulse evidence cannot disappear from records while the fixed plan still requires it"
+          },
+          {
+            "ordinal": 58,
+            "name": "ordinary records cannot acquire an unrequested Pulse state array"
+          },
+          {
+            "ordinal": 59,
+            "name": "bounce preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing"
+          },
+          {
+            "ordinal": 60,
+            "name": "bounce preparation rejects omitted states and altered production bytes before drawing"
+          },
+          {
+            "ordinal": 61,
+            "name": "shake preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing"
+          },
+          {
+            "ordinal": 62,
+            "name": "shake preparation rejects omitted states and altered production bytes before drawing"
+          },
+          {
+            "ordinal": 63,
+            "name": "ordinary records cannot acquire an unrequested motion state array"
+          }
+        ]
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_frame_qc_v001.test.mjs",
+        "run": "bc-native-first-v001",
+        "fileSha256": "87cd9deb433989b44a1654392fbf189fff590e304dd664ba740f62b86ed67642",
+        "tests": [
+          {
+            "ordinal": 64,
+            "name": "the fixed recipe includes every caption and all three Pulse observations without caller-selected samples"
+          },
+          {
+            "ordinal": 65,
+            "name": "mandatory Color/Panel/Normal references and their drawing conditions cannot be silently omitted"
+          },
+          {
+            "ordinal": 66,
+            "name": "a partial selection that covers the whole caption still gets the resolver-required duplicate alternative"
+          },
+          {
+            "ordinal": 67,
+            "name": "foreign references occupy the target clock and candidate bounds, not the inactive caption clock or corrupted frame bounds"
+          },
+          {
+            "ordinal": 68,
+            "name": "simultaneous captions retain their own fades and receive a real pair-order alternative"
+          },
+          {
+            "ordinal": 69,
+            "name": "exact pixel classes permit a Normal alias but reject target absence and an unequal-image tie"
+          },
+          {
+            "ordinal": 70,
+            "name": "whole-caption overpaint and foreign pixels need adversarial references even without empirical thresholds"
+          },
+          {
+            "ordinal": 71,
+            "name": "the pure validator accepts complete synthetic evidence and independently rejects material evidence tampering"
+          },
+          {
+            "ordinal": 72,
+            "name": "bounce native recipe covers every entrance frame and stable visibility with every wrong state as an adversary"
+          },
+          {
+            "ordinal": 73,
+            "name": "bounce rejects a missing, reordered or mixed native state set and missing entrance/stable observations"
+          },
+          {
+            "ordinal": 74,
+            "name": "shake native recipe covers every entrance frame and stable visibility with every wrong state as an adversary"
+          },
+          {
+            "ordinal": 75,
+            "name": "shake rejects a missing, reordered or mixed native state set and missing entrance/stable observations"
+          }
+        ]
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_renderer_v001.test.mjs",
+        "run": "bc-native-boundaries-v002",
+        "fileSha256": "602389696c8ca2d28698bcb56581239aa1b7f1331b03e83865c3b765b819a483",
+        "tests": [
+          {
+            "ordinal": 8,
+            "name": "range scopes retain complete caption clocks, original bindings and exact playback samples"
+          },
+          {
+            "ordinal": 9,
+            "name": "mid-Pulse preview uses the full finite phase and samples local media without restarting the fade"
+          },
+          {
+            "ordinal": 10,
+            "name": "preview starting inside a motion caption preserves each remaining state and has range-only diagnostics"
+          },
+          {
+            "ordinal": 11,
+            "name": "a connection-only black range has no fabricated caption or native reference"
+          },
+          {
+            "ordinal": 12,
+            "name": "native preparation binds the original Normal file and draws diagnostic Normal on the projected clock"
+          },
+          {
+            "ordinal": 13,
+            "name": "native recipe reconstructs projected Pulse and motion samples from durable proof"
+          },
+          {
+            "ordinal": 14,
+            "name": "range native evidence cannot pass as full coverage or move a sampled frame to another media origin"
+          },
+          {
+            "ordinal": 15,
+            "name": "durable native evidence verifies independent original-file and display-plan hashes and rejects clock substitutions"
+          },
+          {
+            "ordinal": 16,
+            "name": "renderer rejects fabricated views, old-clock plans, duplicate timelines and missing combined QC before drawing"
+          },
+          {
+            "ordinal": 17,
+            "name": "renderer rejects changed original files and a background from another projection before media children"
+          },
+          {
+            "ordinal": 18,
+            "name": "compositor maps independent AAC after every finite PNG and overlays only on completed background"
+          },
+          {
+            "ordinal": 19,
+            "name": "exact replay binds independent AAC before/after and repeats the production input mapping"
+          },
+          {
+            "ordinal": 20,
+            "name": "independent AAC mutation during exact replay fails even when output video bytes match"
+          }
+        ]
+      }
+    ]
+  },
+  "pixelEquivalence": {
+    "run": "bc-native-faults-v003",
+    "testOrdinal": 46,
+    "testName": "prepared alpha and shared prefixes retain all reference pixels, classes and strict decisions",
+    "oldComputationScope": "The frozen pre-improvement compositor exists only in the test source as a comparison oracle",
+    "productionFallbacks": 0,
+    "samples": 17,
+    "logicalReferencePixelComparisons": 153,
+    "physicalReferenceOutputs": 43,
+    "exactDistanceCalculations": 413,
+    "reusedExactDistances": 757,
+    "fixture": {
+      "width": 64,
+      "height": 48,
+      "sourceAlphaBytes": "every integer from 0 to 255",
+      "fadeNumerators": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "fadeDenominator": 4,
+      "captionDurations": [
+        7,
+        20
+      ]
+    },
+    "comparison": [
+      "Read old and new reference RGB files and compare every byte for every logical reference",
+      "Use every old reference RGB as the completed observation; compare complete class, distance, reference, and visibility results",
+      "Compare both the new reference bytes with the unchanged pure classifier and the new streaming file classifier against the frozen old compositor",
+      "Include different actual background bytes, different crop, omitted target, foreign target, two-layer order swap, repeated image with same/different phase and distinct PNG bindings with identical bytes"
+    ],
+    "countsMeaning": "413 calculations plus 757 byte-verified reuses belong to all synthetic completed/reference combinations; 153 is the logical reference pixel-comparison count"
+  },
+  "frameExtraction": {
+    "codecs": [
+      "H264/libx264",
+      "FFV1"
+    ],
+    "fixtureFrameCount": 90,
+    "selectedFrames": [
+      [
+        0,
+        1,
+        29,
+        30,
+        31,
+        57,
+        89
+      ],
+      [
+        31,
+        57,
+        89
+      ]
+    ],
+    "comparisons": 20,
+    "comparison": "Each selected decoded RGB equals the pre-improvement single-frame seek/extraction result"
+  },
+  "rejectionCoverage": [
+    "Missing and extra extraction outputs, including extra output in an empty caption scope",
+    "Duplicate, conflicting or reversed global/media frame mapping; zero-length render range",
+    "Adjacent selected frame substituted into extraction command while recomputing its canonical hash",
+    "Same-count decoded-frame order swap and timestamp shift with recomputed execution digests",
+    "Changed alpha/source bindings, missing preparation process, false reference sharing, detached RGB or output artifact chain",
+    "Omitted caption, wrong native state/order, stale input/media identity, RGB file mutation, unequal-image tie"
+  ],
+  "limits": [
+    "Synthetic pixel equality and contract tests do not establish human visual/audio quality or UI acceptance",
+    "Per-test temporary PNG/RGB/media fixtures were removed by the test teardown; saved TAP and source remain, and no raw-fixture retention is claimed",
+    "This record was assembled from existing successful runs without rerunning the tests",
+    "Frame count checks alone do not infer image timestamps; command binding, global/local recipe clocks and old/new decoded-byte comparison provide separate checks"
+  ],
+  "setup": {
+    "node": "v20.19.6",
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "NODE_OPTIONS": "unset for every test invocation",
+    "ffmpeg": "8.0.1",
+    "ffmpegPath": "/opt/homebrew/bin/ffmpeg",
+    "newDependencies": 0,
+    "syntaxChecks": "four owned source/test files passed before first test execution",
+    "diffWhitespaceCheck": "passed"
+  }
+}

@@ -1,0 +1,110 @@
+TAP version 13
+# Subtest: comparison reopens differently compressed frame PNGs and matches actual complete RGB
+ok 1 - comparison reopens differently compressed frame PNGs and matches actual complete RGB
+  ---
+  duration_ms: 106.003833
+  ...
+# Subtest: comparison rejects wrong full-frame pixels even when each PNG reference has its own valid hash
+ok 2 - comparison rejects wrong full-frame pixels even when each PNG reference has its own valid hash
+  ---
+  duration_ms: 119.176417
+  ...
+# Subtest: comparison rejects different width and height even when total RGB length and pixels match
+ok 3 - comparison rejects different width and height even when total RGB length and pixels match
+  ---
+  duration_ms: 92.040875
+  ...
+# Subtest: comparison rejects shifted frame clocks before decoding and rejects stale PNG bytes
+ok 4 - comparison rejects shifted frame clocks before decoding and rejects stale PNG bytes
+  ---
+  duration_ms: 67.089041
+  ...
+# Subtest: comparison rejects a current frame file removed after decoding before accepting the pair
+ok 5 - comparison rejects a current frame file removed after decoding before accepting the pair
+  ---
+  duration_ms: 87.980958
+  ...
+# Subtest: 全候補の実RGBから同値分類と整数距離を再計算し元の証拠を変えない
+ok 6 - 全候補の実RGBから同値分類と整数距離を再計算し元の証拠を変えない
+  ---
+  duration_ms: 15.544333
+  ...
+# Subtest: 比較入口は実RGBが同じでも別媒体への差替えと外側SHAの更新を拒否する
+ok 7 - 比較入口は実RGBが同じでも別媒体への差替えと外側SHAの更新を拒否する
+  ---
+  duration_ms: 33.191709
+  ...
+# Subtest: 保存済みSHAと異なる実RGB・フレーム・欠落ファイル・入力の変更を拒否する
+ok 8 - 保存済みSHAと異なる実RGB・フレーム・欠落ファイル・入力の変更を拒否する
+  ---
+  duration_ms: 15.351875
+  ...
+# Subtest: 実byteを変えない距離・同値分類・判定の改変を拒否する
+ok 9 - 実byteを変えない距離・同値分類・判定の改変を拒否する
+  ---
+  duration_ms: 12.200209
+  ...
+# Subtest: SHAを更新してもRGBの長さや生成物との結び付きが不正なら拒否する
+ok 10 - SHAを更新してもRGBの長さや生成物との結び付きが不正なら拒否する
+  ---
+  duration_ms: 7.266
+  ...
+# Subtest: 入力一覧・構造化入力・実行前後の参照が一致しなければ拒否する
+ok 11 - 入力一覧・構造化入力・実行前後の参照が一致しなければ拒否する
+  ---
+  duration_ms: 3.596
+  ...
+# Subtest: 公開移動は元のSHAを保つ完全一致の一段対応だけを受け付ける
+ok 12 - 公開移動は元のSHAを保つ完全一致の一段対応だけを受け付ける
+  ---
+  duration_ms: 5.360083
+  ...
+# Subtest: 両側を実byte検算して全検査点と候補を同順比較する
+ok 13 - 両側を実byte検算して全検査点と候補を同順比較する
+  ---
+  duration_ms: 11.272375
+  ...
+# Subtest: 各側の記録が自己整合でも実RGB差・検査点順・候補の意味の差を拒否する
+ok 14 - 各側の記録が自己整合でも実RGB差・検査点順・候補の意味の差を拒否する
+  ---
+  duration_ms: 48.832
+  ...
+# Subtest: 旧方式の二字幕・全検査点・実行順・生成物が自己整合する小型証拠を受理する
+ok 15 - 旧方式の二字幕・全検査点・実行順・生成物が自己整合する小型証拠を受理する
+  ---
+  duration_ms: 10.4595
+  ...
+# Subtest: 旧方式の実行記録が空・不足・余分なら保存された成功を信用せず拒否する
+ok 16 - 旧方式の実行記録が空・不足・余分なら保存された成功を信用せず拒否する
+  ---
+  duration_ms: 6.766542
+  ...
+# Subtest: 字幕検査が空・不足・重複なら全体の観測を通過させない
+ok 17 - 字幕検査が空・不足・重複なら全体の観測を通過させない
+  ---
+  duration_ms: 5.396291
+  ...
+# Subtest: 検査点の順序だけを変えた場合も字幕側を合わせて変えた場合も実行順の不一致を拒否する
+ok 18 - 検査点の順序だけを変えた場合も字幕側を合わせて変えた場合も実行順の不一致を拒否する
+  ---
+  duration_ms: 3.379083
+  ...
+# Subtest: 実行先・引数・切り出しRGB・終了結果の改変を拒否する
+ok 19 - 実行先・引数・切り出しRGB・終了結果の改変を拒否する
+  ---
+  duration_ms: 6.925958
+  ...
+# Subtest: 記録された生成物が欠落・重複・別内容なら完全性検査を通過させない
+ok 20 - 記録された生成物が欠落・重複・別内容なら完全性検査を通過させない
+  ---
+  duration_ms: 5.444167
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 531.953

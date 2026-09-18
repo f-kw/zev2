@@ -10,7 +10,8 @@ import path from 'node:path';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {buildConnectionExpressionTimelineFiltersV001} from './connection_expression_v001.mjs';
 import {restoreOrchestrationDrawingViewEvidenceV001} from './presentation_orchestration_v001.mjs';
-import {buildPresentationNativeReferenceArgumentsV001, classifyPresentationNativeFrameRgbV001}
+import {buildPresentationNativeReferenceArgumentsV001, classifyPresentationNativeFrameRgbV001,
+  buildPresentationNativeLayerPlanV001}
   from './presentation_native_frame_qc_v001.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
 
@@ -85,13 +86,17 @@ export function classifyOrchestrationSoftGlyphRgbV001({completedRgb, expectedRgb
     completedRgbSha256: sha(completed), method: 'strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors'};
 }
 
-function nativeYuvArguments({baseFramePath, pngPath, element, frame, canvas, outputPaths}) {
+function nativeYuvArguments({baseFramePath, pngPath, pngSha256, element, frame, canvas, outputPaths}) {
   const bindingId = element.instructionId;
   const sample = {crop: {left: 0, top: 0, width: canvas.width, height: canvas.height}, references: [
     {id: 'expected', layers: [{bindingId, localFrame: frame - element.startFrame,
       displayFrameCount: element.displayFrameCount}]}, {id: 'omitted', layers: []}]};
-  const args = buildPresentationNativeReferenceArgumentsV001({sample,
-    sceneBindings: [{states: [{bindingId, pngPath}], alternates: []}], baseFramePath, outputPaths});
+  const sceneBindings = [{states: [{bindingId, pngPath, pngSha256}], alternates: []}];
+  const nativeLayers = buildPresentationNativeLayerPlanV001({samples: [sample], sceneBindings,
+    directory: path.join(path.dirname(outputPaths[0]), 'prepared-native')});
+  assert(nativeLayers.layers.every(layer => !layer.generated), 'this Soft probe requires the existing full-opacity plateau');
+  const args = buildPresentationNativeReferenceArgumentsV001({sample, nativeLayers,
+    sceneBindings, baseFramePath, outputPaths});
   // Preserve the native compositor and alpha calculation. Only declare the raw
   // base input and keep YUV before its optional final RGB conversion/crop.
   const input = args.indexOf('-i');
@@ -239,7 +244,7 @@ export async function runOrchestrationSoftOverlayProbeV001({repositoryRoot, outp
         ['original-background', 'unfaded-caption', 'unfaded-omitted']]) {
         const outputs = [first, second].map(label => path.join(outputDirectory, prefix + '-' + label + '.yuv'));
         await run(prefix + '-native-reference-' + base, ffmpegPath, nativeYuvArguments({
-          baseFramePath: artifacts[base].raw.path, pngPath: sample.pngRef.path,
+          baseFramePath: artifacts[base].raw.path, pngPath: sample.pngRef.path, pngSha256: sample.pngRef.fileSha256,
           element: sample.element, frame: sample.frame, canvas, outputPaths: outputs}));
         for (const [index, label] of [first, second].entries()) artifacts[label] = {raw: await bind(outputs[index])};
       }

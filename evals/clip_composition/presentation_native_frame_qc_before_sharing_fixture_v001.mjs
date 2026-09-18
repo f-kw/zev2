@@ -1,14 +1,14 @@
 import {scopeOrchestrationPlanV001, assertOrchestrationScopedPlansV001} from './presentation_orchestration_render_scope_v001.mjs';
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
-import {stat, mkdir, mkdtemp, readFile, readdir, writeFile} from 'node:fs/promises';
+import {stat, mkdir, mkdtemp, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {performance} from 'node:perf_hooks';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 
 // Evidence validation reuses the actual executed command builders.
 export {
-  frameExtractionArguments as buildPresentationNativeFrameBatchExtractionArgumentsV001,
+  frameExtractionArguments as buildPresentationNativeFrameExtractionArgumentsV001,
   nativeReferenceArguments as buildPresentationNativeReferenceArgumentsV001,
 };
 import {buildPresentationNativeQcAlternativeElementsV001} from './presentation_native_frame_qc_preparation_v001.mjs';
@@ -19,7 +19,6 @@ import {getPresentationCaptionMotionProgramV001, buildPresentationCaptionMotionS
 
 export const PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001 = 'presentation-native-frame-qc-v001';
 export const PRESENTATION_NATIVE_FRAME_QC_BASIS_V001 = 'native-reference-state-identification-v001';
-export const PRESENTATION_NATIVE_FRAME_EXECUTION_V001 = 'batched-frames-shared-native-layers-v001';
 const HASH = /^[a-f0-9]{64}$/u;
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const hashBytes = value => createHash('sha256').update(value).digest('hex');
@@ -324,64 +323,6 @@ export function classifyPresentationNativeFrameRgbV001({completedRgb, references
     references: observed, classes: classes.map(({rgb: _rgb, ...row}) => row)};
 }
 
-// Read only the current reference and any matching class representative. This
-// avoids retaining every full RGB crop while preserving byte-exact classes.
-export async function classifyPresentationNativeReferenceFilesV001({
-  completedRgb, completedRgbRef, references, distanceCache = new Map(), counts = {},
-}) {
-  requireValue(Buffer.isBuffer(completedRgb) && completedRgb.length > 0
-    && hashBytes(completedRgb) === completedRgbRef?.fileSha256
-    && Array.isArray(references) && references.length >= 2, 'RGB file observations are missing');
-  const ids = new Set(), classes = [], observed = [];
-  for (const reference of references) {
-    requireValue(nonempty(reference.id) && !ids.has(reference.id) && path.isAbsolute(reference.path)
-      && HASH.test(reference.fileSha256), 'RGB file reference identity differs');
-    ids.add(reference.id);
-    const rgb = await readFile(reference.path);
-    requireValue(rgb.length === completedRgb.length && hashBytes(rgb) === reference.fileSha256,
-      'RGB reference dimensions or bytes differ');
-    let group;
-    for (const candidate of classes.filter(row => row.rgbSha256 === reference.fileSha256)) {
-      if (rgb.equals(await readFile(candidate.rgbPath))) {group = candidate; break;}
-    }
-    if (!group) {
-      const key = hashJson({completed: completedRgbRef.fileSha256, reference: reference.fileSha256});
-      const matches = distanceCache.get(key) ?? [];
-      let cached;
-      for (const candidate of matches) {
-        if (completedRgb.equals(await readFile(candidate.completedPath))
-          && rgb.equals(await readFile(candidate.referencePath))) {cached = candidate; break;}
-      }
-      let absoluteRgbDifference;
-      if (cached) {
-        absoluteRgbDifference = cached.absoluteRgbDifference;
-        counts.reusedExactDistances = (counts.reusedExactDistances ?? 0) + 1;
-      } else {
-        absoluteRgbDifference = 0;
-        for (let index = 0; index < completedRgb.length; index++)
-          absoluteRgbDifference += Math.abs(completedRgb[index] - rgb[index]);
-        requireValue(Number.isSafeInteger(absoluteRgbDifference), 'RGB distance exceeds the exact integer range');
-        matches.push({completedPath: completedRgbRef.path, referencePath: reference.path, absoluteRgbDifference});
-        distanceCache.set(key, matches);
-        counts.exactDistanceCalculations = (counts.exactDistanceCalculations ?? 0) + 1;
-      }
-      group = {id: 'class-' + classes.length, rgbSha256: reference.fileSha256, referenceIds: [],
-        absoluteRgbDifference, rgbPath: reference.path};
-      classes.push(group);
-    }
-    group.referenceIds.push(reference.id);
-    observed.push({id: reference.id, rgbSha256: reference.fileSha256, classId: group.id});
-  }
-  const expected = observed.find(row => row.id === 'expected');
-  const omitted = observed.find(row => row.id === 'omitted');
-  requireValue(expected && omitted, 'expected and omitted references are both required');
-  const expectedClass = classes.find(row => row.id === expected.classId);
-  const visible = expected.classId !== omitted.classId
-    && classes.every(row => row.id === expectedClass.id || expectedClass.absoluteRgbDifference < row.absoluteRgbDifference);
-  return {visible, expectedClassId: expected.classId, omittedClassId: omitted.classId,
-    references: observed, classes: classes.map(({rgbPath: _rgbPath, ...row}) => row)};
-}
-
 function checkedRef(ref) {
   requireValue(object(ref) && nonempty(ref.role) && typeof ref.path === 'string' && path.isAbsolute(ref.path)
     && HASH.test(ref.fileSha256) && (ref.canonicalSha256 === undefined || HASH.test(ref.canonicalSha256)),
@@ -400,159 +341,59 @@ async function readBoundRef(ref) {
   return bytes;
 }
 
-function frameExtractionArguments(input, frames, outputPattern) {
-  requireValue(Array.isArray(frames) && frames.length > 0
-    && frames.every((frame, index) => integer(frame) && (index === 0 || frame > frames[index - 1])),
-  'batch extraction requires sorted distinct media frames');
-  requireValue(typeof outputPattern === 'string' && path.isAbsolute(outputPattern)
-    && path.basename(outputPattern) === 'frame-%09d.png', 'batch extraction output pattern differs');
-  const seconds = Math.floor(frames[0] / 30);
-  const selected = frames.map(frame => 'eq(n\\,' + (frame - seconds * 30) + ')').join('+');
+function frameExtractionArguments(input, frame, output) {
+  const seconds = Math.floor(frame / 30);
+  const remainder = frame - seconds * 30;
   return ['-hide_banner', '-loglevel', 'error', '-y', '-ss', String(seconds), '-i', input,
-    '-an', '-vf', 'select=' + selected, '-fps_mode', 'passthrough',
-    '-frames:v', String(frames.length), '-start_number', '0', outputPattern];
+    '-vf', 'select=eq(n\\,' + remainder + ')', '-frames:v', '1', output];
 }
 
-export function buildPresentationNativeFrameBatchPlanV001({samples, directory}) {
-  requireValue(Array.isArray(samples) && typeof directory === 'string' && path.isAbsolute(directory),
-    'frame extraction plan requires samples and an absolute directory');
-  const unique = new Map();
-  for (const sample of samples) {
-    const mediaFrame = sample.mediaFrame ?? sample.frame;
-    requireValue(integer(sample.frame) && integer(mediaFrame), 'frame extraction clock differs');
-    requireValue(!unique.has(sample.frame) || unique.get(sample.frame) === mediaFrame,
-      'one global frame maps to different media frames');
-    unique.set(sample.frame, mediaFrame);
-  }
-  const ordered = [...unique].sort((left, right) => left[0] - right[0]);
-  requireValue(ordered.every((row, index) => index === 0 || row[1] > ordered[index - 1][1]),
-    'global and local frame order differ');
-  const baseOutputPattern = path.join(directory, 'base', 'frame-%09d.png');
-  const completedOutputPattern = path.join(directory, 'completed', 'frame-%09d.png');
-  return {method: 'single-open-selected-frames-v001', directory, baseOutputPattern, completedOutputPattern,
-    frames: ordered.map(([frame, mediaFrame], index) => ({frame, mediaFrame,
-      basePath: path.join(directory, 'base', 'frame-' + String(index).padStart(9, '0') + '.png'),
-      completedPath: path.join(directory, 'completed', 'frame-' + String(index).padStart(9, '0') + '.png')}))};
-}
-
-export async function readPresentationNativeFrameBatchOutputsV001(extraction) {
-  for (const [pattern, field] of [[extraction.baseOutputPattern, 'basePath'], [extraction.completedOutputPattern, 'completedPath']]) {
-    const actual = (await readdir(path.dirname(pattern))).sort();
-    const expected = extraction.frames.map(row => path.basename(row[field])).sort();
-    requireValue(same(actual, expected), 'selected frame extraction produced missing or extra files');
-  }
-  const outputs = [];
-  for (const row of extraction.frames) {
-    const baseFrame = {path: row.basePath, fileSha256: hashBytes(await readFile(row.basePath))};
-    const completedFrame = {path: row.completedPath, fileSha256: hashBytes(await readFile(row.completedPath))};
-    outputs.push({frame: row.frame, mediaFrame: row.mediaFrame, baseFrame, completedFrame});
-  }
-  return outputs;
-}
-
-const layerAlpha = layer => {
-  requireValue(integer(layer.localFrame) && integer(layer.displayFrameCount) && layer.displayFrameCount > layer.localFrame,
-    'native reference layer time differs');
-  return Math.min(4, layer.localFrame + 1, layer.displayFrameCount - layer.localFrame);
-};
-const layerKey = (pngSha256, numerator) => hashJson({pngSha256, numerator, denominator: 4});
-
-export function buildPresentationNativeLayerPlanV001({samples, sceneBindings, directory}) {
-  requireValue(path.isAbsolute(directory), 'prepared native layer directory must be absolute');
+function nativeReferenceArguments({sample, sceneBindings, baseFramePath, outputPaths}) {
   const byId = new Map(sceneBindings.flatMap(group => [...group.states, ...group.alternates])
     .map(row => [row.bindingId, row]));
-  const sourceByHash = new Map();
-  for (const binding of byId.values()) if (!sourceByHash.has(binding.pngSha256))
-    sourceByHash.set(binding.pngSha256, binding.pngPath);
-  const layers = new Map();
-  for (const sample of samples) for (const reference of sample.references) for (const layer of reference.layers) {
-    const binding = byId.get(layer.bindingId);
-    requireValue(binding, 'native reference layer has no bound PNG');
-    const numerator = layerAlpha(layer), key = layerKey(binding.pngSha256, numerator);
-    if (!layers.has(key)) layers.set(key, {key, sourcePath: sourceByHash.get(binding.pngSha256),
-      sourceSha256: binding.pngSha256, numerator, denominator: 4,
-      outputPath: numerator === 4 ? sourceByHash.get(binding.pngSha256) : path.join(directory, 'layer-' + key + '.png'),
-      generated: numerator !== 4});
+  const uses = new Map();
+  for (const reference of sample.references) for (const layer of reference.layers) {
+    const key = layer.bindingId + '/' + layer.localFrame + '/' + layer.displayFrameCount;
+    const found = uses.get(key);
+    if (found) found.count++;
+    else uses.set(key, {layer, count: 1});
   }
-  return {method: 'exact-native-png-four-frame-alpha-v001', directory,
-    layers: [...layers.values()].sort((left, right) => left.key.localeCompare(right.key))};
-}
-
-export function buildPresentationNativeLayerArgumentsV001(layers) {
-  requireValue(Array.isArray(layers) && layers.length > 0 && layers.every(layer => layer.generated
-    && layer.sourcePath === layers[0].sourcePath && layer.sourceSha256 === layers[0].sourceSha256
-    && [1, 2, 3].includes(layer.numerator) && layer.denominator === 4), 'prepared native layer group differs');
-  const filters = ['[0:v]format=rgba' + (layers.length === 1 ? '[native0]' : ',split=' + layers.length
-    + layers.map((_layer, index) => '[native' + index + ']').join(''))];
-  layers.forEach((layer, index) => filters.push('[native' + index + ']geq=r=\'r(X,Y)\':g=\'g(X,Y)\':b=\'b(X,Y)\':a=\'alpha(X,Y)*(' + layer.numerator + '/4)\',format=rgba[out' + index + ']'));
-  const args = ['-hide_banner', '-loglevel', 'error', '-nostdin', '-y', '-filter_complex_threads', '1',
-    '-threads', '1', '-i', layers[0].sourcePath, '-filter_complex', filters.join(';')];
-  layers.forEach((layer, index) => args.push('-map', '[out' + index + ']', '-frames:v', '1', '-c:v', 'png', '-threads', '1', layer.outputPath));
-  return args;
-}
-
-function preparedReferenceLayers(reference, sceneBindings, nativeLayers) {
-  const byId = new Map(sceneBindings.flatMap(group => [...group.states, ...group.alternates]).map(row => [row.bindingId, row]));
-  const prepared = new Map(nativeLayers.layers.map(layer => [layer.key, layer]));
-  return reference.layers.map(layer => {
-    const binding = byId.get(layer.bindingId);
-    requireValue(binding, 'native reference layer has no PNG');
-    const result = prepared.get(layerKey(binding.pngSha256, layerAlpha(layer)));
-    requireValue(result, 'native reference layer has not been prepared');
-    return result;
-  });
-}
-
-export function buildPresentationNativeReferenceExecutionV001({sample, sceneBindings, nativeLayers, directory}) {
-  requireValue(path.isAbsolute(directory) && HASH.test(sample.baseFrame?.fileSha256), 'reference execution source is not bound');
-  return sample.references.map(reference => {
-    const layers = preparedReferenceLayers(reference, sceneBindings, nativeLayers);
-    const key = hashJson({baseFrameSha256: sample.baseFrame.fileSha256, crop: sample.crop, layers: layers.map(layer => layer.key)});
-    return {reference, key, path: path.join(directory, 'reference-' + key + '.rgb')};
-  });
-}
-
-function nativeReferenceArguments({sample, sceneBindings, baseFramePath, outputPaths, nativeLayers}) {
-  requireValue(sample.references.length === outputPaths.length && outputPaths.length > 0,
-    'native reference outputs differ');
-  // A trie shares only identical ordered prefixes. Every logical candidate still
-  // points to its own fully derived scene, including omitted and order-swapped scenes.
-  const nodes = [{id: 0, parent: null, layer: null, children: new Map(), outputs: []}];
-  sample.references.forEach((reference, index) => {
-    let node = nodes[0];
-    for (const layer of preparedReferenceLayers(reference, sceneBindings, nativeLayers)) {
-      if (!node.children.has(layer.key)) {
-        const child = {id: nodes.length, parent: node, layer, children: new Map(), outputs: []};
-        nodes.push(child); node.children.set(layer.key, child);
-      }
-      node = node.children.get(layer.key);
-    }
-    node.outputs.push(index);
-  });
-  const usedLayers = [...new Map(nodes.slice(1).map(node => [node.layer.key, node.layer])).values()];
+  const paths = [...new Set([...uses.values()].map(use => byId.get(use.layer.bindingId).pngPath))];
   const args = ['-hide_banner', '-loglevel', 'error', '-nostdin', '-y', '-filter_complex_threads', '1', '-i', baseFramePath];
-  usedLayers.forEach(layer => args.push('-threads', '1', '-i', layer.outputPath));
+  for (const file of paths) args.push('-threads', '1', '-i', file);
   const filters = [];
-  for (const [index, layer] of usedLayers.entries()) {
-    const uses = nodes.filter(node => node.layer?.key === layer.key);
-    // The old geq path converts RGBA through planar GBR+alpha. Keep that exact
-    // conversion even when alpha is already prepared or is fully opaque.
-    filters.push('[' + (index + 1) + ':v]format=rgba,format=gbrap' + (uses.length === 1
-      ? '[layer' + uses[0].id + ']' : ',split=' + uses.length + uses.map(node => '[layer' + node.id + ']').join('')));
-  }
-  for (const node of nodes) {
-    const consumers = [...node.children.values()].map(child => 'parent' + child.id)
-      .concat(node.outputs.map(index => 'reference' + index));
-    requireValue(consumers.length > 0, 'native reference prefix is unused');
-    const prefix = node.parent === null ? '[0:v]format=yuv420p'
-      : '[parent' + node.id + '][layer' + node.id + ']overlay=0:0:eof_action=pass:shortest=0:repeatlast=0';
-    filters.push(prefix + (consumers.length === 1 ? '[' + consumers[0] + ']'
-      : ',split=' + consumers.length + consumers.map(label => '[' + label + ']').join('')));
-    for (const index of node.outputs) {
-      const crop = sample.crop;
-      filters.push('[reference' + index + ']format=yuv420p,format=rgb24,crop=' + crop.width + ':' + crop.height + ':'
-        + crop.left + ':' + crop.top + ':exact=1[out' + index + ']');
+  const baseLabels = sample.references.map((_ref, index) => 'base' + index);
+  filters.push('[0:v]format=yuv420p,split=' + baseLabels.length + baseLabels.map(label => '[' + label + ']').join(''));
+  const useEntries = [...uses.entries()];
+  for (const [fileIndex, file] of paths.entries()) {
+    const matching = useEntries.filter(([_key, use]) => byId.get(use.layer.bindingId).pngPath === file);
+    filters.push('[' + (fileIndex + 1) + ':v]format=rgba'
+      + (matching.length === 1 ? '[png' + fileIndex + '-0]'
+        : ',split=' + matching.length + matching.map((_entry, index) => '[png' + fileIndex + '-' + index + ']').join('')));
+    for (const [useIndex, [key, use]] of matching.entries()) {
+      const index = useEntries.findIndex(entry => entry[0] === key);
+      const local = use.layer.localFrame;
+      const duration = use.layer.displayFrameCount;
+      const alpha = 'alpha(X,Y)*min(1,min((' + local + '+1)/4,(' + duration + '-' + local + ')/4))';
+      const labels = Array.from({length: use.count}, (_unused, n) => 'faded' + index + '-' + n);
+      filters.push('[png' + fileIndex + '-' + useIndex + ']geq=r=\'r(X,Y)\':g=\'g(X,Y)\':b=\'b(X,Y)\':a=\'' + alpha + '\''
+        + (labels.length === 1 ? '[' + labels[0] + ']'
+          : ',split=' + labels.length + labels.map(label => '[' + label + ']').join('')));
+      use.labels = labels;
+      use.next = 0;
     }
+  }
+  for (const [referenceIndex, reference] of sample.references.entries()) {
+    let previous = baseLabels[referenceIndex];
+    for (const [layerIndex, layer] of reference.layers.entries()) {
+      const use = uses.get(layer.bindingId + '/' + layer.localFrame + '/' + layer.displayFrameCount);
+      const next = 'scene' + referenceIndex + '-' + layerIndex;
+      filters.push('[' + previous + '][' + use.labels[use.next++] + ']overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[' + next + ']');
+      previous = next;
+    }
+    const crop = sample.crop;
+    filters.push('[' + previous + ']format=yuv420p,format=rgb24,crop=' + crop.width + ':' + crop.height + ':'
+      + crop.left + ':' + crop.top + ':exact=1[out' + referenceIndex + ']');
   }
   args.push('-filter_complex', filters.join(';'));
   for (const [index, file] of outputPaths.entries()) args.push('-map', '[out' + index + ']', '-frames:v', '1',
@@ -720,23 +561,14 @@ export async function inspectPresentationNativeFrameQcV001({
   const started = performance.now();
   plan = clone(plan); records = clone(records); provenance = clone(provenance);
   media = clone(media); tools = clone(tools);
-  const processes = [], outputArtifacts = [];
-  const counts = {sourceFrameOutputs: 0, completedFrameOutputs: 0, completedRgbOutputs: 0,
-    logicalReferenceCount: 0, referenceRgbOutputs: 0, reusedReferenceRgbCount: 0,
-    preparedLayerOutputs: 0, exactDistanceCalculations: 0, reusedExactDistances: 0};
-  const phasesMilliseconds = {inputBinding: 0, frameExtraction: 0, nativeLayerPreparation: 0,
-    completedRgbCrop: 0, referenceComposition: 0, rgbDistance: 0, evidenceWrite: 0,
-    verification: 0, evidenceConstruction: 0};
-  const timed = async (name, operation) => {
-    const began = performance.now();
-    try {return await operation();} finally {phasesMilliseconds[name] += performance.now() - began;}
-  };
+  const processes = [];
+  const outputArtifacts = [];
+  const counts = {sourceFrameOutputs: 0, completedFrameOutputs: 0, completedRgbOutputs: 0, referenceRgbOutputs: 0};
   let manifest;
   const performanceRecord = () => ({wallClockMs: performance.now() - started,
-    phasesMilliseconds: {...phasesMilliseconds}, phaseMeaning: 'disjoint measured operations; total also includes tool versions and setup',
     childProcessCount: processes.length, childProcessesByPurpose: Object.fromEntries(
       [...new Set(processes.map(row => row.purpose))].map(purpose => [purpose, processes.filter(row => row.purpose === purpose).length])),
-    ...counts, frameCountMeaning: 'verified selected output frames; internal decoder work is not inferred'});
+    ...counts, frameCountMeaning: 'verified output frames; internal seek/decoder work is not inferred'});
   const run = async (command, args, purpose) => {
     const start = performance.now();
     const observation = {purpose, command, args: [...args], argumentsCanonicalSha256: hashJson(args)};
@@ -754,139 +586,105 @@ export async function inspectPresentationNativeFrameQcV001({
     }
   };
   try {
-    const bound = await timed('inputBinding', async () => {
-      requireValue(object(provenance) && provenance.planCanonicalSha256 === hashJson(plan)
-        && Array.isArray(provenance.inputRefs), 'plan provenance is missing or differs');
-      const declared = provenance.inputRefs.map(checkedRef);
-      const normalRef = declared.find(ref => ref.role === 'baseline-plan');
-      const planRef = declared.find(ref => ref.role === 'plan');
-      const autoRef = declared.find(ref => ref.role === 'auto-input');
-      const orchestrationRef = declared.find(ref => ref.role === 'orchestration-input');
-      requireValue(normalRef && planRef && Boolean(autoRef) !== Boolean(orchestrationRef),
-        'plan, baseline-plan and exactly one decision input reference are required');
-      const decisionRef = orchestrationRef ?? autoRef;
-      const decision = JSON.parse((await readBoundRef(decisionRef)).toString('utf8'));
-      const autoPresentation = autoRef ? decision : undefined;
-      const orchestrationInput = orchestrationRef ? decision : undefined;
-      const orchestrationDrawingView = orchestrationRef ? restoreOrchestrationDrawingViewEvidenceV001(decision) : undefined;
-      const originalBaselinePlan = JSON.parse((await readBoundRef(normalRef)).toString('utf8'));
-      if (orchestrationDrawingView !== undefined) requireValue(hashJson(originalBaselinePlan)
-        === orchestrationDrawingView.sourceContext.baselineRef.canonicalSha256,
-      'original plan file differs from the orchestration source');
-      const baselinePlan = scopeOrchestrationPlanV001(orchestrationDrawingView?.projectedNormalPlan ?? originalBaselinePlan, renderRange);
-      requireValue(same(JSON.parse((await readBoundRef(planRef)).toString('utf8')), plan), 'plan file differs from the in-memory plan');
-      const recipe = buildPresentationNativeFrameQcRecipeV001({plan, baselinePlan, autoPresentation, records, orchestrationDrawingView, renderRange});
-      const refs = [...declared.filter(ref => !['plan', 'baseline-plan', 'auto-input', 'orchestration-input'].includes(ref.role)),
-        {...planRef, canonicalSha256: hashJson(plan)}, {...normalRef, canonicalSha256: hashJson(originalBaselinePlan)},
-        {...decisionRef, canonicalSha256: hashJson(decision)},
-        checkedRef({role: 'base-media', ...media?.base}), checkedRef({role: 'completed-media', ...media?.completed}),
-        checkedRef({role: 'tool-ffmpeg', ...tools?.ffmpeg}), checkedRef({role: 'tool-imagemagick', ...tools?.imageMagick}),
-        ...recipe.sceneBindings.flatMap(group => [...group.states, ...group.alternates]).map(binding => ({
-          role: 'png-' + binding.bindingId, path: binding.pngPath, fileSha256: binding.pngSha256}))]
-        .sort((left, right) => left.role < right.role ? -1 : left.role > right.role ? 1 : 0);
-      requireValue(new Set(refs.map(ref => ref.role)).size === refs.length, 'input reference roles are duplicated');
-      manifest = {planCanonicalSha256: hashJson(plan), baselinePlanCanonicalSha256: hashJson(baselinePlan),
-        ...(orchestrationRef ? {orchestrationInputCanonicalSha256: hashJson(orchestrationInput)}
-          : {autoPresentationCanonicalSha256: hashJson(autoPresentation)}),
-        inputRefs: refs, inputRefsCanonicalSha256: hashJson(refs), before: [], after: []};
-      for (const ref of refs) {
-        await readBoundRef(ref);
-        manifest.before.push({role: ref.role, path: ref.path, fileSha256: ref.fileSha256});
-      }
-      return {recipe, refs, baselinePlan, autoPresentation, orchestrationInput};
-    });
-    const {recipe, refs, baselinePlan, autoPresentation, orchestrationInput} = bound;
+    requireValue(object(provenance) && provenance.planCanonicalSha256 === hashJson(plan)
+      && Array.isArray(provenance.inputRefs), 'plan provenance is missing or differs');
+    const declared = provenance.inputRefs.map(checkedRef);
+    const normalRef = declared.find(ref => ref.role === 'baseline-plan');
+    const planRef = declared.find(ref => ref.role === 'plan');
+    const autoRef = declared.find(ref => ref.role === 'auto-input');
+    const orchestrationRef = declared.find(ref => ref.role === 'orchestration-input');
+    requireValue(normalRef && planRef && Boolean(autoRef) !== Boolean(orchestrationRef),
+      'plan, baseline-plan and exactly one decision input reference are required');
+    const decisionRef = orchestrationRef ?? autoRef;
+    const decision = JSON.parse((await readBoundRef(decisionRef)).toString('utf8'));
+    const autoPresentation = autoRef ? decision : undefined;
+    const orchestrationInput = orchestrationRef ? decision : undefined;
+    const orchestrationDrawingView = orchestrationRef ? restoreOrchestrationDrawingViewEvidenceV001(decision) : undefined;
+    const originalBaselinePlan = JSON.parse((await readBoundRef(normalRef)).toString('utf8'));
+    if (orchestrationDrawingView !== undefined) requireValue(hashJson(originalBaselinePlan)
+      === orchestrationDrawingView.sourceContext.baselineRef.canonicalSha256,
+    'original plan file differs from the orchestration source');
+    const baselinePlan = scopeOrchestrationPlanV001(orchestrationDrawingView?.projectedNormalPlan ?? originalBaselinePlan, renderRange);
+    requireValue(same(JSON.parse((await readBoundRef(planRef)).toString('utf8')), plan), 'plan file differs from the in-memory plan');
+    const recipe = buildPresentationNativeFrameQcRecipeV001({plan, baselinePlan, autoPresentation, records, orchestrationDrawingView, renderRange});
+    const refs = [...declared.filter(ref => !['plan', 'baseline-plan', 'auto-input', 'orchestration-input'].includes(ref.role)),
+      {...planRef, canonicalSha256: hashJson(plan)}, {...normalRef, canonicalSha256: hashJson(originalBaselinePlan)},
+      {...decisionRef, canonicalSha256: hashJson(decision)},
+      checkedRef({role: 'base-media', ...media?.base}), checkedRef({role: 'completed-media', ...media?.completed}),
+      checkedRef({role: 'tool-ffmpeg', ...tools?.ffmpeg}), checkedRef({role: 'tool-imagemagick', ...tools?.imageMagick}),
+      ...recipe.sceneBindings.flatMap(group => [...group.states, ...group.alternates]).map(binding => ({
+        role: 'png-' + binding.bindingId, path: binding.pngPath, fileSha256: binding.pngSha256}))]
+      .sort((left, right) => left.role < right.role ? -1 : left.role > right.role ? 1 : 0);
+    requireValue(new Set(refs.map(ref => ref.role)).size === refs.length, 'input reference roles are duplicated');
+    manifest = {planCanonicalSha256: hashJson(plan), baselinePlanCanonicalSha256: hashJson(baselinePlan),
+      ...(orchestrationRef ? {orchestrationInputCanonicalSha256: hashJson(orchestrationInput)}
+        : {autoPresentationCanonicalSha256: hashJson(autoPresentation)}),
+      inputRefs: refs, inputRefsCanonicalSha256: hashJson(refs), before: [], after: []};
+    for (const ref of refs) {
+      await readBoundRef(ref);
+      manifest.before.push({role: ref.role, path: ref.path, fileSha256: ref.fileSha256});
+    }
     requireValue(typeof scratchDirectory === 'string' && path.isAbsolute(scratchDirectory), 'QC scratch path must be absolute');
     await mkdir(scratchDirectory, {recursive: true});
     const work = await mkdtemp(path.join(scratchDirectory, 'native-frame-qc-'));
-    const frameExtraction = buildPresentationNativeFrameBatchPlanV001({samples: recipe.samples, directory: path.join(work, 'frames')});
-    const nativeLayers = buildPresentationNativeLayerPlanV001({samples: recipe.samples,
-      sceneBindings: recipe.sceneBindings, directory: path.join(work, 'layers')});
-    const referenceDirectory = path.join(work, 'references');
-    await mkdir(referenceDirectory);
-    await mkdir(nativeLayers.directory);
     const version = {};
     for (const [name, tool] of Object.entries(tools)) {
       requireValue(name === 'ffmpeg' || name === 'imageMagick', 'unknown native QC executable');
       version[name] = (await run(tool.path, ['-version'], 'tool-version')).stdout.toString('utf8');
     }
     const extracted = new Map();
-    await timed('frameExtraction', async () => {
-      for (const pattern of [frameExtraction.baseOutputPattern, frameExtraction.completedOutputPattern])
-        await mkdir(path.dirname(pattern), {recursive: true});
-      if (frameExtraction.frames.length > 0) {
-        const frames = frameExtraction.frames.map(row => row.mediaFrame);
-        await run(tools.ffmpeg.path, frameExtractionArguments(media.base.path, frames, frameExtraction.baseOutputPattern), 'source-frames-extract');
-        await run(tools.ffmpeg.path, frameExtractionArguments(media.completed.path, frames, frameExtraction.completedOutputPattern), 'completed-frames-extract');
-      }
-      for (const row of await readPresentationNativeFrameBatchOutputsV001(frameExtraction)) {
-        extracted.set(row.frame, {baseFrame: row.baseFrame, completedFrame: row.completedFrame});
-        outputArtifacts.push(row.baseFrame, row.completedFrame);
+    const samples = [];
+    for (const [sampleIndex, sample] of recipe.samples.entries()) {
+      let frames = extracted.get(sample.frame);
+      if (!frames) {
+        frames = {base: path.join(work, 'frame-' + sample.frame + '-base.png'),
+          completed: path.join(work, 'frame-' + sample.frame + '-completed.png')};
+        await run(tools.ffmpeg.path, frameExtractionArguments(media.base.path, sample.mediaFrame ?? sample.frame, frames.base), 'source-frame-extract');
+        await run(tools.ffmpeg.path, frameExtractionArguments(media.completed.path, sample.mediaFrame ?? sample.frame, frames.completed), 'completed-frame-extract');
+        frames.baseSha256 = hashBytes(await readFile(frames.base));
+        frames.completedSha256 = hashBytes(await readFile(frames.completed));
+        outputArtifacts.push({path: frames.base, fileSha256: frames.baseSha256},
+          {path: frames.completed, fileSha256: frames.completedSha256});
+        extracted.set(sample.frame, frames);
         counts.sourceFrameOutputs++; counts.completedFrameOutputs++;
       }
-    });
-    await timed('nativeLayerPreparation', async () => {
-      const groups = new Map();
-      for (const layer of nativeLayers.layers.filter(row => row.generated)) {
-        if (!groups.has(layer.sourceSha256)) groups.set(layer.sourceSha256, []);
-        groups.get(layer.sourceSha256).push(layer);
-      }
-      for (const layers of groups.values()) {
-        await run(tools.ffmpeg.path, buildPresentationNativeLayerArgumentsV001(layers), 'native-layer-prepare');
-        for (const layer of layers) {
-          outputArtifacts.push({path: layer.outputPath, fileSha256: hashBytes(await readFile(layer.outputPath))});
-          counts.preparedLayerOutputs++;
-        }
-      }
-    });
-    const samples = [], referenceFiles = new Map(), distanceCache = new Map();
-    for (const [sampleIndex, recipeSample] of recipe.samples.entries()) {
-      const frames = extracted.get(recipeSample.frame);
-      requireValue(frames, 'a required sample frame was not extracted');
-      const sample = {...recipeSample, ...frames}, crop = sample.crop;
-      const completed = await timed('completedRgbCrop', () => run(tools.imageMagick.path,
-        [sample.completedFrame.path, '-crop', crop.width + 'x' + crop.height + '+' + crop.left + '+' + crop.top,
-          '+repage', '-alpha', 'off', '-depth', '8', 'rgb:-'], 'completed-rgb-crop'));
+      const crop = sample.crop;
+      const completed = await run(tools.imageMagick.path, [frames.completed, '-crop',
+        crop.width + 'x' + crop.height + '+' + crop.left + '+' + crop.top,
+        '+repage', '-alpha', 'off', '-depth', '8', 'rgb:-'], 'completed-rgb-crop');
       const byteCount = crop.width * crop.height * 3;
       requireValue(completed.stdout.length === byteCount, 'completed RGB crop dimensions differ');
       const completedRgb = {path: path.join(work, 'sample-' + sampleIndex + '-completed.rgb'),
         fileSha256: hashBytes(completed.stdout)};
-      await timed('evidenceWrite', () => writeFile(completedRgb.path, completed.stdout, {flag: 'wx'}));
+      await writeFile(completedRgb.path, completed.stdout, {flag: 'wx'});
       outputArtifacts.push(completedRgb);
       counts.completedRgbOutputs++;
-      const executions = buildPresentationNativeReferenceExecutionV001({sample,
-        sceneBindings: recipe.sceneBindings, nativeLayers, directory: referenceDirectory});
-      const fresh = [...new Map(executions.filter(row => !referenceFiles.has(row.key)).map(row => [row.key, row])).values()];
-      if (fresh.length > 0) await timed('referenceComposition', async () => {
-        await run(tools.ffmpeg.path, nativeReferenceArguments({sample: {...sample, references: fresh.map(row => row.reference)},
-          sceneBindings: recipe.sceneBindings, baseFramePath: sample.baseFrame.path,
-          nativeLayers, outputPaths: fresh.map(row => row.path)}), 'native-reference-composite');
-        for (const row of fresh) {
-          const rgb = await readFile(row.path);
-          requireValue(rgb.length === byteCount, 'reference RGB does not contain exactly one complete crop');
-          const ref = {path: row.path, fileSha256: hashBytes(rgb)};
-          referenceFiles.set(row.key, ref); outputArtifacts.push(ref);
-          counts.referenceRgbOutputs++;
-        }
-      });
-      counts.logicalReferenceCount += executions.length;
-      counts.reusedReferenceRgbCount += executions.length - fresh.length;
-      const decision = await timed('rgbDistance', () => classifyPresentationNativeReferenceFilesV001({
-        completedRgb: completed.stdout, completedRgbRef: completedRgb,
-        references: executions.map(row => ({id: row.reference.id, ...referenceFiles.get(row.key)})), distanceCache, counts}));
-      samples.push({...sample, completedRgb, completedRgbSha256: completedRgb.fileSha256, ...decision,
-        references: sample.references.map((reference, index) => ({...reference,
-          ...decision.references[index], rgbPath: executions[index].path}))});
-    }
-    await timed('verification', async () => {
-      for (const ref of refs) {
-        await readBoundRef(ref);
-        manifest.after.push({role: ref.role, path: ref.path, fileSha256: ref.fileSha256});
+      const outputPaths = sample.references.map((_reference, index) => path.join(work, 'sample-' + sampleIndex + '-reference-' + index + '.rgb'));
+      await run(tools.ffmpeg.path, nativeReferenceArguments({sample, sceneBindings: recipe.sceneBindings,
+        baseFramePath: frames.base, outputPaths}), 'native-reference-composite');
+      const rgbReferences = [];
+      for (const [index, reference] of sample.references.entries()) {
+        const rgb = await readFile(outputPaths[index]);
+        requireValue(rgb.length === byteCount, 'reference RGB does not contain exactly one complete crop');
+        rgbReferences.push({id: reference.id, rgb});
+        outputArtifacts.push({path: outputPaths[index], fileSha256: hashBytes(rgb)});
+        counts.referenceRgbOutputs++;
       }
-      for (const artifact of outputArtifacts) requireValue(hashBytes(await readFile(artifact.path)) === artifact.fileSha256,
+      const decision = classifyPresentationNativeFrameRgbV001({completedRgb: completed.stdout, references: rgbReferences});
+      samples.push({...sample, baseFrame: {path: frames.base, fileSha256: frames.baseSha256},
+        completedFrame: {path: frames.completed, fileSha256: frames.completedSha256},
+        completedRgb, completedRgbSha256: completedRgb.fileSha256, ...decision,
+        references: sample.references.map((reference, index) => ({...reference,
+          ...decision.references[index], rgbPath: outputPaths[index]}))});
+    }
+    for (const ref of refs) {
+      await readBoundRef(ref);
+      manifest.after.push({role: ref.role, path: ref.path, fileSha256: ref.fileSha256});
+    }
+    for (const artifact of outputArtifacts) {
+      requireValue(hashBytes(await readFile(artifact.path)) === artifact.fileSha256,
         'generated frame evidence changed before completion');
-    });
-    const evidenceStarted = performance.now();
+    }
     const inspections = records.map(record => {
       const element = record.element;
       const localSamples = samples.filter(sample => sample.instructionId === element.instructionId);
@@ -903,11 +701,9 @@ export async function inspectPresentationNativeFrameQcV001({
       return inspection;
     });
     const violations = inspections.flatMap(inspection => validatePresentationNativeFrameQcEvidenceV001({plan, inspection, renderRange}).violations);
-    phasesMilliseconds.evidenceConstruction += performance.now() - evidenceStarted;
     return {status: violations.length === 0 ? 'passed' : 'failed', violations, inspections,
       evidence: {schemaVersion: PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, inputManifest: manifest,
         baselinePlan, autoPresentation, orchestrationInput, renderRange, sceneBindings: recipe.sceneBindings, samples, processes,
-        executionMethod: PRESENTATION_NATIVE_FRAME_EXECUTION_V001, frameExtraction, nativeLayers, referenceDirectory,
         outputArtifacts, executableVersions: version},
       performance: performanceRecord()};
   } catch (error) {

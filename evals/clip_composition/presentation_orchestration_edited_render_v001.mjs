@@ -121,6 +121,7 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
   const started = performance.now(), timings = {};
   try {
     await onProgress({phase: 'prepare'});
+    const inputBindingStarted = performance.now();
     const rules = drawingRulesRef ?? await buildEditedOrchestrationDrawingRulesRefV001({backgroundReuseDecoderRef});
     await verifyEditedOrchestrationDrawingRulesRefV001(rules);
     assert.deepEqual(rules.decoderRoles.savedBackgroundObservation, backgroundReuseDecoderRef,
@@ -129,8 +130,11 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     const view = restoreOrchestrationDrawingViewEvidenceV001(await json(drawingEvidenceRef.path));
     const derived = createOrchestrationRenderScopeV001(view, range);
     const sourceReferences = await verifySourceReferences(view, drawingEvidenceRef);
+    timings.inputBindingMilliseconds = performance.now() - inputBindingStarted;
+    const initialEvidenceStarted = performance.now();
     await save(path.join(evidenceDirectory, 'start.json'), {schemaVersion: 'presentation-edited-render-start-v001',
       guards, drawingEvidenceRef, rules, scope: derived.scope, sourceReferences});
+    timings.initialEvidenceWriteMilliseconds = performance.now() - initialEvidenceStarted;
     const backgroundStarted = performance.now();
     await onProgress({phase: 'background', scope: derived.scope});
     let background, backgroundProofRef;
@@ -179,16 +183,21 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
         displayFrameCount: derived.scope.frameCount,
         ...(range === null ? {} : {range}), video: background.outputs.background, audio: background.outputs.audio}});
     timings.drawAndQcMilliseconds = performance.now() - drawStarted;
+    const drawEvidenceStarted = performance.now();
     await save(path.join(evidenceDirectory, 'draw-result.json'), draw);
+    timings.drawEvidenceWriteMilliseconds = performance.now() - drawEvidenceStarted;
     assert.equal(draw.exitCode, 0, JSON.stringify(draw.failure ?? draw.finalQc));
     assert.equal(draw.finalQc.status, 'passed'); assert.deepEqual(draw.resolvedPlan, derived.resolvedPlan);
     assert.equal(draw.outputMedia.video.frameCount, derived.scope.frameCount);
+    const finalVerificationStarted = performance.now();
     const finalAudioClock = await backgroundRenderer.inspectOrchestrationEncodedAudioV001({audioPath: draw.workVideo,
       logicalSampleCount: derived.scope.frameCount * 1470, sampleRate: 44100, ...toolPaths});
     const rendered = await bind(draw.workVideo);
     await verifySourceReferences(view, drawingEvidenceRef); await verifyEditedOrchestrationDrawingRulesRefV001(rules);
     for (const ref of [background.outputs.background, background.outputs.audio]) assert.deepEqual(await bind(ref.path), ref);
     assert.equal((await bind(backgroundProofRef.path)).fileSha256, backgroundProofRef.fileSha256);
+    timings.finalVerificationBeforePublishMilliseconds = performance.now() - finalVerificationStarted;
+    const publicationStarted = performance.now();
     const publication = await commitValidatedPresentationArtifactsV002({stagingDirectory: draw.stagingDirectory,
       outputDirectory: draw.outputDirectory, reservation: draw.reservation});
     assert.equal(publication.status, 'published');
@@ -196,6 +205,7 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     assert.equal(candidateVideo.fileSha256, rendered.fileSha256);
     await verifySourceReferences(view, drawingEvidenceRef); await verifyEditedOrchestrationDrawingRulesRefV001(rules);
     assert.equal((await bind(backgroundProofRef.path)).fileSha256, backgroundProofRef.fileSha256);
+    timings.publicationAndReverificationMilliseconds = performance.now() - publicationStarted;
     timings.elapsedMilliseconds = performance.now() - started;
     const result = {schemaVersion: 'presentation-edited-render-completion-v001', status: 'passed', candidateVideo,
       viewSha256: view.viewSha256, projectionSha256: view.projection.projectionSha256,
@@ -205,6 +215,8 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
       expectedFrameCount: derived.scope.frameCount, sourceReferences, finalAudioClock, outputMedia: draw.outputMedia,
       background, backgroundProofRef, nativeAssets: {...cache.stats, profileSha256: cache.profileSha256},
       finalQc: draw.finalQc, completedFrameQc: draw.completedFrameQc, publication, timings,
+      processTimings: processObserver.getPerformance(),
+      timingScope: 'completion excludes its own serialization/write and the caller result write',
       formalTrustChanged: false, humanQuality: 'not-evaluated', paidApiCalls: 0, newExternalMediaTransfers: 0};
     await save(path.join(evidenceDirectory, 'completion.json'), result);
     await onProgress({phase: 'complete', scope: derived.scope, timings});

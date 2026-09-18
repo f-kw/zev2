@@ -4,11 +4,9 @@ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {validatePresentationExactReplayQcEvidenceV001} from './presentation_exact_replay_qc_v001.mjs';
 import {PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
   PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001,
-  PRESENTATION_NATIVE_FRAME_EXECUTION_V001, buildPresentationNativeFrameBatchPlanV001,
-  buildPresentationNativeFrameBatchExtractionArgumentsV001, buildPresentationNativeLayerPlanV001,
-  buildPresentationNativeLayerArgumentsV001, buildPresentationNativeReferenceExecutionV001,
+  buildPresentationNativeFrameExtractionArgumentsV001,
   buildPresentationNativeReferenceArgumentsV001,
-  validatePresentationNativeFrameQcScopeV001, validatePresentationNativeFrameQcEvidenceV001} from './presentation_native_frame_qc_v001.mjs';
+  validatePresentationNativeFrameQcScopeV001, validatePresentationNativeFrameQcEvidenceV001} from './presentation_native_frame_qc_before_sharing_fixture_v001.mjs';
 
 export const PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001 = 'exact-replay-native-v1';
 export const PRESENTATION_INTEGRITY_STATE_QC_SCHEMA_V001 = 'presentation-integrity-state-qc-v001';
@@ -20,11 +18,10 @@ const same = (left, right) => canonicalJson(left) === canonicalJson(right);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const canonicalDigest = value => digest(canonicalJson(value));
 
-function checkFiniteExecutionEvidence(finite, inspections) {
+export function checkFiniteExecutionEvidence(finite, inspections) {
   requireValue(finite?.schemaVersion === PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001
     && Array.isArray(finite.samples) && Array.isArray(finite.processes)
-    && Array.isArray(finite.outputArtifacts) && finite.executionMethod === PRESENTATION_NATIVE_FRAME_EXECUTION_V001,
-  'complete current finite-state execution evidence is missing');
+    && Array.isArray(finite.outputArtifacts), 'complete finite-state execution evidence is missing');
   const flattened = [];
   for (const inspection of inspections) {
     const local = inspection.nativeFrameQc;
@@ -73,45 +70,21 @@ function checkFiniteExecutionEvidence(finite, inspections) {
     versionNames.add(tool.name);
     expectProcess('tool-version', tool.ref.path, ['-version'], digest(Buffer.from(version, 'utf8')));
   }
-  const emptyStdoutSha256 = digest(Buffer.alloc(0));
-  const extraction = buildPresentationNativeFrameBatchPlanV001({
-    samples: finite.samples, directory: finite.frameExtraction?.directory});
-  requireValue(same(extraction, finite.frameExtraction), 'selected frame extraction plan differs');
-  const layers = buildPresentationNativeLayerPlanV001({samples: finite.samples,
-    sceneBindings: finite.sceneBindings, directory: finite.nativeLayers?.directory});
-  requireValue(same(layers, finite.nativeLayers), 'prepared native layers differ from the complete finite inputs');
-  requireValue(typeof finite.referenceDirectory === 'string' && path.isAbsolute(finite.referenceDirectory),
-    'reference output directory is invalid');
-  if (extraction.frames.length > 0) {
-    const frames = extraction.frames.map(row => row.mediaFrame);
-    expectProcess('source-frames-extract', ffmpeg.path,
-      buildPresentationNativeFrameBatchExtractionArgumentsV001(base.path, frames, extraction.baseOutputPattern), emptyStdoutSha256);
-    expectProcess('completed-frames-extract', ffmpeg.path,
-      buildPresentationNativeFrameBatchExtractionArgumentsV001(completed.path, frames, extraction.completedOutputPattern), emptyStdoutSha256);
-  }
-  const frameObservations = new Map();
-  for (const frame of extraction.frames) {
-    const samples = finite.samples.filter(sample => sample.frame === frame.frame);
-    requireValue(samples.length > 0 && samples.every(sample => (sample.mediaFrame ?? sample.frame) === frame.mediaFrame
-      && sample.baseFrame?.path === frame.basePath && sample.completedFrame?.path === frame.completedPath
-      && same(sample.baseFrame, samples[0].baseFrame) && same(sample.completedFrame, samples[0].completedFrame)),
-    'shared sample frame points to another frame or extracted image');
-    expectArtifact(samples[0].baseFrame); expectArtifact(samples[0].completedFrame);
-    frameObservations.set(frame.frame, samples[0]);
-  }
-  const generatedByPath = new Map(finite.outputArtifacts.map(ref => [ref.path, ref]));
-  const layerGroups = new Map();
-  for (const layer of layers.layers.filter(row => row.generated)) {
-    if (!layerGroups.has(layer.sourceSha256)) layerGroups.set(layer.sourceSha256, []);
-    layerGroups.get(layer.sourceSha256).push(layer);
-  }
-  for (const group of layerGroups.values()) {
-    expectProcess('native-layer-prepare', ffmpeg.path, buildPresentationNativeLayerArgumentsV001(group), emptyStdoutSha256);
-    for (const layer of group) expectArtifact(generatedByPath.get(layer.outputPath));
-  }
-  const references = new Map();
+  const frames = new Map(), emptyStdoutSha256 = digest(Buffer.alloc(0));
   for (const sample of finite.samples) {
-    requireValue(frameObservations.has(sample.frame), 'a finite sample frame was not extracted');
+    const previous = frames.get(sample.frame);
+    if (previous) {
+      requireValue(same(sample.baseFrame, previous.baseFrame)
+        && same(sample.completedFrame, previous.completedFrame),
+      'shared sample frame points to different extracted images');
+    } else {
+      expectProcess('source-frame-extract', ffmpeg.path,
+        buildPresentationNativeFrameExtractionArgumentsV001(base.path, sample.mediaFrame ?? sample.frame, sample.baseFrame.path), emptyStdoutSha256);
+      expectProcess('completed-frame-extract', ffmpeg.path,
+        buildPresentationNativeFrameExtractionArgumentsV001(completed.path, sample.mediaFrame ?? sample.frame, sample.completedFrame.path), emptyStdoutSha256);
+      expectArtifact(sample.baseFrame); expectArtifact(sample.completedFrame);
+      frames.set(sample.frame, {baseFrame: sample.baseFrame, completedFrame: sample.completedFrame});
+    }
     const crop = sample.crop;
     const cropArgs = [sample.completedFrame.path, '-crop',
       crop.width + 'x' + crop.height + '+' + crop.left + '+' + crop.top,
@@ -120,22 +93,11 @@ function checkFiniteExecutionEvidence(finite, inspections) {
       'saved completed RGB hash differs');
     expectProcess('completed-rgb-crop', magick.path, cropArgs, sample.completedRgbSha256);
     expectArtifact(sample.completedRgb);
-    const executions = buildPresentationNativeReferenceExecutionV001({sample,
-      sceneBindings: finite.sceneBindings, nativeLayers: layers, directory: finite.referenceDirectory});
-    const fresh = [...new Map(executions.filter(row => !references.has(row.key)).map(row => [row.key, row])).values()];
-    if (fresh.length > 0) {
-      expectProcess('native-reference-composite', ffmpeg.path,
-        buildPresentationNativeReferenceArgumentsV001({sample: {...sample, references: fresh.map(row => row.reference)},
-          sceneBindings: finite.sceneBindings, baseFramePath: sample.baseFrame.path,
-          nativeLayers: layers, outputPaths: fresh.map(row => row.path)}), emptyStdoutSha256);
-      for (const row of fresh) {
-        const ref = {path: row.path, fileSha256: row.reference.rgbSha256};
-        references.set(row.key, ref); expectArtifact(ref);
-      }
-    }
-    for (const row of executions) requireValue(row.reference.rgbPath === row.path
-      && row.reference.rgbSha256 === references.get(row.key).fileSha256,
-    'a shared reference is not bound to the same complete composition');
+    const referencePaths = sample.references.map(reference => reference.rgbPath);
+    expectProcess('native-reference-composite', ffmpeg.path,
+      buildPresentationNativeReferenceArgumentsV001({sample, sceneBindings: finite.sceneBindings,
+        baseFramePath: sample.baseFrame.path, outputPaths: referencePaths}), emptyStdoutSha256);
+    for (const reference of sample.references) expectArtifact({path: reference.rgbPath, fileSha256: reference.rgbSha256});
   }
   requireValue(cursor === finite.processes.length, 'finite-state execution contains missing or extra processes');
   requireValue(same(finite.outputArtifacts, expectedArtifacts),

@@ -8,7 +8,10 @@ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {AUTO_PRESENTATION_RULES_REF_V007, fixAutoPresentationProposalV001} from './presentation_auto_effects_v001.mjs';
 import {PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
   buildPresentationNativeFrameQcRecipeV001, classifyPresentationNativeFrameRgbV001,
-  buildPresentationNativeFrameExtractionArgumentsV001, buildPresentationNativeReferenceArgumentsV001,
+  PRESENTATION_NATIVE_FRAME_EXECUTION_V001, buildPresentationNativeFrameBatchPlanV001,
+  buildPresentationNativeFrameBatchExtractionArgumentsV001, buildPresentationNativeLayerPlanV001,
+  buildPresentationNativeLayerArgumentsV001, buildPresentationNativeReferenceExecutionV001,
+  buildPresentationNativeReferenceArgumentsV001,
   validatePresentationNativeFrameQcEvidenceV001} from './presentation_native_frame_qc_v001.mjs';
 import {combinePresentationIntegrityStateQcV001, PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001,
   PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001}
@@ -273,13 +276,26 @@ function combinedEvidenceFixture(completedId = 'a') {
   const decision = classifyPresentationNativeFrameRgbV001({completedRgb: expectedRgb, references: referenceRgb});
   assert.equal(decision.visible, true);
   const directory = '/fixture/finite-' + completedId;
+  const frameExtraction = buildPresentationNativeFrameBatchPlanV001({samples: recipe.samples, directory: directory + '/frames'});
+  const nativeLayers = buildPresentationNativeLayerPlanV001({samples: recipe.samples, sceneBindings: recipe.sceneBindings,
+    directory: directory + '/layers'});
+  const referenceDirectory = directory + '/references';
   const sample = {...clone(wanted), ...decision,
-    baseFrame: {path: directory + '/base.png', fileSha256: hash('base-png')},
-    completedFrame: {path: directory + '/completed.png', fileSha256: hash('completed-png')},
+    baseFrame: {path: frameExtraction.frames[0].basePath, fileSha256: hash('base-png')},
+    completedFrame: {path: frameExtraction.frames[0].completedPath, fileSha256: hash('completed-png')},
     completedRgb: {path: directory + '/completed.rgb', fileSha256: hash(expectedRgb)},
     completedRgbSha256: hash(expectedRgb),
     references: wanted.references.map((row, index) => ({...clone(row), ...decision.references[index],
       rgbPath: directory + '/reference-' + index + '.rgb'}))};
+  const executions = buildPresentationNativeReferenceExecutionV001({sample, sceneBindings: recipe.sceneBindings,
+    nativeLayers, directory: referenceDirectory});
+  sample.references.forEach((reference, index) => {reference.rgbPath = executions[index].path;});
+  const uniqueExecutions = [...new Map(executions.map(row => [row.key, row])).values()];
+  const layerGroups = new Map();
+  for (const layer of nativeLayers.layers.filter(row => row.generated)) {
+    if (!layerGroups.has(layer.sourceSha256)) layerGroups.set(layer.sourceSha256, []);
+    layerGroups.get(layer.sourceSha256).push(layer);
+  }
   const exactRef = (fromRole, role) => {
     const row = e.inputManifest.refs.find(ref => ref.role === fromRole);
     return {role, path: row.path, fileSha256: row.fileSha256};
@@ -307,19 +323,25 @@ function combinedEvidenceFixture(completedId = 'a') {
   const processes = [
     observedProcess('tool-version', ffmpeg, ['-version'], executableVersions.ffmpeg),
     observedProcess('tool-version', magick, ['-version'], executableVersions.imageMagick),
-    observedProcess('source-frame-extract', ffmpeg, buildPresentationNativeFrameExtractionArgumentsV001(
-      inputRefs.find(row => row.role === 'base-media').path, 1, sample.baseFrame.path)),
-    observedProcess('completed-frame-extract', ffmpeg, buildPresentationNativeFrameExtractionArgumentsV001(
-      completed.path, 1, sample.completedFrame.path)),
+    observedProcess('source-frames-extract', ffmpeg, buildPresentationNativeFrameBatchExtractionArgumentsV001(
+      inputRefs.find(row => row.role === 'base-media').path, [1], frameExtraction.baseOutputPattern)),
+    observedProcess('completed-frames-extract', ffmpeg, buildPresentationNativeFrameBatchExtractionArgumentsV001(
+      completed.path, [1], frameExtraction.completedOutputPattern)),
+    ...[...layerGroups.values()].map(group => observedProcess('native-layer-prepare', ffmpeg,
+      buildPresentationNativeLayerArgumentsV001(group))),
     observedProcess('completed-rgb-crop', magick, [sample.completedFrame.path, '-crop', '2x2+0+0',
       '+repage', '-alpha', 'off', '-depth', '8', 'rgb:-'], expectedRgb),
     observedProcess('native-reference-composite', ffmpeg, buildPresentationNativeReferenceArgumentsV001({
-      sample, sceneBindings: recipe.sceneBindings, baseFramePath: sample.baseFrame.path,
-      outputPaths: sample.references.map(row => row.rgbPath)})),
+      sample: {...sample, references: uniqueExecutions.map(row => row.reference)}, nativeLayers,
+      sceneBindings: recipe.sceneBindings, baseFramePath: sample.baseFrame.path,
+      outputPaths: uniqueExecutions.map(row => row.path)})),
   ];
-  const finiteEvidence = {...clone(local), processes, executableVersions, outputArtifacts: [
-    clone(sample.baseFrame), clone(sample.completedFrame), clone(sample.completedRgb),
-    ...sample.references.map(row => ({path: row.rgbPath, fileSha256: row.rgbSha256}))]};
+  const finiteEvidence = {...clone(local), processes, executableVersions,
+    executionMethod: PRESENTATION_NATIVE_FRAME_EXECUTION_V001, frameExtraction, nativeLayers, referenceDirectory,
+    outputArtifacts: [clone(sample.baseFrame), clone(sample.completedFrame),
+      ...[...layerGroups.values()].flat().map(layer => ({path: layer.outputPath, fileSha256: hash('prepared-' + layer.key)})),
+      clone(sample.completedRgb),
+      ...uniqueExecutions.map(row => ({path: row.path, fileSha256: row.reference.rgbSha256}))]};
   delete finiteEvidence.instructionId;
   return {plan: f.plan, expectedFrameCount: f.expectedFrameCount,
     currentCompletedMediaRef: {path: completed.path, fileSha256: completed.fileSha256},
@@ -675,9 +697,9 @@ test('combined proof rejects local/global disagreement and a severed RGB stdout 
       for (const sample of [f.finite.inspections[0].nativeFrameQc.samples[0], f.finite.evidence.samples[0]]) {
         sample.completedRgb.fileSha256 = changed; sample.completedRgbSha256 = changed;
       }
-      f.finite.evidence.outputArtifacts[2].fileSha256 = changed;
+      f.finite.evidence.outputArtifacts.find(row => row.path === f.finite.evidence.samples[0].completedRgb.path).fileSha256 = changed;
     }, reason: /process does not bind its input and output: completed-rgb-crop/u},
-    {mutate: f => {f.finite.evidence.outputArtifacts[2].fileSha256 = hash('another-output');},
+    {mutate: f => {f.finite.evidence.outputArtifacts.find(row => row.path === f.finite.evidence.samples[0].completedRgb.path).fileSha256 = hash('another-output');},
       reason: /output artifacts differ/u},
   ];
   for (const {mutate, reason} of changes) {
@@ -686,6 +708,32 @@ test('combined proof rejects local/global disagreement and a severed RGB stdout 
     assert.equal(validatePresentationNativeFrameQcEvidenceV001({
       plan: f.plan, inspection: f.finite.inspections[0]}).status, 'passed');
     assertCombinedRejection(combinePresentationIntegrityStateQcV001(f), 'INTEGRITY_STATE_QC_INVALID', reason);
+  }
+});
+
+test('combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing', () => {
+  const changes = [
+    f => {delete f.finite.evidence.executionMethod;},
+    f => {f.finite.evidence.frameExtraction.frames[0].mediaFrame++;},
+    f => {f.finite.evidence.frameExtraction.frames = [];},
+    f => {f.finite.evidence.nativeLayers.layers[0].numerator = 4;},
+    f => {f.finite.evidence.nativeLayers.layers[0].sourceSha256 = hash('other-native');},
+    f => {f.finite.evidence.processes = f.finite.evidence.processes.filter(row => row.purpose !== 'native-layer-prepare');},
+    f => {f.finite.evidence.processes.find(row => row.purpose === 'source-frames-extract').args.push('-other');},
+    f => {
+      const process = f.finite.evidence.processes.find(row => row.purpose === 'source-frames-extract');
+      process.args[process.args.indexOf('-vf') + 1] = 'select=eq(n\\,2)';
+      process.argumentsCanonicalSha256 = hashJson(process.args);
+    },
+    f => {f.finite.evidence.outputArtifacts.push(clone(f.finite.evidence.outputArtifacts[0]));},
+    f => {
+      for (const sample of [f.finite.inspections[0].nativeFrameQc.samples[0], f.finite.evidence.samples[0]])
+        sample.references.find(row => row.id === 'omitted').rgbPath = sample.references.find(row => row.id === 'expected').rgbPath;
+    },
+  ];
+  for (const change of changes) {
+    const f = combinedEvidenceFixture(); change(f);
+    assertCombinedRejection(combinePresentationIntegrityStateQcV001(f), 'INTEGRITY_STATE_QC_INVALID');
   }
 });
 

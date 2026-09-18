@@ -1,0 +1,1677 @@
+{
+  "schemaVersion": "stage4-bc-preservation-v001",
+  "speaker": "Codexの検証結果",
+  "createdAt": "2026-09-18T10:32:49.572230+00:00",
+  "status": "passed",
+  "baseCommit": "efdee0aabea10b87d39203bee6f9f6e7460032d0",
+  "observedHeadCommit": "efdee0aabea10b87d39203bee6f9f6e7460032d0",
+  "scope": "保存済み基準の指定pathを再読。元の利用者保存、固定自動案、既存4媒体、失敗証拠、A実装、工程I〜IIIと契約文書を保全。旧描画規則と現規則の差分は承認済みQC変更として別記する。",
+  "references": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/responsive-preservation-v001.json",
+      "bytes": 16252,
+      "fileSha256": "6505a9079de183d981a4bcb0cfc725ab994fd9a309d1ae283fb1cc34636acc8c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/final-hygiene-v001.json",
+      "bytes": 64838,
+      "fileSha256": "7b8bfa7b74d3093e8ddd3916b0b842ced5c4ff10b998c9236828ff290edae935"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/rendered-media-verification-v001.json",
+      "bytes": 87569,
+      "fileSha256": "525385a9776597a8eed2eaeb62f58cf7dda2e112254565dab365b74b732dbb2d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/post-audit-preservation-v001.json",
+      "bytes": 20633,
+      "fileSha256": "7169d1416574c6e962eb2f542c0ccc5ad00cdaf9a4900ee08f615be433637172"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-preview-preflight-v001.json",
+      "bytes": 4016,
+      "fileSha256": "52f540372fcc1959bc190d2e9ce204b1aecd9f7e28a3625d6f9bd922e2eb1872"
+    }
+  ],
+  "sections": {
+    "finalBackendReferences": {
+      "count": 7,
+      "records": [
+        {
+          "path": "evals/clip_composition/presentation_editing_state_v001.mjs",
+          "bytes": 29199,
+          "fileSha256": "54cc18aa24d2de4ee3b36b938b7c65e577db093af7f3b698fd543d32b6b29a85",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/presentation_editing_applicability_v001.mjs",
+          "bytes": 17691,
+          "fileSha256": "95c85592d5cec84260f39c96a5f68373e7c425b58408b091656da323bf9fcde5",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/serve_presentation_editing_v001.mjs",
+          "bytes": 19917,
+          "fileSha256": "92f9df38c10f9bcd8c569eb0a90b792447ef1725cb3d2e11976e5bbc50111067",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/presentation_editing_state_v001.test.mjs",
+          "bytes": 31253,
+          "fileSha256": "734ed3d0ea22e62f3b5190132cba6ecbd26606694de508c77a34788fff248395",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/serve_presentation_editing_v001.test.mjs",
+          "bytes": 14668,
+          "fileSha256": "6eb23deff3d4a188b192440eaa44b6d94a87192229e274e9636ea83867b012f0",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/inspect_presentation_editing_layout_v001.ts",
+          "bytes": 711,
+          "fileSha256": "098a4ad7e1c9a6017b92bc5983b43e95870452a9b9d7de9e340795221554ba15",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/presentation_editing_jobs_v001.test.mjs",
+          "bytes": 13071,
+          "fileSha256": "6f865c414b68ef735f9be4af2e34de652326715cbcff25f3f79f15935375fa31",
+          "matched": true
+        }
+      ]
+    },
+    "finalComponentReferences": {
+      "count": 4,
+      "records": [
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/client-selected-check-verification-v001.json",
+          "bytes": 3024,
+          "fileSha256": "bec734d0b68ca323f56915503d982e9532b7ca1ef7b8e46a5d83d8de89c0055b",
+          "matched": true
+        },
+        {
+          "path": "client/src/PresentationEditing.vue",
+          "bytes": 51904,
+          "fileSha256": "4282d518e139b703a9e4fab460b145994b034582145c39d6dfd6ddbca2ea01b3",
+          "matched": true
+        },
+        {
+          "path": "client/src/presentation-editing-api.ts",
+          "bytes": 6981,
+          "fileSha256": "d157b6607cdb0475ef0bc33f900164a273693beab48f246c213a6cd1a337454a",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/presentation_editing_client_state_v001.test.mjs",
+          "bytes": 19181,
+          "fileSha256": "03d1fe9df1b5defa41ab2efa06119b5d850de9f8af42a6be7c2a63f578499f1e",
+          "matched": true
+        }
+      ]
+    },
+    "preservedEvidence": {
+      "count": 7,
+      "records": [
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-state-jobs-v001.tap",
+          "bytes": 5156,
+          "fileSha256": "707817bd2082fad70a42f2d14bbd7c6a9062d165d3c9c3d17622e45b2c9f77ee",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-overlap-v002.tap",
+          "bytes": 4339,
+          "fileSha256": "d427f7e81ddf411280638c5880f1c2b46010d798879a674d64e1ee3ff21fba75",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-normal-input-v001.tap",
+          "bytes": 4166,
+          "fileSha256": "c12445aed8df06137d50ba2a1d77ae161c437a77d4fead1b9bc980f1baf81ef8",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/http-access-integration-v002.tap",
+          "bytes": 347,
+          "fileSha256": "98343be4ce06ab09caff7c74b8aff5e8ed426206639f9857e3b27df1f2c1f8b0",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/candidate-get-timing-v001.json",
+          "bytes": 22956,
+          "fileSha256": "8cc701e9f2270c62cb617c12824f889e1af43b763567732588beecb0a4cc1e89",
+          "matched": true
+        },
+        {
+          "path": "../http-access-integration-v002.stderr.txt",
+          "bytes": 0,
+          "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/service-test-c193eacf-7c1d-4458-884f-ff0bee7c74ba/access.ndjson",
+          "bytes": 5906,
+          "fileSha256": "d289c8e6c83f00f156447d37ee0b02e16b02a6670119413438ed4146ba5abde9",
+          "matched": true
+        }
+      ]
+    },
+    "originalEditing": {
+      "count": 10,
+      "records": [
+        {
+          "path": "runtime/presentation-editing/digest-20260918/document.json",
+          "bytes": 9836,
+          "fileSha256": "d565d843b135ae842c93e135b6f916af7d50aa31dcb9fee335e6f0ca25386393",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/source-bindings.json",
+          "bytes": 354254,
+          "fileSha256": "87d95289df43473c7eb4a672c1a57b314119db05d7124512398df3388bd0550e",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/fresh-input.json",
+          "bytes": 382825,
+          "fileSha256": "122e83a28c4efdc5bfa052a74519039d858415551933596de55e8af0d33c275a",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/raw-ai-response-v001.json",
+          "bytes": 27199,
+          "fileSha256": "7d1d7bc4e0587fa90c7d9115f5c79cb9d39b4ff7d9750aa32d561f6a0c602629",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/captionAuto.json",
+          "bytes": 43149,
+          "fileSha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/connectionAuto.json",
+          "bytes": 2159,
+          "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/selectionRecord.json",
+          "bytes": 477587,
+          "fileSha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/original-drawing-evidence.json",
+          "bytes": 975051,
+          "fileSha256": "c63e584c9eda4341ec2483ce900261681753c2d2fdaeee258696dd592b879c3b",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/captionOverrides.json",
+          "bytes": 31772,
+          "fileSha256": "f8565737d1b5e4531c31be1c77b95e943e4c4a051af4aa31bd9f056b714e02ea",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+          "bytes": 976,
+          "fileSha256": "56b3b7783d1b2188786cf81b1774021d0b3bcedae1fb80fc78e9ca59da3c2bec",
+          "matched": true
+        }
+      ]
+    },
+    "preservedVideos": {
+      "count": 4,
+      "records": [
+        {
+          "path": "../../zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+          "bytes": 75306932,
+          "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+          "bytes": 75271228,
+          "fileSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-7b68ed40-58d0-4772-bf3c-fe36e46dd5e7/render/presentation-rendered-v002.mp4",
+          "bytes": 5517173,
+          "fileSha256": "d5890a7c91d6481bc79b0106bcc34a50e15b28b5a23858e944da28bbc6fc8436",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-d1d18f1b-3ec6-4f35-8b20-0513732ed953/render/presentation-rendered-v002.mp4",
+          "bytes": 3921511,
+          "fileSha256": "74f5ac4df4c6c4acfc1d0bd52678b9613a8a04f81ecc0f6aa365f924b49638cc",
+          "matched": true
+        }
+      ]
+    },
+    "preservedRegistrations": {
+      "count": 7,
+      "records": [
+        {
+          "path": "runtime/presentation-editing/digest-20260918/document.json",
+          "bytes": 9836,
+          "fileSha256": "d565d843b135ae842c93e135b6f916af7d50aa31dcb9fee335e6f0ca25386393",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/media/4ef43bca-e48a-453c-9c78-d036c965103e.json",
+          "bytes": 17070,
+          "fileSha256": "f966ae61b8c3bb6a675329390e85956c442e00f7a4af710fea8ebba16a7fbeb2",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/result.json",
+          "bytes": 216058243,
+          "fileSha256": "ae777525b8b8d1498019ca40957842a78c0b79f59f64ebe9fb376511081da313",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/media/7b68ed40-58d0-4772-bf3c-fe36e46dd5e7.json",
+          "bytes": 17057,
+          "fileSha256": "c1ab60df0c6369bb8f97ab9f580524a2dddce670db3bc531b68c65362222a7bf",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-7b68ed40-58d0-4772-bf3c-fe36e46dd5e7/result.json",
+          "bytes": 22547609,
+          "fileSha256": "a84d6a259defd59ae2d8053b7df66d78e4038cbfdf6d73772e8ec1ddcb119c44",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/digest-20260918/media/d1d18f1b-3ec6-4f35-8b20-0513732ed953.json",
+          "bytes": 17057,
+          "fileSha256": "1d8aad1b85f8bd3188e7aea1f44ad0fb4b8c5287460105e3de03c92c752f6084",
+          "matched": true
+        },
+        {
+          "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-d1d18f1b-3ec6-4f35-8b20-0513732ed953/result.json",
+          "bytes": 10937403,
+          "fileSha256": "7c72435940e46513b92a7009b35391724d96a4477ff852af0c05d32a094a2ce5",
+          "matched": true
+        }
+      ]
+    },
+    "previousFailureAndAuditEvidence": {
+      "records": [
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-state-jobs-v001.tap",
+          "bytes": 5156,
+          "fileSha256": "707817bd2082fad70a42f2d14bbd7c6a9062d165d3c9c3d17622e45b2c9f77ee",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-overlap-v002.tap",
+          "bytes": 4339,
+          "fileSha256": "d427f7e81ddf411280638c5880f1c2b46010d798879a674d64e1ee3ff21fba75",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-normal-input-v001.tap",
+          "bytes": 4166,
+          "fileSha256": "c12445aed8df06137d50ba2a1d77ae161c437a77d4fead1b9bc980f1baf81ef8",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/http-access-integration-v002.tap",
+          "bytes": 347,
+          "fileSha256": "98343be4ce06ab09caff7c74b8aff5e8ed426206639f9857e3b27df1f2c1f8b0",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/candidate-get-timing-v001.json",
+          "bytes": 22956,
+          "fileSha256": "8cc701e9f2270c62cb617c12824f889e1af43b763567732588beecb0a4cc1e89",
+          "matched": true
+        },
+        {
+          "path": "../http-access-integration-v002.stderr.txt",
+          "bytes": 0,
+          "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matched": true
+        },
+        {
+          "path": "runtime/presentation-editing/service-test-c193eacf-7c1d-4458-884f-ff0bee7c74ba/access.ndjson",
+          "bytes": 5906,
+          "fileSha256": "d289c8e6c83f00f156447d37ee0b02e16b02a6670119413438ed4146ba5abde9",
+          "matched": true
+        }
+      ]
+    }
+  },
+  "protectedGit": {
+    "priorStageTrackedInputsAndEvidence": {
+      "count": 70,
+      "records": [
+        {
+          "path": "docs/reports/digest-caption-expression-catalogue-20260918.md",
+          "baselineGitBlob": "c3c9a8d03c8b7d863a16f685d42f658966474803",
+          "currentGitBlob": "c3c9a8d03c8b7d863a16f685d42f658966474803",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-caption-expression-stage1-20260918.md",
+          "baselineGitBlob": "65f9a5483f1cc58177a25b2bd7ff942eade87a64",
+          "currentGitBlob": "65f9a5483f1cc58177a25b2bd7ff942eade87a64",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-caption-expression-stage1-evidence-20260918.json",
+          "baselineGitBlob": "43374eeced18e34f01db072503ebdaa33b0d250d",
+          "currentGitBlob": "43374eeced18e34f01db072503ebdaa33b0d250d",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-caption-expression-stage1-sources-20260918/implementation-instructions-v001.md",
+          "baselineGitBlob": "52ae96b5991fcb37da55e5e48c13e5cda170d3c1",
+          "currentGitBlob": "52ae96b5991fcb37da55e5e48c13e5cda170d3c1",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-caption-expression-stage1-sources-20260918/parent-plan-v001.md",
+          "baselineGitBlob": "62350b9403301308ee70c4d83752bcfd0af747fc",
+          "currentGitBlob": "62350b9403301308ee70c4d83752bcfd0af747fc",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-catalogue-20260918.md",
+          "baselineGitBlob": "d96e2a00735207296bb782a64cec11b92293f2d3",
+          "currentGitBlob": "d96e2a00735207296bb782a64cec11b92293f2d3",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-20260918.md",
+          "baselineGitBlob": "a46aeca756aac069de335cd322eea4af3d04d842",
+          "currentGitBlob": "a46aeca756aac069de335cd322eea4af3d04d842",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-evidence-20260918.json",
+          "baselineGitBlob": "1effaa5805c8dd9dd7e1c740aaa6dbeefb61f06b",
+          "currentGitBlob": "1effaa5805c8dd9dd7e1c740aaa6dbeefb61f06b",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-sources-20260918/parent-plan-v001.md",
+          "baselineGitBlob": "62350b9403301308ee70c4d83752bcfd0af747fc",
+          "currentGitBlob": "62350b9403301308ee70c4d83752bcfd0af747fc",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-sources-20260918/provenance-v001.json",
+          "baselineGitBlob": "f8fc68575abb34ebe821fa1159d6887696f4d744",
+          "currentGitBlob": "f8fc68575abb34ebe821fa1159d6887696f4d744",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-sources-20260918/unit-tests-v001.tap",
+          "baselineGitBlob": "20c9a4254bfb8131a3fc80c82e07e12b697f7d9b",
+          "currentGitBlob": "20c9a4254bfb8131a3fc80c82e07e12b697f7d9b",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-sources-20260918/work-order-v001.md",
+          "baselineGitBlob": "ebc2b1ec784d6437e47742a4e71dce925eabfd1f",
+          "currentGitBlob": "ebc2b1ec784d6437e47742a4e71dce925eabfd1f",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/README.md",
+          "baselineGitBlob": "85cd1cfdf44854cf54a65c5ab8cf7cd26b9b0e79",
+          "currentGitBlob": "85cd1cfdf44854cf54a65c5ab8cf7cd26b9b0e79",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/changed-files.md",
+          "baselineGitBlob": "21beeb32824805fb7df5ce0bc9b452a947f8e229",
+          "currentGitBlob": "21beeb32824805fb7df5ce0bc9b452a947f8e229",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/checkpoint-and-preservation.json",
+          "baselineGitBlob": "c8690f4d99fffd8c40942f15d705d02d471ff4f5",
+          "currentGitBlob": "c8690f4d99fffd8c40942f15d705d02d471ff4f5",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/core-verification.md",
+          "baselineGitBlob": "c27001273e0ed85957cc934f15b70d178860254a",
+          "currentGitBlob": "c27001273e0ed85957cc934f15b70d178860254a",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/advisor-preflight.json",
+          "baselineGitBlob": "01e8852d92796abf8dd975311b4e35cca458a958",
+          "currentGitBlob": "01e8852d92796abf8dd975311b4e35cca458a958",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/background-proof.json",
+          "baselineGitBlob": "3c8a06baa29275de66baacb60ec30e1fb0d596ce",
+          "currentGitBlob": "3c8a06baa29275de66baacb60ec30e1fb0d596ce",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/candidate-completion-summary.json",
+          "baselineGitBlob": "1cb362efaf75614a57f0575737a7fe00efbcef65",
+          "currentGitBlob": "1cb362efaf75614a57f0575737a7fe00efbcef65",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/candidate-job.json",
+          "baselineGitBlob": "8db67e83a0b9046b5bfef13bd6ea483ea6bc6279",
+          "currentGitBlob": "8db67e83a0b9046b5bfef13bd6ea483ea6bc6279",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/combined-tests.log",
+          "baselineGitBlob": "50a1b704fde668ed62ff84958502105c626d308c",
+          "currentGitBlob": "50a1b704fde668ed62ff84958502105c626d308c",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/composition-order-proof.json",
+          "baselineGitBlob": "211bf0e68bfd6b70da50a0386c4b02b27c6b8d1c",
+          "currentGitBlob": "211bf0e68bfd6b70da50a0386c4b02b27c6b8d1c",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/existing-worktree-preservation-after-render.json",
+          "baselineGitBlob": "822846b7975948947a3d6782db23cb3d1e1e65cd",
+          "currentGitBlob": "822846b7975948947a3d6782db23cb3d1e1e65cd",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/existing-worktree-preservation.json",
+          "baselineGitBlob": "ed68b0778dbab19c279b706f12bbee45e1e56e71",
+          "currentGitBlob": "ed68b0778dbab19c279b706f12bbee45e1e56e71",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/input-reproduction-check.json",
+          "baselineGitBlob": "97e503eb636596a0c0812ee17c3cbf3da0228734",
+          "currentGitBlob": "97e503eb636596a0c0812ee17c3cbf3da0228734",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/local-code-review.json",
+          "baselineGitBlob": "5cc2e01c95351f55f86791fc10ed30690906696b",
+          "currentGitBlob": "5cc2e01c95351f55f86791fc10ed30690906696b",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/lossless-verification.json",
+          "baselineGitBlob": "9d47dbf7c43fb0136f5dd05c8f65dad1b1c4c111",
+          "currentGitBlob": "9d47dbf7c43fb0136f5dd05c8f65dad1b1c4c111",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-probe-v001-failure.json",
+          "baselineGitBlob": "98f899e08d6a7b42184d16d83c7be0557155a0bb",
+          "currentGitBlob": "98f899e08d6a7b42184d16d83c7be0557155a0bb",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-probe-v002.json",
+          "baselineGitBlob": "f06ee6240059e42b0a9888158c879eef9de80ed7",
+          "currentGitBlob": "f06ee6240059e42b0a9888158c879eef9de80ed7",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-proof-index-v001.json",
+          "baselineGitBlob": "86382577be2fb85047ef1b94035d70d34485eac2",
+          "currentGitBlob": "86382577be2fb85047ef1b94035d70d34485eac2",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-v002-preflight.json",
+          "baselineGitBlob": "6cfb73f21e73c964688e25694ce054b9975a302b",
+          "currentGitBlob": "6cfb73f21e73c964688e25694ce054b9975a302b",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/previous-candidates-preserved-after-render.json",
+          "baselineGitBlob": "0c78f8268d8c2f0f0de909397677880adf887347",
+          "currentGitBlob": "0c78f8268d8c2f0f0de909397677880adf887347",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/previous-candidates-preserved.json",
+          "baselineGitBlob": "12c0748806e1ad461ffa6485d7ee2602bedc02cc",
+          "currentGitBlob": "12c0748806e1ad461ffa6485d7ee2602bedc02cc",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/renderer-tests-after-audio-fix.log",
+          "baselineGitBlob": "6cf4a12756c53e76badb5b4ffc032e69f7da76de",
+          "currentGitBlob": "6cf4a12756c53e76badb5b4ffc032e69f7da76de",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/retained-failures.json",
+          "baselineGitBlob": "9ef54071b7d579d4986dcffcb3603326e1fd4d74",
+          "currentGitBlob": "9ef54071b7d579d4986dcffcb3603326e1fd4d74",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/soft-overlay-preflight-canvas-v001.json",
+          "baselineGitBlob": "bd282f608495017f3b6abdcc72a3cc1e4b720b8b",
+          "currentGitBlob": "bd282f608495017f3b6abdcc72a3cc1e4b720b8b",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/soft-overlay-preflight-canvas-v002.json",
+          "baselineGitBlob": "ffdabbeb89fe83bc017a9b54ac8439fda43f32a9",
+          "currentGitBlob": "ffdabbeb89fe83bc017a9b54ac8439fda43f32a9",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/soft-overlay-proof.json",
+          "baselineGitBlob": "cf96d78ab87ec54a567eb4eab58386a8f599196c",
+          "currentGitBlob": "cf96d78ab87ec54a567eb4eab58386a8f599196c",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/reproduction.md",
+          "baselineGitBlob": "ddf332dd4cc12f1acbd4ab79ac07641f6fd2525e",
+          "currentGitBlob": "ddf332dd4cc12f1acbd4ab79ac07641f6fd2525e",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/clock-projection-evidence.json",
+          "baselineGitBlob": "f2c0f83eee7674f3fc3e26996adc0becb5ca2910",
+          "currentGitBlob": "f2c0f83eee7674f3fc3e26996adc0becb5ca2910",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/completion.json",
+          "baselineGitBlob": "21b8c774634f0858a22036d8b0c8df1df13d8c58",
+          "currentGitBlob": "21b8c774634f0858a22036d8b0c8df1df13d8c58",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/fault-01-caption-shift-missing.json",
+          "baselineGitBlob": "e28628fcd09411fdb5f0b1990f4f8e186a97bdee",
+          "currentGitBlob": "e28628fcd09411fdb5f0b1990f4f8e186a97bdee",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/fault-02-caption-shift-applied-twice.json",
+          "baselineGitBlob": "b4bf499bac1f38a06a99f43ac49b0b50ef4cfb36",
+          "currentGitBlob": "b4bf499bac1f38a06a99f43ac49b0b50ef4cfb36",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/fault-03-old-measured-peak-clock.json",
+          "baselineGitBlob": "6c928ef21409429294531d2f24303463f236d964",
+          "currentGitBlob": "6c928ef21409429294531d2f24303463f236d964",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/fault-04-old-motion-start-clock.json",
+          "baselineGitBlob": "b6c0c1eb1176ce467a7c75a904a29104b65e9daa",
+          "currentGitBlob": "b6c0c1eb1176ce467a7c75a904a29104b65e9daa",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/fault-05-same-duration-black-to-soft-stale-projection.json",
+          "baselineGitBlob": "8ebca7c8d5da39b33cbba41bdb0acfa275081557",
+          "currentGitBlob": "8ebca7c8d5da39b33cbba41bdb0acfa275081557",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/persisted-state-operations.json",
+          "baselineGitBlob": "f494c884111298ea94bcab18f8c2279dcb45b2a3",
+          "currentGitBlob": "f494c884111298ea94bcab18f8c2279dcb45b2a3",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/saved-state-operations.json",
+          "baselineGitBlob": "ecbf814646fc6e8cb924d36dfd1e6955db3c026a",
+          "currentGitBlob": "ecbf814646fc6e8cb924d36dfd1e6955db3c026a",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/clock-projection-evidence.json",
+          "baselineGitBlob": "f2c0f83eee7674f3fc3e26996adc0becb5ca2910",
+          "currentGitBlob": "f2c0f83eee7674f3fc3e26996adc0becb5ca2910",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/completion.json",
+          "baselineGitBlob": "e52692cc069b9a14aa57fb000ec065288f45ffcb",
+          "currentGitBlob": "e52692cc069b9a14aa57fb000ec065288f45ffcb",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/fault-01-caption-shift-missing.json",
+          "baselineGitBlob": "e28628fcd09411fdb5f0b1990f4f8e186a97bdee",
+          "currentGitBlob": "e28628fcd09411fdb5f0b1990f4f8e186a97bdee",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/fault-02-caption-shift-applied-twice.json",
+          "baselineGitBlob": "b4bf499bac1f38a06a99f43ac49b0b50ef4cfb36",
+          "currentGitBlob": "b4bf499bac1f38a06a99f43ac49b0b50ef4cfb36",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/fault-03-old-measured-peak-clock.json",
+          "baselineGitBlob": "6c928ef21409429294531d2f24303463f236d964",
+          "currentGitBlob": "6c928ef21409429294531d2f24303463f236d964",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/fault-04-old-motion-start-clock.json",
+          "baselineGitBlob": "b6c0c1eb1176ce467a7c75a904a29104b65e9daa",
+          "currentGitBlob": "b6c0c1eb1176ce467a7c75a904a29104b65e9daa",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/fault-05-same-duration-black-to-soft-stale-projection.json",
+          "baselineGitBlob": "8ebca7c8d5da39b33cbba41bdb0acfa275081557",
+          "currentGitBlob": "8ebca7c8d5da39b33cbba41bdb0acfa275081557",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/saved-state-operations.json",
+          "baselineGitBlob": "becdff74fdabcc707b5eaf4de993eef1256a05bd",
+          "currentGitBlob": "becdff74fdabcc707b5eaf4de993eef1256a05bd",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/captionAuto.json",
+          "baselineGitBlob": "f946d5f95f9077f5c1bd12670038b6c683f0a45e",
+          "currentGitBlob": "f946d5f95f9077f5c1bd12670038b6c683f0a45e",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/captionOverrides.json",
+          "baselineGitBlob": "633be3d29411825de429f15e25627f1618087477",
+          "currentGitBlob": "633be3d29411825de429f15e25627f1618087477",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/connectionAuto.json",
+          "baselineGitBlob": "936ade55641ac1a386c6b16e0a050810635e41bf",
+          "currentGitBlob": "936ade55641ac1a386c6b16e0a050810635e41bf",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/connectionOverrides.json",
+          "baselineGitBlob": "68f359544e874ca06b431ec5f0f7f7abed5df9e6",
+          "currentGitBlob": "68f359544e874ca06b431ec5f0f7f7abed5df9e6",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/fresh-input.json",
+          "baselineGitBlob": "7513955ecb0b65d96a5a2cb99caecb6835a12a5d",
+          "currentGitBlob": "7513955ecb0b65d96a5a2cb99caecb6835a12a5d",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/initial-reference-validation-failure.json",
+          "baselineGitBlob": "0ab4dc310fa05aae12ccfc83a44430a93664beca",
+          "currentGitBlob": "0ab4dc310fa05aae12ccfc83a44430a93664beca",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/raw-ai-response-v001.json",
+          "baselineGitBlob": "5e3f4095eb18735cb52a6aa0dc7b80354378816d",
+          "currentGitBlob": "5e3f4095eb18735cb52a6aa0dc7b80354378816d",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/selectionRecord.json",
+          "baselineGitBlob": "72f135ac8bc9743e4e497daa7c1fbba2db460219",
+          "currentGitBlob": "72f135ac8bc9743e4e497daa7c1fbba2db460219",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/source-bindings.json",
+          "baselineGitBlob": "049deec74da5c10ddc5954e4cb26159b74b1e4a5",
+          "currentGitBlob": "049deec74da5c10ddc5954e4cb26159b74b1e4a5",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-sources-20260918/work-order-v002.md",
+          "baselineGitBlob": "51d264c1e5a282a058420b2a506b8abfd1da07e1",
+          "currentGitBlob": "51d264c1e5a282a058420b2a506b8abfd1da07e1",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/repository-hygiene-stage3-20260918/README.md",
+          "baselineGitBlob": "248bd9b2bac4281e608b1718f284cd0efce8eb6b",
+          "currentGitBlob": "248bd9b2bac4281e608b1718f284cd0efce8eb6b",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/repository-hygiene-stage3-20260918/push-readback.json",
+          "baselineGitBlob": "19a5459a6ec6a04ddd8542a82fef906052bbca64",
+          "currentGitBlob": "19a5459a6ec6a04ddd8542a82fef906052bbca64",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/repository-hygiene-stage3-20260918/result.json",
+          "baselineGitBlob": "a35483a6cefa5a7dcaaf63ff2fa808684371494d",
+          "currentGitBlob": "a35483a6cefa5a7dcaaf63ff2fa808684371494d",
+          "matched": true
+        },
+        {
+          "path": "docs/reports/repository-hygiene-stage3-20260918/source-visibility-review.json",
+          "baselineGitBlob": "f8739f25d314f33f036e2d6cc201a3aeeeb318da",
+          "currentGitBlob": "f8739f25d314f33f036e2d6cc201a3aeeeb318da",
+          "matched": true
+        }
+      ]
+    },
+    "contractsAndPreexistingNonReportDocs": {
+      "count": 59,
+      "records": [
+        {
+          "path": "AGENTS.md",
+          "baselineGitBlob": "13b1e7e031f31cff3610d484c5d9c4d56dea096b",
+          "currentGitBlob": "13b1e7e031f31cff3610d484c5d9c4d56dea096b",
+          "matched": true
+        },
+        {
+          "path": "CLAUDE.md",
+          "baselineGitBlob": "d72f549f4e738ebb9d5c9cbfc1960fe78be97139",
+          "currentGitBlob": "d72f549f4e738ebb9d5c9cbfc1960fe78be97139",
+          "matched": true
+        },
+        {
+          "path": "DECISIONS.md",
+          "baselineGitBlob": "6d69067e885fc3bd37bed1e401499e8af43e216f",
+          "currentGitBlob": "6d69067e885fc3bd37bed1e401499e8af43e216f",
+          "matched": true
+        },
+        {
+          "path": "docs/ADVISOR_LEDGER.md",
+          "baselineGitBlob": "5b365b8d8014b86927eb4bc6a1911e7fd09d60d8",
+          "currentGitBlob": "5b365b8d8014b86927eb4bc6a1911e7fd09d60d8",
+          "matched": true
+        },
+        {
+          "path": "docs/CODEX_CHATGPT_AUDIT_PROTOCOL.md",
+          "baselineGitBlob": "dd8d30e8460e28aaba9a86beed6f6ab1b04f842e",
+          "currentGitBlob": "dd8d30e8460e28aaba9a86beed6f6ab1b04f842e",
+          "matched": true
+        },
+        {
+          "path": "docs/COMMUNICATION.md",
+          "baselineGitBlob": "bc9b41850e55c5389c511bd37c7f32012370f5f6",
+          "currentGitBlob": "bc9b41850e55c5389c511bd37c7f32012370f5f6",
+          "matched": true
+        },
+        {
+          "path": "docs/CURRENT_GOAL.md",
+          "baselineGitBlob": "f6edd54a9b57a9c8677ad9f0857d1cf33770b690",
+          "currentGitBlob": "f6edd54a9b57a9c8677ad9f0857d1cf33770b690",
+          "matched": true
+        },
+        {
+          "path": "docs/DIGEST_V1.md",
+          "baselineGitBlob": "3f0db75158baa09f3b25d1820f9990fe074dbdd6",
+          "currentGitBlob": "3f0db75158baa09f3b25d1820f9990fe074dbdd6",
+          "matched": true
+        },
+        {
+          "path": "docs/GOAL_DEFINITION.md",
+          "baselineGitBlob": "5a4068c56836a186275ca26419c5b70db66134a7",
+          "currentGitBlob": "5a4068c56836a186275ca26419c5b70db66134a7",
+          "matched": true
+        },
+        {
+          "path": "docs/HANDOVER.md",
+          "baselineGitBlob": "4238f269af9dee4f716b0ca6fae238226b61b64f",
+          "currentGitBlob": "4238f269af9dee4f716b0ca6fae238226b61b64f",
+          "matched": true
+        },
+        {
+          "path": "docs/WORK_INSTRUCTION_TEMPLATE.md",
+          "baselineGitBlob": "04e49cb510b4abce9bfe1e76e811b636449b6745",
+          "currentGitBlob": "04e49cb510b4abce9bfe1e76e811b636449b6745",
+          "matched": true
+        },
+        {
+          "path": "docs/ZEV_候補動画理解_AB較正終了記録_v001.md",
+          "baselineGitBlob": "fafff2852f0819d262892463fa340551927602b4",
+          "currentGitBlob": "fafff2852f0819d262892463fa340551927602b4",
+          "matched": true
+        },
+        {
+          "path": "docs/ZEV_候補動画理解_設計資料_v0.1.md",
+          "baselineGitBlob": "48c911f0ab2dd2ad91be501f7fec7b8da16f5f4e",
+          "currentGitBlob": "48c911f0ab2dd2ad91be501f7fec7b8da16f5f4e",
+          "matched": true
+        },
+        {
+          "path": "docs/ZEV_候補動画理解_設計資料_v0.2.md",
+          "baselineGitBlob": "f19ef535467f6a47ef3d9045cb561617134c9c67",
+          "currentGitBlob": "f19ef535467f6a47ef3d9045cb561617134c9c67",
+          "matched": true
+        },
+        {
+          "path": "docs/ZEV_遠方接続_設計資料_v0.1.md",
+          "baselineGitBlob": "1915aea8411df75c0b064ebc10847118a5e64077",
+          "currentGitBlob": "1915aea8411df75c0b064ebc10847118a5e64077",
+          "matched": true
+        },
+        {
+          "path": "docs/ZEV_遠方接続_設計資料_v0.2.md",
+          "baselineGitBlob": "dd97ae579aa02511984a7684f86709382cb11718",
+          "currentGitBlob": "dd97ae579aa02511984a7684f86709382cb11718",
+          "matched": true
+        },
+        {
+          "path": "docs/agent-scenario-use-cases.md",
+          "baselineGitBlob": "77773d35a262e33046a5ad61d8af2f1aab8ae3ad",
+          "currentGitBlob": "77773d35a262e33046a5ad61d8af2f1aab8ae3ad",
+          "matched": true
+        },
+        {
+          "path": "docs/ai-agent-api.md",
+          "baselineGitBlob": "08addc2cd8b784b63a68b1c76c2a586f97e7c358",
+          "currentGitBlob": "08addc2cd8b784b63a68b1c76c2a586f97e7c358",
+          "matched": true
+        },
+        {
+          "path": "docs/architecture/ZEV_AGENT_SKILL_ARCHITECTURE_v001.md",
+          "baselineGitBlob": "da0f0dab83a7af8736cf24c962710d038e905991",
+          "currentGitBlob": "da0f0dab83a7af8736cf24c962710d038e905991",
+          "matched": true
+        },
+        {
+          "path": "docs/artifacts/README.md",
+          "baselineGitBlob": "c4f6bce5dd6025cc43226a110cca96cd17432a18",
+          "currentGitBlob": "c4f6bce5dd6025cc43226a110cca96cd17432a18",
+          "matched": true
+        },
+        {
+          "path": "docs/artifacts/samples/adjustment-patch.json",
+          "baselineGitBlob": "51b5a88414dfbe84d51a37a50d17a8f272031688",
+          "currentGitBlob": "51b5a88414dfbe84d51a37a50d17a8f272031688",
+          "matched": true
+        },
+        {
+          "path": "docs/artifacts/samples/clip-composition.json",
+          "baselineGitBlob": "0555c7b75c6a7b5ec6c899d069307a38eec400db",
+          "currentGitBlob": "0555c7b75c6a7b5ec6c899d069307a38eec400db",
+          "matched": true
+        },
+        {
+          "path": "docs/artifacts/samples/edit-plan.json",
+          "baselineGitBlob": "d4226932e995eeea2f287e0aa3da8e4887e6178a",
+          "currentGitBlob": "d4226932e995eeea2f287e0aa3da8e4887e6178a",
+          "matched": true
+        },
+        {
+          "path": "docs/artifacts/samples/themes.json",
+          "baselineGitBlob": "789b938e37743226adb3e093efe86ec826db41c5",
+          "currentGitBlob": "789b938e37743226adb3e093efe86ec826db41c5",
+          "matched": true
+        },
+        {
+          "path": "docs/artifacts/samples/transcript.json",
+          "baselineGitBlob": "9f68a7db35c6db76aca69d3021c214b2fdb61f41",
+          "currentGitBlob": "9f68a7db35c6db76aca69d3021c214b2fdb61f41",
+          "matched": true
+        },
+        {
+          "path": "docs/chatgpt-review-content-selection-20260627-result.md",
+          "baselineGitBlob": "ca9886740d92013af2f93203f41f9cc4e1da21d7",
+          "currentGitBlob": "ca9886740d92013af2f93203f41f9cc4e1da21d7",
+          "matched": true
+        },
+        {
+          "path": "docs/chatgpt-review-content-selection-20260627.md",
+          "baselineGitBlob": "b2ecd637f3bd4d55abc5732b2d635095f73a5360",
+          "currentGitBlob": "b2ecd637f3bd4d55abc5732b2d635095f73a5360",
+          "matched": true
+        },
+        {
+          "path": "docs/claude/code-review-20260702.md",
+          "baselineGitBlob": "bb0f03a21b16d615df7ab222a6a88819cf311bdf",
+          "currentGitBlob": "bb0f03a21b16d615df7ab222a6a88819cf311bdf",
+          "matched": true
+        },
+        {
+          "path": "docs/claude/prompt-design-review-brief-20260704.md",
+          "baselineGitBlob": "81d3e705f976e13b19f2b6d1c969d5f636427acf",
+          "currentGitBlob": "81d3e705f976e13b19f2b6d1c969d5f636427acf",
+          "matched": true
+        },
+        {
+          "path": "docs/claude/system-overview-20260702.md",
+          "baselineGitBlob": "20134a4dbcafcd165307955170a7bfc82dcd7cc2",
+          "currentGitBlob": "20134a4dbcafcd165307955170a7bfc82dcd7cc2",
+          "matched": true
+        },
+        {
+          "path": "docs/claude/ui-redesign-WIP.md",
+          "baselineGitBlob": "ff5e2988934e377473faebab00d18b6f6c08b12f",
+          "currentGitBlob": "ff5e2988934e377473faebab00d18b6f6c08b12f",
+          "matched": true
+        },
+        {
+          "path": "docs/claude/ui-redesign-cyberpunk.md",
+          "baselineGitBlob": "f92c95e60a4d1869bdcf9ca40e7e80d571986af5",
+          "currentGitBlob": "f92c95e60a4d1869bdcf9ca40e7e80d571986af5",
+          "matched": true
+        },
+        {
+          "path": "docs/claude/ui-redesign-preview.html",
+          "baselineGitBlob": "ab327eb5630616ba8f705514db6b403ff19ffd02",
+          "currentGitBlob": "ab327eb5630616ba8f705514db6b403ff19ffd02",
+          "matched": true
+        },
+        {
+          "path": "docs/codex/control-plane-spec.md",
+          "baselineGitBlob": "59d0508a2c73013dbfe899deff6b45ede509aff0",
+          "currentGitBlob": "59d0508a2c73013dbfe899deff6b45ede509aff0",
+          "matched": true
+        },
+        {
+          "path": "docs/codex/control-ready-checkpoint-20260627.md",
+          "baselineGitBlob": "8743e275205de04ca70e05cc52f747eb2cb5d355",
+          "currentGitBlob": "8743e275205de04ca70e05cc52f747eb2cb5d355",
+          "matched": true
+        },
+        {
+          "path": "docs/codex/tag-status.md",
+          "baselineGitBlob": "5ce205fddeb47e437712f5eae01778b4949044bf",
+          "currentGitBlob": "5ce205fddeb47e437712f5eae01778b4949044bf",
+          "matched": true
+        },
+        {
+          "path": "docs/codex/ui-restructure-spec.md",
+          "baselineGitBlob": "47a1b975abd1eaf27f00a5887ff873cd389a1098",
+          "currentGitBlob": "47a1b975abd1eaf27f00a5887ff873cd389a1098",
+          "matched": true
+        },
+        {
+          "path": "docs/codex/web-gemini-review-loop-checkpoint-20260629.md",
+          "baselineGitBlob": "d12eaf07aa9d1ebb3706ea7eaf1de1588ecbfaa5",
+          "currentGitBlob": "d12eaf07aa9d1ebb3706ea7eaf1de1588ecbfaa5",
+          "matched": true
+        },
+        {
+          "path": "docs/codex/work-summary-20260705-last-3-days.md",
+          "baselineGitBlob": "d287a67e61a557a6212c0a45eef7db1ba0ae042f",
+          "currentGitBlob": "d287a67e61a557a6212c0a45eef7db1ba0ae042f",
+          "matched": true
+        },
+        {
+          "path": "docs/codex/zev2-decisions.md",
+          "baselineGitBlob": "01c38510b0f1d384bdc6741246370094f7da4380",
+          "currentGitBlob": "01c38510b0f1d384bdc6741246370094f7da4380",
+          "matched": true
+        },
+        {
+          "path": "docs/codex/zev2-progress.md",
+          "baselineGitBlob": "b1c4f434a680c341661943014cb842fe1f5cbea6",
+          "currentGitBlob": "b1c4f434a680c341661943014cb842fe1f5cbea6",
+          "matched": true
+        },
+        {
+          "path": "docs/control-log.md",
+          "baselineGitBlob": "853aa9444708a1f9a1f8534175c4cdfa48918f15",
+          "currentGitBlob": "853aa9444708a1f9a1f8534175c4cdfa48918f15",
+          "matched": true
+        },
+        {
+          "path": "docs/current-implementation.md",
+          "baselineGitBlob": "3786674485ff9853e3d5940dfecda46e771a37be",
+          "currentGitBlob": "3786674485ff9853e3d5940dfecda46e771a37be",
+          "matched": true
+        },
+        {
+          "path": "docs/order.md",
+          "baselineGitBlob": "b86864c6417bac81363061e2c4ba01d94a6dc1c2",
+          "currentGitBlob": "b86864c6417bac81363061e2c4ba01d94a6dc1c2",
+          "matched": true
+        },
+        {
+          "path": "docs/policies/PRODUCTION_QC_LAYER_POLICY_v001.md",
+          "baselineGitBlob": "79b79f9c09ab8e6a11e598be812437b1046a9993",
+          "currentGitBlob": "79b79f9c09ab8e6a11e598be812437b1046a9993",
+          "matched": true
+        },
+        {
+          "path": "docs/review-brief.md",
+          "baselineGitBlob": "7198d99bd6cfcb797fd50e64bf50749eb394fb01",
+          "currentGitBlob": "7198d99bd6cfcb797fd50e64bf50749eb394fb01",
+          "matched": true
+        },
+        {
+          "path": "docs/runner-dry-run.md",
+          "baselineGitBlob": "27512246e8212d8552a41e3a36eb53c4cd7b87d5",
+          "currentGitBlob": "27512246e8212d8552a41e3a36eb53c4cd7b87d5",
+          "matched": true
+        },
+        {
+          "path": "docs/task-001-最小E2E-dry-run実行.md",
+          "baselineGitBlob": "8a820d41a4d900c2f11fc7695acb51156ceacc99",
+          "currentGitBlob": "8a820d41a4d900c2f11fc7695acb51156ceacc99",
+          "matched": true
+        },
+        {
+          "path": "docs/task-002-AIエージェントAPI契約テストと仕様固定.md",
+          "baselineGitBlob": "eed46d74aa13d7117f687af786d0d780bd358de2",
+          "currentGitBlob": "eed46d74aa13d7117f687af786d0d780bd358de2",
+          "matched": true
+        },
+        {
+          "path": "docs/task-003-成果物確認UIとFileRef最小表示.md",
+          "baselineGitBlob": "624a5e50798910d98141db0bacf38bffae40e3e3",
+          "currentGitBlob": "624a5e50798910d98141db0bacf38bffae40e3e3",
+          "matched": true
+        },
+        {
+          "path": "docs/task-004-claim排他制御と復旧.md",
+          "baselineGitBlob": "e169e13108a42786ce5b35249a132c1cf8851e6c",
+          "currentGitBlob": "e169e13108a42786ce5b35249a132c1cf8851e6c",
+          "matched": true
+        },
+        {
+          "path": "docs/task-005-成果物保存とFileRef実体管理.md",
+          "baselineGitBlob": "f974b34e1372ca84fb1fb45b8008f62d47e6d00a",
+          "currentGitBlob": "f974b34e1372ca84fb1fb45b8008f62d47e6d00a",
+          "matched": true
+        },
+        {
+          "path": "docs/task-006-AI操作ログと監査履歴.md",
+          "baselineGitBlob": "3d55960d1c637e328997a751e3997605f199b68a",
+          "currentGitBlob": "3d55960d1c637e328997a751e3997605f199b68a",
+          "matched": true
+        },
+        {
+          "path": "docs/task-007-人間制御APIとUI整理.md",
+          "baselineGitBlob": "98860c61e9db6bfb58eef4ec166da3a15bc7c2df",
+          "currentGitBlob": "98860c61e9db6bfb58eef4ec166da3a15bc7c2df",
+          "matched": true
+        },
+        {
+          "path": "docs/task-008-Gemini-APIで演出作成.md",
+          "baselineGitBlob": "475792ee3c4cb5e8a3e6a7428838078f37c3f9b9",
+          "currentGitBlob": "475792ee3c4cb5e8a3e6a7428838078f37c3f9b9",
+          "matched": true
+        },
+        {
+          "path": "docs/task-009-セキュリティ境界と実処理接続方針.md",
+          "baselineGitBlob": "742982ee5b80ee3a66c8c2966cec0cc5d20a4ec5",
+          "currentGitBlob": "742982ee5b80ee3a66c8c2966cec0cc5d20a4ec5",
+          "matched": true
+        },
+        {
+          "path": "docs/task-010-成果物アップロードAPI.md",
+          "baselineGitBlob": "9f805f9c345b47422b7385286b304ad3f092ae88",
+          "currentGitBlob": "9f805f9c345b47422b7385286b304ad3f092ae88",
+          "matched": true
+        },
+        {
+          "path": "docs/web-gemini-review-editing-capability-notes.md",
+          "baselineGitBlob": "872a7d922f0669defbcad1319f3e6c17047c78d1",
+          "currentGitBlob": "872a7d922f0669defbcad1319f3e6c17047c78d1",
+          "matched": true
+        },
+        {
+          "path": "docs/zev2-flow-contract.md",
+          "baselineGitBlob": "99dd3cf6d976bc8ed855f5acf7e2aef6c657c796",
+          "currentGitBlob": "99dd3cf6d976bc8ed855f5acf7e2aef6c657c796",
+          "matched": true
+        }
+      ]
+    },
+    "automaticCandidateEntry": {
+      "count": 1,
+      "records": [
+        {
+          "path": "evals/clip_composition/presentation_orchestration_candidate_v001.mjs",
+          "baselineGitBlob": "30054e6d07d1764efbbc006f98f09c96431dcbd3",
+          "currentGitBlob": "30054e6d07d1764efbbc006f98f09c96431dcbd3",
+          "matched": true
+        }
+      ]
+    }
+  },
+  "originalRegistrationSetMatched": true,
+  "existingDrawing": {
+    "count": 57,
+    "oldCanonicalSha256": "2a994d788acf4723c27188ecb3da2cdfeaa99679ed15f81a32d5e70025f20a16",
+    "changedCount": 4,
+    "records": [
+      {
+        "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "oldSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+        "currentSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+cli@4.0.481_postcss@8.5.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@remotion/cli/remotion-cli.js",
+        "oldSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa",
+        "currentSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/cli.mjs",
+        "oldSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8",
+        "currentSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+        "oldSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8",
+        "currentSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "oldSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+        "currentSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+        "oldSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9",
+        "currentSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/opt/homebrew/Cellar/imagemagick/7.1.2-12_1/bin/magick",
+        "oldSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29",
+        "currentSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs",
+        "oldSha256": "4092a3faa49aa360eed4f1b6ecaf4d743dc421d77ccc655d429b4907f5269de0",
+        "currentSha256": "4092a3faa49aa360eed4f1b6ecaf4d743dc421d77ccc655d429b4907f5269de0",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+        "oldSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c",
+        "currentSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_auto_effects_v001.mjs",
+        "oldSha256": "9e85733427c0cd48d40346fc8557df2f291c976ba16837c37bb7c2c116ba8ee5",
+        "currentSha256": "9e85733427c0cd48d40346fc8557df2f291c976ba16837c37bb7c2c116ba8ee5",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+        "oldSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2",
+        "currentSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_contract_v002.mjs",
+        "oldSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c",
+        "currentSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_contract_v003.mjs",
+        "oldSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292",
+        "currentSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_motion_v001.mjs",
+        "oldSha256": "300b9863cba5abf4f3f86d65b1e52b1aadfc10e08024a4df602db2bded376ad5",
+        "currentSha256": "300b9863cba5abf4f3f86d65b1e52b1aadfc10e08024a4df602db2bded376ad5",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_effects_v001.mjs",
+        "oldSha256": "f15ce2adcf7dc93f029f8ed27fbf433c417ec0772356f629daa1b496696c4687",
+        "currentSha256": "f15ce2adcf7dc93f029f8ed27fbf433c417ec0772356f629daa1b496696c4687",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_encoded_omission_qc_v002.mjs",
+        "oldSha256": "51d39ec8a4dc4c7acd46b9ed1194d3ddae0e425646eb1dd7521921b4d9a3aba8",
+        "currentSha256": "51d39ec8a4dc4c7acd46b9ed1194d3ddae0e425646eb1dd7521921b4d9a3aba8",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+        "oldSha256": "c8480c534fa2cd97949d5e74e829d0b4683c874cf15a2dc1f92980e0d84dd981",
+        "currentSha256": "c8480c534fa2cd97949d5e74e829d0b4683c874cf15a2dc1f92980e0d84dd981",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_fatal_observation_v002.mjs",
+        "oldSha256": "cf95c2ba8785be681dcecc03dc4ec009d6f02b4161e3c39f7edbf431b92b6115",
+        "currentSha256": "cf95c2ba8785be681dcecc03dc4ec009d6f02b4161e3c39f7edbf431b92b6115",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_instruction_contract_v002.mjs",
+        "oldSha256": "11c80c40d4fd9cbe88bb40ed5a941e084e381b5646123edecad8f224926c3e20",
+        "currentSha256": "11c80c40d4fd9cbe88bb40ed5a941e084e381b5646123edecad8f224926c3e20",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+        "oldSha256": "cf47aa4b12d87aaed30032c20644f2de294da3a64b4fa6ee9733b36a0b43da9a",
+        "currentSha256": "57e84c6636d7dd66000545bb4606a5d09e0581ad59bf787b3531852b02e5aab3",
+        "changed": true,
+        "authorizedQcSourceChange": true
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_asset_cache_v001.mjs",
+        "oldSha256": "73195d873efd26531b598547527272cf5e8e85862387e08ae0b767c5adc33518",
+        "currentSha256": "73195d873efd26531b598547527272cf5e8e85862387e08ae0b767c5adc33518",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+        "oldSha256": "c607de4f6a9e5abdc011b9975395036833592684e71bd510d877ad41f73d37ac",
+        "currentSha256": "c607de4f6a9e5abdc011b9975395036833592684e71bd510d877ad41f73d37ac",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+        "oldSha256": "704992c891ee12685e6bb35abf535a9e2d851faead86a4ec5296cb67cc92f6b0",
+        "currentSha256": "13f5778233feabd45c78c0b8bebe5ab10f0c7aba86caed0b33dc652316881e41",
+        "changed": true,
+        "authorizedQcSourceChange": true
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs",
+        "oldSha256": "ad3020e7e7a464630b9733d5094cf62483f1917287fa627a1f850dedd62616f3",
+        "currentSha256": "ad3020e7e7a464630b9733d5094cf62483f1917287fa627a1f850dedd62616f3",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+        "oldSha256": "422f589f02f403198f4bcce45efccf8632afc5ca6924efd65a9adee696685356",
+        "currentSha256": "88e514122db173844af1cc74afb00af6dde49fd4792c6dd6ed3aba7aab98364c",
+        "changed": true,
+        "authorizedQcSourceChange": true
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_projection_v001.mjs",
+        "oldSha256": "350272ca2a0abc0082c69b302d3cee626c92aab51770aaf400e63a2526ae9bef",
+        "currentSha256": "350272ca2a0abc0082c69b302d3cee626c92aab51770aaf400e63a2526ae9bef",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_render_scope_v001.mjs",
+        "oldSha256": "fbff175a0b3397868031cf08908c490874f03297f3af286b28d09b0b2f955af3",
+        "currentSha256": "fbff175a0b3397868031cf08908c490874f03297f3af286b28d09b0b2f955af3",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_v001.mjs",
+        "oldSha256": "2eded3dbf718c5e006d80a9f604571fc7a86649aaca7d5d6d8eae8e92661e427",
+        "currentSha256": "2eded3dbf718c5e006d80a9f604571fc7a86649aaca7d5d6d8eae8e92661e427",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_output_directory_v001.mjs",
+        "oldSha256": "58c31d77296a47355305931eb725323d8baf044aeb6e4e502d1878bf51812e16",
+        "currentSha256": "58c31d77296a47355305931eb725323d8baf044aeb6e4e502d1878bf51812e16",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_evidence_v001.mjs",
+        "oldSha256": "2bd5522fb87e5951029b6bdeddf363d11b3f647b31712978a5e45b1117909968",
+        "currentSha256": "2bd5522fb87e5951029b6bdeddf363d11b3f647b31712978a5e45b1117909968",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_renderer_qc_v001.mjs",
+        "oldSha256": "36794ffc1e0019783041c68944c218e1874c40430f7c45fa29f82ef4613171fb",
+        "currentSha256": "36794ffc1e0019783041c68944c218e1874c40430f7c45fa29f82ef4613171fb",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_v001.mjs",
+        "oldSha256": "4d4dd82b04737f691a1f6130605a69093e89f8febb7214584d88fa38fa6051d4",
+        "currentSha256": "4d4dd82b04737f691a1f6130605a69093e89f8febb7214584d88fa38fa6051d4",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_entry_v001.tsx",
+        "oldSha256": "ae053ad3ae1b602669a0bc22b6c0ecd05c720d1e83f70441d528bfc0fb2bd1f0",
+        "currentSha256": "ae053ad3ae1b602669a0bc22b6c0ecd05c720d1e83f70441d528bfc0fb2bd1f0",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_plan_v002.mjs",
+        "oldSha256": "3a77c7feb7005fa06d7e45a6364f76ab4bc40a8622370568cf557d5090f08b79",
+        "currentSha256": "3a77c7feb7005fa06d7e45a6364f76ab4bc40a8622370568cf557d5090f08b79",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+        "oldSha256": "957952952fc736f21d7de59aedd8add53d9f12e211ed3db9f3d65e38f24bf030",
+        "currentSha256": "97aa9b2cd584b2cea15f31f0e7a813cc6ba1e1a8cdbb31bdb5d675c03be7d47d",
+        "changed": true,
+        "authorizedQcSourceChange": true
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+        "oldSha256": "da356af0fb24b5b068a4bb0b5edb10ebc1b445f111a9ac931032a79af183f00c",
+        "currentSha256": "da356af0fb24b5b068a4bb0b5edb10ebc1b445f111a9ac931032a79af183f00c",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "oldSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385",
+        "currentSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+        "oldSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b",
+        "currentSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+        "oldSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+        "currentSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+        "oldSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a",
+        "currentSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+        "oldSha256": "b7afd3589bf97e84479b8a4723296b4317165d84a5a614fa68f49894bcb3acdf",
+        "currentSha256": "b7afd3589bf97e84479b8a4723296b4317165d84a5a614fa68f49894bcb3acdf",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/pnpm-lock.yaml",
+        "oldSha256": "1bfb232ca8a693bebedc1fd84971800aad2f633b2595ed805f2078f1dad44812",
+        "currentSha256": "1bfb232ca8a693bebedc1fd84971800aad2f633b2595ed805f2078f1dad44812",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/@remotion/cli/package.json",
+        "oldSha256": "9dbefa4daf7f9c83b9131192ed176a7ecca71679a1e96d1c85219febffa0135a",
+        "currentSha256": "9dbefa4daf7f9c83b9131192ed176a7ecca71679a1e96d1c85219febffa0135a",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/react-dom/package.json",
+        "oldSha256": "d2f29e31bd48b833e48cd7bbf41f192e8ee4ff8da249fdbe10d4ac4114b8b12e",
+        "currentSha256": "d2f29e31bd48b833e48cd7bbf41f192e8ee4ff8da249fdbe10d4ac4114b8b12e",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/react/package.json",
+        "oldSha256": "d4e68a5c96babb20cad1daafea8b78822eae45b341552cf5418d06a5304fa64c",
+        "currentSha256": "d4e68a5c96babb20cad1daafea8b78822eae45b341552cf5418d06a5304fa64c",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/remotion/package.json",
+        "oldSha256": "965eb84ab06aa4acdbd9dc3751cf015eb13e3bd39e001779c7b5310f31e8b546",
+        "currentSha256": "965eb84ab06aa4acdbd9dc3751cf015eb13e3bd39e001779c7b5310f31e8b546",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "oldSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+        "currentSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/OFL_LINESeedJP.txt",
+        "oldSha256": "8aa3e80c0d02c9f999756a5bb21258700edea4c727dab6169f6460245c4b6f0a",
+        "currentSha256": "8aa3e80c0d02c9f999756a5bb21258700edea4c727dab6169f6460245c4b6f0a",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/OFL_ShipporiMincho-Bold.txt",
+        "oldSha256": "41fba056279be5f45ff9a99e44b7b53897b42732f5806d8e666e0ab49ac6bd38",
+        "currentSha256": "41fba056279be5f45ff9a99e44b7b53897b42732f5806d8e666e0ab49ac6bd38",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/ShipporiMincho-Bold.ttf",
+        "oldSha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f",
+        "currentSha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/components/TelopText.tsx",
+        "oldSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+        "currentSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/utils/telop-font.ts",
+        "oldSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c",
+        "currentSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/shared/telop-glow.ts",
+        "oldSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8",
+        "currentSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-line-break.ts",
+        "oldSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d",
+        "currentSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-render-model.ts",
+        "oldSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+        "currentSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/text-metrics.ts",
+        "oldSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a",
+        "currentSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      },
+      {
+        "path": "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffmpeg",
+        "oldSha256": "f33afb2c1e6510138dd0dd22c25b09908c2ac55780ddd7c8e35c588f076b9493",
+        "currentSha256": "f33afb2c1e6510138dd0dd22c25b09908c2ac55780ddd7c8e35c588f076b9493",
+        "changed": false,
+        "authorizedQcSourceChange": false
+      }
+    ],
+    "meaning": "旧完成媒体は旧描画規則に固定したまま保持。新規則の結果として再登録・転用していない。"
+  },
+  "frozenProductionAndDriver": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "bytes": 62164,
+      "fileSha256": "13f5778233feabd45c78c0b8bebe5ab10f0c7aba86caed0b33dc652316881e41",
+      "matched": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+      "bytes": 14144,
+      "fileSha256": "57e84c6636d7dd66000545bb4606a5d09e0581ad59bf787b3531852b02e5aab3",
+      "matched": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+      "bytes": 4964,
+      "fileSha256": "97aa9b2cd584b2cea15f31f0e7a813cc6ba1e1a8cdbb31bdb5d675c03be7d47d",
+      "matched": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+      "bytes": 18021,
+      "fileSha256": "88e514122db173844af1cc74afb00af6dde49fd4792c6dd6ed3aba7aab98364c",
+      "matched": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs",
+      "bytes": 73447,
+      "fileSha256": "9272b64a189e373ff1d9c528a0944008818f49bd708b10d8040ce66366fdc90f",
+      "matched": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_physical_clock_probe_v001.mjs",
+      "bytes": 26104,
+      "fileSha256": "1a0a2ee0ec591668e4ab1f29d4b2a6134a0a7379a97220fc160b1d17ce8f0b44",
+      "matched": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_soft_overlay_probe_v001.mjs",
+      "bytes": 23205,
+      "fileSha256": "e22f1e91456fd880f3d28a719c49402bf298b74370ad865e48c389505cb6818a",
+      "matched": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_execution_v001.test.mjs",
+      "bytes": 18492,
+      "fileSha256": "a3e93d1382c80a78ccab3f82194a669b2c6445afdee0580e851674ddde37c538",
+      "matched": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/verify_presentation_editing_preview_improvement_v001.mjs",
+      "bytes": 9766,
+      "fileSha256": "0ef18afb67cb4f152cae13fffa73446ccc5cdf252e46ed7e4ce7b621ac3420a5",
+      "matched": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/editing-service-config-v001.json",
+      "bytes": 1229,
+      "fileSha256": "893f6e5d2237367dd2fc036aad7ac1c7ee03d5d88098c383b50bad944a5d106b",
+      "matched": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/preview-improvement-config-v001.json",
+      "bytes": 1308,
+      "fileSha256": "7def3ae06e470c7b88d4e752d37d07106d8ac6bc8d41b2bfa3227a81462cc001",
+      "matched": true
+    }
+  ],
+  "generatedGitPaths": [],
+  "trackedDelta": [
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/README.md",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/preview-qc-performance-proposal-review-v001.md",
+    "evals/clip_composition/compare_presentation_editing_preview_qc_v001.mjs",
+    "evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs",
+    "evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+    "evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+    "evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+    "evals/clip_composition/presentation_orchestration_physical_clock_probe_v001.mjs",
+    "evals/clip_composition/presentation_orchestration_soft_overlay_probe_v001.mjs",
+    "evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+    "evals/clip_composition/verify_presentation_editing_preview_improvement_v001.mjs"
+  ],
+  "untrackedPaths": [
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/DEVELOPMENT_HANDOFF.md",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-comparison-regression-v001.stderr",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-comparison-regression-v001.tap",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-comparison-static-verification-v001.json",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-comparison-static-verification-v002.json",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-independent-comparison-review-v001.json",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-integration-regression-v001.stderr",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-integration-regression-v001.tap",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-integration-static-v001.json",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-integration-verification-v001.json",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-job-retry-regression-v002.stderr",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-job-retry-regression-v002.tap",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-native-boundaries-v002.tap",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-native-faults-v003.tap",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-native-first-v001.tap",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-native-small-verification-v001.json",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-preview-preflight-v001.json",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v001.stderr",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v001.tap",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v002.stderr",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v002.tap",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v003.stderr",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-process-observation-regression-v003.tap",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-related-typecheck-v001.json",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-remotion-typecheck-v001.stderr",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-remotion-typecheck-v001.stdout",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-remotion-typecheck-v002.stderr",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-remotion-typecheck-v002.stdout",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-resumption-instruction-v001.md",
+    "evals/clip_composition/presentation_editing_preview_qc_comparison_v001.test.mjs",
+    "evals/clip_composition/presentation_editing_preview_rgb_verification_v001.mjs",
+    "evals/clip_composition/presentation_editing_preview_rgb_verification_v001.test.mjs",
+    "evals/clip_composition/presentation_integrity_state_qc_before_sharing_fixture_v001.mjs",
+    "evals/clip_composition/presentation_integrity_state_qc_before_sharing_fixture_v001.test.mjs",
+    "evals/clip_composition/presentation_native_frame_execution_v001.test.mjs",
+    "evals/clip_composition/presentation_native_frame_qc_before_sharing_fixture_v001.mjs",
+    "evals/clip_composition/reproduce_presentation_editing_preview_qc_v001.mjs",
+    "node_modules",
+    "packages/shared/node_modules"
+  ],
+  "failures": []
+}

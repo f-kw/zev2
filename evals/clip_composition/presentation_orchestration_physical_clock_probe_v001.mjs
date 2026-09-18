@@ -14,7 +14,8 @@ import {materializeFiniteAutoPresentationCaptionV001} from './presentation_auto_
 import {getPresentationPulseProgramV001, buildPresentationPulseStateElementsV001} from './presentation_pulse_v001.mjs';
 import {getPresentationCaptionMotionProgramV001, buildPresentationCaptionMotionStateElementsV001}
   from './presentation_caption_motion_v001.mjs';
-import {buildPresentationNativeReferenceArgumentsV001, classifyPresentationNativeFrameRgbV001}
+import {buildPresentationNativeReferenceArgumentsV001, classifyPresentationNativeFrameRgbV001,
+  buildPresentationNativeLayerPlanV001}
   from './presentation_native_frame_qc_v001.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
 
@@ -226,7 +227,10 @@ export async function runOrchestrationPhysicalClockProbeV001({preparationPath, s
         localFrame: frame - element.startFrame, displayFrameCount: element.displayFrameCount}]}));
       references.push({id: 'omitted', layers: []});
       const files = references.map(row => path.join(outputDirectory, 'reference-' + group.kind + '-' + row.id + '.rgb'));
-      const args = buildPresentationNativeReferenceArgumentsV001({sample: {crop: group.crop, references},
+      const nativeLayers = buildPresentationNativeLayerPlanV001({samples: [{references}], sceneBindings: [group],
+        directory: path.join(outputDirectory, 'prepared-' + group.kind)});
+      assert(nativeLayers.layers.every(layer => !layer.generated), 'this clock probe requires the existing full-opacity plateau');
+      const args = buildPresentationNativeReferenceArgumentsV001({sample: {crop: group.crop, references}, nativeLayers,
         sceneBindings: [group], baseFramePath: background, outputPaths: files}).map(value => value === '-y' ? '-n' : value);
       await run('native-oracle-' + group.kind, args);
       const result = new Map();

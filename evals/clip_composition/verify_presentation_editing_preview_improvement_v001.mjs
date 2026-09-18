@@ -88,7 +88,10 @@ try {
   state = await request('initial', '/state'); await record('initial', clean(state));
   assert(state.captions.every(row => !row.hasOverride) && state.connections.every(row => !row.hasOverride));
   const detail = await request('caption-options', '/targets/caption/' + encodeURIComponent(targets.caption.id));
-  await record('caption-options', detail); assert(detail.options.some(row => row.value === 'panel' && row.enabled));
+  await record('caption-options', detail); assert(detail.options.some(row => row.value === 'panel' && row.status === 'unchecked'));
+  const captionCheck = await request('caption-applicability', '/check', {expectedRevision: state.revision, kind: 'caption',
+    itemId: targets.caption.id, selection: {preset: 'panel'}});
+  await record('caption-applicability', captionCheck); assert.equal(captionCheck.status, 'applicable');
   state = await request('caption-save', '/save', {expectedRevision: state.revision, kind: 'caption',
     itemId: targets.caption.id, selection: {preset: 'panel'}});
   assert.deepEqual(state.captions, priorCaption.captions); assert.deepEqual(state.connections, priorCaption.connections);
