@@ -1,7 +1,7 @@
 /** Scoped loopback editing service for the existing Vue client. No path or
  * command supplied by a browser can become a filesystem/executable target. */
 import {createServer} from 'node:http';
-import {randomBytes} from 'node:crypto';
+import {randomBytes, randomUUID} from 'node:crypto';
 import {createReadStream} from 'node:fs';
 import {mkdir, readFile, lstat, realpath, appendFile} from 'node:fs/promises';
 import path from 'node:path';
@@ -30,6 +30,19 @@ const send = (response, status, value) => {
   const content = Buffer.from(JSON.stringify(value));
   response.writeHead(status, {...safeHeaders, 'content-type': 'application/json; charset=utf-8', 'content-length': content.length}); response.end(content);
 };
+function accessPath(requestUrl) {
+  // Persist registered route shapes only: no query, target text, headers,
+  // request body, or arbitrary unmatched path can enter the access record.
+  let pathname;
+  try {pathname = new URL(requestUrl, 'http://127.0.0.1').pathname;} catch {return '<invalid>';}
+  if (/^\/presentation-editing\/?$/.test(pathname)) return pathname;
+  if (/^\/assets\/[a-zA-Z0-9_.-]+$/.test(pathname)) return '/assets/:asset';
+  if (/^\/api\/editing\/(state|save|jobs|retry|playhead|seek)$/.test(pathname)) return pathname;
+  if (/^\/api\/editing\/targets\/(caption|connection)\/[^/]+$/.test(pathname))
+    return pathname.replace(/\/[^/]+$/, '/:item');
+  if (/^\/api\/editing\/media\/(original|[a-f0-9-]+)\.mp4$/.test(pathname)) return '/api/editing/media/:media.mp4';
+  return '<unregistered>';
+}
 async function body(request, maximumBytes) {
   demand(request.headers['content-type']?.split(';')[0] === 'application/json', 'JSON形式で送信してください');
   let size = 0; const chunks = [];
@@ -78,12 +91,15 @@ export async function startPresentationEditingServiceV001(config) {
     await ensureRegisteredDirectory(generatedRoot);
     jobs = await createEditingJobsV001({directory, generatedRoot, drawingRulesRef,
       backgroundReuseProofPath: backgroundProofPath, backgroundReuseDecoderRef, nativeAssetReuse});
+    const applicabilityOptions = {generatedRoot, nativeAssetReuse};
     const csrfToken = randomBytes(32).toString('hex');
     const load = () => readEditingWorkspaceV001({directory, drawingRulesRef});
     const initial = await load();
     // A one-item edit cannot require more JSON than its complete original plan.
     const maximumRequestBytes = Buffer.byteLength(initial.source.planBytes);
     const operationLog = path.join(directory, 'operations.ndjson');
+    const accessLog = path.join(directory, 'access.ndjson');
+    let pendingAccess = Promise.resolve();
     const logged = async (operation, task) => {
       const start = performance.now();
       try {const value = await task(); await appendFile(operationLog, JSON.stringify({operation, status: 'passed',
@@ -99,6 +115,20 @@ export async function startPresentationEditingServiceV001(config) {
         csrfToken, ...editingTargetListV001(saved), media: jobs.listMedia(saved.revision), job};
     };
     server = createServer(async (request, response) => {
+      const arrivedAt = new Date().toISOString(), requestId = randomUUID();
+      let accessRecorded = false;
+      const recordAccess = outcome => {
+        if (accessRecorded) return; accessRecorded = true;
+        const entry = {arrivedAt, completedAt: new Date().toISOString(), requestId,
+          method: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'].includes(request.method)
+            ? request.method : '<other>', path: accessPath(request.url),
+          status: response.headersSent ? response.statusCode : null, outcome};
+        pendingAccess = pendingAccess.then(() => appendFile(accessLog, JSON.stringify(entry) + '\n'))
+          .catch(error => process.stderr.write(JSON.stringify({event: 'editing-access-record-failed',
+            requestId, code: error.code ?? 'WRITE_FAILED'}) + '\n'));
+      };
+      response.once('finish', () => recordAccess('completed'));
+      response.once('close', () => recordAccess('closed-before-finish'));
       try {
         const host = `127.0.0.1:${server.address().port}`, origin = 'http://' + host;
         demand(request.socket.remoteAddress === '127.0.0.1' && request.headers.host === host,
@@ -114,7 +144,7 @@ export async function startPresentationEditingServiceV001(config) {
           const input = await body(request, maximumRequestBytes);
           if (route === '/api/editing/save') {
             demand(exact(input, ['expectedRevision', 'kind', 'itemId', 'selection']), '保存項目が不正です');
-            const saved = await logged('save', () => saveEditingOverrideV001({directory, drawingRulesRef, ...input}));
+            const saved = await logged('save', () => saveEditingOverrideV001({directory, drawingRulesRef, applicabilityOptions, ...input}));
             return send(response, 200, await state(saved));
           }
           if (route === '/api/editing/jobs') {
@@ -139,7 +169,7 @@ export async function startPresentationEditingServiceV001(config) {
         if (route === '/api/editing/state') return send(response, 200, await state());
         const detail = /^\/api\/editing\/targets\/(caption|connection)\/([^/]+)$/.exec(route);
         if (detail) return send(response, 200, await logged('target-details', async () =>
-          editingTargetDetailsV001(await load(), detail[1], decodeURIComponent(detail[2]))));
+          editingTargetDetailsV001(await load(), detail[1], decodeURIComponent(detail[2]), applicabilityOptions)));
         if (route === '/api/editing/playhead' || route === '/api/editing/seek') {
           const {row, view} = await jobs.getMedia(url.searchParams.get('mediaId'));
           if (route.endsWith('/playhead')) {
@@ -184,9 +214,11 @@ export async function startPresentationEditingServiceV001(config) {
       }
     });
     await new Promise((resolve, reject) => {server.once('error', reject); server.listen(port, '127.0.0.1', resolve);});
-    let closed = false;
-    const close = async () => {if (closed) return; closed = true; await jobs.close();
-      await new Promise(resolve => server.close(resolve)); await releaseService();};
+    let closing;
+    const close = () => closing ??= (async () => {
+      await jobs.close();
+      await new Promise(resolve => server.close(resolve)); await pendingAccess; await releaseService();
+    })();
     return {url: `http://127.0.0.1:${server.address().port}/presentation-editing`, server, close, directory, generatedRoot};
   } catch (error) {if (server?.listening) server.close(); await releaseService(); throw error;}
 }

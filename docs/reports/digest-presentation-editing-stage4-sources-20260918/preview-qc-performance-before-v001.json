@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "stage4-preview-qc-performance-before-v001",
+  "createdAt": "2026-09-18T08:07:15.111Z",
+  "status": "observed",
+  "cases": [
+    {
+      "label": "caption",
+      "jobId": "d1d18f1b-3ec6-4f35-8b20-0513732ed953",
+      "range": {
+        "startFrame": 414,
+        "endFrameExclusive": 616
+      },
+      "savedViewSha256": "09ee0940e3597117ab69a9dbb646d08b9d7cad1af693314b9b804df0efe8ea57",
+      "drawingRulesSha256": "be0e898a4f4fe8720e07cf8ce1f9eac6831b3490edb5ccdfff2ec8bbb0a0126b",
+      "media": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-d1d18f1b-3ec6-4f35-8b20-0513732ed953/render/presentation-rendered-v002.mp4",
+        "bytes": 3921511,
+        "fileSha256": "74f5ac4df4c6c4acfc1d0bd52678b9613a8a04f81ecc0f6aa365f924b49638cc"
+      },
+      "resultRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-d1d18f1b-3ec6-4f35-8b20-0513732ed953/result.json",
+        "bytes": 10937403,
+        "fileSha256": "7c72435940e46513b92a7009b35391724d96a4477ff852af0c05d32a094a2ce5"
+      },
+      "milliseconds": {
+        "jobElapsed": 129044,
+        "rendererElapsed": 128675.30587499999,
+        "background": 5094.968834,
+        "rendererPreparationIncludingBackground": 7612.331791,
+        "drawAndQc": 120397.538625,
+        "drawOutsideCompletedQc": 53874.21225000001,
+        "completedQc": 66523.32637499999,
+        "replay": 38231.754375,
+        "nativePreparation": 10578.444417000006,
+        "finiteState": 17265.370708999995,
+        "frameExtraction": 3528.9952499999636,
+        "completedRgbCrop": 438.5361269999994,
+        "referenceGeneration": 12298.409875000012,
+        "nativeUnseparated": 968.8622900000191
+      },
+      "notIndividuallyMeasured": {
+        "inputBinding": "not individually timed in the preserved run; do not infer from filesystem timestamps",
+        "layoutInspection": "not individually timed in the preserved run; do not infer from filesystem timestamps",
+        "productionPngDrawing": "not individually timed in the preserved run; do not infer from filesystem timestamps",
+        "mainVideoComposition": "not individually timed in the preserved run; do not infer from filesystem timestamps",
+        "rgbDistance": "not individually timed in the preserved run; do not infer from filesystem timestamps",
+        "evidenceWriting": "not individually timed in the preserved run; do not infer from filesystem timestamps"
+      },
+      "nativeProcessMilliseconds": {
+        "tool-version": 30.567167000001064,
+        "source-frame-extract": 1678.5879989999812,
+        "completed-frame-extract": 1850.4072509999824,
+        "completed-rgb-crop": 438.5361269999994,
+        "native-reference-composite": 12298.409875000012
+      },
+      "counts": {
+        "frames": 202,
+        "samples": 12,
+        "logicalReferences": 92,
+        "nativeDraws": 17,
+        "bitmapReuses": 0,
+        "existingFullFrameCacheAlreadyPresent": true,
+        "oldRepeatedPngAlphaComputations": 56,
+        "distinctPngAlphaInputs": 14
+      },
+      "timingCaution": "Measured nested intervals overlap. Do not sum renderer preparation, background, drawAndQc, completedQc, and finiteState as independent stages."
+    },
+    {
+      "label": "connection",
+      "jobId": "7b68ed40-58d0-4772-bf3c-fe36e46dd5e7",
+      "range": {
+        "startFrame": 222,
+        "endFrameExclusive": 445
+      },
+      "savedViewSha256": "6e48ecc7e9e03f48eac6fe843ae29503c05f8d0d23f75d939e72aa231327e5e9",
+      "drawingRulesSha256": "be0e898a4f4fe8720e07cf8ce1f9eac6831b3490edb5ccdfff2ec8bbb0a0126b",
+      "media": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-7b68ed40-58d0-4772-bf3c-fe36e46dd5e7/render/presentation-rendered-v002.mp4",
+        "bytes": 5517173,
+        "fileSha256": "d5890a7c91d6481bc79b0106bcc34a50e15b28b5a23858e944da28bbc6fc8436"
+      },
+      "resultRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-7b68ed40-58d0-4772-bf3c-fe36e46dd5e7/result.json",
+        "bytes": 22547609,
+        "fileSha256": "a84d6a259defd59ae2d8053b7df66d78e4038cbfdf6d73772e8ec1ddcb119c44"
+      },
+      "milliseconds": {
+        "jobElapsed": 308126,
+        "rendererElapsed": 307649.64833299996,
+        "background": 5058.515541,
+        "rendererPreparationIncludingBackground": 8769.783333,
+        "drawAndQc": 298162.747792,
+        "drawOutsideCompletedQc": 97926.50941700005,
+        "completedQc": 200236.23837499996,
+        "replay": 42920.647540999984,
+        "nativePreparation": 791.6060839999991,
+        "finiteState": 155950.09287499997,
+        "frameExtraction": 16540.779874000204,
+        "completedRgbCrop": 1528.9279179998557,
+        "referenceGeneration": 134139.76437399993,
+        "nativeUnseparated": 3710.342499999999
+      },
+      "notIndividuallyMeasured": {
+        "inputBinding": "not individually timed in the preserved run; do not infer from filesystem timestamps",
+        "layoutInspection": "not individually timed in the preserved run; do not infer from filesystem timestamps",
+        "productionPngDrawing": "not individually timed in the preserved run; do not infer from filesystem timestamps",
+        "mainVideoComposition": "not individually timed in the preserved run; do not infer from filesystem timestamps",
+        "rgbDistance": "not individually timed in the preserved run; do not infer from filesystem timestamps",
+        "evidenceWriting": "not individually timed in the preserved run; do not infer from filesystem timestamps"
+      },
+      "nativeProcessMilliseconds": {
+        "tool-version": 30.27820899998187,
+        "source-frame-extract": 8038.707166000211,
+        "completed-frame-extract": 8502.072707999992,
+        "completed-rgb-crop": 1528.9279179998557,
+        "native-reference-composite": 134139.76437399993
+      },
+      "counts": {
+        "frames": 223,
+        "samples": 41,
+        "logicalReferences": 1051,
+        "nativeDraws": 40,
+        "bitmapReuses": 6,
+        "existingFullFrameCacheAlreadyPresent": true,
+        "oldRepeatedPngAlphaComputations": 619,
+        "distinctPngAlphaInputs": 60
+      },
+      "timingCaution": "Measured nested intervals overlap. Do not sum renderer preparation, background, drawAndQc, completedQc, and finiteState as independent stages."
+    }
+  ],
+  "decision": "接続側は参照生成134.14秒が有限状態検査155.95秒の大部分。同一PNGと有限fade入力の反復処理共有と、元動画・完成動画それぞれ一度の必要frame抽出を実装する。検査点・候補・状態は減らさない。未分離の工程には今回個別timerを追加する。",
+  "retention": "旧周辺媒体と旧描画規則の証拠を保持。現行規則へ付け替えない。"
+}

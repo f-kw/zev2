@@ -1,4 +1,5 @@
-/** Process/storage tests use synthetic bytes only; they are not video evidence. */
+/** Process/storage tests use synthetic media bytes; they are not video evidence.
+ * Caption saves still pass the real font/geometry acceptance and drawing rules. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdtemp, readFile, writeFile, lstat, utimes, rename, rm} from 'node:fs/promises';
@@ -7,12 +8,13 @@ import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createEditingJobsV001} from './presentation_editing_jobs_v001.mjs';
-import {initializeEditingWorkspaceV001, bindEditingFileV001, hashEditingValueV001,
+import {initializeEditingWorkspaceV001, bindEditingFileV001,
   saveEditingOverrideV001} from './presentation_editing_state_v001.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const saved = path.join(repo, 'docs/reports/digest-presentation-orchestration-stage3-inputs-20260918');
-const rules = {canonicalSha256: hashEditingValueV001({test: 'synthetic process and storage tests'}), files: []};
+const {buildEditedOrchestrationDrawingRulesRefV001} = await import('./presentation_orchestration_edited_render_v001.mjs');
+const rules = await buildEditedOrchestrationDrawingRulesRefV001();
 const json = async file => JSON.parse(await readFile(file, 'utf8'));
 const exists = async file => {try {await lstat(file); return true;} catch (error) {if (error.code === 'ENOENT') return false; throw error;}};
 async function until(operation) {
@@ -93,6 +95,7 @@ test('即時失敗を記録し、後から保存が進んでも失敗時の状�
   const failed = await finished(manager);
   assert.equal(failed.id, started.id); assert.equal(failed.status, 'failed');
   const changed = await saveEditingOverrideV001({directory: f.directory, drawingRulesRef: rules,
+    applicabilityOptions: {generatedRoot: f.generatedRoot, nativeAssetReuse: path.join(f.generatedRoot, 'native-assets')},
     expectedRevision: f.snapshot.revision, kind: 'caption', itemId: f.snapshot.context.captionIds[0], selection: 'Normal'});
   assert.notEqual(changed.revision, f.snapshot.revision);
   await writeFile(f.modePath, 'success');
@@ -130,6 +133,7 @@ test('実行中の保存は固定入力を変えず、同時開始と復帰後�
   const started = attempts.find(row => row.status === 'fulfilled').value;
   await until(() => exists(f.ready));
   const changed = await saveEditingOverrideV001({directory: f.directory, drawingRulesRef: rules,
+    applicabilityOptions: {generatedRoot: f.generatedRoot, nativeAssetReuse: path.join(f.generatedRoot, 'native-assets')},
     expectedRevision: f.snapshot.revision, kind: 'connection', itemId: 'connection-01', selection: 'black-separator'});
   const restarted = await f.create();
   await writeFile(f.release, 'release'); await until(() => exists(f.resultReady));

@@ -1,0 +1,115 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-09-18T08:34:46.505Z",
+  "tests": {
+    "uniqueStateJobsAndPhysical": 20,
+    "finalNormalInputRerunOfExistingTest": 1,
+    "httpIntegration": 1,
+    "uniqueTotal": 21,
+    "failures": 0,
+    "notes": "19件成功後に同時字幕検査を1件追加。通常表示の現行UI形式を直した後はその既存1件を再確認。重複を合算しない。"
+  },
+  "http": {
+    "exitCode": 0,
+    "elapsedMilliseconds": 7473.497333,
+    "stderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/http-access-integration-v002.stderr.txt",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "accessRecord": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/service-test-c193eacf-7c1d-4458-884f-ff0bee7c74ba/access.ndjson",
+      "bytes": 5906,
+      "fileSha256": "d289c8e6c83f00f156447d37ee0b02e16b02a6670119413438ed4146ba5abde9"
+    },
+    "requests": 28,
+    "statuses": {
+      "200": 15,
+      "206": 1,
+      "400": 3,
+      "403": 4,
+      "404": 4,
+      "409": 1
+    },
+    "allCompleted": true,
+    "requestIdsUnique": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-state-jobs-v001.tap",
+      "bytes": 5156,
+      "fileSha256": "707817bd2082fad70a42f2d14bbd7c6a9062d165d3c9c3d17622e45b2c9f77ee"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-overlap-v002.tap",
+      "bytes": 4339,
+      "fileSha256": "d427f7e81ddf411280638c5880f1c2b46010d798879a674d64e1ee3ff21fba75"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-normal-input-v001.tap",
+      "bytes": 4166,
+      "fileSha256": "c12445aed8df06137d50ba2a1d77ae161c437a77d4fead1b9bc980f1baf81ef8"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/http-access-integration-v002.tap",
+      "bytes": 347,
+      "fileSha256": "98343be4ce06ab09caff7c74b8aff5e8ed426206639f9857e3b27df1f2c1f8b0"
+    }
+  ],
+  "candidateGetTiming": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/candidate-get-timing-v001.json",
+    "bytes": 22956,
+    "fileSha256": "8cc701e9f2270c62cb617c12824f889e1af43b763567732588beecb0a4cc1e89"
+  },
+  "sourceReferences": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_state_v001.mjs",
+      "bytes": 24276,
+      "fileSha256": "cc4532a7f382f6424b90b92aeeae43048a3a1033d47d6dc7027439f3d1514a80"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_applicability_v001.mjs",
+      "bytes": 16401,
+      "fileSha256": "c71617956c9ec170955c80889352afde30d3f9f9b82312c9281fb2d38ed90947"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/inspect_presentation_editing_layout_v001.ts",
+      "bytes": 711,
+      "fileSha256": "098a4ad7e1c9a6017b92bc5983b43e95870452a9b9d7de9e340795221554ba15"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_state_v001.test.mjs",
+      "bytes": 23607,
+      "fileSha256": "db351f92d5d18d96510ca3f23919c30ff4fc87e1647a929ecedc4ab1cd8d3f4c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_jobs_v001.test.mjs",
+      "bytes": 13071,
+      "fileSha256": "6f865c414b68ef735f9be4af2e34de652326715cbcff25f3f79f15935375fa31"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/serve_presentation_editing_v001.mjs",
+      "bytes": 17084,
+      "fileSha256": "96ba0a66c58a6ce5d2d7fd73bc63de7f8a396762a3a0b2d9696fc89b224b8295"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/serve_presentation_editing_v001.test.mjs",
+      "bytes": 8242,
+      "fileSha256": "b19f31d55c1580e8e84fdea686e36f0e3784539922a54169303fd94006cf62ef"
+    }
+  ],
+  "verified": [
+    "候補表示と直接保存が同じ実書体・全有限状態・配置可視性検査を使用",
+    "通常表示が成立する字幕で別の5表現を拒否、保存内容・版・時刻不変",
+    "再計算された記録hashでも旧描画規則に束縛した観測を拒否",
+    "同時字幕の干渉を拒否、終了と開始が接する字幕を同時扱いしない",
+    "現行UIの通常表示指定と明示上書きを一致させ、自動案へのResetと区別",
+    "未知追加key・古い保存版・競合・不正要求を拒否",
+    "別processとservice再起動で保存内容・登録媒体を再読",
+    "アクセス記録は登録経路形状のみでquery・本文・CSRF・未登録pathを含まない"
+  ],
+  "reviewFix": "重複停止要求の全呼出しが同じ停止完了を待ち、log flushと所有lock解放を先走らない。独立読取り指摘後、最終sourceでHTTP検査を再実行。",
+  "browserAcceptance": false,
+  "fullVideoRegenerated": false,
+  "qcPerformancePatchApplied": false
+}

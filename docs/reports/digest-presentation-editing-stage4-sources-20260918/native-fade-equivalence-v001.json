@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "temporary-native-fade-equivalence-conclusion-v001",
+  "executedAt": "2026-09-18T08:09:15.337Z",
+  "tool": {
+    "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+    "bytes": 442864,
+    "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+  },
+  "smallSyntheticScope": {
+    "width": 64,
+    "height": 48,
+    "sourceAlphaValues": "all 0..255",
+    "displayFrameCounts": [
+      7,
+      20
+    ],
+    "phases": "all finite fade values 1/4,2/4,3/4,4/4 at entrance/exit and changing second layer",
+    "referenceVariants": [
+      "single",
+      "omitted",
+      "two-ordered",
+      "two-swapped",
+      "same-png-two-phases"
+    ]
+  },
+  "singleLayerAlwaysVisible": true,
+  "opaqueFadeIdentityRgba": [
+    {
+      "id": "a",
+      "exact": true,
+      "beforeSha256": "028eb3c7ea5bd2cd59eb416480323335ee3cd7c3872d5c28e11f5cbb6e2f059e",
+      "afterSha256": "028eb3c7ea5bd2cd59eb416480323335ee3cd7c3872d5c28e11f5cbb6e2f059e"
+    },
+    {
+      "id": "b",
+      "exact": true,
+      "beforeSha256": "ad834ed72a12adedf4b662dd095d35e371812f3a67278fd71cd617a59087a3f5",
+      "afterSha256": "ad834ed72a12adedf4b662dd095d35e371812f3a67278fd71cd617a59087a3f5"
+    }
+  ],
+  "perFormat": {
+    "skip-opaque": {
+      "rgb24": {
+        "comparisons": 85,
+        "equal": 59,
+        "failed": 26,
+        "maxByteDifference": 4
+      },
+      "yuv420p": {
+        "comparisons": 85,
+        "equal": 59,
+        "failed": 26,
+        "maxByteDifference": 1
+      }
+    },
+    "skip-opaque-gbrap": {
+      "rgb24": {
+        "comparisons": 85,
+        "equal": 85,
+        "failed": 0,
+        "maxByteDifference": 0
+      },
+      "yuv420p": {
+        "comparisons": 85,
+        "equal": 85,
+        "failed": 0,
+        "maxByteDifference": 0
+      }
+    },
+    "cached-png": {
+      "rgb24": {
+        "comparisons": 85,
+        "equal": 43,
+        "failed": 42,
+        "maxByteDifference": 4
+      },
+      "yuv420p": {
+        "comparisons": 85,
+        "equal": 43,
+        "failed": 42,
+        "maxByteDifference": 1
+      }
+    },
+    "cached-png-gbrap": {
+      "rgb24": {
+        "comparisons": 85,
+        "equal": 85,
+        "failed": 0,
+        "maxByteDifference": 0
+      },
+      "yuv420p": {
+        "comparisons": 85,
+        "equal": 85,
+        "failed": 0,
+        "maxByteDifference": 0
+      }
+    }
+  },
+  "rgbaRoundTripAllExact": true,
+  "conclusion": "Both optimizations require explicit format=gbrap between RGBA/native PNG and overlay to retain the existing geq format conversion. PNG round-trip itself is byte-exact. This is synthetic evidence only; production source unchanged and no real Digest render was executed.",
+  "evidence": [
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/summary.json",
+      "bytes": 6668,
+      "fileSha256": "f0ba29bb4d39db75b4c1b67cdd7c18d41be83d7b26b6cabed8c419b3aa81d76d"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/comparisons.json",
+      "bytes": 325189,
+      "fileSha256": "a03353934b866a5df745d2b178c1adbc7ea5f2c5bc6964aae181160ec24acc4e"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/commands.json",
+      "bytes": 592655,
+      "fileSha256": "8c2a27f90170ee568ce2edb8ae38feebf557c268d35c29630890847dfdea40b8"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/rgba-roundtrip.json",
+      "bytes": 3435,
+      "fileSha256": "f3e5e0826e0d404f906a8a1e7550f9905bf58741adffa80a540f1840737b08eb"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/check.mjs",
+      "bytes": 9608,
+      "fileSha256": "c5b46a4ed08616e4a08718b50ff2b3b940025e5363ec7a86e457665721f3c35f"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/legacy-builder.txt",
+      "bytes": 3249,
+      "fileSha256": "bfba7a414f94d9b9b4416079fb77b7c295105db2e0ed99d705b5211bb44c6c18"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/a.png",
+      "bytes": 598,
+      "fileSha256": "71d495762b984a121ff95284c98bf18e8529edc72d8f75af63dcad9656d4a877"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/b.png",
+      "bytes": 646,
+      "fileSha256": "d042be9c684a50d09b31a0e190dc6009b540b352e319f7f1455aa181affb24de"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/base.png",
+      "bytes": 575,
+      "fileSha256": "4115837cc008033aff93f7b6044f1aaba50637146ea894b008d60448411786ea"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/formats-legacy.log",
+      "bytes": 24386,
+      "fileSha256": "9e3e64ab894563fcb0d1a47d5f480c2a23b51ed3bb3839a3972992d7b4630282"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/formats-skip-opaque.log",
+      "bytes": 22928,
+      "fileSha256": "fb039aa820771db2ed9bf961d732ad6f3d05972091b2baef28db91d842da2bf5"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/formats-skip-opaque-gbrap.log",
+      "bytes": 24622,
+      "fileSha256": "3371df401db23afe555b31322973ddcdbc0d6a7ce70c4fc2eb118b6fe7b13108"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/formats-cached-png.log",
+      "bytes": 23466,
+      "fileSha256": "fd2daef6484cddf4e6feb062adb4ffc3ec1424b405b13df4dd89e4dd0c9499b2"
+    },
+    {
+      "path": "/private/tmp/stage4-native-fade-equivalence-v2-NSpXGZ/formats-cached-png-gbrap.log",
+      "bytes": 25693,
+      "fileSha256": "6ef820c067679b2ad765a972c596bf638e3360e9c7791d2e29cf6a55c0254643"
+    }
+  ],
+  "status": "synthetic-equivalence-investigation-only-production-unchanged"
+}

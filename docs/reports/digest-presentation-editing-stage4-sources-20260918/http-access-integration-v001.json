@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-09-18T08:30:35.384Z",
+  "command": "Node 20.19.6 --test evals/clip_composition/serve_presentation_editing_v001.test.mjs; ZEV_EDITING_SERVICE_FIXTURE_CONFIG points to the registered original config",
+  "exitCode": 0,
+  "tests": 1,
+  "failures": 0,
+  "elapsedMilliseconds": 7553.088875,
+  "tap": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/http-access-integration-v001.tap",
+    "bytes": 347,
+    "fileSha256": "328742cafe1274acc8ec5504f2eac2cc98519f390cd03408e270ff88c951629c"
+  },
+  "stderr": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/http-access-integration-v001.stderr.txt",
+    "bytes": 0,
+    "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "accessRecord": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/service-test-5e13496e-d114-4c21-989c-7a49d616862c/access.ndjson",
+    "bytes": 5906,
+    "fileSha256": "bfb65815a152f64afceb5d29c3dcef99ec0c8a253455c486a9715e1dc001f7a6"
+  },
+  "accessSummary": {
+    "requests": 28,
+    "statuses": {
+      "200": 15,
+      "206": 1,
+      "400": 3,
+      "403": 4,
+      "404": 4,
+      "409": 1
+    },
+    "requestIdentifiersUnique": true,
+    "allCompleted": true
+  },
+  "verified": [
+    "画面資源と動画Range配信",
+    "同一origin保存、競合・不正要求拒否",
+    "現行UIの通常表示選択と明示上書き、独立Reset",
+    "追加key付き通常表示要求の拒否と保存版不変",
+    "再起動後の保存・媒体登録",
+    "応答200/403/206のアクセス記録",
+    "query・未登録path・本文・CSRF値をアクセス記録へ保存しない"
+  ],
+  "browserAcceptance": false,
+  "qcPerformancePatchApplied": false,
+  "sourceReferences": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/serve_presentation_editing_v001.mjs",
+      "bytes": 17092,
+      "fileSha256": "6e86597bf67c7e83c706b8ed5c90c25e97475d059091232ab29130f0007f580a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/serve_presentation_editing_v001.test.mjs",
+      "bytes": 8242,
+      "fileSha256": "b19f31d55c1580e8e84fdea686e36f0e3784539922a54169303fd94006cf62ef"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_state_v001.mjs",
+      "bytes": 24276,
+      "fileSha256": "cc4532a7f382f6424b90b92aeeae43048a3a1033d47d6dc7027439f3d1514a80"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_applicability_v001.mjs",
+      "bytes": 16401,
+      "fileSha256": "c71617956c9ec170955c80889352afde30d3f9f9b82312c9281fb2d38ed90947"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/inspect_presentation_editing_layout_v001.ts",
+      "bytes": 711,
+      "fileSha256": "098a4ad7e1c9a6017b92bc5983b43e95870452a9b9d7de9e340795221554ba15"
+    }
+  ]
+}

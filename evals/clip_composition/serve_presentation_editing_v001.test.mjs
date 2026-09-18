@@ -51,6 +51,8 @@ test('loopback HTTPの保存・再起動・Range配信と外部要求/path/競�
     assert.equal((await request('/media/..%2f..%2fdocument.json')).status, 404);
     assert.equal((await fetch(origin + '/runtime/presentation-editing/document.json')).status, 404);
     assert.equal((await request('/state')).status, 200);
+    assert.equal((await request('/state?secret-query=must-not-be-recorded')).status, 200);
+    assert.equal((await fetch(origin + '/must-not-be-recorded')).status, 404);
     const bad = await post('/save', {...change, selection: {preset: 'color', scope: 'partial-caption',
       startUtf16: 0, endUtf16: 1, selectedText: '<script>'}}, state.csrfToken);
     assert.equal(bad.status, 400);
@@ -72,8 +74,28 @@ test('loopback HTTPの保存・再起動・Range配信と外部要求/path/競�
     assert.equal(restored.revision, saved.revision); assert.equal(restored.captions.find(row => row.id === caption.id).preset, 'panel');
     assert.equal(restored.media.length, 1); assert.equal(restored.media[0].id, 'original');
     assert.notEqual(restored.csrfToken, saved.csrfToken);
-    const resetResponse = await post('/save', {expectedRevision: restored.revision, kind: 'caption', itemId: caption.id,
+    const normalResponse = await post('/save', {expectedRevision: restored.revision, kind: 'caption', itemId: caption.id,
+      selection: {preset: 'normal'}}, restored.csrfToken);
+    assert.equal(normalResponse.status, 200); const normal = await normalResponse.json();
+    assert.equal(normal.captions.find(row => row.id === caption.id).preset, 'normal');
+    assert.equal(normal.captions.find(row => row.id === caption.id).hasOverride, true);
+    assert.notEqual(normal.revision, state.revision, '通常表示への固定を自動案へのResetと混同しない');
+    const malformedNormal = await post('/save', {expectedRevision: normal.revision, kind: 'caption', itemId: caption.id,
+      selection: {preset: 'normal', unregistered: true}}, restored.csrfToken);
+    assert.equal(malformedNormal.status, 400);
+    assert.equal((await (await request('/state')).json()).revision, normal.revision);
+    const resetResponse = await post('/save', {expectedRevision: normal.revision, kind: 'caption', itemId: caption.id,
       selection: 'Reset'}, restored.csrfToken);
     assert.equal(resetResponse.status, 200); assert.equal((await resetResponse.json()).revision, state.revision);
+    await service.close();
+    const accessText = await readFile(path.join(config.directory, 'access.ndjson'), 'utf8');
+    const access = accessText.trim().split('\n').map(line => JSON.parse(line));
+    assert(access.some(row => row.path === '/presentation-editing' && row.status === 200));
+    assert(access.some(row => row.path === '/api/editing/save' && row.status === 403));
+    assert(access.some(row => row.path === '/api/editing/media/:media.mp4' && row.status === 206));
+    assert(access.every(row => row.outcome === 'completed' && row.requestId && row.arrivedAt && row.completedAt));
+    assert.equal(new Set(access.map(row => row.requestId)).size, access.length);
+    assert(!accessText.includes('must-not-be-recorded') && !accessText.includes(state.csrfToken)
+      && !accessText.includes(restored.csrfToken) && !accessText.includes('<script>'));
   } finally {await service.close();}
 });

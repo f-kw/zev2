@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFile} from 'node:child_process';
+import {createHash} from 'node:crypto';
 import {promisify} from 'node:util';
 import {mkdtemp, mkdir, readFile, writeFile, stat} from 'node:fs/promises';
 import os from 'node:os';
@@ -9,32 +10,67 @@ import {fileURLToPath} from 'node:url';
 import {initializeEditingWorkspaceV001, readEditingWorkspaceV001, saveEditingOverrideV001,
   bindEditingFileV001, editingColorChoiceV001, editingTargetListV001, editingTargetDetailsV001,
   hashEditingValueV001, writeEditingSnapshotV001} from './presentation_editing_state_v001.mjs';
-import {createOrchestrationContextV001, resolveOrchestrationDrawingViewV001,
-  editOrchestrationOverrideV001, restoreOrchestrationDrawingViewEvidenceV001} from './presentation_orchestration_v001.mjs';
+import {createOrchestrationContextV001, createOrchestrationJudgmentInputV001, fixOrchestrationJudgmentV001,
+  restoreOrchestrationDrawingViewEvidenceV001} from './presentation_orchestration_v001.mjs';
 import {getEditingPlaybackTargetsV001, getEditingPlaybackSeekV001, deriveEditingPreviewRangeV001}
   from './presentation_editing_navigation_v001.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const saved = path.join(repo, 'docs/reports/digest-presentation-orchestration-stage3-inputs-20260918');
-const rules = {canonicalSha256: hashEditingValueV001({test: 'fixed finite drawing rules'}), files: []};
+const {buildEditedOrchestrationDrawingRulesRefV001} = await import('./presentation_orchestration_edited_render_v001.mjs');
+const rules = await buildEditedOrchestrationDrawingRulesRefV001();
+const generatedRoot = await mkdtemp(path.join(repo, 'evals/clip_composition/outputs/presentation/stage4-editing-state-test-'));
+const applicabilityOptions = {generatedRoot, nativeAssetReuse: path.join(generatedRoot, 'native-assets')};
 const read = async file => JSON.parse(await readFile(file, 'utf8'));
-async function fixture() {
+async function fixture({savedInputDirectory = saved} = {}) {
   const root = await mkdtemp(path.join(os.tmpdir(), 'zev-stage4-state-test-'));
   const original = path.join(root, 'original-fixture.mp4'); await writeFile(original, 'synthetic storage-only fixture');
   const directory = path.join(root, 'editing');
-  const snapshot = await initializeEditingWorkspaceV001({directory, savedInputDirectory: saved,
+  const snapshot = await initializeEditingWorkspaceV001({directory, savedInputDirectory,
     title: '保存と時計の試験用コピー', originalMedia: await bindEditingFileV001(original),
     originalDrawingRulesRef: rules, drawingRulesRef: rules, backgroundProofPath: null});
   return {root, directory, snapshot};
 }
+
+/** The same real caption, font and finite programs are used with a test-only
+ * safe region. Automatic meaning choices are rebuilt against those new bytes. */
+async function geometryFixture(safeWidth) {
+  const savedInputDirectory = await mkdtemp(path.join(generatedRoot, 'geometry-source-'));
+  const source = await read(path.join(saved, 'source-bindings.json'));
+  const plan = JSON.parse(source.planBytes);
+  const margin = Math.floor((plan.canvas.width - safeWidth) / 2);
+  plan.canvas.safeAreaPx.left = margin; plan.canvas.safeAreaPx.right = margin;
+  source.planBytes = JSON.stringify(plan, null, 2) + '\n';
+  const planPath = path.join(savedInputDirectory, 'normal-plan.json');
+  await writeFile(planPath, source.planBytes);
+  const fileSha256 = createHash('sha256').update(source.planBytes).digest('hex');
+  source.planRef = {...source.planRef, path: planPath, fileSha256};
+  source.captionContext.baselineRef = {...source.captionContext.baselineRef, path: planPath, fileSha256,
+    canonicalSha256: hashEditingValueV001(plan)};
+  const context = createOrchestrationContextV001(source);
+  const savedSelection = await read(path.join(saved, 'selectionRecord.json'));
+  const evidence = Object.fromEntries(['productionPurpose', 'captions', 'contexts', 'observations', 'audioEvidence',
+    'audioCandidates'].map(key => [key, savedSelection.input[key]]));
+  const input = createOrchestrationJudgmentInputV001({context, evidence});
+  const reply = await read(path.join(saved, 'raw-ai-response-v001.json'));
+  reply.inputSha256 = input.inputSha256;
+  const replyBytes = JSON.stringify(reply, null, 2) + '\n';
+  const state = fixOrchestrationJudgmentV001({context, input, replyBytes});
+  const files = {...state, 'source-bindings': source, 'fresh-input': input};
+  for (const [name, value] of Object.entries(files))
+    await writeFile(path.join(savedInputDirectory, name + '.json'), JSON.stringify(value, null, 2) + '\n');
+  await writeFile(path.join(savedInputDirectory, 'raw-ai-response-v001.json'), replyBytes);
+  return fixture({savedInputDirectory});
+}
 async function fileState(directory) {
-  const names = ['source-bindings', 'captionAuto', 'connectionAuto', 'selectionRecord', 'captionOverrides', 'connectionOverrides'];
+  const names = ['document', 'source-bindings', 'fresh-input', 'raw-ai-response-v001', 'original-drawing-evidence',
+    'captionAuto', 'connectionAuto', 'selectionRecord', 'captionOverrides', 'connectionOverrides'];
   return Object.fromEntries(await Promise.all(names.map(async name => {
     const file = path.join(directory, name + '.json'); return [name, {bytes: await readFile(file, 'utf8'), mtimeMs: (await stat(file)).mtimeMs}];
   })));
 }
 function save(snapshot, kind, itemId, selection) {
-  return saveEditingOverrideV001({directory: snapshot.directory, drawingRulesRef: rules,
+  return saveEditingOverrideV001({directory: snapshot.directory, drawingRulesRef: rules, applicabilityOptions,
     expectedRevision: snapshot.revision, kind, itemId, selection});
 }
 test('一件追加・明示Normal・Resetは独立して保存され別processから再読できる', async () => {
@@ -50,9 +86,17 @@ test('一件追加・明示Normal・Resetは独立して保存され別process�
     process.stdout.write(result.revision);`;
   const result = await promisify(execFile)(process.execPath, ['--input-type=module', '-e', source]);
   assert.equal(result.stdout, changed.revision); assert.equal(result.stderr, '');
-  const normal = await save(changed, 'caption', id, 'Normal');
+  const normal = await save(changed, 'caption', id, {preset: 'normal'});
   assert.equal(normal.state.captionOverrides.entries.find(row => row.captionId === id).role, 'Normal');
-  const reset = await save(normal, 'caption', id, 'Reset');
+  const normalFiles = await fileState(directory);
+  const explicitNormal = await save(normal, 'caption', id, 'Normal');
+  assert.equal(explicitNormal.revision, normal.revision); assert.equal(explicitNormal.savedAt, normal.savedAt);
+  assert.deepEqual(await fileState(directory), normalFiles);
+  await assert.rejects(save(explicitNormal, 'caption', id, {preset: 'normal', unexpected: true}));
+  assert.deepEqual(await fileState(directory), normalFiles);
+  const afterInvalid = await readEditingWorkspaceV001({directory, drawingRulesRef: rules});
+  assert.equal(afterInvalid.revision, normal.revision); assert.equal(afterInvalid.savedAt, normal.savedAt);
+  const reset = await save(afterInvalid, 'caption', id, 'Reset');
   assert.equal(reset.revision, initial.revision);
   assert.equal((await fileState(directory)).captionOverrides.bytes, before.captionOverrides.bytes);
   const resetAgain = await save(reset, 'caption', id, 'Reset');
@@ -114,7 +158,7 @@ test('同語反復・改行・結合文字・絵文字の選択を正確な出�
 test('Pulse候補は実在する適格ピークだけを時刻で表示し通常字幕へ追加できる', async () => {
   const {snapshot} = await fixture();
   const id = editingTargetListV001(snapshot).captions.find(row => row.status === 'normal').id;
-  const details = editingTargetDetailsV001(snapshot, 'caption', id);
+  const details = await editingTargetDetailsV001(snapshot, 'caption', id, applicabilityOptions);
   assert(details.peakOptions.length > 0);
   for (const peak of details.peakOptions) {
     assert(snapshot.source.captionContext.pulseTimingEvidence.peaks.some(row => row.peakId === peak.id));
@@ -185,4 +229,93 @@ test('全32字幕・全接続の一覧seekと動画位置逆引きがframe境界
     const {seconds} = getEditingPlaybackSeekV001({playingView: view, range, kind: 'connection', itemId: row.connectionId});
     assert(getEditingPlaybackTargetsV001({playingView: view, currentView: view, range, seconds}).connectionIds.includes(row.connectionId));
   }
+});
+
+test('実書体でNormalが収まっても拡大・Panel・全動作が収まらなければ候補と直接保存を同じ物理判定で拒否する', async t => {
+  t.diagnostic('実書体による適用検査の証拠: ' + generatedRoot);
+  const {inspectEditingCaptionApplicabilityV001} = await import('./presentation_editing_applicability_v001.mjs');
+  const {snapshot: base} = await fixture();
+  const id = editingTargetListV001(base).captions.find(row => row.status === 'normal').id;
+  const calibration = await inspectEditingCaptionApplicabilityV001({plan: base.view.resolvedPlan, targetId: id,
+    drawingRulesRef: rules, options: applicabilityOptions});
+  assert.equal(calibration.status, 'passed');
+  const measured = await read(calibration.observationRef.path);
+  assert.equal(measured.body.layout.items.length, 1);
+  const safeWidth = Math.ceil(measured.body.layout.items[0].wrapper.width);
+  const {snapshot: original} = await geometryFixture(safeWidth);
+  const semanticChoice = original.state.selectionRecord.captions.find(row => row.captionId === id);
+  assert.deepEqual(semanticChoice.selection.allowedPresets, [{preset: 'normal'}]);
+  // A different human choice is accepted when it passes the physical check.
+  const captionChanged = await save(original, 'caption', id, {preset: 'color', scope: 'whole-caption'});
+  const snapshot = await save(captionChanged, 'connection', 'connection-01', 'black-separator');
+  const before = await fileState(snapshot.directory), revision = snapshot.revision, savedAt = snapshot.savedAt;
+  assert.equal(snapshot.state.captionOverrides.entries.length, 1);
+  assert.equal(snapshot.state.connectionOverrides.entries.length, 1);
+  const details = await editingTargetDetailsV001(snapshot, 'caption', id, applicabilityOptions);
+  assert.equal(details.options.find(row => row.value === 'normal').enabled, true);
+  assert.equal(details.options.find(row => row.value === 'color').enabled, true);
+  const anchorPeakId = original.state.selectionRecord.input.captions.find(row => row.captionId === id).eligiblePulsePeakIds[0];
+  assert(anchorPeakId);
+  for (const preset of ['scale', 'panel', 'pulse', 'bounce', 'shake']) {
+    const option = details.options.find(row => row.value === preset);
+    assert.equal(option.enabled, false, preset);
+    assert.equal(typeof option.reason, 'string', preset); assert(option.reason.length > 0, preset);
+    const selection = {preset, ...(preset === 'pulse' ? {anchorPeakId} : {})};
+    await assert.rejects(save(snapshot, 'caption', id, selection), {code: 'EDITING_NOT_APPLICABLE'}, preset);
+    assert.deepEqual(await fileState(snapshot.directory), before, preset);
+    const reloaded = await readEditingWorkspaceV001({directory: snapshot.directory, drawingRulesRef: rules});
+    assert.equal(reloaded.revision, revision, preset); assert.equal(reloaded.savedAt, savedAt, preset);
+    assert.deepEqual(reloaded.state, snapshot.state, preset);
+  }
+});
+
+test('過去の描画規則へ束縛した物理観測を現在の候補表示や保存に流用しない', async t => {
+  t.diagnostic('再利用・古い観測拒否の証拠: ' + generatedRoot);
+  const {inspectEditingCaptionApplicabilityV001} = await import('./presentation_editing_applicability_v001.mjs');
+  const {snapshot} = await fixture();
+  const id = editingTargetListV001(snapshot).captions.find(row => row.status === 'normal').id;
+  const args = {plan: snapshot.view.resolvedPlan, targetId: id, drawingRulesRef: rules, options: applicabilityOptions};
+  const result = await inspectEditingCaptionApplicabilityV001(args);
+  assert.equal(result.status, 'passed');
+  assert.equal((await inspectEditingCaptionApplicabilityV001(args)).reused, true);
+  const proofBytes = await readFile(result.observationRef.path), proof = JSON.parse(proofBytes);
+  const before = await fileState(snapshot.directory);
+  proof.body.binding.drawingRulesSha256 = '0'.repeat(64);
+  proof.proofSha256 = hashEditingValueV001(proof.body);
+  await writeFile(result.observationRef.path, JSON.stringify(proof, null, 2) + '\n');
+  try {
+    await assert.rejects(inspectEditingCaptionApplicabilityV001(args), {code: 'EDITING_APPLICABILITY_STALE'});
+    const details = await editingTargetDetailsV001(snapshot, 'caption', id, applicabilityOptions);
+    const normal = details.options.find(row => row.value === 'normal');
+    assert.equal(normal.enabled, false); assert(normal.reason.length > 0);
+    await assert.rejects(save(snapshot, 'caption', id, 'Normal'), {code: 'EDITING_APPLICABILITY_STALE'});
+    assert.deepEqual(await fileState(snapshot.directory), before);
+    const reloaded = await readEditingWorkspaceV001({directory: snapshot.directory, drawingRulesRef: rules});
+    assert.equal(reloaded.revision, snapshot.revision); assert.equal(reloaded.savedAt, snapshot.savedAt);
+    assert.deepEqual(reloaded.state, snapshot.state);
+  } finally {
+    await writeFile(result.observationRef.path, proofBytes);
+  }
+});
+
+
+test('同時に同じ位置へ出る字幕は実配置で拒否し時刻が接するだけの字幕は検査範囲から外す', async t => {
+  t.diagnostic('字幕間干渉の実書体検査証拠: ' + generatedRoot);
+  const {inspectEditingCaptionApplicabilityV001} = await import('./presentation_editing_applicability_v001.mjs');
+  const {snapshot} = await fixture();
+  const targetId = editingTargetListV001(snapshot).captions.find(row => row.status === 'normal').id;
+  const target = snapshot.view.resolvedPlan.elements.find(row => row.instructionId === targetId);
+  const overlapping = {...structuredClone(target), instructionId: targetId + '-overlap-fixture'};
+  const plan = {...snapshot.view.resolvedPlan, elements: [target, overlapping]};
+  const result = await inspectEditingCaptionApplicabilityV001({plan, targetId, drawingRulesRef: rules,
+    options: applicabilityOptions});
+  assert.equal(result.status, 'failed');
+  assert(result.violations.some(row => row.code === 'INSTRUCTION_TEMPORAL_SPATIAL_COLLISION'));
+  assert.equal(result.nativeStateCount, 2);
+  const disjoint = {...overlapping, startFrame: target.endFrameExclusive,
+    endFrameExclusive: target.endFrameExclusive + target.displayFrameCount};
+  const accepted = await inspectEditingCaptionApplicabilityV001({plan: {...plan, elements: [target, disjoint]}, targetId,
+    drawingRulesRef: rules, options: applicabilityOptions});
+  assert.equal(accepted.status, 'passed'); assert.deepEqual(accepted.violations, []);
+  assert.equal(accepted.nativeStateCount, 1);
 });

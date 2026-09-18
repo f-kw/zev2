@@ -9,6 +9,7 @@ import {createOrchestrationContextV001, resolveOrchestrationDrawingViewV001,
   orchestrationCaptionChoiceToSelectionV001} from './presentation_orchestration_v001.mjs';
 import {materializeFiniteAutoPresentationCaptionV001} from './presentation_auto_effects_v001.mjs';
 import {projectOriginalFrameV001, projectAudioPeakV001} from './presentation_orchestration_projection_v001.mjs';
+import {inspectEditingCaptionApplicabilityV001} from './presentation_editing_applicability_v001.mjs';
 
 const fixedNames = ['source-bindings.json', 'fresh-input.json', 'raw-ai-response-v001.json',
   'captionAuto.json', 'connectionAuto.json', 'selectionRecord.json'];
@@ -169,6 +170,7 @@ export function editingColorChoiceV001(text, selection) {
   return {preset: 'color', scope: 'partial-caption', targetText: selectedText, occurrence};
 }
 function normalizedSelection(snapshot, kind, itemId, selection) {
+  if (kind === 'caption' && exact(selection, ['preset']) && selection.preset === 'normal') return 'Normal';
   if (kind === 'caption' && selection?.preset === 'color' && selection.scope === 'partial-caption') {
     const element = JSON.parse(snapshot.source.planBytes).elements.find(row => row.instructionId === itemId);
     demand(element, '字幕が見つかりません');
@@ -185,7 +187,32 @@ async function replaceOne(directory, name, content) {
   await rename(temporary, path.join(directory, name));
   const parent = await open(directory, 'r'); try {await parent.sync();} finally {await parent.close();}
 }
-export async function saveEditingOverrideV001({directory, drawingRulesRef, expectedRevision, kind, itemId, selection}) {
+const applicabilityReason = result => {
+  const codes = new Set(result.violations.map(row => row.code));
+  if (codes.has('LAYOUT_SAFE_AREA_VIOLATION')) return 'この表現では字幕の表示領域が安全域からはみ出します';
+  if (codes.has('LAYOUT_LINE_POSITIVE_INTERSECTION')) return 'この表現では字幕の行どうしが重なります';
+  if (codes.has('INSTRUCTION_TEMPORAL_SPATIAL_COLLISION')) return 'この表現では同時に表示する字幕と重なります';
+  if (codes.has('LAYOUT_LINE_COUNT_EXCEEDED')) return 'この表現では表示できる行数を超えます';
+  if (codes.has('CAPTION_MOTION_NATIVE_STATE_MISMATCH')) return 'この配置では字幕の移動または拡大を指定どおりに表示できません';
+  if (codes.has('PULSE_NATIVE_STATE_MISMATCH')) return 'この配置では拍に合わせた字幕の拡大を指定どおりに表示できません';
+  return 'この表現の実際の書体・表示領域を確認できませんでした';
+};
+async function checkCaptionApplicability(snapshot, state, itemId, applicabilityOptions) {
+  const view = resolveOrchestrationDrawingViewV001({context: snapshot.context, state});
+  let result;
+  try {
+    result = await inspectEditingCaptionApplicabilityV001({plan: view.resolvedPlan, targetId: itemId,
+      drawingRulesRef: snapshot.drawingRulesRef, options: applicabilityOptions});
+  } catch (error) {
+    if (error.code === 'EDITING_APPLICABILITY_STALE') throw error;
+    const failure = new Error('この表現の実際の書体・表示領域を確認できませんでした。前の保存状態を保持しています。', {cause: error});
+    failure.code = 'EDITING_APPLICABILITY_UNVERIFIED'; throw failure;
+  }
+  demand(result.status === 'passed', applicabilityReason(result), 'EDITING_NOT_APPLICABLE');
+  return result;
+}
+export async function saveEditingOverrideV001({directory, drawingRulesRef, expectedRevision, kind, itemId, selection,
+  applicabilityOptions}) {
   return locked(directory, async () => {
     const snapshot = await readUnlocked(directory, drawingRulesRef);
     demand(snapshot.revision === expectedRevision, '別の保存が先に完了しました。読み直してから変更してください。', 'EDITING_CONFLICT');
@@ -193,6 +220,7 @@ export async function saveEditingOverrideV001({directory, drawingRulesRef, expec
     const next = editOrchestrationOverrideV001({context: snapshot.context, state: snapshot.state, kind, itemId,
       selection: normalizedSelection(snapshot, kind, itemId, selection)});
     resolveOrchestrationDrawingViewV001({context: snapshot.context, state: next});
+    if (kind === 'caption') await checkCaptionApplicability(snapshot, next, itemId, applicabilityOptions);
     const changedName = kind === 'caption' ? 'captionOverrides' : 'connectionOverrides';
     for (const name of stateNames.filter(name => name !== changedName)) demand(same(next[name], snapshot.state[name]), '一件の保存が別の系統を変更しました');
     if (!same(next[changedName], snapshot.state[changedName])) await replaceOne(directory, changedName + '.json', bytes(next[changedName]));
@@ -230,7 +258,7 @@ export function editingTargetListV001(snapshot) {
   });
   return {captions, connections};
 }
-export function editingTargetDetailsV001(snapshot, kind, itemId) {
+export async function editingTargetDetailsV001(snapshot, kind, itemId, applicabilityOptions) {
   const lists = editingTargetListV001(snapshot), labels = EDITING_PRESET_LABELS_V001;
   demand(['caption', 'connection'].includes(kind), '対象種別が不正です');
   const target = lists[kind === 'caption' ? 'captions' : 'connections'].find(row => row.id === itemId);
@@ -243,28 +271,38 @@ export function editingTargetDetailsV001(snapshot, kind, itemId) {
     })};
   const element = JSON.parse(snapshot.source.planBytes).elements.find(row => row.instructionId === itemId);
   const current = snapshot.view.resolution.caption.captions.find(row => row.captionId === itemId);
-  const check = choice => {
-    const selection = orchestrationCaptionChoiceToSelectionV001(choice);
+  const check = async choice => {
     const peak = snapshot.source.captionContext.pulseTimingEvidence?.peaks.find(row => row.peakId === choice.anchorPeakId);
-    materializeFiniteAutoPresentationCaptionV001({element, canvas: snapshot.view.projectedNormalPlan.canvas, selection,
-      ...(choice.preset === 'pulse' ? {measuredPeak: peak ? {peakId: peak.peakId, peakSample: peak.peakSample,
-        sampleRate: snapshot.source.observationSampleRate} : null} : {})});
+    // Reject absent/out-of-window peaks using the existing finite timing rules
+    // before deriving or drawing a proposed saved state.
+    materializeFiniteAutoPresentationCaptionV001({element, canvas: snapshot.view.projectedNormalPlan.canvas,
+      selection: orchestrationCaptionChoiceToSelectionV001(choice), ...(choice.preset === 'pulse'
+        ? {measuredPeak: peak ? {peakId: peak.peakId, peakSample: peak.peakSample,
+          sampleRate: snapshot.source.observationSampleRate} : null} : {})});
+    const state = editOrchestrationOverrideV001({context: snapshot.context, state: snapshot.state,
+      kind, itemId, selection: choice.preset === 'normal' ? 'Normal' : choice});
+    return checkCaptionApplicability(snapshot, state, itemId, applicabilityOptions);
   };
-  const peakOptions = (snapshot.source.captionContext.pulseTimingEvidence?.peaks ?? []).flatMap(peak => {
-    try {check({preset: 'pulse', anchorPeakId: peak.peakId});} catch {return [];}
+  const peakOptions = [];
+  for (const peak of snapshot.source.captionContext.pulseTimingEvidence?.peaks ?? []) {
+    try {await check({preset: 'pulse', anchorPeakId: peak.peakId});} catch {continue;}
     const projected = projectAudioPeakV001({projection: snapshot.view.projection, peak: {clock: 'digest-original',
       sourceClockSha256: snapshot.view.projection.sourceClockSha256, peakId: peak.peakId,
       sample: peak.peakSample, sampleRate: snapshot.source.observationSampleRate}});
     const displaySeconds = projected.displaySample / projected.sampleRate;
-    return [{id: peak.peakId, displaySeconds, label: `音声のピーク ${displaySeconds.toFixed(3)}秒`}];
-  });
-  const options = ['normal', 'color', 'scale', 'panel', 'pulse', 'bounce', 'shake'].map(value => {
+    peakOptions.push({id: peak.peakId, displaySeconds, label: `音声のピーク ${displaySeconds.toFixed(3)}秒`});
+  }
+  const options = [];
+  for (const value of ['normal', 'color', 'scale', 'panel', 'pulse', 'bounce', 'shake']) {
     const choice = value === 'color' ? {preset: value, scope: 'whole-caption'} : value === 'pulse'
       ? {preset: value, anchorPeakId: peakOptions[0]?.id} : {preset: value};
-    try {check(choice); return {value, label: labels[value], enabled: true};}
-    catch (error) {return {value, label: labels[value], enabled: false,
-      reason: value === 'pulse' && peakOptions.length === 0 ? 'この字幕の表示中に使える実測ピークがありません' : String(error.message)};}
-  });
+    try {const result = await check(choice); options.push({value, label: labels[value], enabled: true,
+      physicalCheck: {status: result.status, reused: result.reused, nativeStateCount: result.nativeStateCount}});}
+    catch (error) {options.push({value, label: labels[value], enabled: false,
+      reason: value === 'pulse' && peakOptions.length === 0 ? 'この字幕で物理条件と表示時刻が成立する実測ピークがありません'
+        : ['EDITING_NOT_APPLICABLE', 'EDITING_APPLICABILITY_STALE'].includes(error.code) ? String(error.message)
+          : 'この表現の実際の書体・表示領域を確認できませんでした'});}
+  }
   let colorRange;
   if (current.canonicalRange) {
     const points = Array.from(element.text);

@@ -1,0 +1,467 @@
+{
+  "schemaVersion": "stage4-post-audit-preservation-v001",
+  "createdAt": "2026-09-18T08:41:10.587Z",
+  "status": "passed",
+  "repositoryRoot": "/private/tmp/zev-stage4-editing-20260918/worktree",
+  "baseCommit": "d1714533a7f2f767040d0f67dbdc865064379d02",
+  "observedHeadCommit": "d1714533a7f2f767040d0f67dbdc865064379d02",
+  "scope": "監査後A/D/EとB未適用調査・将来検証入口の限定点検。保存済み参照だけをbyte照合し、全素材探索・動画再生成・重い試験は行わない。",
+  "finalVerificationReference": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-and-access-verification-v001.json",
+    "bytes": 5531,
+    "fileSha256": "025c329eb8ec7c1cbc13027dc00b16ad6bce55c0d74dce7fae77de06b1a84cd6"
+  },
+  "finalSourceReferences": {
+    "count": 7,
+    "allMatched": true,
+    "records": [
+      {
+        "path": "evals/clip_composition/presentation_editing_state_v001.mjs",
+        "bytes": 24276,
+        "fileSha256": "cc4532a7f382f6424b90b92aeeae43048a3a1033d47d6dc7027439f3d1514a80",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_applicability_v001.mjs",
+        "bytes": 16401,
+        "fileSha256": "c71617956c9ec170955c80889352afde30d3f9f9b82312c9281fb2d38ed90947",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/inspect_presentation_editing_layout_v001.ts",
+        "bytes": 711,
+        "fileSha256": "098a4ad7e1c9a6017b92bc5983b43e95870452a9b9d7de9e340795221554ba15",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_state_v001.test.mjs",
+        "bytes": 23607,
+        "fileSha256": "db351f92d5d18d96510ca3f23919c30ff4fc87e1647a929ecedc4ab1cd8d3f4c",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_jobs_v001.test.mjs",
+        "bytes": 13071,
+        "fileSha256": "6f865c414b68ef735f9be4af2e34de652326715cbcff25f3f79f15935375fa31",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/serve_presentation_editing_v001.mjs",
+        "bytes": 17084,
+        "fileSha256": "96ba0a66c58a6ce5d2d7fd73bc63de7f8a396762a3a0b2d9696fc89b224b8295",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/serve_presentation_editing_v001.test.mjs",
+        "bytes": 8242,
+        "fileSha256": "b19f31d55c1580e8e84fdea686e36f0e3784539922a54169303fd94006cf62ef",
+        "matched": true
+      }
+    ]
+  },
+  "finalEvidenceReferences": {
+    "count": 7,
+    "allMatched": true,
+    "records": [
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-state-jobs-v001.tap",
+        "bytes": 5156,
+        "fileSha256": "707817bd2082fad70a42f2d14bbd7c6a9062d165d3c9c3d17622e45b2c9f77ee",
+        "matched": true
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-overlap-v002.tap",
+        "bytes": 4339,
+        "fileSha256": "d427f7e81ddf411280638c5880f1c2b46010d798879a674d64e1ee3ff21fba75",
+        "matched": true
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-normal-input-v001.tap",
+        "bytes": 4166,
+        "fileSha256": "c12445aed8df06137d50ba2a1d77ae161c437a77d4fead1b9bc980f1baf81ef8",
+        "matched": true
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/http-access-integration-v002.tap",
+        "bytes": 347,
+        "fileSha256": "98343be4ce06ab09caff7c74b8aff5e8ed426206639f9857e3b27df1f2c1f8b0",
+        "matched": true
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/candidate-get-timing-v001.json",
+        "bytes": 22956,
+        "fileSha256": "8cc701e9f2270c62cb617c12824f889e1af43b763567732588beecb0a4cc1e89",
+        "matched": true
+      },
+      {
+        "path": "../http-access-integration-v002.stderr.txt",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/service-test-c193eacf-7c1d-4458-884f-ff0bee7c74ba/access.ndjson",
+        "bytes": 5906,
+        "fileSha256": "d289c8e6c83f00f156447d37ee0b02e16b02a6670119413438ed4146ba5abde9",
+        "matched": true
+      }
+    ]
+  },
+  "existingDrawing": {
+    "count": 57,
+    "canonicalSha256": "2a994d788acf4723c27188ecb3da2cdfeaa99679ed15f81a32d5e70025f20a16",
+    "allMatched": true,
+    "checkedBytes": 273761405,
+    "protectedDrawingDelta": [],
+    "sourceRecord": "rendered-media-verification-v001.json edited-full entry",
+    "mismatches": []
+  },
+  "originalEditing": {
+    "directory": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918",
+    "document": {
+      "path": "runtime/presentation-editing/digest-20260918/document.json",
+      "bytes": 9836,
+      "fileSha256": "d565d843b135ae842c93e135b6f916af7d50aa31dcb9fee335e6f0ca25386393",
+      "matched": true
+    },
+    "files": [
+      {
+        "path": "runtime/presentation-editing/digest-20260918/source-bindings.json",
+        "bytes": 354254,
+        "fileSha256": "87d95289df43473c7eb4a672c1a57b314119db05d7124512398df3388bd0550e",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/fresh-input.json",
+        "bytes": 382825,
+        "fileSha256": "122e83a28c4efdc5bfa052a74519039d858415551933596de55e8af0d33c275a",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/raw-ai-response-v001.json",
+        "bytes": 27199,
+        "fileSha256": "7d1d7bc4e0587fa90c7d9115f5c79cb9d39b4ff7d9750aa32d561f6a0c602629",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/captionAuto.json",
+        "bytes": 43149,
+        "fileSha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/connectionAuto.json",
+        "bytes": 2159,
+        "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/selectionRecord.json",
+        "bytes": 477587,
+        "fileSha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/original-drawing-evidence.json",
+        "bytes": 975051,
+        "fileSha256": "c63e584c9eda4341ec2483ce900261681753c2d2fdaeee258696dd592b879c3b",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/captionOverrides.json",
+        "bytes": 31772,
+        "fileSha256": "f8565737d1b5e4531c31be1c77b95e943e4c4a051af4aa31bd9f056b714e02ea",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+        "bytes": 976,
+        "fileSha256": "56b3b7783d1b2188786cf81b1774021d0b3bcedae1fb80fc78e9ca59da3c2bec",
+        "matched": true
+      }
+    ],
+    "allMatched": true
+  },
+  "preservedVideos": {
+    "count": 4,
+    "allMatched": true,
+    "records": [
+      {
+        "path": "../../zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+        "bytes": 75306932,
+        "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+        "bytes": 75271228,
+        "fileSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-7b68ed40-58d0-4772-bf3c-fe36e46dd5e7/render/presentation-rendered-v002.mp4",
+        "bytes": 5517173,
+        "fileSha256": "d5890a7c91d6481bc79b0106bcc34a50e15b28b5a23858e944da28bbc6fc8436",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-d1d18f1b-3ec6-4f35-8b20-0513732ed953/render/presentation-rendered-v002.mp4",
+        "bytes": 3921511,
+        "fileSha256": "74f5ac4df4c6c4acfc1d0bd52678b9613a8a04f81ecc0f6aa365f924b49638cc",
+        "matched": true
+      }
+    ]
+  },
+  "preservedRegistrations": [
+    {
+      "id": "original",
+      "kind": "full",
+      "matched": true,
+      "videoFileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "drawingRulesSha256": "db9a3fd5c668f6f2654f65d15e865664a2fb5d88281cc041908a29db1cc6fe58",
+      "publicMetadataSha256": "da82614f382e91ff14fdbb8dea09cff363a661a3ef57e73a9f5d1c08a4a656fa"
+    },
+    {
+      "id": "4ef43bca-e48a-453c-9c78-d036c965103e",
+      "kind": "full",
+      "matched": true,
+      "videoFileSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "drawingRulesSha256": "2a994d788acf4723c27188ecb3da2cdfeaa99679ed15f81a32d5e70025f20a16",
+      "publicMetadataSha256": "b3480e77093545f52a98d06998262f628bb6d2edcfa47b47b32030ed30cec157",
+      "renderingRecord": {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/result.json",
+        "bytes": 216058243,
+        "fileSha256": "ae777525b8b8d1498019ca40957842a78c0b79f59f64ebe9fb376511081da313",
+        "matched": true
+      }
+    },
+    {
+      "id": "7b68ed40-58d0-4772-bf3c-fe36e46dd5e7",
+      "kind": "preview",
+      "matched": true,
+      "videoFileSha256": "d5890a7c91d6481bc79b0106bcc34a50e15b28b5a23858e944da28bbc6fc8436",
+      "drawingRulesSha256": "be0e898a4f4fe8720e07cf8ce1f9eac6831b3490edb5ccdfff2ec8bbb0a0126b",
+      "publicMetadataSha256": "a31dbc8272631e4b92dc2ba1e73cf9af31028a61b5a017ea10f27620f3440e76",
+      "renderingRecord": {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-7b68ed40-58d0-4772-bf3c-fe36e46dd5e7/result.json",
+        "bytes": 22547609,
+        "fileSha256": "a84d6a259defd59ae2d8053b7df66d78e4038cbfdf6d73772e8ec1ddcb119c44",
+        "matched": true
+      }
+    },
+    {
+      "id": "d1d18f1b-3ec6-4f35-8b20-0513732ed953",
+      "kind": "preview",
+      "matched": true,
+      "videoFileSha256": "74f5ac4df4c6c4acfc1d0bd52678b9613a8a04f81ecc0f6aa365f924b49638cc",
+      "drawingRulesSha256": "be0e898a4f4fe8720e07cf8ce1f9eac6831b3490edb5ccdfff2ec8bbb0a0126b",
+      "publicMetadataSha256": "3b12d086029d4adcdb9e55ec8e6c68e7efcd30b891f196fefc972fbd44a893e4",
+      "renderingRecord": {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-d1d18f1b-3ec6-4f35-8b20-0513732ed953/result.json",
+        "bytes": 10937403,
+        "fileSha256": "7c72435940e46513b92a7009b35391724d96a4477ff852af0c05d32a094a2ce5",
+        "matched": true
+      }
+    }
+  ],
+  "changes": {
+    "tracked": [
+      "docs/reports/digest-presentation-editing-stage4-sources-20260918/README.md",
+      "evals/clip_composition/presentation_editing_jobs_v001.test.mjs",
+      "evals/clip_composition/presentation_editing_state_v001.mjs",
+      "evals/clip_composition/presentation_editing_state_v001.test.mjs",
+      "evals/clip_composition/serve_presentation_editing_v001.mjs",
+      "evals/clip_composition/serve_presentation_editing_v001.test.mjs"
+    ],
+    "untracked": [
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-and-access-verification-v001.json",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 5531
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-normal-input-v001.tap",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 4166
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-overlap-v002.tap",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 4339
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-state-jobs-v001.tap",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 5156
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/audit-decision-v001.md",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 10043
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/audit-submission-v001.md",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 2823
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/browser-management-request-v001.md",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 5110
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/candidate-get-timing-v001.json",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 22956
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/http-access-integration-v001.json",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 3056
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/http-access-integration-v001.tap",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 347
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/http-access-integration-v002.tap",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 347
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/limited-improvement-v001.md",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 8129
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/native-fade-equivalence-v001.json",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 5736
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/preview-qc-investigation-v001.md",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 4933
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/preview-qc-performance-before-v001.json",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 7075
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/preview-qc-performance-change-v001.patch",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 13027
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/preview-qc-performance-complete-proposal-v001.patch",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 83699
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/preview-qc-performance-proposal-review-v001.md",
+        "kind": "file",
+        "category": "監査・検証・未適用提案の小型記録",
+        "bytes": 6501
+      },
+      {
+        "path": "evals/clip_composition/compare_presentation_editing_preview_qc_v001.mjs",
+        "kind": "file",
+        "category": "Aの検査入口またはB/Cの将来検証入口",
+        "bytes": 4347
+      },
+      {
+        "path": "evals/clip_composition/inspect_presentation_editing_layout_v001.ts",
+        "kind": "file",
+        "category": "Aの検査入口またはB/Cの将来検証入口",
+        "bytes": 711
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_applicability_v001.mjs",
+        "kind": "file",
+        "category": "Aの検査入口またはB/Cの将来検証入口",
+        "bytes": 16401
+      },
+      {
+        "path": "evals/clip_composition/verify_presentation_editing_preview_improvement_v001.mjs",
+        "kind": "file",
+        "category": "Aの検査入口またはB/Cの将来検証入口",
+        "bytes": 9459
+      },
+      {
+        "path": "node_modules",
+        "kind": "symbolic-link",
+        "category": "以前からある依存参照",
+        "target": "/Users/kawafmm/workspace/zev2/node_modules"
+      },
+      {
+        "path": "packages/shared/node_modules",
+        "kind": "symbolic-link",
+        "category": "以前からある依存参照",
+        "target": "/Users/kawafmm/workspace/zev2/packages/shared/node_modules"
+      }
+    ],
+    "generatedTracked": [],
+    "generatedUntracked": [],
+    "ignoreChecks": [
+      {
+        "path": "runtime/presentation-editing/digest-20260918/captionOverrides.json",
+        "rule": ".gitignore:21:/runtime/presentation-editing/"
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+        "rule": ".gitignore:21:/runtime/presentation-editing/"
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001/candidate-get-timing-v001.json",
+        "rule": ".gitignore:20:/evals/clip_composition/outputs/presentation/stage4-editing-*/"
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+        "rule": ".gitignore:20:/evals/clip_composition/outputs/presentation/stage4-editing-*/"
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-state-test-Vn43v9/applicability/.new-proof.json",
+        "rule": ".gitignore:20:/evals/clip_composition/outputs/presentation/stage4-editing-*/"
+      },
+      {
+        "path": "runtime/presentation-editing/service-test-c193eacf-7c1d-4458-884f-ff0bee7c74ba/access.ndjson",
+        "rule": ".gitignore:21:/runtime/presentation-editing/"
+      }
+    ],
+    "documentOnlyUnappliedPatches": [
+      "docs/reports/digest-presentation-editing-stage4-sources-20260918/preview-qc-performance-change-v001.patch",
+      "docs/reports/digest-presentation-editing-stage4-sources-20260918/preview-qc-performance-complete-proposal-v001.patch"
+    ]
+  },
+  "readOnlyReviews": {
+    "A": "候補と保存は同じ実書体・全有限状態・同時字幕検査。Normalの現在のUI形は正確な項目だけを受理。",
+    "E": "最小記録は登録経路形状と応答情報のみ。秘密を記録せず拒否応答も扱い、全停止要求が同じ完了を待つ修正を確認。",
+    "D": "管理側依頼文だけを保存し外部送信・復旧・実UI受入を未完了と明記。",
+    "B": "既存QC変更は未適用。旧実測・小型合成画像調査と未適用提案のみ。将来検証入口は別編集領域の周辺出力だけを要求し全編を要求しない。"
+  },
+  "limits": [
+    "現在の差分範囲と束縛済み参照の保全確認。実ブラウザー受入や人間の品質判定ではない。",
+    "元の描画規則57参照・固定保存9件・元媒体登録4件を狙って照合。関係のない素材や作業rootは走査しない。",
+    "この記録自身と後続の要約更新・stage・commitは作成時点の一覧に含まれない。rootが選別して扱う。"
+  ],
+  "failures": []
+}
