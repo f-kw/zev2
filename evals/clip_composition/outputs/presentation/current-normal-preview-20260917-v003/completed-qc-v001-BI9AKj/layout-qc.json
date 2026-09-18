@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "presentation-render-qc-v002",
+  "status": "passed",
+  "instructionCount": 3,
+  "checks": {
+    "instructionApplication": {
+      "status": "passed"
+    },
+    "layoutAndVisibility": {
+      "status": "passed"
+    },
+    "media": {
+      "status": "passed"
+    }
+  },
+  "instructionEvidence": [
+    {
+      "instructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 708,
+        "top": 842,
+        "right": 1214,
+        "bottom": 975,
+        "width": 506,
+        "height": 133
+      },
+      "lineCount": 1,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 708,
+          "top": 842,
+          "right": 1214,
+          "bottom": 975,
+          "width": 506,
+          "height": 133
+        }
+      ],
+      "visibilityComparisonBasis": null,
+      "representativeFrame": null,
+      "changedPixelsAgainstInstructionOmittedFrame": null,
+      "appliedOverlayPropsCanonicalSha256": "90f94a497f870161647bce45a7d949d0e771a1a43156b045b43e6824a66d5044",
+      "applicationOverlayFile": "overlays/short-one-line.png",
+      "inspectedOverlayFile": "overlays/short-one-line.png",
+      "applicationOverlaySha256": "7ad0e37611c2ff45499686029f35a1de4d4efff8c5d0fba2bb1c70197e0647f0",
+      "overlaySha256": "7ad0e37611c2ff45499686029f35a1de4d4efff8c5d0fba2bb1c70197e0647f0"
+    },
+    {
+      "instructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 156,
+        "top": 844,
+        "right": 1743,
+        "bottom": 976,
+        "width": 1587,
+        "height": 132
+      },
+      "lineCount": 1,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 156,
+          "top": 844,
+          "right": 1743,
+          "bottom": 976,
+          "width": 1587,
+          "height": 132
+        }
+      ],
+      "visibilityComparisonBasis": null,
+      "representativeFrame": null,
+      "changedPixelsAgainstInstructionOmittedFrame": null,
+      "appliedOverlayPropsCanonicalSha256": "874e3aa82d923569b5d42aebea1e2f165c87dd2367b2287033c0a65eb5e72542",
+      "applicationOverlayFile": "overlays/long-one-line.png",
+      "inspectedOverlayFile": "overlays/long-one-line.png",
+      "applicationOverlaySha256": "e9246b3e4cb6d5b634700f6978d1a013a4e6a622999ffc02779f821629b6e362",
+      "overlaySha256": "e9246b3e4cb6d5b634700f6978d1a013a4e6a622999ffc02779f821629b6e362"
+    },
+    {
+      "instructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 276,
+        "top": 698,
+        "right": 1630,
+        "bottom": 975,
+        "width": 1354,
+        "height": 277
+      },
+      "lineCount": 2,
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 463,
+          "top": 698,
+          "right": 1404,
+          "bottom": 831,
+          "width": 941,
+          "height": 133
+        },
+        {
+          "lineIndex": 1,
+          "left": 276,
+          "top": 842,
+          "right": 1630,
+          "bottom": 975,
+          "width": 1354,
+          "height": 133
+        }
+      ],
+      "visibilityComparisonBasis": null,
+      "representativeFrame": null,
+      "changedPixelsAgainstInstructionOmittedFrame": null,
+      "appliedOverlayPropsCanonicalSha256": "c8ba869f0ffc6d907221fc1cd8a9f62cb74a4c77c3f6266a416abcd8e2f8f678",
+      "applicationOverlayFile": "overlays/two-lines.png",
+      "inspectedOverlayFile": "overlays/two-lines.png",
+      "applicationOverlaySha256": "7dabda54764e68ede6e3160bd27fd54611587b14e427126b2ad696837cba17c6",
+      "overlaySha256": "7dabda54764e68ede6e3160bd27fd54611587b14e427126b2ad696837cba17c6"
+    }
+  ],
+  "mediaEvidence": {
+    "observed": {
+      "durationMs": 10133,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 304
+      },
+      "audio": {
+        "codecName": "aac",
+        "sampleRate": 44100,
+        "channelLayout": "stereo",
+        "durationMs": 10132.993,
+        "packetPayloadSha256": "57ef31d8acef20340217a56a489e3a858465d14c836e8727a40d6d9e19e3f22a"
+      }
+    },
+    "expectedAudio": {
+      "present": true,
+      "codecName": "aac",
+      "sampleRate": 44100,
+      "channelLayout": "stereo",
+      "durationMs": 10132.993,
+      "packetPayloadSha256": "57ef31d8acef20340217a56a489e3a858465d14c836e8727a40d6d9e19e3f22a"
+    },
+    "expectedFrameCount": 304
+  },
+  "violations": []
+}
