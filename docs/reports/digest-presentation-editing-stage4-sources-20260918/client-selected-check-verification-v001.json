@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "presentation-editing-client-selected-check-verification-v001",
+  "createdAt": "2026-09-18T09:10:09.820Z",
+  "node": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+  "sources": [
+    {
+      "path": "client/src/PresentationEditing.vue",
+      "bytes": 51904,
+      "fileSha256": "4282d518e139b703a9e4fab460b145994b034582145c39d6dfd6ddbca2ea01b3"
+    },
+    {
+      "path": "client/src/presentation-editing-api.ts",
+      "bytes": 6981,
+      "fileSha256": "d157b6607cdb0475ef0bc33f900164a273693beab48f246c213a6cd1a337454a"
+    },
+    {
+      "path": "evals/clip_composition/presentation_editing_client_state_v001.test.mjs",
+      "bytes": 19181,
+      "fileSha256": "03d1fe9df1b5defa41ab2efa06119b5d850de9f8af42a6be7c2a63f578499f1e"
+    }
+  ],
+  "component": {
+    "command": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "--test",
+      "evals/clip_composition/presentation_editing_client_state_v001.test.mjs"
+    ],
+    "exitCode": 0,
+    "tests": 6,
+    "passed": 6,
+    "failed": 0,
+    "vueWarnings": 0,
+    "vueErrors": 0,
+    "evidence": {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/component-selected-check-v002.tap",
+      "bytes": 1549,
+      "fileSha256": "c278fca0c194a04e8f78f9011daf9e05799e451baf34d65bb65ce0a758e0938e"
+    },
+    "stderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/component-selected-check-v002.stderr",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "typeCheck": {
+    "command": "PATH=/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:$PATH corepack pnpm --filter client type-check",
+    "exitCode": 0,
+    "evidence": {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/client-selected-check-typecheck-v001.log",
+      "bytes": 266,
+      "fileSha256": "efa51bd8b1ba17e61a05714bc2f1727b8e32b8980429d8b7b50dd8662d6a801f"
+    },
+    "stderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/client-selected-check-typecheck-v001.stderr.txt",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "build": {
+    "command": "PATH=/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:$PATH corepack pnpm --filter client build-only",
+    "exitCode": 0,
+    "version": "Vite 6.4.2",
+    "modulesTransformed": 642,
+    "elapsedSeconds": 1.72,
+    "result": "tool process 28795 completed successfully",
+    "warning": "既存アプリの500 kB超bundle警告。警告基準や分割設定の変更なし。"
+  },
+  "method": "実Vue SFCと実API adapterを既存compilerでコンパイルし、同じVue runtimeのcustom rendererへmount。fetchだけを制御し、生成された操作部品のイベント・表示・保存HTTP本文を照合。",
+  "limits": [
+    "ブラウザーDOM・layout・動画再生・実UI受入の検証ではない",
+    "B/CのQC実装・周辺再生成は未適用・未実行のまま"
+  ]
+}

@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
-import {readFile} from 'node:fs/promises';
+import {readFile, readdir, mkdir, writeFile} from 'node:fs/promises';
+import {setTimeout as delay} from 'node:timers/promises';
 import {request as httpRequest} from 'node:http';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -36,6 +37,23 @@ test('loopback HTTPの保存・再起動・Range配信と外部要求/path/競�
     assert.equal(stateResponse.status, 200); assert.equal(state.captions.length, 32); assert.equal(state.connections.length, 6);
     const caption = state.captions.find(row => row.status === 'normal');
     const change = {expectedRevision: state.revision, kind: 'caption', itemId: caption.id, selection: {preset: 'panel'}};
+    const generatedBefore = await readdir(config.generatedRoot);
+    const unchecked = await (await request('/targets/caption/' + encodeURIComponent(caption.id))).json();
+    assert.equal(unchecked.text, caption.text); assert.equal(unchecked.revision, state.revision);
+    assert(unchecked.options.every(row => row.status === 'unchecked' && !Object.hasOwn(row, 'enabled')));
+    assert(unchecked.peakOptions.length > 0 && unchecked.peakOptions.every(row => row.status === 'unchecked'));
+    assert.deepEqual(await readdir(config.generatedRoot), generatedBefore, '対象GETだけでは実描画を開始しない');
+    assert.equal((await post('/check', change, state.csrfToken, {origin: 'https://unrelated.invalid'})).status, 403);
+    assert.equal((await post('/check', change, '')).status, 403);
+    assert.equal((await post('/check', {...change, applicabilityOptions: {}}, state.csrfToken)).status, 400);
+    const checkedResponse = await post('/check', change, state.csrfToken);
+    assert.equal(checkedResponse.status, 200); const checked = await checkedResponse.json();
+    assert.equal(checked.status, 'applicable'); assert.equal(checked.revision, state.revision);
+    assert.equal(checked.kind, 'caption'); assert.equal(checked.itemId, caption.id);
+    assert.deepEqual(checked.selection, change.selection); assert(checked.checkKey);
+    const checkedDetails = await (await request('/targets/caption/' + encodeURIComponent(caption.id))).json();
+    assert.equal(checkedDetails.options.find(row => row.value === 'panel').status, 'applicable');
+    assert.equal(checkedDetails.options.find(row => row.value === 'normal').status, 'unchecked');
     assert.equal((await post('/save', change, state.csrfToken, {origin: 'https://unrelated.invalid'})).status, 403);
     assert.equal((await post('/save', change, '')).status, 403);
     // Node fetch rewrites Host. Use HTTP's explicit header for this negative test.
@@ -61,6 +79,36 @@ test('loopback HTTPの保存・再起動・Range配信と外部要求/path/競�
     const saved = await good.json(); assert.notEqual(saved.revision, state.revision);
     assert.equal(saved.captions.find(row => row.id === caption.id).preset, 'panel');
     assert.equal((await post('/save', change, state.csrfToken)).status, 409);
+    assert.equal((await post('/check', change, state.csrfToken)).status, 409);
+    let checkFinished = false;
+    const selectedShake = {expectedRevision: saved.revision, kind: 'caption', itemId: caption.id, selection: {preset: 'shake'}};
+    const pendingCheck = post('/check', selectedShake, state.csrfToken).then(async response => {
+      const value = await response.json(); checkFinished = true; return {status: response.status, value};
+    });
+    pendingCheck.catch(() => {});
+    const deadline = Date.now() + 10000;
+    let checking;
+    do {
+      checking = await (await request('/targets/caption/' + encodeURIComponent(caption.id))).json();
+      if (checking.options.find(row => row.value === 'shake').status === 'checking') break;
+      assert.equal(checkFinished, false, '選択した実検査の開始を観測できませんでした');
+      assert(Date.now() < deadline, '検査中の状態が返りませんでした');
+      await delay(10);
+    } while (true);
+    assert.equal(checkFinished, false);
+    const otherId = state.captions.find(row => row.id !== caption.id).id;
+    const [readDuring, otherDuring] = await Promise.race([
+      Promise.all([request('/state').then(response => response.json()),
+        request('/targets/caption/' + encodeURIComponent(otherId)).then(response => response.json())]),
+      pendingCheck.then(() => {throw new Error('検査完了まで状態・別対象GETが待たされました');}),
+    ]);
+    assert.equal(checkFinished, false); assert.equal(readDuring.revision, saved.revision); assert.equal(otherDuring.id, otherId);
+    const completedCheck = await pendingCheck;
+    assert.equal(completedCheck.status, 200); assert.equal(completedCheck.value.status, 'applicable');
+    assert.deepEqual(completedCheck.value.selection, selectedShake.selection);
+    const afterCheck = await (await request('/targets/caption/' + encodeURIComponent(caption.id))).json();
+    assert.equal(afterCheck.options.find(row => row.value === 'shake').status, 'applicable');
+    assert.equal((await (await request('/state')).json()).revision, saved.revision, '検査だけで保存を変更しない');
     const after = await Promise.all(fixedNames.map(name => readFile(path.join(config.directory, name + '.json'), 'utf8')));
     assert.deepEqual(after, fixed);
     const oldMedia = await request('/media/original.mp4', {method: 'HEAD', headers: {range: 'bytes=0-31'}});
@@ -92,10 +140,43 @@ test('loopback HTTPの保存・再起動・Range配信と外部要求/path/競�
     const access = accessText.trim().split('\n').map(line => JSON.parse(line));
     assert(access.some(row => row.path === '/presentation-editing' && row.status === 200));
     assert(access.some(row => row.path === '/api/editing/save' && row.status === 403));
+    assert(access.some(row => row.path === '/api/editing/check' && row.status === 403));
+    assert(access.some(row => row.path === '/api/editing/check' && row.status === 200));
+    assert(access.some(row => row.path === '/api/editing/check' && row.status === 409));
     assert(access.some(row => row.path === '/api/editing/media/:media.mp4' && row.status === 206));
     assert(access.every(row => row.outcome === 'completed' && row.requestId && row.arrivedAt && row.completedAt));
     assert.equal(new Set(access.map(row => row.requestId)).size, access.length);
     assert(!accessText.includes('must-not-be-recorded') && !accessText.includes(state.csrfToken)
       && !accessText.includes(restored.csrfToken) && !accessText.includes('<script>'));
+  } finally {await service.close();}
+});
+
+
+test('Pulse検査が実行環境で失敗してもHTTP候補のピークを消さず失敗として返す', {skip: !fixturePath}, async () => {
+  const original = JSON.parse(await readFile(fixturePath, 'utf8')), id = randomUUID();
+  const generatedRoot = path.join(repo, 'evals/clip_composition/outputs/presentation/stage4-editing-service-failure-' + id);
+  await mkdir(generatedRoot);
+  const nativeAssetReuse = path.join(generatedRoot, 'not-a-directory'); await writeFile(nativeAssetReuse, 'invalid directory');
+  const config = {...original, port: 0, directory: path.join(repo, 'runtime/presentation-editing/service-failure-' + id),
+    generatedRoot, nativeAssetReuse};
+  const service = await startPresentationEditingServiceV001(config), origin = new URL(service.url).origin;
+  const request = route => fetch(origin + '/api/editing' + route);
+  try {
+    const state = await (await request('/state')).json();
+    const caption = state.captions.find(row => row.status === 'normal');
+    const route = '/targets/caption/' + encodeURIComponent(caption.id);
+    const initial = await (await request(route)).json();
+    assert(initial.peakOptions.length > 0); assert(initial.peakOptions.every(row => row.status === 'unchecked'));
+    const selection = {preset: 'pulse', anchorPeakId: initial.peakOptions[0].id};
+    const response = await fetch(origin + '/api/editing/check', {method: 'POST', headers: {
+      'content-type': 'application/json', origin, 'x-zev-editing-token': state.csrfToken},
+      body: JSON.stringify({expectedRevision: state.revision, kind: 'caption', itemId: caption.id, selection})});
+    assert.equal(response.status, 200); const result = await response.json();
+    assert.equal(result.status, 'failed'); assert(result.reason.length > 0); assert.deepEqual(result.selection, selection);
+    const after = await (await request(route)).json();
+    assert.deepEqual(after.peakOptions.map(row => row.id), initial.peakOptions.map(row => row.id));
+    const failedPeak = after.peakOptions.find(row => row.id === selection.anchorPeakId);
+    assert.equal(failedPeak.status, 'failed'); assert.equal(failedPeak.reason, result.reason);
+    assert.equal((await (await request('/state')).json()).revision, state.revision);
   } finally {await service.close();}
 });

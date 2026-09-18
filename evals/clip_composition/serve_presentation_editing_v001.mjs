@@ -9,6 +9,8 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 import {readEditingWorkspaceV001, initializeEditingWorkspaceV001, saveEditingOverrideV001,
   editingTargetListV001, editingTargetDetailsV001, hashEditingValueV001, acquireEditingServiceLockV001}
   from './presentation_editing_state_v001.mjs';
+import {checkEditingSelectionV001, editingSelectionCheckKeyV001, revalidateEditingSelectionCheckV001}
+  from './presentation_editing_state_v001.mjs';
 import {getEditingPlaybackTargetsV001, getEditingPlaybackSeekV001} from './presentation_editing_navigation_v001.mjs';
 import {createEditingJobsV001} from './presentation_editing_jobs_v001.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
@@ -37,7 +39,7 @@ function accessPath(requestUrl) {
   try {pathname = new URL(requestUrl, 'http://127.0.0.1').pathname;} catch {return '<invalid>';}
   if (/^\/presentation-editing\/?$/.test(pathname)) return pathname;
   if (/^\/assets\/[a-zA-Z0-9_.-]+$/.test(pathname)) return '/assets/:asset';
-  if (/^\/api\/editing\/(state|save|jobs|retry|playhead|seek)$/.test(pathname)) return pathname;
+  if (/^\/api\/editing\/(state|save|check|jobs|retry|playhead|seek)$/.test(pathname)) return pathname;
   if (/^\/api\/editing\/targets\/(caption|connection)\/[^/]+$/.test(pathname))
     return pathname.replace(/\/[^/]+$/, '/:item');
   if (/^\/api\/editing\/media\/(original|[a-f0-9-]+)\.mp4$/.test(pathname)) return '/api/editing/media/:media.mp4';
@@ -93,7 +95,12 @@ export async function startPresentationEditingServiceV001(config) {
       backgroundReuseProofPath: backgroundProofPath, backgroundReuseDecoderRef, nativeAssetReuse});
     const applicabilityOptions = {generatedRoot, nativeAssetReuse};
     const csrfToken = randomBytes(32).toString('hex');
-    const load = () => readEditingWorkspaceV001({directory, drawingRulesRef});
+    const checks = new Map(); let checksRevision;
+    const load = async () => {
+      const snapshot = await readEditingWorkspaceV001({directory, drawingRulesRef});
+      if (checksRevision !== snapshot.revision) {checks.clear(); checksRevision = snapshot.revision;}
+      return snapshot;
+    };
     const initial = await load();
     // A one-item edit cannot require more JSON than its complete original plan.
     const maximumRequestBytes = Buffer.byteLength(initial.source.planBytes);
@@ -113,6 +120,24 @@ export async function startPresentationEditingServiceV001(config) {
       return {title: saved.manifest.title, revision: saved.revision, savedAt: saved.savedAt,
         fps: saved.view.projection.sourceClock.frameRate, frameCount: saved.view.projection.displayFrameCount,
         csrfToken, ...editingTargetListV001(saved), media: jobs.listMedia(saved.revision), job};
+    };
+    const targetDetails = async (snapshot, kind, itemId) => {
+      const details = await editingTargetDetailsV001(snapshot, kind, itemId);
+      const observed = async (selection, initial) => {
+        const key = editingSelectionCheckKeyV001({revision: snapshot.revision, kind, itemId, selection});
+        const entry = checks.get(key); if (!entry) return initial;
+        const check = entry.promise ? entry.check : await revalidateEditingSelectionCheckV001({snapshot, check: entry.check});
+        return {...initial, status: check.status, ...(check.reason ? {reason: check.reason} : {})};
+      };
+      details.peakOptions = await Promise.all(details.peakOptions.map(peak =>
+        observed({preset: 'pulse', anchorPeakId: peak.id}, peak)));
+      details.options = await Promise.all(details.options.map(option => {
+        const selection = kind === 'connection' ? option.value : option.value === 'color'
+          ? {preset: 'color', scope: 'whole-caption'} : option.value === 'pulse'
+            ? {preset: 'pulse', anchorPeakId: details.peakOptions[0]?.id} : {preset: option.value};
+        return option.value === 'pulse' && !details.peakOptions.length ? option : observed(selection, option);
+      }));
+      return details;
     };
     server = createServer(async (request, response) => {
       const arrivedAt = new Date().toISOString(), requestId = randomUUID();
@@ -147,6 +172,22 @@ export async function startPresentationEditingServiceV001(config) {
             const saved = await logged('save', () => saveEditingOverrideV001({directory, drawingRulesRef, applicabilityOptions, ...input}));
             return send(response, 200, await state(saved));
           }
+          if (route === '/api/editing/check') {
+            demand(exact(input, ['expectedRevision', 'kind', 'itemId', 'selection']), '確認項目が不正です');
+            const snapshot = await load();
+            demand(input.expectedRevision === snapshot.revision, '保存状態が変わりました。読み直してから確認してください。', 'EDITING_CONFLICT');
+            const identity = {revision: snapshot.revision, kind: input.kind, itemId: input.itemId, selection: input.selection};
+            const key = editingSelectionCheckKeyV001(identity);
+            const previous = checks.get(key);
+            if (previous?.promise) return send(response, 200, await previous.promise);
+            const entry = {check: {...identity, checkKey: key, status: 'checking'}};
+            checks.set(key, entry);
+            entry.promise = logged('selected-expression-check', () => checkEditingSelectionV001({directory,
+              drawingRulesRef, applicabilityOptions, ...input}));
+            try {entry.check = await entry.promise; return send(response, 200, entry.check);}
+            catch (error) {if (checks.get(key) === entry) checks.delete(key); throw error;}
+            finally {delete entry.promise;}
+          }
           if (route === '/api/editing/jobs') {
             demand(input.kind === 'full' ? exact(input, ['expectedRevision', 'kind'])
               : exact(input, ['expectedRevision', 'kind', 'target', 'contextSeconds'])
@@ -169,7 +210,7 @@ export async function startPresentationEditingServiceV001(config) {
         if (route === '/api/editing/state') return send(response, 200, await state());
         const detail = /^\/api\/editing\/targets\/(caption|connection)\/([^/]+)$/.exec(route);
         if (detail) return send(response, 200, await logged('target-details', async () =>
-          editingTargetDetailsV001(await load(), detail[1], decodeURIComponent(detail[2]), applicabilityOptions)));
+          targetDetails(await load(), detail[1], decodeURIComponent(detail[2]))));
         if (route === '/api/editing/playhead' || route === '/api/editing/seek') {
           const {row, view} = await jobs.getMedia(url.searchParams.get('mediaId'));
           if (route.endsWith('/playhead')) {

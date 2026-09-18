@@ -3,11 +3,12 @@ import assert from 'node:assert/strict';
 import {execFile} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {promisify} from 'node:util';
-import {mkdtemp, mkdir, readFile, writeFile, stat} from 'node:fs/promises';
+import {mkdtemp, mkdir, readFile, readdir, writeFile, stat} from 'node:fs/promises';
 import os from 'node:os';
+import {setTimeout as delay} from 'node:timers/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {initializeEditingWorkspaceV001, readEditingWorkspaceV001, saveEditingOverrideV001,
+import {initializeEditingWorkspaceV001, readEditingWorkspaceV001, saveEditingOverrideV001, checkEditingSelectionV001,
   bindEditingFileV001, editingColorChoiceV001, editingTargetListV001, editingTargetDetailsV001,
   hashEditingValueV001, writeEditingSnapshotV001} from './presentation_editing_state_v001.mjs';
 import {createOrchestrationContextV001, createOrchestrationJudgmentInputV001, fixOrchestrationJudgmentV001,
@@ -69,9 +70,29 @@ async function fileState(directory) {
     const file = path.join(directory, name + '.json'); return [name, {bytes: await readFile(file, 'utf8'), mtimeMs: (await stat(file)).mtimeMs}];
   })));
 }
-function save(snapshot, kind, itemId, selection) {
-  return saveEditingOverrideV001({directory: snapshot.directory, drawingRulesRef: rules, applicabilityOptions,
+function save(snapshot, kind, itemId, selection, options = applicabilityOptions) {
+  return saveEditingOverrideV001({directory: snapshot.directory, drawingRulesRef: rules, applicabilityOptions: options,
     expectedRevision: snapshot.revision, kind, itemId, selection});
+}
+function check(snapshot, kind, itemId, selection, options = applicabilityOptions) {
+  return checkEditingSelectionV001({directory: snapshot.directory, drawingRulesRef: rules, applicabilityOptions: options,
+    expectedRevision: snapshot.revision, kind, itemId, selection});
+}
+async function waitForNativeLayout(root, isSettled) {
+  const deadline = Date.now() + 10000;
+  while (Date.now() < deadline) {
+    assert.equal(isSettled(), false, '実配置の開始前に検査が完了しました');
+    try {
+      const runs = path.join(root, 'applicability', 'runs');
+      for (const name of await readdir(runs)) {
+        try {await stat(path.join(runs, name, 'layout-input.json')); return;} catch (error) {
+          if (error.code !== 'ENOENT') throw error;
+        }
+      }
+    } catch (error) {if (error.code !== 'ENOENT') throw error;}
+    await delay(10);
+  }
+  assert.fail('実書体の配置検査が開始されませんでした');
 }
 test('一件追加・明示Normal・Resetは独立して保存され別processから再読できる', async () => {
   const {directory, snapshot: initial} = await fixture();
@@ -129,8 +150,10 @@ test('古い保存版と同時保存を拒否して先行保存を保持する',
   assert.equal(results.filter(row => row.status === 'fulfilled').length, 1);
   assert.equal(results.find(row => row.status === 'rejected').reason.code, 'EDITING_CONFLICT');
   const reloaded = await readEditingWorkspaceV001({directory: snapshot.directory, drawingRulesRef: rules});
-  assert.equal(reloaded.state.captionOverrides.entries.length, 1);
-  assert.equal(reloaded.state.connectionOverrides.entries.length, 0);
+  const accepted = results.find(row => row.status === 'fulfilled').value;
+  assert.deepEqual(reloaded.state, accepted.state);
+  assert.equal(reloaded.revision, accepted.revision);
+  assert.equal(reloaded.state.captionOverrides.entries.length + reloaded.state.connectionOverrides.entries.length, 1);
 });
 test('不正文字範囲・未知ピーク・短過ぎる字幕は保存を変更しない', async () => {
   const {snapshot} = await fixture();
@@ -158,13 +181,21 @@ test('同語反復・改行・結合文字・絵文字の選択を正確な出�
 test('Pulse候補は実在する適格ピークだけを時刻で表示し通常字幕へ追加できる', async () => {
   const {snapshot} = await fixture();
   const id = editingTargetListV001(snapshot).captions.find(row => row.status === 'normal').id;
+  const before = (await readdir(generatedRoot, {recursive: true})).sort();
   const details = await editingTargetDetailsV001(snapshot, 'caption', id, applicabilityOptions);
+  assert.deepEqual((await readdir(generatedRoot, {recursive: true})).sort(), before, '対象表示だけでは物理検査を開始しない');
   assert(details.peakOptions.length > 0);
   for (const peak of details.peakOptions) {
     assert(snapshot.source.captionContext.pulseTimingEvidence.peaks.some(row => row.peakId === peak.id));
     assert(peak.label.includes(peak.displaySeconds.toFixed(3)));
+    assert.equal(peak.status, 'unchecked'); assert.equal(Object.hasOwn(peak, 'enabled'), false);
   }
-  const savedPulse = await save(snapshot, 'caption', id, {preset: 'pulse', anchorPeakId: details.peakOptions[0].id});
+  assert(details.options.every(row => row.status === 'unchecked' && !Object.hasOwn(row, 'enabled')));
+  const selection = {preset: 'pulse', anchorPeakId: details.peakOptions[0].id};
+  const inspected = await check(snapshot, 'caption', id, selection);
+  assert.equal(inspected.status, 'applicable'); assert.deepEqual(inspected.selection, selection);
+  assert.equal(inspected.revision, snapshot.revision); assert(inspected.checkKey);
+  const savedPulse = await save(snapshot, 'caption', id, selection);
   assert.equal(editingTargetListV001(savedPulse).captions.find(row => row.id === id).preset, 'pulse');
 });
 test('描画用snapshotはその後の保存から独立し、固定自動案の改変を再読で拒否する', async () => {
@@ -252,16 +283,22 @@ test('実書体でNormalが収まっても拡大・Panel・全動作が収まら
   assert.equal(snapshot.state.captionOverrides.entries.length, 1);
   assert.equal(snapshot.state.connectionOverrides.entries.length, 1);
   const details = await editingTargetDetailsV001(snapshot, 'caption', id, applicabilityOptions);
-  assert.equal(details.options.find(row => row.value === 'normal').enabled, true);
-  assert.equal(details.options.find(row => row.value === 'color').enabled, true);
+  assert.equal(details.options.find(row => row.value === 'normal').status, 'unchecked');
+  assert.equal(details.options.find(row => row.value === 'color').status, 'unchecked');
+  assert.equal((await check(snapshot, 'caption', id, {preset: 'normal'})).status, 'applicable');
+  assert.equal((await check(snapshot, 'caption', id, {preset: 'color', scope: 'whole-caption'})).status, 'applicable');
+  assert(details.peakOptions.length > 0, '物理的な不成立を時刻候補なしへ変換しない');
   const anchorPeakId = original.state.selectionRecord.input.captions.find(row => row.captionId === id).eligiblePulsePeakIds[0];
   assert(anchorPeakId);
   for (const preset of ['scale', 'panel', 'pulse', 'bounce', 'shake']) {
     const option = details.options.find(row => row.value === preset);
-    assert.equal(option.enabled, false, preset);
-    assert.equal(typeof option.reason, 'string', preset); assert(option.reason.length > 0, preset);
+    assert.equal(option.status, 'unchecked', preset); assert.equal(Object.hasOwn(option, 'enabled'), false);
     const selection = {preset, ...(preset === 'pulse' ? {anchorPeakId} : {})};
-    await assert.rejects(save(snapshot, 'caption', id, selection), {code: 'EDITING_NOT_APPLICABLE'}, preset);
+    const inspected = await check(snapshot, 'caption', id, selection);
+    assert.equal(inspected.status, 'inapplicable', preset);
+    assert.equal(typeof inspected.reason, 'string', preset); assert(inspected.reason.length > 0, preset);
+    await assert.rejects(save(snapshot, 'caption', id, selection),
+      error => error.code === 'EDITING_NOT_APPLICABLE' && error.message === inspected.reason, preset);
     assert.deepEqual(await fileState(snapshot.directory), before, preset);
     const reloaded = await readEditingWorkspaceV001({directory: snapshot.directory, drawingRulesRef: rules});
     assert.equal(reloaded.revision, revision, preset); assert.equal(reloaded.savedAt, savedAt, preset);
@@ -287,7 +324,9 @@ test('過去の描画規則へ束縛した物理観測を現在の候補表示�
     await assert.rejects(inspectEditingCaptionApplicabilityV001(args), {code: 'EDITING_APPLICABILITY_STALE'});
     const details = await editingTargetDetailsV001(snapshot, 'caption', id, applicabilityOptions);
     const normal = details.options.find(row => row.value === 'normal');
-    assert.equal(normal.enabled, false); assert(normal.reason.length > 0);
+    assert.equal(normal.status, 'unchecked');
+    const inspected = await check(snapshot, 'caption', id, {preset: 'normal'});
+    assert.equal(inspected.status, 'stale'); assert(inspected.reason.length > 0);
     await assert.rejects(save(snapshot, 'caption', id, 'Normal'), {code: 'EDITING_APPLICABILITY_STALE'});
     assert.deepEqual(await fileState(snapshot.directory), before);
     const reloaded = await readEditingWorkspaceV001({directory: snapshot.directory, drawingRulesRef: rules});
@@ -318,4 +357,68 @@ test('同時に同じ位置へ出る字幕は実配置で拒否し時刻が接�
     drawingRulesRef: rules, options: applicabilityOptions});
   assert.equal(accepted.status, 'passed'); assert.deepEqual(accepted.violations, []);
   assert.equal(accepted.nativeStateCount, 1);
+});
+
+
+test('遅い保存前検査中も状態と別対象を取得でき先行した接続保存を上書きしない', async t => {
+  for (const resetConnection of [false, true]) {
+    const raceRoot = await mkdtemp(path.join(repo, 'evals/clip_composition/outputs/presentation/stage4-editing-state-race-'));
+    const options = {generatedRoot: raceRoot, nativeAssetReuse: path.join(raceRoot, 'native-assets')};
+    t.diagnostic((resetConnection ? '検査中の変更をResetした競合の証拠: ' : '保存前検査中の読込み・競合の証拠: ') + raceRoot);
+    const {snapshot} = await fixture();
+    const id = editingTargetListV001(snapshot).captions.find(row => row.status === 'normal').id;
+    const before = await fileState(snapshot.directory);
+    let settled = false;
+    const pending = save(snapshot, 'caption', id, {preset: 'shake'}, options).then(
+      value => {settled = true; return {status: 'fulfilled', value};},
+      error => {settled = true; return {status: 'rejected', error};});
+    t.after(async () => {await pending;});
+    await waitForNativeLayout(raceRoot, () => settled);
+    const [stateDuring, other] = await Promise.race([
+      Promise.all([readEditingWorkspaceV001({directory: snapshot.directory, drawingRulesRef: rules}),
+        editingTargetDetailsV001(snapshot, 'caption', snapshot.context.captionIds[0], options)]),
+      pending.then(() => {throw new Error('物理検査の完了まで状態読込みが待たされました');}),
+    ]);
+    assert.equal(settled, false); assert.equal(stateDuring.revision, snapshot.revision);
+    assert.equal(other.id, snapshot.context.captionIds[0]); assert.equal(other.text, JSON.parse(snapshot.source.planBytes).elements[0].text);
+    let changed = await save(snapshot, 'connection', 'connection-01', 'black-separator', options);
+    if (resetConnection) {
+      changed = await save(changed, 'connection', 'connection-01', 'Reset', options);
+      assert.equal(changed.revision, snapshot.revision, '見かけの保存版が元へ戻る条件を作る');
+    }
+    assert.equal(settled, false, '接続の保存が字幕の物理検査を待ちました');
+    const afterConnection = await fileState(snapshot.directory);
+    for (const name of Object.keys(before).filter(name => name !== 'connectionOverrides'))
+      assert.deepEqual(afterConnection[name], before[name]);
+    const outcome = await pending;
+    assert.equal(outcome.status, 'rejected'); assert.equal(outcome.error.code, 'EDITING_CONFLICT');
+    assert.deepEqual(await fileState(snapshot.directory), afterConnection);
+    const reloaded = await readEditingWorkspaceV001({directory: snapshot.directory, drawingRulesRef: rules});
+    assert.equal(reloaded.revision, changed.revision); assert.equal(reloaded.savedAt, changed.savedAt);
+    assert.deepEqual(reloaded.state, changed.state); assert.equal(reloaded.state.captionOverrides.entries.length, 0);
+    assert.equal(reloaded.state.connectionOverrides.entries.length, resetConnection ? 0 : 1);
+    if (!resetConnection) await assert.rejects(check(snapshot, 'caption', id, {preset: 'shake'}, options), {code: 'EDITING_CONFLICT'});
+  }
+});
+
+test('実測ピークの検査処理が失敗しても適用不能やピークなしへ変換せず保存を保持する', async t => {
+  const failureRoot = await mkdtemp(path.join(repo, 'evals/clip_composition/outputs/presentation/stage4-editing-state-failure-'));
+  const nativeAssetReuse = path.join(failureRoot, 'not-a-directory'); await writeFile(nativeAssetReuse, '検査先の種類が不正');
+  const options = {generatedRoot: failureRoot, nativeAssetReuse};
+  t.diagnostic('適用不能と検査失敗を分ける証拠: ' + failureRoot);
+  const {snapshot} = await fixture();
+  const id = editingTargetListV001(snapshot).captions.find(row => row.status === 'normal').id;
+  const before = await fileState(snapshot.directory);
+  const details = await editingTargetDetailsV001(snapshot, 'caption', id, options);
+  assert(details.peakOptions.length > 0); assert(details.peakOptions.every(row => row.status === 'unchecked'));
+  const selection = {preset: 'pulse', anchorPeakId: details.peakOptions[0].id};
+  const result = await check(snapshot, 'caption', id, selection, options);
+  assert.equal(result.status, 'failed'); assert.equal(typeof result.reason, 'string'); assert(result.reason.length > 0);
+  assert.deepEqual(result.selection, selection);
+  const after = await editingTargetDetailsV001(snapshot, 'caption', id, options);
+  assert.deepEqual(after.peakOptions.map(row => row.id), details.peakOptions.map(row => row.id));
+  await assert.rejects(save(snapshot, 'caption', id, selection, options), {code: 'EDITING_APPLICABILITY_UNVERIFIED'});
+  assert.deepEqual(await fileState(snapshot.directory), before);
+  const reloaded = await readEditingWorkspaceV001({directory: snapshot.directory, drawingRulesRef: rules});
+  assert.equal(reloaded.revision, snapshot.revision); assert.equal(reloaded.savedAt, snapshot.savedAt);
 });

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 import {
-  EditingApiError, editingErrorText, editingReasonText, fetchEditingPlayhead, fetchEditingState, fetchEditingTarget,
+  EditingApiError, checkEditingSelection, editingCheckLabel, editingErrorText, editingReasonText, fetchEditingPlayhead, fetchEditingState, fetchEditingTarget,
   requestEditingJob, retryEditingJob, saveEditingSelection, seekEditingTarget,
   type EditingCaption, type EditingConnection, type EditingJob,
+  type EditingCheckRequest, type EditingCheckResult, type EditingCheckStatus,
   type EditingPlayhead, type EditingSelection, type EditingState, type EditingTarget, type EditingTargetKind,
 } from './presentation-editing-api';
 
@@ -20,6 +21,8 @@ const selected = ref<{ kind: EditingTargetKind; id: string } | null>(null);
 const target = ref<EditingTarget | null>(null);
 const targetLoading = ref(false);
 const targetError = ref('');
+const selectionCheck = ref<{ status: EditingCheckStatus; reason?: string; request: EditingCheckRequest | null;
+  action: 'Normal' | 'Reset' | null }>({ status: 'unchecked', request: null, action: null });
 const saving = ref(false);
 const conflict = ref(false);
 const jobStarting = ref(false);
@@ -36,6 +39,7 @@ const draft = reactive({ preset: '', colorScope: 'whole-caption' as 'whole-capti
   startUtf16: 0, endUtf16: 0, selectedText: '', anchorPeakId: '' });
 const pristineDraft = ref('');
 let targetSequence = 0;
+let checkSequence = 0;
 let stateSequence = 0;
 let playheadSequence = 0;
 let seekSequence = 0;
@@ -77,7 +81,17 @@ const nearbyCaptions = computed(() => (state.value?.captions ?? []).filter(row =
 const nearbyConnections = computed(() => (state.value?.connections ?? []).filter(row => playhead.value?.nearbyConnectionIds.includes(row.id)
   && !playhead.value.connectionIds.includes(row.id)));
 const selectedOption = computed(() => target.value?.options.find(option => option.value === draft.preset));
-const disabledOptions = computed(() => target.value?.options.filter(option => !option.enabled) ?? []);
+const disabledOptions = computed(() => target.value?.options.filter(option => option.status === 'inapplicable') ?? []);
+const checkIsCurrent = computed(() => {
+  const detail = target.value;
+  const request = selectionCheck.value.request;
+  if (!detail || !request || detail.revision !== state.value?.revision || request.expectedRevision !== detail.revision
+    || request.kind !== detail.kind || request.itemId !== detail.id) return false;
+  try { return JSON.stringify(request.selection) === JSON.stringify(currentSelection()); } catch { return false; }
+});
+const canSaveSelection = computed(() => checkIsCurrent.value && selectionCheck.value.status === 'applicable');
+const checkTitle = computed(() => selectionCheck.value.action === 'Reset' ? '自動案へ戻す前の確認'
+  : selectionCheck.value.action === 'Normal' ? '通常表示へ固定する前の確認' : '選んだ表現の確認');
 const playableMedia = computed(() => [...state.value?.media ?? []].reverse());
 const savedStatus = computed(() => dirty.value ? '画面に未保存の変更があります' : '画面の内容は保存済みです');
 const playingStatus = computed(() => {
@@ -198,15 +212,17 @@ async function loadSelectedTarget() {
   }
 }
 async function performTargetSelection(kind: EditingTargetKind, id: string) {
+  ++checkSequence;
+  selectionCheck.value = { status: 'unchecked', request: null, action: null };
   selected.value = { kind, id };
   target.value = null;
   targetError.value = '';
   seekNotice.value = '';
   await loadSelectedTarget();
-  if (target.value) await seekToTarget(kind, id);
+  if (target.value && selected.value?.kind === kind && selected.value.id === id) await seekToTarget(kind, id);
 }
 function chooseTarget(kind: EditingTargetKind, id: string) {
-  if (saving.value || targetLoading.value || (selected.value?.kind === kind && selected.value.id === id)) return;
+  if (saving.value || (selected.value?.kind === kind && selected.value.id === id)) return;
   if (dirty.value) {
     pendingTarget.value = { kind, id };
     return;
@@ -317,7 +333,7 @@ function onColorSelection() {
 }
 function currentSelection(): EditingSelection {
   if (!target.value) throw new Error('変更する対象を選んでください。');
-  if (!selectedOption.value?.enabled) throw new Error(selectedOption.value?.reason ?? 'この表現は対象へ適用できません。');
+  if (!selectedOption.value) throw new Error('表現を選んでください。');
   if (target.value.kind === 'connection') {
     if (!['normal-cut', 'black-separator', 'soft-separator'].includes(draft.preset)) throw new Error('接続表現を選んでください。');
     return draft.preset as 'normal-cut' | 'black-separator' | 'soft-separator';
@@ -332,18 +348,86 @@ function currentSelection(): EditingSelection {
       endUtf16: draft.endUtf16, selectedText: draft.selectedText };
   }
   if (draft.preset === 'pulse') {
-    if (!target.value.peakOptions.some(peak => peak.id === draft.anchorPeakId)) throw new Error('使用できる音のピークを選んでください。');
+    if (!target.value.peakOptions.some(peak => peak.id === draft.anchorPeakId)) throw new Error('時刻条件を満たす音のピークから一件を選んでください。');
     return { preset: 'pulse', anchorPeakId: draft.anchorPeakId };
   }
   if (!['normal', 'scale', 'panel', 'bounce', 'shake'].includes(draft.preset)) throw new Error('字幕表現を選んでください。');
   return { preset: draft.preset as 'normal' | 'scale' | 'panel' | 'bounce' | 'shake' };
 }
+
+async function checkCurrentSelection(forced?: 'Normal' | 'Reset'): Promise<EditingCheckResult | null> {
+  const sequence = ++checkSequence;
+  const detail = target.value;
+  const current = state.value;
+  const form = draftSignature();
+  if (!detail || !current || targetLoading.value || unmounted) {
+    selectionCheck.value = { status: 'unchecked', request: null, action: null };
+    return null;
+  }
+  let selection: EditingSelection;
+  try { selection = forced ?? currentSelection(); }
+  catch (error) {
+    selectionCheck.value = { status: 'unchecked', reason: editingErrorText(error), request: null, action: null };
+    return null;
+  }
+  const request: EditingCheckRequest = { expectedRevision: detail.revision, kind: detail.kind,
+    itemId: detail.id, selection };
+  const stillCurrent = () => sequence === checkSequence && !unmounted && target.value?.id === detail.id
+    && target.value?.kind === detail.kind && target.value?.revision === detail.revision
+    && state.value?.revision === detail.revision && draftSignature() === form;
+  if (detail.revision !== current.revision) {
+    selectionCheck.value = { status: 'stale', reason: '別の保存が行われています。最新の保存状態から確認し直してください。', request, action: forced ?? null };
+    conflict.value = true;
+    return null;
+  }
+  selectionCheck.value = { status: 'checking', request, action: forced ?? null };
+  try {
+    const result = await checkEditingSelection(request, current.csrfToken);
+    if (!stillCurrent()) return null;
+    if (result.revision !== detail.revision || result.kind !== detail.kind || result.itemId !== detail.id
+      || JSON.stringify(result.selection) !== JSON.stringify(selection)) {
+      selectionCheck.value = { status: 'stale', reason: '別の入力に対する検査結果のため、保存には使いません。確認し直してください。', request, action: forced ?? null };
+      return null;
+    }
+    selectionCheck.value = { status: result.status, reason: result.reason, request, action: forced ?? null };
+    return result;
+  } catch (error) {
+    if (stillCurrent()) {
+      const stale = error instanceof EditingApiError && error.status === 409;
+      selectionCheck.value = { status: stale ? 'stale' : 'failed', reason: editingErrorText(error), request, action: forced ?? null };
+      if (stale) conflict.value = true;
+    }
+    return null;
+  }
+}
+
+watch(() => [target.value?.kind, target.value?.id, target.value?.revision, state.value?.revision,
+  targetLoading.value, draftSignature()], () => { void checkCurrentSelection(); });
+
+function optionStatus(value: string): EditingCheckStatus {
+  return value === draft.preset && checkIsCurrent.value ? selectionCheck.value.status
+    : target.value?.options.find(option => option.value === value)?.status ?? 'unchecked';
+}
+function peakStatus(id: string): EditingCheckStatus {
+  return draft.preset === 'pulse' && draft.anchorPeakId === id && checkIsCurrent.value ? selectionCheck.value.status
+    : target.value?.peakOptions.find(peak => peak.id === id)?.status ?? 'unchecked';
+}
+
 async function saveCurrent(forced?: 'Normal' | 'Reset'): Promise<boolean> {
   const detail = target.value;
   const current = state.value;
   if (!detail || !current || saving.value || jobStarting.value || targetLoading.value) return false;
   let selection: EditingSelection;
   try { selection = forced ?? currentSelection(); } catch (error) { targetError.value = editingErrorText(error); return false; }
+  // Checking is separate from saving, so a slow physical check does not prevent choosing another target.
+  const form = draftSignature();
+  if (forced || !canSaveSelection.value) {
+    const result = await checkCurrentSelection(forced);
+    if (!result || result.status !== 'applicable') return false;
+  }
+  if (unmounted || target.value?.id !== detail.id || target.value.kind !== detail.kind
+    || target.value.revision !== detail.revision || state.value?.revision !== detail.revision
+    || draftSignature() !== form) return false;
   saving.value = true;
   ++stateSequence;
   loading.value = false;
@@ -419,7 +503,7 @@ async function retryJob() {
 }
 
 onMounted(() => { document.title = '完成動画を後修正 — zev2'; void reloadState(); });
-onBeforeUnmount(() => { unmounted = true; stopPolling(); ++stateSequence; ++targetSequence; ++playheadSequence; ++seekSequence; });
+onBeforeUnmount(() => { unmounted = true; stopPolling(); ++stateSequence; ++targetSequence; ++checkSequence; ++playheadSequence; ++seekSequence; });
 </script>
 
 <template>
@@ -484,7 +568,7 @@ onBeforeUnmount(() => { unmounted = true; stopPolling(); ++stateSequence; ++targ
         <section class="editor panel" aria-label="選択対象の後修正">
           <div class="section-heading"><h2>この一件を直す</h2><span class="pill trial">演出は技術試用中</span></div>
           <p v-if="!selected" class="empty">動画の再生位置、原文の検索、一覧から字幕または接続を選んでください。</p>
-          <p v-if="targetLoading" role="status">対象と使用できる表現を確認しています。</p>
+          <p v-if="targetLoading" role="status">対象の本文・時刻・保存状態を読み込んでいます。</p>
           <p v-if="targetError" class="error" role="alert">{{ targetError }}</p>
           <div v-if="conflict" class="conflict"><p>別の保存が先に行われたため、上書きしていません。画面の未保存入力は残っています。</p>
             <button type="button" class="secondary" @click="discardAndReload">未保存入力を破棄して最新からやり直す</button></div>
@@ -498,7 +582,7 @@ onBeforeUnmount(() => { unmounted = true; stopPolling(); ++stateSequence; ++targ
 
             <fieldset :disabled="targetLoading || saving || jobStarting"><legend class="sr-only">表現の変更</legend>
               <label class="field">表現
-                <select v-model="draft.preset" aria-label="変更する表現"><option v-for="option in target.options" :key="option.value" :value="option.value" :disabled="!option.enabled">{{ option.label }}{{ option.enabled ? '' : '（適用できません）' }}</option></select>
+                <select v-model="draft.preset" aria-label="変更する表現"><option v-for="option in target.options" :key="option.value" :value="option.value">{{ option.label }}（{{ editingCheckLabel(optionStatus(option.value)) }}）</option></select>
               </label>
               <div v-if="target.kind === 'caption' && draft.preset === 'color'" class="color-settings">
                 <div class="radio-row"><label><input v-model="draft.colorScope" type="radio" value="whole-caption" /> 全文に色を付ける</label><label><input v-model="draft.colorScope" type="radio" value="partial-caption" /> 選んだ連続範囲</label></div>
@@ -509,11 +593,22 @@ onBeforeUnmount(() => { unmounted = true; stopPolling(); ++stateSequence; ++targ
                 <p v-else-if="draft.colorScope === 'partial-caption'" class="muted">文章をドラッグするか、Shift キーと矢印キーで範囲を選んでください。同じ語も選んだ位置で区別します。</p>
               </div>
               <label v-if="target.kind === 'caption' && draft.preset === 'pulse'" class="field">動きに合わせる音のピーク
-                <select v-model="draft.anchorPeakId" aria-label="適格な音のピーク"><option value="" disabled>使用できるピークを選んでください</option><option v-for="peak in target.peakOptions" :key="peak.id" :value="peak.id">{{ peak.label }} · {{ time(peak.displaySeconds) }}</option></select>
-                <span v-if="!target.peakOptions.length" class="muted">この字幕には使用できるピークがありません。</span>
+                <select v-model="draft.anchorPeakId" aria-label="時刻条件を満たす音のピーク"><option value="" disabled>確認するピークを選んでください</option><option v-for="peak in target.peakOptions" :key="peak.id" :value="peak.id">{{ peak.label }} · {{ time(peak.displaySeconds) }}（{{ editingCheckLabel(peakStatus(peak.id)) }}）</option></select>
+                <span v-if="!target.peakOptions.length" class="muted">この字幕には時刻条件を満たす実測ピークがありません。</span>
+                <span v-else class="muted">時刻条件を満たす候補です。選んだピークの表示領域は別に確認します。</span>
               </label>
-              <details v-if="disabledOptions.length" class="unavailable"><summary>適用できない表現と理由</summary><ul><li v-for="option in disabledOptions" :key="option.value"><strong>{{ option.label }}</strong>：{{ editingReasonText(option.reason || 'この対象では適用条件を満たしません。') }}</li></ul></details>
-              <div class="button-row"><button type="button" class="primary" :disabled="!dirty || conflict || !selectedOption?.enabled" @click="saveCurrent()">{{ saving ? '保存中…' : 'この変更を保存' }}</button><button type="button" class="secondary" :disabled="!dirty" @click="discardAndReload">未保存の変更を取り消す</button></div>
+              <section class="selection-check" :class="selectionCheck.status" aria-label="選んだ表現の適用確認" aria-live="polite">
+                <strong>{{ checkTitle }} — {{ editingCheckLabel(selectionCheck.status) }}</strong>
+                <p v-if="selectionCheck.reason">{{ editingReasonText(selectionCheck.reason) }}</p>
+                <p v-if="selectionCheck.status === 'checking'">表示領域を確認しています。その間も表現を選び直したり、別の対象へ移動できます。</p>
+                <p v-else-if="selectionCheck.status === 'unchecked'">まだ確認済みではありません。表現と必要な指定を選ぶと、その一件を確認します。</p>
+                <p v-else-if="selectionCheck.status === 'applicable'">この指定の検査は通過しました。保存時にも現在の保存版との一致を確認します。</p>
+                <p v-else-if="selectionCheck.status === 'failed' || selectionCheck.status === 'stale'">適用できないと決まったわけではありません。確認できるまで、この結果では保存しません。</p>
+                <button v-if="selectionCheck.status === 'failed' || selectionCheck.status === 'stale' || selectionCheck.status === 'unchecked'"
+                  type="button" class="secondary" :disabled="conflict" @click="checkCurrentSelection()">選んだ表現を確認する</button>
+              </section>
+              <details v-if="disabledOptions.length" class="unavailable"><summary>候補の基本指定で適用できない理由</summary><p class="muted">色を付ける範囲や音のピークを変えた場合は、選んだ指定で確認します。</p><ul><li v-for="option in disabledOptions" :key="option.value"><strong>{{ option.label }}</strong>：{{ editingReasonText(option.reason || 'この対象では適用条件を満たしません。') }}</li></ul></details>
+              <div class="button-row"><button type="button" class="primary" :disabled="!dirty || conflict || !canSaveSelection" @click="saveCurrent()">{{ saving ? '保存中…' : 'この変更を保存' }}</button><button type="button" class="secondary" :disabled="!dirty" @click="discardAndReload">未保存の変更を取り消す</button></div>
               <div class="button-row reset-row"><button type="button" class="secondary" :disabled="conflict" @click="saveCurrent('Normal')">通常表示へ固定</button><button type="button" class="secondary" :disabled="conflict" @click="saveCurrent('Reset')">自動案へ戻す</button></div>
               <p class="muted operation-help">通常表示へ固定すると、この一件の演出を外して保存します。自動案へ戻すと、この一件の変更だけを取り除きます。字幕本文は残ります。</p>
             </fieldset>
@@ -534,12 +629,12 @@ onBeforeUnmount(() => { unmounted = true; stopPolling(); ++stateSequence; ++targ
             <label class="field">状態<select v-model="statusFilter"><option value="">すべての状態</option><option v-for="[value, label] in statusFilters" :key="value" :value="value">{{ label }}</option></select></label>
             <label class="field">変更の有無<select v-model="changeFilter"><option value="all">すべて</option><option value="changed">変更あり</option><option value="unchanged">変更なし</option></select></label></div>
           <div v-if="listKind === 'caption'" class="target-list"><p v-if="!visibleCaptions.length" class="empty">この条件に一致する字幕はありません。</p>
-            <button v-for="row in visibleCaptions" :key="row.id" type="button" class="target-row" :class="{ selected: selected?.kind === 'caption' && selected.id === row.id }" :aria-pressed="selected?.kind === 'caption' && selected.id === row.id" :disabled="saving || targetLoading" @click="chooseTarget('caption', row.id)">
+            <button v-for="row in visibleCaptions" :key="row.id" type="button" class="target-row" :class="{ selected: selected?.kind === 'caption' && selected.id === row.id }" :aria-pressed="selected?.kind === 'caption' && selected.id === row.id" :disabled="saving" @click="chooseTarget('caption', row.id)">
               <span class="row-time">{{ frameTime(row.startFrame) }}–{{ frameTime(row.endFrameExclusive) }}</span><span class="row-text">{{ row.text }}</span><span class="row-meta">{{ row.presetLabel }} · {{ row.hasOverride ? '変更あり' : '自動案' }} · {{ row.statusLabel }}</span>
             </button>
           </div>
           <div v-else class="target-list"><p v-if="!visibleConnections.length" class="empty">この条件に一致する接続はありません。</p>
-            <button v-for="row in visibleConnections" :key="row.id" type="button" class="target-row" :class="{ selected: selected?.kind === 'connection' && selected.id === row.id }" :aria-pressed="selected?.kind === 'connection' && selected.id === row.id" :disabled="saving || targetLoading" @click="chooseTarget('connection', row.id)">
+            <button v-for="row in visibleConnections" :key="row.id" type="button" class="target-row" :class="{ selected: selected?.kind === 'connection' && selected.id === row.id }" :aria-pressed="selected?.kind === 'connection' && selected.id === row.id" :disabled="saving" @click="chooseTarget('connection', row.id)">
               <span class="row-time">{{ frameTime(row.boundaryFrame) }}</span><span class="row-text"><span>{{ row.beforeText }}</span><span class="connection-arrow">↓</span><span>{{ row.afterText }}</span></span><span class="row-meta">{{ row.presetLabel }} · {{ row.hasOverride ? '変更あり' : '自動案' }} · {{ row.statusLabel }}</span>
             </button>
           </div>
@@ -555,6 +650,7 @@ onBeforeUnmount(() => { unmounted = true; stopPolling(); ++stateSequence; ++targ
 </template>
 
 <style scoped>
+.selection-check{border:1px solid #dce4eb;border-radius:8px;padding:12px 14px;margin:14px 0;font-size:.82rem;background:#f3f7fa}.selection-check p{margin:6px 0;font-size:.8rem}.selection-check.applicable{background:#e5f3ee;border-color:#bad9cf}.selection-check.inapplicable{background:#fff3ed;border-color:#e5c5b7}.selection-check.failed,.selection-check.stale{background:#fff7e7;border-color:#ead6a8}
 .editing-page{--ink:#202b3a;--muted:#647487;--line:#dce4eb;--accent:#185e68;max-width:1520px;margin:0 auto;padding:30px 28px 48px;color:var(--ink);font-family:system-ui,-apple-system,'Noto Sans JP',sans-serif;background:#f5f7f9;min-height:100vh}
 .page-header,.section-heading,.full-output,.job-panel{display:flex;justify-content:space-between;align-items:center;gap:20px}.page-header{margin-bottom:24px}.eyebrow{font-size:.73rem;font-weight:700;letter-spacing:.1em;color:var(--accent);margin:0 0 8px}h1{font-size:clamp(1.4rem,2.3vw,2rem);line-height:1.4;margin:0}h2{font-size:1.1rem;margin:0}h3{font-size:.94rem;margin:0 0 12px}p{line-height:1.7;margin:8px 0}.intro,.muted,.context-line{font-size:.86rem;color:var(--muted)}button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid transparent;border-radius:8px;padding:10px 14px;font-weight:650;font-size:.85rem;line-height:1.4}button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #d89537;outline-offset:3px}.primary{background:var(--accent);color:white}.primary:hover:not(:disabled){background:#124952}.secondary{background:#fff;border-color:var(--line);color:var(--ink)}.secondary:hover:not(:disabled){background:#eef4f5}.notice,.error,.loading{padding:12px 16px;border-radius:8px;margin:12px 0;white-space:pre-wrap;overflow-wrap:anywhere}.notice{background:#e5f3ee;color:#245c4c}.error{background:#ffeded;color:#943834}.loading{background:#eef3f6}.state-strip{display:grid;grid-template-columns:1fr .9fr 1.6fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-bottom:20px}.state-strip>div{padding:15px 18px;display:flex;flex-direction:column;gap:5px;border-right:1px solid var(--line)}.state-strip>div:last-child{border-right:0}.state-strip span{font-size:.72rem;color:var(--muted)}.state-strip strong{font-size:.85rem;line-height:1.6}.state-strip .pending{background:#fff7e7}.job-panel{padding:16px 20px;border:1px solid #bad6db;border-radius:10px;margin-bottom:20px;background:#edf7f8;font-size:.86rem}.job-panel.failed{background:#fff3ed;border-color:#e5c5b7}.job-panel p{margin:5px 0}.workspace{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(340px,1fr);gap:20px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}.playback{grid-column:1}.editor{grid-column:2;grid-row:1 / span 2}.targets{grid-column:1}.section-heading{align-items:flex-start;margin-bottom:18px}.pill{display:inline-flex;align-items:center;border:1px solid var(--line);padding:4px 8px;border-radius:5px;font-size:.69rem;line-height:1.4;background:#f5f8fa}.trial{color:#876029;background:#fff7e9;border-color:#efdeba;white-space:nowrap}.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.field{display:flex;flex-direction:column;gap:7px;font-size:.79rem;font-weight:650;margin-bottom:15px}.field input,.field select,.field textarea{width:100%;border:1px solid #bdcbd5;border-radius:7px;padding:10px 11px;line-height:1.5;font-size:.86rem;color:var(--ink);background:white}.field textarea{resize:vertical;white-space:pre-wrap;font-size:1rem}.field>span{font-weight:400}.field.compact{max-width:190px}.playback video{display:block;width:100%;aspect-ratio:16/9;background:#101820;border-radius:8px}.playback-description{font-size:.79rem;color:var(--muted);margin-top:12px}.playhead-targets{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}.empty{padding:10px 0;color:var(--muted);font-size:.88rem}.target-pill{display:flex;gap:10px;align-items:flex-start;text-align:left;background:#f1f6f6;color:var(--ink);width:100%;margin:7px 0;font-weight:500;white-space:pre-wrap;overflow-wrap:anywhere}.target-pill span{color:var(--accent);font-size:.7rem;white-space:nowrap;margin-top:2px}.nearby{margin-top:12px}.nearby summary,.unavailable summary{cursor:pointer;font-size:.82rem;color:var(--muted);padding:6px 0}.selected-context{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18px}.selected-text{font-size:1.06rem;white-space:pre-wrap;overflow-wrap:anywhere;font-weight:650;line-height:1.65}.context-line{white-space:pre-wrap;overflow-wrap:anywhere;margin:6px 0}.button-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.reset-row{margin-top:10px}.operation-help{font-size:.76rem;margin-top:12px}.preview-controls{border-top:1px solid var(--line);margin-top:22px;padding-top:20px}.preview-controls .primary{width:100%}fieldset{border:0;padding:0;margin:0;min-width:0}.radio-row{display:flex;gap:12px;flex-wrap:wrap;font-size:.82rem;margin:10px 0 14px}.radio-row label,.checkbox{display:flex;align-items:center;gap:6px}.range-preview{font-size:.87rem;white-space:pre-wrap;overflow-wrap:anywhere}mark{background:#ffe9a6;color:inherit;padding:2px 3px}.unavailable{margin-top:8px}.unavailable ul{padding-left:18px;color:var(--muted);font-size:.79rem;line-height:1.7}.conflict{padding:12px;background:#fff5e3;border-radius:8px;margin-bottom:16px;font-size:.85rem}.tabs{display:flex;gap:4px;border-radius:8px;background:#eef3f6;padding:3px}.tabs button{padding:6px 10px;color:var(--muted);background:transparent}.tabs button.active{color:var(--accent);background:white;box-shadow:0 1px 3px #102f4210}.filters{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.filters .search{grid-column:1 / -1}.checkbox{font-size:.8rem;grid-column:1 / -1;margin-bottom:14px}.target-list{max-height:580px;overflow:auto;border-top:1px solid var(--line)}.target-row{width:100%;display:grid;grid-template-columns:1fr;gap:5px;text-align:left;border:1px solid transparent;border-bottom-color:var(--line);border-radius:0;background:white;padding:14px 12px;color:var(--ink)}.target-row.selected{background:#edf6f6;border:1px solid #7caeb3;border-radius:7px}.target-row:hover:not(:disabled){background:#f1f6f8}.row-time{font-size:.69rem;color:var(--muted);font-variant-numeric:tabular-nums}.row-text{font-size:.89rem;font-weight:600;white-space:pre-wrap;overflow-wrap:anywhere}.row-text>span{display:block}.row-meta{font-size:.69rem;font-weight:400;color:var(--muted);line-height:1.5}.connection-arrow{color:var(--muted);font-size:.75rem;padding:2px 0}.full-output{margin-top:22px}.full-output>div{max-width:850px}.full-output p{font-size:.84rem;color:var(--muted);margin-bottom:0}.full-output>button{flex-shrink:0}.dialog-backdrop{position:fixed;inset:0;background:#14233180;display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}.unsaved-dialog{background:#fff;border-radius:14px;padding:28px;max-width:650px;box-shadow:0 20px 70px #0004}.unsaved-dialog>p{font-size:.88rem;color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:980px){.editing-page{padding:20px 16px 36px}.workspace{grid-template-columns:1fr}.playback,.editor,.targets{grid-column:1;grid-row:auto}.editor{order:2}.targets{order:3}.state-strip{grid-template-columns:1fr}.state-strip>div{border-right:0;border-bottom:1px solid var(--line)}.state-strip>div:last-child{border-bottom:0}.full-output{align-items:stretch;flex-direction:column}.page-header{align-items:flex-start}.page-header>button{flex-shrink:0}.panel{padding:18px}}

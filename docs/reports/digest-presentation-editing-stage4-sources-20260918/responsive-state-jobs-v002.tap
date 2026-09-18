@@ -1,0 +1,126 @@
+TAP version 13
+# Subtest: 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+ok 1 - 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+  ---
+  duration_ms: 6072.28375
+  ...
+# Subtest: 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+ok 2 - 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+  ---
+  duration_ms: 477.779917
+  ...
+# Subtest: 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+ok 3 - 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+  ---
+  duration_ms: 822.352
+  ...
+# Subtest: 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+ok 4 - 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+  ---
+  duration_ms: 290.369708
+  ...
+# Subtest: 生成結果と描画証拠も検証cacheで改変を見逃さない
+ok 5 - 生成結果と描画証拠も検証cacheで改変を見逃さない
+  ---
+  duration_ms: 495.354792
+  ...
+# Subtest: service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+ok 6 - service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+  ---
+  duration_ms: 339.756917
+  ...
+# Subtest: 一件追加・明示Normal・Resetは独立して保存され別processから再読できる
+ok 7 - 一件追加・明示Normal・Resetは独立して保存され別processから再読できる
+  ---
+  duration_ms: 11506.76925
+  ...
+# Subtest: 字幕と接続を両順序で保存・Resetしても他方の指定を変えない
+ok 8 - 字幕と接続を両順序で保存・Resetしても他方の指定を変えない
+  ---
+  duration_ms: 8498.412916
+  ...
+# Subtest: 古い保存版と同時保存を拒否して先行保存を保持する
+ok 9 - 古い保存版と同時保存を拒否して先行保存を保持する
+  ---
+  duration_ms: 862.216792
+  ...
+# Subtest: 不正文字範囲・未知ピーク・短過ぎる字幕は保存を変更しない
+ok 10 - 不正文字範囲・未知ピーク・短過ぎる字幕は保存を変更しない
+  ---
+  duration_ms: 381.080083
+  ...
+# Subtest: 同語反復・改行・結合文字・絵文字の選択を正確な出現位置へ変換する
+ok 11 - 同語反復・改行・結合文字・絵文字の選択を正確な出現位置へ変換する
+  ---
+  duration_ms: 0.498583
+  ...
+# Subtest: Pulse候補は実在する適格ピークだけを時刻で表示し通常字幕へ追加できる
+ok 12 - Pulse候補は実在する適格ピークだけを時刻で表示し通常字幕へ追加できる
+  ---
+  duration_ms: 10771.316792
+  ...
+# Subtest: 描画用snapshotはその後の保存から独立し、固定自動案の改変を再読で拒否する
+ok 13 - 描画用snapshotはその後の保存から独立し、固定自動案の改変を再読で拒否する
+  ---
+  duration_ms: 4896.298333
+  ...
+# Subtest: 旧全編・旧previewの時計で対象を引き、接続挿入後も安定IDを維持する
+ok 14 - 旧全編・旧previewの時計で対象を引き、接続挿入後も安定IDを維持する
+  ---
+  duration_ms: 443.167083
+  ...
+# Subtest: 挿入黒は接続に所有させ、字幕の空白を近い字幕の選択にしない
+ok 15 - 挿入黒は接続に所有させ、字幕の空白を近い字幕の選択にしない
+  ---
+  duration_ms: 121.335291
+  ...
+# Subtest: 同尺BlackからSoftへの変更でも版は変わり、確認範囲は全動作と接続前後を含む
+ok 16 - 同尺BlackからSoftへの変更でも版は変わり、確認範囲は全動作と接続前後を含む
+  ---
+  duration_ms: 450.353917
+  ...
+# Subtest: 全32字幕・全接続の一覧seekと動画位置逆引きがframe境界でも一致する
+ok 17 - 全32字幕・全接続の一覧seekと動画位置逆引きがframe境界でも一致する
+  ---
+  duration_ms: 118.304125
+  ...
+# Subtest: 実書体でNormalが収まっても拡大・Panel・全動作が収まらなければ候補と直接保存を同じ物理判定で拒否する
+ok 18 - 実書体でNormalが収まっても拡大・Panel・全動作が収まらなければ候補と直接保存を同じ物理判定で拒否する
+  ---
+  duration_ms: 16099.255292
+  ...
+# 実書体による適用検査の証拠: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-state-test-cMQ18y
+# Subtest: 過去の描画規則へ束縛した物理観測を現在の候補表示や保存に流用しない
+ok 19 - 過去の描画規則へ束縛した物理観測を現在の候補表示や保存に流用しない
+  ---
+  duration_ms: 1259.889542
+  ...
+# 再利用・古い観測拒否の証拠: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-state-test-cMQ18y
+# Subtest: 同時に同じ位置へ出る字幕は実配置で拒否し時刻が接するだけの字幕は検査範囲から外す
+ok 20 - 同時に同じ位置へ出る字幕は実配置で拒否し時刻が接するだけの字幕は検査範囲から外す
+  ---
+  duration_ms: 4653.367583
+  ...
+# 字幕間干渉の実書体検査証拠: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-state-test-cMQ18y
+# Subtest: 遅い保存前検査中も状態と別対象を取得でき先行した接続保存を上書きしない
+ok 21 - 遅い保存前検査中も状態と別対象を取得でき先行した接続保存を上書きしない
+  ---
+  duration_ms: 57088.950375
+  ...
+# 保存前検査中の読込み・競合の証拠: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-state-race-fVL2KJ
+# 検査中の変更をResetした競合の証拠: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-state-race-5NUKXA
+# Subtest: 実測ピークの検査処理が失敗しても適用不能やピークなしへ変換せず保存を保持する
+ok 22 - 実測ピークの検査処理が失敗しても適用不能やピークなしへ変換せず保存を保持する
+  ---
+  duration_ms: 810.173833
+  ...
+# 適用不能と検査失敗を分ける証拠: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-state-failure-PM0qRn
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 126872.527666

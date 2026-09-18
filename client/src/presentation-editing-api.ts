@@ -1,5 +1,6 @@
 export type EditingRevision = string | number;
 export type EditingTargetKind = 'caption' | 'connection';
+export type EditingCheckStatus = 'unchecked' | 'checking' | 'applicable' | 'inapplicable' | 'failed' | 'stale';
 export type CaptionPreset = 'normal' | 'color' | 'scale' | 'panel' | 'pulse' | 'bounce' | 'shake';
 export type ConnectionPreset = 'normal-cut' | 'black-separator' | 'soft-separator';
 export type EditingSelection = 'Normal' | 'Reset' | ConnectionPreset
@@ -74,9 +75,26 @@ export interface EditingTarget {
   beforeText?: string;
   afterText?: string;
   selection: EditingSelection;
-  options: { value: string; label: string; enabled: boolean; reason?: string }[];
-  peakOptions: { id: string; label: string; displaySeconds: number }[];
+  options: { value: string; label: string; status: EditingCheckStatus; reason?: string }[];
+  peakOptions: { id: string; label: string; displaySeconds: number; status: EditingCheckStatus; reason?: string }[];
   colorRange?: { startUtf16: number; endUtf16: number };
+}
+
+export interface EditingCheckRequest {
+  expectedRevision: EditingRevision;
+  kind: EditingTargetKind;
+  itemId: string;
+  selection: EditingSelection;
+}
+
+export interface EditingCheckResult {
+  revision: EditingRevision;
+  kind: EditingTargetKind;
+  itemId: string;
+  selection: EditingSelection;
+  checkKey: string;
+  status: EditingCheckStatus;
+  reason?: string;
 }
 
 export interface EditingPlayhead {
@@ -122,6 +140,8 @@ function post<T>(pathname: string, body: unknown, csrfToken: string): Promise<T>
 export const fetchEditingState = () => request<EditingState>('/state');
 export const fetchEditingTarget = (kind: EditingTargetKind, id: string) =>
   request<EditingTarget>('/targets/' + kind + '/' + encodeURIComponent(id));
+export const checkEditingSelection = (body: EditingCheckRequest, csrfToken: string) =>
+  post<EditingCheckResult>('/check', body, csrfToken);
 export const saveEditingSelection = (body: { expectedRevision: EditingRevision; kind: EditingTargetKind;
   itemId: string; selection: EditingSelection }, csrfToken: string) => post<EditingState>('/save', body, csrfToken);
 export const requestEditingJob = (body: { expectedRevision: EditingRevision; kind: 'preview' | 'full';
@@ -144,6 +164,12 @@ const reasonLabels: Record<string, string> = {
 };
 
 export const editingReasonText = (reason: string): string => reasonLabels[reason] ?? reason;
+
+const checkLabels: Record<EditingCheckStatus, string> = {
+  unchecked: '未検査', checking: '検査中', applicable: '適用可能', inapplicable: '適用不能',
+  failed: '検査失敗', stale: '再確認が必要',
+};
+export const editingCheckLabel = (status: EditingCheckStatus): string => checkLabels[status];
 
 export function editingErrorText(error: unknown): string {
   return error instanceof Error ? editingReasonText(error.message) : '処理を完了できませんでした。';

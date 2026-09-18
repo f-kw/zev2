@@ -44,10 +44,14 @@ async function verifyRules(ref) {
     assert(info.isFile() && !info.isSymbolicLink());
     return ['dev', 'ino', 'size', 'mtimeNs', 'ctimeNs'].map(key => String(info[key]));
   }));
-  const before = await metadata(), key = hash(ref), previous = verifiedRules.get(key);
-  if (!previous || canonicalJson(before) !== canonicalJson(previous)) await verifyEditedOrchestrationDrawingRulesRefV001(ref);
-  const after = await metadata(); assert.deepEqual(before, after, 'drawing files changed during applicability inspection');
-  verifiedRules.set(key, after);
+  try {
+    const before = await metadata(), key = hash(ref), previous = verifiedRules.get(key);
+    if (!previous || canonicalJson(before) !== canonicalJson(previous)) await verifyEditedOrchestrationDrawingRulesRefV001(ref);
+    const after = await metadata(); assert.deepEqual(before, after, 'drawing files changed during applicability inspection');
+    verifiedRules.set(key, after);
+  } catch (error) {
+    throw Object.assign(stale('適用検査に使った描画規則が現在のファイルと一致しません'), {cause: error});
+  }
 }
 async function loadProof(file, binding) {
   let saved;
@@ -72,6 +76,24 @@ function scopedPlan(plan, targetId) {
   assert(target, 'caption target missing');
   return {...plan, elements: plan.elements.filter(row => row.instructionId === targetId
     || row.startFrame < target.endFrameExclusive && row.endFrameExclusive > target.startFrame)};
+}
+async function currentBinding(plan, targetId, drawingRulesRef) {
+  await verifyRules(drawingRulesRef);
+  const helperSha256 = hash(await Promise.all([fileURLToPath(import.meta.url), layoutWorker].map(bind)));
+  return {schemaVersion: 'presentation-editing-applicability-v001', planSha256: hash(scopedPlan(plan, targetId)), targetId,
+    drawingRulesSha256: hash(drawingRulesRef), helperSha256};
+}
+/** Recheck the exact completed observation immediately before saving. This
+ * reads bindings and artifacts only; native rendering never holds a save lock. */
+export const assertEditingApplicabilityRulesCurrentV001 = verifyRules;
+export async function assertEditingCaptionApplicabilityCurrentV001({plan, targetId, drawingRulesRef, result, requirePassed = true}) {
+  const binding = await currentBinding(plan, targetId, drawingRulesRef);
+  if (!result?.observationRef) throw stale('保存前の物理観測が見つかりません');
+  await checkRef(result.observationRef);
+  const proof = await loadProof(result.observationRef.path, binding);
+  if (!proof || proof.result.status !== result.status || requirePassed
+    && (proof.result.status !== 'passed' || canonicalJson(proof.result.violations) !== '[]'))
+    throw stale('保存前の物理観測が現在の指定に適用できません');
 }
 function statesFor(plan) {
   return plan.elements.flatMap((element, groupIndex) => {
@@ -162,10 +184,8 @@ export async function inspectEditingCaptionApplicabilityV001({plan: entirePlan, 
     assertIgnoredPresentationOutputDirectoryV001({repositoryRoot: repo, outputDirectory: path.join(root, '.new-check')});
     await ensureDirectoryChainNoSymlinkV002(repo, path.join(root, 'native'));
     await ensureDirectoryChainNoSymlinkV002(repo, path.join(root, 'runs'));
-    const helperSha256 = hash(await Promise.all([fileURLToPath(import.meta.url), layoutWorker].map(bind)));
     const plan = scopedPlan(entirePlan, targetId);
-    const binding = {schemaVersion: 'presentation-editing-applicability-v001', planSha256: hash(plan), targetId,
-      drawingRulesSha256: hash(drawingRulesRef), helperSha256};
+    const binding = await currentBinding(entirePlan, targetId, drawingRulesRef), {helperSha256} = binding;
     const proofPath = path.join(root, hash(binding) + '.json'), cached = await loadProof(proofPath, binding);
     if (cached) return {...cached.result, observationRef: await bind(proofPath), reused: true,
       nativeStateReuses: cached.result.nativeStateCount,

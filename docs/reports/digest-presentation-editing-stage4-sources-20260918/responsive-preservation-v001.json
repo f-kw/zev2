@@ -1,0 +1,387 @@
+{
+  "schemaVersion": "stage4-responsive-preservation-v001",
+  "createdAt": "2026-09-18T09:21:02.011Z",
+  "status": "passed",
+  "repositoryRoot": "/private/tmp/zev-stage4-editing-20260918/worktree",
+  "observedHeadCommit": "1781ec27f9fcae73570c937557a25f30334c32a6",
+  "baselineReference": {
+    "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/post-audit-preservation-v001.json",
+    "bytes": 20633,
+    "fileSha256": "7169d1416574c6e962eb2f542c0ccc5ad00cdaf9a4900ee08f615be433637172"
+  },
+  "scope": "応答改善Aの最終実装を識別し、旧証拠・元の編集保存・登録済み媒体・描画規則を指定pathで全byte照合する。追加描画・試験・stage・commitは行わない。",
+  "finalBackendReferences": {
+    "count": 7,
+    "changedCount": 5,
+    "unchangedCount": 2,
+    "records": [
+      {
+        "path": "evals/clip_composition/presentation_editing_state_v001.mjs",
+        "bytes": 29199,
+        "fileSha256": "54cc18aa24d2de4ee3b36b938b7c65e577db093af7f3b698fd543d32b6b29a85",
+        "meaning": "保存と選択検査",
+        "unchangedSinceBaseline": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_applicability_v001.mjs",
+        "bytes": 17691,
+        "fileSha256": "95c85592d5cec84260f39c96a5f68373e7c425b58408b091656da323bf9fcde5",
+        "meaning": "実書体による適用検査",
+        "unchangedSinceBaseline": false
+      },
+      {
+        "path": "evals/clip_composition/serve_presentation_editing_v001.mjs",
+        "bytes": 19917,
+        "fileSha256": "92f9df38c10f9bcd8c569eb0a90b792447ef1725cb3d2e11976e5bbc50111067",
+        "meaning": "編集HTTPサービス",
+        "unchangedSinceBaseline": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_state_v001.test.mjs",
+        "bytes": 31253,
+        "fileSha256": "734ed3d0ea22e62f3b5190132cba6ecbd26606694de508c77a34788fff248395",
+        "meaning": "状態保存と競合の検査",
+        "unchangedSinceBaseline": false
+      },
+      {
+        "path": "evals/clip_composition/serve_presentation_editing_v001.test.mjs",
+        "bytes": 14668,
+        "fileSha256": "6eb23deff3d4a188b192440eaa44b6d94a87192229e274e9636ea83867b012f0",
+        "meaning": "HTTP応答と失敗表示の検査",
+        "unchangedSinceBaseline": false
+      },
+      {
+        "path": "evals/clip_composition/inspect_presentation_editing_layout_v001.ts",
+        "bytes": 711,
+        "fileSha256": "098a4ad7e1c9a6017b92bc5983b43e95870452a9b9d7de9e340795221554ba15",
+        "meaning": "変更していない実配置の検査入口",
+        "unchangedSinceBaseline": true
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_jobs_v001.test.mjs",
+        "bytes": 13071,
+        "fileSha256": "6f865c414b68ef735f9be4af2e34de652326715cbcff25f3f79f15935375fa31",
+        "meaning": "変更していない生成jobの回帰検査",
+        "unchangedSinceBaseline": true
+      }
+    ]
+  },
+  "finalComponentReferences": {
+    "count": 3,
+    "verificationReference": {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/client-selected-check-verification-v001.json",
+      "bytes": 3024,
+      "fileSha256": "bec734d0b68ca323f56915503d982e9532b7ca1ef7b8e46a5d83d8de89c0055b"
+    },
+    "allMatched": true,
+    "records": [
+      {
+        "path": "client/src/PresentationEditing.vue",
+        "bytes": 51904,
+        "fileSha256": "4282d518e139b703a9e4fab460b145994b034582145c39d6dfd6ddbca2ea01b3",
+        "matched": true
+      },
+      {
+        "path": "client/src/presentation-editing-api.ts",
+        "bytes": 6981,
+        "fileSha256": "d157b6607cdb0475ef0bc33f900164a273693beab48f246c213a6cd1a337454a",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_client_state_v001.test.mjs",
+        "bytes": 19181,
+        "fileSha256": "03d1fe9df1b5defa41ab2efa06119b5d850de9f8af42a6be7c2a63f578499f1e",
+        "matched": true
+      }
+    ]
+  },
+  "preservedEvidence": {
+    "count": 7,
+    "allMatched": true,
+    "records": [
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-state-jobs-v001.tap",
+        "bytes": 5156,
+        "fileSha256": "707817bd2082fad70a42f2d14bbd7c6a9062d165d3c9c3d17622e45b2c9f77ee",
+        "matched": true
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-overlap-v002.tap",
+        "bytes": 4339,
+        "fileSha256": "d427f7e81ddf411280638c5880f1c2b46010d798879a674d64e1ee3ff21fba75",
+        "matched": true
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/applicability-normal-input-v001.tap",
+        "bytes": 4166,
+        "fileSha256": "c12445aed8df06137d50ba2a1d77ae161c437a77d4fead1b9bc980f1baf81ef8",
+        "matched": true
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/http-access-integration-v002.tap",
+        "bytes": 347,
+        "fileSha256": "98343be4ce06ab09caff7c74b8aff5e8ed426206639f9857e3b27df1f2c1f8b0",
+        "matched": true
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/candidate-get-timing-v001.json",
+        "bytes": 22956,
+        "fileSha256": "8cc701e9f2270c62cb617c12824f889e1af43b763567732588beecb0a4cc1e89",
+        "matched": true
+      },
+      {
+        "path": "../http-access-integration-v002.stderr.txt",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/service-test-c193eacf-7c1d-4458-884f-ff0bee7c74ba/access.ndjson",
+        "bytes": 5906,
+        "fileSha256": "d289c8e6c83f00f156447d37ee0b02e16b02a6670119413438ed4146ba5abde9",
+        "matched": true
+      }
+    ]
+  },
+  "originalEditing": {
+    "document": {
+      "path": "runtime/presentation-editing/digest-20260918/document.json",
+      "bytes": 9836,
+      "fileSha256": "d565d843b135ae842c93e135b6f916af7d50aa31dcb9fee335e6f0ca25386393",
+      "matched": true
+    },
+    "count": 9,
+    "allMatched": true,
+    "files": [
+      {
+        "path": "runtime/presentation-editing/digest-20260918/source-bindings.json",
+        "bytes": 354254,
+        "fileSha256": "87d95289df43473c7eb4a672c1a57b314119db05d7124512398df3388bd0550e",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/fresh-input.json",
+        "bytes": 382825,
+        "fileSha256": "122e83a28c4efdc5bfa052a74519039d858415551933596de55e8af0d33c275a",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/raw-ai-response-v001.json",
+        "bytes": 27199,
+        "fileSha256": "7d1d7bc4e0587fa90c7d9115f5c79cb9d39b4ff7d9750aa32d561f6a0c602629",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/captionAuto.json",
+        "bytes": 43149,
+        "fileSha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/connectionAuto.json",
+        "bytes": 2159,
+        "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/selectionRecord.json",
+        "bytes": 477587,
+        "fileSha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/original-drawing-evidence.json",
+        "bytes": 975051,
+        "fileSha256": "c63e584c9eda4341ec2483ce900261681753c2d2fdaeee258696dd592b879c3b",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/captionOverrides.json",
+        "bytes": 31772,
+        "fileSha256": "f8565737d1b5e4531c31be1c77b95e943e4c4a051af4aa31bd9f056b714e02ea",
+        "matched": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+        "bytes": 976,
+        "fileSha256": "56b3b7783d1b2188786cf81b1774021d0b3bcedae1fb80fc78e9ca59da3c2bec",
+        "matched": true
+      }
+    ]
+  },
+  "preservedVideos": {
+    "count": 4,
+    "method": "各指定動画の全byte SHA-256",
+    "allMatched": true,
+    "records": [
+      {
+        "path": "../../zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+        "bytes": 75306932,
+        "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+        "bytes": 75271228,
+        "fileSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-7b68ed40-58d0-4772-bf3c-fe36e46dd5e7/render/presentation-rendered-v002.mp4",
+        "bytes": 5517173,
+        "fileSha256": "d5890a7c91d6481bc79b0106bcc34a50e15b28b5a23858e944da28bbc6fc8436",
+        "matched": true
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-d1d18f1b-3ec6-4f35-8b20-0513732ed953/render/presentation-rendered-v002.mp4",
+        "bytes": 3921511,
+        "fileSha256": "74f5ac4df4c6c4acfc1d0bd52678b9613a8a04f81ecc0f6aa365f924b49638cc",
+        "matched": true
+      }
+    ]
+  },
+  "preservedRegistrations": {
+    "count": 4,
+    "registrationSetMatched": true,
+    "allMatched": true,
+    "records": [
+      {
+        "id": "original",
+        "kind": "full",
+        "registrationReference": {
+          "path": "runtime/presentation-editing/digest-20260918/document.json",
+          "bytes": 9836,
+          "fileSha256": "d565d843b135ae842c93e135b6f916af7d50aa31dcb9fee335e6f0ca25386393",
+          "matched": true
+        },
+        "publicMetadataSha256": "da82614f382e91ff14fdbb8dea09cff363a661a3ef57e73a9f5d1c08a4a656fa",
+        "metadataMatched": true,
+        "videoBindingMatched": true,
+        "drawingBindingMatched": true,
+        "resultBindingMatched": true,
+        "matched": true
+      },
+      {
+        "id": "4ef43bca-e48a-453c-9c78-d036c965103e",
+        "kind": "full",
+        "registrationReference": {
+          "path": "runtime/presentation-editing/digest-20260918/media/4ef43bca-e48a-453c-9c78-d036c965103e.json",
+          "bytes": 17070,
+          "fileSha256": "f966ae61b8c3bb6a675329390e85956c442e00f7a4af710fea8ebba16a7fbeb2"
+        },
+        "publicMetadataSha256": "b3480e77093545f52a98d06998262f628bb6d2edcfa47b47b32030ed30cec157",
+        "metadataMatched": true,
+        "videoBindingMatched": true,
+        "drawingBindingMatched": true,
+        "resultBindingMatched": true,
+        "renderingRecord": {
+          "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/result.json",
+          "bytes": 216058243,
+          "fileSha256": "ae777525b8b8d1498019ca40957842a78c0b79f59f64ebe9fb376511081da313",
+          "matched": true
+        },
+        "matched": true
+      },
+      {
+        "id": "7b68ed40-58d0-4772-bf3c-fe36e46dd5e7",
+        "kind": "preview",
+        "registrationReference": {
+          "path": "runtime/presentation-editing/digest-20260918/media/7b68ed40-58d0-4772-bf3c-fe36e46dd5e7.json",
+          "bytes": 17057,
+          "fileSha256": "c1ab60df0c6369bb8f97ab9f580524a2dddce670db3bc531b68c65362222a7bf"
+        },
+        "publicMetadataSha256": "a31dbc8272631e4b92dc2ba1e73cf9af31028a61b5a017ea10f27620f3440e76",
+        "metadataMatched": true,
+        "videoBindingMatched": true,
+        "drawingBindingMatched": true,
+        "resultBindingMatched": true,
+        "renderingRecord": {
+          "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-7b68ed40-58d0-4772-bf3c-fe36e46dd5e7/result.json",
+          "bytes": 22547609,
+          "fileSha256": "a84d6a259defd59ae2d8053b7df66d78e4038cbfdf6d73772e8ec1ddcb119c44",
+          "matched": true
+        },
+        "matched": true
+      },
+      {
+        "id": "d1d18f1b-3ec6-4f35-8b20-0513732ed953",
+        "kind": "preview",
+        "registrationReference": {
+          "path": "runtime/presentation-editing/digest-20260918/media/d1d18f1b-3ec6-4f35-8b20-0513732ed953.json",
+          "bytes": 17057,
+          "fileSha256": "1d8aad1b85f8bd3188e7aea1f44ad0fb4b8c5287460105e3de03c92c752f6084"
+        },
+        "publicMetadataSha256": "3b12d086029d4adcdb9e55ec8e6c68e7efcd30b891f196fefc972fbd44a893e4",
+        "metadataMatched": true,
+        "videoBindingMatched": true,
+        "drawingBindingMatched": true,
+        "resultBindingMatched": true,
+        "renderingRecord": {
+          "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-d1d18f1b-3ec6-4f35-8b20-0513732ed953/result.json",
+          "bytes": 10937403,
+          "fileSha256": "7c72435940e46513b92a7009b35391724d96a4477ff852af0c05d32a094a2ce5",
+          "matched": true
+        },
+        "matched": true
+      }
+    ]
+  },
+  "existingDrawing": {
+    "reference": {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/rendered-media-verification-v001.json",
+      "bytes": 87569,
+      "fileSha256": "525385a9776597a8eed2eaeb62f58cf7dda2e112254565dab365b74b732dbb2d"
+    },
+    "sourceEntry": "edited-full",
+    "count": 57,
+    "canonicalSha256": "2a994d788acf4723c27188ecb3da2cdfeaa99679ed15f81a32d5e70025f20a16",
+    "allMatched": true,
+    "checkedBytes": 273761405,
+    "protectedDrawingDelta": [],
+    "mismatches": []
+  },
+  "mediaMetadataReference": {
+    "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-v001.json",
+    "bytes": 25695,
+    "fileSha256": "3f271f3fa006e3e9ca7644042d3d206ddeb23234fd571982335ec06a4e7d3573"
+  },
+  "unappliedQc": {
+    "baseCommit": "d1714533a7f2f767040d0f67dbdc865064379d02",
+    "count": 7,
+    "files": [
+      "evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs",
+      "evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+      "evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+      "evals/clip_composition/presentation_orchestration_physical_clock_probe_v001.mjs",
+      "evals/clip_composition/presentation_orchestration_soft_overlay_probe_v001.mjs",
+      "evals/clip_composition/presentation_renderer_process_observation_v001.mjs"
+    ],
+    "changed": []
+  },
+  "generatedGitChanges": {
+    "baseCommit": "d1714533a7f2f767040d0f67dbdc865064379d02",
+    "tracked": [],
+    "untracked": []
+  },
+  "excludedExistingDependencyLinks": [
+    {
+      "path": "node_modules",
+      "target": "/Users/kawafmm/workspace/zev2/node_modules",
+      "excludedFromNewArtifacts": true,
+      "matched": true
+    },
+    {
+      "path": "packages/shared/node_modules",
+      "target": "/Users/kawafmm/workspace/zev2/packages/shared/node_modules",
+      "excludedFromNewArtifacts": true,
+      "matched": true
+    }
+  ],
+  "limits": [
+    "実ブラウザー受入・人間の品質判定ではない。要約文書と親担当の新規検査記録は本件の不変照合に含めない。",
+    "この記録自身と後続編集・stage・commitは作成時点のGit一覧に含まれない。",
+    "既存script探索時のrgファイル名列挙で除外patternが効かず、/private/tmpの他作業tree内の保全関連ファイル名も表示した。無関係な内容読込み・素材hash・変更は行っていない。以降の照合は基準参照の指定pathだけに限定した。"
+  ],
+  "failures": []
+}
