@@ -1,0 +1,7 @@
+2026-09-18 JST / stage4 HTTP integration attempt 1
+Command: Node 20 --test serve_presentation_editing_v001.test.mjs with local fixture config, ordinary execution escalation.
+Exit: 1; duration 1217.794708ms.
+Failure: Host spoof request expected 403, observed 200, line40.
+Diagnosis: Node fetch rewrites the Host header instead of sending the requested negative-test value. Server independently checks request.headers.host exactly. Test setup changed to node:http request with explicit Host. No production behavior or fixture value changed.
+Earlier assertions passed: dedicated HTML and its JS/CSS assets 200; trailing slash 200; CSP; Origin and CSRF denial.
+Preserved tool output summary; this is not a raw process stdout file.

@@ -116,6 +116,7 @@ function evaluatePresentationRendererQc({
   mediaInspection,
   expectedAudio,
   expectedFrameCount,
+  renderRange = null,
   canvas,
   requireFinalVisibility = true,
   completedFrameQcEvidence,
@@ -127,7 +128,7 @@ function evaluatePresentationRendererQc({
   if (requireFinalVisibility) {
     if (combinedMethod) {
       const combined = validatePresentationIntegrityStateQcEvidenceV001({plan, overlayInspections,
-        evidence: completedFrameQcEvidence, expectedFrameCount, currentCompletedMediaRef, mediaInspection});
+        evidence: completedFrameQcEvidence, expectedFrameCount, currentCompletedMediaRef, mediaInspection, renderRange});
       if (combined.status !== 'passed') violations.push(makeViolation('COMPLETED_FRAME_QC_INVALID', [],
         {reasons: combined.violations}));
     } else if (omissionMethod) {
@@ -877,7 +878,7 @@ async function inspectRenderedMediaWithCommands(filePath, {
     ffprobePath,
     [
       '-v', 'error', '-count_frames',
-      '-show_entries', 'format=duration:stream=index,codec_type,codec_name,width,height,avg_frame_rate,nb_read_frames,sample_rate,channels,channel_layout,duration',
+      '-show_entries', 'format=duration:stream=index,codec_type,codec_name,width,height,r_frame_rate,avg_frame_rate,nb_read_frames,sample_rate,channels,channel_layout,duration',
       '-of', 'json',
       filePath,
     ],
@@ -896,7 +897,10 @@ async function inspectRenderedMediaWithCommands(filePath, {
       codecName: videoStream.codec_name,
       width: videoStream.width,
       height: videoStream.height,
-      fps: parseRate(videoStream.avg_frame_rate),
+      // A single lossless NUT frame has no inter-frame average. Its measured
+      // one-frame coverage and declared nominal rate still define the clock.
+      fps: Number(videoStream.nb_read_frames) === 1 && videoStream.avg_frame_rate === '0/0'
+        ? parseRate(videoStream.r_frame_rate) : parseRate(videoStream.avg_frame_rate),
       frameCount: Number(videoStream.nb_read_frames),
     } : null,
     audio: audioStream ? {

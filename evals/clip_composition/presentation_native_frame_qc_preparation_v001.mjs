@@ -1,3 +1,4 @@
+import {assertOrchestrationScopedPlansV001, scopeOrchestrationPlanV001} from './presentation_orchestration_render_scope_v001.mjs';
 import {createHash} from 'node:crypto';
 import {lstat, mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
@@ -28,15 +29,15 @@ async function bind(file) {
 /** Build only the fixed diagnostic alternatives. The saved selection is never
  * edited, and these elements must never be sent to the production compositor. */
 export function buildPresentationNativeQcAlternativeElementsV001({
-  baselinePlan, plan, autoPresentation, presentationTimeline, orchestrationDrawingView,
+  baselinePlan, plan, autoPresentation, presentationTimeline, orchestrationDrawingView, renderRange = null,
 }) {
   if (presentationTimeline !== null) reject('native references require no inserted timeline; select the encoded oracle explicitly');
   if (orchestrationDrawingView !== undefined) {
     if (autoPresentation !== undefined) reject('orchestration and automatic presentation are mutually exclusive');
     const specification = buildOrchestrationNativeQcAlternativeElementsV001(orchestrationDrawingView);
-    if (!same(plan, orchestrationDrawingView.resolvedPlan)
-      || !same(baselinePlan, orchestrationDrawingView.projectedNormalPlan)) reject('orchestration drawing plans differ');
-    return {alternatives: specification.alternatives, resolution: specification.resolution.caption};
+    assertOrchestrationScopedPlansV001({view: orchestrationDrawingView, plan, baselinePlan, renderRange});
+    const ids = new Set(plan.elements.map(element => element.instructionId));
+    return {alternatives: specification.alternatives.filter(row => ids.has(row.captionId)), resolution: specification.resolution.caption};
   }
   if (!autoPresentation?.context || !Array.isArray(plan?.elements)
     || plan.elements.length === 0
@@ -88,7 +89,7 @@ export function buildPresentationNativeQcAlternativeElementsV001({
  * production PNG directory, or completed media. */
 export async function preparePresentationNativeFrameQcV001({
   plan, records, autoPresentation, presentationTimeline, presetRegistry,
-  overlayAdapter, inspectPng, scratchDirectory, sourceRefs = [], orchestrationDrawingView,
+  overlayAdapter, inspectPng, scratchDirectory, sourceRefs = [], orchestrationDrawingView, renderRange = null,
 }) {
   const started = performance.now();
   const orchestrationInput = orchestrationDrawingView === undefined ? undefined
@@ -105,9 +106,9 @@ export async function preparePresentationNativeFrameQcV001({
   if (baselineBinding.fileSha256 !== baselineRef.fileSha256) reject('fixed normal plan bytes changed');
   const originalBaselinePlan = JSON.parse(await readFile(baselineRef.path, 'utf8'));
   if (sha256AutoPresentationV001(originalBaselinePlan) !== baselineRef.canonicalSha256) reject('fixed normal plan content changed');
-  const baselinePlan = orchestrationDrawingView?.projectedNormalPlan ?? originalBaselinePlan;
+  const baselinePlan = scopeOrchestrationPlanV001(orchestrationDrawingView?.projectedNormalPlan ?? originalBaselinePlan, renderRange);
   const specification = buildPresentationNativeQcAlternativeElementsV001({
-    baselinePlan, plan, autoPresentation, presentationTimeline, orchestrationDrawingView,
+    baselinePlan, plan, autoPresentation, presentationTimeline, orchestrationDrawingView, renderRange,
   });
   if (!Array.isArray(records) || records.length !== plan.elements.length
     || records.some((record, index) => !same(record.element, plan.elements[index])

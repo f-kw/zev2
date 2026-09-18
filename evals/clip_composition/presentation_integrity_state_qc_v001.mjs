@@ -6,7 +6,7 @@ import {PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
   PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001,
   buildPresentationNativeFrameExtractionArgumentsV001,
   buildPresentationNativeReferenceArgumentsV001,
-  validatePresentationNativeFrameQcEvidenceV001} from './presentation_native_frame_qc_v001.mjs';
+  validatePresentationNativeFrameQcScopeV001, validatePresentationNativeFrameQcEvidenceV001} from './presentation_native_frame_qc_v001.mjs';
 
 export const PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001 = 'exact-replay-native-v1';
 export const PRESENTATION_INTEGRITY_STATE_QC_SCHEMA_V001 = 'presentation-integrity-state-qc-v001';
@@ -25,7 +25,7 @@ function checkFiniteExecutionEvidence(finite, inspections) {
   const flattened = [];
   for (const inspection of inspections) {
     const local = inspection.nativeFrameQc;
-    for (const key of ['inputManifest', 'baselinePlan', 'autoPresentation', 'sceneBindings']) {
+    for (const key of ['inputManifest', 'baselinePlan', 'autoPresentation', 'orchestrationInput', 'renderRange', 'sceneBindings']) {
       requireValue(same(local[key], finite[key]), 'caption and global finite-state evidence differ: ' + key);
     }
     requireValue(Array.isArray(local.samples) && local.samples.length > 0
@@ -79,9 +79,9 @@ function checkFiniteExecutionEvidence(finite, inspections) {
       'shared sample frame points to different extracted images');
     } else {
       expectProcess('source-frame-extract', ffmpeg.path,
-        buildPresentationNativeFrameExtractionArgumentsV001(base.path, sample.frame, sample.baseFrame.path), emptyStdoutSha256);
+        buildPresentationNativeFrameExtractionArgumentsV001(base.path, sample.mediaFrame ?? sample.frame, sample.baseFrame.path), emptyStdoutSha256);
       expectProcess('completed-frame-extract', ffmpeg.path,
-        buildPresentationNativeFrameExtractionArgumentsV001(completed.path, sample.frame, sample.completedFrame.path), emptyStdoutSha256);
+        buildPresentationNativeFrameExtractionArgumentsV001(completed.path, sample.mediaFrame ?? sample.frame, sample.completedFrame.path), emptyStdoutSha256);
       expectArtifact(sample.baseFrame); expectArtifact(sample.completedFrame);
       frames.set(sample.frame, {baseFrame: sample.baseFrame, completedFrame: sample.completedFrame});
     }
@@ -134,7 +134,7 @@ function checkSharedInputs(exact, finite) {
 
 /** Both gates are re-evaluated from evidence; neither saved pass flag can rescue the other. */
 export function validatePresentationIntegrityStateQcEvidenceV001({
-  plan, overlayInspections, evidence, expectedFrameCount, currentCompletedMediaRef, mediaInspection,
+  plan, overlayInspections, evidence, expectedFrameCount, currentCompletedMediaRef, mediaInspection, renderRange = null,
 }) {
   const violations = [];
   try {
@@ -142,9 +142,11 @@ export function validatePresentationIntegrityStateQcEvidenceV001({
       && evidence.method === PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001,
     'combined completed-frame evidence is missing or has another method');
     const replay = validatePresentationExactReplayQcEvidenceV001({
-      plan, evidence: evidence.exactReplay, expectedFrameCount, currentCompletedMediaRef, mediaInspection,
+      plan, evidence: evidence.exactReplay, expectedFrameCount, currentCompletedMediaRef, mediaInspection, renderRange,
     });
     violations.push(...replay.violations);
+    validatePresentationNativeFrameQcScopeV001({plan, evidence: evidence.finiteState, renderRange});
+    checkSharedInputs(evidence.exactReplay, evidence.finiteState);
     requireValue(Array.isArray(overlayInspections) && overlayInspections.length === plan.elements.length,
       'finite-state evidence must cover all logical overlays exactly once');
     for (const [index, inspection] of overlayInspections.entries()) {
@@ -152,7 +154,7 @@ export function validatePresentationIntegrityStateQcEvidenceV001({
         && inspection.visibilityComparisonBasis === PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001,
       'combined inspection identity or comparison basis differs');
       const finite = validatePresentationNativeFrameQcEvidenceV001({plan,
-        inspection: {...inspection, visibilityComparisonBasis: PRESENTATION_NATIVE_FRAME_QC_BASIS_V001}});
+        inspection: {...inspection, visibilityComparisonBasis: PRESENTATION_NATIVE_FRAME_QC_BASIS_V001}, renderRange});
       violations.push(...finite.violations);
       checkSharedInputs(evidence.exactReplay, inspection.nativeFrameQc);
     }
@@ -165,7 +167,7 @@ export function validatePresentationIntegrityStateQcEvidenceV001({
 
 /** Store full replay evidence once for the whole video, not once per caption. */
 export function combinePresentationIntegrityStateQcV001({
-  plan, replay, finite, expectedFrameCount, currentCompletedMediaRef, mediaInspection,
+  plan, replay, finite, expectedFrameCount, currentCompletedMediaRef, mediaInspection, renderRange = null,
 }) {
   const inspections = finite.inspections.map(inspection => ({...structuredClone(inspection),
     visibilityComparisonBasis: PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001}));
@@ -174,5 +176,5 @@ export function combinePresentationIntegrityStateQcV001({
     finiteState: structuredClone(finite.evidence)};
   return {method: PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001, inspections, evidence,
     ...validatePresentationIntegrityStateQcEvidenceV001({plan, overlayInspections: inspections,
-      evidence, expectedFrameCount, currentCompletedMediaRef, mediaInspection})};
+      evidence, expectedFrameCount, currentCompletedMediaRef, mediaInspection, renderRange})};
 }

@@ -22,6 +22,8 @@ import {buildPresentationCompositeArgumentsV001, executeValidatedPresentationDra
   from './render_presentation_v002.mjs';
 import {inspectPresentationExactReplayQcV001, validatePresentationExactReplayQcEvidenceV001}
   from './presentation_exact_replay_qc_v001.mjs';
+import {createOrchestrationRenderScopeV001, assertOrchestrationScopedPlansV001}
+  from './presentation_orchestration_render_scope_v001.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const hash = value => sha(canonicalJson(value));
@@ -109,6 +111,71 @@ async function fixture(t) {
   return {directory, save, plan, source, context, state, view, records, options, drawCalls};
 }
 
+test('range scopes retain complete caption clocks, original bindings and exact playback samples', async t => {
+  const f = await fixture(t), range = {startFrame: 160, endFrameExclusive: 166};
+  const scoped = createOrchestrationRenderScopeV001(f.view, range);
+  assert.equal(scoped.scope.frameCount, 6);
+  assert.equal(scoped.scope.playbackStartSample, 235200);
+  assert.equal(scoped.scope.playbackEndSampleExclusive, 244020);
+  assert.deepEqual(scoped.resolvedPlan.elements, [f.view.resolvedPlan.elements[1]]);
+  assert.equal(scoped.resolvedPlan.elements[0].startFrame, 132);
+  assert.equal(scoped.resolvedPlan.elements[0].presentationPulse.anchorFrame, 162);
+  assert.deepEqual(f.view.sourceRefs.planRef, f.source.planRef);
+  assert.throws(() => createOrchestrationRenderScopeV001(f.view, {startFrame: 1.5, endFrameExclusive: 6}));
+  const restarted = clone(scoped.resolvedPlan); restarted.elements[0].startFrame = 0;
+  assert.throws(() => assertOrchestrationScopedPlansV001({view: f.view, plan: restarted,
+    baselinePlan: scoped.normalPlan, renderRange: scoped.renderRange}), /drawing plans differ/);
+});
+
+test('mid-Pulse preview uses the full finite phase and samples local media without restarting the fade', async t => {
+  const f = await fixture(t), scoped = createOrchestrationRenderScopeV001(f.view, {startFrame: 160, endFrameExclusive: 166});
+  const records = f.records.filter(record => record.element.instructionId === 'caption-1');
+  const prepared = await preparePresentationNativeFrameQcV001({...f.options, plan: scoped.resolvedPlan,
+    records, renderRange: scoped.renderRange});
+  const recipe = buildPresentationNativeFrameQcRecipeV001({plan: scoped.resolvedPlan, baselinePlan: scoped.normalPlan,
+    records: prepared.records, orchestrationDrawingView: f.view, renderRange: scoped.renderRange});
+  assert(recipe.samples.every(sample => sample.frame >= 160 && sample.frame < 166
+    && sample.mediaFrame === sample.frame - 160
+    && sample.references[0].layers[0].localFrame === sample.frame - 132));
+  assert(recipe.samples.some(sample => sample.frame === 162 && sample.expectedState === 'maximum'));
+  const args = buildPresentationCompositeArgumentsV001({baseMediaPath: '/fixture/range.nut', plan: scoped.resolvedPlan,
+    overlayRecords: records, expectedFrameCount: 6, renderRange: scoped.renderRange});
+  const filter = args[args.indexOf('-filter_complex') + 1];
+  assert.match(filter, /\(N\+28\)/);
+  assert.match(filter, /setpts=PTS\+0\/30\/TB/);
+  assert.doesNotMatch(filter, /split=0/);
+  assert.equal(args[args.indexOf('-frames:v') + 1], '6');
+});
+
+test('preview starting inside a motion caption preserves each remaining state and has range-only diagnostics', async t => {
+  const f = await fixture(t), scoped = createOrchestrationRenderScopeV001(f.view, {startFrame: 269, endFrameExclusive: 275});
+  const records = f.records.filter(record => record.element.instructionId === 'caption-2');
+  const prepared = await preparePresentationNativeFrameQcV001({...f.options, plan: scoped.resolvedPlan,
+    records, renderRange: scoped.renderRange});
+  const recipe = buildPresentationNativeFrameQcRecipeV001({plan: scoped.resolvedPlan, baselinePlan: scoped.normalPlan,
+    records: prepared.records, orchestrationDrawingView: f.view, renderRange: scoped.renderRange});
+  const fullProgram = getPresentationCaptionMotionProgramV001({element: records[0].element, canvas: scoped.resolvedPlan.canvas});
+  for (const sample of recipe.samples) {
+    assert.equal(sample.expectedState, fullProgram.segments.find(segment => segment.startFrame <= sample.frame
+      && segment.endFrameExclusive > sample.frame).state);
+    assert.equal(sample.references[0].layers[0].localFrame, sample.frame - 264);
+  }
+  assert(recipe.samples.every(sample => sample.frame >= 269 && sample.frame < 275));
+});
+
+test('a connection-only black range has no fabricated caption or native reference', async t => {
+  const f = await fixture(t), scoped = createOrchestrationRenderScopeV001(f.view, {startFrame: 123, endFrameExclusive: 127});
+  assert.deepEqual(scoped.resolvedPlan.elements, []);
+  const prepared = await preparePresentationNativeFrameQcV001({...f.options, plan: scoped.resolvedPlan,
+    records: [], renderRange: scoped.renderRange});
+  const recipe = buildPresentationNativeFrameQcRecipeV001({plan: scoped.resolvedPlan, baselinePlan: scoped.normalPlan,
+    records: prepared.records, orchestrationDrawingView: f.view, renderRange: scoped.renderRange});
+  assert.deepEqual(recipe, {sceneBindings: [], samples: []});
+  assert.equal(f.drawCalls.length, 0);
+  assert.throws(() => buildPresentationNativeQcAlternativeElementsV001({baselinePlan: scoped.normalPlan,
+    plan: scoped.resolvedPlan, orchestrationDrawingView: f.view, presentationTimeline: null}), /drawing plans differ/);
+});
+
 test('native preparation binds the original Normal file and draws diagnostic Normal on the projected clock', async t => {
   const f = await fixture(t), before = jsonBytes(f.state), prepared = await preparePresentationNativeFrameQcV001(f.options);
   assert.equal(jsonBytes(f.state), before);
@@ -145,10 +212,11 @@ test('native recipe reconstructs projected Pulse and motion samples from durable
     records: prepared.records, orchestrationDrawingView: view}), /drawing plans differ/);
 });
 
-function syntheticNativeEvidence(f, prepared) {
-  const view = f.view, plan = view.resolvedPlan, baselinePlan = view.projectedNormalPlan;
+function syntheticNativeEvidence(f, prepared, range = null) {
+  const view = f.view, scoped = createOrchestrationRenderScopeV001(view, range);
+  const plan = scoped.resolvedPlan, baselinePlan = scoped.normalPlan, renderRange = scoped.renderRange;
   const proofRef = prepared.provenance.inputRefs.find(row => row.role === 'orchestration-input');
-  const recipe = buildPresentationNativeFrameQcRecipeV001({plan, baselinePlan, records: prepared.records, orchestrationDrawingView: view});
+  const recipe = buildPresentationNativeFrameQcRecipeV001({plan, baselinePlan, records: prepared.records, orchestrationDrawingView: view, renderRange});
   return readFile(proofRef.path, 'utf8').then(text => {
     const orchestrationInput = JSON.parse(text);
     const refs = [...prepared.provenance.inputRefs,
@@ -176,14 +244,35 @@ function syntheticNativeEvidence(f, prepared) {
           ...decision.references[index], rgbPath: '/synthetic/reference-' + sampleIndex + '-' + index + '.rgb'}))};
     });
     return prepared.records.map(record => ({...clone(record.inspection), visibilityComparisonBasis: PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
-      representativeFrame: record.element.presentationPulse ? getPresentationPulseProgramV001({element: record.element, canvas: plan.canvas}).maximumFrame
+      representativeFrame: renderRange !== null ? (() => {const local = samples.filter(sample => sample.instructionId === record.element.instructionId);
+        return local[Math.floor(local.length / 2)].frame;})()
+        : record.element.presentationPulse ? getPresentationPulseProgramV001({element: record.element, canvas: plan.canvas}).maximumFrame
         : record.element.presentationMotion ? getPresentationCaptionMotionProgramV001({element: record.element, canvas: plan.canvas}).representativeFrame
           : record.element.startFrame + Math.floor(record.element.displayFrameCount / 2),
       nativeFrameQc: {schemaVersion: PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, instructionId: record.element.instructionId,
-        baselinePlan: clone(baselinePlan), orchestrationInput, sceneBindings: recipe.sceneBindings, inputManifest: manifest,
+        baselinePlan: clone(baselinePlan), orchestrationInput, renderRange, sceneBindings: recipe.sceneBindings, inputManifest: manifest,
         samples: samples.filter(sample => sample.instructionId === record.element.instructionId)}}));
   });
 }
+
+test('range native evidence cannot pass as full coverage or move a sampled frame to another media origin', async t => {
+  const f = await fixture(t), range = {startFrame: 160, endFrameExclusive: 166};
+  const scoped = createOrchestrationRenderScopeV001(f.view, range);
+  const prepared = await preparePresentationNativeFrameQcV001({...f.options, plan: scoped.resolvedPlan,
+    records: [f.records[1]], renderRange: scoped.renderRange});
+  const [inspection] = await syntheticNativeEvidence(f, prepared, range);
+  const check = row => validatePresentationNativeFrameQcEvidenceV001({plan: scoped.resolvedPlan,
+    inspection: row, renderRange: scoped.renderRange});
+  assert.equal(check(inspection).status, 'passed');
+  assert.equal(validatePresentationNativeFrameQcEvidenceV001({plan: scoped.resolvedPlan, inspection}).status, 'failed');
+  const wrongOrigin = clone(inspection); wrongOrigin.nativeFrameQc.samples[0].mediaFrame++;
+  assert.equal(check(wrongOrigin).status, 'failed');
+  const globalAsLocal = clone(inspection);
+  globalAsLocal.nativeFrameQc.samples[0].mediaFrame = globalAsLocal.nativeFrameQc.samples[0].frame;
+  assert.equal(check(globalAsLocal).status, 'failed');
+  const changedCoverage = clone(inspection); changedCoverage.nativeFrameQc.renderRange.endFrameExclusive++;
+  assert.equal(check(changedCoverage).status, 'failed');
+});
 
 test('durable native evidence verifies independent original-file and display-plan hashes and rejects clock substitutions', async t => {
   const f = await fixture(t), prepared = await preparePresentationNativeFrameQcV001(f.options), inspections = await syntheticNativeEvidence(f, prepared);

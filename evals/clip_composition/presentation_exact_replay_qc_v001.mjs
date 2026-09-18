@@ -1,3 +1,4 @@
+import {assertPresentationRenderRangeV001} from './presentation_orchestration_render_scope_v001.mjs';
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {createReadStream} from 'node:fs';
@@ -198,18 +199,21 @@ function physicalElements(element, canvas) {
       ? buildPresentationCaptionMotionStateElementsV001({element, canvas}) : [{state: 'static', element}];
 }
 
-function checkPlan(plan, expectedFrameCount) {
+function checkPlan(plan, expectedFrameCount, renderRange = null) {
+  assertPresentationRenderRangeV001(renderRange, expectedFrameCount);
   requireValue(object(plan) && positive(expectedFrameCount) && object(plan.canvas)
     && positive(plan.canvas.width) && positive(plan.canvas.height) && positive(plan.canvas.fps)
     && plan.canvas.width % 2 === 0 && plan.canvas.height % 2 === 0
-    && Array.isArray(plan.elements) && plan.elements.length > 0, 'fixed plan or complete frame count is invalid');
+    && Array.isArray(plan.elements) && (renderRange !== null || plan.elements.length > 0), 'fixed plan or complete frame count is invalid');
   const ids = new Set();
   for (const element of plan.elements) {
     requireValue(typeof element?.instructionId === 'string' && element.instructionId.length > 0
       && !ids.has(element.instructionId) && Number.isSafeInteger(element.startFrame) && element.startFrame >= 0
-      && positive(element.endFrameExclusive) && element.endFrameExclusive <= expectedFrameCount
+      && positive(element.endFrameExclusive) && element.endFrameExclusive <= (renderRange?.fullFrameCount ?? expectedFrameCount)
       && positive(element.displayFrameCount) && element.endFrameExclusive - element.startFrame === element.displayFrameCount,
     'fixed caption coverage or order is invalid');
+    if (renderRange !== null) requireValue(element.startFrame < renderRange.endFrameExclusive
+      && element.endFrameExclusive > renderRange.startFrame, 'inactive caption entered range replay');
     ids.add(element.instructionId);
   }
 }
@@ -397,9 +401,9 @@ function validateRawExecutionEvidence(evidence, inputByRole, plan) {
 }
 
 /** Pure evidence validation reconstructs the original compositor input and both exact comparison routes. */
-export function validatePresentationExactReplayQcEvidenceV001({plan, evidence, expectedFrameCount = evidence?.expectedFrameCount, mediaInspection, currentCompletedMediaRef}) {
+export function validatePresentationExactReplayQcEvidenceV001({plan, evidence, expectedFrameCount = evidence?.expectedFrameCount, mediaInspection, currentCompletedMediaRef, renderRange = null}) {
   try {
-    checkPlan(plan, expectedFrameCount);
+    checkPlan(plan, expectedFrameCount, renderRange);
     requireValue(typeof currentCompletedMediaRef?.path === 'string' && path.isAbsolute(currentCompletedMediaRef.path)
       && HASH.test(currentCompletedMediaRef.fileSha256)
       && currentCompletedMediaRef.path === evidence?.completed?.path
@@ -410,6 +414,7 @@ export function validatePresentationExactReplayQcEvidenceV001({plan, evidence, e
     'exact replay evidence does not bind the fixed plan');
     const records = recordsFromBindings(plan, evidence.recordBindings);
     const input = evidence.compositorInput;
+    requireValue(same(input?.renderRange ?? null, renderRange), 'exact replay scope differs from request');
     requireValue(input?.planCanonicalSha256 === canonicalDigest(plan)
       && input.recordBindingsCanonicalSha256 === canonicalDigest(evidence.recordBindings)
       && typeof input.baseMediaPath === 'string' && path.isAbsolute(input.baseMediaPath)
@@ -418,7 +423,7 @@ export function validatePresentationExactReplayQcEvidenceV001({plan, evidence, e
     const expectedArguments = buildPresentationCompositeArgumentsV001({baseMediaPath: input.baseMediaPath, plan,
       overlayRecords: records, expectedFrameCount, serializePngAndFilters: input.serializePngAndFilters,
       presentationTimeline: input.presentationTimeline, timelineAudio: input.timelineAudio,
-      audioMediaPath: input.audioMediaPath ?? null});
+      audioMediaPath: input.audioMediaPath ?? null, renderRange});
     requireValue(same(evidence.compositorArguments, expectedArguments)
       && evidence.compositorArgumentsCanonicalSha256 === canonicalDigest(expectedArguments)
       && same(evidence.encodeArguments, appendOutputArguments(expectedArguments, evidence.replay.path))
@@ -533,10 +538,10 @@ function spawnObserved(command, args) {
 export async function inspectPresentationExactReplayQcV001({
   plan, records, baseMediaPath, completedMediaPath, expectedFrameCount, scratchDirectory,
   ffmpegPath, ffprobePath, serializePngAndFilters, presentationTimeline = null, timelineAudio = null,
-  processObserver = null, sourceRefs = [], audioMediaPath = null,
+  processObserver = null, sourceRefs = [], audioMediaPath = null, renderRange = null,
 }) {
   const started = performance.now(), processes = [], generatedArtifacts = [], rawObservations = {};
-  const originals = {plan, records, presentationTimeline, timelineAudio, sourceRefs};
+  const originals = {plan, records, presentationTimeline, timelineAudio, sourceRefs, renderRange};
   const originalDigest = canonicalDigest(originals);
   plan = structuredClone(plan); records = structuredClone(records);
   presentationTimeline = structuredClone(presentationTimeline); timelineAudio = structuredClone(timelineAudio);
@@ -569,7 +574,7 @@ export async function inspectPresentationExactReplayQcV001({
     }
   };
   try {
-    checkPlan(plan, expectedFrameCount);
+    checkPlan(plan, expectedFrameCount, renderRange);
     requireValue(typeof serializePngAndFilters === 'boolean' && Array.isArray(sourceRefs), 'explicit compositor settings and source references are required');
     requireValue(processObserver === null || typeof processObserver?.run === 'function', 'invalid process observer');
     const recordBindings = boundRecords(plan, records);
@@ -605,9 +610,9 @@ export async function inspectPresentationExactReplayQcV001({
     const compositorInput = {baseMediaPath, planCanonicalSha256: canonicalDigest(plan),
       recordBindingsCanonicalSha256: canonicalDigest(recordBindings), expectedFrameCount,
       serializePngAndFilters, presentationTimeline, timelineAudio,
-      ...(audioMediaPath === null ? {} : {audioMediaPath})};
+      ...(audioMediaPath === null ? {} : {audioMediaPath}), ...(renderRange === null ? {} : {renderRange})};
     const compositorArguments = buildPresentationCompositeArgumentsV001({baseMediaPath, plan,
-      overlayRecords: records, expectedFrameCount, serializePngAndFilters, presentationTimeline, timelineAudio, audioMediaPath});
+      overlayRecords: records, expectedFrameCount, serializePngAndFilters, presentationTimeline, timelineAudio, audioMediaPath, renderRange});
     const encodeArguments = appendOutputArguments(compositorArguments, replayPath);
     await save('fixed-input.json', JSON.stringify({plan, recordBindings, compositorInput}, null, 2) + '\n');
     await save('encode-arguments.json', JSON.stringify({compositorArguments, encodeArguments,
@@ -666,7 +671,7 @@ export async function inspectPresentationExactReplayQcV001({
     }
     requireValue(canonicalDigest(originals) === originalDigest, 'caller inputs changed during exact replay');
     const currentCompletedMediaRef = evidence.inputManifest.after.find(ref => ref.role === 'completed-media');
-    const validated = validatePresentationExactReplayQcEvidenceV001({plan, evidence, expectedFrameCount, currentCompletedMediaRef});
+    const validated = validatePresentationExactReplayQcEvidenceV001({plan, evidence, expectedFrameCount, currentCompletedMediaRef, renderRange});
     return {...validated, evidence, performance: performanceRecord()};
   } catch (error) {
     error.exactReplayQcFailure = {evidence: evidence ?? null, processes, generatedArtifacts, performance: performanceRecord()};

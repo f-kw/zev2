@@ -1,0 +1,337 @@
+{
+  "schemaVersion": "stage4-render-verification-summary-v001",
+  "createdAt": "2026-09-18T06:29:21.194Z",
+  "repositoryRoot": "/private/tmp/zev-stage4-editing-20260918/worktree",
+  "purpose": "範囲描画の共通処理と、保存背景・native画像の検証済み再利用を確認する開発段階の記録。人間目視・UI実証・編集後全編完成の認定ではない。",
+  "implementationFiles": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 131705,
+      "fileSha256": "b7afd3589bf97e84479b8a4723296b4317165d84a5a614fa68f49894bcb3acdf"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "bytes": 48920,
+      "fileSha256": "704992c891ee12685e6bb35abf535a9e2d851faead86a4ec5296cb67cc92f6b0"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+      "bytes": 16014,
+      "fileSha256": "c607de4f6a9e5abdc011b9975395036833592684e71bd510d877ad41f73d37ac"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+      "bytes": 47306,
+      "fileSha256": "c8480c534fa2cd97949d5e74e829d0b4683c874cf15a2dc1f92980e0d84dd981"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+      "bytes": 11490,
+      "fileSha256": "cf47aa4b12d87aaed30032c20644f2de294da3a64b4fa6ee9733b36a0b43da9a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "bytes": 44594,
+      "fileSha256": "da356af0fb24b5b068a4bb0b5edb10ebc1b445f111a9ac931032a79af183f00c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs",
+      "bytes": 58086,
+      "fileSha256": "ad3020e7e7a464630b9733d5094cf62483f1917287fa627a1f850dedd62616f3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_renderer_v001.test.mjs",
+      "bytes": 31796,
+      "fileSha256": "602389696c8ca2d28698bcb56581239aa1b7f1331b03e83865c3b765b819a483"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_render_scope_v001.mjs",
+      "bytes": 3282,
+      "fileSha256": "fbff175a0b3397868031cf08908c490874f03297f3af286b28d09b0b2f955af3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+      "bytes": 17151,
+      "fileSha256": "422f589f02f403198f4bcce45efccf8632afc5ca6924efd65a9adee696685356"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_asset_cache_v001.mjs",
+      "bytes": 4690,
+      "fileSha256": "73195d873efd26531b598547527272cf5e8e85862387e08ae0b767c5adc33518"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_asset_cache_v001.test.mjs",
+      "bytes": 3865,
+      "fileSha256": "441a9fad3f1f39947e60ce7bff22aec04803c534a54fbc04b091df39e46b98d0"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_range_composition_v001.test.mjs",
+      "bytes": 4631,
+      "fileSha256": "0b48d25d379d1a72d0eb315763386b6b9e3a17270523ff98280ac05ab29f97e1"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_range_v001.test.mjs",
+      "bytes": 19563,
+      "fileSha256": "e88f5fa10548d13c9c8882977c9d21d15d2f0845278329b174fdaeb87c1f9ae2"
+    }
+  ],
+  "drawingRules": {
+    "fileCount": 57,
+    "canonicalSha256": "be0e898a4f4fe8720e07cf8ce1f9eac6831b3490edb5ccdfff2ec8bbb0a0126b",
+    "decoderRoles": {
+      "currentDrawingAndNewAudio": {
+        "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "bytes": 442864,
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      "savedBackgroundObservation": {
+        "path": "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffmpeg",
+        "bytes": 429512,
+        "fileSha256": "f33afb2c1e6510138dd0dd22c25b09908c2ac55780ddd7c8e35c588f076b9493"
+      }
+    }
+  },
+  "unchangedAutomaticEntry": {
+    "path": "evals/clip_composition/presentation_orchestration_candidate_v001.mjs",
+    "headBytesMatch": true,
+    "fileSha256": "fdeca9f572d36ed01b18f950596f9464b87925d04fa3c8fc883e86a1c602cc30",
+    "captionOverrideEmptyGuard": true,
+    "connectionOverrideEmptyGuard": true
+  },
+  "tests": {
+    "durableRuns": [
+      {
+        "evidence": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/render-unit-tests-v001.tap",
+          "bytes": 20755,
+          "fileSha256": "4f9003d523c035a47fe5f2637379f5615192345a1bcbb421dc8a1f720bb9744e"
+        },
+        "tests": 85,
+        "passed": 85,
+        "failed": 0
+      },
+      {
+        "evidence": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/range-pixel-tests-v001.tap",
+          "bytes": 378,
+          "fileSha256": "3032fe24a05b9198697ec6fc124e760b61291b6480adce63e1a33c2e6624573f"
+        },
+        "tests": 1,
+        "passed": 1,
+        "failed": 0
+      }
+    ],
+    "overlapNotice": "pixel test 1件は85件の集約実行にも含まれる。件数を加算しない。",
+    "backgroundRun": {
+      "tests": 17,
+      "passed": 17,
+      "failed": 0,
+      "rawStdoutSaved": false,
+      "evidenceBasis": "背景処理の実装担当による最終実行報告。以下の実媒体proofとは別項目。"
+    },
+    "coverage": [
+      "全体の保存viewから対象範囲の字幕集合を導出し、元の字幕時計を保持",
+      "Pulse/Shakeの途中から切り出しても位相・fadeを開始し直さない",
+      "範囲native証拠を全編合格として受け入れない",
+      "抽出用の局所frameと全体frameを入れ替えた証拠を拒否",
+      "字幕0件の接続区間に架空の字幕を追加しない",
+      "同一native描画条件で独立2回一致した画像のみ再利用",
+      "字幕描画props・描画実装の変更時はnative画像を再生成",
+      "壊れたcache PNGと異なる独立2回描画結果を拒否"
+    ]
+  },
+  "pixelComparison": {
+    "evidence": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/range-pixel-tests-v001.tap",
+      "bytes": 378,
+      "fileSha256": "3032fe24a05b9198697ec6fc124e760b61291b6480adce63e1a33c2e6624573f"
+    },
+    "fixtureCanvas": {
+      "width": 64,
+      "height": 48,
+      "fps": 30
+    },
+    "fullFramesPerExpression": 72,
+    "expressions": [
+      "Normal",
+      "Pulse",
+      "Bounce",
+      "Shake"
+    ],
+    "ranges": [
+      {
+        "startFrame": 12,
+        "endFrameExclusive": 13
+      },
+      {
+        "startFrame": 12,
+        "endFrameExclusive": 18
+      },
+      {
+        "startFrame": 33,
+        "endFrameExclusive": 41
+      },
+      {
+        "startFrame": 59,
+        "endFrameExclusive": 64
+      }
+    ],
+    "comparison": "共有compositorの全編出力と範囲出力を圧縮前YUV420p frame hashで全フレーム一致比較。MP4 container byte一致を要件へ置き換えない。",
+    "oneFrameNominalRateObserved": 30
+  },
+  "emptyCaptionRealRange": {
+    "evidence": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-empty-range-probe-v002/evidence/completion.json",
+      "bytes": 2483461,
+      "fileSha256": "81098b3881832483844d9f369080a43d57283857b761e0be87120585a4d06c92"
+    },
+    "status": "passed",
+    "scope": {
+      "kind": "range",
+      "startFrame": 466,
+      "endFrameExclusive": 470,
+      "fullFrameCount": 4867,
+      "frameCount": 4,
+      "viewSha256": "95e967d566d64c12f645aa1ff89ddaa62d6a2a0f9c8e284bbb62985913d0855a",
+      "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+      "fourSavedSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "6f1afb5dd422cd00853717fc11219d2aa281ebb1d0ca619e1155a7fae2ba2479",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "ca89725d6360c42525ca1d8e2ce61d59d4deb9e480940e8434349ca47e8d2e3f"
+      },
+      "playbackStartSample": 685020,
+      "playbackEndSampleExclusive": 690900
+    },
+    "qcScope": "requested-range-only",
+    "video": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-empty-range-probe-v002/render/presentation-rendered-v002.mp4",
+      "bytes": 2951,
+      "fileSha256": "ef2c0f5c13116a30c037f74fd6919a846e1ecfaec83e142b8842d61702df727a"
+    },
+    "captionInspections": 0,
+    "decodedLogicalAudioSamples": 5880,
+    "timings": {
+      "backgroundMilliseconds": 2405.052125,
+      "preparationMilliseconds": 3191.912958,
+      "drawAndQcMilliseconds": 1797.6839580000005,
+      "elapsedMilliseconds": 5574.896
+    },
+    "completedFrameQcPerformance": {
+      "wallClockMs": 1138.2176250000002,
+      "exactReplay": {
+        "wallClockMs": 250.5332500000004,
+        "encodeWallClockMs": 44.464584000000286,
+        "exactComparisonWallClockMs": 46.41579199999978,
+        "childProcessCount": 5,
+        "childProcessesByPurpose": {
+          "version-ffmpeg": 1,
+          "version-ffprobe": 1,
+          "encode": 1,
+          "video-probe-completed": 1,
+          "video-probe-replay": 1
+        },
+        "encodedFrames": 4,
+        "decodedFrames": null,
+        "comparedFrames": null,
+        "comparedAudioPackets": null,
+        "observationScope": "One actual full-video encode. Decoded frame counts are observed framehash rows only; byte equality does not fabricate decoded or compared frame counts."
+      },
+      "finiteState": {
+        "wallClockMs": 394.44795799999974,
+        "childProcessCount": 2,
+        "childProcessesByPurpose": {
+          "tool-version": 2
+        },
+        "sourceFrameOutputs": 0,
+        "completedFrameOutputs": 0,
+        "completedRgbOutputs": 0,
+        "referenceRgbOutputs": 0,
+        "frameCountMeaning": "verified output frames; internal seek/decoder work is not inferred"
+      },
+      "preparationWallClockMs": 296.0290409999998,
+      "finiteStateWallClockMs": 818.8047500000002,
+      "finiteStateExecuted": true
+    },
+    "fullBackgroundGenerated": false,
+    "fullQcExecuted": false
+  },
+  "realSubtitleOnlyBackgroundReuse": {
+    "evidence": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-background-reuse-v002/proof.json",
+      "bytes": 11552,
+      "fileSha256": "348fd060c44ec37d0e71724b437445861379e8ef19521f1ffa507f80ec8d2695"
+    },
+    "status": "passed",
+    "range": {
+      "startFrame": 20,
+      "endFrameExclusive": 50
+    },
+    "reuse": true,
+    "displayFrames": 30,
+    "logicalSamples": 44100,
+    "timing": {
+      "preparationMilliseconds": 782.1522090000001,
+      "losslessGenerationMilliseconds": 209.866042,
+      "losslessVerificationMilliseconds": 406.18258400000013,
+      "audioEncodingMilliseconds": 122.14641700000016,
+      "totalMilliseconds": 2138.893
+    },
+    "fullBackgroundGenerated": false,
+    "fullQcExecuted": false
+  },
+  "savedFullBackgroundAdmission": {
+    "evidence": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-background-reuse-inspection-v001/source-runtime-check.json",
+      "bytes": 13066,
+      "fileSha256": "c5a076d64daf6ceeb9e973b5e464ec3ffce5589e441093b54328ecc93d2ff6b3"
+    },
+    "used": true,
+    "fullCoverage": true,
+    "coverage": {
+      "startFrame": 0,
+      "endFrameExclusive": 4867
+    },
+    "logicalSamples": 7154490,
+    "elapsedMilliseconds": 2340.6728749999997,
+    "requiredDecoderReference": {
+      "path": "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffmpeg",
+      "bytes": 429512,
+      "fileSha256": "f33afb2c1e6510138dd0dd22c25b09908c2ac55780ddd7c8e35c588f076b9493"
+    },
+    "decoderMismatchEvidence": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-background-reuse-inspection-v001/decoded-hash-mismatch.json",
+      "bytes": 4922,
+      "fileSha256": "22891a92689c340d5ab3eaa797cb178b65674e0eb2f001bfa545c727539b6b42"
+    },
+    "meaning": "保存時の復号観測をその実行環境で再現し、保持した画素/PCM根拠・AAC実体・priming・packet・復号sample数/内容を照合。現在の描画と新AACは別途束縛したARM実行環境を使う。許容差と暗黙fallbackなし。"
+  },
+  "limitations": [
+    "ブラウザー上の編集・再生はこの記録の検証対象外。rootで別途確認する。",
+    "字幕を含む初回preview・編集後full・同一状態再利用の実測はrootのHTTP sequenceで進行中。",
+    "描画に必要なTSX local IPCはsandbox外実行権限が必要だった。失敗runを保存し別runで合格を取得。",
+    "短区間背景の生成と検査は必要frame/sampleだけに限定。入力decoderが区間まで読むprefixの処理量は推定しない。",
+    "native画像の検証・layout検査・範囲QCを省略したcache利用はしない。",
+    "formal trust変更・人間品質判定・mainへの採用・tag・公開の承認は含まない。"
+  ],
+  "failuresPreserved": [
+    {
+      "evidence": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-empty-range-probe-v001/evidence/draw-result.json",
+        "bytes": 896,
+        "fileSha256": "aef7af508301d2fd3ecf7b7bdfb0bb2b3f15f11850160ce0ebe25364082bc2a1"
+      },
+      "meaning": "TSX local IPC作成がEPERMで拒否され、未公開。v002はローカルIPC権限付き別run。"
+    }
+  ],
+  "reviews": {
+    "entryCacheScope": "全長背景再利用の根拠検査不足1件を修正し共通validatorへ接続。",
+    "rangeQc": "別担当の範囲関連5file read-only確認で追加修正対象なし。"
+  },
+  "scopeExclusions": {
+    "externalApiCalls": 0,
+    "newExternalMedia": 0,
+    "formalTrustChanged": false,
+    "commitsByThisAgent": 0
+  }
+}

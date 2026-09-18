@@ -2,12 +2,15 @@ import './assets/main.css';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import App from './App.vue';
 import vuetify from './plugins/vuetify';
 
-const app = createApp(App);
+const component = ['/presentation-editing', '/presentation-editing/'].includes(window.location.pathname)
+  ? import('./PresentationEditing.vue')
+  : import('./App.vue');
 
-app.use(createPinia());
-app.use(vuetify);
-
-app.mount('#app');
+void component.then(({ default: root }) => {
+  const app = createApp(root);
+  app.use(createPinia());
+  app.use(vuetify);
+  app.mount('#app');
+});

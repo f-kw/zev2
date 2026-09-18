@@ -1,0 +1,435 @@
+TAP version 13
+# Subtest: production drawing rejects missing and standalone diagnostic QC methods before output or child processes
+ok 1 - production drawing rejects missing and standalone diagnostic QC methods before output or child processes
+  ---
+  duration_ms: 6.434375
+  ...
+# Subtest: diagnostic completed-frame QC also requires an explicitly selected method before any work
+ok 2 - diagnostic completed-frame QC also requires an explicitly selected method before any work
+  ---
+  duration_ms: 0.951208
+  ...
+# Subtest: public combined QC entry rejects an unsupported frame rate before every media child without fallback
+ok 3 - public combined QC entry rejects an unsupported frame rate before every media child without fallback
+  ---
+  duration_ms: 3.089166
+  ...
+# Subtest: public combined QC entry rejects absent, relative or changed normal-plan references before every media child
+ok 4 - public combined QC entry rejects absent, relative or changed normal-plan references before every media child
+  ---
+  duration_ms: 8.346125
+  ...
+# Subtest: production evaluator accepts complete combined evidence with valid application, layout and media inputs
+ok 5 - production evaluator accepts complete combined evidence with valid application, layout and media inputs
+  ---
+  duration_ms: 14.976667
+  ...
+# Subtest: production final QC rejects old pixel-count and valid native-only evidence without the new global proof
+ok 6 - production final QC rejects old pixel-count and valid native-only evidence without the new global proof
+  ---
+  duration_ms: 10.123416
+  ...
+# Subtest: production evaluator rejects missing global evidence or a missing whole-video proof
+ok 7 - production evaluator rejects missing global evidence or a missing whole-video proof
+  ---
+  duration_ms: 8.221667
+  ...
+# Subtest: production evaluator rejects a missing or substituted current completed-video path or hash
+ok 8 - production evaluator rejects a missing or substituted current completed-video path or hash
+  ---
+  duration_ms: 14.28975
+  ...
+# Subtest: production evaluator rejects whole-video corruption even when native state observations pass
+ok 9 - production evaluator rejects whole-video corruption even when native state observations pass
+  ---
+  duration_ms: 5.90875
+  ...
+# Subtest: production evaluator rejects an omitted native caption even when whole-video equality passes
+ok 10 - production evaluator rejects an omitted native caption even when whole-video equality passes
+  ---
+  duration_ms: 8.550792
+  ...
+# Subtest: production evaluator rejects detached finite-state evidence and a mixed comparison basis
+ok 11 - production evaluator rejects detached finite-state evidence and a mixed comparison basis
+  ---
+  duration_ms: 8.793209
+  ...
+# Subtest: production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements
+ok 12 - production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements
+  ---
+  duration_ms: 3.496291
+  ...
+# Subtest: combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs
+ok 13 - combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs
+  ---
+  duration_ms: 5.305917
+  ...
+# Subtest: combined proof rejects missing whole-video evidence despite cached pass flags
+ok 14 - combined proof rejects missing whole-video evidence despite cached pass flags
+  ---
+  duration_ms: 1.632584
+  ...
+# Subtest: combined proof rejects mixing individually valid observations from different completed videos
+ok 15 - combined proof rejects mixing individually valid observations from different completed videos
+  ---
+  duration_ms: 6.752042
+  ...
+# Subtest: combined proof requires the current completed-video path and hash supplied by its caller
+ok 16 - combined proof requires the current completed-video path and hash supplied by its caller
+  ---
+  duration_ms: 4.25375
+  ...
+# Subtest: combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain
+ok 17 - combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain
+  ---
+  duration_ms: 12.645083
+  ...
+# Subtest: all decoded frame hashes retain order and exact rational timestamps
+ok 18 - all decoded frame hashes retain order and exact rational timestamps
+  ---
+  duration_ms: 0.2215
+  ...
+# Subtest: frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps
+ok 19 - frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps
+  ---
+  duration_ms: 0.365083
+  ...
+# Subtest: audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS
+ok 20 - audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS
+  ---
+  duration_ms: 0.213792
+  ...
+# Subtest: audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks
+ok 21 - audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks
+  ---
+  duration_ms: 0.203584
+  ...
+# Subtest: byte equality and full decoded equality are independently valid exact gates
+ok 22 - byte equality and full decoded equality are independently valid exact gates
+  ---
+  duration_ms: 2.1105
+  ...
+# Subtest: one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests
+ok 23 - one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests
+  ---
+  duration_ms: 8.921958
+  ...
+# Subtest: a cached pass cannot replace complete observations, stable input bindings or original encoder arguments
+ok 24 - a cached pass cannot replace complete observations, stable input bindings or original encoder arguments
+  ---
+  duration_ms: 5.236291
+  ...
+# Subtest: byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison
+ok 25 - byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison
+  ---
+  duration_ms: 2.179083
+  ...
+# Subtest: mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames
+ok 26 - mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames
+  ---
+  duration_ms: 140.576
+  ...
+# Subtest: mock I/O compares every decoded frame and audio packet when container bytes differ
+ok 27 - mock I/O compares every decoded frame and audio packet when container bytes differ
+  ---
+  duration_ms: 126.569875
+  ...
+# Subtest: mock I/O preserves exact failure for an unknown one-pixel change
+ok 28 - mock I/O preserves exact failure for an unknown one-pixel change
+  ---
+  duration_ms: 127.485375
+  ...
+# Subtest: mock I/O detects inputs changing during encode and rejects a missing production PNG before any child
+ok 29 - mock I/O detects inputs changing during encode and rejects a missing production PNG before any child
+  ---
+  duration_ms: 125.903292
+  ...
+# Subtest: pulse replay binds every production PNG to its exact native state and order
+ok 30 - pulse replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.233375
+  ...
+# Subtest: bounce replay binds every production PNG to its exact native state and order
+ok 31 - bounce replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.323542
+  ...
+# Subtest: shake replay binds every production PNG to its exact native state and order
+ok 32 - shake replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.1435
+  ...
+# Subtest: current completed-file identity is mandatory and rejects a stale pass for another same-format video
+ok 33 - current completed-file identity is mandatory and rejects a stale pass for another same-format video
+  ---
+  duration_ms: 0.45025
+  ...
+# Subtest: raw evidence, all observed commands, original stdout and artifact correspondence are mandatory
+ok 34 - raw evidence, all observed commands, original stdout and artifact correspondence are mandatory
+  ---
+  duration_ms: 11.22525
+  ...
+# Subtest: parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes
+ok 35 - parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes
+  ---
+  duration_ms: 1.625125
+  ...
+# Subtest: sample/display aspect, color meaning and display side data must match despite identical pixel hashes
+ok 36 - sample/display aspect, color meaning and display side data must match despite identical pixel hashes
+  ---
+  duration_ms: 6.2685
+  ...
+# Subtest: bounce native QC rejects clamping, unbound images, missing states and invalid static layouts
+ok 37 - bounce native QC rejects clamping, unbound images, missing states and invalid static layouts
+  ---
+  duration_ms: 4.925917
+  ...
+# Subtest: bounce collision checks follow the moving state interval beyond the disjoint stable box
+ok 38 - bounce collision checks follow the moving state interval beyond the disjoint stable box
+  ---
+  duration_ms: 1.039083
+  ...
+# Subtest: shake native QC rejects clamping, unbound images, missing states and invalid static layouts
+ok 39 - shake native QC rejects clamping, unbound images, missing states and invalid static layouts
+  ---
+  duration_ms: 4.184
+  ...
+# Subtest: shake collision checks follow the moving state interval beyond the disjoint stable box
+ok 40 - shake collision checks follow the moving state interval beyond the disjoint stable box
+  ---
+  duration_ms: 1.65875
+  ...
+# Subtest: native cache requires two independent equal draws, survives another process adapter and binds all props and rules
+ok 41 - native cache requires two independent equal draws, survives another process adapter and binds all props and rules
+  ---
+  duration_ms: 626.815834
+  ...
+# Subtest: native cache refuses damaged native bytes and unignored paths instead of accepting a saved pass
+ok 42 - native cache refuses damaged native bytes and unignored paths instead of accepting a saved pass
+  ---
+  duration_ms: 419.138
+  ...
+# Subtest: disagreeing independent native draws never enter the reusable set
+ok 43 - disagreeing independent native draws never enter the reusable set
+  ---
+  duration_ms: 320.911833
+  ...
+# Subtest: diagnostic alternatives retain the saved decisions and distinguish partial-color overpaint, plate loss and absent scale
+ok 44 - diagnostic alternatives retain the saved decisions and distinguish partial-color overpaint, plate loss and absent scale
+  ---
+  duration_ms: 4.890875
+  ...
+# Subtest: an altered current plan cannot nominate its own expected reference
+ok 45 - an altered current plan cannot nominate its own expected reference
+  ---
+  duration_ms: 1.195792
+  ...
+# Subtest: unsupported timelines and positions require an explicit encoded oracle, with no fast fallback
+ok 46 - unsupported timelines and positions require an explicit encoded oracle, with no fast fallback
+  ---
+  duration_ms: 0.759417
+  ...
+# Subtest: reference preparation binds source bytes, renders diagnostic states twice and reuses only the identical normal state
+ok 47 - reference preparation binds source bytes, renders diagnostic states twice and reuses only the identical normal state
+  ---
+  duration_ms: 28.40825
+  ...
+# Subtest: changed baseline bytes are rejected before any diagnostic draw
+ok 48 - changed baseline bytes are rejected before any diagnostic draw
+  ---
+  duration_ms: 3.141375
+  ...
+# Subtest: a native adapter that mutates the expected properties is rejected
+ok 49 - a native adapter that mutates the expected properties is rejected
+  ---
+  duration_ms: 6.482583
+  ...
+# Subtest: changed production PNG bytes cannot be treated as normal-state reuse
+ok 50 - changed production PNG bytes cannot be treated as normal-state reuse
+  ---
+  duration_ms: 6.413417
+  ...
+# Subtest: diagnostic PNG modification during inspection is rejected before preparation succeeds
+ok 51 - diagnostic PNG modification during inspection is rejected before preparation succeeds
+  ---
+  duration_ms: 17.985792
+  ...
+# Subtest: saved expected plan modification during drawing is rejected before preparation succeeds
+ok 52 - saved expected plan modification during drawing is rejected before preparation succeeds
+  ---
+  duration_ms: 13.420833
+  ...
+# Subtest: Pulse evidence cannot disappear from records while the fixed plan still requires it
+ok 53 - Pulse evidence cannot disappear from records while the fixed plan still requires it
+  ---
+  duration_ms: 5.568875
+  ...
+# Subtest: ordinary records cannot acquire an unrequested Pulse state array
+ok 54 - ordinary records cannot acquire an unrequested Pulse state array
+  ---
+  duration_ms: 4.520083
+  ...
+# Subtest: bounce preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing
+ok 55 - bounce preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing
+  ---
+  duration_ms: 13.5615
+  ...
+# Subtest: bounce preparation rejects omitted states and altered production bytes before drawing
+ok 56 - bounce preparation rejects omitted states and altered production bytes before drawing
+  ---
+  duration_ms: 8.481458
+  ...
+# Subtest: shake preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing
+ok 57 - shake preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing
+  ---
+  duration_ms: 14.183167
+  ...
+# Subtest: shake preparation rejects omitted states and altered production bytes before drawing
+ok 58 - shake preparation rejects omitted states and altered production bytes before drawing
+  ---
+  duration_ms: 13.749875
+  ...
+# Subtest: ordinary records cannot acquire an unrequested motion state array
+ok 59 - ordinary records cannot acquire an unrequested motion state array
+  ---
+  duration_ms: 4.225083
+  ...
+# Subtest: the fixed recipe includes every caption and all three Pulse observations without caller-selected samples
+ok 60 - the fixed recipe includes every caption and all three Pulse observations without caller-selected samples
+  ---
+  duration_ms: 11.726667
+  ...
+# Subtest: mandatory Color/Panel/Normal references and their drawing conditions cannot be silently omitted
+ok 61 - mandatory Color/Panel/Normal references and their drawing conditions cannot be silently omitted
+  ---
+  duration_ms: 20.087375
+  ...
+# Subtest: a partial selection that covers the whole caption still gets the resolver-required duplicate alternative
+ok 62 - a partial selection that covers the whole caption still gets the resolver-required duplicate alternative
+  ---
+  duration_ms: 5.762708
+  ...
+# Subtest: foreign references occupy the target clock and candidate bounds, not the inactive caption clock or corrupted frame bounds
+ok 63 - foreign references occupy the target clock and candidate bounds, not the inactive caption clock or corrupted frame bounds
+  ---
+  duration_ms: 5.338958
+  ...
+# Subtest: simultaneous captions retain their own fades and receive a real pair-order alternative
+ok 64 - simultaneous captions retain their own fades and receive a real pair-order alternative
+  ---
+  duration_ms: 5.598416
+  ...
+# Subtest: exact pixel classes permit a Normal alias but reject target absence and an unequal-image tie
+ok 65 - exact pixel classes permit a Normal alias but reject target absence and an unequal-image tie
+  ---
+  duration_ms: 0.468625
+  ...
+# Subtest: whole-caption overpaint and foreign pixels need adversarial references even without empirical thresholds
+ok 66 - whole-caption overpaint and foreign pixels need adversarial references even without empirical thresholds
+  ---
+  duration_ms: 0.147125
+  ...
+# Subtest: the pure validator accepts complete synthetic evidence and independently rejects material evidence tampering
+ok 67 - the pure validator accepts complete synthetic evidence and independently rejects material evidence tampering
+  ---
+  duration_ms: 45.690291
+  ...
+# Subtest: bounce native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+ok 68 - bounce native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+  ---
+  duration_ms: 7.115625
+  ...
+# Subtest: bounce rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+ok 69 - bounce rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+  ---
+  duration_ms: 53.390041
+  ...
+# Subtest: shake native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+ok 70 - shake native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+  ---
+  duration_ms: 6.752791
+  ...
+# Subtest: shake rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+ok 71 - shake rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+  ---
+  duration_ms: 44.7
+  ...
+# Subtest: range compositing matches every precompression full-program frame through finite state and fade cuts
+ok 72 - range compositing matches every precompression full-program frame through finite state and fade cuts
+  ---
+  duration_ms: 1280.835334
+  ...
+# Subtest: range scopes retain complete caption clocks, original bindings and exact playback samples
+ok 73 - range scopes retain complete caption clocks, original bindings and exact playback samples
+  ---
+  duration_ms: 30.299292
+  ...
+# Subtest: mid-Pulse preview uses the full finite phase and samples local media without restarting the fade
+ok 74 - mid-Pulse preview uses the full finite phase and samples local media without restarting the fade
+  ---
+  duration_ms: 24.481875
+  ...
+# Subtest: preview starting inside a motion caption preserves each remaining state and has range-only diagnostics
+ok 75 - preview starting inside a motion caption preserves each remaining state and has range-only diagnostics
+  ---
+  duration_ms: 22.28925
+  ...
+# Subtest: a connection-only black range has no fabricated caption or native reference
+ok 76 - a connection-only black range has no fabricated caption or native reference
+  ---
+  duration_ms: 14.984833
+  ...
+# Subtest: native preparation binds the original Normal file and draws diagnostic Normal on the projected clock
+ok 77 - native preparation binds the original Normal file and draws diagnostic Normal on the projected clock
+  ---
+  duration_ms: 28.246
+  ...
+# Subtest: native recipe reconstructs projected Pulse and motion samples from durable proof
+ok 78 - native recipe reconstructs projected Pulse and motion samples from durable proof
+  ---
+  duration_ms: 38.272167
+  ...
+# Subtest: range native evidence cannot pass as full coverage or move a sampled frame to another media origin
+ok 79 - range native evidence cannot pass as full coverage or move a sampled frame to another media origin
+  ---
+  duration_ms: 31.622541
+  ...
+# Subtest: durable native evidence verifies independent original-file and display-plan hashes and rejects clock substitutions
+ok 80 - durable native evidence verifies independent original-file and display-plan hashes and rejects clock substitutions
+  ---
+  duration_ms: 71.570041
+  ...
+# Subtest: renderer rejects fabricated views, old-clock plans, duplicate timelines and missing combined QC before drawing
+ok 81 - renderer rejects fabricated views, old-clock plans, duplicate timelines and missing combined QC before drawing
+  ---
+  duration_ms: 10.62875
+  ...
+# Subtest: renderer rejects changed original files and a background from another projection before media children
+ok 82 - renderer rejects changed original files and a background from another projection before media children
+  ---
+  duration_ms: 11.437125
+  ...
+# Subtest: compositor maps independent AAC after every finite PNG and overlays only on completed background
+ok 83 - compositor maps independent AAC after every finite PNG and overlays only on completed background
+  ---
+  duration_ms: 9.22775
+  ...
+# Subtest: exact replay binds independent AAC before/after and repeats the production input mapping
+ok 84 - exact replay binds independent AAC before/after and repeats the production input mapping
+  ---
+  duration_ms: 152.828084
+  ...
+# Subtest: independent AAC mutation during exact replay fails even when output video bytes match
+ok 85 - independent AAC mutation during exact replay fails even when output video bytes match
+  ---
+  duration_ms: 129.57675
+  ...
+1..85
+# tests 85
+# suites 0
+# pass 85
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1417.97075
