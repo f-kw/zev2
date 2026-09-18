@@ -333,7 +333,8 @@ export function buildConnectionExpressionTimelineFiltersV001(options) {
   exact(options, ['presentationTimeline', 'canvas', 'audio', 'softWindows'], 'renderer input');
   canvasCheck(options.canvas);
   exact(options.audio, ['sampleRate', 'channelLayout'], 'audio clock');
-  require(options.audio.sampleRate === 48000 && options.audio.channelLayout === 'stereo', '48kHz stereo required');
+  require([44100, 48000].includes(options.audio.sampleRate) && options.audio.channelLayout === 'stereo',
+    '44.1kHz or 48kHz stereo required');
   exact(options.presentationTimeline, ['spans'], 'presentation timeline');
   const spans = options.presentationTimeline.spans;
   require(Array.isArray(spans) && spans.length > 0, 'renderer spans');

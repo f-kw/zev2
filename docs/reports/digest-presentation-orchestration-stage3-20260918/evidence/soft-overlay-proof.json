@@ -1,0 +1,2408 @@
+{
+  "schemaVersion": "presentation-orchestration-soft-overlay-probe-v001",
+  "status": "passed",
+  "purpose": "read-only inspection of the existing zero-override automatic candidate at every Soft overlap",
+  "limits": {
+    "humanVisualAdoption": "not-evaluated",
+    "fullCandidateReencoded": false,
+    "candidateModified": false,
+    "encodedWrongOrderFaultTested": false,
+    "probesAreSupplementalToExistingCompletedFrameQc": true
+  },
+  "outputGuard": {
+    "repositoryRoot": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree",
+    "outputDirectory": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001",
+    "relativeDirectory": "evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001",
+    "matchedIgnoreRule": ".gitignore:18:/evals/clip_composition/outputs/presentation/stage3-orchestration-*/\tevals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/generated-output-probe.txt",
+    "directoryCreated": false
+  },
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "safeAreaPx": {
+      "top": 40,
+      "right": 80,
+      "bottom": 40,
+      "left": 80
+    }
+  },
+  "viewSha256": "95e967d566d64c12f645aa1ff89ddaa62d6a2a0f9c8e284bbb62985913d0855a",
+  "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+  "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+  "fourSavedSha256": {
+    "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+    "captionOverrides": "6f1afb5dd422cd00853717fc11219d2aa281ebb1d0ca619e1155a7fae2ba2479",
+    "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+    "connectionOverrides": "ca89725d6360c42525ca1d8e2ce61d59d4deb9e480940e8434349ca47e8d2e3f"
+  },
+  "sourceFrameCount": 4831,
+  "displayFrameCount": 4867,
+  "playbackSampleRate": 44100,
+  "observationSampleRate": 16000,
+  "candidateRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+    "bytes": 75306932,
+    "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225"
+  },
+  "backgroundProofRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-audio-v002/proof.json",
+    "fileSha256": "11fc158436bcb86a4954a4c802322180a5fdf66020401261a2631fabfb06105f",
+    "bytes": 9732
+  },
+  "viewRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/orchestration-view-v001.json",
+    "fileSha256": "5a81f3733110cbb4c43da532b480579cbb398fcea17340c367d0928c6b9e271a",
+    "bytes": 650662
+  },
+  "drawResultRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/candidate-v003/draw-result.json",
+    "fileSha256": "8064b3eea6432670b0bf4e623bdb10e27da26d958620d3a7bfcf2112009f9326",
+    "bytes": 286008420
+  },
+  "inputManifest": {
+    "before": [
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/orchestration-view-v001.json",
+        "fileSha256": "5a81f3733110cbb4c43da532b480579cbb398fcea17340c367d0928c6b9e271a",
+        "bytes": 650662
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/candidate-v003/draw-result.json",
+        "fileSha256": "8064b3eea6432670b0bf4e623bdb10e27da26d958620d3a7bfcf2112009f9326",
+        "bytes": 286008420
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-audio-v002/proof.json",
+        "fileSha256": "11fc158436bcb86a4954a4c802322180a5fdf66020401261a2631fabfb06105f",
+        "bytes": 9732
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+        "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+        "bytes": 75306932
+      },
+      {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/normal-plan.json",
+        "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e",
+        "bytes": 205982
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/timeline.json",
+        "fileSha256": "dd4ebac277c0f3da73765457ea7812cfc801a16231d35a1cd0a0c4c1b0e61aef",
+        "bytes": 2483
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+        "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d",
+        "bytes": 78398378
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-v001/background.nut",
+        "fileSha256": "85e9c83e41ac3b69435aaedaf80f1357ffc97e47f82b3cfd81ae9f736ae59e87",
+        "bytes": 1029173377
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_orchestration_soft_overlay_probe_v001.mjs",
+        "fileSha256": "2265059f21029d44fb762c8760bde49755bcd09e56fdc0b6e1cdb77a8e704fc7",
+        "bytes": 22770
+      },
+      {
+        "path": "/opt/homebrew/bin/ffmpeg",
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+        "bytes": 442864
+      },
+      {
+        "path": "/opt/homebrew/bin/ffprobe",
+        "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9",
+        "bytes": 238096
+      },
+      {
+        "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+        "bytes": 88501744
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/connection_expression_v001.mjs",
+        "fileSha256": "4092a3faa49aa360eed4f1b6ecaf4d743dc421d77ccc655d429b4907f5269de0",
+        "bytes": 23254
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+        "fileSha256": "6805965e6101d271686e9a89d9f3a8328a3ef032c130856a64a677a865517007",
+        "bytes": 45419
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_orchestration_v001.mjs",
+        "fileSha256": "2eded3dbf718c5e006d80a9f604571fc7a86649aaca7d5d6d8eae8e92661e427",
+        "bytes": 29560
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_orchestration_projection_v001.mjs",
+        "fileSha256": "350272ca2a0abc0082c69b302d3cee626c92aab51770aaf400e63a2526ae9bef",
+        "bytes": 19232
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/render_presentation_v002.mjs",
+        "fileSha256": "3f7f12b08dd1b4b9775954ec8424eb37cf47e976dad3ae817302b360e33a9151",
+        "bytes": 129087
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/09-70d128b99879.png",
+        "fileSha256": "7d277142ebcef5351d5e1adba58c9bb1b9426410ec78fd4d59d6b09c33c758fb",
+        "bytes": 143766
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/10-aca83bb4e738.png",
+        "fileSha256": "87e11f8d572d53d2ce352befb96eb54d9d337a2152e83697b584e95815005f7f",
+        "bytes": 93336
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/29-60d3aa5ca7e7.png",
+        "fileSha256": "14b22fc2cbbd81c07cb290382846a0a6070c7e4e2e3703ee61cd3c6caa181b5a",
+        "bytes": 231321
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/30-d9b21771088b.png",
+        "fileSha256": "56131be13d96637f905aa4a57b0997431751aae03d8dcd90bcff97e7da2ee600",
+        "bytes": 227280
+      }
+    ],
+    "after": [
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/orchestration-view-v001.json",
+        "fileSha256": "5a81f3733110cbb4c43da532b480579cbb398fcea17340c367d0928c6b9e271a",
+        "bytes": 650662
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/candidate-v003/draw-result.json",
+        "fileSha256": "8064b3eea6432670b0bf4e623bdb10e27da26d958620d3a7bfcf2112009f9326",
+        "bytes": 286008420
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-audio-v002/proof.json",
+        "fileSha256": "11fc158436bcb86a4954a4c802322180a5fdf66020401261a2631fabfb06105f",
+        "bytes": 9732
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+        "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+        "bytes": 75306932
+      },
+      {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/normal-plan.json",
+        "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e",
+        "bytes": 205982
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/timeline.json",
+        "fileSha256": "dd4ebac277c0f3da73765457ea7812cfc801a16231d35a1cd0a0c4c1b0e61aef",
+        "bytes": 2483
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+        "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d",
+        "bytes": 78398378
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-v001/background.nut",
+        "fileSha256": "85e9c83e41ac3b69435aaedaf80f1357ffc97e47f82b3cfd81ae9f736ae59e87",
+        "bytes": 1029173377
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_orchestration_soft_overlay_probe_v001.mjs",
+        "fileSha256": "2265059f21029d44fb762c8760bde49755bcd09e56fdc0b6e1cdb77a8e704fc7",
+        "bytes": 22770
+      },
+      {
+        "path": "/opt/homebrew/bin/ffmpeg",
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+        "bytes": 442864
+      },
+      {
+        "path": "/opt/homebrew/bin/ffprobe",
+        "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9",
+        "bytes": 238096
+      },
+      {
+        "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+        "bytes": 88501744
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/connection_expression_v001.mjs",
+        "fileSha256": "4092a3faa49aa360eed4f1b6ecaf4d743dc421d77ccc655d429b4907f5269de0",
+        "bytes": 23254
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+        "fileSha256": "6805965e6101d271686e9a89d9f3a8328a3ef032c130856a64a677a865517007",
+        "bytes": 45419
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_orchestration_v001.mjs",
+        "fileSha256": "2eded3dbf718c5e006d80a9f604571fc7a86649aaca7d5d6d8eae8e92661e427",
+        "bytes": 29560
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_orchestration_projection_v001.mjs",
+        "fileSha256": "350272ca2a0abc0082c69b302d3cee626c92aab51770aaf400e63a2526ae9bef",
+        "bytes": 19232
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/render_presentation_v002.mjs",
+        "fileSha256": "3f7f12b08dd1b4b9775954ec8424eb37cf47e976dad3ae817302b360e33a9151",
+        "bytes": 129087
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/09-70d128b99879.png",
+        "fileSha256": "7d277142ebcef5351d5e1adba58c9bb1b9426410ec78fd4d59d6b09c33c758fb",
+        "bytes": 143766
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/10-aca83bb4e738.png",
+        "fileSha256": "87e11f8d572d53d2ce352befb96eb54d9d337a2152e83697b584e95815005f7f",
+        "bytes": 93336
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/29-60d3aa5ca7e7.png",
+        "fileSha256": "14b22fc2cbbd81c07cb290382846a0a6070c7e4e2e3703ee61cd3c6caa181b5a",
+        "bytes": 231321
+      },
+      {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/30-d9b21771088b.png",
+        "fileSha256": "56131be13d96637f905aa4a57b0997431751aae03d8dcd90bcff97e7da2ee600",
+        "bytes": 227280
+      }
+    ]
+  },
+  "probes": {
+    "candidate": {
+      "stream": {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 1920,
+        "coded_height": 1080,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "16:9",
+        "pix_fmt": "yuv420p",
+        "level": 40,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 2491904,
+        "duration": "162.233333",
+        "bit_rate": "3510861",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "4867",
+        "extradata_size": 48,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc62.11.100 libx264"
+        }
+      },
+      "frameCount": 4867,
+      "frameCountBasis": "MP4 stream frame count"
+    },
+    "background": {
+      "stream": {
+        "index": 0,
+        "codec_name": "ffv1",
+        "codec_long_name": "FFmpeg video codec #1",
+        "codec_type": "video",
+        "codec_tag_string": "FFV1",
+        "codec_tag": "0x31564646",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 1920,
+        "coded_height": 1080,
+        "has_b_frames": 0,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "16:9",
+        "pix_fmt": "yuv420p",
+        "level": -99,
+        "refs": 1,
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/61440",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "bits_per_raw_sample": "8",
+        "extradata_size": 43,
+        "disposition": {
+          "default": 0,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "encoder": "Lavc62.11.100 ffv1"
+        }
+      },
+      "frameCount": 4867,
+      "frameCountBasis": "SHA-bound completed whole-lossless-video proof; no second full decode"
+    },
+    "original": {
+      "stream": {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 1920,
+        "coded_height": 1080,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "16:9",
+        "pix_fmt": "yuv420p",
+        "level": 40,
+        "color_range": "tv",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt709",
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 2473472,
+        "duration": "161.033333",
+        "bit_rate": "3691045",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "4831",
+        "extradata_size": 51,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      },
+      "frameCount": 4831,
+      "frameCountBasis": "MP4 stream frame count"
+    }
+  },
+  "samples": [
+    {
+      "connectionId": "connection-02",
+      "side": "fade-out",
+      "frame": 457,
+      "originalFrame": 457,
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "captionStartFrame": 373,
+      "captionEndFrameExclusive": 462,
+      "localFrame": 84,
+      "nativeCaptionAlpha": 1,
+      "existingSoftState": {
+        "numerator": 4,
+        "denominator": 5
+      },
+      "originalSoftLut": "[connectionSoft0]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,457)'[connectionSoft1]",
+      "appliedSingleFrameSoftLut": "[0:v]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,0)'[soft]",
+      "retainedSpan": {
+        "segmentId": "segment-0002",
+        "sourceStartFrame": 340,
+        "sourceEndFrameExclusive": 462,
+        "displayStartFrame": 340,
+        "displayEndFrameExclusive": 462,
+        "shiftFrames": 0,
+        "sourceStartSample": 499800,
+        "sourceEndSampleExclusive": 679140,
+        "displayStartSample": 499800,
+        "displayEndSampleExclusive": 679140
+      },
+      "pngRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/09-70d128b99879.png",
+        "fileSha256": "7d277142ebcef5351d5e1adba58c9bb1b9426410ec78fd4d59d6b09c33c758fb"
+      },
+      "propsSha256": "ef25f235405c70c9efa35ca9c5af8aa6322756fd59865aedd064f64bd77b4944",
+      "rgbaRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-native-overlay.rgba",
+        "fileSha256": "3500dca336e0f86015bd3a833098f103aed6695b03b5138928c3199d2e475cb8",
+        "bytes": 8294400
+      },
+      "maskRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-native-glyph-mask.json",
+        "fileSha256": "166d3b4586ae9a90fe893602b4059293aad973b592a44d6c4378dae7b3d9cd60",
+        "bytes": 888969
+      },
+      "artifacts": {
+        "completed": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-completed.yuv",
+            "fileSha256": "5b723c13d35f5bef1eeba420d515d02093b1e4bd477c342aa728c719d59b79f1",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-completed.rgb",
+            "fileSha256": "d6df6bb0e853f9520f5f1dee48835bafa1a8681908162e97533651b63c00b199",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-completed.png",
+            "fileSha256": "2fec143d46cfadad82d6775b1ffdb43515d8c978487d1929c1f150a4224b9fc2",
+            "bytes": 668796
+          }
+        },
+        "soft-background": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-soft-background.yuv",
+            "fileSha256": "a67511554f1f0c5629fc736028563f7bf97edbe9d21fdc2b4f7a5e3259c6c765",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-soft-background.rgb",
+            "fileSha256": "a9230f860165bd9dca411c9e2ee0a8e13c58c900a5be5fe8f08411e4f8f5b28e",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-soft-background.png",
+            "fileSha256": "a56de7f101045e0d47816cd3055cf3601d1f47c16c374f31c49e0f25cbae2117",
+            "bytes": 634375
+          }
+        },
+        "original-background": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-original-background.yuv",
+            "fileSha256": "6683aa89ef60cb0e37d0a431b373701f3fcbed8471624feb7d1664f0f94d4062",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-original-background.rgb",
+            "fileSha256": "0dad3dd32ae9970b16024cf5ce386519dcd83e3e7d692e8018750d9aab3aa19c",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-original-background.png",
+            "fileSha256": "be0ea73923fcf859c8faae7665f7bf1b9dbb7e142025ae2d4cc6fe1df6902d62",
+            "bytes": 699524
+          }
+        },
+        "expected": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-expected.yuv",
+            "fileSha256": "ee49bb5f212ac3accc3aaa245793b8220faf06a066f68557753dcd9fb3362cc3",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-expected.rgb",
+            "fileSha256": "f247652c154e9e6a80be45c958f87633680637247facacc60b5f7e0619f66b7e",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-expected.png",
+            "fileSha256": "64dddc40a5905ca1e8115fc73fc9f046699e6466e0e87f31634843c51ae39f1e",
+            "bytes": 660556
+          }
+        },
+        "omitted": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-omitted.yuv",
+            "fileSha256": "a67511554f1f0c5629fc736028563f7bf97edbe9d21fdc2b4f7a5e3259c6c765",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-omitted.rgb",
+            "fileSha256": "a9230f860165bd9dca411c9e2ee0a8e13c58c900a5be5fe8f08411e4f8f5b28e",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-omitted.png",
+            "fileSha256": "a56de7f101045e0d47816cd3055cf3601d1f47c16c374f31c49e0f25cbae2117",
+            "bytes": 634375
+          }
+        },
+        "unfaded-caption": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-unfaded-caption.yuv",
+            "fileSha256": "0884eea33303fbc7ac0aa3d8c2f124fd2c041dbd6b5502dd1480bb70de28aa6e",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-unfaded-caption.rgb",
+            "fileSha256": "cbe71f3e1ca175cbea36c1e9588e8557d1b59cf2a00b1fe52c742d6394dffe42",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-unfaded-caption.png",
+            "fileSha256": "9b5c9b93c8d6e9d41d1efcae63ff4d12bac882a7a21853f1dc3a46684127043d",
+            "bytes": 719783
+          }
+        },
+        "unfaded-omitted": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-unfaded-omitted.yuv",
+            "fileSha256": "6683aa89ef60cb0e37d0a431b373701f3fcbed8471624feb7d1664f0f94d4062",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-unfaded-omitted.rgb",
+            "fileSha256": "0dad3dd32ae9970b16024cf5ce386519dcd83e3e7d692e8018750d9aab3aa19c",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-unfaded-omitted.png",
+            "fileSha256": "be0ea73923fcf859c8faae7665f7bf1b9dbb7e142025ae2d4cc6fe1df6902d62",
+            "bytes": 699524
+          }
+        },
+        "caption-darkened-by-fullframe-soft": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-caption-darkened-by-fullframe-soft.yuv",
+            "fileSha256": "f6f50653763b55c97f585c0188e516464b4b0c50155de2641c309c3fe5fc1364",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-caption-darkened-by-fullframe-soft.rgb",
+            "fileSha256": "27f437a4a3b0c36a5f5d551b0f414e4dde6e139f5cceeb3be6631b6e783a860f",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-457-caption-darkened-by-fullframe-soft.png",
+            "fileSha256": "ea50117f6847535da6d4cf5865a24a23288d2f1f8640467be48335f860c09deb",
+            "bytes": 655820
+          }
+        }
+      },
+      "glyphs": [
+        {
+          "fontColor": "all-native-glyph-fills",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "4dfadeb4409f3e24da21dd9aa6ae43a3a235dc0f29d1ecf7474a3e627e55caef",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "073056f2426a6924b5dea6661b6f699600bed6cb2829e23fa81809de4bb3939d",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "bc5b32b94bf17e91bc07b638af2e1146cac587f19c4521cc1ba0106083fb9925",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "4dfadeb4409f3e24da21dd9aa6ae43a3a235dc0f29d1ecf7474a3e627e55caef",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 160062
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "073056f2426a6924b5dea6661b6f699600bed6cb2829e23fa81809de4bb3939d",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 32148221
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "bc5b32b94bf17e91bc07b638af2e1146cac587f19c4521cc1ba0106083fb9925",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 7130770
+            }
+          ],
+          "comparedPixelCount": 52249,
+          "comparedRgbChannelCount": 156747,
+          "completedRgbSha256": "b98923b299bf576d5ace7aa20ea068937a32215d149c6ffa556a2c6f932f09e3",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        },
+        {
+          "fontColor": "#FFFDF8",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "8a0e8b7fd26642c854104dadb23f877c3ba643f8ce33ced88b3cc18a319c20c4",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "0fb2cb630d310fe27d08356b946081a4147203a169f7f440e70041da39b3e42e",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "5407b22323aefdd47d557f34bfc6c2223dc26a3f48ecac797b96e56c00edc121",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "8a0e8b7fd26642c854104dadb23f877c3ba643f8ce33ced88b3cc18a319c20c4",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 98713
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "0fb2cb630d310fe27d08356b946081a4147203a169f7f440e70041da39b3e42e",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 22962746
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "5407b22323aefdd47d557f34bfc6c2223dc26a3f48ecac797b96e56c00edc121",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 5137879
+            }
+          ],
+          "comparedPixelCount": 34096,
+          "comparedRgbChannelCount": 102288,
+          "completedRgbSha256": "d1fd2b1a92ca7239f22e54dd94ec527e8e935d3a9d44fa0e2d600780ce9126b4",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        },
+        {
+          "fontColor": "#FFD65A",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "b820f5f51e64b90f1f43563dd56945d941b47dcfdd06c342a1979414e0572b13",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "78e89b93fe27865d392bcc194523ed28ced2b006937e70a0adc3f15abf123179",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "c76ad0f97a1449b4a1d7188ac9775fc3c1dc46c6d6cffbf61c62d41a2a891888",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "b820f5f51e64b90f1f43563dd56945d941b47dcfdd06c342a1979414e0572b13",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 61349
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "78e89b93fe27865d392bcc194523ed28ced2b006937e70a0adc3f15abf123179",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 9185475
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "c76ad0f97a1449b4a1d7188ac9775fc3c1dc46c6d6cffbf61c62d41a2a891888",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 1992891
+            }
+          ],
+          "comparedPixelCount": 18153,
+          "comparedRgbChannelCount": 54459,
+          "completedRgbSha256": "5ad060a7b0fdf9a7c15eb7d6ced5d77d1be21dfb18ad62250cf5bb20c6606882",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        }
+      ],
+      "wrongFault": {
+        "visible": false,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "4dfadeb4409f3e24da21dd9aa6ae43a3a235dc0f29d1ecf7474a3e627e55caef",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "073056f2426a6924b5dea6661b6f699600bed6cb2829e23fa81809de4bb3939d",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "bc5b32b94bf17e91bc07b638af2e1146cac587f19c4521cc1ba0106083fb9925",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "4dfadeb4409f3e24da21dd9aa6ae43a3a235dc0f29d1ecf7474a3e627e55caef",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 7096402
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "073056f2426a6924b5dea6661b6f699600bed6cb2829e23fa81809de4bb3939d",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 25021023
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "bc5b32b94bf17e91bc07b638af2e1146cac587f19c4521cc1ba0106083fb9925",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 0
+          }
+        ],
+        "comparedPixelCount": 52249,
+        "comparedRgbChannelCount": 156747,
+        "completedRgbSha256": "bc5b32b94bf17e91bc07b638af2e1146cac587f19c4521cc1ba0106083fb9925",
+        "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+      },
+      "omittedFault": {
+        "visible": false,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "4dfadeb4409f3e24da21dd9aa6ae43a3a235dc0f29d1ecf7474a3e627e55caef",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "073056f2426a6924b5dea6661b6f699600bed6cb2829e23fa81809de4bb3939d",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "bc5b32b94bf17e91bc07b638af2e1146cac587f19c4521cc1ba0106083fb9925",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "4dfadeb4409f3e24da21dd9aa6ae43a3a235dc0f29d1ecf7474a3e627e55caef",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 32113855
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "073056f2426a6924b5dea6661b6f699600bed6cb2829e23fa81809de4bb3939d",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 0
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "bc5b32b94bf17e91bc07b638af2e1146cac587f19c4521cc1ba0106083fb9925",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 25021023
+          }
+        ],
+        "comparedPixelCount": 52249,
+        "comparedRgbChannelCount": 156747,
+        "completedRgbSha256": "073056f2426a6924b5dea6661b6f699600bed6cb2829e23fa81809de4bb3939d",
+        "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+      },
+      "faultCheckBasis": "unencoded generated reference RGB buffers; not an encoded wrong-order candidate",
+      "entireFrameInformational": {
+        "visible": true,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "f247652c154e9e6a80be45c958f87633680637247facacc60b5f7e0619f66b7e",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "a9230f860165bd9dca411c9e2ee0a8e13c58c900a5be5fe8f08411e4f8f5b28e",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "27f437a4a3b0c36a5f5d551b0f414e4dde6e139f5cceeb3be6631b6e783a860f",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "f247652c154e9e6a80be45c958f87633680637247facacc60b5f7e0619f66b7e",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 3898204
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "a9230f860165bd9dca411c9e2ee0a8e13c58c900a5be5fe8f08411e4f8f5b28e",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 49327731
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "27f437a4a3b0c36a5f5d551b0f414e4dde6e139f5cceeb3be6631b6e783a860f",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 13167067
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "connectionId": "connection-02",
+      "side": "fade-in",
+      "frame": 478,
+      "originalFrame": 466,
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "captionStartFrame": 474,
+      "captionEndFrameExclusive": 556,
+      "localFrame": 4,
+      "nativeCaptionAlpha": 1,
+      "existingSoftState": {
+        "numerator": 4,
+        "denominator": 5
+      },
+      "originalSoftLut": "[connectionSoft9]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,478)'[connectionSoft10]",
+      "appliedSingleFrameSoftLut": "[0:v]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,0)'[soft]",
+      "retainedSpan": {
+        "segmentId": "segment-0003",
+        "sourceStartFrame": 462,
+        "sourceEndFrameExclusive": 756,
+        "displayStartFrame": 474,
+        "displayEndFrameExclusive": 768,
+        "shiftFrames": 12,
+        "sourceStartSample": 679140,
+        "sourceEndSampleExclusive": 1111320,
+        "displayStartSample": 696780,
+        "displayEndSampleExclusive": 1128960
+      },
+      "pngRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/10-aca83bb4e738.png",
+        "fileSha256": "87e11f8d572d53d2ce352befb96eb54d9d337a2152e83697b584e95815005f7f"
+      },
+      "propsSha256": "a8e3fb1fa7e5f24ef6f966a59550edf8fd2e8b1191660ccdf42bfb81ed81b65a",
+      "rgbaRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-native-overlay.rgba",
+        "fileSha256": "5387296cc8856c0b83fd1091928c9c2fc44f6d75400420fb7b7e1241a248bf89",
+        "bytes": 8294400
+      },
+      "maskRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-native-glyph-mask.json",
+        "fileSha256": "47d46d7e34db2c9d3658d28716ae2b8eeff8eec746c5845866f29e9f81cf8a79",
+        "bytes": 314709
+      },
+      "artifacts": {
+        "completed": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-completed.yuv",
+            "fileSha256": "20199a22bfda1bba980ace09091f84f661f72f09cc7427df7f959ad672804430",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-completed.rgb",
+            "fileSha256": "96e6425d9b4816d13affd19044deeaf1a45e8e370d5d3e2a05c5284ac8241acd",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-completed.png",
+            "fileSha256": "7bce836c69be0783ec5d5a6fe4a28ae84a5209fccc1dcb8f3088b22dced5d6d9",
+            "bytes": 442370
+          }
+        },
+        "soft-background": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-soft-background.yuv",
+            "fileSha256": "997f25edffe848cbd365df6fadb677b4588b5b02389037c84c53a25c4d5f5fec",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-soft-background.rgb",
+            "fileSha256": "99a3b273ec9fa0403617fdff76f3b9cc881dcee2b318c983c82f819c8019e22f",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-soft-background.png",
+            "fileSha256": "6d998e328c491e1fd6ece554e4c15dea498a306933bdfb595f211f6705d036be",
+            "bytes": 435317
+          }
+        },
+        "original-background": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-original-background.yuv",
+            "fileSha256": "7646e55eb324d8c17f9b443589b87e802007f8d2e7f2ea32303b8c1cbdd26811",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-original-background.rgb",
+            "fileSha256": "455a3b794a78d41f6e3b8ba3684760cd58d8315cf9b25ab20466f6f2d8edcd6e",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-original-background.png",
+            "fileSha256": "fe09bee92f733058f82461632d88ffd54943fd795030b2c897236f0ba0ddde61",
+            "bytes": 481739
+          }
+        },
+        "expected": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-expected.yuv",
+            "fileSha256": "80920ba9c4a59311857d7768717b055521c1432414d541918e90c817f8e8b270",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-expected.rgb",
+            "fileSha256": "f4fb63755a82e379080077806f2d4d93008a35bff8fd590fbc2ea0e1e6bd4412",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-expected.png",
+            "fileSha256": "a9edf11890689da7e12cdb48a33ced2b9d730e3d14ebabb172eff9bc2c30f026",
+            "bytes": 455767
+          }
+        },
+        "omitted": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-omitted.yuv",
+            "fileSha256": "997f25edffe848cbd365df6fadb677b4588b5b02389037c84c53a25c4d5f5fec",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-omitted.rgb",
+            "fileSha256": "99a3b273ec9fa0403617fdff76f3b9cc881dcee2b318c983c82f819c8019e22f",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-omitted.png",
+            "fileSha256": "6d998e328c491e1fd6ece554e4c15dea498a306933bdfb595f211f6705d036be",
+            "bytes": 435317
+          }
+        },
+        "unfaded-caption": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-unfaded-caption.yuv",
+            "fileSha256": "402591baff95a6494a8dbac2749d82eaccd1b1947d0e0ff03e65c8ff7fba9eb9",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-unfaded-caption.rgb",
+            "fileSha256": "98c9b0ff2881bd28f027b0b6fdd4ef2087b7060506b7354702fe21e8c5fa52c6",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-unfaded-caption.png",
+            "fileSha256": "228dfed48e9b9f940ece85fb2dfb9c894ec7d6f719b1d75871fa37abf3ef025d",
+            "bytes": 500109
+          }
+        },
+        "unfaded-omitted": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-unfaded-omitted.yuv",
+            "fileSha256": "7646e55eb324d8c17f9b443589b87e802007f8d2e7f2ea32303b8c1cbdd26811",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-unfaded-omitted.rgb",
+            "fileSha256": "455a3b794a78d41f6e3b8ba3684760cd58d8315cf9b25ab20466f6f2d8edcd6e",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-unfaded-omitted.png",
+            "fileSha256": "fe09bee92f733058f82461632d88ffd54943fd795030b2c897236f0ba0ddde61",
+            "bytes": 481739
+          }
+        },
+        "caption-darkened-by-fullframe-soft": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-caption-darkened-by-fullframe-soft.yuv",
+            "fileSha256": "9cdbe5bb54743a05cd5b24454d8bcdc8a2a892fa57a1dd09c52dc51b249b95ad",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-caption-darkened-by-fullframe-soft.rgb",
+            "fileSha256": "c50b93b46490854878f3ef43b302e6067258bde183c9b9d1da96c89b00fe19b5",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-478-caption-darkened-by-fullframe-soft.png",
+            "fileSha256": "370893a5d6e21131366625f9cd6bc04f8632a83cf792007ed5e489b14f3741ab",
+            "bytes": 453311
+          }
+        }
+      },
+      "glyphs": [
+        {
+          "fontColor": "all-native-glyph-fills",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "4eba81909da0e5233cd75b97208e1dc047d3fdb20920ebbf931bcda7c54b82fc",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "b9944a6a7b12eeb371405c8a80eeea11370d858a2cedb3b2c84f66008b52e778",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "f52f97fe2fd453f96045cafd129524af086b6d55222137670ca7d0b0a3d9b5ae",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "4eba81909da0e5233cd75b97208e1dc047d3fdb20920ebbf931bcda7c54b82fc",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 63510
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "b9944a6a7b12eeb371405c8a80eeea11370d858a2cedb3b2c84f66008b52e778",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 12778319
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "f52f97fe2fd453f96045cafd129524af086b6d55222137670ca7d0b0a3d9b5ae",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 2773400
+            }
+          ],
+          "comparedPixelCount": 18473,
+          "comparedRgbChannelCount": 55419,
+          "completedRgbSha256": "8f9b324269298caee58162e18a998a603e5ff5ba1486c77977fbb4b51019f9d9",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        },
+        {
+          "fontColor": "#FFFDF8",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "4eba81909da0e5233cd75b97208e1dc047d3fdb20920ebbf931bcda7c54b82fc",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "b9944a6a7b12eeb371405c8a80eeea11370d858a2cedb3b2c84f66008b52e778",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "f52f97fe2fd453f96045cafd129524af086b6d55222137670ca7d0b0a3d9b5ae",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "4eba81909da0e5233cd75b97208e1dc047d3fdb20920ebbf931bcda7c54b82fc",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 63510
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "b9944a6a7b12eeb371405c8a80eeea11370d858a2cedb3b2c84f66008b52e778",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 12778319
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "f52f97fe2fd453f96045cafd129524af086b6d55222137670ca7d0b0a3d9b5ae",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 2773400
+            }
+          ],
+          "comparedPixelCount": 18473,
+          "comparedRgbChannelCount": 55419,
+          "completedRgbSha256": "8f9b324269298caee58162e18a998a603e5ff5ba1486c77977fbb4b51019f9d9",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        }
+      ],
+      "wrongFault": {
+        "visible": false,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "4eba81909da0e5233cd75b97208e1dc047d3fdb20920ebbf931bcda7c54b82fc",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "b9944a6a7b12eeb371405c8a80eeea11370d858a2cedb3b2c84f66008b52e778",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "f52f97fe2fd453f96045cafd129524af086b6d55222137670ca7d0b0a3d9b5ae",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "4eba81909da0e5233cd75b97208e1dc047d3fdb20920ebbf931bcda7c54b82fc",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 2764108
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "b9944a6a7b12eeb371405c8a80eeea11370d858a2cedb3b2c84f66008b52e778",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 10004919
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "f52f97fe2fd453f96045cafd129524af086b6d55222137670ca7d0b0a3d9b5ae",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 0
+          }
+        ],
+        "comparedPixelCount": 18473,
+        "comparedRgbChannelCount": 55419,
+        "completedRgbSha256": "f52f97fe2fd453f96045cafd129524af086b6d55222137670ca7d0b0a3d9b5ae",
+        "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+      },
+      "omittedFault": {
+        "visible": false,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "4eba81909da0e5233cd75b97208e1dc047d3fdb20920ebbf931bcda7c54b82fc",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "b9944a6a7b12eeb371405c8a80eeea11370d858a2cedb3b2c84f66008b52e778",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "f52f97fe2fd453f96045cafd129524af086b6d55222137670ca7d0b0a3d9b5ae",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "4eba81909da0e5233cd75b97208e1dc047d3fdb20920ebbf931bcda7c54b82fc",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 12769027
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "b9944a6a7b12eeb371405c8a80eeea11370d858a2cedb3b2c84f66008b52e778",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 0
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "f52f97fe2fd453f96045cafd129524af086b6d55222137670ca7d0b0a3d9b5ae",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 10004919
+          }
+        ],
+        "comparedPixelCount": 18473,
+        "comparedRgbChannelCount": 55419,
+        "completedRgbSha256": "b9944a6a7b12eeb371405c8a80eeea11370d858a2cedb3b2c84f66008b52e778",
+        "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+      },
+      "faultCheckBasis": "unencoded generated reference RGB buffers; not an encoded wrong-order candidate",
+      "entireFrameInformational": {
+        "visible": true,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "f4fb63755a82e379080077806f2d4d93008a35bff8fd590fbc2ea0e1e6bd4412",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "99a3b273ec9fa0403617fdff76f3b9cc881dcee2b318c983c82f819c8019e22f",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "c50b93b46490854878f3ef43b302e6067258bde183c9b9d1da96c89b00fe19b5",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "f4fb63755a82e379080077806f2d4d93008a35bff8fd590fbc2ea0e1e6bd4412",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 2333657
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "99a3b273ec9fa0403617fdff76f3b9cc881dcee2b318c983c82f819c8019e22f",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 19833149
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "c50b93b46490854878f3ef43b302e6067258bde183c9b9d1da96c89b00fe19b5",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 5930222
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "connectionId": "connection-06",
+      "side": "fade-out",
+      "frame": 4401,
+      "originalFrame": 4377,
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+      "captionStartFrame": 4255,
+      "captionEndFrameExclusive": 4406,
+      "localFrame": 146,
+      "nativeCaptionAlpha": 1,
+      "existingSoftState": {
+        "numerator": 4,
+        "denominator": 5
+      },
+      "originalSoftLut": "[connectionSoft12]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,4401)'[connectionSoft13]",
+      "appliedSingleFrameSoftLut": "[0:v]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,0)'[soft]",
+      "retainedSpan": {
+        "segmentId": "segment-0006",
+        "sourceStartFrame": 3563,
+        "sourceEndFrameExclusive": 4382,
+        "displayStartFrame": 3587,
+        "displayEndFrameExclusive": 4406,
+        "shiftFrames": 24,
+        "sourceStartSample": 5237610,
+        "sourceEndSampleExclusive": 6441540,
+        "displayStartSample": 5272890,
+        "displayEndSampleExclusive": 6476820
+      },
+      "pngRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/29-60d3aa5ca7e7.png",
+        "fileSha256": "14b22fc2cbbd81c07cb290382846a0a6070c7e4e2e3703ee61cd3c6caa181b5a"
+      },
+      "propsSha256": "f1ea3d138d5a4f4e553c59e45ef8d9a01299c928d0fe7a88b9600dd2d36bf3cd",
+      "rgbaRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-native-overlay.rgba",
+        "fileSha256": "cc8b7f88b7d45944f47487662ac5dd409950d943bacc71d9ec51bd89dae09500",
+        "bytes": 8294400
+      },
+      "maskRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-native-glyph-mask.json",
+        "fileSha256": "cc9f0723f5f57ee6af9742340a1bb1901b27c022000f7bb71ab36211155d2c14",
+        "bytes": 1527846
+      },
+      "artifacts": {
+        "completed": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-completed.yuv",
+            "fileSha256": "b3a81b9a3ec73dec5136801cf0586ef68c44503294d79f0b82838168ea820c3e",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-completed.rgb",
+            "fileSha256": "ad3e7a6210e7e9197a8d7c89dbd4cfafe3e0e8adffb496e87742fd0f4d648924",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-completed.png",
+            "fileSha256": "3ae5cb31fedd4a49a240d64fb400c829fea8b772d1f4bdf71657f3b8273f6bd0",
+            "bytes": 894224
+          }
+        },
+        "soft-background": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-soft-background.yuv",
+            "fileSha256": "40d6569dca88cc27f6f2b25c7335da5d6ed4e869e797339a9939974519ebd902",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-soft-background.rgb",
+            "fileSha256": "4a5c11ce957e9e359a1692a8d74d8bdbc94f2fcbf565247665bbcd8153b0812a",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-soft-background.png",
+            "fileSha256": "d646ee72eb833556b76686c40e097cdb3d8f8f1b81b3340f26333f61903062df",
+            "bytes": 743544
+          }
+        },
+        "original-background": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-original-background.yuv",
+            "fileSha256": "dea447ad492223b1f9e5be5f3cfe76c2d78edd16318f86d90cfc122a15a1ff3d",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-original-background.rgb",
+            "fileSha256": "d9ca96bc29eb7dba69ea4a625609dd4d0b43da520e0225593f0538d70e8b8cad",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-original-background.png",
+            "fileSha256": "1761b8e6b3e437f900a1d7921b801c693e50b3960d78be3fe3fa625e89e7ca73",
+            "bytes": 812058
+          }
+        },
+        "expected": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-expected.yuv",
+            "fileSha256": "b13fbf307834ced4f64295cde568da071bedecb0653545f0fb40d6b801fca138",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-expected.rgb",
+            "fileSha256": "34aeb181359b7431a32efda3ff57b0a6bea8a29da723c57b4f822c04422e5149",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-expected.png",
+            "fileSha256": "5acd85c4408ff22a5572d3d142970aace16fb2a219422d38a8273dca83711de3",
+            "bytes": 828225
+          }
+        },
+        "omitted": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-omitted.yuv",
+            "fileSha256": "40d6569dca88cc27f6f2b25c7335da5d6ed4e869e797339a9939974519ebd902",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-omitted.rgb",
+            "fileSha256": "4a5c11ce957e9e359a1692a8d74d8bdbc94f2fcbf565247665bbcd8153b0812a",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-omitted.png",
+            "fileSha256": "d646ee72eb833556b76686c40e097cdb3d8f8f1b81b3340f26333f61903062df",
+            "bytes": 743544
+          }
+        },
+        "unfaded-caption": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-unfaded-caption.yuv",
+            "fileSha256": "124fb114a1598a49a08763c1ea2210148c6661f471e2d1c1051103b3fcf408ce",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-unfaded-caption.rgb",
+            "fileSha256": "0a1024149b467773740e94c4ea16a8bccd2dd4c278fa2cb532912eb4c2d6f0d7",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-unfaded-caption.png",
+            "fileSha256": "ce8e5822210271aec844866a5c7e1a306a617fca23e8c411dc769756d90c3476",
+            "bytes": 887378
+          }
+        },
+        "unfaded-omitted": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-unfaded-omitted.yuv",
+            "fileSha256": "dea447ad492223b1f9e5be5f3cfe76c2d78edd16318f86d90cfc122a15a1ff3d",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-unfaded-omitted.rgb",
+            "fileSha256": "d9ca96bc29eb7dba69ea4a625609dd4d0b43da520e0225593f0538d70e8b8cad",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-unfaded-omitted.png",
+            "fileSha256": "1761b8e6b3e437f900a1d7921b801c693e50b3960d78be3fe3fa625e89e7ca73",
+            "bytes": 812058
+          }
+        },
+        "caption-darkened-by-fullframe-soft": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-caption-darkened-by-fullframe-soft.yuv",
+            "fileSha256": "aba57fc0dd0fc9a2985264b3ec7c4b741e6c11a07a085890da2f5c505c3f8d9a",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-caption-darkened-by-fullframe-soft.rgb",
+            "fileSha256": "6e2391082198f5e84865f9dbd1a178f0e4f84afa3f3f8dde9a977ba324c735a6",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4401-caption-darkened-by-fullframe-soft.png",
+            "fileSha256": "249df5b1b1ecc3aeec0b018fb565b221289f2f72d8037dd949f936eb3e41b65d",
+            "bytes": 818894
+          }
+        }
+      },
+      "glyphs": [
+        {
+          "fontColor": "all-native-glyph-fills",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "6c3b19f97c1c61a4c26ef2a88b547075d6c12cc4cf55df085631752375cf4df4",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "d3d2dfa6517c60df9a1e16ee593d795ded3b0d54b93245542da9b02c08a3c51b",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "9287c6fc413dea3567245e963c2451c2694d0b1ac54a4ec19dd35fc8e55c4d3b",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "6c3b19f97c1c61a4c26ef2a88b547075d6c12cc4cf55df085631752375cf4df4",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 175886
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "d3d2dfa6517c60df9a1e16ee593d795ded3b0d54b93245542da9b02c08a3c51b",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 55786883
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "9287c6fc413dea3567245e963c2451c2694d0b1ac54a4ec19dd35fc8e55c4d3b",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 11977718
+            }
+          ],
+          "comparedPixelCount": 89830,
+          "comparedRgbChannelCount": 269490,
+          "completedRgbSha256": "1287a8cb373dd8cf4890856eb98904cb46b7f31435042706db9351f70e7fa505",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        },
+        {
+          "fontColor": "#FFFDF8",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "d99844bb295fd4f2515ddac913c48daf74105774b6aa8eb663d79edc691de41c",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "37192fa097ce295e360bd0e6906a0127c5bb179c4d431eb9ceadbcead46f970e",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "b03f464fdad35a8ee18509caad5109d57cea591d0d19c7068c05721e65f11d08",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "d99844bb295fd4f2515ddac913c48daf74105774b6aa8eb663d79edc691de41c",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 101477
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "37192fa097ce295e360bd0e6906a0127c5bb179c4d431eb9ceadbcead46f970e",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 36590376
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "b03f464fdad35a8ee18509caad5109d57cea591d0d19c7068c05721e65f11d08",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 7835445
+            }
+          ],
+          "comparedPixelCount": 52193,
+          "comparedRgbChannelCount": 156579,
+          "completedRgbSha256": "e14136bf758c8fc19967bf8058cdb4f67b211abda1daf567058ef3fffcfcf198",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        },
+        {
+          "fontColor": "#FFD65A",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "af22a604875b301b4123621d862cd72c16d23cba500dd25ebbeafe29dea2b46c",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "b8170b3155385b58fc765bce10a081a2c70fca97ad29a7ed265a2431e7f2587f",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "a238f6c0794e4380301ba72798a06aa6b13a5d893730b3f9e2e0ff8ba055b097",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "af22a604875b301b4123621d862cd72c16d23cba500dd25ebbeafe29dea2b46c",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 74409
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "b8170b3155385b58fc765bce10a081a2c70fca97ad29a7ed265a2431e7f2587f",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 19196507
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "a238f6c0794e4380301ba72798a06aa6b13a5d893730b3f9e2e0ff8ba055b097",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 4142273
+            }
+          ],
+          "comparedPixelCount": 37637,
+          "comparedRgbChannelCount": 112911,
+          "completedRgbSha256": "6977c7c60c25d0baf63ff29915fae2ac7a350ea4f1fa011daaf59e2228e19ebe",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        }
+      ],
+      "wrongFault": {
+        "visible": false,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "6c3b19f97c1c61a4c26ef2a88b547075d6c12cc4cf55df085631752375cf4df4",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "d3d2dfa6517c60df9a1e16ee593d795ded3b0d54b93245542da9b02c08a3c51b",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "9287c6fc413dea3567245e963c2451c2694d0b1ac54a4ec19dd35fc8e55c4d3b",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "6c3b19f97c1c61a4c26ef2a88b547075d6c12cc4cf55df085631752375cf4df4",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 11945202
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "d3d2dfa6517c60df9a1e16ee593d795ded3b0d54b93245542da9b02c08a3c51b",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 43813719
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "9287c6fc413dea3567245e963c2451c2694d0b1ac54a4ec19dd35fc8e55c4d3b",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 0
+          }
+        ],
+        "comparedPixelCount": 89830,
+        "comparedRgbChannelCount": 269490,
+        "completedRgbSha256": "9287c6fc413dea3567245e963c2451c2694d0b1ac54a4ec19dd35fc8e55c4d3b",
+        "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+      },
+      "omittedFault": {
+        "visible": false,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "6c3b19f97c1c61a4c26ef2a88b547075d6c12cc4cf55df085631752375cf4df4",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "d3d2dfa6517c60df9a1e16ee593d795ded3b0d54b93245542da9b02c08a3c51b",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "9287c6fc413dea3567245e963c2451c2694d0b1ac54a4ec19dd35fc8e55c4d3b",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "6c3b19f97c1c61a4c26ef2a88b547075d6c12cc4cf55df085631752375cf4df4",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 55754367
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "d3d2dfa6517c60df9a1e16ee593d795ded3b0d54b93245542da9b02c08a3c51b",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 0
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "9287c6fc413dea3567245e963c2451c2694d0b1ac54a4ec19dd35fc8e55c4d3b",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 43813719
+          }
+        ],
+        "comparedPixelCount": 89830,
+        "comparedRgbChannelCount": 269490,
+        "completedRgbSha256": "d3d2dfa6517c60df9a1e16ee593d795ded3b0d54b93245542da9b02c08a3c51b",
+        "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+      },
+      "faultCheckBasis": "unencoded generated reference RGB buffers; not an encoded wrong-order candidate",
+      "entireFrameInformational": {
+        "visible": true,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "34aeb181359b7431a32efda3ff57b0a6bea8a29da723c57b4f822c04422e5149",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "4a5c11ce957e9e359a1692a8d74d8bdbc94f2fcbf565247665bbcd8153b0812a",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "6e2391082198f5e84865f9dbd1a178f0e4f84afa3f3f8dde9a977ba324c735a6",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "34aeb181359b7431a32efda3ff57b0a6bea8a29da723c57b4f822c04422e5149",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 4774824
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "4a5c11ce957e9e359a1692a8d74d8bdbc94f2fcbf565247665bbcd8153b0812a",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 82259971
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "6e2391082198f5e84865f9dbd1a178f0e4f84afa3f3f8dde9a977ba324c735a6",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 20744254
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "connectionId": "connection-06",
+      "side": "fade-in",
+      "frame": 4422,
+      "originalFrame": 4386,
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+      "captionStartFrame": 4418,
+      "captionEndFrameExclusive": 4588,
+      "localFrame": 4,
+      "nativeCaptionAlpha": 1,
+      "existingSoftState": {
+        "numerator": 4,
+        "denominator": 5
+      },
+      "originalSoftLut": "[connectionSoft21]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,4422)'[connectionSoft22]",
+      "appliedSingleFrameSoftLut": "[0:v]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,0)'[soft]",
+      "retainedSpan": {
+        "segmentId": "segment-0007",
+        "sourceStartFrame": 4382,
+        "sourceEndFrameExclusive": 4831,
+        "displayStartFrame": 4418,
+        "displayEndFrameExclusive": 4867,
+        "shiftFrames": 36,
+        "sourceStartSample": 6441540,
+        "sourceEndSampleExclusive": 7101570,
+        "displayStartSample": 6494460,
+        "displayEndSampleExclusive": 7154490
+      },
+      "pngRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/30-d9b21771088b.png",
+        "fileSha256": "56131be13d96637f905aa4a57b0997431751aae03d8dcd90bcff97e7da2ee600"
+      },
+      "propsSha256": "fadc654d88f43c0986f27858bdd176bac8ad6b31c628c238460e650be12297ad",
+      "rgbaRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-native-overlay.rgba",
+        "fileSha256": "88b4a3c13b500d19f295bccb72199acd5a8c8f286b5cca75ab4e54f1f6e8974b",
+        "bytes": 8294400
+      },
+      "maskRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-native-glyph-mask.json",
+        "fileSha256": "82ccb3b623389216c70445b50df686cd692ddfe6e8725b77f3ade7e45dc07924",
+        "bytes": 1475843
+      },
+      "artifacts": {
+        "completed": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-completed.yuv",
+            "fileSha256": "b85f4bfe911fab51ee9ead3f03b93e4d0cccc5f4f24a4496da6cef6d15acb27c",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-completed.rgb",
+            "fileSha256": "d135e3d29d25332f87f5c042f0449b30c2f89cbeb418e7f82687b0486ed84999",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-completed.png",
+            "fileSha256": "b1c53dc241d6374d189204048c10793eb76148f1113aa7243bc64681e832a7b5",
+            "bytes": 890745
+          }
+        },
+        "soft-background": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-soft-background.yuv",
+            "fileSha256": "87e76aaf031583579f09ffd2524d552180beaecc31b002f523f817d3f334ae7c",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-soft-background.rgb",
+            "fileSha256": "b85bab00860fed79a6da369cb7715842d3c63bd78e58b205dfeba54517c4771a",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-soft-background.png",
+            "fileSha256": "83f63c218086576dc67103fd336ea38af8359d49f6f7e9ea5e829b7b56cd94a6",
+            "bytes": 781072
+          }
+        },
+        "original-background": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-original-background.yuv",
+            "fileSha256": "6179605bee7a055dd03447a89f82112ca3b217f3a0aa5b7ab00c8f827e8cf3c1",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-original-background.rgb",
+            "fileSha256": "1e072e915e5678b0f847368ff75c3fb34e1ea8369d372598fd265a24c15e80da",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-original-background.png",
+            "fileSha256": "34726039ea1e32c04bb9bdca8466b97325f12ae476f4ba99c0818ac2b86c440a",
+            "bytes": 851599
+          }
+        },
+        "expected": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-expected.yuv",
+            "fileSha256": "681c796233483a8726e5d1adabc5f3ab6381f9a99eabaaff2a1d3c73744e5c8a",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-expected.rgb",
+            "fileSha256": "bf72757779ff9b85f54b9e1ff8474003b12b35553ef5d173c2c13c5d65b16263",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-expected.png",
+            "fileSha256": "94898b56c2651ba70f91955b7c2604c97fd6de8a27abcf982a6a055f41675cab",
+            "bytes": 848933
+          }
+        },
+        "omitted": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-omitted.yuv",
+            "fileSha256": "87e76aaf031583579f09ffd2524d552180beaecc31b002f523f817d3f334ae7c",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-omitted.rgb",
+            "fileSha256": "b85bab00860fed79a6da369cb7715842d3c63bd78e58b205dfeba54517c4771a",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-omitted.png",
+            "fileSha256": "83f63c218086576dc67103fd336ea38af8359d49f6f7e9ea5e829b7b56cd94a6",
+            "bytes": 781072
+          }
+        },
+        "unfaded-caption": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-unfaded-caption.yuv",
+            "fileSha256": "5288ed9dcbae35dc052d224443b58d373bdb86b9c02fa02e68902b6595bffe8d",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-unfaded-caption.rgb",
+            "fileSha256": "d39d2a8acdd8992b6d0c41dd22a778e84e09db69b42321ef2f92eba9447d6afe",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-unfaded-caption.png",
+            "fileSha256": "aaf0f5a64d45b0498fbc951c4080eaff734b0de1c27ccf557828a52be9619894",
+            "bytes": 910571
+          }
+        },
+        "unfaded-omitted": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-unfaded-omitted.yuv",
+            "fileSha256": "6179605bee7a055dd03447a89f82112ca3b217f3a0aa5b7ab00c8f827e8cf3c1",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-unfaded-omitted.rgb",
+            "fileSha256": "1e072e915e5678b0f847368ff75c3fb34e1ea8369d372598fd265a24c15e80da",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-unfaded-omitted.png",
+            "fileSha256": "34726039ea1e32c04bb9bdca8466b97325f12ae476f4ba99c0818ac2b86c440a",
+            "bytes": 851599
+          }
+        },
+        "caption-darkened-by-fullframe-soft": {
+          "raw": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-caption-darkened-by-fullframe-soft.yuv",
+            "fileSha256": "42c07ea8fbac3403d642029aaf611b22dde666fdbd117fc57af224335e2f8e50",
+            "bytes": 3110400
+          },
+          "rgb": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-caption-darkened-by-fullframe-soft.rgb",
+            "fileSha256": "c33f0ced7ea4ba7ba82cfcf8acde4ea524fd33a62fc974807ea526b8424e1138",
+            "bytes": 6220800
+          },
+          "png": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/soft-overlay-v001/frame-4422-caption-darkened-by-fullframe-soft.png",
+            "fileSha256": "a0011c1ac9413e3da3e702f89039fc6139637c470fb5155f6ba0e1b93a1adcb8",
+            "bytes": 839471
+          }
+        }
+      },
+      "glyphs": [
+        {
+          "fontColor": "all-native-glyph-fills",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "f4a4dc8cbdcc93952188a0f824342665dda86a8383533b263a4eefe88fdbaee4",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "2b4efde54114058234d813ca9f9befa91e45e78dbe1df6ea62865e4ec2bde3dc",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "e74eeacf93332fbab96330f521cd8b98f791060ed40ed012596e041344e935e8",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "f4a4dc8cbdcc93952188a0f824342665dda86a8383533b263a4eefe88fdbaee4",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 300677
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "2b4efde54114058234d813ca9f9befa91e45e78dbe1df6ea62865e4ec2bde3dc",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 57343601
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "e74eeacf93332fbab96330f521cd8b98f791060ed40ed012596e041344e935e8",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 12283453
+            }
+          ],
+          "comparedPixelCount": 86771,
+          "comparedRgbChannelCount": 260313,
+          "completedRgbSha256": "0759f896919115a925d308ef51a8fc8950d4531aa7b50e30a1c8cfd89bf9f486",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        },
+        {
+          "fontColor": "#FFFDF8",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "456e50ac26a870b2fa1df08febb178aa2968219166e68f0eaf99e558c1696b5d",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "55f000f51fc7d97b9ac3e8dd1807b22e87c10b9a54248df11f500a7107977be7",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "fd1e3b469e8844755d9fd248939adcefe04f07c7680ab3645d08df6e487215f5",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "456e50ac26a870b2fa1df08febb178aa2968219166e68f0eaf99e558c1696b5d",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 221916
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "55f000f51fc7d97b9ac3e8dd1807b22e87c10b9a54248df11f500a7107977be7",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 47599661
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "fd1e3b469e8844755d9fd248939adcefe04f07c7680ab3645d08df6e487215f5",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 10180124
+            }
+          ],
+          "comparedPixelCount": 67583,
+          "comparedRgbChannelCount": 202749,
+          "completedRgbSha256": "5683ae72eebb07564910cea4e56e8beeda4d643b6573d6e83dd034b205d0bf12",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        },
+        {
+          "fontColor": "#FFD65A",
+          "visible": true,
+          "expectedClassId": "class-0",
+          "omittedClassId": "class-1",
+          "references": [
+            {
+              "id": "expected",
+              "rgbSha256": "79e3814b4f2426e119d068ed81734a1b7cc863763a3940848fecbdaf6aef52d1",
+              "classId": "class-0"
+            },
+            {
+              "id": "omitted",
+              "rgbSha256": "aefe8aeae9311a4cc682c76dee76a2eb4bbe4983fb27f9d6fdbc2640627f59b7",
+              "classId": "class-1"
+            },
+            {
+              "id": "caption-darkened-by-fullframe-soft",
+              "rgbSha256": "a13e5633b32314319e34492481e3f28b06f375a670d5b3cdd85126e88f83fbca",
+              "classId": "class-2"
+            }
+          ],
+          "classes": [
+            {
+              "id": "class-0",
+              "rgbSha256": "79e3814b4f2426e119d068ed81734a1b7cc863763a3940848fecbdaf6aef52d1",
+              "referenceIds": [
+                "expected"
+              ],
+              "absoluteRgbDifference": 78761
+            },
+            {
+              "id": "class-1",
+              "rgbSha256": "aefe8aeae9311a4cc682c76dee76a2eb4bbe4983fb27f9d6fdbc2640627f59b7",
+              "referenceIds": [
+                "omitted"
+              ],
+              "absoluteRgbDifference": 9743940
+            },
+            {
+              "id": "class-2",
+              "rgbSha256": "a13e5633b32314319e34492481e3f28b06f375a670d5b3cdd85126e88f83fbca",
+              "referenceIds": [
+                "caption-darkened-by-fullframe-soft"
+              ],
+              "absoluteRgbDifference": 2103329
+            }
+          ],
+          "comparedPixelCount": 19188,
+          "comparedRgbChannelCount": 57564,
+          "completedRgbSha256": "b44d3b8c646338a2a6ef30deae9a9c91a01eb381f9db180271dbcddb6b1d8d74",
+          "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+        }
+      ],
+      "wrongFault": {
+        "visible": false,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "f4a4dc8cbdcc93952188a0f824342665dda86a8383533b263a4eefe88fdbaee4",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "2b4efde54114058234d813ca9f9befa91e45e78dbe1df6ea62865e4ec2bde3dc",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "e74eeacf93332fbab96330f521cd8b98f791060ed40ed012596e041344e935e8",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "f4a4dc8cbdcc93952188a0f824342665dda86a8383533b263a4eefe88fdbaee4",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 12222558
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "2b4efde54114058234d813ca9f9befa91e45e78dbe1df6ea62865e4ec2bde3dc",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 45061384
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "e74eeacf93332fbab96330f521cd8b98f791060ed40ed012596e041344e935e8",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 0
+          }
+        ],
+        "comparedPixelCount": 86771,
+        "comparedRgbChannelCount": 260313,
+        "completedRgbSha256": "e74eeacf93332fbab96330f521cd8b98f791060ed40ed012596e041344e935e8",
+        "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+      },
+      "omittedFault": {
+        "visible": false,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "f4a4dc8cbdcc93952188a0f824342665dda86a8383533b263a4eefe88fdbaee4",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "2b4efde54114058234d813ca9f9befa91e45e78dbe1df6ea62865e4ec2bde3dc",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "e74eeacf93332fbab96330f521cd8b98f791060ed40ed012596e041344e935e8",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "f4a4dc8cbdcc93952188a0f824342665dda86a8383533b263a4eefe88fdbaee4",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 57282752
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "2b4efde54114058234d813ca9f9befa91e45e78dbe1df6ea62865e4ec2bde3dc",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 0
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "e74eeacf93332fbab96330f521cd8b98f791060ed40ed012596e041344e935e8",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 45061384
+          }
+        ],
+        "comparedPixelCount": 86771,
+        "comparedRgbChannelCount": 260313,
+        "completedRgbSha256": "2b4efde54114058234d813ca9f9befa91e45e78dbe1df6ea62865e4ec2bde3dc",
+        "method": "strict-nearest-unweighted-integer-RGB-L1-on-native-opaque-glyph-interiors"
+      },
+      "faultCheckBasis": "unencoded generated reference RGB buffers; not an encoded wrong-order candidate",
+      "entireFrameInformational": {
+        "visible": true,
+        "expectedClassId": "class-0",
+        "omittedClassId": "class-1",
+        "references": [
+          {
+            "id": "expected",
+            "rgbSha256": "bf72757779ff9b85f54b9e1ff8474003b12b35553ef5d173c2c13c5d65b16263",
+            "classId": "class-0"
+          },
+          {
+            "id": "omitted",
+            "rgbSha256": "b85bab00860fed79a6da369cb7715842d3c63bd78e58b205dfeba54517c4771a",
+            "classId": "class-1"
+          },
+          {
+            "id": "caption-darkened-by-fullframe-soft",
+            "rgbSha256": "c33f0ced7ea4ba7ba82cfcf8acde4ea524fd33a62fc974807ea526b8424e1138",
+            "classId": "class-2"
+          }
+        ],
+        "classes": [
+          {
+            "id": "class-0",
+            "rgbSha256": "bf72757779ff9b85f54b9e1ff8474003b12b35553ef5d173c2c13c5d65b16263",
+            "referenceIds": [
+              "expected"
+            ],
+            "absoluteRgbDifference": 4543547
+          },
+          {
+            "id": "class-1",
+            "rgbSha256": "b85bab00860fed79a6da369cb7715842d3c63bd78e58b205dfeba54517c4771a",
+            "referenceIds": [
+              "omitted"
+            ],
+            "absoluteRgbDifference": 82737945
+          },
+          {
+            "id": "class-2",
+            "rgbSha256": "c33f0ced7ea4ba7ba82cfcf8acde4ea524fd33a62fc974807ea526b8424e1138",
+            "referenceIds": [
+              "caption-darkened-by-fullframe-soft"
+            ],
+            "absoluteRgbDifference": 20478296
+          }
+        ]
+      },
+      "status": "passed"
+    }
+  ],
+  "decisionRule": "Each native font-color interior and their union must uniquely prefer expected over omitted and fullframe-Soft; no threshold or channel weights. Ties fail.",
+  "processCount": 63
+}

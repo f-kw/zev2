@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "presentation-orchestration-saved-state-check-v001",
+  "selectedCaptionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+  "selectedConnectionId": "connection-01",
+  "changes": {
+    "caption": "temporary Normal override",
+    "connection": "temporary Black override"
+  },
+  "independentOrderCommutes": true,
+  "eachResetDeletesOnlyItsOwnOverride": true,
+  "bothResetRestoresAllFourRecords": true,
+  "variants": [
+    {
+      "name": "saved",
+      "fourSavedCanonicalSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "6f1afb5dd422cd00853717fc11219d2aa281ebb1d0ca619e1155a7fae2ba2479",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "ca89725d6360c42525ca1d8e2ce61d59d4deb9e480940e8434349ca47e8d2e3f"
+      },
+      "viewSha256": "95e967d566d64c12f645aa1ff89ddaa62d6a2a0f9c8e284bbb62985913d0855a",
+      "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+      "displayFrameCount": 4867,
+      "captionOverrideEntries": [],
+      "connectionOverrideEntries": [],
+      "selectedCaption": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "selection": {
+          "role": "Focus",
+          "presentation": "provisional-focus",
+          "scope": "partial-caption",
+          "targetText": "世界一嫌い"
+        },
+        "origin": "automatic",
+        "hasOverride": false
+      },
+      "fixedAutomaticRecordsAndMeaningUnchanged": true,
+      "fixedCaptionContentAndSourceMappingUnchanged": true,
+      "reloadedViewIdentical": true,
+      "durableProofReconstructed": true
+    },
+    {
+      "name": "captionOnly",
+      "fourSavedCanonicalSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "4d502b5ff8c8a1d0caea7d2bb8604714ca1fc9898793af6eb11f9a747c5ee313",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "ca89725d6360c42525ca1d8e2ce61d59d4deb9e480940e8434349ca47e8d2e3f"
+      },
+      "viewSha256": "cd1edfcaecb50fdc0a1c4980b29fe5dbfd7c74b3b99a15ddb4655d0304aa6029",
+      "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+      "displayFrameCount": 4867,
+      "captionOverrideEntries": [
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+          "role": "Normal"
+        }
+      ],
+      "connectionOverrideEntries": [],
+      "selectedCaption": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "selection": {
+          "role": "Normal"
+        },
+        "origin": "human",
+        "hasOverride": true
+      },
+      "fixedAutomaticRecordsAndMeaningUnchanged": true,
+      "fixedCaptionContentAndSourceMappingUnchanged": true,
+      "reloadedViewIdentical": true,
+      "durableProofReconstructed": true
+    },
+    {
+      "name": "connectionOnly",
+      "fourSavedCanonicalSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "6f1afb5dd422cd00853717fc11219d2aa281ebb1d0ca619e1155a7fae2ba2479",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+      },
+      "viewSha256": "256dfe3d5599f693432ede6867dd193b7ee6c6b88545cd1f060c1926583fa4a1",
+      "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+      "displayFrameCount": 4879,
+      "captionOverrideEntries": [],
+      "connectionOverrideEntries": [
+        {
+          "connectionId": "connection-01",
+          "role": "separator",
+          "preset": "black-separator",
+          "presetVersion": "v001"
+        }
+      ],
+      "selectedCaption": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "selection": {
+          "role": "Focus",
+          "presentation": "provisional-focus",
+          "scope": "partial-caption",
+          "targetText": "世界一嫌い"
+        },
+        "origin": "automatic",
+        "hasOverride": false
+      },
+      "fixedAutomaticRecordsAndMeaningUnchanged": true,
+      "fixedCaptionContentAndSourceMappingUnchanged": true,
+      "reloadedViewIdentical": true,
+      "durableProofReconstructed": true
+    },
+    {
+      "name": "captionThenConnection",
+      "fourSavedCanonicalSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "4d502b5ff8c8a1d0caea7d2bb8604714ca1fc9898793af6eb11f9a747c5ee313",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+      },
+      "viewSha256": "e5fe0329949fa1b5e1106fca2311479437353fd035b19a6dc8dc9b3e1500f015",
+      "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+      "displayFrameCount": 4879,
+      "captionOverrideEntries": [
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+          "role": "Normal"
+        }
+      ],
+      "connectionOverrideEntries": [
+        {
+          "connectionId": "connection-01",
+          "role": "separator",
+          "preset": "black-separator",
+          "presetVersion": "v001"
+        }
+      ],
+      "selectedCaption": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "selection": {
+          "role": "Normal"
+        },
+        "origin": "human",
+        "hasOverride": true
+      },
+      "fixedAutomaticRecordsAndMeaningUnchanged": true,
+      "fixedCaptionContentAndSourceMappingUnchanged": true,
+      "reloadedViewIdentical": true,
+      "durableProofReconstructed": true
+    },
+    {
+      "name": "connectionThenCaption",
+      "fourSavedCanonicalSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "4d502b5ff8c8a1d0caea7d2bb8604714ca1fc9898793af6eb11f9a747c5ee313",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+      },
+      "viewSha256": "e5fe0329949fa1b5e1106fca2311479437353fd035b19a6dc8dc9b3e1500f015",
+      "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+      "displayFrameCount": 4879,
+      "captionOverrideEntries": [
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+          "role": "Normal"
+        }
+      ],
+      "connectionOverrideEntries": [
+        {
+          "connectionId": "connection-01",
+          "role": "separator",
+          "preset": "black-separator",
+          "presetVersion": "v001"
+        }
+      ],
+      "selectedCaption": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "selection": {
+          "role": "Normal"
+        },
+        "origin": "human",
+        "hasOverride": true
+      },
+      "fixedAutomaticRecordsAndMeaningUnchanged": true,
+      "fixedCaptionContentAndSourceMappingUnchanged": true,
+      "reloadedViewIdentical": true,
+      "durableProofReconstructed": true
+    },
+    {
+      "name": "captionResetFirst",
+      "fourSavedCanonicalSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "6f1afb5dd422cd00853717fc11219d2aa281ebb1d0ca619e1155a7fae2ba2479",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+      },
+      "viewSha256": "256dfe3d5599f693432ede6867dd193b7ee6c6b88545cd1f060c1926583fa4a1",
+      "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+      "displayFrameCount": 4879,
+      "captionOverrideEntries": [],
+      "connectionOverrideEntries": [
+        {
+          "connectionId": "connection-01",
+          "role": "separator",
+          "preset": "black-separator",
+          "presetVersion": "v001"
+        }
+      ],
+      "selectedCaption": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "selection": {
+          "role": "Focus",
+          "presentation": "provisional-focus",
+          "scope": "partial-caption",
+          "targetText": "世界一嫌い"
+        },
+        "origin": "automatic",
+        "hasOverride": false
+      },
+      "fixedAutomaticRecordsAndMeaningUnchanged": true,
+      "fixedCaptionContentAndSourceMappingUnchanged": true,
+      "reloadedViewIdentical": true,
+      "durableProofReconstructed": true
+    },
+    {
+      "name": "connectionResetFirst",
+      "fourSavedCanonicalSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "4d502b5ff8c8a1d0caea7d2bb8604714ca1fc9898793af6eb11f9a747c5ee313",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "ca89725d6360c42525ca1d8e2ce61d59d4deb9e480940e8434349ca47e8d2e3f"
+      },
+      "viewSha256": "cd1edfcaecb50fdc0a1c4980b29fe5dbfd7c74b3b99a15ddb4655d0304aa6029",
+      "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+      "displayFrameCount": 4867,
+      "captionOverrideEntries": [
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+          "role": "Normal"
+        }
+      ],
+      "connectionOverrideEntries": [],
+      "selectedCaption": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "selection": {
+          "role": "Normal"
+        },
+        "origin": "human",
+        "hasOverride": true
+      },
+      "fixedAutomaticRecordsAndMeaningUnchanged": true,
+      "fixedCaptionContentAndSourceMappingUnchanged": true,
+      "reloadedViewIdentical": true,
+      "durableProofReconstructed": true
+    },
+    {
+      "name": "bothResetCaptionFirst",
+      "fourSavedCanonicalSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "6f1afb5dd422cd00853717fc11219d2aa281ebb1d0ca619e1155a7fae2ba2479",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "ca89725d6360c42525ca1d8e2ce61d59d4deb9e480940e8434349ca47e8d2e3f"
+      },
+      "viewSha256": "95e967d566d64c12f645aa1ff89ddaa62d6a2a0f9c8e284bbb62985913d0855a",
+      "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+      "displayFrameCount": 4867,
+      "captionOverrideEntries": [],
+      "connectionOverrideEntries": [],
+      "selectedCaption": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "selection": {
+          "role": "Focus",
+          "presentation": "provisional-focus",
+          "scope": "partial-caption",
+          "targetText": "世界一嫌い"
+        },
+        "origin": "automatic",
+        "hasOverride": false
+      },
+      "fixedAutomaticRecordsAndMeaningUnchanged": true,
+      "fixedCaptionContentAndSourceMappingUnchanged": true,
+      "reloadedViewIdentical": true,
+      "durableProofReconstructed": true
+    },
+    {
+      "name": "bothResetConnectionFirst",
+      "fourSavedCanonicalSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "6f1afb5dd422cd00853717fc11219d2aa281ebb1d0ca619e1155a7fae2ba2479",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "ca89725d6360c42525ca1d8e2ce61d59d4deb9e480940e8434349ca47e8d2e3f"
+      },
+      "viewSha256": "95e967d566d64c12f645aa1ff89ddaa62d6a2a0f9c8e284bbb62985913d0855a",
+      "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+      "displayFrameCount": 4867,
+      "captionOverrideEntries": [],
+      "connectionOverrideEntries": [],
+      "selectedCaption": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "selection": {
+          "role": "Focus",
+          "presentation": "provisional-focus",
+          "scope": "partial-caption",
+          "targetText": "世界一嫌い"
+        },
+        "origin": "automatic",
+        "hasOverride": false
+      },
+      "fixedAutomaticRecordsAndMeaningUnchanged": true,
+      "fixedCaptionContentAndSourceMappingUnchanged": true,
+      "reloadedViewIdentical": true,
+      "durableProofReconstructed": true
+    },
+    {
+      "name": "repeatedReset",
+      "fourSavedCanonicalSha256": {
+        "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+        "captionOverrides": "6f1afb5dd422cd00853717fc11219d2aa281ebb1d0ca619e1155a7fae2ba2479",
+        "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+        "connectionOverrides": "ca89725d6360c42525ca1d8e2ce61d59d4deb9e480940e8434349ca47e8d2e3f"
+      },
+      "viewSha256": "95e967d566d64c12f645aa1ff89ddaa62d6a2a0f9c8e284bbb62985913d0855a",
+      "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+      "displayFrameCount": 4867,
+      "captionOverrideEntries": [],
+      "connectionOverrideEntries": [],
+      "selectedCaption": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "selection": {
+          "role": "Focus",
+          "presentation": "provisional-focus",
+          "scope": "partial-caption",
+          "targetText": "世界一嫌い"
+        },
+        "origin": "automatic",
+        "hasOverride": false
+      },
+      "fixedAutomaticRecordsAndMeaningUnchanged": true,
+      "fixedCaptionContentAndSourceMappingUnchanged": true,
+      "reloadedViewIdentical": true,
+      "durableProofReconstructed": true
+    }
+  ]
+}

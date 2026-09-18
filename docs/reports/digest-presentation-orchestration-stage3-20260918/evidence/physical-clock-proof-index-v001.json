@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "physical-clock-probe-evidence-index-v001",
+  "status": "passed",
+  "proof": {
+    "source": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/physical-clock-probe-v002/completion.json",
+      "fileSha256": "369891119c90b0597e70ef5a9c8cdb1dec69f9d24bc60e495f6371be3b6a2272",
+      "bytes": 173895
+    },
+    "copy": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-probe-v002.json",
+      "fileSha256": "369891119c90b0597e70ef5a9c8cdb1dec69f9d24bc60e495f6371be3b6a2272",
+      "bytes": 173895
+    }
+  },
+  "priorFailure": {
+    "source": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/physical-clock-probe-v001/failure.json",
+      "fileSha256": "eb311b7b7f49f40ab436e039eae845075775d209fa31879bf09a13e341b86f51",
+      "bytes": 4375
+    },
+    "copy": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-probe-v001-failure.json",
+      "fileSha256": "eb311b7b7f49f40ab436e039eae845075775d209fa31879bf09a13e341b86f51",
+      "bytes": 4375
+    }
+  },
+  "preflight": {
+    "source": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/physical-clock-v002-preflight.json",
+      "fileSha256": "1b38807b25d161a46d554680d93e808d889bf84956d3b22695021d5b5755925b",
+      "bytes": 7007
+    },
+    "copy": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-v002-preflight.json",
+      "fileSha256": "1b38807b25d161a46d554680d93e808d889bf84956d3b22695021d5b5755925b",
+      "bytes": 7007
+    }
+  },
+  "helper": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_orchestration_physical_clock_probe_v001.mjs",
+    "fileSha256": "67709890f05f2bf6f8e32af1497123b0938d844667ae9224b0d44b93f42eacff",
+    "bytes": 25730
+  },
+  "previousHelper": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/physical-clock-before-published-path-v001.mjs",
+    "fileSha256": "afcf914cb201a7dc896c71dda3c9cb8fae59b033ea68da4f6359cefb0bbb3b9d",
+    "bytes": 24758
+  },
+  "command": {
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "argv": [
+      "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_orchestration_physical_clock_probe_v001.mjs",
+      "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/scratch/native-qc-preparation/preparation.json",
+      "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/source-bindings.json",
+      "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/physical-clock-probe-v002",
+      "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+      "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays"
+    ]
+  },
+  "scope": "inspection-only physical RGB fixture using a synthetic 12-frame connection and actual native PNGs; independent of the automatic candidate",
+  "positiveObservationCount": 8,
+  "physicalFaults": [
+    {
+      "name": "old-peak-clock",
+      "rejectedAtFrames": [
+        118,
+        130
+      ]
+    },
+    {
+      "name": "old-motion-start-clock",
+      "rejectedAtFrames": [
+        53
+      ]
+    },
+    {
+      "name": "missing-shift",
+      "rejectedAtFrames": [
+        161
+      ]
+    },
+    {
+      "name": "double-shift",
+      "rejectedAtFrames": [
+        87
+      ]
+    }
+  ],
+  "predrawFault": {
+    "name": "same-duration-stale-projection",
+    "status": "rejected-before-physical-draw",
+    "assertion": "assertProjectionMatchesStateV001 at the shared observe entry",
+    "previousProjectionSha256": "5bcfb435313f2acdda16efe35eab86aab6d8083aa79c87b7fdf51090e7978be8",
+    "expectedProjectionSha256": "a1881e6cdc12e343132b97c53631241069537bd6ab3834832a719dd738f6c995",
+    "beforeCommandCount": 1,
+    "afterCommandCount": 1,
+    "observationFilesBefore": [],
+    "observationFilesAfter": [],
+    "error": {
+      "type": "TypeError",
+      "message": "ORCHESTRATION_PROJECTION_INVALID: stale projection: current source or concrete connection state differs"
+    }
+  },
+  "originalInputBytesUnchanged": true,
+  "validatedInputCount": 22,
+  "validatedArtifactCount": 44,
+  "limits": [
+    "No full temporal compositor execution or codec-quality claim for this fixture.",
+    "The held black background clock is synthetic; actual source audio is not decoded or reconstructed here."
+  ],
+  "setupHistory": [
+    "v001 stopped before any FFmpeg command because publication moved native PNG paths; raw failure retained.",
+    "Before v002, published paths were resolved explicitly with unchanged PNG SHAs and exact projection-reference fields were checked.",
+    "v002 passed on its first physical execution."
+  ]
+}

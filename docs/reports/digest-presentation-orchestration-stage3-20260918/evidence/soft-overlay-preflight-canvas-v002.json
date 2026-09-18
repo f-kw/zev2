@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "scope": "pure helper call-contract preflight; no media probe executed",
+  "failureRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/soft-overlay-preflight-canvas-v001.json",
+    "fileSha256": "40ef6c5a891f906965366fe3a08f4662df4381453ebe421fd3b452d25565c88f"
+  },
+  "helperRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_orchestration_soft_overlay_probe_v001.mjs",
+    "fileSha256": "2265059f21029d44fb762c8760bde49755bcd09e56fdc0b6e1cdb77a8e704fc7"
+  },
+  "viewRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/orchestration-view-v001.json",
+    "fileSha256": "5a81f3733110cbb4c43da532b480579cbb398fcea17340c367d0928c6b9e271a"
+  },
+  "passedCanvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30
+  },
+  "requiredCanvasKeys": [
+    "width",
+    "height",
+    "fps"
+  ],
+  "existingFiniteLuts": [
+    {
+      "frame": 457,
+      "lut": "[connectionSoft0]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,457)'[connectionSoft1]"
+    },
+    {
+      "frame": 478,
+      "lut": "[connectionSoft9]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,478)'[connectionSoft10]"
+    },
+    {
+      "frame": 4401,
+      "lut": "[connectionSoft12]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,4401)'[connectionSoft13]"
+    },
+    {
+      "frame": 4422,
+      "lut": "[connectionSoft21]lut=y='floor((val*4+16*(5-4)+2)/5)':u='floor((val*4+128*(5-4)+2)/5)':v='floor((val*4+128*(5-4)+2)/5)':enable='eq(n,4422)'[connectionSoft22]"
+    }
+  ],
+  "existingProductionChanged": false
+}

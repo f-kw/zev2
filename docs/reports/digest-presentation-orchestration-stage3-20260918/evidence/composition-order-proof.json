@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "presentation-orchestration-composition-order-fixture-v001",
+  "status": "passed",
+  "purpose": "manual physical fault fixture; separate from the zero-override automatic Digest candidate",
+  "automaticDigestCandidate": false,
+  "manualCaptionPlacements": 2,
+  "manualConnectionSelection": "soft-separator",
+  "nativeOverlay": {
+    "pngRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/caption-human-repair-render-v002/render/overlays/01-8da4fb838757.png",
+      "fileSha256": "a8c4875e7d37a0fc08daead132073a0aba7eaba6c45885b73ac5081013ac9ece"
+    },
+    "normalPlanRef": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/normal-plan.json",
+      "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e"
+    },
+    "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000001"
+  },
+  "nativeVisualState": {
+    "stateId": "caption-core-v001",
+    "textStyle": {
+      "fontAssetId": "line-seed-jp-extra-bold-v001",
+      "fontSizePx": 96,
+      "fontColor": "#FFFDF8",
+      "borderColor": "#111827",
+      "borderWidthPx": 8,
+      "lineSpacingPercent": 150,
+      "glowColor": "#000000",
+      "glowWidthPx": 12,
+      "glowOpacityPercent": 82
+    },
+    "position": {
+      "preset": "bottom-center",
+      "alignment": "center",
+      "offsetXPercent": 0,
+      "offsetYPercent": -6
+    },
+    "background": null,
+    "layout": {
+      "maxCharsPerLine": 36,
+      "maxLines": 2,
+      "singleLine": false
+    },
+    "transitionId": "quick-fade-4f-v001"
+  },
+  "nativePngPixelsUnchanged": true,
+  "outputGuard": {
+    "repositoryRoot": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree",
+    "outputDirectory": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16",
+    "relativeDirectory": "evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16",
+    "matchedIgnoreRule": ".gitignore:18:/evals/clip_composition/outputs/presentation/stage3-orchestration-*/\tevals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/generated-output-probe.txt",
+    "directoryCreated": false
+  },
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "safeAreaPx": {
+      "top": 40,
+      "right": 80,
+      "bottom": 40,
+      "left": 80
+    }
+  },
+  "sourceFrameCount": 24,
+  "displayFrameCount": 36,
+  "projectionSha256": "780552b4d408ad247a137c790818520789f495edacdcb424f95e002319900590",
+  "samples": [
+    {
+      "frame": 8,
+      "captionId": "composition-fixture-caption-1",
+      "localFrame": 8,
+      "nativeCaptionAlpha": 1,
+      "softState": {
+        "numerator": 3,
+        "denominator": 5
+      },
+      "correct": {
+        "status": "passed",
+        "method": "all opaque native glyph interior luma samples equal the unfaded native PNG",
+        "opaqueGlyphInteriorPixelCount": 22183,
+        "comparedLumaSamples": 22183
+      },
+      "rejection": {
+        "code": "CAPTION_DARKENED_BY_CONNECTION",
+        "message": "ORCHESTRATION_COMPOSITION_ORDER_INVALID: opaque glyph changed at x=1200, y=867: expected native luma 233, observed 146"
+      },
+      "wrongMatchesFiniteFullframeFadeAtEveryGlyphInterior": true,
+      "correctFrame": {
+        "raw": {
+          "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/correct-frame-8.yuv",
+          "fileSha256": "2569d7a1c2b782fc4726de1a018e28828abc96118281e31f28f737141bff40aa",
+          "bytes": 3110400
+        },
+        "png": {
+          "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/correct-frame-8.png",
+          "fileSha256": "465ea9320e0b074b2489ed0df1e20fc0b03351cbc45271fa567c0bc91988986b",
+          "bytes": 60872
+        }
+      },
+      "wrongFrame": {
+        "raw": {
+          "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/wrong-frame-8.yuv",
+          "fileSha256": "e9d295c5dfb3528e93218eaf8c22121072c544aa2af3c5a936402859792d6e68",
+          "bytes": 3110400
+        },
+        "png": {
+          "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/wrong-frame-8.png",
+          "fileSha256": "66dab114a830fb49839b61d8771b5d16ea5a74ff87ef58ff6a701cfe00e43d8c",
+          "bytes": 53936
+        }
+      }
+    },
+    {
+      "frame": 27,
+      "captionId": "composition-fixture-caption-2",
+      "localFrame": 3,
+      "nativeCaptionAlpha": 1,
+      "softState": {
+        "numerator": 3,
+        "denominator": 5
+      },
+      "correct": {
+        "status": "passed",
+        "method": "all opaque native glyph interior luma samples equal the unfaded native PNG",
+        "opaqueGlyphInteriorPixelCount": 22183,
+        "comparedLumaSamples": 22183
+      },
+      "rejection": {
+        "code": "CAPTION_DARKENED_BY_CONNECTION",
+        "message": "ORCHESTRATION_COMPOSITION_ORDER_INVALID: opaque glyph changed at x=1200, y=867: expected native luma 233, observed 146"
+      },
+      "wrongMatchesFiniteFullframeFadeAtEveryGlyphInterior": true,
+      "correctFrame": {
+        "raw": {
+          "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/correct-frame-27.yuv",
+          "fileSha256": "2569d7a1c2b782fc4726de1a018e28828abc96118281e31f28f737141bff40aa",
+          "bytes": 3110400
+        },
+        "png": {
+          "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/correct-frame-27.png",
+          "fileSha256": "465ea9320e0b074b2489ed0df1e20fc0b03351cbc45271fa567c0bc91988986b",
+          "bytes": 60872
+        }
+      },
+      "wrongFrame": {
+        "raw": {
+          "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/wrong-frame-27.yuv",
+          "fileSha256": "e9d295c5dfb3528e93218eaf8c22121072c544aa2af3c5a936402859792d6e68",
+          "bytes": 3110400
+        },
+        "png": {
+          "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/wrong-frame-27.png",
+          "fileSha256": "66dab114a830fb49839b61d8771b5d16ea5a74ff87ef58ff6a701cfe00e43d8c",
+          "bytes": 53936
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "correctLossless": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/correct-background-soft-then-caption.nut",
+      "fileSha256": "cb661c6f3ab83c3e73bfb2eae44859ba51d83320feaa476ce6676e316b0b501d",
+      "bytes": 1029556
+    },
+    "wrongLossless": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/fault-caption-darkened-by-fullframe-soft.nut",
+      "fileSha256": "d6ab309f440095d511a6316391756459659f26fcb24327421139a0683ab5cf30",
+      "bytes": 973487
+    },
+    "encodedNativeRenderer": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/correct-native-renderer-with-audio-sidecar.mp4",
+      "fileSha256": "76d5d344e401f8ef497670fe481a23f44c3c21c0b6a76249ac31b02a8ec37ecc",
+      "bytes": 72841
+    }
+  },
+  "encodedRenderer": {
+    "videoFrameCount": 36,
+    "presentationStartSample": 0,
+    "presentationEndSampleExclusive": 52920,
+    "sampleRate": 44100,
+    "audioPacketPayloadSha256": "7c5b953c76900ed3ecf8ae9558085f9e81a02d039e59599b01d761afc0d8aa3d",
+    "audioSidecarRef": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/soft-separator/audio.m4a",
+      "fileSha256": "2a9321ff45318a5045f52d22ac9804155de32173e6ac1200fdfb07f1c97865ad",
+      "bytes": 21470
+    },
+    "audioCopiedWithoutSecondEncode": true
+  },
+  "backgroundProofRefs": {
+    "soft-separator": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/soft-separator/proof.json",
+      "fileSha256": "7f6138ecb84e471d0fd8f0533aa2d74df3f3b43b052787e4e6e33f346c1923b5",
+      "bytes": 9183
+    },
+    "black-separator": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-composition-test-bb60f235-832e-4e50-a021-fce815219a16/black-separator/proof.json",
+      "fileSha256": "8b29164a7e54b362e5f6db35f2180f341deca143eb517714037cd14f171f5d86",
+      "bytes": 9190
+    }
+  },
+  "nativeCompositeBuilder": "buildPresentationCompositeArgumentsV001; lossless oracle changes encoder only; encoded artifact uses normal H264 and audioMediaPath",
+  "processCount": 17
+}

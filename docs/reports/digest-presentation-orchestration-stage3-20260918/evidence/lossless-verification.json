@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "presentation-orchestration-background-verification-v001",
+  "status": "passed",
+  "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+  "inputBindings": {
+    "media": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+      "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d"
+    },
+    "plan": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/normal-plan.json",
+      "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e"
+    },
+    "timeline": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/timeline.json",
+      "fileSha256": "dd4ebac277c0f3da73765457ea7812cfc801a16231d35a1cd0a0c4c1b0e61aef"
+    }
+  },
+  "outputRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-v001/background.nut",
+    "fileSha256": "85e9c83e41ac3b69435aaedaf80f1357ffc97e47f82b3cfd81ae9f736ae59e87",
+    "bytes": 1029173377
+  },
+  "video": {
+    "status": "passed",
+    "method": "all decoded yuv420p bytes; independent finite-preset arithmetic",
+    "sourceFrames": 4831,
+    "displayFrames": 4867,
+    "blackFrames": 36,
+    "fadedFrames": 24,
+    "comparedYuvBytes": 15138316800,
+    "originalDecodedPayloadSha256": "09af3da1df4d51e68304cc9ea3cbeb9d016dd030cd1a519a7f995d57a29ee632",
+    "expectedPayloadSha256": "7901c862f0d24942bc71652fd172bba07049e173f5a90a4795ae027aadbb7f94",
+    "observedPayloadSha256": "7901c862f0d24942bc71652fd172bba07049e173f5a90a4795ae027aadbb7f94",
+    "completeRetainedFrameOrderPreserved": true
+  },
+  "audio": {
+    "status": "passed",
+    "method": "all float32 interleaved stereo bytes; retained samples unchanged; inserted bytes zero",
+    "sampleRate": 44100,
+    "channels": 2,
+    "sourceLogicalSampleCount": 7101570,
+    "sourceRawDecodedSampleCount": 7102464,
+    "sourceDecoderTailSampleCount": 894,
+    "displaySampleCount": 7154490,
+    "insertedZeroSampleCount": 52920,
+    "comparedPcmBytes": 57235920,
+    "sourceRawDecodedPayloadSha256": "98b7a518cfde5cbd07478ab7fa6f96c994b54eb7d8d4af79a804759a566678d0",
+    "sourceLogicalPayloadSha256": "ef84d4be8399678a40a7722d900b37eada023ea5b6a5c21aac5834dbc9be8214",
+    "expectedPayloadSha256": "c1fa4002a87ea48f976ff2da40f1a3a0c717db9b29696f6db408f831f7196e5f",
+    "observedPayloadSha256": "c1fa4002a87ea48f976ff2da40f1a3a0c717db9b29696f6db408f831f7196e5f"
+  }
+}

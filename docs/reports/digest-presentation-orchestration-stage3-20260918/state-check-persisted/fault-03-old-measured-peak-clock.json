@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "presentation-orchestration-saved-state-check-v001",
+  "kind": "audio-peak",
+  "name": "old-measured-peak-clock",
+  "status": "rejected",
+  "assertion": "assertProjectedTimingV001",
+  "rejection": {
+    "type": "TypeError",
+    "message": "ORCHESTRATION_PROJECTION_INVALID: projected timing differs from immutable source"
+  },
+  "original": {
+    "clock": "digest-original",
+    "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+    "peakId": "audio-peak-000067",
+    "sample": 195840,
+    "sampleRate": 16000
+  },
+  "expected": {
+    "clock": "digest-display",
+    "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+    "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+    "source": {
+      "clock": "digest-original",
+      "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+      "peakId": "audio-peak-000067",
+      "sample": 195840,
+      "sampleRate": 16000
+    },
+    "peakId": "audio-peak-000067",
+    "sampleRate": 16000,
+    "displaySample": 202240,
+    "displayFrame": 379,
+    "playbackSample": {
+      "numerator": 557424,
+      "denominator": 1
+    }
+  },
+  "injected": {
+    "clock": "digest-display",
+    "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+    "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+    "source": {
+      "clock": "digest-original",
+      "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+      "peakId": "audio-peak-000067",
+      "sample": 195840,
+      "sampleRate": 16000
+    },
+    "peakId": "audio-peak-000067",
+    "sampleRate": 16000,
+    "displaySample": 195840,
+    "displayFrame": 367,
+    "playbackSample": {
+      "numerator": 539784,
+      "denominator": 1
+    }
+  }
+}

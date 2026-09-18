@@ -171,6 +171,37 @@ function focusRange(element, selection) {
     endCodePointExclusive: Array.from(text.slice(0, end)).length};
 }
 
+/** Finite drawing primitive for an already checked normal caption. Saved-state
+ * and source-evidence validation remain the caller's responsibility. A projected
+ * caller supplies the measured peak on the same clock as the caption; it must
+ * not relabel projected measurements as native source evidence. */
+export function materializeFiniteAutoPresentationCaptionV001({element, canvas, selection, measuredPeak}) {
+  if (!object(element) || element.kind !== 'speech-caption' || !nonempty(element.instructionId)
+    || ['presentationColorRange', 'presentationPreset', 'presentationPulse', 'presentationMotion']
+      .some(key => Object.hasOwn(element, key))) reject('finite materialization requires a normal caption');
+  if (selection?.role === 'Normal') {
+    if (!exact(selection, ['role']) || measuredPeak !== undefined) reject('Normal has extra drawing inputs');
+    return element;
+  }
+  checkSelection(selection, false);
+  if (selection.role !== rules.pulse.role && measuredPeak !== undefined) reject('only Pulse uses a measured peak');
+  if (isMotion(selection)) return motionElement({elements: [element], canvas}, element.instructionId, selection);
+  if (selection.role === rules.pulse.role) {
+    if (!exact(measuredPeak, ['peakId', 'peakSample', 'sampleRate'])
+      || measuredPeak.peakId !== selection.anchorPeakId) reject('finite Pulse requires its bound measured peak');
+    const program = resolvePresentationPulseTimingV001({element, canvas,
+      peakSample: measuredPeak.peakSample, sampleRate: measuredPeak.sampleRate});
+    return {...element, presentationPulse: {presentation: rules.pulse.presentation,
+      anchorPeakId: selection.anchorPeakId, anchorFrame: program.anchorFrame}};
+  }
+  if (selection.role === rules.panel.role) return {...element, visualState: {...element.visualState,
+    textStyle: {...element.visualState.textStyle, ...rules.panel.textStyle},
+    background: {...rules.panel.background}}};
+  if (selection.role === rules.vocal.role) return {...element, visualState: {...element.visualState,
+    textStyle: {...element.visualState.textStyle, ...rules.vocal.textStyle}}};
+  return {...element, presentationColorRange: {...focusRange(element, selection), fontColor: rules.textStyle.fontColor}};
+}
+
 function checkProposal(baselinePlan, context, proposal) {
   const captions = checkContext(baselinePlan, context);
   if (!exact(proposal, ['schemaVersion', 'context', 'targetCaptionIds', 'completion', 'effects', 'exceptions'])
@@ -289,28 +320,15 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
   const ranges = new Map();
   const elements = baselinePlan.elements.map(element => {
     const selection = effective.get(element.instructionId);
-    if (isMotion(selection)) return motionElement(baselinePlan, element.instructionId, selection);
-    if (selection?.role === rules.pulse.role) {
-      const program = pulseProgram(baselinePlan, context, element.instructionId, selection);
-      return {...element, presentationPulse: {presentation: rules.pulse.presentation,
-        anchorPeakId: selection.anchorPeakId, anchorFrame: program.anchorFrame}};
-    }
-    if (selection?.role === rules.panel.role) {
-      return {...element, visualState: {...element.visualState,
-        textStyle: {...element.visualState.textStyle, ...rules.panel.textStyle},
-        background: {...rules.panel.background}}};
-    }
-    if (selection?.role === 'Vocal accent') {
-      return {...element, visualState: {...element.visualState,
-        textStyle: {...element.visualState.textStyle, ...rules.vocal.textStyle}}};
-    }
-    if (selection?.role !== 'Focus') return element;
-    const range = focusRange(element, selection);
-    ranges.set(element.instructionId, range);
-    // Whole Focus is the complete canonical range of the same paint operation.
-    // Keep every selected glyph in the range. Native color glyphs retain their
-    // original RGBA; an all-color-glyph range can be visually unchanged.
-    return {...element, presentationColorRange: {...range, fontColor: rules.textStyle.fontColor}};
+    if (selection === undefined || selection.role === 'Normal') return element;
+    const {captionId: _id, ...finiteSelection} = selection;
+    const peak = selection.role === rules.pulse.role
+      ? context.pulseTimingEvidence.peaks.find(row => row.peakId === selection.anchorPeakId) : undefined;
+    const materialized = materializeFiniteAutoPresentationCaptionV001({element, canvas: baselinePlan.canvas,
+      selection: finiteSelection, ...(peak === undefined ? {} : {measuredPeak: {
+        peakId: peak.peakId, peakSample: peak.peakSample, sampleRate: context.pulseTimingEvidence.sampleRate}})});
+    if (selection.role === 'Focus') ranges.set(element.instructionId, focusRange(element, selection));
+    return materialized;
   });
   const changed = elements.some((element, index) => element !== baselinePlan.elements[index]);
   const selection = entry => {

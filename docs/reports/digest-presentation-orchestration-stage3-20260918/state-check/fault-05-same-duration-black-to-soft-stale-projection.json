@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "presentation-orchestration-saved-state-check-v001",
+  "kind": "injected-clock-fault",
+  "name": "same-duration-black-to-soft-stale-projection",
+  "status": "rejected",
+  "assertion": "assertProjectionMatchesStateV001",
+  "rejection": {
+    "type": "TypeError",
+    "message": "ORCHESTRATION_PROJECTION_INVALID: stale projection: current source or concrete connection state differs"
+  },
+  "connectionId": "connection-01",
+  "expectedPreset": "soft-separator",
+  "reusedPreset": "black-separator",
+  "displayFrameCount": 4879,
+  "expectedProjectionSha256": "e07f0054bff3656f28cb60b1d196b58c562593c3366414871777cca6fdf020b1",
+  "reusedProjectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+  "savedStateViewRejection": {
+    "type": "TypeError",
+    "message": "ORCHESTRATION_INVALID: stale drawing view: source, projection, or four saved systems differ"
+  }
+}

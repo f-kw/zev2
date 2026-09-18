@@ -319,8 +319,13 @@ test('renderer accepts an exactly cropped local clock and rejects incomplete or 
   const filters = buildConnectionExpressionTimelineFiltersV001(input);
   assert.deepEqual(filters.filter(line => line.includes(']lut=')).map(line => Number(line.match(/eq\(n,(\d+)\)/)[1])),
     [114, 115, 116, 117, 118, 119, 132, 133, 134, 135, 136, 137]);
+  const input44100 = copy(input); input44100.audio.sampleRate = 44100;
+  const filters44100 = buildConnectionExpressionTimelineFiltersV001(input44100);
+  assert(filters44100.some(line => line.includes('atrim=start_sample=0:end_sample=176400')));
+  assert(filters44100.some(line => line.includes('anullsrc=r=44100:cl=stereo,atrim=end_sample=17640')));
+  assert.deepEqual(filters44100.filter(line => line.includes(']lut=')), filters.filter(line => line.includes(']lut=')));
   for (const change of [
-    value => { value.audio.sampleRate = 44100; },
+    value => { value.audio.sampleRate = 32000; },
     value => { value.audio.channelLayout = 'mono'; },
     value => { value.canvas.fps = 60; },
     value => { value.softWindows[0].blackStartFrame++; },

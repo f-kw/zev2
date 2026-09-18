@@ -11,6 +11,7 @@ export {
   nativeReferenceArguments as buildPresentationNativeReferenceArgumentsV001,
 };
 import {buildPresentationNativeQcAlternativeElementsV001} from './presentation_native_frame_qc_preparation_v001.mjs';
+import {restoreOrchestrationDrawingViewEvidenceV001} from './presentation_orchestration_v001.mjs';
 import {getPresentationPulseProgramV001, buildPresentationPulseStateElementsV001} from './presentation_pulse_v001.mjs';
 import {getPresentationCaptionMotionProgramV001, buildPresentationCaptionMotionStateElementsV001}
   from './presentation_caption_motion_v001.mjs';
@@ -68,9 +69,9 @@ function checkPlans(plan, baselinePlan) {
   }
 }
 
-function finiteSpecifications(plan, baselinePlan, autoPresentation) {
+function finiteSpecifications(plan, baselinePlan, autoPresentation, orchestrationDrawingView) {
   const rebuilt = buildPresentationNativeQcAlternativeElementsV001({
-    plan, baselinePlan, autoPresentation, presentationTimeline: null,
+    plan, baselinePlan, autoPresentation, presentationTimeline: null, orchestrationDrawingView,
   });
   const byId = new Map(rebuilt.resolution.captions.map(row => [row.captionId, row.effectiveSelection]));
   const kinds = new Map([['Normal', 'normal'], ['Focus', 'color'], ['Vocal accent', 'scale'],
@@ -102,9 +103,9 @@ function bindNativeRecord(record, element, state, bindingId, canvas) {
     alphaBounds: checkedBounds(record.inspection.alphaBounds, canvas)};
 }
 
-function bindRecords(plan, baselinePlan, autoPresentation, records) {
+function bindRecords(plan, baselinePlan, autoPresentation, records, orchestrationDrawingView) {
   checkPlans(plan, baselinePlan);
-  const specifications = finiteSpecifications(plan, baselinePlan, autoPresentation);
+  const specifications = finiteSpecifications(plan, baselinePlan, autoPresentation, orchestrationDrawingView);
   requireValue(Array.isArray(records) && records.length === plan.elements.length,
     'native records must cover every caption');
   return records.map((record, index) => {
@@ -141,9 +142,9 @@ function bindRecords(plan, baselinePlan, autoPresentation, records) {
   });
 }
 
-function checkSceneBindings(plan, baselinePlan, autoPresentation, sceneBindings) {
+function checkSceneBindings(plan, baselinePlan, autoPresentation, sceneBindings, orchestrationDrawingView) {
   checkPlans(plan, baselinePlan);
-  const specifications = finiteSpecifications(plan, baselinePlan, autoPresentation);
+  const specifications = finiteSpecifications(plan, baselinePlan, autoPresentation, orchestrationDrawingView);
   requireValue(Array.isArray(sceneBindings) && sceneBindings.length === plan.elements.length,
     'scene bindings do not cover the plan');
   const bindingIds = new Set();
@@ -201,8 +202,8 @@ function unionBounds(bindings, canvas) {
   return {left: x, top: y, right: endX, bottom: endY, width: endX - x, height: endY - y};
 }
 
-function deriveRecipes(plan, baselinePlan, autoPresentation, sceneBindings) {
-  checkSceneBindings(plan, baselinePlan, autoPresentation, sceneBindings);
+function deriveRecipes(plan, baselinePlan, autoPresentation, sceneBindings, orchestrationDrawingView) {
+  checkSceneBindings(plan, baselinePlan, autoPresentation, sceneBindings, orchestrationDrawingView);
   const allNative = sceneBindings.flatMap(group => group.states);
   const byId = new Map(sceneBindings.flatMap(group => [...group.states, ...group.alternates])
     .map(binding => [binding.bindingId, binding]));
@@ -261,9 +262,9 @@ function deriveRecipes(plan, baselinePlan, autoPresentation, sceneBindings) {
 }
 
 /** Pure QC recipe: all samples and adversarial references derive from bound finite inputs. */
-export function buildPresentationNativeFrameQcRecipeV001({plan, baselinePlan, autoPresentation, records}) {
-  const sceneBindings = bindRecords(plan, baselinePlan, autoPresentation, records);
-  return {sceneBindings, samples: deriveRecipes(plan, baselinePlan, autoPresentation, sceneBindings)};
+export function buildPresentationNativeFrameQcRecipeV001({plan, baselinePlan, autoPresentation, records, orchestrationDrawingView}) {
+  const sceneBindings = bindRecords(plan, baselinePlan, autoPresentation, records, orchestrationDrawingView);
+  return {sceneBindings, samples: deriveRecipes(plan, baselinePlan, autoPresentation, sceneBindings, orchestrationDrawingView)};
 }
 
 /** Exact bytes form equivalence classes; no label, threshold, ratio or channel weighting selects a winner. */
@@ -394,10 +395,17 @@ function spawnObserved(command, args) {
   });
 }
 
-function checkInputManifest(manifest, plan, baselinePlan, autoPresentation) {
+function checkInputManifest(manifest, plan, baselinePlan, autoPresentation, orchestrationInput, orchestrationDrawingView) {
+  const decisionRole = orchestrationDrawingView === undefined ? 'auto-input' : 'orchestration-input';
+  const sourceBaseline = orchestrationDrawingView?.sourceContext?.baselineRef ?? autoPresentation?.context?.baselineRef;
+  requireValue(sourceBaseline !== undefined, 'original normal-plan reference is missing');
   requireValue(object(manifest) && manifest.planCanonicalSha256 === hashJson(plan)
     && manifest.baselinePlanCanonicalSha256 === hashJson(baselinePlan)
-    && manifest.autoPresentationCanonicalSha256 === hashJson(autoPresentation)
+    && (orchestrationDrawingView === undefined
+      ? manifest.autoPresentationCanonicalSha256 === hashJson(autoPresentation)
+      : autoPresentation === undefined && manifest.orchestrationInputCanonicalSha256 === hashJson(orchestrationInput)
+        && same(baselinePlan, orchestrationDrawingView.projectedNormalPlan)
+        && same(plan, orchestrationDrawingView.resolvedPlan))
     && Array.isArray(manifest.inputRefs) && manifest.inputRefs.length > 0
     && manifest.inputRefsCanonicalSha256 === hashJson(manifest.inputRefs), 'input manifest binding differs');
   const roles = new Set();
@@ -406,16 +414,17 @@ function checkInputManifest(manifest, plan, baselinePlan, autoPresentation) {
     requireValue(!roles.has(ref.role), 'input reference role is duplicated');
     roles.add(ref.role);
   }
-  for (const role of ['plan', 'baseline-plan', 'auto-input', 'base-media', 'completed-media', 'tool-ffmpeg', 'tool-imagemagick']) {
+  for (const role of ['plan', 'baseline-plan', decisionRole, 'base-media', 'completed-media', 'tool-ffmpeg', 'tool-imagemagick']) {
     requireValue(roles.has(role), 'required input reference is missing: ' + role);
   }
   requireValue(manifest.inputRefs.find(row => row.role === 'plan').canonicalSha256 === hashJson(plan)
-    && manifest.inputRefs.find(row => row.role === 'baseline-plan').canonicalSha256 === hashJson(baselinePlan)
-    && manifest.inputRefs.find(row => row.role === 'auto-input').canonicalSha256 === hashJson(autoPresentation),
+    && manifest.inputRefs.find(row => row.role === 'baseline-plan').canonicalSha256 === sourceBaseline.canonicalSha256
+    && manifest.inputRefs.find(row => row.role === decisionRole).canonicalSha256
+      === hashJson(orchestrationDrawingView === undefined ? autoPresentation : orchestrationInput),
   'plan file references do not bind the compared plans');
   const normalRef = manifest.inputRefs.find(row => row.role === 'baseline-plan');
-  requireValue(normalRef.path === autoPresentation.context.baselineRef.path
-    && normalRef.fileSha256 === autoPresentation.context.baselineRef.fileSha256,
+  requireValue(normalRef.path === sourceBaseline.path
+    && normalRef.fileSha256 === sourceBaseline.fileSha256,
   'normal plan file differs from the automatic context');
   for (const stage of ['before', 'after']) {
     requireValue(Array.isArray(manifest[stage]) && manifest[stage].length === manifest.inputRefs.length,
@@ -435,8 +444,12 @@ export function validatePresentationNativeFrameQcEvidenceV001({plan, inspection}
       && evidence.instructionId === instructionId, 'native evidence identity or basis differs');
     const index = plan.elements.findIndex(element => element.instructionId === instructionId);
     requireValue(index >= 0, 'inspection caption is not in the plan');
-    checkInputManifest(evidence.inputManifest, plan, evidence.baselinePlan, evidence.autoPresentation);
-    const recipes = deriveRecipes(plan, evidence.baselinePlan, evidence.autoPresentation, evidence.sceneBindings)
+    const orchestrationDrawingView = evidence.orchestrationInput === undefined ? undefined
+      : restoreOrchestrationDrawingViewEvidenceV001(evidence.orchestrationInput);
+    checkInputManifest(evidence.inputManifest, plan, evidence.baselinePlan, evidence.autoPresentation,
+      evidence.orchestrationInput, orchestrationDrawingView);
+    const recipes = deriveRecipes(plan, evidence.baselinePlan, evidence.autoPresentation, evidence.sceneBindings,
+      orchestrationDrawingView)
       .filter(sample => sample.instructionId === instructionId);
     const element = plan.elements[index];
     const representativeFrame = Object.hasOwn(element, 'presentationPulse')
@@ -555,14 +568,24 @@ export async function inspectPresentationNativeFrameQcV001({
     const normalRef = declared.find(ref => ref.role === 'baseline-plan');
     const planRef = declared.find(ref => ref.role === 'plan');
     const autoRef = declared.find(ref => ref.role === 'auto-input');
-    requireValue(normalRef && planRef && autoRef, 'plan, baseline-plan and auto-input file references are required');
-    const autoPresentation = JSON.parse((await readBoundRef(autoRef)).toString('utf8'));
-    const baselinePlan = JSON.parse((await readBoundRef(normalRef)).toString('utf8'));
+    const orchestrationRef = declared.find(ref => ref.role === 'orchestration-input');
+    requireValue(normalRef && planRef && Boolean(autoRef) !== Boolean(orchestrationRef),
+      'plan, baseline-plan and exactly one decision input reference are required');
+    const decisionRef = orchestrationRef ?? autoRef;
+    const decision = JSON.parse((await readBoundRef(decisionRef)).toString('utf8'));
+    const autoPresentation = autoRef ? decision : undefined;
+    const orchestrationInput = orchestrationRef ? decision : undefined;
+    const orchestrationDrawingView = orchestrationRef ? restoreOrchestrationDrawingViewEvidenceV001(decision) : undefined;
+    const originalBaselinePlan = JSON.parse((await readBoundRef(normalRef)).toString('utf8'));
+    if (orchestrationDrawingView !== undefined) requireValue(hashJson(originalBaselinePlan)
+      === orchestrationDrawingView.sourceContext.baselineRef.canonicalSha256,
+    'original plan file differs from the orchestration source');
+    const baselinePlan = orchestrationDrawingView?.projectedNormalPlan ?? originalBaselinePlan;
     requireValue(same(JSON.parse((await readBoundRef(planRef)).toString('utf8')), plan), 'plan file differs from the in-memory plan');
-    const recipe = buildPresentationNativeFrameQcRecipeV001({plan, baselinePlan, autoPresentation, records});
-    const refs = [...declared.filter(ref => ref.role !== 'plan' && ref.role !== 'baseline-plan' && ref.role !== 'auto-input'),
-      {...planRef, canonicalSha256: hashJson(plan)}, {...normalRef, canonicalSha256: hashJson(baselinePlan)},
-      {...autoRef, canonicalSha256: hashJson(autoPresentation)},
+    const recipe = buildPresentationNativeFrameQcRecipeV001({plan, baselinePlan, autoPresentation, records, orchestrationDrawingView});
+    const refs = [...declared.filter(ref => !['plan', 'baseline-plan', 'auto-input', 'orchestration-input'].includes(ref.role)),
+      {...planRef, canonicalSha256: hashJson(plan)}, {...normalRef, canonicalSha256: hashJson(originalBaselinePlan)},
+      {...decisionRef, canonicalSha256: hashJson(decision)},
       checkedRef({role: 'base-media', ...media?.base}), checkedRef({role: 'completed-media', ...media?.completed}),
       checkedRef({role: 'tool-ffmpeg', ...tools?.ffmpeg}), checkedRef({role: 'tool-imagemagick', ...tools?.imageMagick}),
       ...recipe.sceneBindings.flatMap(group => [...group.states, ...group.alternates]).map(binding => ({
@@ -570,7 +593,8 @@ export async function inspectPresentationNativeFrameQcV001({
       .sort((left, right) => left.role < right.role ? -1 : left.role > right.role ? 1 : 0);
     requireValue(new Set(refs.map(ref => ref.role)).size === refs.length, 'input reference roles are duplicated');
     manifest = {planCanonicalSha256: hashJson(plan), baselinePlanCanonicalSha256: hashJson(baselinePlan),
-      autoPresentationCanonicalSha256: hashJson(autoPresentation),
+      ...(orchestrationRef ? {orchestrationInputCanonicalSha256: hashJson(orchestrationInput)}
+        : {autoPresentationCanonicalSha256: hashJson(autoPresentation)}),
       inputRefs: refs, inputRefsCanonicalSha256: hashJson(refs), before: [], after: []};
     for (const ref of refs) {
       await readBoundRef(ref);
@@ -646,7 +670,7 @@ export async function inspectPresentationNativeFrameQcV001({
           : element.startFrame + Math.floor(element.displayFrameCount / 2);
       const inspection = {...clone(record.inspection), visibilityComparisonBasis: PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
         representativeFrame, nativeFrameQc: {schemaVersion: PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001,
-          instructionId: element.instructionId, baselinePlan, autoPresentation, inputManifest: manifest,
+          instructionId: element.instructionId, baselinePlan, autoPresentation, orchestrationInput, inputManifest: manifest,
           sceneBindings: recipe.sceneBindings, samples: samples.filter(sample => sample.instructionId === element.instructionId)}};
       delete inspection.changedPixelsAgainstInstructionOmittedFrame;
       return inspection;
@@ -654,7 +678,7 @@ export async function inspectPresentationNativeFrameQcV001({
     const violations = inspections.flatMap(inspection => validatePresentationNativeFrameQcEvidenceV001({plan, inspection}).violations);
     return {status: violations.length === 0 ? 'passed' : 'failed', violations, inspections,
       evidence: {schemaVersion: PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, inputManifest: manifest,
-        baselinePlan, autoPresentation, sceneBindings: recipe.sceneBindings, samples, processes,
+        baselinePlan, autoPresentation, orchestrationInput, sceneBindings: recipe.sceneBindings, samples, processes,
         outputArtifacts, executableVersions: version},
       performance: performanceRecord()};
   } catch (error) {

@@ -417,7 +417,8 @@ export function validatePresentationExactReplayQcEvidenceV001({plan, evidence, e
     'saved compositor input differs');
     const expectedArguments = buildPresentationCompositeArgumentsV001({baseMediaPath: input.baseMediaPath, plan,
       overlayRecords: records, expectedFrameCount, serializePngAndFilters: input.serializePngAndFilters,
-      presentationTimeline: input.presentationTimeline, timelineAudio: input.timelineAudio});
+      presentationTimeline: input.presentationTimeline, timelineAudio: input.timelineAudio,
+      audioMediaPath: input.audioMediaPath ?? null});
     requireValue(same(evidence.compositorArguments, expectedArguments)
       && evidence.compositorArgumentsCanonicalSha256 === canonicalDigest(expectedArguments)
       && same(evidence.encodeArguments, appendOutputArguments(expectedArguments, evidence.replay.path))
@@ -438,6 +439,8 @@ export function validatePresentationExactReplayQcEvidenceV001({plan, evidence, e
       requireValue(roles.has(role), 'required input binding is missing: ' + role);
     }
     const inputByRole = new Map(manifest.refs.map(ref => [ref.role, ref]));
+    if (input.audioMediaPath != null) requireValue(inputByRole.get('audio-media')?.path === input.audioMediaPath,
+      'separate audio file is absent from verified inputs');
     requireValue(inputByRole.get('base-media').path === input.baseMediaPath
       && same(inputByRole.get('completed-media'), evidence.completed), 'compared media differs from the fixed inputs');
     for (const group of evidence.recordBindings) for (const state of group.states) {
@@ -530,7 +533,7 @@ function spawnObserved(command, args) {
 export async function inspectPresentationExactReplayQcV001({
   plan, records, baseMediaPath, completedMediaPath, expectedFrameCount, scratchDirectory,
   ffmpegPath, ffprobePath, serializePngAndFilters, presentationTimeline = null, timelineAudio = null,
-  processObserver = null, sourceRefs = [],
+  processObserver = null, sourceRefs = [], audioMediaPath = null,
 }) {
   const started = performance.now(), processes = [], generatedArtifacts = [], rawObservations = {};
   const originals = {plan, records, presentationTimeline, timelineAudio, sourceRefs};
@@ -573,6 +576,7 @@ export async function inspectPresentationExactReplayQcV001({
     const refs = [await fileBinding(baseMediaPath, 'base-media'), await fileBinding(completedMediaPath, 'completed-media'),
       await fileBinding(ffmpegPath, 'tool:ffmpeg'), await fileBinding(ffprobePath, 'tool:ffprobe'),
       await fileBinding(process.execPath, 'runtime:node'), ...await sourceBindings()];
+    if (audioMediaPath !== null) refs.push(await fileBinding(audioMediaPath, 'audio-media'));
     for (const group of recordBindings) for (const state of group.states) {
       const ref = await fileBinding(state.pngPath, state.inputRole);
       requireValue(ref.fileSha256 === state.pngSha256, 'a production PNG differs from its fixed hash'); refs.push(ref);
@@ -600,9 +604,10 @@ export async function inspectPresentationExactReplayQcV001({
     };
     const compositorInput = {baseMediaPath, planCanonicalSha256: canonicalDigest(plan),
       recordBindingsCanonicalSha256: canonicalDigest(recordBindings), expectedFrameCount,
-      serializePngAndFilters, presentationTimeline, timelineAudio};
+      serializePngAndFilters, presentationTimeline, timelineAudio,
+      ...(audioMediaPath === null ? {} : {audioMediaPath})};
     const compositorArguments = buildPresentationCompositeArgumentsV001({baseMediaPath, plan,
-      overlayRecords: records, expectedFrameCount, serializePngAndFilters, presentationTimeline, timelineAudio});
+      overlayRecords: records, expectedFrameCount, serializePngAndFilters, presentationTimeline, timelineAudio, audioMediaPath});
     const encodeArguments = appendOutputArguments(compositorArguments, replayPath);
     await save('fixed-input.json', JSON.stringify({plan, recordBindings, compositorInput}, null, 2) + '\n');
     await save('encode-arguments.json', JSON.stringify({compositorArguments, encodeArguments,

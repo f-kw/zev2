@@ -9,6 +9,8 @@ import {
 } from './presentation_auto_effects_v001.mjs';
 import {buildPresentationPulseStateElementsV001} from './presentation_pulse_v001.mjs';
 import {buildPresentationCaptionMotionStateElementsV001} from './presentation_caption_motion_v001.mjs';
+import {buildOrchestrationNativeQcAlternativeElementsV001,
+  exportOrchestrationDrawingViewEvidenceV001} from './presentation_orchestration_v001.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const same = (left, right) => canonicalJson(left) === canonicalJson(right);
@@ -26,9 +28,16 @@ async function bind(file) {
 /** Build only the fixed diagnostic alternatives. The saved selection is never
  * edited, and these elements must never be sent to the production compositor. */
 export function buildPresentationNativeQcAlternativeElementsV001({
-  baselinePlan, plan, autoPresentation, presentationTimeline,
+  baselinePlan, plan, autoPresentation, presentationTimeline, orchestrationDrawingView,
 }) {
   if (presentationTimeline !== null) reject('native references require no inserted timeline; select the encoded oracle explicitly');
+  if (orchestrationDrawingView !== undefined) {
+    if (autoPresentation !== undefined) reject('orchestration and automatic presentation are mutually exclusive');
+    const specification = buildOrchestrationNativeQcAlternativeElementsV001(orchestrationDrawingView);
+    if (!same(plan, orchestrationDrawingView.resolvedPlan)
+      || !same(baselinePlan, orchestrationDrawingView.projectedNormalPlan)) reject('orchestration drawing plans differ');
+    return {alternatives: specification.alternatives, resolution: specification.resolution.caption};
+  }
   if (!autoPresentation?.context || !Array.isArray(plan?.elements)
     || plan.elements.length === 0
     || plan.elements.some(element => element.kind !== 'speech-caption'
@@ -79,23 +88,26 @@ export function buildPresentationNativeQcAlternativeElementsV001({
  * production PNG directory, or completed media. */
 export async function preparePresentationNativeFrameQcV001({
   plan, records, autoPresentation, presentationTimeline, presetRegistry,
-  overlayAdapter, inspectPng, scratchDirectory, sourceRefs = [],
+  overlayAdapter, inspectPng, scratchDirectory, sourceRefs = [], orchestrationDrawingView,
 }) {
   const started = performance.now();
-  const originalInputsSha256 = sha256AutoPresentationV001({plan, records, autoPresentation, presetRegistry});
+  const orchestrationInput = orchestrationDrawingView === undefined ? undefined
+    : exportOrchestrationDrawingViewEvidenceV001(orchestrationDrawingView);
+  const originalInputsSha256 = sha256AutoPresentationV001({plan, records, autoPresentation, orchestrationInput, presetRegistry});
   if (!path.isAbsolute(scratchDirectory)) reject('absolute scratch directory required');
   if (typeof overlayAdapter?.buildProps !== 'function' || typeof overlayAdapter?.renderStill !== 'function'
     || typeof inspectPng !== 'function') reject('existing native adapter and PNG inspector are required');
-  const baselineRef = autoPresentation?.context?.baselineRef;
+  const baselineRef = orchestrationDrawingView?.sourceContext?.baselineRef ?? autoPresentation?.context?.baselineRef;
   if (!baselineRef || !digest(baselineRef.fileSha256) || !digest(baselineRef.canonicalSha256)) {
     reject('fixed normal plan reference required');
   }
   const baselineBinding = await bind(baselineRef.path);
   if (baselineBinding.fileSha256 !== baselineRef.fileSha256) reject('fixed normal plan bytes changed');
-  const baselinePlan = JSON.parse(await readFile(baselineRef.path, 'utf8'));
-  if (sha256AutoPresentationV001(baselinePlan) !== baselineRef.canonicalSha256) reject('fixed normal plan content changed');
+  const originalBaselinePlan = JSON.parse(await readFile(baselineRef.path, 'utf8'));
+  if (sha256AutoPresentationV001(originalBaselinePlan) !== baselineRef.canonicalSha256) reject('fixed normal plan content changed');
+  const baselinePlan = orchestrationDrawingView?.projectedNormalPlan ?? originalBaselinePlan;
   const specification = buildPresentationNativeQcAlternativeElementsV001({
-    baselinePlan, plan, autoPresentation, presentationTimeline,
+    baselinePlan, plan, autoPresentation, presentationTimeline, orchestrationDrawingView,
   });
   if (!Array.isArray(records) || records.length !== plan.elements.length
     || records.some((record, index) => !same(record.element, plan.elements[index])
@@ -108,7 +120,7 @@ export async function preparePresentationNativeFrameQcV001({
     canonicalSha256: baselineRef.canonicalSha256}];
   for (const ref of sourceRefs) {
     if (typeof ref.role !== 'string' || ref.role.length === 0 || !digest(ref.fileSha256)) reject('invalid source evidence');
-    if (['baseline-plan', 'plan', 'auto-input', 'preset-registry'].includes(ref.role)) reject('reserved evidence role');
+    if (['baseline-plan', 'plan', 'auto-input', 'orchestration-input', 'preset-registry'].includes(ref.role)) reject('reserved evidence role');
     const actual = await bind(ref.path);
     if (actual.fileSha256 !== ref.fileSha256) reject('source evidence bytes changed');
     inputBindings.push({...ref, ...actual});
@@ -150,7 +162,9 @@ export async function preparePresentationNativeFrameQcV001({
     return {role, ...await bind(file), canonicalSha256: sha256AutoPresentationV001(value)};
   };
   const planBinding = await save('plan.json', plan, 'plan');
-  const autoBinding = await save('auto-input.json', autoPresentation, 'auto-input');
+  const autoBinding = orchestrationDrawingView === undefined
+    ? await save('auto-input.json', autoPresentation, 'auto-input')
+    : await save('orchestration-input.json', orchestrationInput, 'orchestration-input');
   const registryBinding = await save('preset-registry.json', presetRegistry, 'preset-registry');
   const generatedBindings = [planBinding, autoBinding, registryBinding];
   const outputRecords = [], drawingEvidence = [];
@@ -199,7 +213,9 @@ export async function preparePresentationNativeFrameQcV001({
   for (const ref of [...inputBindings, ...nativeInputs, ...generatedBindings]) {
     if ((await bind(ref.path)).fileSha256 !== ref.fileSha256) reject('fixed input changed during native preparation');
   }
-  if (sha256AutoPresentationV001({plan, records, autoPresentation, presetRegistry}) !== originalInputsSha256) {
+  if (sha256AutoPresentationV001({plan, records, autoPresentation,
+    orchestrationInput: orchestrationDrawingView === undefined ? undefined
+      : exportOrchestrationDrawingViewEvidenceV001(orchestrationDrawingView), presetRegistry}) !== originalInputsSha256) {
     reject('production input objects changed during diagnostic preparation');
   }
   const prepared = {

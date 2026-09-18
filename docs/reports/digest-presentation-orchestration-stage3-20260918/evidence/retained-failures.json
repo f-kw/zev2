@@ -1,0 +1,28 @@
+[
+  {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-v001/failure.json",
+    "sha256": "4d6311ba514cf4fec834bb727ef0d92e8533dfd82fe47f615e3a454618cedc98",
+    "bytes": 1144,
+    "stage": null,
+    "violationCounts": {},
+    "message": "ORCHESTRATION_BACKGROUND_INVALID: AAC last packet does not end at logical presentation sample"
+  },
+  {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/candidate-v001/failure.json",
+    "sha256": "d8be720e9edd4d6c97a8e2f894170765e7f5520420c400f7c47c88abd4571cf8",
+    "bytes": 16676,
+    "stage": null,
+    "violationCounts": {},
+    "message": "AssertionError [ERR_ASSERTION]: {\"schemaVersion\":\"presentation-render-failure-v002\",\"status\":\"process_failed\",\"stage\":\"execution\",\"message\":\"layout inspector produced no result\",\"cleanupWarnings\":[{\"code\":\"RENDER_OUTPUT_LOCK_RETAINED_FOR_SAFETY\",\"path\":\"evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v001.presentation-renderer-v002.lock\",\"reason\":\"automatic path-based cleanup is disabled to avoid deleting a replaced external directory\"},{\"code\":\"RENDER_OUTPUT_WORK_RETAINED_FOR_SAFETY\",\"path\":\"evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v001.presentation-renderer-v002-work-FpTAT0\",\"reason\":\"automatic path-based cleanup is disabled to avoid deleting a replaced external directory\"}]}\n\n2 !== 0\n"
+  },
+  {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/candidate-v002/draw-result.json",
+    "sha256": "1bc2ffb80254a6b0947f5294147867bf47672a0536045c5b5552dc39982dec98",
+    "bytes": 198169,
+    "stage": "overlay-preflight",
+    "violationCounts": {
+      "OUTPUT_AUDIO_PACKET_HASH_MISMATCH": 39
+    },
+    "message": ""
+  }
+]

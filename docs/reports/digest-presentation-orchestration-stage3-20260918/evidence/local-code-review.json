@@ -1,0 +1,44 @@
+{
+  "reviewType": "independent read-only source review by a separate Codex agent",
+  "recordedAt": "2026-09-18T02:38:51.485259+00:00",
+  "scope": "fixed Stage III inputs; concrete false-pass, common-clock, separate-audio errors",
+  "actionableFindings": [],
+  "verifiedBySourceReading": [
+    "lossless background compared against every source YUV frame and logical PCM sample",
+    "separate AAC input index and copy mapping; final logical start/end, priming and packet continuity inspection",
+    "original Normal bytes and canonical identity separated from projected diagnostic Normal",
+    "whole-video replay and finite-state QC mandatory; completed movie SHA shared by both proofs before publication"
+  ],
+  "reviewedFileRefs": [
+    {
+      "path": "evals/clip_composition/presentation_orchestration_candidate_v001.mjs",
+      "sha256": "fdeca9f572d36ed01b18f950596f9464b87925d04fa3c8fc883e86a1c602cc30"
+    },
+    {
+      "path": "evals/clip_composition/presentation_orchestration_background_v001.mjs",
+      "sha256": "b2f698abea07d43adffedccbcdbeb91a4adbe91240c70adbac5f3a1a821de778"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "sha256": "3f7f12b08dd1b4b9775954ec8424eb37cf47e976dad3ae817302b360e33a9151"
+    },
+    {
+      "path": "evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+      "sha256": "b6437cafafc5eb5a107075f4a661a61861cc706d6d3b65983ceb9444a63b3458"
+    },
+    {
+      "path": "evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+      "sha256": "889d5f251091e13ec13fdedfd05d196881e38a85041582f667c6ed4954a43609"
+    },
+    {
+      "path": "evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "sha256": "6805965e6101d271686e9a89d9f3a8328a3ef032c130856a64a677a865517007"
+    }
+  ],
+  "limitations": [
+    "static reading only",
+    "no additional rendering or tests by reviewer",
+    "does not determine in-progress candidate final QC",
+    "does not determine human quality or formal trust"
+  ]
+}

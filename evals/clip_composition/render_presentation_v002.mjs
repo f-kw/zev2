@@ -11,6 +11,8 @@ import {performance} from 'node:perf_hooks';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {resolvePresentationEffectsV001, buildPresentationTimelineFiltersV001} from './presentation_effects_v001.mjs';
 import {resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
+import {assertOrchestrationDrawingViewV001, exportOrchestrationDrawingViewEvidenceV001}
+  from './presentation_orchestration_v001.mjs';
 import {preparePresentationNativeFrameQcV001, buildPresentationNativeQcAlternativeElementsV001}
   from './presentation_native_frame_qc_preparation_v001.mjs';
 import {inspectPresentationNativeFrameQcV001} from './presentation_native_frame_qc_v001.mjs';
@@ -967,6 +969,7 @@ export const buildPresentationCompositeArgumentsV001 = ({
   serializePngAndFilters = false,
   presentationTimeline = null,
   timelineAudio = null,
+  audioMediaPath = null,
 }) => {
   if (typeof serializePngAndFilters !== 'boolean') {
     throw new TypeError('PNG and filter execution control must be boolean');
@@ -985,6 +988,12 @@ export const buildPresentationCompositeArgumentsV001 = ({
       if (serializePngAndFilters) args.push('-threads', '1');
       args.push('-loop', '1', '-framerate', String(plan.canvas.fps), '-i', state.pngPath);
     }
+  }
+  if (audioMediaPath !== null) {
+    if (presentationTimeline !== null || typeof audioMediaPath !== 'string' || !path.isAbsolute(audioMediaPath)) {
+      throw new TypeError('separate audio requires an absolute file on the already resolved display clock');
+    }
+    args.push('-i', audioMediaPath);
   }
   const filters = presentationTimeline
     ? buildPresentationTimelineFiltersV001({presentationTimeline, canvas: plan.canvas, audio: timelineAudio}) : [];
@@ -1033,11 +1042,13 @@ export const buildPresentationCompositeArgumentsV001 = ({
   args.push(
     '-filter_complex', filters.join(';'),
     '-map', '[video]', ...(presentationTimeline
-      ? (timelineAudio ? ['-map', '[timelineAudio]'] : []) : ['-map', '0:a?']),
+      ? (timelineAudio ? ['-map', '[timelineAudio]'] : [])
+      : ['-map', audioMediaPath === null ? '0:a?' : `${nextInputIndex}:a:0`]),
     '-frames:v', String(expectedFrameCount),
     '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p',
     '-c:a', presentationTimeline && timelineAudio ? 'aac' : 'copy',
   );
+  if (audioMediaPath !== null) args.push('-movie_timescale', String(plan.canvas.fps));
   return args;
 };
 
@@ -1047,8 +1058,9 @@ export const composePresentationMediaV001 = async ({
   processObserver = null, observationLabel = 'video-composite',
   serializePngAndFilters = false,
   presentationTimeline = null, timelineAudio = null,
+  audioMediaPath = null,
 }) => {
-  const args = buildPresentationCompositeArgumentsV001({baseMediaPath, plan, overlayRecords, expectedFrameCount, serializePngAndFilters, presentationTimeline, timelineAudio});
+  const args = buildPresentationCompositeArgumentsV001({baseMediaPath, plan, overlayRecords, expectedFrameCount, serializePngAndFilters, presentationTimeline, timelineAudio, audioMediaPath});
   await runPresentationRendererChildProcessV001(ffmpegPath, [...args, '-movflags', '+faststart', outputPath], {
     fatalInnerStage,
     processObserver,
@@ -1735,7 +1747,7 @@ export async function inspectPresentationCompletedFrameQcV001({
   toolPaths = DEFAULT_PRESENTATION_DRAW_TOOL_PATHS_V001,
   processObserver = null, serializePngAndFilters = false,
   presentationTimeline = null, timelineAudio = null,
-  counterfactualQcMethod,
+  counterfactualQcMethod, orchestrationDrawingView, audioMediaPath = null,
 }) {
   if (!['encoded', 'native', PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002,
     PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001].includes(counterfactualQcMethod)) {
@@ -1759,7 +1771,7 @@ export async function inspectPresentationCompletedFrameQcV001({
     try {
       if (counterfactualQcMethod === PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
         if (plan.canvas?.fps !== 30) throw new TypeError('combined QC requires the existing 30fps native profile');
-        const baselineRef = autoPresentation?.context?.baselineRef;
+        const baselineRef = orchestrationDrawingView?.sourceContext?.baselineRef ?? autoPresentation?.context?.baselineRef;
         if (typeof baselineRef?.path !== 'string' || !path.isAbsolute(baselineRef.path)) {
           throw new TypeError('combined QC requires the fixed normal-plan reference');
         }
@@ -1775,14 +1787,15 @@ export async function inspectPresentationCompletedFrameQcV001({
         if (sha256Canonical(baselinePlan) !== baselineRef.canonicalSha256) {
           throw new TypeError('combined QC fixed normal-plan content changed');
         }
-        buildPresentationNativeQcAlternativeElementsV001({baselinePlan, plan,
-          autoPresentation, presentationTimeline});
+        buildPresentationNativeQcAlternativeElementsV001({
+          baselinePlan: orchestrationDrawingView?.projectedNormalPlan ?? baselinePlan, plan,
+          autoPresentation, presentationTimeline, orchestrationDrawingView});
         phase = 'exact-replay';
         replay = await inspectPresentationExactReplayQcV001({plan, records: overlayRecords,
           baseMediaPath, completedMediaPath, expectedFrameCount,
           scratchDirectory: path.join(scratchDirectory, 'exact-replay-qc'), ffmpegPath,
           ffprobePath: await nativeQcExecutable(toolPaths.ffprobePath), processObserver,
-          serializePngAndFilters, presentationTimeline, timelineAudio});
+          serializePngAndFilters, presentationTimeline, timelineAudio, audioMediaPath});
         phase = 'save-exact-replay-proof';
         await writeFile(path.join(scratchDirectory, 'exact-replay-result.json'),
           JSON.stringify(replay, null, 2) + '\n', {flag: 'wx'});
@@ -1797,7 +1810,7 @@ export async function inspectPresentationCompletedFrameQcV001({
       const finiteStarted = performance.now();
       phase = 'native-preparation';
       prepared = await preparePresentationNativeFrameQcV001({
-        plan, records: overlayRecords, autoPresentation, presentationTimeline, presetRegistry,
+        plan, records: overlayRecords, autoPresentation, presentationTimeline, presetRegistry, orchestrationDrawingView,
         overlayAdapter,
         sourceRefs: await nativeQcDrawingSourceRefs({plan, presetRegistry, overlayAdapter}),
         inspectPng: input => inspectOverlayPngWithToolV001({...input,
@@ -1956,6 +1969,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
   serializePngAndFilters = false,
   effects,
   autoPresentation = undefined,
+  orchestrationDrawingView = undefined,
+  orchestrationBackground = undefined,
   baseTimeline,
   runCounterfactualQc = true,
   counterfactualQcMethod,
@@ -1965,13 +1980,47 @@ export async function executeValidatedPresentationDrawAndQcV001({
     PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001].includes(counterfactualQcMethod)) {
     throw new TypeError('final completed-frame QC requires an explicit corrected-omission or combined-replay method');
   }
-  if (autoPresentation !== undefined && effects !== undefined) {
+  if ([autoPresentation, effects, orchestrationDrawingView].filter(value => value !== undefined).length > 1) {
     throw new TypeError('automatic presentation and trial effects cannot be combined');
   }
   let autoPresentationResolution;
   let autoPresentationInputs;
   let resolved;
-  if (autoPresentation === undefined) {
+  let audioMediaPath = null;
+  let separateAudioInspection;
+  if (orchestrationDrawingView !== undefined) {
+    assertOrchestrationDrawingViewV001(orchestrationDrawingView);
+    if (!runCounterfactualQc || counterfactualQcMethod !== PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
+      throw new TypeError('orchestration requires combined whole-video replay and native state QC');
+    }
+    if (validatedLayoutInspection !== null || baseTimeline !== undefined
+      || canonicalJson(plan) !== canonicalJson(orchestrationDrawingView.projectedNormalPlan)
+      || expectedFrameCount !== orchestrationDrawingView.projection.displayFrameCount) {
+      throw new TypeError('orchestration requires its projected normal plan, frame count and native layout inspection');
+    }
+    const source = orchestrationDrawingView.sourceRefs;
+    for (const ref of [source.planRef, source.timelineRef, source.mediaRef, source.decisionInputRef,
+      source.pulseTimingEvidence.sourceRef, source.pulseTimingEvidence.candidatesRef, source.pulseTimingEvidence.peaksRef]) {
+      if (await fileSha256V002(ref.path) !== ref.fileSha256) throw new TypeError('orchestration original source bytes changed');
+    }
+    if (orchestrationBackground?.projectionSha256 !== orchestrationDrawingView.projection.projectionSha256
+      || orchestrationBackground?.displayFrameCount !== expectedFrameCount
+      || orchestrationBackground?.video?.path !== baseMediaPath
+      || await fileSha256V002(baseMediaPath) !== orchestrationBackground?.video?.fileSha256
+      || !path.isAbsolute(orchestrationBackground?.audio?.path ?? '')
+      || await fileSha256V002(orchestrationBackground.audio.path) !== orchestrationBackground.audio.fileSha256) {
+      throw new TypeError('orchestration background or audio is not bound to the current projection');
+    }
+    audioMediaPath = orchestrationBackground.audio.path;
+    separateAudioInspection = await inspectRenderedMediaWithToolsV001(audioMediaPath, {
+      ffprobePath: toolPaths.ffprobePath, ffmpegPath: toolPaths.ffmpegPath,
+      processObserver, observationLabelPrefix: 'orchestration-audio-inspection'});
+    if (separateAudioInspection.audio?.codecName !== 'aac'
+      || separateAudioInspection.audio?.sampleRate !== orchestrationDrawingView.projection.sourceClock.playbackSampleRate) {
+      throw new TypeError('orchestration audio does not use the projected playback sample clock');
+    }
+    resolved = {plan: orchestrationDrawingView.resolvedPlan, expectedFrameCount, presentationTimeline: null};
+  } else if (autoPresentation === undefined) {
     resolved = resolvePresentationEffectsV001({plan, expectedFrameCount, baseTimeline, effects});
   } else {
     if (!isObject(autoPresentation) || Object.keys(autoPresentation).some(
@@ -1992,7 +2041,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
   if (runCounterfactualQc && counterfactualQcMethod === PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
     if (resolved.plan.canvas?.fps !== 30) throw new TypeError('combined QC requires the existing 30fps native profile');
     buildPresentationNativeQcAlternativeElementsV001({baselinePlan: plan, plan: resolved.plan,
-      autoPresentation, presentationTimeline: resolved.presentationTimeline});
+      autoPresentation, presentationTimeline: resolved.presentationTimeline, orchestrationDrawingView});
   }
   for (const element of resolved.plan.elements) {
     if (Object.hasOwn(element, 'presentationMotion')) {
@@ -2312,6 +2361,11 @@ export async function executeValidatedPresentationDrawAndQcV001({
     const baseExpectedAudio = baseMediaInspection.media.audio
       ? {present: true, ...baseMediaInspection.media.audio}
       : {present: false};
+    // Layout preflight inspects the lossless background. The completed movie
+    // copies the separately verified AAC, so those expectations remain distinct.
+    const completedExpectedAudio = separateAudioInspection?.audio
+      ? {present: true, ...separateAudioInspection.audio}
+      : baseExpectedAudio;
     const layoutQc = evaluateQc({
       plan,
       applicationResults,
@@ -2339,6 +2393,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       serializePngAndFilters,
       presentationTimeline,
       timelineAudio,
+      audioMediaPath,
     });
     const outputMedia = await inspectRenderedMediaWithToolsV001(workVideo, {
       ffprobePath: toolPaths.ffprobePath,
@@ -2362,7 +2417,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
         plan, records: overlayRecords, baseMediaPath, completedMediaPath: workVideo,
         expectedFrameCount, scratchDirectory, presetRegistry, autoPresentation,
         overlayAdapter, toolPaths, processObserver, serializePngAndFilters,
-        presentationTimeline, timelineAudio, counterfactualQcMethod,
+        presentationTimeline, timelineAudio, counterfactualQcMethod, orchestrationDrawingView, audioMediaPath,
       });
       if (completedFrameQc.status !== 'passed' || completedFrameQc.violations.length !== 0) {
         return failAfterWork([makeViolation('COMPLETED_FRAME_QC_INVALID', '$completedFrames', [],
@@ -2385,7 +2440,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       mediaInspection: outputMedia,
       expectedAudio: timelineAudio ? {present: true, codecName: 'aac',
         mode: 'timeline-insertions', sampleRate: timelineAudio.sampleRate,
-        durationMs: expectedFrameCount * 1000 / plan.canvas.fps} : baseExpectedAudio,
+        durationMs: expectedFrameCount * 1000 / plan.canvas.fps} : completedExpectedAudio,
       expectedFrameCount,
       canvas: plan.canvas,
       requireFinalVisibility: runCounterfactualQc,
@@ -2408,6 +2463,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       overlayRecords,
       applicationResults,
       baseExpectedAudio,
+      completedExpectedAudio,
       outputMedia,
       finalQc,
       workVideo,
@@ -2418,6 +2474,9 @@ export async function executeValidatedPresentationDrawAndQcV001({
       }),
       presentationTimeline,
       counterfactualQcExecuted: runCounterfactualQc,
+      ...(orchestrationDrawingView === undefined ? {} : {
+        orchestrationInput: exportOrchestrationDrawingViewEvidenceV001(orchestrationDrawingView),
+        orchestrationBackground, audioMediaPath}),
       ...(completedFrameQc === undefined ? {} : {completedFrameQc}),
     };
   } catch (error) {
