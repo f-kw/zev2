@@ -8,6 +8,7 @@
 - 開始点: `ec88af59f0287272be7789f798929c82d7d1a508`
 - 救済commit: `880c063d`、`679f2fb0`
 - 未管理表示の修正: `65276fefb73fb1920158a805ad6ba65976178e5d`。同remoteの読戻し一致。
+- 工程III実装checkpoint: `7e8e2c2930b8ef090da23c516380f0eda9f7fad1`。76 pathを保存し、remote読戻し一致。元14 treeを保存後にも再照合した。[保存・保全記録](checkpoint-and-preservation.json)
 - 指示書原文: [v002](../digest-presentation-orchestration-stage3-sources-20260918/work-order-v002.md)
 - 上位計画: [工程I〜IV](../digest-caption-expression-stage1-sources-20260918/parent-plan-v001.md)
 
