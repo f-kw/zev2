@@ -8,7 +8,9 @@ import {fileURLToPath} from 'node:url';
 import {startPresentationEditingServiceV001} from './serve_presentation_editing_v001.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
 
-const [configPath, evidenceDirectory, completedCaptionEvidenceDirectory] = process.argv.slice(2);
+const [configPath, evidenceDirectory, resumeArgument, fullFailureEvidenceDirectory] = process.argv.slice(2);
+const fullOnly = resumeArgument === '--full-from-saved';
+const completedCaptionEvidenceDirectory = fullOnly ? undefined : resumeArgument;
 assert(path.isAbsolute(configPath ?? '') && path.isAbsolute(evidenceDirectory ?? ''));
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const guard = assertIgnoredPresentationOutputDirectoryV001({repositoryRoot: repo, outputDirectory: evidenceDirectory});
@@ -70,6 +72,21 @@ try {
   await record('scope', {entry: 'registered loopback HTTP API; no browser actions', url: service.url,
     generatedAt: new Date().toISOString(), guard, purpose: '動作検証用の修正。品質・正式採用の判断ではない。'});
   state = await request('initial-read', '/state'); await record('initial', clean(state));
+  if (fullOnly) {
+    assert(path.isAbsolute(fullFailureEvidenceDirectory ?? ''));
+    const prior = JSON.parse(await readFile(path.join(fullFailureEvidenceDirectory, 'full-output-finish.json'), 'utf8'));
+    assert.equal(prior.job.status, 'failed'); assert.equal(prior.job.kind, 'full');
+    // Implementation may change during a scoped repair. Saved edit choices and
+    // their displayed clock must remain exactly the previously verified ones.
+    assert.deepEqual(state.captions, prior.captions); assert.deepEqual(state.connections, prior.connections);
+    assert.equal(state.frameCount, prior.frameCount);
+    await record('resume-from-saved-edits', {fullFailureEvidenceDirectory, previousJob: prior.job,
+      previousRevision: prior.revision, currentRevision: state.revision,
+      meaning: '字幕と接続の保存内容を保持したまま、現在の描画規則で全編を新しく出力する。'});
+    const full = await job('full-output', 'full');
+    await record('completion', {status: 'passed', full, revision: state.revision,
+      elapsedMilliseconds: performance.now() - started, observations: times});
+  } else {
   const previousTargets = completedCaptionEvidenceDirectory
     ? JSON.parse(await readFile(path.join(completedCaptionEvidenceDirectory, 'targets.json'), 'utf8')) : null;
   const caption = previousTargets?.caption ?? state.captions.find(row => row.status === 'normal');
@@ -116,6 +133,7 @@ try {
   const full = await job('full-output', 'full');
   await record('completion', {status: 'passed', full, elapsedMilliseconds: performance.now() - started,
     captionId: caption.id, connectionId: connection.id, revision: state.revision, observations: times});
+  }
 } catch (error) {
   await record('failure', {status: 'failed', message: error.message, stack: error.stack, observations: times});
   throw error;

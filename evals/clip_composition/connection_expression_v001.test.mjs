@@ -81,8 +81,9 @@ test('Normal preserves every caption and source frame and supplies a single base
     '[0:v]split=1[basev0]',
     '[0:a]asplit=1[basea0]',
     '[basev0]trim=start_frame=0:end_frame=96,setpts=PTS-STARTPTS[tv0]',
-    '[basea0]atrim=start_sample=0:end_sample=153600,asetpts=PTS-STARTPTS[ta0]',
-    '[tv0][ta0]concat=n=1:v=1:a=1[timelineVideo][timelineAudio]',
+    '[basea0]atrim=start_sample=0:end_sample=153600,asettb=expr=1/48000,asetpts=N[ta0]',
+    '[ta0]concat=n=1:v=0:a=1,asettb=expr=1/48000,asetpts=N[timelineAudio]',
+    '[tv0]concat=n=1:v=1:a=0[timelineVideo]',
   ]);
   assert.deepEqual(f.planBytes, savedBytes[0]);
   assert.deepEqual(f.timelineBytes, savedBytes[1]);

@@ -1,0 +1,86 @@
+{
+  "status": "failed-not-published",
+  "job": {
+    "id": "20f1b699-0fad-4829-b695-c7375ac5460b",
+    "kind": "full",
+    "revision": "c43adc0775d845b2d720d6f9862e786f94c845d8eef3a866ce09d7bd15bfdc68",
+    "viewSha256": "6e48ecc7e9e03f48eac6fe843ae29503c05f8d0d23f75d939e72aa231327e5e9",
+    "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+    "range": {
+      "startFrame": 0,
+      "endFrameExclusive": 4879
+    },
+    "startedAt": "2026-09-18T06:34:16.118Z",
+    "completedAt": "2026-09-18T06:35:44.510Z",
+    "error": "ORCHESTRATION_BACKGROUND_INVALID: range PCM at local sample 517440: byte 0, expected 185, observed 0",
+    "elapsedMilliseconds": 88392
+  },
+  "failure": {
+    "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-20f1b699-0fad-4829-b695-c7375ac5460b/evidence/background/failure.json",
+    "bytes": 1696,
+    "fileSha256": "68c55455cb0927e012991cc8f1c90900ce231628cf35c04fb2635f4d1b75a991",
+    "details": {
+      "schemaVersion": "presentation-orchestration-background-range-v001",
+      "status": "failed",
+      "range": {
+        "startFrame": 0,
+        "endFrameExclusive": 4879
+      },
+      "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+      "timing": {
+        "preparationMilliseconds": 182.436958,
+        "losslessGenerationMilliseconds": 40093.768458000006
+      },
+      "message": "TypeError: ORCHESTRATION_BACKGROUND_INVALID: range PCM at local sample 517440: byte 0, expected 185, observed 0",
+      "stack": "TypeError: ORCHESTRATION_BACKGROUND_INVALID: range PCM at local sample 517440: byte 0, expected 185, observed 0\n    at fail (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs:21:32)\n    at assertBytes (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs:167:3)\n    at verifyRangePixelsAndPcm (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs:572:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Module.buildOrchestrationRangeBackgroundV001 (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs:775:26)\n    at async renderEditedOrchestrationV001 (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_edited_render_v001.mjs:151:35)\n    at async file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_worker_v001.mjs:20:18"
+    }
+  },
+  "previousMedia": [
+    {
+      "id": "original",
+      "url": "/api/editing/media/original.mp4",
+      "kind": "full",
+      "revision": "8bcf4b2c509a817c956ca599803bb572c58f9df33d897c739350c1d620783dc0",
+      "range": {
+        "startFrame": 0,
+        "endFrameExclusive": 4867
+      },
+      "isCurrent": false,
+      "createdAt": "2026-09-18T06:05:33.318Z",
+      "label": "工程IIIの自動案・全編"
+    },
+    {
+      "id": "d1d18f1b-3ec6-4f35-8b20-0513732ed953",
+      "url": "/api/editing/media/d1d18f1b-3ec6-4f35-8b20-0513732ed953.mp4",
+      "kind": "preview",
+      "revision": "841f98ece13f92443ae8ec09450299a14d895f936d6f1c667cd33057b115aacc",
+      "range": {
+        "startFrame": 414,
+        "endFrameExclusive": 616
+      },
+      "isCurrent": false,
+      "createdAt": "2026-09-18T06:27:56.967Z",
+      "label": "周辺確認"
+    },
+    {
+      "id": "7b68ed40-58d0-4772-bf3c-fe36e46dd5e7",
+      "url": "/api/editing/media/7b68ed40-58d0-4772-bf3c-fe36e46dd5e7.mp4",
+      "kind": "preview",
+      "revision": "c43adc0775d845b2d720d6f9862e786f94c845d8eef3a866ce09d7bd15bfdc68",
+      "range": {
+        "startFrame": 222,
+        "endFrameExclusive": 445
+      },
+      "isCurrent": true,
+      "createdAt": "2026-09-18T06:34:14.508Z",
+      "label": "周辺確認"
+    }
+  ],
+  "mediaRecords": [
+    "7b68ed40-58d0-4772-bf3c-fe36e46dd5e7.json",
+    "d1d18f1b-3ec6-4f35-8b20-0513732ed953.json"
+  ],
+  "savedStatePreserved": true,
+  "fullOutputListed": false,
+  "repairStatus": "cause investigation; original failed run retained"
+}

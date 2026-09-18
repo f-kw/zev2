@@ -1,0 +1,180 @@
+TAP version 13
+# Subtest: Normal preserves every caption and source frame and supplies a single base span
+ok 1 - Normal preserves every caption and source frame and supplies a single base span
+  ---
+  duration_ms: 3.196208
+  ...
+# Subtest: mixed insertions shift once and soft windows follow resolved spans after preceding insertions
+ok 2 - mixed insertions shift once and soft windows follow resolved spans after preceding insertions
+  ---
+  duration_ms: 1.562958
+  ...
+# Subtest: saved overrides and Reset restore the original soft choice while preserving another edit
+ok 3 - saved overrides and Reset restore the original soft choice while preserving another edit
+  ---
+  duration_ms: 2.342583
+  ...
+# Subtest: normal override remains explicit and edit order cannot change the saved result
+ok 4 - normal override remains explicit and edit order cannot change the saved result
+  ---
+  duration_ms: 1.479667
+  ...
+# Subtest: original JSON bytes, Digest version and Digest SHA all bind saved records
+ok 5 - original JSON bytes, Digest version and Digest SHA all bind saved records
+  ---
+  duration_ms: 1.067542
+  ...
+# Subtest: hash failures and correctly resealed identity, version and free-value changes are rejected
+ok 6 - hash failures and correctly resealed identity, version and free-value changes are rejected
+  ---
+  duration_ms: 1.194917
+  ...
+# Subtest: all finite selection entrances reject unknown, duplicate, version and extra fields
+ok 7 - all finite selection entrances reject unknown, duplicate, version and extra fields
+  ---
+  duration_ms: 1.469333
+  ...
+# Subtest: soft needs six retained frames on both sides and cannot reuse one retained frame twice
+ok 8 - soft needs six retained frames on both sides and cannot reuse one retained frame twice
+  ---
+  duration_ms: 1.343625
+  ...
+# Subtest: captions ending or starting on a cut survive, while a crossing caption rejects insertion
+ok 9 - captions ending or starting on a cut survive, while a crossing caption rejects insertion
+  ---
+  duration_ms: 0.793166
+  ...
+# Subtest: soft filters use the specified twelve discrete luma/chroma states and keep audio identical to black
+ok 10 - soft filters use the specified twelve discrete luma/chroma states and keep audio identical to black
+  ---
+  duration_ms: 1.19725
+  ...
+# Subtest: renderer accepts an exactly cropped local clock and rejects incomplete or conflicting windows
+ok 11 - renderer accepts an exactly cropped local clock and rejects incomplete or conflicting windows
+  ---
+  duration_ms: 0.796875
+  ...
+# Subtest: malformed original clocks and context extras are rejected before any record can be created
+ok 12 - malformed original clocks and context extras are rejected before any record can be created
+  ---
+  duration_ms: 0.715125
+  ...
+# Subtest: audio-only QC requires packet identity for copies and the declared duration and codec after edits
+ok 13 - audio-only QC requires packet identity for copies and the declared duration and codec after edits
+  ---
+  duration_ms: 1.340916
+  ...
+# Subtest: no selections and explicit normal preserve the existing plan and compositor arguments
+ok 14 - no selections and explicit normal preserve the existing plan and compositor arguments
+  ---
+  duration_ms: 44.14275
+  ...
+# Subtest: preset changes only its selected display property; text, IDs, boundaries and position stay intact
+ok 15 - preset changes only its selected display property; text, IDs, boundaries and position stay intact
+  ---
+  duration_ms: 0.315166
+  ...
+# Subtest: invalid and duplicate selections, nonadjacent connections and crossing captions fail closed
+ok 16 - invalid and duplicate selections, nonadjacent connections and crossing captions fail closed
+  ---
+  duration_ms: 0.487083
+  ...
+# Subtest: two black insertions preserve source references and cumulatively move video, audio and captions
+ok 17 - two black insertions preserve source references and cumulatively move video, audio and captions
+  ---
+  duration_ms: 308.98725
+  ...
+# Subtest: caption-only edit reuses the SHA-bound full background and verifies exact range PCM/AAC clocks
+ok 18 - caption-only edit reuses the SHA-bound full background and verifies exact range PCM/AAC clocks
+  ---
+  duration_ms: 1151.941125
+  ...
+# Subtest: partial Soft fade, insertion-only range, insertion middle and logical tail equal full-clock decoded bytes
+ok 19 - partial Soft fade, insertion-only range, insertion middle and logical tail equal full-clock decoded bytes
+  ---
+  duration_ms: 2893.01525
+  ...
+# Subtest: same-duration Black-to-Soft refuses prior reuse and creates only the required new background range
+ok 20 - same-duration Black-to-Soft refuses prior reuse and creates only the required new background range
+  ---
+  duration_ms: 1406.198458
+  ...
+# Subtest: range checker rejects real changed PCM while source and every range video frame remain unchanged
+ok 21 - range checker rejects real changed PCM while source and every range video frame remain unchanged
+  ---
+  duration_ms: 113.72325
+  ...
+# Subtest: invalid local ranges cannot acquire output directories or be passed as full-clock plans
+ok 22 - invalid local ranges cannot acquire output directories or be passed as full-clock plans
+  ---
+  duration_ms: 787.976209
+  ...
+# Subtest: a saved range can be reused only when its full-clock coverage includes the new range
+ok 23 - a saved range can be reused only when its full-clock coverage includes the new range
+  ---
+  duration_ms: 1328.648291
+  ...
+# Subtest: saved full reuse validates pixel/PCM proof, exact coverage and actual AAC instead of trusting saved status
+ok 24 - saved full reuse validates pixel/PCM proof, exact coverage and actual AAC instead of trusting saved status
+  ---
+  duration_ms: 635.507958
+  ...
+# Subtest: saved background reuse rejects failed, missing, mismatched and hashless verification evidence
+ok 25 - saved background reuse rejects failed, missing, mismatched and hashless verification evidence
+  ---
+  duration_ms: 385.675208
+  ...
+# Subtest: saved reuse rejects substituted AAC even when its file SHA and logical sample duration are updated correctly
+ok 26 - saved reuse rejects substituted AAC even when its file SHA and logical sample duration are updated correctly
+  ---
+  duration_ms: 136.451416
+  ...
+# Subtest: 44.1kHz background verifies every YUV byte, every retained PCM sample and exact inserted zeros
+ok 27 - 44.1kHz background verifies every YUV byte, every retained PCM sample and exact inserted zeros
+  ---
+  duration_ms: 2144.11075
+  ...
+# Subtest: AAC sidecar has zero presentation origin, exact logical duration and preserved MP4 priming
+ok 28 - AAC sidecar has zero presentation origin, exact logical duration and preserved MP4 priming
+  ---
+  duration_ms: 0.40275
+  ...
+# Subtest: 48kHz physical regression retains 19200 zero samples per 12-frame insertion
+ok 29 - 48kHz physical regression retains 19200 zero samples per 12-frame insertion
+  ---
+  duration_ms: 2060.833625
+  ...
+# Subtest: independent verification rejects an actual one-frame delay of all Soft states
+ok 30 - independent verification rejects an actual one-frame delay of all Soft states
+  ---
+  duration_ms: 754.380375
+  ...
+# Subtest: independent verification rejects altered retained PCM after all video pixels still pass
+ok 31 - independent verification rejects altered retained PCM after all video pixels still pass
+  ---
+  duration_ms: 619.549958
+  ...
+# Subtest: output gate refuses reused or visible directories before writing, and stale projection before mkdir
+ok 32 - output gate refuses reused or visible directories before writing, and stale projection before mkdir
+  ---
+  duration_ms: 265.689458
+  ...
+# Subtest: normal-only path adds no frames, makes no zero samples and still emits separately timed AAC
+ok 33 - normal-only path adds no frames, makes no zero samples and still emits separately timed AAC
+  ---
+  duration_ms: 1669.706292
+  ...
+# Subtest: audio-only finalization rebinds a passed immutable lossless proof and preserves all earlier files
+ok 34 - audio-only finalization rebinds a passed immutable lossless proof and preserves all earlier files
+  ---
+  duration_ms: 1057.895042
+  ...
+1..34
+# tests 34
+# suites 0
+# pass 34
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8891.9655
