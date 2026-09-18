@@ -1,0 +1,1604 @@
+{
+  "schemaVersion": "stage4-final-hygiene-v001",
+  "createdAt": "2026-09-18T07:04:27.106Z",
+  "repositoryRoot": "/private/tmp/zev-stage4-editing-20260918/worktree",
+  "baseCommit": "4318d6bea024be793fca17d4333a3a42e6484874",
+  "observedHeadCommit": "9ae5cb7fd090258f1ec5a3a1b1556f80f7982fdd",
+  "status": "passed-scoped-readonly-audit",
+  "scope": "この一つの工程IV treeを対象に、開始commitからのGit差分、現在の未追跡一覧、既存の追跡済み文書・入力・証拠、既知source直下と今回報告directoryの可視性を照合した。生成物の全量走査・大量媒体hash・全関連tree棚卸しは実施していない。",
+  "trackedDelta": {
+    "counts": {
+      "A": 35,
+      "M": 12,
+      "D": 0
+    },
+    "total": 47,
+    "changes": [
+      {
+        "status": "M",
+        "path": ".gitignore"
+      },
+      {
+        "status": "A",
+        "path": "client/src/PresentationEditing.vue"
+      },
+      {
+        "status": "M",
+        "path": "client/src/main.ts"
+      },
+      {
+        "status": "A",
+        "path": "client/src/presentation-editing-api.ts"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/browser-operation-block-v001.md"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/browser-operation-decision-v001.md"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/current-state-invariants-audit-v001.json"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/editing-integration-v003.tap"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/full-background-failure-v001.json"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/http-integration-failure-v001.txt"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/implementation-checkpoint-v001.md"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/local-service-config-v001.json"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-cause-audit-v001.json"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-existing-regressions-v001.tap"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-new-regression-v001.tap"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-repair-verification-v001.json"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/range-pixel-tests-v001.tap"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/real-sequence-setup-failure-v001.json"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/render-unit-tests-v001.tap"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/render-verification-v001.json"
+      },
+      {
+        "status": "A",
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/work-order-v001.md"
+      },
+      {
+        "status": "M",
+        "path": "evals/clip_composition/connection_expression_v001.test.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_editing_jobs_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_editing_jobs_v001.test.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_editing_navigation_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_editing_state_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_editing_state_v001.test.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_editing_worker_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_effects_pcm_clock_v001.test.mjs"
+      },
+      {
+        "status": "M",
+        "path": "evals/clip_composition/presentation_effects_v001.mjs"
+      },
+      {
+        "status": "M",
+        "path": "evals/clip_composition/presentation_exact_replay_qc_v001.mjs"
+      },
+      {
+        "status": "M",
+        "path": "evals/clip_composition/presentation_integrity_state_qc_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_native_asset_cache_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_native_asset_cache_v001.test.mjs"
+      },
+      {
+        "status": "M",
+        "path": "evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs"
+      },
+      {
+        "status": "M",
+        "path": "evals/clip_composition/presentation_native_frame_qc_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_orchestration_background_range_v001.test.mjs"
+      },
+      {
+        "status": "M",
+        "path": "evals/clip_composition/presentation_orchestration_background_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_orchestration_edited_render_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_orchestration_range_composition_v001.test.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/presentation_orchestration_render_scope_v001.mjs"
+      },
+      {
+        "status": "M",
+        "path": "evals/clip_composition/presentation_orchestration_renderer_v001.test.mjs"
+      },
+      {
+        "status": "M",
+        "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs"
+      },
+      {
+        "status": "M",
+        "path": "evals/clip_composition/render_presentation_v002.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/run_presentation_editing_real_sequence_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/serve_presentation_editing_v001.mjs"
+      },
+      {
+        "status": "A",
+        "path": "evals/clip_composition/serve_presentation_editing_v001.test.mjs"
+      }
+    ]
+  },
+  "observedUntrackedBeforeWritingThisRecord": [
+    {
+      "status": "??",
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/README.md",
+      "kind": "file",
+      "meaning": "工程IVの軽量報告または再起動検証source。ignoreに隠れていない。"
+    },
+    {
+      "status": "??",
+      "path": "evals/clip_composition/verify_presentation_editing_restarted_v001.mjs",
+      "kind": "file",
+      "meaning": "工程IVの軽量報告または再起動検証source。ignoreに隠れていない。"
+    },
+    {
+      "status": "??",
+      "path": "node_modules",
+      "kind": "symbolic-link",
+      "target": "/Users/kawafmm/workspace/zev2/node_modules",
+      "meaning": "導入済み依存を参照する既存workspaceへのsymlink。sourceではなく、commit対象外。"
+    },
+    {
+      "status": "??",
+      "path": "packages/shared/node_modules",
+      "kind": "symbolic-link",
+      "target": "/Users/kawafmm/workspace/zev2/packages/shared/node_modules",
+      "meaning": "導入済み依存を参照する既存workspaceへのsymlink。sourceではなく、commit対象外。"
+    }
+  ],
+  "thisRecord": {
+    "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/final-hygiene-v001.json",
+    "meaning": "本記録の保存自体が未追跡の軽量報告を一件追加する。以後rootが追加・更新する完成報告や再起動証拠は、この時点の一覧には含まれない。"
+  },
+  "generatedData": {
+    "trackedDeltaEntries": [],
+    "untrackedEntries": [],
+    "ignoreChecks": [
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/result.json",
+        "source": ".gitignore",
+        "line": 20,
+        "pattern": "/evals/clip_composition/outputs/presentation/stage4-editing-*/",
+        "ignored": true
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+        "source": ".gitignore",
+        "line": 20,
+        "pattern": "/evals/clip_composition/outputs/presentation/stage4-editing-*/",
+        "ignored": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/captionOverrides.json",
+        "source": ".gitignore",
+        "line": 21,
+        "pattern": "/runtime/presentation-editing/",
+        "ignored": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+        "source": ".gitignore",
+        "line": 21,
+        "pattern": "/runtime/presentation-editing/",
+        "ignored": true
+      }
+    ],
+    "userOverridesRetention": "利用者の上書きはruntime/presentation-editingの永続編集状態であり、捨ててよいcacheではない。今回の監査は削除・移動を行わない。",
+    "limits": "生成物が専用root内で保持されていること、媒体のbyte保全と最終公開対象の選別はrootの生成物確認に分離する。"
+  },
+  "ignoreRules": {
+    "added": [
+      "/evals/clip_composition/outputs/presentation/stage4-editing-*/",
+      "/runtime/presentation-editing/"
+    ],
+    "removed": [],
+    "patch": "diff --git a/.gitignore b/.gitignore\nindex bbef65e4..d7750696 100644\n--- a/.gitignore\n+++ b/.gitignore\n@@ -16,6 +16,9 @@ packages/*/dist/\n /evals/clip_composition/outputs/**/process-observations/\n /evals/clip_composition/outputs/**/.render*.presentation-renderer-v002-work-*/\n /evals/clip_composition/outputs/presentation/stage3-orchestration-*/\n+# Stage IV generated media and verification. User edits below are durable state, not cache.\n+/evals/clip_composition/outputs/presentation/stage4-editing-*/\n+/runtime/presentation-editing/\n /evals/clip_composition/__pycache__/\n /evals/clip_composition/outputs/**/font*-retained-png-reinspection-process-v*/\n /evals/clip_composition/outputs/**/qc-integrated-fixture-v001-*/\n"
+  },
+  "necessaryFiles": {
+    "method": "変更されたtracked file、既知二source directory直下で開始時に存在しなかったsource、今回報告directoryの実file、作成予定の本記録をgit check-ignore --no-indexで照合。",
+    "directSourceCounts": {
+      "client/src": 6,
+      "evals/clip_composition": 460
+    },
+    "newDirectSources": [
+      "client/src/PresentationEditing.vue",
+      "client/src/presentation-editing-api.ts",
+      "evals/clip_composition/presentation_editing_jobs_v001.mjs",
+      "evals/clip_composition/presentation_editing_jobs_v001.test.mjs",
+      "evals/clip_composition/presentation_editing_navigation_v001.mjs",
+      "evals/clip_composition/presentation_editing_state_v001.mjs",
+      "evals/clip_composition/presentation_editing_state_v001.test.mjs",
+      "evals/clip_composition/presentation_editing_worker_v001.mjs",
+      "evals/clip_composition/presentation_effects_pcm_clock_v001.test.mjs",
+      "evals/clip_composition/presentation_native_asset_cache_v001.mjs",
+      "evals/clip_composition/presentation_native_asset_cache_v001.test.mjs",
+      "evals/clip_composition/presentation_orchestration_background_range_v001.test.mjs",
+      "evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+      "evals/clip_composition/presentation_orchestration_range_composition_v001.test.mjs",
+      "evals/clip_composition/presentation_orchestration_render_scope_v001.mjs",
+      "evals/clip_composition/run_presentation_editing_real_sequence_v001.mjs",
+      "evals/clip_composition/serve_presentation_editing_v001.mjs",
+      "evals/clip_composition/serve_presentation_editing_v001.test.mjs",
+      "evals/clip_composition/verify_presentation_editing_restarted_v001.mjs"
+    ],
+    "checkedPaths": 49,
+    "hidden": [],
+    "records": [
+      {
+        "path": "client/src/PresentationEditing.vue",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "client/src/main.ts",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "client/src/presentation-editing-api.ts",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/README.md",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/browser-operation-block-v001.md",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/browser-operation-decision-v001.md",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/current-state-invariants-audit-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/editing-integration-v003.tap",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/final-hygiene-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/full-background-failure-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/http-integration-failure-v001.txt",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/implementation-checkpoint-v001.md",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/local-service-config-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-cause-audit-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-existing-regressions-v001.tap",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-new-regression-v001.tap",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-repair-verification-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/range-pixel-tests-v001.tap",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/real-sequence-setup-failure-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/render-unit-tests-v001.tap",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/render-verification-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/work-order-v001.md",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/connection_expression_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_jobs_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_jobs_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_navigation_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_state_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_state_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_worker_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_effects_pcm_clock_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_effects_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_asset_cache_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_asset_cache_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_background_range_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_background_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_range_composition_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_render_scope_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_renderer_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/render_presentation_v002.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/run_presentation_editing_real_sequence_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/serve_presentation_editing_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/serve_presentation_editing_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/verify_presentation_editing_restarted_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      }
+    ]
+  },
+  "preservation": {
+    "priorStageTrackedInputsAndEvidence": {
+      "meaning": "工程I〜IIIのGit保存済み入力・指示・証拠と、工程IIIの整理記録を開始時のGit blobと実file byteで照合。",
+      "checkedFiles": 70,
+      "changedFiles": [],
+      "records": [
+        {
+          "path": "docs/reports/digest-caption-expression-catalogue-20260918.md",
+          "bytes": 8823,
+          "baselineGitBlob": "c3c9a8d03c8b7d863a16f685d42f658966474803",
+          "currentGitBlob": "c3c9a8d03c8b7d863a16f685d42f658966474803",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-caption-expression-stage1-20260918.md",
+          "bytes": 35864,
+          "baselineGitBlob": "65f9a5483f1cc58177a25b2bd7ff942eade87a64",
+          "currentGitBlob": "65f9a5483f1cc58177a25b2bd7ff942eade87a64",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-caption-expression-stage1-evidence-20260918.json",
+          "bytes": 95243,
+          "baselineGitBlob": "43374eeced18e34f01db072503ebdaa33b0d250d",
+          "currentGitBlob": "43374eeced18e34f01db072503ebdaa33b0d250d",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-caption-expression-stage1-sources-20260918/implementation-instructions-v001.md",
+          "bytes": 21672,
+          "baselineGitBlob": "52ae96b5991fcb37da55e5e48c13e5cda170d3c1",
+          "currentGitBlob": "52ae96b5991fcb37da55e5e48c13e5cda170d3c1",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-caption-expression-stage1-sources-20260918/parent-plan-v001.md",
+          "bytes": 28997,
+          "baselineGitBlob": "62350b9403301308ee70c4d83752bcfd0af747fc",
+          "currentGitBlob": "62350b9403301308ee70c4d83752bcfd0af747fc",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-catalogue-20260918.md",
+          "bytes": 11258,
+          "baselineGitBlob": "d96e2a00735207296bb782a64cec11b92293f2d3",
+          "currentGitBlob": "d96e2a00735207296bb782a64cec11b92293f2d3",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-20260918.md",
+          "bytes": 32066,
+          "baselineGitBlob": "a46aeca756aac069de335cd322eea4af3d04d842",
+          "currentGitBlob": "a46aeca756aac069de335cd322eea4af3d04d842",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-evidence-20260918.json",
+          "bytes": 82390,
+          "baselineGitBlob": "1effaa5805c8dd9dd7e1c740aaa6dbeefb61f06b",
+          "currentGitBlob": "1effaa5805c8dd9dd7e1c740aaa6dbeefb61f06b",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-sources-20260918/parent-plan-v001.md",
+          "bytes": 28997,
+          "baselineGitBlob": "62350b9403301308ee70c4d83752bcfd0af747fc",
+          "currentGitBlob": "62350b9403301308ee70c4d83752bcfd0af747fc",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-sources-20260918/provenance-v001.json",
+          "bytes": 758,
+          "baselineGitBlob": "f8fc68575abb34ebe821fa1159d6887696f4d744",
+          "currentGitBlob": "f8fc68575abb34ebe821fa1159d6887696f4d744",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-sources-20260918/unit-tests-v001.tap",
+          "bytes": 2865,
+          "baselineGitBlob": "20c9a4254bfb8131a3fc80c82e07e12b697f7d9b",
+          "currentGitBlob": "20c9a4254bfb8131a3fc80c82e07e12b697f7d9b",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-connection-expression-stage2-sources-20260918/work-order-v001.md",
+          "bytes": 24404,
+          "baselineGitBlob": "ebc2b1ec784d6437e47742a4e71dce925eabfd1f",
+          "currentGitBlob": "ebc2b1ec784d6437e47742a4e71dce925eabfd1f",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/README.md",
+          "bytes": 12274,
+          "baselineGitBlob": "85cd1cfdf44854cf54a65c5ab8cf7cd26b9b0e79",
+          "currentGitBlob": "85cd1cfdf44854cf54a65c5ab8cf7cd26b9b0e79",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/changed-files.md",
+          "bytes": 16676,
+          "baselineGitBlob": "21beeb32824805fb7df5ce0bc9b452a947f8e229",
+          "currentGitBlob": "21beeb32824805fb7df5ce0bc9b452a947f8e229",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/checkpoint-and-preservation.json",
+          "bytes": 6941,
+          "baselineGitBlob": "c8690f4d99fffd8c40942f15d705d02d471ff4f5",
+          "currentGitBlob": "c8690f4d99fffd8c40942f15d705d02d471ff4f5",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/core-verification.md",
+          "bytes": 18660,
+          "baselineGitBlob": "c27001273e0ed85957cc934f15b70d178860254a",
+          "currentGitBlob": "c27001273e0ed85957cc934f15b70d178860254a",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/advisor-preflight.json",
+          "bytes": 558,
+          "baselineGitBlob": "01e8852d92796abf8dd975311b4e35cca458a958",
+          "currentGitBlob": "01e8852d92796abf8dd975311b4e35cca458a958",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/background-proof.json",
+          "bytes": 9732,
+          "baselineGitBlob": "3c8a06baa29275de66baacb60ec30e1fb0d596ce",
+          "currentGitBlob": "3c8a06baa29275de66baacb60ec30e1fb0d596ce",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/candidate-completion-summary.json",
+          "bytes": 386517,
+          "baselineGitBlob": "1cb362efaf75614a57f0575737a7fe00efbcef65",
+          "currentGitBlob": "1cb362efaf75614a57f0575737a7fe00efbcef65",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/candidate-job.json",
+          "bytes": 848,
+          "baselineGitBlob": "8db67e83a0b9046b5bfef13bd6ea483ea6bc6279",
+          "currentGitBlob": "8db67e83a0b9046b5bfef13bd6ea483ea6bc6279",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/combined-tests.log",
+          "bytes": 17359,
+          "baselineGitBlob": "50a1b704fde668ed62ff84958502105c626d308c",
+          "currentGitBlob": "50a1b704fde668ed62ff84958502105c626d308c",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/composition-order-proof.json",
+          "bytes": 10047,
+          "baselineGitBlob": "211bf0e68bfd6b70da50a0386c4b02b27c6b8d1c",
+          "currentGitBlob": "211bf0e68bfd6b70da50a0386c4b02b27c6b8d1c",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/existing-worktree-preservation-after-render.json",
+          "bytes": 5683,
+          "baselineGitBlob": "822846b7975948947a3d6782db23cb3d1e1e65cd",
+          "currentGitBlob": "822846b7975948947a3d6782db23cb3d1e1e65cd",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/existing-worktree-preservation.json",
+          "bytes": 5703,
+          "baselineGitBlob": "ed68b0778dbab19c279b706f12bbee45e1e56e71",
+          "currentGitBlob": "ed68b0778dbab19c279b706f12bbee45e1e56e71",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/input-reproduction-check.json",
+          "bytes": 4066,
+          "baselineGitBlob": "97e503eb636596a0c0812ee17c3cbf3da0228734",
+          "currentGitBlob": "97e503eb636596a0c0812ee17c3cbf3da0228734",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/local-code-review.json",
+          "bytes": 2020,
+          "baselineGitBlob": "5cc2e01c95351f55f86791fc10ed30690906696b",
+          "currentGitBlob": "5cc2e01c95351f55f86791fc10ed30690906696b",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/lossless-verification.json",
+          "bytes": 2787,
+          "baselineGitBlob": "9d47dbf7c43fb0136f5dd05c8f65dad1b1c4c111",
+          "currentGitBlob": "9d47dbf7c43fb0136f5dd05c8f65dad1b1c4c111",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-probe-v001-failure.json",
+          "bytes": 4375,
+          "baselineGitBlob": "98f899e08d6a7b42184d16d83c7be0557155a0bb",
+          "currentGitBlob": "98f899e08d6a7b42184d16d83c7be0557155a0bb",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-probe-v002.json",
+          "bytes": 173895,
+          "baselineGitBlob": "f06ee6240059e42b0a9888158c879eef9de80ed7",
+          "currentGitBlob": "f06ee6240059e42b0a9888158c879eef9de80ed7",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-proof-index-v001.json",
+          "bytes": 5453,
+          "baselineGitBlob": "86382577be2fb85047ef1b94035d70d34485eac2",
+          "currentGitBlob": "86382577be2fb85047ef1b94035d70d34485eac2",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/physical-clock-v002-preflight.json",
+          "bytes": 7007,
+          "baselineGitBlob": "6cfb73f21e73c964688e25694ce054b9975a302b",
+          "currentGitBlob": "6cfb73f21e73c964688e25694ce054b9975a302b",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/previous-candidates-preserved-after-render.json",
+          "bytes": 878,
+          "baselineGitBlob": "0c78f8268d8c2f0f0de909397677880adf887347",
+          "currentGitBlob": "0c78f8268d8c2f0f0de909397677880adf887347",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/previous-candidates-preserved.json",
+          "bytes": 972,
+          "baselineGitBlob": "12c0748806e1ad461ffa6485d7ee2602bedc02cc",
+          "currentGitBlob": "12c0748806e1ad461ffa6485d7ee2602bedc02cc",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/renderer-tests-after-audio-fix.log",
+          "bytes": 2121,
+          "baselineGitBlob": "6cf4a12756c53e76badb5b4ffc032e69f7da76de",
+          "currentGitBlob": "6cf4a12756c53e76badb5b4ffc032e69f7da76de",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/retained-failures.json",
+          "bytes": 2052,
+          "baselineGitBlob": "9ef54071b7d579d4986dcffcb3603326e1fd4d74",
+          "currentGitBlob": "9ef54071b7d579d4986dcffcb3603326e1fd4d74",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/soft-overlay-preflight-canvas-v001.json",
+          "bytes": 710,
+          "baselineGitBlob": "bd282f608495017f3b6abdcc72a3cc1e4b720b8b",
+          "currentGitBlob": "bd282f608495017f3b6abdcc72a3cc1e4b720b8b",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/soft-overlay-preflight-canvas-v002.json",
+          "bytes": 1797,
+          "baselineGitBlob": "ffdabbeb89fe83bc017a9b54ac8439fda43f32a9",
+          "currentGitBlob": "ffdabbeb89fe83bc017a9b54ac8439fda43f32a9",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/soft-overlay-proof.json",
+          "bytes": 109382,
+          "baselineGitBlob": "cf96d78ab87ec54a567eb4eab58386a8f599196c",
+          "currentGitBlob": "cf96d78ab87ec54a567eb4eab58386a8f599196c",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/reproduction.md",
+          "bytes": 3829,
+          "baselineGitBlob": "ddf332dd4cc12f1acbd4ab79ac07641f6fd2525e",
+          "currentGitBlob": "ddf332dd4cc12f1acbd4ab79ac07641f6fd2525e",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/clock-projection-evidence.json",
+          "bytes": 12053,
+          "baselineGitBlob": "f2c0f83eee7674f3fc3e26996adc0becb5ca2910",
+          "currentGitBlob": "f2c0f83eee7674f3fc3e26996adc0becb5ca2910",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/completion.json",
+          "bytes": 12821,
+          "baselineGitBlob": "21b8c774634f0858a22036d8b0c8df1df13d8c58",
+          "currentGitBlob": "21b8c774634f0858a22036d8b0c8df1df13d8c58",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/fault-01-caption-shift-missing.json",
+          "bytes": 2121,
+          "baselineGitBlob": "e28628fcd09411fdb5f0b1990f4f8e186a97bdee",
+          "currentGitBlob": "e28628fcd09411fdb5f0b1990f4f8e186a97bdee",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/fault-02-caption-shift-applied-twice.json",
+          "bytes": 2127,
+          "baselineGitBlob": "b4bf499bac1f38a06a99f43ac49b0b50ef4cfb36",
+          "currentGitBlob": "b4bf499bac1f38a06a99f43ac49b0b50ef4cfb36",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/fault-03-old-measured-peak-clock.json",
+          "bytes": 1916,
+          "baselineGitBlob": "6c928ef21409429294531d2f24303463f236d964",
+          "currentGitBlob": "6c928ef21409429294531d2f24303463f236d964",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/fault-04-old-motion-start-clock.json",
+          "bytes": 2127,
+          "baselineGitBlob": "b6c0c1eb1176ce467a7c75a904a29104b65e9daa",
+          "currentGitBlob": "b6c0c1eb1176ce467a7c75a904a29104b65e9daa",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/fault-05-same-duration-black-to-soft-stale-projection.json",
+          "bytes": 913,
+          "baselineGitBlob": "8ebca7c8d5da39b33cbba41bdb0acfa275081557",
+          "currentGitBlob": "8ebca7c8d5da39b33cbba41bdb0acfa275081557",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/persisted-state-operations.json",
+          "bytes": 133069,
+          "baselineGitBlob": "f494c884111298ea94bcab18f8c2279dcb45b2a3",
+          "currentGitBlob": "f494c884111298ea94bcab18f8c2279dcb45b2a3",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check-persisted/saved-state-operations.json",
+          "bytes": 14921,
+          "baselineGitBlob": "ecbf814646fc6e8cb924d36dfd1e6955db3c026a",
+          "currentGitBlob": "ecbf814646fc6e8cb924d36dfd1e6955db3c026a",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/clock-projection-evidence.json",
+          "bytes": 12053,
+          "baselineGitBlob": "f2c0f83eee7674f3fc3e26996adc0becb5ca2910",
+          "currentGitBlob": "f2c0f83eee7674f3fc3e26996adc0becb5ca2910",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/completion.json",
+          "bytes": 11215,
+          "baselineGitBlob": "e52692cc069b9a14aa57fb000ec065288f45ffcb",
+          "currentGitBlob": "e52692cc069b9a14aa57fb000ec065288f45ffcb",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/fault-01-caption-shift-missing.json",
+          "bytes": 2121,
+          "baselineGitBlob": "e28628fcd09411fdb5f0b1990f4f8e186a97bdee",
+          "currentGitBlob": "e28628fcd09411fdb5f0b1990f4f8e186a97bdee",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/fault-02-caption-shift-applied-twice.json",
+          "bytes": 2127,
+          "baselineGitBlob": "b4bf499bac1f38a06a99f43ac49b0b50ef4cfb36",
+          "currentGitBlob": "b4bf499bac1f38a06a99f43ac49b0b50ef4cfb36",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/fault-03-old-measured-peak-clock.json",
+          "bytes": 1916,
+          "baselineGitBlob": "6c928ef21409429294531d2f24303463f236d964",
+          "currentGitBlob": "6c928ef21409429294531d2f24303463f236d964",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/fault-04-old-motion-start-clock.json",
+          "bytes": 2127,
+          "baselineGitBlob": "b6c0c1eb1176ce467a7c75a904a29104b65e9daa",
+          "currentGitBlob": "b6c0c1eb1176ce467a7c75a904a29104b65e9daa",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/fault-05-same-duration-black-to-soft-stale-projection.json",
+          "bytes": 913,
+          "baselineGitBlob": "8ebca7c8d5da39b33cbba41bdb0acfa275081557",
+          "currentGitBlob": "8ebca7c8d5da39b33cbba41bdb0acfa275081557",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-20260918/state-check/saved-state-operations.json",
+          "bytes": 14608,
+          "baselineGitBlob": "becdff74fdabcc707b5eaf4de993eef1256a05bd",
+          "currentGitBlob": "becdff74fdabcc707b5eaf4de993eef1256a05bd",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/captionAuto.json",
+          "bytes": 43149,
+          "baselineGitBlob": "f946d5f95f9077f5c1bd12670038b6c683f0a45e",
+          "currentGitBlob": "f946d5f95f9077f5c1bd12670038b6c683f0a45e",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/captionOverrides.json",
+          "bytes": 31558,
+          "baselineGitBlob": "633be3d29411825de429f15e25627f1618087477",
+          "currentGitBlob": "633be3d29411825de429f15e25627f1618087477",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/connectionAuto.json",
+          "bytes": 2159,
+          "baselineGitBlob": "936ade55641ac1a386c6b16e0a050810635e41bf",
+          "currentGitBlob": "936ade55641ac1a386c6b16e0a050810635e41bf",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/connectionOverrides.json",
+          "bytes": 830,
+          "baselineGitBlob": "68f359544e874ca06b431ec5f0f7f7abed5df9e6",
+          "currentGitBlob": "68f359544e874ca06b431ec5f0f7f7abed5df9e6",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/fresh-input.json",
+          "bytes": 382825,
+          "baselineGitBlob": "7513955ecb0b65d96a5a2cb99caecb6835a12a5d",
+          "currentGitBlob": "7513955ecb0b65d96a5a2cb99caecb6835a12a5d",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/initial-reference-validation-failure.json",
+          "bytes": 1394,
+          "baselineGitBlob": "0ab4dc310fa05aae12ccfc83a44430a93664beca",
+          "currentGitBlob": "0ab4dc310fa05aae12ccfc83a44430a93664beca",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/raw-ai-response-v001.json",
+          "bytes": 27199,
+          "baselineGitBlob": "5e3f4095eb18735cb52a6aa0dc7b80354378816d",
+          "currentGitBlob": "5e3f4095eb18735cb52a6aa0dc7b80354378816d",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/selectionRecord.json",
+          "bytes": 477587,
+          "baselineGitBlob": "72f135ac8bc9743e4e497daa7c1fbba2db460219",
+          "currentGitBlob": "72f135ac8bc9743e4e497daa7c1fbba2db460219",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/source-bindings.json",
+          "bytes": 354254,
+          "baselineGitBlob": "049deec74da5c10ddc5954e4cb26159b74b1e4a5",
+          "currentGitBlob": "049deec74da5c10ddc5954e4cb26159b74b1e4a5",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/digest-presentation-orchestration-stage3-sources-20260918/work-order-v002.md",
+          "bytes": 42445,
+          "baselineGitBlob": "51d264c1e5a282a058420b2a506b8abfd1da07e1",
+          "currentGitBlob": "51d264c1e5a282a058420b2a506b8abfd1da07e1",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/repository-hygiene-stage3-20260918/README.md",
+          "bytes": 4621,
+          "baselineGitBlob": "248bd9b2bac4281e608b1718f284cd0efce8eb6b",
+          "currentGitBlob": "248bd9b2bac4281e608b1718f284cd0efce8eb6b",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/repository-hygiene-stage3-20260918/push-readback.json",
+          "bytes": 291,
+          "baselineGitBlob": "19a5459a6ec6a04ddd8542a82fef906052bbca64",
+          "currentGitBlob": "19a5459a6ec6a04ddd8542a82fef906052bbca64",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/repository-hygiene-stage3-20260918/result.json",
+          "bytes": 17602,
+          "baselineGitBlob": "a35483a6cefa5a7dcaaf63ff2fa808684371494d",
+          "currentGitBlob": "a35483a6cefa5a7dcaaf63ff2fa808684371494d",
+          "unchanged": true
+        },
+        {
+          "path": "docs/reports/repository-hygiene-stage3-20260918/source-visibility-review.json",
+          "bytes": 65323,
+          "baselineGitBlob": "f8739f25d314f33f036e2d6cc201a3aeeeb318da",
+          "currentGitBlob": "f8739f25d314f33f036e2d6cc201a3aeeeb318da",
+          "unchanged": true
+        }
+      ]
+    },
+    "contractsAndPreexistingNonReportDocs": {
+      "meaning": "既存の契約・承認規則・目標・設計方針を含む、reports以外の既存docsとルート運用文書を照合。",
+      "checkedFiles": 59,
+      "changedFiles": [],
+      "records": [
+        {
+          "path": "AGENTS.md",
+          "bytes": 10697,
+          "baselineGitBlob": "13b1e7e031f31cff3610d484c5d9c4d56dea096b",
+          "currentGitBlob": "13b1e7e031f31cff3610d484c5d9c4d56dea096b",
+          "unchanged": true
+        },
+        {
+          "path": "CLAUDE.md",
+          "bytes": 33003,
+          "baselineGitBlob": "d72f549f4e738ebb9d5c9cbfc1960fe78be97139",
+          "currentGitBlob": "d72f549f4e738ebb9d5c9cbfc1960fe78be97139",
+          "unchanged": true
+        },
+        {
+          "path": "DECISIONS.md",
+          "bytes": 521386,
+          "baselineGitBlob": "6d69067e885fc3bd37bed1e401499e8af43e216f",
+          "currentGitBlob": "6d69067e885fc3bd37bed1e401499e8af43e216f",
+          "unchanged": true
+        },
+        {
+          "path": "docs/ADVISOR_LEDGER.md",
+          "bytes": 105165,
+          "baselineGitBlob": "5b365b8d8014b86927eb4bc6a1911e7fd09d60d8",
+          "currentGitBlob": "5b365b8d8014b86927eb4bc6a1911e7fd09d60d8",
+          "unchanged": true
+        },
+        {
+          "path": "docs/CODEX_CHATGPT_AUDIT_PROTOCOL.md",
+          "bytes": 7168,
+          "baselineGitBlob": "dd8d30e8460e28aaba9a86beed6f6ab1b04f842e",
+          "currentGitBlob": "dd8d30e8460e28aaba9a86beed6f6ab1b04f842e",
+          "unchanged": true
+        },
+        {
+          "path": "docs/COMMUNICATION.md",
+          "bytes": 8771,
+          "baselineGitBlob": "bc9b41850e55c5389c511bd37c7f32012370f5f6",
+          "currentGitBlob": "bc9b41850e55c5389c511bd37c7f32012370f5f6",
+          "unchanged": true
+        },
+        {
+          "path": "docs/CURRENT_GOAL.md",
+          "bytes": 8063,
+          "baselineGitBlob": "f6edd54a9b57a9c8677ad9f0857d1cf33770b690",
+          "currentGitBlob": "f6edd54a9b57a9c8677ad9f0857d1cf33770b690",
+          "unchanged": true
+        },
+        {
+          "path": "docs/DIGEST_V1.md",
+          "bytes": 4196,
+          "baselineGitBlob": "3f0db75158baa09f3b25d1820f9990fe074dbdd6",
+          "currentGitBlob": "3f0db75158baa09f3b25d1820f9990fe074dbdd6",
+          "unchanged": true
+        },
+        {
+          "path": "docs/GOAL_DEFINITION.md",
+          "bytes": 14962,
+          "baselineGitBlob": "5a4068c56836a186275ca26419c5b70db66134a7",
+          "currentGitBlob": "5a4068c56836a186275ca26419c5b70db66134a7",
+          "unchanged": true
+        },
+        {
+          "path": "docs/HANDOVER.md",
+          "bytes": 207452,
+          "baselineGitBlob": "4238f269af9dee4f716b0ca6fae238226b61b64f",
+          "currentGitBlob": "4238f269af9dee4f716b0ca6fae238226b61b64f",
+          "unchanged": true
+        },
+        {
+          "path": "docs/WORK_INSTRUCTION_TEMPLATE.md",
+          "bytes": 4490,
+          "baselineGitBlob": "04e49cb510b4abce9bfe1e76e811b636449b6745",
+          "currentGitBlob": "04e49cb510b4abce9bfe1e76e811b636449b6745",
+          "unchanged": true
+        },
+        {
+          "path": "docs/ZEV_候補動画理解_AB較正終了記録_v001.md",
+          "bytes": 22447,
+          "baselineGitBlob": "fafff2852f0819d262892463fa340551927602b4",
+          "currentGitBlob": "fafff2852f0819d262892463fa340551927602b4",
+          "unchanged": true
+        },
+        {
+          "path": "docs/ZEV_候補動画理解_設計資料_v0.1.md",
+          "bytes": 29079,
+          "baselineGitBlob": "48c911f0ab2dd2ad91be501f7fec7b8da16f5f4e",
+          "currentGitBlob": "48c911f0ab2dd2ad91be501f7fec7b8da16f5f4e",
+          "unchanged": true
+        },
+        {
+          "path": "docs/ZEV_候補動画理解_設計資料_v0.2.md",
+          "bytes": 18493,
+          "baselineGitBlob": "f19ef535467f6a47ef3d9045cb561617134c9c67",
+          "currentGitBlob": "f19ef535467f6a47ef3d9045cb561617134c9c67",
+          "unchanged": true
+        },
+        {
+          "path": "docs/ZEV_遠方接続_設計資料_v0.1.md",
+          "bytes": 19592,
+          "baselineGitBlob": "1915aea8411df75c0b064ebc10847118a5e64077",
+          "currentGitBlob": "1915aea8411df75c0b064ebc10847118a5e64077",
+          "unchanged": true
+        },
+        {
+          "path": "docs/ZEV_遠方接続_設計資料_v0.2.md",
+          "bytes": 15278,
+          "baselineGitBlob": "dd97ae579aa02511984a7684f86709382cb11718",
+          "currentGitBlob": "dd97ae579aa02511984a7684f86709382cb11718",
+          "unchanged": true
+        },
+        {
+          "path": "docs/agent-scenario-use-cases.md",
+          "bytes": 7942,
+          "baselineGitBlob": "77773d35a262e33046a5ad61d8af2f1aab8ae3ad",
+          "currentGitBlob": "77773d35a262e33046a5ad61d8af2f1aab8ae3ad",
+          "unchanged": true
+        },
+        {
+          "path": "docs/ai-agent-api.md",
+          "bytes": 16996,
+          "baselineGitBlob": "08addc2cd8b784b63a68b1c76c2a586f97e7c358",
+          "currentGitBlob": "08addc2cd8b784b63a68b1c76c2a586f97e7c358",
+          "unchanged": true
+        },
+        {
+          "path": "docs/architecture/ZEV_AGENT_SKILL_ARCHITECTURE_v001.md",
+          "bytes": 53752,
+          "baselineGitBlob": "da0f0dab83a7af8736cf24c962710d038e905991",
+          "currentGitBlob": "da0f0dab83a7af8736cf24c962710d038e905991",
+          "unchanged": true
+        },
+        {
+          "path": "docs/artifacts/README.md",
+          "bytes": 7161,
+          "baselineGitBlob": "c4f6bce5dd6025cc43226a110cca96cd17432a18",
+          "currentGitBlob": "c4f6bce5dd6025cc43226a110cca96cd17432a18",
+          "unchanged": true
+        },
+        {
+          "path": "docs/artifacts/samples/adjustment-patch.json",
+          "bytes": 647,
+          "baselineGitBlob": "51b5a88414dfbe84d51a37a50d17a8f272031688",
+          "currentGitBlob": "51b5a88414dfbe84d51a37a50d17a8f272031688",
+          "unchanged": true
+        },
+        {
+          "path": "docs/artifacts/samples/clip-composition.json",
+          "bytes": 1962,
+          "baselineGitBlob": "0555c7b75c6a7b5ec6c899d069307a38eec400db",
+          "currentGitBlob": "0555c7b75c6a7b5ec6c899d069307a38eec400db",
+          "unchanged": true
+        },
+        {
+          "path": "docs/artifacts/samples/edit-plan.json",
+          "bytes": 3710,
+          "baselineGitBlob": "d4226932e995eeea2f287e0aa3da8e4887e6178a",
+          "currentGitBlob": "d4226932e995eeea2f287e0aa3da8e4887e6178a",
+          "unchanged": true
+        },
+        {
+          "path": "docs/artifacts/samples/themes.json",
+          "bytes": 1006,
+          "baselineGitBlob": "789b938e37743226adb3e093efe86ec826db41c5",
+          "currentGitBlob": "789b938e37743226adb3e093efe86ec826db41c5",
+          "unchanged": true
+        },
+        {
+          "path": "docs/artifacts/samples/transcript.json",
+          "bytes": 1420,
+          "baselineGitBlob": "9f68a7db35c6db76aca69d3021c214b2fdb61f41",
+          "currentGitBlob": "9f68a7db35c6db76aca69d3021c214b2fdb61f41",
+          "unchanged": true
+        },
+        {
+          "path": "docs/chatgpt-review-content-selection-20260627-result.md",
+          "bytes": 2881,
+          "baselineGitBlob": "ca9886740d92013af2f93203f41f9cc4e1da21d7",
+          "currentGitBlob": "ca9886740d92013af2f93203f41f9cc4e1da21d7",
+          "unchanged": true
+        },
+        {
+          "path": "docs/chatgpt-review-content-selection-20260627.md",
+          "bytes": 4467,
+          "baselineGitBlob": "b2ecd637f3bd4d55abc5732b2d635095f73a5360",
+          "currentGitBlob": "b2ecd637f3bd4d55abc5732b2d635095f73a5360",
+          "unchanged": true
+        },
+        {
+          "path": "docs/claude/code-review-20260702.md",
+          "bytes": 13085,
+          "baselineGitBlob": "bb0f03a21b16d615df7ab222a6a88819cf311bdf",
+          "currentGitBlob": "bb0f03a21b16d615df7ab222a6a88819cf311bdf",
+          "unchanged": true
+        },
+        {
+          "path": "docs/claude/prompt-design-review-brief-20260704.md",
+          "bytes": 39352,
+          "baselineGitBlob": "81d3e705f976e13b19f2b6d1c969d5f636427acf",
+          "currentGitBlob": "81d3e705f976e13b19f2b6d1c969d5f636427acf",
+          "unchanged": true
+        },
+        {
+          "path": "docs/claude/system-overview-20260702.md",
+          "bytes": 9247,
+          "baselineGitBlob": "20134a4dbcafcd165307955170a7bfc82dcd7cc2",
+          "currentGitBlob": "20134a4dbcafcd165307955170a7bfc82dcd7cc2",
+          "unchanged": true
+        },
+        {
+          "path": "docs/claude/ui-redesign-WIP.md",
+          "bytes": 4723,
+          "baselineGitBlob": "ff5e2988934e377473faebab00d18b6f6c08b12f",
+          "currentGitBlob": "ff5e2988934e377473faebab00d18b6f6c08b12f",
+          "unchanged": true
+        },
+        {
+          "path": "docs/claude/ui-redesign-cyberpunk.md",
+          "bytes": 16939,
+          "baselineGitBlob": "f92c95e60a4d1869bdcf9ca40e7e80d571986af5",
+          "currentGitBlob": "f92c95e60a4d1869bdcf9ca40e7e80d571986af5",
+          "unchanged": true
+        },
+        {
+          "path": "docs/claude/ui-redesign-preview.html",
+          "bytes": 13934,
+          "baselineGitBlob": "ab327eb5630616ba8f705514db6b403ff19ffd02",
+          "currentGitBlob": "ab327eb5630616ba8f705514db6b403ff19ffd02",
+          "unchanged": true
+        },
+        {
+          "path": "docs/codex/control-plane-spec.md",
+          "bytes": 33307,
+          "baselineGitBlob": "59d0508a2c73013dbfe899deff6b45ede509aff0",
+          "currentGitBlob": "59d0508a2c73013dbfe899deff6b45ede509aff0",
+          "unchanged": true
+        },
+        {
+          "path": "docs/codex/control-ready-checkpoint-20260627.md",
+          "bytes": 1843,
+          "baselineGitBlob": "8743e275205de04ca70e05cc52f747eb2cb5d355",
+          "currentGitBlob": "8743e275205de04ca70e05cc52f747eb2cb5d355",
+          "unchanged": true
+        },
+        {
+          "path": "docs/codex/tag-status.md",
+          "bytes": 3028,
+          "baselineGitBlob": "5ce205fddeb47e437712f5eae01778b4949044bf",
+          "currentGitBlob": "5ce205fddeb47e437712f5eae01778b4949044bf",
+          "unchanged": true
+        },
+        {
+          "path": "docs/codex/ui-restructure-spec.md",
+          "bytes": 2793,
+          "baselineGitBlob": "47a1b975abd1eaf27f00a5887ff873cd389a1098",
+          "currentGitBlob": "47a1b975abd1eaf27f00a5887ff873cd389a1098",
+          "unchanged": true
+        },
+        {
+          "path": "docs/codex/web-gemini-review-loop-checkpoint-20260629.md",
+          "bytes": 2870,
+          "baselineGitBlob": "d12eaf07aa9d1ebb3706ea7eaf1de1588ecbfaa5",
+          "currentGitBlob": "d12eaf07aa9d1ebb3706ea7eaf1de1588ecbfaa5",
+          "unchanged": true
+        },
+        {
+          "path": "docs/codex/work-summary-20260705-last-3-days.md",
+          "bytes": 6507,
+          "baselineGitBlob": "d287a67e61a557a6212c0a45eef7db1ba0ae042f",
+          "currentGitBlob": "d287a67e61a557a6212c0a45eef7db1ba0ae042f",
+          "unchanged": true
+        },
+        {
+          "path": "docs/codex/zev2-decisions.md",
+          "bytes": 46449,
+          "baselineGitBlob": "01c38510b0f1d384bdc6741246370094f7da4380",
+          "currentGitBlob": "01c38510b0f1d384bdc6741246370094f7da4380",
+          "unchanged": true
+        },
+        {
+          "path": "docs/codex/zev2-progress.md",
+          "bytes": 79656,
+          "baselineGitBlob": "b1c4f434a680c341661943014cb842fe1f5cbea6",
+          "currentGitBlob": "b1c4f434a680c341661943014cb842fe1f5cbea6",
+          "unchanged": true
+        },
+        {
+          "path": "docs/control-log.md",
+          "bytes": 18566,
+          "baselineGitBlob": "853aa9444708a1f9a1f8534175c4cdfa48918f15",
+          "currentGitBlob": "853aa9444708a1f9a1f8534175c4cdfa48918f15",
+          "unchanged": true
+        },
+        {
+          "path": "docs/current-implementation.md",
+          "bytes": 14852,
+          "baselineGitBlob": "3786674485ff9853e3d5940dfecda46e771a37be",
+          "currentGitBlob": "3786674485ff9853e3d5940dfecda46e771a37be",
+          "unchanged": true
+        },
+        {
+          "path": "docs/order.md",
+          "bytes": 8481,
+          "baselineGitBlob": "b86864c6417bac81363061e2c4ba01d94a6dc1c2",
+          "currentGitBlob": "b86864c6417bac81363061e2c4ba01d94a6dc1c2",
+          "unchanged": true
+        },
+        {
+          "path": "docs/policies/PRODUCTION_QC_LAYER_POLICY_v001.md",
+          "bytes": 4725,
+          "baselineGitBlob": "79b79f9c09ab8e6a11e598be812437b1046a9993",
+          "currentGitBlob": "79b79f9c09ab8e6a11e598be812437b1046a9993",
+          "unchanged": true
+        },
+        {
+          "path": "docs/review-brief.md",
+          "bytes": 8086,
+          "baselineGitBlob": "7198d99bd6cfcb797fd50e64bf50749eb394fb01",
+          "currentGitBlob": "7198d99bd6cfcb797fd50e64bf50749eb394fb01",
+          "unchanged": true
+        },
+        {
+          "path": "docs/runner-dry-run.md",
+          "bytes": 8083,
+          "baselineGitBlob": "27512246e8212d8552a41e3a36eb53c4cd7b87d5",
+          "currentGitBlob": "27512246e8212d8552a41e3a36eb53c4cd7b87d5",
+          "unchanged": true
+        },
+        {
+          "path": "docs/task-001-最小E2E-dry-run実行.md",
+          "bytes": 3552,
+          "baselineGitBlob": "8a820d41a4d900c2f11fc7695acb51156ceacc99",
+          "currentGitBlob": "8a820d41a4d900c2f11fc7695acb51156ceacc99",
+          "unchanged": true
+        },
+        {
+          "path": "docs/task-002-AIエージェントAPI契約テストと仕様固定.md",
+          "bytes": 2384,
+          "baselineGitBlob": "eed46d74aa13d7117f687af786d0d780bd358de2",
+          "currentGitBlob": "eed46d74aa13d7117f687af786d0d780bd358de2",
+          "unchanged": true
+        },
+        {
+          "path": "docs/task-003-成果物確認UIとFileRef最小表示.md",
+          "bytes": 1330,
+          "baselineGitBlob": "624a5e50798910d98141db0bacf38bffae40e3e3",
+          "currentGitBlob": "624a5e50798910d98141db0bacf38bffae40e3e3",
+          "unchanged": true
+        },
+        {
+          "path": "docs/task-004-claim排他制御と復旧.md",
+          "bytes": 2221,
+          "baselineGitBlob": "e169e13108a42786ce5b35249a132c1cf8851e6c",
+          "currentGitBlob": "e169e13108a42786ce5b35249a132c1cf8851e6c",
+          "unchanged": true
+        },
+        {
+          "path": "docs/task-005-成果物保存とFileRef実体管理.md",
+          "bytes": 2610,
+          "baselineGitBlob": "f974b34e1372ca84fb1fb45b8008f62d47e6d00a",
+          "currentGitBlob": "f974b34e1372ca84fb1fb45b8008f62d47e6d00a",
+          "unchanged": true
+        },
+        {
+          "path": "docs/task-006-AI操作ログと監査履歴.md",
+          "bytes": 2684,
+          "baselineGitBlob": "3d55960d1c637e328997a751e3997605f199b68a",
+          "currentGitBlob": "3d55960d1c637e328997a751e3997605f199b68a",
+          "unchanged": true
+        },
+        {
+          "path": "docs/task-007-人間制御APIとUI整理.md",
+          "bytes": 3117,
+          "baselineGitBlob": "98860c61e9db6bfb58eef4ec166da3a15bc7c2df",
+          "currentGitBlob": "98860c61e9db6bfb58eef4ec166da3a15bc7c2df",
+          "unchanged": true
+        },
+        {
+          "path": "docs/task-008-Gemini-APIで演出作成.md",
+          "bytes": 2144,
+          "baselineGitBlob": "475792ee3c4cb5e8a3e6a7428838078f37c3f9b9",
+          "currentGitBlob": "475792ee3c4cb5e8a3e6a7428838078f37c3f9b9",
+          "unchanged": true
+        },
+        {
+          "path": "docs/task-009-セキュリティ境界と実処理接続方針.md",
+          "bytes": 4315,
+          "baselineGitBlob": "742982ee5b80ee3a66c8c2966cec0cc5d20a4ec5",
+          "currentGitBlob": "742982ee5b80ee3a66c8c2966cec0cc5d20a4ec5",
+          "unchanged": true
+        },
+        {
+          "path": "docs/task-010-成果物アップロードAPI.md",
+          "bytes": 3499,
+          "baselineGitBlob": "9f805f9c345b47422b7385286b304ad3f092ae88",
+          "currentGitBlob": "9f805f9c345b47422b7385286b304ad3f092ae88",
+          "unchanged": true
+        },
+        {
+          "path": "docs/web-gemini-review-editing-capability-notes.md",
+          "bytes": 5157,
+          "baselineGitBlob": "872a7d922f0669defbcad1319f3e6c17047c78d1",
+          "currentGitBlob": "872a7d922f0669defbcad1319f3e6c17047c78d1",
+          "unchanged": true
+        },
+        {
+          "path": "docs/zev2-flow-contract.md",
+          "bytes": 27375,
+          "baselineGitBlob": "99dd3cf6d976bc8ed855f5acf7e2aef6c657c796",
+          "currentGitBlob": "99dd3cf6d976bc8ed855f5acf7e2aef6c657c796",
+          "unchanged": true
+        }
+      ]
+    },
+    "automaticCandidateEntry": {
+      "meaning": "工程IIIの無修正自動候補入口は変更していない。",
+      "checkedFiles": 1,
+      "changedFiles": [],
+      "records": [
+        {
+          "path": "evals/clip_composition/presentation_orchestration_candidate_v001.mjs",
+          "bytes": 16837,
+          "baselineGitBlob": "30054e6d07d1764efbbc006f98f09c96431dcbd3",
+          "currentGitBlob": "30054e6d07d1764efbbc006f98f09c96431dcbd3",
+          "unchanged": true
+        }
+      ]
+    }
+  },
+  "checks": {
+    "priorStageTrackedInputsAndEvidenceUnchanged": true,
+    "contractsAndPreexistingNonReportDocsUnchanged": true,
+    "automaticCandidateEntryUnchanged": true,
+    "noTrackedDeletions": true,
+    "onlyTwoNarrowIgnoreRulesAdded": true,
+    "allNecessarySourceTestAndReportPathsVisible": true,
+    "generatedRootProbesIgnored": true,
+    "noGeneratedMediaOrRuntimeStateInTrackedDelta": true,
+    "noGeneratedRootEntriesInUntrackedStatus": true,
+    "headStableDuringRead": true
+  },
+  "remaining": "全編実媒体の完成記録、最終報告のcommit/pushとremote読戻しは別工程。ブラウザー実操作はERR_BLOCKED_BY_CLIENTのため未確認であり、本記録は工程IV全体の完成を認定しない。"
+}

@@ -1,0 +1,552 @@
+{
+  "schemaVersion": "stage4-final-hygiene-v002",
+  "createdAt": "2026-09-18T07:44:38.570Z",
+  "repositoryRoot": "/private/tmp/zev-stage4-editing-20260918/worktree",
+  "status": "passed-scoped-follow-up",
+  "baseCommit": "4318d6bea024be793fca17d4333a3a42e6484874",
+  "observedHeadCommit": "9ae5cb7fd090258f1ec5a3a1b1556f80f7982fdd",
+  "priorEvidence": {
+    "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/final-hygiene-v001.json",
+    "bytes": 64838,
+    "fileSha256": "7b8bfa7b74d3093e8ddd3916b0b842ced5c4ff10b998c9236828ff290edae935",
+    "meaning": "v001は当時の独立照合として保持し上書きしない。保全対象の全byte再hashはこの追補では繰り返さず、その後のGit差分だけを照合。"
+  },
+  "scope": "v001後に追加された軽量検証記録、再起動検証sourceの現内容、必要source・報告のignore可視性、Gitへの生成物流入を確認する差分追補。大量生成物・媒体・関連treeの走査またはhashは行わない。",
+  "trackedDelta": {
+    "fromBaseTotal": 47,
+    "counts": {
+      "A": 35,
+      "M": 12,
+      "D": 0
+    },
+    "unchangedFromV001": true,
+    "changesSincePreviousObservedHead": [],
+    "protectedDelta": []
+  },
+  "restartVerificationSource": {
+    "path": "evals/clip_composition/verify_presentation_editing_restarted_v001.mjs",
+    "bytes": 5159,
+    "fileSha256": "4e9f77589724745dd859f0cb0f1fc6996c3a147e32dc7ceb00b70f4c12bd3134",
+    "meaning": "媒体一覧をID順へ並べた後、各媒体object全体を比較する。順序の永続性を要求しない。前回v001はこの未追跡sourceのbyte指紋を固定していないため、変更前後のbyte差分を本記録だけで証明したとは扱わない。"
+  },
+  "addedLightweightEvidence": [
+    {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/rendered-media-verification-v001.json",
+      "bytes": 87569,
+      "fileSha256": "525385a9776597a8eed2eaeb62f58cf7dda2e112254565dab365b74b732dbb2d",
+      "schemaVersion": "presentation-editing-media-verification-v001"
+    },
+    {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-v001.json",
+      "bytes": 25695,
+      "fileSha256": "3f271f3fa006e3e9ca7644042d3d206ddeb23234fd571982335ec06a4e7d3573",
+      "schemaVersion": "presentation-editing-restart-verification-v001"
+    },
+    {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-setup-failure-v001.json",
+      "bytes": 1069,
+      "fileSha256": "9bad0e2a877b6993553cb5514fa456063f164fc479c69e0bd2a02c8115342ae8",
+      "schemaVersion": "presentation-editing-verification-setup-failure-v001"
+    }
+  ],
+  "unfinishedReadme": {
+    "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/README.md",
+    "exists": true,
+    "contentHashFixed": false,
+    "meaning": "rootが編集中。内容・byte数・更新時刻を固定しない。ignoreに隠れていないことだけ確認。"
+  },
+  "visibleFiles": {
+    "count": 53,
+    "newSinceV001": [
+      "docs/reports/digest-presentation-editing-stage4-sources-20260918/final-hygiene-v002.json",
+      "docs/reports/digest-presentation-editing-stage4-sources-20260918/rendered-media-verification-v001.json",
+      "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-setup-failure-v001.json",
+      "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-v001.json"
+    ],
+    "hidden": [],
+    "records": [
+      {
+        "path": "client/src/PresentationEditing.vue",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "client/src/main.ts",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "client/src/presentation-editing-api.ts",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/README.md",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/browser-operation-block-v001.md",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/browser-operation-decision-v001.md",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/current-state-invariants-audit-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/editing-integration-v003.tap",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/final-hygiene-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/final-hygiene-v002.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/full-background-failure-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/http-integration-failure-v001.txt",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/implementation-checkpoint-v001.md",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/local-service-config-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-cause-audit-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-existing-regressions-v001.tap",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-new-regression-v001.tap",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-repair-verification-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/range-pixel-tests-v001.tap",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/real-sequence-setup-failure-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/render-unit-tests-v001.tap",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/render-verification-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/rendered-media-verification-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-setup-failure-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-v001.json",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/work-order-v001.md",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/connection_expression_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_jobs_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_jobs_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_navigation_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_state_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_state_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_editing_worker_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_effects_pcm_clock_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_effects_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_asset_cache_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_asset_cache_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_background_range_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_background_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_range_composition_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_render_scope_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_orchestration_renderer_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/render_presentation_v002.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/run_presentation_editing_real_sequence_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/serve_presentation_editing_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/serve_presentation_editing_v001.test.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      },
+      {
+        "path": "evals/clip_composition/verify_presentation_editing_restarted_v001.mjs",
+        "source": null,
+        "line": null,
+        "pattern": null,
+        "ignored": false
+      }
+    ]
+  },
+  "untrackedBeforeWritingThisRecord": [
+    {
+      "status": "??",
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/README.md",
+      "kind": "file"
+    },
+    {
+      "status": "??",
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/final-hygiene-v001.json",
+      "kind": "file"
+    },
+    {
+      "status": "??",
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/rendered-media-verification-v001.json",
+      "kind": "file"
+    },
+    {
+      "status": "??",
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-setup-failure-v001.json",
+      "kind": "file"
+    },
+    {
+      "status": "??",
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-v001.json",
+      "kind": "file"
+    },
+    {
+      "status": "??",
+      "path": "evals/clip_composition/verify_presentation_editing_restarted_v001.mjs",
+      "kind": "file"
+    },
+    {
+      "status": "??",
+      "path": "node_modules",
+      "kind": "symbolic-link"
+    },
+    {
+      "status": "??",
+      "path": "packages/shared/node_modules",
+      "kind": "symbolic-link"
+    }
+  ],
+  "newUntrackedSinceV001": [
+    {
+      "status": "??",
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/rendered-media-verification-v001.json",
+      "kind": "file"
+    },
+    {
+      "status": "??",
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-setup-failure-v001.json",
+      "kind": "file"
+    },
+    {
+      "status": "??",
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/restart-verification-v001.json",
+      "kind": "file"
+    }
+  ],
+  "thisRecord": {
+    "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/final-hygiene-v002.json",
+    "meaning": "本記録の保存により未追跡の軽量報告がさらに一件増える。以後のroot編集・最終commitはこの時点の一覧には含まれない。"
+  },
+  "generatedData": {
+    "trackedEntries": [],
+    "untrackedEntries": [],
+    "ignoreChecks": [
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/result.json",
+        "source": ".gitignore",
+        "line": 20,
+        "pattern": "/evals/clip_composition/outputs/presentation/stage4-editing-*/",
+        "ignored": true
+      },
+      {
+        "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+        "source": ".gitignore",
+        "line": 20,
+        "pattern": "/evals/clip_composition/outputs/presentation/stage4-editing-*/",
+        "ignored": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/captionOverrides.json",
+        "source": ".gitignore",
+        "line": 21,
+        "pattern": "/runtime/presentation-editing/",
+        "ignored": true
+      },
+      {
+        "path": "runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+        "source": ".gitignore",
+        "line": 21,
+        "pattern": "/runtime/presentation-editing/",
+        "ignored": true
+      }
+    ],
+    "meaning": "生成物自体の所在と保持・実媒体検証はrootの検証記録に分離。本追補は生成物削除・移動を行わない。"
+  },
+  "checks": {
+    "previousRecordPreserved": true,
+    "trackedDeltaUnchangedSinceV001": true,
+    "noTrackedWorktreeChangesSincePreviousObservedHead": true,
+    "noProtectedInputsEvidenceOrContractDeltaSinceV001": true,
+    "allSourceAndLightweightReportPathsVisible": true,
+    "generatedRootRulesStillApply": true,
+    "noGeneratedFilesInTrackedDelta": true,
+    "noGeneratedRootEntriesInUntrackedStatus": true,
+    "restartVerifierComparesWholeMediaObjectsSortedById": true,
+    "headStableDuringRead": true
+  },
+  "remaining": "最終報告・選別commit・remote読戻しはrootが実施。実ブラウザー操作と再生はERR_BLOCKED_BY_CLIENTのため未確認を維持し、全編QC成功だけで工程IV全体の完成とはしない。"
+}
