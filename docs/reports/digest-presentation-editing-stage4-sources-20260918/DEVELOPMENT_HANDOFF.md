@@ -27,3 +27,23 @@ Codexの判断：B/Cは `efdee0aabea10b87d39203bee6f9f6e7460032d0` を開始点�
 初回周辺確認とShake等の適用検査の待ち時間は性能残件として保持する。新しい高速化工事、受理済みA/B/Cの再開発、新機能、ショートを自動追加しない。人間品質・正式採用・trustと工程IV全体の完成は今回の技術受理に含まれない。
 
 Codexの判断：監査受領時点で実UI環境の復旧根拠は追加されていない。今回は受領記録だけを選別してcommit／pushし、remote一致を確認して閉じる。
+
+## Human Review Pending の運用
+
+kawafmmの指示：人間は常時開発へ張り付かない。人間レビューをまとめて実行すること自体は問題ではなく、レビュー待ちを正しく蓄積し、後で正しい成果物へ正しく反映できることを重視する。
+
+以後の正本ルールは `docs/policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md` とする。
+現在の未消化レビューは `docs/HUMAN_REVIEW_PENDING.md` を生きた台帳とする。
+
+Codex/Agentは次を守る。
+
+- 技術成立と人間採用を分離し、人間判断が残るものを `HUMAN_REVIEW_PENDING` として登録する。
+- review_id、対象動画SHA、plan/judgment/rules等の版、確認したい問い、反映先・非反映先を残す。
+- レビュー待ちを理由に独立した技術作業を止めない。
+- 人間レビューは個別commitごとではなく、完成動画としてまとめられるものはHuman Review Batchへまとめる。
+- 人間回答を一例から全体へ勝手に一般化しない。
+- 古い成果物への判断を新しい版へ無言で移さない。
+- 技術完了報告では、新規Human Review Pendingの有無と追加review_idを必ず確認する。
+- Pending項目を無言で削除しない。
+
+現時点では、字幕演出のPanel / Pulse / Bounce / Shake、Soft Separator、自動使い分け全体、修正後Digest、現行Normal基準、後修正UIと待ち時間体感を台帳へ登録済み。Normal Cut / Black Separator、Color、Scaleの既存人間判断はPendingへ戻さない。
