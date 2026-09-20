@@ -35,7 +35,7 @@ test('audio-only QC requires packet identity for copies and the declared duratio
   }
 });
 
-test('no selections and explicit normal preserve the existing plan and compositor arguments', () => {
+test('no selections and explicit normal preserve the plan and all compositor arguments except exact frame-clock muxing', () => {
   const captured = execFileSync('git', ['show', '3a3270be35246b8335b45b61dc5be8bd1b5d8b21:evals/clip_composition/render_presentation_v002.mjs'], {encoding: 'utf8'});
   const begin = captured.indexOf('export const buildPresentationCompositeArgumentsV001 =');
   const end = captured.indexOf('\nconst composite =', begin);
@@ -45,7 +45,10 @@ test('no selections and explicit normal preserve the existing plan and composito
     assert.equal(resolved.plan, plan);
     assert.equal(resolved.presentationTimeline, null);
     const argsInput = {...resolved, baseMediaPath: '/base.mp4', overlayRecords: plan.elements.map(element => ({element, pngPath: '/caption.png'}))};
-    assert.deepEqual(argsFor(argsInput), Array.from(before(argsInput)));
+    const current = argsFor(argsInput), capturedArguments = Array.from(before(argsInput));
+    assert(!capturedArguments.includes('-movie_timescale'));
+    assert.deepEqual(current.slice(-2), ['-movie_timescale', String(plan.canvas.fps)]);
+    assert.deepEqual(current.slice(0, -2), capturedArguments);
   }
 });
 

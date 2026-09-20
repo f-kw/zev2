@@ -594,18 +594,21 @@ async function verifyRangePixelsAndPcm({projection, recipe, sourceMediaPath, los
     method: 'every requested YUV byte and float32 PCM byte against original retained media and global finite connection arithmetic'};
 }
 
-async function checkedDrawingSources(drawingView, ffprobePath) {
+async function checkedDrawingSources(drawingView, ffprobePath, originalObservationCopies) {
   assertOrchestrationDrawingViewV001(drawingView);
   const projection = drawingView.projection;
   const input = await checkedSource({projection, expectedProjectionSha256: projection.projectionSha256,
     sourceMediaPath: projection.sourceClock.mediaRef.path, ffprobePath});
   const timing = drawingView.sourceRefs.pulseTimingEvidence;
+  const observationCopyBindings = originalObservationCopies === undefined ? null
+    : await verifyOrchestrationObservationCopiesV001({pulseTimingEvidence: timing, originalObservationCopies});
   const extra = [drawingView.sourceRefs.decisionInputRef,
-    ...(timing ? [timing.sourceRef, timing.candidatesRef, timing.peaksRef] : [])];
+    ...(timing ? [timing.sourceRef, ...(observationCopyBindings
+      ? observationCopyBindings.map(binding => binding.copyRef) : [timing.candidatesRef, timing.peaksRef])] : [])];
   const unique = new Map([...Object.values(input.refs), ...extra].map(ref => [ref.path, ref]));
   for (const reference of new Map(extra.map(ref => [ref.path, ref])).values())
     require(await fileHash(reference.path) === reference.fileSha256, 'drawing source SHA differs');
-  return {...input, allRefs: [...unique.values()].map(copy)};
+  return {...input, allRefs: [...unique.values()].map(copy), observationCopyBindings};
 }
 
 /** Public range checker for saved results and bounded physical fault tests. */
@@ -630,6 +633,39 @@ async function requireSavedFile(reference, label) {
   const metadata = await lstat(reference.path);
   require(metadata.isFile() && !metadata.isSymbolicLink() && metadata.size === reference.bytes
     && await fileHash(reference.path) === reference.fileSha256, label + ' file binding differs');
+}
+
+/** Explicit relocation of the two immutable observation files only. No path search or fallback. */
+export async function verifyOrchestrationObservationCopiesV001({pulseTimingEvidence, originalObservationCopies}) {
+  require(pulseTimingEvidence && Array.isArray(originalObservationCopies) && originalObservationCopies.length === 2,
+    'exactly two explicit original observation copies are required');
+  const roles = ['candidates', 'peaks'], seen = new Set(), paths = new Set(), bindings = [];
+  const referenceShape = (ref, label) => {
+    require(ref && Object.keys(ref).every(key => ['path', 'fileSha256', 'bytes'].includes(key))
+      && isSha256(ref.fileSha256), label + ' reference fields differ');
+    requireAbsolute(ref.path, label);
+  };
+  for (const mapping of originalObservationCopies) {
+    require(mapping && Object.keys(mapping).length === 3
+      && ['role', 'originalRef', 'copyRef'].every(key => Object.hasOwn(mapping, key))
+      && roles.includes(mapping.role) && !seen.has(mapping.role), 'observation copy role is extra, missing or duplicated');
+    seen.add(mapping.role);
+    const expected = pulseTimingEvidence[mapping.role === 'candidates' ? 'candidatesRef' : 'peaksRef'];
+    referenceShape(mapping.originalRef, 'original observation'); referenceShape(mapping.copyRef, 'current observation copy');
+    require(mapping.originalRef.path === expected?.path && mapping.originalRef.fileSha256 === expected?.fileSha256,
+      'observation copy does not name the original role path and SHA');
+    require(mapping.copyRef.fileSha256 === expected.fileSha256, 'observation copy SHA differs from original');
+    for (const file of [mapping.originalRef.path, mapping.copyRef.path]) {
+      require(!paths.has(file), 'observation copy paths are duplicated'); paths.add(file);
+    }
+    await requireSavedFile(mapping.copyRef, 'current observation copy');
+    if (mapping.originalRef.bytes !== undefined) require(mapping.originalRef.bytes === mapping.copyRef.bytes,
+      'original observation byte count differs from current copy');
+    if (expected.bytes !== undefined) require(expected.bytes === mapping.copyRef.bytes,
+      'saved observation byte count differs from current copy');
+    bindings.push(copy(mapping));
+  }
+  return roles.map(role => bindings.find(binding => binding.role === role));
 }
 
 async function reusableBackground({reuseProofPath, projection, range, input, includeProof = false}) {
@@ -724,11 +760,11 @@ export async function inspectSavedOrchestrationBackgroundReuseV001({drawingView,
 
 /** The same full-clock background rules, restricted to a requested display range.
  * This entry accepts saved human overrides through a validated drawing view. */
-export async function buildOrchestrationRangeBackgroundV001({drawingView, range, outputDirectory,
-  reuseProofPath, ffmpegPath = 'ffmpeg', ffprobePath = 'ffprobe'}) {
+async function buildOrchestrationRangeBackground({drawingView, range, outputDirectory,
+  reuseProofPath, originalObservationCopies, ffmpegPath = 'ffmpeg', ffprobePath = 'ffprobe'}) {
   const started = performance.now(), timing = {};
   const outputGuard = assertIgnoredPresentationOutputDirectoryV001({repositoryRoot: rangeRepositoryRoot, outputDirectory});
-  const input = await checkedDrawingSources(drawingView, ffprobePath);
+  const input = await checkedDrawingSources(drawingView, ffprobePath, originalObservationCopies);
   const projection = drawingView.projection;
   const recipe = deriveOrchestrationBackgroundRangeV001({projection, range});
   const reuse = await reusableBackground({reuseProofPath, projection, range: recipe.range, input});
@@ -782,6 +818,7 @@ export async function buildOrchestrationRangeBackgroundV001({drawingView, range,
     timing.audioEncodingMilliseconds = performance.now() - audioStarted;
     for (const ref of [...input.allRefs, ...implementationBindings]) require(await fileHash(ref.path) === ref.fileSha256,
       'a range input or implementation changed while drawing');
+    for (const binding of input.observationCopyBindings ?? []) await requireSavedFile(binding.copyRef, 'current observation copy');
     if (reuse.used) {
       require(await fileHash(reuse.background.path) === reuse.background.fileSha256, 'reused background changed while trimming');
       require(await fileHash(reuseProofPath) === reuse.proofRef.fileSha256, 'reused background proof changed while trimming');
@@ -791,6 +828,7 @@ export async function buildOrchestrationRangeBackgroundV001({drawingView, range,
       sourceClockSha256: projection.sourceClockSha256, fullDisplayFrameCount: projection.displayFrameCount,
       displayFrameCount: recipe.displayFrameCount, range: copy(recipe.range), recipe, inputBindings: input.refs,
       sourceBindings: input.allRefs, implementationBindings, outputGuard, reuse, timing,
+      ...(input.observationCopyBindings ? {observationCopyBindings: input.observationCopyBindings} : {}),
       outputs: {background: await fileRef(backgroundPath), audio: await fileRef(audioPath)}, verification,
       encodedAudio: {...encodedAudio, encodeInputPcmPayloadSha256: verification.audio.observedPayloadSha256},
       composition: 'full-clock connection effects on the requested subtitle-free range; native captions follow; AAC sidecar copied at final mux',
@@ -806,4 +844,16 @@ export async function buildOrchestrationRangeBackgroundV001({drawingView, range,
       range: recipe.range, projectionSha256: projection.projectionSha256, timing, message: String(error), stack: error?.stack});
     throw error;
   }
+}
+
+export async function buildOrchestrationRangeBackgroundV001({drawingView, range, outputDirectory,
+  reuseProofPath, ffmpegPath = 'ffmpeg', ffprobePath = 'ffprobe'}) {
+  return buildOrchestrationRangeBackground({drawingView, range, outputDirectory, reuseProofPath, ffmpegPath, ffprobePath});
+}
+
+/** Use two caller-specified identical observation copies while preserving the original drawing view. */
+export async function buildOrchestrationRangeBackgroundWithObservationCopiesV001({drawingView, range, outputDirectory,
+  originalObservationCopies, ffmpegPath = 'ffmpeg', ffprobePath = 'ffprobe'}) {
+  require(Array.isArray(originalObservationCopies), 'explicit original observation copies are required');
+  return buildOrchestrationRangeBackground({drawingView, range, outputDirectory, originalObservationCopies, ffmpegPath, ffprobePath});
 }

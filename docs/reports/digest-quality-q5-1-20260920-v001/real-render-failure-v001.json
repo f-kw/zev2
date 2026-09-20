@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "q5-real-render-attempt-failure-v001",
+  "recordedAt": "2026-09-20T16:17:25.695Z",
+  "status": "failed-before-publication",
+  "fixedCutUnchanged": true,
+  "mediaOmission": {
+    "startFrame": 12153,
+    "endFrameExclusive": 12212
+  },
+  "expectedFrameCount": 763,
+  "failure": {
+    "status": "failed",
+    "message": "TypeError: ORCHESTRATION_BACKGROUND_INVALID: AAC effective presentation clock differs",
+    "stack": "TypeError: ORCHESTRATION_BACKGROUND_INVALID: AAC effective presentation clock differs\n    at fail (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs:21:32)\n    at require (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs:22:58)\n    at inspectEncodedAudio (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs:260:3)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async drawQ5NormalShortV002 (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.mjs:351:24)\n    at async renderQ5ComparisonV002 (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.mjs:426:20)\n    at async file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.mjs:463:3"
+  },
+  "jobRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-job-v003.json",
+    "bytes": 3167,
+    "fileSha256": "40cd9a83173e709500ba1bcfc0cd4769867022ce941637c0a1a0cc17018f5dd3"
+  },
+  "renderStartRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v002/start.json",
+    "bytes": 80386,
+    "fileSha256": "35e4c9c9182723a6cd04a29ee7fb44c36fb387eb0c3e8f53f814ebd054761966"
+  },
+  "drawResultRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v002/normal/draw-result.json",
+    "bytes": 2752952,
+    "fileSha256": "9b01a111b7b8e3ba2afb308ea22918a5a78d1aae3340cdc6577e83eab49afe09"
+  },
+  "failureRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v002/failure.json",
+    "bytes": 1159,
+    "fileSha256": "b8f2e77386ed845870a3ff987986ac909a0bcc8ef1238bff65525c9d4430a11d"
+  },
+  "baseBuildRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v002/normal/base-build.json",
+    "bytes": 7412,
+    "fileSha256": "215cef7d54ffea5c664eb66d375e11b707b310981991ce2109f0213cb2609a6d"
+  },
+  "qc": {
+    "common": "passed",
+    "instructions": 5,
+    "completedFrameStatus": "passed",
+    "violations": [],
+    "counterfactualExecuted": true,
+    "performance": {
+      "wallClockMs": 132688.51375,
+      "exactReplay": {
+        "wallClockMs": 129395.27475000001,
+        "encodeWallClockMs": 129065.73441699997,
+        "exactComparisonWallClockMs": 85.15979199996218,
+        "childProcessCount": 5,
+        "childProcessesByPurpose": {
+          "version-ffmpeg": 1,
+          "version-ffprobe": 1,
+          "encode": 1,
+          "video-probe-completed": 1,
+          "video-probe-replay": 1
+        },
+        "encodedFrames": 763,
+        "decodedFrames": null,
+        "comparedFrames": null,
+        "comparedAudioPackets": null,
+        "observationScope": "One actual full-video encode. Decoded frame counts are observed framehash rows only; byte equality does not fabricate decoded or compared frame counts."
+      },
+      "finiteState": {
+        "wallClockMs": 2802.315750000009,
+        "phasesMilliseconds": {
+          "inputBinding": 167.85941700002877,
+          "frameExtraction": 1020.1617079999996,
+          "nativeLayerPreparation": 0.0774169999640435,
+          "completedRgbCrop": 221.8387090000324,
+          "referenceComposition": 997.1336669999873,
+          "rgbDistance": 128.3648749999702,
+          "evidenceWrite": 1.3871259999577887,
+          "verification": 199.2538329999661,
+          "evidenceConstruction": 17.264541000011377
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 14,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "completed-rgb-crop": 5,
+          "native-reference-composite": 5
+        },
+        "sourceFrameOutputs": 5,
+        "completedFrameOutputs": 5,
+        "completedRgbOutputs": 5,
+        "logicalReferenceCount": 55,
+        "referenceRgbOutputs": 50,
+        "reusedReferenceRgbCount": 5,
+        "preparedLayerOutputs": 0,
+        "exactDistanceCalculations": 50,
+        "reusedExactDistances": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "preparationWallClockMs": 296.42733299999963,
+      "finiteStateWallClockMs": 3259.7062090000254,
+      "finiteStateExecuted": true
+    }
+  },
+  "publicationCompleted": false,
+  "humanQuality": "not-evaluated",
+  "adopted": false,
+  "followup": "Inspect exact AAC presentation clock discrepancy; do not relax verification or alter the fixed content proposal."
+}

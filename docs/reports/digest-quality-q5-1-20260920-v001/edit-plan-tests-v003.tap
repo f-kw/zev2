@@ -1,0 +1,90 @@
+TAP version 13
+# Subtest: one inward media omission hides only selected caption and preserves all other payloads and a 13-piece clock
+ok 1 - one inward media omission hides only selected caption and preserves all other payloads and a 13-piece clock
+  ---
+  duration_ms: 9.369167
+  ...
+# Subtest: hidden subtitle provenance records both retained media edges instead of claiming full media deletion
+ok 2 - hidden subtitle provenance records both retained media edges instead of claiming full media deletion
+  ---
+  duration_ms: 4.136667
+  ...
+# Subtest: playback uses 48kHz stereo and 1600 samples per frame independently from exact 16kHz observations
+ok 3 - playback uses 48kHz stereo and 1600 samples per frame independently from exact 16kHz observations
+  ---
+  duration_ms: 3.599208
+  ...
+# Subtest: point mapping shifts by the actual media omission once and preserves the two retained caption-media edges
+ok 4 - point mapping shifts by the actual media omission once and preserves the two retained caption-media edges
+  ---
+  duration_ms: 42.818167
+  ...
+# Subtest: the user-selected six-frame minimum permits inward adjustment and rejects either margin being reduced
+ok 5 - the user-selected six-frame minimum permits inward adjustment and rejects either margin being reduced
+  ---
+  duration_ms: 3.127333
+  ...
+# Subtest: invalid and multiple media omissions are rejected instead of being rounded or silently replaced
+ok 6 - invalid and multiple media omissions are rejected instead of being rounded or silently replaced
+  ---
+  duration_ms: 0.785708
+  ...
+# Subtest: no other caption may be hidden and neither partial nor complete non-target overlap is permitted
+ok 7 - no other caption may be hidden and neither partial nor complete non-target overlap is permitted
+  ---
+  duration_ms: 4.26875
+  ...
+# Subtest: non-target captions touching either media boundary are retained at their complete duration
+ok 8 - non-target captions touching either media boundary are retained at their complete duration
+  ---
+  duration_ms: 3.258917
+  ...
+# Subtest: cancellation releases media omission and caption hiding together and restores all 325 synthetic captions and clocks
+ok 9 - cancellation releases media omission and caption hiding together and restores all 325 synthetic captions and clocks
+  ---
+  duration_ms: 166.717916
+  ...
+# Subtest: saved new content reconstructs exactly and rejects changes to protected captions, media, hiding, retention or evidence
+ok 10 - saved new content reconstructs exactly and rejects changes to protected captions, media, hiding, retention or evidence
+  ---
+  duration_ms: 74.293
+  ...
+# Subtest: old edit schemas and old exports are rejected rather than silently converted
+ok 11 - old edit schemas and old exports are rejected rather than silently converted
+  ---
+  duration_ms: 3.352708
+  ...
+# Subtest: derived objects cannot masquerade as original input and both edit fields must be explicit
+ok 12 - derived objects cannot masquerade as original input and both edit fields must be explicit
+  ---
+  duration_ms: 3.145292
+  ...
+# Subtest: new content identity binds the actual cut, policy and boundary evidence deterministically
+ok 13 - new content identity binds the actual cut, policy and boundary evidence deterministically
+  ---
+  duration_ms: 11.996708
+  ...
+# Subtest: short comparison keeps both target-media fragments, hides the caption and maps all retained captions once without phase restart
+ok 14 - short comparison keeps both target-media fragments, hides the caption and maps all retained captions once without phase restart
+  ---
+  duration_ms: 11.511667
+  ...
+# Subtest: comparison endpoints cannot cut any original caption, leave the original scene or describe a cancelled edit
+ok 15 - comparison endpoints cannot cut any original caption, leave the original scene or describe a cancelled edit
+  ---
+  duration_ms: 35.130625
+  ...
+# Subtest: original byte binding still rejects altered source captions or a fixture claiming the real C-all identity
+ok 16 - original byte binding still rejects altered source captions or a fixture claiming the real C-all identity
+  ---
+  duration_ms: 1.171583
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 464.539791

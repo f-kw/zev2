@@ -1,0 +1,1281 @@
+{
+  "schemaVersion": "q5-retention-comparison-verification-v002",
+  "preparationScriptRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/finish-evidence-v002.mjs",
+    "bytes": 6971,
+    "fileSha256": "23e7bd0f8147ab0ed88f506c2396f9e4cb274d32846c7b393476d86a6bff743d"
+  },
+  "recordedAt": "2026-09-20T16:33:52.553Z",
+  "status": "technically-verified-human-review-pending",
+  "completionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/completion.json",
+    "bytes": 2108579,
+    "fileSha256": "95508900b9ba5d36b2cea6b021bb44f376d622338ca632e2942d4b704af4ef02"
+  },
+  "startRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/start.json",
+    "bytes": 80386,
+    "fileSha256": "e6fe0bdb5e5117a17a7f6c4a1731e2c2a6a1209aa977ee5aee7779ea688f7121"
+  },
+  "preflightRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/actual-preflight-v003.json",
+    "bytes": 5183,
+    "fileSha256": "8bad52c919f773b4de2f3bf02dd6a455a00eb3de56f23ec3f2670739054021d8"
+  },
+  "firstFailedAttemptRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/real-render-failure-v001.json",
+    "bytes": 5772,
+    "fileSha256": "794e8fb8782d7d8e7cbc1d5ced3dc09da878c4fcfeeb3f3ba62e180afd1e934d"
+  },
+  "clockCorrectionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/render-tool-aac-clock-cause-v001.json",
+    "bytes": 19683,
+    "fileSha256": "5dd4539d423c98218d269c7ceded55858dc7f754f982f026f50429db67fa25b2"
+  },
+  "firstFixedProposalCount": 1,
+  "realManufacturingAttempts": 2,
+  "contentVersion": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+  "mediaOmission": {
+    "startFrame": 12153,
+    "endFrameExclusive": 12212
+  },
+  "hiddenCaptionId": "digest-v1-phase2-20260913-v001-bridge-caption-000121",
+  "targetMediaRetention": {
+    "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000121",
+    "status": "partially-retained",
+    "originalRange": {
+      "startFrame": 12109,
+      "endFrameExclusive": 12228
+    },
+    "originalSourceRange": {
+      "startFrame": 127871,
+      "endFrameExclusive": 127990
+    },
+    "mediaOmission": {
+      "startFrame": 12153,
+      "endFrameExclusive": 12212
+    },
+    "omittedOriginalSourceRange": {
+      "startFrame": 127915,
+      "endFrameExclusive": 127974
+    },
+    "retainedBeforeRange": {
+      "startFrame": 12109,
+      "endFrameExclusive": 12153
+    },
+    "retainedAfterRange": {
+      "startFrame": 12212,
+      "endFrameExclusive": 12228
+    },
+    "retainedFramesBefore": 44,
+    "retainedFramesAfter": 16,
+    "outputClock": "q5-comparison-local-frame-v002",
+    "retainedPieces": [
+      {
+        "side": "before",
+        "originalRange": {
+          "startFrame": 12109,
+          "endFrameExclusive": 12153
+        },
+        "originalSourceRange": {
+          "startFrame": 127871,
+          "endFrameExclusive": 127915
+        },
+        "outputRange": {
+          "startFrame": 426,
+          "endFrameExclusive": 470
+        },
+        "retainedPieceId": "q5-piece-0004",
+        "playback": {
+          "sampleRate": 48000,
+          "channels": 2,
+          "originalRange": {
+            "startSample": 19374400,
+            "endSampleExclusive": 19444800
+          },
+          "outputRange": {
+            "startSample": 681600,
+            "endSampleExclusive": 752000
+          }
+        },
+        "editedGlobalRange": {
+          "startFrame": 12109,
+          "endFrameExclusive": 12153
+        }
+      },
+      {
+        "side": "after",
+        "originalRange": {
+          "startFrame": 12212,
+          "endFrameExclusive": 12228
+        },
+        "originalSourceRange": {
+          "startFrame": 127974,
+          "endFrameExclusive": 127990
+        },
+        "outputRange": {
+          "startFrame": 470,
+          "endFrameExclusive": 486
+        },
+        "retainedPieceId": "q5-piece-0005",
+        "playback": {
+          "sampleRate": 48000,
+          "channels": 2,
+          "originalRange": {
+            "startSample": 19539200,
+            "endSampleExclusive": 19564800
+          },
+          "outputRange": {
+            "startSample": 752000,
+            "endSampleExclusive": 777600
+          }
+        },
+        "editedGlobalRange": {
+          "startFrame": 12153,
+          "endFrameExclusive": 12169
+        }
+      }
+    ],
+    "meaning": "caption is hidden; its two edge media ranges remain; naturalness is not established"
+  },
+  "policyRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/instruction-received-v002.md",
+    "bytes": 5075,
+    "fileSha256": "94413e1ebcd1ad4f24625d260b3b0d3daf57a286e29a4def94ea6056b1b6e72a"
+  },
+  "boundaryEvidenceRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/retention-boundary-v002.json",
+    "bytes": 6055,
+    "fileSha256": "c5d833c4fd0b346a4c9684546baa3804e6a574ec173dcd872c1dc1eea9a31b80"
+  },
+  "before": {
+    "mediaRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "bytes": 616632321,
+      "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+    },
+    "range": {
+      "startFrame": 11683,
+      "endFrameExclusive": 12505
+    }
+  },
+  "after": {
+    "mediaRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+      "bytes": 8591313,
+      "fileSha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6"
+    },
+    "range": {
+      "startFrame": 0,
+      "endFrameExclusive": 763
+    },
+    "fullEditedRange": {
+      "startFrame": 11683,
+      "endFrameExclusive": 12446
+    },
+    "orderedPieces": [
+      {
+        "pieceId": "q5-comparison-piece-1",
+        "ordinal": 1,
+        "contentVersion": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+        "parentSegmentId": "segment-0004",
+        "originalRange": {
+          "startFrame": 11683,
+          "endFrameExclusive": 12153
+        },
+        "originalSourceRange": {
+          "startFrame": 127445,
+          "endFrameExclusive": 127915
+        },
+        "outputRange": {
+          "startFrame": 0,
+          "endFrameExclusive": 470
+        },
+        "editedGlobalRange": {
+          "startFrame": 11683,
+          "endFrameExclusive": 12153
+        },
+        "playback": {
+          "sampleRate": 48000,
+          "channels": 2,
+          "originalRange": {
+            "startSample": 18692800,
+            "endSampleExclusive": 19444800
+          },
+          "outputRange": {
+            "startSample": 0,
+            "endSampleExclusive": 752000
+          }
+        },
+        "observation": {
+          "sampleRate": 16000,
+          "originalRange": {
+            "startSample": {
+              "numerator": "18692800",
+              "denominator": "3"
+            },
+            "endSampleExclusive": {
+              "numerator": "6481600",
+              "denominator": "1"
+            }
+          },
+          "outputRange": {
+            "startSample": {
+              "numerator": "0",
+              "denominator": "1"
+            },
+            "endSampleExclusive": {
+              "numerator": "752000",
+              "denominator": "3"
+            }
+          }
+        }
+      },
+      {
+        "pieceId": "q5-comparison-piece-2",
+        "ordinal": 2,
+        "contentVersion": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+        "parentSegmentId": "segment-0004",
+        "originalRange": {
+          "startFrame": 12212,
+          "endFrameExclusive": 12505
+        },
+        "originalSourceRange": {
+          "startFrame": 127974,
+          "endFrameExclusive": 128267
+        },
+        "outputRange": {
+          "startFrame": 470,
+          "endFrameExclusive": 763
+        },
+        "editedGlobalRange": {
+          "startFrame": 12153,
+          "endFrameExclusive": 12446
+        },
+        "playback": {
+          "sampleRate": 48000,
+          "channels": 2,
+          "originalRange": {
+            "startSample": 19539200,
+            "endSampleExclusive": 20008000
+          },
+          "outputRange": {
+            "startSample": 752000,
+            "endSampleExclusive": 1220800
+          }
+        },
+        "observation": {
+          "sampleRate": 16000,
+          "originalRange": {
+            "startSample": {
+              "numerator": "19539200",
+              "denominator": "3"
+            },
+            "endSampleExclusive": {
+              "numerator": "20008000",
+              "denominator": "3"
+            }
+          },
+          "outputRange": {
+            "startSample": {
+              "numerator": "752000",
+              "denominator": "3"
+            },
+            "endSampleExclusive": {
+              "numerator": "1220800",
+              "denominator": "3"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "logicalFrameCounts": {
+    "original": 44408,
+    "editedPlanOnly": 44349,
+    "beforeComparison": 822,
+    "afterComparison": 763,
+    "omitted": 59
+  },
+  "captionCounts": {
+    "original": 325,
+    "editedPlanOnly": 324,
+    "shortAfter": 5,
+    "hidden": 1
+  },
+  "lossless": {
+    "scope": "every retained decoded YUV420p byte and stereo float32 PCM byte, in the specified piece order; before H.264/AAC encoding",
+    "video": {
+      "status": "passed",
+      "comparedBytes": 2373235200,
+      "expectedPayloadSha256": "e3c5a39d6ef7b9a52249009f9dacca5fcd50cffcdf89b5f23f20e706c74e7899",
+      "observedPayloadSha256": "e3c5a39d6ef7b9a52249009f9dacca5fcd50cffcdf89b5f23f20e706c74e7899",
+      "frameCount": 763
+    },
+    "audio": {
+      "status": "passed",
+      "comparedBytes": 9766400,
+      "expectedPayloadSha256": "b05f98daa233e0487485027c9f629ac643a6c8dd313c21b6d87b290847d7376b",
+      "observedPayloadSha256": "b05f98daa233e0487485027c9f629ac643a6c8dd313c21b6d87b290847d7376b",
+      "sampleRate": 48000,
+      "channels": 2,
+      "sampleCount": 1220800
+    },
+    "pcmRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/join/verified-pcm.f32le",
+      "bytes": 9766400,
+      "fileSha256": "b05f98daa233e0487485027c9f629ac643a6c8dd313c21b6d87b290847d7376b"
+    },
+    "orderedPieces": [
+      {
+        "frameCount": 470,
+        "originalRange": {
+          "startFrame": 11683,
+          "endFrameExclusive": 12153
+        },
+        "outputRange": {
+          "startFrame": 0,
+          "endFrameExclusive": 470
+        },
+        "proofRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/piece-1/proof.json",
+          "fileSha256": "1ec29e720eff65540206bef175068e595e938bf1240f0719fc72fc941e0f281c",
+          "bytes": 13075
+        },
+        "status": "passed"
+      },
+      {
+        "frameCount": 293,
+        "originalRange": {
+          "startFrame": 12212,
+          "endFrameExclusive": 12505
+        },
+        "outputRange": {
+          "startFrame": 470,
+          "endFrameExclusive": 763
+        },
+        "proofRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/piece-2/proof.json",
+          "fileSha256": "5815459c17b67c5fd2916ef15339eea1a7e3b38152cfb2857caad56056f4bc8c",
+          "bytes": 13081
+        },
+        "status": "passed"
+      }
+    ]
+  },
+  "newAac": {
+    "base": {
+      "status": "passed",
+      "sampleRate": 48000,
+      "channels": 2,
+      "streamTimeBase": "1/48000",
+      "presentationStartSample": 0,
+      "presentationEndSampleExclusive": 1220800,
+      "durationSeconds": 25.433333333333334,
+      "firstPacket": {
+        "pts": -1024,
+        "dts": -1024,
+        "duration": 1024,
+        "side_data_list": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 1220608,
+        "dts": 1220608,
+        "duration": 192
+      },
+      "packetCount": 1194,
+      "primingSkipSamples": 1024,
+      "firstDecodedFrame": {
+        "pts": 0,
+        "best_effort_timestamp": 0,
+        "nb_samples": 1024
+      },
+      "packetPayloadSha256": "a3ca25ea0d4edc707b17fd7866e276be6fee69b59ae88880ae24a95f2c028586",
+      "rawDecodedSampleCount": 1221632,
+      "logicalDecodedSampleCount": 1220800,
+      "decodedTailSampleCount": 832,
+      "rawDecodedPayloadSha256": "f9d3aa307282c21cbb936da1ae61054009bb91880243fa58a2bf1eb97455dc16",
+      "logicalDecodedPayloadSha256": "b98e1dd3e8d69ebb5873c625091f25da9b4dae4b447b63775c2ac1dac147da61",
+      "logicalDecodedInterval": {
+        "startSample": 0,
+        "endSampleExclusive": 1220800
+      },
+      "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+    },
+    "completed": {
+      "status": "passed",
+      "sampleRate": 48000,
+      "channels": 2,
+      "streamTimeBase": "1/48000",
+      "presentationStartSample": 0,
+      "presentationEndSampleExclusive": 1220800,
+      "durationSeconds": 25.433333333333334,
+      "firstPacket": {
+        "pts": -1024,
+        "dts": -1024,
+        "duration": 1024,
+        "side_data_list": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 1220608,
+        "dts": 1220608,
+        "duration": 192
+      },
+      "packetCount": 1194,
+      "primingSkipSamples": 1024,
+      "firstDecodedFrame": {
+        "pts": 0,
+        "best_effort_timestamp": 0,
+        "nb_samples": 1024
+      },
+      "packetPayloadSha256": "a3ca25ea0d4edc707b17fd7866e276be6fee69b59ae88880ae24a95f2c028586",
+      "rawDecodedSampleCount": 1221632,
+      "logicalDecodedSampleCount": 1220800,
+      "decodedTailSampleCount": 832,
+      "rawDecodedPayloadSha256": "f9d3aa307282c21cbb936da1ae61054009bb91880243fa58a2bf1eb97455dc16",
+      "logicalDecodedPayloadSha256": "b98e1dd3e8d69ebb5873c625091f25da9b4dae4b447b63775c2ac1dac147da61",
+      "logicalDecodedInterval": {
+        "startSample": 0,
+        "endSampleExclusive": 1220800
+      },
+      "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+    },
+    "packetPayloadUnchanged": true,
+    "logicalDecodedPcmUnchanged": true,
+    "rawDecodedPcmUnchanged": true,
+    "meaning": "One AAC encode after verified retained PCM; compare this new base against its Normal-caption output, not against the original full MP4."
+  },
+  "commonQc": {
+    "status": "passed",
+    "instructionCount": 5,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "violations": []
+  },
+  "completedFrameQc": {
+    "status": "passed",
+    "method": "exact-replay-native-v1",
+    "inspectedCaptions": [
+      "digest-v1-phase2-20260913-v001-bridge-caption-000117",
+      "digest-v1-phase2-20260913-v001-bridge-caption-000118",
+      "digest-v1-phase2-20260913-v001-bridge-caption-000119",
+      "digest-v1-phase2-20260913-v001-bridge-caption-000120",
+      "digest-v1-phase2-20260913-v001-bridge-caption-000122"
+    ],
+    "selectedFrames": 5,
+    "exactReplay": {
+      "completed": {
+        "role": "completed-media",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/.after-render-v003.presentation-renderer-v002-work-nCisPz/publish/presentation-rendered-v002.mp4",
+        "realPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/.after-render-v003.presentation-renderer-v002-work-nCisPz/publish/presentation-rendered-v002.mp4",
+        "bytes": 8591313,
+        "fileSha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6"
+      },
+      "replay": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/.after-render-v003.presentation-renderer-v002-work-nCisPz/scratch/exact-replay-qc/replay.mp4",
+        "realPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/.after-render-v003.presentation-renderer-v002-work-nCisPz/scratch/exact-replay-qc/replay.mp4",
+        "bytes": 8591313,
+        "fileSha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6"
+      },
+      "mp4BytesIdentical": true,
+      "comparisonMethod": "mp4-byte-identical",
+      "expectedFrameCount": 763,
+      "video": {
+        "completed": {
+          "codecName": "h264",
+          "pixelFormat": "yuv420p",
+          "width": 1920,
+          "height": 1080,
+          "fps": "30/1",
+          "averageFps": "30/1",
+          "frameCount": 763,
+          "timeBase": "1/15360",
+          "start": "0/1",
+          "duration": "763/30",
+          "display": {
+            "sampleAspectRatio": "1/1",
+            "displayAspectRatio": "16/9",
+            "colorRange": null,
+            "colorSpace": null,
+            "colorTransfer": null,
+            "colorPrimaries": null,
+            "chromaLocation": "left",
+            "fieldOrder": "progressive",
+            "sideData": null
+          }
+        },
+        "replay": {
+          "codecName": "h264",
+          "pixelFormat": "yuv420p",
+          "width": 1920,
+          "height": 1080,
+          "fps": "30/1",
+          "averageFps": "30/1",
+          "frameCount": 763,
+          "timeBase": "1/15360",
+          "start": "0/1",
+          "duration": "763/30",
+          "display": {
+            "sampleAspectRatio": "1/1",
+            "displayAspectRatio": "16/9",
+            "colorRange": null,
+            "colorSpace": null,
+            "colorTransfer": null,
+            "colorPrimaries": null,
+            "chromaLocation": "left",
+            "fieldOrder": "progressive",
+            "sideData": null
+          }
+        }
+      }
+    },
+    "performance": {
+      "wallClockMs": 132457.5815,
+      "exactReplay": {
+        "wallClockMs": 129166.94920799998,
+        "encodeWallClockMs": 128847.36333300002,
+        "exactComparisonWallClockMs": 82.73904100002255,
+        "childProcessCount": 5,
+        "childProcessesByPurpose": {
+          "version-ffmpeg": 1,
+          "version-ffprobe": 1,
+          "encode": 1,
+          "video-probe-completed": 1,
+          "video-probe-replay": 1
+        },
+        "encodedFrames": 763,
+        "decodedFrames": null,
+        "comparedFrames": null,
+        "comparedAudioPackets": null,
+        "observationScope": "One actual full-video encode. Decoded frame counts are observed framehash rows only; byte equality does not fabricate decoded or compared frame counts."
+      },
+      "finiteState": {
+        "wallClockMs": 2815.6535840000142,
+        "phasesMilliseconds": {
+          "inputBinding": 165.50533300003735,
+          "frameExtraction": 1017.5106249999953,
+          "nativeLayerPreparation": 0.10550000000512227,
+          "completedRgbCrop": 214.26049900002545,
+          "referenceComposition": 1013.9321679999703,
+          "rgbDistance": 147.6127920000581,
+          "evidenceWrite": 1.5985840000212193,
+          "verification": 201.92320799996378,
+          "evidenceConstruction": 17.539249999972526
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 14,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "completed-rgb-crop": 5,
+          "native-reference-composite": 5
+        },
+        "sourceFrameOutputs": 5,
+        "completedFrameOutputs": 5,
+        "completedRgbOutputs": 5,
+        "logicalReferenceCount": 55,
+        "referenceRgbOutputs": 50,
+        "reusedReferenceRgbCount": 5,
+        "preparedLayerOutputs": 0,
+        "exactDistanceCalculations": 50,
+        "reusedExactDistances": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "preparationWallClockMs": 288.24870799999917,
+      "finiteStateWallClockMs": 3258.0900000000256,
+      "finiteStateExecuted": true
+    }
+  },
+  "preservation": {
+    "baselineRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/preservation-before.json",
+      "bytes": 7907,
+      "fileSha256": "49806d60847686f6a1cc93edc0fc3828cc762b0eb36d3daf1b88739d7a879271"
+    },
+    "originalReferenceCount": 26,
+    "originalRefs": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/basis-edit-plan.json",
+        "bytes": 190739,
+        "fileSha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/normal-plan.json",
+        "bytes": 2095671,
+        "fileSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/timeline.json",
+        "bytes": 3711,
+        "fileSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/base-media.mp4",
+        "bytes": 635378367,
+        "fileSha256": "0de24b8c9b18d33d38e163f0e1eaed8a35aaeea4b2411c507d7947c992545c04"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+        "bytes": 616632321,
+        "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/drawing-evidence.json",
+        "bytes": 9088283,
+        "fileSha256": "b9ae2cb29c52d2976ec450b65e9ae58d0a45f395e4b9f03797efcefa14d10b7f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/captionAuto.json",
+        "bytes": 325464,
+        "fileSha256": "1d3fd9643338e5f0e93052af43237fa9c98e8bb507bee8f0c1216d7e9c30e800"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/connectionAuto.json",
+        "bytes": 3401,
+        "fileSha256": "f4eff1a5c34936f1bbcf29e702a42dba394baf3b2ab07f4dec95338c07724ec7"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/captionOverrides.json",
+        "bytes": 250441,
+        "fileSha256": "51ae628804ced3992b5feacd35b81f78cf8e308f10f1149e130daaa9b73704ad"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/connectionOverrides.json",
+        "bytes": 821,
+        "fileSha256": "16fba566b18d70e2bfb07439b1a074d967589f8f731a8789e4ce4b0394ebdf65"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/judgment-reply.raw.json",
+        "bytes": 190168,
+        "fileSha256": "c909317cec5571ec00c1bbe85e5a3992f716dc795f16388abfef8b394509fcc5"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/candidate-raw-reply-v001.json",
+        "bytes": 22037,
+        "fileSha256": "4bd4f00653965121cb88294b7a011a608a07ee9817fb5d5460a7a9fcef79c28f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/candidate-validation-v001.json",
+        "bytes": 505,
+        "fileSha256": "929126aa3b068e89724cf3572618c357bb39796bd14400607c387ed824972415"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/boundary-assessment-v001.json",
+        "bytes": 24936,
+        "fileSha256": "8cffded0e2076b73c869113552b0ffb27990d3e9b08fa15c44168e05123ca1c1"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/boundary-assessment-v001.md",
+        "bytes": 4530,
+        "fileSha256": "15ce9538e43be002cbdb9db852346a66dfd51b112994f0d66ef1ca7ca179f6d4"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/review-main-v001.json",
+        "bytes": 12061,
+        "fileSha256": "5810ae6d13133cba265c161c84ec3f8024ad778917c62485897c9195392371e3"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/review-v001.json",
+        "bytes": 3054,
+        "fileSha256": "9c8cc833e7f56dfeac35cd8f011c9382ca6b0d87d5a7f7fb237067f951a3e63f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q4-20260920-v001/review-v001.json",
+        "bytes": 7692,
+        "fileSha256": "62553b82133dcc4f27eea2eb8f3193daf4e71007930838251c7671b4e85521c9"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/responses.json",
+        "bytes": 39348,
+        "fileSha256": "411e896f17cc50eefe72cc72a52df60c4ddcfa31f2699757bc87e625efdf950f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/human-response-original-v001.md",
+        "bytes": 5572,
+        "fileSha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-timing-resolution-v002.json",
+        "bytes": 1401130,
+        "fileSha256": "288dd18230b1bb0e59cd6ff2b1ec47bf86dc916026f8e9c77cb219ed275847e1"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/acoustic-observation-chunk-0142-v001.json",
+        "bytes": 12100,
+        "fileSha256": "0a39318852fc6acf6d02fcec201a308ee13b941b20443850b7c5d57034a34998"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/audio-preparation.json",
+        "bytes": 35542,
+        "fileSha256": "48c9f33638a22a69151b238a84cfc3e1d846bff5a650b9fd1da192e9a68476fb"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/candidate-run-v001/input.json",
+        "bytes": 843521,
+        "fileSha256": "d69a63d2c30aee19bae079eb63651438edf248b2f1a57ee4b524b2442b0ea958"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/boundary-observation-v001/pcm-measurement-v001.json",
+        "bytes": 118640,
+        "fileSha256": "9ad1e20ad20e2a6c21f702937792b42603c92694e1bb3eea1269900fe4c8533b"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/boundary-observation-v001/source-400-to-411s.f32le",
+        "bytes": 4224000,
+        "fileSha256": "97b16d4628f7fae399c973743fc0b06df1441fc7165cb416c9420f14a09f6657"
+      }
+    ],
+    "implementationRefs": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-edit-plan.mjs",
+        "bytes": 28349,
+        "fileSha256": "9303dec05a87a08fa529d502c2b37159dbc5b2fffc8620a16ebfefe8c50586ba"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-edit-plan.test.mjs",
+        "bytes": 22452,
+        "fileSha256": "4c666d2ee4d1600ec7f88dd4c4c9461556364603adb627c02ae81b47179a731d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.mjs",
+        "bytes": 32434,
+        "fileSha256": "ea97880ab4026ab29f10ba9a606612806b7e5060dfdc1a6d1f8eca4fa34721c6"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.test.mjs",
+        "bytes": 29214,
+        "fileSha256": "fb03f5bc62cf10a34b0e3672407caf1a84ce5a1c925f6e3e893932cb33a2b55c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs",
+        "bytes": 61871,
+        "fileSha256": "3a01da6a3897c44beea540aba4602793d5e445780f79ce891daee258a40f7ecd"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+        "bytes": 133483,
+        "fileSha256": "6650e4d5c6c2a50e6e1bb81eeb23f4463dcc7f8def227b16a4071866a2e1f7a6"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_effects_v001.test.mjs",
+        "bytes": 9291,
+        "fileSha256": "6319549b3bd73bcb9fdb1a8a5528d29828ec4e53efc48176dac035757c65a6d8"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_execution_resources_v001.test.mjs",
+        "bytes": 10652,
+        "fileSha256": "49e6908d42aa82043309ef121067c8c2438d9f24cb9cf98250e1763739e19c02"
+      }
+    ],
+    "renderRefCount": 95,
+    "checkedRenderRefs": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+        "bytes": 8591313,
+        "fileSha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+        "bytes": 616632321,
+        "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-job-v004.json",
+        "bytes": 3167,
+        "fileSha256": "aef8afd7319e6b9f66c5380d116344f070e582ad78fa6d4a7cfb3e47c04b582d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/edit-plan-v002.json",
+        "bytes": 2561895,
+        "fileSha256": "55b5b00253401fd7ef740aa0f62f0b4ebaa4fa4fd4f4b9461d997d19544d13e5"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/comparison.json",
+        "bytes": 51528,
+        "fileSha256": "bb913456eb754f833797665b55712adbd109563fe2b0643338e768d1d8456a78"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/join/proof.json",
+        "bytes": 3429,
+        "fileSha256": "66d1c23f8b3d3e0f4d12d42512f2a48b454e76c418d7691e6b6c3be709493aae"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/instruction-received-v002.md",
+        "bytes": 5075,
+        "fileSha256": "94413e1ebcd1ad4f24625d260b3b0d3daf57a286e29a4def94ea6056b1b6e72a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/retention-boundary-v002.json",
+        "bytes": 6055,
+        "fileSha256": "c5d833c4fd0b346a4c9684546baa3804e6a574ec173dcd872c1dc1eea9a31b80"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/source.json",
+        "bytes": 1306,
+        "fileSha256": "13430742f97280efbafa9f0dff790072613238908ed53a991a2ae628e552385d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/drawing-evidence.json",
+        "bytes": 9088283,
+        "fileSha256": "b9ae2cb29c52d2976ec450b65e9ae58d0a45f395e4b9f03797efcefa14d10b7f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/normal-plan.json",
+        "bytes": 2095671,
+        "fileSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/timeline.json",
+        "bytes": 3711,
+        "fileSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/base-media.mp4",
+        "bytes": 635378367,
+        "fileSha256": "0de24b8c9b18d33d38e163f0e1eaed8a35aaeea4b2411c507d7947c992545c04"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/basis-edit-plan.json",
+        "bytes": 190739,
+        "fileSha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/native-audio-binding.json",
+        "bytes": 232811,
+        "fileSha256": "4a8abb3805fe637f906d41ac0acb0b73446d61450f05b948974b7c8c44aba4c6"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-audio-candidates.json",
+        "bytes": 600900,
+        "fileSha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-acoustic-peaks.json",
+        "bytes": 5612034,
+        "fileSha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.mjs",
+        "bytes": 32434,
+        "fileSha256": "ea97880ab4026ab29f10ba9a606612806b7e5060dfdc1a6d1f8eca4fa34721c6"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-edit-plan.mjs",
+        "bytes": 28349,
+        "fileSha256": "9303dec05a87a08fa529d502c2b37159dbc5b2fffc8620a16ebfefe8c50586ba"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/clock.mjs",
+        "bytes": 14222,
+        "fileSha256": "7050880b99cebbdbb6f420084017a9f5306179270400e54180f5bdd186e30df4"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q4-c-all-input.mjs",
+        "bytes": 24191,
+        "fileSha256": "6146332ce66be89fa062aa068e36056c57d187dd3dc8abddc1b79e64f5e41343"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/prepare.mjs",
+        "bytes": 24272,
+        "fileSha256": "f3402ec35a09b4ea73e9f9d16e1101a41963580521ade7456dd840fa539d83de"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_auto_effects_io_v001.mjs",
+        "bytes": 6794,
+        "fileSha256": "9ae97c1b169aed49fb428f626ed0c50bb0051afde189ffba725c5b150a13763a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_base_media_build_v003.mjs",
+        "bytes": 111387,
+        "fileSha256": "2bd5b9d7ed5d3980d49e4af67fcc4db7d01425b10815e835d27d393452d0143b"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+        "bytes": 62522,
+        "fileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32"
+      },
+      {
+        "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "bytes": 88501744,
+        "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+cli@4.0.481_postcss@8.5.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@remotion/cli/remotion-cli.js",
+        "bytes": 225,
+        "fileSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/cli.mjs",
+        "bytes": 120402,
+        "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+        "bytes": 159972320,
+        "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "bytes": 442864,
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+        "bytes": 238096,
+        "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/imagemagick/7.1.2-12_1/bin/magick",
+        "bytes": 69952,
+        "fileSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs",
+        "bytes": 23254,
+        "fileSha256": "4092a3faa49aa360eed4f1b6ecaf4d743dc421d77ccc655d429b4907f5269de0"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+        "bytes": 5139,
+        "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_auto_effects_v001.mjs",
+        "bytes": 22906,
+        "fileSha256": "0413358322054de838d09993cceb36a6ecc3da0b49afa310af5d17cb87516a38"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+        "bytes": 56058,
+        "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_contract_v002.mjs",
+        "bytes": 4613,
+        "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_contract_v003.mjs",
+        "bytes": 32607,
+        "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_motion_v001.mjs",
+        "bytes": 8482,
+        "fileSha256": "be2a8d088f93347b8f05ed4e0524823d44843f95bad416c4d3dd7f30c49ce726"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "bytes": 186390,
+        "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_effects_v001.mjs",
+        "bytes": 8352,
+        "fileSha256": "5028d65e6768bef6c8f7b935b38bc1af7b29a043619a3069b10cec5ddea42b5f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_encoded_omission_qc_v002.mjs",
+        "bytes": 31653,
+        "fileSha256": "61708daed8de8bd6426bdda619a2797e8ef0021c90ded9b7a3742049ec238f7d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+        "bytes": 47306,
+        "fileSha256": "c8480c534fa2cd97949d5e74e829d0b4683c874cf15a2dc1f92980e0d84dd981"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_fatal_observation_v002.mjs",
+        "bytes": 12762,
+        "fileSha256": "cf95c2ba8785be681dcecc03dc4ec009d6f02b4161e3c39f7edbf431b92b6115"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_instruction_contract_v002.mjs",
+        "bytes": 60145,
+        "fileSha256": "11c80c40d4fd9cbe88bb40ed5a941e084e381b5646123edecad8f224926c3e20"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+        "bytes": 14144,
+        "fileSha256": "57e84c6636d7dd66000545bb4606a5d09e0581ad59bf787b3531852b02e5aab3"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_asset_cache_v001.mjs",
+        "bytes": 4690,
+        "fileSha256": "73195d873efd26531b598547527272cf5e8e85862387e08ae0b767c5adc33518"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+        "bytes": 20680,
+        "fileSha256": "1dfa1f28280480e48fe102b33adf54f7b2b5c827e2931a1d8acdfb3e75d3e3e9"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+        "bytes": 61942,
+        "fileSha256": "6820d0e85dba7ac76b36f0c8b4499ddc7018d600097fc4ecd1043ad1d5c730a6"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs",
+        "bytes": 61871,
+        "fileSha256": "3a01da6a3897c44beea540aba4602793d5e445780f79ce891daee258a40f7ecd"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+        "bytes": 18113,
+        "fileSha256": "efe6df57b2e2164d16743f1e1626a8f5a56fbce2a8ed426da654f085dc475f9d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_projection_v001.mjs",
+        "bytes": 19232,
+        "fileSha256": "350272ca2a0abc0082c69b302d3cee626c92aab51770aaf400e63a2526ae9bef"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_render_scope_v001.mjs",
+        "bytes": 3523,
+        "fileSha256": "3d4a6a2e06c659b7502f0d65a87cfb195d8a9599818893a3c32332da803e81e3"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_v001.mjs",
+        "bytes": 41484,
+        "fileSha256": "1c9ebb2b6994c503ced3695e4ff553b366671d6cb64c82c769f645606eb0e3b8"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_output_directory_v001.mjs",
+        "bytes": 2222,
+        "fileSha256": "58c31d77296a47355305931eb725323d8baf044aeb6e4e502d1878bf51812e16"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_panel_presets_v002.mjs",
+        "bytes": 3771,
+        "fileSha256": "7c85194c5d9e9605cb6ce27407cf1b91c3bf490bc26cb2ce323b11700a49db3d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_evidence_v001.mjs",
+        "bytes": 2872,
+        "fileSha256": "2bd5522fb87e5951029b6bdeddf363d11b3f647b31712978a5e45b1117909968"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_renderer_qc_v001.mjs",
+        "bytes": 5111,
+        "fileSha256": "f55a247822a3bf7d7f516c75ab038a1567de21f5f5a119a05042523b3afdcc61"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_v001.mjs",
+        "bytes": 7267,
+        "fileSha256": "2d3ac1f546ea3b6f186a6569c73d9b3b16fe2406bf63c7ac80726e43abcb14e9"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_entry_v001.tsx",
+        "bytes": 28811,
+        "fileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_plan_v002.mjs",
+        "bytes": 25089,
+        "fileSha256": "3a77c7feb7005fa06d7e45a6364f76ab4bc40a8622370568cf557d5090f08b79"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+        "bytes": 4964,
+        "fileSha256": "97aa9b2cd584b2cea15f31f0e7a813cc6ba1e1a8cdbb31bdb5d675c03be7d47d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+        "bytes": 45187,
+        "fileSha256": "e2b421a57d4f5a64cc0c4be94f6d0daec7d9d91ae79eaeaed5b2e9786471b87e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "bytes": 14071,
+        "fileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "bytes": 87458,
+        "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+        "bytes": 70230,
+        "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+        "bytes": 6454,
+        "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+        "bytes": 14291,
+        "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+        "bytes": 602,
+        "fileSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+        "bytes": 133483,
+        "fileSha256": "6650e4d5c6c2a50e6e1bb81eeb23f4463dcc7f8def227b16a4071866a2e1f7a6"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+        "bytes": 47252,
+        "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/pnpm-lock.yaml",
+        "bytes": 177485,
+        "fileSha256": "1bfb232ca8a693bebedc1fd84971800aad2f633b2595ed805f2078f1dad44812"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/@remotion/cli/package.json",
+        "bytes": 1985,
+        "fileSha256": "9dbefa4daf7f9c83b9131192ed176a7ecca71679a1e96d1c85219febffa0135a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/react-dom/package.json",
+        "bytes": 1353,
+        "fileSha256": "d2f29e31bd48b833e48cd7bbf41f192e8ee4ff8da249fdbe10d4ac4114b8b12e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/react/package.json",
+        "bytes": 999,
+        "fileSha256": "d4e68a5c96babb20cad1daafea8b78822eae45b341552cf5418d06a5304fa64c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/remotion/package.json",
+        "bytes": 2117,
+        "fileSha256": "965eb84ab06aa4acdbd9dc3751cf015eb13e3bd39e001779c7b5310f31e8b546"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "bytes": 4106788,
+        "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/OFL_LINESeedJP.txt",
+        "bytes": 4431,
+        "fileSha256": "8aa3e80c0d02c9f999756a5bb21258700edea4c727dab6169f6460245c4b6f0a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/OFL_ShipporiMincho-Bold.txt",
+        "bytes": 4399,
+        "fileSha256": "41fba056279be5f45ff9a99e44b7b53897b42732f5806d8e666e0ab49ac6bd38"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/ShipporiMincho-Bold.ttf",
+        "bytes": 18846492,
+        "fileSha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/components/TelopText.tsx",
+        "bytes": 7328,
+        "fileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/utils/telop-font.ts",
+        "bytes": 1723,
+        "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/shared/telop-glow.ts",
+        "bytes": 3060,
+        "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-line-break.ts",
+        "bytes": 8755,
+        "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-render-model.ts",
+        "bytes": 11392,
+        "fileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/text-metrics.ts",
+        "bytes": 2144,
+        "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/normal/short-normal-plan.json",
+        "bytes": 30814,
+        "fileSha256": "45f44ac0aceec04f006c64ee1c3f9221c34e2de8553ade1877ea4a2ebe0a1d68"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/normal/short-normal-context.json",
+        "bytes": 8023,
+        "fileSha256": "6ac20eb41a6dabf6b31988556723ecc2343bab0e69a9f35b27a7dec04f4cff0f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/normal/base.mp4",
+        "bytes": 8742940,
+        "fileSha256": "8ae864fd42c309c7662f9decc79fa47ede4e285fff6032068bb4fe4c1df66f63"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/join/joined.nut",
+        "bytes": 517846302,
+        "fileSha256": "5c1304ea91a62f120d65ce80b5ff94add7118098426ac3dbd340e91562cb16f4"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/join/verified-pcm.f32le",
+        "bytes": 9766400,
+        "fileSha256": "b05f98daa233e0487485027c9f629ac643a6c8dd313c21b6d87b290847d7376b"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/piece-1/background.nut",
+        "bytes": 342205829,
+        "fileSha256": "02d3a22cb4c4edd41ffc7cd438d286d3071361011e4ea604ef40f661c5174906"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/piece-1/proof.json",
+        "bytes": 13075,
+        "fileSha256": "1ec29e720eff65540206bef175068e595e938bf1240f0719fc72fc941e0f281c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/piece-2/background.nut",
+        "bytes": 175652320,
+        "fileSha256": "1c0802f382e77893ce582fa14d41b0b5736d7d981f55c6fb10d2ecfa0cb0bb22"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/piece-2/proof.json",
+        "bytes": 13081,
+        "fileSha256": "5815459c17b67c5fd2916ef15339eea1a7e3b38152cfb2857caad56056f4bc8c"
+      }
+    ]
+  },
+  "humanQuality": "not-evaluated",
+  "audibleContinuity": "not-evaluated; preserved word observations and editing margins do not prove phonetic safety",
+  "contentEditAdopted": false,
+  "formalTrustChanged": false,
+  "paidApiCalls": 0,
+  "newExternalMediaTransfers": 0
+}

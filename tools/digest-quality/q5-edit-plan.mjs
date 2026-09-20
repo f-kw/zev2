@@ -10,7 +10,13 @@ const hash = value => sha(canonicalJson(value));
 const clone = structuredClone;
 const sourceContexts = new WeakSet();
 const SOURCE_CLOCK = 'q5-original-c-all-frame-v001';
-const EDITED_CLOCK = 'q5-edited-content-frame-v001';
+const EDITED_CLOCK = 'q5-edited-content-frame-v002';
+const HIDDEN_CAPTION_ID = 'digest-v1-phase2-20260913-v001-bridge-caption-000121';
+const HIDDEN_CAPTION_TEXT = 'このドスンと落ちていくんですこれ';
+// The user's v002 instruction sets this editing margin; it is not a measurement tolerance.
+const RETENTION_POLICY = freeze({schemaVersion: 'q5-retain-first-policy-v002',
+  minimumRetainedFramesBefore: 6, minimumRetainedFramesAfter: 6,
+  meaning: 'user-selected editing margin; retain more when supported by saved observations; not an ASR error bound or proof of natural sound'});
 const BASIS_SHA = '0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d';
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const require = (condition, message) => {if (!condition) throw new TypeError('Q5_EDIT_PLAN_INVALID: ' + message);};
@@ -141,18 +147,32 @@ export function createQ5EditSourceV001({originalContentVersion, basisEditPlanRef
   return source;
 }
 
-function resolve(source, omissionInput, candidateId, policyRefInput) {
+function resolve(source, omissionInput, hiddenCaptionId, candidateId, policyRefInput, boundaryEvidenceRefInput) {
   assertSource(source);
   require(typeof candidateId === 'string' && candidateId.trim().length > 0, 'candidate ID required');
   const policyRef = reference(policyRefInput, 'received content-edit policy');
-  const omission = omissionInput === null ? null : range(omissionInput, source.sourceIdentity.frameCount, 'omission');
+  const boundaryEvidenceRef = reference(boundaryEvidenceRefInput, 'saved retain-first boundary evidence');
+  require(omissionInput !== undefined && hiddenCaptionId !== undefined,
+    'media omission and hidden caption must both be explicit; use two nulls for cancellation');
+  require((omissionInput === null) === (hiddenCaptionId === null),
+    'cancellation must release media omission and caption hiding together');
+  const omission = omissionInput === null ? null : range(omissionInput, source.sourceIdentity.frameCount, 'media omission');
+  const hiddenCaption = omission === null ? null : source.normalPlan.elements.find(caption => caption.instructionId === hiddenCaptionId);
+  require(omission === null || (hiddenCaptionId === HIDDEN_CAPTION_ID && hiddenCaption?.text === HIDDEN_CAPTION_TEXT),
+    'only the selected Q5-1 caption 121 may be hidden; arbitrary caption cutting is forbidden');
+  require(omission === null || (contains(captionRange(hiddenCaption), omission)
+    && omission.startFrame - hiddenCaption.startFrame >= RETENTION_POLICY.minimumRetainedFramesBefore
+    && hiddenCaption.endFrameExclusive - omission.endFrameExclusive >= RETENTION_POLICY.minimumRetainedFramesAfter),
+    'media omission must be inside the selected caption and retain at least six frames on each side');
   const parent = omission === null ? null : source.timeline.segments.find(segment =>
     segment.outputStartFrame < omission.startFrame && omission.endFrameExclusive < segment.outputEndFrame);
   require(omission === null || parent, 'one omission strictly inside one original retained interval is required');
   const removedFrames = omission === null ? 0 : duration(omission);
   const versionInput = {sourceIdentity: source.sourceIdentity, sourceIdentitySha256: source.sourceIdentitySha256,
-    candidateId, policyRef, omission, operation: 'single-internal-omission; retain-Normal; normal-cut; no-adoption'};
-  const contentVersion = omission === null ? source.sourceIdentity.originalContentVersion : 'q5-content-' + hash(versionInput);
+    candidateId, policyRef, boundaryEvidenceRef, mediaOmission: omission, hiddenCaptionId,
+    retentionPolicy: RETENTION_POLICY,
+    operation: 'v002-retain-first-single-media-omission; hide-only-selected-caption-121; retain-Normal; normal-cut; no-adoption'};
+  const contentVersion = omission === null ? source.sourceIdentity.originalContentVersion : 'q5-content-v002-' + hash(versionInput);
   const retainedPieces = [];
   let nextOutputFrame = 0;
   for (const [parentIndex, segment] of source.timeline.segments.entries()) {
@@ -172,31 +192,56 @@ function resolve(source, omissionInput, candidateId, policyRefInput) {
     }
   }
   require(nextOutputFrame === source.sourceIdentity.frameCount - removedFrames, 'resolved whole-content clock differs');
+  const targetMediaRetention = omission === null ? null : {
+    captionId: hiddenCaptionId, status: 'partially-retained', originalRange: captionRange(hiddenCaption),
+    originalSourceRange: originalSourceRange(parent, captionRange(hiddenCaption)),
+    mediaOmission: clone(omission), omittedOriginalSourceRange: originalSourceRange(parent, omission),
+    retainedBeforeRange: frameRange(hiddenCaption.startFrame, omission.startFrame),
+    retainedAfterRange: frameRange(omission.endFrameExclusive, hiddenCaption.endFrameExclusive),
+    retainedFramesBefore: omission.startFrame - hiddenCaption.startFrame,
+    retainedFramesAfter: hiddenCaption.endFrameExclusive - omission.endFrameExclusive,
+    outputClock: EDITED_CLOCK,
+    retainedPieces: [frameRange(hiddenCaption.startFrame, omission.startFrame),
+      frameRange(omission.endFrameExclusive, hiddenCaption.endFrameExclusive)].map((originalRange, index) => {
+      const piece = retainedPieces.find(item => contains(item.originalRange, originalRange));
+      require(piece, 'retained target media must belong to a retained original piece');
+      const shift = piece.outputRange.startFrame - piece.originalRange.startFrame;
+      const outputRange = frameRange(originalRange.startFrame + shift, originalRange.endFrameExclusive + shift);
+      return {side: index === 0 ? 'before' : 'after', originalRange,
+        originalSourceRange: originalSourceRange(parent, originalRange), outputRange, retainedPieceId: piece.pieceId,
+        playback: {sampleRate: 48000, channels: 2, originalRange: sampleRange(originalRange, 1600),
+          outputRange: sampleRange(outputRange, 1600)}};
+    }),
+    meaning: 'caption is hidden; its two edge media ranges remain; naturalness is not established'};
   const elements = [], captionMappings = [];
   for (const caption of source.normalPlan.elements) {
     const originalRange = captionRange(caption);
-    const removed = omission !== null && contains(omission, originalRange);
-    require(omission === null || !overlaps(originalRange, omission) || removed, 'caption crosses an omission boundary; partial caption cutting is forbidden');
+    const hidden = omission !== null && caption.instructionId === hiddenCaptionId;
+    require(omission === null || !overlaps(originalRange, omission) || hidden,
+      'media omission intersects a non-target caption; every other caption must remain complete');
     const originalSegment = source.timeline.segments.find(segment => contains(segmentRange(segment), originalRange));
-    const piece = removed ? null : retainedPieces.find(item => contains(item.originalRange, originalRange));
-    require(removed || piece, 'retained caption does not belong to exactly one retained piece');
-    const shift = removed ? null : piece.outputRange.startFrame - piece.originalRange.startFrame;
-    const outputRange = removed ? null : frameRange(originalRange.startFrame + shift, originalRange.endFrameExclusive + shift);
-    if (!removed) {
+    const piece = hidden ? null : retainedPieces.find(item => contains(item.originalRange, originalRange));
+    require(hidden || piece, 'retained caption does not belong to exactly one retained piece');
+    const shift = hidden ? null : piece.outputRange.startFrame - piece.originalRange.startFrame;
+    const outputRange = hidden ? null : frameRange(originalRange.startFrame + shift, originalRange.endFrameExclusive + shift);
+    if (!hidden) {
       const edited = {...clone(caption), startFrame: outputRange.startFrame, endFrameExclusive: outputRange.endFrameExclusive};
       assert.deepEqual(withoutTime(edited), withoutTime(caption), 'remaining caption text, lines, duration, visual state or transition changed');
       elements.push(edited);
     }
     captionMappings.push({captionId: caption.instructionId, contentVersion,
-      originalContentVersion: source.sourceIdentity.originalContentVersion, status: removed ? 'omitted' : 'retained',
+      originalContentVersion: source.sourceIdentity.originalContentVersion, status: hidden ? 'hidden' : 'retained',
       originalRange, originalSourceRange: originalSourceRange(originalSegment, originalRange), outputRange,
       originalParentSegmentId: originalSegment.segmentId, retainedPieceId: piece?.pieceId ?? null,
+      mediaStatus: hidden ? 'partially-retained' : 'retained',
+      targetMediaRetention: hidden ? clone(targetMediaRetention) : null,
       displayFrameCount: caption.displayFrameCount, unchangedCaptionSha256: hash(withoutTime(caption))});
   }
   const normalPlan = {...clone(source.normalPlan), elements};
   if (omission === null) assert.deepEqual(normalPlan, source.normalPlan, 'content cancellation must exactly restore the original Normal plan');
-  const result = {schemaVersion: 'q5-content-edit-plan-v001', sourceIdentity: clone(source.sourceIdentity),
-    sourceIdentitySha256: source.sourceIdentitySha256, contentVersion, candidateId, policyRef, omission,
+  const result = {schemaVersion: 'q5-content-edit-plan-v002', sourceIdentity: clone(source.sourceIdentity),
+    sourceIdentitySha256: source.sourceIdentitySha256, contentVersion, candidateId, policyRef, boundaryEvidenceRef,
+    mediaOmission: omission, hiddenCaptionId, retentionPolicy: clone(RETENTION_POLICY), targetMediaRetention,
     status: omission === null ? 'original-content-restored' : 'unadopted-proposal',
     clock: omission === null ? SOURCE_CLOCK : EDITED_CLOCK,
     frameRate: 30, frameCount: nextOutputFrame, removedFrameCount: removedFrames,
@@ -204,7 +249,7 @@ function resolve(source, omissionInput, candidateId, policyRefInput) {
     observation: {sampleRate: 16000, endSampleExclusive: rationalFrameSample(nextOutputFrame),
       removedDurationSamples: rationalFrameSample(removedFrames), rule: 'exact-rational-duration; no-decoder-tail-or-playback-sample-substitution'},
     normalPlan, retainedPieces, captionMappings,
-    omittedCaptionIds: captionMappings.filter(row => row.status === 'omitted').map(row => row.captionId),
+    hiddenCaptionIds: captionMappings.filter(row => row.status === 'hidden').map(row => row.captionId),
     retainedCaptionIds: captionMappings.filter(row => row.status === 'retained').map(row => row.captionId),
     omittedOriginalSourceRange: parent === null ? null : originalSourceRange(parent, omission),
     omittedParentSegmentId: parent?.segmentId ?? null,
@@ -214,46 +259,46 @@ function resolve(source, omissionInput, candidateId, policyRefInput) {
     invariants: {remainingCaptions: 'all fields except start/end frames exactly preserved',
       projection: 'derive only from bound original inputs; subtract omission duration exactly once',
       cancellation: 'restore original content, captions and clocks; separate from presentation Reset',
+      hiddenCaption: 'only selected caption 121 hidden; corresponding edge media retained; no replacement caption',
       earlierEffectsOverridesAndReviews: 'not-imported; same IDs do not transfer between content versions',
       baseMedia: 'original media reference only; no newly manufactured whole-content media is claimed'}};
   return freeze({...result, resolutionSha256: hash(result)});
 }
 
-export function resolveQ5EditPlanV001({source, omission, candidateId, policyRef}) {
-  require(omission !== undefined, 'omission must be an explicit half-open range or null for cancellation');
-  return resolve(source, omission, candidateId, policyRef);
+export function resolveQ5EditPlanV002({source, mediaOmission, hiddenCaptionId, candidateId, policyRef, boundaryEvidenceRef}) {
+  return resolve(source, mediaOmission, hiddenCaptionId, candidateId, policyRef, boundaryEvidenceRef);
 }
 
 /** Recompute saved content from bound originals, including all source and policy identities. */
-export function restoreQ5EditPlanV001({source, saved}) {
+export function restoreQ5EditPlanV002({source, saved}) {
   assertSource(source);
-  require(object(saved) && saved.schemaVersion === 'q5-content-edit-plan-v001'
-    && same(saved.sourceIdentity, source.sourceIdentity)
+  require(object(saved) && saved.schemaVersion === 'q5-content-edit-plan-v002', 'saved edit schema must be v002; old plans are not converted');
+  require(same(saved.sourceIdentity, source.sourceIdentity)
     && saved.sourceIdentitySha256 === source.sourceIdentitySha256, 'saved content belongs to a different original source');
-  const expected = resolve(source, saved.omission, saved.candidateId, saved.policyRef);
+  const expected = resolve(source, saved.mediaOmission, saved.hiddenCaptionId, saved.candidateId, saved.policyRef, saved.boundaryEvidenceRef);
   require(same(saved, expected), 'saved content does not exactly reconstruct; altered, stale or twice-projected plan rejected');
   return expected;
 }
 
 /** A typed point cannot be reused as an original point after projection. Caption ends use interval mapping. */
-export function mapQ5OriginalPointV001({source, resolved, point}) {
-  const plan = restoreQ5EditPlanV001({source, saved: resolved});
+export function mapQ5OriginalPointV002({source, resolved, point}) {
+  const plan = restoreQ5EditPlanV002({source, saved: resolved});
   exact(point, ['clock', 'sourceIdentitySha256', 'frame'], 'original point');
   require(point.clock === SOURCE_CLOCK && point.sourceIdentitySha256 === source.sourceIdentitySha256
     && integer(point.frame) && point.frame <= source.sourceIdentity.frameCount, 'point clock or source differs; double projection rejected');
-  const omitted = plan.omission !== null && point.frame >= plan.omission.startFrame && point.frame < plan.omission.endFrameExclusive;
-  const frame = omitted ? null : point.frame - (plan.omission !== null && point.frame >= plan.omission.endFrameExclusive ? plan.removedFrameCount : 0);
+  const omitted = plan.mediaOmission !== null && point.frame >= plan.mediaOmission.startFrame && point.frame < plan.mediaOmission.endFrameExclusive;
+  const frame = omitted ? null : point.frame - (plan.mediaOmission !== null && point.frame >= plan.mediaOmission.endFrameExclusive ? plan.removedFrameCount : 0);
   return freeze({clock: plan.clock, contentVersion: plan.contentVersion,
     sourceIdentitySha256: source.sourceIdentitySha256, originalFrame: point.frame, frame,
     status: omitted ? 'omitted-no-output' : 'mapped'});
 }
 
 /** A short Normal plan is admitted only when neither endpoint cuts a caption's display clock. */
-export function projectQ5ComparisonRangeV001({source, resolved, beforeRange: inputRange}) {
-  const plan = restoreQ5EditPlanV001({source, saved: resolved});
-  require(plan.omission !== null, 'a comparison requires an active omission proposal');
+export function projectQ5ComparisonRangeV002({source, resolved, beforeRange: inputRange}) {
+  const plan = restoreQ5EditPlanV002({source, saved: resolved});
+  require(plan.mediaOmission !== null, 'a comparison requires an active omission proposal');
   const beforeRange = range(inputRange, source.sourceIdentity.frameCount, 'Before range');
-  require(beforeRange.startFrame < plan.omission.startFrame && plan.omission.endFrameExclusive < beforeRange.endFrameExclusive,
+  require(beforeRange.startFrame < plan.mediaOmission.startFrame && plan.mediaOmission.endFrameExclusive < beforeRange.endFrameExclusive,
     'Before range must include context on both sides of the omission');
   const parent = source.timeline.segments.find(segment => contains(segmentRange(segment), beforeRange));
   require(parent?.segmentId === plan.omittedParentSegmentId, 'comparison must stay inside the same original retained interval');
@@ -263,8 +308,8 @@ export function projectQ5ComparisonRangeV001({source, resolved, beforeRange: inp
   }
   const afterGlobalRange = frameRange(beforeRange.startFrame, beforeRange.endFrameExclusive - plan.removedFrameCount);
   const afterRange = frameRange(0, duration(afterGlobalRange));
-  const originals = [frameRange(beforeRange.startFrame, plan.omission.startFrame),
-    frameRange(plan.omission.endFrameExclusive, beforeRange.endFrameExclusive)];
+  const originals = [frameRange(beforeRange.startFrame, plan.mediaOmission.startFrame),
+    frameRange(plan.mediaOmission.endFrameExclusive, beforeRange.endFrameExclusive)];
   let end = 0;
   const pieces = originals.map((originalRange, index) => {
     const outputRange = frameRange(end, end + duration(originalRange)); end = outputRange.endFrameExclusive;
@@ -291,12 +336,24 @@ export function projectQ5ComparisonRangeV001({source, resolved, beforeRange: inp
     return {...clone(full), editedGlobalRange: clone(full.outputRange), outputRange: captionRange(caption),
       comparisonPieceId: piece.pieceId};
   });
-  const result = {schemaVersion: 'q5-content-comparison-range-v001', sourceIdentity: clone(source.sourceIdentity),
+  const targetMediaRetention = {...clone(plan.targetMediaRetention), outputClock: 'q5-comparison-local-frame-v002',
+    retainedPieces: plan.targetMediaRetention.retainedPieces.map(piece => {
+      const outputRange = frameRange(piece.outputRange.startFrame - afterGlobalRange.startFrame,
+        piece.outputRange.endFrameExclusive - afterGlobalRange.startFrame);
+      return {...clone(piece), editedGlobalRange: clone(piece.outputRange), outputRange,
+        playback: {...clone(piece.playback), outputRange: sampleRange(outputRange, 1600)}};
+    })};
+  const hiddenCaptionMappings = plan.captionMappings.filter(row => row.status === 'hidden')
+    .map(row => ({...clone(row), targetMediaRetention: clone(targetMediaRetention)}));
+  const result = {schemaVersion: 'q5-content-comparison-range-v002', sourceIdentity: clone(source.sourceIdentity),
     sourceIdentitySha256: source.sourceIdentitySha256, contentVersion: plan.contentVersion, candidateId: plan.candidateId,
-    editPlanSha256: plan.resolutionSha256, omission: clone(plan.omission), beforeRange, afterGlobalRange, afterRange,
+    editPlanSha256: plan.resolutionSha256, mediaOmission: clone(plan.mediaOmission),
+    hiddenCaptionId: plan.hiddenCaptionId, hiddenCaptionIds: clone(plan.hiddenCaptionIds),
+    policyRef: clone(plan.policyRef), boundaryEvidenceRef: clone(plan.boundaryEvidenceRef),
+    retentionPolicy: clone(plan.retentionPolicy), targetMediaRetention, beforeRange, afterGlobalRange, afterRange,
     frameRate: 30, frameCount: afterRange.endFrameExclusive, normalPlan: {...clone(source.normalPlan), elements}, pieces,
-    captionMappings, omittedCaptionIds: clone(plan.omittedCaptionIds),
-    clocks: {before: SOURCE_CLOCK, afterGlobal: EDITED_CLOCK, afterLocal: 'q5-comparison-local-frame-v001',
+    captionMappings, hiddenCaptionMappings,
+    clocks: {before: SOURCE_CLOCK, afterGlobal: EDITED_CLOCK, afterLocal: 'q5-comparison-local-frame-v002',
       playbackSampleRate: 48000, observationSampleRate: 16000,
       rule: 'two ordered original ranges; no single offset crosses the omitted interval'},
     noCaptionPhaseRestart: true, captionEndpointPolicy: 'both short endpoints outside every caption display interval'};

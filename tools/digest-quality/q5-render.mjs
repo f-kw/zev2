@@ -1,4 +1,4 @@
-/** Q5-1: one unadopted content omission, original Normal captions, short output only.
+/** Q5-1: one unadopted media omission with one separately hidden caption, short output only.
  * Existing background extraction, base-media encoding and native drawing/QC are reused.
  * This adapter only joins the two retained pieces and binds the new content clock. */
 import assert from 'node:assert/strict';
@@ -8,9 +8,10 @@ import {createReadStream} from 'node:fs';
 import {lstat, mkdir, open, readFile, realpath, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {createQ5EditSourceV001, restoreQ5EditPlanV001, projectQ5ComparisonRangeV001} from './q5-edit-plan.mjs';
+import {createQ5EditSourceV001, restoreQ5EditPlanV002, projectQ5ComparisonRangeV002} from './q5-edit-plan.mjs';
 import {restoreOrchestrationDrawingViewEvidenceV001} from '../../evals/clip_composition/presentation_orchestration_v001.mjs';
-import {buildOrchestrationRangeBackgroundV001, inspectOrchestrationEncodedAudioV001}
+import {buildOrchestrationRangeBackgroundWithObservationCopiesV001, verifyOrchestrationObservationCopiesV001,
+  inspectOrchestrationEncodedAudioV001}
   from '../../evals/clip_composition/presentation_orchestration_background_v001.mjs';
 import {buildPresentationBaseMediaVideoV001, muxPresentationBaseMediaV001}
   from '../../evals/clip_composition/presentation_base_media_build_v003.mjs';
@@ -224,13 +225,31 @@ export function assertQ5OriginalBackgroundIdentityV001({sourceRefs, view}) {
   assert.equal(view.projection.displayFrameCount, 44408); assert.equal(view.projection.sourceClock.playbackSampleRate, 48000);
 }
 
+/** A byte-bound evidence document must describe this exact saved edit and comparison context. */
+export async function verifyQ5RetentionEvidenceV002({evidence, resolved, beforeRange}) {
+  assert.equal(evidence.schemaVersion, 'q5-retention-priority-boundary-evidence-v002');
+  assert(evidence.policyRef, 'Q5 boundary evidence must name its received policy');
+  for (const key of ['path', 'fileSha256']) {
+    assert.equal(evidence.policyRef[key], resolved.policyRef[key], 'Q5 boundary evidence policy identity differs');
+  }
+  const policyRef = await checkRef(evidence.policyRef);
+  assert.equal(evidence.candidateId, resolved.candidateId, 'Q5 boundary evidence candidate differs');
+  assert.equal(evidence.hiddenCaptionId, resolved.hiddenCaptionId, 'Q5 boundary evidence hidden caption differs');
+  assert.deepEqual(evidence.actualMediaOmission, resolved.mediaOmission, 'Q5 boundary evidence media omission differs');
+  assert.deepEqual(evidence.originalTargetRange, resolved.targetMediaRetention?.originalRange,
+    'Q5 boundary evidence original target range differs');
+  assert.deepEqual(evidence.comparisonBeforeRange, beforeRange, 'Q5 boundary evidence comparison context differs');
+  return policyRef;
+}
+
 /** File-only input boundary: restore the saved whole-content edit, then derive the short clock again. */
-export async function loadQ5RenderInputsV001(job) {
-  assert.equal(job.schemaVersion, 'digest-quality-q5-render-job-v001');
+export async function loadQ5RenderInputsV002(job) {
+  assert.equal(job.schemaVersion, 'digest-quality-q5-render-job-v002');
   const refs = [job.sourceRef, job.editPlanRef, job.originalDrawingEvidenceRef, job.originalCompletedMediaRef];
   for (const ref of refs) await checkRef(ref);
   const saved = await json(job.editPlanRef.path);
-  await checkRef(saved.policyRef); refs.push(saved.policyRef);
+  assert.equal(saved.schemaVersion, 'q5-content-edit-plan-v002', 'Q5 rendering requires an explicitly saved V002 content edit');
+  for (const ref of [saved.policyRef, saved.boundaryEvidenceRef]) {await checkRef(ref); refs.push(ref);}
   assert.equal(job.originalCompletedMediaRef.fileSha256, ORIGINAL_NORMAL_SHA, 'Before must be the original Normal completion');
   const sourceInput = await json(job.sourceRef.path);
   assert(!Object.hasOwn(sourceInput, 'fixture'), 'fixture sources are not accepted by the real rendering entry');
@@ -238,21 +257,25 @@ export async function loadQ5RenderInputsV001(job) {
   const source = createQ5EditSourceV001({...sourceInput,
     planBytes: await readFile(sourceInput.planRef.path, 'utf8'), timelineBytes: await readFile(sourceInput.timelineRef.path, 'utf8'),
     basisEditPlanBytes: await readFile(sourceInput.basisEditPlanRef.path, 'utf8')});
-  const resolved = restoreQ5EditPlanV001({source, saved});
-  const comparison = projectQ5ComparisonRangeV001({source, resolved, beforeRange: job.beforeRange});
+  const resolved = restoreQ5EditPlanV002({source, saved});
+  const comparison = projectQ5ComparisonRangeV002({source, resolved, beforeRange: job.beforeRange});
+  refs.push(await verifyQ5RetentionEvidenceV002({evidence: await json(saved.boundaryEvidenceRef.path),
+    resolved, beforeRange: job.beforeRange}));
   assert.equal(comparison.pieces.length, 2, 'render entry requires an active omission and exactly two retained pieces');
   const view = restoreOrchestrationDrawingViewEvidenceV001(await json(job.originalDrawingEvidenceRef.path));
   assertQ5OriginalBackgroundIdentityV001({sourceRefs: sourceInput, view});
   // Q4 caption choices are never passed to the new drawing call.
   const old = view.sourceRefs;
+  const observationCopyBindings = await verifyOrchestrationObservationCopiesV001({pulseTimingEvidence: old.pulseTimingEvidence,
+    originalObservationCopies: job.originalObservationCopies});
   for (const ref of [old.decisionInputRef, old.pulseTimingEvidence.sourceRef,
-    old.pulseTimingEvidence.candidatesRef, old.pulseTimingEvidence.peaksRef]) {await checkRef(ref); refs.push(ref);}
-  return {source, resolved, comparison, view, refs};
+    ...observationCopyBindings.map(binding => binding.copyRef)]) {await checkRef(ref); refs.push(ref);}
+  return {source, resolved, comparison, view, refs, observationCopyBindings};
 }
 
 /** The common short-media path also admits explicit synthetic fixtures in direct tests.
  * The real job entry below still accepts only the pinned C-all source. No fixture flag changes it. */
-export async function drawQ5NormalShortV001({comparisonRef, joined, sourceRef, editPlanRef,
+export async function drawQ5NormalShortV002({comparisonRef, joined, sourceRef, editPlanRef,
   inputRefs = [], outputDirectory, evidenceDirectory, onProgress = () => {}}) {
   for (const directory of [outputDirectory, evidenceDirectory]) {
     assert(path.isAbsolute(directory ?? ''));
@@ -268,7 +291,7 @@ export async function drawQ5NormalShortV001({comparisonRef, joined, sourceRef, e
   assert.equal(joined.schemaVersion, 'digest-quality-q5-ordered-lossless-verification-v001');
   assert.equal(joined.status, 'passed'); assert.equal(joined.audio.sampleRate, 48000); assert.equal(joined.audio.channels, 2);
   const comparison = await json(comparisonRef.path);
-  assert.equal(comparison.schemaVersion, 'q5-content-comparison-range-v001');
+  assert.equal(comparison.schemaVersion, 'q5-content-comparison-range-v002');
   assert.equal(comparison.afterRange.startFrame, 0);
   assert(Number.isSafeInteger(comparison.afterRange.endFrameExclusive) && comparison.afterRange.endFrameExclusive > 0);
   assert.equal(comparison.normalPlan.canvas.fps, 30);
@@ -297,6 +320,10 @@ export async function drawQ5NormalShortV001({comparisonRef, joined, sourceRef, e
     await save(baselinePath, comparison.normalPlan);
     await save(decisionInputPath, {schemaVersion: 'presentation-focus-decision-input-v005', pulseTimingEvidence: null,
       q5ContentVersion: comparison.contentVersion, editPlanRef, baseMediaRef: baseRef,
+      mediaOmission: comparison.mediaOmission, hiddenCaptionId: comparison.hiddenCaptionId,
+      hiddenCaptionIds: comparison.hiddenCaptionIds, targetMediaRetention: comparison.targetMediaRetention,
+      policyRef: comparison.policyRef, boundaryEvidenceRef: comparison.boundaryEvidenceRef,
+      retentionPolicy: comparison.retentionPolicy,
       originalSourceRefs: sourceRef, orderedPieces: comparison.pieces,
       presentation: 'original Normal unchanged; no new semantic presentation judgment; no Q4 proposal or override'});
     const localRefs = [await bind(baselinePath), await bind(decisionInputPath), baseRef, joined.proofRef, joined.joinedRef, joined.pcmRef];
@@ -332,8 +359,13 @@ export async function drawQ5NormalShortV001({comparisonRef, joined, sourceRef, e
     const after = await bind(path.join(publication.outputDirectory, 'presentation-rendered-v002.mp4'));
     assert.equal(after.fileSha256, rendered.fileSha256);
     await reread(); for (const ref of localRefs) await checkRef(ref);
-    const result = {schemaVersion: 'digest-quality-q5-normal-short-completion-v001', status: 'passed',
+    const result = {schemaVersion: 'digest-quality-q5-normal-short-completion-v002', status: 'passed',
       comparisonRef, sourceRef, editPlanRef, after, expectedFrameCount, baseRef, baseAudio, finalAudio,
+      contentVersion: comparison.contentVersion, mediaOmission: comparison.mediaOmission,
+      hiddenCaptionId: comparison.hiddenCaptionId, hiddenCaptionIds: comparison.hiddenCaptionIds,
+      targetMediaRetention: comparison.targetMediaRetention,
+      policyRef: comparison.policyRef, boundaryEvidenceRef: comparison.boundaryEvidenceRef,
+      retentionPolicy: comparison.retentionPolicy,
       localRefs, drawingRulesRef: rules, extraImplementationRefs, finalQc: draw.finalQc,
       completedFrameQc: draw.completedFrameQc, automaticResolution: draw.autoPresentationResolution,
       publication, humanQuality: 'not-evaluated', contentEditAdopted: false};
@@ -346,7 +378,7 @@ export async function drawQ5NormalShortV001({comparisonRef, joined, sourceRef, e
 }
 
 
-export async function renderQ5ComparisonV001({jobPath, onProgress = () => {}}) {
+export async function renderQ5ComparisonV002({jobPath, onProgress = () => {}}) {
   assert.equal(process.version, 'v20.19.6'); assert(!Object.hasOwn(process.env, 'NODE_OPTIONS'));
   assert.equal(await realpath(process.execPath), await realpath(nodePath), 'Q5 requires the fixed Node executable');
   assert.equal(await realpath(execFileSync('node', ['-p', 'process.execPath'], {encoding: 'utf8'}).trim()), await realpath(nodePath),
@@ -359,25 +391,27 @@ export async function renderQ5ComparisonV001({jobPath, onProgress = () => {}}) {
   'render output and evidence must be separate unused directories');
   const guards = [job.outputDirectory, job.evidenceDirectory].map(outputDirectory =>
     assertIgnoredPresentationOutputDirectoryV001({repositoryRoot: repo, outputDirectory}));
-  const loaded = await loadQ5RenderInputsV001(job);
+  const loaded = await loadQ5RenderInputsV002(job);
   const {comparison, view} = loaded;
   const rules = await buildEditedOrchestrationDrawingRulesRefV001();
   const extraImplementationRefs = await implementationRefs(rules);
   const reread = async () => {
     for (const ref of [jobRef, ...loaded.refs, ...extraImplementationRefs]) await checkRef(ref);
     await verifyEditedOrchestrationDrawingRulesRefV001(rules);
-    const current = await loadQ5RenderInputsV001(await json(jobPath));
+    const current = await loadQ5RenderInputsV002(await json(jobPath));
     assert.deepEqual(current.comparison, comparison, 'saved content or short projection changed');
   };
   await mkdir(job.evidenceDirectory);
   try {
-    await save(path.join(job.evidenceDirectory, 'start.json'), {schemaVersion: 'digest-quality-q5-render-start-v001',
+    await save(path.join(job.evidenceDirectory, 'start.json'), {schemaVersion: 'digest-quality-q5-render-start-v002',
       jobRef, guards, drawingRulesRef: rules, extraImplementationRefs,
-      inputRefs: loaded.refs, comparison, humanQuality: 'not-evaluated'});
+      inputRefs: loaded.refs, observationCopyBindings: loaded.observationCopyBindings,
+      comparison, humanQuality: 'not-evaluated'});
     const pieces = [];
     for (const [index, piece] of comparison.pieces.entries()) {
       await onProgress({phase: 'retained-piece', index, range: piece.originalRange});
-      const background = await buildOrchestrationRangeBackgroundV001({drawingView: view,
+      const background = await buildOrchestrationRangeBackgroundWithObservationCopiesV001({drawingView: view,
+        originalObservationCopies: job.originalObservationCopies,
         range: piece.originalRange, outputDirectory: path.join(job.evidenceDirectory, 'piece-' + (index + 1)), ...tools});
       assert.equal(background.status, 'passed');
       pieces.push({frameCount: frameCount(piece.originalRange), mediaRef: background.outputs.background,
@@ -389,22 +423,29 @@ export async function renderQ5ComparisonV001({jobPath, onProgress = () => {}}) {
     await reread();
     const comparisonPath = path.join(job.evidenceDirectory, 'comparison.json');
     await save(comparisonPath, comparison);
-    const normal = await drawQ5NormalShortV001({comparisonRef: await bind(comparisonPath), joined,
+    const normal = await drawQ5NormalShortV002({comparisonRef: await bind(comparisonPath), joined,
       sourceRef: job.sourceRef, editPlanRef: job.editPlanRef, inputRefs: [jobRef, ...loaded.refs],
       outputDirectory: job.outputDirectory, evidenceDirectory: path.join(job.evidenceDirectory, 'normal'), onProgress});
     await reread();
     const {after, expectedFrameCount, localRefs, baseRef, baseAudio, finalAudio, publication} = normal;
-    const result = {schemaVersion: 'digest-quality-q5-render-completion-v001', status: 'passed',
+    const result = {schemaVersion: 'digest-quality-q5-render-completion-v002', status: 'passed',
       jobRef, editPlanRef: job.editPlanRef, contentVersion: comparison.contentVersion,
+      mediaOmission: comparison.mediaOmission, hiddenCaptionId: comparison.hiddenCaptionId,
+      hiddenCaptionIds: comparison.hiddenCaptionIds, targetMediaRetention: comparison.targetMediaRetention,
+      retentionPolicy: loaded.resolved.retentionPolicy, policyRef: loaded.resolved.policyRef,
+      boundaryEvidenceRef: loaded.resolved.boundaryEvidenceRef,
       before: {mediaRef: job.originalCompletedMediaRef, range: comparison.beforeRange},
       after: {mediaRef: after, range: comparison.afterRange, fullEditedRange: comparison.afterGlobalRange,
         orderedPieces: comparison.pieces},
       comparisonRef: normal.comparisonRef,
-      originalInputRefs: loaded.refs, drawingRulesRef: rules, extraImplementationRefs, localRefs,
+      originalInputRefs: loaded.refs, observationCopyBindings: loaded.observationCopyBindings,
+      drawingRulesRef: rules, extraImplementationRefs, localRefs,
       joinedProofRef: joined.proofRef, baseRef, baseAudio, finalAudio, finalQc: normal.finalQc,
       completedFrameQc: normal.completedFrameQc, publication, expectedFrameCount,
       qcScope: 'complete short comparison only; full edited content plan is data, not a generated full movie',
       losslessVerificationScope: joined.scope, encodedMediaLimitation: 'H.264 and AAC are newly encoded; differences need not be confined to the omitted interval',
+      targetCaptionTreatment: 'the selected caption is hidden in full; original media at both ends is retained, so target speech may remain',
+      audibleContinuity: 'not-evaluated; the retention margin is an edit choice, not proof of phonetic safety',
       humanQuality: 'not-evaluated', contentEditAdopted: false, formalTrustChanged: false,
       paidApiCalls: 0, newExternalMediaTransfers: 0};
     await save(path.join(job.evidenceDirectory, 'completion.json'), result);
@@ -419,5 +460,5 @@ export async function renderQ5ComparisonV001({jobPath, onProgress = () => {}}) {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const [jobPath, ...extra] = process.argv.slice(2);
   assert(jobPath && path.isAbsolute(jobPath) && extra.length === 0, 'usage: q5-render.mjs <absolute-job.json>');
-  await renderQ5ComparisonV001({jobPath, onProgress: value => process.stdout.write(JSON.stringify(value) + '\n')});
+  await renderQ5ComparisonV002({jobPath, onProgress: value => process.stdout.write(JSON.stringify(value) + '\n')});
 }

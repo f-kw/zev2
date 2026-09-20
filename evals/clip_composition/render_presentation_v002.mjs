@@ -1065,7 +1065,9 @@ export const buildPresentationCompositeArgumentsV001 = ({
     '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p',
     '-c:a', presentationTimeline && timelineAudio ? 'aac' : 'copy',
   );
-  if (audioMediaPath !== null) args.push('-movie_timescale', String(plan.canvas.fps));
+  // The resolved frame clock also governs AAC copied from the base MP4.
+  // Millisecond movie ticks would round fractional-frame edit-list durations.
+  if (presentationTimeline === null) args.push('-movie_timescale', String(plan.canvas.fps));
   return args;
 };
 

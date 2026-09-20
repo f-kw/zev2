@@ -25,8 +25,30 @@ const save=(p,v)=>writeFile(p,JSON.stringify(v,null,2)+'\n',{flag:'wx'});
 const canvas={width:1920,height:1080,fps:30};
 const png=n=>path.join(FIXTURE,n+'.png');
 const input={baseMediaPath:path.join(FIXTURE,'base.mp4'),plan:{canvas},expectedFrameCount:900,
-  overlayRecords:[{element:{instructionId:'target',startFrame:280,displayFrameCount:41},pngPath:png('target')},
-    {element:{instructionId:'other',startFrame:270,displayFrameCount:61},pngPath:png('other')}]};
+  overlayRecords:[{element:{instructionId:'target',startFrame:280,endFrameExclusive:321,displayFrameCount:41},pngPath:png('target')},
+    {element:{instructionId:'other',startFrame:270,endFrameExclusive:331,displayFrameCount:61},pngPath:png('other')}]};
+
+const assertOnlyFrameClockAdded=(current,captured,fps)=>{
+  assert(!captured.includes('-movie_timescale'));
+  assert.deepEqual(current.slice(-2),['-movie_timescale',String(fps)]);
+  assert.deepEqual(current.slice(0,-2),captured,'a compositor argument other than exact frame-clock muxing changed');
+};
+
+test('captured compositor arguments differ only by exact frame-clock muxing',()=>{
+  const captured=execFileSync('git',['show','91b740d7707b812fdf22de4129e157309e0f9155:evals/clip_composition/render_presentation_v002.mjs'],{cwd:ROOT,encoding:'utf8'});
+  assert.equal(hash(captured),'b5670f2e9a665fddf7082fee107b322181f6a2c6a89edb6c1d77fcebce38a61b');
+  const begin=captured.indexOf('export const buildPresentationCompositeArgumentsV001 =');
+  const end=captured.indexOf('\nconst composite =',begin);assert(begin>=0&&end>begin);
+  const legacy=vm.runInNewContext(captured.slice(begin,end).replace('export const','const')+'\nbuildPresentationCompositeArgumentsV001;');
+  const current=buildPresentationCompositeArgumentsV001(input),capturedArguments=Array.from(legacy(input));
+  assertOnlyFrameClockAdded(current,capturedArguments,canvas.fps);
+  const controlled=buildPresentationCompositeArgumentsV001({...input,serializePngAndFilters:true}),withoutResourceControls=[];
+  for(let i=0;i<controlled.length;i++){
+    if(controlled[i]==='-threads'||controlled[i]==='-filter_complex_threads'){assert.equal(controlled[++i],'1');continue;}
+    withoutResourceControls.push(controlled[i]);
+  }
+  assert.deepEqual(withoutResourceControls,current);
+});
 
 test('execution control applies only to PNG decoders and the complex filter graph',()=>{
   assert.throws(()=>buildPresentationCompositeArgumentsV001({...input,serializePngAndFilters:1}),/must be boolean/u);
@@ -68,10 +90,10 @@ test('all decoded fixture frames and streamed QC frames match before resource co
   ];
   const evidence=[];const frames=new Map();
   for(const c of cases){
-    const argsInput={...input,overlayRecords:[{element:{instructionId:'target',startFrame:c.start,displayFrameCount:c.count},pngPath:png(c.target)},
-      {element:{instructionId:'other',startFrame:c.otherStart,displayFrameCount:c.otherCount},pngPath:png(c.other)}]};
+    const argsInput={...input,overlayRecords:[{element:{instructionId:'target',startFrame:c.start,endFrameExclusive:c.start+c.count,displayFrameCount:c.count},pngPath:png(c.target)},
+      {element:{instructionId:'other',startFrame:c.otherStart,endFrameExclusive:c.otherStart+c.otherCount,displayFrameCount:c.otherCount},pngPath:png(c.other)}]};
     const legacyArgs=Array.from(legacy(argsInput));
-    assert.deepEqual(buildPresentationCompositeArgumentsV001(argsInput),legacyArgs,'default differs from captured pre-change implementation');
+    assertOnlyFrameClockAdded(buildPresentationCompositeArgumentsV001(argsInput),legacyArgs,canvas.fps);
     const controlledArgs=buildPresentationCompositeArgumentsV001({...argsInput,serializePngAndFilters:true});
     await save(path.join(directory,c.name+'-inputs.json'),{input:argsInput,legacyArgs,controlledArgs});
     const oldVideo=path.join(directory,c.name+'-before.mp4'),newVideo=path.join(directory,c.name+'-after.mp4');
@@ -102,7 +124,8 @@ test('all decoded fixture frames and streamed QC frames match before resource co
   assert.deepEqual(await bind(corePath),current,'implementation changed during equivalence test');
   await save(path.join(directory,'result.json'),{schemaVersion:'presentation-render-execution-resource-equivalence-v001',status:'passed',
     implementationBinding:current,fixtureBindings,capturedImplementationFileSha256:hash(captured),
-    defaultArgumentsUnchanged:true,onlyPngDecoderAndFilterThreadArgumentsChanged:true,
+    defaultArgumentsUnchangedExceptFrameClock:true,movieTimeScale:canvas.fps,
+    additionalArguments:'frame-grid movie timescale plus PNG/filter execution control only',
     baseDecoderAndEncoderThreadsUnchanged:true,allDecodedFramesIdentical:true,streamedQcFramesIdentical:true,
     wrongOmissionDistinguished:true,positionMutationDistinguished:true,evidence});
   process.stdout.write('# evidence: '+directory+'\n');
