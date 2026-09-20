@@ -60,7 +60,7 @@ function fixture() {
       contexts: plan.elements.map((_, i) => ({contextId: 'context-' + i, description: '保持した場面 ' + i})),
       observations: [], audioEvidence: null, audioCandidates: []}});
     const choices = ['normal-cut', 'black-separator', 'soft-separator'];
-    const reply = {schemaVersion: 'presentation-orchestration-judgment-v001', inputSha256: input.inputSha256, completion: 'complete',
+    const reply = {schemaVersion: 'presentation-orchestration-judgment-v002', inputSha256: input.inputSha256, completion: 'complete',
       captions: plan.elements.map(row => ({captionId: row.instructionId, status: 'resolved', semanticRole: 'normal',
         allowedPresets: [{preset: 'normal'}], reason: '背景だけを検査する。', evidenceIds: [row.instructionId]})),
       connections: context.connectionIds.map((connectionId, i) => ({connectionId, status: 'resolved',

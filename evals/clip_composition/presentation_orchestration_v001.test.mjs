@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
@@ -16,7 +17,7 @@ const hash = value => sha(canonicalJson(value));
 const copy = value => structuredClone(value);
 const serialize = value => JSON.stringify(value) + '\n';
 const ref = (name, content = name) => ({path: '/fixture/' + name, fileSha256: sha(content)});
-function fixture({sampleRate = 44100, ids = ['caption-1', 'caption-2', 'caption-3']} = {}) {
+export function fixture({sampleRate = 44100, ids = ['caption-1', 'caption-2', 'caption-3']} = {}) {
   const plan = {schemaVersion: 'presentation-output-common-core-plan-v001',
     canvas: {width: 1920, height: 1080, fps: 30, safeAreaPx: {top: 40, right: 80, bottom: 40, left: 80}},
     provenance: {fixedLayout: 'unchanged'}, elements: ids.map((instructionId, i) => ({instructionId,
@@ -50,9 +51,9 @@ function fixture({sampleRate = 44100, ids = ['caption-1', 'caption-2', 'caption-
     audioEvidence: {sourceRef: pulseTimingEvidence.sourceRef, candidatesRef: pulseTimingEvidence.candidatesRef, sampleRate: 16000, sampleCount: 192000},
     audioCandidates: [{candidateId: 'event-1', startSample: 62000, endSampleExclusive: 100000, constituentPeakIds: ['peak-1']} ]};
   const input = createOrchestrationJudgmentInputV001({context, evidence});
-  const reply = {schemaVersion: 'presentation-orchestration-judgment-v001', inputSha256: input.inputSha256, completion: 'complete',
+  const reply = {schemaVersion: 'presentation-orchestration-judgment-v002', inputSha256: input.inputSha256, completion: 'complete',
     captions: ids.map(captionId => ({captionId, status: 'resolved', semanticRole: 'focus',
-      allowedPresets: [{preset: 'color', scope: 'whole-caption'}, {preset: 'panel'}], reason: '本文の意味を強調する。', evidenceIds: [captionId]})),
+      allowedPresets: [{preset: 'color', scope: 'whole-caption'}, {preset: 'panel', allowedBackgroundPresets: ['plain']}], reason: '本文の意味を強調する。', evidenceIds: [captionId]})),
     connections: context.connectionIds.map(connectionId => ({connectionId, status: 'resolved', semanticRole: 'separator',
       allowedPresets: ['black-separator', 'soft-separator'], reason: '保持場面を区切る。', evidenceIds: [connectionId]}))};
   return {source, context, evidence, input, reply, plan};
@@ -61,6 +62,7 @@ const fixed = (f, reply = f.reply) => fixOrchestrationJudgmentV001({context: f.c
 const view = (f, state) => resolveOrchestrationDrawingViewV001({context: f.context, state});
 const edit = (f, state, kind, itemId, selection) => editOrchestrationOverrideV001({context: f.context, state, kind, itemId, selection});
 
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
 test('fresh complete semantic judgment seals four independent saved systems without a prior answer', () => {
   const f = fixture(), state = fixed(f), v = view(f, state);
   assert.equal(state.captionAuto.proposal.targetCaptionIds.length, 3);
@@ -121,7 +123,7 @@ test('partial Color is exact text and sole preset; physical exclusions and Pulse
   r.captions[0].allowedPresets = [{preset: 'color', scope: 'partial-caption', targetText: '字幕'}];
   const v = view(f, fixed(f, r));
   assert.deepEqual(v.resolvedPlan.elements[0].presentationColorRange, {startCodePoint: 2, endCodePointExclusive: 4, fontColor: '#FFD65A'});
-  r.captions[0].allowedPresets.push({preset: 'panel'}); assert.throws(() => fixed(f, r), /partial-caption/);
+  r.captions[0].allowedPresets.push({preset: 'panel', allowedBackgroundPresets: ['plain']}); assert.throws(() => fixed(f, r), /partial-caption/);
   r.captions[0].allowedPresets = [{preset: 'color', scope: 'partial-caption', targetText: '不存在'}];
   assert.throws(() => fixed(f, r), /not found/);
   Object.assign(r.captions[0], {semanticRole: 'vocal-energy', allowedPresets: [{preset: 'pulse', anchorPeakId: 'peak-1'}]});
@@ -245,7 +247,7 @@ test('saved rendering proof reconstructs checked sources and rejects tampering e
 test('native QC alternatives retain display time and fixed text geometry, with whole-Color and Panel discriminators', () => {
   const f = fixture(), r = copy(f.reply);
   r.captions[0].allowedPresets = [{preset: 'color', scope: 'partial-caption', targetText: '字幕'}];
-  r.captions[1].allowedPresets = [{preset: 'panel'}];
+  r.captions[1].allowedPresets = [{preset: 'panel', allowedBackgroundPresets: ['plain']}];
   const v = view(f, fixed(f, r)), alternatives = buildOrchestrationNativeQcAlternativeElementsV001(v).alternatives;
   assert.deepEqual(alternatives[0].entries.map(row => row.kind), ['normal', 'whole-color']);
   assert.equal(alternatives[0].entries[1].element.presentationColorRange.startCodePoint, 0);
@@ -289,3 +291,4 @@ test('AI input retains every native candidate and the measured sample clock cann
   source.captionContext.decisionInputRef.fileSha256 = sha(source.decisionInputBytes);
   assert.throws(() => createOrchestrationContextV001(source), /sample clocks differ/);
 });
+}

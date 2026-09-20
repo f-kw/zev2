@@ -1,6 +1,7 @@
 /** Finite semantic choices, four independent saved records, and one drawing clock. */
 import {createHash} from 'node:crypto';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+import {decodePresentationCaptionB1StrictJsonV001} from './presentation_caption_semantic_source_package_v001.mjs';
 import {omitPresentationPanelPlateForInspectionV002} from './presentation_panel_presets_v002.mjs';
 import {sha256AutoPresentationV001, fixAutoPresentationProposalV001,
   createAutoPresentationOverridesV001, editAutoPresentationOverrideV001,
@@ -13,7 +14,11 @@ import {createConnectionExpressionContextV001, createConnectionExpressionOrigina
 import {createOrchestrationProjectionV001, projectCaptionPlanV001, projectAudioPeakV001,
   projectAudioEvidenceIntervalV001} from './presentation_orchestration_projection_v001.mjs';
 
-export const ORCHESTRATION_VERSION_V001 = 'presentation-orchestration-v001';
+export const ORCHESTRATION_VERSION_V002 = 'presentation-orchestration-v002';
+// The expression assignment identity is independent of the saved wire format.
+// Adding a Panel background must not reshuffle caption or connection choices.
+const EXPRESSION_SELECTION_IDENTITY = 'presentation-orchestration-v001';
+const PANEL_BACKGROUND_SELECTION_IDENTITY = 'presentation-orchestration-panel-background-v001';
 const contexts = new WeakMap(), views = new WeakMap();
 const clone = value => structuredClone(value);
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -75,7 +80,7 @@ export function createOrchestrationContextV001(options) {
   const initialProjection = createOrchestrationProjectionV001({...projectionOptions,
     connections: connectionContext.connections.map(row => ({connectionId: row.connectionId,
       preset: 'normal-cut', presetVersion: 'v001'}))});
-  const identity = {schemaVersion: 'presentation-orchestration-context-v001', version: ORCHESTRATION_VERSION_V001,
+  const identity = {schemaVersion: 'presentation-orchestration-context-v002', version: ORCHESTRATION_VERSION_V002,
     digestRef: source.digestRef, sourceClockSha256: initialProjection.sourceClockSha256,
     captionContextSha256: hash(source.captionContext), captionIds: plan.elements.filter(row => row.kind === 'speech-caption')
       .map(row => row.instructionId), connectionIds: connectionContext.connections.map(row => row.connectionId)};
@@ -86,6 +91,8 @@ export function createOrchestrationContextV001(options) {
 
 const group = freeze({normal: ['normal'], focus: ['color', 'panel'],
   'vocal-energy': ['scale', 'pulse'], reaction: ['bounce', 'shake']});
+const panelBackgroundChoices = freeze({plain: 'panel', 'graph-paper': 'panel-graph-paper',
+  'comic-frame': 'panel-comic-frame'});
 export function orchestrationCaptionChoiceToSelectionV001(choice) {
   require(object(choice), 'caption choice');
   if (choice.preset === 'color') {
@@ -126,8 +133,12 @@ function checkCoverage(rows, ids, key, name) {
 
 /** Explicitly accepted semantic evidence only: never a prior answer, preset table,
  * or prior result. The calling producer extracts these fields from original evidence. */
-export function createOrchestrationJudgmentInputV001({context, evidence}) {
+export function createOrchestrationJudgmentInputV001({context, evidence, connectionPolicy = 'semantic-choice'}) {
+  return createJudgmentInput({context, evidence, connectionPolicy}, 'fresh-codex');
+}
+function createJudgmentInput({context, evidence, connectionPolicy}, judgmentMode) {
   const data = contextData(context);
+  require(['semantic-choice', 'preserve-normal-cut'].includes(connectionPolicy), 'explicit connection policy');
   exact(evidence, ['productionPurpose', 'captions', 'contexts', 'observations', 'audioEvidence', 'audioCandidates'], 'semantic evidence');
   require(nonempty(evidence.productionPurpose), 'production purpose');
   checkCoverage(evidence.captions, context.captionIds, 'captionId', 'input caption');
@@ -149,6 +160,11 @@ export function createOrchestrationJudgmentInputV001({context, evidence}) {
   require(timing === null ? evidence.audioEvidence === null : object(evidence.audioEvidence)
     && ['sourceRef', 'candidatesRef', 'sampleRate', 'sampleCount'].every(key => same(evidence.audioEvidence[key], timing[key])),
   'audio semantic evidence native binding differs');
+  if (Object.hasOwn(evidence.audioEvidence ?? {}, 'allAsrSegments')) {
+    const allAsr = evidence.audioEvidence.allAsrSegments;
+    require(Array.isArray(allAsr) && allAsr.every(row => object(row) && nonempty(row.id))
+      && new Set(allAsr.map(row => row.id)).size === allAsr.length, 'whole-audio ASR observation IDs');
+  }
   const nativeCandidateIds = new Set(timing?.candidates.map(row => row.candidateId) ?? []);
   require(evidence.audioCandidates.length === nativeCandidateIds.size
     && new Set(evidence.audioCandidates.map(row => row.candidateId)).size === evidence.audioCandidates.length
@@ -174,23 +190,27 @@ export function createOrchestrationJudgmentInputV001({context, evidence}) {
         row.startSample * 30 < connection.boundaryFrame * timing.sampleRate
         && row.endSampleExclusive * 30 > connection.boundaryFrame * timing.sampleRate).map(row => row.candidateId)};
   });
-  const body = {schemaVersion: 'presentation-orchestration-judgment-input-v001', contextSha256: context.contextSha256,
+  const body = {schemaVersion: 'presentation-orchestration-judgment-input-v002', contextSha256: context.contextSha256,
     digestRef: clone(context.digestRef), sourceClockSha256: context.sourceClockSha256,
-    orchestrationVersion: ORCHESTRATION_VERSION_V001,
+    orchestrationVersion: ORCHESTRATION_VERSION_V002,
+    judgmentMode, connectionPolicy,
     productionPurpose: evidence.productionPurpose, captionRolePresets: clone(group),
-    connectionRolePresets: {continuation: ['normal-cut'], separator: ['black-separator', 'soft-separator'],
-      either: ['normal-cut', 'black-separator', 'soft-separator']},
+    panelBackgroundPresets: Object.keys(panelBackgroundChoices),
+    connectionRolePresets: connectionPolicy === 'preserve-normal-cut' ? {continuation: ['normal-cut']}
+      : {continuation: ['normal-cut'], separator: ['black-separator', 'soft-separator'],
+        either: ['normal-cut', 'black-separator', 'soft-separator']},
     policy: {completeCoverage: true, chooseSemanticAllowedSetsOnly: true, explicitNormal: true,
-      oneChoicePerPreset: true, noQuotas: true, noSequenceAssignment: true, noSavedPriorAnswers: true,
+      oneChoicePerPreset: true, noQuotas: true, noSequenceAssignment: true, noSavedPriorAnswers: judgmentMode === 'fresh-codex',
+      panelBackgroundOnlyAfterPanel: true, explicitPanelBackgroundAllowedSet: true,
       unresolvedAndUnrepresentableAreNotNormal: true, automaticSelection: 'SHA256-canonical-tuple-modulo-sorted-allowed-presets'},
     captions, connections, contexts: clone(evidence.contexts), observations: clone(evidence.observations),
     audioEvidence: clone(evidence.audioEvidence), audioCandidates: clone(evidence.audioCandidates)};
   return freeze({...body, inputSha256: hash(body)});
 }
-function checkInput(context, input) {
+function checkInput(context, input, judgmentMode) {
   require(object(input), 'judgment input');
-  const expected = createOrchestrationJudgmentInputV001({context, evidence: Object.fromEntries(
-    ['productionPurpose', 'captions', 'contexts', 'observations', 'audioEvidence', 'audioCandidates'].map(key => [key, input[key]]))});
+  const expected = createJudgmentInput({context, connectionPolicy: input.connectionPolicy, evidence: Object.fromEntries(
+    ['productionPurpose', 'captions', 'contexts', 'observations', 'audioEvidence', 'audioCandidates'].map(key => [key, input[key]]))}, judgmentMode);
   require(same(input, expected), 'judgment input source or hash differs');
 }
 
@@ -203,17 +223,33 @@ export function selectOrchestrationPresetV001({digestSha256, kind, itemId, allow
   require(allowedPresets.every(value => nonempty(key(value)))
     && new Set(allowedPresets.map(key)).size === allowedPresets.length, 'duplicate preset in allowed set');
   const sorted = [...allowedPresets].sort((a, b) => key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0);
-  const selectionSha256 = sha(canonicalJson([digestSha256, ORCHESTRATION_VERSION_V001, kind, itemId]));
+  const selectionSha256 = sha(canonicalJson([digestSha256, EXPRESSION_SELECTION_IDENTITY, kind, itemId]));
   const selectedIndex = Number(BigInt('0x' + selectionSha256) % BigInt(sorted.length));
   return freeze({selectionSha256, allowedPresets: clone(sorted), selectedIndex, selectedPreset: clone(sorted[selectedIndex])});
 }
 
-function evaluateReply(context, input, replyBytes) {
+/** A second, independent finite choice, made only after Panel was selected. */
+export function selectOrchestrationPanelBackgroundV002({digestSha256, captionId, allowedPresets}) {
+  require(/^[a-f0-9]{64}$/.test(digestSha256) && nonempty(captionId)
+    && Array.isArray(allowedPresets) && allowedPresets.length > 0
+    && allowedPresets.every(value => typeof value === 'string' && Object.hasOwn(panelBackgroundChoices, value))
+    && new Set(allowedPresets).size === allowedPresets.length, 'finite Panel background allowed set');
+  const sorted = [...allowedPresets].sort();
+  const selectionSha256 = sha(canonicalJson([digestSha256, PANEL_BACKGROUND_SELECTION_IDENTITY,
+    'caption-panel-background', captionId]));
+  const selectedIndex = Number(BigInt('0x' + selectionSha256) % BigInt(sorted.length));
+  return freeze({selectionSha256, allowedPresets: sorted, selectedIndex, selectedPreset: sorted[selectedIndex]});
+}
+
+function evaluateReply(context, input, replyBytes, judgmentMode) {
   const data = contextData(context);
-  checkInput(context, input);
-  const raw = utf8(replyBytes, 'judgment reply'), reply = json(raw, 'judgment reply');
+  checkInput(context, input, judgmentMode);
+  const raw = utf8(replyBytes, 'judgment reply');
+  const decoded = decodePresentationCaptionB1StrictJsonV001(Buffer.from(raw, 'utf8'));
+  require(decoded.status === 'decoded', 'judgment reply strict JSON: ' + (decoded.reason ?? 'invalid'));
+  const reply = decoded.value;
   exact(reply, ['schemaVersion', 'inputSha256', 'completion', 'captions', 'connections'], 'judgment reply');
-  require(reply.schemaVersion === 'presentation-orchestration-judgment-v001'
+  require(reply.schemaVersion === 'presentation-orchestration-judgment-v002'
     && reply.inputSha256 === input.inputSha256 && reply.completion === 'complete', 'complete fresh judgment binding required');
   checkCoverage(reply.captions, context.captionIds, 'captionId', 'reply caption');
   checkCoverage(reply.connections, context.connectionIds, 'connectionId', 'reply connection');
@@ -221,6 +257,7 @@ function evaluateReply(context, input, replyBytes) {
     ...input.contexts.map(row => row.contextId), ...input.observations.map(row => row.observationId),
     ...input.audioCandidates.map(row => row.candidateId),
     ...input.audioCandidates.flatMap(row => [...(row.asrSegments ?? []), ...(row.asrContext ?? [])].map(observation => observation.id)),
+    ...(input.audioEvidence?.allAsrSegments ?? []).map(row => row.id),
     ...(data.source.captionContext.pulseTimingEvidence?.peaks.map(row => row.peakId) ?? [])]);
   const resolveRow = (row, kind) => {
     const idKey = kind + 'Id', id = row[idKey];
@@ -230,18 +267,31 @@ function evaluateReply(context, input, replyBytes) {
       && row.evidenceIds.every(value => knownEvidence.has(value)) && Array.isArray(row.allowedPresets), 'status, reason, or evidence references');
     if (row.status !== 'resolved') {
       require(row.semanticRole === null && row.allowedPresets.length === 0, 'exceptions must retain their status without an allowed set');
-      return {...clone(row), selection: null};
+      return {...clone(row), selection: null,
+        ...(kind === 'caption' ? {panelBackgroundSelection: null, finalCaptionChoice: null} : {})};
     }
     require(row.allowedPresets.length > 0, 'resolved judgment needs explicit allowed set, including Normal');
     if (kind === 'caption') {
       require(Object.hasOwn(group, row.semanticRole), 'caption semantic role');
       const observed = input.captions.find(value => value.captionId === id);
       for (const choice of row.allowedPresets) {
+        require(object(choice), 'finite caption choice');
         require(group[row.semanticRole].includes(choice.preset), 'preset outside semantic role');
         require(!input.observations.some(value => value.kind === choice.preset + '-unrepresentable'
           && value.captionIds.includes(id)), 'physically unrepresentable preset in allowed set');
         if (choice.preset === 'pulse') require(observed.eligiblePulsePeakIds.includes(choice.anchorPeakId), 'Pulse anchor not eligible');
-        checkOneChoice(data, id, choice);
+        if (choice.preset === 'panel') {
+          exact(choice, ['preset', 'allowedBackgroundPresets'], 'Panel semantic choice');
+          // Validate every permitted background, including ones not selected.
+          selectOrchestrationPanelBackgroundV002({digestSha256: context.digestRef.sha256,
+            captionId: id, allowedPresets: choice.allowedBackgroundPresets});
+          for (const background of choice.allowedBackgroundPresets) {
+            const preset = panelBackgroundChoices[background];
+            require(!input.observations.some(value => value.kind === preset + '-unrepresentable'
+              && value.captionIds.includes(id)), 'physically unrepresentable Panel background in allowed set');
+            checkOneChoice(data, id, {preset});
+          }
+        } else checkOneChoice(data, id, choice);
       }
       require(!row.allowedPresets.some(value => value.preset === 'color' && value.scope === 'partial-caption')
         || row.allowedPresets.length === 1, 'partial-caption focus has only Color');
@@ -251,16 +301,112 @@ function evaluateReply(context, input, replyBytes) {
       if (row.semanticRole === 'either') require(row.allowedPresets.includes('normal-cut')
         && row.allowedPresets.some(value => value !== 'normal-cut'), 'either requires both continuation and separator');
     }
-    return {...clone(row), selection: selectOrchestrationPresetV001({digestSha256: context.digestRef.sha256,
-      kind, itemId: id, allowedPresets: row.allowedPresets})};
+    const allowedExpressions = kind === 'caption' ? row.allowedPresets.map(choice => choice.preset === 'panel'
+      ? {preset: 'panel'} : choice) : row.allowedPresets;
+    const selection = selectOrchestrationPresetV001({digestSha256: context.digestRef.sha256,
+      kind, itemId: id, allowedPresets: allowedExpressions});
+    if (kind !== 'caption') return {...clone(row), selection};
+    const panelBackgroundSelection = selection.selectedPreset.preset === 'panel'
+      ? selectOrchestrationPanelBackgroundV002({digestSha256: context.digestRef.sha256, captionId: id,
+        allowedPresets: row.allowedPresets.find(choice => choice.preset === 'panel').allowedBackgroundPresets}) : null;
+    const finalCaptionChoice = panelBackgroundSelection
+      ? {preset: panelBackgroundChoices[panelBackgroundSelection.selectedPreset]} : clone(selection.selectedPreset);
+    return {...clone(row), selection, panelBackgroundSelection, finalCaptionChoice};
   };
   return {raw, captions: context.captionIds.map(id => resolveRow(reply.captions.find(row => row.captionId === id), 'caption')),
     connections: context.connectionIds.map(id => resolveRow(reply.connections.find(row => row.connectionId === id), 'connection'))};
 }
-function compile(context, input, replyBytes) {
-  const data = contextData(context), evaluated = evaluateReply(context, input, replyBytes);
+const recompileBackgroundPolicy = freeze({
+  id: 'q4-existing-panel-background-connection-check-v001',
+  allowedBackgroundPresets: Object.keys(panelBackgroundChoices),
+  reason: 'Technical recompilation of saved semantic judgments to check the existing finite Panel backgrounds; not a new AI judgment.',
+});
+const ORIGINAL_RECOMPILE_KEYS = ['selectionRecordBytes', 'selectionRecordFileSha256', 'inputBytes',
+  'inputFileSha256', 'replyBytes', 'replyFileSha256'];
+
+function preparePanelBackgroundRecompile(context, original) {
+  exact(original, ORIGINAL_RECOMPILE_KEYS, 'explicit recompilation originals');
+  const normalized = clone(original);
+  for (const stem of ['selectionRecord', 'input', 'reply']) {
+    normalized[stem + 'Bytes'] = utf8(original[stem + 'Bytes'], 'original ' + stem);
+    require(/^[a-f0-9]{64}$/.test(original[stem + 'FileSha256'])
+      && sha(normalized[stem + 'Bytes']) === original[stem + 'FileSha256'], 'original ' + stem + ' file SHA differs');
+  }
+  const record = json(normalized.selectionRecordBytes, 'original selection record');
+  const input = json(normalized.inputBytes, 'original judgment input');
+  const decoded = decodePresentationCaptionB1StrictJsonV001(Buffer.from(normalized.replyBytes, 'utf8'));
+  require(decoded.status === 'decoded', 'original judgment reply strict JSON');
+  const reply = decoded.value;
+  exact(record, ['schemaVersion', 'version', 'contextSha256', 'input', 'replyBytes', 'replySha256',
+    'captions', 'connections', 'captionAutoSha256', 'connectionAutoSha256', 'recordSha256'], 'original selection record');
+  exact(input, ['schemaVersion', 'contextSha256', 'digestRef', 'sourceClockSha256', 'orchestrationVersion',
+    'productionPurpose', 'captionRolePresets', 'connectionRolePresets', 'policy', 'captions', 'connections',
+    'contexts', 'observations', 'audioEvidence', 'audioCandidates', 'inputSha256'], 'original judgment input');
+  exact(reply, ['schemaVersion', 'inputSha256', 'completion', 'captions', 'connections'], 'original judgment reply');
+  const {recordSha256, ...recordBody} = record, {inputSha256, ...inputBody} = input;
+  require(record.schemaVersion === 'presentation-orchestration-selection-record-v001'
+    && record.version === EXPRESSION_SELECTION_IDENTITY
+    && input.schemaVersion === 'presentation-orchestration-judgment-input-v001'
+    && input.orchestrationVersion === EXPRESSION_SELECTION_IDENTITY
+    && reply.schemaVersion === 'presentation-orchestration-judgment-v001'
+    && reply.completion === 'complete', 'explicit recompilation requires bound v001 semantic originals');
+  require(hash(recordBody) === recordSha256 && hash(inputBody) === inputSha256
+    && same(record.input, input) && record.contextSha256 === input.contextSha256
+    && reply.inputSha256 === inputSha256 && record.replyBytes === normalized.replyBytes
+    && record.replySha256 === normalized.replyFileSha256, 'original record, input or reply binding differs');
+  const evidence = Object.fromEntries(['productionPurpose', 'captions', 'contexts', 'observations', 'audioEvidence',
+    'audioCandidates'].map(key => [key, input[key]]));
+  const nextInput = createJudgmentInput({context, evidence, connectionPolicy: 'semantic-choice'}, 'technical-recompile');
+  for (const key of ['digestRef', 'sourceClockSha256', 'captionRolePresets', 'connectionRolePresets', 'captions', 'connections']) {
+    require(same(input[key], nextInput[key]), 'original source identity, expressions or connections differ');
+  }
+  const {panelBackgroundOnlyAfterPanel, explicitPanelBackgroundAllowedSet, ...previousPolicy} = nextInput.policy;
+  previousPolicy.noSavedPriorAnswers = true;
+  require(same(input.policy, previousPolicy), 'original semantic policy differs');
+  for (const [kind, ids, key] of [['caption', context.captionIds, 'captions'], ['connection', context.connectionIds, 'connections']]) {
+    const idKey = kind + 'Id';
+    checkCoverage(reply[key], ids, idKey, 'original reply ' + kind);
+    checkCoverage(record[key], ids, idKey, 'original saved ' + kind);
+    for (const id of ids) {
+      const row = reply[key].find(value => value[idKey] === id);
+      exact(row, [idKey, 'status', 'semanticRole', 'allowedPresets', 'reason', 'evidenceIds'], 'original semantic row');
+      const selection = row.status === 'resolved' ? selectOrchestrationPresetV001({digestSha256: context.digestRef.sha256,
+        kind, itemId: id, allowedPresets: row.allowedPresets}) : null;
+      require(same(record[key].find(value => value[idKey] === id), {...clone(row), selection}),
+        'original saved semantic row or expression selection differs');
+    }
+  }
+  const nextReply = clone(reply);
+  nextReply.schemaVersion = 'presentation-orchestration-judgment-v002';
+  nextReply.inputSha256 = nextInput.inputSha256;
+  for (const row of nextReply.captions) row.allowedPresets = row.allowedPresets.map(choice => {
+    if (choice.preset !== 'panel') return choice;
+    exact(choice, ['preset'], 'original Panel expression');
+    return {preset: 'panel', allowedBackgroundPresets: [...recompileBackgroundPolicy.allowedBackgroundPresets]};
+  });
+  return {original: normalized, input: nextInput, replyBytes: JSON.stringify(nextReply) + '\n', record};
+}
+
+function compile(context, input, replyBytes, origin) {
+  require(object(origin) && ['fresh-codex', 'technical-recompile'].includes(origin.kind), 'judgment origin required');
+  let recompilation;
+  if (origin.kind === 'fresh-codex') exact(origin, ['kind'], 'fresh judgment origin');
+  else {
+    exact(origin, ['kind', 'original', 'backgroundPolicy'], 'technical recompilation origin');
+    require(same(origin.backgroundPolicy, recompileBackgroundPolicy), 'technical background policy differs');
+    recompilation = preparePanelBackgroundRecompile(context, origin.original);
+    require(same(input, recompilation.input) && utf8(replyBytes, 'recompiled reply') === recompilation.replyBytes,
+      'recompiled semantic judgments or background policy differ');
+  }
+  const data = contextData(context), evaluated = evaluateReply(context, input, replyBytes, origin.kind);
+  if (recompilation) for (const key of ['captions', 'connections']) {
+    const idKey = key === 'captions' ? 'captionId' : 'connectionId';
+    for (const row of evaluated[key]) require(same(row.selection,
+      recompilation.record[key].find(original => original[idKey] === row[idKey]).selection),
+    'recompiled expression assignment differs from the original');
+  }
   const effects = evaluated.captions.filter(row => row.selection && row.selection.selectedPreset.preset !== 'normal')
-    .map(row => ({captionId: row.captionId, ...orchestrationCaptionChoiceToSelectionV001(row.selection.selectedPreset)}));
+    .map(row => ({captionId: row.captionId, ...orchestrationCaptionChoiceToSelectionV001(row.finalCaptionChoice)}));
   const exceptions = evaluated.captions.filter(row => row.status !== 'resolved')
     .map(row => ({captionId: row.captionId, status: row.status, reason: row.reason}));
   const captionAuto = fixAutoPresentationProposalV001({baselinePlan: data.plan, context: data.source.captionContext,
@@ -269,14 +415,27 @@ function compile(context, input, replyBytes) {
   const connectionAuto = createConnectionExpressionOriginalV001({context: data.connectionContext,
     selections: evaluated.connections.map(row => ({connectionId: row.connectionId,
       preset: row.selection?.selectedPreset ?? 'normal-cut', presetVersion: 'v001'}))});
-  const recordBody = {schemaVersion: 'presentation-orchestration-selection-record-v001',
-    version: ORCHESTRATION_VERSION_V001, contextSha256: context.contextSha256, input: clone(input),
+  const recordBody = {schemaVersion: 'presentation-orchestration-selection-record-v002',
+    version: ORCHESTRATION_VERSION_V002, contextSha256: context.contextSha256, input: clone(input),
+    origin: clone(origin),
     replyBytes: evaluated.raw, replySha256: sha(evaluated.raw), captions: evaluated.captions, connections: evaluated.connections,
     captionAutoSha256: hash(captionAuto), connectionAutoSha256: hash(connectionAuto)};
   return {captionAuto, connectionAuto, selectionRecord: freeze({...recordBody, recordSha256: hash(recordBody)})};
 }
 export function fixOrchestrationJudgmentV001({context, input, replyBytes}) {
-  const data = contextData(context), compiled = compile(context, input, replyBytes);
+  const compiled = compile(context, input, replyBytes, {kind: 'fresh-codex'});
+  return initializeSavedOverrides(context, compiled);
+}
+/** This explicit operation retains old semantic decisions and their original
+ * bytes. It never labels a migrated answer as a fresh Codex judgment. */
+export function recompileOrchestrationPanelBackgroundsV002({context, original}) {
+  const prepared = preparePanelBackgroundRecompile(context, original);
+  const compiled = compile(context, prepared.input, prepared.replyBytes,
+    {kind: 'technical-recompile', original: prepared.original, backgroundPolicy: recompileBackgroundPolicy});
+  return initializeSavedOverrides(context, compiled);
+}
+function initializeSavedOverrides(context, compiled) {
+  const data = contextData(context);
   return freeze({...compiled,
     captionOverrides: createAutoPresentationOverridesV001({baselinePlan: data.plan, context: data.source.captionContext,
       autoProposal: compiled.captionAuto}),
@@ -285,8 +444,8 @@ export function fixOrchestrationJudgmentV001({context, input, replyBytes}) {
 function validateState(context, state) {
   exact(state, ['selectionRecord', 'captionAuto', 'captionOverrides', 'connectionAuto', 'connectionOverrides'], 'four saved systems and selection proof');
   const data = contextData(context), record = state.selectionRecord;
-  require(object(record), 'selection record');
-  const expected = compile(context, record.input, record.replyBytes);
+  require(object(record) && record.schemaVersion === 'presentation-orchestration-selection-record-v002', 'new selection record required');
+  const expected = compile(context, record.input, record.replyBytes, record.origin);
   require(same(record, expected.selectionRecord) && same(state.captionAuto, expected.captionAuto)
     && same(state.connectionAuto, expected.connectionAuto), 'fixed semantic choices or saved automatic record differs');
   const captions = resolveAutoPresentationV001({baselinePlan: data.plan, context: data.source.captionContext,
@@ -343,7 +502,7 @@ export function resolveOrchestrationDrawingViewV001({context, state}) {
       startSample: row.startSample, endSampleExclusive: row.endSampleExclusive, sampleRate: data.source.observationSampleRate}}));
   const fourSavedSha256 = Object.fromEntries(['captionAuto', 'captionOverrides', 'connectionAuto', 'connectionOverrides']
     .map(key => [key, hash(state[key])]));
-  const body = {schemaVersion: 'presentation-orchestration-drawing-view-v001', version: ORCHESTRATION_VERSION_V001,
+  const body = {schemaVersion: 'presentation-orchestration-drawing-view-v002', version: ORCHESTRATION_VERSION_V002,
     contextSha256: context.contextSha256, sourceContext: clone(data.source.captionContext),
     sourceRefs: {planRef: clone(data.source.planRef), timelineRef: clone(data.source.timelineRef), mediaRef: clone(data.source.mediaRef),
       decisionInputRef: clone(data.source.captionContext.decisionInputRef),
@@ -392,14 +551,14 @@ export function buildOrchestrationNativeQcAlternativeElementsV001(view) {
  * all sources, semantic choices, overrides, projection and finite drawing. */
 export function exportOrchestrationDrawingViewEvidenceV001(view) {
   const {context, state} = viewData(view), data = contextData(context);
-  const body = {schemaVersion: 'presentation-orchestration-drawing-evidence-v001',
+  const body = {schemaVersion: 'presentation-orchestration-drawing-evidence-v002',
     source: clone(data.source), state: clone(state), expectedViewSha256: view.viewSha256};
   return freeze({...body, evidenceSha256: hash(body)});
 }
 export function restoreOrchestrationDrawingViewEvidenceV001(evidence) {
   exact(evidence, ['schemaVersion', 'source', 'state', 'expectedViewSha256', 'evidenceSha256'], 'drawing proof');
   const {evidenceSha256, ...body} = evidence;
-  require(evidence.schemaVersion === 'presentation-orchestration-drawing-evidence-v001'
+  require(evidence.schemaVersion === 'presentation-orchestration-drawing-evidence-v002'
     && hash(body) === evidenceSha256, 'drawing proof SHA differs');
   const context = createOrchestrationContextV001(evidence.source);
   const view = resolveOrchestrationDrawingViewV001({context, state: evidence.state});

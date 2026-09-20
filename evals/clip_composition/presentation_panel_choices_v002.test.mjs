@@ -157,8 +157,8 @@ function orchestrationFixture(){
   const evidence={productionPurpose:'Test-only Panel persistence and public selection',captions:plan.elements.map((row,index)=>({captionId:row.instructionId,text:row.text,contextId:`context-${index}`,startFrame:row.startFrame,endFrameExclusive:row.endFrameExclusive,eligiblePulsePeakIds:[]})),
     contexts:plan.elements.map((_row,index)=>({contextId:`context-${index}`,description:'test only'})),observations:[],audioEvidence:null,audioCandidates:[]};
   const input=createOrchestrationJudgmentInputV001({context,evidence});
-  const reply={schemaVersion:'presentation-orchestration-judgment-v001',inputSha256:input.inputSha256,completion:'complete',
-    captions:plan.elements.map(row=>({captionId:row.instructionId,status:'resolved',semanticRole:'focus',allowedPresets:[{preset:'panel'}],reason:'Test-only automatic plain panel',evidenceIds:[row.instructionId]})),
+  const reply={schemaVersion:'presentation-orchestration-judgment-v002',inputSha256:input.inputSha256,completion:'complete',
+    captions:plan.elements.map(row=>({captionId:row.instructionId,status:'resolved',semanticRole:'focus',allowedPresets:[{preset:'panel',allowedBackgroundPresets:['plain']}],reason:'Test-only automatic plain panel',evidenceIds:[row.instructionId]})),
     connections:context.connectionIds.map(connectionId=>({connectionId,status:'resolved',semanticRole:'continuation',allowedPresets:['normal-cut'],reason:'Test-only normal connection',evidenceIds:[connectionId]}))};
   const state=fixOrchestrationJudgmentV001({context,input,replyBytes:bytes(reply)});
   return {source,context,state,plan};

@@ -6,7 +6,10 @@ import {assertOrchestrationDrawingViewV001} from './presentation_orchestration_v
 export function createOrchestrationRenderScopeV001(view, range = null) {
   assertOrchestrationDrawingViewV001(view);
   assert.equal(view.resolvedPlan.canvas.fps, 30);
-  assert.equal(view.projection.sourceClock.playbackSampleRate, 44100);
+  const playbackSampleRate = view.projection.sourceClock.playbackSampleRate;
+  assert([44100, 48000].includes(playbackSampleRate));
+  const playbackSamplesPerFrame = playbackSampleRate / view.resolvedPlan.canvas.fps;
+  assert(Number.isSafeInteger(playbackSamplesPerFrame));
   const fullFrameCount = view.projection.displayFrameCount;
   const actual = range ?? {startFrame: 0, endFrameExclusive: fullFrameCount};
   assert.deepEqual(Object.keys(actual).sort(), ['endFrameExclusive', 'startFrame']);
@@ -18,8 +21,8 @@ export function createOrchestrationRenderScopeV001(view, range = null) {
     frameCount: actual.endFrameExclusive - actual.startFrame,
     viewSha256: view.viewSha256, projectionSha256: view.projection.projectionSha256,
     fourSavedSha256: view.fourSavedSha256,
-    playbackStartSample: actual.startFrame * 1470,
-    playbackEndSampleExclusive: actual.endFrameExclusive * 1470};
+    playbackStartSample: actual.startFrame * playbackSamplesPerFrame,
+    playbackEndSampleExclusive: actual.endFrameExclusive * playbackSamplesPerFrame};
   return {scope, renderRange,
     normalPlan: scopeOrchestrationPlanV001(view.projectedNormalPlan, renderRange),
     resolvedPlan: scopeOrchestrationPlanV001(view.resolvedPlan, renderRange)};

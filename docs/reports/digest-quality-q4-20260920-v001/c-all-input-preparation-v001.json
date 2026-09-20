@@ -1,0 +1,712 @@
+{
+  "schemaVersion": "q4-c-all-input-preparation-v001",
+  "references": [
+    {
+      "id": "completion",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/phase2-completion-v001/completion-record.json",
+      "fileSha256": "6f656cc4e0c6903139f3f0ecb0bf5000fa6ff19eede3cbbe53981ce24300384a",
+      "bytes": 11417
+    },
+    {
+      "id": "normal-plan",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/common-plan.json",
+      "fileSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+      "bytes": 2095671
+    },
+    {
+      "id": "timeline",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/timeline.json",
+      "fileSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e",
+      "bytes": 3711
+    },
+    {
+      "id": "generation-manifest",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/generation-manifest.json",
+      "fileSha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053",
+      "bytes": 16291
+    },
+    {
+      "id": "normal-style",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/preset-registry.json",
+      "fileSha256": "9ae9208bccc8b75d798ab1ae2f2f21ea275d96121a844c04b4dae1889bcd4c7d",
+      "bytes": 14291
+    },
+    {
+      "id": "caption-bridge",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-v001.json",
+      "fileSha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60",
+      "bytes": 1035588
+    },
+    {
+      "id": "base-media-validation",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/validation-receipt.json",
+      "fileSha256": "3155983a8fdd36b97e0b8ae46ad297ff030c8b4001e56abe264f667d98e5aafc",
+      "bytes": 2813
+    },
+    {
+      "id": "basis-edit-plan",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/edit-plan.json",
+      "fileSha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d",
+      "bytes": 190739
+    },
+    {
+      "id": "completed-media",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+      "bytes": 616632321
+    },
+    {
+      "id": "base-media",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/base-media.mp4",
+      "fileSha256": "0de24b8c9b18d33d38e163f0e1eaed8a35aaeea4b2411c507d7947c992545c04",
+      "bytes": 635378367
+    },
+    {
+      "id": "original-source",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+      "fileSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06",
+      "bytes": 2923277322
+    },
+    {
+      "id": "legacy-semantic-context",
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/inputs/c-all/context.json",
+      "fileSha256": "952c5916bb3c9b7654b3abd8fd6bed624d221431537d1963243f69f2fe664e45",
+      "bytes": 58436
+    },
+    {
+      "id": "legacy-audio-candidates",
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/audio-candidates.json",
+      "fileSha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817",
+      "bytes": 600900
+    },
+    {
+      "id": "legacy-asr",
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/asr-evidence.json",
+      "fileSha256": "b5f2388f595dba372b473b78562a7da770258d43b4e95a381f3ece5d2b43897d",
+      "bytes": 725745
+    },
+    {
+      "id": "legacy-acoustic-peaks",
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/acoustic-peaks.json",
+      "fileSha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d",
+      "bytes": 5612034
+    },
+    {
+      "id": "legacy-pcm",
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/complete-audio.s16le",
+      "fileSha256": "b21494427d2bcead00db583b5e4353a06707639eac1ba7998856da0cacc1f910",
+      "bytes": 47368874
+    },
+    {
+      "id": "legacy-rms",
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/rms.json",
+      "fileSha256": "e6fe650b43138291f6807e246858102d3d12103d63314d0ae39b2ab5f790ace9",
+      "bytes": 8691702
+    },
+    {
+      "id": "legacy-voice-probability",
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/voice-probability.json",
+      "fileSha256": "224b48903a4b38beee30be883df6e4eb3602ef0de19cb75581174b34110c9215",
+      "bytes": 7406116
+    },
+    {
+      "id": "legacy-integrated-rms",
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/integrated-rms.json",
+      "fileSha256": "3f98ff94250b1088410410ad83ddb762afda3ca11cc8c1508436e89f1d043196",
+      "bytes": 9433632
+    },
+    {
+      "id": "current-applicability",
+      "path": "/private/tmp/zev-q4-c-all-current-geometry-20260920-v001.json",
+      "fileSha256": "886e6922985fbcb8c6d95527681bcfa52d668922e522f6a65a0079e3b5da0134",
+      "bytes": 1529621
+    }
+  ],
+  "snapshots": [
+    {
+      "id": "completion",
+      "original": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/phase2-completion-v001/completion-record.json",
+        "fileSha256": "6f656cc4e0c6903139f3f0ecb0bf5000fa6ff19eede3cbbe53981ce24300384a"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/completion.json",
+        "fileSha256": "6f656cc4e0c6903139f3f0ecb0bf5000fa6ff19eede3cbbe53981ce24300384a"
+      }
+    },
+    {
+      "id": "normal-plan",
+      "original": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/common-plan.json",
+        "fileSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/normal-plan.json",
+        "fileSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778"
+      }
+    },
+    {
+      "id": "timeline",
+      "original": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/timeline.json",
+        "fileSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/timeline.json",
+        "fileSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e"
+      }
+    },
+    {
+      "id": "generation-manifest",
+      "original": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/generation-manifest.json",
+        "fileSha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/generation-manifest.json",
+        "fileSha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053"
+      }
+    },
+    {
+      "id": "normal-style",
+      "original": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/preset-registry.json",
+        "fileSha256": "9ae9208bccc8b75d798ab1ae2f2f21ea275d96121a844c04b4dae1889bcd4c7d"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/normal-style.json",
+        "fileSha256": "9ae9208bccc8b75d798ab1ae2f2f21ea275d96121a844c04b4dae1889bcd4c7d"
+      }
+    },
+    {
+      "id": "caption-bridge",
+      "original": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-v001.json",
+        "fileSha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/caption-bridge.json",
+        "fileSha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60"
+      }
+    },
+    {
+      "id": "base-media-validation",
+      "original": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/validation-receipt.json",
+        "fileSha256": "3155983a8fdd36b97e0b8ae46ad297ff030c8b4001e56abe264f667d98e5aafc"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/base-media-validation.json",
+        "fileSha256": "3155983a8fdd36b97e0b8ae46ad297ff030c8b4001e56abe264f667d98e5aafc"
+      }
+    },
+    {
+      "id": "basis-edit-plan",
+      "original": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/edit-plan.json",
+        "fileSha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/basis-edit-plan.json",
+        "fileSha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d"
+      }
+    },
+    {
+      "id": "legacy-semantic-context",
+      "original": {
+        "path": "/private/tmp/zev-vocal-accent-6mnpszdq/inputs/c-all/context.json",
+        "fileSha256": "952c5916bb3c9b7654b3abd8fd6bed624d221431537d1963243f69f2fe664e45"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-semantic-context.json",
+        "fileSha256": "952c5916bb3c9b7654b3abd8fd6bed624d221431537d1963243f69f2fe664e45"
+      }
+    },
+    {
+      "id": "legacy-audio-candidates",
+      "original": {
+        "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/audio-candidates.json",
+        "fileSha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-audio-candidates.json",
+        "fileSha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817"
+      }
+    },
+    {
+      "id": "legacy-asr",
+      "original": {
+        "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/asr-evidence.json",
+        "fileSha256": "b5f2388f595dba372b473b78562a7da770258d43b4e95a381f3ece5d2b43897d"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-asr.json",
+        "fileSha256": "b5f2388f595dba372b473b78562a7da770258d43b4e95a381f3ece5d2b43897d"
+      }
+    },
+    {
+      "id": "legacy-acoustic-peaks",
+      "original": {
+        "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/acoustic-peaks.json",
+        "fileSha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-acoustic-peaks.json",
+        "fileSha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d"
+      }
+    },
+    {
+      "id": "legacy-rms",
+      "original": {
+        "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/rms.json",
+        "fileSha256": "e6fe650b43138291f6807e246858102d3d12103d63314d0ae39b2ab5f790ace9"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-rms.json",
+        "fileSha256": "e6fe650b43138291f6807e246858102d3d12103d63314d0ae39b2ab5f790ace9"
+      }
+    },
+    {
+      "id": "legacy-voice-probability",
+      "original": {
+        "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/voice-probability.json",
+        "fileSha256": "224b48903a4b38beee30be883df6e4eb3602ef0de19cb75581174b34110c9215"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-voice-probability.json",
+        "fileSha256": "224b48903a4b38beee30be883df6e4eb3602ef0de19cb75581174b34110c9215"
+      }
+    },
+    {
+      "id": "legacy-integrated-rms",
+      "original": {
+        "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/integrated-rms.json",
+        "fileSha256": "3f98ff94250b1088410410ad83ddb762afda3ca11cc8c1508436e89f1d043196"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-integrated-rms.json",
+        "fileSha256": "3f98ff94250b1088410410ad83ddb762afda3ca11cc8c1508436e89f1d043196"
+      }
+    },
+    {
+      "id": "current-applicability",
+      "original": {
+        "path": "/private/tmp/zev-q4-c-all-current-geometry-20260920-v001.json",
+        "fileSha256": "886e6922985fbcb8c6d95527681bcfa52d668922e522f6a65a0079e3b5da0134"
+      },
+      "saved": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/current-applicability.json",
+        "fileSha256": "886e6922985fbcb8c6d95527681bcfa52d668922e522f6a65a0079e3b5da0134"
+      }
+    }
+  ],
+  "clock": {
+    "schemaVersion": "q4-c-all-original-clock-v001",
+    "fps": 30,
+    "frameCount": 44408,
+    "playbackSampleRate": 48000,
+    "playbackSampleCount": 71052800,
+    "observationSampleRate": 16000,
+    "observationSampleCount": 23684437,
+    "effectiveObservationEndSample": {
+      "numerator": 71052800,
+      "denominator": 3
+    },
+    "decoderTailObservationSamples": {
+      "numerator": 511,
+      "denominator": 3
+    },
+    "connectionPolicy": "preserve-normal-cut",
+    "connectionCount": 11,
+    "insertedFrameCount": 0,
+    "spans": [
+      {
+        "segmentId": "segment-0001",
+        "sourceStartMs": 499080,
+        "sourceEndMs": 558714,
+        "sourceStartFrame30": 14972,
+        "sourceEndFrame30": 16761,
+        "outputStartFrame": 0,
+        "outputEndFrame": 1789,
+        "audioSamples": {
+          "sourceStart": 23955200,
+          "sourceEnd": 26817600,
+          "outputStart": 0,
+          "outputEnd": 2862400
+        }
+      },
+      {
+        "segmentId": "segment-0002",
+        "sourceStartMs": 2010874,
+        "sourceEndMs": 2155280,
+        "sourceStartFrame30": 60326,
+        "sourceEndFrame30": 64658,
+        "outputStartFrame": 1789,
+        "outputEndFrame": 6121,
+        "audioSamples": {
+          "sourceStart": 96521600,
+          "sourceEnd": 103452800,
+          "outputStart": 2862400,
+          "outputEnd": 9793600
+        }
+      },
+      {
+        "segmentId": "segment-0003",
+        "sourceStartMs": 2275786,
+        "sourceEndMs": 2355253,
+        "sourceStartFrame30": 68274,
+        "sourceEndFrame30": 70658,
+        "outputStartFrame": 6121,
+        "outputEndFrame": 8505,
+        "audioSamples": {
+          "sourceStart": 109238400,
+          "sourceEnd": 113052800,
+          "outputStart": 9793600,
+          "outputEnd": 13608000
+        }
+      },
+      {
+        "segmentId": "segment-0004",
+        "sourceStartMs": 4142230,
+        "sourceEndMs": 4374520,
+        "sourceStartFrame30": 124267,
+        "sourceEndFrame30": 131236,
+        "outputStartFrame": 8505,
+        "outputEndFrame": 15474,
+        "audioSamples": {
+          "sourceStart": 198827200,
+          "sourceEnd": 209977600,
+          "outputStart": 13608000,
+          "outputEnd": 24758400
+        }
+      },
+      {
+        "segmentId": "segment-0005",
+        "sourceStartMs": 4419620,
+        "sourceEndMs": 4439900,
+        "sourceStartFrame30": 132589,
+        "sourceEndFrame30": 133197,
+        "outputStartFrame": 15474,
+        "outputEndFrame": 16082,
+        "audioSamples": {
+          "sourceStart": 212142400,
+          "sourceEnd": 213115200,
+          "outputStart": 24758400,
+          "outputEnd": 25731200
+        }
+      },
+      {
+        "segmentId": "segment-0006",
+        "sourceStartMs": 4950642,
+        "sourceEndMs": 4979980,
+        "sourceStartFrame30": 148519,
+        "sourceEndFrame30": 149399,
+        "outputStartFrame": 16082,
+        "outputEndFrame": 16962,
+        "audioSamples": {
+          "sourceStart": 237630400,
+          "sourceEnd": 239038400,
+          "outputStart": 25731200,
+          "outputEnd": 27139200
+        }
+      },
+      {
+        "segmentId": "segment-0007",
+        "sourceStartMs": 5032496,
+        "sourceEndMs": 5086380,
+        "sourceStartFrame30": 150975,
+        "sourceEndFrame30": 152591,
+        "outputStartFrame": 16962,
+        "outputEndFrame": 18578,
+        "audioSamples": {
+          "sourceStart": 241560000,
+          "sourceEnd": 244145600,
+          "outputStart": 27139200,
+          "outputEnd": 29724800
+        }
+      },
+      {
+        "segmentId": "segment-0008",
+        "sourceStartMs": 7610280,
+        "sourceEndMs": 7727619,
+        "sourceStartFrame30": 228308,
+        "sourceEndFrame30": 231829,
+        "outputStartFrame": 18578,
+        "outputEndFrame": 22099,
+        "audioSamples": {
+          "sourceStart": 365292800,
+          "sourceEnd": 370926400,
+          "outputStart": 29724800,
+          "outputEnd": 35358400
+        }
+      },
+      {
+        "segmentId": "segment-0009",
+        "sourceStartMs": 8139730,
+        "sourceEndMs": 8149920,
+        "sourceStartFrame30": 244192,
+        "sourceEndFrame30": 244498,
+        "outputStartFrame": 22099,
+        "outputEndFrame": 22405,
+        "audioSamples": {
+          "sourceStart": 390707200,
+          "sourceEnd": 391196800,
+          "outputStart": 35358400,
+          "outputEnd": 35848000
+        }
+      },
+      {
+        "segmentId": "segment-0010",
+        "sourceStartMs": 8232340,
+        "sourceEndMs": 8312220,
+        "sourceStartFrame30": 246970,
+        "sourceEndFrame30": 249367,
+        "outputStartFrame": 22405,
+        "outputEndFrame": 24802,
+        "audioSamples": {
+          "sourceStart": 395152000,
+          "sourceEnd": 398987200,
+          "outputStart": 35848000,
+          "outputEnd": 39683200
+        }
+      },
+      {
+        "segmentId": "segment-0011",
+        "sourceStartMs": 10441547,
+        "sourceEndMs": 10488860,
+        "sourceStartFrame30": 313246,
+        "sourceEndFrame30": 314666,
+        "outputStartFrame": 24802,
+        "outputEndFrame": 26222,
+        "audioSamples": {
+          "sourceStart": 501193600,
+          "sourceEnd": 503465600,
+          "outputStart": 39683200,
+          "outputEnd": 41955200
+        }
+      },
+      {
+        "segmentId": "segment-0012",
+        "sourceStartMs": 10500258,
+        "sourceEndMs": 11106471,
+        "sourceStartFrame30": 315008,
+        "sourceEndFrame30": 333194,
+        "outputStartFrame": 26222,
+        "outputEndFrame": 44408,
+        "audioSamples": {
+          "sourceStart": 504012800,
+          "sourceEnd": 533110400,
+          "outputStart": 41955200,
+          "outputEnd": 71052800
+        }
+      }
+    ],
+    "captionInvariantSha256": "91da98a8dd0d1bfeb80c9eb5d95b97c61daa088bcf481d0987fad1814b1e886a",
+    "normal": {
+      "fontSizePx": 94,
+      "fontAssetId": "line-seed-jp-extra-bold-v001",
+      "position": {
+        "preset": "bottom-center",
+        "alignment": "center",
+        "offsetXPercent": 0,
+        "offsetYPercent": -6
+      },
+      "oneLineCaptions": 278,
+      "twoLineCaptions": 47
+    },
+    "limitations": [
+      "Original stream sample offsets belong to the saved source grid; no offset is guessed from rounded milliseconds.",
+      "Decoder tail is outside the completed video clock and cannot anchor a displayed expression."
+    ]
+  },
+  "mediaInspection": {
+    "completed": {
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1",
+            "avg_frame_rate": "30/1",
+            "time_base": "1/15360",
+            "start_pts": 0,
+            "duration_ts": 22736886,
+            "nb_frames": "44408"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/48000",
+            "start_pts": 0,
+            "duration_ts": 71052768,
+            "nb_frames": "69389"
+          }
+        ],
+        "format": {
+          "start_time": "0.000000",
+          "duration": "1480.266016"
+        }
+      },
+      "packetPayloadSha256": "0bc96d57e86ae04b6640e631af7cffb5d6b506d204dd252d64f87809f1f4f92f",
+      "packetCount": 69389,
+      "firstPacket": {
+        "pts": -1024,
+        "duration": 1024,
+        "side_data_list": [
+          {
+            "skip_samples": 1024,
+            "discard_padding": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 71052288,
+        "duration": 512
+      },
+      "skipSamples": 1024,
+      "discardPadding": 0,
+      "method": "Container/stream metadata and every encoded audio packet read; no full video decode, ASR, or encode."
+    },
+    "baseMedia": {
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1",
+            "avg_frame_rate": "30/1",
+            "time_base": "1/15360",
+            "start_pts": 0,
+            "duration_ts": 22736896,
+            "nb_frames": "44408"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/48000",
+            "start_pts": 0,
+            "duration_ts": 71052800,
+            "nb_frames": "69389"
+          }
+        ],
+        "format": {
+          "start_time": "0.000000",
+          "duration": "1480.266667"
+        }
+      },
+      "packetPayloadSha256": "0bc96d57e86ae04b6640e631af7cffb5d6b506d204dd252d64f87809f1f4f92f",
+      "packetCount": 69389,
+      "firstPacket": {
+        "pts": -1024,
+        "duration": 1024,
+        "side_data_list": [
+          {
+            "skip_samples": 1024,
+            "discard_padding": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 71052288,
+        "duration": 512
+      },
+      "skipSamples": 1024,
+      "discardPadding": 0,
+      "method": "Container/stream metadata and every encoded audio packet read; no full video decode, ASR, or encode."
+    }
+  },
+  "sourceSchemas": [
+    "presentation-vocal-audio-candidates-v001",
+    "presentation-vocal-audio-measurements-v001",
+    "presentation-vocal-asr-evidence-v001"
+  ],
+  "newInputSha256": "4ae459682120423c7f47be94bd766b41dbb39b10af33dfe04679d1c9d85f82e4",
+  "contextSha256": "30f4e6cb492bdcb3173e5652f4fb935430981d080b4dd4fefdd64a638198f897",
+  "counts": {
+    "captions": 325,
+    "contexts": 12,
+    "connections": 11,
+    "audioCandidates": 306,
+    "asrSegments": 462,
+    "asrWords": 3159,
+    "qualifiedPeaks": 1068
+  },
+  "applicabilityRef": {
+    "id": "current-applicability",
+    "path": "/private/tmp/zev-q4-c-all-current-geometry-20260920-v001.json",
+    "fileSha256": "886e6922985fbcb8c6d95527681bcfa52d668922e522f6a65a0079e3b5da0134",
+    "bytes": 1529621
+  },
+  "historicalHumanReview": {
+    "completionRef": {
+      "id": "completion",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/phase2-completion-v001/completion-record.json",
+      "fileSha256": "6f656cc4e0c6903139f3f0ecb0bf5000fa6ff19eede3cbbe53981ce24300384a",
+      "bytes": 11417
+    },
+    "note": "Pastly used C-all material, not unseen evaluation. Earlier human answers are not semantic answer labels in this fresh input."
+  },
+  "unavailableExpressionsAreSemanticNormal": false,
+  "limitations": [
+    "Layout applicability uses the existing Node character-width estimate, not measured font pixels.",
+    "No new frames were observed here; selected Panel plates may cover important source content and require the planned short-video review.",
+    "The parent fresh-judgment request deliberately supplies the received Q4 human policy.",
+    "Past raw snapshots retain their original descriptions, including obsolete inspection wording; the new applicability observations explicitly correct the measurement scope."
+  ],
+  "savedFiles": {
+    "source-bindings.json": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/source-bindings.json",
+      "fileSha256": "9dcfedb9caee132e9769ad4975a3055cf4bb8ed0e3598c5a5eb7765734459136"
+    },
+    "semantic-evidence.json": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/semantic-evidence.json",
+      "fileSha256": "0610ee90b0f89ca534a0b4add0465851e6df7097153a30a6c49eeda2fc69da69"
+    },
+    "judgment-input.json": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/judgment-input.json",
+      "fileSha256": "67b6a426d3e83e7e90f1d80c55518c3e0452a95a9e455d456ae23a9a26ff2264"
+    },
+    "native-audio-binding.json": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/native-audio-binding.json",
+      "fileSha256": "4a8abb3805fe637f906d41ac0acb0b73446d61450f05b948974b7c8c44aba4c6"
+    },
+    "preparation-report.json": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/preparation-report.json",
+      "fileSha256": "16648fa3ebe2af4871370fdbbdce1c4695ebd7c15c8c96197c65af359d4e26ca"
+    },
+    "original-clock.json": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/original-clock.json",
+      "fileSha256": "5e7b0d85386fbde2ca6abdc866ed5503426e404af8bec00a4d6e52b865fa4507"
+    }
+  },
+  "readback": {
+    "contextSha256": "30f4e6cb492bdcb3173e5652f4fb935430981d080b4dd4fefdd64a638198f897",
+    "inputSha256": "4ae459682120423c7f47be94bd766b41dbb39b10af33dfe04679d1c9d85f82e4",
+    "reconstructedExactly": true
+  },
+  "initialPathCorrection": {
+    "reason": "First preparation was saved beneath docs; only new generated records were moved to the managed ignored output, then source paths and input identity were reconstructed.",
+    "evidencePath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-initial-path-evidence-v001",
+    "usedForFreshJudgment": false
+  }
+}

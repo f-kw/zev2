@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "q4-render-environment-retry-v001",
+  "classification": "sandbox-local-IPC-denied",
+  "failureRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v002/Q4-C001-evidence/failure.json",
+    "bytes": 2552,
+    "fileSha256": "58ef0600e0962733995854a008857709eb6410cb960d6571aad7a4ead57018f8"
+  },
+  "childFailureRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v002/Q4-C001-evidence/processes/0003-layout-inspection/stderr.txt",
+    "bytes": 864,
+    "fileSha256": "6657aa60f78ba3dea33e75d74108665c4260ccabbc51d66f0f461dc8d888fcf2"
+  },
+  "executionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v002/Q4-C001-execution.json",
+    "bytes": 628,
+    "fileSha256": "2ea3378fe1bd4836f41cd61c8740fc5e1cc4e3915bc0e270c2e048430682df61"
+  },
+  "reason": "Existing tsx layout inspector requires a local IPC socket; sandbox denied listen with EPERM.",
+  "proposedAction": "Use the standard require_escalated approval path for the same three approved Q4 short render jobs. Do not replace the inspector, disable a check, or use another IPC location.",
+  "retryJob": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C001-retry-job-v003.json",
+    "bytes": 17343,
+    "fileSha256": "54144247aaa647cba493dd20352f65f6dd8fccfc1e7ed42f088951f969f90456"
+  },
+  "preRenderSelectionUnchanged": true,
+  "drawingRulesUnchanged": true,
+  "failedNativeAssetsReused": false,
+  "backgroundReuseProofRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v002/Q4-C001-evidence/background/proof.json",
+    "bytes": 12421,
+    "fileSha256": "03d30c2542bb8db4fd86afadc8cba6ee2c3be3f8078cb268f598d3f31fce8048"
+  },
+  "videoQualityClaim": false
+}

@@ -1,0 +1,281 @@
+{
+  "schemaVersion": "digest-quality-q4-pre-render-selection-v001",
+  "viewSha256": "7839f582005ee13fe412df12944e2fa405d3b3d8c73298194512045ed1c7181a",
+  "selectionRecordedBeforeAnyNewImage": true,
+  "manualPresentationOverrides": false,
+  "criteria": "全325件の実判断を固定後、保存Normal計画の行数と論理幅で選定。同幅は元の表示順。対象と同じ保持区間にある直前・直後の字幕を文脈に含める。背景の種類を選定目標にしない。",
+  "geometryMethod": "保存Normal計画の論理幅。文字幅推定であり、実フォント・画素の測定ではない。",
+  "conditionsAbsent": [],
+  "automaticPanelBackgroundCounts": {
+    "plain": 25,
+    "graph-paper": 6,
+    "comic-frame": 6
+  },
+  "backgroundsWithinSelectedRanges": [
+    "graph-paper",
+    "plain"
+  ],
+  "candidates": [
+    {
+      "target": {
+        "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000042",
+        "text": "えっと今うぶちゃんみーちゃんの変化量がもう10くらいいってんだよな",
+        "range": {
+          "startFrame": 2542,
+          "endFrameExclusive": 2936
+        },
+        "lineCount": 2,
+        "maximumLogicalLineWidth": 34,
+        "judgmentStatus": "resolved",
+        "selection": {
+          "role": "Panel accent",
+          "presentation": "provisional-panel-graph-paper",
+          "scope": "whole-caption"
+        },
+        "background": "graph-paper",
+        "segmentId": "segment-0002"
+      },
+      "conditions": [
+        "multi-line-panel"
+      ],
+      "reasons": [
+        "自動Panelの複数行字幕のうち、保存Normal計画の最大行論理幅が最大の字幕。"
+      ],
+      "range": {
+        "startFrame": 2511,
+        "endFrameExclusive": 3197
+      },
+      "includedCaptions": [
+        {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000041",
+          "text": "チャットで送ってみるか",
+          "range": {
+            "startFrame": 2511,
+            "endFrameExclusive": 2542
+          },
+          "lineCount": 1,
+          "maximumLogicalLineWidth": 22,
+          "judgmentStatus": "resolved",
+          "selection": {
+            "role": "Normal"
+          },
+          "background": null,
+          "segmentId": "segment-0002"
+        },
+        {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000042",
+          "text": "えっと今うぶちゃんみーちゃんの変化量がもう10くらいいってんだよな",
+          "range": {
+            "startFrame": 2542,
+            "endFrameExclusive": 2936
+          },
+          "lineCount": 2,
+          "maximumLogicalLineWidth": 34,
+          "judgmentStatus": "resolved",
+          "selection": {
+            "role": "Panel accent",
+            "presentation": "provisional-panel-graph-paper",
+            "scope": "whole-caption"
+          },
+          "background": "graph-paper",
+          "segmentId": "segment-0002"
+        },
+        {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000043",
+          "text": "そこにさらに追加で変化球を覚えさせても",
+          "range": {
+            "startFrame": 2936,
+            "endFrameExclusive": 3197
+          },
+          "lineCount": 2,
+          "maximumLogicalLineWidth": 20,
+          "judgmentStatus": "resolved",
+          "selection": {
+            "role": "Normal"
+          },
+          "background": null,
+          "segmentId": "segment-0002"
+        }
+      ],
+      "id": "Q4-C001"
+    },
+    {
+      "target": {
+        "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000051",
+        "text": "俺たちは仲間",
+        "range": {
+          "startFrame": 4456,
+          "endFrameExclusive": 4462
+        },
+        "lineCount": 1,
+        "maximumLogicalLineWidth": 12,
+        "judgmentStatus": "resolved",
+        "selection": {
+          "role": "Panel accent",
+          "presentation": "provisional-panel",
+          "scope": "whole-caption"
+        },
+        "background": "plain",
+        "segmentId": "segment-0002"
+      },
+      "conditions": [
+        "short-single-line-panel"
+      ],
+      "reasons": [
+        "自動Panelの1行字幕のうち、保存Normal計画の論理幅が最小の字幕。"
+      ],
+      "range": {
+        "startFrame": 4436,
+        "endFrameExclusive": 4564
+      },
+      "includedCaptions": [
+        {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000050",
+          "text": "いやライバルライバルって言いますけどね",
+          "range": {
+            "startFrame": 4436,
+            "endFrameExclusive": 4456
+          },
+          "lineCount": 2,
+          "maximumLogicalLineWidth": 24,
+          "judgmentStatus": "resolved",
+          "selection": {
+            "role": "Normal"
+          },
+          "background": null,
+          "segmentId": "segment-0002"
+        },
+        {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000051",
+          "text": "俺たちは仲間",
+          "range": {
+            "startFrame": 4456,
+            "endFrameExclusive": 4462
+          },
+          "lineCount": 1,
+          "maximumLogicalLineWidth": 12,
+          "judgmentStatus": "resolved",
+          "selection": {
+            "role": "Panel accent",
+            "presentation": "provisional-panel",
+            "scope": "whole-caption"
+          },
+          "background": "plain",
+          "segmentId": "segment-0002"
+        },
+        {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000052",
+          "text": "忘れてるかもしれませんけどね",
+          "range": {
+            "startFrame": 4521,
+            "endFrameExclusive": 4564
+          },
+          "lineCount": 1,
+          "maximumLogicalLineWidth": 28,
+          "judgmentStatus": "resolved",
+          "selection": {
+            "role": "Normal"
+          },
+          "background": null,
+          "segmentId": "segment-0002"
+        }
+      ],
+      "id": "Q4-C002"
+    },
+    {
+      "target": {
+        "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000070",
+        "text": "好きなキャラに覚えさせたのもいいし",
+        "range": {
+          "startFrame": 6528,
+          "endFrameExclusive": 6592
+        },
+        "lineCount": 1,
+        "maximumLogicalLineWidth": 34,
+        "judgmentStatus": "resolved",
+        "selection": {
+          "role": "Panel accent",
+          "presentation": "provisional-panel",
+          "scope": "whole-caption"
+        },
+        "background": "plain",
+        "segmentId": "segment-0003"
+      },
+      "conditions": [
+        "wide-single-line-panel"
+      ],
+      "reasons": [
+        "自動Panelの1行字幕のうち、保存Normal計画の論理幅が最大の字幕。"
+      ],
+      "range": {
+        "startFrame": 6363,
+        "endFrameExclusive": 6645
+      },
+      "includedCaptions": [
+        {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000069",
+          "text": "まあリリカ的にはエースにしたいとか思ったら",
+          "range": {
+            "startFrame": 6363,
+            "endFrameExclusive": 6528
+          },
+          "lineCount": 2,
+          "maximumLogicalLineWidth": 26,
+          "judgmentStatus": "resolved",
+          "selection": {
+            "role": "Normal"
+          },
+          "background": null,
+          "segmentId": "segment-0003"
+        },
+        {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000070",
+          "text": "好きなキャラに覚えさせたのもいいし",
+          "range": {
+            "startFrame": 6528,
+            "endFrameExclusive": 6592
+          },
+          "lineCount": 1,
+          "maximumLogicalLineWidth": 34,
+          "judgmentStatus": "resolved",
+          "selection": {
+            "role": "Panel accent",
+            "presentation": "provisional-panel",
+            "scope": "whole-caption"
+          },
+          "background": "plain",
+          "segmentId": "segment-0003"
+        },
+        {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000071",
+          "text": "そうだよね",
+          "range": {
+            "startFrame": 6592,
+            "endFrameExclusive": 6645
+          },
+          "lineCount": 1,
+          "maximumLogicalLineWidth": 10,
+          "judgmentStatus": "resolved",
+          "selection": {
+            "role": "Normal"
+          },
+          "background": null,
+          "segmentId": "segment-0003"
+        }
+      ],
+      "id": "Q4-C003"
+    }
+  ],
+  "humanQualityApproved": false,
+  "fullSelectionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v002/pre-render-selection.json",
+    "bytes": 161854,
+    "fileSha256": "2c608537f3370575602c857af9bbd291114a86cb9760c72fcfffbab49db0be6b"
+  },
+  "initialSelectionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v001/pre-render-selection.json",
+    "bytes": 161854,
+    "fileSha256": "2c608537f3370575602c857af9bbd291114a86cb9760c72fcfffbab49db0be6b"
+  },
+  "sameByteSelectionAcrossExecutionRetry": true
+}

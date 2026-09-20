@@ -1,0 +1,611 @@
+{
+  "schemaVersion": "digest-quality-q4-candidate-evidence-v001",
+  "observationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/observations-v001/observation-record.json",
+    "bytes": 75769,
+    "fileSha256": "35f6f20df7e18a0b47e1441f7168307d594ef3e6e76773cdceb4985b28991679"
+  },
+  "comparisonCondition": "取りまとめ担当は既存の人間方針・Q3仮説・新しい生成判断を知っている。未知問題の独立発見とは呼ばず、計測事実・意味上の仮説・不足・正常な別説明を分ける。",
+  "candidates": [
+    {
+      "candidateId": "Q4-C001",
+      "reviewId": "HR-Q4-001",
+      "mediaRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C001-render/presentation-rendered-v002.mp4",
+        "bytes": 4346875,
+        "fileSha256": "209397f26a3164d61496b599fe2b7209db3f6d4949115cd27ea63ac4690017ce"
+      },
+      "targetCaptionId": "digest-v1-phase2-20260913-v001-bridge-caption-000042",
+      "targetText": "えっと今うぶちゃんみーちゃんの変化量がもう10くらいいってんだよな",
+      "targetRangeInDigest": {
+        "startFrame": 2542,
+        "endFrameExclusive": 2936
+      },
+      "targetRangeInCandidate": {
+        "startFrame": 31,
+        "endFrameExclusive": 425
+      },
+      "observedFacts": {
+        "method": "保存された本文・元時計、完成動画の共通QC、公開字幕PNGのSHA、ローカル48kHzステレオPCM計測。新しい視聴・聞き取りはしていない。",
+        "lineCount": 2,
+        "durationFrames": 394,
+        "background": "graph-paper",
+        "placement": {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000042",
+          "background": "graph-paper",
+          "selectedRole": "Panel accent",
+          "qcComparisonMethod": "exact-replay-and-native-finite-state-v001",
+          "representativeDigestFrame": 2739,
+          "representativeLocalFrame": 228,
+          "overlay": {
+            "relativePath": "overlays/02-48dcee0b723c.png",
+            "fileSha256": "d18b574d7b3264a9fbcb903ab0001cb4300141765cd1f2db6dfd2b419b85aa0e",
+            "appliedPropertiesSha256": "988e4786ab9f137bdf53dd810611129cb186a2d4a8f4de5cd28b1cf57882cf1c",
+            "publishedRef": {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C001-render/overlays/02-48dcee0b723c.png",
+              "bytes": 138008,
+              "fileSha256": "d18b574d7b3264a9fbcb903ab0001cb4300141765cd1f2db6dfd2b419b85aa0e"
+            }
+          },
+          "compositeAlphaBounds": {
+            "left": 121,
+            "top": 681,
+            "right": 1800,
+            "bottom": 975
+          },
+          "visibleLineAlphaBounds": [
+            {
+              "left": 276,
+              "top": 712,
+              "right": 1644,
+              "bottom": 804
+            },
+            {
+              "left": 161,
+              "top": 855,
+              "right": 1759,
+              "bottom": 945
+            }
+          ],
+          "visibleTextUnionBounds": {
+            "left": 161,
+            "top": 712,
+            "right": 1759,
+            "bottom": 945
+          },
+          "logicalLineRects": [
+            {
+              "left": 255,
+              "top": 701.2,
+              "right": 1665,
+              "bottom": 795.2
+            },
+            {
+              "left": 161,
+              "top": 842.2,
+              "right": 1759,
+              "bottom": 936.2
+            }
+          ],
+          "panel": {
+            "referenceMethod": "Saved native composite alpha bounds, with contained text and matching plate-omitted diagnostic bounds; not a newly isolated plate mask.",
+            "compositeCenter": {
+              "x": 960.5,
+              "y": 828
+            },
+            "visibleTextUnionCenter": {
+              "x": 960,
+              "y": 828.5
+            },
+            "visibleLineHorizontalCenterOffsetsPx": [
+              -0.5,
+              -0.5
+            ],
+            "visibleTextUnionVerticalCenterOffsetPx": 0.5,
+            "visibleTextMarginsPx": {
+              "left": 40,
+              "right": 41,
+              "top": 31,
+              "bottom": 30
+            },
+            "savedPlateOmittedPngSha256": "ed9240936628dd067f2fdf2de2012648323320a7ce958d031ef10e9c0680235c",
+            "savedPlateOmittedTextBoundsMatch": true
+          }
+        },
+        "targetPcm": {
+          "unitId": "digest-v1-phase2-20260913-v001-bridge-caption-000042",
+          "range": {
+            "startFrame": 31,
+            "endFrameExclusive": 425
+          },
+          "startSample": 49600,
+          "endSampleExclusive": 680000,
+          "sampleCount": 630400,
+          "channelMetrics": [
+            {
+              "channel": 0,
+              "minimum": -0.3969622552394867,
+              "maximum": 0.41285502910614014,
+              "peakAbsolute": 0.41285502910614014,
+              "peakSample": 336710,
+              "peakCompletedFrame": 210,
+              "rootMeanSquare": 0.04365321262321291,
+              "exactZeroSamples": 0,
+              "fullScaleOrAboveSamples": 0,
+              "firstSample": 0.021039588376879692,
+              "lastSample": 0.0019196071662008762,
+              "previousSample": 0.019797634333372116,
+              "followingSample": 0.006932960357517004
+            },
+            {
+              "channel": 1,
+              "minimum": -0.38294392824172974,
+              "maximum": 0.3918837904930115,
+              "peakAbsolute": 0.3918837904930115,
+              "peakSample": 337755,
+              "peakCompletedFrame": 211,
+              "rootMeanSquare": 0.043146241520438375,
+              "exactZeroSamples": 0,
+              "fullScaleOrAboveSamples": 0,
+              "firstSample": 0.005097304005175829,
+              "lastSample": 0.0032854743767529726,
+              "previousSample": 0.004498681984841824,
+              "followingSample": 0.0074263522401452065
+            }
+          ]
+        },
+        "wholeClipCoverage": {
+          "captionCount": 3,
+          "noCaptionIntervalCount": 0,
+          "coveredFrames": 686
+        }
+      },
+      "hypothesis": "数値や変化量を説明するこの2行の発話に方眼紙を使う案。文章と背景が一つの説明としてまとまるかは未確認であり、表示のまとまりを問いにする。",
+      "normalAlternatives": [
+        "元の文字と発話だけでも説明が伝わる可能性がある。",
+        "背景が説明を助ける可能性と、画面の別の重要情報を覆う可能性のどちらも残る。"
+      ],
+      "missingEvidence": [
+        "元映像の重要な内容との重なり。",
+        "発話と2行の読み取りの自然さ。"
+      ],
+      "humanQuestion": "「えっと今うぶちゃんみーちゃんの変化量がもう10くらいいってんだよな」に選ばれた背景と文字のまとまりは、自然に見えますか。",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "えっと今うぶちゃんみーちゃんの変化量がもう10くらいいってんだよな：この字幕に選ばれた背景と文字のまとまり。前後は発話の流れを確認するために再生します。"
+        ],
+        "does_not_apply_to": [
+          "隣接字幕の採否への回答転用",
+          "Q1の未回答への回答転記",
+          "HR-Q3-001の未回答への回答転記",
+          "Panel機能の使用許可の取り直し",
+          "Normal／Black／Softの採用の再判定",
+          "動き表現の94px対応",
+          "字幕本文・改行・表示区間・保持順序の変更",
+          "全24分の品質合格"
+        ]
+      },
+      "possibleFollowup": "本人回答を対象版・この字幕へ保存し、Q4内の背景選択や表示のまとまりの具体修正を検討する。本文・保持・表示時間変更へ広がる場合は別の判断に分ける。現時点で修正はしない。",
+      "knownRelation": "HRC-001/002で採用済みの要求を別内容へ適用した確認。機能の使用許可や既知指摘の再発見を問うものではない。Q1の4点・HR-Q3-001への回答転記なし。",
+      "savedGenerationJudgmentForComparison": {
+        "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000042",
+        "status": "resolved",
+        "semanticRole": "focus",
+        "allowedPresets": [
+          {
+            "preset": "color",
+            "scope": "whole-caption"
+          },
+          {
+            "preset": "panel",
+            "allowedBackgroundPresets": [
+              "plain",
+              "graph-paper"
+            ]
+          }
+        ],
+        "reason": "既に変化量が大きい投手という相談の前提を示す。Colorと、能力比較の説明に沿う無地・方眼紙Panelを許容する。",
+        "evidenceIds": [
+          "digest-v1-phase2-20260913-v001-bridge-caption-000042",
+          "c-all-segment-0002"
+        ]
+      },
+      "generationReasonIsQualityProof": false,
+      "reviewAuthorKnowsPriorJudgments": true,
+      "humanAnswer": null,
+      "humanQualityApproved": false
+    },
+    {
+      "candidateId": "Q4-C002",
+      "reviewId": "HR-Q4-002",
+      "mediaRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C002-render/presentation-rendered-v002.mp4",
+        "bytes": 1237690,
+        "fileSha256": "9ea1730ccc3bd3561291a185428aa3aa72afcc2610b0225adcd8c37049f44fce"
+      },
+      "targetCaptionId": "digest-v1-phase2-20260913-v001-bridge-caption-000051",
+      "targetText": "俺たちは仲間",
+      "targetRangeInDigest": {
+        "startFrame": 4456,
+        "endFrameExclusive": 4462
+      },
+      "targetRangeInCandidate": {
+        "startFrame": 20,
+        "endFrameExclusive": 26
+      },
+      "observedFacts": {
+        "method": "保存された本文・元時計、完成動画の共通QC、公開字幕PNGのSHA、ローカル48kHzステレオPCM計測。新しい視聴・聞き取りはしていない。",
+        "lineCount": 1,
+        "durationFrames": 6,
+        "background": "plain",
+        "placement": {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000051",
+          "background": "plain",
+          "selectedRole": "Panel accent",
+          "qcComparisonMethod": "exact-replay-and-native-finite-state-v001",
+          "representativeDigestFrame": 4459,
+          "representativeLocalFrame": 23,
+          "overlay": {
+            "relativePath": "overlays/02-a6706a05e9ad.png",
+            "fileSha256": "41e635da6e875703d0064372830c8966ab29d66662c4a667be85d4e36360352f",
+            "appliedPropertiesSha256": "634b45ab57fa5da3c3f00148b38d25204f505ebbb85e8b6ea5522b4a958c4e81",
+            "publishedRef": {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C002-render/overlays/02-a6706a05e9ad.png",
+              "bytes": 59663,
+              "fileSha256": "41e635da6e875703d0064372830c8966ab29d66662c4a667be85d4e36360352f"
+            }
+          },
+          "compositeAlphaBounds": {
+            "left": 650,
+            "top": 822,
+            "right": 1270,
+            "bottom": 975
+          },
+          "visibleLineAlphaBounds": [
+            {
+              "left": 681,
+              "top": 854,
+              "right": 1239,
+              "bottom": 944
+            }
+          ],
+          "visibleTextUnionBounds": {
+            "left": 681,
+            "top": 854,
+            "right": 1239,
+            "bottom": 944
+          },
+          "logicalLineRects": [
+            {
+              "left": 678,
+              "top": 842.2,
+              "right": 1242,
+              "bottom": 936.2
+            }
+          ],
+          "panel": {
+            "referenceMethod": "Saved native composite alpha bounds, with contained text and matching plate-omitted diagnostic bounds; not a newly isolated plate mask.",
+            "compositeCenter": {
+              "x": 960,
+              "y": 898.5
+            },
+            "visibleTextUnionCenter": {
+              "x": 960,
+              "y": 899
+            },
+            "visibleLineHorizontalCenterOffsetsPx": [
+              0
+            ],
+            "visibleTextUnionVerticalCenterOffsetPx": 0.5,
+            "visibleTextMarginsPx": {
+              "left": 31,
+              "right": 31,
+              "top": 32,
+              "bottom": 31
+            },
+            "savedPlateOmittedPngSha256": "b32007b8b30d17625b259197a8c7dbc4faf29b1921cff8f24deaa932ad47469f",
+            "savedPlateOmittedTextBoundsMatch": true
+          }
+        },
+        "targetPcm": {
+          "unitId": "digest-v1-phase2-20260913-v001-bridge-caption-000051",
+          "range": {
+            "startFrame": 20,
+            "endFrameExclusive": 26
+          },
+          "startSample": 32000,
+          "endSampleExclusive": 41600,
+          "sampleCount": 9600,
+          "channelMetrics": [
+            {
+              "channel": 0,
+              "minimum": -0.34438997507095337,
+              "maximum": 0.3678252398967743,
+              "peakAbsolute": 0.3678252398967743,
+              "peakSample": 36947,
+              "peakCompletedFrame": 23,
+              "rootMeanSquare": 0.10019978281897365,
+              "exactZeroSamples": 0,
+              "fullScaleOrAboveSamples": 0,
+              "firstSample": -0.00766352703794837,
+              "lastSample": -0.10485752671957016,
+              "previousSample": -0.0017802673391997814,
+              "followingSample": -0.10852159559726715
+            },
+            {
+              "channel": 1,
+              "minimum": -0.3407573997974396,
+              "maximum": 0.3684522211551666,
+              "peakAbsolute": 0.3684522211551666,
+              "peakSample": 41008,
+              "peakCompletedFrame": 25,
+              "rootMeanSquare": 0.09938746939867225,
+              "exactZeroSamples": 0,
+              "fullScaleOrAboveSamples": 0,
+              "firstSample": 0.02604597993195057,
+              "lastSample": -0.11020241677761078,
+              "previousSample": 0.03176579624414444,
+              "followingSample": -0.11318212002515793
+            }
+          ]
+        },
+        "wholeClipCoverage": {
+          "captionCount": 3,
+          "noCaptionIntervalCount": 1,
+          "coveredFrames": 128
+        }
+      },
+      "hypothesis": "短い連帯の言葉を無地の板でまとめる案。元の表示は6frameのままであり、この短い出現が文脈の中で自然に見えるかを確認する。短さだけで欠陥とは認定しない。",
+      "normalAlternatives": [
+        "短い反応を音声と前後の流れで理解できる可能性がある。",
+        "一瞬の強調として自然に機能する可能性がある。"
+      ],
+      "missingEvidence": [
+        "元の発話・映像と合わせた受け止め方。",
+        "この表示時間で背景と文字のまとまりを見取れるか。"
+      ],
+      "humanQuestion": "「俺たちは仲間」に選ばれた背景と文字のまとまりは、自然に見えますか。",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "俺たちは仲間：この字幕に選ばれた背景と文字のまとまり。前後は発話の流れを確認するために再生します。"
+        ],
+        "does_not_apply_to": [
+          "隣接字幕の採否への回答転用",
+          "Q1の未回答への回答転記",
+          "HR-Q3-001の未回答への回答転記",
+          "Panel機能の使用許可の取り直し",
+          "Normal／Black／Softの採用の再判定",
+          "動き表現の94px対応",
+          "字幕本文・改行・表示区間・保持順序の変更",
+          "全24分の品質合格"
+        ]
+      },
+      "possibleFollowup": "本人回答を対象版・この字幕へ保存し、Q4内の背景選択や表示のまとまりの具体修正を検討する。本文・保持・表示時間変更へ広がる場合は別の判断に分ける。現時点で修正はしない。",
+      "knownRelation": "HRC-001/002で採用済みの要求を別内容へ適用した確認。機能の使用許可や既知指摘の再発見を問うものではない。Q1の4点・HR-Q3-001への回答転記なし。",
+      "savedGenerationJudgmentForComparison": {
+        "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000051",
+        "status": "resolved",
+        "semanticRole": "focus",
+        "allowedPresets": [
+          {
+            "preset": "color",
+            "scope": "whole-caption"
+          },
+          {
+            "preset": "panel",
+            "allowedBackgroundPresets": [
+              "plain",
+              "comic-frame"
+            ]
+          }
+        ],
+        "reason": "競争相手を仲間と言い直すこの場面の中心台詞。Colorと、宣言を掲げる無地・コミック枠Panelを許容する。",
+        "evidenceIds": [
+          "digest-v1-phase2-20260913-v001-bridge-caption-000051",
+          "c-all-segment-0002"
+        ]
+      },
+      "generationReasonIsQualityProof": false,
+      "reviewAuthorKnowsPriorJudgments": true,
+      "humanAnswer": null,
+      "humanQualityApproved": false
+    },
+    {
+      "candidateId": "Q4-C003",
+      "reviewId": "HR-Q4-003",
+      "mediaRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C003-render/presentation-rendered-v002.mp4",
+        "bytes": 2156475,
+        "fileSha256": "0a5bd2a7b8a461b4e0276df660ddf09c452dcc60b0d47b0e2780551cfebc4145"
+      },
+      "targetCaptionId": "digest-v1-phase2-20260913-v001-bridge-caption-000070",
+      "targetText": "好きなキャラに覚えさせたのもいいし",
+      "targetRangeInDigest": {
+        "startFrame": 6528,
+        "endFrameExclusive": 6592
+      },
+      "targetRangeInCandidate": {
+        "startFrame": 165,
+        "endFrameExclusive": 229
+      },
+      "observedFacts": {
+        "method": "保存された本文・元時計、完成動画の共通QC、公開字幕PNGのSHA、ローカル48kHzステレオPCM計測。新しい視聴・聞き取りはしていない。",
+        "lineCount": 1,
+        "durationFrames": 64,
+        "background": "plain",
+        "placement": {
+          "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000070",
+          "background": "plain",
+          "selectedRole": "Panel accent",
+          "qcComparisonMethod": "exact-replay-and-native-finite-state-v001",
+          "representativeDigestFrame": 6560,
+          "representativeLocalFrame": 197,
+          "overlay": {
+            "relativePath": "overlays/02-c8af36ad8e77.png",
+            "fileSha256": "47d12f1be310b761ea832fbcc0f07c838a79451b966198f3f2f916e79bae49ff",
+            "appliedPropertiesSha256": "b6a08c95d441685224350f453b9cc2e480f71777d172d5dbd178196328da4411",
+            "publishedRef": {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C003-render/overlays/02-c8af36ad8e77.png",
+              "bytes": 89773,
+              "fileSha256": "47d12f1be310b761ea832fbcc0f07c838a79451b966198f3f2f916e79bae49ff"
+            }
+          },
+          "compositeAlphaBounds": {
+            "left": 133,
+            "top": 822,
+            "right": 1787,
+            "bottom": 975
+          },
+          "visibleLineAlphaBounds": [
+            {
+              "left": 169,
+              "top": 854,
+              "right": 1752,
+              "bottom": 944
+            }
+          ],
+          "visibleTextUnionBounds": {
+            "left": 169,
+            "top": 854,
+            "right": 1752,
+            "bottom": 944
+          },
+          "logicalLineRects": [
+            {
+              "left": 161,
+              "top": 842.2,
+              "right": 1759,
+              "bottom": 936.2
+            }
+          ],
+          "panel": {
+            "referenceMethod": "Saved native composite alpha bounds, with contained text and matching plate-omitted diagnostic bounds; not a newly isolated plate mask.",
+            "compositeCenter": {
+              "x": 960,
+              "y": 898.5
+            },
+            "visibleTextUnionCenter": {
+              "x": 960.5,
+              "y": 899
+            },
+            "visibleLineHorizontalCenterOffsetsPx": [
+              0.5
+            ],
+            "visibleTextUnionVerticalCenterOffsetPx": 0.5,
+            "visibleTextMarginsPx": {
+              "left": 36,
+              "right": 35,
+              "top": 32,
+              "bottom": 31
+            },
+            "savedPlateOmittedPngSha256": "672f38184803ea65b21046f7a738bb28202298f7b6c10b663af9e155efb991ca",
+            "savedPlateOmittedTextBoundsMatch": true
+          }
+        },
+        "targetPcm": {
+          "unitId": "digest-v1-phase2-20260913-v001-bridge-caption-000070",
+          "range": {
+            "startFrame": 165,
+            "endFrameExclusive": 229
+          },
+          "startSample": 264000,
+          "endSampleExclusive": 366400,
+          "sampleCount": 102400,
+          "channelMetrics": [
+            {
+              "channel": 0,
+              "minimum": -0.25960564613342285,
+              "maximum": 0.2415602207183838,
+              "peakAbsolute": 0.25960564613342285,
+              "peakSample": 357988,
+              "peakCompletedFrame": 223,
+              "rootMeanSquare": 0.026794353292464837,
+              "exactZeroSamples": 0,
+              "fullScaleOrAboveSamples": 0,
+              "firstSample": 0.04412616789340973,
+              "lastSample": -0.008757914416491985,
+              "previousSample": 0.03804002329707146,
+              "followingSample": -0.007863660342991352
+            },
+            {
+              "channel": 1,
+              "minimum": -0.26400884985923767,
+              "maximum": 0.24809691309928894,
+              "peakAbsolute": 0.26400884985923767,
+              "peakSample": 357988,
+              "peakCompletedFrame": 223,
+              "rootMeanSquare": 0.026001164181883647,
+              "exactZeroSamples": 0,
+              "fullScaleOrAboveSamples": 0,
+              "firstSample": 0.05452899634838104,
+              "lastSample": -0.0011046751169487834,
+              "previousSample": 0.04627292603254318,
+              "followingSample": -0.0005712344427593052
+            }
+          ]
+        },
+        "wholeClipCoverage": {
+          "captionCount": 3,
+          "noCaptionIntervalCount": 0,
+          "coveredFrames": 282
+        }
+      },
+      "hypothesis": "選択肢を説明する横長の1行を無地の板でまとめる案。この内容で強調と前後の通常表示が自然につながるかを確認する。",
+      "normalAlternatives": [
+        "板を用いることで説明のまとまりが伝わる可能性がある。",
+        "発話や画面だけでも十分伝わる可能性がある。"
+      ],
+      "missingEvidence": [
+        "元映像の重要な情報との重なり。",
+        "横長の背景を含む表示の自然さ。"
+      ],
+      "humanQuestion": "「好きなキャラに覚えさせたのもいいし」に選ばれた背景と文字のまとまりは、自然に見えますか。",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "好きなキャラに覚えさせたのもいいし：この字幕に選ばれた背景と文字のまとまり。前後は発話の流れを確認するために再生します。"
+        ],
+        "does_not_apply_to": [
+          "隣接字幕の採否への回答転用",
+          "Q1の未回答への回答転記",
+          "HR-Q3-001の未回答への回答転記",
+          "Panel機能の使用許可の取り直し",
+          "Normal／Black／Softの採用の再判定",
+          "動き表現の94px対応",
+          "字幕本文・改行・表示区間・保持順序の変更",
+          "全24分の品質合格"
+        ]
+      },
+      "possibleFollowup": "本人回答を対象版・この字幕へ保存し、Q4内の背景選択や表示のまとまりの具体修正を検討する。本文・保持・表示時間変更へ広がる場合は別の判断に分ける。現時点で修正はしない。",
+      "knownRelation": "HRC-001/002で採用済みの要求を別内容へ適用した確認。機能の使用許可や既知指摘の再発見を問うものではない。Q1の4点・HR-Q3-001への回答転記なし。",
+      "savedGenerationJudgmentForComparison": {
+        "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000070",
+        "status": "resolved",
+        "semanticRole": "focus",
+        "allowedPresets": [
+          {
+            "preset": "color",
+            "scope": "whole-caption"
+          },
+          {
+            "preset": "panel",
+            "allowedBackgroundPresets": [
+              "plain"
+            ]
+          }
+        ],
+        "reason": "好きな選手に覚えさせてもよいという選択の自由が相談への答え。Colorと、助言を落ち着いて示す無地Panelを許容する。",
+        "evidenceIds": [
+          "digest-v1-phase2-20260913-v001-bridge-caption-000070",
+          "c-all-segment-0003"
+        ]
+      },
+      "generationReasonIsQualityProof": false,
+      "reviewAuthorKnowsPriorJudgments": true,
+      "humanAnswer": null,
+      "humanQualityApproved": false
+    }
+  ]
+}

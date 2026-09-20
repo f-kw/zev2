@@ -114,6 +114,26 @@ Q1の3修正の人間再確認待ちと、実UIの環境待ちは従来どおり
 
 ---
 
+## 0.5 Q4の別Digest確認 — 自動背景と文字のまとまり
+
+2026-09-20、[Q4指示](reports/digest-quality-q4-20260920-v001/instruction-received-v001.md)と[本人の続行承認](reports/digest-quality-q4-20260920-v001/resumption-received-v001.md)に基づき、C-all全325字幕の新判断と自動背景選択を保存した。条件を描画前に固定した3本の短尺、完成動画QC、区間別音声計測、標準レビューの生成まで完了。最終監査前であり、人間品質の合格ではない。
+
+Batchは **HRB-Q4-001 / v001**。全3点は `HUMAN_REVIEW_PENDING`、視聴・回答・採否は未実施。Q1の4点、HR-Q3-001、Q3-C002の内部保留は維持する。
+
+|review_id／point_id|対象字幕と問い|前後を含む提示区間|媒体SHA|
+|---|---|---|---|
+|HR-Q4-001／Q4-C001|「えっと今うぶちゃんみーちゃんの変化量がもう10くらいいってんだよな」の方眼紙と2行の文字のまとまりは自然か|686frame、約22.87秒|`209397f26a3164d61496b599fe2b7209db3f6d4949115cd27ea63ac4690017ce`|
+|HR-Q4-002／Q4-C002|「俺たちは仲間」の無地背景と文字のまとまりは自然か|128frame、約4.27秒|`9ea1730ccc3bd3561291a185428aa3aa72afcc2610b0225adcd8c37049f44fce`|
+|HR-Q4-003／Q4-C003|「好きなキャラに覚えさせたのもいいし」の無地背景と横長の文字のまとまりは自然か|282frame、9.4秒|`0a5bd2a7b8a461b4e0276df660ddf09c452dcc60b0d47b0e2780551cfebc4145`|
+
+- [標準確認HTML](/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/review.html)、[問い・媒体・固有時計・回答範囲](reports/digest-quality-q4-20260920-v001/review-v001.json)、[観測事実・仮説・不足](reports/digest-quality-q4-20260920-v001/candidate-evidence-v001.json)。
+- 3件とも新しい固定自動案の結果であり、背景を手で選び直していない。対象表示は順に394・6・64frameで元のまま。前後は発話の文脈を示すために含め、回答を隣接字幕へ広げない。
+- HRC-001／002の既存要求を別内容へ適用した確認。Panel機能の使用許可や黒・Softの採用を問い直さず、Q1の修正後確認へ回答を転記しない。
+- 反映し得るのは対象版の背景選択や表示のまとまりに関するQ4内の具体修正。本文・表示時間・保持区間を変える要求は別の判断に分ける。現時点では変更しない。
+- 技術検査の成功を見心地の採用にせず、CLOSED・反映確認済み・全編合格には進めない。実ブラウザー操作、本人の直接open、視聴は未確認。
+
+---
+
 ## 1. 現在のHuman Review Batch
 
 ### HRB-001 — 保存済み自動演出Digestのレビュー対象

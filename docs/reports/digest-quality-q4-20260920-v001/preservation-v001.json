@@ -1,0 +1,2299 @@
+{
+  "schemaVersion": "digest-quality-q4-preservation-v001",
+  "checkedAt": "2026-09-20T10:12:44.733Z",
+  "q4StartCommit": "e2c67d7dd81440c0df2125ce5815cd3471be59a3",
+  "scope": "Q3で固定済みの18文書・7媒体、Q1/Q3の保存済み確認資料・Q3回答/候補、Q4のC-all入力準備/保存依頼/参照。明示参照だけを検査し、全workspace探索と新Q4候補完成証拠を除外。",
+  "method": "SHA-256をstreamで再計算し保存済みfile SHA・byte数、またはQ4開始commit内の対象ファイルbyteと比較。ハッシュのみで内容を変更せず、媒体の視覚解析・再生・復号は行わない。",
+  "baselineManifests": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json",
+      "sha256": "9e0088209decc599951868bf9058b9b6fa949f6b60343c3febaf7625534a68c1",
+      "bytes": 7781,
+      "savedCommit": {
+        "commit": "e2c67d7dd81440c0df2125ce5815cd3471be59a3",
+        "sha256": "9e0088209decc599951868bf9058b9b6fa949f6b60343c3febaf7625534a68c1",
+        "bytes": 7781,
+        "matchesCurrent": true
+      }
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/review-main-verification-v001.json",
+      "sha256": "e785ad5e4dbacb7c6c4a55686d4691afea4046c808aa67758c2ad57342445d1f",
+      "bytes": 16299,
+      "savedCommit": {
+        "commit": "e2c67d7dd81440c0df2125ce5815cd3471be59a3",
+        "sha256": "e785ad5e4dbacb7c6c4a55686d4691afea4046c808aa67758c2ad57342445d1f",
+        "bytes": 16299,
+        "matchesCurrent": true
+      }
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/review-verification-v001.json",
+      "sha256": "9c1be46c59d995a56e32db53c9f643d27c86c9122c5476d8085dec6a95b0185e",
+      "bytes": 2650,
+      "savedCommit": {
+        "commit": "e2c67d7dd81440c0df2125ce5815cd3471be59a3",
+        "sha256": "9c1be46c59d995a56e32db53c9f643d27c86c9122c5476d8085dec6a95b0185e",
+        "bytes": 2650,
+        "matchesCurrent": true
+      }
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/judgment-validation-v001.json",
+      "sha256": "bf984605196862d8fc5f5801c28c39e5fc3b58d9dbb933e0da3022a39d8e4872",
+      "bytes": 120824,
+      "savedCommit": {
+        "commit": "e2c67d7dd81440c0df2125ce5815cd3471be59a3",
+        "sha256": "bf984605196862d8fc5f5801c28c39e5fc3b58d9dbb933e0da3022a39d8e4872",
+        "bytes": 120824,
+        "matchesCurrent": true
+      }
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/request.json",
+      "sha256": "8c8b4a7da6c3ad309029fa732d59327b01d4869b4dfc79b99806731898c6ec30",
+      "bytes": 9592
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json",
+      "sha256": "d94fe8d0289354db1c28c7e2992ee454b959dde1346c6b2871681fca163f6aa8",
+      "bytes": 30051
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/request.json",
+      "sha256": "6052dafa98a65ce6c23717cebd656f12a417183ac59146d8f3cb45ec0bb99321",
+      "bytes": 758
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/advisor-final-audit-v001.md",
+      "sha256": "e4e7ba7421a3e3857c2ceda862843a095fd0649e52f6ea178e294066260ec439",
+      "bytes": 2970,
+      "savedCommit": {
+        "commit": "f3ade3924afa16f9a9f5a4fa6d2570dadba3e803",
+        "sha256": "e4e7ba7421a3e3857c2ceda862843a095fd0649e52f6ea178e294066260ec439",
+        "bytes": 2970,
+        "matchesCurrent": true
+      }
+    }
+  ],
+  "summary": {
+    "uniqueFiles": 90,
+    "matchesSavedBaseline": 88,
+    "currentReferenceOnly": 1,
+    "mismatches": 0,
+    "unreadable": 0,
+    "changedDuringRead": 0,
+    "baselineComparisons": 102,
+    "groups": {
+      "q3-preserved-18-documents": {
+        "files": 18,
+        "matches": 18,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "q1-review-definition": {
+        "files": 1,
+        "matches": 1,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "q3-preserved-7-media": {
+        "files": 7,
+        "matches": 7,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "q1-review-html": {
+        "files": 1,
+        "matches": 1,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "q1-unanswered": {
+        "files": 1,
+        "matches": 1,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "q1-candidate-completions": {
+        "files": 5,
+        "matches": 5,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "q3-saved-judgment-candidates-review": {
+        "files": 7,
+        "matches": 6,
+        "currentReferenceOnly": 0,
+        "failures": 0,
+        "matchesPreQ4RecordedAcceptance": 1
+      },
+      "q3-raw-reply": {
+        "files": 2,
+        "matches": 2,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "q3-review-definition": {
+        "files": 2,
+        "matches": 2,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "q3-review-html": {
+        "files": 1,
+        "matches": 1,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "q3-unanswered": {
+        "files": 1,
+        "matches": 0,
+        "currentReferenceOnly": 1,
+        "failures": 0
+      },
+      "q3-saved-request": {
+        "files": 2,
+        "matches": 2,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "c-all-original-input-references": {
+        "files": 20,
+        "matches": 20,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "c-all-live-source-bindings": {
+        "files": 7,
+        "matches": 7,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "c-all-preserved-input-copies": {
+        "files": 16,
+        "matches": 16,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "c-all-prepared-input-files": {
+        "files": 6,
+        "matches": 6,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      },
+      "c-all-saved-judgment-request": {
+        "files": 3,
+        "matches": 3,
+        "currentReferenceOnly": 0,
+        "failures": 0
+      }
+    },
+    "knownPreQ4AcceptanceDifference": 1,
+    "startCommitDifferences": 1
+  },
+  "checks": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/README.md",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/0",
+          "sha256": "d42bdfc91b9386b3e834e1bc0f0b8fde93460ca7a65eb1bb7f10bf19e091ff63",
+          "bytes": 4579,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "d42bdfc91b9386b3e834e1bc0f0b8fde93460ca7a65eb1bb7f10bf19e091ff63",
+        "bytes": 4579,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/comparison-points.json",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/1",
+          "sha256": "3823178a06f1794cc01b0d8c66637cb828018cb2bbcac9721f670ab387c7aa11",
+          "bytes": 3457,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "3823178a06f1794cc01b0d8c66637cb828018cb2bbcac9721f670ab387c7aa11",
+        "bytes": 3457,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/comparison.html",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/2",
+          "sha256": "e9d0f3d45d28471093c9894d07fe3cea97a525df72b88f99b280235bc2c6f578",
+          "bytes": 10553,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "e9d0f3d45d28471093c9894d07fe3cea97a525df72b88f99b280235bc2c6f578",
+        "bytes": 10553,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/hrb001-bindings.json",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/3",
+          "sha256": "b370cb0a8c03b2e6da9f0b959347132462b42e08e66471f6572edd35aa291ecb",
+          "bytes": 26085,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "b370cb0a8c03b2e6da9f0b959347132462b42e08e66471f6572edd35aa291ecb",
+        "bytes": 26085,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/hrb002-bindings.json",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/4",
+          "sha256": "c05055bfd5c1e66d6bcda6d8ff2b261626bb30ce1a7ec4605dfaa13d5a2a27b8",
+          "bytes": 13512,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "c05055bfd5c1e66d6bcda6d8ff2b261626bb30ce1a7ec4605dfaa13d5a2a27b8",
+        "bytes": 13512,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/human-response-original-v001.md",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/5",
+          "sha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98",
+          "bytes": 5572,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98",
+        "bytes": 5572,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/responses.json",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/6",
+          "sha256": "411e896f17cc50eefe72cc72a52df60c4ddcfa31f2699757bc87e625efdf950f",
+          "bytes": 39348,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "411e896f17cc50eefe72cc72a52df60c4ddcfa31f2699757bc87e625efdf950f",
+        "bytes": 39348,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/session.json",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/7",
+          "sha256": "062b179f2ad6144f1fa04941169f63cf6aa8b7d627844219f37416d83b82eab3",
+          "bytes": 15746,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "062b179f2ad6144f1fa04941169f63cf6aa8b7d627844219f37416d83b82eab3",
+        "bytes": 15746,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/AGENTS.md",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/8",
+          "sha256": "4da0725bc29514a8cdd29c4891039a8ae9adb9b7375cb45674fec876937c76f1",
+          "bytes": 10697,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "4da0725bc29514a8cdd29c4891039a8ae9adb9b7375cb45674fec876937c76f1",
+        "bytes": 10697,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/DECISIONS.md",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/9",
+          "sha256": "d5fada5c70f2da127abb07d7bbbd522eccf0313057387735b02289bcca028e75",
+          "bytes": 521386,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "d5fada5c70f2da127abb07d7bbbd522eccf0313057387735b02289bcca028e75",
+        "bytes": 521386,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/CURRENT_GOAL.md",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/10",
+          "sha256": "fb37ace122775ec3829fcafbe74ca06e5092f378f9dd2849382e5fd6e16e9253",
+          "bytes": 8063,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "fb37ace122775ec3829fcafbe74ca06e5092f378f9dd2849382e5fd6e16e9253",
+        "bytes": 8063,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/work-orders/DIGEST_Q1_Q2_WORK_ORDER_v001.md",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/11",
+          "sha256": "8db37dcd8b43c23f2cdbf14e4caf3fddbcd027dd31d0923fdcfde954e0653563",
+          "bytes": 14082,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "8db37dcd8b43c23f2cdbf14e4caf3fddbcd027dd31d0923fdcfde954e0653563",
+        "bytes": 14082,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/pnpm-lock.yaml",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/12",
+          "sha256": "1bfb232ca8a693bebedc1fd84971800aad2f633b2595ed805f2078f1dad44812",
+          "bytes": 177485,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "1bfb232ca8a693bebedc1fd84971800aad2f633b2595ed805f2078f1dad44812",
+        "bytes": 177485,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/source-bindings.json",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/13",
+          "sha256": "87d95289df43473c7eb4a672c1a57b314119db05d7124512398df3388bd0550e",
+          "bytes": 354254,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "87d95289df43473c7eb4a672c1a57b314119db05d7124512398df3388bd0550e",
+        "bytes": 354254,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/captionAuto.json",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/14",
+          "sha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1",
+          "bytes": 43149,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1",
+        "bytes": 43149,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/connectionAuto.json",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/15",
+          "sha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7",
+          "bytes": 2159,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7",
+        "bytes": 2159,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/review-main-v001.json",
+      "groups": [
+        "q3-preserved-18-documents",
+        "q1-review-definition"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/16",
+          "sha256": "5810ae6d13133cba265c161c84ec3f8024ad778917c62485897c9195392371e3",
+          "bytes": 12061,
+          "sha256Matches": true,
+          "bytesMatch": true
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q1-q2-20260920-v001/review-main-verification-v001.json#/source_data",
+          "sha256": "5810ae6d13133cba265c161c84ec3f8024ad778917c62485897c9195392371e3",
+          "bytes": 12061,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "5810ae6d13133cba265c161c84ec3f8024ad778917c62485897c9195392371e3",
+        "bytes": 12061,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/revision-lifecycle-v001.json",
+      "groups": [
+        "q3-preserved-18-documents"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/trackedFiles/17",
+          "sha256": "597f63eecd178f23ffcf39d59a359807035e8fc4a318b718df3f9c651170fd09",
+          "bytes": 5483,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "597f63eecd178f23ffcf39d59a359807035e8fc4a318b718df3f9c651170fd09",
+        "bytes": 5483,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+      "groups": [
+        "q3-preserved-7-media"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/media/0",
+          "sha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "bytes": 75306932,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+        "bytes": 75306932,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+      "groups": [
+        "q3-preserved-7-media"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/media/1",
+          "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "bytes": 75271228,
+          "sha256Matches": true,
+          "bytesMatch": true
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/media/2",
+          "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "bytes": 75271228,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+        "bytes": 75271228,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-render-v002/presentation-rendered-v002.mp4",
+      "groups": [
+        "q3-preserved-7-media"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/media/3",
+          "sha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118",
+          "bytes": 2485102,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118",
+        "bytes": 2485102,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-render/presentation-rendered-v002.mp4",
+      "groups": [
+        "q3-preserved-7-media"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/media/4",
+          "sha256": "290dd256d75bf596cb4775ab3697e778687916f893eae70fa1e148c745a4ccdf",
+          "bytes": 2131201,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "290dd256d75bf596cb4775ab3697e778687916f893eae70fa1e148c745a4ccdf",
+        "bytes": 2131201,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-graph-paper-render/presentation-rendered-v002.mp4",
+      "groups": [
+        "q3-preserved-7-media"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/media/5",
+          "sha256": "5169c7f29ed7abe26fafca1c79debedf927bff7a0ee0e8a1c115b419d2c6fa6b",
+          "bytes": 1483049,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "5169c7f29ed7abe26fafca1c79debedf927bff7a0ee0e8a1c115b419d2c6fa6b",
+        "bytes": 1483049,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-comic-frame-render/presentation-rendered-v002.mp4",
+      "groups": [
+        "q3-preserved-7-media"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/media/6",
+          "sha256": "e14ab77c96a80780668c791c6a94498ca1fceb47bf1da25f9368bc9e3f7e7085",
+          "bytes": 1483853,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "e14ab77c96a80780668c791c6a94498ca1fceb47bf1da25f9368bc9e3f7e7085",
+        "bytes": 1483853,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+      "groups": [
+        "q3-preserved-7-media"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/preservation-v001.json#/media/7",
+          "sha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58",
+          "bytes": 4623609,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58",
+        "bytes": 4623609,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/review-v001/index.html",
+      "groups": [
+        "q1-review-html"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q1-q2-20260920-v001/review-main-verification-v001.json#/build",
+          "sha256": "6ffa202055bdf7e07e8096f8fff3a923e57632353a8dc82f90e5e1d1624018f7",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "6ffa202055bdf7e07e8096f8fff3a923e57632353a8dc82f90e5e1d1624018f7",
+        "bytes": 41358,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/review-v001/blank-answers.json",
+      "groups": [
+        "q1-unanswered"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q1-q2-20260920-v001/review-main-verification-v001.json#/initial_answers",
+          "sha256": "74728c40aa96c0f536d4c83ac1ca3e89d96942936a14b433d6113581efc02766",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "74728c40aa96c0f536d4c83ac1ca3e89d96942936a14b433d6113581efc02766",
+        "bytes": 8805,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-evidence-v002/completion.json",
+      "groups": [
+        "q1-candidate-completions"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q1-q2-20260920-v001/review-main-verification-v001.json#/provenance/candidate_completions/0",
+          "sha256": "44152e2546912d45daac24f3b7ee9698a415076f4ce6df43176803de309d6cb6",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "44152e2546912d45daac24f3b7ee9698a415076f4ce6df43176803de309d6cb6",
+        "bytes": 10888518,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-evidence/completion.json",
+      "groups": [
+        "q1-candidate-completions"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q1-q2-20260920-v001/review-main-verification-v001.json#/provenance/candidate_completions/1",
+          "sha256": "5259161350a257ad290d70235bfea76b23f71102749744c7d0ed2c45efb46d89",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "5259161350a257ad290d70235bfea76b23f71102749744c7d0ed2c45efb46d89",
+        "bytes": 5153433,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-graph-paper-evidence/completion.json",
+      "groups": [
+        "q1-candidate-completions"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q1-q2-20260920-v001/review-main-verification-v001.json#/provenance/candidate_completions/2",
+          "sha256": "f3829c4f9ebeaed8a97c223d308007b9e43d1dd2a2746982fa1c6f4f4b0041b1",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "f3829c4f9ebeaed8a97c223d308007b9e43d1dd2a2746982fa1c6f4f4b0041b1",
+        "bytes": 5197608,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-comic-frame-evidence/completion.json",
+      "groups": [
+        "q1-candidate-completions"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q1-q2-20260920-v001/review-main-verification-v001.json#/provenance/candidate_completions/3",
+          "sha256": "58a514d4067224efa657895fc05111ae1062919e22eb257ecab012871cb5094a",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "58a514d4067224efa657895fc05111ae1062919e22eb257ecab012871cb5094a",
+        "bytes": 5197317,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-evidence/completion.json",
+      "groups": [
+        "q1-candidate-completions"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q1-q2-20260920-v001/review-main-verification-v001.json#/provenance/candidate_completions/4",
+          "sha256": "501bad990cce44f6e478ed18e75aa9baec35ad588bd4d83e10bdf39a8db0d65a",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "501bad990cce44f6e478ed18e75aa9baec35ad588bd4d83e10bdf39a8db0d65a",
+        "bytes": 34241063,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/judgment-reply-v001.json",
+      "groups": [
+        "q3-saved-judgment-candidates-review",
+        "q3-raw-reply"
+      ],
+      "baselines": [
+        {
+          "kind": "sha256-of-saved-start-commit-bytes",
+          "source": "git:e2c67d7dd81440c0df2125ce5815cd3471be59a3:docs/reports/digest-quality-q3-20260920-v001/judgment-reply-v001.json",
+          "sha256": "0b7981f9fe017b2f8379f5c5a107f2c03e0816480224e72bbb80252386f28b07",
+          "bytes": 116200,
+          "sha256Matches": true,
+          "bytesMatch": true
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/judgment-validation-v001.json#/rawReplySha256",
+          "sha256": "0b7981f9fe017b2f8379f5c5a107f2c03e0816480224e72bbb80252386f28b07",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "0b7981f9fe017b2f8379f5c5a107f2c03e0816480224e72bbb80252386f28b07",
+        "bytes": 116200,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/judgment-validation-v001.json",
+      "groups": [
+        "q3-saved-judgment-candidates-review"
+      ],
+      "baselines": [
+        {
+          "kind": "sha256-of-saved-start-commit-bytes",
+          "source": "git:e2c67d7dd81440c0df2125ce5815cd3471be59a3:docs/reports/digest-quality-q3-20260920-v001/judgment-validation-v001.json",
+          "sha256": "bf984605196862d8fc5f5801c28c39e5fc3b58d9dbb933e0da3022a39d8e4872",
+          "bytes": 120824,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "bf984605196862d8fc5f5801c28c39e5fc3b58d9dbb933e0da3022a39d8e4872",
+        "bytes": 120824,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/candidate-evidence-v001.json",
+      "groups": [
+        "q3-saved-judgment-candidates-review"
+      ],
+      "baselines": [
+        {
+          "kind": "sha256-of-saved-start-commit-bytes",
+          "source": "git:e2c67d7dd81440c0df2125ce5815cd3471be59a3:docs/reports/digest-quality-q3-20260920-v001/candidate-evidence-v001.json",
+          "sha256": "a32148ff0ec0fef15a46264da8d2bb8f7d0a9fed7e1061d3c0c9d1c1a0d9d780",
+          "bytes": 172862,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "a32148ff0ec0fef15a46264da8d2bb8f7d0a9fed7e1061d3c0c9d1c1a0d9d780",
+        "bytes": 172862,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/candidate-lifecycle-v001.json",
+      "groups": [
+        "q3-saved-judgment-candidates-review"
+      ],
+      "baselines": [
+        {
+          "kind": "sha256-of-saved-start-commit-bytes",
+          "source": "git:e2c67d7dd81440c0df2125ce5815cd3471be59a3:docs/reports/digest-quality-q3-20260920-v001/candidate-lifecycle-v001.json",
+          "sha256": "c616af5237ba8828494b3fba864ce2d27534a18e2ccea8732b5c67e1f47ea40e",
+          "bytes": 1008,
+          "sha256Matches": false,
+          "bytesMatch": false
+        },
+        {
+          "kind": "sha256-of-saved-pre-q4-acceptance-commit-bytes",
+          "source": "git:f3ade3924afa16f9a9f5a4fa6d2570dadba3e803:docs/reports/digest-quality-q3-20260920-v001/candidate-lifecycle-v001.json",
+          "sha256": "1810beef950ddc70db45d10e24aa46bd0e8f06a2aaf9f5eac213b1ee86ca704e",
+          "bytes": 1069,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "1810beef950ddc70db45d10e24aa46bd0e8f06a2aaf9f5eac213b1ee86ca704e",
+        "bytes": 1069,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-pre-q4-recorded-acceptance",
+      "preservedStartCommitDifference": {
+        "status": "known-pre-q4-acceptance-record",
+        "startCommit": "e2c67d7dd81440c0df2125ce5815cd3471be59a3",
+        "preQ4Commit": "f3ade3924afa16f9a9f5a4fa6d2570dadba3e803",
+        "differences": [
+          {
+            "jsonPointer": "/items/0/auditAcceptance",
+            "before": "pending",
+            "after": "technical-route-accepted-at-e2c67d7dd81440c0df2125ce5815cd3471be59a3"
+          }
+        ],
+        "instructionBasis": "Q4指示 第3節: 開始基準以後の受理記録や既存差分を保持。",
+        "humanResponseAndDecisionUnchanged": true,
+        "recordedAt": "2026-09-20T10:14:29.437Z"
+      }
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/post-comparison-v001.json",
+      "groups": [
+        "q3-saved-judgment-candidates-review"
+      ],
+      "baselines": [
+        {
+          "kind": "sha256-of-saved-start-commit-bytes",
+          "source": "git:e2c67d7dd81440c0df2125ce5815cd3471be59a3:docs/reports/digest-quality-q3-20260920-v001/post-comparison-v001.json",
+          "sha256": "a66e6ff1666af19b9da2da4e57eda9e124b288a2e7a59aa13d296f76b3ad4c6f",
+          "bytes": 4470,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "a66e6ff1666af19b9da2da4e57eda9e124b288a2e7a59aa13d296f76b3ad4c6f",
+        "bytes": 4470,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/review-v001.json",
+      "groups": [
+        "q3-saved-judgment-candidates-review",
+        "q3-review-definition"
+      ],
+      "baselines": [
+        {
+          "kind": "sha256-of-saved-start-commit-bytes",
+          "source": "git:e2c67d7dd81440c0df2125ce5815cd3471be59a3:docs/reports/digest-quality-q3-20260920-v001/review-v001.json",
+          "sha256": "9c8cc833e7f56dfeac35cd8f011c9382ca6b0d87d5a7f7fb237067f951a3e63f",
+          "bytes": 3054,
+          "sha256Matches": true,
+          "bytesMatch": true
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/review-verification-v001.json#/reviewFileSha256",
+          "sha256": "9c8cc833e7f56dfeac35cd8f011c9382ca6b0d87d5a7f7fb237067f951a3e63f",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "9c8cc833e7f56dfeac35cd8f011c9382ca6b0d87d5a7f7fb237067f951a3e63f",
+        "bytes": 3054,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/review-verification-v001.json",
+      "groups": [
+        "q3-saved-judgment-candidates-review"
+      ],
+      "baselines": [
+        {
+          "kind": "sha256-of-saved-start-commit-bytes",
+          "source": "git:e2c67d7dd81440c0df2125ce5815cd3471be59a3:docs/reports/digest-quality-q3-20260920-v001/review-verification-v001.json",
+          "sha256": "9c1be46c59d995a56e32db53c9f643d27c86c9122c5476d8085dec6a95b0185e",
+          "bytes": 2650,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "9c1be46c59d995a56e32db53c9f643d27c86c9122c5476d8085dec6a95b0185e",
+        "bytes": 2650,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/judgment-reply.raw.json",
+      "groups": [
+        "q3-raw-reply"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/judgment-validation-v001.json#/rawReplySha256",
+          "sha256": "0b7981f9fe017b2f8379f5c5a107f2c03e0816480224e72bbb80252386f28b07",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "0b7981f9fe017b2f8379f5c5a107f2c03e0816480224e72bbb80252386f28b07",
+        "bytes": 116200,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/review/review.json",
+      "groups": [
+        "q3-review-definition"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/review-verification-v001.json#/reviewFileSha256",
+          "sha256": "9c8cc833e7f56dfeac35cd8f011c9382ca6b0d87d5a7f7fb237067f951a3e63f",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "9c8cc833e7f56dfeac35cd8f011c9382ca6b0d87d5a7f7fb237067f951a3e63f",
+        "bytes": 3054,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/review/index.html",
+      "groups": [
+        "q3-review-html"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q3-20260920-v001/review-verification-v001.json#/html_sha256",
+          "sha256": "f9a203365c284645bc256004493c50f44a6bf129990cabeec57ee0e2a530f31a",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "f9a203365c284645bc256004493c50f44a6bf129990cabeec57ee0e2a530f31a",
+        "bytes": 33216,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/review/blank-answers.json",
+      "groups": [
+        "q3-unanswered"
+      ],
+      "baselines": [],
+      "observed": {
+        "sha256": "34f7d226781a0774defd556ec994511ffd58182bea6ccf5b80a95b6529a3ff9e",
+        "bytes": 1708,
+        "fileStableDuringRead": true
+      },
+      "status": "current-reference-only"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/judgment-input.json",
+      "groups": [
+        "q3-saved-request"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/request.json#/inputFileSha256",
+          "sha256": "e361ddb8eae6241a754168512b32e0ce142fe06bfb76faf1807b01004aae3123",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "e361ddb8eae6241a754168512b32e0ce142fe06bfb76faf1807b01004aae3123",
+        "bytes": 5306539,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/judgment-prompt.md",
+      "groups": [
+        "q3-saved-request"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/request.json#/promptSha256",
+          "sha256": "fad0d5c482a5e22656efac1a773c422fbe7833f1345c300ce08ae85d78cb0574",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "fad0d5c482a5e22656efac1a773c422fbe7833f1345c300ce08ae85d78cb0574",
+        "bytes": 4307,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/phase2-completion-v001/completion-record.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/0",
+          "sha256": "6f656cc4e0c6903139f3f0ecb0bf5000fa6ff19eede3cbbe53981ce24300384a",
+          "bytes": 11417,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "6f656cc4e0c6903139f3f0ecb0bf5000fa6ff19eede3cbbe53981ce24300384a",
+        "bytes": 11417,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/common-plan.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/1",
+          "sha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+          "bytes": 2095671,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+        "bytes": 2095671,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/timeline.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/2",
+          "sha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e",
+          "bytes": 3711,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e",
+        "bytes": 3711,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/generation-manifest.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/3",
+          "sha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053",
+          "bytes": 16291,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053",
+        "bytes": 16291,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/preset-registry.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/4",
+          "sha256": "9ae9208bccc8b75d798ab1ae2f2f21ea275d96121a844c04b4dae1889bcd4c7d",
+          "bytes": 14291,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "9ae9208bccc8b75d798ab1ae2f2f21ea275d96121a844c04b4dae1889bcd4c7d",
+        "bytes": 14291,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-v001.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/5",
+          "sha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60",
+          "bytes": 1035588,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60",
+        "bytes": 1035588,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/validation-receipt.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/6",
+          "sha256": "3155983a8fdd36b97e0b8ae46ad297ff030c8b4001e56abe264f667d98e5aafc",
+          "bytes": 2813,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "3155983a8fdd36b97e0b8ae46ad297ff030c8b4001e56abe264f667d98e5aafc",
+        "bytes": 2813,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/edit-plan.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/7",
+          "sha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d",
+          "bytes": 190739,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d",
+        "bytes": 190739,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "groups": [
+        "c-all-original-input-references",
+        "c-all-live-source-bindings"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/8",
+          "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+          "bytes": 616632321,
+          "sha256Matches": true,
+          "bytesMatch": true
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/source-bindings.json#$.captionContext.pulseTimingEvidence.sourceRef",
+          "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+        "bytes": 616632321,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/base-media.mp4",
+      "groups": [
+        "c-all-original-input-references",
+        "c-all-live-source-bindings"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/9",
+          "sha256": "0de24b8c9b18d33d38e163f0e1eaed8a35aaeea4b2411c507d7947c992545c04",
+          "bytes": 635378367,
+          "sha256Matches": true,
+          "bytesMatch": true
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/source-bindings.json#$.mediaRef",
+          "sha256": "0de24b8c9b18d33d38e163f0e1eaed8a35aaeea4b2411c507d7947c992545c04",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "0de24b8c9b18d33d38e163f0e1eaed8a35aaeea4b2411c507d7947c992545c04",
+        "bytes": 635378367,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/10",
+          "sha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06",
+          "bytes": 2923277322,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06",
+        "bytes": 2923277322,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/inputs/c-all/context.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/11",
+          "sha256": "952c5916bb3c9b7654b3abd8fd6bed624d221431537d1963243f69f2fe664e45",
+          "bytes": 58436,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "952c5916bb3c9b7654b3abd8fd6bed624d221431537d1963243f69f2fe664e45",
+        "bytes": 58436,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/audio-candidates.json",
+      "groups": [
+        "c-all-original-input-references",
+        "c-all-live-source-bindings"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/12",
+          "sha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817",
+          "bytes": 600900,
+          "sha256Matches": true,
+          "bytesMatch": true
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/source-bindings.json#$.captionContext.pulseTimingEvidence.candidatesRef",
+          "sha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817",
+        "bytes": 600900,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/asr-evidence.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/13",
+          "sha256": "b5f2388f595dba372b473b78562a7da770258d43b4e95a381f3ece5d2b43897d",
+          "bytes": 725745,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "b5f2388f595dba372b473b78562a7da770258d43b4e95a381f3ece5d2b43897d",
+        "bytes": 725745,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/acoustic-peaks.json",
+      "groups": [
+        "c-all-original-input-references",
+        "c-all-live-source-bindings"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/14",
+          "sha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d",
+          "bytes": 5612034,
+          "sha256Matches": true,
+          "bytesMatch": true
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/source-bindings.json#$.captionContext.pulseTimingEvidence.peaksRef",
+          "sha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d",
+        "bytes": 5612034,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/complete-audio.s16le",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/15",
+          "sha256": "b21494427d2bcead00db583b5e4353a06707639eac1ba7998856da0cacc1f910",
+          "bytes": 47368874,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "b21494427d2bcead00db583b5e4353a06707639eac1ba7998856da0cacc1f910",
+        "bytes": 47368874,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/rms.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/16",
+          "sha256": "e6fe650b43138291f6807e246858102d3d12103d63314d0ae39b2ab5f790ace9",
+          "bytes": 8691702,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "e6fe650b43138291f6807e246858102d3d12103d63314d0ae39b2ab5f790ace9",
+        "bytes": 8691702,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/voice-probability.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/17",
+          "sha256": "224b48903a4b38beee30be883df6e4eb3602ef0de19cb75581174b34110c9215",
+          "bytes": 7406116,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "224b48903a4b38beee30be883df6e4eb3602ef0de19cb75581174b34110c9215",
+        "bytes": 7406116,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/integrated-rms.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/18",
+          "sha256": "3f98ff94250b1088410410ad83ddb762afda3ca11cc8c1508436e89f1d043196",
+          "bytes": 9433632,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "3f98ff94250b1088410410ad83ddb762afda3ca11cc8c1508436e89f1d043196",
+        "bytes": 9433632,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-q4-c-all-current-geometry-20260920-v001.json",
+      "groups": [
+        "c-all-original-input-references"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/references/19",
+          "sha256": "886e6922985fbcb8c6d95527681bcfa52d668922e522f6a65a0079e3b5da0134",
+          "bytes": 1529621,
+          "sha256Matches": true,
+          "bytesMatch": true
+        }
+      ],
+      "observed": {
+        "sha256": "886e6922985fbcb8c6d95527681bcfa52d668922e522f6a65a0079e3b5da0134",
+        "bytes": 1529621,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/completion.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/0/saved",
+          "sha256": "6f656cc4e0c6903139f3f0ecb0bf5000fa6ff19eede3cbbe53981ce24300384a",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "6f656cc4e0c6903139f3f0ecb0bf5000fa6ff19eede3cbbe53981ce24300384a",
+        "bytes": 11417,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/normal-plan.json",
+      "groups": [
+        "c-all-preserved-input-copies",
+        "c-all-live-source-bindings"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/1/saved",
+          "sha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+          "sha256Matches": true,
+          "bytesMatch": null
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/source-bindings.json#$.planRef",
+          "sha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+          "sha256Matches": true,
+          "bytesMatch": null
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/source-bindings.json#$.captionContext.baselineRef",
+          "sha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+        "bytes": 2095671,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/timeline.json",
+      "groups": [
+        "c-all-preserved-input-copies",
+        "c-all-live-source-bindings"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/2/saved",
+          "sha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e",
+          "sha256Matches": true,
+          "bytesMatch": null
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/source-bindings.json#$.timelineRef",
+          "sha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e",
+        "bytes": 3711,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/generation-manifest.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/3/saved",
+          "sha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053",
+        "bytes": 16291,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/normal-style.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/4/saved",
+          "sha256": "9ae9208bccc8b75d798ab1ae2f2f21ea275d96121a844c04b4dae1889bcd4c7d",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "9ae9208bccc8b75d798ab1ae2f2f21ea275d96121a844c04b4dae1889bcd4c7d",
+        "bytes": 14291,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/caption-bridge.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/5/saved",
+          "sha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60",
+        "bytes": 1035588,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/base-media-validation.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/6/saved",
+          "sha256": "3155983a8fdd36b97e0b8ae46ad297ff030c8b4001e56abe264f667d98e5aafc",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "3155983a8fdd36b97e0b8ae46ad297ff030c8b4001e56abe264f667d98e5aafc",
+        "bytes": 2813,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/basis-edit-plan.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/7/saved",
+          "sha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d",
+        "bytes": 190739,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-semantic-context.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/8/saved",
+          "sha256": "952c5916bb3c9b7654b3abd8fd6bed624d221431537d1963243f69f2fe664e45",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "952c5916bb3c9b7654b3abd8fd6bed624d221431537d1963243f69f2fe664e45",
+        "bytes": 58436,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-audio-candidates.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/9/saved",
+          "sha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817",
+        "bytes": 600900,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-asr.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/10/saved",
+          "sha256": "b5f2388f595dba372b473b78562a7da770258d43b4e95a381f3ece5d2b43897d",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "b5f2388f595dba372b473b78562a7da770258d43b4e95a381f3ece5d2b43897d",
+        "bytes": 725745,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-acoustic-peaks.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/11/saved",
+          "sha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d",
+        "bytes": 5612034,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-rms.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/12/saved",
+          "sha256": "e6fe650b43138291f6807e246858102d3d12103d63314d0ae39b2ab5f790ace9",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "e6fe650b43138291f6807e246858102d3d12103d63314d0ae39b2ab5f790ace9",
+        "bytes": 8691702,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-voice-probability.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/13/saved",
+          "sha256": "224b48903a4b38beee30be883df6e4eb3602ef0de19cb75581174b34110c9215",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "224b48903a4b38beee30be883df6e4eb3602ef0de19cb75581174b34110c9215",
+        "bytes": 7406116,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-integrated-rms.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/14/saved",
+          "sha256": "3f98ff94250b1088410410ad83ddb762afda3ca11cc8c1508436e89f1d043196",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "3f98ff94250b1088410410ad83ddb762afda3ca11cc8c1508436e89f1d043196",
+        "bytes": 9433632,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/current-applicability.json",
+      "groups": [
+        "c-all-preserved-input-copies"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/snapshots/15/saved",
+          "sha256": "886e6922985fbcb8c6d95527681bcfa52d668922e522f6a65a0079e3b5da0134",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "886e6922985fbcb8c6d95527681bcfa52d668922e522f6a65a0079e3b5da0134",
+        "bytes": 1529621,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/source-bindings.json",
+      "groups": [
+        "c-all-prepared-input-files"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/savedFiles/source-bindings.json",
+          "sha256": "9dcfedb9caee132e9769ad4975a3055cf4bb8ed0e3598c5a5eb7765734459136",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "9dcfedb9caee132e9769ad4975a3055cf4bb8ed0e3598c5a5eb7765734459136",
+        "bytes": 2802213,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/semantic-evidence.json",
+      "groups": [
+        "c-all-prepared-input-files"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/savedFiles/semantic-evidence.json",
+          "sha256": "0610ee90b0f89ca534a0b4add0465851e6df7097153a30a6c49eeda2fc69da69",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "0610ee90b0f89ca534a0b4add0465851e6df7097153a30a6c49eeda2fc69da69",
+        "bytes": 4150000,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/judgment-input.json",
+      "groups": [
+        "c-all-prepared-input-files"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/savedFiles/judgment-input.json",
+          "sha256": "67b6a426d3e83e7e90f1d80c55518c3e0452a95a9e455d456ae23a9a26ff2264",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "67b6a426d3e83e7e90f1d80c55518c3e0452a95a9e455d456ae23a9a26ff2264",
+        "bytes": 4156722,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/native-audio-binding.json",
+      "groups": [
+        "c-all-prepared-input-files",
+        "c-all-live-source-bindings"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/savedFiles/native-audio-binding.json",
+          "sha256": "4a8abb3805fe637f906d41ac0acb0b73446d61450f05b948974b7c8c44aba4c6",
+          "sha256Matches": true,
+          "bytesMatch": null
+        },
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/source-bindings.json#$.captionContext.decisionInputRef",
+          "sha256": "4a8abb3805fe637f906d41ac0acb0b73446d61450f05b948974b7c8c44aba4c6",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "4a8abb3805fe637f906d41ac0acb0b73446d61450f05b948974b7c8c44aba4c6",
+        "bytes": 232811,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/preparation-report.json",
+      "groups": [
+        "c-all-prepared-input-files"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/savedFiles/preparation-report.json",
+          "sha256": "16648fa3ebe2af4871370fdbbdce1c4695ebd7c15c8c96197c65af359d4e26ca",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "16648fa3ebe2af4871370fdbbdce1c4695ebd7c15c8c96197c65af359d4e26ca",
+        "bytes": 27358,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/original-clock.json",
+      "groups": [
+        "c-all-prepared-input-files"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "docs/reports/digest-quality-q4-20260920-v001/c-all-input-preparation-v001.json#/savedFiles/original-clock.json",
+          "sha256": "5e7b0d85386fbde2ca6abdc866ed5503426e404af8bec00a4d6e52b865fa4507",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "5e7b0d85386fbde2ca6abdc866ed5503426e404af8bec00a4d6e52b865fa4507",
+        "bytes": 5973,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/source-bindings.json",
+      "groups": [
+        "c-all-saved-judgment-request"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/request.json#/files/source-bindings.json",
+          "sha256": "9dcfedb9caee132e9769ad4975a3055cf4bb8ed0e3598c5a5eb7765734459136",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "9dcfedb9caee132e9769ad4975a3055cf4bb8ed0e3598c5a5eb7765734459136",
+        "bytes": 2802213,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/judgment-input.json",
+      "groups": [
+        "c-all-saved-judgment-request"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/request.json#/files/judgment-input.json",
+          "sha256": "67b6a426d3e83e7e90f1d80c55518c3e0452a95a9e455d456ae23a9a26ff2264",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "67b6a426d3e83e7e90f1d80c55518c3e0452a95a9e455d456ae23a9a26ff2264",
+        "bytes": 4156722,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/judgment-prompt.md",
+      "groups": [
+        "c-all-saved-judgment-request"
+      ],
+      "baselines": [
+        {
+          "kind": "saved-file-sha256",
+          "source": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/request.json#/files/judgment-prompt.md",
+          "sha256": "77b06c240eaedb8ffcbf908392700f70f34b6ad2be64c13e3113e9b516c83622",
+          "sha256Matches": true,
+          "bytesMatch": null
+        }
+      ],
+      "observed": {
+        "sha256": "77b06c240eaedb8ffcbf908392700f70f34b6ad2be64c13e3113e9b516c83622",
+        "bytes": 6584,
+        "fileStableDuringRead": true
+      },
+      "status": "matches-saved-baseline"
+    }
+  ],
+  "answerStateChecks": [
+    {
+      "label": "Q1",
+      "reviewPath": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/review-main-v001.json",
+      "answersPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/review-v001/blank-answers.json",
+      "savedCanonicalReviewSha256": "ca3e73c9f0de047cd594cd29cadc7d60453c89003c0885b0caa475b51a8c42b1",
+      "actualCanonicalReviewSha256": "ca3e73c9f0de047cd594cd29cadc7d60453c89003c0885b0caa475b51a8c42b1",
+      "canonicalMatches": true,
+      "answersValid": true,
+      "total": 4,
+      "unanswered": 4,
+      "playbackStarts": 0,
+      "scope": "保存済み初期未回答ファイルだけ。ブラウザー内や未保存の人間回答は未確認。"
+    },
+    {
+      "label": "Q3",
+      "reviewPath": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-20260920-v001/review-v001.json",
+      "answersPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/review/blank-answers.json",
+      "savedCanonicalReviewSha256": "5d74023f3e822b79aea37d06a6250231829357c7f99db30ea12e792576568806",
+      "actualCanonicalReviewSha256": "5d74023f3e822b79aea37d06a6250231829357c7f99db30ea12e792576568806",
+      "canonicalMatches": true,
+      "answersValid": true,
+      "total": 1,
+      "unanswered": 1,
+      "playbackStarts": 0,
+      "scope": "保存済み初期未回答ファイルだけ。ブラウザー内や未保存の人間回答は未確認。"
+    }
+  ],
+  "unverified": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/review/blank-answers.json",
+      "reason": "対象範囲の旧記録にこのファイルbyteの過去SHAがないため、今回参照SHAとして保存。過去との差なしとは認定しない。"
+    },
+    {
+      "scope": "ブラウザーlocalStorage・未保存の本人回答",
+      "reason": "今回の読み取り検査は保存済みファイルに限定。"
+    },
+    {
+      "scope": "Q4候補完成証拠",
+      "reason": "親担当が描画中のため今回対象外。"
+    }
+  ],
+  "oldFilesModified": 0,
+  "newHumanVerdicts": 0,
+  "rendererRuns": 0,
+  "newExternalMediaTransmissions": 0,
+  "commitPerformed": false,
+  "preQ4AcceptanceCommit": "f3ade3924afa16f9a9f5a4fa6d2570dadba3e803",
+  "followupCheckedAt": "2026-09-20T10:14:29.470Z"
+}

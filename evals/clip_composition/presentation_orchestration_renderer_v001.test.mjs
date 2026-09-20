@@ -70,8 +70,8 @@ async function fixture(t) {
     audioEvidence: {sourceRef: pulseTimingEvidence.sourceRef, candidatesRef: pulseTimingEvidence.candidatesRef, sampleRate: 16000, sampleCount: 256000},
     audioCandidates: [{candidateId: 'candidate-1', startSample: 60000, endSampleExclusive: 85000, constituentPeakIds: ['peak-1']}]}});
   const choices = [{preset: 'color', scope: 'partial-caption', targetText: '条件'}, {preset: 'pulse', anchorPeakId: 'peak-1'},
-    {preset: 'shake'}, {preset: 'panel'}];
-  const reply = {schemaVersion: 'presentation-orchestration-judgment-v001', inputSha256: input.inputSha256, completion: 'complete',
+    {preset: 'shake'}, {preset: 'panel', allowedBackgroundPresets: ['plain']}];
+  const reply = {schemaVersion: 'presentation-orchestration-judgment-v002', inputSha256: input.inputSha256, completion: 'complete',
     captions: plan.elements.map((row, index) => ({captionId: row.instructionId, status: 'resolved',
       semanticRole: ['focus', 'vocal-energy', 'reaction', 'focus'][index], allowedPresets: [choices[index]],
       reason: '有限表現の検証対象。', evidenceIds: [row.instructionId]})),
@@ -201,7 +201,8 @@ test('native recipe reconstructs projected Pulse and motion samples from durable
   const view = restoreOrchestrationDrawingViewEvidenceV001(JSON.parse(await readFile(proofRef.path, 'utf8')));
   const recipe = buildPresentationNativeFrameQcRecipeV001({plan: view.resolvedPlan, baselinePlan: view.projectedNormalPlan,
     records: prepared.records, orchestrationDrawingView: view});
-  assert.deepEqual(recipe.samples.filter(row => row.instructionId === 'caption-1').map(row => row.frame), [157, 162, 168]);
+  assert.deepEqual(recipe.samples.filter(row => row.instructionId === 'caption-1').map(row => row.frame),
+    [157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168]);
   const motion = recipe.samples.filter(row => row.instructionId === 'caption-2');
   assert.equal(motion[0].frame, 264); assert.equal(motion[0].references[0].layers[0].localFrame, 0);
   assert.equal(motion.at(-1).frame, 359);
@@ -326,8 +327,8 @@ test('compositor maps independent AAC after every finite PNG and overlays only o
   const inputs = args.flatMap((value, index) => value === '-i' ? [args[index + 1]] : []);
   const maps = args.flatMap((value, index) => value === '-map' ? [args[index + 1]] : []);
   assert.equal(inputs[0], base); assert.equal(inputs.at(-1), audio);
-  assert.equal(inputs.length, 14); // base + Color 1 + Pulse 3 + Shake 7 + Panel 1 + independent AAC
-  assert.deepEqual(maps, ['[video]', '13:a:0']);
+  assert.equal(inputs.length, 16); // base + Color 1 + Pulse 5 + Shake 7 + Panel 1 + independent AAC
+  assert.deepEqual(maps, ['[video]', '15:a:0']);
   assert.equal(args[args.indexOf('-c:a') + 1], 'copy');
   const filter = args[args.indexOf('-filter_complex') + 1];
   assert.ok(filter.includes('[0:v][overlay0]overlay=0:0'));

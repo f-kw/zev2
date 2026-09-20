@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: disk reload, Normal, one background override and both Resets preserve the fixed state and 94px normal captions
+ok 1 - disk reload, Normal, one background override and both Resets preserve the fixed state and 94px normal captions
+  ---
+  duration_ms: 209.274083
+  ...
+# Subtest: other caption and normal-connection override records survive the inspected caption changes and Reset byte for byte
+ok 2 - other caption and normal-connection override records survive the inspected caption changes and Reset byte for byte
+  ---
+  duration_ms: 190.997875
+  ...
+# Subtest: no automatic Panel records no target and never invents override or Reset cases
+ok 3 - no automatic Panel records no target and never invents override or Reset cases
+  ---
+  duration_ms: 149.566916
+  ...
+# Subtest: raw reply and input association mismatches reject before any derived directory is created
+ok 4 - raw reply and input association mismatches reject before any derived directory is created
+  ---
+  duration_ms: 280.497375
+  ...
+# Subtest: saved plan corruption is rejected and an existing inspection is never overwritten
+ok 5 - saved plan corruption is rejected and an existing inspection is never overwritten
+  ---
+  duration_ms: 355.871458
+  ...
+# Subtest: real C-all entry requires an accepted request and output must remain in the managed Q4 tree
+ok 6 - real C-all entry requires an accepted request and output must remain in the managed Q4 tree
+  ---
+  duration_ms: 139.859333
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1384.565959

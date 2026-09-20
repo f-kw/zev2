@@ -1,0 +1,311 @@
+TAP version 13
+# Subtest: caption-only edit reuses the SHA-bound full background and verifies exact range PCM/AAC clocks
+ok 1 - caption-only edit reuses the SHA-bound full background and verifies exact range PCM/AAC clocks
+  ---
+  duration_ms: 1149.666791
+  ...
+# Subtest: partial Soft fade, insertion-only range, insertion middle and logical tail equal full-clock decoded bytes
+ok 2 - partial Soft fade, insertion-only range, insertion middle and logical tail equal full-clock decoded bytes
+  ---
+  duration_ms: 2793.927167
+  ...
+# Subtest: same-duration Black-to-Soft refuses prior reuse and creates only the required new background range
+ok 3 - same-duration Black-to-Soft refuses prior reuse and creates only the required new background range
+  ---
+  duration_ms: 1351.86
+  ...
+# Subtest: range checker rejects real changed PCM while source and every range video frame remain unchanged
+ok 4 - range checker rejects real changed PCM while source and every range video frame remain unchanged
+  ---
+  duration_ms: 110.303917
+  ...
+# Subtest: invalid local ranges cannot acquire output directories or be passed as full-clock plans
+ok 5 - invalid local ranges cannot acquire output directories or be passed as full-clock plans
+  ---
+  duration_ms: 774.9265
+  ...
+# Subtest: a saved range can be reused only when its full-clock coverage includes the new range
+ok 6 - a saved range can be reused only when its full-clock coverage includes the new range
+  ---
+  duration_ms: 1323.607208
+  ...
+# Subtest: saved full reuse validates pixel/PCM proof, exact coverage and actual AAC instead of trusting saved status
+ok 7 - saved full reuse validates pixel/PCM proof, exact coverage and actual AAC instead of trusting saved status
+  ---
+  duration_ms: 638.3935
+  ...
+# Subtest: saved background reuse rejects failed, missing, mismatched and hashless verification evidence
+ok 8 - saved background reuse rejects failed, missing, mismatched and hashless verification evidence
+  ---
+  duration_ms: 385.707667
+  ...
+# Subtest: saved reuse rejects substituted AAC even when its file SHA and logical sample duration are updated correctly
+ok 9 - saved reuse rejects substituted AAC even when its file SHA and logical sample duration are updated correctly
+  ---
+  duration_ms: 139.653625
+  ...
+# Subtest: 範囲描画は媒体の44100Hzを維持し、字幕の元時計を動かさない
+not ok 10 - 範囲描画は媒体の44100Hzを維持し、字幕の元時計を動かさない
+  ---
+  duration_ms: 1.490083
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:39:3'
+  failureType: 'testCodeFailure'
+  error: 'CONNECTION_EXPRESSION_INVALID: adjacent segments required'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs:29:33)
+    require (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs:30:59)
+    createConnectionExpressionContextV001 (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs:106:3)
+    createOrchestrationContextV001 (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_v001.mjs:77:29)
+    viewFor (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:23:17)
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:40:16)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    node:internal/test_runner/harness:255:12
+  ...
+# Subtest: 範囲描画は媒体の48000Hzを維持し、字幕の元時計を動かさない
+not ok 11 - 範囲描画は媒体の48000Hzを維持し、字幕の元時計を動かさない
+  ---
+  duration_ms: 0.268292
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:39:3'
+  failureType: 'testCodeFailure'
+  error: 'CONNECTION_EXPRESSION_INVALID: adjacent segments required'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs:29:33)
+    require (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs:30:59)
+    createConnectionExpressionContextV001 (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs:106:3)
+    createOrchestrationContextV001 (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_v001.mjs:77:29)
+    viewFor (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:23:17)
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:40:16)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+  ...
+# Subtest: 未対応の再生時計を既存値へ黙って変更しない
+not ok 12 - 未対応の再生時計を既存値へ黙って変更しない
+  ---
+  duration_ms: 1.369625
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:52:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /44100 or 48000/. Input:
+    
+    'TypeError: CONNECTION_EXPRESSION_INVALID: adjacent segments required'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: 'CONNECTION_EXPRESSION_INVALID: adjacent segments required'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs:29:33)
+    require (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs:30:59)
+    createConnectionExpressionContextV001 (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs:106:3)
+    createOrchestrationContextV001 (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_v001.mjs:77:29)
+    viewFor (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:23:17)
+    file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:52:52
+    getActual (node:assert:498:5)
+    Function.throws (node:assert:644:24)
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:52:41)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_playback_scope_v002.test.mjs:52:41)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: range scopes retain complete caption clocks, original bindings and exact playback samples
+ok 13 - range scopes retain complete caption clocks, original bindings and exact playback samples
+  ---
+  duration_ms: 32.031625
+  ...
+# Subtest: mid-Pulse preview uses the full finite phase and samples local media without restarting the fade
+ok 14 - mid-Pulse preview uses the full finite phase and samples local media without restarting the fade
+  ---
+  duration_ms: 25.42625
+  ...
+# Subtest: preview starting inside a motion caption preserves each remaining state and has range-only diagnostics
+ok 15 - preview starting inside a motion caption preserves each remaining state and has range-only diagnostics
+  ---
+  duration_ms: 19.443291
+  ...
+# Subtest: a connection-only black range has no fabricated caption or native reference
+ok 16 - a connection-only black range has no fabricated caption or native reference
+  ---
+  duration_ms: 15.280042
+  ...
+# Subtest: native preparation binds the original Normal file and draws diagnostic Normal on the projected clock
+ok 17 - native preparation binds the original Normal file and draws diagnostic Normal on the projected clock
+  ---
+  duration_ms: 30.012958
+  ...
+# Subtest: native recipe reconstructs projected Pulse and motion samples from durable proof
+not ok 18 - native recipe reconstructs projected Pulse and motion samples from durable proof
+  ---
+  duration_ms: 28.53825
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_renderer_v001.test.mjs:198:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        157,
+    +   158,
+    +   159,
+    +   160,
+    +   161,
+    +   162,
+    +   163,
+    +   164,
+    +   165,
+    +   166,
+    +   167,
+    -   162,
+        168
+      ]
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 157
+    1: 162
+    2: 168
+  actual:
+    0: 157
+    1: 158
+    2: 159
+    3: 160
+    4: 161
+    5: 162
+    6: 163
+    7: 164
+    8: 165
+    9: 166
+    10: 167
+    11: 168
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_renderer_v001.test.mjs:204:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: range native evidence cannot pass as full coverage or move a sampled frame to another media origin
+ok 19 - range native evidence cannot pass as full coverage or move a sampled frame to another media origin
+  ---
+  duration_ms: 32.682792
+  ...
+# Subtest: durable native evidence verifies independent original-file and display-plan hashes and rejects clock substitutions
+ok 20 - durable native evidence verifies independent original-file and display-plan hashes and rejects clock substitutions
+  ---
+  duration_ms: 79.23925
+  ...
+# Subtest: renderer rejects fabricated views, old-clock plans, duplicate timelines and missing combined QC before drawing
+ok 21 - renderer rejects fabricated views, old-clock plans, duplicate timelines and missing combined QC before drawing
+  ---
+  duration_ms: 10.0495
+  ...
+# Subtest: renderer rejects changed original files and a background from another projection before media children
+ok 22 - renderer rejects changed original files and a background from another projection before media children
+  ---
+  duration_ms: 12.73475
+  ...
+# Subtest: compositor maps independent AAC after every finite PNG and overlays only on completed background
+not ok 23 - compositor maps independent AAC after every finite PNG and overlays only on completed background
+  ---
+  duration_ms: 8.986333
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_renderer_v001.test.mjs:322:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    16 !== 14
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 14
+  actual: 16
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_renderer_v001.test.mjs:329:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: exact replay binds independent AAC before/after and repeats the production input mapping
+ok 24 - exact replay binds independent AAC before/after and repeats the production input mapping
+  ---
+  duration_ms: 153.218333
+  ...
+# Subtest: independent AAC mutation during exact replay fails even when output video bytes match
+ok 25 - independent AAC mutation during exact replay fails even when output video bytes match
+  ---
+  duration_ms: 132.601417
+  ...
+# Subtest: Panel has exactly three immutable choices with distinct local artwork and shared text/padding
+ok 26 - Panel has exactly three immutable choices with distinct local artwork and shared text/padding
+  ---
+  duration_ms: 1.26475
+  ...
+# Subtest: finite background rejects arbitrary paths, drawing fields, unknown IDs and changed geometry
+ok 27 - finite background rejects arbitrary paths, drawing fields, unknown IDs and changed geometry
+  ---
+  duration_ms: 0.305958
+  ...
+# Subtest: inspection-only plate omission retains Panel geometry without asset paint and cannot enter saved choices
+ok 28 - inspection-only plate omission retains Panel geometry without asset paint and cannot enter saved choices
+  ---
+  duration_ms: 0.200417
+  ...
+# Subtest: three backgrounds persist and reload through production IO; Normal fixes and Reset restores exact automatic Panel
+ok 29 - three backgrounds persist and reload through production IO; Normal fixes and Reset restores exact automatic Panel
+  ---
+  duration_ms: 42.018833
+  ...
+# Subtest: unchanged source with old rendering rule binding is rejected on read and before save
+ok 30 - unchanged source with old rendering rule binding is rejected on read and before save
+  ---
+  duration_ms: 3.921792
+  ...
+# Subtest: one-item orchestration and UI payload retain background choice; Normal and Reset do not affect other captions/connections
+ok 31 - one-item orchestration and UI payload retain background choice; Normal and Reset do not affect other captions/connections
+  ---
+  duration_ms: 25.946
+  ...
+# Subtest: CLI show retains finite background name after saving each choice
+ok 32 - CLI show retains finite background name after saving each choice
+  ---
+  duration_ms: 7.921666
+  ...
+# Subtest: 判断を依頼した後の本文・元媒体対応・指示文の差替えを拒否する
+ok 33 - 判断を依頼した後の本文・元媒体対応・指示文の差替えを拒否する
+  ---
+  duration_ms: 11.636
+  ...
+# Subtest: 依頼のhashも更新されてもC-all接続保存方針を解除できない
+ok 34 - 依頼のhashも更新されてもC-all接続保存方針を解除できない
+  ---
+  duration_ms: 3.105791
+  ...
+# Subtest: 入力照合失敗でも受信原文をparse前に保存し、受理記録を作らない
+ok 35 - 入力照合失敗でも受信原文をparse前に保存し、受理記録を作らない
+  ---
+  duration_ms: 3.530584
+  ...
+1..35
+# tests 35
+# suites 0
+# pass 30
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8726.015

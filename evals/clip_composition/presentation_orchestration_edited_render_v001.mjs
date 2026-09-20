@@ -191,7 +191,8 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     assert.equal(draw.outputMedia.video.frameCount, derived.scope.frameCount);
     const finalVerificationStarted = performance.now();
     const finalAudioClock = await backgroundRenderer.inspectOrchestrationEncodedAudioV001({audioPath: draw.workVideo,
-      logicalSampleCount: derived.scope.frameCount * 1470, sampleRate: 44100, ...toolPaths});
+      logicalSampleCount: derived.scope.playbackEndSampleExclusive - derived.scope.playbackStartSample,
+      sampleRate: view.projection.sourceClock.playbackSampleRate, ...toolPaths});
     const rendered = await bind(draw.workVideo);
     await verifySourceReferences(view, drawingEvidenceRef); await verifyEditedOrchestrationDrawingRulesRefV001(rules);
     for (const ref of [background.outputs.background, background.outputs.audio]) assert.deepEqual(await bind(ref.path), ref);
