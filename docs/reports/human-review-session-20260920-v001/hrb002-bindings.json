@@ -1,0 +1,313 @@
+{
+  "schemaVersion": "stage4-saved-digest-human-review-index-v001",
+  "speaker": "Codexの保存済み計画からの索引",
+  "createdAt": "2026-09-20T02:39:53.748448+00:00",
+  "media": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+    "bytes": 75271228,
+    "fileSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6"
+  },
+  "mediaHashMeaning": "保存済み完了記録の媒体識別。今回の索引作成では動画再解析・再生・再hashは実施していない。",
+  "duration": {
+    "fps": 30,
+    "frameCount": 4879,
+    "seconds": 162.63333333333333,
+    "clock": "02:42.633"
+  },
+  "timeBasis": "すべての表示・接続・動きの時刻は修正後4879フレーム媒体の表示時計。30fpsのframe / 30で秒へ変換。開始を含み終端を含まない。",
+  "changedLocations": [
+    {
+      "change": "字幕「逃げるやつ?」へPanelを追加",
+      "before": "Normal",
+      "after": "Panel",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "range": {
+        "startFrame": 486,
+        "endFrameExclusive": 568,
+        "startSeconds": 16.2,
+        "endSecondsExclusive": 18.933333333333334,
+        "frameCount": 82,
+        "startClock": "00:16.200",
+        "endClockExclusive": "00:18.933"
+      },
+      "watchFrom": {
+        "frame": 385,
+        "seconds": 12.833333333333334,
+        "clock": "00:12.833"
+      },
+      "watchFromBasis": "直前の字幕「もうこいつの覗き方もう世界一嫌い!」の表示開始から、Soft接続を経て変更字幕へ進む。",
+      "nearbyLandmark": {
+        "softGapStart": {
+          "frame": 474,
+          "seconds": 15.8,
+          "clock": "00:15.800"
+        },
+        "panelStart": {
+          "frame": 486,
+          "seconds": 16.2,
+          "clock": "00:16.200"
+        }
+      },
+      "savedOverride": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "role": "Panel accent",
+        "presentation": "provisional-panel",
+        "scope": "whole-caption"
+      },
+      "timeBasis": "修正後4879フレーム媒体の保存済み表示計画。自動版の時刻は転用していない。"
+    },
+    {
+      "change": "最初の接続をNormal CutからBlack Separatorへ変更",
+      "before": "Normal Cut",
+      "after": "Black Separator",
+      "connectionId": "connection-01",
+      "range": {
+        "startFrame": 340,
+        "endFrameExclusive": 352,
+        "startSeconds": 11.333333333333334,
+        "endSecondsExclusive": 11.733333333333333,
+        "frameCount": 12,
+        "startClock": "00:11.333",
+        "endClockExclusive": "00:11.733"
+      },
+      "watchFrom": {
+        "frame": 282,
+        "seconds": 9.4,
+        "clock": "00:09.400"
+      },
+      "watchFromBasis": "直前の字幕「この覗き方やめろ!」の表示開始から接続と次の発話まで見る。",
+      "savedOverride": {
+        "connectionId": "connection-01",
+        "role": "separator",
+        "preset": "black-separator",
+        "presetVersion": "v001"
+      },
+      "timeBasis": "修正後媒体の保存済み背景投影にある最初の12フレーム黒区間。"
+    }
+  ],
+  "representativeLocations": [
+    {
+      "presentation": "Panel",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "text": "なんかグロいやつに捕まってる",
+      "range": {
+        "startFrame": 1747,
+        "endFrameExclusive": 1818,
+        "startSeconds": 58.233333333333334,
+        "endSecondsExclusive": 60.6,
+        "frameCount": 71,
+        "startClock": "00:58.233",
+        "endClockExclusive": "01:00.600"
+      },
+      "watchFrom": {
+        "frame": 1747,
+        "seconds": 58.233333333333334,
+        "clock": "00:58.233"
+      },
+      "watchFromBasis": "当該字幕の表示開始。",
+      "detailKey": null
+    },
+    {
+      "presentation": "Pulse",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "text": "もうリカちゃんやめてー!",
+      "range": {
+        "startFrame": 71,
+        "endFrameExclusive": 154,
+        "startSeconds": 2.3666666666666667,
+        "endSecondsExclusive": 5.133333333333334,
+        "frameCount": 83,
+        "startClock": "00:02.367",
+        "endClockExclusive": "00:05.133"
+      },
+      "watchFrom": {
+        "frame": 71,
+        "seconds": 2.3666666666666667,
+        "clock": "00:02.367"
+      },
+      "watchFromBasis": "当該字幕の表示開始。",
+      "detailKey": "pulseActiveRange"
+    },
+    {
+      "presentation": "Bounce",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "text": "これもういるやん",
+      "range": {
+        "startFrame": 13,
+        "endFrameExclusive": 37,
+        "startSeconds": 0.43333333333333335,
+        "endSecondsExclusive": 1.2333333333333334,
+        "frameCount": 24,
+        "startClock": "00:00.433",
+        "endClockExclusive": "00:01.233"
+      },
+      "watchFrom": {
+        "frame": 0,
+        "seconds": 0.0,
+        "clock": "00:00.000"
+      },
+      "watchFromBasis": "冒頭から出現時の動きを見る。",
+      "detailKey": "motionActiveRange"
+    },
+    {
+      "presentation": "Shake",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "text": "いるやんいるやん",
+      "range": {
+        "startFrame": 37,
+        "endFrameExclusive": 71,
+        "startSeconds": 1.2333333333333334,
+        "endSecondsExclusive": 2.3666666666666667,
+        "frameCount": 34,
+        "startClock": "00:01.233",
+        "endClockExclusive": "00:02.367"
+      },
+      "watchFrom": {
+        "frame": 0,
+        "seconds": 0.0,
+        "clock": "00:00.000"
+      },
+      "watchFromBasis": "冒頭から出現時の動きを見る。",
+      "detailKey": "motionActiveRange"
+    },
+    {
+      "presentation": "Normal",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+      "text": "逃げるんだ",
+      "range": {
+        "startFrame": 568,
+        "endFrameExclusive": 638,
+        "startSeconds": 18.933333333333334,
+        "endSecondsExclusive": 21.266666666666666,
+        "frameCount": 70,
+        "startClock": "00:18.933",
+        "endClockExclusive": "00:21.267"
+      },
+      "watchFrom": {
+        "frame": 568,
+        "seconds": 18.933333333333334,
+        "clock": "00:18.933"
+      },
+      "watchFromBasis": "当該字幕の表示開始。",
+      "detailKey": null
+    },
+    {
+      "presentation": "Soft Separator",
+      "connectionId": "connection-02",
+      "range": {
+        "startFrame": 474,
+        "endFrameExclusive": 486,
+        "startSeconds": 15.8,
+        "endSecondsExclusive": 16.2,
+        "frameCount": 12,
+        "startClock": "00:15.800",
+        "endClockExclusive": "00:16.200"
+      },
+      "rangeMeaning": "保存済みSoft接続の中央黒区間。前後のfadeを含む全移行区間とは呼ばない。",
+      "watchFrom": {
+        "frame": 385,
+        "seconds": 12.833333333333334,
+        "clock": "00:12.833"
+      },
+      "watchFromBasis": "直前の保存済み字幕表示開始",
+      "precedingText": "もうこいつの覗き方もう世界一嫌い!",
+      "followingText": "逃げるやつ?"
+    },
+    {
+      "presentation": "Normal Cut",
+      "connectionId": "connection-03",
+      "range": {
+        "startFrame": 780,
+        "endFrameExclusive": 780,
+        "startSeconds": 26.0,
+        "endSecondsExclusive": 26.0,
+        "frameCount": 0,
+        "startClock": "00:26.000",
+        "endClockExclusive": "00:26.000"
+      },
+      "rangeMeaning": "追加フレームを持たない接続時点。",
+      "watchFrom": {
+        "frame": 638,
+        "seconds": 21.266666666666666,
+        "clock": "00:21.267"
+      },
+      "watchFromBasis": "直前の保存済み字幕表示開始",
+      "precedingText": "でもこいつ走りでこれだよ",
+      "followingText": "おい、急に速くなった!"
+    }
+  ],
+  "identities": {
+    "viewSha256": "6e48ecc7e9e03f48eac6fe843ae29503c05f8d0d23f75d939e72aa231327e5e9",
+    "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+    "fourSavedSha256": {
+      "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+      "captionOverrides": "97992bbda4eae25acdd2ce2adf3d65bb669218bdc8deeac674836b433d7bcc4d",
+      "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+      "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+    },
+    "historicalDrawingRulesCanonicalSha256": "2a994d788acf4723c27188ecb3da2cdfeaa99679ed15f81a32d5e70025f20a16",
+    "drawingRulesReferenceCount": 57,
+    "sourceDigestRef": {
+      "version": "digest-completed-ymUsGrT6EaA-human-caption-repair",
+      "sha256": "c4bbf207440cc846f73ffcd8bde12b95258dc8589ce9f0cd824a449ad3af258c"
+    },
+    "sourcePlanRef": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/normal-plan.json",
+      "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e"
+    },
+    "sourceTimelineRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/timeline.json",
+      "fileSha256": "dd4ebac277c0f3da73765457ea7812cfc801a16231d35a1cd0a0c4c1b0e61aef"
+    },
+    "sourceMediaRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+      "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d"
+    },
+    "projectedNormalBaselinePlanCanonicalSha256": "cb0ad30f76ea1487aa590346cb482ee2ef9e77296534d79174407a1c1417e396",
+    "finalCompositorPlanCanonicalSha256": "647fb172efeb5383eb03b47af8ae3d8e2080ad306784fec634a26328ce70df6b",
+    "fixedAutomaticCaptionProposalSha256": "10592bf99efff43b12d4f53195cece6623c94a933dc06a83c9431b254c078c3e",
+    "fixedAutomaticConnectionRecordSha256": "9cd5e0e2caa196b52a1ebf452c7757c6a3b13f206f0594c96c7967b3b7109f10",
+    "connectionOverrideRecordSha256": "b572745f84086e41d71dca93b07c3230ba5dd8ad4caed3b96e7989f6ca0972e0",
+    "captionExpressionRules": {
+      "version": "auto-presentation-rules-v007",
+      "contentSha256": "127db1dff0b4d2bbeb1cd07d782126147657e1871380680cec243da5dc148f07"
+    },
+    "automaticSelectionRecord": {
+      "schemaVersion": "presentation-orchestration-selection-record-v001",
+      "version": "presentation-orchestration-v001",
+      "contextSha256": "51a0c1b5ce38be8a94c3b0c34a98848110302c876aa373aa6e05e7a3fc81a449",
+      "replySha256": "7d1d7bc4e0587fa90c7d9115f5c79cb9d39b4ff7d9750aa32d561f6a0c602629",
+      "captionAutoSha256": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+      "connectionAutoSha256": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+      "recordSha256": "d8ffc73a96755e908f0e7c2edf81f7d3a2c5e98ea381856c7d826b29a97da087"
+    }
+  },
+  "evidence": {
+    "result": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/result.json",
+      "bytes": 216058243,
+      "fileSha256": "ae777525b8b8d1498019ca40957842a78c0b79f59f64ebe9fb376511081da313"
+    },
+    "drawingEvidence": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/jobs/4ef43bca-e48a-453c-9c78-d036c965103e/input/drawing-evidence.json",
+      "bytes": 975467,
+      "fileSha256": "fcc2ac91d5dc15cde88b36b1b7aede5a8735bb3ed8e6cb363bc9d381babc2baf"
+    },
+    "resultFieldPointers": {
+      "captionTimes": "completedFrameQc.evidence.finiteState.baselinePlan.elements",
+      "renderedKinds": "completedFrameQc.evidence.finiteState.sceneBindings",
+      "motionAndPulsePrograms": "completedFrameQc.inspections",
+      "savedAutomaticAndOverrideState": "completedFrameQc.evidence.finiteState.orchestrationInput.state",
+      "connectionTiming": "background.recipe.presentationTimeline.spans",
+      "softConnectionIds": "background.recipe.softWindows"
+    }
+  },
+  "scope": "保存済み結果・計画・状態・背景投影の必要項目を抽出した人間レビュー案内。新しい品質判定・承認ではない。",
+  "limitations": [
+    "動画解析、再描画、試験、全画素QC、tree棚卸し、ブラウザー操作、Git操作は行っていない。",
+    "描画規則はこの旧完成媒体に結び付いた履歴値を維持し、B/C改善後の新規則へ付け替えない。",
+    "Soft Separatorの記載区間は保存投影にある中央黒区間。前後のfade範囲を推測追加していない。",
+    "字幕範囲は保存済み表示計画の範囲。画素の見え始めを新たに動画から検出した結果ではない。",
+    "代表箇所は索引上の選択であり、見心地の合否や優劣の自動判定を含まない。"
+  ]
+}

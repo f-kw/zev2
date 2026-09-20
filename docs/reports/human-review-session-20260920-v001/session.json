@@ -1,0 +1,288 @@
+{
+  "sessionId": "HRS-20260920-001",
+  "recordedBy": "Codex",
+  "purpose": "保存済み完成動画二本をまとめて提示し、本人の判断を固定した対象へ保存する。",
+  "policyBaselineCommit": "a689611d28ab4957b061230c411c95f83c8dc380",
+  "policyFiles": [
+    "docs/policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md",
+    "docs/HUMAN_REVIEW_PENDING.md",
+    "docs/reports/digest-presentation-editing-stage4-sources-20260918/DEVELOPMENT_HANDOFF.md"
+  ],
+  "createdAt": "2026-09-20T02:39:42.215750+00:00",
+  "status": "POINT_COMPARISON_PRESENTED_AWAITING_HUMAN_REVIEW",
+  "batches": [
+    {
+      "batchId": "HRB-001",
+      "displayName": "01_自動演出版",
+      "reviewIds": [
+        "HR-001",
+        "HR-002",
+        "HR-003",
+        "HR-004",
+        "HR-005",
+        "HR-006",
+        "HR-009"
+      ],
+      "artifact": {
+        "sourcePath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+        "reviewPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+        "bytes": 75306932,
+        "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225"
+      },
+      "frameCount": 4867,
+      "fps": 30,
+      "durationSeconds": 162.23333333333332,
+      "presented": true,
+      "viewingScopeConfirmed": false,
+      "humanDecision": null,
+      "savedPlanAndJudgmentBindings": {
+        "path": "hrb001-bindings.json",
+        "fileSha256": "b370cb0a8c03b2e6da9f0b959347132462b42e08e66471f6572edd35aa291ecb",
+        "bytes": 26085
+      },
+      "presentedRanges": [
+        {
+          "pointId": "connection",
+          "startFrame": 270,
+          "endFrameExclusive": 388,
+          "fps": 30
+        },
+        {
+          "pointId": "caption",
+          "startFrame": 444,
+          "endFrameExclusive": 581,
+          "fps": 30
+        },
+        {
+          "pointId": "motion",
+          "startFrame": 0,
+          "endFrameExclusive": 170,
+          "fps": 30
+        },
+        {
+          "pointId": "panel",
+          "startFrame": 1719,
+          "endFrameExclusive": 1818,
+          "fps": 30
+        }
+      ],
+      "wholeDigestViewed": false,
+      "viewingStatus": "NOT_CONFIRMED"
+    },
+    {
+      "batchId": "HRB-002",
+      "displayName": "02_一件修正版",
+      "reviewIds": [
+        "HR-007",
+        "HR-010"
+      ],
+      "artifact": {
+        "sourcePath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+        "reviewPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/02_一件修正版.mp4",
+        "bytes": 75271228,
+        "fileSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6"
+      },
+      "frameCount": 4879,
+      "fps": 30,
+      "durationSeconds": 162.63333333333333,
+      "presented": true,
+      "viewingScopeConfirmed": false,
+      "humanDecision": null,
+      "changePurpose": "技術検証用の字幕一件と接続一件の変更。本人が望んだ改善や自動版より優れることを前提にしない。",
+      "savedPlanAndJudgmentBindings": {
+        "path": "hrb002-bindings.json",
+        "fileSha256": "c05055bfd5c1e66d6bcda6d8ff2b261626bb30ce1a7ec4605dfaa13d5a2a27b8",
+        "bytes": 13512
+      },
+      "presentedRanges": [
+        {
+          "pointId": "connection",
+          "startFrame": 270,
+          "endFrameExclusive": 400,
+          "fps": 30
+        },
+        {
+          "pointId": "caption",
+          "startFrame": 456,
+          "endFrameExclusive": 593,
+          "fps": 30
+        }
+      ],
+      "wholeDigestViewed": false,
+      "viewingStatus": "NOT_CONFIRMED"
+    },
+    {
+      "batchId": "HRB-003",
+      "displayName": "後修正UIと待ち時間",
+      "reviewIds": [
+        "HR-008",
+        "HR-011"
+      ],
+      "status": "NOT_PERFORMED_ENVIRONMENT_WAITING",
+      "performed": false,
+      "humanDecision": null,
+      "reason": "正式な復旧根拠・許可された操作手順・対象サービスと保存版の固定が追加されていない。",
+      "conditionsUnchanged": true
+    }
+  ],
+  "reviewBoundaries": [
+    "本人の視聴範囲と使用許可の範囲だけを記録し、無回答・未視聴・保留を問題なしにしない。",
+    "HRB-001の演出採否とHRB-002の局所変更の感想を混ぜない。",
+    "理由は任意。述べられていない理由を作らない。差が分からなくても明示された使用許可は保持する。",
+    "一括使用許可は実際に含まれる表現へ適用し、同じ許可を取り直さない。単なる感想を全表現・全用途採用へ広げない。",
+    "一箇所の違和感を表現全体の禁止へ広げず、通常字幕の確認を未視聴条件・正式trustへ移さない。",
+    "Color、Scale、Normal Cut、Black Separatorの既存採用を再審査へ戻さない。",
+    "レビュー済み、採用判断、修正実装、反映確認を分離し、修正依頼の受領だけでCLOSEDにしない。",
+    "固定した動画を上書きしない。古い描画規則であることだけを理由に再生成しない。"
+  ],
+  "mediaHandling": "既存の完成MP4を同byteコピーし、提示する二本の実SHAが指定SHAと一致することだけを確認。原動画は変更していない。",
+  "additionalRendering": 0,
+  "technicalTestReruns": 0,
+  "fullPixelQcReruns": 0,
+  "browserUiRetries": 0,
+  "externalMediaTransmission": false,
+  "presentationAttempts": [
+    {
+      "method": "local-file-link",
+      "scope": "verified original HRB-001 MP4",
+      "status": "presented-before-copy-and-record-completion"
+    },
+    {
+      "method": "Codex file panel",
+      "scope": "original HRB-001 MP4",
+      "status": "queued-not-confirmed-open"
+    },
+    {
+      "method": "local-file-links",
+      "scope": "verified copies of HRB-001 and HRB-002",
+      "status": "presented"
+    },
+    {
+      "method": "macOS open folder",
+      "scope": "review copy folder",
+      "status": "failed-no-compatible-application",
+      "uiAcceptanceClaim": false
+    },
+    {
+      "method": "Edge Browser Use",
+      "scope": "static local point comparison HTML only; not editing UI",
+      "status": "rejected-by-browser-url-policy",
+      "followingAction": "本人へ実在ローカルHTMLのリンクを提示。自動表示の別経路は試さない。"
+    }
+  ],
+  "advisorJudgmentThisSession": null,
+  "reviewMode": "point-only",
+  "localGuide": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/ポイント比較.html",
+  "comparisonPoints": "comparison-points.json",
+  "reviewItems": [
+    {
+      "reviewId": "HR-001",
+      "batchId": "HRB-001",
+      "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "pointIds": [
+        "panel"
+      ],
+      "decision": null,
+      "status": "AWAITING_HUMAN_RESPONSE",
+      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+    },
+    {
+      "reviewId": "HR-002",
+      "batchId": "HRB-001",
+      "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "pointIds": [
+        "motion"
+      ],
+      "decision": null,
+      "status": "AWAITING_HUMAN_RESPONSE",
+      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+    },
+    {
+      "reviewId": "HR-003",
+      "batchId": "HRB-001",
+      "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "pointIds": [
+        "motion"
+      ],
+      "decision": null,
+      "status": "AWAITING_HUMAN_RESPONSE",
+      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+    },
+    {
+      "reviewId": "HR-004",
+      "batchId": "HRB-001",
+      "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "pointIds": [
+        "motion"
+      ],
+      "decision": null,
+      "status": "AWAITING_HUMAN_RESPONSE",
+      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+    },
+    {
+      "reviewId": "HR-005",
+      "batchId": "HRB-001",
+      "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "pointIds": [
+        "caption"
+      ],
+      "decision": null,
+      "status": "AWAITING_HUMAN_RESPONSE",
+      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+    },
+    {
+      "reviewId": "HR-006",
+      "batchId": "HRB-001",
+      "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "pointIds": [],
+      "decision": null,
+      "status": "WHOLE_DIGEST_REVIEW_NOT_PERFORMED",
+      "scopeLimit": "全編の使い分け・見心地・単調さは今回のポイント提示で確認済みにしない。局所感想が返ればその範囲だけ保存する。"
+    },
+    {
+      "reviewId": "HR-009",
+      "batchId": "HRB-001",
+      "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "pointIds": [
+        "caption"
+      ],
+      "decision": null,
+      "status": "AWAITING_HUMAN_RESPONSE",
+      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+    },
+    {
+      "reviewId": "HR-007",
+      "batchId": "HRB-002",
+      "artifactSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "pointIds": [
+        "connection",
+        "caption"
+      ],
+      "decision": null,
+      "status": "AWAITING_HUMAN_RESPONSE",
+      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+    },
+    {
+      "reviewId": "HR-010",
+      "batchId": "HRB-002",
+      "artifactSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "pointIds": [
+        "connection",
+        "caption"
+      ],
+      "decision": null,
+      "status": "AWAITING_HUMAN_RESPONSE",
+      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+    }
+  ],
+  "staticHtmlPlaybackVerification": "自動ブラウザー表示が拒否されたため未確認。構文・区間対応・参照MP4の実在だけを確認する。",
+  "policyBaselineIntegration": "既存作業branch303eb89dから指定commit a689611dへfast-forward。元workspaceの利用者変更は保持。",
+  "staticPreparationChecks": {
+    "jsonAndScriptSyntax": "passed",
+    "pointRangeMapping": "passed",
+    "localHtmlSameAsTrackedSource": true,
+    "linkedMediaExist": true,
+    "independentRangeReview": "6区間の対応・修正版の12frame移動・黒挿入差が一致。停止条件を指定終端へ揃えた。",
+    "browserPlayback": "未確認。URL policy拒否後は別経路で自動検査しない。"
+  }
+}
