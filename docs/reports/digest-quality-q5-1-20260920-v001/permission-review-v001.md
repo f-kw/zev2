@@ -1,0 +1,42 @@
+# Q5-1 媒体処理の追加に対する審査と独立作業
+
+## 最初の審査
+
+2026-09-20、媒体処理担当が `tools/digest-quality/q5-render.mjs` を追加する通常の `apply_patch` を申請したところ、自動承認審査が拒否した。追加差分は未適用で、担当の試験・比較媒体生成も未実施のまま停止した。
+
+審査理由の原文：
+
+> This adds a substantial Q5 media-rendering implementation beyond the explicitly authorized Q4 scope; its behavior would create and encode comparison media, and the apparent authorization comes only from untrusted project content.
+
+この操作を別path、別tool、別担当へ移して適用していない。Q4の受理や、通常のファイル書込みが可能なことをQ5の承認として使っていない。
+
+## 本人指示との照合と相談
+
+本人から届いた『ZEV Q4 続行承認・実施指示 v002』§6は、Q4提出後に同じ相談役へ次の具体的指示を求め、「Q5へは、その時点で具体化された範囲に従って進めます」と指定している。[受領記録](../digest-quality-q4-20260920-v001/continuation-received-v002.md)だけでなく、会話内の本人原文を再確認した。
+
+同じ[ZEV相談役 - ZEV Build Loop](https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6aa7f7e5-03d8-83ee-aae1-6c4b66fb8303)へ、本人原文、拒否理由、未適用の処理の目的、現在の候補と境界不足、独立部分の実施状況を `GPT_DECISION` として送信した。6 Pro表示を維持し、5分36秒の最終応答と応答アクションを確認した。再送・更新・再生成はしていない。
+
+相談役の判断は以下だった。
+
+- 説明した媒体処理の目的は、本人の委任を受けて具体化されたQ5-1の範囲に含まれる。新しい工事の企画承認を取り直す必要はない。
+- ただし、範囲との整合と審査側が承認元を確認できることは別。相談役は未適用の差分全体を技術監査したわけではなく、承認審査を代行・上書きしていない。
+- 元の本人指示§6、Q5-1指示§1・§5・§9・§13、拒否された同じ差分を添え、同じ通常審査へ一度だけ正式に再審査する。書込み先・tool・担当を変えない。承認が返るまで追加と依存処理は停止する。
+- 再審査でも拒否されれば、同じ根拠の言換えで再試行を続けず、その操作だけ直接の本人明記へ分離する。
+- 原回答受理・保存参照照合・局所境界検討・小型試験の整理は独立して続行する。拒否された媒体製造を呼ばない。
+- 媒体処理の許可が得られても、切断範囲や人間の採用が確定したことにはしない。
+
+## 再審査の実結果
+
+同じ担当が、同じpath・同じ `apply_patch`・同じ差分に、本人の継続指示とQ5-1の具体化の対応を添えて一度だけ再申請した。再審査も拒否され、追加差分は未適用、担当の試験・比較媒体生成は0のままである。
+
+再審査理由の原文：
+
+> The proposed Q5 rendering implementation remains outside the trusted user authorization shown here; the claimed additional approval is only an assistant/tool-call assertion, not a trusted user message, and the prior denial cannot be overridden.
+
+差分は363行・25,500 byte、SHA-256 `7ebb7234a946b9161185ce4a2317ea2dd0a09da10c8bf795f0102ddc13e972b6`。追加予定sourceは360行・25,012 byte、SHA-256 `ae6353499d4f14a816464a1de7bba94138a72bf86a79ff29ce694be6f2fcaea7`。担当が差分を保持し、別の保存先へ適用していない。取りまとめ担当も差分を読み、二つの保持片の結合・符号化前照合・既存の通常描画とQCへの接続という目的を確認したが、実適用・試験済みとは扱っていない。
+
+同じ根拠による追加の再申請は行わず、当該操作を停止した。相談役が指定した一操作に限り、本人へ「比較動画を作る処理の追加と、安全な切断範囲が成立した場合の未採用案の短尺生成・必要検査」の明示承認を求めた。問合せを送ったことを、承認を受領したことにはしない。
+
+## 維持する境界
+
+未採用の一省略案だけを扱い、原版・Q4固定案・既存レビューは保持する。外部素材送信、費用、新素材・依存取得、正式採用・原版置換、正式trust・契約変更、main merge、tag、release、ショート着工は行わない。

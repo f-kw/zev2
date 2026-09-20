@@ -1,0 +1,360 @@
+{
+  "schemaVersion": "digest-quality-q5-1-candidate-judgment-v001",
+  "inputSha256": "f28374701c88ff838746218314a9015e010f37601a028af0f09b9530405a59b7",
+  "completion": "complete",
+  "reviewedContextIds": [
+    "c-all-segment-0001",
+    "c-all-segment-0002",
+    "c-all-segment-0003",
+    "c-all-segment-0004",
+    "c-all-segment-0005",
+    "c-all-segment-0006",
+    "c-all-segment-0007",
+    "c-all-segment-0008",
+    "c-all-segment-0009",
+    "c-all-segment-0010",
+    "c-all-segment-0011",
+    "c-all-segment-0012"
+  ],
+  "coverageSummary": "指定された入力と判断文だけを今回の意味判断資料とした。全12保持場面の説明・保持理由、全325字幕の本文・改行・表示区間、全462 ASR区間の本文・保存秒値を順に読んだ。字幕本文と改行を結合した本文の相違はないことも確認した。説明の命題が同じかを、質問から結論への変化、数値・条件・否定の追加、驚き・歓声・迷い・呼びかけの反復と分けて検討した。球種比較の前後16 ASR区間について語ごとの保存時刻を読み、候補発話と前後の字幕の境界に小さな不一致があることを記録した。保存時刻を実切断frameの認定には使っていない。私は先にQ4の時刻・PCM・Panel矩形を扱う補助処理の読み取り監査を担当しており、その技術的文脈は保持している。未知事例を独立に発見したという主張はしない。過去の人間回答・Q3仮説・Q4の具体的な演出判断を今回の根拠として参照していない。",
+  "status": "candidate-proposed",
+  "preferredCandidateId": "q5-1-candidate-001",
+  "candidates": [
+    {
+      "candidateId": "q5-1-candidate-001",
+      "contextId": "c-all-segment-0004",
+      "keepCaptionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000117"
+      ],
+      "omitCaptionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000121"
+      ],
+      "keepAsrIds": [
+        "asr-segment-000128"
+      ],
+      "omitAsrIds": [
+        "asr-segment-000133"
+      ],
+      "retainedExplanation": "重いバージョンの紹介と「重い方はこうだ」を残した上で、「ドスンと落ちていく感じがありますね」という最初の説明を残す。この字幕とASRは同じ文面であり、重い方の落ち方についての内容を一度伝えている。",
+      "omittedExplanation": "同じ保持場面の少し後にある「このドスンと落ちていくんですこれ」という一発話と、それに対応する字幕一件だけを省略候補とする。前後の「同じにしか見えないけどまた違う」と「ということで重いわー」は省略対象に含めない。",
+      "sharedInformation": "比較中の重い方は「ドスンと落ちていく」という落ち方をする、という説明が共通する。単に「重い」という同じ語があるからではなく、同じ紹介の続きで同じ落ち方をもう一度説明していることを根拠とする。",
+      "uniqueInformationInOmission": "省略候補の文面には新しい数字、条件、否定、例外、採用する球種の結論はない。「この」「これ」で指し示し、「感じがありますね」より断定的に説明し直す働きはある。映像上で別の投球・新しい挙動を指している可能性や、実演に合わせた念押しの価値は未確認であり、情報が何も失われないとは認定しない。",
+      "dependencies": "直前には「さっきとはまた違う」「同じにしか見えないけどまた違う」があり、違いが分からないまま比較する面白さを担うので両方残す。直後の「ということで重いわー」は最初の落ち方の説明と重いバージョンの紹介が残れば文面上は受けられる。その後の「これよりも重いは言うとります」はASRが「ここよりも重いは言うとります」と異なり、比較対象の指示が不確かなので削らず残す。「こんなに違うこの2球種」、投票、重さを削った方の採用、一時間経過の驚きまでの後続は変えない。",
+      "normalAlternative": "保存保持理由は、投げ比べの反応と言い直しが違いの分からなさの面白さを支えると説明している。二度目の落ち方の説明も、分からないのに実演を続ける間や、最初の説明とは別の投球への反応として有効かもしれない。声色・間・映像がその読みを支えるなら、原版の反復を残す方がよい。原版が冗長で欠陥だとは判定しない。",
+      "boundaryFeasibility": "候補は一保持場面内部の、字幕一件に対応する一連続発話であり、意味上の省略対象は限定できる。ただし切断可能とはまだ認定できない。対象字幕の保存表示区間は [12109,12228) frame、直前字幕は12109で終了、直後字幕は12228から始まる。対象ASRの語時刻は「この」404.58秒から末尾「これ」407.7秒までで、字幕の終了境界407.6秒を0.1秒越えている。直前発話の末尾「違う」も403.64秒までと記録され、字幕境界12109/30秒とはわずかに異なる。これらの秒値を丸めて切断frameにしてはいけない。対象字幕だけを除き、残す字幕の本文・改行・表示長を変えずに語末と語頭を保てるか、後段で保存境界と周辺PCM等を照合する必要がある。成立しなければこの案を描画せず不成立とし、前後の字幕を削ったり短縮したりして成立扱いにしない。",
+      "comparisonContext": "同じ入口として「重いやつを見せるOK」「じゃあ重いバージョンがこれです」から始め、「いくよ重い方はこうだ」、残す最初の落ち方の説明、「はいどうでしょうか」、「さっきとはまた違う」「同じにしか見えないけどまた違う」、対象発話、「ということで重いわー」「これよりも重いは言うとります」を含める。同じ出口は「ということでさあ皆さん」「こんなに違うこの2球種」までとし、比較の呼びかけに接続できるかを確かめる。原版と案でこの入口・出口と、対象以外の字幕の内容・改行・表示長を揃える。ここでの指定は比較に必要な発話であり、正確な切出しframeの指定ではない。",
+      "unknowns": [
+        "対象発話中に新しい投球、操作、結果や重要な画面上の出来事があるかは、意味的な映像観測をしていないため未確認。",
+        "二度目の説明が声色や間による笑い・演技的な反復として必要か、また省略後の聴覚的な自然さは未確認。",
+        "保存ASRの語時刻と字幕表示境界が一致しないため、残す字幕の表示長を保ったまま語の途中を切らない境界が存在するかは未確認。",
+        "後続の比較対象を指す字幕「これよりも」とASR「ここよりも」の不一致は解決していない。対象を広げず、その発話は残す。"
+      ],
+      "selectionReason": "今回の一案として推奨する。残す一文と省く一文がどちらも確定字幕とASRで確認でき、同じ重いバージョンの具体的な落ち方を説明している。一場面内の一発話に限定でき、前後の比較・戸惑い・採用結論を残した短い同文脈比較を具体化できる。他の反復より数値訂正や結論変更、歓声そのものを省く危険を狭められる。ただしこれは未採用の意味候補であり、境界成立・映像情報の保持・人間品質合格の推奨認定ではない。"
+    }
+  ],
+  "excludedConsiderations": [
+    {
+      "contextId": "c-all-segment-0001",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000009",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000010",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000017",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000018",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000019",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000031",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000032"
+      ],
+      "asrIds": [
+        "asr-segment-000006",
+        "asr-segment-000007",
+        "asr-segment-000010",
+        "asr-segment-000011",
+        "asr-segment-000018",
+        "asr-segment-000019"
+      ],
+      "reason": "「やったー」「これ何」「何も作ってない」の反復は、正体を理解できないまま喜び、最後も困惑する流れである。説明を二度提供している対とはせず、喜び・質問・戸惑いを弱める省略は選ばない。"
+    },
+    {
+      "contextId": "c-all-segment-0002",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000034",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000035",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000055",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000056",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000059",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000060"
+      ],
+      "asrIds": [
+        "asr-segment-000021",
+        "asr-segment-000051",
+        "asr-segment-000052",
+        "asr-segment-000056"
+      ],
+      "reason": "病中の相手への感謝と卒業生としての謝罪は対人反応である。去年使えなかったことと覚えられなかったことも、監督との関係を示す回想を含む。共通語だけで同じ説明として削らない。"
+    },
+    {
+      "contextId": "c-all-segment-0003",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000077",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000078",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000079",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000080",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000081",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000091",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000092"
+      ],
+      "asrIds": [
+        "asr-segment-000076",
+        "asr-segment-000077",
+        "asr-segment-000078",
+        "asr-segment-000079",
+        "asr-segment-000080",
+        "asr-segment-000090",
+        "asr-segment-000091"
+      ],
+      "reason": "選手をもう一回見るという反復は迷って確認し直す行為の宣言で、今回求める事実説明の重複とはしない。「甲子園」から「合宿も甲子園も」への言い直しは対象が増えるため同じ情報でもない。"
+    },
+    {
+      "contextId": "c-all-segment-0004",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000094",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000095",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000101",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000102",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000103",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000110",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000111",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000112"
+      ],
+      "asrIds": [
+        "asr-segment-000093",
+        "asr-segment-000094",
+        "asr-segment-000107",
+        "asr-segment-000109",
+        "asr-segment-000110",
+        "asr-segment-000119",
+        "asr-segment-000120",
+        "asr-segment-000121",
+        "asr-segment-000122"
+      ],
+      "reason": "冒頭の「さっきやろうとしたのがこれ」は指示先が同じか映像なしでは確定しない。「ブレーキは逆?」から「逆効果」へは理解・説明の確定が進み、「強そう」の反復は反応であるため、今回の省略対から外した。"
+    },
+    {
+      "contextId": "c-all-segment-0005",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000149",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000150",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000151",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000152",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000153"
+      ],
+      "asrIds": [
+        "asr-segment-000180",
+        "asr-segment-000181",
+        "asr-segment-000182",
+        "asr-segment-000183",
+        "asr-segment-000184",
+        "asr-segment-000185",
+        "asr-segment-000186",
+        "asr-segment-000187"
+      ],
+      "reason": "行くという呼びかけと実際に覚えたという結果は別内容。スーパーノヴァの反復は習得を喜ぶ反応であり、説明の重複を省く対象にはしない。"
+    },
+    {
+      "contextId": "c-all-segment-0006",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000154",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000155",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000156",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000157",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000158"
+      ],
+      "asrIds": [
+        "asr-segment-000188",
+        "asr-segment-000189",
+        "asr-segment-000190",
+        "asr-segment-000191",
+        "asr-segment-000192",
+        "asr-segment-000193",
+        "asr-segment-000194",
+        "asr-segment-000195",
+        "asr-segment-000196",
+        "asr-segment-000197",
+        "asr-segment-000198",
+        "asr-segment-000199"
+      ],
+      "reason": "字幕は長い悲鳴として表現する一方、保存ASRには付かなかった結果、キャッチャーを決めたいという発話などがある。悲鳴字幕の見た目や反復だけを根拠に同じ説明を削ることはできず、内容の不一致もある。"
+    },
+    {
+      "contextId": "c-all-segment-0007",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000160",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000161",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000162",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000164",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000166",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000167",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000171",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000172"
+      ],
+      "asrIds": [
+        "asr-segment-000205",
+        "asr-segment-000206",
+        "asr-segment-000207",
+        "asr-segment-000208",
+        "asr-segment-000209",
+        "asr-segment-000211",
+        "asr-segment-000214",
+        "asr-segment-000217",
+        "asr-segment-000218"
+      ],
+      "reason": "三年生ばかりという嘆きを、勝つ気があるという解釈と「勝つなら許す」という条件へ変える場面。勝つという語の反復は決意と呼びかけを強め、条件と結論も増えるため対象外。"
+    },
+    {
+      "contextId": "c-all-segment-0008",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000178",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000179",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000184",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000185",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000186",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000187",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000189",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000191",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000199"
+      ],
+      "asrIds": [
+        "asr-segment-000223",
+        "asr-segment-000224",
+        "asr-segment-000225",
+        "asr-segment-000226",
+        "asr-segment-000233",
+        "asr-segment-000234",
+        "asr-segment-000235",
+        "asr-segment-000237",
+        "asr-segment-000239",
+        "asr-segment-000245",
+        "asr-segment-000246"
+      ],
+      "reason": "七回の能力使用は質問から判断へ進む。出塁要求の反復は焦りであり、ビトーを確認できないという説明の後には「魔物かどうか」という確認目的が加わる。その固有情報を除くとラッキーボーイとの落差の前提が弱まるため削らない。"
+    },
+    {
+      "contextId": "c-all-segment-0009",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000205",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000206",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000207",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000208"
+      ],
+      "asrIds": [
+        "asr-segment-000252",
+        "asr-segment-000253",
+        "asr-segment-000254"
+      ],
+      "reason": "いつもやれますと言っている、という反復は選手への茶化しと呼びかけ。説明の重複を省く対象ではない。"
+    },
+    {
+      "contextId": "c-all-segment-0010",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000209",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000210",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000219",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000220",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000221",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000222",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000227",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000229",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000230"
+      ],
+      "asrIds": [
+        "asr-segment-000255",
+        "asr-segment-000256",
+        "asr-segment-000265",
+        "asr-segment-000266",
+        "asr-segment-000267",
+        "asr-segment-000270",
+        "asr-segment-000272",
+        "asr-segment-000273"
+      ],
+      "reason": "宣言・期待否定・質問・風への理解・引っ張る決定という進行がある。風についての反復を確定済み説明の重複とは扱わず、最後の入らない突っ込みとドキドキしたという反復も感情の表現として除外した。"
+    },
+    {
+      "contextId": "c-all-segment-0011",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000233",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000234",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000236",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000237",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000238",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000239",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000240",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000241"
+      ],
+      "asrIds": [
+        "asr-segment-000275",
+        "asr-segment-000276",
+        "asr-segment-000277",
+        "asr-segment-000279",
+        "asr-segment-000280",
+        "asr-segment-000281",
+        "asr-segment-000282",
+        "asr-segment-000283"
+      ],
+      "reason": "転がすしかないかという確認と試合の緊張、選手への歓声が中心。同じ作戦語の反復を説明だけの重複として切り離さず、緊張と歓声は今回の対象外とした。"
+    },
+    {
+      "contextId": "c-all-segment-0012",
+      "captionIds": [
+        "digest-v1-phase2-20260913-v001-bridge-caption-000242",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000243",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000247",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000248",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000252",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000253",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000261",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000285",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000286",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000288",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000291",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000295",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000296",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000300",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000308",
+        "digest-v1-phase2-20260913-v001-bridge-caption-000309"
+      ],
+      "asrIds": [
+        "asr-segment-000284",
+        "asr-segment-000285",
+        "asr-segment-000286",
+        "asr-segment-000288",
+        "asr-segment-000289",
+        "asr-segment-000290",
+        "asr-segment-000294",
+        "asr-segment-000295",
+        "asr-segment-000304",
+        "asr-segment-000305",
+        "asr-segment-000367",
+        "asr-segment-000368",
+        "asr-segment-000369",
+        "asr-segment-000370",
+        "asr-segment-000371",
+        "asr-segment-000372",
+        "asr-segment-000373",
+        "asr-segment-000374",
+        "asr-segment-000375",
+        "asr-segment-000376",
+        "asr-segment-000377",
+        "asr-segment-000378",
+        "asr-segment-000382",
+        "asr-segment-000390",
+        "asr-segment-000391",
+        "asr-segment-000395",
+        "asr-segment-000396",
+        "asr-segment-000423",
+        "asr-segment-000424"
+      ],
+      "reason": "能力の読上げには「ミートじゃない、走力」という訂正や別能力が入り、同じ数字でも条件が同じとは言えない。「失敗したらヤバい」「スクイズ2も怖い」はリスクへの反応と迷いであり、バント職人や二ストライクという後の条件追加を含む判断経過から切り離さない。長い歓声と勝利の解放も対象外とした。"
+    }
+  ],
+  "humanQualityApproved": false
+}

@@ -1,0 +1,917 @@
+{
+  "schemaVersion": "q5-local-boundary-assessment-v001",
+  "candidateId": "q5-1-candidate-001",
+  "status": "boundary-not-established",
+  "sourceReferences": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-timing-resolution-v002.json",
+      "bytes": 1401130,
+      "fileSha256": "288dd18230b1bb0e59cd6ff2b1ec47bf86dc916026f8e9c77cb219ed275847e1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/acoustic-observation-chunk-0142-v001.json",
+      "bytes": 12100,
+      "fileSha256": "0a39318852fc6acf6d02fcec201a308ee13b941b20443850b7c5d57034a34998"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/audio-preparation.json",
+      "bytes": 35542,
+      "fileSha256": "48c9f33638a22a69151b238a84cfc3e1d846bff5a650b9fd1da192e9a68476fb"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/candidate-run-v001/input.json",
+      "bytes": 843521,
+      "fileSha256": "d69a63d2c30aee19bae079eb63651438edf248b2f1a57ee4b524b2442b0ea958"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/boundary-observation-v001/pcm-measurement-v001.json",
+      "bytes": 118640,
+      "fileSha256": "9ad1e20ad20e2a6c21f702937792b42603c92694e1bb3eea1269900fe4c8533b"
+    }
+  ],
+  "sourceOriginalVideoBinding": {
+    "path": "evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+    "fileSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06"
+  },
+  "originalSegment": {
+    "sourceStartFrame30": 124267,
+    "outputStartFrame": 8505,
+    "fps": 30
+  },
+  "onlyCaptionPreservingOmissionUnderExamination": {
+    "startFrame": 12109,
+    "endFrameExclusive": 12228
+  },
+  "removedFramesIfValid": 119,
+  "removedPlaybackSamplesIfValid": 190400,
+  "checks": [
+    {
+      "kind": "start",
+      "fixedCaptionBoundaryFrame": 12109,
+      "playbackSample": 19374400,
+      "boundarySeconds": {
+        "numerator": "12109",
+        "denominator": "30"
+      },
+      "originalSourceFrame": 127871,
+      "savedFixedTextSourceMilliseconds": 4262360,
+      "mappedSavedFixedTextSeconds": {
+        "numerator": "30272",
+        "denominator": "75"
+      },
+      "savedCompleteAsrSeconds": "403.64",
+      "captionMinusFixedTextSeconds": {
+        "numerator": "1",
+        "denominator": "150"
+      },
+      "captionMinusLaterAsrSeconds": {
+        "numerator": "-1",
+        "denominator": "150"
+      },
+      "safetyConclusion": "not-established; no tolerance or rounding used to accept disagreement"
+    },
+    {
+      "kind": "end",
+      "fixedCaptionBoundaryFrame": 12228,
+      "playbackSample": 19564800,
+      "boundarySeconds": {
+        "numerator": "2038",
+        "denominator": "5"
+      },
+      "originalSourceFrame": 127990,
+      "savedFixedTextSourceMilliseconds": 4266320,
+      "mappedSavedFixedTextSeconds": {
+        "numerator": "30569",
+        "denominator": "75"
+      },
+      "savedCompleteAsrSeconds": "407.7",
+      "captionMinusFixedTextSeconds": {
+        "numerator": "1",
+        "denominator": "75"
+      },
+      "captionMinusLaterAsrSeconds": {
+        "numerator": "-1",
+        "denominator": "10"
+      },
+      "safetyConclusion": "not-established; no tolerance or rounding used to accept disagreement"
+    }
+  ],
+  "savedFixedTextRows": [
+    {
+      "unitId": "digest-v1-phase2-20260913-v001-caption-timing-120",
+      "timelineSegmentId": "segment-0004",
+      "atomOccurrenceIds": [
+        "digest-v1-phase2-20260913-v001-atom-001526",
+        "digest-v1-phase2-20260913-v001-atom-001527",
+        "digest-v1-phase2-20260913-v001-atom-001528",
+        "digest-v1-phase2-20260913-v001-atom-001529",
+        "digest-v1-phase2-20260913-v001-atom-001530",
+        "digest-v1-phase2-20260913-v001-atom-001531",
+        "digest-v1-phase2-20260913-v001-atom-001532",
+        "digest-v1-phase2-20260913-v001-atom-001533",
+        "digest-v1-phase2-20260913-v001-atom-001534",
+        "digest-v1-phase2-20260913-v001-atom-001535",
+        "digest-v1-phase2-20260913-v001-atom-001536",
+        "digest-v1-phase2-20260913-v001-atom-001537",
+        "digest-v1-phase2-20260913-v001-atom-001538",
+        "digest-v1-phase2-20260913-v001-atom-001539",
+        "digest-v1-phase2-20260913-v001-atom-001540"
+      ],
+      "sourceSegmentIds": [
+        12747,
+        12748,
+        12749,
+        12750,
+        12751,
+        12752,
+        12753,
+        12754,
+        12755,
+        12756,
+        12757,
+        12758,
+        12759,
+        12760,
+        12761
+      ],
+      "text": "同じにしか見えないけどまた違う",
+      "oldStartMs": 4260438,
+      "oldEndMs": 4263600,
+      "resolution": {
+        "status": "partial",
+        "sourceSegmentIds": [
+          12747,
+          12748,
+          12749,
+          12750,
+          12751,
+          12752,
+          12753,
+          12754,
+          12755,
+          12756,
+          12757,
+          12758,
+          12759,
+          12760,
+          12761
+        ],
+        "startResolution": {
+          "status": "unresolved",
+          "reason": "window-origin-does-not-observe-speech-onset"
+        },
+        "endResolution": {
+          "status": "resolved",
+          "unitId": "chunk-142-unit-10",
+          "observedMs": 4262360,
+          "sourceMs": 4262360
+        },
+        "sourceStartMs": 4260438,
+        "sourceEndMs": 4262360,
+        "observedStartMs": 4260000,
+        "observedEndMs": 4262360,
+        "intersectionWithUnchangedComposition": false
+      },
+      "changes": {
+        "startMs": 0,
+        "endMs": -1240
+      }
+    },
+    {
+      "unitId": "digest-v1-phase2-20260913-v001-caption-timing-121",
+      "timelineSegmentId": "segment-0004",
+      "atomOccurrenceIds": [
+        "digest-v1-phase2-20260913-v001-atom-001541",
+        "digest-v1-phase2-20260913-v001-atom-001542",
+        "digest-v1-phase2-20260913-v001-atom-001543",
+        "digest-v1-phase2-20260913-v001-atom-001544",
+        "digest-v1-phase2-20260913-v001-atom-001545",
+        "digest-v1-phase2-20260913-v001-atom-001546",
+        "digest-v1-phase2-20260913-v001-atom-001547",
+        "digest-v1-phase2-20260913-v001-atom-001548",
+        "digest-v1-phase2-20260913-v001-atom-001549",
+        "digest-v1-phase2-20260913-v001-atom-001550",
+        "digest-v1-phase2-20260913-v001-atom-001551",
+        "digest-v1-phase2-20260913-v001-atom-001552",
+        "digest-v1-phase2-20260913-v001-atom-001553",
+        "digest-v1-phase2-20260913-v001-atom-001554",
+        "digest-v1-phase2-20260913-v001-atom-001555",
+        "digest-v1-phase2-20260913-v001-atom-001556"
+      ],
+      "sourceSegmentIds": [
+        12762,
+        12763,
+        12764,
+        12765,
+        12766,
+        12767,
+        12768,
+        12769,
+        12770,
+        12771,
+        12772,
+        12773,
+        12774,
+        12775,
+        12776,
+        12777
+      ],
+      "text": "このドスンと落ちていくんですこれ",
+      "oldStartMs": 4263600,
+      "oldEndMs": 4266122,
+      "resolution": {
+        "status": "resolved",
+        "sourceSegmentIds": [
+          12762,
+          12763,
+          12764,
+          12765,
+          12766,
+          12767,
+          12768,
+          12769,
+          12770,
+          12771,
+          12772,
+          12773,
+          12774,
+          12775,
+          12776,
+          12777
+        ],
+        "startResolution": {
+          "status": "resolved",
+          "unitId": "chunk-142-unit-11",
+          "observedMs": 4262360,
+          "sourceMs": 4262360
+        },
+        "endResolution": {
+          "status": "resolved",
+          "unitId": "chunk-142-unit-21",
+          "observedMs": 4266320,
+          "sourceMs": 4266320
+        },
+        "sourceStartMs": 4262360,
+        "sourceEndMs": 4266320,
+        "observedStartMs": 4262360,
+        "observedEndMs": 4266320,
+        "intersectionWithUnchangedComposition": false
+      },
+      "changes": {
+        "startMs": -1240,
+        "endMs": 198
+      }
+    },
+    {
+      "unitId": "digest-v1-phase2-20260913-v001-caption-timing-122",
+      "timelineSegmentId": "segment-0004",
+      "atomOccurrenceIds": [
+        "digest-v1-phase2-20260913-v001-atom-001557",
+        "digest-v1-phase2-20260913-v001-atom-001558",
+        "digest-v1-phase2-20260913-v001-atom-001559",
+        "digest-v1-phase2-20260913-v001-atom-001560",
+        "digest-v1-phase2-20260913-v001-atom-001561",
+        "digest-v1-phase2-20260913-v001-atom-001562",
+        "digest-v1-phase2-20260913-v001-atom-001563",
+        "digest-v1-phase2-20260913-v001-atom-001564",
+        "digest-v1-phase2-20260913-v001-atom-001565",
+        "digest-v1-phase2-20260913-v001-atom-001566"
+      ],
+      "sourceSegmentIds": [
+        12778,
+        12779,
+        12780,
+        12781,
+        12782,
+        12783,
+        12784,
+        12785,
+        12786,
+        12787
+      ],
+      "text": "ということで重いわー",
+      "oldStartMs": 4266122,
+      "oldEndMs": 4276030,
+      "resolution": {
+        "status": "resolved",
+        "sourceSegmentIds": [
+          12778,
+          12779,
+          12780,
+          12781,
+          12782,
+          12783,
+          12784,
+          12785,
+          12786,
+          12787
+        ],
+        "startResolution": {
+          "status": "resolved",
+          "unitId": "chunk-142-unit-22",
+          "observedMs": 4266320,
+          "sourceMs": 4266320
+        },
+        "endResolution": {
+          "status": "resolved",
+          "unitId": "chunk-142-unit-26",
+          "observedMs": 4275580,
+          "sourceMs": 4275580
+        },
+        "sourceStartMs": 4266320,
+        "sourceEndMs": 4275580,
+        "observedStartMs": 4266320,
+        "observedEndMs": 4275580,
+        "intersectionWithUnchangedComposition": false
+      },
+      "changes": {
+        "startMs": 198,
+        "endMs": -450
+      }
+    }
+  ],
+  "savedFixedTextLocalWords": [
+    {
+      "word": "また",
+      "tokens": [
+        24712
+      ],
+      "start": 1.48,
+      "end": 1.82,
+      "probability": 0.5671015977859497
+    },
+    {
+      "word": "違う",
+      "tokens": [
+        49806
+      ],
+      "start": 1.82,
+      "end": 2.36,
+      "probability": 0.8625852465629578
+    },
+    {
+      "word": "この",
+      "tokens": [
+        13303
+      ],
+      "start": 2.36,
+      "end": 3.8,
+      "probability": 0.3913693428039551
+    },
+    {
+      "word": "ド",
+      "tokens": [
+        11195
+      ],
+      "start": 3.8,
+      "end": 4.18,
+      "probability": 0.7441096901893616
+    },
+    {
+      "word": "ス",
+      "tokens": [
+        9550
+      ],
+      "start": 4.18,
+      "end": 4.3,
+      "probability": 0.2249642163515091
+    },
+    {
+      "word": "ン",
+      "tokens": [
+        4824
+      ],
+      "start": 4.3,
+      "end": 4.44,
+      "probability": 0.9651153683662415
+    },
+    {
+      "word": "と",
+      "tokens": [
+        3193
+      ],
+      "start": 4.44,
+      "end": 4.64,
+      "probability": 0.91713947057724
+    },
+    {
+      "word": "落",
+      "tokens": [
+        30848
+      ],
+      "start": 4.64,
+      "end": 5.22,
+      "probability": 0.40845340490341187
+    },
+    {
+      "word": "ち",
+      "tokens": [
+        6574
+      ],
+      "start": 5.22,
+      "end": 5.28,
+      "probability": 0.999309778213501
+    },
+    {
+      "word": "て",
+      "tokens": [
+        2996
+      ],
+      "start": 5.28,
+      "end": 5.4,
+      "probability": 0.9935609102249146
+    },
+    {
+      "word": "いく",
+      "tokens": [
+        49394
+      ],
+      "start": 5.4,
+      "end": 5.54,
+      "probability": 0.8706256747245789
+    },
+    {
+      "word": "んです",
+      "tokens": [
+        27113
+      ],
+      "start": 5.54,
+      "end": 5.82,
+      "probability": 0.9828917980194092
+    },
+    {
+      "word": "これ",
+      "tokens": [
+        9329
+      ],
+      "start": 5.82,
+      "end": 6.32,
+      "probability": 0.4058362543582916
+    },
+    {
+      "word": "ということで",
+      "tokens": [
+        39341
+      ],
+      "start": 6.32,
+      "end": 11.4,
+      "probability": 0.2624698281288147
+    }
+  ],
+  "savedLaterAsrRows": [
+    {
+      "id": "asr-segment-000132",
+      "modelSegmentId": 132,
+      "seek": 41894,
+      "startSec": 401.38,
+      "endSec": 403.64,
+      "text": "同じにしか見えないけどまた違う",
+      "tokens": [
+        50914,
+        13089,
+        9257,
+        4108,
+        32156,
+        10470,
+        6474,
+        9311,
+        21891,
+        24712,
+        49806,
+        51064
+      ],
+      "avgLogprob": -0.14338739775121212,
+      "noSpeechProbability": 0.004846254363656044,
+      "compressionRatio": 1.6875,
+      "temperature": 0,
+      "words": [
+        {
+          "startSec": 401.38,
+          "endSec": 401.88,
+          "text": "同",
+          "probability": 0.8059603571891785
+        },
+        {
+          "startSec": 401.88,
+          "endSec": 402.04,
+          "text": "じ",
+          "probability": 0.9994975328445435
+        },
+        {
+          "startSec": 402.04,
+          "endSec": 402.16,
+          "text": "に",
+          "probability": 0.8840975761413574
+        },
+        {
+          "startSec": 402.16,
+          "endSec": 402.28,
+          "text": "しか",
+          "probability": 0.9858443737030029
+        },
+        {
+          "startSec": 402.28,
+          "endSec": 402.44,
+          "text": "見",
+          "probability": 0.9575150012969971
+        },
+        {
+          "startSec": 402.44,
+          "endSec": 402.5,
+          "text": "え",
+          "probability": 0.9971953630447388
+        },
+        {
+          "startSec": 402.5,
+          "endSec": 402.6,
+          "text": "ない",
+          "probability": 0.9972711205482483
+        },
+        {
+          "startSec": 402.6,
+          "endSec": 402.76,
+          "text": "けど",
+          "probability": 0.9483742117881775
+        },
+        {
+          "startSec": 402.76,
+          "endSec": 403.1,
+          "text": "また",
+          "probability": 0.7891314029693604
+        },
+        {
+          "startSec": 403.1,
+          "endSec": 403.64,
+          "text": "違う",
+          "probability": 0.9107483625411987
+        }
+      ]
+    },
+    {
+      "id": "asr-segment-000133",
+      "modelSegmentId": 133,
+      "seek": 41894,
+      "startSec": 404.58,
+      "endSec": 407.7,
+      "text": "このドスンと落ちていくんですこれ",
+      "tokens": [
+        51064,
+        13303,
+        11195,
+        9550,
+        4824,
+        3193,
+        30848,
+        6574,
+        2996,
+        49394,
+        27113,
+        9329,
+        51264
+      ],
+      "avgLogprob": -0.14338739775121212,
+      "noSpeechProbability": 0.004846254363656044,
+      "compressionRatio": 1.6875,
+      "temperature": 0,
+      "words": [
+        {
+          "startSec": 404.58,
+          "endSec": 405.08,
+          "text": "この",
+          "probability": 0.8794993758201599
+        },
+        {
+          "startSec": 405.08,
+          "endSec": 405.44,
+          "text": "ド",
+          "probability": 0.9335303902626038
+        },
+        {
+          "startSec": 405.44,
+          "endSec": 405.58,
+          "text": "ス",
+          "probability": 0.9472286701202393
+        },
+        {
+          "startSec": 405.58,
+          "endSec": 405.72,
+          "text": "ン",
+          "probability": 0.9853648543357849
+        },
+        {
+          "startSec": 405.72,
+          "endSec": 405.9,
+          "text": "と",
+          "probability": 0.9888855218887329
+        },
+        {
+          "startSec": 405.9,
+          "endSec": 406.5,
+          "text": "落",
+          "probability": 0.8710787892341614
+        },
+        {
+          "startSec": 406.5,
+          "endSec": 406.54,
+          "text": "ち",
+          "probability": 0.9996432065963745
+        },
+        {
+          "startSec": 406.54,
+          "endSec": 406.66,
+          "text": "て",
+          "probability": 0.9961904287338257
+        },
+        {
+          "startSec": 406.66,
+          "endSec": 406.82,
+          "text": "いく",
+          "probability": 0.9161104559898376
+        },
+        {
+          "startSec": 406.82,
+          "endSec": 407.1,
+          "text": "んです",
+          "probability": 0.9836664199829102
+        },
+        {
+          "startSec": 407.1,
+          "endSec": 407.7,
+          "text": "これ",
+          "probability": 0.4534917175769806
+        }
+      ]
+    },
+    {
+      "id": "asr-segment-000134",
+      "modelSegmentId": 134,
+      "seek": 41894,
+      "startSec": 412.18,
+      "endSec": 412.68,
+      "text": "ということで",
+      "tokens": [
+        51464,
+        39341,
+        51564
+      ],
+      "avgLogprob": -0.14338739775121212,
+      "noSpeechProbability": 0.004846254363656044,
+      "compressionRatio": 1.6875,
+      "temperature": 0,
+      "words": [
+        {
+          "startSec": 412.18,
+          "endSec": 412.68,
+          "text": "ということで",
+          "probability": 0.42479607462882996
+        }
+      ]
+    }
+  ],
+  "pcmRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/boundary-observation-v001/source-400-to-411s.f32le",
+    "bytes": 4224000,
+    "fileSha256": "97b16d4628f7fae399c973743fc0b06df1441fc7165cb416c9420f14a09f6657"
+  },
+  "pcmObservation": {
+    "originalFrameRange": {
+      "startFrame": 12000,
+      "endFrameExclusive": 12330
+    },
+    "sampleRate": 48000,
+    "channels": 2,
+    "selectedFrames": [
+      {
+        "originalFrame": 12106,
+        "startPlaybackSample": 19369600,
+        "endPlaybackSampleExclusive": 19371200,
+        "rmsPerChannel": [
+          0.09095126113884305,
+          0.09040496317958169
+        ],
+        "peakAbsolutePerChannel": [
+          0.2973023056983948,
+          0.3034394681453705
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12107,
+        "startPlaybackSample": 19371200,
+        "endPlaybackSampleExclusive": 19372800,
+        "rmsPerChannel": [
+          0.05457375821297304,
+          0.05257441448640133
+        ],
+        "peakAbsolutePerChannel": [
+          0.16456009447574615,
+          0.1520516723394394
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12108,
+        "startPlaybackSample": 19372800,
+        "endPlaybackSampleExclusive": 19374400,
+        "rmsPerChannel": [
+          0.03132502890181393,
+          0.030820300593391876
+        ],
+        "peakAbsolutePerChannel": [
+          0.09327947348356247,
+          0.08921553194522858
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12109,
+        "startPlaybackSample": 19374400,
+        "endPlaybackSampleExclusive": 19376000,
+        "rmsPerChannel": [
+          0.011597876167510119,
+          0.010068025787419877
+        ],
+        "peakAbsolutePerChannel": [
+          0.03751218318939209,
+          0.029633721336722374
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12110,
+        "startPlaybackSample": 19376000,
+        "endPlaybackSampleExclusive": 19377600,
+        "rmsPerChannel": [
+          0.006156441105676775,
+          0.0065567409414949976
+        ],
+        "peakAbsolutePerChannel": [
+          0.018189020454883575,
+          0.017147304490208626
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12111,
+        "startPlaybackSample": 19377600,
+        "endPlaybackSampleExclusive": 19379200,
+        "rmsPerChannel": [
+          0.0060535281318793484,
+          0.0050034242907578425
+        ],
+        "peakAbsolutePerChannel": [
+          0.015077086165547371,
+          0.01552241574972868
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12224,
+        "startPlaybackSample": 19558400,
+        "endPlaybackSampleExclusive": 19560000,
+        "rmsPerChannel": [
+          0.007731985597658538,
+          0.006633352569082213
+        ],
+        "peakAbsolutePerChannel": [
+          0.024451665580272675,
+          0.026479925960302353
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12225,
+        "startPlaybackSample": 19560000,
+        "endPlaybackSampleExclusive": 19561600,
+        "rmsPerChannel": [
+          0.008034522881231106,
+          0.008610765935388783
+        ],
+        "peakAbsolutePerChannel": [
+          0.024625534191727638,
+          0.029711749404668808
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12226,
+        "startPlaybackSample": 19561600,
+        "endPlaybackSampleExclusive": 19563200,
+        "rmsPerChannel": [
+          0.011898569737347386,
+          0.012021119053599691
+        ],
+        "peakAbsolutePerChannel": [
+          0.03173566609621048,
+          0.029324211180210114
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12227,
+        "startPlaybackSample": 19563200,
+        "endPlaybackSampleExclusive": 19564800,
+        "rmsPerChannel": [
+          0.00861189478909702,
+          0.007990522855061594
+        ],
+        "peakAbsolutePerChannel": [
+          0.023395618423819542,
+          0.023618599399924278
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12228,
+        "startPlaybackSample": 19564800,
+        "endPlaybackSampleExclusive": 19566400,
+        "rmsPerChannel": [
+          0.008299608842631093,
+          0.007510645707545927
+        ],
+        "peakAbsolutePerChannel": [
+          0.025524593889713287,
+          0.0209139883518219
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12229,
+        "startPlaybackSample": 19566400,
+        "endPlaybackSampleExclusive": 19568000,
+        "rmsPerChannel": [
+          0.009613934176462714,
+          0.00871570730669279
+        ],
+        "peakAbsolutePerChannel": [
+          0.04494406282901764,
+          0.0447845384478569
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12230,
+        "startPlaybackSample": 19568000,
+        "endPlaybackSampleExclusive": 19569600,
+        "rmsPerChannel": [
+          0.011916394544249318,
+          0.012531351282360142
+        ],
+        "peakAbsolutePerChannel": [
+          0.03110160119831562,
+          0.03467581048607826
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12231,
+        "startPlaybackSample": 19569600,
+        "endPlaybackSampleExclusive": 19571200,
+        "rmsPerChannel": [
+          0.010275987874990612,
+          0.009024334136798992
+        ],
+        "peakAbsolutePerChannel": [
+          0.035449668765068054,
+          0.02431921847164631
+        ],
+        "exactZeroSampleFrames": 0
+      },
+      {
+        "originalFrame": 12232,
+        "startPlaybackSample": 19571200,
+        "endPlaybackSampleExclusive": 19572800,
+        "rmsPerChannel": [
+          0.010316788446936172,
+          0.009707089432034372
+        ],
+        "peakAbsolutePerChannel": [
+          0.032220449298620224,
+          0.03612089529633522
+        ],
+        "exactZeroSampleFrames": 0
+      }
+    ],
+    "claim": "mixed-program numerical observation only; no speech isolation or listening"
+  },
+  "newShortAsr": {
+    "status": "not-started-runtime-unavailable",
+    "knownRuntimePathsChecked": [
+      "/Users/kawafmm/.pyenv/versions/3.10.14/bin/python3.10",
+      "/private/tmp/zev024-stt-arm64/bin/python"
+    ],
+    "error": "ModuleNotFoundError: No module named 'faster_whisper'",
+    "currentSecondRuntimeTarget": "/Users/kawafmm/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "previouslyBoundModulePresent": false,
+    "modelLoadStarted": false,
+    "modelDownloaded": false,
+    "newDependencyInstalled": false,
+    "newObservationProduced": false
+  },
+  "semanticListeningPerformed": false,
+  "newSemanticVideoObservation": false,
+  "actualEditPlanFixed": false,
+  "comparisonGenerated": false,
+  "contentEditAdopted": false,
+  "conclusion": "Existing fixed-text source timing and later completed-media ASR differ at the only caption-preserving boundaries. Mixed-program PCM alone does not identify a safe word ending. No arbitrary tolerance, silence score, or neighboring-caption modification is used to force a comparison."
+}

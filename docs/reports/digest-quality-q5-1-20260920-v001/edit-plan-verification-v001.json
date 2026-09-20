@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "q5-edit-plan-fixture-verification-v001",
+  "status": "passed-fixture-only",
+  "runtime": {
+    "node": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "version": "20.19.6",
+    "NODE_OPTIONS": "unset",
+    "command": "env -u NODE_OPTIONS /Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --test tools/digest-quality/q5-edit-plan.test.mjs"
+  },
+  "testResult": {
+    "tests": 14,
+    "passed": 14,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "stderrBytes": 0
+  },
+  "bindings": [
+    {
+      "path": "tools/digest-quality/q5-edit-plan.mjs",
+      "fileSha256": "14c24c9378c9044c4d3c2d8c0667671a13d30fc5472f537df14a842987f12481",
+      "bytes": 23174
+    },
+    {
+      "path": "tools/digest-quality/q5-edit-plan.test.mjs",
+      "fileSha256": "94f271d36d5d96dd5d00673317b7f822c1f06a78c4819a7bce49ae5c2424b752",
+      "bytes": 18642
+    },
+    {
+      "path": "docs/reports/digest-quality-q5-1-20260920-v001/edit-plan-tests-v002.tap",
+      "fileSha256": "6d5d17eb14a0f4f0c1f7260afb0229b7a5c3118e0649bdda4dc8f1c0d5ce6370",
+      "bytes": 3355
+    },
+    {
+      "path": "docs/reports/digest-quality-q5-1-20260920-v001/edit-plan-tests-v002.stderr",
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "fixture": {
+    "originalFrameCount": 1200,
+    "originalCaptionCount": 48,
+    "originalRetainedIntervalCount": 12,
+    "omission": {
+      "startFrame": 130,
+      "endFrameExclusive": 160
+    },
+    "editedFrameCount": 1170,
+    "retainedCaptionCount": 46,
+    "editedRetainedPieceCount": 13,
+    "beforeRange": {
+      "startFrame": 110,
+      "endFrameExclusive": 180
+    },
+    "afterFrameCount": 40
+  },
+  "scope": {
+    "newProductionContract": false,
+    "q4OrOriginalModified": false,
+    "realCandidateFrameBoundaryChosen": false,
+    "realCAllMediaGenerated": false,
+    "semanticJudgmentValidatedByUnitTests": false,
+    "captionTextEdited": false,
+    "effectsOrReviewsTransferred": false,
+    "externalServiceOrPaidApiUsed": false,
+    "commitOrPushPerformed": false,
+    "mediaRunnerRejectionBypassed": false
+  },
+  "verification": {
+    "targetedTestsOnly": true,
+    "newSourceTestAndFinalTapIgnoredByGit": false,
+    "ownedDiffWhitespaceCheck": "passed",
+    "actualMediaBytes": "must be checked by the media caller before use",
+    "policyReference": "must be checked against the received instruction by the caller"
+  }
+}
