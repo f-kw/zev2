@@ -1,7 +1,117 @@
 {
   "sessionId": "HRS-20260920-001",
-  "qualityResponses": [],
-  "decisions": [],
+  "qualityResponses": [
+    {
+      "pointId": "connection",
+      "speaker": "kawafmmの回答（原文）",
+      "text": "POINT 1　違和感はない。何度も何度も何度も言ってるが、黒い接続は選択の問題で入れた方が良いときと入れない方が良い時がある。ただのバリエーションの問題で比較判断は人間でもほとんどできない。なんとなくレベルだ",
+      "interpretation": {
+        "decision": "ADOPT",
+        "appliesTo": [
+          "Normal Cut",
+          "Black Separator"
+        ],
+        "meaning": "両方を使える。黒を入れるかは文脈とバリエーションの選択問題であり、人間に微差の優劣A/Bを繰り返し要求しない。",
+        "notAppliedTo": [
+          "Soft Separatorの採否",
+          "全接続へ黒を入れる固定規則"
+        ]
+      }
+    },
+    {
+      "pointId": "caption",
+      "speaker": "kawafmmの回答（原文）",
+      "text": "POINT2 この機能はバリエーションとしてあった方が良いが、まず背景にセンタリングを綺麗にできてないと違和感がすごい。センタリングは必須で背景も色のバリエーション色じゃなくて画像というバリエーションが必要。機能の存在自体は違和感ない。何かしら効果的に使うことも可能だろう",
+      "interpretation": {
+        "decision": "ADOPT_WITH_CHANGE",
+        "appliesTo": [
+          "Panel Accent"
+        ],
+        "meaning": "Panel/背景板という表現自体は残す。必要に応じて効果的に使える。",
+        "requiredChanges": [
+          "背景板に対する字幕のセンタリングを綺麗に成立させることを必須品質条件にする",
+          "背景のバリエーションを色違いだけにせず、画像を使うバリエーションを用意する"
+        ],
+        "notAppliedTo": [
+          "Normal字幕そのもの",
+          "Soft Separatorのフェード評価"
+        ]
+      }
+    },
+    {
+      "pointId": "motion",
+      "speaker": "kawafmmの回答（原文）",
+      "text": "POINT3 この機能はとても良い。気になったのは拡大縮小が荒くてカクカク見える",
+      "interpretation": {
+        "decision": "ADOPT_WITH_CHANGE",
+        "appliesTo": [
+          "Bounce Accent",
+          "Shake Accent",
+          "Pulse Accent"
+        ],
+        "meaning": "動き系の表現をバリエーションとして使う方向は高評価。",
+        "requiredChanges": [
+          "拡大縮小を含む動きは、カクカク見えないよう時間補間・状態数・動作曲線を改善する"
+        ],
+        "attributionLimit": "POINT3はBounce/Shake/Pulseを一つの区間へ束ねている。拡大縮小の欠陥を特定preset一つへ推測で限定せず、実装上スケール変化を持つpresetを確認して修正する。"
+      }
+    },
+    {
+      "pointId": "panel",
+      "speaker": "kawafmmの回答（原文）",
+      "text": "POINT4 目立ちすぎの心配はない。必要に応じて一番目立ってもいい。ただしPOINT2と同じ問題がある",
+      "interpretation": {
+        "decision": "ADOPT_WITH_CHANGE",
+        "appliesTo": [
+          "Panel Accent"
+        ],
+        "meaning": "Panelは必要なら画面内で最も目立つ表現になってよい。『目立ちすぎないこと』を固定制約にしない。",
+        "requiredChanges": [
+          "背景板に対するセンタリングを必須品質条件にする",
+          "背景の画像バリエーションを用意する"
+        ]
+      }
+    },
+    {
+      "pointId": "caption-soft-fade",
+      "speaker": "kawafmmの回答（原文）",
+      "text": "２のフェイドは良かったよ",
+      "interpretation": {
+        "decision": "ADOPT",
+        "appliesTo": [
+          "Soft Separator"
+        ],
+        "meaning": "POINT2区間に含まれていたSoft Separatorのフェード表現は良かった。今回観測したフェード仕様を使用可とする。",
+        "scopeLimit": "Soft Separatorを置く場所の自動選択全般まで一律に正しいとはしない。表現自体の人間採用判断。"
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "target": "Normal Cut / Black Separator",
+      "decision": "ADOPT",
+      "status": "HUMAN_REVIEWED",
+      "note": "両方使用可。微差の優劣を人間に繰り返し比較させず、文脈とバリエーションの選択として扱う。"
+    },
+    {
+      "target": "Soft Separator",
+      "decision": "ADOPT",
+      "status": "HUMAN_REVIEWED",
+      "note": "POINT2に含まれたフェードは良好。表現自体を使用可とする。配置判断は別。"
+    },
+    {
+      "target": "Panel Accent",
+      "decision": "ADOPT_WITH_CHANGE",
+      "status": "HUMAN_REVIEWED_CHANGE_REQUIRED",
+      "note": "機能の存在と強い目立たせ方は許容。センタリング必須、色違いだけでなく画像背景バリエーションが必要。"
+    },
+    {
+      "target": "Motion bundle (Bounce / Shake / Pulse)",
+      "decision": "ADOPT_WITH_CHANGE",
+      "status": "HUMAN_REVIEWED_BUNDLE_LEVEL",
+      "note": "動き系は高評価。拡大縮小のカクつきは修正必要。技術側でスケール変化を持つpresetを特定して改善する。"
+    }
+  ],
   "guidanceFeedback": [
     {
       "speaker": "kawafmmの回答（原文）",
@@ -22,7 +132,28 @@
       "action": "既存MP4の短い範囲だけを音声付きで再生・停止し、対応箇所を左右で比較する静的ローカルHTMLを作成・提示。"
     }
   ],
-  "interpretationStatus": "品質への回答は未受領。視聴済みとは認定していない。",
-  "implementationChanges": [],
-  "reReviewRequirements": []
+  "interpretationStatus": "POINT1〜4とPOINT2内フェードの品質回答を受領。局所レビュー結果として保存。全編HR-006、Normal基準HR-009、実UI HRB-003は未実施のまま。",
+  "implementationChanges": [
+    "Panel: 背景板に対するセンタリングを必須品質条件として改善する",
+    "Panel: 色違いだけでなく画像背景のバリエーションを追加する",
+    "Motion: 拡大縮小を含む動きのカクつきを改善する",
+    "Review: Normal Cut / Black Separatorの微差を繰り返し人間A/Bさせない"
+  ],
+  "reReviewRequirements": [
+    "Panel修正後はセンタリングと画像背景バリエーションの代表ポイントだけを短いPoint Reviewで確認する",
+    "Motion修正後は拡大縮小を含む代表箇所だけを短いPoint Reviewで確認する",
+    "Soft Separatorの表現自体は今回採用。配置ロジックを変更した場合だけ、その変更箇所を必要に応じて再レビューする"
+  ],
+  "attributionCorrections": [
+    {
+      "issue": "POINT2の提示metadataはPanel比較であるのにreviewIdsへHR-001を含めず、HR-005等を束ねていた。",
+      "correction": "人間回答は見た機能の実体へ再帰属する。Panel判断はHR-001、POINT2内で明示されたフェード評価はHR-005へ分離する。",
+      "historicalPresentationChanged": false
+    },
+    {
+      "issue": "POINT3はBounce/Shake/Pulseを一つの短区間へ束ねていた。",
+      "correction": "動き系全体の方向性採用として保存し、拡大縮小のカクつきは実装上スケール変化を持つpresetへ修正要求を割り当てる。人間が特定preset名を指したとは記録しない。",
+      "historicalPresentationChanged": false
+    }
+  ]
 }
