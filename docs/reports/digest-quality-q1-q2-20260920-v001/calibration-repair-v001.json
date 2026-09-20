@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "q1-calibration-propagation-repair-v001",
+  "classification": "implementation-connection-defect",
+  "scope": "HRC-001",
+  "initialFailure": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-evidence/draw-result.json",
+    "bytes": 116597,
+    "sha256": "7f11d0dfd4eb5b4ef4e3ead9fc16ba68b41944ac8679a3289d9c4caced28d6b6",
+    "status": "process_failed",
+    "stage": "execution",
+    "message": "native frame QC preparation: native input drawing conditions differ",
+    "strictReplay": "passed"
+  },
+  "cause": "実描画に使った画素校正値が、検査準備のprops再構築に含まれていなかった。",
+  "repair": "校正元propsの識別・行mask画像と実alphaを保存して再照合する。既存レイアウト検査で板の領域を再導出し、補正を再計算する。板paintだけを消した診断にも同じ補正を使う。",
+  "adversarialConcern": "自己申告の板領域と補正を連動変更する入力も、独立再導出領域との不一致で拒否する。",
+  "failedEvidencePreserved": true,
+  "humanQuality": "not-evaluated",
+  "newRun": "panel-short-job-v002.json"
+}

@@ -1,3 +1,4 @@
+import {getPresentationPanelPresetV002} from './presentation_panel_presets_v002.mjs';
 /** Prepare one approved 32-caption Digest without choosing any expression. */
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -6,7 +7,7 @@ import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {inspectPresentationRenderLayoutV001} from './inspect_presentation_render_layout_v001.js';
 import {buildPresentationRendererOverlayAdapterV001} from './render_presentation_v002.mjs';
-import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001, PRESENTATION_PANEL_PRESET_V001} from './presentation_effects_v001.mjs';
+import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001} from './presentation_effects_v001.mjs';
 import {PRESENTATION_PULSE_PRESET_V001, assertPresentationPulseAnchorsV001} from './presentation_pulse_v001.mjs';
 import {PRESENTATION_CAPTION_MOTION_PRESETS_V001, getPresentationCaptionMotionProgramV001,
   buildPresentationCaptionMotionStateElementsV001, assertPresentationCaptionMotionLayoutsV001}
@@ -105,8 +106,8 @@ export async function prepareCaptionExpressionStage1V001({outputDirectory, basel
       const value = structuredClone(element);
       if (kind === 'scale') Object.assign(value.visualState.textStyle, PRESENTATION_EFFECT_TRIAL_PRESETS_V001.reaction);
       else {
-        Object.assign(value.visualState.textStyle, PRESENTATION_PANEL_PRESET_V001.textStyle);
-        value.visualState.background = structuredClone(PRESENTATION_PANEL_PRESET_V001.background);
+        Object.assign(value.visualState.textStyle, getPresentationPanelPresetV002('provisional-panel').textStyle);
+        value.visualState.background = structuredClone(getPresentationPanelPresetV002('provisional-panel').background);
       }
       assert.deepEqual(value.visualState.position, element.visualState.position);
       return value;

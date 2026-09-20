@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import test from 'node:test';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {AUTO_PRESENTATION_RULES_REF_V007, fixAutoPresentationProposalV001,
+import {AUTO_PRESENTATION_RULES_REF_V008, fixAutoPresentationProposalV001,
   resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {buildPresentationNativeQcAlternativeElementsV001} from './presentation_native_frame_qc_preparation_v001.mjs';
 import {buildPresentationPulseStateElementsV001, getPresentationPulseProgramV001} from './presentation_pulse_v001.mjs';
@@ -29,7 +29,7 @@ function fixture({overlap = false, partialWhole = false, motion = null} = {}) {
       position: {preset: 'bottom-center', alignment: 'center', offsetXPercent: 0, offsetYPercent: 0}, background: null},
     }))};
   const context = {baselineRef: {...ref('baseline-plan'), canonicalSha256: hashJson(baselinePlan)},
-    decisionInputRef: ref('decision'), renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007,
+    decisionInputRef: ref('decision'), renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V008,
     pulseTimingEvidence: {schemaVersion: 'auto-presentation-pulse-timing-v001',
       sourceRef: ref('source'), candidatesRef: ref('candidates'), peaksRef: ref('peaks'),
       sampleRate: 300, sampleCount: 4500,
@@ -89,15 +89,14 @@ function fixture({overlap = false, partialWhole = false, motion = null} = {}) {
   return {plan, baselinePlan, autoPresentation, records};
 }
 
-test('the fixed recipe includes every caption and all three Pulse observations without caller-selected samples', () => {
+test('the fixed recipe includes every caption and all moving Pulse frames without caller-selected samples', () => {
   const f = fixture(), before = JSON.stringify(f);
   const result = buildPresentationNativeFrameQcRecipeV001(f);
-  assert.equal(result.samples.length, 7);
+  assert.equal(result.samples.length, 16);
   assert.deepEqual(result.samples.slice(0, 4).map(row => row.frame), [45, 135, 225, 315]);
   const program = getPresentationPulseProgramV001({element: f.plan.elements[4], canvas: f.plan.canvas});
-  assert.deepEqual(result.samples.slice(4).map(row => [row.frame, row.expectedState]), [
-    [program.normalBeforeFrame, 'normal'], [program.maximumFrame, 'maximum'], [program.normalAfterFrame, 'normal'],
-  ]);
+  assert.deepEqual(result.samples.slice(4).map(row => [row.frame, row.expectedState]),
+    program.samples.map(row => [row.frame, row.expectedState]));
   assert.equal(JSON.stringify(f), before);
 });
 

@@ -125,7 +125,7 @@ test('real native entrances retain saved placement, pass combined QC and reject 
       layoutRules: savedProps.layoutRules, elements: [makeNormal('bounce', ['一度弾んでから読む'], 0, 30),
         makeNormal('shake', ['短い動きの後には', '同じ位置へ戻る'], 30, 60)]};
     const motions = baselinePlan.elements.map(element => ({...element, presentationMotion: {
-      presentation: `provisional-${element.instructionId}`, presetVersion: 'presentation-caption-motion-v001'}}));
+      presentation: `provisional-${element.instructionId}`, presetVersion: 'presentation-caption-motion-v002'}}));
     for (const element of motions) {
       const states = buildPresentationCaptionMotionStateElementsV001({element, canvas});
       const layout = await inspectLayout(states.map(row => propsFor(row.element, baselinePlan)), element.instructionId);
@@ -198,7 +198,7 @@ test('real native entrances retain saved placement, pass combined QC and reject 
     const finite = outcome.completedFrameQc.evidence.finiteState;
     assert.equal(finite.samples.length, 24);
     const expectedStates = {
-      bounce: ['small', 'small', 'middle', 'middle', 'maximum', 'maximum', 'middle', 'middle', 'stable', 'stable'],
+      bounce: ['small', 'stable', 'middle', 'between-middle-maximum', 'maximum', 'maximum', 'middle', 'between-middle-stable', 'stable', 'stable'],
       shake: ['left-12', 'left-12', 'right-12', 'right-12', 'left-8', 'left-8', 'right-8', 'right-8',
         'left-4', 'left-4', 'right-4', 'right-4', 'stable', 'stable'],
     };

@@ -18,7 +18,7 @@ test('both entrance programs select the independently specified state on every r
     'sine=frequency=440:sample_rate=48000:duration=1.5', '-c:v', 'ffv1', '-c:a', 'pcm_s16le', baseMediaPath]);
   const baseAudio = run(['-i', baseMediaPath, '-map', '0:a', '-f', 's16le', '-']);
   const schedules = {
-    bounce: ['small', 'small', 'middle', 'middle', 'maximum', 'maximum', 'middle', 'middle'],
+    bounce: ['small', 'stable', 'middle', 'between-middle-maximum', 'maximum', 'maximum', 'middle', 'between-middle-stable'],
     shake: ['left-12', 'left-12', 'right-12', 'right-12', 'left-8', 'left-8',
       'right-8', 'right-8', 'left-4', 'left-4', 'right-4', 'right-4'],
   };
@@ -27,7 +27,7 @@ test('both entrance programs select the independently specified state on every r
       startFrame: 5, endFrameExclusive: 40, displayFrameCount: 35,
       visualState: {textStyle: {fontSizePx: 96},
         position: {preset: 'bottom-center', alignment: 'center', offsetXPercent: 0, offsetYPercent: -6}},
-      presentationMotion: {presentation: `provisional-${kind}`, presetVersion: 'presentation-caption-motion-v001'}};
+      presentationMotion: {presentation: `provisional-${kind}`, presetVersion: 'presentation-caption-motion-v002'}};
     const states = buildPresentationCaptionMotionStateElementsV001({element, canvas}).map((row, index) => {
       const pngPath = path.join(directory, `${kind}-${row.state}.png`);
       // These simple images isolate the compositor clock and alpha. Native font geometry has its own test.

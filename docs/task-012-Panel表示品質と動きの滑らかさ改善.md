@@ -123,3 +123,21 @@
 - [HRB-001の計画・判断・描画との対応](reports/human-review-session-20260920-v001/hrb001-bindings.json): SHA-256 `b370cb0a8c03b2e6da9f0b959347132462b42e08e66471f6572edd35aa291ecb`。
 - [HRB-002の計画・判断・描画との対応](reports/human-review-session-20260920-v001/hrb002-bindings.json): SHA-256 `c05055bfd5c1e66d6bcda6d8ff2b261626bb30ce1a7ec4605dfaa13d5a2a27b8`。
 - [本人回答の整理](reports/human-review-session-20260920-v001/responses.json)、[人間レビュー台帳](HUMAN_REVIEW_PENDING.md)、[人間レビュー蓄積方針](policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md)。
+
+## 2026-09-20 Q1 着工記録
+
+kawafmm承認の[Q1・Q2実装指示書](work-orders/DIGEST_Q1_Q2_WORK_ORDER_v001.md)に基づき、HRC-001〜003の実装を開始した。上記の「整理のみ・未着手」は作成時の履歴であり、今回の着工を禁止するものではない。
+
+開始HEADは `66d352ca`、作業branchは `codex/digest-presentation-editing-stage4`。`b8056419`後の計画・指示書・引継ぎ3文書をfast-forwardで取り込んだ。開始時の追跡ファイル差分はなく、既存の依存フォルダーへの未追跡リンク2件は保持している。元workspaceの既存差分は作業対象にしない。
+
+第一優先はダイジェスト品質改善。Q1の局所修正とQ2の固定ポイントレビューを並行し、Q3は既存入力・観測経路の短い確認まで。修正候補の人間再確認は別に記録する。
+
+## 2026-09-20 Q1 技術提出
+
+Codexです。HRC-001〜003を実装し、短い修正版5本と必要な技術検査を完成した。[提出報告](reports/digest-quality-q1-q2-20260920-v001/README.md)を現在の技術状態とする。従来の未実装記録は受領・着工時の履歴として保持する。
+
+- HRC-001：実際の文字輪郭を使って背景内の中央へ配置。短文・横長・2行と、対象外の通常字幕不変を検査済み。
+- HRC-002：無地・方眼紙・コミック枠の有限背景を、保存・再読・一件修正へ接続。比較候補は手選択で、自動使い分け成功には数えない。
+- HRC-003：Bounce／Pulseの既存端点間へ中間状態を追加し、開始・ピーク・最大状態・元表示期間・静止復帰を保持。Shakeは現状を保持。人間の指摘は動き系へのまとまった判断のまま。
+
+状態は3件とも「修正要求受領 → 実装済み → 技術確認済み → 人間再確認待ち」。修正後の回答は未着で、「反映確認済み」「CLOSED」へ移していない。機能の既存使用許可は維持する。Q2のBatch `HRB-Q1-Q2-001` へ問いと適用範囲を分けて接続する。

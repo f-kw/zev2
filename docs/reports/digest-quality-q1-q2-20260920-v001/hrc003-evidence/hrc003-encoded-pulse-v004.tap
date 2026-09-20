@@ -1,0 +1,50 @@
+TAP version 13
+# Subtest: logical removal drops the entire Pulse record while preserving survivors, order, fades and encoder arguments
+ok 1 - logical removal drops the entire Pulse record while preserving survivors, order, fades and encoder arguments
+  ---
+  duration_ms: 2.962667
+  ...
+# Subtest: removing a static caption retains the complete unchanged Pulse program and timeline/audio graph
+ok 2 - removing a static caption retains the complete unchanged Pulse program and timeline/audio graph
+  ---
+  duration_ms: 1.939875
+  ...
+# Subtest: a single-caption omission uses the original base-only encoder path and never a transparent replacement PNG
+ok 3 - a single-caption omission uses the original base-only encoder path and never a transparent replacement PNG
+  ---
+  duration_ms: 2.407125
+  ...
+# Subtest: duplicate IDs, wrong record order, changed elements/properties and missing targets are rejected without mutation
+ok 4 - duplicate IDs, wrong record order, changed elements/properties and missing targets are rejected without mutation
+  ---
+  duration_ms: 2.137125
+  ...
+# Subtest: title and speaker overlays remain in the same composition unless they are the one omitted target
+ok 5 - title and speaker overlays remain in the same composition unless they are the one omitted target
+  ---
+  duration_ms: 0.583
+  ...
+# Subtest: complete saved evidence passes; equal completed/omitted pixels fail with the existing visibility meaning
+ok 6 - complete saved evidence passes; equal completed/omitted pixels fail with the existing visibility meaning
+  ---
+  duration_ms: 2.188917
+  ...
+# Subtest: a basis or success flag cannot replace frame, graph, media, artifact and actual difference evidence
+ok 7 - a basis or success flag cannot replace frame, graph, media, artifact and actual difference evidence
+  ---
+  duration_ms: 7.900542
+  ...
+# Subtest: Pulse evidence must preserve all moving-frame observations and their unique intended states
+ok 8 - Pulse evidence must preserve all moving-frame observations and their unique intended states
+  ---
+  duration_ms: 7.829
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 85.906792

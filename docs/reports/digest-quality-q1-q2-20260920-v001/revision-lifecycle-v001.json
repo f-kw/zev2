@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "q1-correction-lifecycle-v001",
+  "reportedBy": "Codex",
+  "asOf": "2026-09-20",
+  "state": "technical-submission-ready-human-reconfirmation-pending",
+  "corrections": [
+    {
+      "correctionId": "HRC-001",
+      "requestReceived": true,
+      "implemented": true,
+      "technicallyVerified": true,
+      "humanReconfirmationPending": true,
+      "reflectionConfirmed": false,
+      "closed": false,
+      "existingFeatureUsagePermission": "maintained",
+      "newHumanAnswers": 0,
+      "batchId": "HRB-Q1-Q2-001",
+      "revision": "v001",
+      "reviewDataFileSha256": "5810ae6d13133cba265c161c84ec3f8024ad778917c62485897c9195392371e3",
+      "points": [
+        {
+          "pointId": "Q1-PANEL-CENTER-SHORT",
+          "scope": {
+            "level": "point",
+            "applies_to": [
+              "この短文例の文字・行と背景の整列"
+            ],
+            "does_not_apply_to": [
+              "横長例への回答の転記",
+              "背景意匠の好み",
+              "前後のフェード",
+              "Normal Cut・Black Separator・Softの再採点",
+              "Panel・動き系の機能使用許可の取り直し",
+              "全編のテンポ・単調さ・自動使い分け",
+              "Normalの基準",
+              "編集UIの操作感・待ち時間"
+            ]
+          },
+          "relatedReviewIds": [
+            "HR-001",
+            "HR-007",
+            "HR-010"
+          ]
+        },
+        {
+          "pointId": "Q1-PANEL-CENTER-WIDE",
+          "scope": {
+            "level": "point",
+            "applies_to": [
+              "この横長例の文字・行と背景の整列"
+            ],
+            "does_not_apply_to": [
+              "短文例への回答の転記",
+              "背景意匠の好み",
+              "前後のフェード",
+              "Normal Cut・Black Separator・Softの再採点",
+              "Panel・動き系の機能使用許可の取り直し",
+              "全編のテンポ・単調さ・自動使い分け",
+              "Normalの基準",
+              "編集UIの操作感・待ち時間"
+            ]
+          },
+          "relatedReviewIds": [
+            "HR-001"
+          ]
+        }
+      ],
+      "humanAnswerPropagation": "none; bundle-level answers remain bundle-level unless later human text explicitly identifies a narrower target"
+    },
+    {
+      "correctionId": "HRC-002",
+      "requestReceived": true,
+      "implemented": true,
+      "technicallyVerified": true,
+      "humanReconfirmationPending": true,
+      "reflectionConfirmed": false,
+      "closed": false,
+      "existingFeatureUsagePermission": "maintained",
+      "newHumanAnswers": 0,
+      "batchId": "HRB-Q1-Q2-001",
+      "revision": "v001",
+      "reviewDataFileSha256": "5810ae6d13133cba265c161c84ec3f8024ad778917c62485897c9195392371e3",
+      "points": [
+        {
+          "pointId": "Q1-PANEL-BACKGROUND-VARIANTS",
+          "scope": {
+            "level": "bundle",
+            "applies_to": [
+              "この短文へ手で選んだ無地・方眼紙・コミック枠の、背景の種類の違いをまとめた回答"
+            ],
+            "does_not_apply_to": [
+              "文字と背景のセンタリング",
+              "三種類それぞれへの採用・合否の自動配布",
+              "背景の自動選択の成否",
+              "前後のフェード",
+              "Normal Cut・Black Separator・Softの再採点",
+              "Panel・動き系の機能使用許可の取り直し",
+              "全編のテンポ・単調さ・自動使い分け",
+              "Normalの基準",
+              "編集UIの操作感・待ち時間"
+            ]
+          },
+          "relatedReviewIds": [
+            "HR-001"
+          ]
+        }
+      ],
+      "humanAnswerPropagation": "none; bundle-level answers remain bundle-level unless later human text explicitly identifies a narrower target"
+    },
+    {
+      "correctionId": "HRC-003",
+      "requestReceived": true,
+      "implemented": true,
+      "technicallyVerified": true,
+      "humanReconfirmationPending": true,
+      "reflectionConfirmed": false,
+      "closed": false,
+      "existingFeatureUsagePermission": "maintained",
+      "newHumanAnswers": 0,
+      "batchId": "HRB-Q1-Q2-001",
+      "revision": "v001",
+      "reviewDataFileSha256": "5810ae6d13133cba265c161c84ec3f8024ad778917c62485897c9195392371e3",
+      "points": [
+        {
+          "pointId": "Q1-MOTION-SMOOTHNESS",
+          "scope": {
+            "level": "bundle",
+            "applies_to": [
+              "この冒頭の短区間にあるBounce／Shake／Pulseをまとめた、修正後の滑らかさ"
+            ],
+            "does_not_apply_to": [
+              "個別presetへの欠陥や合否の自動配布",
+              "動き系の機能使用許可の取り直し",
+              "Panelのセンタリング・背景意匠",
+              "Normal Cut・Black Separator・Softの採点",
+              "全編のテンポ・単調さ・自動使い分け",
+              "編集UIの操作感・待ち時間"
+            ]
+          },
+          "relatedReviewIds": [
+            "HR-002",
+            "HR-003",
+            "HR-004"
+          ]
+        }
+      ],
+      "humanAnswerPropagation": "none; bundle-level answers remain bundle-level unless later human text explicitly identifies a narrower target"
+    }
+  ]
+}

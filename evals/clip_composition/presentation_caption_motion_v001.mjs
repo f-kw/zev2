@@ -10,7 +10,7 @@ const reject = reason => { throw new TypeError(`Caption motion: ${reason}`); };
 const integer = value => Number.isSafeInteger(value) && value >= 0;
 const exact = (value, keys) => value !== null && typeof value === 'object' && !Array.isArray(value)
   && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
-const common = {version: 'presentation-caption-motion-v001', fps: 30, normalFontSizePx: 96,
+const common = {version: 'presentation-caption-motion-v002', fps: 30, normalFontSizePx: 96,
   positionPreset: 'bottom-center', commonFadeFrames: 4, stableVisibleFrames: 8};
 
 export const PRESENTATION_CAPTION_MOTION_PRESETS_V001 = freeze({
@@ -20,12 +20,19 @@ export const PRESENTATION_CAPTION_MOTION_PRESETS_V001 = freeze({
       {state: 'small', fontSizePx: 88, offsetXPx: 0},
       {state: 'middle', fontSizePx: 104, offsetXPx: 0},
       {state: 'maximum', fontSizePx: 112, offsetXPx: 0},
+      // Linear midpoints of the existing 104→112 and 104→96 intervals.
+      // The 88→104 midpoint already has the stable state's 96 px geometry.
+      {state: 'between-middle-maximum', fontSizePx: (104 + 112) / 2, offsetXPx: 0},
+      {state: 'between-middle-stable', fontSizePx: (104 + 96) / 2, offsetXPx: 0},
     ],
     excursion: [
-      {state: 'small', startOffset: 0, endOffsetExclusive: 2},
-      {state: 'middle', startOffset: 2, endOffsetExclusive: 4},
+      {state: 'small', startOffset: 0, endOffsetExclusive: 1},
+      {state: 'stable', startOffset: 1, endOffsetExclusive: 2},
+      {state: 'middle', startOffset: 2, endOffsetExclusive: 3},
+      {state: 'between-middle-maximum', startOffset: 3, endOffsetExclusive: 4},
       {state: 'maximum', startOffset: 4, endOffsetExclusive: 6},
-      {state: 'middle', startOffset: 6, endOffsetExclusive: 8},
+      {state: 'middle', startOffset: 6, endOffsetExclusive: 7},
+      {state: 'between-middle-stable', startOffset: 7, endOffsetExclusive: 8},
     ]},
   shake: {...common, presentation: 'provisional-shake', motionFrameCount: 12, minimumDisplayFrames: 24,
     states: [
@@ -128,10 +135,11 @@ export function assertPresentationCaptionMotionLayoutsV001({element, canvas, lay
     }
   }
   if (preset.presentation === 'provisional-bounce') {
-    const ordered = [boxes[1], boxes[0], boxes[2], boxes[3]];
+    const ordered = preset.states.map((state, index) => ({fontSizePx: state.fontSizePx, box: boxes[index]}))
+      .sort((left, right) => left.fontSizePx - right.fontSizePx).map(row => row.box);
     if (ordered.some((box, index) => index > 0
       && (box.width <= ordered[index - 1].width || box.height <= ordered[index - 1].height))) {
-      reject('bounce native layouts do not follow the four fixed sizes');
+      reject('bounce native layouts do not follow every finite interpolated size');
     }
   }
 }

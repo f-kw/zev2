@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V007,
+  AUTO_PRESENTATION_RULES_REF_V008,
   sha256AutoPresentationV001,
   sha256AutoPresentationStateV001,
   fixAutoPresentationProposalV001,
@@ -60,7 +60,7 @@ function fixture() {
     baselineRef: {path: 'fixtures/normal-plan.json', fileSha256: byteSha(`${JSON.stringify(baselinePlan, null, 2)}\n`),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: 'fixtures/confirmed-caption-input.json', fileSha256: byteSha('saved caption decision input')},
-    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V007), pulseTimingEvidence: null,
+    renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V008), pulseTimingEvidence: null,
   };
   return freeze({baselinePlan, context});
 }
@@ -85,7 +85,7 @@ test('Panel creates a finite plate and preserves caption content, layout lines, 
   const before = JSON.stringify(f), saved = JSON.stringify(auto);
   const result = resolve(f, auto), expected = clone(f.baselinePlan);
   Object.assign(expected.elements[1].visualState.textStyle, {fontColor: '#111827', borderWidthPx: 0, glowWidthPx: 0});
-  expected.elements[1].visualState.background = {color: '#FFFDF8', borderRadiusPx: 0, paddingXPx: 24, paddingYPx: 16};
+  expected.elements[1].visualState.background = {color: '#FFFDF8', borderRadiusPx: 0, paddingXPx: 24, paddingYPx: 16, panelPresetId: 'plain'};
   assert.deepEqual(result.plan, expected);
   assert.equal(state(result, 'caption-2').role, 'Panel accent');
   assert.equal(state(result, 'caption-2').canonicalRange, null);
@@ -124,8 +124,8 @@ test('Panel refuses partial text, free drawing values, stacking and unknown pres
     {...panel(), paddingXPx: 24}, {...panel(), fontSizePx: 96}, {...panel(), css: 'color:red'},
     {...panel(), jsx: '<div />'}, {...panel(), presentation: 'free-panel'},
   ]) {
-    assert.throws(() => fixed(f, {effects: [{captionId: 'caption-1', ...selection}]}), /finite whole-caption/);
-    assert.throws(() => edit(f, auto, overrides, 'caption-1', selection), /finite whole-caption/);
+    assert.throws(() => fixed(f, {effects: [{captionId: 'caption-1', ...selection}]}), /finite whole-caption|unknown finite Panel preset/);
+    assert.throws(() => edit(f, auto, overrides, 'caption-1', selection), /finite whole-caption|unknown finite Panel preset/);
   }
   for (const other of [focus(), vocal(), panel()]) {
     assert.throws(() => fixed(f, {effects: [{captionId: 'caption-1', ...panel()},

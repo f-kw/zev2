@@ -28,7 +28,8 @@ const exact = (value, keys) => value !== null && typeof value === 'object' && !A
 const rolePreset = {'Normal': 'normal', 'Focus': 'color', 'Vocal accent': 'scale', 'Panel accent': 'panel',
   'Pulse accent': 'pulse', 'Bounce accent': 'bounce', 'Shake accent': 'shake'};
 export const EDITING_PRESET_LABELS_V001 = Object.freeze({normal: 'Normal（通常表示）', color: 'Color',
-  scale: 'Scale', panel: 'Panel', pulse: 'Pulse', bounce: 'Bounce', shake: 'Shake',
+  scale: 'Scale', panel: 'Panel（無地）', 'panel-graph-paper': 'Panel（方眼紙）',
+  'panel-comic-frame': 'Panel（コミック枠）', pulse: 'Pulse', bounce: 'Bounce', shake: 'Shake',
   'normal-cut': 'Normal Cut', 'black-separator': 'Black Separator', 'soft-separator': 'Soft Separator'});
 export async function bindEditingFileV001(file) {
   const info = await lstat(file);
@@ -300,6 +301,12 @@ export async function saveEditingOverrideV001({directory, drawingRulesRef, expec
   });
 }
 function choiceFromSelection(selection) {
+  if (selection.role === 'Panel accent') {
+    const preset = {'provisional-panel': 'panel', 'provisional-panel-graph-paper': 'panel-graph-paper',
+      'provisional-panel-comic-frame': 'panel-comic-frame'}[selection.presentation];
+    demand(preset, 'Panel背景の種類を表示できません');
+    return {preset};
+  }
   const preset = rolePreset[selection.role]; demand(preset, '表現の種類を表示できません');
   if (preset === 'color') return {preset, scope: selection.scope, ...(selection.scope === 'partial-caption'
     ? {targetText: selection.targetText, occurrence: selection.occurrence} : {})};
@@ -311,7 +318,7 @@ export function editingTargetListV001(snapshot) {
   const captions = view.resolvedPlan.elements.map(row => {
     const selected = view.resolution.caption.captions.find(entry => entry.captionId === row.instructionId);
     const status = selected.hasOverride ? 'edited' : selected.automaticStatus;
-    const preset = rolePreset[selected.effectiveSelection.role];
+    const preset = choiceFromSelection(selected.effectiveSelection).preset;
     return {id: row.instructionId, text: row.text, startFrame: row.startFrame, endFrameExclusive: row.endFrameExclusive,
       preset, presetLabel: labels[preset], hasOverride: selected.hasOverride, status,
       statusLabel: selected.hasOverride ? '変更あり' : status === 'unresolved' ? '未解決' : status === 'unrepresentable' ? '自動案は適用不能' : '自動案'};
@@ -361,7 +368,7 @@ export async function editingTargetDetailsV001(snapshot, kind, itemId) {
     peakOptions.push({id: peak.peakId, displaySeconds, label: `音声のピーク ${displaySeconds.toFixed(3)}秒`,
       status, ...(reason ? {reason} : {})});
   }
-  const options = ['normal', 'color', 'scale', 'panel', 'pulse', 'bounce', 'shake'].map(value =>
+  const options = ['normal', 'color', 'scale', 'panel', 'panel-graph-paper', 'panel-comic-frame', 'pulse', 'bounce', 'shake'].map(value =>
     ({value, label: labels[value], status: value === 'pulse' && peakOptions.length === 0 ? 'inapplicable' : 'unchecked',
       ...(value === 'pulse' && peakOptions.length === 0 ? {reason: 'この字幕の表示時刻条件を満たす実測ピークがありません'} : {})}));
   let colorRange;

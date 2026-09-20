@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "q1q2-root-checks-v001",
+  "meaning": "実施済み局所検査の保存記録を再読集計。試験集合は重複があるため合算しない。型検査終了値は実行時観測。",
+  "tapRuns": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/root-focused-v001.tap",
+      "fileSha256": "ffbc6d88eb815c090080090e0785949d261dba88487ff40cb7956abd07b1888f",
+      "bytes": 37089,
+      "tests": 124,
+      "pass": 120,
+      "fail": 4,
+      "skipped": 0
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/root-focused-v002.tap",
+      "fileSha256": "5ff943ae6f904375641dac9221a0684a208341d1991837e351d62a696fc20f25",
+      "bytes": 24161,
+      "tests": 124,
+      "pass": 124,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/native-preparation-v002.tap",
+      "fileSha256": "2e9eb0880b48c5225289fb326191f9dc587f89b3ab7295f0e4720a61821be99d",
+      "bytes": 3753,
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/native-preparation-v003.tap",
+      "fileSha256": "3ab3fccee4d2973b20147575c37f2577abc00db5d31ebfca7b685a00aea00a24",
+      "bytes": 6418,
+      "tests": 24,
+      "pass": 23,
+      "fail": 1,
+      "skipped": 0
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/native-preparation-v004.tap",
+      "fileSha256": "81b90260fd40e8ac38397e5d74126615c2b4b1c3b1b706975a189e3cab2bb174",
+      "bytes": 5799,
+      "tests": 24,
+      "pass": 24,
+      "fail": 0,
+      "skipped": 0
+    }
+  ],
+  "typeAndBuildLogs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/shared-typecheck-v001.log",
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "exitCodeObserved": 0
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/remotion-typecheck-v001.log",
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "exitCodeObserved": 0
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/client-typecheck-v001.log",
+      "fileSha256": "efa51bd8b1ba17e61a05714bc2f1727b8e32b8980429d8b7b50dd8662d6a801f",
+      "bytes": 266,
+      "exitCodeObserved": 0
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/client-build-v001.log",
+      "fileSha256": "a5aae4fcb369043be7c6e0707fe67dd21cdb2e683fe3e6c87a19ce895fcca581",
+      "bytes": 3184,
+      "exitCodeObserved": 0
+    }
+  ],
+  "independentReadOnlyReview": {
+    "target": "Panel有限背景・共通描画・校正根拠・背景なし診断・通常字幕不変",
+    "newBlockingFindings": 0,
+    "sourceEdits": 0,
+    "testReruns": 0,
+    "observedDiagnosticCases": 9,
+    "uniqueCalibrationReferences": 12
+  }
+}

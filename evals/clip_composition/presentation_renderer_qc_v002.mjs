@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
+import {isPresentationPanelBackgroundV002} from './presentation_panel_presets_v002.mjs';
 import {PRESENTATION_PULSE_PRESET_V001, getPresentationPulseProgramV001,
   buildPresentationPulseStateElementsV001, assertPresentationPulseAnchorsV001,
 } from './presentation_pulse_v001.mjs';
@@ -262,8 +263,8 @@ function evaluatePresentationRendererQc({
           || !equal(application.metadata, element.presentationPulse)
           || !equal(native.metadata, application.metadata)
           || !equal(application.program, program) || !equal(native.program, program)
-          || !Array.isArray(application.states) || application.states.length !== 3
-          || !Array.isArray(native.states) || native.states.length !== 3) {
+          || !Array.isArray(application.states) || application.states.length !== expectedStates.length
+          || !Array.isArray(native.states) || native.states.length !== expectedStates.length) {
           throw new TypeError('the finite native state set is missing or changed');
         }
         assertPresentationPulseAnchorsV001(native.states.map(state => ({wrapper: state.layoutWrapper})));
@@ -293,35 +294,34 @@ function evaluatePresentationRendererQc({
           violations.push(...stateQc.violations.map(violation => ({...violation,
             details: {...(violation.details ?? {}), pulseState: expected.state}})));
         }
-        for (let index = 1; index < native.states.length; index++) {
-          const smaller = native.states[index - 1];
-          const larger = native.states[index];
+        const sizeOrderedStates = expectedStates.map((state, index) => ({
+          fontSizePx: state.element.visualState.textStyle.fontSizePx, observed: native.states[index]}))
+          .sort((left, right) => left.fontSizePx - right.fontSizePx).map(row => row.observed);
+        for (let index = 1; index < sizeOrderedStates.length; index++) {
+          const smaller = sizeOrderedStates[index - 1];
+          const larger = sizeOrderedStates[index];
           if (!smaller.alphaBounds || !larger.alphaBounds
             || !(larger.alphaBounds.width > smaller.alphaBounds.width)
             || !(larger.alphaBounds.height > smaller.alphaBounds.height)
             || larger.overlaySha256 === smaller.overlaySha256) {
-            throw new TypeError('the three native states do not grow in both dimensions');
+            throw new TypeError('the finite native states do not grow in both dimensions');
           }
         }
         if (requireFinalVisibility
           && !['native-reference-state-identification-v001', PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001,
             PRESENTATION_ENCODED_OMISSION_QC_BASIS_V002].includes(inspection.visibilityComparisonBasis)) {
           const frames = native.completedFrames;
-          const expectedFrames = [
-            {frame: program.normalBeforeFrame, state: 'normal'},
-            {frame: program.maximumFrame, state: 'maximum'},
-            {frame: program.normalAfterFrame, state: 'normal'},
-          ];
+          const expectedFrames = program.samples.map(({frame, expectedState}) => ({frame, state: expectedState}));
           const frameValid = Array.isArray(frames) && frames.length === expectedFrames.length
             && frames.every((frame, index) => {
               const expected = expectedFrames[index];
               const reference = application.states.find(state => state.state === expected.state);
               const distances = frame?.stateDistances;
               if (frame.frame !== expected.frame || frame.expectedState !== expected.state
-                || frame.comparisonBasis !== 'same-source-frame-three-native-pulse-states'
+                || frame.comparisonBasis !== 'same-source-frame-finite-native-pulse-states'
                 || frame.expectedOverlaySha256 !== reference.overlaySha256
                 || !hash(frame.outputFrameSha256) || !hash(frame.baseFrameSha256)
-                || !Array.isArray(distances) || distances.length !== 3
+                || !Array.isArray(distances) || distances.length !== expectedStates.length
                 || distances.some((distance, stateIndex) => distance.state !== expectedStates[stateIndex].state
                   || distance.overlaySha256 !== application.states[stateIndex].overlaySha256
                   || !Number.isSafeInteger(distance.absoluteRgbDifference)
@@ -396,11 +396,13 @@ function evaluatePresentationRendererQc({
             }
           }
         } else {
-          const ordered = [native.states[1], native.states[0], native.states[2], native.states[3]];
+          const ordered = expectedStates.map((state, index) => ({
+            fontSizePx: state.element.visualState.textStyle.fontSizePx, observed: native.states[index]}))
+            .sort((left, right) => left.fontSizePx - right.fontSizePx).map(row => row.observed);
           if (ordered.some((state, index) => !state.alphaBounds || (index > 0
             && (state.alphaBounds.width <= ordered[index - 1].alphaBounds.width
               || state.alphaBounds.height <= ordered[index - 1].alphaBounds.height)))) {
-            throw new TypeError('the bounce PNGs do not follow the four fixed sizes');
+            throw new TypeError('the bounce PNGs do not follow every finite interpolated size');
           }
         }
         if (requireFinalVisibility && !combinedMethod) {
@@ -469,6 +471,7 @@ function evaluatePresentationRendererQc({
     const bounds = inspection.alphaBounds;
     const safe = canvas.safeAreaPx;
     const isTopBand = element.visualState?.position?.preset === 'top-band';
+    const isPanel = isPresentationPanelBackgroundV002(element.visualState?.background);
     if (inspection.lineCount > element.visualState.layout.maxLines) {
       violations.push(makeViolation('LAYOUT_LINE_COUNT_EXCEEDED', [element.instructionId], {
         actual: inspection.lineCount,
@@ -499,7 +502,7 @@ function evaluatePresentationRendererQc({
       || bounds.right !== canvas.width
       || bounds.bottom > canvas.height
     );
-    const topBandVisibleCenterInvalid = isTopBand
+    const topBandVisibleCenterInvalid = (isTopBand || isPanel)
       && !lineAlphaBoundsInvalid
       && (
         lineAlphaBounds.some(entry => (

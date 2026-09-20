@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import {
-  AUTO_PRESENTATION_RULES_REF_V007, fixAutoPresentationProposalV001,
+  AUTO_PRESENTATION_RULES_REF_V008, fixAutoPresentationProposalV001,
   resolveAutoPresentationV001, sha256AutoPresentationV001,
 } from './presentation_auto_effects_v001.mjs';
 import {
@@ -34,7 +34,7 @@ function fixture(baselinePath = '/fixture/normal.json', withPulse = false, motio
   const context = {baselineRef: {path: baselinePath, fileSha256: hash(bytes),
     canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: '/fixture/input.json', fileSha256: hash('input')},
-    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007, pulseTimingEvidence: null};
+    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V008, pulseTimingEvidence: null};
   if (withPulse) {
     const ref = name => ({path: `/fixture/${name}`, fileSha256: hash(name)});
     context.pulseTimingEvidence = {schemaVersion: 'auto-presentation-pulse-timing-v001',
@@ -75,6 +75,7 @@ test('diagnostic alternatives retain the saved decisions and distinguish partial
   assert.equal(input.plan.elements[1].visualState.textStyle.fontSizePx, 128);
   const expectedPlateLoss = clone(input.plan.elements[2]);
   expectedPlateLoss.visualState.background.color = 'transparent';
+  expectedPlateLoss.visualState.background.inspectionPlateOmitted = true;
   assert.deepEqual(result.alternatives[2].entries[1].element, expectedPlateLoss);
   assert.equal(result.alternatives[2].entries[1].element.visualState.background.paddingXPx, 24);
   assert.equal(result.alternatives[2].entries[1].element.visualState.background.paddingYPx, 16);
@@ -216,7 +217,7 @@ for (const motion of ['bounce', 'shake']) {
     const before = clone(options.records);
     const result = await preparePresentationNativeFrameQcV001(options);
     assert.deepEqual(options.records, before);
-    assert.equal(result.evidence.productionNativeInputs.length, motion === 'bounce' ? 7 : 10);
+    assert.equal(result.evidence.productionNativeInputs.length, motion === 'bounce' ? 9 : 10);
     assert.equal(result.evidence.renderedDiagnosticStates, 3);
     assert.equal(result.evidence.reusedDiagnosticStates, 2);
     assert.equal(calls.length, 6);
@@ -239,4 +240,156 @@ test('ordinary records cannot acquire an unrequested motion state array', async 
   options.records[0].motionStates = [];
   await assert.rejects(preparePresentationNativeFrameQcV001(options), /non-motion record has unexpected/);
   assert.equal(calls.length, 0);
+});
+
+// Calibration transport tests retain the existing synthetic IO adapter. They
+// verify evidence/geometry bindings, not native pixels or human appearance.
+async function calibratedIoFixture(t) {
+  const fixture = await ioFixture(t);
+  const record = fixture.options.records[2];
+  const uncorrectedProps = clone(record.props);
+  const maskPath = path.join(fixture.directory, 'panel-calibration-line-0.png');
+  const maskBytes = JSON.stringify({...uncorrectedProps, inspectionLineIndex: 0});
+  await writeFile(maskPath, maskBytes);
+  record.visibleCenterCalibration = {
+    schemaVersion: 'presentation-visible-center-calibration-v001',
+    uncorrectedPropsCanonicalSha256: sha256AutoPresentationV001(uncorrectedProps),
+    containerBounds: {left: 0, top: 0, right: 110, bottom: 86},
+    lineMasks: [{lineIndex: 0, pngPath: maskPath, pngSha256: hash(maskBytes),
+      alphaBounds: {left: 20, top: 20, right: 80, bottom: 60, width: 60, height: 40}}],
+  };
+  // The visible line centre is (50, 40); the container centre is (55, 43).
+  record.props.renderVisibleCenterCorrectionPx = [{x: 5, y: 3}];
+  await syncSyntheticProductionRecord(record);
+  // This represents an independent layout observation. It intentionally does
+  // not read the caller's calibration box or corrected production properties.
+  const fixedLayout = fixture.options.records.map(row => ({instructionId: row.element.instructionId,
+    wrapper: {left: 0, top: 0, width: 110, height: 86}}));
+  const layoutCalls = [];
+  fixture.options.inspectLayout = async overlays => {
+    assert(Array.isArray(overlays)); layoutCalls.push(clone(overlays));
+    return {status: 'passed', violations: [], items: overlays.map(props => {
+      const item = fixedLayout.find(row => row.instructionId === props.instructionId);
+      assert(item); return clone(item);
+    })};
+  };
+  return {...fixture, record, uncorrectedProps, maskPath, layoutCalls};
+}
+async function syncSyntheticProductionRecord(record) {
+  const pngBytes = JSON.stringify(record.props);
+  await writeFile(record.pngPath, pngBytes);
+  record.pngSha256 = hash(pngBytes);
+  record.inspection.overlaySha256 = record.pngSha256;
+  record.inspection.appliedOverlayPropsCanonicalSha256 = sha256AutoPresentationV001(record.props);
+}
+
+test('verified Panel centering calibration is reobserved and retained when only diagnostic plate paint is removed', async t => {
+  const {options, record, calls, maskPath, layoutCalls, uncorrectedProps} = await calibratedIoFixture(t);
+  const before = clone(options.records);
+  const observed = [], inspect = options.inspectPng;
+  options.inspectPng = async args => {observed.push(args.pngPath); return inspect(args);};
+  const prepared = await preparePresentationNativeFrameQcV001(options);
+  assert.deepEqual(options.records, before);
+  assert.deepEqual(layoutCalls, [[uncorrectedProps]]);
+  assert(observed.includes(maskPath));
+  const bound = prepared.provenance.inputRefs.find(ref => ref.role === `visible-center-calibration:${record.fileStem}:static:0`);
+  assert.equal(bound.path, maskPath);
+  assert.equal(bound.fileSha256, record.visibleCenterCalibration.lineMasks[0].pngSha256);
+  const alternate = prepared.records[2].alternates.find(row => row.kind === 'panel-plate-omitted');
+  assert.deepEqual(alternate.props.renderVisibleCenterCorrectionPx, [{x: 5, y: 3}]);
+  assert.equal(alternate.props.visualState.background.inspectionPlateOmitted, true);
+  assert.equal(alternate.props.visualState.background.color, 'transparent');
+  const {color, inspectionPlateOmitted, ...geometry} = alternate.props.visualState.background;
+  assert.deepEqual(geometry, Object.fromEntries(Object.entries(record.props.visualState.background).filter(([key]) => key !== 'color')));
+  assert.equal(prepared.records[2].alternates.find(row => row.kind === 'normal').props.renderVisibleCenterCorrectionPx, undefined);
+  assert.equal(calls.filter(row => row.props.visualState.background?.inspectionPlateOmitted).length, 2);
+});
+
+test('changed centering correction is rejected even if production PNG and inspection hashes match the changed props', async t => {
+  const {options, record, calls} = await calibratedIoFixture(t);
+  record.props.renderVisibleCenterCorrectionPx[0].x = 6;
+  await syncSyntheticProductionRecord(record);
+  await assert.rejects(preparePresentationNativeFrameQcV001(options), /native input drawing conditions differ/);
+  assert.equal(calls.length, 0);
+});
+
+test('missing, replaced or wrongly hashed calibration mask is rejected before diagnostic drawing', async t => {
+  const missing = await calibratedIoFixture(t);
+  missing.record.visibleCenterCalibration.lineMasks[0].pngPath = path.join(missing.directory, 'missing-mask.png');
+  await assert.rejects(preparePresentationNativeFrameQcV001(missing.options), {code: 'ENOENT'});
+  assert.equal(missing.calls.length, 0);
+  const replaced = await calibratedIoFixture(t);
+  await writeFile(replaced.maskPath, JSON.stringify({wrong: 'calibration image'}));
+  await assert.rejects(preparePresentationNativeFrameQcV001(replaced.options), /calibration PNG bytes changed/);
+  assert.equal(replaced.calls.length, 0);
+  const wronglyHashed = await calibratedIoFixture(t);
+  wronglyHashed.record.visibleCenterCalibration.lineMasks[0].pngSha256 = hash('different bytes');
+  await assert.rejects(preparePresentationNativeFrameQcV001(wronglyHashed.options), /calibration PNG bytes changed/);
+  assert.equal(wronglyHashed.calls.length, 0);
+});
+
+test('calibration for other uncorrected props and invented observed bounds cannot authorize correction', async t => {
+  const otherProps = await calibratedIoFixture(t);
+  otherProps.record.visibleCenterCalibration.uncorrectedPropsCanonicalSha256 = hash('different original props');
+  await assert.rejects(preparePresentationNativeFrameQcV001(otherProps.options), /calibration binding differs/);
+  assert.equal(otherProps.calls.length, 0);
+  const inventedBounds = await calibratedIoFixture(t);
+  inventedBounds.record.visibleCenterCalibration.lineMasks[0].alphaBounds.left = 21;
+  inventedBounds.record.visibleCenterCalibration.lineMasks[0].alphaBounds.width = 59;
+  await assert.rejects(preparePresentationNativeFrameQcV001(inventedBounds.options), /calibration pixels differ/);
+  assert.equal(inventedBounds.calls.length, 0);
+});
+
+test('calibration is neither optional for corrected props nor allowed without correction or on ordinary captions', async t => {
+  const missing = await calibratedIoFixture(t);
+  delete missing.record.visibleCenterCalibration;
+  await assert.rejects(preparePresentationNativeFrameQcV001(missing.options), /calibration binding differs/);
+  assert.equal(missing.calls.length, 0);
+  const unexpected = await calibratedIoFixture(t);
+  delete unexpected.record.props.renderVisibleCenterCorrectionPx;
+  await syncSyntheticProductionRecord(unexpected.record);
+  await assert.rejects(preparePresentationNativeFrameQcV001(unexpected.options), /unexpected visible center calibration/);
+  assert.equal(unexpected.calls.length, 0);
+  const ordinary = await calibratedIoFixture(t);
+  ordinary.options.records[3].props.renderVisibleCenterCorrectionPx = [{x: 5, y: 3}];
+  ordinary.options.records[3].visibleCenterCalibration = clone(ordinary.record.visibleCenterCalibration);
+  ordinary.options.records[3].visibleCenterCalibration.uncorrectedPropsCanonicalSha256 = sha256AutoPresentationV001(
+    ordinary.options.overlayAdapter.buildProps(ordinary.options.records[3].element));
+  await syncSyntheticProductionRecord(ordinary.options.records[3]);
+  await assert.rejects(preparePresentationNativeFrameQcV001(ordinary.options), /calibration binding differs/);
+  assert.equal(ordinary.calls.length, 0);
+});
+
+test('centering container cannot move in lockstep with correction and matching production hashes', async t => {
+  const {options, record, calls} = await calibratedIoFixture(t);
+  record.visibleCenterCalibration.containerBounds.left += 10;
+  record.visibleCenterCalibration.containerBounds.right += 10;
+  record.props.renderVisibleCenterCorrectionPx[0].x += 10;
+  await syncSyntheticProductionRecord(record);
+  await assert.rejects(preparePresentationNativeFrameQcV001(options), /calibration.*container|wrapper|layout/i);
+  assert.equal(calls.length, 0);
+});
+
+test('corrected captions require independent layout observation with no self-declared-container fallback', async t => {
+  const {options, calls} = await calibratedIoFixture(t);
+  delete options.inspectLayout;
+  await assert.rejects(preparePresentationNativeFrameQcV001(options), /layout/i);
+  assert.equal(calls.length, 0);
+});
+
+test('failed, incomplete, misidentified or geometrically different layout observations reject calibration', async t => {
+  const mutations = [
+    result => {result.status = 'failed';},
+    result => {result.items = [];},
+    result => {result.items[0].instructionId = 'another-caption';},
+    result => {delete result.items[0].wrapper;},
+    result => {result.items[0].wrapper.width += 2;},
+  ];
+  for (const mutate of mutations) {
+    const {options, calls} = await calibratedIoFixture(t);
+    const inspect = options.inspectLayout;
+    options.inspectLayout = async overlays => {const result = await inspect(overlays); mutate(result); return result;};
+    await assert.rejects(preparePresentationNativeFrameQcV001(options), /layout/i);
+    assert.equal(calls.length, 0);
+  }
 });

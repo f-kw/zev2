@@ -2,7 +2,9 @@ import {createHash} from 'node:crypto';
 import {PRESENTATION_CAPTION_MOTION_PRESETS_V001, getPresentationCaptionMotionProgramV001}
   from './presentation_caption_motion_v001.mjs';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001, PRESENTATION_PANEL_PRESET_V001} from './presentation_effects_v001.mjs';
+import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001} from './presentation_effects_v001.mjs';
+import {PRESENTATION_PANEL_PRESETS_V002, PRESENTATION_PANEL_ASSETS_V002, getPresentationPanelPresetV002}
+  from './presentation_panel_presets_v002.mjs';
 import {PRESENTATION_PULSE_PRESET_V001, resolvePresentationPulseTimingV001} from './presentation_pulse_v001.mjs';
 import {validatePresentationPulseEvidenceV001, presentationPulseEvidenceIdentityV001} from './presentation_pulse_evidence_v001.mjs';
 
@@ -36,8 +38,9 @@ export const sha256AutoPresentationStateV001 = value => sha256AutoPresentationV0
 });
 
 // Color Accent and Scale Accent are adopted. Their saved role tokens remain
-// internal identifiers. Panel Accent is provisional. Selectors supply no drawing values.
-const rules = freeze({version: 'auto-presentation-rules-v007', role: 'Focus',
+// internal identifiers. Human-adopted Panel keeps pending display-quality work.
+// Selection supplies finite names, never image paths or drawing values.
+const rules = freeze({version: 'auto-presentation-rules-v008', role: 'Focus',
   presentation: 'provisional-focus', scopes: ['whole-caption', 'partial-caption'],
   targetMatching: 'exact-text-overlapping-occurrences-one-based',
   targetBoundary: 'unicode-grapheme-cluster',
@@ -48,14 +51,15 @@ const rules = freeze({version: 'auto-presentation-rules-v007', role: 'Focus',
   vocal: {role: 'Vocal accent', presentation: 'provisional-vocal', scope: 'whole-caption',
     textStyle: {...PRESENTATION_EFFECT_TRIAL_PRESETS_V001.reaction}},
   panel: {role: 'Panel accent', presentation: 'provisional-panel', scope: 'whole-caption',
-    ...PRESENTATION_PANEL_PRESET_V001},
+    presets: PRESENTATION_PANEL_PRESETS_V002, assets: PRESENTATION_PANEL_ASSETS_V002,
+    alignment: 'each-visible-line-centered-x-and-line-union-centered-y-in-panel'},
   pulse: {role: 'Pulse accent', presentation: 'provisional-pulse', scope: 'whole-caption',
     preset: PRESENTATION_PULSE_PRESET_V001},
   bounce: {role: 'Bounce accent', presentation: 'provisional-bounce', scope: 'whole-caption',
     preset: PRESENTATION_CAPTION_MOTION_PRESETS_V001.bounce},
   shake: {role: 'Shake accent', presentation: 'provisional-shake', scope: 'whole-caption',
     preset: PRESENTATION_CAPTION_MOTION_PRESETS_V001.shake}});
-export const AUTO_PRESENTATION_RULES_REF_V007 = freeze({version: rules.version,
+export const AUTO_PRESENTATION_RULES_REF_V008 = freeze({version: rules.version,
   contentSha256: sha256AutoPresentationV001(rules)});
 const graphemeSegmenter = new Intl.Segmenter('ja', {granularity: 'grapheme'});
 
@@ -68,7 +72,7 @@ function checkContext(baselinePlan, context) {
     || !digest(base.fileSha256) || !digest(base.canonicalSha256)) reject('invalid baseline reference');
   if (!exact(decision, ['path', 'fileSha256']) || !nonempty(decision.path)
     || !digest(decision.fileSha256)) reject('invalid decision input reference');
-  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V007)) reject('rendering rules version differs');
+  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V008)) reject('rendering rules version differs');
   if (!object(baselinePlan) || baselinePlan.schemaVersion !== 'presentation-output-common-core-plan-v001'
     || !Array.isArray(baselinePlan.elements)) reject('invalid baseline plan');
   if (sha256AutoPresentationV001(baselinePlan) !== base.canonicalSha256) reject('baseline content differs');
@@ -109,6 +113,12 @@ function checkFocus(entry, withId = true) {
 
 function checkSelection(entry, withId = true) {
   if (entry?.role === rules.role) return checkFocus(entry, withId);
+  if (entry?.role === rules.panel.role) {
+    if (!exact(entry, ['role', 'presentation', 'scope', ...(withId ? ['captionId'] : [])])
+      || entry.scope !== rules.panel.scope) reject('Panel requires a finite whole-caption preset without drawing fields');
+    getPresentationPanelPresetV002(entry.presentation);
+    return;
+  }
   if (entry?.role === rules.pulse.role) {
     if (!exact(entry, ['role', 'presentation', 'scope', 'anchorPeakId', ...(withId ? ['captionId'] : [])])
       || entry.presentation !== rules.pulse.presentation || entry.scope !== rules.pulse.scope
@@ -194,9 +204,11 @@ export function materializeFiniteAutoPresentationCaptionV001({element, canvas, s
     return {...element, presentationPulse: {presentation: rules.pulse.presentation,
       anchorPeakId: selection.anchorPeakId, anchorFrame: program.anchorFrame}};
   }
-  if (selection.role === rules.panel.role) return {...element, visualState: {...element.visualState,
-    textStyle: {...element.visualState.textStyle, ...rules.panel.textStyle},
-    background: {...rules.panel.background}}};
+  if (selection.role === rules.panel.role) {
+    const panel = getPresentationPanelPresetV002(selection.presentation);
+    return {...element, visualState: {...element.visualState,
+      textStyle: {...element.visualState.textStyle, ...panel.textStyle}, background: {...panel.background}}};
+  }
   if (selection.role === rules.vocal.role) return {...element, visualState: {...element.visualState,
     textStyle: {...element.visualState.textStyle, ...rules.vocal.textStyle}}};
   return {...element, presentationColorRange: {...focusRange(element, selection), fontColor: rules.textStyle.fontColor}};

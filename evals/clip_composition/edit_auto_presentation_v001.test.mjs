@@ -104,7 +104,7 @@ test('CLI uses Color, Scale and provisional Panel/Pulse names and rejects the re
   }
   assert.match(AUTO_PRESENTATION_EDIT_HELP, /color\s+全文Color Accent/);
   assert.match(AUTO_PRESENTATION_EDIT_HELP, /scale\s+全文Scale Accent/);
-  assert.match(AUTO_PRESENTATION_EDIT_HELP, /panel\s+全文Panel Accent（仮称）/);
+  assert.match(AUTO_PRESENTATION_EDIT_HELP, /panel\s+全文Panel（無地）/);
   assert.match(AUTO_PRESENTATION_EDIT_HELP, /pulse\s+全文Pulse Accent（仮称）: --peak/);
   assert.match(AUTO_PRESENTATION_EDIT_HELP, /partial\s+部分Color Accent/);
   assert.doesNotMatch(AUTO_PRESENTATION_EDIT_HELP, /Focus|Vocal accent|\bfocus\b|\bvocal\b/);
@@ -229,7 +229,7 @@ test('all three accents can be overridden and Normal or Reset preserves every sa
   const choices = [
     {action: 'color', role: 'Focus', presentation: 'provisional-focus', label: 'Color Accent'},
     {action: 'scale', role: 'Vocal accent', presentation: 'provisional-vocal', label: 'Scale Accent'},
-    {action: 'panel', role: 'Panel accent', presentation: 'provisional-panel', label: 'Panel Accent（仮称）'},
+    {action: 'panel', role: 'Panel accent', presentation: 'provisional-panel', label: 'Panel（無地）'},
   ];
   for (const saved of choices) await t.test(`saved ${saved.label}`, async t => {
     const f = await fixture(t, true, {role: saved.role, presentation: saved.presentation, scope: 'whole-caption'});

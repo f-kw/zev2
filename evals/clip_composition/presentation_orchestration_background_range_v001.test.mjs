@@ -5,7 +5,7 @@ import {mkdtemp, mkdir, readFile, writeFile, access} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {AUTO_PRESENTATION_RULES_REF_V007, sha256AutoPresentationV001} from './presentation_auto_effects_v001.mjs';
+import {AUTO_PRESENTATION_RULES_REF_V008, sha256AutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {createOrchestrationContextV001, createOrchestrationJudgmentInputV001, fixOrchestrationJudgmentV001,
   resolveOrchestrationDrawingViewV001, editOrchestrationOverrideV001} from './presentation_orchestration_v001.mjs';
 import {buildOrchestrationBackgroundV001, buildOrchestrationRangeBackgroundV001,
@@ -51,7 +51,7 @@ function fixture() {
     const source = {digestRef: {version: 'small-physical-range-test-v001', sha256: mediaRef.fileSha256},
       planRef, timelineRef, mediaRef, planBytes, timelineBytes, playbackSampleRate: 44100, observationSampleRate: 16000,
       captionContext: {baselineRef: {...planRef, canonicalSha256: sha256AutoPresentationV001(plan)},
-        decisionInputRef, renderingRulesRef: structuredClone(AUTO_PRESENTATION_RULES_REF_V007), pulseTimingEvidence: null},
+        decisionInputRef, renderingRulesRef: structuredClone(AUTO_PRESENTATION_RULES_REF_V008), pulseTimingEvidence: null},
       decisionInputBytes};
     const context = createOrchestrationContextV001(source);
     const input = createOrchestrationJudgmentInputV001({context, evidence: {productionPurpose: '範囲描画の物理時計検査。',

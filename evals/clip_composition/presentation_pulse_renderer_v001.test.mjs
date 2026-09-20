@@ -47,10 +47,8 @@ const qcInput = () => {
   const program = record.inspection.pulse.program;
   record.inspection.visibilityComparisonBasis = 'same-composite-with-instruction-omitted';
   record.inspection.changedPixelsAgainstInstructionOmittedFrame = 1;
-  record.inspection.pulse.completedFrames = [
-    [program.normalBeforeFrame, 'normal'], [program.maximumFrame, 'maximum'], [program.normalAfterFrame, 'normal'],
-  ].map(([frame, state]) => ({frame, expectedState: state,
-    comparisonBasis: 'same-source-frame-three-native-pulse-states', expectedOverlaySha256: record.pulseStates.find(row => row.state === state).pngSha256,
+  record.inspection.pulse.completedFrames = program.samples.map(({frame, expectedState: state}) => ({frame, expectedState: state,
+    comparisonBasis: 'same-source-frame-finite-native-pulse-states', expectedOverlaySha256: record.pulseStates.find(row => row.state === state).pngSha256,
     outputFrameSha256: 'a'.repeat(64), baseFrameSha256: 'b'.repeat(64),
     stateDistances: record.pulseStates.map(row => ({state: row.state, overlaySha256: row.pngSha256, absoluteRgbDifference: row.state === state ? 0 : 1,
       referenceFrameSha256: 'c'.repeat(64)}))}));
@@ -60,17 +58,19 @@ const qcInput = () => {
     expectedAudio: {present: false}, expectedFrameCount: 30};
 };
 
-test('Pulse compositor owns exactly three inputs, five contiguous phases and one common fade', () => {
+test('Pulse compositor owns all five finite inputs, nine contiguous phases and one common fade', () => {
   const record = recordFor();
   const args = buildPresentationCompositeArgumentsV001({baseMediaPath: '/base.mp4', plan: {canvas},
     overlayRecords: [record], expectedFrameCount: 30, serializePngAndFilters: true});
   assert.deepEqual(args.flatMap((arg, index) => arg === '-i' ? [args[index + 1]] : []),
-    ['/base.mp4', '/native/normal.png', '/native/middle.png', '/native/maximum.png']);
+    ['/base.mp4', '/native/normal.png', '/native/middle.png', '/native/maximum.png',
+      '/native/between-normal-middle.png', '/native/between-middle-maximum.png']);
   const graph = args[args.indexOf('-filter_complex') + 1];
   assert.equal((graph.match(/geq=/g) ?? []).length, 1);
-  assert.equal((graph.match(/split=2/g) ?? []).length, 2);
-  assert.match(graph, /concat=n=5:v=1:a=0,settb=expr=1\/30,setpts=N/);
-  assert.deepEqual([...graph.matchAll(/trim=end_frame=(\d+)/g)].map(match => Number(match[1])).sort((a,b) => a-b), [3,3,4,10,10]);
+  assert.equal((graph.match(/split=2/g) ?? []).length, 4);
+  assert.match(graph, /concat=n=9:v=1:a=0,settb=expr=1\/30,setpts=N/);
+  assert.deepEqual([...graph.matchAll(/trim=end_frame=(\d+)/g)].map(match => Number(match[1])).sort((a,b) => a-b),
+    [1,1,1,1,1,1,4,10,10]);
   assert.equal(args[args.indexOf('-c:a') + 1], 'copy');
   for (const mutation of [r => r.pulseStates.pop(), r => r.pulseStates.reverse(),
     r => r.element.presentationPulse.scale = 2, r => r.pulseStates[1].element.text = 'changed']) {
@@ -80,12 +80,13 @@ test('Pulse compositor owns exactly three inputs, five contiguous phases and one
   }
 });
 
-test('one Pulse application binds all three native PNGs and forward-only metadata', () => {
+test('one Pulse application binds every finite native PNG and forward-only metadata', () => {
   const record = recordFor();
   const results = buildPresentationRenderApplicationResultsV002([record]);
   assert.equal(results.length, 1);
   assert.deepEqual(buildPresentationOverlayFileBindingsV001(results).map(row => row.path),
-    ['overlays/maximum.png', 'overlays/middle.png', 'overlays/normal.png']);
+    ['overlays/between-middle-maximum.png', 'overlays/between-normal-middle.png',
+      'overlays/maximum.png', 'overlays/middle.png', 'overlays/normal.png']);
   assert.deepEqual(results[0].pulse.metadata, record.element.presentationPulse);
   assert.deepEqual(results[0].pulse.program, record.inspection.pulse.program);
   const staticRecord = record.pulseStates[0];
@@ -107,6 +108,7 @@ test('Pulse native geometry rejects missing, substituted, unsafe and clamped sta
     input => input.overlayInspections[0].pulse.states[1].lineAlphaBounds = [],
     input => input.applicationResults[0].pulse.program.segments[1].startFrame++,
     input => input.overlayInspections[0].pulse.states[2].alphaBounds = structuredClone(input.overlayInspections[0].pulse.states[0].alphaBounds),
+    input => input.overlayInspections[0].pulse.states[3].alphaBounds = structuredClone(input.overlayInspections[0].pulse.states[0].alphaBounds),
   ];
   for (const mutate of cases) {
     const input = nativeInput(); mutate(input);
@@ -139,7 +141,7 @@ test('Pulse layout collision checks use the actual finite phase, including expan
     && row.details.pulseStates.left === 'maximum' && row.details.overlappingFrames === 4));
 });
 
-test('legacy Pulse frame diagnostics reject ties and wrong return without granting final acceptance', () => {
+test('local Pulse frame diagnostics reject ties and wrong return without granting final acceptance', () => {
   const validLocalFrames = evaluatePresentationRendererQcV002(qcInput());
   assert.equal(validLocalFrames.status, 'failed');
   assert(validLocalFrames.violations.some(row => row.code === 'COMPLETED_FRAME_QC_INVALID'
@@ -148,8 +150,10 @@ test('legacy Pulse frame diagnostics reject ties and wrong return without granti
   for (const mutate of [
     input => delete input.overlayInspections[0].pulse.completedFrames,
     input => input.overlayInspections[0].pulse.completedFrames[1].stateDistances.forEach(row => row.absoluteRgbDifference = 0),
-    input => input.overlayInspections[0].pulse.completedFrames[2].stateDistances.forEach(row => row.absoluteRgbDifference = row.state === 'maximum' ? 0 : 1),
+    input => input.overlayInspections[0].pulse.completedFrames.at(-1).stateDistances.forEach(row => row.absoluteRgbDifference = row.state === 'maximum' ? 0 : 1),
     input => input.overlayInspections[0].pulse.completedFrames[1].frame++,
+    input => {input.overlayInspections[0].pulse.completedFrames = input.overlayInspections[0].pulse.completedFrames
+      .filter(row => ['normal', 'maximum'].includes(row.expectedState));},
   ]) {
     const input = qcInput(); mutate(input);
     const qc = evaluatePresentationRendererQcV002(input);
@@ -183,7 +187,7 @@ test('Pulse refuses a normal precomputed layout and sends all native states to t
     runCounterfactualQc: false}), /completed-frame state identification/);
   await assert.rejects(executeValidatedPresentationDrawAndQcV001({plan, expectedFrameCount: 30,
     counterfactualQcMethod: 'encoded-omission-v2',
-    validatedLayoutInspection: {status: 'passed', items: []}}), /all three states/);
+    validatedLayoutInspection: {status: 'passed', items: []}}), /all finite states/);
   const directory = await mkdtemp(path.resolve('evals/clip_composition/outputs/presentation/pulse-layout-test-'));
   t.after(() => rm(directory, {recursive: true, force: true}));
   let observed;
@@ -201,7 +205,7 @@ test('Pulse refuses a normal precomputed layout and sends all native states to t
       return {code: 1, signal: null, stdout: Buffer.alloc(0), stderr: Buffer.alloc(0)};
     }}});
   assert.equal(outcome.exitCode, 1);
-  assert.deepEqual(observed.overlays.map(row => row.visualState.textStyle.fontSizePx), [96,112,128]);
+  assert.deepEqual(observed.overlays.map(row => row.visualState.textStyle.fontSizePx), [96,112,128,104,120]);
   assert(observed.overlays.every(row => row.text === source.text && row.startFrame === 0 && row.endFrameExclusive === 30));
 });
 
@@ -220,7 +224,7 @@ test('the real finite compositor selects exactly the declared state at every fra
     const pngPath=path.join(directory,`${row.state}.png`);
     // Deliberately simple RGB fixtures isolate frame selection and shared alpha;
     // real font geometry is verified separately by the native test.
-    execFileSync('/opt/homebrew/bin/magick',['-size','64x36','xc:none','-fill',['red','green','blue'][index],
+    execFileSync('/opt/homebrew/bin/magick',['-size','64x36','xc:none','-fill',['red','green','blue','yellow','magenta'][index],
       '-draw','rectangle 12,12 51,31','PNG32:'+pngPath]);
     return {...row,pngPath};
   });
@@ -263,5 +267,12 @@ test('the real finite compositor selects exactly the declared state at every fra
   const broken=structuredClone(logical);broken.pulseStates[2].pngPath=broken.pulseStates[0].pngPath;
   const brokenOutput=encode(broken,'maximum-removed');
   const wrongFrames=await identify(brokenOutput.output);
-  assert.equal(uniquelyExpected(wrongFrames[1]),false,'a displayed normal image is not a maximum pulse');
+  assert.equal(uniquelyExpected(wrongFrames.find(row=>row.frame===program.maximumFrame)),false,
+    'a displayed normal image is not a maximum pulse');
+  const missingIntermediate=structuredClone(logical);
+  missingIntermediate.pulseStates[4].pngPath=missingIntermediate.pulseStates[1].pngPath;
+  const missingIntermediateOutput=encode(missingIntermediate,'intermediate-replaced-by-middle');
+  const intermediateFrames=await identify(missingIntermediateOutput.output);
+  assert.deepEqual(intermediateFrames.filter(row=>!uniquelyExpected(row)).map(row=>row.frame),
+    [program.anchorFrame-2,program.anchorFrame+3], 'both intermediate ramp frames are actually inspected');
 });

@@ -351,8 +351,8 @@ function currentSelection(): EditingSelection {
     if (!target.value.peakOptions.some(peak => peak.id === draft.anchorPeakId)) throw new Error('時刻条件を満たす音のピークから一件を選んでください。');
     return { preset: 'pulse', anchorPeakId: draft.anchorPeakId };
   }
-  if (!['normal', 'scale', 'panel', 'bounce', 'shake'].includes(draft.preset)) throw new Error('字幕表現を選んでください。');
-  return { preset: draft.preset as 'normal' | 'scale' | 'panel' | 'bounce' | 'shake' };
+  if (!['normal', 'scale', 'panel', 'panel-graph-paper', 'panel-comic-frame', 'bounce', 'shake'].includes(draft.preset)) throw new Error('字幕表現を選んでください。');
+  return { preset: draft.preset as 'normal' | 'scale' | 'panel' | 'panel-graph-paper' | 'panel-comic-frame' | 'bounce' | 'shake' };
 }
 
 async function checkCurrentSelection(forced?: 'Normal' | 'Reset'): Promise<EditingCheckResult | null> {

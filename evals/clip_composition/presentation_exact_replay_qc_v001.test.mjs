@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {AUTO_PRESENTATION_RULES_REF_V007, fixAutoPresentationProposalV001} from './presentation_auto_effects_v001.mjs';
+import {AUTO_PRESENTATION_RULES_REF_V008, fixAutoPresentationProposalV001} from './presentation_auto_effects_v001.mjs';
 import {PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
   buildPresentationNativeFrameQcRecipeV001, classifyPresentationNativeFrameRgbV001,
   PRESENTATION_NATIVE_FRAME_EXECUTION_V001, buildPresentationNativeFrameBatchPlanV001,
@@ -253,7 +253,7 @@ function combinedEvidenceFixture(completedId = 'a') {
   const context = {baselineRef: {path: baselineRef.path, fileSha256: baselineRef.fileSha256,
     canonicalSha256: baselineRef.canonicalSha256},
   decisionInputRef: {path: '/fixture/decision.json', fileSha256: hash('decision')},
-  renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007, pulseTimingEvidence: null};
+  renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V008, pulseTimingEvidence: null};
   const autoPresentation = {context, autoProposal: fixAutoPresentationProposalV001({baselinePlan, context,
     proposal: {schemaVersion: 'auto-presentation-proposal-v001', context,
       targetCaptionIds: [f.plan.elements[0].instructionId], completion: 'complete', exceptions: [], effects: []}})};
@@ -626,9 +626,8 @@ test('production Pulse rejects legacy final proof and retains native state check
     visibilityComparisonBasis: 'same-composite-with-instruction-omitted', changedPixelsAgainstInstructionOmittedFrame: 1,
     pulse: {presetVersion: PRESENTATION_PULSE_PRESET_V001.version, metadata: element.presentationPulse, program,
       states: states.map(row => ({state: row.state, ...row.inspection})),
-      completedFrames: [[program.normalBeforeFrame, 'normal'], [program.maximumFrame, 'maximum'],
-        [program.normalAfterFrame, 'normal']].map(([frame, state]) => ({frame, expectedState: state,
-        comparisonBasis: 'same-source-frame-three-native-pulse-states',
+      completedFrames: program.samples.map(({frame, expectedState: state}) => ({frame, expectedState: state,
+        comparisonBasis: 'same-source-frame-finite-native-pulse-states',
         expectedOverlaySha256: states.find(row => row.state === state).pngSha256,
         outputFrameSha256: hash('completed-frame'), baseFrameSha256: hash('base-frame'),
         stateDistances: states.map(row => ({state: row.state, overlaySha256: row.pngSha256,
@@ -637,10 +636,10 @@ test('production Pulse rejects legacy final proof and retains native state check
     applicationResults: buildPresentationRenderApplicationResultsV002([record]), overlayInspections: [record.inspection],
     mediaInspection: {video: {...canvas, frameCount: 30}, durationMs: 1000},
     expectedAudio: {present: false}, expectedFrameCount: 30};
-  // This positive control checks the three physical layouts only. It does not
+  // This positive control checks the finite physical layouts only. It does not
   // certify completed-video visibility or substitute for the combined PASS test.
   assert.equal(evaluatePresentationRendererQcV002({...input, requireFinalVisibility: false}).status, 'passed');
-  // Even complete legacy three-point observations cannot certify the final video.
+  // Even complete local observations cannot certify the full video.
   assertRendererCompletedFailure(evaluatePresentationRendererQcV002(input));
   delete input.overlayInspections[0].pulse.completedFrames;
   for (const basis of [PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001, PRESENTATION_ENCODED_OMISSION_QC_BASIS_V002]) {
@@ -924,7 +923,7 @@ for (const expression of ['pulse', 'bounce', 'shake']) test(expression + ' repla
   const f = syntheticEvidence(), element = f.plan.elements[0];
   element.endFrameExclusive = 90; element.displayFrameCount = 90; element.visualState.textStyle.fontSizePx = 96;
   if (expression === 'pulse') element.presentationPulse = {presentation: 'provisional-pulse', anchorPeakId: 'measured', anchorFrame: 45};
-  else element.presentationMotion = {presentation: 'provisional-' + expression, presetVersion: 'presentation-caption-motion-v001'};
+  else element.presentationMotion = {presentation: 'provisional-' + expression, presetVersion: 'presentation-caption-motion-v002'};
   f.expectedFrameCount = 90;
   const states = (expression === 'pulse' ? buildPresentationPulseStateElementsV001
     : buildPresentationCaptionMotionStateElementsV001)({element, canvas: f.plan.canvas})
@@ -1037,7 +1036,7 @@ function motionRendererFixture(expression) {
   element.visualState.textStyle.fontSizePx = 96;
   element.visualState.position.offsetYPercent = -6;
   element.presentationMotion = {presentation: 'provisional-' + expression,
-    presetVersion: 'presentation-caption-motion-v001'};
+    presetVersion: 'presentation-caption-motion-v002'};
   const states = buildPresentationCaptionMotionStateElementsV001({element, canvas}).map(row => {
     const width = row.element.visualState.textStyle.fontSizePx;
     const offset = row.element.visualState.position.offsetXPercent * canvas.width / 100;

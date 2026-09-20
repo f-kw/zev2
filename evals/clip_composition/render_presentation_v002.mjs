@@ -13,6 +13,7 @@ import {createOrchestrationRenderScopeV001, assertPresentationRenderRangeV001}
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {resolvePresentationEffectsV001, buildPresentationTimelineFiltersV001} from './presentation_effects_v001.mjs';
 import {resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
+import {isPresentationPanelBackgroundV002} from './presentation_panel_presets_v002.mjs';
 import {assertOrchestrationDrawingViewV001, exportOrchestrationDrawingViewEvidenceV001}
   from './presentation_orchestration_v001.mjs';
 import {preparePresentationNativeFrameQcV001, buildPresentationNativeQcAlternativeElementsV001}
@@ -942,7 +943,7 @@ const presentationPulseRecordsV001 = (record, canvas) => {
     || record.pulseStates.some((row, index) => row.state !== expected[index].state
       || typeof row.pngPath !== 'string' || row.pngPath.length === 0
       || canonicalJson(row.element) !== canonicalJson(expected[index].element))) {
-    throw new TypeError('Pulse requires exactly its three bound native states');
+    throw new TypeError('Pulse requires exactly all of its bound native states');
   }
   return record.pulseStates;
 };
@@ -1834,6 +1835,18 @@ export async function inspectPresentationCompletedFrameQcV001({
         inspectPng: input => inspectOverlayPngWithToolV001({...input,
           imageMagickPath, processObserver,
           observationLabelPrefix: 'native-qc-diagnostic-overlay-inspection'}),
+        inspectLayout: async overlays => {
+          const inputPath = path.join(scratchDirectory, 'native-center-layout-input.json');
+          const outputPath = path.join(scratchDirectory, 'native-center-layout-output.json');
+          await writeFile(inputPath, JSON.stringify({canvas: plan.canvas, overlays}) + '\n', {flag: 'wx'});
+          await runPresentationRendererChildProcessV001(toolPaths.tsxPath,
+            [toolPaths.layoutInspectorPath, inputPath, outputPath], {
+              allowedExitCodes: [0, 1], env: {NODE_PATH: RENDER_NODE_MODULES},
+              fatalInnerStage: 'native-preparation', processObserver,
+              observationLabel: 'native-center-layout-reconstruction',
+            });
+          return readJson(outputPath);
+        },
         scratchDirectory: path.join(scratchDirectory, 'native-qc-preparation'),
       });
       phase = 'native-discriminator';
@@ -2084,7 +2097,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       getPresentationPulseProgramV001({element, canvas: resolved.plan.canvas});
       if (!runCounterfactualQc) throw new TypeError('Pulse requires completed-frame state identification QC');
       if (validatedLayoutInspection !== null) {
-        throw new TypeError('Pulse selections require native layout inspection of all three states');
+        throw new TypeError('Pulse selections require native layout inspection of all finite states');
       }
     }
   }
@@ -2244,8 +2257,11 @@ export async function executeValidatedPresentationDrawAndQcV001({
       const pngPath = path.join(stagingDirectory, artifactNames.overlays, `${baseName}.png`);
       const repeatPath = path.join(scratchDirectory, 'frames', `${baseName}.repeat.png`);
       const layoutItem = hasFiniteStates ? layoutInspection.items[index] : layoutByInstruction.get(element.instructionId);
-      if (element.visualState.position.preset === 'top-band') {
+      let visibleCenterCalibration;
+      if (element.visualState.position.preset === 'top-band'
+        || isPresentationPanelBackgroundV002(element.visualState.background)) {
         const calibrationLineBounds = [];
+        const lineMasks = [];
         for (const line of element.indexedLines) {
           const calibrationPath = path.join(
             scratchDirectory,
@@ -2265,12 +2281,18 @@ export async function executeValidatedPresentationDrawAndQcV001({
             observationLabelPrefix: 'overlay-calibration-inspection',
           });
           if (!calibration.alphaBounds) {
-            throw new Error('top band visible center calibration produced no alpha bounds');
+            throw new Error('background visible center calibration produced no alpha bounds');
           }
           calibrationLineBounds.push(calibration.alphaBounds);
+          lineMasks.push({lineIndex: line.lineIndex, pngPath: calibrationPath,
+            pngSha256: await fileSha256V002(calibrationPath), alphaBounds: calibration.alphaBounds});
         }
         const wrapper = layoutItem?.wrapper;
-        if (!wrapper) throw new Error('top band visible center calibration has no wrapper');
+        if (!wrapper) throw new Error('background visible center calibration has no wrapper');
+        visibleCenterCalibration = {schemaVersion: 'presentation-visible-center-calibration-v001',
+          uncorrectedPropsCanonicalSha256: sha256Canonical(overlayProps[index]),
+          containerBounds: {left: wrapper.left, top: wrapper.top,
+            right: wrapper.left + wrapper.width, bottom: wrapper.top + wrapper.height}, lineMasks};
         overlayProps[index] = {
           ...overlayProps[index],
           renderVisibleCenterCorrectionPx: resolveVisibleCenterOffsetsV001({
@@ -2353,6 +2375,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
         groupIndex,
         ...(state === undefined ? {} : {state}),
         props: overlayProps[index],
+        ...(visibleCenterCalibration === undefined ? {} : {visibleCenterCalibration}),
         fileStem: baseName,
         pngPath,
         pngSha256,

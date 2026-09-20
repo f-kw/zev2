@@ -12,19 +12,31 @@ const exact = (value, keys) => value !== null && typeof value === 'object' && !A
   && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
 
 export const PRESENTATION_PULSE_PRESET_V001 = freeze({
-  version: 'presentation-pulse-preset-v001',
+  version: 'presentation-pulse-preset-v002',
   presentation: 'provisional-pulse',
   fps: 30,
   normalFontSizePx: 96,
   middleFontSizePx: 112,
   maximumFontSizePx: 128,
+  states: [
+    {state: 'normal', fontSizePx: 96},
+    {state: 'middle', fontSizePx: 112},
+    {state: 'maximum', fontSizePx: 128},
+    // Linear midpoints. No new scale endpoint or caller-provided curve.
+    {state: 'between-normal-middle', fontSizePx: (96 + 112) / 2},
+    {state: 'between-middle-maximum', fontSizePx: (112 + 128) / 2},
+  ],
   positionPreset: 'bottom-center',
   commonFadeFrames: 4,
   // These are this single preset's states, not a user-editable keyframe language.
   excursion: [
-    {state: 'middle', startOffset: -4, endOffsetExclusive: -1},
+    {state: 'between-normal-middle', startOffset: -4, endOffsetExclusive: -3},
+    {state: 'middle', startOffset: -3, endOffsetExclusive: -2},
+    {state: 'between-middle-maximum', startOffset: -2, endOffsetExclusive: -1},
     {state: 'maximum', startOffset: -1, endOffsetExclusive: 3},
-    {state: 'middle', startOffset: 3, endOffsetExclusive: 6},
+    {state: 'between-middle-maximum', startOffset: 3, endOffsetExclusive: 4},
+    {state: 'middle', startOffset: 4, endOffsetExclusive: 5},
+    {state: 'between-normal-middle', startOffset: 5, endOffsetExclusive: 6},
   ],
 });
 
@@ -61,15 +73,22 @@ function programForAnchor(element, canvas, anchorFrame) {
     || pulseEndFrameExclusive > element.endFrameExclusive - preset.commonFadeFrames) {
     reject('the complete pulse and visible normal return do not fit this peak');
   }
-  return freeze({presentation: preset.presentation, anchorFrame, pulseStartFrame, pulseEndFrameExclusive,
+  const segments = [
+    {state: 'normal', startFrame: element.startFrame, endFrameExclusive: pulseStartFrame},
+    ...excursion,
+    {state: 'normal', startFrame: pulseEndFrameExclusive, endFrameExclusive: element.endFrameExclusive},
+  ];
+  return freeze({presentation: preset.presentation, presetVersion: preset.version,
+    anchorFrame, pulseStartFrame, pulseEndFrameExclusive,
     normalBeforeFrame: pulseStartFrame - 1,
     maximumFrame: anchorFrame,
     normalAfterFrame: pulseEndFrameExclusive,
-    segments: [
-      {state: 'normal', startFrame: element.startFrame, endFrameExclusive: pulseStartFrame},
-      ...excursion,
-      {state: 'normal', startFrame: pulseEndFrameExclusive, endFrameExclusive: element.endFrameExclusive},
-    ]});
+    segments,
+    // Cover the moving frames, the measured maximum, and both static borders.
+    samples: Array.from({length: pulseEndFrameExclusive - pulseStartFrame + 2}, (_, index) => {
+      const frame = pulseStartFrame - 1 + index;
+      return {frame, expectedState: segments.find(row => row.startFrame <= frame && frame < row.endFrameExclusive).state};
+    })});
 }
 
 /** Derive the one excursion from an actual measured sample, never AI seconds. */
@@ -98,23 +117,21 @@ export function getPresentationPulseProgramV001({element, canvas}) {
   return programForAnchor(element, canvas, value.anchorFrame);
 }
 
-/** Three native PNGs belong to the same logical caption and retain its times. */
+/** Every finite native PNG belongs to the same logical caption and retains its times. */
 export function buildPresentationPulseStateElementsV001({element, canvas}) {
   getPresentationPulseProgramV001({element, canvas});
   const {presentationPulse, ...normal} = element;
   const preset = PRESENTATION_PULSE_PRESET_V001;
-  return [
-    {state: 'normal', element: normal},
-    {state: 'middle', element: {...normal, visualState: {...normal.visualState,
-      textStyle: {...normal.visualState.textStyle, fontSizePx: preset.middleFontSizePx}}}},
-    {state: 'maximum', element: {...normal, visualState: {...normal.visualState,
-      textStyle: {...normal.visualState.textStyle, fontSizePx: preset.maximumFontSizePx}}}},
-  ];
+  return preset.states.map(({state, fontSizePx}) => ({state, element: state === 'normal' ? normal
+    : {...normal, visualState: {...normal.visualState,
+      textStyle: {...normal.visualState.textStyle, fontSizePx}}}}));
 }
 
 /** Reject native layout clamping that moves the finite pulse's fixed anchor. */
 export function assertPresentationPulseAnchorsV001(layoutItems) {
-  if (!Array.isArray(layoutItems) || layoutItems.length !== 3) reject('all three native layouts are required');
+  if (!Array.isArray(layoutItems) || layoutItems.length !== PRESENTATION_PULSE_PRESET_V001.states.length) {
+    reject('all finite native layouts are required');
+  }
   const anchors = layoutItems.map(item => {
     const box = item?.wrapper;
     if (!box || !['left', 'top', 'width', 'height'].every(key => Number.isFinite(box[key]))) {

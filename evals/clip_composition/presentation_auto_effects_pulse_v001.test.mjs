@@ -4,7 +4,7 @@ import {mkdtemp, readFile, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import test from 'node:test';
-import {AUTO_PRESENTATION_RULES_REF_V007, sha256AutoPresentationV001, sha256AutoPresentationStateV001,
+import {AUTO_PRESENTATION_RULES_REF_V008, sha256AutoPresentationV001, sha256AutoPresentationStateV001,
   fixAutoPresentationProposalV001, createAutoPresentationOverridesV001,
   editAutoPresentationOverrideV001, resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {loadAutoPresentationContextV001, saveFixedAutoPresentationV001} from './presentation_auto_effects_io_v001.mjs';
@@ -25,7 +25,7 @@ function fixture() {
   const peaks = [['early', 10], ['central', 450], ['end', 900], ['other', 1200]].map(([peakId, peakSample]) => ({
     peakId, startSample: peakSample, endSampleExclusive: peakSample + 1, peakSample}));
   const context = {baselineRef: {...ref('baseline'), canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
-    decisionInputRef: ref('decision'), renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007,
+    decisionInputRef: ref('decision'), renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V008,
     pulseTimingEvidence: {schemaVersion: 'auto-presentation-pulse-timing-v001', sourceRef: ref('source'),
       candidatesRef: ref('candidates'), peaksRef: ref('peaks'), sampleRate: 300, sampleCount: 1800,
       candidates: [{candidateId: 'native-union', peakIds: peaks.map(row => row.peakId)}], peaks}};
@@ -52,7 +52,7 @@ test('Pulse changes only finite metadata; all expressions and Normal Reset resto
   }
   assert.deepEqual(f, before);
   const states = buildPresentationPulseStateElementsV001({element: expected.elements[0], canvas: expected.canvas});
-  assert.deepEqual(states.map(row => row.element.visualState.textStyle.fontSizePx), [96, 112, 128]);
+  assert.deepEqual(states.map(row => row.element.visualState.textStyle.fontSizePx), [96, 112, 128, 104, 120]);
   for (const {element} of states) {
     const restored = clone(element); restored.visualState.textStyle.fontSizePx = 96;
     assert.deepEqual(restored, f.baselinePlan.elements[0]);
@@ -85,9 +85,15 @@ test('timing uses exact measured samples and rejects clipping instead of moving 
   assert.equal(run(800).normalAfterFrame, 86);
   for (const sample of [79, 810, 899, 900, -1, 1.5]) assert.throws(() => run(sample), TypeError);
   assert.deepEqual(run(450).segments, [{state: 'normal', startFrame: 0, endFrameExclusive: 41},
-    {state: 'middle', startFrame: 41, endFrameExclusive: 44}, {state: 'maximum', startFrame: 44, endFrameExclusive: 48},
-    {state: 'middle', startFrame: 48, endFrameExclusive: 51}, {state: 'normal', startFrame: 51, endFrameExclusive: 90}]);
-  const layouts = [96, 112, 128].map(size => ({wrapper: {left: 100 - size / 2, top: 500 - size, width: size, height: size}}));
+    {state: 'between-normal-middle', startFrame: 41, endFrameExclusive: 42},
+    {state: 'middle', startFrame: 42, endFrameExclusive: 43},
+    {state: 'between-middle-maximum', startFrame: 43, endFrameExclusive: 44},
+    {state: 'maximum', startFrame: 44, endFrameExclusive: 48},
+    {state: 'between-middle-maximum', startFrame: 48, endFrameExclusive: 49},
+    {state: 'middle', startFrame: 49, endFrameExclusive: 50},
+    {state: 'between-normal-middle', startFrame: 50, endFrameExclusive: 51},
+    {state: 'normal', startFrame: 51, endFrameExclusive: 90}]);
+  const layouts = [96, 112, 128, 104, 120].map(size => ({wrapper: {left: 100 - size / 2, top: 500 - size, width: size, height: size}}));
   assert.doesNotThrow(() => assertPresentationPulseAnchorsV001(layouts));
   layouts[2].wrapper.left += 1;
   assert.throws(() => assertPresentationPulseAnchorsV001(layouts), /anchor/);

@@ -1,8 +1,10 @@
+import {omitPresentationPanelPlateForInspectionV002, isPresentationPanelBackgroundV002} from './presentation_panel_presets_v002.mjs';
 import {assertOrchestrationScopedPlansV001, scopeOrchestrationPlanV001} from './presentation_orchestration_render_scope_v001.mjs';
 import {createHash} from 'node:crypto';
 import {lstat, mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {performance} from 'node:perf_hooks';
+import {resolveVisibleCenterOffsetsV001} from './presentation_renderer_text_layout_v001.mjs';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {
   createAutoPresentationOverridesV001, editAutoPresentationOverrideV001,
@@ -76,7 +78,7 @@ export function buildPresentationNativeQcAlternativeElementsV001({
       // the text. The diagnostic removes only the plate paint, preserving the
       // actual wrapper, dark text, padding, outline and all placement values.
       const withoutPlate = structuredClone(element);
-      withoutPlate.visualState.background.color = 'transparent';
+      withoutPlate.visualState.background = omitPresentationPanelPlateForInspectionV002(withoutPlate.visualState.background);
       entries.push({kind: 'panel-plate-omitted', element: withoutPlate});
     }
     return {captionId: element.instructionId, entries};
@@ -89,7 +91,7 @@ export function buildPresentationNativeQcAlternativeElementsV001({
  * production PNG directory, or completed media. */
 export async function preparePresentationNativeFrameQcV001({
   plan, records, autoPresentation, presentationTimeline, presetRegistry,
-  overlayAdapter, inspectPng, scratchDirectory, sourceRefs = [], orchestrationDrawingView, renderRange = null,
+  overlayAdapter, inspectPng, inspectLayout, scratchDirectory, sourceRefs = [], orchestrationDrawingView, renderRange = null,
 }) {
   const started = performance.now();
   const orchestrationInput = orchestrationDrawingView === undefined ? undefined
@@ -127,6 +129,18 @@ export async function preparePresentationNativeFrameQcV001({
     inputBindings.push({...ref, ...actual});
   }
   const nativeInputs = [];
+  const calibratedStates = records.flatMap(record => record.pulseStates ?? record.motionStates ?? [record])
+    .filter(state => Object.hasOwn(state.props, 'renderVisibleCenterCorrectionPx'));
+  const calibratedWrappers = new Map();
+  if (calibratedStates.length) {
+    if (typeof inspectLayout !== 'function') reject('visible center requires independent native layout reconstruction');
+    const layout = await inspectLayout(calibratedStates.map(state => overlayAdapter.buildProps(state.element, plan, presetRegistry)));
+    if (layout?.status !== 'passed' || !Array.isArray(layout.items) || layout.items.length !== calibratedStates.length
+      || layout.items.some((row, index) => row.instructionId !== calibratedStates[index].element.instructionId)) {
+      reject('visible center native layout reconstruction differs');
+    }
+    calibratedStates.forEach((state, index) => calibratedWrappers.set(state, layout.items[index].wrapper));
+  }
   for (const record of records) {
     const expectedStates = Object.hasOwn(record.element, 'presentationPulse')
       ? buildPresentationPulseStateElementsV001({element: record.element, canvas: plan.canvas}) : null;
@@ -142,7 +156,37 @@ export async function preparePresentationNativeFrameQcV001({
     if (!motionStates && Object.hasOwn(record, 'motionStates')) reject('non-motion record has unexpected native states');
     const states = record.pulseStates ?? record.motionStates ?? [record];
     for (const state of states) {
-      const expectedProps = overlayAdapter.buildProps(state.element, plan, presetRegistry);
+      let expectedProps = overlayAdapter.buildProps(state.element, plan, presetRegistry);
+      if (Object.hasOwn(state.props, 'renderVisibleCenterCorrectionPx')) {
+        const calibration = state.visibleCenterCalibration;
+        if ((!isPresentationPanelBackgroundV002(state.element.visualState?.background)
+          && state.element.visualState?.position?.preset !== 'top-band')
+          || calibration?.schemaVersion !== 'presentation-visible-center-calibration-v001'
+          || Object.keys(calibration).sort().join(',') !== 'containerBounds,lineMasks,schemaVersion,uncorrectedPropsCanonicalSha256'
+          || calibration.uncorrectedPropsCanonicalSha256 !== sha256AutoPresentationV001(expectedProps)
+          || !Array.isArray(calibration.lineMasks)
+          || calibration.lineMasks.length !== state.element.indexedLines.length) reject('visible center calibration binding differs');
+        const wrapper = calibratedWrappers.get(state);
+        const containerBounds = {left: wrapper?.left, top: wrapper?.top,
+          right: wrapper?.left + wrapper?.width, bottom: wrapper?.top + wrapper?.height};
+        if (!same(calibration.containerBounds, containerBounds)) reject('visible center container differs from native layout');
+        const bounds = [];
+        for (const [index, mask] of calibration.lineMasks.entries()) {
+          if (mask.lineIndex !== index || !digest(mask.pngSha256)
+            || Object.keys(mask).sort().join(',') !== 'alphaBounds,lineIndex,pngPath,pngSha256') reject('visible center calibration line differs');
+          const actual = await bind(mask.pngPath);
+          if (actual.fileSha256 !== mask.pngSha256) reject('visible center calibration PNG bytes changed');
+          const observation = await inspectPng({instructionId: state.element.instructionId,
+            pngPath: mask.pngPath, appliedOverlayPropsCanonicalSha256: sha256AutoPresentationV001({
+              ...expectedProps, inspectionLineIndex: index}), overlaySha256: mask.pngSha256,
+            overlayFile: path.basename(mask.pngPath)});
+          if (!same(observation.alphaBounds, mask.alphaBounds)) reject('visible center calibration pixels differ');
+          bounds.push(observation.alphaBounds);
+          inputBindings.push({role: `visible-center-calibration:${record.fileStem}:${state.state ?? 'static'}:${index}`, ...actual});
+        }
+        expectedProps = {...expectedProps, renderVisibleCenterCorrectionPx: resolveVisibleCenterOffsetsV001({
+          containerBounds, lineBounds: bounds})};
+      } else if (state.visibleCenterCalibration !== undefined) reject('unexpected visible center calibration');
       const propsSha = sha256AutoPresentationV001(expectedProps);
       if (!same(state.props, expectedProps)
         || state.inspection?.appliedOverlayPropsCanonicalSha256 !== propsSha
@@ -173,7 +217,17 @@ export async function preparePresentationNativeFrameQcV001({
   for (const [index, record] of records.entries()) {
     const alternates = [];
     for (const spec of specification.alternatives[index].entries) {
-      const props = overlayAdapter.buildProps(spec.element, plan, presetRegistry);
+      let props = overlayAdapter.buildProps(spec.element, plan, presetRegistry);
+      const sameProduction = (record.pulseStates ?? record.motionStates ?? [record])
+        .find(state => same(state.element, spec.element));
+      if (sameProduction?.visibleCenterCalibration) {
+        props = {...props, renderVisibleCenterCorrectionPx: structuredClone(sameProduction.props.renderVisibleCenterCorrectionPx)};
+      } else if (spec.kind === 'panel-plate-omitted' && record.visibleCenterCalibration) {
+        const expectedDiagnostic = structuredClone(record.element);
+        expectedDiagnostic.visualState.background = omitPresentationPanelPlateForInspectionV002(expectedDiagnostic.visualState.background);
+        if (!same(spec.element, expectedDiagnostic)) reject('plate omission changes the calibrated text geometry');
+        props = {...props, renderVisibleCenterCorrectionPx: structuredClone(record.props.renderVisibleCenterCorrectionPx)};
+      }
       const propsSha = sha256AutoPresentationV001(props);
       const reusable = (record.pulseStates ?? record.motionStates ?? [record]).find(state =>
         same(state.element, spec.element) && same(state.props, props));

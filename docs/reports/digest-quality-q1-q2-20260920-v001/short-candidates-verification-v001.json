@@ -1,0 +1,316 @@
+{
+  "schemaVersion": "q1-short-candidates-verification-v001",
+  "verifiedAt": "2026-09-20",
+  "meaning": "新規全編生成をせず、元の表示時計と位相を保つ5短尺。完成記録と動画byteを再読照合した技術証拠。見心地・採用・反映確認の判定ではない。",
+  "runtimeProfileMeaning": "候補ごとに実行当時の描画実装へ束縛。motionはPanel校正引継ぎ修正前、panel-shortは校正再導出追加後かつ参照名一意化前、残り3本は最終実装。旧記録のhashを現行期待へ付け替えていない。",
+  "candidates": [
+    {
+      "candidateId": "motion",
+      "completionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-evidence/completion.json",
+        "fileSha256": "501bad990cce44f6e478ed18e75aa9baec35ad588bd4d83e10bdf39a8db0d65a",
+        "bytes": 34241063
+      },
+      "video": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+        "bytes": 4623609,
+        "fileSha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58"
+      },
+      "actualVideoShaVerified": true,
+      "range": {
+        "startFrame": 0,
+        "endFrameExclusive": 170
+      },
+      "scope": {
+        "kind": "range",
+        "startFrame": 0,
+        "endFrameExclusive": 170,
+        "fullFrameCount": 4879,
+        "frameCount": 170,
+        "viewSha256": "5b7341ac8390f51d465daffb89fd213942f9d9fd9bfcd518148a8ab0bd36acff",
+        "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+        "fourSavedSha256": {
+          "captionAuto": "49b880b14e30adbc79f5e644eb60800ad752a29ceb0b23fa28f96315a25d752a",
+          "captionOverrides": "fdb031767dd6d07d696b047624a52eafff3e73c89f62199d7c91824df1181f22",
+          "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+          "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+        },
+        "playbackStartSample": 0,
+        "playbackEndSampleExclusive": 249900
+      },
+      "frameCount": 170,
+      "durationMs": 5667,
+      "rulesRefCanonicalSha256": "593d34be2db37d852b68b5a5efbd59fee1909e86effebc394280078351fe3bca",
+      "nativeRuntimeProfileSha256": "f04cdf53bcfd8f7e0b37231da3d2ed64165a0635fa9db65a85bf16fc37715a2d",
+      "finalQcStatus": "passed",
+      "completedFrameQcStatus": "passed",
+      "violationCount": 0,
+      "nativeCaptionInspectionCount": 5,
+      "audioClockStatus": "passed",
+      "backgroundVerification": {
+        "range": {
+          "startFrame": 0,
+          "endFrameExclusive": 170
+        },
+        "fullDisplayFrameCount": 4879,
+        "comparedVideoFrames": 170,
+        "comparedAudioSamples": 249900
+      },
+      "fullBackgroundGenerated": false,
+      "fullQcExecuted": false,
+      "humanQuality": "not-evaluated",
+      "formalTrustChanged": false,
+      "paidApiCalls": 0,
+      "newExternalMediaTransfers": 0,
+      "exactReplayMp4BytesIdentical": true,
+      "finiteStateSampleCount": 53
+    },
+    {
+      "candidateId": "panel-short",
+      "completionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-evidence-v002/completion.json",
+        "fileSha256": "44152e2546912d45daac24f3b7ee9698a415076f4ce6df43176803de309d6cb6",
+        "bytes": 10888518
+      },
+      "video": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-render-v002/presentation-rendered-v002.mp4",
+        "bytes": 2485102,
+        "fileSha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118"
+      },
+      "actualVideoShaVerified": true,
+      "range": {
+        "startFrame": 456,
+        "endFrameExclusive": 593
+      },
+      "scope": {
+        "kind": "range",
+        "startFrame": 456,
+        "endFrameExclusive": 593,
+        "fullFrameCount": 4879,
+        "frameCount": 137,
+        "viewSha256": "5b7341ac8390f51d465daffb89fd213942f9d9fd9bfcd518148a8ab0bd36acff",
+        "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+        "fourSavedSha256": {
+          "captionAuto": "49b880b14e30adbc79f5e644eb60800ad752a29ceb0b23fa28f96315a25d752a",
+          "captionOverrides": "fdb031767dd6d07d696b047624a52eafff3e73c89f62199d7c91824df1181f22",
+          "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+          "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+        },
+        "playbackStartSample": 670320,
+        "playbackEndSampleExclusive": 871710
+      },
+      "frameCount": 137,
+      "durationMs": 4567,
+      "rulesRefCanonicalSha256": "1a7ba965dd63646ffec484c1fc01b36e1e5cf8d53f589d43724c1f1cf70be04e",
+      "nativeRuntimeProfileSha256": "23ee26e42b11097b46869a3e39a3922958e1d27d4f104f65197f20ff565e8666",
+      "finalQcStatus": "passed",
+      "completedFrameQcStatus": "passed",
+      "violationCount": 0,
+      "nativeCaptionInspectionCount": 3,
+      "audioClockStatus": "passed",
+      "backgroundVerification": {
+        "range": {
+          "startFrame": 456,
+          "endFrameExclusive": 593
+        },
+        "fullDisplayFrameCount": 4879,
+        "comparedVideoFrames": 137,
+        "comparedAudioSamples": 201390
+      },
+      "fullBackgroundGenerated": false,
+      "fullQcExecuted": false,
+      "humanQuality": "not-evaluated",
+      "formalTrustChanged": false,
+      "paidApiCalls": 0,
+      "newExternalMediaTransfers": 0,
+      "exactReplayMp4BytesIdentical": true,
+      "finiteStateSampleCount": 10
+    },
+    {
+      "candidateId": "panel-wide",
+      "completionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-evidence/completion.json",
+        "fileSha256": "5259161350a257ad290d70235bfea76b23f71102749744c7d0ed2c45efb46d89",
+        "bytes": 5153433
+      },
+      "video": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-render/presentation-rendered-v002.mp4",
+        "bytes": 2131201,
+        "fileSha256": "290dd256d75bf596cb4775ab3697e778687916f893eae70fa1e148c745a4ccdf"
+      },
+      "actualVideoShaVerified": true,
+      "range": {
+        "startFrame": 1731,
+        "endFrameExclusive": 1830
+      },
+      "scope": {
+        "kind": "range",
+        "startFrame": 1731,
+        "endFrameExclusive": 1830,
+        "fullFrameCount": 4879,
+        "frameCount": 99,
+        "viewSha256": "5b7341ac8390f51d465daffb89fd213942f9d9fd9bfcd518148a8ab0bd36acff",
+        "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+        "fourSavedSha256": {
+          "captionAuto": "49b880b14e30adbc79f5e644eb60800ad752a29ceb0b23fa28f96315a25d752a",
+          "captionOverrides": "fdb031767dd6d07d696b047624a52eafff3e73c89f62199d7c91824df1181f22",
+          "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+          "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+        },
+        "playbackStartSample": 2544570,
+        "playbackEndSampleExclusive": 2690100
+      },
+      "frameCount": 99,
+      "durationMs": 3300,
+      "rulesRefCanonicalSha256": "2353c9ae544f9dda61290693b5d797c4475444d89e28b916a5c2f2f4df65d983",
+      "nativeRuntimeProfileSha256": "0a116b53b26e174c654f1011c5668f43c595286956a663ad9928d78066b664c6",
+      "finalQcStatus": "passed",
+      "completedFrameQcStatus": "passed",
+      "violationCount": 0,
+      "nativeCaptionInspectionCount": 1,
+      "audioClockStatus": "passed",
+      "backgroundVerification": {
+        "range": {
+          "startFrame": 1731,
+          "endFrameExclusive": 1830
+        },
+        "fullDisplayFrameCount": 4879,
+        "comparedVideoFrames": 99,
+        "comparedAudioSamples": 145530
+      },
+      "fullBackgroundGenerated": false,
+      "fullQcExecuted": false,
+      "humanQuality": "not-evaluated",
+      "formalTrustChanged": false,
+      "paidApiCalls": 0,
+      "newExternalMediaTransfers": 0,
+      "exactReplayMp4BytesIdentical": true,
+      "finiteStateSampleCount": 3
+    },
+    {
+      "candidateId": "panel-graph-paper",
+      "completionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-graph-paper-evidence/completion.json",
+        "fileSha256": "f3829c4f9ebeaed8a97c223d308007b9e43d1dd2a2746982fa1c6f4f4b0041b1",
+        "bytes": 5197608
+      },
+      "video": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-graph-paper-render/presentation-rendered-v002.mp4",
+        "bytes": 1483049,
+        "fileSha256": "5169c7f29ed7abe26fafca1c79debedf927bff7a0ee0e8a1c115b419d2c6fa6b"
+      },
+      "actualVideoShaVerified": true,
+      "range": {
+        "startFrame": 486,
+        "endFrameExclusive": 568
+      },
+      "scope": {
+        "kind": "range",
+        "startFrame": 486,
+        "endFrameExclusive": 568,
+        "fullFrameCount": 4879,
+        "frameCount": 82,
+        "viewSha256": "726109d03a8c6e4796bff347b394c3484535d925bd3c210feda7d4849da6167c",
+        "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+        "fourSavedSha256": {
+          "captionAuto": "49b880b14e30adbc79f5e644eb60800ad752a29ceb0b23fa28f96315a25d752a",
+          "captionOverrides": "b1c5ebb947ee52a09d8e9664c7f239a34003420f9b9e1b4ec773fed26c8d1102",
+          "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+          "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+        },
+        "playbackStartSample": 714420,
+        "playbackEndSampleExclusive": 834960
+      },
+      "frameCount": 82,
+      "durationMs": 2733,
+      "rulesRefCanonicalSha256": "2353c9ae544f9dda61290693b5d797c4475444d89e28b916a5c2f2f4df65d983",
+      "nativeRuntimeProfileSha256": "0a116b53b26e174c654f1011c5668f43c595286956a663ad9928d78066b664c6",
+      "finalQcStatus": "passed",
+      "completedFrameQcStatus": "passed",
+      "violationCount": 0,
+      "nativeCaptionInspectionCount": 1,
+      "audioClockStatus": "passed",
+      "backgroundVerification": {
+        "range": {
+          "startFrame": 486,
+          "endFrameExclusive": 568
+        },
+        "fullDisplayFrameCount": 4879,
+        "comparedVideoFrames": 82,
+        "comparedAudioSamples": 120540
+      },
+      "fullBackgroundGenerated": false,
+      "fullQcExecuted": false,
+      "humanQuality": "not-evaluated",
+      "formalTrustChanged": false,
+      "paidApiCalls": 0,
+      "newExternalMediaTransfers": 0,
+      "exactReplayMp4BytesIdentical": true,
+      "finiteStateSampleCount": 4
+    },
+    {
+      "candidateId": "panel-comic-frame",
+      "completionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-comic-frame-evidence/completion.json",
+        "fileSha256": "58a514d4067224efa657895fc05111ae1062919e22eb257ecab012871cb5094a",
+        "bytes": 5197317
+      },
+      "video": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-comic-frame-render/presentation-rendered-v002.mp4",
+        "bytes": 1483853,
+        "fileSha256": "e14ab77c96a80780668c791c6a94498ca1fceb47bf1da25f9368bc9e3f7e7085"
+      },
+      "actualVideoShaVerified": true,
+      "range": {
+        "startFrame": 486,
+        "endFrameExclusive": 568
+      },
+      "scope": {
+        "kind": "range",
+        "startFrame": 486,
+        "endFrameExclusive": 568,
+        "fullFrameCount": 4879,
+        "frameCount": 82,
+        "viewSha256": "c73044ef0c4e7525460445883437bb286e7b44ac016f58aeda988dbf12a1aabc",
+        "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+        "fourSavedSha256": {
+          "captionAuto": "49b880b14e30adbc79f5e644eb60800ad752a29ceb0b23fa28f96315a25d752a",
+          "captionOverrides": "9694f82d614d1ebc4a10e6d3dfa488c63e1af6e2574c765482a5991094ac8c56",
+          "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+          "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+        },
+        "playbackStartSample": 714420,
+        "playbackEndSampleExclusive": 834960
+      },
+      "frameCount": 82,
+      "durationMs": 2733,
+      "rulesRefCanonicalSha256": "2353c9ae544f9dda61290693b5d797c4475444d89e28b916a5c2f2f4df65d983",
+      "nativeRuntimeProfileSha256": "0a116b53b26e174c654f1011c5668f43c595286956a663ad9928d78066b664c6",
+      "finalQcStatus": "passed",
+      "completedFrameQcStatus": "passed",
+      "violationCount": 0,
+      "nativeCaptionInspectionCount": 1,
+      "audioClockStatus": "passed",
+      "backgroundVerification": {
+        "range": {
+          "startFrame": 486,
+          "endFrameExclusive": 568
+        },
+        "fullDisplayFrameCount": 4879,
+        "comparedVideoFrames": 82,
+        "comparedAudioSamples": 120540
+      },
+      "fullBackgroundGenerated": false,
+      "fullQcExecuted": false,
+      "humanQuality": "not-evaluated",
+      "formalTrustChanged": false,
+      "paidApiCalls": 0,
+      "newExternalMediaTransfers": 0,
+      "exactReplayMp4BytesIdentical": true,
+      "finiteStateSampleCount": 4
+    }
+  ],
+  "totalNewReviewCandidateFrames": 570,
+  "totalNewReviewCandidateSeconds": 19.0,
+  "humanReviewState": "human-reconfirmation-pending"
+}

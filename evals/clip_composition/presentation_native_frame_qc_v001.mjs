@@ -212,12 +212,9 @@ function deriveRecipes(plan, baselinePlan, autoPresentation, sceneBindings, orch
   const recipes = [];
   for (const [targetIndex, element] of plan.elements.entries()) {
     const group = sceneBindings[targetIndex];
-    let samples = group.selectedKind === 'pulse' ? (() => {
-      const pulse = getPresentationPulseProgramV001({element, canvas: plan.canvas});
-      return [{frame: pulse.normalBeforeFrame, expectedState: 'normal'},
-        {frame: pulse.maximumFrame, expectedState: 'maximum'},
-        {frame: pulse.normalAfterFrame, expectedState: 'normal'}];
-    })() : ['bounce', 'shake'].includes(group.selectedKind)
+    let samples = group.selectedKind === 'pulse'
+      ? getPresentationPulseProgramV001({element, canvas: plan.canvas}).samples
+      : ['bounce', 'shake'].includes(group.selectedKind)
       ? getPresentationCaptionMotionProgramV001({element, canvas: plan.canvas}).samples
       : [{frame: element.startFrame + Math.floor(element.displayFrameCount / 2), expectedState: 'static'}];
     if (renderRange !== null) {

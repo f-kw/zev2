@@ -1,3 +1,4 @@
+import {getPresentationPanelPresetV002} from './presentation_panel_presets_v002.mjs';
 /** One saved automatic Digest. Connections have already been applied to the
  * subtitle-free background; the renderer receives only the common display clock. */
 import assert from 'node:assert/strict';
@@ -14,7 +15,7 @@ import {createOrchestrationContextV001, resolveOrchestrationDrawingViewV001,
   assertOrchestrationDrawingViewMatchesStateV001, exportOrchestrationDrawingViewEvidenceV001}
   from './presentation_orchestration_v001.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
-import {PRESENTATION_PANEL_PRESET_V001, PRESENTATION_EFFECT_TRIAL_PRESETS_V001} from './presentation_effects_v001.mjs';
+import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001} from './presentation_effects_v001.mjs';
 import {PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001} from './presentation_integrity_state_qc_v001.mjs';
 import {getPresentationPulseProgramV001} from './presentation_pulse_v001.mjs';
 import {getPresentationCaptionMotionProgramV001} from './presentation_caption_motion_v001.mjs';
@@ -54,8 +55,8 @@ function assertOnlySelectedPresentationChanged(plan, normalPlan, state) {
       assert.equal(element.presentationMotion.presentation, selected.presentation);
       delete value.presentationMotion;
     } else if (selected?.role === 'Panel accent') {
-      assert.deepEqual(element.visualState.background, PRESENTATION_PANEL_PRESET_V001.background);
-      for (const [key, expected] of Object.entries(PRESENTATION_PANEL_PRESET_V001.textStyle)) {
+      assert.deepEqual(element.visualState.background, getPresentationPanelPresetV002(selected.presentation).background);
+      for (const [key, expected] of Object.entries(getPresentationPanelPresetV002(selected.presentation).textStyle)) {
         assert.equal(element.visualState.textStyle[key], expected);
         value.visualState.textStyle[key] = original.visualState.textStyle[key];
       }

@@ -1,3 +1,4 @@
+import {getPresentationPanelPresetV002} from './presentation_panel_presets_v002.mjs';
 /** One whole-Digest candidate through the existing shared development renderer. */
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -11,7 +12,7 @@ import {createPresentationRendererProcessObserverV001} from './presentation_rend
 import {inspectRenderedMediaWithToolsV001} from './presentation_renderer_qc_v002.mjs';
 import {loadAutoPresentationV001} from './presentation_auto_effects_io_v001.mjs';
 import {resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
-import {PRESENTATION_PANEL_PRESET_V001, PRESENTATION_EFFECT_TRIAL_PRESETS_V001} from './presentation_effects_v001.mjs';
+import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001} from './presentation_effects_v001.mjs';
 import {PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001} from './presentation_integrity_state_qc_v001.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -108,8 +109,8 @@ export async function renderCaptionExpressionStage1CandidateV001({
         assert.equal(element.presentationMotion.presentation, selected.presentation);
         delete value.presentationMotion;
       } else if (selected?.role === 'Panel accent') {
-        assert.deepEqual(element.visualState.background, PRESENTATION_PANEL_PRESET_V001.background);
-        for (const [key, v] of Object.entries(PRESENTATION_PANEL_PRESET_V001.textStyle)) {
+        assert.deepEqual(element.visualState.background, getPresentationPanelPresetV002(selected.presentation).background);
+        for (const [key, v] of Object.entries(getPresentationPanelPresetV002(selected.presentation).textStyle)) {
           assert.equal(element.visualState.textStyle[key], v);
           value.visualState.textStyle[key] = before.elements[index].visualState.textStyle[key];
         }

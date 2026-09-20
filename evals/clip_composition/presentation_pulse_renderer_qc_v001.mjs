@@ -1,15 +1,15 @@
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
-import {getPresentationPulseProgramV001} from './presentation_pulse_v001.mjs';
+import {getPresentationPulseProgramV001, PRESENTATION_PULSE_PRESET_V001} from './presentation_pulse_v001.mjs';
 
 const hashFile = async file => createHash('sha256').update(await readFile(file)).digest('hex');
 
 export const presentationPulseAlphaUnionV001 = states => {
   const boxes = states.map(state => state.inspection?.alphaBounds ?? state.alphaBounds);
-  if (boxes.length !== 3 || boxes.some(box => !box
+  if (boxes.length !== PRESENTATION_PULSE_PRESET_V001.states.length || boxes.some(box => !box
     || !['left', 'top', 'right', 'bottom'].every(key => Number.isInteger(box[key])))) {
-    throw new TypeError('all three inspected Pulse alpha bounds are required');
+    throw new TypeError('all finite inspected Pulse alpha bounds are required');
   }
   const left = Math.min(...boxes.map(box => box.left));
   const top = Math.min(...boxes.map(box => box.top));
@@ -40,11 +40,7 @@ export async function inspectPresentationPulseCompletedFramesV001({
   ffmpegPath, imageMagickPath, processObserver, runProcess, extractFrame,
 }) {
   const program = getPresentationPulseProgramV001({element: record.element, canvas});
-  const samples = [
-    {frame: program.normalBeforeFrame, state: 'normal'},
-    {frame: program.maximumFrame, state: 'maximum'},
-    {frame: program.normalAfterFrame, state: 'normal'},
-  ];
+  const samples = program.samples.map(({frame, expectedState}) => ({frame, state: expectedState}));
   const bounds = presentationPulseAlphaUnionV001(record.pulseStates);
   const geometry = `${bounds.width}x${bounds.height}+${bounds.left}+${bounds.top}`;
   const crop = async file => {
@@ -68,7 +64,7 @@ export async function inspectPresentationPulseCompletedFramesV001({
     const distances = [];
     for (const state of record.pulseStates) {
       const referenceFrame = path.join(scratchDirectory, `${stem}-reference-${state.state}.png`);
-      // These three samples lie outside the common fade, so alpha is exactly
+      // The excursion and its static borders lie outside the common fade, so alpha is exactly
       // one. No free timing, scaling, or user-authored filter enters this QC.
       await runProcess(ffmpegPath, ['-hide_banner', '-loglevel', 'error', '-y',
         '-i', baseFrame, '-i', state.pngPath,
@@ -82,7 +78,7 @@ export async function inspectPresentationPulseCompletedFramesV001({
         referenceFrameFile: referenceFrame, referenceFrameSha256: await hashFile(referenceFrame)});
     }
     evidence.push({frame: sample.frame, expectedState: sample.state,
-      comparisonBasis: 'same-source-frame-three-native-pulse-states',
+      comparisonBasis: 'same-source-frame-finite-native-pulse-states',
       expectedOverlaySha256: record.pulseStates.find(state => state.state === sample.state).pngSha256,
       alphaUnion: bounds, baseFrameFile: baseFrame, baseFrameSha256: await hashFile(baseFrame),
       outputFrameFile: outputFrame, outputFrameSha256: await hashFile(outputFrame), stateDistances: distances});

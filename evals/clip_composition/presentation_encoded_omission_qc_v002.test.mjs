@@ -79,7 +79,7 @@ test('removing a static caption retains the complete unchanged Pulse program and
   }));
   for (const state of f.records[1].pulseStates) assert.ok(result.compositeArguments.includes(state.pngPath));
   const graph = result.compositeArguments[result.compositeArguments.indexOf('-filter_complex') + 1];
-  assert.match(graph, /concat=n=5:v=1:a=0/);
+  assert.match(graph, /concat=n=9:v=1:a=0/);
   assert.match(graph, /atrim=start_sample=32000:end_sample=128000/);
   assert.ok(result.compositeArguments.includes('[timelineAudio]'));
   assert.equal(JSON.stringify(f), before);
@@ -187,12 +187,11 @@ function savedEvidence({pulse = false, changed = 7} = {}) {
     representativeFrame: recipe.representativeFrame, changedPixelsAgainstInstructionOmittedFrame: changed};
   if (pulse) {
     const program = getPresentationPulseProgramV001({element: record.element, canvas: f.plan.canvas});
-    const targets = [{frame: program.normalBeforeFrame, state: 'normal'}, {frame: program.maximumFrame, state: 'maximum'},
-      {frame: program.normalAfterFrame, state: 'normal'}];
+    const targets = program.samples.map(({frame, expectedState}) => ({frame, state: expectedState}));
     const frames = targets.map(target => {
       const base = fileRef('/scratch/base-' + target.frame + '.png'), output = fileRef('/scratch/completed-' + target.frame + '.png');
       artifacts.push(base, output);
-      return {frame: target.frame, expectedState: target.state, comparisonBasis: 'same-source-frame-three-native-pulse-states',
+      return {frame: target.frame, expectedState: target.state, comparisonBasis: 'same-source-frame-finite-native-pulse-states',
         expectedOverlaySha256: record.pulseStates.find(state => state.state === target.state).pngSha256,
         alphaUnion: presentationPulseAlphaUnionV001(record.pulseStates),
         baseFrameFile: base.path, baseFrameSha256: base.fileSha256, outputFrameFile: output.path, outputFrameSha256: output.fileSha256,
@@ -245,7 +244,7 @@ test('a basis or success flag cannot replace frame, graph, media, artifact and a
   }
 });
 
-test('Pulse evidence must preserve all three requested observations and their unique intended states', () => {
+test('Pulse evidence must preserve all moving-frame observations and their unique intended states', () => {
   assert.equal(validatePresentationEncodedOmissionQcEvidenceV002(savedEvidence({pulse: true})).status, 'passed');
   for (const mutate of [
     frames => frames.pop(),

@@ -163,13 +163,12 @@ function validateManifest(manifest) {
 
 function pulseIsValid(record, plan, frames) {
   const program = getPresentationPulseProgramV001({element: record.element, canvas: plan.canvas});
-  const expected = [{frame: program.normalBeforeFrame, state: 'normal'},
-    {frame: program.maximumFrame, state: 'maximum'}, {frame: program.normalAfterFrame, state: 'normal'}];
+  const expected = program.samples.map(({frame, expectedState}) => ({frame, state: expectedState}));
   return Array.isArray(frames) && frames.length === expected.length && frames.every((frame, index) => {
     const target = expected[index], expectedState = record.pulseStates.find(state => state.state === target.state);
     const distances = frame?.stateDistances;
     if (frame?.frame !== target.frame || frame.expectedState !== target.state
-      || frame.comparisonBasis !== 'same-source-frame-three-native-pulse-states'
+      || frame.comparisonBasis !== 'same-source-frame-finite-native-pulse-states'
       || frame.expectedOverlaySha256 !== expectedState.pngSha256
       || !equal(frame.alphaUnion, presentationPulseAlphaUnionV001(record.pulseStates))
       || !hash(frame.baseFrameSha256) || !hash(frame.outputFrameSha256)

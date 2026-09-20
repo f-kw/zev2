@@ -34,7 +34,7 @@ test('range compositing matches every precompression full-program frame through 
         position: {preset: 'bottom-center', alignment: 'center', offsetXPercent: 0, offsetYPercent: -6}},
       ...(kind === 'pulse' ? {presentationPulse: {presentation: 'provisional-pulse', anchorPeakId: 'measured', anchorFrame: 35}}
         : kind === 'static' ? {} : {presentationMotion: {presentation: 'provisional-' + kind,
-          presetVersion: 'presentation-caption-motion-v001'}})};
+          presetVersion: 'presentation-caption-motion-v002'}})};
     const states = kind === 'pulse' ? buildPresentationPulseStateElementsV001({element, canvas})
       : kind === 'static' ? [{state: 'static', element}] : buildPresentationCaptionMotionStateElementsV001({element, canvas});
     const records = [];

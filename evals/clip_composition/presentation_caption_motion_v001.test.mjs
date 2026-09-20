@@ -10,12 +10,12 @@ function caption(kind, frames = kind === 'bounce' ? 20 : 24) {
     sourceRef: {instructionId: 'original-instruction'}, startFrame: 30, endFrameExclusive: 30 + frames,
     displayFrameCount: frames, visualState: {textStyle: {fontSizePx: 96, fontColor: '#ffffff'},
       position: {preset: 'bottom-center', alignment: 'center', offsetXPercent: 0, offsetYPercent: -6}},
-    presentationMotion: {presentation: `provisional-${kind}`, presetVersion: 'presentation-caption-motion-v001'}};
+    presentationMotion: {presentation: `provisional-${kind}`, presetVersion: 'presentation-caption-motion-v002'}};
 }
 
 test('entrances use the fixed subtitle clock, leave stable reading time, and preserve all caption content', () => {
   const expected = {
-    bounce: ['small', 'small', 'middle', 'middle', 'maximum', 'maximum', 'middle', 'middle'],
+    bounce: ['small', 'stable', 'middle', 'between-middle-maximum', 'maximum', 'maximum', 'middle', 'between-middle-stable'],
     shake: ['left-12', 'left-12', 'right-12', 'right-12', 'left-8', 'left-8',
       'right-8', 'right-8', 'left-4', 'left-4', 'right-4', 'right-4'],
   };
@@ -70,7 +70,8 @@ test('short captions, arbitrary motion values, old presets and stacked expressio
 test('native layout must show the prescribed offsets and sizes without clamping or vertical drift', () => {
   const makeBox = (width, height, x = 0) => ({wrapper: {left: 960 - width / 2 + x, top: 900 - height, width, height}});
   const bounce = caption('bounce'), shake = caption('shake');
-  const bounceLayouts = [makeBox(500, 140), makeBox(450, 130), makeBox(550, 150), makeBox(600, 160)];
+  const bounceLayouts = [makeBox(500, 140), makeBox(450, 130), makeBox(550, 150), makeBox(600, 160),
+    makeBox(575, 155), makeBox(525, 145)];
   const shakeLayouts = [0, -12, 12, -8, 8, -4, 4].map(x => makeBox(500, 140, x));
   for (const [element, layoutItems] of [[bounce, bounceLayouts], [shake, shakeLayouts]]) {
     assert.doesNotThrow(() => assertPresentationCaptionMotionLayoutsV001({element, canvas, layoutItems}));
@@ -84,5 +85,5 @@ test('native layout must show the prescribed offsets and sizes without clamping 
     }
   }
   const sameSize = structuredClone(bounceLayouts); sameSize[2] = structuredClone(sameSize[0]);
-  assert.throws(() => assertPresentationCaptionMotionLayoutsV001({element: bounce, canvas, layoutItems: sameSize}), /four fixed sizes/);
+  assert.throws(() => assertPresentationCaptionMotionLayoutsV001({element: bounce, canvas, layoutItems: sameSize}), /every finite interpolated size/);
 });

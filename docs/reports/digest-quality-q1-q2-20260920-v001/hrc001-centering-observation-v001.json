@@ -1,0 +1,566 @@
+{
+  "schemaVersion": "hrc001-centering-saved-observation-v001",
+  "preparedBy": "Codex",
+  "status": "SHORT_AND_WIDE_NATIVE_COMPARISONS_RECORDED_HUMAN_REVIEW_PENDING",
+  "workOrder": "docs/work-orders/DIGEST_Q1_Q2_WORK_ORDER_v001.md",
+  "purpose": "HRC-001の旧ずれと短文・横長修正を保存済み描画検査の数値で支える。見心地の認定は行わない。",
+  "measurementDefinition": {
+    "coordinateSystem": "実PNGの画素座標。right/bottomは排他的境界。中心は左右または上下境界の算術平均。正の横差は右、正の縦差は下。",
+    "panelReference": "保存されたPanel合成PNGのalpha外接矩形を板側の外接矩形として使う。文字のalpha unionが内側に収まり、保存された板なし診断のalphaと一致することを照合した。板単独画像の新規抽出はしていない。",
+    "horizontal": "各行の実描画alpha外接矩形の横中心 − 板側外接矩形の横中心。",
+    "vertical": "全行の実描画alpha外接矩形を合わせた領域の縦中心 − 板側外接矩形の縦中心。",
+    "judgment": "ずれの実測値のみ。独自の係数、品質スコア、人間の見心地判定は設けない。"
+  },
+  "shortCaption": {
+    "before": {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "text": "逃げるやつ?",
+      "displayInterval": {
+        "startFrame": 486,
+        "endFrameExclusive": 568
+      },
+      "representativeFrame": 527,
+      "representativeFrameInCandidate": 527,
+      "panelCompositeAlphaBounds": {
+        "left": 661,
+        "top": 819,
+        "right": 1259,
+        "bottom": 979,
+        "width": 598,
+        "height": 160
+      },
+      "panelCentre": {
+        "x": 960.0,
+        "y": 899.0
+      },
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 690,
+          "top": 865,
+          "right": 1221,
+          "bottom": 958,
+          "width": 531,
+          "height": 93
+        }
+      ],
+      "textAlphaUnionBounds": {
+        "left": 690,
+        "top": 865,
+        "right": 1221,
+        "bottom": 958
+      },
+      "textAlphaUnionCentre": {
+        "x": 955.5,
+        "y": 911.5
+      },
+      "lineHorizontalCentreOffsetsPx": [
+        {
+          "lineIndex": 0,
+          "lineCentreX": 955.5,
+          "offsetFromPanelCentreX": -4.5
+        }
+      ],
+      "textUnionVerticalCentreOffsetPx": 12.5,
+      "logicalLineRects": [
+        {
+          "left": 696,
+          "top": 839.2,
+          "right": 1224,
+          "bottom": 935.2
+        }
+      ],
+      "logicalLineHorizontalCentreOffsetsPx": [
+        0.0
+      ],
+      "textUnionMatchesSavedPlateOmittedAlpha": true,
+      "textAlphaContainedByPanel": true,
+      "publishedPng": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/overlays/10-aca83bb4e738.png",
+        "bytes": 65565,
+        "fileSha256": "4d7772edb2189ff67af4cef12fa80b4ed474971defdbbc9405d0a62d2431a93a"
+      },
+      "recordedPngPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/.render.presentation-renderer-v002-work-DuK20Q/publish/overlays/10-aca83bb4e738.png",
+      "propertiesSha256": "754224416a82eeef12fbf6d2d9ef9ffb84d2f90167a114db77127c3d8754e596",
+      "explicitLineTexts": [
+        "逃げるやつ?"
+      ]
+    },
+    "after": {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "text": "逃げるやつ?",
+      "displayInterval": {
+        "startFrame": 486,
+        "endFrameExclusive": 568
+      },
+      "representativeFrame": 527,
+      "representativeFrameInCandidate": 71,
+      "panelCompositeAlphaBounds": {
+        "left": 661,
+        "top": 819,
+        "right": 1259,
+        "bottom": 975,
+        "width": 598,
+        "height": 156
+      },
+      "panelCentre": {
+        "x": 960.0,
+        "y": 897.0
+      },
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 695,
+          "top": 851,
+          "right": 1226,
+          "bottom": 944,
+          "width": 531,
+          "height": 93
+        }
+      ],
+      "textAlphaUnionBounds": {
+        "left": 695,
+        "top": 851,
+        "right": 1226,
+        "bottom": 944
+      },
+      "textAlphaUnionCentre": {
+        "x": 960.5,
+        "y": 897.5
+      },
+      "lineHorizontalCentreOffsetsPx": [
+        {
+          "lineIndex": 0,
+          "lineCentreX": 960.5,
+          "offsetFromPanelCentreX": 0.5
+        }
+      ],
+      "textUnionVerticalCentreOffsetPx": 0.5,
+      "logicalLineRects": [
+        {
+          "left": 696,
+          "top": 839.2,
+          "right": 1224,
+          "bottom": 935.2
+        }
+      ],
+      "logicalLineHorizontalCentreOffsetsPx": [
+        0.0
+      ],
+      "textUnionMatchesSavedPlateOmittedAlpha": true,
+      "textAlphaContainedByPanel": true,
+      "publishedPng": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-render-v002/overlays/02-aca83bb4e738.png",
+        "bytes": 65517,
+        "fileSha256": "914414e205cc4430e06c0b70a9e1ef982d3180ea63894bccc1aee7c4e39e50af"
+      },
+      "recordedPngPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.panel-short-render-v002.presentation-renderer-v002-work-2t4et1/publish/overlays/02-aca83bb4e738.png",
+      "propertiesSha256": "96a9b67ef4df67ac816801e4cda32471df0e639d903dce775f147cba4ecabe9d",
+      "explicitLineTexts": [
+        "逃げるやつ?"
+      ]
+    },
+    "preserved": {
+      "text": true,
+      "explicitLines": true,
+      "fullDisplayInterval": true,
+      "sourceTimingAndProvenance": true
+    },
+    "difference": {
+      "lineHorizontalCentreOffsetPx": {
+        "before": -4.5,
+        "after": 0.5
+      },
+      "textUnionVerticalCentreOffsetPx": {
+        "before": 12.5,
+        "after": 0.5
+      }
+    },
+    "nativeCalibration": {
+      "containerBounds": {
+        "left": 668,
+        "top": 819.2,
+        "right": 1252,
+        "bottom": 975.2
+      },
+      "uncorrectedPropertiesSha256": "e5b36823c6489c43ebf583f012473167728e172f4bb1bdd93e191c0320855d43",
+      "uncorrectedLineAlphaBounds": [
+        {
+          "left": 693,
+          "top": 846,
+          "right": 1224,
+          "bottom": 939,
+          "width": 531,
+          "height": 93
+        }
+      ],
+      "appliedPixelCorrection": [
+        {
+          "x": 2,
+          "y": 5
+        }
+      ],
+      "calibrationPngs": [
+        {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.panel-short-render-v002.presentation-renderer-v002-work-2t4et1/scratch/frames/02-aca83bb4e738-visible-center-calibration-01.png",
+          "bytes": 65689,
+          "fileSha256": "adfb80d24d9506aa5bf94ad5c92032af1797982a782f708d3b1faf77b9e50a19"
+        }
+      ]
+    }
+  },
+  "wideCaption": {
+    "before": {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "text": "なんかグロいやつに捕まってる",
+      "displayInterval": {
+        "startFrame": 1747,
+        "endFrameExclusive": 1818
+      },
+      "representativeFrame": 1782,
+      "representativeFrameInCandidate": 1782,
+      "panelCompositeAlphaBounds": {
+        "left": 260,
+        "top": 819,
+        "right": 1660,
+        "bottom": 979,
+        "width": 1400,
+        "height": 160
+      },
+      "panelCentre": {
+        "x": 960.0,
+        "y": 899.0
+      },
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 292,
+          "top": 865,
+          "right": 1612,
+          "bottom": 959,
+          "width": 1320,
+          "height": 94
+        }
+      ],
+      "textAlphaUnionBounds": {
+        "left": 292,
+        "top": 865,
+        "right": 1612,
+        "bottom": 959
+      },
+      "textAlphaUnionCentre": {
+        "x": 952.0,
+        "y": 912.0
+      },
+      "lineHorizontalCentreOffsetsPx": [
+        {
+          "lineIndex": 0,
+          "lineCentreX": 952.0,
+          "offsetFromPanelCentreX": -8.0
+        }
+      ],
+      "textUnionVerticalCentreOffsetPx": 13.0,
+      "logicalLineRects": [
+        {
+          "left": 288,
+          "top": 839.2,
+          "right": 1632,
+          "bottom": 935.2
+        }
+      ],
+      "logicalLineHorizontalCentreOffsetsPx": [
+        0.0
+      ],
+      "textUnionMatchesSavedPlateOmittedAlpha": true,
+      "textAlphaContainedByPanel": true,
+      "publishedPng": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/overlays/14-1e8f237bba7d.png",
+        "bytes": 82362,
+        "fileSha256": "bfa7b9b4e0aa5b5716651e8bcb99fca3830577212c09901f222969ba8d347c35"
+      },
+      "recordedPngPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/.render.presentation-renderer-v002-work-DuK20Q/publish/overlays/14-1e8f237bba7d.png",
+      "propertiesSha256": "0c923823e20195758b019c233d4b739f853357f9f990876e0af92d6d2034ff17",
+      "explicitLineTexts": [
+        "なんかグロいやつに捕まってる"
+      ]
+    },
+    "after": {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "text": "なんかグロいやつに捕まってる",
+      "displayInterval": {
+        "startFrame": 1747,
+        "endFrameExclusive": 1818
+      },
+      "representativeFrame": 1782,
+      "representativeFrameInCandidate": 51,
+      "panelCompositeAlphaBounds": {
+        "left": 260,
+        "top": 819,
+        "right": 1660,
+        "bottom": 975,
+        "width": 1400,
+        "height": 156
+      },
+      "panelCentre": {
+        "x": 960.0,
+        "y": 897.0
+      },
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "left": 300,
+          "top": 850,
+          "right": 1620,
+          "bottom": 944,
+          "width": 1320,
+          "height": 94
+        }
+      ],
+      "textAlphaUnionBounds": {
+        "left": 300,
+        "top": 850,
+        "right": 1620,
+        "bottom": 944
+      },
+      "textAlphaUnionCentre": {
+        "x": 960.0,
+        "y": 897.0
+      },
+      "lineHorizontalCentreOffsetsPx": [
+        {
+          "lineIndex": 0,
+          "lineCentreX": 960.0,
+          "offsetFromPanelCentreX": 0.0
+        }
+      ],
+      "textUnionVerticalCentreOffsetPx": 0.0,
+      "logicalLineRects": [
+        {
+          "left": 288,
+          "top": 839.2,
+          "right": 1632,
+          "bottom": 935.2
+        }
+      ],
+      "logicalLineHorizontalCentreOffsetsPx": [
+        0.0
+      ],
+      "textUnionMatchesSavedPlateOmittedAlpha": true,
+      "textAlphaContainedByPanel": true,
+      "publishedPng": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-render/overlays/01-1e8f237bba7d.png",
+        "bytes": 82172,
+        "fileSha256": "885e8e011eb806cd020e5bf47a60da678ca09e744f21d9100865e98b995761c3"
+      },
+      "recordedPngPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.panel-wide-render.presentation-renderer-v002-work-1X5pAR/publish/overlays/01-1e8f237bba7d.png",
+      "propertiesSha256": "b48d4bd87996607c31ea0a2fc8d009bad255bcaa25b546741399a2aace2544a8",
+      "explicitLineTexts": [
+        "なんかグロいやつに捕まってる"
+      ]
+    },
+    "status": "NATIVE_BEFORE_AFTER_COMPARISON_RECORDED",
+    "preserved": {
+      "text": true,
+      "explicitLines": true,
+      "fullDisplayInterval": true,
+      "sourceTimingAndProvenance": true
+    },
+    "difference": {
+      "lineHorizontalCentreOffsetPx": {
+        "before": -8.0,
+        "after": 0.0
+      },
+      "textUnionVerticalCentreOffsetPx": {
+        "before": 13.0,
+        "after": 0.0
+      }
+    },
+    "nativeCalibration": {
+      "containerBounds": {
+        "left": 260,
+        "top": 819.2,
+        "right": 1660,
+        "bottom": 975.2
+      },
+      "uncorrectedPropertiesSha256": "33f1d2249a15dea829d2ad63c8641c4559d0f890d1dd6455c2dc1ff561eb010c",
+      "uncorrectedLineAlphaBounds": [
+        {
+          "left": 299,
+          "top": 846,
+          "right": 1619,
+          "bottom": 940,
+          "width": 1320,
+          "height": 94
+        }
+      ],
+      "appliedPixelCorrection": [
+        {
+          "x": 1,
+          "y": 4
+        }
+      ],
+      "calibrationPngs": [
+        {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.panel-wide-render.presentation-renderer-v002-work-1X5pAR/scratch/frames/01-1e8f237bba7d-visible-center-calibration-01.png",
+          "bytes": 84328,
+          "fileSha256": "eec8bd29aa9652ec8722bcad443d2830f13c8dd29562a4ebe98675b98a016b6b"
+        }
+      ]
+    }
+  },
+  "technicalFinding": "旧版は論理的な行の横中心が板の横中心に一致していても、実際の文字画素の中心が一致しなかった。短文は横4.5 px左・縦12.5 px下、横長は横8 px左・縦13 px下だった。修正版の実画素差は短文が横・縦とも+0.5 px、横長が横・縦とも0 px。両方とも本文、改行、元表示期間と来歴は同じ。",
+  "sourceProfiles": {
+    "beforeDrawingRulesCanonicalSha256": "2a994d788acf4723c27188ecb3da2cdfeaa99679ed15f81a32d5e70025f20a16",
+    "shortAfterDrawingRulesCanonicalSha256": "1a7ba965dd63646ffec484c1fc01b36e1e5cf8d53f589d43724c1f1cf70be04e",
+    "eachResultUsesItsOwnExecutionProfile": true,
+    "oldHashesReboundToCurrentSource": false,
+    "currentSourceProfileEqualityClaimed": false,
+    "wideAfterDrawingRulesCanonicalSha256": "2353c9ae544f9dda61290693b5d797c4475444d89e28b916a5c2f2f4df65d983"
+  },
+  "evidence": {
+    "historicalBindings": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/hrb002-bindings.json",
+      "bytes": 13512,
+      "fileSha256": "c05055bfd5c1e66d6bcda6d8ff2b261626bb30ce1a7ec4605dfaa13d5a2a27b8"
+    },
+    "oldCompletion": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/result.json",
+      "bytes": 216058243,
+      "fileSha256": "ae777525b8b8d1498019ca40957842a78c0b79f59f64ebe9fb376511081da313"
+    },
+    "shortCompletion": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-evidence-v002/completion.json",
+      "bytes": 10888518,
+      "fileSha256": "44152e2546912d45daac24f3b7ee9698a415076f4ce6df43176803de309d6cb6"
+    },
+    "shortDrawResult": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-evidence-v002/draw-result.json",
+      "bytes": 15687105,
+      "fileSha256": "46fe6e30a58365f9e5e6519ac5d6f484d9462779af400f735c6dbf1cb309ce1e"
+    },
+    "actualFilesRehashed": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/hrb002-bindings.json",
+        "bytes": 13512,
+        "fileSha256": "c05055bfd5c1e66d6bcda6d8ff2b261626bb30ce1a7ec4605dfaa13d5a2a27b8"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/result.json",
+        "bytes": 216058243,
+        "fileSha256": "ae777525b8b8d1498019ca40957842a78c0b79f59f64ebe9fb376511081da313"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-evidence-v002/completion.json",
+        "bytes": 10888518,
+        "fileSha256": "44152e2546912d45daac24f3b7ee9698a415076f4ce6df43176803de309d6cb6"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-evidence-v002/draw-result.json",
+        "bytes": 15687105,
+        "fileSha256": "46fe6e30a58365f9e5e6519ac5d6f484d9462779af400f735c6dbf1cb309ce1e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-render-v002/presentation-rendered-v002.mp4",
+        "bytes": 2485102,
+        "fileSha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/overlays/10-aca83bb4e738.png",
+        "bytes": 65565,
+        "fileSha256": "4d7772edb2189ff67af4cef12fa80b4ed474971defdbbc9405d0a62d2431a93a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/overlays/14-1e8f237bba7d.png",
+        "bytes": 82362,
+        "fileSha256": "bfa7b9b4e0aa5b5716651e8bcb99fca3830577212c09901f222969ba8d347c35"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-render-v002/overlays/02-aca83bb4e738.png",
+        "bytes": 65517,
+        "fileSha256": "914414e205cc4430e06c0b70a9e1ef982d3180ea63894bccc1aee7c4e39e50af"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.panel-short-render-v002.presentation-renderer-v002-work-2t4et1/scratch/frames/02-aca83bb4e738-visible-center-calibration-01.png",
+        "bytes": 65689,
+        "fileSha256": "adfb80d24d9506aa5bf94ad5c92032af1797982a782f708d3b1faf77b9e50a19"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-evidence/completion.json",
+        "bytes": 5153433,
+        "fileSha256": "5259161350a257ad290d70235bfea76b23f71102749744c7d0ed2c45efb46d89"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-evidence/draw-result.json",
+        "bytes": 7358417,
+        "fileSha256": "ea92d8f722135b4e4fa435aff276f7c58b81c244921bb1fb5886abfa5b65a01a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-render/presentation-rendered-v002.mp4",
+        "bytes": 2131201,
+        "fileSha256": "290dd256d75bf596cb4775ab3697e778687916f893eae70fa1e148c745a4ccdf"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-render/overlays/01-1e8f237bba7d.png",
+        "bytes": 82172,
+        "fileSha256": "885e8e011eb806cd020e5bf47a60da678ca09e744f21d9100865e98b995761c3"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.panel-wide-render.presentation-renderer-v002-work-1X5pAR/scratch/frames/01-1e8f237bba7d-visible-center-calibration-01.png",
+        "bytes": 84328,
+        "fileSha256": "eec8bd29aa9652ec8722bcad443d2830f13c8dd29562a4ebe98675b98a016b6b"
+      }
+    ],
+    "wideCompletion": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-evidence/completion.json",
+      "bytes": 5153433,
+      "fileSha256": "5259161350a257ad290d70235bfea76b23f71102749744c7d0ed2c45efb46d89"
+    },
+    "wideDrawResult": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-evidence/draw-result.json",
+      "bytes": 7358417,
+      "fileSha256": "ea92d8f722135b4e4fa435aff276f7c58b81c244921bb1fb5886abfa5b65a01a"
+    }
+  },
+  "limits": {
+    "newModelAnalysis": false,
+    "newVideoPerceptualAnalysis": false,
+    "additionalRender": false,
+    "additionalQcExecution": false,
+    "additionalTests": false,
+    "humanVerdict": "NOT_MADE"
+  },
+  "candidates": {
+    "short": {
+      "video": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-render-v002/presentation-rendered-v002.mp4",
+        "bytes": 2485102,
+        "fileSha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118"
+      },
+      "range": {
+        "startFrame": 456,
+        "endFrameExclusive": 593
+      },
+      "frameCount": 137,
+      "durationSeconds": 4.566666666666666,
+      "finalQcStatus": "passed",
+      "finalQcViolations": [],
+      "humanQuality": "HUMAN_REVIEW_PENDING"
+    },
+    "wide": {
+      "video": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-render/presentation-rendered-v002.mp4",
+        "bytes": 2131201,
+        "fileSha256": "290dd256d75bf596cb4775ab3697e778687916f893eae70fa1e148c745a4ccdf"
+      },
+      "range": {
+        "startFrame": 1731,
+        "endFrameExclusive": 1830
+      },
+      "frameCount": 99,
+      "durationSeconds": 3.3,
+      "finalQcStatus": "passed",
+      "finalQcViolations": [],
+      "humanQuality": "HUMAN_REVIEW_PENDING"
+    }
+  }
+}

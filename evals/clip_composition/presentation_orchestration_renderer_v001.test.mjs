@@ -5,7 +5,7 @@ import {mkdtemp, readFile, readdir, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {tmpdir} from 'node:os';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {AUTO_PRESENTATION_RULES_REF_V007} from './presentation_auto_effects_v001.mjs';
+import {AUTO_PRESENTATION_RULES_REF_V008} from './presentation_auto_effects_v001.mjs';
 import {createOrchestrationContextV001, createOrchestrationJudgmentInputV001, fixOrchestrationJudgmentV001,
   resolveOrchestrationDrawingViewV001, restoreOrchestrationDrawingViewEvidenceV001}
   from './presentation_orchestration_v001.mjs';
@@ -58,7 +58,7 @@ async function fixture(t) {
     peaks: [{peakId: 'peak-1', startSample: 75000, endSampleExclusive: 85000, peakSample: 80000}]};
   const decisionInputBytes = jsonBytes({schemaVersion: 'presentation-focus-decision-input-v005', pulseTimingEvidence});
   const captionContext = {baselineRef: {...planRef, canonicalSha256: hash(plan)},
-    decisionInputRef: await save('native-binding.json', decisionInputBytes), renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V007), pulseTimingEvidence};
+    decisionInputRef: await save('native-binding.json', decisionInputBytes), renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V008), pulseTimingEvidence};
   const source = {digestRef: {version: 'synthetic-orchestration-render-v001', sha256: sha('fixed Digest bytes')},
     planRef, timelineRef, mediaRef, planBytes, timelineBytes, playbackSampleRate: 44100, observationSampleRate: 16000,
     captionContext, decisionInputBytes};

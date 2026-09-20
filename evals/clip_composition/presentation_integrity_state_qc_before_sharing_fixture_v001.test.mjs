@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {AUTO_PRESENTATION_RULES_REF_V007, fixAutoPresentationProposalV001} from './presentation_auto_effects_v001.mjs';
+import {AUTO_PRESENTATION_RULES_REF_V008, fixAutoPresentationProposalV001} from './presentation_auto_effects_v001.mjs';
 import {PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
   buildPresentationNativeFrameQcRecipeV001, classifyPresentationNativeFrameRgbV001,
   buildPresentationNativeFrameExtractionArgumentsV001, buildPresentationNativeReferenceArgumentsV001,
@@ -33,7 +33,7 @@ function fixture() {
   const context = {baselineRef: {path: baselineRef.path, fileSha256: baselineRef.fileSha256,
     canonicalSha256: baselineRef.canonicalSha256},
   decisionInputRef: {path: '/fixture/decision.json', fileSha256: hash('decision')},
-  renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007, pulseTimingEvidence: null};
+  renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V008, pulseTimingEvidence: null};
   const autoPresentation = {context, autoProposal: fixAutoPresentationProposalV001({baselinePlan, context,
     proposal: {schemaVersion: 'auto-presentation-proposal-v001', context,
       targetCaptionIds: elements.map(row => row.instructionId), completion: 'complete', exceptions: [], effects: []}})};

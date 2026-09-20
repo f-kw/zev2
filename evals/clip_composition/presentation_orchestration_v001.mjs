@@ -1,6 +1,7 @@
 /** Finite semantic choices, four independent saved records, and one drawing clock. */
 import {createHash} from 'node:crypto';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+import {omitPresentationPanelPlateForInspectionV002} from './presentation_panel_presets_v002.mjs';
 import {sha256AutoPresentationV001, fixAutoPresentationProposalV001,
   createAutoPresentationOverridesV001, editAutoPresentationOverrideV001,
   resolveAutoPresentationV001, materializeFiniteAutoPresentationCaptionV001}
@@ -101,6 +102,8 @@ export function orchestrationCaptionChoiceToSelectionV001(choice) {
   exact(choice, ['preset'], 'finite caption choice');
   if (choice.preset === 'normal') return {role: 'Normal'};
   const name = {scale: ['Vocal accent', 'provisional-vocal'], panel: ['Panel accent', 'provisional-panel'],
+    'panel-graph-paper': ['Panel accent', 'provisional-panel-graph-paper'],
+    'panel-comic-frame': ['Panel accent', 'provisional-panel-comic-frame'],
     bounce: ['Bounce accent', 'provisional-bounce'], shake: ['Shake accent', 'provisional-shake']}[choice.preset];
   require(name !== undefined, 'unknown finite caption choice');
   return {role: name[0], presentation: name[1], scope: 'whole-caption'};
@@ -376,7 +379,8 @@ export function buildOrchestrationNativeQcAlternativeElementsV001(view) {
       element: materializeFiniteAutoPresentationCaptionV001({element: clone(normal), canvas: view.projectedNormalPlan.canvas,
         selection: {role: 'Focus', presentation: 'provisional-focus', scope: 'whole-caption'}})});
     if (row.selection.role === 'Panel accent') {
-      const element = clone(selected); element.visualState.background.color = '#00000000';
+      const element = clone(selected);
+      element.visualState.background = omitPresentationPanelPlateForInspectionV002(element.visualState.background);
       entries.push({kind: 'panel-plate-omitted', element});
     }
     return {captionId: row.captionId, entries};

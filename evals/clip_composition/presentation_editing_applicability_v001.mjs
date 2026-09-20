@@ -20,6 +20,7 @@ import {PRESENTATION_PULSE_PRESET_V001, getPresentationPulseProgramV001,
 import {getPresentationCaptionMotionProgramV001, buildPresentationCaptionMotionStateElementsV001,
   assertPresentationCaptionMotionLayoutsV001} from './presentation_caption_motion_v001.mjs';
 import {resolveVisibleCenterOffsetsV001} from './presentation_renderer_text_layout_v001.mjs';
+import {isPresentationPanelBackgroundV002} from './presentation_panel_presets_v002.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
 
 const directory = path.dirname(fileURLToPath(import.meta.url)), repo = path.resolve(directory, '../..');
@@ -118,7 +119,8 @@ async function inspectState({drawState, props: initialProps, layoutItem, plan, a
   const artifacts = [], prefix = path.join(attempt, key);
   const inspect = input => inspectOverlayPngWithToolV001({instructionId: element.instructionId,
     imageMagickPath: '/opt/homebrew/bin/magick', processObserver, ...input});
-  if (element.visualState.position.preset === 'top-band') {
+  if (element.visualState.position.preset === 'top-band'
+    || isPresentationPanelBackgroundV002(element.visualState.background)) {
     const lineBounds = [];
     for (const line of element.indexedLines) {
       const calibrationPath = prefix + '-calibration-' + line.lineIndex + '.png';

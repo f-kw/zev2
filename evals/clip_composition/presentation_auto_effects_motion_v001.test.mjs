@@ -3,7 +3,7 @@ import {mkdtemp, readFile, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import test from 'node:test';
-import {AUTO_PRESENTATION_RULES_REF_V007, sha256AutoPresentationV001, sha256AutoPresentationStateV001,
+import {AUTO_PRESENTATION_RULES_REF_V008, sha256AutoPresentationV001, sha256AutoPresentationStateV001,
   fixAutoPresentationProposalV001, createAutoPresentationOverridesV001,
   editAutoPresentationOverrideV001, resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {loadAutoPresentationContextV001, loadAutoPresentationV001, saveFixedAutoPresentationV001}
@@ -24,7 +24,7 @@ function fixture() {
         position: {preset: 'bottom-center', alignment: 'center', offsetXPercent: 0, offsetYPercent: -6}}}))};
   const context = {baselineRef: {path: '/synthetic/normal.json', fileSha256: 'a'.repeat(64),
     canonicalSha256: sha256AutoPresentationV001(baselinePlan)}, decisionInputRef: {path: '/synthetic/decision.json', fileSha256: 'b'.repeat(64)},
-    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007, pulseTimingEvidence: null};
+    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V008, pulseTimingEvidence: null};
   return {baselinePlan, context};
 }
 const proposal = (f, name = 'Bounce') => ({schemaVersion: 'auto-presentation-proposal-v001', context: clone(f.context),
@@ -39,7 +39,7 @@ test('entrance expressions preserve the normal plan and Color range while Normal
     const automatic = resolveAutoPresentationV001(args), proposed = JSON.stringify(autoProposal);
     const normalElement = clone(automatic.plan.elements[0]);
     assert.deepEqual(normalElement.presentationMotion,
-      {presentation: motion(name).presentation, presetVersion: 'presentation-caption-motion-v001'});
+      {presentation: motion(name).presentation, presetVersion: 'presentation-caption-motion-v002'});
     delete normalElement.presentationMotion;
     assert.deepEqual(normalElement, f.baselinePlan.elements[0]);
     assert.deepEqual(automatic.plan.elements[1].presentationColorRange,

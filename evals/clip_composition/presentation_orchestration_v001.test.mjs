@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {AUTO_PRESENTATION_RULES_REF_V007, sha256AutoPresentationV001,
+import {AUTO_PRESENTATION_RULES_REF_V008, sha256AutoPresentationV001,
   materializeFiniteAutoPresentationCaptionV001} from './presentation_auto_effects_v001.mjs';
 import {getPresentationCaptionMotionProgramV001} from './presentation_caption_motion_v001.mjs';
 import {createOrchestrationContextV001, createOrchestrationJudgmentInputV001, fixOrchestrationJudgmentV001,
@@ -38,7 +38,7 @@ function fixture({sampleRate = 44100, ids = ['caption-1', 'caption-2', 'caption-
     peaks: [{peakId: 'peak-1', startSample: 75000, endSampleExclusive: 90000, peakSample: 80000}]};
   const decisionInputBytes = serialize({schemaVersion: 'presentation-focus-decision-input-v005', pulseTimingEvidence});
   const captionContext = {baselineRef: {...ref('normal.json', planBytes), canonicalSha256: sha256AutoPresentationV001(plan)},
-    decisionInputRef: ref('native-binding.json', decisionInputBytes), renderingRulesRef: copy(AUTO_PRESENTATION_RULES_REF_V007), pulseTimingEvidence};
+    decisionInputRef: ref('native-binding.json', decisionInputBytes), renderingRulesRef: copy(AUTO_PRESENTATION_RULES_REF_V008), pulseTimingEvidence};
   const source = {digestRef: {version: 'synthetic-fixed-digest-v001', sha256: sha('fixed Digest')},
     planRef: ref('normal.json', planBytes), timelineRef: ref('timeline.json', timelineBytes), mediaRef,
     planBytes, timelineBytes, playbackSampleRate: sampleRate, observationSampleRate: 16000, captionContext, decisionInputBytes};
@@ -250,8 +250,10 @@ test('native QC alternatives retain display time and fixed text geometry, with w
   assert.deepEqual(alternatives[0].entries.map(row => row.kind), ['normal', 'whole-color']);
   assert.equal(alternatives[0].entries[1].element.presentationColorRange.startCodePoint, 0);
   const panel = alternatives[1].entries.find(row => row.kind === 'panel-plate-omitted').element;
-  assert.equal(panel.startFrame, 132); assert.equal(panel.visualState.background.color, '#00000000');
-  assert.deepEqual({...panel.visualState.background, color: '#FFFDF8'}, v.resolvedPlan.elements[1].visualState.background);
+  assert.equal(panel.startFrame, 132); assert.equal(panel.visualState.background.color, 'transparent');
+  const {inspectionPlateOmitted, ...plateGeometry} = panel.visualState.background;
+  assert.equal(inspectionPlateOmitted, true);
+  assert.deepEqual({...plateGeometry, color: '#FFFDF8'}, v.resolvedPlan.elements[1].visualState.background);
   assert.deepEqual(panel.visualState.textStyle, v.resolvedPlan.elements[1].visualState.textStyle);
 });
 

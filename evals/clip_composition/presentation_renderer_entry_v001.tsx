@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useStat
 import {
   AbsoluteFill,
   Composition,
+  Img,
   cancelRender,
   continueRender,
   delayRender,
@@ -14,6 +15,7 @@ import {TelopText, type TelopForegroundSelection} from '../../runner/src/remotio
 import {measureTextLine} from '../../runner/src/telop/text-metrics';
 import type {TelopTextRenderModel} from '../../runner/src/telop/telop-render-model';
 import {buildPresentationColorRunsV001, resolveVisibleCenterOffsetsV001} from './presentation_renderer_text_layout_v001.mjs';
+import {isPresentationPanelBackgroundV002, getPresentationPanelAssetV002} from './presentation_panel_presets_v002.mjs';
 
 export const PRESENTATION_RENDERER_OVERLAY_PROPS_SCHEMA_VERSION =
   'presentation-renderer-overlay-props-v001';
@@ -57,6 +59,8 @@ type VisualState = {
     borderRadiusPx: number;
     paddingXPx: number;
     paddingYPx: number;
+    panelPresetId?: string;
+    inspectionPlateOmitted?: true;
   };
   layout: {
     maxCharsPerLine: number;
@@ -149,6 +153,7 @@ const rgbaWithOpacity = (color: string, opacityPercent: number): string | undefi
 };
 
 const assertProps = (props: PresentationRendererOverlayPropsV001) => {
+  const isPanel = isPresentationPanelBackgroundV002(props.visualState.background);
   if (props.schemaVersion !== PRESENTATION_RENDERER_OVERLAY_PROPS_SCHEMA_VERSION) {
     throw new Error('renderer overlay props schema mismatch');
   }
@@ -201,7 +206,7 @@ const assertProps = (props: PresentationRendererOverlayPropsV001) => {
   if (
     props.renderVisibleCenterCorrectionPx !== undefined
     && (
-      props.visualState.position.preset !== 'top-band'
+      (props.visualState.position.preset !== 'top-band' && !isPanel)
       || props.renderVisibleCenterCorrectionPx.length !== props.indexedLines.length
       || props.renderVisibleCenterCorrectionPx.some(offset => (
         !Number.isInteger(offset?.x) || !Number.isInteger(offset?.y)
@@ -462,6 +467,8 @@ export const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (pro
   const wrapperRef = useRef<HTMLDivElement>(null);
   const measurementRef = useRef<HTMLDivElement>(null);
   const isTopBand = props.visualState.position.preset === 'top-band';
+  const isPanel = isPresentationPanelBackgroundV002(props.visualState.background);
+  const centerVisibleText = isTopBand || isPanel;
   const foregroundSelection = useMemo(() => buildPresentationForegroundSelectionV001(props), [
     props.indexedLines,
     props.inspectionLineIndex,
@@ -522,7 +529,7 @@ export const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (pro
 
   const exact = useMemo(() => buildExactTextModel(props), [fontReady, props]);
   useLayoutEffect(() => {
-    if (!fontReady || !isTopBand || visibleCenterOffsets !== null || settled.current) return;
+    if (!fontReady || !centerVisibleText || visibleCenterOffsets !== null || settled.current) return;
     try {
       const wrapper = wrapperRef.current;
       const measurement = measurementRef.current;
@@ -530,7 +537,7 @@ export const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (pro
         ? []
         : Array.from(measurement.querySelectorAll<SVGGElement>('svg > g'));
       if (wrapper === null || groups.length !== exact.textModel.lines.length) {
-        throw new Error('top band visible text measurement is incomplete');
+        throw new Error('background visible text measurement is incomplete');
       }
       const bandRect = wrapper.getBoundingClientRect();
       const lineBounds = groups.map((group) => {
@@ -559,7 +566,7 @@ export const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (pro
   }, [
     exact.textModel.lines.length,
     fontReady,
-    isTopBand,
+    centerVisibleText,
     props.layoutRules.renderScale,
     visibleCenterOffsets,
   ]);
@@ -568,14 +575,14 @@ export const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (pro
     if (
       settled.current
       || !fontReady
-      || (isTopBand && visibleCenterOffsets === null)
+      || (centerVisibleText && visibleCenterOffsets === null)
       || !foregroundReady
     ) return;
     settled.current = true;
     continueRender(fontHandle);
-  }, [fontHandle, fontReady, foregroundReady, isTopBand, visibleCenterOffsets]);
+  }, [fontHandle, fontReady, foregroundReady, centerVisibleText, visibleCenterOffsets]);
 
-  const centeredTextModel = isTopBand && visibleCenterOffsets !== null
+  const centeredTextModel = centerVisibleText && visibleCenterOffsets !== null
     ? {
       ...exact.textModel,
       lines: exact.textModel.lines.map((line, index) => ({
@@ -590,6 +597,7 @@ export const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (pro
     }
     : exact.textModel;
   const background = props.visualState.background;
+  const panelAsset = getPresentationPanelAssetV002(background);
   const inspectionLineIndex = props.inspectionLineIndex;
   const renderModel = inspectionLineIndex === null
     ? centeredTextModel
@@ -605,10 +613,15 @@ export const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (pro
     transformOrigin: 'top left',
     ...(background ? {
       ...(inspectionLineIndex === null ? {background: background.color} : {}),
+      ...(inspectionLineIndex === null && panelAsset ? {
+        backgroundImage: `url("${panelAsset.dataUrl}")`,
+        backgroundSize: panelAsset.sizing === 'tile' ? '48px 48px' : '100% 100%',
+        backgroundRepeat: panelAsset.sizing === 'tile' ? 'repeat' : 'no-repeat',
+      } : {}),
       borderRadius: background.borderRadiusPx,
       padding: `${background.paddingYPx}px ${background.paddingXPx}px`,
     } : {}),
-    ...(isTopBand ? {
+    ...(centerVisibleText ? {
       width: exact.wrapper.width,
       height: exact.wrapper.height,
       boxSizing: 'border-box',
@@ -632,7 +645,7 @@ export const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (pro
       lineAlign={props.visualState.position.alignment}
       renderModel={model}
       foregroundSelection={measurement ? undefined : foregroundSelection}
-      selectionReady={!measurement && fontReady && (!isTopBand || visibleCenterOffsets !== null)}
+      selectionReady={!measurement && fontReady && (!centerVisibleText || visibleCenterOffsets !== null)}
       onSelectionReady={measurement ? undefined : onSelectionReady}
       onSelectionError={measurement ? undefined : onSelectionError}
     />
@@ -645,7 +658,10 @@ export const ExactOverlay: React.FC<PresentationRendererOverlayPropsV001> = (pro
       data-presentation-render-ready={foregroundReady}
     >
       <div ref={wrapperRef} style={wrapperStyle}>
-        {isTopBand ? (
+        {panelAsset && inspectionLineIndex === null ? (
+          <Img src={panelAsset.dataUrl} aria-hidden="true" style={{position: 'absolute', width: 1, height: 1, opacity: 0}} />
+        ) : null}
+        {centerVisibleText ? (
           <>
             <div style={{
               position: 'absolute',

@@ -164,8 +164,8 @@ test('native Pulse states, exact common renderer and broken completed-frame case
     assert.equal(outcome.exitCode,0,JSON.stringify(outcome));
     assert.equal(outcome.overlayRecords.length,2);assert.equal(outcome.applicationResults.length,2);
     assert.equal(outcome.finalQc.status,'passed');
-    assert.equal(calls.filter(call=>call.kind==='still').length,12);
-    assert.equal(calls.filter(call=>call.kind==='line').length,9);
+    assert.equal(calls.filter(call=>call.kind==='still').length,20);
+    assert.equal(calls.filter(call=>call.kind==='line').length,15);
     assert.equal(outcome.outputMedia.audio.packetPayloadSha256,baseMediaInspection.media.audio.packetPayloadSha256);
     assert.deepEqual(plan.elements,elements);
     results.push({name:'common-render',finalQc:outcome.finalQc,video:outcome.workVideo,
@@ -177,8 +177,8 @@ test('native Pulse states, exact common renderer and broken completed-frame case
       {name:'maximum-replaced-by-normal',change:records=>{records[0].pulseStates[2].pngPath=records[0].pulseStates[0].pngPath;}},
       {name:'pulse-timing-shifted',change:records=>{records[0].element.presentationPulse.anchorFrame+=8;}},
       {name:'pulse-does-not-return',changeGraph:graph=>graph
-        .replace('[1:v]format=rgba,split=2[pulse0state0][pulse0state4]','[1:v]format=rgba[pulse0state0]')
-        .replace('[3:v]format=rgba[pulse0state2]','[3:v]format=rgba,split=2[pulse0state2][pulse0state4]')},
+        .replace('[1:v]format=rgba,split=2[pulse0state0][pulse0state8]','[1:v]format=rgba[pulse0state0]')
+        .replace('[3:v]format=rgba[pulse0state4]','[3:v]format=rgba,split=2[pulse0state4][pulse0state8]')},
     ];
     for (const defect of cases) {
       const records=structuredClone(outcome.overlayRecords);defect.change?.(records);

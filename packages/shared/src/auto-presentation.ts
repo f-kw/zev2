@@ -7,7 +7,7 @@ export interface AutoPresentationFileRef {
 export interface AutoPresentationContext {
   baselineRef: AutoPresentationFileRef & {canonicalSha256: string};
   decisionInputRef: AutoPresentationFileRef;
-  renderingRulesRef: {version: 'auto-presentation-rules-v007'; contentSha256: string};
+  renderingRulesRef: {version: 'auto-presentation-rules-v008'; contentSha256: string};
   pulseTimingEvidence: AutoPresentationPulseTimingEvidence | null;
 }
 export interface AutoPresentationPulseTimingEvidence {
@@ -42,10 +42,10 @@ export interface AutoPresentationVocal {
   presentation: 'provisional-vocal';
   scope: 'whole-caption';
 }
-/** Provisional Panel Accent: one renderer-owned light plate with dark text. */
+/** Finite managed Panel backgrounds with common centered dark text. */
 export interface AutoPresentationPanel {
   role: 'Panel accent';
-  presentation: 'provisional-panel';
+  presentation: 'provisional-panel' | 'provisional-panel-graph-paper' | 'provisional-panel-comic-frame';
   scope: 'whole-caption';
 }
 /** One provisional finite pulse anchored to an existing measured peak. */

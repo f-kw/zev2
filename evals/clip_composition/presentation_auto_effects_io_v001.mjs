@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import {readFile, writeFile} from 'node:fs/promises';
 import {basename, resolve} from 'node:path';
-import {AUTO_PRESENTATION_RULES_REF_V007, sha256AutoPresentationV001,
+import {AUTO_PRESENTATION_RULES_REF_V008, sha256AutoPresentationV001,
   fixAutoPresentationProposalV001, resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {validatePresentationPulseEvidenceV001} from './presentation_pulse_evidence_v001.mjs';
 
@@ -78,7 +78,7 @@ export async function loadAutoPresentationContextV001({baselinePath, decisionInp
     baselineRef: {path: resolve(baselinePath), fileSha256: bytesHash(baselineBytes),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: resolve(decisionInputPath), fileSha256: bytesHash(decisionBytes)},
-    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V007,
+    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V008,
     pulseTimingEvidence,
   };
   resolveAutoPresentationV001({baselinePlan, context});
