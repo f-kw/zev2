@@ -1,0 +1,316 @@
+{
+  "schemaVersion": "digest-quality-q5-render-tool-verification-v001",
+  "status": "passed",
+  "scope": "Q5 source adapter and bounded synthetic tests only; no real C-all comparison or boundary measurement",
+  "sourceRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.mjs",
+    "bytes": 29065,
+    "fileSha256": "3c6ff9619748743ed193ce03f746c8900725444dde014cfa80330ef2bf89cbb1"
+  },
+  "currentTestRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.test.mjs",
+    "bytes": 17003,
+    "fileSha256": "4b2590231c1e8906aebfa34a8c08543484ad57bc1659ba4743c2050fd920ae6c"
+  },
+  "fixtureOnlyRevision": {
+    "beforeTest": {
+      "bytes": 16624,
+      "fileSha256": "bb22095c25760348210b1ee886138ec3bd204fc006a91d5ebc4709c1355b81db"
+    },
+    "afterTest": {
+      "bytes": 17003,
+      "fileSha256": "4b2590231c1e8906aebfa34a8c08543484ad57bc1659ba4743c2050fd920ae6c"
+    },
+    "changes": [
+      "inherit original Normal format field",
+      "set three source-clock/source-segment fields explicitly null in the synthetic caption",
+      "assert full original Normal top-level field set and three null source fields"
+    ],
+    "unchangedFirstFourTestsAndSharedFixturePrefix": {
+      "bytes": 11585,
+      "fileSha256": "41f2d87dd6f682a4029a345957718b71cdacda34bdae75ccde81e093b589ec20"
+    },
+    "otherFourTestsRerun": false,
+    "previousLogsReboundToNewTestBytes": false
+  },
+  "runtime": {
+    "nodeVersion": "v20.19.6",
+    "nodeExecutable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "childPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "nodeOptionsAbsent": true,
+    "normalApprovalForNativeIpc": true,
+    "newDependencies": false,
+    "newModelDownloads": false
+  },
+  "checks": {
+    "orderedVideoAndStereoPcmBytes": true,
+    "reversedVideoOrderRejected": true,
+    "singleRightChannelSampleChangeRejected": true,
+    "extraAndMissingSamplesRejected": true,
+    "observation16kHzAsPlaybackRejected": true,
+    "staleInputRejected": true,
+    "existingOutputOverwriteRejected": true,
+    "policyFileMutationRejected": true,
+    "fixtureAsRealCAllRejected": true,
+    "optionalByteCountIdentityAccepted": true,
+    "otherSourceOrNonNormalBackgroundRejected": true,
+    "commonNormalDrawAndWholeShortReplayAndNativeQc": true,
+    "unsupportedProfileNotPublished": true
+  },
+  "runs": [
+    {
+      "version": "v001",
+      "outputDirectory": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001",
+      "tap": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/render-tool-tests-v001.tap",
+        "bytes": 1709,
+        "fileSha256": "9bd6823a955630bcb4a31cbe3c100b9f9e2e9dd63cd8806c6345163b0dbb5e44"
+      },
+      "tests": {
+        "executed": 5,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0
+      },
+      "testFile": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.test.mjs",
+        "bytes": 16624,
+        "fileSha256": "bb22095c25760348210b1ee886138ec3bd204fc006a91d5ebc4709c1355b81db",
+        "bindingObservation": "reconstructed after the run from the original applied test patch and the exact six-line fixture-only revision; not a contemporaneous execution-time test-file seal"
+      },
+      "executionBoundImplementation": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.mjs",
+        "bytes": 29065,
+        "fileSha256": "3c6ff9619748743ed193ce03f746c8900725444dde014cfa80330ef2bf89cbb1"
+      },
+      "drawingRulesSha256": "073d3f2172cd3d424bb07b07724c7f6fe5fdfc87af5ec123bfa358affc58d98f",
+      "artifactRefs": {
+        "normalCompletion": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/normal/completion.json",
+          "bytes": 450042,
+          "fileSha256": "3c54fd8013bc7a95aa6a8360b03e41cdb461e0b71149a8c34ecf9f501c37d50f"
+        },
+        "joinProof": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/join/proof.json",
+          "bytes": 2389,
+          "fileSha256": "0da4cdad7a3e26330b69f29f8074dbb2bd67bbb96cdd73102ad3575f85669ae5"
+        },
+        "drawResult": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/normal/draw-result.json",
+          "bytes": 492873,
+          "fileSha256": "6395c6fb1a0ed6bb4b4b025bdcf4c558104a0963595626c2756102bbee2fca6a"
+        },
+        "comparison": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/comparison.json",
+          "bytes": 6082,
+          "fileSha256": "00936cb5da61aed69a0adfe2e6e67e3bfd9fa1a516ea78a61a3ca528736d8931"
+        },
+        "fixtureSource": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/source.json",
+          "bytes": 1310,
+          "fileSha256": "664560a6e2a497af398cadc401a5be7e564a896ba835e4a48e3cdfc010dd9040"
+        },
+        "fixtureEdit": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/edit.json",
+          "bytes": 517,
+          "fileSha256": "0bc06fe78c297598fb5949f3646c6b4c85b3d438b2fbbb53667f408752b3a586"
+        },
+        "baseBuild": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/normal/base-build.json",
+          "bytes": 6975,
+          "fileSha256": "279d98bd318eaebb377b82ee265fe0d81b5b1525eeddbd49e9c748502e3ed679"
+        },
+        "after": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/render/presentation-rendered-v002.mp4",
+          "bytes": 52530,
+          "fileSha256": "e55d132fba0e734626b13e5c269a2631d10f4027bb6866ef4c5ad0589b46cdbf"
+        },
+        "base": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/normal/base.mp4",
+          "bytes": 39085,
+          "fileSha256": "3af3f83771bb958e431f0787bf2525122c04d5c25aaad87593630a5d8680af1b"
+        },
+        "lossless": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/join/joined.nut",
+          "bytes": 597112,
+          "fileSha256": "16d891852d216d845278c39d6c8eeb87c1c434acd32134cfb08ce9d882567db9"
+        },
+        "verifiedPcm": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/join/verified-pcm.f32le",
+          "bytes": 460800,
+          "fileSha256": "569979b5844902a0ad27b744785dbcaab6860f2083a90c2b8f97254a876790d0"
+        },
+        "unsupportedFailure": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/normal-native-common-qc/unsupported-normal/failure.json",
+          "bytes": 1311,
+          "fileSha256": "806d950c85e548e37df00569267fe8b8471772e76f168f80dab1bfee5911495e"
+        },
+        "smallJoin": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/lossless-and-aac/join/proof.json",
+          "bytes": 2348,
+          "fileSha256": "60795ce58fde1c85bb2e4cccb962100b2eaa52f8822bfc38b141eaf1ecf57818"
+        },
+        "smallAacClock": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/lossless-and-aac/aac-clock.json",
+          "bytes": 1353,
+          "fileSha256": "08c347bdad466a5245bb19fed13362d1a107565467878905da4580059794cbc4"
+        },
+        "negativeCaseJoin": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001/byte-negative-cases/join/proof.json",
+          "bytes": 2360,
+          "fileSha256": "76905f8a78773ef00340367d9680fa33a9b5b66322898de139100631f31240a3"
+        }
+      },
+      "measurements": {
+        "videoFrames": 36,
+        "comparedYuvBytes": 111974400,
+        "comparedFloat32PcmBytes": 460800,
+        "playbackSampleRate": 48000,
+        "channels": 2,
+        "logicalSamples": 57600,
+        "primingSkipSamples": 1024,
+        "rawDecodedSamples": 58368,
+        "decodedTailSamples": 768,
+        "newBaseToFinalPacketPayloadUnchanged": true,
+        "newBaseToFinalLogicalDecodedPcmUnchanged": true,
+        "exactReplayMethod": "mp4-byte-identical",
+        "exactReplayExpectedFrames": 36,
+        "exactReplayMp4BytesIdentical": true,
+        "nativeCaptionInspections": 1,
+        "nativeSamples": 1,
+        "nativeVisible": true,
+        "inheritedNormalFontSizePx": 94,
+        "automaticJudgmentStatus": "not-processed",
+        "unsupportedProfilePublished": false
+      },
+      "humanQuality": "not-evaluated",
+      "realCandidate": false
+    },
+    {
+      "version": "v002",
+      "outputDirectory": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002",
+      "tap": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/render-tool-tests-v002.tap",
+        "bytes": 1868,
+        "fileSha256": "117ced5b6d4387522e47728f8b744ef4870b8fccdf7c23cde37571caa4fe3b69"
+      },
+      "tests": {
+        "executed": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 4
+      },
+      "testFile": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.test.mjs",
+        "bytes": 17003,
+        "fileSha256": "4b2590231c1e8906aebfa34a8c08543484ad57bc1659ba4743c2050fd920ae6c",
+        "bindingObservation": "measured after the run; current test bytes. The implementation below was bound and rechecked during drawing."
+      },
+      "executionBoundImplementation": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.mjs",
+        "bytes": 29065,
+        "fileSha256": "3c6ff9619748743ed193ce03f746c8900725444dde014cfa80330ef2bf89cbb1"
+      },
+      "drawingRulesSha256": "073d3f2172cd3d424bb07b07724c7f6fe5fdfc87af5ec123bfa358affc58d98f",
+      "artifactRefs": {
+        "normalCompletion": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/normal/completion.json",
+          "bytes": 450186,
+          "fileSha256": "670b87117ba7374508a53a40bbcf6f13609887d1ae8b4718b8f1a0e8ff753174"
+        },
+        "joinProof": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/join/proof.json",
+          "bytes": 2389,
+          "fileSha256": "19f29a81945308f6215b08d85ae9222e3934cbd5c58c2b74dbf99c9768478ce9"
+        },
+        "drawResult": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/normal/draw-result.json",
+          "bytes": 493093,
+          "fileSha256": "c86a471f4b7d493adc5c24e741953608ae452d9fc0fb6084e14cf9b29394896b"
+        },
+        "comparison": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/comparison.json",
+          "bytes": 6116,
+          "fileSha256": "86470fd0ad17b60bd0b22c5d60b2f376da774ad02430724b87df2fe7b4f64857"
+        },
+        "fixtureSource": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/source.json",
+          "bytes": 1310,
+          "fileSha256": "97dd9ada9e812838369210877b4f47789b981e658d04e8b67048de7778a5b9bd"
+        },
+        "fixtureEdit": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/edit.json",
+          "bytes": 517,
+          "fileSha256": "f48d1827a20d5cbb5eeaf70b62cbc366ee44d70bbebf5917556ae45f5266adbc"
+        },
+        "baseBuild": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/normal/base-build.json",
+          "bytes": 6975,
+          "fileSha256": "01801a78cb4cbfa380ffe89b1920dd77e00fd4a0d8baedaddd59ec3ddbe4c411"
+        },
+        "after": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/render/presentation-rendered-v002.mp4",
+          "bytes": 52530,
+          "fileSha256": "e55d132fba0e734626b13e5c269a2631d10f4027bb6866ef4c5ad0589b46cdbf"
+        },
+        "base": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/normal/base.mp4",
+          "bytes": 39085,
+          "fileSha256": "3af3f83771bb958e431f0787bf2525122c04d5c25aaad87593630a5d8680af1b"
+        },
+        "lossless": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/join/joined.nut",
+          "bytes": 597112,
+          "fileSha256": "16d891852d216d845278c39d6c8eeb87c1c434acd32134cfb08ce9d882567db9"
+        },
+        "verifiedPcm": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/join/verified-pcm.f32le",
+          "bytes": 460800,
+          "fileSha256": "569979b5844902a0ad27b744785dbcaab6860f2083a90c2b8f97254a876790d0"
+        },
+        "unsupportedFailure": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v002/normal-native-common-qc/unsupported-normal/failure.json",
+          "bytes": 1311,
+          "fileSha256": "ff104f7ce1de62cab2159f75a9e2d5c5d4fb944c6017b7ce2b404187132631f4"
+        }
+      },
+      "measurements": {
+        "videoFrames": 36,
+        "comparedYuvBytes": 111974400,
+        "comparedFloat32PcmBytes": 460800,
+        "playbackSampleRate": 48000,
+        "channels": 2,
+        "logicalSamples": 57600,
+        "primingSkipSamples": 1024,
+        "rawDecodedSamples": 58368,
+        "decodedTailSamples": 768,
+        "newBaseToFinalPacketPayloadUnchanged": true,
+        "newBaseToFinalLogicalDecodedPcmUnchanged": true,
+        "exactReplayMethod": "mp4-byte-identical",
+        "exactReplayExpectedFrames": 36,
+        "exactReplayMp4BytesIdentical": true,
+        "nativeCaptionInspections": 1,
+        "nativeSamples": 1,
+        "nativeVisible": true,
+        "inheritedNormalFontSizePx": 94,
+        "automaticJudgmentStatus": "not-processed",
+        "unsupportedProfilePublished": false
+      },
+      "humanQuality": "not-evaluated",
+      "realCandidate": false
+    }
+  ],
+  "limitations": [
+    "Real C-all omission boundary remains unproved; no candidate render job or comparison media was made.",
+    "Synthetic speech/caption content does not establish semantic omission correctness or human viewing/listening approval.",
+    "Retained-byte equality applies before new H.264/AAC encoding; post-encode differences are not claimed to be confined to the omission.",
+    "The real entry remains pinned to C-all original media/plan/timeline and rejects fixture sources."
+  ],
+  "existingProductionFilesChanged": 0,
+  "newQ5AdapterFiles": 1,
+  "newDirectTestFiles": 1,
+  "oldQ4TestsRerun": 0,
+  "realCandidateVideos": 0,
+  "newExternalMediaTransfers": 0,
+  "paidApiCalls": 0
+}
