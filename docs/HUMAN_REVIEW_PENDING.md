@@ -34,6 +34,22 @@ HRB-003の実UI操作は未実施。正式な復旧根拠・許可された操�
 
 ---
 
+## 0.2 HRS-20260920-001 人間レビュー結果
+
+kawafmmがPOINT1〜4を確認し、以下を判断した。
+
+- Normal Cut / Black Separator: 両方使用可。黒を入れるかは文脈・バリエーションの選択であり、人間へ微差の優劣比較を繰り返し要求しない。
+- Soft Separator: POINT2内のフェードは良好。表現自体を採用。
+- Panel Accent: 表現自体は採用。必要なら最も目立ってよい。ただし字幕と背景板のセンタリングは必須品質条件で、背景は色違いだけでなく画像バリエーションが必要。
+- Bounce / Pulse / Shakeを含む動き系: 方向性は高評価で採用。拡大縮小がカクカク見えるため、スケール変化を持つpresetは滑らかさの修正が必要。
+- POINT2の提示metadataはPanelとSoftフェードを一つの区間へ束ねていたため、人間回答は機能実体へ分離して帰属した。歴史的な提示記録自体は書き換えない。
+
+詳細な原文・帰属・反映範囲は `reports/human-review-session-20260920-v001/responses.json` を正本記録とする。
+
+HR-006の全体使い分け、HR-009のNormal基準、HRB-003の実UI操作・待ち時間体感は今回のPOINT1〜4だけでは完了扱いにしない。
+
+---
+
 ## 1. 現在のHuman Review Batch
 
 ### HRB-001 — 自動演出入りDigestを一本で見る
@@ -136,88 +152,94 @@ Edge操作環境の `ERR_BLOCKED_BY_CLIENT` が正式な手順で解消し、実
 
 ### HR-001 — Panel Accent 正式採用
 
-status: HUMAN_REVIEW_PENDING
-技術状態: 技術成立済み
+status: HUMAN_REVIEWED_CHANGE_REQUIRED
+decision: ADOPT_WITH_CHANGE
 対象Batch: HRB-001
 
-問い:
-説明・要点の字幕にPanelを使ったとき、自然な変化として許容できるか。
+人間判断:
+- Panel/背景板という表現自体は採用。
+- 必要に応じて画面内で最も目立つ表現になってよい。
+- 「目立ちすぎないこと」を固定制約にしない。
 
-反映先:
-- Panelの正式採用状態
-- 自動selectorでPanelを許可する意味役割
+必須修正:
+- 背景板に対する字幕のセンタリングを綺麗に成立させる。
+- 背景のバリエーションを色違いだけにせず、画像を使うバリエーションを用意する。
+
+再レビュー:
+修正後、センタリングと画像背景バリエーションの代表ポイントだけを短いPoint Reviewで確認する。
 
 反映してはいけない範囲:
-- Color / Scale / Pulse等の採用状態
 - Panelを全字幕へ増やす判断
-
+- 他presetの採否
 ---
 
 ### HR-002 — Pulse Accent 正式採用
 
-status: HUMAN_REVIEW_PENDING
-技術状態: 技術成立済み
+status: HUMAN_REVIEWED_CHANGE_REQUIRED
+decision: ADOPT_WITH_CHANGE
 対象Batch: HRB-001
 
-問い:
-実測音声ピークに同期した短いPulseが、内容の勢いとして自然に見えるか。
+人間判断:
+POINT3でBounce / Shake / Pulseをまとめて確認し、動き系の機能は「とても良い」と評価。Pulseをバリエーションとして使用する方向を採用する。
 
-反映先:
-- Pulse正式採用
-- Pulseを許可する反応・勢いの条件
+必須修正:
+Pulseのように拡大縮小を使う動きは、カクカク見えないよう時間補間・状態数・動作曲線を改善する。
 
-禁止:
-一例の違和感からPulse全体を廃止しない。対象文脈を記録する。
+注意:
+人間は「拡大縮小が荒い」と述べており、特定preset名を原因として指定していない。技術上スケール変化を持つ実装へ修正を割り当てる。
 
+再レビュー:
+滑らかさ修正後、代表箇所だけを短いPoint Reviewで確認する。
 ---
 
 ### HR-003 — Bounce Accent 正式採用
 
-status: HUMAN_REVIEW_PENDING
-技術状態: 工程Iで技術成立
+status: HUMAN_REVIEWED_CHANGE_REQUIRED
+decision: ADOPT_WITH_CHANGE
 対象Batch: HRB-001
-参考技術候補SHA:
-`36f3863fdd3c3c601459d5b5547e1a7c3df014dd8b026c3570c31d176a3e405b`
 
-問い:
-反応・短い発話の入口表現として自然か。強すぎないか。
+人間判断:
+POINT3でBounce / Shake / Pulseをまとめて確認し、動き系の機能は「とても良い」と評価。Bounceをバリエーションとして使用する方向を採用する。
 
+必須修正:
+Bounceの拡大縮小を含む動きは、カクカク見えないよう滑らかさを改善する。
+
+再レビュー:
+修正後、代表箇所だけを短いPoint Reviewで確認する。
 ---
 
 ### HR-004 — Shake Accent 正式採用
 
-status: HUMAN_REVIEW_PENDING
-技術状態: 工程Iで技術成立
+status: HUMAN_REVIEWED
+decision: ADOPT
 対象Batch: HRB-001
-参考技術候補SHA:
-`36f3863fdd3c3c601459d5b5547e1a7c3df014dd8b026c3570c31d176a3e405b`
 
-問い:
-強い反応を表す揺れが、動画全体の中で自然か。
+人間判断:
+POINT3でBounce / Shake / Pulseをまとめて確認し、動き系の機能は「とても良い」と評価。Shakeをバリエーションとして使用する方向を採用する。
 
 注意:
-適用検査の初回待ち時間は別の性能課題。人間品質判断と混同しない。
-
+今回の具体的な不満は「拡大縮小が荒くてカクカク見える」。Shakeへ存在しないスケール問題を勝手に割り当てない。将来Shake自体に別の違和感が見つかった場合は新しいreview_idで扱う。
 ---
 
 ### HR-005 — Soft Separator 正式採用
 
-status: HUMAN_REVIEW_PENDING
-技術状態: 工程IIで技術成立
+status: HUMAN_REVIEWED
+decision: ADOPT
 対象Batch: HRB-001
-参考技術候補SHA:
-`38fe5cb7e5a4bd546a667926f71d98815af1dc848242d947d620f205ceb3d662`
 
-問い:
-通常Cut / Black Separatorとは別の接続表現として、Softが自然に使えるか。
+人間判断:
+POINT2区間に含まれていたフェードについて「良かった」と明示された。Soft Separatorのフェード表現自体を使用可とする。
 
-既存の人間判断:
-- Normal Cut: 使用可
-- Black Separator: 使用可
-- 両者を微差でも使い分けてよい
+適用範囲:
+- 今回観測したSoft Separatorのフェード表現
+- Softを接続表現のバリエーションとして保持すること
 
-上記を再レビュー項目へ戻さない。
+適用しない範囲:
+- Softを置く場所の自動選択が常に正しいという判断
+- Normal Cut / Black Separatorとの優劣順位
 
+既存判断:
+Normal Cut / Black Separatorも双方使用可。微差を人間へ繰り返し比較させない。
 ---
 
 ### HR-006 — 自動演出の使い分け全体
@@ -246,15 +268,22 @@ status: HUMAN_REVIEW_PENDING
 
 ### HR-007 — 修正後Digestの見心地・音・接続
 
-status: HUMAN_REVIEW_PENDING
+status: PARTIALLY_HUMAN_REVIEWED_CHANGE_REQUIRED
 技術状態: 工程IV媒体・QC成立
 対象Batch: HRB-002
 対象SHA:
 `1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6`
 
-問い:
-人間overrideを反映した全編が、そのまま使える動画として自然か。
+今回確認済み:
+- POINT1のBlack Separator変更は違和感なし。
+- POINT2のPanel変更は機能自体は使用可だが、センタリングと背景バリエーションに修正が必要。
+- POINT2内のSoftフェードは良好。
 
+未確認:
+全編を通した「そのまま使える動画」としての自然さは、今回のポイントレビューだけでは確認済みにしない。
+
+次:
+Panel修正後の短いPoint Reviewへ回す。
 ---
 
 ### HR-008 — 後修正UIの実操作
@@ -290,17 +319,20 @@ HRB-001の完成Digestの通常会話部分で確認することを優先する�
 
 ### HR-010 — override後の全体整合感
 
-status: HUMAN_REVIEW_PENDING
+status: PARTIALLY_HUMAN_REVIEWED
 技術状態: 工程IV全編生成成立
 対象Batch: HRB-002
 
-問い:
-局所変更を入れても、前後の演出・接続・字幕との統一感が崩れないか。
+今回確認済み:
+- 黒接続の局所変更には違和感なし。
+- Panelという局所変更自体は成立するが、表示品質の修正が必要。
+
+未確認:
+局所変更を入れた全編全体の統一感は、ポイントレビューから全編視聴済みへ拡張しない。
 
 反映先:
 必要なら後修正UIの候補提示や局所確認の見せ方。
 自動selector全体へ無条件に一般化しない。
-
 ---
 
 ### HR-011 — 待ち時間の人間体感
@@ -325,11 +357,14 @@ status: WAITING_FOR_UI_ACCEPTANCE
 
 ## 3. 既に人間判断済みでPendingへ戻さない事項
 
-- Normal Cut と Black Separatorは双方使用可。
+- Normal Cut と Black Separatorは双方使用可。微差の優劣を人間へ繰り返し比較させない。
 - 両者に微差しかなくても、役割が違うため両方使ってよい。
 - ランダムなprocess乱数ではなく、再現可能な変化を用いて複数表現を使う方向。
 - Color Accentは採用済み。
 - Scale Accentは採用済み。
+- Soft SeparatorはPOINT2内のフェード確認により採用済み。
+- Panel Accentは採用方向だがセンタリングと画像背景バリエーションの修正待ち。
+- Bounce / Pulse / Shakeを含む動き系は採用方向。Bounce / Pulseなどスケール変化を持つ動きは滑らかさ修正待ち。
 
 新しい具体的な成果物で別の問題が出た場合だけ、新しいreview_idとして登録する。
 
