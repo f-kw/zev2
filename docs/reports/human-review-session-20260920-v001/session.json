@@ -9,7 +9,7 @@
     "docs/reports/digest-presentation-editing-stage4-sources-20260918/DEVELOPMENT_HANDOFF.md"
   ],
   "createdAt": "2026-09-20T02:39:42.215750+00:00",
-  "status": "POINT_COMPARISON_PRESENTED_AWAITING_HUMAN_REVIEW",
+  "status": "HUMAN_POINT_REVIEW_RECORDED_CHANGES_PENDING",
   "batches": [
     {
       "batchId": "HRB-001",
@@ -33,8 +33,8 @@
       "fps": 30,
       "durationSeconds": 162.23333333333332,
       "presented": true,
-      "viewingScopeConfirmed": false,
-      "humanDecision": null,
+      "viewingScopeConfirmed": true,
+      "humanDecision": "機能別・指摘別の結果はresponses.jsonへ分離",
       "savedPlanAndJudgmentBindings": {
         "path": "hrb001-bindings.json",
         "fileSha256": "b370cb0a8c03b2e6da9f0b959347132462b42e08e66471f6572edd35aa291ecb",
@@ -67,7 +67,8 @@
         }
       ],
       "wholeDigestViewed": false,
-      "viewingStatus": "NOT_CONFIRMED"
+      "viewingStatus": "POINT_REVIEW_REPORTED_BY_HUMAN",
+      "viewingEvidence": "本人のPOINT1〜4への回答。再生操作や視聴の全秒数を自動計測した認定ではない。"
     },
     {
       "batchId": "HRB-002",
@@ -86,8 +87,8 @@
       "fps": 30,
       "durationSeconds": 162.63333333333333,
       "presented": true,
-      "viewingScopeConfirmed": false,
-      "humanDecision": null,
+      "viewingScopeConfirmed": true,
+      "humanDecision": "機能別・指摘別の結果はresponses.jsonへ分離",
       "changePurpose": "技術検証用の字幕一件と接続一件の変更。本人が望んだ改善や自動版より優れることを前提にしない。",
       "savedPlanAndJudgmentBindings": {
         "path": "hrb002-bindings.json",
@@ -109,7 +110,8 @@
         }
       ],
       "wholeDigestViewed": false,
-      "viewingStatus": "NOT_CONFIRMED"
+      "viewingStatus": "POINT_REVIEW_REPORTED_BY_HUMAN",
+      "viewingEvidence": "本人のPOINT1〜4への回答。再生操作や視聴の全秒数を自動計測した認定ではない。"
     },
     {
       "batchId": "HRB-003",
@@ -170,7 +172,7 @@
       "followingAction": "本人へ実在ローカルHTMLのリンクを提示。自動表示の別経路は試さない。"
     }
   ],
-  "advisorJudgmentThisSession": null,
+  "advisorJudgmentThisSession": "相談役による先行Git記録あり。本人判断とは区別し、responses.jsonのadvisorPriorRecordsへ原形を保存。",
   "reviewMode": "point-only",
   "localGuide": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/ポイント比較.html",
   "comparisonPoints": "comparison-points.json",
@@ -182,9 +184,47 @@
       "pointIds": [
         "panel"
       ],
-      "decision": null,
-      "status": "AWAITING_HUMAN_RESPONSE",
-      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+      "decision": "ADOPT",
+      "status": "HUMAN_REVIEWED_CHANGE_REQUIRED",
+      "scopeLimit": "本人はPanel機能自体を使用可と明示。提示時のreviewIds欠落を補正し、POINT2/4の2媒体へ束縛。表示修正は未実装。",
+      "outcomeRef": "responses.json#HR-001",
+      "changeRequestRefs": [
+        "HRC-001",
+        "HRC-002"
+      ],
+      "actualResponsePoints": [
+        "caption",
+        "panel"
+      ],
+      "decisionArtifactRefs": [
+        {
+          "pointId": "caption",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 444,
+          "endFrameExclusive": 581,
+          "fps": 30
+        },
+        {
+          "pointId": "caption",
+          "batchId": "HRB-002",
+          "artifactSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/02_一件修正版.mp4",
+          "startFrame": 456,
+          "endFrameExclusive": 593,
+          "fps": 30
+        },
+        {
+          "pointId": "panel",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 1719,
+          "endFrameExclusive": 1818,
+          "fps": 30
+        }
+      ]
     },
     {
       "reviewId": "HR-002",
@@ -193,9 +233,13 @@
       "pointIds": [
         "motion"
       ],
-      "decision": null,
-      "status": "AWAITING_HUMAN_RESPONSE",
-      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+      "decision": "ADOPT",
+      "status": "HUMAN_REVIEWED_SHARED_CHANGE_PENDING",
+      "scopeLimit": "動き系として機能使用可・高評価。原因presetは未特定の共通課題。個別欠陥の認定や除外は行わない。",
+      "outcomeRef": "responses.json#HR-002",
+      "changeRequestRefs": [
+        "HRC-003"
+      ]
     },
     {
       "reviewId": "HR-003",
@@ -204,9 +248,13 @@
       "pointIds": [
         "motion"
       ],
-      "decision": null,
-      "status": "AWAITING_HUMAN_RESPONSE",
-      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+      "decision": "ADOPT",
+      "status": "HUMAN_REVIEWED_SHARED_CHANGE_PENDING",
+      "scopeLimit": "動き系として機能使用可・高評価。原因presetは未特定の共通課題。個別欠陥の認定や除外は行わない。",
+      "outcomeRef": "responses.json#HR-003",
+      "changeRequestRefs": [
+        "HRC-003"
+      ]
     },
     {
       "reviewId": "HR-004",
@@ -215,9 +263,13 @@
       "pointIds": [
         "motion"
       ],
-      "decision": null,
-      "status": "AWAITING_HUMAN_RESPONSE",
-      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+      "decision": "ADOPT",
+      "status": "HUMAN_REVIEWED_SHARED_CHANGE_PENDING",
+      "scopeLimit": "動き系として機能使用可・高評価。原因presetは未特定の共通課題。個別欠陥の認定や除外は行わない。",
+      "outcomeRef": "responses.json#HR-004",
+      "changeRequestRefs": [
+        "HRC-003"
+      ]
     },
     {
       "reviewId": "HR-005",
@@ -226,9 +278,11 @@
       "pointIds": [
         "caption"
       ],
-      "decision": null,
-      "status": "AWAITING_HUMAN_RESPONSE",
-      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+      "decision": "ADOPT",
+      "status": "HUMAN_REVIEWED",
+      "scopeLimit": "POINT2で良かったと明示されたフェード表現を使用可。Panel修正や自動配置全般へ広げない。",
+      "outcomeRef": "responses.json#HR-005",
+      "changeRequestRefs": []
     },
     {
       "reviewId": "HR-006",
@@ -236,8 +290,10 @@
       "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
       "pointIds": [],
       "decision": null,
-      "status": "WHOLE_DIGEST_REVIEW_NOT_PERFORMED",
-      "scopeLimit": "全編の使い分け・見心地・単調さは今回のポイント提示で確認済みにしない。局所感想が返ればその範囲だけ保存する。"
+      "status": "HUMAN_REVIEW_PENDING",
+      "scopeLimit": "全編の使い分け・見心地・単調さは今回のポイント提示で確認済みにしない。局所感想が返ればその範囲だけ保存する。",
+      "outcomeRef": "responses.json#HR-006",
+      "changeRequestRefs": []
     },
     {
       "reviewId": "HR-009",
@@ -247,8 +303,10 @@
         "caption"
       ],
       "decision": null,
-      "status": "AWAITING_HUMAN_RESPONSE",
-      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+      "status": "HUMAN_REVIEW_PENDING",
+      "scopeLimit": "通常字幕の基準について明示採否なし。Panelとフェードの回答を流用しない。",
+      "outcomeRef": "responses.json#HR-009",
+      "changeRequestRefs": []
     },
     {
       "reviewId": "HR-007",
@@ -259,8 +317,13 @@
         "caption"
       ],
       "decision": null,
-      "status": "AWAITING_HUMAN_RESPONSE",
-      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+      "status": "PARTIALLY_HUMAN_REVIEWED_CHANGE_REQUIRED",
+      "scopeLimit": "POINT1の局所接続に違和感なし。POINT2はPanel機能使用可・表示修正必要、フェード使用可。 全編視聴・全体品質の認定はしない。",
+      "outcomeRef": "responses.json#HR-007",
+      "changeRequestRefs": [
+        "HRC-001",
+        "HRC-002"
+      ]
     },
     {
       "reviewId": "HR-010",
@@ -271,8 +334,13 @@
         "caption"
       ],
       "decision": null,
-      "status": "AWAITING_HUMAN_RESPONSE",
-      "scopeLimit": "提示したポイントのみ。視聴範囲と使用許可は本人の実際の回答で確定。"
+      "status": "PARTIALLY_HUMAN_REVIEWED_CHANGE_REQUIRED",
+      "scopeLimit": "接続の局所変更には違和感なし。Panel機能は使用可だが表示品質修正が必要。 全編視聴・全体品質の認定はしない。",
+      "outcomeRef": "responses.json#HR-010",
+      "changeRequestRefs": [
+        "HRC-001",
+        "HRC-002"
+      ]
     }
   ],
   "staticHtmlPlaybackVerification": "自動ブラウザー表示が拒否されたため未確認。構文・区間対応・参照MP4の実在だけを確認する。",
@@ -284,5 +352,28 @@
     "linkedMediaExist": true,
     "independentRangeReview": "6区間の対応・修正版の12frame移動・黒挿入差が一致。停止条件を指定終端へ揃えた。",
     "browserPlayback": "未確認。URL policy拒否後は別経路で自動検査しない。"
-  }
+  },
+  "authoritativeHumanResponse": {
+    "path": "human-response-original-v001.md",
+    "fileSha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98",
+    "bytes": 5572,
+    "receivedFrom": "本人からこの会話へ届いた直接の回答",
+    "date": "2026-09-20"
+  },
+  "reviewResultsRef": "responses.json",
+  "nextDevelopmentTask": "../../task-012-Panel表示品質と動きの滑らかさ改善.md",
+  "sourceRecordsIntegrated": {
+    "advisorCommits": [
+      "f9336243",
+      "5a0efcff",
+      "039f59e5dca8d7c607281b14d1262a291a2c2982"
+    ],
+    "handling": "先行記録を保持して取り込み、本人の直接原文を正本として帰属と未実装状態を訂正。"
+  },
+  "implementationChangesAfterReview": [],
+  "openChangeRequestIds": [
+    "HRC-001",
+    "HRC-002",
+    "HRC-003"
+  ]
 }

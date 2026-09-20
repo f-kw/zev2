@@ -46,4 +46,22 @@ Codex/Agentは次を守る。
 - 技術完了報告では、新規Human Review Pendingの有無と追加review_idを必ず確認する。
 - Pending項目を無言で削除しない。
 
-現時点では、字幕演出のPanel / Pulse / Bounce / Shake、Soft Separator、自動使い分け全体、修正後Digest、現行Normal基準、後修正UIと待ち時間体感を台帳へ登録済み。Normal Cut / Black Separator、Color、Scaleの既存人間判断はPendingへ戻さない。
+台帳作成時には、字幕演出のPanel / Pulse / Bounce / Shake、Soft Separator、自動使い分け全体、修正後Digest、現行Normal基準、後修正UIと待ち時間体感を登録した。2026-09-20の回答受領後は、次節と台帳の現在状態を参照する。Normal Cut / Black Separator、Color、Scaleの既存人間判断はPendingへ戻さない。
+
+## 2026-09-20 Point Review の回答受領後
+
+kawafmmの回答（原文）：[POINT 1〜4のレビュー結果](../human-review-session-20260920-v001/human-response-original-v001.md)。今回の対象は保存済みHRB-001／002の短いポイントで、全編視聴済みを意味しない。
+
+Codexの解釈：以下の採用判断と修正要求を分離し、[セッション記録](../human-review-session-20260920-v001/session.json)、[回答と対象の対応](../human-review-session-20260920-v001/responses.json)、[人間レビュー台帳](../../HUMAN_REVIEW_PENDING.md)へ保存した。
+
+- **採用判断**：Normal Cut／Black Separatorは双方使用可で、AIが文脈に応じて選ぶ。微差のA/B比較を繰り返し要求しない。POINT 2のフェードは使用可。Panelと動き系も機能自体は使用可で、動き系は高評価。
+- **未実装の修正要求**：Panelのセンタリングを必須品質条件にする。色違いだけでなく画像・テクスチャ・意匠そのものが異なる背景を用意する。拡大縮小を含む動きを滑らかにする。
+- **帰属の注意**：Panelは必要時に最も目立ってよく、目立ちすぎないことを固定制約にしない。動きを弱める要求ではない。原因となるpreset・変化箇所は未特定で、複数の動きをまとめて見た回答を特定presetの欠陥へ割り当てない。Panelとフェードの判断を分ける。
+- **次タスク**：[task-012 — Panel表示品質と動きの滑らかさ改善](../../task-012-Panel表示品質と動きの滑らかさ改善.md)に整理済み。実装未着手・修正後の確認未実施。修正要求が残ることを理由に機能使用可を未採用へ戻さない。
+- **未評価範囲**：全体使い分け・テンポ・単調さ、現行Normal基準、修正版の全編評価は今回の回答から採用へ移さない。後修正UIと待ち時間体感の環境待ちは継続する。
+- **レビュー運用**：細かな演出・差分はPoint Review、全体のテンポ・単調さ・一本としての印象は必要時だけWhole Video Review。一つの問いで何の採用・修正が判断できるかを明確にする。[運用方針](../../policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md)へ保存した。
+- **HTML標準化**：[task-011 — 人間レビュー用HTMLフォーマットの標準化](../../task-011-人間レビュー用HTMLフォーマットの標準化.md)は、固定テンプレート＋review dataの別TODOとして維持する。今回の文書同期で実装開始とはしない。
+
+相談役の先行記録：`f9336243`、`5a0efcff`、`039f59e5`の3 commitを保持して取り込んだ。先に保存された回答整理は履歴と回答記録内に残し、この会話で直接受領した本人原文に照らして帰属・状態を同期した。相談役の先行整理とCodexの解釈を本人の原文へ混ぜない。
+
+今回完了したのは、返された判断の保存、台帳・運用規則の更新、次の修正タスクの整理である。既存動画は不変で、修正実装・新動画生成・修正後の反映確認は行っていない。
