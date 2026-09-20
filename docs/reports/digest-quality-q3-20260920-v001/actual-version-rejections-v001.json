@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "digest-quality-actual-version-rejection-v001",
+  "secondaryMedia": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+    "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "avg_frame_rate": "30/1",
+          "nb_frames": "4879"
+        }
+      ]
+    }
+  },
+  "primaryMediaSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+  "cases": [
+    {
+      "kind": "actual-HRB002",
+      "status": "rejected",
+      "reason": "QUALITY_INPUT_INVALID: selected media is not HRB001",
+      "bindingPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/actual-other-version-rejections-v001/actual-HRB002.json",
+      "actualMediaSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "declaredFrameCount": 4879
+    },
+    {
+      "kind": "HRB002-with-primary-declared-length",
+      "status": "rejected",
+      "reason": "QUALITY_INPUT_INVALID: selected media is not HRB001",
+      "bindingPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/actual-other-version-rejections-v001/HRB002-with-primary-declared-length.json",
+      "actualMediaSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "declaredFrameCount": 4867
+    },
+    {
+      "kind": "primary-hash-with-HRB002-bytes",
+      "status": "rejected",
+      "reason": "QUALITY_INPUT_INVALID: reference bytes differ: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+      "bindingPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/actual-other-version-rejections-v001/primary-hash-with-HRB002-bytes.json",
+      "actualMediaSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "declaredFrameCount": 4867
+    }
+  ],
+  "originalInputsModified": false
+}

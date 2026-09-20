@@ -1,0 +1,5092 @@
+{
+  "schemaVersion": "digest-quality-candidate-evidence-v001",
+  "inputSha256": "65102e48de14824e63435f70d0453c5d36233f47a802048e933ada4d7be79a8d",
+  "rawReplySha256": "0b7981f9fe017b2f8379f5c5a107f2c03e0816480224e72bbb80252386f28b07",
+  "candidates": [
+    {
+      "id": "Q3-C001",
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000003"
+      ],
+      "range": {
+        "startFrame": 8,
+        "endFrameExclusive": 71
+      },
+      "evidenceIds": [
+        "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+        "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+        "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000003"
+      ],
+      "observedFacts": [
+        {
+          "evidenceId": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+          "statement": "保存された表示計画では「あーもういるやん」を完成動画の8以上13未満の5フレームに表示し、入場と退場はいずれも4フレームの不透明度変化が指定されている。これは設定の記録であり、実際の画面上の透明度や読み取りを観測した事実ではない。"
+        },
+        {
+          "evidenceId": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+          "statement": "保存された表示計画では直後の13以上37未満に「これもういるやん」を表示し、跳ねる動きが指定されている。前の字幕との間に空白のフレームはない。"
+        },
+        {
+          "evidenceId": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+          "statement": "保存された表示計画では続く37以上71未満に「いるやんいるやん」を表示し、揺れる動きが指定されている。前の2字幕と近い言葉がこの順で続く。"
+        }
+      ],
+      "hypothesis": "冒頭の発見を表す最初の文について、5フレームの枠に入退場各4フレームが指定され、すぐ似た文の動く表示へ移る組合せが、最初の言葉を捉えることを難しくしている可能性があるという仮説。表示が短いことや言葉が反復することだけを欠陥とは判定していない。",
+      "missingInformation": [
+        "完成動画で最初の文が実際にどの不透明度で表示され、続く2字幕とどう切り替わって見えるか。",
+        "音声と背景の状況を含め、最初の言葉を読まなくても冒頭の発見が十分伝わるか。"
+      ],
+      "normalExplanations": [
+        "短い最初の字幕が話し始めの勢いを表し、次のよく似た字幕で内容を十分補っている可能性がある。",
+        "実際の表示では入退場の処理が調整され、保存された設定値から想像するより読める可能性がある。",
+        "音声や映像だけで発見が分かり、字幕の素早い切替が場面に合っている可能性がある。"
+      ],
+      "humanQuestion": "完成動画の冒頭で「あーもういるやん」から「これもういるやん」「いるやんいるやん」へ続く現在の字幕の切替は、最初の言葉の読み取りも含め、このまま採用できますか？",
+      "reflectionTargets": [
+        "将来の冒頭字幕の表示時間と入退場の組合せについての採用判断。",
+        "将来の連続する字幕の切替確認に、人間が示した読み取り上の条件を反映すること。"
+      ]
+    },
+    {
+      "id": "Q3-C002",
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+        "no-caption-929-1735",
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+        "no-caption-1806-2685",
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+        "no-caption-2720-2930",
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000017"
+      ],
+      "range": {
+        "startFrame": 768,
+        "endFrameExclusive": 3009
+      },
+      "evidenceIds": [
+        "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+        "display.no-caption-929-1735",
+        "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+        "display.no-caption-1806-2685",
+        "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+        "display.no-caption-2720-2930",
+        "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+        "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+        "mapping.digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+        "old.asr-segment-000017.part-1",
+        "old.asr-segment-000019.part-1",
+        "old.asr-segment-000022.part-1",
+        "old.asr-segment-000028.part-1",
+        "old.asr-segment-000032.part-1",
+        "old.asr-segment-000035.part-1",
+        "old.asr-segment-000043.part-1",
+        "pcm-no-caption-929-1735",
+        "pcm-no-caption-1806-2685",
+        "pcm-no-caption-2720-2930"
+      ],
+      "observedFacts": [
+        {
+          "evidenceId": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+          "statement": "保存字幕では768以上929未満に「おい、急に速くなった!」が表示される。ここで実際に何が速くなったかは観測していない。"
+        },
+        {
+          "evidenceId": "display.no-caption-929-1735",
+          "statement": "保存表示計画では929以上1735未満に字幕がない。"
+        },
+        {
+          "evidenceId": "old.asr-segment-000017.part-1",
+          "statement": "以前の音声の認識記録には「追いつかれちゃう!」があり、その保存区間は完成動画の994以上1030未満へ対応付けられている。完成音声を新たに聞き取った結果ではない。"
+        },
+        {
+          "evidenceId": "old.asr-segment-000019.part-1",
+          "statement": "以前の音声の認識記録には「どこに隠れるんだよぉ!」があり、その保存区間は1099以上1178未満へ対応付けられている。"
+        },
+        {
+          "evidenceId": "old.asr-segment-000022.part-1",
+          "statement": "以前の音声の認識記録には「ねぇーじゃあどうすればいいの?」があり、その保存区間は1450以上1543未満へ対応付けられている。"
+        },
+        {
+          "evidenceId": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+          "statement": "保存表示計画では1735以上1806未満に「なんかグロいやつに捕まってる」を白い背景付きで表示する。捕まった場面を実際に目視したという記録ではない。"
+        },
+        {
+          "evidenceId": "display.no-caption-1806-2685",
+          "statement": "保存表示計画では1806以上2685未満に字幕がない。"
+        },
+        {
+          "evidenceId": "old.asr-segment-000028.part-1",
+          "statement": "以前の音声の認識記録には「捕まってる必死に頑張ったのに!」があり、全体は1778以上1871未満へ対応付けられている。保存された語の対応では「必」から「に!」までは1805以上1871未満にかかる。時刻は認識記録の対応であり、物理的に正確な発話境界を保証しない。"
+        },
+        {
+          "evidenceId": "old.asr-segment-000032.part-1",
+          "statement": "以前の音声の認識記録には「なんの音してるのこれ?」があり、その保存区間は2193以上2238未満へ対応付けられている。"
+        },
+        {
+          "evidenceId": "old.asr-segment-000035.part-1",
+          "statement": "以前の音声の認識記録には「進んだ!」があり、その保存区間は2388以上2421未満へ対応付けられている。"
+        },
+        {
+          "evidenceId": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+          "statement": "保存表示計画では2685以上2720未満に「どこ?」を表示する。"
+        },
+        {
+          "evidenceId": "display.no-caption-2720-2930",
+          "statement": "保存表示計画では2720以上2930未満に字幕がない。"
+        },
+        {
+          "evidenceId": "old.asr-segment-000043.part-1",
+          "statement": "以前の音声の認識記録には「なにこれ?え?」があり、その保存区間は2731以上2765未満へ対応付けられている。"
+        },
+        {
+          "evidenceId": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+          "statement": "保存表示計画では2930以上2941未満に「何これ?」を表示する。"
+        },
+        {
+          "evidenceId": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+          "statement": "保存表示計画では2941以上3009未満に「なんか棺みたいなところに入れられてる!」を2行で表示する。"
+        },
+        {
+          "evidenceId": "pcm-no-caption-929-1735",
+          "statement": "完成動画から復号して保存された929以上1735未満の測定では、両チャンネル各1184820標本に厳密なゼロ標本はない。混合音声の数値であり、認識文字列の正しさや声の聞きやすさを証明しない。"
+        },
+        {
+          "evidenceId": "pcm-no-caption-1806-2685",
+          "statement": "完成動画から復号して保存された1806以上2685未満の測定では、両チャンネル各1292130標本に厳密なゼロ標本はない。どの種類の音があるかはこの値では分からない。"
+        },
+        {
+          "evidenceId": "pcm-no-caption-2720-2930",
+          "statement": "完成動画から復号して保存された2720以上2930未満の測定では、両チャンネル各308700標本に厳密なゼロ標本はない。発話の意味を観測した結果ではない。"
+        }
+      ],
+      "hypothesis": "保存字幕の「急に速くなった」から「捕まってる」「どこ?」「棺みたいなところ」へ進む流れに対して、旧認識には追跡への反応、隠れる場所、状況への疑問などをつなぐ文字列が無字幕区間内にもある。これらが完成音声でも実際に聞こえる重要な言葉であり、映像と音声だけでは伝わりにくい場合、現在の字幕の入り方に改善の余地があるという仮説。無字幕の長さや音の大きさそのものを根拠にはしていない。",
+      "missingInformation": [
+        "旧認識の各文字列が完成音声で実際に発話され、視聴者にどう聞こえるか。",
+        "追跡や状況の変化が映像だけで十分理解できるか、文字を置くと重要な動きを妨げるか。",
+        "この区間の現在の字幕の入り方で、人間が伝えたい状況と反応を十分受け取れるか。"
+      ],
+      "normalExplanations": [
+        "画面の動きと元の音を見せるために字幕を要所へ絞っており、現在の表示で十分伝わる可能性がある。",
+        "旧認識に誤りや時刻のずれがあり、文字列どおりの発話が完成音声にはない可能性がある。",
+        "同種の短い反応をすべて表示せず、目立つ反応や状況説明だけを残すことが自然な可能性がある。"
+      ],
+      "humanQuestion": "完成動画の「おい、急に速くなった!」から「なんか棺みたいなところに入れられてる!」までの区間は、状況や反応を伝える字幕の入り方として、このまま採用できますか？",
+      "reflectionTargets": [
+        "将来の同区間における字幕を出す箇所についての採用判断。",
+        "将来の字幕確認で、状況をつなぐ言葉と画面を見せる余地のどちらを人間が重視したかを反映すること。"
+      ]
+    }
+  ],
+  "supportingEvidence": [
+    {
+      "id": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "kind": "saved-caption",
+      "range": {
+        "startFrame": 8,
+        "endFrameExclusive": 13
+      },
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000001"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": "あーもういるやん",
+        "display": {
+          "presetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 96,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#111827",
+              "borderWidthPx": 8,
+              "lineSpacingPercent": 150,
+              "glowColor": "#000000",
+              "glowWidthPx": 12,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "renderedLines": [
+            "あーもういるやん"
+          ],
+          "adjacentCaptions": {
+            "previous": null,
+            "next": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+              "text": "これもういるやん",
+              "range": {
+                "startFrame": 13,
+                "endFrameExclusive": 37
+              }
+            }
+          }
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "kind": "saved-caption",
+      "range": {
+        "startFrame": 13,
+        "endFrameExclusive": 37
+      },
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000002"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": "これもういるやん",
+        "display": {
+          "presetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 96,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#111827",
+              "borderWidthPx": 8,
+              "lineSpacingPercent": 150,
+              "glowColor": "#000000",
+              "glowWidthPx": 12,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "presentationMotion": {
+            "presentation": "provisional-bounce",
+            "presetVersion": "presentation-caption-motion-v001"
+          },
+          "renderedLines": [
+            "これもういるやん"
+          ],
+          "adjacentCaptions": {
+            "previous": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+              "text": "あーもういるやん",
+              "range": {
+                "startFrame": 8,
+                "endFrameExclusive": 13
+              }
+            },
+            "next": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+              "text": "いるやんいるやん",
+              "range": {
+                "startFrame": 37,
+                "endFrameExclusive": 71
+              }
+            }
+          }
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "kind": "saved-caption",
+      "range": {
+        "startFrame": 37,
+        "endFrameExclusive": 71
+      },
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000003"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": "いるやんいるやん",
+        "display": {
+          "presetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 96,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#111827",
+              "borderWidthPx": 8,
+              "lineSpacingPercent": 150,
+              "glowColor": "#000000",
+              "glowWidthPx": 12,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "presentationMotion": {
+            "presentation": "provisional-shake",
+            "presetVersion": "presentation-caption-motion-v001"
+          },
+          "renderedLines": [
+            "いるやんいるやん"
+          ],
+          "adjacentCaptions": {
+            "previous": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+              "text": "これもういるやん",
+              "range": {
+                "startFrame": 13,
+                "endFrameExclusive": 37
+              }
+            },
+            "next": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+              "text": "もうリカちゃんやめてー!",
+              "range": {
+                "startFrame": 71,
+                "endFrameExclusive": 154
+              }
+            }
+          }
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "mapping.digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "kind": "saved-source-mapping",
+      "range": {
+        "startFrame": 768,
+        "endFrameExclusive": 929
+      },
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+        "connection-03"
+      ],
+      "method": "Verified saved final-to-baseline-to-original mapping; no generation repeated.",
+      "facts": {
+        "sourceParts": [
+          {
+            "kind": "retained",
+            "range": {
+              "startFrame": 768,
+              "endFrameExclusive": 929
+            },
+            "baselineRange": {
+              "startFrame": 756,
+              "endFrameExclusive": 917
+            },
+            "originalVideo": {
+              "sourceRef": "original-source-media",
+              "logicalFrameRange": {
+                "startFrame": 59717,
+                "endFrameExclusive": 59878
+              },
+              "decodedFrameIndices": {
+                "first": 119434,
+                "step": 2,
+                "count": 161
+              },
+              "presentationSeconds": {
+                "start": {
+                  "numerator": 1492937,
+                  "denominator": 750
+                },
+                "end": {
+                  "numerator": 748481,
+                  "denominator": 375
+                }
+              }
+            },
+            "originalAudio": {
+              "sourceRef": "original-source-media",
+              "sampleRate": 44100,
+              "startSample": 87784696,
+              "endSampleExclusive": 88021366
+            },
+            "segmentId": "segment-0004",
+            "connectionId": null
+          }
+        ]
+      },
+      "limitations": [
+        "Time correspondence does not establish audiovisual meaning."
+      ],
+      "referenceIds": [
+        "projection",
+        "baseline-timeline",
+        "baseline-generation-manifest",
+        "original-source-media"
+      ]
+    },
+    {
+      "id": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "kind": "saved-caption",
+      "range": {
+        "startFrame": 768,
+        "endFrameExclusive": 929
+      },
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+        "connection-03"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": "おい、急に速くなった!",
+        "display": {
+          "presetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 96,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#111827",
+              "borderWidthPx": 8,
+              "lineSpacingPercent": 150,
+              "glowColor": "#000000",
+              "glowWidthPx": 12,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "presentationMotion": {
+            "presentation": "provisional-shake",
+            "presetVersion": "presentation-caption-motion-v001"
+          },
+          "renderedLines": [
+            "おい、急に速くなった!"
+          ],
+          "adjacentCaptions": {
+            "previous": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+              "text": "でもこいつ走りでこれだよ",
+              "range": {
+                "startFrame": 626,
+                "endFrameExclusive": 768
+              }
+            },
+            "next": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+              "text": "なんかグロいやつに捕まってる",
+              "range": {
+                "startFrame": 1735,
+                "endFrameExclusive": 1806
+              }
+            }
+          }
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "kind": "saved-caption",
+      "range": {
+        "startFrame": 1735,
+        "endFrameExclusive": 1806
+      },
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000014"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": "なんかグロいやつに捕まってる",
+        "display": {
+          "presetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 96,
+              "fontColor": "#111827",
+              "borderColor": "#111827",
+              "borderWidthPx": 0,
+              "lineSpacingPercent": 150,
+              "glowColor": "#000000",
+              "glowWidthPx": 0,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": {
+              "color": "#FFFDF8",
+              "borderRadiusPx": 0,
+              "paddingXPx": 24,
+              "paddingYPx": 16
+            },
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "renderedLines": [
+            "なんかグロいやつに捕まってる"
+          ],
+          "adjacentCaptions": {
+            "previous": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+              "text": "おい、急に速くなった!",
+              "range": {
+                "startFrame": 768,
+                "endFrameExclusive": 929
+              }
+            },
+            "next": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+              "text": "どこ?",
+              "range": {
+                "startFrame": 2685,
+                "endFrameExclusive": 2720
+              }
+            }
+          }
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "kind": "saved-caption",
+      "range": {
+        "startFrame": 2685,
+        "endFrameExclusive": 2720
+      },
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000015"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": "どこ?",
+        "display": {
+          "presetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 96,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#111827",
+              "borderWidthPx": 8,
+              "lineSpacingPercent": 150,
+              "glowColor": "#000000",
+              "glowWidthPx": 12,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "presentationMotion": {
+            "presentation": "provisional-bounce",
+            "presetVersion": "presentation-caption-motion-v001"
+          },
+          "renderedLines": [
+            "どこ?"
+          ],
+          "adjacentCaptions": {
+            "previous": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+              "text": "なんかグロいやつに捕まってる",
+              "range": {
+                "startFrame": 1735,
+                "endFrameExclusive": 1806
+              }
+            },
+            "next": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+              "text": "何これ?",
+              "range": {
+                "startFrame": 2930,
+                "endFrameExclusive": 2941
+              }
+            }
+          }
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+      "kind": "saved-caption",
+      "range": {
+        "startFrame": 2930,
+        "endFrameExclusive": 2941
+      },
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000016"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": "何これ?",
+        "display": {
+          "presetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 96,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#111827",
+              "borderWidthPx": 8,
+              "lineSpacingPercent": 150,
+              "glowColor": "#000000",
+              "glowWidthPx": 12,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "renderedLines": [
+            "何これ?"
+          ],
+          "adjacentCaptions": {
+            "previous": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+              "text": "どこ?",
+              "range": {
+                "startFrame": 2685,
+                "endFrameExclusive": 2720
+              }
+            },
+            "next": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+              "text": "なんか棺みたいなところに入れられてる!",
+              "range": {
+                "startFrame": 2941,
+                "endFrameExclusive": 3009
+              }
+            }
+          }
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "display.digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+      "kind": "saved-caption",
+      "range": {
+        "startFrame": 2941,
+        "endFrameExclusive": 3009
+      },
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+        "connection-04"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": "なんか棺みたいなところに入れられてる!",
+        "display": {
+          "presetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 96,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#111827",
+              "borderWidthPx": 8,
+              "lineSpacingPercent": 150,
+              "glowColor": "#000000",
+              "glowWidthPx": 12,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "presentationColorRange": {
+            "startCodePoint": 0,
+            "endCodePointExclusive": 19,
+            "fontColor": "#FFD65A"
+          },
+          "renderedLines": [
+            "なんか棺みたいな",
+            "ところに入れられてる!"
+          ],
+          "adjacentCaptions": {
+            "previous": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+              "text": "何これ?",
+              "range": {
+                "startFrame": 2930,
+                "endFrameExclusive": 2941
+              }
+            },
+            "next": {
+              "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+              "text": "まぁでも怖かったね",
+              "range": {
+                "startFrame": 3021,
+                "endFrameExclusive": 3155
+              }
+            }
+          }
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "display.no-caption-929-1735",
+      "kind": "saved-display-plan",
+      "range": {
+        "startFrame": 929,
+        "endFrameExclusive": 1735
+      },
+      "unitIds": [
+        "no-caption-929-1735"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": null,
+        "display": {
+          "captionPresent": false
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "display.no-caption-1806-2685",
+      "kind": "saved-display-plan",
+      "range": {
+        "startFrame": 1806,
+        "endFrameExclusive": 2685
+      },
+      "unitIds": [
+        "no-caption-1806-2685"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": null,
+        "display": {
+          "captionPresent": false
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "display.no-caption-2720-2930",
+      "kind": "saved-display-plan",
+      "range": {
+        "startFrame": 2720,
+        "endFrameExclusive": 2930
+      },
+      "unitIds": [
+        "no-caption-2720-2930"
+      ],
+      "method": "Read the saved final display plan and concrete connection projection bound to HRB001.",
+      "facts": {
+        "text": null,
+        "display": {
+          "captionPresent": false
+        }
+      },
+      "limitations": [
+        "Saved rendering facts; no new visual quality judgment."
+      ],
+      "referenceIds": [
+        "completed-caption-plan",
+        "projection",
+        "completed-media"
+      ]
+    },
+    {
+      "id": "old.asr-segment-000017.part-1",
+      "kind": "reused-audio-observation",
+      "range": {
+        "startFrame": 994,
+        "endFrameExclusive": 1030
+      },
+      "unitIds": [
+        "no-caption-929-1735"
+      ],
+      "method": "Project a saved baseline observation through verified retained spans once; exclude inserted silence and decoder tail.",
+      "facts": {
+        "category": "asr-segment",
+        "observationId": "asr-segment-000017",
+        "historicalMediaSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+        "observationRange": {
+          "clock": "digest-original",
+          "sampleRate": 16000,
+          "startSample": {
+            "numerator": 524160,
+            "denominator": 1
+          },
+          "endSampleExclusive": {
+            "numerator": 542720,
+            "denominator": 1
+          }
+        },
+        "exactPart": {
+          "range": {
+            "startFrame": 994,
+            "endFrameExclusive": 1030
+          },
+          "segmentId": "segment-0004",
+          "pointOnly": false,
+          "sampleRate": 16000,
+          "baselineSamples": {
+            "start": {
+              "numerator": 524160,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 542720,
+              "denominator": 1
+            }
+          },
+          "completedObservationSamples": {
+            "start": {
+              "numerator": 530560,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 549120,
+              "denominator": 1
+            }
+          },
+          "completedPlaybackSamples": {
+            "start": {
+              "numerator": 1462356,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 1513512,
+              "denominator": 1
+            }
+          },
+          "originalAudioSamples": {
+            "start": {
+              "numerator": 88118092,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 88169248,
+              "denominator": 1
+            }
+          }
+        },
+        "wholeObservationAggregate": {
+          "text": "追いつかれちゃう!",
+          "avgLogprob": -0.8443508400180475,
+          "noSpeechProbability": 0.5294657349586487,
+          "compressionRatio": 1.822085889570552,
+          "temperature": 0.6
+        },
+        "words": [
+          {
+            "id": "asr-segment-000017:word-1",
+            "text": "追",
+            "probability": 0.6474311947822571,
+            "startSec": 32.76,
+            "endSec": 32.88,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 994,
+                    "endFrameExclusive": 999
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 524160,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 526080,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 530560,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 532480,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1462356,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1467648,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88118092,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88123384,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000017:word-2",
+            "text": "いつ",
+            "probability": 0.7366597056388855,
+            "startSec": 32.88,
+            "endSec": 33.08,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 998,
+                    "endFrameExclusive": 1005
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 526080,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 529280,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 532480,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 535680,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1467648,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1476468,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88123384,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88132204,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000017:word-3",
+            "text": "か",
+            "probability": 0.9988337159156799,
+            "startSec": 33.08,
+            "endSec": 33.3,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1004,
+                    "endFrameExclusive": 1011
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 529280,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 532800,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 535680,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 539200,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1476468,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1486170,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88132204,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88141906,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000017:word-4",
+            "text": "れ",
+            "probability": 0.9974971413612366,
+            "startSec": 33.3,
+            "endSec": 33.46,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1011,
+                    "endFrameExclusive": 1016
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 532800,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 535360,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 539200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 541760,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1486170,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1493226,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88141906,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88148962,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000017:word-5",
+            "text": "ちゃ",
+            "probability": 0.9194563031196594,
+            "startSec": 33.46,
+            "endSec": 33.7,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1015,
+                    "endFrameExclusive": 1023
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 535360,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 539200,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 541760,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 545600,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1493226,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1503810,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88148962,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88159546,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000017:word-6",
+            "text": "う!",
+            "probability": 0.9655464887619019,
+            "startSec": 33.7,
+            "endSec": 33.92,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1023,
+                    "endFrameExclusive": 1030
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 539200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 542720,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 545600,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 549120,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1503810,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1513512,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88159546,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88169248,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          }
+        ]
+      },
+      "limitations": [
+        "Reused observation from the saved baseline audio; not a new HRB001 observation.",
+        "Integer frame ranges enclose exact sample coverage; rational sample endpoints are authoritative.",
+        "Exact decimal transport preserves saved ASR timestamps, not their physical timing accuracy; tiny decimal residue is not evidence of a speech cut.",
+        "The whole-observation aggregate is scoped to its saved baseline interval, not recomputed for this split part.",
+        "Audio energy and ASR do not establish emotion, visual meaning, or a need for an effect."
+      ],
+      "referenceIds": [
+        "old-asr",
+        "old-observation-media",
+        "old-observation-pcm",
+        "historical-audio-binding",
+        "projection"
+      ]
+    },
+    {
+      "id": "old.asr-segment-000019.part-1",
+      "kind": "reused-audio-observation",
+      "range": {
+        "startFrame": 1099,
+        "endFrameExclusive": 1178
+      },
+      "unitIds": [
+        "no-caption-929-1735"
+      ],
+      "method": "Project a saved baseline observation through verified retained spans once; exclude inserted silence and decoder tail.",
+      "facts": {
+        "category": "asr-segment",
+        "observationId": "asr-segment-000019",
+        "historicalMediaSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+        "observationRange": {
+          "clock": "digest-original",
+          "sampleRate": 16000,
+          "startSample": {
+            "numerator": 579840,
+            "denominator": 1
+          },
+          "endSampleExclusive": {
+            "numerator": 621440,
+            "denominator": 1
+          }
+        },
+        "exactPart": {
+          "range": {
+            "startFrame": 1099,
+            "endFrameExclusive": 1178
+          },
+          "segmentId": "segment-0004",
+          "pointOnly": false,
+          "sampleRate": 16000,
+          "baselineSamples": {
+            "start": {
+              "numerator": 579840,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 621440,
+              "denominator": 1
+            }
+          },
+          "completedObservationSamples": {
+            "start": {
+              "numerator": 586240,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 627840,
+              "denominator": 1
+            }
+          },
+          "completedPlaybackSamples": {
+            "start": {
+              "numerator": 1615824,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 1730484,
+              "denominator": 1
+            }
+          },
+          "originalAudioSamples": {
+            "start": {
+              "numerator": 88271560,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 88386220,
+              "denominator": 1
+            }
+          }
+        },
+        "wholeObservationAggregate": {
+          "text": "どこに隠れるんだよぉ!",
+          "avgLogprob": -0.8443508400180475,
+          "noSpeechProbability": 0.5294657349586487,
+          "compressionRatio": 1.822085889570552,
+          "temperature": 0.6
+        },
+        "words": [
+          {
+            "id": "asr-segment-000019:word-1",
+            "text": "ど",
+            "probability": 0.8398156762123108,
+            "startSec": 36.24,
+            "endSec": 36.48,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1099,
+                    "endFrameExclusive": 1107
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 579840,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 583680,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 586240,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 590080,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1615824,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1626408,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88271560,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88282144,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000019:word-2",
+            "text": "こ",
+            "probability": 0.996711254119873,
+            "startSec": 36.48,
+            "endSec": 36.64,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1106,
+                    "endFrameExclusive": 1112
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 583680,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 586240,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 590080,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 592640,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1626408,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1633464,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88282144,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88289200,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000019:word-3",
+            "text": "に",
+            "probability": 0.9933369159698486,
+            "startSec": 36.64,
+            "endSec": 36.9,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1111,
+                    "endFrameExclusive": 1119
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 586240,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 590400,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 592640,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 596800,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1633464,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1644930,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88289200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88300666,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000019:word-4",
+            "text": "隠",
+            "probability": 0.9567193388938904,
+            "startSec": 36.9,
+            "endSec": 37.26,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1119,
+                    "endFrameExclusive": 1130
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 590400,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 596160,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 596800,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 602560,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1644930,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1660806,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88300666,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88316542,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000019:word-5",
+            "text": "れる",
+            "probability": 0.0722167044878006,
+            "startSec": 37.26,
+            "endSec": 37.7,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1129,
+                    "endFrameExclusive": 1143
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 596160,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 603200,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 602560,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 609600,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1660806,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1680210,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88316542,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88335946,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000019:word-6",
+            "text": "んだ",
+            "probability": 0.8434749245643616,
+            "startSec": 37.7,
+            "endSec": 38.08,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1143,
+                    "endFrameExclusive": 1155
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 603200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 609280,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 609600,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 615680,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1680210,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1696968,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88335946,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88352704,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000019:word-7",
+            "text": "よ",
+            "probability": 0.7568915486335754,
+            "startSec": 38.08,
+            "endSec": 38.48,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1154,
+                    "endFrameExclusive": 1167
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 609280,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 615680,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 615680,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 622080,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1696968,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1714608,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88352704,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88370344,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000019:word-8",
+            "text": "ぉ!",
+            "probability": 0.7341456413269043,
+            "startSec": 38.48,
+            "endSec": 38.84,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1166,
+                    "endFrameExclusive": 1178
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 615680,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 621440,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 622080,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 627840,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 1714608,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1730484,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88370344,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88386220,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          }
+        ]
+      },
+      "limitations": [
+        "Reused observation from the saved baseline audio; not a new HRB001 observation.",
+        "Integer frame ranges enclose exact sample coverage; rational sample endpoints are authoritative.",
+        "Exact decimal transport preserves saved ASR timestamps, not their physical timing accuracy; tiny decimal residue is not evidence of a speech cut.",
+        "The whole-observation aggregate is scoped to its saved baseline interval, not recomputed for this split part.",
+        "Audio energy and ASR do not establish emotion, visual meaning, or a need for an effect."
+      ],
+      "referenceIds": [
+        "old-asr",
+        "old-observation-media",
+        "old-observation-pcm",
+        "historical-audio-binding",
+        "projection"
+      ]
+    },
+    {
+      "id": "old.asr-segment-000022.part-1",
+      "kind": "reused-audio-observation",
+      "range": {
+        "startFrame": 1450,
+        "endFrameExclusive": 1543
+      },
+      "unitIds": [
+        "no-caption-929-1735"
+      ],
+      "method": "Project a saved baseline observation through verified retained spans once; exclude inserted silence and decoder tail.",
+      "facts": {
+        "category": "asr-segment",
+        "observationId": "asr-segment-000022",
+        "historicalMediaSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+        "observationRange": {
+          "clock": "digest-original",
+          "sampleRate": 16000,
+          "startSample": {
+            "numerator": 767360,
+            "denominator": 1
+          },
+          "endSampleExclusive": {
+            "numerator": 816320,
+            "denominator": 1
+          }
+        },
+        "exactPart": {
+          "range": {
+            "startFrame": 1450,
+            "endFrameExclusive": 1543
+          },
+          "segmentId": "segment-0004",
+          "pointOnly": false,
+          "sampleRate": 16000,
+          "baselineSamples": {
+            "start": {
+              "numerator": 767360,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 816320,
+              "denominator": 1
+            }
+          },
+          "completedObservationSamples": {
+            "start": {
+              "numerator": 773760,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 822720,
+              "denominator": 1
+            }
+          },
+          "completedPlaybackSamples": {
+            "start": {
+              "numerator": 2132676,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 2267622,
+              "denominator": 1
+            }
+          },
+          "originalAudioSamples": {
+            "start": {
+              "numerator": 88788412,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 88923358,
+              "denominator": 1
+            }
+          }
+        },
+        "wholeObservationAggregate": {
+          "text": "ねぇーじゃあどうすればいいの?",
+          "avgLogprob": -0.8443508400180475,
+          "noSpeechProbability": 0.5294657349586487,
+          "compressionRatio": 1.822085889570552,
+          "temperature": 0.6
+        },
+        "words": [
+          {
+            "id": "asr-segment-000022:word-1",
+            "text": "ねぇ",
+            "probability": 0.5431049466133118,
+            "startSec": 47.96,
+            "endSec": 48.38,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1450,
+                    "endFrameExclusive": 1464
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 767360,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 774080,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 773760,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 780480,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2132676,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2151198,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88788412,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88806934,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000022:word-2",
+            "text": "ー",
+            "probability": 0.24378696084022522,
+            "startSec": 48.38,
+            "endSec": 48.68,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1463,
+                    "endFrameExclusive": 1473
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 774080,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 778880,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 780480,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 785280,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2151198,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2164428,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88806934,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88820164,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000022:word-3",
+            "text": "じゃあ",
+            "probability": 0.29669076204299927,
+            "startSec": 48.68,
+            "endSec": 48.84,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1472,
+                    "endFrameExclusive": 1478
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 778880,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 781440,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 785280,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 787840,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2164428,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2171484,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88820164,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88827220,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000022:word-4",
+            "text": "どう",
+            "probability": 0.6084619164466858,
+            "startSec": 48.84,
+            "endSec": 49.3,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1477,
+                    "endFrameExclusive": 1491
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 781440,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 788800,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 787840,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 795200,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2171484,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2191770,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88827220,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88847506,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000022:word-5",
+            "text": "す",
+            "probability": 0.9877538084983826,
+            "startSec": 49.3,
+            "endSec": 49.82,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1491,
+                    "endFrameExclusive": 1507
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 788800,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 797120,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 795200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 803520,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2191770,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2214702,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88847506,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88870438,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000022:word-6",
+            "text": "れ",
+            "probability": 0.9936979413032532,
+            "startSec": 49.82,
+            "endSec": 50,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1506,
+                    "endFrameExclusive": 1512
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 797120,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 800000,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 803520,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 806400,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2214702,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2222640,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88870438,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88878376,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000022:word-7",
+            "text": "ば",
+            "probability": 0.9708247184753418,
+            "startSec": 50,
+            "endSec": 50.22,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1512,
+                    "endFrameExclusive": 1519
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 800000,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 803520,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 806400,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 809920,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2222640,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2232342,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88878376,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88888078,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000022:word-8",
+            "text": "いい",
+            "probability": 0.9574953317642212,
+            "startSec": 50.22,
+            "endSec": 50.7,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1518,
+                    "endFrameExclusive": 1533
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 803520,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 811200,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 809920,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 817600,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2232342,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2253510,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88888078,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88909246,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000022:word-9",
+            "text": "の?",
+            "probability": 0.44758135080337524,
+            "startSec": 50.7,
+            "endSec": 51.02,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1533,
+                    "endFrameExclusive": 1543
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 811200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 816320,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 817600,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 822720,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2253510,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2267622,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 88909246,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 88923358,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          }
+        ]
+      },
+      "limitations": [
+        "Reused observation from the saved baseline audio; not a new HRB001 observation.",
+        "Integer frame ranges enclose exact sample coverage; rational sample endpoints are authoritative.",
+        "Exact decimal transport preserves saved ASR timestamps, not their physical timing accuracy; tiny decimal residue is not evidence of a speech cut.",
+        "The whole-observation aggregate is scoped to its saved baseline interval, not recomputed for this split part.",
+        "Audio energy and ASR do not establish emotion, visual meaning, or a need for an effect."
+      ],
+      "referenceIds": [
+        "old-asr",
+        "old-observation-media",
+        "old-observation-pcm",
+        "historical-audio-binding",
+        "projection"
+      ]
+    },
+    {
+      "id": "old.asr-segment-000028.part-1",
+      "kind": "reused-audio-observation",
+      "range": {
+        "startFrame": 1778,
+        "endFrameExclusive": 1871
+      },
+      "unitIds": [
+        "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+        "no-caption-1806-2685"
+      ],
+      "method": "Project a saved baseline observation through verified retained spans once; exclude inserted silence and decoder tail.",
+      "facts": {
+        "category": "asr-segment",
+        "observationId": "asr-segment-000028",
+        "historicalMediaSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+        "observationRange": {
+          "clock": "digest-original",
+          "sampleRate": 16000,
+          "startSample": {
+            "numerator": 942080,
+            "denominator": 1
+          },
+          "endSampleExclusive": {
+            "numerator": 991360,
+            "denominator": 1
+          }
+        },
+        "exactPart": {
+          "range": {
+            "startFrame": 1778,
+            "endFrameExclusive": 1871
+          },
+          "segmentId": "segment-0004",
+          "pointOnly": false,
+          "sampleRate": 16000,
+          "baselineSamples": {
+            "start": {
+              "numerator": 942080,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 991360,
+              "denominator": 1
+            }
+          },
+          "completedObservationSamples": {
+            "start": {
+              "numerator": 948480,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 997760,
+              "denominator": 1
+            }
+          },
+          "completedPlaybackSamples": {
+            "start": {
+              "numerator": 2614248,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 2750076,
+              "denominator": 1
+            }
+          },
+          "originalAudioSamples": {
+            "start": {
+              "numerator": 89269984,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 89405812,
+              "denominator": 1
+            }
+          }
+        },
+        "wholeObservationAggregate": {
+          "text": "捕まってる必死に頑張ったのに!",
+          "avgLogprob": -0.4557106416849863,
+          "noSpeechProbability": 0.018138011917471886,
+          "compressionRatio": 1.5242718446601942,
+          "temperature": 0
+        },
+        "words": [
+          {
+            "id": "asr-segment-000028:word-1",
+            "text": "捕",
+            "probability": 0.6586046069860458,
+            "startSec": 58.88,
+            "endSec": 59.08,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1778,
+                    "endFrameExclusive": 1785
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 942080,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 945280,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 948480,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 951680,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2614248,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2623068,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89269984,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89278804,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000028:word-2",
+            "text": "ま",
+            "probability": 0.9972477555274963,
+            "startSec": 59.08,
+            "endSec": 59.34,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1784,
+                    "endFrameExclusive": 1793
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 945280,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 949440,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 951680,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 955840,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2623068,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2634534,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89278804,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89290270,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000028:word-3",
+            "text": "ってる",
+            "probability": 0.8957498073577881,
+            "startSec": 59.34,
+            "endSec": 59.78,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1792,
+                    "endFrameExclusive": 1806
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 949440,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 956480,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 955840,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 962880,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2634534,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2653938,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89290270,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89309674,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000028:word-4",
+            "text": "必",
+            "probability": 0.7671539187431335,
+            "startSec": 59.78,
+            "endSec": 60.18,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1805,
+                    "endFrameExclusive": 1818
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 956480,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 962880,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 962880,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 969280,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2653938,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2671578,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89309674,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89327314,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000028:word-5",
+            "text": "死",
+            "probability": 0.996562659740448,
+            "startSec": 60.18,
+            "endSec": 60.32,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1817,
+                    "endFrameExclusive": 1822
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 962880,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 965120,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 969280,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 971520,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2671578,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2677752,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89327314,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89333488,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000028:word-6",
+            "text": "に",
+            "probability": 0.9967625141143799,
+            "startSec": 60.32,
+            "endSec": 60.48,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1821,
+                    "endFrameExclusive": 1827
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 965120,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 967680,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 971520,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 974080,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2677752,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2684808,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89333488,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89340544,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000028:word-7",
+            "text": "頑",
+            "probability": 0.9140211343765259,
+            "startSec": 60.48,
+            "endSec": 60.78,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1826,
+                    "endFrameExclusive": 1836
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 967680,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 972480,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 974080,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 978880,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2684808,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2698038,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89340544,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89353774,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000028:word-8",
+            "text": "張",
+            "probability": 0.9929446578025818,
+            "startSec": 60.78,
+            "endSec": 60.9,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1835,
+                    "endFrameExclusive": 1839
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 972480,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 974400,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 978880,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 980800,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2698038,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2703330,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89353774,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89359066,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000028:word-9",
+            "text": "った",
+            "probability": 0.9991220831871033,
+            "startSec": 60.9,
+            "endSec": 61.2,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1839,
+                    "endFrameExclusive": 1848
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 974400,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 979200,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 980800,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 985600,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2703330,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2716560,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89359066,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89372296,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000028:word-10",
+            "text": "の",
+            "probability": 0.9978530406951904,
+            "startSec": 61.2,
+            "endSec": 61.52,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1848,
+                    "endFrameExclusive": 1858
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 979200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 984320,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 985600,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 990720,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2716560,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2730672,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89372296,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89386408,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000028:word-11",
+            "text": "に!",
+            "probability": 0.9967705011367798,
+            "startSec": 61.52,
+            "endSec": 61.96,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 1857,
+                    "endFrameExclusive": 1871
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 984320,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 991360,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 990720,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 997760,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 2730672,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 2750076,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89386408,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89405812,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          }
+        ]
+      },
+      "limitations": [
+        "Reused observation from the saved baseline audio; not a new HRB001 observation.",
+        "Integer frame ranges enclose exact sample coverage; rational sample endpoints are authoritative.",
+        "Exact decimal transport preserves saved ASR timestamps, not their physical timing accuracy; tiny decimal residue is not evidence of a speech cut.",
+        "The whole-observation aggregate is scoped to its saved baseline interval, not recomputed for this split part.",
+        "Audio energy and ASR do not establish emotion, visual meaning, or a need for an effect."
+      ],
+      "referenceIds": [
+        "old-asr",
+        "old-observation-media",
+        "old-observation-pcm",
+        "historical-audio-binding",
+        "projection"
+      ]
+    },
+    {
+      "id": "old.asr-segment-000032.part-1",
+      "kind": "reused-audio-observation",
+      "range": {
+        "startFrame": 2193,
+        "endFrameExclusive": 2238
+      },
+      "unitIds": [
+        "no-caption-1806-2685"
+      ],
+      "method": "Project a saved baseline observation through verified retained spans once; exclude inserted silence and decoder tail.",
+      "facts": {
+        "category": "asr-segment",
+        "observationId": "asr-segment-000032",
+        "historicalMediaSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+        "observationRange": {
+          "clock": "digest-original",
+          "sampleRate": 16000,
+          "startSample": {
+            "numerator": 1163200,
+            "denominator": 1
+          },
+          "endSampleExclusive": {
+            "numerator": 1187200,
+            "denominator": 1
+          }
+        },
+        "exactPart": {
+          "range": {
+            "startFrame": 2193,
+            "endFrameExclusive": 2238
+          },
+          "segmentId": "segment-0004",
+          "pointOnly": false,
+          "sampleRate": 16000,
+          "baselineSamples": {
+            "start": {
+              "numerator": 1163200,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 1187200,
+              "denominator": 1
+            }
+          },
+          "completedObservationSamples": {
+            "start": {
+              "numerator": 1169600,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 1193600,
+              "denominator": 1
+            }
+          },
+          "completedPlaybackSamples": {
+            "start": {
+              "numerator": 3223710,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 3289860,
+              "denominator": 1
+            }
+          },
+          "originalAudioSamples": {
+            "start": {
+              "numerator": 89879446,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 89945596,
+              "denominator": 1
+            }
+          }
+        },
+        "wholeObservationAggregate": {
+          "text": "なんの音してるのこれ?",
+          "avgLogprob": -0.4557106416849863,
+          "noSpeechProbability": 0.018138011917471886,
+          "compressionRatio": 1.5242718446601942,
+          "temperature": 0
+        },
+        "words": [
+          {
+            "id": "asr-segment-000032:word-1",
+            "text": "なん",
+            "probability": 0.42216119170188904,
+            "startSec": 72.7,
+            "endSec": 72.88,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2193,
+                    "endFrameExclusive": 2199
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1163200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1166080,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1169600,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1172480,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 3223710,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 3231648,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89879446,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89887384,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000032:word-2",
+            "text": "の",
+            "probability": 0.9988813996315002,
+            "startSec": 72.88,
+            "endSec": 73.02,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2198,
+                    "endFrameExclusive": 2203
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1166080,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1168320,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1172480,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1174720,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 3231648,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 3237822,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89887384,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89893558,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000032:word-3",
+            "text": "音",
+            "probability": 0.9822270274162292,
+            "startSec": 73.02,
+            "endSec": 73.2,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2202,
+                    "endFrameExclusive": 2208
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1168320,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1171200,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1174720,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1177600,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 3237822,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 3245760,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89893558,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89901496,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000032:word-4",
+            "text": "して",
+            "probability": 0.9947655200958252,
+            "startSec": 73.2,
+            "endSec": 73.52,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2208,
+                    "endFrameExclusive": 2218
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1171200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1176320,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1177600,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1182720,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 3245760,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 3259872,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89901496,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89915608,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000032:word-5",
+            "text": "る",
+            "probability": 0.9557331204414368,
+            "startSec": 73.52,
+            "endSec": 73.72,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2217,
+                    "endFrameExclusive": 2224
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1176320,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1179520,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1182720,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1185920,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 3259872,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 3268692,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89915608,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89924428,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000032:word-6",
+            "text": "の",
+            "probability": 0.998013973236084,
+            "startSec": 73.72,
+            "endSec": 73.88,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2223,
+                    "endFrameExclusive": 2229
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1179520,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1182080,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1185920,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1188480,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 3268692,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 3275748,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89924428,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89931484,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000032:word-7",
+            "text": "これ?",
+            "probability": 0.7107991576194763,
+            "startSec": 73.88,
+            "endSec": 74.2,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2228,
+                    "endFrameExclusive": 2238
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1182080,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1187200,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1188480,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1193600,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 3275748,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 3289860,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 89931484,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 89945596,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          }
+        ]
+      },
+      "limitations": [
+        "Reused observation from the saved baseline audio; not a new HRB001 observation.",
+        "Integer frame ranges enclose exact sample coverage; rational sample endpoints are authoritative.",
+        "Exact decimal transport preserves saved ASR timestamps, not their physical timing accuracy; tiny decimal residue is not evidence of a speech cut.",
+        "The whole-observation aggregate is scoped to its saved baseline interval, not recomputed for this split part.",
+        "Audio energy and ASR do not establish emotion, visual meaning, or a need for an effect."
+      ],
+      "referenceIds": [
+        "old-asr",
+        "old-observation-media",
+        "old-observation-pcm",
+        "historical-audio-binding",
+        "projection"
+      ]
+    },
+    {
+      "id": "old.asr-segment-000035.part-1",
+      "kind": "reused-audio-observation",
+      "range": {
+        "startFrame": 2388,
+        "endFrameExclusive": 2421
+      },
+      "unitIds": [
+        "no-caption-1806-2685"
+      ],
+      "method": "Project a saved baseline observation through verified retained spans once; exclude inserted silence and decoder tail.",
+      "facts": {
+        "category": "asr-segment",
+        "observationId": "asr-segment-000035",
+        "historicalMediaSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+        "observationRange": {
+          "clock": "digest-original",
+          "sampleRate": 16000,
+          "startSample": {
+            "numerator": 1267520,
+            "denominator": 1
+          },
+          "endSampleExclusive": {
+            "numerator": 1284480,
+            "denominator": 1
+          }
+        },
+        "exactPart": {
+          "range": {
+            "startFrame": 2388,
+            "endFrameExclusive": 2421
+          },
+          "segmentId": "segment-0004",
+          "pointOnly": false,
+          "sampleRate": 16000,
+          "baselineSamples": {
+            "start": {
+              "numerator": 1267520,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 1284480,
+              "denominator": 1
+            }
+          },
+          "completedObservationSamples": {
+            "start": {
+              "numerator": 1273920,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 1290880,
+              "denominator": 1
+            }
+          },
+          "completedPlaybackSamples": {
+            "start": {
+              "numerator": 3511242,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 3557988,
+              "denominator": 1
+            }
+          },
+          "originalAudioSamples": {
+            "start": {
+              "numerator": 90166978,
+              "denominator": 1
+            },
+            "end": {
+              "numerator": 90213724,
+              "denominator": 1
+            }
+          }
+        },
+        "wholeObservationAggregate": {
+          "text": "進んだ!",
+          "avgLogprob": -0.4557106416849863,
+          "noSpeechProbability": 0.018138011917471886,
+          "compressionRatio": 1.5242718446601942,
+          "temperature": 0
+        },
+        "words": [
+          {
+            "id": "asr-segment-000035:word-1",
+            "text": "進",
+            "probability": 0.7990246415138245,
+            "startSec": 79.22,
+            "endSec": 79.82,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2388,
+                    "endFrameExclusive": 2407
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1267520,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1277120,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1273920,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1283520,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 3511242,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 3537702,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 90166978,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 90193438,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000035:word-2",
+            "text": "んだ!",
+            "probability": 0.9605868458747864,
+            "startSec": 79.82,
+            "endSec": 80.28,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2406,
+                    "endFrameExclusive": 2421
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1277120,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1284480,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1283520,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1290880,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 3537702,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 3557988,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 90193438,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 90213724,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          }
+        ]
+      },
+      "limitations": [
+        "Reused observation from the saved baseline audio; not a new HRB001 observation.",
+        "Integer frame ranges enclose exact sample coverage; rational sample endpoints are authoritative.",
+        "Exact decimal transport preserves saved ASR timestamps, not their physical timing accuracy; tiny decimal residue is not evidence of a speech cut.",
+        "The whole-observation aggregate is scoped to its saved baseline interval, not recomputed for this split part.",
+        "Audio energy and ASR do not establish emotion, visual meaning, or a need for an effect."
+      ],
+      "referenceIds": [
+        "old-asr",
+        "old-observation-media",
+        "old-observation-pcm",
+        "historical-audio-binding",
+        "projection"
+      ]
+    },
+    {
+      "id": "old.asr-segment-000043.part-1",
+      "kind": "reused-audio-observation",
+      "range": {
+        "startFrame": 2731,
+        "endFrameExclusive": 2765
+      },
+      "unitIds": [
+        "no-caption-2720-2930"
+      ],
+      "method": "Project a saved baseline observation through verified retained spans once; exclude inserted silence and decoder tail.",
+      "facts": {
+        "category": "asr-segment",
+        "observationId": "asr-segment-000043",
+        "historicalMediaSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c",
+        "observationRange": {
+          "clock": "digest-original",
+          "sampleRate": 16000,
+          "startSample": {
+            "numerator": "9064000000000001",
+            "denominator": 6250000000
+          },
+          "endSampleExclusive": {
+            "numerator": 1468160,
+            "denominator": 1
+          }
+        },
+        "exactPart": {
+          "range": {
+            "startFrame": 2731,
+            "endFrameExclusive": 2765
+          },
+          "segmentId": "segment-0004",
+          "pointOnly": false,
+          "sampleRate": 16000,
+          "baselineSamples": {
+            "start": {
+              "numerator": "9064000000000001",
+              "denominator": 6250000000
+            },
+            "end": {
+              "numerator": 1468160,
+              "denominator": 1
+            }
+          },
+          "completedObservationSamples": {
+            "start": {
+              "numerator": "9104000000000001",
+              "denominator": 6250000000
+            },
+            "end": {
+              "numerator": 1474560,
+              "denominator": 1
+            }
+          },
+          "completedPlaybackSamples": {
+            "start": {
+              "numerator": "4014864000000000441",
+              "denominator": 1000000000000
+            },
+            "end": {
+              "numerator": 4064256,
+              "denominator": 1
+            }
+          },
+          "originalAudioSamples": {
+            "start": {
+              "numerator": "90670600000000000441",
+              "denominator": 1000000000000
+            },
+            "end": {
+              "numerator": 90719992,
+              "denominator": 1
+            }
+          }
+        },
+        "wholeObservationAggregate": {
+          "text": "なにこれ?え?",
+          "avgLogprob": -0.27681676789801174,
+          "noSpeechProbability": 0.0009410652564838529,
+          "compressionRatio": 1.518987341772152,
+          "temperature": 0
+        },
+        "words": [
+          {
+            "id": "asr-segment-000043:word-1",
+            "text": "な",
+            "probability": 0.49897658824920654,
+            "startSec": 90.64000000000001,
+            "endSec": 91.2,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2731,
+                    "endFrameExclusive": 2748
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": "9064000000000001",
+                      "denominator": 6250000000
+                    },
+                    "end": {
+                      "numerator": 1459200,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": "9104000000000001",
+                      "denominator": 6250000000
+                    },
+                    "end": {
+                      "numerator": 1465600,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": "4014864000000000441",
+                      "denominator": 1000000000000
+                    },
+                    "end": {
+                      "numerator": 4039560,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": "90670600000000000441",
+                      "denominator": 1000000000000
+                    },
+                    "end": {
+                      "numerator": 90695296,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000043:word-2",
+            "text": "に",
+            "probability": 0.9929593801498413,
+            "startSec": 91.2,
+            "endSec": 91.3,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2748,
+                    "endFrameExclusive": 2751
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1459200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1460800,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1465600,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1467200,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 4039560,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 4043970,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 90695296,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 90699706,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000043:word-3",
+            "text": "これ?",
+            "probability": 0.9018881916999817,
+            "startSec": 91.3,
+            "endSec": 91.58,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2751,
+                    "endFrameExclusive": 2760
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1460800,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1465280,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1467200,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1471680,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 4043970,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 4056318,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 90699706,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 90712054,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          },
+          {
+            "id": "asr-segment-000043:word-4",
+            "text": "え?",
+            "probability": 0.4433334171772003,
+            "startSec": 91.66,
+            "endSec": 91.76,
+            "mapped": {
+              "parts": [
+                {
+                  "range": {
+                    "startFrame": 2761,
+                    "endFrameExclusive": 2765
+                  },
+                  "segmentId": "segment-0004",
+                  "pointOnly": false,
+                  "sampleRate": 16000,
+                  "baselineSamples": {
+                    "start": {
+                      "numerator": 1466560,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1468160,
+                      "denominator": 1
+                    }
+                  },
+                  "completedObservationSamples": {
+                    "start": {
+                      "numerator": 1472960,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 1474560,
+                      "denominator": 1
+                    }
+                  },
+                  "completedPlaybackSamples": {
+                    "start": {
+                      "numerator": 4059846,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 4064256,
+                      "denominator": 1
+                    }
+                  },
+                  "originalAudioSamples": {
+                    "start": {
+                      "numerator": 90715582,
+                      "denominator": 1
+                    },
+                    "end": {
+                      "numerator": 90719992,
+                      "denominator": 1
+                    }
+                  }
+                }
+              ],
+              "excluded": []
+            }
+          }
+        ]
+      },
+      "limitations": [
+        "Reused observation from the saved baseline audio; not a new HRB001 observation.",
+        "Integer frame ranges enclose exact sample coverage; rational sample endpoints are authoritative.",
+        "Exact decimal transport preserves saved ASR timestamps, not their physical timing accuracy; tiny decimal residue is not evidence of a speech cut.",
+        "The whole-observation aggregate is scoped to its saved baseline interval, not recomputed for this split part.",
+        "Audio energy and ASR do not establish emotion, visual meaning, or a need for an effect."
+      ],
+      "referenceIds": [
+        "old-asr",
+        "old-observation-media",
+        "old-observation-pcm",
+        "historical-audio-binding",
+        "projection"
+      ]
+    },
+    {
+      "id": "pcm-no-caption-929-1735",
+      "kind": "completed-pcm-measurement",
+      "range": {
+        "startFrame": 929,
+        "endFrameExclusive": 1735
+      },
+      "unitIds": [
+        "no-caption-929-1735"
+      ],
+      "method": "FFmpeg decoded the selected completed MP4 to unchanged-channel float32 PCM; each full target interval was measured.",
+      "facts": {
+        "sampleRate": 44100,
+        "channels": 2,
+        "startSample": 1365630,
+        "endSampleExclusive": 2550450,
+        "sampleCount": 1184820,
+        "channelMetrics": [
+          {
+            "channel": 0,
+            "minimum": -0.36586615443229675,
+            "maximum": 0.46499285101890564,
+            "peakAbsolute": 0.46499285101890564,
+            "peakSample": 1775033,
+            "peakCompletedFrame": 1207,
+            "rootMeanSquare": 0.06652791915245176,
+            "exactZeroSamples": 0,
+            "fullScaleOrAboveSamples": 0,
+            "firstSample": 0.019463935866951942,
+            "lastSample": -0.06485376507043839,
+            "previousSample": 0.014009423553943634,
+            "followingSample": -0.059266891330480576
+          },
+          {
+            "channel": 1,
+            "minimum": -0.38393911719322205,
+            "maximum": 0.4782898426055908,
+            "peakAbsolute": 0.4782898426055908,
+            "peakSample": 1775033,
+            "peakCompletedFrame": 1207,
+            "rootMeanSquare": 0.06721002619454383,
+            "exactZeroSamples": 0,
+            "fullScaleOrAboveSamples": 0,
+            "firstSample": 0.02116948552429676,
+            "lastSample": 0.05619644373655319,
+            "previousSample": 0.015109135769307613,
+            "followingSample": 0.05817283317446709
+          }
+        ]
+      },
+      "limitations": [
+        "完成動画の混合音声を各チャンネルのまま復号した数値。声・効果音・音楽を分離していない。",
+        "音の意味、驚き、聞きやすさ、無音の良し悪しを聴覚で判定した記録ではない。",
+        "RMS・頂点・ゼロサンプルは区間の測定値で、品質得点や自動修正の閾値ではない。"
+      ],
+      "referenceIds": [
+        "q3-completed-pcm"
+      ]
+    },
+    {
+      "id": "pcm-no-caption-1806-2685",
+      "kind": "completed-pcm-measurement",
+      "range": {
+        "startFrame": 1806,
+        "endFrameExclusive": 2685
+      },
+      "unitIds": [
+        "no-caption-1806-2685"
+      ],
+      "method": "FFmpeg decoded the selected completed MP4 to unchanged-channel float32 PCM; each full target interval was measured.",
+      "facts": {
+        "sampleRate": 44100,
+        "channels": 2,
+        "startSample": 2654820,
+        "endSampleExclusive": 3946950,
+        "sampleCount": 1292130,
+        "channelMetrics": [
+          {
+            "channel": 0,
+            "minimum": -0.3584168553352356,
+            "maximum": 0.3646693527698517,
+            "peakAbsolute": 0.3646693527698517,
+            "peakSample": 3553231,
+            "peakCompletedFrame": 2417,
+            "rootMeanSquare": 0.036136156124646414,
+            "exactZeroSamples": 0,
+            "fullScaleOrAboveSamples": 0,
+            "firstSample": 0.01354125328361988,
+            "lastSample": -0.04788416251540184,
+            "previousSample": 0.07635898888111115,
+            "followingSample": -0.036599863320589066
+          },
+          {
+            "channel": 1,
+            "minimum": -0.3579223155975342,
+            "maximum": 0.3644120693206787,
+            "peakAbsolute": 0.3644120693206787,
+            "peakSample": 3553231,
+            "peakCompletedFrame": 2417,
+            "rootMeanSquare": 0.037245979408597,
+            "exactZeroSamples": 0,
+            "fullScaleOrAboveSamples": 0,
+            "firstSample": 0.0337451696395874,
+            "lastSample": -0.03658394515514374,
+            "previousSample": 0.0998990535736084,
+            "followingSample": -0.024061573669314384
+          }
+        ]
+      },
+      "limitations": [
+        "完成動画の混合音声を各チャンネルのまま復号した数値。声・効果音・音楽を分離していない。",
+        "音の意味、驚き、聞きやすさ、無音の良し悪しを聴覚で判定した記録ではない。",
+        "RMS・頂点・ゼロサンプルは区間の測定値で、品質得点や自動修正の閾値ではない。"
+      ],
+      "referenceIds": [
+        "q3-completed-pcm"
+      ]
+    },
+    {
+      "id": "pcm-no-caption-2720-2930",
+      "kind": "completed-pcm-measurement",
+      "range": {
+        "startFrame": 2720,
+        "endFrameExclusive": 2930
+      },
+      "unitIds": [
+        "no-caption-2720-2930"
+      ],
+      "method": "FFmpeg decoded the selected completed MP4 to unchanged-channel float32 PCM; each full target interval was measured.",
+      "facts": {
+        "sampleRate": 44100,
+        "channels": 2,
+        "startSample": 3998400,
+        "endSampleExclusive": 4307100,
+        "sampleCount": 308700,
+        "channelMetrics": [
+          {
+            "channel": 0,
+            "minimum": -0.18416637182235718,
+            "maximum": 0.1963990479707718,
+            "peakAbsolute": 0.1963990479707718,
+            "peakSample": 4046761,
+            "peakCompletedFrame": 2752,
+            "rootMeanSquare": 0.03579102643552893,
+            "exactZeroSamples": 0,
+            "fullScaleOrAboveSamples": 0,
+            "firstSample": -0.018181804567575455,
+            "lastSample": 0.031101403757929802,
+            "previousSample": -0.017559796571731567,
+            "followingSample": 0.03038194216787815
+          },
+          {
+            "channel": 1,
+            "minimum": -0.237355574965477,
+            "maximum": 0.23890280723571777,
+            "peakAbsolute": 0.23890280723571777,
+            "peakSample": 4050633,
+            "peakCompletedFrame": 2755,
+            "rootMeanSquare": 0.0359621132638766,
+            "exactZeroSamples": 0,
+            "fullScaleOrAboveSamples": 0,
+            "firstSample": 0.042985137552022934,
+            "lastSample": -0.04804287850856781,
+            "previousSample": 0.04369397461414337,
+            "followingSample": -0.04796687886118889
+          }
+        ]
+      },
+      "limitations": [
+        "完成動画の混合音声を各チャンネルのまま復号した数値。声・効果音・音楽を分離していない。",
+        "音の意味、驚き、聞きやすさ、無音の良し悪しを聴覚で判定した記録ではない。",
+        "RMS・頂点・ゼロサンプルは区間の測定値で、品質得点や自動修正の閾値ではない。"
+      ],
+      "referenceIds": [
+        "q3-completed-pcm"
+      ]
+    }
+  ],
+  "postJudgmentKnownContext": {
+    "firstCaption": "5frameの確定枠で反応用の跳ね/揺れが成立しないことは既に保存されている。意味を通常へ変換して解消しない既知の表現不能記録である。今回の問いはその枠と入退場の組合せの読み取り可能性。",
+    "openingIntent": "存在確認から呼びかけまでの反応を一続きで保持し、いるやんの反復は慌て方を伝えるために残すという保存理由。反復削減は提案しない。",
+    "middleIntent": "急加速から捕獲・場所への戸惑い・棺のような場所の説明までを一続きで保持し、対比と結末を伝える保存理由。字幕密度そのものの正解ではなく、正常な別説明として扱う。"
+  },
+  "savedSelectionRows": [
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "status": "unrepresentable",
+      "semanticRole": null,
+      "allowedPresets": [],
+      "reason": "相手を見つけた瞬間の短い驚きで、情報説明よりも反応の出現を伝える発話である。しかし確定した5フレームの字幕では、反応に対応する跳ねと揺れの両方が物理的に成立しない。通常表示へ意味役割を変更して解消することはしない。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "audio-event-000001",
+        "stage1-bounce-physical-unrepresentable",
+        "stage1-shake-physical-unrepresentable"
+      ],
+      "selection": null
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "status": "resolved",
+      "semanticRole": "reaction",
+      "allowedPresets": [
+        {
+          "preset": "bounce"
+        },
+        {
+          "preset": "shake"
+        }
+      ],
+      "reason": "見つけた相手を「これもういる」と慌てて指し直す短い反応である。出現時の跳ね、または戸惑いを示す揺れが、この発見の反応を保つ。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "audio-event-000001"
+      ],
+      "selection": {
+        "selectionSha256": "202b8e4dd7f8c5f6ec01a7dac74e114524189b4c897a80c9e8400f65f201253e",
+        "allowedPresets": [
+          {
+            "preset": "bounce"
+          },
+          {
+            "preset": "shake"
+          }
+        ],
+        "selectedIndex": 0,
+        "selectedPreset": {
+          "preset": "bounce"
+        }
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "status": "resolved",
+      "semanticRole": "reaction",
+      "allowedPresets": [
+        {
+          "preset": "bounce"
+        },
+        {
+          "preset": "shake"
+        }
+      ],
+      "reason": "「いるやん」の反復は新情報を説明するためではなく、発見した相手への慌て方そのものである。短い反復の反応として跳ねと揺れのどちらも意味に合う。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "audio-event-000001"
+      ],
+      "selection": {
+        "selectionSha256": "ce2d03c2fed061693a5aa0ffd1e84b342ac8c0ce1afa9ea8ab95eb03bc43d143",
+        "allowedPresets": [
+          {
+            "preset": "bounce"
+          },
+          {
+            "preset": "shake"
+          }
+        ],
+        "selectedIndex": 1,
+        "selectedPreset": {
+          "preset": "shake"
+        }
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "status": "resolved",
+      "semanticRole": "reaction",
+      "allowedPresets": [
+        {
+          "preset": "bounce"
+        },
+        {
+          "preset": "shake"
+        }
+      ],
+      "reason": "遅い走りを確認した直後に、突然速くなったことへ「おい」と反応する落差の場面である。驚きの短い言い切りとして跳ねと揺れを許す。入力の音響観測だけでは字幕中の特定の叫びへ頂点を帰属できないため、音の頂点に合わせた表現を意味判断の中心にしない。",
+      "evidenceIds": [
+        "horror-segment-0003",
+        "horror-segment-0004",
+        "audio-event-000007"
+      ],
+      "selection": {
+        "selectionSha256": "37a82d4925f9d4753a1b03e211763ab5fb5d21b7ccdd3712ac4623bd7804d3b1",
+        "allowedPresets": [
+          {
+            "preset": "bounce"
+          },
+          {
+            "preset": "shake"
+          }
+        ],
+        "selectedIndex": 1,
+        "selectedPreset": {
+          "preset": "shake"
+        }
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "whole-caption"
+        },
+        {
+          "preset": "panel"
+        }
+      ],
+      "reason": "逃走の結果として、異様な相手に捕まった状況を一文で明らかにする。相手の説明と捕まった結末を一緒に示す情報なので、一文全体の色強調と枠表示が意味を保つ。",
+      "evidenceIds": [
+        "horror-segment-0004",
+        "audio-event-000011",
+        "asr-segment-000027",
+        "asr-segment-000028"
+      ],
+      "selection": {
+        "selectionSha256": "ea3fe017bb6742c741669bbaa2d1841d61a7a90ea61231963edfa781d5fc369b",
+        "allowedPresets": [
+          {
+            "preset": "color",
+            "scope": "whole-caption"
+          },
+          {
+            "preset": "panel"
+          }
+        ],
+        "selectedIndex": 1,
+        "selectedPreset": {
+          "preset": "panel"
+        }
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "status": "resolved",
+      "semanticRole": "reaction",
+      "allowedPresets": [
+        {
+          "preset": "bounce"
+        },
+        {
+          "preset": "shake"
+        }
+      ],
+      "reason": "捕まった後、現在地が分からず「どこ?」と戸惑う短い反応である。周辺の認識にも場所を尋ねる反復があり、状況説明の結論よりも戸惑いの出現を伝える跳ねや揺れに合う。",
+      "evidenceIds": [
+        "horror-segment-0004",
+        "audio-event-000015",
+        "asr-segment-000042"
+      ],
+      "selection": {
+        "selectionSha256": "5da2b4e5dfe3be2a84562c04a8a151abc11fe14ddc52fd2ced863885a854fa6a",
+        "allowedPresets": [
+          {
+            "preset": "bounce"
+          },
+          {
+            "preset": "shake"
+          }
+        ],
+        "selectedIndex": 0,
+        "selectedPreset": {
+          "preset": "bounce"
+        }
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+      "status": "unrepresentable",
+      "semanticRole": null,
+      "allowedPresets": [],
+      "reason": "「何これ?」は棺のような場所を説明する直前の短い戸惑いの反応である。しかし確定した11フレームでは反応を示す跳ねと揺れがどちらも成立しない。意味を通常の説明へ付け替えず、有限の許容演出では表現不能とする。",
+      "evidenceIds": [
+        "horror-segment-0004",
+        "audio-event-000017",
+        "stage1-bounce-physical-unrepresentable",
+        "stage1-shake-physical-unrepresentable"
+      ],
+      "selection": null
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "whole-caption"
+        },
+        {
+          "preset": "panel"
+        }
+      ],
+      "reason": "棺のような場所に入れられていると状況が判明する、逃走の結末を伝える一文である。場所の比喩と入れられた結果をまとめて読ませる全体色と枠表示が許される。音響頂点の存在より、何が起きたかの説明を主要な役割とする。",
+      "evidenceIds": [
+        "horror-segment-0004",
+        "audio-event-000017",
+        "asr-segment-000047"
+      ],
+      "selection": {
+        "selectionSha256": "37c4b154130d924cd84f8ebef781b2d368c8df554fbb54376455453c8ccccd50",
+        "allowedPresets": [
+          {
+            "preset": "color",
+            "scope": "whole-caption"
+          },
+          {
+            "preset": "panel"
+          }
+        ],
+        "selectedIndex": 0,
+        "selectedPreset": {
+          "preset": "color",
+          "scope": "whole-caption"
+        }
+      }
+    }
+  ],
+  "savedRoleAllowedSets": {
+    "captionRolePresets": {
+      "normal": [
+        "normal"
+      ],
+      "focus": [
+        "color",
+        "panel"
+      ],
+      "vocal-energy": [
+        "scale",
+        "pulse"
+      ],
+      "reaction": [
+        "bounce",
+        "shake"
+      ]
+    },
+    "connectionRolePresets": {
+      "continuation": [
+        "normal-cut"
+      ],
+      "separator": [
+        "black-separator",
+        "soft-separator"
+      ],
+      "either": [
+        "normal-cut",
+        "black-separator",
+        "soft-separator"
+      ]
+    }
+  },
+  "comparisonReferences": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/post-judgment-sources-v001/human-review-pending-before-q3.md",
+      "sha256": "a0c5f6f23de936f12c0df545948beb4b0a699cd94b78fb71ea8fffb668bf2449"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/human-response-original-v001.md",
+      "sha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/selectionRecord.json",
+      "sha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/review-main-v001.json",
+      "sha256": "5810ae6d13133cba265c161c84ec3f8024ad778917c62485897c9195392371e3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md",
+      "sha256": "8f365834bc3b90a0fc188dc88563d9432abf2999e3a9d5c85bece3b76b7f2892"
+    }
+  ],
+  "recordedAt": "2026-09-20T07:49:31.951170+00:00",
+  "newDefectsConfirmed": 0,
+  "humanVerdictsReceived": 0,
+  "limits": "根拠IDと範囲は検証済み。自然文の推測や旧ASRの正しさ・視聴品質を機械的に認定していない。"
+}

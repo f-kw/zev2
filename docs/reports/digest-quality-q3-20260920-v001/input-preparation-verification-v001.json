@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "digest-quality-input-preparation-verification-v001",
+  "recordedAt": "2026-09-20T07:36:02.926405+00:00",
+  "status": "passed",
+  "scope": "HRB001 saved-input preparation and exact clock correspondence only; no semantic quality acceptance",
+  "sourceFrozenAt": "2026-09-20T07:32:44.954Z",
+  "sourceFiles": [
+    {
+      "path": "tools/digest-quality/prepare.mjs",
+      "sha256": "f3402ec35a09b4ea73e9f9d16e1101a41963580521ade7456dd840fa539d83de"
+    },
+    {
+      "path": "tools/digest-quality/clock.mjs",
+      "sha256": "7050880b99cebbdbb6f420084017a9f5306179270400e54180f5bdd186e30df4"
+    },
+    {
+      "path": "tools/digest-quality/prepare.test.mjs",
+      "sha256": "b946aeb1e9be17fc8d00b1a2e9597c74826dcee6092b18128cb01aad4b833a2f"
+    },
+    {
+      "path": "tools/digest-quality/clock.test.mjs",
+      "sha256": "7d60412ab1b1fb6b6beec452b47de038c04f088c404fd9f0883a7010883c3bad"
+    }
+  ],
+  "tests": {
+    "runtime": "v20.19.6",
+    "command": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "--test",
+      "--test-reporter=tap",
+      "tools/digest-quality/clock.test.mjs",
+      "tools/digest-quality/prepare.test.mjs"
+    ],
+    "exitCode": 0,
+    "counts": {
+      "tests": 26,
+      "pass": 26,
+      "fail": 0,
+      "skipped": 0
+    },
+    "tapPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/input-preparation-attempt-003/focused-tests-v001.tap",
+    "tapSha256": "a1bd65a60ae6f44d362c64d4e02a1d3158356863e3c30f87eb1ef34d4d65560b"
+  },
+  "inputRun": {
+    "packetPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/input-preparation-attempt-003/saved-input-packet-v002.json",
+    "inputSha256": "a99841005cb655ed1b8b8a2d4e1b6668affc51f62744eae4414fad346f3a8067",
+    "mediaSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+    "counts": {
+      "captions": 32,
+      "connections": 6,
+      "noCaption": 8,
+      "audioCandidates": 27,
+      "asrSegments": 70,
+      "asrWords": 392,
+      "acousticPeaks": 1064,
+      "coverageFrames": 4867
+    },
+    "evidenceCount": 1280,
+    "referenceCount": 21,
+    "validator": "validateQualityInput passed; referenced actual bytes were verified by prepare",
+    "postPreparationAnnotation": "ASR timestamp precision limitation added without changing observations"
+  },
+  "preservedPreparationStops": [
+    {
+      "attempt": "input-preparation-attempt-001",
+      "evidencePath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/input-preparation-attempt-001/preparation-failure-v001.json",
+      "cause": "Historical remux container duration differs from the frame-aligned baseline, despite identical encoded audio packet bytes.",
+      "correction": "Require exact effective stream duration for completed and baseline media; for historical observation media verify packet bytes and decoder skip/padding, and record container duration separately."
+    },
+    {
+      "attempt": "input-preparation-attempt-002",
+      "evidencePath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/input-preparation-attempt-002/preparation-failure-v001.json",
+      "cause": "Eight saved ASR endpoints preserve long decimal residues and cannot be represented as integer 16kHz samples without rounding.",
+      "correction": "Transport saved seconds as exact rational sample positions; preserve large numerators/denominators as decimal strings, exclude decoder tail and keep insertions unobserved."
+    }
+  ],
+  "historicalAudio": {
+    "packetPayloadSha256": "475233b0648161e3014ef52ffa1d7f4400b8dca1b0dc66214a2d66af9cd1b56e",
+    "baselineEffectiveSamples": 7101570,
+    "historicalContainerSamples": 7101555,
+    "skipSamples": 1024,
+    "discardPadding": 0,
+    "savedObservationSamples": 2576858,
+    "effectiveObservationEnd": {
+      "numerator": 7729600,
+      "denominator": 3
+    },
+    "excludedObservationTailSamples": {
+      "numerator": 974,
+      "denominator": 3
+    }
+  },
+  "limitations": [
+    "Saved ASR, acoustic candidates and peaks are historical observations, not new completed-media observations.",
+    "Exact transport preserves timestamps and does not prove the physical accuracy of ASR timing.",
+    "Source-clock correspondence and packet identity do not establish audiovisual meaning or completed-video quality.",
+    "No external API, new dependency, media generation, source-media change, previous-answer import, or old automatic-choice execution."
+  ],
+  "testFixtureNote": "During test development an illustrative decimal normalized to 23.76 in JavaScript; the fixture was replaced by the actual saved 43.120000000000005 endpoint before the final 26-test run."
+}

@@ -1,0 +1,405 @@
+TAP version 13
+# Subtest: canonical hash is key-order independent, preserves array order and rejects non-JSON values
+ok 1 - canonical hash is key-order independent, preserves array order and rejects non-JSON values
+  ---
+  duration_ms: 1.225667
+  ...
+# Subtest: complete zero-candidate result is accepted without claiming media quality
+ok 2 - complete zero-candidate result is accepted without claiming media quality
+  ---
+  duration_ms: 4.510666
+  ...
+# Subtest: input and response are not mutated; candidate fact keeps its actual evidence range
+ok 3 - input and response are not mutated; candidate fact keeps its actual evidence range
+  ---
+  duration_ms: 2.189417
+  ...
+# Subtest: explicit insufficient evidence counts as processed but not as newly observed media
+ok 4 - explicit insufficient evidence counts as processed but not as newly observed media
+  ---
+  duration_ms: 1.20775
+  ...
+# Subtest: incomplete retains partial work and raw hash, never enables review
+ok 5 - incomplete retains partial work and raw hash, never enables review
+  ---
+  duration_ms: 1.070667
+  ...
+# Subtest: failed retains partial work and raw hash, never enables review
+ok 6 - failed retains partial work and raw hash, never enables review
+  ---
+  duration_ms: 1.01725
+  ...
+# Subtest: input rejects stale input hash
+ok 7 - input rejects stale input hash
+  ---
+  duration_ms: 0.670958
+  ...
+# Subtest: input rejects unknown top-level field
+ok 8 - input rejects unknown top-level field
+  ---
+  duration_ms: 0.525417
+  ...
+# Subtest: input rejects unknown media field
+ok 9 - input rejects unknown media field
+  ---
+  duration_ms: 0.868917
+  ...
+# Subtest: input rejects wrong clock media
+ok 10 - input rejects wrong clock media
+  ---
+  duration_ms: 0.649625
+  ...
+# Subtest: input rejects wrong completed clock length
+ok 11 - input rejects wrong completed clock length
+  ---
+  duration_ms: 0.944792
+  ...
+# Subtest: input rejects unknown clock field
+ok 12 - input rejects unknown clock field
+  ---
+  duration_ms: 0.674334
+  ...
+# Subtest: input rejects incomplete clock spans
+ok 13 - input rejects incomplete clock spans
+  ---
+  duration_ms: 0.600292
+  ...
+# Subtest: input rejects wrong clock span order
+ok 14 - input rejects wrong clock span order
+  ---
+  duration_ms: 0.9455
+  ...
+# Subtest: input rejects baseline gap in clock
+ok 15 - input rejects baseline gap in clock
+  ---
+  duration_ms: 0.685291
+  ...
+# Subtest: input rejects decoded audio shorter than video
+ok 16 - input rejects decoded audio shorter than video
+  ---
+  duration_ms: 0.775792
+  ...
+# Subtest: input rejects unknown unit field
+ok 17 - input rejects unknown unit field
+  ---
+  duration_ms: 0.696
+  ...
+# Subtest: input rejects unknown unit kind
+ok 18 - input rejects unknown unit kind
+  ---
+  duration_ms: 0.553125
+  ...
+# Subtest: input rejects duplicate unit ID
+ok 19 - input rejects duplicate unit ID
+  ---
+  duration_ms: 0.670709
+  ...
+# Subtest: input rejects missing no-caption coverage
+ok 20 - input rejects missing no-caption coverage
+  ---
+  duration_ms: 0.569959
+  ...
+# Subtest: input rejects overlapping subtitle coverage
+ok 21 - input rejects overlapping subtitle coverage
+  ---
+  duration_ms: 0.713709
+  ...
+# Subtest: input rejects negative range
+ok 22 - input rejects negative range
+  ---
+  duration_ms: 0.530541
+  ...
+# Subtest: input rejects fractional range
+ok 23 - input rejects fractional range
+  ---
+  duration_ms: 0.577208
+  ...
+# Subtest: input rejects outside media range
+ok 24 - input rejects outside media range
+  ---
+  duration_ms: 0.566125
+  ...
+# Subtest: input rejects unknown unit evidence
+ok 25 - input rejects unknown unit evidence
+  ---
+  duration_ms: 0.705167
+  ...
+# Subtest: input rejects duplicate unit evidence
+ok 26 - input rejects duplicate unit evidence
+  ---
+  duration_ms: 0.519292
+  ...
+# Subtest: input rejects duplicate reference ID
+ok 27 - input rejects duplicate reference ID
+  ---
+  duration_ms: 0.479708
+  ...
+# Subtest: input rejects missing source reference
+ok 28 - input rejects missing source reference
+  ---
+  duration_ms: 0.611209
+  ...
+# Subtest: input rejects missing evidence reference
+ok 29 - input rejects missing evidence reference
+  ---
+  duration_ms: 0.735959
+  ...
+# Subtest: input rejects duplicate evidence ID
+ok 30 - input rejects duplicate evidence ID
+  ---
+  duration_ms: 0.681042
+  ...
+# Subtest: input rejects unknown evidence field
+ok 31 - input rejects unknown evidence field
+  ---
+  duration_ms: 0.563041
+  ...
+# Subtest: input rejects unknown evidence kind
+ok 32 - input rejects unknown evidence kind
+  ---
+  duration_ms: 0.72025
+  ...
+# Subtest: input rejects unrelated evidence range
+ok 33 - input rejects unrelated evidence range
+  ---
+  duration_ms: 0.871916
+  ...
+# Subtest: input rejects unknown evidence target
+ok 34 - input rejects unknown evidence target
+  ---
+  duration_ms: 0.613125
+  ...
+# Subtest: input rejects one-sided evidence link
+ok 35 - input rejects one-sided evidence link
+  ---
+  duration_ms: 0.839
+  ...
+# Subtest: input rejects missing source part
+ok 36 - input rejects missing source part
+  ---
+  duration_ms: 0.456292
+  ...
+# Subtest: input rejects inserted part with invented source
+ok 37 - input rejects inserted part with invented source
+  ---
+  duration_ms: 0.501791
+  ...
+# Subtest: input rejects inserted part with unknown connection
+ok 38 - input rejects inserted part with unknown connection
+  ---
+  duration_ms: 0.709625
+  ...
+# Subtest: input rejects retained audio from a different clock
+ok 39 - input rejects retained audio from a different clock
+  ---
+  duration_ms: 0.518291
+  ...
+# Subtest: input rejects retained decoded count changed
+ok 40 - input rejects retained decoded count changed
+  ---
+  duration_ms: 0.410709
+  ...
+# Subtest: input rejects wrong shift with unchanged duration
+ok 41 - input rejects wrong shift with unchanged duration
+  ---
+  duration_ms: 0.47825
+  ...
+# Subtest: input rejects repeated projection with unchanged audio duration
+ok 42 - input rejects repeated projection with unchanged audio duration
+  ---
+  duration_ms: 0.639584
+  ...
+# Subtest: reply rejects wrong input hash
+ok 43 - reply rejects wrong input hash
+  ---
+  duration_ms: 0.610292
+  ...
+# Subtest: reply rejects wrong media hash including another revision
+ok 44 - reply rejects wrong media hash including another revision
+  ---
+  duration_ms: 0.51
+  ...
+# Subtest: reply rejects unknown top-level field
+ok 45 - reply rejects unknown top-level field
+  ---
+  duration_ms: 0.650792
+  ...
+# Subtest: reply rejects duplicate processed unit
+ok 46 - reply rejects duplicate processed unit
+  ---
+  duration_ms: 0.629791
+  ...
+# Subtest: reply rejects unknown processed unit
+ok 47 - reply rejects unknown processed unit
+  ---
+  duration_ms: 0.640292
+  ...
+# Subtest: reply rejects complete missing processed unit
+ok 48 - reply rejects complete missing processed unit
+  ---
+  duration_ms: 0.707334
+  ...
+# Subtest: reply rejects unknown processed field
+ok 49 - reply rejects unknown processed field
+  ---
+  duration_ms: 0.573958
+  ...
+# Subtest: reply rejects unrelated processed evidence
+ok 50 - reply rejects unrelated processed evidence
+  ---
+  duration_ms: 0.590667
+  ...
+# Subtest: reply rejects reviewed unit without evidence
+ok 51 - reply rejects reviewed unit without evidence
+  ---
+  duration_ms: 0.634834
+  ...
+# Subtest: reply rejects duplicate candidate ID
+ok 52 - reply rejects duplicate candidate ID
+  ---
+  duration_ms: 0.556042
+  ...
+# Subtest: reply rejects unknown candidate field
+ok 53 - reply rejects unknown candidate field
+  ---
+  duration_ms: 0.4865
+  ...
+# Subtest: reply rejects unknown candidate unit
+ok 54 - reply rejects unknown candidate unit
+  ---
+  duration_ms: 0.766375
+  ...
+# Subtest: reply rejects duplicate candidate unit
+ok 55 - reply rejects duplicate candidate unit
+  ---
+  duration_ms: 0.558292
+  ...
+# Subtest: reply rejects candidate outside media
+ok 56 - reply rejects candidate outside media
+  ---
+  duration_ms: 0.507958
+  ...
+# Subtest: reply rejects candidate empty range
+ok 57 - reply rejects candidate empty range
+  ---
+  duration_ms: 0.656
+  ...
+# Subtest: reply rejects candidate unrelated unit
+ok 58 - reply rejects candidate unrelated unit
+  ---
+  duration_ms: 0.484875
+  ...
+# Subtest: reply rejects candidate partly outside nominated unit
+ok 59 - reply rejects candidate partly outside nominated unit
+  ---
+  duration_ms: 0.7045
+  ...
+# Subtest: reply rejects candidate nominated union has a gap
+ok 60 - reply rejects candidate nominated union has a gap
+  ---
+  duration_ms: 0.786792
+  ...
+# Subtest: reply rejects unknown candidate evidence
+ok 61 - reply rejects unknown candidate evidence
+  ---
+  duration_ms: 0.547458
+  ...
+# Subtest: reply rejects candidate evidence from unrelated time
+ok 62 - reply rejects candidate evidence from unrelated time
+  ---
+  duration_ms: 0.683584
+  ...
+# Subtest: reply rejects duplicate candidate evidence
+ok 63 - reply rejects duplicate candidate evidence
+  ---
+  duration_ms: 0.574041
+  ...
+# Subtest: reply rejects fact without included evidence
+ok 64 - reply rejects fact without included evidence
+  ---
+  duration_ms: 0.528333
+  ...
+# Subtest: reply rejects fact unknown field
+ok 65 - reply rejects fact unknown field
+  ---
+  duration_ms: 0.640584
+  ...
+# Subtest: reply rejects empty observed facts
+ok 66 - reply rejects empty observed facts
+  ---
+  duration_ms: 0.541083
+  ...
+# Subtest: reply rejects empty normal explanations
+ok 67 - reply rejects empty normal explanations
+  ---
+  duration_ms: 0.531
+  ...
+# Subtest: reply rejects empty missing information
+ok 68 - reply rejects empty missing information
+  ---
+  duration_ms: 0.75725
+  ...
+# Subtest: reply rejects empty reflection targets
+ok 69 - reply rejects empty reflection targets
+  ---
+  duration_ms: 0.603083
+  ...
+# Subtest: reply rejects empty hypothesis
+ok 70 - reply rejects empty hypothesis
+  ---
+  duration_ms: 0.6015
+  ...
+# Subtest: reply rejects complete with failure reason
+ok 71 - reply rejects complete with failure reason
+  ---
+  duration_ms: 0.588334
+  ...
+# Subtest: reply rejects failed without reason
+ok 72 - reply rejects failed without reason
+  ---
+  duration_ms: 0.497166
+  ...
+# Subtest: reply rejects partial candidate targets unprocessed unit
+ok 73 - reply rejects partial candidate targets unprocessed unit
+  ---
+  duration_ms: 0.507292
+  ...
+# Subtest: candidate evidence must overlap both the candidate and a related nominated unit
+ok 74 - candidate evidence must overlap both the candidate and a related nominated unit
+  ---
+  duration_ms: 0.7995
+  ...
+# Subtest: candidate can span adjacent nominated units with narrower attributed evidence
+ok 75 - candidate can span adjacent nominated units with narrower attributed evidence
+  ---
+  duration_ms: 0.52675
+  ...
+# Subtest: strict wire reader rejects duplicate keys, fractions, fences, trailing content, invalid UTF-8 and BOM
+ok 76 - strict wire reader rejects duplicate keys, fractions, fences, trailing content, invalid UTF-8 and BOM
+  ---
+  duration_ms: 3.665459
+  ...
+# Subtest: raw reply hashes preserve whitespace differences without changing accepted content
+ok 77 - raw reply hashes preserve whitespace differences without changing accepted content
+  ---
+  duration_ms: 1.07075
+  ...
+# Subtest: AAC decoder padding after the video is allowed and retained
+ok 78 - AAC decoder padding after the video is allowed and retained
+  ---
+  duration_ms: 0.6135
+  ...
+# Subtest: actual reference verification detects missing files, changed bytes and conflicting path hashes
+ok 79 - actual reference verification detects missing files, changed bytes and conflicting path hashes
+  ---
+  duration_ms: 20.384416
+  ...
+1..79
+# tests 79
+# suites 0
+# pass 79
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 124.748042
