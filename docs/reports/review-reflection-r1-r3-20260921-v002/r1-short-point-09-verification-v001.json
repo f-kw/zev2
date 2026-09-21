@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "r1-caption-short-verification-v001",
+  "point": 9,
+  "status": "passed",
+  "completionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-09/render-evidence/completion.json",
+    "bytes": 2113785,
+    "fileSha256": "cd59a7dfa4414c2380bd724d2d646bf12a05cc9967eca0be515bd9423213d0f1"
+  },
+  "candidateVideo": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-09/render/presentation-rendered-v002.mp4",
+    "bytes": 8500095,
+    "fileSha256": "2c2de1f8474885fc61ab085eeb78357aa4ddab9ce4f3e236fa111b39f24f3991"
+  },
+  "frameCount": 763,
+  "reviewMedia": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-09/render/presentation-rendered-v002.mp4",
+    "sha256": "2c2de1f8474885fc61ab085eeb78357aa4ddab9ce4f3e236fa111b39f24f3991",
+    "fps_num": 30,
+    "fps_den": 1,
+    "total_frames": 763,
+    "timeline_id": "r1-point-9-short-frame-v001",
+    "timeline_start_frame": 0
+  },
+  "localRange": {
+    "startFrame": 0,
+    "endFrameExclusive": 763
+  },
+  "sourceClockId": "q5-edited-content-frame-v002",
+  "sourceRange": {
+    "startFrame": 11683,
+    "endFrameExclusive": 12446
+  },
+  "captionRanges": [
+    {
+      "text": "ドスンと落ちていく感じがありますね",
+      "startFrame": 7,
+      "endFrameExclusive": 129
+    },
+    {
+      "text": "はいどうでしょうか",
+      "startFrame": 181,
+      "endFrameExclusive": 270
+    },
+    {
+      "text": "さっきとはまた違う",
+      "startFrame": 270,
+      "endFrameExclusive": 340
+    },
+    {
+      "text": "同じにしか見えないけどまた違う",
+      "startFrame": 358,
+      "endFrameExclusive": 426
+    },
+    {
+      "text": "ということで重いわー",
+      "startFrame": 623,
+      "endFrameExclusive": 728
+    }
+  ],
+  "preservation": {
+    "backgroundKind": "same-saved-base-bytes",
+    "sameSavedBaseBytes": true,
+    "baseRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/normal/base.mp4",
+      "fileSha256": "8ae864fd42c309c7662f9decc79fa47ede4e285fff6032068bb4fe4c1df66f63",
+      "bytes": 8742940
+    },
+    "mediaOmission": {
+      "startFrame": 12153,
+      "endFrameExclusive": 12212
+    },
+    "omittedFrames": 59,
+    "hiddenCaptionIds": [
+      "digest-v1-phase2-20260913-v001-bridge-caption-000121"
+    ],
+    "retainedFramesBefore": 44,
+    "retainedFramesAfter": 16,
+    "aacPacketPayloadSame": true,
+    "logicalDecodedAudioSame": true,
+    "logicalDecodedSampleCount": 1220800
+  },
+  "finalQc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 5,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "violations": []
+  },
+  "completedFrameQcSummary": {
+    "status": "passed",
+    "method": "exact-replay-native-v1",
+    "violations": []
+  },
+  "nativeAssets": {
+    "nativeDraws": 15,
+    "bitmapReuses": 0,
+    "verifiedPairsAdded": 5
+  },
+  "formalTrustChanged": false,
+  "humanQuality": "not-evaluated",
+  "mediaEditChanged": false
+}

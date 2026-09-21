@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "r123-independent-read-review-v001",
+  "status": "no-blocking-findings",
+  "scope": "承認A/C/Dの追加差分、検査結果集計、Point Review生成準備、完成報告草案の読取り確認。動画目視・試験再実行・最終生成の実行成功はこの記録の対象外。",
+  "sourceRefs": [
+    {
+      "path": "evals/clip_composition/presentation_editing_client_state_v001.test.mjs",
+      "fileSha256": "767f6e983c1751612f377fe9f2b69597b3a7f3a6afa3c83f84a8756154cf5b6c"
+    },
+    {
+      "path": "tools/digest-quality/r1-caption-render.mjs",
+      "fileSha256": "3321ad4d414cc8455398555e3af2cb6993de8f8476629b45136df737ce89c434"
+    },
+    {
+      "path": "tools/digest-quality/r3-palette-qa.mjs",
+      "fileSha256": "b8bede46c3815c4dc1363c88dd2e8a80f473c1cddfee09d976569ef5c743e46c"
+    }
+  ],
+  "reviews": [
+    {
+      "reviewer": "connection_prototype_audit",
+      "finding": "3ファイル17行追加・6行削除。cache専用検査、画素集合/bounds厳密比較、selected optionによる試験読取のみ。共通描画・QC・製品UIは追加変更なし。"
+    },
+    {
+      "reviewer": "q5_retention_boundary_audit",
+      "finding": "7問、12媒体、14再生窓の設計に問題なし。4は141frameずつ、新時計だけ11frame移動。5は0始まり。9/10は旧Q5 After。8は実HRBの代表2例。原回答不変と新版空回答を確認する構成。"
+    },
+    {
+      "reviewer": "connection_prototype_audit",
+      "finding": "最新8組TAPの206件合格を重複なしで集計。原回答10件完了、実ファイルSHAを照合。完成報告の数値・範囲に重大な問題なし。",
+      "wordingClarificationsApplied": [
+        "映像不変を字幕の下の映像を保持と明確化",
+        "配色は既存を含む計4組と明確化",
+        "動作復帰は言い終わり付近で字幕消失前と明確化"
+      ]
+    },
+    {
+      "reviewer": "q5_retention_boundary_audit",
+      "finding": "最終実生成記録とレビューのSHA、12媒体/7問/14窓、32字幕/4878frame、158標本/22269論理参照/22126RGB/21906距離、音声7170660sampleとbyte一致判定を確認。包装後の軽量要約SHA・build参照更新を確認し、旧buildとの差はnative要約参照と説明だけ。元review/HTML/空回答/範囲は不変。",
+      "scope": "lightweight evidence and binding read only; no media rehash, test rerun, browser playback or human visual review"
+    }
+  ],
+  "preparedReviewScript": {
+    "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/build-final-review-v002.mjs",
+    "fileSha256": "33e9156b626b9e156dae9402b0be995e99226ec1b571b95a54e268cc3f392fb4"
+  },
+  "finalArtifactExecutionAndVerification": "recorded in hrb-native-verification-v001.json and review-build-verification-v002.json; final binding read review completed"
+}

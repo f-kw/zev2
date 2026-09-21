@@ -222,7 +222,9 @@ async function losslessBase(job, evidenceDirectory) {
 export async function renderR1CaptionShortV001({jobPath, onProgress = () => {}}) {
   assert.equal(process.version, 'v20.19.6'); assert(!Object.hasOwn(process.env, 'NODE_OPTIONS'));
   const jobRef = await bind(jobPath), initial = await verifyR1CaptionShortJobV001({jobPath}), {job, loaded, resolved} = initial;
-  for (const dir of [job.outputDirectory, job.evidenceDirectory, job.nativeAssetDirectory])
+  // The shared native cache is checked by its dedicated existing-cache guard.
+  // Only new render outputs and run evidence must be unused directories.
+  for (const dir of [job.outputDirectory, job.evidenceDirectory])
     assertIgnoredPresentationOutputDirectoryV001({repositoryRoot: repo, outputDirectory: dir});
   await absent(job.outputDirectory); await absent(job.evidenceDirectory); await mkdir(job.evidenceDirectory);
   const extraImplementationRefs = await Promise.all(['r1-caption-render.mjs', 'r1-caption-plan.mjs', 'r1-caption-prepare.mjs']

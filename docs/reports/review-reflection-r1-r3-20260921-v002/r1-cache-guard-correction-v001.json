@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "r1-cache-guard-correction-v001",
+  "authorization": "Parent relayed kawafmm's one-time approval for the four specifically listed A–D setup corrections in R1–R3 v002. This record covers A only.",
+  "change": "Exclude shared native cache from new unused output-directory validation; retain createPresentationNativeAssetCacheV001's existing-cache validation.",
+  "beforeRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/r1-caption-render.mjs",
+      "bytes": 24932,
+      "fileSha256": "6aa2422bf3b60c303a9547cf1cdeeb935f9157b2c949f34bed508cea311989cc"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-06/stderr.log",
+      "bytes": 761,
+      "fileSha256": "a2d07eef0ea7843e78d86cd5edceb3670dd70cef78292e135be69b5dbeb164ad"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-07/render-evidence/completion.json",
+      "bytes": 790679,
+      "fileSha256": "12d92914fc973ef317413a67d01fe3215128722559b3252f2c370b20841756cb"
+    }
+  ],
+  "afterImplementationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/r1-caption-render.mjs",
+    "bytes": 25059,
+    "fileSha256": "3321ad4d414cc8455398555e3af2cb6993de8f8476629b45136df737ce89c434"
+  },
+  "checks": [
+    {
+      "name": "syntax",
+      "chunk_id": "69b9c9",
+      "wall_time_seconds": 0.000001833,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "name": "06",
+      "chunk_id": "8e804b",
+      "wall_time_seconds": 0.740447583,
+      "exit_code": 0,
+      "original_token_count": 12,
+      "output": "{\"status\":\"passed\",\"point\":6,\"frameCount\":686}\n"
+    },
+    {
+      "name": "09",
+      "chunk_id": "4cdd68",
+      "wall_time_seconds": 0.207628125,
+      "exit_code": 0,
+      "original_token_count": 12,
+      "output": "{\"status\":\"passed\",\"point\":9,\"frameCount\":763}\n"
+    },
+    {
+      "name": "10",
+      "chunk_id": "bb12ea",
+      "wall_time_seconds": 0.163701708,
+      "exit_code": 0,
+      "original_token_count": 12,
+      "output": "{\"status\":\"passed\",\"point\":10,\"frameCount\":624}\n"
+    }
+  ],
+  "nativeCacheValidation": "absolute managed path; existing directory chain must be ordinary directories with no symlinks; ignored-output eligibility checked on a new entry path; cached artifact bindings retained",
+  "oldPoint7RenderRepeated": false,
+  "productionRendererChanged": false,
+  "nativeCompletion": "reported separately in each completion record"
+}

@@ -380,6 +380,10 @@ test('component: paired palette choice is saved with its background and survives
   await ui.click(ui.button(saveLabel));
   assert.deepEqual(ui.service.saves[0].selection, selected);
   await ui.choose('caption-b'); await ui.choose('caption-a');
-  assert.equal(ui.label('select', '背景と文字の配色').value, 'dark');
-  assert.equal(ui.label('select', '変更する表現').value, 'panel');
+  // The synthetic host retains selected options; unlike a browser select it
+  // does not derive select.value when Vue assigns option.selected on reload.
+  assert.deepEqual(ui.label('select', '背景と文字の配色').options.filter(option => option.selected)
+    .map(option => option.value), ['dark']);
+  assert.deepEqual(ui.label('select', '変更する表現').options.filter(option => option.selected)
+    .map(option => option.value), ['panel']);
 });

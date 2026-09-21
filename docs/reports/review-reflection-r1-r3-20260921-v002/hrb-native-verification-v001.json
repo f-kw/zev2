@@ -1,0 +1,943 @@
+{
+  "schemaVersion": "r123-full-native-verification-v001",
+  "status": "passed",
+  "completedAt": "2026-09-21T10:11:08.918Z",
+  "completionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-render-evidence-v001/completion.json",
+    "bytes": 255679721,
+    "fileSha256": "249b22516e85a6a61a5b7d52660c4f44ff250d60200860086465bbeb316e8e9a"
+  },
+  "candidateVideo": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-render-v001/presentation-rendered-v002.mp4",
+    "bytes": 73566343,
+    "fileSha256": "6cacf10a9d804cafa10a148c141db33521c5f62bf3c4e34a133622e377608075"
+  },
+  "frameCount": 4878,
+  "fps": {
+    "numerator": 30,
+    "denominator": 1
+  },
+  "durationSeconds": 162.6,
+  "captionCount": 32,
+  "finalQc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 32,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "violations": []
+  },
+  "completedFrameQc": {
+    "status": "passed",
+    "method": "exact-replay-native-v1",
+    "violations": []
+  },
+  "exactReplay": {
+    "status": "passed",
+    "method": "mp4-byte-identical",
+    "encodedFrames": 4878,
+    "mp4BytesIdentical": true,
+    "completedSha256": "6cacf10a9d804cafa10a148c141db33521c5f62bf3c4e34a133622e377608075",
+    "replaySha256": "6cacf10a9d804cafa10a148c141db33521c5f62bf3c4e34a133622e377608075",
+    "observedDecodedFrameCount": null,
+    "note": "4878frame全体を再合成したMP4 byte一致。別途全frameを復号比較した件数とは扱わない。"
+  },
+  "finiteState": {
+    "verifiedSamples": 158,
+    "verifiedCaptions": 32,
+    "logicalReferenceCount": 22269,
+    "referenceRgbOutputs": 22126,
+    "exactDistanceCalculations": 21906,
+    "violations": []
+  },
+  "audio": {
+    "status": "passed",
+    "baseAndFinalPacketPayloadEqual": true,
+    "baseAndFinalLogicalPcmEqual": true,
+    "sampleRate": 44100,
+    "channels": 2,
+    "streamTimeBase": "1/44100",
+    "presentationStartSample": 0,
+    "presentationEndSampleExclusive": 7170660,
+    "durationSeconds": 162.6,
+    "firstPacket": {
+      "pts": -1024,
+      "dts": -1024,
+      "duration": 1024,
+      "side_data_list": [
+        {
+          "side_data_type": "Skip Samples",
+          "skip_samples": 1024,
+          "discard_padding": 0,
+          "skip_reason": 0,
+          "discard_reason": 0
+        }
+      ]
+    },
+    "lastPacket": {
+      "pts": 7170048,
+      "dts": 7170048,
+      "duration": 612
+    },
+    "packetCount": 7004,
+    "primingSkipSamples": 1024,
+    "firstDecodedFrame": {
+      "pts": 0,
+      "best_effort_timestamp": 0,
+      "nb_samples": 1024
+    },
+    "packetPayloadSha256": "8f5e83c0c4c531f0b7b03621e0cf3fdbbd28d83a3961433bb6bfb8b25fe14d4e",
+    "rawDecodedSampleCount": 7171072,
+    "logicalDecodedSampleCount": 7170660,
+    "decodedTailSampleCount": 412,
+    "rawDecodedPayloadSha256": "5f8528be0774a10b663b5ecec37643e4e4bc032689ac8e074b2423e2cc942338",
+    "logicalDecodedPayloadSha256": "d265f7fb9335b5f973e5e6e92d4e1b444fafdccdc3d0905c255431c9d70a3ac5",
+    "logicalDecodedInterval": {
+      "startSample": 0,
+      "endSampleExclusive": 7170660
+    },
+    "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+  },
+  "preparedIntegrationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v003/integration.json",
+    "bytes": 32649,
+    "fileSha256": "18af780134981e494f75e2b1c803e08e249715c7689be7ad578f81dbb2ccca30"
+  },
+  "backgroundVerificationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/review-reflection-r1-r3-20260921-v002/r2-full-background-completion-v001.json",
+    "bytes": 2166,
+    "fileSha256": "a0785b148ed0782fcd3017015967e71f89a4f5dcdeed1179caecd4f24f827ab2"
+  },
+  "extension": {
+    "observedUtteranceMs": {
+      "startMs": 1268220,
+      "endMs": 1269000
+    },
+    "oldRequestedSourceStartMs": 1268581,
+    "addedFrameCount": 11,
+    "oldCompletedFrameCount": 4867,
+    "newCompletedFrameCount": 4878,
+    "sourceVideoRange": {
+      "startFrame": 38046,
+      "endFrameExclusive": 38057
+    },
+    "sourceDecodedFrameRange": {
+      "startFrame": 76092,
+      "endFrameExclusive": 76114
+    },
+    "sourcePtsRange": {
+      "startPts": 114139440,
+      "endPtsExclusive": 114172440,
+      "timeBase": "1/90000"
+    },
+    "sourceAudioRange": {
+      "startSample": 55928326,
+      "endSampleExclusive": 55944496,
+      "sampleRate": 44100,
+      "channels": 2,
+      "sampleCount": 16170
+    },
+    "physicalPieces": [
+      {
+        "kind": "added-source",
+        "oldDigestRange": null,
+        "newGlobalRange": {
+          "startFrame": 0,
+          "endFrameExclusive": 11
+        },
+        "sourceVideoRange": {
+          "startFrame": 38046,
+          "endFrameExclusive": 38057
+        }
+      },
+      {
+        "kind": "unchanged-old-digest",
+        "oldDigestRange": {
+          "startFrame": 0,
+          "endFrameExclusive": 4867
+        },
+        "newGlobalRange": {
+          "startFrame": 11,
+          "endFrameExclusive": 4878
+        }
+      }
+    ],
+    "extendedFirstSegment": {
+      "segmentId": "segment-0001",
+      "sourceStartMs": 1268220,
+      "sourceEndMs": 1279920,
+      "sourceStartFrame30": 38046,
+      "sourceEndFrame30": 38397,
+      "outputStartFrame": 0,
+      "outputEndFrame": 351,
+      "audioSamples": {
+        "sourceStart": 55928326,
+        "sourceEnd": 56444296,
+        "outputStart": 0,
+        "outputEnd": 515970
+      }
+    },
+    "invariant": "all old Digest frames and the exit remain in order; only the source-contiguous prefix is new",
+    "projection": "resolve the corrected baseline once; project all subsequent captions, measured peaks and motion anchors by the same added frame count"
+  },
+  "explicitOpeningNormalPreserved": true,
+  "representativePaletteCaptions": [
+    {
+      "instructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "kind": "speech-caption",
+      "text": "なんかグロいやつに捕まってる",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "な",
+              "codePoint": 12394,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "ん",
+              "codePoint": 12435,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "か",
+              "codePoint": 12363,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "グ",
+              "codePoint": 12464,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "ロ",
+              "codePoint": 12525,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "い",
+              "codePoint": 12356,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "や",
+              "codePoint": 12420,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "つ",
+              "codePoint": 12388,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "に",
+              "codePoint": 12395,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "捕",
+              "codePoint": 25429,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 10,
+              "character": "ま",
+              "codePoint": 12414,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 11,
+              "character": "っ",
+              "codePoint": 12387,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 12,
+              "character": "て",
+              "codePoint": 12390,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 13,
+              "character": "る",
+              "codePoint": 12427,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "なんかグロいやつに捕まってる",
+          "text": "なんかグロいやつに捕まってる",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "sourceUnitIds": [
+            "digest-internal-edit-20260907-v002-atom-000125",
+            "digest-internal-edit-20260907-v002-atom-000126",
+            "digest-internal-edit-20260907-v002-atom-000127",
+            "digest-internal-edit-20260907-v002-atom-000128",
+            "digest-internal-edit-20260907-v002-atom-000129",
+            "digest-internal-edit-20260907-v002-atom-000130",
+            "digest-internal-edit-20260907-v002-atom-000131",
+            "digest-internal-edit-20260907-v002-atom-000132",
+            "digest-internal-edit-20260907-v002-atom-000133",
+            "digest-internal-edit-20260907-v002-atom-000134",
+            "digest-internal-edit-20260907-v002-atom-000135",
+            "digest-internal-edit-20260907-v002-atom-000136",
+            "digest-internal-edit-20260907-v002-atom-000137",
+            "digest-internal-edit-20260907-v002-atom-000138"
+          ],
+          "logicalWidth": 28
+        }
+      ],
+      "sourceStartMs": null,
+      "sourceEndMs": null,
+      "startFrame": 1746,
+      "endFrameExclusive": 1817,
+      "displayFrameCount": 71,
+      "requestedProfileId": "normal-landscape-readable-pop-v001",
+      "appliedProfileId": "normal-landscape-readable-pop-v001",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "presetId": "normal-landscape-readable-pop-v001",
+      "registryVersion": "normal-landscape-preset-registry-v001",
+      "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "stateId": "caption-core-v001",
+      "visualState": {
+        "stateId": "caption-core-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 96,
+          "fontColor": "#4B2C16",
+          "borderColor": "#111827",
+          "borderWidthPx": 0,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 0,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": {
+          "color": "#FFF0DC",
+          "borderRadiusPx": 0,
+          "paddingXPx": 24,
+          "paddingYPx": 16,
+          "panelPresetId": "plain",
+          "panelPaletteId": "warm"
+        },
+        "layout": {
+          "maxCharsPerLine": 36,
+          "maxLines": 2,
+          "singleLine": false
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": null,
+      "targetProvenance": {
+        "targetRefId": "digest-internal-edit-20260907-v002-caption",
+        "targetType": "semantic-caption",
+        "sourceAtomIds": [
+          "digest-internal-edit-20260907-v002-atom-000125",
+          "digest-internal-edit-20260907-v002-atom-000126",
+          "digest-internal-edit-20260907-v002-atom-000127",
+          "digest-internal-edit-20260907-v002-atom-000128",
+          "digest-internal-edit-20260907-v002-atom-000129",
+          "digest-internal-edit-20260907-v002-atom-000130",
+          "digest-internal-edit-20260907-v002-atom-000131",
+          "digest-internal-edit-20260907-v002-atom-000132",
+          "digest-internal-edit-20260907-v002-atom-000133",
+          "digest-internal-edit-20260907-v002-atom-000134",
+          "digest-internal-edit-20260907-v002-atom-000135",
+          "digest-internal-edit-20260907-v002-atom-000136",
+          "digest-internal-edit-20260907-v002-atom-000137",
+          "digest-internal-edit-20260907-v002-atom-000138"
+        ]
+      },
+      "materialRefs": []
+    },
+    {
+      "instructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+      "kind": "speech-caption",
+      "text": "今年一でしたわ今年一",
+      "indexedLines": [
+        {
+          "lineIndex": 0,
+          "characters": [
+            {
+              "sourceIndex": 0,
+              "character": "今",
+              "codePoint": 20170,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 1,
+              "character": "年",
+              "codePoint": 24180,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 2,
+              "character": "一",
+              "codePoint": 19968,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 3,
+              "character": "で",
+              "codePoint": 12391,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 4,
+              "character": "し",
+              "codePoint": 12375,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 5,
+              "character": "た",
+              "codePoint": 12383,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 6,
+              "character": "わ",
+              "codePoint": 12431,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 7,
+              "character": "今",
+              "codePoint": 20170,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 8,
+              "character": "年",
+              "codePoint": 24180,
+              "role": "visible"
+            },
+            {
+              "sourceIndex": 9,
+              "character": "一",
+              "codePoint": 19968,
+              "role": "visible"
+            }
+          ],
+          "renderedText": "今年一でしたわ今年一",
+          "text": "今年一でしたわ今年一",
+          "codePointIndices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "sourceUnitIds": [
+            "digest-internal-edit-20260907-v002-atom-000393",
+            "digest-internal-edit-20260907-v002-atom-000394",
+            "digest-internal-edit-20260907-v002-atom-000395",
+            "digest-internal-edit-20260907-v002-atom-000396",
+            "digest-internal-edit-20260907-v002-atom-000397",
+            "digest-internal-edit-20260907-v002-atom-000398",
+            "digest-internal-edit-20260907-v002-atom-000399",
+            "digest-internal-edit-20260907-v002-atom-000400",
+            "digest-internal-edit-20260907-v002-atom-000401",
+            "digest-internal-edit-20260907-v002-atom-000402"
+          ],
+          "logicalWidth": 20
+        }
+      ],
+      "sourceStartMs": null,
+      "sourceEndMs": null,
+      "startFrame": 4599,
+      "endFrameExclusive": 4716,
+      "displayFrameCount": 117,
+      "requestedProfileId": "normal-landscape-readable-pop-v001",
+      "appliedProfileId": "normal-landscape-readable-pop-v001",
+      "requestedPresetId": "normal-landscape-readable-pop-v001",
+      "appliedPresetId": "normal-landscape-readable-pop-v001",
+      "presetId": "normal-landscape-readable-pop-v001",
+      "registryVersion": "normal-landscape-preset-registry-v001",
+      "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+      "stateId": "caption-core-v001",
+      "visualState": {
+        "stateId": "caption-core-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 96,
+          "fontColor": "#F8FAFC",
+          "borderColor": "#111827",
+          "borderWidthPx": 0,
+          "lineSpacingPercent": 150,
+          "glowColor": "#000000",
+          "glowWidthPx": 0,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": {
+          "color": "#172338",
+          "borderRadiusPx": 0,
+          "paddingXPx": 24,
+          "paddingYPx": 16,
+          "panelPresetId": "graph-paper",
+          "panelPaletteId": "dark"
+        },
+        "layout": {
+          "maxCharsPerLine": 36,
+          "maxLines": 2,
+          "singleLine": false
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "transition": {
+        "transitionId": "quick-fade-4f-v001",
+        "entry": {
+          "type": "alpha-fade",
+          "frames": 4
+        },
+        "exit": {
+          "type": "alpha-fade",
+          "frames": 4
+        }
+      },
+      "timelineSegmentId": null,
+      "targetProvenance": {
+        "targetRefId": "digest-internal-edit-20260907-v002-caption",
+        "targetType": "semantic-caption",
+        "sourceAtomIds": [
+          "digest-internal-edit-20260907-v002-atom-000393",
+          "digest-internal-edit-20260907-v002-atom-000394",
+          "digest-internal-edit-20260907-v002-atom-000395",
+          "digest-internal-edit-20260907-v002-atom-000396",
+          "digest-internal-edit-20260907-v002-atom-000397",
+          "digest-internal-edit-20260907-v002-atom-000398",
+          "digest-internal-edit-20260907-v002-atom-000399",
+          "digest-internal-edit-20260907-v002-atom-000400",
+          "digest-internal-edit-20260907-v002-atom-000401",
+          "digest-internal-edit-20260907-v002-atom-000402"
+        ]
+      },
+      "materialRefs": []
+    }
+  ],
+  "originalCompletedMediaRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+    "bytes": 75306932,
+    "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225"
+  },
+  "originalCompletedMediaBytesUnchanged": true,
+  "localImplementationRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/r123-integration.mjs",
+      "bytes": 17527,
+      "fileSha256": "57c667a06a8490b02893a88df4d3b5834a20020c2e6b71f422934b0d3ac45191"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/r123-plan.mjs",
+      "bytes": 10366,
+      "fileSha256": "dac95497dc1d6a9475956c683442864e0c519524e0e0b3bc9ae073125bbeffe9"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/r3-integration.mjs",
+      "bytes": 8566,
+      "fileSha256": "aab72a34fa3e16fa64ce68ad1db9eb1b0cc1172a9100fca51ef03ec18059ee9a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/r2-media.mjs",
+      "bytes": 11695,
+      "fileSha256": "fb910f9977745a49c904c52c04603f78f8b0b327b0d08685414017c3ee3e9f7d"
+    }
+  ],
+  "drawingRulesRef": {
+    "schemaVersion": "presentation-edited-drawing-rules-v001",
+    "files": [
+      {
+        "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "bytes": 88501744,
+        "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+cli@4.0.481_postcss@8.5.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@remotion/cli/remotion-cli.js",
+        "bytes": 225,
+        "fileSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/tsx@4.22.3/node_modules/tsx/dist/cli.mjs",
+        "bytes": 120402,
+        "fileSha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+        "bytes": 159972320,
+        "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "bytes": 442864,
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+        "bytes": 238096,
+        "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/imagemagick/7.1.2-12_1/bin/magick",
+        "bytes": 69952,
+        "fileSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.mjs",
+        "bytes": 23254,
+        "fileSha256": "4092a3faa49aa360eed4f1b6ecaf4d743dc421d77ccc655d429b4907f5269de0"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+        "bytes": 5139,
+        "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_auto_effects_v001.mjs",
+        "bytes": 27968,
+        "fileSha256": "f8f3864af36540a1c0c20684ddb6a318e0c4fa3f0ad274a88ead8e81c4052c3d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_base_media_timeline_v002.mjs",
+        "bytes": 56058,
+        "fileSha256": "a1f72079f0e970cb5c6a67817427aa5909f2453ad0d04e81150cfd29c5b41ab2"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_contract_v002.mjs",
+        "bytes": 4613,
+        "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_contract_v003.mjs",
+        "bytes": 32607,
+        "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_motion_v001.mjs",
+        "bytes": 11588,
+        "fileSha256": "97306f1ec65af6622d275090736618389676d65aff2e763a3b9316f32056f325"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+        "bytes": 186390,
+        "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_effects_v001.mjs",
+        "bytes": 8352,
+        "fileSha256": "5028d65e6768bef6c8f7b935b38bc1af7b29a043619a3069b10cec5ddea42b5f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_encoded_omission_qc_v002.mjs",
+        "bytes": 31653,
+        "fileSha256": "61708daed8de8bd6426bdda619a2797e8ef0021c90ded9b7a3742049ec238f7d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+        "bytes": 47306,
+        "fileSha256": "c8480c534fa2cd97949d5e74e829d0b4683c874cf15a2dc1f92980e0d84dd981"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_fatal_observation_v002.mjs",
+        "bytes": 12762,
+        "fileSha256": "cf95c2ba8785be681dcecc03dc4ec009d6f02b4161e3c39f7edbf431b92b6115"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_instruction_contract_v002.mjs",
+        "bytes": 60145,
+        "fileSha256": "11c80c40d4fd9cbe88bb40ed5a941e084e381b5646123edecad8f224926c3e20"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+        "bytes": 14144,
+        "fileSha256": "57e84c6636d7dd66000545bb4606a5d09e0581ad59bf787b3531852b02e5aab3"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_asset_cache_v001.mjs",
+        "bytes": 4690,
+        "fileSha256": "73195d873efd26531b598547527272cf5e8e85862387e08ae0b767c5adc33518"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+        "bytes": 20680,
+        "fileSha256": "1dfa1f28280480e48fe102b33adf54f7b2b5c827e2931a1d8acdfb3e75d3e3e9"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+        "bytes": 61942,
+        "fileSha256": "6820d0e85dba7ac76b36f0c8b4499ddc7018d600097fc4ecd1043ad1d5c730a6"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs",
+        "bytes": 61871,
+        "fileSha256": "3a01da6a3897c44beea540aba4602793d5e445780f79ce891daee258a40f7ecd"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+        "bytes": 18113,
+        "fileSha256": "efe6df57b2e2164d16743f1e1626a8f5a56fbce2a8ed426da654f085dc475f9d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_projection_v001.mjs",
+        "bytes": 19232,
+        "fileSha256": "350272ca2a0abc0082c69b302d3cee626c92aab51770aaf400e63a2526ae9bef"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_render_scope_v001.mjs",
+        "bytes": 3523,
+        "fileSha256": "3d4a6a2e06c659b7502f0d65a87cfb195d8a9599818893a3c32332da803e81e3"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_v001.mjs",
+        "bytes": 51537,
+        "fileSha256": "1e1a4e5357466a502087c1e2f5a10110e5d30bf6e3dd68af8ff32896695612e2"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_output_directory_v001.mjs",
+        "bytes": 2222,
+        "fileSha256": "58c31d77296a47355305931eb725323d8baf044aeb6e4e502d1878bf51812e16"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_panel_presets_v002.mjs",
+        "bytes": 6334,
+        "fileSha256": "73c1978a27b30a90d1c9036248eb16039a99e0896c365d35e76b5d9158121522"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_evidence_v001.mjs",
+        "bytes": 2872,
+        "fileSha256": "2bd5522fb87e5951029b6bdeddf363d11b3f647b31712978a5e45b1117909968"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_renderer_qc_v001.mjs",
+        "bytes": 5111,
+        "fileSha256": "f55a247822a3bf7d7f516c75ab038a1567de21f5f5a119a05042523b3afdcc61"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_v001.mjs",
+        "bytes": 9938,
+        "fileSha256": "b4a437f64d26c1c8ee64bbedab7956c2fc5d1cfd1c1fa946e060e90789c12e05"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_entry_v001.tsx",
+        "bytes": 28811,
+        "fileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_plan_v002.mjs",
+        "bytes": 25089,
+        "fileSha256": "3a77c7feb7005fa06d7e45a6364f76ab4bc40a8622370568cf557d5090f08b79"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+        "bytes": 4964,
+        "fileSha256": "97aa9b2cd584b2cea15f31f0e7a813cc6ba1e1a8cdbb31bdb5d675c03be7d47d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+        "bytes": 45170,
+        "fileSha256": "4882f9ce20f1797235068462125e7af1399ded5e4b62470452b96320938bc4cd"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "bytes": 14071,
+        "fileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_retained_source_atoms_v001.mjs",
+        "bytes": 87458,
+        "fileSha256": "f28178327ddc0cc64f11527d850c71bfb5043b4e13f59f6da7997fd8f6d6cad0"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_segmenter_boundary_evidence_v001.mjs",
+        "bytes": 70230,
+        "fileSha256": "dac613292e463897ee2757be75a7d64f3ece9928141765a195ba54a0ebc6007a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_source_speaker_policy_v001.mjs",
+        "bytes": 6454,
+        "fileSha256": "56d2d03d5bcee3a409b27acc9819a48c95abb867cdc00fd0b2bf2fe87bb9477b"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+        "bytes": 14291,
+        "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/registries/presentation/presentation-source-speaker-non-identity-registry-v001/registry.json",
+        "bytes": 602,
+        "fileSha256": "9e6f6c5e57c0b0823840c70fe0e3de05592cbc88819def6020a7c1cfaf211f3a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+        "bytes": 133529,
+        "fileSha256": "60c1ebe306b9ed3470118d83c3a1155a698fc156358d6b354678da4025a22d26"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/run_presentation_segmenter_boundary_preflight_v001.mjs",
+        "bytes": 47252,
+        "fileSha256": "e83157cfe72197940193c9bd07a4f8c9be4b1716617dc55bf90e1e8c4f33812e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/pnpm-lock.yaml",
+        "bytes": 177485,
+        "fileSha256": "1bfb232ca8a693bebedc1fd84971800aad2f633b2595ed805f2078f1dad44812"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/@remotion/cli/package.json",
+        "bytes": 1985,
+        "fileSha256": "9dbefa4daf7f9c83b9131192ed176a7ecca71679a1e96d1c85219febffa0135a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/react-dom/package.json",
+        "bytes": 1353,
+        "fileSha256": "d2f29e31bd48b833e48cd7bbf41f192e8ee4ff8da249fdbe10d4ac4114b8b12e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/react/package.json",
+        "bytes": 999,
+        "fileSha256": "d4e68a5c96babb20cad1daafea8b78822eae45b341552cf5418d06a5304fa64c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/node_modules/remotion/package.json",
+        "bytes": 2117,
+        "fileSha256": "965eb84ab06aa4acdbd9dc3751cf015eb13e3bd39e001779c7b5310f31e8b546"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "bytes": 4106788,
+        "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/OFL_LINESeedJP.txt",
+        "bytes": 4431,
+        "fileSha256": "8aa3e80c0d02c9f999756a5bb21258700edea4c727dab6169f6460245c4b6f0a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/OFL_ShipporiMincho-Bold.txt",
+        "bytes": 4399,
+        "fileSha256": "41fba056279be5f45ff9a99e44b7b53897b42732f5806d8e666e0ab49ac6bd38"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/ShipporiMincho-Bold.ttf",
+        "bytes": 18846492,
+        "fileSha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/components/TelopText.tsx",
+        "bytes": 7328,
+        "fileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/utils/telop-font.ts",
+        "bytes": 1723,
+        "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/shared/telop-glow.ts",
+        "bytes": 3060,
+        "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-line-break.ts",
+        "bytes": 8755,
+        "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-render-model.ts",
+        "bytes": 11392,
+        "fileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/text-metrics.ts",
+        "bytes": 2144,
+        "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+      }
+    ],
+    "decoderRoles": {
+      "currentDrawingAndNewAudio": {
+        "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "bytes": 442864,
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      "savedBackgroundObservation": null
+    },
+    "canonicalSha256": "3ccb44e815c524c902a306b09796766d4e03d339b88c4df52ee5d5e6e0a09792"
+  },
+  "stderrRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-render-v001.stderr.log",
+    "bytes": 0,
+    "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "newAiJudgment": false,
+  "originalMediaReplaced": false,
+  "humanQuality": "pending",
+  "scope": "HRBのR2冒頭・対象2動作とR3配色を統合した一候補。C-all/Q5の6/7/9/10は対応素材の独立した局所候補として保持。",
+  "expandedSummaryRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-native-verification-expanded-v001.json",
+    "bytes": 127826429,
+    "fileSha256": "e11a340303d22b8e20a4132df1574b5cbc482e70606240d0e244b30066dc8eeb"
+  },
+  "summaryPackaging": "Expanded final QC evidence is preserved byte-for-byte in the managed output directory and in completionRef; this tracked summary retains verdicts/counts and exact evidence references."
+}

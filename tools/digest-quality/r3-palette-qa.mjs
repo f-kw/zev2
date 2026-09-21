@@ -32,6 +32,10 @@ const alphaBytes = rgba => {
   for (let offset = 3, index = 0; offset < rgba.length; offset += 4) output[index++] = rgba[offset];
   return output;
 };
+const alphaPixelSets = alpha => ({
+  nonzeroPixelSetSha256: sha(Uint8Array.from(alpha, value => value > 0 ? 1 : 0)),
+  opaquePixelSetSha256: sha(Uint8Array.from(alpha, value => value === 255 ? 1 : 0)),
+});
 function centered(container, line, id) {
   const margins = {left: line.left - container.left, right: container.right - line.right,
     top: line.top - container.top, bottom: container.bottom - line.bottom};
@@ -160,9 +164,10 @@ export async function runR3PaletteQa(outputDirectory, summaryPath) {
       if (background.panelPresetId === 'plain') assert.deepEqual([...backgroundColors.keys()], [fieldColor]);
       else assert.ok(backgroundColors.size > 1, 'the graph keeps visible grid lines');
       const shapeId = element.instructionId.startsWith('short-') ? 'short' : 'wide';
-      const geometry = {container, line: mask.alphaBounds, glyphAlphaSha256: sha(alphaBytes(maskPixels))};
+      const glyphAlpha = alphaBytes(maskPixels);
+      const geometry = {container, line: mask.alphaBounds, ...alphaPixelSets(glyphAlpha)};
       const previous = geometryByShape.get(shapeId);
-      if (previous) assert.deepEqual(geometry, previous, 'palette/background changes leave glyph alpha and geometry unchanged');
+      if (previous) assert.deepEqual(geometry, previous, 'palette/background changes leave visible/opaque pixel sets and geometry unchanged');
       else geometryByShape.set(shapeId, geometry);
       evidence.cases.push({captionId: element.instructionId, shape: shapeId, background: background.panelPresetId,
         paletteId: background.panelPaletteId, status: 'passed',
@@ -171,7 +176,7 @@ export async function runR3PaletteQa(outputDirectory, summaryPath) {
         nativeCalibration: {path: calibrationPath, fileSha256: sha(await readFile(calibrationPath)),
           alphaBounds: calibration.alphaBounds, containerBounds, correction,
           method: 'resolveVisibleCenterOffsetsV001'},
-        declaredColors: palette, geometry, margins,
+        declaredColors: palette, geometry, margins, glyphAlphaSha256: sha(glyphAlpha),
         backgroundColorCounts: Object.fromEntries(backgroundColors), solidGlyphColorCounts: Object.fromEntries(glyphColors)});
       console.log(`${evidence.cases.length}/${elements.length} ${element.instructionId} passed`);
     }

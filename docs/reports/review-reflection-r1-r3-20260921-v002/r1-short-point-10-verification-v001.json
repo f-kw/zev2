@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "r1-caption-short-verification-v001",
+  "point": 10,
+  "status": "passed",
+  "completionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-10/render-evidence/completion.json",
+    "bytes": 3142879,
+    "fileSha256": "c913c15a1d90ae82170deb6451c1d4db0f8594f5f65aa4f79e1448fdc1234e85"
+  },
+  "candidateVideo": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-10/render/presentation-rendered-v002.mp4",
+    "bytes": 14891698,
+    "fileSha256": "a3bd104a79aa51da6f29bae6821e3c0e6d467c77ca6b0404bd30537f94d24dae"
+  },
+  "frameCount": 624,
+  "reviewMedia": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-10/render/presentation-rendered-v002.mp4",
+    "sha256": "a3bd104a79aa51da6f29bae6821e3c0e6d467c77ca6b0404bd30537f94d24dae",
+    "fps_num": 30,
+    "fps_den": 1,
+    "total_frames": 624,
+    "timeline_id": "r1-point-10-short-frame-v001",
+    "timeline_start_frame": 0
+  },
+  "localRange": {
+    "startFrame": 0,
+    "endFrameExclusive": 624
+  },
+  "sourceClockId": "q5-2-edited-content-frame-v001",
+  "sourceRange": {
+    "startFrame": 18578,
+    "endFrameExclusive": 19202
+  },
+  "captionRanges": [
+    {
+      "text": "撃てないかー",
+      "startFrame": 0,
+      "endFrameExclusive": 86
+    },
+    {
+      "text": "撃てないかー",
+      "startFrame": 86,
+      "endFrameExclusive": 171
+    },
+    {
+      "text": "全然まで使ったのに",
+      "startFrame": 171,
+      "endFrameExclusive": 215
+    },
+    {
+      "text": "撃てないかー",
+      "startFrame": 215,
+      "endFrameExclusive": 345
+    },
+    {
+      "text": "厳しいですねー",
+      "startFrame": 345,
+      "endFrameExclusive": 470
+    },
+    {
+      "text": "もう7回かもうやばくない?",
+      "startFrame": 470,
+      "endFrameExclusive": 587
+    },
+    {
+      "text": "早くビト見せろよ",
+      "startFrame": 587,
+      "endFrameExclusive": 624
+    }
+  ],
+  "preservation": {
+    "backgroundKind": "same-saved-base-bytes",
+    "sameSavedBaseBytes": true,
+    "baseRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-evidence-v002/normal/base.mp4",
+      "fileSha256": "fa2a242b8b1ce5dd8104a4f331d19686ab5d4c3e3b319c4172f315e00b06e364",
+      "bytes": 15173586
+    },
+    "addition": {
+      "targetSegmentId": "segment-0008",
+      "sourceVideoRange": {
+        "startFrame": 227963,
+        "endFrameExclusive": 228308
+      },
+      "subtitleMode": "source-text-captions"
+    },
+    "addedFrameCount": 345,
+    "aacPacketPayloadSame": true,
+    "logicalDecodedAudioSame": true,
+    "logicalDecodedSampleCount": 998400,
+    "splitParentTextAndOrderUnchanged": true
+  },
+  "finalQc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 7,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "violations": []
+  },
+  "completedFrameQcSummary": {
+    "status": "passed",
+    "method": "exact-replay-native-v1",
+    "violations": []
+  },
+  "nativeAssets": {
+    "nativeDraws": 21,
+    "bitmapReuses": 0,
+    "verifiedPairsAdded": 7
+  },
+  "formalTrustChanged": false,
+  "humanQuality": "not-evaluated",
+  "mediaEditChanged": false
+}
