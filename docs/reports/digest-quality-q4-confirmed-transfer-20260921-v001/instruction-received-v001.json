@@ -1,0 +1,32 @@
+{
+  "recordedAt": "2026-09-21T11:54:02.385Z",
+  "conversation": "ZEV相談役 - ZEV Build Loop",
+  "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6aa7f7e5-03d8-83ee-aae1-6c4b66fb8303",
+  "parentUserInstruction": "ZEV R1〜R3：既存レビューを保持し、相談役へ直接相談して作業を継続する — 続行指示 v002",
+  "adviserInstruction": "ZEV Q4-1：確認済みルールを別Digestへ一度だけ反映する実走 — 実施指示 v001",
+  "decision": "continue",
+  "startCheckpoint": "90592baf95cf068ffbee7d1e02a3054b12a98f82",
+  "responseComplete": true,
+  "responseStatus": "レスポンス確認済み",
+  "modelSpecified": false,
+  "uiEffort": "中程度",
+  "modelChanges": 0,
+  "requestCount": 1,
+  "resends": 0,
+  "regenerations": 0,
+  "purpose": "既に人間確認された表示ルールだけを調整に使っていない別Digestへ保存済み意味判断を保持して適用できるか確認",
+  "firstGate": "024から既知のpresentation/orchestration/auto-presentation保存先に絞り、HRB以外で媒体・字幕・時計・元素材対応・保存済み意味役割/許容集合または自動判断が揃う一本を探す",
+  "ifInputFound": "保存意味判断を固定し、確認済みルールだけで再compile。通常審査と現権限が許せば別候補1本、変更記録・適用範囲・関連検査・最大3点のreview dataを準備し監査へ戻す",
+  "ifInputMissing": "探索範囲と候補ごとの不足を記録し、入力不足による第一完了としてcheckpoint/push/remote照合の後に相談役へ戻す。新意味判断を補わない",
+  "excluded": [
+    "未確認の発話末復帰",
+    "新4配色",
+    "冒頭11frame追加",
+    "R1の6/7/9/10字幕変更",
+    "Q3-2最短6frameの一般化",
+    "新selectorや係数",
+    "新素材/モデル/依存/有料API/外部媒体送信",
+    "正式trust/契約/原版置換/main merge/tag/release/ショート"
+  ],
+  "authorityNote": "相談役の具体化を本人の新しい直接承認に見せかけない。現行制約・通常審査を個々の操作へ適用する。"
+}
