@@ -1,0 +1,55 @@
+TAP version 13
+# Subtest: fixed format: every point starts unanswered; each video has its own clock
+ok 1 - fixed format: every point starts unanswered; each video has its own clock
+  ---
+  duration_ms: 2.17275
+  ...
+# Subtest: reject duplicate IDs, missing media, invalid ranges, loose fields, remote paths and orphan comparison
+ok 2 - reject duplicate IDs, missing media, invalid ranges, loose fields, remote paths and orphan comparison
+  ---
+  duration_ms: 0.590083
+  ...
+# Subtest: answers stay bound to exact batch, version, points, scope, SHA and ranges
+ok 3 - answers stay bound to exact batch, version, points, scope, SHA and ranges
+  ---
+  duration_ms: 1.720958
+  ...
+# Subtest: bundle answer and chat original remain a single scoped record; both-usable only has two offered views
+ok 4 - bundle answer and chat original remain a single scoped record; both-usable only has two offered views
+  ---
+  duration_ms: 1.096
+  ...
+# Subtest: local persistence round-trips raw answers; other revisions remain unanswered; corrupt stored data rejected
+ok 5 - local persistence round-trips raw answers; other revisions remain unanswered; corrupt stored data rejected
+  ---
+  duration_ms: 1.283666
+  ...
+# Subtest: segment controller stops at boundary, clips external seeks, and cancels playback when switching media
+ok 6 - segment controller stops at boundary, clips external seeks, and cancels playback when switching media
+  ---
+  duration_ms: 0.503
+  ...
+# Subtest: late play promise cannot revive a previous point or play after pause
+ok 7 - late play promise cannot revive a previous point or play after pause
+  ---
+  duration_ms: 0.174625
+  ...
+# Subtest: DOM-model integration: fixed controls navigate two datasets, save/read/export, stop segments, and reject foreign imports
+ok 8 - DOM-model integration: fixed controls navigate two datasets, save/read/export, stop segments, and reject foreign imports
+  ---
+  duration_ms: 8.285708
+  ...
+# Subtest: builder reuses exact template for two datasets; rejects forged media SHA/frame count and output overwrite
+ok 9 - builder reuses exact template for two datasets; rejects forged media SHA/frame count and output overwrite
+  ---
+  duration_ms: 15.907875
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 73.24025

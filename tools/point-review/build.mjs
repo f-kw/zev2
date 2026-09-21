@@ -18,19 +18,27 @@ export async function probeMedia(path) {
   const [num,den]=(stream.avg_frame_rate ?? '').split('/').map(Number);
   return {fps_num:num,fps_den:den,total_frames:Number(stream.nb_frames === undefined || stream.nb_frames === 'N/A' ? stream.nb_read_frames : stream.nb_frames)};
 }
+export async function verifyReviewMedia(review,inputPath,{probe=probeMedia}={}) {
+  validateReview(review);
+  const input=resolve(inputPath),sources={},checked=[],observations=new Map();
+  for(const media of review.media){
+    const path=await realpath(resolve(dirname(input),media.path));
+    if(!observations.has(path)){
+      const info=await stat(path);
+      if(!info.isFile())throw new Error(`${media.media_id}: ファイルではありません`);
+      observations.set(path,{hash:await fileHash(path),observed:await probe(path),bytes:info.size});
+    }
+    const {hash,observed,bytes}=observations.get(path);
+    if(hash!==media.sha256)throw new Error(`${media.media_id}: 動画SHA-256が一致しません`);
+    if(!Number.isSafeInteger(observed.fps_num)||!Number.isSafeInteger(observed.fps_den)||observed.fps_num<=0||observed.fps_den<=0||observed.total_frames!==media.total_frames||BigInt(observed.fps_num)*BigInt(media.fps_den)!==BigInt(media.fps_num)*BigInt(observed.fps_den))throw new Error(`${media.media_id}: 動画のframe数またはfpsが一致しません`);
+    sources[media.media_id]=pathToFileURL(path).href;checked.push({media_id:media.media_id,path,sha256:hash,bytes,...observed});
+  }
+  return {sources,checked};
+}
 export async function buildReview({dataPath,outputPath,probe=probeMedia}) {
   const input=resolve(dataPath),output=resolve(outputPath);
   const review=validateReview(JSON.parse(await readFile(input,'utf8')));
-  const sources={}, checked=[];
-  for(const media of review.media){
-    const path=await realpath(resolve(dirname(input),media.path));
-    if(!(await stat(path)).isFile())throw new Error(`${media.media_id}: ファイルではありません`);
-    const hash=await fileHash(path);
-    if(hash!==media.sha256)throw new Error(`${media.media_id}: 動画SHA-256が一致しません`);
-    const observed=await probe(path);
-    if(!Number.isSafeInteger(observed.fps_num)||!Number.isSafeInteger(observed.fps_den)||observed.fps_num<=0||observed.fps_den<=0||observed.total_frames!==media.total_frames||BigInt(observed.fps_num)*BigInt(media.fps_den)!==BigInt(media.fps_num)*BigInt(observed.fps_den))throw new Error(`${media.media_id}: 動画のframe数またはfpsが一致しません`);
-    sources[media.media_id]=pathToFileURL(path).href;checked.push({media_id:media.media_id,path,sha256:hash,...observed});
-  }
+  const {sources,checked}=await verifyReviewMedia(review,input,{probe});
   const reviewSha=sha256(canonical(review));
   const files=await Promise.all(['template.html','style.css','core.mjs','player.mjs','app.mjs'].map(name=>readFile(resolve(here,name),'utf8')));
   const script=files.slice(2).map(source=>source.replace(/^import .*;\n/gm,'').replace(/^export /gm,'')).join('\n')+'\ntry { mountReview(document, window, JSON.parse(document.getElementById("review-package").textContent)); } catch (error) { document.getElementById("save-status").textContent = "レビューを開けません: " + error.message; }';

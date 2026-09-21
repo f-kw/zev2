@@ -1,0 +1,35 @@
+TAP version 13
+# Subtest: session storage/export contains five unchanged original review bindings and form edits remain editable
+ok 1 - session storage/export contains five unchanged original review bindings and form edits remain editable
+  ---
+  duration_ms: 55.120167
+  ...
+# Subtest: imports preserve current answers, merge other points, and reject replacement even before a successful save
+ok 2 - imports preserve current answers, merge other points, and reject replacement even before a successful save
+  ---
+  duration_ms: 63.396583
+  ...
+# Subtest: one existing UI navigates all ten points, shows each original introduction, and exports original answers
+ok 3 - one existing UI navigates all ten points, shows each original introduction, and exports original answers
+  ---
+  duration_ms: 41.669959
+  ...
+# Subtest: UI imports cannot silently replace answers; storage denial still permits complete original-batch export
+ok 4 - UI imports cannot silently replace answers; storage denial still permits complete original-batch export
+  ---
+  duration_ms: 52.974833
+  ...
+# Subtest: a different display package is rejected before the existing app is mounted
+ok 5 - a different display package is rejected before the existing app is mounted
+  ---
+  duration_ms: 1.786292
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 255.252333

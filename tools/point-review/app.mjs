@@ -2,15 +2,24 @@
 import {ANSWERS, validateReview, blankAnswers, loadAnswers, saveAnswers, validateAnswers, recordAnswer, frameRange} from './core.mjs';
 import {createSegmentPlayer} from './player.mjs';
 
-export function mountReview(document, window, bundle) {
+export function mountReview(document, window, bundle, answerIO = null) {
   const {review, review_sha256: reviewSha, media_sources: mediaSources} = bundle;
   validateReview(review);
+  const io = answerIO ?? {
+    load: storage => loadAnswers(storage, review, reviewSha),
+    save: (storage, answers) => saveAnswers(storage, answers, review, reviewSha),
+    parse: text => validateAnswers(JSON.parse(text), review, reviewSha),
+    serialize: answers => JSON.stringify(validateAnswers(answers, review, reviewSha), null, 2) + '\n',
+    downloadName: `${review.batch_id}-${review.revision}-answers.json`,
+  };
+  const pointIntro = io.pointIntro ?? (() => review.intro);
+  const pointBindingText = io.pointBindingText ?? (() => `${review.batch_id} / ${review.revision} · レビュー版 SHA-256: ${reviewSha}`);
   const $ = (name) => document.getElementById(name);
   const text = (name, value) => { $(name).textContent = value; };
   let pointIndex = 0, viewIndex = 0, expanded = false;
   let answers = blankAnswers(review, reviewSha), storage = null;
   function saveStatus(message, error = false) { text('save-status', message); $('save-status').classList.toggle('error', error); }
-  try { storage = window.localStorage; answers = loadAnswers(storage, review, reviewSha); saveStatus('この端末の回答を読み込みました。未回答は未回答のまま残ります。'); }
+  try { storage = window.localStorage; answers = validateAnswers(io.load(storage), review, reviewSha); saveStatus('この端末の回答を読み込みました。未回答は未回答のまま残ります。'); }
   catch (error) { saveStatus(`端末の保存を読み込めませんでした。回答ファイルの取り出しは使えます。\n${error.message}`, true); }
   const point = () => review.points[pointIndex];
   const answer = () => answers.answers.find(a => a.point_id === point().point_id);
@@ -22,7 +31,7 @@ export function mountReview(document, window, bundle) {
   function persist() {
     try {
       if (!storage) throw new Error('このブラウザーでは端末保存を利用できません。');
-      saveAnswers(storage, answers, review, reviewSha); saveStatus('この端末へ保存しました。回答ファイルも取り出せます。');
+      validateAnswers(answers, review, reviewSha); io.save(storage, answers); saveStatus('この端末へ保存しました。回答ファイルも取り出せます。');
     } catch (error) { saveStatus(`端末へ保存できません。ページを閉じる前に「回答を取り出す」を使ってください。\n${error.message}`, true); }
     summary();
   }
@@ -72,6 +81,7 @@ export function mountReview(document, window, bundle) {
   function renderPoint(focus = false) {
     player.pause(); viewIndex = Math.max(0, point().views.findIndex(v => v.role === 'after' || v.role === 'candidate')); expanded = false;
     const p = point(), a = answer();
+    text('intro', pointIntro(p)); text('binding', pointBindingText(p));
     text('point-number', `POINT ${pointIndex+1} / ${review.points.length} · ${p.point_id}`);
     text('point-title', p.title); text('question', p.question); text('change-summary', p.change_summary); text('why-review', p.why_human_review);
     text('applies-to', p.scope.applies_to.join(' ／ ')); text('does-not-apply', p.scope.does_not_apply_to.join(' ／ '));
@@ -90,8 +100,7 @@ export function mountReview(document, window, bundle) {
     }));
     selectView(); summary(); if(focus) $('point-title').focus();
   }
-  text('batch-title', review.title); text('intro', review.intro);
-  text('binding', `${review.batch_id} / ${review.revision} · レビュー版 SHA-256: ${reviewSha}`);
+  text('batch-title', review.title);
   $('play').addEventListener('click', () => player.play()); $('replay').addEventListener('click', () => player.play()); $('pause').addEventListener('click', () => player.pause());
   $('context').addEventListener('click', () => { expanded=!expanded; selectView(); });
   $('previous').addEventListener('click', () => { if(pointIndex>0){pointIndex--;renderPoint(true);} });
@@ -99,14 +108,14 @@ export function mountReview(document, window, bundle) {
   $('comment').addEventListener('input',readForm);
   $('export').addEventListener('click', () => {
     player.pause(); validateAnswers(answers, review, reviewSha);
-    const url=window.URL.createObjectURL(new window.Blob([JSON.stringify(answers,null,2)+'\n'],{type:'application/json'}));
-    const anchor=document.createElement('a');anchor.href=url;anchor.download=`${review.batch_id}-${review.revision}-answers.json`;document.body.append(anchor);anchor.click();anchor.remove();
+    const url=window.URL.createObjectURL(new window.Blob([io.serialize(answers)],{type:'application/json'}));
+    const anchor=document.createElement('a');anchor.href=url;anchor.download=io.downloadName;document.body.append(anchor);anchor.click();anchor.remove();
     window.setTimeout(()=>window.URL.revokeObjectURL(url),0); saveStatus('回答ファイルを取り出しました。保存先はブラウザーのダウンロード一覧で確認できます。');
   });
   $('import').addEventListener('click',()=>{player.pause();$('import-file').click();});
   $('import-file').addEventListener('change',async()=>{
     const file=$('import-file').files[0];if(!file)return;
-    try { const incoming=validateAnswers(JSON.parse(await file.text()),review,reviewSha); answers=structuredClone(incoming);persist();renderPoint(); }
+    try { const incoming=validateAnswers(io.parse(await file.text(), structuredClone(answers)),review,reviewSha); answers=structuredClone(incoming);persist();renderPoint(); }
     catch(error){saveStatus(`読み込みを拒否しました。現在の回答は保持しています。\n${error.message}`,true);}
     finally{$('import-file').value='';}
   });
