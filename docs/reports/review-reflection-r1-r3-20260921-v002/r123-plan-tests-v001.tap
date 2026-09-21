@@ -1,0 +1,35 @@
+TAP version 13
+# Subtest: real HRB keeps all 32 captions, palette/connection choices and three exact peaks while applying R2 once
+ok 1 - real HRB keeps all 32 captions, palette/connection choices and three exact peaks while applying R2 once
+  ---
+  duration_ms: 169.577875
+  ...
+# Subtest: the returned choices resolve through current common rules and reproduce the saved R2 drawing
+ok 2 - the returned choices resolve through current common rules and reproduce the saved R2 drawing
+  ---
+  duration_ms: 148.650167
+  ...
+# Subtest: fresh source-proof reconstruction deterministically rebuilds the same plan and rejects an unbound copied view
+ok 3 - fresh source-proof reconstruction deterministically rebuilds the same plan and rejects an unbound copied view
+  ---
+  duration_ms: 285.633916
+  ...
+# Subtest: changed original text, caption identity, drawing, repeated prefix and repeated speech endpoint are rejected
+ok 4 - changed original text, caption identity, drawing, repeated prefix and repeated speech endpoint are rejected
+  ---
+  duration_ms: 1210.3445
+  ...
+# Subtest: a valid later Pulse is rejected explicitly because its native peak needs an additional connection shift
+ok 5 - a valid later Pulse is rejected explicitly because its native peak needs an additional connection shift
+  ---
+  duration_ms: 364.134542
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2255.325959

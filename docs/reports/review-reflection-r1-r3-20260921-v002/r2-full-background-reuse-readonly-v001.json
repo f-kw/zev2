@@ -1,0 +1,1335 @@
+{
+  "schemaVersion": "r2-full-background-reuse-readonly-v001",
+  "status": "read-only-reuse-qualified",
+  "checkedAt": "2026-09-21T06:44:12.809Z",
+  "sourceChanged": false,
+  "mediaOutputGenerated": false,
+  "nativeRenderingExecuted": false,
+  "conclusion": "既存の接続込み字幕なしNUTを元本として、承認された元動画11frameと既存4867frameをこの順序で結合できる。共通native描画の再試行は保留中。",
+  "originalBaseRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-v001/background.nut",
+    "bytes": 1029173377,
+    "fileSha256": "85e9c83e41ac3b69435aaedaf80f1357ffc97e47f82b3cfd81ae9f736ae59e87"
+  },
+  "streamMetadata": [
+    {
+      "index": 0,
+      "codec_name": "ffv1",
+      "codec_type": "video",
+      "width": 1920,
+      "height": 1080,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "time_base": "1/61440",
+      "start_pts": 0,
+      "start_time": "0.000000"
+    },
+    {
+      "index": 1,
+      "codec_name": "pcm_f32le",
+      "codec_type": "audio",
+      "sample_rate": "44100",
+      "channels": 2,
+      "r_frame_rate": "0/0",
+      "avg_frame_rate": "0/0",
+      "time_base": "1/44100",
+      "start_pts": 0,
+      "start_time": "0.000000"
+    }
+  ],
+  "previousBackgroundProofRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-audio-v002/proof.json",
+    "bytes": 9732,
+    "fileSha256": "11fc158436bcb86a4954a4c802322180a5fdf66020401261a2631fabfb06105f"
+  },
+  "previousLosslessVerificationRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-v001/lossless-verification.json",
+    "bytes": 2787,
+    "fileSha256": "ee72e800002b5a9c7a03606b81c21ecd0172b69821ec4f4d73039f1f0131a735"
+  },
+  "currentDrawingEvidenceRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/drawing-evidence.json",
+    "bytes": 1942870,
+    "fileSha256": "5a4bd86c2b826649d6658f58f3c6e3dd31c76b0242a42bc9966534b1df428d2e"
+  },
+  "r2ShortBackgroundProofRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r2-v002/background/proof.json",
+    "bytes": 9438,
+    "fileSha256": "a00bfff7e45e0973fe00562dacb52ee0a9abc8aa2d5f629bab4b64beb2baf771"
+  },
+  "priorVerification": {
+    "video": {
+      "status": "passed",
+      "method": "all decoded yuv420p bytes; independent finite-preset arithmetic",
+      "sourceFrames": 4831,
+      "displayFrames": 4867,
+      "blackFrames": 36,
+      "fadedFrames": 24,
+      "comparedYuvBytes": 15138316800,
+      "originalDecodedPayloadSha256": "09af3da1df4d51e68304cc9ea3cbeb9d016dd030cd1a519a7f995d57a29ee632",
+      "expectedPayloadSha256": "7901c862f0d24942bc71652fd172bba07049e173f5a90a4795ae027aadbb7f94",
+      "observedPayloadSha256": "7901c862f0d24942bc71652fd172bba07049e173f5a90a4795ae027aadbb7f94",
+      "completeRetainedFrameOrderPreserved": true
+    },
+    "audio": {
+      "status": "passed",
+      "method": "all float32 interleaved stereo bytes; retained samples unchanged; inserted bytes zero",
+      "sampleRate": 44100,
+      "channels": 2,
+      "sourceLogicalSampleCount": 7101570,
+      "sourceRawDecodedSampleCount": 7102464,
+      "sourceDecoderTailSampleCount": 894,
+      "displaySampleCount": 7154490,
+      "insertedZeroSampleCount": 52920,
+      "comparedPcmBytes": 57235920,
+      "sourceRawDecodedPayloadSha256": "98b7a518cfde5cbd07478ab7fa6f96c994b54eb7d8d4af79a804759a566678d0",
+      "sourceLogicalPayloadSha256": "ef84d4be8399678a40a7722d900b37eada023ea5b6a5c21aac5834dbc9be8214",
+      "expectedPayloadSha256": "c1fa4002a87ea48f976ff2da40f1a3a0c717db9b29696f6db408f831f7196e5f",
+      "observedPayloadSha256": "c1fa4002a87ea48f976ff2da40f1a3a0c717db9b29696f6db408f831f7196e5f"
+    },
+    "backgroundFileShaStillMatches": true,
+    "fullVerificationReexecuted": false,
+    "note": "初回background-v001のfailureはAAC終端1sampleの問題。lossless NUTは後続background-audio-v002でSHA再検査して採用され、今回もファイルSHA一致を確認。"
+  },
+  "projection": {
+    "equalToCurrentHrbPaletteProjection": true,
+    "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+    "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+    "oldFrames": 4867,
+    "newFrames": 4878,
+    "addedFrames": 11
+  },
+  "recommendedExistingApi": {
+    "module": "tools/digest-quality/r2-media.mjs",
+    "function": "buildR2OpeningBackgroundV001",
+    "arguments": {
+      "extension": {
+        "observedUtteranceMs": {
+          "startMs": 1268220,
+          "endMs": 1269000
+        },
+        "oldRequestedSourceStartMs": 1268581,
+        "addedFrameCount": 11,
+        "oldCompletedFrameCount": 4867,
+        "newCompletedFrameCount": 4878,
+        "sourceVideoRange": {
+          "startFrame": 38046,
+          "endFrameExclusive": 38057
+        },
+        "sourceDecodedFrameRange": {
+          "startFrame": 76092,
+          "endFrameExclusive": 76114
+        },
+        "sourcePtsRange": {
+          "startPts": 114139440,
+          "endPtsExclusive": 114172440,
+          "timeBase": "1/90000"
+        },
+        "sourceAudioRange": {
+          "startSample": 55928326,
+          "endSampleExclusive": 55944496,
+          "sampleRate": 44100,
+          "channels": 2,
+          "sampleCount": 16170
+        },
+        "physicalPieces": [
+          {
+            "kind": "added-source",
+            "oldDigestRange": null,
+            "newGlobalRange": {
+              "startFrame": 0,
+              "endFrameExclusive": 11
+            },
+            "sourceVideoRange": {
+              "startFrame": 38046,
+              "endFrameExclusive": 38057
+            }
+          },
+          {
+            "kind": "unchanged-old-digest",
+            "oldDigestRange": {
+              "startFrame": 0,
+              "endFrameExclusive": 4867
+            },
+            "newGlobalRange": {
+              "startFrame": 11,
+              "endFrameExclusive": 4878
+            }
+          }
+        ],
+        "extendedFirstSegment": {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 1268220,
+          "sourceEndMs": 1279920,
+          "sourceStartFrame30": 38046,
+          "sourceEndFrame30": 38397,
+          "outputStartFrame": 0,
+          "outputEndFrame": 351,
+          "audioSamples": {
+            "sourceStart": 55928326,
+            "sourceEnd": 56444296,
+            "outputStart": 0,
+            "outputEnd": 515970
+          }
+        },
+        "invariant": "all old Digest frames and the exit remain in order; only the source-contiguous prefix is new",
+        "projection": "resolve the corrected baseline once; project all subsequent captions, measured peaks and motion anchors by the same added frame count"
+      },
+      "sourceRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-distant-connection-real-input-preparation-ymUsGrT6EaA-v001/source/ymUsGrT6EaA.mp4",
+        "bytes": 3510899816,
+        "fileSha256": "79e9cf231000c18448d52541449f65ceecd6068ae800e18736c2a0c358c90537"
+      },
+      "sourceInspectionRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/source-media-inspection.json",
+        "bytes": 2807,
+        "fileSha256": "68040496532466279b49208a34d491602d20bc3145b66cf821688acdb964a649"
+      },
+      "originalBaseRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/background-v001/background.nut",
+        "bytes": 1029173377,
+        "fileSha256": "85e9c83e41ac3b69435aaedaf80f1357ffc97e47f82b3cfd81ae9f736ae59e87"
+      },
+      "originalCompletedRef": {
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+        "bytes": 75306932,
+        "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225"
+      },
+      "oldEndFrame": 4867,
+      "outputDirectory": "caller must supply a new ignored absolute output directory"
+    },
+    "expected": {
+      "frames": 4878,
+      "audioSampleRate": 44100,
+      "audioChannels": 2,
+      "audioSampleCount": 7170660,
+      "audioFloat32Bytes": 57365280
+    },
+    "bodyKeepsPreviousThreeConnectionInserts": true,
+    "apiChangesRequired": false
+  },
+  "captionIntegration": {
+    "normalPlan": "start from the reconstructed 4867-frame projectedNormalPlan; shift every caption by 11 once; replace only the matching first five captions with the already shifted R2 corrected normal elements",
+    "selection": "retain the saved R3 effective choices, replace only the two explicit R2 motion choices; do not assign a new automatic judgment to historical exceptions",
+    "forbidden": "do not prepend the 4831-frame bare base and do not project the corrected first five elements a second time"
+  },
+  "nativePeakProjection": {
+    "sampleRate": 16000,
+    "nativeSamplesPreserved": true,
+    "total": 134,
+    "connectionOffsetHistogram": {
+      "0": 15,
+      "12": 52,
+      "24": 56,
+      "36": 11
+    },
+    "formula": "floor((sourcePeakSample * 30 + (connectionOffsetFrames + 11) * sampleRate) / sampleRate)",
+    "selectedPeaks": [
+      {
+        "peakId": "audio-peak-000020",
+        "sourcePeakSample": 63040,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 118,
+        "newFrame": 129
+      },
+      {
+        "peakId": "audio-peak-000047",
+        "sourcePeakSample": 138560,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 259,
+        "newFrame": 270
+      },
+      {
+        "peakId": "audio-peak-000059",
+        "sourcePeakSample": 172480,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 323,
+        "newFrame": 334
+      }
+    ],
+    "allPeaks": [
+      {
+        "peakId": "audio-peak-000005",
+        "sourcePeakSample": 15680,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 29,
+        "newFrame": 40
+      },
+      {
+        "peakId": "audio-peak-000020",
+        "sourcePeakSample": 63040,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 118,
+        "newFrame": 129
+      },
+      {
+        "peakId": "audio-peak-000021",
+        "sourcePeakSample": 66560,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 124,
+        "newFrame": 135
+      },
+      {
+        "peakId": "audio-peak-000026",
+        "sourcePeakSample": 83200,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 156,
+        "newFrame": 167
+      },
+      {
+        "peakId": "audio-peak-000047",
+        "sourcePeakSample": 138560,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 259,
+        "newFrame": 270
+      },
+      {
+        "peakId": "audio-peak-000051",
+        "sourcePeakSample": 148480,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 278,
+        "newFrame": 289
+      },
+      {
+        "peakId": "audio-peak-000054",
+        "sourcePeakSample": 156160,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 292,
+        "newFrame": 303
+      },
+      {
+        "peakId": "audio-peak-000057",
+        "sourcePeakSample": 164800,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 309,
+        "newFrame": 320
+      },
+      {
+        "peakId": "audio-peak-000059",
+        "sourcePeakSample": 172480,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 323,
+        "newFrame": 334
+      },
+      {
+        "peakId": "audio-peak-000067",
+        "sourcePeakSample": 195840,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 367,
+        "newFrame": 378
+      },
+      {
+        "peakId": "audio-peak-000070",
+        "sourcePeakSample": 204480,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 383,
+        "newFrame": 394
+      },
+      {
+        "peakId": "audio-peak-000074",
+        "sourcePeakSample": 213760,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 400,
+        "newFrame": 411
+      },
+      {
+        "peakId": "audio-peak-000076",
+        "sourcePeakSample": 220480,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 413,
+        "newFrame": 424
+      },
+      {
+        "peakId": "audio-peak-000079",
+        "sourcePeakSample": 230720,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 432,
+        "newFrame": 443
+      },
+      {
+        "peakId": "audio-peak-000081",
+        "sourcePeakSample": 234880,
+        "connectionOffsetFrames": 0,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 440,
+        "newFrame": 451
+      },
+      {
+        "peakId": "audio-peak-000093",
+        "sourcePeakSample": 261760,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 502,
+        "newFrame": 513
+      },
+      {
+        "peakId": "audio-peak-000094",
+        "sourcePeakSample": 265600,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 510,
+        "newFrame": 521
+      },
+      {
+        "peakId": "audio-peak-000100",
+        "sourcePeakSample": 278400,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 534,
+        "newFrame": 545
+      },
+      {
+        "peakId": "audio-peak-000108",
+        "sourcePeakSample": 291200,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 558,
+        "newFrame": 569
+      },
+      {
+        "peakId": "audio-peak-000113",
+        "sourcePeakSample": 307200,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 588,
+        "newFrame": 599
+      },
+      {
+        "peakId": "audio-peak-000117",
+        "sourcePeakSample": 320960,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 613,
+        "newFrame": 624
+      },
+      {
+        "peakId": "audio-peak-000139",
+        "sourcePeakSample": 360000,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 687,
+        "newFrame": 698
+      },
+      {
+        "peakId": "audio-peak-000142",
+        "sourcePeakSample": 369600,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 705,
+        "newFrame": 716
+      },
+      {
+        "peakId": "audio-peak-000143",
+        "sourcePeakSample": 373120,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 711,
+        "newFrame": 722
+      },
+      {
+        "peakId": "audio-peak-000144",
+        "sourcePeakSample": 377280,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 719,
+        "newFrame": 730
+      },
+      {
+        "peakId": "audio-peak-000147",
+        "sourcePeakSample": 385920,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 735,
+        "newFrame": 746
+      },
+      {
+        "peakId": "audio-peak-000149",
+        "sourcePeakSample": 394560,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 751,
+        "newFrame": 762
+      },
+      {
+        "peakId": "audio-peak-000185",
+        "sourcePeakSample": 467200,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 888,
+        "newFrame": 899
+      },
+      {
+        "peakId": "audio-peak-000186",
+        "sourcePeakSample": 471040,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 895,
+        "newFrame": 906
+      },
+      {
+        "peakId": "audio-peak-000191",
+        "sourcePeakSample": 482880,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 917,
+        "newFrame": 928
+      },
+      {
+        "peakId": "audio-peak-000192",
+        "sourcePeakSample": 486720,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 924,
+        "newFrame": 935
+      },
+      {
+        "peakId": "audio-peak-000193",
+        "sourcePeakSample": 492800,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 936,
+        "newFrame": 947
+      },
+      {
+        "peakId": "audio-peak-000207",
+        "sourcePeakSample": 530880,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1007,
+        "newFrame": 1018
+      },
+      {
+        "peakId": "audio-peak-000210",
+        "sourcePeakSample": 537920,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1020,
+        "newFrame": 1031
+      },
+      {
+        "peakId": "audio-peak-000212",
+        "sourcePeakSample": 549440,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1042,
+        "newFrame": 1053
+      },
+      {
+        "peakId": "audio-peak-000216",
+        "sourcePeakSample": 558080,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1058,
+        "newFrame": 1069
+      },
+      {
+        "peakId": "audio-peak-000232",
+        "sourcePeakSample": 614400,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1164,
+        "newFrame": 1175
+      },
+      {
+        "peakId": "audio-peak-000237",
+        "sourcePeakSample": 626880,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1187,
+        "newFrame": 1198
+      },
+      {
+        "peakId": "audio-peak-000249",
+        "sourcePeakSample": 653760,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1237,
+        "newFrame": 1248
+      },
+      {
+        "peakId": "audio-peak-000400",
+        "sourcePeakSample": 930880,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1757,
+        "newFrame": 1768
+      },
+      {
+        "peakId": "audio-peak-000407",
+        "sourcePeakSample": 949440,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1792,
+        "newFrame": 1803
+      },
+      {
+        "peakId": "audio-peak-000408",
+        "sourcePeakSample": 954560,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1801,
+        "newFrame": 1812
+      },
+      {
+        "peakId": "audio-peak-000414",
+        "sourcePeakSample": 974080,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1838,
+        "newFrame": 1849
+      },
+      {
+        "peakId": "audio-peak-000415",
+        "sourcePeakSample": 978560,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1846,
+        "newFrame": 1857
+      },
+      {
+        "peakId": "audio-peak-000442",
+        "sourcePeakSample": 1040960,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 1963,
+        "newFrame": 1974
+      },
+      {
+        "peakId": "audio-peak-000449",
+        "sourcePeakSample": 1061120,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2001,
+        "newFrame": 2012
+      },
+      {
+        "peakId": "audio-peak-000452",
+        "sourcePeakSample": 1071680,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2021,
+        "newFrame": 2032
+      },
+      {
+        "peakId": "audio-peak-000454",
+        "sourcePeakSample": 1081920,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2040,
+        "newFrame": 2051
+      },
+      {
+        "peakId": "audio-peak-000458",
+        "sourcePeakSample": 1097600,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2070,
+        "newFrame": 2081
+      },
+      {
+        "peakId": "audio-peak-000489",
+        "sourcePeakSample": 1167040,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2200,
+        "newFrame": 2211
+      },
+      {
+        "peakId": "audio-peak-000490",
+        "sourcePeakSample": 1171520,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2208,
+        "newFrame": 2219
+      },
+      {
+        "peakId": "audio-peak-000491",
+        "sourcePeakSample": 1176000,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2217,
+        "newFrame": 2228
+      },
+      {
+        "peakId": "audio-peak-000494",
+        "sourcePeakSample": 1184320,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2232,
+        "newFrame": 2243
+      },
+      {
+        "peakId": "audio-peak-000509",
+        "sourcePeakSample": 1213120,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2286,
+        "newFrame": 2297
+      },
+      {
+        "peakId": "audio-peak-000516",
+        "sourcePeakSample": 1232960,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2323,
+        "newFrame": 2334
+      },
+      {
+        "peakId": "audio-peak-000520",
+        "sourcePeakSample": 1243200,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2343,
+        "newFrame": 2354
+      },
+      {
+        "peakId": "audio-peak-000524",
+        "sourcePeakSample": 1258560,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2371,
+        "newFrame": 2382
+      },
+      {
+        "peakId": "audio-peak-000527",
+        "sourcePeakSample": 1274560,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2401,
+        "newFrame": 2412
+      },
+      {
+        "peakId": "audio-peak-000530",
+        "sourcePeakSample": 1283200,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2418,
+        "newFrame": 2429
+      },
+      {
+        "peakId": "audio-peak-000535",
+        "sourcePeakSample": 1295040,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2440,
+        "newFrame": 2451
+      },
+      {
+        "peakId": "audio-peak-000588",
+        "sourcePeakSample": 1412160,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2659,
+        "newFrame": 2670
+      },
+      {
+        "peakId": "audio-peak-000589",
+        "sourcePeakSample": 1416320,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2667,
+        "newFrame": 2678
+      },
+      {
+        "peakId": "audio-peak-000594",
+        "sourcePeakSample": 1431360,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2695,
+        "newFrame": 2706
+      },
+      {
+        "peakId": "audio-peak-000595",
+        "sourcePeakSample": 1434240,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2701,
+        "newFrame": 2712
+      },
+      {
+        "peakId": "audio-peak-000606",
+        "sourcePeakSample": 1462400,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2754,
+        "newFrame": 2765
+      },
+      {
+        "peakId": "audio-peak-000658",
+        "sourcePeakSample": 1568320,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2952,
+        "newFrame": 2963
+      },
+      {
+        "peakId": "audio-peak-000669",
+        "sourcePeakSample": 1590400,
+        "connectionOffsetFrames": 12,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 2994,
+        "newFrame": 3005
+      },
+      {
+        "peakId": "audio-peak-000698",
+        "sourcePeakSample": 1655680,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3128,
+        "newFrame": 3139
+      },
+      {
+        "peakId": "audio-peak-000707",
+        "sourcePeakSample": 1689600,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3192,
+        "newFrame": 3203
+      },
+      {
+        "peakId": "audio-peak-000710",
+        "sourcePeakSample": 1697280,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3206,
+        "newFrame": 3217
+      },
+      {
+        "peakId": "audio-peak-000712",
+        "sourcePeakSample": 1703680,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3218,
+        "newFrame": 3229
+      },
+      {
+        "peakId": "audio-peak-000714",
+        "sourcePeakSample": 1708160,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3226,
+        "newFrame": 3237
+      },
+      {
+        "peakId": "audio-peak-000715",
+        "sourcePeakSample": 1712000,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3234,
+        "newFrame": 3245
+      },
+      {
+        "peakId": "audio-peak-000716",
+        "sourcePeakSample": 1716160,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3241,
+        "newFrame": 3252
+      },
+      {
+        "peakId": "audio-peak-000720",
+        "sourcePeakSample": 1726720,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3261,
+        "newFrame": 3272
+      },
+      {
+        "peakId": "audio-peak-000721",
+        "sourcePeakSample": 1734080,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3275,
+        "newFrame": 3286
+      },
+      {
+        "peakId": "audio-peak-000726",
+        "sourcePeakSample": 1748800,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3303,
+        "newFrame": 3314
+      },
+      {
+        "peakId": "audio-peak-000729",
+        "sourcePeakSample": 1762240,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3328,
+        "newFrame": 3339
+      },
+      {
+        "peakId": "audio-peak-000735",
+        "sourcePeakSample": 1775040,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3352,
+        "newFrame": 3363
+      },
+      {
+        "peakId": "audio-peak-000749",
+        "sourcePeakSample": 1803520,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3405,
+        "newFrame": 3416
+      },
+      {
+        "peakId": "audio-peak-000751",
+        "sourcePeakSample": 1810560,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3418,
+        "newFrame": 3429
+      },
+      {
+        "peakId": "audio-peak-000750",
+        "sourcePeakSample": 1807360,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3412,
+        "newFrame": 3423
+      },
+      {
+        "peakId": "audio-peak-000765",
+        "sourcePeakSample": 1838400,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3471,
+        "newFrame": 3482
+      },
+      {
+        "peakId": "audio-peak-000766",
+        "sourcePeakSample": 1844800,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3483,
+        "newFrame": 3494
+      },
+      {
+        "peakId": "audio-peak-000770",
+        "sourcePeakSample": 1852480,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3497,
+        "newFrame": 3508
+      },
+      {
+        "peakId": "audio-peak-000778",
+        "sourcePeakSample": 1873280,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3536,
+        "newFrame": 3547
+      },
+      {
+        "peakId": "audio-peak-000786",
+        "sourcePeakSample": 1893760,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3574,
+        "newFrame": 3585
+      },
+      {
+        "peakId": "audio-peak-000789",
+        "sourcePeakSample": 1906880,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3599,
+        "newFrame": 3610
+      },
+      {
+        "peakId": "audio-peak-000793",
+        "sourcePeakSample": 1920640,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3625,
+        "newFrame": 3636
+      },
+      {
+        "peakId": "audio-peak-000794",
+        "sourcePeakSample": 1924160,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3631,
+        "newFrame": 3642
+      },
+      {
+        "peakId": "audio-peak-000795",
+        "sourcePeakSample": 1928640,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3640,
+        "newFrame": 3651
+      },
+      {
+        "peakId": "audio-peak-000797",
+        "sourcePeakSample": 1936640,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3655,
+        "newFrame": 3666
+      },
+      {
+        "peakId": "audio-peak-000799",
+        "sourcePeakSample": 1941760,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3664,
+        "newFrame": 3675
+      },
+      {
+        "peakId": "audio-peak-000800",
+        "sourcePeakSample": 1945600,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3672,
+        "newFrame": 3683
+      },
+      {
+        "peakId": "audio-peak-000801",
+        "sourcePeakSample": 1950080,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3680,
+        "newFrame": 3691
+      },
+      {
+        "peakId": "audio-peak-000802",
+        "sourcePeakSample": 1956160,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3691,
+        "newFrame": 3702
+      },
+      {
+        "peakId": "audio-peak-000820",
+        "sourcePeakSample": 1995520,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3765,
+        "newFrame": 3776
+      },
+      {
+        "peakId": "audio-peak-000824",
+        "sourcePeakSample": 2006720,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3786,
+        "newFrame": 3797
+      },
+      {
+        "peakId": "audio-peak-000829",
+        "sourcePeakSample": 2020160,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3811,
+        "newFrame": 3822
+      },
+      {
+        "peakId": "audio-peak-000831",
+        "sourcePeakSample": 2028800,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3828,
+        "newFrame": 3839
+      },
+      {
+        "peakId": "audio-peak-000833",
+        "sourcePeakSample": 2034560,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3838,
+        "newFrame": 3849
+      },
+      {
+        "peakId": "audio-peak-000846",
+        "sourcePeakSample": 2058880,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3884,
+        "newFrame": 3895
+      },
+      {
+        "peakId": "audio-peak-000851",
+        "sourcePeakSample": 2071360,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3907,
+        "newFrame": 3918
+      },
+      {
+        "peakId": "audio-peak-000857",
+        "sourcePeakSample": 2084800,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3933,
+        "newFrame": 3944
+      },
+      {
+        "peakId": "audio-peak-000862",
+        "sourcePeakSample": 2096000,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3954,
+        "newFrame": 3965
+      },
+      {
+        "peakId": "audio-peak-000875",
+        "sourcePeakSample": 2118400,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 3996,
+        "newFrame": 4007
+      },
+      {
+        "peakId": "audio-peak-000876",
+        "sourcePeakSample": 2121600,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4002,
+        "newFrame": 4013
+      },
+      {
+        "peakId": "audio-peak-000877",
+        "sourcePeakSample": 2125440,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4009,
+        "newFrame": 4020
+      },
+      {
+        "peakId": "audio-peak-000882",
+        "sourcePeakSample": 2140480,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4037,
+        "newFrame": 4048
+      },
+      {
+        "peakId": "audio-peak-000898",
+        "sourcePeakSample": 2172800,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4098,
+        "newFrame": 4109
+      },
+      {
+        "peakId": "audio-peak-000904",
+        "sourcePeakSample": 2188160,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4126,
+        "newFrame": 4137
+      },
+      {
+        "peakId": "audio-peak-000911",
+        "sourcePeakSample": 2210240,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4168,
+        "newFrame": 4179
+      },
+      {
+        "peakId": "audio-peak-000912",
+        "sourcePeakSample": 2213760,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4174,
+        "newFrame": 4185
+      },
+      {
+        "peakId": "audio-peak-000918",
+        "sourcePeakSample": 2232320,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4209,
+        "newFrame": 4220
+      },
+      {
+        "peakId": "audio-peak-000926",
+        "sourcePeakSample": 2258240,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4258,
+        "newFrame": 4269
+      },
+      {
+        "peakId": "audio-peak-000929",
+        "sourcePeakSample": 2267840,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4276,
+        "newFrame": 4287
+      },
+      {
+        "peakId": "audio-peak-000931",
+        "sourcePeakSample": 2276160,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4291,
+        "newFrame": 4302
+      },
+      {
+        "peakId": "audio-peak-000933",
+        "sourcePeakSample": 2282240,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4303,
+        "newFrame": 4314
+      },
+      {
+        "peakId": "audio-peak-000942",
+        "sourcePeakSample": 2300800,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4338,
+        "newFrame": 4349
+      },
+      {
+        "peakId": "audio-peak-000945",
+        "sourcePeakSample": 2309120,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4353,
+        "newFrame": 4364
+      },
+      {
+        "peakId": "audio-peak-000946",
+        "sourcePeakSample": 2312960,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4360,
+        "newFrame": 4371
+      },
+      {
+        "peakId": "audio-peak-000948",
+        "sourcePeakSample": 2319680,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4373,
+        "newFrame": 4384
+      },
+      {
+        "peakId": "audio-peak-000949",
+        "sourcePeakSample": 2327040,
+        "connectionOffsetFrames": 24,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4387,
+        "newFrame": 4398
+      },
+      {
+        "peakId": "audio-peak-000951",
+        "sourcePeakSample": 2337920,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4419,
+        "newFrame": 4430
+      },
+      {
+        "peakId": "audio-peak-000955",
+        "sourcePeakSample": 2348800,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4440,
+        "newFrame": 4451
+      },
+      {
+        "peakId": "audio-peak-000964",
+        "sourcePeakSample": 2369280,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4478,
+        "newFrame": 4489
+      },
+      {
+        "peakId": "audio-peak-000965",
+        "sourcePeakSample": 2373440,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4486,
+        "newFrame": 4497
+      },
+      {
+        "peakId": "audio-peak-000967",
+        "sourcePeakSample": 2381760,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4501,
+        "newFrame": 4512
+      },
+      {
+        "peakId": "audio-peak-000976",
+        "sourcePeakSample": 2399680,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4535,
+        "newFrame": 4546
+      },
+      {
+        "peakId": "audio-peak-001023",
+        "sourcePeakSample": 2477760,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4681,
+        "newFrame": 4692
+      },
+      {
+        "peakId": "audio-peak-001026",
+        "sourcePeakSample": 2488640,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4702,
+        "newFrame": 4713
+      },
+      {
+        "peakId": "audio-peak-001047",
+        "sourcePeakSample": 2518400,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4758,
+        "newFrame": 4769
+      },
+      {
+        "peakId": "audio-peak-001049",
+        "sourcePeakSample": 2525760,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4771,
+        "newFrame": 4782
+      },
+      {
+        "peakId": "audio-peak-001063",
+        "sourcePeakSample": 2568320,
+        "connectionOffsetFrames": 36,
+        "openingOffsetFrames": 11,
+        "oldDisplayedFrame": 4851,
+        "newFrame": 4862
+      }
+    ],
+    "note": "保存された全134peakには0/12/24/36frameの接続offsetが混在。現在選択中の3peakはいずれも最初の挿入前なので接続offset0。元byteの測定値を書換えず、保存projectionから導出する。"
+  },
+  "importantLimits": [
+    "新全体のmedia生成・native描画・QCは未実行。",
+    "旧完成動画のAACとNUTのfloat32 PCMは別のlossy段階。新結合では旧背景PCMを保持して一度だけAAC化し、以後コピーする。旧完成動画と新完成動画のAAC payload同一は主張しない。",
+    "原版SHAは元資料の意味のまま保存し、新出力へ転用しない。"
+  ]
+}
