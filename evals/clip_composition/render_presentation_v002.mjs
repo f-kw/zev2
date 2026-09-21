@@ -7,6 +7,7 @@ import {constants as fsConstants} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {performance} from 'node:perf_hooks';
+import {createPresentationOverlayRenderSessionV001} from './presentation_overlay_render_session_v001.mjs';
 
 import {createOrchestrationRenderScopeV001, assertPresentationRenderRangeV001}
   from './presentation_orchestration_render_scope_v001.mjs';
@@ -849,6 +850,40 @@ export function buildPresentationRendererOverlayAdapterV001({
       processObserver,
       observationLabel: 'overlay-line-mask',
     }),
+  });
+}
+
+/** A job owns this shared drawing environment and must close it before success. */
+export function createPresentationRendererOverlayJobV001({
+  remotionPath,
+  chromiumPath,
+  processObserver,
+}) {
+  if (!path.isAbsolute(remotionPath) || !path.isAbsolute(chromiumPath)) {
+    throw new TypeError('renderer overlay runtime paths must be absolute');
+  }
+  if (!isObject(processObserver) || typeof processObserver.run !== 'function'
+    || typeof processObserver.observeOperation !== 'function') {
+    throw new TypeError('renderer overlay process observer is required');
+  }
+  const session = createPresentationOverlayRenderSessionV001({repositoryRoot: WORKSPACE_ROOT,
+    entryPoint: REMOTION_ENTRY, publicDir: REMOTION_PUBLIC, remotionPath, chromiumPath, processObserver});
+  const render = async (props, outputPath, options) => {
+    try {return await session.render(props, outputPath, options);}
+    catch (error) {
+      const code = classifyPresentationRenderErrorV002(error);
+      if (code !== null) Object.defineProperty(error, 'rendererViolationCode', {value: code});
+      throw error;
+    }
+  };
+  return Object.freeze({
+    nativeQcRuntimePaths: Object.freeze({remotionPath, chromiumPath, nodePath: process.execPath}),
+    buildProps: overlayPropsFor,
+    renderStill: (props, outputPath, options = {}) => render(props, outputPath,
+      {...options, observationLabel: 'overlay-still'}),
+    renderLineMask: (props, lineIndex, outputPath, options = {}) => render(
+      {...props, inspectionLineIndex: lineIndex}, outputPath, {...options, observationLabel: 'overlay-line-mask'}),
+    close: session.close,
   });
 }
 
@@ -2309,7 +2344,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
         };
       }
       await overlayAdapter.renderStill(overlayProps[index], pngPath);
-      await overlayAdapter.renderStill(overlayProps[index], repeatPath);
+      await overlayAdapter.renderStill(overlayProps[index], repeatPath, {series: 'repeat'});
       const [pngSha256, repeatSha256] = await Promise.all([
         fileSha256V002(pngPath),
         fileSha256V002(repeatPath),

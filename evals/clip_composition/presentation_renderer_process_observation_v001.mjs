@@ -32,6 +32,7 @@ export function createPresentationRendererProcessObserverV001({observationDirect
   }
   let sequence = 0;
   const timingRecords = [];
+  const operationRecords = [];
 
   const run = (command, args, options = {}) => new Promise((resolve, reject) => {
     if (typeof command !== 'string' || command.length === 0 || !Array.isArray(args)) {
@@ -58,6 +59,11 @@ export function createPresentationRendererProcessObserverV001({observationDirect
       await mkdir(observationDirectory, {recursive: true});
       await mkdir(recordDirectory, {recursive: false});
       await Promise.all([
+        writeFile(path.join(recordDirectory, 'request.json'), JSON.stringify({
+          kind: 'child-process', command, args, cwd: options.cwd ?? process.cwd(),
+          parentNode: process.execPath, parentNodeVersion: process.version,
+          path: options.env?.PATH ?? process.env.PATH,
+        }, null, 2) + '\n', {flag: 'wx', mode: 0o444}),
         writeFile(
           path.join(recordDirectory, 'exit-code.txt'),
           evidenceBytes(code === null ? 'null' : String(code)),
@@ -91,9 +97,12 @@ export function createPresentationRendererProcessObserverV001({observationDirect
       let result;
       try {
         try {result = await persist({code, signal});} finally {
-          timingRecords.push({sequence: recordSequence, label, childMilliseconds,
+          const timing = {sequence: recordSequence, label, childMilliseconds,
             evidenceWriteMilliseconds: performance.now() - writingStarted, code, signal,
-            spawnFailed: spawnError !== null});
+            spawnFailed: spawnError !== null};
+          timingRecords.push(timing);
+          await writeFile(path.join(recordDirectory, 'timing.json'), JSON.stringify(timing, null, 2) + '\n',
+            {flag: 'wx', mode: 0o444});
         }
         const allowed = options.allowedExitCodes ?? [0];
         if (spawnError === null && signal === null && allowed.includes(code)) {
@@ -133,6 +142,40 @@ export function createPresentationRendererProcessObserverV001({observationDirect
     });
   });
 
+  // In-process renderer API work is recorded as an operation, never as a
+  // fabricated per-image child process. The callback result stays local.
+  const observeOperation = async ({observationLabel, operationKind, input}, task) => {
+    if (!LABEL.test(observationLabel ?? '') || !LABEL.test(operationKind ?? '') || typeof task !== 'function') {
+      throw new TypeError('observed renderer operation is invalid');
+    }
+    const recordSequence = ++sequence;
+    const recordDirectory = path.join(observationDirectory,
+      `${String(recordSequence).padStart(4, '0')}-${observationLabel}`);
+    await mkdir(observationDirectory, {recursive: true});
+    await mkdir(recordDirectory);
+    const request = structuredClone(input);
+    await writeFile(path.join(recordDirectory, 'request.json'), JSON.stringify({
+      kind: 'renderer-api-operation', operationKind, input: request,
+      node: process.execPath, nodeVersion: process.version,
+    }, null, 2) + '\n', {flag: 'wx', mode: 0o444});
+    const start = performance.now();
+    let status = 'failed', failure = null;
+    try {
+      const result = await task();
+      status = 'passed';
+      return result;
+    } catch (error) {
+      failure = {name: error?.name ?? null, code: error?.code ?? null, message: String(error?.message ?? error)};
+      throw error;
+    } finally {
+      const record = {sequence: recordSequence, label: observationLabel, operationKind,
+        elapsedMilliseconds: performance.now() - start, status, failure, observationDirectory: recordDirectory};
+      await writeFile(path.join(recordDirectory, 'operation.json'), JSON.stringify(record, null, 2) + '\n',
+        {flag: 'wx', mode: 0o444});
+      operationRecords.push(record);
+    }
+  };
+
   const getPerformance = () => {
     const records = timingRecords.map(row => ({...row}));
     const byLabel = {};
@@ -142,7 +185,13 @@ export function createPresentationRendererProcessObserverV001({observationDirect
       totals.childMilliseconds += row.childMilliseconds;
       totals.evidenceWriteMilliseconds += row.evidenceWriteMilliseconds;
     }
-    return {records, byLabel, meaning: 'child wall time and observation-file write time; nested renderer totals are separate'};
+    const operations = operationRecords.map(row => ({...row})), byOperationLabel = {};
+    for (const row of operations) {
+      const totals = byOperationLabel[row.label] ??= {operationCount: 0, elapsedMilliseconds: 0};
+      totals.operationCount++; totals.elapsedMilliseconds += row.elapsedMilliseconds;
+    }
+    return {records, byLabel, operations, byOperationLabel,
+      meaning: 'child and renderer API wall times are separate; nested renderer totals must not be added together'};
   };
-  return Object.freeze({run, getPerformance});
+  return Object.freeze({run, observeOperation, getPerformance});
 }

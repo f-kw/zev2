@@ -10,7 +10,7 @@ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {restoreOrchestrationDrawingViewEvidenceV001} from './presentation_orchestration_v001.mjs';
 import {createOrchestrationRenderScopeV001} from './presentation_orchestration_render_scope_v001.mjs';
 import * as backgroundRenderer from './presentation_orchestration_background_v001.mjs';
-import {executeValidatedPresentationDrawAndQcV001, buildPresentationRendererOverlayAdapterV001,
+import {executeValidatedPresentationDrawAndQcV001, createPresentationRendererOverlayJobV001,
   commitValidatedPresentationArtifactsV002} from './render_presentation_v002.mjs';
 import {createPresentationRendererProcessObserverV001} from './presentation_renderer_process_observation_v001.mjs';
 import {inspectRenderedMediaWithToolsV001} from './presentation_renderer_qc_v002.mjs';
@@ -119,6 +119,7 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     assertIgnoredPresentationOutputDirectoryV001({repositoryRoot: repo, outputDirectory: output}));
   await mkdir(evidenceDirectory);
   const started = performance.now(), timings = {};
+  let nativeAdapter;
   try {
     await onProgress({phase: 'prepare'});
     const inputBindingStarted = performance.now();
@@ -164,7 +165,7 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     const media = await inspectRenderedMediaWithToolsV001(background.outputs.background.path, toolPaths);
     assert.equal(media.video.frameCount, derived.scope.frameCount);
     const processObserver = createPresentationRendererProcessObserverV001({observationDirectory: path.join(evidenceDirectory, 'processes')});
-    const nativeAdapter = buildPresentationRendererOverlayAdapterV001({
+    nativeAdapter = createPresentationRendererOverlayJobV001({
       remotionPath: path.join(repo, 'runner/node_modules/@remotion/cli/remotion-cli.js'),
       chromiumPath: path.join(repo, 'runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell'), processObserver});
     const cache = await createPresentationNativeAssetCacheV001({repositoryRoot: repo,
@@ -182,6 +183,7 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
       orchestrationBackground: {projectionSha256: view.projection.projectionSha256,
         displayFrameCount: derived.scope.frameCount,
         ...(range === null ? {} : {range}), video: background.outputs.background, audio: background.outputs.audio}});
+    await nativeAdapter.close();
     timings.drawAndQcMilliseconds = performance.now() - drawStarted;
     const drawEvidenceStarted = performance.now();
     await save(path.join(evidenceDirectory, 'draw-result.json'), draw);
@@ -226,6 +228,8 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     await save(path.join(evidenceDirectory, 'failure.json'), {status: 'failed', message: String(error), stack: error?.stack,
       timings, elapsedMilliseconds: performance.now() - started});
     throw error;
+  } finally {
+    await nativeAdapter?.close();
   }
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

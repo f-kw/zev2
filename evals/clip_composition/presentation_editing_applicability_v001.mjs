@@ -9,7 +9,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {verifyEditedOrchestrationDrawingRulesRefV001} from './presentation_orchestration_edited_render_v001.mjs';
-import {buildPresentationRendererOverlayAdapterV001, buildPresentationRenderApplicationResultsV002,
+import {createPresentationRendererOverlayJobV001, buildPresentationRenderApplicationResultsV002,
   runPresentationRendererChildProcessV001, validateOverlayDeterminismV002,
   ensureDirectoryChainNoSymlinkV002} from './render_presentation_v002.mjs';
 import {createPresentationNativeAssetCacheV001} from './presentation_native_asset_cache_v001.mjs';
@@ -135,7 +135,7 @@ async function inspectState({drawState, props: initialProps, layoutItem, plan, a
         bottom: wrapper.top + wrapper.height}, lineBounds})};
   }
   const pngPath = prefix + '.png', repeatPath = prefix + '-repeat.png';
-  await adapter.renderStill(props, pngPath); await adapter.renderStill(props, repeatPath);
+  await adapter.renderStill(props, pngPath); await adapter.renderStill(props, repeatPath, {series: 'repeat'});
   const first = await bind(pngPath), repeat = await bind(repeatPath);
   const determinism = validateOverlayDeterminismV002(first.fileSha256, repeat.fileSha256, element.instructionId);
   assert.equal(determinism.status, 'passed', 'independent native captions differ'); artifacts.push(first, repeat);
@@ -195,63 +195,69 @@ export async function inspectEditingCaptionApplicabilityV001({plan: entirePlan, 
       elapsedMilliseconds: performance.now() - start};
     const attempt = path.join(root, 'runs', randomUUID()); await mkdir(attempt);
     const processObserver = createPresentationRendererProcessObserverV001({observationDirectory: path.join(attempt, 'processes')});
-    const nativeAdapter = buildPresentationRendererOverlayAdapterV001({
+    const nativeAdapter = createPresentationRendererOverlayJobV001({
       remotionPath: await realpath(path.join(repo, 'runner/node_modules/@remotion/cli/remotion-cli.js')),
       chromiumPath: await realpath(path.join(repo, 'runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell')),
       processObserver});
-    const assetCache = await createPresentationNativeAssetCacheV001({repositoryRoot: repo,
-      directory: options.nativeAssetReuse ?? path.join(generatedRoot, 'native-assets'), adapter: nativeAdapter,
-      drawingProfile: drawingRulesRef});
-    const registry = await json(path.join(directory, 'registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json'));
-    const drawStates = statesFor(plan), props = drawStates.map(row => assetCache.adapter.buildProps(row.element, plan, registry));
-    const inputPath = path.join(attempt, 'layout-input.json'), outputPath = path.join(attempt, 'layout-output.json');
-    await save(inputPath, {canvas: plan.canvas, overlays: props});
-    await runPresentationRendererChildProcessV001(process.execPath,
-      [path.join(repo, 'runner/node_modules/tsx/dist/cli.mjs'), layoutWorker, inputPath, outputPath],
-      {env: {NODE_PATH: path.join(repo, 'runner/node_modules')}, processObserver, observationLabel: 'applicability-layout'});
-    const layout = await json(outputPath), artifacts = [await bind(inputPath), await bind(outputPath)];
-    let violations = layout.violations, qc = null;
-    const physicalRecords = [];
-    if (layout.status === 'passed') {
-      assert.equal(layout.items.length, drawStates.length);
-      for (const [groupIndex, element] of plan.elements.entries()) {
-        const items = layout.items.filter((_row, index) => drawStates[index].groupIndex === groupIndex);
-        try {
-          if (element.presentationMotion) assertPresentationCaptionMotionLayoutsV001({element, canvas: plan.canvas, layoutItems: items});
-          if (element.presentationPulse) assertPresentationPulseAnchorsV001(items);
-        } catch (error) {
-          violations = [...violations, {code: element.presentationMotion ? 'CAPTION_MOTION_NATIVE_STATE_MISMATCH'
-            : 'PULSE_NATIVE_STATE_MISMATCH', instructionId: element.instructionId, details: {reason: error.message}}];
+    try {
+      const assetCache = await createPresentationNativeAssetCacheV001({repositoryRoot: repo,
+        directory: options.nativeAssetReuse ?? path.join(generatedRoot, 'native-assets'), adapter: nativeAdapter,
+        drawingProfile: drawingRulesRef});
+      const registry = await json(path.join(directory, 'registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json'));
+      const drawStates = statesFor(plan), props = drawStates.map(row => assetCache.adapter.buildProps(row.element, plan, registry));
+      const inputPath = path.join(attempt, 'layout-input.json'), outputPath = path.join(attempt, 'layout-output.json');
+      await save(inputPath, {canvas: plan.canvas, overlays: props});
+      await runPresentationRendererChildProcessV001(process.execPath,
+        [path.join(repo, 'runner/node_modules/tsx/dist/cli.mjs'), layoutWorker, inputPath, outputPath],
+        {env: {NODE_PATH: path.join(repo, 'runner/node_modules')}, processObserver, observationLabel: 'applicability-layout'});
+      const layout = await json(outputPath), artifacts = [await bind(inputPath), await bind(outputPath)];
+      let violations = layout.violations, qc = null;
+      const physicalRecords = [];
+      if (layout.status === 'passed') {
+        assert.equal(layout.items.length, drawStates.length);
+        for (const [groupIndex, element] of plan.elements.entries()) {
+          const items = layout.items.filter((_row, index) => drawStates[index].groupIndex === groupIndex);
+          try {
+            if (element.presentationMotion) assertPresentationCaptionMotionLayoutsV001({element, canvas: plan.canvas, layoutItems: items});
+            if (element.presentationPulse) assertPresentationPulseAnchorsV001(items);
+          } catch (error) {
+            violations = [...violations, {code: element.presentationMotion ? 'CAPTION_MOTION_NATIVE_STATE_MISMATCH'
+              : 'PULSE_NATIVE_STATE_MISMATCH', instructionId: element.instructionId, details: {reason: error.message}}];
+          }
+        }
+        for (const [index, drawState] of violations.length ? [] : drawStates.entries()) {
+          const record = await inspectState({drawState, props: props[index], layoutItem: layout.items[index], plan,
+            adapter: assetCache.adapter, processObserver, root, attempt,
+            drawingRulesSha256: binding.drawingRulesSha256, helperSha256});
+          physicalRecords.push({...record, groupIndex: drawState.groupIndex}); artifacts.push(record.physicalProofRef, ...record.artifacts);
+        }
+        if (violations.length === 0) {
+          const records = groupRecords(plan, physicalRecords);
+          qc = evaluatePresentationRendererQcV002({plan, canvas: plan.canvas,
+            applicationResults: buildPresentationRenderApplicationResultsV002(records),
+            overlayInspections: records.map(row => row.inspection), mediaInspection: null, expectedAudio: null,
+            requireFinalVisibility: false});
+          // The shared evaluator honestly records absent output media. Only its
+          // native application/layout checks apply here; no media success is made up.
+          violations = qc.violations.filter(row => row.code !== 'OUTPUT_VIDEO_STREAM_MISSING');
+          assert(qc.violations.some(row => row.code === 'OUTPUT_VIDEO_STREAM_MISSING'));
         }
       }
-      for (const [index, drawState] of violations.length ? [] : drawStates.entries()) {
-        const record = await inspectState({drawState, props: props[index], layoutItem: layout.items[index], plan,
-          adapter: assetCache.adapter, processObserver, root, attempt,
-          drawingRulesSha256: binding.drawingRulesSha256, helperSha256});
-        physicalRecords.push({...record, groupIndex: drawState.groupIndex}); artifacts.push(record.physicalProofRef, ...record.artifacts);
+      const result = {status: violations.length ? 'failed' : 'passed', violations, targetId,
+        mediaCheck: 'not-performed', layoutCheck: layout.status,
+        nativeStateCount: physicalRecords.length, nativeStateReuses: physicalRecords.filter(row => row.reused).length,
+        nativeAssets: {...assetCache.stats}, ...(qc ? {checks: qc.checks} : {})};
+      await nativeAdapter.close();
+      result.processTimings = processObserver.getPerformance();
+      if (result.status === 'passed') {
+        assert.equal(qc?.checks.instructionApplication.status, 'passed');
+        assert.equal(qc?.checks.layoutAndVisibility.status, 'passed');
       }
-      if (violations.length === 0) {
-        const records = groupRecords(plan, physicalRecords);
-        qc = evaluatePresentationRendererQcV002({plan, canvas: plan.canvas,
-          applicationResults: buildPresentationRenderApplicationResultsV002(records),
-          overlayInspections: records.map(row => row.inspection), mediaInspection: null, expectedAudio: null,
-          requireFinalVisibility: false});
-        // The shared evaluator honestly records absent output media. Only its
-        // native application/layout checks apply here; no media success is made up.
-        violations = qc.violations.filter(row => row.code !== 'OUTPUT_VIDEO_STREAM_MISSING');
-        assert(qc.violations.some(row => row.code === 'OUTPUT_VIDEO_STREAM_MISSING'));
-      }
+      await verifyRules(drawingRulesRef);
+      await storeProof(proofPath, {binding, artifacts, result, layout, qc, elapsedMilliseconds: performance.now() - start});
+      return {...result, observationRef: await bind(proofPath), reused: false, elapsedMilliseconds: performance.now() - start};
+    } finally {
+      await nativeAdapter.close();
     }
-    const result = {status: violations.length ? 'failed' : 'passed', violations, targetId,
-      mediaCheck: 'not-performed', layoutCheck: layout.status,
-      nativeStateCount: physicalRecords.length, nativeStateReuses: physicalRecords.filter(row => row.reused).length,
-      nativeAssets: {...assetCache.stats}, ...(qc ? {checks: qc.checks} : {})};
-    if (result.status === 'passed') {
-      assert.equal(qc?.checks.instructionApplication.status, 'passed');
-      assert.equal(qc?.checks.layoutAndVisibility.status, 'passed');
-    }
-    await verifyRules(drawingRulesRef);
-    await storeProof(proofPath, {binding, artifacts, result, layout, qc, elapsedMilliseconds: performance.now() - start});
-    return {...result, observationRef: await bind(proofPath), reused: false, elapsedMilliseconds: performance.now() - start};
   });
 }

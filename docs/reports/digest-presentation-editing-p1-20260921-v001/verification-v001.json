@@ -1,0 +1,741 @@
+{
+  "schemaVersion": "p1-final-verification-summary-v001",
+  "status": "passed",
+  "scope": "one-edit applicability and neighboring-preview jobs; technical performance, not human quality adoption",
+  "baseCommit": "3168836bb255d989b18fc7fc440a6fdb68fc17f1",
+  "branch": "codex/digest-presentation-editing-stage4",
+  "instruction": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-p1-20260921-v001/instruction-received-v001.md",
+    "bytes": 13552,
+    "fileSha256": "20600bdc7814bc8950a6785fdb1aa27255b7fe9d37f3a9bd43857e2298f7f6fb"
+  },
+  "environment": {
+    "node": {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "bytes": 88501744,
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "version": "v20.19.6",
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "25.6.0",
+    "cpuModel": "Apple M3 Max",
+    "chromium": {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "bytes": 159972320,
+      "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8"
+    },
+    "remotion": {
+      "path": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+cli@4.0.481_postcss@8.5.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@remotion/cli/remotion-cli.js",
+      "bytes": 225,
+      "fileSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa"
+    }
+  },
+  "startingConditions": "separate empty native image, applicability, and completed-preview stores per case",
+  "pollIntervalMilliseconds": 2000,
+  "timingMeaning": "HTTP edit-to-full-media includes applicability, durable save, preview polling and full media transfer; renderer, QC and child times are nested, never added to that total",
+  "cases": [
+    {
+      "name": "panel",
+      "nativePngRequestCount": 10,
+      "cachedPngOutputCount": 2,
+      "allAdapterPngOutputCount": 12,
+      "productionStateCount": 1,
+      "distinctDecodedPngPairs": 4,
+      "logicalFiniteCandidates": 12,
+      "before": {
+        "editRequestToCompleteMediaMilliseconds": 62870.594124999996,
+        "applicabilityHttpMilliseconds": 7307.7474999999995,
+        "durableSaveHttpMilliseconds": 1071.9835840000014,
+        "previewRequestToCompleteMediaMilliseconds": 54487.675292,
+        "mediaAcquisitionMilliseconds": 12.844708000004175,
+        "completedMediaReuseMilliseconds": 612.948000000004,
+        "applicabilityReuseHttpMilliseconds": 826.4599170000001,
+        "rendererPreparationMilliseconds": null,
+        "legacyPngWithPerImagePreparationMilliseconds": 11765.187708000001,
+        "freshPngApiMilliseconds": null,
+        "pngCacheReuseMilliseconds": 2.8636659999974654,
+        "freshPngCount": 10,
+        "pngCacheReuseCount": 2,
+        "overlayCliLaunchCount": 10,
+        "overlayBrowserLaunchCount": 10,
+        "observedChildProcessCount": 55,
+        "cleanupMilliseconds": 0,
+        "mainCompositionMilliseconds": 14161.244999999999,
+        "strictRecompositionMilliseconds": 14443.130000000005,
+        "finiteStateQcMilliseconds": 2453.291541999999,
+        "diagnosticImagePreparationMilliseconds": 5825.013874999997,
+        "totalCompletedQcMilliseconds": 23237.292707999997,
+        "observedScope": "PNG initialization counts only; layout/QC processes remain separate. Old CLI preparation and still pixels share one measured process and are not artificially split. Times include nested phases and must not be summed into end-to-end time."
+      },
+      "after": {
+        "editRequestToCompleteMediaMilliseconds": 55527.114541,
+        "applicabilityHttpMilliseconds": 4176.751875,
+        "durableSaveHttpMilliseconds": 1070.033375,
+        "previewRequestToCompleteMediaMilliseconds": 50277.114792,
+        "mediaAcquisitionMilliseconds": 8.671708000001672,
+        "completedMediaReuseMilliseconds": 622.3585420000018,
+        "applicabilityReuseHttpMilliseconds": 814.8561250000057,
+        "rendererPreparationMilliseconds": 1613.257624999997,
+        "legacyPngWithPerImagePreparationMilliseconds": null,
+        "freshPngApiMilliseconds": 2524.5282899999947,
+        "pngCacheReuseMilliseconds": 2.562584000001152,
+        "freshPngCount": 10,
+        "pngCacheReuseCount": 2,
+        "overlayCliLaunchCount": 0,
+        "overlayBrowserLaunchCount": 4,
+        "observedChildProcessCount": 45,
+        "cleanupMilliseconds": 31.437876999991204,
+        "mainCompositionMilliseconds": 14199.907167000001,
+        "strictRecompositionMilliseconds": 14540.724083000001,
+        "finiteStateQcMilliseconds": 2449.0541250000024,
+        "diagnosticImagePreparationMilliseconds": 2408.870167000001,
+        "totalCompletedQcMilliseconds": 19926.358083,
+        "observedScope": "PNG initialization counts only; layout/QC processes remain separate. Old CLI preparation and still pixels share one measured process and are not artificially split. Times include nested phases and must not be summed into end-to-end time."
+      },
+      "savedMilliseconds": 7343.479583999993,
+      "afterOverBefore": 0.8831969112714346,
+      "qcProjectionSha256": "584f1e61a2dd78bb7b44a801be622ea1293072a31efa7770030929c8f14a5554",
+      "target": {
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+        "text": "なんかグロいやつに捕まってる",
+        "range": {
+          "startFrame": 1675,
+          "endFrameExclusive": 1866
+        },
+        "selection": "Reset",
+        "effectiveSelection": {
+          "role": "Panel accent",
+          "presentation": "provisional-panel",
+          "scope": "whole-caption",
+          "paletteId": "warm"
+        },
+        "cacheStart": {
+          "nativeAssetEntries": 0,
+          "applicabilityEntries": 0,
+          "completedPreviewEntries": 0
+        }
+      },
+      "media": {
+        "before": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-p1-20260921-baseline-v001-panel/run-4e05749a-cb59-4a1b-aa1c-c3bae76bc8c6/render/presentation-rendered-v002.mp4",
+          "bytes": 4059555,
+          "fileSha256": "0a030a3b88fc883c0ec4212dd00b4c599b2133917c192a1c98968bd7e3fc42cb"
+        },
+        "after": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-p1-20260921-changed-v002-panel/run-fa6fcab8-270f-4ec4-9d4d-b343470a822c/render/presentation-rendered-v002.mp4",
+          "bytes": 4059555,
+          "fileSha256": "0a030a3b88fc883c0ec4212dd00b4c599b2133917c192a1c98968bd7e3fc42cb"
+        },
+        "bytesExact": true
+      },
+      "rgbaByteExact": true,
+      "qcCounts": {
+        "sampleCount": 3,
+        "logicalReferenceCount": 12,
+        "comparedCompletedRgbBytes": 1990800,
+        "comparedReferenceRgbBytes": 7963200
+      },
+      "savedContentExact": true,
+      "qcObservationsExact": true,
+      "savedReload": {
+        "before": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/baseline-v001/panel/reload-result.json",
+          "bytes": 1640,
+          "fileSha256": "04ac51781f50bb8e8f89ae1f9dc6d19efb940adee25795f67bbbfaa5110a30d0"
+        },
+        "after": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/changed-v002/panel/reload-result.json",
+          "bytes": 1640,
+          "fileSha256": "d7b342c56b8073f5e5e9f244f884a0a6555372cfe44be255f0a6c80e5e0a60f5"
+        }
+      },
+      "phasesAfterMilliseconds": {
+        "bundle": 1232.6481679999993,
+        "browser-open": 380.60945699999775,
+        "render-still": 2524.5282899999947,
+        "browser-close": 27.250083999997514,
+        "browser-process-cleanup": 0.6600839999937307,
+        "bundle-remove": 3.527708999999959
+      },
+      "operationCountsAfter": {
+        "bundle": 2,
+        "browser-open": 4,
+        "render-still": 10,
+        "browser-close": 4,
+        "browser-process-cleanup": 4,
+        "bundle-remove": 2
+      },
+      "drawingRulesBefore": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/baseline-v001/panel/drawing-rules.json",
+        "bytes": 15755,
+        "fileSha256": "97a67b4dd51efc66c7505d506892972733081ce8c5bc8be09afa36590602123c"
+      },
+      "drawingRulesAfter": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/changed-v002/panel/drawing-rules.json",
+        "bytes": 16012,
+        "fileSha256": "fb271161d7ddf58cd41645cb612de724f3657f34e98a93487bb3ba9dfdbe2a8f"
+      },
+      "currentDrawingRulesSha256": "1e23d53d0c11c04d032c5af5260bdb6649c062e4bf0066d299386ab1aad5a65e"
+    },
+    {
+      "name": "shake",
+      "nativePngRequestCount": 64,
+      "cachedPngOutputCount": 14,
+      "allAdapterPngOutputCount": 78,
+      "productionStateCount": 19,
+      "distinctDecodedPngPairs": 19,
+      "logicalFiniteCandidates": 1715,
+      "before": {
+        "editRequestToCompleteMediaMilliseconds": 198449.85220800003,
+        "applicabilityHttpMilliseconds": 28693.937667000006,
+        "durableSaveHttpMilliseconds": 1104.8528329999972,
+        "previewRequestToCompleteMediaMilliseconds": 168648.24104199998,
+        "mediaAcquisitionMilliseconds": 8.382917000039015,
+        "completedMediaReuseMilliseconds": 610.0091250000405,
+        "applicabilityReuseHttpMilliseconds": 857.5842079999857,
+        "rendererPreparationMilliseconds": null,
+        "legacyPngWithPerImagePreparationMilliseconds": 72786.29303600002,
+        "freshPngApiMilliseconds": null,
+        "pngCacheReuseMilliseconds": 16.659584000015457,
+        "freshPngCount": 64,
+        "pngCacheReuseCount": 14,
+        "overlayCliLaunchCount": 64,
+        "overlayBrowserLaunchCount": 64,
+        "observedChildProcessCount": 329,
+        "cleanupMilliseconds": 0,
+        "mainCompositionMilliseconds": 23976.204708999998,
+        "strictRecompositionMilliseconds": 24286.377582999994,
+        "finiteStateQcMilliseconds": 48780.738667,
+        "diagnosticImagePreparationMilliseconds": 344.2680839999957,
+        "totalCompletedQcMilliseconds": 74551.71474999998,
+        "observedScope": "PNG initialization counts only; layout/QC processes remain separate. Old CLI preparation and still pixels share one measured process and are not artificially split. Times include nested phases and must not be summed into end-to-end time."
+      },
+      "after": {
+        "editRequestToCompleteMediaMilliseconds": 142416.142417,
+        "applicabilityHttpMilliseconds": 10620.199290999997,
+        "durableSaveHttpMilliseconds": 1101.182541000002,
+        "previewRequestToCompleteMediaMilliseconds": 130691.816292,
+        "mediaAcquisitionMilliseconds": 6.762457999982871,
+        "completedMediaReuseMilliseconds": 622.8096249999944,
+        "applicabilityReuseHttpMilliseconds": 862.1734169999836,
+        "rendererPreparationMilliseconds": 1383.311416999999,
+        "legacyPngWithPerImagePreparationMilliseconds": null,
+        "freshPngApiMilliseconds": 15812.379999000012,
+        "pngCacheReuseMilliseconds": 14.103000000002794,
+        "freshPngCount": 64,
+        "pngCacheReuseCount": 14,
+        "overlayCliLaunchCount": 0,
+        "overlayBrowserLaunchCount": 4,
+        "observedChildProcessCount": 265,
+        "cleanupMilliseconds": 30.99016800003301,
+        "mainCompositionMilliseconds": 23959.813625,
+        "strictRecompositionMilliseconds": 24303.129374999997,
+        "finiteStateQcMilliseconds": 48707.275708,
+        "diagnosticImagePreparationMilliseconds": 364.20366600000125,
+        "totalCompletedQcMilliseconds": 74549.502833,
+        "observedScope": "PNG initialization counts only; layout/QC processes remain separate. Old CLI preparation and still pixels share one measured process and are not artificially split. Times include nested phases and must not be summed into end-to-end time."
+      },
+      "savedMilliseconds": 56033.70979100003,
+      "afterOverBefore": 0.7176429754542233,
+      "qcProjectionSha256": "db59ad6258217ed44d244ad9ca5e8ff0dac307e46eacc4bf5b27e38c9e6fbb52",
+      "target": {
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+        "text": "いるやんいるやん",
+        "range": {
+          "startFrame": 0,
+          "endFrameExclusive": 131
+        },
+        "selection": "Reset",
+        "effectiveSelection": {
+          "role": "Shake accent",
+          "presentation": "provisional-shake",
+          "scope": "whole-caption"
+        },
+        "cacheStart": {
+          "nativeAssetEntries": 0,
+          "applicabilityEntries": 0,
+          "completedPreviewEntries": 0
+        }
+      },
+      "media": {
+        "before": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-p1-20260921-baseline-v001-shake/run-97930def-17f4-4fcb-b77c-1a1820f87964/render/presentation-rendered-v002.mp4",
+          "bytes": 3802260,
+          "fileSha256": "aff15c4832d775b563419adbd255a3d502fc083dc7d78a48987dbb4e0dfe56be"
+        },
+        "after": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-p1-20260921-changed-v002-shake/run-a44ac336-9e82-43c4-bf88-cdf05c9070c7/render/presentation-rendered-v002.mp4",
+          "bytes": 3802260,
+          "fileSha256": "aff15c4832d775b563419adbd255a3d502fc083dc7d78a48987dbb4e0dfe56be"
+        },
+        "bytesExact": true
+      },
+      "rgbaByteExact": true,
+      "qcCounts": {
+        "sampleCount": 50,
+        "logicalReferenceCount": 1715,
+        "comparedCompletedRgbBytes": 34560000,
+        "comparedReferenceRgbBytes": 1185408000
+      },
+      "savedContentExact": true,
+      "qcObservationsExact": true,
+      "savedReload": {
+        "before": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/baseline-v001/shake/reload-result.json",
+          "bytes": 1640,
+          "fileSha256": "79da91c290bb237a538ede7d3e744996abb63a508dda5eab2efb65400c3e81a4"
+        },
+        "after": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/changed-v002/shake/reload-result.json",
+          "bytes": 1640,
+          "fileSha256": "eb333c6f3743fa838da4cb5f37853f68200f1f628fde7dc18a5e7a10be876426"
+        }
+      },
+      "phasesAfterMilliseconds": {
+        "bundle": 1011.5617080000011,
+        "browser-open": 371.7497089999979,
+        "render-still": 15812.379999000012,
+        "browser-close": 26.656876000008197,
+        "browser-process-cleanup": 0.9085420000337763,
+        "bundle-remove": 3.424749999991036
+      },
+      "operationCountsAfter": {
+        "bundle": 2,
+        "browser-open": 4,
+        "render-still": 64,
+        "browser-close": 4,
+        "browser-process-cleanup": 4,
+        "bundle-remove": 2
+      },
+      "drawingRulesBefore": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/baseline-v001/shake/drawing-rules.json",
+        "bytes": 15755,
+        "fileSha256": "97a67b4dd51efc66c7505d506892972733081ce8c5bc8be09afa36590602123c"
+      },
+      "drawingRulesAfter": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/changed-v002/shake/drawing-rules.json",
+        "bytes": 16012,
+        "fileSha256": "fb271161d7ddf58cd41645cb612de724f3657f34e98a93487bb3ba9dfdbe2a8f"
+      },
+      "currentDrawingRulesSha256": "1e23d53d0c11c04d032c5af5260bdb6649c062e4bf0066d299386ab1aad5a65e"
+    }
+  ],
+  "testRuns": [
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/session-cache-tests-v003.tap",
+        "bytes": 4865,
+        "fileSha256": "f73af9b98348053c1a1e61839c3165520e1d920f9b8ca4267339c65e0b86af59"
+      },
+      "pass": 26,
+      "fail": 0,
+      "skipped": 1,
+      "cancelled": 0
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/adapter-observer-tests-v003.tap",
+        "bytes": 5279,
+        "fileSha256": "559982a78733efb7b79eac69d16ad113e9e52850e64de19bbccf9a225c0f0174"
+      },
+      "pass": 5,
+      "fail": 0,
+      "skipped": 15,
+      "cancelled": 0
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/session-native-v002.tap",
+        "bytes": 2962,
+        "fileSha256": "2ca03ae2d1a3e5c0725fabce22c887a86f3c7f10c4f50a9656dbdcd597fcef35"
+      },
+      "pass": 1,
+      "fail": 0,
+      "skipped": 10,
+      "cancelled": 0
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/reference-rejection-v001/native-preparation-negative-tests.tap",
+        "bytes": 6554,
+        "fileSha256": "db005b08dfaee46e95a2790c05b2f3c176417a82c52bf753d7bc2ee331ec5107"
+      },
+      "pass": 5,
+      "fail": 0,
+      "skipped": 19,
+      "cancelled": 0
+    }
+  ],
+  "rejectionProbes": [
+    {
+      "kind": "font-reference-sha-mismatch",
+      "status": "passed",
+      "validReferenceAccepted": true,
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+      "originalSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+      "changedInMemorySha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "error": {
+        "name": "Error",
+        "code": "EDITING_APPLICABILITY_STALE",
+        "message": "適用検査に使った描画規則が現在のファイルと一致しません"
+      }
+    },
+    {
+      "kind": "registered-input-sha-mismatch",
+      "status": "passed",
+      "validReferenceAccepted": true,
+      "originalReference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/fresh-input.json",
+        "bytes": 383354,
+        "fileSha256": "474df94db948c172fdc57b44711c7cd4f40e7af8c98d992cc5bd472214d1bdde"
+      },
+      "changedInMemoryReference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/fresh-input.json",
+        "bytes": 383354,
+        "fileSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "error": {
+        "name": "TypeError",
+        "code": "EDITING_BINDING_CHANGED",
+        "message": "登録ファイルの内容が変わっています"
+      }
+    },
+    {
+      "kind": "registered-input-path-mismatch",
+      "status": "passed",
+      "validReferenceAccepted": true,
+      "originalReference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/fresh-input.json",
+        "bytes": 383354,
+        "fileSha256": "474df94db948c172fdc57b44711c7cd4f40e7af8c98d992cc5bd472214d1bdde"
+      },
+      "changedInMemoryReference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/source-bindings.json",
+        "bytes": 383354,
+        "fileSha256": "474df94db948c172fdc57b44711c7cd4f40e7af8c98d992cc5bd472214d1bdde"
+      },
+      "error": {
+        "name": "TypeError",
+        "code": "EDITING_BINDING_CHANGED",
+        "message": "登録ファイルの内容が変わっています"
+      }
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_applicability_v001.mjs",
+      "bytes": 18180,
+      "fileSha256": "57a8572cddc3d8af814cc07a5278c1c002137cb858489e20163a7dec8fc77339"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_asset_cache_v001.mjs",
+      "bytes": 5799,
+      "fileSha256": "6616161618ed6644495dfaf71a5e7c0c3a80a44874661dc09c253801875a1f5e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_asset_cache_v001.test.mjs",
+      "bytes": 5515,
+      "fileSha256": "87e6ccbaa1dcc95845ee0f6a1bbe45ea089b4c857d93a3fe8edd54d97e9bfb8b"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+      "bytes": 20700,
+      "fileSha256": "740effe22c1278945562aedafa52df2aaf9d2ab7fe8277a05acd32be8818f939"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+      "bytes": 18203,
+      "fileSha256": "145b850cb6c7590bf174f7e883321e895bbe793628890f65575e5314d4bf309d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_overlay_render_session_v001.mjs",
+      "bytes": 17094,
+      "fileSha256": "9bc00ae3a2b7a696e69bba64c3ab061dac57b2700de10956519ed6b30a3bb7e5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_overlay_render_session_v001.test.mjs",
+      "bytes": 31162,
+      "fileSha256": "bbf6777d495a66050a1883b52e0604fa4521fc6375d1afef20e3db3e007cd81d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+      "bytes": 7635,
+      "fileSha256": "d7803432e7b15bc7b1b41c4b5d7bedcf927d1f7f44fb7dedba1fbc04c81c2a4a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 135283,
+      "fileSha256": "d0a7d4eae95779943ca5865b3aa3f1886a72f3a1cd95b75026dfc98451ffe6e7"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/p1-compare.mjs",
+      "bytes": 25880,
+      "fileSha256": "0e0741c0ee02bf55dc9c7a725c3d21cf877efbf2236e56502ace17295e1393e8"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/p1-editing-performance.mjs",
+      "bytes": 25464,
+      "fileSha256": "305d72855a3102d40d47b48650040097d17ee7027c6e926ee97044586912fe90"
+    }
+  ],
+  "evidenceBindings": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/start-v001.json",
+      "bytes": 2123,
+      "fileSha256": "2dcf812e2c472d2ac35f9ba212f613c656bf2686611ffe9fec6f4e29f3bbea83"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/runtime-preflight-v001.json",
+      "bytes": 2740,
+      "fileSha256": "f4c63c7361f69f28e4a716c416de76595823c3c4a50b3012836ca6a127aa57c7"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/baseline-measurement-only.patch",
+      "bytes": 8143,
+      "fileSha256": "59711e75a3f4cf72acf34a25f11795b75c1d3408290471006fe539da21ef66f4"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/baseline-source/bindings.json",
+      "bytes": 3634,
+      "fileSha256": "892b81bfab24cbf30efa3ca6e10b56594034d76f9f36b6bdff80745238071395"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/baseline-v001/result.json",
+      "bytes": 331645,
+      "fileSha256": "4df6df9d363f7fc44dfbd9f3ebbe5ab170fe02b2ed6e01bf0a134291e517e3a6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/changed-v001/result.json",
+      "bytes": 383646,
+      "fileSha256": "1f7072972c3d240f51e60bb51a4a87806f8e578e94cf5c9523c8397962894002"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/changed-v002/result.json",
+      "bytes": 383429,
+      "fileSha256": "a7b37677ad44a01ee1caf5fa2b434fc457c5ebaadd9d91af870f250e0ac2ebbb"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/comparison-v001/result.json",
+      "bytes": 6126413,
+      "fileSha256": "edbfb358a8d6cd6851450e03cf907820395a93efec4621aa93d208a740318534"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/comparison-v002/result.json",
+      "bytes": 6126396,
+      "fileSha256": "6b4c769b494dca96f8632936647dbaa878606661bbde6b0292660dbc6553e7eb"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/small-native-v002/measurement.json",
+      "bytes": 35430,
+      "fileSha256": "bfbb76d54fe3c728a29bd723eccbb76923cdec424ece7cbfc2ea5b31785b886d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/reference-rejection-v001/result.json",
+      "bytes": 5453,
+      "fileSha256": "f9c98150f0b1577bb335d9e3a23f728ba1bfe4365638b0aa387e06cd5cc6a83b"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/final-independent-review-v001.json",
+      "bytes": 9925,
+      "fileSha256": "bf4ed55011c49fb8965abb783819690f874f244e502a40558250f580bca3cb81"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/final-owned-resource-verification-v001.json",
+      "bytes": 327745,
+      "fileSha256": "6ea87d9dce1c50f8b04f94e120505ea296d691da6c5ef0fc3e8aa1c7a0d06117"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/job-ownership-scope-v001.json",
+      "bytes": 2012,
+      "fileSha256": "0f71af8904f68a23def647425c6f1f819049544e3ac4f36e877461fb7acc45c2"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/test-invocation-correction-v001.json",
+      "bytes": 1503,
+      "fileSha256": "7b10d5f284170d7a1127c148cc15d5afcd92a3fe5de09d31a29c00d26fab7b79"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/session-fixture-preflight-v001.failure.json",
+      "bytes": 805,
+      "fileSha256": "33490da953a2036faa84ada24d8bd3a7d45e74e0dc33a3562bf0ca9672a4f619"
+    }
+  ],
+  "preservation": {
+    "protectedReferences": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v003/session-answers.json",
+        "bytes": 62272,
+        "fileSha256": "8dc2c92b70837b6927899373217a6419446f687e308c3f68602037d213066216"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/review-reflection-r1-r3-20260921-v002/review-v002.json",
+        "bytes": 20805,
+        "fileSha256": "5a6bf7f68ce79a4b1056ff61b891f29aee874b02d43a7219fc480d1e51f5c8e0"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-2-20260921-v001/candidate-record-v001.json",
+        "bytes": 2799,
+        "fileSha256": "bff779fe9a157cee1a1715cee61171b03e9c73ce2fc9981b5d42c6322c0d2e00"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q4-confirmed-transfer-20260921-v001/input-availability-v001.json",
+        "bytes": 13194,
+        "fileSha256": "45c7a4e7c4f02ef6c5e175677d5ee2dca3d0d0fead4125f4b69211c2330e050a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/captionAuto.json",
+        "bytes": 43149,
+        "fileSha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/captionOverrides.json",
+        "bytes": 31772,
+        "fileSha256": "f8565737d1b5e4531c31be1c77b95e943e4c4a051af4aa31bd9f056b714e02ea"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/connectionAuto.json",
+        "bytes": 2159,
+        "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+        "bytes": 976,
+        "fileSha256": "56b3b7783d1b2188786cf81b1774021d0b3bcedae1fb80fc78e9ca59da3c2bec"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/document.json",
+        "bytes": 9836,
+        "fileSha256": "d565d843b135ae842c93e135b6f916af7d50aa31dcb9fee335e6f0ca25386393"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/fresh-input.json",
+        "bytes": 382825,
+        "fileSha256": "122e83a28c4efdc5bfa052a74519039d858415551933596de55e8af0d33c275a"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/media/4ef43bca-e48a-453c-9c78-d036c965103e.json",
+        "bytes": 17070,
+        "fileSha256": "f966ae61b8c3bb6a675329390e85956c442e00f7a4af710fea8ebba16a7fbeb2"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/media/7b68ed40-58d0-4772-bf3c-fe36e46dd5e7.json",
+        "bytes": 17057,
+        "fileSha256": "c1ab60df0c6369bb8f97ab9f580524a2dddce670db3bc531b68c65362222a7bf"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/media/d1d18f1b-3ec6-4f35-8b20-0513732ed953.json",
+        "bytes": 17057,
+        "fileSha256": "1d8aad1b85f8bd3188e7aea1f44ad0fb4b8c5287460105e3de03c92c752f6084"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/original-drawing-evidence.json",
+        "bytes": 975051,
+        "fileSha256": "c63e584c9eda4341ec2483ce900261681753c2d2fdaeee258696dd592b879c3b"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/raw-ai-response-v001.json",
+        "bytes": 27199,
+        "fileSha256": "7d1d7bc4e0587fa90c7d9115f5c79cb9d39b4ff7d9750aa32d561f6a0c602629"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/selectionRecord.json",
+        "bytes": 477587,
+        "fileSha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/source-bindings.json",
+        "bytes": 354254,
+        "fileSha256": "87d95289df43473c7eb4a672c1a57b314119db05d7124512398df3388bd0550e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-2-20260921-v001/review-data-v001.json",
+        "bytes": 2564,
+        "fileSha256": "a453c382d6c687394496000a1a53acc56511f20122208c07785496e17fce4524"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/source-bindings.json",
+        "bytes": 354254,
+        "fileSha256": "db0b940c80afc85107c7cebbe99e2376947144ef89556c5d73b3156342df10e2"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/fresh-input.json",
+        "bytes": 383354,
+        "fileSha256": "474df94db948c172fdc57b44711c7cd4f40e7af8c98d992cc5bd472214d1bdde"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/raw-ai-response-v001.json",
+        "bytes": 22263,
+        "fileSha256": "de1bed01813ac9425601877dc0dc6c3389a7f12fd6c588b05cff87041b707b1f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/captionAuto.json",
+        "bytes": 43248,
+        "fileSha256": "e7acbe14edfe12a3d6b65441eca2abb91ffa0ca65a45ce1a2c16716aca8715cb"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/captionOverrides.json",
+        "bytes": 31558,
+        "fileSha256": "7fbff66619ec1420e25fc91d0c88443c475cb74406a61bd948d5582ec1a62415"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/connectionAuto.json",
+        "bytes": 2159,
+        "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/connectionOverrides.json",
+        "bytes": 830,
+        "fileSha256": "cd8a1c3fc432ec3e66361f47e87f5284f6ff05b37b3a8a0858c62eff35daf562"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/selectionRecord.json",
+        "bytes": 1443943,
+        "fileSha256": "f0d440da65803138a68658bf88f5a36f1ebf1b8a7ab15e91225bc0df004b44ff"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/drawing-evidence.json",
+        "bytes": 1942870,
+        "fileSha256": "5a4bd86c2b826649d6658f58f3c6e3dd31c76b0242a42bc9966534b1df428d2e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/lineage.json",
+        "bytes": 4097,
+        "fileSha256": "ed5fe5e4bf1868697527b1adcecbe89e361f2526ac22fc9ad47fc619a24103ba"
+      }
+    ],
+    "protectedReferenceCount": 28,
+    "currentDrawingReferenceCount": 63,
+    "currentDrawingReferencesVerified": true,
+    "originalSingleImageFactoryUnchanged": true,
+    "fixedV001RunnerUnchanged": true
+  },
+  "intermediateExecution": {
+    "purpose": "preserved intermediate connection before restricting ownership to the two authorized edit entrypoints; final source was rerun into changed-v002 without retagging old records",
+    "cases": [
+      {
+        "name": "panel",
+        "beforeMilliseconds": 62870.594124999996,
+        "afterMilliseconds": 55609.845958,
+        "pngAndMp4AndQcExact": true
+      },
+      {
+        "name": "shake",
+        "beforeMilliseconds": 198449.85220800003,
+        "afterMilliseconds": 143954.13233300002,
+        "pngAndMp4AndQcExact": true
+      }
+    ]
+  },
+  "externalPaidApiCalls": 0,
+  "newMediaTransfers": 0,
+  "newDependencies": 0,
+  "costUsd": 0,
+  "reviewStatesChanged": false,
+  "limitations": [
+    "one baseline and one final-source run per case; intermediate-source run also retained; no best-run selection",
+    "fresh image/applicability/completed-media stores, not a machine reboot or cleared OS/Remotion Webpack disk cache",
+    "before CLI combines preparation and drawing in one measured process; it cannot be retroactively split",
+    "existing browser UI restrictions and pending human reviews are unchanged"
+  ]
+}

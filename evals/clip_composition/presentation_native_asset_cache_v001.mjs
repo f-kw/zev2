@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {createReadStream} from 'node:fs';
+import {constants, createReadStream} from 'node:fs';
 import {copyFile, lstat, mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
@@ -36,8 +36,10 @@ export async function createPresentationNativeAssetCacheV001({repositoryRoot, di
     await mkdir(directory, {recursive: true});
   }
   const profileSha256 = hash(canonicalJson(drawingProfile)), pending = new Map();
-  const stats = {nativeDraws: 0, bitmapReuses: 0, verifiedPairsAdded: 0};
-  const draw = async (props, outputPath, render) => {
+  const stats = {nativeDraws: 0, bitmapReuses: 0, verifiedPairsAdded: 0,
+    nativeDrawMilliseconds: 0, bitmapReuseMilliseconds: 0};
+  const draw = async (props, outputPath, options, render) => {
+    const reuseStarted = performance.now();
     const propsSha256 = hash(canonicalJson(props));
     const key = hash(canonicalJson({profileSha256, propsSha256}));
     const pngPath = path.join(directory, key + '.png'), proofPath = path.join(directory, key + '.json');
@@ -52,28 +54,40 @@ export async function createPresentationNativeAssetCacheV001({repositoryRoot, di
       assert.equal(proof.first.fileSha256, proof.repeat.fileSha256);
       assert.deepEqual(await bind(pngPath), proof.png);
       assert.equal(proof.png.fileSha256, proof.first.fileSha256);
-      await copyFile(pngPath, outputPath);
+      await copyFile(pngPath, outputPath, constants.COPYFILE_EXCL);
       assert.equal((await bind(outputPath)).fileSha256, proof.png.fileSha256);
       assert.deepEqual(await bind(proofPath), proofRef);
       stats.bitmapReuses++;
+      stats.bitmapReuseMilliseconds += performance.now() - reuseStarted;
       return;
     } catch (error) {if (error.code !== 'ENOENT') throw error;}
-    await render(); stats.nativeDraws++;
+    const previous = pending.get(key);
+    const requestedSeries = options?.series ?? 'normal';
+    assert(['normal', 'repeat'].includes(requestedSeries), 'native rendering series is invalid');
+    // Identical masks can be requested twice in the normal sequence. Their
+    // cache admission still needs two independently initialized environments.
+    const series = previous?.series === requestedSeries
+      ? requestedSeries === 'normal' ? 'repeat' : 'normal' : requestedSeries;
+    const drawStarted = performance.now();
+    await render({series}); stats.nativeDraws++;
+    stats.nativeDrawMilliseconds += performance.now() - drawStarted;
     assert.equal(hash(canonicalJson(props)), propsSha256, 'native draw mutated props');
-    const actual = await bind(outputPath), first = pending.get(key);
-    if (!first) {pending.set(key, actual); return;}
+    const actual = await bind(outputPath), first = previous?.file;
+    if (!first) {pending.set(key, {file: actual, series}); return;}
+    assert.notEqual(previous.series, series, 'deterministic cache pair needs independent rendering series');
     assert.notEqual(first.path, actual.path, 'deterministic cache pair needs distinct native outputs');
     assert.deepEqual(await bind(first.path), first);
     assert.equal(first.fileSha256, actual.fileSha256, 'native draw pair differs');
-    await copyFile(actual.path, pngPath);
+    await copyFile(actual.path, pngPath, constants.COPYFILE_EXCL);
     const body = {schemaVersion: 'presentation-native-asset-cache-v001', key, profileSha256, propsSha256,
-      first, repeat: actual, png: await bind(pngPath)};
+      first, repeat: actual, png: await bind(pngPath), renderSeries: [previous.series, series]};
     await writeFile(proofPath, JSON.stringify({...body, proofSha256: hash(canonicalJson(body))}, null, 2) + '\n', {flag: 'wx'});
     pending.delete(key); stats.verifiedPairsAdded++;
   };
   return {stats, profileSha256, directory,
     adapter: {...adapter,
-      renderStill: (props, outputPath) => draw(props, outputPath, () => adapter.renderStill(props, outputPath)),
-      renderLineMask: (props, lineIndex, outputPath) => draw({...props, inspectionLineIndex: lineIndex}, outputPath,
-        () => adapter.renderLineMask(props, lineIndex, outputPath))}};
+      renderStill: (props, outputPath, options) => draw(props, outputPath, options,
+        actualOptions => adapter.renderStill(props, outputPath, actualOptions)),
+      renderLineMask: (props, lineIndex, outputPath, options) => draw({...props, inspectionLineIndex: lineIndex}, outputPath, options,
+        actualOptions => adapter.renderLineMask(props, lineIndex, outputPath, actualOptions))}};
 }

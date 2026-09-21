@@ -245,7 +245,7 @@ export async function preparePresentationNativeFrameQcV001({
       const repeatPath = path.join(overlayDirectory, `${record.fileStem}-${spec.kind}-repeat.png`);
       await overlayAdapter.renderStill(props, pngPath);
       if (sha256AutoPresentationV001(props) !== propsSha) reject('native adapter changed diagnostic drawing properties');
-      await overlayAdapter.renderStill(props, repeatPath);
+      await overlayAdapter.renderStill(props, repeatPath, {series: 'repeat'});
       if (sha256AutoPresentationV001(props) !== propsSha) reject('native adapter changed diagnostic drawing properties');
       const [png, repeat] = await Promise.all([bind(pngPath), bind(repeatPath)]);
       if (png.fileSha256 !== repeat.fileSha256) reject('diagnostic native rendering is nondeterministic');
