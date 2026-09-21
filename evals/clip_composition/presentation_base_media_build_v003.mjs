@@ -1334,6 +1334,8 @@ const videoFilterGraph = (fps, segments) => {
   ].join(';');
 };
 
+export {videoFilterGraph as buildPresentationBaseMediaVideoFilterGraphV001};
+
 export const buildPresentationBaseMediaVideoV001 = async (sourcePath, outputPath, fps, segments) => {
   const graph = videoFilterGraph(fps, segments);
   const args = [

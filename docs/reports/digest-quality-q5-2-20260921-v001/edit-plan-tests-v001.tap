@@ -1,0 +1,60 @@
+TAP version 13
+# Subtest: one added source interval expands scene 8, keeps the previous endpoint and moves owned content exactly once
+ok 1 - one added source interval expands scene 8, keeps the previous endpoint and moves owned content exactly once
+  ---
+  duration_ms: 14.016959
+  ...
+# Subtest: source provenance has no invented old-Digest coordinate and the 48k stereo playback count stays separate
+ok 2 - source provenance has no invented old-Digest coordinate and the 48k stereo playback count stays separate
+  ---
+  duration_ms: 6.611625
+  ...
+# Subtest: three new captions use exact grounded text, fresh IDs and the existing Normal layout and appearance
+ok 3 - three new captions use exact grounded text, fresh IDs and the existing Normal layout and appearance
+  ---
+  duration_ms: 5.806375
+  ...
+# Subtest: saved content reconstructs exactly; cancellation removes media and new captions and restores the original clock together
+ok 4 - saved content reconstructs exactly; cancellation removes media and new captions and restores the original clock together
+  ---
+  duration_ms: 23.784042
+  ...
+# Subtest: comparison prepends only the new source, preserves the common body and exit, and does not restart caption phases
+ok 5 - comparison prepends only the new source, preserves the common body and exit, and does not restart caption phases
+  ---
+  duration_ms: 12.508584
+  ...
+# Subtest: different source bytes, missing roots and unsupported caption text or timing are rejected before projection
+ok 6 - different source bytes, missing roots and unsupported caption text or timing are rejected before projection
+  ---
+  duration_ms: 6.559583
+  ...
+# Subtest: distant, overlapping, oversized, alternate and old-schema additions are rejected
+ok 7 - distant, overlapping, oversized, alternate and old-schema additions are rejected
+  ---
+  duration_ms: 8.019958
+  ...
+# Subtest: saved payload tampering and reuse of derived or serialized content as originals are rejected
+ok 8 - saved payload tampering and reuse of derived or serialized content as originals are rejected
+  ---
+  duration_ms: 51.881333
+  ...
+# Subtest: comparison rejects cutting original captions, skipping the original opening or crossing the original exit
+ok 9 - comparison rejects cutting original captions, skipping the original opening or crossing the original exit
+  ---
+  duration_ms: 38.39025
+  ...
+# Subtest: real C-all first proposal preserves 325 originals and adds exactly the three grounded captions
+ok 10 - real C-all first proposal preserves 325 originals and adds exactly the three grounded captions
+  ---
+  duration_ms: 176.875959
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 406.263833

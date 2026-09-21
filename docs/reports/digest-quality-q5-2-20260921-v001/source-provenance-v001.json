@@ -1,0 +1,811 @@
+{
+  "schemaVersion": "q5-2-source-provenance-v001",
+  "recordedAt": "2026-09-21T01:08:02.988188+00:00",
+  "status": "verified-existing-source-provenance",
+  "startCheckpoint": "0e319b59c58d977104661fba04182211720f72b1",
+  "receivedInstructionRef": {
+    "path": "/Users/kawafmm/.codex/attachments/899cefed-97e7-4294-b98b-e4954965f76f/pasted-text.txt",
+    "bytes": 15243,
+    "fileSha256": "35225b25cc563376161be3bbb91692d2dd447c1bfc247f0f944ab8a51f18de7b"
+  },
+  "scope": "既存完成記録から限定的にたどった素材・全文記録・変換条件の来歴。候補選定、映像内容判断、新ASR、媒体再生成は行わない。",
+  "searchBoundary": {
+    "entrypoints": [
+      "tools/digest-quality/q4-c-all-input.mjs",
+      "docs/reports/digest-quality-q5-1-20260920-v001"
+    ],
+    "method": "固定完成記録とそこからの明示参照、対応する既存製造実装に限定。",
+    "forbiddenFoldersVisited": false,
+    "wholeDiskSearch": false,
+    "bulkCopies": 0
+  },
+  "refs": {
+    "completionRecord": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/phase2-completion-v001/completion-record.json",
+      "bytes": 11417,
+      "fileSha256": "6f656cc4e0c6903139f3f0ecb0bf5000fa6ff19eede3cbbe53981ce24300384a"
+    },
+    "originalCompletedMedia": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "bytes": 616632321,
+      "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+    },
+    "originalSourceVideo": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+      "bytes": 2923277322,
+      "fileSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06"
+    },
+    "subtitleFreeBaseMedia": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/base-media.mp4",
+      "bytes": 635378367,
+      "fileSha256": "0de24b8c9b18d33d38e163f0e1eaed8a35aaeea4b2411c507d7947c992545c04"
+    },
+    "generationManifest": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/generation-manifest.json",
+      "bytes": 16291,
+      "fileSha256": "b49a6972361686d62e4dd96ceeafe48f9692121544ccc9e066661dc3db11c053"
+    },
+    "timeline": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/timeline.json",
+      "bytes": 3711,
+      "fileSha256": "42bd0d376648eacaba13d469dd1780a6acd330d470e1a4f2cd2fc9404252d53e"
+    },
+    "normalCaptionPlan": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/common-plan.json",
+      "bytes": 2095671,
+      "fileSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778"
+    },
+    "machineAdoption": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/machine-adoption.json",
+      "bytes": 197066,
+      "fileSha256": "48d8a351777849a7db7588c045e6ec27d54232066b3fca5400b06f985b45e8fb"
+    },
+    "candidateSet": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/candidate-set.json",
+      "bytes": 6170,
+      "fileSha256": "92c86734b01aab91e2f15ae835729030767507e220fede4b119bf38788ed9946"
+    },
+    "captionBridge": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-v001.json",
+      "bytes": 1035588,
+      "fileSha256": "98c3c0b6559faf44cf40199abea66f7408bbe5773064f3489dc9e6e705a56b60"
+    },
+    "phase2Job": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/job.json",
+      "bytes": 7669,
+      "fileSha256": "4f445a2e7a360365d6eeb1ffaf8f0a28c7e51bbbdb5bebb6e44548118f5f157f"
+    },
+    "captionTextInput": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-text-input.json",
+      "bytes": 1450821,
+      "fileSha256": "7f2aa2044e737ba4d661e3f32ec33fc9151d946c594aef9b72d408d2cbba35ef"
+    },
+    "basisEditPlan": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/edit-plan.json",
+      "bytes": 190739,
+      "fileSha256": "0c501519ff3302abedb6d14bf5d27c33abc2a2a63ad295c1086f4d4533b8eb8d"
+    },
+    "sourceInspection": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/source-media-inspection.json",
+      "bytes": 2926,
+      "fileSha256": "0f429335d3524ac76d7517ad7d828454eaacdd85ae83223ad6a47cd096ec270c"
+    },
+    "sourceTranscript": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/transcript.json",
+      "bytes": 5416069,
+      "fileSha256": "cd79fbf244bdb73b2eb7ddcffa3fca55e087046b72cbf26b69b87856dae01389"
+    },
+    "sourceUtterances": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/utterances.json",
+      "bytes": 869951,
+      "fileSha256": "ebc394fdc848d4d89d5de168eeeac191e07d2aa53d11238a14a3973c53995aa2"
+    },
+    "sourceWordTimestamps": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/word-timestamps.json",
+      "bytes": 4805478,
+      "fileSha256": "fa43146d457125d8768cf11b7e9cbcd51c9a242ebc16d25ab77f998afe9ec950"
+    },
+    "sourceSttManifest": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/manifest.json",
+      "bytes": 245127,
+      "fileSha256": "60320907a4ec7754e103a2c4af0d5bcef072363e93a06d1f60b2516bdea1ed33"
+    },
+    "sourceSttChunkCatalogue": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/local-stt-response.raw.json",
+      "bytes": 243977,
+      "fileSha256": "9e57d7e574a20470208370202b44b8e2dad8f9eb05c76897dadae548cd8ef7a9"
+    },
+    "sourceAcousticObservationChunk253": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/acoustic-observation-chunk-0253-v001.json",
+      "bytes": 9113,
+      "fileSha256": "aa4d1983ae634d8a0a56371e7d56df70db9775b3930a9988531279f44f033f59"
+    },
+    "sourceAcousticPreflight": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/acoustic-preflight-v001.json",
+      "bytes": 663016,
+      "fileSha256": "73556f12af3fc35d5f95d397109abd0b52af378cdcd9b8b453629d6c40f759b8"
+    },
+    "originalRetentionRequest": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-request.json",
+      "bytes": 615981,
+      "fileSha256": "b5699b27d791a8195e510bd776600b1108c4bfcf7c99462b0639714b2460b745"
+    },
+    "originalRetentionResult": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-result.json",
+      "bytes": 11502,
+      "fileSha256": "cd3c03998cc327ca3a7aea6ffa68aa73ae7f680df63f93d7edee6f6d31567b70"
+    },
+    "sourceAudioPreparation": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/audio-preparation.json",
+      "bytes": 35542,
+      "fileSha256": "48c9f33638a22a69151b238a84cfc3e1d846bff5a650b9fd1da192e9a68476fb"
+    },
+    "sourceAcousticChunk253Audio": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/inputs/chunk-0253.flac",
+      "bytes": 1109339,
+      "fileSha256": "d7b663600f1e4da11f58be5a646572c786f630015cca9d8a7e191a53bce7abc3"
+    },
+    "sourceAcousticChunk253FormalText": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/inputs/chunk-0253.formal-text.json",
+      "bytes": 4885,
+      "fileSha256": "1f62aa8a01fd49e6b9fd907904e6dc9790cdcfee0c4c2fb8347dc7b34edc9c50"
+    }
+  },
+  "referenceChain": [
+    {
+      "from": "completionRecord",
+      "jsonPointer": "/bindings/finalMp4",
+      "to": "originalCompletedMedia"
+    },
+    {
+      "from": "completionRecord",
+      "jsonPointer": "/bindings/sourceMaterial",
+      "to": "originalSourceVideo"
+    },
+    {
+      "from": "completionRecord",
+      "jsonPointer": "/bindings/baseMedia",
+      "to": "subtitleFreeBaseMedia"
+    },
+    {
+      "from": "completionRecord",
+      "jsonPointer": "/bindings/baseMediaGenerationManifest",
+      "to": "generationManifest"
+    },
+    {
+      "from": "completionRecord",
+      "jsonPointer": "/bindings/baseMediaTimeline",
+      "to": "timeline"
+    },
+    {
+      "from": "completionRecord",
+      "jsonPointer": "/bindings/commonPlan",
+      "to": "normalCaptionPlan"
+    },
+    {
+      "from": "completionRecord",
+      "jsonPointer": "/bindings/prospects",
+      "to": "candidateSet"
+    },
+    {
+      "from": "completionRecord",
+      "jsonPointer": "/bindings/machineAdoption",
+      "to": "machineAdoption"
+    },
+    {
+      "from": "completionRecord",
+      "jsonPointer": "/bindings/bridge",
+      "to": "captionBridge"
+    },
+    {
+      "from": "machineAdoption",
+      "jsonPointer": "/planBinding",
+      "to": "phase2Job"
+    },
+    {
+      "from": "machineAdoption",
+      "jsonPointer": "/transcriptBinding",
+      "to": "sourceTranscript"
+    },
+    {
+      "from": "machineAdoption",
+      "jsonPointer": "/utteranceBinding",
+      "to": "sourceUtterances"
+    },
+    {
+      "from": "captionBridge",
+      "jsonPointer": "/semanticProvenance/textInput",
+      "to": "captionTextInput"
+    },
+    {
+      "from": "captionTextInput",
+      "jsonPointer": "/transcriptBinding",
+      "to": "sourceTranscript"
+    },
+    {
+      "from": "captionTextInput",
+      "jsonPointer": "/utteranceBinding",
+      "to": "sourceUtterances"
+    },
+    {
+      "from": "candidateSet",
+      "jsonPointer": "/transcriptBinding",
+      "to": "sourceTranscript"
+    },
+    {
+      "from": "candidateSet",
+      "jsonPointer": "/utteranceBinding",
+      "to": "sourceUtterances"
+    },
+    {
+      "from": "phase2Job",
+      "jsonPointer": "/request/sourceVideo",
+      "to": "originalSourceVideo"
+    },
+    {
+      "from": "phase2Job",
+      "jsonPointer": "/request/transcript",
+      "to": "sourceTranscript"
+    },
+    {
+      "from": "phase2Job",
+      "jsonPointer": "/request/utterances",
+      "to": "sourceUtterances"
+    },
+    {
+      "from": "phase2Job",
+      "jsonPointer": "/request/wordTimestamps",
+      "to": "sourceWordTimestamps"
+    },
+    {
+      "from": "phase2Job",
+      "jsonPointer": "/request/sttManifest",
+      "to": "sourceSttManifest"
+    },
+    {
+      "from": "sourceSttManifest",
+      "jsonPointer": "/outputs/rawResponse",
+      "to": "sourceSttChunkCatalogue",
+      "bindingKind": "recorded-output-path; current byte SHA is stored in refs"
+    },
+    {
+      "from": "sourceSttManifest",
+      "jsonPointer": "/outputs/transcript",
+      "to": "sourceTranscript",
+      "bindingKind": "recorded-output-path; current byte SHA is stored in refs"
+    },
+    {
+      "from": "sourceSttManifest",
+      "jsonPointer": "/outputs/wordTimestamps",
+      "to": "sourceWordTimestamps",
+      "bindingKind": "recorded-output-path; current byte SHA is stored in refs"
+    },
+    {
+      "from": "sourceUtterances",
+      "jsonPointer": "/sourceTranscriptBinding",
+      "to": "sourceTranscript"
+    },
+    {
+      "from": "generationManifest",
+      "jsonPointer": "/source",
+      "to": "originalSourceVideo"
+    },
+    {
+      "from": "generationManifest",
+      "jsonPointer": "/basisEditPlan",
+      "to": "basisEditPlan"
+    },
+    {
+      "from": "sourceInspection",
+      "jsonPointer": "/sourceVideoBinding",
+      "to": "originalSourceVideo"
+    },
+    {
+      "from": "basisEditPlan",
+      "jsonPointer": "/segments/7/retainedRanges/0/cutBoundaryEvidence/start/observationBinding",
+      "to": "sourceAcousticObservationChunk253"
+    },
+    {
+      "from": "sourceAcousticObservationChunk253",
+      "jsonPointer": "/preflightBinding",
+      "to": "sourceAcousticPreflight"
+    },
+    {
+      "from": "sourceAcousticPreflight",
+      "jsonPointer": "/sourceBindings/0",
+      "to": "sourceTranscript"
+    },
+    {
+      "from": "sourceAcousticPreflight",
+      "jsonPointer": "/sourceBindings/1",
+      "to": "sourceSttChunkCatalogue"
+    },
+    {
+      "from": "sourceAcousticPreflight",
+      "jsonPointer": "/sourceBindings/2",
+      "to": "originalRetentionRequest"
+    },
+    {
+      "from": "sourceAcousticPreflight",
+      "jsonPointer": "/sourceBindings/3",
+      "to": "originalRetentionResult"
+    },
+    {
+      "from": "sourceAcousticPreflight",
+      "jsonPointer": "/sourceBindings/4",
+      "to": "phase2Job"
+    },
+    {
+      "from": "sourceAcousticPreflight",
+      "jsonPointer": "/sourceBindings/5",
+      "to": "sourceAudioPreparation"
+    },
+    {
+      "from": "sourceAcousticPreflight",
+      "jsonPointer": "/chunks/30/audioBinding",
+      "to": "sourceAcousticChunk253Audio"
+    },
+    {
+      "from": "sourceAcousticPreflight",
+      "jsonPointer": "/chunks/30/rawTextBinding",
+      "to": "sourceAcousticChunk253FormalText"
+    },
+    {
+      "from": "sourceAudioPreparation",
+      "jsonPointer": "/sourceVideoBinding",
+      "to": "originalSourceVideo"
+    },
+    {
+      "from": "sourceAudioPreparation",
+      "jsonPointer": "/chunkCatalogueBinding",
+      "to": "sourceSttChunkCatalogue"
+    }
+  ],
+  "originalCompletion": {
+    "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+    "frameCount": 44408,
+    "captionCount": 325,
+    "retainedSceneCount": 12,
+    "normalFontSizePx": 94,
+    "fps": 30,
+    "playbackSampleRate": 48000,
+    "playbackChannels": 2
+  },
+  "sourceTranscript": {
+    "kind": "transcript_json",
+    "mode": "zev-local-stt-chunked",
+    "sourceUri": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+    "recordedGeneratedAt": "2026-07-12T00:13:37.894Z",
+    "language": "ja-JP",
+    "originalDurationSec": 11898.441,
+    "durationSec": 11898.441,
+    "chunkSeconds": 30,
+    "processedChunkCount": 397,
+    "fullChunkCount": 397,
+    "partial": false,
+    "segmentCount": 34507,
+    "segmentFields": [
+      "id",
+      "startMs",
+      "endMs",
+      "text",
+      "speaker"
+    ],
+    "recordedBoundaryResolution": {
+      "basis": "exact_audio_chunk_boundaries",
+      "discardedSegmentCount": 0,
+      "clampedSegmentCount": 0,
+      "discardedWordCount": 0,
+      "clampedWordCount": 0
+    },
+    "sourceTimeBasis": "元動画の容器時刻上の整数ミリ秒。保存済みチャンク応答を各チャンク範囲へ正規化した正式本文記録。",
+    "precisionLimitation": "保存原文と時刻の根拠であり、今回の精密な音素境界や字幕同期の人間確認を意味しない。"
+  },
+  "sourceUtterances": {
+    "schemaVersion": "distant-connection-common-utterance-artifact-v001",
+    "algorithm": "theme-generation-compact-segments-v001",
+    "utteranceCount": 1323,
+    "sourceSegmentCount": 34507,
+    "fields": [
+      "utteranceId",
+      "ordinal",
+      "sourceStartMs",
+      "sourceEndMs",
+      "text",
+      "sourceSegmentIds"
+    ],
+    "verifiedMeaning": "全34,507元要素を順に過不足なく分割。発話本文は参照元の本文連結、両端時刻も参照元と一致。"
+  },
+  "sourceWordTimestamps": {
+    "kind": "clip_composition_word_timestamps",
+    "wordCount": 34507,
+    "fields": [
+      "text",
+      "startMs",
+      "endMs",
+      "speaker",
+      "segmentId"
+    ],
+    "verifiedMeaning": "segmentIdで元全文34,507要素の本文・時刻・話者と全件一致。独立した今回の再認識結果ではない。"
+  },
+  "sourceVideoConversion": {
+    "recordedSource": {
+      "width": 1920,
+      "height": 1080,
+      "frameRate": "60/1",
+      "timeBase": "1/15360",
+      "decodedFrameCount": 713904,
+      "firstPts": 0,
+      "lastPts": 182759168,
+      "ptsStep": 256,
+      "containerStartTimeMs": 0,
+      "presentationOffsetMs": 0,
+      "clockAuthority": "container-zero-video-stream-offset-v001",
+      "rotation": 0
+    },
+    "logicalFrameCount": 356952,
+    "logicalFps": 30,
+    "extractionRule": "source-frame-60fps-global-even-v001",
+    "meaning": "元60fps全体の0始まり復号フレーム番号の偶数を選んで30fpsへ変換した後に区間を切り出す。",
+    "frameBoundaryMapping": "保存msから映像提示offsetを引き、30/1000を掛けて既存規則の最寄り整数へ丸める。元動画終端は既存終端規則で扱う。",
+    "retainedVideoEncoding": {
+      "codec": "libx264",
+      "preset": "fast",
+      "crf": 20,
+      "pixelFormat": "yuv420p",
+      "movieTimeScale": 30
+    },
+    "comparisonLimitation": "元動画から新規変換した追加部と、既に符号化された字幕前基礎媒体の保持部は符号化段階が異なる。双方をそれぞれの抽出元に照合する。"
+  },
+  "sourceAudioConversion": {
+    "recordedSource": {
+      "present": true,
+      "codec": "opus",
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "timeBase": "1/48000",
+      "firstDecodedPts": 312,
+      "lastDecodedPts": 571124208,
+      "presentationClock": {
+        "authority": "stream-and-packet-v001",
+        "endSample": 571125168,
+        "streamEndSample": 571125168,
+        "packetEndSample": 571125168,
+        "skipSamples": 0,
+        "discardPadding": 0
+      }
+    },
+    "recordedAudioClock": {
+      "sampleRate": 48000,
+      "channels": 2,
+      "channelLayout": "stereo",
+      "spans": [
+        {
+          "startSample": 0,
+          "endSample": 312
+        },
+        {
+          "startSample": 960,
+          "endSample": 1008
+        }
+      ],
+      "sourceGridSampleCount": 571125168,
+      "sourceGridMappingEndSample": 571125168,
+      "decodedTailPaddingSampleCount": 0
+    },
+    "canonicalPcmFormat": {
+      "sampleFormat": "f32le",
+      "packing": "interleaved"
+    },
+    "channelOrder": [
+      "FL",
+      "FR"
+    ],
+    "samplesPerLogicalFrame": 1600,
+    "sourceGridSavedMeasurement": {
+      "sampleCount": 571125168,
+      "byteCount": 4569001344,
+      "payloadSha256": "2741b78160aba433326b5595bfd524998fe1a51dde52e623c916940f80cf69cb",
+      "decodedSampleCount": 571125168,
+      "decodedTailPaddingSampleCount": 0
+    },
+    "derivedPlacementRuns": [
+      {
+        "rawDecodedSampleRange": [
+          0,
+          648
+        ],
+        "absoluteSampleRange": [
+          312,
+          960
+        ]
+      },
+      {
+        "rawDecodedSampleRange": [
+          648,
+          571124808
+        ],
+        "absoluteSampleRange": [
+          1008,
+          571125168
+        ]
+      }
+    ],
+    "totalGapSamples": 360,
+    "placementMeaning": "保存された2つの無音範囲を絶対sample時計へ挿入する既存配置規則から導出。新しい補正係数ではない。",
+    "temporaryGrid": {
+      "expectedPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media-work/source-grid.f32le",
+      "exists": false,
+      "removalProvenance": "既存adopted_media_manufacturing_v001.mtsの製造成功後処理がbase-media-work内のsource copyと一時PCMを削除する。現在同directoryは存在しない。"
+    },
+    "retainedBaseAudio": {
+      "encodeInput": {
+        "sampleCount": 71052800,
+        "byteCount": 568422400,
+        "payloadSha256": "d36b5e425ed355e987b36f3ebbf3c8ca1609dd065bc4de3c51ee81de7ebe87b5"
+      },
+      "encoded": {
+        "codec": "aac",
+        "bitRate": "192k",
+        "movieTimeScale": 30,
+        "timeBase": "1/48000",
+        "startPts": 0,
+        "durationTs": 71052800,
+        "containerDurationSamples": 71052800,
+        "presentationDurationSamples": 71052800,
+        "videoPresentationDurationSamples": 71052800,
+        "trailingVideoOnlySampleCount": 0,
+        "tailPolicy": "frame-aligned-v001",
+        "rawDecodedSampleCount": 71053312,
+        "effectiveDecodedSampleCount": 71052800,
+        "effectiveDecodedPayloadSha256": "f91bb3915543243f8222abab7de1d1f7bfd06cf5b692bb2f400ce843863b6d36",
+        "packetPayloadSha256": "0bc96d57e86ae04b6640e631af7cffb5d6b506d204dd252d64f87809f1f4f92f",
+        "skipSamples": 1024,
+        "discardPadding": 0,
+        "encoderDelay": 1024
+      }
+    }
+  },
+  "missingHistoricalIntermediateData": {
+    "sourceChunkDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/chunks",
+    "sourceChunkDirectoryExists": false,
+    "originalChunkFlacAndRawResponsesAvailable": false,
+    "savedChunkCatalogueCount": 397,
+    "chunkCatalogueMeaning": "local-stt-response.raw.jsonは保存済み397チャンクの目録。各チャンクの原raw応答実体の存在を意味しない。",
+    "recoveryOrAsrRetryPerformed": false
+  },
+  "completedDigestAsrIsSeparate": {
+    "ref": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-asr.json",
+      "bytes": 725745,
+      "fileSha256": "b5f2388f595dba372b473b78562a7da770258d43b4e95a381f3ece5d2b43897d"
+    },
+    "schemaVersion": "presentation-vocal-asr-evidence-v001",
+    "sourceRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "bytes": 616632321,
+      "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+    },
+    "sampleRate": 16000,
+    "sampleCount": 23684437,
+    "segmentCount": 462,
+    "wordCount": 3159,
+    "meaning": "完成Digestを対象にした16kHz観測。追加する未保持元動画区間の本文や時刻根拠として流用しない。"
+  },
+  "checks": {
+    "recordedFileSha256Matches": true,
+    "sourceRefsAgreeAcrossFourExistingArtifacts": true,
+    "sourceInspectionMatchesGenerationManifest": true,
+    "utterancesPartitionEntireTranscript": true,
+    "wordTimesMatchEntireTranscript": true,
+    "noReplacementPathSearch": true
+  },
+  "verificationMethodsByPath": {
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/phase2-completion-v001/completion-record.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4": "same-inventory-task-streamed-byte-SHA256-result-reused; existence-and-size-rechecked-before-recording",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/base-media.mp4": "same-inventory-task-streamed-byte-SHA256-result-reused; existence-and-size-rechecked-before-recording",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/generation-manifest.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/base-media/timeline.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/common-plan.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/machine-adoption.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/candidate-set.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-bridge-v001.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/job.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-text-input.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/edit-plan.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/source-media-inspection.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/transcript.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/utterances.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/word-timestamps.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/manifest.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/local-stt-response.raw.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-asr.json": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/.codex/attachments/899cefed-97e7-4294-b98b-e4954965f76f/pasted-text.txt": "streamed-byte-SHA256-and-stat-in-this-recording-pass",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/acoustic-observation-chunk-0253-v001.json": "streamed-byte-SHA256-and-stat-during-authorized-acoustic-provenance-addition",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/acoustic-preflight-v001.json": "streamed-byte-SHA256-and-stat-during-authorized-acoustic-provenance-addition",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-request.json": "streamed-byte-SHA256-and-stat-during-authorized-acoustic-provenance-addition",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-result.json": "streamed-byte-SHA256-and-stat-during-authorized-acoustic-provenance-addition",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/audio-preparation.json": "streamed-byte-SHA256-and-stat-during-authorized-acoustic-provenance-addition",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/inputs/chunk-0253.flac": "streamed-byte-SHA256-and-stat-during-authorized-acoustic-provenance-addition",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/inputs/chunk-0253.formal-text.json": "streamed-byte-SHA256-and-stat-during-authorized-acoustic-provenance-addition"
+  },
+  "operations": {
+    "newMediaDecode": false,
+    "newAsr": false,
+    "modelOrDependencyDownload": false,
+    "externalCommunication": false,
+    "candidateSelection": false,
+    "oldArtifactWrites": false,
+    "newLightweightRecordFilesOnly": true
+  },
+  "updatedAt": "2026-09-21T01:13:31.239493+00:00",
+  "existingFixedTextAcousticObservation": {
+    "schemaVersion": "digest-fixed-text-acoustic-observation-v001",
+    "observationRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/acoustic-observation-chunk-0253-v001.json",
+      "bytes": 9113,
+      "fileSha256": "aa4d1983ae634d8a0a56371e7d56df70db9775b3930a9988531279f44f033f59"
+    },
+    "preflightRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/acoustic-preflight-v001.json",
+      "bytes": 663016,
+      "fileSha256": "73556f12af3fc35d5f95d397109abd0b52af378cdcd9b8b453629d6c40f759b8"
+    },
+    "origin": "元保持計画の第8区間の保存開始根拠から、同じ元動画のchunk253固定本文音響観測へ到達。",
+    "originalRetainedSegmentId": "segment-0008",
+    "originalRetainedStartEvidenceJsonPointer": "/segments/7/retainedRanges/0/cutBoundaryEvidence/start",
+    "methodRecordedAtOriginalObservation": "existing faster_whisper.WhisperModel.find_alignment; known text only; no transcription",
+    "inputAdapter": "formal source ID membership through existing STT chunk catalogue; no text edits",
+    "preflightInputRefs": [
+      {
+        "role": "sourceTranscript",
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/transcript.json",
+        "bytes": 5416069,
+        "fileSha256": "cd79fbf244bdb73b2eb7ddcffa3fca55e087046b72cbf26b69b87856dae01389"
+      },
+      {
+        "role": "sourceSttChunkCatalogue",
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/stt/9dtwF5Exu5w_o8rZAhARXAc_local30_v001/source/local-stt-response.raw.json",
+        "bytes": 243977,
+        "fileSha256": "9e57d7e574a20470208370202b44b8e2dad8f9eb05c76897dadae548cd8ef7a9"
+      },
+      {
+        "role": "originalRetentionRequest",
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-request.json",
+        "bytes": 615981,
+        "fileSha256": "b5699b27d791a8195e510bd776600b1108c4bfcf7c99462b0639714b2460b745"
+      },
+      {
+        "role": "originalRetentionResult",
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/retention-result.json",
+        "bytes": 11502,
+        "fileSha256": "cd3c03998cc327ca3a7aea6ffa68aa73ae7f680df63f93d7edee6f6d31567b70"
+      },
+      {
+        "role": "phase2Job",
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/jobs/digest-v1/phase2-20260913-v001/job.json",
+        "bytes": 7669,
+        "fileSha256": "4f445a2e7a360365d6eeb1ffaf8f0a28c7e51bbbdb5bebb6e44548118f5f157f"
+      },
+      {
+        "role": "sourceAudioPreparation",
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/audio-preparation.json",
+        "bytes": 35542,
+        "fileSha256": "48c9f33638a22a69151b238a84cfc3e1d846bff5a650b9fd1da192e9a68476fb"
+      }
+    ],
+    "chunk": {
+      "index": 253,
+      "startMs": 7590000,
+      "endMs": 7620000,
+      "sampleRate": 16000,
+      "channels": 1,
+      "audioSamples": 480000,
+      "observedWordCount": 51,
+      "textTokenCount": 56,
+      "sourceAtomCount": 63,
+      "audioRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/inputs/chunk-0253.flac",
+        "bytes": 1109339,
+        "fileSha256": "d7b663600f1e4da11f58be5a646572c786f630015cca9d8a7e191a53bce7abc3"
+      },
+      "formalTextRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/inputs/chunk-0253.formal-text.json",
+        "bytes": 4885,
+        "fileSha256": "1f62aa8a01fd49e6b9fd907904e6dc9790cdcfee0c4c2fb8347dc7b34edc9c50"
+      }
+    },
+    "recordedAudioPreparation": {
+      "ref": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/audio-preparation.json",
+        "bytes": 35542,
+        "fileSha256": "48c9f33638a22a69151b238a84cfc3e1d846bff5a650b9fd1da192e9a68476fb"
+      },
+      "textOrigin": "current formal transcript; original raw STT responses are absent",
+      "audioOrigin": "new local extraction of the same catalogue windows from approved video",
+      "matchingCommands": [
+        [
+          "ffmpeg",
+          "-hide_banner",
+          "-nostdin",
+          "-v",
+          "error",
+          "-ss",
+          "7590.0",
+          "-i",
+          "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+          "-t",
+          "30.0",
+          "-vn",
+          "-ac",
+          "1",
+          "-ar",
+          "16000",
+          "-c:a",
+          "flac",
+          "-n",
+          "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/inputs/chunk-0253.flac"
+        ]
+      ],
+      "newTranscriptionAtThatPreparation": false,
+      "externalCommunicationAtThatPreparation": false
+    },
+    "parentSpecifiedUse": {
+      "sourceSegmentIds": [
+        23639,
+        23640,
+        23641,
+        23642,
+        23643,
+        23644,
+        23645,
+        23646,
+        23647,
+        23648,
+        23649,
+        23650,
+        23651,
+        23652,
+        23653,
+        23654,
+        23655,
+        23656,
+        23657,
+        23658,
+        23659,
+        23660,
+        23661,
+        23662,
+        23663,
+        23664,
+        23665
+      ],
+      "observationWordIndexBasis": "zero-based",
+      "observationWordStartIndex": 7,
+      "observationWordEndIndexInclusive": 28,
+      "selectedObservationTextEqualsSourceAtomText": true,
+      "firstObservedWord": "撃",
+      "firstObservedStartSecondsWithinChunk": 8.78,
+      "firstObservedStartMsOnOriginalVideo": 7598780,
+      "selectedStartFrame30ProvidedByParent": 227963,
+      "unchangedOriginalSceneStartFrame30": 228308,
+      "addedFramesProvidedByParent": 345,
+      "selectionOwner": "parent agent; this record only verifies saved provenance and arithmetic"
+    },
+    "checks": {
+      "allSixPreflightSourceRefsMatchActualBytes": true,
+      "formalChunkTextMatchesOriginalTranscriptAtoms": true,
+      "selectedObservedTextMatchesParentSpecifiedSourceAtoms": true,
+      "chunkAudioAndFormalTextFilesExistAndMatchSavedSha": true
+    },
+    "limitations": [
+      "既存の固定原文を音へ対応させた保存観測であり、今回の新ASRではない。",
+      "原STTのsource/chunksは不存在だが、この別の既存acoustics/inputsには過去に元動画から再抽出した30秒FLACと固定本文が現存する。",
+      "この音響観測は16kHz monoであり、48kHz stereoの再生sample時計と混同しない。",
+      "今回モデルや当時の580実行環境参照の再成立は確認せず、音響処理・動画解析・音声聴取を実行していない。",
+      "保存された固定本文観測の照合は、精密な音素境界の安全性や人間品質の認定ではない。"
+    ]
+  }
+}

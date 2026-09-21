@@ -1,0 +1,76 @@
+{
+  "schema_version": "zev-point-review-v001",
+  "batch_id": "HRB-Q5-2-001",
+  "revision": "v001",
+  "title": "場面の冒頭へ説明を戻した案の確認",
+  "intro": "Beforeは元の場面冒頭、Afterはその直前の11.50秒を戻した案です。共通する本編9.30秒と出口は同じです。今回の案でよければ「良い」、元のままがよければ「直したい」を選んでください。「両方使える」「判断しない」も選べます。理由は任意です。回答だけで原版を置き換えることはありません。",
+  "media": [
+    {
+      "media_id": "Q5-2-BEFORE",
+      "label": "Before：元の通常完成版",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 44408,
+      "timeline_id": "digest-v1-phase2-completed-20260914-v001",
+      "timeline_start_frame": 0
+    },
+    {
+      "media_id": "Q5-2-AFTER",
+      "label": "After：場面の直前を戻した案",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/after-render-v002/presentation-rendered-v002.mp4",
+      "sha256": "98d73010ebfa93bf9b094781e279d705f51771d295ae3fbc9fe78d1f0f365737",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 624,
+      "timeline_id": "q5-2-content-v001-94698bac280a5fef2bab4d07b23eefbf519e7a5e43aa69f4287b0e5258bd1898",
+      "timeline_start_frame": 18578
+    }
+  ],
+  "points": [
+    {
+      "point_id": "Q5-2-C001",
+      "review_id": "HR-Q5-2-001",
+      "related_review_ids": [],
+      "title": "「厳しいですねー」の直前の反応を戻す",
+      "question": "場面の直前にあった説明を少し戻した案です。冒頭の意味が分かりやすくなっていますか。長くなったことも含め、この案は使えますか。",
+      "target_function": "同じ元動画の直前部分を戻し、場面冒頭の意味が分かりやすくなるかを比べる内容編集",
+      "change_summary": "「撃てないかー」を2回と「全然まで使ったのに撃てないかー」という保存済みの発話原文に対応する11.50秒を追加し、通常94pxの字幕3件を付けました。その後の本編9.30秒と既存字幕3件、通常の見せ方は保っています。BeforeとAfterの入口は異なり、本編と出口は同じです。",
+      "why_human_review": "原文の認識誤りの可能性、言葉の自然さ、冒頭の分かりやすさと長くなる影響は未評価です。追加が不要だったり、繰り返しで勢いが落ちたりする可能性も含め、この一案が使えるかを確認します。",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "この場面の直前11.50秒と原文字幕3件を追加した、提示中のBefore／Afterの理解しやすさと長さを含む使いやすさ"
+        ],
+        "does_not_apply_to": [
+          "Q1・Q3・Q4・Q5-1の別の問いと既存回答",
+          "原文から分からない能力名や詳しい戦況の推定、全編の品質、他の場面や別の追加量",
+          "原版の置換、正式採用、ショートの制作"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "Q5-2-BEFORE-VIEW",
+          "label": "Before：元版（9.30秒）",
+          "role": "before",
+          "media_id": "Q5-2-BEFORE",
+          "start_frame": 18578,
+          "end_frame": 18857,
+          "context_start_frame": 18578,
+          "context_end_frame": 18857
+        },
+        {
+          "view_id": "Q5-2-AFTER-VIEW",
+          "label": "After：今回案（20.80秒）",
+          "role": "after",
+          "media_id": "Q5-2-AFTER",
+          "start_frame": 0,
+          "end_frame": 624,
+          "context_start_frame": 0,
+          "context_end_frame": 624
+        }
+      ]
+    }
+  ]
+}

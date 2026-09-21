@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "digest-quality-q5-2-independent-audit-v001",
+  "recordedAt": "2026-09-21T01:26:05.983202+00:00",
+  "recordKind": "post-execution-record-of-previous-read-only-audits",
+  "actor": "Codex independent connection_inventory agent",
+  "status": "no-material-discrepancy-found-within-reviewed-scope",
+  "authority": "取りまとめ担当から依頼されたQ5-2の限定読取監査と、その実施済み結果の記録。",
+  "method": {
+    "description": "先に実施した記録の静的照合・ソースコード読取・保存済み媒体検査情報に対する純粋計算の結果を後から記録する。ここで再検査は実行しない。",
+    "blindEvaluation": false,
+    "priorKnowledge": "担当は既存の来歴調査、Q5関連資料、候補・境界記録を既に知っている。初見・盲検評価ではない。",
+    "newTestsAtRecording": 0,
+    "newRendersAtRecording": 0,
+    "browserOperationsAtRecording": 0,
+    "newMediaSemanticAnalysis": false,
+    "scopeLimit": "読取監査で重大な不一致を見つけなかったという結果であり、正式採用、実媒体の完成、聴感、人間品質の承認ではない。"
+  },
+  "candidateAndBoundaryAudit": {
+    "subjectRefs": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-2-20260921-v001/candidate-judgment-v001.json",
+        "bytes": 155587,
+        "fileSha256": "5e41a857be54af276ca4075ff77dc8b65cf1038093e83cfe560c9b2c195eaa4b"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-2-20260921-v001/boundary-evidence-v001.json",
+        "bytes": 5279,
+        "fileSha256": "d68cedc509a510f47ea4b7532c0f56cfe6297570004fa933c84e5d4ab1d77cbe"
+      }
+    ],
+    "executedStaticCheckCount": 98,
+    "failedStaticCheckCount": 0,
+    "checkScope": [
+      "候補に保存された47原文行と発話801を元動画の保存全文へ照合し、47行の単語時刻資料との対応も一致した。",
+      "候補の音響chunk253と51wordが保存済みの音響事前記録・観測記録に一致した。",
+      "追加字幕3件の原文字列、音響word列、開始終了時刻、30fps最寄り丸め、発話内の所属が一致した。追加する原字ID23639〜23665を音響word7〜28と対応させた。",
+      "12場面の見出し用字幕・直前末尾字幕・場面情報が参照入力に一致し、3場面の調査行が元動画直前900frameの窓と交差する原文行に一致した。",
+      "場面8の元動画保持範囲[228308,231829)、元Digest範囲[18578,22099)と固定記録が一致した。",
+      "追加する元動画範囲[227963,228308)は元保持冒頭に隣接し、直前30秒以内で、既存12保持区間との重複がなかった。",
+      "追加345frame、比較Before279frame、After624frame、全体44753frameの算術と、元字幕175末尾18857を共通出口にする対応が一致した。",
+      "48kHz・2ch・1frame当たり1600sampleとして、追加552000sample/チャンネルと絶対音声範囲[364740800,365292800)が一致した。",
+      "追加部分に架空の旧Digest時刻を割り当てていなかった。"
+    ],
+    "referenceVerification": {
+      "referencedFileCount": 12,
+      "byteCountMatchCount": 12,
+      "lightweightFileShaRecheckCount": 11,
+      "sourceVideoShaHandling": "元動画約3GBのSHAは同じ来歴調査で先行実測し、保全記録に結び付けた値を使用した。この候補監査では元動画を再hashしていない。"
+    },
+    "additionalOriginalInputCheck": {
+      "normalPlanFileSha256": "420bac69fb75c878a770406155171d5f09167ac22e41c1cd0c707f580229a778",
+      "originalCaptionCount": 325,
+      "result": "元Normal計画のSHAを照合し、参照入力の325字幕すべてのID・本文・行分け・開始終了frameが元Normal計画に一致し、元325字幕が94pxであることを確認した。",
+      "limit": "これは元資料と参照入力の一致である。実際のAfterまたは最終編集済み全体における325字幕の最終比較を実施したという意味ではない。"
+    },
+    "semanticClaimReview": {
+      "result": "過大な補完説明の修正点は見つからなかった。",
+      "supportedClaim": "「打てない」という反応が「厳しい」「七回」の直前にあったことを前置きする、という範囲に限定していた。",
+      "notClaimed": [
+        "具体的な能力名の解明",
+        "点差の説明",
+        "実視聴での理解改善",
+        "音素境界の安全認定"
+      ],
+      "counterHypothesesRetained": [
+        "既存ゲーム映像だけで分かる可能性",
+        "現在の冒頭が持つ勢い",
+        "11.5秒延びることでテンポが下がる可能性"
+      ],
+      "unresolvedText": "「全然まで」という保存原文の正確さや指す能力名は未確認としており、推測による書換えをしていない。"
+    }
+  },
+  "rendererReadOnlyAudit": {
+    "subjectFrozenShaRefs": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-2-render.mjs",
+        "fileSha256": "9902ac3e90074730b9d75e05ef5e89b40e3b5b4532448e3ec77db6a379805883"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-2-render.test.mjs",
+        "fileSha256": "281541c78487cf5ffa853cb3cd5dce04c7cb367c74c0aa56a01128ee8ab1c10b"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_base_media_build_v003.mjs",
+        "fileSha256": "92549531204385ecafb89939cea99af87021359aaa3183e523970142da7d12ff"
+      }
+    ],
+    "shaMeaning": "読取監査時に取得した対象ファイルSHA。記録作成時に新しい照合を行った値ではない。",
+    "result": "読取範囲で重大な不一致は見つからなかった。",
+    "findings": [
+      "既存の基礎動画作成処理への差分は、既存の純粋な映像filter生成処理を公開するexport1行と空行だけで、処理本体を変えていない。",
+      "整数秒からの元60fps連続PTSを照合して偶数frameの位相を固定し、その後で局所30fps範囲を切り出す。",
+      "音声の絶対sample範囲を、保存済みの空白sample列から連番PCM範囲へ変換する。16kHz観測音声は再生音声に使用しない。",
+      "追加映像の独立照合は、生成側より1秒前から絶対PTS範囲と偶数PTS位相で選ぶ。追加音声の独立照合は、元動画先頭から復号して絶対PTSで切り出す。生成側の局所frame切出しやraw連番切出しをそのまま参照計算に流用していない。",
+      "既存本編は、元計画・timeline・基礎媒体の同一性と通常切替を確認した既存処理で、旧基礎媒体から必要範囲を取り出して画素とPCMを照合する。",
+      "短い比較は追加部分と既存本編の2片を固定順で一度ずつ結合する。映像と音声を別々に結合し、自動的な音声paddingを避けたうえで全YUV・PCM byteを再照合する。",
+      "全体計画は元資料から復元し、元字幕の時刻を所属する保持区間に基づいて一度だけ移動する。保存済み計画の二重適用は完全再構成照合で拒否する。",
+      "Normal描画後のAAC packetと論理復号PCMは、新たに作った短い基礎媒体と一致することを検査する。H.264とAACを新規encodeする限界は記録で明示している。"
+    ],
+    "executedPureCalculation": {
+      "input": "保存済み元動画検査情報。媒体を開かず、純粋な時計解決関数だけを実行した。",
+      "sourceVideoInspectionPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/source-media-inspection.json",
+      "sourceRange30": {
+        "startFrame": 227963,
+        "endFrameExclusive": 228308
+      },
+      "integerSeekSeconds": 7598,
+      "sourceRange60": {
+        "startFrame": 455926,
+        "endFrameExclusive": 456616
+      },
+      "sourcePtsRange": {
+        "startPts": 116717056,
+        "endPtsExclusive": 116893696
+      },
+      "sourceTimeBase": "1/15360",
+      "sourcePtsStep60": 256,
+      "relativeRange30": {
+        "startFrame": 23,
+        "endFrameExclusive": 368
+      },
+      "frameCount": 345,
+      "absoluteAudioSamples": {
+        "startSample": 364740800,
+        "endSampleExclusive": 365292800
+      },
+      "decodedOrdinalAudioSamples": {
+        "startSample": 364740440,
+        "endSampleExclusive": 365292440
+      },
+      "precedingGapSamples": 360,
+      "sampleCountPerChannel": 552000,
+      "sampleRate": 48000,
+      "channels": 2
+    },
+    "testCodeReview": {
+      "testExecutionByThisAuditor": false,
+      "readCoverage": [
+        "奇数frame位相を誤採用した媒体を拒否する検査",
+        "絶対sampleをraw連番へ誤用して360sampleずれる媒体を拒否する検査",
+        "全画素・stereo PCMの独立byte比較",
+        "原文・音響記録の改変と古い参照を拒否する検査",
+        "Normal描画・ネイティブ再現照合・新しいAAC時計の保持"
+      ],
+      "limit": "テストコードに検査が含まれることを読み取った。テスト実行結果の認定は、この独立読取監査の範囲外。"
+    }
+  },
+  "unverifiedByThisAudit": [
+    "実際に生成されたAfter媒体の完成と、その実測検証結果。",
+    "聴こえ方、接続の自然さ、映像を見た理解の変化、採否を含む人間品質。",
+    "最終編集済み出力に対する元325字幕の完全保持と一回だけの移動、取消の最終比較。取りまとめ担当の実preflight結果は別記録として扱う。"
+  ],
+  "communication": {
+    "reportedTo": "取りまとめ担当root",
+    "rendererFindingsAlsoReportedTo": "独立監査担当connection_prototype_audit（Dalton）",
+    "correctionsRequested": 0
+  },
+  "sourceRecordDuplication": "元原文・大きい候補記録・媒体・コード本文は複製せず、対象参照と監査結果だけを記録する。"
+}

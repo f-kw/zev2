@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "q5-2-context-addition-boundary-v001",
+  "candidateId": "Q5-2-C001",
+  "policyRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-2-20260921-v001/instruction-received-v001.md",
+    "bytes": 15811,
+    "fileSha256": "8b6708cb59192af9cdbe2ef1242d91b37370d47515bba84778e788e94606c09c"
+  },
+  "sourceEvidenceRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-2-20260921-v001/candidate-judgment-v001.json",
+    "bytes": 155587,
+    "fileSha256": "5e41a857be54af276ca4075ff77dc8b65cf1038093e83cfe560c9b2c195eaa4b"
+  },
+  "sourceVideoRef": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/research/downloads/9dtwF5Exu5w/sources/o8rZAhARXAc/o8rZAhARXAc.mp4",
+    "fileSha256": "4c9911c860f7ed42cf6c66c1ceda605e5818381f695c26116632b1f86c4c2a06",
+    "bytes": 2923277322
+  },
+  "targetSegmentId": "segment-0008",
+  "originalTargetSourceRange": {
+    "startFrame": 228308,
+    "endFrameExclusive": 231829
+  },
+  "originalTargetDigestRange": {
+    "startFrame": 18578,
+    "endFrameExclusive": 22099
+  },
+  "actualSourceAddition": {
+    "startFrame": 227963,
+    "endFrameExclusive": 228308
+  },
+  "comparisonBeforeRange": {
+    "startFrame": 18578,
+    "endFrameExclusive": 18857
+  },
+  "addedFrameCount": 345,
+  "subtitleMode": "source-text-captions",
+  "addedCaptions": [
+    {
+      "captionId": "q5-2-added-caption-000001",
+      "text": "撃てないかー",
+      "sourceVideoRange": {
+        "startFrame": 227963,
+        "endFrameExclusive": 228049
+      },
+      "sourceSegmentIds": [
+        23639,
+        23640,
+        23641,
+        23642,
+        23643,
+        23644
+      ],
+      "acousticWordIndices": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "sourceUtteranceId": "common-utterance-000801",
+      "acousticChunkIndex": 253,
+      "sourceStartMs": 7598780,
+      "sourceEndMs": 7601620
+    },
+    {
+      "captionId": "q5-2-added-caption-000002",
+      "text": "撃てないかー",
+      "sourceVideoRange": {
+        "startFrame": 228049,
+        "endFrameExclusive": 228134
+      },
+      "sourceSegmentIds": [
+        23645,
+        23646,
+        23647,
+        23648,
+        23649,
+        23650
+      ],
+      "acousticWordIndices": [
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "sourceUtteranceId": "common-utterance-000801",
+      "acousticChunkIndex": 253,
+      "sourceStartMs": 7601620,
+      "sourceEndMs": 7604480
+    },
+    {
+      "captionId": "q5-2-added-caption-000003",
+      "text": "全然まで使ったのに撃てないかー",
+      "sourceVideoRange": {
+        "startFrame": 228134,
+        "endFrameExclusive": 228308
+      },
+      "sourceSegmentIds": [
+        23651,
+        23652,
+        23653,
+        23654,
+        23655,
+        23656,
+        23657,
+        23658,
+        23659,
+        23660,
+        23661,
+        23662,
+        23663,
+        23664,
+        23665
+      ],
+      "acousticWordIndices": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "sourceUtteranceId": "common-utterance-000801",
+      "acousticChunkIndex": 253,
+      "sourceStartMs": 7604480,
+      "sourceEndMs": 7610280
+    }
+  ],
+  "selectedSourceSpeechBoundary": {
+    "utteranceId": "common-utterance-000801",
+    "firstSegmentId": 23639,
+    "rawObservedStartMs": 7603034,
+    "fixedTextObservedStartMs": 7598780,
+    "startMs": 7598780,
+    "rounding": "nearest-at-30fps",
+    "startFrame": 227963
+  },
+  "whyThisStart": "同じ原文を音声へ対応付けた保存観測では最初の撃てないが早く始まる。遅い原文字起こし時刻で語頭を落とさないよう、既存の発話開始へ戻す。選んだ開始frameは最寄り丸めと手前丸めの両方に一致し、固定6frameや独自の余裕値は加えない。",
+  "sourceFirstFrameRoundingCheck": {
+    "numerator": 227963400,
+    "denominator": 1000,
+    "nearestFrame": 227963,
+    "floorFrame": 227963,
+    "roundedBeforeSpeechStart": true
+  },
+  "sourceVideoFrameConversion": "保存条件の60fps偶数decoded frameを保持する30fps格子。",
+  "playbackAudio": {
+    "sampleRate": 48000,
+    "channels": 2,
+    "samplesPerFrame": 1600,
+    "sourceStartSample": 364740800,
+    "sourceEndSampleExclusive": 365292800,
+    "addedSampleCount": 552000
+  },
+  "observationAudioSampleRate": 16000,
+  "comparison": {
+    "beforeFrameCount": 279,
+    "afterFrameCount": 624,
+    "originalBodySourceRange": {
+      "startFrame": 228308,
+      "endFrameExclusive": 228587
+    },
+    "newWholeContentFrameCount": 44753,
+    "afterGlobalRange": {
+      "startFrame": 18578,
+      "endFrameExclusive": 19202
+    },
+    "afterLocalRange": {
+      "startFrame": 0,
+      "endFrameExclusive": 624
+    },
+    "oldDigestRangeForAddition": null,
+    "sharedExitCaptionId": "digest-v1-phase2-20260913-v001-bridge-caption-000175"
+  },
+  "continuity": "追加末尾と元保持冒頭は同じ元動画上で隣接する。黒・Soft・無音・静止・crossfadeは加えない。",
+  "phonemeBoundarySafetyCertified": false,
+  "humanQualityApproved": false
+}

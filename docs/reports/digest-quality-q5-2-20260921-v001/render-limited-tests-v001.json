@@ -1,0 +1,414 @@
+{
+  "schemaVersion": "q5-2-render-limited-tests-v001",
+  "scope": "new Q5-2 renderer only; synthetic media and read-only existing source evidence; no real C-all render",
+  "runtime": {
+    "node": "v20.19.6",
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "nodeOptionsPresent": false,
+    "pathSelectsSameNode": true
+  },
+  "uniqueTestCasesPassed": 5,
+  "setupCorrectionCount": 2,
+  "implementationCorrectionsAfterTestFailures": 0,
+  "attempts": [
+    {
+      "version": "render-tests-v001",
+      "outputDirectory": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v001",
+      "result": "2 passed, 1 failed",
+      "passedCases": [
+        "saved actual clock resolves 345 added frames to 552000 stereo playback samples, subtracting exactly 360 preceding gap samples",
+        "real entry rejects Q5-1 jobs and an unpinned Before"
+      ],
+      "failedStage": "synthetic source fixture prerequisite; extraction had not started",
+      "reason": "aselect-based fixture produced no audio PTS gaps; observed [] differed from the required two gaps",
+      "originalExpectedGaps": [
+        {
+          "startSample": 0,
+          "endSample": 8
+        },
+        {
+          "startSample": 16,
+          "endSample": 24
+        }
+      ],
+      "media": "synthetic 16x16, no C-all media read"
+    },
+    {
+      "version": "render-tests-v002",
+      "outputDirectory": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v002",
+      "result": "extraction positive case passed; negative-fixture command failed",
+      "setupCorrection": 1,
+      "change": "explicitly compact the synthetic PCM and place decoded packets on an absolute PTS clock; retain two actual gaps",
+      "failedStage": "construction of wrong-phase negative fixture",
+      "reason": "ffmpeg rejects simultaneous -r 30 and -fps_mode passthrough",
+      "productionExtractionValidation": "independent all-byte video/audio comparison passed before the negative fixture command failed"
+    },
+    {
+      "version": "render-tests-v003",
+      "outputDirectory": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v003",
+      "result": "1 passed, 2 excluded",
+      "setupCorrection": 2,
+      "change": "negative fixture uses fps=30 in its graph and removes contradictory -r",
+      "negativeCases": [
+        "source odd-frame video phase rejected by all-byte YUV comparison",
+        "audio without preceding-gap ordinal subtraction rejected by all-byte PCM comparison"
+      ],
+      "gapsAtThisVersion": [
+        {
+          "startSample": 0,
+          "endSample": 8
+        },
+        {
+          "startSample": 16,
+          "endSample": 24
+        }
+      ]
+    },
+    {
+      "version": "render-tests-v004",
+      "outputDirectory": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v004",
+      "result": "1 affected extraction case passed, 2 excluded",
+      "change": "synthetic fixture gaps now exactly match saved source gaps [0,312),[960,1008); production and verification code unchanged",
+      "negativeCases": [
+        "source odd-frame video phase rejected",
+        "audio without 360-sample ordinal subtraction rejected",
+        "existing output directory rejected"
+      ],
+      "repeatCountedAsNewCase": false
+    },
+    {
+      "version": "render-tests-v005",
+      "outputDirectory": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v005",
+      "result": "2 newly added cases passed, 3 excluded",
+      "cases": [
+        "source evidence actual row identity and rewritten/mismatched/stale references rejected",
+        "two-caption synthetic 36-frame Q5-2 native Normal/replay/AAC/publish path passed"
+      ],
+      "sandbox": "normal approval review accepted local Chromium/tsx IPC execution"
+    }
+  ],
+  "realEvidencePreflight": {
+    "status": "passed",
+    "sourcePath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/source-v001.json",
+    "addedFrames": 345,
+    "addedCaptionCount": 3,
+    "actualEvidenceReferencesVerified": 8,
+    "scope": "source factory and resolver plus policy/boundary/source-judgment, transcript, utterance, word timestamps, saved acoustic observation and preflight rows; no real media operation"
+  },
+  "sourceRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-2-render.mjs",
+      "bytes": 41703,
+      "fileSha256": "9902ac3e90074730b9d75e05ef5e89b40e3b5b4532448e3ec77db6a379805883"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-2-render.test.mjs",
+      "bytes": 19776,
+      "fileSha256": "281541c78487cf5ffa853cb3cd5dce04c7cb367c74c0aa56a01128ee8ab1c10b"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_base_media_build_v003.mjs",
+      "bytes": 111465,
+      "fileSha256": "92549531204385ecafb89939cea99af87021359aaa3183e523970142da7d12ff"
+    }
+  ],
+  "tapRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v004.tap",
+      "bytes": 1152,
+      "fileSha256": "924452fa8fdc662097755afe1028ad5a91895ab77cf94334822700448f23880b"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v005.tap",
+      "bytes": 1876,
+      "fileSha256": "c6254ef1292028dbd6307296076ed1c4c48ee8c26dc519bad814fab30c48ba3b"
+    }
+  ],
+  "extraction": {
+    "proofRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v004/source-extraction/piece/proof.json",
+      "bytes": 6071,
+      "fileSha256": "94e0958bc858803e71b7c38b79b38a259240de7b21d470eea895b6f68092e96d"
+    },
+    "clock": {
+      "schemaVersion": "q5-2-source-extraction-clock-v001",
+      "sourceVideoRange": {
+        "startFrame": 33,
+        "endFrameExclusive": 39
+      },
+      "frameCount": 6,
+      "seekSeconds": 1,
+      "sourceFrame60Range": {
+        "startFrame": 66,
+        "endFrameExclusive": 78
+      },
+      "sourcePtsRange": {
+        "startPts": 67584,
+        "endPtsExclusive": 79872
+      },
+      "sourceVideoTimeBase": "1/61440",
+      "sourcePtsStep60": 1024,
+      "ticksPerSecond": 61440,
+      "relativeRange30": {
+        "sourceStartFrame30": 3,
+        "sourceEndFrame30": 9
+      },
+      "audio": {
+        "sampleRate": 48000,
+        "channels": 2,
+        "absoluteSourceRange": {
+          "startSample": 52800,
+          "endSampleExclusive": 62400
+        },
+        "decodedOrdinalRange": {
+          "startSample": 52440,
+          "endSampleExclusive": 62040
+        },
+        "sourceGridRun": {
+          "runId": "run-000002",
+          "sourceStartSample": 648,
+          "sourceEndSample": 71640,
+          "targetStartSample": 1008,
+          "targetEndSample": 72000
+        },
+        "precedingGapSamples": 360,
+        "sampleCount": 9600
+      },
+      "transformation": "the existing source-zero even-frame 60-to-30 selection, YUV420p; unchanged 48kHz stereo float32 PCM"
+    },
+    "sourcePts": {
+      "seekPts": 61440,
+      "firstPts": 61440,
+      "lastPts": 78848,
+      "count": 18,
+      "step": 1024,
+      "sourceFirstOutputPts": 67584,
+      "sourceLastOutputPts": 77824,
+      "sourceEndExclusivePts": 79872
+    },
+    "video": {
+      "status": "passed",
+      "comparedBytes": 2304,
+      "expectedPayloadSha256": "1f418ad93720292824f2ffa68864b63e29b9995b30c8458a56bf79317d09a208",
+      "observedPayloadSha256": "1f418ad93720292824f2ffa68864b63e29b9995b30c8458a56bf79317d09a208",
+      "expectedArgs": [
+        "-v",
+        "error",
+        "-nostdin",
+        "-copyts",
+        "-ss",
+        "0",
+        "-i",
+        "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v004/source-extraction/source.nut",
+        "-map",
+        "0:v:0",
+        "-an",
+        "-vf",
+        "select='gte(pts,67584)*lt(pts,79872)*not(mod(pts,2048))',format=pix_fmts=yuv420p",
+        "-frames:v",
+        "6",
+        "-fps_mode",
+        "passthrough",
+        "-pix_fmt",
+        "yuv420p",
+        "-f",
+        "rawvideo",
+        "-"
+      ],
+      "observedArgs": [
+        "-v",
+        "error",
+        "-nostdin",
+        "-i",
+        "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v004/source-extraction/piece/source-piece.nut",
+        "-map",
+        "0:v:0",
+        "-an",
+        "-fps_mode",
+        "passthrough",
+        "-pix_fmt",
+        "yuv420p",
+        "-f",
+        "rawvideo",
+        "-"
+      ]
+    },
+    "audio": {
+      "status": "passed",
+      "comparedBytes": 76800,
+      "expectedPayloadSha256": "7b64d957dba2cb58ac751015ced71ee9dabd98169fe19f84529951b27fc4cfe8",
+      "observedPayloadSha256": "7b64d957dba2cb58ac751015ced71ee9dabd98169fe19f84529951b27fc4cfe8",
+      "expectedArgs": [
+        "-v",
+        "error",
+        "-nostdin",
+        "-copyts",
+        "-i",
+        "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v004/source-extraction/source.nut",
+        "-map",
+        "0:a:0",
+        "-vn",
+        "-af",
+        "atrim=start_pts=52800:end_pts=62400",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "-"
+      ],
+      "observedArgs": [
+        "-v",
+        "error",
+        "-nostdin",
+        "-i",
+        "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v004/source-extraction/piece/source-piece.nut",
+        "-map",
+        "0:a:0",
+        "-vn",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "-"
+      ]
+    }
+  },
+  "native": {
+    "completionRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v005/normal-native-common-qc/normal/completion.json",
+      "bytes": 677711,
+      "fileSha256": "099e52c6866968606478d63ae3c1bf2b5ec8980578db1ff72a45e965f729ec4a"
+    },
+    "after": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v005/normal-native-common-qc/render/presentation-rendered-v002.mp4",
+      "bytes": 63344,
+      "fileSha256": "2cc7aea4d3235e3fb8240bb0b1f325e299b037c7091b944f77be33ed2d9fd5e0"
+    },
+    "expectedFrameCount": 36,
+    "finalQc": "passed",
+    "completedFrameQc": "passed",
+    "method": "exact-replay-native-v1",
+    "captionChecks": 2,
+    "automaticStatus": "not-processed",
+    "baseAudio": {
+      "status": "passed",
+      "sampleRate": 48000,
+      "channels": 2,
+      "streamTimeBase": "1/48000",
+      "presentationStartSample": 0,
+      "presentationEndSampleExclusive": 57600,
+      "durationSeconds": 1.2,
+      "firstPacket": {
+        "pts": -1024,
+        "dts": -1024,
+        "duration": 1024,
+        "side_data_list": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 57344,
+        "dts": 57344,
+        "duration": 256
+      },
+      "packetCount": 58,
+      "primingSkipSamples": 1024,
+      "firstDecodedFrame": {
+        "pts": 0,
+        "best_effort_timestamp": 0,
+        "nb_samples": 1024
+      },
+      "packetPayloadSha256": "52f7ec0e90740f241129b8a1325f3041cb40b797c9a1382cf584a9c7e4dc915a",
+      "rawDecodedSampleCount": 58368,
+      "logicalDecodedSampleCount": 57600,
+      "decodedTailSampleCount": 768,
+      "rawDecodedPayloadSha256": "17d0c35866fe72bfee6b907cfe778878674f8ed70ce913807562272880e2a131",
+      "logicalDecodedPayloadSha256": "3e3602f5f3480813bdea358174606df6d1b5284d36de07790c769c6b352598c7",
+      "logicalDecodedInterval": {
+        "startSample": 0,
+        "endSampleExclusive": 57600
+      },
+      "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+    },
+    "finalAudio": {
+      "status": "passed",
+      "sampleRate": 48000,
+      "channels": 2,
+      "streamTimeBase": "1/48000",
+      "presentationStartSample": 0,
+      "presentationEndSampleExclusive": 57600,
+      "durationSeconds": 1.2,
+      "firstPacket": {
+        "pts": -1024,
+        "dts": -1024,
+        "duration": 1024,
+        "side_data_list": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 57344,
+        "dts": 57344,
+        "duration": 256
+      },
+      "packetCount": 58,
+      "primingSkipSamples": 1024,
+      "firstDecodedFrame": {
+        "pts": 0,
+        "best_effort_timestamp": 0,
+        "nb_samples": 1024
+      },
+      "packetPayloadSha256": "52f7ec0e90740f241129b8a1325f3041cb40b797c9a1382cf584a9c7e4dc915a",
+      "rawDecodedSampleCount": 58368,
+      "logicalDecodedSampleCount": 57600,
+      "decodedTailSampleCount": 768,
+      "rawDecodedPayloadSha256": "17d0c35866fe72bfee6b907cfe778878674f8ed70ce913807562272880e2a131",
+      "logicalDecodedPayloadSha256": "3e3602f5f3480813bdea358174606df6d1b5284d36de07790c769c6b352598c7",
+      "logicalDecodedInterval": {
+        "startSample": 0,
+        "endSampleExclusive": 57600
+      },
+      "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+    },
+    "publication": "published",
+    "losslessVideo": {
+      "status": "passed",
+      "comparedBytes": 111974400,
+      "expectedPayloadSha256": "b840d56e990b1639ceb9fd6810be12aaa6cd339dc2e55ce491ddab938470247b",
+      "observedPayloadSha256": "b840d56e990b1639ceb9fd6810be12aaa6cd339dc2e55ce491ddab938470247b",
+      "frameCount": 36
+    },
+    "losslessAudio": {
+      "status": "passed",
+      "comparedBytes": 460800,
+      "expectedPayloadSha256": "4afae12f3e509b1b24861b646d05f1219208112c46f693c39b0354ba9a28c2cb",
+      "observedPayloadSha256": "4afae12f3e509b1b24861b646d05f1219208112c46f693c39b0354ba9a28c2cb",
+      "sampleRate": 48000,
+      "channels": 2,
+      "sampleCount": 57600
+    },
+    "humanQuality": "not-evaluated",
+    "contentEditAdopted": false
+  },
+  "existingCodeChange": "only a public alias export for the existing unchanged pure video graph; original implementation and all existing callers unchanged",
+  "unperformed": [
+    "real C-all rendering (root performs after freeze)",
+    "Q5-1 media retest",
+    "full regression",
+    "new ASR/model/dependency/API/media transfer"
+  ],
+  "testTitleClarification": "after v005, the input-rejection title was changed to accurately say unpinned Before; test code and runtime were unchanged"
+}
+
