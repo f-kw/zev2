@@ -39,14 +39,14 @@ export function mountReview(document, window, bundle, answerIO = null) {
     raf: window.requestAnimationFrame.bind(window), cancelRaf: window.cancelAnimationFrame.bind(window),
     setTimer: window.setTimeout.bind(window), clearTimer: window.clearTimeout.bind(window),
     onStatus(state) {
-      $('play').disabled = $('replay').disabled = !state.ready;
+      $('play').disabled = $('replay').disabled = !state.selection || Boolean(state.starting);
       if (state.error) { text('playback-status', state.error); $('playback-status').classList.add('error'); return; }
       $('playback-status').classList.remove('error');
       if (!state.selection) return;
       const duration = state.selection.end-state.selection.start;
       const elapsed = Math.max(0,Math.min(duration,state.current-state.selection.start));
       $('progress').value = elapsed/duration;
-      text('playback-status', state.ready ? `${state.running ? '再生中' : '停止中'} · この区間 ${elapsed.toFixed(1)} / ${duration.toFixed(1)} 秒${expanded ? '（前後を含む）' : ''}` : '動画を読み込み中…');
+      text('playback-status', state.starting ? '再生を準備しています…' : state.ready ? `${state.running ? '再生中' : '停止中'} · この区間 ${elapsed.toFixed(1)} / ${duration.toFixed(1)} 秒${expanded ? '（前後を含む）' : ''}` : '動画を読み込み中…「この箇所を見る」で開始できます。');
     },
     onStarted(viewId) {
       const a = answer(); if (!a.playback_started_view_ids.includes(viewId)) a.playback_started_view_ids.push(viewId);
