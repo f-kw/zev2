@@ -5,7 +5,7 @@ import {
   requestEditingJob, retryEditingJob, saveEditingSelection, seekEditingTarget,
   type EditingCaption, type EditingConnection, type EditingJob,
   type EditingCheckRequest, type EditingCheckResult, type EditingCheckStatus,
-  type EditingPlayhead, type EditingSelection, type EditingState, type EditingTarget, type EditingTargetKind,
+  type EditingPlayhead, type EditingSelection, type EditingState, type EditingTarget, type EditingTargetKind, type PanelPalette,
 } from './presentation-editing-api';
 
 const state = ref<EditingState | null>(null);
@@ -36,7 +36,7 @@ const seekNotice = ref('');
 const currentSeconds = ref(0);
 const pendingTarget = ref<{ kind: EditingTargetKind; id: string } | null>(null);
 const draft = reactive({ preset: '', colorScope: 'whole-caption' as 'whole-caption' | 'partial-caption',
-  startUtf16: 0, endUtf16: 0, selectedText: '', anchorPeakId: '' });
+  startUtf16: 0, endUtf16: 0, selectedText: '', anchorPeakId: '', paletteId: 'ivory' as PanelPalette });
 const pristineDraft = ref('');
 let targetSequence = 0;
 let checkSequence = 0;
@@ -167,12 +167,13 @@ async function reloadState(showLoading = true) {
 }
 function resetForm(detail: EditingTarget) {
   const next = { preset: '', colorScope: 'whole-caption' as 'whole-caption' | 'partial-caption',
-    startUtf16: 0, endUtf16: 0, selectedText: '', anchorPeakId: '' };
+    startUtf16: 0, endUtf16: 0, selectedText: '', anchorPeakId: '', paletteId: 'ivory' as PanelPalette };
   const selection = detail.selection;
   if (typeof selection === 'string') {
     next.preset = selection === 'Normal' ? (detail.kind === 'caption' ? 'normal' : 'normal-cut') : selection;
   } else {
     next.preset = selection.preset;
+    if ('paletteId' in selection && selection.paletteId) next.paletteId = selection.paletteId;
     if (selection.preset === 'color') {
       next.colorScope = selection.scope;
       if (selection.scope === 'partial-caption') {
@@ -351,8 +352,13 @@ function currentSelection(): EditingSelection {
     if (!target.value.peakOptions.some(peak => peak.id === draft.anchorPeakId)) throw new Error('時刻条件を満たす音のピークから一件を選んでください。');
     return { preset: 'pulse', anchorPeakId: draft.anchorPeakId };
   }
-  if (!['normal', 'scale', 'panel', 'panel-graph-paper', 'panel-comic-frame', 'bounce', 'shake'].includes(draft.preset)) throw new Error('字幕表現を選んでください。');
-  return { preset: draft.preset as 'normal' | 'scale' | 'panel' | 'panel-graph-paper' | 'panel-comic-frame' | 'bounce' | 'shake' };
+  if (draft.preset === 'panel' || draft.preset === 'panel-graph-paper') {
+    const palettes = target.value.paletteOptions ?? [];
+    if (palettes.length && !palettes.some(row => row.id === draft.paletteId)) throw new Error('背景と文字の配色を選んでください。');
+    return {preset: draft.preset, ...(palettes.length ? {paletteId: draft.paletteId} : {})};
+  }
+  if (!['normal', 'scale', 'bounce', 'shake'].includes(draft.preset)) throw new Error('字幕表現を選んでください。');
+  return { preset: draft.preset as 'normal' | 'scale' | 'bounce' | 'shake' };
 }
 
 async function checkCurrentSelection(forced?: 'Normal' | 'Reset'): Promise<EditingCheckResult | null> {
@@ -583,6 +589,9 @@ onBeforeUnmount(() => { unmounted = true; stopPolling(); ++stateSequence; ++targ
             <fieldset :disabled="targetLoading || saving || jobStarting"><legend class="sr-only">表現の変更</legend>
               <label class="field">表現
                 <select v-model="draft.preset" aria-label="変更する表現"><option v-for="option in target.options" :key="option.value" :value="option.value">{{ option.label }}（{{ editingCheckLabel(optionStatus(option.value)) }}）</option></select>
+              </label>
+              <label v-if="target.kind === 'caption' && ['panel', 'panel-graph-paper'].includes(draft.preset) && target.paletteOptions?.length" class="field">背景と文字の配色
+                <select v-model="draft.paletteId" aria-label="背景と文字の配色"><option v-for="palette in target.paletteOptions" :key="palette.id" :value="palette.id">{{ palette.label }}</option></select>
               </label>
               <div v-if="target.kind === 'caption' && draft.preset === 'color'" class="color-settings">
                 <div class="radio-row"><label><input v-model="draft.colorScope" type="radio" value="whole-caption" /> 全文に色を付ける</label><label><input v-model="draft.colorScope" type="radio" value="partial-caption" /> 選んだ連続範囲</label></div>

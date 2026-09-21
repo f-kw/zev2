@@ -258,7 +258,7 @@ function evaluatePresentationRendererQc({
         const equal = (left, right) => sha256Canonical(left) === sha256Canonical(right);
         const hash = value => typeof value === 'string' && /^[0-9a-f]{64}$/.test(value);
         if (results.length !== 1 || !application || !native
-          || application.presetVersion !== PRESENTATION_PULSE_PRESET_V001.version
+          || application.presetVersion !== program.presetVersion
           || native.presetVersion !== application.presetVersion
           || !equal(application.metadata, element.presentationPulse)
           || !equal(native.metadata, application.metadata)

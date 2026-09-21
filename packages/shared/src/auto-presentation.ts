@@ -7,8 +7,11 @@ export interface AutoPresentationFileRef {
 export interface AutoPresentationContext {
   baselineRef: AutoPresentationFileRef & {canonicalSha256: string};
   decisionInputRef: AutoPresentationFileRef;
-  renderingRulesRef: {version: 'auto-presentation-rules-v008'; contentSha256: string};
+  renderingRulesRef: {version: 'auto-presentation-rules-v008' | 'auto-presentation-rules-v009'; contentSha256: string};
   pulseTimingEvidence: AutoPresentationPulseTimingEvidence | null;
+  /** Explicit whole-frame prefix projection; source measurements keep their sample clock. */
+  pulseTimingProjection?: {schemaVersion: 'auto-presentation-pulse-frame-offset-v001'; frameOffset: number;
+    sourceBaselineRef: AutoPresentationFileRef & {canonicalSha256: string}};
 }
 export interface AutoPresentationPulseTimingEvidence {
   schemaVersion: 'auto-presentation-pulse-timing-v001';
@@ -47,6 +50,8 @@ export interface AutoPresentationPanel {
   role: 'Panel accent';
   presentation: 'provisional-panel' | 'provisional-panel-graph-paper' | 'provisional-panel-comic-frame';
   scope: 'whole-caption';
+  /** Required by rules v009. Omitted only in a historical saved recipe. */
+  paletteId?: 'ivory' | 'cool' | 'warm' | 'dark';
 }
 /** One provisional finite pulse anchored to an existing measured peak. */
 export interface AutoPresentationPulse {
@@ -54,11 +59,16 @@ export interface AutoPresentationPulse {
   presentation: 'provisional-pulse';
   scope: 'whole-caption';
   anchorPeakId: string;
+  presetVersion?: 'presentation-pulse-speech-return-v001';
+  /** Bound phrase end on the same frame clock as the caption. */
+  speechEndFrame?: number;
 }
 export interface AutoPresentationBounce {
   role: 'Bounce accent';
   presentation: 'provisional-bounce';
   scope: 'whole-caption';
+  presetVersion?: 'presentation-bounce-speech-return-v001';
+  speechEndFrame?: number;
 }
 export interface AutoPresentationShake {
   role: 'Shake accent';

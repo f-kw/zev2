@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import {readFile, writeFile} from 'node:fs/promises';
 import {basename, resolve} from 'node:path';
-import {AUTO_PRESENTATION_RULES_REF_V008, sha256AutoPresentationV001,
+import {AUTO_PRESENTATION_RULES_REF_V008, AUTO_PRESENTATION_RULES_REF_V009, sha256AutoPresentationV001,
   fixAutoPresentationProposalV001, resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {validatePresentationPulseEvidenceV001} from './presentation_pulse_evidence_v001.mjs';
 
@@ -68,18 +68,27 @@ async function loadPulseTimingEvidence(decision) {
 }
 
 /** Read actual bytes; a proposal cannot declare an old hash for new source content. */
-export async function loadAutoPresentationContextV001({baselinePath, decisionInputPath}) {
+export async function loadAutoPresentationContextV001({baselinePath, decisionInputPath,
+  renderingRulesRef = AUTO_PRESENTATION_RULES_REF_V009, pulseTimingProjection}) {
+  if (![AUTO_PRESENTATION_RULES_REF_V008, AUTO_PRESENTATION_RULES_REF_V009]
+    .some(ref => equal(ref, renderingRulesRef))) reject('unknown rendering rules reference');
   const [baselineBytes, decisionBytes] = await Promise.all([
     readFile(baselinePath), readFile(decisionInputPath),
   ]);
   const baselinePlan = JSON.parse(baselineBytes.toString('utf8'));
   const pulseTimingEvidence = await loadPulseTimingEvidence(JSON.parse(decisionBytes.toString('utf8')));
+  if (pulseTimingProjection !== undefined) {
+    const sourceBytes = await readBound(pulseTimingProjection.sourceBaselineRef);
+    if (sha256AutoPresentationV001(JSON.parse(sourceBytes.toString('utf8')))
+      !== pulseTimingProjection.sourceBaselineRef.canonicalSha256) reject('source normal plan content differs');
+  }
   const context = {
     baselineRef: {path: resolve(baselinePath), fileSha256: bytesHash(baselineBytes),
       canonicalSha256: sha256AutoPresentationV001(baselinePlan)},
     decisionInputRef: {path: resolve(decisionInputPath), fileSha256: bytesHash(decisionBytes)},
-    renderingRulesRef: AUTO_PRESENTATION_RULES_REF_V008,
+    renderingRulesRef,
     pulseTimingEvidence,
+    ...(pulseTimingProjection === undefined ? {} : {pulseTimingProjection}),
   };
   resolveAutoPresentationV001({baselinePlan, context});
   return {baselinePlan, context};
@@ -87,7 +96,8 @@ export async function loadAutoPresentationContextV001({baselinePath, decisionInp
 
 /** Existing paths are never replaced. All validation precedes creation of an output. */
 export async function saveFixedAutoPresentationV001({baselinePath, decisionInputPath, proposal, outputPath}) {
-  const loaded = await loadAutoPresentationContextV001({baselinePath, decisionInputPath});
+  const loaded = await loadAutoPresentationContextV001({baselinePath, decisionInputPath,
+    pulseTimingProjection: proposal?.context?.pulseTimingProjection});
   const fixed = fixAutoPresentationProposalV001({...loaded, proposal});
   await writeFile(outputPath, `${JSON.stringify(fixed, null, 2)}\n`, {flag: 'wx'});
   return fixed;
@@ -95,10 +105,16 @@ export async function saveFixedAutoPresentationV001({baselinePath, decisionInput
 
 /** This is the file-to-render boundary, not an unchecked JSON cast. */
 export async function loadAutoPresentationV001({baselinePath, decisionInputPath, autoProposalPath, overridesPath}) {
-  const {baselinePlan, context} = await loadAutoPresentationContextV001({baselinePath, decisionInputPath});
+  const autoProposal = autoProposalPath === undefined ? undefined : await readJson(autoProposalPath);
+  const overrides = overridesPath === undefined ? undefined : await readJson(overridesPath);
+  // Reading a saved recipe explicitly selects its bound historical rules.
+  const renderingRulesRef = autoProposal?.proposal?.context?.renderingRulesRef
+    ?? overrides?.context?.renderingRulesRef ?? AUTO_PRESENTATION_RULES_REF_V009;
+  const pulseTimingProjection = autoProposal?.proposal?.context?.pulseTimingProjection ?? overrides?.context?.pulseTimingProjection;
+  const {baselinePlan, context} = await loadAutoPresentationContextV001({baselinePath, decisionInputPath, renderingRulesRef, pulseTimingProjection});
   const autoPresentation = {context,
-    ...(autoProposalPath === undefined ? {} : {autoProposal: await readJson(autoProposalPath)}),
-    ...(overridesPath === undefined ? {} : {overrides: await readJson(overridesPath)}),
+    ...(autoProposal === undefined ? {} : {autoProposal}),
+    ...(overrides === undefined ? {} : {overrides}),
   };
   // Recheck the proposal, overrides, and all bindings even if these files were
   // previously saved successfully. A file may have been edited since then.

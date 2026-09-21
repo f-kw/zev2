@@ -2,8 +2,9 @@
 import {createHash} from 'node:crypto';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {decodePresentationCaptionB1StrictJsonV001} from './presentation_caption_semantic_source_package_v001.mjs';
-import {omitPresentationPanelPlateForInspectionV002} from './presentation_panel_presets_v002.mjs';
-import {sha256AutoPresentationV001, fixAutoPresentationProposalV001,
+import {omitPresentationPanelPlateForInspectionV002, PRESENTATION_PANEL_ALLOWED_PALETTES_V003}
+  from './presentation_panel_presets_v002.mjs';
+import {AUTO_PRESENTATION_RULES_REF_V008, sha256AutoPresentationV001, fixAutoPresentationProposalV001,
   createAutoPresentationOverridesV001, editAutoPresentationOverrideV001,
   resolveAutoPresentationV001, materializeFiniteAutoPresentationCaptionV001}
   from './presentation_auto_effects_v001.mjs';
@@ -15,10 +16,12 @@ import {createOrchestrationProjectionV001, projectCaptionPlanV001, projectAudioP
   projectAudioEvidenceIntervalV001} from './presentation_orchestration_projection_v001.mjs';
 
 export const ORCHESTRATION_VERSION_V002 = 'presentation-orchestration-v002';
+export const ORCHESTRATION_VERSION_V003 = 'presentation-orchestration-v003';
 // The expression assignment identity is independent of the saved wire format.
 // Adding a Panel background must not reshuffle caption or connection choices.
 const EXPRESSION_SELECTION_IDENTITY = 'presentation-orchestration-v001';
 const PANEL_BACKGROUND_SELECTION_IDENTITY = 'presentation-orchestration-panel-background-v001';
+const PANEL_PALETTE_SELECTION_IDENTITY = 'presentation-orchestration-panel-palette-v001';
 const contexts = new WeakMap(), views = new WeakMap();
 const clone = value => structuredClone(value);
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -46,6 +49,10 @@ const contextData = context => {
   require(data !== undefined, 'context must be rebuilt from bound original bytes');
   return data;
 };
+const hasPaletteRules = source => source.captionContext.renderingRulesRef.version === 'auto-presentation-rules-v009';
+const wireVersion = context => hasPaletteRules(contextData(context).source) ? 'v003' : 'v002';
+const wireSchema = (context, kind) => `presentation-orchestration-${kind}-${wireVersion(context)}`;
+const orchestrationVersion = context => wireVersion(context) === 'v003' ? ORCHESTRATION_VERSION_V003 : ORCHESTRATION_VERSION_V002;
 const viewData = view => {
   const data = views.get(view);
   require(data !== undefined, 'drawing view must be derived from current saved state');
@@ -61,6 +68,8 @@ export function createOrchestrationContextV001(options) {
   const source = clone({...options, planBytes: utf8(options.planBytes, 'normal plan'),
     timelineBytes: utf8(options.timelineBytes, 'timeline'),
     decisionInputBytes: utf8(options.decisionInputBytes, 'native decision binding')});
+  require(!Object.hasOwn(source.captionContext, 'pulseTimingProjection'),
+    'already shifted local Pulse timing cannot enter the original orchestration clock');
   const plan = json(source.planBytes, 'normal plan'), decision = json(source.decisionInputBytes, 'native binding');
   require(source.planRef.fileSha256 === sha(source.planBytes)
     && source.planRef.fileSha256 === source.captionContext.baselineRef.fileSha256,
@@ -80,7 +89,8 @@ export function createOrchestrationContextV001(options) {
   const initialProjection = createOrchestrationProjectionV001({...projectionOptions,
     connections: connectionContext.connections.map(row => ({connectionId: row.connectionId,
       preset: 'normal-cut', presetVersion: 'v001'}))});
-  const identity = {schemaVersion: 'presentation-orchestration-context-v002', version: ORCHESTRATION_VERSION_V002,
+  const version = hasPaletteRules(source) ? 'v003' : 'v002';
+  const identity = {schemaVersion: `presentation-orchestration-context-${version}`, version: `presentation-orchestration-${version}`,
     digestRef: source.digestRef, sourceClockSha256: initialProjection.sourceClockSha256,
     captionContextSha256: hash(source.captionContext), captionIds: plan.elements.filter(row => row.kind === 'speech-caption')
       .map(row => row.instructionId), connectionIds: connectionContext.connections.map(row => row.connectionId)};
@@ -93,6 +103,8 @@ const group = freeze({normal: ['normal'], focus: ['color', 'panel'],
   'vocal-energy': ['scale', 'pulse'], reaction: ['bounce', 'shake']});
 const panelBackgroundChoices = freeze({plain: 'panel', 'graph-paper': 'panel-graph-paper',
   'comic-frame': 'panel-comic-frame'});
+const newPanelBackgroundChoices = freeze({plain: 'panel', 'graph-paper': 'panel-graph-paper'});
+const backgroundsFor = context => wireVersion(context) === 'v003' ? newPanelBackgroundChoices : panelBackgroundChoices;
 export function orchestrationCaptionChoiceToSelectionV001(choice) {
   require(object(choice), 'caption choice');
   if (choice.preset === 'color') {
@@ -103,17 +115,26 @@ export function orchestrationCaptionChoiceToSelectionV001(choice) {
     return {role: 'Focus', presentation: 'provisional-focus', ...scope};
   }
   if (choice.preset === 'pulse') {
-    exact(choice, ['preset', 'anchorPeakId'], 'Pulse choice');
-    return {role: 'Pulse accent', presentation: 'provisional-pulse', scope: 'whole-caption', anchorPeakId: choice.anchorPeakId};
+    const speechKeys = Object.hasOwn(choice, 'presetVersion') || Object.hasOwn(choice, 'speechEndFrame')
+      ? ['presetVersion', 'speechEndFrame'] : [];
+    exact(choice, ['preset', 'anchorPeakId', ...speechKeys], 'Pulse choice');
+    return {role: 'Pulse accent', presentation: 'provisional-pulse', scope: 'whole-caption', anchorPeakId: choice.anchorPeakId,
+      ...Object.fromEntries(speechKeys.map(key => [key, choice[key]]))};
   }
-  exact(choice, ['preset'], 'finite caption choice');
+  const panel = ['panel', 'panel-graph-paper'].includes(choice.preset);
+  const motion = ['bounce', 'shake'].includes(choice.preset);
+  const paletteKeys = panel && Object.hasOwn(choice, 'paletteId') ? ['paletteId'] : [];
+  const motionKeys = motion && (Object.hasOwn(choice, 'presetVersion') || Object.hasOwn(choice, 'speechEndFrame'))
+    ? ['presetVersion', 'speechEndFrame'] : [];
+  exact(choice, ['preset', ...paletteKeys, ...motionKeys], 'finite caption choice');
   if (choice.preset === 'normal') return {role: 'Normal'};
   const name = {scale: ['Vocal accent', 'provisional-vocal'], panel: ['Panel accent', 'provisional-panel'],
     'panel-graph-paper': ['Panel accent', 'provisional-panel-graph-paper'],
     'panel-comic-frame': ['Panel accent', 'provisional-panel-comic-frame'],
     bounce: ['Bounce accent', 'provisional-bounce'], shake: ['Shake accent', 'provisional-shake']}[choice.preset];
   require(name !== undefined, 'unknown finite caption choice');
-  return {role: name[0], presentation: name[1], scope: 'whole-caption'};
+  return {role: name[0], presentation: name[1], scope: 'whole-caption',
+    ...Object.fromEntries([...paletteKeys, ...motionKeys].map(key => [key, choice[key]]))};
 }
 
 function checkOneChoice(data, captionId, choice) {
@@ -190,18 +211,21 @@ function createJudgmentInput({context, evidence, connectionPolicy}, judgmentMode
         row.startSample * 30 < connection.boundaryFrame * timing.sampleRate
         && row.endSampleExclusive * 30 > connection.boundaryFrame * timing.sampleRate).map(row => row.candidateId)};
   });
-  const body = {schemaVersion: 'presentation-orchestration-judgment-input-v002', contextSha256: context.contextSha256,
+  const palettes = wireVersion(context) === 'v003';
+  const body = {schemaVersion: wireSchema(context, 'judgment-input'), contextSha256: context.contextSha256,
     digestRef: clone(context.digestRef), sourceClockSha256: context.sourceClockSha256,
-    orchestrationVersion: ORCHESTRATION_VERSION_V002,
+    orchestrationVersion: orchestrationVersion(context),
     judgmentMode, connectionPolicy,
     productionPurpose: evidence.productionPurpose, captionRolePresets: clone(group),
-    panelBackgroundPresets: Object.keys(panelBackgroundChoices),
+    panelBackgroundPresets: Object.keys(backgroundsFor(context)),
+    ...(palettes ? {panelPaletteIdsByBackground: clone(PRESENTATION_PANEL_ALLOWED_PALETTES_V003)} : {}),
     connectionRolePresets: connectionPolicy === 'preserve-normal-cut' ? {continuation: ['normal-cut']}
       : {continuation: ['normal-cut'], separator: ['black-separator', 'soft-separator'],
         either: ['normal-cut', 'black-separator', 'soft-separator']},
     policy: {completeCoverage: true, chooseSemanticAllowedSetsOnly: true, explicitNormal: true,
       oneChoicePerPreset: true, noQuotas: true, noSequenceAssignment: true, noSavedPriorAnswers: judgmentMode === 'fresh-codex',
       panelBackgroundOnlyAfterPanel: true, explicitPanelBackgroundAllowedSet: true,
+      ...(palettes ? {panelPaletteOnlyAfterBackground: true, explicitPanelPaletteAllowedSet: true} : {}),
       unresolvedAndUnrepresentableAreNotNormal: true, automaticSelection: 'SHA256-canonical-tuple-modulo-sorted-allowed-presets'},
     captions, connections, contexts: clone(evidence.contexts), observations: clone(evidence.observations),
     audioEvidence: clone(evidence.audioEvidence), audioCandidates: clone(evidence.audioCandidates)};
@@ -241,6 +265,22 @@ export function selectOrchestrationPanelBackgroundV002({digestSha256, captionId,
   return freeze({selectionSha256, allowedPresets: sorted, selectedIndex, selectedPreset: sorted[selectedIndex]});
 }
 
+/** A third independent finite choice. Palette count cannot affect expressions
+ * or backgrounds, and no palette exists before a permitted background does. */
+export function selectOrchestrationPanelPaletteV003({digestSha256, captionId, backgroundPreset, allowedPaletteIds}) {
+  require(/^[a-f0-9]{64}$/.test(digestSha256) && nonempty(captionId)
+    && Object.hasOwn(PRESENTATION_PANEL_ALLOWED_PALETTES_V003, backgroundPreset)
+    && Array.isArray(allowedPaletteIds) && allowedPaletteIds.length > 0
+    && allowedPaletteIds.every(value => typeof value === 'string'
+      && PRESENTATION_PANEL_ALLOWED_PALETTES_V003[backgroundPreset].includes(value))
+    && new Set(allowedPaletteIds).size === allowedPaletteIds.length, 'finite Panel palette allowed set');
+  const sorted = [...allowedPaletteIds].sort();
+  const selectionSha256 = sha(canonicalJson([digestSha256, PANEL_PALETTE_SELECTION_IDENTITY,
+    'caption-panel-palette', captionId, backgroundPreset]));
+  const selectedIndex = Number(BigInt('0x' + selectionSha256) % BigInt(sorted.length));
+  return freeze({selectionSha256, allowedPaletteIds: sorted, selectedIndex, selectedPaletteId: sorted[selectedIndex]});
+}
+
 function evaluateReply(context, input, replyBytes, judgmentMode) {
   const data = contextData(context);
   checkInput(context, input, judgmentMode);
@@ -249,7 +289,8 @@ function evaluateReply(context, input, replyBytes, judgmentMode) {
   require(decoded.status === 'decoded', 'judgment reply strict JSON: ' + (decoded.reason ?? 'invalid'));
   const reply = decoded.value;
   exact(reply, ['schemaVersion', 'inputSha256', 'completion', 'captions', 'connections'], 'judgment reply');
-  require(reply.schemaVersion === 'presentation-orchestration-judgment-v002'
+  const palettes = wireVersion(context) === 'v003';
+  require(reply.schemaVersion === wireSchema(context, 'judgment')
     && reply.inputSha256 === input.inputSha256 && reply.completion === 'complete', 'complete fresh judgment binding required');
   checkCoverage(reply.captions, context.captionIds, 'captionId', 'reply caption');
   checkCoverage(reply.connections, context.connectionIds, 'connectionId', 'reply connection');
@@ -268,7 +309,8 @@ function evaluateReply(context, input, replyBytes, judgmentMode) {
     if (row.status !== 'resolved') {
       require(row.semanticRole === null && row.allowedPresets.length === 0, 'exceptions must retain their status without an allowed set');
       return {...clone(row), selection: null,
-        ...(kind === 'caption' ? {panelBackgroundSelection: null, finalCaptionChoice: null} : {})};
+        ...(kind === 'caption' ? {panelBackgroundSelection: null,
+          ...(palettes ? {panelPaletteSelection: null} : {}), finalCaptionChoice: null} : {})};
     }
     require(row.allowedPresets.length > 0, 'resolved judgment needs explicit allowed set, including Normal');
     if (kind === 'caption') {
@@ -281,15 +323,20 @@ function evaluateReply(context, input, replyBytes, judgmentMode) {
           && value.captionIds.includes(id)), 'physically unrepresentable preset in allowed set');
         if (choice.preset === 'pulse') require(observed.eligiblePulsePeakIds.includes(choice.anchorPeakId), 'Pulse anchor not eligible');
         if (choice.preset === 'panel') {
-          exact(choice, ['preset', 'allowedBackgroundPresets'], 'Panel semantic choice');
+          exact(choice, ['preset', 'allowedBackgroundPresets', ...(palettes ? ['allowedPaletteIds'] : [])], 'Panel semantic choice');
           // Validate every permitted background, including ones not selected.
           selectOrchestrationPanelBackgroundV002({digestSha256: context.digestRef.sha256,
             captionId: id, allowedPresets: choice.allowedBackgroundPresets});
           for (const background of choice.allowedBackgroundPresets) {
+            require(Object.hasOwn(backgroundsFor(context), background), 'Panel background unavailable for new selection');
             const preset = panelBackgroundChoices[background];
             require(!input.observations.some(value => value.kind === preset + '-unrepresentable'
               && value.captionIds.includes(id)), 'physically unrepresentable Panel background in allowed set');
-            checkOneChoice(data, id, {preset});
+            if (palettes) {
+              selectOrchestrationPanelPaletteV003({digestSha256: context.digestRef.sha256,
+                captionId: id, backgroundPreset: background, allowedPaletteIds: choice.allowedPaletteIds});
+              for (const paletteId of choice.allowedPaletteIds) checkOneChoice(data, id, {preset, paletteId});
+            } else checkOneChoice(data, id, {preset});
           }
         } else checkOneChoice(data, id, choice);
       }
@@ -309,9 +356,15 @@ function evaluateReply(context, input, replyBytes, judgmentMode) {
     const panelBackgroundSelection = selection.selectedPreset.preset === 'panel'
       ? selectOrchestrationPanelBackgroundV002({digestSha256: context.digestRef.sha256, captionId: id,
         allowedPresets: row.allowedPresets.find(choice => choice.preset === 'panel').allowedBackgroundPresets}) : null;
+    const panelPaletteSelection = palettes && panelBackgroundSelection
+      ? selectOrchestrationPanelPaletteV003({digestSha256: context.digestRef.sha256, captionId: id,
+        backgroundPreset: panelBackgroundSelection.selectedPreset,
+        allowedPaletteIds: row.allowedPresets.find(choice => choice.preset === 'panel').allowedPaletteIds}) : null;
     const finalCaptionChoice = panelBackgroundSelection
-      ? {preset: panelBackgroundChoices[panelBackgroundSelection.selectedPreset]} : clone(selection.selectedPreset);
-    return {...clone(row), selection, panelBackgroundSelection, finalCaptionChoice};
+      ? {preset: panelBackgroundChoices[panelBackgroundSelection.selectedPreset],
+        ...(panelPaletteSelection ? {paletteId: panelPaletteSelection.selectedPaletteId} : {})} : clone(selection.selectedPreset);
+    return {...clone(row), selection, panelBackgroundSelection,
+      ...(palettes ? {panelPaletteSelection} : {}), finalCaptionChoice};
   };
   return {raw, captions: context.captionIds.map(id => resolveRow(reply.captions.find(row => row.captionId === id), 'caption')),
     connections: context.connectionIds.map(id => resolveRow(reply.connections.find(row => row.connectionId === id), 'connection'))};
@@ -325,6 +378,7 @@ const ORIGINAL_RECOMPILE_KEYS = ['selectionRecordBytes', 'selectionRecordFileSha
   'inputFileSha256', 'replyBytes', 'replyFileSha256'];
 
 function preparePanelBackgroundRecompile(context, original) {
+  require(wireVersion(context) === 'v002', 'historical background recompilation requires saved v008 rules');
   exact(original, ORIGINAL_RECOMPILE_KEYS, 'explicit recompilation originals');
   const normalized = clone(original);
   for (const stem of ['selectionRecord', 'input', 'reply']) {
@@ -387,14 +441,73 @@ function preparePanelBackgroundRecompile(context, original) {
   return {original: normalized, input: nextInput, replyBytes: JSON.stringify(nextReply) + '\n', record};
 }
 
+const paletteRecompilePolicy = freeze({
+  id: 'r1-r3-finite-panel-palettes-v001',
+  allowedBackgroundPresets: Object.keys(newPanelBackgroundChoices),
+  allowedPaletteIds: [...PRESENTATION_PANEL_ALLOWED_PALETTES_V003.plain],
+  reason: 'Explicit technical recompilation of saved semantic judgments with comic excluded and finite Panel palettes; not a new AI judgment.',
+});
+function preparePanelPaletteRecompile(context, original) {
+  require(wireVersion(context) === 'v003', 'palette recompilation requires explicitly bound v009 rules');
+  exact(original, ORIGINAL_RECOMPILE_KEYS, 'explicit palette recompilation originals');
+  const normalized = clone(original);
+  for (const stem of ['selectionRecord', 'input', 'reply']) {
+    normalized[stem + 'Bytes'] = utf8(original[stem + 'Bytes'], 'original ' + stem);
+    require(/^[a-f0-9]{64}$/.test(original[stem + 'FileSha256'])
+      && sha(normalized[stem + 'Bytes']) === original[stem + 'FileSha256'], 'original ' + stem + ' file SHA differs');
+  }
+  const record = json(normalized.selectionRecordBytes, 'original selection record');
+  const input = json(normalized.inputBytes, 'original judgment input');
+  const decoded = decodePresentationCaptionB1StrictJsonV001(Buffer.from(normalized.replyBytes, 'utf8'));
+  require(decoded.status === 'decoded', 'original judgment reply strict JSON');
+  const reply = decoded.value, data = contextData(context);
+  const legacyContext = createOrchestrationContextV001({...clone(data.source),
+    captionContext: {...clone(data.source.captionContext), renderingRulesRef: clone(AUTO_PRESENTATION_RULES_REF_V008)}});
+  let connectionPolicy;
+  if (record.schemaVersion === 'presentation-orchestration-selection-record-v001') {
+    // The existing explicit v001 reader verifies historical semantic rows and
+    // their original source clock without inventing a new semantic judgment.
+    const prepared = preparePanelBackgroundRecompile(legacyContext, normalized);
+    compile(legacyContext, prepared.input, prepared.replyBytes,
+      {kind: 'technical-recompile', original: prepared.original, backgroundPolicy: recompileBackgroundPolicy});
+    connectionPolicy = 'semantic-choice';
+  } else {
+    require(record.schemaVersion === 'presentation-orchestration-selection-record-v002'
+      && same(record.input, input) && record.replyBytes === normalized.replyBytes
+      && record.replySha256 === normalized.replyFileSha256, 'palette recompilation requires bound v001 or v002 originals');
+    const expected = compile(legacyContext, input, normalized.replyBytes, record.origin);
+    require(same(record, expected.selectionRecord), 'original fixed v002 selection record differs');
+    connectionPolicy = input.connectionPolicy;
+  }
+  const evidence = Object.fromEntries(['productionPurpose', 'captions', 'contexts', 'observations', 'audioEvidence',
+    'audioCandidates'].map(key => [key, input[key]]));
+  const nextInput = createJudgmentInput({context, evidence, connectionPolicy}, 'technical-recompile');
+  for (const key of ['digestRef', 'sourceClockSha256', 'captionRolePresets', 'connectionRolePresets', 'captions', 'connections']) {
+    require(same(input[key], nextInput[key]), 'palette recompilation source identity, expressions or connections differ');
+  }
+  const nextReply = clone(reply);
+  nextReply.schemaVersion = wireSchema(context, 'judgment');
+  nextReply.inputSha256 = nextInput.inputSha256;
+  for (const row of nextReply.captions) row.allowedPresets = row.allowedPresets.map(choice => choice.preset === 'panel'
+    ? {preset: 'panel', allowedBackgroundPresets: [...paletteRecompilePolicy.allowedBackgroundPresets],
+      allowedPaletteIds: [...paletteRecompilePolicy.allowedPaletteIds]} : choice);
+  return {original: normalized, input: nextInput, replyBytes: JSON.stringify(nextReply) + '\n', record};
+}
+
 function compile(context, input, replyBytes, origin) {
   require(object(origin) && ['fresh-codex', 'technical-recompile'].includes(origin.kind), 'judgment origin required');
   let recompilation;
   if (origin.kind === 'fresh-codex') exact(origin, ['kind'], 'fresh judgment origin');
   else {
-    exact(origin, ['kind', 'original', 'backgroundPolicy'], 'technical recompilation origin');
-    require(same(origin.backgroundPolicy, recompileBackgroundPolicy), 'technical background policy differs');
-    recompilation = preparePanelBackgroundRecompile(context, origin.original);
+    if (wireVersion(context) === 'v003') {
+      exact(origin, ['kind', 'original', 'palettePolicy'], 'technical palette recompilation origin');
+      require(same(origin.palettePolicy, paletteRecompilePolicy), 'technical palette policy differs');
+      recompilation = preparePanelPaletteRecompile(context, origin.original);
+    } else {
+      exact(origin, ['kind', 'original', 'backgroundPolicy'], 'technical recompilation origin');
+      require(same(origin.backgroundPolicy, recompileBackgroundPolicy), 'technical background policy differs');
+      recompilation = preparePanelBackgroundRecompile(context, origin.original);
+    }
     require(same(input, recompilation.input) && utf8(replyBytes, 'recompiled reply') === recompilation.replyBytes,
       'recompiled semantic judgments or background policy differ');
   }
@@ -415,8 +528,8 @@ function compile(context, input, replyBytes, origin) {
   const connectionAuto = createConnectionExpressionOriginalV001({context: data.connectionContext,
     selections: evaluated.connections.map(row => ({connectionId: row.connectionId,
       preset: row.selection?.selectedPreset ?? 'normal-cut', presetVersion: 'v001'}))});
-  const recordBody = {schemaVersion: 'presentation-orchestration-selection-record-v002',
-    version: ORCHESTRATION_VERSION_V002, contextSha256: context.contextSha256, input: clone(input),
+  const recordBody = {schemaVersion: wireSchema(context, 'selection-record'),
+    version: orchestrationVersion(context), contextSha256: context.contextSha256, input: clone(input),
     origin: clone(origin),
     replyBytes: evaluated.raw, replySha256: sha(evaluated.raw), captions: evaluated.captions, connections: evaluated.connections,
     captionAutoSha256: hash(captionAuto), connectionAutoSha256: hash(connectionAuto)};
@@ -434,6 +547,14 @@ export function recompileOrchestrationPanelBackgroundsV002({context, original}) 
     {kind: 'technical-recompile', original: prepared.original, backgroundPolicy: recompileBackgroundPolicy});
   return initializeSavedOverrides(context, compiled);
 }
+/** A new saved derivative with original byte/SHA provenance. Old saved records
+ * are read through their original rules and never changed in place. */
+export function recompileOrchestrationPanelPalettesV003({context, original}) {
+  const prepared = preparePanelPaletteRecompile(context, original);
+  const compiled = compile(context, prepared.input, prepared.replyBytes,
+    {kind: 'technical-recompile', original: prepared.original, palettePolicy: paletteRecompilePolicy});
+  return initializeSavedOverrides(context, compiled);
+}
 function initializeSavedOverrides(context, compiled) {
   const data = contextData(context);
   return freeze({...compiled,
@@ -444,7 +565,7 @@ function initializeSavedOverrides(context, compiled) {
 function validateState(context, state) {
   exact(state, ['selectionRecord', 'captionAuto', 'captionOverrides', 'connectionAuto', 'connectionOverrides'], 'four saved systems and selection proof');
   const data = contextData(context), record = state.selectionRecord;
-  require(object(record) && record.schemaVersion === 'presentation-orchestration-selection-record-v002', 'new selection record required');
+  require(object(record) && record.schemaVersion === wireSchema(context, 'selection-record'), 'new selection record required');
   const expected = compile(context, record.input, record.replyBytes, record.origin);
   require(same(record, expected.selectionRecord) && same(state.captionAuto, expected.captionAuto)
     && same(state.connectionAuto, expected.connectionAuto), 'fixed semantic choices or saved automatic record differs');
@@ -457,6 +578,7 @@ function validateState(context, state) {
 export function editOrchestrationOverrideV001({context, state, kind, itemId, selection}) {
   const {data} = validateState(context, state);
   if (kind === 'caption') {
+    require(selection?.preset !== 'panel-comic-frame', 'comic Panel is unavailable for new editing selections');
     return freeze({...state, captionOverrides: editAutoPresentationOverrideV001({baselinePlan: data.plan,
       context: data.source.captionContext, autoProposal: state.captionAuto, overrides: state.captionOverrides,
       captionId: itemId, selection: ['Normal', 'Reset'].includes(selection) ? selection
@@ -494,7 +616,13 @@ export function resolveOrchestrationDrawingViewV001({context, state}) {
       projectedPeaks.push(peak);
       measuredPeak = {peakId: peak.peakId, peakSample: peak.displaySample, sampleRate: peak.sampleRate};
     }
-    return materializeFiniteAutoPresentationCaptionV001({element, canvas: projected.plan.canvas, selection,
+    // Caption intervals use their start-side shift even at an exclusive end
+    // exactly on a connection. Apply that same shift to the explicit speech
+    // endpoint once, while preserving the saved original-clock selection.
+    const originalElement = data.plan.elements.find(row => row.instructionId === element.instructionId);
+    const displaySelection = Object.hasOwn(selection, 'speechEndFrame')
+      ? {...selection, speechEndFrame: selection.speechEndFrame + element.startFrame - originalElement.startFrame} : selection;
+    return materializeFiniteAutoPresentationCaptionV001({element, canvas: projected.plan.canvas, selection: displaySelection,
       ...(measuredPeak === undefined ? {} : {measuredPeak})});
   });
   const audioEvidenceIntervals = state.selectionRecord.input.audioCandidates.map(row => projectAudioEvidenceIntervalV001({projection,
@@ -502,7 +630,7 @@ export function resolveOrchestrationDrawingViewV001({context, state}) {
       startSample: row.startSample, endSampleExclusive: row.endSampleExclusive, sampleRate: data.source.observationSampleRate}}));
   const fourSavedSha256 = Object.fromEntries(['captionAuto', 'captionOverrides', 'connectionAuto', 'connectionOverrides']
     .map(key => [key, hash(state[key])]));
-  const body = {schemaVersion: 'presentation-orchestration-drawing-view-v002', version: ORCHESTRATION_VERSION_V002,
+  const body = {schemaVersion: wireSchema(context, 'drawing-view'), version: orchestrationVersion(context),
     contextSha256: context.contextSha256, sourceContext: clone(data.source.captionContext),
     sourceRefs: {planRef: clone(data.source.planRef), timelineRef: clone(data.source.timelineRef), mediaRef: clone(data.source.mediaRef),
       decisionInputRef: clone(data.source.captionContext.decisionInputRef),
@@ -551,16 +679,17 @@ export function buildOrchestrationNativeQcAlternativeElementsV001(view) {
  * all sources, semantic choices, overrides, projection and finite drawing. */
 export function exportOrchestrationDrawingViewEvidenceV001(view) {
   const {context, state} = viewData(view), data = contextData(context);
-  const body = {schemaVersion: 'presentation-orchestration-drawing-evidence-v002',
+  const body = {schemaVersion: wireSchema(context, 'drawing-evidence'),
     source: clone(data.source), state: clone(state), expectedViewSha256: view.viewSha256};
   return freeze({...body, evidenceSha256: hash(body)});
 }
 export function restoreOrchestrationDrawingViewEvidenceV001(evidence) {
   exact(evidence, ['schemaVersion', 'source', 'state', 'expectedViewSha256', 'evidenceSha256'], 'drawing proof');
   const {evidenceSha256, ...body} = evidence;
-  require(evidence.schemaVersion === 'presentation-orchestration-drawing-evidence-v002'
+  require(['presentation-orchestration-drawing-evidence-v002', 'presentation-orchestration-drawing-evidence-v003'].includes(evidence.schemaVersion)
     && hash(body) === evidenceSha256, 'drawing proof SHA differs');
   const context = createOrchestrationContextV001(evidence.source);
+  require(evidence.schemaVersion === wireSchema(context, 'drawing-evidence'), 'drawing proof version differs from bound rules');
   const view = resolveOrchestrationDrawingViewV001({context, state: evidence.state});
   require(view.viewSha256 === evidence.expectedViewSha256, 'reconstructed drawing view differs');
   return view;

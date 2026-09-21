@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: component: target text and navigation remain available while a physical check is pending
+ok 1 - component: target text and navigation remain available while a physical check is pending
+  ---
+  duration_ms: 44.568542
+  ...
+# Subtest: component: late whole-Color and prior-range results cannot validate a changed Color range
+ok 2 - component: late whole-Color and prior-range results cannot validate a changed Color range
+  ---
+  duration_ms: 7.983417
+  ...
+# Subtest: component: a new saved revision invalidates an older pending check without overwriting the draft
+ok 3 - component: a new saved revision invalidates an older pending check without overwriting the draft
+  ---
+  duration_ms: 8.188458
+  ...
+# Subtest: component: a returned Pulse check failure stays distinct from inapplicability and preserves measured peaks
+ok 4 - component: a returned Pulse check failure stays distinct from inapplicability and preserves measured peaks
+  ---
+  duration_ms: 5.837417
+  ...
+# Subtest: component: a response that echoes another selection is stale and cannot enable saving
+ok 5 - component: a response that echoes another selection is stale and cannot enable saving
+  ---
+  duration_ms: 2.57875
+  ...
+# Subtest: component: delayed Reset checking cannot save after the user moves to another target
+ok 6 - component: delayed Reset checking cannot save after the user moves to another target
+  ---
+  duration_ms: 2.445333
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 458.495542

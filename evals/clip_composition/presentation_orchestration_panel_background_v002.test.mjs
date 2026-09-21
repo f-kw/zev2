@@ -208,7 +208,7 @@ test('reloading and Reset restore the fixed automatic background while preservin
   const proof = JSON.parse(serialize(exportOrchestrationDrawingViewEvidenceV001(original)));
   assert.equal(proof.schemaVersion, 'presentation-orchestration-drawing-evidence-v002');
   assert.deepEqual(restoreOrchestrationDrawingViewEvidenceV001(proof), original);
-  for (const preset of Object.values(finalPresets)) {
+  for (const preset of ['panel', 'panel-graph-paper']) {
     const overridden = editOrchestrationOverrideV001({context: f.context, state, kind: 'caption',
       itemId: 'caption-2', selection: {preset}});
     for (const key of ['captionAuto', 'connectionAuto', 'connectionOverrides', 'selectionRecord']) {
@@ -219,6 +219,8 @@ test('reloading and Reset restore the fixed automatic background while preservin
     assert.deepEqual(reset, state);
     assert.deepEqual(view(f, reset), original);
   }
+  assert.throws(() => editOrchestrationOverrideV001({context: f.context, state, kind: 'caption',
+    itemId: 'caption-2', selection: {preset: 'panel-comic-frame'}}), /comic Panel/);
 });
 
 test('saved background selections and final choices cannot be changed, including to a managed but unallowed background', () => {

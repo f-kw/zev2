@@ -3,8 +3,10 @@ export type EditingTargetKind = 'caption' | 'connection';
 export type EditingCheckStatus = 'unchecked' | 'checking' | 'applicable' | 'inapplicable' | 'failed' | 'stale';
 export type CaptionPreset = 'normal' | 'color' | 'scale' | 'panel' | 'panel-graph-paper' | 'panel-comic-frame' | 'pulse' | 'bounce' | 'shake';
 export type ConnectionPreset = 'normal-cut' | 'black-separator' | 'soft-separator';
+export type PanelPalette = 'ivory' | 'cool' | 'warm' | 'dark';
 export type EditingSelection = 'Normal' | 'Reset' | ConnectionPreset
-  | { preset: 'normal' | 'scale' | 'panel' | 'panel-graph-paper' | 'panel-comic-frame' | 'bounce' | 'shake' }
+  | { preset: 'normal' | 'scale' | 'panel-comic-frame' | 'bounce' | 'shake' }
+  | { preset: 'panel' | 'panel-graph-paper'; paletteId?: PanelPalette }
   | { preset: 'color'; scope: 'whole-caption' }
   | { preset: 'color'; scope: 'partial-caption'; startUtf16: number; endUtf16: number; selectedText: string }
   | { preset: 'pulse'; anchorPeakId: string };
@@ -77,6 +79,7 @@ export interface EditingTarget {
   selection: EditingSelection;
   options: { value: string; label: string; status: EditingCheckStatus; reason?: string }[];
   peakOptions: { id: string; label: string; displaySeconds: number; status: EditingCheckStatus; reason?: string }[];
+  paletteOptions?: {id: PanelPalette; label: string; backgroundColor: string; fontColor: string}[];
   colorRange?: { startUtf16: number; endUtf16: number };
 }
 

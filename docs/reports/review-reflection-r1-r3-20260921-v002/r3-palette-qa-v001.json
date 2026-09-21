@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "r3-deliberate-palette-native-qa-v001",
+  "kind": "deliberate-finite-palette-coverage",
+  "status": "failed",
+  "automaticSelectionEvidence": false,
+  "nativePngCases": 0,
+  "encodedVideoRendered": false,
+  "audioVerified": false,
+  "humanQualityVerdict": null,
+  "externalApiCalls": 0,
+  "costUsd": 0,
+  "measurement": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-palette-qa-v001/measurement.json",
+    "fileSha256": "2a9c0854a8a8be1d5b76f5065fba28be81686fafebb530fd31cd480b0270f126"
+  },
+  "failure": {
+    "name": "AssertionError",
+    "message": "short-plain-ivory: horizontal pixel centering",
+    "stack": "AssertionError [ERR_ASSERTION]: short-plain-ivory: horizontal pixel centering\n    at centered (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/r3-palette-qa.mjs:39:10)\n    at runR3PaletteQa (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/r3-palette-qa.mjs:127:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+  }
+}

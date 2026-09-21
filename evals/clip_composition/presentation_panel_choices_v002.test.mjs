@@ -8,10 +8,10 @@ import {PRESENTATION_PANEL_PRESETS_V002, PRESENTATION_PANEL_ASSETS_V002,
   getPresentationPanelPresetV002, isPresentationPanelBackgroundV002,
   getPresentationPanelAssetV002, omitPresentationPanelPlateForInspectionV002} from './presentation_panel_presets_v002.mjs';
 import {AUTO_PRESENTATION_RULES_REF_V008, sha256AutoPresentationV001,
-  createAutoPresentationOverridesV001, editAutoPresentationOverrideV001,
+  createAutoPresentationOverridesV001, editAutoPresentationOverrideV001, fixAutoPresentationProposalV001,
   resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {loadAutoPresentationContextV001, loadAutoPresentationV001,
-  saveFixedAutoPresentationV001, saveAutoPresentationOverridesV001} from './presentation_auto_effects_io_v001.mjs';
+  saveAutoPresentationOverridesV001} from './presentation_auto_effects_io_v001.mjs';
 import {orchestrationCaptionChoiceToSelectionV001, createOrchestrationContextV001,
   createOrchestrationJudgmentInputV001, fixOrchestrationJudgmentV001,
   editOrchestrationOverrideV001, resolveOrchestrationDrawingViewV001}
@@ -25,6 +25,7 @@ const hash = value => createHash('sha256').update(value).digest('hex');
 const bytes = value => JSON.stringify(value, null, 2) + '\n';
 const clone = value => structuredClone(value);
 const variants = [['panel', 'plain'], ['panel-graph-paper', 'graph-paper'], ['panel-comic-frame', 'comic-frame']];
+const newEditingVariants = variants.filter(([preset]) => preset !== 'panel-comic-frame');
 const planFixture = () => ({schemaVersion:'presentation-output-common-core-plan-v001',
   canvas:{width:1920,height:1080,fps:30,safeAreaPx:{top:40,right:80,bottom:40,left:80}},
   provenance:{purpose:'synthetic-panel-storage-test'},
@@ -43,11 +44,14 @@ async function storageFixture(automaticPreset='panel') {
   const baselinePath=path.join(directory,'normal.json'),decisionInputPath=path.join(directory,'decision.json'),autoProposalPath=path.join(directory,'auto.json');
   await writeFile(baselinePath,bytes(planFixture()));
   await writeFile(decisionInputPath,bytes({schemaVersion:'presentation-focus-decision-input-v005',pulseTimingEvidence:null}));
-  const loaded=await loadAutoPresentationContextV001({baselinePath,decisionInputPath});
+  // Reconstruct an explicitly historical saved v008 fixture. This is not the
+  // current proposal-saving path and does not make comic a new choice.
+  const loaded=await loadAutoPresentationContextV001({baselinePath,decisionInputPath,renderingRulesRef:AUTO_PRESENTATION_RULES_REF_V008});
   const proposal={schemaVersion:'auto-presentation-proposal-v001',context:clone(loaded.context),
     targetCaptionIds:loaded.baselinePlan.elements.map(row=>row.instructionId),completion:'complete',
     effects:[{captionId:'caption-2',...orchestrationCaptionChoiceToSelectionV001({preset:automaticPreset})}],exceptions:[]};
-  const autoProposal=await saveFixedAutoPresentationV001({baselinePath,decisionInputPath,proposal,outputPath:autoProposalPath});
+  const autoProposal=fixAutoPresentationProposalV001({...loaded,proposal});
+  await writeFile(autoProposalPath,bytes(autoProposal),{flag:'wx'});
   return {directory,baselinePath,decisionInputPath,autoProposalPath,autoProposal,...loaded};
 }
 const resolved=loaded=>resolveAutoPresentationV001({baselinePlan:loaded.baselinePlan,...loaded.autoPresentation});
@@ -58,7 +62,7 @@ function assertContentUnchanged(before,after) {
   assert.equal(after.visualState.textStyle.fontSizePx,before.visualState.textStyle.fontSizePx);
 }
 
-test('Panel has exactly three immutable choices with distinct local artwork and shared text/padding',()=>{
+test('historical Panel retains three immutable saved presets with distinct local artwork and shared text/padding',()=>{
   const presets=variants.map(([preset])=>getPresentationPanelPresetV002(orchestrationCaptionChoiceToSelectionV001({preset}).presentation));
   assert.equal(Object.keys(PRESENTATION_PANEL_PRESETS_V002).length,3);
   assert.equal(Object.keys(PRESENTATION_PANEL_ASSETS_V002).length,2);
@@ -98,7 +102,7 @@ test('inspection-only plate omission retains Panel geometry without asset paint 
     assert.throws(()=>orchestrationCaptionChoiceToSelectionV001({preset,inspectionPlateOmitted:true}),/fields/);
   }
 });
-test('three backgrounds persist and reload through production IO; Normal fixes and Reset restores exact automatic Panel',async()=>{
+test('three historical backgrounds reload through production IO; new two-background edits, Normal and Reset preserve the old fixed Panel',async()=>{
   for(const [automaticPreset,automaticId] of variants){
     const fixture=await storageFixture(automaticPreset);
     try{
@@ -110,13 +114,15 @@ test('three backgrounds persist and reload through production IO; Normal fixes a
         await saveAutoPresentationOverridesV001({...fixture,overrides:value,outputPath:overridesPath});
         return loadAutoPresentationV001({...fixture,overridesPath});
       };
-      for(const [preset,id] of variants){
+      for(const [preset,id] of newEditingVariants){
         overrides=editAutoPresentationOverrideV001({...base,overrides,captionId:'caption-2',selection:orchestrationCaptionChoiceToSelectionV001({preset})});
         const loaded=await saveReload(overrides),view=resolved(loaded),target=view.plan.elements[1];
         assert.equal(target.visualState.background.panelPresetId,id);assertContentUnchanged(fixture.baselinePlan.elements[1],target);
         assert.deepEqual(view.plan.elements.filter(row=>row.instructionId!=='caption-2'),fixture.baselinePlan.elements.filter(row=>row.instructionId!=='caption-2'));
         overrides=loaded.autoPresentation.overrides;
       }
+      assert.throws(()=>editAutoPresentationOverrideV001({...base,overrides,captionId:'caption-2',
+        selection:orchestrationCaptionChoiceToSelectionV001({preset:'panel-comic-frame'})}),/comic/i);
       overrides=editAutoPresentationOverrideV001({...base,overrides,captionId:'caption-2',selection:'Normal'});
       const normal=await saveReload(overrides);assert.deepEqual(resolved(normal).plan,fixture.baselinePlan);
       assert.equal(normal.autoPresentation.overrides.entries[0].role,'Normal');
@@ -167,7 +173,7 @@ test('one-item orchestration and UI payload retain background choice; Normal and
   const fixture=orchestrationFixture(),initial=resolveOrchestrationDrawingViewV001(fixture);
   const stable=bytes(fixture.state);
   let state=fixture.state;
-  for(const [preset,id] of variants){
+  for(const [preset,id] of newEditingVariants){
     state=editOrchestrationOverrideV001({...fixture,state,kind:'caption',itemId:'caption-2',selection:{preset}});
     // JSON round-trip is distinct from native save/applicability; it checks the persisted state representation.
     state=JSON.parse(bytes(state));const view=resolveOrchestrationDrawingViewV001({...fixture,state});
@@ -175,18 +181,20 @@ test('one-item orchestration and UI payload retain background choice; Normal and
     const target=editingTargetListV001(snapshot).captions.find(row=>row.id==='caption-2');
     assert.equal(target.preset,preset);assert.equal(target.hasOverride,true);
     const details=await editingTargetDetailsV001(snapshot,'caption','caption-2');assert.deepEqual(details.selection,{preset});
-    assert.deepEqual(details.options.filter(option=>option.value.startsWith('panel')).map(option=>option.value),variants.map(row=>row[0]));
+    assert.deepEqual(details.options.filter(option=>option.value.startsWith('panel')).map(option=>option.value),newEditingVariants.map(row=>row[0]));
     assert.equal(view.resolvedPlan.elements[1].visualState.background.panelPresetId,id);
     assert.deepEqual(view.resolvedPlan.elements.filter(row=>row.instructionId!=='caption-2'),initial.resolvedPlan.elements.filter(row=>row.instructionId!=='caption-2'));
     assert.deepEqual(state.connectionOverrides,fixture.state.connectionOverrides);assert.deepEqual(state.connectionAuto,fixture.state.connectionAuto);
   }
+  assert.throws(()=>editOrchestrationOverrideV001({...fixture,state,kind:'caption',itemId:'caption-2',
+    selection:{preset:'panel-comic-frame'}}),/comic/i);
   state=editOrchestrationOverrideV001({...fixture,state,kind:'caption',itemId:'caption-2',selection:'Normal'});
   assert.equal(resolveOrchestrationDrawingViewV001({...fixture,state}).resolvedPlan.elements[1].visualState.background.panelPresetId,undefined);
   state=editOrchestrationOverrideV001({...fixture,state,kind:'caption',itemId:'caption-2',selection:'Reset'});
   assert.deepEqual(resolveOrchestrationDrawingViewV001({...fixture,state}).resolvedPlan,initial.resolvedPlan);
   assert.equal(bytes(fixture.state),stable);
 });
-test('CLI show retains finite background name after saving each choice',async()=>{
+test('CLI show retains each historical finite background name from saved v008 fixtures',async()=>{
   for(const [preset] of variants){const fixture=await storageFixture(preset);
     try{const loaded=await loadAutoPresentationV001(fixture);const rows=inspectAutoPresentationCaptionsV001({...loaded,query:{captionId:'caption-2'}});
       const text=formatAutoPresentationCaptionRowsV001(rows);assert.match(text,new RegExp(getPresentationPanelPresetV002(orchestrationCaptionChoiceToSelectionV001({preset}).presentation).label.replace(/[()]/g,'\\$&')));

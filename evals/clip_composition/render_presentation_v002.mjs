@@ -1217,7 +1217,7 @@ export function buildPresentationRenderApplicationResults(
       overlayFile: path.posix.join(artifactNames.overlays, path.basename(record.pngPath)),
       overlaySha256: record.pngSha256,
       ...(record.pulseStates === undefined ? {} : {pulse: {
-        presetVersion: PRESENTATION_PULSE_PRESET_V001.version,
+        presetVersion: record.inspection.pulse.program.presetVersion,
         metadata: structuredClone(record.element.presentationPulse),
         program: structuredClone(record.inspection.pulse.program),
         states: record.pulseStates.map(state => ({state: state.state,
@@ -2401,7 +2401,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       const normal = records[0];
       return {...normal, element, pulseStates: records,
         inspection: {...normal.inspection,
-          pulse: {presetVersion: PRESENTATION_PULSE_PRESET_V001.version,
+          pulse: {presetVersion: getPresentationPulseProgramV001({element, canvas: plan.canvas}).presetVersion,
             metadata: structuredClone(element.presentationPulse),
             program: getPresentationPulseProgramV001({element, canvas: plan.canvas}),
             states: records.map(record => ({state: record.state, ...record.inspection}))}}};

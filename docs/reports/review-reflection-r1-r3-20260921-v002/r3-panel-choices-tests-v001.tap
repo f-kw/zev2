@@ -1,0 +1,45 @@
+TAP version 13
+# Subtest: historical Panel retains three immutable saved presets with distinct local artwork and shared text/padding
+ok 1 - historical Panel retains three immutable saved presets with distinct local artwork and shared text/padding
+  ---
+  duration_ms: 1.029458
+  ...
+# Subtest: finite background rejects arbitrary paths, drawing fields, unknown IDs and changed geometry
+ok 2 - finite background rejects arbitrary paths, drawing fields, unknown IDs and changed geometry
+  ---
+  duration_ms: 0.302208
+  ...
+# Subtest: inspection-only plate omission retains Panel geometry without asset paint and cannot enter saved choices
+ok 3 - inspection-only plate omission retains Panel geometry without asset paint and cannot enter saved choices
+  ---
+  duration_ms: 0.217625
+  ...
+# Subtest: three historical backgrounds reload through production IO; new two-background edits, Normal and Reset preserve the old fixed Panel
+ok 4 - three historical backgrounds reload through production IO; new two-background edits, Normal and Reset preserve the old fixed Panel
+  ---
+  duration_ms: 31.451833
+  ...
+# Subtest: unchanged source with old rendering rule binding is rejected on read and before save
+ok 5 - unchanged source with old rendering rule binding is rejected on read and before save
+  ---
+  duration_ms: 3.303
+  ...
+# Subtest: one-item orchestration and UI payload retain background choice; Normal and Reset do not affect other captions/connections
+ok 6 - one-item orchestration and UI payload retain background choice; Normal and Reset do not affect other captions/connections
+  ---
+  duration_ms: 22.177417
+  ...
+# Subtest: CLI show retains each historical finite background name from saved v008 fixtures
+ok 7 - CLI show retains each historical finite background name from saved v008 fixtures
+  ---
+  duration_ms: 4.985625
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 125.745042

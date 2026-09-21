@@ -124,6 +124,7 @@ const targetFor = (state, id, selection = {preset: 'normal'}) => ({
   options: presets.map(([value, label]) => ({value, label, status: 'unchecked'})),
   peakOptions: [{id: 'peak-a', label: '一つ目の実測ピーク', displaySeconds: 1, status: 'unchecked'},
     {id: 'peak-b', label: '二つ目の実測ピーク', displaySeconds: 2, status: 'unchecked'}],
+  ...(state.paletteOptions ? {paletteOptions: state.paletteOptions} : {}),
 });
 const response = (body, status = 200) => ({ok: status >= 200 && status < 300, status, json: async () => clone(body)});
 
@@ -359,4 +360,26 @@ test('component: delayed Reset checking cannot save after the user moves to anot
   assert.equal(ui.service.saves.length, 0);
   assert(ui.editorText().includes(captions[1].text));
   assert(ui.checkText().includes('検査中'));
+});
+
+test('component: paired palette choice is saved with its background and survives a target reload', async t => {
+  const ui = await mount(t);
+  ui.service.state.paletteOptions = [
+    {id: 'ivory', label: 'アイボリー', backgroundColor: '#FFFDF8', fontColor: '#111827'},
+    {id: 'cool', label: '寒色', backgroundColor: '#EAF4FF', fontColor: '#142B49'},
+    {id: 'warm', label: '暖色', backgroundColor: '#FFF0DC', fontColor: '#4B2C16'},
+    {id: 'dark', label: '暗地', backgroundColor: '#172338', fontColor: '#F8FAFC'},
+  ];
+  await ui.choose('caption-a'); await ui.select('変更する表現', 'panel');
+  const first = ui.check('caption-a', {preset: 'panel', paletteId: 'ivory'});
+  await ui.select('背景と文字の配色', 'dark');
+  const selected = {preset: 'panel', paletteId: 'dark'};
+  first.resolve('applicable'); await settle();
+  assert.equal(ui.isDisabled(ui.button(saveLabel)), true, 'old palette check cannot validate the new palette');
+  ui.check('caption-a', selected).resolve('applicable'); await settle();
+  await ui.click(ui.button(saveLabel));
+  assert.deepEqual(ui.service.saves[0].selection, selected);
+  await ui.choose('caption-b'); await ui.choose('caption-a');
+  assert.equal(ui.label('select', '背景と文字の配色').value, 'dark');
+  assert.equal(ui.label('select', '変更する表現').value, 'panel');
 });

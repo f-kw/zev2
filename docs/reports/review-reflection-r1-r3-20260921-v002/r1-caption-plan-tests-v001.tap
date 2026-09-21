@@ -1,0 +1,95 @@
+TAP version 13
+# Subtest: exact source characters, child atom ownership and untouched captions survive splitting
+ok 1 - exact source characters, child atom ownership and untouched captions survive splitting
+  ---
+  duration_ms: 3.029583
+  ...
+# Subtest: save/reload recomputes selected repairs, and local cancellation preserves other work
+ok 2 - save/reload recomputes selected repairs, and local cancellation preserves other work
+  ---
+  duration_ms: 3.437709
+  ...
+# Subtest: short projection preserves duration and rejects second projection or truncated captions
+ok 3 - short projection preserves duration and rejects second projection or truncated captions
+  ---
+  duration_ms: 1.049542
+  ...
+# Subtest: missing source character is rejected before rendering
+ok 4 - missing source character is rejected before rendering
+  ---
+  duration_ms: 0.241834
+  ...
+# Subtest: repeated source character is rejected before rendering
+ok 5 - repeated source character is rejected before rendering
+  ---
+  duration_ms: 0.213542
+  ...
+# Subtest: text replacement is rejected before rendering
+ok 6 - text replacement is rejected before rendering
+  ---
+  duration_ms: 0.216834
+  ...
+# Subtest: missing observation is rejected before rendering
+ok 7 - missing observation is rejected before rendering
+  ---
+  duration_ms: 0.253167
+  ...
+# Subtest: unbound observation is rejected before rendering
+ok 8 - unbound observation is rejected before rendering
+  ---
+  duration_ms: 0.185833
+  ...
+# Subtest: unsupported action is rejected before rendering
+ok 9 - unsupported action is rejected before rendering
+  ---
+  duration_ms: 0.434875
+  ...
+# Subtest: empty duration is rejected before rendering
+ok 10 - empty duration is rejected before rendering
+  ---
+  duration_ms: 0.25375
+  ...
+# Subtest: overlapping child times is rejected before rendering
+ok 11 - overlapping child times is rejected before rendering
+  ---
+  duration_ms: 0.178958
+  ...
+# Subtest: unexplained child time is rejected before rendering
+ok 12 - unexplained child time is rejected before rendering
+  ---
+  duration_ms: 0.1595
+  ...
+# Subtest: hide in-range speech is rejected before rendering
+ok 13 - hide in-range speech is rejected before rendering
+  ---
+  duration_ms: 0.203
+  ...
+# Subtest: hide beyond selected review is rejected before rendering
+ok 14 - hide beyond selected review is rejected before rendering
+  ---
+  duration_ms: 0.194583
+  ...
+# Subtest: repair cannot overlap another subtitle or run after effects
+ok 15 - repair cannot overlap another subtitle or run after effects
+  ---
+  duration_ms: 0.479625
+  ...
+# Subtest: changed input bytes and rewritten saved plans are rejected
+ok 16 - changed input bytes and rewritten saved plans are rejected
+  ---
+  duration_ms: 3.494875
+  ...
+# Subtest: fresh process reload verifies saved observation bytes, including later tampering
+ok 17 - fresh process reload verifies saved observation bytes, including later tampering
+  ---
+  duration_ms: 37.861083
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 88.07725

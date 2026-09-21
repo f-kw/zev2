@@ -1,11 +1,13 @@
 import {createHash} from 'node:crypto';
-import {PRESENTATION_CAPTION_MOTION_PRESETS_V001, getPresentationCaptionMotionProgramV001}
+import {PRESENTATION_CAPTION_MOTION_PRESETS_V001, PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001, getPresentationCaptionMotionProgramV001}
   from './presentation_caption_motion_v001.mjs';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {PRESENTATION_EFFECT_TRIAL_PRESETS_V001} from './presentation_effects_v001.mjs';
-import {PRESENTATION_PANEL_PRESETS_V002, PRESENTATION_PANEL_ASSETS_V002, getPresentationPanelPresetV002}
+import {PRESENTATION_PANEL_PRESETS_V002, PRESENTATION_PANEL_ASSETS_V002, getPresentationPanelPresetV002,
+  PRESENTATION_PANEL_PALETTES_V003, PRESENTATION_PANEL_ALLOWED_PALETTES_V003, getPresentationPanelPalettePresetV003}
   from './presentation_panel_presets_v002.mjs';
-import {PRESENTATION_PULSE_PRESET_V001, resolvePresentationPulseTimingV001} from './presentation_pulse_v001.mjs';
+import {PRESENTATION_PULSE_PRESET_V001, PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001,
+  resolvePresentationPulseTimingV001, resolvePresentationPulseSpeechReturnTimingV001} from './presentation_pulse_v001.mjs';
 import {validatePresentationPulseEvidenceV001, presentationPulseEvidenceIdentityV001} from './presentation_pulse_evidence_v001.mjs';
 
 const reject = message => { throw new TypeError(`auto presentation: ${message}`); };
@@ -32,6 +34,10 @@ const contextIdentity = context => ({
   decisionInputRef: {fileSha256: context.decisionInputRef.fileSha256},
   renderingRulesRef: context.renderingRulesRef,
   pulseTimingEvidence: presentationPulseEvidenceIdentityV001(context.pulseTimingEvidence),
+  ...(context.pulseTimingProjection === undefined ? {} : {pulseTimingProjection: {
+    ...context.pulseTimingProjection, sourceBaselineRef: {
+      fileSha256: context.pulseTimingProjection.sourceBaselineRef.fileSha256,
+      canonicalSha256: context.pulseTimingProjection.sourceBaselineRef.canonicalSha256}}}),
 });
 export const sha256AutoPresentationStateV001 = value => sha256AutoPresentationV001({
   ...value, context: contextIdentity(value.context),
@@ -61,18 +67,45 @@ const rules = freeze({version: 'auto-presentation-rules-v008', role: 'Focus',
     preset: PRESENTATION_CAPTION_MOTION_PRESETS_V001.shake}});
 export const AUTO_PRESENTATION_RULES_REF_V008 = freeze({version: rules.version,
   contentSha256: sha256AutoPresentationV001(rules)});
+// Historical rules remain byte-identical. New fixed plans explicitly bind the
+// finite palette and speech-return additions; no old plan changes implicitly.
+const newRules = freeze({...rules, version: 'auto-presentation-rules-v009',
+  panel: {...rules.panel, newBackgrounds: ['plain', 'graph-paper'], palettes: PRESENTATION_PANEL_PALETTES_V003,
+    allowedPalettes: PRESENTATION_PANEL_ALLOWED_PALETTES_V003},
+  speechReturn: {bounce: PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001,
+    pulse: PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001}});
+export const AUTO_PRESENTATION_RULES_REF_V009 = freeze({version: newRules.version,
+  contentSha256: sha256AutoPresentationV001(newRules)});
+const currentRules = context => same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V009);
+function checkSelectionVersion(context, selection) {
+  if (currentRules(context)) {
+    if (selection.role === rules.panel.role && (!Object.hasOwn(selection, 'paletteId')
+      || selection.presentation === 'provisional-panel-comic-frame')) reject('new Panel selection requires a finite plain or graph-paper palette');
+  } else if (Object.hasOwn(selection, 'paletteId') || Object.hasOwn(selection, 'presetVersion')
+    || Object.hasOwn(selection, 'speechEndFrame')) reject('new finite selection requires rules v009');
+}
 const graphemeSegmenter = new Intl.Segmenter('ja', {granularity: 'grapheme'});
 
 function checkContext(baselinePlan, context) {
-  if (!exact(context, ['baselineRef', 'decisionInputRef', 'renderingRulesRef', 'pulseTimingEvidence'])) reject('invalid context');
+  if (!exact(context, ['baselineRef', 'decisionInputRef', 'renderingRulesRef', 'pulseTimingEvidence',
+    ...(Object.hasOwn(context, 'pulseTimingProjection') ? ['pulseTimingProjection'] : [])])) reject('invalid context');
   validatePresentationPulseEvidenceV001(context.pulseTimingEvidence);
+  if (context.pulseTimingProjection !== undefined) {
+    const projection = context.pulseTimingProjection, source = projection?.sourceBaselineRef;
+    if (!currentRules(context) || context.pulseTimingEvidence === null
+      || !exact(projection, ['schemaVersion', 'frameOffset', 'sourceBaselineRef'])
+      || projection.schemaVersion !== 'auto-presentation-pulse-frame-offset-v001'
+      || !Number.isSafeInteger(projection.frameOffset) || projection.frameOffset <= 0
+      || !exact(source, ['path', 'fileSha256', 'canonicalSha256']) || !nonempty(source.path)
+      || !digest(source.fileSha256) || !digest(source.canonicalSha256)) reject('invalid explicit pulse frame projection');
+  }
   const base = context.baselineRef;
   const decision = context.decisionInputRef;
   if (!exact(base, ['path', 'fileSha256', 'canonicalSha256']) || !nonempty(base.path)
     || !digest(base.fileSha256) || !digest(base.canonicalSha256)) reject('invalid baseline reference');
   if (!exact(decision, ['path', 'fileSha256']) || !nonempty(decision.path)
     || !digest(decision.fileSha256)) reject('invalid decision input reference');
-  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V008)) reject('rendering rules version differs');
+  if (!same(context.renderingRulesRef, AUTO_PRESENTATION_RULES_REF_V008) && !currentRules(context)) reject('rendering rules version differs');
   if (!object(baselinePlan) || baselinePlan.schemaVersion !== 'presentation-output-common-core-plan-v001'
     || !Array.isArray(baselinePlan.elements)) reject('invalid baseline plan');
   if (sha256AutoPresentationV001(baselinePlan) !== base.canonicalSha256) reject('baseline content differs');
@@ -114,13 +147,22 @@ function checkFocus(entry, withId = true) {
 function checkSelection(entry, withId = true) {
   if (entry?.role === rules.role) return checkFocus(entry, withId);
   if (entry?.role === rules.panel.role) {
-    if (!exact(entry, ['role', 'presentation', 'scope', ...(withId ? ['captionId'] : [])])
+    if (!exact(entry, ['role', 'presentation', 'scope', ...(withId ? ['captionId'] : []),
+      ...(Object.hasOwn(entry, 'paletteId') ? ['paletteId'] : [])])
       || entry.scope !== rules.panel.scope) reject('Panel requires a finite whole-caption preset without drawing fields');
-    getPresentationPanelPresetV002(entry.presentation);
+    if (Object.hasOwn(entry, 'paletteId')) getPresentationPanelPalettePresetV003(entry.presentation, entry.paletteId);
+    else getPresentationPanelPresetV002(entry.presentation);
     return;
   }
+  const speechReturn = Object.hasOwn(entry ?? {}, 'presetVersion') || Object.hasOwn(entry ?? {}, 'speechEndFrame');
+  const speechKeys = speechReturn ? ['presetVersion', 'speechEndFrame'] : [];
+  if (speechReturn && (!Number.isSafeInteger(entry.speechEndFrame) || entry.speechEndFrame < 0
+    || !((entry.role === rules.bounce.role && entry.presetVersion === PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001.version)
+      || (entry.role === rules.pulse.role && entry.presetVersion === PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001.version)))) {
+    reject('speech return requires a finite Bounce or Pulse version and bound speech end');
+  }
   if (entry?.role === rules.pulse.role) {
-    if (!exact(entry, ['role', 'presentation', 'scope', 'anchorPeakId', ...(withId ? ['captionId'] : [])])
+    if (!exact(entry, ['role', 'presentation', 'scope', 'anchorPeakId', ...speechKeys, ...(withId ? ['captionId'] : [])])
       || entry.presentation !== rules.pulse.presentation || entry.scope !== rules.pulse.scope
       || !nonempty(entry.anchorPeakId)) reject('Pulse Accent requires one measured peak and no drawing fields');
     return;
@@ -128,7 +170,7 @@ function checkSelection(entry, withId = true) {
   const preset = entry?.role === rules.vocal.role ? rules.vocal
     : entry?.role === rules.panel.role ? rules.panel
     : entry?.role === rules.bounce.role ? rules.bounce : entry?.role === rules.shake.role ? rules.shake : null;
-  if (preset === null || !exact(entry, ['role', 'presentation', 'scope', ...(withId ? ['captionId'] : [])])
+  if (preset === null || !exact(entry, ['role', 'presentation', 'scope', ...speechKeys, ...(withId ? ['captionId'] : [])])
     || entry.presentation !== preset.presentation || entry.scope !== preset.scope) {
     reject('Scale Accent / Panel Accent / Bounce Accent / Shake Accent requires a finite whole-caption preset without drawing fields');
   }
@@ -137,7 +179,8 @@ function checkSelection(entry, withId = true) {
 function motionElement(baselinePlan, captionId, selection) {
   const preset = selection.role === rules.bounce.role ? rules.bounce : rules.shake;
   const element = {...baselinePlan.elements.find(row => row.instructionId === captionId),
-    presentationMotion: {presentation: preset.presentation, presetVersion: preset.preset.version}};
+    presentationMotion: {presentation: preset.presentation, presetVersion: selection.presetVersion ?? preset.preset.version,
+      ...(selection.presetVersion === undefined ? {} : {speechEndFrame: selection.speechEndFrame})}};
   getPresentationCaptionMotionProgramV001({element, canvas: baselinePlan.canvas});
   return element;
 }
@@ -147,9 +190,12 @@ function pulseProgram(baselinePlan, context, captionId, selection) {
   const evidence = context.pulseTimingEvidence;
   const peak = evidence?.peaks.find(row => row.peakId === selection.anchorPeakId);
   if (!peak) reject('Pulse Accent peak is missing or unknown');
-  return resolvePresentationPulseTimingV001({
+  const resolveTiming = selection.presetVersion === undefined ? resolvePresentationPulseTimingV001 : resolvePresentationPulseSpeechReturnTimingV001;
+  return resolveTiming({
     element: baselinePlan.elements.find(element => element.instructionId === captionId),
     canvas: baselinePlan.canvas, peakSample: peak.peakSample, sampleRate: evidence.sampleRate,
+    ...(context.pulseTimingProjection === undefined ? {} : {frameOffset: context.pulseTimingProjection.frameOffset}),
+    ...(selection.presetVersion === undefined ? {} : {speechEndFrame: selection.speechEndFrame}),
   });
 }
 
@@ -197,15 +243,21 @@ export function materializeFiniteAutoPresentationCaptionV001({element, canvas, s
   if (selection.role !== rules.pulse.role && measuredPeak !== undefined) reject('only Pulse uses a measured peak');
   if (isMotion(selection)) return motionElement({elements: [element], canvas}, element.instructionId, selection);
   if (selection.role === rules.pulse.role) {
-    if (!exact(measuredPeak, ['peakId', 'peakSample', 'sampleRate'])
+    if (!exact(measuredPeak, ['peakId', 'peakSample', 'sampleRate',
+      ...(Object.hasOwn(measuredPeak ?? {}, 'frameOffset') ? ['frameOffset'] : [])])
       || measuredPeak.peakId !== selection.anchorPeakId) reject('finite Pulse requires its bound measured peak');
-    const program = resolvePresentationPulseTimingV001({element, canvas,
-      peakSample: measuredPeak.peakSample, sampleRate: measuredPeak.sampleRate});
+    const resolveTiming = selection.presetVersion === undefined ? resolvePresentationPulseTimingV001 : resolvePresentationPulseSpeechReturnTimingV001;
+    const program = resolveTiming({element, canvas,
+      peakSample: measuredPeak.peakSample, sampleRate: measuredPeak.sampleRate,
+      ...(measuredPeak.frameOffset === undefined ? {} : {frameOffset: measuredPeak.frameOffset}),
+      ...(selection.presetVersion === undefined ? {} : {speechEndFrame: selection.speechEndFrame})});
     return {...element, presentationPulse: {presentation: rules.pulse.presentation,
-      anchorPeakId: selection.anchorPeakId, anchorFrame: program.anchorFrame}};
+      anchorPeakId: selection.anchorPeakId, anchorFrame: program.anchorFrame,
+      ...(selection.presetVersion === undefined ? {} : {presetVersion: selection.presetVersion, speechEndFrame: selection.speechEndFrame})}};
   }
   if (selection.role === rules.panel.role) {
-    const panel = getPresentationPanelPresetV002(selection.presentation);
+    const panel = selection.paletteId === undefined ? getPresentationPanelPresetV002(selection.presentation)
+      : getPresentationPanelPalettePresetV003(selection.presentation, selection.paletteId);
     return {...element, visualState: {...element.visualState,
       textStyle: {...element.visualState.textStyle, ...panel.textStyle}, background: {...panel.background}}};
   }
@@ -228,6 +280,7 @@ function checkProposal(baselinePlan, context, proposal) {
   const selected = new Set();
   for (const effect of proposal.effects) {
     checkSelection(effect);
+    checkSelectionVersion(context, effect);
     if (!targets.includes(effect.captionId)) reject('caption ID is outside the judgment target set');
     if (selected.has(effect.captionId)) reject('duplicate or conflicting judgment');
     if (effect.role === 'Focus') {
@@ -278,7 +331,7 @@ function checkOverrides(baselinePlan, context, autoProposal, overrides) {
   for (const entry of overrides.entries) {
     if (entry?.role === 'Normal') {
       if (!exact(entry, ['captionId', 'role'])) reject('Normal has extra fields');
-    } else checkSelection(entry);
+    } else {checkSelection(entry); checkSelectionVersion(context, entry);}
     if (!captions.includes(entry.captionId)) reject('unknown override caption ID');
     if (selected.has(entry.captionId)) reject('duplicate override');
     if (entry.role === 'Focus') {
@@ -306,6 +359,8 @@ export function editAutoPresentationOverrideV001({baselinePlan, context, autoPro
   if (selection === 'Normal') entries.push({captionId, role: 'Normal'});
   else if (selection !== 'Reset') {
     checkSelection(selection, false);
+    checkSelectionVersion(context, selection);
+    if (selection.presentation === 'provisional-panel-comic-frame') reject('comic frame is unavailable for new edits');
     if (selection.role === 'Focus') {
       focusRange(baselinePlan.elements.find(element => element.instructionId === captionId), selection);
     }
@@ -338,7 +393,8 @@ export function resolveAutoPresentationV001({baselinePlan, context, autoProposal
       ? context.pulseTimingEvidence.peaks.find(row => row.peakId === selection.anchorPeakId) : undefined;
     const materialized = materializeFiniteAutoPresentationCaptionV001({element, canvas: baselinePlan.canvas,
       selection: finiteSelection, ...(peak === undefined ? {} : {measuredPeak: {
-        peakId: peak.peakId, peakSample: peak.peakSample, sampleRate: context.pulseTimingEvidence.sampleRate}})});
+        peakId: peak.peakId, peakSample: peak.peakSample, sampleRate: context.pulseTimingEvidence.sampleRate,
+        ...(context.pulseTimingProjection === undefined ? {} : {frameOffset: context.pulseTimingProjection.frameOffset})}})});
     if (selection.role === 'Focus') ranges.set(element.instructionId, focusRange(element, selection));
     return materialized;
   });

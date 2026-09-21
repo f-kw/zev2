@@ -40,6 +40,14 @@ export const PRESENTATION_PULSE_PRESET_V001 = freeze({
   ],
 });
 
+/** A separately saved phrase-end return; the short measured-peak pulse remains unchanged. */
+export const PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001 = freeze({
+  ...PRESENTATION_PULSE_PRESET_V001,
+  version: 'presentation-pulse-speech-return-v001',
+  returnStates: ['between-middle-maximum', 'middle', 'between-normal-middle'],
+  returnRule: 'normal-at-speech-end-or-one-frame-before-common-exit-fade',
+});
+
 function checkCaption(element, canvas) {
   const preset = PRESENTATION_PULSE_PRESET_V001;
   if (canvas?.fps !== preset.fps) reject('the finite preset requires 30 fps');
@@ -58,13 +66,27 @@ function checkCaption(element, canvas) {
   if (Object.hasOwn(element, 'presentationColorRange')) reject('expressions cannot be stacked');
 }
 
-function programForAnchor(element, canvas, anchorFrame) {
+function programForAnchor(element, canvas, anchorFrame, speechEndFrame) {
   checkCaption(element, canvas);
   if (!integer(anchorFrame)) reject('invalid derived anchor frame');
-  const preset = PRESENTATION_PULSE_PRESET_V001;
-  const excursion = preset.excursion.map(row => ({state: row.state,
+  const preset = speechEndFrame === undefined ? PRESENTATION_PULSE_PRESET_V001
+    : PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001;
+  if (speechEndFrame !== undefined && (!integer(speechEndFrame) || speechEndFrame <= anchorFrame
+    || speechEndFrame > element.endFrameExclusive)) reject('invalid bound speech end');
+  let excursion = preset.excursion.map(row => ({state: row.state,
     startFrame: anchorFrame + row.startOffset,
     endFrameExclusive: anchorFrame + row.endOffsetExclusive}));
+  if (speechEndFrame !== undefined) {
+    const normalReturnFrame = Math.min(speechEndFrame,
+      element.endFrameExclusive - preset.commonFadeFrames - 1);
+    const returnStartFrame = normalReturnFrame - preset.returnStates.length;
+    const peak = excursion.find(row => row.state === 'maximum');
+    if (returnStartFrame < peak.endFrameExclusive) reject('the unchanged measured peak and speech-end return do not fit');
+    excursion = [...excursion.filter(row => row.endFrameExclusive <= peak.startFrame),
+      {...peak, endFrameExclusive: returnStartFrame},
+      ...preset.returnStates.map((state, index) => ({state, startFrame: returnStartFrame + index,
+        endFrameExclusive: returnStartFrame + index + 1}))];
+  }
   const pulseStartFrame = excursion[0].startFrame;
   const pulseEndFrameExclusive = excursion.at(-1).endFrameExclusive;
   // A fully visible normal frame must exist immediately before and after the
@@ -79,6 +101,8 @@ function programForAnchor(element, canvas, anchorFrame) {
     {state: 'normal', startFrame: pulseEndFrameExclusive, endFrameExclusive: element.endFrameExclusive},
   ];
   return freeze({presentation: preset.presentation, presetVersion: preset.version,
+    ...(speechEndFrame === undefined ? {} : {speechEndFrame,
+      returnStartFrame: pulseEndFrameExclusive - preset.returnStates.length}),
     anchorFrame, pulseStartFrame, pulseEndFrameExclusive,
     normalBeforeFrame: pulseStartFrame - 1,
     maximumFrame: anchorFrame,
@@ -92,11 +116,14 @@ function programForAnchor(element, canvas, anchorFrame) {
 }
 
 /** Derive the one excursion from an actual measured sample, never AI seconds. */
-export function resolvePresentationPulseTimingV001({element, canvas, peakSample, sampleRate}) {
+export function resolvePresentationPulseTimingV001({element, canvas, peakSample, sampleRate, frameOffset = 0}) {
   checkCaption(element, canvas);
   if (!integer(peakSample) || !integer(sampleRate) || sampleRate === 0) reject('invalid measured peak sample');
-  const sampleTime = BigInt(peakSample) * BigInt(canvas.fps);
+  if (!integer(frameOffset)) reject('invalid explicit output-frame offset');
   const rate = BigInt(sampleRate);
+  // Keep native measured samples untouched: the offset is exact in the frame
+  // numerator even when the observation clock has fractional samples per frame.
+  const sampleTime = BigInt(peakSample) * BigInt(canvas.fps) + BigInt(frameOffset) * rate;
   if (sampleTime < BigInt(element.startFrame) * rate
     || sampleTime >= BigInt(element.endFrameExclusive) * rate) {
     reject('the measured peak itself is outside the caption');
@@ -106,15 +133,25 @@ export function resolvePresentationPulseTimingV001({element, canvas, peakSample,
   return programForAnchor(element, canvas, Number(frame));
 }
 
+/** The peak and phrase boundary use the same already-projected output clock. */
+export function resolvePresentationPulseSpeechReturnTimingV001({element, canvas, peakSample, sampleRate, speechEndFrame, frameOffset = 0}) {
+  if (!integer(speechEndFrame)) reject('invalid bound speech end');
+  const measured = resolvePresentationPulseTimingV001({element, canvas, peakSample, sampleRate, frameOffset});
+  return programForAnchor(element, canvas, measured.anchorFrame, speechEndFrame);
+}
+
 /** The renderer accepts only metadata created by the bound fixed-plan resolver. */
 export function getPresentationPulseProgramV001({element, canvas}) {
   const value = element?.presentationPulse;
-  if (!exact(value, ['presentation', 'anchorPeakId', 'anchorFrame'])
+  const speechReturn = value?.presetVersion === PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001.version;
+  if (!exact(value, speechReturn ? ['presentation', 'presetVersion', 'anchorPeakId', 'anchorFrame', 'speechEndFrame']
+    : ['presentation', 'anchorPeakId', 'anchorFrame'])
     || value.presentation !== PRESENTATION_PULSE_PRESET_V001.presentation
     || typeof value.anchorPeakId !== 'string' || value.anchorPeakId.trim().length === 0) {
     reject('expected finite pulse metadata with one measured peak ID');
   }
-  return programForAnchor(element, canvas, value.anchorFrame);
+  if (speechReturn && !integer(value.speechEndFrame)) reject('invalid bound speech end');
+  return programForAnchor(element, canvas, value.anchorFrame, speechReturn ? value.speechEndFrame : undefined);
 }
 
 /** Every finite native PNG belongs to the same logical caption and retains its times. */

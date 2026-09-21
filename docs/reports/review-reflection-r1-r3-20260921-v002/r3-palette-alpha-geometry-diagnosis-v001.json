@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "r3-palette-alpha-geometry-diagnosis-v001",
+  "failedRunPreserved": true,
+  "productionChanged": false,
+  "scriptUsed": {
+    "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-palette-qa-v002/qa-script-used.mjs",
+    "fileSha256": "4e3ff7c85885945c5ebd14160d47ba06b53db5a3ffb543f6d9c3e77708e69125"
+  },
+  "pngs": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-palette-qa-v002/short-plain-ivory-line.png",
+      "fileSha256": "a083189ba0d9472466fe3bd0b535216e7e0314000af3dd2cbebe9314d6743542"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-palette-qa-v002/short-plain-dark-line.png",
+      "fileSha256": "a2c7eef99d10bc9ee1504ab66e89035dc46e6410bef2b054850005fe2ea119fd"
+    }
+  ],
+  "observation": {
+    "alphaValueDifferences": 3073,
+    "nonzeroPixelSetDifferences": 0,
+    "opaquePixelSetDifferences": 0
+  },
+  "proposedScope": "Compare exact visible and opaque pixel sets plus alpha bounds for palette-independent glyph geometry. Retain numeric alpha hashes as measurements; do not require a color change to preserve intermediate opacity values. No numeric tolerance or altered drawing values."
+}

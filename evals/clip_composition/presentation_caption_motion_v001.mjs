@@ -54,12 +54,25 @@ export const PRESENTATION_CAPTION_MOTION_PRESETS_V001 = freeze({
     ]},
 });
 
+/** Explicit opt-in: hold the existing entrance peak until the bound phrase ends. */
+export const PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001 = freeze({
+  ...PRESENTATION_CAPTION_MOTION_PRESETS_V001.bounce,
+  version: 'presentation-bounce-speech-return-v001',
+  returnStates: ['between-middle-maximum', 'middle', 'between-middle-stable'],
+  returnRule: 'normal-at-speech-end-or-one-frame-before-common-exit-fade',
+});
+
 function checkedPreset(element, canvas) {
   const metadata = element?.presentationMotion;
-  if (!exact(metadata, ['presentation', 'presetVersion'])) reject('expected one finite presentation and preset version');
-  const preset = Object.values(PRESENTATION_CAPTION_MOTION_PRESETS_V001)
+  const speechReturn = metadata?.presetVersion === PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001.version;
+  if (!exact(metadata, speechReturn ? ['presentation', 'presetVersion', 'speechEndFrame']
+    : ['presentation', 'presetVersion'])) reject('expected one finite presentation and preset version');
+  const preset = speechReturn ? PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001
+    : Object.values(PRESENTATION_CAPTION_MOTION_PRESETS_V001)
     .find(value => value.presentation === metadata.presentation);
-  if (!preset || metadata.presetVersion !== preset.version) reject('unknown presentation or preset version');
+  if (!preset || metadata.presetVersion !== preset.version || metadata.presentation !== preset.presentation) {
+    reject('unknown presentation or preset version');
+  }
   if (canvas?.fps !== preset.fps || !integer(canvas.width) || canvas.width === 0
     || !integer(canvas.height) || canvas.height === 0) reject('the finite preset requires an integer canvas at 30 fps');
   if (element.kind !== 'speech-caption' || !integer(element.startFrame) || !integer(element.endFrameExclusive)
@@ -78,14 +91,44 @@ function checkedPreset(element, canvas) {
   if (['presentationColorRange', 'presentationPreset', 'presentationPulse']
     .some(key => Object.hasOwn(element, key))) reject('expressions cannot be stacked');
   if (element.displayFrameCount < preset.minimumDisplayFrames) {
-    reject('the complete entrance, eight fully visible stable frames and common exit fade do not fit');
+    reject(speechReturn ? 'the complete entrance and visible speech-end return do not fit'
+      : 'the complete entrance, eight fully visible stable frames and common exit fade do not fit');
   }
+  if (speechReturn && (!integer(metadata.speechEndFrame) || metadata.speechEndFrame <= element.startFrame
+    || metadata.speechEndFrame > element.endFrameExclusive)) reject('invalid bound speech end');
   return preset;
 }
 
 /** The original caption start is the entrance clock; it is not inferred speech onset. */
 export function getPresentationCaptionMotionProgramV001({element, canvas}) {
   const preset = checkedPreset(element, canvas);
+  if (preset.version === PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001.version) {
+    // The bound speech end is independent evidence. The unchanged exit fade
+    // limits the return so a fully opaque normal state is visible before it.
+    const speechEndFrame = element.presentationMotion.speechEndFrame;
+    const stableStartFrame = Math.min(speechEndFrame,
+      element.endFrameExclusive - preset.commonFadeFrames - 1);
+    const returnStartFrame = stableStartFrame - preset.returnStates.length;
+    const peak = preset.excursion.find(row => row.state === 'maximum');
+    if (returnStartFrame < element.startFrame + peak.endOffsetExclusive) {
+      reject('the unchanged entrance maximum and visible speech-end return do not fit');
+    }
+    const entrance = preset.excursion.filter(row => row.endOffsetExclusive <= peak.startOffset)
+      .map(row => ({state: row.state, startFrame: element.startFrame + row.startOffset,
+        endFrameExclusive: element.startFrame + row.endOffsetExclusive}));
+    const segments = [...entrance,
+      {state: 'maximum', startFrame: element.startFrame + peak.startOffset, endFrameExclusive: returnStartFrame},
+      ...preset.returnStates.map((state, index) => ({state, startFrame: returnStartFrame + index,
+        endFrameExclusive: returnStartFrame + index + 1})),
+      {state: 'stable', startFrame: stableStartFrame, endFrameExclusive: element.endFrameExclusive}];
+    const frames = [...Array.from({length: stableStartFrame - element.startFrame + 1},
+      (_, index) => element.startFrame + index), element.endFrameExclusive - preset.commonFadeFrames];
+    return freeze({presentation: preset.presentation, presetVersion: preset.version,
+      speechEndFrame, returnStartFrame, motionFrameCount: stableStartFrame - element.startFrame,
+      stableStartFrame, representativeFrame: element.startFrame + peak.startOffset,
+      segments, samples: [...new Set(frames)].sort((left, right) => left - right).map(frame => ({frame,
+        expectedState: segments.find(row => row.startFrame <= frame && frame < row.endFrameExclusive).state}))});
+  }
   const stableStartFrame = element.startFrame + preset.motionFrameCount;
   const segments = [...preset.excursion.map(row => ({state: row.state,
     startFrame: element.startFrame + row.startOffset,

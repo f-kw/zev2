@@ -1,0 +1,540 @@
+TAP version 13
+# Subtest: invalid automatic proposals are rejected before any output file is created
+    # Subtest: unknown caption
+    ok 1 - unknown caption
+      ---
+      duration_ms: 9.354417
+      ...
+    # Subtest: incomplete judgment
+    ok 2 - incomplete judgment
+      ---
+      duration_ms: 2.895
+      ...
+    # Subtest: extra drawing value
+    ok 3 - extra drawing value
+      ---
+      duration_ms: 2.219375
+      ...
+    # Subtest: unsupported partial range
+    ok 4 - unsupported partial range
+      ---
+      duration_ms: 2.558667
+      ...
+    1..4
+ok 1 - invalid automatic proposals are rejected before any output file is created
+  ---
+  duration_ms: 17.945084
+  ...
+# Subtest: invalid human overrides are rejected before their output is created
+    # Subtest: unknown caption
+    ok 1 - unknown caption
+      ---
+      duration_ms: 5.8025
+      ...
+    # Subtest: extra drawing value
+    ok 2 - extra drawing value
+      ---
+      duration_ms: 3.367459
+      ...
+    1..2
+ok 2 - invalid human overrides are rejected before their output is created
+  ---
+  duration_ms: 9.536208
+  ...
+# Subtest: human override saving rejects omitted and undefined documents without creating a file
+    # Subtest: omitted
+    ok 1 - omitted
+      ---
+      duration_ms: 2.373042
+      ...
+    # Subtest: explicit undefined
+    ok 2 - explicit undefined
+      ---
+      duration_ms: 2.274458
+      ...
+    1..2
+ok 3 - human override saving rejects omitted and undefined documents without creating a file
+  ---
+  duration_ms: 5.061
+  ...
+# Subtest: saved automatic judgment and human edits survive a fresh read, and saved Reset restores the automatic result
+ok 4 - saved automatic judgment and human edits survive a fresh read, and saved Reset restores the automatic result
+  ---
+  duration_ms: 7.615875
+  ...
+# Subtest: source byte changes invalidate saved judgment even when parsed JSON is unchanged
+    # Subtest: baselinePath
+    ok 1 - baselinePath
+      ---
+      duration_ms: 3.504875
+      ...
+    # Subtest: decisionInputPath
+    ok 2 - decisionInputPath
+      ---
+      duration_ms: 3.795875
+      ...
+    1..2
+ok 5 - source byte changes invalidate saved judgment even when parsed JSON is unchanged
+  ---
+  duration_ms: 7.547375
+  ...
+# Subtest: identical files may relocate while saved proposal and override paths remain provenance
+ok 6 - identical files may relocate while saved proposal and override paths remain provenance
+  ---
+  duration_ms: 10.576667
+  ...
+# Subtest: malformed JSON in either saved file is rejected during reload
+    # Subtest: autoProposalPath
+    ok 1 - autoProposalPath
+      ---
+      duration_ms: 2.503916
+      ...
+    # Subtest: overridesPath
+    ok 2 - overridesPath
+      ---
+      duration_ms: 2.743709
+      ...
+    1..2
+ok 7 - malformed JSON in either saved file is rejected during reload
+  ---
+  duration_ms: 5.505208
+  ...
+# Subtest: reload revalidates drawing fields rather than trusting a saved JSON file or its checksum
+    # Subtest: automatic proposal with a recomputed checksum
+    ok 1 - automatic proposal with a recomputed checksum
+      ---
+      duration_ms: 2.472333
+      ...
+    # Subtest: human override
+    ok 2 - human override
+      ---
+      duration_ms: 2.92325
+      ...
+    1..2
+ok 8 - reload revalidates drawing fields rather than trusting a saved JSON file or its checksum
+  ---
+  duration_ms: 5.60025
+  ...
+# Subtest: a valid-looking edit to a saved automatic proposal cannot retain its old content hash
+ok 9 - a valid-looking edit to a saved automatic proposal cannot retain its old content hash
+  ---
+  duration_ms: 2.760666
+  ...
+# Subtest: saving again cannot replace an existing automatic proposal or human edit file
+ok 10 - saving again cannot replace an existing automatic proposal or human edit file
+  ---
+  duration_ms: 3.975
+  ...
+# Subtest: unresolved and unrepresentable cases remain exceptions after saving and reloading
+ok 11 - unresolved and unrepresentable cases remain exceptions after saving and reloading
+  ---
+  duration_ms: 2.116791
+  ...
+# Subtest: entrance expressions preserve the normal plan and Color range while Normal and Reset retain fixed proposals
+ok 12 - entrance expressions preserve the normal plan and Color range while Normal and Reset retain fixed proposals
+  ---
+  duration_ms: 11.901292
+  ...
+# Subtest: unknown expressions, fields, partial ranges, duplicate IDs and previous rules cannot enter saved plans
+ok 13 - unknown expressions, fields, partial ranges, duplicate IDs and previous rules cannot enter saved plans
+  ---
+  duration_ms: 5.093833
+  ...
+# Subtest: each expression checks its own complete duration and never lengthens the fixed subtitle
+ok 14 - each expression checks its own complete duration and never lengthens the fixed subtitle
+  ---
+  duration_ms: 0.991709
+  ...
+# Subtest: CLI saves entrance changes to new files, reloads them, and Reset restores the exact fixed automatic assignment
+ok 15 - CLI saves entrance changes to new files, reloads them, and Reset restores the exact fixed automatic assignment
+  ---
+  duration_ms: 32.675042
+  ...
+# Subtest: Panel creates a finite plate and preserves caption content, layout lines, font size, time and source identity
+ok 16 - Panel creates a finite plate and preserves caption content, layout lines, font size, time and source identity
+  ---
+  duration_ms: 3.34175
+  ...
+# Subtest: all finite roles replace each other from Normal; Reset restores the fixed automatic role without stale plate or paint
+ok 17 - all finite roles replace each other from Normal; Reset restores the fixed automatic role without stale plate or paint
+  ---
+  duration_ms: 15.177792
+  ...
+# Subtest: Panel refuses partial text, free drawing values, stacking and unknown presets
+ok 18 - Panel refuses partial text, free drawing values, stacking and unknown presets
+  ---
+  duration_ms: 3.59825
+  ...
+# Subtest: a Panel layout exception remains unresolved in the fixed plan and survives a temporary human edit
+ok 19 - a Panel layout exception remains unresolved in the fixed plan and survives a temporary human edit
+  ---
+  duration_ms: 1.356667
+  ...
+# Subtest: Vocal changes only the selected caption size and preserves fixed text, lines, source, time and other elements
+ok 20 - Vocal changes only the selected caption size and preserves fixed text, lines, source, time and other elements
+  ---
+  duration_ms: 0.507625
+  ...
+# Subtest: Focus, Vocal and Normal replace each other and Reset restores either saved automatic role
+ok 21 - Focus, Vocal and Normal replace each other and Reset restores either saved automatic role
+  ---
+  duration_ms: 4.594875
+  ...
+# Subtest: Vocal cannot receive partial ranges, free drawing values, duplicate roles, or a prepainted baseline
+ok 22 - Vocal cannot receive partial ranges, free drawing values, duplicate roles, or a prepainted baseline
+  ---
+  duration_ms: 2.270666
+  ...
+# Subtest: forward-only rules reject an old revision even when its saved proposal hash is recomputed
+ok 23 - forward-only rules reject an old revision even when its saved proposal hash is recomputed
+  ---
+  duration_ms: 0.360625
+  ...
+# Subtest: content identity ignores object-key order while preserving array order and values
+ok 24 - content identity ignores object-key order while preserving array order and values
+  ---
+  duration_ms: 0.172625
+  ...
+# Subtest: the same complete target set and effects fix to one saved proposal without changing display order
+ok 25 - the same complete target set and effects fix to one saved proposal without changing display order
+  ---
+  duration_ms: 0.713791
+  ...
+# Subtest: no automatic judgment, completed all-Normal, and all effects removed retain the entire ordinary plan
+ok 26 - no automatic judgment, completed all-Normal, and all effects removed retain the entire ordinary plan
+  ---
+  duration_ms: 1.390875
+  ...
+# Subtest: changing one caption preserves every other caption, the non-caption element, and source/timing/layout content
+ok 27 - changing one caption preserves every other caption, the non-caption element, and source/timing/layout content
+  ---
+  duration_ms: 0.820292
+  ...
+# Subtest: human Focus can add a missing effect, Normal removes an automatic effect, and Reset restores that saved automatic result
+ok 28 - human Focus can add a missing effect, Normal removes an automatic effect, and Reset restores that saved automatic result
+  ---
+  duration_ms: 1.965833
+  ...
+# Subtest: the same human selection is idempotent and independent caption edits commute
+ok 29 - the same human selection is idempotent and independent caption edits commute
+  ---
+  duration_ms: 2.216375
+  ...
+# Subtest: fixing, editing, resolving, and Reset do not rewrite any supplied baseline, proposal, or prior override
+ok 30 - fixing, editing, resolving, and Reset do not rewrite any supplied baseline, proposal, or prior override
+  ---
+  duration_ms: 1.322792
+  ...
+# Subtest: rendering provenance identifies its input versions and human revision without changing the saved automatic reference
+ok 31 - rendering provenance identifies its input versions and human revision without changing the saved automatic reference
+  ---
+  duration_ms: 2.623208
+  ...
+# Subtest: a changed effective plan cannot replace the fixed baseline under its original reference
+ok 32 - a changed effective plan cannot replace the fixed baseline under its original reference
+  ---
+  duration_ms: 0.97675
+  ...
+# Subtest: unrepresentable and unresolved judgments remain explicit even when displayed normally or repaired by a person
+ok 33 - unrepresentable and unresolved judgments remain explicit even when displayed normally or repaired by a person
+  ---
+  duration_ms: 1.113041
+  ...
+# Subtest: human additions and Reset also work before any automatic judgment exists
+ok 34 - human additions and Reset also work before any automatic judgment exists
+  ---
+  duration_ms: 0.471625
+  ...
+# Subtest: a completed partial target set leaves other captions unprocessed, including after a human adds an effect there
+ok 35 - a completed partial target set leaves other captions unprocessed, including after a human adds an effect there
+  ---
+  duration_ms: 0.860667
+  ...
+# Subtest: a proposal is rejected before fixing for unknown targets, unsupported drawing, invalid coverage, and malformed exceptions
+    # Subtest: unknown caption
+    ok 1 - unknown caption
+      ---
+      duration_ms: 0.158708
+      ...
+    # Subtest: non-caption target
+    ok 2 - non-caption target
+      ---
+      duration_ms: 0.114458
+      ...
+    # Subtest: unknown role
+    ok 3 - unknown role
+      ---
+      duration_ms: 0.175
+      ...
+    # Subtest: Vocal cannot use the Focus preset
+    ok 4 - Vocal cannot use the Focus preset
+      ---
+      duration_ms: 0.143958
+      ...
+    # Subtest: unknown presentation
+    ok 5 - unknown presentation
+      ---
+      duration_ms: 0.135708
+      ...
+    # Subtest: partial scope
+    ok 6 - partial scope
+      ---
+      duration_ms: 0.111792
+      ...
+    # Subtest: extra drawing value
+    ok 7 - extra drawing value
+      ---
+      duration_ms: 0.114084
+      ...
+    # Subtest: duplicate selection
+    ok 8 - duplicate selection
+      ---
+      duration_ms: 0.308458
+      ...
+    # Subtest: unknown proposal field
+    ok 9 - unknown proposal field
+      ---
+      duration_ms: 0.104458
+      ...
+    # Subtest: empty target set
+    ok 10 - empty target set
+      ---
+      duration_ms: 0.115791
+      ...
+    # Subtest: only a missing array element
+    ok 11 - only a missing array element
+      ---
+      duration_ms: 0.107542
+      ...
+    # Subtest: known target followed by a missing array element
+    ok 12 - known target followed by a missing array element
+      ---
+      duration_ms: 0.182583
+      ...
+    # Subtest: duplicate target
+    ok 13 - duplicate target
+      ---
+      duration_ms: 0.176416
+      ...
+    # Subtest: unknown target in coverage
+    ok 14 - unknown target in coverage
+      ---
+      duration_ms: 0.115834
+      ...
+    # Subtest: effect outside processed set
+    ok 15 - effect outside processed set
+      ---
+      duration_ms: 0.116875
+      ...
+    # Subtest: exception outside processed set
+    ok 16 - exception outside processed set
+      ---
+      duration_ms: 0.111083
+      ...
+    # Subtest: incomplete judgment with empty effects
+    ok 17 - incomplete judgment with empty effects
+      ---
+      duration_ms: 0.100667
+      ...
+    # Subtest: missing completion with empty effects
+    ok 18 - missing completion with empty effects
+      ---
+      duration_ms: 0.067167
+      ...
+    # Subtest: unknown exception caption
+    ok 19 - unknown exception caption
+      ---
+      duration_ms: 0.104292
+      ...
+    # Subtest: unknown exception status
+    ok 20 - unknown exception status
+      ---
+      duration_ms: 0.35375
+      ...
+    # Subtest: empty exception reason
+    ok 21 - empty exception reason
+      ---
+      duration_ms: 0.130542
+      ...
+    # Subtest: extra exception field
+    ok 22 - extra exception field
+      ---
+      duration_ms: 0.115541
+      ...
+    # Subtest: duplicate exception
+    ok 23 - duplicate exception
+      ---
+      duration_ms: 0.11825
+      ...
+    # Subtest: selection and exception overlap
+    ok 24 - selection and exception overlap
+      ---
+      duration_ms: 0.111458
+      ...
+    1..24
+ok 36 - a proposal is rejected before fixing for unknown targets, unsupported drawing, invalid coverage, and malformed exceptions
+  ---
+  duration_ms: 4.412042
+  ...
+# Subtest: proposal and baseline references must agree with the current immutable inputs and installed rendering rules
+    # Subtest: baseline file bytes
+    ok 1 - baseline file bytes
+      ---
+      duration_ms: 0.137458
+      ...
+    # Subtest: baseline content
+    ok 2 - baseline content
+      ---
+      duration_ms: 0.097
+      ...
+    # Subtest: decision version
+    ok 3 - decision version
+      ---
+      duration_ms: 0.101125
+      ...
+    # Subtest: drawing rule version
+    ok 4 - drawing rule version
+      ---
+      duration_ms: 0.06775
+      ...
+    # Subtest: drawing rule content
+    ok 5 - drawing rule content
+      ---
+      duration_ms: 0.0715
+      ...
+    # Subtest: unknown context field
+    ok 6 - unknown context field
+      ---
+      duration_ms: 0.078708
+      ...
+    # Subtest: missing baseline locator
+    ok 7 - missing baseline locator
+      ---
+      duration_ms: 0.068166
+      ...
+    # Subtest: invalid baseline locator
+    ok 8 - invalid baseline locator
+      ---
+      duration_ms: 0.235625
+      ...
+    # Subtest: unknown baseline reference field
+    ok 9 - unknown baseline reference field
+      ---
+      duration_ms: 0.129792
+      ...
+    # Subtest: missing decision locator
+    ok 10 - missing decision locator
+      ---
+      duration_ms: 0.067709
+      ...
+    # Subtest: empty decision locator
+    ok 11 - empty decision locator
+      ---
+      duration_ms: 0.064917
+      ...
+    # Subtest: unknown decision reference field
+    ok 12 - unknown decision reference field
+      ---
+      duration_ms: 0.075334
+      ...
+    1..12
+ok 37 - proposal and baseline references must agree with the current immutable inputs and installed rendering rules
+  ---
+  duration_ms: 1.634667
+  ...
+# Subtest: moving identical inputs preserves the fixed judgment and human edits, and Reset still restores the saved automatic result
+    # Subtest: baselineRef
+    ok 1 - baselineRef
+      ---
+      duration_ms: 1.237167
+      ...
+    # Subtest: decisionInputRef
+    ok 2 - decisionInputRef
+      ---
+      duration_ms: 1.167625
+      ...
+    # Subtest: baselineRef and decisionInputRef
+    ok 3 - baselineRef and decisionInputRef
+      ---
+      duration_ms: 1.119459
+      ...
+    1..3
+ok 38 - moving identical inputs preserves the fixed judgment and human edits, and Reset still restores the saved automatic result
+  ---
+  duration_ms: 4.386833
+  ...
+# Subtest: invalid human selections and duplicate override entries cannot reach the renderer
+    # Subtest: unknown Normal target
+    ok 1 - unknown Normal target
+      ---
+      duration_ms: 0.256041
+      ...
+    # Subtest: unknown Reset target
+    ok 2 - unknown Reset target
+      ---
+      duration_ms: 0.174
+      ...
+    # Subtest: non-caption effect target
+    ok 3 - non-caption effect target
+      ---
+      duration_ms: 0.138708
+      ...
+    # Subtest: old trial name
+    ok 4 - old trial name
+      ---
+      duration_ms: 0.149458
+      ...
+    # Subtest: unknown role
+    ok 5 - unknown role
+      ---
+      duration_ms: 0.155583
+      ...
+    # Subtest: partial range
+    ok 6 - partial range
+      ---
+      duration_ms: 0.320958
+      ...
+    # Subtest: free rendering value
+    ok 7 - free rendering value
+      ---
+      duration_ms: 0.146167
+      ...
+    1..7
+ok 39 - invalid human selections and duplicate override entries cannot reach the renderer
+  ---
+  duration_ms: 3.069167
+  ...
+# Subtest: saved human edits cannot silently migrate to another automatic proposal or changed input content
+ok 40 - saved human edits cannot silently migrate to another automatic proposal or changed input content
+  ---
+  duration_ms: 1.25325
+  ...
+# Subtest: new finite palettes survive saved reload, Normal and Reset with text, clock and other caption unchanged
+ok 41 - new finite palettes survive saved reload, Normal and Reset with text, clock and other caption unchanged
+  ---
+  duration_ms: 10.937708
+  ...
+# Subtest: new plans reject comic, missing palette and arbitrary drawing values
+ok 42 - new plans reject comic, missing palette and arbitrary drawing values
+  ---
+  duration_ms: 0.418459
+  ...
+# Subtest: historical comic is read and Reset exactly; a new comic edit is rejected
+ok 43 - historical comic is read and Reset exactly; a new comic edit is rejected
+  ---
+  duration_ms: 1.164625
+  ...
+# Subtest: previous saved rendering-rule identity stays exact
+ok 44 - previous saved rendering-rule identity stays exact
+  ---
+  duration_ms: 2.711459
+  ...
+1..44
+# tests 104
+# suites 0
+# pass 104
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 127.182375

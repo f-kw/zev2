@@ -7,6 +7,7 @@ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {createOrchestrationContextV001, resolveOrchestrationDrawingViewV001,
   editOrchestrationOverrideV001, exportOrchestrationDrawingViewEvidenceV001} from './presentation_orchestration_v001.mjs';
 import {resolvePresentationPulseTimingV001} from './presentation_pulse_v001.mjs';
+import {PRESENTATION_PANEL_PALETTES_V003} from './presentation_panel_presets_v002.mjs';
 import {projectOriginalFrameV001, projectAudioPeakV001} from './presentation_orchestration_projection_v001.mjs';
 import {inspectEditingCaptionApplicabilityV001, assertEditingCaptionApplicabilityCurrentV001, assertEditingApplicabilityRulesCurrentV001}
   from './presentation_editing_applicability_v001.mjs';
@@ -305,7 +306,7 @@ function choiceFromSelection(selection) {
     const preset = {'provisional-panel': 'panel', 'provisional-panel-graph-paper': 'panel-graph-paper',
       'provisional-panel-comic-frame': 'panel-comic-frame'}[selection.presentation];
     demand(preset, 'Panel背景の種類を表示できません');
-    return {preset};
+    return {preset, ...(selection.paletteId === undefined ? {} : {paletteId: selection.paletteId})};
   }
   const preset = rolePreset[selection.role]; demand(preset, '表現の種類を表示できません');
   if (preset === 'color') return {preset, scope: selection.scope, ...(selection.scope === 'partial-caption'
@@ -318,9 +319,10 @@ export function editingTargetListV001(snapshot) {
   const captions = view.resolvedPlan.elements.map(row => {
     const selected = view.resolution.caption.captions.find(entry => entry.captionId === row.instructionId);
     const status = selected.hasOverride ? 'edited' : selected.automaticStatus;
-    const preset = choiceFromSelection(selected.effectiveSelection).preset;
+    const choice = choiceFromSelection(selected.effectiveSelection), preset = choice.preset;
     return {id: row.instructionId, text: row.text, startFrame: row.startFrame, endFrameExclusive: row.endFrameExclusive,
-      preset, presetLabel: labels[preset], hasOverride: selected.hasOverride, status,
+      preset, presetLabel: labels[preset] + (choice.paletteId ? ` / ${PRESENTATION_PANEL_PALETTES_V003[choice.paletteId].label}` : ''),
+      hasOverride: selected.hasOverride, status,
       statusLabel: selected.hasOverride ? '変更あり' : status === 'unresolved' ? '未解決' : status === 'unrepresentable' ? '自動案は適用不能' : '自動案'};
   });
   const connections = view.projection.connections.map(row => {
@@ -368,7 +370,7 @@ export async function editingTargetDetailsV001(snapshot, kind, itemId) {
     peakOptions.push({id: peak.peakId, displaySeconds, label: `音声のピーク ${displaySeconds.toFixed(3)}秒`,
       status, ...(reason ? {reason} : {})});
   }
-  const options = ['normal', 'color', 'scale', 'panel', 'panel-graph-paper', 'panel-comic-frame', 'pulse', 'bounce', 'shake'].map(value =>
+  const options = ['normal', 'color', 'scale', 'panel', 'panel-graph-paper', 'pulse', 'bounce', 'shake'].map(value =>
     ({value, label: labels[value], status: value === 'pulse' && peakOptions.length === 0 ? 'inapplicable' : 'unchecked',
       ...(value === 'pulse' && peakOptions.length === 0 ? {reason: 'この字幕の表示時刻条件を満たす実測ピークがありません'} : {})}));
   let colorRange;
@@ -382,7 +384,11 @@ export async function editingTargetDetailsV001(snapshot, kind, itemId) {
     ? {preset: 'color', scope: 'partial-caption', ...colorRange,
       selectedText: element.text.slice(colorRange.startUtf16, colorRange.endUtf16)} : selection;
   return {...target, kind, revision: snapshot.revision, selection: publicSelection,
-    options, peakOptions, ...(colorRange ? {colorRange} : {})};
+    options, peakOptions,
+    paletteOptions: snapshot.source.captionContext.renderingRulesRef.version === 'auto-presentation-rules-v009'
+      ? Object.values(PRESENTATION_PANEL_PALETTES_V003).map(row => ({id: row.id, label: row.label,
+        backgroundColor: row.backgroundColor, fontColor: row.fontColor})) : [],
+    ...(colorRange ? {colorRange} : {})};
 }
 export async function writeEditingSnapshotV001({snapshot, outputDirectory}) {
   await mkdir(outputDirectory);

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "r1-caption-native-environment-failure-v001",
+  "point": 7,
+  "status": "setup-failed-before-caption-render",
+  "cause": "tsx CLI attempted local IPC listen inside sandbox and received EPERM; its node resolved to v23.7.0 while the parent used v20.19.6",
+  "evidence": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v001/point-07/render-evidence/failure.json",
+      "bytes": 2259,
+      "fileSha256": "300217a2be719d64336fcdfe62882bb72302edccb087436b852a2ef9c326e0f2"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v001/point-07/render-evidence/draw-result.json",
+      "bytes": 1002,
+      "fileSha256": "a496d4257f007d6a5e6be0463b4c880a262b630c023502ef6a56cf67bb654bd6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v001/point-07/render-evidence/processes/0001-layout-inspection/stderr.txt",
+      "bytes": 863,
+      "fileSha256": "20251e3f324cb17ba1e0bf4d34ab3dc8a4c848e1c72a9411c1dd10f42db0d746"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v001/point-07/render-evidence/background-preservation.json",
+      "bytes": 3211,
+      "fileSha256": "b679e51451da19da191a62efbcd089f8a2529bc51cd534ea5627c9d52ec3292b"
+    }
+  ],
+  "commonSourceChanged": false,
+  "candidateProduced": false,
+  "approvedCaptionValuesChanged": false,
+  "proposal": "Keep failure evidence. Use explicit Node 20 PATH and standard sandbox escalation review with an unused derived output version. Do not evade rejection."
+}

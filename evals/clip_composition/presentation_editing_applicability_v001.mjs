@@ -172,7 +172,7 @@ function groupRecords(plan, physicalRecords) {
         metadata: structuredClone(element.presentationMotion), program: getPresentationCaptionMotionProgramV001({element, canvas: plan.canvas}),
         states: records.map(row => ({state: row.state, ...row.inspection}))}}};
     if (Object.hasOwn(element, 'presentationPulse')) return {...stable, element, pulseStates: records,
-      inspection: {...stable.inspection, pulse: {presetVersion: PRESENTATION_PULSE_PRESET_V001.version,
+      inspection: {...stable.inspection, pulse: {presetVersion: getPresentationPulseProgramV001({element, canvas: plan.canvas}).presetVersion,
         metadata: structuredClone(element.presentationPulse), program: getPresentationPulseProgramV001({element, canvas: plan.canvas}),
         states: records.map(row => ({state: row.state, ...row.inspection}))}}};
     return {...stable, element};

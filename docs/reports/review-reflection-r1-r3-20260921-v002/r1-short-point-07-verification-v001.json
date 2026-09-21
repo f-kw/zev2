@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "r1-caption-short-verification-v001",
+  "point": 7,
+  "status": "passed",
+  "completionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-07/render-evidence/completion.json",
+    "bytes": 790679,
+    "fileSha256": "12d92914fc973ef317413a67d01fe3215128722559b3252f2c370b20841756cb"
+  },
+  "candidateVideo": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-07/render/presentation-rendered-v002.mp4",
+    "fileSha256": "7ea9e631a20c28ebba29e8f70ae11a45b2ace91818ed0fdf943b6cf6a66e9478",
+    "bytes": 1150990
+  },
+  "frameCount": 128,
+  "captionRange": {
+    "first": "0..27",
+    "following": "85..128"
+  },
+  "preservation": {
+    "backgroundDecodedFramesSame": true,
+    "backgroundDecodedSha256": "cc4b9b3b5f2079b8f4e3bbf0545555a88a7541f8b6072f6883921b8c1f3e264e",
+    "aacPacketPayloadSame": true,
+    "logicalDecodedAudioSame": true,
+    "logicalDecodedSampleCount": 204800
+  },
+  "finalQc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 2,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "violations": [],
+    "captionChecks": [
+      {
+        "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000051",
+        "lineCount": 1,
+        "representativeFrame": 13,
+        "comparisonBasis": "exact-replay-and-native-finite-state-v001"
+      },
+      {
+        "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000052",
+        "lineCount": 1,
+        "representativeFrame": 106,
+        "comparisonBasis": "exact-replay-and-native-finite-state-v001"
+      }
+    ]
+  },
+  "completedFrameQcSummary": {
+    "status": "passed",
+    "method": "exact-replay-native-v1",
+    "violations": []
+  },
+  "nativeAssets": {
+    "nativeDraws": 11,
+    "bitmapReuses": 0,
+    "verifiedPairsAdded": 4
+  },
+  "formalTrustChanged": false,
+  "humanQuality": "not-evaluated",
+  "remaining": {
+    "6": "prepared; native guard rejected existing shared cache before media processing; corrective change held",
+    "9": "prepared; native not started",
+    "10": "prepared; native not started"
+  },
+  "setupCorrectionsApplied": 2,
+  "additionalSetupCorrectionProposed": 1
+}

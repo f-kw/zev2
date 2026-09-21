@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "r3-palette-qa-setup-correction-v001",
+  "classification": "test-harness-missing-existing-native-calibration",
+  "productionChanged": false,
+  "failedRunPreserved": true,
+  "failedSummary": "docs/reports/review-reflection-r1-r3-20260921-v002/r3-palette-qa-v001.json",
+  "scriptUsed": {
+    "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-palette-qa-v001/qa-script-used.mjs",
+    "fileSha256": "81e80418287a695983c6d537f9eb2a9752f2e006907c96505cacdacc71452d4c"
+  },
+  "measurements": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-palette-qa-v001/short-plain-ivory.png",
+      "instructionId": "short-plain-ivory.png",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 661,
+        "top": 819,
+        "right": 1259,
+        "bottom": 975,
+        "width": 598,
+        "height": 156
+      },
+      "lineCount": 0,
+      "lineRects": [],
+      "lineAlphaBounds": [],
+      "visibilityComparisonBasis": null,
+      "representativeFrame": null,
+      "changedPixelsAgainstInstructionOmittedFrame": null,
+      "appliedOverlayPropsCanonicalSha256": null,
+      "overlayFile": null,
+      "overlaySha256": null
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-palette-qa-v001/short-plain-ivory-line.png",
+      "instructionId": "short-plain-ivory-line.png",
+      "alphaMax": 1,
+      "alphaBounds": {
+        "left": 693,
+        "top": 846,
+        "right": 1224,
+        "bottom": 939,
+        "width": 531,
+        "height": 93
+      },
+      "lineCount": 0,
+      "lineRects": [],
+      "lineAlphaBounds": [],
+      "visibilityComparisonBasis": null,
+      "representativeFrame": null,
+      "changedPixelsAgainstInstructionOmittedFrame": null,
+      "appliedOverlayPropsCanonicalSha256": null,
+      "overlayFile": null,
+      "overlaySha256": null
+    }
+  ],
+  "requiredCorrection": "Use the existing common renderer sequence: render uncorrected native line mask, inspect alpha bounds, resolveVisibleCenterOffsetsV001 against the layout wrapper, then render the corrected Panel and line mask. No drawing values or tolerances change."
+}
