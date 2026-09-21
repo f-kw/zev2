@@ -1,0 +1,438 @@
+{
+  "schemaVersion": "q5-3-independent-technical-audit-v001",
+  "createdAt": "2026-09-21T02:48:35.371061+00:00",
+  "status": "passed-with-closed-findings",
+  "auditScope": "固定済み二案に限った保存・選択・併用・個別取消、共通原版からの再構成、既存短尺への対応付け。",
+  "repositoryHeadBeforeCheckpoint": "e0b58a45f5ca272d49b369c36932267f2413e03c",
+  "sourceRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-edit-plan.mjs",
+      "bytes": 26817,
+      "fileSha256": "b59080904369f9189166d9cd42a5b2d5980522c65ba5346b11a74ab8cd7ccba7"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-edit-plan.test.mjs",
+      "bytes": 25882,
+      "fileSha256": "8b98833b84761326fc6fd458aef8b95d2fc0dec6c9a836d897464dd68ec3022a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-reuse.mjs",
+      "bytes": 23468,
+      "fileSha256": "7f12b9d6f2d59991ae77c375f609dd2c38fbfca7479f61c1c1a97e3c54c9afb9"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-reuse.test.mjs",
+      "bytes": 10609,
+      "fileSha256": "ac4f09c92eb55a734192ddf070610fb5ecc64bce645c40381c69aa34b964dfa2"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-run.mjs",
+      "bytes": 1754,
+      "fileSha256": "8f7304d54a779718b0dcbd5197bef67e4be1e97d05c96efa88777e995abdfa8c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-run.test.mjs",
+      "bytes": 11484,
+      "fileSha256": "17d16435325dde010bdd3e02103ee028983af2ae2bd66261fa135199fa61086c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-store.mjs",
+      "bytes": 17368,
+      "fileSha256": "4df32dbd39de5f40834852d61c23fde41e6009c67d47e17048882251758ef85d"
+    }
+  ],
+  "fixedCatalogRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/fixed-catalog-v001.json",
+    "bytes": 4093,
+    "fileSha256": "d7d8d9fdc474bc239523fecef49c0fd24eb32db98af88eebab61cce880272c08"
+  },
+  "authorityReceiptRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/authority-receipt-v001.md",
+    "bytes": 5205,
+    "fileSha256": "dc021102e192113e3409cb18314039b13a19c966e047603a983a15eb910c5db6"
+  },
+  "preservedInputIndexRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/preserved-inputs-v001.json",
+    "bytes": 96774,
+    "fileSha256": "02968019e1f4acc353567c9b016bac99d13c09125fe4930f76b65c1167728455"
+  },
+  "independenceBoundary": {
+    "primarySourceInspection": "保存とCLIは独立静的監査。共通原版解決、再利用検証、既存の排他保存処理とポイント参照処理は接続境界を読んで照合。",
+    "ownRuntimeChecks": "承認指示の参照だけをメモリ内で別の既存JSONへ差し替えた読込を修正前後で確認。修正後は正しいcatalogの読込も確認。ファイルへの変更なし。",
+    "formalTestsExecutedByAuditor": 0,
+    "existingMediaBytesReadByAuditor": 0,
+    "oldMediaQaOrDecodingExecutedByAuditor": 0,
+    "newRenderingExecutedByAuditor": 0,
+    "newNetworkOrApiCallsExecutedByAuditor": 0,
+    "finalEvidenceHandling": "最終実行は担当者が実施。監査者は固定source・TAP・保存済みJSONの現物とSHAを照合した。",
+    "writeScope": "今回の独立監査保存ではこの監査JSON一件だけを新規作成。"
+  },
+  "checks": [
+    {
+      "name": "固定二案と範囲根拠",
+      "result": "passed",
+      "evidence": "実原版では旧二案の編集計画・比較計画の四つの受理済みbyte SHAを要求。保存入口は今回承認指示のSHAも固定して実byteを照合する。"
+    },
+    {
+      "name": "原版の共通性",
+      "result": "passed",
+      "evidence": "両案の既存復元器で同じ原版の内容・字幕・時計への束縛を照合し、有効な操作を一回の走査で解決する。編集済み出力を次の原版として受け付けない。"
+    },
+    {
+      "name": "保存競合と古い更新",
+      "result": "passed",
+      "evidence": "既存のprocess排他内で現在の保存byteを再読して更新前tokenと照合する。保存ごとに操作識別子を更新し、AからBを経てAへ戻った後の古い更新も拒否する。"
+    },
+    {
+      "name": "個別取消と他方の記録保持",
+      "result": "passed",
+      "evidence": "選択した一案の有効状態と操作理由だけを更新する。他方は保持し、両方を取り消すと原版の解決済み内容へ完全一致する。"
+    },
+    {
+      "name": "操作順序と二重適用",
+      "result": "passed",
+      "evidence": "二案の指定順が逆でも内容版と解決内容のSHAは同じ。同じ案を再度有効にしても効果を重ねない。"
+    },
+    {
+      "name": "ポイント回答の分離",
+      "result": "passed",
+      "evidence": "既存ポイントへの参照は確認対象の版・媒体・範囲を束縛するだけ。回答ファイルを読んで実行選択へ変換する接続はなく、保存操作は明示した模擬選択だけを受け付ける。"
+    },
+    {
+      "name": "出力の保存snapshot",
+      "result": "passed",
+      "evidence": "出力は取得時のcatalog・選択・解決済み内容・再利用対応を固定する。後から現在の選択を取り消しても、過去出力の検証は保存したsnapshotを再構成する。"
+    },
+    {
+      "name": "短尺再利用の局所同一性",
+      "result": "passed",
+      "evidence": "旧短尺と同じ局所内容、字幕payload全体、音声の範囲、描画規則を照合し、実媒体byteと主要な既存証拠を再確認する。旧完成記録の時計を上書きせず、新しい全体内の位置は別の対応として記録する。"
+    },
+    {
+      "name": "出力完了記録の範囲",
+      "result": "passed",
+      "evidence": "許された完了項目だけを受け付け、別processで保存内容から再構成する。既存短尺への対応付けを全編動画の新規生成として扱わない。"
+    }
+  ],
+  "closedInitialFindings": [
+    {
+      "id": "Q53-AUDIT-01",
+      "issue": "旧検証器で有効な別の編集案へ内容と参照SHAを整合させ直すと、新規入力として入り得た。",
+      "initialEvidenceOwner": "rootと共通原版解決担当の報告。監査者も修正前の固定SHA不在をsource上で確認した。",
+      "correction": "実原版の二案について、受理済み編集計画二件と比較計画二件のbyte SHAを固定。",
+      "independentConfirmation": "最終sourceの四SHA固定とfixture入口の制約を静的確認。別案の動的負例は監査者自身の実行とはしていない。",
+      "reportedDynamicConfirmation": "共通原版解決担当が旧検証器で合法な58frame省略案を作り、比較と参照SHAを再生成しても拒否されることを最終core検査内で確認。別比較窓と実原版のfixture偽装も拒否。",
+      "evidenceRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/core-tests-v001.tap",
+        "bytes": 3120,
+        "fileSha256": "f38f3ea403a698c1839e2f887ded5b4cd93274c70b142531e49ac997fba85cb1"
+      },
+      "status": "closed",
+      "limitedCorrectionRound": 1
+    },
+    {
+      "id": "Q53-AUDIT-02",
+      "issue": "承認指示の参照が、別の実在JSONとその正しいSHAでも受け付けられた。",
+      "initialStoreSha256": "a4a6ecb767b3a389a82f54b04ddf486f40bf017d708384a08dee86466c763fe6",
+      "independentReadOnlyReproduction": {
+        "mutation": "catalogの承認指示参照だけを同catalogの原版説明JSON参照へ置換。実ファイルは書き換えない。",
+        "before": "読込成功。原版説明JSONのpathが承認指示のpathとして返った。",
+        "after": "Q53_STORE_INVALIDで拒否。正しい固定catalogは読込成功。"
+      },
+      "correction": "承認済み受領本文のSHA dc021102e192113e3409cb18314039b13a19c966e047603a983a15eb910c5db6 を固定し、参照先の実byteも照合。",
+      "finalStoreSha256": "4df32dbd39de5f40834852d61c23fde41e6009c67d47e17048882251758ef85d",
+      "evidenceRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/cli-tests-v003.tap",
+        "bytes": 1371,
+        "fileSha256": "f56faf35e84f2bfa71d351856f13d454460824f4a8d35b496f89cd18ed655637"
+      },
+      "status": "closed",
+      "limitedCorrectionRound": 1
+    }
+  ],
+  "executionFailureAndResolution": {
+    "failureRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/reuse-tests-v001.tap",
+      "bytes": 4890,
+      "fileSha256": "ef569d4ca094d5265bffb19c46d79abe4ce8b245122f392c35cca7feb6414159"
+    },
+    "observedFailure": "再利用の初回専用検査は四群合格の後、巨大な不一致内容の差分表示を組み立てる途中でNodeのheap上限へ到達し、processが終了した。初回記録は保持し、全合格には数えない。",
+    "failedModuleSha256": "a31b859c80eedca1f1cc223e2ed4113b86fe31f7b4a8c94c8542b2b85487408c",
+    "limitedCorrectionRound": 2,
+    "correction": "厳密な深い一致判定を維持し、不一致では短い理由で拒否する。巨大な差分表示だけを作らない。",
+    "independentConfirmation": "修正sourceでisDeepStrictEqualによる同一性判定と短い失敗を確認し、最終再利用TAP六群と修正後CLI四群の全合格を保存記録から照合。",
+    "finalModuleSha256": "7f12b9d6f2d59991ae77c375f609dd2c38fbfca7479f61c1c1a97e3c54c9afb9",
+    "finalReuseEvidenceRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/reuse-tests-v002.tap",
+      "bytes": 1918,
+      "fileSha256": "aefd2a9d24682a782cd22e1ff5ff1e9501316cf3e32c9d39e0e2c85df5dd8c8a"
+    },
+    "postCorrectionCliEvidenceRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/cli-tests-v003.tap",
+      "bytes": 1371,
+      "fileSha256": "f56faf35e84f2bfa71d351856f13d454460824f4a8d35b496f89cd18ed655637"
+    },
+    "status": "closed"
+  },
+  "finalTestEvidence": [
+    {
+      "scope": "common-original-resolution",
+      "evidenceRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/core-tests-v001.tap",
+        "bytes": 3120,
+        "fileSha256": "f38f3ea403a698c1839e2f887ded5b4cd93274c70b142531e49ac997fba85cb1"
+      },
+      "testGroups": 11,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "executionByAuditor": false,
+      "auditorAction": "保存済み実行記録と対象sourceを読んで照合。検査は再実行していない。"
+    },
+    {
+      "scope": "short-reuse-boundary",
+      "evidenceRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/reuse-tests-v002.tap",
+        "bytes": 1918,
+        "fileSha256": "aefd2a9d24682a782cd22e1ff5ff1e9501316cf3e32c9d39e0e2c85df5dd8c8a"
+      },
+      "testGroups": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "executionByAuditor": false,
+      "auditorAction": "保存済み実行記録と対象sourceを読んで照合。検査は再実行していない。"
+    },
+    {
+      "scope": "real-saved-entry",
+      "evidenceRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/cli-tests-v003.tap",
+        "bytes": 1371,
+        "fileSha256": "f56faf35e84f2bfa71d351856f13d454460824f4a8d35b496f89cd18ed655637"
+      },
+      "testGroups": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "executionByAuditor": false,
+      "auditorAction": "保存済み実行記録と対象sourceを読んで照合。検査は再実行していない。"
+    }
+  ],
+  "finalTestGroupCount": 21,
+  "finalPassedTestGroupCount": 21,
+  "finalFailedTestGroupCount": 0,
+  "finalSkippedTestGroupCount": 0,
+  "reuseNegativeCaseAccounting": {
+    "cases": 48,
+    "countedWithinReuseGroups": true,
+    "additionalTestGroupsAdded": 0,
+    "basis": "再利用担当の内訳報告と専用検査sourceの変更ケースを確認。六群の内訳であり、総数へ重複加算しない。"
+  },
+  "realSavedEvidenceRoot": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy",
+  "realSavedObservationRefs": {
+    "four-states": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/observations.json",
+      "bytes": 156507,
+      "fileSha256": "03db489f1a5f0ea1ff22d5741bff6eab63312f45f207c0aca6fd05d6c5ae0c03"
+    },
+    "order-and-stale": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/order-and-stale/observations.json",
+      "bytes": 4273,
+      "fileSha256": "789e0e9bedfa23f8780e0a597e7751ca0094bcf8b34cccba0777ef2a1fea239e"
+    },
+    "competing-saves": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/competing-saves/observations.json",
+      "bytes": 2366,
+      "fileSha256": "072ddce7fd22b4ed8f24b8d67bfa85c0db07f602d6e8e17e2d6e4033b737a264"
+    },
+    "changed-files": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/changed-files/observations.json",
+      "bytes": 1432,
+      "fileSha256": "905f6132e5cc0b23361a9310ba76964ee2e9fb68a2cea8dd66c17325e8e1933d"
+    }
+  },
+  "realSavedStateResults": [
+    {
+      "state": "none",
+      "selection": {
+        "omit": false,
+        "add": false
+      },
+      "frameCount": 44408,
+      "captionCount": 325,
+      "reusedShortCount": 0,
+      "acquisitionProcessId": 45582,
+      "verificationProcessId": 45583,
+      "savedSelectionTokenMatched": true,
+      "outputCompletionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/none/completion.json",
+        "bytes": 2560,
+        "fileSha256": "428985289398be069f568d276f0b64e8b548d77057ebff244690871b4ef19f5b"
+      },
+      "existingLocalMedia": []
+    },
+    {
+      "state": "omit",
+      "selection": {
+        "omit": true,
+        "add": false
+      },
+      "frameCount": 44349,
+      "captionCount": 324,
+      "reusedShortCount": 1,
+      "acquisitionProcessId": 45591,
+      "verificationProcessId": 45592,
+      "savedSelectionTokenMatched": true,
+      "outputCompletionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/omit/completion.json",
+        "bytes": 2598,
+        "fileSha256": "35c5398cea3aa93dbcf6ef85bb17b4969a2215255a03b56362e1e2f879526baf"
+      },
+      "existingLocalMedia": [
+        {
+          "proposal": "omit",
+          "localFrameCount": 763,
+          "newGlobalRange": {
+            "startFrame": 11683,
+            "endFrameExclusive": 12446
+          },
+          "existingMediaRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+            "bytes": 8591313,
+            "fileSha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6"
+          }
+        }
+      ]
+    },
+    {
+      "state": "both",
+      "selection": {
+        "omit": true,
+        "add": true
+      },
+      "frameCount": 44694,
+      "captionCount": 327,
+      "reusedShortCount": 2,
+      "acquisitionProcessId": 45595,
+      "verificationProcessId": 45596,
+      "savedSelectionTokenMatched": true,
+      "outputCompletionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/both/completion.json",
+        "bytes": 2597,
+        "fileSha256": "20e0541ea32a9f82a108a2c2ebf75b7ef6252d962a69ca3f82770d788b1d896f"
+      },
+      "existingLocalMedia": [
+        {
+          "proposal": "omit",
+          "localFrameCount": 763,
+          "newGlobalRange": {
+            "startFrame": 11683,
+            "endFrameExclusive": 12446
+          },
+          "existingMediaRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+            "bytes": 8591313,
+            "fileSha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6"
+          }
+        },
+        {
+          "proposal": "add",
+          "localFrameCount": 624,
+          "newGlobalRange": {
+            "startFrame": 18519,
+            "endFrameExclusive": 19143
+          },
+          "existingMediaRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/after-render-v002/presentation-rendered-v002.mp4",
+            "bytes": 14839099,
+            "fileSha256": "98d73010ebfa93bf9b094781e279d705f51771d295ae3fbc9fe78d1f0f365737"
+          }
+        }
+      ]
+    },
+    {
+      "state": "add",
+      "selection": {
+        "omit": false,
+        "add": true
+      },
+      "frameCount": 44753,
+      "captionCount": 328,
+      "reusedShortCount": 1,
+      "acquisitionProcessId": 45604,
+      "verificationProcessId": 45605,
+      "savedSelectionTokenMatched": true,
+      "outputCompletionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/add/completion.json",
+        "bytes": 2601,
+        "fileSha256": "69b682421840e3f7cfb04e302af55710787fbc9e56cf372395a6481049149a15"
+      },
+      "existingLocalMedia": [
+        {
+          "proposal": "add",
+          "localFrameCount": 624,
+          "newGlobalRange": {
+            "startFrame": 18578,
+            "endFrameExclusive": 19202
+          },
+          "existingMediaRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/after-render-v002/presentation-rendered-v002.mp4",
+            "bytes": 14839099,
+            "fileSha256": "98d73010ebfa93bf9b094781e279d705f51771d295ae3fbc9fe78d1f0f365737"
+          }
+        }
+      ]
+    }
+  ],
+  "cancellationRestoresExactResolvedOriginal": true,
+  "staleAndAbaChangesRefused": true,
+  "historicalProofClosure": {
+    "scope": "旧二短尺の完成・比較・Normal完了・連結と素材片のproof・局所描画計画を読み、公開Afterの版と範囲へ閉じることを確認。旧媒体QAは再実行していない。",
+    "additionalReadReferences": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/normal/completion.json",
+        "bytes": 2100677,
+        "fileSha256": "c74d4fa1dc0ae1a54d1e27397af754c35325c3cb0fb7d3397a67f37af04596d9"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/normal/short-normal-plan.json",
+        "bytes": 30814,
+        "fileSha256": "45f44ac0aceec04f006c64ee1c3f9221c34e2de8553ade1877ea4a2ebe0a1d68"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/normal/short-normal-context.json",
+        "bytes": 8023,
+        "fileSha256": "6ac20eb41a6dabf6b31988556723ecc2343bab0e69a9f35b27a7dec04f4cff0f"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/piece-1/proof.json",
+        "bytes": 13075,
+        "fileSha256": "1ec29e720eff65540206bef175068e595e938bf1240f0719fc72fc941e0f281c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/piece-2/proof.json",
+        "bytes": 13081,
+        "fileSha256": "5815459c17b67c5fd2916ef15339eea1a7e3b38152cfb2857caad56056f4bc8c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-evidence-v002/normal/completion.json",
+        "bytes": 2535529,
+        "fileSha256": "5377994c47023599b6ccce2e1ac55a78299bb7f8bfef7cb438c6439a8abf9771"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-evidence-v002/normal/short-normal-plan.json",
+        "bytes": 30641,
+        "fileSha256": "206384076bd3313cc764d6ae92ca9e3dc3e5b8b1b9fb94e8a0950db3f5c1c44d"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-evidence-v002/normal/short-normal-context.json",
+        "bytes": 7227,
+        "fileSha256": "02d8ba2c671e83b0b39fedb776126b8ef957b5c4befe522e7824443c82e87b24"
+      }
+    ],
+    "pathHandling": "過去の一時描画pathと公開Afterのpathは異なるが、旧完成QCと再描画比較の実byte SHA・byte数は公開Afterへ一致する。再利用のために全ての過去一時媒体を復元する必要はない。",
+    "audioClockDistinction": "省略案は論理音声1220800sample・復号末尾832sample、追加案は998400sample・復号末尾0sample。双方の先頭priming1024sampleを別々の旧証拠として照合。"
+  },
+  "unresolvedFindingCount": 0,
+  "unresolvedFindings": []
+}
