@@ -14,10 +14,14 @@ export function mountReview(document, window, bundle, answerIO = null) {
   };
   const pointIntro = io.pointIntro ?? (() => review.intro);
   const pointBindingText = io.pointBindingText ?? (() => `${review.batch_id} / ${review.revision} · レビュー版 SHA-256: ${reviewSha}`);
+  const navigation = io.visiblePointIds === undefined ? review.points.map((_, index) => index)
+    : io.visiblePointIds.map(id => review.points.findIndex(point => point.point_id === id));
+  if (!navigation.length || navigation.some(index => index < 0) || new Set(navigation).size !== navigation.length)
+    throw new Error('表示するポイントの指定が一致しません。');
   const $ = (name) => document.getElementById(name);
   const text = (name, value) => { $(name).textContent = value; };
-  let pointIndex = 0, viewIndex = 0, expanded = false;
-  let answers = blankAnswers(review, reviewSha), storage = null;
+  let pointIndex = navigation[0], viewIndex = 0, expanded = false;
+  let answers = io.initialAnswers ? validateAnswers(io.initialAnswers(), review, reviewSha) : blankAnswers(review, reviewSha), storage = null;
   function saveStatus(message, error = false) { text('save-status', message); $('save-status').classList.toggle('error', error); }
   try { storage = window.localStorage; answers = validateAnswers(io.load(storage), review, reviewSha); saveStatus('この端末の回答を読み込みました。未回答は未回答のまま残ります。'); }
   catch (error) { saveStatus(`端末の保存を読み込めませんでした。回答ファイルの取り出しは使えます。\n${error.message}`, true); }
@@ -79,7 +83,12 @@ export function mountReview(document, window, bundle, answerIO = null) {
     persist();
   }
   function renderPoint(focus = false) {
-    player.pause(); viewIndex = Math.max(0, point().views.findIndex(v => v.role === 'after' || v.role === 'candidate')); expanded = false;
+    player.pause();
+    const initialView = io.initialViewId?.(point());
+    viewIndex = initialView === undefined ? Math.max(0, point().views.findIndex(v => v.role === 'after' || v.role === 'candidate'))
+      : point().views.findIndex(v => v.view_id === initialView);
+    if (viewIndex < 0) throw new Error('最初に表示する動画がポイントに属していません。');
+    expanded = false;
     const p = point(), a = answer();
     text('intro', pointIntro(p)); text('binding', pointBindingText(p));
     text('point-number', `POINT ${pointIndex+1} / ${review.points.length} · ${p.point_id}`);
@@ -92,19 +101,21 @@ export function mountReview(document, window, bundle, answerIO = null) {
       input.addEventListener('change', readForm); wrap.append(input, document.createTextNode(label)); return wrap;
     }));
     $('comment').value = a.comment;
-    $('previous').disabled = pointIndex === 0; $('next').disabled = pointIndex === review.points.length-1;
-    $('point-nav').replaceChildren(...review.points.map((item,index) => {
+    const position = navigation.indexOf(pointIndex);
+    $('previous').disabled = position === 0; $('next').disabled = position === navigation.length-1;
+    $('point-nav').replaceChildren(...navigation.map(index => {
+      const item = review.points[index];
       const button=document.createElement('button'); button.textContent=`${index+1}. ${item.title}`;
       if(index === pointIndex) button.setAttribute('aria-current','step');
       button.addEventListener('click',()=>{pointIndex=index;renderPoint(true);}); return button;
     }));
     selectView(); summary(); if(focus) $('point-title').focus();
   }
-  text('batch-title', review.title);
+  text('batch-title', io.title ?? review.title);
   $('play').addEventListener('click', () => player.play()); $('replay').addEventListener('click', () => player.play()); $('pause').addEventListener('click', () => player.pause());
   $('context').addEventListener('click', () => { expanded=!expanded; selectView(); });
-  $('previous').addEventListener('click', () => { if(pointIndex>0){pointIndex--;renderPoint(true);} });
-  $('next').addEventListener('click', () => { if(pointIndex<review.points.length-1){pointIndex++;renderPoint(true);} });
+  $('previous').addEventListener('click', () => { const position=navigation.indexOf(pointIndex); if(position>0){pointIndex=navigation[position-1];renderPoint(true);} });
+  $('next').addEventListener('click', () => { const position=navigation.indexOf(pointIndex); if(position<navigation.length-1){pointIndex=navigation[position+1];renderPoint(true);} });
   $('comment').addEventListener('input',readForm);
   $('export').addEventListener('click', () => {
     player.pause(); validateAnswers(answers, review, reviewSha);

@@ -5,8 +5,9 @@ import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {ANSWERS, canonical, blankAnswers, validateAnswers, recordAnswer, storageKey} from './core.mjs';
-import {createSessionPackage, blankSessionAnswers, toAggregateAnswers, validateSessionAnswers} from './session-core.mjs';
+import {createSessionPackage, blankSessionAnswers, toAggregateAnswers, validateSessionAnswers, recordNumberedChatAnswers, readRetrySessionAnswers, mergeRetrySessionAnswers} from './session-core.mjs';
 import {createSessionAnswerIO, mountPointReviewSession} from './session-app.mjs';
+import {createReviewSessionRetryBundle, renderReviewSessionHtml} from './session-build.mjs';
 
 const repo = fileURLToPath(new URL('../..', import.meta.url));
 const hash = value => createHash('sha256').update(canonical(value)).digest('hex');
@@ -202,4 +203,93 @@ test('a different display package is rejected before the existing app is mounted
   const wrongPoint = structuredClone(bundle); wrongPoint.review.points[0].question += '別の問い';
   assert.throws(() => mountPointReviewSession(page.document, page.window, wrongPoint));
   assert.equal(page.document.getElementById('point-title').textContent, '');
+});
+
+async function retryFixture() {
+  const {session, bundle} = await fixture();
+  const entries = session.display_review.points.map((point, index) => ({number: index + 1,
+    choice: [2, 8].includes(index) ? 'no_decision' : 'good', comment: '',
+    raw_response: `【技術試験用・本人回答ではありません】${index + 1}`, source: 'chat', answered_at: '2026-09-21T04:00:00.000Z'}));
+  const received = recordNumberedChatAnswers(session, blankSessionAnswers(session), entries);
+  received.batches[0].answers.answers[2].playback_started_view_ids = ['background-plain'];
+  const requested = [{point_id: session.display_review.points[2].point_id, initial_view_id: 'background-graph-paper'},
+    {point_id: session.display_review.points[8].point_id, initial_view_id: 'Q5-AFTER-VIEW'}];
+  return {session, bundle, received, retryBundle: createReviewSessionRetryBundle(bundle, received, requested)};
+}
+
+test('retry uses only original points 3 and 9 while keeping all eight other received answers unchanged', async () => {
+  const {session, bundle, received, retryBundle} = await retryFixture(), page = sessionPage();
+  const originalBytes = canonical({bundle, received});
+  const oldKey = `zev-point-review-session:${session.display_review_sha256}`;
+  page.storage.setItem(oldKey, JSON.stringify(received));
+  const app = mountPointReviewSession(page.document, page.window, retryBundle), $ = id => page.document.getElementById(id);
+  assert.deepEqual($('point-nav').children.map(button => button.textContent), ['3. 背景の三種類', '9. 説明の残り方と、前後のつながり']);
+  assert.match($('point-number').textContent, /^POINT 3 \/ 10/); assert.equal($('previous').disabled, true);
+  assert.equal($('view-label').textContent, '方眼紙（手選択）'); assert.equal($('answer-state').textContent, '未回答');
+  assert.equal($('comment').value, ''); assert.equal($('view-controls').children.length, 3);
+  assert.deepEqual(app.getAnswers().answers[2].playback_started_view_ids, ['background-plain']);
+  await choose(page, 'good', '【技術試験用】再確認3');
+  await $('next').click(); assert.match($('point-number').textContent, /^POINT 9 \/ 10/);
+  assert.equal($('next').disabled, true); assert.equal($('view-controls').children.length, 2);
+  assert.equal($('question').textContent, session.display_review.points[8].question);
+  await choose(page, 'both_usable', '【技術試験用】再確認9');
+  await $('previous').click(); assert.match($('point-number').textContent, /^POINT 3 \/ 10/);
+  assert.equal($('answer-state').textContent, '良い');
+  await $('export').click();
+  const packet = JSON.parse(await page.downloads[0].text());
+  const answers = readRetrySessionAnswers(retryBundle.session_package, retryBundle.retry, packet);
+  const all = toAggregateAnswers(session, answers).answers, before = toAggregateAnswers(session, received).answers;
+  for (let index = 0; index < all.length; index++) if (![2, 8].includes(index)) assert.deepEqual(all[index], before[index]);
+  assert.equal(all[2].choice, 'good'); assert.equal(all[8].choice, 'both_usable');
+  assert.deepEqual(answers.batches.map(batch => batch.review), received.batches.map(batch => batch.review));
+  assert.equal(page.storage.getItem(oldKey), JSON.stringify(received));
+  assert.match([...page.storage.values.keys()].find(key => key !== oldKey), /:retry:/);
+  const restored = sessionPage(page.storage);
+  assert.deepEqual(mountPointReviewSession(restored.document, restored.window, retryBundle).getAnswers(), app.getAnswers());
+  assert.equal(canonical({bundle, received}), originalBytes);
+});
+
+test('retry packets reject old ten-point files, another retry, changed protected answers and stale received state', async () => {
+  const {session, received, retryBundle} = await retryFixture(), retrySession = retryBundle.session_package;
+  const io = createSessionAnswerIO(retrySession, retryBundle.retry), draft = io.initialAnswers();
+  const before = canonical(received), packet = JSON.parse(io.serialize(draft));
+  assert.throws(() => io.parse(JSON.stringify(received), draft), /fields do not match/);
+  const other = structuredClone(packet); other.retry_sha256 = 'f'.repeat(64);
+  assert.throws(() => io.parse(JSON.stringify(other), draft), /another retry/);
+  const wrong = structuredClone(packet); wrong.answers.batches[0].answers.answers[0].raw_response += ' changed';
+  assert.throws(() => io.parse(JSON.stringify(wrong), draft), /original answer/);
+  const watched = structuredClone(packet); watched.answers.batches[0].answers.answers[0].playback_started_view_ids.push('short-after');
+  assert.throws(() => io.parse(JSON.stringify(watched), draft), /outside the requested retry/);
+  const storage = new SessionMemoryStorage();
+  storage.setItem(`zev-point-review-session:${retrySession.display_review_sha256}:retry:${retryBundle.retry.sha256}`, JSON.stringify(watched.answers));
+  assert.throws(() => io.load(storage), /outside the requested retry/);
+  const changedDisplay = toAggregateAnswers(retrySession, watched.answers);
+  assert.throws(() => io.serialize(changedDisplay), /outside the requested retry/);
+  assert.throws(() => io.save(new SessionMemoryStorage(), changedDisplay), /outside the requested retry/);
+  const stale = structuredClone(received); stale.batches[0].answers.answers[2].comment = 'changed';
+  assert.throws(() => mergeRetrySessionAnswers(retrySession, retryBundle.retry, stale, packet), /no longer current/);
+  assert.deepEqual(mergeRetrySessionAnswers(retrySession, retryBundle.retry, received, packet), received);
+  let edited = answer(retrySession, draft, 2, 'good', '【技術試験用】再回答');
+  const returned = JSON.parse(io.serialize(edited)), merged = mergeRetrySessionAnswers(retrySession, retryBundle.retry, received, returned);
+  assert.equal(merged.batches[0].answers.answers[2].choice, 'good');
+  assert.deepEqual(merged.batches[3].answers.answers[0], received.batches[3].answers.answers[0]);
+  validateSessionAnswers(session, merged); assert.equal(canonical(received), before);
+});
+
+test('retry keeps eight received answers even if storage is unavailable and validates generated bundle bindings', async () => {
+  const {received, retryBundle} = await retryFixture();
+  const page = sessionPage({getItem() {throw new Error('test read denied');}, setItem() {throw new Error('test write denied');}});
+  const app = mountPointReviewSession(page.document, page.window, retryBundle), $ = id => page.document.getElementById(id);
+  assert.match($('save-status').textContent, /読み込めません/);
+  assert.equal(app.getAnswers().answers.filter(answer => answer.source !== null).length, 8);
+  await choose(page, 'good', '【技術試験用】端末保存不可'); await $('export').click();
+  const packet = JSON.parse(await page.downloads[0].text());
+  const answers = readRetrySessionAnswers(retryBundle.session_package, retryBundle.retry, packet);
+  assert.deepEqual(answers.batches[4].answers, received.batches[4].answers);
+  const rendered = await renderReviewSessionHtml(retryBundle);
+  assert.equal((rendered.html.match(/<video /g) || []).length, 1);
+  const changed = structuredClone(retryBundle); changed.retry.sha256 = 'f'.repeat(64);
+  await assert.rejects(renderReviewSessionHtml(changed), /SHAが一致しません/);
+  const foreign = structuredClone(retryBundle); foreign.retry.points[0].initial_view_id = 'Q5-AFTER-VIEW';
+  await assert.rejects(renderReviewSessionHtml(foreign), /initial view does not match/);
 });

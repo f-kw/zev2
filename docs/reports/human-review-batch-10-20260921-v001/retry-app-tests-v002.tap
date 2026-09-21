@@ -1,0 +1,50 @@
+TAP version 13
+# Subtest: session storage/export contains five unchanged original review bindings and form edits remain editable
+ok 1 - session storage/export contains five unchanged original review bindings and form edits remain editable
+  ---
+  duration_ms: 59.56075
+  ...
+# Subtest: imports preserve current answers, merge other points, and reject replacement even before a successful save
+ok 2 - imports preserve current answers, merge other points, and reject replacement even before a successful save
+  ---
+  duration_ms: 77.736875
+  ...
+# Subtest: one existing UI navigates all ten points, shows each original introduction, and exports original answers
+ok 3 - one existing UI navigates all ten points, shows each original introduction, and exports original answers
+  ---
+  duration_ms: 56.118
+  ...
+# Subtest: UI imports cannot silently replace answers; storage denial still permits complete original-batch export
+ok 4 - UI imports cannot silently replace answers; storage denial still permits complete original-batch export
+  ---
+  duration_ms: 65.987542
+  ...
+# Subtest: a different display package is rejected before the existing app is mounted
+ok 5 - a different display package is rejected before the existing app is mounted
+  ---
+  duration_ms: 1.881375
+  ...
+# Subtest: retry uses only original points 3 and 9 while keeping all eight other received answers unchanged
+ok 6 - retry uses only original points 3 and 9 while keeping all eight other received answers unchanged
+  ---
+  duration_ms: 104.917083
+  ...
+# Subtest: retry packets reject old ten-point files, another retry, changed protected answers and stale received state
+ok 7 - retry packets reject old ten-point files, another retry, changed protected answers and stale received state
+  ---
+  duration_ms: 128.683292
+  ...
+# Subtest: retry keeps eight received answers even if storage is unavailable and validates generated bundle bindings
+ok 8 - retry keeps eight received answers even if storage is unavailable and validates generated bundle bindings
+  ---
+  duration_ms: 75.824166
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 613.675375

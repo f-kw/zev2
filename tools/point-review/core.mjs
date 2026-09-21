@@ -136,5 +136,6 @@ export function frameRange(review, view, expanded = false) {
   const start = expanded ? view.context_start_frame : view.start_frame;
   const end = expanded ? view.context_end_frame : view.end_frame;
   return {start: start * m.fps_den / m.fps_num, end: end * m.fps_den / m.fps_num, start_frame: start, end_frame: end,
+    ends_at_media_end: end === m.total_frames, last_frame_start_seconds: (end - 1) * m.fps_den / m.fps_num,
     timeline_start_frame: m.timeline_start_frame + start, timeline_end_frame: m.timeline_start_frame + end};
 }

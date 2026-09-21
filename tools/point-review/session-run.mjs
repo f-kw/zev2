@@ -3,8 +3,8 @@ import {resolve,join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {canonical} from './core.mjs';
 import {sha256} from './build.mjs';
-import {buildReviewSession,verifySessionDigests} from './session-build.mjs';
-import {validateSessionAnswers,mergeSessionAnswers,recordNumberedChatAnswers} from './session-core.mjs';
+import {buildReviewSession,verifySessionDigests,verifySessionRetryBundle} from './session-build.mjs';
+import {validateSessionAnswers,mergeSessionAnswers,mergeRetrySessionAnswers,recordNumberedChatAnswers} from './session-core.mjs';
 
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
 export function summarizeSessionAnswers(session,answers){
@@ -43,12 +43,17 @@ export async function runSessionCommand(args){
   const [command,...paths]=args;
   if(command==='build'&&paths.length===2)return buildReviewSession({manifestPath:resolve(paths[0]),outputDir:resolve(paths[1])});
   if(command==='verify'&&paths.length===2){const session=verifySessionDigests(await read(paths[0])),answers=await read(paths[1]);return summarizeSessionAnswers(session,answers);}
+  if(command==='import-retry'&&paths.length===4){
+    const bundle=verifySessionRetryBundle(await read(paths[0])),current=await read(paths[1]),packet=await read(paths[2]);
+    const answers=mergeRetrySessionAnswers(bundle.session_package,bundle.retry,current,packet);
+    return saveReceipt(bundle.session_package,answers,paths[3],'returned-retry-answer-file');
+  }
   if(['import','chat'].includes(command)&&paths.length===4){
     const session=verifySessionDigests(await read(paths[0])),current=await read(paths[1]),incoming=await read(paths[2]);
     validateSessionAnswers(session,current);
     const answers=command==='import'?mergeSessionAnswers(session,current,incoming):recordNumberedChatAnswers(session,current,incoming);
     return saveReceipt(session,answers,paths[3],command==='import'?'returned-session-answer-file':'chat');
   }
-  throw new Error('Usage: session-run.mjs build MANIFEST NEW_DIR | verify PACKAGE ANSWERS | import|chat PACKAGE CURRENT INCOMING NEW_DIR');
+  throw new Error('Usage: session-run.mjs build MANIFEST NEW_DIR | verify PACKAGE ANSWERS | import|chat PACKAGE CURRENT INCOMING NEW_DIR | import-retry BUNDLE CURRENT INCOMING NEW_DIR');
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))runSessionCommand(process.argv.slice(2)).then(result=>console.log(JSON.stringify(result,null,2))).catch(error=>{console.error(error.message);process.exitCode=1;});

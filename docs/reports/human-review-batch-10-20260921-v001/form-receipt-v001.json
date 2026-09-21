@@ -1,0 +1,136 @@
+{
+  "recorded_at": "2026-09-21T04:45:25.532252+00:00",
+  "session_id": "HRS-20260921-10-POINTS",
+  "display_review_sha256": "760994296bdc799917133ec1287fdc20a06c0cd77ff48db5c369ed2a93c43b84",
+  "original_attachment": {
+    "path": "/Users/kawafmm/Downloads/HRS-20260921-10-POINTS-answers.json",
+    "bytes": 62194,
+    "sha256": "c38b86fab35766038c20889ef10792196e7f4aead1a2a434ea83327b50a8ecff"
+  },
+  "unchanged_attachment_copy": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/returned-form-v001.json",
+    "bytes": 62194,
+    "sha256": "c38b86fab35766038c20889ef10792196e7f4aead1a2a434ea83327b50a8ecff"
+  },
+  "current_answer_input": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v001/session-answers.json",
+    "bytes": 59109,
+    "sha256": "413270e0430073984533615fb41beb3eb2e62e5458221945423830f37bca44c5"
+  },
+  "import_selection": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/import-selection-v002.json",
+    "bytes": 62156,
+    "sha256": "d334860d2c2ccbb46f302aea437b1ae101ec37f09e23cc8e8faf0d06e5bca715"
+  },
+  "manual_record_reconciliation": {
+    "number": 1,
+    "point_id": "Q1-PANEL-CENTER-SHORT",
+    "review_id": "HRC-001",
+    "decision": "両方とも同じ短文センタリングへの「良い」であり、品質判断は一致する。ただし原文・受領経路・回答日時は異なる別記録として保持する。",
+    "reason_for_retaining_chat": "先に保存済みのチャット原文を上書きしない。添付全文を同byteで保存し、1番のフォーム原文と日時も原本に保持する。",
+    "original_chat_record": {
+      "point_id": "Q1-PANEL-CENTER-SHORT",
+      "review_id": "HRC-001",
+      "choice": "good",
+      "comment": "",
+      "raw_response": "２、３と動画が壊れてて見えなかったよ。１は見えてOK",
+      "source": "chat",
+      "answered_at": "2026-09-21T03:52:41.292657Z",
+      "playback_started_view_ids": []
+    },
+    "separate_form_record": {
+      "point_id": "Q1-PANEL-CENTER-SHORT",
+      "review_id": "HRC-001",
+      "choice": "good",
+      "comment": "",
+      "raw_response": "良い",
+      "source": "local_form",
+      "answered_at": "2026-09-21T03:51:03.610Z",
+      "playback_started_view_ids": [
+        "short-after"
+      ]
+    },
+    "import_projection": "1番の回答内容だけを未回答の追加差分にし、添付で実際に開始記録のあるshort-afterを保持する。既存mergeはチャット回答を残し、再生開始履歴だけを追加する。2〜10番は添付の回答全fieldを変更しない。",
+    "result_record": {
+      "point_id": "Q1-PANEL-CENTER-SHORT",
+      "review_id": "HRC-001",
+      "choice": "good",
+      "comment": "",
+      "raw_response": "２、３と動画が壊れてて見えなかったよ。１は見えてOK",
+      "source": "chat",
+      "answered_at": "2026-09-21T03:52:41.292657Z",
+      "playback_started_view_ids": [
+        "short-after"
+      ]
+    }
+  },
+  "retry_only_numbers": [
+    3,
+    9
+  ],
+  "playback_unavailable_not_quality_rejection": [
+    {
+      "number": 3,
+      "point_id": "Q1-PANEL-BACKGROUND-VARIANTS",
+      "kept_choice": "no_decision",
+      "quality_judgment": "再生不能のため未判定",
+      "reported_unavailable_view_ids": [
+        "background-graph-paper",
+        "background-comic-frame"
+      ],
+      "recorded_started_view_ids": [
+        "background-plain"
+      ],
+      "comment": "無地以外壊れて見えない。指定区間を動画内で確認できません。"
+    },
+    {
+      "number": 9,
+      "point_id": "Q5-1-C001",
+      "kept_choice": "no_decision",
+      "quality_judgment": "再生不能のため未判定",
+      "offered_view_ids": [
+        "Q5-BEFORE-VIEW",
+        "Q5-AFTER-VIEW"
+      ],
+      "failed_view_identification": "コメントからBefore/Afterのどちらかは特定できず、再生開始記録はない",
+      "recorded_started_view_ids": [],
+      "comment": "壊れて見えない　指定区間を動画内で確認できません。"
+    }
+  ],
+  "counts": {
+    "answered": 10,
+    "good": 4,
+    "change_requested": 4,
+    "both_usable": 0,
+    "no_decision": 2,
+    "comment_only": 0,
+    "unanswered": 0
+  },
+  "new_answer_output": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/session-answers.json",
+    "bytes": 62259,
+    "sha256": "21f90c08670cb558034512770355a7b7ebcde5edd8bf72441b76ab81e14b8390"
+  },
+  "separate_process_verification": {
+    "command": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "tools/point-review/session-run.mjs",
+      "verify",
+      "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/session-package.json",
+      "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/session-answers.json"
+    ],
+    "exit_code": 0,
+    "stderr_bytes": 0,
+    "output": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/verification.json",
+      "bytes": 35392,
+      "sha256": "52d42b45cd8c926ee32bf3157dc657a393bfaa58d31c7ec90e31e9e3722b1b2e"
+    }
+  },
+  "input_text_treated_as_data": true,
+  "merge_policy_changed": false,
+  "old_answer_files_changed": false,
+  "media_rechecked": false,
+  "automatic_quality_edits_applied": false,
+  "formal_adoption": false
+}

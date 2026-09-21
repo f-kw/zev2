@@ -2,15 +2,15 @@
 
 2026-09-21。本人の「ZEV 人間レビュー一括実施：10ポイント確認セッション — 実施指示 v001」に基づく。開始点は `713e2c675d8909211cfca283d99f6f575a74b4b8`、branchは `codex/digest-presentation-editing-stage4`。
 
-**10ポイントを一つのページから順番に確認できます。**
+**今回の再確認は、再生エラーのあった3番・9番だけです。他の8件は保存済みです。**
 
-[一括レビューHTML](/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/review.html)
+[3番・9番だけの再確認HTML](/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/review-errors-v001.html)。元番号と問いを維持し、方眼紙から始め、次は9番へ進む。[再確認の説明と検査](error-only-retry-v001.md)。
 
-Q1/Q2 4件 → Q3 1件 → Q4 3件 → Q5-1 → Q5-2。番号を添えたチャット回答も受け取れる。現在は **1/10回答済み（良い1）、9/10未回答**。1番だけを本人の「OK」として保存した。2・3番は視聴不能、4〜10番は未視聴であり、品質への回答に変換していない。[本人回答と再読結果](answers-received-v001/verification.json)、[原文と再生不具合](playback-issues-v001.json)。技術検査の架空回答を本人回答へ取り込んでいない。
+返送されたフォーム回答を統合し、現在は **10件の回答記録あり：良い4・直したい4・両方使える0・判断しない2・未回答0**。3番・9番は再生不能による「判断しない」で、品質は未判定。本人の「エラーのみやり直し」に従い、この2点だけ再確認する。[統合回答と再読結果](answers-received-v002/verification.json)、[原本・来歴](form-receipt-v001.json)、[コメントの対象整理](answer-interpretation-v002.md)。
 
-「読み込み中」のまま再生ボタンが反応しないとの報告を受け、読み込み前から人の再生操作を受け付けるよう修理した。同じHTMLのURLへ反映し、修理前HTMLは別名で保存した。元のレビュー内容・媒体・時計・回答保存の識別は不変。[修理報告と確認範囲](playback-repair-v001.md)。
+初回の部分回答は1番だけ「良い」で、残り9点は未回答だった。その後、読み込み前に操作を封鎖する再生処理を修理し、同じZEV Build Loopで必須修正なしの技術受理を得た。[初回の回答](answers-received-v001/verification.json)、[初回の修理・監査記録](playback-repair-v001.md)。
 
-2026-09-21、同じZEV Build Loopの最終監査で、一括入口・部分回答保存・再生コードの修理を**必須修正なしで技術受理**された。本人環境での実再生復旧は未確認のまま。同じページを再読み込みし、1番の再回答を求めず2番から再開する。[監査受理と次の回答取込み](playback-repair-v001.md#最終監査と回答取込みの継続)。
+今回、3番の方眼紙・コミック枠と9番のAfterに一致する、媒体末尾の秒数丸めによるコード上の誤拒否を修理した。本人ブラウザーの実際の時間値と再生復旧は未確認で、保存媒体情報を使ったコード再現と区別する。元の[10点入口](/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/review.html)にも同じ再生修理を反映した。新旧HTMLと過去の回答は保持する。
 
 ## 元レビューとの対応
 
@@ -43,7 +43,7 @@ Q1/Q2 4件 → Q3 1件 → Q4 3件 → Q5-1 → Q5-2。番号を添えたチャ�
 
 受領後は新しい回答保存先に、一括回答、元5レビューごとの標準回答、集計、受領記録を保存できる。元レビュー自体のIDと対象版を保つ。実装、動画再生成、selector・override・原版・正式採用の変更はこの入口から行わない。
 
-## 軽量確認
+## 初回準備時の軽量確認
 
 - 10ポイント、17表示区間、14媒体参照を元の5レビューと照合した。参照先の実ファイルは13件で、SHA・fps・frame数を既存生成器の検証で確認した。同一ファイルは一回の読取結果を共有する。[生成結果](build-verification-v001.json)。
 - 各viewは自身の媒体時計を使う。Q5-1は元版27.40秒と今回案25.43秒、Q5-2は元版9.30秒と今回案20.80秒。既存の短い区間と前後範囲を保ち、Q5-3の併用時計は持ち込まない。
@@ -57,7 +57,7 @@ Q1/Q2 4件 → Q3 1件 → Q4 3件 → Q5-1 → Q5-2。番号を添えたチャ�
 
 本人が実際に答えたポイントだけを回答済みにし、「良い／直したい／両方使える／判断しない／未回答」を集計する。「直したい」は、対象、元機能・編集案、局所修正か、自動選択規則へ返す可能性、追加確認の必要性を区別して整理する。新規実装には着工しない。
 
-回答整理を同じZEV Build Loopへ送り、次の具体的な修正・採用指示を求める。現在は1番への部分回答と再生不具合を受領した段階である。残りの品質回答や採用を補完しない。
+回答整理を同じZEV Build Loopへ送る。現在は10件の回答記録を受領したが、3・9番は再生不能による判断保留。今回の修理と再確認を優先し、品質コメントを根拠に新規実装・編集案の採用へ進めない。
 
 内部の保存入口は `tools/point-review/session-run.mjs`。人間にJSON編集を要求しない。
 
@@ -66,4 +66,7 @@ build MANIFEST NEW_DIR
 verify PACKAGE ANSWERS
 import PACKAGE CURRENT INCOMING NEW_DIR
 chat PACKAGE CURRENT NUMBERED_ENTRIES NEW_DIR
+import-retry RETRY_BUNDLE CURRENT RETURNED_RETRY_PACKET NEW_DIR
 ```
+
+再確認回答は元10点・5Batchの回答を、受領状態と再確認対象へ結び付けた包みに入れて書き出す。再確認の取込みには `retry-bundle-v001.json` と `answers-received-v002/session-answers.json` を渡す。8件は行全体を保持し、指定した3・9番の新回答だけを新しい受領版へ保存する。空の再回答で過去の「判断しない」を消さない。

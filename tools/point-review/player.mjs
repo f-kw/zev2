@@ -17,7 +17,10 @@ export function createSegmentPlayer(video, {onStatus = () => {}, onStarted = () 
     generation++; running = starting = false;
     if (pending) { pending.resolve(false); pending = null; }
     clear(); video.pause();
-    if (atEnd && selection && ready && video.currentTime !== selection.end) video.currentTime = selection.end;
+    if (atEnd && selection && ready && Number.isFinite(video.duration)) {
+      const end = Math.min(selection.end, video.duration);
+      if (video.currentTime !== end) video.currentTime = end;
+    }
     status();
   }
   function fail(message) { error = message; ready = false; stop(); }
@@ -53,7 +56,13 @@ export function createSegmentPlayer(video, {onStatus = () => {}, onStarted = () 
     if (!selection || error || !currentSource()) return;
     // NaN is the normal duration before metadata arrives, not a failed clip.
     if (Number.isNaN(video.duration)) { ready = false; status(); return; }
-    if (!validRange() || !Number.isFinite(video.duration) || video.duration < selection.end) {
+    // Integer frame bounds were checked against this media at build time. At its
+    // actual end, duration may round below the exclusive end while the last frame exists.
+    const reachesMediaEnd = selection.ends_at_media_end === true &&
+      Number.isFinite(selection.last_frame_start_seconds) &&
+      selection.last_frame_start_seconds >= selection.start && selection.last_frame_start_seconds < selection.end &&
+      video.duration > selection.last_frame_start_seconds;
+    if (!validRange() || !Number.isFinite(video.duration) || (video.duration < selection.end && !reachesMediaEnd)) {
       fail('指定区間を動画内で確認できません。'); return;
     }
     ready = true;
@@ -65,7 +74,11 @@ export function createSegmentPlayer(video, {onStatus = () => {}, onStarted = () 
   for (const event of ['loadedmetadata', 'loadeddata', 'canplay', 'durationchange']) video.addEventListener(event, refreshReadiness);
   video.addEventListener('timeupdate', boundary);
   video.addEventListener('pause', () => { if (running && video.paused) stop(); else status(); });
-  video.addEventListener('ended', boundary);
+  video.addEventListener('ended', () => {
+    boundary();
+    if ((running || starting) && ready && currentSource() && video.ended && Number.isFinite(video.duration) &&
+        video.currentTime >= Math.min(selection.end, video.duration)) stop(true);
+  });
   video.addEventListener('error', () => { if (currentSource() && video.error !== null) fail('動画を開けません。もう一度押すと読み込み直します。'); });
   video.addEventListener('ratechange', armTimer);
   video.addEventListener('seeking', () => {

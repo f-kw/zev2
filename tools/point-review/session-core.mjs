@@ -4,6 +4,7 @@ import {canonical, validateReview, blankAnswers, validateAnswers, recordAnswer} 
 
 export const SESSION_SCHEMA = 'zev-point-review-session-v001';
 export const SESSION_ANSWER_SCHEMA = 'zev-point-review-session-answers-v001';
+export const RETRY_ANSWER_SCHEMA = 'zev-point-review-retry-answers-v001';
 
 function sessionFail(message) { throw new Error(`review session: ${message}`); }
 function sessionKeys(value, expected, where) {
@@ -97,6 +98,70 @@ export function blankSessionAnswers(packageValue) {
       review_sha256: source.review_sha256, answers: structuredClone(source.initial_answers)})),
   };
   return validateSessionAnswers(packageValue, envelope);
+}
+
+// Retry is a display request over the same reviews, not another quality review.
+// The received answers remain verbatim evidence; only the requested drafts reset.
+export function validateSessionRetry(packageValue, retry) {
+  sessionKeys(retry, ['points', 'received_answers', 'sha256'], 'retry');
+  sessionHash(retry.sha256, 'retry.sha256');
+  validateSessionAnswers(packageValue, retry.received_answers);
+  sessionArray(retry.points, 'retry points');
+  const ids = new Set();
+  for (const requested of retry.points) {
+    sessionKeys(requested, ['point_id', 'initial_view_id'], 'retry point');
+    const point = packageValue.display_review.points.find(point => point.point_id === requested.point_id);
+    if (!point || ids.has(requested.point_id) || !point.views.some(view => view.view_id === requested.initial_view_id))
+      sessionFail('retry point or initial view does not match');
+    ids.add(requested.point_id);
+  }
+  for (let index = 0; index < packageValue.sources.length; index++) {
+    const expected = structuredClone(retry.received_answers.batches[index].answers);
+    for (const answer of expected.answers) if (ids.has(answer.point_id))
+      Object.assign(answer, {choice: null, comment: '', raw_response: '', source: null, answered_at: null});
+    sessionSame(packageValue.sources[index].initial_answers, expected, 'retry answer draft');
+  }
+  return retry;
+}
+
+export function packRetrySessionAnswers(packageValue, retry, answers) {
+  validateSessionRetry(packageValue, retry);
+  validateSessionAnswers(packageValue, answers);
+  const packet = {schema_version: RETRY_ANSWER_SCHEMA, retry_sha256: retry.sha256, answers: structuredClone(answers)};
+  readRetrySessionAnswers(packageValue, retry, packet);
+  return packet;
+}
+
+export function readRetrySessionAnswers(packageValue, retry, packet) {
+  sessionKeys(packet, ['schema_version', 'retry_sha256', 'answers'], 'retry answer packet');
+  validateSessionRetry(packageValue, retry);
+  if (packet.schema_version !== RETRY_ANSWER_SCHEMA || packet.retry_sha256 !== retry.sha256)
+    sessionFail('answers belong to another retry request');
+  validateSessionAnswers(packageValue, packet.answers);
+  const targets = new Set(retry.points.map(point => point.point_id));
+  for (let index = 0; index < packageValue.sources.length; index++) {
+    for (const original of retry.received_answers.batches[index].answers.answers) if (!targets.has(original.point_id)) {
+      const incoming = packet.answers.batches[index].answers.answers.find(answer => answer.point_id === original.point_id);
+      sessionSame(incoming, original, 'answer outside the requested retry');
+    }
+  }
+  return packet.answers;
+}
+
+export function mergeRetrySessionAnswers(packageValue, retry, current, packet) {
+  validateSessionAnswers(packageValue, current);
+  sessionSame(current, retry.received_answers, 'retry received state is no longer current');
+  const incoming = readRetrySessionAnswers(packageValue, retry, packet), next = structuredClone(current);
+  const targets = new Set(retry.points.map(point => point.point_id));
+  for (let index = 0; index < next.batches.length; index++) {
+    next.batches[index].answers.answers = next.batches[index].answers.answers.map(previous => {
+      if (!targets.has(previous.point_id)) return previous;
+      const answer = incoming.batches[index].answers.answers.find(item => item.point_id === previous.point_id);
+      return {...structuredClone(answer.source === null ? previous : answer),
+        playback_started_view_ids: sessionUnionPlayback(previous, answer)};
+    });
+  }
+  return validateSessionAnswers(packageValue, next);
 }
 
 export function validateSessionAnswers(packageValue, envelope) {

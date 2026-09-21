@@ -6,7 +6,8 @@ import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {Script} from 'node:vm';
 import {validateAnswers,canonical} from './core.mjs';
-import {verifySessionDigests} from './session-build.mjs';
+import {verifySessionDigests,createReviewSessionRetryBundle} from './session-build.mjs';
+import {blankSessionAnswers,recordNumberedChatAnswers,packRetrySessionAnswers} from './session-core.mjs';
 
 // Tests only the new entry against the prepared ten-point package. Hypothetical
 // answers are confined to technical-fixtures; the human pending file is read-only.
@@ -73,4 +74,37 @@ test('wrong original review, altered media clock and duplicate chat number are r
     const result=spawnSync(process.execPath,[join(root,'tools/point-review/session-run.mjs'),entry.command,packagePath,pendingPath,input,destination],{encoding:'utf8'});
     assert.equal(result.status,1);await assert.rejects(stat(destination),{code:'ENOENT'});
   }
+});
+
+test('retry file import binds the received state, updates only requested answers, and is readable in a separate process',async()=>{
+  const folder=await mkdtemp(join(output,'technical-retry-import-')),session=await read(packagePath);
+  const html=await readFile(join(output,'review.html'),'utf8'),bundle=JSON.parse(html.match(/id="review-package">([\s\S]*?)<\/script>/)[1]);
+  const entries=session.display_review.points.map((point,index)=>({number:index+1,choice:[2,8].includes(index)?'no_decision':'good',comment:'',
+    raw_response:`【技術検査用の架空回答。本人の回答ではありません】${index+1}`,source:'chat',answered_at:'2026-09-21T04:00:00.000Z'}));
+  const current=recordNumberedChatAnswers(session,blankSessionAnswers(session),entries),before=canonical(current);
+  const retry=createReviewSessionRetryBundle(bundle,current,[{point_id:session.display_review.points[2].point_id,initial_view_id:'background-graph-paper'},
+    {point_id:session.display_review.points[8].point_id,initial_view_id:'Q5-AFTER-VIEW'}]);
+  const draft=blankSessionAnswers(retry.session_package),empty=packRetrySessionAnswers(retry.session_package,retry.retry,draft);
+  Object.assign(draft.batches[0].answers.answers[2],{choice:'change_requested',comment:'技術検査用',raw_response:'直したい\n技術検査用',source:'local_form',answered_at:'2026-09-21T05:00:00.000Z'});
+  Object.assign(draft.batches[3].answers.answers[0],{choice:'both_usable',comment:'技術検査用',raw_response:'両方使える\n技術検査用',source:'local_form',answered_at:'2026-09-21T05:00:00.000Z'});
+  const packet=packRetrySessionAnswers(retry.session_package,retry.retry,draft);
+  const retryPath=join(folder,'retry-bundle.json'),currentPath=join(folder,'hypothetical-current.json'),packetPath=join(folder,'hypothetical-returned.json'),emptyPath=join(folder,'hypothetical-empty.json');
+  await save(retryPath,retry);await save(currentPath,current);await save(packetPath,packet);await save(emptyPath,empty);
+  const saved=cli('import-retry',retryPath,currentPath,packetPath,join(folder,'received'));
+  const reread=cli('verify',packagePath,join(folder,'received/session-answers.json'));
+  assert.notEqual(saved.pid,reread.pid);
+  assert.deepEqual(reread.value.counts,{answered:10,good:8,change_requested:1,both_usable:1,no_decision:0,comment_only:0,unanswered:0});
+  const imported=await read(join(folder,'received/session-answers.json'));
+  const allBefore=current.batches.flatMap(batch=>batch.answers.answers),allAfter=imported.batches.flatMap(batch=>batch.answers.answers);
+  for(let index=0;index<10;index++)if(![2,8].includes(index))assert.deepEqual(allAfter[index],allBefore[index]);
+  cli('import-retry',retryPath,currentPath,emptyPath,join(folder,'empty-return'));
+  assert.deepEqual(await read(join(folder,'empty-return/session-answers.json')),current);
+  const wrong=structuredClone(packet);wrong.retry_sha256='f'.repeat(64);await save(join(folder,'wrong-retry.json'),wrong);
+  const stale=structuredClone(current);stale.batches[3].answers.answers[0].raw_response+='別の受領';await save(join(folder,'stale-current.json'),stale);
+  for(const [name,beforePath,inputPath]of[['old-format',currentPath,currentPath],['wrong-retry',currentPath,join(folder,'wrong-retry.json')],['stale',join(folder,'stale-current.json'),packetPath]]){
+    const destination=join(folder,'rejected-'+name),result=spawnSync(process.execPath,[join(root,'tools/point-review/session-run.mjs'),'import-retry',retryPath,beforePath,inputPath,destination],{encoding:'utf8'});
+    assert.equal(result.status,1);await assert.rejects(stat(destination),{code:'ENOENT'});
+  }
+  assert.equal(canonical(await read(currentPath)),before);
+  await save(join(folder,'observations.json'),{test_only:true,human_answers_received:false,save_pid:saved.pid,reread_pid:reread.pid,counts:reread.value.counts,unchanged_answer_count:8});
 });

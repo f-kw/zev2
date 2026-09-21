@@ -1,0 +1,79 @@
+{
+  "created_at": "2026-09-21T04:56:16.301Z",
+  "kind": "existing_review_media_end_repair_and_requested_retry",
+  "received_answers": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/session-answers.json",
+    "sha256": "21f90c08670cb558034512770355a7b7ebcde5edd8bf72441b76ab81e14b8390"
+  },
+  "retry_bundle": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/retry-bundle-v001.json",
+    "sha256": "cc96c23f9f9ed46c066312bd86a4163cfe4c8da18d92b140b56abef32ee39c3f",
+    "request_sha256": "948144ba84ebf2e6396b6f664fc3740631602e631fe0418db647253346bf5089"
+  },
+  "retry_html": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/review-errors-v001.html",
+    "sha256": "5b84a5f0cc6a0a78adc48ff7922097f8949b3d1f8a0f2eec2efe86827963d1c6"
+  },
+  "current_ten_point_html": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/review.html",
+    "sha256": "60d0fe8e5b2781e6cdee966da4d7ad35fe7ec361022a706e8418172385b9cb11"
+  },
+  "prior_html": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/review-repaired-v002.html",
+    "sha256": "3d41f29e094e4eb9e524ea5cf5aa7e29c9ea9900fe0309201af5b36244c6581e"
+  },
+  "original_point_numbers": [
+    3,
+    9
+  ],
+  "original_view_ids": [
+    {
+      "point_id": "Q1-PANEL-BACKGROUND-VARIANTS",
+      "initial_view_id": "background-graph-paper"
+    },
+    {
+      "point_id": "Q5-1-C001",
+      "initial_view_id": "Q5-AFTER-VIEW"
+    }
+  ],
+  "original_reviews_media_clocks_unchanged": true,
+  "retained_received_answers": 8,
+  "retry_drafts": 2,
+  "prior_error_answers_preserved": true,
+  "source_files": [
+    {
+      "name": "template.html",
+      "sha256": "6eb01d1616ed97c8d064eba9015efd7ee83fb4f25c729fff8e20456444ec9dac"
+    },
+    {
+      "name": "style.css",
+      "sha256": "ecf4c492b2c29e1d6658d27760f26d97f1bc2d016f5e4d263130ba594a32411f"
+    },
+    {
+      "name": "core.mjs",
+      "sha256": "91e40dcd0a384d0d6bd1c1f774fea7f66eccf0d2a4bc7838b5084c78689f4086"
+    },
+    {
+      "name": "player.mjs",
+      "sha256": "ccc973edba7765ad9bd3b06c11903e37dc850545aca8949c30b963ddec95e4b8"
+    },
+    {
+      "name": "app.mjs",
+      "sha256": "b1716bbe47d94dbfcd10000471c44363246dd76394bf5c927efe9fb80eb5842e"
+    },
+    {
+      "name": "session-core.mjs",
+      "sha256": "ed561f6420054a8023e52819484351738c4463ce59bddd9d6c9250846ba2924f"
+    },
+    {
+      "name": "session-app.mjs",
+      "sha256": "23723dfd56220e4acf3e0453505b3bf406c37c409f0b0cb44b20e3ac11aca02b"
+    }
+  ],
+  "code_only_playback_views_checked": 5,
+  "new_video_encodes": 0,
+  "new_media_probes": 0,
+  "new_browser_attempts": 0,
+  "real_browser_playback_verified": false,
+  "limitations": "保存媒体情報の小数秒を使ったコード再現・検査。本人ブラウザーのduration実値・実再生は未確認。以前のfile URL操作拒否は迂回していない。"
+}

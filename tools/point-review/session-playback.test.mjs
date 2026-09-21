@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {runInNewContext} from 'node:vm';
-import {renderReviewSessionHtml} from './session-build.mjs';
+import {renderReviewSessionHtml,createReviewSessionRetryBundle} from './session-build.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'../..');
 const output=resolve(root,'evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001');
@@ -30,8 +30,8 @@ class GestureLoadedVideo extends PlaybackTestElement{
     this.paused=false;await this.emit('playing');
   }
 }
-function playbackTestPage(bundle){
-  const durations=new Map(bundle.review.media.map(media=>[bundle.media_sources[media.media_id],media.total_frames*media.fps_den/media.fps_num]));
+function playbackTestPage(bundle,durationOverride){
+  const durations=durationOverride??new Map(bundle.review.media.map(media=>[bundle.media_sources[media.media_id],media.total_frames*media.fps_den/media.fps_num]));
   const video=new GestureLoadedVideo(durations),nodes=new Map(),values=new Map(),callbacks=new Map();let serial=0;
   const document={hidden:false,body:new PlaybackTestElement('body'),getElementById(id){if(!nodes.has(id))nodes.set(id,id==='video'?video:new PlaybackTestElement());return nodes.get(id);},createElement:tag=>new PlaybackTestElement(tag),createTextNode:text=>({textContent:text}),addEventListener(){}};
   document.getElementById('review-package').textContent=JSON.stringify(bundle);
@@ -79,4 +79,40 @@ test('generated ten-point page permits gesture-loaded playback and stops all 17 
   }
   assert.equal(checked,17);
   for(const stored of page.values.values())for(const batch of JSON.parse(stored).batches)for(const answer of batch.answers.answers){assert.equal(answer.choice,null);assert.equal(answer.source,null);}
+});
+
+test('generated error-only page uses recorded decimal durations for points 3 and 9 and preserves eight received answers',async()=>{
+  const oldHtml=await readFile(resolve(output,'review-before-repair-v001.html'),'utf8');
+  const original=JSON.parse(oldHtml.match(/id="review-package">([\s\S]*?)<\/script>/)[1]);
+  const report=resolve(root,'docs/reports/human-review-batch-10-20260921-v001');
+  const received=JSON.parse(await readFile(resolve(report,'answers-received-v002/session-answers.json'),'utf8'));
+  const diagnosis=JSON.parse(await readFile(resolve(report,'media-end-diagnosis-v001.json'),'utf8'));
+  const bundle=createReviewSessionRetryBundle(original,received,[{point_id:'Q1-PANEL-BACKGROUND-VARIANTS',initial_view_id:'background-graph-paper'},
+    {point_id:'Q5-1-C001',initial_view_id:'Q5-AFTER-VIEW'}]);
+  const durations=new Map(original.review.media.map(media=>[original.media_sources[media.media_id],diagnosis.cases.find(item=>item.mediaPath===media.path).storedDuration.containerDecimalSeconds]));
+  const rendered=await renderReviewSessionHtml(bundle),page=playbackTestPage(bundle,durations),$=id=>page.document.getElementById(id);
+  runInNewContext(rendered.html.match(/<script>([\s\S]*?)<\/script>/)[1],{document:page.document,window:page.window,structuredClone,setTimeout,clearTimeout,console});
+  assert.equal($('point-nav').children.length,2);assert.match($('point-number').textContent,/POINT 3 \/ 10/);
+  assert.equal($('view-label').textContent,'方眼紙（手選択）');
+  let checked=0;
+  for(const [position,index]of [2,8].entries()){
+    await $('point-nav').children[position].click();
+    const point=original.review.points[index];assert.equal($('question').textContent,point.question);
+    for(const [viewIndex,view]of point.views.entries()){
+      await $('view-controls').children[viewIndex].click();await $('play').click();
+      assert.equal(page.video.paused,false,view.view_id);assert.match($('playback-status').textContent,/再生中/);
+      const media=original.review.media.find(item=>item.media_id===view.media_id);
+      assert.equal(page.video.currentTime,view.start_frame*media.fps_den/media.fps_num);
+      if(view.end_frame===media.total_frames){page.video.currentTime=page.video.duration;page.video.ended=true;await page.video.emit('ended');}
+      else{page.video.currentTime=view.end_frame*media.fps_den/media.fps_num;await page.video.emit('timeupdate');}
+      assert.equal(page.video.paused,true,view.view_id);checked++;
+    }
+  }
+  assert.equal(checked,5);
+  const before=received.batches.flatMap(batch=>batch.answers.answers);
+  for(const stored of page.values.values()){
+    const after=JSON.parse(stored).batches.flatMap(batch=>batch.answers.answers);
+    for(let index=0;index<10;index++)if([2,8].includes(index)){assert.equal(after[index].choice,null);assert.equal(after[index].source,null);}
+    else assert.deepEqual(after[index],before[index]);
+  }
 });

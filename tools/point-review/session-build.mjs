@@ -3,7 +3,7 @@ import {resolve, dirname, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {canonical, validateReview, validateAnswers, REVIEW_SCHEMA} from './core.mjs';
 import {sha256, verifyReviewMedia} from './build.mjs';
-import {createSessionPackage, validateSessionPackage, blankSessionAnswers} from './session-core.mjs';
+import {createSessionPackage, validateSessionPackage, blankSessionAnswers, validateSessionAnswers, validateSessionRetry} from './session-core.mjs';
 
 const here=dirname(fileURLToPath(import.meta.url));
 export function verifySessionDigests(session){
@@ -14,11 +14,18 @@ export function verifySessionDigests(session){
   if(sha256(canonical(session.display_review))!==session.display_review_sha256)throw new Error('一括表示の内容とSHAが一致しません');
   return session;
 }
+export function verifySessionRetryBundle(bundle){
+  const session=verifySessionDigests(bundle.session_package),retry=validateSessionRetry(session,bundle.retry);
+  if(bundle.review_sha256!==session.display_review_sha256||canonical(bundle.review)!==canonical(session.display_review))throw new Error('再確認の表示内容が元レビューと一致しません');
+  if(sha256(canonical({points:retry.points,received_answers:retry.received_answers}))!==retry.sha256)throw new Error('再確認対象と受領回答のSHAが一致しません');
+  return bundle;
+}
 export async function renderReviewSessionHtml(bundle){
   const session=verifySessionDigests(bundle.session_package);
   if(bundle.review_sha256!==session.display_review_sha256||canonical(bundle.review)!==canonical(session.display_review))throw new Error('表示内容と元レビューが一致しません');
   if(canonical(Object.keys(bundle.media_sources).sort())!==canonical(bundle.review.media.map(m=>m.media_id).sort()))throw new Error('表示媒体の参照が一致しません');
   for(const source of Object.values(bundle.media_sources))if(typeof source!=='string'||!source.startsWith('file:///'))throw new Error('ローカル媒体参照が必要です');
+  if(bundle.retry!==undefined)verifySessionRetryBundle(bundle);
   const names=['template.html','style.css','core.mjs','player.mjs','app.mjs','session-core.mjs','session-app.mjs'];
   const files=await Promise.all(names.map(name=>readFile(join(here,name),'utf8')));
   const script=files.slice(2).map(source=>source.replace(/^import .*;\n/gm,'').replace(/^export /gm,'')).join('\n')+
@@ -26,6 +33,20 @@ export async function renderReviewSessionHtml(bundle){
   const safeJson=JSON.stringify(bundle).replaceAll('<','\\u003c').replaceAll('\u2028','\\u2028').replaceAll('\u2029','\\u2029');
   const html=files[0].replace('/*__STYLE__*/',()=>files[1]).replace('/*__DATA__*/',()=>safeJson).replace('/*__SCRIPT__*/',()=>script);
   return {html,html_sha256:sha256(html),template_sha256:sha256(files[0]),source_files:names.map((name,i)=>({name,sha256:sha256(files[i])}))};
+}
+
+export function createReviewSessionRetryBundle(bundle, receivedAnswers, points){
+  const session=verifySessionDigests(bundle.session_package);
+  validateSessionAnswers(session,receivedAnswers);
+  const next=structuredClone(bundle),content={points:structuredClone(points),received_answers:structuredClone(receivedAnswers)};
+  const ids=new Set(points.map(point=>point.point_id));
+  for(let index=0;index<next.session_package.sources.length;index++){
+    const draft=structuredClone(receivedAnswers.batches[index].answers);
+    for(const answer of draft.answers)if(ids.has(answer.point_id))Object.assign(answer,{choice:null,comment:'',raw_response:'',source:null,answered_at:null});
+    next.session_package.sources[index].initial_answers=draft;
+  }
+  next.retry={...content,sha256:sha256(canonical(content))};
+  return verifySessionRetryBundle(next);
 }
 export async function buildReviewSession({manifestPath,outputDir,probe}){
   const manifest=JSON.parse(await readFile(manifestPath,'utf8'));

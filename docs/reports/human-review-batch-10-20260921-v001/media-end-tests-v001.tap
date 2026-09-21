@@ -1,0 +1,90 @@
+TAP version 13
+# Subtest: frame ranges derive media-end and last-included-frame facts from unchanged integer clocks
+ok 1 - frame ranges derive media-end and last-included-frame facts from unchanged integer clocks
+  ---
+  duration_ms: 1.094708
+  ...
+# Subtest: all 17 stored decimal durations are accepted, including exactly the three prior rejected views
+ok 2 - all 17 stored decimal durations are accepted, including exactly the three prior rejected views
+  ---
+  duration_ms: 1.517625
+  ...
+# Subtest: a missing last frame or an interior selection remains rejected without a tolerance
+ok 3 - a missing last frame or an interior selection remains rejected without a tolerance
+  ---
+  duration_ms: 0.661958
+  ...
+# Subtest: confirmed current-resource EOF stops at rounded duration without an out-of-media seek
+ok 4 - confirmed current-resource EOF stops at rounded duration without an out-of-media seek
+  ---
+  duration_ms: 0.449333
+  ...
+# Subtest: stale ended events do not cancel a new point, and pending play cannot resume after actual EOF
+ok 5 - stale ended events do not cancel a new point, and pending play cannot resume after actual EOF
+  ---
+  duration_ms: 0.130708
+  ...
+# Subtest: unknown duration stays pending, while non-finite duration and invalid frame-end facts remain rejected
+ok 6 - unknown duration stays pending, while non-finite duration and invalid frame-end facts remain rejected
+  ---
+  duration_ms: 0.122334
+  ...
+# Subtest: duration refreshes never rewind accepted playback, and ordinary interior boundaries still stop exactly
+ok 7 - duration refreshes never rewind accepted playback, and ordinary interior boundaries still stop exactly
+  ---
+  duration_ms: 0.126542
+  ...
+# Subtest: human play starts loading before metadata; recording waits for both metadata and the play response
+ok 8 - human play starts loading before metadata; recording waits for both metadata and the play response
+  ---
+  duration_ms: 1.399833
+  ...
+# Subtest: media error survives late pause and metadata events; only explicit replay reloads the source
+ok 9 - media error survives late pause and metadata events; only explicit replay reloads the source
+  ---
+  duration_ms: 0.97875
+  ...
+# Subtest: switching or explicit pause cancels pending play; an old completion cannot pause a new request
+ok 10 - switching or explicit pause cancels pending play; an old completion cannot pause a new request
+  ---
+  duration_ms: 0.157583
+  ...
+# Subtest: durationchange or canplay can establish readiness without rewinding an active segment
+ok 11 - durationchange or canplay can establish readiness without rewinding an active segment
+  ---
+  duration_ms: 0.310125
+  ...
+# Subtest: old-source metadata, pause, ended and cancelled callbacks cannot finish or stop the new request
+ok 12 - old-source metadata, pause, ended and cancelled callbacks cannot finish or stop the new request
+  ---
+  duration_ms: 0.331666
+  ...
+# Subtest: invalid duration invalidates pending play and cannot be reopened by its delayed response
+ok 13 - invalid duration invalidates pending play and cannot be reopened by its delayed response
+  ---
+  duration_ms: 0.151875
+  ...
+# Subtest: segment end is enforced while play response is pending; external seeks remain clipped
+ok 14 - segment end is enforced while play response is pending; external seeks remain clipped
+  ---
+  duration_ms: 0.195625
+  ...
+# Subtest: a rejected starting seek or play leaves no pending start and retains a visible error
+ok 15 - a rejected starting seek or play leaves no pending start and retains a visible error
+  ---
+  duration_ms: 0.105041
+  ...
+# Subtest: all 17 saved view ranges can switch, start, stop, and return using one simulated video element
+ok 16 - all 17 saved view ranges can switch, start, stop, and return using one simulated video element
+  ---
+  duration_ms: 6.020958
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 49.545708
