@@ -2,17 +2,19 @@
 
 2026-09-21。本人の「ZEV 人間レビュー一括実施：10ポイント確認セッション — 実施指示 v001」に基づく。開始点は `713e2c675d8909211cfca283d99f6f575a74b4b8`、branchは `codex/digest-presentation-editing-stage4`。
 
-**今回の再確認は、再生エラーのあった3番・9番だけです。他の8件は保存済みです。**
+**3番・9番の再回答も受領し、全10点の回答保存が完了しました。良い5件・直したい5件、未回答0件です。**
 
-[3番・9番だけの再確認HTML](/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/review-errors-v001.html)。元番号と問いを維持し、方眼紙から始め、次は9番へ進む。[再確認の説明と検査](error-only-retry-v001.md)。
+[最新の回答整理](answer-interpretation-v003.md)、[元5レビューへ帰属した受領v003](answers-received-v003/verification.json)、[再確認原本と保持の確認](retry-receipt-v001.json)。3番は「直したい：コミック枠は使わなくて良い。」、9番は「良い：違和感はない。字幕のタイミングがズレてる気がした」。他8点は原文・時刻・再生開始履歴を含め不変。元のエラー回答と過去の受領版も保持する。
 
-返送されたフォーム回答を統合し、現在は **10件の回答記録あり：良い4・直したい4・両方使える0・判断しない2・未回答0**。3番・9番は再生不能による「判断しない」で、品質は未判定。本人の「エラーのみやり直し」に従い、この2点だけ再確認する。[統合回答と再読結果](answers-received-v002/verification.json)、[原本・来歴](form-receipt-v001.json)、[コメントの対象整理](answer-interpretation-v002.md)。
+再確認時に提示した[3番・9番だけのHTML](/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/review-errors-v001.html)は履歴として保持し、同じ再回答を要求しない。[再確認の説明と検査](error-only-retry-v001.md)。以前エラーだった方眼紙・コミック枠・省略案に新しい開始履歴があり、品質回答を受領した。ただし全区間の視聴完了や、Codexによる実ブラウザー復旧確認を意味しない。正式採用・CLOSED・品質修正の着工は行っていない。
+
+最初のフォーム受領時は **良い4・直したい4・両方使える0・判断しない2・未回答0** だった。3番・9番が再生不能による判断保留だった履歴は、[受領v002](answers-received-v002/verification.json)、[原本・来歴](form-receipt-v001.json)、[当時のコメント整理](answer-interpretation-v002.md)に保持する。
 
 初回の部分回答は1番だけ「良い」で、残り9点は未回答だった。その後、読み込み前に操作を封鎖する再生処理を修理し、同じZEV Build Loopで必須修正なしの技術受理を得た。[初回の回答](answers-received-v001/verification.json)、[初回の修理・監査記録](playback-repair-v001.md)。
 
 今回、3番の方眼紙・コミック枠と9番のAfterに一致する、媒体末尾の秒数丸めによるコード上の誤拒否を修理した。本人ブラウザーの実際の時間値と再生復旧は未確認で、保存媒体情報を使ったコード再現と区別する。元の[10点入口](/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/review.html)にも同じ再生修理を反映した。新旧HTMLと過去の回答は保持する。
 
-同じZEV Build Loopの最終監査は、修理・回答保全・2点だけの再確認をcommit `5259b9df52d8012d43fa67cdfd725f7ceded4d0e` で必須修正なしとして技術受理した。応答完了を確認済み。実ブラウザーの復旧と3・9番の品質判定は未確認で、他8点の再回答は不要。品質コメントは受領・整理済みだが、新しい修正や採用へは着工しない。[監査受理の記録](error-only-retry-v001.md#同じ相談役による最終監査)。
+同じZEV Build Loopの修理時の最終監査は、修理・回答保全・2点だけの再確認をcommit `5259b9df52d8012d43fa67cdfd725f7ceded4d0e` で必須修正なしとして技術受理した。応答完了を確認済み。その監査時点では実ブラウザーの復旧と3・9番の品質判定は未確認だった。再回答後の現在状態は冒頭の受領v003を正とする。品質コメントは受領・整理済みだが、新しい修正や採用へは着工しない。[監査受理の記録](error-only-retry-v001.md#同じ相談役による最終監査)。
 
 ## 元レビューとの対応
 
@@ -59,7 +61,7 @@
 
 本人が実際に答えたポイントだけを回答済みにし、「良い／直したい／両方使える／判断しない／未回答」を集計する。「直したい」は、対象、元機能・編集案、局所修正か、自動選択規則へ返す可能性、追加確認の必要性を区別して整理する。新規実装には着工しない。
 
-回答整理を同じZEV Build Loopへ送る。現在は10件の回答記録を受領したが、3・9番は再生不能による判断保留。今回の修理と再確認を優先し、品質コメントを根拠に新規実装・編集案の採用へ進めない。
+回答整理を同じZEV Build Loopへ送る。現在は再確認分も含め全10点の品質回答を受領した。3・9番を再生不能による判断保留へ戻さず、原文と要望を保持して、次の具体的な修正・採用の判断を求める。今回の回答保存だけで新規実装・編集案の採用へ進めない。
 
 内部の保存入口は `tools/point-review/session-run.mjs`。人間にJSON編集を要求しない。
 
@@ -71,4 +73,4 @@ chat PACKAGE CURRENT NUMBERED_ENTRIES NEW_DIR
 import-retry RETRY_BUNDLE CURRENT RETURNED_RETRY_PACKET NEW_DIR
 ```
 
-再確認回答は元10点・5Batchの回答を、受領状態と再確認対象へ結び付けた包みに入れて書き出す。再確認の取込みには `retry-bundle-v001.json` と `answers-received-v002/session-answers.json` を渡す。8件は行全体を保持し、指定した3・9番の新回答だけを新しい受領版へ保存する。空の再回答で過去の「判断しない」を消さない。
+再確認回答は元10点・5Batchの回答を、受領状態と再確認対象へ結び付けた包みに入れて書き出す。今回の取込みでは `retry-bundle-v001.json` と開始時の `answers-received-v002/session-answers.json` を渡し、8件を行全体で保持して3・9番の新回答だけをv003へ保存した。現在の受領版はv003であり、v002を再び現在状態として適用しない。
