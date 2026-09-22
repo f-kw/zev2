@@ -6,7 +6,8 @@ import {PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
   PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001,
   PRESENTATION_NATIVE_FRAME_EXECUTION_V001, buildPresentationNativeFrameBatchPlanV001,
   buildPresentationNativeFrameBatchExtractionArgumentsV001, buildPresentationNativeLayerPlanV001,
-  buildPresentationNativeLayerArgumentsV001, buildPresentationNativeReferenceExecutionV001,
+  buildPresentationNativeLayerArgumentsV001, buildPresentationNativeLayerDecodeArgumentsV001,
+  buildPresentationNativeReferenceExecutionV001,
   buildPresentationNativeReferenceArgumentsV001,
   validatePresentationNativeFrameQcScopeV001, validatePresentationNativeFrameQcEvidenceV001} from './presentation_native_frame_qc_v001.mjs';
 
@@ -20,7 +21,7 @@ const same = (left, right) => canonicalJson(left) === canonicalJson(right);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const canonicalDigest = value => digest(canonicalJson(value));
 
-function checkFiniteExecutionEvidence(finite, inspections) {
+function checkFiniteExecutionEvidence(finite, inspections, canvas) {
   requireValue(finite?.schemaVersion === PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001
     && Array.isArray(finite.samples) && Array.isArray(finite.processes)
     && Array.isArray(finite.outputArtifacts) && finite.executionMethod === PRESENTATION_NATIVE_FRAME_EXECUTION_V001,
@@ -78,7 +79,7 @@ function checkFiniteExecutionEvidence(finite, inspections) {
     samples: finite.samples, directory: finite.frameExtraction?.directory});
   requireValue(same(extraction, finite.frameExtraction), 'selected frame extraction plan differs');
   const layers = buildPresentationNativeLayerPlanV001({samples: finite.samples,
-    sceneBindings: finite.sceneBindings, directory: finite.nativeLayers?.directory});
+    sceneBindings: finite.sceneBindings, directory: finite.nativeLayers?.directory, canvas});
   requireValue(same(layers, finite.nativeLayers), 'prepared native layers differ from the complete finite inputs');
   requireValue(typeof finite.referenceDirectory === 'string' && path.isAbsolute(finite.referenceDirectory),
     'reference output directory is invalid');
@@ -108,6 +109,16 @@ function checkFiniteExecutionEvidence(finite, inspections) {
   for (const group of layerGroups.values()) {
     expectProcess('native-layer-prepare', ffmpeg.path, buildPresentationNativeLayerArgumentsV001(group), emptyStdoutSha256);
     for (const layer of group) expectArtifact(generatedByPath.get(layer.outputPath));
+  }
+  const decodeGroups = new Map();
+  for (const layer of layers.layers) {
+    if (!decodeGroups.has(layer.sourceSha256)) decodeGroups.set(layer.sourceSha256, []);
+    decodeGroups.get(layer.sourceSha256).push(layer);
+  }
+  for (const group of decodeGroups.values()) {
+    expectProcess('native-layer-decode', ffmpeg.path,
+      buildPresentationNativeLayerDecodeArgumentsV001(group), emptyStdoutSha256);
+    for (const layer of group) expectArtifact(generatedByPath.get(layer.decodedPath));
   }
   const references = new Map();
   for (const sample of finite.samples) {
@@ -196,7 +207,7 @@ export function validatePresentationIntegrityStateQcEvidenceV001({
       violations.push(...finite.violations);
       checkSharedInputs(evidence.exactReplay, inspection.nativeFrameQc);
     }
-    checkFiniteExecutionEvidence(evidence.finiteState, overlayInspections);
+    checkFiniteExecutionEvidence(evidence.finiteState, overlayInspections, plan.canvas);
   } catch (error) {
     violations.push({code: 'INTEGRITY_STATE_QC_INVALID', reason: error.message});
   }

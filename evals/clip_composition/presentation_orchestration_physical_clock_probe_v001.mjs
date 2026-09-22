@@ -15,7 +15,7 @@ import {getPresentationPulseProgramV001, buildPresentationPulseStateElementsV001
 import {getPresentationCaptionMotionProgramV001, buildPresentationCaptionMotionStateElementsV001}
   from './presentation_caption_motion_v001.mjs';
 import {buildPresentationNativeReferenceArgumentsV001, classifyPresentationNativeFrameRgbV001,
-  buildPresentationNativeLayerPlanV001}
+  buildPresentationNativeLayerPlanV001, buildPresentationNativeLayerDecodeArgumentsV001}
   from './presentation_native_frame_qc_v001.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
 
@@ -228,8 +228,21 @@ export async function runOrchestrationPhysicalClockProbeV001({preparationPath, s
       references.push({id: 'omitted', layers: []});
       const files = references.map(row => path.join(outputDirectory, 'reference-' + group.kind + '-' + row.id + '.rgb'));
       const nativeLayers = buildPresentationNativeLayerPlanV001({samples: [{references}], sceneBindings: [group],
-        directory: path.join(outputDirectory, 'prepared-' + group.kind)});
+        canvas, directory: path.join(outputDirectory, 'prepared-' + group.kind)});
       assert(nativeLayers.layers.every(layer => !layer.generated), 'this clock probe requires the existing full-opacity plateau');
+      await mkdir(nativeLayers.directory);
+      const decodeGroups = new Map();
+      for (const layer of nativeLayers.layers) {
+        if (!decodeGroups.has(layer.sourceSha256)) decodeGroups.set(layer.sourceSha256, []);
+        decodeGroups.get(layer.sourceSha256).push(layer);
+      }
+      for (const [sourceSha256, layers] of decodeGroups) await run('native-decode-' + group.kind + '-' + sourceSha256,
+        buildPresentationNativeLayerDecodeArgumentsV001(layers).map(value => value === '-y' ? '-n' : value));
+      for (const layer of nativeLayers.layers) {
+        const ref = await bind(layer.decodedPath);
+        assert.equal(layer.pixelFormat, 'gbrap'); assert.equal(ref.bytes, layer.width * layer.height * 4);
+        artifacts.push(ref);
+      }
       const args = buildPresentationNativeReferenceArgumentsV001({sample: {crop: group.crop, references}, nativeLayers,
         sceneBindings: [group], baseFramePath: background, outputPaths: files}).map(value => value === '-y' ? '-n' : value);
       await run('native-oracle-' + group.kind, args);

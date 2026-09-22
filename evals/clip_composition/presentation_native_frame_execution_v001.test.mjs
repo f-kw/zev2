@@ -8,6 +8,7 @@ import path from 'node:path';
 import test from 'node:test';
 import {buildPresentationNativeFrameBatchPlanV001, buildPresentationNativeFrameBatchExtractionArgumentsV001,
   buildPresentationNativeLayerPlanV001, buildPresentationNativeLayerArgumentsV001,
+  buildPresentationNativeLayerDecodeArgumentsV001,
   buildPresentationNativeReferenceExecutionV001, buildPresentationNativeReferenceArgumentsV001,
   classifyPresentationNativeFrameRgbV001, classifyPresentationNativeReferenceFilesV001,
   readPresentationNativeFrameBatchOutputsV001}
@@ -68,7 +69,12 @@ test('an empty caption scope produces no extracted frame or prepared layer', asy
   await mkdir(path.dirname(extraction.completedOutputPattern));
   assert.deepEqual(await readPresentationNativeFrameBatchOutputsV001(extraction), []);
   assert.deepEqual(buildPresentationNativeLayerPlanV001({samples: [], sceneBindings: [],
-    directory: path.join(directory, 'layers')}).layers, []);
+    canvas: {width: 64, height: 48}, directory: path.join(directory, 'layers')}).layers, []);
+  for (const canvas of [undefined, {width: 0, height: 48}, {width: 64, height: 0},
+    {width: 64.5, height: 48}]) {
+    assert.throws(() => buildPresentationNativeLayerPlanV001({samples: [], sceneBindings: [],
+      canvas, directory: path.join(directory, 'invalid-layers')}));
+  }
   await writeFile(path.join(path.dirname(extraction.baseOutputPattern), 'frame-000000000.png'), 'unexpected frame');
   await assert.rejects(readPresentationNativeFrameBatchOutputsV001(extraction), /missing or extra/u);
   assert.throws(() => assertPresentationRenderRangeV001({startFrame: 12, endFrameExclusive: 12, fullFrameCount: 30}, 0));
@@ -154,7 +160,7 @@ function originalReferenceArgumentsForEquivalence({sample, sceneBindings, baseFr
 }
 
 
-test('prepared alpha and shared prefixes retain all reference pixels, classes and strict decisions', async t => {
+test('prepared alpha, shared decoded planes and shared prefixes retain all reference pixels, classes and strict decisions', async t => {
   const directory = await temporary(t), width = 64, height = 48;
   const nativeDirectory = path.join(directory, 'layers'), referenceDirectory = path.join(directory, 'references');
   await mkdir(nativeDirectory); await mkdir(referenceDirectory);
@@ -197,14 +203,49 @@ test('prepared alpha and shared prefixes retain all reference pixels, classes an
   // The independent old compositor below must still match each saved result.
   samples.push({...samples[0], baseFrame: {path: otherBase, fileSha256: hash(await readFile(otherBase))}});
   samples.push({...samples[0], crop: {left: 2, top: 4, width: width - 4, height: height - 8}});
-  const nativeLayers = buildPresentationNativeLayerPlanV001({samples, sceneBindings, directory: nativeDirectory});
+  const nativeLayers = buildPresentationNativeLayerPlanV001({samples, sceneBindings,
+    canvas: {width, height}, directory: nativeDirectory});
   const groups = new Map();
   for (const layer of nativeLayers.layers.filter(row => row.generated)) {
     if (!groups.has(layer.sourceSha256)) groups.set(layer.sourceSha256, []);
     groups.get(layer.sourceSha256).push(layer);
   }
   for (const group of groups.values()) await run(buildPresentationNativeLayerArgumentsV001(group));
+  const decodeGroups = new Map();
+  for (const layer of nativeLayers.layers) {
+    if (!decodeGroups.has(layer.sourceSha256)) decodeGroups.set(layer.sourceSha256, []);
+    decodeGroups.get(layer.sourceSha256).push(layer);
+  }
+  assert.equal(decodeGroups.size, 2, 'identical PNG bytes under another binding share the same decoded layers');
+  assert.equal(nativeLayers.layers.length, 8, 'both source PNGs cover every existing opacity');
+  assert.equal(new Set(nativeLayers.layers.map(layer => layer.decodedPath)).size, 8);
+  for (const group of decodeGroups.values()) {
+    assert.deepEqual(group.map(layer => layer.numerator).sort((left, right) => left - right), [1, 2, 3, 4]);
+    await run(buildPresentationNativeLayerDecodeArgumentsV001(group));
+  }
+  for (const layer of nativeLayers.layers) {
+    assert.equal(layer.pixelFormat, 'gbrap');
+    assert.equal(layer.width, width); assert.equal(layer.height, height);
+    const pixels = width * height;
+    const decoded = await readFile(layer.decodedPath);
+    assert.equal(decoded.length, pixels * 4, 'one complete 8bit image has four full color/alpha planes');
+    // Independently read the saved PNG, including the partial-alpha PNG
+    // roundtrip, then arrange its channels into the declared planar order.
+    const rgba = (await run([...common, '-i', layer.outputPath, '-frames:v', '1',
+      '-pix_fmt', 'rgba', '-f', 'rawvideo', 'pipe:1'])).stdout;
+    assert.equal(rgba.length, pixels * 4);
+    const expected = Buffer.alloc(rgba.length);
+    for (let pixel = 0; pixel < pixels; pixel++) {
+      expected[pixel] = rgba[pixel * 4 + 1];
+      expected[pixels + pixel] = rgba[pixel * 4 + 2];
+      expected[pixels * 2 + pixel] = rgba[pixel * 4];
+      expected[pixels * 3 + pixel] = rgba[pixel * 4 + 3];
+    }
+    assert.deepEqual(decoded, expected, 'decoded planes preserve the saved PNG color and alpha bytes');
+    assert.equal(hash(decoded), hash(expected), 'decoded layer hash binds the complete planes');
+  }
   const generated = new Set(), distanceCache = new Map(), distanceCounts = {};
+  let checkedWrongCandidateAndOrder = false;
   for (const [sampleIndex, sample] of samples.entries()) {
     const previousFiles = sample.references.map((_row, index) => path.join(directory, 'old-' + sampleIndex + '-' + index + '.rgb'));
     await run(originalReferenceArgumentsForEquivalence({sample, sceneBindings,
@@ -219,8 +260,19 @@ test('prepared alpha and shared prefixes retain all reference pixels, classes an
     const before = [], after = [];
     for (const [index, row] of sample.references.entries()) {
       const oldRgb = await readFile(previousFiles[index]), newRgb = await readFile(executions[index].path);
+      assert.equal(newRgb.length, sample.crop.width * sample.crop.height * 3, 'reference output keeps the requested crop');
       assert.deepEqual(newRgb, oldRgb, 'sample=' + sampleIndex + ' reference=' + row.id);
       before.push({id: row.id, rgb: oldRgb}); after.push({id: row.id, rgb: newRgb});
+    }
+    if (!checkedWrongCandidateAndOrder && sample.references[0].layers[0].localFrame === 3) {
+      const pixelsFor = id => after.find(row => row.id === id).rgb;
+      assert.notDeepEqual(pixelsFor('expected'), pixelsFor('foreign'), 'different source pixels remain distinguishable');
+      assert.notDeepEqual(pixelsFor('ordered'), pixelsFor('swapped'), 'changing layer order still changes the output');
+      for (const id of ['foreign', 'swapped']) {
+        assert.equal(classifyPresentationNativeFrameRgbV001({completedRgb: pixelsFor(id), references: after}).visible,
+          false, 'a completed image with the wrong source or order must not pass the expected scene');
+      }
+      checkedWrongCandidateAndOrder = true;
     }
     for (const [completedIndex, completed] of before.entries()) {
       const expected = classifyPresentationNativeFrameRgbV001({completedRgb: completed.rgb, references: before});
@@ -232,11 +284,13 @@ test('prepared alpha and shared prefixes retain all reference pixels, classes an
     }
   }
   assert(generated.size < samples.reduce((total, sample) => total + sample.references.length, 0));
+  assert.equal(checkedWrongCandidateAndOrder, true);
   assert(distanceCounts.exactDistanceCalculations > 0);
   assert(distanceCounts.reusedExactDistances > 0);
   t.diagnostic(JSON.stringify({samples: samples.length,
     logicalReferencePixelComparisons: samples.reduce((total, sample) => total + sample.references.length, 0),
-    physicalReferenceOutputs: generated.size, ...distanceCounts}));
+    physicalReferenceOutputs: generated.size, decodedLayerOutputs: nativeLayers.layers.length,
+    decodedSourceGroups: decodeGroups.size, ...distanceCounts}));
 });
 
 test('file-based exact distances match the pure classifier, reuse equal byte pairs and reject changed files', async t => {

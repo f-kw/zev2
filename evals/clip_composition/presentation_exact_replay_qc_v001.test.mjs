@@ -10,7 +10,8 @@ import {PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, PRESENTATION_NATIVE_FRAME_QC_B
   buildPresentationNativeFrameQcRecipeV001, classifyPresentationNativeFrameRgbV001,
   PRESENTATION_NATIVE_FRAME_EXECUTION_V001, buildPresentationNativeFrameBatchPlanV001,
   buildPresentationNativeFrameBatchExtractionArgumentsV001, buildPresentationNativeLayerPlanV001,
-  buildPresentationNativeLayerArgumentsV001, buildPresentationNativeReferenceExecutionV001,
+  buildPresentationNativeLayerArgumentsV001, buildPresentationNativeLayerDecodeArgumentsV001,
+  buildPresentationNativeReferenceExecutionV001,
   buildPresentationNativeReferenceArgumentsV001,
   validatePresentationNativeFrameQcEvidenceV001} from './presentation_native_frame_qc_v001.mjs';
 import {combinePresentationIntegrityStateQcV001, PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001,
@@ -278,7 +279,7 @@ function combinedEvidenceFixture(completedId = 'a') {
   const directory = '/fixture/finite-' + completedId;
   const frameExtraction = buildPresentationNativeFrameBatchPlanV001({samples: recipe.samples, directory: directory + '/frames'});
   const nativeLayers = buildPresentationNativeLayerPlanV001({samples: recipe.samples, sceneBindings: recipe.sceneBindings,
-    directory: directory + '/layers'});
+    directory: directory + '/layers', canvas: f.plan.canvas});
   const referenceDirectory = directory + '/references';
   const sample = {...clone(wanted), ...decision,
     baseFrame: {path: frameExtraction.frames[0].basePath, fileSha256: hash('base-png')},
@@ -295,6 +296,11 @@ function combinedEvidenceFixture(completedId = 'a') {
   for (const layer of nativeLayers.layers.filter(row => row.generated)) {
     if (!layerGroups.has(layer.sourceSha256)) layerGroups.set(layer.sourceSha256, []);
     layerGroups.get(layer.sourceSha256).push(layer);
+  }
+  const decodeGroups = new Map();
+  for (const layer of nativeLayers.layers) {
+    if (!decodeGroups.has(layer.sourceSha256)) decodeGroups.set(layer.sourceSha256, []);
+    decodeGroups.get(layer.sourceSha256).push(layer);
   }
   const exactRef = (fromRole, role) => {
     const row = e.inputManifest.refs.find(ref => ref.role === fromRole);
@@ -329,6 +335,8 @@ function combinedEvidenceFixture(completedId = 'a') {
       completed.path, [1], frameExtraction.completedOutputPattern)),
     ...[...layerGroups.values()].map(group => observedProcess('native-layer-prepare', ffmpeg,
       buildPresentationNativeLayerArgumentsV001(group))),
+    ...[...decodeGroups.values()].map(group => observedProcess('native-layer-decode', ffmpeg,
+      buildPresentationNativeLayerDecodeArgumentsV001(group))),
     observedProcess('completed-rgb-crop', magick, [sample.completedFrame.path, '-crop', '2x2+0+0',
       '+repage', '-alpha', 'off', '-depth', '8', 'rgb:-'], expectedRgb),
     observedProcess('native-reference-composite', ffmpeg, buildPresentationNativeReferenceArgumentsV001({
@@ -340,6 +348,7 @@ function combinedEvidenceFixture(completedId = 'a') {
     executionMethod: PRESENTATION_NATIVE_FRAME_EXECUTION_V001, frameExtraction, nativeLayers, referenceDirectory,
     outputArtifacts: [clone(sample.baseFrame), clone(sample.completedFrame),
       ...[...layerGroups.values()].flat().map(layer => ({path: layer.outputPath, fileSha256: hash('prepared-' + layer.key)})),
+      ...[...decodeGroups.values()].flat().map(layer => ({path: layer.decodedPath, fileSha256: hash('decoded-' + layer.key)})),
       clone(sample.completedRgb),
       ...uniqueExecutions.map(row => ({path: row.path, fileSha256: row.reference.rgbSha256}))]};
   delete finiteEvidence.instructionId;
@@ -733,6 +742,78 @@ test('combined proof rejects altered batch clocks, prepared alpha, missing proce
   for (const change of changes) {
     const f = combinedEvidenceFixture(); change(f);
     assertCombinedRejection(combinePresentationIntegrityStateQcV001(f), 'INTEGRITY_STATE_QC_INVALID');
+  }
+});
+
+test('combined proof rejects missing or substituted planar layers and a severed decode-to-composition chain', () => {
+  const decoder = f => f.finite.evidence.processes.find(row => row.purpose === 'native-layer-decode');
+  const changeArguments = (process, change) => {
+    change(process.args);
+    process.argumentsCanonicalSha256 = hashJson(process.args);
+  };
+  const changes = [
+    ['old preparation method', f => {f.finite.evidence.nativeLayers.method = 'exact-native-png-four-frame-alpha-v001';}],
+    ['missing layer', f => {f.finite.evidence.nativeLayers.layers.pop();}],
+    ['duplicate layer', f => {f.finite.evidence.nativeLayers.layers.push(clone(f.finite.evidence.nativeLayers.layers[0]));}],
+    ['different source PNG', f => {f.finite.evidence.nativeLayers.layers[0].outputPath = '/fixture/another-layer.png';}],
+    ['different raw output', f => {f.finite.evidence.nativeLayers.layers[0].decodedPath += '.other';}],
+    ['different pixel format', f => {f.finite.evidence.nativeLayers.layers[0].pixelFormat = 'rgba';}],
+    ['different width', f => {f.finite.evidence.nativeLayers.layers[0].width++;}],
+    ['different height', f => {f.finite.evidence.nativeLayers.layers[0].height++;}],
+    ['missing decoder', f => {f.finite.evidence.processes = f.finite.evidence.processes.filter(row => row !== decoder(f));}],
+    ['duplicate decoder', f => {
+      const index = f.finite.evidence.processes.indexOf(decoder(f));
+      f.finite.evidence.processes.splice(index, 0, clone(decoder(f)));
+    }],
+    ['decoder after composition', f => {
+      const index = f.finite.evidence.processes.indexOf(decoder(f));
+      f.finite.evidence.processes.push(...f.finite.evidence.processes.splice(index, 1));
+    }],
+    ['decoder failure', f => {decoder(f).code = 1;}],
+    ['decoder interruption', f => {decoder(f).signal = 'SIGTERM';}],
+    ['rehashed decoder source substitution', f => {
+      changeArguments(decoder(f), args => {args[args.indexOf('-i') + 1] = '/fixture/substituted.png';});
+    }],
+    ['rehashed decoder conversion substitution', f => {
+      changeArguments(decoder(f), args => {args[args.indexOf('-filter_complex') + 1] = '[0:v]format=rgba[out0]';});
+    }],
+    ['rehashed decoder output substitution', f => {
+      const layer = f.finite.evidence.nativeLayers.layers[0];
+      changeArguments(decoder(f), args => {args[args.indexOf(layer.decodedPath)] = '/fixture/substituted.gbrap';});
+    }],
+    ['missing raw artifact', f => {
+      const layer = f.finite.evidence.nativeLayers.layers[0];
+      f.finite.evidence.outputArtifacts = f.finite.evidence.outputArtifacts.filter(row => row.path !== layer.decodedPath);
+    }],
+    ['duplicate raw artifact', f => {
+      const layer = f.finite.evidence.nativeLayers.layers[0];
+      f.finite.evidence.outputArtifacts.push(clone(f.finite.evidence.outputArtifacts.find(row => row.path === layer.decodedPath)));
+    }],
+    ['raw output aliases a fixed input', f => {
+      const layer = f.finite.evidence.nativeLayers.layers[0];
+      f.finite.evidence.outputArtifacts.find(row => row.path === layer.decodedPath).path = layer.sourcePath;
+    }],
+    ['composition reads prepared PNG instead of raw layer', f => {
+      const layer = f.finite.evidence.nativeLayers.layers[0];
+      const process = f.finite.evidence.processes.find(row => row.purpose === 'native-reference-composite');
+      changeArguments(process, args => {args[args.indexOf(layer.decodedPath)] = layer.outputPath;});
+    }],
+    ['composition changes raw pixel format', f => {
+      const process = f.finite.evidence.processes.find(row => row.purpose === 'native-reference-composite');
+      changeArguments(process, args => {args[args.indexOf('-pixel_format') + 1] = 'rgba';});
+    }],
+    ['composition changes raw dimensions', f => {
+      const process = f.finite.evidence.processes.find(row => row.purpose === 'native-reference-composite');
+      changeArguments(process, args => {args[args.indexOf('-video_size') + 1] = '1x1';});
+    }],
+  ];
+  for (const [label, change] of changes) {
+    const f = combinedEvidenceFixture();
+    assert.equal(combinePresentationIntegrityStateQcV001(f).status, 'passed', label + ' starts with valid evidence');
+    change(f);
+    const result = combinePresentationIntegrityStateQcV001(f);
+    assert.equal(result.status, 'failed', label);
+    assert.ok(result.violations.some(row => row.code === 'INTEGRITY_STATE_QC_INVALID'), label);
   }
 });
 

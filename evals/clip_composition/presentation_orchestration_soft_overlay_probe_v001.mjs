@@ -11,7 +11,7 @@ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {buildConnectionExpressionTimelineFiltersV001} from './connection_expression_v001.mjs';
 import {restoreOrchestrationDrawingViewEvidenceV001} from './presentation_orchestration_v001.mjs';
 import {buildPresentationNativeReferenceArgumentsV001, classifyPresentationNativeFrameRgbV001,
-  buildPresentationNativeLayerPlanV001}
+  buildPresentationNativeLayerPlanV001, buildPresentationNativeLayerDecodeArgumentsV001}
   from './presentation_native_frame_qc_v001.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
 
@@ -92,8 +92,8 @@ function nativeYuvArguments({baseFramePath, pngPath, pngSha256, element, frame, 
     {id: 'expected', layers: [{bindingId, localFrame: frame - element.startFrame,
       displayFrameCount: element.displayFrameCount}]}, {id: 'omitted', layers: []}]};
   const sceneBindings = [{states: [{bindingId, pngPath, pngSha256}], alternates: []}];
-  const nativeLayers = buildPresentationNativeLayerPlanV001({samples: [sample], sceneBindings,
-    directory: path.join(path.dirname(outputPaths[0]), 'prepared-native')});
+  const nativeLayers = buildPresentationNativeLayerPlanV001({samples: [sample], sceneBindings, canvas,
+    directory: path.join(path.dirname(outputPaths[0]), 'prepared-native-' + frame)});
   assert(nativeLayers.layers.every(layer => !layer.generated), 'this Soft probe requires the existing full-opacity plateau');
   const args = buildPresentationNativeReferenceArgumentsV001({sample, nativeLayers,
     sceneBindings, baseFramePath, outputPaths});
@@ -104,7 +104,7 @@ function nativeYuvArguments({baseFramePath, pngPath, pngSha256, element, frame, 
     canvas.width + 'x' + canvas.height, '-framerate', String(canvas.fps));
   const filter = args.indexOf('-filter_complex') + 1;
   args[filter] = args[filter].replaceAll(',format=rgb24,crop=', ',crop=');
-  return args.map(value => value === '-y' ? '-n' : value === 'rgb24' ? 'yuv420p' : value);
+  return {nativeLayers, args: args.map(value => value === '-y' ? '-n' : value === 'rgb24' ? 'yuv420p' : value)};
 }
 
 /**
@@ -240,12 +240,31 @@ export async function runOrchestrationSoftOverlayProbeV001({repositoryRoot, outp
         artifacts[label] = {raw: await bind(output)};
         assert.equal(artifacts[label].raw.bytes, canvas.width * canvas.height * 3 / 2);
       }
+      let nativeLayerRefs;
       for (const [base, first, second] of [['soft-background', 'expected', 'omitted'],
         ['original-background', 'unfaded-caption', 'unfaded-omitted']]) {
         const outputs = [first, second].map(label => path.join(outputDirectory, prefix + '-' + label + '.yuv'));
-        await run(prefix + '-native-reference-' + base, ffmpegPath, nativeYuvArguments({
+        const {nativeLayers, args} = nativeYuvArguments({
           baseFramePath: artifacts[base].raw.path, pngPath: sample.pngRef.path, pngSha256: sample.pngRef.fileSha256,
-          element: sample.element, frame: sample.frame, canvas, outputPaths: outputs}));
+          element: sample.element, frame: sample.frame, canvas, outputPaths: outputs});
+        if (nativeLayerRefs === undefined) {
+          await mkdir(nativeLayers.directory);
+          const decodeGroups = new Map();
+          for (const layer of nativeLayers.layers) {
+            if (!decodeGroups.has(layer.sourceSha256)) decodeGroups.set(layer.sourceSha256, []);
+            decodeGroups.get(layer.sourceSha256).push(layer);
+          }
+          for (const [sourceSha256, layers] of decodeGroups) await run(prefix + '-native-decode-' + sourceSha256,
+            ffmpegPath, buildPresentationNativeLayerDecodeArgumentsV001(layers).map(value => value === '-y' ? '-n' : value));
+          nativeLayerRefs = [];
+          for (const layer of nativeLayers.layers) {
+            const ref = await bind(layer.decodedPath);
+            assert.equal(layer.pixelFormat, 'gbrap'); assert.equal(ref.bytes, layer.width * layer.height * 4);
+            nativeLayerRefs.push(ref);
+          }
+        }
+        equal(nativeLayers.layers.map(layer => layer.decodedPath), nativeLayerRefs.map(ref => ref.path));
+        await run(prefix + '-native-reference-' + base, ffmpegPath, args);
         for (const [index, label] of [first, second].entries()) artifacts[label] = {raw: await bind(outputs[index])};
       }
       const wrong = path.join(outputDirectory, prefix + '-caption-darkened-by-fullframe-soft.yuv');
@@ -291,10 +310,11 @@ export async function runOrchestrationSoftOverlayProbeV001({repositoryRoot, outp
         localFrame: sample.localFrame, nativeCaptionAlpha: 1, existingSoftState: {numerator: 4, denominator: 5},
         originalSoftLut: sample.originalSoftLut, appliedSingleFrameSoftLut: sample.softLut,
         retainedSpan: sample.retainedSpan, pngRef: sample.pngRef, propsSha256: sample.propsSha256,
-        rgbaRef: await bind(rgbaPath), maskRef: await bind(maskPath), artifacts,
+        rgbaRef: await bind(rgbaPath), maskRef: await bind(maskPath), decodedNativeLayers: nativeLayerRefs, artifacts,
         glyphs, wrongFault, omittedFault,
         faultCheckBasis: 'unencoded generated reference RGB buffers; not an encoded wrong-order candidate',
         entireFrameInformational: entireFrame, status: passed ? 'passed' : 'failed'};
+      for (const ref of nativeLayerRefs) await verify(ref);
       samples.push(result); await save(path.join(outputDirectory, prefix + '-proof.json'), result);
     }
     const after = [];

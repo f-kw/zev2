@@ -162,13 +162,13 @@ async function nativeEvidence(config, caseDirectory, renderResult) {
       elapsedMilliseconds: row.elapsedMilliseconds, processTimings: row.processTimings})),
     drawResultRef: output.drawResultRef};
 }
-async function runCase({label, spec, runDirectory, base, sourceRefs, reference}) {
+async function runCase({label, spec, runDirectory, base, sourceRefs, reference, runPrefix}) {
   const directory = path.join(runDirectory, spec.name); await mkdir(directory);
   const copiedInputs = path.join(directory, 'input'); await mkdir(copiedInputs);
   for (const name of inputNames) await copyFile(path.join(sourceDirectory, name), path.join(copiedInputs, name), constants.COPYFILE_EXCL);
   assert.deepEqual(contentIdentity(await bindings(copiedInputs, inputNames)), contentIdentity(sourceRefs));
-  const generatedRoot = path.join(repo, 'evals/clip_composition/outputs/presentation', `stage4-editing-p1-20260921-${label}-${spec.name}`);
-  const config = {...base, directory: path.join(repo, 'runtime/presentation-editing', `p1-20260921-${label}-${spec.name}`),
+  const generatedRoot = path.join(repo, 'evals/clip_composition/outputs/presentation', `stage4-editing-${runPrefix}-${label}-${spec.name}`);
+  const config = {...base, directory: path.join(repo, 'runtime/presentation-editing', `${runPrefix}-${label}-${spec.name}`),
     generatedRoot, nativeAssetReuse: path.join(generatedRoot, 'native-assets'), savedInputDirectory: copiedInputs,
     title: `P1 ${label} ${spec.name} isolated measurement`, port: 0};
   await absent(config.directory); await absent(config.generatedRoot);
@@ -284,11 +284,12 @@ async function runCase({label, spec, runDirectory, base, sourceRefs, reference})
     resultPath: path.join(directory, 'result.json'), failure: result.failure ?? null});
   return result;
 }
-export async function runP1EditingPerformanceV001(label, referencePath) {
+export async function runP1EditingPerformanceV001(label, referencePath, {evidenceDirectory = evidenceRoot, runPrefix = 'p1-20260921'} = {}) {
   assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(label ?? ''), 'a new explicit run label is required');
-  const runDirectory = path.join(evidenceRoot, label);
+  assert(path.isAbsolute(evidenceDirectory) && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(runPrefix));
+  const runDirectory = path.join(evidenceDirectory, label);
   assertIgnoredPresentationOutputDirectoryV001({repositoryRoot: repo, outputDirectory: runDirectory});
-  await absent(runDirectory); await mkdir(evidenceRoot, {recursive: true}); await mkdir(runDirectory);
+  await absent(runDirectory); await mkdir(evidenceDirectory, {recursive: true}); await mkdir(runDirectory);
   const result = {schemaVersion: 'p1-editing-performance-v001', label, status: 'running', cases: [],
     startingConditions: 'separate empty native image, applicability, and completed-preview stores per case',
     pollIntervalMilliseconds: 2000,
@@ -310,7 +311,7 @@ export async function runP1EditingPerformanceV001(label, referencePath) {
     protectedBefore = await protectedReferences(base); result.protectedBefore = protectedBefore;
     await save(path.join(runDirectory, 'preflight.json'), result);
     for (const spec of cases) {
-      const row = await runCase({label, spec, runDirectory, base, sourceRefs: result.sourceRefs,
+      const row = await runCase({label, spec, runDirectory, base, runPrefix, sourceRefs: result.sourceRefs,
         reference: reference?.cases.find(row => row.name === spec.name)});
       result.cases.push(row); assert.equal(row.status, 'passed', row.failure?.message);
     }

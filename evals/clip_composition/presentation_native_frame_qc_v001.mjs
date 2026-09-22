@@ -19,7 +19,7 @@ import {getPresentationCaptionMotionProgramV001, buildPresentationCaptionMotionS
 
 export const PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001 = 'presentation-native-frame-qc-v001';
 export const PRESENTATION_NATIVE_FRAME_QC_BASIS_V001 = 'native-reference-state-identification-v001';
-export const PRESENTATION_NATIVE_FRAME_EXECUTION_V001 = 'batched-frames-shared-native-layers-v001';
+export const PRESENTATION_NATIVE_FRAME_EXECUTION_V001 = 'batched-frames-shared-planar-native-layers-v002';
 const HASH = /^[a-f0-9]{64}$/u;
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const hashBytes = value => createHash('sha256').update(value).digest('hex');
@@ -454,8 +454,11 @@ const layerAlpha = layer => {
 };
 const layerKey = (pngSha256, numerator) => hashJson({pngSha256, numerator, denominator: 4});
 
-export function buildPresentationNativeLayerPlanV001({samples, sceneBindings, directory}) {
+export function buildPresentationNativeLayerPlanV001({samples, sceneBindings, directory, canvas}) {
   requireValue(path.isAbsolute(directory), 'prepared native layer directory must be absolute');
+  requireValue(object(canvas) && integer(canvas.width) && canvas.width > 0
+    && integer(canvas.height) && canvas.height > 0 && Number.isSafeInteger(canvas.width * canvas.height * 4),
+  'prepared native layer canvas is invalid');
   const byId = new Map(sceneBindings.flatMap(group => [...group.states, ...group.alternates])
     .map(row => [row.bindingId, row]));
   const sourceByHash = new Map();
@@ -469,9 +472,10 @@ export function buildPresentationNativeLayerPlanV001({samples, sceneBindings, di
     if (!layers.has(key)) layers.set(key, {key, sourcePath: sourceByHash.get(binding.pngSha256),
       sourceSha256: binding.pngSha256, numerator, denominator: 4,
       outputPath: numerator === 4 ? sourceByHash.get(binding.pngSha256) : path.join(directory, 'layer-' + key + '.png'),
-      generated: numerator !== 4});
+      generated: numerator !== 4, decodedPath: path.join(directory, 'layer-' + key + '.gbrap'),
+      pixelFormat: 'gbrap', width: canvas.width, height: canvas.height});
   }
-  return {method: 'exact-native-png-four-frame-alpha-v001', directory,
+  return {method: 'exact-native-png-four-frame-alpha-planar-v002', directory,
     layers: [...layers.values()].sort((left, right) => left.key.localeCompare(right.key))};
 }
 
@@ -485,6 +489,21 @@ export function buildPresentationNativeLayerArgumentsV001(layers) {
   const args = ['-hide_banner', '-loglevel', 'error', '-nostdin', '-y', '-filter_complex_threads', '1',
     '-threads', '1', '-i', layers[0].sourcePath, '-filter_complex', filters.join(';')];
   layers.forEach((layer, index) => args.push('-map', '[out' + index + ']', '-frames:v', '1', '-c:v', 'png', '-threads', '1', layer.outputPath));
+  return args;
+}
+
+/** Decode the already-prepared PNGs once per job, preserving their PNG roundtrip. */
+export function buildPresentationNativeLayerDecodeArgumentsV001(layers) {
+  requireValue(Array.isArray(layers) && layers.length > 0 && layers.every(layer =>
+    layer.sourceSha256 === layers[0].sourceSha256 && path.isAbsolute(layer.outputPath)
+    && path.isAbsolute(layer.decodedPath) && layer.pixelFormat === 'gbrap'
+    && integer(layer.width) && layer.width > 0 && integer(layer.height) && layer.height > 0),
+  'native planar decode group differs');
+  const args = ['-hide_banner', '-loglevel', 'error', '-nostdin', '-y', '-filter_complex_threads', '1'];
+  for (const layer of layers) args.push('-threads', '1', '-i', layer.outputPath);
+  args.push('-filter_complex', layers.map((_layer, index) => '[' + index + ':v]format=rgba,format=gbrap[out' + index + ']').join(';'));
+  for (const [index, layer] of layers.entries()) args.push('-map', '[out' + index + ']', '-frames:v', '1',
+    '-c:v', 'rawvideo', '-threads', '1', '-pix_fmt', 'gbrap', '-f', 'rawvideo', layer.decodedPath);
   return args;
 }
 
@@ -528,13 +547,14 @@ function nativeReferenceArguments({sample, sceneBindings, baseFramePath, outputP
   });
   const usedLayers = [...new Map(nodes.slice(1).map(node => [node.layer.key, node.layer])).values()];
   const args = ['-hide_banner', '-loglevel', 'error', '-nostdin', '-y', '-filter_complex_threads', '1', '-i', baseFramePath];
-  usedLayers.forEach(layer => args.push('-threads', '1', '-i', layer.outputPath));
+  usedLayers.forEach(layer => args.push('-threads', '1', '-f', 'rawvideo', '-pixel_format', layer.pixelFormat,
+    '-video_size', layer.width + 'x' + layer.height, '-framerate', '25', '-i', layer.decodedPath));
   const filters = [];
   for (const [index, layer] of usedLayers.entries()) {
     const uses = nodes.filter(node => node.layer?.key === layer.key);
-    // The old geq path converts RGBA through planar GBR+alpha. Keep that exact
-    // conversion even when alpha is already prepared or is fully opaque.
-    filters.push('[' + (index + 1) + ':v]format=rgba,format=gbrap' + (uses.length === 1
+    // These exact planar bytes were decoded from the same prepared PNG once.
+    // Keep the original single-frame 25fps input clock and every overlay consumer.
+    filters.push('[' + (index + 1) + ':v]format=gbrap' + (uses.length === 1
       ? '[layer' + uses[0].id + ']' : ',split=' + uses.length + uses.map(node => '[layer' + node.id + ']').join('')));
   }
   for (const node of nodes) {
@@ -720,8 +740,8 @@ export async function inspectPresentationNativeFrameQcV001({
   const processes = [], outputArtifacts = [];
   const counts = {sourceFrameOutputs: 0, completedFrameOutputs: 0, completedRgbOutputs: 0,
     logicalReferenceCount: 0, referenceRgbOutputs: 0, reusedReferenceRgbCount: 0,
-    preparedLayerOutputs: 0, exactDistanceCalculations: 0, reusedExactDistances: 0};
-  const phasesMilliseconds = {inputBinding: 0, frameExtraction: 0, nativeLayerPreparation: 0,
+    preparedLayerOutputs: 0, decodedLayerOutputs: 0, decodedLayerBytes: 0, exactDistanceCalculations: 0, reusedExactDistances: 0};
+  const phasesMilliseconds = {inputBinding: 0, frameExtraction: 0, nativeLayerPreparation: 0, nativeLayerDecode: 0,
     completedRgbCrop: 0, referenceComposition: 0, rgbDistance: 0, evidenceWrite: 0,
     verification: 0, evidenceConstruction: 0};
   const timed = async (name, operation) => {
@@ -798,7 +818,7 @@ export async function inspectPresentationNativeFrameQcV001({
     const work = await mkdtemp(path.join(scratchDirectory, 'native-frame-qc-'));
     const frameExtraction = buildPresentationNativeFrameBatchPlanV001({samples: recipe.samples, directory: path.join(work, 'frames')});
     const nativeLayers = buildPresentationNativeLayerPlanV001({samples: recipe.samples,
-      sceneBindings: recipe.sceneBindings, directory: path.join(work, 'layers')});
+      sceneBindings: recipe.sceneBindings, directory: path.join(work, 'layers'), canvas: plan.canvas});
     const referenceDirectory = path.join(work, 'references');
     await mkdir(referenceDirectory);
     await mkdir(nativeLayers.directory);
@@ -833,6 +853,29 @@ export async function inspectPresentationNativeFrameQcV001({
         for (const layer of layers) {
           outputArtifacts.push({path: layer.outputPath, fileSha256: hashBytes(await readFile(layer.outputPath))});
           counts.preparedLayerOutputs++;
+        }
+      }
+    });
+    await timed('nativeLayerDecode', async () => {
+      const groups = new Map();
+      const preparedHashes = new Map(outputArtifacts.map(artifact => [artifact.path, artifact.fileSha256]));
+      for (const layer of nativeLayers.layers) {
+        const png = await readFile(layer.outputPath);
+        requireValue(hashBytes(png) === (layer.generated ? preparedHashes.get(layer.outputPath) : layer.sourceSha256),
+          'prepared native PNG changed before planar decode');
+        requireValue(png.length >= 24 && png.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+          && png.readUInt32BE(16) === layer.width && png.readUInt32BE(20) === layer.height,
+        'prepared native PNG canvas differs');
+        if (!groups.has(layer.sourceSha256)) groups.set(layer.sourceSha256, []);
+        groups.get(layer.sourceSha256).push(layer);
+      }
+      for (const layers of groups.values()) {
+        await run(tools.ffmpeg.path, buildPresentationNativeLayerDecodeArgumentsV001(layers), 'native-layer-decode');
+        for (const layer of layers) {
+          const decoded = await readFile(layer.decodedPath);
+          requireValue(decoded.length === layer.width * layer.height * 4, 'decoded native layer does not contain exactly one planar frame');
+          outputArtifacts.push({path: layer.decodedPath, fileSha256: hashBytes(decoded)});
+          counts.decodedLayerOutputs++; counts.decodedLayerBytes += decoded.length;
         }
       }
     });
