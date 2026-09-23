@@ -1,0 +1,266 @@
+diff --git a/evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs b/evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs
+index 711a4d3a..c03543a7 100644
+--- a/evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs
++++ b/evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs
+@@ -238,7 +238,7 @@ const validate = f => validatePresentationExactReplayQcEvidenceV001({
+ 
+ // Pure evidence fixture: two decoded frames and one 2x2 Normal observation.
+ // These fixed bytes test evidence validation; they are not real media output.
+-function combinedEvidenceFixture(completedId = 'a') {
++function combinedEvidenceFixture(completedId = 'a', {distinctNormalPng = false} = {}) {
+   const f = syntheticEvidence({decoded: true}), e = f.evidence;
+   const completed = fileRef('completed-media', '/fixture/completed-' + completedId + '.mp4', 'completed-' + completedId);
+   e.completed = clone(completed);
+@@ -267,6 +267,12 @@ function combinedEvidenceFixture(completedId = 'a') {
+     appliedOverlayPropsCanonicalSha256: hashJson(props),
+     alphaBounds: {left: 0, top: 0, right: 2, bottom: 2, width: 2, height: 2}}};
+   record.alternates = [{...clone(record), kind: 'normal'}];
++  if (distinctNormalPng) {
++    const alternate = record.alternates[0];
++    alternate.pngPath = '/fixture/normal-alternative.png';
++    alternate.pngSha256 = hash('normal-alternative');
++    alternate.inspection.overlaySha256 = alternate.pngSha256;
++  }
+   const recipe = buildPresentationNativeFrameQcRecipeV001({plan: f.plan, baselinePlan, autoPresentation, records: [record]});
+   assert.equal(recipe.samples.length, 1);
+   const wanted = recipe.samples[0];
+@@ -335,8 +341,10 @@ function combinedEvidenceFixture(completedId = 'a') {
+       completed.path, [1], frameExtraction.completedOutputPattern)),
+     ...[...layerGroups.values()].map(group => observedProcess('native-layer-prepare', ffmpeg,
+       buildPresentationNativeLayerArgumentsV001(group))),
+-    ...[...decodeGroups.values()].map(group => observedProcess('native-layer-decode', ffmpeg,
+-      buildPresentationNativeLayerDecodeArgumentsV001(group))),
++    ...[...decodeGroups.values()].map(group => ({...observedProcess('native-layer-decode', ffmpeg,
++      buildPresentationNativeLayerDecodeArgumentsV001(group)), outputFiles: group.map(layer => ({
++        path: layer.decodedPath, bytes: layer.width * layer.height * 4, fileSha256: hash('decoded-' + layer.key),
++      }))})),
+     observedProcess('completed-rgb-crop', magick, [sample.completedFrame.path, '-crop', '2x2+0+0',
+       '+repage', '-alpha', 'off', '-depth', '8', 'rgb:-'], expectedRgb),
+     observedProcess('native-reference-composite', ffmpeg, buildPresentationNativeReferenceArgumentsV001({
+@@ -344,11 +352,17 @@ function combinedEvidenceFixture(completedId = 'a') {
+       sceneBindings: recipe.sceneBindings, baseFramePath: sample.baseFrame.path,
+       outputPaths: uniqueExecutions.map(row => row.path)})),
+   ];
++  const decodedLayers = {schemaVersion: 'native-decoded-layer-observation-v001',
++    layers: [...decodeGroups.values()].flatMap(group => group.map(layer => ({
++      layerKey: layer.key, sourcePngSha256: layer.sourceSha256,
++      preparedPngSha256: layer.generated ? hash('prepared-' + layer.key) : layer.sourceSha256,
++      decodeArgumentsCanonicalSha256: hashJson(buildPresentationNativeLayerDecodeArgumentsV001(group)),
++      decodedBytes: layer.width * layer.height * 4, decodedSha256: hash('decoded-' + layer.key),
++    })))};
+   const finiteEvidence = {...clone(local), processes, executableVersions,
+-    executionMethod: PRESENTATION_NATIVE_FRAME_EXECUTION_V001, frameExtraction, nativeLayers, referenceDirectory,
++    executionMethod: PRESENTATION_NATIVE_FRAME_EXECUTION_V001, frameExtraction, nativeLayers, decodedLayers, referenceDirectory,
+     outputArtifacts: [clone(sample.baseFrame), clone(sample.completedFrame),
+       ...[...layerGroups.values()].flat().map(layer => ({path: layer.outputPath, fileSha256: hash('prepared-' + layer.key)})),
+-      ...[...decodeGroups.values()].flat().map(layer => ({path: layer.decodedPath, fileSha256: hash('decoded-' + layer.key)})),
+       clone(sample.completedRgb),
+       ...uniqueExecutions.map(row => ({path: row.path, fileSha256: row.reference.rgbSha256}))]};
+   delete finiteEvidence.instructionId;
+@@ -781,17 +795,15 @@ test('combined proof rejects missing or substituted planar layers and a severed
+       const layer = f.finite.evidence.nativeLayers.layers[0];
+       changeArguments(decoder(f), args => {args[args.indexOf(layer.decodedPath)] = '/fixture/substituted.gbrap';});
+     }],
+-    ['missing raw artifact', f => {
+-      const layer = f.finite.evidence.nativeLayers.layers[0];
+-      f.finite.evidence.outputArtifacts = f.finite.evidence.outputArtifacts.filter(row => row.path !== layer.decodedPath);
++    ['missing raw output observation', f => {
++      decoder(f).outputFiles.pop();
+     }],
+-    ['duplicate raw artifact', f => {
+-      const layer = f.finite.evidence.nativeLayers.layers[0];
+-      f.finite.evidence.outputArtifacts.push(clone(f.finite.evidence.outputArtifacts.find(row => row.path === layer.decodedPath)));
++    ['duplicate raw output observation', f => {
++      decoder(f).outputFiles.push(clone(decoder(f).outputFiles[0]));
+     }],
+     ['raw output aliases a fixed input', f => {
+       const layer = f.finite.evidence.nativeLayers.layers[0];
+-      f.finite.evidence.outputArtifacts.find(row => row.path === layer.decodedPath).path = layer.sourcePath;
++      decoder(f).outputFiles[0].path = layer.sourcePath;
+     }],
+     ['composition reads prepared PNG instead of raw layer', f => {
+       const layer = f.finite.evidence.nativeLayers.layers[0];
+@@ -817,6 +829,65 @@ test('combined proof rejects missing or substituted planar layers and a severed
+   }
+ });
+ 
++test('combined proof validates saved compact decode observations without raw artifacts and rejects independent tampering', () => {
++  const fixture = () => combinedEvidenceFixture('compact', {distinctNormalPng: true});
++  const original = fixture(), finite = original.finite.evidence;
++  assert.equal(finite.decodedLayers.layers.length, 2);
++  const rawPaths = new Set(finite.nativeLayers.layers.map(layer => layer.decodedPath));
++  assert(finite.outputArtifacts.every(ref => !rawPaths.has(ref.path)));
++  // These synthetic paths never contain files; saved validation needs the
++  // recorded chain, while actual generation verifies all raw bytes before release.
++  const saved = JSON.parse(JSON.stringify(original));
++  assert.equal(combinePresentationIntegrityStateQcV001(saved).status, 'passed');
++  const observations = f => f.finite.evidence.decodedLayers.layers;
++  const decoders = f => f.finite.evidence.processes.filter(row => row.purpose === 'native-layer-decode');
++  const changes = [
++    ['missing compact observations', f => {delete f.finite.evidence.decodedLayers;}],
++    ['wrong compact schema', f => {f.finite.evidence.decodedLayers.schemaVersion = 'other';}],
++    ['extra compact container field', f => {f.finite.evidence.decodedLayers.extra = true;}],
++    ['missing observation', f => {observations(f).pop();}],
++    ['duplicate observation', f => {observations(f).push(clone(observations(f)[0]));}],
++    ['reordered observations', f => {observations(f).reverse();}],
++    ['extra observation field', f => {observations(f)[0].extra = true;}],
++    ['another layer key', f => {observations(f)[0].layerKey = observations(f)[1].layerKey;}],
++    ['changed source PNG hash', f => {observations(f)[0].sourcePngSha256 = hash('changed-source');}],
++    ['changed prepared PNG hash', f => {observations(f)[0].preparedPngSha256 = hash('changed-prepared');}],
++    ['changed decode command hash', f => {observations(f)[0].decodeArgumentsCanonicalSha256 = hash('changed-command');}],
++    ['changed decoded byte count', f => {observations(f)[0].decodedBytes++;}],
++    ['changed decoded hash', f => {observations(f)[0].decodedSha256 = hash('changed-raw');}],
++    ['swapped decoded hashes', f => {
++      const rows = observations(f);
++      [rows[0].decodedSha256, rows[1].decodedSha256] = [rows[1].decodedSha256, rows[0].decodedSha256];
++    }],
++    ['missing decode output list', f => {delete decoders(f)[0].outputFiles;}],
++    ['extra decode output field', f => {decoders(f)[0].outputFiles[0].extra = true;}],
++    ['changed process output hash', f => {decoders(f)[0].outputFiles[0].fileSha256 = hash('changed-process-raw');}],
++    ['malformed process and compact raw hash', f => {
++      decoders(f)[0].outputFiles[0].fileSha256 = 'invalid';
++      observations(f)[0].decodedSha256 = 'invalid';
++    }],
++    ['changed process output byte count', f => {decoders(f)[0].outputFiles[0].bytes++;}],
++    ['changed process and compact byte count', f => {
++      decoders(f)[0].outputFiles[0].bytes++;
++      observations(f)[0].decodedBytes++;
++    }],
++    ['swapped process output lists', f => {
++      const processes = decoders(f);
++      [processes[0].outputFiles, processes[1].outputFiles] = [processes[1].outputFiles, processes[0].outputFiles];
++    }],
++    ['raw output included among retained artifacts', f => {
++      const output = decoders(f)[0].outputFiles[0];
++      f.finite.evidence.outputArtifacts.push({path: output.path, fileSha256: output.fileSha256});
++    }],
++  ];
++  for (const [label, change] of changes) {
++    const f = fixture(); change(f);
++    const result = combinePresentationIntegrityStateQcV001(f);
++    assert.equal(result.status, 'failed', label);
++    assert.ok(result.violations.some(row => row.code === 'INTEGRITY_STATE_QC_INVALID'), label);
++  }
++});
++
+ test('all decoded frame hashes retain order and exact rational timestamps', () => {
+   const rows = parsePresentationExactVideoFrameHashV001({
+     text: frameHashText({timeBase: '2/60'}), width: 2, height: 2,
+diff --git a/evals/clip_composition/presentation_integrity_state_qc_v001.mjs b/evals/clip_composition/presentation_integrity_state_qc_v001.mjs
+index 6cf5c5ea..e9f8d3b5 100644
+--- a/evals/clip_composition/presentation_integrity_state_qc_v001.mjs
++++ b/evals/clip_composition/presentation_integrity_state_qc_v001.mjs
+@@ -59,6 +59,7 @@ function checkFiniteExecutionEvidence(finite, inspections, canvas) {
+       && HASH.test(process.stdoutSha256) && HASH.test(process.stderrSha256)
+       && (stdoutSha256 === undefined || process.stdoutSha256 === stdoutSha256),
+     'finite-state process does not bind its input and output: ' + purpose);
++    return process;
+   };
+   const tools = [{name: 'ffmpeg', ref: ffmpeg}, {name: 'imageMagick', ref: magick}];
+   requireValue(finite.executableVersions && same(Object.keys(finite.executableVersions).sort(),
+@@ -115,11 +116,31 @@ function checkFiniteExecutionEvidence(finite, inspections, canvas) {
+     if (!decodeGroups.has(layer.sourceSha256)) decodeGroups.set(layer.sourceSha256, []);
+     decodeGroups.get(layer.sourceSha256).push(layer);
+   }
++  requireValue(finite.decodedLayers?.schemaVersion === 'native-decoded-layer-observation-v001'
++    && same(Object.keys(finite.decodedLayers).sort(), ['layers', 'schemaVersion'])
++    && Array.isArray(finite.decodedLayers.layers), 'complete decoded layer observations are missing');
++  let decodedCursor = 0;
+   for (const group of decodeGroups.values()) {
+-    expectProcess('native-layer-decode', ffmpeg.path,
+-      buildPresentationNativeLayerDecodeArgumentsV001(group), emptyStdoutSha256);
+-    for (const layer of group) expectArtifact(generatedByPath.get(layer.decodedPath));
++    const args = buildPresentationNativeLayerDecodeArgumentsV001(group);
++    const process = expectProcess('native-layer-decode', ffmpeg.path, args, emptyStdoutSha256);
++    requireValue(Array.isArray(process.outputFiles) && process.outputFiles.length === group.length,
++      'decode process does not observe every raw output exactly once');
++    for (const [index, layer] of group.entries()) {
++      const output = process.outputFiles[index], decodedBytes = layer.width * layer.height * 4;
++      requireValue(output && HASH.test(output.fileSha256)
++        && same(output, {path: layer.decodedPath, bytes: decodedBytes, fileSha256: output.fileSha256})
++        && !outputPaths.has(layer.decodedPath) && !inputPaths.has(layer.decodedPath),
++      'decoded raw output is missing, duplicated, substituted, or aliases another file');
++      outputPaths.add(layer.decodedPath);
++      const preparedPngSha256 = layer.generated ? generatedByPath.get(layer.outputPath).fileSha256 : layer.sourceSha256;
++      requireValue(same(finite.decodedLayers.layers[decodedCursor++], {
++        layerKey: layer.key, sourcePngSha256: layer.sourceSha256, preparedPngSha256,
++        decodeArgumentsCanonicalSha256: canonicalDigest(args), decodedBytes, decodedSha256: output.fileSha256,
++      }), 'decoded layer observation differs from its source, prepared PNG, command, or raw output');
++    }
+   }
++  requireValue(decodedCursor === finite.decodedLayers.layers.length,
++    'decoded layer observations contain missing or extra layers');
+   const references = new Map();
+   for (const sample of finite.samples) {
+     requireValue(frameObservations.has(sample.frame), 'a finite sample frame was not extracted');
+diff --git a/evals/clip_composition/presentation_native_frame_qc_v001.mjs b/evals/clip_composition/presentation_native_frame_qc_v001.mjs
+index be8f123c..802ec47f 100644
+--- a/evals/clip_composition/presentation_native_frame_qc_v001.mjs
++++ b/evals/clip_composition/presentation_native_frame_qc_v001.mjs
+@@ -19,7 +19,7 @@ import {getPresentationCaptionMotionProgramV001, buildPresentationCaptionMotionS
+ 
+ export const PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001 = 'presentation-native-frame-qc-v001';
+ export const PRESENTATION_NATIVE_FRAME_QC_BASIS_V001 = 'native-reference-state-identification-v001';
+-export const PRESENTATION_NATIVE_FRAME_EXECUTION_V001 = 'batched-frames-shared-planar-native-layers-v002';
++export const PRESENTATION_NATIVE_FRAME_EXECUTION_V001 = 'batched-frames-shared-planar-native-layers-v003';
+ const HASH = /^[a-f0-9]{64}$/u;
+ const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+ const hashBytes = value => createHash('sha256').update(value).digest('hex');
+@@ -737,7 +737,8 @@ export async function inspectPresentationNativeFrameQcV001({
+   const started = performance.now();
+   plan = clone(plan); records = clone(records); provenance = clone(provenance);
+   media = clone(media); tools = clone(tools);
+-  const processes = [], outputArtifacts = [];
++  const processes = [], outputArtifacts = [], temporaryArtifacts = [];
++  const decodedLayers = {schemaVersion: 'native-decoded-layer-observation-v001', layers: []};
+   const counts = {sourceFrameOutputs: 0, completedFrameOutputs: 0, completedRgbOutputs: 0,
+     logicalReferenceCount: 0, referenceRgbOutputs: 0, reusedReferenceRgbCount: 0,
+     preparedLayerOutputs: 0, decodedLayerOutputs: 0, decodedLayerBytes: 0, exactDistanceCalculations: 0, reusedExactDistances: 0};
+@@ -870,11 +871,20 @@ export async function inspectPresentationNativeFrameQcV001({
+         groups.get(layer.sourceSha256).push(layer);
+       }
+       for (const layers of groups.values()) {
+-        await run(tools.ffmpeg.path, buildPresentationNativeLayerDecodeArgumentsV001(layers), 'native-layer-decode');
++        const args = buildPresentationNativeLayerDecodeArgumentsV001(layers);
++        await run(tools.ffmpeg.path, args, 'native-layer-decode');
++        const observation = processes.at(-1);
++        observation.outputFiles = [];
+         for (const layer of layers) {
+           const decoded = await readFile(layer.decodedPath);
+           requireValue(decoded.length === layer.width * layer.height * 4, 'decoded native layer does not contain exactly one planar frame');
+-          outputArtifacts.push({path: layer.decodedPath, fileSha256: hashBytes(decoded)});
++          const output = {path: layer.decodedPath, bytes: decoded.length, fileSha256: hashBytes(decoded)};
++          temporaryArtifacts.push(output);
++          observation.outputFiles.push({...output});
++          decodedLayers.layers.push({layerKey: layer.key, sourcePngSha256: layer.sourceSha256,
++            preparedPngSha256: layer.generated ? preparedHashes.get(layer.outputPath) : layer.sourceSha256,
++            decodeArgumentsCanonicalSha256: observation.argumentsCanonicalSha256,
++            decodedBytes: output.bytes, decodedSha256: output.fileSha256});
+           counts.decodedLayerOutputs++; counts.decodedLayerBytes += decoded.length;
+         }
+       }
+@@ -925,6 +935,11 @@ export async function inspectPresentationNativeFrameQcV001({
+       }
+       for (const artifact of outputArtifacts) requireValue(hashBytes(await readFile(artifact.path)) === artifact.fileSha256,
+         'generated frame evidence changed before completion');
++      for (const artifact of temporaryArtifacts) {
++        const bytes = await readFile(artifact.path);
++        requireValue(bytes.length === artifact.bytes && hashBytes(bytes) === artifact.fileSha256,
++          'temporary decoded layer changed before completion');
++      }
+     });
+     const evidenceStarted = performance.now();
+     const inspections = records.map(record => {
+@@ -948,10 +963,10 @@ export async function inspectPresentationNativeFrameQcV001({
+       evidence: {schemaVersion: PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, inputManifest: manifest,
+         baselinePlan, autoPresentation, orchestrationInput, renderRange, sceneBindings: recipe.sceneBindings, samples, processes,
+         executionMethod: PRESENTATION_NATIVE_FRAME_EXECUTION_V001, frameExtraction, nativeLayers, referenceDirectory,
+-        outputArtifacts, executableVersions: version},
++        outputArtifacts, decodedLayers, executableVersions: version},
+       performance: performanceRecord()};
+   } catch (error) {
+-    error.nativeFrameQcFailure = {inputManifest: manifest ?? null, processes, performance: performanceRecord()};
++    error.nativeFrameQcFailure = {inputManifest: manifest ?? null, processes, decodedLayers, performance: performanceRecord()};
+     throw error;
+   }
+ }
