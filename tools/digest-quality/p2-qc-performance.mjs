@@ -1,10 +1,11 @@
 /** P2: rerun only finite-state QC against saved P1 media and native PNGs. */
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {lstat, mkdir, readFile, realpath, writeFile} from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 import {canonicalJson} from '../../evals/clip_composition/presentation_caption_contract_v002.mjs';
 import {buildPresentationNativeFrameQcRecipeV001, inspectPresentationNativeFrameQcV001}
   from '../../evals/clip_composition/presentation_native_frame_qc_v001.mjs';
@@ -174,7 +175,58 @@ async function newOutput(directory) {
   await mkdir(directory);
 }
 
-export async function runP2QcPerformanceV001(sourceResultPath, outputDirectory, beforeResultPath) {
+// Recheck after worktree consolidation: only relocate missing native source/font
+// bindings, and only after verifying the existing recorded bytes at main's path.
+async function restoreRepositoryInputs(saved) {
+  const entry = saved.input.provenance.inputRefs.find(ref => ref.role === 'native-entry');
+  const relativeEntry = 'evals/clip_composition/presentation_renderer_entry_v001.tsx';
+  assert(entry?.path.endsWith('/' + relativeEntry));
+  const oldRoot = entry.path.slice(0, -relativeEntry.length);
+  const relocations = [];
+  for (const ref of saved.input.provenance.inputRefs) {
+    try {await lstat(ref.path); continue;} catch (error) {if (error.code !== 'ENOENT') throw error;}
+    assert(ref.role.startsWith('native-source:') || ref.role.startsWith('native-font:'));
+    assert(ref.path.startsWith(oldRoot));
+    const replacement = path.resolve(repo, ref.path.slice(oldRoot.length));
+    assert(replacement.startsWith(repo + path.sep));
+    await readBound({...ref, path: replacement});
+    relocations.push({from: ref.path, to: replacement, fileSha256: ref.fileSha256});
+    ref.path = replacement;
+  }
+  return relocations;
+}
+
+async function beforeSharingModule() {
+  const commit = '73d1536b1a2febad04111609bb82f97e44df36ae';
+  const relativePath = 'evals/clip_composition/presentation_native_frame_qc_v001.mjs';
+  const source = execFileSync('git', ['show', commit + ':' + relativePath], {cwd: repo, encoding: 'utf8'});
+  const fileSha256 = hash(source);
+  assert.equal(fileSha256, '6820d0e85dba7ac76b36f0c8b4499ddc7018d600097fc4ecd1043ad1d5c730a6');
+  assert(!source.includes('import.meta'), 'historical module requires its original location');
+  const dependencies = new Set();
+  const verifyDependency = async file => {
+    if (dependencies.has(file)) return;
+    dependencies.add(file);
+    const current = await readFile(file, 'utf8');
+    assert.equal(current, execFileSync('git', ['show', commit + ':' + path.relative(repo, file)],
+      {cwd: repo, encoding: 'utf8'}), 'historical QC dependency changed: ' + file);
+    for (const match of current.matchAll(/(?:from\s+|import\s*)['"](\.[^'"]+)['"]/gu))
+      await verifyDependency(path.resolve(path.dirname(file), match[1]));
+  };
+  for (const match of source.matchAll(/from\s+['"](\.[^'"]+)['"]/gu))
+    await verifyDependency(path.resolve(repo, path.dirname(relativePath), match[1]));
+  // Only import addresses change. No checkout, production overwrite or old
+  // branch is needed; the recorded Git blob remains the benchmark baseline.
+  const executable = source.replace(/(from\s+['"])(\.[^'"]+)(['"])/gu, (_, prefix, target, suffix) =>
+    prefix + pathToFileURL(path.resolve(repo, path.dirname(relativePath), target)).href + suffix);
+  const module = await import('data:text/javascript;base64,' + Buffer.from(executable).toString('base64'));
+  return {inspect: module.inspectPresentationNativeFrameQcV001,
+    binding: {commit, relativePath, fileSha256, executableSha256: hash(executable),
+      unchangedDependencyCount: dependencies.size, adaptation: 'relative import addresses only'}};
+}
+
+export async function runP2QcPerformanceV001(sourceResultPath, outputDirectory, beforeResultPath,
+  {recheck = false, historical = false} = {}) {
   assert(path.isAbsolute(sourceResultPath));
   const before = beforeResultPath ? await json(beforeResultPath) : null;
   if (before) assert.equal(before.status, 'passed');
@@ -190,6 +242,10 @@ export async function runP2QcPerformanceV001(sourceResultPath, outputDirectory, 
     summary.helperRef = await bind(filename);
     summary.sourceResult = await bind(sourceResultPath);
     summary.sourceBindings = await codeClosure();
+    const implementation = historical ? await beforeSharingModule()
+      : {inspect: inspectPresentationNativeFrameQcV001,
+        binding: await bind(path.join(repo, 'evals/clip_composition/presentation_native_frame_qc_v001.mjs'))};
+    summary.implementation = implementation.binding;
     if (before) {
       assert.deepEqual(summary.environment, before.environment, 'measurement environment changed');
       assert.deepEqual(summary.helperRef, before.helperRef, 'measurement helper changed');
@@ -201,11 +257,13 @@ export async function runP2QcPerformanceV001(sourceResultPath, outputDirectory, 
       const sourceCase = source.cases.find(row => row.name === spec.name); assert(sourceCase);
       await readBound(sourceCase.nativeEvidence.drawResultRef);
       const saved = await inspectSourceCase(sourceCase, spec);
+      const repositoryRelocations = recheck ? await restoreRepositoryInputs(saved) : [];
       const directory = path.join(outputDirectory, spec.name); await mkdir(directory);
       const preparedRef = await bind(saved.preparationPath);
       const fixedInputs = {sourceDraw: sourceCase.nativeEvidence.drawResultRef,
         preparation: preparedRef, inputCanonicalSha256: hashJson(saved.input),
-        sourceInputRefs: saved.sourceInputRefs, publicationRelocations: saved.relocations};
+        sourceInputRefs: saved.sourceInputRefs, publicationRelocations: saved.relocations,
+        ...(recheck ? {repositoryRelocations} : {})};
       const previous = before?.cases.find(row => row.name === spec.name);
       if (before) {assert(previous); assert.deepEqual(fixedInputs, previous.fixedInputs);
         assert.deepEqual(saved.condition, previous.condition);}
@@ -215,7 +273,7 @@ export async function runP2QcPerformanceV001(sourceResultPath, outputDirectory, 
       const started = performance.now();
       let qc;
       try {
-        qc = await inspectPresentationNativeFrameQcV001({...saved.input,
+        qc = await implementation.inspect({...saved.input,
           scratchDirectory: path.join(directory, 'scratch'), processObserver: observer});
       } catch (error) {
         await save(path.join(directory, 'failure.json'), {message: error.message,
@@ -288,9 +346,19 @@ if (process.argv[1] && path.resolve(process.argv[1]) === filename) {
   const [command, ...args] = process.argv.slice(2);
   const action = command === 'inspect' && args.length === 1 ? () => inspectP2QcSourceV001(...args)
     : command === 'run' && [2, 3].includes(args.length) ? () => runP2QcPerformanceV001(...args)
-    : command === 'compare' && args.length === 3 ? () => compareP2QcPerformanceV001(...args) : null;
+    : command === 'compare' && args.length === 3 ? () => compareP2QcPerformanceV001(...args)
+    : command === 'recheck' && args.length === 2 ? async () => {
+      const [source, output] = args;
+      await newOutput(output);
+      const before = await runP2QcPerformanceV001(source, path.join(output, 'before'), undefined,
+        {recheck: true, historical: true});
+      assert.equal(before.status, 'passed', JSON.stringify(before.failure));
+      const after = await runP2QcPerformanceV001(source, path.join(output, 'after'), before.resultPath, {recheck: true});
+      assert.equal(after.status, 'passed', JSON.stringify(after.failure));
+      return compareP2QcPerformanceV001(before.resultPath, after.resultPath, path.join(output, 'comparison'));
+    } : null;
   assert(action, 'usage: p2-qc-performance.mjs inspect source-result | run source-result output [before-result] '
-    + '| compare before-result after-result output (all paths absolute)');
+    + '| compare before-result after-result output | recheck source-result output (all paths absolute)');
   action().then(result => {progress(result); if (result.status !== 'passed') process.exitCode = 1;})
     .catch(error => {console.error(error.stack); process.exitCode = 1;});
 }

@@ -2,7 +2,7 @@
  * Caption saves still pass the real font/geometry acceptance and drawing rules. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp, readFile, writeFile, lstat, utimes, rename, rm} from 'node:fs/promises';
+import {mkdtemp, mkdir, readFile, writeFile, lstat, utimes, rename, rm} from 'node:fs/promises';
 import {setTimeout as delay} from 'node:timers/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -10,6 +10,9 @@ import {fileURLToPath} from 'node:url';
 import {createEditingJobsV001} from './presentation_editing_jobs_v001.mjs';
 import {initializeEditingWorkspaceV001, bindEditingFileV001,
   saveEditingOverrideV001} from './presentation_editing_state_v001.mjs';
+import {AUTO_PRESENTATION_RULES_REF_V008} from './presentation_auto_effects_v001.mjs';
+import {createOrchestrationContextV001, createOrchestrationJudgmentInputV001,
+  fixOrchestrationJudgmentV001} from './presentation_orchestration_v001.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const saved = path.join(repo, 'docs/reports/digest-presentation-orchestration-stage3-inputs-20260918');
@@ -25,10 +28,37 @@ async function until(operation) {
 async function fixture(t, mode = 'success') {
   const root = await mkdtemp(path.join(os.tmpdir(), 'zev-editing-jobs-test-'));
   const generatedRoot = await mkdtemp(path.join(repo, 'evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-'));
+  const managers = [];
+  t.after(async () => {
+    for (const manager of managers) await manager.close();
+    await rm(root, {recursive: true, force: true});
+    await rm(generatedRoot, {recursive: true, force: true});
+  });
+  // Preserve the historical v007 report. Rebuild this storage-only fixture's
+  // bindings with the supported v008 vocabulary and unchanged semantic choices.
+  const savedInputDirectory = path.join(root, 'inputs'); await mkdir(savedInputDirectory);
+  const source = await json(path.join(saved, 'source-bindings.json'));
+  source.captionContext.renderingRulesRef = structuredClone(AUTO_PRESENTATION_RULES_REF_V008);
+  const context = createOrchestrationContextV001(source);
+  const previousInput = (await json(path.join(saved, 'selectionRecord.json'))).input;
+  const evidence = Object.fromEntries(['productionPurpose', 'captions', 'contexts', 'observations',
+    'audioEvidence', 'audioCandidates'].map(key => [key, previousInput[key]]));
+  const input = createOrchestrationJudgmentInputV001({context, evidence});
+  const reply = await json(path.join(saved, 'raw-ai-response-v001.json'));
+  reply.schemaVersion = 'presentation-orchestration-judgment-v002'; reply.inputSha256 = input.inputSha256;
+  // v007's Panel was the plain background; v008 requires that choice explicitly.
+  for (const row of reply.captions) for (const choice of row.allowedPresets) if (choice.preset === 'panel') {
+    assert.deepEqual(Object.keys(choice), ['preset']); choice.allowedBackgroundPresets = ['plain'];
+  }
+  const replyBytes = JSON.stringify(reply) + '\n';
+  const state = fixOrchestrationJudgmentV001({context, input, replyBytes});
+  for (const [name, value] of Object.entries({...state, 'source-bindings': source, 'fresh-input': input}))
+    await writeFile(path.join(savedInputDirectory, name + '.json'), JSON.stringify(value) + '\n');
+  await writeFile(path.join(savedInputDirectory, 'raw-ai-response-v001.json'), replyBytes);
   const original = path.join(root, 'original.mp4');
   await writeFile(original, 'SYNTHETIC BYTES: storage test, not playable media');
   const directory = path.join(root, 'editing');
-  const snapshot = await initializeEditingWorkspaceV001({directory, savedInputDirectory: saved,
+  const snapshot = await initializeEditingWorkspaceV001({directory, savedInputDirectory,
     title: '検査専用・実映像ではない', originalMedia: await bindEditingFileV001(original),
     originalDrawingRulesRef: rules, drawingRulesRef: rules, backgroundProofPath: null});
   const modePath = path.join(root, 'mode.txt'), ready = path.join(root, 'ready'), release = path.join(root, 'release');
@@ -61,6 +91,13 @@ if(mode==='gate') {
 const candidatePath=path.join(path.dirname(job.resultPath),'synthetic-candidate.mp4');
 const bytes=Buffer.from('SYNTHETIC RESULT: process test, not playable media');
 await writeFile(candidatePath,bytes,{flag:'wx'});
+if(mode==='partial-fail'||mode==='partial-cancel') {
+  await writeFile(job.resultPath,JSON.stringify({status:'running',candidateVideo:{path:candidatePath}}),{flag:'wx'});
+  await writeFile(${JSON.stringify(ready)},'partial candidate and incomplete result');
+  if(mode==='partial-fail') process.exit(17);
+  setInterval(()=>{},1000);
+  await new Promise(()=>{});
+}
 const result={status:'passed',viewSha256:job.viewSha256,projectionSha256:job.projectionSha256,
   range:job.range,drawingRulesRef:job.drawingRulesRef,candidateVideo:{path:candidatePath,
     bytes:bytes.length,fileSha256:createHash('sha256').update(bytes).digest('hex')}};
@@ -71,17 +108,10 @@ if(mode==='gate') {
   while(true) {try {await stat(${JSON.stringify(exit)}); break;} catch {await delay(10);}}
 }
 `);
-  const managers = [];
   const create = async () => {
     const manager = await createEditingJobsV001({directory, generatedRoot, drawingRulesRef: rules, workerPath});
     managers.push(manager); return manager;
   };
-  t.after(async () => {
-    await writeFile(exit, 'exit'); await writeFile(release, 'release');
-    for (const manager of managers) await manager.close();
-    await rm(root, {recursive: true, force: true});
-    await rm(generatedRoot, {recursive: true, force: true});
-  });
   return {root, directory, generatedRoot, snapshot, original, create, modePath, ready, release, resultReady, exit,
     descendantStopped};
 }
@@ -123,6 +153,37 @@ test('媒体登録後の中断から再起動して成功記録を補完し登�
   assert.equal(await readFile(mediaPath, 'utf8'), mediaBytes);
   assert.equal((await json(jobPath)).completedAt, JSON.parse(mediaBytes).createdAt);
 });
+
+for (const mode of ['partial-fail', 'partial-cancel']) {
+  test(`${mode}: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない`, async t => {
+    const f = await fixture(t, mode), manager = await f.create();
+    const started = await manager.start({snapshot: f.snapshot, kind: 'full'});
+    await until(() => exists(f.ready));
+    const jobPath = path.join(f.directory, 'jobs', started.id, 'job.json');
+    const job = await json(jobPath), incomplete = await json(job.resultPath);
+    assert.equal(incomplete.status, 'running');
+    assert.equal(await exists(incomplete.candidateVideo.path), true);
+    if (mode === 'partial-cancel') await manager.close();
+    const failed = await finished(manager);
+    assert.equal(failed.status, 'failed');
+    assert.match(failed.error, mode === 'partial-fail' ? /17/ : /SIGTERM/);
+    const checkUnpublished = async current => {
+      assert.equal(current.listMedia(f.snapshot.revision).some(row => row.id === started.id), false);
+      await assert.rejects(current.getMedia(started.id), {code: 'EDITING_NOT_FOUND'});
+      assert.equal(await exists(path.join(f.directory, 'media', started.id + '.json')), false);
+      assert.equal((await current.getMedia('original')).row.fileSha256, (await bindEditingFileV001(f.original)).fileSha256);
+    };
+    await checkUnpublished(manager);
+    await manager.close();
+    // Simulate interruption before the durable failed state was saved as well.
+    const interrupted = await json(jobPath);
+    interrupted.status = 'running';
+    await writeFile(jobPath, JSON.stringify(interrupted));
+    const restarted = await f.create();
+    assert.equal((await restarted.refresh()).status, 'failed');
+    await checkUnpublished(restarted);
+  });
+}
 
 test('実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ', async t => {
   const f = await fixture(t, 'gate'), manager = await f.create();

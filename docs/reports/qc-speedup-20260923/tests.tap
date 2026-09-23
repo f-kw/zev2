@@ -1,0 +1,484 @@
+TAP version 13
+# Subtest: 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+not ok 1 - 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+  ---
+  duration_ms: 11.065375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:99:1'
+  failureType: 'testCodeFailure'
+  error: 'auto presentation: rendering rules version differs'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    reject (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:13:35)
+    checkContext (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:108:101)
+    checkOverrides (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:322:20)
+    resolveAutoPresentationV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:381:20)
+    createOrchestrationContextV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:85:3)
+    initializeEditingWorkspaceV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_state_v001.mjs:130:19)
+    async fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:31:20)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:100:13)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+not ok 2 - 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+  ---
+  duration_ms: 7.8255
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:118:1'
+  failureType: 'testCodeFailure'
+  error: 'auto presentation: rendering rules version differs'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    reject (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:13:35)
+    checkContext (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:108:101)
+    checkOverrides (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:322:20)
+    resolveAutoPresentationV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:381:20)
+    createOrchestrationContextV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:85:3)
+    initializeEditingWorkspaceV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_state_v001.mjs:130:19)
+    async fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:31:20)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:119:13)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: partial-fail: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+not ok 3 - partial-fail: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+  ---
+  duration_ms: 7.778333
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:135:3'
+  failureType: 'testCodeFailure'
+  error: 'auto presentation: rendering rules version differs'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    reject (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:13:35)
+    checkContext (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:108:101)
+    checkOverrides (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:322:20)
+    resolveAutoPresentationV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:381:20)
+    createOrchestrationContextV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:85:3)
+    initializeEditingWorkspaceV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_state_v001.mjs:130:19)
+    async fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:31:20)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:136:15)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: partial-cancel: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+not ok 4 - partial-cancel: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+  ---
+  duration_ms: 6.384667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:135:3'
+  failureType: 'testCodeFailure'
+  error: 'auto presentation: rendering rules version differs'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    reject (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:13:35)
+    checkContext (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:108:101)
+    checkOverrides (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:322:20)
+    resolveAutoPresentationV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:381:20)
+    createOrchestrationContextV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:85:3)
+    initializeEditingWorkspaceV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_state_v001.mjs:130:19)
+    async fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:31:20)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:136:15)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+not ok 5 - 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+  ---
+  duration_ms: 7.076333
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:165:1'
+  failureType: 'testCodeFailure'
+  error: 'auto presentation: rendering rules version differs'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    reject (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:13:35)
+    checkContext (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:108:101)
+    checkOverrides (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:322:20)
+    resolveAutoPresentationV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:381:20)
+    createOrchestrationContextV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:85:3)
+    initializeEditingWorkspaceV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_state_v001.mjs:130:19)
+    async fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:31:20)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:166:13)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+not ok 6 - 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+  ---
+  duration_ms: 6.523375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:188:1'
+  failureType: 'testCodeFailure'
+  error: 'auto presentation: rendering rules version differs'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    reject (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:13:35)
+    checkContext (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:108:101)
+    checkOverrides (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:322:20)
+    resolveAutoPresentationV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:381:20)
+    createOrchestrationContextV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:85:3)
+    initializeEditingWorkspaceV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_state_v001.mjs:130:19)
+    async fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:31:20)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:189:13)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 生成結果と描画証拠も検証cacheで改変を見逃さない
+not ok 7 - 生成結果と描画証拠も検証cacheで改変を見逃さない
+  ---
+  duration_ms: 7.1375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:211:1'
+  failureType: 'testCodeFailure'
+  error: 'auto presentation: rendering rules version differs'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    reject (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:13:35)
+    checkContext (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:108:101)
+    checkOverrides (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:322:20)
+    resolveAutoPresentationV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:381:20)
+    createOrchestrationContextV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:85:3)
+    initializeEditingWorkspaceV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_state_v001.mjs:130:19)
+    async fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:31:20)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:212:13)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+not ok 8 - service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+  ---
+  duration_ms: 6.229208
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:226:1'
+  failureType: 'testCodeFailure'
+  error: 'auto presentation: rendering rules version differs'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    reject (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:13:35)
+    checkContext (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:108:101)
+    checkOverrides (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:322:20)
+    resolveAutoPresentationV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_auto_effects_v001.mjs:381:20)
+    createOrchestrationContextV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:85:3)
+    initializeEditingWorkspaceV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_state_v001.mjs:130:19)
+    async fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:31:20)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:227:13)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: production drawing rejects missing and standalone diagnostic QC methods before output or child processes
+ok 9 - production drawing rejects missing and standalone diagnostic QC methods before output or child processes
+  ---
+  duration_ms: 6.423084
+  ...
+# Subtest: diagnostic completed-frame QC also requires an explicitly selected method before any work
+ok 10 - diagnostic completed-frame QC also requires an explicitly selected method before any work
+  ---
+  duration_ms: 0.900417
+  ...
+# Subtest: public combined QC entry rejects an unsupported frame rate before every media child without fallback
+ok 11 - public combined QC entry rejects an unsupported frame rate before every media child without fallback
+  ---
+  duration_ms: 2.631958
+  ...
+# Subtest: public combined QC entry rejects absent, relative or changed normal-plan references before every media child
+ok 12 - public combined QC entry rejects absent, relative or changed normal-plan references before every media child
+  ---
+  duration_ms: 4.234667
+  ...
+# Subtest: production evaluator accepts complete combined evidence with valid application, layout and media inputs
+ok 13 - production evaluator accepts complete combined evidence with valid application, layout and media inputs
+  ---
+  duration_ms: 15.253167
+  ...
+# Subtest: production final QC rejects old pixel-count and valid native-only evidence without the new global proof
+ok 14 - production final QC rejects old pixel-count and valid native-only evidence without the new global proof
+  ---
+  duration_ms: 9.308666
+  ...
+# Subtest: production evaluator rejects missing global evidence or a missing whole-video proof
+ok 15 - production evaluator rejects missing global evidence or a missing whole-video proof
+  ---
+  duration_ms: 8.331083
+  ...
+# Subtest: production evaluator rejects a missing or substituted current completed-video path or hash
+ok 16 - production evaluator rejects a missing or substituted current completed-video path or hash
+  ---
+  duration_ms: 13.256791
+  ...
+# Subtest: production evaluator rejects whole-video corruption even when native state observations pass
+ok 17 - production evaluator rejects whole-video corruption even when native state observations pass
+  ---
+  duration_ms: 5.692458
+  ...
+# Subtest: production evaluator rejects an omitted native caption even when whole-video equality passes
+ok 18 - production evaluator rejects an omitted native caption even when whole-video equality passes
+  ---
+  duration_ms: 7.573084
+  ...
+# Subtest: production evaluator rejects detached finite-state evidence and a mixed comparison basis
+ok 19 - production evaluator rejects detached finite-state evidence and a mixed comparison basis
+  ---
+  duration_ms: 8.301625
+  ...
+# Subtest: production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements
+ok 20 - production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements
+  ---
+  duration_ms: 4.293833
+  ...
+# Subtest: combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs
+ok 21 - combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs
+  ---
+  duration_ms: 5.265292
+  ...
+# Subtest: combined proof rejects missing whole-video evidence despite cached pass flags
+ok 22 - combined proof rejects missing whole-video evidence despite cached pass flags
+  ---
+  duration_ms: 1.936375
+  ...
+# Subtest: combined proof rejects mixing individually valid observations from different completed videos
+ok 23 - combined proof rejects mixing individually valid observations from different completed videos
+  ---
+  duration_ms: 7.024834
+  ...
+# Subtest: combined proof requires the current completed-video path and hash supplied by its caller
+ok 24 - combined proof requires the current completed-video path and hash supplied by its caller
+  ---
+  duration_ms: 4.314875
+  ...
+# Subtest: combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain
+ok 25 - combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain
+  ---
+  duration_ms: 10.481667
+  ...
+# Subtest: combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing
+ok 26 - combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing
+  ---
+  duration_ms: 23.469375
+  ...
+# Subtest: combined proof rejects missing or substituted planar layers and a severed decode-to-composition chain
+ok 27 - combined proof rejects missing or substituted planar layers and a severed decode-to-composition chain
+  ---
+  duration_ms: 82.340167
+  ...
+# Subtest: all decoded frame hashes retain order and exact rational timestamps
+ok 28 - all decoded frame hashes retain order and exact rational timestamps
+  ---
+  duration_ms: 0.17725
+  ...
+# Subtest: frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps
+ok 29 - frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps
+  ---
+  duration_ms: 0.233459
+  ...
+# Subtest: audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS
+ok 30 - audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS
+  ---
+  duration_ms: 0.146792
+  ...
+# Subtest: audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks
+ok 31 - audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks
+  ---
+  duration_ms: 0.153042
+  ...
+# Subtest: byte equality and full decoded equality are independently valid exact gates
+ok 32 - byte equality and full decoded equality are independently valid exact gates
+  ---
+  duration_ms: 1.477708
+  ...
+# Subtest: one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests
+ok 33 - one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests
+  ---
+  duration_ms: 6.743792
+  ...
+# Subtest: a cached pass cannot replace complete observations, stable input bindings or original encoder arguments
+ok 34 - a cached pass cannot replace complete observations, stable input bindings or original encoder arguments
+  ---
+  duration_ms: 5.551167
+  ...
+# Subtest: byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison
+ok 35 - byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison
+  ---
+  duration_ms: 1.344792
+  ...
+# Subtest: mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames
+ok 36 - mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames
+  ---
+  duration_ms: 143.339833
+  ...
+# Subtest: mock I/O compares every decoded frame and audio packet when container bytes differ
+ok 37 - mock I/O compares every decoded frame and audio packet when container bytes differ
+  ---
+  duration_ms: 129.612334
+  ...
+# Subtest: mock I/O preserves exact failure for an unknown one-pixel change
+ok 38 - mock I/O preserves exact failure for an unknown one-pixel change
+  ---
+  duration_ms: 129.023875
+  ...
+# Subtest: mock I/O detects inputs changing during encode and rejects a missing production PNG before any child
+ok 39 - mock I/O detects inputs changing during encode and rejects a missing production PNG before any child
+  ---
+  duration_ms: 137.097709
+  ...
+# Subtest: pulse replay binds every production PNG to its exact native state and order
+ok 40 - pulse replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.257834
+  ...
+# Subtest: bounce replay binds every production PNG to its exact native state and order
+ok 41 - bounce replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.541167
+  ...
+# Subtest: shake replay binds every production PNG to its exact native state and order
+ok 42 - shake replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.538417
+  ...
+# Subtest: current completed-file identity is mandatory and rejects a stale pass for another same-format video
+ok 43 - current completed-file identity is mandatory and rejects a stale pass for another same-format video
+  ---
+  duration_ms: 0.437958
+  ...
+# Subtest: raw evidence, all observed commands, original stdout and artifact correspondence are mandatory
+ok 44 - raw evidence, all observed commands, original stdout and artifact correspondence are mandatory
+  ---
+  duration_ms: 10.201292
+  ...
+# Subtest: parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes
+ok 45 - parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes
+  ---
+  duration_ms: 2.067375
+  ...
+# Subtest: sample/display aspect, color meaning and display side data must match despite identical pixel hashes
+ok 46 - sample/display aspect, color meaning and display side data must match despite identical pixel hashes
+  ---
+  duration_ms: 5.733166
+  ...
+# Subtest: bounce native QC rejects clamping, unbound images, missing states and invalid static layouts
+ok 47 - bounce native QC rejects clamping, unbound images, missing states and invalid static layouts
+  ---
+  duration_ms: 5.195625
+  ...
+# Subtest: bounce collision checks follow the moving state interval beyond the disjoint stable box
+ok 48 - bounce collision checks follow the moving state interval beyond the disjoint stable box
+  ---
+  duration_ms: 1.041042
+  ...
+# Subtest: shake native QC rejects clamping, unbound images, missing states and invalid static layouts
+ok 49 - shake native QC rejects clamping, unbound images, missing states and invalid static layouts
+  ---
+  duration_ms: 3.899084
+  ...
+# Subtest: shake collision checks follow the moving state interval beyond the disjoint stable box
+ok 50 - shake collision checks follow the moving state interval beyond the disjoint stable box
+  ---
+  duration_ms: 1.170916
+  ...
+# Subtest: selected frames retain global/local clocks and reject duplicate local clocks or unsorted media requests
+ok 51 - selected frames retain global/local clocks and reject duplicate local clocks or unsorted media requests
+  ---
+  duration_ms: 1.138708
+  ...
+# Subtest: an exited extraction cannot pass with missing or extra selected outputs
+ok 52 - an exited extraction cannot pass with missing or extra selected outputs
+  ---
+  duration_ms: 6.881958
+  ...
+# Subtest: an empty caption scope produces no extracted frame or prepared layer
+ok 53 - an empty caption scope produces no extracted frame or prepared layer
+  ---
+  duration_ms: 2.053917
+  ...
+# Subtest: batch extraction matches original single-frame RGB for H264 and FFV1, including second-boundary and range offsets
+ok 54 - batch extraction matches original single-frame RGB for H264 and FFV1, including second-boundary and range offsets
+  ---
+  duration_ms: 1527.306958
+  ...
+# Subtest: prepared alpha, shared decoded planes and shared prefixes retain all reference pixels, classes and strict decisions
+ok 55 - prepared alpha, shared decoded planes and shared prefixes retain all reference pixels, classes and strict decisions
+  ---
+  duration_ms: 1319.837208
+  ...
+# {"samples":17,"logicalReferencePixelComparisons":153,"physicalReferenceOutputs":43,"decodedLayerOutputs":8,"decodedSourceGroups":2,"exactDistanceCalculations":413,"reusedExactDistances":757}
+# Subtest: file-based exact distances match the pure classifier, reuse equal byte pairs and reject changed files
+ok 56 - file-based exact distances match the pure classifier, reuse equal byte pairs and reject changed files
+  ---
+  duration_ms: 3.815167
+  ...
+# Subtest: process timing separates child completion from evidence write on success and failure
+ok 57 - process timing separates child completion from evidence write on success and failure
+  ---
+  duration_ms: 45.332042
+  ...
+# Subtest: the fixed recipe includes every caption and all moving Pulse frames without caller-selected samples
+ok 58 - the fixed recipe includes every caption and all moving Pulse frames without caller-selected samples
+  ---
+  duration_ms: 13.013875
+  ...
+# Subtest: mandatory Color/Panel/Normal references and their drawing conditions cannot be silently omitted
+ok 59 - mandatory Color/Panel/Normal references and their drawing conditions cannot be silently omitted
+  ---
+  duration_ms: 19.588583
+  ...
+# Subtest: a partial selection that covers the whole caption still gets the resolver-required duplicate alternative
+ok 60 - a partial selection that covers the whole caption still gets the resolver-required duplicate alternative
+  ---
+  duration_ms: 5.476417
+  ...
+# Subtest: foreign references occupy the target clock and candidate bounds, not the inactive caption clock or corrupted frame bounds
+ok 61 - foreign references occupy the target clock and candidate bounds, not the inactive caption clock or corrupted frame bounds
+  ---
+  duration_ms: 5.251375
+  ...
+# Subtest: simultaneous captions retain their own fades and receive a real pair-order alternative
+ok 62 - simultaneous captions retain their own fades and receive a real pair-order alternative
+  ---
+  duration_ms: 5.156375
+  ...
+# Subtest: exact pixel classes permit a Normal alias but reject target absence and an unequal-image tie
+ok 63 - exact pixel classes permit a Normal alias but reject target absence and an unequal-image tie
+  ---
+  duration_ms: 0.44025
+  ...
+# Subtest: whole-caption overpaint and foreign pixels need adversarial references even without empirical thresholds
+ok 64 - whole-caption overpaint and foreign pixels need adversarial references even without empirical thresholds
+  ---
+  duration_ms: 0.147583
+  ...
+# Subtest: the pure validator accepts complete synthetic evidence and independently rejects material evidence tampering
+ok 65 - the pure validator accepts complete synthetic evidence and independently rejects material evidence tampering
+  ---
+  duration_ms: 56.333667
+  ...
+# Subtest: bounce native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+ok 66 - bounce native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+  ---
+  duration_ms: 7.687
+  ...
+# Subtest: bounce rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+ok 67 - bounce rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+  ---
+  duration_ms: 50.536417
+  ...
+# Subtest: shake native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+ok 68 - shake native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+  ---
+  duration_ms: 6.960834
+  ...
+# Subtest: shake rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+ok 69 - shake rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+  ---
+  duration_ms: 50.282667
+  ...
+1..69
+# tests 69
+# suites 0
+# pass 61
+# fail 8
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4425.488125

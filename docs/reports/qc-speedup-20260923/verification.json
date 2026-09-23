@@ -1,0 +1,507 @@
+{
+  "schemaVersion": "qc-speedup-closure-20260923-v001",
+  "startingMain": "df5d8eca4754fe34f1b57766f876a9f98079ccfa",
+  "validationMain": "718f51fcbfaea048794b585e4c29ccd3ef3f0a3c",
+  "existingImplementationCommit": "ea725d465e2f445620b798b658b4fc01bd382380",
+  "environment": {
+    "node": {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "bytes": 88501744,
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+    },
+    "version": "v20.19.6",
+    "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "25.6.0",
+    "cpuModel": "Apple M3 Max"
+  },
+  "helper": {
+    "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/p2-qc-performance.mjs",
+    "bytes": 23210,
+    "fileSha256": "f6285e64b2a5a80d1c45e51d1ab0190cd92f77e1c86079eed2f1a16fc949e7f5"
+  },
+  "implementations": {
+    "before": {
+      "commit": "73d1536b1a2febad04111609bb82f97e44df36ae",
+      "relativePath": "evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "fileSha256": "6820d0e85dba7ac76b36f0c8b4499ddc7018d600097fc4ecd1043ad1d5c730a6",
+      "executableSha256": "881e5b50e505df8bb3e2be44250bf840f564e666e67f7ac822aadb65a2a55259",
+      "unchangedDependencyCount": 19,
+      "adaptation": "relative import addresses only"
+    },
+    "after": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "bytes": 65107,
+      "fileSha256": "e339173000b7406bfd03c85b40c4769f69534cd5fc5b4c6bf3b475ac5fe2b0a9"
+    }
+  },
+  "sourceResult": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/changed-v002/result.json",
+    "bytes": 383429,
+    "fileSha256": "a7b37677ad44a01ee1caf5fa2b434fc457c5ebaadd9d91af870f250e0ac2ebbb"
+  },
+  "rawResults": {
+    "before": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-qc-main-recheck-20260923-v001/before/result.json",
+      "bytes": 65984,
+      "fileSha256": "67e4662bb728b6a2deb1316e1c7c87a7234048fe303f397da305dfd83655a273"
+    },
+    "after": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-qc-main-recheck-20260923-v001/after/result.json",
+      "bytes": 66103,
+      "fileSha256": "5c8fd34a3061399b75556ee3ccfe7e154b2b113e33c9a72cf3c6440bdd4a7e8a"
+    },
+    "comparison": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-qc-main-recheck-20260923-v001/comparison/result.json",
+      "bytes": 9130,
+      "fileSha256": "631f0f0894006998bd59f75c0c92fbf6862625f3f575e371bee4e5c52113a40c"
+    }
+  },
+  "boundary": "inspectPresentationNativeFrameQcV001 only, including its native input hashing, executable versions, extraction, layer preparation, full candidate composition, exact RGB comparison and final verification. Source loading, harness binding, observer setup and result serialization are outside the measured call. No Remotion PNG preparation, main MP4 composition or strict replay is executed.",
+  "cases": [
+    {
+      "name": "panel",
+      "condition": {
+        "name": "panel",
+        "text": "なんかグロいやつに捕まってる",
+        "selection": "Reset",
+        "range": {
+          "startFrame": 1675,
+          "endFrameExclusive": 1866
+        },
+        "sampleCount": 3,
+        "logicalCandidateCount": 12,
+        "recipeCanonicalSha256": "f2883b7196ba6ae9b8d0cb3e3495e8708869f39677968ea9fd8b9d2d5bf1ed12",
+        "sceneCanonicalSha256": "f26022a1dc0476c91438d9e97cfb045b2d04e2c2417ef3160fc9b225ae0e848a"
+      },
+      "rgb": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-qc-main-recheck-20260923-v001/comparison/panel-rgb-comparison.json",
+        "bytes": 55189,
+        "fileSha256": "2e2ff5eb028ca4eb6a307061b276d32bce8122583361e75a9f5cfbdeb641828e"
+      },
+      "counts": {
+        "sampleCount": 3,
+        "logicalReferenceCount": 12,
+        "comparedCompletedRgbBytes": 1990800,
+        "comparedReferenceRgbBytes": 7963200
+      },
+      "beforeMilliseconds": 2410.6733750000003,
+      "afterMilliseconds": 2531.624791999995,
+      "savedMilliseconds": -120.95141699999476,
+      "afterOverBefore": 1.0501732911037749,
+      "beforePerformance": {
+        "wallClockMs": 2410.3867090000003,
+        "phasesMilliseconds": {
+          "inputBinding": 347.836334,
+          "frameExtraction": 577.4865420000001,
+          "nativeLayerPreparation": 522.6288750000001,
+          "completedRgbCrop": 112.34679099999994,
+          "referenceComposition": 394.1348339999997,
+          "rgbDistance": 84.69624999999996,
+          "evidenceWrite": 0.7223340000002736,
+          "verification": 177.98020799999995,
+          "evidenceConstruction": 159.62062500000002
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 13,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 3,
+          "completed-rgb-crop": 3,
+          "native-reference-composite": 3
+        },
+        "sourceFrameOutputs": 3,
+        "completedFrameOutputs": 3,
+        "completedRgbOutputs": 3,
+        "logicalReferenceCount": 12,
+        "referenceRgbOutputs": 12,
+        "reusedReferenceRgbCount": 0,
+        "preparedLayerOutputs": 3,
+        "exactDistanceCalculations": 12,
+        "reusedExactDistances": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "afterPerformance": {
+        "wallClockMs": 2531.277833,
+        "phasesMilliseconds": {
+          "inputBinding": 345.1465409999946,
+          "frameExtraction": 562.1455420000057,
+          "nativeLayerPreparation": 527.6100829999996,
+          "nativeLayerDecode": 191.36808400000155,
+          "completedRgbCrop": 115.50020899999072,
+          "referenceComposition": 288.87062400000286,
+          "rgbDistance": 83.99537499999133,
+          "evidenceWrite": 0.796541999996407,
+          "verification": 210.65787500000442,
+          "evidenceConstruction": 172.27920799999993
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 16,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 3,
+          "native-layer-decode": 3,
+          "completed-rgb-crop": 3,
+          "native-reference-composite": 3
+        },
+        "sourceFrameOutputs": 3,
+        "completedFrameOutputs": 3,
+        "completedRgbOutputs": 3,
+        "logicalReferenceCount": 12,
+        "referenceRgbOutputs": 12,
+        "reusedReferenceRgbCount": 0,
+        "preparedLayerOutputs": 3,
+        "decodedLayerOutputs": 6,
+        "decodedLayerBytes": 49766400,
+        "exactDistanceCalculations": 12,
+        "reusedExactDistances": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      }
+    },
+    {
+      "name": "shake",
+      "condition": {
+        "name": "shake",
+        "text": "いるやんいるやん",
+        "selection": "Reset",
+        "range": {
+          "startFrame": 0,
+          "endFrameExclusive": 131
+        },
+        "sampleCount": 50,
+        "logicalCandidateCount": 1715,
+        "recipeCanonicalSha256": "afda46d572afbbb62bb53c1a39b07e33342b0adca03db6f610f2e921209f3316",
+        "sceneCanonicalSha256": "c27f0ebdb6cbb812d4bdd9585eaaa80eb46cf50ebe452d14655e6be37d51a995"
+      },
+      "rgb": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-qc-main-recheck-20260923-v001/comparison/shake-rgb-comparison.json",
+        "bytes": 4868659,
+        "fileSha256": "a9774308742a82652769d5161643b600a634b5e64e4300e59f1e8a92c9910dbc"
+      },
+      "counts": {
+        "sampleCount": 50,
+        "logicalReferenceCount": 1715,
+        "comparedCompletedRgbBytes": 34560000,
+        "comparedReferenceRgbBytes": 1185408000
+      },
+      "beforeMilliseconds": 48404.065542000004,
+      "afterMilliseconds": 42804.875958,
+      "savedMilliseconds": 5599.189584000007,
+      "afterOverBefore": 0.8843239814403273,
+      "beforePerformance": {
+        "wallClockMs": 48403.975791,
+        "phasesMilliseconds": {
+          "inputBinding": 373.6456250000001,
+          "frameExtraction": 1977.797834,
+          "nativeLayerPreparation": 8090.299791,
+          "completedRgbCrop": 1913.5978759999962,
+          "referenceComposition": 31479.151247000016,
+          "rgbDistance": 2739.511702000009,
+          "evidenceWrite": 15.344873000027292,
+          "verification": 1072.0610830000005,
+          "evidenceConstruction": 652.2286249999961
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 123,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 19,
+          "completed-rgb-crop": 50,
+          "native-reference-composite": 50
+        },
+        "sourceFrameOutputs": 50,
+        "completedFrameOutputs": 50,
+        "completedRgbOutputs": 50,
+        "logicalReferenceCount": 1715,
+        "referenceRgbOutputs": 1665,
+        "reusedReferenceRgbCount": 50,
+        "preparedLayerOutputs": 57,
+        "exactDistanceCalculations": 1665,
+        "reusedExactDistances": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "afterPerformance": {
+        "wallClockMs": 42804.798541,
+        "phasesMilliseconds": {
+          "inputBinding": 364.8682919999992,
+          "frameExtraction": 1903.9167919999963,
+          "nativeLayerPreparation": 8106.893958000001,
+          "nativeLayerDecode": 2294.082209,
+          "completedRgbCrop": 1943.7595809999766,
+          "referenceComposition": 23034.09879599999,
+          "rgbDistance": 2865.3936229999963,
+          "evidenceWrite": 13.79070499993395,
+          "verification": 1533.8641659999994,
+          "evidenceConstruction": 653.7021660000028
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 142,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 19,
+          "native-layer-decode": 19,
+          "completed-rgb-crop": 50,
+          "native-reference-composite": 50
+        },
+        "sourceFrameOutputs": 50,
+        "completedFrameOutputs": 50,
+        "completedRgbOutputs": 50,
+        "logicalReferenceCount": 1715,
+        "referenceRgbOutputs": 1665,
+        "reusedReferenceRgbCount": 50,
+        "preparedLayerOutputs": 57,
+        "decodedLayerOutputs": 76,
+        "decodedLayerBytes": 630374400,
+        "exactDistanceCalculations": 1665,
+        "reusedExactDistances": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      }
+    }
+  ],
+  "relocatedRepositoryInputs": {
+    "panel": [
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/components/TelopText.tsx",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/remotion/components/TelopText.tsx",
+        "fileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/utils/telop-font.ts",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/remotion/utils/telop-font.ts",
+        "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-render-model.ts",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/telop/telop-render-model.ts",
+        "fileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-line-break.ts",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/telop/telop-line-break.ts",
+        "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/text-metrics.ts",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/telop/text-metrics.ts",
+        "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/shared/telop-glow.ts",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/shared/telop-glow.ts",
+        "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "to": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "fileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/pnpm-lock.yaml",
+        "to": "/Users/kawafmm/workspace/zev2/pnpm-lock.yaml",
+        "fileSha256": "1bfb232ca8a693bebedc1fd84971800aad2f633b2595ed805f2078f1dad44812"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "to": "/Users/kawafmm/workspace/zev2/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb"
+      }
+    ],
+    "shake": [
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/components/TelopText.tsx",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/remotion/components/TelopText.tsx",
+        "fileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/remotion/utils/telop-font.ts",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/remotion/utils/telop-font.ts",
+        "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-render-model.ts",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/telop/telop-render-model.ts",
+        "fileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/telop-line-break.ts",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/telop/telop-line-break.ts",
+        "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/telop/text-metrics.ts",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/telop/text-metrics.ts",
+        "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/src/shared/telop-glow.ts",
+        "to": "/Users/kawafmm/workspace/zev2/runner/src/shared/telop-glow.ts",
+        "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "to": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+        "fileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/pnpm-lock.yaml",
+        "to": "/Users/kawafmm/workspace/zev2/pnpm-lock.yaml",
+        "fileSha256": "1bfb232ca8a693bebedc1fd84971800aad2f633b2595ed805f2078f1dad44812"
+      },
+      {
+        "from": "/private/tmp/zev-stage4-editing-20260918/worktree/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "to": "/Users/kawafmm/workspace/zev2/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb"
+      }
+    ]
+  },
+  "inputsUnchanged": true,
+  "comparisonStatus": "passed",
+  "tests": {
+    "qcExistingPassed": 61,
+    "jobsPassed": 8,
+    "newPartialFailureAndCancellationPassed": 2,
+    "initialFailures": "8 stale v007 fixture failures; rebuilt temporary v008 input and explicit plain Panel without changing historical report. One subsequent real font/browser test required sandbox-external execution.",
+    "evidence": [
+      {
+        "path": "/Users/kawafmm/workspace/zev2/docs/reports/qc-speedup-20260923/jobs-tests-v002.tap",
+        "bytes": 13042,
+        "fileSha256": "a31d7144ece128264975569ffad80c68c4b958c3e8860a01e6fe655e1c4f06c0"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/docs/reports/qc-speedup-20260923/jobs-tests-v003.tap",
+        "bytes": 2944,
+        "fileSha256": "0c91a796d1b4abd03c2a6f6e440faa102ba2785b57a6427d95e437fa8bab9821"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/docs/reports/qc-speedup-20260923/jobs-tests-v004.tap",
+        "bytes": 2101,
+        "fileSha256": "ab8ab3a45dc6ebe14140b4bd8b1f722db907d67685f0ddf95eb6e51338b886fa"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/docs/reports/qc-speedup-20260923/tests.tap",
+        "bytes": 28921,
+        "fileSha256": "dabfd3f47e7e7be459220961a29deb97f1a1b8d70f782f9bc8038800fad90f98"
+      }
+    ]
+  },
+  "cleanup": [
+    {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-editing-jobs-test-Qo6XlI",
+      "contents": [
+        "original.mp4"
+      ],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-editing-jobs-test-JYGqHg",
+      "contents": [
+        "original.mp4"
+      ],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-editing-jobs-test-Ghf1Pp",
+      "contents": [
+        "original.mp4"
+      ],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-editing-jobs-test-aiCuYl",
+      "contents": [
+        "original.mp4"
+      ],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-editing-jobs-test-OgUhgQ",
+      "contents": [
+        "original.mp4"
+      ],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-editing-jobs-test-F3b74T",
+      "contents": [
+        "original.mp4"
+      ],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-editing-jobs-test-5S7B7E",
+      "contents": [
+        "original.mp4"
+      ],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-editing-jobs-test-CCFgx8",
+      "contents": [
+        "original.mp4"
+      ],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-Bi8bvk",
+      "contents": [],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-W3VWdT",
+      "contents": [],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-yJLeuk",
+      "contents": [],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-aMMelK",
+      "contents": [],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-e9lPpZ",
+      "contents": [],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-yPU4jF",
+      "contents": [],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-F4JbcZ",
+      "contents": [],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-8qMvst",
+      "contents": [],
+      "basis": "created within initial TAP execution; only the fixture literal or an empty generated directory"
+    }
+  ],
+  "retainedGeneratedEvidence": {
+    "directory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-qc-main-recheck-20260923-v001",
+    "reason": "Panel/Shake QC images, raw planes and process evidence needed to reread the full comparison; covered by existing stage4-editing-* ignore rule"
+  },
+  "notNow": [
+    "additional Panel-specific preparation optimization",
+    "other renderer or QC performance methods"
+  ],
+  "limitations": [
+    "One sequential Before/After pair; no statistical performance guarantee",
+    "Current rerun measures finite-state QC only; historical full HTTP entry timings are not remeasured",
+    "Synthetic process/storage failure tests are not video quality evidence"
+  ]
+}

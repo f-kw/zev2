@@ -1,0 +1,61 @@
+TAP version 13
+# Subtest: 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+not ok 1 - 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+  ---
+  duration_ms: 733.190667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:122:1'
+  failureType: 'testCodeFailure'
+  error: 'この表現の実際の書体・表示領域を確認できませんでした'
+  code: 'EDITING_APPLICABILITY_UNVERIFIED'
+  name: 'TypeError'
+  stack: |-
+    demand (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_state_v001.mjs:23:34)
+    saveEditingOverrideV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_state_v001.mjs:283:3)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:127:19)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+ok 2 - 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+  ---
+  duration_ms: 419.7835
+  ...
+# Subtest: partial-fail: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+ok 3 - partial-fail: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+  ---
+  duration_ms: 368.171875
+  ...
+# Subtest: partial-cancel: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+ok 4 - partial-cancel: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+  ---
+  duration_ms: 370.6325
+  ...
+# Subtest: 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+ok 5 - 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+  ---
+  duration_ms: 728.904209
+  ...
+# Subtest: 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+ok 6 - 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+  ---
+  duration_ms: 327.226542
+  ...
+# Subtest: 生成結果と描画証拠も検証cacheで改変を見逃さない
+ok 7 - 生成結果と描画証拠も検証cacheで改変を見逃さない
+  ---
+  duration_ms: 416.189292
+  ...
+# Subtest: service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+ok 8 - service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+  ---
+  duration_ms: 300.478208
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 7
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3889.448334

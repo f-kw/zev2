@@ -1,0 +1,178 @@
+TAP version 13
+# Subtest: 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+not ok 1 - 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+  ---
+  duration_ms: 37.754875
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:118:1'
+  failureType: 'testCodeFailure'
+  error: 'ORCHESTRATION_INVALID: Panel semantic choice fields'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:32:32)
+    require (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:33:58)
+    exact (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:34:38)
+    resolveRow (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:326:11)
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:55
+    Array.map (<anonymous>)
+    evaluateReply (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:45)
+    compile (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:514:50)
+    fixOrchestrationJudgmentV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:539:20)
+    fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:50:17)
+  ...
+# Subtest: 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+not ok 2 - 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+  ---
+  duration_ms: 24.490334
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:137:1'
+  failureType: 'testCodeFailure'
+  error: 'ORCHESTRATION_INVALID: Panel semantic choice fields'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:32:32)
+    require (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:33:58)
+    exact (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:34:38)
+    resolveRow (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:326:11)
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:55
+    Array.map (<anonymous>)
+    evaluateReply (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:45)
+    compile (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:514:50)
+    fixOrchestrationJudgmentV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:539:20)
+    fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:50:17)
+  ...
+# Subtest: partial-fail: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+not ok 3 - partial-fail: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+  ---
+  duration_ms: 25.203375
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:154:3'
+  failureType: 'testCodeFailure'
+  error: 'ORCHESTRATION_INVALID: Panel semantic choice fields'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:32:32)
+    require (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:33:58)
+    exact (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:34:38)
+    resolveRow (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:326:11)
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:55
+    Array.map (<anonymous>)
+    evaluateReply (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:45)
+    compile (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:514:50)
+    fixOrchestrationJudgmentV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:539:20)
+    fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:50:17)
+  ...
+# Subtest: partial-cancel: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+not ok 4 - partial-cancel: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+  ---
+  duration_ms: 26.042667
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:154:3'
+  failureType: 'testCodeFailure'
+  error: 'ORCHESTRATION_INVALID: Panel semantic choice fields'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:32:32)
+    require (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:33:58)
+    exact (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:34:38)
+    resolveRow (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:326:11)
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:55
+    Array.map (<anonymous>)
+    evaluateReply (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:45)
+    compile (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:514:50)
+    fixOrchestrationJudgmentV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:539:20)
+    fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:50:17)
+  ...
+# Subtest: 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+not ok 5 - 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+  ---
+  duration_ms: 24.846417
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:184:1'
+  failureType: 'testCodeFailure'
+  error: 'ORCHESTRATION_INVALID: Panel semantic choice fields'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:32:32)
+    require (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:33:58)
+    exact (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:34:38)
+    resolveRow (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:326:11)
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:55
+    Array.map (<anonymous>)
+    evaluateReply (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:45)
+    compile (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:514:50)
+    fixOrchestrationJudgmentV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:539:20)
+    fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:50:17)
+  ...
+# Subtest: 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+not ok 6 - 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+  ---
+  duration_ms: 23.634958
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:207:1'
+  failureType: 'testCodeFailure'
+  error: 'ORCHESTRATION_INVALID: Panel semantic choice fields'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:32:32)
+    require (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:33:58)
+    exact (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:34:38)
+    resolveRow (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:326:11)
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:55
+    Array.map (<anonymous>)
+    evaluateReply (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:45)
+    compile (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:514:50)
+    fixOrchestrationJudgmentV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:539:20)
+    fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:50:17)
+  ...
+# Subtest: 生成結果と描画証拠も検証cacheで改変を見逃さない
+not ok 7 - 生成結果と描画証拠も検証cacheで改変を見逃さない
+  ---
+  duration_ms: 23.81175
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:230:1'
+  failureType: 'testCodeFailure'
+  error: 'ORCHESTRATION_INVALID: Panel semantic choice fields'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:32:32)
+    require (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:33:58)
+    exact (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:34:38)
+    resolveRow (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:326:11)
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:55
+    Array.map (<anonymous>)
+    evaluateReply (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:45)
+    compile (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:514:50)
+    fixOrchestrationJudgmentV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:539:20)
+    fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:50:17)
+  ...
+# Subtest: service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+not ok 8 - service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+  ---
+  duration_ms: 23.000083
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:245:1'
+  failureType: 'testCodeFailure'
+  error: 'ORCHESTRATION_INVALID: Panel semantic choice fields'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    fail (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:32:32)
+    require (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:33:58)
+    exact (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:34:38)
+    resolveRow (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:326:11)
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:55
+    Array.map (<anonymous>)
+    evaluateReply (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:369:45)
+    compile (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:514:50)
+    fixOrchestrationJudgmentV001 (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs:539:20)
+    fixture (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_editing_jobs_v001.test.mjs:50:17)
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 0
+# fail 8
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 429.755167
