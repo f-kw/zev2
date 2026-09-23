@@ -1,4 +1,4 @@
-import {getPresentationPanelPresetV002} from './presentation_panel_presets_v002.mjs';
+import {getPresentationPanelPresetV002, getPresentationPanelPalettePresetV003} from './presentation_panel_presets_v002.mjs';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
 import {loadAutoPresentationV001, saveAutoPresentationOverridesV001} from './presentation_auto_effects_io_v001.mjs';
@@ -27,7 +27,6 @@ node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
   scale    全文Scale Accent
   panel    全文Panel（無地）
   panel-graph-paper 全文Panel（方眼紙）
-  panel-comic-frame 全文Panel（コミック枠）
   bounce   全文Bounce Accent（仮称）: 字幕出現時に弾み、通常表示へ戻る
   shake    全文Shake Accent（仮称）: 字幕出現時に短く左右へ揺れ、通常位置へ戻る
   pulse    全文Pulse Accent（仮称）: --peak <既存の音響ピークID>
@@ -38,19 +37,22 @@ node evals/clip_composition/edit_auto_presentation_v001.mjs <操作> \\
 複数候補では候補一覧を表示して停止します。表示されたIDで再指定してください。
 既存ファイルは上書きしません。保存後は --overrides に新しいファイルを渡してください。
 --text / --target は文字の正規化・近似一致を行いません。時刻の終了端は対象外です。
+panel / panel-graph-paper は --palette ivory / cool / warm / dark を明示します。
+コミック枠は新しい選択対象ではありません。保存済み原案へのResetは維持します。
 pulse の --peak が未指定・不適格なら、使えるIDを表示して保存せず停止します。
 --time は字幕検索専用です。Pulseの時刻・倍率・長さは指定できません。`;
 
 export function parseAutoPresentationEditArgsV001(argv) {
   if (argv.length === 1 && ['--help', '-h'].includes(argv[0])) return {help: true};
   const [action, ...args] = argv;
-  if (!['show', 'normal', 'color', 'scale', 'panel', 'panel-graph-paper', 'panel-comic-frame', 'pulse', 'bounce', 'shake', 'partial', 'reset'].includes(action)) fail('操作は show / normal / color / scale / panel / panel-graph-paper / panel-comic-frame / pulse / bounce / shake / partial / reset から指定してください。');
+  if (!['show', 'normal', 'color', 'scale', 'panel', 'panel-graph-paper', 'pulse', 'bounce', 'shake', 'partial', 'reset'].includes(action)) fail('操作は show / normal / color / scale / panel / panel-graph-paper / pulse / bounce / shake / partial / reset から指定してください。');
   const names = new Map([
     ['--baseline', 'baselinePath'], ['--decision-input', 'decisionInputPath'],
     ['--auto', 'autoProposalPath'], ['--overrides', 'overridesPath'], ['--output', 'outputPath'],
     ['--caption-id', 'captionId'], ['--time', 'time'], ['--text', 'text'],
     ['--target', 'targetText'], ['--occurrence', 'occurrence'],
     ['--peak', 'anchorPeakId'],
+    ['--palette', 'paletteId'],
   ]);
   const parsed = {action};
   for (let index = 0; index < args.length; index += 2) {
@@ -68,6 +70,10 @@ export function parseAutoPresentationEditArgsV001(argv) {
   if (action === 'partial' && !own(parsed, 'targetText')) fail('部分Color Accentには --target が必要です。');
   if (action !== 'partial' && (own(parsed, 'targetText') || own(parsed, 'occurrence'))) fail('--target と --occurrence は partial 専用です。');
   if (action !== 'pulse' && own(parsed, 'anchorPeakId')) fail('--peak は pulse 専用です。');
+  if (['panel', 'panel-graph-paper'].includes(action)) {
+    if (!own(parsed, 'paletteId')) fail('Panelには --palette ivory / cool / warm / dark が必要です。');
+    getPresentationPanelPalettePresetV003('provisional-' + action, parsed.paletteId);
+  } else if (own(parsed, 'paletteId')) fail('--palette は panel / panel-graph-paper 専用です。');
   if (own(parsed, 'occurrence')) {
     if (!/^[1-9][0-9]*$/.test(parsed.occurrence) || !Number.isSafeInteger(Number(parsed.occurrence))) fail('出現番号は1以上の整数を指定してください。');
     parsed.occurrence = Number(parsed.occurrence);
@@ -90,7 +96,8 @@ export function parseAutoPresentationEditArgsV001(argv) {
 const selectionDescription = selection => selection?.role === 'Vocal accent'
   ? {role: 'Vocal accent', scope: 'whole-caption'}
   : selection?.role === 'Panel accent'
-  ? {role: selection.role, presentation: selection.presentation, scope: 'whole-caption'}
+  ? {role: selection.role, presentation: selection.presentation, scope: 'whole-caption',
+    ...(own(selection, 'paletteId') ? {paletteId: selection.paletteId} : {})}
   : ['Bounce accent', 'Shake accent'].includes(selection?.role)
   ? {role: selection.role, scope: 'whole-caption'}
   : selection?.role === 'Pulse accent'
@@ -137,7 +144,9 @@ export function inspectAutoPresentationCaptionsV001({baselinePlan, autoPresentat
 
 const describe = selection => selection.role === 'Normal' ? 'Normal'
   : selection.role === 'Vocal accent' ? 'Scale Accent / whole（全文）'
-  : selection.role === 'Panel accent' ? getPresentationPanelPresetV002(selection.presentation).label + ' / whole（全文）'
+  : selection.role === 'Panel accent' ? (own(selection, 'paletteId')
+    ? getPresentationPanelPalettePresetV003(selection.presentation, selection.paletteId)
+    : getPresentationPanelPresetV002(selection.presentation)).label + ' / whole（全文）'
   : selection.role === 'Bounce accent' ? 'Bounce Accent（仮称） / whole（全文） / 字幕出現時'
   : selection.role === 'Shake accent' ? 'Shake Accent（仮称） / whole（全文） / 字幕出現時'
   : selection.role === 'Pulse accent' ? `Pulse Accent（仮称） / whole（全文） / 根拠ピーク: ${selection.anchorPeakId}`
@@ -200,8 +209,8 @@ export async function runAutoPresentationEditV001(argv, write = text => process.
   }
   const previous = autoPresentation.overrides ?? createAutoPresentationOverridesV001({baselinePlan, ...autoPresentation});
   const selection = parsed.action === 'normal' ? 'Normal' : parsed.action === 'reset' ? 'Reset'
-    : parsed.action === 'scale' ? scaleSelection : ['panel', 'panel-graph-paper', 'panel-comic-frame'].includes(parsed.action)
-      ? {...panelSelection, presentation: 'provisional-' + parsed.action}
+    : parsed.action === 'scale' ? scaleSelection : ['panel', 'panel-graph-paper'].includes(parsed.action)
+      ? {...panelSelection, presentation: 'provisional-' + parsed.action, paletteId: parsed.paletteId}
     : parsed.action === 'bounce' ? bounceSelection : parsed.action === 'shake' ? shakeSelection
     : parsed.action === 'pulse' ? {role: 'Pulse accent', presentation: 'provisional-pulse',
       scope: 'whole-caption', anchorPeakId: parsed.anchorPeakId}

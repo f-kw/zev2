@@ -20,6 +20,9 @@ const bytes = value => JSON.stringify(value) + '\n';
 const sha = value => createHash('sha256').update(value).digest('hex');
 const hash = value => sha(canonicalJson(value));
 const paletteIds = ['ivory', 'cool', 'warm', 'dark'];
+// Real saved media inputs can live outside the current checkout after Git consolidation.
+const savedOutputRoot = process.env.ZEV_PANEL_SAVED_OUTPUT_ROOT
+  ?? 'evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001';
 const fixed = (f, reply = f.reply) => fixOrchestrationJudgmentV001({context: f.context, input: f.input, replyBytes: bytes(reply)});
 const view = (f, state) => resolveOrchestrationDrawingViewV001({context: f.context, state});
 function newFixture() {
@@ -262,7 +265,7 @@ test('explicit Bounce and Pulse speech endpoints follow the caption shift once a
 });
 
 test('real fixed HRB and C-all saved v002 drawing evidence replays its original view hash exactly', async () => {
-  const base = 'evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001';
+  const base = `${savedOutputRoot}/quality-q4-20260920-v001`;
   for (const name of ['hrb-recompile-v002', 'c-all-run-v001']) {
     const file = `${base}/${name}/drawing-evidence.json`, saved = await readFile(file, 'utf8');
     const proof = JSON.parse(saved), replayed = restoreOrchestrationDrawingViewEvidenceV001(proof);
@@ -276,7 +279,7 @@ test('real HRB v001 and C-all v002 semantic records derive new palettes without 
   const inputs = [
     {name: 'HRB', directory: 'docs/reports/digest-presentation-orchestration-stage3-inputs-20260918',
       inputFile: 'fresh-input.json', replyFile: 'raw-ai-response-v001.json'},
-    {name: 'C-all', directory: 'evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001'},
+    {name: 'C-all', directory: `${savedOutputRoot}/quality-q4-20260920-v001/c-all-run-v001`},
   ];
   for (const row of inputs) {
     const source = JSON.parse(await readFile(`${row.directory}/source-bindings.json`, 'utf8'));

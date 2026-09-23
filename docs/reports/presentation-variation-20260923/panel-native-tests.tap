@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: Panel Accent paints a real plate and retains existing layout and raster rejection gates
+    # Subtest: short
+    ok 1 - short
+      ---
+      duration_ms: 1326.089208
+      ...
+    # Subtest: two-lines
+    ok 2 - two-lines
+      ---
+      duration_ms: 1987.714916
+      ...
+    # Subtest: normal-fits-panel-crosses-safe-edge
+    ok 3 - normal-fits-panel-crosses-safe-edge
+      ---
+      duration_ms: 1468.398875
+      ...
+    # Subtest: too-wide
+    ok 4 - too-wide
+      ---
+      duration_ms: 1246.433292
+      ...
+    # Subtest: three-lines
+    ok 5 - three-lines
+      ---
+      duration_ms: 2578.979667
+      ...
+    # Subtest: overlapping-lines
+    ok 6 - overlapping-lines
+      ---
+      duration_ms: 1916.542792
+      ...
+    1..6
+ok 1 - Panel Accent paints a real plate and retains existing layout and raster rejection gates
+  ---
+  duration_ms: 10864.696959
+  ...
+1..1
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10927.889917

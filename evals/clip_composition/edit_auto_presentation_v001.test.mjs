@@ -97,7 +97,8 @@ test('CLI accepts exact identity/text and time, and rejects ambiguous argument c
 test('CLI uses Color, Scale and provisional Panel/Pulse names and rejects the replaced action names', () => {
   const required = ['--baseline', 'base', '--decision-input', 'input', '--caption-id', 'a', '--output', 'new'];
   for (const action of ['color', 'scale', 'panel', 'pulse']) {
-    assert.equal(parseAutoPresentationEditArgsV001([action, ...required]).action, action);
+    assert.equal(parseAutoPresentationEditArgsV001([action, ...required,
+      ...(action === 'panel' ? ['--palette', 'ivory'] : [])]).action, action);
   }
   for (const action of ['focus', 'vocal']) {
     assert.throws(() => parseAutoPresentationEditArgsV001([action, ...required]), /color \/ scale \/ panel/);
@@ -171,7 +172,7 @@ test('Pulse overrides preserve other captions and Reset restores the saved autom
   let current;
   const operations = [
     ['pulse', ['--peak', 'peak-a-second'], 'Pulse accent'],
-    ['color', [], 'Focus'], ['scale', [], 'Vocal accent'], ['panel', [], 'Panel accent'],
+    ['color', [], 'Focus'], ['scale', [], 'Vocal accent'], ['panel', ['--palette', 'ivory'], 'Panel accent'],
     ['normal', [], 'Normal'], ['reset', [], 'Pulse accent'],
   ];
   for (const [index, [action, extra, expectedRole]] of operations.entries()) {
@@ -225,21 +226,29 @@ test('Pulse direct CLI prints eligible IDs on refusal and the selected peak afte
   assert.deepEqual(await readFile(outputPath), before);
 });
 
-test('all three accents can be overridden and Normal or Reset preserves every saved automatic role', async t => {
+test('accents and both Panel backgrounds save explicit palettes and Reset preserves the saved automatic role', async t => {
   const choices = [
     {action: 'color', role: 'Focus', presentation: 'provisional-focus', label: 'Color Accent'},
     {action: 'scale', role: 'Vocal accent', presentation: 'provisional-vocal', label: 'Scale Accent'},
-    {action: 'panel', role: 'Panel accent', presentation: 'provisional-panel', label: 'Panel（無地）'},
+    {action: 'panel', role: 'Panel accent', presentation: 'provisional-panel', paletteId: 'warm', label: 'Panel（無地） / 暖色'},
+    {action: 'panel-graph-paper', role: 'Panel accent', presentation: 'provisional-panel-graph-paper', paletteId: 'dark', label: 'Panel（方眼紙） / 暗地'},
   ];
   for (const saved of choices) await t.test(`saved ${saved.label}`, async t => {
-    const f = await fixture(t, true, {role: saved.role, presentation: saved.presentation, scope: 'whole-caption'});
+    const f = await fixture(t, true, {role: saved.role, presentation: saved.presentation, scope: 'whole-caption',
+      ...(saved.paletteId ? {paletteId: saved.paletteId} : {})});
     const before = await Promise.all(Object.values(f.files).map(p => readFile(p)));
+    const original = await loadAutoPresentationV001(f.files);
+    const originalResolved = resolveAutoPresentationV001({baselinePlan: original.baselinePlan, ...original.autoPresentation});
     let current;
-    for (const [index, action] of ['color', 'scale', 'panel', 'normal', 'reset'].entries()) {
+    for (const [index, action] of ['color', 'scale', 'panel', 'panel-graph-paper', 'normal', 'reset'].entries()) {
       const outputPath = join(f.directory, `accent-edit-${index}.json`), output = [];
+      const selected = choices.find(choice => choice.action === action);
       const result = await runAutoPresentationEditV001([action, ...f.args,
+        ...(selected?.paletteId ? ['--palette', selected.paletteId] : []),
         ...(current ? ['--overrides', current] : []), '--caption-id', 'a', '--output', outputPath], s => output.push(s));
       const loaded = await loadAutoPresentationV001({...f.files, overridesPath: outputPath});
+      const resolved = resolveAutoPresentationV001({baselinePlan: loaded.baselinePlan, ...loaded.autoPresentation});
+      assert.deepEqual(resolved.plan.elements.slice(1), originalResolved.plan.elements.slice(1));
       const row = inspectAutoPresentationCaptionsV001({...loaded, query: {captionId: 'a'}})[0];
       const expected = action === 'reset' ? saved : choices.find(choice => choice.action === action);
       assert.deepEqual(row, result.after);
@@ -252,18 +261,32 @@ test('all three accents can be overridden and Normal or Reset preserves every sa
         assert.equal(row.hasOverride, false);
         assert.equal(row.origin, 'auto');
         assert.deepEqual(entries, []);
+        assert.deepEqual(resolved.plan, originalResolved.plan);
+        assert.deepEqual(resolved.resolution.captions, originalResolved.resolution.captions);
       } else if (action === 'normal') {
         assert.equal(row.origin, 'Normal fixed');
         assert.deepEqual(entries, [{captionId: 'a', role: 'Normal'}]);
       } else {
         assert.equal(row.origin, 'human override');
         assert.deepEqual(entries, [{captionId: 'a', role: expected.role,
-          presentation: expected.presentation, scope: 'whole-caption'}]);
+          presentation: expected.presentation, scope: 'whole-caption',
+          ...(expected.paletteId ? {paletteId: expected.paletteId} : {})}]);
       }
       current = outputPath;
     }
     for (const [i, file] of Object.values(f.files).entries()) assert.deepEqual(await readFile(file), before[i]);
   });
+});
+
+test('Panel edits reject absent, unknown, misplaced palettes and the excluded comic before creating files', async t => {
+  const f = await fixture(t), before = await readdir(f.directory);
+  for (const [action, extra] of [['panel', []], ['panel-graph-paper', ['--palette', 'unknown']],
+    ['panel', ['--palette', 'warm', '--palette', 'dark']], ['normal', ['--palette', 'warm']],
+    ['reset', ['--palette', 'warm']], ['panel-comic-frame', ['--palette', 'ivory']]]) {
+    await assert.rejects(runAutoPresentationEditV001([action, ...f.args, '--caption-id', 'a',
+      '--output', join(f.directory, 'rejected.json'), ...extra], () => {}), TypeError);
+    assert.deepEqual(await readdir(f.directory), before);
+  }
 });
 
 test('ID, exact substring, and half-open video time return all matching candidates', async t => {

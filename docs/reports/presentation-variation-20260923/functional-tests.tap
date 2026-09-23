@@ -1,0 +1,276 @@
+TAP version 13
+# Subtest: CLI accepts exact identity/text and time, and rejects ambiguous argument contracts
+ok 1 - CLI accepts exact identity/text and time, and rejects ambiguous argument contracts
+  ---
+  duration_ms: 1.191417
+  ...
+# Subtest: CLI uses Color, Scale and provisional Panel/Pulse names and rejects the replaced action names
+ok 2 - CLI uses Color, Scale and provisional Panel/Pulse names and rejects the replaced action names
+  ---
+  duration_ms: 0.416542
+  ...
+# Subtest: Pulse accepts one measured peak ID and keeps time as caption search only
+ok 3 - Pulse accepts one measured peak ID and keeps time as caption search only
+  ---
+  duration_ms: 0.229666
+  ...
+# Subtest: Pulse lists eligible IDs and never chooses one or writes for a missing, foreign or unfittable peak
+ok 4 - Pulse lists eligible IDs and never chooses one or writes for a missing, foreign or unfittable peak
+  ---
+  duration_ms: 29.459084
+  ...
+# Subtest: Pulse cannot be saved without bound acoustic evidence
+ok 5 - Pulse cannot be saved without bound acoustic evidence
+  ---
+  duration_ms: 4.316959
+  ...
+# Subtest: Pulse overrides preserve other captions and Reset restores the saved automatic peak exactly
+ok 6 - Pulse overrides preserve other captions and Reset restores the saved automatic peak exactly
+  ---
+  duration_ms: 41.403875
+  ...
+# Subtest: Pulse direct CLI prints eligible IDs on refusal and the selected peak after an explicit save
+ok 7 - Pulse direct CLI prints eligible IDs on refusal and the selected peak after an explicit save
+  ---
+  duration_ms: 144.395375
+  ...
+# Subtest: accents and both Panel backgrounds save explicit palettes and Reset preserves the saved automatic role
+    # Subtest: saved Color Accent
+    ok 1 - saved Color Accent
+      ---
+      duration_ms: 18.291167
+      ...
+    # Subtest: saved Scale Accent
+    ok 2 - saved Scale Accent
+      ---
+      duration_ms: 16.136458
+      ...
+    # Subtest: saved Panel（無地） / 暖色
+    ok 3 - saved Panel（無地） / 暖色
+      ---
+      duration_ms: 15.697209
+      ...
+    # Subtest: saved Panel（方眼紙） / 暗地
+    ok 4 - saved Panel（方眼紙） / 暗地
+      ---
+      duration_ms: 13.732375
+      ...
+    1..4
+ok 8 - accents and both Panel backgrounds save explicit palettes and Reset preserves the saved automatic role
+  ---
+  duration_ms: 64.3885
+  ...
+# Subtest: Panel edits reject absent, unknown, misplaced palettes and the excluded comic before creating files
+ok 9 - Panel edits reject absent, unknown, misplaced palettes and the excluded comic before creating files
+  ---
+  duration_ms: 1.758166
+  ...
+# Subtest: ID, exact substring, and half-open video time return all matching candidates
+ok 10 - ID, exact substring, and half-open video time return all matching candidates
+  ---
+  duration_ms: 2.75625
+  ...
+# Subtest: display distinguishes fixed automatic range, automatic Normal, unresolved, and unprocessed
+ok 11 - display distinguishes fixed automatic range, automatic Normal, unresolved, and unprocessed
+  ---
+  duration_ms: 1.806
+  ...
+# Subtest: four CLI operations save, reload, display their origin, and Reset restores the fixed auto range
+ok 12 - four CLI operations save, reload, display their origin, and Reset restores the fixed auto range
+  ---
+  duration_ms: 10.108209
+  ...
+# Subtest: human partial Color can be added to automatic Normal and Reset restores Normal
+ok 13 - human partial Color can be added to automatic Normal and Reset restores Normal
+  ---
+  duration_ms: 4.353041
+  ...
+# Subtest: several matches and missing matches show candidates without writing an override
+ok 14 - several matches and missing matches show candidates without writing an override
+  ---
+  duration_ms: 2.269542
+  ...
+# Subtest: invalid exact range and existing output fail without modifying any saved state
+ok 15 - invalid exact range and existing output fail without modifying any saved state
+  ---
+  duration_ms: 3.679708
+  ...
+# Subtest: no automatic proposal remains visibly unprocessed and allows a bound one-caption edit
+ok 16 - no automatic proposal remains visibly unprocessed and allows a bound one-caption edit
+  ---
+  duration_ms: 1.666625
+  ...
+# Subtest: direct CLI process emits readable help, state, and nonzero errors without JSON editing
+ok 17 - direct CLI process emits readable help, state, and nonzero errors without JSON editing
+  ---
+  duration_ms: 127.578042
+  ...
+# Subtest: new input keeps Color and Panel as the two Focus expressions with a separate finite background table
+ok 18 - new input keeps Color and Panel as the two Focus expressions with a separate finite background table
+  ---
+  duration_ms: 4.81125
+  ...
+# Subtest: expression assignments and full hashes match the pre-background identity after background expansion
+ok 19 - expression assignments and full hashes match the pre-background identity after background expansion
+  ---
+  duration_ms: 24.878209
+  ...
+# Subtest: Normal, reaction and vocal-energy retain their expression assignment without a Panel background selection
+ok 20 - Normal, reaction and vocal-energy retain their expression assignment without a Panel background selection
+  ---
+  duration_ms: 2.149167
+  ...
+# Subtest: each singleton Panel background is saved as its final finite preset and materialized on the same clock
+ok 21 - each singleton Panel background is saved as its final finite preset and materialized on the same clock
+  ---
+  duration_ms: 12.567292
+  ...
+# Subtest: Panel background selection is independent of expression assignment and ignores row or set ordering
+ok 22 - Panel background selection is independent of expression assignment and ignores row or set ordering
+  ---
+  duration_ms: 3.833334
+  ...
+# Subtest: Panel backgrounds cannot become extra Focus expressions or drawing values and must be explicitly allowed
+ok 23 - Panel backgrounds cannot become extra Focus expressions or drawing values and must be explicitly allowed
+  ---
+  duration_ms: 3.673708
+  ...
+# Subtest: inapplicable backgrounds are rejected even when the first stage would select Color
+ok 24 - inapplicable backgrounds are rejected even when the first stage would select Color
+  ---
+  duration_ms: 2.015208
+  ...
+# Subtest: duplicate JSON keys cannot hide an unallowed background before validation
+ok 25 - duplicate JSON keys cannot hide an unallowed background before validation
+  ---
+  duration_ms: 1.43825
+  ...
+# Subtest: reloading and Reset restore the fixed automatic background while preserving other saved axes
+ok 26 - reloading and Reset restore the fixed automatic background while preserving other saved axes
+  ---
+  duration_ms: 19.527625
+  ...
+# Subtest: saved background selections and final choices cannot be changed, including to a managed but unallowed background
+ok 27 - saved background selections and final choices cannot be changed, including to a managed but unallowed background
+  ---
+  duration_ms: 4.569333
+  ...
+# Subtest: v001 input, reply, selection record and evidence are rejected without implicit upgrading
+ok 28 - v001 input, reply, selection record and evidence are rejected without implicit upgrading
+  ---
+  duration_ms: 4.469625
+  ...
+# Subtest: unfinished and unrepresentable rows do not receive a background selection or become Normal
+ok 29 - unfinished and unrepresentable rows do not receive a background selection or become Normal
+  ---
+  duration_ms: 5.54625
+  ...
+# Subtest: the independent background selector rejects unknown, duplicate or arbitrary values without coercion
+ok 30 - the independent background selector rejects unknown, duplicate or arbitrary values without coercion
+  ---
+  duration_ms: 0.702417
+  ...
+# Subtest: explicit technical recompilation binds original bytes, preserves old semantic choices and assigns only Panel backgrounds
+ok 31 - explicit technical recompilation binds original bytes, preserves old semantic choices and assigns only Panel backgrounds
+  ---
+  duration_ms: 22.689709
+  ...
+# Subtest: technical recompilation does not enter the fresh judgment path and its provenance is checked on reload
+ok 32 - technical recompilation does not enter the fresh judgment path and its provenance is checked on reload
+  ---
+  duration_ms: 5.040209
+  ...
+# Subtest: technical recompilation retains old unrepresentable and unresolved decisions without new background choices
+ok 33 - technical recompilation retains old unrepresentable and unresolved decisions without new background choices
+  ---
+  duration_ms: 12.853167
+  ...
+# Subtest: explicit recompilation rejects changed original bytes, record hashes and old selected expressions
+ok 34 - explicit recompilation rejects changed original bytes, record hashes and old selected expressions
+  ---
+  duration_ms: 8.5
+  ...
+# Subtest: preserve-normal-cut is explicit in the input and refuses separator assignments without changing captions
+ok 35 - preserve-normal-cut is explicit in the input and refuses separator assignments without changing captions
+  ---
+  duration_ms: 4.420083
+  ...
+# Subtest: whole-audio ASR evidence is available outside acoustic candidates and requires unique saved observation IDs
+ok 36 - whole-audio ASR evidence is available outside acoustic candidates and requires unique saved observation IDs
+  ---
+  duration_ms: 1.608
+  ...
+# Subtest: new rules bind a versioned three-stage finite choice without changing the old v002 input
+ok 37 - new rules bind a versioned three-stage finite choice without changing the old v002 input
+  ---
+  duration_ms: 6.457916
+  ...
+# Subtest: adding palettes cannot change Panel frequency, background, other expressions or connections
+ok 38 - adding palettes cannot change Panel frequency, background, other expressions or connections
+  ---
+  duration_ms: 30.211583
+  ...
+# Subtest: palette choice uses its own full hash and ignores row/set order while one-item changes stay local
+ok 39 - palette choice uses its own full hash and ignores row/set order while one-item changes stay local
+  ---
+  duration_ms: 5.631084
+  ...
+# Subtest: deliberate singleton coverage materializes all eight declared pairs without claiming automatic diversity
+ok 40 - deliberate singleton coverage materializes all eight declared pairs without claiming automatic diversity
+  ---
+  duration_ms: 29.197041
+  ...
+# Subtest: new selection rejects comic, missing or arbitrary palettes, duplicate sets and drawing fields before fixation
+ok 41 - new selection rejects comic, missing or arbitrary palettes, duplicate sets and drawing fields before fixation
+  ---
+  duration_ms: 3.829292
+  ...
+# Subtest: saved new plans reload exactly; one-item palette, Normal and Reset retain all other saved systems
+ok 42 - saved new plans reload exactly; one-item palette, Normal and Reset retain all other saved systems
+  ---
+  duration_ms: 27.448125
+  ...
+# Subtest: old comic reading and Reset reproduce saved v002 values while new comic editing is unavailable
+ok 43 - old comic reading and Reset reproduce saved v002 values while new comic editing is unavailable
+  ---
+  duration_ms: 11.880459
+  ...
+# Subtest: explicit v002 recompilation keeps raw bytes, semantics, expression assignments and connections
+ok 44 - explicit v002 recompilation keeps raw bytes, semantics, expression assignments and connections
+  ---
+  duration_ms: 14.418042
+  ...
+# Subtest: recompiled bytes, palette policy, selected palette and version cannot be altered even with a replacement outer hash
+ok 45 - recompiled bytes, palette policy, selected palette and version cannot be altered even with a replacement outer hash
+  ---
+  duration_ms: 16.82325
+  ...
+# Subtest: unfinished captions retain their exception status and receive no palette choice
+ok 46 - unfinished captions retain their exception status and receive no palette choice
+  ---
+  duration_ms: 1.917042
+  ...
+# Subtest: explicit Bounce and Pulse speech endpoints follow the caption shift once and saved selections remain original-clock
+ok 47 - explicit Bounce and Pulse speech endpoints follow the caption shift once and saved selections remain original-clock
+  ---
+  duration_ms: 15.840292
+  ...
+# Subtest: real fixed HRB and C-all saved v002 drawing evidence replays its original view hash exactly
+ok 48 - real fixed HRB and C-all saved v002 drawing evidence replays its original view hash exactly
+  ---
+  duration_ms: 645.618042
+  ...
+# Subtest: real HRB v001 and C-all v002 semantic records derive new palettes without another AI judgment or text/timing changes
+ok 49 - real HRB v001 and C-all v002 semantic records derive new palettes without another AI judgment or text/timing changes
+  ---
+  duration_ms: 4533.277083
+  ...
+1..49
+# tests 53
+# suites 0
+# pass 53
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5406.403042

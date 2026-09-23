@@ -12,7 +12,7 @@ import {
   AUTO_PRESENTATION_RULES_REF_V008, fixAutoPresentationProposalV001,
   resolveAutoPresentationV001, sha256AutoPresentationV001,
 } from './presentation_auto_effects_v001.mjs';
-import {indexExplicitLinesV001} from './presentation_renderer_text_layout_v001.mjs';
+import {indexExplicitLinesV001, resolveVisibleCenterOffsetsV001} from './presentation_renderer_text_layout_v001.mjs';
 import {evaluatePresentationRendererQcV002, inspectOverlayPngV002}
   from './presentation_renderer_qc_v002.mjs';
 
@@ -157,8 +157,21 @@ test('Panel Accent paints a real plate and retains existing layout and raster re
       return JSON.parse(await readFile(resultPath, 'utf8'));
     };
     for (const fixture of fixtures) await t.test(fixture.name, async () => {
-      const {element, props, normalProps} = panelFixture(savedProps, fixture);
-      const layout = await inspectLayout(props, fixture.name);
+      const {element, props: initialProps, normalProps} = panelFixture(savedProps, fixture);
+      const layout = await inspectLayout(initialProps, fixture.name);
+      // Use the same measured glyph centering as the production Panel adapter.
+      // The historical standalone harness predated this required drawing step.
+      const calibrationBounds = [];
+      for (let lineIndex = 0; lineIndex < initialProps.indexedLines.length; lineIndex++) {
+        await draw({...initialProps, inspectionLineIndex: lineIndex});
+        const mask = await shot(`${fixture.name}-calibration-${lineIndex}`);
+        const observed = await inspectOverlayPngV002({instructionId: fixture.name, pngPath: mask.pngPath});
+        assert.ok(observed.alphaBounds); calibrationBounds.push(observed.alphaBounds);
+      }
+      const wrapper = layout.items[0].wrapper;
+      const props = {...initialProps, renderVisibleCenterCorrectionPx: resolveVisibleCenterOffsetsV001({
+        containerBounds: {left: wrapper.left, top: wrapper.top, right: wrapper.left + wrapper.width,
+          bottom: wrapper.top + wrapper.height}, lineBounds: calibrationBounds})};
       const measurement = await draw(props);
       const panel = await shot(fixture.name);
       const lineAlphaBounds = [], masks = [];

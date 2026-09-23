@@ -1,0 +1,1029 @@
+{
+  "status": "passed",
+  "protectedRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-render-evidence-v001/completion.json",
+      "bytes": 255679721,
+      "fileSha256": "249b22516e85a6a61a5b7d52660c4f44ff250d60200860086465bbeb316e8e9a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v003/integration.json",
+      "bytes": 32649,
+      "fileSha256": "18af780134981e494f75e2b1c803e08e249715c7689be7ad578f81dbb2ccca30"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-render-evidence-v001/base.mp4",
+      "bytes": 76057645,
+      "fileSha256": "bc542aeef59ae0883ddcb58690e7c0f6581860bc5b65df5f30081b377535b1c4"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-render-v001/presentation-rendered-v002.mp4",
+      "bytes": 73566343,
+      "fileSha256": "6cacf10a9d804cafa10a148c141db33521c5f62bf3c4e34a133622e377608075"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v003/normal-plan.json",
+      "bytes": 205983,
+      "fileSha256": "7fb82d062a89b52ad43b71987938c011171ebcda00658f0b852b20286e0ca3a6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v003/decision-input.json",
+      "bytes": 33756,
+      "fileSha256": "8be07de848399fb8f3e3b5dd91d8fa3451d6005948ba36ce76176fd3c9419450"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v003/fixed-proposal.json",
+      "bytes": 44119,
+      "fileSha256": "83e513ba45d3433933c8201ba94647d21cea11e3a0971734d15c4efc0fded84f"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v003/overrides.json",
+      "bytes": 32350,
+      "fileSha256": "ffbf1988d7ba84391aeaf2f5bd167b5f2cb8dc7968f4d636af8e878e3dd91f60"
+    }
+  ],
+  "baseRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-render-evidence-v001/base.mp4",
+    "bytes": 76057645,
+    "fileSha256": "bc542aeef59ae0883ddcb58690e7c0f6581860bc5b65df5f30081b377535b1c4"
+  },
+  "originalVideo": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-render-v001/presentation-rendered-v002.mp4",
+    "bytes": 73566343,
+    "fileSha256": "6cacf10a9d804cafa10a148c141db33521c5f62bf3c4e34a133622e377608075"
+  },
+  "expectedFrameCount": 4878,
+  "target": {
+    "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+    "text": "なんかグロいやつに捕まってる",
+    "startFrame": 1746,
+    "endFrameExclusive": 1817
+  },
+  "automaticProposalUnchanged": true,
+  "nonTargetCaptionsUnchanged": true,
+  "contentAndTimingUnchanged": true,
+  "resetRestoredOriginalOverridesAndPlan": true,
+  "newAiJudgment": false,
+  "manualTechnicalDemonstration": true,
+  "phaseResults": [
+    {
+      "phase": "graph",
+      "overrideRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/graph-overrides.json",
+        "bytes": 32601,
+        "fileSha256": "eb76aa9309f5ce783d6419cd9b57dee95cb1e80132b76f3975eaacd7ea84773e"
+      },
+      "independentReload": {
+        "status": "passed",
+        "pid": 58507,
+        "planSha256": "601d964db4df8bcd3d75846500dc529a1f03b4f4ab668f98c66b5a0dc0d3bf57"
+      },
+      "physical": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 1,
+        "nativeStateReuses": 0,
+        "nativeAssets": {
+          "nativeDraws": 4,
+          "bitmapReuses": 0,
+          "verifiedPairsAdded": 1,
+          "nativeDrawMilliseconds": 1964.8341659999999,
+          "bitmapReuseMilliseconds": 0
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        },
+        "processTimings": {
+          "records": [
+            {
+              "sequence": 1,
+              "label": "applicability-layout",
+              "childMilliseconds": 224.05245900000023,
+              "evidenceWriteMilliseconds": 0.42308299999990595,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 5,
+              "label": "overlay-inspection-alpha",
+              "childMilliseconds": 133.2710830000001,
+              "evidenceWriteMilliseconds": 0.6220419999999649,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 6,
+              "label": "overlay-inspection-bounds",
+              "childMilliseconds": 129.18754199999967,
+              "evidenceWriteMilliseconds": 0.45899999999983265,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 11,
+              "label": "overlay-inspection-alpha",
+              "childMilliseconds": 80.46487500000012,
+              "evidenceWriteMilliseconds": 0.507542000000285,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 12,
+              "label": "overlay-inspection-bounds",
+              "childMilliseconds": 128.53770799999984,
+              "evidenceWriteMilliseconds": 0.47058300000026065,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 13,
+              "label": "overlay-inspection-alpha",
+              "childMilliseconds": 78.42079199999989,
+              "evidenceWriteMilliseconds": 0.40216700000019046,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 14,
+              "label": "overlay-inspection-bounds",
+              "childMilliseconds": 131.01916600000004,
+              "evidenceWriteMilliseconds": 0.49891699999989214,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            }
+          ],
+          "byLabel": {
+            "applicability-layout": {
+              "processCount": 1,
+              "childMilliseconds": 224.05245900000023,
+              "evidenceWriteMilliseconds": 0.42308299999990595
+            },
+            "overlay-inspection-alpha": {
+              "processCount": 3,
+              "childMilliseconds": 292.1567500000001,
+              "evidenceWriteMilliseconds": 1.5317510000004404
+            },
+            "overlay-inspection-bounds": {
+              "processCount": 3,
+              "childMilliseconds": 388.74441599999955,
+              "evidenceWriteMilliseconds": 1.4284999999999854
+            }
+          },
+          "operations": [
+            {
+              "sequence": 2,
+              "label": "overlay-bundle",
+              "operationKind": "bundle",
+              "elapsedMilliseconds": 645.899375,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0002-overlay-bundle"
+            },
+            {
+              "sequence": 3,
+              "label": "overlay-browser-open",
+              "operationKind": "browser-open",
+              "elapsedMilliseconds": 108.94791699999996,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0003-overlay-browser-open"
+            },
+            {
+              "sequence": 4,
+              "label": "overlay-line-mask",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 265.7966250000004,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0004-overlay-line-mask"
+            },
+            {
+              "sequence": 7,
+              "label": "overlay-still",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 233.15591700000004,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0007-overlay-still"
+            },
+            {
+              "sequence": 8,
+              "label": "overlay-browser-open",
+              "operationKind": "browser-open",
+              "elapsedMilliseconds": 72.61216699999977,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0008-overlay-browser-open"
+            },
+            {
+              "sequence": 9,
+              "label": "overlay-still",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 224.62408400000004,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0009-overlay-still"
+            },
+            {
+              "sequence": 10,
+              "label": "overlay-line-mask",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 230.90449999999964,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0010-overlay-line-mask"
+            },
+            {
+              "sequence": 15,
+              "label": "overlay-browser-close",
+              "operationKind": "browser-close",
+              "elapsedMilliseconds": 7.839582999999948,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0015-overlay-browser-close"
+            },
+            {
+              "sequence": 16,
+              "label": "overlay-browser-close",
+              "operationKind": "browser-close",
+              "elapsedMilliseconds": 6.791000000000167,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0016-overlay-browser-close"
+            },
+            {
+              "sequence": 17,
+              "label": "overlay-browser-process-cleanup",
+              "operationKind": "browser-process-cleanup",
+              "elapsedMilliseconds": 0.24066700000003038,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0017-overlay-browser-process-cleanup"
+            },
+            {
+              "sequence": 18,
+              "label": "overlay-browser-process-cleanup",
+              "operationKind": "browser-process-cleanup",
+              "elapsedMilliseconds": 0.03208300000005693,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0018-overlay-browser-process-cleanup"
+            },
+            {
+              "sequence": 19,
+              "label": "overlay-bundle-remove",
+              "operationKind": "bundle-remove",
+              "elapsedMilliseconds": 1.8926669999991645,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/processes/0019-overlay-bundle-remove"
+            }
+          ],
+          "byOperationLabel": {
+            "overlay-bundle": {
+              "operationCount": 1,
+              "elapsedMilliseconds": 645.899375
+            },
+            "overlay-browser-open": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 181.56008399999973
+            },
+            "overlay-line-mask": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 496.70112500000005
+            },
+            "overlay-still": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 457.7800010000001
+            },
+            "overlay-browser-close": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 14.630583000000115
+            },
+            "overlay-browser-process-cleanup": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 0.2727500000000873
+            },
+            "overlay-bundle-remove": {
+              "operationCount": 1,
+              "elapsedMilliseconds": 1.8926669999991645
+            }
+          },
+          "meaning": "child and renderer API wall times are separate; nested renderer totals must not be added together"
+        },
+        "observationRef": {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/24ec5adb0ceb51c260a9878c8764c262ae3f8e41d2196ddf88aba5f16693a340.json",
+          "bytes": 17180,
+          "fileSha256": "e128aff4db25eea0335e0e3f8720771199b6c3d706dd35a28e37436eefa7f85c"
+        },
+        "reused": false,
+        "elapsedMilliseconds": 3158.5627090000003
+      }
+    },
+    {
+      "phase": "normal",
+      "overrideRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/normal-overrides.json",
+        "bytes": 32481,
+        "fileSha256": "36ac3598a11b2cd1d9cdd282c61fbcb66a791164820f20614f9eea4c1d02acb7"
+      },
+      "independentReload": {
+        "status": "passed",
+        "pid": 58631,
+        "planSha256": "cceccdfb701bd3fbfb7e79a4acabc72ec980ce9d09a97a941f02e423d465795b"
+      },
+      "physical": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 1,
+        "nativeStateReuses": 0,
+        "nativeAssets": {
+          "nativeDraws": 3,
+          "bitmapReuses": 0,
+          "verifiedPairsAdded": 1,
+          "nativeDrawMilliseconds": 1200.915583,
+          "bitmapReuseMilliseconds": 0
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        },
+        "processTimings": {
+          "records": [
+            {
+              "sequence": 1,
+              "label": "applicability-layout",
+              "childMilliseconds": 191.28862499999923,
+              "evidenceWriteMilliseconds": 0.5144170000003214,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 8,
+              "label": "overlay-inspection-alpha",
+              "childMilliseconds": 79.28279199999997,
+              "evidenceWriteMilliseconds": 0.5278330000001006,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 9,
+              "label": "overlay-inspection-bounds",
+              "childMilliseconds": 132.45066599999973,
+              "evidenceWriteMilliseconds": 0.45024999999986903,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 10,
+              "label": "overlay-inspection-alpha",
+              "childMilliseconds": 81.0469579999999,
+              "evidenceWriteMilliseconds": 0.4685829999998532,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 11,
+              "label": "overlay-inspection-bounds",
+              "childMilliseconds": 133.70545800000036,
+              "evidenceWriteMilliseconds": 0.5656660000004194,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            }
+          ],
+          "byLabel": {
+            "applicability-layout": {
+              "processCount": 1,
+              "childMilliseconds": 191.28862499999923,
+              "evidenceWriteMilliseconds": 0.5144170000003214
+            },
+            "overlay-inspection-alpha": {
+              "processCount": 2,
+              "childMilliseconds": 160.32974999999988,
+              "evidenceWriteMilliseconds": 0.9964159999999538
+            },
+            "overlay-inspection-bounds": {
+              "processCount": 2,
+              "childMilliseconds": 266.1561240000001,
+              "evidenceWriteMilliseconds": 1.0159160000002885
+            }
+          },
+          "operations": [
+            {
+              "sequence": 2,
+              "label": "overlay-bundle",
+              "operationKind": "bundle",
+              "elapsedMilliseconds": 354.8943329999993,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0002-overlay-bundle"
+            },
+            {
+              "sequence": 3,
+              "label": "overlay-browser-open",
+              "operationKind": "browser-open",
+              "elapsedMilliseconds": 84.19558300000062,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0003-overlay-browser-open"
+            },
+            {
+              "sequence": 4,
+              "label": "overlay-still",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 228.03537499999948,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0004-overlay-still"
+            },
+            {
+              "sequence": 5,
+              "label": "overlay-browser-open",
+              "operationKind": "browser-open",
+              "elapsedMilliseconds": 68.18700000000081,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0005-overlay-browser-open"
+            },
+            {
+              "sequence": 6,
+              "label": "overlay-still",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 246.31312500000058,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0006-overlay-still"
+            },
+            {
+              "sequence": 7,
+              "label": "overlay-line-mask",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 213.96437499999956,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0007-overlay-line-mask"
+            },
+            {
+              "sequence": 12,
+              "label": "overlay-browser-close",
+              "operationKind": "browser-close",
+              "elapsedMilliseconds": 6.860916000000543,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0012-overlay-browser-close"
+            },
+            {
+              "sequence": 13,
+              "label": "overlay-browser-close",
+              "operationKind": "browser-close",
+              "elapsedMilliseconds": 6.653707999999824,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0013-overlay-browser-close"
+            },
+            {
+              "sequence": 14,
+              "label": "overlay-browser-process-cleanup",
+              "operationKind": "browser-process-cleanup",
+              "elapsedMilliseconds": 0.05333300000074814,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0014-overlay-browser-process-cleanup"
+            },
+            {
+              "sequence": 15,
+              "label": "overlay-browser-process-cleanup",
+              "operationKind": "browser-process-cleanup",
+              "elapsedMilliseconds": 0.03541700000005221,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0015-overlay-browser-process-cleanup"
+            },
+            {
+              "sequence": 16,
+              "label": "overlay-bundle-remove",
+              "operationKind": "bundle-remove",
+              "elapsedMilliseconds": 1.4952499999999418,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/d4595678-cb21-4228-aee5-9c3f55c43c92/processes/0016-overlay-bundle-remove"
+            }
+          ],
+          "byOperationLabel": {
+            "overlay-bundle": {
+              "operationCount": 1,
+              "elapsedMilliseconds": 354.8943329999993
+            },
+            "overlay-browser-open": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 152.38258300000143
+            },
+            "overlay-still": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 474.34850000000006
+            },
+            "overlay-line-mask": {
+              "operationCount": 1,
+              "elapsedMilliseconds": 213.96437499999956
+            },
+            "overlay-browser-close": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 13.514624000000367
+            },
+            "overlay-browser-process-cleanup": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 0.08875000000080036
+            },
+            "overlay-bundle-remove": {
+              "operationCount": 1,
+              "elapsedMilliseconds": 1.4952499999999418
+            }
+          },
+          "meaning": "child and renderer API wall times are separate; nested renderer totals must not be added together"
+        },
+        "observationRef": {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/aebf6968ad18c6263ff614c367fd84591281f244fda9cb0f80272edfa5cd220f.json",
+          "bytes": 15665,
+          "fileSha256": "c4a0ddb1df18eb0111f4cb5e40f748900edc9e601ef5f878172e2932b3edb993"
+        },
+        "reused": false,
+        "elapsedMilliseconds": 1898.0716250000005
+      }
+    },
+    {
+      "phase": "reset",
+      "overrideRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/reset-overrides.json",
+        "bytes": 32350,
+        "fileSha256": "ffbf1988d7ba84391aeaf2f5bd167b5f2cb8dc7968f4d636af8e878e3dd91f60"
+      },
+      "independentReload": {
+        "status": "passed",
+        "pid": 58715,
+        "planSha256": "a05db0a1cceed5ce47def60e870380dce55162b17892ad5f8dbe946632cf18e7"
+      },
+      "physical": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 1,
+        "nativeStateReuses": 0,
+        "nativeAssets": {
+          "nativeDraws": 4,
+          "bitmapReuses": 0,
+          "verifiedPairsAdded": 1,
+          "nativeDrawMilliseconds": 1342.8558340000009,
+          "bitmapReuseMilliseconds": 0
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        },
+        "processTimings": {
+          "records": [
+            {
+              "sequence": 1,
+              "label": "applicability-layout",
+              "childMilliseconds": 172.29041599999982,
+              "evidenceWriteMilliseconds": 0.4547499999998763,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 5,
+              "label": "overlay-inspection-alpha",
+              "childMilliseconds": 80.97962499999994,
+              "evidenceWriteMilliseconds": 0.4593750000003638,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 6,
+              "label": "overlay-inspection-bounds",
+              "childMilliseconds": 130.41154200000074,
+              "evidenceWriteMilliseconds": 0.4903340000000753,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 11,
+              "label": "overlay-inspection-alpha",
+              "childMilliseconds": 79.8955420000002,
+              "evidenceWriteMilliseconds": 0.4599159999997937,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 12,
+              "label": "overlay-inspection-bounds",
+              "childMilliseconds": 132.94179200000144,
+              "evidenceWriteMilliseconds": 0.4631249999983993,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 13,
+              "label": "overlay-inspection-alpha",
+              "childMilliseconds": 79.10033400000066,
+              "evidenceWriteMilliseconds": 0.4142090000004828,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            },
+            {
+              "sequence": 14,
+              "label": "overlay-inspection-bounds",
+              "childMilliseconds": 128.5841670000009,
+              "evidenceWriteMilliseconds": 0.4312919999993028,
+              "code": 0,
+              "signal": null,
+              "spawnFailed": false
+            }
+          ],
+          "byLabel": {
+            "applicability-layout": {
+              "processCount": 1,
+              "childMilliseconds": 172.29041599999982,
+              "evidenceWriteMilliseconds": 0.4547499999998763
+            },
+            "overlay-inspection-alpha": {
+              "processCount": 3,
+              "childMilliseconds": 239.9755010000008,
+              "evidenceWriteMilliseconds": 1.3335000000006403
+            },
+            "overlay-inspection-bounds": {
+              "processCount": 3,
+              "childMilliseconds": 391.93750100000307,
+              "evidenceWriteMilliseconds": 1.3847509999977774
+            }
+          },
+          "operations": [
+            {
+              "sequence": 2,
+              "label": "overlay-bundle",
+              "operationKind": "bundle",
+              "elapsedMilliseconds": 310.77458300000035,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0002-overlay-bundle"
+            },
+            {
+              "sequence": 3,
+              "label": "overlay-browser-open",
+              "operationKind": "browser-open",
+              "elapsedMilliseconds": 74.84537499999988,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0003-overlay-browser-open"
+            },
+            {
+              "sequence": 4,
+              "label": "overlay-line-mask",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 220.17812499999945,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0004-overlay-line-mask"
+            },
+            {
+              "sequence": 7,
+              "label": "overlay-still",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 210.1609580000004,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0007-overlay-still"
+            },
+            {
+              "sequence": 8,
+              "label": "overlay-browser-open",
+              "operationKind": "browser-open",
+              "elapsedMilliseconds": 70.06016699999964,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0008-overlay-browser-open"
+            },
+            {
+              "sequence": 9,
+              "label": "overlay-still",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 236.07537499999853,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0009-overlay-still"
+            },
+            {
+              "sequence": 10,
+              "label": "overlay-line-mask",
+              "operationKind": "render-still",
+              "elapsedMilliseconds": 214.32775000000038,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0010-overlay-line-mask"
+            },
+            {
+              "sequence": 15,
+              "label": "overlay-browser-close",
+              "operationKind": "browser-close",
+              "elapsedMilliseconds": 6.69262499999968,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0015-overlay-browser-close"
+            },
+            {
+              "sequence": 16,
+              "label": "overlay-browser-close",
+              "operationKind": "browser-close",
+              "elapsedMilliseconds": 4.309792000000016,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0016-overlay-browser-close"
+            },
+            {
+              "sequence": 17,
+              "label": "overlay-browser-process-cleanup",
+              "operationKind": "browser-process-cleanup",
+              "elapsedMilliseconds": 0.04383299999972223,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0017-overlay-browser-process-cleanup"
+            },
+            {
+              "sequence": 18,
+              "label": "overlay-browser-process-cleanup",
+              "operationKind": "browser-process-cleanup",
+              "elapsedMilliseconds": 0.03379099999983737,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0018-overlay-browser-process-cleanup"
+            },
+            {
+              "sequence": 19,
+              "label": "overlay-bundle-remove",
+              "operationKind": "bundle-remove",
+              "elapsedMilliseconds": 1.7573330000013812,
+              "status": "passed",
+              "failure": null,
+              "observationDirectory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/processes/0019-overlay-bundle-remove"
+            }
+          ],
+          "byOperationLabel": {
+            "overlay-bundle": {
+              "operationCount": 1,
+              "elapsedMilliseconds": 310.77458300000035
+            },
+            "overlay-browser-open": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 144.9055419999995
+            },
+            "overlay-line-mask": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 434.50587499999983
+            },
+            "overlay-still": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 446.2363329999989
+            },
+            "overlay-browser-close": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 11.002416999999696
+            },
+            "overlay-browser-process-cleanup": {
+              "operationCount": 2,
+              "elapsedMilliseconds": 0.0776239999995596
+            },
+            "overlay-bundle-remove": {
+              "operationCount": 1,
+              "elapsedMilliseconds": 1.7573330000013812
+            }
+          },
+          "meaning": "child and renderer API wall times are separate; nested renderer totals must not be added together"
+        },
+        "observationRef": {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/523eb2fb23d0d3d193c1eb8464e14e4710207a5fd7f92728d2255b8b3eb72697.json",
+          "bytes": 17186,
+          "fileSha256": "adc06551125df24b6ad708147a49e4b562829d93e6c1704956f140281ed5e198"
+        },
+        "reused": false,
+        "elapsedMilliseconds": 2213.3542080000007
+      }
+    }
+  ],
+  "localPixels": {
+    "status": "passed",
+    "changedRgbPixels": 26717,
+    "samePlateAlpha": true,
+    "sameGlyphRgba": true,
+    "glyphRgbaSha256": "2b8e1638448f09282e832ca4a9dfea9b8fb4b8517e4211f0d6f6540324595518",
+    "graph": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/48cab69d-abd2-4414-9b2d-1658aaa69d75/afc53734adf83d73e8d2fd9b0d910ff719a37dfc701c324fc12ccff1d9f44cbe.png",
+      "bytes": 87178,
+      "fileSha256": "2b4136ed49044d8cef4b0b4a0fe92ccd574f811739d3ec33cf6fc448d9b4a1a1"
+    },
+    "plain": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/physical/applicability/runs/40ec045e-5b9a-4ee6-a885-613fc32f0790/ea0b9b62356e101dde66a70ba0db4d3668351d44558c1fe3e0bb0bbdb35e800e.png",
+      "bytes": 82436,
+      "fileSha256": "4bdcb8313f0448a6b3e099048f52c5c32dff29774531256fcc7c8130819c797c"
+    },
+    "scope": "same actual subtitle and warm palette; native plate grid differs while glyph bitmap and plate coverage are identical"
+  },
+  "sourceHead": "79e527aa135472af98d8469959e70cfcbfbe40a8",
+  "selectedOverrideTrackedPath": "docs/reports/presentation-variation-20260923/selected-overrides.json",
+  "selectedOverrideSha256": "eb76aa9309f5ce783d6419cd9b57dee95cb1e80132b76f3975eaacd7ea84773e",
+  "tests": {
+    "functional": {
+      "passed": 53,
+      "failed": 0
+    },
+    "savedIO": {
+      "passed": 25,
+      "failed": 0
+    },
+    "nativePanel": {
+      "passed": 7,
+      "failed": 0
+    },
+    "totalPassed": 85,
+    "unresolvedFailures": 0
+  },
+  "testSetupCorrections": [
+    {
+      "issue": "Reset comparison incorrectly treated absent and explicit empty override document metadata as identical",
+      "fix": "compare restored plan and per-caption decisions; confirm empty overrides separately",
+      "productionChanged": false
+    },
+    {
+      "issue": "historical real-input tests assumed artifacts lived in current checkout",
+      "fix": "explicit ZEV_PANEL_SAVED_OUTPUT_ROOT points to unchanged saved inputs",
+      "productionChanged": false
+    },
+    {
+      "issue": "legacy native Panel test omitted production glyph-centering calibration",
+      "fix": "measure existing glyph masks then use the existing centering function; fixture values and QC expectations unchanged",
+      "productionChanged": false
+    }
+  ],
+  "historicalNativeDiagnostic": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/legacy-panel-diagnostic/measurement.json",
+    "fileSha256": "cf10d130286d65119859bcc5aba393f65177c264380436206a8480ac483d12cb",
+    "resolved": true
+  },
+  "completedFrames": {
+    "status": "actual-frames-inspected",
+    "videoSha256": "82957560ab7123cb54c76d63ee9865c7116050cf94b819f54e662f0bbfee4c6f",
+    "frames": [
+      {
+        "frame": 1780,
+        "seconds": 59.333333333333336,
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/completed-frames/frame-01.png",
+        "bytes": 566935,
+        "fileSha256": "d9cc0b125948aff466a51904803f8f9b52228259a5e3d3cf62f6d5cf58bf9277"
+      },
+      {
+        "frame": 3650,
+        "seconds": 121.66666666666667,
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/completed-frames/frame-02.png",
+        "bytes": 766644,
+        "fileSha256": "e53f41fc1f6e64d637a290a6cd3149a7d40250572e36fed25f33568de7552f8d"
+      },
+      {
+        "frame": 4650,
+        "seconds": 155.0,
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/completed-frames/frame-03.png",
+        "bytes": 844996,
+        "fileSha256": "480a2a81db88fd0c7f63e21b6e47b4183f9a6aa0ec051aaba98e364da71e205d"
+      }
+    ],
+    "observations": [
+      "1780フレーム: 暖色の方眼紙と元の本文が表示され、文字欠け・画面端超過なし",
+      "3650フレーム: 保存済みの暗地無地Panelと元の本文を保持",
+      "4650フレーム: 保存済みの暗地方眼紙Panelと元の本文を保持"
+    ],
+    "humanAdoption": "not-claimed"
+  },
+  "completion": {
+    "status": "passed",
+    "video": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/render/presentation-rendered-v002.mp4",
+      "bytes": 73592255,
+      "fileSha256": "82957560ab7123cb54c76d63ee9865c7116050cf94b819f54e662f0bbfee4c6f"
+    },
+    "expectedFrameCount": 4878,
+    "media": {
+      "durationMs": 162600,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 4878
+      },
+      "audio": {
+        "codecName": "aac",
+        "sampleRate": 44100,
+        "channelLayout": "stereo",
+        "durationMs": 162600,
+        "packetPayloadSha256": "8f5e83c0c4c531f0b7b03621e0cf3fdbbd28d83a3961433bb6bfb8b25fe14d4e"
+      }
+    },
+    "sourceBytesUnchanged": true,
+    "humanAdoption": "not-claimed",
+    "finalQcStatus": "passed",
+    "completedFrameQcStatus": "passed",
+    "fullEvidence": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/completion.json",
+      "fileSha256": "68c82568876de7402fe7be2f1b4bd928bb96857aafb5dcfcb380a7a6a3ff1a7a"
+    },
+    "audio": {
+      "sampleRate": 44100,
+      "logicalSampleCount": 7170660,
+      "packetPayloadUnchanged": true,
+      "logicalPcmUnchanged": true,
+      "packetPayloadSha256": "8f5e83c0c4c531f0b7b03621e0cf3fdbbd28d83a3961433bb6bfb8b25fe14d4e",
+      "logicalDecodedPayloadSha256": "d265f7fb9335b5f973e5e6e92d4e1b444fafdccdc3d0905c255431c9d70a3ac5"
+    },
+    "qc": {
+      "method": "exact-replay-native-v1",
+      "status": "passed",
+      "violations": [],
+      "instructionCount": 32,
+      "inspectionCount": 32,
+      "selectedCompletedFrameCount": 158,
+      "logicalReferenceCount": 22269,
+      "exactReplay": {
+        "schemaVersion": "presentation-exact-replay-qc-v001",
+        "expectedFrameCount": 4878,
+        "planCanonicalSha256": "601d964db4df8bcd3d75846500dc529a1f03b4f4ab668f98c66b5a0dc0d3bf57",
+        "compositorArgumentsCanonicalSha256": "d199cef100071f0f3682aa8cb75e0b2455b1e8e51095e7c1648288f9cc3266ae",
+        "encodeArgumentsCanonicalSha256": "2a0365a84dad93dd05c2cdde34c2a320cfd2853e4fdf6e0c6a594ebe4c7243fb",
+        "completed": {
+          "role": "completed-media",
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/.render.presentation-renderer-v002-work-yBz8Dp/publish/presentation-rendered-v002.mp4",
+          "realPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/.render.presentation-renderer-v002-work-yBz8Dp/publish/presentation-rendered-v002.mp4",
+          "bytes": 73592255,
+          "fileSha256": "82957560ab7123cb54c76d63ee9865c7116050cf94b819f54e662f0bbfee4c6f"
+        },
+        "replay": {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/.render.presentation-renderer-v002-work-yBz8Dp/scratch/exact-replay-qc/replay.mp4",
+          "realPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-variation-20260923-v001/.render.presentation-renderer-v002-work-yBz8Dp/scratch/exact-replay-qc/replay.mp4",
+          "bytes": 73592255,
+          "fileSha256": "82957560ab7123cb54c76d63ee9865c7116050cf94b819f54e662f0bbfee4c6f"
+        },
+        "encodeProgress": {
+          "completed": true,
+          "encodedFrames": 4878,
+          "observations": 1060
+        },
+        "mp4BytesIdentical": true,
+        "comparisonMethod": "mp4-byte-identical"
+      }
+    }
+  }
+}
