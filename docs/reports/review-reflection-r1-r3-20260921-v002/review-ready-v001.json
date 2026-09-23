@@ -1,0 +1,79 @@
+{
+  "schema_version": "zev-point-review-v001",
+  "batch_id": "HRB-R123-CHANGED-POINTS",
+  "revision": "v001",
+  "title": "修正後の確認：俺たちは仲間",
+  "intro": "元の10ポイントへの回答は完了のままです。ここでは修正後の字幕だけを確認します。他の修正箇所は検査準備中です。",
+  "media": [
+    {
+      "media_id": "R1-P07-BEFORE",
+      "label": "字幕修正前：既存の回答対象",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C002-render/presentation-rendered-v002.mp4",
+      "sha256": "9ea1730ccc3bd3561291a185428aa3aa72afcc2610b0225adcd8c37049f44fce",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 128,
+      "timeline_id": "C-all-Q4-v001",
+      "timeline_start_frame": 4436
+    },
+    {
+      "media_id": "R1-P07-AFTER",
+      "label": "字幕修正後：今回の局所候補",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-07/render/presentation-rendered-v002.mp4",
+      "sha256": "7ea9e631a20c28ebba29e8f70ae11a45b2ace91818ed0fdf943b6cf6a66e9478",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 128,
+      "timeline_id": "r1-point-7-short-frame-v001",
+      "timeline_start_frame": 0
+    }
+  ],
+  "points": [
+    {
+      "point_id": "R1-P07-CAPTION-DELTA",
+      "review_id": "HR-R123-P07-v001",
+      "related_review_ids": [
+        "HR-Q4-002"
+      ],
+      "title": "7：「俺たちは仲間」と直前の字幕",
+      "question": "「俺たちは仲間」は発話に合って表示されていますか。直前の「ライバル」の字幕が残る問題も解消していますか。",
+      "target_function": "対象字幕と直前字幕をそれぞれの発話区間へ合わせる処理",
+      "change_summary": "「俺たちは仲間」を短尺の冒頭から表示し、この短尺に対応発話がない直前字幕を非表示にしました。無地背景は保持し、暖色は今回の局所配色候補です。",
+      "why_human_review": "変更した字幕の読みやすさと発話との自然な対応を、この短尺で確認します。",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "対象字幕と直前字幕をそれぞれの発話区間へ合わせる処理の変更後の見え方"
+        ],
+        "does_not_apply_to": [
+          "背景に対する元回答の再判定",
+          "配色の自動選択や全編品質",
+          "元の10ポイントへの回答の書換え・再入力",
+          "他のポイントへの回答転記"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "R1-P07-BEFORE-VIEW",
+          "label": "字幕修正前",
+          "role": "before",
+          "media_id": "R1-P07-BEFORE",
+          "start_frame": 0,
+          "end_frame": 128,
+          "context_start_frame": 0,
+          "context_end_frame": 128
+        },
+        {
+          "view_id": "R1-P07-AFTER-VIEW",
+          "label": "字幕修正後",
+          "role": "after",
+          "media_id": "R1-P07-AFTER",
+          "start_frame": 0,
+          "end_frame": 128,
+          "context_start_frame": 0,
+          "context_end_frame": 128
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "q5-2-render-environment-failure-v001",
+  "recordedAt": "2026-09-21T01:26:07.170864+00:00",
+  "category": "environment-process-restriction",
+  "actualProposalChanged": false,
+  "actualMediaAttempt": 1,
+  "setupCorrectionCountIncludingEarlierSyntheticFixtures": 3,
+  "stage": "native-layout-inspection-before-overlay-draw",
+  "reason": "tsx IPC listen EPERM at /private/tmp/tsx-501/41309.pipe",
+  "passedStages": [
+    "source addition independent full YUV/PCM verification",
+    "retained original base full YUV/PCM verification",
+    "joined lossless full YUV/PCM verification",
+    "base video and AAC logical clock"
+  ],
+  "logRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/actual-render-v001.log",
+    "bytes": 1683,
+    "fileSha256": "cf24e1eb403a08b3be9ee7fbb6958d6cc38a98cc9e1a5bf4b43de5b287ef8275"
+  },
+  "failureRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-evidence-v001/failure.json",
+    "bytes": 2206,
+    "fileSha256": "7f286cee91bbc131dde2c490257644ff33b9a847989e0d2fc664446a0fe4b3af"
+  },
+  "innerStderrRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-evidence-v001/normal/processes/0001-layout-inspection/stderr.txt",
+    "bytes": 864,
+    "fileSha256": "4ab8e822fcd607a787004b0f6b7026acdcba2d14202f4b930a449f611dc3487d"
+  },
+  "priorJobRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-job-v001.json",
+    "bytes": 3469,
+    "fileSha256": "9feb89fd667c16216a897cbfd94116b67e3df70afddad9835e294622403d5145"
+  },
+  "nextJobRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-job-v002.json",
+    "bytes": 3469,
+    "fileSha256": "8a29525571bd900ba3106e7cf88f0027d5749a3efee22712777880672883a408"
+  },
+  "difference": "only unused versioned output and evidence directories; same source, plan, before, instruction and boundary",
+  "nextAction": "request ordinary approval review for the same fixed Q5-2 local rendering with its required local IPC; if rejected do not route around it",
+  "postRenderReportCorrection": {
+    "category": "saved-result-shape-in-report-collector",
+    "countIncludingEarlierSetupCorrections": 4,
+    "firstCollectorError": "KeyError: 'video' while collecting retained-body/proof.json; its successful video/audio results are inside verification",
+    "changed": "read the existing verification member when collecting retained-body results; no production/test/QC/threshold/media changes",
+    "firstCollectorRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/collect-verification-v001.py",
+      "fileSha256": "db8bcf6666254732e6fcba161ac291c2d6dd27bdfe5fe070b7cf7bd675b38792"
+    },
+    "correctedCollectorRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/collect-verification-v002.py",
+      "fileSha256": "f4a9e43a90daef61cb3d864a674427a7a928be2237a5ee0492478daeaffd24a9"
+    },
+    "actualRenderRerunForThisCorrection": false
+  },
+  "ordinaryApprovalReviewOutcome": {
+    "status": "accepted",
+    "execution": "the exact versioned second render job was run with required local IPC/Chromium permission; completion succeeded",
+    "automaticApprovalRejection": false,
+    "proposalChanged": false,
+    "fallbackRouteUsed": false
+  }
+}

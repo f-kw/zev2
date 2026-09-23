@@ -1,0 +1,39 @@
+TAP version 13
+# Subtest: Q5-2 saved absolute audio gaps and the 60fps phase resolve without 16kHz or ordinal substitution
+ok 1 - Q5-2 saved absolute audio gaps and the 60fps phase resolve without 16kHz or ordinal substitution # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.53775
+  ...
+# Subtest: Q5-2 source extraction checks seek phase, every selected YUV byte and absolute stereo PCM against independent references
+ok 2 - Q5-2 source extraction checks seek phase, every selected YUV byte and absolute stereo PCM against independent references # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.042917
+  ...
+# Subtest: Q5-2 real entry rejects Q5-1 jobs and synthetic sources before any media work
+ok 3 - Q5-2 real entry rejects Q5-1 jobs and synthetic sources before any media work # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.038917
+  ...
+# Q5-2 synthetic test evidence: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-tests-v005
+# Subtest: Q5-2 evidence is bound to the actual source rows and exact saved comparison, including acoustic rows
+ok 4 - Q5-2 evidence is bound to the actual source rows and exact saved comparison, including acoustic rows
+  ---
+  duration_ms: 49.576875
+  ...
+# Q5-2 fixture: {"phase":"native-assets","captions":2}
+# Q5-2 fixture: {"phase":"composite","frames":36}
+# Q5-2 fixture: {"phase":"range-qc","scope":null}
+# Subtest: Q5-2 new-content Normal drawing preserves added and retained captions, exact replay and the new AAC clock
+ok 5 - Q5-2 new-content Normal drawing preserves added and retained captions, exact replay and the new AAC clock
+  ---
+  duration_ms: 21671.760417
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 3
+# todo 0
+# duration_ms 21797.407625

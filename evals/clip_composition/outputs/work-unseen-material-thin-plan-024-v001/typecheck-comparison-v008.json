@@ -1,0 +1,30 @@
+{
+  "command": [
+    "node",
+    "node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/tsc.js",
+    "--noEmit",
+    "--strict",
+    "--skipLibCheck",
+    "--allowImportingTsExtensions",
+    "--target",
+    "es2022",
+    "--module",
+    "nodenext",
+    "--moduleResolution",
+    "nodenext",
+    "--types",
+    "node",
+    "--typeRoots",
+    "node_modules/.pnpm/@types+node@25.9.1/node_modules/@types",
+    "evals/clip_composition/run_unseen_material_thin_plan_v001.mts",
+    "evals/clip_composition/unseen_material_thin_plan_v001.mts",
+    "evals/clip_composition/unseen_material_thin_plan_v001.test.mts",
+    "evals/clip_composition/run_unseen_material_render_v002.mts",
+    "evals/clip_composition/run_unseen_material_render_v003.mts",
+    "evals/clip_composition/run_unseen_material_render_v004.mts"
+  ],
+  "attemptExitCode": 2,
+  "exactExistingDiagnostics": true,
+  "currentDiagnosticLines": 132,
+  "newRenderEntryDiagnostics": []
+}

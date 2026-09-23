@@ -1,0 +1,1807 @@
+{
+  "schemaVersion": "hrc003-native-short-verification-v001",
+  "preparedBy": "Codex",
+  "status": "TECHNICALLY_VERIFIED_HUMAN_REVIEW_PENDING",
+  "authority": "docs/work-orders/DIGEST_Q1_Q2_WORK_ORDER_v001.md",
+  "scope": "HRC-003 native short candidate on the original POINT3 clock; read-only saved-result verification",
+  "originalPoint": {
+    "reviewIds": [
+      "HR-002",
+      "HR-003",
+      "HR-004"
+    ],
+    "originalVideoSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+    "startFrame": 0,
+    "endFrameExclusive": 170,
+    "fps": 30,
+    "durationSeconds": 5.666666666666667,
+    "note": "The original human statement concerns the bundled motions; this technical record attributes size stepping to the saved Bounce/Pulse implementation only."
+  },
+  "candidateVideo": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+    "bytes": 4623609,
+    "fileSha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58"
+  },
+  "sourceClock": {
+    "kind": "range",
+    "startFrame": 0,
+    "endFrameExclusive": 170,
+    "fullFrameCount": 4879,
+    "frameCount": 170,
+    "viewSha256": "5b7341ac8390f51d465daffb89fd213942f9d9fd9bfcd518148a8ab0bd36acff",
+    "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+    "fourSavedSha256": {
+      "captionAuto": "49b880b14e30adbc79f5e644eb60800ad752a29ceb0b23fa28f96315a25d752a",
+      "captionOverrides": "fdb031767dd6d07d696b047624a52eafff3e73c89f62199d7c91824df1181f22",
+      "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+      "connectionOverrides": "0bed3475de50ad2dd1eadb062e82de93da60c3380170701475e61f11cf603122"
+    },
+    "playbackStartSample": 0,
+    "playbackEndSampleExclusive": 249900
+  },
+  "sourcePreservation": {
+    "allEightSourceReferenceFilesMatchRecordedHashes": true,
+    "oldDrawingEvidenceMatchesItsHistoricalHash": true,
+    "allFiveCaptionContentLinesSourceAndDisplayIntervalsUnchanged": true,
+    "existingBouncePulseEndpointsAndAllShakePngsByteIdentical": true,
+    "oldMediaAndOldQcModified": false,
+    "technicalReplayOnly": true,
+    "freshAutomaticSelectionSuccess": false,
+    "oldObservationsRevalidated": false,
+    "lineageRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/lineage.json",
+      "bytes": 1452,
+      "fileSha256": "ad13b4d70380c13b6f22803f894378249bbb03662bfaf5f22fd434a7a8a9e876"
+    },
+    "sourceChange": "Only the caption drawing-rules reference differs in the copied source. Judgment input differs only in its context/input hashes; the new local reply differs only in its input hash. All prior semantic choices, exceptions and connections match.",
+    "entireLogicalCaptionsUnchangedExceptNewMotionPresetVersion": true,
+    "originalPoint3VideoRehashedAndUnchanged": true
+  },
+  "rules": {
+    "autoPresentation": {
+      "version": "auto-presentation-rules-v008",
+      "contentSha256": "0ca0e8e4fa9cc1441dbda3b4b2c3cd2442c09f8403cc339943046f551bc28b06"
+    },
+    "drawingRulesCanonicalSha256": "593d34be2db37d852b68b5a5efbd59fee1909e86effebc394280078351fe3bca",
+    "drawingRuleFileCount": 57,
+    "canonicalRulesDigestRecomputed": true,
+    "checkedCurrentSourceFiles": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_auto_effects_v001.mjs",
+        "bytes": 22906,
+        "fileSha256": "0413358322054de838d09993cceb36a6ecc3da0b49afa310af5d17cb87516a38"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_motion_v001.mjs",
+        "bytes": 8482,
+        "fileSha256": "be2a8d088f93347b8f05ed4e0524823d44843f95bad416c4d3dd7f30c49ce726"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_v001.mjs",
+        "bytes": 7267,
+        "fileSha256": "2d3ac1f546ea3b6f186a6569c73d9b3b16fe2406bf63c7ac80726e43abcb14e9"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+        "bytes": 61942,
+        "fileSha256": "6820d0e85dba7ac76b36f0c8b4499ddc7018d600097fc4ecd1043ad1d5c730a6"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_renderer_qc_v001.mjs",
+        "bytes": 5111,
+        "fileSha256": "f55a247822a3bf7d7f516c75ab038a1567de21f5f5a119a05042523b3afdcc61"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+        "bytes": 45187,
+        "fileSha256": "e2b421a57d4f5a64cc0c4be94f6d0daec7d9d91ae79eaeaed5b2e9786471b87e"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+        "bytes": 131877,
+        "fileSha256": "b145ceff29539736dda4b5cbbbddec2e19ce7f4fcf09c8c7903ef66dee033f77"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_entry_v001.tsx",
+        "bytes": 28811,
+        "fileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e"
+      }
+    ]
+  },
+  "finalQc": {
+    "status": "passed",
+    "instructionCount": 5,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "violations": []
+  },
+  "completedMovieEvidence": {
+    "method": "exact-replay-native-v1",
+    "exactReplay": {
+      "expectedFrames": 170,
+      "encodedFrames": 170,
+      "completedMp4AndReplayBytesIndependentlyCompared": true,
+      "comparisonMethod": "mp4-byte-identical",
+      "mp4BytesIdentical": true,
+      "fullDecodedComparison": "not needed because actual complete MP4 bytes match",
+      "successfulChildProcesses": 5
+    },
+    "finiteState": {
+      "sampleCount": 53,
+      "captionCount": 5,
+      "logicalReferenceCount": 1938,
+      "allSampledStatesStrictlyNearestSavedRgbClass": true,
+      "allSampledStatesVisible": true,
+      "allRequiredMotionAndReturnFramesPresent": true,
+      "successfulChildProcesses": 131,
+      "note": "Verified the recorded reference identities and exact integer distance inequalities. This independent review did not rerun RGB decoding or distance computation.",
+      "nativeAnchorsAndSizeOrderingIndependentlyChecked": true
+    }
+  },
+  "captions": [
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "text": "あーもういるやん",
+      "startFrame": 8,
+      "endFrameExclusive": 13,
+      "originalContentLinesSourceAndDisplayIntervalPreserved": true,
+      "presetVersion": null,
+      "program": null,
+      "nativeStates": [
+        {
+          "state": "static",
+          "fontSizePx": 96,
+          "originalPublishedEndpointByteIdentical": null,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/01-8da4fb838757.png",
+            "bytes": 103286,
+            "fileSha256": "a8c4875e7d37a0fc08daead132073a0aba7eaba6c45885b73ac5081013ac9ece"
+          },
+          "alphaBounds": {
+            "left": 562,
+            "top": 845,
+            "right": 1347,
+            "bottom": 974,
+            "width": 785,
+            "height": 129
+          },
+          "layoutWrapper": null
+        }
+      ],
+      "observedFrames": [
+        {
+          "frame": 8,
+          "mediaFrame": 8,
+          "expectedState": "static",
+          "expectedOverlaySha256": "a8c4875e7d37a0fc08daead132073a0aba7eaba6c45885b73ac5081013ac9ece",
+          "visible": true,
+          "referenceCount": 41,
+          "distinctClasses": 40,
+          "expectedAbsoluteRgbDifference": 1426616,
+          "nearestOtherAbsoluteRgbDifference": 2652006
+        },
+        {
+          "frame": 10,
+          "mediaFrame": 10,
+          "expectedState": "static",
+          "expectedOverlaySha256": "a8c4875e7d37a0fc08daead132073a0aba7eaba6c45885b73ac5081013ac9ece",
+          "visible": true,
+          "referenceCount": 41,
+          "distinctClasses": 40,
+          "expectedAbsoluteRgbDifference": 1463770,
+          "nearestOtherAbsoluteRgbDifference": 5379921
+        },
+        {
+          "frame": 12,
+          "mediaFrame": 12,
+          "expectedState": "static",
+          "expectedOverlaySha256": "a8c4875e7d37a0fc08daead132073a0aba7eaba6c45885b73ac5081013ac9ece",
+          "visible": true,
+          "referenceCount": 41,
+          "distinctClasses": 40,
+          "expectedAbsoluteRgbDifference": 1406494,
+          "nearestOtherAbsoluteRgbDifference": 2620398
+        }
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "text": "これもういるやん",
+      "startFrame": 13,
+      "endFrameExclusive": 37,
+      "originalContentLinesSourceAndDisplayIntervalPreserved": true,
+      "presetVersion": "presentation-caption-motion-v002",
+      "program": {
+        "segments": [
+          {
+            "state": "small",
+            "startFrame": 13,
+            "endFrameExclusive": 14
+          },
+          {
+            "state": "stable",
+            "startFrame": 14,
+            "endFrameExclusive": 15
+          },
+          {
+            "state": "middle",
+            "startFrame": 15,
+            "endFrameExclusive": 16
+          },
+          {
+            "state": "between-middle-maximum",
+            "startFrame": 16,
+            "endFrameExclusive": 17
+          },
+          {
+            "state": "maximum",
+            "startFrame": 17,
+            "endFrameExclusive": 19
+          },
+          {
+            "state": "middle",
+            "startFrame": 19,
+            "endFrameExclusive": 20
+          },
+          {
+            "state": "between-middle-stable",
+            "startFrame": 20,
+            "endFrameExclusive": 21
+          },
+          {
+            "state": "stable",
+            "startFrame": 21,
+            "endFrameExclusive": 37
+          }
+        ],
+        "stableStartFrame": 21,
+        "motionFrameCount": 8
+      },
+      "nativeStates": [
+        {
+          "state": "stable",
+          "fontSizePx": 96,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-stable.png",
+            "bytes": 109094,
+            "fileSha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142"
+          },
+          "alphaBounds": {
+            "left": 569,
+            "top": 845,
+            "right": 1347,
+            "bottom": 974,
+            "width": 778,
+            "height": 129
+          },
+          "layoutWrapper": {
+            "top": 811.2,
+            "left": 552,
+            "width": 816,
+            "height": 164
+          }
+        },
+        {
+          "state": "small",
+          "fontSizePx": 88,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-small.png",
+            "bytes": 103263,
+            "fileSha256": "4b8abfc9ac3959aa8b09c18374d5defcbe763e2b85585f0d6e85722f6b7adf28"
+          },
+          "alphaBounds": {
+            "left": 600,
+            "top": 852,
+            "right": 1317,
+            "bottom": 973,
+            "width": 717,
+            "height": 121
+          },
+          "layoutWrapper": {
+            "top": 821.2,
+            "left": 584,
+            "width": 752,
+            "height": 154
+          }
+        },
+        {
+          "state": "middle",
+          "fontSizePx": 104,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-middle.png",
+            "bytes": 115882,
+            "fileSha256": "b6f693025f6c5c54916d47d63b4b796a8ecfc2d16d197745165d2bc10de774e8"
+          },
+          "alphaBounds": {
+            "left": 538,
+            "top": 837,
+            "right": 1378,
+            "bottom": 974,
+            "width": 840,
+            "height": 137
+          },
+          "layoutWrapper": {
+            "top": 800.2,
+            "left": 519,
+            "width": 882,
+            "height": 175
+          }
+        },
+        {
+          "state": "maximum",
+          "fontSizePx": 112,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-maximum.png",
+            "bytes": 121711,
+            "fileSha256": "08ec12c61fa37a7a10b38498ce7ec37f3e680a733b3b9541646f631d8f42b2d7"
+          },
+          "alphaBounds": {
+            "left": 508,
+            "top": 830,
+            "right": 1408,
+            "bottom": 973,
+            "width": 900,
+            "height": 143
+          },
+          "layoutWrapper": {
+            "top": 790.2,
+            "left": 487,
+            "width": 946,
+            "height": 185
+          }
+        },
+        {
+          "state": "between-middle-maximum",
+          "fontSizePx": 108,
+          "originalPublishedEndpointByteIdentical": null,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-between-middle-maximum.png",
+            "bytes": 118684,
+            "fileSha256": "2837b8d22a87c67fa90c7f267a0de0b9016a5910d6217bea5b442463d17b19cd"
+          },
+          "alphaBounds": {
+            "left": 523,
+            "top": 833,
+            "right": 1393,
+            "bottom": 973,
+            "width": 870,
+            "height": 140
+          },
+          "layoutWrapper": {
+            "top": 795.2,
+            "left": 503,
+            "width": 914,
+            "height": 180
+          }
+        },
+        {
+          "state": "between-middle-stable",
+          "fontSizePx": 100,
+          "originalPublishedEndpointByteIdentical": null,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-between-middle-stable.png",
+            "bytes": 112577,
+            "fileSha256": "7688ba5ec82d43f30c16482647d6de2b8c0582703a991655d3116f7580713651"
+          },
+          "alphaBounds": {
+            "left": 554,
+            "top": 842,
+            "right": 1362,
+            "bottom": 974,
+            "width": 808,
+            "height": 132
+          },
+          "layoutWrapper": {
+            "top": 807.2,
+            "left": 536,
+            "width": 848,
+            "height": 168
+          }
+        }
+      ],
+      "observedFrames": [
+        {
+          "frame": 13,
+          "mediaFrame": 13,
+          "expectedState": "small",
+          "expectedOverlaySha256": "4b8abfc9ac3959aa8b09c18374d5defcbe763e2b85585f0d6e85722f6b7adf28",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1481152,
+          "nearestOtherAbsoluteRgbDifference": 4448984
+        },
+        {
+          "frame": 14,
+          "mediaFrame": 14,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1479946,
+          "nearestOtherAbsoluteRgbDifference": 4015118
+        },
+        {
+          "frame": 15,
+          "mediaFrame": 15,
+          "expectedState": "middle",
+          "expectedOverlaySha256": "b6f693025f6c5c54916d47d63b4b796a8ecfc2d16d197745165d2bc10de774e8",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1564975,
+          "nearestOtherAbsoluteRgbDifference": 11137854
+        },
+        {
+          "frame": 16,
+          "mediaFrame": 16,
+          "expectedState": "between-middle-maximum",
+          "expectedOverlaySha256": "2837b8d22a87c67fa90c7f267a0de0b9016a5910d6217bea5b442463d17b19cd",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1255386,
+          "nearestOtherAbsoluteRgbDifference": 14693682
+        },
+        {
+          "frame": 17,
+          "mediaFrame": 17,
+          "expectedState": "maximum",
+          "expectedOverlaySha256": "08ec12c61fa37a7a10b38498ce7ec37f3e680a733b3b9541646f631d8f42b2d7",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1304266,
+          "nearestOtherAbsoluteRgbDifference": 14658166
+        },
+        {
+          "frame": 18,
+          "mediaFrame": 18,
+          "expectedState": "maximum",
+          "expectedOverlaySha256": "08ec12c61fa37a7a10b38498ce7ec37f3e680a733b3b9541646f631d8f42b2d7",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1307542,
+          "nearestOtherAbsoluteRgbDifference": 14653759
+        },
+        {
+          "frame": 19,
+          "mediaFrame": 19,
+          "expectedState": "middle",
+          "expectedOverlaySha256": "b6f693025f6c5c54916d47d63b4b796a8ecfc2d16d197745165d2bc10de774e8",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1344820,
+          "nearestOtherAbsoluteRgbDifference": 14382421
+        },
+        {
+          "frame": 20,
+          "mediaFrame": 20,
+          "expectedState": "between-middle-stable",
+          "expectedOverlaySha256": "7688ba5ec82d43f30c16482647d6de2b8c0582703a991655d3116f7580713651",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1208900,
+          "nearestOtherAbsoluteRgbDifference": 13081899
+        },
+        {
+          "frame": 21,
+          "mediaFrame": 21,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1180111,
+          "nearestOtherAbsoluteRgbDifference": 5936291
+        },
+        {
+          "frame": 24,
+          "mediaFrame": 24,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1240874,
+          "nearestOtherAbsoluteRgbDifference": 6001814
+        },
+        {
+          "frame": 28,
+          "mediaFrame": 28,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1254128,
+          "nearestOtherAbsoluteRgbDifference": 6014674
+        },
+        {
+          "frame": 32,
+          "mediaFrame": 32,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1258069,
+          "nearestOtherAbsoluteRgbDifference": 6010115
+        },
+        {
+          "frame": 36,
+          "mediaFrame": 36,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142",
+          "visible": true,
+          "referenceCount": 36,
+          "distinctClasses": 35,
+          "expectedAbsoluteRgbDifference": 1285987,
+          "nearestOtherAbsoluteRgbDifference": 2501940
+        }
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "text": "いるやんいるやん",
+      "startFrame": 37,
+      "endFrameExclusive": 71,
+      "originalContentLinesSourceAndDisplayIntervalPreserved": true,
+      "presetVersion": "presentation-caption-motion-v002",
+      "program": {
+        "segments": [
+          {
+            "state": "left-12",
+            "startFrame": 37,
+            "endFrameExclusive": 39
+          },
+          {
+            "state": "right-12",
+            "startFrame": 39,
+            "endFrameExclusive": 41
+          },
+          {
+            "state": "left-8",
+            "startFrame": 41,
+            "endFrameExclusive": 43
+          },
+          {
+            "state": "right-8",
+            "startFrame": 43,
+            "endFrameExclusive": 45
+          },
+          {
+            "state": "left-4",
+            "startFrame": 45,
+            "endFrameExclusive": 47
+          },
+          {
+            "state": "right-4",
+            "startFrame": 47,
+            "endFrameExclusive": 49
+          },
+          {
+            "state": "stable",
+            "startFrame": 49,
+            "endFrameExclusive": 71
+          }
+        ],
+        "stableStartFrame": 49,
+        "motionFrameCount": 12
+      },
+      "nativeStates": [
+        {
+          "state": "stable",
+          "fontSizePx": 96,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-stable.png",
+            "bytes": 109969,
+            "fileSha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc"
+          },
+          "alphaBounds": {
+            "left": 562,
+            "top": 845,
+            "right": 1341,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          },
+          "layoutWrapper": {
+            "top": 811.2,
+            "left": 552,
+            "width": 816,
+            "height": 164
+          }
+        },
+        {
+          "state": "left-12",
+          "fontSizePx": 96,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-left-12.png",
+            "bytes": 109953,
+            "fileSha256": "32050dac8c61db0e83e71ae99231468180fda2be1f73a2b85587b2867c5861f9"
+          },
+          "alphaBounds": {
+            "left": 550,
+            "top": 845,
+            "right": 1329,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          },
+          "layoutWrapper": {
+            "top": 811.2,
+            "left": 540,
+            "width": 816,
+            "height": 164
+          }
+        },
+        {
+          "state": "right-12",
+          "fontSizePx": 96,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-right-12.png",
+            "bytes": 109930,
+            "fileSha256": "982a624cb139768d5e4c47bcc344a002eb6ee8d67e1ce4e959b81295fcefd864"
+          },
+          "alphaBounds": {
+            "left": 574,
+            "top": 845,
+            "right": 1353,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          },
+          "layoutWrapper": {
+            "top": 811.2,
+            "left": 564,
+            "width": 816,
+            "height": 164
+          }
+        },
+        {
+          "state": "left-8",
+          "fontSizePx": 96,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-left-8.png",
+            "bytes": 110011,
+            "fileSha256": "9f2a33426182d8c838892e221c6eda5b146cc1fc783b7cec1de4f6eee1bc173b"
+          },
+          "alphaBounds": {
+            "left": 554,
+            "top": 845,
+            "right": 1333,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          },
+          "layoutWrapper": {
+            "top": 811.2,
+            "left": 544,
+            "width": 816,
+            "height": 164
+          }
+        },
+        {
+          "state": "right-8",
+          "fontSizePx": 96,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-right-8.png",
+            "bytes": 109985,
+            "fileSha256": "5c8e757b620cb6f285eb54248d37940a44bb3cabbf472f0281bd826a4f98a9e9"
+          },
+          "alphaBounds": {
+            "left": 570,
+            "top": 845,
+            "right": 1349,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          },
+          "layoutWrapper": {
+            "top": 811.2,
+            "left": 560,
+            "width": 816,
+            "height": 164
+          }
+        },
+        {
+          "state": "left-4",
+          "fontSizePx": 96,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-left-4.png",
+            "bytes": 109990,
+            "fileSha256": "4f97bca2b52d2d748f09b26948ad03ebbe9bcd46f696665f7f25b6be1de660c4"
+          },
+          "alphaBounds": {
+            "left": 558,
+            "top": 845,
+            "right": 1337,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          },
+          "layoutWrapper": {
+            "top": 811.2,
+            "left": 548,
+            "width": 816,
+            "height": 164
+          }
+        },
+        {
+          "state": "right-4",
+          "fontSizePx": 96,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-right-4.png",
+            "bytes": 109961,
+            "fileSha256": "a8f2c2f7c2b21ec93afa406502db53ab9d1a2fd27989179bca8d01a861431b6d"
+          },
+          "alphaBounds": {
+            "left": 566,
+            "top": 845,
+            "right": 1345,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          },
+          "layoutWrapper": {
+            "top": 811.2,
+            "left": 556,
+            "width": 816,
+            "height": 164
+          }
+        }
+      ],
+      "observedFrames": [
+        {
+          "frame": 37,
+          "mediaFrame": 37,
+          "expectedState": "left-12",
+          "expectedOverlaySha256": "32050dac8c61db0e83e71ae99231468180fda2be1f73a2b85587b2867c5861f9",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1409303,
+          "nearestOtherAbsoluteRgbDifference": 2832700
+        },
+        {
+          "frame": 38,
+          "mediaFrame": 38,
+          "expectedState": "left-12",
+          "expectedOverlaySha256": "32050dac8c61db0e83e71ae99231468180fda2be1f73a2b85587b2867c5861f9",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1166768,
+          "nearestOtherAbsoluteRgbDifference": 4274421
+        },
+        {
+          "frame": 39,
+          "mediaFrame": 39,
+          "expectedState": "right-12",
+          "expectedOverlaySha256": "982a624cb139768d5e4c47bcc344a002eb6ee8d67e1ce4e959b81295fcefd864",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1222082,
+          "nearestOtherAbsoluteRgbDifference": 6015422
+        },
+        {
+          "frame": 40,
+          "mediaFrame": 40,
+          "expectedState": "right-12",
+          "expectedOverlaySha256": "982a624cb139768d5e4c47bcc344a002eb6ee8d67e1ce4e959b81295fcefd864",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1110474,
+          "nearestOtherAbsoluteRgbDifference": 7627811
+        },
+        {
+          "frame": 41,
+          "mediaFrame": 41,
+          "expectedState": "left-8",
+          "expectedOverlaySha256": "9f2a33426182d8c838892e221c6eda5b146cc1fc783b7cec1de4f6eee1bc173b",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1138970,
+          "nearestOtherAbsoluteRgbDifference": 7623642
+        },
+        {
+          "frame": 42,
+          "mediaFrame": 42,
+          "expectedState": "left-8",
+          "expectedOverlaySha256": "9f2a33426182d8c838892e221c6eda5b146cc1fc783b7cec1de4f6eee1bc173b",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1168041,
+          "nearestOtherAbsoluteRgbDifference": 7669169
+        },
+        {
+          "frame": 43,
+          "mediaFrame": 43,
+          "expectedState": "right-8",
+          "expectedOverlaySha256": "5c8e757b620cb6f285eb54248d37940a44bb3cabbf472f0281bd826a4f98a9e9",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1080096,
+          "nearestOtherAbsoluteRgbDifference": 7616962
+        },
+        {
+          "frame": 44,
+          "mediaFrame": 44,
+          "expectedState": "right-8",
+          "expectedOverlaySha256": "5c8e757b620cb6f285eb54248d37940a44bb3cabbf472f0281bd826a4f98a9e9",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1095480,
+          "nearestOtherAbsoluteRgbDifference": 7603361
+        },
+        {
+          "frame": 45,
+          "mediaFrame": 45,
+          "expectedState": "left-4",
+          "expectedOverlaySha256": "4f97bca2b52d2d748f09b26948ad03ebbe9bcd46f696665f7f25b6be1de660c4",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1041191,
+          "nearestOtherAbsoluteRgbDifference": 7536537
+        },
+        {
+          "frame": 46,
+          "mediaFrame": 46,
+          "expectedState": "left-4",
+          "expectedOverlaySha256": "4f97bca2b52d2d748f09b26948ad03ebbe9bcd46f696665f7f25b6be1de660c4",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1106992,
+          "nearestOtherAbsoluteRgbDifference": 7591425
+        },
+        {
+          "frame": 47,
+          "mediaFrame": 47,
+          "expectedState": "right-4",
+          "expectedOverlaySha256": "a8f2c2f7c2b21ec93afa406502db53ab9d1a2fd27989179bca8d01a861431b6d",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1070282,
+          "nearestOtherAbsoluteRgbDifference": 7535907
+        },
+        {
+          "frame": 48,
+          "mediaFrame": 48,
+          "expectedState": "right-4",
+          "expectedOverlaySha256": "a8f2c2f7c2b21ec93afa406502db53ab9d1a2fd27989179bca8d01a861431b6d",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1109819,
+          "nearestOtherAbsoluteRgbDifference": 7579886
+        },
+        {
+          "frame": 49,
+          "mediaFrame": 49,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1075367,
+          "nearestOtherAbsoluteRgbDifference": 7559254
+        },
+        {
+          "frame": 53,
+          "mediaFrame": 53,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1128635,
+          "nearestOtherAbsoluteRgbDifference": 7675371
+        },
+        {
+          "frame": 59,
+          "mediaFrame": 59,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 995334,
+          "nearestOtherAbsoluteRgbDifference": 7356028
+        },
+        {
+          "frame": 66,
+          "mediaFrame": 66,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1016833,
+          "nearestOtherAbsoluteRgbDifference": 7454505
+        },
+        {
+          "frame": 70,
+          "mediaFrame": 70,
+          "expectedState": "stable",
+          "expectedOverlaySha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc",
+          "visible": true,
+          "referenceCount": 35,
+          "distinctClasses": 34,
+          "expectedAbsoluteRgbDifference": 1197938,
+          "nearestOtherAbsoluteRgbDifference": 2635296
+        }
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "text": "もうリカちゃんやめてー!",
+      "startFrame": 71,
+      "endFrameExclusive": 154,
+      "originalContentLinesSourceAndDisplayIntervalPreserved": true,
+      "presetVersion": "presentation-pulse-preset-v002",
+      "program": {
+        "segments": [
+          {
+            "state": "normal",
+            "startFrame": 71,
+            "endFrameExclusive": 114
+          },
+          {
+            "state": "between-normal-middle",
+            "startFrame": 114,
+            "endFrameExclusive": 115
+          },
+          {
+            "state": "middle",
+            "startFrame": 115,
+            "endFrameExclusive": 116
+          },
+          {
+            "state": "between-middle-maximum",
+            "startFrame": 116,
+            "endFrameExclusive": 117
+          },
+          {
+            "state": "maximum",
+            "startFrame": 117,
+            "endFrameExclusive": 121
+          },
+          {
+            "state": "between-middle-maximum",
+            "startFrame": 121,
+            "endFrameExclusive": 122
+          },
+          {
+            "state": "middle",
+            "startFrame": 122,
+            "endFrameExclusive": 123
+          },
+          {
+            "state": "between-normal-middle",
+            "startFrame": 123,
+            "endFrameExclusive": 124
+          },
+          {
+            "state": "normal",
+            "startFrame": 124,
+            "endFrameExclusive": 154
+          }
+        ],
+        "measuredPeakFrame": 118,
+        "normalBeforeFrame": 113,
+        "normalAfterFrame": 124
+      },
+      "nativeStates": [
+        {
+          "state": "normal",
+          "fontSizePx": 96,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/04-c4b6154f65f0-normal.png",
+            "bytes": 124582,
+            "fileSha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9"
+          },
+          "alphaBounds": {
+            "left": 396,
+            "top": 845,
+            "right": 1485,
+            "bottom": 974,
+            "width": 1089,
+            "height": 129
+          },
+          "layoutWrapper": {
+            "top": 811.2,
+            "left": 384,
+            "width": 1152,
+            "height": 164
+          }
+        },
+        {
+          "state": "middle",
+          "fontSizePx": 112,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/04-c4b6154f65f0-middle.png",
+            "bytes": 138349,
+            "fileSha256": "a3fe915160ac81b8f5fa8393cc30e8a7d84682e051223da0d44fdd6c87de4f60"
+          },
+          "alphaBounds": {
+            "left": 306,
+            "top": 830,
+            "right": 1569,
+            "bottom": 973,
+            "width": 1263,
+            "height": 143
+          },
+          "layoutWrapper": {
+            "top": 790.2,
+            "left": 291,
+            "width": 1338,
+            "height": 185
+          }
+        },
+        {
+          "state": "maximum",
+          "fontSizePx": 128,
+          "originalPublishedEndpointByteIdentical": true,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/04-c4b6154f65f0-maximum.png",
+            "bytes": 153948,
+            "fileSha256": "589e37a9b8d43d9dee3692160863c5741a4a87c7afef3e09088bcd145fcf6d51"
+          },
+          "alphaBounds": {
+            "left": 215,
+            "top": 814,
+            "right": 1653,
+            "bottom": 973,
+            "width": 1438,
+            "height": 159
+          },
+          "layoutWrapper": {
+            "top": 769.2,
+            "left": 198,
+            "width": 1524,
+            "height": 206
+          }
+        },
+        {
+          "state": "between-normal-middle",
+          "fontSizePx": 104,
+          "originalPublishedEndpointByteIdentical": null,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/04-c4b6154f65f0-between-normal-middle.png",
+            "bytes": 131166,
+            "fileSha256": "913d1fd83ba72703212d8698296f1cff2141d0fc01820531406d3e41fc51e09a"
+          },
+          "alphaBounds": {
+            "left": 351,
+            "top": 837,
+            "right": 1527,
+            "bottom": 974,
+            "width": 1176,
+            "height": 137
+          },
+          "layoutWrapper": {
+            "top": 800.2,
+            "left": 337,
+            "width": 1246,
+            "height": 175
+          }
+        },
+        {
+          "state": "between-middle-maximum",
+          "fontSizePx": 120,
+          "originalPublishedEndpointByteIdentical": null,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/04-c4b6154f65f0-between-middle-maximum.png",
+            "bytes": 146267,
+            "fileSha256": "2a2bfa4f99bebeec0418536cf42c2fea0fd3ea24eca6586c17fe0a826a755c13"
+          },
+          "alphaBounds": {
+            "left": 260,
+            "top": 823,
+            "right": 1611,
+            "bottom": 974,
+            "width": 1351,
+            "height": 151
+          },
+          "layoutWrapper": {
+            "top": 781.2,
+            "left": 245,
+            "width": 1430,
+            "height": 194
+          }
+        }
+      ],
+      "observedFrames": [
+        {
+          "frame": 71,
+          "mediaFrame": 71,
+          "expectedState": "normal",
+          "expectedOverlaySha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1172367,
+          "nearestOtherAbsoluteRgbDifference": 4350627
+        },
+        {
+          "frame": 92,
+          "mediaFrame": 92,
+          "expectedState": "normal",
+          "expectedOverlaySha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1257448,
+          "nearestOtherAbsoluteRgbDifference": 16450144
+        },
+        {
+          "frame": 112,
+          "mediaFrame": 112,
+          "expectedState": "normal",
+          "expectedOverlaySha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1314795,
+          "nearestOtherAbsoluteRgbDifference": 17618779
+        },
+        {
+          "frame": 113,
+          "mediaFrame": 113,
+          "expectedState": "normal",
+          "expectedOverlaySha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1330523,
+          "nearestOtherAbsoluteRgbDifference": 17525718
+        },
+        {
+          "frame": 114,
+          "mediaFrame": 114,
+          "expectedState": "between-normal-middle",
+          "expectedOverlaySha256": "913d1fd83ba72703212d8698296f1cff2141d0fc01820531406d3e41fc51e09a",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1494536,
+          "nearestOtherAbsoluteRgbDifference": 18378162
+        },
+        {
+          "frame": 115,
+          "mediaFrame": 115,
+          "expectedState": "middle",
+          "expectedOverlaySha256": "a3fe915160ac81b8f5fa8393cc30e8a7d84682e051223da0d44fdd6c87de4f60",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1349526,
+          "nearestOtherAbsoluteRgbDifference": 16744309
+        },
+        {
+          "frame": 116,
+          "mediaFrame": 116,
+          "expectedState": "between-middle-maximum",
+          "expectedOverlaySha256": "2a2bfa4f99bebeec0418536cf42c2fea0fd3ea24eca6586c17fe0a826a755c13",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1541651,
+          "nearestOtherAbsoluteRgbDifference": 15236706
+        },
+        {
+          "frame": 117,
+          "mediaFrame": 117,
+          "expectedState": "maximum",
+          "expectedOverlaySha256": "589e37a9b8d43d9dee3692160863c5741a4a87c7afef3e09088bcd145fcf6d51",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1465338,
+          "nearestOtherAbsoluteRgbDifference": 14425306
+        },
+        {
+          "frame": 118,
+          "mediaFrame": 118,
+          "expectedState": "maximum",
+          "expectedOverlaySha256": "589e37a9b8d43d9dee3692160863c5741a4a87c7afef3e09088bcd145fcf6d51",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1462044,
+          "nearestOtherAbsoluteRgbDifference": 14452620
+        },
+        {
+          "frame": 119,
+          "mediaFrame": 119,
+          "expectedState": "maximum",
+          "expectedOverlaySha256": "589e37a9b8d43d9dee3692160863c5741a4a87c7afef3e09088bcd145fcf6d51",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1398779,
+          "nearestOtherAbsoluteRgbDifference": 14471909
+        },
+        {
+          "frame": 120,
+          "mediaFrame": 120,
+          "expectedState": "maximum",
+          "expectedOverlaySha256": "589e37a9b8d43d9dee3692160863c5741a4a87c7afef3e09088bcd145fcf6d51",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1444941,
+          "nearestOtherAbsoluteRgbDifference": 14575639
+        },
+        {
+          "frame": 121,
+          "mediaFrame": 121,
+          "expectedState": "between-middle-maximum",
+          "expectedOverlaySha256": "2a2bfa4f99bebeec0418536cf42c2fea0fd3ea24eca6586c17fe0a826a755c13",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1409485,
+          "nearestOtherAbsoluteRgbDifference": 15448555
+        },
+        {
+          "frame": 122,
+          "mediaFrame": 122,
+          "expectedState": "middle",
+          "expectedOverlaySha256": "a3fe915160ac81b8f5fa8393cc30e8a7d84682e051223da0d44fdd6c87de4f60",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1627499,
+          "nearestOtherAbsoluteRgbDifference": 17261953
+        },
+        {
+          "frame": 123,
+          "mediaFrame": 123,
+          "expectedState": "between-normal-middle",
+          "expectedOverlaySha256": "913d1fd83ba72703212d8698296f1cff2141d0fc01820531406d3e41fc51e09a",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1578356,
+          "nearestOtherAbsoluteRgbDifference": 18546672
+        },
+        {
+          "frame": 124,
+          "mediaFrame": 124,
+          "expectedState": "normal",
+          "expectedOverlaySha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1405053,
+          "nearestOtherAbsoluteRgbDifference": 17273930
+        },
+        {
+          "frame": 138,
+          "mediaFrame": 138,
+          "expectedState": "normal",
+          "expectedOverlaySha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1354683,
+          "nearestOtherAbsoluteRgbDifference": 17573939
+        },
+        {
+          "frame": 153,
+          "mediaFrame": 153,
+          "expectedState": "normal",
+          "expectedOverlaySha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9",
+          "visible": true,
+          "referenceCount": 37,
+          "distinctClasses": 36,
+          "expectedAbsoluteRgbDifference": 1396002,
+          "nearestOtherAbsoluteRgbDifference": 5424528
+        }
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+      "text": "リカー!",
+      "startFrame": 154,
+      "endFrameExclusive": 197,
+      "originalContentLinesSourceAndDisplayIntervalPreserved": true,
+      "presetVersion": null,
+      "program": null,
+      "nativeStates": [
+        {
+          "state": "static",
+          "fontSizePx": 128,
+          "originalPublishedEndpointByteIdentical": null,
+          "png": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/05-d3cb7b1029d4.png",
+            "bytes": 72015,
+            "fileSha256": "e191277f81f1672a61b2bb4b753f913a4baa367c6f95b4b8f61b9b65930a150a"
+          },
+          "alphaBounds": {
+            "left": 739,
+            "top": 818,
+            "right": 1171,
+            "bottom": 969,
+            "width": 432,
+            "height": 151
+          },
+          "layoutWrapper": null
+        }
+      ],
+      "observedFrames": [
+        {
+          "frame": 154,
+          "mediaFrame": 154,
+          "expectedState": "static",
+          "expectedOverlaySha256": "e191277f81f1672a61b2bb4b753f913a4baa367c6f95b4b8f61b9b65930a150a",
+          "visible": true,
+          "referenceCount": 41,
+          "distinctClasses": 41,
+          "expectedAbsoluteRgbDifference": 1203156,
+          "nearestOtherAbsoluteRgbDifference": 5229304
+        },
+        {
+          "frame": 161,
+          "mediaFrame": 161,
+          "expectedState": "static",
+          "expectedOverlaySha256": "e191277f81f1672a61b2bb4b753f913a4baa367c6f95b4b8f61b9b65930a150a",
+          "visible": true,
+          "referenceCount": 41,
+          "distinctClasses": 41,
+          "expectedAbsoluteRgbDifference": 1111404,
+          "nearestOtherAbsoluteRgbDifference": 18701688
+        },
+        {
+          "frame": 169,
+          "mediaFrame": 169,
+          "expectedState": "static",
+          "expectedOverlaySha256": "e191277f81f1672a61b2bb4b753f913a4baa367c6f95b4b8f61b9b65930a150a",
+          "visible": true,
+          "referenceCount": 41,
+          "distinctClasses": 41,
+          "expectedAbsoluteRgbDifference": 1127964,
+          "nearestOtherAbsoluteRgbDifference": 18862939
+        }
+      ]
+    }
+  ],
+  "actualSelectedCompletedFrameFiles": [
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "frame": 20,
+      "completedFrame": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.motion-render.presentation-renderer-v002-work-hrzgLx/scratch/native-frame-qc/native-frame-qc-uCP7nl/frames/completed/frame-000000010.png",
+        "bytes": 1399314,
+        "fileSha256": "6c1c31f88980b959705f621a98e6c566b2bb6ebe3a103d3d48ada2f2710c9fa2"
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "frame": 48,
+      "completedFrame": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.motion-render.presentation-renderer-v002-work-hrzgLx/scratch/native-frame-qc/native-frame-qc-uCP7nl/frames/completed/frame-000000027.png",
+        "bytes": 857637,
+        "fileSha256": "046490217c019db5e4b27e973f189ed1e0cbcfe321357eb329eb92c75a1d4cd5"
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "frame": 116,
+      "completedFrame": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.motion-render.presentation-renderer-v002-work-hrzgLx/scratch/native-frame-qc/native-frame-qc-uCP7nl/frames/completed/frame-000000039.png",
+        "bytes": 767913,
+        "fileSha256": "30f72c9330c3f6a09c6417d801a8a4cd0df3e5b2922d65270cdf7f619b6ce022"
+      }
+    }
+  ],
+  "sourceReferences": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-drawing-evidence.json",
+      "bytes": 975467,
+      "fileSha256": "82e067f2f42d6b238d79c829a2a3c589cec42d3098b660a279cf42076d6de140"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/normal-plan.json",
+      "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/timeline.json",
+      "fileSha256": "dd4ebac277c0f3da73765457ea7812cfc801a16231d35a1cd0a0c4c1b0e61aef"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+      "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/judgment-v001/decision-input.json",
+      "fileSha256": "ede1bf8678a10a69ab7466e6a6e2eaaea51319fd7dd7191b9691d8f724e1750f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-20260913-v003/render/presentation-rendered-v002.mp4",
+      "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/horror/audio-candidates.json",
+      "fileSha256": "3dc79fde9c0fc7937c715d6835af8c3c82efbb465892e451da0f14a807aefd71"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/horror/acoustic-peaks.json",
+      "fileSha256": "4719b043a6ccb37f85f57a44ad847ddb5881cc474648c3b371a1990d4871ac5e"
+    }
+  ],
+  "audio": {
+    "status": "passed",
+    "sampleRate": 44100,
+    "channels": 2,
+    "logicalStartSample": 0,
+    "logicalEndSampleExclusive": 249900,
+    "logicalDecodedSampleCount": 249900,
+    "rawDecodedSampleCount": 250880,
+    "decodedTailSampleCount": 980,
+    "packetPayloadSha256": "69e9303db488b9d6624de21a5746b075f85cdc019bb06301aa9b3da4898be551",
+    "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+  },
+  "timings": {
+    "totalRendererMilliseconds": 210913.38720899998,
+    "drawAndQcMilliseconds": 202734.70270899998,
+    "preparationCumulativeFromRenderStartMilliseconds": 7390.503334,
+    "note": "Preparation is cumulative from render start, including background creation. It is not a standalone PNG-generation phase."
+  },
+  "limitations": {
+    "newVideoPerceptualAnalysis": false,
+    "smoothnessHumanVerdict": "HUMAN_REVIEW_PENDING",
+    "humanQuality": "not-evaluated",
+    "formalTrustChanged": false,
+    "wholeDigestGenerated": false,
+    "wholeDigestQcRerun": false,
+    "newTestsAdded": false,
+    "newRendersOrQcExecutedByThisReview": false,
+    "externalTransfers": 0,
+    "currentImplementationNote": {
+      "recordScope": "この成功は、保存されたmotion jobの実行時に束縛された描画構成に対する結果である。",
+      "subsequentSourceChange": "本記録の検査後、Panelだけに必要な校正情報をQCへ渡す変更が、共通描画処理とnative検査準備処理に追加された。",
+      "changedSourceFiles": [
+        "evals/clip_composition/render_presentation_v002.mjs",
+        "evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs"
+      ],
+      "preservedBindings": "motion完成動画、保存された完成記録、実行時の描画構成、字幕の新規則参照と各ハッシュは不変のまま保持する。旧完成記録のハッシュを現在のソースに合わせて付け替えていない。",
+      "currentSourceProfileEqualityClaimed": false,
+      "historicalVerificationRebasedToCurrentSource": false,
+      "motionRegeneratedForThisNote": false,
+      "additionalTestsForThisNote": false,
+      "laterPanelJobs": "後続3件のPanel候補は、それぞれの実行時に束縛された最終構成の確認として別に記録する。このmotion結果から後続候補の成功を推定しない。"
+    }
+  },
+  "actualFilesRehashed": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/jobs/4ef43bca-e48a-453c-9c78-d036c965103e/input/drawing-evidence.json",
+      "bytes": 975467,
+      "fileSha256": "fcc2ac91d5dc15cde88b36b1b7aede5a8735bb3ed8e6cb363bc9d381babc2baf"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/historical-drawing-evidence.json",
+      "bytes": 975467,
+      "fileSha256": "fcc2ac91d5dc15cde88b36b1b7aede5a8735bb3ed8e6cb363bc9d381babc2baf"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/historical-reply.json",
+      "bytes": 27199,
+      "fileSha256": "7d1d7bc4e0587fa90c7d9115f5c79cb9d39b4ff7d9750aa32d561f6a0c602629"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/local-replayed-reply.json",
+      "bytes": 27199,
+      "fileSha256": "457ea695a5657080d11a7edf4cd302979c9589a7f0a80206fac7473c97572ea5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/lineage.json",
+      "bytes": 1452,
+      "fileSha256": "ad13b4d70380c13b6f22803f894378249bbb03662bfaf5f22fd434a7a8a9e876"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/replayed-input.json",
+      "bytes": 382825,
+      "fileSha256": "6cb9981ffd72ff383d53748efae7143b7e2d2ac872b0d4d5f3f38567e27d1409"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-evidence/background/proof.json",
+      "bytes": 11234,
+      "fileSha256": "8f606d0dc477100a4b1d42c38052e253f78d4320ac2f8eb1d696efa9b41cd943"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+      "bytes": 4623609,
+      "fileSha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-evidence/completion.json",
+      "bytes": 34241063,
+      "fileSha256": "501bad990cce44f6e478ed18e75aa9baec35ad588bd4d83e10bdf39a8db0d65a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-evidence/draw-result.json",
+      "bytes": 44870321,
+      "fileSha256": "a5732fd56a72f9d48abb89da1743a4b499c8ce0f7b041b36254996264c5daf78"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-drawing-evidence.json",
+      "bytes": 975467,
+      "fileSha256": "82e067f2f42d6b238d79c829a2a3c589cec42d3098b660a279cf42076d6de140"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/normal-plan.json",
+      "bytes": 205982,
+      "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/timeline.json",
+      "bytes": 2483,
+      "fileSha256": "dd4ebac277c0f3da73765457ea7812cfc801a16231d35a1cd0a0c4c1b0e61aef"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+      "bytes": 78398378,
+      "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d"
+    },
+    {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/judgment-v001/decision-input.json",
+      "bytes": 88192,
+      "fileSha256": "ede1bf8678a10a69ab7466e6a6e2eaaea51319fd7dd7191b9691d8f724e1750f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-20260913-v003/render/presentation-rendered-v002.mp4",
+      "bytes": 75458918,
+      "fileSha256": "044bc61a6cd0034cc01d277f31e57c6a831e508ac179966cae29b3f3bb763a8c"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/horror/audio-candidates.json",
+      "bytes": 66160,
+      "fileSha256": "3dc79fde9c0fc7937c715d6835af8c3c82efbb465892e451da0f14a807aefd71"
+    },
+    {
+      "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/horror/acoustic-peaks.json",
+      "bytes": 646924,
+      "fileSha256": "4719b043a6ccb37f85f57a44ad847ddb5881cc474648c3b371a1990d4871ac5e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_auto_effects_v001.mjs",
+      "bytes": 22906,
+      "fileSha256": "0413358322054de838d09993cceb36a6ecc3da0b49afa310af5d17cb87516a38"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_motion_v001.mjs",
+      "bytes": 8482,
+      "fileSha256": "be2a8d088f93347b8f05ed4e0524823d44843f95bad416c4d3dd7f30c49ce726"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_v001.mjs",
+      "bytes": 7267,
+      "fileSha256": "2d3ac1f546ea3b6f186a6569c73d9b3b16fe2406bf63c7ac80726e43abcb14e9"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "bytes": 61942,
+      "fileSha256": "6820d0e85dba7ac76b36f0c8b4499ddc7018d600097fc4ecd1043ad1d5c730a6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_renderer_qc_v001.mjs",
+      "bytes": 5111,
+      "fileSha256": "f55a247822a3bf7d7f516c75ab038a1567de21f5f5a119a05042523b3afdcc61"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "bytes": 45187,
+      "fileSha256": "e2b421a57d4f5a64cc0c4be94f6d0daec7d9d91ae79eaeaed5b2e9786471b87e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 131877,
+      "fileSha256": "b145ceff29539736dda4b5cbbbddec2e19ce7f4fcf09c8c7903ef66dee033f77"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "bytes": 28811,
+      "fileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.motion-render.presentation-renderer-v002-work-hrzgLx/scratch/exact-replay-qc/replay.mp4",
+      "bytes": 4623609,
+      "fileSha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/scratch/native-qc-preparation/plan.json",
+      "bytes": 208937,
+      "fileSha256": "30df64b2bacf34c5575142078cef63a7601d0021493e2a6518f55d7cf051693f"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/01-8da4fb838757.png",
+      "bytes": 103286,
+      "fileSha256": "a8c4875e7d37a0fc08daead132073a0aba7eaba6c45885b73ac5081013ac9ece"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-stable.png",
+      "bytes": 109094,
+      "fileSha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-small.png",
+      "bytes": 103263,
+      "fileSha256": "4b8abfc9ac3959aa8b09c18374d5defcbe763e2b85585f0d6e85722f6b7adf28"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-middle.png",
+      "bytes": 115882,
+      "fileSha256": "b6f693025f6c5c54916d47d63b4b796a8ecfc2d16d197745165d2bc10de774e8"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-maximum.png",
+      "bytes": 121711,
+      "fileSha256": "08ec12c61fa37a7a10b38498ce7ec37f3e680a733b3b9541646f631d8f42b2d7"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-between-middle-maximum.png",
+      "bytes": 118684,
+      "fileSha256": "2837b8d22a87c67fa90c7f267a0de0b9016a5910d6217bea5b442463d17b19cd"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/02-0f13452b2d0d-between-middle-stable.png",
+      "bytes": 112577,
+      "fileSha256": "7688ba5ec82d43f30c16482647d6de2b8c0582703a991655d3116f7580713651"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.motion-render.presentation-renderer-v002-work-hrzgLx/scratch/native-frame-qc/native-frame-qc-uCP7nl/frames/completed/frame-000000010.png",
+      "bytes": 1399314,
+      "fileSha256": "6c1c31f88980b959705f621a98e6c566b2bb6ebe3a103d3d48ada2f2710c9fa2"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-stable.png",
+      "bytes": 109969,
+      "fileSha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-left-12.png",
+      "bytes": 109953,
+      "fileSha256": "32050dac8c61db0e83e71ae99231468180fda2be1f73a2b85587b2867c5861f9"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-right-12.png",
+      "bytes": 109930,
+      "fileSha256": "982a624cb139768d5e4c47bcc344a002eb6ee8d67e1ce4e959b81295fcefd864"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-left-8.png",
+      "bytes": 110011,
+      "fileSha256": "9f2a33426182d8c838892e221c6eda5b146cc1fc783b7cec1de4f6eee1bc173b"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-right-8.png",
+      "bytes": 109985,
+      "fileSha256": "5c8e757b620cb6f285eb54248d37940a44bb3cabbf472f0281bd826a4f98a9e9"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-left-4.png",
+      "bytes": 109990,
+      "fileSha256": "4f97bca2b52d2d748f09b26948ad03ebbe9bcd46f696665f7f25b6be1de660c4"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/03-d9cbbe6d5626-right-4.png",
+      "bytes": 109961,
+      "fileSha256": "a8f2c2f7c2b21ec93afa406502db53ab9d1a2fd27989179bca8d01a861431b6d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.motion-render.presentation-renderer-v002-work-hrzgLx/scratch/native-frame-qc/native-frame-qc-uCP7nl/frames/completed/frame-000000027.png",
+      "bytes": 857637,
+      "fileSha256": "046490217c019db5e4b27e973f189ed1e0cbcfe321357eb329eb92c75a1d4cd5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/04-c4b6154f65f0-normal.png",
+      "bytes": 124582,
+      "fileSha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/04-c4b6154f65f0-middle.png",
+      "bytes": 138349,
+      "fileSha256": "a3fe915160ac81b8f5fa8393cc30e8a7d84682e051223da0d44fdd6c87de4f60"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/04-c4b6154f65f0-maximum.png",
+      "bytes": 153948,
+      "fileSha256": "589e37a9b8d43d9dee3692160863c5741a4a87c7afef3e09088bcd145fcf6d51"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/04-c4b6154f65f0-between-normal-middle.png",
+      "bytes": 131166,
+      "fileSha256": "913d1fd83ba72703212d8698296f1cff2141d0fc01820531406d3e41fc51e09a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/04-c4b6154f65f0-between-middle-maximum.png",
+      "bytes": 146267,
+      "fileSha256": "2a2bfa4f99bebeec0418536cf42c2fea0fd3ea24eca6586c17fe0a826a755c13"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/.motion-render.presentation-renderer-v002-work-hrzgLx/scratch/native-frame-qc/native-frame-qc-uCP7nl/frames/completed/frame-000000039.png",
+      "bytes": 767913,
+      "fileSha256": "30f72c9330c3f6a09c6417d801a8a4cd0df3e5b2922d65270cdf7f619b6ce022"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/overlays/05-d3cb7b1029d4.png",
+      "bytes": 72015,
+      "fileSha256": "e191277f81f1672a61b2bb4b753f913a4baa367c6f95b4b8f61b9b65930a150a"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+      "bytes": 75306932,
+      "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225"
+    }
+  ],
+  "primaryEvidence": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-evidence/completion.json",
+      "bytes": 34241063,
+      "fileSha256": "501bad990cce44f6e478ed18e75aa9baec35ad588bd4d83e10bdf39a8db0d65a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-evidence/draw-result.json",
+      "bytes": 44870321,
+      "fileSha256": "a5732fd56a72f9d48abb89da1743a4b499c8ce0f7b041b36254996264c5daf78"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/lineage.json",
+      "bytes": 1452,
+      "fileSha256": "ad13b4d70380c13b6f22803f894378249bbb03662bfaf5f22fd434a7a8a9e876"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/replayed-input.json",
+      "bytes": 382825,
+      "fileSha256": "6cb9981ffd72ff383d53748efae7143b7e2d2ac872b0d4d5f3f38567e27d1409"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+      "bytes": 4623609,
+      "fileSha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-evidence/background/proof.json",
+      "bytes": 11234,
+      "fileSha256": "8f606d0dc477100a4b1d42c38052e253f78d4320ac2f8eb1d696efa9b41cd943"
+    }
+  ]
+}

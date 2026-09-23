@@ -1,0 +1,557 @@
+{
+  "schemaVersion": "q5-aac-movie-clock-cause-v001",
+  "createdAt": "2026-09-20T16:27:47.241Z",
+  "status": "cause-confirmed-and-limited-regression-passed",
+  "scope": "Saved failed real media were read only. Only synthetic seven-frame media were generated for the correction test. Real candidate rerender is a separate root-owned run.",
+  "sourceFailureRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v002/normal/failure.json",
+      "bytes": 1159,
+      "fileSha256": "b8f2e77386ed845870a3ff987986ac909a0bcc8ef1238bff65525c9d4430a11d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v002/normal/draw-result.json",
+      "bytes": 2752952,
+      "fileSha256": "9b01a111b7b8e3ba2afb308ea22918a5a78d1aae3340cdc6577e83eab49afe09"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v002/normal/base-build.json",
+      "bytes": 7412,
+      "fileSha256": "215cef7d54ffea5c664eb66d375e11b707b310981991ce2109f0213cb2609a6d"
+    }
+  ],
+  "failedRunStartRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v002/start.json",
+    "bytes": 80386,
+    "fileSha256": "35e4c9c9182723a6cd04a29ee7fb44c36fb387eb0c3e8f53f814ebd054761966"
+  },
+  "failedRendererBinding": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+    "bytes": 133325,
+    "fileSha256": "2f214bf0b8fbe13df69c6856d85521011d948b0423342626df91e1cba5d14ddf"
+  },
+  "expected": {
+    "frameCount": 763,
+    "frameRate": 30,
+    "playbackSampleRate": 48000,
+    "channels": 2,
+    "logicalSamples": 1220800
+  },
+  "observations": [
+    {
+      "role": "base",
+      "mediaRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v002/normal/base.mp4",
+        "bytes": 8742940,
+        "fileSha256": "8ae864fd42c309c7662f9decc79fa47ede4e285fff6032068bb4fe4c1df66f63"
+      },
+      "movie": {
+        "timeScale": 30,
+        "duration": 763
+      },
+      "tracks": [
+        {
+          "handler": "vide",
+          "media": {
+            "timeScale": 15360,
+            "duration": 390656
+          },
+          "edits": [
+            {
+              "durationMovieTicks": 763,
+              "mediaTime": 1024,
+              "rateInteger": 1,
+              "rateFraction": 0
+            }
+          ]
+        },
+        {
+          "handler": "soun",
+          "media": {
+            "timeScale": 48000,
+            "duration": 1221824
+          },
+          "edits": [
+            {
+              "durationMovieTicks": 763,
+              "mediaTime": 1024,
+              "rateInteger": 1,
+              "rateFraction": 0
+            }
+          ]
+        }
+      ],
+      "stream": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 1220800,
+        "duration": "25.433333",
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      },
+      "packetCount": 1194,
+      "firstPacket": {
+        "pts": -1024,
+        "dts": -1024,
+        "duration": 1024,
+        "size": "378",
+        "data_hash": "SHA256:3d6d4a1d72726edec809f326a748458d300eac3c03fcbb93c21025e6e3bf376b",
+        "side_data_list": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 1220608,
+        "dts": 1220608,
+        "duration": 192,
+        "size": "7",
+        "data_hash": "SHA256:8a3734dbcb6f4f91174047b0e347cbbd65a57aca20511f53b8488f8da10ff600"
+      },
+      "rawDecodedSampleCount": 1221632,
+      "rawDecodedPayloadSha256": "f9d3aa307282c21cbb936da1ae61054009bb91880243fa58a2bf1eb97455dc16",
+      "logicalDecodedSampleCount": 1220800,
+      "logicalDecodedPayloadSha256": "b98e1dd3e8d69ebb5873c625091f25da9b4dae4b447b63775c2ac1dac147da61"
+    },
+    {
+      "role": "failed-drawn-output",
+      "mediaRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/.after-render-v002.presentation-renderer-v002-work-Xrkxl2/publish/presentation-rendered-v002.mp4",
+        "bytes": 8591313,
+        "fileSha256": "9e745a51beae81e928a85ae3fa056c6b78537f9e3efe3028f285b1af172862c4"
+      },
+      "movie": {
+        "timeScale": 1000,
+        "duration": 25434
+      },
+      "tracks": [
+        {
+          "handler": "vide",
+          "media": {
+            "timeScale": 15360,
+            "duration": 391168
+          },
+          "edits": [
+            {
+              "durationMovieTicks": 25433,
+              "mediaTime": 1024,
+              "rateInteger": 1,
+              "rateFraction": 0
+            }
+          ]
+        },
+        {
+          "handler": "soun",
+          "media": {
+            "timeScale": 48000,
+            "duration": 1221824
+          },
+          "edits": [
+            {
+              "durationMovieTicks": 25433,
+              "mediaTime": 1024,
+              "rateInteger": 1,
+              "rateFraction": 0
+            }
+          ]
+        }
+      ],
+      "stream": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 1220784,
+        "duration": "25.433000",
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      },
+      "packetCount": 1194,
+      "firstPacket": {
+        "pts": -1024,
+        "dts": -1024,
+        "duration": 1024,
+        "size": "378",
+        "data_hash": "SHA256:3d6d4a1d72726edec809f326a748458d300eac3c03fcbb93c21025e6e3bf376b",
+        "side_data_list": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 1220608,
+        "dts": 1220608,
+        "duration": 192,
+        "size": "7",
+        "data_hash": "SHA256:8a3734dbcb6f4f91174047b0e347cbbd65a57aca20511f53b8488f8da10ff600"
+      },
+      "rawDecodedSampleCount": 1221632,
+      "rawDecodedPayloadSha256": "f9d3aa307282c21cbb936da1ae61054009bb91880243fa58a2bf1eb97455dc16",
+      "logicalDecodedSampleCount": 1220800,
+      "logicalDecodedPayloadSha256": "b98e1dd3e8d69ebb5873c625091f25da9b4dae4b447b63775c2ac1dac147da61"
+    }
+  ],
+  "comparison": {
+    "everyAacPacketIdentical": true,
+    "packetComparisonFields": [
+      "pts",
+      "dts",
+      "duration",
+      "size",
+      "data_hash",
+      "side_data_list"
+    ],
+    "comparedPackets": 1194,
+    "allRawDecodedPcmBytesIdentical": true,
+    "comparedRawDecodedPcmBytes": 9773056,
+    "comparedLogicalDecodedPcmBytes": 9766400,
+    "effectivePresentationShortfallSamples": 16
+  },
+  "cause": {
+    "meaning": "The ordinary compositor copied AAC bytes but omitted the frame-based MP4 movie clock. Its default 1000-tick movie clock rounded the audio edit-list duration from 763/30 seconds to 25433/1000 seconds. The AAC media clock and packets remained intact.",
+    "priorCondition": "movie_timescale was set only for a separate audio input",
+    "newCondition": "movie_timescale uses the existing canvas fps for an already-resolved frame timeline, including embedded audio, separate audio and silent video",
+    "unchanged": [
+      "media omission",
+      "caption hide",
+      "retained pixels and PCM",
+      "AAC encoder",
+      "AAC packet payload",
+      "strict clock validator",
+      "layout and native text rendering"
+    ],
+    "toleranceAdded": false
+  },
+  "implementationRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 133483,
+      "fileSha256": "6650e4d5c6c2a50e6e1bb81eeb23f4463dcc7f8def227b16a4071866a2e1f7a6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.test.mjs",
+      "bytes": 29214,
+      "fileSha256": "fb03f5bc62cf10a34b0e3672407caf1a84ce5a1c925f6e3e893932cb33a2b55c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_effects_v001.test.mjs",
+      "bytes": 9291,
+      "fileSha256": "6319549b3bd73bcb9fdb1a8a5528d29828ec4e53efc48176dac035757c65a6d8"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_execution_resources_v001.test.mjs",
+      "bytes": 10652,
+      "fileSha256": "49e6908d42aa82043309ef121067c8c2438d9f24cb9cf98250e1763739e19c02"
+    }
+  ],
+  "trustBoundary": {
+    "formalTrustUpdated": false,
+    "formalTrustRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/registries/presentation/presentation-renderer-trust-v002/trust.json",
+      "bytes": 5397,
+      "fileSha256": "6e21352ff105e3b77acc351625fed22ff97486fb21d0ce9ee5b1821750a9047a"
+    },
+    "meaning": "The runtime compositor SHA is included in Q5 drawingRulesRef and must be fixed anew for the next run. The formal trust registry pins appearance dependencies; none of its files or values is changed by this clock correction."
+  },
+  "tests": {
+    "sevenFrameRegressionRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-aac-clock-tests-v001/seven-frame-aac-clock/clock-regression.json",
+      "bytes": 13037,
+      "fileSha256": "b55c3d8b7e3721d39acd197aea62f99bb9dc62cff09e5c9bc0be8037fd9cc433"
+    },
+    "sevenFrameTapRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/render-tool-aac-clock-tests-v001.tap",
+      "bytes": 2747,
+      "fileSha256": "60fe19286e7a6ffd6330d8195be46c2a032a7bb8301c1f422f0bf77eec71d484"
+    },
+    "argumentTapRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/render-tool-aac-arguments-tests-v001.tap",
+      "bytes": 2230,
+      "fileSha256": "7428a1339684537d0ca9c76be557c5048ac2e09139d3e71204fe10ec11d274ab"
+    },
+    "sevenFrameTestsPassed": 1,
+    "argumentTestsPassed": 2,
+    "skippedSevenFrameFileTests": 7,
+    "skippedArgumentFileTests": 6,
+    "oldHeavySixBy900FrameRunExecuted": false,
+    "regression": {
+      "baseline": {
+        "stream": {
+          "time_base": "1/48000",
+          "start_pts": 0,
+          "duration_ts": 11200,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "SoundHandler",
+            "vendor_id": "[0][0][0][0]"
+          }
+        },
+        "movieTimeScale": 30,
+        "packetCount": 12,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "size": "375",
+          "data_hash": "SHA256:a39e063e772722391e4b246821a7197f2af54255db924fe46433c09cc2df7411",
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 10240,
+          "dts": 10240,
+          "duration": 960,
+          "size": "460",
+          "data_hash": "SHA256:0f23f161a296663f86f1183e65f41b830b8f4832cc443f14523a39a846152853"
+        },
+        "rawDecodedSampleCount": 11264,
+        "rawDecodedPayloadSha256": "d4aaa5812abf4abaa6199a0d9c1669b678f82fe29b4a0468317a7ee67563427e",
+        "logicalDecodedPayloadSha256": "7528ebaba2cb023d2f6db570d1abeddcb6afc654ce9e642b23295633bc359092"
+      },
+      "corrected": [
+        {
+          "name": "embedded",
+          "stream": {
+            "time_base": "1/48000",
+            "start_pts": 0,
+            "duration_ts": 11200,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "und",
+              "handler_name": "SoundHandler",
+              "vendor_id": "[0][0][0][0]"
+            }
+          },
+          "movieTimeScale": 30,
+          "everyPacketIdentical": true,
+          "everyDecodedPcmByteIdentical": true
+        },
+        {
+          "name": "separate",
+          "stream": {
+            "time_base": "1/48000",
+            "start_pts": 0,
+            "duration_ts": 11200,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "und",
+              "handler_name": "SoundHandler",
+              "vendor_id": "[0][0][0][0]"
+            }
+          },
+          "movieTimeScale": 30,
+          "everyPacketIdentical": true,
+          "everyDecodedPcmByteIdentical": true
+        }
+      ],
+      "silentVideoFrameCount": 7,
+      "oldSettingNegativeControl": {
+        "mediaRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-aac-clock-tests-v001/seven-frame-aac-clock/old-millisecond-clock.mp4",
+          "bytes": 8253,
+          "fileSha256": "e1466bb18da30ce6926b3237432aa18ca5a6e98e0bb4bde9b189722cf2e95da0"
+        },
+        "observed": {
+          "stream": {
+            "time_base": "1/48000",
+            "start_pts": 0,
+            "duration_ts": 11184,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "und",
+              "handler_name": "SoundHandler",
+              "vendor_id": "[0][0][0][0]"
+            }
+          },
+          "movieTimeScale": 1000,
+          "packetCount": 12,
+          "firstPacket": {
+            "pts": -1024,
+            "dts": -1024,
+            "duration": 1024,
+            "size": "375",
+            "data_hash": "SHA256:a39e063e772722391e4b246821a7197f2af54255db924fe46433c09cc2df7411",
+            "side_data_list": [
+              {
+                "side_data_type": "Skip Samples",
+                "skip_samples": 1024,
+                "discard_padding": 0,
+                "skip_reason": 0,
+                "discard_reason": 0
+              }
+            ]
+          },
+          "lastPacket": {
+            "pts": 10240,
+            "dts": 10240,
+            "duration": 960,
+            "size": "460",
+            "data_hash": "SHA256:0f23f161a296663f86f1183e65f41b830b8f4832cc443f14523a39a846152853"
+          },
+          "rawDecodedSampleCount": 11264,
+          "rawDecodedPayloadSha256": "d4aaa5812abf4abaa6199a0d9c1669b678f82fe29b4a0468317a7ee67563427e",
+          "logicalDecodedPayloadSha256": "7528ebaba2cb023d2f6db570d1abeddcb6afc654ce9e642b23295633bc359092"
+        },
+        "expectedFailure": "AAC effective presentation clock differs",
+        "effectivePresentationShortfallSamples": 16,
+        "everyPacketIdentical": true,
+        "everyDecodedPcmByteIdentical": true
+      }
+    },
+    "fixtureSetupCorrection": "The old execution-resource fixture omitted caption end frames. Each end is now explicitly the existing start plus existing display length. Read-only comparison before the mux change confirmed this restores exact historical compositor arguments without changing content or timing values."
+  },
+  "humanQuality": "not-evaluated",
+  "contentEditAdopted": false
+}

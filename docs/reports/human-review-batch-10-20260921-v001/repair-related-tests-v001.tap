@@ -1,0 +1,80 @@
+TAP version 13
+# Subtest: fixed format: every point starts unanswered; each video has its own clock
+ok 1 - fixed format: every point starts unanswered; each video has its own clock
+  ---
+  duration_ms: 1.697708
+  ...
+# Subtest: reject duplicate IDs, missing media, invalid ranges, loose fields, remote paths and orphan comparison
+ok 2 - reject duplicate IDs, missing media, invalid ranges, loose fields, remote paths and orphan comparison
+  ---
+  duration_ms: 0.575875
+  ...
+# Subtest: answers stay bound to exact batch, version, points, scope, SHA and ranges
+ok 3 - answers stay bound to exact batch, version, points, scope, SHA and ranges
+  ---
+  duration_ms: 1.628166
+  ...
+# Subtest: bundle answer and chat original remain a single scoped record; both-usable only has two offered views
+ok 4 - bundle answer and chat original remain a single scoped record; both-usable only has two offered views
+  ---
+  duration_ms: 1.050458
+  ...
+# Subtest: local persistence round-trips raw answers; other revisions remain unanswered; corrupt stored data rejected
+ok 5 - local persistence round-trips raw answers; other revisions remain unanswered; corrupt stored data rejected
+  ---
+  duration_ms: 1.337958
+  ...
+# Subtest: segment controller stops at boundary, clips external seeks, and cancels playback when switching media
+ok 6 - segment controller stops at boundary, clips external seeks, and cancels playback when switching media
+  ---
+  duration_ms: 0.752584
+  ...
+# Subtest: late play promise cannot revive a previous point or play after pause
+ok 7 - late play promise cannot revive a previous point or play after pause
+  ---
+  duration_ms: 0.286708
+  ...
+# Subtest: DOM-model integration: fixed controls navigate two datasets, save/read/export, stop segments, and reject foreign imports
+ok 8 - DOM-model integration: fixed controls navigate two datasets, save/read/export, stop segments, and reject foreign imports
+  ---
+  duration_ms: 8.632875
+  ...
+# Subtest: builder reuses exact template for two datasets; rejects forged media SHA/frame count and output overwrite
+ok 9 - builder reuses exact template for two datasets; rejects forged media SHA/frame count and output overwrite
+  ---
+  duration_ms: 16.725
+  ...
+# Subtest: session storage/export contains five unchanged original review bindings and form edits remain editable
+ok 10 - session storage/export contains five unchanged original review bindings and form edits remain editable
+  ---
+  duration_ms: 56.422125
+  ...
+# Subtest: imports preserve current answers, merge other points, and reject replacement even before a successful save
+ok 11 - imports preserve current answers, merge other points, and reject replacement even before a successful save
+  ---
+  duration_ms: 66.734333
+  ...
+# Subtest: one existing UI navigates all ten points, shows each original introduction, and exports original answers
+ok 12 - one existing UI navigates all ten points, shows each original introduction, and exports original answers
+  ---
+  duration_ms: 44.107
+  ...
+# Subtest: UI imports cannot silently replace answers; storage denial still permits complete original-batch export
+ok 13 - UI imports cannot silently replace answers; storage denial still permits complete original-batch export
+  ---
+  duration_ms: 55.839542
+  ...
+# Subtest: a different display package is rejected before the existing app is mounted
+ok 14 - a different display package is rejected before the existing app is mounted
+  ---
+  duration_ms: 2.105167
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 269.257

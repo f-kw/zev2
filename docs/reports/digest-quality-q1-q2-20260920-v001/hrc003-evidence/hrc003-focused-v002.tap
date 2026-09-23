@@ -1,0 +1,508 @@
+TAP version 13
+# Subtest: entrance expressions preserve the normal plan and Color range while Normal and Reset retain fixed proposals
+ok 1 - entrance expressions preserve the normal plan and Color range while Normal and Reset retain fixed proposals
+  ---
+  duration_ms: 12.405375
+  ...
+# Subtest: unknown expressions, fields, partial ranges, duplicate IDs and previous rules cannot enter saved plans
+ok 2 - unknown expressions, fields, partial ranges, duplicate IDs and previous rules cannot enter saved plans
+  ---
+  duration_ms: 5.314917
+  ...
+# Subtest: each expression checks its own complete duration and never lengthens the fixed subtitle
+ok 3 - each expression checks its own complete duration and never lengthens the fixed subtitle
+  ---
+  duration_ms: 0.718875
+  ...
+# Subtest: CLI saves entrance changes to new files, reloads them, and Reset restores the exact fixed automatic assignment
+ok 4 - CLI saves entrance changes to new files, reloads them, and Reset restores the exact fixed automatic assignment
+  ---
+  duration_ms: 41.330541
+  ...
+# Subtest: Pulse changes only finite metadata; all expressions and Normal Reset restore the fixed anchor
+ok 5 - Pulse changes only finite metadata; all expressions and Normal Reset restore the fixed anchor
+  ---
+  duration_ms: 9.937625
+  ...
+# Subtest: unknown, outside, end-boundary and early peaks are rejected at fix and human edit
+    # Subtest: missing
+    ok 1 - missing
+      ---
+      duration_ms: 1.101792
+      ...
+    # Subtest: other
+    ok 2 - other
+      ---
+      duration_ms: 0.677083
+      ...
+    # Subtest: end
+    ok 3 - end
+      ---
+      duration_ms: 1.28425
+      ...
+    # Subtest: early
+    ok 4 - early
+      ---
+      duration_ms: 0.641125
+      ...
+    1..4
+ok 6 - unknown, outside, end-boundary and early peaks are rejected at fix and human edit
+  ---
+  duration_ms: 4.25825
+  ...
+# Subtest: Pulse rejects missing evidence and arbitrary rendering fields at the saved boundary
+    # Subtest: scale
+    ok 1 - scale
+      ---
+      duration_ms: 0.194958
+      ...
+    # Subtest: anchorFrame
+    ok 2 - anchorFrame
+      ---
+      duration_ms: 0.145708
+      ...
+    # Subtest: startFrame
+    ok 3 - startFrame
+      ---
+      duration_ms: 0.205208
+      ...
+    # Subtest: endFrame
+    ok 4 - endFrame
+      ---
+      duration_ms: 0.21225
+      ...
+    # Subtest: easing
+    ok 5 - easing
+      ---
+      duration_ms: 0.164625
+      ...
+    # Subtest: keyframes
+    ok 6 - keyframes
+      ---
+      duration_ms: 0.134584
+      ...
+    # Subtest: x
+    ok 7 - x
+      ---
+      duration_ms: 0.454375
+      ...
+    # Subtest: color
+    ok 8 - color
+      ---
+      duration_ms: 0.179917
+      ...
+    # Subtest: filter
+    ok 9 - filter
+      ---
+      duration_ms: 0.245084
+      ...
+    # Subtest: targetText
+    ok 10 - targetText
+      ---
+      duration_ms: 0.143792
+      ...
+    # Subtest: occurrence
+    ok 11 - occurrence
+      ---
+      duration_ms: 0.134792
+      ...
+    1..11
+ok 7 - Pulse rejects missing evidence and arbitrary rendering fields at the saved boundary
+  ---
+  duration_ms: 3.312083
+  ...
+# Subtest: timing uses exact measured samples and rejects clipping instead of moving the anchor
+ok 8 - timing uses exact measured samples and rejects clipping instead of moving the anchor
+  ---
+  duration_ms: 0.436417
+  ...
+# Subtest: timing identity includes all samples, preserves relocation and rejects old contexts
+ok 9 - timing identity includes all samples, preserves relocation and rejects old contexts
+  ---
+  duration_ms: 0.390833
+  ...
+# Subtest: native IO derives each constituent time rather than the union representative
+ok 10 - native IO derives each constituent time rather than the union representative
+  ---
+  duration_ms: 10.326334
+  ...
+# Subtest: native source changes and fabricated embedded times fail before saving
+    # Subtest: source
+    ok 1 - source
+      ---
+      duration_ms: 6.287
+      ...
+    # Subtest: candidates
+    ok 2 - candidates
+      ---
+      duration_ms: 5.511166
+      ...
+    # Subtest: peaks
+    ok 3 - peaks
+      ---
+      duration_ms: 4.366417
+      ...
+    # Subtest: embedded
+    ok 4 - embedded
+      ---
+      duration_ms: 4.567
+      ...
+    1..4
+ok 11 - native source changes and fabricated embedded times fail before saving
+  ---
+  duration_ms: 21.614125
+  ...
+# Subtest: both entrance programs select the independently specified state on every real frame and apply the shared fade once
+ok 12 - both entrance programs select the independently specified state on every real frame and apply the shared fade once
+  ---
+  duration_ms: 1819.224666
+  ...
+# Subtest: entrances use the fixed subtitle clock, leave stable reading time, and preserve all caption content
+ok 13 - entrances use the fixed subtitle clock, leave stable reading time, and preserve all caption content
+  ---
+  duration_ms: 2.394166
+  ...
+# Subtest: short captions, arbitrary motion values, old presets and stacked expressions cannot enter drawing
+ok 14 - short captions, arbitrary motion values, old presets and stacked expressions cannot enter drawing
+  ---
+  duration_ms: 0.490875
+  ...
+# Subtest: native layout must show the prescribed offsets and sizes without clamping or vertical drift
+ok 15 - native layout must show the prescribed offsets and sizes without clamping or vertical drift
+  ---
+  duration_ms: 0.487875
+  ...
+# Subtest: production drawing rejects missing and standalone diagnostic QC methods before output or child processes
+ok 16 - production drawing rejects missing and standalone diagnostic QC methods before output or child processes
+  ---
+  duration_ms: 6.307584
+  ...
+# Subtest: diagnostic completed-frame QC also requires an explicitly selected method before any work
+ok 17 - diagnostic completed-frame QC also requires an explicitly selected method before any work
+  ---
+  duration_ms: 1.741
+  ...
+# Subtest: public combined QC entry rejects an unsupported frame rate before every media child without fallback
+ok 18 - public combined QC entry rejects an unsupported frame rate before every media child without fallback
+  ---
+  duration_ms: 5.0135
+  ...
+# Subtest: public combined QC entry rejects absent, relative or changed normal-plan references before every media child
+ok 19 - public combined QC entry rejects absent, relative or changed normal-plan references before every media child
+  ---
+  duration_ms: 8.348292
+  ...
+# Subtest: production evaluator accepts complete combined evidence with valid application, layout and media inputs
+ok 20 - production evaluator accepts complete combined evidence with valid application, layout and media inputs
+  ---
+  duration_ms: 15.525125
+  ...
+# Subtest: production final QC rejects old pixel-count and valid native-only evidence without the new global proof
+ok 21 - production final QC rejects old pixel-count and valid native-only evidence without the new global proof
+  ---
+  duration_ms: 10.68475
+  ...
+# Subtest: production evaluator rejects missing global evidence or a missing whole-video proof
+ok 22 - production evaluator rejects missing global evidence or a missing whole-video proof
+  ---
+  duration_ms: 9.986
+  ...
+# Subtest: production evaluator rejects a missing or substituted current completed-video path or hash
+ok 23 - production evaluator rejects a missing or substituted current completed-video path or hash
+  ---
+  duration_ms: 14.068917
+  ...
+# Subtest: production evaluator rejects whole-video corruption even when native state observations pass
+ok 24 - production evaluator rejects whole-video corruption even when native state observations pass
+  ---
+  duration_ms: 6.628041
+  ...
+# Subtest: production evaluator rejects an omitted native caption even when whole-video equality passes
+ok 25 - production evaluator rejects an omitted native caption even when whole-video equality passes
+  ---
+  duration_ms: 7.960458
+  ...
+# Subtest: production evaluator rejects detached finite-state evidence and a mixed comparison basis
+ok 26 - production evaluator rejects detached finite-state evidence and a mixed comparison basis
+  ---
+  duration_ms: 8.979166
+  ...
+# Subtest: production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements
+ok 27 - production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements
+  ---
+  duration_ms: 4.843583
+  ...
+# Subtest: combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs
+ok 28 - combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs
+  ---
+  duration_ms: 5.461292
+  ...
+# Subtest: combined proof rejects missing whole-video evidence despite cached pass flags
+ok 29 - combined proof rejects missing whole-video evidence despite cached pass flags
+  ---
+  duration_ms: 1.992625
+  ...
+# Subtest: combined proof rejects mixing individually valid observations from different completed videos
+ok 30 - combined proof rejects mixing individually valid observations from different completed videos
+  ---
+  duration_ms: 7.036
+  ...
+# Subtest: combined proof requires the current completed-video path and hash supplied by its caller
+ok 31 - combined proof requires the current completed-video path and hash supplied by its caller
+  ---
+  duration_ms: 5.001542
+  ...
+# Subtest: combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain
+ok 32 - combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain
+  ---
+  duration_ms: 11.822208
+  ...
+# Subtest: combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing
+ok 33 - combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing
+  ---
+  duration_ms: 26.650792
+  ...
+# Subtest: all decoded frame hashes retain order and exact rational timestamps
+ok 34 - all decoded frame hashes retain order and exact rational timestamps
+  ---
+  duration_ms: 0.2675
+  ...
+# Subtest: frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps
+ok 35 - frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps
+  ---
+  duration_ms: 0.287666
+  ...
+# Subtest: audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS
+ok 36 - audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS
+  ---
+  duration_ms: 0.183583
+  ...
+# Subtest: audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks
+ok 37 - audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks
+  ---
+  duration_ms: 0.182542
+  ...
+# Subtest: byte equality and full decoded equality are independently valid exact gates
+ok 38 - byte equality and full decoded equality are independently valid exact gates
+  ---
+  duration_ms: 1.710541
+  ...
+# Subtest: one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests
+ok 39 - one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests
+  ---
+  duration_ms: 7.243625
+  ...
+# Subtest: a cached pass cannot replace complete observations, stable input bindings or original encoder arguments
+ok 40 - a cached pass cannot replace complete observations, stable input bindings or original encoder arguments
+  ---
+  duration_ms: 5.370125
+  ...
+# Subtest: byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison
+ok 41 - byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison
+  ---
+  duration_ms: 1.470625
+  ...
+# Subtest: mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames
+ok 42 - mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames
+  ---
+  duration_ms: 148.66125
+  ...
+# Subtest: mock I/O compares every decoded frame and audio packet when container bytes differ
+ok 43 - mock I/O compares every decoded frame and audio packet when container bytes differ
+  ---
+  duration_ms: 121.610542
+  ...
+# Subtest: mock I/O preserves exact failure for an unknown one-pixel change
+ok 44 - mock I/O preserves exact failure for an unknown one-pixel change
+  ---
+  duration_ms: 122.812833
+  ...
+# Subtest: mock I/O detects inputs changing during encode and rejects a missing production PNG before any child
+ok 45 - mock I/O detects inputs changing during encode and rejects a missing production PNG before any child
+  ---
+  duration_ms: 122.832125
+  ...
+# Subtest: pulse replay binds every production PNG to its exact native state and order
+ok 46 - pulse replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.528416
+  ...
+# Subtest: bounce replay binds every production PNG to its exact native state and order
+ok 47 - bounce replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.408
+  ...
+# Subtest: shake replay binds every production PNG to its exact native state and order
+ok 48 - shake replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.448792
+  ...
+# Subtest: current completed-file identity is mandatory and rejects a stale pass for another same-format video
+ok 49 - current completed-file identity is mandatory and rejects a stale pass for another same-format video
+  ---
+  duration_ms: 0.481167
+  ...
+# Subtest: raw evidence, all observed commands, original stdout and artifact correspondence are mandatory
+ok 50 - raw evidence, all observed commands, original stdout and artifact correspondence are mandatory
+  ---
+  duration_ms: 10.366833
+  ...
+# Subtest: parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes
+ok 51 - parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes
+  ---
+  duration_ms: 1.971667
+  ...
+# Subtest: sample/display aspect, color meaning and display side data must match despite identical pixel hashes
+ok 52 - sample/display aspect, color meaning and display side data must match despite identical pixel hashes
+  ---
+  duration_ms: 5.565625
+  ...
+# Subtest: bounce native QC rejects clamping, unbound images, missing states and invalid static layouts
+ok 53 - bounce native QC rejects clamping, unbound images, missing states and invalid static layouts
+  ---
+  duration_ms: 5.382916
+  ...
+# Subtest: bounce collision checks follow the moving state interval beyond the disjoint stable box
+ok 54 - bounce collision checks follow the moving state interval beyond the disjoint stable box
+  ---
+  duration_ms: 1.269167
+  ...
+# Subtest: shake native QC rejects clamping, unbound images, missing states and invalid static layouts
+ok 55 - shake native QC rejects clamping, unbound images, missing states and invalid static layouts
+  ---
+  duration_ms: 4.314917
+  ...
+# Subtest: shake collision checks follow the moving state interval beyond the disjoint stable box
+ok 56 - shake collision checks follow the moving state interval beyond the disjoint stable box
+  ---
+  duration_ms: 1.002167
+  ...
+# Subtest: Bounce fills each old interval midpoint while retaining its extrema, maximum hold and return clock
+ok 57 - Bounce fills each old interval midpoint while retaining its extrema, maximum hold and return clock
+  ---
+  duration_ms: 2.495
+  ...
+# Subtest: Pulse linearly fills the rise and fall, preserving the measured peak and all four maximum frames
+ok 58 - Pulse linearly fills the rise and fall, preserving the measured peak and all four maximum frames
+  ---
+  duration_ms: 0.902709
+  ...
+# Subtest: Shake keeps its saved horizontal excursion and never scales the caption
+ok 59 - Shake keeps its saved horizontal excursion and never scales the caption
+  ---
+  duration_ms: 0.761208
+  ...
+# Subtest: the fixed recipe includes every caption and all moving Pulse frames without caller-selected samples
+ok 60 - the fixed recipe includes every caption and all moving Pulse frames without caller-selected samples
+  ---
+  duration_ms: 12.406709
+  ...
+# Subtest: mandatory Color/Panel/Normal references and their drawing conditions cannot be silently omitted
+ok 61 - mandatory Color/Panel/Normal references and their drawing conditions cannot be silently omitted
+  ---
+  duration_ms: 21.46425
+  ...
+# Subtest: a partial selection that covers the whole caption still gets the resolver-required duplicate alternative
+ok 62 - a partial selection that covers the whole caption still gets the resolver-required duplicate alternative
+  ---
+  duration_ms: 5.982333
+  ...
+# Subtest: foreign references occupy the target clock and candidate bounds, not the inactive caption clock or corrupted frame bounds
+ok 63 - foreign references occupy the target clock and candidate bounds, not the inactive caption clock or corrupted frame bounds
+  ---
+  duration_ms: 6.092833
+  ...
+# Subtest: simultaneous captions retain their own fades and receive a real pair-order alternative
+ok 64 - simultaneous captions retain their own fades and receive a real pair-order alternative
+  ---
+  duration_ms: 5.318375
+  ...
+# Subtest: exact pixel classes permit a Normal alias but reject target absence and an unequal-image tie
+ok 65 - exact pixel classes permit a Normal alias but reject target absence and an unequal-image tie
+  ---
+  duration_ms: 0.436708
+  ...
+# Subtest: whole-caption overpaint and foreign pixels need adversarial references even without empirical thresholds
+ok 66 - whole-caption overpaint and foreign pixels need adversarial references even without empirical thresholds
+  ---
+  duration_ms: 0.149916
+  ...
+# Subtest: the pure validator accepts complete synthetic evidence and independently rejects material evidence tampering
+ok 67 - the pure validator accepts complete synthetic evidence and independently rejects material evidence tampering
+  ---
+  duration_ms: 58.585666
+  ...
+# Subtest: bounce native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+ok 68 - bounce native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+  ---
+  duration_ms: 7.905459
+  ...
+# Subtest: bounce rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+ok 69 - bounce rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+  ---
+  duration_ms: 50.200292
+  ...
+# Subtest: shake native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+ok 70 - shake native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+  ---
+  duration_ms: 6.7685
+  ...
+# Subtest: shake rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+ok 71 - shake rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+  ---
+  duration_ms: 51.033625
+  ...
+# Subtest: range compositing matches every precompression full-program frame through finite state and fade cuts
+ok 72 - range compositing matches every precompression full-program frame through finite state and fade cuts
+  ---
+  duration_ms: 1349.825083
+  ...
+# Subtest: Pulse compositor owns all five finite inputs, nine contiguous phases and one common fade
+ok 73 - Pulse compositor owns all five finite inputs, nine contiguous phases and one common fade
+  ---
+  duration_ms: 2.974958
+  ...
+# Subtest: one Pulse application binds every finite native PNG and forward-only metadata
+ok 74 - one Pulse application binds every finite native PNG and forward-only metadata
+  ---
+  duration_ms: 0.830583
+  ...
+# Subtest: Pulse native geometry rejects missing, substituted, unsafe and clamped states without final visibility
+ok 75 - Pulse native geometry rejects missing, substituted, unsafe and clamped states without final visibility
+  ---
+  duration_ms: 9.890667
+  ...
+# Subtest: Pulse layout collision checks use the actual finite phase, including expanded-only intersections
+ok 76 - Pulse layout collision checks use the actual finite phase, including expanded-only intersections
+  ---
+  duration_ms: 1.780542
+  ...
+# Subtest: local Pulse frame diagnostics reject ties and wrong return without granting final acceptance
+ok 77 - local Pulse frame diagnostics reject ties and wrong return without granting final acceptance
+  ---
+  duration_ms: 4.19125
+  ...
+# Subtest: native-only Pulse evidence cannot satisfy the final completed-video requirement
+ok 78 - native-only Pulse evidence cannot satisfy the final completed-video requirement
+  ---
+  duration_ms: 1.477084
+  ...
+# Subtest: Pulse refuses a normal precomputed layout and sends all native states to the real layout boundary
+ok 79 - Pulse refuses a normal precomputed layout and sends all native states to the real layout boundary
+  ---
+  duration_ms: 12.841125
+  ...
+# Subtest: the real finite compositor selects exactly the declared state at every frame, including all boundaries and fades
+ok 80 - the real finite compositor selects exactly the declared state at every frame, including all boundaries and fades
+  ---
+  duration_ms: 9169.517334
+  ...
+1..80
+# tests 99
+# suites 0
+# pass 99
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9267.946292

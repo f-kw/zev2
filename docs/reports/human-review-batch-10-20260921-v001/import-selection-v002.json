@@ -1,0 +1,1296 @@
+{
+  "schema_version": "zev-point-review-session-answers-v001",
+  "session_id": "HRS-20260921-10-POINTS",
+  "display_review_sha256": "760994296bdc799917133ec1287fdc20a06c0cd77ff48db5c369ed2a93c43b84",
+  "batches": [
+    {
+      "review": {
+        "schema_version": "zev-point-review-v001",
+        "batch_id": "HRB-Q1-Q2-001",
+        "revision": "v001",
+        "title": "Panelと動きの修正確認",
+        "intro": "センタリング、背景の種類、動きの滑らかさを数秒ずつ確認します。見たポイントへ「良い／直したい／判断しない」と、必要ならひとことだけで十分です。背景の三種類は手で選んだ候補です。",
+        "media": [
+          {
+            "media_id": "edited-before",
+            "label": "修正前の保存済み一件修正版",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+            "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 4879,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 0
+          },
+          {
+            "media_id": "panel-short-after",
+            "label": "短文の整列を修正した無地背景",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-render-v002/presentation-rendered-v002.mp4",
+            "sha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 137,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 456
+          },
+          {
+            "media_id": "panel-wide-after",
+            "label": "横長の整列を修正した無地背景",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-render/presentation-rendered-v002.mp4",
+            "sha256": "290dd256d75bf596cb4775ab3697e778687916f893eae70fa1e148c745a4ccdf",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 99,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 1731
+          },
+          {
+            "media_id": "panel-graph-paper",
+            "label": "手選択：方眼紙",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-graph-paper-render/presentation-rendered-v002.mp4",
+            "sha256": "5169c7f29ed7abe26fafca1c79debedf927bff7a0ee0e8a1c115b419d2c6fa6b",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 82,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 486
+          },
+          {
+            "media_id": "panel-comic-frame",
+            "label": "手選択：コミック枠",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-comic-frame-render/presentation-rendered-v002.mp4",
+            "sha256": "e14ab77c96a80780668c791c6a94498ca1fceb47bf1da25f9368bc9e3f7e7085",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 82,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 486
+          },
+          {
+            "media_id": "motion-after",
+            "label": "動きの滑らかさを修正した短尺",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+            "sha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 170,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 0
+          }
+        ],
+        "points": [
+          {
+            "point_id": "Q1-PANEL-CENTER-SHORT",
+            "review_id": "HRC-001",
+            "related_review_ids": [
+              "HR-001",
+              "HR-007",
+              "HR-010"
+            ],
+            "title": "短い字幕のセンタリング",
+            "question": "短い字幕は、背景の中で綺麗にセンタリングされて見えますか。",
+            "target_function": "Panel内部の短い文字・行と背景の整列",
+            "change_summary": "実際に描かれた文字と行の中心に、背景の内側の中心を合わせた修正版です。",
+            "why_human_review": "文字と背景のまとまりが自然に見えるかを確認します。横長の例とは別の回答として保持します。",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "この短文例の文字・行と背景の整列"
+              ],
+              "does_not_apply_to": [
+                "横長例への回答の転記",
+                "背景意匠の好み",
+                "前後のフェード",
+                "Normal Cut・Black Separator・Softの再採点",
+                "Panel・動き系の機能使用許可の取り直し",
+                "全編のテンポ・単調さ・自動使い分け",
+                "Normalの基準",
+                "編集UIの操作感・待ち時間"
+              ]
+            },
+            "views": [
+              {
+                "view_id": "short-before",
+                "label": "修正前",
+                "role": "before",
+                "media_id": "edited-before",
+                "start_frame": 486,
+                "end_frame": 568,
+                "context_start_frame": 456,
+                "context_end_frame": 593
+              },
+              {
+                "view_id": "short-after",
+                "label": "修正後",
+                "role": "after",
+                "media_id": "panel-short-after",
+                "start_frame": 30,
+                "end_frame": 112,
+                "context_start_frame": 0,
+                "context_end_frame": 137
+              }
+            ]
+          },
+          {
+            "point_id": "Q1-PANEL-CENTER-WIDE",
+            "review_id": "HRC-001",
+            "related_review_ids": [
+              "HR-001"
+            ],
+            "title": "横長の字幕のセンタリング",
+            "question": "横長の字幕でも、背景の中で文字のまとまりが中央に見えますか。",
+            "target_function": "Panel内部の横長の文字・行と背景の整列",
+            "change_summary": "横長の字幕も、実際に描かれた文字のまとまりに背景の中心を合わせた修正版です。",
+            "why_human_review": "長さが異なる例でも自然に見えるかを確認します。短文の回答をこの例へ転記しません。",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "この横長例の文字・行と背景の整列"
+              ],
+              "does_not_apply_to": [
+                "短文例への回答の転記",
+                "背景意匠の好み",
+                "前後のフェード",
+                "Normal Cut・Black Separator・Softの再採点",
+                "Panel・動き系の機能使用許可の取り直し",
+                "全編のテンポ・単調さ・自動使い分け",
+                "Normalの基準",
+                "編集UIの操作感・待ち時間"
+              ]
+            },
+            "views": [
+              {
+                "view_id": "wide-before",
+                "label": "修正前",
+                "role": "before",
+                "media_id": "edited-before",
+                "start_frame": 1747,
+                "end_frame": 1818,
+                "context_start_frame": 1731,
+                "context_end_frame": 1830
+              },
+              {
+                "view_id": "wide-after",
+                "label": "修正後",
+                "role": "after",
+                "media_id": "panel-wide-after",
+                "start_frame": 16,
+                "end_frame": 87,
+                "context_start_frame": 0,
+                "context_end_frame": 99
+              }
+            ]
+          },
+          {
+            "point_id": "Q1-PANEL-BACKGROUND-VARIANTS",
+            "review_id": "HRC-002",
+            "related_review_ids": [
+              "HR-001"
+            ],
+            "title": "背景の三種類",
+            "question": "無地・方眼紙・コミック枠は、色違いではなく背景の種類の違いとして分かりますか。",
+            "target_function": "Panel背景の意匠の違い",
+            "change_summary": "同じ短文へ、無地・方眼紙・コミック枠を手で選んだ三候補です。各候補の字幕区間を揃えて切り替えます。",
+            "why_human_review": "三種類の違いが伝わるかを確認します。特に直したい種類があればコメントに名前を添えてください。",
+            "scope": {
+              "level": "bundle",
+              "applies_to": [
+                "この短文へ手で選んだ無地・方眼紙・コミック枠の、背景の種類の違いをまとめた回答"
+              ],
+              "does_not_apply_to": [
+                "文字と背景のセンタリング",
+                "三種類それぞれへの採用・合否の自動配布",
+                "背景の自動選択の成否",
+                "前後のフェード",
+                "Normal Cut・Black Separator・Softの再採点",
+                "Panel・動き系の機能使用許可の取り直し",
+                "全編のテンポ・単調さ・自動使い分け",
+                "Normalの基準",
+                "編集UIの操作感・待ち時間"
+              ]
+            },
+            "views": [
+              {
+                "view_id": "background-plain",
+                "label": "無地（手選択）",
+                "role": "candidate",
+                "media_id": "panel-short-after",
+                "start_frame": 30,
+                "end_frame": 112,
+                "context_start_frame": 30,
+                "context_end_frame": 112
+              },
+              {
+                "view_id": "background-graph-paper",
+                "label": "方眼紙（手選択）",
+                "role": "variant",
+                "media_id": "panel-graph-paper",
+                "start_frame": 0,
+                "end_frame": 82,
+                "context_start_frame": 0,
+                "context_end_frame": 82
+              },
+              {
+                "view_id": "background-comic-frame",
+                "label": "コミック枠（手選択）",
+                "role": "variant",
+                "media_id": "panel-comic-frame",
+                "start_frame": 0,
+                "end_frame": 82,
+                "context_start_frame": 0,
+                "context_end_frame": 82
+              }
+            ]
+          },
+          {
+            "point_id": "Q1-MOTION-SMOOTHNESS",
+            "review_id": "HRC-003",
+            "related_review_ids": [
+              "HR-002",
+              "HR-003",
+              "HR-004"
+            ],
+            "title": "拡大縮小の滑らかさ",
+            "question": "動きの強さはそのままに、拡大縮小が滑らかになって見えますか。",
+            "target_function": "Bounce／Shake／Pulseの動きの滑らかさ",
+            "change_summary": "拡大縮小の中間状態を増やした修正版です。元の字幕時刻・動きの開始基準・音声ピークとの対応を維持しています。",
+            "why_human_review": "拡大縮小が滑らかに見えるかを確認します。冒頭のBounce／Shake／Pulseをまとめた回答として保持し、個別の演出へ合否を配りません。",
+            "scope": {
+              "level": "bundle",
+              "applies_to": [
+                "この冒頭の短区間にあるBounce／Shake／Pulseをまとめた、修正後の滑らかさ"
+              ],
+              "does_not_apply_to": [
+                "個別presetへの欠陥や合否の自動配布",
+                "動き系の機能使用許可の取り直し",
+                "Panelのセンタリング・背景意匠",
+                "Normal Cut・Black Separator・Softの採点",
+                "全編のテンポ・単調さ・自動使い分け",
+                "編集UIの操作感・待ち時間"
+              ]
+            },
+            "views": [
+              {
+                "view_id": "motion-before",
+                "label": "修正前の冒頭",
+                "role": "before",
+                "media_id": "edited-before",
+                "start_frame": 0,
+                "end_frame": 170,
+                "context_start_frame": 0,
+                "context_end_frame": 170
+              },
+              {
+                "view_id": "motion-after",
+                "label": "修正後の冒頭",
+                "role": "after",
+                "media_id": "motion-after",
+                "start_frame": 0,
+                "end_frame": 170,
+                "context_start_frame": 0,
+                "context_end_frame": 170
+              }
+            ]
+          }
+        ]
+      },
+      "review_sha256": "ca3e73c9f0de047cd594cd29cadc7d60453c89003c0885b0caa475b51a8c42b1",
+      "answers": {
+        "schema_version": "zev-point-review-answers-v001",
+        "batch_id": "HRB-Q1-Q2-001",
+        "revision": "v001",
+        "review_sha256": "ca3e73c9f0de047cd594cd29cadc7d60453c89003c0885b0caa475b51a8c42b1",
+        "answers": [
+          {
+            "point_id": "Q1-PANEL-CENTER-SHORT",
+            "review_id": "HRC-001",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "この短文例の文字・行と背景の整列"
+              ],
+              "does_not_apply_to": [
+                "横長例への回答の転記",
+                "背景意匠の好み",
+                "前後のフェード",
+                "Normal Cut・Black Separator・Softの再採点",
+                "Panel・動き系の機能使用許可の取り直し",
+                "全編のテンポ・単調さ・自動使い分け",
+                "Normalの基準",
+                "編集UIの操作感・待ち時間"
+              ]
+            },
+            "offered_views": [
+              {
+                "view_id": "short-before",
+                "label": "修正前",
+                "role": "before",
+                "media_id": "edited-before",
+                "start_frame": 486,
+                "end_frame": 568,
+                "context_start_frame": 456,
+                "context_end_frame": 593,
+                "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 4879,
+                "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+                "timeline_start_frame": 0
+              },
+              {
+                "view_id": "short-after",
+                "label": "修正後",
+                "role": "after",
+                "media_id": "panel-short-after",
+                "start_frame": 30,
+                "end_frame": 112,
+                "context_start_frame": 0,
+                "context_end_frame": 137,
+                "sha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 137,
+                "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+                "timeline_start_frame": 456
+              }
+            ],
+            "choice": null,
+            "comment": "",
+            "raw_response": "",
+            "source": null,
+            "answered_at": null,
+            "playback_started_view_ids": [
+              "short-after"
+            ]
+          },
+          {
+            "point_id": "Q1-PANEL-CENTER-WIDE",
+            "review_id": "HRC-001",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "この横長例の文字・行と背景の整列"
+              ],
+              "does_not_apply_to": [
+                "短文例への回答の転記",
+                "背景意匠の好み",
+                "前後のフェード",
+                "Normal Cut・Black Separator・Softの再採点",
+                "Panel・動き系の機能使用許可の取り直し",
+                "全編のテンポ・単調さ・自動使い分け",
+                "Normalの基準",
+                "編集UIの操作感・待ち時間"
+              ]
+            },
+            "offered_views": [
+              {
+                "view_id": "wide-before",
+                "label": "修正前",
+                "role": "before",
+                "media_id": "edited-before",
+                "start_frame": 1747,
+                "end_frame": 1818,
+                "context_start_frame": 1731,
+                "context_end_frame": 1830,
+                "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 4879,
+                "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+                "timeline_start_frame": 0
+              },
+              {
+                "view_id": "wide-after",
+                "label": "修正後",
+                "role": "after",
+                "media_id": "panel-wide-after",
+                "start_frame": 16,
+                "end_frame": 87,
+                "context_start_frame": 0,
+                "context_end_frame": 99,
+                "sha256": "290dd256d75bf596cb4775ab3697e778687916f893eae70fa1e148c745a4ccdf",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 99,
+                "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+                "timeline_start_frame": 1731
+              }
+            ],
+            "choice": "good",
+            "comment": "",
+            "raw_response": "良い",
+            "source": "local_form",
+            "answered_at": "2026-09-21T04:28:53.299Z",
+            "playback_started_view_ids": [
+              "wide-after",
+              "wide-before"
+            ]
+          },
+          {
+            "point_id": "Q1-PANEL-BACKGROUND-VARIANTS",
+            "review_id": "HRC-002",
+            "scope": {
+              "level": "bundle",
+              "applies_to": [
+                "この短文へ手で選んだ無地・方眼紙・コミック枠の、背景の種類の違いをまとめた回答"
+              ],
+              "does_not_apply_to": [
+                "文字と背景のセンタリング",
+                "三種類それぞれへの採用・合否の自動配布",
+                "背景の自動選択の成否",
+                "前後のフェード",
+                "Normal Cut・Black Separator・Softの再採点",
+                "Panel・動き系の機能使用許可の取り直し",
+                "全編のテンポ・単調さ・自動使い分け",
+                "Normalの基準",
+                "編集UIの操作感・待ち時間"
+              ]
+            },
+            "offered_views": [
+              {
+                "view_id": "background-plain",
+                "label": "無地（手選択）",
+                "role": "candidate",
+                "media_id": "panel-short-after",
+                "start_frame": 30,
+                "end_frame": 112,
+                "context_start_frame": 30,
+                "context_end_frame": 112,
+                "sha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 137,
+                "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+                "timeline_start_frame": 456
+              },
+              {
+                "view_id": "background-graph-paper",
+                "label": "方眼紙（手選択）",
+                "role": "variant",
+                "media_id": "panel-graph-paper",
+                "start_frame": 0,
+                "end_frame": 82,
+                "context_start_frame": 0,
+                "context_end_frame": 82,
+                "sha256": "5169c7f29ed7abe26fafca1c79debedf927bff7a0ee0e8a1c115b419d2c6fa6b",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 82,
+                "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+                "timeline_start_frame": 486
+              },
+              {
+                "view_id": "background-comic-frame",
+                "label": "コミック枠（手選択）",
+                "role": "variant",
+                "media_id": "panel-comic-frame",
+                "start_frame": 0,
+                "end_frame": 82,
+                "context_start_frame": 0,
+                "context_end_frame": 82,
+                "sha256": "e14ab77c96a80780668c791c6a94498ca1fceb47bf1da25f9368bc9e3f7e7085",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 82,
+                "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+                "timeline_start_frame": 486
+              }
+            ],
+            "choice": "no_decision",
+            "comment": "無地以外壊れて見えない。指定区間を動画内で確認できません。",
+            "raw_response": "判断しない\n無地以外壊れて見えない。指定区間を動画内で確認できません。",
+            "source": "local_form",
+            "answered_at": "2026-09-21T04:30:01.590Z",
+            "playback_started_view_ids": [
+              "background-plain"
+            ]
+          },
+          {
+            "point_id": "Q1-MOTION-SMOOTHNESS",
+            "review_id": "HRC-003",
+            "scope": {
+              "level": "bundle",
+              "applies_to": [
+                "この冒頭の短区間にあるBounce／Shake／Pulseをまとめた、修正後の滑らかさ"
+              ],
+              "does_not_apply_to": [
+                "個別presetへの欠陥や合否の自動配布",
+                "動き系の機能使用許可の取り直し",
+                "Panelのセンタリング・背景意匠",
+                "Normal Cut・Black Separator・Softの採点",
+                "全編のテンポ・単調さ・自動使い分け",
+                "編集UIの操作感・待ち時間"
+              ]
+            },
+            "offered_views": [
+              {
+                "view_id": "motion-before",
+                "label": "修正前の冒頭",
+                "role": "before",
+                "media_id": "edited-before",
+                "start_frame": 0,
+                "end_frame": 170,
+                "context_start_frame": 0,
+                "context_end_frame": 170,
+                "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 4879,
+                "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+                "timeline_start_frame": 0
+              },
+              {
+                "view_id": "motion-after",
+                "label": "修正後の冒頭",
+                "role": "after",
+                "media_id": "motion-after",
+                "start_frame": 0,
+                "end_frame": 170,
+                "context_start_frame": 0,
+                "context_end_frame": 170,
+                "sha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 170,
+                "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+                "timeline_start_frame": 0
+              }
+            ],
+            "choice": "good",
+            "comment": "拡大するのはもし可能なら小さくなるタイミングはいい終わりが良い。他は良いよ",
+            "raw_response": "良い\n拡大するのはもし可能なら小さくなるタイミングはいい終わりが良い。他は良いよ",
+            "source": "local_form",
+            "answered_at": "2026-09-21T04:31:00.858Z",
+            "playback_started_view_ids": [
+              "motion-after",
+              "motion-before"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "review": {
+        "schema_version": "zev-point-review-v001",
+        "batch_id": "HRB-Q3-001",
+        "revision": "v001",
+        "title": "完成Digestの確認ポイント",
+        "intro": "字幕・時間の対応と音声の数値から挙げた確認候補です。短い区間を再生して、現状を保つか、直したい点があるかを回答してください。",
+        "media": [
+          {
+            "media_id": "HRB-001",
+            "label": "無修正の自動演出版",
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+            "sha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 4867,
+            "timeline_id": "completed-49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+            "timeline_start_frame": 0
+          }
+        ],
+        "points": [
+          {
+            "point_id": "Q3-C001",
+            "review_id": "HR-Q3-001",
+            "related_review_ids": [
+              "HR-009",
+              "HR-003",
+              "HR-004"
+            ],
+            "title": "冒頭の最初の言葉と字幕の切替",
+            "question": "完成動画の冒頭で「あーもういるやん」から「これもういるやん」「いるやんいるやん」へ続く現在の字幕の切替は、最初の言葉の読み取りも含め、このまま採用できますか？",
+            "target_function": "将来の冒頭字幕の表示時間と入退場の組合せについての採用判断。／将来の連続する字幕の切替確認に、人間が示した読み取り上の条件を反映すること。",
+            "change_summary": "完成動画の現状を確認します。修正版はまだ作成していません。",
+            "why_human_review": "字幕と測定値から考えた仮説です。完成動画で最初の文が実際にどの不透明度で表示され、続く2字幕とどう切り替わって見えるか。 音声と背景の状況を含め、最初の言葉を読まなくても冒頭の発見が十分伝わるか。",
+            "scope": {
+              "level": "bundle",
+              "applies_to": [
+                "あーもういるやん（0.267–0.433秒）",
+                "これもういるやん（0.433–1.233秒）",
+                "いるやんいるやん（1.233–2.367秒）"
+              ],
+              "does_not_apply_to": [
+                "跳ねる・揺れる動きの機能使用可という採用判断",
+                "Q1の動きの滑らかさの修正後確認",
+                "字幕本文や採用区間を変更する許可",
+                "動画全体の品質判定",
+                "他の動画・別の版",
+                "未提示の修正案の採用"
+              ]
+            },
+            "views": [
+              {
+                "view_id": "Q3-C001-current",
+                "label": "現在の完成動画",
+                "role": "candidate",
+                "media_id": "HRB-001",
+                "start_frame": 8,
+                "end_frame": 71,
+                "context_start_frame": 0,
+                "context_end_frame": 71
+              }
+            ]
+          }
+        ]
+      },
+      "review_sha256": "5d74023f3e822b79aea37d06a6250231829357c7f99db30ea12e792576568806",
+      "answers": {
+        "schema_version": "zev-point-review-answers-v001",
+        "batch_id": "HRB-Q3-001",
+        "revision": "v001",
+        "review_sha256": "5d74023f3e822b79aea37d06a6250231829357c7f99db30ea12e792576568806",
+        "answers": [
+          {
+            "point_id": "Q3-C001",
+            "review_id": "HR-Q3-001",
+            "scope": {
+              "level": "bundle",
+              "applies_to": [
+                "あーもういるやん（0.267–0.433秒）",
+                "これもういるやん（0.433–1.233秒）",
+                "いるやんいるやん（1.233–2.367秒）"
+              ],
+              "does_not_apply_to": [
+                "跳ねる・揺れる動きの機能使用可という採用判断",
+                "Q1の動きの滑らかさの修正後確認",
+                "字幕本文や採用区間を変更する許可",
+                "動画全体の品質判定",
+                "他の動画・別の版",
+                "未提示の修正案の採用"
+              ]
+            },
+            "offered_views": [
+              {
+                "view_id": "Q3-C001-current",
+                "label": "現在の完成動画",
+                "role": "candidate",
+                "media_id": "HRB-001",
+                "start_frame": 8,
+                "end_frame": 71,
+                "context_start_frame": 0,
+                "context_end_frame": 71,
+                "sha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 4867,
+                "timeline_id": "completed-49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+                "timeline_start_frame": 0
+              }
+            ],
+            "choice": "good",
+            "comment": "基本的には良い。最初のあーが入ってないから前に１秒ほど伸ばしたほうが良さそう",
+            "raw_response": "良い\n基本的には良い。最初のあーが入ってないから前に１秒ほど伸ばしたほうが良さそう",
+            "source": "local_form",
+            "answered_at": "2026-09-21T04:31:55.183Z",
+            "playback_started_view_ids": [
+              "Q3-C001-current"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "review": {
+        "schema_version": "zev-point-review-v001",
+        "batch_id": "HRB-Q4-001",
+        "revision": "v001",
+        "title": "別のDigestでの自動背景の確認",
+        "intro": "各動画は対象字幕の前後から再生します。質問に書かれた字幕の背景と文字のまとまりを確認してください。Q1・Q3の未回答はそのまま保持しています。",
+        "media": [
+          {
+            "media_id": "Q4-C001",
+            "label": "C-allの新しい固定自動案",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C001-render/presentation-rendered-v002.mp4",
+            "sha256": "209397f26a3164d61496b599fe2b7209db3f6d4949115cd27ea63ac4690017ce",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 686,
+            "timeline_id": "C-all-Q4-v001",
+            "timeline_start_frame": 2511
+          },
+          {
+            "media_id": "Q4-C002",
+            "label": "C-allの新しい固定自動案",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C002-render/presentation-rendered-v002.mp4",
+            "sha256": "9ea1730ccc3bd3561291a185428aa3aa72afcc2610b0225adcd8c37049f44fce",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 128,
+            "timeline_id": "C-all-Q4-v001",
+            "timeline_start_frame": 4436
+          },
+          {
+            "media_id": "Q4-C003",
+            "label": "C-allの新しい固定自動案",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C003-render/presentation-rendered-v002.mp4",
+            "sha256": "0a5bd2a7b8a461b4e0276df660ddf09c452dcc60b0d47b0e2780551cfebc4145",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 282,
+            "timeline_id": "C-all-Q4-v001",
+            "timeline_start_frame": 6363
+          }
+        ],
+        "points": [
+          {
+            "point_id": "Q4-C001",
+            "review_id": "HR-Q4-001",
+            "related_review_ids": [
+              "HRC-001",
+              "HRC-002"
+            ],
+            "title": "複数行の自動背景",
+            "question": "「えっと今うぶちゃんみーちゃんの変化量がもう10くらいいってんだよな」に選ばれた背景と文字のまとまりは、自然に見えますか。",
+            "target_function": "内容に応じたPanel背景の自動選択と文字のまとまり",
+            "change_summary": "全字幕から新しく判断して固定した自動案です。この候補の表現や背景を手で選び直していません。",
+            "why_human_review": "画面の重要な内容との重なりや、発話と表示の関係が自然かは、保存された字幕と数値だけでは判定できません。",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "えっと今うぶちゃんみーちゃんの変化量がもう10くらいいってんだよな：この字幕に選ばれた背景と文字のまとまり。前後は発話の流れを確認するために再生します。"
+              ],
+              "does_not_apply_to": [
+                "隣接字幕の採否への回答転用",
+                "Q1の未回答への回答転記",
+                "HR-Q3-001の未回答への回答転記",
+                "Panel機能の使用許可の取り直し",
+                "Normal／Black／Softの採用の再判定",
+                "動き表現の94px対応",
+                "字幕本文・改行・表示区間・保持順序の変更",
+                "全24分の品質合格"
+              ]
+            },
+            "views": [
+              {
+                "view_id": "Q4-C001-current",
+                "label": "新しい自動案（前後の文脈を含む）",
+                "role": "candidate",
+                "media_id": "Q4-C001",
+                "start_frame": 0,
+                "end_frame": 686,
+                "context_start_frame": 0,
+                "context_end_frame": 686
+              }
+            ]
+          },
+          {
+            "point_id": "Q4-C002",
+            "review_id": "HR-Q4-002",
+            "related_review_ids": [
+              "HRC-001",
+              "HRC-002"
+            ],
+            "title": "短い字幕の自動背景",
+            "question": "「俺たちは仲間」に選ばれた背景と文字のまとまりは、自然に見えますか。",
+            "target_function": "内容に応じたPanel背景の自動選択と文字のまとまり",
+            "change_summary": "全字幕から新しく判断して固定した自動案です。この候補の表現や背景を手で選び直していません。",
+            "why_human_review": "画面の重要な内容との重なりや、発話と表示の関係が自然かは、保存された字幕と数値だけでは判定できません。",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "俺たちは仲間：この字幕に選ばれた背景と文字のまとまり。前後は発話の流れを確認するために再生します。"
+              ],
+              "does_not_apply_to": [
+                "隣接字幕の採否への回答転用",
+                "Q1の未回答への回答転記",
+                "HR-Q3-001の未回答への回答転記",
+                "Panel機能の使用許可の取り直し",
+                "Normal／Black／Softの採用の再判定",
+                "動き表現の94px対応",
+                "字幕本文・改行・表示区間・保持順序の変更",
+                "全24分の品質合格"
+              ]
+            },
+            "views": [
+              {
+                "view_id": "Q4-C002-current",
+                "label": "新しい自動案（前後の文脈を含む）",
+                "role": "candidate",
+                "media_id": "Q4-C002",
+                "start_frame": 0,
+                "end_frame": 128,
+                "context_start_frame": 0,
+                "context_end_frame": 128
+              }
+            ]
+          },
+          {
+            "point_id": "Q4-C003",
+            "review_id": "HR-Q4-003",
+            "related_review_ids": [
+              "HRC-001",
+              "HRC-002"
+            ],
+            "title": "横長の字幕の自動背景",
+            "question": "「好きなキャラに覚えさせたのもいいし」に選ばれた背景と文字のまとまりは、自然に見えますか。",
+            "target_function": "内容に応じたPanel背景の自動選択と文字のまとまり",
+            "change_summary": "全字幕から新しく判断して固定した自動案です。この候補の表現や背景を手で選び直していません。",
+            "why_human_review": "画面の重要な内容との重なりや、発話と表示の関係が自然かは、保存された字幕と数値だけでは判定できません。",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "好きなキャラに覚えさせたのもいいし：この字幕に選ばれた背景と文字のまとまり。前後は発話の流れを確認するために再生します。"
+              ],
+              "does_not_apply_to": [
+                "隣接字幕の採否への回答転用",
+                "Q1の未回答への回答転記",
+                "HR-Q3-001の未回答への回答転記",
+                "Panel機能の使用許可の取り直し",
+                "Normal／Black／Softの採用の再判定",
+                "動き表現の94px対応",
+                "字幕本文・改行・表示区間・保持順序の変更",
+                "全24分の品質合格"
+              ]
+            },
+            "views": [
+              {
+                "view_id": "Q4-C003-current",
+                "label": "新しい自動案（前後の文脈を含む）",
+                "role": "candidate",
+                "media_id": "Q4-C003",
+                "start_frame": 0,
+                "end_frame": 282,
+                "context_start_frame": 0,
+                "context_end_frame": 282
+              }
+            ]
+          }
+        ]
+      },
+      "review_sha256": "ba13510ba061a8282bdd211d2fd481d4b83be7b64a6c16a46914632e1b10e41d",
+      "answers": {
+        "schema_version": "zev-point-review-answers-v001",
+        "batch_id": "HRB-Q4-001",
+        "revision": "v001",
+        "review_sha256": "ba13510ba061a8282bdd211d2fd481d4b83be7b64a6c16a46914632e1b10e41d",
+        "answers": [
+          {
+            "point_id": "Q4-C001",
+            "review_id": "HR-Q4-001",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "えっと今うぶちゃんみーちゃんの変化量がもう10くらいいってんだよな：この字幕に選ばれた背景と文字のまとまり。前後は発話の流れを確認するために再生します。"
+              ],
+              "does_not_apply_to": [
+                "隣接字幕の採否への回答転用",
+                "Q1の未回答への回答転記",
+                "HR-Q3-001の未回答への回答転記",
+                "Panel機能の使用許可の取り直し",
+                "Normal／Black／Softの採用の再判定",
+                "動き表現の94px対応",
+                "字幕本文・改行・表示区間・保持順序の変更",
+                "全24分の品質合格"
+              ]
+            },
+            "offered_views": [
+              {
+                "view_id": "Q4-C001-current",
+                "label": "新しい自動案（前後の文脈を含む）",
+                "role": "candidate",
+                "media_id": "Q4-C001",
+                "start_frame": 0,
+                "end_frame": 686,
+                "context_start_frame": 0,
+                "context_end_frame": 686,
+                "sha256": "209397f26a3164d61496b599fe2b7209db3f6d4949115cd27ea63ac4690017ce",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 686,
+                "timeline_id": "C-all-Q4-v001",
+                "timeline_start_frame": 2511
+              }
+            ],
+            "choice": "change_requested",
+            "comment": "別に悪くないんだけど、ゆっくり話してるから、字幕が表示されてる時間が長すぎると思う\nあと、ここで方眼紙背景は確認できたけど、バリエーションとしてはあり",
+            "raw_response": "直したい\n別に悪くないんだけど、ゆっくり話してるから、字幕が表示されてる時間が長すぎると思う\nあと、ここで方眼紙背景は確認できたけど、バリエーションとしてはあり",
+            "source": "local_form",
+            "answered_at": "2026-09-21T04:33:55.215Z",
+            "playback_started_view_ids": [
+              "Q4-C001-current"
+            ]
+          },
+          {
+            "point_id": "Q4-C002",
+            "review_id": "HR-Q4-002",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "俺たちは仲間：この字幕に選ばれた背景と文字のまとまり。前後は発話の流れを確認するために再生します。"
+              ],
+              "does_not_apply_to": [
+                "隣接字幕の採否への回答転用",
+                "Q1の未回答への回答転記",
+                "HR-Q3-001の未回答への回答転記",
+                "Panel機能の使用許可の取り直し",
+                "Normal／Black／Softの採用の再判定",
+                "動き表現の94px対応",
+                "字幕本文・改行・表示区間・保持順序の変更",
+                "全24分の品質合格"
+              ]
+            },
+            "offered_views": [
+              {
+                "view_id": "Q4-C002-current",
+                "label": "新しい自動案（前後の文脈を含む）",
+                "role": "candidate",
+                "media_id": "Q4-C002",
+                "start_frame": 0,
+                "end_frame": 128,
+                "context_start_frame": 0,
+                "context_end_frame": 128,
+                "sha256": "9ea1730ccc3bd3561291a185428aa3aa72afcc2610b0225adcd8c37049f44fce",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 128,
+                "timeline_id": "C-all-Q4-v001",
+                "timeline_start_frame": 4436
+              }
+            ],
+            "choice": "change_requested",
+            "comment": "仲間のやつが一瞬しか表示されてない。一方でその前のライバル云々は発話がないのに表示されているので間違ってる\n背景は特に違和感ない。ただ、背景色はバリエーションがあったほうが良さそう。これはどの色がすごくいいはならないのでバリエーションです",
+            "raw_response": "直したい\n仲間のやつが一瞬しか表示されてない。一方でその前のライバル云々は発話がないのに表示されているので間違ってる\n背景は特に違和感ない。ただ、背景色はバリエーションがあったほうが良さそう。これはどの色がすごくいいはならないのでバリエーションです",
+            "source": "local_form",
+            "answered_at": "2026-09-21T04:36:33.448Z",
+            "playback_started_view_ids": [
+              "Q4-C002-current"
+            ]
+          },
+          {
+            "point_id": "Q4-C003",
+            "review_id": "HR-Q4-003",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "好きなキャラに覚えさせたのもいいし：この字幕に選ばれた背景と文字のまとまり。前後は発話の流れを確認するために再生します。"
+              ],
+              "does_not_apply_to": [
+                "隣接字幕の採否への回答転用",
+                "Q1の未回答への回答転記",
+                "HR-Q3-001の未回答への回答転記",
+                "Panel機能の使用許可の取り直し",
+                "Normal／Black／Softの採用の再判定",
+                "動き表現の94px対応",
+                "字幕本文・改行・表示区間・保持順序の変更",
+                "全24分の品質合格"
+              ]
+            },
+            "offered_views": [
+              {
+                "view_id": "Q4-C003-current",
+                "label": "新しい自動案（前後の文脈を含む）",
+                "role": "candidate",
+                "media_id": "Q4-C003",
+                "start_frame": 0,
+                "end_frame": 282,
+                "context_start_frame": 0,
+                "context_end_frame": 282,
+                "sha256": "0a5bd2a7b8a461b4e0276df660ddf09c452dcc60b0d47b0e2780551cfebc4145",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 282,
+                "timeline_id": "C-all-Q4-v001",
+                "timeline_start_frame": 6363
+              }
+            ],
+            "choice": "change_requested",
+            "comment": "背景色も文字色もバリエーションがあったほうが良い",
+            "raw_response": "直したい\n背景色も文字色もバリエーションがあったほうが良い",
+            "source": "local_form",
+            "answered_at": "2026-09-21T04:37:10.572Z",
+            "playback_started_view_ids": [
+              "Q4-C003-current"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "review": {
+        "schema_version": "zev-point-review-v001",
+        "batch_id": "HRB-Q5-1-001",
+        "revision": "v001",
+        "title": "説明の途中を省いた案の確認",
+        "intro": "前後の文脈を含むBeforeとAfterを一組だけ比べます。今回の案でよければ「良い」、元版の方がよければ「直したい」を選んでください。「両方使える」「判断しない」も選べます。理由の記入は任意です。回答だけで原版を置き換えることはありません。",
+        "media": [
+          {
+            "media_id": "Q5-BEFORE",
+            "label": "Before：元の通常完成版",
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+            "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 44408,
+            "timeline_id": "digest-v1-phase2-completed-20260914-v001",
+            "timeline_start_frame": 0
+          },
+          {
+            "media_id": "Q5-AFTER",
+            "label": "After：前後を多めに残した省略案",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+            "sha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 763,
+            "timeline_id": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+            "timeline_start_frame": 11683
+          }
+        ],
+        "points": [
+          {
+            "point_id": "Q5-1-C001",
+            "review_id": "HR-Q5-1-001",
+            "related_review_ids": [],
+            "title": "説明の残り方と、前後のつながり",
+            "question": "前後を多めに残して、説明の途中を省いた案です。言葉の残り方やつながりを含め、この案は使えますか。",
+            "target_function": "同じ場面で繰り返す説明を、一箇所だけ短くする内容編集",
+            "change_summary": "「ドスンと落ちていく感じがありますね」を残し、後の説明の中ほど約1.97秒を省きました。対象説明の前後の音声は一部残り、その全文字幕一件は非表示です。ほかの字幕と通常の見せ方は保っています。",
+            "why_human_review": "言葉の残り方や音の自然なつながりは未確認です。音声が一部残ることだけで良否を決めず、この一案が使えるかを確認します。",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "この一箇所の省略と対象字幕一件の非表示を合わせた、提示中のBefore／Afterの使いやすさ"
+              ],
+              "does_not_apply_to": [
+                "Q1・Q3・Q4の別の問いと既存回答",
+                "全編の品質、他の字幕や別の省略箇所",
+                "原版の置換、正式採用、ショートの制作"
+              ]
+            },
+            "views": [
+              {
+                "view_id": "Q5-BEFORE-VIEW",
+                "label": "Before：元版（27.40秒）",
+                "role": "before",
+                "media_id": "Q5-BEFORE",
+                "start_frame": 11683,
+                "end_frame": 12505,
+                "context_start_frame": 11683,
+                "context_end_frame": 12505
+              },
+              {
+                "view_id": "Q5-AFTER-VIEW",
+                "label": "After：今回案（25.43秒）",
+                "role": "after",
+                "media_id": "Q5-AFTER",
+                "start_frame": 0,
+                "end_frame": 763,
+                "context_start_frame": 0,
+                "context_end_frame": 763
+              }
+            ]
+          }
+        ]
+      },
+      "review_sha256": "bd91c2e1cac5c3beb999768b304c686b0d19eb103bc18f933a8f171774176b42",
+      "answers": {
+        "schema_version": "zev-point-review-answers-v001",
+        "batch_id": "HRB-Q5-1-001",
+        "revision": "v001",
+        "review_sha256": "bd91c2e1cac5c3beb999768b304c686b0d19eb103bc18f933a8f171774176b42",
+        "answers": [
+          {
+            "point_id": "Q5-1-C001",
+            "review_id": "HR-Q5-1-001",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "この一箇所の省略と対象字幕一件の非表示を合わせた、提示中のBefore／Afterの使いやすさ"
+              ],
+              "does_not_apply_to": [
+                "Q1・Q3・Q4の別の問いと既存回答",
+                "全編の品質、他の字幕や別の省略箇所",
+                "原版の置換、正式採用、ショートの制作"
+              ]
+            },
+            "offered_views": [
+              {
+                "view_id": "Q5-BEFORE-VIEW",
+                "label": "Before：元版（27.40秒）",
+                "role": "before",
+                "media_id": "Q5-BEFORE",
+                "start_frame": 11683,
+                "end_frame": 12505,
+                "context_start_frame": 11683,
+                "context_end_frame": 12505,
+                "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 44408,
+                "timeline_id": "digest-v1-phase2-completed-20260914-v001",
+                "timeline_start_frame": 0
+              },
+              {
+                "view_id": "Q5-AFTER-VIEW",
+                "label": "After：今回案（25.43秒）",
+                "role": "after",
+                "media_id": "Q5-AFTER",
+                "start_frame": 0,
+                "end_frame": 763,
+                "context_start_frame": 0,
+                "context_end_frame": 763,
+                "sha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 763,
+                "timeline_id": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+                "timeline_start_frame": 11683
+              }
+            ],
+            "choice": "no_decision",
+            "comment": "壊れて見えない　指定区間を動画内で確認できません。",
+            "raw_response": "判断しない\n壊れて見えない　指定区間を動画内で確認できません。",
+            "source": "local_form",
+            "answered_at": "2026-09-21T04:37:44.401Z",
+            "playback_started_view_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "review": {
+        "schema_version": "zev-point-review-v001",
+        "batch_id": "HRB-Q5-2-001",
+        "revision": "v001",
+        "title": "場面の冒頭へ説明を戻した案の確認",
+        "intro": "Beforeは元の場面冒頭、Afterはその直前の11.50秒を戻した案です。共通する本編9.30秒と出口は同じです。今回の案でよければ「良い」、元のままがよければ「直したい」を選んでください。「両方使える」「判断しない」も選べます。理由は任意です。回答だけで原版を置き換えることはありません。",
+        "media": [
+          {
+            "media_id": "Q5-2-BEFORE",
+            "label": "Before：元の通常完成版",
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+            "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 44408,
+            "timeline_id": "digest-v1-phase2-completed-20260914-v001",
+            "timeline_start_frame": 0
+          },
+          {
+            "media_id": "Q5-2-AFTER",
+            "label": "After：場面の直前を戻した案",
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/after-render-v002/presentation-rendered-v002.mp4",
+            "sha256": "98d73010ebfa93bf9b094781e279d705f51771d295ae3fbc9fe78d1f0f365737",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 624,
+            "timeline_id": "q5-2-content-v001-94698bac280a5fef2bab4d07b23eefbf519e7a5e43aa69f4287b0e5258bd1898",
+            "timeline_start_frame": 18578
+          }
+        ],
+        "points": [
+          {
+            "point_id": "Q5-2-C001",
+            "review_id": "HR-Q5-2-001",
+            "related_review_ids": [],
+            "title": "「厳しいですねー」の直前の反応を戻す",
+            "question": "場面の直前にあった説明を少し戻した案です。冒頭の意味が分かりやすくなっていますか。長くなったことも含め、この案は使えますか。",
+            "target_function": "同じ元動画の直前部分を戻し、場面冒頭の意味が分かりやすくなるかを比べる内容編集",
+            "change_summary": "「撃てないかー」を2回と「全然まで使ったのに撃てないかー」という保存済みの発話原文に対応する11.50秒を追加し、通常94pxの字幕3件を付けました。その後の本編9.30秒と既存字幕3件、通常の見せ方は保っています。BeforeとAfterの入口は異なり、本編と出口は同じです。",
+            "why_human_review": "原文の認識誤りの可能性、言葉の自然さ、冒頭の分かりやすさと長くなる影響は未評価です。追加が不要だったり、繰り返しで勢いが落ちたりする可能性も含め、この一案が使えるかを確認します。",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "この場面の直前11.50秒と原文字幕3件を追加した、提示中のBefore／Afterの理解しやすさと長さを含む使いやすさ"
+              ],
+              "does_not_apply_to": [
+                "Q1・Q3・Q4・Q5-1の別の問いと既存回答",
+                "原文から分からない能力名や詳しい戦況の推定、全編の品質、他の場面や別の追加量",
+                "原版の置換、正式採用、ショートの制作"
+              ]
+            },
+            "views": [
+              {
+                "view_id": "Q5-2-BEFORE-VIEW",
+                "label": "Before：元版（9.30秒）",
+                "role": "before",
+                "media_id": "Q5-2-BEFORE",
+                "start_frame": 18578,
+                "end_frame": 18857,
+                "context_start_frame": 18578,
+                "context_end_frame": 18857
+              },
+              {
+                "view_id": "Q5-2-AFTER-VIEW",
+                "label": "After：今回案（20.80秒）",
+                "role": "after",
+                "media_id": "Q5-2-AFTER",
+                "start_frame": 0,
+                "end_frame": 624,
+                "context_start_frame": 0,
+                "context_end_frame": 624
+              }
+            ]
+          }
+        ]
+      },
+      "review_sha256": "a9ef5312b0c885c5119c5ba689075eb0d5c2fc69fa845179dbbe828dff1ecb0c",
+      "answers": {
+        "schema_version": "zev-point-review-answers-v001",
+        "batch_id": "HRB-Q5-2-001",
+        "revision": "v001",
+        "review_sha256": "a9ef5312b0c885c5119c5ba689075eb0d5c2fc69fa845179dbbe828dff1ecb0c",
+        "answers": [
+          {
+            "point_id": "Q5-2-C001",
+            "review_id": "HR-Q5-2-001",
+            "scope": {
+              "level": "point",
+              "applies_to": [
+                "この場面の直前11.50秒と原文字幕3件を追加した、提示中のBefore／Afterの理解しやすさと長さを含む使いやすさ"
+              ],
+              "does_not_apply_to": [
+                "Q1・Q3・Q4・Q5-1の別の問いと既存回答",
+                "原文から分からない能力名や詳しい戦況の推定、全編の品質、他の場面や別の追加量",
+                "原版の置換、正式採用、ショートの制作"
+              ]
+            },
+            "offered_views": [
+              {
+                "view_id": "Q5-2-BEFORE-VIEW",
+                "label": "Before：元版（9.30秒）",
+                "role": "before",
+                "media_id": "Q5-2-BEFORE",
+                "start_frame": 18578,
+                "end_frame": 18857,
+                "context_start_frame": 18578,
+                "context_end_frame": 18857,
+                "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 44408,
+                "timeline_id": "digest-v1-phase2-completed-20260914-v001",
+                "timeline_start_frame": 0
+              },
+              {
+                "view_id": "Q5-2-AFTER-VIEW",
+                "label": "After：今回案（20.80秒）",
+                "role": "after",
+                "media_id": "Q5-2-AFTER",
+                "start_frame": 0,
+                "end_frame": 624,
+                "context_start_frame": 0,
+                "context_end_frame": 624,
+                "sha256": "98d73010ebfa93bf9b094781e279d705f51771d295ae3fbc9fe78d1f0f365737",
+                "fps_num": 30,
+                "fps_den": 1,
+                "total_frames": 624,
+                "timeline_id": "q5-2-content-v001-94698bac280a5fef2bab4d07b23eefbf519e7a5e43aa69f4287b0e5258bd1898",
+                "timeline_start_frame": 18578
+              }
+            ],
+            "choice": "change_requested",
+            "comment": "使ったのに　と　打てないか　は別な字幕の方が良さそう",
+            "raw_response": "直したい\n使ったのに　と　打てないか　は別な字幕の方が良さそう",
+            "source": "local_form",
+            "answered_at": "2026-09-21T04:38:50.022Z",
+            "playback_started_view_ids": [
+              "Q5-2-AFTER-VIEW"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

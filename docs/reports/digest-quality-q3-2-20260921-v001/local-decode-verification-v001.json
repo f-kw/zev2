@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "command": [
+    "/opt/homebrew/bin/ffmpeg",
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-ss",
+    "1711.533333333",
+    "-i",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4",
+    "-map",
+    "0:v:0",
+    "-an",
+    "-frames:v",
+    "8",
+    "-pix_fmt",
+    "rgba",
+    "-f",
+    "framehash",
+    "-hash",
+    "sha256",
+    "pipe:1"
+  ],
+  "range": {
+    "startFrame": 51346,
+    "endFrameExclusive": 51354
+  },
+  "decodedFrames": 8,
+  "pixelFormat": "rgba",
+  "matchedSavedFrameHashes": true,
+  "savedEvidence": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/source-encoded-rgba.framehash.txt",
+    "fileSha256": "0542b4ca7dca2131d2737e9ab8396aa87b46d54356e1115071e8f588cfa4b316",
+    "provenance": {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/cache-verification.json",
+      "bytes": 5016,
+      "fileSha256": "bfb30972ed637187dba08cbdf7768f6b501581224be09146111618fd89b74df4"
+    }
+  },
+  "frames": [
+    {
+      "pts": 51346,
+      "bytes": 8294400,
+      "hash": "e088728328b7abad36be3879782c30d24835cc57e70b76dc95d00b7e8c817a97"
+    },
+    {
+      "pts": 51347,
+      "bytes": 8294400,
+      "hash": "6a163bddb9b675bad2142a708ff421239ea8c1fb2cf4375f23c99917d2b32cf1"
+    },
+    {
+      "pts": 51348,
+      "bytes": 8294400,
+      "hash": "39b4e9c0475de246fa3a0c6fb237bbd6dc623394e2487b1fcf12fa13b1dd76cf"
+    },
+    {
+      "pts": 51349,
+      "bytes": 8294400,
+      "hash": "9289333df16c4dfde0450aceecb772588d113932e816e56c47a1d14182e09e63"
+    },
+    {
+      "pts": 51350,
+      "bytes": 8294400,
+      "hash": "9d0f6add57712e08278119328deeeb2350e3838064b5d903f1b836212ee57a68"
+    },
+    {
+      "pts": 51351,
+      "bytes": 8294400,
+      "hash": "3687837ae44c587478d191f2fdac56a472abb2f8faad74e644b761d16bb71594"
+    },
+    {
+      "pts": 51352,
+      "bytes": 8294400,
+      "hash": "54d1ea812e94c7efc990505cf3576b1b138b7fb97f834e2f2a0088050efc0bea"
+    },
+    {
+      "pts": 51353,
+      "bytes": 8294400,
+      "hash": "d22c24b6c6ff3a2452d5dd193c67873e723afe7aa9c89242fc1accaadd130369"
+    }
+  ],
+  "limitation": "局所8frameの画素同一性とdecode成立の確認。字幕を読んだ・見心地を確認した証拠ではない。旧024の未完了可視性QCは再開しない。"
+}

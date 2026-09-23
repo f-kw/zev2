@@ -1,0 +1,119 @@
+TAP version 13
+# Subtest: candidate and zero-supported outcomes remain distinct from semantic certification
+ok 1 - candidate and zero-supported outcomes remain distinct from semantic certification
+  ---
+  duration_ms: 1.86075
+  ...
+# Subtest: rejects changed input binding
+ok 2 - rejects changed input binding
+  ---
+  duration_ms: 0.771625
+  ...
+# Subtest: rejects incomplete context coverage
+ok 3 - rejects incomplete context coverage
+  ---
+  duration_ms: 0.59825
+  ...
+# Subtest: rejects duplicated context coverage
+ok 4 - rejects duplicated context coverage
+  ---
+  duration_ms: 0.380375
+  ...
+# Subtest: rejects caption from another context
+ok 5 - rejects caption from another context
+  ---
+  duration_ms: 0.228292
+  ...
+# Subtest: rejects speech from another context
+ok 6 - rejects speech from another context
+  ---
+  duration_ms: 0.192334
+  ...
+# Subtest: rejects same speech retained and omitted
+ok 7 - rejects same speech retained and omitted
+  ---
+  duration_ms: 0.246875
+  ...
+# Subtest: rejects same caption retained and omitted
+ok 8 - rejects same caption retained and omitted
+  ---
+  duration_ms: 0.549708
+  ...
+# Subtest: rejects unrecorded preferred candidate
+ok 9 - rejects unrecorded preferred candidate
+  ---
+  duration_ms: 0.284417
+  ...
+# Subtest: rejects failed judgment called complete
+ok 10 - rejects failed judgment called complete
+  ---
+  duration_ms: 0.300833
+  ...
+# Subtest: rejects zero-candidate flag with candidate
+ok 11 - rejects zero-candidate flag with candidate
+  ---
+  duration_ms: 0.17275
+  ...
+# Subtest: rejects unbound extra cut frames
+ok 12 - rejects unbound extra cut frames
+  ---
+  duration_ms: 0.231417
+  ...
+# Subtest: rejects human approval invented
+ok 13 - rejects human approval invented
+  ---
+  duration_ms: 0.116209
+  ...
+# Subtest: rejects missing uncertainty
+ok 14 - rejects missing uncertainty
+  ---
+  duration_ms: 0.209791
+  ...
+# Subtest: rejects unknown exclusion references
+ok 15 - rejects unknown exclusion references
+  ---
+  duration_ms: 0.204292
+  ...
+# Subtest: strict raw JSON rejects duplicate keys, fences and trailing text
+ok 16 - strict raw JSON rejects duplicate keys, fences and trailing text
+  ---
+  duration_ms: 0.588375
+  ...
+# Subtest: raw-first file receipt preserves a rejected response and refuses overwrite
+not ok 17 - raw-first file receipt preserves a rejected response and refuses overwrite
+  ---
+  duration_ms: 116.755625
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-run.test.mjs:54:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /request.json/. Input:
+    
+    'TypeError: output is not covered by an explicit generated-data ignore rule'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: 'output is not covered by an explicit generated-data ignore rule'
+  name: 'TypeError'
+  stack: |-
+    assertIgnoredPresentationOutputDirectoryV001 (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_output_directory_v001.mjs:36:11)
+    acceptQ5CandidateReply (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-run.mjs:103:3)
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-run.test.mjs:60:26)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-run.test.mjs:60:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 16
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 180.662667

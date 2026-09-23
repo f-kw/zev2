@@ -1,0 +1,832 @@
+{
+  "sessionId": "HRS-20260920-001",
+  "qualityResponses": [
+    {
+      "responseId": "HRS-20260920-001-P1",
+      "pointId": "connection",
+      "speaker": "kawafmmの回答（原文）",
+      "text": "POINT 1\\\n違和感はありません。\n\nただし、これは何度も伝えている通り、Black Separatorと通常接続のどちらが優れているかを決める話ではありません。黒を入れた方がよい場面と、入れない方がよい場面があります。\n\n差は人間でもほとんど比較判断できず、「なんとなくこちら」という程度です。これは優劣ではなくバリエーションと選択の問題です。\n\nしたがって、\n\n- Normal CutもBlack Separatorも使う\n- 人間へ微差のA/B比較を繰り返し要求しない\n- どこで使うかはAI側の文脈判断・バリエーション選択として扱う\n\nとして下さい。",
+      "source": {
+        "path": "human-response-original-v001.md",
+        "fileSha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98",
+        "bytes": 5572,
+        "receivedFrom": "本人からこの会話へ届いた直接の回答",
+        "date": "2026-09-20"
+      },
+      "reviewIds": [
+        "HR-007",
+        "HR-010"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "connection",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 270,
+          "endFrameExclusive": 388,
+          "fps": 30
+        },
+        {
+          "pointId": "connection",
+          "batchId": "HRB-002",
+          "artifactSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/02_一件修正版.mp4",
+          "startFrame": 270,
+          "endFrameExclusive": 400,
+          "fps": 30
+        }
+      ],
+      "attributionMethod": "本文で明示された機能と指摘ごとに分離。提示HTMLのreviewIdsを一括配布しない。"
+    },
+    {
+      "responseId": "HRS-20260920-001-P2",
+      "pointId": "caption",
+      "speaker": "kawafmmの回答（原文）",
+      "text": "POINT 2\\\nPanel / 背景板という機能自体には違和感がありません。バリエーションとしてあった方がよく、効果的に使える機能だと思います。\n\nただし、現状は背景板に対して文字を綺麗にセンタリングできていないため、そこがかなり大きな違和感になっています。\n\n**Panelではセンタリングを必須品質条件にしてください。**\n\nもう一点、背景板のバリエーションを単なる「色違い」にするだけでは弱いです。\n\n背景については、\n\n- 色違い\\\n  ではなく\n- 画像・テクスチャ・意匠そのものが違う背景\n\nという種類のバリエーションが必要です。\n\nなお、POINT 2に含まれていた**フェード自体は良かったです。**\\\nこれはPanelの問題とは分けてください。フェード表現は採用してよいです。",
+      "source": {
+        "path": "human-response-original-v001.md",
+        "fileSha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98",
+        "bytes": 5572,
+        "receivedFrom": "本人からこの会話へ届いた直接の回答",
+        "date": "2026-09-20"
+      },
+      "reviewIds": [
+        "HR-001",
+        "HR-005",
+        "HR-007",
+        "HR-010"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "caption",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 444,
+          "endFrameExclusive": 581,
+          "fps": 30
+        },
+        {
+          "pointId": "caption",
+          "batchId": "HRB-002",
+          "artifactSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/02_一件修正版.mp4",
+          "startFrame": 456,
+          "endFrameExclusive": 593,
+          "fps": 30
+        }
+      ],
+      "attributionMethod": "本文で明示された機能と指摘ごとに分離。提示HTMLのreviewIdsを一括配布しない。"
+    },
+    {
+      "responseId": "HRS-20260920-001-P3",
+      "pointId": "motion",
+      "speaker": "kawafmmの回答（原文）",
+      "text": "POINT 3\\\nこの動きの機能はとても良いです。残す方向で問題ありません。\n\n気になったのは、**拡大縮小が荒く、カクカクして見えること**です。\n\n機能を弱くしたり目立たなくしたりする必要はありません。問題は動きの滑らかさです。\n\nどのpresetのどのスケール変化が原因かは実装側で特定してください。人間レビューではBounce / Shake / Pulse等を同じ短い区間で見ているため、私の発言を特定presetだけの問題だと勝手に決めないでください。\n\n必要なら、\n\n- 補間\n- 中間状態数\n- easing / motion curve\n- frameごとの変化量\n\nなどを見直して、自然に滑らかにしてください。",
+      "source": {
+        "path": "human-response-original-v001.md",
+        "fileSha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98",
+        "bytes": 5572,
+        "receivedFrom": "本人からこの会話へ届いた直接の回答",
+        "date": "2026-09-20"
+      },
+      "reviewIds": [
+        "HR-002",
+        "HR-003",
+        "HR-004"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "motion",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 0,
+          "endFrameExclusive": 170,
+          "fps": 30
+        }
+      ],
+      "attributionMethod": "本文で明示された機能と指摘ごとに分離。提示HTMLのreviewIdsを一括配布しない。"
+    },
+    {
+      "responseId": "HRS-20260920-001-P4",
+      "pointId": "panel",
+      "speaker": "kawafmmの回答（原文）",
+      "text": "POINT 4\\\n目立ちすぎる心配はありません。\n\n必要な場面では、Panelが一番目立つ表現になっても構いません。「目立ちすぎないこと」をPanelの固定制約にしないでください。\n\nただし、問題はPOINT 2と同じです。\n\n- 背景と字幕のセンタリング\n- 色違いだけではない画像背景のバリエーション\n\nは必要です。",
+      "source": {
+        "path": "human-response-original-v001.md",
+        "fileSha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98",
+        "bytes": 5572,
+        "receivedFrom": "本人からこの会話へ届いた直接の回答",
+        "date": "2026-09-20"
+      },
+      "reviewIds": [
+        "HR-001"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "panel",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 1719,
+          "endFrameExclusive": 1818,
+          "fps": 30
+        }
+      ],
+      "attributionMethod": "本文で明示された機能と指摘ごとに分離。提示HTMLのreviewIdsを一括配布しない。"
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "HRD-001",
+      "target": [
+        "Normal Cut",
+        "Black Separator"
+      ],
+      "decision": "ADOPT",
+      "featureUse": "両方使用可（既存採用を維持・再確認）",
+      "reviewIds": [
+        "HR-007",
+        "HR-010"
+      ],
+      "sourceResponseIds": [
+        "HRS-20260920-001-P1"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "connection",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 270,
+          "endFrameExclusive": 388,
+          "fps": 30
+        },
+        {
+          "pointId": "connection",
+          "batchId": "HRB-002",
+          "artifactSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/02_一件修正版.mp4",
+          "startFrame": 270,
+          "endFrameExclusive": 400,
+          "fps": 30
+        }
+      ],
+      "scope": "両表現の使用可とPOINT1の局所変更に違和感なし。置く場面はAI側の文脈判断・バリエーション選択。",
+      "notAppliedTo": [
+        "優劣順位",
+        "全接続への黒の固定適用",
+        "全編の自然さ・音の品質",
+        "正式trust"
+      ],
+      "requiredChanges": [],
+      "reviewOperation": "微差の優劣A/B比較を人間へ繰り返し要求しない。",
+      "reReviewRequired": false
+    },
+    {
+      "decisionId": "HRD-002",
+      "target": [
+        "Panel"
+      ],
+      "decision": "ADOPT",
+      "featureUse": "機能自体は使用可。必要な場面では最も目立つ表現になってよい。",
+      "reviewIds": [
+        "HR-001"
+      ],
+      "sourceResponseIds": [
+        "HRS-20260920-001-P2",
+        "HRS-20260920-001-P4"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "caption",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 444,
+          "endFrameExclusive": 581,
+          "fps": 30
+        },
+        {
+          "pointId": "caption",
+          "batchId": "HRB-002",
+          "artifactSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/02_一件修正版.mp4",
+          "startFrame": 456,
+          "endFrameExclusive": 593,
+          "fps": 30
+        },
+        {
+          "pointId": "panel",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 1719,
+          "endFrameExclusive": 1818,
+          "fps": 30
+        }
+      ],
+      "scope": "Panelという表現の使用を採用し、センタリングと背景種類の修正を別に保持する。目立ちすぎないことを固定制約にしない。",
+      "notAppliedTo": [
+        "センタリング修正済みという認定",
+        "背景画像等が実装済みという認定",
+        "Panelを全字幕へ増やす固定選択",
+        "全編品質・正式trust"
+      ],
+      "requiredChanges": [
+        "HRC-001",
+        "HRC-002"
+      ],
+      "reReviewRequired": true,
+      "reReviewScope": "修正後のセンタリングと背景バリエーション"
+    },
+    {
+      "decisionId": "HRD-003",
+      "target": [
+        "POINT2のSoft Separatorフェード"
+      ],
+      "decision": "ADOPT",
+      "featureUse": "今回のフェード表現は使用可。良かったとの明示判断。",
+      "reviewIds": [
+        "HR-005"
+      ],
+      "sourceResponseIds": [
+        "HRS-20260920-001-P2"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "caption",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 444,
+          "endFrameExclusive": 581,
+          "fps": 30
+        },
+        {
+          "pointId": "caption",
+          "batchId": "HRB-002",
+          "artifactSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/02_一件修正版.mp4",
+          "startFrame": 456,
+          "endFrameExclusive": 593,
+          "fps": 30
+        }
+      ],
+      "scope": "提示されたPOINT2のフェード仕様・表現の採用。Panelの表示品質問題と分離する。",
+      "notAppliedTo": [
+        "Panelの修正完了",
+        "Soft配置の自動選択全体",
+        "通常接続・黒接続との優劣",
+        "正式trust"
+      ],
+      "requiredChanges": [],
+      "reReviewRequired": false
+    },
+    {
+      "decisionId": "HRD-004",
+      "target": [
+        "動き系（Bounce / Shake / Pulse）"
+      ],
+      "decision": "ADOPT",
+      "featureUse": "機能自体は使用可。とても良い、高評価。",
+      "reviewIds": [
+        "HR-002",
+        "HR-003",
+        "HR-004"
+      ],
+      "sourceResponseIds": [
+        "HRS-20260920-001-P3"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "motion",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 0,
+          "endFrameExclusive": 170,
+          "fps": 30
+        }
+      ],
+      "scope": "まとめて見た動き系の機能を使用可とし、滑らかさの修正要求は共通課題として保持する。",
+      "notAppliedTo": [
+        "特定presetを不具合原因とする人間判断",
+        "特定presetを調査対象から除外する判断",
+        "機能を弱める・目立たなくする要求",
+        "滑らかさが修正済みとの認定",
+        "正式trust"
+      ],
+      "requiredChanges": [
+        "HRC-003"
+      ],
+      "causeAttribution": "NOT_YET_IDENTIFIED",
+      "reReviewRequired": true,
+      "reReviewScope": "原因特定後に実際に修正する動きの滑らかさ"
+    }
+  ],
+  "guidanceFeedback": [
+    {
+      "speaker": "kawafmmの回答（原文）",
+      "text": "観点を明らかにしろ",
+      "classificationByCodex": "確認観点の明確化要求。動画品質の採用・不採用・保留の判断ではない。",
+      "action": "自動版の通常字幕・各演出・使い分け、修正版の二変更と全体整合について確認観点を説明した。"
+    },
+    {
+      "speaker": "kawafmmの回答（原文）",
+      "text": "2:42を比較することは無理だ。ポイントだけにしろ",
+      "classificationByCodex": "視聴方法と判断範囲をポイントだけへ変更する指示。動画品質への採否ではない。",
+      "action": "全編視聴・全編比較を要求せず、計6区間・4ポイントへ限定。HR-006の全体評価を未実施として保持。"
+    },
+    {
+      "speaker": "kawafmmの回答（原文）",
+      "text": "なぜその部分だけ切り取って比較するHTMLを書かない？",
+      "classificationByCodex": "局所比較用のHTML作成の明示指示。当初の新規Webアプリを作らない指示に対する今回の提示方法の具体化。",
+      "action": "既存MP4の短い範囲だけを音声付きで再生・停止し、対応箇所を左右で比較する静的ローカルHTMLを作成・提示。"
+    }
+  ],
+  "interpretationStatus": "本人原文を直接受領し、機能の使用可と未実装の修正要求3件を分離して記録済み。Panel/フェードの帰属を分け、動きの原因presetは未特定。全編評価・Normal基準・実UIは別途未了。",
+  "implementationChanges": [],
+  "reReviewRequirements": [
+    {
+      "changeRequestId": "HRC-001",
+      "scope": "修正後のセンタリングが分かる短いポイントで確認。元の視聴対象を上書きせず別版へ束縛する。",
+      "status": "AFTER_IMPLEMENTATION_NOT_YET_PERFORMED"
+    },
+    {
+      "changeRequestId": "HRC-002",
+      "scope": "背景の種類の差を判断できる代表ポイントで確認。素材取得・費用等の権限はこの記録から増やさない。",
+      "status": "AFTER_IMPLEMENTATION_NOT_YET_PERFORMED"
+    },
+    {
+      "changeRequestId": "HRC-003",
+      "scope": "原因と修正対象を実装側で特定した後、変更した動きの滑らかさを短いポイントで確認。未変更機能の使用許可を取り直す理由にはしない。",
+      "status": "AFTER_IMPLEMENTATION_NOT_YET_PERFORMED"
+    }
+  ],
+  "attributionCorrections": [
+    {
+      "issue": "POINT2の提示reviewIdsはHR-001を含めずPanelとフェードを混在させていた。",
+      "correction": "原文のPanel採用・修正はHR-001と修正版局所のHR-007/010へ。フェード採用はHR-005へ。HR-009の通常字幕採用は推認しない。",
+      "historicalPresentationChanged": false
+    },
+    {
+      "issue": "先行台帳はPulse/Bounceへ滑らかさ修正を割当て、Shakeを除外する書き方だった。",
+      "correction": "本人はまとめて見た動き系の使用可と滑らかさ要求を述べた。現時点で原因presetは未特定、三者とも機能使用可を維持し、実装側で原因と修正対象を特定する。",
+      "historicalPresentationChanged": false
+    },
+    {
+      "issue": "先行記録のimplementationChanges欄に未実装の修正要求が入っていた。",
+      "correction": "実装修正の実績は空配列とし、3件をNOT_IMPLEMENTEDのchangeRequestsへ分離する。",
+      "historicalPresentationChanged": false
+    }
+  ],
+  "advisorPriorRecords": [
+    {
+      "qualityResponses": [
+        {
+          "pointId": "connection",
+          "speaker": "kawafmmの回答（原文）",
+          "text": "POINT 1　違和感はない。何度も何度も何度も言ってるが、黒い接続は選択の問題で入れた方が良いときと入れない方が良い時がある。ただのバリエーションの問題で比較判断は人間でもほとんどできない。なんとなくレベルだ",
+          "interpretation": {
+            "decision": "ADOPT",
+            "appliesTo": [
+              "Normal Cut",
+              "Black Separator"
+            ],
+            "meaning": "両方を使える。黒を入れるかは文脈とバリエーションの選択問題であり、人間に微差の優劣A/Bを繰り返し要求しない。",
+            "notAppliedTo": [
+              "Soft Separatorの採否",
+              "全接続へ黒を入れる固定規則"
+            ]
+          }
+        },
+        {
+          "pointId": "caption",
+          "speaker": "kawafmmの回答（原文）",
+          "text": "POINT2 この機能はバリエーションとしてあった方が良いが、まず背景にセンタリングを綺麗にできてないと違和感がすごい。センタリングは必須で背景も色のバリエーション色じゃなくて画像というバリエーションが必要。機能の存在自体は違和感ない。何かしら効果的に使うことも可能だろう",
+          "interpretation": {
+            "decision": "ADOPT_WITH_CHANGE",
+            "appliesTo": [
+              "Panel Accent"
+            ],
+            "meaning": "Panel/背景板という表現自体は残す。必要に応じて効果的に使える。",
+            "requiredChanges": [
+              "背景板に対する字幕のセンタリングを綺麗に成立させることを必須品質条件にする",
+              "背景のバリエーションを色違いだけにせず、画像を使うバリエーションを用意する"
+            ],
+            "notAppliedTo": [
+              "Normal字幕そのもの",
+              "Soft Separatorのフェード評価"
+            ]
+          }
+        },
+        {
+          "pointId": "motion",
+          "speaker": "kawafmmの回答（原文）",
+          "text": "POINT3 この機能はとても良い。気になったのは拡大縮小が荒くてカクカク見える",
+          "interpretation": {
+            "decision": "ADOPT_WITH_CHANGE",
+            "appliesTo": [
+              "Bounce Accent",
+              "Shake Accent",
+              "Pulse Accent"
+            ],
+            "meaning": "動き系の表現をバリエーションとして使う方向は高評価。",
+            "requiredChanges": [
+              "拡大縮小を含む動きは、カクカク見えないよう時間補間・状態数・動作曲線を改善する"
+            ],
+            "attributionLimit": "POINT3はBounce/Shake/Pulseを一つの区間へ束ねている。拡大縮小の欠陥を特定preset一つへ推測で限定せず、実装上スケール変化を持つpresetを確認して修正する。"
+          }
+        },
+        {
+          "pointId": "panel",
+          "speaker": "kawafmmの回答（原文）",
+          "text": "POINT4 目立ちすぎの心配はない。必要に応じて一番目立ってもいい。ただしPOINT2と同じ問題がある",
+          "interpretation": {
+            "decision": "ADOPT_WITH_CHANGE",
+            "appliesTo": [
+              "Panel Accent"
+            ],
+            "meaning": "Panelは必要なら画面内で最も目立つ表現になってよい。『目立ちすぎないこと』を固定制約にしない。",
+            "requiredChanges": [
+              "背景板に対するセンタリングを必須品質条件にする",
+              "背景の画像バリエーションを用意する"
+            ]
+          }
+        },
+        {
+          "pointId": "caption-soft-fade",
+          "speaker": "kawafmmの回答（原文）",
+          "text": "２のフェイドは良かったよ",
+          "interpretation": {
+            "decision": "ADOPT",
+            "appliesTo": [
+              "Soft Separator"
+            ],
+            "meaning": "POINT2区間に含まれていたSoft Separatorのフェード表現は良かった。今回観測したフェード仕様を使用可とする。",
+            "scopeLimit": "Soft Separatorを置く場所の自動選択全般まで一律に正しいとはしない。表現自体の人間採用判断。"
+          }
+        }
+      ],
+      "decisions": [
+        {
+          "target": "Normal Cut / Black Separator",
+          "decision": "ADOPT",
+          "status": "HUMAN_REVIEWED",
+          "note": "両方使用可。微差の優劣を人間に繰り返し比較させず、文脈とバリエーションの選択として扱う。"
+        },
+        {
+          "target": "Soft Separator",
+          "decision": "ADOPT",
+          "status": "HUMAN_REVIEWED",
+          "note": "POINT2に含まれたフェードは良好。表現自体を使用可とする。配置判断は別。"
+        },
+        {
+          "target": "Panel Accent",
+          "decision": "ADOPT_WITH_CHANGE",
+          "status": "HUMAN_REVIEWED_CHANGE_REQUIRED",
+          "note": "機能の存在と強い目立たせ方は許容。センタリング必須、色違いだけでなく画像背景バリエーションが必要。"
+        },
+        {
+          "target": "Motion bundle (Bounce / Shake / Pulse)",
+          "decision": "ADOPT_WITH_CHANGE",
+          "status": "HUMAN_REVIEWED_BUNDLE_LEVEL",
+          "note": "動き系は高評価。拡大縮小のカクつきは修正必要。技術側でスケール変化を持つpresetを特定して改善する。"
+        }
+      ],
+      "interpretationStatus": "POINT1〜4とPOINT2内フェードの品質回答を受領。局所レビュー結果として保存。全編HR-006、Normal基準HR-009、実UI HRB-003は未実施のまま。",
+      "implementationChanges": [
+        "Panel: 背景板に対するセンタリングを必須品質条件として改善する",
+        "Panel: 色違いだけでなく画像背景のバリエーションを追加する",
+        "Motion: 拡大縮小を含む動きのカクつきを改善する",
+        "Review: Normal Cut / Black Separatorの微差を繰り返し人間A/Bさせない"
+      ],
+      "reReviewRequirements": [
+        "Panel修正後はセンタリングと画像背景バリエーションの代表ポイントだけを短いPoint Reviewで確認する",
+        "Motion修正後は拡大縮小を含む代表箇所だけを短いPoint Reviewで確認する",
+        "Soft Separatorの表現自体は今回採用。配置ロジックを変更した場合だけ、その変更箇所を必要に応じて再レビューする"
+      ],
+      "attributionCorrections": [
+        {
+          "issue": "POINT2の提示metadataはPanel比較であるのにreviewIdsへHR-001を含めず、HR-005等を束ねていた。",
+          "correction": "人間回答は見た機能の実体へ再帰属する。Panel判断はHR-001、POINT2内で明示されたフェード評価はHR-005へ分離する。",
+          "historicalPresentationChanged": false
+        },
+        {
+          "issue": "POINT3はBounce/Shake/Pulseを一つの短区間へ束ねていた。",
+          "correction": "動き系全体の方向性採用として保存し、拡大縮小のカクつきは実装上スケール変化を持つpresetへ修正要求を割り当てる。人間が特定preset名を指したとは記録しない。",
+          "historicalPresentationChanged": false
+        }
+      ],
+      "recordSource": "相談役がGitに保存した先行記録",
+      "throughCommit": "039f59e5dca8d7c607281b14d1262a291a2c2982",
+      "note": "先行記録中の原文表示はその記録の表記として保持する。現在の正本は今回この会話へ直接届いた本人原文。implementationChangesに列挙されていた事項は未実装の要求であり、実装完了の証拠ではない。"
+    }
+  ],
+  "authoritativeHumanResponse": {
+    "path": "human-response-original-v001.md",
+    "fileSha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98",
+    "bytes": 5572,
+    "receivedFrom": "本人からこの会話へ届いた直接の回答",
+    "date": "2026-09-20"
+  },
+  "changeRequests": [
+    {
+      "changeRequestId": "HRC-001",
+      "target": "Panelのセンタリング",
+      "reviewIds": [
+        "HR-001",
+        "HR-007",
+        "HR-010"
+      ],
+      "sourceResponseIds": [
+        "HRS-20260920-001-P2",
+        "HRS-20260920-001-P4"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "caption",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 444,
+          "endFrameExclusive": 581,
+          "fps": 30
+        },
+        {
+          "pointId": "caption",
+          "batchId": "HRB-002",
+          "artifactSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/02_一件修正版.mp4",
+          "startFrame": 456,
+          "endFrameExclusive": 593,
+          "fps": 30
+        },
+        {
+          "pointId": "panel",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 1719,
+          "endFrameExclusive": 1818,
+          "fps": 30
+        }
+      ],
+      "requirement": "背景板に対して字幕が綺麗にセンタリングされることを必須品質条件にする。",
+      "featureAdoption": "ADOPT",
+      "implementationStatus": "NOT_IMPLEMENTED",
+      "verificationStatus": "NOT_PERFORMED",
+      "reReview": "修正後のセンタリングが分かる短いポイントで確認。元の視聴対象を上書きせず別版へ束縛する。",
+      "nextTask": "../../task-012-Panel表示品質と動きの滑らかさ改善.md"
+    },
+    {
+      "changeRequestId": "HRC-002",
+      "target": "Panelの画像背景バリエーション",
+      "reviewIds": [
+        "HR-001",
+        "HR-007",
+        "HR-010"
+      ],
+      "sourceResponseIds": [
+        "HRS-20260920-001-P2",
+        "HRS-20260920-001-P4"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "caption",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 444,
+          "endFrameExclusive": 581,
+          "fps": 30
+        },
+        {
+          "pointId": "caption",
+          "batchId": "HRB-002",
+          "artifactSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/02_一件修正版.mp4",
+          "startFrame": 456,
+          "endFrameExclusive": 593,
+          "fps": 30
+        },
+        {
+          "pointId": "panel",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 1719,
+          "endFrameExclusive": 1818,
+          "fps": 30
+        }
+      ],
+      "requirement": "色違いだけでなく、画像・テクスチャ・意匠そのものが異なる背景の種類を用意する。",
+      "featureAdoption": "ADOPT",
+      "implementationStatus": "NOT_IMPLEMENTED",
+      "verificationStatus": "NOT_PERFORMED",
+      "reReview": "背景の種類の差を判断できる代表ポイントで確認。素材取得・費用等の権限はこの記録から増やさない。",
+      "nextTask": "../../task-012-Panel表示品質と動きの滑らかさ改善.md"
+    },
+    {
+      "changeRequestId": "HRC-003",
+      "target": "拡大縮小を含む動きの滑らかさ",
+      "reviewIds": [
+        "HR-002",
+        "HR-003",
+        "HR-004"
+      ],
+      "sourceResponseIds": [
+        "HRS-20260920-001-P3"
+      ],
+      "reviewedArtifacts": [
+        {
+          "pointId": "motion",
+          "batchId": "HRB-001",
+          "artifactSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+          "artifactPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-20260920-v001/01_自動演出版.mp4",
+          "startFrame": 0,
+          "endFrameExclusive": 170,
+          "fps": 30
+        }
+      ],
+      "requirement": "機能の強さや目立ち方を弱めず、カクカク見える拡大縮小を含む動きを自然に滑らかにする。",
+      "featureAdoption": "ADOPT",
+      "humanEvaluation": "とても良い。機能自体は使用可、評価はかなり良い。",
+      "causeAttribution": "NOT_YET_IDENTIFIED",
+      "diagnosisScope": [
+        "Bounce",
+        "Shake",
+        "Pulse"
+      ],
+      "presetSpecificDefectsConfirmed": [],
+      "implementationExamplesOnly": [
+        "補間",
+        "中間状態数",
+        "easing / motion curve",
+        "frameごとの変化量"
+      ],
+      "examplesAreChosenImplementation": false,
+      "implementationStatus": "NOT_IMPLEMENTED",
+      "verificationStatus": "NOT_PERFORMED",
+      "reReview": "原因と修正対象を実装側で特定した後、変更した動きの滑らかさを短いポイントで確認。未変更機能の使用許可を取り直す理由にはしない。",
+      "nextTask": "../../task-012-Panel表示品質と動きの滑らかさ改善.md"
+    }
+  ],
+  "reviewIdOutcomes": [
+    {
+      "reviewId": "HR-001",
+      "featureDecision": "ADOPT",
+      "reviewStatus": "HUMAN_REVIEWED_CHANGE_REQUIRED",
+      "decisionRefs": [
+        "HRD-002"
+      ],
+      "changeRequestRefs": [
+        "HRC-001",
+        "HRC-002"
+      ],
+      "implementationStatus": "NOT_IMPLEMENTED",
+      "reflectionVerified": false,
+      "closed": false
+    },
+    {
+      "reviewId": "HR-002",
+      "featureDecision": "ADOPT",
+      "reviewStatus": "HUMAN_REVIEWED_SHARED_CHANGE_PENDING",
+      "decisionRefs": [
+        "HRD-004"
+      ],
+      "changeRequestRefs": [
+        "HRC-003"
+      ],
+      "causeAttribution": "NOT_YET_IDENTIFIED",
+      "presetSpecificDefectConfirmed": false,
+      "implementationStatus": "NOT_IMPLEMENTED",
+      "reflectionVerified": false,
+      "closed": false
+    },
+    {
+      "reviewId": "HR-003",
+      "featureDecision": "ADOPT",
+      "reviewStatus": "HUMAN_REVIEWED_SHARED_CHANGE_PENDING",
+      "decisionRefs": [
+        "HRD-004"
+      ],
+      "changeRequestRefs": [
+        "HRC-003"
+      ],
+      "causeAttribution": "NOT_YET_IDENTIFIED",
+      "presetSpecificDefectConfirmed": false,
+      "implementationStatus": "NOT_IMPLEMENTED",
+      "reflectionVerified": false,
+      "closed": false
+    },
+    {
+      "reviewId": "HR-004",
+      "featureDecision": "ADOPT",
+      "reviewStatus": "HUMAN_REVIEWED_SHARED_CHANGE_PENDING",
+      "decisionRefs": [
+        "HRD-004"
+      ],
+      "changeRequestRefs": [
+        "HRC-003"
+      ],
+      "causeAttribution": "NOT_YET_IDENTIFIED",
+      "presetSpecificDefectConfirmed": false,
+      "implementationStatus": "NOT_IMPLEMENTED",
+      "reflectionVerified": false,
+      "closed": false
+    },
+    {
+      "reviewId": "HR-005",
+      "featureDecision": "ADOPT",
+      "reviewStatus": "HUMAN_REVIEWED",
+      "decisionRefs": [
+        "HRD-003"
+      ],
+      "changeRequestRefs": [],
+      "implementationStatus": "NO_CHANGE_REQUESTED",
+      "reflectionVerified": "今回の保存版のPOINT2フェードを本人が良いと評価。新実装の検証を意味しない。"
+    },
+    {
+      "reviewId": "HR-006",
+      "featureDecision": null,
+      "reviewStatus": "HUMAN_REVIEW_PENDING",
+      "reason": "全編の使い分け・テンポ・単調さ・一本としての印象は今回のポイント回答から認定しない。"
+    },
+    {
+      "reviewId": "HR-007",
+      "featureDecision": null,
+      "reviewStatus": "PARTIALLY_HUMAN_REVIEWED_CHANGE_REQUIRED",
+      "decisionRefs": [
+        "HRD-001",
+        "HRD-002",
+        "HRD-003"
+      ],
+      "changeRequestRefs": [
+        "HRC-001",
+        "HRC-002"
+      ],
+      "scope": "POINT1の局所接続に違和感なし。POINT2はPanel機能使用可・表示修正必要、フェード使用可。",
+      "notAppliedTo": "修正後Digest全編がそのまま使えるという認定",
+      "implementationStatus": "NOT_IMPLEMENTED",
+      "closed": false
+    },
+    {
+      "reviewId": "HR-008",
+      "featureDecision": null,
+      "reviewStatus": "BLOCKED_BY_ENVIRONMENT",
+      "reason": "実UI未実施。"
+    },
+    {
+      "reviewId": "HR-009",
+      "featureDecision": null,
+      "reviewStatus": "HUMAN_REVIEW_PENDING",
+      "reason": "POINT2の採用・修正はPanelとフェードへの明示回答。通常字幕基準への判断は受領していない。"
+    },
+    {
+      "reviewId": "HR-010",
+      "featureDecision": null,
+      "reviewStatus": "PARTIALLY_HUMAN_REVIEWED_CHANGE_REQUIRED",
+      "decisionRefs": [
+        "HRD-001",
+        "HRD-002"
+      ],
+      "changeRequestRefs": [
+        "HRC-001",
+        "HRC-002"
+      ],
+      "scope": "接続の局所変更には違和感なし。Panel機能は使用可だが表示品質修正が必要。",
+      "notAppliedTo": "全編の統一感の認定",
+      "implementationStatus": "NOT_IMPLEMENTED",
+      "closed": false
+    },
+    {
+      "reviewId": "HR-011",
+      "featureDecision": null,
+      "reviewStatus": "WAITING_FOR_UI_ACCEPTANCE",
+      "reason": "実UIの待ち時間体感は未実施。"
+    }
+  ],
+  "policyActions": [
+    {
+      "action": "Point Reviewを細部の標準、Whole Video Reviewを必要時の全体評価へ限定。",
+      "status": "DOCUMENTED"
+    },
+    {
+      "action": "一つの問いから採用・修正できる対象を明確化し、混在POINTの回答を機械的に一括配布しない。",
+      "status": "DOCUMENTED"
+    },
+    {
+      "action": "機能使用可、修正要求、実装完了、反映確認を別に保存。理由の説明を必須にしない。",
+      "status": "DOCUMENTED"
+    },
+    {
+      "action": "固定HTMLテンプレート＋review dataの標準化TODOを維持。",
+      "task": "../../task-011-人間レビュー用HTMLフォーマットの標準化.md",
+      "status": "TODO_NOT_IMPLEMENTED"
+    }
+  ]
+}

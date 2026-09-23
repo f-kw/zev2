@@ -1,0 +1,50 @@
+TAP version 13
+# Subtest: native preparation binds the original Normal file and draws diagnostic Normal on the projected clock
+ok 1 - native preparation binds the original Normal file and draws diagnostic Normal on the projected clock
+  ---
+  duration_ms: 43.886542
+  ...
+# Subtest: native recipe reconstructs projected Pulse and motion samples from durable proof
+ok 2 - native recipe reconstructs projected Pulse and motion samples from durable proof
+  ---
+  duration_ms: 28.16025
+  ...
+# Subtest: durable native evidence verifies independent original-file and display-plan hashes and rejects clock substitutions
+ok 3 - durable native evidence verifies independent original-file and display-plan hashes and rejects clock substitutions
+  ---
+  duration_ms: 74.50225
+  ...
+# Subtest: renderer rejects fabricated views, old-clock plans, duplicate timelines and missing combined QC before drawing
+ok 4 - renderer rejects fabricated views, old-clock plans, duplicate timelines and missing combined QC before drawing
+  ---
+  duration_ms: 9.787334
+  ...
+# Subtest: renderer rejects changed original files and a background from another projection before media children
+ok 5 - renderer rejects changed original files and a background from another projection before media children
+  ---
+  duration_ms: 10.9555
+  ...
+# Subtest: compositor maps independent AAC after every finite PNG and overlays only on completed background
+ok 6 - compositor maps independent AAC after every finite PNG and overlays only on completed background
+  ---
+  duration_ms: 9.627834
+  ...
+# Subtest: exact replay binds independent AAC before/after and repeats the production input mapping
+ok 7 - exact replay binds independent AAC before/after and repeats the production input mapping
+  ---
+  duration_ms: 151.588125
+  ...
+# Subtest: independent AAC mutation during exact replay fails even when output video bytes match
+ok 8 - independent AAC mutation during exact replay fails even when output video bytes match
+  ---
+  duration_ms: 140.794042
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 529.988875

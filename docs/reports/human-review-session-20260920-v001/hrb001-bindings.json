@@ -1,0 +1,646 @@
+{
+  "schemaVersion": "hrb001-human-review-index-v001",
+  "preparedBy": "Codex",
+  "preparation": "保存済み記録から字幕と切替の時刻を抽出。動画はバイト同一性の照合のみ。動画解析・再生成・QC・試験・人間判定は実施していない。",
+  "latestReviewScope": "人間向けはポイントのみ。全件索引は内部記録。局所範囲への判断を全編へ拡張せず、HR006全編は未評価。",
+  "video": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+    "exists": true,
+    "bytes": 75306932,
+    "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+    "frameCount": 4867,
+    "frameRate": 30,
+    "durationSeconds": 162.23333333333332
+  },
+  "sourceRecords": {
+    "readme": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-orchestration-stage3-20260918/README.md",
+      "exists": true,
+      "bytes": 12274,
+      "fileSha256": "cf145cf9c18b0746f48f5abd1f5adadfb4f006e3e2a9ea8cb25be1ab7561137e"
+    },
+    "summary": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/candidate-completion-summary.json",
+      "exists": true,
+      "bytes": 386517,
+      "fileSha256": "d20a64ea90128c37402fccfa54ce79de069498d55ec8ba109ec1b22bda534836"
+    },
+    "projectedPlan": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/scratch/native-qc-preparation/plan.json",
+      "exists": true,
+      "bytes": 208937,
+      "fileSha256": "30df64b2bacf34c5575142078cef63a7601d0021493e2a6518f55d7cf051693f"
+    },
+    "orchestrationInput": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/scratch/native-qc-preparation/orchestration-input.json",
+      "exists": true,
+      "bytes": 975051,
+      "fileSha256": "c63e584c9eda4341ec2483ce900261681753c2d2fdaeee258696dd592b879c3b"
+    },
+    "projection": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/candidate-v003/projection.json",
+      "exists": true,
+      "bytes": 8920,
+      "fileSha256": "0a00ab2eeb68f2799b36b9cd224193f0aab94e802490d558875552d0976051a3"
+    },
+    "video": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+      "exists": true,
+      "bytes": 75306932,
+      "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225"
+    },
+    "captionAuto": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/captionAuto.json",
+      "bytes": 43149,
+      "fileSha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1",
+      "exists": true,
+      "verifiedFileSha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1"
+    },
+    "connectionAuto": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/connectionAuto.json",
+      "bytes": 2159,
+      "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7",
+      "exists": true,
+      "verifiedFileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7"
+    },
+    "selectionRecord": {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/selectionRecord.json",
+      "bytes": 477587,
+      "fileSha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c",
+      "exists": true,
+      "verifiedFileSha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c"
+    }
+  },
+  "bindings": {
+    "projectionSha256": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+    "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+    "expectedViewSha256": "95e967d566d64c12f645aa1ff89ddaa62d6a2a0f9c8e284bbb62985913d0855a",
+    "evidenceSha256": "278cba30303e30166852ae992219d030d72f8d4e3eeb24760ca09656945a00e3",
+    "selectionRecordSha256": "d8ffc73a96755e908f0e7c2edf81f7d3a2c5e98ea381856c7d826b29a97da087",
+    "selectionVersion": "presentation-orchestration-v001",
+    "judgmentInputSha256": "61ee7fc885cd50fddce924152c77046e2f117452452d70e8e6315d41e397c981",
+    "judgmentReplySha256": "7d1d7bc4e0587fa90c7d9115f5c79cb9d39b4ff7d9750aa32d561f6a0c602629",
+    "captionAutoProposalSha256": "10592bf99efff43b12d4f53195cece6623c94a933dc06a83c9431b254c078c3e",
+    "connectionAutoRecordSha256": "9cd5e0e2caa196b52a1ebf452c7757c6a3b13f206f0594c96c7967b3b7109f10",
+    "fourSavedSha256": {
+      "captionAuto": "42a3e4294aa3d43f3a913b0bedc1e93a6b5667dc205e5765d67856f6c8b9afe9",
+      "captionOverrides": "6f1afb5dd422cd00853717fc11219d2aa281ebb1d0ca619e1155a7fae2ba2479",
+      "connectionAuto": "6c1f7538539c3a0a8d7a956095ac6a97a3a602e880e27108b88b699afd9a4ba5",
+      "connectionOverrides": "ca89725d6360c42525ca1d8e2ce61d59d4deb9e480940e8434349ca47e8d2e3f"
+    },
+    "renderingRules": {
+      "version": "auto-presentation-rules-v007",
+      "contentSha256": "127db1dff0b4d2bbeb1cd07d782126147657e1871380680cec243da5dc148f07"
+    },
+    "embeddedSourcePlan": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/normal-plan.json",
+      "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e",
+      "embeddedBytesSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e",
+      "bindingVerified": true
+    }
+  },
+  "timeConvention": "30 fpsの表示frameを秒へ変換。終端はexclusive。人間向け時刻はミリ秒へ四捨五入し、正確な整数frameを内部に保存。通常字幕は代表3件。",
+  "internalIndex": [
+    {
+      "indexKey": "panel-01",
+      "expression": "Panel",
+      "text": "なんかグロいやつに捕まってる",
+      "timeLabel": "字幕 00:57.833–01:00.200",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "videoInterval": {
+        "startFrame": 1735,
+        "endFrameExclusive": 1806,
+        "startSeconds": 57.833333333333336,
+        "endSecondsExclusive": 60.2,
+        "timeLabel": "00:57.833–01:00.200"
+      },
+      "motionInterval": null,
+      "sourcePlanInterval": {
+        "startFrame": 1723,
+        "endFrameExclusive": 1794,
+        "startSeconds": 57.43333333333333,
+        "endSecondsExclusive": 59.8,
+        "timeLabel": "00:57.433–00:59.800"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+        "role": "Panel accent",
+        "presentation": "provisional-panel",
+        "scope": "whole-caption"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "panel-02",
+      "expression": "Panel",
+      "text": "カメラワークと今回時間差怖かった",
+      "timeLabel": "字幕 01:59.567–02:03.100",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+      "videoInterval": {
+        "startFrame": 3587,
+        "endFrameExclusive": 3693,
+        "startSeconds": 119.56666666666666,
+        "endSecondsExclusive": 123.1,
+        "timeLabel": "01:59.567–02:03.100"
+      },
+      "motionInterval": null,
+      "sourcePlanInterval": {
+        "startFrame": 3563,
+        "endFrameExclusive": 3669,
+        "startSeconds": 118.76666666666667,
+        "endSecondsExclusive": 122.3,
+        "timeLabel": "01:58.767–02:02.300"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+        "role": "Panel accent",
+        "presentation": "provisional-panel",
+        "scope": "whole-caption"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "panel-03",
+      "expression": "Panel",
+      "text": "今年一でしたわ今年一",
+      "timeLabel": "字幕 02:32.933–02:36.833",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+      "videoInterval": {
+        "startFrame": 4588,
+        "endFrameExclusive": 4705,
+        "startSeconds": 152.93333333333334,
+        "endSecondsExclusive": 156.83333333333334,
+        "timeLabel": "02:32.933–02:36.833"
+      },
+      "motionInterval": null,
+      "sourcePlanInterval": {
+        "startFrame": 4552,
+        "endFrameExclusive": 4669,
+        "startSeconds": 151.73333333333332,
+        "endSecondsExclusive": 155.63333333333333,
+        "timeLabel": "02:31.733–02:35.633"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+        "role": "Panel accent",
+        "presentation": "provisional-panel",
+        "scope": "whole-caption"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "pulse-01",
+      "expression": "Pulse",
+      "text": "もうリカちゃんやめてー!",
+      "timeLabel": "動作 00:03.800–00:04.133（字幕 00:02.367–00:05.133）",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "videoInterval": {
+        "startFrame": 71,
+        "endFrameExclusive": 154,
+        "startSeconds": 2.3666666666666667,
+        "endSecondsExclusive": 5.133333333333334,
+        "timeLabel": "00:02.367–00:05.133"
+      },
+      "motionInterval": {
+        "startFrame": 114,
+        "endFrameExclusive": 124,
+        "startSeconds": 3.8,
+        "endSecondsExclusive": 4.133333333333334,
+        "timeLabel": "00:03.800–00:04.133"
+      },
+      "sourcePlanInterval": {
+        "startFrame": 71,
+        "endFrameExclusive": 154,
+        "startSeconds": 2.3666666666666667,
+        "endSecondsExclusive": 5.133333333333334,
+        "timeLabel": "00:02.367–00:05.133"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+        "role": "Pulse accent",
+        "presentation": "provisional-pulse",
+        "scope": "whole-caption",
+        "anchorPeakId": "audio-peak-000020"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "pulse-02",
+      "expression": "Pulse",
+      "text": "もう勘弁してーよ",
+      "timeLabel": "動作 00:08.500–00:08.833（字幕 00:06.567–00:09.400）",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "videoInterval": {
+        "startFrame": 197,
+        "endFrameExclusive": 282,
+        "startSeconds": 6.566666666666666,
+        "endSecondsExclusive": 9.4,
+        "timeLabel": "00:06.567–00:09.400"
+      },
+      "motionInterval": {
+        "startFrame": 255,
+        "endFrameExclusive": 265,
+        "startSeconds": 8.5,
+        "endSecondsExclusive": 8.833333333333334,
+        "timeLabel": "00:08.500–00:08.833"
+      },
+      "sourcePlanInterval": {
+        "startFrame": 197,
+        "endFrameExclusive": 282,
+        "startSeconds": 6.566666666666666,
+        "endSecondsExclusive": 9.4,
+        "timeLabel": "00:06.567–00:09.400"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+        "role": "Pulse accent",
+        "presentation": "provisional-pulse",
+        "scope": "whole-caption",
+        "anchorPeakId": "audio-peak-000047"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "pulse-03",
+      "expression": "Pulse",
+      "text": "この覗き方やめろ!",
+      "timeLabel": "動作 00:10.633–00:10.967（字幕 00:09.400–00:11.333）",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "videoInterval": {
+        "startFrame": 282,
+        "endFrameExclusive": 340,
+        "startSeconds": 9.4,
+        "endSecondsExclusive": 11.333333333333334,
+        "timeLabel": "00:09.400–00:11.333"
+      },
+      "motionInterval": {
+        "startFrame": 319,
+        "endFrameExclusive": 329,
+        "startSeconds": 10.633333333333333,
+        "endSecondsExclusive": 10.966666666666667,
+        "timeLabel": "00:10.633–00:10.967"
+      },
+      "sourcePlanInterval": {
+        "startFrame": 282,
+        "endFrameExclusive": 340,
+        "startSeconds": 9.4,
+        "endSecondsExclusive": 11.333333333333334,
+        "timeLabel": "00:09.400–00:11.333"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+        "role": "Pulse accent",
+        "presentation": "provisional-pulse",
+        "scope": "whole-caption",
+        "anchorPeakId": "audio-peak-000059"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "bounce-01",
+      "expression": "Bounce",
+      "text": "これもういるやん",
+      "timeLabel": "動作 00:00.433–00:00.700（字幕 00:00.433–00:01.233）",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "videoInterval": {
+        "startFrame": 13,
+        "endFrameExclusive": 37,
+        "startSeconds": 0.43333333333333335,
+        "endSecondsExclusive": 1.2333333333333334,
+        "timeLabel": "00:00.433–00:01.233"
+      },
+      "motionInterval": {
+        "startFrame": 13,
+        "endFrameExclusive": 21,
+        "startSeconds": 0.43333333333333335,
+        "endSecondsExclusive": 0.7,
+        "timeLabel": "00:00.433–00:00.700"
+      },
+      "sourcePlanInterval": {
+        "startFrame": 13,
+        "endFrameExclusive": 37,
+        "startSeconds": 0.43333333333333335,
+        "endSecondsExclusive": 1.2333333333333334,
+        "timeLabel": "00:00.433–00:01.233"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+        "role": "Bounce accent",
+        "presentation": "provisional-bounce",
+        "scope": "whole-caption"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "bounce-02",
+      "expression": "Bounce",
+      "text": "どこ?",
+      "timeLabel": "動作 01:29.500–01:29.767（字幕 01:29.500–01:30.667）",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "videoInterval": {
+        "startFrame": 2685,
+        "endFrameExclusive": 2720,
+        "startSeconds": 89.5,
+        "endSecondsExclusive": 90.66666666666667,
+        "timeLabel": "01:29.500–01:30.667"
+      },
+      "motionInterval": {
+        "startFrame": 2685,
+        "endFrameExclusive": 2693,
+        "startSeconds": 89.5,
+        "endSecondsExclusive": 89.76666666666667,
+        "timeLabel": "01:29.500–01:29.767"
+      },
+      "sourcePlanInterval": {
+        "startFrame": 2673,
+        "endFrameExclusive": 2708,
+        "startSeconds": 89.1,
+        "endSecondsExclusive": 90.26666666666667,
+        "timeLabel": "01:29.100–01:30.267"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+        "role": "Bounce accent",
+        "presentation": "provisional-bounce",
+        "scope": "whole-caption"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "shake-01",
+      "expression": "Shake",
+      "text": "いるやんいるやん",
+      "timeLabel": "動作 00:01.233–00:01.633（字幕 00:01.233–00:02.367）",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "videoInterval": {
+        "startFrame": 37,
+        "endFrameExclusive": 71,
+        "startSeconds": 1.2333333333333334,
+        "endSecondsExclusive": 2.3666666666666667,
+        "timeLabel": "00:01.233–00:02.367"
+      },
+      "motionInterval": {
+        "startFrame": 37,
+        "endFrameExclusive": 49,
+        "startSeconds": 1.2333333333333334,
+        "endSecondsExclusive": 1.6333333333333333,
+        "timeLabel": "00:01.233–00:01.633"
+      },
+      "sourcePlanInterval": {
+        "startFrame": 37,
+        "endFrameExclusive": 71,
+        "startSeconds": 1.2333333333333334,
+        "endSecondsExclusive": 2.3666666666666667,
+        "timeLabel": "00:01.233–00:02.367"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+        "role": "Shake accent",
+        "presentation": "provisional-shake",
+        "scope": "whole-caption"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "shake-02",
+      "expression": "Shake",
+      "text": "え、もうやだー",
+      "timeLabel": "動作 00:11.333–00:11.733（字幕 00:11.333–00:12.433）",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "videoInterval": {
+        "startFrame": 340,
+        "endFrameExclusive": 373,
+        "startSeconds": 11.333333333333334,
+        "endSecondsExclusive": 12.433333333333334,
+        "timeLabel": "00:11.333–00:12.433"
+      },
+      "motionInterval": {
+        "startFrame": 340,
+        "endFrameExclusive": 352,
+        "startSeconds": 11.333333333333334,
+        "endSecondsExclusive": 11.733333333333333,
+        "timeLabel": "00:11.333–00:11.733"
+      },
+      "sourcePlanInterval": {
+        "startFrame": 340,
+        "endFrameExclusive": 373,
+        "startSeconds": 11.333333333333334,
+        "endSecondsExclusive": 12.433333333333334,
+        "timeLabel": "00:11.333–00:12.433"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+        "role": "Shake accent",
+        "presentation": "provisional-shake",
+        "scope": "whole-caption"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "shake-03",
+      "expression": "Shake",
+      "text": "おい、急に速くなった!",
+      "timeLabel": "動作 00:25.600–00:26.000（字幕 00:25.600–00:30.967）",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "videoInterval": {
+        "startFrame": 768,
+        "endFrameExclusive": 929,
+        "startSeconds": 25.6,
+        "endSecondsExclusive": 30.966666666666665,
+        "timeLabel": "00:25.600–00:30.967"
+      },
+      "motionInterval": {
+        "startFrame": 768,
+        "endFrameExclusive": 780,
+        "startSeconds": 25.6,
+        "endSecondsExclusive": 26,
+        "timeLabel": "00:25.600–00:26.000"
+      },
+      "sourcePlanInterval": {
+        "startFrame": 756,
+        "endFrameExclusive": 917,
+        "startSeconds": 25.2,
+        "endSecondsExclusive": 30.566666666666666,
+        "timeLabel": "00:25.200–00:30.567"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+        "role": "Shake accent",
+        "presentation": "provisional-shake",
+        "scope": "whole-caption"
+      },
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "通常字幕-01",
+      "expression": "通常字幕",
+      "text": "逃げるやつ?",
+      "timeLabel": "字幕 00:15.800–00:18.533",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "videoInterval": {
+        "startFrame": 474,
+        "endFrameExclusive": 556,
+        "startSeconds": 15.8,
+        "endSecondsExclusive": 18.533333333333335,
+        "timeLabel": "00:15.800–00:18.533"
+      },
+      "motionInterval": null,
+      "sourcePlanInterval": {
+        "startFrame": 462,
+        "endFrameExclusive": 544,
+        "startSeconds": 15.4,
+        "endSecondsExclusive": 18.133333333333333,
+        "timeLabel": "00:15.400–00:18.133"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": null,
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "通常字幕-02",
+      "expression": "通常字幕",
+      "text": "まぁでも怖かったね",
+      "timeLabel": "字幕 01:40.700–01:45.167",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+      "videoInterval": {
+        "startFrame": 3021,
+        "endFrameExclusive": 3155,
+        "startSeconds": 100.7,
+        "endSecondsExclusive": 105.16666666666667,
+        "timeLabel": "01:40.700–01:45.167"
+      },
+      "motionInterval": null,
+      "sourcePlanInterval": {
+        "startFrame": 2997,
+        "endFrameExclusive": 3131,
+        "startSeconds": 99.9,
+        "endSecondsExclusive": 104.36666666666666,
+        "timeLabel": "01:39.900–01:44.367"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": null,
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "通常字幕-03",
+      "expression": "通常字幕",
+      "text": "ホラーゲーやってるとさなんか分かってくるじゃん",
+      "timeLabel": "字幕 02:06.600–02:10.167",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+      "videoInterval": {
+        "startFrame": 3798,
+        "endFrameExclusive": 3905,
+        "startSeconds": 126.6,
+        "endSecondsExclusive": 130.16666666666666,
+        "timeLabel": "02:06.600–02:10.167"
+      },
+      "motionInterval": null,
+      "sourcePlanInterval": {
+        "startFrame": 3774,
+        "endFrameExclusive": 3881,
+        "startSeconds": 125.8,
+        "endSecondsExclusive": 129.36666666666667,
+        "timeLabel": "02:05.800–02:09.367"
+      },
+      "projectedPlanRef": "sourceRecords.projectedPlan",
+      "automaticEffect": null,
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "soft-01",
+      "expression": "Soft",
+      "text": "覗き方への抗議から逃走場面へ",
+      "timeLabel": "仕切りの黒区間 00:15.400–00:15.800",
+      "videoInterval": {
+        "startFrame": 462,
+        "endFrameExclusive": 474,
+        "startSeconds": 15.4,
+        "endSecondsExclusive": 15.8,
+        "timeLabel": "00:15.400–00:15.800"
+      },
+      "connectionId": "connection-02",
+      "humanVerdict": "not-evaluated"
+    },
+    {
+      "indexKey": "soft-02",
+      "expression": "Soft",
+      "text": "怖がらせ方の説明から体験の回収・最終評価へ",
+      "timeLabel": "仕切りの黒区間 02:26.867–02:27.267",
+      "videoInterval": {
+        "startFrame": 4406,
+        "endFrameExclusive": 4418,
+        "startSeconds": 146.86666666666667,
+        "endSecondsExclusive": 147.26666666666668,
+        "timeLabel": "02:26.867–02:27.267"
+      },
+      "connectionId": "connection-06",
+      "humanVerdict": "not-evaluated"
+    }
+  ],
+  "humanPoints": [
+    {
+      "indexKey": "bounce-01",
+      "expression": "Bounce",
+      "text": "これもういるやん",
+      "timeLabel": "動作 00:00.433–00:00.700（字幕 00:00.433–00:01.233）"
+    },
+    {
+      "indexKey": "shake-01",
+      "expression": "Shake",
+      "text": "いるやんいるやん",
+      "timeLabel": "動作 00:01.233–00:01.633（字幕 00:01.233–00:02.367）"
+    },
+    {
+      "indexKey": "pulse-01",
+      "expression": "Pulse",
+      "text": "もうリカちゃんやめてー!",
+      "timeLabel": "動作 00:03.800–00:04.133（字幕 00:02.367–00:05.133）"
+    },
+    {
+      "indexKey": "soft-01",
+      "expression": "Soft",
+      "text": "覗き方への抗議から逃走場面へ",
+      "timeLabel": "仕切りの黒区間 00:15.400–00:15.800"
+    },
+    {
+      "indexKey": "通常字幕-01",
+      "expression": "通常字幕",
+      "text": "逃げるやつ?",
+      "timeLabel": "字幕 00:15.800–00:18.533"
+    },
+    {
+      "indexKey": "panel-01",
+      "expression": "Panel",
+      "text": "なんかグロいやつに捕まってる",
+      "timeLabel": "字幕 00:57.833–01:00.200"
+    }
+  ],
+  "renderImplementationAtCreation": [
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_orchestration_projection_v001.mjs",
+      "bytes": 19232,
+      "fileSha256": "350272ca2a0abc0082c69b302d3cee626c92aab51770aaf400e63a2526ae9bef"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 129087,
+      "fileSha256": "3f7f12b08dd1b4b9775954ec8424eb37cf47e976dad3ae817302b360e33a9151"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "bytes": 27769,
+      "fileSha256": "ae053ad3ae1b602669a0bc22b6c0ecd05c720d1e83f70441d528bfc0fb2bd1f0"
+    }
+  ]
+}

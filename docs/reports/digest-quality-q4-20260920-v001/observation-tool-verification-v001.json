@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "q4-observation-tool-verification-v001",
+  "status": "small-tests-passed-real-candidates-pending-parent-run",
+  "files": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q4-observations.mjs",
+      "bytes": 16127,
+      "sha256": "a4321950c2f9a353d5f8995c77f1c841cf6b06eb541a7d65bcc4823e7f34099d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q4-observations.test.mjs",
+      "bytes": 7185,
+      "sha256": "bd8d2cb933ca100913465029e8fa0148a51702ca948873afa45e968cd666c44c"
+    }
+  ],
+  "testCount": 6,
+  "passing": 6,
+  "testRunRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q4-20260920-v001/observation-tests-v001.json",
+      "bytes": 738,
+      "sha256": "227102089534726bc528bce73018a0f2f1763e9c0b837ec9db10fad380879280"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q4-20260920-v001/observation-tests-v002.json",
+      "bytes": 738,
+      "sha256": "6b5bc35a9e3ab6db5ea7b52845faa8e35d2c73860b44b1e481c4f9c1781fa816"
+    }
+  ],
+  "audit": {
+    "method": "independent-read-only-code-audit",
+    "finding": "Last following sample can be the first decoder-tail sample even though interval aggregates exclude tail.",
+    "resolution": "Preserved common measurer. Explicitly labeled the last following sample scope and narrowed the exclusion statement to interval RMS, peak and counts.",
+    "closed": true
+  },
+  "existingRuntimeFilesChanged": false,
+  "actualCandidatesDecoded": 0,
+  "newVideoOrImageViewing": false,
+  "humanQualityApproved": false,
+  "gitDiffCheckExitCode": 0
+}

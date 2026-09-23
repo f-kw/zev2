@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "q5-retention-priority-boundary-evidence-v002",
+  "createdAt": "2026-09-20T15:54:39.535Z",
+  "candidateId": "q5-1-candidate-001",
+  "status": "one-unadopted-proposal-fixed-before-render",
+  "policyRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/instruction-received-v002.md",
+    "bytes": 5075,
+    "fileSha256": "94413e1ebcd1ad4f24625d260b3b0d3daf57a286e29a4def94ea6056b1b6e72a"
+  },
+  "originalAssessmentRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/boundary-assessment-v001.json",
+    "bytes": 24936,
+    "fileSha256": "8cffded0e2076b73c869113552b0ffb27990d3e9b08fa15c44168e05123ca1c1"
+  },
+  "verifiedSavedObservationRefs": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/caption-timing-resolution-v002.json",
+      "bytes": 1401130,
+      "fileSha256": "288dd18230b1bb0e59cd6ff2b1ec47bf86dc916026f8e9c77cb219ed275847e1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/acoustic-observation-chunk-0142-v001.json",
+      "bytes": 12100,
+      "fileSha256": "0a39318852fc6acf6d02fcec201a308ee13b941b20443850b7c5d57034a34998"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/acoustics/audio-preparation.json",
+      "bytes": 35542,
+      "fileSha256": "48c9f33638a22a69151b238a84cfc3e1d846bff5a650b9fd1da192e9a68476fb"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/candidate-run-v001/input.json",
+      "bytes": 843521,
+      "fileSha256": "d69a63d2c30aee19bae079eb63651438edf248b2f1a57ee4b524b2442b0ea958"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/boundary-observation-v001/pcm-measurement-v001.json",
+      "bytes": 118640,
+      "fileSha256": "9ad1e20ad20e2a6c21f702937792b42603c92694e1bb3eea1269900fe4c8533b"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/boundary-observation-v001/source-400-to-411s.f32le",
+      "bytes": 4224000,
+      "fileSha256": "97b16d4628f7fae399c973743fc0b06df1441fc7165cb416c9420f14a09f6657"
+    }
+  ],
+  "originalTargetRange": {
+    "startFrame": 12109,
+    "endFrameExclusive": 12228
+  },
+  "hiddenCaptionId": "digest-v1-phase2-20260913-v001-bridge-caption-000121",
+  "mapping": {
+    "sourceStartFrame30": 124267,
+    "outputStartFrame": 8505,
+    "sourceToOriginalFrameOffset": 115762,
+    "fps": 30,
+    "sourceChunkStartMs": 4260000
+  },
+  "observationOrder": [
+    "saved-fixed-text-alignment",
+    "saved-completed-media-asr"
+  ],
+  "observations": [
+    {
+      "name": "previous-retained-utterance-end",
+      "clock": "original-c-all-frame",
+      "denominator": 1000,
+      "frameNumerators": [
+        12108800,
+        12109200
+      ]
+    },
+    {
+      "name": "following-retained-utterance-start",
+      "clock": "original-c-all-frame",
+      "denominator": 1000,
+      "frameNumerators": [
+        12227600,
+        12365400
+      ]
+    },
+    {
+      "name": "retained-target-prefix-this-end",
+      "clock": "original-c-all-frame",
+      "denominator": 1000,
+      "frameNumerators": [
+        12152000,
+        12152400
+      ]
+    },
+    {
+      "name": "retained-target-suffix-this-start",
+      "clock": "original-c-all-frame",
+      "denominator": 1000,
+      "frameNumerators": [
+        12212600,
+        12213000
+      ]
+    }
+  ],
+  "arithmeticRule": "Exact integer milliseconds × 30, denominator 1000. For fixed source observations subtract source-to-original offset × 1000. Later ASR already uses original completed-media time. Use all two observations without probability weighting; ceil maximum ends, floor minimum starts.",
+  "userSpecifiedInitialRetainedFramesEachSide": 6,
+  "initialMediaOmission": {
+    "startFrame": 12115,
+    "endFrameExclusive": 12222
+  },
+  "neighborAdjustedMediaOmission": {
+    "startFrame": 12115,
+    "endFrameExclusive": 12222
+  },
+  "wordGroupingAdjustment": {
+    "left": "Keep この through the later of both saved word endings, rounded toward retention.",
+    "right": "Keep これ from the earlier of both saved word starts, rounded toward retention.",
+    "qualityClaim": "No exact phoneme or naturalness guarantee. Inward frame rounding can retain adjacent target phoneme fragments."
+  },
+  "actualMediaOmission": {
+    "startFrame": 12153,
+    "endFrameExclusive": 12212
+  },
+  "retainedTargetMediaRanges": [
+    {
+      "startFrame": 12109,
+      "endFrameExclusive": 12153
+    },
+    {
+      "startFrame": 12212,
+      "endFrameExclusive": 12228
+    }
+  ],
+  "retainedFrameCounts": {
+    "left": 44,
+    "right": 16
+  },
+  "removedFrameCount": 59,
+  "playback": {
+    "sampleRate": 48000,
+    "channels": 2,
+    "removedSampleCount": 94400,
+    "mediaOmission": {
+      "startSample": 19444800,
+      "endSampleExclusive": 19539200
+    }
+  },
+  "observation": {
+    "sampleRate": 16000,
+    "rule": "not a playback sample clock; observation uncertainty is not certified by six-frame editorial margin"
+  },
+  "comparisonBeforeRange": {
+    "startFrame": 11683,
+    "endFrameExclusive": 12505
+  },
+  "comparisonRangeReason": "Complete retained explanation 117 through complete immediately following caption 122; neither comparison endpoint cuts a caption display interval. Same entrance and exit media for Before and After.",
+  "firstProposalOnly": true,
+  "semanticRejudgment": false,
+  "newAsr": false,
+  "newVideoSemanticObservation": false,
+  "humanQuality": "not-evaluated",
+  "contentEditAdopted": false
+}

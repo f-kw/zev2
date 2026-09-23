@@ -1,0 +1,195 @@
+TAP version 13
+# Subtest: new input keeps Color and Panel as the two Focus expressions with a separate finite background table
+ok 1 - new input keeps Color and Panel as the two Focus expressions with a separate finite background table
+  ---
+  duration_ms: 4.02525
+  ...
+# Subtest: expression assignments and full hashes match the pre-background identity after background expansion
+ok 2 - expression assignments and full hashes match the pre-background identity after background expansion
+  ---
+  duration_ms: 20.158959
+  ...
+# Subtest: Normal, reaction and vocal-energy retain their expression assignment without a Panel background selection
+ok 3 - Normal, reaction and vocal-energy retain their expression assignment without a Panel background selection
+  ---
+  duration_ms: 2.399833
+  ...
+# Subtest: each singleton Panel background is saved as its final finite preset and materialized on the same clock
+ok 4 - each singleton Panel background is saved as its final finite preset and materialized on the same clock
+  ---
+  duration_ms: 10.5
+  ...
+# Subtest: Panel background selection is independent of expression assignment and ignores row or set ordering
+ok 5 - Panel background selection is independent of expression assignment and ignores row or set ordering
+  ---
+  duration_ms: 3.484584
+  ...
+# Subtest: Panel backgrounds cannot become extra Focus expressions or drawing values and must be explicitly allowed
+ok 6 - Panel backgrounds cannot become extra Focus expressions or drawing values and must be explicitly allowed
+  ---
+  duration_ms: 3.472041
+  ...
+# Subtest: inapplicable backgrounds are rejected even when the first stage would select Color
+ok 7 - inapplicable backgrounds are rejected even when the first stage would select Color
+  ---
+  duration_ms: 2.564625
+  ...
+# Subtest: duplicate JSON keys cannot hide an unallowed background before validation
+ok 8 - duplicate JSON keys cannot hide an unallowed background before validation
+  ---
+  duration_ms: 1.192292
+  ...
+# Subtest: reloading and Reset restore the fixed automatic background while preserving other saved axes
+ok 9 - reloading and Reset restore the fixed automatic background while preserving other saved axes
+  ---
+  duration_ms: 23.059791
+  ...
+# Subtest: saved background selections and final choices cannot be changed, including to a managed but unallowed background
+ok 10 - saved background selections and final choices cannot be changed, including to a managed but unallowed background
+  ---
+  duration_ms: 3.992042
+  ...
+# Subtest: v001 input, reply, selection record and evidence are rejected without implicit upgrading
+ok 11 - v001 input, reply, selection record and evidence are rejected without implicit upgrading
+  ---
+  duration_ms: 4.5615
+  ...
+# Subtest: unfinished and unrepresentable rows do not receive a background selection or become Normal
+ok 12 - unfinished and unrepresentable rows do not receive a background selection or become Normal
+  ---
+  duration_ms: 5.337875
+  ...
+# Subtest: the independent background selector rejects unknown, duplicate or arbitrary values without coercion
+ok 13 - the independent background selector rejects unknown, duplicate or arbitrary values without coercion
+  ---
+  duration_ms: 0.829541
+  ...
+# Subtest: explicit technical recompilation binds original bytes, preserves old semantic choices and assigns only Panel backgrounds
+ok 14 - explicit technical recompilation binds original bytes, preserves old semantic choices and assigns only Panel backgrounds
+  ---
+  duration_ms: 24.552875
+  ...
+# Subtest: technical recompilation does not enter the fresh judgment path and its provenance is checked on reload
+ok 15 - technical recompilation does not enter the fresh judgment path and its provenance is checked on reload
+  ---
+  duration_ms: 5.63875
+  ...
+# Subtest: technical recompilation retains old unrepresentable and unresolved decisions without new background choices
+ok 16 - technical recompilation retains old unrepresentable and unresolved decisions without new background choices
+  ---
+  duration_ms: 12.799542
+  ...
+# Subtest: explicit recompilation rejects changed original bytes, record hashes and old selected expressions
+ok 17 - explicit recompilation rejects changed original bytes, record hashes and old selected expressions
+  ---
+  duration_ms: 8.046083
+  ...
+# Subtest: preserve-normal-cut is explicit in the input and refuses separator assignments without changing captions
+ok 18 - preserve-normal-cut is explicit in the input and refuses separator assignments without changing captions
+  ---
+  duration_ms: 4.389333
+  ...
+# Subtest: whole-audio ASR evidence is available outside acoustic candidates and requires unique saved observation IDs
+ok 19 - whole-audio ASR evidence is available outside acoustic candidates and requires unique saved observation IDs
+  ---
+  duration_ms: 1.399709
+  ...
+# Subtest: fresh complete semantic judgment seals four independent saved systems without a prior answer
+ok 20 - fresh complete semantic judgment seals four independent saved systems without a prior answer
+  ---
+  duration_ms: 12.336125
+  ...
+# Subtest: stable hashing ignores allowed-set order, other item judgments and decision row order
+ok 21 - stable hashing ignores allowed-set order, other item judgments and decision row order
+  ---
+  duration_ms: 5.586375
+  ...
+# Subtest: Normal, unresolved and unrepresentable remain separately counted with complete coverage
+ok 22 - Normal, unresolved and unrepresentable remain separately counted with complete coverage
+  ---
+  duration_ms: 4.470291
+  ...
+# Subtest: reject omitted, duplicated, incomplete, foreign or hidden numeric judgment fields before fixation
+ok 23 - reject omitted, duplicated, incomplete, foreign or hidden numeric judgment fields before fixation
+  ---
+  duration_ms: 3.407959
+  ...
+# Subtest: partial Color is exact text and sole preset; physical exclusions and Pulse eligibility are binding
+ok 24 - partial Color is exact text and sole preset; physical exclusions and Pulse eligibility are binding
+  ---
+  duration_ms: 5.670875
+  ...
+# Subtest: caption override affects one caption and preserves automatic records and connection override bytes
+ok 25 - caption override affects one caption and preserves automatic records and connection override bytes
+  ---
+  duration_ms: 7.716042
+  ...
+# Subtest: connection override shifts later captions and measured peak once while fixed captions remain original
+ok 26 - connection override shifts later captions and measured peak once while fixed captions remain original
+  ---
+  duration_ms: 8.124541
+  ...
+# Subtest: 48kHz projection is separate from 16kHz Pulse observations and uses integer insertions
+ok 27 - 48kHz projection is separate from 16kHz Pulse observations and uses integer insertions
+  ---
+  duration_ms: 3.78975
+  ...
+# Subtest: Reset deletes one override, restores fixed auto, preserves the other axis, and repeated Reset is idempotent
+ok 28 - Reset deletes one override, restores fixed auto, preserves the other axis, and repeated Reset is idempotent
+  ---
+  duration_ms: 12.039416
+  ...
+# Subtest: caption and connection changes commute and sequential reloading never accumulates shifts
+ok 29 - caption and connection changes commute and sequential reloading never accumulates shifts
+  ---
+  duration_ms: 19.270959
+  ...
+# Subtest: all dynamic finite captions start on projected display time and return to normal within the original duration
+ok 30 - all dynamic finite captions start on projected display time and return to normal within the original duration
+  ---
+  duration_ms: 8.937125
+  ...
+# Subtest: source replacement, shifted input, saved-auto edits and fabricated views are rejected
+ok 31 - source replacement, shifted input, saved-auto edits and fabricated views are rejected
+  ---
+  duration_ms: 5.098458
+  ...
+# Subtest: same-duration Black to Soft update invalidates stale projection/view; current state reload succeeds
+ok 32 - same-duration Black to Soft update invalidates stale projection/view; current state reload succeeds
+  ---
+  duration_ms: 12.759042
+  ...
+# Subtest: saved rendering proof reconstructs checked sources and rejects tampering even after resealing the outer proof
+ok 33 - saved rendering proof reconstructs checked sources and rejects tampering even after resealing the outer proof
+  ---
+  duration_ms: 9.685292
+  ...
+# Subtest: native QC alternatives retain display time and fixed text geometry, with whole-Color and Panel discriminators
+ok 34 - native QC alternatives retain display time and fixed text geometry, with whole-Color and Panel discriminators
+  ---
+  duration_ms: 3.290625
+  ...
+# Subtest: finite materialization does not accept inherited/extra drawing data or an unbound Pulse peak
+ok 35 - finite materialization does not accept inherited/extra drawing data or an unbound Pulse peak
+  ---
+  duration_ms: 0.629417
+  ...
+# Subtest: fresh semantic reasoning may cite actual ASR observations, while unknown IDs still fail
+ok 36 - fresh semantic reasoning may cite actual ASR observations, while unknown IDs still fail
+  ---
+  duration_ms: 1.956333
+  ...
+# Subtest: AI input retains every native candidate and the measured sample clock cannot be relabeled
+ok 37 - AI input retains every native candidate and the measured sample clock cannot be relabeled
+  ---
+  duration_ms: 0.788916
+  ...
+1..37
+# tests 37
+# suites 0
+# pass 37
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 206.314958

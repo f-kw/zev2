@@ -1,9 +1,17 @@
-import React, { useMemo } from 'react';
+import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { getTelopFontFaceStyles } from '../utils/telop-font';
 import {
   buildTelopTextRenderModel,
   type TelopTextRenderModel
 } from '../../telop/telop-render-model';
+
+export type TelopForegroundSelection = {
+  startLineIndex: number;
+  startUtf16Offset: number;
+  endLineIndex: number;
+  endUtf16Offset: number;
+  fontColor: string;
+};
 
 export type TelopTextProps = {
   text: string;
@@ -21,6 +29,10 @@ export type TelopTextProps = {
   singleLine?: boolean;
   lineAlign?: 'left' | 'center' | 'right';
   renderModel?: TelopTextRenderModel;
+  foregroundSelection?: TelopForegroundSelection;
+  selectionReady?: boolean;
+  onSelectionReady?: () => void;
+  onSelectionError?: (error: Error) => void;
 };
 
 export const TelopText: React.FC<TelopTextProps> = (props) => {
@@ -39,8 +51,13 @@ export const TelopText: React.FC<TelopTextProps> = (props) => {
     maxCharsPerLine,
     singleLine = false,
     lineAlign = 'left',
-    renderModel
+    renderModel,
+    foregroundSelection,
+    selectionReady = false,
+    onSelectionReady,
+    onSelectionError
   } = props;
+  const fillRefs = useRef<(SVGTextElement | null)[]>([]);
 
   const model = useMemo(() => {
     if (renderModel) {
@@ -78,6 +95,56 @@ export const TelopText: React.FC<TelopTextProps> = (props) => {
     lineAlign
   ]);
 
+  useLayoutEffect(() => {
+    if (!selectionReady) return;
+    if (foregroundSelection === undefined) {
+      onSelectionReady?.();
+      return;
+    }
+    let range: Range | null = null;
+    let selection: Selection | null = null;
+    let firstFrame: number | undefined;
+    let secondFrame: number | undefined;
+    try {
+      if (foregroundSelection !== undefined) {
+        const start = fillRefs.current[foregroundSelection.startLineIndex]?.firstChild;
+        const end = fillRefs.current[foregroundSelection.endLineIndex]?.firstChild;
+        if (start?.nodeType !== Node.TEXT_NODE || end?.nodeType !== Node.TEXT_NODE) {
+          throw new Error('foreground selection requires intact fill text nodes');
+        }
+        selection = window.getSelection();
+        if (selection === null) throw new Error('native foreground selection is unavailable');
+        range = document.createRange();
+        range.setStart(start, foregroundSelection.startUtf16Offset);
+        range.setEnd(end, foregroundSelection.endUtf16Offset);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      // The first frame accepts the committed SVG and native Selection; the
+      // next frame observes that paint before the overlay owner releases its
+      // existing Remotion wait. This does not add a render pass or an image.
+      firstFrame = requestAnimationFrame(() => {
+        secondFrame = requestAnimationFrame(() => onSelectionReady?.());
+      });
+    } catch (error) {
+      const failure = error instanceof Error ? error : new Error(String(error));
+      if (onSelectionError) onSelectionError(failure);
+      else throw failure;
+    }
+    return () => {
+      if (firstFrame !== undefined) cancelAnimationFrame(firstFrame);
+      if (secondFrame !== undefined) cancelAnimationFrame(secondFrame);
+      if (range !== null && selection !== null) {
+        for (let index = 0; index < selection.rangeCount; index += 1) {
+          if (selection.getRangeAt(index) === range) {
+            selection.removeRange(range);
+            break;
+          }
+        }
+      }
+    };
+  }, [foregroundSelection, selectionReady, onSelectionReady, onSelectionError, text]);
+
   return (
     <div
       style={{
@@ -89,6 +156,7 @@ export const TelopText: React.FC<TelopTextProps> = (props) => {
     >
       {/* フォント定義 */}
       <style dangerouslySetInnerHTML={{ __html: getTelopFontFaceStyles() }} />
+      <style>{`.zev-telop-fill::selection { color: var(--zev-telop-selection-color); fill: var(--zev-telop-selection-color); background-color: transparent; text-shadow: none; }`}</style>
       {/* SVGテキスト */}
       <svg
         width={model.svgWidth}
@@ -112,6 +180,7 @@ export const TelopText: React.FC<TelopTextProps> = (props) => {
                   strokeWidth={model.glowStrokeWidth}
                   strokeLinejoin="round"
                   dominantBaseline="text-before-edge"
+                  style={{userSelect: 'none'}}
                 >
                   {line.text}
                 </text>
@@ -129,12 +198,16 @@ export const TelopText: React.FC<TelopTextProps> = (props) => {
                   strokeWidth={model.borderStrokeWidth}
                   strokeLinejoin="round"
                   dominantBaseline="text-before-edge"
+                  style={{userSelect: 'none'}}
                 >
                   {line.text}
                 </text>
               )}
               {/* 塗りレイヤー（最前面） */}
               <text
+                ref={(node) => { fillRefs.current[i] = node; }}
+                className="zev-telop-fill"
+                data-telop-fill-line={i}
                 x={line.x}
                 y={line.y}
                 fontFamily={model.cssFontFamily}
@@ -142,6 +215,10 @@ export const TelopText: React.FC<TelopTextProps> = (props) => {
                 fontWeight={model.fontWeight}
                 fill={model.fontColor}
                 dominantBaseline="text-before-edge"
+                style={{
+                  userSelect: 'text',
+                  '--zev-telop-selection-color': foregroundSelection?.fontColor ?? model.fontColor,
+                } as React.CSSProperties}
               >
                 {line.text}
               </text>

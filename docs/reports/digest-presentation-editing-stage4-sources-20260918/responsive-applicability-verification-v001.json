@@ -1,0 +1,299 @@
+{
+  "schemaVersion": "presentation-editing-responsive-applicability-verification-v001",
+  "createdAt": "2026-09-18T09:18:34.251Z",
+  "status": "passed",
+  "purpose": "対象本文・現在の表現・保存状態の取得を、選択した一表現の実書体検査から分離する。保存前の物理判定を維持し、検査中の別変更を上書きしない。",
+  "authority": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/audit-decision-v002.md",
+    "bytes": 12222,
+    "fileSha256": "fe32874480e17d4bfdec06df02f464add19c534ad46c9ac76d5ed82f6970c881"
+  },
+  "sourceReferences": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_state_v001.mjs",
+      "bytes": 29199,
+      "fileSha256": "54cc18aa24d2de4ee3b36b938b7c65e577db093af7f3b698fd543d32b6b29a85"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_applicability_v001.mjs",
+      "bytes": 17691,
+      "fileSha256": "95c85592d5cec84260f39c96a5f68373e7c425b58408b091656da323bf9fcde5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/serve_presentation_editing_v001.mjs",
+      "bytes": 19917,
+      "fileSha256": "92f9df38c10f9bcd8c569eb0a90b792447ef1725cb3d2e11976e5bbc50111067"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_state_v001.test.mjs",
+      "bytes": 31253,
+      "fileSha256": "734ed3d0ea22e62f3b5190132cba6ecbd26606694de508c77a34788fff248395"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/serve_presentation_editing_v001.test.mjs",
+      "bytes": 14668,
+      "fileSha256": "6eb23deff3d4a188b192440eaa44b6d94a87192229e274e9636ea83867b012f0"
+    }
+  ],
+  "behavior": [
+    "対象の基本情報取得では実描画を始めず、字幕候補は未検査として返す。",
+    "個別検査は送信された対象・保存版・Color範囲・ピーク指定そのものを返却結果に束縛する。",
+    "Pulse候補の除外は既存の時刻条件による不成立だけ。物理検査の失敗では実測ピークを消さない。",
+    "既知の配置・時間の不成立、検査処理の失敗、古い観測を区別する。",
+    "実描画中は保存用ロックを保持せず、保存直前に内容の版・保存ファイルの変更履歴・選択条件・描画規則・物理観測を再照合する。",
+    "途中の接続変更が元へResetされていても、古い検査を使った字幕保存を拒否する。",
+    "確認済み結果を画面へ再提示する場合も、現在の保存条件・描画規則・観測を描画せず再照合する。"
+  ],
+  "tests": [
+    {
+      "tests": 22,
+      "passed": 22,
+      "failed": 0,
+      "durationMilliseconds": 126872.527666,
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/responsive-state-jobs-v002.tap",
+        "bytes": 6722,
+        "fileSha256": "cb164f53f504dc57161d91c77aa6c43d55919978985787a1cf3d01684c05d87a"
+      }
+    },
+    {
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "durationMilliseconds": 22677.533459,
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/responsive-service-v002.tap",
+        "bytes": 606,
+        "fileSha256": "3ae3533a95d7958e4e04f9059e22212da7fc1b71e40bf212f7db4bd8f898cf9d"
+      }
+    }
+  ],
+  "clientVerification": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/client-selected-check-verification-v001.json",
+    "bytes": 3024,
+    "fileSha256": "bec734d0b68ca323f56915503d982e9532b7ca1ef7b8e46a5d83d8de89c0055b"
+  },
+  "timing": {
+    "method": "元の自動案から別の編集保存領域を新設。前回と同じ元描画由来109画像を別の管理済み保存先へ同内容複製。基本情報取得、Panel一案の初回検査、保存、未選択の残り8案を順に計測。全編・周辺動画は生成していない。",
+    "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+    "fullEvidence": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-response-timing-v002/response-timing-v002.json",
+      "bytes": 431343,
+      "fileSha256": "ece2c9e5e24ddebe1c313e3a4290c20eb1c271d35951599c6d5566ac08540a47"
+    },
+    "script": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/applicability-response-timing-v002.mjs",
+      "bytes": 8307,
+      "fileSha256": "96782e5ba651039ef9575bedf3398d7743e72ed818448df0edbf0730f9b3b49c"
+    },
+    "log": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/applicability-response-timing-v002.log",
+      "bytes": 3610,
+      "fileSha256": "0f6c41e190d840f54476217d217fd245d2b637b4ff158bd80e3df5e35ad7f425"
+    },
+    "measurements": [
+      {
+        "operation": "target-basic-information",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 62.32720799999993,
+        "nativeWork": {
+          "actualDraws": 0,
+          "bitmapReuses": 0,
+          "physicalStates": 0,
+          "physicalStateReuses": 0
+        },
+        "inspectionStatus": null
+      },
+      {
+        "operation": "selected-Panel-first-check",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 2511.309875,
+        "nativeWork": {
+          "actualDraws": 1,
+          "bitmapReuses": 2,
+          "physicalStates": 1,
+          "physicalStateReuses": 0
+        },
+        "inspectionStatus": "passed"
+      },
+      {
+        "operation": "save-checked-Panel",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 487.81520800000044,
+        "nativeWork": {
+          "actualDraws": 0,
+          "bitmapReuses": 0,
+          "physicalStates": 0,
+          "physicalStateReuses": 0
+        },
+        "inspectionStatus": null
+      },
+      {
+        "operation": "remaining-normal",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 2331.549,
+        "nativeWork": {
+          "actualDraws": 1,
+          "bitmapReuses": 2,
+          "physicalStates": 1,
+          "physicalStateReuses": 0
+        },
+        "inspectionStatus": "passed"
+      },
+      {
+        "operation": "remaining-color",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 4682.414000000001,
+        "nativeWork": {
+          "actualDraws": 3,
+          "bitmapReuses": 0,
+          "physicalStates": 1,
+          "physicalStateReuses": 0
+        },
+        "inspectionStatus": "passed"
+      },
+      {
+        "operation": "remaining-scale",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 4622.030625000001,
+        "nativeWork": {
+          "actualDraws": 3,
+          "bitmapReuses": 0,
+          "physicalStates": 1,
+          "physicalStateReuses": 0
+        },
+        "inspectionStatus": "passed"
+      },
+      {
+        "operation": "remaining-pulse-audio-peak-000093",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 7924.55025,
+        "nativeWork": {
+          "actualDraws": 5,
+          "bitmapReuses": 4,
+          "physicalStates": 3,
+          "physicalStateReuses": 0
+        },
+        "inspectionStatus": "passed"
+      },
+      {
+        "operation": "remaining-pulse-audio-peak-000094",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 750.5152500000004,
+        "nativeWork": {
+          "actualDraws": 0,
+          "bitmapReuses": 0,
+          "physicalStates": 3,
+          "physicalStateReuses": 3
+        },
+        "inspectionStatus": "passed"
+      },
+      {
+        "operation": "remaining-pulse-audio-peak-000100",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 771.4844169999997,
+        "nativeWork": {
+          "actualDraws": 0,
+          "bitmapReuses": 0,
+          "physicalStates": 3,
+          "physicalStateReuses": 3
+        },
+        "inspectionStatus": "passed"
+      },
+      {
+        "operation": "remaining-bounce",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 11756.063791999997,
+        "nativeWork": {
+          "actualDraws": 8,
+          "bitmapReuses": 4,
+          "physicalStates": 4,
+          "physicalStateReuses": 0
+        },
+        "inspectionStatus": "passed"
+      },
+      {
+        "operation": "remaining-shake",
+        "httpStatus": 200,
+        "elapsedMilliseconds": 24188.5795,
+        "nativeWork": {
+          "actualDraws": 18,
+          "bitmapReuses": 0,
+          "physicalStates": 7,
+          "physicalStateReuses": 1
+        },
+        "inspectionStatus": "passed"
+      }
+    ],
+    "allNineChecksHttpMilliseconds": 59538.496709,
+    "allCandidatesWallMilliseconds": 60119.839,
+    "wallScope": "基本情報・保存・検査9回と計測用の観測ファイル読込みを含む。サービス起動・初期在庫複製は含めない。",
+    "nativeWork": {
+      "actualDraws": 39,
+      "bitmapReuses": 12,
+      "physicalStates": 24,
+      "physicalStateReuses": 7
+    },
+    "previousAllCandidatesGet": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/candidate-get-timing-v001.json",
+      "bytes": 22956,
+      "fileSha256": "8cc701e9f2270c62cb617c12824f889e1af43b763567732588beecb0a4cc1e89"
+    },
+    "interpretation": "基本情報は62.327msで返ったが、全9案の検査HTTP合計は59.538秒、Shake一案の初回検査は24.189秒かかった。旧56.729秒の全候補検査を高速化したという主張ではない。"
+  },
+  "cacheProvenance": {
+    "startingPairs": 109,
+    "endingPairs": 120,
+    "relocatedPngMatchesOriginal": 109,
+    "originalRepeatPngBytesVerified": 109,
+    "originalFirstTemporaryPathPresentAndVerified": 31,
+    "originalFirstTemporaryPathAbsent": 78,
+    "preservedFields": "元のproof・PNG・描画物は変更しない。複製proofで変えた内容はキャッシュPNGの絶対pathのみ。その他の全項目は元と同一で、内容ハッシュを再照合した。",
+    "limitation": "初回描画の元一時pathが残っていない78件について、初回の実byteを今回再検証したとは扱わない。既存の再利用と同様に、元proofの独立2描画同一SHAと現存キャッシュPNGを用いる。実在する繰返し描画109件とキャッシュPNG109件は全byteを照合した。"
+  },
+  "preservation": {
+    "originalSavedFiles": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/captionAuto.json",
+        "bytes": 43149,
+        "fileSha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/connectionAuto.json",
+        "bytes": 2159,
+        "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/selectionRecord.json",
+        "bytes": 477587,
+        "fileSha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/captionOverrides.json",
+        "bytes": 31772,
+        "fileSha256": "f8565737d1b5e4531c31be1c77b95e943e4c4a051af4aa31bd9f056b714e02ea"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+        "bytes": 976,
+        "fileSha256": "56b3b7783d1b2188786cf81b1774021d0b3bcedae1fb80fc78e9ca59da3c2bec"
+      }
+    ],
+    "originalSavedStateUnchanged": true,
+    "completedMediaGenerated": 0
+  },
+  "confidentiality": {
+    "requestHeadersRecorded": false,
+    "csrfTokenRecorded": false,
+    "check": "full timing JSONにcsrfToken/x-zev-editing-tokenの記録なし。保存応答から認証トークンを除いて記録。"
+  },
+  "review": {
+    "method": "最終backend3ソースを別agentが読取り点検。",
+    "result": "具体的な欠陥の指摘なし。",
+    "scope": "検査共通化・保存ロック解放・直前照合・失敗状態保持・古い応答混入と秘密記録。"
+  },
+  "limits": [
+    "HTTP・状態保存の実行と実書体の物理検査であり、実ブラウザー受入や人間の動画品質判定ではない。",
+    "B/Cの拒否されたQC変更は未適用。媒体再生成・外部送信・新規依存・費用支出なし。"
+  ]
+}

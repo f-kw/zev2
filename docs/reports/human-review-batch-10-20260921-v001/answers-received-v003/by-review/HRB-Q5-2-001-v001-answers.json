@@ -1,0 +1,65 @@
+{
+  "schema_version": "zev-point-review-answers-v001",
+  "batch_id": "HRB-Q5-2-001",
+  "revision": "v001",
+  "review_sha256": "a9ef5312b0c885c5119c5ba689075eb0d5c2fc69fa845179dbbe828dff1ecb0c",
+  "answers": [
+    {
+      "point_id": "Q5-2-C001",
+      "review_id": "HR-Q5-2-001",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "この場面の直前11.50秒と原文字幕3件を追加した、提示中のBefore／Afterの理解しやすさと長さを含む使いやすさ"
+        ],
+        "does_not_apply_to": [
+          "Q1・Q3・Q4・Q5-1の別の問いと既存回答",
+          "原文から分からない能力名や詳しい戦況の推定、全編の品質、他の場面や別の追加量",
+          "原版の置換、正式採用、ショートの制作"
+        ]
+      },
+      "offered_views": [
+        {
+          "view_id": "Q5-2-BEFORE-VIEW",
+          "label": "Before：元版（9.30秒）",
+          "role": "before",
+          "media_id": "Q5-2-BEFORE",
+          "start_frame": 18578,
+          "end_frame": 18857,
+          "context_start_frame": 18578,
+          "context_end_frame": 18857,
+          "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 44408,
+          "timeline_id": "digest-v1-phase2-completed-20260914-v001",
+          "timeline_start_frame": 0
+        },
+        {
+          "view_id": "Q5-2-AFTER-VIEW",
+          "label": "After：今回案（20.80秒）",
+          "role": "after",
+          "media_id": "Q5-2-AFTER",
+          "start_frame": 0,
+          "end_frame": 624,
+          "context_start_frame": 0,
+          "context_end_frame": 624,
+          "sha256": "98d73010ebfa93bf9b094781e279d705f51771d295ae3fbc9fe78d1f0f365737",
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 624,
+          "timeline_id": "q5-2-content-v001-94698bac280a5fef2bab4d07b23eefbf519e7a5e43aa69f4287b0e5258bd1898",
+          "timeline_start_frame": 18578
+        }
+      ],
+      "choice": "change_requested",
+      "comment": "使ったのに　と　打てないか　は別な字幕の方が良さそう",
+      "raw_response": "直したい\n使ったのに　と　打てないか　は別な字幕の方が良さそう",
+      "source": "local_form",
+      "answered_at": "2026-09-21T04:38:50.022Z",
+      "playback_started_view_ids": [
+        "Q5-2-AFTER-VIEW"
+      ]
+    }
+  ]
+}

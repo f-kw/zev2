@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "q1q2-preservation-v001",
+  "meaning": "開始commitと旧レビュー記録・原回答・契約/指示/依存固定の選んだ既存ファイルを実byte比較。旧全編2本は保存SHAと実byteを再照合。元workspaceの全量棚卸しではない。",
+  "startCommit": "66d352ca54425b3deb25d757428ceb3d6f2b8e5d",
+  "oldTrackedFiles": [
+    {
+      "path": "docs/reports/human-review-session-20260920-v001/README.md",
+      "fileSha256": "d42bdfc91b9386b3e834e1bc0f0b8fde93460ca7a65eb1bb7f10bf19e091ff63",
+      "bytes": 4579,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "docs/reports/human-review-session-20260920-v001/comparison-points.json",
+      "fileSha256": "3823178a06f1794cc01b0d8c66637cb828018cb2bbcac9721f670ab387c7aa11",
+      "bytes": 3457,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "docs/reports/human-review-session-20260920-v001/comparison.html",
+      "fileSha256": "e9d0f3d45d28471093c9894d07fe3cea97a525df72b88f99b280235bc2c6f578",
+      "bytes": 10553,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "docs/reports/human-review-session-20260920-v001/hrb001-bindings.json",
+      "fileSha256": "b370cb0a8c03b2e6da9f0b959347132462b42e08e66471f6572edd35aa291ecb",
+      "bytes": 26085,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "docs/reports/human-review-session-20260920-v001/hrb002-bindings.json",
+      "fileSha256": "c05055bfd5c1e66d6bcda6d8ff2b261626bb30ce1a7ec4605dfaa13d5a2a27b8",
+      "bytes": 13512,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "docs/reports/human-review-session-20260920-v001/human-response-original-v001.md",
+      "fileSha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98",
+      "bytes": 5572,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "docs/reports/human-review-session-20260920-v001/responses.json",
+      "fileSha256": "411e896f17cc50eefe72cc72a52df60c4ddcfa31f2699757bc87e625efdf950f",
+      "bytes": 39348,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "docs/reports/human-review-session-20260920-v001/session.json",
+      "fileSha256": "062b179f2ad6144f1fa04941169f63cf6aa8b7d627844219f37416d83b82eab3",
+      "bytes": 15746,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "AGENTS.md",
+      "fileSha256": "4da0725bc29514a8cdd29c4891039a8ae9adb9b7375cb45674fec876937c76f1",
+      "bytes": 10697,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "DECISIONS.md",
+      "fileSha256": "d5fada5c70f2da127abb07d7bbbd522eccf0313057387735b02289bcca028e75",
+      "bytes": 521386,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "docs/CURRENT_GOAL.md",
+      "fileSha256": "fb37ace122775ec3829fcafbe74ca06e5092f378f9dd2849382e5fd6e16e9253",
+      "bytes": 8063,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "docs/work-orders/DIGEST_Q1_Q2_WORK_ORDER_v001.md",
+      "fileSha256": "8db37dcd8b43c23f2cdbf14e4caf3fddbcd027dd31d0923fdcfde954e0653563",
+      "bytes": 14082,
+      "matchesStartCommit": true
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "fileSha256": "1bfb232ca8a693bebedc1fd84971800aad2f633b2595ed805f2078f1dad44812",
+      "bytes": 177485,
+      "matchesStartCommit": true
+    }
+  ],
+  "oldVideos": [
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+      "actualSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "matchesSavedSha256": true
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+      "actualSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "matchesSavedSha256": true
+    }
+  ],
+  "paidApiCalls": 0,
+  "newExternalVideoOrAudioTransfers": 0,
+  "newDependencyIntroductions": 0,
+  "mainMerge": false,
+  "tagOrRelease": false,
+  "shortDevelopment": false,
+  "newHumanQualityDecision": false
+}

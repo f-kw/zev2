@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "digest-quality-implementation-verification-v001",
+  "nodeVersion": "v20.19.6",
+  "testCommand": "node --test --test-reporter=tap tools/digest-quality/clock.test.mjs tools/digest-quality/prepare.test.mjs tools/digest-quality/validate.test.mjs tools/digest-quality/measure-pcm.test.mjs tools/digest-quality/review.test.mjs tools/digest-quality/run.test.mjs",
+  "tests": {
+    "passed": 115,
+    "failed": 0,
+    "stderrBytes": 0
+  },
+  "actualPrepareCompleted": true,
+  "inputSha256": "65102e48de14824e63435f70d0453c5d36233f47a802048e933ada4d7be79a8d",
+  "actualInputCounts": {
+    "units": 46,
+    "evidence": 1326,
+    "historicalUniqueMappedObservations": {
+      "audio-candidate": 27,
+      "acoustic-peak": 1064,
+      "asr-segment": 70
+    }
+  },
+  "semanticVideoReview": false,
+  "audioListeningReview": false,
+  "sourceFilesAt115TestRun": [
+    {
+      "path": "tools/digest-quality/INTERFACE.md",
+      "sha256": "a824270179089700d7c479d6cc9f92e139d33c6ffb7d12a02b58ccf86b91c92e",
+      "bytes": 4320
+    },
+    {
+      "path": "tools/digest-quality/README.md",
+      "sha256": "9ca38620289ddb42e9f170cca80eefeec8cbc951e92e8690baca60b04923cbe2",
+      "bytes": 2974
+    },
+    {
+      "path": "tools/digest-quality/clock.mjs",
+      "sha256": "7050880b99cebbdbb6f420084017a9f5306179270400e54180f5bdd186e30df4",
+      "bytes": 14222
+    },
+    {
+      "path": "tools/digest-quality/clock.test.mjs",
+      "sha256": "7d60412ab1b1fb6b6beec452b47de038c04f088c404fd9f0883a7010883c3bad",
+      "bytes": 23902
+    },
+    {
+      "path": "tools/digest-quality/judgment-prompt.md",
+      "sha256": "fad0d5c482a5e22656efac1a773c422fbe7833f1345c300ce08ae85d78cb0574",
+      "bytes": 4307
+    },
+    {
+      "path": "tools/digest-quality/measure-pcm.mjs",
+      "sha256": "2855f31c7793611589f5a9f9ff4b081a93b7e6b45076472bc9798928a3bbac6c",
+      "bytes": 6693
+    },
+    {
+      "path": "tools/digest-quality/measure-pcm.test.mjs",
+      "sha256": "2b7646758e4fee92bf1a3bbaaabbe4b5ad34121288fb5fdaaee2d8bbe3e57821",
+      "bytes": 2137
+    },
+    {
+      "path": "tools/digest-quality/prepare.mjs",
+      "sha256": "f3402ec35a09b4ea73e9f9d16e1101a41963580521ade7456dd840fa539d83de",
+      "bytes": 24272
+    },
+    {
+      "path": "tools/digest-quality/prepare.test.mjs",
+      "sha256": "b946aeb1e9be17fc8d00b1a2e9597c74826dcee6092b18128cb01aad4b833a2f",
+      "bytes": 4576
+    },
+    {
+      "path": "tools/digest-quality/review.mjs",
+      "sha256": "e62b996feac60d5cf17977d58d4a9da9852321011583a6f479fd0751b133d0ce",
+      "bytes": 5130
+    },
+    {
+      "path": "tools/digest-quality/review.test.mjs",
+      "sha256": "737333b8976770a2483bb34250f09ab8982c79f5b0503d8524d5e11b0295e4f9",
+      "bytes": 6598
+    },
+    {
+      "path": "tools/digest-quality/run.mjs",
+      "sha256": "db2badf4bf39e0af44cafb1332fabc3df089d89efe55843c0cda65361a07ec87",
+      "bytes": 6446
+    },
+    {
+      "path": "tools/digest-quality/run.test.mjs",
+      "sha256": "08bb070ae86eeceee8918c866eb2475d7ab8fdfc8898f81cdd470bc702fab852",
+      "bytes": 2516
+    },
+    {
+      "path": "tools/digest-quality/validate.mjs",
+      "sha256": "e2b0e65c883fe9fff3579bb6bffee872897b7a80fcb83e02a89f132b3d18505f",
+      "bytes": 22834
+    },
+    {
+      "path": "tools/digest-quality/validate.test.mjs",
+      "sha256": "fc236d4128327b8d67a9d5d2f9b4d873c22bed992b84c93720f9ba6924e290ad",
+      "bytes": 19822
+    },
+    {
+      "path": "docs/reports/digest-quality-q3-20260920-v001/final-tests-v001.tap",
+      "sha256": "fce126a1563188d6ee97059932a2b1871202ddb696745335da20acc1c48c99ab",
+      "bytes": 19734
+    },
+    {
+      "path": "docs/reports/digest-quality-q3-20260920-v001/final-tests-v001.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "inputPreparationSourceFrozenBeforeInitialJudgment": true,
+  "postJudgmentPresentationChange": {
+    "meaning": "実際の問いの対象を短いタイトルと明示的な非適用範囲へ落とす。AIの問い・区間・実回答は不変。",
+    "files": [
+      "tools/digest-quality/review.mjs",
+      "tools/digest-quality/review.test.mjs",
+      "tools/digest-quality/INTERFACE.md"
+    ],
+    "affectedTests": {
+      "path": "docs/reports/digest-quality-q3-20260920-v001/review-scope-tests-v002.tap",
+      "passed": 3,
+      "failed": 0
+    },
+    "countsNotAddedTo115": true
+  },
+  "finalSourceFiles": [
+    {
+      "path": "tools/digest-quality/INTERFACE.md",
+      "sha256": "3142f3740e55430f7e8aa54579b6b96c5b1d1142282518702e9bc9d9fd855802",
+      "bytes": 4630
+    },
+    {
+      "path": "tools/digest-quality/README.md",
+      "sha256": "9ca38620289ddb42e9f170cca80eefeec8cbc951e92e8690baca60b04923cbe2",
+      "bytes": 2974
+    },
+    {
+      "path": "tools/digest-quality/clock.mjs",
+      "sha256": "7050880b99cebbdbb6f420084017a9f5306179270400e54180f5bdd186e30df4",
+      "bytes": 14222
+    },
+    {
+      "path": "tools/digest-quality/clock.test.mjs",
+      "sha256": "7d60412ab1b1fb6b6beec452b47de038c04f088c404fd9f0883a7010883c3bad",
+      "bytes": 23902
+    },
+    {
+      "path": "tools/digest-quality/judgment-prompt.md",
+      "sha256": "fad0d5c482a5e22656efac1a773c422fbe7833f1345c300ce08ae85d78cb0574",
+      "bytes": 4307
+    },
+    {
+      "path": "tools/digest-quality/measure-pcm.mjs",
+      "sha256": "2855f31c7793611589f5a9f9ff4b081a93b7e6b45076472bc9798928a3bbac6c",
+      "bytes": 6693
+    },
+    {
+      "path": "tools/digest-quality/measure-pcm.test.mjs",
+      "sha256": "2b7646758e4fee92bf1a3bbaaabbe4b5ad34121288fb5fdaaee2d8bbe3e57821",
+      "bytes": 2137
+    },
+    {
+      "path": "tools/digest-quality/prepare.mjs",
+      "sha256": "f3402ec35a09b4ea73e9f9d16e1101a41963580521ade7456dd840fa539d83de",
+      "bytes": 24272
+    },
+    {
+      "path": "tools/digest-quality/prepare.test.mjs",
+      "sha256": "b946aeb1e9be17fc8d00b1a2e9597c74826dcee6092b18128cb01aad4b833a2f",
+      "bytes": 4576
+    },
+    {
+      "path": "tools/digest-quality/review.mjs",
+      "sha256": "0020ee0c4a72adff0e2acabb64538412645cb10102cdb456b6ce7a78e7d81d73",
+      "bytes": 5540
+    },
+    {
+      "path": "tools/digest-quality/review.test.mjs",
+      "sha256": "6b0594cfce9a260b7d301e68731bf1e5bfd36974b16fee4977dddc3e58682331",
+      "bytes": 7038
+    },
+    {
+      "path": "tools/digest-quality/run.mjs",
+      "sha256": "db2badf4bf39e0af44cafb1332fabc3df089d89efe55843c0cda65361a07ec87",
+      "bytes": 6446
+    },
+    {
+      "path": "tools/digest-quality/run.test.mjs",
+      "sha256": "08bb070ae86eeceee8918c866eb2475d7ab8fdfc8898f81cdd470bc702fab852",
+      "bytes": 2516
+    },
+    {
+      "path": "tools/digest-quality/validate.mjs",
+      "sha256": "e2b0e65c883fe9fff3579bb6bffee872897b7a80fcb83e02a89f132b3d18505f",
+      "bytes": 22834
+    },
+    {
+      "path": "tools/digest-quality/validate.test.mjs",
+      "sha256": "fc236d4128327b8d67a9d5d2f9b4d873c22bed992b84c93720f9ba6924e290ad",
+      "bytes": 19822
+    }
+  ]
+}

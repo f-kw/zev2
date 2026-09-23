@@ -1,0 +1,145 @@
+TAP version 13
+# Subtest: fixed format: every point starts unanswered; each video has its own clock
+ok 1 - fixed format: every point starts unanswered; each video has its own clock
+  ---
+  duration_ms: 1.546708
+  ...
+# Subtest: reject duplicate IDs, missing media, invalid ranges, loose fields, remote paths and orphan comparison
+ok 2 - reject duplicate IDs, missing media, invalid ranges, loose fields, remote paths and orphan comparison
+  ---
+  duration_ms: 0.619916
+  ...
+# Subtest: answers stay bound to exact batch, version, points, scope, SHA and ranges
+ok 3 - answers stay bound to exact batch, version, points, scope, SHA and ranges
+  ---
+  duration_ms: 1.563209
+  ...
+# Subtest: bundle answer and chat original remain a single scoped record; both-usable only has two offered views
+ok 4 - bundle answer and chat original remain a single scoped record; both-usable only has two offered views
+  ---
+  duration_ms: 1.068292
+  ...
+# Subtest: local persistence round-trips raw answers; other revisions remain unanswered; corrupt stored data rejected
+ok 5 - local persistence round-trips raw answers; other revisions remain unanswered; corrupt stored data rejected
+  ---
+  duration_ms: 1.739583
+  ...
+# Subtest: segment controller stops at boundary, clips external seeks, and cancels playback when switching media
+ok 6 - segment controller stops at boundary, clips external seeks, and cancels playback when switching media
+  ---
+  duration_ms: 0.841375
+  ...
+# Subtest: late play promise cannot revive a previous point or play after pause
+ok 7 - late play promise cannot revive a previous point or play after pause
+  ---
+  duration_ms: 0.179
+  ...
+# Subtest: DOM-model integration: fixed controls navigate two datasets, save/read/export, stop segments, and reject foreign imports
+ok 8 - DOM-model integration: fixed controls navigate two datasets, save/read/export, stop segments, and reject foreign imports
+  ---
+  duration_ms: 9.383666
+  ...
+# Subtest: builder reuses exact template for two datasets; rejects forged media SHA/frame count and output overwrite
+ok 9 - builder reuses exact template for two datasets; rejects forged media SHA/frame count and output overwrite
+  ---
+  duration_ms: 18.952167
+  ...
+# Subtest: session storage/export contains five unchanged original review bindings and form edits remain editable
+ok 10 - session storage/export contains five unchanged original review bindings and form edits remain editable
+  ---
+  duration_ms: 56.402
+  ...
+# Subtest: imports preserve current answers, merge other points, and reject replacement even before a successful save
+ok 11 - imports preserve current answers, merge other points, and reject replacement even before a successful save
+  ---
+  duration_ms: 67.314458
+  ...
+# Subtest: one existing UI navigates all ten points, shows each original introduction, and exports original answers
+ok 12 - one existing UI navigates all ten points, shows each original introduction, and exports original answers
+  ---
+  duration_ms: 51.692708
+  ...
+# Subtest: UI imports cannot silently replace answers; storage denial still permits complete original-batch export
+ok 13 - UI imports cannot silently replace answers; storage denial still permits complete original-batch export
+  ---
+  duration_ms: 59.131458
+  ...
+# Subtest: a different display package is rejected before the existing app is mounted
+ok 14 - a different display package is rejected before the existing app is mounted
+  ---
+  duration_ms: 1.752708
+  ...
+# Subtest: retry uses only original points 3 and 9 while keeping all eight other received answers unchanged
+ok 15 - retry uses only original points 3 and 9 while keeping all eight other received answers unchanged
+  ---
+  duration_ms: 78.117916
+  ...
+# Subtest: retry packets reject old ten-point files, another retry, changed protected answers and stale received state
+ok 16 - retry packets reject old ten-point files, another retry, changed protected answers and stale received state
+  ---
+  duration_ms: 77.379917
+  ...
+# Subtest: retry keeps eight received answers even if storage is unavailable and validates generated bundle bindings
+ok 17 - retry keeps eight received answers even if storage is unavailable and validates generated bundle bindings
+  ---
+  duration_ms: 66.707167
+  ...
+# Subtest: numbered chat answers preserve exact raw text, receipt source and timezone while unanswered and no-decision remain different
+ok 18 - numbered chat answers preserve exact raw text, receipt source and timezone while unanswered and no-decision remain different
+  ---
+  duration_ms: 29.507292
+  ...
+# Subtest: explicit form edits can extend or clear this session draft while preserving the original baseline and playback observations
+ok 19 - explicit form edits can extend or clear this session draft while preserving the original baseline and playback observations
+  ---
+  duration_ms: 25.91175
+  ...
+# Subtest: answers that already existed in the original baseline cannot be edited or cleared through display projection or imported files
+ok 20 - answers that already existed in the original baseline cannot be edited or cleared through display projection or imported files
+  ---
+  duration_ms: 24.017416
+  ...
+# Subtest: a conflict in any raw response, choice, comment, source or timestamp rejects an entire import or numbered chat update without mutation
+ok 21 - a conflict in any raw response, choice, comment, source or timestamp rejects an entire import or numbered chat update without mutation
+  ---
+  duration_ms: 69.18575
+  ...
+# Subtest: display packaging preserves the original questions and source ownership instead of relabeling a different review
+ok 22 - display packaging preserves the original questions and source ownership instead of relabeling a different review
+  ---
+  duration_ms: 12.823334
+  ...
+# Subtest: numbered chat input rejects invalid receipt times, invented provenance and unsupported decisions without altering other points
+ok 23 - numbered chat input rejects invalid receipt times, invented provenance and unsupported decisions without altering other points
+  ---
+  duration_ms: 79.07975
+  ...
+# Subtest: actual ten-point package: unchanged originals, unanswered rows and executable shared template
+ok 24 - actual ten-point package: unchanged originals, unanswered rows and executable shared template
+  ---
+  duration_ms: 52.29325
+  ...
+# Subtest: separate processes preserve numbered chat raw text, original batches and remaining unanswered points
+ok 25 - separate processes preserve numbered chat raw text, original batches and remaining unanswered points
+  ---
+  duration_ms: 205.218333
+  ...
+# Subtest: wrong original review, altered media clock and duplicate chat number are rejected before output
+ok 26 - wrong original review, altered media clock and duplicate chat number are rejected before output
+  ---
+  duration_ms: 129.70725
+  ...
+# Subtest: retry file import binds the received state, updates only requested answers, and is readable in a separate process
+ok 27 - retry file import binds the received state, updates only requested answers, and is readable in a separate process
+  ---
+  duration_ms: 322.44475
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 751.226458

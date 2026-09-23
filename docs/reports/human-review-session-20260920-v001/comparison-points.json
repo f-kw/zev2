@@ -1,0 +1,113 @@
+{
+  "sessionId": "HRS-20260920-001",
+  "mode": "point-only",
+  "videoBytesChanged": false,
+  "rangesAreFromSavedMovieClock": true,
+  "points": [
+    {
+      "id": "connection",
+      "title": "黒い接続を入れた箇所",
+      "question": "黒が入る長さ・テンポ・音のつながり",
+      "note": "最初の場面切り替え。修正版には0.4秒の黒を追加しています。",
+      "reviewIds": [
+        "HR-007",
+        "HR-010"
+      ],
+      "clips": [
+        {
+          "label": "自動版：そのまま接続",
+          "file": "01_自動演出版.mp4",
+          "batch": "HRB-001",
+          "startFrame": 270,
+          "endFrame": 388,
+          "fps": 30,
+          "durationSeconds": 3.933333333333333
+        },
+        {
+          "label": "修正版：黒を挿入",
+          "file": "02_一件修正版.mp4",
+          "batch": "HRB-002",
+          "startFrame": 270,
+          "endFrame": 400,
+          "fps": 30,
+          "durationSeconds": 4.333333333333333
+        }
+      ]
+    },
+    {
+      "id": "caption",
+      "title": "「逃げるやつ?」に背景板を追加",
+      "question": "背景板の読みやすさ・目立ち方・周囲から浮かないか",
+      "note": "同じ発話の前後だけを比較します。手前のフェードも含みます。",
+      "reviewIds": [
+        "HR-005",
+        "HR-009",
+        "HR-007",
+        "HR-010"
+      ],
+      "clips": [
+        {
+          "label": "自動版：通常字幕",
+          "file": "01_自動演出版.mp4",
+          "batch": "HRB-001",
+          "startFrame": 444,
+          "endFrame": 581,
+          "fps": 30,
+          "durationSeconds": 4.566666666666666
+        },
+        {
+          "label": "修正版：Panelの背景板あり",
+          "file": "02_一件修正版.mp4",
+          "batch": "HRB-002",
+          "startFrame": 456,
+          "endFrame": 593,
+          "fps": 30,
+          "durationSeconds": 4.566666666666666
+        }
+      ]
+    },
+    {
+      "id": "motion",
+      "title": "弾む・揺れる・一瞬拡大する字幕",
+      "question": "動きが声の反応に合い、読む邪魔にならないか",
+      "note": "「これもういるやん」＝弾む／「いるやんいるやん」＝揺れる／「もうリカちゃんやめてー!」＝声に合わせ一瞬拡大。",
+      "reviewIds": [
+        "HR-002",
+        "HR-003",
+        "HR-004"
+      ],
+      "clips": [
+        {
+          "label": "自動演出版の冒頭だけ",
+          "file": "01_自動演出版.mp4",
+          "batch": "HRB-001",
+          "startFrame": 0,
+          "endFrame": 170,
+          "fps": 30,
+          "durationSeconds": 5.666666666666667
+        }
+      ]
+    },
+    {
+      "id": "panel",
+      "title": "自動で選ばれた背景板の字幕",
+      "question": "背景板が読みやすさに役立ち、目立ちすぎないか",
+      "note": "「なんかグロいやつに捕まってる」。修正版への追加とは別に、自動で選ばれたPanelです。",
+      "reviewIds": [
+        "HR-001"
+      ],
+      "clips": [
+        {
+          "label": "自動演出版のこの一箇所",
+          "file": "01_自動演出版.mp4",
+          "batch": "HRB-001",
+          "startFrame": 1719,
+          "endFrame": 1818,
+          "fps": 30,
+          "durationSeconds": 3.3
+        }
+      ]
+    }
+  ],
+  "wholeDigestReview": "NOT_PERFORMED_BY_THIS_POINT_VIEW"
+}

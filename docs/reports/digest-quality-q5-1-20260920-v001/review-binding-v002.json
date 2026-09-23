@@ -1,0 +1,361 @@
+{
+  "schemaVersion": "q5-standard-review-binding-v002",
+  "preparationScriptRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/prepare-review-v002.mjs",
+    "bytes": 8253,
+    "fileSha256": "021d50f607ff023001bd251f02befba8bf6d7e1628f925b70d2e7fc4c0080997"
+  },
+  "status": "human-review-pending",
+  "recordedAt": "2026-09-20T16:34:06.802Z",
+  "reviewRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/review-v002.json",
+    "bytes": 3779,
+    "fileSha256": "8b52282bf57ec3854af503b16bd950de20ee8cbd6ed8f3d5b76490ed6943a6d9"
+  },
+  "reviewCanonicalSha256": "bd91c2e1cac5c3beb999768b304c686b0d19eb103bc18f933a8f171774176b42",
+  "answersRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/review-answers-v002.json",
+    "bytes": 2138,
+    "fileSha256": "8a78f843e0792c705b0c4f7308573ea205792ffe9259a76c9b1b142afed10c0d"
+  },
+  "completionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/completion.json",
+    "bytes": 2108579,
+    "fileSha256": "95508900b9ba5d36b2cea6b021bb44f376d622338ca632e2942d4b704af4ef02"
+  },
+  "editPlanRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/edit-plan-v002.json",
+    "bytes": 2561895,
+    "fileSha256": "55b5b00253401fd7ef740aa0f62f0b4ebaa4fa4fd4f4b9461d997d19544d13e5"
+  },
+  "contentVersion": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+  "mediaOmission": {
+    "startFrame": 12153,
+    "endFrameExclusive": 12212
+  },
+  "hiddenCaptionId": "digest-v1-phase2-20260913-v001-bridge-caption-000121",
+  "targetMediaRetention": {
+    "captionId": "digest-v1-phase2-20260913-v001-bridge-caption-000121",
+    "status": "partially-retained",
+    "originalRange": {
+      "startFrame": 12109,
+      "endFrameExclusive": 12228
+    },
+    "originalSourceRange": {
+      "startFrame": 127871,
+      "endFrameExclusive": 127990
+    },
+    "mediaOmission": {
+      "startFrame": 12153,
+      "endFrameExclusive": 12212
+    },
+    "omittedOriginalSourceRange": {
+      "startFrame": 127915,
+      "endFrameExclusive": 127974
+    },
+    "retainedBeforeRange": {
+      "startFrame": 12109,
+      "endFrameExclusive": 12153
+    },
+    "retainedAfterRange": {
+      "startFrame": 12212,
+      "endFrameExclusive": 12228
+    },
+    "retainedFramesBefore": 44,
+    "retainedFramesAfter": 16,
+    "outputClock": "q5-comparison-local-frame-v002",
+    "retainedPieces": [
+      {
+        "side": "before",
+        "originalRange": {
+          "startFrame": 12109,
+          "endFrameExclusive": 12153
+        },
+        "originalSourceRange": {
+          "startFrame": 127871,
+          "endFrameExclusive": 127915
+        },
+        "outputRange": {
+          "startFrame": 426,
+          "endFrameExclusive": 470
+        },
+        "retainedPieceId": "q5-piece-0004",
+        "playback": {
+          "sampleRate": 48000,
+          "channels": 2,
+          "originalRange": {
+            "startSample": 19374400,
+            "endSampleExclusive": 19444800
+          },
+          "outputRange": {
+            "startSample": 681600,
+            "endSampleExclusive": 752000
+          }
+        },
+        "editedGlobalRange": {
+          "startFrame": 12109,
+          "endFrameExclusive": 12153
+        }
+      },
+      {
+        "side": "after",
+        "originalRange": {
+          "startFrame": 12212,
+          "endFrameExclusive": 12228
+        },
+        "originalSourceRange": {
+          "startFrame": 127974,
+          "endFrameExclusive": 127990
+        },
+        "outputRange": {
+          "startFrame": 470,
+          "endFrameExclusive": 486
+        },
+        "retainedPieceId": "q5-piece-0005",
+        "playback": {
+          "sampleRate": 48000,
+          "channels": 2,
+          "originalRange": {
+            "startSample": 19539200,
+            "endSampleExclusive": 19564800
+          },
+          "outputRange": {
+            "startSample": 752000,
+            "endSampleExclusive": 777600
+          }
+        },
+        "editedGlobalRange": {
+          "startFrame": 12153,
+          "endFrameExclusive": 12169
+        }
+      }
+    ],
+    "meaning": "caption is hidden; its two edge media ranges remain; naturalness is not established"
+  },
+  "policyRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/instruction-received-v002.md",
+    "bytes": 5075,
+    "fileSha256": "94413e1ebcd1ad4f24625d260b3b0d3daf57a286e29a4def94ea6056b1b6e72a"
+  },
+  "boundaryEvidenceRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/retention-boundary-v002.json",
+    "bytes": 6055,
+    "fileSha256": "c5d833c4fd0b346a4c9684546baa3804e6a574ec173dcd872c1dc1eea9a31b80"
+  },
+  "before": {
+    "mediaRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "bytes": 616632321,
+      "fileSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+    },
+    "range": {
+      "startFrame": 11683,
+      "endFrameExclusive": 12505
+    }
+  },
+  "after": {
+    "mediaRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+      "bytes": 8591313,
+      "fileSha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6"
+    },
+    "range": {
+      "startFrame": 0,
+      "endFrameExclusive": 763
+    },
+    "fullEditedRange": {
+      "startFrame": 11683,
+      "endFrameExclusive": 12446
+    },
+    "orderedPieces": [
+      {
+        "pieceId": "q5-comparison-piece-1",
+        "ordinal": 1,
+        "contentVersion": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+        "parentSegmentId": "segment-0004",
+        "originalRange": {
+          "startFrame": 11683,
+          "endFrameExclusive": 12153
+        },
+        "originalSourceRange": {
+          "startFrame": 127445,
+          "endFrameExclusive": 127915
+        },
+        "outputRange": {
+          "startFrame": 0,
+          "endFrameExclusive": 470
+        },
+        "editedGlobalRange": {
+          "startFrame": 11683,
+          "endFrameExclusive": 12153
+        },
+        "playback": {
+          "sampleRate": 48000,
+          "channels": 2,
+          "originalRange": {
+            "startSample": 18692800,
+            "endSampleExclusive": 19444800
+          },
+          "outputRange": {
+            "startSample": 0,
+            "endSampleExclusive": 752000
+          }
+        },
+        "observation": {
+          "sampleRate": 16000,
+          "originalRange": {
+            "startSample": {
+              "numerator": "18692800",
+              "denominator": "3"
+            },
+            "endSampleExclusive": {
+              "numerator": "6481600",
+              "denominator": "1"
+            }
+          },
+          "outputRange": {
+            "startSample": {
+              "numerator": "0",
+              "denominator": "1"
+            },
+            "endSampleExclusive": {
+              "numerator": "752000",
+              "denominator": "3"
+            }
+          }
+        }
+      },
+      {
+        "pieceId": "q5-comparison-piece-2",
+        "ordinal": 2,
+        "contentVersion": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+        "parentSegmentId": "segment-0004",
+        "originalRange": {
+          "startFrame": 12212,
+          "endFrameExclusive": 12505
+        },
+        "originalSourceRange": {
+          "startFrame": 127974,
+          "endFrameExclusive": 128267
+        },
+        "outputRange": {
+          "startFrame": 470,
+          "endFrameExclusive": 763
+        },
+        "editedGlobalRange": {
+          "startFrame": 12153,
+          "endFrameExclusive": 12446
+        },
+        "playback": {
+          "sampleRate": 48000,
+          "channels": 2,
+          "originalRange": {
+            "startSample": 19539200,
+            "endSampleExclusive": 20008000
+          },
+          "outputRange": {
+            "startSample": 752000,
+            "endSampleExclusive": 1220800
+          }
+        },
+        "observation": {
+          "sampleRate": 16000,
+          "originalRange": {
+            "startSample": {
+              "numerator": "19539200",
+              "denominator": "3"
+            },
+            "endSampleExclusive": {
+              "numerator": "20008000",
+              "denominator": "3"
+            }
+          },
+          "outputRange": {
+            "startSample": {
+              "numerator": "752000",
+              "denominator": "3"
+            },
+            "endSampleExclusive": {
+              "numerator": "1220800",
+              "denominator": "3"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "cancellationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/cancelled-plan-v002.json",
+    "bytes": 2548795,
+    "fileSha256": "ef99c08cc0d7a28f75c56e3237cc0f5d11d5929c8ddb55e860586dcef27dcfb0"
+  },
+  "cancellationMeaning": "The media omission and the one-caption hiding are cleared together; original media, all 325 captions and the original clock return. Review answers do not apply or cancel edits automatically.",
+  "templateRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/point-review/template.html",
+      "bytes": 3726,
+      "fileSha256": "6eb01d1616ed97c8d064eba9015efd7ee83fb4f25c729fff8e20456444ec9dac"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/point-review/style.css",
+      "bytes": 2862,
+      "fileSha256": "ecf4c492b2c29e1d6658d27760f26d97f1bc2d016f5e4d263130ba594a32411f"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/point-review/core.mjs",
+      "bytes": 10644,
+      "fileSha256": "8aae903ccdded256b98136b3b86ccf61b86a4c36a6ed1e51adee2f19d2ea87e6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/point-review/player.mjs",
+      "bytes": 3831,
+      "fileSha256": "501c84d9bbf080f4b893df2399889726fa9f8d6d27cbc81b318e80ba6ad1eb81"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/point-review/app.mjs",
+      "bytes": 9405,
+      "fileSha256": "d0c8bf6bef88efa323a91cacd4b7cf280d63c448483061ed6180285533eaf88e"
+    }
+  ],
+  "build": {
+    "output_path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/review.html",
+    "review_sha256": "bd91c2e1cac5c3beb999768b304c686b0d19eb103bc18f933a8f171774176b42",
+    "html_sha256": "83aaf94186fee722358474a2c5de8f20d4183a5fb0a364b40d031ac14ba77c59",
+    "template_sha256": "6eb01d1616ed97c8d064eba9015efd7ee83fb4f25c729fff8e20456444ec9dac",
+    "media": [
+      {
+        "media_id": "Q5-BEFORE",
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+        "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+        "fps_num": 30,
+        "fps_den": 1,
+        "total_frames": 44408
+      },
+      {
+        "media_id": "Q5-AFTER",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+        "sha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6",
+        "fps_num": 30,
+        "fps_den": 1,
+        "total_frames": 763
+      }
+    ],
+    "points": 1,
+    "browser_checked": false,
+    "human_quality_checked": false
+  },
+  "checks": {
+    "reviewSchema": true,
+    "realMediaShaAndFrameCount": true,
+    "blankAnswers": true,
+    "fourChoicesWithOptionalReason": true,
+    "oldQ1Q3Q4ReviewPackagesRejected": true,
+    "changedContentVersionOrViewOrMediaOrScopeRejected": true,
+    "editedClockExplicit": true
+  },
+  "testMethod": "Real review data checked through the unchanged standard core; synthetic choices existed in memory only and were not saved as human answers.",
+  "browserAutomationPerformed": false,
+  "humanPlaybackObserved": false,
+  "humanResponseReceived": false,
+  "adopted": false
+}

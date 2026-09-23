@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "review-reflection-test-result-record-v001",
+  "command": [
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "--test",
+    "tools/digest-quality/r123-plan.test.mjs"
+  ],
+  "cwd": "/private/tmp/zev-stage4-editing-20260918/worktree",
+  "exitCode": 0,
+  "capture": "The completed command result was preserved after execution. The command was not rerun to create this record.",
+  "streamCapture": "The command result exposes combined output. Standard error was not captured separately.",
+  "tap": {
+    "path": "docs/reports/review-reflection-r1-r3-20260921-v002/r123-plan-tests-v001.tap",
+    "fileSha256": "7725cf8add419774cf2255ecf2fca97bde75bd75bb7c476bf9f0cef7210b4a50"
+  },
+  "summary": {
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 2255.325959
+  },
+  "files": {
+    "tools/digest-quality/r123-plan.mjs": "dac95497dc1d6a9475956c683442864e0c519524e0e0b3bc9ae073125bbeffe9",
+    "tools/digest-quality/r123-plan.test.mjs": "80e97dd62adc18057ae37e3d9a605ab2cf7357809348c3937610e3b41c8ae822"
+  },
+  "limitations": [
+    "This focused test uses the existing saved local HRB palette drawing proof and R2 v002 plans.",
+    "The tests reconstruct the drawing proof and finite plan in memory; native-file reread and full-video rendering are separate checks."
+  ]
+}

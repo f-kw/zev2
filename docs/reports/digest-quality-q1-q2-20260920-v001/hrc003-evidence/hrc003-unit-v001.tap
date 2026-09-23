@@ -1,0 +1,228 @@
+TAP version 13
+# Subtest: entrance expressions preserve the normal plan and Color range while Normal and Reset retain fixed proposals
+ok 1 - entrance expressions preserve the normal plan and Color range while Normal and Reset retain fixed proposals
+  ---
+  duration_ms: 16.337291
+  ...
+# Subtest: unknown expressions, fields, partial ranges, duplicate IDs and previous rules cannot enter saved plans
+ok 2 - unknown expressions, fields, partial ranges, duplicate IDs and previous rules cannot enter saved plans
+  ---
+  duration_ms: 4.766917
+  ...
+# Subtest: each expression checks its own complete duration and never lengthens the fixed subtitle
+ok 3 - each expression checks its own complete duration and never lengthens the fixed subtitle
+  ---
+  duration_ms: 0.889542
+  ...
+# Subtest: CLI saves entrance changes to new files, reloads them, and Reset restores the exact fixed automatic assignment
+ok 4 - CLI saves entrance changes to new files, reloads them, and Reset restores the exact fixed automatic assignment
+  ---
+  duration_ms: 29.134167
+  ...
+# Subtest: Pulse changes only finite metadata; all expressions and Normal Reset restore the fixed anchor
+not ok 5 - Pulse changes only finite metadata; all expressions and Normal Reset restore the fixed anchor
+  ---
+  duration_ms: 14.612625
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_auto_effects_pulse_v001.test.mjs:38:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        96,
+        112,
+        128,
+    +   104,
+    +   120
+      ]
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 96
+    1: 112
+    2: 128
+  actual:
+    0: 96
+    1: 112
+    2: 128
+    3: 104
+    4: 120
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_auto_effects_pulse_v001.test.mjs:55:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    node:internal/test_runner/harness:255:12
+    node:internal/process/task_queues:140:7
+    AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+    AsyncResource.runMicrotask (node:internal/process/task_queues:137:8)
+  ...
+# Subtest: unknown, outside, end-boundary and early peaks are rejected at fix and human edit
+    # Subtest: missing
+    ok 1 - missing
+      ---
+      duration_ms: 0.992417
+      ...
+    # Subtest: other
+    ok 2 - other
+      ---
+      duration_ms: 0.583917
+      ...
+    # Subtest: end
+    ok 3 - end
+      ---
+      duration_ms: 0.7265
+      ...
+    # Subtest: early
+    ok 4 - early
+      ---
+      duration_ms: 0.591833
+      ...
+    1..4
+ok 6 - unknown, outside, end-boundary and early peaks are rejected at fix and human edit
+  ---
+  duration_ms: 3.321166
+  ...
+# Subtest: Pulse rejects missing evidence and arbitrary rendering fields at the saved boundary
+    # Subtest: scale
+    ok 1 - scale
+      ---
+      duration_ms: 0.209333
+      ...
+    # Subtest: anchorFrame
+    ok 2 - anchorFrame
+      ---
+      duration_ms: 0.142458
+      ...
+    # Subtest: startFrame
+    ok 3 - startFrame
+      ---
+      duration_ms: 0.18975
+      ...
+    # Subtest: endFrame
+    ok 4 - endFrame
+      ---
+      duration_ms: 0.188166
+      ...
+    # Subtest: easing
+    ok 5 - easing
+      ---
+      duration_ms: 0.154042
+      ...
+    # Subtest: keyframes
+    ok 6 - keyframes
+      ---
+      duration_ms: 0.362417
+      ...
+    # Subtest: x
+    ok 7 - x
+      ---
+      duration_ms: 0.208208
+      ...
+    # Subtest: color
+    ok 8 - color
+      ---
+      duration_ms: 0.226833
+      ...
+    # Subtest: filter
+    ok 9 - filter
+      ---
+      duration_ms: 0.205291
+      ...
+    # Subtest: targetText
+    ok 10 - targetText
+      ---
+      duration_ms: 0.143292
+      ...
+    # Subtest: occurrence
+    ok 11 - occurrence
+      ---
+      duration_ms: 0.260958
+      ...
+    1..11
+ok 7 - Pulse rejects missing evidence and arbitrary rendering fields at the saved boundary
+  ---
+  duration_ms: 3.160959
+  ...
+# Subtest: timing uses exact measured samples and rejects clipping instead of moving the anchor
+ok 8 - timing uses exact measured samples and rejects clipping instead of moving the anchor
+  ---
+  duration_ms: 0.45375
+  ...
+# Subtest: timing identity includes all samples, preserves relocation and rejects old contexts
+ok 9 - timing identity includes all samples, preserves relocation and rejects old contexts
+  ---
+  duration_ms: 0.413917
+  ...
+# Subtest: native IO derives each constituent time rather than the union representative
+ok 10 - native IO derives each constituent time rather than the union representative
+  ---
+  duration_ms: 9.428
+  ...
+# Subtest: native source changes and fabricated embedded times fail before saving
+    # Subtest: source
+    ok 1 - source
+      ---
+      duration_ms: 3.853667
+      ...
+    # Subtest: candidates
+    ok 2 - candidates
+      ---
+      duration_ms: 2.639208
+      ...
+    # Subtest: peaks
+    ok 3 - peaks
+      ---
+      duration_ms: 2.56325
+      ...
+    # Subtest: embedded
+    ok 4 - embedded
+      ---
+      duration_ms: 3.025917
+      ...
+    1..4
+ok 11 - native source changes and fabricated embedded times fail before saving
+  ---
+  duration_ms: 12.446042
+  ...
+# Subtest: entrances use the fixed subtitle clock, leave stable reading time, and preserve all caption content
+ok 12 - entrances use the fixed subtitle clock, leave stable reading time, and preserve all caption content
+  ---
+  duration_ms: 2.5655
+  ...
+# Subtest: short captions, arbitrary motion values, old presets and stacked expressions cannot enter drawing
+ok 13 - short captions, arbitrary motion values, old presets and stacked expressions cannot enter drawing
+  ---
+  duration_ms: 0.539834
+  ...
+# Subtest: native layout must show the prescribed offsets and sizes without clamping or vertical drift
+ok 14 - native layout must show the prescribed offsets and sizes without clamping or vertical drift
+  ---
+  duration_ms: 0.521167
+  ...
+# Subtest: Bounce fills each old interval midpoint while retaining its extrema, maximum hold and return clock
+ok 15 - Bounce fills each old interval midpoint while retaining its extrema, maximum hold and return clock
+  ---
+  duration_ms: 2.982042
+  ...
+# Subtest: Pulse linearly fills the rise and fall, preserving the measured peak and all four maximum frames
+ok 16 - Pulse linearly fills the rise and fall, preserving the measured peak and all four maximum frames
+  ---
+  duration_ms: 1.0515
+  ...
+# Subtest: Shake keeps its saved horizontal excursion and never scales the caption
+ok 17 - Shake keeps its saved horizontal excursion and never scales the caption
+  ---
+  duration_ms: 0.91625
+  ...
+1..17
+# tests 36
+# suites 0
+# pass 35
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 118.502333

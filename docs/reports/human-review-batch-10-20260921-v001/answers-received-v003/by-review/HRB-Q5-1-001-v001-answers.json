@@ -1,0 +1,65 @@
+{
+  "schema_version": "zev-point-review-answers-v001",
+  "batch_id": "HRB-Q5-1-001",
+  "revision": "v001",
+  "review_sha256": "bd91c2e1cac5c3beb999768b304c686b0d19eb103bc18f933a8f171774176b42",
+  "answers": [
+    {
+      "point_id": "Q5-1-C001",
+      "review_id": "HR-Q5-1-001",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "この一箇所の省略と対象字幕一件の非表示を合わせた、提示中のBefore／Afterの使いやすさ"
+        ],
+        "does_not_apply_to": [
+          "Q1・Q3・Q4の別の問いと既存回答",
+          "全編の品質、他の字幕や別の省略箇所",
+          "原版の置換、正式採用、ショートの制作"
+        ]
+      },
+      "offered_views": [
+        {
+          "view_id": "Q5-BEFORE-VIEW",
+          "label": "Before：元版（27.40秒）",
+          "role": "before",
+          "media_id": "Q5-BEFORE",
+          "start_frame": 11683,
+          "end_frame": 12505,
+          "context_start_frame": 11683,
+          "context_end_frame": 12505,
+          "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 44408,
+          "timeline_id": "digest-v1-phase2-completed-20260914-v001",
+          "timeline_start_frame": 0
+        },
+        {
+          "view_id": "Q5-AFTER-VIEW",
+          "label": "After：今回案（25.43秒）",
+          "role": "after",
+          "media_id": "Q5-AFTER",
+          "start_frame": 0,
+          "end_frame": 763,
+          "context_start_frame": 0,
+          "context_end_frame": 763,
+          "sha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6",
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 763,
+          "timeline_id": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+          "timeline_start_frame": 11683
+        }
+      ],
+      "choice": "good",
+      "comment": "違和感はない。字幕のタイミングがズレてる気がした",
+      "raw_response": "良い\n違和感はない。字幕のタイミングがズレてる気がした",
+      "source": "local_form",
+      "answered_at": "2026-09-21T05:22:06.785Z",
+      "playback_started_view_ids": [
+        "Q5-AFTER-VIEW"
+      ]
+    }
+  ]
+}

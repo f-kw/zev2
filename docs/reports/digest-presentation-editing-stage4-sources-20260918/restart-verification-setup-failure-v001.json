@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "presentation-editing-verification-setup-failure-v001",
+  "observedAt": "2026-09-18T07:40:00Z",
+  "timestampPrecision": "minute",
+  "entry": "verify_presentation_editing_restarted_v001.mjs",
+  "exitCode": 1,
+  "observedFailure": "assert.deepEqual(state.media, prior.media) rejected the media array order after service restart.",
+  "beforeMediaOrder": ["original", "7b68ed40-58d0-4772-bf3c-fe36e46dd5e7", "d1d18f1b-3ec6-4f35-8b20-0513732ed953", "4ef43bca-e48a-453c-9c78-d036c965103e"],
+  "restartedMediaOrder": ["original", "4ef43bca-e48a-453c-9c78-d036c965103e", "7b68ed40-58d0-4772-bf3c-fe36e46dd5e7", "d1d18f1b-3ec6-4f35-8b20-0513732ed953"],
+  "classification": "verification setup",
+  "repair": "Compare complete media records by stable media identity. Keep every field comparison and the exactly-one-current-full assertion. Do not change saved state, media registration, application code, or rendering.",
+  "scope": "Summary transcribed from observed shell assertion output; not a byte-for-byte stderr archive.",
+  "renderingRepeated": false
+}

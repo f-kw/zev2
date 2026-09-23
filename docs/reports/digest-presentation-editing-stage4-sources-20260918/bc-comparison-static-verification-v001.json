@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "presentation-editing-preview-comparison-static-verification-v001",
+  "status": "passed",
+  "author": "Codex",
+  "checkedAt": "2026-09-18T10:25:21.427Z",
+  "runtime": "v20.19.6",
+  "sourceRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/compare_presentation_editing_preview_qc_v001.mjs",
+      "bytes": 10704,
+      "fileSha256": "fdcb4f9a066438231f98a0397fa51a9c9e048ea05b33da758746b6fcd564803d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/reproduce_presentation_editing_preview_qc_v001.mjs",
+      "bytes": 13625,
+      "fileSha256": "9279994d3b60bde22e2a82537673a3e467a22dc7874e8746995c7c7754d01b46"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/verify_presentation_editing_preview_improvement_v001.mjs",
+      "bytes": 9766,
+      "fileSha256": "0ef18afb67cb4f152cae13fffa73446ccc5cdf252e46ed7e4ce7b621ac3420a5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_preview_rgb_verification_v001.mjs",
+      "bytes": 12662,
+      "fileSha256": "b67073ee06376e4784f69e175d06e9f39bae151791952f8b9a2a211762f44794"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_before_sharing_fixture_v001.mjs",
+      "bytes": 48920,
+      "fileSha256": "704992c891ee12685e6bb35abf535a9e2d851faead86a4ec5296cb67cc92f6b0"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_before_sharing_fixture_v001.mjs",
+      "bytes": 11520,
+      "fileSha256": "ee3b93f88c4a9ebd9ad81c0b41ae1f81d0caafe8f0337bb6c915021c6f60ee4e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_preview_qc_comparison_v001.test.mjs",
+      "bytes": 4016,
+      "fileSha256": "840ba0537141095dc0bf3f976c7e29ba1a04520a90b86287d4856034dd191040"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_preview_rgb_verification_v001.test.mjs",
+      "bytes": 12597,
+      "fileSha256": "ba850a47ba6a7b65ef51cb0f391daa045caaae18fad374c3c8b7109aee04818b"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_before_sharing_fixture_v001.test.mjs",
+      "bytes": 11437,
+      "fileSha256": "69ca3e9855610bd0bb171ad520a2eb445e8e6a8408e708fbe87b801a8781d708"
+    }
+  ],
+  "frozenSources": {
+    "native": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_before_sharing_fixture_v001.mjs",
+      "bytes": 48920,
+      "fileSha256": "704992c891ee12685e6bb35abf535a9e2d851faead86a4ec5296cb67cc92f6b0"
+    },
+    "integrity": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_before_sharing_fixture_v001.mjs",
+      "bytes": 11520,
+      "fileSha256": "ee3b93f88c4a9ebd9ad81c0b41ae1f81d0caafe8f0337bb6c915021c6f60ee4e"
+    },
+    "originalIntegritySha256": "cf47aa4b12d87aaed30032c20644f2de294da3a64b4fa6ee9733b36a0b43da9a",
+    "integrityFixtureChanges": [
+      "bind native import to frozen original fixture",
+      "export the original finite execution checker"
+    ]
+  },
+  "syntaxChecked": [
+    "compare_presentation_editing_preview_qc_v001.mjs",
+    "reproduce_presentation_editing_preview_qc_v001.mjs",
+    "verify_presentation_editing_preview_improvement_v001.mjs",
+    "presentation_editing_preview_rgb_verification_v001.mjs",
+    "presentation_native_frame_qc_before_sharing_fixture_v001.mjs",
+    "presentation_integrity_state_qc_before_sharing_fixture_v001.mjs"
+  ],
+  "tests": {
+    "count": 20,
+    "passed": 20,
+    "failed": 0,
+    "milliseconds": 531.953,
+    "tap": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-comparison-regression-v001.tap",
+      "bytes": 4893,
+      "fileSha256": "12038ec6bbf6e27f5f47575de2468f258f08051a00f7aa8075fa6427be2afbee"
+    },
+    "stderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-comparison-regression-v001.stderr",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "originalTap": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/preview-qc-comparison-v005.tap",
+      "bytes": 4893,
+      "fileSha256": "12038ec6bbf6e27f5f47575de2468f258f08051a00f7aa8075fa6427be2afbee"
+    },
+    "originalStderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/preview-qc-comparison-v005.stderr",
+      "bytes": 0,
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "verified": [
+    "actual reference RGB re-read, exact integer distances, equivalence classes and verdict",
+    "ordered all-sample/all-candidate actual RGB equality",
+    "actual full-frame PNG width/height and decoded RGB equality",
+    "exact resolved input role/path/bytes/SHA identity across both runs",
+    "exact ordered PNG scene states after explicit SHA-preserving publication relocation",
+    "before/after full input and output byte hashes",
+    "frozen original process command order, stdout and artifact correspondence",
+    "all caption inspections and flattened global sample correspondence"
+  ],
+  "rejectionCases": [
+    "changed input/RGB/frame/artifact, missing file",
+    "changed distance/class/verdict, incorrect RGB length",
+    "frame clock and sample/candidate order mismatch",
+    "different frame dimensions with the same total pixel count",
+    "different complete media with identical sampled RGB and resealed reference hashes",
+    "empty/missing/extra processes or inspections",
+    "changed command arguments, resealed command hash, RGB stdout or unsuccessful exit",
+    "old artifact omission, duplication or hash change"
+  ],
+  "productionChangesByThisComparisonTask": [
+    "driver uses the already accepted single-selection applicability endpoint"
+  ],
+  "limitation": "Small comparison tests and syntax only. Same-current-media old/new preview QC is executed and reported separately. No browser acceptance, human quality decision or full Digest rendering."
+}

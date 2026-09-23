@@ -1,0 +1,220 @@
+TAP version 13
+# Subtest: production drawing rejects missing and standalone diagnostic QC methods before output or child processes
+ok 1 - production drawing rejects missing and standalone diagnostic QC methods before output or child processes # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.469083
+  ...
+# Subtest: diagnostic completed-frame QC also requires an explicitly selected method before any work
+ok 2 - diagnostic completed-frame QC also requires an explicitly selected method before any work # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.564417
+  ...
+# Subtest: public combined QC entry rejects an unsupported frame rate before every media child without fallback
+ok 3 - public combined QC entry rejects an unsupported frame rate before every media child without fallback # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.075708
+  ...
+# Subtest: public combined QC entry rejects absent, relative or changed normal-plan references before every media child
+ok 4 - public combined QC entry rejects absent, relative or changed normal-plan references before every media child # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.061875
+  ...
+# Subtest: production evaluator accepts complete combined evidence with valid application, layout and media inputs
+ok 5 - production evaluator accepts complete combined evidence with valid application, layout and media inputs # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.052666
+  ...
+# Subtest: production final QC rejects old pixel-count and valid native-only evidence without the new global proof
+ok 6 - production final QC rejects old pixel-count and valid native-only evidence without the new global proof # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.040542
+  ...
+# Subtest: production evaluator rejects missing global evidence or a missing whole-video proof
+ok 7 - production evaluator rejects missing global evidence or a missing whole-video proof # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.13125
+  ...
+# Subtest: production evaluator rejects a missing or substituted current completed-video path or hash
+ok 8 - production evaluator rejects a missing or substituted current completed-video path or hash # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.050833
+  ...
+# Subtest: production evaluator rejects whole-video corruption even when native state observations pass
+ok 9 - production evaluator rejects whole-video corruption even when native state observations pass # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.175416
+  ...
+# Subtest: production evaluator rejects an omitted native caption even when whole-video equality passes
+ok 10 - production evaluator rejects an omitted native caption even when whole-video equality passes # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.137417
+  ...
+# Subtest: production evaluator rejects detached finite-state evidence and a mixed comparison basis
+ok 11 - production evaluator rejects detached finite-state evidence and a mixed comparison basis # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.05125
+  ...
+# Subtest: production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements
+ok 12 - production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.04775
+  ...
+# Subtest: combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs
+ok 13 - combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs
+  ---
+  duration_ms: 15.015416
+  ...
+# Subtest: combined proof rejects missing whole-video evidence despite cached pass flags
+ok 14 - combined proof rejects missing whole-video evidence despite cached pass flags
+  ---
+  duration_ms: 3.311084
+  ...
+# Subtest: combined proof rejects mixing individually valid observations from different completed videos
+ok 15 - combined proof rejects mixing individually valid observations from different completed videos
+  ---
+  duration_ms: 10.3145
+  ...
+# Subtest: combined proof requires the current completed-video path and hash supplied by its caller
+ok 16 - combined proof requires the current completed-video path and hash supplied by its caller
+  ---
+  duration_ms: 6.548959
+  ...
+# Subtest: combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain
+ok 17 - combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain
+  ---
+  duration_ms: 13.476958
+  ...
+# Subtest: combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing
+ok 18 - combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing
+  ---
+  duration_ms: 29.24575
+  ...
+# Subtest: combined proof rejects missing or substituted planar layers and a severed decode-to-composition chain
+ok 19 - combined proof rejects missing or substituted planar layers and a severed decode-to-composition chain
+  ---
+  duration_ms: 89.257209
+  ...
+# Subtest: all decoded frame hashes retain order and exact rational timestamps
+ok 20 - all decoded frame hashes retain order and exact rational timestamps # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.1235
+  ...
+# Subtest: frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps
+ok 21 - frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.039583
+  ...
+# Subtest: audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS
+ok 22 - audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.030125
+  ...
+# Subtest: audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks
+ok 23 - audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.027625
+  ...
+# Subtest: byte equality and full decoded equality are independently valid exact gates
+ok 24 - byte equality and full decoded equality are independently valid exact gates # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.024292
+  ...
+# Subtest: one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests
+ok 25 - one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.023666
+  ...
+# Subtest: a cached pass cannot replace complete observations, stable input bindings or original encoder arguments
+ok 26 - a cached pass cannot replace complete observations, stable input bindings or original encoder arguments # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.024667
+  ...
+# Subtest: byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison
+ok 27 - byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.023708
+  ...
+# Subtest: mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames
+ok 28 - mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.025291
+  ...
+# Subtest: mock I/O compares every decoded frame and audio packet when container bytes differ
+ok 29 - mock I/O compares every decoded frame and audio packet when container bytes differ # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.028458
+  ...
+# Subtest: mock I/O preserves exact failure for an unknown one-pixel change
+ok 30 - mock I/O preserves exact failure for an unknown one-pixel change # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.0235
+  ...
+# Subtest: mock I/O detects inputs changing during encode and rejects a missing production PNG before any child
+ok 31 - mock I/O detects inputs changing during encode and rejects a missing production PNG before any child # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.021625
+  ...
+# Subtest: pulse replay binds every production PNG to its exact native state and order
+ok 32 - pulse replay binds every production PNG to its exact native state and order # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.0755
+  ...
+# Subtest: bounce replay binds every production PNG to its exact native state and order
+ok 33 - bounce replay binds every production PNG to its exact native state and order # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.082084
+  ...
+# Subtest: shake replay binds every production PNG to its exact native state and order
+ok 34 - shake replay binds every production PNG to its exact native state and order # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.02475
+  ...
+# Subtest: current completed-file identity is mandatory and rejects a stale pass for another same-format video
+ok 35 - current completed-file identity is mandatory and rejects a stale pass for another same-format video # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.0245
+  ...
+# Subtest: raw evidence, all observed commands, original stdout and artifact correspondence are mandatory
+ok 36 - raw evidence, all observed commands, original stdout and artifact correspondence are mandatory # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.0265
+  ...
+# Subtest: parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes
+ok 37 - parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.022459
+  ...
+# Subtest: sample/display aspect, color meaning and display side data must match despite identical pixel hashes
+ok 38 - sample/display aspect, color meaning and display side data must match despite identical pixel hashes # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.021541
+  ...
+# Subtest: bounce native QC rejects clamping, unbound images, missing states and invalid static layouts
+ok 39 - bounce native QC rejects clamping, unbound images, missing states and invalid static layouts # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.021584
+  ...
+# Subtest: bounce collision checks follow the moving state interval beyond the disjoint stable box
+ok 40 - bounce collision checks follow the moving state interval beyond the disjoint stable box # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.022125
+  ...
+# Subtest: shake native QC rejects clamping, unbound images, missing states and invalid static layouts
+ok 41 - shake native QC rejects clamping, unbound images, missing states and invalid static layouts # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.022042
+  ...
+# Subtest: shake collision checks follow the moving state interval beyond the disjoint stable box
+ok 42 - shake collision checks follow the moving state interval beyond the disjoint stable box # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.02575
+  ...
+1..42
+# tests 42
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 35
+# todo 0
+# duration_ms 252.476708

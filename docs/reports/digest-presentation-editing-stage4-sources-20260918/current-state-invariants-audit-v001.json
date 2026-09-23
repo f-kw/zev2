@@ -1,0 +1,3254 @@
+{
+  "schemaVersion": "stage4-current-state-invariants-audit-v001",
+  "createdAt": "2026-09-18T06:39:27.360Z",
+  "status": "passed",
+  "scope": "保存内容と固定された接続周辺生成入力の独立・読取専用照合。描画や重い試験の再実行なし。UI操作、人間目視、編集後全体生成の完成を認定しない。",
+  "method": "固定入力のbyte SHAを再照合し、保存前後を同じ元入力から再構成。追加された区間の長さと挿入位置から期待されるframe/sample差を別計算し、全字幕・全保持区間・全音声観測part・全有限動作へ照合。",
+  "evidenceInputs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/document.json",
+      "bytes": 9836,
+      "fileSha256": "d565d843b135ae842c93e135b6f916af7d50aa31dcb9fee335e6f0ca25386393"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/original-drawing-evidence.json",
+      "bytes": 975051,
+      "fileSha256": "c63e584c9eda4341ec2483ce900261681753c2d2fdaeee258696dd592b879c3b"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/source-bindings.json",
+      "bytes": 354254,
+      "fileSha256": "87d95289df43473c7eb4a672c1a57b314119db05d7124512398df3388bd0550e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/captionAuto.json",
+      "bytes": 43149,
+      "fileSha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/captionOverrides.json",
+      "bytes": 31772,
+      "fileSha256": "f8565737d1b5e4531c31be1c77b95e943e4c4a051af4aa31bd9f056b714e02ea"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/connectionAuto.json",
+      "bytes": 2159,
+      "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+      "bytes": 976,
+      "fileSha256": "56b3b7783d1b2188786cf81b1774021d0b3bcedae1fb80fc78e9ca59da3c2bec"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/selectionRecord.json",
+      "bytes": 477587,
+      "fileSha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/jobs/7b68ed40-58d0-4772-bf3c-fe36e46dd5e7/input/drawing-evidence.json",
+      "bytes": 975467,
+      "fileSha256": "fcc2ac91d5dc15cde88b36b1b7aede5a8735bb3ed8e6cb363bc9d381babc2baf"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/fresh-input.json",
+      "bytes": 382825,
+      "fileSha256": "122e83a28c4efdc5bfa052a74519039d858415551933596de55e8af0d33c275a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/raw-ai-response-v001.json",
+      "bytes": 27199,
+      "fileSha256": "7d1d7bc4e0587fa90c7d9115f5c79cb9d39b4ff7d9750aa32d561f6a0c602629"
+    }
+  ],
+  "viewIdentity": {
+    "original": "95e967d566d64c12f645aa1ff89ddaa62d6a2a0f9c8e284bbb62985913d0855a",
+    "current": "6e48ecc7e9e03f48eac6fe843ae29503c05f8d0d23f75d939e72aa231327e5e9",
+    "preview": "6e48ecc7e9e03f48eac6fe843ae29503c05f8d0d23f75d939e72aa231327e5e9",
+    "sourceClock": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+    "beforeProjection": "6d840adda73610ae4167e32ba029b4916f61325d2b38ea5f5c7d32a8909c45c1",
+    "afterProjection": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31"
+  },
+  "totals": {
+    "checks": 368,
+    "passed": 368,
+    "captions": 32,
+    "unchangedCaptionChoices": 31,
+    "changedCaptionChoices": 1,
+    "unchangedConnectionChoices": 5,
+    "changedConnectionChoices": 1,
+    "retainedSegments": 7,
+    "audioEvidenceIntervals": 27,
+    "audioEvidenceParts": 31,
+    "unchangedCaptionTimings": 7,
+    "shiftedCaptionTimings": 25
+  },
+  "edits": {
+    "caption": {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "text": "逃げるやつ?",
+      "before": {
+        "role": "Normal"
+      },
+      "after": {
+        "role": "Panel accent",
+        "presentation": "provisional-panel",
+        "scope": "whole-caption"
+      }
+    },
+    "connection": {
+      "before": {
+        "connectionId": "connection-01",
+        "beforeSegmentId": "segment-0001",
+        "afterSegmentId": "segment-0002",
+        "boundaryFrame": 340,
+        "role": "normal-cut",
+        "preset": "normal-cut",
+        "presetVersion": "v001",
+        "insertedFrameCount": 0
+      },
+      "after": {
+        "connectionId": "connection-01",
+        "beforeSegmentId": "segment-0001",
+        "afterSegmentId": "segment-0002",
+        "boundaryFrame": 340,
+        "role": "separator",
+        "preset": "black-separator",
+        "presetVersion": "v001",
+        "insertedFrameCount": 12
+      }
+    }
+  },
+  "clock": {
+    "framesPerSecond": 30,
+    "sourceFrameCount": 4831,
+    "displayFrameCountBefore": 4867,
+    "displayFrameCountAfter": 4879,
+    "addedFrames": 12,
+    "addedSeconds": 0.4,
+    "playbackSampleRate": 44100,
+    "sourcePlaybackSampleCount": 7101570,
+    "displayPlaybackSampleCountBefore": 7154490,
+    "displayPlaybackSampleCountAfter": 7172130,
+    "addedPlaybackSamples": 17640,
+    "observationSampleRate": 16000,
+    "addedObservationSamplesAfterBoundary": 6400
+  },
+  "retained": [
+    {
+      "segmentId": "segment-0001",
+      "sourceFrames": [
+        0,
+        340
+      ],
+      "sourceSamples": [
+        0,
+        499800
+      ],
+      "beforeDisplayFrames": [
+        0,
+        340
+      ],
+      "afterDisplayFrames": [
+        0,
+        340
+      ],
+      "shiftFrames": 0
+    },
+    {
+      "segmentId": "segment-0002",
+      "sourceFrames": [
+        340,
+        462
+      ],
+      "sourceSamples": [
+        499800,
+        679140
+      ],
+      "beforeDisplayFrames": [
+        340,
+        462
+      ],
+      "afterDisplayFrames": [
+        352,
+        474
+      ],
+      "shiftFrames": 12
+    },
+    {
+      "segmentId": "segment-0003",
+      "sourceFrames": [
+        462,
+        756
+      ],
+      "sourceSamples": [
+        679140,
+        1111320
+      ],
+      "beforeDisplayFrames": [
+        474,
+        768
+      ],
+      "afterDisplayFrames": [
+        486,
+        780
+      ],
+      "shiftFrames": 12
+    },
+    {
+      "segmentId": "segment-0004",
+      "sourceFrames": [
+        756,
+        2997
+      ],
+      "sourceSamples": [
+        1111320,
+        4405590
+      ],
+      "beforeDisplayFrames": [
+        768,
+        3009
+      ],
+      "afterDisplayFrames": [
+        780,
+        3021
+      ],
+      "shiftFrames": 12
+    },
+    {
+      "segmentId": "segment-0005",
+      "sourceFrames": [
+        2997,
+        3563
+      ],
+      "sourceSamples": [
+        4405590,
+        5237610
+      ],
+      "beforeDisplayFrames": [
+        3021,
+        3587
+      ],
+      "afterDisplayFrames": [
+        3033,
+        3599
+      ],
+      "shiftFrames": 12
+    },
+    {
+      "segmentId": "segment-0006",
+      "sourceFrames": [
+        3563,
+        4382
+      ],
+      "sourceSamples": [
+        5237610,
+        6441540
+      ],
+      "beforeDisplayFrames": [
+        3587,
+        4406
+      ],
+      "afterDisplayFrames": [
+        3599,
+        4418
+      ],
+      "shiftFrames": 12
+    },
+    {
+      "segmentId": "segment-0007",
+      "sourceFrames": [
+        4382,
+        4831
+      ],
+      "sourceSamples": [
+        6441540,
+        7101570
+      ],
+      "beforeDisplayFrames": [
+        4418,
+        4867
+      ],
+      "afterDisplayFrames": [
+        4430,
+        4879
+      ],
+      "shiftFrames": 12
+    }
+  ],
+  "captions": [
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "text": "あーもういるやん",
+      "lines": [
+        "あーもういるやん"
+      ],
+      "sourceFrames": [
+        8,
+        13
+      ],
+      "beforeDisplayFrames": [
+        8,
+        13
+      ],
+      "afterDisplayFrames": [
+        8,
+        13
+      ],
+      "displayFrameCount": 5,
+      "startShiftFrames": 0,
+      "endShiftFrames": 0,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "text": "これもういるやん",
+      "lines": [
+        "これもういるやん"
+      ],
+      "sourceFrames": [
+        13,
+        37
+      ],
+      "beforeDisplayFrames": [
+        13,
+        37
+      ],
+      "afterDisplayFrames": [
+        13,
+        37
+      ],
+      "displayFrameCount": 24,
+      "startShiftFrames": 0,
+      "endShiftFrames": 0,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "text": "いるやんいるやん",
+      "lines": [
+        "いるやんいるやん"
+      ],
+      "sourceFrames": [
+        37,
+        71
+      ],
+      "beforeDisplayFrames": [
+        37,
+        71
+      ],
+      "afterDisplayFrames": [
+        37,
+        71
+      ],
+      "displayFrameCount": 34,
+      "startShiftFrames": 0,
+      "endShiftFrames": 0,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "text": "もうリカちゃんやめてー!",
+      "lines": [
+        "もうリカちゃんやめてー!"
+      ],
+      "sourceFrames": [
+        71,
+        154
+      ],
+      "beforeDisplayFrames": [
+        71,
+        154
+      ],
+      "afterDisplayFrames": [
+        71,
+        154
+      ],
+      "displayFrameCount": 83,
+      "startShiftFrames": 0,
+      "endShiftFrames": 0,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+      "text": "リカー!",
+      "lines": [
+        "リカー!"
+      ],
+      "sourceFrames": [
+        154,
+        197
+      ],
+      "beforeDisplayFrames": [
+        154,
+        197
+      ],
+      "afterDisplayFrames": [
+        154,
+        197
+      ],
+      "displayFrameCount": 43,
+      "startShiftFrames": 0,
+      "endShiftFrames": 0,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "text": "もう勘弁してーよ",
+      "lines": [
+        "もう勘弁してーよ"
+      ],
+      "sourceFrames": [
+        197,
+        282
+      ],
+      "beforeDisplayFrames": [
+        197,
+        282
+      ],
+      "afterDisplayFrames": [
+        197,
+        282
+      ],
+      "displayFrameCount": 85,
+      "startShiftFrames": 0,
+      "endShiftFrames": 0,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "text": "この覗き方やめろ!",
+      "lines": [
+        "この覗き方やめろ!"
+      ],
+      "sourceFrames": [
+        282,
+        340
+      ],
+      "beforeDisplayFrames": [
+        282,
+        340
+      ],
+      "afterDisplayFrames": [
+        282,
+        340
+      ],
+      "displayFrameCount": 58,
+      "startShiftFrames": 0,
+      "endShiftFrames": 0,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "text": "え、もうやだー",
+      "lines": [
+        "え、もうやだー"
+      ],
+      "sourceFrames": [
+        340,
+        373
+      ],
+      "beforeDisplayFrames": [
+        340,
+        373
+      ],
+      "afterDisplayFrames": [
+        352,
+        385
+      ],
+      "displayFrameCount": 33,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "text": "もうこいつの覗き方もう世界一嫌い!",
+      "lines": [
+        "もうこいつの覗き方もう世界一嫌い!"
+      ],
+      "sourceFrames": [
+        373,
+        462
+      ],
+      "beforeDisplayFrames": [
+        373,
+        462
+      ],
+      "afterDisplayFrames": [
+        385,
+        474
+      ],
+      "displayFrameCount": 89,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "text": "逃げるやつ?",
+      "lines": [
+        "逃げるやつ?"
+      ],
+      "sourceFrames": [
+        462,
+        544
+      ],
+      "beforeDisplayFrames": [
+        474,
+        556
+      ],
+      "afterDisplayFrames": [
+        486,
+        568
+      ],
+      "displayFrameCount": 82,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": true
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+      "text": "逃げるんだ",
+      "lines": [
+        "逃げるんだ"
+      ],
+      "sourceFrames": [
+        544,
+        614
+      ],
+      "beforeDisplayFrames": [
+        556,
+        626
+      ],
+      "afterDisplayFrames": [
+        568,
+        638
+      ],
+      "displayFrameCount": 70,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+      "text": "でもこいつ走りでこれだよ",
+      "lines": [
+        "でもこいつ走りでこれだよ"
+      ],
+      "sourceFrames": [
+        614,
+        756
+      ],
+      "beforeDisplayFrames": [
+        626,
+        768
+      ],
+      "afterDisplayFrames": [
+        638,
+        780
+      ],
+      "displayFrameCount": 142,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "text": "おい、急に速くなった!",
+      "lines": [
+        "おい、急に速くなった!"
+      ],
+      "sourceFrames": [
+        756,
+        917
+      ],
+      "beforeDisplayFrames": [
+        768,
+        929
+      ],
+      "afterDisplayFrames": [
+        780,
+        941
+      ],
+      "displayFrameCount": 161,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "text": "なんかグロいやつに捕まってる",
+      "lines": [
+        "なんかグロいやつに捕まってる"
+      ],
+      "sourceFrames": [
+        1723,
+        1794
+      ],
+      "beforeDisplayFrames": [
+        1735,
+        1806
+      ],
+      "afterDisplayFrames": [
+        1747,
+        1818
+      ],
+      "displayFrameCount": 71,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "text": "どこ?",
+      "lines": [
+        "どこ?"
+      ],
+      "sourceFrames": [
+        2673,
+        2708
+      ],
+      "beforeDisplayFrames": [
+        2685,
+        2720
+      ],
+      "afterDisplayFrames": [
+        2697,
+        2732
+      ],
+      "displayFrameCount": 35,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+      "text": "何これ?",
+      "lines": [
+        "何これ?"
+      ],
+      "sourceFrames": [
+        2918,
+        2929
+      ],
+      "beforeDisplayFrames": [
+        2930,
+        2941
+      ],
+      "afterDisplayFrames": [
+        2942,
+        2953
+      ],
+      "displayFrameCount": 11,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+      "text": "なんか棺みたいなところに入れられてる!",
+      "lines": [
+        "なんか棺みたいな",
+        "ところに入れられてる!"
+      ],
+      "sourceFrames": [
+        2929,
+        2997
+      ],
+      "beforeDisplayFrames": [
+        2941,
+        3009
+      ],
+      "afterDisplayFrames": [
+        2953,
+        3021
+      ],
+      "displayFrameCount": 68,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+      "text": "まぁでも怖かったね",
+      "lines": [
+        "まぁでも怖かったね"
+      ],
+      "sourceFrames": [
+        2997,
+        3131
+      ],
+      "beforeDisplayFrames": [
+        3021,
+        3155
+      ],
+      "afterDisplayFrames": [
+        3033,
+        3167
+      ],
+      "displayFrameCount": 134,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+      "text": "やっぱここの会社さ、アングル攻めんのやめてほしい",
+      "lines": [
+        "やっぱここの会社さ、",
+        "アングル攻めんのやめてほしい"
+      ],
+      "sourceFrames": [
+        3131,
+        3286
+      ],
+      "beforeDisplayFrames": [
+        3155,
+        3310
+      ],
+      "afterDisplayFrames": [
+        3167,
+        3322
+      ],
+      "displayFrameCount": 155,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+      "text": "マジで怖い",
+      "lines": [
+        "マジで怖い"
+      ],
+      "sourceFrames": [
+        3286,
+        3346
+      ],
+      "beforeDisplayFrames": [
+        3310,
+        3370
+      ],
+      "afterDisplayFrames": [
+        3322,
+        3382
+      ],
+      "displayFrameCount": 60,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000021",
+      "text": "なんかさぁアングルで怖がらせんのマジ上手いと思うここの会社",
+      "lines": [
+        "なんかさぁアングルで怖がらせんの",
+        "マジ上手いと思うここの会社"
+      ],
+      "sourceFrames": [
+        3346,
+        3563
+      ],
+      "beforeDisplayFrames": [
+        3370,
+        3587
+      ],
+      "afterDisplayFrames": [
+        3382,
+        3599
+      ],
+      "displayFrameCount": 217,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+      "text": "カメラワークと今回時間差怖かった",
+      "lines": [
+        "カメラワークと今回時間差怖かった"
+      ],
+      "sourceFrames": [
+        3563,
+        3669
+      ],
+      "beforeDisplayFrames": [
+        3587,
+        3693
+      ],
+      "afterDisplayFrames": [
+        3599,
+        3705
+      ],
+      "displayFrameCount": 106,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000023",
+      "text": "いや分かってるよ",
+      "lines": [
+        "いや分かってるよ"
+      ],
+      "sourceFrames": [
+        3669,
+        3755
+      ],
+      "beforeDisplayFrames": [
+        3693,
+        3779
+      ],
+      "afterDisplayFrames": [
+        3705,
+        3791
+      ],
+      "displayFrameCount": 86,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000024",
+      "text": "なんかやっぱさ",
+      "lines": [
+        "なんかやっぱさ"
+      ],
+      "sourceFrames": [
+        3755,
+        3774
+      ],
+      "beforeDisplayFrames": [
+        3779,
+        3798
+      ],
+      "afterDisplayFrames": [
+        3791,
+        3810
+      ],
+      "displayFrameCount": 19,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+      "text": "ホラーゲーやってるとさなんか分かってくるじゃん",
+      "lines": [
+        "ホラーゲーやってるとさ",
+        "なんか分かってくるじゃん"
+      ],
+      "sourceFrames": [
+        3774,
+        3881
+      ],
+      "beforeDisplayFrames": [
+        3798,
+        3905
+      ],
+      "afterDisplayFrames": [
+        3810,
+        3917
+      ],
+      "displayFrameCount": 107,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000026",
+      "text": "あーここ来そうだなみたいなの",
+      "lines": [
+        "あーここ来そうだなみたいなの"
+      ],
+      "sourceFrames": [
+        3881,
+        3950
+      ],
+      "beforeDisplayFrames": [
+        3905,
+        3974
+      ],
+      "afterDisplayFrames": [
+        3917,
+        3986
+      ],
+      "displayFrameCount": 69,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000027",
+      "text": "ここの会社すごいのがさ",
+      "lines": [
+        "ここの会社すごいのがさ"
+      ],
+      "sourceFrames": [
+        3950,
+        4032
+      ],
+      "beforeDisplayFrames": [
+        3974,
+        4056
+      ],
+      "afterDisplayFrames": [
+        3986,
+        4068
+      ],
+      "displayFrameCount": 82,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000028",
+      "text": "いやもうなんか来るよなっていうところじゃないところで",
+      "lines": [
+        "いやもうなんか来るよなっていう",
+        "ところじゃないところで"
+      ],
+      "sourceFrames": [
+        4032,
+        4189
+      ],
+      "beforeDisplayFrames": [
+        4056,
+        4213
+      ],
+      "afterDisplayFrames": [
+        4068,
+        4225
+      ],
+      "displayFrameCount": 157,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+      "text": "油断させてビビらせてくるのがマジでここの会社多いなって思う",
+      "lines": [
+        "油断させてビビらせてくるのが",
+        "マジでここの会社多いなって思う"
+      ],
+      "sourceFrames": [
+        4231,
+        4382
+      ],
+      "beforeDisplayFrames": [
+        4255,
+        4406
+      ],
+      "afterDisplayFrames": [
+        4267,
+        4418
+      ],
+      "displayFrameCount": 151,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+      "text": "ただ覗くだけであんな毎回さ怖がらさせられてとんでもねえ",
+      "lines": [
+        "ただ覗くだけであんな毎回さ",
+        "怖がらさせられてとんでもねえ"
+      ],
+      "sourceFrames": [
+        4382,
+        4552
+      ],
+      "beforeDisplayFrames": [
+        4418,
+        4588
+      ],
+      "afterDisplayFrames": [
+        4430,
+        4600
+      ],
+      "displayFrameCount": 170,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+      "text": "今年一でしたわ今年一",
+      "lines": [
+        "今年一でしたわ今年一"
+      ],
+      "sourceFrames": [
+        4552,
+        4669
+      ],
+      "beforeDisplayFrames": [
+        4588,
+        4705
+      ],
+      "afterDisplayFrames": [
+        4600,
+        4717
+      ],
+      "displayFrameCount": 117,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000032",
+      "text": "いやびっくりポイントマジうまいと思うほんとに",
+      "lines": [
+        "いやびっくりポイント",
+        "マジうまいと思うほんとに"
+      ],
+      "sourceFrames": [
+        4669,
+        4831
+      ],
+      "beforeDisplayFrames": [
+        4705,
+        4867
+      ],
+      "afterDisplayFrames": [
+        4717,
+        4879
+      ],
+      "displayFrameCount": 162,
+      "startShiftFrames": 12,
+      "endShiftFrames": 12,
+      "expressionChanged": false
+    }
+  ],
+  "dynamicCaptions": [
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "text": "これもういるやん",
+      "expression": "Bounce",
+      "captionStart": {
+        "before": 13,
+        "after": 13,
+        "shiftFrames": 0
+      },
+      "finiteSegmentsBefore": [
+        {
+          "state": "small",
+          "startFrame": 13,
+          "endFrameExclusive": 15
+        },
+        {
+          "state": "middle",
+          "startFrame": 15,
+          "endFrameExclusive": 17
+        },
+        {
+          "state": "maximum",
+          "startFrame": 17,
+          "endFrameExclusive": 19
+        },
+        {
+          "state": "middle",
+          "startFrame": 19,
+          "endFrameExclusive": 21
+        },
+        {
+          "state": "stable",
+          "startFrame": 21,
+          "endFrameExclusive": 37
+        }
+      ],
+      "finiteSegmentsAfter": [
+        {
+          "state": "small",
+          "startFrame": 13,
+          "endFrameExclusive": 15
+        },
+        {
+          "state": "middle",
+          "startFrame": 15,
+          "endFrameExclusive": 17
+        },
+        {
+          "state": "maximum",
+          "startFrame": 17,
+          "endFrameExclusive": 19
+        },
+        {
+          "state": "middle",
+          "startFrame": 19,
+          "endFrameExclusive": 21
+        },
+        {
+          "state": "stable",
+          "startFrame": 21,
+          "endFrameExclusive": 37
+        }
+      ],
+      "animationStart": {
+        "before": 13,
+        "after": 13
+      },
+      "stableStart": {
+        "before": 21,
+        "after": 21
+      },
+      "maximumSizeInterval": {
+        "before": [
+          17,
+          19
+        ],
+        "after": [
+          17,
+          19
+        ]
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "text": "いるやんいるやん",
+      "expression": "Shake",
+      "captionStart": {
+        "before": 37,
+        "after": 37,
+        "shiftFrames": 0
+      },
+      "finiteSegmentsBefore": [
+        {
+          "state": "left-12",
+          "startFrame": 37,
+          "endFrameExclusive": 39
+        },
+        {
+          "state": "right-12",
+          "startFrame": 39,
+          "endFrameExclusive": 41
+        },
+        {
+          "state": "left-8",
+          "startFrame": 41,
+          "endFrameExclusive": 43
+        },
+        {
+          "state": "right-8",
+          "startFrame": 43,
+          "endFrameExclusive": 45
+        },
+        {
+          "state": "left-4",
+          "startFrame": 45,
+          "endFrameExclusive": 47
+        },
+        {
+          "state": "right-4",
+          "startFrame": 47,
+          "endFrameExclusive": 49
+        },
+        {
+          "state": "stable",
+          "startFrame": 49,
+          "endFrameExclusive": 71
+        }
+      ],
+      "finiteSegmentsAfter": [
+        {
+          "state": "left-12",
+          "startFrame": 37,
+          "endFrameExclusive": 39
+        },
+        {
+          "state": "right-12",
+          "startFrame": 39,
+          "endFrameExclusive": 41
+        },
+        {
+          "state": "left-8",
+          "startFrame": 41,
+          "endFrameExclusive": 43
+        },
+        {
+          "state": "right-8",
+          "startFrame": 43,
+          "endFrameExclusive": 45
+        },
+        {
+          "state": "left-4",
+          "startFrame": 45,
+          "endFrameExclusive": 47
+        },
+        {
+          "state": "right-4",
+          "startFrame": 47,
+          "endFrameExclusive": 49
+        },
+        {
+          "state": "stable",
+          "startFrame": 49,
+          "endFrameExclusive": 71
+        }
+      ],
+      "animationStart": {
+        "before": 37,
+        "after": 37
+      },
+      "stableStart": {
+        "before": 49,
+        "after": 49
+      },
+      "largestDisplacementIntervals": {
+        "before": [
+          {
+            "state": "left-12",
+            "startFrame": 37,
+            "endFrameExclusive": 39
+          },
+          {
+            "state": "right-12",
+            "startFrame": 39,
+            "endFrameExclusive": 41
+          }
+        ],
+        "after": [
+          {
+            "state": "left-12",
+            "startFrame": 37,
+            "endFrameExclusive": 39
+          },
+          {
+            "state": "right-12",
+            "startFrame": 39,
+            "endFrameExclusive": 41
+          }
+        ]
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "text": "もうリカちゃんやめてー!",
+      "expression": "Pulse",
+      "captionStart": {
+        "before": 71,
+        "after": 71,
+        "shiftFrames": 0
+      },
+      "finiteSegmentsBefore": [
+        {
+          "state": "normal",
+          "startFrame": 71,
+          "endFrameExclusive": 114
+        },
+        {
+          "state": "middle",
+          "startFrame": 114,
+          "endFrameExclusive": 117
+        },
+        {
+          "state": "maximum",
+          "startFrame": 117,
+          "endFrameExclusive": 121
+        },
+        {
+          "state": "middle",
+          "startFrame": 121,
+          "endFrameExclusive": 124
+        },
+        {
+          "state": "normal",
+          "startFrame": 124,
+          "endFrameExclusive": 154
+        }
+      ],
+      "finiteSegmentsAfter": [
+        {
+          "state": "normal",
+          "startFrame": 71,
+          "endFrameExclusive": 114
+        },
+        {
+          "state": "middle",
+          "startFrame": 114,
+          "endFrameExclusive": 117
+        },
+        {
+          "state": "maximum",
+          "startFrame": 117,
+          "endFrameExclusive": 121
+        },
+        {
+          "state": "middle",
+          "startFrame": 121,
+          "endFrameExclusive": 124
+        },
+        {
+          "state": "normal",
+          "startFrame": 124,
+          "endFrameExclusive": 154
+        }
+      ],
+      "actualMeasuredPeak": {
+        "peakId": "audio-peak-000020",
+        "sourceSample": 63040,
+        "observationSampleRate": 16000,
+        "displaySampleBefore": 63040,
+        "displaySampleAfter": 63040,
+        "beforeFrame": 118,
+        "afterFrame": 118,
+        "shiftFrames": 0
+      },
+      "animationStart": {
+        "before": 114,
+        "after": 114
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "text": "もう勘弁してーよ",
+      "expression": "Pulse",
+      "captionStart": {
+        "before": 197,
+        "after": 197,
+        "shiftFrames": 0
+      },
+      "finiteSegmentsBefore": [
+        {
+          "state": "normal",
+          "startFrame": 197,
+          "endFrameExclusive": 255
+        },
+        {
+          "state": "middle",
+          "startFrame": 255,
+          "endFrameExclusive": 258
+        },
+        {
+          "state": "maximum",
+          "startFrame": 258,
+          "endFrameExclusive": 262
+        },
+        {
+          "state": "middle",
+          "startFrame": 262,
+          "endFrameExclusive": 265
+        },
+        {
+          "state": "normal",
+          "startFrame": 265,
+          "endFrameExclusive": 282
+        }
+      ],
+      "finiteSegmentsAfter": [
+        {
+          "state": "normal",
+          "startFrame": 197,
+          "endFrameExclusive": 255
+        },
+        {
+          "state": "middle",
+          "startFrame": 255,
+          "endFrameExclusive": 258
+        },
+        {
+          "state": "maximum",
+          "startFrame": 258,
+          "endFrameExclusive": 262
+        },
+        {
+          "state": "middle",
+          "startFrame": 262,
+          "endFrameExclusive": 265
+        },
+        {
+          "state": "normal",
+          "startFrame": 265,
+          "endFrameExclusive": 282
+        }
+      ],
+      "actualMeasuredPeak": {
+        "peakId": "audio-peak-000047",
+        "sourceSample": 138560,
+        "observationSampleRate": 16000,
+        "displaySampleBefore": 138560,
+        "displaySampleAfter": 138560,
+        "beforeFrame": 259,
+        "afterFrame": 259,
+        "shiftFrames": 0
+      },
+      "animationStart": {
+        "before": 255,
+        "after": 255
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "text": "この覗き方やめろ!",
+      "expression": "Pulse",
+      "captionStart": {
+        "before": 282,
+        "after": 282,
+        "shiftFrames": 0
+      },
+      "finiteSegmentsBefore": [
+        {
+          "state": "normal",
+          "startFrame": 282,
+          "endFrameExclusive": 319
+        },
+        {
+          "state": "middle",
+          "startFrame": 319,
+          "endFrameExclusive": 322
+        },
+        {
+          "state": "maximum",
+          "startFrame": 322,
+          "endFrameExclusive": 326
+        },
+        {
+          "state": "middle",
+          "startFrame": 326,
+          "endFrameExclusive": 329
+        },
+        {
+          "state": "normal",
+          "startFrame": 329,
+          "endFrameExclusive": 340
+        }
+      ],
+      "finiteSegmentsAfter": [
+        {
+          "state": "normal",
+          "startFrame": 282,
+          "endFrameExclusive": 319
+        },
+        {
+          "state": "middle",
+          "startFrame": 319,
+          "endFrameExclusive": 322
+        },
+        {
+          "state": "maximum",
+          "startFrame": 322,
+          "endFrameExclusive": 326
+        },
+        {
+          "state": "middle",
+          "startFrame": 326,
+          "endFrameExclusive": 329
+        },
+        {
+          "state": "normal",
+          "startFrame": 329,
+          "endFrameExclusive": 340
+        }
+      ],
+      "actualMeasuredPeak": {
+        "peakId": "audio-peak-000059",
+        "sourceSample": 172480,
+        "observationSampleRate": 16000,
+        "displaySampleBefore": 172480,
+        "displaySampleAfter": 172480,
+        "beforeFrame": 323,
+        "afterFrame": 323,
+        "shiftFrames": 0
+      },
+      "animationStart": {
+        "before": 319,
+        "after": 319
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "text": "え、もうやだー",
+      "expression": "Shake",
+      "captionStart": {
+        "before": 340,
+        "after": 352,
+        "shiftFrames": 12
+      },
+      "finiteSegmentsBefore": [
+        {
+          "state": "left-12",
+          "startFrame": 340,
+          "endFrameExclusive": 342
+        },
+        {
+          "state": "right-12",
+          "startFrame": 342,
+          "endFrameExclusive": 344
+        },
+        {
+          "state": "left-8",
+          "startFrame": 344,
+          "endFrameExclusive": 346
+        },
+        {
+          "state": "right-8",
+          "startFrame": 346,
+          "endFrameExclusive": 348
+        },
+        {
+          "state": "left-4",
+          "startFrame": 348,
+          "endFrameExclusive": 350
+        },
+        {
+          "state": "right-4",
+          "startFrame": 350,
+          "endFrameExclusive": 352
+        },
+        {
+          "state": "stable",
+          "startFrame": 352,
+          "endFrameExclusive": 373
+        }
+      ],
+      "finiteSegmentsAfter": [
+        {
+          "state": "left-12",
+          "startFrame": 352,
+          "endFrameExclusive": 354
+        },
+        {
+          "state": "right-12",
+          "startFrame": 354,
+          "endFrameExclusive": 356
+        },
+        {
+          "state": "left-8",
+          "startFrame": 356,
+          "endFrameExclusive": 358
+        },
+        {
+          "state": "right-8",
+          "startFrame": 358,
+          "endFrameExclusive": 360
+        },
+        {
+          "state": "left-4",
+          "startFrame": 360,
+          "endFrameExclusive": 362
+        },
+        {
+          "state": "right-4",
+          "startFrame": 362,
+          "endFrameExclusive": 364
+        },
+        {
+          "state": "stable",
+          "startFrame": 364,
+          "endFrameExclusive": 385
+        }
+      ],
+      "animationStart": {
+        "before": 340,
+        "after": 352
+      },
+      "stableStart": {
+        "before": 352,
+        "after": 364
+      },
+      "largestDisplacementIntervals": {
+        "before": [
+          {
+            "state": "left-12",
+            "startFrame": 340,
+            "endFrameExclusive": 342
+          },
+          {
+            "state": "right-12",
+            "startFrame": 342,
+            "endFrameExclusive": 344
+          }
+        ],
+        "after": [
+          {
+            "state": "left-12",
+            "startFrame": 352,
+            "endFrameExclusive": 354
+          },
+          {
+            "state": "right-12",
+            "startFrame": 354,
+            "endFrameExclusive": 356
+          }
+        ]
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "text": "おい、急に速くなった!",
+      "expression": "Shake",
+      "captionStart": {
+        "before": 768,
+        "after": 780,
+        "shiftFrames": 12
+      },
+      "finiteSegmentsBefore": [
+        {
+          "state": "left-12",
+          "startFrame": 768,
+          "endFrameExclusive": 770
+        },
+        {
+          "state": "right-12",
+          "startFrame": 770,
+          "endFrameExclusive": 772
+        },
+        {
+          "state": "left-8",
+          "startFrame": 772,
+          "endFrameExclusive": 774
+        },
+        {
+          "state": "right-8",
+          "startFrame": 774,
+          "endFrameExclusive": 776
+        },
+        {
+          "state": "left-4",
+          "startFrame": 776,
+          "endFrameExclusive": 778
+        },
+        {
+          "state": "right-4",
+          "startFrame": 778,
+          "endFrameExclusive": 780
+        },
+        {
+          "state": "stable",
+          "startFrame": 780,
+          "endFrameExclusive": 929
+        }
+      ],
+      "finiteSegmentsAfter": [
+        {
+          "state": "left-12",
+          "startFrame": 780,
+          "endFrameExclusive": 782
+        },
+        {
+          "state": "right-12",
+          "startFrame": 782,
+          "endFrameExclusive": 784
+        },
+        {
+          "state": "left-8",
+          "startFrame": 784,
+          "endFrameExclusive": 786
+        },
+        {
+          "state": "right-8",
+          "startFrame": 786,
+          "endFrameExclusive": 788
+        },
+        {
+          "state": "left-4",
+          "startFrame": 788,
+          "endFrameExclusive": 790
+        },
+        {
+          "state": "right-4",
+          "startFrame": 790,
+          "endFrameExclusive": 792
+        },
+        {
+          "state": "stable",
+          "startFrame": 792,
+          "endFrameExclusive": 941
+        }
+      ],
+      "animationStart": {
+        "before": 768,
+        "after": 780
+      },
+      "stableStart": {
+        "before": 780,
+        "after": 792
+      },
+      "largestDisplacementIntervals": {
+        "before": [
+          {
+            "state": "left-12",
+            "startFrame": 768,
+            "endFrameExclusive": 770
+          },
+          {
+            "state": "right-12",
+            "startFrame": 770,
+            "endFrameExclusive": 772
+          }
+        ],
+        "after": [
+          {
+            "state": "left-12",
+            "startFrame": 780,
+            "endFrameExclusive": 782
+          },
+          {
+            "state": "right-12",
+            "startFrame": 782,
+            "endFrameExclusive": 784
+          }
+        ]
+      }
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "text": "どこ?",
+      "expression": "Bounce",
+      "captionStart": {
+        "before": 2685,
+        "after": 2697,
+        "shiftFrames": 12
+      },
+      "finiteSegmentsBefore": [
+        {
+          "state": "small",
+          "startFrame": 2685,
+          "endFrameExclusive": 2687
+        },
+        {
+          "state": "middle",
+          "startFrame": 2687,
+          "endFrameExclusive": 2689
+        },
+        {
+          "state": "maximum",
+          "startFrame": 2689,
+          "endFrameExclusive": 2691
+        },
+        {
+          "state": "middle",
+          "startFrame": 2691,
+          "endFrameExclusive": 2693
+        },
+        {
+          "state": "stable",
+          "startFrame": 2693,
+          "endFrameExclusive": 2720
+        }
+      ],
+      "finiteSegmentsAfter": [
+        {
+          "state": "small",
+          "startFrame": 2697,
+          "endFrameExclusive": 2699
+        },
+        {
+          "state": "middle",
+          "startFrame": 2699,
+          "endFrameExclusive": 2701
+        },
+        {
+          "state": "maximum",
+          "startFrame": 2701,
+          "endFrameExclusive": 2703
+        },
+        {
+          "state": "middle",
+          "startFrame": 2703,
+          "endFrameExclusive": 2705
+        },
+        {
+          "state": "stable",
+          "startFrame": 2705,
+          "endFrameExclusive": 2732
+        }
+      ],
+      "animationStart": {
+        "before": 2685,
+        "after": 2697
+      },
+      "stableStart": {
+        "before": 2693,
+        "after": 2705
+      },
+      "maximumSizeInterval": {
+        "before": [
+          2689,
+          2691
+        ],
+        "after": [
+          2701,
+          2703
+        ]
+      }
+    }
+  ],
+  "dynamicCoverage": "実DigestのPulse3件は接続01より前にあるためピーク移動は0 frame。後方のShake2件・Bounce1件は開始・有限状態とも12 frame後方へ移動。前方のShake1件・Bounce1件は不変。今回の実Digestから後方Pulse移動を実観測したとは主張しない。",
+  "checks": [
+    {
+      "meaning": "固定入力の保存内容一致: source-bindings.json",
+      "passed": true
+    },
+    {
+      "meaning": "固定入力の保存内容一致: fresh-input.json",
+      "passed": true
+    },
+    {
+      "meaning": "固定入力の保存内容一致: raw-ai-response-v001.json",
+      "passed": true
+    },
+    {
+      "meaning": "固定入力の保存内容一致: captionAuto.json",
+      "passed": true
+    },
+    {
+      "meaning": "固定入力の保存内容一致: connectionAuto.json",
+      "passed": true
+    },
+    {
+      "meaning": "固定入力の保存内容一致: selectionRecord.json",
+      "passed": true
+    },
+    {
+      "meaning": "固定入力の保存内容一致: original-drawing-evidence.json",
+      "passed": true
+    },
+    {
+      "meaning": "初期描画証拠と現在の元入力が完全一致",
+      "passed": true
+    },
+    {
+      "meaning": "元の字幕案・接続案・判断記録が完全一致",
+      "passed": true
+    },
+    {
+      "meaning": "接続周辺生成の固定snapshotと現在保存状態が一致",
+      "passed": true
+    },
+    {
+      "meaning": "接続周辺生成snapshotの元入力も一致",
+      "passed": true
+    },
+    {
+      "meaning": "元時計の内容・識別が不変",
+      "passed": true
+    },
+    {
+      "meaning": "保存字幕変更が指定したPanel一件だけ",
+      "passed": true
+    },
+    {
+      "meaning": "保存接続変更が指定したBlack一件だけ",
+      "passed": true
+    },
+    {
+      "meaning": "反映された字幕演出の差が指定した一件だけ",
+      "passed": true
+    },
+    {
+      "meaning": "反映された接続演出の差が指定した一件だけ",
+      "passed": true
+    },
+    {
+      "meaning": "今回追加された黒区間は元340 frame地点の12 frame",
+      "passed": true
+    },
+    {
+      "meaning": "表示全長が追加区間分だけ増加",
+      "passed": true
+    },
+    {
+      "meaning": "音声の論理sample数が追加区間分だけ増加",
+      "passed": true
+    },
+    {
+      "meaning": "元映像・元音声の論理全長が不変",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の元frameと元sampleが不変: segment-0001",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の投影時刻が挿入位置に対応: segment-0001",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の元frameと元sampleが不変: segment-0002",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の投影時刻が挿入位置に対応: segment-0002",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の元frameと元sampleが不変: segment-0003",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の投影時刻が挿入位置に対応: segment-0003",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の元frameと元sampleが不変: segment-0004",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の投影時刻が挿入位置に対応: segment-0004",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の元frameと元sampleが不変: segment-0005",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の投影時刻が挿入位置に対応: segment-0005",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の元frameと元sampleが不変: segment-0006",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の投影時刻が挿入位置に対応: segment-0006",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の元frameと元sampleが不変: segment-0007",
+      "passed": true
+    },
+    {
+      "meaning": "保持区間の投影時刻が挿入位置に対応: segment-0007",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000021",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000021",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000021",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000021",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000021",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000021",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000023",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000023",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000023",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000023",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000023",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000023",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000024",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000024",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000024",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000024",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000024",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000024",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000026",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000026",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000026",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000026",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000026",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000026",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000027",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000027",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000027",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000027",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000027",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000027",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000028",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000028",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000028",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000028",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000028",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000028",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+      "passed": true
+    },
+    {
+      "meaning": "字幕IDと原文・改行・文字索引・原素材参照が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000032",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の元時計区間が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000032",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の投影時刻が挿入位置に対応: digest-human-caption-repair-20260907-v001-instruction-instruction-000032",
+      "passed": true
+    },
+    {
+      "meaning": "字幕の表示時間と共通fadeを維持: digest-human-caption-repair-20260907-v001-instruction-instruction-000032",
+      "passed": true
+    },
+    {
+      "meaning": "Normal投影の非時刻属性が原文案と完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000032",
+      "passed": true
+    },
+    {
+      "meaning": "指定外字幕の非時刻属性が完全一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000032",
+      "passed": true
+    },
+    {
+      "meaning": "字幕32件を順序・件数とも維持",
+      "passed": true
+    },
+    {
+      "meaning": "境界前7字幕は不変・後方25字幕は12frame移動",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000001",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000001",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000001/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000001/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000002",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000002",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000002/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000002/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000003",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000003",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000003/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000003/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000004",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000004",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000004/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000004/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000004/1",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000004/1",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000005",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000005",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000005/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000005/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000006",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000006",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000006/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000006/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000007",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000007",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000007/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000007/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000008",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000008",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000008/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000008/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000009",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000009",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000009/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000009/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000010",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000010",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000010/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000010/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000011",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000011",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000011/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000011/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000012",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000012",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000012/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000012/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000013",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000013",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000013/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000013/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000014",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000014",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000014/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000014/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000015",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000015",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000015/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000015/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000016",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000016",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000016/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000016/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000017",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000017",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000017/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000017/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000017/1",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000017/1",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000018",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000018",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000018/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000018/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000019",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000019",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000019/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000019/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000020",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000020",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000020/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000020/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000021",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000021",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000021/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000021/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000021/1",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000021/1",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000022",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000022",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000022/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000022/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000023",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000023",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000023/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000023/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000024",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000024",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000024/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000024/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000024/1",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000024/1",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000025",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000025",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000025/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000025/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000026",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000026",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000026/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000026/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の元区間・除外部が不変: audio-event-000027",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持part数が不変: audio-event-000027",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測の保持元sampleが不変: audio-event-000027/0",
+      "passed": true
+    },
+    {
+      "meaning": "音声観測と再生の別時計を有理数のまま投影: audio-event-000027/0",
+      "passed": true
+    },
+    {
+      "meaning": "動きの状態順・状態ごとの相対時刻が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "passed": true
+    },
+    {
+      "meaning": "動きの状態順・状態ごとの相対時刻が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "passed": true
+    },
+    {
+      "meaning": "動きの状態順・状態ごとの相対時刻が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "passed": true
+    },
+    {
+      "meaning": "Pulseの測定ピークID・元sampleが不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "passed": true
+    },
+    {
+      "meaning": "Pulseの基準frameが測定sampleからの整数投影と一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "passed": true
+    },
+    {
+      "meaning": "動きの状態順・状態ごとの相対時刻が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "passed": true
+    },
+    {
+      "meaning": "Pulseの測定ピークID・元sampleが不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "passed": true
+    },
+    {
+      "meaning": "Pulseの基準frameが測定sampleからの整数投影と一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "passed": true
+    },
+    {
+      "meaning": "動きの状態順・状態ごとの相対時刻が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "passed": true
+    },
+    {
+      "meaning": "Pulseの測定ピークID・元sampleが不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "passed": true
+    },
+    {
+      "meaning": "Pulseの基準frameが測定sampleからの整数投影と一致: digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "passed": true
+    },
+    {
+      "meaning": "動きの状態順・状態ごとの相対時刻が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "passed": true
+    },
+    {
+      "meaning": "動きの状態順・状態ごとの相対時刻が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "passed": true
+    },
+    {
+      "meaning": "動きの状態順・状態ごとの相対時刻が不変: digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: document.json",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: original-drawing-evidence.json",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: source-bindings.json",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: captionAuto.json",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: captionOverrides.json",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: connectionAuto.json",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: connectionOverrides.json",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: selectionRecord.json",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: jobs/7b68ed40-58d0-4772-bf3c-fe36e46dd5e7/input/drawing-evidence.json",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: fresh-input.json",
+      "passed": true
+    },
+    {
+      "meaning": "照合中に入力が変わっていない: raw-ai-response-v001.json",
+      "passed": true
+    }
+  ]
+}

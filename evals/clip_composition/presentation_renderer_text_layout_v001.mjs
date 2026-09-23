@@ -102,6 +102,60 @@ const makeLine = (lineIndex, characters) => {
   };
 };
 
+/** Keep admitted line geometry intact; only partition each line's foreground fill. */
+export function buildPresentationColorRunsV001({text, indexedLines, fontColor, presentationColorRange}) {
+  if (validateIndexedLinesV001(text, indexedLines).status !== 'passed') {
+    throw new TypeError('color runs require intact indexed source text');
+  }
+  if (presentationColorRange !== undefined) {
+    const range = presentationColorRange;
+    const source = Array.from(text);
+    if (
+      !range || typeof range !== 'object' || Array.isArray(range)
+      || Object.keys(range).length !== 3
+      || Object.keys(range).some(key => !['startCodePoint', 'endCodePointExclusive', 'fontColor'].includes(key))
+      || !Number.isInteger(range.startCodePoint) || !Number.isInteger(range.endCodePointExclusive)
+      || range.startCodePoint < 0 || range.endCodePointExclusive > source.length
+      || range.startCodePoint >= range.endCodePointExclusive
+      || typeof range.fontColor !== 'string' || !/^#[0-9a-f]{6}$/iu.test(range.fontColor)
+    ) throw new TypeError('presentation color range is invalid');
+    const graphemeBoundaries = new Set([0]);
+    let codePointOffset = 0;
+    for (const {segment} of new Intl.Segmenter('und', {granularity: 'grapheme'}).segment(text)) {
+      codePointOffset += Array.from(segment).length;
+      graphemeBoundaries.add(codePointOffset);
+    }
+    if (!graphemeBoundaries.has(range.startCodePoint) || !graphemeBoundaries.has(range.endCodePointExclusive)) {
+      throw new TypeError('presentation color range splits a grapheme');
+    }
+    for (const line of indexedLines) {
+      const first = line.characters[0]?.sourceIndex;
+      const last = line.characters.at(-1)?.sourceIndex;
+      if (first !== undefined && (!graphemeBoundaries.has(first) || !graphemeBoundaries.has(last + 1))) {
+        throw new TypeError('indexed display line splits a grapheme');
+      }
+    }
+    if (!indexedLines.some(line => line.characters.some(item => item.role === 'visible'
+      && item.sourceIndex >= range.startCodePoint && item.sourceIndex < range.endCodePointExclusive))) {
+      throw new TypeError('presentation color range contains no visible characters');
+    }
+  }
+  return indexedLines.map(line => {
+    const runs = [];
+    for (const item of line.characters) {
+      if (item.role !== 'visible') continue;
+      const selected = presentationColorRange !== undefined
+        && item.sourceIndex >= presentationColorRange.startCodePoint
+        && item.sourceIndex < presentationColorRange.endCodePointExclusive;
+      const color = selected ? presentationColorRange.fontColor : fontColor;
+      const last = runs.at(-1);
+      if (last?.fontColor === color) last.text += item.character;
+      else runs.push({text: item.character, fontColor: color});
+    }
+    return runs;
+  });
+}
+
 /**
  * 非caption本文をcode point境界で折り返す。入力由来の改行もindex付き要素として
  * 保持し、描画用改行と混同しない。
@@ -202,7 +256,7 @@ export function indexExplicitLinesV001(lineTexts) {
         sourceIndex: nextIndex,
         character,
         codePoint: character.codePointAt(0),
-        role: 'visible',
+        role: character === '\n' || character === '\r' ? 'source-line-break' : 'visible',
       };
       nextIndex += 1;
       return item;
@@ -235,6 +289,7 @@ export function validateIndexedLinesV001(sourceText, indexedLines) {
       sourceCharacters[item.sourceIndex] !== item.character
       || item.codePoint !== item.character?.codePointAt(0)
       || item.sourceIndex !== position
+      || item.role !== (item.character === '\n' || item.character === '\r' ? 'source-line-break' : 'visible')
     ) {
       violations.push({
         code: 'TARGET_TEXT_MUTATED',

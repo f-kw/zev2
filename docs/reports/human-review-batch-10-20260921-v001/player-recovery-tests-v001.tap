@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: human play starts loading before metadata; recording waits for both metadata and the play response
+ok 1 - human play starts loading before metadata; recording waits for both metadata and the play response
+  ---
+  duration_ms: 5.416041
+  type: 'test'
+  ...
+# Subtest: media error survives late pause and metadata events; only explicit replay reloads the source
+ok 2 - media error survives late pause and metadata events; only explicit replay reloads the source
+  ---
+  duration_ms: 0.7255
+  type: 'test'
+  ...
+# Subtest: switching or explicit pause cancels pending play; an old completion cannot pause a new request
+ok 3 - switching or explicit pause cancels pending play; an old completion cannot pause a new request
+  ---
+  duration_ms: 0.497125
+  type: 'test'
+  ...
+# Subtest: durationchange or canplay can establish readiness without rewinding an active segment
+ok 4 - durationchange or canplay can establish readiness without rewinding an active segment
+  ---
+  duration_ms: 1.661667
+  type: 'test'
+  ...
+# Subtest: old-source metadata, pause, ended and cancelled callbacks cannot finish or stop the new request
+ok 5 - old-source metadata, pause, ended and cancelled callbacks cannot finish or stop the new request
+  ---
+  duration_ms: 0.768042
+  type: 'test'
+  ...
+# Subtest: invalid duration invalidates pending play and cannot be reopened by its delayed response
+ok 6 - invalid duration invalidates pending play and cannot be reopened by its delayed response
+  ---
+  duration_ms: 0.55825
+  type: 'test'
+  ...
+# Subtest: segment end is enforced while play response is pending; external seeks remain clipped
+ok 7 - segment end is enforced while play response is pending; external seeks remain clipped
+  ---
+  duration_ms: 0.821208
+  type: 'test'
+  ...
+# Subtest: a rejected starting seek or play leaves no pending start and retains a visible error
+ok 8 - a rejected starting seek or play leaves no pending start and retains a visible error
+  ---
+  duration_ms: 0.979167
+  type: 'test'
+  ...
+# Subtest: all 17 saved view ranges can switch, start, stop, and return using one simulated video element
+ok 9 - all 17 saved view ranges can switch, start, stop, and return using one simulated video element
+  ---
+  duration_ms: 18.644125
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 145.869958

@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "q5-actual-content-preflight-v002",
+  "recordedAt": "2026-09-20T16:09:12.131Z",
+  "status": "passed",
+  "sourceRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/source.json",
+    "bytes": 1306,
+    "fileSha256": "13430742f97280efbafa9f0dff790072613238908ed53a991a2ae628e552385d"
+  },
+  "editPlanRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/edit-plan-v002.json",
+    "bytes": 2561895,
+    "fileSha256": "55b5b00253401fd7ef740aa0f62f0b4ebaa4fa4fd4f4b9461d997d19544d13e5"
+  },
+  "boundaryEvidenceRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/retention-boundary-v002.json",
+    "bytes": 6055,
+    "fileSha256": "c5d833c4fd0b346a4c9684546baa3804e6a574ec173dcd872c1dc1eea9a31b80"
+  },
+  "policyRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/instruction-received-v002.md",
+    "bytes": 5075,
+    "fileSha256": "94413e1ebcd1ad4f24625d260b3b0d3daf57a286e29a4def94ea6056b1b6e72a"
+  },
+  "jobRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-job-v003.json",
+    "bytes": 3167,
+    "fileSha256": "40cd9a83173e709500ba1bcfc0cd4769867022ce941637c0a1a0cc17018f5dd3"
+  },
+  "comparisonRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/comparison-preflight-v002.json",
+    "bytes": 51528,
+    "fileSha256": "bb913456eb754f833797665b55712adbd109563fe2b0643338e768d1d8456a78"
+  },
+  "cancellationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/cancelled-plan-v002.json",
+    "bytes": 2548795,
+    "fileSha256": "ef99c08cc0d7a28f75c56e3237cc0f5d11d5929c8ddb55e860586dcef27dcfb0"
+  },
+  "priorFailureRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/preflight-failure-v001.json",
+    "bytes": 595,
+    "fileSha256": "e87e84f2581de1a5bb90b78094dc3d42b3baffcb86cdb164c7979b3cb9b0ca7f"
+  },
+  "priorJobRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-job-v002.json",
+    "bytes": 1870,
+    "fileSha256": "b7ba8a2e824e53edac7c30bdfec9b47f2ab582083fc8f7ba80947be76ec73524"
+  },
+  "originalObservationCopies": [
+    {
+      "role": "candidates",
+      "originalRef": {
+        "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/audio-candidates.json",
+        "fileSha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817"
+      },
+      "copyRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-audio-candidates.json",
+        "bytes": 600900,
+        "fileSha256": "280bb1360b9517df27753a285e3be246e310b12de5cabb4d1c75c89928664817"
+      }
+    },
+    {
+      "role": "peaks",
+      "originalRef": {
+        "path": "/private/tmp/zev-vocal-accent-6mnpszdq/audio-probe/run-v001/c-all/acoustic-peaks.json",
+        "fileSha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d"
+      },
+      "copyRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/legacy-acoustic-peaks.json",
+        "bytes": 5612034,
+        "fileSha256": "dc5349e1470ce6ccd78b9775af7dbcd9ef3c8dcbfd9bac4f53a6800aeeccf80d"
+      }
+    }
+  ],
+  "implementationRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-edit-plan.mjs",
+      "bytes": 28349,
+      "fileSha256": "9303dec05a87a08fa529d502c2b37159dbc5b2fffc8620a16ebfefe8c50586ba"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-edit-plan.test.mjs",
+      "bytes": 22452,
+      "fileSha256": "4c666d2ee4d1600ec7f88dd4c4c9461556364603adb627c02ae81b47179a731d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.mjs",
+      "bytes": 32434,
+      "fileSha256": "ea97880ab4026ab29f10ba9a606612806b7e5060dfdc1a6d1f8eca4fa34721c6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.test.mjs",
+      "bytes": 24027,
+      "fileSha256": "1b607f5bee69d51cfbafed1f2863f246d5bb9775a8a26ffcdd60278efa589254"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs",
+      "bytes": 61871,
+      "fileSha256": "3a01da6a3897c44beea540aba4602793d5e445780f79ce891daee258a40f7ecd"
+    }
+  ],
+  "contentVersion": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+  "originalFrameCount": 44408,
+  "editedFrameCount": 44349,
+  "originalCaptionCount": 325,
+  "editedCaptionCount": 324,
+  "hiddenCaptionIds": [
+    "digest-v1-phase2-20260913-v001-bridge-caption-000121"
+  ],
+  "removedFrameCount": 59,
+  "retainedFrameCounts": {
+    "left": 44,
+    "right": 16
+  },
+  "beforeComparisonFrameCount": 822,
+  "afterComparisonFrameCount": 763,
+  "afterComparisonCaptionCount": 5,
+  "checks": {
+    "actualSourceFactory": true,
+    "rendererInputBoundary": true,
+    "savedReloadExact": true,
+    "all324ProtectedCaptionPayloadsUnchanged": true,
+    "postOmissionShiftExactly59": true,
+    "cancellationRestores325AndOriginalClock": true,
+    "retained48kPlaybackAnd16kObservationSeparate": true,
+    "sameFirstFixedCutAfterObservationLocatorRepair": true
+  },
+  "humanQuality": "not-evaluated",
+  "adopted": false
+}

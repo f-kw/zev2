@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "r1-caption-short-verification-v001",
+  "point": 6,
+  "status": "passed",
+  "completionRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-06/render-evidence/completion.json",
+    "bytes": 2449180,
+    "fileSha256": "3c7a1398d22538f3f4219ef3143b5868778cde6614e242bbd4f947ecf6dbc5eb"
+  },
+  "candidateVideo": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-06/render/presentation-rendered-v002.mp4",
+    "bytes": 5168730,
+    "fileSha256": "0e10a25cf8e5544345d8a5bf0e13e5e486872c7e0cdcd5e2771af0e751bb16c0"
+  },
+  "frameCount": 686,
+  "reviewMedia": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-06/render/presentation-rendered-v002.mp4",
+    "sha256": "0e10a25cf8e5544345d8a5bf0e13e5e486872c7e0cdcd5e2771af0e751bb16c0",
+    "fps_num": 30,
+    "fps_den": 1,
+    "total_frames": 686,
+    "timeline_id": "r1-point-6-short-frame-v001",
+    "timeline_start_frame": 0
+  },
+  "localRange": {
+    "startFrame": 0,
+    "endFrameExclusive": 686
+  },
+  "sourceClockId": "q5-original-c-all-frame-v001",
+  "sourceRange": {
+    "startFrame": 2511,
+    "endFrameExclusive": 3197
+  },
+  "captionRanges": [
+    {
+      "text": "チャットで送ってみるか",
+      "startFrame": 0,
+      "endFrameExclusive": 31
+    },
+    {
+      "text": "えっと今うぶちゃん",
+      "startFrame": 31,
+      "endFrameExclusive": 145
+    },
+    {
+      "text": "みーちゃんの変化量が",
+      "startFrame": 152,
+      "endFrameExclusive": 280
+    },
+    {
+      "text": "もう10くらいいってんだよな",
+      "startFrame": 280,
+      "endFrameExclusive": 425
+    },
+    {
+      "text": "そこにさらに追加で変化球を覚えさせても",
+      "startFrame": 425,
+      "endFrameExclusive": 686
+    }
+  ],
+  "preservation": {
+    "backgroundDecodedFramesSame": true,
+    "backgroundDecodedSha256": "8bcd18de5befc8edef577292629a3ad31b45fc299d8556ca246e5a712b8eec94",
+    "baseRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-06/render-evidence/base-lossless-video-original-audio.mp4",
+      "fileSha256": "05183b079c292fdd5954792bb13787fc5e968d8054f4198c8da5ccf4e8c749ba",
+      "bytes": 47321929
+    },
+    "aacPacketPayloadSame": true,
+    "logicalDecodedAudioSame": true,
+    "logicalDecodedSampleCount": 1097600,
+    "splitParentTextAndOrderUnchanged": true
+  },
+  "finalQc": {
+    "schemaVersion": "presentation-render-qc-v002",
+    "status": "passed",
+    "instructionCount": 5,
+    "checks": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "layoutAndVisibility": {
+        "status": "passed"
+      },
+      "media": {
+        "status": "passed"
+      }
+    },
+    "violations": []
+  },
+  "completedFrameQcSummary": {
+    "status": "passed",
+    "method": "exact-replay-native-v1",
+    "violations": []
+  },
+  "nativeAssets": {
+    "nativeDraws": 31,
+    "bitmapReuses": 0,
+    "verifiedPairsAdded": 11
+  },
+  "formalTrustChanged": false,
+  "humanQuality": "not-evaluated",
+  "mediaEditChanged": false,
+  "launchArgumentCorrection": {
+    "failureRef": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-06/launch-a-v001-failure.json",
+      "bytes": 1018,
+      "fileSha256": "1ef6bb57f10105e3be35d43ea0888b7b52cfaba7734b655fdbae8d5d85f8b0a6"
+    },
+    "effect": "既存の絶対path必須条件を満たさない呼出が描画前に拒否された。同じjobの実在する絶対pathで起動し直した。実装・入力・検査を追加変更していない。",
+    "nativeOrCacheReachedInRejectedCall": false
+  }
+}

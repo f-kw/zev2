@@ -1,0 +1,80 @@
+TAP version 13
+# Subtest: one internal omission resolves 13 pieces, source parentage, all captions and a shorter whole-content clock
+ok 1 - one internal omission resolves 13 pieces, source parentage, all captions and a shorter whole-content clock
+  ---
+  duration_ms: 8.179333
+  ...
+# Subtest: the 48kHz playback clock and exact 16kHz observation boundaries remain distinct
+ok 2 - the 48kHz playback clock and exact 16kHz observation boundaries remain distinct
+  ---
+  duration_ms: 3.832209
+  ...
+# Subtest: all omitted captions have no output and all retained captions keep their complete payload
+ok 3 - all omitted captions have no output and all retained captions keep their complete payload
+  ---
+  duration_ms: 4.313666
+  ...
+# Subtest: point mapping uses half-open omission and rejects repeated projection
+ok 4 - point mapping uses half-open omission and rejects repeated projection
+  ---
+  duration_ms: 35.434167
+  ...
+# Subtest: a caption ending at omission start or starting at omission end remains intact
+ok 5 - a caption ending at omission start or starting at omission end remains intact
+  ---
+  duration_ms: 3.046208
+  ...
+# Subtest: invalid omission ranges, multiple omissions and range boundary contact are rejected
+ok 6 - invalid omission ranges, multiple omissions and range boundary contact are rejected
+  ---
+  duration_ms: 0.722334
+  ...
+# Subtest: partial subtitle cutting is rejected at either omission boundary
+ok 7 - partial subtitle cutting is rejected at either omission boundary
+  ---
+  duration_ms: 1.136458
+  ...
+# Subtest: an explicit null restores original captions, all retained content and both clocks exactly
+ok 8 - an explicit null restores original captions, all retained content and both clocks exactly
+  ---
+  duration_ms: 20.683625
+  ...
+# Subtest: save/reload reconstructs from original bytes and refuses changed plan, range, version or source
+ok 9 - save/reload reconstructs from original bytes and refuses changed plan, range, version or source
+  ---
+  duration_ms: 39.082417
+  ...
+# Subtest: derived and serialized objects cannot be passed as an original input context
+ok 10 - derived and serialized objects cannot be passed as an original input context
+  ---
+  duration_ms: 3.040375
+  ...
+# Subtest: content identity deterministically binds source, omission, policy and candidate
+ok 11 - content identity deterministically binds source, omission, policy and candidate
+  ---
+  duration_ms: 10.353083
+  ...
+# Subtest: short comparison retains the same entry/exit context and ordered source pieces without restarting captions
+ok 12 - short comparison retains the same entry/exit context and ordered source pieces without restarting captions
+  ---
+  duration_ms: 10.207542
+  ...
+# Subtest: short comparison refuses mid-caption endpoints, another scene, missing context and cancelled content
+ok 13 - short comparison refuses mid-caption endpoints, another scene, missing context and cancelled content
+  ---
+  duration_ms: 26.118958
+  ...
+# Subtest: byte-bound source verification rejects changed source bytes, mismatched media and false production identity
+ok 14 - byte-bound source verification rejects changed source bytes, mismatched media and false production identity
+  ---
+  duration_ms: 2.613834
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 231.193709

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "q4-orchestration-core-verification-v001",
+  "recordedAt": "2026-09-20T08:34:09.576563+00:00",
+  "status": "passed",
+  "changedFiles": [
+    {
+      "path": "evals/clip_composition/presentation_orchestration_v001.mjs",
+      "bytes": 41484,
+      "sha256": "1c9ebb2b6994c503ced3695e4ff553b366671d6cb64c82c769f645606eb0e3b8"
+    },
+    {
+      "path": "evals/clip_composition/presentation_orchestration_v001.test.mjs",
+      "bytes": 23036,
+      "sha256": "e1e5a8bb2442fe57d1bff72a430ff94c0f3ab8a4e4a5ebfcd904e7ac1873ffcb"
+    },
+    {
+      "path": "evals/clip_composition/presentation_orchestration_panel_background_v002.test.mjs",
+      "bytes": 26089,
+      "sha256": "80f3af605b49eb28c639ba187c60073737a1aed84b5cd1b4d9d9d5f1488c5ae7"
+    }
+  ],
+  "directTests": {
+    "passed": 37,
+    "failed": 0,
+    "finalRun": "orchestration-panel-tests-v004.json",
+    "retainedRuns": [
+      "orchestration-panel-tests-v001.json",
+      "orchestration-panel-tests-v002.json",
+      "orchestration-panel-tests-v003.json",
+      "orchestration-panel-tests-v004.json"
+    ],
+    "testSetupCorrections": 0,
+    "implementationDefectCorrections": 0
+  },
+  "scope": [
+    "Two-stage finite expression then Panel background selection",
+    "Original expression assignment SHA and non-Panel/connection invariance",
+    "Strict reply JSON and complete explicit background allowlists",
+    "Finite final preset saving, reload validation, override independence and Reset",
+    "Explicit v001-history technical recompilation with preserved original bytes and hashes",
+    "Fresh Codex versus technical recompilation origin validation",
+    "C-all explicit preserve-normal-cut input and response restriction",
+    "Whole-audio saved ASR references outside acoustic candidates"
+  ],
+  "limits": [
+    "Synthetic direct cases only; no new real-media rendering or semantic judgment performed in this ownership task.",
+    "Human quality acceptance is not inferred from numeric or structural tests.",
+    "HRB old-state recompilation and C-all input/render integration are owned and verified separately."
+  ]
+}

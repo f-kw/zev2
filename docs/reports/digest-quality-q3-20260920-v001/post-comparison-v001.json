@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "digest-quality-post-comparison-v001",
+  "inputSha256": "65102e48de14824e63435f70d0453c5d36233f47a802048e933ada4d7be79a8d",
+  "rawReplySha256": "0b7981f9fe017b2f8379f5c5a107f2c03e0816480224e72bbb80252386f28b07",
+  "references": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/post-judgment-sources-v001/human-review-pending-before-q3.md",
+      "sha256": "a0c5f6f23de936f12c0df545948beb4b0a699cd94b78fb71ea8fffb668bf2449"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/human-response-original-v001.md",
+      "sha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/selectionRecord.json",
+      "sha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/review-main-v001.json",
+      "sha256": "5810ae6d13133cba265c161c84ec3f8024ad778917c62485897c9195392371e3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md",
+      "sha256": "8f365834bc3b90a0fc188dc88563d9432abf2999e3a9d5c85bece3b76b7f2892"
+    }
+  ],
+  "judgmentConditions": "初回判断担当は親会話を引き継がず、保存入力と指示だけを読んで実回答を保存した。その保存後に、過去回答を既に知る取りまとめ担当が今回の資料照合を実施。後段の選別を独立発見とは呼ばない。",
+  "entries": [
+    {
+      "candidateId": "Q3-C001",
+      "disposition": "present",
+      "reason": "最初の5frame字幕と前後の切替に関する読み取りの問いは、過去の動き機能の採用・滑らかさの指摘とは別で、約2秒の局所確認として後の表示時間/入退場検討を変え得る。保存済みには短すぎて反応の動きを表現できない例外が既にあり、その再発見を未知の欠陥発見とは呼ばない。",
+      "knownRelations": [
+        {
+          "id": "HR-009",
+          "relationship": "通常字幕の読み取り基準は未評価。今回の回答は冒頭の最初の文と切替だけに属する。"
+        },
+        {
+          "id": "HR-003",
+          "relationship": "跳ねる動きは使用可。今回の問いは機能採否やHRC-003の滑らかさを再質問しない。"
+        },
+        {
+          "id": "HR-004",
+          "relationship": "揺れる動きは使用可。今回の問いは機能採否やHRC-003の滑らかさを再質問しない。"
+        }
+      ],
+      "reviewId": "HR-Q3-001",
+      "reviewTitle": "冒頭の最初の言葉と字幕の切替",
+      "scopeExclusions": [
+        "跳ねる・揺れる動きの機能使用可という採用判断",
+        "Q1の動きの滑らかさの修正後確認",
+        "字幕本文や採用区間を変更する許可"
+      ],
+      "contextRange": {
+        "startFrame": 0,
+        "endFrameExclusive": 71
+      }
+    },
+    {
+      "candidateId": "Q3-C002",
+      "disposition": "withheld",
+      "reason": "74.7秒の区間に複数の発話と字幕なし区間をまとめた問いであり、回答一つから具体的な字幕採用箇所を決められない。旧ASRの確認不足もある。無字幕だけを欠陥とせず、保持理由と画面を見せる意図も保存した上で、後の字幕選択/編集品質の検討候補として保留する。今回の短いPoint Reviewへ長区間を持ち込まず、別の小候補を手置きして補わない。",
+      "knownRelations": [
+        {
+          "id": "HR-006",
+          "relationship": "一本全体の使い分けは未評価であり、この仮説でも合否を付けない。"
+        },
+        {
+          "id": "HR-001",
+          "relationship": "区間内のPanelには既知センタリング/背景課題があるが、この仮説は字幕を出す箇所に関する別の観点。既知HRCを増殖させない。"
+        }
+      ],
+      "reviewId": null,
+      "reviewTitle": null,
+      "scopeExclusions": [],
+      "contextRange": null
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: Normal preserves every caption and source frame and supplies a single base span
+ok 1 - Normal preserves every caption and source frame and supplies a single base span
+  ---
+  duration_ms: 3.21525
+  ...
+# Subtest: mixed insertions shift once and soft windows follow resolved spans after preceding insertions
+ok 2 - mixed insertions shift once and soft windows follow resolved spans after preceding insertions
+  ---
+  duration_ms: 1.241125
+  ...
+# Subtest: saved overrides and Reset restore the original soft choice while preserving another edit
+ok 3 - saved overrides and Reset restore the original soft choice while preserving another edit
+  ---
+  duration_ms: 2.059
+  ...
+# Subtest: normal override remains explicit and edit order cannot change the saved result
+ok 4 - normal override remains explicit and edit order cannot change the saved result
+  ---
+  duration_ms: 1.287958
+  ...
+# Subtest: original JSON bytes, Digest version and Digest SHA all bind saved records
+ok 5 - original JSON bytes, Digest version and Digest SHA all bind saved records
+  ---
+  duration_ms: 0.842667
+  ...
+# Subtest: hash failures and correctly resealed identity, version and free-value changes are rejected
+ok 6 - hash failures and correctly resealed identity, version and free-value changes are rejected
+  ---
+  duration_ms: 1.0905
+  ...
+# Subtest: all finite selection entrances reject unknown, duplicate, version and extra fields
+ok 7 - all finite selection entrances reject unknown, duplicate, version and extra fields
+  ---
+  duration_ms: 1.471
+  ...
+# Subtest: soft needs six retained frames on both sides and cannot reuse one retained frame twice
+ok 8 - soft needs six retained frames on both sides and cannot reuse one retained frame twice
+  ---
+  duration_ms: 1.057625
+  ...
+# Subtest: captions ending or starting on a cut survive, while a crossing caption rejects insertion
+ok 9 - captions ending or starting on a cut survive, while a crossing caption rejects insertion
+  ---
+  duration_ms: 0.698083
+  ...
+# Subtest: soft filters use the specified twelve discrete luma/chroma states and keep audio identical to black
+ok 10 - soft filters use the specified twelve discrete luma/chroma states and keep audio identical to black
+  ---
+  duration_ms: 1.003042
+  ...
+# Subtest: renderer accepts an exactly cropped local clock and rejects incomplete or conflicting windows
+ok 11 - renderer accepts an exactly cropped local clock and rejects incomplete or conflicting windows
+  ---
+  duration_ms: 0.657792
+  ...
+# Subtest: malformed original clocks and context extras are rejected before any record can be created
+ok 12 - malformed original clocks and context extras are rejected before any record can be created
+  ---
+  duration_ms: 0.438583
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 54.901125

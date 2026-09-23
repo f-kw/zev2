@@ -1,0 +1,201 @@
+*** Begin Patch
+*** Update File: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs
+@@
+-import {stat, mkdir, mkdtemp, readFile, writeFile} from 'node:fs/promises';
++import {stat, mkdir, mkdtemp, readFile, readdir, writeFile} from 'node:fs/promises';
+@@
+ export {
+-  frameExtractionArguments as buildPresentationNativeFrameExtractionArgumentsV001,
++  frameExtractionArguments as buildPresentationNativeFrameBatchExtractionArgumentsV001,
+   nativeReferenceArguments as buildPresentationNativeReferenceArgumentsV001,
+ };
+@@
+ export const PRESENTATION_NATIVE_FRAME_QC_BASIS_V001 = 'native-reference-state-identification-v001';
++export const PRESENTATION_NATIVE_FRAME_EXECUTION_V001 = 'batched-frames-shared-native-layers-v001';
+@@
+-function frameExtractionArguments(input, frame, output) {
+-  const seconds = Math.floor(frame / 30);
+-  const remainder = frame - seconds * 30;
++function frameExtractionArguments(input, frames, outputPattern) {
++  requireValue(Array.isArray(frames) && frames.length > 0
++    && frames.every((frame, index) => integer(frame) && (index === 0 || frame > frames[index - 1])),
++  'batch extraction requires sorted distinct media frames');
++  requireValue(typeof outputPattern === 'string' && path.isAbsolute(outputPattern)
++    && path.basename(outputPattern) === 'frame-%09d.png', 'batch extraction output pattern differs');
++  const seconds = Math.floor(frames[0] / 30);
++  const selected = frames.map(frame => 'eq(n\\,' + (frame - seconds * 30) + ')').join('+');
+   return ['-hide_banner', '-loglevel', 'error', '-y', '-ss', String(seconds), '-i', input,
+-    '-vf', 'select=eq(n\\,' + remainder + ')', '-frames:v', '1', output];
++    '-an', '-vf', 'select=' + selected, '-fps_mode', 'passthrough',
++    '-frames:v', String(frames.length), '-start_number', '0', outputPattern];
+ }
+ 
+-function nativeReferenceArguments({sample, sceneBindings, baseFramePath, outputPaths}) {
++export function buildPresentationNativeFrameBatchPlanV001({samples, directory}) {
++  requireValue(Array.isArray(samples) && typeof directory === 'string' && path.isAbsolute(directory),
++    'frame extraction plan requires samples and an absolute directory');
++  const unique = new Map();
++  for (const sample of samples) {
++    const mediaFrame = sample.mediaFrame ?? sample.frame;
++    requireValue(integer(sample.frame) && integer(mediaFrame), 'frame extraction clock differs');
++    requireValue(!unique.has(sample.frame) || unique.get(sample.frame) === mediaFrame,
++      'one global frame maps to different media frames');
++    unique.set(sample.frame, mediaFrame);
++  }
++  const ordered = [...unique].sort((left, right) => left[0] - right[0]);
++  requireValue(ordered.every((row, index) => index === 0 || row[1] > ordered[index - 1][1]),
++    'global and local frame order differ');
++  const baseOutputPattern = path.join(directory, 'base', 'frame-%09d.png');
++  const completedOutputPattern = path.join(directory, 'completed', 'frame-%09d.png');
++  return {method: 'single-open-selected-frames-v001', directory, baseOutputPattern, completedOutputPattern,
++    frames: ordered.map(([frame, mediaFrame], index) => ({frame, mediaFrame,
++      basePath: path.join(directory, 'base', 'frame-' + String(index).padStart(9, '0') + '.png'),
++      completedPath: path.join(directory, 'completed', 'frame-' + String(index).padStart(9, '0') + '.png')}))};
++}
++
++const layerAlpha = layer => {
++  requireValue(integer(layer.localFrame) && integer(layer.displayFrameCount) && layer.displayFrameCount > layer.localFrame,
++    'native reference layer time differs');
++  return Math.min(4, layer.localFrame + 1, layer.displayFrameCount - layer.localFrame);
++};
++const layerKey = (pngSha256, numerator) => hashJson({pngSha256, numerator, denominator: 4});
++
++export function buildPresentationNativeLayerPlanV001({samples, sceneBindings, directory}) {
++  requireValue(path.isAbsolute(directory), 'prepared native layer directory must be absolute');
+   const byId = new Map(sceneBindings.flatMap(group => [...group.states, ...group.alternates])
+     .map(row => [row.bindingId, row]));
+-  const uses = new Map();
+-  for (const reference of sample.references) for (const layer of reference.layers) {
+-    const key = layer.bindingId + '/' + layer.localFrame + '/' + layer.displayFrameCount;
+-    const found = uses.get(key);
+-    if (found) found.count++;
+-    else uses.set(key, {layer, count: 1});
++  const sourceByHash = new Map();
++  for (const binding of byId.values()) if (!sourceByHash.has(binding.pngSha256))
++    sourceByHash.set(binding.pngSha256, binding.pngPath);
++  const layers = new Map();
++  for (const sample of samples) for (const reference of sample.references) for (const layer of reference.layers) {
++    const binding = byId.get(layer.bindingId);
++    requireValue(binding, 'native reference layer has no bound PNG');
++    const numerator = layerAlpha(layer), key = layerKey(binding.pngSha256, numerator);
++    if (!layers.has(key)) layers.set(key, {key, sourcePath: sourceByHash.get(binding.pngSha256),
++      sourceSha256: binding.pngSha256, numerator, denominator: 4,
++      outputPath: numerator === 4 ? sourceByHash.get(binding.pngSha256) : path.join(directory, 'layer-' + key + '.png'),
++      generated: numerator !== 4});
+   }
+-  const paths = [...new Set([...uses.values()].map(use => byId.get(use.layer.bindingId).pngPath))];
+-  const args = ['-hide_banner', '-loglevel', 'error', '-nostdin', '-y', '-filter_complex_threads', '1', '-i', baseFramePath];
+-  for (const file of paths) args.push('-threads', '1', '-i', file);
+-  const filters = [];
+-  const baseLabels = sample.references.map((_ref, index) => 'base' + index);
+-  filters.push('[0:v]format=yuv420p,split=' + baseLabels.length + baseLabels.map(label => '[' + label + ']').join(''));
+-  const useEntries = [...uses.entries()];
+-  for (const [fileIndex, file] of paths.entries()) {
+-    const matching = useEntries.filter(([_key, use]) => byId.get(use.layer.bindingId).pngPath === file);
+-    filters.push('[' + (fileIndex + 1) + ':v]format=rgba'
+-      + (matching.length === 1 ? '[png' + fileIndex + '-0]'
+-        : ',split=' + matching.length + matching.map((_entry, index) => '[png' + fileIndex + '-' + index + ']').join('')));
+-    for (const [useIndex, [key, use]] of matching.entries()) {
+-      const index = useEntries.findIndex(entry => entry[0] === key);
+-      const local = use.layer.localFrame;
+-      const duration = use.layer.displayFrameCount;
+-      const alpha = 'alpha(X,Y)*min(1,min((' + local + '+1)/4,(' + duration + '-' + local + ')/4))';
+-      const labels = Array.from({length: use.count}, (_unused, n) => 'faded' + index + '-' + n);
+-      filters.push('[png' + fileIndex + '-' + useIndex + ']geq=r=\'r(X,Y)\':g=\'g(X,Y)\':b=\'b(X,Y)\':a=\'' + alpha + '\''
+-        + (labels.length === 1 ? '[' + labels[0] + ']'
+-          : ',split=' + labels.length + labels.map(label => '[' + label + ']').join('')));
+-      use.labels = labels;
+-      use.next = 0;
+-    }
++  return {method: 'exact-native-png-four-frame-alpha-v001', directory,
++    layers: [...layers.values()].sort((left, right) => left.key.localeCompare(right.key))};
++}
++
++export function buildPresentationNativeLayerArgumentsV001(layers) {
++  requireValue(Array.isArray(layers) && layers.length > 0 && layers.every(layer => layer.generated
++    && layer.sourcePath === layers[0].sourcePath && layer.sourceSha256 === layers[0].sourceSha256
++    && [1, 2, 3].includes(layer.numerator) && layer.denominator === 4), 'prepared native layer group differs');
++  const filters = ['[0:v]format=rgba' + (layers.length === 1 ? '[native0]' : ',split=' + layers.length
++    + layers.map((_layer, index) => '[native' + index + ']').join(''))];
++  layers.forEach((layer, index) => filters.push('[native' + index + ']geq=r=\'r(X,Y)\':g=\'g(X,Y)\':b=\'b(X,Y)\':a=\'alpha(X,Y)*( '
++    .replace('( ', '(') + layer.numerator + '/4)\',format=rgba[out' + index + ']'));
++  const args = ['-hide_banner', '-loglevel', 'error', '-nostdin', '-y', '-filter_complex_threads', '1',
++    '-threads', '1', '-i', layers[0].sourcePath, '-filter_complex', filters.join(';')];
++  layers.forEach((layer, index) => args.push('-map', '[out' + index + ']', '-frames:v', '1', '-c:v', 'png', '-threads', '1', layer.outputPath));
++  return args;
++}
++
++function preparedReferenceLayers(reference, sceneBindings, nativeLayers) {
++  const byId = new Map(sceneBindings.flatMap(group => [...group.states, ...group.alternates]).map(row => [row.bindingId, row]));
++  const prepared = new Map(nativeLayers.layers.map(layer => [layer.key, layer]));
++  return reference.layers.map(layer => {
++    const binding = byId.get(layer.bindingId);
++    requireValue(binding, 'native reference layer has no PNG');
++    const result = prepared.get(layerKey(binding.pngSha256, layerAlpha(layer)));
++    requireValue(result, 'native reference layer has not been prepared');
++    return result;
++  });
++}
++
++export function buildPresentationNativeReferenceExecutionV001({sample, sceneBindings, nativeLayers, directory}) {
++  requireValue(path.isAbsolute(directory) && HASH.test(sample.baseFrame?.fileSha256), 'reference execution source is not bound');
++  return sample.references.map(reference => {
++    const layers = preparedReferenceLayers(reference, sceneBindings, nativeLayers);
++    const key = hashJson({baseFrameSha256: sample.baseFrame.fileSha256, crop: sample.crop, layers: layers.map(layer => layer.key)});
++    return {reference, key, path: path.join(directory, 'reference-' + key + '.rgb')};
++  });
++}
++
++function nativeReferenceArguments({sample, sceneBindings, baseFramePath, outputPaths, nativeLayers}) {
++  requireValue(sample.references.length === outputPaths.length && outputPaths.length > 0,
++    'native reference outputs differ');
++  // A trie shares only identical ordered prefixes. Every logical candidate still
++  // points to its own fully derived scene, including omitted and order-swapped scenes.
++  const nodes = [{id: 0, parent: null, layer: null, children: new Map(), outputs: []}];
++  sample.references.forEach((reference, index) => {
++    let node = nodes[0];
++    for (const layer of preparedReferenceLayers(reference, sceneBindings, nativeLayers)) {
++      if (!node.children.has(layer.key)) {
++        const child = {id: nodes.length, parent: node, layer, children: new Map(), outputs: []};
++        nodes.push(child); node.children.set(layer.key, child);
++      }
++      node = node.children.get(layer.key);
++    }
++    node.outputs.push(index);
++  });
++  const usedLayers = [...new Map(nodes.slice(1).map(node => [node.layer.key, node.layer])).values()];
++  const args = ['-hide_banner', '-loglevel', 'error', '-nostdin', '-y', '-filter_complex_threads', '1', '-i', baseFramePath];
++  usedLayers.forEach(layer => args.push('-threads', '1', '-i', layer.outputPath));
++  const filters = [];
++  for (const [index, layer] of usedLayers.entries()) {
++    const uses = nodes.filter(node => node.layer?.key === layer.key);
++    // The old geq path converts RGBA through planar GBR+alpha. Keep that exact
++    // conversion even when alpha is already prepared or is fully opaque.
++    filters.push('[' + (index + 1) + ':v]format=rgba,format=gbrap' + (uses.length === 1
++      ? '[layer' + uses[0].id + ']' : ',split=' + uses.length + uses.map(node => '[layer' + node.id + ']').join('')));
+   }
+-  for (const [referenceIndex, reference] of sample.references.entries()) {
+-    let previous = baseLabels[referenceIndex];
+-    for (const [layerIndex, layer] of reference.layers.entries()) {
+-      const use = uses.get(layer.bindingId + '/' + layer.localFrame + '/' + layer.displayFrameCount);
+-      const next = 'scene' + referenceIndex + '-' + layerIndex;
+-      filters.push('[' + previous + '][' + use.labels[use.next++] + ']overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[' + next + ']');
+-      previous = next;
++  for (const node of nodes) {
++    const consumers = [...node.children.values()].map(child => 'parent' + child.id)
++      .concat(node.outputs.map(index => 'reference' + index));
++    requireValue(consumers.length > 0, 'native reference prefix is unused');
++    const prefix = node.parent === null ? '[0:v]format=yuv420p'
++      : '[parent' + node.id + '][layer' + node.id + ']overlay=0:0:eof_action=pass:shortest=0:repeatlast=0';
++    filters.push(prefix + (consumers.length === 1 ? '[' + consumers[0] + ']'
++      : ',split=' + consumers.length + consumers.map(label => '[' + label + ']').join('')));
++    for (const index of node.outputs) {
++      const crop = sample.crop;
++      filters.push('[reference' + index + ']format=yuv420p,format=rgb24,crop=' + crop.width + ':' + crop.height + ':'
++        + crop.left + ':' + crop.top + ':exact=1[out' + index + ']');
+     }
+-    const crop = sample.crop;
+-    filters.push('[' + previous + ']format=yuv420p,format=rgb24,crop=' + crop.width + ':' + crop.height + ':'
+-      + crop.left + ':' + crop.top + ':exact=1[out' + referenceIndex + ']');
+   }
+*** End Patch

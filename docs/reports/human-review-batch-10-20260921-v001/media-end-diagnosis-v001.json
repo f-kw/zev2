@@ -1,0 +1,722 @@
+{
+  "schemaVersion": "human-review-media-end-diagnosis-v001",
+  "recordedAt": "2026-09-21T04:45:17.547Z",
+  "scope": "Stored metadata, returned human answers, and code-only readiness simulation. No browser/file-URL operation, media decoding, media modification, or human-quality judgment was performed.",
+  "runtime": {
+    "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "version": "v20.19.6"
+  },
+  "sourceReferences": [
+    {
+      "role": "saved-metadata",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/playback-metadata-diagnosis-v001.json",
+      "sha256": "b5cf06e2353a7bf3ff703069f4c58fc1c3de0152e5922db087d11b2f24c1d8ef"
+    },
+    {
+      "role": "returned-human-answers",
+      "path": "/Users/kawafmm/Downloads/HRS-20260921-10-POINTS-answers.json",
+      "sha256": "c38b86fab35766038c20889ef10792196e7f4aead1a2a434ea83327b50a8ecff"
+    },
+    {
+      "role": "player-before-media-end-repair",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/point-review/player.mjs",
+      "sha256": "a2b1ab29e2a27e7d3cb50fc9471e230c40c3ce4b6b873efb8b56aed9ce4397f1"
+    }
+  ],
+  "browserDurationObserved": false,
+  "reportedErrors": [
+    {
+      "pointId": "Q1-PANEL-BACKGROUND-VARIANTS",
+      "choice": "no_decision",
+      "comment": "無地以外壊れて見えない。指定区間を動画内で確認できません。",
+      "rawResponse": "判断しない\n無地以外壊れて見えない。指定区間を動画内で確認できません。",
+      "source": "local_form",
+      "answeredAt": "2026-09-21T04:30:01.590Z",
+      "playbackStartedViewIds": [
+        "background-plain"
+      ]
+    },
+    {
+      "pointId": "Q5-1-C001",
+      "choice": "no_decision",
+      "comment": "壊れて見えない　指定区間を動画内で確認できません。",
+      "rawResponse": "判断しない\n壊れて見えない　指定区間を動画内で確認できません。",
+      "source": "local_form",
+      "answeredAt": "2026-09-21T04:37:44.401Z",
+      "playbackStartedViewIds": []
+    }
+  ],
+  "summary": {
+    "viewCount": 17,
+    "exactTickDurationRejected": [],
+    "storedDecimalDurationRejected": [
+      "background-graph-paper",
+      "background-comic-frame",
+      "Q5-AFTER-VIEW"
+    ],
+    "decimalRejectedPoints": [
+      3,
+      9
+    ],
+    "reportedErrorPoints": [
+      3,
+      9
+    ]
+  },
+  "conclusion": {
+    "established": "The unchanged player rejects exactly three views when given the saved decimal duration values; the same 17 views are all accepted with exact video-tick duration values. The rejected views are the two explicitly reported background variants and the initially displayed Q5-1 After candidate.",
+    "hypothesis": "Browser duration quantization at the media end is consistent with the reported failures. The actual browser duration values and failing event order were not observed.",
+    "limit": "The Q5-1 answer does not name a failing view and has no playback-start record. The diagnosis does not claim that its Before view failed or that stored ffprobe decimal text is an observation of browser duration.",
+    "repairBasis": "Preserve all declared integer frame ranges. At a verified media-end selection only, require the reported media duration to extend past the last included frame start. Preserve strict end checks for interior selections and stop at a confirmed current-resource EOF without seeking past actual duration.",
+    "arbitraryToleranceAdded": false,
+    "decimalPrecisionUsedForRepair": false
+  },
+  "cases": [
+    {
+      "pointNumber": 1,
+      "pointId": "Q1-PANEL-CENTER-SHORT",
+      "viewId": "short-before",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+      "mediaSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "frames": {
+        "start": 486,
+        "endExclusive": 568,
+        "total": 4879,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": false,
+      "logicalEndSeconds": 18.933333333333334,
+      "lastIncludedFrameStartSeconds": 18.9,
+      "storedDuration": {
+        "videoTicks": 2498048,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 162.63333333333333,
+        "containerDecimalText": "162.633333",
+        "containerDecimalSeconds": 162.633333
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": false,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 1,
+      "pointId": "Q1-PANEL-CENTER-SHORT",
+      "viewId": "short-after",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-render-v002/presentation-rendered-v002.mp4",
+      "mediaSha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118",
+      "frames": {
+        "start": 30,
+        "endExclusive": 112,
+        "total": 137,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": false,
+      "logicalEndSeconds": 3.7333333333333334,
+      "lastIncludedFrameStartSeconds": 3.7,
+      "storedDuration": {
+        "videoTicks": 70144,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 4.566666666666666,
+        "containerDecimalText": "4.566667",
+        "containerDecimalSeconds": 4.566667
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 2,
+      "pointId": "Q1-PANEL-CENTER-WIDE",
+      "viewId": "wide-before",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+      "mediaSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "frames": {
+        "start": 1747,
+        "endExclusive": 1818,
+        "total": 4879,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": false,
+      "logicalEndSeconds": 60.6,
+      "lastIncludedFrameStartSeconds": 60.56666666666667,
+      "storedDuration": {
+        "videoTicks": 2498048,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 162.63333333333333,
+        "containerDecimalText": "162.633333",
+        "containerDecimalSeconds": 162.633333
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 2,
+      "pointId": "Q1-PANEL-CENTER-WIDE",
+      "viewId": "wide-after",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-render/presentation-rendered-v002.mp4",
+      "mediaSha256": "290dd256d75bf596cb4775ab3697e778687916f893eae70fa1e148c745a4ccdf",
+      "frames": {
+        "start": 16,
+        "endExclusive": 87,
+        "total": 99,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": false,
+      "logicalEndSeconds": 2.9,
+      "lastIncludedFrameStartSeconds": 2.8666666666666667,
+      "storedDuration": {
+        "videoTicks": 50688,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 3.3,
+        "containerDecimalText": "3.300000",
+        "containerDecimalSeconds": 3.3
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 3,
+      "pointId": "Q1-PANEL-BACKGROUND-VARIANTS",
+      "viewId": "background-plain",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-render-v002/presentation-rendered-v002.mp4",
+      "mediaSha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118",
+      "frames": {
+        "start": 30,
+        "endExclusive": 112,
+        "total": 137,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": false,
+      "logicalEndSeconds": 3.7333333333333334,
+      "lastIncludedFrameStartSeconds": 3.7,
+      "storedDuration": {
+        "videoTicks": 70144,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 4.566666666666666,
+        "containerDecimalText": "4.566667",
+        "containerDecimalSeconds": 4.566667
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": true
+      }
+    },
+    {
+      "pointNumber": 3,
+      "pointId": "Q1-PANEL-BACKGROUND-VARIANTS",
+      "viewId": "background-graph-paper",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-graph-paper-render/presentation-rendered-v002.mp4",
+      "mediaSha256": "5169c7f29ed7abe26fafca1c79debedf927bff7a0ee0e8a1c115b419d2c6fa6b",
+      "frames": {
+        "start": 0,
+        "endExclusive": 82,
+        "total": 82,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": true,
+      "logicalEndSeconds": 2.7333333333333334,
+      "lastIncludedFrameStartSeconds": 2.7,
+      "storedDuration": {
+        "videoTicks": 41984,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 2.7333333333333334,
+        "containerDecimalText": "2.733333",
+        "containerDecimalSeconds": 2.733333
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": false,
+          "error": "指定区間を動画内で確認できません。"
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": false,
+        "pointHasReportedRangeError": true
+      }
+    },
+    {
+      "pointNumber": 3,
+      "pointId": "Q1-PANEL-BACKGROUND-VARIANTS",
+      "viewId": "background-comic-frame",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-comic-frame-render/presentation-rendered-v002.mp4",
+      "mediaSha256": "e14ab77c96a80780668c791c6a94498ca1fceb47bf1da25f9368bc9e3f7e7085",
+      "frames": {
+        "start": 0,
+        "endExclusive": 82,
+        "total": 82,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": true,
+      "logicalEndSeconds": 2.7333333333333334,
+      "lastIncludedFrameStartSeconds": 2.7,
+      "storedDuration": {
+        "videoTicks": 41984,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 2.7333333333333334,
+        "containerDecimalText": "2.733333",
+        "containerDecimalSeconds": 2.733333
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": false,
+          "error": "指定区間を動画内で確認できません。"
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": false,
+        "pointHasReportedRangeError": true
+      }
+    },
+    {
+      "pointNumber": 4,
+      "pointId": "Q1-MOTION-SMOOTHNESS",
+      "viewId": "motion-before",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+      "mediaSha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "frames": {
+        "start": 0,
+        "endExclusive": 170,
+        "total": 4879,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": false,
+      "logicalEndSeconds": 5.666666666666667,
+      "lastIncludedFrameStartSeconds": 5.633333333333334,
+      "storedDuration": {
+        "videoTicks": 2498048,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 162.63333333333333,
+        "containerDecimalText": "162.633333",
+        "containerDecimalSeconds": 162.633333
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 4,
+      "pointId": "Q1-MOTION-SMOOTHNESS",
+      "viewId": "motion-after",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+      "mediaSha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58",
+      "frames": {
+        "start": 0,
+        "endExclusive": 170,
+        "total": 170,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": true,
+      "logicalEndSeconds": 5.666666666666667,
+      "lastIncludedFrameStartSeconds": 5.633333333333334,
+      "storedDuration": {
+        "videoTicks": 87040,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 5.666666666666667,
+        "containerDecimalText": "5.666667",
+        "containerDecimalSeconds": 5.666667
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 5,
+      "pointId": "Q3-C001",
+      "viewId": "Q3-C001-current",
+      "mediaPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+      "mediaSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "frames": {
+        "start": 8,
+        "endExclusive": 71,
+        "total": 4867,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": false,
+      "logicalEndSeconds": 2.3666666666666667,
+      "lastIncludedFrameStartSeconds": 2.3333333333333335,
+      "storedDuration": {
+        "videoTicks": 2491904,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 162.23333333333332,
+        "containerDecimalText": "162.233333",
+        "containerDecimalSeconds": 162.233333
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 6,
+      "pointId": "Q4-C001",
+      "viewId": "Q4-C001-current",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C001-render/presentation-rendered-v002.mp4",
+      "mediaSha256": "209397f26a3164d61496b599fe2b7209db3f6d4949115cd27ea63ac4690017ce",
+      "frames": {
+        "start": 0,
+        "endExclusive": 686,
+        "total": 686,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": true,
+      "logicalEndSeconds": 22.866666666666667,
+      "lastIncludedFrameStartSeconds": 22.833333333333332,
+      "storedDuration": {
+        "videoTicks": 351232,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 22.866666666666667,
+        "containerDecimalText": "22.866667",
+        "containerDecimalSeconds": 22.866667
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 7,
+      "pointId": "Q4-C002",
+      "viewId": "Q4-C002-current",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C002-render/presentation-rendered-v002.mp4",
+      "mediaSha256": "9ea1730ccc3bd3561291a185428aa3aa72afcc2610b0225adcd8c37049f44fce",
+      "frames": {
+        "start": 0,
+        "endExclusive": 128,
+        "total": 128,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": true,
+      "logicalEndSeconds": 4.266666666666667,
+      "lastIncludedFrameStartSeconds": 4.233333333333333,
+      "storedDuration": {
+        "videoTicks": 65536,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 4.266666666666667,
+        "containerDecimalText": "4.266667",
+        "containerDecimalSeconds": 4.266667
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 8,
+      "pointId": "Q4-C003",
+      "viewId": "Q4-C003-current",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C003-render/presentation-rendered-v002.mp4",
+      "mediaSha256": "0a5bd2a7b8a461b4e0276df660ddf09c452dcc60b0d47b0e2780551cfebc4145",
+      "frames": {
+        "start": 0,
+        "endExclusive": 282,
+        "total": 282,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": true,
+      "logicalEndSeconds": 9.4,
+      "lastIncludedFrameStartSeconds": 9.366666666666667,
+      "storedDuration": {
+        "videoTicks": 144384,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 9.4,
+        "containerDecimalText": "9.400000",
+        "containerDecimalSeconds": 9.4
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 9,
+      "pointId": "Q5-1-C001",
+      "viewId": "Q5-BEFORE-VIEW",
+      "mediaPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "mediaSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+      "frames": {
+        "start": 11683,
+        "endExclusive": 12505,
+        "total": 44408,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": false,
+      "logicalEndSeconds": 416.8333333333333,
+      "lastIncludedFrameStartSeconds": 416.8,
+      "storedDuration": {
+        "videoTicks": 22736886,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 1480.266015625,
+        "containerDecimalText": "1480.266016",
+        "containerDecimalSeconds": 1480.266016
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": false,
+        "pointHasReportedRangeError": true
+      }
+    },
+    {
+      "pointNumber": 9,
+      "pointId": "Q5-1-C001",
+      "viewId": "Q5-AFTER-VIEW",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+      "mediaSha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6",
+      "frames": {
+        "start": 0,
+        "endExclusive": 763,
+        "total": 763,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": true,
+      "logicalEndSeconds": 25.433333333333334,
+      "lastIncludedFrameStartSeconds": 25.4,
+      "storedDuration": {
+        "videoTicks": 390656,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 25.433333333333334,
+        "containerDecimalText": "25.433333",
+        "containerDecimalSeconds": 25.433333
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": false,
+          "error": "指定区間を動画内で確認できません。"
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": false,
+        "pointHasReportedRangeError": true
+      }
+    },
+    {
+      "pointNumber": 10,
+      "pointId": "Q5-2-C001",
+      "viewId": "Q5-2-BEFORE-VIEW",
+      "mediaPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "mediaSha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+      "frames": {
+        "start": 18578,
+        "endExclusive": 18857,
+        "total": 44408,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": false,
+      "logicalEndSeconds": 628.5666666666667,
+      "lastIncludedFrameStartSeconds": 628.5333333333333,
+      "storedDuration": {
+        "videoTicks": 22736886,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 1480.266015625,
+        "containerDecimalText": "1480.266016",
+        "containerDecimalSeconds": 1480.266016
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": false,
+        "pointHasReportedRangeError": false
+      }
+    },
+    {
+      "pointNumber": 10,
+      "pointId": "Q5-2-C001",
+      "viewId": "Q5-2-AFTER-VIEW",
+      "mediaPath": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/after-render-v002/presentation-rendered-v002.mp4",
+      "mediaSha256": "98d73010ebfa93bf9b094781e279d705f51771d295ae3fbc9fe78d1f0f365737",
+      "frames": {
+        "start": 0,
+        "endExclusive": 624,
+        "total": 624,
+        "fpsNum": 30,
+        "fpsDen": 1
+      },
+      "selectionEndsAtMediaEnd": true,
+      "logicalEndSeconds": 20.8,
+      "lastIncludedFrameStartSeconds": 20.766666666666666,
+      "storedDuration": {
+        "videoTicks": 319488,
+        "videoTimeBase": "1/15360",
+        "exactTickSeconds": 20.8,
+        "containerDecimalText": "20.800000",
+        "containerDecimalSeconds": 20.8
+      },
+      "codeOnlyObservation": {
+        "exactTickSeconds": {
+          "ready": true,
+          "error": ""
+        },
+        "containerDecimalSeconds": {
+          "ready": true,
+          "error": ""
+        }
+      },
+      "returnedAnswer": {
+        "playbackStartRecorded": true,
+        "pointHasReportedRangeError": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+TAP version 13
+# Subtest: candidate and zero-supported outcomes remain distinct from semantic certification
+ok 1 - candidate and zero-supported outcomes remain distinct from semantic certification
+  ---
+  duration_ms: 2.22175
+  ...
+# Subtest: rejects changed input binding
+ok 2 - rejects changed input binding
+  ---
+  duration_ms: 0.828666
+  ...
+# Subtest: rejects incomplete context coverage
+ok 3 - rejects incomplete context coverage
+  ---
+  duration_ms: 0.6025
+  ...
+# Subtest: rejects duplicated context coverage
+ok 4 - rejects duplicated context coverage
+  ---
+  duration_ms: 0.333333
+  ...
+# Subtest: rejects caption from another context
+ok 5 - rejects caption from another context
+  ---
+  duration_ms: 0.211542
+  ...
+# Subtest: rejects speech from another context
+ok 6 - rejects speech from another context
+  ---
+  duration_ms: 0.20225
+  ...
+# Subtest: rejects same speech retained and omitted
+ok 7 - rejects same speech retained and omitted
+  ---
+  duration_ms: 0.233792
+  ...
+# Subtest: rejects same caption retained and omitted
+ok 8 - rejects same caption retained and omitted
+  ---
+  duration_ms: 0.777625
+  ...
+# Subtest: rejects unrecorded preferred candidate
+ok 9 - rejects unrecorded preferred candidate
+  ---
+  duration_ms: 0.378916
+  ...
+# Subtest: rejects failed judgment called complete
+ok 10 - rejects failed judgment called complete
+  ---
+  duration_ms: 0.29775
+  ...
+# Subtest: rejects zero-candidate flag with candidate
+ok 11 - rejects zero-candidate flag with candidate
+  ---
+  duration_ms: 0.206
+  ...
+# Subtest: rejects unbound extra cut frames
+ok 12 - rejects unbound extra cut frames
+  ---
+  duration_ms: 0.256333
+  ...
+# Subtest: rejects human approval invented
+ok 13 - rejects human approval invented
+  ---
+  duration_ms: 0.135167
+  ...
+# Subtest: rejects missing uncertainty
+ok 14 - rejects missing uncertainty
+  ---
+  duration_ms: 0.233958
+  ...
+# Subtest: rejects unknown exclusion references
+ok 15 - rejects unknown exclusion references
+  ---
+  duration_ms: 0.211958
+  ...
+# Subtest: strict raw JSON rejects duplicate keys, fences and trailing text
+ok 16 - strict raw JSON rejects duplicate keys, fences and trailing text
+  ---
+  duration_ms: 0.3655
+  ...
+# Subtest: raw-first file receipt preserves a rejected response and refuses overwrite
+ok 17 - raw-first file receipt preserves a rejected response and refuses overwrite
+  ---
+  duration_ms: 181.856542
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 251.598709

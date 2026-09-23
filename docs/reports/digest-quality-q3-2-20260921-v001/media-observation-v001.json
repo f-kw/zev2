@@ -1,0 +1,57 @@
+{
+  "command": [
+    "/opt/homebrew/bin/ffprobe",
+    "-v",
+    "error",
+    "-show_entries",
+    "format=duration,start_time:stream=index,codec_name,codec_type,width,height,r_frame_rate,avg_frame_rate,time_base,start_pts,duration_ts,nb_frames,sample_rate,channels",
+    "-of",
+    "json",
+    "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4"
+  ],
+  "programs": [],
+  "stream_groups": [],
+  "streams": [
+    {
+      "index": 0,
+      "codec_name": "h264",
+      "codec_type": "video",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "time_base": "1/15360",
+      "start_pts": 0,
+      "duration_ts": 33465846,
+      "nb_frames": "65363"
+    },
+    {
+      "index": 1,
+      "codec_name": "aac",
+      "codec_type": "audio",
+      "sample_rate": "44100",
+      "channels": 2,
+      "r_frame_rate": "0/0",
+      "avg_frame_rate": "0/0",
+      "time_base": "1/44100",
+      "start_pts": 0,
+      "duration_ts": 96083581,
+      "nb_frames": "93833"
+    }
+  ],
+  "format": {
+    "start_time": "0.000000",
+    "duration": "2178.766016"
+  },
+  "checked": [
+    {
+      "media_id": "Q32-ONIMUSHA",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4",
+      "sha256": "58744717f3d03a19f004fdca76a7199674a6b97a3f2f26e60d1b86b0ee8bf1cd",
+      "bytes": 1860839383,
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 65363
+    }
+  ]
+}

@@ -6,6 +6,8 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+import type {AutoPresentationInput} from '../../packages/shared/src/auto-presentation.js';
+import {loadAutoPresentationV001} from './presentation_auto_effects_io_v001.mjs';
 import {
   decodePresentationCueEndProjectionV001,
   decodePresentationSemanticLineEndProjectionV001,
@@ -330,6 +332,7 @@ export async function executePresentationInstructionRendererJobV002({
   processObserver = null,
   capabilities = {},
   serializePngAndFilters = false,
+  autoPresentation = undefined as AutoPresentationInput | undefined,
   suppliedOverlayAdapter = undefined as ReturnType<typeof buildPresentationRendererOverlayAdapterV001> | undefined,
 }) {
   const admission = inspectPresentationRendererAdmissionV002({
@@ -451,6 +454,8 @@ export async function executePresentationInstructionRendererJobV002({
     },
     ...(overlayAdapter === undefined ? {} : {overlayAdapter}),
     ...(serializePngAndFilters ? {serializePngAndFilters: true} : {}),
+    ...(autoPresentation === undefined ? {} : {autoPresentation}),
+    counterfactualQcMethod: autoPresentation === undefined ? 'encoded-omission-v2' : 'exact-replay-native-v1',
     processObserver,
   });
   if (draw.exitCode !== 0 || draw.finalQc?.status !== 'passed') {
@@ -471,6 +476,11 @@ export async function executePresentationInstructionRendererJobV002({
       lineLayout: layoutBuilt.layout,
       lineLayoutPublication,
       commonCorePlan: common.plan,
+      ...(autoPresentation === undefined ? {} : {
+        effectivePlan: draw.resolvedPlan,
+        autoPresentationResolution: draw.autoPresentationResolution,
+        autoPresentationInputs: draw.autoPresentationInputs,
+      }),
       qc: draw.finalQc,
       publication,
     }),
@@ -480,7 +490,9 @@ export async function executePresentationInstructionRendererJobV002({
 export async function runPresentationInstructionRendererJobFileV002(
   jobPath,
   {workspaceRoot = DEFAULT_WORKSPACE_ROOT, serializePngAndFilters = false,
-    overlayAdapter}: {workspaceRoot?: string; serializePngAndFilters?: boolean;
+    overlayAdapter, autoPresentationFiles}: {workspaceRoot?: string; serializePngAndFilters?: boolean;
+      autoPresentationFiles?: {baselinePath: string; decisionInputPath: string;
+        autoProposalPath?: string; overridesPath?: string};
       overlayAdapter?: ReturnType<typeof buildPresentationRendererOverlayAdapterV001>} = {},
 ) {
   const root = await realpath(workspaceRoot);
@@ -491,6 +503,46 @@ export async function runPresentationInstructionRendererJobFileV002(
     return {exitCode: 1, result: failure('RENDER_ADMISSION_INPUT_INVALID', 'job-read')};
   }
   const job = decodedJob.value;
+  let autoPresentation: AutoPresentationInput | undefined;
+  let autoPresentationSourceFiles;
+  if (autoPresentationFiles !== undefined) {
+    if (!isObject(autoPresentationFiles) || Object.keys(autoPresentationFiles).some(
+      key => !['baselinePath', 'decisionInputPath', 'autoProposalPath', 'overridesPath'].includes(key),
+    )) {
+      throw new TypeError('automatic presentation file inputs are invalid');
+    }
+    const inputPath = (value: string) => {
+      if (typeof value !== 'string' || value.length === 0) {
+        throw new TypeError('automatic presentation file path is required');
+      }
+      return path.resolve(root, value);
+    };
+    const loaded = await loadAutoPresentationV001({
+      baselinePath: inputPath(autoPresentationFiles.baselinePath),
+      decisionInputPath: inputPath(autoPresentationFiles.decisionInputPath),
+      ...(autoPresentationFiles.autoProposalPath === undefined ? {} : {
+        autoProposalPath: inputPath(autoPresentationFiles.autoProposalPath),
+      }),
+      ...(autoPresentationFiles.overridesPath === undefined ? {} : {
+        overridesPath: inputPath(autoPresentationFiles.overridesPath),
+      }),
+    });
+    autoPresentation = loaded.autoPresentation;
+    const sourceFile = async (filePath: string | undefined, loadedValue) => {
+      if (filePath === undefined) return null;
+      const absolutePath = inputPath(filePath);
+      const observed = await stableFileBytes(absolutePath);
+      if (canonicalSha256(JSON.parse(observed.bytes.toString('utf8')))
+        !== canonicalSha256(loadedValue)) {
+        throw new Error('automatic presentation source changed after validation');
+      }
+      return Object.freeze({path: absolutePath, fileSha256: observed.fileSha256});
+    };
+    autoPresentationSourceFiles = Object.freeze({
+      autoProposal: await sourceFile(autoPresentationFiles.autoProposalPath, autoPresentation.autoProposal),
+      overrides: await sourceFile(autoPresentationFiles.overridesPath, autoPresentation.overrides),
+    });
+  }
   const rendererJobBinding = {
     schemaVersion: job.schemaVersion,
     path: relativeJobPath,
@@ -581,7 +633,7 @@ export async function runPresentationInstructionRendererJobFileV002(
     frameCount: media.video.frameCount,
     audioStreamCount: media.audio ? 1 : 0,
   };
-  return executePresentationInstructionRendererJobV002({
+  const outcome = await executePresentationInstructionRendererJobV002({
     workspaceRoot: root,
     job,
     rendererJobBinding,
@@ -603,8 +655,13 @@ export async function runPresentationInstructionRendererJobFileV002(
     outputPathsUnused: await outputUnused(root, job),
     processObserver,
     serializePngAndFilters,
+    autoPresentation,
     suppliedOverlayAdapter: overlayAdapter,
   });
+  if (autoPresentation !== undefined && outcome.exitCode === 0) {
+    return {...outcome, result: Object.freeze({...outcome.result, autoPresentationSourceFiles})};
+  }
+  return outcome;
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

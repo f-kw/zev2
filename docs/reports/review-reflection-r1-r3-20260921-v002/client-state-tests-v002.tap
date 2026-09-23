@@ -1,0 +1,61 @@
+TAP version 13
+# Subtest: component: target text and navigation remain available while a physical check is pending
+ok 1 - component: target text and navigation remain available while a physical check is pending
+  ---
+  duration_ms: 28.177208
+  ...
+# Subtest: component: late whole-Color and prior-range results cannot validate a changed Color range
+ok 2 - component: late whole-Color and prior-range results cannot validate a changed Color range
+  ---
+  duration_ms: 8.408792
+  ...
+# Subtest: component: a new saved revision invalidates an older pending check without overwriting the draft
+ok 3 - component: a new saved revision invalidates an older pending check without overwriting the draft
+  ---
+  duration_ms: 7.776875
+  ...
+# Subtest: component: a returned Pulse check failure stays distinct from inapplicability and preserves measured peaks
+ok 4 - component: a returned Pulse check failure stays distinct from inapplicability and preserves measured peaks
+  ---
+  duration_ms: 6.641208
+  ...
+# Subtest: component: a response that echoes another selection is stale and cannot enable saving
+ok 5 - component: a response that echoes another selection is stale and cannot enable saving
+  ---
+  duration_ms: 2.686459
+  ...
+# Subtest: component: delayed Reset checking cannot save after the user moves to another target
+ok 6 - component: delayed Reset checking cannot save after the user moves to another target
+  ---
+  duration_ms: 2.567917
+  ...
+# Subtest: component: paired palette choice is saved with its background and survives a target reload
+not ok 7 - component: paired palette choice is saved with its background and survives a target reload
+  ---
+  duration_ms: 6.699
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_client_state_v001.test.mjs:365:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    '' !== 'dark'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'dark'
+  actual: ''
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_editing_client_state_v001.test.mjs:383:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 6
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 443.393458

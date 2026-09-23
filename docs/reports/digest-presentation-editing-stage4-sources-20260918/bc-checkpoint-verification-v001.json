@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "stage4-bc-checkpoint-verification-v001",
+  "speaker": "Codexの検証結果",
+  "checkedAt": "2026-09-18T10:51:20.954427+00:00",
+  "status": "passed",
+  "branch": "codex/digest-presentation-editing-stage4",
+  "checkpoint": "f6ff6671350e937fdcb8b64891d0146bbdb8fdea",
+  "remoteReadback": "f6ff6671350e937fdcb8b64891d0146bbdb8fdea",
+  "committedFileCount": 64,
+  "sourceAndTestFiles": 17,
+  "selectedFileBytesVerifiedAtCheckpoint": 63,
+  "generatedFilesInCommit": 0,
+  "unstagedTrackedChanges": [],
+  "untrackedBeforeReceiptFiles": [
+    "node_modules",
+    "packages/shared/node_modules"
+  ],
+  "receiptFilesCreatedAfterCheckpoint": [
+    "bc-audit-request-v001.md",
+    "bc-audit-delivery-v001.json"
+  ],
+  "scope": "提出checkpoint内の選別63fileの実Git blobをSHAとbyte数で確認。選別記録自身を加え64file。後続の監査受領記録は別commitへ保存する。"
+}

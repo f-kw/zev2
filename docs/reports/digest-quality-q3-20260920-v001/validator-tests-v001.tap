@@ -1,0 +1,959 @@
+TAP version 13
+# Subtest: canonical hash is key-order independent, preserves array order and rejects non-JSON values
+ok 1 - canonical hash is key-order independent, preserves array order and rejects non-JSON values
+  ---
+  duration_ms: 1.064041
+  ...
+# Subtest: complete zero-candidate result is accepted without claiming media quality
+not ok 2 - complete zero-candidate result is accepted without claiming media quality
+  ---
+  duration_ms: 4.577583
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/validate.test.mjs:80:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+    + [Object: null prototype] {
+    - {
+        candidates: [],
+        failureReason: null,
+    ...
+        mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        processedUnits: [
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+              'caption-observation-a',
+    ...
+            unitId: 'caption-a'
+          },
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+              'gap-observation',
+    ...
+            unitId: 'no-caption-20-30'
+          },
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+              'caption-observation-b',
+    ...
+            unitId: 'caption-b'
+          },
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+    ...
+        schemaVersion: 'digest-quality-judgment-v001',
+        status: 'complete'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    schemaVersion: 'digest-quality-judgment-v001'
+    inputSha256: '2241557545f8fde217aafe0d32a4552141bf0c76a67b51ca06ad9a0b2fef469d'
+    mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    status: 'complete'
+    processedUnits:
+      0:
+        unitId: 'caption-a'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-a'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      1:
+        unitId: 'no-caption-20-30'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'gap-observation'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      2:
+        unitId: 'caption-b'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-b'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      3:
+        unitId: 'connection-01'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'connection-observation'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+    candidates:
+    limitations:
+      0: 'The supplied evidence is limited.'
+    failureReason: ~
+  actual:
+    schemaVersion: 'digest-quality-judgment-v001'
+    inputSha256: '2241557545f8fde217aafe0d32a4552141bf0c76a67b51ca06ad9a0b2fef469d'
+    mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    status: 'complete'
+    processedUnits:
+      0:
+        unitId: 'caption-a'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-a'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      1:
+        unitId: 'no-caption-20-30'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'gap-observation'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      2:
+        unitId: 'caption-b'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-b'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      3:
+        unitId: 'connection-01'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'connection-observation'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+    candidates:
+    limitations:
+      0: 'The supplied evidence is limited.'
+    failureReason: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/validate.test.mjs:86:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: input and response are not mutated; candidate fact keeps its actual evidence range
+not ok 3 - input and response are not mutated; candidate fact keeps its actual evidence range
+  ---
+  duration_ms: 2.582166
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/validate.test.mjs:91:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+    + [Object: null prototype] {
+    - {
+        candidates: [
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+              'caption-observation-a'
+    ...
+            ],
+            observedFacts: [
+    +         [Object: null prototype] {
+    -         {
+                evidenceId: 'caption-observation-a',
+                statement: 'The saved caption is present in this interval.'
+              }
+            ],
+    +       range: [Object: null prototype] {
+    -       range: {
+              endFrameExclusive: 15,
+              startFrame: 5
+    ...
+        mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        processedUnits: [
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+              'caption-observation-a',
+    ...
+            unitId: 'caption-a'
+          },
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+              'gap-observation',
+    ...
+            unitId: 'no-caption-20-30'
+          },
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+              'caption-observation-b',
+    ...
+            unitId: 'caption-b'
+          },
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+    ...
+        schemaVersion: 'digest-quality-judgment-v001',
+        status: 'complete'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    schemaVersion: 'digest-quality-judgment-v001'
+    inputSha256: '2241557545f8fde217aafe0d32a4552141bf0c76a67b51ca06ad9a0b2fef469d'
+    mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    status: 'complete'
+    processedUnits:
+      0:
+        unitId: 'caption-a'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-a'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      1:
+        unitId: 'no-caption-20-30'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'gap-observation'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      2:
+        unitId: 'caption-b'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-b'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      3:
+        unitId: 'connection-01'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'connection-observation'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+    candidates:
+      0:
+        id: 'candidate-a'
+        unitIds:
+          0: 'caption-a'
+        range:
+          startFrame: 5
+          endFrameExclusive: 15
+        evidenceIds:
+          0: 'caption-observation-a'
+        observedFacts:
+          0:
+            evidenceId: 'caption-observation-a'
+            statement: 'The saved caption is present in this interval.'
+        hypothesis: 'Reading this passage may need human confirmation.'
+        missingInformation:
+          0: 'Actual reading comfort is unobserved.'
+        normalExplanations:
+          0: 'The present duration may already be appropriate.'
+        humanQuestion: 'Is this passage comfortable to read?'
+        reflectionTargets:
+          0: 'Caption presentation in a later authorized task.'
+    limitations:
+      0: 'The supplied evidence is limited.'
+    failureReason: ~
+  actual:
+    schemaVersion: 'digest-quality-judgment-v001'
+    inputSha256: '2241557545f8fde217aafe0d32a4552141bf0c76a67b51ca06ad9a0b2fef469d'
+    mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    status: 'complete'
+    processedUnits:
+      0:
+        unitId: 'caption-a'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-a'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      1:
+        unitId: 'no-caption-20-30'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'gap-observation'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      2:
+        unitId: 'caption-b'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-b'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+      3:
+        unitId: 'connection-01'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'connection-observation'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+    candidates:
+      0:
+        id: 'candidate-a'
+        unitIds:
+          0: 'caption-a'
+        range:
+          startFrame: 5
+          endFrameExclusive: 15
+        evidenceIds:
+          0: 'caption-observation-a'
+        observedFacts:
+          0:
+            evidenceId: 'caption-observation-a'
+            statement: 'The saved caption is present in this interval.'
+        hypothesis: 'Reading this passage may need human confirmation.'
+        missingInformation:
+          0: 'Actual reading comfort is unobserved.'
+        normalExplanations:
+          0: 'The present duration may already be appropriate.'
+        humanQuestion: 'Is this passage comfortable to read?'
+        reflectionTargets:
+          0: 'Caption presentation in a later authorized task.'
+    limitations:
+      0: 'The supplied evidence is limited.'
+    failureReason: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/validate.test.mjs:94:79)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: explicit insufficient evidence counts as processed but not as newly observed media
+not ok 4 - explicit insufficient evidence counts as processed but not as newly observed media
+  ---
+  duration_ms: 1.000417
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/validate.test.mjs:99:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+    + [Object: null prototype] {
+    - {
+        evidenceIds: [],
+    ...
+        summary: 'New visual observation is unavailable.',
+        unitId: 'caption-a'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    unitId: 'caption-a'
+    state: 'insufficient-evidence'
+    evidenceIds:
+    summary: 'New visual observation is unavailable.'
+  actual:
+    unitId: 'caption-a'
+    state: 'insufficient-evidence'
+    evidenceIds:
+    summary: 'New visual observation is unavailable.'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/validate.test.mjs:103:51)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: incomplete retains partial work and raw hash, never enables review
+not ok 5 - incomplete retains partial work and raw hash, never enables review
+  ---
+  duration_ms: 0.645042
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/validate.test.mjs:106:48'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+    + [Object: null prototype] {
+    - {
+        candidates: [
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+              'caption-observation-a'
+    ...
+            ],
+            observedFacts: [
+    +         [Object: null prototype] {
+    -         {
+                evidenceId: 'caption-observation-a',
+                statement: 'The saved caption is present in this interval.'
+              }
+            ],
+    +       range: [Object: null prototype] {
+    -       range: {
+              endFrameExclusive: 15,
+              startFrame: 5
+    ...
+        mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        processedUnits: [
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+    ...
+        schemaVersion: 'digest-quality-judgment-v001',
+        status: 'incomplete'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    schemaVersion: 'digest-quality-judgment-v001'
+    inputSha256: '2241557545f8fde217aafe0d32a4552141bf0c76a67b51ca06ad9a0b2fef469d'
+    mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    status: 'incomplete'
+    processedUnits:
+      0:
+        unitId: 'caption-a'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-a'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+    candidates:
+      0:
+        id: 'candidate-a'
+        unitIds:
+          0: 'caption-a'
+        range:
+          startFrame: 5
+          endFrameExclusive: 15
+        evidenceIds:
+          0: 'caption-observation-a'
+        observedFacts:
+          0:
+            evidenceId: 'caption-observation-a'
+            statement: 'The saved caption is present in this interval.'
+        hypothesis: 'Reading this passage may need human confirmation.'
+        missingInformation:
+          0: 'Actual reading comfort is unobserved.'
+        normalExplanations:
+          0: 'The present duration may already be appropriate.'
+        humanQuestion: 'Is this passage comfortable to read?'
+        reflectionTargets:
+          0: 'Caption presentation in a later authorized task.'
+    limitations:
+      0: 'The supplied evidence is limited.'
+    failureReason: 'The remaining units were not processed.'
+  actual:
+    schemaVersion: 'digest-quality-judgment-v001'
+    inputSha256: '2241557545f8fde217aafe0d32a4552141bf0c76a67b51ca06ad9a0b2fef469d'
+    mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    status: 'incomplete'
+    processedUnits:
+      0:
+        unitId: 'caption-a'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-a'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+    candidates:
+      0:
+        id: 'candidate-a'
+        unitIds:
+          0: 'caption-a'
+        range:
+          startFrame: 5
+          endFrameExclusive: 15
+        evidenceIds:
+          0: 'caption-observation-a'
+        observedFacts:
+          0:
+            evidenceId: 'caption-observation-a'
+            statement: 'The saved caption is present in this interval.'
+        hypothesis: 'Reading this passage may need human confirmation.'
+        missingInformation:
+          0: 'Actual reading comfort is unobserved.'
+        normalExplanations:
+          0: 'The present duration may already be appropriate.'
+        humanQuestion: 'Is this passage comfortable to read?'
+        reflectionTargets:
+          0: 'Caption presentation in a later authorized task.'
+    limitations:
+      0: 'The supplied evidence is limited.'
+    failureReason: 'The remaining units were not processed.'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/validate.test.mjs:112:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: failed retains partial work and raw hash, never enables review
+not ok 6 - failed retains partial work and raw hash, never enables review
+  ---
+  duration_ms: 0.85525
+  location: '/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/validate.test.mjs:106:48'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected ... Lines skipped
+    
+    + [Object: null prototype] {
+    - {
+        candidates: [
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+              'caption-observation-a'
+    ...
+            ],
+            observedFacts: [
+    +         [Object: null prototype] {
+    -         {
+                evidenceId: 'caption-observation-a',
+                statement: 'The saved caption is present in this interval.'
+              }
+            ],
+    +       range: [Object: null prototype] {
+    -       range: {
+              endFrameExclusive: 15,
+              startFrame: 5
+    ...
+        mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        processedUnits: [
+    +     [Object: null prototype] {
+    -     {
+            evidenceIds: [
+    ...
+        schemaVersion: 'digest-quality-judgment-v001',
+        status: 'failed'
+      }
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    schemaVersion: 'digest-quality-judgment-v001'
+    inputSha256: '2241557545f8fde217aafe0d32a4552141bf0c76a67b51ca06ad9a0b2fef469d'
+    mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    status: 'failed'
+    processedUnits:
+      0:
+        unitId: 'caption-a'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-a'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+    candidates:
+      0:
+        id: 'candidate-a'
+        unitIds:
+          0: 'caption-a'
+        range:
+          startFrame: 5
+          endFrameExclusive: 15
+        evidenceIds:
+          0: 'caption-observation-a'
+        observedFacts:
+          0:
+            evidenceId: 'caption-observation-a'
+            statement: 'The saved caption is present in this interval.'
+        hypothesis: 'Reading this passage may need human confirmation.'
+        missingInformation:
+          0: 'Actual reading comfort is unobserved.'
+        normalExplanations:
+          0: 'The present duration may already be appropriate.'
+        humanQuestion: 'Is this passage comfortable to read?'
+        reflectionTargets:
+          0: 'Caption presentation in a later authorized task.'
+    limitations:
+      0: 'The supplied evidence is limited.'
+    failureReason: 'The remaining units were not processed.'
+  actual:
+    schemaVersion: 'digest-quality-judgment-v001'
+    inputSha256: '2241557545f8fde217aafe0d32a4552141bf0c76a67b51ca06ad9a0b2fef469d'
+    mediaSha256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    status: 'failed'
+    processedUnits:
+      0:
+        unitId: 'caption-a'
+        state: 'reviewed-with-available-evidence'
+        evidenceIds:
+          0: 'caption-observation-a'
+          1: 'pcm-observation'
+        summary: 'Available evidence considered; visual meaning remains unobserved.'
+    candidates:
+      0:
+        id: 'candidate-a'
+        unitIds:
+          0: 'caption-a'
+        range:
+          startFrame: 5
+          endFrameExclusive: 15
+        evidenceIds:
+          0: 'caption-observation-a'
+        observedFacts:
+          0:
+            evidenceId: 'caption-observation-a'
+            statement: 'The saved caption is present in this interval.'
+        hypothesis: 'Reading this passage may need human confirmation.'
+        missingInformation:
+          0: 'Actual reading comfort is unobserved.'
+        normalExplanations:
+          0: 'The present duration may already be appropriate.'
+        humanQuestion: 'Is this passage comfortable to read?'
+        reflectionTargets:
+          0: 'Caption presentation in a later authorized task.'
+    limitations:
+      0: 'The supplied evidence is limited.'
+    failureReason: 'The remaining units were not processed.'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/validate.test.mjs:112:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: input rejects stale input hash
+ok 7 - input rejects stale input hash
+  ---
+  duration_ms: 0.475375
+  ...
+# Subtest: input rejects unknown top-level field
+ok 8 - input rejects unknown top-level field
+  ---
+  duration_ms: 0.34875
+  ...
+# Subtest: input rejects unknown media field
+ok 9 - input rejects unknown media field
+  ---
+  duration_ms: 0.772333
+  ...
+# Subtest: input rejects wrong clock media
+ok 10 - input rejects wrong clock media
+  ---
+  duration_ms: 0.694833
+  ...
+# Subtest: input rejects wrong completed clock length
+ok 11 - input rejects wrong completed clock length
+  ---
+  duration_ms: 0.547417
+  ...
+# Subtest: input rejects unknown unit field
+ok 12 - input rejects unknown unit field
+  ---
+  duration_ms: 0.646333
+  ...
+# Subtest: input rejects unknown unit kind
+ok 13 - input rejects unknown unit kind
+  ---
+  duration_ms: 0.620833
+  ...
+# Subtest: input rejects duplicate unit ID
+ok 14 - input rejects duplicate unit ID
+  ---
+  duration_ms: 0.7925
+  ...
+# Subtest: input rejects missing no-caption coverage
+ok 15 - input rejects missing no-caption coverage
+  ---
+  duration_ms: 0.526791
+  ...
+# Subtest: input rejects overlapping subtitle coverage
+ok 16 - input rejects overlapping subtitle coverage
+  ---
+  duration_ms: 0.820875
+  ...
+# Subtest: input rejects negative range
+ok 17 - input rejects negative range
+  ---
+  duration_ms: 0.679708
+  ...
+# Subtest: input rejects fractional range
+ok 18 - input rejects fractional range
+  ---
+  duration_ms: 0.845667
+  ...
+# Subtest: input rejects outside media range
+ok 19 - input rejects outside media range
+  ---
+  duration_ms: 0.514333
+  ...
+# Subtest: input rejects unknown unit evidence
+ok 20 - input rejects unknown unit evidence
+  ---
+  duration_ms: 0.877875
+  ...
+# Subtest: input rejects duplicate unit evidence
+ok 21 - input rejects duplicate unit evidence
+  ---
+  duration_ms: 0.714375
+  ...
+# Subtest: input rejects duplicate reference ID
+ok 22 - input rejects duplicate reference ID
+  ---
+  duration_ms: 0.555125
+  ...
+# Subtest: input rejects missing source reference
+ok 23 - input rejects missing source reference
+  ---
+  duration_ms: 0.555459
+  ...
+# Subtest: input rejects missing evidence reference
+ok 24 - input rejects missing evidence reference
+  ---
+  duration_ms: 0.587292
+  ...
+# Subtest: input rejects duplicate evidence ID
+ok 25 - input rejects duplicate evidence ID
+  ---
+  duration_ms: 0.709125
+  ...
+# Subtest: input rejects unknown evidence field
+ok 26 - input rejects unknown evidence field
+  ---
+  duration_ms: 0.853667
+  ...
+# Subtest: input rejects unknown evidence kind
+ok 27 - input rejects unknown evidence kind
+  ---
+  duration_ms: 0.667792
+  ...
+# Subtest: input rejects unrelated evidence range
+ok 28 - input rejects unrelated evidence range
+  ---
+  duration_ms: 0.583042
+  ...
+# Subtest: input rejects unknown evidence target
+ok 29 - input rejects unknown evidence target
+  ---
+  duration_ms: 0.460625
+  ...
+# Subtest: input rejects one-sided evidence link
+ok 30 - input rejects one-sided evidence link
+  ---
+  duration_ms: 0.603292
+  ...
+# Subtest: input rejects missing source part
+ok 31 - input rejects missing source part
+  ---
+  duration_ms: 0.47475
+  ...
+# Subtest: input rejects inserted part with invented source
+ok 32 - input rejects inserted part with invented source
+  ---
+  duration_ms: 0.790917
+  ...
+# Subtest: input rejects inserted part with unknown connection
+ok 33 - input rejects inserted part with unknown connection
+  ---
+  duration_ms: 0.52225
+  ...
+# Subtest: input rejects retained audio from a different clock
+ok 34 - input rejects retained audio from a different clock
+  ---
+  duration_ms: 0.6235
+  ...
+# Subtest: input rejects retained decoded count changed
+ok 35 - input rejects retained decoded count changed
+  ---
+  duration_ms: 0.510709
+  ...
+# Subtest: reply rejects wrong input hash
+ok 36 - reply rejects wrong input hash
+  ---
+  duration_ms: 0.442209
+  ...
+# Subtest: reply rejects wrong media hash including another revision
+ok 37 - reply rejects wrong media hash including another revision
+  ---
+  duration_ms: 0.37575
+  ...
+# Subtest: reply rejects unknown top-level field
+ok 38 - reply rejects unknown top-level field
+  ---
+  duration_ms: 0.496791
+  ...
+# Subtest: reply rejects duplicate processed unit
+ok 39 - reply rejects duplicate processed unit
+  ---
+  duration_ms: 0.450375
+  ...
+# Subtest: reply rejects unknown processed unit
+ok 40 - reply rejects unknown processed unit
+  ---
+  duration_ms: 0.924417
+  ...
+# Subtest: reply rejects complete missing processed unit
+ok 41 - reply rejects complete missing processed unit
+  ---
+  duration_ms: 0.421792
+  ...
+# Subtest: reply rejects unknown processed field
+ok 42 - reply rejects unknown processed field
+  ---
+  duration_ms: 0.633959
+  ...
+# Subtest: reply rejects unrelated processed evidence
+ok 43 - reply rejects unrelated processed evidence
+  ---
+  duration_ms: 0.413333
+  ...
+# Subtest: reply rejects reviewed unit without evidence
+ok 44 - reply rejects reviewed unit without evidence
+  ---
+  duration_ms: 0.587416
+  ...
+# Subtest: reply rejects duplicate candidate ID
+ok 45 - reply rejects duplicate candidate ID
+  ---
+  duration_ms: 0.494333
+  ...
+# Subtest: reply rejects unknown candidate field
+ok 46 - reply rejects unknown candidate field
+  ---
+  duration_ms: 0.419959
+  ...
+# Subtest: reply rejects unknown candidate unit
+ok 47 - reply rejects unknown candidate unit
+  ---
+  duration_ms: 0.650917
+  ...
+# Subtest: reply rejects duplicate candidate unit
+ok 48 - reply rejects duplicate candidate unit
+  ---
+  duration_ms: 0.394834
+  ...
+# Subtest: reply rejects candidate outside media
+ok 49 - reply rejects candidate outside media
+  ---
+  duration_ms: 0.387958
+  ...
+# Subtest: reply rejects candidate empty range
+ok 50 - reply rejects candidate empty range
+  ---
+  duration_ms: 0.450083
+  ...
+# Subtest: reply rejects candidate unrelated unit
+ok 51 - reply rejects candidate unrelated unit
+  ---
+  duration_ms: 0.480958
+  ...
+# Subtest: reply rejects candidate partly outside nominated unit
+ok 52 - reply rejects candidate partly outside nominated unit
+  ---
+  duration_ms: 0.498166
+  ...
+# Subtest: reply rejects candidate nominated union has a gap
+ok 53 - reply rejects candidate nominated union has a gap
+  ---
+  duration_ms: 0.391958
+  ...
+# Subtest: reply rejects unknown candidate evidence
+ok 54 - reply rejects unknown candidate evidence
+  ---
+  duration_ms: 0.438666
+  ...
+# Subtest: reply rejects candidate evidence from unrelated time
+ok 55 - reply rejects candidate evidence from unrelated time
+  ---
+  duration_ms: 0.455875
+  ...
+# Subtest: reply rejects duplicate candidate evidence
+ok 56 - reply rejects duplicate candidate evidence
+  ---
+  duration_ms: 0.613791
+  ...
+# Subtest: reply rejects fact without included evidence
+ok 57 - reply rejects fact without included evidence
+  ---
+  duration_ms: 0.392834
+  ...
+# Subtest: reply rejects fact unknown field
+ok 58 - reply rejects fact unknown field
+  ---
+  duration_ms: 0.3735
+  ...
+# Subtest: reply rejects empty observed facts
+ok 59 - reply rejects empty observed facts
+  ---
+  duration_ms: 0.350292
+  ...
+# Subtest: reply rejects empty normal explanations
+ok 60 - reply rejects empty normal explanations
+  ---
+  duration_ms: 0.609667
+  ...
+# Subtest: reply rejects empty missing information
+ok 61 - reply rejects empty missing information
+  ---
+  duration_ms: 0.403708
+  ...
+# Subtest: reply rejects empty reflection targets
+ok 62 - reply rejects empty reflection targets
+  ---
+  duration_ms: 0.3835
+  ...
+# Subtest: reply rejects empty hypothesis
+ok 63 - reply rejects empty hypothesis
+  ---
+  duration_ms: 0.406625
+  ...
+# Subtest: reply rejects complete with failure reason
+ok 64 - reply rejects complete with failure reason
+  ---
+  duration_ms: 0.363959
+  ...
+# Subtest: reply rejects failed without reason
+ok 65 - reply rejects failed without reason
+  ---
+  duration_ms: 0.519709
+  ...
+# Subtest: reply rejects partial candidate targets unprocessed unit
+ok 66 - reply rejects partial candidate targets unprocessed unit
+  ---
+  duration_ms: 0.375833
+  ...
+# Subtest: candidate evidence must overlap both the candidate and a related nominated unit
+ok 67 - candidate evidence must overlap both the candidate and a related nominated unit
+  ---
+  duration_ms: 0.506792
+  ...
+# Subtest: candidate can span adjacent nominated units with narrower attributed evidence
+ok 68 - candidate can span adjacent nominated units with narrower attributed evidence
+  ---
+  duration_ms: 0.360625
+  ...
+# Subtest: strict wire reader rejects duplicate keys, fractions, fences, trailing content, invalid UTF-8 and BOM
+ok 69 - strict wire reader rejects duplicate keys, fractions, fences, trailing content, invalid UTF-8 and BOM
+  ---
+  duration_ms: 2.372458
+  ...
+# Subtest: raw reply hashes preserve whitespace differences without changing accepted content
+ok 70 - raw reply hashes preserve whitespace differences without changing accepted content
+  ---
+  duration_ms: 0.758667
+  ...
+# Subtest: actual reference verification detects missing files, changed bytes and conflicting path hashes
+ok 71 - actual reference verification detects missing files, changed bytes and conflicting path hashes
+  ---
+  duration_ms: 19.375084
+  ...
+1..71
+# tests 71
+# suites 0
+# pass 66
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 111.016125

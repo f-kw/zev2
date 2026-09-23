@@ -1,5 +1,4 @@
-// Trial rendering values for the three owner-requested comparisons. Selection
-// supplies only finite names; typography and black duration belong to renderer.
+// Renderer-owned finite values. Selection supplies names, never drawing values.
 export const PRESENTATION_EFFECT_TRIAL_PRESETS_V001 = Object.freeze({
   emphasis: Object.freeze({fontColor: '#FFD65A'}),
   reaction: Object.freeze({fontSizePx: 128}),
@@ -123,13 +122,17 @@ export function buildPresentationTimelineFiltersV001({presentationTimeline, canv
     const frames = span.endFrameExclusive - span.startFrame;
     if (span.kind === 'base') {
       filters.push(`[basev${baseIndex}]trim=start_frame=${span.baseStartFrame}:end_frame=${span.baseEndFrame},setpts=PTS-STARTPTS[tv${index}]`);
-      if (audio) filters.push(`[basea${baseIndex}]atrim=start_sample=${span.baseStartFrame * audio.sampleRate / canvas.fps}:end_sample=${span.baseEndFrame * audio.sampleRate / canvas.fps},asetpts=PTS-STARTPTS[ta${index}]`);
+      if (audio) filters.push(`[basea${baseIndex}]atrim=start_sample=${span.baseStartFrame * audio.sampleRate / canvas.fps}:end_sample=${span.baseEndFrame * audio.sampleRate / canvas.fps},asettb=expr=1/${audio.sampleRate},asetpts=N[ta${index}]`);
       baseIndex++;
     } else {
       filters.push(`color=c=black:s=${canvas.width}x${canvas.height}:r=${canvas.fps},trim=end_frame=${frames},setpts=PTS-STARTPTS[tv${index}]`);
-      if (audio) filters.push(`anullsrc=r=${audio.sampleRate}:cl=${audio.channelLayout},atrim=end_sample=${frames * audio.sampleRate / canvas.fps},asetpts=PTS-STARTPTS[ta${index}]`);
+      if (audio) filters.push(`anullsrc=r=${audio.sampleRate}:cl=${audio.channelLayout},atrim=end_sample=${frames * audio.sampleRate / canvas.fps},asettb=expr=1/${audio.sampleRate},asetpts=N[ta${index}]`);
     }
   }
-  filters.push(`${spans.map((_, i) => `[tv${i}]${audio ? `[ta${i}]` : ''}`).join('')}concat=n=${spans.length}:v=1:a=${audio ? 1 : 0}[timelineVideo]${audio ? '[timelineAudio]' : ''}`);
+  // Joint A/V concat pads audio to the rounded video duration. Keep the exact
+  // PCM sequence independent, and derive timestamps from integer sample counts.
+  if (audio) filters.push(`${spans.map((_, i) => `[ta${i}]`).join('')}concat=n=${spans.length}:v=0:a=1,asettb=expr=1/${audio.sampleRate},asetpts=N[timelineAudio]`);
+  // The connection wrapper appends its finite video fades to this last output.
+  filters.push(`${spans.map((_, i) => `[tv${i}]`).join('')}concat=n=${spans.length}:v=1:a=0[timelineVideo]`);
   return filters;
 }

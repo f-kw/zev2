@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: short-clock partition includes every caption-free interval and maps exact saved 48kHz and even native frames
+ok 1 - short-clock partition includes every caption-free interval and maps exact saved 48kHz and even native frames
+  ---
+  duration_ms: 2.048458
+  ...
+# Subtest: 48kHz stereo measures the whole six-frame target and every gap independently, without downmixing or a quality threshold
+ok 2 - 48kHz stereo measures the whole six-frame target and every gap independently, without downmixing or a quality threshold
+  ---
+  duration_ms: 7.4475
+  ...
+# Subtest: wrong audio clock, timeline mapping, missing neighbor or overlapping caption fails instead of guessing
+ok 3 - wrong audio clock, timeline mapping, missing neighbor or overlapping caption fails instead of guessing
+  ---
+  duration_ms: 2.504708
+  ...
+# Subtest: two-line Panel placement uses saved visible ink and plate-omitted evidence, not logical line-width estimates
+ok 4 - two-line Panel placement uses saved visible ink and plate-omitted evidence, not logical line-width estimates
+  ---
+  duration_ms: 0.47975
+  ...
+# Subtest: placement refuses changed native PNG, wrong plate-omitted text or missing common QC inspection
+ok 5 - placement refuses changed native PNG, wrong plate-omitted text or missing common QC inspection
+  ---
+  duration_ms: 0.4745
+  ...
+# Subtest: observation cannot create output outside the Q4 generated area
+ok 6 - observation cannot create output outside the Q4 generated area
+  ---
+  duration_ms: 0.431125
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 83.122583

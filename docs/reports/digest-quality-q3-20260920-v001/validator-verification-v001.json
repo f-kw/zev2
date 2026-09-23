@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "digest-quality-validator-verification-v001",
+  "preparedBy": "Codex",
+  "status": "focused-checks-passed",
+  "scope": "Q3 input and actual AI reply attribution/range validation; no semantic judgment, rendering, media observation or external transmission.",
+  "implementation": [
+    {
+      "path": "tools/digest-quality/validate.mjs",
+      "bytes": 22834,
+      "fileSha256": "e2b0e65c883fe9fff3579bb6bffee872897b7a80fcb83e02a89f132b3d18505f"
+    },
+    {
+      "path": "tools/digest-quality/validate.test.mjs",
+      "bytes": 19822,
+      "fileSha256": "fc236d4128327b8d67a9d5d2f9b4d873c22bed992b84c93720f9ba6924e290ad"
+    }
+  ],
+  "sharedSource": [
+    {
+      "path": "tools/digest-quality/clock.mjs",
+      "bytes": 13661,
+      "fileSha256": "e8cbf1e0a1e9f88d9324e29e56fad844c937baf3a4fe24a3ad1d1516974bb236"
+    },
+    {
+      "path": "tools/point-review/core.mjs",
+      "bytes": 10644,
+      "fileSha256": "8aae903ccdded256b98136b3b86ccf61b86a4c36a6ed1e51adee2f19d2ea87e6"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_semantic_source_package_v001.mjs",
+      "bytes": 186390,
+      "fileSha256": "ac3dcbbc671af6f56dcceeea6a41c8ae9cbf9fc4ba28a8a00bbc5d6faff45bcd"
+    }
+  ],
+  "finalCommand": "env -u NODE_OPTIONS /Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --test tools/digest-quality/validate.test.mjs",
+  "finalExitCode": 0,
+  "finalResult": {
+    "tests": 81,
+    "passed": 81,
+    "failed": 0,
+    "stderrBytes": 0
+  },
+  "runs": [
+    {
+      "version": "v001",
+      "tests": 71,
+      "passed": 66,
+      "failed": 5,
+      "tap": {
+        "path": "docs/reports/digest-quality-q3-20260920-v001/validator-tests-v001.tap",
+        "bytes": 32162,
+        "fileSha256": "efce441c8436c4294b807e4e8e7867b1f0bbe2692f58a256712e949e4b0d2931"
+      },
+      "stderr": {
+        "path": "docs/reports/digest-quality-q3-20260920-v001/validator-tests-v001.stderr",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "version": "v002",
+      "tests": 79,
+      "passed": 79,
+      "failed": 0,
+      "tap": {
+        "path": "docs/reports/digest-quality-q3-20260920-v001/validator-tests-v002.tap",
+        "bytes": 11714,
+        "fileSha256": "04b4badb1af5cd8e07160dd6420d6b8c510d5ddabad35ac6b8ba9399d393f853"
+      },
+      "stderr": {
+        "path": "docs/reports/digest-quality-q3-20260920-v001/validator-tests-v002.stderr",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "version": "v003",
+      "tests": 81,
+      "passed": 81,
+      "failed": 0,
+      "tap": {
+        "path": "docs/reports/digest-quality-q3-20260920-v001/validator-tests-v003.tap",
+        "bytes": 12106,
+        "fileSha256": "e0e045106bdb224dfca6e3003cbe7e20ee746352a308278cc6ae0c7f748792c4"
+      },
+      "stderr": {
+        "path": "docs/reports/digest-quality-q3-20260920-v001/validator-tests-v003.stderr",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "initialFailureAttribution": {
+    "run": "v001",
+    "failedTests": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "singleCause": "The existing strict JSON decoder returns null-prototype objects. The test compared their JavaScript prototypes with regular fixture objects using deepStrictEqual, despite all decoded JSON values being equal.",
+    "category": "test-expectation representation mismatch",
+    "testCorrections": 1,
+    "productionDefectsExposedByTheseFiveFailures": 0,
+    "correction": "Compare a structured clone of the decoded result with the fixture. The decoder, received bytes and returned JSON values were not changed.",
+    "preservedEvidence": "The first TAP and empty stderr remain saved. Later clock/coverage additions are new boundary checks, not fixes hidden by changing expected JSON values."
+  },
+  "verifiedBoundaries": [
+    "Exact input/reply/unit/evidence/candidate keys; known unique identifiers and complete processed-target coverage.",
+    "Input canonical identity and completed-media identity; raw response byte hash independent of whitespace.",
+    "Whole-video partition by caption and no-caption intervals; related evidence references and bounds.",
+    "Exact recomputation of final/baseline/original source parts from the saved clock; inserted intervals retain null origins.",
+    "Audio sample count covers video duration while permitting AAC decoder tail samples.",
+    "Historical audio evidence is split into retained spans and cannot cover inserted silence.",
+    "Candidate ranges overlap each nominated unit and evidence and are covered by the nominated unit union.",
+    "Natural-language fact attribution requires an included evidence ID; observation content itself is not machine-certified.",
+    "Complete with zero candidates is accepted; incomplete/failed preserve partial work and never enable review.",
+    "Raw strict JSON rejects duplicate keys, fractional ranges, code fences, trailing values, BOM and invalid UTF-8.",
+    "Streaming file identity and SHA verification detects missing/changed references without modifying sources."
+  ],
+  "limits": [
+    "Small synthetic packet fixtures were used. The actual HRB001 run is recorded by the integration owner.",
+    "Validation proves packet/reference/range consistency, not the truth of natural-language observations, hypotheses or human quality.",
+    "Media decoding, original projection creation and evidence measurement belong to the input preparer; this validator does not re-run them.",
+    "No changes to selectors, renderers or the fixed Q2 review schema; no API/new dependencies/new media."
+  ]
+}

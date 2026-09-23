@@ -1,0 +1,39 @@
+TAP version 13
+# Q5 synthetic test evidence: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260920-v001/render-tests-v001
+# Subtest: ordered retained frames and both PCM channels survive a two-piece join and a new AAC encode
+ok 1 - ordered retained frames and both PCM channels survive a two-piece join and a new AAC encode
+  ---
+  duration_ms: 464.016708
+  ...
+# Subtest: same counts cannot hide reversed video order, one changed audio sample, extra samples, or a 16kHz clock
+ok 2 - same counts cannot hide reversed video order, one changed audio sample, extra samples, or a 16kHz clock
+  ---
+  duration_ms: 938.330583
+  ...
+# Subtest: policy bytes are checked before a real render, and fixture media cannot enter the C-all job
+ok 3 - policy bytes are checked before a real render, and fixture media cannot enter the C-all job
+  ---
+  duration_ms: 4.004541
+  ...
+# Subtest: optional byte counts preserve original identity while another source or non-Normal cut is rejected
+ok 4 - optional byte counts preserve original identity while another source or non-Normal cut is rejected
+  ---
+  duration_ms: 0.37575
+  ...
+# Q5 fixture: {"phase":"native-assets","captions":1}
+# Q5 fixture: {"phase":"composite","frames":36}
+# Q5 fixture: {"phase":"range-qc","scope":null}
+# Subtest: one synthetic Normal caption passes the same short-media drawing, complete replay and native QC
+ok 5 - one synthetic Normal caption passes the same short-media drawing, complete replay and native QC
+  ---
+  duration_ms: 12757.47775
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 14251.26825

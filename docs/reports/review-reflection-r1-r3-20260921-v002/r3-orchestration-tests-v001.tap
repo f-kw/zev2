@@ -1,0 +1,75 @@
+TAP version 13
+# Subtest: new rules bind a versioned three-stage finite choice without changing the old v002 input
+ok 1 - new rules bind a versioned three-stage finite choice without changing the old v002 input
+  ---
+  duration_ms: 5.854125
+  ...
+# Subtest: adding palettes cannot change Panel frequency, background, other expressions or connections
+ok 2 - adding palettes cannot change Panel frequency, background, other expressions or connections
+  ---
+  duration_ms: 25.911708
+  ...
+# Subtest: palette choice uses its own full hash and ignores row/set order while one-item changes stay local
+ok 3 - palette choice uses its own full hash and ignores row/set order while one-item changes stay local
+  ---
+  duration_ms: 4.246333
+  ...
+# Subtest: deliberate singleton coverage materializes all eight declared pairs without claiming automatic diversity
+ok 4 - deliberate singleton coverage materializes all eight declared pairs without claiming automatic diversity
+  ---
+  duration_ms: 25.262125
+  ...
+# Subtest: new selection rejects comic, missing or arbitrary palettes, duplicate sets and drawing fields before fixation
+ok 5 - new selection rejects comic, missing or arbitrary palettes, duplicate sets and drawing fields before fixation
+  ---
+  duration_ms: 3.213958
+  ...
+# Subtest: saved new plans reload exactly; one-item palette, Normal and Reset retain all other saved systems
+ok 6 - saved new plans reload exactly; one-item palette, Normal and Reset retain all other saved systems
+  ---
+  duration_ms: 24.751917
+  ...
+# Subtest: old comic reading and Reset reproduce saved v002 values while new comic editing is unavailable
+ok 7 - old comic reading and Reset reproduce saved v002 values while new comic editing is unavailable
+  ---
+  duration_ms: 10.492042
+  ...
+# Subtest: explicit v002 recompilation keeps raw bytes, semantics, expression assignments and connections
+ok 8 - explicit v002 recompilation keeps raw bytes, semantics, expression assignments and connections
+  ---
+  duration_ms: 13.926042
+  ...
+# Subtest: recompiled bytes, palette policy, selected palette and version cannot be altered even with a replacement outer hash
+ok 9 - recompiled bytes, palette policy, selected palette and version cannot be altered even with a replacement outer hash
+  ---
+  duration_ms: 14.357875
+  ...
+# Subtest: unfinished captions retain their exception status and receive no palette choice
+ok 10 - unfinished captions retain their exception status and receive no palette choice
+  ---
+  duration_ms: 1.873917
+  ...
+# Subtest: explicit Bounce and Pulse speech endpoints follow the caption shift once and saved selections remain original-clock
+ok 11 - explicit Bounce and Pulse speech endpoints follow the caption shift once and saved selections remain original-clock
+  ---
+  duration_ms: 13.313708
+  ...
+# Subtest: real fixed HRB and C-all saved v002 drawing evidence replays its original view hash exactly
+ok 12 - real fixed HRB and C-all saved v002 drawing evidence replays its original view hash exactly
+  ---
+  duration_ms: 599.577875
+  ...
+# Subtest: real HRB v001 and C-all v002 semantic records derive new palettes without another AI judgment or text/timing changes
+ok 13 - real HRB v001 and C-all v002 semantic records derive new palettes without another AI judgment or text/timing changes
+  ---
+  duration_ms: 4293.038666
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5110.274125

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "connection-expression-original-development-v001",
+  "purpose": "development-fixture",
+  "createdBy": "codex-development-fixture",
+  "digestRef": {
+    "version": "digest-completed-ymUsGrT6EaA-human-caption-repair",
+    "sha256": "c4bbf207440cc846f73ffcd8bde12b95258dc8589ce9f0cd824a449ad3af258c"
+  },
+  "inputBindings": {
+    "canonicalPlanSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e",
+    "canonicalTimelineSha256": "dd4ebac277c0f3da73765457ea7812cfc801a16231d35a1cd0a0c4c1b0e61aef"
+  },
+  "connections": [
+    {
+      "connectionId": "connection-01",
+      "beforeSegmentId": "segment-0001",
+      "afterSegmentId": "segment-0002",
+      "boundaryFrame": 340,
+      "role": "normal-cut",
+      "preset": "normal-cut",
+      "presetVersion": "v001"
+    },
+    {
+      "connectionId": "connection-02",
+      "beforeSegmentId": "segment-0002",
+      "afterSegmentId": "segment-0003",
+      "boundaryFrame": 462,
+      "role": "separator",
+      "preset": "soft-separator",
+      "presetVersion": "v001"
+    },
+    {
+      "connectionId": "connection-03",
+      "beforeSegmentId": "segment-0003",
+      "afterSegmentId": "segment-0004",
+      "boundaryFrame": 756,
+      "role": "normal-cut",
+      "preset": "normal-cut",
+      "presetVersion": "v001"
+    },
+    {
+      "connectionId": "connection-04",
+      "beforeSegmentId": "segment-0004",
+      "afterSegmentId": "segment-0005",
+      "boundaryFrame": 2997,
+      "role": "separator",
+      "preset": "black-separator",
+      "presetVersion": "v001"
+    },
+    {
+      "connectionId": "connection-05",
+      "beforeSegmentId": "segment-0005",
+      "afterSegmentId": "segment-0006",
+      "boundaryFrame": 3563,
+      "role": "normal-cut",
+      "preset": "normal-cut",
+      "presetVersion": "v001"
+    },
+    {
+      "connectionId": "connection-06",
+      "beforeSegmentId": "segment-0006",
+      "afterSegmentId": "segment-0007",
+      "boundaryFrame": 4382,
+      "role": "separator",
+      "preset": "soft-separator",
+      "presetVersion": "v001"
+    }
+  ],
+  "recordSha256": "9cd5e0e2caa196b52a1ebf452c7757c6a3b13f206f0594c96c7967b3b7109f10"
+}

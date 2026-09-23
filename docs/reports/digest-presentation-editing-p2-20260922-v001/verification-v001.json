@@ -1,0 +1,784 @@
+{
+  "schemaVersion": "digest-presentation-editing-p2-verification-v001",
+  "date": "2026-09-22",
+  "status": "P2本体実装・性能実証完了／失敗・取消の追加負例試験のみapproval pending",
+  "branch": "codex/digest-presentation-editing-stage4",
+  "startingCommit": "73d1536b1a2febad04111609bb82f97e44df36ae",
+  "authority": [
+    "ZEV P2：有限状態QCの重複処理を減らし、一件後修正をさらに高速化する — 着工指示 v001 §1/§10",
+    "GPT_DECISION：P2の現在地と、承認待ち試験を分離した続行指示 §2/§5/§7"
+  ],
+  "measurement": {
+    "beforeAfterPairsPerBoundaryPerCase": 1,
+    "qcBoundary": "inspectPresentationNativeFrameQcV001 only, including its native input hashing, executable versions, extraction, layer preparation, full candidate composition, exact RGB comparison and final verification. Source loading, harness binding, observer setup and result serialization are outside the measured call. No Remotion PNG preparation, main MP4 composition or strict replay is executed.",
+    "endToEndBoundary": "HTTP edit-to-full-media includes applicability, durable save, preview polling and full media transfer; renderer, QC and child times are nested, never added to that total",
+    "qcStartingConditions": "new output and scratch per execution; same saved P1 media, native PNGs and QC recipe",
+    "endToEndStartingConditions": "separate empty native image, applicability, and completed-preview stores per case",
+    "pollIntervalMilliseconds": 2000,
+    "environmentEqual": true,
+    "sameHarnessBytes": true,
+    "qcHarness": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/p2-qc-performance.mjs",
+      "bytes": 18914,
+      "fileSha256": "d8d628662d087b9ec1f9aaa5e749504909872e3451ec5d9024f60419fc1f79d1"
+    },
+    "endToEndHarness": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/p1-editing-performance.mjs",
+      "bytes": 25660,
+      "fileSha256": "8fcae9f91c7b1bddc150c4616153adca538700aa36f0b849c0af7116a15c6a43"
+    },
+    "environment": {
+      "node": {
+        "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "bytes": 88501744,
+        "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+      },
+      "version": "v20.19.6",
+      "platform": "darwin",
+      "arch": "arm64",
+      "release": "25.6.0",
+      "cpuModel": "Apple M3 Max"
+    },
+    "selection": "全ての本測定を掲載。P1過去値のBefore流用なし。OS page cacheの消去はせず、jobの保存領域とcacheを新規空状態にした。"
+  },
+  "protectedEvidence": {
+    "unchanged": true,
+    "protectedReferenceCount": 18,
+    "sourceReferenceCount": 10,
+    "protectedReferences": [
+      {
+        "name": "captionAuto.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/captionAuto.json",
+        "bytes": 43149,
+        "fileSha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1"
+      },
+      {
+        "name": "captionOverrides.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/captionOverrides.json",
+        "bytes": 31772,
+        "fileSha256": "f8565737d1b5e4531c31be1c77b95e943e4c4a051af4aa31bd9f056b714e02ea"
+      },
+      {
+        "name": "connectionAuto.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/connectionAuto.json",
+        "bytes": 2159,
+        "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7"
+      },
+      {
+        "name": "connectionOverrides.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+        "bytes": 976,
+        "fileSha256": "56b3b7783d1b2188786cf81b1774021d0b3bcedae1fb80fc78e9ca59da3c2bec"
+      },
+      {
+        "name": "document.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/document.json",
+        "bytes": 9836,
+        "fileSha256": "d565d843b135ae842c93e135b6f916af7d50aa31dcb9fee335e6f0ca25386393"
+      },
+      {
+        "name": "fresh-input.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/fresh-input.json",
+        "bytes": 382825,
+        "fileSha256": "122e83a28c4efdc5bfa052a74519039d858415551933596de55e8af0d33c275a"
+      },
+      {
+        "name": "media/4ef43bca-e48a-453c-9c78-d036c965103e.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/media/4ef43bca-e48a-453c-9c78-d036c965103e.json",
+        "bytes": 17070,
+        "fileSha256": "f966ae61b8c3bb6a675329390e85956c442e00f7a4af710fea8ebba16a7fbeb2"
+      },
+      {
+        "name": "media/7b68ed40-58d0-4772-bf3c-fe36e46dd5e7.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/media/7b68ed40-58d0-4772-bf3c-fe36e46dd5e7.json",
+        "bytes": 17057,
+        "fileSha256": "c1ab60df0c6369bb8f97ab9f580524a2dddce670db3bc531b68c65362222a7bf"
+      },
+      {
+        "name": "media/d1d18f1b-3ec6-4f35-8b20-0513732ed953.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/media/d1d18f1b-3ec6-4f35-8b20-0513732ed953.json",
+        "bytes": 17057,
+        "fileSha256": "1d8aad1b85f8bd3188e7aea1f44ad0fb4b8c5287460105e3de03c92c752f6084"
+      },
+      {
+        "name": "original-drawing-evidence.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/original-drawing-evidence.json",
+        "bytes": 975051,
+        "fileSha256": "c63e584c9eda4341ec2483ce900261681753c2d2fdaeee258696dd592b879c3b"
+      },
+      {
+        "name": "raw-ai-response-v001.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/raw-ai-response-v001.json",
+        "bytes": 27199,
+        "fileSha256": "7d1d7bc4e0587fa90c7d9115f5c79cb9d39b4ff7d9750aa32d561f6a0c602629"
+      },
+      {
+        "name": "selectionRecord.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/selectionRecord.json",
+        "bytes": 477587,
+        "fileSha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c"
+      },
+      {
+        "name": "source-bindings.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/source-bindings.json",
+        "bytes": 354254,
+        "fileSha256": "87d95289df43473c7eb4a672c1a57b314119db05d7124512398df3388bd0550e"
+      },
+      {
+        "name": "review-reflection-r1-r3-20260921-v002/review-v002.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/review-reflection-r1-r3-20260921-v002/review-v002.json",
+        "bytes": 20805,
+        "fileSha256": "5a6bf7f68ce79a4b1056ff61b891f29aee874b02d43a7219fc480d1e51f5c8e0"
+      },
+      {
+        "name": "human-review-batch-10-20260921-v001/answers-received-v003/session-answers.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v003/session-answers.json",
+        "bytes": 62272,
+        "fileSha256": "8dc2c92b70837b6927899373217a6419446f687e308c3f68602037d213066216"
+      },
+      {
+        "name": "digest-quality-q3-2-20260921-v001/candidate-record-v001.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-2-20260921-v001/candidate-record-v001.json",
+        "bytes": 2799,
+        "fileSha256": "bff779fe9a157cee1a1715cee61171b03e9c73ce2fc9981b5d42c6322c0d2e00"
+      },
+      {
+        "name": "digest-quality-q3-2-20260921-v001/review-data-v001.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-2-20260921-v001/review-data-v001.json",
+        "bytes": 2564,
+        "fileSha256": "a453c382d6c687394496000a1a53acc56511f20122208c07785496e17fce4524"
+      },
+      {
+        "name": "digest-quality-q4-confirmed-transfer-20260921-v001/input-availability-v001.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q4-confirmed-transfer-20260921-v001/input-availability-v001.json",
+        "bytes": 13194,
+        "fileSha256": "45c7a4e7c4f02ef6c5e175677d5ee2dca3d0d0fead4125f4b69211c2330e050a"
+      }
+    ],
+    "sourceReferences": [
+      {
+        "name": "source-bindings.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/source-bindings.json",
+        "bytes": 354254,
+        "fileSha256": "db0b940c80afc85107c7cebbe99e2376947144ef89556c5d73b3156342df10e2"
+      },
+      {
+        "name": "fresh-input.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/fresh-input.json",
+        "bytes": 383354,
+        "fileSha256": "474df94db948c172fdc57b44711c7cd4f40e7af8c98d992cc5bd472214d1bdde"
+      },
+      {
+        "name": "raw-ai-response-v001.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/raw-ai-response-v001.json",
+        "bytes": 22263,
+        "fileSha256": "de1bed01813ac9425601877dc0dc6c3389a7f12fd6c588b05cff87041b707b1f"
+      },
+      {
+        "name": "captionAuto.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/captionAuto.json",
+        "bytes": 43248,
+        "fileSha256": "e7acbe14edfe12a3d6b65441eca2abb91ffa0ca65a45ce1a2c16716aca8715cb"
+      },
+      {
+        "name": "captionOverrides.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/captionOverrides.json",
+        "bytes": 31558,
+        "fileSha256": "7fbff66619ec1420e25fc91d0c88443c475cb74406a61bd948d5582ec1a62415"
+      },
+      {
+        "name": "connectionAuto.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/connectionAuto.json",
+        "bytes": 2159,
+        "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7"
+      },
+      {
+        "name": "connectionOverrides.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/connectionOverrides.json",
+        "bytes": 830,
+        "fileSha256": "cd8a1c3fc432ec3e66361f47e87f5284f6ff05b37b3a8a0858c62eff35daf562"
+      },
+      {
+        "name": "selectionRecord.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/selectionRecord.json",
+        "bytes": 1443943,
+        "fileSha256": "f0d440da65803138a68658bf88f5a36f1ebf1b8a7ab15e91225bc0df004b44ff"
+      },
+      {
+        "name": "drawing-evidence.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/drawing-evidence.json",
+        "bytes": 1942870,
+        "fileSha256": "5a4bd86c2b826649d6658f58f3c6e3dd31c76b0242a42bc9966534b1df428d2e"
+      },
+      {
+        "name": "lineage.json",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/hrb-integrated-v001/lineage.json",
+        "bytes": 4097,
+        "fileSha256": "ed5fe5e4bf1868697527b1adcecbe89e361f2526ac22fc9ad47fc619a24103ba"
+      }
+    ]
+  },
+  "pendingTest": {
+    "approvalStatus": "approval pending",
+    "patchApplied": false,
+    "executed": false,
+    "technicalResult": null,
+    "reason": "自動承認審査が信頼できる着工承認根拠を確認できず、追加の失敗・取消試験変更を拒否。承認原文を添えた通常の再提示は中断され、正式許可は未確認。以後再試行・別経路実行なし。",
+    "unverified": "部分的な候補媒体と未完了結果を残したworkerの非zero終了／SIGTERM後、媒体登録と取得を拒否する追加実走負例。証拠上の失敗／signal改変拒否試験は、この実走の代替合格とは扱わない。",
+    "auditQuestions": [
+      "既存の他試験と現物の失敗処理は今回変更を十分覆うか",
+      "未実施の追加負例はP2最終受理に必須か"
+    ]
+  },
+  "cases": [
+    {
+      "name": "panel",
+      "condition": {
+        "name": "panel",
+        "text": "なんかグロいやつに捕まってる",
+        "selection": "Reset",
+        "range": {
+          "startFrame": 1675,
+          "endFrameExclusive": 1866
+        },
+        "sampleCount": 3,
+        "logicalCandidateCount": 12,
+        "recipeCanonicalSha256": "f2883b7196ba6ae9b8d0cb3e3495e8708869f39677968ea9fd8b9d2d5bf1ed12",
+        "sceneCanonicalSha256": "f26022a1dc0476c91438d9e97cfb045b2d04e2c2417ef3160fc9b225ae0e848a"
+      },
+      "qc": {
+        "beforeMilliseconds": 2402.7313750000003,
+        "afterMilliseconds": 2382.49775,
+        "savedMilliseconds": 20.233625000000302,
+        "afterOverBefore": 0.9915789067348404,
+        "beforePerformance": {
+          "wallClockMs": 2402.453375,
+          "phasesMilliseconds": {
+            "inputBinding": 344.05270900000005,
+            "frameExtraction": 568.4502079999999,
+            "nativeLayerPreparation": 528.314625,
+            "completedRgbCrop": 111.0557080000001,
+            "referenceComposition": 389.6929569999995,
+            "rgbDistance": 88.28141700000015,
+            "evidenceWrite": 0.6958330000002206,
+            "verification": 184.49545799999987,
+            "evidenceConstruction": 154.70529100000022
+          },
+          "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+          "childProcessCount": 13,
+          "childProcessesByPurpose": {
+            "tool-version": 2,
+            "source-frames-extract": 1,
+            "completed-frames-extract": 1,
+            "native-layer-prepare": 3,
+            "completed-rgb-crop": 3,
+            "native-reference-composite": 3
+          },
+          "sourceFrameOutputs": 3,
+          "completedFrameOutputs": 3,
+          "completedRgbOutputs": 3,
+          "logicalReferenceCount": 12,
+          "referenceRgbOutputs": 12,
+          "reusedReferenceRgbCount": 0,
+          "preparedLayerOutputs": 3,
+          "exactDistanceCalculations": 12,
+          "reusedExactDistances": 0,
+          "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+        },
+        "afterPerformance": {
+          "wallClockMs": 2382.20125,
+          "phasesMilliseconds": {
+            "inputBinding": 320.81883400000004,
+            "frameExtraction": 537.494459,
+            "nativeLayerPreparation": 498.9937090000001,
+            "nativeLayerDecode": 178.3096660000001,
+            "completedRgbCrop": 104.03670899999997,
+            "referenceComposition": 267.1785840000002,
+            "rgbDistance": 78.25958400000036,
+            "evidenceWrite": 0.6739159999992808,
+            "verification": 201.84562499999993,
+            "evidenceConstruction": 162.53099999999995
+          },
+          "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+          "childProcessCount": 16,
+          "childProcessesByPurpose": {
+            "tool-version": 2,
+            "source-frames-extract": 1,
+            "completed-frames-extract": 1,
+            "native-layer-prepare": 3,
+            "native-layer-decode": 3,
+            "completed-rgb-crop": 3,
+            "native-reference-composite": 3
+          },
+          "sourceFrameOutputs": 3,
+          "completedFrameOutputs": 3,
+          "completedRgbOutputs": 3,
+          "logicalReferenceCount": 12,
+          "referenceRgbOutputs": 12,
+          "reusedReferenceRgbCount": 0,
+          "preparedLayerOutputs": 3,
+          "decodedLayerOutputs": 6,
+          "decodedLayerBytes": 49766400,
+          "exactDistanceCalculations": 12,
+          "reusedExactDistances": 0,
+          "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+        },
+        "counts": {
+          "sampleCount": 3,
+          "logicalReferenceCount": 12,
+          "comparedCompletedRgbBytes": 1990800,
+          "comparedReferenceRgbBytes": 7963200
+        }
+      },
+      "duplicateWork": {
+        "beforePreparedPngInputsInReferenceCommands": 9,
+        "beforeDistinctPreparedPngInputs": 6,
+        "afterPreparedPngInputsInDecodeCommands": 6,
+        "afterDistinctPreparedPngInputs": 6,
+        "afterRawInputsInReferenceCommands": 9,
+        "rawOutputCount": 6,
+        "rawOutputBytes": 49766400,
+        "meaning": "保存済みprocess引数の入力出現数と生成ファイルbyte数。OSの物理I/O量やdecoder内部読取回数ではない。"
+      },
+      "endToEnd": {
+        "before": {
+          "editRequestToCompleteMediaMilliseconds": 55802.102666,
+          "applicabilityHttpMilliseconds": 4511.775458,
+          "durableSaveHttpMilliseconds": 1054.5881669999999,
+          "previewRequestToCompleteMediaMilliseconds": 50232.828208,
+          "mediaAcquisitionMilliseconds": 8.728750000002037,
+          "completedMediaReuseMilliseconds": 614.4841250000027,
+          "applicabilityReuseHttpMilliseconds": 817.0918749999983,
+          "rendererPreparationMilliseconds": 1717.450499999999,
+          "legacyPngWithPerImagePreparationMilliseconds": null,
+          "freshPngApiMilliseconds": 2539.416417000005,
+          "pngCacheReuseMilliseconds": 3.0062920000000304,
+          "freshPngCount": 10,
+          "pngCacheReuseCount": 2,
+          "overlayCliLaunchCount": 0,
+          "overlayBrowserLaunchCount": 4,
+          "observedChildProcessCount": 45,
+          "cleanupMilliseconds": 32.34437299999627,
+          "mainCompositionMilliseconds": 14201.883291,
+          "strictRecompositionMilliseconds": 14454.299124999998,
+          "finiteStateQcMilliseconds": 2469.9213750000054,
+          "diagnosticImagePreparationMilliseconds": 2372.6825420000023,
+          "totalCompletedQcMilliseconds": 19831.125625,
+          "observedScope": "PNG initialization counts only; layout/QC processes remain separate. Old CLI preparation and still pixels share one measured process and are not artificially split. Times include nested phases and must not be summed into end-to-end time."
+        },
+        "after": {
+          "editRequestToCompleteMediaMilliseconds": 53288.642542,
+          "applicabilityHttpMilliseconds": 4284.297333,
+          "durableSaveHttpMilliseconds": 994.9093330000005,
+          "previewRequestToCompleteMediaMilliseconds": 48006.484458,
+          "mediaAcquisitionMilliseconds": 12.476041000001715,
+          "completedMediaReuseMilliseconds": 581.0042089999988,
+          "applicabilityReuseHttpMilliseconds": 794.6598340000055,
+          "rendererPreparationMilliseconds": 1644.1064159999978,
+          "legacyPngWithPerImagePreparationMilliseconds": null,
+          "freshPngApiMilliseconds": 2448.60195999999,
+          "pngCacheReuseMilliseconds": 2.1744159999998374,
+          "freshPngCount": 10,
+          "pngCacheReuseCount": 2,
+          "overlayCliLaunchCount": 0,
+          "overlayBrowserLaunchCount": 4,
+          "observedChildProcessCount": 48,
+          "cleanupMilliseconds": 29.057332000016686,
+          "mainCompositionMilliseconds": 13860.131000000001,
+          "strictRecompositionMilliseconds": 14166.850000000002,
+          "finiteStateQcMilliseconds": 2472.7332499999975,
+          "diagnosticImagePreparationMilliseconds": 2304.190499999997,
+          "totalCompletedQcMilliseconds": 19425.013667000003,
+          "observedScope": "PNG initialization counts only; layout/QC processes remain separate. Old CLI preparation and still pixels share one measured process and are not artificially split. Times include nested phases and must not be summed into end-to-end time."
+        },
+        "savedMilliseconds": 2513.4601239999974,
+        "afterOverBefore": 0.9549576090520432
+      },
+      "identity": {
+        "allLogicalCandidatesAndFullRgbExact": true,
+        "rgbCounts": {
+          "sampleCount": 3,
+          "logicalReferenceCount": 12,
+          "comparedCompletedRgbBytes": 1990800,
+          "comparedReferenceRgbBytes": 7963200
+        },
+        "adapterPngOutputsCompared": 12,
+        "distinctDecodedPngPairs": 4,
+        "mp4BytesExact": true,
+        "mp4": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-p2-20260922-e2e-after-v001-panel/run-28cfce23-824e-4f8d-b41e-304b723fbb89/render/presentation-rendered-v002.mp4",
+          "bytes": 4059555,
+          "fileSha256": "0a030a3b88fc883c0ec4212dd00b4c599b2133917c192a1c98968bd7e3fc42cb"
+        },
+        "strictReplayBeforeAndAfterBytesExact": true,
+        "savedContentExact": true,
+        "resolvedPlanExact": true,
+        "applicationResultsExact": true,
+        "qcObservationsExact": true,
+        "audioExact": true,
+        "qcProjectionSha256": "584f1e61a2dd78bb7b44a801be622ea1293072a31efa7770030929c8f14a5554",
+        "separateProcessReloadBeforeAndAfterPassed": true,
+        "reloadBefore": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/e2e-before-v001/panel/reload-result.json",
+          "bytes": 1640,
+          "fileSha256": "8c81726cac2ff521789398de481e56ef33ab894851e392586103e154955d23d7"
+        },
+        "reloadAfter": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/e2e-after-v001/panel/reload-result.json",
+          "bytes": 1639,
+          "fileSha256": "8c9b1dbc6944a0ba57f15bf51040c2011b8baae7dd7700e3aa8e2191beb655a9"
+        }
+      }
+    },
+    {
+      "name": "shake",
+      "condition": {
+        "name": "shake",
+        "text": "いるやんいるやん",
+        "selection": "Reset",
+        "range": {
+          "startFrame": 0,
+          "endFrameExclusive": 131
+        },
+        "sampleCount": 50,
+        "logicalCandidateCount": 1715,
+        "recipeCanonicalSha256": "afda46d572afbbb62bb53c1a39b07e33342b0adca03db6f610f2e921209f3316",
+        "sceneCanonicalSha256": "c27f0ebdb6cbb812d4bdd9585eaaa80eb46cf50ebe452d14655e6be37d51a995"
+      },
+      "qc": {
+        "beforeMilliseconds": 48578.284834,
+        "afterMilliseconds": 40826.223750000005,
+        "savedMilliseconds": 7752.061083999994,
+        "afterOverBefore": 0.8404212682582338,
+        "beforePerformance": {
+          "wallClockMs": 48578.212167000005,
+          "phasesMilliseconds": {
+            "inputBinding": 372.1084579999997,
+            "frameExtraction": 1845.728125,
+            "nativeLayerPreparation": 8130.811541,
+            "completedRgbCrop": 1949.6921709999915,
+            "referenceComposition": 31545.820163999993,
+            "rgbDistance": 2836.4572039999985,
+            "evidenceWrite": 13.66662800001177,
+            "verification": 1115.7759579999984,
+            "evidenceConstruction": 677.4454170000026
+          },
+          "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+          "childProcessCount": 123,
+          "childProcessesByPurpose": {
+            "tool-version": 2,
+            "source-frames-extract": 1,
+            "completed-frames-extract": 1,
+            "native-layer-prepare": 19,
+            "completed-rgb-crop": 50,
+            "native-reference-composite": 50
+          },
+          "sourceFrameOutputs": 50,
+          "completedFrameOutputs": 50,
+          "completedRgbOutputs": 50,
+          "logicalReferenceCount": 1715,
+          "referenceRgbOutputs": 1665,
+          "reusedReferenceRgbCount": 50,
+          "preparedLayerOutputs": 57,
+          "exactDistanceCalculations": 1665,
+          "reusedExactDistances": 0,
+          "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+        },
+        "afterPerformance": {
+          "wallClockMs": 40826.14137500001,
+          "phasesMilliseconds": {
+            "inputBinding": 348.0496670000002,
+            "frameExtraction": 1816.898333,
+            "nativeLayerPreparation": 7778.121959,
+            "nativeLayerDecode": 2223.082166,
+            "completedRgbCrop": 1822.7301249999837,
+            "referenceComposition": 22088.969331999986,
+            "rgbDistance": 2537.4597899999953,
+            "evidenceWrite": 12.828583999978946,
+            "verification": 1498.4975829999967,
+            "evidenceConstruction": 613.1752500000002
+          },
+          "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+          "childProcessCount": 142,
+          "childProcessesByPurpose": {
+            "tool-version": 2,
+            "source-frames-extract": 1,
+            "completed-frames-extract": 1,
+            "native-layer-prepare": 19,
+            "native-layer-decode": 19,
+            "completed-rgb-crop": 50,
+            "native-reference-composite": 50
+          },
+          "sourceFrameOutputs": 50,
+          "completedFrameOutputs": 50,
+          "completedRgbOutputs": 50,
+          "logicalReferenceCount": 1715,
+          "referenceRgbOutputs": 1665,
+          "reusedReferenceRgbCount": 50,
+          "preparedLayerOutputs": 57,
+          "decodedLayerOutputs": 76,
+          "decodedLayerBytes": 630374400,
+          "exactDistanceCalculations": 1665,
+          "reusedExactDistances": 0,
+          "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+        },
+        "counts": {
+          "sampleCount": 50,
+          "logicalReferenceCount": 1715,
+          "comparedCompletedRgbBytes": 34560000,
+          "comparedReferenceRgbBytes": 1185408000
+        }
+      },
+      "duplicateWork": {
+        "beforePreparedPngInputsInReferenceCommands": 950,
+        "beforeDistinctPreparedPngInputs": 76,
+        "afterPreparedPngInputsInDecodeCommands": 76,
+        "afterDistinctPreparedPngInputs": 76,
+        "afterRawInputsInReferenceCommands": 950,
+        "rawOutputCount": 76,
+        "rawOutputBytes": 630374400,
+        "meaning": "保存済みprocess引数の入力出現数と生成ファイルbyte数。OSの物理I/O量やdecoder内部読取回数ではない。"
+      },
+      "endToEnd": {
+        "before": {
+          "editRequestToCompleteMediaMilliseconds": 144086.157458,
+          "applicabilityHttpMilliseconds": 10555.278166999997,
+          "durableSaveHttpMilliseconds": 1087.0632500000065,
+          "previewRequestToCompleteMediaMilliseconds": 132440.98366600001,
+          "mediaAcquisitionMilliseconds": 7.4508330000098795,
+          "completedMediaReuseMilliseconds": 621.5697079999954,
+          "applicabilityReuseHttpMilliseconds": 856.0650000000023,
+          "rendererPreparationMilliseconds": 1386.8042490000043,
+          "legacyPngWithPerImagePreparationMilliseconds": null,
+          "freshPngApiMilliseconds": 15865.609252999979,
+          "pngCacheReuseMilliseconds": 22.273623999997653,
+          "freshPngCount": 64,
+          "pngCacheReuseCount": 14,
+          "overlayCliLaunchCount": 0,
+          "overlayBrowserLaunchCount": 4,
+          "observedChildProcessCount": 265,
+          "cleanupMilliseconds": 31.995458000004874,
+          "mainCompositionMilliseconds": 23993.295499999997,
+          "strictRecompositionMilliseconds": 24338.40645799999,
+          "finiteStateQcMilliseconds": 48765.93075,
+          "diagnosticImagePreparationMilliseconds": 360.04950000000827,
+          "totalCompletedQcMilliseconds": 74609.87979199999,
+          "observedScope": "PNG initialization counts only; layout/QC processes remain separate. Old CLI preparation and still pixels share one measured process and are not artificially split. Times include nested phases and must not be summed into end-to-end time."
+        },
+        "after": {
+          "editRequestToCompleteMediaMilliseconds": 134672.313084,
+          "applicabilityHttpMilliseconds": 10196.962333000003,
+          "durableSaveHttpMilliseconds": 1041.687208000003,
+          "previewRequestToCompleteMediaMilliseconds": 123431.333167,
+          "mediaAcquisitionMilliseconds": 6.754000000015367,
+          "completedMediaReuseMilliseconds": 584.0640419999836,
+          "applicabilityReuseHttpMilliseconds": 811.7094999999972,
+          "rendererPreparationMilliseconds": 1309.6197099999963,
+          "legacyPngWithPerImagePreparationMilliseconds": null,
+          "freshPngApiMilliseconds": 15260.185582000013,
+          "pngCacheReuseMilliseconds": 14.24745699999221,
+          "freshPngCount": 64,
+          "pngCacheReuseCount": 14,
+          "overlayCliLaunchCount": 0,
+          "overlayBrowserLaunchCount": 4,
+          "observedChildProcessCount": 284,
+          "cleanupMilliseconds": 29.300084000002244,
+          "mainCompositionMilliseconds": 23478.742542000004,
+          "strictRecompositionMilliseconds": 23899.616875000007,
+          "finiteStateQcMilliseconds": 41755.782999999996,
+          "diagnosticImagePreparationMilliseconds": 338.2605419999891,
+          "totalCompletedQcMilliseconds": 67085.241209,
+          "observedScope": "PNG initialization counts only; layout/QC processes remain separate. Old CLI preparation and still pixels share one measured process and are not artificially split. Times include nested phases and must not be summed into end-to-end time."
+        },
+        "savedMilliseconds": 9413.844374000008,
+        "afterOverBefore": 0.9346651715884361
+      },
+      "identity": {
+        "allLogicalCandidatesAndFullRgbExact": true,
+        "rgbCounts": {
+          "sampleCount": 50,
+          "logicalReferenceCount": 1715,
+          "comparedCompletedRgbBytes": 34560000,
+          "comparedReferenceRgbBytes": 1185408000
+        },
+        "adapterPngOutputsCompared": 78,
+        "distinctDecodedPngPairs": 19,
+        "mp4BytesExact": true,
+        "mp4": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-p2-20260922-e2e-after-v001-shake/run-336b4bc5-0bb4-444a-8c7b-8d9eeb68a944/render/presentation-rendered-v002.mp4",
+          "bytes": 3802260,
+          "fileSha256": "aff15c4832d775b563419adbd255a3d502fc083dc7d78a48987dbb4e0dfe56be"
+        },
+        "strictReplayBeforeAndAfterBytesExact": true,
+        "savedContentExact": true,
+        "resolvedPlanExact": true,
+        "applicationResultsExact": true,
+        "qcObservationsExact": true,
+        "audioExact": true,
+        "qcProjectionSha256": "db59ad6258217ed44d244ad9ca5e8ff0dac307e46eacc4bf5b27e38c9e6fbb52",
+        "separateProcessReloadBeforeAndAfterPassed": true,
+        "reloadBefore": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/e2e-before-v001/shake/reload-result.json",
+          "bytes": 1640,
+          "fileSha256": "588de07fe5c1a4e24caf9da2357e65480d1ac40327f5e83c59aede7ab97c8bc3"
+        },
+        "reloadAfter": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/e2e-after-v001/shake/reload-result.json",
+          "bytes": 1639,
+          "fileSha256": "20a7b2eecc6015263e2840f18a5506caf4cdb6bae46bf73e221b8963b089de7b"
+        }
+      }
+    }
+  ],
+  "tests": [
+    {
+      "command": "node --test --test-name-pattern='prepared alpha, shared decoded planes|file-based exact distances' evals/clip_composition/presentation_native_frame_execution_v001.test.mjs",
+      "node": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "result": {
+        "tests": 7,
+        "pass": 2,
+        "fail": 0,
+        "skipped": 5
+      },
+      "log": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-p2-20260922-v001/native-layer-tests-v001.tap",
+        "bytes": 2218,
+        "fileSha256": "5fb5392f6874e82d92f0f920230b9ecf6595e9dad819be6fae033cabb2b8e31c"
+      }
+    },
+    {
+      "command": "node --test --test-name-pattern='an empty caption scope' evals/clip_composition/presentation_native_frame_execution_v001.test.mjs",
+      "node": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "result": {
+        "tests": 7,
+        "pass": 1,
+        "fail": 0,
+        "skipped": 6
+      },
+      "log": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-p2-20260922-v001/native-empty-scope-node20-v001.tap",
+        "bytes": 2056,
+        "fileSha256": "4d69beafd22605c63f1ec4a5e78192c5369d6ef46b0b696f2dbbbc98ec3770af"
+      }
+    },
+    {
+      "command": "node --test evals/clip_composition/presentation_native_frame_qc_v001.test.mjs",
+      "node": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "result": {
+        "tests": 12,
+        "pass": 12,
+        "fail": 0,
+        "skipped": 0
+      },
+      "log": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-p2-20260922-v001/native-recipe-tests-v001.tap",
+        "bytes": 3257,
+        "fileSha256": "ff1e7fcc9c730e6b21f59c5c7d702da4081cb0d71627156114cbcee82d5b8f7f"
+      }
+    },
+    {
+      "command": "node --test --test-name-pattern='combined proof' evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs",
+      "node": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "result": {
+        "tests": 42,
+        "pass": 7,
+        "fail": 0,
+        "skipped": 35
+      },
+      "log": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-p2-20260922-v001/combined-proof-node20-v001.tap",
+        "bytes": 11682,
+        "fileSha256": "a0941b6dda3b7f4156f6fbecce47032bd266b045ce0a69635336c29afd7ca369"
+      }
+    }
+  ],
+  "evidenceReferences": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/starting-point.json",
+      "bytes": 1482,
+      "fileSha256": "738850f1d82e23858cf7c08dd1953c2b1fe86630ca15371c1a77b6b38b3b6208"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/before-presentation_native_frame_qc_v001.mjs",
+      "bytes": 61942,
+      "fileSha256": "6820d0e85dba7ac76b36f0c8b4499ddc7018d600097fc4ecd1043ad1d5c730a6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/before-p1-editing-performance.mjs",
+      "bytes": 25660,
+      "fileSha256": "8fcae9f91c7b1bddc150c4616153adca538700aa36f0b849c0af7116a15c6a43"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/qc-before-v001/result.json",
+      "bytes": 61036,
+      "fileSha256": "4bfe0c6325d3e5480ecf00d803bc50d37480354d087a54446c7e79e8b3255db1"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/qc-after-v001/result.json",
+      "bytes": 61343,
+      "fileSha256": "0c60c7087737e4501b9f1efa991ddc6a57390dbf78a23869f45cad02ee9fd1b8"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/qc-comparison-v001/result.json",
+      "bytes": 9263,
+      "fileSha256": "4605f3506b555de4292b9aecf15b9e6af871a25ce5c44f8a633e9593435854b3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/e2e-before-v001/result.json",
+      "bytes": 383943,
+      "fileSha256": "df4f0dbac91c10a03335f66902b9befb46459922ef879fd3f64cdc73966fca76"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/e2e-after-v001/result.json",
+      "bytes": 391013,
+      "fileSha256": "761eb7b8eae45e04d05167de6b591b471d854937d8287bb8ea4805d6a26a20ef"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p2-finite-qc-20260922-v001/e2e-comparison-v001/result.json",
+      "bytes": 6128592,
+      "fileSha256": "11810500fd1c05083d2645f5f506859ca17c7e61959d43e83b0da3132bcaeac7"
+    }
+  ],
+  "changedSourceReferences": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "bytes": 65107,
+      "fileSha256": "e339173000b7406bfd03c85b40c4769f69534cd5fc5b4c6bf3b475ac5fe2b0a9"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+      "bytes": 14718,
+      "fileSha256": "4731e8c46013e9604b84eb5c1529e326199a59d2b7f3a7a3e8492e9d79110ca5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_execution_v001.test.mjs",
+      "bytes": 21930,
+      "fileSha256": "87d21693b9c64ac6d8857d5841e39a1772f5ef2512ae77f18d604175591b06bd"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs",
+      "bytes": 78358,
+      "fileSha256": "2bc85d7ae13c488001b842e10be13ffcbf8b373eeec392329c47b3e0fb35bb3a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_physical_clock_probe_v001.mjs",
+      "bytes": 26923,
+      "fileSha256": "b5f730277eadcfa2b2e93a20bd7eb1500a68ab2bc23404c58fc82ffdcc28fafe"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_soft_overlay_probe_v001.mjs",
+      "bytes": 24477,
+      "fileSha256": "e488af94bd260432dbcfc2ed7c772ba1e57bca7a84f4bf6e6fd5677d51604c8b"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/p1-editing-performance.mjs",
+      "bytes": 25660,
+      "fileSha256": "8fcae9f91c7b1bddc150c4616153adca538700aa36f0b849c0af7116a15c6a43"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/p2-qc-performance.mjs",
+      "bytes": 18914,
+      "fileSha256": "d8d628662d087b9ec1f9aaa5e749504909872e3451ec5d9024f60419fc1f79d1"
+    }
+  ]
+}

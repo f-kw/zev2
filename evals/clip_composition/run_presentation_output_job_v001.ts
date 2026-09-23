@@ -2382,6 +2382,9 @@ export async function runPresentationOutputJobV001({
     }
     for (let index = 0; index < core.overlayRecords.length; index += 1) {
       const record = core.overlayRecords[index];
+      if (record.pulseStates !== undefined || Object.hasOwn(record.element ?? {}, 'presentationPulse')) {
+        throw new TypeError('native static page output does not accept pulse overlays');
+      }
       const newName = formalOverlayName(pages[index].pageId, index);
       const newPath = path.join(
         core.stagingDirectory,

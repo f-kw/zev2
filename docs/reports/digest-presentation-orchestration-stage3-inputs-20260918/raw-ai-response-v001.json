@@ -1,0 +1,675 @@
+{
+  "schemaVersion": "presentation-orchestration-judgment-v001",
+  "inputSha256": "61ee7fc885cd50fddce924152c77046e2f117452452d70e8e6315d41e397c981",
+  "completion": "complete",
+  "captions": [
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+      "status": "unrepresentable",
+      "semanticRole": null,
+      "allowedPresets": [],
+      "reason": "相手を見つけた瞬間の短い驚きで、情報説明よりも反応の出現を伝える発話である。しかし確定した5フレームの字幕では、反応に対応する跳ねと揺れの両方が物理的に成立しない。通常表示へ意味役割を変更して解消することはしない。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "audio-event-000001",
+        "stage1-bounce-physical-unrepresentable",
+        "stage1-shake-physical-unrepresentable"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "status": "resolved",
+      "semanticRole": "reaction",
+      "allowedPresets": [
+        {
+          "preset": "bounce"
+        },
+        {
+          "preset": "shake"
+        }
+      ],
+      "reason": "見つけた相手を「これもういる」と慌てて指し直す短い反応である。出現時の跳ね、または戸惑いを示す揺れが、この発見の反応を保つ。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "audio-event-000001"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "status": "resolved",
+      "semanticRole": "reaction",
+      "allowedPresets": [
+        {
+          "preset": "bounce"
+        },
+        {
+          "preset": "shake"
+        }
+      ],
+      "reason": "「いるやん」の反復は新情報を説明するためではなく、発見した相手への慌て方そのものである。短い反復の反応として跳ねと揺れのどちらも意味に合う。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "audio-event-000001"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "status": "resolved",
+      "semanticRole": "vocal-energy",
+      "allowedPresets": [
+        {
+          "preset": "scale"
+        },
+        {
+          "preset": "pulse",
+          "anchorPeakId": "audio-peak-000020"
+        }
+      ],
+      "reason": "発見後に相手の名を呼び、引き延ばした「やめてー」で抗議する悲鳴のまとまりである。声を張る勢いを字幕全体の拡大で伝えられ、脈動なら呼びかけ中の3.94秒に実在する適格な頂点へ合わせられる。音響値だけを声由来の証明とはせず、悲鳴という保持文脈と発話内容を併せて判断した。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "audio-event-000002",
+        "audio-peak-000020",
+        "asr-segment-000003"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+      "status": "resolved",
+      "semanticRole": "vocal-energy",
+      "allowedPresets": [
+        {
+          "preset": "scale"
+        }
+      ],
+      "reason": "「リカー!」は相手を名指しして引き延ばす叫びであり、名前の説明ではない。叫びの勢いを伝える拡大が許される。元の字幕内で脈動を完結できる頂点がないため、脈動は含めない。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "audio-event-000002",
+        "asr-segment-000004",
+        "pulse-no-eligible-anchor"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+      "status": "resolved",
+      "semanticRole": "vocal-energy",
+      "allowedPresets": [
+        {
+          "preset": "scale"
+        },
+        {
+          "preset": "pulse",
+          "anchorPeakId": "audio-peak-000047"
+        }
+      ],
+      "reason": "「勘弁してーよ」は発見後の悲鳴に続く、声を伸ばして訴える抗議である。拡大で訴えの勢いを保てるほか、「勘弁」の発音と重なる8.66秒の適格な頂点へ脈動を合わせられる。混合音の変化だけで声量を断定せず、発話の訴えと保持文脈を根拠にする。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "audio-event-000003",
+        "audio-peak-000047",
+        "asr-segment-000006"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+      "status": "resolved",
+      "semanticRole": "vocal-energy",
+      "allowedPresets": [
+        {
+          "preset": "scale"
+        },
+        {
+          "preset": "pulse",
+          "anchorPeakId": "audio-peak-000059"
+        }
+      ],
+      "reason": "覗き方に対して「やめろ!」と直接抗議する、悲鳴の一連の結びである。字幕全体の拡大と、命令語の末尾に重なる10.78秒の適格な頂点を用いた脈動は、どちらもこの強い抗議の勢いに対応する。声由来の判断は混合音の頂点だけには依存しない。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "audio-event-000003",
+        "audio-peak-000059",
+        "asr-segment-000007"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+      "status": "resolved",
+      "semanticRole": "reaction",
+      "allowedPresets": [
+        {
+          "preset": "bounce"
+        },
+        {
+          "preset": "shake"
+        }
+      ],
+      "reason": "同じ覗き方への抗議を受けた「え、もうやだー」という短い拒絶の反応である。情報を整理する強調より、反応の出現や揺れとして伝えるのが適する。",
+      "evidenceIds": [
+        "horror-segment-0002",
+        "audio-event-000004"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "partial-caption",
+          "targetText": "世界一嫌い"
+        }
+      ],
+      "reason": "この発話の結びで新たに際立つのは、覗き方を「世界一嫌い」とまで言う極端な評価である。相手と覗き方は既出の説明として残し、評価の語句だけに焦点を置く部分色を許す。字幕全体を同じ強さで強調する枠表示は、この限定した焦点とは異なる。",
+      "evidenceIds": [
+        "horror-segment-0002",
+        "audio-event-000004",
+        "asr-segment-000011"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+      "status": "resolved",
+      "semanticRole": "normal",
+      "allowedPresets": [
+        {
+          "preset": "normal"
+        }
+      ],
+      "reason": "逃げる必要がある場面なのかを確認する導入の問いであり、この時点では急加速への驚きも結論も述べていない。音響頂点が存在することだけで声の強調へ変えず、後続の理解へつなぐ通常の説明として扱う。",
+      "evidenceIds": [
+        "horror-segment-0003",
+        "audio-event-000005",
+        "asr-segment-000012"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+      "status": "resolved",
+      "semanticRole": "normal",
+      "allowedPresets": [
+        {
+          "preset": "normal"
+        }
+      ],
+      "reason": "直前の問いを受けて逃げる必要を理解したという短い確認である。単独の見どころや驚きの頂点より、次の走る速さの説明へ進む役割が中心なので通常表示が適する。",
+      "evidenceIds": [
+        "horror-segment-0003",
+        "audio-event-000005",
+        "asr-segment-000013"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "whole-caption"
+        },
+        {
+          "preset": "panel"
+        }
+      ],
+      "reason": "走ってもこの速さだという一文全体が、後の急加速との差を理解する基準を作る。説明の前提として重要な一文なので、全体の色強調と枠表示のどちらでも同じ意味を保てる。音響頂点の多さを理由に声の勢いへ置き換えない。",
+      "evidenceIds": [
+        "horror-segment-0003",
+        "audio-event-000006",
+        "asr-segment-000014"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+      "status": "resolved",
+      "semanticRole": "reaction",
+      "allowedPresets": [
+        {
+          "preset": "bounce"
+        },
+        {
+          "preset": "shake"
+        }
+      ],
+      "reason": "遅い走りを確認した直後に、突然速くなったことへ「おい」と反応する落差の場面である。驚きの短い言い切りとして跳ねと揺れを許す。入力の音響観測だけでは字幕中の特定の叫びへ頂点を帰属できないため、音の頂点に合わせた表現を意味判断の中心にしない。",
+      "evidenceIds": [
+        "horror-segment-0003",
+        "horror-segment-0004",
+        "audio-event-000007"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "whole-caption"
+        },
+        {
+          "preset": "panel"
+        }
+      ],
+      "reason": "逃走の結果として、異様な相手に捕まった状況を一文で明らかにする。相手の説明と捕まった結末を一緒に示す情報なので、一文全体の色強調と枠表示が意味を保つ。",
+      "evidenceIds": [
+        "horror-segment-0004",
+        "audio-event-000011",
+        "asr-segment-000027",
+        "asr-segment-000028"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+      "status": "resolved",
+      "semanticRole": "reaction",
+      "allowedPresets": [
+        {
+          "preset": "bounce"
+        },
+        {
+          "preset": "shake"
+        }
+      ],
+      "reason": "捕まった後、現在地が分からず「どこ?」と戸惑う短い反応である。周辺の認識にも場所を尋ねる反復があり、状況説明の結論よりも戸惑いの出現を伝える跳ねや揺れに合う。",
+      "evidenceIds": [
+        "horror-segment-0004",
+        "audio-event-000015",
+        "asr-segment-000042"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+      "status": "unrepresentable",
+      "semanticRole": null,
+      "allowedPresets": [],
+      "reason": "「何これ?」は棺のような場所を説明する直前の短い戸惑いの反応である。しかし確定した11フレームでは反応を示す跳ねと揺れがどちらも成立しない。意味を通常の説明へ付け替えず、有限の許容演出では表現不能とする。",
+      "evidenceIds": [
+        "horror-segment-0004",
+        "audio-event-000017",
+        "stage1-bounce-physical-unrepresentable",
+        "stage1-shake-physical-unrepresentable"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "whole-caption"
+        },
+        {
+          "preset": "panel"
+        }
+      ],
+      "reason": "棺のような場所に入れられていると状況が判明する、逃走の結末を伝える一文である。場所の比喩と入れられた結果をまとめて読ませる全体色と枠表示が許される。音響頂点の存在より、何が起きたかの説明を主要な役割とする。",
+      "evidenceIds": [
+        "horror-segment-0004",
+        "audio-event-000017",
+        "asr-segment-000047"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+      "status": "resolved",
+      "semanticRole": "normal",
+      "allowedPresets": [
+        {
+          "preset": "normal"
+        }
+      ],
+      "reason": "「まぁでも怖かったね」は実際の出来事から振り返りへ入る総論であり、怖さの具体的な仕組みは後続で説明する。ここでは強い断定の見出しにせず、感想の導入として通常表示を許す。",
+      "evidenceIds": [
+        "horror-segment-0005",
+        "audio-event-000018",
+        "asr-segment-000048"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "partial-caption",
+          "targetText": "アングル"
+        }
+      ],
+      "reason": "会社への一般的な感想から、怖さを作る具体的な手段である「アングル」を初めて取り出す発話である。焦点は会社名や抗議全体ではなくこの手段なので、その語だけを色で示す。",
+      "evidenceIds": [
+        "horror-segment-0005",
+        "audio-event-000019",
+        "asr-segment-000050"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+      "status": "resolved",
+      "semanticRole": "vocal-energy",
+      "allowedPresets": [
+        {
+          "preset": "scale"
+        },
+        {
+          "preset": "pulse",
+          "anchorPeakId": "audio-peak-000735"
+        }
+      ],
+      "reason": "直前の角度への抗議を、短い「マジで怖い」で強く押す発話である。「怖い」の末尾と一致する110.94秒には適格な局所頂点があり、認識内容と音声存在の観測も重なる。拡大でもその頂点への脈動でも、短い訴えの勢いを伝えられる。混合音であるため声だけの振幅とは断定しない。",
+      "evidenceIds": [
+        "horror-segment-0005",
+        "audio-event-000019",
+        "audio-peak-000735",
+        "asr-segment-000051"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000021",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "partial-caption",
+          "targetText": "アングルで怖がらせんのマジ上手い"
+        }
+      ],
+      "reason": "抗議から一歩進み、角度で怖がらせる技術が上手いという具体的な評価へ着地する。言い出しと会社を示す部分を通常の文脈として保ち、この手段と評価がつながる語句だけに色を置く。",
+      "evidenceIds": [
+        "horror-segment-0005",
+        "audio-event-000021",
+        "asr-segment-000053"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "whole-caption"
+        },
+        {
+          "preset": "panel"
+        }
+      ],
+      "reason": "カメラワークに加えて時間差が怖かったという、振り返りの二つの主題を一文で提示する。片方だけを切り出すと主題の並列が弱くなるため、文全体の色強調または枠表示でまとめて示すことを許す。",
+      "evidenceIds": [
+        "horror-segment-0006",
+        "audio-event-000021",
+        "asr-segment-000055"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000023",
+      "status": "resolved",
+      "semanticRole": "normal",
+      "allowedPresets": [
+        {
+          "preset": "normal"
+        }
+      ],
+      "reason": "「分かってるよ」は次のホラー経験についての説明を始める受け答えであり、この字幕だけでは何を理解しているかの要点が完結していない。局所頂点の存在を新しい強調の理由にはせず通常表示にする。",
+      "evidenceIds": [
+        "horror-segment-0006",
+        "audio-event-000022",
+        "asr-segment-000056"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000024",
+      "status": "resolved",
+      "semanticRole": "normal",
+      "allowedPresets": [
+        {
+          "preset": "normal"
+        }
+      ],
+      "reason": "「なんかやっぱさ」は後続の説明を始める言い出しで、独立した情報、評価、驚きの対象を持たない。通常表示を意味に対応する選択として明示する。",
+      "evidenceIds": [
+        "horror-segment-0006",
+        "audio-event-000022",
+        "asr-segment-000057"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+      "status": "resolved",
+      "semanticRole": "normal",
+      "allowedPresets": [
+        {
+          "preset": "normal"
+        }
+      ],
+      "reason": "ホラーゲームに慣れると仕掛けが分かるという一般的な前提を説明する部分である。具体的な予想とその裏切りが続くため、この導入自体を独立した反応や結論として強調せず通常表示にする。",
+      "evidenceIds": [
+        "horror-segment-0006",
+        "audio-event-000022",
+        "asr-segment-000057",
+        "asr-segment-000058"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000026",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "partial-caption",
+          "targetText": "ここ来そうだな"
+        }
+      ],
+      "reason": "後で裏切られる「ここに来そう」という予想の中身が、対比を理解する基準になる。語り手の言い出しや「みたいなの」ではなく、予想をそのまま表す語句へ限定して色を置く。",
+      "evidenceIds": [
+        "horror-segment-0006",
+        "audio-event-000022",
+        "asr-segment-000059"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000027",
+      "status": "resolved",
+      "semanticRole": "normal",
+      "allowedPresets": [
+        {
+          "preset": "normal"
+        }
+      ],
+      "reason": "「ここの会社すごいのがさ」は評価内容を後続へ予告する接続で、何がすごいかはまだ述べていない。認識と重なる音響頂点があっても、意味上は説明をつなぐ通常の言い出しである。",
+      "evidenceIds": [
+        "horror-segment-0006",
+        "audio-event-000022",
+        "asr-segment-000060"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000028",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "partial-caption",
+          "targetText": "来るよなっていうところじゃないところで"
+        }
+      ],
+      "reason": "予想した場所ではない所で来るという否定と対比が、この説明の転換点である。「来るよな」だけを強調すると予想どおりという逆の意味へ寄るため、予想から「じゃないところで」までを一続きの部分色で示す。前置き全体を同じ強さで囲う表現は、この限定した対比の焦点には含めない。",
+      "evidenceIds": [
+        "horror-segment-0006",
+        "audio-event-000023",
+        "asr-segment-000062"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "partial-caption",
+          "targetText": "油断させてビビらせてくる"
+        }
+      ],
+      "reason": "予想を外した結果、いったん油断させてから驚かすという仕組みを説明している。「油断させて」と「ビビらせてくる」をまとめて色で示し、単なる会社への称賛ではなく怖さの作り方へ焦点を保つ。",
+      "evidenceIds": [
+        "horror-segment-0006",
+        "audio-event-000024",
+        "asr-segment-000063"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "partial-caption",
+          "targetText": "ただ覗くだけ"
+        }
+      ],
+      "reason": "冒頭の覗き方への反応を回収し、わずかな動作なのに毎回怖がらされるという落差を語る結びである。「ただ覗くだけ」を色で示し、続く怖がらされた結果は本文のまま読ませることで、小さな動作と大きな反応の対比を保つ。",
+      "evidenceIds": [
+        "horror-segment-0007",
+        "audio-event-000024",
+        "asr-segment-000065"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "whole-caption"
+        },
+        {
+          "preset": "panel"
+        }
+      ],
+      "reason": "「今年一」を繰り返し、今回の怖さに対する最終的な強い評価を言い切る。文全体が同じ評価を担うため、全体色と枠表示の両方が適する。音響頂点があることだけで、この評価の役割を声量の演出へ変えない。",
+      "evidenceIds": [
+        "horror-segment-0007",
+        "audio-event-000025",
+        "asr-segment-000068"
+      ]
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000032",
+      "status": "resolved",
+      "semanticRole": "focus",
+      "allowedPresets": [
+        {
+          "preset": "color",
+          "scope": "whole-caption"
+        },
+        {
+          "preset": "panel"
+        }
+      ],
+      "reason": "驚かせるポイントの作り方が上手いという評価で全体を締める発話である。末尾の「ほんとに」まで同じ確信を補うため、字幕全体の色強調と枠表示はどちらも結論の意味を保つ。",
+      "evidenceIds": [
+        "horror-segment-0007",
+        "audio-event-000026",
+        "asr-segment-000069",
+        "asr-segment-000070"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "connectionId": "connection-01",
+      "status": "resolved",
+      "semanticRole": "continuation",
+      "allowedPresets": [
+        "normal-cut"
+      ],
+      "reason": "覗き方への「やめろ」という抗議から、同じ相手への拒絶と「世界一嫌い」という結びへ続く。同じ反応の対象を保つ接続なので、場面の仕切りを入れず素繋ぎで連続させる。",
+      "evidenceIds": [
+        "horror-segment-0001",
+        "horror-segment-0002",
+        "audio-event-000004"
+      ]
+    },
+    {
+      "connectionId": "connection-02",
+      "status": "resolved",
+      "semanticRole": "separator",
+      "allowedPresets": [
+        "black-separator",
+        "soft-separator"
+      ],
+      "reason": "覗き方への抗議が完結した後、別の場面で逃げる必要を確認する話へ切り替わる。直前の抗議の返答として誤読させず、別の出来事の開始を知らせるため、暗転または穏やかな仕切りを許す。",
+      "evidenceIds": [
+        "horror-segment-0002",
+        "horror-segment-0003"
+      ]
+    },
+    {
+      "connectionId": "connection-03",
+      "status": "resolved",
+      "semanticRole": "continuation",
+      "allowedPresets": [
+        "normal-cut"
+      ],
+      "reason": "走っても遅いという基準の直後に、急に速くなった驚きを並べることが、この場面の落差を作る。元の省略時間を仕切りで強調するより、同じ逃走の前提と反転を直接つなぐ必要がある。",
+      "evidenceIds": [
+        "horror-segment-0003",
+        "horror-segment-0004"
+      ]
+    },
+    {
+      "connectionId": "connection-04",
+      "status": "resolved",
+      "semanticRole": "separator",
+      "allowedPresets": [
+        "black-separator",
+        "soft-separator"
+      ],
+      "reason": "棺のような所へ入れられた実際の出来事の結末から、別の時点での感想へ移る。出来事の続きと振り返りを区別する仕切りが必要で、暗転と穏やかな仕切りのどちらもこの意味を保つ。",
+      "evidenceIds": [
+        "horror-segment-0004",
+        "horror-segment-0005",
+        "audio-event-000017"
+      ]
+    },
+    {
+      "connectionId": "connection-05",
+      "status": "resolved",
+      "semanticRole": "continuation",
+      "allowedPresets": [
+        "normal-cut"
+      ],
+      "reason": "角度で怖がらせる技術の評価から、カメラワークと時間差という具体的な主題へ説明が続く。同じ振り返りを展開する接続なので、素繋ぎによって論旨の連続を保つ。",
+      "evidenceIds": [
+        "horror-segment-0005",
+        "horror-segment-0006",
+        "audio-event-000021"
+      ]
+    },
+    {
+      "connectionId": "connection-06",
+      "status": "resolved",
+      "semanticRole": "either",
+      "allowedPresets": [
+        "normal-cut",
+        "black-separator",
+        "soft-separator"
+      ],
+      "reason": "油断させて驚かす仕組みの説明が一度まとまり、その後で「ただ覗くだけ」の体験を回収して最終評価へ進む。同じ振り返りの論旨を素繋ぎで続けてもよく、説明から結びへの区切りとして短い仕切りを置いても意味が保たれる。",
+      "evidenceIds": [
+        "horror-segment-0006",
+        "horror-segment-0007",
+        "audio-event-000024"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+TAP version 13
+# Subtest: fixed sources reuse the existing original validators and expose separate source and candidate identities
+ok 1 - fixed sources reuse the existing original validators and expose separate source and candidate identities
+  ---
+  duration_ms: 66.70225
+  ...
+# Subtest: four states resolve from common originals with exact durations, visible-caption counts and ordered piece counts
+ok 2 - four states resolve from common originals with exact durations, visible-caption counts and ordered piece counts
+  ---
+  duration_ms: 69.432584
+  ...
+# Subtest: shared-boundary roles keep the preceding endpoint separate from inserted source and shifted original body
+ok 3 - shared-boundary roles keep the preceding endpoint separate from inserted source and shifted original body
+  ---
+  duration_ms: 55.091541
+  ...
+# Subtest: original caption payloads and verified new caption payloads are preserved while target media edges remain
+ok 4 - original caption payloads and verified new caption payloads are preserved while target media edges remain
+  ---
+  duration_ms: 52.361542
+  ...
+# Subtest: individual cancellation preserves the other fixed edit, and clearing both restores original content and captions
+ok 5 - individual cancellation preserves the other fixed edit, and clearing both restores original content and captions
+  ---
+  duration_ms: 62.613166
+  ...
+# Subtest: operation order and reselecting an already selected proposal cannot apply an effect twice
+ok 6 - operation order and reselecting an already selected proposal cannot apply an effect twice
+  ---
+  duration_ms: 80.204167
+  ...
+# Subtest: combined local comparisons retain the old exact Normal plans and physical coordinates with a separate new global clock
+ok 7 - combined local comparisons retain the old exact Normal plans and physical coordinates with a separate new global clock
+  ---
+  duration_ms: 76.801875
+  ...
+# Subtest: saved states reconstruct completely and reject altered payload, clocks, identity or prior schemas
+ok 8 - saved states reconstruct completely and reject altered payload, clocks, identity or prior schemas
+  ---
+  duration_ms: 98.626792
+  ...
+# Subtest: only two boolean choices and byte-bound originals are accepted; arbitrary and duplicate operation forms are rejected
+ok 9 - only two boolean choices and byte-bound originals are accepted; arbitrary and duplicate operation forms are rejected
+  ---
+  duration_ms: 50.74425
+  ...
+# Subtest: candidate replacement, changed input bytes, comparison tampering and intersecting ownership are rejected
+ok 10 - candidate replacement, changed input bytes, comparison tampering and intersecting ownership are rejected
+  ---
+  duration_ms: 121.578
+  ...
+# Subtest: real fixed C-all proposals resolve all four expected states and localize both accepted shorts without changing their payload
+ok 11 - real fixed C-all proposals resolve all four expected states and localize both accepted shorts without changing their payload
+  ---
+  duration_ms: 1057.459208
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1853.431708

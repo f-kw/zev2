@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "r2-review-frame-mapping-v001",
+  "status": "proposal-with-bound-completed-media",
+  "frameEndConvention": "exclusive",
+  "points": [
+    {
+      "oldPointNumber": 4,
+      "previousPointId": "Q1-MOTION-SMOOTHNESS",
+      "previousReviewId": "HRC-003",
+      "title": "拡大から戻るタイミング",
+      "question": "拡大の強さと滑らかさを保ち、言い終わり付近で自然に通常サイズへ戻って見えますか。",
+      "before": {
+        "media_id": "previous-smooth-motion",
+        "label": "動きの滑らかさを修正した短尺",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+        "sha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58",
+        "fps_num": 30,
+        "fps_den": 1,
+        "total_frames": 170,
+        "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+        "timeline_start_frame": 0
+      },
+      "after": {
+        "media_id": "r2-opening-speech-return-after",
+        "label": "冒頭追加と発話末付近の復帰を反映した短尺",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r2-render-v003/presentation-rendered-v002.mp4",
+        "sha256": "685b249d3e852c74b6112a4372fff59c3dcf09f3efab2a28da3cc61c83551810",
+        "fps_num": 30,
+        "fps_den": 1,
+        "total_frames": 208,
+        "timeline_id": "HRB-R123-OPENING-EXTENDED-v001",
+        "timeline_start_frame": 0
+      },
+      "views": [
+        {
+          "role": "before",
+          "start_frame": 0,
+          "end_frame": 170,
+          "context_start_frame": 0,
+          "context_end_frame": 170
+        },
+        {
+          "role": "after",
+          "start_frame": 11,
+          "end_frame": 181,
+          "context_start_frame": 0,
+          "context_end_frame": 208
+        }
+      ],
+      "matchedBody": {
+        "oldRange": {
+          "startFrame": 0,
+          "endFrameExclusive": 170
+        },
+        "newRange": {
+          "startFrame": 11,
+          "endFrameExclusive": 181
+        }
+      },
+      "note": "Beforeは前回良いとされた滑らかさ修正版。更に古い粗い動きの動画へ戻さない。Shakeは元動作を保持。問いは今回変更した復帰時期に限る。"
+    },
+    {
+      "oldPointNumber": 5,
+      "previousPointId": "Q3-C001",
+      "previousReviewId": "HR-Q3-001",
+      "title": "最初の発話と字幕の切替",
+      "question": "冒頭の「あー」から言葉を欠かさず聞き取れ、最初の字幕と続く字幕の切替が自然に見えますか。",
+      "before": {
+        "media_id": "HRB-001",
+        "label": "無修正の自動演出版",
+        "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+        "sha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+        "fps_num": 30,
+        "fps_den": 1,
+        "total_frames": 4867,
+        "timeline_id": "completed-49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+        "timeline_start_frame": 0
+      },
+      "after": {
+        "media_id": "r2-opening-speech-return-after",
+        "label": "冒頭追加と発話末付近の復帰を反映した短尺",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r2-render-v003/presentation-rendered-v002.mp4",
+        "sha256": "685b249d3e852c74b6112a4372fff59c3dcf09f3efab2a28da3cc61c83551810",
+        "fps_num": 30,
+        "fps_den": 1,
+        "total_frames": 208,
+        "timeline_id": "HRB-R123-OPENING-EXTENDED-v001",
+        "timeline_start_frame": 0
+      },
+      "views": [
+        {
+          "role": "before",
+          "start_frame": 0,
+          "end_frame": 71,
+          "context_start_frame": 0,
+          "context_end_frame": 197
+        },
+        {
+          "role": "after",
+          "start_frame": 0,
+          "end_frame": 82,
+          "context_start_frame": 0,
+          "context_end_frame": 208
+        }
+      ],
+      "pieces": [
+        {
+          "kind": "new-source-prefix",
+          "oldDigestRange": null,
+          "newRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 11
+          },
+          "sourceVideoRange": {
+            "startFrame": 38046,
+            "endFrameExclusive": 38057
+          },
+          "sourceAudioRange": {
+            "startSample": 55928326,
+            "endSampleExclusive": 55944496,
+            "sampleRate": 44100,
+            "channels": 2,
+            "sampleCount": 16170
+          }
+        },
+        {
+          "kind": "unchanged-old-body",
+          "oldDigestRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 71
+          },
+          "newRange": {
+            "startFrame": 11,
+            "endFrameExclusive": 82
+          }
+        }
+      ],
+      "note": "旧レビューの8frame開始では問題の先頭を隠すため、Beforeも完成動画0frameから再生。新prefixに旧Digest座標は付けない。"
+    }
+  ],
+  "humanAnswers": "unanswered-for-this-new-revision",
+  "oldTenPointAnswersUnchanged": true,
+  "mediaShaChecked": true,
+  "reviewHtmlGeneratedByThisTask": false
+}

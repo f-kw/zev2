@@ -1,0 +1,76 @@
+{
+  "schema_version": "zev-point-review-v001",
+  "batch_id": "HRB-Q5-1-001",
+  "revision": "v001",
+  "title": "説明の途中を省いた案の確認",
+  "intro": "前後の文脈を含むBeforeとAfterを一組だけ比べます。今回の案でよければ「良い」、元版の方がよければ「直したい」を選んでください。「両方使える」「判断しない」も選べます。理由の記入は任意です。回答だけで原版を置き換えることはありません。",
+  "media": [
+    {
+      "media_id": "Q5-BEFORE",
+      "label": "Before：元の通常完成版",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-94-v001/.render-v003.presentation-renderer-v002-work-OF3SgY/publish/presentation-rendered-v002.mp4",
+      "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 44408,
+      "timeline_id": "digest-v1-phase2-completed-20260914-v001",
+      "timeline_start_frame": 0
+    },
+    {
+      "media_id": "Q5-AFTER",
+      "label": "After：前後を多めに残した省略案",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+      "sha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 763,
+      "timeline_id": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+      "timeline_start_frame": 11683
+    }
+  ],
+  "points": [
+    {
+      "point_id": "Q5-1-C001",
+      "review_id": "HR-Q5-1-001",
+      "related_review_ids": [],
+      "title": "説明の残り方と、前後のつながり",
+      "question": "前後を多めに残して、説明の途中を省いた案です。言葉の残り方やつながりを含め、この案は使えますか。",
+      "target_function": "同じ場面で繰り返す説明を、一箇所だけ短くする内容編集",
+      "change_summary": "「ドスンと落ちていく感じがありますね」を残し、後の説明の中ほど約1.97秒を省きました。対象説明の前後の音声は一部残り、その全文字幕一件は非表示です。ほかの字幕と通常の見せ方は保っています。",
+      "why_human_review": "言葉の残り方や音の自然なつながりは未確認です。音声が一部残ることだけで良否を決めず、この一案が使えるかを確認します。",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "この一箇所の省略と対象字幕一件の非表示を合わせた、提示中のBefore／Afterの使いやすさ"
+        ],
+        "does_not_apply_to": [
+          "Q1・Q3・Q4の別の問いと既存回答",
+          "全編の品質、他の字幕や別の省略箇所",
+          "原版の置換、正式採用、ショートの制作"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "Q5-BEFORE-VIEW",
+          "label": "Before：元版（27.40秒）",
+          "role": "before",
+          "media_id": "Q5-BEFORE",
+          "start_frame": 11683,
+          "end_frame": 12505,
+          "context_start_frame": 11683,
+          "context_end_frame": 12505
+        },
+        {
+          "view_id": "Q5-AFTER-VIEW",
+          "label": "After：今回案（25.43秒）",
+          "role": "after",
+          "media_id": "Q5-AFTER",
+          "start_frame": 0,
+          "end_frame": 763,
+          "context_start_frame": 0,
+          "context_end_frame": 763
+        }
+      ]
+    }
+  ]
+}

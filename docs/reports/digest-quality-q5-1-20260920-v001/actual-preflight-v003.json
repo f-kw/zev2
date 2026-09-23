@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "q5-real-render-retry-preflight-v001",
+  "recordedAt": "2026-09-20T16:26:35.583Z",
+  "status": "passed",
+  "jobRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-job-v004.json",
+    "bytes": 3167,
+    "fileSha256": "aef8afd7319e6b9f66c5380d116344f070e582ad78fa6d4a7cfb3e47c04b582d"
+  },
+  "previousPreflightRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/actual-preflight-v002.json",
+    "bytes": 6331,
+    "fileSha256": "d88f53d711579151a44cd281f27d604e2c64483b1b5a99f918179f262854a22c"
+  },
+  "failedAttemptRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/real-render-failure-v001.json",
+    "bytes": 5772,
+    "fileSha256": "794e8fb8782d7d8e7cbc1d5ced3dc09da878c4fcfeeb3f3ba62e180afd1e934d"
+  },
+  "sameFirstFixedContentProposal": true,
+  "contentVersion": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+  "mediaOmission": {
+    "startFrame": 12153,
+    "endFrameExclusive": 12212
+  },
+  "hiddenCaptionId": "digest-v1-phase2-20260913-v001-bridge-caption-000121",
+  "comparisonRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/comparison-preflight-v002.json",
+    "bytes": 51528,
+    "fileSha256": "bb913456eb754f833797665b55712adbd109563fe2b0643338e768d1d8456a78"
+  },
+  "editPlanRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/edit-plan-v002.json",
+    "bytes": 2561895,
+    "fileSha256": "55b5b00253401fd7ef740aa0f62f0b4ebaa4fa4fd4f4b9461d997d19544d13e5"
+  },
+  "policyRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/instruction-received-v002.md",
+    "bytes": 5075,
+    "fileSha256": "94413e1ebcd1ad4f24625d260b3b0d3daf57a286e29a4def94ea6056b1b6e72a"
+  },
+  "boundaryEvidenceRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/retention-boundary-v002.json",
+    "bytes": 6055,
+    "fileSha256": "c5d833c4fd0b346a4c9684546baa3804e6a574ec173dcd872c1dc1eea9a31b80"
+  },
+  "implementationRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-edit-plan.mjs",
+      "bytes": 28349,
+      "fileSha256": "9303dec05a87a08fa529d502c2b37159dbc5b2fffc8620a16ebfefe8c50586ba"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-edit-plan.test.mjs",
+      "bytes": 22452,
+      "fileSha256": "4c666d2ee4d1600ec7f88dd4c4c9461556364603adb627c02ae81b47179a731d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.mjs",
+      "bytes": 32434,
+      "fileSha256": "ea97880ab4026ab29f10ba9a606612806b7e5060dfdc1a6d1f8eca4fa34721c6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-render.test.mjs",
+      "bytes": 29214,
+      "fileSha256": "fb03f5bc62cf10a34b0e3672407caf1a84ce5a1c925f6e3e893932cb33a2b55c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_orchestration_background_v001.mjs",
+      "bytes": 61871,
+      "fileSha256": "3a01da6a3897c44beea540aba4602793d5e445780f79ce891daee258a40f7ecd"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 133483,
+      "fileSha256": "6650e4d5c6c2a50e6e1bb81eeb23f4463dcc7f8def227b16a4071866a2e1f7a6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_effects_v001.test.mjs",
+      "bytes": 9291,
+      "fileSha256": "6319549b3bd73bcb9fdb1a8a5528d29828ec4e53efc48176dac035757c65a6d8"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_execution_resources_v001.test.mjs",
+      "bytes": 10652,
+      "fileSha256": "49e6908d42aa82043309ef121067c8c2438d9f24cb9cf98250e1763739e19c02"
+    }
+  ],
+  "tests": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/render-tool-aac-clock-tests-v001.tap",
+      "bytes": 2747,
+      "fileSha256": "60fe19286e7a6ffd6330d8195be46c2a032a7bb8301c1f422f0bf77eec71d484"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/render-tool-aac-arguments-tests-v001.tap",
+      "bytes": 2230,
+      "fileSha256": "7428a1339684537d0ca9c76be557c5048ac2e09139d3e71204fe10ec11d274ab"
+    }
+  ],
+  "reason": "Reuse the identical first retention proposal after fixing exact frame-clock muxing of embedded AAC; retain the failed attempt and use new output/evidence destinations."
+}

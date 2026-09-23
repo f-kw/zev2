@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "p1-final-audit-receipt-v001",
+  "recordedAt": "2026-09-21T15:05:27.957088+00:00",
+  "auditedCommit": "9ac340600ef9d7fcd4b7a7dadc1d16612be13a02",
+  "branch": "codex/digest-presentation-editing-stage4",
+  "authorization": {
+    "source": "このCodex会話で本人から直接受領した新しい明示承認",
+    "title": "ZEV P1：保存済み最終監査依頼の送信承認・実施指示 v001",
+    "scope": "指定済み本文の同じZEV Build Loopへの一回送信、回答確認・原文保存、軽量記録checkpoint commit/push",
+    "previousDenialRetained": true
+  },
+  "destination": {
+    "browser": "Microsoft Edge",
+    "tabId": "1516875271",
+    "title": "ZEV相談役 - ZEV Build Loop",
+    "url": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6aa7f7e5-03d8-83ee-aae1-6c4b66fb8303"
+  },
+  "submittedText": {
+    "path": "docs/reports/digest-presentation-editing-p1-20260921-v001/audit-request-v001.md",
+    "bytes": 4676,
+    "fileSha256": "5a526991f75ee31fefd65c38faf6f76bc2841870b0da612b1b6a9a0bb6e2d19e"
+  },
+  "originalSavedText": {
+    "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/final-audit-request-v001.md",
+    "bytes": 4676,
+    "fileSha256": "5a526991f75ee31fefd65c38faf6f76bc2841870b0da612b1b6a9a0bb6e2d19e"
+  },
+  "preSendComposerReconstructedSha256": "5a526991f75ee31fefd65c38faf6f76bc2841870b0da612b1b6a9a0bb6e2d19e",
+  "normalApprovalReview": "accepted after new direct user approval",
+  "delivery": {
+    "status": "sent-and-visible",
+    "observedAt": "2026-09-21T15:01:56.146114+00:00",
+    "sendClicksAfterDirectApproval": 1,
+    "visiblePostedCopies": 1,
+    "composerCleared": true,
+    "confirmedAfterReload": true,
+    "refreshForReadOnlyConfirmation": 1,
+    "resends": 0,
+    "regenerations": 0,
+    "attachments": 0
+  },
+  "response": {
+    "status": "unavailable-stream-error",
+    "uiErrorOriginal": {
+      "path": "docs/reports/digest-presentation-editing-p1-20260921-v001/audit-ui-error-v001.txt",
+      "bytes": 65,
+      "fileSha256": "f5ca5f03573b47f2d2a9090c14e0cc9d5d35d221be01ce628811013c54ccdef3"
+    },
+    "auditAnswerBodyReceived": false,
+    "afterReload": "同じ会話に最終監査依頼一件を確認。投稿後の監査回答本文も生成中表示もなかった。",
+    "acceptance": "not-determined",
+    "requiredCorrections": "not-determined",
+    "unconfirmed": [
+      "相談役によるP1最終監査回答",
+      "技術的第一完成の受理可否",
+      "必須修正の有無"
+    ],
+    "noAnswerIsNotApproval": true
+  },
+  "modelCondition": {
+    "specified": false,
+    "selectionChanged": false,
+    "visibleEffort": "中程度"
+  },
+  "priorRejection": {
+    "retained": true,
+    "reason": "送信内容には内部実装・性能測定・リポジトリ情報が含まれる外部送信ですが、本人の信頼できる発言ではこの具体的な最終監査payloadと宛先への送信まで明示承認されていません。",
+    "record": {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/checkpoint-audit-status-v001.json",
+      "bytes": 1862,
+      "fileSha256": "7c11fca91b3001e069942283ac24b29168eee689c44edb2c3d68d0b2836344fb"
+    }
+  },
+  "evidence": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/authorized-send-preflight-v001.json",
+      "bytes": 1507,
+      "fileSha256": "1749c010a4bfcda15fc0548487e0e39a1689fb3a95bb63339bf66246efc4a57d"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/authorized-send-observed-v001.json",
+      "bytes": 1769,
+      "fileSha256": "cade05dee7ab11ffd607f7c85d804c2308ccda41fd7cc65c59fcccd6aa395501"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/p1-overlay-startup-20260921-v001/authorized-audit-stream-error-v001.json",
+      "bytes": 498,
+      "fileSha256": "21ab4ef59df68afec6ab06317af9190adae68c4ddd8ac009c759f216acd6c6f1"
+    }
+  ],
+  "readOnlyCrossCheck": {
+    "checks": 18,
+    "mismatches": 0,
+    "externalActions": 0
+  },
+  "scope": {
+    "implementationChanges": 0,
+    "remeasurements": 0,
+    "mediaRegeneration": 0,
+    "newMediaUploads": 0,
+    "newDependencies": 0,
+    "paidApiCalls": 0,
+    "newWorkOrders": 0,
+    "formalAdoption": false,
+    "humanQualityApproval": false
+  },
+  "nextState": "送信済み・監査回答未受領。再送・再生成を行わず保持。"
+}

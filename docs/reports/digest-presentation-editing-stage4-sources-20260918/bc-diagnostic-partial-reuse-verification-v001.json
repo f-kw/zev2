@@ -1,0 +1,712 @@
+{
+  "schemaVersion": "presentation-diagnostic-png-partial-reuse-verification-v001",
+  "status": "passed",
+  "author": "Codex",
+  "checkedAt": "2026-09-18T10:43:33.915Z",
+  "purpose": "Codexの判断：保存済み実観測から、初回周辺生成・診断PNG準備中の部分再利用・完成媒体再利用の計測境界を分ける。新しい実行結果は生成していない。",
+  "originalEvidence": {
+    "processInspection": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/partial-reuse-process-readonly-v001.json",
+      "bytes": 44995,
+      "fileSha256": "76c0e59cb0ad0963e8137dcb12565db8d45df52ea011d249477ef2098e6ccbb2"
+    },
+    "cacheInspection": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/connection-diagnostic-cache-bindings-v002.json",
+      "bytes": 16185,
+      "fileSha256": "eaa9f728beb47875ecb8156d06a579cae6cadf90bbc0ea1d020a95e0fd0d8cbb"
+    }
+  },
+  "sourceRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+      "bytes": 16014,
+      "fileSha256": "c607de4f6a9e5abdc011b9975395036833592684e71bd510d877ad41f73d37ac"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_asset_cache_v001.mjs",
+      "bytes": 4690,
+      "fileSha256": "73195d873efd26531b598547527272cf5e8e85862387e08ae0b767c5adc33518"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 131705,
+      "fileSha256": "b7afd3589bf97e84479b8a4723296b4317165d84a5a614fa68f49894bcb3acdf"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+      "bytes": 4964,
+      "fileSha256": "97aa9b2cd584b2cea15f31f0e7a813cc6ba1e1a8cdbb31bdb5d675c03be7d47d"
+    }
+  ],
+  "measurementBoundary": {
+    "function": "preparePresentationNativeFrameQcV001",
+    "meaning": "固定入力と本番PNGの照合、診断用の画像準備、診断画像の不透明画素と可視範囲の再確認",
+    "starts": "既存準備関数の入口",
+    "ends": "返却する準備証拠を構成した時点。最後のpreparation.json書出し前",
+    "includes": [
+      "固定した描画条件・元ファイル・本番PNGの照合",
+      "診断状態のPNG要求（この接続実行では検証済みcacheから4コピー）",
+      "同一本番PNGを使える状態の直接参照",
+      "コピー後PNGの不透明度・画素範囲の確認",
+      "準備中に生成・参照したファイルの再照合"
+    ],
+    "excludes": [
+      "背景動画の準備",
+      "動画合成と再合成検査",
+      "有限状態のRGB参照生成・距離照合",
+      "関数最後のpreparation.json書出し"
+    ],
+    "notCumulativeWorkerPreparation": true
+  },
+  "measurements": [
+    {
+      "kind": "caption",
+      "http": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/http-current-audio-v001/caption-preview-media.json",
+        "bytes": 18876,
+        "fileSha256": "d8aad942a703c2ea589465efe9289480955990a6914abb4872444173f12dfb1e"
+      },
+      "result": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/result.json",
+        "bytes": 11041325,
+        "fileSha256": "c2dc553ca042bcd96f929d9f6589fa366d999729b015ad13a0d7ed37babde52f"
+      },
+      "preparation": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/.render.presentation-renderer-v002-work-NRnMOD/scratch/native-qc-preparation/preparation.json",
+        "bytes": 125285,
+        "fileSha256": "317336a783de06252d2e064f4677e0656e817e9af4e36795cd5fb7576c8318ab"
+      },
+      "range": {
+        "startFrame": 414,
+        "endFrameExclusive": 616
+      },
+      "drawingProfileSha256": "2c224c5883be84ea363fc9f0e65d046a45c2f3bc075a75b4bf98fc26a4445d6c",
+      "preparationMilliseconds": 10373.925333000007,
+      "reportedQcPreparationMilliseconds": 10373.925333000007,
+      "requestedDiagnosticStates": 4,
+      "requestedDiagnosticPngs": 8,
+      "identicalProductionStatesReusedDirectly": 1,
+      "observedNewNativePngDraws": 8,
+      "observedLineMaskDraws": 0,
+      "observedAlphaChecks": 4,
+      "observedBoundsChecks": 4,
+      "totalWorkerNativeAssets": {
+        "nativeDraws": 15,
+        "bitmapReuses": 2,
+        "verifiedPairsAdded": 6,
+        "profileSha256": "2c224c5883be84ea363fc9f0e65d046a45c2f3bc075a75b4bf98fc26a4445d6c"
+      },
+      "phaseBoundary": {
+        "previousProcessLabel": "exact-replay-video-probe-replay",
+        "previousProcessSequence": 31,
+        "nextProcessLabel": "native-qc-tool-version",
+        "nextProcessSequence": 48,
+        "firstWithinSequence": 32,
+        "lastWithinSequence": 47
+      },
+      "observedProcesses": [
+        {
+          "sequence": 31,
+          "label": "exact-replay-video-probe-replay",
+          "childMilliseconds": 27.914290999993682,
+          "evidenceWriteMilliseconds": 0.5237919999926817,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 32,
+          "label": "overlay-still",
+          "childMilliseconds": 1120.0389589999977,
+          "evidenceWriteMilliseconds": 0.45345800000359304,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 33,
+          "label": "overlay-still",
+          "childMilliseconds": 1123.3722500000003,
+          "evidenceWriteMilliseconds": 0.3804999999993015,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 34,
+          "label": "native-qc-diagnostic-overlay-inspection-alpha",
+          "childMilliseconds": 85.59133400001156,
+          "evidenceWriteMilliseconds": 0.5096670000057202,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 35,
+          "label": "native-qc-diagnostic-overlay-inspection-bounds",
+          "childMilliseconds": 145.78974999999627,
+          "evidenceWriteMilliseconds": 0.6422920000040904,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 36,
+          "label": "overlay-still",
+          "childMilliseconds": 1164.8540409999987,
+          "evidenceWriteMilliseconds": 0.41908300000068266,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 37,
+          "label": "overlay-still",
+          "childMilliseconds": 1157.6881250000006,
+          "evidenceWriteMilliseconds": 0.40941700000257697,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 38,
+          "label": "native-qc-diagnostic-overlay-inspection-alpha",
+          "childMilliseconds": 86.20212499999616,
+          "evidenceWriteMilliseconds": 0.5917499999923166,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 39,
+          "label": "native-qc-diagnostic-overlay-inspection-bounds",
+          "childMilliseconds": 142.33520899999712,
+          "evidenceWriteMilliseconds": 0.4635419999976875,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 40,
+          "label": "overlay-still",
+          "childMilliseconds": 1141.0007500000065,
+          "evidenceWriteMilliseconds": 0.42716700000164565,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 41,
+          "label": "overlay-still",
+          "childMilliseconds": 1116.9483340000006,
+          "evidenceWriteMilliseconds": 0.4647499999991851,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 42,
+          "label": "native-qc-diagnostic-overlay-inspection-alpha",
+          "childMilliseconds": 84.32833400000527,
+          "evidenceWriteMilliseconds": 0.3980420000007143,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 43,
+          "label": "native-qc-diagnostic-overlay-inspection-bounds",
+          "childMilliseconds": 141.49958399999014,
+          "evidenceWriteMilliseconds": 0.5785420000029262,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 44,
+          "label": "overlay-still",
+          "childMilliseconds": 1134.4389999999985,
+          "evidenceWriteMilliseconds": 0.4854170000035083,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 45,
+          "label": "overlay-still",
+          "childMilliseconds": 1175.4775410000002,
+          "evidenceWriteMilliseconds": 0.4624589999875752,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 46,
+          "label": "native-qc-diagnostic-overlay-inspection-alpha",
+          "childMilliseconds": 84.59375,
+          "evidenceWriteMilliseconds": 0.4894170000043232,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 47,
+          "label": "native-qc-diagnostic-overlay-inspection-bounds",
+          "childMilliseconds": 141.36787499999627,
+          "evidenceWriteMilliseconds": 0.5278330000001006,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        {
+          "sequence": 48,
+          "label": "native-qc-tool-version",
+          "childMilliseconds": 19.81295799999498,
+          "evidenceWriteMilliseconds": 0.42754199999035336,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        }
+      ],
+      "note": "The preparation function timing includes fixed input verification, diagnostic PNG preparation/copy and alpha/bounds checks; it excludes completed-video rendering and native finite RGB discrimination. It is not the renderer cumulative preparationMilliseconds field."
+    },
+    {
+      "kind": "connection",
+      "http": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/http-current-audio-v001/connection-preview-media.json",
+        "bytes": 18880,
+        "fileSha256": "bfb63becf16af900c9ace1a1a6e696ec7972645182a86f4fa1d7768b2a7965b7"
+      },
+      "result": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/result.json",
+        "bytes": 23249639,
+        "fileSha256": "be63c9d5baafac2c75f34b41abac62b70bfc86545d3d7efcce85736876de3823"
+      },
+      "preparation": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/.render.presentation-renderer-v002-work-whi5ks/scratch/native-qc-preparation/preparation.json",
+        "bytes": 347705,
+        "fileSha256": "1c7b7341995e9c9f91565ef5520948001fa89046567b31434f0b0f5571a9d946"
+      },
+      "range": {
+        "startFrame": 222,
+        "endFrameExclusive": 445
+      },
+      "drawingProfileSha256": "2c224c5883be84ea363fc9f0e65d046a45c2f3bc075a75b4bf98fc26a4445d6c",
+      "preparationMilliseconds": 776.6389590000035,
+      "reportedQcPreparationMilliseconds": 776.6389590000035,
+      "requestedDiagnosticStates": 2,
+      "requestedDiagnosticPngs": 4,
+      "identicalProductionStatesReusedDirectly": 3,
+      "observedNewNativePngDraws": 0,
+      "observedLineMaskDraws": 0,
+      "observedAlphaChecks": 2,
+      "observedBoundsChecks": 2,
+      "totalWorkerNativeAssets": {
+        "nativeDraws": 40,
+        "bitmapReuses": 6,
+        "verifiedPairsAdded": 13,
+        "profileSha256": "2c224c5883be84ea363fc9f0e65d046a45c2f3bc075a75b4bf98fc26a4445d6c"
+      },
+      "phaseBoundary": {
+        "previousProcessLabel": "exact-replay-video-probe-replay",
+        "previousProcessSequence": 121,
+        "nextProcessLabel": "native-qc-tool-version",
+        "nextProcessSequence": 126,
+        "firstWithinSequence": 122,
+        "lastWithinSequence": 125
+      },
+      "observedProcesses": [
+        {
+          "sequence": 121,
+          "label": "exact-replay-video-probe-replay",
+          "childMilliseconds": 27.315165999985766,
+          "evidenceWriteMilliseconds": 0.4724580000038259,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false,
+          "files": [
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0121-exact-replay-video-probe-replay/exit-code.txt",
+              "bytes": 2,
+              "fileSha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0121-exact-replay-video-probe-replay/signal.txt",
+              "bytes": 5,
+              "fileSha256": "fcf33dfbe13c2354bf0e1b063f9fb422747a46cee00b7420bceff2b81457b345"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0121-exact-replay-video-probe-replay/stderr.txt",
+              "bytes": 0,
+              "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        {
+          "sequence": 122,
+          "label": "native-qc-diagnostic-overlay-inspection-alpha",
+          "childMilliseconds": 85.94979100002092,
+          "evidenceWriteMilliseconds": 0.4974999999976717,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false,
+          "files": [
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0122-native-qc-diagnostic-overlay-inspection-alpha/exit-code.txt",
+              "bytes": 2,
+              "fileSha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0122-native-qc-diagnostic-overlay-inspection-alpha/signal.txt",
+              "bytes": 5,
+              "fileSha256": "fcf33dfbe13c2354bf0e1b063f9fb422747a46cee00b7420bceff2b81457b345"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0122-native-qc-diagnostic-overlay-inspection-alpha/stderr.txt",
+              "bytes": 0,
+              "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        {
+          "sequence": 123,
+          "label": "native-qc-diagnostic-overlay-inspection-bounds",
+          "childMilliseconds": 142.66458300000522,
+          "evidenceWriteMilliseconds": 0.41658299998380244,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false,
+          "files": [
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0123-native-qc-diagnostic-overlay-inspection-bounds/exit-code.txt",
+              "bytes": 2,
+              "fileSha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0123-native-qc-diagnostic-overlay-inspection-bounds/signal.txt",
+              "bytes": 5,
+              "fileSha256": "fcf33dfbe13c2354bf0e1b063f9fb422747a46cee00b7420bceff2b81457b345"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0123-native-qc-diagnostic-overlay-inspection-bounds/stderr.txt",
+              "bytes": 0,
+              "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        {
+          "sequence": 124,
+          "label": "native-qc-diagnostic-overlay-inspection-alpha",
+          "childMilliseconds": 84.86645800000406,
+          "evidenceWriteMilliseconds": 0.38879200001247227,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false,
+          "files": [
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0124-native-qc-diagnostic-overlay-inspection-alpha/exit-code.txt",
+              "bytes": 2,
+              "fileSha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0124-native-qc-diagnostic-overlay-inspection-alpha/signal.txt",
+              "bytes": 5,
+              "fileSha256": "fcf33dfbe13c2354bf0e1b063f9fb422747a46cee00b7420bceff2b81457b345"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0124-native-qc-diagnostic-overlay-inspection-alpha/stderr.txt",
+              "bytes": 0,
+              "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        {
+          "sequence": 125,
+          "label": "native-qc-diagnostic-overlay-inspection-bounds",
+          "childMilliseconds": 141.9417919999978,
+          "evidenceWriteMilliseconds": 0.4214170000050217,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false,
+          "files": [
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0125-native-qc-diagnostic-overlay-inspection-bounds/exit-code.txt",
+              "bytes": 2,
+              "fileSha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0125-native-qc-diagnostic-overlay-inspection-bounds/signal.txt",
+              "bytes": 5,
+              "fileSha256": "fcf33dfbe13c2354bf0e1b063f9fb422747a46cee00b7420bceff2b81457b345"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0125-native-qc-diagnostic-overlay-inspection-bounds/stderr.txt",
+              "bytes": 0,
+              "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        {
+          "sequence": 126,
+          "label": "native-qc-tool-version",
+          "childMilliseconds": 19.393582999997307,
+          "evidenceWriteMilliseconds": 0.3871670000080485,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false,
+          "files": [
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0126-native-qc-tool-version/exit-code.txt",
+              "bytes": 2,
+              "fileSha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0126-native-qc-tool-version/signal.txt",
+              "bytes": 5,
+              "fileSha256": "fcf33dfbe13c2354bf0e1b063f9fb422747a46cee00b7420bceff2b81457b345"
+            },
+            {
+              "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/evidence/processes/0126-native-qc-tool-version/stderr.txt",
+              "bytes": 0,
+              "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        }
+      ],
+      "note": "The preparation function timing includes fixed input verification, diagnostic PNG preparation/copy and alpha/bounds checks; it excludes completed-video rendering and native finite RGB discrimination. It is not the renderer cumulative preparationMilliseconds field."
+    }
+  ],
+  "cacheBindings": {
+    "profileSha256": "2c224c5883be84ea363fc9f0e65d046a45c2f3bc075a75b4bf98fc26a4445d6c",
+    "comparisons": [
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "kind": "normal",
+        "profileSha256": "2c224c5883be84ea363fc9f0e65d046a45c2f3bc075a75b4bf98fc26a4445d6c",
+        "propsSha256": "874e3aa82d923569b5d42aebea1e2f165c87dd2367b2287033c0a65eb5e72542",
+        "key": "4f2d13b1d6e11b1b5442e505ea385ab650524cfd5c2b897cddf470efe18afb1b",
+        "proofCanonicalSha256": "0cb0bc0e677332dd30195ea6fc684bf09fb712762f9091b1c0387d9a50c1fb9c",
+        "proof": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/native-assets/4f2d13b1d6e11b1b5442e505ea385ab650524cfd5c2b897cddf470efe18afb1b.json",
+          "bytes": 1643,
+          "fileSha256": "4810fe82eb49579facc154e780bea557993d5e7be70187d082164015ca40b05a"
+        },
+        "cachePng": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/native-assets/4f2d13b1d6e11b1b5442e505ea385ab650524cfd5c2b897cddf470efe18afb1b.png",
+          "bytes": 140368,
+          "fileSha256": "e9246b3e4cb6d5b634700f6978d1a013a4e6a622999ffc02779f821629b6e362"
+        },
+        "originalCaptionFirst": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/.render.presentation-renderer-v002-work-NRnMOD/scratch/native-qc-preparation/alternates/01-70d128b99879-normal.png",
+          "bytes": 140368,
+          "fileSha256": "e9246b3e4cb6d5b634700f6978d1a013a4e6a622999ffc02779f821629b6e362"
+        },
+        "originalCaptionRepeat": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/.render.presentation-renderer-v002-work-NRnMOD/scratch/native-qc-preparation/alternates/01-70d128b99879-normal-repeat.png",
+          "bytes": 140368,
+          "fileSha256": "e9246b3e4cb6d5b634700f6978d1a013a4e6a622999ffc02779f821629b6e362"
+        },
+        "connectionFirst": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/.render.presentation-renderer-v002-work-whi5ks/scratch/native-qc-preparation/alternates/04-70d128b99879-normal.png",
+          "bytes": 140368,
+          "fileSha256": "e9246b3e4cb6d5b634700f6978d1a013a4e6a622999ffc02779f821629b6e362"
+        },
+        "connectionRepeat": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/.render.presentation-renderer-v002-work-whi5ks/scratch/native-qc-preparation/alternates/04-70d128b99879-normal-repeat.png",
+          "bytes": 140368,
+          "fileSha256": "e9246b3e4cb6d5b634700f6978d1a013a4e6a622999ffc02779f821629b6e362"
+        },
+        "allFivePngByteHashesEqual": true,
+        "requestedDrawCount": 2,
+        "connectionSavedPlacementInspection": {
+          "instructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+          "alphaMax": 1,
+          "alphaBounds": {
+            "left": 156,
+            "top": 844,
+            "right": 1743,
+            "bottom": 976,
+            "width": 1587,
+            "height": 132
+          },
+          "lineCount": 0,
+          "lineRects": [],
+          "lineAlphaBounds": [],
+          "visibilityComparisonBasis": null,
+          "representativeFrame": null,
+          "changedPixelsAgainstInstructionOmittedFrame": null,
+          "appliedOverlayPropsCanonicalSha256": "874e3aa82d923569b5d42aebea1e2f165c87dd2367b2287033c0a65eb5e72542",
+          "overlayFile": "04-70d128b99879-normal.png",
+          "overlaySha256": "e9246b3e4cb6d5b634700f6978d1a013a4e6a622999ffc02779f821629b6e362"
+        },
+        "connectionSavedPlacementInspectionCanonicalSha256": "5ac99a44d6ff0d83d7835c60b817873452b6435f59cdcf33e642d5185459f3ff"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "kind": "whole-color",
+        "profileSha256": "2c224c5883be84ea363fc9f0e65d046a45c2f3bc075a75b4bf98fc26a4445d6c",
+        "propsSha256": "df917107ed8997073e326cead516df97caa9074979a9effcb4e6251ce2d4e1b8",
+        "key": "e98a89011d7032d489b41fa80fb390ca287f05d98f7af208348b43c4018e71fb",
+        "proofCanonicalSha256": "74ee9015ade43ed1c7ad9783a707c16408f3b10bc8e640959db3586beeef25b8",
+        "proof": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/native-assets/e98a89011d7032d489b41fa80fb390ca287f05d98f7af208348b43c4018e71fb.json",
+          "bytes": 1653,
+          "fileSha256": "843e365f58d9d60f30d16a89ec6a74c1e4fc7671e52fa36a99c2201c352103a8"
+        },
+        "cachePng": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/native-assets/e98a89011d7032d489b41fa80fb390ca287f05d98f7af208348b43c4018e71fb.png",
+          "bytes": 140831,
+          "fileSha256": "8d0deb6790ba38b6d095ce6cc8ba90fff00ba4bc92c8c8a2436e8e1f6246403e"
+        },
+        "originalCaptionFirst": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/.render.presentation-renderer-v002-work-NRnMOD/scratch/native-qc-preparation/alternates/01-70d128b99879-whole-color.png",
+          "bytes": 140831,
+          "fileSha256": "8d0deb6790ba38b6d095ce6cc8ba90fff00ba4bc92c8c8a2436e8e1f6246403e"
+        },
+        "originalCaptionRepeat": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-2a9bc100-9217-434b-81a7-7866bf8cb4ed/.render.presentation-renderer-v002-work-NRnMOD/scratch/native-qc-preparation/alternates/01-70d128b99879-whole-color-repeat.png",
+          "bytes": 140831,
+          "fileSha256": "8d0deb6790ba38b6d095ce6cc8ba90fff00ba4bc92c8c8a2436e8e1f6246403e"
+        },
+        "connectionFirst": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/.render.presentation-renderer-v002-work-whi5ks/scratch/native-qc-preparation/alternates/04-70d128b99879-whole-color.png",
+          "bytes": 140831,
+          "fileSha256": "8d0deb6790ba38b6d095ce6cc8ba90fff00ba4bc92c8c8a2436e8e1f6246403e"
+        },
+        "connectionRepeat": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/run-ccb9d797-b986-4454-a219-ce6444f444e3/.render.presentation-renderer-v002-work-whi5ks/scratch/native-qc-preparation/alternates/04-70d128b99879-whole-color-repeat.png",
+          "bytes": 140831,
+          "fileSha256": "8d0deb6790ba38b6d095ce6cc8ba90fff00ba4bc92c8c8a2436e8e1f6246403e"
+        },
+        "allFivePngByteHashesEqual": true,
+        "requestedDrawCount": 2,
+        "connectionSavedPlacementInspection": {
+          "instructionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+          "alphaMax": 1,
+          "alphaBounds": {
+            "left": 156,
+            "top": 844,
+            "right": 1743,
+            "bottom": 976,
+            "width": 1587,
+            "height": 132
+          },
+          "lineCount": 0,
+          "lineRects": [],
+          "lineAlphaBounds": [],
+          "visibilityComparisonBasis": null,
+          "representativeFrame": null,
+          "changedPixelsAgainstInstructionOmittedFrame": null,
+          "appliedOverlayPropsCanonicalSha256": "df917107ed8997073e326cead516df97caa9074979a9effcb4e6251ce2d4e1b8",
+          "overlayFile": "04-70d128b99879-whole-color.png",
+          "overlaySha256": "8d0deb6790ba38b6d095ce6cc8ba90fff00ba4bc92c8c8a2436e8e1f6246403e"
+        },
+        "connectionSavedPlacementInspectionCanonicalSha256": "70a2553b388f26cfbac72e3a4e588f5f4ceee43e2ce51fc1107927644148b007"
+      }
+    ],
+    "summary": {
+      "diagnosticStates": 2,
+      "requestedDiagnosticPngs": 4,
+      "validExistingCacheProofs": 2,
+      "matchedOriginalCaptionPngs": 4,
+      "matchedConnectionPngs": 4,
+      "actualReadUniqueFiles": 14,
+      "actualReadUniqueBytes": 25006635,
+      "allReadFilesReboundUnchanged": true,
+      "savedPlacementInspectionsIncluded": 2,
+      "savedPlacementInspectionsBoundToCurrentPngAndProps": true
+    }
+  },
+  "mediaMeasurements": [
+    {
+      "name": "caption-preview-media",
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/http-current-audio-v001/caption-preview-media.json",
+        "bytes": 18876,
+        "fileSha256": "d8aad942a703c2ea589465efe9289480955990a6914abb4872444173f12dfb1e"
+      },
+      "elapsedMilliseconds": 113844.42775,
+      "reused": false,
+      "mediaId": "2a9bc100-9217-434b-81a7-7866bf8cb4ed",
+      "range": {
+        "startFrame": 414,
+        "endFrameExclusive": 616
+      }
+    },
+    {
+      "name": "caption-preview-reuse-media",
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/http-current-audio-v001/caption-preview-reuse-media.json",
+        "bytes": 18886,
+        "fileSha256": "fc9099be20670b5fd912bb51465dbda23f879e44aee221e9d723cd3107f754f6"
+      },
+      "elapsedMilliseconds": 450.0085000000108,
+      "reused": true,
+      "mediaId": "2a9bc100-9217-434b-81a7-7866bf8cb4ed",
+      "range": {
+        "startFrame": 414,
+        "endFrameExclusive": 616
+      }
+    },
+    {
+      "name": "connection-preview-media",
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/http-current-audio-v001/connection-preview-media.json",
+        "bytes": 18880,
+        "fileSha256": "bfb63becf16af900c9ace1a1a6e696ec7972645182a86f4fa1d7768b2a7965b7"
+      },
+      "elapsedMilliseconds": 183915.271875,
+      "reused": false,
+      "mediaId": "ccb9d797-b986-4454-a219-ce6444f444e3",
+      "range": {
+        "startFrame": 222,
+        "endFrameExclusive": 445
+      }
+    },
+    {
+      "name": "connection-preview-reuse-media",
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-preview-improvement-20260918-v001/http-current-audio-v001/connection-preview-reuse-media.json",
+        "bytes": 18889,
+        "fileSha256": "82ca2b390fb3fe586074c532ac5557538880f2a1e9178b1b71481643fe15898f"
+      },
+      "elapsedMilliseconds": 436.7851250000531,
+      "reused": true,
+      "mediaId": "ccb9d797-b986-4454-a219-ce6444f444e3",
+      "range": {
+        "startFrame": 222,
+        "endFrameExclusive": 445
+      }
+    }
+  ],
+  "conclusion": {
+    "connectionDiagnosticPreparationMilliseconds": 776.6389590000035,
+    "connectionRequestedDiagnosticStates": 2,
+    "connectionRequestedDiagnosticPngs": 4,
+    "connectionActualNativeDraws": 0,
+    "connectionExistingCachePngCopies": 4,
+    "connectionDirectProductionStateReferences": 3,
+    "connectionObservedAlphaChecks": 2,
+    "connectionObservedBoundsChecks": 2,
+    "initialCaptionDiagnosticPreparationMilliseconds": 10373.925333000007,
+    "initialCaptionRequestedDiagnosticStates": 4,
+    "initialCaptionActualNativeDraws": 8,
+    "initialCaptionDirectProductionStateReferences": 1,
+    "explanation": "接続側の対象2状態は、先に字幕側で別々に生成して一致を確認した画像と同じ描画条件・描画規則に結び付き、接続側4画像も実byteのSHAが一致した。対応工程区間にはPNG作画processがなく、画像の不透明度と範囲を調べたprocessだけが各2件ある。既存adapterとcacheの実装経路も一致するため、4回の画像要求はcacheコピーと特定できる。"
+  },
+  "limitations": [
+    "診断PNG準備という部分工程の実測であり、動画全体の再生成時間ではない。",
+    "字幕側4状態と接続側2状態は準備する状態数・範囲が異なるため、両時間から純粋な短縮率を算出しない。",
+    "cache内のファイルコピーだけの独立時間は保存されていない。0.777秒は入力照合と画像確認を含む。",
+    "診断画像では不透明画素の範囲を確認している。行分割・行同士の交差検査を追加実行したという意味ではない。",
+    "完成媒体再利用0.450秒／0.437秒を初回動画生成の高速化とは扱わない。",
+    "全素材準備のcache再実行は行っていない。全行maskの保存proofがあるという前提も置かない。"
+  ],
+  "actions": {
+    "additionalNativeDraws": 0,
+    "additionalVideoGenerations": 0,
+    "additionalCacheCopies": 0,
+    "additionalRuntimeMeasurements": 0,
+    "sourceChanges": 0
+  }
+}

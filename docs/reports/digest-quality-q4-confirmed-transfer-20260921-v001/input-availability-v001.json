@@ -1,0 +1,345 @@
+{
+  "recordedAt": "2026-09-21T11:59:28.870Z",
+  "status": "no-eligible-input-in-bounded-search",
+  "startCheckpoint": "90592baf95cf068ffbee7d1e02a3054b12a98f82",
+  "search": {
+    "roots": [
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation",
+      "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation",
+      "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports"
+    ],
+    "method": [
+      "024 formal-v004直下JSONのみ列挙し、指定した演出判断キーを検索。意味入力・採否・字幕分割の構造も読取。",
+      "presentation直下名から既知Digest/演出保存先を確認。",
+      "docs/reportsのMarkdown一覧をauto/effectで限定し、既知Phase1〜3/visual variation/orchestration/Q4一次報告を参照。"
+    ],
+    "formal024": {
+      "jsonFiles": [
+        "admission-receipt.json",
+        "base-media-bindings.json",
+        "candidate-request.json",
+        "candidate-response.json",
+        "candidate-result.json",
+        "candidate-set.json",
+        "caption-adoption.json",
+        "core-invocation.json",
+        "cue-end-projection.json",
+        "discovery-input-isolation.json",
+        "discovery-plan.json",
+        "discovery-validation.json",
+        "display-1-request.json",
+        "display-1-response.json",
+        "display-1-result.json",
+        "display-10-request.json",
+        "display-10-response.json",
+        "display-10-result.json",
+        "display-2-request.json",
+        "display-2-response.json",
+        "display-2-result.json",
+        "display-3-request.json",
+        "display-3-response.json",
+        "display-3-result.json",
+        "display-4-request.json",
+        "display-4-response.json",
+        "display-4-result.json",
+        "display-5-request.json",
+        "display-5-response.json",
+        "display-5-result.json",
+        "display-6-request.json",
+        "display-6-response.json",
+        "display-6-result.json",
+        "display-7-request.json",
+        "display-7-response.json",
+        "display-7-result.json",
+        "display-8-request.json",
+        "display-8-response.json",
+        "display-8-result.json",
+        "display-9-request.json",
+        "display-9-response.json",
+        "display-9-result.json",
+        "edit-plan.json",
+        "instruction.json",
+        "line-end-projection.json",
+        "line-layout.json",
+        "machine-adoption.json",
+        "manufacturing-values.json",
+        "meaning-input.json",
+        "received-instruction.json",
+        "renderer-job.json",
+        "renderer-result.json",
+        "retention-assessment.json",
+        "selection-adoption.json",
+        "selection-plan.json",
+        "selection-request.json",
+        "selection-response.json",
+        "selection-result.json",
+        "selection-validation.json",
+        "selection.json",
+        "source-media-inspection.json",
+        "source-package.json",
+        "utterances.json"
+      ],
+      "keyPatterns": [
+        "semanticRole",
+        "allowedPresets",
+        "captionAuto",
+        "connectionAuto",
+        "connectionRole"
+      ],
+      "matchingFiles": []
+    },
+    "scopeLimit": "無制限workspace探索・退避folder探索なし。未探索範囲の不存在は主張しない。"
+  },
+  "candidates": [
+    {
+      "sourceId": "SsdxVhwxyYo",
+      "label": "024 鬼武者",
+      "savedMeaning": "候補採否・字幕分割の意味入力あり",
+      "missing": "完成Digest自身の演出役割・許容集合・固定自動演出判断",
+      "eligible": false
+    },
+    {
+      "sourceId": "ymUsGrT6EaA",
+      "label": "HRB系 ホラー",
+      "savedMeaning": "32字幕・6接続の判断あり",
+      "excludedReason": "現在の調整対象。別Digest条件に合わない",
+      "eligible": false
+    },
+    {
+      "sourceId": "o8rZAhARXAc",
+      "label": "C-all 野球",
+      "savedMeaning": "325字幕・11接続の判断あり",
+      "excludedReason": "今回元6〜8番およびR1で調整に使用済み。上位計画§7と今回目的の未調整条件に合わない",
+      "eligible": false
+    },
+    {
+      "label": "Phase1/2小型例",
+      "savedMeaning": "旧ホラーの技術fixture",
+      "excludedReason": "独立した未調整Digestの評価入力ではない",
+      "eligible": false
+    }
+  ],
+  "references": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/meaning-input.json",
+      "fileSha256": "89ea3e9f63fd5a54a117d0402ddb529ccaa2717a6414144d188879e0bbb8fee5",
+      "bytes": 1565223,
+      "schemaVersion": "unseen-material-presentation-meaning-input-v001",
+      "topLevelKeys": [
+        "schemaVersion",
+        "artifactId",
+        "machineAdoptionBinding",
+        "transcriptBinding",
+        "utteranceBinding",
+        "sourceVideoBinding",
+        "orderedCandidates",
+        "atomOccurrences",
+        "captions"
+      ],
+      "topLevelArrayCounts": {
+        "orderedCandidates": 10,
+        "atomOccurrences": 3194,
+        "captions": 1
+      }
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/machine-adoption.json",
+      "fileSha256": "a2a69b5aed6c3aeaf47666fdc487ac262b96c732357b8dc23c6d65ef5a50308e",
+      "bytes": 229907,
+      "schemaVersion": "unseen-material-execution-adoption-v001",
+      "topLevelKeys": [
+        "schemaVersion",
+        "artifactId",
+        "authorityKind",
+        "authorizationBinding",
+        "planBinding",
+        "candidateSetBinding",
+        "resultBinding",
+        "requestBinding",
+        "responseBinding",
+        "validatorResultBinding",
+        "sourceVideoBinding",
+        "transcriptBinding",
+        "utteranceBinding",
+        "adoptedCandidates",
+        "rejectedCandidates",
+        "order",
+        "individualCandidateHumanApproval",
+        "historicalHumanQualityInherited",
+        "humanQuality",
+        "selectionAdoptionBinding",
+        "retentionAssessmentBinding",
+        "retentionMode",
+        "selectedCandidates"
+      ],
+      "topLevelArrayCounts": {
+        "adoptedCandidates": 10,
+        "rejectedCandidates": 7,
+        "selectedCandidates": 10
+      }
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/caption-adoption.json",
+      "fileSha256": "1b0d3f2b55914486c16aaa6b5d14ec800a7c55ace850d39648f2b06e6bdecc36",
+      "bytes": 13533,
+      "schemaVersion": "unseen-material-caption-adoption-v001",
+      "topLevelKeys": [
+        "schemaVersion",
+        "machineAdoptionBinding",
+        "meaningInputBinding",
+        "displayJudgments",
+        "composition",
+        "quality"
+      ],
+      "topLevelArrayCounts": {
+        "displayJudgments": 10
+      }
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/judgment-reply.raw.json",
+      "fileSha256": "c909317cec5571ec00c1bbe85e5a3992f716dc795f16388abfef8b394509fcc5",
+      "bytes": 190168,
+      "schemaVersion": "presentation-orchestration-judgment-v002",
+      "topLevelKeys": [
+        "schemaVersion",
+        "inputSha256",
+        "completion",
+        "captions",
+        "connections"
+      ],
+      "topLevelArrayCounts": {
+        "captions": 325,
+        "connections": 11
+      }
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/selectionRecord.json",
+      "fileSha256": "b8b2f2a4ba48bafee07923affca1b7185d5d03e6613ae2aabd38fd68986c6d37",
+      "bytes": 4986383,
+      "schemaVersion": "presentation-orchestration-selection-record-v002",
+      "topLevelKeys": [
+        "schemaVersion",
+        "version",
+        "contextSha256",
+        "input",
+        "origin",
+        "replyBytes",
+        "replySha256",
+        "captions",
+        "connections",
+        "captionAutoSha256",
+        "connectionAutoSha256",
+        "recordSha256"
+      ],
+      "topLevelArrayCounts": {
+        "captions": 325,
+        "connections": 11
+      }
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-run-v001/source-bindings.json",
+      "fileSha256": "9dcfedb9caee132e9769ad4975a3055cf4bb8ed0e3598c5a5eb7765734459136",
+      "bytes": 2802213,
+      "schemaVersion": null,
+      "topLevelKeys": [
+        "digestRef",
+        "planRef",
+        "timelineRef",
+        "mediaRef",
+        "planBytes",
+        "timelineBytes",
+        "playbackSampleRate",
+        "observationSampleRate",
+        "captionContext",
+        "decisionInputBytes"
+      ],
+      "topLevelArrayCounts": {}
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-orchestration-stage3-inputs-20260918/raw-ai-response-v001.json",
+      "fileSha256": "7d1d7bc4e0587fa90c7d9115f5c79cb9d39b4ff7d9750aa32d561f6a0c602629",
+      "bytes": 27199,
+      "schemaVersion": "presentation-orchestration-judgment-v001",
+      "topLevelKeys": [
+        "schemaVersion",
+        "inputSha256",
+        "completion",
+        "captions",
+        "connections"
+      ],
+      "topLevelArrayCounts": {
+        "captions": 32,
+        "connections": 6
+      }
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/auto-effects-phase1-20260916.md",
+      "fileSha256": "7c1c39bf79dd3449347f34e93a8b8b24464af37f1db0c1ef411376a8ec88b864",
+      "bytes": 36230
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/auto-effects-phase3-20260916.md",
+      "fileSha256": "049f10339ff44bbd7653cee61fd20eecf52afd6c216a958abd1df7892768be41",
+      "bytes": 26389
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/auto-effects-visual-variation-20260917.md",
+      "fileSha256": "4c045fad2571a4fe3b4dfbf7eae9b138dcf608f7aef76503ed0b80f163808bea",
+      "bytes": 15381
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answer-interpretation-v003.md",
+      "fileSha256": "e9ba5622546b5a1925eb3fa10332560ab8fd8adac7009294c27fb98362e6352d",
+      "bytes": 12446
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/review-reflection-r1-r3-20260921-v002/COMPLETION.md",
+      "fileSha256": "5ca36e19189c464870521901dee2fa8ff6f5ec992aacc6522919ca960881dd6f",
+      "bytes": 10875
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/plans/DIGEST_QUALITY_IMPROVEMENT_PLAN_v002.md",
+      "fileSha256": "b3959a4319de84d37f83bc6811af3292a9d0838180c8c0cf7d571a27bad0974f",
+      "bytes": 21151
+    }
+  ],
+  "codeReadOnly": {
+    "defaultRules": "新配色・発話末復帰を含む版。無指定のまま今回へ流用しない",
+    "explicitSavedRules": "旧配色・従来動作を保持する明示入力は既存経路あり",
+    "recompileBoundary": "既存背景再compileはcomic含3背景、配色再compileはcomic除外と4配色一括。対象未発見で新profileを実装しない"
+  },
+  "preservation": {
+    "protectedInputs": [
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/review-reflection-r1-r3-20260921-v002/review-v002.json",
+        "fileSha256": "5a6bf7f68ce79a4b1056ff61b891f29aee874b02d43a7219fc480d1e51f5c8e0"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v003/session-answers.json",
+        "fileSha256": "8dc2c92b70837b6927899373217a6419446f687e308c3f68602037d213066216"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-2-20260921-v001/candidate-record-v001.json",
+        "fileSha256": "bff779fe9a157cee1a1715cee61171b03e9c73ce2fc9981b5d42c6322c0d2e00"
+      },
+      {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q3-2-20260921-v001/review-data-v001.json",
+        "fileSha256": "a453c382d6c687394496000a1a53acc56511f20122208c07785496e17fce4524"
+      }
+    ],
+    "unchanged": true
+  },
+  "actions": {
+    "newImplementation": 0,
+    "newSemanticDecisions": 0,
+    "newSelectionRules": 0,
+    "newVideoGeneration": 0,
+    "newPointReviews": 0,
+    "newApiCalls": 0,
+    "externalMediaSends": 0,
+    "additionalCostUsd": 0,
+    "testsOrQcRerun": 0
+  },
+  "restart": "未調整別Digestとその版に束縛された再利用可能な演出判断が揃うこと。新しく意味判断する場合は対象と観測経路について必要な本人判断を別に得る。"
+}

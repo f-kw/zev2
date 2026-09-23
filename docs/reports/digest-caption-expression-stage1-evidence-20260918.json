@@ -1,0 +1,2238 @@
+{
+  "schemaVersion": "digest-caption-expression-stage1-evidence-v001",
+  "collectedAt": "2026-09-17T16:03:28.937Z",
+  "scope": "工程Iの保存・判断・編集・合成検査の軽量要約。元JSON/TAP/動画/PNGはパスとSHA256で参照し、このファイルへコピーしない。",
+  "status": "technical-evidence-complete-human-quality-not-evaluated",
+  "runtime": "v20.19.6",
+  "testRuns": {
+    "suites": [
+      {
+        "id": "storageAndCli",
+        "meaning": "保存契約・一件編集CLI",
+        "counts": {
+          "tests": 268,
+          "pass": 268,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "evidence": "storageAndCliLog"
+      },
+      {
+        "id": "automaticSelection",
+        "meaning": "自動選定の入出力と検証",
+        "counts": {
+          "tests": 96,
+          "pass": 96,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "evidence": "automaticSelectionLog"
+      },
+      {
+        "id": "combinedQc",
+        "meaning": "動画再現一致と状態識別の検査",
+        "counts": {
+          "tests": 68,
+          "pass": 68,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "evidence": "combinedQcLog"
+      },
+      {
+        "id": "motionAndPulse",
+        "meaning": "入口動作・実FFmpeg・既存Pulse回帰",
+        "counts": {
+          "tests": 12,
+          "pass": 12,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "evidence": "motionAndPulseLog"
+      },
+      {
+        "id": "existingRaster",
+        "meaning": "既存Panelと部分文字表現の実描画回帰",
+        "counts": {
+          "tests": 23,
+          "pass": 23,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "evidence": "existingRasterLog"
+      },
+      {
+        "id": "automaticRenderer",
+        "meaning": "自動案から描画への接続回帰",
+        "counts": {
+          "tests": 6,
+          "pass": 6,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "evidence": "automaticRendererLog"
+      },
+      {
+        "id": "nativeMotion",
+        "meaning": "実native描画・24フレーム観測・6故障動画",
+        "counts": {
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "evidence": "nativeMotionLog"
+      }
+    ],
+    "aggregate": {
+      "reportedTestExecutions": 474,
+      "passed": 474,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "countMeaning": "列挙したTAPの実行件数を合計。固有テスト数や製品の目視品質を意味しない。"
+    },
+    "typeChecks": {
+      "reportedPassed": 3,
+      "checks": [
+        {
+          "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node packages/shared/node_modules/typescript/bin/tsc -p packages/shared/tsconfig.json",
+          "exitCode": 0
+        },
+        {
+          "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node runner/node_modules/typescript/bin/tsc -p runner/tsconfig.json --noEmit",
+          "exitCode": 0
+        },
+        {
+          "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node runner/node_modules/typescript/bin/tsc -p runner/tsconfig.remotion.json",
+          "exitCode": 0
+        }
+      ],
+      "evidence": "storageVerification"
+    },
+    "storageSourceBindingsRechecked": 17
+  },
+  "preparedRealInput": {
+    "evidence": "inputPreparation",
+    "captionCount": 32,
+    "expectedFrameCount": 4831,
+    "fixedNormalPlanBytesUnchanged": true,
+    "semanticContextsUnchanged": true,
+    "previousSelectionsRead": false,
+    "availability": [
+      {
+        "preset": "scale",
+        "available": 23,
+        "unavailable": 9
+      },
+      {
+        "preset": "panel",
+        "available": 32,
+        "unavailable": 0
+      },
+      {
+        "preset": "pulse",
+        "available": 23,
+        "unavailable": 9
+      },
+      {
+        "preset": "bounce",
+        "available": 26,
+        "unavailable": 6
+      },
+      {
+        "preset": "shake",
+        "available": 29,
+        "unavailable": 3
+      }
+    ],
+    "sourceAndFeasibilityBindingsRechecked": 29,
+    "inputBindings": {
+      "originalNormalPlan": {
+        "path": "/private/tmp/zev-pulse-accent-fswa9cuw/inputs/horror/normal-plan.json",
+        "bytes": 205982,
+        "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e"
+      },
+      "originalSemanticContext": {
+        "path": "/private/tmp/zev-pulse-accent-fswa9cuw/inputs/horror/context.json",
+        "bytes": 15534,
+        "fileSha256": "3dac290d6fe91282c0fe6cbe49242bceb66a9d61b641bc4095109a0b2115d9ea"
+      },
+      "fixedNormalPlan": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/normal-plan.json",
+        "bytes": 205982,
+        "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e"
+      },
+      "preparedContext": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/context.json",
+        "bytes": 16935,
+        "fileSha256": "f77cef073735158b072828f25746a72082039e6ab378bcd7f6758caf95f5b8d1"
+      },
+      "decisionInput": {
+        "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/judgment-v001/decision-input.json",
+        "bytes": 88192,
+        "fileSha256": "ede1bf8678a10a69ab7466e6a6e2eaaea51319fd7dd7191b9691d8f724e1750f"
+      },
+      "fixedAuto": {
+        "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/judgment-v001/fixed-auto.json",
+        "bytes": 42799,
+        "fileSha256": "1392edbad1ac7063aecbccb60b2bb0da245e4d64eb512134c7e79f165381bb7e"
+      }
+    }
+  },
+  "automaticJudgment": {
+    "evidence": "judgmentValidation",
+    "proposalSha256": "7703d5887bf8e11ddb148eca46f9c9a3ce7377a3fb3131578a2ee15a876b457b",
+    "captionCount": 32,
+    "counts": {
+      "normal": 11,
+      "selected": 18,
+      "unrepresentable": 1,
+      "unresolved": 2
+    },
+    "selectedRoles": {
+      "Color Accent": 13,
+      "Scale Accent": 0,
+      "Panel Accent": 2,
+      "Pulse Accent": 0,
+      "Bounce Accent": 1,
+      "Shake Accent": 2
+    },
+    "audioCandidateCount": 27,
+    "candidateCounts": {
+      "selected": 17,
+      "discarded": 0,
+      "unrepresentable": 0,
+      "unresolved": 10
+    },
+    "classificationCoverageRechecked": true,
+    "captionClassifications": [
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+        "decision": "selected",
+        "role": "Shake Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+        "decision": "unresolved",
+        "role": "Scale Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+        "decision": "unresolved",
+        "role": "Scale Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+        "decision": "selected",
+        "role": "Bounce Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+        "decision": "selected",
+        "role": "Shake Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+        "decision": "unrepresentable",
+        "role": "Shake Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000021",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+        "decision": "selected",
+        "role": "Panel Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000023",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000024",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000026",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000027",
+        "decision": "normal",
+        "role": "Normal"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000028",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+        "decision": "selected",
+        "role": "Color Accent"
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000032",
+        "decision": "selected",
+        "role": "Panel Accent"
+      }
+    ],
+    "overridesApplied": false,
+    "humanQuality": "not-evaluated",
+    "automaticSelectionQuality": "not-evaluated",
+    "normalOnlyIsQualitySuccess": false
+  },
+  "nativeMotion": {
+    "evidence": [
+      "nativeCommonRender",
+      "nativeMeasurement",
+      "nativeTestSource",
+      "nativeMotionLog"
+    ],
+    "syntheticVideoOnly": true,
+    "automaticMeaningJudgment": false,
+    "status": "passed",
+    "video": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/presentation-rendered-v002.mp4",
+      "bytes": 1846470,
+      "fileSha256": "2c3aee9c7ffc27b939b697631de3df8a31b6a4fb2f6bd6442e6afb1c319d6dcd"
+    },
+    "expectedFrameCount": 60,
+    "canvas": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30
+    },
+    "completedMediaInspection": {
+      "durationMs": 2000,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 60
+      },
+      "audio": {
+        "codecName": "aac",
+        "sampleRate": 48000,
+        "channelLayout": "mono",
+        "durationMs": 2000,
+        "packetPayloadSha256": "cb0562784e703d85944bcf35d9dae1359559f14a2b5ce05c3411aac51891b4cf"
+      }
+    },
+    "wholeVideoReplay": {
+      "status": "passed",
+      "comparisonMethod": "mp4-byte-identical",
+      "mp4BytesIdentical": true,
+      "replay": {
+        "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/scratch/exact-replay-qc/replay.mp4",
+        "bytes": 1846470,
+        "fileSha256": "2c3aee9c7ffc27b939b697631de3df8a31b6a4fb2f6bd6442e6afb1c319d6dcd"
+      }
+    },
+    "audioPayloadPreserved": true,
+    "audioPacketPayloadSha256": "cb0562784e703d85944bcf35d9dae1359559f14a2b5ce05c3411aac51891b4cf",
+    "nativeStatePngCount": 11,
+    "expectedStateObservations": 24,
+    "expectedStateMatches": 24,
+    "captions": [
+      {
+        "captionId": "bounce",
+        "statePngs": [
+          {
+            "state": "stable",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/01-4d6723e5e454-stable.png",
+              "bytes": 106672,
+              "fileSha256": "979ede31b5b78b5aec951f4d4d606af08c21ef6730f5775291a721968074498b"
+            }
+          },
+          {
+            "state": "small",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/01-4d6723e5e454-small.png",
+              "bytes": 101029,
+              "fileSha256": "6f325894d9801e8eb485c9eaef0416cf8d7f8641a869921a6238fad3ff2204b2"
+            }
+          },
+          {
+            "state": "middle",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/01-4d6723e5e454-middle.png",
+              "bytes": 112153,
+              "fileSha256": "23ff959daf28dc2b3b6dc2cf3d5ced4411d16479bd36c217f3b3253ab52e578d"
+            }
+          },
+          {
+            "state": "maximum",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/01-4d6723e5e454-maximum.png",
+              "bytes": 118125,
+              "fileSha256": "f697047df6a3cabd8a04e855b18e6f1dbd6025f0a6f92b10d0c80bdf05b3f040"
+            }
+          }
+        ],
+        "independentNormalPng": {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/bounce-normal.png",
+          "bytes": 106672,
+          "fileSha256": "979ede31b5b78b5aec951f4d4d606af08c21ef6730f5775291a721968074498b"
+        },
+        "stablePngByteIdenticalToNormal": true,
+        "stableStartFrame": 8,
+        "samples": [
+          {
+            "frame": 0,
+            "expectedState": "small",
+            "visible": true
+          },
+          {
+            "frame": 1,
+            "expectedState": "small",
+            "visible": true
+          },
+          {
+            "frame": 2,
+            "expectedState": "middle",
+            "visible": true
+          },
+          {
+            "frame": 3,
+            "expectedState": "middle",
+            "visible": true
+          },
+          {
+            "frame": 4,
+            "expectedState": "maximum",
+            "visible": true
+          },
+          {
+            "frame": 5,
+            "expectedState": "maximum",
+            "visible": true
+          },
+          {
+            "frame": 6,
+            "expectedState": "middle",
+            "visible": true
+          },
+          {
+            "frame": 7,
+            "expectedState": "middle",
+            "visible": true
+          },
+          {
+            "frame": 8,
+            "expectedState": "stable",
+            "visible": true
+          },
+          {
+            "frame": 25,
+            "expectedState": "stable",
+            "visible": true
+          }
+        ],
+        "observedFrameCount": 10,
+        "statePngCount": 4
+      },
+      {
+        "captionId": "shake",
+        "statePngs": [
+          {
+            "state": "stable",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/02-50d22da6c0d4-stable.png",
+              "bytes": 147803,
+              "fileSha256": "f9b107f8b76efbd3aa36678c1e5051fbd85308d784bd793acde85d4e86171174"
+            }
+          },
+          {
+            "state": "left-12",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/02-50d22da6c0d4-left-12.png",
+              "bytes": 147827,
+              "fileSha256": "7d01baaeb19f01fd156be02b3d7532e3c1744c1ffc827030cfa7fccf1094c8c2"
+            }
+          },
+          {
+            "state": "right-12",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/02-50d22da6c0d4-right-12.png",
+              "bytes": 147779,
+              "fileSha256": "f17eb8401c2704649989c3905194269eb040c69b76afecfb4550dc01540c414f"
+            }
+          },
+          {
+            "state": "left-8",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/02-50d22da6c0d4-left-8.png",
+              "bytes": 147773,
+              "fileSha256": "c78c9db29e852fa201d685421e60654076d6742762c20c00d39462d6b9d21db6"
+            }
+          },
+          {
+            "state": "right-8",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/02-50d22da6c0d4-right-8.png",
+              "bytes": 147904,
+              "fileSha256": "64de692d1cc6a71729935a7777be6da471e93cfdce013efb7cd3c5ef8b558f25"
+            }
+          },
+          {
+            "state": "left-4",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/02-50d22da6c0d4-left-4.png",
+              "bytes": 147679,
+              "fileSha256": "d11d01f13787f6342fd7adca0fbcbbe832af5734d8265b753c2e5c9cd7c52458"
+            }
+          },
+          {
+            "state": "right-4",
+            "png": {
+              "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/motion-native-test-eVUPgz/.render.presentation-renderer-v002-work-Q7eGDp/publish/overlays/02-50d22da6c0d4-right-4.png",
+              "bytes": 147834,
+              "fileSha256": "067bdfe7d89b0ba3e45a49842f8df90199c738dfd8d34d1dc93e506cf8461d8c"
+            }
+          }
+        ],
+        "independentNormalPng": {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/shake-normal.png",
+          "bytes": 147803,
+          "fileSha256": "f9b107f8b76efbd3aa36678c1e5051fbd85308d784bd793acde85d4e86171174"
+        },
+        "stablePngByteIdenticalToNormal": true,
+        "stableStartFrame": 42,
+        "samples": [
+          {
+            "frame": 30,
+            "expectedState": "left-12",
+            "visible": true
+          },
+          {
+            "frame": 31,
+            "expectedState": "left-12",
+            "visible": true
+          },
+          {
+            "frame": 32,
+            "expectedState": "right-12",
+            "visible": true
+          },
+          {
+            "frame": 33,
+            "expectedState": "right-12",
+            "visible": true
+          },
+          {
+            "frame": 34,
+            "expectedState": "left-8",
+            "visible": true
+          },
+          {
+            "frame": 35,
+            "expectedState": "left-8",
+            "visible": true
+          },
+          {
+            "frame": 36,
+            "expectedState": "right-8",
+            "visible": true
+          },
+          {
+            "frame": 37,
+            "expectedState": "right-8",
+            "visible": true
+          },
+          {
+            "frame": 38,
+            "expectedState": "left-4",
+            "visible": true
+          },
+          {
+            "frame": 39,
+            "expectedState": "left-4",
+            "visible": true
+          },
+          {
+            "frame": 40,
+            "expectedState": "right-4",
+            "visible": true
+          },
+          {
+            "frame": 41,
+            "expectedState": "right-4",
+            "visible": true
+          },
+          {
+            "frame": 42,
+            "expectedState": "stable",
+            "visible": true
+          },
+          {
+            "frame": 55,
+            "expectedState": "stable",
+            "visible": true
+          }
+        ],
+        "observedFrameCount": 14,
+        "statePngCount": 7
+      }
+    ],
+    "layoutEvidence": [
+      {
+        "name": "bounce",
+        "status": "passed",
+        "itemCount": 4,
+        "violationCodes": [],
+        "evidence": "layout-bounce"
+      },
+      {
+        "name": "shake",
+        "status": "passed",
+        "itemCount": 7,
+        "violationCodes": [],
+        "evidence": "layout-shake"
+      },
+      {
+        "name": "wide-stable",
+        "status": "passed",
+        "itemCount": 1,
+        "violationCodes": [],
+        "evidence": "layout-wide-stable"
+      },
+      {
+        "name": "wide-maximum",
+        "status": "failed",
+        "itemCount": 1,
+        "violationCodes": [
+          "LAYOUT_SAFE_AREA_VIOLATION"
+        ],
+        "evidence": "layout-wide-maximum"
+      },
+      {
+        "name": "two-line-collision",
+        "status": "failed",
+        "itemCount": 4,
+        "violationCodes": [
+          "LAYOUT_LINE_POSITIVE_INTERSECTION",
+          "LAYOUT_LINE_POSITIVE_INTERSECTION",
+          "LAYOUT_LINE_POSITIVE_INTERSECTION",
+          "LAYOUT_LINE_POSITIVE_INTERSECTION"
+        ],
+        "evidence": "layout-two-line-collision"
+      },
+      {
+        "name": "clamp",
+        "status": "passed",
+        "itemCount": 7,
+        "violationCodes": [],
+        "evidence": "layout-clamp"
+      }
+    ],
+    "layoutFindings": {
+      "normalWideCaptionFits": true,
+      "maximumWideCaptionRejected": true,
+      "twoLineIntersectionRejected": true,
+      "unrequestedPositionClampingRejectedByMotionValidation": true
+    },
+    "realFaults": {
+      "count": 6,
+      "eachRejectedByNativeStateAndWholeVideoReplay": true,
+      "rows": [
+        {
+          "name": "bounce-no-motion",
+          "video": {
+            "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/bounce-no-motion.mp4",
+            "bytes": 1809889,
+            "fileSha256": "2b2bf60044bf8256982c2f2d10609c081884b148996aacbdfe80feceaef254fa"
+          },
+          "sampleFrame": 4,
+          "nativeRejected": true,
+          "exactReplayRejected": true,
+          "observedFrameCounts": {
+            "completed": 60,
+            "replay": 60
+          },
+          "differingFrames": 60,
+          "successfulProcessCount": 9,
+          "violationReason": "exact replay QC: complete decoded video frame sequence or exact timestamps differ",
+          "evidence": "fault-bounce-no-motion"
+        },
+        {
+          "name": "bounce-late",
+          "video": {
+            "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/bounce-late.mp4",
+            "bytes": 1837846,
+            "fileSha256": "8bcfea72aef4622fdd68990ea2fcfcd26889e3595c6529ce26ac7dda2febc2af"
+          },
+          "sampleFrame": 4,
+          "nativeRejected": true,
+          "exactReplayRejected": true,
+          "observedFrameCounts": {
+            "completed": 60,
+            "replay": 60
+          },
+          "differingFrames": 60,
+          "successfulProcessCount": 9,
+          "violationReason": "exact replay QC: complete decoded video frame sequence or exact timestamps differ",
+          "evidence": "fault-bounce-late"
+        },
+        {
+          "name": "bounce-no-return",
+          "video": {
+            "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/bounce-no-return.mp4",
+            "bytes": 1815896,
+            "fileSha256": "bfb6e5a67205a91c734f11a6f411a4bad1dfd12ad7c4ff044a1baa8eacf581c0"
+          },
+          "sampleFrame": 8,
+          "nativeRejected": true,
+          "exactReplayRejected": true,
+          "observedFrameCounts": {
+            "completed": 60,
+            "replay": 60
+          },
+          "differingFrames": 60,
+          "successfulProcessCount": 9,
+          "violationReason": "exact replay QC: complete decoded video frame sequence or exact timestamps differ",
+          "evidence": "fault-bounce-no-return"
+        },
+        {
+          "name": "shake-no-motion",
+          "video": {
+            "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/shake-no-motion.mp4",
+            "bytes": 1824020,
+            "fileSha256": "894627d4911294fcbd2bf5e5e62c177a52f020d477d022450a4da3aa7e225e6c"
+          },
+          "sampleFrame": 34,
+          "nativeRejected": true,
+          "exactReplayRejected": true,
+          "observedFrameCounts": {
+            "completed": 60,
+            "replay": 60
+          },
+          "differingFrames": 53,
+          "successfulProcessCount": 9,
+          "violationReason": "exact replay QC: complete decoded video frame sequence or exact timestamps differ",
+          "evidence": "fault-shake-no-motion"
+        },
+        {
+          "name": "shake-late",
+          "video": {
+            "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/shake-late.mp4",
+            "bytes": 1826548,
+            "fileSha256": "a922bda84122fa115caf35b769d022499d1356917477eb6b1cf282b62db56883"
+          },
+          "sampleFrame": 34,
+          "nativeRejected": true,
+          "exactReplayRejected": true,
+          "observedFrameCounts": {
+            "completed": 60,
+            "replay": 60
+          },
+          "differingFrames": 60,
+          "successfulProcessCount": 9,
+          "violationReason": "exact replay QC: complete decoded video frame sequence or exact timestamps differ",
+          "evidence": "fault-shake-late"
+        },
+        {
+          "name": "shake-no-return",
+          "video": {
+            "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/shake-no-return.mp4",
+            "bytes": 1856341,
+            "fileSha256": "8d683f055ff71b0428bd8cb7a611f8214bbe58ed0a765827c5ac8da4a6446ad9"
+          },
+          "sampleFrame": 42,
+          "nativeRejected": true,
+          "exactReplayRejected": true,
+          "observedFrameCounts": {
+            "completed": 60,
+            "replay": 60
+          },
+          "differingFrames": 33,
+          "successfulProcessCount": 9,
+          "violationReason": "exact replay QC: complete decoded video frame sequence or exact timestamps differ",
+          "evidence": "fault-shake-no-return"
+        }
+      ]
+    },
+    "runtimeBindings": {
+      "savedProps": {
+        "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/work-digest-v1-phase2-20260913-v001/style-95-v001/raster-diagnosis-v001/overlay-props.json",
+        "bytes": 6509,
+        "fileSha256": "928fd6dffcfd7402816e1073730eed69bee2490e7f84f05a53c70a3c24a35ec8"
+      },
+      "font": {
+        "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "bytes": 4106788,
+        "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb"
+      },
+      "browserBundle": {
+        "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/browser-bundle.js",
+        "bytes": 649641,
+        "fileSha256": "f123837ab7360281739a1d3f6094c7ddd0992fefb01b16323ad5e49d0456f1b0"
+      },
+      "chromium": {
+        "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+        "bytes": 159972320,
+        "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8"
+      }
+    },
+    "observationMeaning": "24 frame観測（Bounce 10 / Shake 14）と、11種類の状態PNG（Bounce 4 / Shake 7）を分けて数える。24種類の異なる状態を意味しない。"
+  },
+  "savedCaptionEditing": {
+    "evidence": "realCaptionEditCompletion",
+    "status": "passed",
+    "cliExecutions": 6,
+    "renderingExecuted": false,
+    "aiJudgmentRerun": false,
+    "candidateOverrides": 0,
+    "diagnosticOverridesOnly": true,
+    "inputAndImplementationBindingsRechecked": 12,
+    "allSixSavedOverridesRehashedAfterCompletion": true,
+    "checks": [
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+        "text": "もうリカちゃんやめてー!",
+        "originalAutomaticRole": "Shake accent",
+        "steps": [
+          {
+            "action": "bounce",
+            "role": "Bounce accent",
+            "origin": "human",
+            "hasOverride": true,
+            "otherCaptionsUnchanged": 31,
+            "output": {
+              "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/real-caption-edit-check-v003/bounce-bounce.json",
+              "bytes": 31774,
+              "fileSha256": "1280ee68c39eb53476ca8a5229f0817679bc1e76e5a1d6e849773193dd392fef"
+            },
+            "outputStillMatchesSavedHash": true
+          },
+          {
+            "action": "normal",
+            "role": "Normal",
+            "origin": "human",
+            "hasOverride": true,
+            "otherCaptionsUnchanged": 31,
+            "output": {
+              "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/real-caption-edit-check-v003/bounce-normal.json",
+              "bytes": 31691,
+              "fileSha256": "344db3ea5f826bdf8b9fc743e4e12f63ffa8b99602bd216e1578b5b2c9f3fbdb"
+            },
+            "outputStillMatchesSavedHash": true
+          },
+          {
+            "action": "reset",
+            "role": "Shake accent",
+            "origin": "automatic",
+            "hasOverride": false,
+            "otherCaptionsUnchanged": 31,
+            "output": {
+              "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/real-caption-edit-check-v003/bounce-reset.json",
+              "bytes": 31558,
+              "fileSha256": "a594061d9603cf5cfc968bf85b3b91cda045ab6ce4b4577a18172972b096ab7d"
+            },
+            "outputStillMatchesSavedHash": true
+          }
+        ],
+        "resetRestoresSavedAutomaticSelection": true
+      },
+      {
+        "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+        "text": "逃げるんだ",
+        "originalAutomaticRole": "Bounce accent",
+        "steps": [
+          {
+            "action": "shake",
+            "role": "Shake accent",
+            "origin": "human",
+            "hasOverride": true,
+            "otherCaptionsUnchanged": 31,
+            "output": {
+              "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/real-caption-edit-check-v003/shake-shake.json",
+              "bytes": 31772,
+              "fileSha256": "081dfbfd0b7b9d0f29b67dfdbc57826d8d0d2cc90353639468a4a58874e6bc27"
+            },
+            "outputStillMatchesSavedHash": true
+          },
+          {
+            "action": "normal",
+            "role": "Normal",
+            "origin": "human",
+            "hasOverride": true,
+            "otherCaptionsUnchanged": 31,
+            "output": {
+              "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/real-caption-edit-check-v003/shake-normal.json",
+              "bytes": 31691,
+              "fileSha256": "5c1292685a969993a49c53089d68f7eef40e43e5e6b00bcd6385353ba32e4ecd"
+            },
+            "outputStillMatchesSavedHash": true
+          },
+          {
+            "action": "reset",
+            "role": "Bounce accent",
+            "origin": "automatic",
+            "hasOverride": false,
+            "otherCaptionsUnchanged": 31,
+            "output": {
+              "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/real-caption-edit-check-v003/shake-reset.json",
+              "bytes": 31558,
+              "fileSha256": "a594061d9603cf5cfc968bf85b3b91cda045ab6ce4b4577a18172972b096ab7d"
+            },
+            "outputStillMatchesSavedHash": true
+          }
+        ],
+        "resetRestoresSavedAutomaticSelection": true
+      }
+    ]
+  },
+  "originalTreePreservation": {
+    "evidence": "originalTreePreservation",
+    "status": "passed",
+    "recordedAt": "2026-09-17T15:59:01.645728+00:00",
+    "meaning": "開始時に保存した作業tree状態・追跡差分・staged差分・HEAD・branchの5記録と、現観測が一致した検査記録。未追跡ファイル全内容のハッシュ検査を意味しない。",
+    "records": [
+      {
+        "name": "original-status.z",
+        "unchanged": true,
+        "observedSnapshot": {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v001/original-status.z",
+          "bytes": 10693537,
+          "fileSha256": "3d2edf1b0683e8c76d59baf100b59fcf6658e2d3d799a0b3ceebc1dfa3441b3b"
+        }
+      },
+      {
+        "name": "original-tracked.diff",
+        "unchanged": true,
+        "observedSnapshot": {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v001/original-tracked.diff",
+          "bytes": 2604,
+          "fileSha256": "3e7877a0bee01a6796a7444aa3570fb6d1d3b390b902c3a3112084f92ee2c2bb"
+        }
+      },
+      {
+        "name": "original-staged.diff",
+        "unchanged": true,
+        "observedSnapshot": {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v001/original-staged.diff",
+          "bytes": 0,
+          "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "original-head.txt",
+        "unchanged": true,
+        "observedSnapshot": {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v001/original-head.txt",
+          "bytes": 41,
+          "fileSha256": "203125c151b0a38e636ce58c4baa9228f845e0dc5d5f95dff0ec94a3dc6d1646"
+        }
+      },
+      {
+        "name": "original-branch.txt",
+        "unchanged": true,
+        "observedSnapshot": {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v001/original-branch.txt",
+          "bytes": 27,
+          "fileSha256": "d2d293869d375ba9ef2c557cb5e2c39dcf4bbf5136ef43bda0e7219679658458"
+        }
+      }
+    ]
+  },
+  "fullCandidate": {
+    "status": "passed",
+    "completionEvidence": "fullCandidateCompletion",
+    "drawEvidence": "fullCandidateDrawResult",
+    "completedAt": "2026-09-17T16:22:41.648Z",
+    "elapsedMilliseconds": 2170472.533292,
+    "exitCode": 0,
+    "candidateVideo": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/render-v002/presentation-rendered-v002.mp4",
+      "bytes": 75378768,
+      "fileSha256": "36f3863fdd3c3c601459d5b5547e1a7c3df014dd8b026c3570c31d176a3e405b"
+    },
+    "entry": "existing-shared-renderer-development-entry",
+    "formalJobAdmissionProven": false,
+    "formalTrustChanged": false,
+    "priorJobTrustSnapshotUsed": false,
+    "captionCount": 32,
+    "expectedFrameCount": 4831,
+    "outputMedia": {
+      "durationMs": 161033,
+      "video": {
+        "codecName": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frameCount": 4831
+      },
+      "audio": {
+        "codecName": "aac",
+        "sampleRate": 44100,
+        "channelLayout": "stereo",
+        "durationMs": 161032.99300000002,
+        "packetPayloadSha256": "475233b0648161e3014ef52ffa1d7f4400b8dca1b0dc66214a2d66af9cd1b56e"
+      }
+    },
+    "wholeVideoQc": {
+      "status": "passed",
+      "method": "exact-replay-native-v1",
+      "exactReplay": {
+        "status": "passed",
+        "comparisonMethod": "mp4-byte-identical",
+        "mp4BytesIdentical": true,
+        "expectedFrameCount": 4831,
+        "replayEncodedFrameCount": 4831,
+        "decodedVideo": null,
+        "audioPackets": null,
+        "meaning": "同じ入力から生成した再現MP4と完成MP4が全バイト一致。復号フレーム列による4831フレーム比較は実施していない。",
+        "successfulProcessCount": 5,
+        "replayVideo": {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/.render-v002.presentation-renderer-v002-work-snEBrQ/scratch/exact-replay-qc/replay.mp4",
+          "bytes": 75378768,
+          "fileSha256": "36f3863fdd3c3c601459d5b5547e1a7c3df014dd8b026c3570c31d176a3e405b"
+        }
+      },
+      "nativeState": {
+        "status": "passed",
+        "captionCount": 32,
+        "observedFrameCount": 67,
+        "expectedStateMatches": 67,
+        "publishedPngCount": 47,
+        "meaning": "全編の32字幕に対する67フレーム観測。47枚は静止字幕を含む描画PNG総数。小型試験の24観測・11状態PNGとは別集計。",
+        "newMotionCaptionCount": 3,
+        "newMotionObservedFrames": 38,
+        "otherCaptionObservedFrames": 29,
+        "newMotionUses": [
+          {
+            "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+            "role": "Shake accent",
+            "startFrame": 71,
+            "endFrameExclusive": 154,
+            "stableStartFrame": 83,
+            "statePngCount": 7,
+            "observedFrameCount": 14,
+            "expectedStateAndPngBindingMatches": true,
+            "samples": [
+              {
+                "frame": 71,
+                "expectedState": "left-12",
+                "visible": true
+              },
+              {
+                "frame": 72,
+                "expectedState": "left-12",
+                "visible": true
+              },
+              {
+                "frame": 73,
+                "expectedState": "right-12",
+                "visible": true
+              },
+              {
+                "frame": 74,
+                "expectedState": "right-12",
+                "visible": true
+              },
+              {
+                "frame": 75,
+                "expectedState": "left-8",
+                "visible": true
+              },
+              {
+                "frame": 76,
+                "expectedState": "left-8",
+                "visible": true
+              },
+              {
+                "frame": 77,
+                "expectedState": "right-8",
+                "visible": true
+              },
+              {
+                "frame": 78,
+                "expectedState": "right-8",
+                "visible": true
+              },
+              {
+                "frame": 79,
+                "expectedState": "left-4",
+                "visible": true
+              },
+              {
+                "frame": 80,
+                "expectedState": "left-4",
+                "visible": true
+              },
+              {
+                "frame": 81,
+                "expectedState": "right-4",
+                "visible": true
+              },
+              {
+                "frame": 82,
+                "expectedState": "right-4",
+                "visible": true
+              },
+              {
+                "frame": 83,
+                "expectedState": "stable",
+                "visible": true
+              },
+              {
+                "frame": 149,
+                "expectedState": "stable",
+                "visible": true
+              }
+            ]
+          },
+          {
+            "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+            "role": "Bounce accent",
+            "startFrame": 544,
+            "endFrameExclusive": 614,
+            "stableStartFrame": 552,
+            "statePngCount": 4,
+            "observedFrameCount": 10,
+            "expectedStateAndPngBindingMatches": true,
+            "samples": [
+              {
+                "frame": 544,
+                "expectedState": "small",
+                "visible": true
+              },
+              {
+                "frame": 545,
+                "expectedState": "small",
+                "visible": true
+              },
+              {
+                "frame": 546,
+                "expectedState": "middle",
+                "visible": true
+              },
+              {
+                "frame": 547,
+                "expectedState": "middle",
+                "visible": true
+              },
+              {
+                "frame": 548,
+                "expectedState": "maximum",
+                "visible": true
+              },
+              {
+                "frame": 549,
+                "expectedState": "maximum",
+                "visible": true
+              },
+              {
+                "frame": 550,
+                "expectedState": "middle",
+                "visible": true
+              },
+              {
+                "frame": 551,
+                "expectedState": "middle",
+                "visible": true
+              },
+              {
+                "frame": 552,
+                "expectedState": "stable",
+                "visible": true
+              },
+              {
+                "frame": 609,
+                "expectedState": "stable",
+                "visible": true
+              }
+            ]
+          },
+          {
+            "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+            "role": "Shake accent",
+            "startFrame": 2673,
+            "endFrameExclusive": 2708,
+            "stableStartFrame": 2685,
+            "statePngCount": 7,
+            "observedFrameCount": 14,
+            "expectedStateAndPngBindingMatches": true,
+            "samples": [
+              {
+                "frame": 2673,
+                "expectedState": "left-12",
+                "visible": true
+              },
+              {
+                "frame": 2674,
+                "expectedState": "left-12",
+                "visible": true
+              },
+              {
+                "frame": 2675,
+                "expectedState": "right-12",
+                "visible": true
+              },
+              {
+                "frame": 2676,
+                "expectedState": "right-12",
+                "visible": true
+              },
+              {
+                "frame": 2677,
+                "expectedState": "left-8",
+                "visible": true
+              },
+              {
+                "frame": 2678,
+                "expectedState": "left-8",
+                "visible": true
+              },
+              {
+                "frame": 2679,
+                "expectedState": "right-8",
+                "visible": true
+              },
+              {
+                "frame": 2680,
+                "expectedState": "right-8",
+                "visible": true
+              },
+              {
+                "frame": 2681,
+                "expectedState": "left-4",
+                "visible": true
+              },
+              {
+                "frame": 2682,
+                "expectedState": "left-4",
+                "visible": true
+              },
+              {
+                "frame": 2683,
+                "expectedState": "right-4",
+                "visible": true
+              },
+              {
+                "frame": 2684,
+                "expectedState": "right-4",
+                "visible": true
+              },
+              {
+                "frame": 2685,
+                "expectedState": "stable",
+                "visible": true
+              },
+              {
+                "frame": 2703,
+                "expectedState": "stable",
+                "visible": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "finalQc": {
+      "status": "passed",
+      "checks": {
+        "instructionApplication": {
+          "status": "passed"
+        },
+        "layoutAndVisibility": {
+          "status": "passed"
+        },
+        "media": {
+          "status": "passed"
+        }
+      },
+      "instructionCount": 32,
+      "instructionEvidenceCount": 32,
+      "violationCount": 0
+    },
+    "preservedInput": {
+      "captionContentAndTimingPreserved": true,
+      "captionCount": 32,
+      "comparedFields": [
+        "instructionId",
+        "kind",
+        "text",
+        "indexedLines",
+        "startFrame",
+        "endFrameExclusive",
+        "displayFrameCount"
+      ],
+      "audioPacketPayloadIdentical": true,
+      "audioPacketPayloadSha256": "475233b0648161e3014ef52ffa1d7f4400b8dca1b0dc66214a2d66af9cd1b56e",
+      "humanOverrides": 0,
+      "fixedAutomaticProposalSha256": "7703d5887bf8e11ddb148eca46f9c9a3ce7377a3fb3131578a2ee15a876b457b",
+      "allCaptionsRetainAutomaticOrigin": true
+    },
+    "completedMediaBinding": {
+      "publishedVideo": {
+        "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/render-v002/presentation-rendered-v002.mp4",
+        "bytes": 75378768,
+        "fileSha256": "36f3863fdd3c3c601459d5b5547e1a7c3df014dd8b026c3570c31d176a3e405b"
+      },
+      "exactReplayCompletedMedia": {
+        "role": "completed-media",
+        "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/.render-v002.presentation-renderer-v002-work-snEBrQ/publish/presentation-rendered-v002.mp4",
+        "realPath": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/.render-v002.presentation-renderer-v002-work-snEBrQ/publish/presentation-rendered-v002.mp4",
+        "bytes": 75378768,
+        "fileSha256": "36f3863fdd3c3c601459d5b5547e1a7c3df014dd8b026c3570c31d176a3e405b"
+      },
+      "nativeStateCompletedMedia": {
+        "role": "completed-media",
+        "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/.render-v002.presentation-renderer-v002-work-snEBrQ/publish/presentation-rendered-v002.mp4",
+        "fileSha256": "36f3863fdd3c3c601459d5b5547e1a7c3df014dd8b026c3570c31d176a3e405b"
+      },
+      "publishedBytesAndBothQcSha256Match": true,
+      "meaning": "検査中の一時配置から最終配置へ移した後も、動画のSHA256がA・B双方の完成動画参照と一致する。"
+    },
+    "completedSourcePreservation": {
+      "recordedPassed": true,
+      "independentlyRehashedAfterCompletion": true,
+      "inputReferencesCount": 7,
+      "implementationAndRuntimeReferencesCount": 24,
+      "inputReferences": [
+        {
+          "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/normal-plan.json",
+          "bytes": 205982,
+          "fileSha256": "9a4550ee0f9d3ccaf7ddedac26ed5af8af2bf64e23c505f082830b9031c3311e"
+        },
+        {
+          "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/judgment-v001/decision-input.json",
+          "bytes": 88192,
+          "fileSha256": "ede1bf8678a10a69ab7466e6a6e2eaaea51319fd7dd7191b9691d8f724e1750f"
+        },
+        {
+          "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/judgment-v001/fixed-auto.json",
+          "bytes": 42799,
+          "fileSha256": "1392edbad1ac7063aecbccb60b2bb0da245e4d64eb512134c7e79f165381bb7e"
+        },
+        {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-digest-caption-sync-internal-edit-20260907-v001/internal-edit-v001/base-media/base-media.mp4",
+          "bytes": 78398378,
+          "fileSha256": "8c36b25a30e8acf5ac97475646092adeca5336d1c9a447dc9f2ffd0f7fd5ce2d"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+          "bytes": 14291,
+          "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+          "bytes": 4106788,
+          "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/runner/public/font/OFL_LINESeedJP.txt",
+          "bytes": 4431,
+          "fileSha256": "8aa3e80c0d02c9f999756a5bb21258700edea4c727dab6169f6460245c4b6f0a"
+        }
+      ],
+      "implementationAndRuntimeReferences": [
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_auto_effects_v001.mjs",
+          "bytes": 20568,
+          "fileSha256": "505106e7e3eb0e40b929c28eb7774128d0beb42f529c1fab708e147fe421fcb6"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_auto_effects_io_v001.mjs",
+          "bytes": 6794,
+          "fileSha256": "0f83602a7fcd9d9ad763f402a0ae40ac271d8d205d4e74b7633bee87bfb18b8b"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_effects_v001.mjs",
+          "bytes": 8472,
+          "fileSha256": "d47414ce90b40bd0d3595c0b5818291653c24ea197ed268a121f1bbea8ec05bc"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_pulse_v001.mjs",
+          "bytes": 6326,
+          "fileSha256": "4d4dd82b04737f691a1f6130605a69093e89f8febb7214584d88fa38fa6051d4"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_pulse_evidence_v001.mjs",
+          "bytes": 2872,
+          "fileSha256": "2bd5522fb87e5951029b6bdeddf363d11b3f647b31712978a5e45b1117909968"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_pulse_renderer_qc_v001.mjs",
+          "bytes": 5108,
+          "fileSha256": "36794ffc1e0019783041c68944c218e1874c40430f7c45fa29f82ef4613171fb"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_caption_motion_v001.mjs",
+          "bytes": 7796,
+          "fileSha256": "300b9863cba5abf4f3f86d65b1e52b1aadfc10e08024a4df602db2bded376ad5"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/render_presentation_v002.mjs",
+          "bytes": 124893,
+          "fileSha256": "801b568cfe4f637535ce8e48d3b06ba8b0ad63d8e271c7bac2492c85e3868149"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_renderer_entry_v001.tsx",
+          "bytes": 27769,
+          "fileSha256": "ae053ad3ae1b602669a0bc22b6c0ecd05c720d1e83f70441d528bfc0fb2bd1f0"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+          "bytes": 5139,
+          "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+          "bytes": 14071,
+          "fileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+          "bytes": 44261,
+          "fileSha256": "be29f8a76e89016c7eb21ebc6f161186fd2ed0cd81d5d0cb9261fd9f3c4f2d32"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+          "bytes": 43112,
+          "fileSha256": "3d511f3892fc45ec003a1a3e9d01f834494422691807ebb5b1a030313d95f26c"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+          "bytes": 14315,
+          "fileSha256": "d025933b534a4f66c941106a66a00f29400efd043ccafa6711484087461c0b65"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+          "bytes": 46164,
+          "fileSha256": "ceaa985cd940bedf29ae04a761b637e483b514b28e375906ce81eee7e22c69c8"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_integrity_state_qc_v001.mjs",
+          "bytes": 11120,
+          "fileSha256": "29f001827550295cc0ea70b14a04586c8badd37fdde25c4872caab7cc0184fe5"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+          "bytes": 3858,
+          "fileSha256": "957952952fc736f21d7de59aedd8add53d9f12e211ed3db9f3d65e38f24bf030"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/runner/src/remotion/components/TelopText.tsx",
+          "bytes": 7328,
+          "fileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/runner/src/telop/telop-render-model.ts",
+          "bytes": 11392,
+          "fileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/runner/src/remotion/utils/telop-font.ts",
+          "bytes": 1723,
+          "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/runner/src/telop/text-metrics.ts",
+          "bytes": 2144,
+          "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/runner/src/telop/telop-line-break.ts",
+          "bytes": 8755,
+          "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+        },
+        {
+          "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/caption_expression_stage1_candidate_v001.mjs",
+          "bytes": 12962,
+          "fileSha256": "87ce23018c41e7965491434e2072146773915ebfc80aca5501f8c151a1f82310"
+        },
+        {
+          "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "bytes": 88501744,
+          "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+        }
+      ]
+    },
+    "publishedPngsRehashed": {
+      "count": 47,
+      "allMatchDrawEvidence": true,
+      "baseDirectory": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/render-v002",
+      "files": [
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000001",
+          "state": "static",
+          "relativePath": "overlays/01-8da4fb838757.png",
+          "bytes": 103286,
+          "fileSha256": "a8c4875e7d37a0fc08daead132073a0aba7eaba6c45885b73ac5081013ac9ece"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+          "state": "static",
+          "relativePath": "overlays/02-0f13452b2d0d.png",
+          "bytes": 109094,
+          "fileSha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+          "state": "static",
+          "relativePath": "overlays/03-d9cbbe6d5626.png",
+          "bytes": 109969,
+          "fileSha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+          "state": "stable",
+          "relativePath": "overlays/04-c4b6154f65f0-stable.png",
+          "bytes": 124582,
+          "fileSha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+          "state": "left-12",
+          "relativePath": "overlays/04-c4b6154f65f0-left-12.png",
+          "bytes": 124591,
+          "fileSha256": "1685491e9b0d7cc87a363d3bad836d58512c75c573b1cb5a19cc83817f55cb56"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+          "state": "right-12",
+          "relativePath": "overlays/04-c4b6154f65f0-right-12.png",
+          "bytes": 124528,
+          "fileSha256": "17cd682550bae3d076c2695730cd8c93cde0e366c2388f019726ef851cba1d5d"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+          "state": "left-8",
+          "relativePath": "overlays/04-c4b6154f65f0-left-8.png",
+          "bytes": 124566,
+          "fileSha256": "cf37cfbad17dfd2801be19eaff288f6bbe78ef0c93d628f647a8f8cc0852e268"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+          "state": "right-8",
+          "relativePath": "overlays/04-c4b6154f65f0-right-8.png",
+          "bytes": 124524,
+          "fileSha256": "4155a67c66d9e9a2276bd270cbcb78157b48c6336f5120c8c394770209f15267"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+          "state": "left-4",
+          "relativePath": "overlays/04-c4b6154f65f0-left-4.png",
+          "bytes": 124538,
+          "fileSha256": "a9b3d9067ef87b261fb3bc9c616bc71adc7e8173277254c03569446069725a64"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+          "state": "right-4",
+          "relativePath": "overlays/04-c4b6154f65f0-right-4.png",
+          "bytes": 124542,
+          "fileSha256": "14632f07544a55b779a441557554034bb426cd2d2235da17470f0fec5f937308"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000005",
+          "state": "static",
+          "relativePath": "overlays/05-d3cb7b1029d4.png",
+          "bytes": 65209,
+          "fileSha256": "02989dbda87e18443e3e414865d04e73ce4f9c6ca603ac778a65284b4f70e8cb"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000006",
+          "state": "static",
+          "relativePath": "overlays/06-245940ed77ce.png",
+          "bytes": 98186,
+          "fileSha256": "dd2b8aa9b29ab95d8d37b21e8e92ae83e74c415fb73447da9e168260edfd9582"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000007",
+          "state": "static",
+          "relativePath": "overlays/07-f33e63b13e46.png",
+          "bytes": 109062,
+          "fileSha256": "e7f1eeb939d58ab82bab3aa8d45225d978f9180a39f680b93720e1eb51a2229f"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000008",
+          "state": "static",
+          "relativePath": "overlays/08-e6df788e576d.png",
+          "bytes": 95104,
+          "fileSha256": "5dca655e0adea5738de9caf7dd40c5da2a4cb1fe67f8b8d4b9ec69c3e09d8b21"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+          "state": "static",
+          "relativePath": "overlays/09-70d128b99879.png",
+          "bytes": 143766,
+          "fileSha256": "7d277142ebcef5351d5e1adba58c9bb1b9426410ec78fd4d59d6b09c33c758fb"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+          "state": "static",
+          "relativePath": "overlays/10-aca83bb4e738.png",
+          "bytes": 93336,
+          "fileSha256": "87e11f8d572d53d2ce352befb96eb54d9d337a2152e83697b584e95815005f7f"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+          "state": "stable",
+          "relativePath": "overlays/11-9cd9ed60c47d-stable.png",
+          "bytes": 89754,
+          "fileSha256": "e4823c5ae9794209111e734b928e3f18697bc7e01e0be4ab7bf6edf48656fe80"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+          "state": "small",
+          "relativePath": "overlays/11-9cd9ed60c47d-small.png",
+          "bytes": 85596,
+          "fileSha256": "3e85ae092be337cd41f12fb3d3bd08a8784b1d8c914c4a916d15761c792150fe"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+          "state": "middle",
+          "relativePath": "overlays/11-9cd9ed60c47d-middle.png",
+          "bytes": 93756,
+          "fileSha256": "ecd4c25f0a8d16556397393b39f981cd4883e148f4f8a5d9d5a424a1a79a8da8"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000011",
+          "state": "maximum",
+          "relativePath": "overlays/11-9cd9ed60c47d-maximum.png",
+          "bytes": 98085,
+          "fileSha256": "d4e96c9761a9226a860f7c6ea5b5ee097b6cafd550a1149250e18e7a8181f3f4"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000012",
+          "state": "static",
+          "relativePath": "overlays/12-492788fc72d8.png",
+          "bytes": 131634,
+          "fileSha256": "57baab98c87a3921c562671dd30abc048a30da3394481d119dd489d8de2849e8"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000013",
+          "state": "static",
+          "relativePath": "overlays/13-77470d3ffecd.png",
+          "bytes": 124803,
+          "fileSha256": "92d665194b7eddeedb82a005a941719312a40791cb2e0530321faa71bc8d2a13"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+          "state": "static",
+          "relativePath": "overlays/14-1e8f237bba7d.png",
+          "bytes": 145587,
+          "fileSha256": "a112ccad4a581bf09bc95ad315894b74a6ef541903599ce69c3100de7937011a"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+          "state": "stable",
+          "relativePath": "overlays/15-0414b7991f3b-stable.png",
+          "bytes": 69656,
+          "fileSha256": "4ab20806476599fe7587b72cb35e5eee0c758ad6b823caa65c56dfdf0dea6b6b"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+          "state": "left-12",
+          "relativePath": "overlays/15-0414b7991f3b-left-12.png",
+          "bytes": 69691,
+          "fileSha256": "90d9a51451cc07beb772bae104de24863b2fd57fbf0425799b28df72a557d5ae"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+          "state": "right-12",
+          "relativePath": "overlays/15-0414b7991f3b-right-12.png",
+          "bytes": 69670,
+          "fileSha256": "211649c984cb990b1374e8e61f96cab4b3f288452703515edc398b804a1f2688"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+          "state": "left-8",
+          "relativePath": "overlays/15-0414b7991f3b-left-8.png",
+          "bytes": 69669,
+          "fileSha256": "d030a2caa48b985845e60b45dfbd143afab56b69c5a3686e9f72b9cb21a9b691"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+          "state": "right-8",
+          "relativePath": "overlays/15-0414b7991f3b-right-8.png",
+          "bytes": 69688,
+          "fileSha256": "13753bdfd757a844b669fcc4f5ad6cc65a7e3b86de17c3f2b4e1a941d0a3b12a"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+          "state": "left-4",
+          "relativePath": "overlays/15-0414b7991f3b-left-4.png",
+          "bytes": 69671,
+          "fileSha256": "3e69304e307bf2ecfade40d1f82c7f99847b4b801a1b34a5c74913600d44ea72"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000015",
+          "state": "right-4",
+          "relativePath": "overlays/15-0414b7991f3b-right-4.png",
+          "bytes": 69654,
+          "fileSha256": "c27b19d8fb16880dbbbee28ba0bc0a82020b3b05cd87750a3c613322d9f4d7dc"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000016",
+          "state": "static",
+          "relativePath": "overlays/16-a0a90c03372e.png",
+          "bytes": 73588,
+          "fileSha256": "6bda9a5dd6638c4e348e7cd96a79e7f9a1f2ff7f8279a9ccb19889c09225282f"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000017",
+          "state": "static",
+          "relativePath": "overlays/17-7bc5905812ef.png",
+          "bytes": 178758,
+          "fileSha256": "0af369eb7e72ec834e1194d1d7d2dfa6758db9263f7488a58f3bf18a84cd9f62"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000018",
+          "state": "static",
+          "relativePath": "overlays/18-78d0ddcb19f4.png",
+          "bytes": 111297,
+          "fileSha256": "f18ce9602742f150082e61a5da71577942d705a3d94736e714a9724c507c3b6b"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000019",
+          "state": "static",
+          "relativePath": "overlays/19-12b1411e2204.png",
+          "bytes": 213328,
+          "fileSha256": "af5fe5e568f1ab3ba6cafb47ee1df08c02a0af81fd5f2678271d0023e7deb349"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000020",
+          "state": "static",
+          "relativePath": "overlays/20-ca0aa971c7bf.png",
+          "bytes": 84494,
+          "fileSha256": "7ad0e37611c2ff45499686029f35a1de4d4efff8c5d0fba2bb1c70197e0647f0"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000021",
+          "state": "static",
+          "relativePath": "overlays/21-72ce2fa2d85c.png",
+          "bytes": 249048,
+          "fileSha256": "b424734f56fc08cc841167e9c65f75b5ca900ba23197c2147d81b8ed1ce3e05d"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000022",
+          "state": "static",
+          "relativePath": "overlays/22-b7e32fd19579.png",
+          "bytes": 78109,
+          "fileSha256": "852405822d3ac77d90bf88e4bad5542a271ca95f9c9a826a30ad4bdfac357937"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000023",
+          "state": "static",
+          "relativePath": "overlays/23-9a243f9d8325.png",
+          "bytes": 109671,
+          "fileSha256": "8831460cba949aa092e20d1d1b0fe3d12757f21d96524bb99a53c0ae88f4d506"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000024",
+          "state": "static",
+          "relativePath": "overlays/24-c31f33ba5e36.png",
+          "bytes": 104409,
+          "fileSha256": "a901ec284a331412ce5be4f7901d7d9f366b9e1ca64a134e4bdf2a4d82b5fd86"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000025",
+          "state": "static",
+          "relativePath": "overlays/25-83c37bc200d6.png",
+          "bytes": 197108,
+          "fileSha256": "fc3c0b5bbc7324ef593b502c16716a10585686ebef8026233777ee04893741a6"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000026",
+          "state": "static",
+          "relativePath": "overlays/26-9849d7e52178.png",
+          "bytes": 142906,
+          "fileSha256": "e15aa00d4f1456d8020255402f72c9769a7ff929db261b21c03cec37ebac6de7"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000027",
+          "state": "static",
+          "relativePath": "overlays/27-2eaea633e516.png",
+          "bytes": 117999,
+          "fileSha256": "121a4a7d5e9e85e0ee55ffd2e1dc4750e5f1c14a781e4e77d9e9285609056c89"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000028",
+          "state": "static",
+          "relativePath": "overlays/28-640f2303386f.png",
+          "bytes": 238586,
+          "fileSha256": "db329b77ab128de9ebfe7b4e019f2d2f3a3ce42bcc7c9179fdcb3d8d24461b16"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000029",
+          "state": "static",
+          "relativePath": "overlays/29-60d3aa5ca7e7.png",
+          "bytes": 231321,
+          "fileSha256": "14b22fc2cbbd81c07cb290382846a0a6070c7e4e2e3703ee61cd3c6caa181b5a"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000030",
+          "state": "static",
+          "relativePath": "overlays/30-d9b21771088b.png",
+          "bytes": 227272,
+          "fileSha256": "e7f540d5a6cb34cde8de20857d8b0c2c1c0762ff74f506fa33a073f95c547f3d"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000031",
+          "state": "static",
+          "relativePath": "overlays/31-b3c3bafde2f0.png",
+          "bytes": 103084,
+          "fileSha256": "1c9303f8afadd9ad72f482ae821671c93dd1600359ce32ad5e1573142f092ff5"
+        },
+        {
+          "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000032",
+          "state": "static",
+          "relativePath": "overlays/32-53cd278daf38.png",
+          "bytes": 100179,
+          "fileSha256": "3deca19b23d9d264b76d81c23002056941136881b2fce9807ff39f2bd76372f3"
+        }
+      ]
+    },
+    "publication": {
+      "status": "published",
+      "outputDirectory": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/render-v002"
+    },
+    "retainedWorkWarnings": [
+      {
+        "code": "RENDER_OUTPUT_LOCK_RETAINED_FOR_SAFETY",
+        "path": "evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/.render-v002.presentation-renderer-v002.lock",
+        "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+      },
+      {
+        "code": "RENDER_OUTPUT_WORK_RETAINED_FOR_SAFETY",
+        "path": "evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/.render-v002.presentation-renderer-v002-work-snEBrQ",
+        "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+      }
+    ],
+    "humanQuality": "not-evaluated",
+    "automaticSelectionQuality": "not-evaluated",
+    "paidApiCallsDuringCandidateRun": 0,
+    "newExternalMediaTransfers": 0,
+    "finalOriginalTreePreservationAfterPush": {
+      "status": "passed",
+      "evidence": "originalTreePreservationAfterPush",
+      "recordedAt": "2026-09-17T16:29:15.005461+00:00",
+      "records": [
+        {
+          "name": "original-status.z",
+          "bytes": 10693537,
+          "sha256": "3d2edf1b0683e8c76d59baf100b59fcf6658e2d3d799a0b3ceebc1dfa3441b3b",
+          "unchanged": true
+        },
+        {
+          "name": "original-tracked.diff",
+          "bytes": 2604,
+          "sha256": "3e7877a0bee01a6796a7444aa3570fb6d1d3b390b902c3a3112084f92ee2c2bb",
+          "unchanged": true
+        },
+        {
+          "name": "original-staged.diff",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "unchanged": true
+        },
+        {
+          "name": "original-head.txt",
+          "bytes": 41,
+          "sha256": "203125c151b0a38e636ce58c4baa9228f845e0dc5d5f95dff0ec94a3dc6d1646",
+          "unchanged": true
+        },
+        {
+          "name": "original-branch.txt",
+          "bytes": 27,
+          "sha256": "d2d293869d375ba9ef2c557cb5e2c39dcf4bbf5136ef43bda0e7219679658458",
+          "unchanged": true
+        }
+      ],
+      "meaning": "元workspaceのHEAD・branch・追跡差分・staged差分・未追跡一覧が開始時と一致。未追跡本文の全件hash検査ではない。"
+    }
+  },
+  "rawEvidence": {
+    "storageAndCliLog": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/storage-selection-verification-v001/storage-and-cli.tap",
+      "bytes": 40840,
+      "fileSha256": "1027c70e41533f4e4c1c2d9419983296d591c9d3a1e542937048d8895d2e5fa4"
+    },
+    "automaticSelectionLog": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/storage-selection-verification-v001/ai-selection.tap",
+      "bytes": 18908,
+      "fileSha256": "913b266f760d0d813a2b8c56b8bdba815e01de07ad643ea3a294e722413056eb"
+    },
+    "combinedQcLog": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/qc-owned-tests-node20-v001.tap",
+      "bytes": 16559,
+      "fileSha256": "f9a6647a8ee325fe0a355d8b33bb74c2238eb8b0c05e1c967970a8e868aa3732"
+    },
+    "motionAndPulseLog": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-pulse-regression-node20-v001.tap",
+      "bytes": 3084,
+      "fileSha256": "11c3468f3de52b6b5006853a8dd549db083543ab019dec3451e802977939f7e5"
+    },
+    "existingRasterLog": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/existing-raster-regression-v001.tap",
+      "bytes": 4546,
+      "fileSha256": "f24210b8392b964d22dbed604733429c276f9916522a54e45636f4f934822f80"
+    },
+    "automaticRendererLog": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/auto-renderer-regression-v001.tap",
+      "bytes": 1611,
+      "fileSha256": "7bd83d87da8a3e8c32930511161cd811aa84a9bb2d2009631133f6bca4a6c116"
+    },
+    "nativeMotionLog": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002.tap",
+      "bytes": 411,
+      "fileSha256": "8e1154b3a83a5849a25a63390f2e079628a73062533dcbcf2130194005ad9219"
+    },
+    "storageVerification": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/storage-selection-verification-v001/verification.json",
+      "bytes": 5262,
+      "fileSha256": "f0dd4efd6670da350d9f61c0166ddcd401489a6a68db0bed81da2b1aea98d2df"
+    },
+    "inputPreparation": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/inputs-v001/preparation.json",
+      "bytes": 10262,
+      "fileSha256": "fc9f80606eef9837482f52699bcc70f5383a1d41af1e3304171931673a4db22a"
+    },
+    "judgmentValidation": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/judgment-v001/validation.json",
+      "bytes": 1402,
+      "fileSha256": "9f49cfe97cd1d6f587d2fe40ece192588033fec6fc4897c51c88d82b9cd64e5b"
+    },
+    "judgmentRequest": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/judgment-v001/request.json",
+      "bytes": 423351,
+      "fileSha256": "87b2043bc78d241816500dfda0fdd474edeab4a872cb5accdeeae4b79801a447"
+    },
+    "judgmentResult": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/judgment-v001/result.json",
+      "bytes": 53491,
+      "fileSha256": "6f017c9640b671afbb724f28a692776a302e59730daf2e1838f06416aa7f075c"
+    },
+    "fixedAutomaticProposal": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/judgment-v001/fixed-auto.json",
+      "bytes": 42799,
+      "fileSha256": "1392edbad1ac7063aecbccb60b2bb0da245e4d64eb512134c7e79f165381bb7e"
+    },
+    "nativeCommonRender": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/common-render-result.json",
+      "bytes": 5710546,
+      "fileSha256": "4e3ddc460a7069013b32105b39c42fd624830b656aef03f2106acd34501b0db9"
+    },
+    "nativeMeasurement": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/measurement.json",
+      "bytes": 2553589,
+      "fileSha256": "a9fec24bfaca95a3c041ca4bad52a4c01eb03ee70df5ae1584f316fe3099dc95"
+    },
+    "nativeTestSource": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/presentation_caption_motion_renderer_native_v001.test.mjs",
+      "bytes": 21723,
+      "fileSha256": "230686525d768c0d537c1a02c4df6d671ca948df4819a2310195996ea7397321"
+    },
+    "fault-bounce-no-motion": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/bounce-no-motion-qc.json",
+      "bytes": 308516,
+      "fileSha256": "e5476ac6c0d1c4b148f441b1bfa1fee716b133c58f54e85b5d9b2e57e11e71fa"
+    },
+    "fault-bounce-late": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/bounce-late-qc.json",
+      "bytes": 308144,
+      "fileSha256": "8af0118b604c4469cfa531da2c43de7e48d7566aafed8e3c025dcf6bcbff1a36"
+    },
+    "fault-bounce-no-return": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/bounce-no-return-qc.json",
+      "bytes": 308522,
+      "fileSha256": "88edd1a1619565c01baabc14aeca0ea38cdc6ef40ff783724b962935c44d150f"
+    },
+    "fault-shake-no-motion": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/shake-no-motion-qc.json",
+      "bytes": 307010,
+      "fileSha256": "07fccf4ac248941490c007c777d5d859702f3fb82a230971eb4c003adbd8e4c8"
+    },
+    "fault-shake-late": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/shake-late-qc.json",
+      "bytes": 306657,
+      "fileSha256": "3c54214a70e4456a663bb55c86ce4c9f63b7865b3eecfabed9e939a38d112287"
+    },
+    "fault-shake-no-return": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/shake-no-return-qc.json",
+      "bytes": 307034,
+      "fileSha256": "456444271854b966308521433d6339c4aceb49e193f0d2cea5a2ba78e7e7486b"
+    },
+    "layout-bounce": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/bounce-layout.json",
+      "bytes": 1772,
+      "fileSha256": "84813bc8a82de35617902e2baf6ee4bf88cb9207ac84b13aa94884feac7fcf8a"
+    },
+    "layout-shake": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/shake-layout.json",
+      "bytes": 3701,
+      "fileSha256": "dcb8fc4d2c3f2e4d1d2fa1ccb98113d710615298c9ec57ff7a946906d477d167"
+    },
+    "layout-wide-stable": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/wide-stable-layout.json",
+      "bytes": 670,
+      "fileSha256": "ea5f1483dadb1dd8e38563c82f3bc4b674e8805984664b1a23fc47df4618985f"
+    },
+    "layout-wide-maximum": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/wide-maximum-layout.json",
+      "bytes": 1255,
+      "fileSha256": "a89f4b675eca1f6c1ee263e9a4a26fed14b2a92877ce852b44b7e2cb3e76ab85"
+    },
+    "layout-two-line-collision": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/two-line-collision-layout.json",
+      "bytes": 3213,
+      "fileSha256": "b5afbdf0517ba481d498dba9063315351c2db1e4d5fdaed0cb992bde9c95655f"
+    },
+    "layout-clamp": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/motion-native-v002/clamp-layout.json",
+      "bytes": 3702,
+      "fileSha256": "ccf9554981b9452985b25b5f84af7c18fffc160dcf11a7a8ba9f9cfa70276947"
+    },
+    "realCaptionEditCompletion": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/real-caption-edit-check-v003/completion.json",
+      "bytes": 21137,
+      "fileSha256": "4a0c0cf6f4a6e6cd5f6b47f596f7688e2f6f38d26ea74ea2f121c7d3d624e2b9"
+    },
+    "originalTreePreservation": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v001/verification.json",
+      "bytes": 987,
+      "fileSha256": "5955499f7387501fcf1cc1cb3782258bbf1c52b9b8b5fb422153d14c94708983"
+    },
+    "fullCandidateCompletion": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/candidate-v002/completion.json",
+      "bytes": 100025168,
+      "fileSha256": "ce450ae9c8607afd6459e98a30e0cc5d25d37d8b28d6eeadfccdc455de8b0da6"
+    },
+    "fullCandidateDrawResult": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/candidate-v002/draw-result.json",
+      "bytes": 131240757,
+      "fileSha256": "f1489c5022307bcd9c8b0b475b0ed1c92e0def7238e863b762868d44414eede2"
+    },
+    "fullCandidateVideo": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/worktree/evals/clip_composition/outputs/presentation/stage1-caption-expression-20260918-v001/render-v002/presentation-rendered-v002.mp4",
+      "bytes": 75378768,
+      "fileSha256": "36f3863fdd3c3c601459d5b5547e1a7c3df014dd8b026c3570c31d176a3e405b"
+    },
+    "fullCandidateStart": {
+      "path": "/private/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/candidate-v002/start.json",
+      "bytes": 11443,
+      "fileSha256": "7d66b4481619c576940b786bfe76e78af4bc62978d900a06351e4adb2ea675c3"
+    },
+    "originalTreePreservationAfterPush": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v002/verification.json",
+      "bytes": 987,
+      "fileSha256": "188f4c96623dd2cee08a001914af69d7910b08e1c641c2797ebcff8b3091e8c1"
+    },
+    "checkpointRemoteReadback": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/checkpoint-v001-remote-readback.json",
+      "bytes": 3409,
+      "fileSha256": "78b7aaa37478db0b632b9d4207808bc3e08d80fa1a46a1bafa646ac21847f550"
+    },
+    "advisorAuditResult": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/advisor-audit-result-v001.json",
+      "bytes": 2638,
+      "fileSha256": "91ac135fbd7dd868f0895918a60da4a6247bd2dd431dbba1d7af6b8e3107ea90"
+    },
+    "receivedNextWorkOrder": {
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/received-stage2-work-order-v001.md",
+      "bytes": 24404,
+      "fileSha256": "a5d36cab441558c53f274ab84d7cb05e7c251511d820a6b5da52b7f33bf17982"
+    }
+  },
+  "fullCandidateEvidenceUpdatedAt": "2026-09-17T16:27:01.294Z",
+  "checkpoint": {
+    "status": "passed",
+    "recordedAt": "2026-09-17T16:30:30.581655+00:00",
+    "branch": "codex/digest-caption-expression-stage1",
+    "base": "43a9382bdac0dd2881777f2cd442c21158173da9",
+    "checkpoint": "53c25d3a1f51e1154524e9f4ea271ff4ac296ddf",
+    "remoteReadback": {
+      "command": "git ls-remote --heads origin refs/heads/codex/digest-caption-expression-stage1",
+      "exitCode": 0,
+      "stdout": "53c25d3a1f51e1154524e9f4ea271ff4ac296ddf\trefs/heads/codex/digest-caption-expression-stage1\n",
+      "commitMatches": true
+    },
+    "selectedFiles": [
+      "docs/reports/digest-caption-expression-catalogue-20260918.md",
+      "docs/reports/digest-caption-expression-stage1-20260918.md",
+      "docs/reports/digest-caption-expression-stage1-evidence-20260918.json",
+      "docs/reports/digest-caption-expression-stage1-sources-20260918/implementation-instructions-v001.md",
+      "docs/reports/digest-caption-expression-stage1-sources-20260918/parent-plan-v001.md",
+      "evals/clip_composition/caption_expression_stage1_candidate_v001.mjs",
+      "evals/clip_composition/caption_expression_stage1_edit_check_v001.mjs",
+      "evals/clip_composition/caption_expression_stage1_prepare_v001.mts",
+      "evals/clip_composition/edit_auto_presentation_v001.mjs",
+      "evals/clip_composition/edit_auto_presentation_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_io_v001.mjs",
+      "evals/clip_composition/presentation_auto_effects_io_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_motion_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_panel_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_partial_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_pulse_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_renderer_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_span_v001.test.mjs",
+      "evals/clip_composition/presentation_auto_effects_v001.mjs",
+      "evals/clip_composition/presentation_auto_effects_v001.test.mjs",
+      "evals/clip_composition/presentation_caption_motion_renderer_native_v001.test.mjs",
+      "evals/clip_composition/presentation_caption_motion_renderer_v001.test.mjs",
+      "evals/clip_composition/presentation_caption_motion_v001.mjs",
+      "evals/clip_composition/presentation_caption_motion_v001.test.mjs",
+      "evals/clip_composition/presentation_exact_replay_qc_v001.mjs",
+      "evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs",
+      "evals/clip_composition/presentation_focus_selection_v001.mts",
+      "evals/clip_composition/presentation_focus_selection_v001.test.mts",
+      "evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+      "evals/clip_composition/presentation_native_frame_qc_preparation_v001.test.mjs",
+      "evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "evals/clip_composition/presentation_native_frame_qc_v001.test.mjs",
+      "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "evals/clip_composition/prompts/presentation_focus_selection_v001.md",
+      "evals/clip_composition/render_presentation_v002.mjs",
+      "packages/shared/src/auto-presentation.ts",
+      "runner/src/skills/presentation-focus-selection-v001.ts"
+    ],
+    "originalTreePreservation": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/original-tree-preservation-v002/verification.json",
+    "selectedFileCount": 37,
+    "evidence": "checkpointRemoteReadback"
+  },
+  "advisorAudit": {
+    "status": "accepted-technical-first-completion",
+    "submittedCheckpoint": "93a8a551a625f50b4d2c7c64ab13af5ca384ba5d",
+    "requiredRevisions": [],
+    "conversationUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6aa7f7e5-03d8-83ee-aae1-6c4b66fb8303",
+    "conversationTitle": "ZEV相談役 - ZEV Build Loop",
+    "modelConditionSpecified": false,
+    "selectedModelMaintained": "6 Pro",
+    "auditRequestSent": true,
+    "nextTaskRequestSent": true,
+    "replyGenerationComplete": true,
+    "responseConfirmedAt": "2026-09-17T16:46:24.734953+00:00",
+    "sendCount": 1,
+    "refreshCount": 0,
+    "regenerationCount": 0,
+    "scope": "指定commitの差分、主要実装、試験定義、軽量証拠、報告、remote branchを照合。ローカル動画の再生、生ログの再実行、媒体の再hashは相談役環境では実施していない。",
+    "notAdoptedByThisAudit": [
+      "人間の見心地",
+      "正式名称・デザイン採用",
+      "通常file入口の正式受入",
+      "正式trust再発行"
+    ],
+    "nextWorkOrder": {
+      "title": "23_ZEV_工程II_接続表現拡張_Codex実装指示書_2026-09-18_v001.md",
+      "url": "https://drive.google.com/file/d/1vEpJmKmVSZkCQRM_XCza09jyA5sbxIt-/view",
+      "path": "/var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev-caption-stage1-en1loox_/received-stage2-work-order-v001.md",
+      "bytes": 24404,
+      "fileSha256": "a5d36cab441558c53f274ab84d7cb05e7c251511d820a6b5da52b7f33bf17982",
+      "readInFull": true,
+      "implementationStarted": false
+    },
+    "evidence": "advisorAuditResult"
+  }
+}

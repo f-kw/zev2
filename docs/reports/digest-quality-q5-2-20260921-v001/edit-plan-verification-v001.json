@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "q5-2-edit-plan-verification-v001",
+  "status": "passed",
+  "command": {
+    "executable": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "args": [
+      "--test",
+      "tools/digest-quality/q5-2-edit-plan.test.mjs"
+    ],
+    "workingDirectory": "/private/tmp/zev-stage4-editing-20260918/worktree"
+  },
+  "exitCode": 0,
+  "summary": {
+    "tests": 10,
+    "passed": 10,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 406.263833,
+    "realCAllInputTestIncluded": true
+  },
+  "implementationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-2-edit-plan.mjs",
+    "bytes": 32036,
+    "fileSha256": "6c367a5a525de1a23730b8f20468a5479d249bd1d98a9a0bae0c5ef320f7ba63"
+  },
+  "testRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-2-edit-plan.test.mjs",
+    "bytes": 19525,
+    "fileSha256": "ffac1d9e27fff909f0ec59870bd7ca334eb7bef69767745cea98b45b6fbc0622"
+  },
+  "tapRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-2-20260921-v001/edit-plan-tests-v001.tap",
+    "bytes": 2729,
+    "fileSha256": "8cd77287acd85066400fface67f1c40d59c6583c7f6a583c04470b57eeaadb8c"
+  },
+  "recording": {
+    "method": "post-execution-verbatim-transcription-of-existing-command-output",
+    "description": "既存の成功した実行結果に残るTAP全出力を、実行後にそのまま転記した。保存のための再実行はしていない。",
+    "preExecutionSealingClaimed": false,
+    "rerunForRecordCreation": false,
+    "outputTruncationObserved": false,
+    "separateStdoutAndStderrFilesCaptured": false,
+    "sourceAndTestHashes": "実行後に計算した実装・試験SHAを、今回の記録作成時にも再照合して一致した。実行時の事前封印とは扱わない。"
+  }
+}

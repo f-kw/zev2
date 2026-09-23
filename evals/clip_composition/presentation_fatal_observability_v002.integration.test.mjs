@@ -1114,8 +1114,9 @@ test('FOVI006: export欠落はcrop検査段階の安全な観測へ写せる', a
   assert.equal(value.innerCode, 'REQUIRED_EXPORT_MISSING');
 });
 
-test('FOVI007: 描画指示欠落はQC失敗のままfatal専用語彙へ混入しない', () => {
+test('FOVI007: 指示適用だけのQCで描画指示欠落をfatal専用語彙へ混入させない', () => {
   const qc = evaluatePresentationRendererQcV002({
+    requireFinalVisibility: false,
     plan: {elements: [{instructionId: 'instruction-000001'}]},
     applicationResults: [],
     overlayInspections: [],

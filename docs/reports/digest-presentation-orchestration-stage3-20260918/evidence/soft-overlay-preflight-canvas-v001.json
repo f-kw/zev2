@@ -1,0 +1,28 @@
+{
+  "scope": "pure helper preflight; no media probe executed",
+  "viewRef": {
+    "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/orchestration-view-v001.json",
+    "fileSha256": "5a81f3733110cbb4c43da532b480579cbb398fcea17340c367d0928c6b9e271a"
+  },
+  "observedCanvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "safeAreaPx": {
+      "top": 40,
+      "right": 80,
+      "bottom": 40,
+      "left": 80
+    }
+  },
+  "requiredCanvasKeys": [
+    "width",
+    "height",
+    "fps"
+  ],
+  "error": {
+    "name": "TypeError",
+    "message": "CONNECTION_EXPRESSION_INVALID: canvas fields"
+  },
+  "proposedFix": "Pass only width, height and fps into the existing connection filter builder."
+}

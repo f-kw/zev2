@@ -1,0 +1,753 @@
+{
+  "schemaVersion": "q5-3-technical-verification-v001",
+  "recordedAt": "2026-09-21T02:47:09.992Z",
+  "status": "technical-complete-awaiting-final-audit-and-real-adoption-choice",
+  "baselineCheckpoint": "e0b58a45f5ca272d49b369c36932267f2413e03c",
+  "authorityRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/authority-receipt-v001.md",
+    "bytes": 5205,
+    "fileSha256": "dc021102e192113e3409cb18314039b13a19c966e047603a983a15eb910c5db6"
+  },
+  "catalogRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/fixed-catalog-v001.json",
+    "bytes": 4093,
+    "fileSha256": "d7d8d9fdc474bc239523fecef49c0fd24eb32db98af88eebab61cce880272c08"
+  },
+  "implementationRefs": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-edit-plan.mjs",
+      "bytes": 26817,
+      "fileSha256": "b59080904369f9189166d9cd42a5b2d5980522c65ba5346b11a74ab8cd7ccba7"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-edit-plan.test.mjs",
+      "bytes": 25882,
+      "fileSha256": "8b98833b84761326fc6fd458aef8b95d2fc0dec6c9a836d897464dd68ec3022a"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-reuse.mjs",
+      "bytes": 23468,
+      "fileSha256": "7f12b9d6f2d59991ae77c375f609dd2c38fbfca7479f61c1c1a97e3c54c9afb9"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-reuse.test.mjs",
+      "bytes": 10609,
+      "fileSha256": "ac4f09c92eb55a734192ddf070610fb5ecc64bce645c40381c69aa34b964dfa2"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-store.mjs",
+      "bytes": 17368,
+      "fileSha256": "4df32dbd39de5f40834852d61c23fde41e6009c67d47e17048882251758ef85d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-run.mjs",
+      "bytes": 1754,
+      "fileSha256": "8f7304d54a779718b0dcbd5197bef67e4be1e97d05c96efa88777e995abdfa8c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/q5-3-run.test.mjs",
+      "bytes": 11484,
+      "fileSha256": "17d16435325dde010bdd3e02103ee028983af2ae2bd66261fa135199fa61086c"
+    }
+  ],
+  "tests": [
+    {
+      "ref": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/core-tests-v001.tap",
+        "bytes": 3120,
+        "fileSha256": "f38f3ea403a698c1839e2f887ded5b4cd93274c70b142531e49ac997fba85cb1"
+      },
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "ref": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/reuse-tests-v003.tap",
+        "bytes": 1830,
+        "fileSha256": "d27d0f97bc1fb8c76aeb56c9b4e58a9c942159d80f3e1d76500d78b5797eb24b"
+      },
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "ref": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/cli-tests-v003.tap",
+        "bytes": 1371,
+        "fileSha256": "f56faf35e84f2bfa71d351856f13d454460824f4a8d35b496f89cd18ed655637"
+      },
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "uniqueTestGroups": 21,
+  "reuseNegativeCasesWithinSixGroups": 48,
+  "realEntryObservationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/observations.json",
+    "bytes": 156507,
+    "fileSha256": "03db489f1a5f0ea1ff22d5741bff6eab63312f45f207c0aca6fd05d6c5ae0c03"
+  },
+  "orderAndStaleObservationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/order-and-stale/observations.json",
+    "bytes": 4273,
+    "fileSha256": "789e0e9bedfa23f8780e0a597e7751ca0094bcf8b34cccba0777ef2a1fea239e"
+  },
+  "competingSaveObservationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/competing-saves/observations.json",
+    "bytes": 2366,
+    "fileSha256": "072ddce7fd22b4ed8f24b8d67bfa85c0db07f602d6e8e17e2d6e4033b737a264"
+  },
+  "changedFilesObservationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/changed-files/observations.json",
+    "bytes": 1432,
+    "fileSha256": "905f6132e5cc0b23361a9310ba76964ee2e9fb68a2cea8dd66c17325e8e1933d"
+  },
+  "states": [
+    {
+      "state": "none",
+      "selection": {
+        "omit": false,
+        "add": false
+      },
+      "selectionProvenance": {
+        "omit": {
+          "kind": "default-disabled",
+          "statement": "Initial disabled state; no human selection or adoption."
+        },
+        "add": {
+          "kind": "default-disabled",
+          "statement": "Initial disabled state; no human selection or adoption."
+        }
+      },
+      "contentVersion": "digest-v1-phase2-completed-20260914-v001",
+      "frameCount": 44408,
+      "captionCount": 325,
+      "retainedSceneCount": 12,
+      "physicalPieceCount": 12,
+      "playbackSampleCount": 71052800,
+      "files": {
+        "catalog": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/none/catalog.json",
+          "bytes": 4093,
+          "fileSha256": "d7d8d9fdc474bc239523fecef49c0fd24eb32db98af88eebab61cce880272c08"
+        },
+        "selection": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/none/selection.json",
+          "bytes": 777,
+          "fileSha256": "672dee5196b79161416cf429d2144aa49cc22775b2849484ba2eb3bbfc5dbb42"
+        },
+        "resolved": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/none/resolved.json",
+          "bytes": 2568275,
+          "fileSha256": "a77c3a84d39340255f2d842832000158ddc885f87c58ba966c5cb544ef51faa4"
+        },
+        "review-targets": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/none/review-targets.json",
+          "bytes": 3866,
+          "fileSha256": "9d344f539a41c493a6a4a766857d74e955022bc699fc940d9f365f4e901b8ccb"
+        },
+        "reuse-bindings": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/none/reuse-bindings.json",
+          "bytes": 2568,
+          "fileSha256": "aa8b417bdfbb4bad0538c96ca40a8016ebc628c5e561de75836a2ce6584aecbd"
+        }
+      },
+      "saveProcessId": 45576,
+      "acquireProcessId": 45582,
+      "separateVerificationProcessId": 45583,
+      "media": []
+    },
+    {
+      "state": "omit",
+      "selection": {
+        "omit": true,
+        "add": false
+      },
+      "selectionProvenance": {
+        "omit": {
+          "kind": "technical-fixture",
+          "statement": "Omission selected only for technical verification."
+        },
+        "add": {
+          "kind": "default-disabled",
+          "statement": "Initial disabled state; no human selection or adoption."
+        }
+      },
+      "contentVersion": "q5-3-content-v001-f4dc4f5eed7e382143a57250446a4f8dbf38fee86cf2d96b03c22b826b3904d4",
+      "frameCount": 44349,
+      "captionCount": 324,
+      "retainedSceneCount": 12,
+      "physicalPieceCount": 13,
+      "playbackSampleCount": 70958400,
+      "files": {
+        "catalog": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/omit/catalog.json",
+          "bytes": 4093,
+          "fileSha256": "d7d8d9fdc474bc239523fecef49c0fd24eb32db98af88eebab61cce880272c08"
+        },
+        "selection": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/omit/selection.json",
+          "bytes": 772,
+          "fileSha256": "ca8f77638c92d4b55a7844b349ac40d8125c693dc2e3b6a5265fc9fb03ab19dd"
+        },
+        "resolved": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/omit/resolved.json",
+          "bytes": 2579857,
+          "fileSha256": "22fc5f506b0743e7ed1d7f693040373d394195f035ad0404a96877f25573287a"
+        },
+        "review-targets": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/omit/review-targets.json",
+          "bytes": 3866,
+          "fileSha256": "9d344f539a41c493a6a4a766857d74e955022bc699fc940d9f365f4e901b8ccb"
+        },
+        "reuse-bindings": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/omit/reuse-bindings.json",
+          "bytes": 31710,
+          "fileSha256": "92cfd49309b9ea7dc95a8ab90bd5769618c3a9ee68d8a0bbb6655e92ebcb6007"
+        }
+      },
+      "saveProcessId": 45589,
+      "acquireProcessId": 45591,
+      "separateVerificationProcessId": 45592,
+      "media": [
+        {
+          "candidate": "omit",
+          "candidateId": "q5-1-candidate-001",
+          "newGlobalRange": {
+            "startFrame": 11683,
+            "endFrameExclusive": 12446
+          },
+          "mediaLocalRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 763
+          },
+          "mediaRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+            "bytes": 8591313,
+            "fileSha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6"
+          },
+          "originalArtifactContentVersion": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+          "originalArtifactGlobalRange": {
+            "startFrame": 11683,
+            "endFrameExclusive": 12446
+          },
+          "originalCompletionRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/completion.json",
+            "bytes": 2108579,
+            "fileSha256": "95508900b9ba5d36b2cea6b021bb44f376d622338ca632e2942d4b704af4ef02"
+          },
+          "frameCount": 763,
+          "captionCount": 5,
+          "normalPlanSha256": "8e3c637d0891746be69ff9dda026eaac9e125cc73bde0a55e00b2234375ba5b5",
+          "drawingRulesSha256": "0e7ec69612dd7040aabc78a6bcdb4626aac84e72df1f2a59cfc24b0b3b81d942",
+          "logicalAudioSamples": 1220800,
+          "primingSkipSamples": 1024,
+          "decodedTailSampleCount": 832,
+          "mode": "reuse-existing-media",
+          "mediaGenerated": false,
+          "historicalQcReexecuted": false
+        }
+      ]
+    },
+    {
+      "state": "both",
+      "selection": {
+        "omit": true,
+        "add": true
+      },
+      "selectionProvenance": {
+        "omit": {
+          "kind": "technical-fixture",
+          "statement": "Omission selected only for technical verification."
+        },
+        "add": {
+          "kind": "technical-fixture",
+          "statement": "Introduction selected only for technical verification."
+        }
+      },
+      "contentVersion": "q5-3-content-v001-d2d9c9a351f96f6974d4c7f1d8b021907fe409984c79523c346b3797e6a6bbe3",
+      "frameCount": 44694,
+      "captionCount": 327,
+      "retainedSceneCount": 12,
+      "physicalPieceCount": 14,
+      "playbackSampleCount": 71510400,
+      "files": {
+        "catalog": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/both/catalog.json",
+          "bytes": 4093,
+          "fileSha256": "d7d8d9fdc474bc239523fecef49c0fd24eb32db98af88eebab61cce880272c08"
+        },
+        "selection": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/both/selection.json",
+          "bytes": 771,
+          "fileSha256": "bfa3cd45fdc309c0b48bcbb768a49f8ec7ced7ac8ed4f3a2e1baaa8ed1fa0e52"
+        },
+        "resolved": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/both/resolved.json",
+          "bytes": 2602404,
+          "fileSha256": "99d4da7c04ca0216204dd1af509d33525b0ffb029fcc43e81ab65785339ad277"
+        },
+        "review-targets": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/both/review-targets.json",
+          "bytes": 3866,
+          "fileSha256": "9d344f539a41c493a6a4a766857d74e955022bc699fc940d9f365f4e901b8ccb"
+        },
+        "reuse-bindings": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/both/reuse-bindings.json",
+          "bytes": 44844,
+          "fileSha256": "946ef318fcb4dc2a2989104792f17f3dfb62bfcd8d3a2693c4f31c1be4e13dc4"
+        }
+      },
+      "saveProcessId": 45593,
+      "acquireProcessId": 45595,
+      "separateVerificationProcessId": 45596,
+      "media": [
+        {
+          "candidate": "omit",
+          "candidateId": "q5-1-candidate-001",
+          "newGlobalRange": {
+            "startFrame": 11683,
+            "endFrameExclusive": 12446
+          },
+          "mediaLocalRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 763
+          },
+          "mediaRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+            "bytes": 8591313,
+            "fileSha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6"
+          },
+          "originalArtifactContentVersion": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+          "originalArtifactGlobalRange": {
+            "startFrame": 11683,
+            "endFrameExclusive": 12446
+          },
+          "originalCompletionRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/render-evidence-v003/completion.json",
+            "bytes": 2108579,
+            "fileSha256": "95508900b9ba5d36b2cea6b021bb44f376d622338ca632e2942d4b704af4ef02"
+          },
+          "frameCount": 763,
+          "captionCount": 5,
+          "normalPlanSha256": "8e3c637d0891746be69ff9dda026eaac9e125cc73bde0a55e00b2234375ba5b5",
+          "drawingRulesSha256": "0e7ec69612dd7040aabc78a6bcdb4626aac84e72df1f2a59cfc24b0b3b81d942",
+          "logicalAudioSamples": 1220800,
+          "primingSkipSamples": 1024,
+          "decodedTailSampleCount": 832,
+          "mode": "reuse-existing-media",
+          "mediaGenerated": false,
+          "historicalQcReexecuted": false
+        },
+        {
+          "candidate": "add",
+          "candidateId": "Q5-2-C001",
+          "newGlobalRange": {
+            "startFrame": 18519,
+            "endFrameExclusive": 19143
+          },
+          "mediaLocalRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 624
+          },
+          "mediaRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/after-render-v002/presentation-rendered-v002.mp4",
+            "bytes": 14839099,
+            "fileSha256": "98d73010ebfa93bf9b094781e279d705f51771d295ae3fbc9fe78d1f0f365737"
+          },
+          "originalArtifactContentVersion": "q5-2-content-v001-94698bac280a5fef2bab4d07b23eefbf519e7a5e43aa69f4287b0e5258bd1898",
+          "originalArtifactGlobalRange": {
+            "startFrame": 18578,
+            "endFrameExclusive": 19202
+          },
+          "originalCompletionRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-evidence-v002/completion.json",
+            "bytes": 2546089,
+            "fileSha256": "9cb36e7578b27ecec951c1de16d82009617491779d942e2b548788b4f68f1d8a"
+          },
+          "frameCount": 624,
+          "captionCount": 6,
+          "normalPlanSha256": "0b2512a10dda8bd4b5706a8866d84392621e4969b2782a8dd869569bc1fa2c6d",
+          "drawingRulesSha256": "0e7ec69612dd7040aabc78a6bcdb4626aac84e72df1f2a59cfc24b0b3b81d942",
+          "logicalAudioSamples": 998400,
+          "primingSkipSamples": 1024,
+          "decodedTailSampleCount": 0,
+          "mode": "reuse-existing-media",
+          "mediaGenerated": false,
+          "historicalQcReexecuted": false
+        }
+      ]
+    },
+    {
+      "state": "add",
+      "selection": {
+        "omit": false,
+        "add": true
+      },
+      "selectionProvenance": {
+        "omit": {
+          "kind": "technical-fixture",
+          "statement": "Explicit Q5-3 development verification; no human adoption."
+        },
+        "add": {
+          "kind": "technical-fixture",
+          "statement": "Introduction selected only for technical verification."
+        }
+      },
+      "contentVersion": "q5-3-content-v001-4340191fcd3b24c2fcd8af633846342b001fc09f26c5a6e95568979c737b12ef",
+      "frameCount": 44753,
+      "captionCount": 328,
+      "retainedSceneCount": 12,
+      "physicalPieceCount": 13,
+      "playbackSampleCount": 71604800,
+      "files": {
+        "catalog": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/add/catalog.json",
+          "bytes": 4093,
+          "fileSha256": "d7d8d9fdc474bc239523fecef49c0fd24eb32db98af88eebab61cce880272c08"
+        },
+        "selection": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/add/selection.json",
+          "bytes": 780,
+          "fileSha256": "faecfc547dc48b55819ddb3b5f8dde029c12af5f3c8ef81ca680a8aa3a71e4f7"
+        },
+        "resolved": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/add/resolved.json",
+          "bytes": 2605015,
+          "fileSha256": "0921b3ba204f415bf3fa556586d914cdafdf54df84a0d93d55a3fc45e3560054"
+        },
+        "review-targets": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/add/review-targets.json",
+          "bytes": 3866,
+          "fileSha256": "9d344f539a41c493a6a4a766857d74e955022bc699fc940d9f365f4e901b8ccb"
+        },
+        "reuse-bindings": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/add/reuse-bindings.json",
+          "bytes": 31777,
+          "fileSha256": "e45a8d1e907a6ad63e30b19954b55c253e707f3f898eaa68c3f5f3ba164c644d"
+        }
+      },
+      "saveProcessId": 45597,
+      "acquireProcessId": 45604,
+      "separateVerificationProcessId": 45605,
+      "media": [
+        {
+          "candidate": "add",
+          "candidateId": "Q5-2-C001",
+          "newGlobalRange": {
+            "startFrame": 18578,
+            "endFrameExclusive": 19202
+          },
+          "mediaLocalRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 624
+          },
+          "mediaRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/after-render-v002/presentation-rendered-v002.mp4",
+            "bytes": 14839099,
+            "fileSha256": "98d73010ebfa93bf9b094781e279d705f51771d295ae3fbc9fe78d1f0f365737"
+          },
+          "originalArtifactContentVersion": "q5-2-content-v001-94698bac280a5fef2bab4d07b23eefbf519e7a5e43aa69f4287b0e5258bd1898",
+          "originalArtifactGlobalRange": {
+            "startFrame": 18578,
+            "endFrameExclusive": 19202
+          },
+          "originalCompletionRef": {
+            "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/render-evidence-v002/completion.json",
+            "bytes": 2546089,
+            "fileSha256": "9cb36e7578b27ecec951c1de16d82009617491779d942e2b548788b4f68f1d8a"
+          },
+          "frameCount": 624,
+          "captionCount": 6,
+          "normalPlanSha256": "0b2512a10dda8bd4b5706a8866d84392621e4969b2782a8dd869569bc1fa2c6d",
+          "drawingRulesSha256": "0e7ec69612dd7040aabc78a6bcdb4626aac84e72df1f2a59cfc24b0b3b81d942",
+          "logicalAudioSamples": 998400,
+          "primingSkipSamples": 1024,
+          "decodedTailSampleCount": 0,
+          "mode": "reuse-existing-media",
+          "mediaGenerated": false,
+          "historicalQcReexecuted": false
+        }
+      ]
+    }
+  ],
+  "combinedBoundaries": {
+    "previousSceneEnd": 18519,
+    "addedStart": 18519,
+    "retainedBodyStart": 18864,
+    "sharedComparisonExit": 19143,
+    "addedOriginalDigestRange": null,
+    "omittedMedia": {
+      "originalDigestRange": {
+        "startFrame": 12153,
+        "endFrameExclusive": 12212
+      },
+      "sourceVideoRange": {
+        "startFrame": 127915,
+        "endFrameExclusive": 127974
+      },
+      "editedGlobalRange": null,
+      "outputRange": null,
+      "status": "omitted-no-output"
+    },
+    "retainedHiddenCaptionEdges": [
+      {
+        "side": "before",
+        "originalDigestRange": {
+          "startFrame": 12109,
+          "endFrameExclusive": 12153
+        },
+        "sourceVideoRange": {
+          "startFrame": 127871,
+          "endFrameExclusive": 127915
+        },
+        "editedGlobalRange": {
+          "startFrame": 12109,
+          "endFrameExclusive": 12153
+        },
+        "playback": {
+          "sampleRate": 48000,
+          "channels": 2,
+          "samplesPerFrame": 1600,
+          "sourceVideoRange": {
+            "startSample": 204593600,
+            "endSampleExclusive": 204664000
+          },
+          "originalDigestRange": {
+            "startSample": 19374400,
+            "endSampleExclusive": 19444800
+          },
+          "editedGlobalRange": {
+            "startSample": 19374400,
+            "endSampleExclusive": 19444800
+          },
+          "outputRange": {
+            "startSample": 19374400,
+            "endSampleExclusive": 19444800
+          },
+          "rule": "48k normalized playback coordinates; source-container audio sample indices are not inferred"
+        }
+      },
+      {
+        "side": "after",
+        "originalDigestRange": {
+          "startFrame": 12212,
+          "endFrameExclusive": 12228
+        },
+        "sourceVideoRange": {
+          "startFrame": 127974,
+          "endFrameExclusive": 127990
+        },
+        "editedGlobalRange": {
+          "startFrame": 12153,
+          "endFrameExclusive": 12169
+        },
+        "playback": {
+          "sampleRate": 48000,
+          "channels": 2,
+          "samplesPerFrame": 1600,
+          "sourceVideoRange": {
+            "startSample": 204758400,
+            "endSampleExclusive": 204784000
+          },
+          "originalDigestRange": {
+            "startSample": 19539200,
+            "endSampleExclusive": 19564800
+          },
+          "editedGlobalRange": {
+            "startSample": 19444800,
+            "endSampleExclusive": 19470400
+          },
+          "outputRange": {
+            "startSample": 19444800,
+            "endSampleExclusive": 19470400
+          },
+          "rule": "48k normalized playback coordinates; source-container audio sample indices are not inferred"
+        }
+      }
+    ]
+  },
+  "cancellation": {
+    "individualPreservesOtherSelectionAndProvenance": true,
+    "bothRestoreOriginalContentClockAndCaptions": true,
+    "finalSavedState": {
+      "directory": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/selection",
+      "savedStateToken": "2ea0a2e8cb3abf3f0ad23a70a3eb84e9bfecac9a178370018b4e5e81e600ff4c",
+      "selection": {
+        "omit": false,
+        "add": false
+      },
+      "selectionProvenance": {
+        "omit": {
+          "kind": "technical-fixture",
+          "statement": "Explicit Q5-3 development verification; no human adoption."
+        },
+        "add": {
+          "kind": "technical-fixture",
+          "statement": "Explicit Q5-3 development verification; no human adoption."
+        }
+      },
+      "saveId": "5a7fdb89-66d6-46a5-a68f-90b171b61807",
+      "contentVersion": "digest-v1-phase2-completed-20260914-v001",
+      "resolutionSha256": "f5b364c1046429768d91e3c69a05ddbdfef630bb042bf93ed8a744f35a51809c",
+      "frameCount": 44408,
+      "captionCount": 325,
+      "humanAdoption": false,
+      "executionProcessId": 45610
+    },
+    "allCancelledOutput": {
+      "schemaVersion": "q5-3-output-acquisition-v001",
+      "files": {
+        "catalog": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/all-cancelled/catalog.json",
+          "bytes": 4093,
+          "fileSha256": "d7d8d9fdc474bc239523fecef49c0fd24eb32db98af88eebab61cce880272c08"
+        },
+        "selection": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/all-cancelled/selection.json",
+          "bytes": 785,
+          "fileSha256": "2ea0a2e8cb3abf3f0ad23a70a3eb84e9bfecac9a178370018b4e5e81e600ff4c"
+        },
+        "resolved": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/all-cancelled/resolved.json",
+          "bytes": 2568275,
+          "fileSha256": "a77c3a84d39340255f2d842832000158ddc885f87c58ba966c5cb544ef51faa4"
+        },
+        "review-targets": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/all-cancelled/review-targets.json",
+          "bytes": 3866,
+          "fileSha256": "9d344f539a41c493a6a4a766857d74e955022bc699fc940d9f365f4e901b8ccb"
+        },
+        "reuse-bindings": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy/four-states/all-cancelled/reuse-bindings.json",
+          "bytes": 2612,
+          "fileSha256": "6f47355b9a1f47bf7b73a2a0d6eb38f70f1d23d09ef4a16c9aaf197f0b5b1eab"
+        }
+      },
+      "savedStateToken": "2ea0a2e8cb3abf3f0ad23a70a3eb84e9bfecac9a178370018b4e5e81e600ff4c",
+      "selection": {
+        "omit": false,
+        "add": false
+      },
+      "selectionProvenance": {
+        "omit": {
+          "kind": "technical-fixture",
+          "statement": "Explicit Q5-3 development verification; no human adoption."
+        },
+        "add": {
+          "kind": "technical-fixture",
+          "statement": "Explicit Q5-3 development verification; no human adoption."
+        }
+      },
+      "contentVersion": "digest-v1-phase2-completed-20260914-v001",
+      "frameCount": 44408,
+      "captionCount": 325,
+      "status": "technical-fixture-output-acquired",
+      "newlyRenderedMedia": false,
+      "wholeContentMediaCreated": false,
+      "humanAdoption": false,
+      "originalReplaced": false,
+      "executionProcessId": 45617
+    }
+  },
+  "preservationRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/preservation-verification-v001.json",
+    "bytes": 51059,
+    "fileSha256": "912752e9eaab622619c4c5363592ac22c6c25dca750423f00879d4bf99526d5b"
+  },
+  "reviews": [
+    {
+      "reviewRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/review-v002.json",
+        "bytes": 3779,
+        "fileSha256": "8b52282bf57ec3854af503b16bd950de20ee8cbd6ed8f3d5b76490ed6943a6d9"
+      },
+      "answersRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-1-20260920-v001/review-answers-v002.json",
+        "bytes": 2138,
+        "fileSha256": "8a78f843e0792c705b0c4f7308573ea205792ffe9259a76c9b1b142afed10c0d"
+      },
+      "allUnanswered": true,
+      "humanAdoption": false
+    },
+    {
+      "reviewRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-2-20260921-v001/review-v001.json",
+        "bytes": 4221,
+        "fileSha256": "3db83563243a852bc5e19ca35310690f160bb8031c54bba444d6eca01053f667"
+      },
+      "answersRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-2-20260921-v001/review-answers-v001.json",
+        "bytes": 2244,
+        "fileSha256": "9273a022cf2f3a52d9899a1a3e518cf84d50ba1b223b45e3f86cad60e34d019f"
+      },
+      "allUnanswered": true,
+      "humanAdoption": false
+    }
+  ],
+  "corrections": [
+    {
+      "round": 1,
+      "kind": "fixed-scope-boundary",
+      "description": "Reject fully rebound alternate valid candidates/comparison windows and a different instruction; preserve the two accepted candidates and exact current approval bytes.",
+      "oldArtifactsChanged": false
+    },
+    {
+      "round": 2,
+      "kind": "invalid-saved-content-rejection",
+      "description": "A saved-plan mismatch triggered Node assertion diff formatting until heap exhaustion. Keep full structural equality and report a short rejection without constructing that huge diagnostic diff.",
+      "failureRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/reuse-tests-v001.tap",
+        "bytes": 4890,
+        "fileSha256": "ef569d4ca094d5265bffb19c46d79abe4ce8b245122f392c35cca7feb6414159"
+      },
+      "successRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/reuse-tests-v002.tap",
+        "bytes": 1918,
+        "fileSha256": "aefd2a9d24682a782cd22e1ff5ff1e9501316cf3e32c9d39e0e2c85df5dd8c8a"
+      },
+      "defaultHeapRetained": true,
+      "oldArtifactsChanged": false
+    }
+  ],
+  "implementationCorrectionRounds": 2,
+  "setupCorrectionRounds": 0,
+  "newCandidateCount": 0,
+  "newRenderAttempts": 0,
+  "newMediaCount": 0,
+  "oldYuvPcmVerificationRuns": 0,
+  "apiCalls": 0,
+  "costUsd": 0,
+  "externalMediaTransfers": 0,
+  "humanAdoption": false,
+  "humanQualityVerified": false,
+  "jointAdoptionInferred": false,
+  "originalReplaced": false,
+  "formalTrustChanged": false,
+  "contractsChanged": false,
+  "mainMerged": false,
+  "tagsCreated": false,
+  "releasesCreated": false,
+  "shortDevelopmentStarted": false,
+  "limits": "Only local technical selection, one-pass common-original resolution and the two existing short artifacts. No new full-length movie, naturalness judgement, speech-recognition correction or review answer is claimed.",
+  "runtimeVerification": {
+    "finalRuntime": {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "version": "v20.19.6",
+      "scope": "core 11, reuse 6, CLI 4 final groups"
+    },
+    "priorReuseRuntime": {
+      "path": "/usr/local/Cellar/node/23.7.0/bin/node",
+      "version": "v23.7.0",
+      "evidence": "reuse-tests-v002.tap"
+    },
+    "reasonForReuseOnlyRerun": "The successful reuse test initially used the existing Node 23 runtime. The same six relevant groups were rerun under the Node 20.19.6 runtime used by the actual CLI; no source or test changes, no new dependency, no duplicate test counting.",
+    "proof": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q5-3-20260921-v001/reuse-tests-v003.tap",
+      "bytes": 1830,
+      "fileSha256": "d27d0f97bc1fb8c76aeb56c9b4e58a9c942159d80f3e1d76500d78b5797eb24b"
+    }
+  }
+}

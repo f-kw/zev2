@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "digest-quality-review-verification-v001",
+  "output_path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q3-20260920-v001/run-v001/review/index.html",
+  "review_sha256": "5d74023f3e822b79aea37d06a6250231829357c7f99db30ea12e792576568806",
+  "html_sha256": "f9a203365c284645bc256004493c50f44a6bf129990cabeec57ee0e2a530f31a",
+  "template_sha256": "6eb01d1616ed97c8d064eba9015efd7ee83fb4f25c729fff8e20456444ec9dac",
+  "media": [
+    {
+      "media_id": "HRB-001",
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+      "sha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 4867
+    }
+  ],
+  "points": 1,
+  "browser_checked": false,
+  "human_quality_checked": false,
+  "reviewFileSha256": "9c8cc833e7f56dfeac35cd8f011c9382ca6b0d87d5a7f7fb237067f951a3e63f",
+  "inputSha256": "65102e48de14824e63435f70d0453c5d36233f47a802048e933ada4d7be79a8d",
+  "rawReplySha256": "0b7981f9fe017b2f8379f5c5a107f2c03e0816480224e72bbb80252386f28b07",
+  "point": {
+    "start": 0.26666666666666666,
+    "end": 2.3666666666666667,
+    "start_frame": 8,
+    "end_frame": 71,
+    "timeline_start_frame": 8,
+    "timeline_end_frame": 71
+  },
+  "expandedContext": {
+    "start": 0,
+    "end": 2.3666666666666667,
+    "start_frame": 0,
+    "end_frame": 71,
+    "timeline_start_frame": 0,
+    "timeline_end_frame": 71
+  },
+  "answersReceived": 0,
+  "oldAnswersReused": 0,
+  "attributionChecks": [
+    {
+      "kind": "other-video",
+      "status": "rejected",
+      "message": "answer: 対象動画・区間・反映範囲が一致しません"
+    },
+    {
+      "kind": "other-batch",
+      "status": "rejected",
+      "message": "answers: 別のレビュー版の回答です"
+    },
+    {
+      "kind": "both-usable-on-one-video",
+      "status": "rejected",
+      "message": "answer: 両方使えるは提示された二つだけに回答できます"
+    }
+  ],
+  "rawQuestionUnchanged": true,
+  "scopeExclusions": [
+    "跳ねる・揺れる動きの機能使用可という採用判断",
+    "Q1の動きの滑らかさの修正後確認",
+    "字幕本文や採用区間を変更する許可",
+    "動画全体の品質判定",
+    "他の動画・別の版",
+    "未提示の修正案の採用"
+  ],
+  "templateMatchesQ1Q2": true,
+  "actualBrowserAutomation": false,
+  "humanDirectOpen": false,
+  "humanQualityDecision": false
+}

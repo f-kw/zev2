@@ -1,0 +1,45 @@
+✔ both fixed short clips preserve local captions, source pieces and audio while the introduction moves globally (724.426334ms)
+✔ changed caption text, wrapping, provenance, appearance and fade phase all prevent reuse (41.754125ms)
+✔ source byte changes, equal-duration source shifts, piece reorder and local audio shifts prevent reuse (8.740167ms)
+✔ a different comparison window or local duration cannot borrow the accepted short artifact (3.227584ms)
+
+<--- Last few GCs --->
+
+[45028:0x7fa708008000]    19520 ms: Mark-Compact (reduce) 4093.8 (4106.4) -> 4093.8 (4099.4) MB, pooled: 0 MB, 103.90 / 0.00 ms  (+ 0.1 ms in 0 steps since start of marking, biggest step 0.0 ms, walltime since start of marking 114 ms) (average mu = 0.371,[45028:0x7fa708008000]    19599 ms: Mark-Compact 4096.3 (4101.7) -> 4096.1 (4104.7) MB, pooled: 0 MB, 68.88 / 0.00 ms  (average mu = 0.300, current mu = 0.123) allocation failure; scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0x1007d4b39 node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/usr/local/Cellar/node/23.7.0/bin/node]
+ 2: 0x10097b353 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/usr/local/Cellar/node/23.7.0/bin/node]
+ 3: 0x100b3a0b9 v8::internal::Heap::FatalProcessOutOfMemory(char const*) [/usr/local/Cellar/node/23.7.0/bin/node]
+ 4: 0x100b374c3 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/usr/local/Cellar/node/23.7.0/bin/node]
+ 5: 0x100b308a1 v8::internal::HeapAllocator::AllocateRawWithLightRetrySlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/usr/local/Cellar/node/23.7.0/bin/node]
+ 6: 0x100b312a4 v8::internal::HeapAllocator::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/usr/local/Cellar/node/23.7.0/bin/node]
+ 7: 0x100b1c8e5 v8::internal::FactoryBase<v8::internal::Factory>::AllocateRawArray(int, v8::internal::AllocationType) [/usr/local/Cellar/node/23.7.0/bin/node]
+ 8: 0x100b1c885 v8::internal::Handle<v8::internal::FixedArray> v8::internal::TaggedArrayBase<v8::internal::FixedArray, v8::internal::TaggedArrayShape, v8::internal::HeapObject>::Allocate<v8::internal::Isolate>(v8::internal::Isolate*, int, std::__1::optional<v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8::internal::PerThreadAssertType)2>>*, v8::internal::AllocationType) [/usr/local/Cellar/node/23.7.0/bin/node]
+ 9: 0x100b1c827 v8::internal::FactoryBase<v8::internal::Factory>::NewFixedArray(int, v8::internal::AllocationType) [/usr/local/Cellar/node/23.7.0/bin/node]
+10: 0x100ca678e v8::internal::(anonymous namespace)::ElementsAccessorBase<v8::internal::(anonymous namespace)::FastHoleySmiElementsAccessor, v8::internal::(anonymous namespace)::ElementsKindTraits<(v8::internal::ElementsKind)1>>::ConvertElementsWithCapacity(v8::internal::Handle<v8::internal::JSObject>, v8::internal::Handle<v8::internal::FixedArrayBase>, v8::internal::ElementsKind, unsigned int, unsigned int, unsigned int) [/usr/local/Cellar/node/23.7.0/bin/node]
+11: 0x100ca65fe v8::internal::(anonymous namespace)::ElementsAccessorBase<v8::internal::(anonymous namespace)::FastHoleySmiElementsAccessor, v8::internal::(anonymous namespace)::ElementsKindTraits<(v8::internal::ElementsKind)1>>::GrowCapacityAndConvertImpl(v8::internal::Handle<v8::internal::JSObject>, unsigned int) [/usr/local/Cellar/node/23.7.0/bin/node]
+12: 0x100ca6b74 v8::internal::(anonymous namespace)::ElementsAccessorBase<v8::internal::(anonymous namespace)::FastHoleySmiElementsAccessor, v8::internal::(anonymous namespace)::ElementsKindTraits<(v8::internal::ElementsKind)1>>::SetLengthImpl(v8::internal::Isolate*, v8::internal::Handle<v8::internal::JSArray>, unsigned int, v8::internal::Handle<v8::internal::FixedArrayBase>) [/usr/local/Cellar/node/23.7.0/bin/node]
+13: 0x100ded67d v8::internal::Runtime_NewArray(int, unsigned long*, v8::internal::Isolate*) [/usr/local/Cellar/node/23.7.0/bin/node]
+14: 0x1005ac936 Builtins_CEntry_Return1_ArgvOnStack_NoBuiltinExit [/usr/local/Cellar/node/23.7.0/bin/node]
+Q5-3 reuse-boundary evidence: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/reuse-tests-RXf5LV
+✖ tools/digest-quality/q5-3-reuse.test.mjs (19663.526042ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19676.850583
+
+✖ failing tests:
+
+test at tools/digest-quality/q5-3-reuse.test.mjs:1:1
+✖ tools/digest-quality/q5-3-reuse.test.mjs (19663.526042ms)
+  'test failed'

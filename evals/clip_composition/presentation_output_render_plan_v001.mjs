@@ -199,6 +199,7 @@ const finalElementMatchesPage = (
   presetRegistryVersion = undefined,
 ) => (
   isObject(element)
+  && !Object.hasOwn(element, 'presentationPulse')
   && element.instructionId === page.pageId
   && element.kind === 'speech-caption'
   && element.text === page.text
@@ -572,6 +573,9 @@ export function buildPresentationOutputRenderApplicationResultsV001({
     presetRegistryBinding: structuredClone(presetRegistryBinding),
     results: overlayRecords.map((record, index) => {
       const page = pages[index];
+      if (record.pulseStates !== undefined || Object.hasOwn(record.element ?? {}, 'presentationPulse')) {
+        throw new TypeError('native static page output does not accept pulse overlays');
+      }
       if (record.element?.instructionId !== page.pageId || !SHA256.test(record.pngSha256)) {
         throw new TypeError('overlay record differs from native display page');
       }

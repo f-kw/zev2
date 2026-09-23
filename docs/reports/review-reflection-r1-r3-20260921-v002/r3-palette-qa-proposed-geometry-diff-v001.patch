@@ -1,0 +1,22 @@
+--- a/tools/digest-quality/r3-palette-qa.mjs
++++ b/tools/digest-quality/r3-palette-qa.mjs
+@@
+ const alphaBytes = rgba => {
+   const output = Buffer.alloc(rgba.length / 4);
+   for (let offset = 3, index = 0; offset < rgba.length; offset += 4) output[index++] = rgba[offset];
+   return output;
+ };
++const alphaPixelSets = alpha => ({
++  nonzeroPixelSetSha256: sha(Uint8Array.from(alpha, value => value > 0 ? 1 : 0)),
++  opaquePixelSetSha256: sha(Uint8Array.from(alpha, value => value === 255 ? 1 : 0)),
++});
+@@
+-      const geometry = {container, line: mask.alphaBounds, glyphAlphaSha256: sha(alphaBytes(maskPixels))};
++      const glyphAlpha = alphaBytes(maskPixels);
++      const geometry = {container, line: mask.alphaBounds, ...alphaPixelSets(glyphAlpha)};
+       const previous = geometryByShape.get(shapeId);
+-      if (previous) assert.deepEqual(geometry, previous, 'palette/background changes leave glyph alpha and geometry unchanged');
++      if (previous) assert.deepEqual(geometry, previous, 'palette/background changes leave visible/opaque pixel sets and geometry unchanged');
+@@
+-        declaredColors: palette, geometry, margins,
++        declaredColors: palette, geometry, margins, glyphAlphaSha256: sha(glyphAlpha),

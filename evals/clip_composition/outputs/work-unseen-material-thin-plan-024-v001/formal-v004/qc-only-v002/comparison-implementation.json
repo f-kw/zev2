@@ -1,0 +1,8 @@
+{
+  "source": {
+    "path": "evals/clip_composition/render_presentation_v002.mjs",
+    "bytes": 93860,
+    "fileSha256": "b715993ee76a6db88f669ea93429e24426f775a7069e3b56bd578727a2786e94"
+  },
+  "exactFunctionText": "const imageDifferencePixelsWithinBounds = async (\n  leftPath,\n  rightPath,\n  bounds,\n  imageMagickPath = 'magick',\n  processObserver = null,\n) => {\n  const width = bounds.right - bounds.left;\n  const height = bounds.bottom - bounds.top;\n  if (![bounds.left, bounds.top, width, height].every(Number.isInteger) || width <= 0 || height <= 0) {\n    throw new TypeError('image comparison bounds are invalid');\n  }\n  const geometry = `${width}x${height}+${bounds.left}+${bounds.top}`;\n  const result = await runPresentationRendererChildProcessV001(imageMagickPath, [\n    'compare', '-metric', 'AE',\n    '(', leftPath, '-crop', geometry, '+repage', ')',\n    '(', rightPath, '-crop', geometry, '+repage', ')',\n    'null:',\n  ], {\n    allowedExitCodes: [0, 1],\n    fatalInnerStage: 'post-render-qc',\n    processObserver,\n    observationLabel: 'qc-image-difference',\n  });\n  const value = Number(result.stderr.toString().trim().split(/\\s+/)[0]);\n  if (!Number.isFinite(value)) throw new Error('bounded image difference could not be parsed');\n  return value;\n};\n"
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": "zev-point-review-real-media-check-v001",
+  "purpose": "second-data-set-template-injection-only; not an additional human-review request",
+  "checked_at": "2026-09-20T06:19:24.752Z",
+  "source_data": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/review-template-check-v001.json",
+    "bytes": 3504,
+    "file_sha256": "7c2cc58399a978f85ca7468f911e0c378431cac4ece7b1eca547eb9d64f06d5e"
+  },
+  "provenance": {
+    "candidate_completion": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-evidence/completion.json",
+    "before_media_index": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/hrb002-bindings.json"
+  },
+  "build": {
+    "output_path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/template-check-v001/index.html",
+    "review_sha256": "e9917a4eb7d45530a2d1f02e6141df400133ed52865e52cb0cf6cf017b84d9c4",
+    "html_sha256": "5ed8832db9bfd6d6b7a5252347475ef5ce0e633cc55e0ee9eab753cb77ed1cd4",
+    "template_sha256": "6eb01d1616ed97c8d064eba9015efd7ee83fb4f25c729fff8e20456444ec9dac",
+    "media": [
+      {
+        "media_id": "edited-before",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+        "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+        "fps_num": 30,
+        "fps_den": 1,
+        "total_frames": 4879
+      },
+      {
+        "media_id": "motion-after",
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+        "sha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58",
+        "fps_num": 30,
+        "fps_den": 1,
+        "total_frames": 170
+      }
+    ],
+    "points": 1,
+    "browser_checked": false,
+    "human_quality_checked": false
+  },
+  "point_count": 1,
+  "question_scope": "bundle; related review IDs receive no automatic answer distribution",
+  "ranges": [
+    {
+      "view_id": "motion-before",
+      "start": 0,
+      "end": 5.666666666666667,
+      "start_frame": 0,
+      "end_frame": 170,
+      "timeline_start_frame": 0,
+      "timeline_end_frame": 170
+    },
+    {
+      "view_id": "motion-after",
+      "start": 0,
+      "end": 5.666666666666667,
+      "start_frame": 0,
+      "end_frame": 170,
+      "timeline_start_frame": 0,
+      "timeline_end_frame": 170
+    }
+  ],
+  "initial_answers": {
+    "all_unanswered": true,
+    "answer_file": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/template-check-v001/blank-answers.json",
+    "human_answers_recorded": 0
+  },
+  "negative_checks": {
+    "duplicate_review_point_rejected": true,
+    "answer_mismatch_rejected": [
+      "different-batch",
+      "different-revision",
+      "different-media",
+      "different-range",
+      "different-scope",
+      "duplicate-point"
+    ],
+    "test_input_only": true
+  },
+  "browser_automation_performed": false,
+  "human_review_performed": false,
+  "template_or_code_modified": false
+}

@@ -1,0 +1,30 @@
+TAP version 13
+# Subtest: short ranges retain the original clock, stop context at segment edges, and do not enforce background coverage
+ok 1 - short ranges retain the original clock, stop context at segment edges, and do not enforce background coverage
+  ---
+  duration_ms: 2.917833
+  ...
+# Subtest: unsupported fallback is not counted as semantically Normal, and missing multiline cases stay absent
+ok 2 - unsupported fallback is not counted as semantically Normal, and missing multiline cases stay absent
+  ---
+  duration_ms: 1.019333
+  ...
+# Subtest: ties use original order; changed connections, clocks and manual overrides cannot enter automatic selection
+ok 3 - ties use original order; changed connections, clocks and manual overrides cannot enter automatic selection
+  ---
+  duration_ms: 7.014542
+  ...
+# Subtest: review rejects another drawing implementation, clock or unfinished frame inspection even with the same view and range
+ok 4 - review rejects another drawing implementation, clock or unfinished frame inspection even with the same view and range
+  ---
+  duration_ms: 1.047792
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 78.035417

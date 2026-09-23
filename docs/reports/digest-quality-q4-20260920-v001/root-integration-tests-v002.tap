@@ -1,0 +1,185 @@
+TAP version 13
+# Subtest: caption-only edit reuses the SHA-bound full background and verifies exact range PCM/AAC clocks
+ok 1 - caption-only edit reuses the SHA-bound full background and verifies exact range PCM/AAC clocks
+  ---
+  duration_ms: 1144.872791
+  ...
+# Subtest: partial Soft fade, insertion-only range, insertion middle and logical tail equal full-clock decoded bytes
+ok 2 - partial Soft fade, insertion-only range, insertion middle and logical tail equal full-clock decoded bytes
+  ---
+  duration_ms: 2804.923584
+  ...
+# Subtest: same-duration Black-to-Soft refuses prior reuse and creates only the required new background range
+ok 3 - same-duration Black-to-Soft refuses prior reuse and creates only the required new background range
+  ---
+  duration_ms: 1363.20175
+  ...
+# Subtest: range checker rejects real changed PCM while source and every range video frame remain unchanged
+ok 4 - range checker rejects real changed PCM while source and every range video frame remain unchanged
+  ---
+  duration_ms: 112.347292
+  ...
+# Subtest: invalid local ranges cannot acquire output directories or be passed as full-clock plans
+ok 5 - invalid local ranges cannot acquire output directories or be passed as full-clock plans
+  ---
+  duration_ms: 758.110667
+  ...
+# Subtest: a saved range can be reused only when its full-clock coverage includes the new range
+ok 6 - a saved range can be reused only when its full-clock coverage includes the new range
+  ---
+  duration_ms: 1267.308208
+  ...
+# Subtest: saved full reuse validates pixel/PCM proof, exact coverage and actual AAC instead of trusting saved status
+ok 7 - saved full reuse validates pixel/PCM proof, exact coverage and actual AAC instead of trusting saved status
+  ---
+  duration_ms: 607.029875
+  ...
+# Subtest: saved background reuse rejects failed, missing, mismatched and hashless verification evidence
+ok 8 - saved background reuse rejects failed, missing, mismatched and hashless verification evidence
+  ---
+  duration_ms: 368.152334
+  ...
+# Subtest: saved reuse rejects substituted AAC even when its file SHA and logical sample duration are updated correctly
+ok 9 - saved reuse rejects substituted AAC even when its file SHA and logical sample duration are updated correctly
+  ---
+  duration_ms: 130.693417
+  ...
+# Subtest: 範囲描画は媒体の44100Hzを維持し、字幕の元時計を動かさない
+ok 10 - 範囲描画は媒体の44100Hzを維持し、字幕の元時計を動かさない
+  ---
+  duration_ms: 8.083958
+  ...
+# Subtest: 範囲描画は媒体の48000Hzを維持し、字幕の元時計を動かさない
+ok 11 - 範囲描画は媒体の48000Hzを維持し、字幕の元時計を動かさない
+  ---
+  duration_ms: 3.496125
+  ...
+# Subtest: 未対応の再生時計を既存値へ黙って変更しない
+ok 12 - 未対応の再生時計を既存値へ黙って変更しない
+  ---
+  duration_ms: 0.573458
+  ...
+# Subtest: range scopes retain complete caption clocks, original bindings and exact playback samples
+ok 13 - range scopes retain complete caption clocks, original bindings and exact playback samples
+  ---
+  duration_ms: 31.104416
+  ...
+# Subtest: mid-Pulse preview uses the full finite phase and samples local media without restarting the fade
+ok 14 - mid-Pulse preview uses the full finite phase and samples local media without restarting the fade
+  ---
+  duration_ms: 24.233416
+  ...
+# Subtest: preview starting inside a motion caption preserves each remaining state and has range-only diagnostics
+ok 15 - preview starting inside a motion caption preserves each remaining state and has range-only diagnostics
+  ---
+  duration_ms: 19.098334
+  ...
+# Subtest: a connection-only black range has no fabricated caption or native reference
+ok 16 - a connection-only black range has no fabricated caption or native reference
+  ---
+  duration_ms: 15.573792
+  ...
+# Subtest: native preparation binds the original Normal file and draws diagnostic Normal on the projected clock
+ok 17 - native preparation binds the original Normal file and draws diagnostic Normal on the projected clock
+  ---
+  duration_ms: 26.456542
+  ...
+# Subtest: native recipe reconstructs projected Pulse and motion samples from durable proof
+ok 18 - native recipe reconstructs projected Pulse and motion samples from durable proof
+  ---
+  duration_ms: 27.287958
+  ...
+# Subtest: range native evidence cannot pass as full coverage or move a sampled frame to another media origin
+ok 19 - range native evidence cannot pass as full coverage or move a sampled frame to another media origin
+  ---
+  duration_ms: 31.277333
+  ...
+# Subtest: durable native evidence verifies independent original-file and display-plan hashes and rejects clock substitutions
+ok 20 - durable native evidence verifies independent original-file and display-plan hashes and rejects clock substitutions
+  ---
+  duration_ms: 75.833542
+  ...
+# Subtest: renderer rejects fabricated views, old-clock plans, duplicate timelines and missing combined QC before drawing
+ok 21 - renderer rejects fabricated views, old-clock plans, duplicate timelines and missing combined QC before drawing
+  ---
+  duration_ms: 10.369125
+  ...
+# Subtest: renderer rejects changed original files and a background from another projection before media children
+ok 22 - renderer rejects changed original files and a background from another projection before media children
+  ---
+  duration_ms: 11.387208
+  ...
+# Subtest: compositor maps independent AAC after every finite PNG and overlays only on completed background
+ok 23 - compositor maps independent AAC after every finite PNG and overlays only on completed background
+  ---
+  duration_ms: 9.962625
+  ...
+# Subtest: exact replay binds independent AAC before/after and repeats the production input mapping
+ok 24 - exact replay binds independent AAC before/after and repeats the production input mapping
+  ---
+  duration_ms: 148.384458
+  ...
+# Subtest: independent AAC mutation during exact replay fails even when output video bytes match
+ok 25 - independent AAC mutation during exact replay fails even when output video bytes match
+  ---
+  duration_ms: 127.47125
+  ...
+# Subtest: Panel has exactly three immutable choices with distinct local artwork and shared text/padding
+ok 26 - Panel has exactly three immutable choices with distinct local artwork and shared text/padding
+  ---
+  duration_ms: 1.624917
+  ...
+# Subtest: finite background rejects arbitrary paths, drawing fields, unknown IDs and changed geometry
+ok 27 - finite background rejects arbitrary paths, drawing fields, unknown IDs and changed geometry
+  ---
+  duration_ms: 0.354958
+  ...
+# Subtest: inspection-only plate omission retains Panel geometry without asset paint and cannot enter saved choices
+ok 28 - inspection-only plate omission retains Panel geometry without asset paint and cannot enter saved choices
+  ---
+  duration_ms: 0.202792
+  ...
+# Subtest: three backgrounds persist and reload through production IO; Normal fixes and Reset restores exact automatic Panel
+ok 29 - three backgrounds persist and reload through production IO; Normal fixes and Reset restores exact automatic Panel
+  ---
+  duration_ms: 43.818417
+  ...
+# Subtest: unchanged source with old rendering rule binding is rejected on read and before save
+ok 30 - unchanged source with old rendering rule binding is rejected on read and before save
+  ---
+  duration_ms: 4.200625
+  ...
+# Subtest: one-item orchestration and UI payload retain background choice; Normal and Reset do not affect other captions/connections
+ok 31 - one-item orchestration and UI payload retain background choice; Normal and Reset do not affect other captions/connections
+  ---
+  duration_ms: 25.105
+  ...
+# Subtest: CLI show retains finite background name after saving each choice
+ok 32 - CLI show retains finite background name after saving each choice
+  ---
+  duration_ms: 6.973708
+  ...
+# Subtest: 判断を依頼した後の本文・元媒体対応・指示文の差替えを拒否する
+ok 33 - 判断を依頼した後の本文・元媒体対応・指示文の差替えを拒否する
+  ---
+  duration_ms: 12.704875
+  ...
+# Subtest: 依頼のhashも更新されてもC-all接続保存方針を解除できない
+ok 34 - 依頼のhashも更新されてもC-all接続保存方針を解除できない
+  ---
+  duration_ms: 3.507
+  ...
+# Subtest: 入力照合失敗でも受信原文をparse前に保存し、受理記録を作らない
+ok 35 - 入力照合失敗でも受信原文をparse前に保存し、受理記録を作らない
+  ---
+  duration_ms: 3.890958
+  ...
+1..35
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8613.904917

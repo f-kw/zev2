@@ -1,0 +1,83 @@
+{
+  "schema_version": "zev-point-review-v001",
+  "batch_id": "HRB-Q1-Q2-TEMPLATE-CHECK-001",
+  "revision": "v001",
+  "title": "固定テンプレート投入の技術確認 — 動きの短尺",
+  "intro": "二組目のデータを同じ固定テンプレートへ投入する技術試験用です。追加の人間回答依頼ではありません。",
+  "media": [
+    {
+      "media_id": "edited-before",
+      "label": "修正前の保存済み一件修正版",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+      "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 4879,
+      "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+      "timeline_start_frame": 0
+    },
+    {
+      "media_id": "motion-after",
+      "label": "動きの滑らかさを修正した短尺",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+      "sha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 170,
+      "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+      "timeline_start_frame": 0
+    }
+  ],
+  "points": [
+    {
+      "point_id": "Q1-MOTION-SMOOTHNESS",
+      "review_id": "HRC-003",
+      "related_review_ids": [
+        "HR-002",
+        "HR-003",
+        "HR-004"
+      ],
+      "title": "拡大縮小の滑らかさ",
+      "question": "動きの強さはそのままに、拡大縮小が滑らかになって見えますか。",
+      "target_function": "Bounce／Shake／Pulseの動きの滑らかさ",
+      "change_summary": "拡大縮小の中間状態を増やした修正版です。元の字幕時刻・動きの開始基準・音声ピークとの対応を維持しています。",
+      "why_human_review": "技術検査と、動きが滑らかに見えるかという人間判断を分けます。このページはテンプレート投入の技術試験用です。",
+      "scope": {
+        "level": "bundle",
+        "applies_to": [
+          "この冒頭の短区間にあるBounce／Shake／Pulseをまとめた、修正後の滑らかさ"
+        ],
+        "does_not_apply_to": [
+          "個別presetへの欠陥や合否の自動配布",
+          "動き系の機能使用許可の取り直し",
+          "Panelのセンタリング・背景意匠",
+          "Normal Cut・Black Separator・Softの採点",
+          "全編のテンポ・単調さ・自動使い分け",
+          "編集UIの操作感・待ち時間"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "motion-before",
+          "label": "修正前の冒頭",
+          "role": "before",
+          "media_id": "edited-before",
+          "start_frame": 0,
+          "end_frame": 170,
+          "context_start_frame": 0,
+          "context_end_frame": 170
+        },
+        {
+          "view_id": "motion-after",
+          "label": "修正後の冒頭",
+          "role": "after",
+          "media_id": "motion-after",
+          "start_frame": 0,
+          "end_frame": 170,
+          "context_start_frame": 0,
+          "context_end_frame": 170
+        }
+      ]
+    }
+  ]
+}

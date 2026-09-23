@@ -1,0 +1,308 @@
+{
+  "status": "technical-first-completion",
+  "media": {
+    "media_id": "Q32-ONIMUSHA",
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4",
+    "sha256": "58744717f3d03a19f004fdca76a7199674a6b97a3f2f26e60d1b86b0ee8bf1cd",
+    "bytes": 1860839383,
+    "fps_num": 30,
+    "fps_den": 1,
+    "total_frames": 65363
+  },
+  "references": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/owner-stop-recovery-v001.json",
+      "fileSha256": "154a3f6fdfe206edd3f82a5c0823599d37209fd447fc0dc8f6ca2432777e9443",
+      "bytes": 116431
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/render-v008-completed-main-verification-v001.json",
+      "fileSha256": "0146e4e48ef051de734a1febfaa50d44eb234466395359730cf8d76f7eccc642",
+      "bytes": 252072
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/render-attempt-v008/renderer-job.json",
+      "fileSha256": "de163cef57fbf6901815af5a4c824b104341805b06a0fcfd0bdef54941629699",
+      "bytes": 10766
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/instruction.json",
+      "fileSha256": "852cd9abd492c6b9c849f3a68984346042479cd9d75dee41eef19ad92782d319",
+      "bytes": 472991
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/base-media/timeline.json",
+      "fileSha256": "4a42978d4d5c73aa737d102c0d447edcb82d99394e2c2ae05b1518de83862195",
+      "bytes": 3243
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/source-acquisition-authorization-v001.json",
+      "fileSha256": "1976e19e53309af2ba952a5195d3899dee676f012e6b92f1db2cce3c1c810809",
+      "bytes": 1572
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/editorial-review-v001/review-preparation-status.json",
+      "fileSha256": "9edbb580b550218715552fbadecee24c12b52ab26bd3d657eb6678db731f5fc6",
+      "bytes": 14120
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/editorial-review-v001/advisor-procedure-decision-v001.json",
+      "fileSha256": "8bed0e7faa5c71c0d07ed7d782befeeca217cd05665263d6a9da03580388ee74",
+      "bytes": 1221
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/cache-verification.json",
+      "fileSha256": "bfb30972ed637187dba08cbdf7768f6b501581224be09146111618fd89b74df4",
+      "bytes": 5016
+    }
+  ],
+  "timing": {
+    "captions": 343,
+    "frameCount": 65363,
+    "minimumDisplayFrames": 6,
+    "minimumCaption": "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000287"
+  },
+  "technicalOutput": {
+    "status": "passed",
+    "command": [
+      "/opt/homebrew/bin/ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-ss",
+      "1711.533333333",
+      "-i",
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4",
+      "-map",
+      "0:v:0",
+      "-an",
+      "-frames:v",
+      "8",
+      "-pix_fmt",
+      "rgba",
+      "-f",
+      "framehash",
+      "-hash",
+      "sha256",
+      "pipe:1"
+    ],
+    "range": {
+      "startFrame": 51346,
+      "endFrameExclusive": 51354
+    },
+    "decodedFrames": 8,
+    "pixelFormat": "rgba",
+    "matchedSavedFrameHashes": true,
+    "savedEvidence": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/source-encoded-rgba.framehash.txt",
+      "fileSha256": "0542b4ca7dca2131d2737e9ab8396aa87b46d54356e1115071e8f588cfa4b316",
+      "provenance": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/cache-verification.json",
+        "bytes": 5016,
+        "fileSha256": "bfb30972ed637187dba08cbdf7768f6b501581224be09146111618fd89b74df4"
+      }
+    },
+    "frames": [
+      {
+        "pts": 51346,
+        "bytes": 8294400,
+        "hash": "e088728328b7abad36be3879782c30d24835cc57e70b76dc95d00b7e8c817a97"
+      },
+      {
+        "pts": 51347,
+        "bytes": 8294400,
+        "hash": "6a163bddb9b675bad2142a708ff421239ea8c1fb2cf4375f23c99917d2b32cf1"
+      },
+      {
+        "pts": 51348,
+        "bytes": 8294400,
+        "hash": "39b4e9c0475de246fa3a0c6fb237bbd6dc623394e2487b1fcf12fa13b1dd76cf"
+      },
+      {
+        "pts": 51349,
+        "bytes": 8294400,
+        "hash": "9289333df16c4dfde0450aceecb772588d113932e816e56c47a1d14182e09e63"
+      },
+      {
+        "pts": 51350,
+        "bytes": 8294400,
+        "hash": "9d0f6add57712e08278119328deeeb2350e3838064b5d903f1b836212ee57a68"
+      },
+      {
+        "pts": 51351,
+        "bytes": 8294400,
+        "hash": "3687837ae44c587478d191f2fdac56a472abb2f8faad74e644b761d16bb71594"
+      },
+      {
+        "pts": 51352,
+        "bytes": 8294400,
+        "hash": "54d1ea812e94c7efc990505cf3576b1b138b7fb97f834e2f2a0088050efc0bea"
+      },
+      {
+        "pts": 51353,
+        "bytes": 8294400,
+        "hash": "d22c24b6c6ff3a2452d5dd193c67873e723afe7aa9c89242fc1accaadd130369"
+      }
+    ],
+    "limitation": "局所8frameの画素同一性とdecode成立の確認。字幕を読んだ・見心地を確認した証拠ではない。旧024の未完了可視性QCは再開しない。"
+  },
+  "coverage": {
+    "savedTiming": {
+      "range": {
+        "startFrame": 0,
+        "endFrameExclusive": 65363
+      },
+      "captions": 343,
+      "cuts": 9,
+      "normal": "全343字幕は既存caption-core-v001。演出付き別状態は保存jobにない。",
+      "observation": "保存計画の全範囲を読取。完成映像全編の視聴ではない。"
+    },
+    "technicalOutput": {
+      "container": {
+        "startFrame": 0,
+        "endFrameExclusive": 65363
+      },
+      "actualDecodedRanges": [
+        {
+          "startFrame": 51346,
+          "endFrameExclusive": 51354
+        }
+      ],
+      "actualDecodedFrames": 8,
+      "audio": "今回の音声decode・聴取なし。旧AAC一致記録だけでは自然さを観測済みにしない。"
+    },
+    "semanticPerceptual": {
+      "status": "unavailable",
+      "ranges": [],
+      "savedCompletedDigestGeminiReused": false,
+      "reason": "対象024の保存済み準備状態では同一SHAの完成動画の観測済み区間0。照合した準備状態・相談記録から再利用可能な完成動画観測は得られなかった。新規外部送信と別モデル意味解析は行わない。"
+    },
+    "candidateNotPresented": "他区間は今回候補化しなかった。問題なし・全編品質合格を意味しない。"
+  },
+  "candidates": [
+    {
+      "candidateId": "Q32-50416464411394675c80",
+      "digest": {
+        "media_id": "Q32-ONIMUSHA",
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/work-unseen-material-thin-plan-024-v001/.render-v008.presentation-renderer-v002-work-J6DQda/publish/presentation-rendered-v002.mp4",
+        "sha256": "58744717f3d03a19f004fdca76a7199674a6b97a3f2f26e60d1b86b0ee8bf1cd",
+        "bytes": 1860839383,
+        "fps_num": 30,
+        "fps_den": 1,
+        "total_frames": 65363
+      },
+      "range": {
+        "startFrame": 51347,
+        "endFrameExclusive": 51353
+      },
+      "relatedCaptionIds": [
+        "unseen-SsdxVhwxyYo-024-v001-instruction-instruction-000287"
+      ],
+      "sourceParts": [
+        {
+          "segmentId": "segment-0009",
+          "outputRange": {
+            "startFrame": 51347,
+            "endFrameExclusive": 51353
+          },
+          "sourceRange30": {
+            "startFrame": 296993,
+            "endFrameExclusive": 296999
+          }
+        }
+      ],
+      "classification": "表示",
+      "evidenceClass": "technical-output-only",
+      "knownCategory": "既知カテゴリ（字幕の表示時間）の別素材における確認候補",
+      "technicalObservation": "保存された343字幕のうち、この字幕は最短の6frame。完成媒体の当該箇所と前後1frameずつは局所decodeで保存済み画素hashへ一致。",
+      "savedSemanticObservation": null,
+      "hypothesis": "表示が短く、前後の字幕と続けて読む際に読み取りにくい可能性がある。",
+      "missingEvidence": [
+        "実際の読みやすさ",
+        "完成動画の意味・見心地観測",
+        "字幕本文の音声との一致"
+      ],
+      "humanQuestion": "前後の字幕と続けて見たとき、「次回予告」の表示時間は読み取れる長さですか。短く感じる場合は、その点だけ教えてください。",
+      "reflectionTarget": "回答が得られた場合に、この字幕の表示時間・分割の局所修正を検討する。今回修正しない。",
+      "reviewRange": {
+        "startFrame": 51315,
+        "endFrameExclusive": 51446
+      },
+      "reviewId": "HR-Q32-50416464411394675c80-v001",
+      "automaticallyRepaired": false,
+      "evidence": [
+        "timing-observation-v001.json",
+        "media-observation-v001.json",
+        "local-decode-verification-v001.json"
+      ],
+      "claimBoundary": "6frameは保存された表示時計の事実。短いことを欠陥や読めないことへ確定しない。現在の実動画から字幕表示期間を再認識したものではない。"
+    }
+  ],
+  "review": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/digest-quality-q3-2-20260921-v001/verified-run-v002/review-data-v001.json",
+    "sha256": "d4484c0c6351336aa9bff99efe8587cd81de3d329bda4167537a094da6c3bef6",
+    "status": "data-ready-not-presented",
+    "htmlCreated": false,
+    "blankAnswersCreated": false
+  },
+  "savedObservationSearch": {
+    "preparationKeys": [
+      "purpose",
+      "sourceVideo",
+      "coverageStatus",
+      "completedVideoReviewIntervals",
+      "pendingFullVideoRange",
+      "segments",
+      "analysisParts",
+      "partTimestampCaveat",
+      "blocker",
+      "humanDecisionClips",
+      "actions"
+    ],
+    "decisionKeys": [
+      "recordedAt",
+      "conversationName",
+      "conversationUrl",
+      "checkpointCommit",
+      "checkpointLocalRemoteMatch",
+      "requestSent",
+      "responseStatus",
+      "responseComplete",
+      "pageReloads",
+      "requestResends",
+      "modelVisibleAtSend",
+      "modelVisibleAfterReloadAtResponse",
+      "modelChangesByThisTask",
+      "decision",
+      "procedureAcceptedWithCorrections",
+      "geminiTransmissionApproval",
+      "videoReviewStatus",
+      "responseFile",
+      "authorityNote",
+      "completedVideoChanged",
+      "stoppedQcResumed"
+    ],
+    "sameCompletedDigestObservationFound": false,
+    "searchScope": "対象024の保存済みeditorial-review準備状態と相談記録。元素材の観測を完成動画の観測へ読み替えない。"
+  },
+  "invariants": {
+    "newExternalMediaSends": 0,
+    "newPaidApiCalls": 0,
+    "additionalCostUsd": 0,
+    "localSemanticModelsUsed": 0,
+    "newVideoGeneration": 0,
+    "oldQcResumed": false,
+    "oldMediaOverwritten": false,
+    "originalTenAnswersChanged": false,
+    "existingSevenPointReviewChanged": false,
+    "original024QcUnfinishedCaptions": 131,
+    "humanQualityConfirmed": false
+  },
+  "verification": {
+    "reviewSchema": "passed",
+    "mediaIdentity": "passed",
+    "captionAndSourceClockMapping": "passed",
+    "localDecodeAndSavedPixels": "passed",
+    "readbackRecord": "readback-verification-v001.json"
+  }
+}

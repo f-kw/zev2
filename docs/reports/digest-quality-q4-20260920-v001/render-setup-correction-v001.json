@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "q4-render-setup-correction-v001",
+  "classification": "execution-setup",
+  "failedAttempt": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v001/Q4-C001-evidence/failure.json",
+    "bytes": 302927,
+    "fileSha256": "4e513018c07f121b35e3fa11d2e2490f0959369cb93fde3eb29cdfdb85a5c005"
+  },
+  "reason": "Parent Node 20 was invoked by absolute path, while the native child resolved Node 23 through PATH. Final QC rejected this difference.",
+  "oldChild": {
+    "version": "v23.7.0",
+    "execPath": "/usr/local/Cellar/node/23.7.0/bin/node"
+  },
+  "correctedChild": {
+    "version": "v20.19.6",
+    "execPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node"
+  },
+  "nodeOptionsPresent": false,
+  "shimAdjacentNodeExists": false,
+  "change": "Set Node20 directory first in the child environment; unset NODE_OPTIONS. No production, selection or drawing-rule change.",
+  "preRenderSelectionUnchanged": true,
+  "drawingRulesUnchanged": true,
+  "failedNativeAssetsReused": false,
+  "reusedBackgroundProof": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v001/Q4-C001-evidence/background/proof.json",
+    "bytes": 11567,
+    "fileSha256": "d6cdf0981c81accf730f89424aaa22a6e1b4688c054dd0cd738a5c57ba2ed783"
+  },
+  "retryJob": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v002/Q4-C001-retry-job-v002.json",
+    "bytes": 17343,
+    "fileSha256": "53625567acd27b5eeecd38cc143a43aa73574dcfcb46f19a4d625f7f99fd83df"
+  },
+  "newOutputDirectory": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v002",
+  "firstAttemptPassedStages": [
+    "lossless-background-video-and-PCM",
+    "composition",
+    "exact-replay"
+  ],
+  "firstAttemptCompletedNativeQc": false
+}

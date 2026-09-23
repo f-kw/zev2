@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "stage4-bc-audit-receipt-v001",
+  "speaker": "Codexの受領記録",
+  "responseSpeaker": "相談役の回答",
+  "responseObservedAt": "2026-09-18T10:57:07Z",
+  "status": "レスポンス確認済み",
+  "decision": "今回の限定範囲の技術完成としてB/Cを受理",
+  "requiredRevisions": 0,
+  "acceptedImplementationCheckpoint": "f6ff6671350e937fdcb8b64891d0146bbdb8fdea",
+  "submittedRemoteReadback": "f6ff6671350e937fdcb8b64891d0146bbdb8fdea",
+  "branch": "codex/digest-presentation-editing-stage4",
+  "advisorTaskName": "ZEV Build Loop",
+  "advisorUrl": "https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6aa7f7e5-03d8-83ee-aae1-6c4b66fb8303",
+  "browser": "Microsoft Edge",
+  "selectedModelObserved": "6 Pro",
+  "modelRequirement": "今回の新しいモデル指定なし。現在の選択6 Proを維持。",
+  "modelChanged": false,
+  "auditRequestSent": true,
+  "requestVisibleInSameConversation": true,
+  "completedResponseRead": true,
+  "responseActionsObserved": true,
+  "stopButtonAbsent": true,
+  "retries": 0,
+  "refreshes": 0,
+  "regenerations": 0,
+  "newInstructionRequestSent": false,
+  "request": {
+    "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-audit-request-v001.md",
+    "bytes": 5406,
+    "fileSha256": "68871903279bd4a61188f32d7869c333e053ed6ba3ae36148838b8dca1bc29db"
+  },
+  "deliveryHistory": {
+    "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-audit-delivery-v001.json",
+    "bytes": 1328,
+    "fileSha256": "491ab3f7a19c18da72666eceea47aeabb2fc9ba8f332c98065757e840c7ec7d6"
+  },
+  "response": {
+    "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-audit-decision-v001.md",
+    "bytes": 9829,
+    "fileSha256": "648ce3339606c72b303536912014c85b7c9387d8491f8e45e6b1fe6c8eebe338"
+  },
+  "submittedCheckpointVerification": {
+    "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-checkpoint-verification-v001.json",
+    "bytes": 912,
+    "fileSha256": "3da8e1eb9f36e8db545f6535413a825e2b6715649b7ffdcd2e9748068ba1ad19"
+  },
+  "updatedSummaries": [
+    {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/README.md",
+      "bytes": 15726,
+      "fileSha256": "5de41e5475b5e5ce14f10ceb804c7e3a8e2ada077254c5e730029894ad3befd1"
+    },
+    {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/bc-qc-performance-verification-v001.md",
+      "bytes": 11581,
+      "fileSha256": "9d56ca480de047a00d67c8a5cdef3f731c17df535a133b5e89692045df5d0435"
+    },
+    {
+      "path": "docs/reports/digest-presentation-editing-stage4-sources-20260918/DEVELOPMENT_HANDOFF.md",
+      "bytes": 3163,
+      "fileSha256": "d4c8cf6af851ab774ec76bf4fdb477ee0a474f96075ad3b87238d9a462daa2ff"
+    }
+  ],
+  "acceptedScope": [
+    "検査条件を保持した計算共有の実装",
+    "指定二媒体で実入力・実RGBを再読した新旧QCの同値性と関連故障拒否",
+    "現行音声版の周辺生成・登録と性能報告"
+  ],
+  "remaining": [
+    "正式な復旧根拠と許可された手順を待つ実UI受入",
+    "初回周辺確認時間とShake等の適用検査時間という性能残件",
+    "人間品質・正式採用・正式trust",
+    "工程IV全体の完成"
+  ],
+  "unchangedEnvironmentHandling": "復旧根拠は追加されていない。同じ失敗操作の再試行、保護設定変更、別経路への迂回は行わない。",
+  "noAutomaticScopeExpansion": "受理済みA/B/Cの再開発、新しい高速化工事、新機能、ショートへ移らない。",
+  "advisorAuditLimits": "主要な実装・検証器・試験・報告の読取り照合。相談役自身によるローカル試験再実行・媒体再生・実RGB再計算・大量証拠再hashは行っていない。",
+  "checkpointManifestScope": "bc-selected-files-v001.jsonとbc-checkpoint-verification-v001.jsonは実装checkpoint f6ff6671350e937fdcb8b64891d0146bbdb8fdea のGit内容を記録。受領後に変更した報告の現在hashへ読み替えない。",
+  "receiptChangesOnly": "受領後は文書記録だけを保存し、実装変更・同じ試験比較の再実行・動画再生成は行っていない。"
+}

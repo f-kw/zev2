@@ -1,0 +1,101 @@
+{
+  "status": "passed-preflight",
+  "formalPhysicalRun": false,
+  "mediaCommands": 0,
+  "checkedContracts": [
+    "projection exact 10 options and exact 2-field refs",
+    "caption plan projection",
+    "observed peak projection",
+    "finite Pulse selection and original/projected program",
+    "finite Shake original/projected program",
+    "native finite state builders",
+    "native reference argument builder",
+    "same-duration stale projection rejection"
+  ],
+  "note": "Uses an existing real PNG as the preflight-only background reference; the physical run will generate black background. No preflight image output.",
+  "capturedSetupIssue": "byte-count-bearing evidence refs must be narrowed to path/SHA for projection; found by independent static preflight before v002",
+  "projectionKeys": [
+    "digestRef",
+    "planRef",
+    "timelineRef",
+    "mediaRef",
+    "planBytes",
+    "timelineBytes",
+    "playbackSampleRate",
+    "observationSampleRate",
+    "connections"
+  ],
+  "referenceKeys": {
+    "planRef": [
+      "path",
+      "fileSha256"
+    ],
+    "timelineRef": [
+      "path",
+      "fileSha256"
+    ],
+    "mediaRef": [
+      "path",
+      "fileSha256"
+    ]
+  },
+  "nativeMappings": [
+    {
+      "recorded": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/04-c4b6154f65f0-normal.png",
+      "published": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/04-c4b6154f65f0-normal.png",
+      "fileSha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9"
+    },
+    {
+      "recorded": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/04-c4b6154f65f0-middle.png",
+      "published": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/04-c4b6154f65f0-middle.png",
+      "fileSha256": "a3fe915160ac81b8f5fa8393cc30e8a7d84682e051223da0d44fdd6c87de4f60"
+    },
+    {
+      "recorded": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/04-c4b6154f65f0-maximum.png",
+      "published": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/04-c4b6154f65f0-maximum.png",
+      "fileSha256": "589e37a9b8d43d9dee3692160863c5741a4a87c7afef3e09088bcd145fcf6d51"
+    },
+    {
+      "recorded": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-stable.png",
+      "published": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-stable.png",
+      "fileSha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc"
+    },
+    {
+      "recorded": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-left-12.png",
+      "published": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-left-12.png",
+      "fileSha256": "32050dac8c61db0e83e71ae99231468180fda2be1f73a2b85587b2867c5861f9"
+    },
+    {
+      "recorded": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-right-12.png",
+      "published": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-right-12.png",
+      "fileSha256": "982a624cb139768d5e4c47bcc344a002eb6ee8d67e1ce4e959b81295fcefd864"
+    },
+    {
+      "recorded": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-left-8.png",
+      "published": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-left-8.png",
+      "fileSha256": "9f2a33426182d8c838892e221c6eda5b146cc1fc783b7cec1de4f6eee1bc173b"
+    },
+    {
+      "recorded": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-right-8.png",
+      "published": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-right-8.png",
+      "fileSha256": "5c8e757b620cb6f285eb54248d37940a44bb3cabbf472f0281bd826a4f98a9e9"
+    },
+    {
+      "recorded": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-left-4.png",
+      "published": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-left-4.png",
+      "fileSha256": "4f97bca2b52d2d748f09b26948ad03ebbe9bcd46f696665f7f25b6be1de660c4"
+    },
+    {
+      "recorded": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-right-4.png",
+      "published": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-right-4.png",
+      "fileSha256": "a8f2c2f7c2b21ec93afa406502db53ab9d1a2fd27989179bca8d01a861431b6d"
+    }
+  ],
+  "frames": {
+    "pulseOriginal": 118,
+    "pulseProjected": 130,
+    "motionOriginal": 37,
+    "motionProjected": 49
+  },
+  "helperSha256": "67709890f05f2bf6f8e32af1497123b0938d844667ae9224b0d44b93f42eacff"
+}

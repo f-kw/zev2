@@ -1,0 +1,358 @@
+{
+  "schemaVersion": "stage4-pcm-concat-diagnostic-v001",
+  "createdAt": "2026-09-18T06:43:16.662Z",
+  "fixture": {
+    "width": 64,
+    "height": 48,
+    "fps": 30,
+    "sampleRate": 44100,
+    "channels": 2,
+    "sourceFrames": 462,
+    "boundaryFrame": 340,
+    "insertionFrames": 12,
+    "sampleValues": "deterministic nonzero binary fractions, unique per-channel short periods"
+  },
+  "sourcePcmSha256": "1363b4b5716ebb974c48f3592d4c6cc4487aca1274735e8c964c5deabdc2686c",
+  "results": [
+    {
+      "name": "joint",
+      "expectedSampleCount": 696780,
+      "observedSampleCount": 696781,
+      "bytesEqual": false,
+      "firstDifferentByte": 4139522,
+      "firstDifferentSample": 517440,
+      "sourceContinuationAt": 517441,
+      "expectedPcmSha256": "4c47e15621870bd2a72d8a4f0030c053c094fe64ee57f25572cd6200b758512c",
+      "actualPcmSha256": "6f260ffb3747eb1e873bf9be9440664a33e2b4c113123b64b07cbf2b71c5bfd0"
+    },
+    {
+      "name": "separate",
+      "expectedSampleCount": 696780,
+      "observedSampleCount": 696780,
+      "bytesEqual": true,
+      "firstDifferentByte": -1,
+      "firstDifferentSample": null,
+      "sourceContinuationAt": 517440,
+      "expectedPcmSha256": "4c47e15621870bd2a72d8a4f0030c053c094fe64ee57f25572cd6200b758512c",
+      "actualPcmSha256": "4c47e15621870bd2a72d8a4f0030c053c094fe64ee57f25572cd6200b758512c"
+    },
+    {
+      "name": "separate-sample-clock",
+      "expectedSampleCount": 696780,
+      "observedSampleCount": 696780,
+      "bytesEqual": true,
+      "firstDifferentByte": -1,
+      "firstDifferentSample": null,
+      "sourceContinuationAt": 517440,
+      "expectedPcmSha256": "4c47e15621870bd2a72d8a4f0030c053c094fe64ee57f25572cd6200b758512c",
+      "actualPcmSha256": "4c47e15621870bd2a72d8a4f0030c053c094fe64ee57f25572cd6200b758512c"
+    }
+  ],
+  "commands": [
+    {
+      "executable": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-f",
+        "lavfi",
+        "-i",
+        "color=c=blue:s=64x48:r=30",
+        "-f",
+        "f32le",
+        "-ar",
+        "44100",
+        "-ac",
+        "2",
+        "-i",
+        "/private/tmp/stage4-concat-diagnostic-v002/source.f32le",
+        "-filter_complex",
+        "[0:v]trim=end_frame=462,setpts=N/(30*TB)[v];[1:a]asetnsamples=n=1024:p=0,asetpts=N/SR/TB[a]",
+        "-map",
+        "[v]",
+        "-map",
+        "[a]",
+        "-c:v",
+        "ffv1",
+        "-level",
+        "3",
+        "-pix_fmt",
+        "yuv420p",
+        "-fps_mode",
+        "passthrough",
+        "-c:a",
+        "pcm_f32le",
+        "-ar",
+        "44100",
+        "-ac",
+        "2",
+        "-f",
+        "nut",
+        "/private/tmp/stage4-concat-diagnostic-v002/source.nut"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stderr": ""
+    },
+    {
+      "executable": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-filter_complex_threads",
+        "1",
+        "-i",
+        "/private/tmp/stage4-concat-diagnostic-v002/source.nut",
+        "-filter_complex_script",
+        "/private/tmp/stage4-concat-diagnostic-v002/joint.filter.txt",
+        "-map",
+        "[timelineVideo]",
+        "-map",
+        "[timelineAudio]",
+        "-c:v",
+        "ffv1",
+        "-level",
+        "3",
+        "-pix_fmt",
+        "yuv420p",
+        "-fps_mode",
+        "passthrough",
+        "-c:a",
+        "pcm_f32le",
+        "-ar",
+        "44100",
+        "-ac",
+        "2",
+        "-f",
+        "nut",
+        "/private/tmp/stage4-concat-diagnostic-v002/joint.nut"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stderr": ""
+    },
+    {
+      "executable": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-i",
+        "/private/tmp/stage4-concat-diagnostic-v002/joint.nut",
+        "-map",
+        "0:a:0",
+        "-vn",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stderr": ""
+    },
+    {
+      "executable": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-filter_complex_threads",
+        "1",
+        "-i",
+        "/private/tmp/stage4-concat-diagnostic-v002/source.nut",
+        "-filter_complex_script",
+        "/private/tmp/stage4-concat-diagnostic-v002/separate.filter.txt",
+        "-map",
+        "[timelineVideo]",
+        "-map",
+        "[timelineAudio]",
+        "-c:v",
+        "ffv1",
+        "-level",
+        "3",
+        "-pix_fmt",
+        "yuv420p",
+        "-fps_mode",
+        "passthrough",
+        "-c:a",
+        "pcm_f32le",
+        "-ar",
+        "44100",
+        "-ac",
+        "2",
+        "-f",
+        "nut",
+        "/private/tmp/stage4-concat-diagnostic-v002/separate.nut"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stderr": ""
+    },
+    {
+      "executable": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-i",
+        "/private/tmp/stage4-concat-diagnostic-v002/separate.nut",
+        "-map",
+        "0:a:0",
+        "-vn",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stderr": ""
+    },
+    {
+      "executable": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-filter_complex_threads",
+        "1",
+        "-i",
+        "/private/tmp/stage4-concat-diagnostic-v002/source.nut",
+        "-filter_complex_script",
+        "/private/tmp/stage4-concat-diagnostic-v002/separate-sample-clock.filter.txt",
+        "-map",
+        "[timelineVideo]",
+        "-map",
+        "[timelineAudio]",
+        "-c:v",
+        "ffv1",
+        "-level",
+        "3",
+        "-pix_fmt",
+        "yuv420p",
+        "-fps_mode",
+        "passthrough",
+        "-c:a",
+        "pcm_f32le",
+        "-ar",
+        "44100",
+        "-ac",
+        "2",
+        "-f",
+        "nut",
+        "/private/tmp/stage4-concat-diagnostic-v002/separate-sample-clock.nut"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stderr": ""
+    },
+    {
+      "executable": "/opt/homebrew/bin/ffmpeg",
+      "args": [
+        "-i",
+        "/private/tmp/stage4-concat-diagnostic-v002/separate-sample-clock.nut",
+        "-map",
+        "0:a:0",
+        "-vn",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stderr": ""
+    }
+  ],
+  "videoComparisons": [
+    {
+      "mode": "joint",
+      "expectedFrameCount": 474,
+      "observedFrameCount": 474,
+      "allRawYuvBytesEqual": true,
+      "expectedSha256": "34497dbee1292a5c6182865c790f507d0d14ad88b6407e79018c73cb5a3a7f1d",
+      "actualSha256": "34497dbee1292a5c6182865c790f507d0d14ad88b6407e79018c73cb5a3a7f1d"
+    },
+    {
+      "mode": "separate",
+      "expectedFrameCount": 474,
+      "observedFrameCount": 474,
+      "allRawYuvBytesEqual": true,
+      "expectedSha256": "34497dbee1292a5c6182865c790f507d0d14ad88b6407e79018c73cb5a3a7f1d",
+      "actualSha256": "34497dbee1292a5c6182865c790f507d0d14ad88b6407e79018c73cb5a3a7f1d"
+    },
+    {
+      "mode": "separate-sample-clock",
+      "expectedFrameCount": 474,
+      "observedFrameCount": 474,
+      "allRawYuvBytesEqual": true,
+      "expectedSha256": "34497dbee1292a5c6182865c790f507d0d14ad88b6407e79018c73cb5a3a7f1d",
+      "actualSha256": "34497dbee1292a5c6182865c790f507d0d14ad88b6407e79018c73cb5a3a7f1d"
+    }
+  ],
+  "actualFailureBoundary": {
+    "sourceStartSample": 499800,
+    "expectedContinuationSample": 517440,
+    "workingContinuationSample": 517441,
+    "finalContinuationSample": 517441,
+    "zeroSampleBeforeContinuation": true,
+    "sourceFirstSampleStereo": [
+      -0.008810454048216343,
+      -0.0063160136342048645
+    ],
+    "continuousSourceBytesMatchedAfterOneSample": true,
+    "checkedSamples": 255
+  },
+  "actualSourcePacketTimes": [
+    {
+      "pts": 492544,
+      "dts": 492544,
+      "duration": 1024,
+      "size": "8192"
+    },
+    {
+      "pts": 493568,
+      "dts": 493568,
+      "duration": 1024,
+      "size": "8192"
+    },
+    {
+      "pts": 494592,
+      "dts": 494592,
+      "duration": 1024,
+      "size": "8192"
+    },
+    {
+      "pts": 495615,
+      "dts": 495615,
+      "duration": 1024,
+      "size": "8192"
+    },
+    {
+      "pts": 496640,
+      "dts": 496640,
+      "duration": 1024,
+      "size": "8192"
+    },
+    {
+      "pts": 497664,
+      "dts": 497664,
+      "duration": 1024,
+      "size": "8192"
+    },
+    {
+      "pts": 498688,
+      "dts": 498688,
+      "duration": 1024,
+      "size": "8192"
+    },
+    {
+      "pts": 499711,
+      "dts": 499711,
+      "duration": 1024,
+      "size": "8192"
+    },
+    {
+      "pts": 500736,
+      "dts": 500736,
+      "duration": 1024,
+      "size": "8192"
+    },
+    {
+      "pts": 501760,
+      "dts": 501760,
+      "duration": 1024,
+      "size": "8192"
+    }
+  ],
+  "conclusion": "音声を浮動小数の秒換算から付け直す式が一部packet時刻を1sample切り下げ、共同A/V concatが動画との差を無音で補った。音声だけの結合は元のsample列を保つ。各音声区間と結合後を整数sample索引で時刻付けすれば丸めも持ち込まない。",
+  "sourceFilesModified": false
+}

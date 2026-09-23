@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "presentation-orchestration-saved-state-check-v001",
+  "kind": "caption",
+  "name": "caption-shift-missing",
+  "status": "rejected",
+  "assertion": "assertProjectedTimingV001",
+  "rejection": {
+    "type": "TypeError",
+    "message": "ORCHESTRATION_PROJECTION_INVALID: projected timing differs from immutable source"
+  },
+  "original": {
+    "clock": "digest-original",
+    "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+    "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+    "startFrame": 373,
+    "endFrameExclusive": 462
+  },
+  "expected": {
+    "clock": "digest-display",
+    "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+    "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+    "source": {
+      "clock": "digest-original",
+      "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "startFrame": 373,
+      "endFrameExclusive": 462
+    },
+    "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+    "startFrame": 385,
+    "endFrameExclusive": 474,
+    "displayFrameCount": 89,
+    "motionStartFrame": 385
+  },
+  "injected": {
+    "clock": "digest-display",
+    "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+    "projectionSha256": "edc7e9fb94da0de30a87b6dd8fa847825e19ac6cba68e715a51fbf90ca3a6b31",
+    "source": {
+      "clock": "digest-original",
+      "sourceClockSha256": "2a87934e3258886f36cb82c5705f251d9ab1e4d80b54b9afdee56daea63b44c3",
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+      "startFrame": 373,
+      "endFrameExclusive": 462
+    },
+    "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000009",
+    "startFrame": 373,
+    "endFrameExclusive": 462,
+    "displayFrameCount": 89,
+    "motionStartFrame": 373
+  }
+}

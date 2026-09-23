@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "stage4-pcm-concat-repair-verification-v001",
+  "createdAt": "2026-09-18T06:47:57.449Z",
+  "status": "passed",
+  "problem": "共同映像音声結合が、秒換算式で1sample短くなった入力packet時刻を映像へ合わせて無音補充し、黒区間直後の音声列を1sample遅らせた。",
+  "correction": "映像と音声を別々に結合し、各音声区間と結合後の時刻を整数sample索引から与える。映像結合を最後に保つので既存Soft wrapperは変更しない。sampleの切捨て・追加・許容差・時間補正は導入しない。",
+  "files": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_effects_v001.mjs",
+      "bytes": 8849,
+      "fileSha256": "f15ce2adcf7dc93f029f8ed27fbf433c417ec0772356f629daa1b496696c4687"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/connection_expression_v001.test.mjs",
+      "bytes": 22690,
+      "fileSha256": "ba172b3dc46dd027ada4976796c1db2ac73a4de5b804196b9892d3491b52af90"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_effects_pcm_clock_v001.test.mjs",
+      "bytes": 6394,
+      "fileSha256": "8925f1f54e0051a3ed6167792372ee1117aed6e56b2afb7095e698d070064be3"
+    }
+  ],
+  "beforeRepairEvidence": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-cause-audit-v001.json",
+    "bytes": 9108,
+    "fileSha256": "e4e5dc3758f4107a310e1daacb5fc6fb4484259bc744c59e36d4e5f827495eb4"
+  },
+  "tests": [
+    {
+      "evidence": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-existing-regressions-v001.tap",
+        "bytes": 8256,
+        "fileSha256": "50a907d29674bd7b1927c54f348b259693ae1f8ac46b96f18dab5396bc51a2eb"
+      },
+      "tests": 34,
+      "passed": 34,
+      "failed": 0
+    },
+    {
+      "evidence": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-editing-stage4-sources-20260918/pcm-concat-new-regression-v001.tap",
+        "bytes": 378,
+        "fileSha256": "c4e8ed3315bd3d7718d376947a91bbdabbdb7de965fdaeb90f77b59eb9906fd1"
+      },
+      "tests": 1,
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "newRegression": {
+    "input": "64x48 30fps / 44.1kHz stereo / 1024sample packet / seconds-derived timestamps retaining the measured one-sample packet PTS rounding",
+    "sourceFrames": 462,
+    "insertionFrames": 12,
+    "boundaries": [
+      1,
+      2,
+      339,
+      340,
+      341
+    ],
+    "expectedOutputFrames": 474,
+    "expectedOutputSamples": 696780,
+    "allPcmBytesCompared": true,
+    "allYuvBytesCompared": true,
+    "allOutputAudioPacketTimestampsMatchedCumulativeSamples": true
+  },
+  "existingCoverage": "effects, connection, background full, background range: 34 existing tests passed, including Soft behavior and complete audio/video checks.",
+  "priorStage3Behavior": "固定自動案・自動案専用入口・原資料・保存overrideは無変更。旧成果物は保持。共通処理で今後再生成する背景だけ、新しい独立結合と整数sample時計を使う。",
+  "evidenceHistory": "render-verification-v001.jsonは修正前の57参照と検査を保存した履歴。現在の描画識別はこの修正検証のdrawingRulesを参照する。",
+  "drawingRules": {
+    "fileCount": 57,
+    "canonicalSha256": "2a994d788acf4723c27188ecb3da2cdfeaa99679ed15f81a32d5e70025f20a16",
+    "decoderRoles": {
+      "currentDrawingAndNewAudio": {
+        "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "bytes": 442864,
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      "savedBackgroundObservation": {
+        "path": "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffmpeg",
+        "bytes": 429512,
+        "fileSha256": "f33afb2c1e6510138dd0dd22c25b09908c2ac55780ddd7c8e35c588f076b9493"
+      }
+    }
+  },
+  "constraints": "修正後全体生成の実媒体検査とUIブラウザー操作の実証は別途。今回の小型回帰で完成を認定しない。"
+}

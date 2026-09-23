@@ -1,0 +1,64 @@
+{
+  "schema_version": "zev-point-review-v001",
+  "batch_id": "HRB-Q3-001",
+  "revision": "v001",
+  "title": "完成Digestの確認ポイント",
+  "intro": "字幕・時間の対応と音声の数値から挙げた確認候補です。短い区間を再生して、現状を保つか、直したい点があるかを回答してください。",
+  "media": [
+    {
+      "media_id": "HRB-001",
+      "label": "無修正の自動演出版",
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+      "sha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 4867,
+      "timeline_id": "completed-49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+      "timeline_start_frame": 0
+    }
+  ],
+  "points": [
+    {
+      "point_id": "Q3-C001",
+      "review_id": "HR-Q3-001",
+      "related_review_ids": [
+        "HR-009",
+        "HR-003",
+        "HR-004"
+      ],
+      "title": "冒頭の最初の言葉と字幕の切替",
+      "question": "完成動画の冒頭で「あーもういるやん」から「これもういるやん」「いるやんいるやん」へ続く現在の字幕の切替は、最初の言葉の読み取りも含め、このまま採用できますか？",
+      "target_function": "将来の冒頭字幕の表示時間と入退場の組合せについての採用判断。／将来の連続する字幕の切替確認に、人間が示した読み取り上の条件を反映すること。",
+      "change_summary": "完成動画の現状を確認します。修正版はまだ作成していません。",
+      "why_human_review": "字幕と測定値から考えた仮説です。完成動画で最初の文が実際にどの不透明度で表示され、続く2字幕とどう切り替わって見えるか。 音声と背景の状況を含め、最初の言葉を読まなくても冒頭の発見が十分伝わるか。",
+      "scope": {
+        "level": "bundle",
+        "applies_to": [
+          "あーもういるやん（0.267–0.433秒）",
+          "これもういるやん（0.433–1.233秒）",
+          "いるやんいるやん（1.233–2.367秒）"
+        ],
+        "does_not_apply_to": [
+          "跳ねる・揺れる動きの機能使用可という採用判断",
+          "Q1の動きの滑らかさの修正後確認",
+          "字幕本文や採用区間を変更する許可",
+          "動画全体の品質判定",
+          "他の動画・別の版",
+          "未提示の修正案の採用"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "Q3-C001-current",
+          "label": "現在の完成動画",
+          "role": "candidate",
+          "media_id": "HRB-001",
+          "start_frame": 8,
+          "end_frame": 71,
+          "context_start_frame": 0,
+          "context_end_frame": 71
+        }
+      ]
+    }
+  ]
+}

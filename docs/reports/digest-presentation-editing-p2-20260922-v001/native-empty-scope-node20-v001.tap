@@ -1,0 +1,45 @@
+TAP version 13
+# Subtest: selected frames retain global/local clocks and reject duplicate local clocks or unsorted media requests
+ok 1 - selected frames retain global/local clocks and reject duplicate local clocks or unsorted media requests # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.534667
+  ...
+# Subtest: an exited extraction cannot pass with missing or extra selected outputs
+ok 2 - an exited extraction cannot pass with missing or extra selected outputs # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.048084
+  ...
+# Subtest: an empty caption scope produces no extracted frame or prepared layer
+ok 3 - an empty caption scope produces no extracted frame or prepared layer
+  ---
+  duration_ms: 5.526083
+  ...
+# Subtest: batch extraction matches original single-frame RGB for H264 and FFV1, including second-boundary and range offsets
+ok 4 - batch extraction matches original single-frame RGB for H264 and FFV1, including second-boundary and range offsets # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.078375
+  ...
+# Subtest: prepared alpha, shared decoded planes and shared prefixes retain all reference pixels, classes and strict decisions
+ok 5 - prepared alpha, shared decoded planes and shared prefixes retain all reference pixels, classes and strict decisions # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.098
+  ...
+# Subtest: file-based exact distances match the pure classifier, reuse equal byte pairs and reject changed files
+ok 6 - file-based exact distances match the pure classifier, reuse equal byte pairs and reject changed files # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.03575
+  ...
+# Subtest: process timing separates child completion from evidence write on success and failure
+ok 7 - process timing separates child completion from evidence write on success and failure # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.031292
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 6
+# todo 0
+# duration_ms 67.746542

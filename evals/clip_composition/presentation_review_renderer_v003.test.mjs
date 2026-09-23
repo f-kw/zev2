@@ -357,7 +357,7 @@ test('the six review checks remain owned by the existing renderer QC', () => {
   }
 });
 
-test('the same QC calculations accept only their own v002 or v003 plan reference', async () => {
+test('layout and application QC accept only their own v002 or v003 plan reference', async () => {
   const actual = await loadActual();
   const planReport = buildPresentationReviewRenderPlanV003({
     instructionBundle: actual.instructionBundle,
@@ -369,20 +369,23 @@ test('the same QC calculations accept only their own v002 or v003 plan reference
   assert.equal(planReport.status, 'passed');
 
   const v3 = evaluatePresentationReviewRendererQcV003(
-    makeQcInput(planReport.plan, PRESENTATION_REVIEW_RENDER_OUTPUT_NAMES_V003.plan),
+    {...makeQcInput(planReport.plan, PRESENTATION_REVIEW_RENDER_OUTPUT_NAMES_V003.plan),
+      requireFinalVisibility: false},
   );
   assert.equal(v3.status, 'passed');
   assert.equal(v3.schemaVersion, 'presentation-review-render-qc-v003');
 
   const wrongPlanReference = evaluatePresentationReviewRendererQcV003(
-    makeQcInput(planReport.plan, 'presentation-render-plan-v002.json'),
+    {...makeQcInput(planReport.plan, 'presentation-render-plan-v002.json'),
+      requireFinalVisibility: false},
   );
   assert.ok(
     wrongPlanReference.violations.some((entry) => entry.code === 'INSTRUCTION_RENDER_MISSING'),
   );
 
   const v2 = evaluatePresentationRendererQcV002(
-    makeQcInput(planReport.plan, 'presentation-render-plan-v002.json'),
+    {...makeQcInput(planReport.plan, 'presentation-render-plan-v002.json'),
+      requireFinalVisibility: false},
   );
   assert.equal(v2.status, 'passed');
   assert.equal(v2.schemaVersion, 'presentation-render-qc-v002');

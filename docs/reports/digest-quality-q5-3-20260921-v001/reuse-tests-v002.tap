@@ -1,0 +1,47 @@
+TAP version 13
+# Subtest: both fixed short clips preserve local captions, source pieces and audio while the introduction moves globally
+ok 1 - both fixed short clips preserve local captions, source pieces and audio while the introduction moves globally
+  ---
+  duration_ms: 760.104125
+  type: 'test'
+  ...
+# Subtest: changed caption text, wrapping, provenance, appearance and fade phase all prevent reuse
+ok 2 - changed caption text, wrapping, provenance, appearance and fade phase all prevent reuse
+  ---
+  duration_ms: 5.01825
+  type: 'test'
+  ...
+# Subtest: source byte changes, equal-duration source shifts, piece reorder and local audio shifts prevent reuse
+ok 3 - source byte changes, equal-duration source shifts, piece reorder and local audio shifts prevent reuse
+  ---
+  duration_ms: 14.096041
+  type: 'test'
+  ...
+# Subtest: a different comparison window or local duration cannot borrow the accepted short artifact
+ok 4 - a different comparison window or local duration cannot borrow the accepted short artifact
+  ---
+  duration_ms: 4.3235
+  type: 'test'
+  ...
+# Q5-3 reuse-boundary evidence: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/reuse-tests-qVVkZM
+# Subtest: disabled selection reads no old media and a changed binding or stale saved content is rejected
+ok 5 - disabled selection reads no old media and a changed binding or stale saved content is rejected
+  ---
+  duration_ms: 795.170917
+  type: 'test'
+  ...
+# Subtest: historical frame, audio, media and native-replay evidence must agree before any existing clip is reused
+ok 6 - historical frame, audio, media and native-replay evidence must agree before any existing clip is reused
+  ---
+  duration_ms: 5162.737917
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6943.160709

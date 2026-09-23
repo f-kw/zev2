@@ -19,6 +19,7 @@ import {
 import {indexExplicitLinesV001} from './presentation_renderer_text_layout_v001.mjs';
 import {
   actualToolVersions,
+  buildPresentationOverlayFileBindingsV001,
   executeValidatedPresentationDrawAndQcV001,
   inspectFrameCount,
   inspectGitStateV001,
@@ -981,13 +982,7 @@ export async function executePresentationReviewRendererV003(job) {
       fileSha256V002(applicationResultsPath),
       fileSha256V002(qcPath),
     ]);
-    const overlayFiles = applicationResults
-      .map((result) => ({
-        instructionId: result.instructionId,
-        path: result.overlayFile,
-        fileSha256: result.overlaySha256,
-      }))
-      .sort((left, right) => left.path.localeCompare(right.path, 'en'));
+    const overlayFiles = buildPresentationOverlayFileBindingsV001(applicationResults);
     const rendererFiles = [];
     for (const rendererFile of [
       path.join(MODULE_DIRECTORY, 'presentation_renderer_entry_v001.tsx'),
@@ -999,6 +994,10 @@ export async function executePresentationReviewRendererV003(job) {
       path.join(MODULE_DIRECTORY, 'render_presentation_v002.mjs'),
       fileURLToPath(import.meta.url),
       path.join(MODULE_DIRECTORY, 'inspect_presentation_render_layout_v001.ts'),
+      ...(applicationResults.some(result => result.pulse !== undefined) ? [
+        path.join(MODULE_DIRECTORY, 'presentation_pulse_v001.mjs'),
+        path.join(MODULE_DIRECTORY, 'presentation_pulse_renderer_qc_v001.mjs'),
+      ] : []),
     ]) {
       rendererFiles.push({
         path: repoPath(rendererFile),

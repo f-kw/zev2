@@ -1,0 +1,109 @@
+{
+  "status": "passed",
+  "cacheProofs": [
+    {
+      "name": "baseline",
+      "cache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v001/cache/baseline.nut",
+        "bytes": 27895930738,
+        "fileSha256": "34283d00b9b662f61ff2c0df6b5de5444929a9355d5439711f55a0c9fff3d4de"
+      },
+      "encoderInputFrameHash": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v001/cache/baseline-pre-encode.framehash.txt",
+        "bytes": 7320875,
+        "fileSha256": "0f23dfb14f15412f8609cf395a84bd80763edde3e0a3c8178c3fab1ad25280cb"
+      },
+      "decodedFrameHash": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/cache/baseline-decoded.framehash.txt",
+        "bytes": 7320875,
+        "fileSha256": "0f23dfb14f15412f8609cf395a84bd80763edde3e0a3c8178c3fab1ad25280cb"
+      },
+      "all65363PixelsAndTimesIdentical": true,
+      "inherited": true,
+      "sourceGeneration": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/inherited-baseline-source.json",
+        "bytes": 192932,
+        "fileSha256": "1b148ec7d3606e331a2e21cec06cc9c4064ebc1bf636d6b7327591594857a1ba"
+      }
+    },
+    {
+      "name": "transparent",
+      "cache": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/cache/transparent.nut",
+        "bytes": 15006655825,
+        "fileSha256": "f9f44f68436b171a1906ed27df75825e8a6f2c1307fd6878c1d59925d16b597e"
+      },
+      "encoderInputFrameHash": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/cache/transparent-pre-encode.framehash.txt",
+        "bytes": 7320875,
+        "fileSha256": "e62fa404f6d0e1dc6f4462c20ed4bde9dc386502627ea51b1c996936e34ea378"
+      },
+      "decodedFrameHash": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/cache/transparent-decoded.framehash.txt",
+        "bytes": 7320875,
+        "fileSha256": "e62fa404f6d0e1dc6f4462c20ed4bde9dc386502627ea51b1c996936e34ea378"
+      },
+      "all65363PixelsAndTimesIdentical": true,
+      "inherited": false,
+      "sourceGeneration": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/cache/transparent-generation-input.json",
+        "bytes": 7193320,
+        "fileSha256": "4da6fbdbadf2e4b3f54c90ce9bb779cfc73ff766ae9157f3c6c8793fe540671d"
+      }
+    }
+  ],
+  "actualEncodedFramesIdentical": 65363,
+  "decodedComparisonPixelFormats": [
+    "yuv420p",
+    "rgba"
+  ],
+  "colorEvidence": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/observed-cache-interpretation.json",
+    "bytes": 12783,
+    "fileSha256": "3c129b091a3e062f23206d5db7ad4689567573b4b1f8aa14064774b28f8000b1"
+  },
+  "inheritedBaseline": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/inherited-baseline-source.json",
+    "bytes": 192932,
+    "fileSha256": "1b148ec7d3606e331a2e21cec06cc9c4064ebc1bf636d6b7327591594857a1ba"
+  },
+  "encodedVideoComparisons": [
+    {
+      "pixelFormat": "yuv420p",
+      "identicalFrames": 65363,
+      "artifacts": [
+        {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/source-encoded-yuv420p.framehash.txt",
+          "bytes": 7320875,
+          "fileSha256": "80ba908b549275b54dbb39ce6824d339d3960779d69260acef70594d2ac80ea6"
+        },
+        {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/replay-encoded-yuv420p.framehash.txt",
+          "bytes": 7320875,
+          "fileSha256": "80ba908b549275b54dbb39ce6824d339d3960779d69260acef70594d2ac80ea6"
+        }
+      ]
+    },
+    {
+      "pixelFormat": "rgba",
+      "identicalFrames": 65363,
+      "artifacts": [
+        {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/source-encoded-rgba.framehash.txt",
+          "bytes": 7320875,
+          "fileSha256": "0542b4ca7dca2131d2737e9ab8396aa87b46d54356e1115071e8f588cfa4b316"
+        },
+        {
+          "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/formal-v004/qc-only-v002/replay-encoded-rgba.framehash.txt",
+          "bytes": 7320875,
+          "fileSha256": "0542b4ca7dca2131d2737e9ab8396aa87b46d54356e1115071e8f588cfa4b316"
+        }
+      ]
+    }
+  ],
+  "sourceMain": {
+    "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/render-v008-completed-main-verification-v001.json",
+    "bytes": 252072,
+    "fileSha256": "0146e4e48ef051de734a1febfaa50d44eb234466395359730cf8d76f7eccc642"
+  }
+}

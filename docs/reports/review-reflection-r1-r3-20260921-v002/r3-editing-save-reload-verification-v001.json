@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "r3-editing-save-reload-verification-v001",
+  "status": "passed",
+  "resultRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-editing-save-reload-v001/result.json",
+    "bytes": 13464,
+    "fileSha256": "d02850d34b058c95910c9dab4862e821f42aa37241a0cf1fb9f09e9f0f838fc8"
+  },
+  "helperRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/tools/digest-quality/r3-editing-save-reload.mjs",
+    "bytes": 12854,
+    "fileSha256": "46c6b9fc7b1011775f5fa1fecc84827e9d22568aac6f6284951e008b2e57a649"
+  },
+  "nodeVersion": "v20.19.6",
+  "selectionRecordVersion": "presentation-orchestration-selection-record-v003",
+  "target": {
+    "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000014",
+    "text": "なんかグロいやつに捕まってる",
+    "automaticSelection": {
+      "preset": "panel",
+      "paletteId": "warm"
+    }
+  },
+  "phases": [
+    {
+      "phase": "palette",
+      "selection": {
+        "preset": "panel",
+        "paletteId": "cool"
+      },
+      "hasOverride": true,
+      "independentReloadRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-editing-save-reload-v001/palette-reload-result.json",
+        "bytes": 1860,
+        "fileSha256": "641f6cbbff82c94d0fa5ee22016f587621132e26cd300e676eb9d8974888aeeb"
+      },
+      "parentPid": 61833,
+      "childPid": 61928,
+      "otherCaptionsUnchanged": true,
+      "connectionsUnchanged": true,
+      "fixedAutomaticStateUnchanged": true
+    },
+    {
+      "phase": "normal",
+      "selection": {
+        "preset": "normal"
+      },
+      "hasOverride": true,
+      "independentReloadRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-editing-save-reload-v001/normal-reload-result.json",
+        "bytes": 1715,
+        "fileSha256": "a5e8186696c20ea527cd441806f10e488fa642fe388311577f1f52483a293c61"
+      },
+      "parentPid": 61833,
+      "childPid": 61995,
+      "otherCaptionsUnchanged": true,
+      "connectionsUnchanged": true,
+      "fixedAutomaticStateUnchanged": true
+    },
+    {
+      "phase": "reset",
+      "selection": {
+        "preset": "panel",
+        "paletteId": "warm"
+      },
+      "hasOverride": false,
+      "independentReloadRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-editing-save-reload-v001/reset-reload-result.json",
+        "bytes": 1859,
+        "fileSha256": "33692db291dfa8d16763d054c86b34c56a9cb3555007592349ce8e2f83237142"
+      },
+      "parentPid": 61833,
+      "childPid": 62082,
+      "otherCaptionsUnchanged": true,
+      "connectionsUnchanged": true,
+      "fixedAutomaticStateUnchanged": true
+    }
+  ],
+  "nativeApplicability": [
+    {
+      "proofRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-editing-save-reload-v001/physical-checks/applicability/b3b280a187922f62f245fc8d49400cc386ac2b0f28895e6faa22b31e4c9d3d12.json",
+        "bytes": 7132,
+        "fileSha256": "c21d87301759bd60abdbdbb4b503c2f4316c6d4e2721317efed646b43d7b39c8"
+      },
+      "status": "passed",
+      "violations": [],
+      "nativeStateCount": 1,
+      "nativeAssets": {
+        "nativeDraws": 3,
+        "bitmapReuses": 0,
+        "verifiedPairsAdded": 1
+      },
+      "mediaCheck": "not-performed"
+    },
+    {
+      "proofRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-editing-save-reload-v001/physical-checks/applicability/dd2a5360779ed49e3ca12fe2b1567cd26e796ba2de71dde02ad36f9a8e131488.json",
+        "bytes": 7614,
+        "fileSha256": "a1548c42144f3bc3b552e6abc50e46730d6cbef7dc622cda40427bca0f6ba44a"
+      },
+      "status": "passed",
+      "violations": [],
+      "nativeStateCount": 1,
+      "nativeAssets": {
+        "nativeDraws": 4,
+        "bitmapReuses": 0,
+        "verifiedPairsAdded": 1
+      },
+      "mediaCheck": "not-performed"
+    },
+    {
+      "proofRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r3-editing-save-reload-v001/physical-checks/applicability/fdeca2bb56c95d7cfe8a50039c5d6e34316c8026041898e2706f352f6944655f.json",
+        "bytes": 7621,
+        "fileSha256": "f95893fd0f9f072f35167307194e737aa66a7c3213e67dea34da8ab2a457b03b"
+      },
+      "status": "passed",
+      "violations": [],
+      "nativeStateCount": 1,
+      "nativeAssets": {
+        "nativeDraws": 4,
+        "bitmapReuses": 0,
+        "verifiedPairsAdded": 1
+      },
+      "mediaCheck": "not-performed"
+    }
+  ],
+  "inputBytesUnchanged": true,
+  "resetReturnedToOriginalAutomaticState": true,
+  "originalMediaUse": "旧HRB完成版の元path/SHAを初期化用参照として保持。新配色版の完成媒体とは扱わず、プレビュー・再生・動画生成・公開は行っていない。",
+  "limits": [
+    "保存APIと実入力の適用検査。UIのDOM検査ではない。",
+    "A〜Dの保留箇所に実装修正を加えていない。"
+  ],
+  "newSetupCorrections": 0,
+  "productionImplementationChanges": 0
+}

@@ -1,0 +1,432 @@
+{
+  "schemaVersion": "digest-quality-q4-actual-renders-v001",
+  "status": "passed",
+  "candidateCount": 3,
+  "totalFrames": 1096,
+  "nativeFrameSamples": 31,
+  "candidateDirectory": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003",
+  "allRulesMatch": true,
+  "humanQualityApproved": false,
+  "candidates": [
+    {
+      "candidateId": "Q4-C001",
+      "completionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C001-evidence/completion.json",
+        "bytes": 88652493,
+        "fileSha256": "8b8162a9ecc1170a978a4c0b9663a69ec6a1f1a26713d278eea2e4517826c689"
+      },
+      "execution": {
+        "candidate": "Q4-C001",
+        "command": [
+          "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+          "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C001-retry-job-v003.json"
+        ],
+        "exitCode": 0,
+        "completedAt": "2026-09-20T10:26:00.914739+00:00",
+        "stdoutSha256": "cf11596d233b7bf45b93c69780f5a5beb3416e4c36c9bd166b81ecb4a620d88d",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "mediaRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C001-render/presentation-rendered-v002.mp4",
+        "bytes": 4346875,
+        "fileSha256": "209397f26a3164d61496b599fe2b7209db3f6d4949115cd27ea63ac4690017ce"
+      },
+      "range": {
+        "startFrame": 2511,
+        "endFrameExclusive": 3197
+      },
+      "scope": {
+        "kind": "range",
+        "startFrame": 2511,
+        "endFrameExclusive": 3197,
+        "fullFrameCount": 44408,
+        "frameCount": 686,
+        "viewSha256": "7839f582005ee13fe412df12944e2fa405d3b3d8c73298194512045ed1c7181a",
+        "projectionSha256": "a18685c59bcb45d2037354b199336c9bb39eb5d8d694a297dd3a5eb6e0c8b52e",
+        "fourSavedSha256": {
+          "captionAuto": "c4a8261186094a340a9e2da079c2960e684d20365f3a5d9a972f2fdad6fd870e",
+          "captionOverrides": "3650fc4f49f7a3e4c6f4847017f89cdb0df3aa7a961e23a2c688ae155345fa32",
+          "connectionAuto": "6f7cb2b85e5aad146264d73ec7cb09613d615f070ecde4a7e27915550dec7e84",
+          "connectionOverrides": "cc2ffd8c2caca26e1fdecbafe8d72ef5e4cc0bd1a40b4a8ee88cb218c2e14494"
+        },
+        "playbackStartSample": 4017600,
+        "playbackEndSampleExclusive": 5115200
+      },
+      "frameCount": 686,
+      "viewSha256": "7839f582005ee13fe412df12944e2fa405d3b3d8c73298194512045ed1c7181a",
+      "projectionSha256": "a18685c59bcb45d2037354b199336c9bb39eb5d8d694a297dd3a5eb6e0c8b52e",
+      "fourSavedSha256": {
+        "captionAuto": "c4a8261186094a340a9e2da079c2960e684d20365f3a5d9a972f2fdad6fd870e",
+        "captionOverrides": "3650fc4f49f7a3e4c6f4847017f89cdb0df3aa7a961e23a2c688ae155345fa32",
+        "connectionAuto": "6f7cb2b85e5aad146264d73ec7cb09613d615f070ecde4a7e27915550dec7e84",
+        "connectionOverrides": "cc2ffd8c2caca26e1fdecbafe8d72ef5e4cc0bd1a40b4a8ee88cb218c2e14494"
+      },
+      "drawingRulesSha256": "073d3f2172cd3d424bb07b07724c7f6fe5fdfc87af5ec123bfa358affc58d98f",
+      "backgroundProofRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C001-evidence/background/proof.json",
+        "fileSha256": "9708b78736cfbe3f8972ac3c5b7b73a8f147a42d7b456d246bce0c7ca17e4114",
+        "bytes": 12417
+      },
+      "backgroundVideoPreserved": {
+        "comparedYuvBytes": 2133734400,
+        "expectedPayloadSha256": "8bcd18de5befc8edef577292629a3ad31b45fc299d8556ca246e5a712b8eec94",
+        "observedPayloadSha256": "8bcd18de5befc8edef577292629a3ad31b45fc299d8556ca246e5a712b8eec94"
+      },
+      "backgroundAudioPreserved": {
+        "sampleRate": 48000,
+        "sampleCount": 1097600,
+        "comparedPcmBytes": 8780800,
+        "expectedPayloadSha256": "1bd37138e22139767277c6369f053418ffd5e3ccc24c5242b4f82c32f5208358",
+        "observedPayloadSha256": "1bd37138e22139767277c6369f053418ffd5e3ccc24c5242b4f82c32f5208358"
+      },
+      "finalAudioClock": {
+        "status": "passed",
+        "sampleRate": 48000,
+        "channels": 2,
+        "streamTimeBase": "1/48000",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 1097600,
+        "durationSeconds": 22.866666666666667,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 1096704,
+          "dts": 1096704,
+          "duration": 896
+        },
+        "packetCount": 1073,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "b1db3cb0fa1f957a0375609c3dfb6c2d6a9b6ea01c1c24942e0913594bc08367",
+        "rawDecodedSampleCount": 1097728,
+        "logicalDecodedSampleCount": 1097600,
+        "decodedTailSampleCount": 128,
+        "rawDecodedPayloadSha256": "aab7426c92961166629d541cc0e6b9b6172e88f14cc12a1e45dfb9328e4246fa",
+        "logicalDecodedPayloadSha256": "4783fabd1e70dd4269ea49aa9bd17d5bf8d5443b7ddccc6b083a3847ac85f843",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 1097600
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "finalMuxCopiesEncodedAudioPackets": true,
+      "qualityChecks": {
+        "finalStatus": "passed",
+        "completedFrameStatus": "passed",
+        "violationCount": 0,
+        "exactReplayMp4BytesIdentical": true,
+        "nativeFrameSampleCount": 10,
+        "captionInspectionCount": 3
+      },
+      "timings": {
+        "inputBindingMilliseconds": 1278.3212910000002,
+        "initialEvidenceWriteMilliseconds": 0.6460830000000897,
+        "backgroundMilliseconds": 14619.406958,
+        "preparationMilliseconds": 36595.754833,
+        "drawAndQcMilliseconds": 302172.185666,
+        "drawEvidenceWriteMilliseconds": 472.7170000000042,
+        "finalVerificationBeforePublishMilliseconds": 1202.41866700002,
+        "publicationAndReverificationMilliseconds": 792.5350830000243,
+        "elapsedMilliseconds": 341296.12616600003
+      },
+      "humanQuality": "not-evaluated"
+    },
+    {
+      "candidateId": "Q4-C002",
+      "completionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C002-evidence/completion.json",
+        "bytes": 88553287,
+        "fileSha256": "8d4bc5d64c1a4c938485302bcf777e1ee3fe7e3589c000b567ccaffb498c5d52"
+      },
+      "execution": {
+        "candidate": "Q4-C002",
+        "command": [
+          "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+          "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C002-job.json"
+        ],
+        "exitCode": 0,
+        "completedAt": "2026-09-20T10:27:20.385880+00:00",
+        "stdoutSha256": "0fc991ab68f48a9457d4f29ec153daea9ee6c0ccd076d304c7b345e6cd9fbc86",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "mediaRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C002-render/presentation-rendered-v002.mp4",
+        "bytes": 1237690,
+        "fileSha256": "9ea1730ccc3bd3561291a185428aa3aa72afcc2610b0225adcd8c37049f44fce"
+      },
+      "range": {
+        "startFrame": 4436,
+        "endFrameExclusive": 4564
+      },
+      "scope": {
+        "kind": "range",
+        "startFrame": 4436,
+        "endFrameExclusive": 4564,
+        "fullFrameCount": 44408,
+        "frameCount": 128,
+        "viewSha256": "7839f582005ee13fe412df12944e2fa405d3b3d8c73298194512045ed1c7181a",
+        "projectionSha256": "a18685c59bcb45d2037354b199336c9bb39eb5d8d694a297dd3a5eb6e0c8b52e",
+        "fourSavedSha256": {
+          "captionAuto": "c4a8261186094a340a9e2da079c2960e684d20365f3a5d9a972f2fdad6fd870e",
+          "captionOverrides": "3650fc4f49f7a3e4c6f4847017f89cdb0df3aa7a961e23a2c688ae155345fa32",
+          "connectionAuto": "6f7cb2b85e5aad146264d73ec7cb09613d615f070ecde4a7e27915550dec7e84",
+          "connectionOverrides": "cc2ffd8c2caca26e1fdecbafe8d72ef5e4cc0bd1a40b4a8ee88cb218c2e14494"
+        },
+        "playbackStartSample": 7097600,
+        "playbackEndSampleExclusive": 7302400
+      },
+      "frameCount": 128,
+      "viewSha256": "7839f582005ee13fe412df12944e2fa405d3b3d8c73298194512045ed1c7181a",
+      "projectionSha256": "a18685c59bcb45d2037354b199336c9bb39eb5d8d694a297dd3a5eb6e0c8b52e",
+      "fourSavedSha256": {
+        "captionAuto": "c4a8261186094a340a9e2da079c2960e684d20365f3a5d9a972f2fdad6fd870e",
+        "captionOverrides": "3650fc4f49f7a3e4c6f4847017f89cdb0df3aa7a961e23a2c688ae155345fa32",
+        "connectionAuto": "6f7cb2b85e5aad146264d73ec7cb09613d615f070ecde4a7e27915550dec7e84",
+        "connectionOverrides": "cc2ffd8c2caca26e1fdecbafe8d72ef5e4cc0bd1a40b4a8ee88cb218c2e14494"
+      },
+      "drawingRulesSha256": "073d3f2172cd3d424bb07b07724c7f6fe5fdfc87af5ec123bfa358affc58d98f",
+      "backgroundProofRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C002-evidence/background/proof.json",
+        "fileSha256": "7d8545a24d4d8a5f16d62b3464e1334d722cd49436310b65d268571b63732493",
+        "bytes": 11555
+      },
+      "backgroundVideoPreserved": {
+        "comparedYuvBytes": 398131200,
+        "expectedPayloadSha256": "cc4b9b3b5f2079b8f4e3bbf0545555a88a7541f8b6072f6883921b8c1f3e264e",
+        "observedPayloadSha256": "cc4b9b3b5f2079b8f4e3bbf0545555a88a7541f8b6072f6883921b8c1f3e264e"
+      },
+      "backgroundAudioPreserved": {
+        "sampleRate": 48000,
+        "sampleCount": 204800,
+        "comparedPcmBytes": 1638400,
+        "expectedPayloadSha256": "8c01e3246a2eabde672551bf8854f4820820f6088e1b1d578cfad6e98d1227d4",
+        "observedPayloadSha256": "8c01e3246a2eabde672551bf8854f4820820f6088e1b1d578cfad6e98d1227d4"
+      },
+      "finalAudioClock": {
+        "status": "passed",
+        "sampleRate": 48000,
+        "channels": 2,
+        "streamTimeBase": "1/48000",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 204800,
+        "durationSeconds": 4.266666666666667,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 203776,
+          "dts": 203776,
+          "duration": 1024
+        },
+        "packetCount": 201,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "8f3888f809415dd6c0e68cc2bee350d6ab33a19975e19b4052c0bdbe07c7728e",
+        "rawDecodedSampleCount": 204800,
+        "logicalDecodedSampleCount": 204800,
+        "decodedTailSampleCount": 0,
+        "rawDecodedPayloadSha256": "2201b4e1c18e555fd3ca141494e62d6728cbe924da2ed46e4a196ee9a0eafdd5",
+        "logicalDecodedPayloadSha256": "2201b4e1c18e555fd3ca141494e62d6728cbe924da2ed46e4a196ee9a0eafdd5",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 204800
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "finalMuxCopiesEncodedAudioPackets": true,
+      "qualityChecks": {
+        "finalStatus": "passed",
+        "completedFrameStatus": "passed",
+        "violationCount": 0,
+        "exactReplayMp4BytesIdentical": true,
+        "nativeFrameSampleCount": 11,
+        "captionInspectionCount": 3
+      },
+      "timings": {
+        "inputBindingMilliseconds": 1328.6295,
+        "initialEvidenceWriteMilliseconds": 0.707290999999941,
+        "backgroundMilliseconds": 8227.520708,
+        "preparationMilliseconds": 13541.134167,
+        "drawAndQcMilliseconds": 62897.205709,
+        "drawEvidenceWriteMilliseconds": 463.9207909999968,
+        "finalVerificationBeforePublishMilliseconds": 1001.2554579999996,
+        "publicationAndReverificationMilliseconds": 802.6304579999996,
+        "elapsedMilliseconds": 78766.09879199999
+      },
+      "humanQuality": "not-evaluated"
+    },
+    {
+      "candidateId": "Q4-C003",
+      "completionRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C003-evidence/completion.json",
+        "bytes": 88506106,
+        "fileSha256": "9e9d3250a79220bc1b2c80799519f8bd284636cbd56f5998fcf17a014461997b"
+      },
+      "execution": {
+        "candidate": "Q4-C003",
+        "command": [
+          "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "evals/clip_composition/presentation_orchestration_edited_render_v001.mjs",
+          "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C003-job.json"
+        ],
+        "exitCode": 0,
+        "completedAt": "2026-09-20T10:30:10.051599+00:00",
+        "stdoutSha256": "850b247a4cdff3ea9d479954849966dd628f433fcc4be6051615913647aebdca",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "mediaRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C003-render/presentation-rendered-v002.mp4",
+        "bytes": 2156475,
+        "fileSha256": "0a5bd2a7b8a461b4e0276df660ddf09c452dcc60b0d47b0e2780551cfebc4145"
+      },
+      "range": {
+        "startFrame": 6363,
+        "endFrameExclusive": 6645
+      },
+      "scope": {
+        "kind": "range",
+        "startFrame": 6363,
+        "endFrameExclusive": 6645,
+        "fullFrameCount": 44408,
+        "frameCount": 282,
+        "viewSha256": "7839f582005ee13fe412df12944e2fa405d3b3d8c73298194512045ed1c7181a",
+        "projectionSha256": "a18685c59bcb45d2037354b199336c9bb39eb5d8d694a297dd3a5eb6e0c8b52e",
+        "fourSavedSha256": {
+          "captionAuto": "c4a8261186094a340a9e2da079c2960e684d20365f3a5d9a972f2fdad6fd870e",
+          "captionOverrides": "3650fc4f49f7a3e4c6f4847017f89cdb0df3aa7a961e23a2c688ae155345fa32",
+          "connectionAuto": "6f7cb2b85e5aad146264d73ec7cb09613d615f070ecde4a7e27915550dec7e84",
+          "connectionOverrides": "cc2ffd8c2caca26e1fdecbafe8d72ef5e4cc0bd1a40b4a8ee88cb218c2e14494"
+        },
+        "playbackStartSample": 10180800,
+        "playbackEndSampleExclusive": 10632000
+      },
+      "frameCount": 282,
+      "viewSha256": "7839f582005ee13fe412df12944e2fa405d3b3d8c73298194512045ed1c7181a",
+      "projectionSha256": "a18685c59bcb45d2037354b199336c9bb39eb5d8d694a297dd3a5eb6e0c8b52e",
+      "fourSavedSha256": {
+        "captionAuto": "c4a8261186094a340a9e2da079c2960e684d20365f3a5d9a972f2fdad6fd870e",
+        "captionOverrides": "3650fc4f49f7a3e4c6f4847017f89cdb0df3aa7a961e23a2c688ae155345fa32",
+        "connectionAuto": "6f7cb2b85e5aad146264d73ec7cb09613d615f070ecde4a7e27915550dec7e84",
+        "connectionOverrides": "cc2ffd8c2caca26e1fdecbafe8d72ef5e4cc0bd1a40b4a8ee88cb218c2e14494"
+      },
+      "drawingRulesSha256": "073d3f2172cd3d424bb07b07724c7f6fe5fdfc87af5ec123bfa358affc58d98f",
+      "backgroundProofRef": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C003-evidence/background/proof.json",
+        "fileSha256": "65d4a39a8afaf782f819c4c6ffecd4f7de888a93f51733113e98e800ac66c82a",
+        "bytes": 11548
+      },
+      "backgroundVideoPreserved": {
+        "comparedYuvBytes": 877132800,
+        "expectedPayloadSha256": "3ca5ae023a89f7f1d51c2e42b9cb68b8d591e82df035bd616778dd2937b050bb",
+        "observedPayloadSha256": "3ca5ae023a89f7f1d51c2e42b9cb68b8d591e82df035bd616778dd2937b050bb"
+      },
+      "backgroundAudioPreserved": {
+        "sampleRate": 48000,
+        "sampleCount": 451200,
+        "comparedPcmBytes": 3609600,
+        "expectedPayloadSha256": "279c88f67529f6d5cbcffc4293bb905de16754df822152f947c6cdda0b8f2980",
+        "observedPayloadSha256": "279c88f67529f6d5cbcffc4293bb905de16754df822152f947c6cdda0b8f2980"
+      },
+      "finalAudioClock": {
+        "status": "passed",
+        "sampleRate": 48000,
+        "channels": 2,
+        "streamTimeBase": "1/48000",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 451200,
+        "durationSeconds": 9.4,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 450560,
+          "dts": 450560,
+          "duration": 640
+        },
+        "packetCount": 442,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "b1717927a47d2e22547c9876730498d488418b995ed7d3aa776f11bef6568e11",
+        "rawDecodedSampleCount": 451584,
+        "logicalDecodedSampleCount": 451200,
+        "decodedTailSampleCount": 384,
+        "rawDecodedPayloadSha256": "e93085f0dbafba358b37333f79ee8dd036418ee95ffac7e452dcfb18343a7398",
+        "logicalDecodedPayloadSha256": "e21c0675ce0e8109fbfca8fe5588d90dbfebde52e0524b935e26a48613b02a3b",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 451200
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "finalMuxCopiesEncodedAudioPackets": true,
+      "qualityChecks": {
+        "finalStatus": "passed",
+        "completedFrameStatus": "passed",
+        "violationCount": 0,
+        "exactReplayMp4BytesIdentical": true,
+        "nativeFrameSampleCount": 10,
+        "captionInspectionCount": 3
+      },
+      "timings": {
+        "inputBindingMilliseconds": 1344.705833,
+        "initialEvidenceWriteMilliseconds": 1.44724999999994,
+        "backgroundMilliseconds": 14043.277458,
+        "preparationMilliseconds": 23725.378542000002,
+        "drawAndQcMilliseconds": 142859.91249999998,
+        "drawEvidenceWriteMilliseconds": 469.3214159999916,
+        "finalVerificationBeforePublishMilliseconds": 1054.4003329999978,
+        "publicationAndReverificationMilliseconds": 807.8182919999817,
+        "elapsedMilliseconds": 168974.270584
+      },
+      "humanQuality": "not-evaluated"
+    }
+  ]
+}

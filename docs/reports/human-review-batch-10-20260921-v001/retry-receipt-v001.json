@@ -1,0 +1,445 @@
+{
+  "recorded_at": "2026-09-21T05:24:55.985758+00:00",
+  "session_id": "HRS-20260921-10-POINTS",
+  "original_attachment": {
+    "path": "/Users/kawafmm/Downloads/HRS-20260921-10-POINTS-retry-answers.json",
+    "bytes": 65032,
+    "sha256": "f5c8d14865dd7f331e347117ee002dddd45b53086271bebbd6077800364bccc4"
+  },
+  "unchanged_attachment_copy": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/returned-retry-form-v001.json",
+    "bytes": 65032,
+    "sha256": "f5c8d14865dd7f331e347117ee002dddd45b53086271bebbd6077800364bccc4"
+  },
+  "input_text_treated_as_answer_data": true,
+  "additional_request_text_received": false,
+  "retry_bundle": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/human-review-batch-10-20260921-v001/retry-bundle-v001.json",
+    "bytes": 197424,
+    "sha256": "cc96c23f9f9ed46c066312bd86a4163cfe4c8da18d92b140b56abef32ee39c3f"
+  },
+  "retry_sha256": "948144ba84ebf2e6396b6f664fc3740631602e631fe0418db647253346bf5089",
+  "previous_received_answers": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/session-answers.json",
+    "bytes": 62259,
+    "sha256": "21f90c08670cb558034512770355a7b7ebcde5edd8bf72441b76ab81e14b8390"
+  },
+  "new_received_answers": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v003/session-answers.json",
+    "bytes": 62272,
+    "sha256": "8dc2c92b70837b6927899373217a6419446f687e308c3f68602037d213066216"
+  },
+  "import_command": "import-retry RETRY_BUNDLE RECEIVED_V002 RETURNED_RETRY_PACKET RECEIVED_V003",
+  "import_exit_code": 0,
+  "separate_process_verification": {
+    "command": "verify ORIGINAL_SESSION_PACKAGE RECEIVED_V003",
+    "exit_code": 0,
+    "file": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v003/verification.json",
+      "bytes": 35389,
+      "sha256": "ccde9b08af53a448c8d7c4c2753965fbb942686ca896b4249a08d152c2654001"
+    }
+  },
+  "counts": {
+    "answered": 10,
+    "good": 5,
+    "change_requested": 5,
+    "both_usable": 0,
+    "no_decision": 0,
+    "comment_only": 0,
+    "unanswered": 0
+  },
+  "new_actual_answers": [
+    {
+      "number": 3,
+      "previous_answer": {
+        "point_id": "Q1-PANEL-BACKGROUND-VARIANTS",
+        "review_id": "HRC-002",
+        "scope": {
+          "level": "bundle",
+          "applies_to": [
+            "この短文へ手で選んだ無地・方眼紙・コミック枠の、背景の種類の違いをまとめた回答"
+          ],
+          "does_not_apply_to": [
+            "文字と背景のセンタリング",
+            "三種類それぞれへの採用・合否の自動配布",
+            "背景の自動選択の成否",
+            "前後のフェード",
+            "Normal Cut・Black Separator・Softの再採点",
+            "Panel・動き系の機能使用許可の取り直し",
+            "全編のテンポ・単調さ・自動使い分け",
+            "Normalの基準",
+            "編集UIの操作感・待ち時間"
+          ]
+        },
+        "offered_views": [
+          {
+            "view_id": "background-plain",
+            "label": "無地（手選択）",
+            "role": "candidate",
+            "media_id": "panel-short-after",
+            "start_frame": 30,
+            "end_frame": 112,
+            "context_start_frame": 30,
+            "context_end_frame": 112,
+            "sha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 137,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 456
+          },
+          {
+            "view_id": "background-graph-paper",
+            "label": "方眼紙（手選択）",
+            "role": "variant",
+            "media_id": "panel-graph-paper",
+            "start_frame": 0,
+            "end_frame": 82,
+            "context_start_frame": 0,
+            "context_end_frame": 82,
+            "sha256": "5169c7f29ed7abe26fafca1c79debedf927bff7a0ee0e8a1c115b419d2c6fa6b",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 82,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 486
+          },
+          {
+            "view_id": "background-comic-frame",
+            "label": "コミック枠（手選択）",
+            "role": "variant",
+            "media_id": "panel-comic-frame",
+            "start_frame": 0,
+            "end_frame": 82,
+            "context_start_frame": 0,
+            "context_end_frame": 82,
+            "sha256": "e14ab77c96a80780668c791c6a94498ca1fceb47bf1da25f9368bc9e3f7e7085",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 82,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 486
+          }
+        ],
+        "choice": "no_decision",
+        "comment": "無地以外壊れて見えない。指定区間を動画内で確認できません。",
+        "raw_response": "判断しない\n無地以外壊れて見えない。指定区間を動画内で確認できません。",
+        "source": "local_form",
+        "answered_at": "2026-09-21T04:30:01.590Z",
+        "playback_started_view_ids": [
+          "background-plain"
+        ]
+      },
+      "new_answer": {
+        "point_id": "Q1-PANEL-BACKGROUND-VARIANTS",
+        "review_id": "HRC-002",
+        "scope": {
+          "level": "bundle",
+          "applies_to": [
+            "この短文へ手で選んだ無地・方眼紙・コミック枠の、背景の種類の違いをまとめた回答"
+          ],
+          "does_not_apply_to": [
+            "文字と背景のセンタリング",
+            "三種類それぞれへの採用・合否の自動配布",
+            "背景の自動選択の成否",
+            "前後のフェード",
+            "Normal Cut・Black Separator・Softの再採点",
+            "Panel・動き系の機能使用許可の取り直し",
+            "全編のテンポ・単調さ・自動使い分け",
+            "Normalの基準",
+            "編集UIの操作感・待ち時間"
+          ]
+        },
+        "offered_views": [
+          {
+            "view_id": "background-plain",
+            "label": "無地（手選択）",
+            "role": "candidate",
+            "media_id": "panel-short-after",
+            "start_frame": 30,
+            "end_frame": 112,
+            "context_start_frame": 30,
+            "context_end_frame": 112,
+            "sha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 137,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 456
+          },
+          {
+            "view_id": "background-graph-paper",
+            "label": "方眼紙（手選択）",
+            "role": "variant",
+            "media_id": "panel-graph-paper",
+            "start_frame": 0,
+            "end_frame": 82,
+            "context_start_frame": 0,
+            "context_end_frame": 82,
+            "sha256": "5169c7f29ed7abe26fafca1c79debedf927bff7a0ee0e8a1c115b419d2c6fa6b",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 82,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 486
+          },
+          {
+            "view_id": "background-comic-frame",
+            "label": "コミック枠（手選択）",
+            "role": "variant",
+            "media_id": "panel-comic-frame",
+            "start_frame": 0,
+            "end_frame": 82,
+            "context_start_frame": 0,
+            "context_end_frame": 82,
+            "sha256": "e14ab77c96a80780668c791c6a94498ca1fceb47bf1da25f9368bc9e3f7e7085",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 82,
+            "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+            "timeline_start_frame": 486
+          }
+        ],
+        "choice": "change_requested",
+        "comment": "コミック枠は使わなくて良い。",
+        "raw_response": "直したい\nコミック枠は使わなくて良い。",
+        "source": "local_form",
+        "answered_at": "2026-09-21T05:19:45.847Z",
+        "playback_started_view_ids": [
+          "background-plain",
+          "background-graph-paper",
+          "background-comic-frame"
+        ]
+      }
+    },
+    {
+      "number": 9,
+      "previous_answer": {
+        "point_id": "Q5-1-C001",
+        "review_id": "HR-Q5-1-001",
+        "scope": {
+          "level": "point",
+          "applies_to": [
+            "この一箇所の省略と対象字幕一件の非表示を合わせた、提示中のBefore／Afterの使いやすさ"
+          ],
+          "does_not_apply_to": [
+            "Q1・Q3・Q4の別の問いと既存回答",
+            "全編の品質、他の字幕や別の省略箇所",
+            "原版の置換、正式採用、ショートの制作"
+          ]
+        },
+        "offered_views": [
+          {
+            "view_id": "Q5-BEFORE-VIEW",
+            "label": "Before：元版（27.40秒）",
+            "role": "before",
+            "media_id": "Q5-BEFORE",
+            "start_frame": 11683,
+            "end_frame": 12505,
+            "context_start_frame": 11683,
+            "context_end_frame": 12505,
+            "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 44408,
+            "timeline_id": "digest-v1-phase2-completed-20260914-v001",
+            "timeline_start_frame": 0
+          },
+          {
+            "view_id": "Q5-AFTER-VIEW",
+            "label": "After：今回案（25.43秒）",
+            "role": "after",
+            "media_id": "Q5-AFTER",
+            "start_frame": 0,
+            "end_frame": 763,
+            "context_start_frame": 0,
+            "context_end_frame": 763,
+            "sha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 763,
+            "timeline_id": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+            "timeline_start_frame": 11683
+          }
+        ],
+        "choice": "no_decision",
+        "comment": "壊れて見えない　指定区間を動画内で確認できません。",
+        "raw_response": "判断しない\n壊れて見えない　指定区間を動画内で確認できません。",
+        "source": "local_form",
+        "answered_at": "2026-09-21T04:37:44.401Z",
+        "playback_started_view_ids": []
+      },
+      "new_answer": {
+        "point_id": "Q5-1-C001",
+        "review_id": "HR-Q5-1-001",
+        "scope": {
+          "level": "point",
+          "applies_to": [
+            "この一箇所の省略と対象字幕一件の非表示を合わせた、提示中のBefore／Afterの使いやすさ"
+          ],
+          "does_not_apply_to": [
+            "Q1・Q3・Q4の別の問いと既存回答",
+            "全編の品質、他の字幕や別の省略箇所",
+            "原版の置換、正式採用、ショートの制作"
+          ]
+        },
+        "offered_views": [
+          {
+            "view_id": "Q5-BEFORE-VIEW",
+            "label": "Before：元版（27.40秒）",
+            "role": "before",
+            "media_id": "Q5-BEFORE",
+            "start_frame": 11683,
+            "end_frame": 12505,
+            "context_start_frame": 11683,
+            "context_end_frame": 12505,
+            "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 44408,
+            "timeline_id": "digest-v1-phase2-completed-20260914-v001",
+            "timeline_start_frame": 0
+          },
+          {
+            "view_id": "Q5-AFTER-VIEW",
+            "label": "After：今回案（25.43秒）",
+            "role": "after",
+            "media_id": "Q5-AFTER",
+            "start_frame": 0,
+            "end_frame": 763,
+            "context_start_frame": 0,
+            "context_end_frame": 763,
+            "sha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6",
+            "fps_num": 30,
+            "fps_den": 1,
+            "total_frames": 763,
+            "timeline_id": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+            "timeline_start_frame": 11683
+          }
+        ],
+        "choice": "good",
+        "comment": "違和感はない。字幕のタイミングがズレてる気がした",
+        "raw_response": "良い\n違和感はない。字幕のタイミングがズレてる気がした",
+        "source": "local_form",
+        "answered_at": "2026-09-21T05:22:06.785Z",
+        "playback_started_view_ids": [
+          "Q5-AFTER-VIEW"
+        ]
+      }
+    }
+  ],
+  "protected_numbers": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10
+  ],
+  "protected_answer_rows_unchanged": true,
+  "original_review_and_media_reference_unchanged": true,
+  "prior_files_unchanged": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/returned-form-v001.json",
+      "bytes": 62194,
+      "sha256": "c38b86fab35766038c20889ef10792196e7f4aead1a2a434ea83327b50a8ecff"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v001/by-review/HRB-Q1-Q2-001-v001-answers.json",
+      "bytes": 8908,
+      "sha256": "28cf14e2e510b9aadd56dd3b0d95425406a3386aeb2039c404d77dd7d8edd1f2"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v001/by-review/HRB-Q3-001-v001-answers.json",
+      "bytes": 1708,
+      "sha256": "34f7d226781a0774defd556ec994511ffd58182bea6ccf5b80a95b6529a3ff9e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v001/by-review/HRB-Q4-001-v001-answers.json",
+      "bytes": 4930,
+      "sha256": "f76ebbceef60edd023faed611714f0983afefa60df8e2ed7ac0f6904b75f9aad"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v001/by-review/HRB-Q5-1-001-v001-answers.json",
+      "bytes": 2138,
+      "sha256": "8a78f843e0792c705b0c4f7308573ea205792ffe9259a76c9b1b142afed10c0d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v001/by-review/HRB-Q5-2-001-v001-answers.json",
+      "bytes": 2244,
+      "sha256": "9273a022cf2f3a52d9899a1a3e518cf84d50ba1b223b45e3f86cad60e34d019f"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v001/receipt.json",
+      "bytes": 2644,
+      "sha256": "6f99e301aeb94b31f7f9b8d04ead33723e537ac0295def7aeeab633b0eea9e24"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v001/session-answers.json",
+      "bytes": 59109,
+      "sha256": "413270e0430073984533615fb41beb3eb2e62e5458221945423830f37bca44c5"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v001/summary.json",
+      "bytes": 32321,
+      "sha256": "4373d393b3194d6762f3516db34a10ab503aaa86f8b8ad14a279b30ffa2691f3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v001/verification.json",
+      "bytes": 32321,
+      "sha256": "4373d393b3194d6762f3516db34a10ab503aaa86f8b8ad14a279b30ffa2691f3"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/by-review/HRB-Q1-Q2-001-v001-answers.json",
+      "bytes": 9607,
+      "sha256": "ea131e115a82d78d6f315e023484e361c4e3e4c0bac14a6ac13a3789a973617d"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/by-review/HRB-Q3-001-v001-answers.json",
+      "bytes": 2009,
+      "sha256": "8a165dcd73ca3f04586d0814899e69fd8c5594cb060e5de6018b65698412b552"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/by-review/HRB-Q4-001-v001-answers.json",
+      "bytes": 6507,
+      "sha256": "922a542d7f8324963490df129153d2f10ad66c516fbd8922f6131231c81942af"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/by-review/HRB-Q5-1-001-v001-answers.json",
+      "bytes": 2344,
+      "sha256": "cf5b94925393e7029c10ff91a5b94dcfca68b7db33ff3b7a0c967f7b304a3636"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/by-review/HRB-Q5-2-001-v001-answers.json",
+      "bytes": 2491,
+      "sha256": "54e7b7fe086d6588b24b5c7713dec040c3e638707a566813b88a01364aee6159"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/receipt.json",
+      "bytes": 2669,
+      "sha256": "130b3f1f7a33974b35b5053af4760170aa9acbbcac90871634bd2f2096e9362f"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/session-answers.json",
+      "bytes": 62259,
+      "sha256": "21f90c08670cb558034512770355a7b7ebcde5edd8bf72441b76ab81e14b8390"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/summary.json",
+      "bytes": 35392,
+      "sha256": "52d42b45cd8c926ee32bf3157dc657a393bfaa58d31c7ec90e31e9e3722b1b2e"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v002/verification.json",
+      "bytes": 35392,
+      "sha256": "52d42b45cd8c926ee32bf3157dc657a393bfaa58d31c7ec90e31e9e3722b1b2e"
+    }
+  ],
+  "playback_evidence": "3番は無地・方眼紙・コミック枠の開始履歴、9番はAfterの開始履歴と新しい品質コメントを受領。旧v002から新たに加わった開始履歴は3番の方眼紙・コミック枠、9番のAfter。開始履歴は視聴完了や全比較の復旧証明ではなく、Codexによる実ブラウザー操作・復号確認でもない。",
+  "automatic_edits_applied": false,
+  "formal_adoption": false,
+  "closed_issues": false
+}

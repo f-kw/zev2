@@ -1,0 +1,290 @@
+{
+  "schema_version": "zev-point-review-v001",
+  "batch_id": "HRB-Q1-Q2-001",
+  "revision": "v001",
+  "title": "Panelと動きの修正確認",
+  "intro": "センタリング、背景の種類、動きの滑らかさを数秒ずつ確認します。見たポイントへ「良い／直したい／判断しない」と、必要ならひとことだけで十分です。背景の三種類は手で選んだ候補です。",
+  "media": [
+    {
+      "media_id": "edited-before",
+      "label": "修正前の保存済み一件修正版",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/run-4ef43bca-e48a-453c-9c78-d036c965103e/render/presentation-rendered-v002.mp4",
+      "sha256": "1454ca54018edcfc16b7139336e60ae28e9f32bc617cb476d87b689cf5afcbb6",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 4879,
+      "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+      "timeline_start_frame": 0
+    },
+    {
+      "media_id": "panel-short-after",
+      "label": "短文の整列を修正した無地背景",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-short-render-v002/presentation-rendered-v002.mp4",
+      "sha256": "40dc92219d782f3e1dc45bb66eb91934a763081976fc1e6a93d21ec6e162a118",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 137,
+      "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+      "timeline_start_frame": 456
+    },
+    {
+      "media_id": "panel-wide-after",
+      "label": "横長の整列を修正した無地背景",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-wide-render/presentation-rendered-v002.mp4",
+      "sha256": "290dd256d75bf596cb4775ab3697e778687916f893eae70fa1e148c745a4ccdf",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 99,
+      "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+      "timeline_start_frame": 1731
+    },
+    {
+      "media_id": "panel-graph-paper",
+      "label": "手選択：方眼紙",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-graph-paper-render/presentation-rendered-v002.mp4",
+      "sha256": "5169c7f29ed7abe26fafca1c79debedf927bff7a0ee0e8a1c115b419d2c6fa6b",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 82,
+      "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+      "timeline_start_frame": 486
+    },
+    {
+      "media_id": "panel-comic-frame",
+      "label": "手選択：コミック枠",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/panel-comic-frame-render/presentation-rendered-v002.mp4",
+      "sha256": "e14ab77c96a80780668c791c6a94498ca1fceb47bf1da25f9368bc9e3f7e7085",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 82,
+      "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+      "timeline_start_frame": 486
+    },
+    {
+      "media_id": "motion-after",
+      "label": "動きの滑らかさを修正した短尺",
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q1-q2-20260920-v001/candidates-v001/motion-render/presentation-rendered-v002.mp4",
+      "sha256": "c1b8fbaa6ba252eeb1e1bac680b29d072d766a639d1a5359b028c4ce13426a58",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 170,
+      "timeline_id": "HRB-002-EDITED-DIGEST-v001",
+      "timeline_start_frame": 0
+    }
+  ],
+  "points": [
+    {
+      "point_id": "Q1-PANEL-CENTER-SHORT",
+      "review_id": "HRC-001",
+      "related_review_ids": [
+        "HR-001",
+        "HR-007",
+        "HR-010"
+      ],
+      "title": "短い字幕のセンタリング",
+      "question": "短い字幕は、背景の中で綺麗にセンタリングされて見えますか。",
+      "target_function": "Panel内部の短い文字・行と背景の整列",
+      "change_summary": "実際に描かれた文字と行の中心に、背景の内側の中心を合わせた修正版です。",
+      "why_human_review": "文字と背景のまとまりが自然に見えるかを確認します。横長の例とは別の回答として保持します。",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "この短文例の文字・行と背景の整列"
+        ],
+        "does_not_apply_to": [
+          "横長例への回答の転記",
+          "背景意匠の好み",
+          "前後のフェード",
+          "Normal Cut・Black Separator・Softの再採点",
+          "Panel・動き系の機能使用許可の取り直し",
+          "全編のテンポ・単調さ・自動使い分け",
+          "Normalの基準",
+          "編集UIの操作感・待ち時間"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "short-before",
+          "label": "修正前",
+          "role": "before",
+          "media_id": "edited-before",
+          "start_frame": 486,
+          "end_frame": 568,
+          "context_start_frame": 456,
+          "context_end_frame": 593
+        },
+        {
+          "view_id": "short-after",
+          "label": "修正後",
+          "role": "after",
+          "media_id": "panel-short-after",
+          "start_frame": 30,
+          "end_frame": 112,
+          "context_start_frame": 0,
+          "context_end_frame": 137
+        }
+      ]
+    },
+    {
+      "point_id": "Q1-PANEL-CENTER-WIDE",
+      "review_id": "HRC-001",
+      "related_review_ids": [
+        "HR-001"
+      ],
+      "title": "横長の字幕のセンタリング",
+      "question": "横長の字幕でも、背景の中で文字のまとまりが中央に見えますか。",
+      "target_function": "Panel内部の横長の文字・行と背景の整列",
+      "change_summary": "横長の字幕も、実際に描かれた文字のまとまりに背景の中心を合わせた修正版です。",
+      "why_human_review": "長さが異なる例でも自然に見えるかを確認します。短文の回答をこの例へ転記しません。",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "この横長例の文字・行と背景の整列"
+        ],
+        "does_not_apply_to": [
+          "短文例への回答の転記",
+          "背景意匠の好み",
+          "前後のフェード",
+          "Normal Cut・Black Separator・Softの再採点",
+          "Panel・動き系の機能使用許可の取り直し",
+          "全編のテンポ・単調さ・自動使い分け",
+          "Normalの基準",
+          "編集UIの操作感・待ち時間"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "wide-before",
+          "label": "修正前",
+          "role": "before",
+          "media_id": "edited-before",
+          "start_frame": 1747,
+          "end_frame": 1818,
+          "context_start_frame": 1731,
+          "context_end_frame": 1830
+        },
+        {
+          "view_id": "wide-after",
+          "label": "修正後",
+          "role": "after",
+          "media_id": "panel-wide-after",
+          "start_frame": 16,
+          "end_frame": 87,
+          "context_start_frame": 0,
+          "context_end_frame": 99
+        }
+      ]
+    },
+    {
+      "point_id": "Q1-PANEL-BACKGROUND-VARIANTS",
+      "review_id": "HRC-002",
+      "related_review_ids": [
+        "HR-001"
+      ],
+      "title": "背景の三種類",
+      "question": "無地・方眼紙・コミック枠は、色違いではなく背景の種類の違いとして分かりますか。",
+      "target_function": "Panel背景の意匠の違い",
+      "change_summary": "同じ短文へ、無地・方眼紙・コミック枠を手で選んだ三候補です。各候補の字幕区間を揃えて切り替えます。",
+      "why_human_review": "三種類の違いが伝わるかを確認します。特に直したい種類があればコメントに名前を添えてください。",
+      "scope": {
+        "level": "bundle",
+        "applies_to": [
+          "この短文へ手で選んだ無地・方眼紙・コミック枠の、背景の種類の違いをまとめた回答"
+        ],
+        "does_not_apply_to": [
+          "文字と背景のセンタリング",
+          "三種類それぞれへの採用・合否の自動配布",
+          "背景の自動選択の成否",
+          "前後のフェード",
+          "Normal Cut・Black Separator・Softの再採点",
+          "Panel・動き系の機能使用許可の取り直し",
+          "全編のテンポ・単調さ・自動使い分け",
+          "Normalの基準",
+          "編集UIの操作感・待ち時間"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "background-plain",
+          "label": "無地（手選択）",
+          "role": "candidate",
+          "media_id": "panel-short-after",
+          "start_frame": 30,
+          "end_frame": 112,
+          "context_start_frame": 30,
+          "context_end_frame": 112
+        },
+        {
+          "view_id": "background-graph-paper",
+          "label": "方眼紙（手選択）",
+          "role": "variant",
+          "media_id": "panel-graph-paper",
+          "start_frame": 0,
+          "end_frame": 82,
+          "context_start_frame": 0,
+          "context_end_frame": 82
+        },
+        {
+          "view_id": "background-comic-frame",
+          "label": "コミック枠（手選択）",
+          "role": "variant",
+          "media_id": "panel-comic-frame",
+          "start_frame": 0,
+          "end_frame": 82,
+          "context_start_frame": 0,
+          "context_end_frame": 82
+        }
+      ]
+    },
+    {
+      "point_id": "Q1-MOTION-SMOOTHNESS",
+      "review_id": "HRC-003",
+      "related_review_ids": [
+        "HR-002",
+        "HR-003",
+        "HR-004"
+      ],
+      "title": "拡大縮小の滑らかさ",
+      "question": "動きの強さはそのままに、拡大縮小が滑らかになって見えますか。",
+      "target_function": "Bounce／Shake／Pulseの動きの滑らかさ",
+      "change_summary": "拡大縮小の中間状態を増やした修正版です。元の字幕時刻・動きの開始基準・音声ピークとの対応を維持しています。",
+      "why_human_review": "拡大縮小が滑らかに見えるかを確認します。冒頭のBounce／Shake／Pulseをまとめた回答として保持し、個別の演出へ合否を配りません。",
+      "scope": {
+        "level": "bundle",
+        "applies_to": [
+          "この冒頭の短区間にあるBounce／Shake／Pulseをまとめた、修正後の滑らかさ"
+        ],
+        "does_not_apply_to": [
+          "個別presetへの欠陥や合否の自動配布",
+          "動き系の機能使用許可の取り直し",
+          "Panelのセンタリング・背景意匠",
+          "Normal Cut・Black Separator・Softの採点",
+          "全編のテンポ・単調さ・自動使い分け",
+          "編集UIの操作感・待ち時間"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "motion-before",
+          "label": "修正前の冒頭",
+          "role": "before",
+          "media_id": "edited-before",
+          "start_frame": 0,
+          "end_frame": 170,
+          "context_start_frame": 0,
+          "context_end_frame": 170
+        },
+        {
+          "view_id": "motion-after",
+          "label": "修正後の冒頭",
+          "role": "after",
+          "media_id": "motion-after",
+          "start_frame": 0,
+          "end_frame": 170,
+          "context_start_frame": 0,
+          "context_end_frame": 170
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "p1-final-audit-acceptance-v001",
+  "recordedAt": "2026-09-21T23:31:05.884220+00:00",
+  "receivedThrough": "本人がこのCodex会話へ提示した監査回答全文",
+  "userReportedAction": "失敗してたから再送しておいた",
+  "sourceSession": "ZEV Build Loop",
+  "codexFetchedAnswerFromBrowserThisTurn": false,
+  "auditedImplementationCommit": "9ac340600ef9d7fcd4b7a7dadc1d16612be13a02",
+  "comparisonBase": "3168836bb255d989b18fc7fc440a6fdb68fc17f1",
+  "remoteHeadReportedAtAudit": "e8313f450a5028de626b157bee45811914257f30",
+  "branch": "codex/digest-presentation-editing-stage4",
+  "responseOriginal": {
+    "path": "docs/reports/digest-presentation-editing-p1-20260921-v001/audit-response-v001.md",
+    "bytes": 9339,
+    "fileSha256": "0aa92c5938eddaaef5cac9288eb60730b9f333db089bc4f85c2d9c2bafc46c0e"
+  },
+  "decision": {
+    "status": "accepted-technical-first-completion",
+    "requiredRevisionsWithinReviewedScope": 0,
+    "p1Closed": true,
+    "acceptedScope": "既存Panel一件・Shake一件で、画像生成の重複初期化を減らし、描画結果と検査内容を維持したまま、適用検査開始から周辺媒体取得までを短縮した技術実証",
+    "notIncluded": [
+      "人間品質",
+      "全入力での性能保証",
+      "実編集UI受入",
+      "正式trust",
+      "原版置換",
+      "別工程の着工"
+    ],
+    "remainingPerformanceIssue": "Shakeの初回取得は約142秒。主合成・厳密再合成・有限状態QCの時間は残る。"
+  },
+  "auditEvidenceBoundary": {
+    "directlyReviewedByAdviser": "GitHub上の実装・主要差分・関連試験source・測定比較helper・本人指示・軽量報告・remote参照と記録差分",
+    "acceptedFromSubmittedRecords": [
+      "旧新PNG・RGBA・MP4・巨大QCの実byte",
+      "生TAP・全実行snapshot",
+      "所有PID終了と一時領域回収",
+      "ローカル保存内容の実行前後照合"
+    ],
+    "adviserReranTests": false,
+    "adviserRehashedLocalMedia": false,
+    "adviserViewedOrListenedToVideos": false,
+    "adviserExercisedEditingUi": false
+  },
+  "historyPreserved": {
+    "previousUnreceivedRecord": {
+      "path": "docs/reports/digest-presentation-editing-p1-20260921-v001/audit-receipt-v001.json",
+      "bytes": 4673,
+      "fileSha256": "2472e334100111e16e8aa6801eec791c673f1fc83c1421a878c1c1850fe6cd49"
+    },
+    "streamErrorOriginal": {
+      "path": "docs/reports/digest-presentation-editing-p1-20260921-v001/audit-ui-error-v001.txt",
+      "bytes": 65,
+      "fileSha256": "f5ca5f03573b47f2d2a9090c14e0cc9d5d35d221be01ce628811013c54ccdef3"
+    },
+    "submittedText": {
+      "path": "docs/reports/digest-presentation-editing-p1-20260921-v001/audit-request-v001.md",
+      "bytes": 4676,
+      "fileSha256": "5a526991f75ee31fefd65c38faf6f76bc2841870b0da612b1b6a9a0bb6e2d19e"
+    },
+    "previousReceiptMarkdown": {
+      "path": "docs/reports/digest-presentation-editing-p1-20260921-v001/audit-receipt-v001.md",
+      "gitCommit": "e8313f450a5028de626b157bee45811914257f30",
+      "bytes": 3200,
+      "fileSha256": "13dca10e25a27b30b7b44b2b40becd6acbf5f55c88de0ab17d4b7f9a7361c1ca",
+      "preservedAsExactPrefixBeforeNewAppendix": true
+    }
+  },
+  "verificationReports": [
+    {
+      "path": "docs/reports/digest-presentation-editing-p1-20260921-v001/verification-v001.md",
+      "bytes": 9145,
+      "fileSha256": "551b2308ed1ceb83ad1311489f9425614a70e5567f299ec02a942d4bf7d1ea2b"
+    },
+    {
+      "path": "docs/reports/digest-presentation-editing-p1-20260921-v001/verification-v001.json",
+      "bytes": 38856,
+      "fileSha256": "5e2370ca10f96e6529f8b785c49eb0fe82ae5c1a04d45dae2266f35d1520a4a0"
+    }
+  ],
+  "preservedProductStates": [
+    "元10回答",
+    "修正後7ポイント",
+    "Q3-2候補",
+    "Q4入力不足",
+    "既存利用者保存状態・媒体",
+    "ブラウザー制約"
+  ],
+  "receiptOnlyActions": {
+    "implementationChanges": 0,
+    "performanceReruns": 0,
+    "mediaRegenerations": 0,
+    "codexResends": 0,
+    "responseRegenerations": 0,
+    "newAuditRequests": 0,
+    "newWorkOrders": 0,
+    "paidApiCalls": 0,
+    "mediaUploads": 0
+  },
+  "completion": "P1技術受理・必須修正なしで閉じる。受理記録以外の追加作用なし。"
+}

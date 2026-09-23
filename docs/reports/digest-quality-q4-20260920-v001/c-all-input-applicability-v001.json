@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "q4-c-all-applicability-summary-v001",
+  "sourceRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/source-bindings.json",
+    "fileSha256": "9dcfedb9caee132e9769ad4975a3055cf4bb8ed0e3598c5a5eb7765734459136"
+  },
+  "fullGeometryRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/c-all-input-v001/raw-inputs/current-applicability.json",
+    "fileSha256": "886e6922985fbcb8c6d95527681bcfa52d668922e522f6a65a0079e3b5da0134"
+  },
+  "method": {
+    "label": "existing Node fallback text-width geometry gate",
+    "callPath": [
+      "buildPresentationRendererOverlayAdapterV001.buildProps",
+      "inspectPresentationRenderLayoutV001",
+      "buildExactTextModel",
+      "measureTextLine Node fallback"
+    ],
+    "measuredFontMetrics": false,
+    "documentPresent": false,
+    "newCoefficients": false,
+    "productionChanges": false,
+    "rendererProcessAttempts": 0,
+    "imagesGenerated": 0,
+    "videosEncoded": 0,
+    "semanticJudgmentPerformed": false,
+    "description": "Uses the existing character-weight width and estimated line-height path because Node has no document/canvas text-measurement context. All renderer geometry, strokes, panel padding, fixed line breaks and positions are unchanged."
+  },
+  "limitations": [
+    "Pass/fail is the current existing estimated geometry gate only, not native-font measured bounds or pixel/raster quality.",
+    "Color was tested for whole-caption coloring; partial-match correctness is outside this diagnostic. Color changes no layout geometry.",
+    "Panel plate artwork and glyph-visible-center calibration were not rendered or measured. All three backgrounds share the managed panel geometry.",
+    "No completed-media decoding, source audio processing, speech recognition, semantic selection or human quality decision occurred."
+  ],
+  "presets": [
+    {
+      "preset": "color",
+      "captionCount": 325,
+      "passed": 325,
+      "failed": 0,
+      "fontSizePx": 94
+    },
+    {
+      "preset": "panel",
+      "captionCount": 325,
+      "passed": 325,
+      "failed": 0,
+      "fontSizePx": 94
+    },
+    {
+      "preset": "panel-graph-paper",
+      "captionCount": 325,
+      "passed": 325,
+      "failed": 0,
+      "fontSizePx": 94
+    },
+    {
+      "preset": "panel-comic-frame",
+      "captionCount": 325,
+      "passed": 325,
+      "failed": 0,
+      "fontSizePx": 94
+    },
+    {
+      "preset": "scale",
+      "captionCount": 325,
+      "passed": 218,
+      "failed": 107,
+      "fontSizePx": 128
+    }
+  ],
+  "currentMotionRejections": [
+    {
+      "preset": "pulse",
+      "rejected": 325,
+      "reason": "the finite preset requires the unchanged 96 px normal caption",
+      "existingNormalFontSizePx": 94
+    },
+    {
+      "preset": "bounce",
+      "rejected": 325,
+      "reason": "the finite preset requires the unchanged 96 px normal caption",
+      "existingNormalFontSizePx": 94
+    },
+    {
+      "preset": "shake",
+      "rejected": 325,
+      "reason": "the finite preset requires the unchanged 96 px normal caption",
+      "existingNormalFontSizePx": 94
+    }
+  ],
+  "scope": "The motion rejection used every original caption and an actually saved individual peak; rejection occurs at the unchanged Normal-size requirement before peak placement. No effect, text, line, time, or source file was changed."
+}

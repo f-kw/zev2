@@ -1,0 +1,31 @@
+TAP version 13
+# Q5-3 real saved-entry evidence: /private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-3-20260921-v001/cli-tests-6h1ayy
+# Subtest: real CLI saves four states, reopens in separate processes, independently cancels, and acquires existing local media
+ok 1 - real CLI saves four states, reopens in separate processes, independently cancels, and acquires existing local media
+  ---
+  duration_ms: 16441.344333
+  ...
+# Subtest: saved selection order and repeat enable do not change effective content; stale and ABA saves are refused
+ok 2 - saved selection order and repeat enable do not change effective content; stale and ABA saves are refused
+  ---
+  duration_ms: 8983.497625
+  ...
+# Subtest: competing processes cannot overwrite one another and invalid or human-review choices do not write state
+ok 3 - competing processes cannot overwrite one another and invalid or human-review choices do not write state
+  ---
+  duration_ms: 2366.302917
+  ...
+# Subtest: a changed saved selection, candidate binding or false completion is rejected on read
+ok 4 - a changed saved selection, candidate binding or false completion is rejected on read
+  ---
+  duration_ms: 2815.950375
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 30654.919375

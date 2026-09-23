@@ -1,0 +1,637 @@
+{
+  "schemaVersion": "presentation-editing-applicability-timing-v001",
+  "createdAt": "2026-09-18T08:27:37.418Z",
+  "setupMilliseconds": 983.4435,
+  "config": {
+    "directory": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/applicability-timing-v001",
+    "generatedRoot": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001",
+    "nativeAssetReuse": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/native-assets",
+    "backgroundReuseDecoderRef": {
+      "path": "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffmpeg",
+      "bytes": 429512,
+      "fileSha256": "f33afb2c1e6510138dd0dd22c25b09908c2ac55780ddd7c8e35c588f076b9493"
+    }
+  },
+  "originalSavedStateUnchanged": true,
+  "originalSaved": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/captionAuto.json",
+      "bytes": 43149,
+      "fileSha256": "7e3b4eebb3232ea7d0a415faacdbc3b6a1dc0a90dac4cf04e3b3694dccd28ac1"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/connectionAuto.json",
+      "bytes": 2159,
+      "fileSha256": "070c752ca5c62fced4bbb1cd640543f10a70cfec78ddf67b305e8c87ebfb11b7"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/selectionRecord.json",
+      "bytes": 477587,
+      "fileSha256": "b1bb61b9ff199b2eaa02b78546fc47b0375e4562249c9e5afe769a2aff9b6d4c"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/captionOverrides.json",
+      "bytes": 31772,
+      "fileSha256": "f8565737d1b5e4531c31be1c77b95e943e4c4a051af4aa31bd9f056b714e02ea"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/runtime/presentation-editing/digest-20260918/connectionOverrides.json",
+      "bytes": 976,
+      "fileSha256": "56b3b7783d1b2188786cf81b1774021d0b3bcedae1fb80fc78e9ca59da3c2bec"
+    }
+  ],
+  "checks": [
+    {
+      "name": "initial-with-registered-native-assets",
+      "elapsedMilliseconds": 56728.829959,
+      "httpStatus": 200,
+      "details": {
+        "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "text": "逃げるやつ?",
+        "startFrame": 474,
+        "endFrameExclusive": 556,
+        "preset": "normal",
+        "presetLabel": "Normal（通常表示）",
+        "hasOverride": false,
+        "status": "normal",
+        "statusLabel": "自動案",
+        "kind": "caption",
+        "revision": "a4d76028df3aa3f88606ddb74c0c809d05756500d47820433bc77f5e5f04675a",
+        "selection": {
+          "preset": "normal"
+        },
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal（通常表示）",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": false,
+              "nativeStateCount": 1
+            }
+          },
+          {
+            "value": "color",
+            "label": "Color",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": false,
+              "nativeStateCount": 1
+            }
+          },
+          {
+            "value": "scale",
+            "label": "Scale",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": false,
+              "nativeStateCount": 1
+            }
+          },
+          {
+            "value": "panel",
+            "label": "Panel",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": false,
+              "nativeStateCount": 1
+            }
+          },
+          {
+            "value": "pulse",
+            "label": "Pulse",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": true,
+              "nativeStateCount": 3
+            }
+          },
+          {
+            "value": "bounce",
+            "label": "Bounce",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": false,
+              "nativeStateCount": 4
+            }
+          },
+          {
+            "value": "shake",
+            "label": "Shake",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": false,
+              "nativeStateCount": 7
+            }
+          }
+        ],
+        "peakOptions": [
+          {
+            "id": "audio-peak-000093",
+            "displaySeconds": 16.76,
+            "label": "音声のピーク 16.760秒"
+          },
+          {
+            "id": "audio-peak-000094",
+            "displaySeconds": 17,
+            "label": "音声のピーク 17.000秒"
+          },
+          {
+            "id": "audio-peak-000100",
+            "displaySeconds": 17.8,
+            "label": "音声のピーク 17.800秒"
+          }
+        ]
+      }
+    },
+    {
+      "name": "verified-observation-reuse",
+      "elapsedMilliseconds": 2201.535499999998,
+      "httpStatus": 200,
+      "details": {
+        "id": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "text": "逃げるやつ?",
+        "startFrame": 474,
+        "endFrameExclusive": 556,
+        "preset": "normal",
+        "presetLabel": "Normal（通常表示）",
+        "hasOverride": false,
+        "status": "normal",
+        "statusLabel": "自動案",
+        "kind": "caption",
+        "revision": "a4d76028df3aa3f88606ddb74c0c809d05756500d47820433bc77f5e5f04675a",
+        "selection": {
+          "preset": "normal"
+        },
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal（通常表示）",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": true,
+              "nativeStateCount": 1
+            }
+          },
+          {
+            "value": "color",
+            "label": "Color",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": true,
+              "nativeStateCount": 1
+            }
+          },
+          {
+            "value": "scale",
+            "label": "Scale",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": true,
+              "nativeStateCount": 1
+            }
+          },
+          {
+            "value": "panel",
+            "label": "Panel",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": true,
+              "nativeStateCount": 1
+            }
+          },
+          {
+            "value": "pulse",
+            "label": "Pulse",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": true,
+              "nativeStateCount": 3
+            }
+          },
+          {
+            "value": "bounce",
+            "label": "Bounce",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": true,
+              "nativeStateCount": 4
+            }
+          },
+          {
+            "value": "shake",
+            "label": "Shake",
+            "enabled": true,
+            "physicalCheck": {
+              "status": "passed",
+              "reused": true,
+              "nativeStateCount": 7
+            }
+          }
+        ],
+        "peakOptions": [
+          {
+            "id": "audio-peak-000093",
+            "displaySeconds": 16.76,
+            "label": "音声のピーク 16.760秒"
+          },
+          {
+            "id": "audio-peak-000094",
+            "displaySeconds": 17,
+            "label": "音声のピーク 17.000秒"
+          },
+          {
+            "id": "audio-peak-000100",
+            "displaySeconds": 17.8,
+            "label": "音声のピーク 17.800秒"
+          }
+        ]
+      }
+    }
+  ],
+  "proofs": [
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001/applicability/59864de3b53495dd12202079b1e1c34266a575efa0651bbc710d88def0afb4dd.json",
+        "bytes": 6703,
+        "fileSha256": "f976d67223bae89ad4620ac5ede1e0537627ae59d40e53f720207a904da82391"
+      },
+      "binding": {
+        "schemaVersion": "presentation-editing-applicability-v001",
+        "planSha256": "a85135da0414f70e69a46b81eb171df4889878cb45854ce96d2493007bc5d419",
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "drawingRulesSha256": "81c1a0456394cb1c3d60636ef2e112592212dba755f51a22a0d54a8110b6f814",
+        "helperSha256": "3a2ce27ee2d5face1dcfbe5bdd3a35cff2f7f63db6d658ce3e19bda4ca7c62b5"
+      },
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 1,
+        "nativeStateReuses": 0,
+        "nativeAssets": {
+          "nativeDraws": 1,
+          "bitmapReuses": 2,
+          "verifiedPairsAdded": 0
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        }
+      },
+      "elapsedMilliseconds": 2042.260291999999
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001/applicability/89c58c682ae6e2e81d832c428ade6bf661ea52e118dfc2042e4376afcb0167a3.json",
+        "bytes": 18311,
+        "fileSha256": "15f5c9e1c526536c56cb7dc061da30d49a0ca079aa1f87aa2d583a108a687d94"
+      },
+      "binding": {
+        "schemaVersion": "presentation-editing-applicability-v001",
+        "planSha256": "d835bc5b3e7e9f7dc1c572d326d7722bea0723b98d107c388ee64685d4c7af4f",
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "drawingRulesSha256": "81c1a0456394cb1c3d60636ef2e112592212dba755f51a22a0d54a8110b6f814",
+        "helperSha256": "3a2ce27ee2d5face1dcfbe5bdd3a35cff2f7f63db6d658ce3e19bda4ca7c62b5"
+      },
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 3,
+        "nativeStateReuses": 3,
+        "nativeAssets": {
+          "nativeDraws": 0,
+          "bitmapReuses": 0,
+          "verifiedPairsAdded": 0
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        }
+      },
+      "elapsedMilliseconds": 473.7452919999996
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001/applicability/9c80becb84cd4d8047f046c470bf907af90e63b3b0a7166042a35f1a0d42b0e9.json",
+        "bytes": 6704,
+        "fileSha256": "3aa495f6f2e4084d9f586c35353f0df2235ebfc254cb1ee7e82b89d7871a5922"
+      },
+      "binding": {
+        "schemaVersion": "presentation-editing-applicability-v001",
+        "planSha256": "a2ef44b8636e1c0545f81b949fc0637f7d2b556bfd41171f2ab57a06f35031e1",
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "drawingRulesSha256": "81c1a0456394cb1c3d60636ef2e112592212dba755f51a22a0d54a8110b6f814",
+        "helperSha256": "3a2ce27ee2d5face1dcfbe5bdd3a35cff2f7f63db6d658ce3e19bda4ca7c62b5"
+      },
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 1,
+        "nativeStateReuses": 0,
+        "nativeAssets": {
+          "nativeDraws": 3,
+          "bitmapReuses": 0,
+          "verifiedPairsAdded": 1
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        }
+      },
+      "elapsedMilliseconds": 4328.058791000001
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001/applicability/a517633d99ddf7e6da488fd78dffbdcdfb2604f591d6a3c26dd663ab33e6ce6e.json",
+        "bytes": 18305,
+        "fileSha256": "2626cc78f6fd0c92aa41d4aa31ac84e45d99b948ad7932c4a1d2530e4339664f"
+      },
+      "binding": {
+        "schemaVersion": "presentation-editing-applicability-v001",
+        "planSha256": "a7fcb3daf7bf5ba1941b15dcc70c8d393cc83e5eaeb574d886358e00b037d024",
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "drawingRulesSha256": "81c1a0456394cb1c3d60636ef2e112592212dba755f51a22a0d54a8110b6f814",
+        "helperSha256": "3a2ce27ee2d5face1dcfbe5bdd3a35cff2f7f63db6d658ce3e19bda4ca7c62b5"
+      },
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 3,
+        "nativeStateReuses": 0,
+        "nativeAssets": {
+          "nativeDraws": 7,
+          "bitmapReuses": 2,
+          "verifiedPairsAdded": 2
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        }
+      },
+      "elapsedMilliseconds": 9678.921083
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001/applicability/b19353ff4c54b10c3d2567487b9c740669e36a9bc05b2a397c51523fec9d27a6.json",
+        "bytes": 23538,
+        "fileSha256": "1dc9739d6a40f74e63a7cdf2f102c6ccd52f0fef8c943f71885135a96d938aef"
+      },
+      "binding": {
+        "schemaVersion": "presentation-editing-applicability-v001",
+        "planSha256": "8ee58e4cb2b40f09ecf2059efe72e6b58e243b5849d36fc48decff1b373a6d47",
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "drawingRulesSha256": "81c1a0456394cb1c3d60636ef2e112592212dba755f51a22a0d54a8110b6f814",
+        "helperSha256": "3a2ce27ee2d5face1dcfbe5bdd3a35cff2f7f63db6d658ce3e19bda4ca7c62b5"
+      },
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 4,
+        "nativeStateReuses": 0,
+        "nativeAssets": {
+          "nativeDraws": 8,
+          "bitmapReuses": 4,
+          "verifiedPairsAdded": 2
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        }
+      },
+      "elapsedMilliseconds": 11326.950417
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001/applicability/cc2fe8a2b3c899d1319812d6a404ef78799852b8285be1511e71412cc07bfb3b.json",
+        "bytes": 6708,
+        "fileSha256": "f8bfc2b588a6e3749934840cb2f954e81504d4292ffc42cbb87cfee52a363d6b"
+      },
+      "binding": {
+        "schemaVersion": "presentation-editing-applicability-v001",
+        "planSha256": "3f0ac75c79e0440579ac280ac0ed72c5b968e18f7731a7b28a472c001fdf8b2e",
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "drawingRulesSha256": "81c1a0456394cb1c3d60636ef2e112592212dba755f51a22a0d54a8110b6f814",
+        "helperSha256": "3a2ce27ee2d5face1dcfbe5bdd3a35cff2f7f63db6d658ce3e19bda4ca7c62b5"
+      },
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 1,
+        "nativeStateReuses": 0,
+        "nativeAssets": {
+          "nativeDraws": 1,
+          "bitmapReuses": 2,
+          "verifiedPairsAdded": 0
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        }
+      },
+      "elapsedMilliseconds": 2062.7731249999997
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001/applicability/d081bfc64bd018ec37a799455fab7697ea13762c45d6eaf19a8a3aa5046e8b47.json",
+        "bytes": 18310,
+        "fileSha256": "dd19b8133f2314b9daec4528d07f691e067a211354325134c25e5592a3f9033e"
+      },
+      "binding": {
+        "schemaVersion": "presentation-editing-applicability-v001",
+        "planSha256": "bea1a20d97f7afcce1bb70ff789ae18f3c75b3349f604a7aa751fd028e9188cc",
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "drawingRulesSha256": "81c1a0456394cb1c3d60636ef2e112592212dba755f51a22a0d54a8110b6f814",
+        "helperSha256": "3a2ce27ee2d5face1dcfbe5bdd3a35cff2f7f63db6d658ce3e19bda4ca7c62b5"
+      },
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 3,
+        "nativeStateReuses": 3,
+        "nativeAssets": {
+          "nativeDraws": 0,
+          "bitmapReuses": 0,
+          "verifiedPairsAdded": 0
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        }
+      },
+      "elapsedMilliseconds": 482.179583000001
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001/applicability/dd630be7cc6a2f6bd6c5378999821098ad6a5ef31f3315250664816404c4f357.json",
+        "bytes": 6705,
+        "fileSha256": "d6d05756af6667c74f50f2e4354631e356de2466c827cf764943b502fce782d5"
+      },
+      "binding": {
+        "schemaVersion": "presentation-editing-applicability-v001",
+        "planSha256": "93c50d1330294e5b868696f0836faa082e6fb9ea65165f333ace90c08cea2d6b",
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "drawingRulesSha256": "81c1a0456394cb1c3d60636ef2e112592212dba755f51a22a0d54a8110b6f814",
+        "helperSha256": "3a2ce27ee2d5face1dcfbe5bdd3a35cff2f7f63db6d658ce3e19bda4ca7c62b5"
+      },
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 1,
+        "nativeStateReuses": 0,
+        "nativeAssets": {
+          "nativeDraws": 1,
+          "bitmapReuses": 2,
+          "verifiedPairsAdded": 0
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        }
+      },
+      "elapsedMilliseconds": 2023.6370000000006
+    },
+    {
+      "reference": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-applicability-timing-v001/applicability/f7cd16c19cc9f326fffa0eacee8cba05b8ad67ea0a335efbcc1eb26d428a3ab1.json",
+        "bytes": 36626,
+        "fileSha256": "857341cad124289a06519dd91a41ef5ae144049d81d0da51ab30c953febbccf4"
+      },
+      "binding": {
+        "schemaVersion": "presentation-editing-applicability-v001",
+        "planSha256": "55d7a2951fae28250e6d976bd54fc87e6244379e0903533cdd4254f8996f0719",
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "drawingRulesSha256": "81c1a0456394cb1c3d60636ef2e112592212dba755f51a22a0d54a8110b6f814",
+        "helperSha256": "3a2ce27ee2d5face1dcfbe5bdd3a35cff2f7f63db6d658ce3e19bda4ca7c62b5"
+      },
+      "result": {
+        "status": "passed",
+        "violations": [],
+        "targetId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000010",
+        "mediaCheck": "not-performed",
+        "layoutCheck": "passed",
+        "nativeStateCount": 7,
+        "nativeStateReuses": 1,
+        "nativeAssets": {
+          "nativeDraws": 18,
+          "bitmapReuses": 0,
+          "verifiedPairsAdded": 6
+        },
+        "checks": {
+          "instructionApplication": {
+            "status": "passed"
+          },
+          "layoutAndVisibility": {
+            "status": "passed"
+          },
+          "media": {
+            "status": "failed"
+          }
+        }
+      },
+      "elapsedMilliseconds": 23400.334499999997
+    }
+  ],
+  "nativeCache": {
+    "beforePairs": 109,
+    "afterPairs": 120
+  },
+  "nativeWork": {
+    "actualDraws": 39,
+    "bitmapReuses": 12,
+    "physicalStates": 24,
+    "physicalStateReuses": 7
+  }
+}

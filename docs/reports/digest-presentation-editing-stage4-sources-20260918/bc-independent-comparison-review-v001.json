@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "presentation-editing-preview-comparison-independent-review-v001",
+  "author": "Codex",
+  "reviewType": "Independent read-only source review and saved-TAP inspection",
+  "status": "passed-after-two-findings-corrected",
+  "unresolvedMaterialFindings": [],
+  "reviewedFiles": [
+    {
+      "path": "evals/clip_composition/compare_presentation_editing_preview_qc_v001.mjs",
+      "fileSha256": "fdcb4f9a066438231f98a0397fa51a9c9e048ea05b33da758746b6fcd564803d",
+      "bytes": 10704
+    },
+    {
+      "path": "evals/clip_composition/verify_presentation_editing_preview_improvement_v001.mjs",
+      "fileSha256": "0ef18afb67cb4f152cae13fffa73446ccc5cdf252e46ed7e4ce7b621ac3420a5",
+      "bytes": 9766
+    },
+    {
+      "path": "evals/clip_composition/reproduce_presentation_editing_preview_qc_v001.mjs",
+      "fileSha256": "9279994d3b60bde22e2a82537673a3e467a22dc7874e8746995c7c7754d01b46",
+      "bytes": 13625
+    },
+    {
+      "path": "evals/clip_composition/presentation_editing_preview_rgb_verification_v001.mjs",
+      "fileSha256": "b67073ee06376e4784f69e175d06e9f39bae151791952f8b9a2a211762f44794",
+      "bytes": 12662
+    },
+    {
+      "path": "evals/clip_composition/presentation_native_frame_qc_before_sharing_fixture_v001.mjs",
+      "fileSha256": "704992c891ee12685e6bb35abf535a9e2d851faead86a4ec5296cb67cc92f6b0",
+      "bytes": 48920
+    },
+    {
+      "path": "evals/clip_composition/presentation_integrity_state_qc_before_sharing_fixture_v001.mjs",
+      "fileSha256": "ee3b93f88c4a9ebd9ad81c0b41ae1f81d0caafe8f0337bb6c915021c6f60ee4e",
+      "bytes": 11520
+    },
+    {
+      "path": "evals/clip_composition/presentation_editing_preview_qc_comparison_v001.test.mjs",
+      "fileSha256": "840ba0537141095dc0bf3f976c7e29ba1a04520a90b86287d4856034dd191040",
+      "bytes": 4016
+    },
+    {
+      "path": "evals/clip_composition/presentation_editing_preview_rgb_verification_v001.test.mjs",
+      "fileSha256": "ba850a47ba6a7b65ef51cb0f391daa045caaae18fad374c3c8b7109aee04818b",
+      "bytes": 12597
+    },
+    {
+      "path": "evals/clip_composition/presentation_integrity_state_qc_before_sharing_fixture_v001.test.mjs",
+      "fileSha256": "69ca3e9855610bd0bb171ad520a2eb445e8e6a8408e708fbe87b801a8781d708",
+      "bytes": 11437
+    }
+  ],
+  "actionsByReviewer": {
+    "sourceEdits": 0,
+    "testsExecuted": 0,
+    "mediaGeneration": 0,
+    "oldQcExecuted": 0,
+    "fullDigestRerenders": 0,
+    "documentationFilesWritten": 1
+  },
+  "closedFindings": [
+    {
+      "id": "same-input-binding",
+      "priority": 1,
+      "initialProblem": "旧計算の依頼内容だけを照合し、旧計算の実際の入力一覧を今回の入力へ照合していなかった。同じ有限検査画像を含む別媒体へ証拠を差し替えても比較成功となり得た。",
+      "correction": "公開先へ正規化した役割・絶対パス・実ファイルSHA・byte数・構造化入力SHAを旧新で完全一致させる。旧側の順序付きPNG状態集合も、今回の導出結果を同じ移動対応へ直したものと完全一致させる。",
+      "locations": [
+        {
+          "path": "evals/clip_composition/compare_presentation_editing_preview_qc_v001.mjs",
+          "line": 29
+        },
+        {
+          "path": "evals/clip_composition/compare_presentation_editing_preview_qc_v001.mjs",
+          "line": 104
+        }
+      ],
+      "savedFaultTest": "比較入口は実RGBが同じでも別媒体への差替えと外側SHAの更新を拒否する"
+    },
+    {
+      "id": "complete-old-execution",
+      "priority": 1,
+      "initialProblem": "旧側の字幕検査一覧や実行記録が空でも、残っているRGBの比較だけで成功へ進めた。",
+      "correction": "旧字幕検査一覧を全字幕の順序と完全一致させ、全体と字幕別の検査点を対応付ける。開始commitの検証処理で旧抽出・切出し・参照合成の全実行順、引数、終了結果、出力一覧を再導出して照合する。",
+      "locations": [
+        {
+          "path": "evals/clip_composition/reproduce_presentation_editing_preview_qc_v001.mjs",
+          "line": 55
+        },
+        {
+          "path": "evals/clip_composition/presentation_integrity_state_qc_before_sharing_fixture_v001.mjs",
+          "line": 21
+        }
+      ],
+      "savedFaultTests": [
+        "旧方式の実行記録が空・不足・余分なら保存された成功を信用せず拒否する",
+        "字幕検査が空・不足・重複なら全体の観測を通過させない",
+        "検査点の順序だけを変えた場合も字幕側を合わせて変えた場合も実行順の不一致を拒否する",
+        "実行先・引数・切り出しRGB・終了結果の改変を拒否する",
+        "記録された生成物が欠落・重複・別内容なら完全性検査を通過させない"
+      ]
+    }
+  ],
+  "checkedProperties": [
+    "現行完了結果の媒体・保存状態・全体時計・範囲・品質証拠を再検証する。公開前後の対応は元SHAを保持する一段の指定であり、公開先の実byteを読む。",
+    "同じ準備記録の全PNG状態から新旧両方式の検査点を導出し、一致を確認する。旧方式の本番へのfallbackはない。",
+    "全検査点の本文識別・全体frame・媒体内frame・状態・切出し・全候補の種類と重ね順を比較する。",
+    "全完成RGBと全候補RGBを実ファイルから再読してbyte比較し、整数距離・同値分類・厳密な合否を再計算して保存値とも照合する。",
+    "元画像と完成画像の全frame PNGは実縦横を確認して復号し、PNG圧縮の違いを許しつつ全RGBを比較する。",
+    "比較の終端でも入力・生成物・固定した旧ソースを再hashし、途中の欠落や変更を成功記録へ持ち込まない。",
+    "実行器は同じ字幕Panelと接続Blackの周辺を各一度生成し、完成媒体再利用を各一度確認する。全編生成は要求しない。",
+    "登録媒体のRange応答と実ファイルbyte、再起動後の保存状態、元利用者の保存ファイルと原媒体の不変を確認する。"
+  ],
+  "frozenComputation": {
+    "commit": "efdee0aabea10b87d39203bee6f9f6e7460032d0",
+    "nativeOriginalSha256": "704992c891ee12685e6bb35abf535a9e2d851faead86a4ec5296cb67cc92f6b0",
+    "nativeFixtureExactBytes": true,
+    "integrityOriginalSha256": "cf47aa4b12d87aaed30032c20644f2de294da3a64b4fa6ee9733b36a0b43da9a",
+    "integrityRestoredOriginalExactBytes": true,
+    "integrityFixtureOnlyChanges": [
+      "旧nativeモジュールのimport先を固定した試験fixtureへ変更",
+      "既存の有限実行証拠検証関数をexport"
+    ],
+    "verifiedByReviewer": "git showの元ファイルbyteを読み、fixtureおよび二変更を逆変換したbyteと直接一致確認",
+    "productionFallbacks": 0
+  },
+  "savedTestEvidence": {
+    "executor": "comparison implementation agent",
+    "reviewerReran": false,
+    "tap": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/preview-qc-comparison-v005.tap",
+      "fileSha256": "12038ec6bbf6e27f5f47575de2468f258f08051a00f7aa8075fa6427be2afbee",
+      "bytes": 4893
+    },
+    "stderr": {
+      "path": "/private/tmp/zev-stage4-editing-20260918/preview-qc-comparison-v005.stderr",
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "tests": 20,
+    "passed": 20,
+    "failed": 0,
+    "elapsedMilliseconds": 531.953,
+    "testNames": [
+      "comparison reopens differently compressed frame PNGs and matches actual complete RGB",
+      "comparison rejects wrong full-frame pixels even when each PNG reference has its own valid hash",
+      "comparison rejects different width and height even when total RGB length and pixels match",
+      "comparison rejects shifted frame clocks before decoding and rejects stale PNG bytes",
+      "comparison rejects a current frame file removed after decoding before accepting the pair",
+      "全候補の実RGBから同値分類と整数距離を再計算し元の証拠を変えない",
+      "比較入口は実RGBが同じでも別媒体への差替えと外側SHAの更新を拒否する",
+      "保存済みSHAと異なる実RGB・フレーム・欠落ファイル・入力の変更を拒否する",
+      "実byteを変えない距離・同値分類・判定の改変を拒否する",
+      "SHAを更新してもRGBの長さや生成物との結び付きが不正なら拒否する",
+      "入力一覧・構造化入力・実行前後の参照が一致しなければ拒否する",
+      "公開移動は元のSHAを保つ完全一致の一段対応だけを受け付ける",
+      "両側を実byte検算して全検査点と候補を同順比較する",
+      "各側の記録が自己整合でも実RGB差・検査点順・候補の意味の差を拒否する",
+      "旧方式の二字幕・全検査点・実行順・生成物が自己整合する小型証拠を受理する",
+      "旧方式の実行記録が空・不足・余分なら保存された成功を信用せず拒否する",
+      "字幕検査が空・不足・重複なら全体の観測を通過させない",
+      "検査点の順序だけを変えた場合も字幕側を合わせて変えた場合も実行順の不一致を拒否する",
+      "実行先・引数・切り出しRGB・終了結果の改変を拒否する",
+      "記録された生成物が欠落・重複・別内容なら完全性検査を通過させない"
+    ]
+  },
+  "timingMeaning": {
+    "previewHttpElapsed": "job開始から状態poll・登録後の32byte Range確認まで。2秒poll待ちを含む。",
+    "nativeQc": "旧計算と新計算の有限QC処理に記録された時間。生成物の同一性確認後に比較する。",
+    "renderPhases": "今回の媒体生成結果に記録された工程別時間。HTTP待ち時間や比較処理時間とは別項目。",
+    "comparison": "RGB再読検算とframe PNG復号比較の実測。全frame側には末尾の参照再検証も含む。",
+    "reproductionElapsed": "旧有限QCに加え、その証拠検証と保存・参照再照合を含む。旧有限QCだけの時間と混同しない。",
+    "noPredictedSpeedup": true
+  },
+  "limits": [
+    "本レビューはsourceと保存された試験記録の検査であり、同一現行媒体二本の最終比較結果そのものの確認ではない。",
+    "実UI受入、人間の映像・音声品質、正式採用を認定しない。",
+    "旧周辺MP4は音声修正前の履歴であり、新しいMP4とのbyte一致を必要条件にはしない。"
+  ]
+}

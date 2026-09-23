@@ -1476,20 +1476,46 @@ test('12 行数・行の正の交差・安全領域・空alphaを独立して検
   );
 });
 
+test('12b 旧差分・native単独・成功フラグは新しい完成映像全体証拠の代わりにならない', async () => {
+  const {planReport} = await logicalFixturePromise;
+  const plan = clone(planReport.plan);
+  const caption = plan.elements.find(element => element.kind === 'speech-caption');
+  assert.ok(caption);
+  plan.elements = [caption];
+  const base = makeValidQcInput(plan);
+  const legacyOnly = evaluatePresentationRendererQcV002(base);
+  assert.equal(legacyOnly.status, 'failed', JSON.stringify(legacyOnly));
+  assert(legacyOnly.violations.some(row => row.code === 'COMPLETED_FRAME_QC_INVALID'
+    && row.details?.missingGlobalEvidence === true));
+  assert.deepEqual([...new Set(codesOf(legacyOnly))], ['COMPLETED_FRAME_QC_INVALID']);
+  for (const evidence of [undefined, {status: 'passed', visible: true}]) {
+    const invalid = clone(base);
+    invalid.overlayInspections[0].visibilityComparisonBasis = 'native-reference-state-identification-v001';
+    if (evidence !== undefined) invalid.overlayInspections[0].nativeFrameQc = evidence;
+    const rejected = evaluatePresentationRendererQcV002(invalid);
+    assert.equal(rejected.status, 'failed');
+    assert(rejected.violations.some(row => row.code === 'COMPLETED_FRAME_QC_INVALID'
+      && row.details?.missingGlobalEvidence === true));
+    assert.deepEqual([...new Set(codesOf(rejected))], ['COMPLETED_FRAME_QC_INVALID']);
+  }
+});
+
 test('13 時間と空間の正の交差だけを衝突とし境界接触は許容する', async () => {
   const fixture = await logicalFixturePromise;
   const two = clone(fixture.planReport.plan);
   two.elements = two.elements.slice(0, 2);
   two.elements[1].startFrame = two.elements[0].startFrame + 1;
   two.elements[1].endFrameExclusive = two.elements[0].endFrameExclusive;
-  const collisionInput = makeValidQcInput(two);
+  const collisionInput = {...makeValidQcInput(two), requireFinalVisibility: false};
   collisionInput.overlayInspections[1].alphaBounds = clone(collisionInput.overlayInspections[0].alphaBounds);
   assertHasCode(evaluatePresentationRendererQcV002(collisionInput), 'INSTRUCTION_TEMPORAL_SPATIAL_COLLISION');
 
   const touching = clone(two);
   touching.elements[1].startFrame = touching.elements[0].endFrameExclusive;
   touching.elements[1].endFrameExclusive = touching.elements[1].startFrame + 30;
-  const touchingReport = evaluatePresentationRendererQcV002(makeValidQcInput(touching));
+  const touchingReport = evaluatePresentationRendererQcV002({
+    ...makeValidQcInput(touching), requireFinalVisibility: false,
+  });
   assert.ok(!codesOf(touchingReport).includes('INSTRUCTION_TEMPORAL_SPATIAL_COLLISION'));
 });
 
@@ -1815,9 +1841,14 @@ test('17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成
     'RENDER_OUTPUT_PUBLISH_FAILED',
   ]);
   assert.deepEqual(allExported, expectedUnion);
+  // This fixture owns the static renderer's violations. The two finite Pulse
+  // failures have dedicated fault cases in presentation_pulse_renderer_v001.test.mjs.
+  const pulseCodes = new Set(['PULSE_NATIVE_STATE_MISMATCH', 'PULSE_FRAME_STATE_MISMATCH']);
+  const staticExpected = new Set([...expectedUnion].filter(code => !pulseCodes.has(code)));
+  assert.deepEqual(allExported, new Set([...staticExpected, ...pulseCodes]));
   assert.deepEqual(
-    new Set([...observedCodes].filter((code) => allExported.has(code))),
-    allExported,
-    `未発火: ${[...allExported].filter((code) => !observedCodes.has(code)).join(', ')}`,
+    new Set([...observedCodes].filter((code) => staticExpected.has(code))),
+    staticExpected,
+    `静的fixtureで未発火: ${[...staticExpected].filter((code) => !observedCodes.has(code)).join(', ')}`,
   );
 });

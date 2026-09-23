@@ -1,0 +1,525 @@
+{
+  "schemaVersion": "r1-caption-review-preparation-v001",
+  "status": "partial; preparation only, not an emitted Point Review package",
+  "originalAnswersRef": {
+    "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-batch-10-20260921-v001/answers-received-v003/session-answers.json",
+    "fileSha256": "8dc2c92b70837b6927899373217a6419446f687e308c3f68602037d213066216",
+    "bytes": 62272
+  },
+  "originalAnswersCompletion": "all 10 answered; existing answers remain immutable",
+  "scope": "Prepare only the four changed-caption questions for the existing standard Point Review entry point. Root combines these with 4/5/8. No new UI, submission, answer import, or completed-media claim for pending rows.",
+  "frameRangeConvention": "all ranges are half-open; Point Review start_frame/end_frame and context ranges are local to the selected media",
+  "beforeSelection": "For 9/10 use the previously reviewed Q5 After, preserving the accepted omission/addition while comparing only caption changes. Do not substitute the unedited original Digest.",
+  "finalization": "After native completion, bind actual candidate path/SHA/fps/frame count and passed completion/QC; then only materialize complete media entries into the standard Point Review. Preserve this preparation record.",
+  "rows": [
+    {
+      "originalNumber": 6,
+      "readyForPointReview": false,
+      "originalAnswer": {
+        "sessionId": "HRS-20260921-10-POINTS",
+        "batchId": "HRB-Q4-001",
+        "revision": "v001",
+        "reviewSha256": "ba13510ba061a8282bdd211d2fd481d4b83be7b64a6c16a46914632e1b10e41d",
+        "pointId": "Q4-C001",
+        "reviewId": "HR-Q4-001",
+        "choice": "change_requested",
+        "comment": "別に悪くないんだけど、ゆっくり話してるから、字幕が表示されてる時間が長すぎると思う\nあと、ここで方眼紙背景は確認できたけど、バリエーションとしてはあり",
+        "answeredAt": "2026-09-21T04:33:55.215Z",
+        "completion": "answered; preserved; no re-answer requested"
+      },
+      "beforeOriginalMediaId": "Q4-C001",
+      "media": [
+        {
+          "media_id": "R1-P06-BEFORE",
+          "label": "字幕修正前：既存の回答対象",
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C001-render/presentation-rendered-v002.mp4",
+          "sha256": "209397f26a3164d61496b599fe2b7209db3f6d4949115cd27ea63ac4690017ce",
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 686,
+          "timeline_id": "C-all-Q4-v001",
+          "timeline_start_frame": 2511
+        },
+        {
+          "media_id": "R1-P06-AFTER",
+          "label": "字幕修正後：今回の局所候補",
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-06/render/presentation-rendered-v002.mp4",
+          "sha256": null,
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 686,
+          "timeline_id": "r1-point-6-short-frame-v001",
+          "timeline_start_frame": 0
+        }
+      ],
+      "point": {
+        "point_id": "R1-P06-CAPTION-DELTA",
+        "review_id": "HR-Q4-001",
+        "related_review_ids": [],
+        "title": "6：長い説明字幕の区切り",
+        "question": "説明を3枚の字幕に分けました。発話に沿って切り替わり、一枚が長く残る感じは改善していますか。",
+        "target_function": "長い説明を原文の順序どおり句で分け、発話に合わせて表示する処理",
+        "change_summary": "長い一枚を「えっと今うぶちゃん」「みーちゃんの変化量が」「もう10くらいいってんだよな」の3枚へ分けました。方眼紙は保持し、寒色は今回の局所配色候補です。",
+        "why_human_review": "変更した字幕の読みやすさと発話との自然な対応を、この短尺で確認します。",
+        "scope": {
+          "level": "point",
+          "applies_to": [
+            "長い説明を原文の順序どおり句で分け、発話に合わせて表示する処理の変更後の見え方"
+          ],
+          "does_not_apply_to": [
+            "方眼紙の種類に対する元回答の再判定",
+            "配色の自動選択や全編品質",
+            "元の10ポイントへの回答の書換え・再入力",
+            "他のポイントへの回答転記"
+          ]
+        },
+        "views": [
+          {
+            "view_id": "R1-P06-BEFORE-VIEW",
+            "label": "字幕修正前",
+            "role": "before",
+            "media_id": "R1-P06-BEFORE",
+            "start_frame": 0,
+            "end_frame": 686,
+            "context_start_frame": 0,
+            "context_end_frame": 686
+          },
+          {
+            "view_id": "R1-P06-AFTER-VIEW",
+            "label": "字幕修正後",
+            "role": "after",
+            "media_id": "R1-P06-AFTER",
+            "start_frame": 0,
+            "end_frame": 686,
+            "context_start_frame": 0,
+            "context_end_frame": 686
+          }
+        ]
+      },
+      "afterBinding": {
+        "status": "pending native render; the null sha256 is not a review-ready media record",
+        "jobRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-06/job.json",
+          "fileSha256": "70e76213646c42fe67dbfa93c5ad44445aa6ba082fd6fe74b8d69f5a6caebe42",
+          "bytes": 5603
+        },
+        "projectionRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-caption-v001/points-06-07/point-6-projection.json",
+          "bytes": 41433,
+          "fileSha256": "042e45431b27fde9f2c8e2a47ca13b75959a277eb234b529c95bc020387402ea"
+        },
+        "verificationRef": null,
+        "sourceClockId": "q5-original-c-all-frame-v001",
+        "sourceRange": {
+          "startFrame": 2511,
+          "endFrameExclusive": 3197
+        },
+        "targetClockId": "r1-point-6-short-frame-v001",
+        "allShortLocalRange": {
+          "startFrame": 0,
+          "endFrameExclusive": 686
+        },
+        "changedCaptionLocalRanges": [
+          {
+            "startFrame": 31,
+            "endFrameExclusive": 425
+          }
+        ]
+      },
+      "preserve": [
+        "元の全文・語順・映像・音声・短尺の入口と出口",
+        "方眼紙を背景の種類として肯定した元回答",
+        "前後の字幕本文と表示区間"
+      ]
+    },
+    {
+      "originalNumber": 7,
+      "readyForPointReview": true,
+      "originalAnswer": {
+        "sessionId": "HRS-20260921-10-POINTS",
+        "batchId": "HRB-Q4-001",
+        "revision": "v001",
+        "reviewSha256": "ba13510ba061a8282bdd211d2fd481d4b83be7b64a6c16a46914632e1b10e41d",
+        "pointId": "Q4-C002",
+        "reviewId": "HR-Q4-002",
+        "choice": "change_requested",
+        "comment": "仲間のやつが一瞬しか表示されてない。一方でその前のライバル云々は発話がないのに表示されているので間違ってる\n背景は特に違和感ない。ただ、背景色はバリエーションがあったほうが良さそう。これはどの色がすごくいいはならないのでバリエーションです",
+        "answeredAt": "2026-09-21T04:36:33.448Z",
+        "completion": "answered; preserved; no re-answer requested"
+      },
+      "beforeOriginalMediaId": "Q4-C002",
+      "media": [
+        {
+          "media_id": "R1-P07-BEFORE",
+          "label": "字幕修正前：既存の回答対象",
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q4-20260920-v001/candidates-v003/Q4-C002-render/presentation-rendered-v002.mp4",
+          "sha256": "9ea1730ccc3bd3561291a185428aa3aa72afcc2610b0225adcd8c37049f44fce",
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 128,
+          "timeline_id": "C-all-Q4-v001",
+          "timeline_start_frame": 4436
+        },
+        {
+          "media_id": "R1-P07-AFTER",
+          "label": "字幕修正後：今回の局所候補",
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-07/render/presentation-rendered-v002.mp4",
+          "sha256": "7ea9e631a20c28ebba29e8f70ae11a45b2ace91818ed0fdf943b6cf6a66e9478",
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 128,
+          "timeline_id": "r1-point-7-short-frame-v001",
+          "timeline_start_frame": 0
+        }
+      ],
+      "point": {
+        "point_id": "R1-P07-CAPTION-DELTA",
+        "review_id": "HR-Q4-002",
+        "related_review_ids": [],
+        "title": "7：「俺たちは仲間」と直前の字幕",
+        "question": "「俺たちは仲間」は発話に合って表示されていますか。直前の「ライバル」の字幕が残る問題も解消していますか。",
+        "target_function": "対象字幕と直前字幕をそれぞれの発話区間へ合わせる処理",
+        "change_summary": "「俺たちは仲間」を短尺の冒頭から表示し、この短尺に対応発話がない直前字幕を非表示にしました。無地背景は保持し、暖色は今回の局所配色候補です。",
+        "why_human_review": "変更した字幕の読みやすさと発話との自然な対応を、この短尺で確認します。",
+        "scope": {
+          "level": "point",
+          "applies_to": [
+            "対象字幕と直前字幕をそれぞれの発話区間へ合わせる処理の変更後の見え方"
+          ],
+          "does_not_apply_to": [
+            "背景に対する元回答の再判定",
+            "配色の自動選択や全編品質",
+            "元の10ポイントへの回答の書換え・再入力",
+            "他のポイントへの回答転記"
+          ]
+        },
+        "views": [
+          {
+            "view_id": "R1-P07-BEFORE-VIEW",
+            "label": "字幕修正前",
+            "role": "before",
+            "media_id": "R1-P07-BEFORE",
+            "start_frame": 0,
+            "end_frame": 128,
+            "context_start_frame": 0,
+            "context_end_frame": 128
+          },
+          {
+            "view_id": "R1-P07-AFTER-VIEW",
+            "label": "字幕修正後",
+            "role": "after",
+            "media_id": "R1-P07-AFTER",
+            "start_frame": 0,
+            "end_frame": 128,
+            "context_start_frame": 0,
+            "context_end_frame": 128
+          }
+        ]
+      },
+      "afterBinding": {
+        "status": "passed candidate",
+        "jobRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-07/job.json",
+          "fileSha256": "5f4782389f3a7dd5ef17991ba34edfbfaa30a4c612361973a784aa5a729bd7a5",
+          "bytes": 5602
+        },
+        "projectionRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-caption-v001/points-06-07/point-7-projection.json",
+          "bytes": 19197,
+          "fileSha256": "4e544ba8ffa418b8cb5d026d9b6ba61b798f123493c7f69f5ccdb408a47c106c"
+        },
+        "verificationRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/review-reflection-r1-r3-20260921-v002/r1-short-point-07-verification-v001.json",
+          "fileSha256": "661c451132b59f5bb669decfbc8380e8d8b2922a0c67859bf1286cbed5916125",
+          "bytes": 2615
+        },
+        "sourceClockId": "q5-original-c-all-frame-v001",
+        "sourceRange": {
+          "startFrame": 4436,
+          "endFrameExclusive": 4564
+        },
+        "targetClockId": "r1-point-7-short-frame-v001",
+        "allShortLocalRange": {
+          "startFrame": 0,
+          "endFrameExclusive": 128
+        },
+        "changedCaptionLocalRanges": [
+          {
+            "startFrame": 0,
+            "endFrameExclusive": 27
+          }
+        ]
+      },
+      "preserve": [
+        "「俺たちは仲間」の原文と後続字幕の本文・区間",
+        "映像・音声・短尺の入口と出口",
+        "背景に違和感はないという元回答と、色の種類を増やしたい希望"
+      ]
+    },
+    {
+      "originalNumber": 9,
+      "readyForPointReview": false,
+      "originalAnswer": {
+        "sessionId": "HRS-20260921-10-POINTS",
+        "batchId": "HRB-Q5-1-001",
+        "revision": "v001",
+        "reviewSha256": "bd91c2e1cac5c3beb999768b304c686b0d19eb103bc18f933a8f171774176b42",
+        "pointId": "Q5-1-C001",
+        "reviewId": "HR-Q5-1-001",
+        "choice": "good",
+        "comment": "違和感はない。字幕のタイミングがズレてる気がした",
+        "answeredAt": "2026-09-21T05:22:06.785Z",
+        "completion": "answered; preserved; no re-answer requested"
+      },
+      "beforeOriginalMediaId": "Q5-AFTER",
+      "media": [
+        {
+          "media_id": "R1-P09-BEFORE",
+          "label": "字幕修正前：既存の回答対象",
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-1-20260921-v002/after-render-v003/presentation-rendered-v002.mp4",
+          "sha256": "80f39330b22f238263e282d33327105f1651bd45800d33fddf4888d9d146c8f6",
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 763,
+          "timeline_id": "q5-content-v002-df4831a9670d44cc451f4e43387af4be8bb76a83695db1f9bd6a21e55aacd969",
+          "timeline_start_frame": 11683
+        },
+        {
+          "media_id": "R1-P09-AFTER",
+          "label": "字幕修正後：今回の局所候補",
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-09/render/presentation-rendered-v002.mp4",
+          "sha256": null,
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 763,
+          "timeline_id": "r1-point-9-short-frame-v001",
+          "timeline_start_frame": 0
+        }
+      ],
+      "point": {
+        "point_id": "R1-P09-CAPTION-DELTA",
+        "review_id": "HR-Q5-1-001",
+        "related_review_ids": [],
+        "title": "9：省略案の字幕タイミング",
+        "question": "省略した映像と音声はそのままです。修正した各字幕の出る時刻・消える時刻は、発話に合っていますか。",
+        "target_function": "確認済みの省略案の中で、各字幕を固有の発話開始・終了へ合わせる処理",
+        "change_summary": "既存の省略案を比較元とし、5枚の字幕時刻だけを個別に修正しました。",
+        "why_human_review": "変更した字幕の読みやすさと発話との自然な対応を、この短尺で確認します。",
+        "scope": {
+          "level": "point",
+          "applies_to": [
+            "確認済みの省略案の中で、各字幕を固有の発話開始・終了へ合わせる処理の変更後の見え方"
+          ],
+          "does_not_apply_to": [
+            "省略案そのものの再採点",
+            "原版置換・正式採用・他の内容編集との併用",
+            "元の10ポイントへの回答の書換え・再入力",
+            "他のポイントへの回答転記"
+          ]
+        },
+        "views": [
+          {
+            "view_id": "R1-P09-BEFORE-VIEW",
+            "label": "字幕修正前",
+            "role": "before",
+            "media_id": "R1-P09-BEFORE",
+            "start_frame": 0,
+            "end_frame": 763,
+            "context_start_frame": 0,
+            "context_end_frame": 763
+          },
+          {
+            "view_id": "R1-P09-AFTER-VIEW",
+            "label": "字幕修正後",
+            "role": "after",
+            "media_id": "R1-P09-AFTER",
+            "start_frame": 0,
+            "end_frame": 763,
+            "context_start_frame": 0,
+            "context_end_frame": 763
+          }
+        ]
+      },
+      "afterBinding": {
+        "status": "pending native render; the null sha256 is not a review-ready media record",
+        "jobRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-09/job.json",
+          "fileSha256": "39545796dbd54a64eec7c0d3eda14582c987d1879bc057c620b8274cb0662f6f",
+          "bytes": 8449
+        },
+        "projectionRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-caption-v001/point-09/point-9-projection.json",
+          "bytes": 42845,
+          "fileSha256": "9aed20bd82bcd2a951b5f3127281579fe0459dec06439f7ff74d33883e228a0c"
+        },
+        "verificationRef": null,
+        "sourceClockId": "q5-edited-content-frame-v002",
+        "sourceRange": {
+          "startFrame": 11683,
+          "endFrameExclusive": 12446
+        },
+        "targetClockId": "r1-point-9-short-frame-v001",
+        "allShortLocalRange": {
+          "startFrame": 0,
+          "endFrameExclusive": 763
+        },
+        "changedCaptionLocalRanges": [
+          {
+            "startFrame": 7,
+            "endFrameExclusive": 129
+          },
+          {
+            "startFrame": 181,
+            "endFrameExclusive": 270
+          },
+          {
+            "startFrame": 270,
+            "endFrameExclusive": 340
+          },
+          {
+            "startFrame": 358,
+            "endFrameExclusive": 426
+          },
+          {
+            "startFrame": 623,
+            "endFrameExclusive": 728
+          }
+        ]
+      },
+      "preserve": [
+        "省略案に「良い」「違和感はない」とした元回答",
+        "元Digestの12153〜12212frameの59frame省略",
+        "対象字幕「このドスンと落ちていくんですこれ」の非表示",
+        "省略対象説明の前44frame・後16frameの映像と音声の保持",
+        "既存省略案の763frameとNormalの見せ方"
+      ]
+    },
+    {
+      "originalNumber": 10,
+      "readyForPointReview": false,
+      "originalAnswer": {
+        "sessionId": "HRS-20260921-10-POINTS",
+        "batchId": "HRB-Q5-2-001",
+        "revision": "v001",
+        "reviewSha256": "a9ef5312b0c885c5119c5ba689075eb0d5c2fc69fa845179dbbe828dff1ecb0c",
+        "pointId": "Q5-2-C001",
+        "reviewId": "HR-Q5-2-001",
+        "choice": "change_requested",
+        "comment": "使ったのに　と　打てないか　は別な字幕の方が良さそう",
+        "answeredAt": "2026-09-21T04:38:50.022Z",
+        "completion": "answered; preserved; no re-answer requested"
+      },
+      "beforeOriginalMediaId": "Q5-2-AFTER",
+      "media": [
+        {
+          "media_id": "R1-P10-BEFORE",
+          "label": "字幕修正前：既存の回答対象",
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/quality-q5-2-20260921-v001/after-render-v002/presentation-rendered-v002.mp4",
+          "sha256": "98d73010ebfa93bf9b094781e279d705f51771d295ae3fbc9fe78d1f0f365737",
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 624,
+          "timeline_id": "q5-2-content-v001-94698bac280a5fef2bab4d07b23eefbf519e7a5e43aa69f4287b0e5258bd1898",
+          "timeline_start_frame": 18578
+        },
+        {
+          "media_id": "R1-P10-AFTER",
+          "label": "字幕修正後：今回の局所候補",
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-10/render/presentation-rendered-v002.mp4",
+          "sha256": null,
+          "fps_num": 30,
+          "fps_den": 1,
+          "total_frames": 624,
+          "timeline_id": "r1-point-10-short-frame-v001",
+          "timeline_start_frame": 0
+        }
+      ],
+      "point": {
+        "point_id": "R1-P10-CAPTION-DELTA",
+        "review_id": "HR-Q5-2-001",
+        "related_review_ids": [],
+        "title": "10：導入字幕を二句に分ける",
+        "question": "「全然まで使ったのに」と「撃てないかー」を別の字幕にしました。発話に沿って自然に切り替わりますか。",
+        "target_function": "導入で追加した一枚の字幕を、保存原文の二句へ分ける処理",
+        "change_summary": "「全然まで使ったのに撃てないかー」を2枚へ分け、対応する発話境界で切り替えました。導入の長さは同じです。",
+        "why_human_review": "変更した字幕の読みやすさと発話との自然な対応を、この短尺で確認します。",
+        "scope": {
+          "level": "point",
+          "applies_to": [
+            "導入で追加した一枚の字幕を、保存原文の二句へ分ける処理の変更後の見え方"
+          ],
+          "does_not_apply_to": [
+            "導入追加量そのものの再採点",
+            "認識誤りの可能性がある語の訂正",
+            "原版置換・正式採用",
+            "元の10ポイントへの回答の書換え・再入力",
+            "他のポイントへの回答転記"
+          ]
+        },
+        "views": [
+          {
+            "view_id": "R1-P10-BEFORE-VIEW",
+            "label": "字幕修正前",
+            "role": "before",
+            "media_id": "R1-P10-BEFORE",
+            "start_frame": 0,
+            "end_frame": 624,
+            "context_start_frame": 0,
+            "context_end_frame": 624
+          },
+          {
+            "view_id": "R1-P10-AFTER-VIEW",
+            "label": "字幕修正後",
+            "role": "after",
+            "media_id": "R1-P10-AFTER",
+            "start_frame": 0,
+            "end_frame": 624,
+            "context_start_frame": 0,
+            "context_end_frame": 624
+          }
+        ]
+      },
+      "afterBinding": {
+        "status": "pending native render; the null sha256 is not a review-ready media record",
+        "jobRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-shorts-v002/point-10/job.json",
+          "fileSha256": "5f7c01bd89d7cb98c1686b5e302a25e02c9d86d482a9fa4b34aeae46359fc0ae",
+          "bytes": 5477
+        },
+        "projectionRef": {
+          "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/outputs/presentation/stage4-editing-20260918-v001/review-reflection-r1-r3-20260921-v002/r1-caption-v001/point-10/point-10-projection.json",
+          "bytes": 39285,
+          "fileSha256": "5949cb433e8d1e39295abe4bdcb2844f1ba1e58818e6d7bb612f6d943a716dff"
+        },
+        "verificationRef": null,
+        "sourceClockId": "q5-2-edited-content-frame-v001",
+        "sourceRange": {
+          "startFrame": 18578,
+          "endFrameExclusive": 19202
+        },
+        "targetClockId": "r1-point-10-short-frame-v001",
+        "allShortLocalRange": {
+          "startFrame": 0,
+          "endFrameExclusive": 624
+        },
+        "changedCaptionLocalRanges": [
+          {
+            "startFrame": 171,
+            "endFrameExclusive": 215
+          },
+          {
+            "startFrame": 215,
+            "endFrameExclusive": 345
+          }
+        ]
+      },
+      "preserve": [
+        "元動画の227963〜228308frameに対応する345frameの導入追加",
+        "導入と本編の映像・音声・接続、624frameの短尺",
+        "対象字幕の保存原文と語順。コメントの「打てないか」で本文を訂正しない",
+        "他の追加字幕2枚と本編の既存字幕3枚",
+        "元回答を導入追加の取消へ変換しない"
+      ]
+    }
+  ]
+}

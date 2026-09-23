@@ -1,0 +1,1462 @@
+{
+  "schemaVersion": "hrc003-motion-smoothing-verification-v001",
+  "preparedBy": "Codex",
+  "workOrder": "docs/work-orders/DIGEST_Q1_Q2_WORK_ORDER_v001.md",
+  "scope": "HRC-003; finite Bounce/Pulse interpolation and matching native-state checks; Shake remains fixed in scale and unchanged in motion.",
+  "humanAttribution": "POINT3 is a bundle-level observation. The human did not identify a particular preset as defective. Bounce/Pulse scale steps are identified here from the saved implementation and drawing states.",
+  "sourcePoint": {
+    "id": "motion",
+    "title": "弾む・揺れる・一瞬拡大する字幕",
+    "question": "動きが声の反応に合い、読む邪魔にならないか",
+    "note": "「これもういるやん」＝弾む／「いるやんいるやん」＝揺れる／「もうリカちゃんやめてー!」＝声に合わせ一瞬拡大。",
+    "reviewIds": [
+      "HR-002",
+      "HR-003",
+      "HR-004"
+    ],
+    "clips": [
+      {
+        "label": "自動演出版の冒頭だけ",
+        "file": "01_自動演出版.mp4",
+        "batch": "HRB-001",
+        "startFrame": 0,
+        "endFrame": 170,
+        "fps": 30,
+        "durationSeconds": 5.666666666666667
+      }
+    ]
+  },
+  "sourceBindings": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/hrb001-bindings.json",
+      "bytes": 26085,
+      "fileSha256": "b370cb0a8c03b2e6da9f0b959347132462b42e08e66471f6572edd35aa291ecb"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/comparison-points.json",
+      "bytes": 3457,
+      "fileSha256": "3823178a06f1794cc01b0d8c66637cb828018cb2bbcac9721f670ab387c7aa11"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/human-review-session-20260920-v001/human-response-original-v001.md",
+      "bytes": 5572,
+      "fileSha256": "e579aef4a642a5d93915608c1d418aa82b4334ce8fed44119cae5ccb649b9d98"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-presentation-orchestration-stage3-20260918/evidence/candidate-completion-summary.json",
+      "bytes": 386517,
+      "fileSha256": "d20a64ea90128c37402fccfa54ce79de069498d55ec8ba109ec1b22bda534836"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/scratch/native-qc-preparation/plan.json",
+      "bytes": 208937,
+      "fileSha256": "30df64b2bacf34c5575142078cef63a7601d0021493e2a6518f55d7cf051693f"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/scratch/native-qc-preparation/orchestration-input.json",
+      "bytes": 975051,
+      "fileSha256": "c63e584c9eda4341ec2483ce900261681753c2d2fdaeee258696dd592b879c3b"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/presentation-rendered-v002.mp4",
+      "bytes": 75306932,
+      "fileSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_caption_motion_v001.mjs",
+      "bytes": 7796,
+      "fileSha256": "300b9863cba5abf4f3f86d65b1e52b1aadfc10e08024a4df602db2bded376ad5"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/presentation_pulse_v001.mjs",
+      "bytes": 6326,
+      "fileSha256": "4d4dd82b04737f691a1f6130605a69093e89f8febb7214584d88fa38fa6051d4"
+    },
+    {
+      "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 129087,
+      "fileSha256": "3f7f12b08dd1b4b9775954ec8424eb37cf47e976dad3ae817302b360e33a9151"
+    }
+  ],
+  "sourceVideoSha256": "49ea952aea47e38095c9a8e336a1722fd3278230dda4203e10ab76f0129ba225",
+  "sourceRules": {
+    "version": "auto-presentation-rules-v007",
+    "contentSha256": "127db1dff0b4d2bbeb1cd07d782126147657e1871380680cec243da5dc148f07"
+  },
+  "newMotionPresetVersion": "presentation-caption-motion-v002",
+  "newPulsePresetVersion": "presentation-pulse-preset-v002",
+  "renderingRuleBinding": "new candidate must bind auto-presentation-rules-v008 and its actual current implementation; no old media or old QC hashes are changed",
+  "interpolation": "linear midpoints of existing finite endpoint sizes; no caller curve, arbitrary coefficient, amplitude reduction, duration extension or generic animation engine",
+  "rows": [
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000002",
+      "text": "これもういるやん",
+      "displayInterval": {
+        "startFrame": 13,
+        "endFrameExclusive": 37
+      },
+      "beforeProgram": {
+        "presentation": "provisional-bounce",
+        "presetVersion": "presentation-caption-motion-v001",
+        "motionFrameCount": 8,
+        "stableStartFrame": 21,
+        "representativeFrame": 17,
+        "segments": [
+          {
+            "state": "small",
+            "startFrame": 13,
+            "endFrameExclusive": 15
+          },
+          {
+            "state": "middle",
+            "startFrame": 15,
+            "endFrameExclusive": 17
+          },
+          {
+            "state": "maximum",
+            "startFrame": 17,
+            "endFrameExclusive": 19
+          },
+          {
+            "state": "middle",
+            "startFrame": 19,
+            "endFrameExclusive": 21
+          },
+          {
+            "state": "stable",
+            "startFrame": 21,
+            "endFrameExclusive": 37
+          }
+        ],
+        "samples": [
+          {
+            "frame": 13,
+            "expectedState": "small"
+          },
+          {
+            "frame": 14,
+            "expectedState": "small"
+          },
+          {
+            "frame": 15,
+            "expectedState": "middle"
+          },
+          {
+            "frame": 16,
+            "expectedState": "middle"
+          },
+          {
+            "frame": 17,
+            "expectedState": "maximum"
+          },
+          {
+            "frame": 18,
+            "expectedState": "maximum"
+          },
+          {
+            "frame": 19,
+            "expectedState": "middle"
+          },
+          {
+            "frame": 20,
+            "expectedState": "middle"
+          },
+          {
+            "frame": 21,
+            "expectedState": "stable"
+          },
+          {
+            "frame": 32,
+            "expectedState": "stable"
+          }
+        ]
+      },
+      "afterProgram": {
+        "presentation": "provisional-bounce",
+        "presetVersion": "presentation-caption-motion-v002",
+        "motionFrameCount": 8,
+        "stableStartFrame": 21,
+        "representativeFrame": 17,
+        "segments": [
+          {
+            "state": "small",
+            "startFrame": 13,
+            "endFrameExclusive": 14
+          },
+          {
+            "state": "stable",
+            "startFrame": 14,
+            "endFrameExclusive": 15
+          },
+          {
+            "state": "middle",
+            "startFrame": 15,
+            "endFrameExclusive": 16
+          },
+          {
+            "state": "between-middle-maximum",
+            "startFrame": 16,
+            "endFrameExclusive": 17
+          },
+          {
+            "state": "maximum",
+            "startFrame": 17,
+            "endFrameExclusive": 19
+          },
+          {
+            "state": "middle",
+            "startFrame": 19,
+            "endFrameExclusive": 20
+          },
+          {
+            "state": "between-middle-stable",
+            "startFrame": 20,
+            "endFrameExclusive": 21
+          },
+          {
+            "state": "stable",
+            "startFrame": 21,
+            "endFrameExclusive": 37
+          }
+        ],
+        "samples": [
+          {
+            "frame": 13,
+            "expectedState": "small"
+          },
+          {
+            "frame": 14,
+            "expectedState": "stable"
+          },
+          {
+            "frame": 15,
+            "expectedState": "middle"
+          },
+          {
+            "frame": 16,
+            "expectedState": "between-middle-maximum"
+          },
+          {
+            "frame": 17,
+            "expectedState": "maximum"
+          },
+          {
+            "frame": 18,
+            "expectedState": "maximum"
+          },
+          {
+            "frame": 19,
+            "expectedState": "middle"
+          },
+          {
+            "frame": 20,
+            "expectedState": "between-middle-stable"
+          },
+          {
+            "frame": 21,
+            "expectedState": "stable"
+          },
+          {
+            "frame": 32,
+            "expectedState": "stable"
+          }
+        ]
+      },
+      "beforeTrace": [
+        {
+          "frame": 13,
+          "state": "small",
+          "fontSizePx": 88,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 14,
+          "state": "small",
+          "fontSizePx": 88,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 15,
+          "state": "middle",
+          "fontSizePx": 104,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 16,
+          "state": "middle",
+          "fontSizePx": 104,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 17,
+          "state": "maximum",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 18,
+          "state": "maximum",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 19,
+          "state": "middle",
+          "fontSizePx": 104,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 20,
+          "state": "middle",
+          "fontSizePx": 104,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 21,
+          "state": "stable",
+          "fontSizePx": 96,
+          "offsetXPercent": 0
+        }
+      ],
+      "afterTrace": [
+        {
+          "frame": 13,
+          "state": "small",
+          "fontSizePx": 88,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 14,
+          "state": "stable",
+          "fontSizePx": 96,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 15,
+          "state": "middle",
+          "fontSizePx": 104,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 16,
+          "state": "between-middle-maximum",
+          "fontSizePx": 108,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 17,
+          "state": "maximum",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 18,
+          "state": "maximum",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 19,
+          "state": "middle",
+          "fontSizePx": 104,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 20,
+          "state": "between-middle-stable",
+          "fontSizePx": 100,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 21,
+          "state": "stable",
+          "fontSizePx": 96,
+          "offsetXPercent": 0
+        }
+      ],
+      "maximumAdjacentFontSizeChangePx": {
+        "before": 16,
+        "after": 8
+      },
+      "originalPngBindings": [
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/02-0f13452b2d0d-stable.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/02-0f13452b2d0d-stable.png",
+            "bytes": 109094,
+            "fileSha256": "0e35032bab6c3862ef372da4c638632be4866d8dfce648320bdc2252404ee142"
+          },
+          "state": "stable",
+          "alphaBounds": {
+            "left": 569,
+            "top": 845,
+            "right": 1347,
+            "bottom": 974,
+            "width": 778,
+            "height": 129
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/02-0f13452b2d0d-small.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/02-0f13452b2d0d-small.png",
+            "bytes": 103263,
+            "fileSha256": "4b8abfc9ac3959aa8b09c18374d5defcbe763e2b85585f0d6e85722f6b7adf28"
+          },
+          "state": "small",
+          "alphaBounds": {
+            "left": 600,
+            "top": 852,
+            "right": 1317,
+            "bottom": 973,
+            "width": 717,
+            "height": 121
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/02-0f13452b2d0d-middle.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/02-0f13452b2d0d-middle.png",
+            "bytes": 115882,
+            "fileSha256": "b6f693025f6c5c54916d47d63b4b796a8ecfc2d16d197745165d2bc10de774e8"
+          },
+          "state": "middle",
+          "alphaBounds": {
+            "left": 538,
+            "top": 837,
+            "right": 1378,
+            "bottom": 974,
+            "width": 840,
+            "height": 137
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/02-0f13452b2d0d-maximum.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/02-0f13452b2d0d-maximum.png",
+            "bytes": 121711,
+            "fileSha256": "08ec12c61fa37a7a10b38498ce7ec37f3e680a733b3b9541646f631d8f42b2d7"
+          },
+          "state": "maximum",
+          "alphaBounds": {
+            "left": 508,
+            "top": 830,
+            "right": 1408,
+            "bottom": 973,
+            "width": 900,
+            "height": 143
+          }
+        }
+      ],
+      "measuredPeak": null,
+      "normalGeometryAndCaptionContentPreserved": true,
+      "observationSource": "saved resolved plan, finite program, native PNG byte binding and saved completion metadata; no perceptual video analysis",
+      "technicalFinding": "The saved compositor switches static PNG sizes without intervening sizes. Linear midpoint PNG states reduce each 16 px size jump to at most 8 px while retaining the original extrema and maximum hold."
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000003",
+      "text": "いるやんいるやん",
+      "displayInterval": {
+        "startFrame": 37,
+        "endFrameExclusive": 71
+      },
+      "beforeProgram": {
+        "presentation": "provisional-shake",
+        "presetVersion": "presentation-caption-motion-v001",
+        "motionFrameCount": 12,
+        "stableStartFrame": 49,
+        "representativeFrame": 41,
+        "segments": [
+          {
+            "state": "left-12",
+            "startFrame": 37,
+            "endFrameExclusive": 39
+          },
+          {
+            "state": "right-12",
+            "startFrame": 39,
+            "endFrameExclusive": 41
+          },
+          {
+            "state": "left-8",
+            "startFrame": 41,
+            "endFrameExclusive": 43
+          },
+          {
+            "state": "right-8",
+            "startFrame": 43,
+            "endFrameExclusive": 45
+          },
+          {
+            "state": "left-4",
+            "startFrame": 45,
+            "endFrameExclusive": 47
+          },
+          {
+            "state": "right-4",
+            "startFrame": 47,
+            "endFrameExclusive": 49
+          },
+          {
+            "state": "stable",
+            "startFrame": 49,
+            "endFrameExclusive": 71
+          }
+        ],
+        "samples": [
+          {
+            "frame": 37,
+            "expectedState": "left-12"
+          },
+          {
+            "frame": 38,
+            "expectedState": "left-12"
+          },
+          {
+            "frame": 39,
+            "expectedState": "right-12"
+          },
+          {
+            "frame": 40,
+            "expectedState": "right-12"
+          },
+          {
+            "frame": 41,
+            "expectedState": "left-8"
+          },
+          {
+            "frame": 42,
+            "expectedState": "left-8"
+          },
+          {
+            "frame": 43,
+            "expectedState": "right-8"
+          },
+          {
+            "frame": 44,
+            "expectedState": "right-8"
+          },
+          {
+            "frame": 45,
+            "expectedState": "left-4"
+          },
+          {
+            "frame": 46,
+            "expectedState": "left-4"
+          },
+          {
+            "frame": 47,
+            "expectedState": "right-4"
+          },
+          {
+            "frame": 48,
+            "expectedState": "right-4"
+          },
+          {
+            "frame": 49,
+            "expectedState": "stable"
+          },
+          {
+            "frame": 66,
+            "expectedState": "stable"
+          }
+        ]
+      },
+      "afterProgram": {
+        "presentation": "provisional-shake",
+        "presetVersion": "presentation-caption-motion-v002",
+        "motionFrameCount": 12,
+        "stableStartFrame": 49,
+        "representativeFrame": 41,
+        "segments": [
+          {
+            "state": "left-12",
+            "startFrame": 37,
+            "endFrameExclusive": 39
+          },
+          {
+            "state": "right-12",
+            "startFrame": 39,
+            "endFrameExclusive": 41
+          },
+          {
+            "state": "left-8",
+            "startFrame": 41,
+            "endFrameExclusive": 43
+          },
+          {
+            "state": "right-8",
+            "startFrame": 43,
+            "endFrameExclusive": 45
+          },
+          {
+            "state": "left-4",
+            "startFrame": 45,
+            "endFrameExclusive": 47
+          },
+          {
+            "state": "right-4",
+            "startFrame": 47,
+            "endFrameExclusive": 49
+          },
+          {
+            "state": "stable",
+            "startFrame": 49,
+            "endFrameExclusive": 71
+          }
+        ],
+        "samples": [
+          {
+            "frame": 37,
+            "expectedState": "left-12"
+          },
+          {
+            "frame": 38,
+            "expectedState": "left-12"
+          },
+          {
+            "frame": 39,
+            "expectedState": "right-12"
+          },
+          {
+            "frame": 40,
+            "expectedState": "right-12"
+          },
+          {
+            "frame": 41,
+            "expectedState": "left-8"
+          },
+          {
+            "frame": 42,
+            "expectedState": "left-8"
+          },
+          {
+            "frame": 43,
+            "expectedState": "right-8"
+          },
+          {
+            "frame": 44,
+            "expectedState": "right-8"
+          },
+          {
+            "frame": 45,
+            "expectedState": "left-4"
+          },
+          {
+            "frame": 46,
+            "expectedState": "left-4"
+          },
+          {
+            "frame": 47,
+            "expectedState": "right-4"
+          },
+          {
+            "frame": 48,
+            "expectedState": "right-4"
+          },
+          {
+            "frame": 49,
+            "expectedState": "stable"
+          },
+          {
+            "frame": 66,
+            "expectedState": "stable"
+          }
+        ]
+      },
+      "beforeTrace": [
+        {
+          "frame": 37,
+          "state": "left-12",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.625
+        },
+        {
+          "frame": 38,
+          "state": "left-12",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.625
+        },
+        {
+          "frame": 39,
+          "state": "right-12",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.625
+        },
+        {
+          "frame": 40,
+          "state": "right-12",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.625
+        },
+        {
+          "frame": 41,
+          "state": "left-8",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.4166666666666667
+        },
+        {
+          "frame": 42,
+          "state": "left-8",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.4166666666666667
+        },
+        {
+          "frame": 43,
+          "state": "right-8",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.4166666666666667
+        },
+        {
+          "frame": 44,
+          "state": "right-8",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.4166666666666667
+        },
+        {
+          "frame": 45,
+          "state": "left-4",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.20833333333333334
+        },
+        {
+          "frame": 46,
+          "state": "left-4",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.20833333333333334
+        },
+        {
+          "frame": 47,
+          "state": "right-4",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.20833333333333334
+        },
+        {
+          "frame": 48,
+          "state": "right-4",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.20833333333333334
+        },
+        {
+          "frame": 49,
+          "state": "stable",
+          "fontSizePx": 96,
+          "offsetXPercent": 0
+        }
+      ],
+      "afterTrace": [
+        {
+          "frame": 37,
+          "state": "left-12",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.625
+        },
+        {
+          "frame": 38,
+          "state": "left-12",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.625
+        },
+        {
+          "frame": 39,
+          "state": "right-12",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.625
+        },
+        {
+          "frame": 40,
+          "state": "right-12",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.625
+        },
+        {
+          "frame": 41,
+          "state": "left-8",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.4166666666666667
+        },
+        {
+          "frame": 42,
+          "state": "left-8",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.4166666666666667
+        },
+        {
+          "frame": 43,
+          "state": "right-8",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.4166666666666667
+        },
+        {
+          "frame": 44,
+          "state": "right-8",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.4166666666666667
+        },
+        {
+          "frame": 45,
+          "state": "left-4",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.20833333333333334
+        },
+        {
+          "frame": 46,
+          "state": "left-4",
+          "fontSizePx": 96,
+          "offsetXPercent": -0.20833333333333334
+        },
+        {
+          "frame": 47,
+          "state": "right-4",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.20833333333333334
+        },
+        {
+          "frame": 48,
+          "state": "right-4",
+          "fontSizePx": 96,
+          "offsetXPercent": 0.20833333333333334
+        },
+        {
+          "frame": 49,
+          "state": "stable",
+          "fontSizePx": 96,
+          "offsetXPercent": 0
+        }
+      ],
+      "maximumAdjacentFontSizeChangePx": {
+        "before": 0,
+        "after": 0
+      },
+      "originalPngBindings": [
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-stable.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-stable.png",
+            "bytes": 109969,
+            "fileSha256": "400c25eef50444453892743e12fc145ed00f08a1521291d4962cb363da54aabc"
+          },
+          "state": "stable",
+          "alphaBounds": {
+            "left": 562,
+            "top": 845,
+            "right": 1341,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-left-12.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-left-12.png",
+            "bytes": 109953,
+            "fileSha256": "32050dac8c61db0e83e71ae99231468180fda2be1f73a2b85587b2867c5861f9"
+          },
+          "state": "left-12",
+          "alphaBounds": {
+            "left": 550,
+            "top": 845,
+            "right": 1329,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-right-12.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-right-12.png",
+            "bytes": 109930,
+            "fileSha256": "982a624cb139768d5e4c47bcc344a002eb6ee8d67e1ce4e959b81295fcefd864"
+          },
+          "state": "right-12",
+          "alphaBounds": {
+            "left": 574,
+            "top": 845,
+            "right": 1353,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-left-8.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-left-8.png",
+            "bytes": 110011,
+            "fileSha256": "9f2a33426182d8c838892e221c6eda5b146cc1fc783b7cec1de4f6eee1bc173b"
+          },
+          "state": "left-8",
+          "alphaBounds": {
+            "left": 554,
+            "top": 845,
+            "right": 1333,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-right-8.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-right-8.png",
+            "bytes": 109985,
+            "fileSha256": "5c8e757b620cb6f285eb54248d37940a44bb3cabbf472f0281bd826a4f98a9e9"
+          },
+          "state": "right-8",
+          "alphaBounds": {
+            "left": 570,
+            "top": 845,
+            "right": 1349,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-left-4.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-left-4.png",
+            "bytes": 109990,
+            "fileSha256": "4f97bca2b52d2d748f09b26948ad03ebbe9bcd46f696665f7f25b6be1de660c4"
+          },
+          "state": "left-4",
+          "alphaBounds": {
+            "left": 558,
+            "top": 845,
+            "right": 1337,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/03-d9cbbe6d5626-right-4.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/03-d9cbbe6d5626-right-4.png",
+            "bytes": 109961,
+            "fileSha256": "a8f2c2f7c2b21ec93afa406502db53ab9d1a2fd27989179bca8d01a861431b6d"
+          },
+          "state": "right-4",
+          "alphaBounds": {
+            "left": 566,
+            "top": 845,
+            "right": 1345,
+            "bottom": 974,
+            "width": 779,
+            "height": 129
+          }
+        }
+      ],
+      "measuredPeak": null,
+      "normalGeometryAndCaptionContentPreserved": true,
+      "observationSource": "saved resolved plan, finite program, native PNG byte binding and saved completion metadata; no perceptual video analysis",
+      "technicalFinding": "96 px throughout; the recorded Shake performs horizontal displacement only. No scale change is implemented for Shake."
+    },
+    {
+      "captionId": "digest-human-caption-repair-20260907-v001-instruction-instruction-000004",
+      "text": "もうリカちゃんやめてー!",
+      "displayInterval": {
+        "startFrame": 71,
+        "endFrameExclusive": 154
+      },
+      "beforeProgram": {
+        "presentation": "provisional-pulse",
+        "anchorFrame": 118,
+        "pulseStartFrame": 114,
+        "pulseEndFrameExclusive": 124,
+        "normalBeforeFrame": 113,
+        "maximumFrame": 118,
+        "normalAfterFrame": 124,
+        "segments": [
+          {
+            "state": "normal",
+            "startFrame": 71,
+            "endFrameExclusive": 114
+          },
+          {
+            "state": "middle",
+            "startFrame": 114,
+            "endFrameExclusive": 117
+          },
+          {
+            "state": "maximum",
+            "startFrame": 117,
+            "endFrameExclusive": 121
+          },
+          {
+            "state": "middle",
+            "startFrame": 121,
+            "endFrameExclusive": 124
+          },
+          {
+            "state": "normal",
+            "startFrame": 124,
+            "endFrameExclusive": 154
+          }
+        ]
+      },
+      "afterProgram": {
+        "presentation": "provisional-pulse",
+        "presetVersion": "presentation-pulse-preset-v002",
+        "anchorFrame": 118,
+        "pulseStartFrame": 114,
+        "pulseEndFrameExclusive": 124,
+        "normalBeforeFrame": 113,
+        "maximumFrame": 118,
+        "normalAfterFrame": 124,
+        "segments": [
+          {
+            "state": "normal",
+            "startFrame": 71,
+            "endFrameExclusive": 114
+          },
+          {
+            "state": "between-normal-middle",
+            "startFrame": 114,
+            "endFrameExclusive": 115
+          },
+          {
+            "state": "middle",
+            "startFrame": 115,
+            "endFrameExclusive": 116
+          },
+          {
+            "state": "between-middle-maximum",
+            "startFrame": 116,
+            "endFrameExclusive": 117
+          },
+          {
+            "state": "maximum",
+            "startFrame": 117,
+            "endFrameExclusive": 121
+          },
+          {
+            "state": "between-middle-maximum",
+            "startFrame": 121,
+            "endFrameExclusive": 122
+          },
+          {
+            "state": "middle",
+            "startFrame": 122,
+            "endFrameExclusive": 123
+          },
+          {
+            "state": "between-normal-middle",
+            "startFrame": 123,
+            "endFrameExclusive": 124
+          },
+          {
+            "state": "normal",
+            "startFrame": 124,
+            "endFrameExclusive": 154
+          }
+        ],
+        "samples": [
+          {
+            "frame": 113,
+            "expectedState": "normal"
+          },
+          {
+            "frame": 114,
+            "expectedState": "between-normal-middle"
+          },
+          {
+            "frame": 115,
+            "expectedState": "middle"
+          },
+          {
+            "frame": 116,
+            "expectedState": "between-middle-maximum"
+          },
+          {
+            "frame": 117,
+            "expectedState": "maximum"
+          },
+          {
+            "frame": 118,
+            "expectedState": "maximum"
+          },
+          {
+            "frame": 119,
+            "expectedState": "maximum"
+          },
+          {
+            "frame": 120,
+            "expectedState": "maximum"
+          },
+          {
+            "frame": 121,
+            "expectedState": "between-middle-maximum"
+          },
+          {
+            "frame": 122,
+            "expectedState": "middle"
+          },
+          {
+            "frame": 123,
+            "expectedState": "between-normal-middle"
+          },
+          {
+            "frame": 124,
+            "expectedState": "normal"
+          }
+        ]
+      },
+      "beforeTrace": [
+        {
+          "frame": 113,
+          "state": "normal",
+          "fontSizePx": 96,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 114,
+          "state": "middle",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 115,
+          "state": "middle",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 116,
+          "state": "middle",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 117,
+          "state": "maximum",
+          "fontSizePx": 128,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 118,
+          "state": "maximum",
+          "fontSizePx": 128,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 119,
+          "state": "maximum",
+          "fontSizePx": 128,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 120,
+          "state": "maximum",
+          "fontSizePx": 128,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 121,
+          "state": "middle",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 122,
+          "state": "middle",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 123,
+          "state": "middle",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 124,
+          "state": "normal",
+          "fontSizePx": 96,
+          "offsetXPercent": 0
+        }
+      ],
+      "afterTrace": [
+        {
+          "frame": 113,
+          "state": "normal",
+          "fontSizePx": 96,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 114,
+          "state": "between-normal-middle",
+          "fontSizePx": 104,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 115,
+          "state": "middle",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 116,
+          "state": "between-middle-maximum",
+          "fontSizePx": 120,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 117,
+          "state": "maximum",
+          "fontSizePx": 128,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 118,
+          "state": "maximum",
+          "fontSizePx": 128,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 119,
+          "state": "maximum",
+          "fontSizePx": 128,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 120,
+          "state": "maximum",
+          "fontSizePx": 128,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 121,
+          "state": "between-middle-maximum",
+          "fontSizePx": 120,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 122,
+          "state": "middle",
+          "fontSizePx": 112,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 123,
+          "state": "between-normal-middle",
+          "fontSizePx": 104,
+          "offsetXPercent": 0
+        },
+        {
+          "frame": 124,
+          "state": "normal",
+          "fontSizePx": 96,
+          "offsetXPercent": 0
+        }
+      ],
+      "maximumAdjacentFontSizeChangePx": {
+        "before": 16,
+        "after": 8
+      },
+      "originalPngBindings": [
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/04-c4b6154f65f0-normal.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/04-c4b6154f65f0-normal.png",
+            "bytes": 124582,
+            "fileSha256": "bf92d53004067eaaae9be7d8097a4df5bcceef9a7604fabc9193a2805db553a9"
+          },
+          "state": "normal",
+          "alphaBounds": {
+            "left": 396,
+            "top": 845,
+            "right": 1485,
+            "bottom": 974,
+            "width": 1089,
+            "height": 129
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/04-c4b6154f65f0-middle.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/04-c4b6154f65f0-middle.png",
+            "bytes": 138349,
+            "fileSha256": "a3fe915160ac81b8f5fa8393cc30e8a7d84682e051223da0d44fdd6c87de4f60"
+          },
+          "state": "middle",
+          "alphaBounds": {
+            "left": 306,
+            "top": 830,
+            "right": 1569,
+            "bottom": 973,
+            "width": 1263,
+            "height": 143
+          }
+        },
+        {
+          "recordedPath": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/.render-v003.presentation-renderer-v002-work-Wwq4jY/publish/overlays/04-c4b6154f65f0-maximum.png",
+          "publishedFile": {
+            "path": "/private/tmp/zev-stage3-orchestration-34ktdfcx/worktree/evals/clip_composition/outputs/presentation/stage3-orchestration-20260918-v001/render-v003/overlays/04-c4b6154f65f0-maximum.png",
+            "bytes": 153948,
+            "fileSha256": "589e37a9b8d43d9dee3692160863c5741a4a87c7afef3e09088bcd145fcf6d51"
+          },
+          "state": "maximum",
+          "alphaBounds": {
+            "left": 215,
+            "top": 814,
+            "right": 1653,
+            "bottom": 973,
+            "width": 1438,
+            "height": 159
+          }
+        }
+      ],
+      "measuredPeak": {
+        "peakId": "audio-peak-000020",
+        "peakSample": 63040,
+        "sampleRate": 16000,
+        "frame": 118
+      },
+      "normalGeometryAndCaptionContentPreserved": true,
+      "observationSource": "saved resolved plan, finite program, native PNG byte binding and saved completion metadata; no perceptual video analysis",
+      "technicalFinding": "The saved compositor switches static PNG sizes without intervening sizes. Linear midpoint PNG states reduce each 16 px size jump to at most 8 px while retaining the original extrema and maximum hold."
+    }
+  ],
+  "currentImplementationBindings": [
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_caption_motion_v001.mjs",
+      "bytes": 8482,
+      "fileSha256": "be2a8d088f93347b8f05ed4e0524823d44843f95bad416c4d3dd7f30c49ce726"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_v001.mjs",
+      "bytes": 7267,
+      "fileSha256": "2d3ac1f546ea3b6f186a6569c73d9b3b16fe2406bf63c7ac80726e43abcb14e9"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_pulse_renderer_qc_v001.mjs",
+      "bytes": 5111,
+      "fileSha256": "f55a247822a3bf7d7f516c75ab038a1567de21f5f5a119a05042523b3afdcc61"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "bytes": 61942,
+      "fileSha256": "6820d0e85dba7ac76b36f0c8b4499ddc7018d600097fc4ecd1043ad1d5c730a6"
+    },
+    {
+      "path": "/private/tmp/zev-stage4-editing-20260918/worktree/evals/clip_composition/presentation_encoded_omission_qc_v002.mjs",
+      "bytes": 31653,
+      "fileSha256": "61708daed8de8bd6426bdda619a2797e8ef0021c90ded9b7a3742049ec238f7d"
+    }
+  ],
+  "testRuns": [
+    {
+      "name": "hrc003-unit-v001",
+      "tests": 36,
+      "passed": 35,
+      "failed": 1,
+      "durationMs": 118.502333,
+      "tap": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/hrc003-evidence/hrc003-unit-v001.tap",
+        "bytes": 6962,
+        "fileSha256": "c3b4791992494ab9fcf4b4aa43e66b979e83bbcfcdb208c7a92271a3e226f2d0"
+      },
+      "stderr": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/hrc003-evidence/hrc003-unit-v001.stderr",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "hrc003-focused-v002",
+      "tests": 99,
+      "passed": 99,
+      "failed": 0,
+      "durationMs": 9267.946292,
+      "tap": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/hrc003-evidence/hrc003-focused-v002.tap",
+        "bytes": 21421,
+        "fileSha256": "ff78ca1dfc0a98f622b0e0db63f0f7ed0d4448b494a63113b04ea89ba290b0a0"
+      },
+      "stderr": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/hrc003-evidence/hrc003-focused-v002.stderr",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "hrc003-encoded-pulse-v003",
+      "tests": 8,
+      "passed": 7,
+      "failed": 1,
+      "durationMs": 87.751,
+      "tap": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/hrc003-evidence/hrc003-encoded-pulse-v003.tap",
+        "bytes": 7403,
+        "fileSha256": "a673733a95f61e0408f8011ffcd310d49ae8b30146fb101858485293c2371002"
+      },
+      "stderr": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/hrc003-evidence/hrc003-encoded-pulse-v003.stderr",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "hrc003-encoded-pulse-v004",
+      "tests": 8,
+      "passed": 8,
+      "failed": 0,
+      "durationMs": 85.906792,
+      "tap": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/hrc003-evidence/hrc003-encoded-pulse-v004.tap",
+        "bytes": 2182,
+        "fileSha256": "7f6588435c9f8a9eb2f63a708acfe52c779ed3508aa7e931b3bef94e59c1c7ff"
+      },
+      "stderr": {
+        "path": "/private/tmp/zev-stage4-editing-20260918/worktree/docs/reports/digest-quality-q1-q2-20260920-v001/hrc003-evidence/hrc003-encoded-pulse-v004.stderr",
+        "bytes": 0,
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "distinctFinalPassingTests": 107,
+  "fixtureExpectationCorrections": [
+    {
+      "run": "hrc003-unit-v001",
+      "cause": "Existing fixture still expected three Pulse PNGs; updated expected size list to include the two interpolated PNGs.",
+      "productionDefect": false
+    },
+    {
+      "run": "hrc003-encoded-pulse-v003",
+      "cause": "Existing fixture still expected five concatenated phases; updated it to the nine phases that contain all intermediate frames.",
+      "productionDefect": false
+    }
+  ],
+  "validation": {
+    "pureStateAndInvariantTests": "passed",
+    "tinyRealFfmpegCompositor": "passed; all frames, common fade, audio preservation, partial-range phase and substituted intermediate-state fault",
+    "nativeFontLargeFixtureTests": "not executed by this worker; updated existing fixtures for the current finite state count",
+    "newRealPoint3Video": "pending root short-render validation",
+    "perceptualSmoothness": "HUMAN_REVIEW_PENDING"
+  },
+  "requestedShortCandidate": {
+    "sourceClock": {
+      "startFrame": 0,
+      "endFrameExclusive": 170,
+      "fps": 30
+    },
+    "bounceMandatoryFrames": {
+      "startFrame": 13,
+      "endFrameInclusive": 21
+    },
+    "pulseMandatoryFrames": {
+      "startFrame": 113,
+      "endFrameInclusive": 124
+    },
+    "shakeReference": {
+      "startFrame": 37,
+      "endFrameExclusive": 49
+    }
+  },
+  "externalApiCalls": 0,
+  "newPerceptualVideoAnalyses": 0,
+  "oldMediaMutations": 0
+}

@@ -20,12 +20,13 @@ const baseTimeline = {segments: [0, 1, 2].map(i => ({segmentId: `s${i}`,
 const input = {plan, baseTimeline, expectedFrameCount: 90};
 const connection = (i, transition = 'black') => ({beforeSegmentId: `s${i}`, afterSegmentId: `s${i + 1}`, transition});
 
-test('audio copy still requires packet identity; timeline audio requires the new duration and codec', () => {
+test('audio-only QC requires packet identity for copies and the declared duration and codec after edits', () => {
   const canvas = plan.canvas;
   const mediaInspection = {durationMs: 3800, video: {...canvas, frameCount: 114},
     audio: {codecName: 'aac', sampleRate: 48000, durationMs: 3800, packetPayloadSha256: 'new'}};
   const check = expectedAudio => evaluatePresentationRendererQcV002({plan: {elements: [], canvas},
-    applicationResults: [], overlayInspections: [], canvas, expectedFrameCount: 114, mediaInspection, expectedAudio});
+    applicationResults: [], overlayInspections: [], canvas, expectedFrameCount: 114, mediaInspection, expectedAudio,
+    requireFinalVisibility: false});
   assert.equal(check({present: true, codecName: 'aac', packetPayloadSha256: 'old'}).status, 'failed');
   const edited = {present: true, mode: 'timeline-insertions', codecName: 'aac', sampleRate: 48000, durationMs: 3800};
   assert.equal(check(edited).status, 'passed');
@@ -34,7 +35,7 @@ test('audio copy still requires packet identity; timeline audio requires the new
   }
 });
 
-test('no selections and explicit normal preserve the existing plan and compositor arguments', () => {
+test('no selections and explicit normal preserve the plan and all compositor arguments except exact frame-clock muxing', () => {
   const captured = execFileSync('git', ['show', '3a3270be35246b8335b45b61dc5be8bd1b5d8b21:evals/clip_composition/render_presentation_v002.mjs'], {encoding: 'utf8'});
   const begin = captured.indexOf('export const buildPresentationCompositeArgumentsV001 =');
   const end = captured.indexOf('\nconst composite =', begin);
@@ -44,7 +45,10 @@ test('no selections and explicit normal preserve the existing plan and composito
     assert.equal(resolved.plan, plan);
     assert.equal(resolved.presentationTimeline, null);
     const argsInput = {...resolved, baseMediaPath: '/base.mp4', overlayRecords: plan.elements.map(element => ({element, pngPath: '/caption.png'}))};
-    assert.deepEqual(argsFor(argsInput), Array.from(before(argsInput)));
+    const current = argsFor(argsInput), capturedArguments = Array.from(before(argsInput));
+    assert(!capturedArguments.includes('-movie_timescale'));
+    assert.deepEqual(current.slice(-2), ['-movie_timescale', String(plan.canvas.fps)]);
+    assert.deepEqual(current.slice(0, -2), capturedArguments);
   }
 });
 
