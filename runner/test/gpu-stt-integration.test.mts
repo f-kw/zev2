@@ -6,9 +6,10 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import type { AgentRequest, Zev2State } from '@zev2/shared';
-import { buildTranscriptArtifact } from '../src/steps/transcript.js';
+import { buildTranscriptArtifact, normalizeGpuSttResponse } from '../src/steps/transcript.js';
 import { buildThemeOptionsArtifact } from '../src/steps/theme-options.js';
-import { assertThemeArtifact, assertTranscriptArtifact } from '../src/workflow-artifact-validation.js';
+import { buildClipComposition } from '../src/steps/composition.js';
+import { assertClipCompositionArtifact, assertThemeArtifact, assertTranscriptArtifact } from '../src/workflow-artifact-validation.js';
 import { createRunnerEnvironmentFromConfig, loadRuntimeConfig } from '../../backend/src/config/runtime-config.js';
 
 const media = Buffer.from('existing media bytes');
@@ -19,7 +20,7 @@ const zevResult = {
     { id: 1, startMs: 120, endMs: 800, text: '前半。', speaker: 'SPEAKER_00', speakerConfidence: 1 },
     { id: 2, startMs: 3200, endMs: 4400, text: '後半。', speaker: 'unknown' }
   ],
-  speechUnitGroups: [[1], [2]]
+  speechUnitGroups: [[1, 2]]
 };
 type Options = {
   state?: string; unhealthy?: boolean; resultSha?: string; invalidSegments?: boolean;
@@ -97,9 +98,51 @@ test('非同期jobを一度だけ投入し、生結果と対応を保存して�
     assert.equal(JSON.parse(await readFile(path.join(directory, 'gpu-stt-status.json'), 'utf8')).state, 'completed');
     const raw = JSON.parse(await readFile(path.join(directory, 'gpu-stt-job_1.response.json'), 'utf8'));
     assert.equal(raw.zevResult.segments[0].speakerConfidence, 1);
+    assert.deepEqual(raw.zevResult.speechUnitGroups, [[1, 2]], 'GPUの生まとまりを保持する');
     assert.equal(raw.rawOnlyEvidence, 'retained');
     assert.deepEqual(calls, ['GET /health', 'POST /jobs', 'GET /jobs/job_1', 'GET /jobs/job_1', 'GET /jobs/job_1/result']);
   });
+});
+
+test('GPUの文単位groupが変わってもZEVの断片単位入力とテーマ候補を変えない', async () => {
+  const segments = [1, 2, 3, 4, 5].map(id => ({ id, startMs: id * 100, endMs: id * 100 + 50, text: `発話${id}` }));
+  const request = { target: { sourceUri: 'file:///group-contract.mp4' }, constraints: { themeCountLabel: '5件' } } as AgentRequest;
+  const groups = [ [[1, 2, 3, 4, 5]], [[1, 2], [3, 4, 5]], [[1], [2], [3], [4], [5]], [] ];
+  for (const speechUnitGroups of groups) {
+    const response = { ...zevResult, segments, speechUnitGroups };
+    const preservedRaw = JSON.stringify(response);
+    const transcript = normalizeGpuSttResponse(response, request);
+    assertTranscriptArtifact(transcript);
+    assert.deepEqual(transcript.speechUnitGroups, [[1], [2], [3], [4], [5]]);
+    assert.equal(JSON.stringify(response), preservedRaw, '入力したGPU応答を変更しない');
+    const themes = await buildThemeOptionsArtifact(transcript, request, { contentDiscoveryMode: 'transcript', fixedThemeOptionsPath: '', sanitizePathPart: x => x });
+    assertThemeArtifact(themes);
+    assert.deepEqual(themes.themes.map(t => t.representativeSpeechIds), [[1], [2], [3], [4], [5]]);
+  }
+});
+
+test('candidate 59の旧STT製造単位を維持し、保存GPU結果から要求した5候補と後続を受理する', async () => {
+  const old = JSON.parse(await readFile(new URL('../../evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/transcript.json', import.meta.url), 'utf8'));
+  assert.deepEqual(old.speechUnitGroups, old.segments.map(s => [s.id]));
+  const oldSegments = old.segments.filter(s => s.endMs > 5941162 && s.startMs < 5992736)
+    .map(s => ({ ...s, startMs: s.startMs - 5941162, endMs: s.endMs - 5941162 }));
+  assert.equal(oldSegments.length, 281);
+  const raw = JSON.parse(await readFile(new URL('../../docs/reports/gpu-stt-integration-20260923/gpu-result.json', import.meta.url), 'utf8'));
+  assert.equal(raw.zevResult.speechUnitGroups.length, 2);
+  const request = { target: { sourceUri: 'file:///candidate-59.mp4' }, constraints: { themeCountLabel: '5件' } } as AgentRequest;
+  const gpu = normalizeGpuSttResponse({ ...raw.zevResult, durationSec: raw.audioDurationSeconds }, request);
+  assertTranscriptArtifact(gpu);
+  assert.equal(gpu.speechUnitGroups.length, 269);
+  assert.deepEqual(gpu.speechUnitGroups.flat(), gpu.segments.map(s => s.id));
+  for (const transcript of [gpu, { ...gpu, segments: oldSegments, segmentCount: oldSegments.length, speechUnitGroups: oldSegments.map(s => [s.id]) }]) {
+    assertTranscriptArtifact(transcript);
+    const themes = await buildThemeOptionsArtifact(transcript, request, { contentDiscoveryMode: 'transcript', fixedThemeOptionsPath: '', sanitizePathPart: x => x });
+    assertThemeArtifact(themes);
+    assert.equal(themes.themes.length, 5);
+    for (const theme of themes.themes) {
+      assertClipCompositionArtifact(buildClipComposition(themes, transcript, theme.id));
+    }
+  }
 });
 
 test('保存済みjobの再利用を受理し、同じ生結果を上書きしない', async () => {

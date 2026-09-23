@@ -215,10 +215,14 @@ function toSttServerLanguage(language: string): string {
   return language.split('-')[0] || language;
 }
 
-function normalizeLocalSttResponse(payload: unknown, request: AgentRequest): TranscriptArtifact {
+export function normalizeGpuSttResponse(payload: unknown, request: AgentRequest): TranscriptArtifact {
   const record = recordFrom(payload);
   const segments = normalizeSegments(record.segments);
-  const speechUnitGroups = normalizeSpeechUnitGroups(record.speechUnitGroups, segments);
+  // Existing ZEV STT producers (run_local_stt.ts / run_local_stt_chunked.ts)
+  // expose one input fragment per group. GPU groups are ASR sentence batches,
+  // which must not collapse the downstream pool of theme/composition inputs.
+  // The provider groups remain intact in the separately saved raw response.
+  const speechUnitGroups = segments.map((segment) => [segment.id]);
   const lastEndMs = segments[segments.length - 1]?.endMs ?? 0;
   const durationSec = typeof record.durationSec === 'number' ? record.durationSec : lastEndMs / 1000;
   const language = typeof record.language === 'string' && record.language.trim() ? record.language.trim() : 'ja';
@@ -294,5 +298,5 @@ export async function buildTranscriptArtifact(
     language: toSttServerLanguage(process.env.ZEV2_STT_LANGUAGE ?? 'ja-JP'),
     artifactDir: context.requestArtifactDir(request)
   });
-  return normalizeLocalSttResponse(result, request);
+  return normalizeGpuSttResponse(result, request);
 }

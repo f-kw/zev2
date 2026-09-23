@@ -539,7 +539,6 @@
     "oldSegments": 281,
     "gpuSegments": 269,
     "oldGroupsOverlapping": 281,
-    "gpuGroups": 2,
     "oldSpeakers": [
       "SPEAKER_00",
       "unknown"
@@ -590,10 +589,12 @@
     "gpuStartTimeReversals": [],
     "gpuFirstSpeechMs": 842,
     "gpuLastSpeechMs": 51404,
-    "trailingUntranscribedMs": 180.0
+    "trailingUntranscribedMs": 180,
+    "gpuRawGroups": 2,
+    "zevGroups": 269
   },
   "rawResultSha256": "bb178bd7152fe69fec7e3e39592dafab4afc67d3e47a276b8a791f6a786fd7c6",
-  "transcriptSha256": "3f19efe90f7a60442f0e5577b1d5cbad0cd680c8583b872d345e9c15b39e4b6f",
+  "transcriptSha256": "60d23966ee829dc8e7156195b1ebd02ad4d061f3a9040a2e6ed4ab17b5f9268f",
   "preflightAndReuse": {
     "submission": {
       "status": 202,
@@ -652,7 +653,7 @@
           "device": "cuda",
           "diarizationDevice": "cpu",
           "enableDiarization": true,
-          "minDiarizationAudioSeconds": 1.0,
+          "minDiarizationAudioSeconds": 1,
           "model": "large-v3",
           "numSpeakers": null,
           "offline": true,
@@ -758,7 +759,7 @@
         }
       ],
       "matchedCharacterStartAbsoluteDifferenceMs": {
-        "median": 7.0,
+        "median": 7,
         "maximum": 2570
       },
       "gpuInvalidTimestamps": [],
@@ -846,6 +847,140 @@
       "scenarioStatus": "pre-existing fixed transcript missing; no GPU call reached",
       "command": "corepack pnpm test",
       "output": "\n> zev2@ test /Users/kawafmm/workspace/zev2\n> corepack pnpm run ui:contract:test && corepack pnpm run web-gemini:review:test && corepack pnpm run scenario:agent\n\n\n> zev2@ ui:contract:test /Users/kawafmm/workspace/zev2\n> node scripts/ui-contract-test.mjs\n\nUI契約テスト成功\n\n> zev2@ web-gemini:review:test /Users/kawafmm/workspace/zev2\n> corepack pnpm run build:backend && node scripts/web-gemini-review-script-test.mjs\n\n\n> zev2@ build:backend /Users/kawafmm/workspace/zev2\n> corepack pnpm --filter backend build\n\n\n> backend@0.1.0 build /Users/kawafmm/workspace/zev2/backend\n> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json\n\n\n> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared\n> tsc -p tsconfig.json\n\nWeb Geminiレビュースクリプトテスト成功: /var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev2-web-gemini-script-2pUI78\n\n> zev2@ scenario:agent /Users/kawafmm/workspace/zev2\n> node scripts/agent-scenario-test.mjs\n\nnode runner/dist/index.js --max-steps=2 failed with code 1\nAIエージェント実行開始: 動画取り込み (prepare_video)\nAIエージェント実行完了: 動画取り込み\nAIエージェント実行開始: STT (run_stt)\nnode:internal/fs/promises:639\n  return new FileHandle(await PromisePrototypeThen(\n                        ^\n\nError: ENOENT: no such file or directory, open '/Users/kawafmm/workspace/zev2/runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/transcript.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async readFile (node:internal/fs/promises:1246:14)\n    at async buildFixedTranscript (file:///Users/kawafmm/workspace/zev2/runner/dist/steps/transcript.js:188:17)\n    at async Object.run_stt (file:///Users/kawafmm/workspace/zev2/runner/dist/workflow-step-builders.js:59:153)\n    at async completeRequest (file:///Users/kawafmm/workspace/zev2/runner/dist/index.js:619:22)\n    at async runDryRunLoop (file:///Users/kawafmm/workspace/zev2/runner/dist/index.js:643:13)\n    at async file:///Users/kawafmm/workspace/zev2/runner/dist/index.js:659:1 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: '/Users/kawafmm/workspace/zev2/runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/transcript.json'\n}\n\nNode.js v20.19.6\n\n ELIFECYCLE  Command failed with exit code 1.\n ELIFECYCLE  Test failed. See above for more details.\n"
+    }
+  },
+  "groupContractCorrection": {
+    "verifiedAt": "2026-09-23T08:12:41.305Z",
+    "auditSource": "https://chatgpt.com/c/6ab30b1e-1f6c-83e8-9c83-56f3030d5ad7",
+    "initialCommit": "9f427f319ab9a9b2376424650cd94ef4a74ec535",
+    "basis": [
+      {
+        "path": "evals/clip_composition/run_local_stt_chunked.ts",
+        "line": 399,
+        "meaning": "segments.map(segment => [segment.id])"
+      },
+      {
+        "path": "evals/clip_composition/run_local_stt.ts",
+        "line": 315,
+        "meaning": "same fragment-per-group rule"
+      },
+      {
+        "path": "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/transcript.json",
+        "fullSegmentCount": 23963,
+        "fullGroupCount": 23963,
+        "allGroupsSingletonsInSegmentOrder": true
+      }
+    ],
+    "gpuRawGroupCount": 2,
+    "gpuRawGroupSizes": [
+      160,
+      109
+    ],
+    "gpuAsrSentenceCount": 2,
+    "oldIntervalGroups": 281,
+    "zevNormalizedGroups": 269,
+    "zevRule": "one normalized STT fragment per group; provider ASR sentence grouping is raw evidence only",
+    "rawResultSha256Unchanged": true,
+    "segmentsBodyTimesSpeakersUnchanged": true,
+    "checks": [
+      {
+        "input": "old",
+        "requestedThemes": 3,
+        "receivedThemes": 3,
+        "transcriptSchema": true,
+        "themeSchema": true,
+        "compositionSchema": true,
+        "representativeSpeechIds": [
+          [
+            17686
+          ],
+          [
+            17687
+          ],
+          [
+            17688
+          ]
+        ]
+      },
+      {
+        "input": "gpu",
+        "requestedThemes": 3,
+        "receivedThemes": 3,
+        "transcriptSchema": true,
+        "themeSchema": true,
+        "compositionSchema": true,
+        "representativeSpeechIds": [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ]
+      },
+      {
+        "input": "old",
+        "requestedThemes": 5,
+        "receivedThemes": 5,
+        "transcriptSchema": true,
+        "themeSchema": true,
+        "compositionSchema": true,
+        "representativeSpeechIds": [
+          [
+            17686
+          ],
+          [
+            17687
+          ],
+          [
+            17688
+          ],
+          [
+            17689
+          ],
+          [
+            17690
+          ]
+        ]
+      },
+      {
+        "input": "gpu",
+        "requestedThemes": 5,
+        "receivedThemes": 5,
+        "transcriptSchema": true,
+        "themeSchema": true,
+        "compositionSchema": true,
+        "representativeSpeechIds": [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      }
+    ],
+    "apiCalls": 0,
+    "priorTranscriptSha256": "3f19efe90f7a60442f0e5577b1d5cbad0cd680c8583b872d345e9c15b39e4b6f",
+    "transcriptSha256": "60d23966ee829dc8e7156195b1ebd02ad4d061f3a9040a2e6ed4ab17b5f9268f",
+    "tests": {
+      "passed": 33,
+      "failed": 0,
+      "output": "✔ 非同期jobを一度だけ投入し、生結果と対応を保存して既存の後続工程が受理する (4102.545292ms)\n✔ GPUの文単位groupが変わってもZEVの断片単位入力とテーマ候補を変えない (5.154583ms)\n✔ candidate 59の旧STT製造単位を維持し、保存GPU結果から要求した5候補と後続を受理する (52.319208ms)\n✔ 保存済みjobの再利用を受理し、同じ生結果を上書きしない (54.783458ms)\n✔ health失敗では投入しない (7.448416ms)\n✔ HTTPエラーでは投入しない (3.736375ms)\n✔ 接続切断では投入しない (3.378625ms)\n✔ 受付不明では自動再送しない (6.988541ms)\n✔ 失敗したjobでは結果を読まない (6.154416ms)\n✔ 中断したjobでは結果を読まない (5.554583ms)\n✔ 別動画の結果を拒否する (5.77325ms)\n✔ 応答JSON破損を拒否する (9.345458ms)\n✔ 既存形式に不適合な発話を拒否する (7.788375ms)\n✔ 待機上限ではjob情報を残し、二重投入せず終了する (157.710583ms)\n✔ 結果の本文読み込みにも同じ待機上限を適用する (159.097042ms)\n✔ 既存設定へ環境接続先を渡せ、fixedはネットワークを使用しない (7.473042ms)\n✔ 正式意味発話は現行の発話まとまりを安定ID・本文・時刻・元断片へ変換する (1.885709ms)\n✔ 長尺分割STTを正式入力として受理し、未登録の作成方法は拒否する (0.719542ms)\n✔ 各STT断片の完全被覆を要求し、未知・重複・欠落・順序逆転を個別に拒否する (1.924084ms)\n✔ 元transcript自体の時系列逆転も拒否する (0.151083ms)\n✔ 束縛した元transcriptのSHA-256が異なる場合はfail-closedで拒否する (0.815958ms)\n✔ 同一入力はbyte単位で同一の成果物になり、再読後も元transcriptと一致する (2.669375ms)\n✔ 成果物の余分なfieldや元transcriptと異なる本文を拒否する (0.707375ms)\n✔ 保存済みの現行transcriptを正式入力として読める (14.430583ms)\n✔ 取得動画と既存全文STTを動画ID・path・SHA・実測尺で正式に束縛する (2.926584ms)\n✔ 取得動画のbyteまたは実測尺が承認済み履歴値と違う場合は拒否する (0.713875ms)\n✔ 動画IDとtranscript動画参照の不一致を拒否し、同一byteの配置pathは同一性に混ぜない (1.599083ms)\n✔ transcriptの動画尺差、時系列逆転、動画尺外断片を拒否する (1.283375ms)\n✔ transcriptの小数ミリ秒は既存ZEVと同じ最寄りミリ秒へ決定的に正規化する (0.380917ms)\n✔ file入口は動画を一括読込せずSHAを計算し、同じ正式成果物を作る (15.894208ms)\n✔ 元STT断片の欠落、重複、順序変更を完全被覆検査で拒否する (1.271458ms)\n✔ 同じ入力は同じformal byteになり、SHA差と余分なfieldはfail-closedする (1.773917ms)\n✔ o8rの既存34,507断片STTは再生成せず正式再利用検査へ入力できる (109.675042ms)\nℹ tests 33\nℹ suites 0\nℹ pass 33\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 5046.117208\n",
+      "typeCheckPassed": true,
+      "typeCheckOutput": "\n> zev2@ type-check /Users/kawafmm/workspace/zev2\n> corepack pnpm run build:shared && corepack pnpm --filter backend type-check && corepack pnpm --filter client type-check && corepack pnpm --filter @zev2/agent-runner type-check\n\n\n> zev2@ build:shared /Users/kawafmm/workspace/zev2\n> corepack pnpm --filter @zev2/shared build\n\n\n> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared\n> tsc -p tsconfig.json\n\n\n> backend@0.1.0 type-check /Users/kawafmm/workspace/zev2/backend\n> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit\n\n\n> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared\n> tsc -p tsconfig.json\n\n\n> client@0.1.0 type-check /Users/kawafmm/workspace/zev2/client\n> corepack pnpm --filter @zev2/shared build && vue-tsc --build\n\n\n> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared\n> tsc -p tsconfig.json\n\n\n> @zev2/agent-runner@0.1.0 type-check /Users/kawafmm/workspace/zev2/runner\n> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit && tsc -p tsconfig.remotion.json\n\n\n> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared\n> tsc -p tsconfig.json\n\n"
     }
   }
 }
