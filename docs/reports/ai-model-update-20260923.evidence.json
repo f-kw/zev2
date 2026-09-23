@@ -1,0 +1,1584 @@
+{
+  "recordedAt": "2026-09-23",
+  "preflight": {
+    "fixture": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/legacy-crop",
+    "parserReplayPassed": true,
+    "historicalPromptEquality": [
+      false,
+      false
+    ],
+    "promptSource": "current buildEditPlanArtifact",
+    "fingerprints": [
+      {
+        "name": "gemini-edit-plan-response.json",
+        "partsSha256": "989e3b10b5ce3147b187aab0c616a3c17988047ba9fe28f6ebc5635ee9e36c40",
+        "parts": [
+          {
+            "text": "複数の動画断片と文字起こしを見て、ショート動画の演出に必要な検出結果を作ってください。\n候補選定は済んでいます。断片の順番と時間範囲は変えず、各断片の画面パターン、表示対象の検出範囲、テロップを決めてください。\n最終的な切り出し位置はAIエージェント側で候補化します。ここでは候補選択やcrop座標を返さないでください。\n画面パターンと検出範囲は添付動画を直接見て判断してください。文字起こしだけを根拠にした推測は禁止です。\nテロップの表示タイミングは時間で指定しないでください。LLMは時間指定を間違えやすいため、必ず下の発話IDで指定してください。\ntelopPlan.sourceSpeechIds には、そのテロップが対応する発話IDだけを入れてください。存在しない発話ID、元動画秒数、atMs は返さないでください。\nテロップの区切りは文脈を読んで決めてください。プログラム側では日本語の文節推定や例外処理で直しません。\n文章の途中、語の途中、不自然な接続語だけで切らないでください。\n1テロップには、表示文に対応する連続した複数の発話IDを入れてください。1 IDだけ、断片全体1件、時刻指定は禁止です。\n断片全体の文字起こしを1つのテロップにまとめないでください。読点、句点、問いかけ、返答など、人間が自然に読める意味の区切りごとに複数のtelopPlanへ分けてください。\nJSONだけを返してください。\n\n最初に動画の種類を判別し、その種類に対応する画面枠を選んでください。検出範囲を考えてから種類を決めてはいけません。\n動画種類と画面枠:\n- speaker_only: 主要な視覚対象が話者1人で、場面の理解に同時表示が必要な独立映像がない。\n- screen_speaker: 話者とは別に、ゲーム、共有画面、ブラウザ、資料、別映像など、場面の理解に同時表示が必要な独立映像がある。\n- speaker_pair: 2人の話者の表情や反応を同時に残す必要がある。\n- 背景、装飾枠、コメント欄、常設タイトル、小さな静止パネルが見えるだけでは、独立映像があるとは判定しない。\n- 同じ話者を含む元映像全体と、その話者を上下へ重複表示してはいけません。\n- layoutReasonには、映像を見て種類を選んだ理由を短く書いてください。\n\ndetections:\n- 座標は [ymin, xmin, ymax, xmax] の順で、0..1000 の整数にしてください。\n- 種類を決めた後、その種類が必要とする対象だけを検出してください。\n- screen は元映像全体ではなく、話者とは独立して内容理解に必要な情報画面の範囲です。\n- speaker / speaker1 / speaker2 は face と body を返してください。\n- face は顔全体、body は見えている人物全体です。face は必ず body の内側に収めてください。\n- speaker_only では speaker を返してください。\n- screen_speaker では screen と speaker を返してください。\n- speaker_pair では speaker1 と speaker2 を返してください。\n- final crop と selectedCandidateId は返さないでください。AIエージェントが検出結果から表示候補を作ります。\n- speaker_onlyのdetections形: { \"speaker\": { \"face\": [ymin, xmin, ymax, xmax], \"body\": [ymin, xmin, ymax, xmax] } }\n- screen_speakerのdetections形: { \"screen\": [ymin, xmin, ymax, xmax], \"speaker\": { \"face\": [ymin, xmin, ymax, xmax], \"body\": [ymin, xmin, ymax, xmax] } }\n- speaker_pairのdetections形: { \"speaker1\": { \"face\": [ymin, xmin, ymax, xmax], \"body\": [ymin, xmin, ymax, xmax] }, \"speaker2\": { \"face\": [ymin, xmin, ymax, xmax], \"body\": [ymin, xmin, ymax, xmax] } }\n\n返すJSON:\n{\n  \"title\": \"動画のタイトルになる短い文言\",\n  \"hookText\": \"冒頭で見せる短い文言\",\n  \"renderSegments\": [\n    {\n      \"role\": \"断片の役割\",\n      \"caption\": \"断片に出す短いテロップ\",\n      \"screenLayoutId\": \"<speaker_only|screen_speaker|speaker_pair>\",\n      \"layoutReason\": \"映像を見てこの種類を選んだ理由\",\n      \"detections\": {}\n    }\n  ],\n  \"telopPlan\": [\n    { \"sourceSpeechIds\": [1, 2, 3], \"text\": \"表示するテロップ\", \"role\": \"表示意図\" }\n  ]\n}\n\n依頼目的: 縦型ショートの画面構成previewで、旧crop窓を決める\n選ばれたテーマ: マリンのADHD的？な片付け事情と無意識の脱衣\nテーマ概要: 片付けの途中で別のことを始めてしまう話と、無意識に服を脱いでいた話\n\n断片1\n役割: 本編\n元動画時間: 5941.162秒 - 5992.736秒\n参照する発話ID: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16\n文字起こし: あ、さあ船長さあ何かやってる最中でもさあ違うことが気になったらそれやり始めちゃうんだよねこれやばいよねなんか最近さあ引っ越しがあってさあ片付けてるんだけど最中にそうだあれやらないとって思ったらやり始めるからあっちこっちで30%だけ進んだものが大量にあってでぐるぐる回りながら一つずつ片付けていくのうんでもね結局全部片付けてる片付けよう1個ずつ片付けていくあ、そうだあれもこれもってやってるうちに1個ずつ片付いていって一応全部片付けはするの綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう困ったもんですえ、なんか無意識にまた服脱いでたけど寒い気をこうしてと\n発話:\n  - 発話ID 1: 5941.162秒 - 5946.345秒 / あ、さあ船長さあ何かやってる最中でもさあ\n  - 発話ID 2: 5946.345秒 - 5948.907秒 / 違うことが気になったらそれやり始めちゃうんだよね\n  - 発話ID 3: 5948.907秒 - 5949.827秒 / これやばいよね\n  - 発話ID 4: 5949.827秒 - 5953.610秒 / なんか最近さあ引っ越しがあってさあ片付けてるんだけど\n  - 発話ID 5: 5953.610秒 - 5955.951秒 / 最中にそうだあれやらないとって思ったら\n  - 発話ID 6: 5955.951秒 - 5958.653秒 / やり始めるからあっちこっちで\n  - 発話ID 7: 5958.653秒 - 5961.675秒 / 30%だけ進んだものが大量にあって\n  - 発話ID 8: 5961.675秒 - 5968.359秒 / でぐるぐる回りながら一つずつ片付けていくの\n  - 発話ID 9: 5968.359秒 - 5969.820秒 / うんでもね結局全部片付けてる\n  - 発話ID 10: 5970.002秒 - 5973.064秒 / 片付けよう1個ずつ片付けていく\n  - 発話ID 11: 5973.064秒 - 5975.265秒 / あ、そうだあれもこれもってやってるうちに\n  - 発話ID 12: 5975.265秒 - 5978.867秒 / 1個ずつ片付いていって一応全部片付けはするの\n  - 発話ID 13: 5978.867秒 - 5984.951秒 / 綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう\n  - 発話ID 14: 5984.951秒 - 5986.672秒 / 困ったもんです\n  - 発話ID 15: 5986.672秒 - 5988.353秒 / え、なんか無意識にまた服脱いでたけど\n  - 発話ID 16: 5988.353秒 - 5992.736秒 / 寒い気をこうしてと"
+          },
+          {
+            "text": "動画断片1\n役割: 本編\n元動画時間: 5941.162秒 - 5992.736秒\n使用する発話ID: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16\n文字起こし: あ、さあ船長さあ何かやってる最中でもさあ違うことが気になったらそれやり始めちゃうんだよねこれやばいよねなんか最近さあ引っ越しがあってさあ片付けてるんだけど最中にそうだあれやらないとって思ったらやり始めるからあっちこっちで30%だけ進んだものが大量にあってでぐるぐる回りながら一つずつ片付けていくのうんでもね結局全部片付けてる片付けよう1個ずつ片付けていくあ、そうだあれもこれもってやってるうちに1個ずつ片付いていって一応全部片付けはするの綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう困ったもんですえ、なんか無意識にまた服脱いでたけど寒い気をこうしてと"
+          },
+          {
+            "mimeType": "video/mp4",
+            "sha256": "535590429f26233a1b5bd5a41696b1dfb119b2743d8c9b0fa6404ae2585a68a2",
+            "bytes": 4767399
+          }
+        ]
+      },
+      {
+        "name": "gemini-layout-candidate-response.json",
+        "partsSha256": "24f53e67c90fdb33d8697dadc5a31658466713057a49ece3ce6b9fc634329c6b",
+        "parts": [
+          {
+            "text": "AIエージェントが、検出結果から最低条件を満たす表示候補を作りました。\n各候補画像を見て、断片ごとに一番自然に見える候補IDだけを選んでください。\n座標や新しい候補は作らないでください。必ず候補一覧にある selectedCandidateId を返してください。\n判断基準は、顔が自然に見えること、画面情報が読めること、話の流れに対して主役が分かりやすいことです。\nJSONだけを返してください。\n\n返すJSON:\n{\n  \"renderSegments\": [\n    { \"selectedCandidateId\": \"候補ID\", \"reason\": \"その候補を選んだ短い理由\" }\n  ]\n}\n\n選ばれたテーマ: マリンのADHD的？な片付け事情と無意識の脱衣\nテーマ概要: 片付けの途中で別のことを始めてしまう話と、無意識に服を脱いでいた話\n\n断片1\n役割: 本編\nテロップ: マリンのADHD的な片付け事情\n画面パターン: 画面と話者\n種類判定理由: 応答に記録なし\n候補:\n  - screen_speaker_body: 画面と話者全体 / 上に画面、下に顔を入れた話者全体を表示する\n  - screen_speaker_face: 画面と顔寄せ / 上に画面、下に顔の見やすさを優先した話者を表示する"
+          },
+          {
+            "text": "断片1\n候補ID: screen_speaker_body\n候補名: 画面と話者全体\n候補の意味: 上に画面、下に顔を入れた話者全体を表示する"
+          },
+          {
+            "mimeType": "image/jpeg",
+            "sha256": "2112801db86c1fe303f01131a9b9d6dc19b1b8bf8be8fe4cc94c03814d296feb",
+            "bytes": 317326
+          },
+          {
+            "text": "断片1\n候補ID: screen_speaker_face\n候補名: 画面と顔寄せ\n候補の意味: 上に画面、下に顔の見やすさを優先した話者を表示する"
+          },
+          {
+            "mimeType": "image/jpeg",
+            "sha256": "abd605ed628a9dbe49f6a41ecef64ec9cf44b7b9bc9ba8e16ccaf43345db3f4d",
+            "bytes": 258503
+          }
+        ]
+      }
+    ],
+    "baselinePlan": {
+      "kind": "edit_plan_json",
+      "mode": "gemini-api-edit-plan",
+      "generatedAt": "2026-09-23T07:19:30.886Z",
+      "selectedThemeId": "candidate-59",
+      "title": "片付け中に脱線しまくるマリン船長の片付け事情",
+      "hookText": "何かやってる最中に別のこと始めちゃう…",
+      "sourceStartMs": 5941162,
+      "sourceEndMs": 5992736,
+      "geminiApiInput": [
+        {
+          "sourceUri": "saved-candidate-59.mp4",
+          "sourceStartMs": 5941162,
+          "sourceEndMs": 5992736,
+          "purpose": "本編: undefined"
+        }
+      ],
+      "renderSegments": [
+        {
+          "sourceStartMs": 5941162,
+          "sourceEndMs": 5992736,
+          "role": "本編",
+          "caption": "マリンのADHD的な片付け事情",
+          "speechIds": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "speechUnits": [
+            {
+              "id": 1,
+              "sourceStartMs": 5941162,
+              "sourceEndMs": 5946345,
+              "text": "あ、さあ船長さあ何かやってる最中でもさあ"
+            },
+            {
+              "id": 2,
+              "sourceStartMs": 5946345,
+              "sourceEndMs": 5948907,
+              "text": "違うことが気になったらそれやり始めちゃうんだよね"
+            },
+            {
+              "id": 3,
+              "sourceStartMs": 5948907,
+              "sourceEndMs": 5949827,
+              "text": "これやばいよね"
+            },
+            {
+              "id": 4,
+              "sourceStartMs": 5949827,
+              "sourceEndMs": 5953610,
+              "text": "なんか最近さあ引っ越しがあってさあ片付けてるんだけど"
+            },
+            {
+              "id": 5,
+              "sourceStartMs": 5953610,
+              "sourceEndMs": 5955951,
+              "text": "最中にそうだあれやらないとって思ったら"
+            },
+            {
+              "id": 6,
+              "sourceStartMs": 5955951,
+              "sourceEndMs": 5958653,
+              "text": "やり始めるからあっちこっちで"
+            },
+            {
+              "id": 7,
+              "sourceStartMs": 5958653,
+              "sourceEndMs": 5961675,
+              "text": "30%だけ進んだものが大量にあって"
+            },
+            {
+              "id": 8,
+              "sourceStartMs": 5961675,
+              "sourceEndMs": 5968359,
+              "text": "でぐるぐる回りながら一つずつ片付けていくの"
+            },
+            {
+              "id": 9,
+              "sourceStartMs": 5968359,
+              "sourceEndMs": 5969820,
+              "text": "うんでもね結局全部片付けてる"
+            },
+            {
+              "id": 10,
+              "sourceStartMs": 5970002,
+              "sourceEndMs": 5973064,
+              "text": "片付けよう1個ずつ片付けていく"
+            },
+            {
+              "id": 11,
+              "sourceStartMs": 5973064,
+              "sourceEndMs": 5975265,
+              "text": "あ、そうだあれもこれもってやってるうちに"
+            },
+            {
+              "id": 12,
+              "sourceStartMs": 5975265,
+              "sourceEndMs": 5978867,
+              "text": "1個ずつ片付いていって一応全部片付けはするの"
+            },
+            {
+              "id": 13,
+              "sourceStartMs": 5978867,
+              "sourceEndMs": 5984951,
+              "text": "綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう"
+            },
+            {
+              "id": 14,
+              "sourceStartMs": 5984951,
+              "sourceEndMs": 5986672,
+              "text": "困ったもんです"
+            },
+            {
+              "id": 15,
+              "sourceStartMs": 5986672,
+              "sourceEndMs": 5988353,
+              "text": "え、なんか無意識にまた服脱いでたけど"
+            },
+            {
+              "id": 16,
+              "sourceStartMs": 5988353,
+              "sourceEndMs": 5992736,
+              "text": "寒い気をこうしてと"
+            }
+          ],
+          "screenLayout": {
+            "screenLayoutId": "screen_speaker",
+            "detections": {
+              "screen": [
+                0,
+                0,
+                1000,
+                1000
+              ],
+              "speaker": {
+                "face": [
+                  180,
+                  600,
+                  520,
+                  960
+                ],
+                "body": [
+                  150,
+                  520,
+                  1000,
+                  1000
+                ]
+              }
+            },
+            "viewports": {
+              "screen": [
+                0.18359375,
+                0,
+                0.81640625,
+                1
+              ],
+              "speaker": [
+                0.46210937500000004,
+                0.14999999999999997,
+                1,
+                1
+              ]
+            },
+            "displaySummary": "画面と話者",
+            "selectedCandidateId": "screen_speaker_body",
+            "candidateSummary": "画面と話者全体",
+            "selectionReason": "下半分の話者の構図において顔や衣装が切れずにバランス良く収まっており、自然に見えるため。",
+            "candidateOptions": [
+              {
+                "id": "screen_speaker_body",
+                "label": "画面と話者全体",
+                "reason": "上に画面、下に顔を入れた話者全体を表示する",
+                "viewports": {
+                  "screen": [
+                    0.18359375,
+                    0,
+                    0.81640625,
+                    1
+                  ],
+                  "speaker": [
+                    0.46210937500000004,
+                    0.14999999999999997,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "id": "screen_speaker_face",
+                "label": "画面と顔寄せ",
+                "reason": "上に画面、下に顔の見やすさを優先した話者を表示する",
+                "viewports": {
+                  "screen": [
+                    0.18359375,
+                    0,
+                    0.81640625,
+                    1
+                  ],
+                  "speaker": [
+                    0.6000000000000001,
+                    0.06555555555555553,
+                    0.9600000000000001,
+                    0.6344444444444444
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "telopPlan": [
+        {
+          "sourceSpeechIds": [
+            1,
+            2,
+            3
+          ],
+          "text": "何かやってる最中に違うことが気になるとやり始めちゃう",
+          "role": "強調"
+        },
+        {
+          "sourceSpeechIds": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "text": "引っ越しの片付け中も30%だけ進んだものが大量発生",
+          "role": "エピソード説明"
+        },
+        {
+          "sourceSpeechIds": [
+            8,
+            9,
+            10
+          ],
+          "text": "ぐるぐる回りながら1個ずつ片付けて一応全部終わる",
+          "role": "状況説明"
+        },
+        {
+          "sourceSpeechIds": [
+            11,
+            12,
+            13,
+            14
+          ],
+          "text": "綺麗にはなるけどやりかけで色々始めちゃう困った性格",
+          "role": "オチ"
+        },
+        {
+          "sourceSpeechIds": [
+            15,
+            16
+          ],
+          "text": "えっ…無意識にまた服脱いでて寒い",
+          "role": "補足・ツッコミ"
+        }
+      ]
+    }
+  },
+  "runs": [
+    {
+      "intent": {
+        "mode": "openai",
+        "model": "gpt-6-luna",
+        "requestSha256": "e09b091f756c51440306f46c0ea27e2b5672454f04e02b9e2e4af3155e96aad3",
+        "startedAt": "2026-09-23T07:19:44.661Z",
+        "retry": 0,
+        "requestShapeChanged": [
+          "model"
+        ]
+      },
+      "rawSha256": "a771f946b4236ef72ed5a93da93bc0641775b5553660413594507043995a87a6",
+      "rawText": "{\n  \"id\": \"resp_0fc6088f6d9a3963016ab37d93e0e487d0a3bbc7c609077284\",\n  \"object\": \"response\",\n  \"created_at\": 1790147987,\n  \"status\": \"completed\",\n  \"access_programs\": null,\n  \"background\": false,\n  \"billing\": {\n    \"payer\": \"developer\"\n  },\n  \"completed_at\": 1790148033,\n  \"error\": null,\n  \"frequency_penalty\": 0,\n  \"incomplete_details\": null,\n  \"instructions\": \"indexed model inputのexplorationTaskに従って遠方接続候補を探索し、responseContract.jsonSchemaに適合するJSONだけを返してください。anchorIndexはanchors配列の位置、utteranceIndexはutterances配列の位置で、いずれも0始まりです。anchorと発話はこのindexだけで参照してください。範囲外indexを補完、推測、類似照合しないでください。返答indexから入力要素への対応付けと候補識別子の生成はローカルの決定論的処理だけが行います。\",\n  \"max_output_tokens\": null,\n  \"max_tool_calls\": null,\n  \"model\": \"gpt-6-luna\",\n  \"moderation\": null,\n  \"output\": [\n    {\n      \"id\": \"rs_0fc6088f6d9a3963016ab37d956dfc87d09204ce41b4f59b90\",\n      \"type\": \"reasoning\",\n      \"content\": [],\n      \"encrypted_content\": \"gAAAAABqs33BaWF2o7gELgSKqkT9lX_U0xDWJV1E_ZuR4vHAr0QOdS0phjhX6VDUznLRlX-Z0TKkcwUjlaHNAT27O25BSqmlM8mKzs94RNQGZ8B7g6p2QL6dTwL6FQv_hpQ9hF0JpuA3kV6vGArsspXWCjwi_Qs_fU2Yk2ebXF-P9bFVHH3Gm6BaYUqMDXXi_iERjZ7930A4UdMiggcTMw3WRsf_l-HRdU6qpX1CLsy5rJ0xwgt4dnZXwZvM7XZPFN00h-moUYRQ7r5O99cVp-Yi-a5_GypkOSU1TgUe2KXPKIlY1H0cFAMWmFWfirmV6MfN5x8nw8Z-n6JHbAGhces9eQyk2Bk70sVVqP5j_Ugre_y77nU5QnSgZ4RpJhNn_P1Rfbl2H4iG_PmChd7UmY21KuxqNjGYNwrAgjUpLkTUMZ2HRC9Ly5932kl-lZyE5-CMBWjd9HYCc8MUQ-4s0kmzftdOERYDWGrS_eZjCQs_3O9L7LaSrfmMeOw_sgRr11L-ANdDUeNQ1Xy8GX8LWsr8ffWQ1q2xPlwGids7WtQQo2WVHR4xJTzoXq4cfonOY1STqq9mo_YeSpcAKcIGl8NdjmvjffaMi_pHm5T_GQTnVqbc7WkjgSvy80TzYeVmsTB76BPuXZtFhCGFxxm8L_klvRNdpFnMaDQcpZuZVtNpsrQC2reIC-DR_P9wrXbOZp70NCKrM7z2zXn44AccLaFE5O3dbJXAx8bip8fz12aaiSjbrESocg7KKyOvVrSA2J_xTFr8fhpzWpC5JSljcuvseh4rvpU4k3_-vvxy5MLsMf1vplzPIbiHgbITsiwpI0bi_Y13O1J8r0rYi6We2Al68VFaVlNPeshhd-7CZ20W0Ei9wg8bVBtEgvWoLGk4HMzahITsa315xAybcls16Z38kIXrEprP_ubNtFF42_KuwcMEtQRCzcamJM0i8JWiZe_jMsEHKqHyMvFubmwra7i3XxTANFjYRSwA4buJRxC_o22_ckcxhxVJTQUyb2AxjuX9hAP1lRSUOlGVjghHHsdyva1sE_iasoTnjKOFwiWimkiFBECoFzHUyuwUrFB_kH4qQy9rkAO12wjCBzqCcmih2ea6yeoIOwMa_AVhr9fM4iArk39g8eAVBOAXOfuNukNAMozyuM0VIyqJ6LZouifQpfy-wWprvsImYjrWotRUdG3Bfm0l7pDJ0UZl4P5lqdUGQJtgVQhTVmtQo4WB801XFXqqyVXqzOQzHBJIJaSCxOSQjN49S_E5cYzq8gG8Pm8HOIIaoZ7N6tSMmwjjilJ4qOHSB0GPxNH6IignldxW2KAvoQIqhRuOwhJr2gEBy1QtXfeCfLxWHwRexnp3Y6zVg_b1GNzvgeeWGx5KBGUDsc1AJSi77QJUZdKY7dutljd7vdGusj2ZdOZ7Nf3GN-kINXtxyeUFpLqZzkbpOe6S_4xn8iNI_3A44MJgysiKz0thz___3XE_tXv1E8ibdySTp-uc2CuWm_ZZVW-kuwS90jqiJlXcMWP8Gyjpd80mFILPD2S7Uwal09iW5wLS0KGB6NCfWKu8xRC9zsJixVe6ZkrpGyY247lM3AjnWIsY7tf11FKF6mxPovDWyAnbehLilDnZoVQCzInOmMLiMgqkRbCIdjj3YEoemeF2Gh3iqXoGqnpl5oWIZs0WnwQsmUe77W84Rkag4Qbkpu56h8ynqK57qC5RQ4YRe7M_sB-MwFxD07McgTMkolFafUvUZUG0Sn5zZxGKidQmPmCCRqA5X5Y4L9G4S3AhibsFS-jfeOnyldK5VvMHJh-0X0VPdYGctQdEbFT2cxuXg_7m2yRB-50eBzq-PCDilbv2OecjYco3cnKSTqfaU6KWP3S0SbearJ_KQQrjjbAn_piU8-K6NPIuCK6etWB6h-PMLiMFkHMQCLKlx8ASsiywxxkUQsVr6trt-rFPcjGa_G14d0CQqnrHIitBKaXnnpoCbuRKql5tjp5L7J85civzj6jBjtW9fdmN13TCQOUL5lHIYfKx_HYzswbctu1G5I010enNJZT-94USpoOjn7vJguiT2mOGcYVpDho49RAM-WtapOBzur1vWfysxBj3GOlSUSv7NuyRWbXOuPsGhGpR7MTeRaPdHLT2Rq5izGJrkrsdQNbfVOB1DBB06elD3Q85MW9YKMDt3llZZdE7_EZFLPahKTXNYDtorenpH7vJ2k1kO4dYStIDKdacHpNSxE588wWOE4isKNImQyf7s4_xvOuBtHDlavwL6tAQqTTbk6VrK061HxBmJZ3dbK1cJ5OF0gQRhFUbdN_vLh29i-rOX2kEr4oTmgISGOvdQN3Gk28-kQQ8kg5aGBQTwdNHjr4RKNGHcbVRgxGKFYvz04nW62oJfJn0fDq0gP-psFJW74sUU7IE1fhxkTufIhX3NjTZPoqEEA9HwQC6P4O2zHaHrPX1h_PjMIxxnyaStjCbS32F1jEO2KIpeN7jRU-9ADCeGBnFUzodXdZPDV_A9kPPWKvGifb-g11pkX5zcfyhu8v--j4gk0kVG_rZkXrVD5hQef2OpFWFHwVaVMZHYFLRjdKYJtTkVoTITBkTeO0wZHlhAT1CzTxEmtK57XR9E9ByYIx_elhjCahqBpxEHOiD6jkSkryhZjmmbvJJwErpg_ONrWRai4iQlBG-SbMXIF4yf-JFjGQHGoj4sKCVuY6qA7_OP5mK2WQDBadwIOpSz-Goh-I0eKah5GPJ6xVIzs0zhIvuiV8hAN34PvLRP8x5G9zjNI-PqulFMjvjyydG3A_4vG4Z_2IZUxd2rABXtboyn8MndVtFyZe-MfhorgMpZTzActooOh1rCBvFNFBhb1UP6rdbdnaDvxhboztG12CJwlPXXmiB4dHIJLch58Ey5YxJPLEtnrNpO9PcHrpN3WT4qXAjvreyOHUp7N15pb4PGIjYIkhAviqV-LWaVN9EJWmusZoghOY9_EEL6wXBfyFyq9sL25jbhaPBBbOnKpkih8gBdGG-J3G7mPptNBWUGng5qX75kEZz3CMu4sKZwbxTYc2BnbkJ4hidIawcpaumHCCuYOXB5K4hqxQ9mfp-fw8LbmJMliCvYkUIHRFRcA0NE_1GuYSa6oK0P5fS1KZ4O6XjnUSWRL-wYTJn9lWhmlzoLC4pT3YpB3vp_jU6oZnAUDlA-KtHrRPDblyci0PDHPs7hQTX-Rb1vwF5glvABAS0hRXbM43fuDX2BjnruYrgT4jrYCp0jKVr772rrkyrjWLJ42VtOpYU1r7VaPjuO5Jd9GuHcQd_auZtj2kX-CbIdWm-YYuoR1mSh7gTg1RaJmgcOaa05nt1N9avcskTaBsKVtr8sUZnSfJx4yp57SofDOUnsuBnTQGFbYQl8THZ5T1UpKnJB9L5TFRwH0njtS3m0Po4J6QOM9GgPDs3FjPMHi8wYKtoGMo81YlOGAXj8H9f3SPJB6ZydnMnh8ZXFrLcAj4LupS53LFoyT0YMvX2wRhmDNV5ZFbos-NyG3jJcD6z6E680GbKeTpOPcODVLkNlMeuni_vnWZdPbhHXKjvfJLqkmksW3A7u1eBlmzGqxewUy4PBXl8ffwkLJdnTYCllmOmaeROoo8THPZ7sMRDhn8B9bagNti5oD2hul_-BnzhpSsvcQY9bcnSlPqxy1QzwrFJizy7_2OOKLu7H5FMx6kF7TwnLA-2gD-9J0UBmomChgr7j_Fwe81ZmCCcKKMSzbOWRfrXssRATWJ7jnjLAJbngoqrQ_AZnSnvcgsq31i7j5WNaHXYpDmyoks6HcAf09s6jfWi7vHvVVZCUpzF-hqhhc_tmlo3K7YnykEd2k9rtBOPNFPxsaLl6sFR62vIwouWlQE2VmOJ3su6Z0ILzu7WrOV5ePQeKnLouCGcNFM7wPUFAFyINCIl9YAmk-260IP9JpJXZ4yOmQdNuXflDxkDbg4dSjVMYzeaDQg6V4RxsVNapJx84Xele1zCwzLyEziyrHhZOyD75285AykvSyIBvBtYPt6yoiADD-BgnhElF9lrONTr56ZsT6MzY48-faRSE84ZnqRpcUHy3XwkB1h7NL38_lbzAXI0XJ0qrYnF2mODsYVjVXZXqVngKlqoxYhvUEGIitqfj6Ui6BF2o3VlJeUmgm05uwLQt986-U3IuTY8X2mTajzpqLPlvSUiwEuCpeKBn-6OiFfSO5bFj5HJgeuKrj7_2O6fyQv-BJJqTNhoIS3gHS9QXsJDOpRap7OFZmg2hZ5w-9Fm5w_JNWrMuHrO-MLhyie9DWsyq02VMaqaUu9tNNTSdEHr_XwCdbPgzVIwHYxZrVqmo7TXkrFvZnbMr9bkUM2MTPD5cxAFusZ4dbxEKygP\",\n      \"summary\": []\n    },\n    {\n      \"id\": \"rs_0fc6088f6d9a3963016ab37d9ac31487d0a95150efb82ef3e0\",\n      \"type\": \"reasoning\",\n      \"content\": [],\n      \"encrypted_content\": \"gAAAAABqs33BkVVVkWrYynR_MeKWT5stago0BRW54-TtdURO02UknAdXE6VCWuJ2lCp3jIAZ7_Z47W74Osi1l7mXTjy_NgR-x9M0EgIA_Iu_LzE_Xf2kPSzvRFpXR9_Vq5u6HvCZak-9Y-SsFP1B-UB6OsW9lk9mQfLUnBSTmHY5TWf7a0_p2p4UMYdXIZqovQf0BfEtxAvBZR7C1EWNT15r8roGqdAIgA6yj4x-tyaJeYYxMYXconCH68DaFOSZaViulq61LDnwcMKw7-XLaWUFi6c7efOHPYmb75-vrBhWakINWeWWygrbggWI0uh__cRXYkqJKDvC4qS1esl-C4aO-t2Y-Wexg2K9UQmPLaH1jgDsuFl3f3TTEticeCWu_moc_pK9xQ9oZImWByYSN2JJwcFm_Fm0nUVjIx4qbDnooaOMQG9eG43_1NmQxHN0erH08QquHa4ErRzcN5BVH-jWbxAw8i7CggxbGg4Jz0phZyJk8dS8jCXW2rIgWFxB3Gf3OIyaYravJg96-J2-f5OkyYHOlfUh-t-4KqE-L6IXw3xRTmGrpknJKtqRxuQ8ebpkC-yanLgye8EB72NbEWyw1IzbcuHM4Ym-Bj1Ou9JEClstFVQYdqALqFT-lPDAFpVBjfZSmhbG-rRNEGASwklwpuOmwdbKhNI19KP1BlQU5rame-F7fBRyDVrXpwJvJAS771lyez3cisKAhNhhJlGCwRc9qzbRPFCSvm_L-ekrmoQ7QRcS3_xss1_eW4r2vvYBM0rrQHNghRDHgzzlBuHuva4Vh1byhxobFYgrrQGKUuH6YGYig3el6Zrbx3nrNocv5sQIzFi27zLG78TSzOVbN0r4MyztV-CGJZSmRsn9X8o3dlHtluR1sTPiPfxPAEQ-pE42S8StUaEmZ3G1Ap-ornFXddVl42UkyQYkXZXKg-ar1J6tr7atfaWLU4cFaqFcwrffFP53ACeSX3tu2no3XWXHdBM8Ijreldvif5W3Kar3WqC3zGa5EgtHYehWdffcs9xB4u_xKRfoJ8A8lloLCHJK7eImsXgex4PpvPto6NQEDwFptYhUOLCmPj-DwhXIYz7WfQDIjNxtd-PgKRPRC5rPZk_oq_NsomiENAupyeqdNtLxqypmq3py-LAh1HzRdcUYhgiSVpYldkF9qibbYS-lfktNcZDGSttsavsEenObHpMFuLS4osD2-PAsujQgSYIydN0M_-oC9b7B7toCoHkIxk10Vd50FuzH-3gmU-qTa5xwwOvLVbzF_zSVvSU68DHIHDsnOOxubqNqL-3Cq63biVvC0_6LLYa_kqXcgYBgooZ6WihFxvZv8JLccMm5C34EF-gbHW1hZ8gERahmaFGoiwwhrRm_erNIYRiKUGvCnRFw7beetxMQDAVCbld1y4SdKuFMqakNL_3ysLH4GeQ-lkiWRGZyuQlRJb1eiEd2wBaI9d1JtJ8pk3XkkHe4wHlyBY2-um32kr7FtRZqH0RLBxkhZf904yz8zAErM97RzC75oJ9_8WPWEWUVGf9TnksC8vySzEsUMUwVSQlCUm60yWOGbt2brel3oLzzdaC3_0ugd-J-pxobXtlyVIrv6My5KlW0wIBqmwtGOZx1mN_gqtKcwmTyIkJrkTyzo88ZRds3ttVN816GTJb3YWQafYjqVYZ9Js8qPQU1otevW2kG2Zfd8RfkaxstIywPnrUd4HdLcz6L_rwRVyJCEY-qvtcghBd2TM9RdMPxVTeixQgj-UFD-DnTt7tSV-_0qtjfZg-L1FdcDfAy0mIE3rRQdE5ucm9Qe0K-tS8_NG7QP59BnzwV2G9eWhHQl6eDvDY0G8_io582UdRTWgFoxRRJFoKprMC4SMgU0KetY3Wd201m-38eHbuerf3vCYzR7Im-CcuTTJ-JuqUEg7cLVsN9Tb80x3bT5z1DTEF-b2wjaicYHd1YfR2jjXC5jlIRTQ392MmR4EsvvPvQssnsb9wx3ACb7aQvaOI2pcIdHGeD8o_5-ea3tpTLLuFh6eYDqbQYVHCTH9SkNEEiJu9bi7N47zea_ztJ6AqSrQZAjye7W4eYKSL1k9w1FMmYZOObyINk6HOMyPQygXFdQ3J1I4bnbfgQgGe3qOiwtFJpZvnuA19uRppcOS7A7VjY3zIRHwcigxaISLbLeCexI7IeoD7Yn0fn59_9moTdxFWOcWRift5np1Jl7rTkSgfqeEcV5r5nhMfW4dZp9MXnoGk1efClx01rprEXiRtOQVaOvGeLlb0rP4Av2IyOjT6l4rFInIeZtrROnTqGA372297YOVay-Cu5zdbV6tfzDOaZJsS7_Pd1lB4VsNPMybXmVCTZiJ1kSO6noO14ZVMao0cDdsn2FsbEwQFpo5QQxSWwvdZj3pyRCLk5wYCGg4Y-O_8XNN9J-WeM6sPeVJb-zH70S_aoI2Mp9WxkK0VyAHW1hHcqv8rKCPVeq88L9YR4tIcifE4bCMPyqeD4tRbx_YCM-gDRRq6djFFBFI97xPVD-6_HCs4sRB2kRklOhLox23pBhclhr1OLWkzFuG-CFp7ujFtSiPGT69IHmRuz6BY_4Douva8V3xo2_k0RU5gkn2d7oVwzBoPv9Ah_nkvUVtOef0MdTckMHObY8p-sgFt7MBnzAi1b6woO5TNCCQqWx1AAJrFLLRe9TukCByzTLvxfG-3jd2JXxgdape-ttdUv2lvZc6m2Zz4RRfR2P1XYPIg8JC3ArTy2oN9Jg9zpMCiciIawP3JLvGXfT2c7s3Ki8DH7FVz6BRTiX3sWinDjzYvkGuz0XJWlJBBxbdB1v036eA_zivJCBiUfBngC8jSAufasuNSEO88TmX6BZpulOubxu70icshdnYG9XtcSU5oqCG-Ih6BI-iZPR6RSMuDxxN6jQUgnFwJx1Rb50mzFkolKsoLVC3pmMwn2sD6WLRy4BJF9gXth_hoWlB5cDDG-yLdabG1bv9fliMZ_GGQYXLXygz10MdTUMvCnyaGqlz81f-W5D9z8iK9sp0bhSdfDpaG304uCYogezD6wrrAHsFSvSWDCM9972xk2dwzxUI7jp52BXhqUUN2EFaRLsTRM-4pe4Lzjbr4KagvFkB7TV-b92i9ikxX-jg4jclOYW24xB4iGqIPQospzBBjpH9-yVxPWxUOZ2LQvJeM2c7ai0Mk0vOLzD4Kz1Fah8ALAFG2j0u3ZwnWiBwwwc4Flmg0OV4FnHo1oHZTU1zE8cTQDJd2aaheAeTCJOOCqzWLDAoD0Em0qUaWIv-ceM1j286bF5oQS5_fy2jZFsf_nKG1jYmGTpc6gxVCbKWTa8hekT__zcu40oQOAtJhbzqd8Iap2fqlUnrKYz5DWav2Ndxe5LaOEF8nE2MzxZxZfjjS9SWymvS0Q_NCe-00WWj2HvWTNFsn48clzv1x8AtvggaLtz7qo_QIxjxUuO8p0ukQIw8Pt-UpMvcQRzLFoG6wUBZZaw4PMIvvcE-_flNb3FfrhelzKSSzm8vh7QhTu2V8KGSLumYvaNGdE1mV1WwWiyQkJ4l2fso6OvZ_JwPw8LxRNjobuhgQys3T7uQ7ktqh3ZYEvrPoLfZi9RyYDalunNSIU0xTXtozRb5c0URckY9Ou1HYrDI2Vh8FLQtjz7NZ0TJ77RsgT8l1MFrDn37Rwa510xk4EytY71cRTkWakikBjs0QMQJgi4P0PZvgH364N7GAF8NE_-K5ITsj1_qMYuhasGd4rF4ur9IRDBENY376I2kzZZrVswLmLRtl4o7uI_Cc5t2vIN3Z5P6zGjpx0bAMoCB0-gyTfWksLOuhQJvSBFOE9zjCu-6G__W67yecA3Hpq_8l5AlOIjdwZ7NRpSyUVVPPuTqwqSmRkSD5BTQinmrJNrgW4b_sCCTEvQ7T9125kBeLvdGaX4DzstkZsABrTGY_JmuQswJqCqWTUgRLGrxizfqZ1HY_zppu1MEWwSDTQ3y2m2OkJFobS1YFTa_SuuoLr0n9IZGQdPOFXA9iKeBdEUyA7dStWDI1p25kEbqRxTj4LKDyIN0fy\",\n      \"summary\": []\n    },\n    {\n      \"id\": \"rs_0fc6088f6d9a3963016ab37da002d887d098aa7498d7db9768\",\n      \"type\": \"reasoning\",\n      \"content\": [],\n      \"encrypted_content\": \"gAAAAABqs33Bzz2l2anM5cGfkPCWBZ7kkiWBfJMWkmHjEQt86vWzL7a5jUqYPqEjoLmU3xRe99zGQ6quonV73QnxyFvZm3i_dPoBIJQrSo8v_h9z8ZwZMeoiqm4LcgRuLTBPvy2ZsvKE0YCL5ceLdkCWqW_t-7oGpXjF_15f9uO-xfqwqmQqaYZvHiOdqaefKDLFktVSuC38DzOyAZsi7YseHAAlabQTZDEAAjSSvSrdtfs0SZMF_zvvpqeE06vm9xrHPvsaqLXKBNJfbVyNfxf1iz_TAmRahoXoTF_i6rxIGAmuMPWcWaVzNqvsQ1QxpFumCCN0HcSxxO5XOEqXi4hYEvpZIYiOx3p9fpvfeUoKLjrzh3K3MSXGgzi_UvOgHh29Ai64j-rLEs1Q2xT4HORTanSaAtptjuV9-NKAlJQfWIyIxT0AxcuNhHuiEpPkuditVoWON7mHXLK9vLVI9xeJD0xasp_lvIPXDQxrt49ZIz9eCdXit4r9deOqGVv83nzTqS75ZE4c2hFd6oKkCjeM6cuJP-riQNM9abW6yePPfb0xuRA94nnYl4CAfqwNNoDKTKD7z7sbtk3cv85qam2Q8LGaeQ2th3Ol-ELtkH6n3xGbL3YsUBHd_hhT-JV2BTYmn6uRhL-guCsfRVbBg_jLp4_xKYQatqKW_2X4rTTBsatzM_LaSnUMC-RXD-xzZIhHKbWl-o3fF3Gli0POzcEx4R8EQXkkJgcxh2VRAntHjk0haQT7cgiwu84rIdjxBczRMGkKXLn18b0sQUv__AycPJ-3jOvIgbWl5ENexYoMwlFKSNBit1XAn-WZT0PkmNNuZfS_JqmAhCNeUrw-msKvqvFdQ_wl9jzSZWPehFTxgHdL-7iXnejhgpw6K0tAhQvDrjG3GD3NH-Ty17eWVz2AtGCJoX1EmvTvvK1BM55jAmAWRnlXWuKRGTg32Su58xC2VrKv3FPJxa2aw0mOY-Rx5CDXUrwA3RiWh-uKeIRw9HRMNs7vcdNNR6e2814OpQpOWVb0HhZe4pd5hEo-IPu2kxmdoBXOL50AGN9vBgGuZYHfYr1C8q_OXlJ0nk0lrakE6rUbuxUMZceVos6DI2UCxg_KuQgucqXqoyGyxBbLK9UugE-klRupqPXpIJ5fTy8HojoBwK3S4n06HKEx5S5kNkfaqy1DkflB5ZcCBBiE7_uVothjFjp0sIEzdrTa7XBrvqauVczAx6uOtPRwXA1aJJU6GOW-UUY3f_0ki2Hp6JYRMA_k3uC7K4zEyghrSJeXcA9RAAN9DlRTBq21_5U_XWgdH7yayaWSrl_CwD2EyLr-pqY69qSwAEV-2a4J6pm6VXRuAOQ5QjMw-UmZzLc9Q4jMpSUA0YZRy_FJ7jHnnep-m8mtDiGaorUyl6nYYf-QAzYbg3rcRpduaXkdrW-VkOhmPsSPX7Aadqb1UN2yIuYkFnCmVZonPeWmlUS0LI4T2s-WBgb4c0vWj7IholS-Ak2MFXK1AQJysB94-ZoBH_o8eB46cTduh3q6Sv7Ax6C4XVEfkHoqGyzEfMqaOKyMnXGCLXA6hhsypg3Tw8wkyLTrkHzsu60a9VSYg_09m03LZFGqF1vv43e8X1-FO39JmSPt9XB90pkpN6GC8OrxtcUsCXz8cUXG9TI7uLxQ7syymWX1r73cZAYKhKgD_sYMp_cw-Txl91cmFJv2GlHxvpfb85R_MG-kCla5bljmi9icjXsENfYPEHnHqQ15wfdXdKZ5maAswn_XGv4qoDdBjN8tVbr_LJ5yu8iGIsHLeEMmmEsPu7ESYEctIuw6Guy6TzD6Twf2BQdXffCVIF6rXLRDNb76x3-GhMkVdVsbji8z1DR9zN2r5b-qdMrHMvuZQNH3nBpXoGsfTHeyC2_J_-rTG_gSdwjB4HOT62xgJU_gGtIiL28cw84hNEB2grvihYZ5M24X5fShR7gG9yzcK_syZgcQArDGfxcUT-BY0J-hQLXT75Q8PANRFrac6xbyRhjQObC3Il07mnDjKGBqQMSPPkcVmATIqiQB8_SeHC4nVIjnbRfnYjdV1BdUfGkVFApz-0WNu0G9gkjUkGa1vanMJo04vQuK4_7wAnrOMUjcY7RjVHe-eCobhdqCYSpxw3SeVdaTgvRkWzr8Lfu7E7z3oE6sd8M3kA9Llt_9hrhW3mWQx-7ahxXI_bWs8Gnt_FLgL8l4ZZjmnzVbBtrfKbw4jlFb8UTl41CdaVSqL_gVHem4lYPtf6W-jvOPeRVI60NLXmAdvEcVUYgha1zHlg-ei2XsV1Reg66ok69JoD8xIPCftR8WN2w5iG1JWlKYhxoZ46moTOCCNzs49Bz1MOThFO9byR1fVE6avd_l3x_LKhe_75zPl616ZLLDJTGNM1qpDrd-K4PNkpog6E3pXz7r7n0EedQfLjdKkrGju7U_61TxkyahMP-oz-AWHsgcfaxAF-E51yTdSyIWJfDez6cu71e9DMmhSkjweG3cpPLBtakJLUUs5NxB8LP_us8xqHucwUC9oRclSOKZ7XMoaC7KynIdlqQqWxrfux_vPVcfPzWJbNDHwMYCq_iVJQNLbL_ynmAb1pzKsx9eRRTotG0QtXimOffUoA4TpUi7iZPxmXynLJw6gE8t5GFZLAVs83kh4r2PUE2FrUuMmO-pn_E-PN3nlHuXT_0OWjOYm9rdMye_2OtAhav1GiKeCY-ZoRCAx0jgO8kHFwOjvd5kHUX_xtl7RJ-W3xaDDfxedG2ije43OpS6FRHCieFuWxeD59Y0SyVtRuAG5QhnEFCVmZsQgVVi8nKKK4w4AdZubgejV5swoXwG-pcPJZ0F-wWAL4v3NWelu0N2IkTRd0knMCM_FaxUawumNlX7-XUCw3DR30piMeK4MrVGq1Z6E_M-QP7RzwiM8OH6M6gAnrfYvIYTFYGPizu1sE1tGdGHn_smeXZFo4hWKDeHdO66483nUQ5EH-FHwvh-lcjNOpI3Dy8yopwbxO5CguvhAFpFizmDHaUA7QrsldlLBMit4am2Zr47VvcqyCh1_Zi4FwJKgOzi1vfCVA6zkTWoWDjd3Q3kAKpDDTPsGP2mAI5uFIS3tFwRY3TATaW36BwGMoXETiJNAjgdFQ64rcH_VYTyu_YruEPqpQxPSNp_VO4W3yiB2o8_ZkJijvgzCO13oo0LB8TrStbUxz8zWJsa-Gdbv2A_PwJ7ppXUzrW3aU0fM9zImiQK2_E96xf7Hx3ycBm__7oXbpJnbNN6QUef42ENjm3hg1bJ7_Pr7zSopHH7vf8EkpWo9rMLuRCeKVyemc3KkxRVYrO4B9iEG_6hfcBZ0q9v40PyCPlJVVzoAe9H5w4Lb7uTYyfjTsQZQnseDd-8BZ-MSKjJGFCjnJhMfXhfx7MMufjfL2H61m6MdLvxvqpKMOtdicnEp_i-JTHBLapbcoaKiPbU8Z-1RZlaj06MiN3zxT4_-YjuUiQZp3cz1xJnWdsZqbP53oy2SKLIeit9OKvbiPem_AuAU87HIhSn7ELgZjJ-yPamsgYDSTx8xIl2nh5_CPYc37USogS2B-Fw6qGvggXegorGqVwWGzHnYxVaudf_kI54osGIDrlwrXMP6L5PPOGLsMkNhFB2WxNgnG4BQy33ayTi4LHKcTRBPFzsQWJ6sxYuTP4yIBYqAaq9vqcDhkyxopCYHEn-gfO3CCOwMIzV83ZCH-FRIsp0Fp8_doOPhFdkA9WRgwn2q-0JrRZsgfjj0pPVLqmTrPIG9c4vo-LEZFf6Jn8-sQUKmGVZmYmu1hUqKmgaJJteydkiQLzEBzGXXm8wjOm-yx1Cw5i6e8W_s6I=\",\n      \"summary\": []\n    },\n    {\n      \"id\": \"rs_0fc6088f6d9a3963016ab37da5138887d09d07a3a3db311907\",\n      \"type\": \"reasoning\",\n      \"content\": [],\n      \"encrypted_content\": \"gAAAAABqs33BVelyBLvdqEcbZm5JDjouIYsTE6YoPJoD-RCiGJTwUkpgCrwRngtuadtpoyDf4T_FRwwGW8c0-YDCEKHuh6jUE2kLbKWqnuohPwV8lZ1B0M7Arl4p-W1GiCFxp3eNIOhWvz856f9mMf83csi1RqrY28G36JXk_mLCka8F8MdCHZ4LuRrWc3vBctbMuqK-QbH3tgm91aZvxQvv7me4oD1W1UtHOiiU08aP5PUEPkurtC_hQUNUKHkthukuLgwB9XIgvfBIUtiP32ETOW9W_NcxY3cdJNr-vQi2kYZt3kAmKzRyWhJpRfWjChIiRtgNyiPFe6pRKE7NE_Rp-DjDAf1i0S72REe7BSC8onpy2UOUfQwEIR4DtniieOSRtLXBTqM3hVC3hQ3Sv7UeI0jdgoPza7FOKzJ6aTz2_gYOiQ27CbHfn4N-ZJRa18zYxt3kA1QlH2IF9vDEirfdW7gBw6LLFniSiU_BQxJ_DPrYWZupIpbMGOy4xyrORJIjLsBWwWsXy0U55KFzr-jDYCKjMypS-Z70285tozZlhq3OYAPHqB-s8W18D6IC3tio5CpTbyZPl3Wj_DhJtQkReiY1MG_Gt--YO0WlsLbC2F-ZS6dc51nZeQXaQnD1IS9b_ZBDGIXrWsLLDnh4UHBcbPXM93RmE6Yo9ThW6ZzMVakY7PSTVV6kkqajlnYHVoehf2R9nNkpmSsx_1rMDkgDKZapmBAvBI92Ng3XmdHjm1jIvJvgc3HEXRPr9BZalYO-T-uNBWATHLAo3NquvrSPtmToqpiqiF8qbfkj2PiQGHIB7ZYRH4L4_q2zUwkCMN7euaLb3dGz1qm6qPWTNcVjMNdc9mOxxFfm1OyRTlj20hiQfYQNPXP1gm4NQ82ioNmQgfhHRBAW3KJwcWLaEQQ76CrFXxDRo04puA5xLr9M3_nYokex_3tp4N60lcJcHoUR-Tt6Uvj8-0KWEI2aF7hYLrYQmcBzeCkaYGXWa8gAs8e889F69fHyOCNAelcQ4ObOybsTR86rR3J0qR9cYbNXnEhoOa2U-c8OB3CyKljpqmOgWN7tsAHiU-4AF7ycvnRfNqI2nX-fwnCu64d3H0PT3fXsOgPhO0tqh-ZKOI-WJoW6qHyBarlAY8BT56GNX_6zeHs4Ltl5mKOrcz8b7i57OXe1txQJ1Xo-q37GVm06HYgCfXvTDBIoaFZwjlcY_bLEQD_OgDbjpGu_TFa-P9km5_eXdsxn_iXn1y9diDNvg5A6sY550itTOpyfsVKddg7m6LElAXXxsLy_0pX78e9c8cU8rXY4gNLnwn86msPlVK0XLHQCH8v87YTkfpIu925RbAWJD5AYd21M81FENuyn-LZeNYCZt8R1IHyW97YuekxsoEDjKlquhcMiSQlTGyf1rT-ruRTIMj4g41RSRXN6-X_3JKLn4DPWS0BxcRoWv7XLt9FKrXZFPdeXEq1OIWg_gevSFf7aj8F6kof1DB7ddPhqjj4N9kNB5402Xk89bAOUWy7nDgihMKxj6Nw8bpEM1qvrxlJtTOr_I0SRk-GXjSEsSIuAWYPN3b2MNgYmFU-yNbwkllaBuaeEQqnb1IZCH4i99iYQB7c8h4DISrifa4PwvdG7cHKWG8xL7hOXTCKuN6Xf2N6adPsuQBZaCS2zu7gVEKSG9TithJ5dY_3MHtpnWVeX7fN7RCP111QpN4GdqpnyAZCP72Q-UpCm2hXR44uUs7QVgRIVcmsr2yRc4jTn4MynZUA_2y62ANutqWMoePk-GwLOatKuXlMHHq9ge_s2dhcONh41icxviWJjVar6SGsICXgr3K9Li7Xk9HPpKY7tEVtuhaguNq-bi9x2WHB6fTD1t0fYC2f6Ov3I_JbrFYqOTZO020E4v-0TuzwyruBrJ8u-Z744gMZS1apuZIf9gGDYe5My7QrWyjjHH4mTFjEWzHA2nTpfvGZ5z2uxMK7Duz4LS_Do3X0gLj1dXRMMwJAH1qt_MLBberINuUuqjKuFmov6fmTTe45AGeGhoURxbl8jBof65sGGhsR8AQs5VW9rBWM3MhIZyScCr3Sg-R9MhPn_NsoX3-vg0mjpT92glRpQt9L-_i2Hd0hYq5y1IMNzYrzoG2r19TI3jWRpEneKTcOsrXqQyJwMFxQzp_TVy0tMh8i_eHw6g29FNWf8uGbbXGi9Nen-I2H8mbv48_PTu-LZQvDMX8rvSmpA-QriT_O6kwEvPnhAfdIhwGuoM-r4uka2-G1_46FOIONZUTtOZuyhh73lqkxf3ra8eTAo0SmiCgZg-xxirrS-lqO_-bY0CI9qUgxqXcAl4dl4jnBuE4FXkDqfbmllZdh7K-aw4yxpnmEKE1lUdggzAxwxBSP0wLjAAEAAzShhmaT9jgIYicEKRV7arglWXOKTlF5FnS2NFAgSN8BdiLtZ0Xu4GBfs219uE8VI0plasx5ljkOwb_0CAaLqp2g2hfxHNCbN1C1zi1x1SYjaoCdrKHwQ9GAydiQaa-bPejC5mkkt_HbstRrE9WWtj7enfiEG4JjJzkNYMsNgSNH9DNS3ZTjuefqbDnJyaj6hKD7UaoP_tOI3ZwqjmTiwoBwbKizPX1K2NM1JB0H6gASVOPMOC2fv5LmB0wleent8WcJJwkLovVs0YyxxzaFiBgV4EolvpkK9c1fKyYdqSqP8wlFycVQAHbBULcAIiaI22f3Vhr05hNe6euqYBBorRR2d2Hw6XaWTmA5uD-H6273AaT1e9HzNS34ROUM3gciqTL9TsdDDzMR3y89sirZkesNrARod8iKxoH1BNERIaPx2in7J-VzAwt0ys_oruKDi3Q2HZViC1IfaAbfeUtrhmdDOu1wAEPqFvxi4Qsl1Ds9wVwJqX4yIMaUr_cfpQpliyhARlLFA7ms-JVw8SGBBIE9tq8wEJqy5ynoV4RsbRHynA8v4hh8Cis0oqDrn0w1tEUXLm5A-W4eWP34RnoR6itBXlbhow8CxGTHNn9nR9BgdYFQcNOVRXClr4zH4xeuzW6DuWUXDgpHEg_bU2J8Kej_0r6idQA7C7Egc1I0l3AJLLT-ETtlQJN65PuFFDWIP6s2d6c8QiPtqXsKl6WbNo8HeH4cBTf3454JWgpJBmEBfp-tu2-rb5GwsgQP8P361FMfxhYEx9LaECkS8iSlKIza6w3vVVgF--Whmona5GFbzNTo1ckLsE7epJux9K47GtBkiiFgf9ij81HUZM6LKyrlbRfnChH-AGZuu9pqguzmHlnEtbptabgKzWevCl4yiSxCUFdJ-vqMUUByk_oxh00HvFWZTeEYN2xaNHdIRKGSwXVMnxITVTtIF9D5zNiO8s4xqUWfFm663KlF5YDsquS9Sm7-EQcNzkJif88dFVOEGfiyA0kSvxNkPqv5PO6YGa6aMgsSyHOPcH5MazxMoP6r0JiM3krAZvpwQgRNzVPjwJvcmnzPj3Ap0ly2OtZtOD0Cvt48y1yk8HqBkZdj58fmE5jp-nAba5vkZJ4Qo3AaD-VjNdH6gnokVN0bnqFChZ2rrUjqFv-nhR7q9lCa_GNt_3Q0G5szP9yBtIter902oaG652YWaV8QznEynOP5VNAInsXnBSnvQFTP__uwsy8ZG-pChpBipChchblIT1J6q7cSoYlYfIVa3fpfanaPJxMCATmbhse77KwWk5AZxFlXhsEELnSQ_WYsl_9uGWOeQ7lG752IfM6RaR8vyUSs94zLXtNQEpoh-R2sC5KGkESz2Rq36Te68v5kOc3z4DaiZCf_eRW8AKd7pC4Ux3zjrvDk8ZY4uyeBvcI-20Xi6FVR0yXoJKZ31nnFlmfGK7iB19n3WHvTaG1k4U4QyDdIV2cqLK7AOaVZ2sLRJ8CJiT3sRYAGEjEM7sPC90yIepxP0iyagNFE_pbbey-DGwfYTmreHexXx7xbmF0c_Ox3h3yPzTiYxnPG78wl8lCaG5yhvRjQXE8irPQ5beyqLN16_9PUjy14GLeuFoM1JQ9Xm2eI46GqUDjA4S3T9tSJUWfBFR2g6nSyLFdcEYAxq_XafLBzMMIDUJ9bN9Mf26abhH7mnCkwlDdWIzyay-IlJWTBTg7dSedQeYS-dm21xVfVc_px0SHq10axHRuCVQZqHrUjl6JMuGVU2qdRfg9veEgpY_0rcAVII8RdcNvXP6rFcg52x5uZFgMWhyv9xykwsJ-WsPchrebdx2uo=\",\n      \"summary\": []\n    },\n    {\n      \"id\": \"rs_0fc6088f6d9a3963016ab37daa191087d0a77ae41cda3e4af5\",\n      \"type\": \"reasoning\",\n      \"content\": [],\n      \"encrypted_content\": \"gAAAAABqs33Bv7gQ3BG9X6AaVJDtD65YQYrW6Mxhp4PGQNY2-1oS8y04SGbAgXtGEe_Vac1RXX4BGUbFyUVzabzepmFzoGX4vTQ64U1_IwFkZrSZ08Gkcx1KUvng-3IJLsY0Ubid7Bm5zfvQLDMHGyeKNmetTAzfavHyQNBaUqxT251KGFDb8IuGAkuW9_hFTNdoyc6Gg4Gf7NAkXih_VV51pyyV0i2FYqAfVMkO_Prz7lmIpiBZwabkQCK16J14jWQMOsa-pToNvJKYwBiw5LLsBgYTeU_zjnUga3fFJzv2ZJ6iLHfAhzOPwn_3WsvptbaH7Q-oHZzNClpfAqkyorDnj9HhigjvlizNOGorAU7u1ju2O5aUS_dhawOZx7VyblMPZtWZ2t_wLZpbA0UTFZnWjzcJTcMsbOGe6abCz-6aig2uo6YKKuN0-Bgw6knkHwnkF10TNcVcnJEeP9qlzxn6MuYM1qB9j0Hft5AUM8PmLpVCyIo2f2nNUdWkMDFzt94D7Q4mgXpE2PkZ8nNE9Gribdlp-jslY3EtyJgKLWpXcyMQgW3gUVD9OlAfpkWr8WIlqlqUyTp9a9sDi_DRgyHa-zoZ5ByQUqm2g0IkPnHUzQTsrr_Q-AJSRV3RKCHiHCEIIfxjtaDjVhjy7KkJFvvJUvUf-Bv268KRaydtzq60LIlQ49uxs7Og4KkxWmE72uH33NUf63dvzbPEoOXHKT13sACTQriFRHS8f8RBzKEY7vi20vPKEB7lHXoJphZwx5FCjHkRAwNH1tnaAa_LN0yQfEE6kduV-YcE48M99ywGA-AoisHwopfuraAaJAUHr5KI1CNCKyj_q67nmcwgVU9a_4lpF0JJZEOlnu7Z_lMFTet7NjjBODnkpqZAolWqlUQwih78xs9NZmVcjOeuVYcBU3YPKj2uQU1TAtJo9iwNBPkin89nnxi3xgVdS06brwmIsDHae5i8W-f4uVqhyejANJQTrUz6Sl8e4aTpkSioqT4zX3_any9EVHeYG7JGhXeDk8JXPY9Sv2FvzjQ2mfKS4b-HF--rHL6ycAjwLlaqQKlt55xeb_iG_NGQiXk7zf4YBJ72nCzU1tsrBZdLrwjq2JTVrArARI1JYdxU3NVJIboL2Kuzk0NC4LEmtKGrZtIvr5o3I50Gkhj-cMiXeIF3uEFzzfOiFCmaS095vXF9Pgl_YcR3tSyf8b7eMQUp1gBwk1Xg7LGyQOAKIn3DRpvc9rDYeqN_-EYpU-lL7hjXYXVmWBrSyqSJGqVfXTlZ8miJyThe_869bCu42CcC_OQEu1fL5PCjV1f3esLGEdy5Q7SxO4DAhYvIsts2k_tNlIoz84UbIq-mLsFMefNeNvToCoJKESxewQk1vumMQPfMKWc02FESfRTrV9_jqDgxuQVXnFdfjJtYjOGh2B3l75bdGtMTTzYd95iTgjQSh8TK4-K3zfUrzvDN_KByQGUwXc05NSQlD8U7JHUo4kMUhvL2dMR4ESeOw_olKOJAimFX5D2rla9nBN5Eq5ZuxHkuaz5FHcafl8b6z1JsHHduauQYe41UAt15l4iHeF-_z45c1adbNpHaJ8lw9Wr4SSJQHQhMiIDqd6b5b7O_upDNnpirAUT7WRIEAe2ewZih5k-R7rjtu6YdrFklnhtA4xh-HcmYiQzdEm_Iud9kfWnG6U6f1XgIDfHVy3TszJNFbsuE8uta2ybJVemngFN6NQDX7JtbAkxmzocwh1dsoFjFUQt8j59nKTKMmZCFJgUSoO6X4BGzMdUjvdK8R7Ge0NXGJl8VLT57yy4AobI52F59lLS_JggEKwsJ0LGR7f3wdKMydFTzcN9yPXDk4FlExsVxo93o-Jp3sXSCXr7ZnfIm03Ud9bTXxkly7b3b7JCnZbrWcdYza2wSlt6uvtmLCIuHaVGCaNnG5wK_07-ocx0VjZcStzDdUmWI-nA3fm2U3HUV8_5ahHbKib71lggL98xxSkqzaGhxdurzfevla44y6uyMLO-2gk0_q4e27LIJrxA-M7iWjuZRFCmPXwr7JdVBcuPUPb5JdLAVOn-Bn_KadY_l75CYsknYrFKyT8aR4lH3qIJbMpWobWzNkEHosvJHoGYwHgYzVdQcZMCo1EqgULCLFqFpif7hogSiFh1TKN4ES_-s1enKZV7sUBUyk_JFAw-RVdtRmL7prgv8hxaMFbAcgJlGrSe_cM-xFwWa3GviZ6XbtCciXCyU4VCiuPxOFzL1F1CsRlzaUO_5PYs6pUVkhFpzmG8HFYKRJ0SpeIrzEodgOOW9OHz2oGY4396sYD2EmCyJCKqWtm-8JHFfq5y3fuxXzNLwQUMP9jMbnlGj3x2iAnLnN8jmuUTbd2XmE_oLXKSk-HJAw6UQxVXAReHEEXmvHEU6VRn8UPu0_ANxsKVedfgeWlF0e9kmlGFxzzpTctUKvWxR9iWuHI1eb2I6sV_s6y_3Qfkn8sc-xnZw933sX3nhAr4cX0vGaHqFtED3bl5uTkuJG_VjYqUAq2pMS7lsQpEChl02qPFQo33j0ktP9BzL4z7NMoC8I1tzfsa1eAv9JwKf5r2tL8I0cA8uE8DtXx8I9hrEaPd1NCm4QR7CaX81_XX5BoSzyQErUwRJoV6Rs7do3n-wXksuoCIdkwKYKikP1APKZKE_EgsZ1HZpBahXqKdsvEXAcxWXkLRkNNiUelO7rvJXwxZDCal8mu0IM4whYQ_NbAAslUN87vG1-i2TskKd5zkycczNp8PKvd72XYJzl03b0WlSnZm5H4npOB9XNq5wEi1RS0YFiZiBhq5Qs5AE96HE8wnDg07XnYKQ1AtGTDuMSJkYiiegfNd9iQxEP_lmkus2YhvqFO1IhC0mqk1aMhWvIqXld_3iKx_MMT9lJAbSMcWauUK4-5aB3dHciRikCSi7JcU6rUAqJp6AAXVZl5Tcejbu-mEztOHG-CiSb4f_Rnw6_kg3ERWy108ZuTiV8zFEbD5HgsCVrg4JjwWyMJjbvfchW6vSPLYaLEJAd4iJfjrDeOW5CkeqFKEoKVPifduXHwyToXTlgGZ_fUGzFZj9qwR-Eq2iBz5SZIUnUjJaujYJIDDdzBofEcdqJhgeVQvA0yXXh8UlLfYbY1--A6laWjqBL-J_qLbpJWwdkY0e_qJTou29HVucsGfyE2n4moPLQoNgp87zmk0eY_p5Wtwg2TiAYZqd4PFxxua6dgpvY0soTw3-rkyxa0Fswx262cT7wVHTYP8vDhgUmHRWihQSPqlVlqU1_VqoEwEP2yumt1TO5AQO1P-c0gyO9vbGA4KsHSdVpKSlpAGmdb-FRSaSgjNIzEH5Rgxrw4yKUeFpeu2TZ_my4Im_fETAxn3RH-M0z1AVWIdcvsNVbjMAcQJgXbCJVO3PbIrr8KvEW4S-xcmmgNZADRX0JB9O8krF1Fk6GyOXlu4YPU0wX4PzKVK4ZUGFqDU7fnAMDyiL9_d5rx22C3mAN_R8mjQsJ_eyFtDl5I4bGdINTbIcFh2FtrtO-UEwpmYIAlGJfEqwji9usASQUJ3l2xDW9NUMW-TEoE6LfcZ_2I6Vnm46FdVAQ0aWrGgEqbpU125io8S7l5eYoR3mQF1Eu6yVETAkbMshjsC8yiPxTUO_4DDLPnJThJYR3qTKbxsJAgI3cfyhgwmPTViilBeDpYj_RYk-2_2BSXgASfb1-02dWL4_jrSnJnSLOX3tM8YG1x_tYXlXL5cXiDYW1pAMK4KmMZFS59Wv1ElA5pZY-asVXbBY4zsRcI7vMqYTordwmuKvaTEwEEglCvcU_-dpU9rDXvyxGC3dU0abd8TaBrE8iCaAz_SrnVXgbFBVQ_9DhwTkRU5F35Pl9OFGcT0IJrUtE9xptvuB_PQjL191ZpjkqVQ9UOCJ10bY2N-BYJ8vwV2EzUga6taV0KBDtNBM7ePn7vvsxqT2z9CnbVE-RduEXcL85-oYx0YuOENtD0jZPr6AXuB1pVWsfys_3b59Na_SxJKUBzvh3D_zengWu98NAnjUhZglqK4SMUktvkVTAkGRKSkjiSfoQ2PH9tDjEwwWIejVhV5zlh-aFrTL813qqXsFxeqxGckNTPygHKcqlJoA4mtsNwicHrWIgMAkBULdDvv3ZotsgO236MHPS0C6_uTMbFJUyvqyfrJoeTAsmx09o3Ded_cdP9_9M_ka_1hD_NMBypzDebWoQovXBR0sk6vWAMc=\",\n      \"summary\": []\n    },\n    {\n      \"id\": \"rs_0fc6088f6d9a3963016ab37daeb24487d0b52f120483ff1aa6\",\n      \"type\": \"reasoning\",\n      \"content\": [],\n      \"encrypted_content\": \"gAAAAABqs33BD0k_9C1fNRzbURePutBo4Xq5h7Qz-XkGYVTwXMTdm47ZxYJ2E4pPeqPudMOuUeWBpsweJ4dXKB2Takqlp87QsTqAWx2dOy1waxL2uCrL8TdUkEG79TXgNlDlNZ19X-hJco_PD71IuAkf7nu6FArFmdpQgOn4VA-tbW38RaD1WmtFiBO59zgqu_eYdxQCveIt0VL0HRO_PDyORiaUEC_7aTWICoClsVQiTjRT49sfoMRjPhSsAMAr44KnseewQxFAbHdH8Ts3Wf80TTx1QCqi0zFpvS9xN4SDwtFvmNT4kD5zcsBbKyxVhvHy9afaM-o16Tfa2nvB-nmN6-8BmxyY4vValWmLJR53_opT3Oa3uS3vvQwLRv1-JHQXfLma-EaTs1tqdHosI2MDlfwfUiNpstshlZohNNBYEuteqib6igolj8GEyCsANDyOyUB7nbO9S5Kq5aN8AyB-vRqQUCQqdlKp1Uuij_0SjHfSDFC69AvRwlcQiDPxU8ooSSoxERVtUfHIJPGN9N9v70Fa2RtOvLiKj4_o4cGpsarMdClFNnalgbjpYdlMD_k_-8r6xqdnSf22w0noc2hAjeqAbE2uaJlmepa5SQKJutE7JDnKKERbaEaIfD6TdNYmArBKuZuRDOCIhewEAvg_zSLqmX1Dz2oRJ2GK4Qq8_NuITg14MmlZOxXoAOyqonzbt7XB1f4uGiVCqjwhrSd_toYGCObiv4KNuWuCpZEFnkV_153_Htrmpd95_KihM41D0KiQdomJ58FMSsUwn3QDGwkpyYLnnLFK7qyjmi4okLqs4tiN1UTvmewkme013ATI3fkCF0CFob8tcjfxdYH48foKSaofxFuNI9ft1HRNZ3UQCYwJS0T47PKk6xP9xt9SUtZr6JVw0nOPBddTg6QlwCdTKIfnVW19Es23PsE3bB82KvLAaTWAvSj0F6voIbzFv5wxyK5yy0E1syr9C_3i1hiWuCs8JnUUPWm38N9HRsQfq68rS-bkJKpsPLorPMf4NGKoScmZoM3ZOtqSSWg9oCLA-kkYmQNM8AQuitK8nC84UtQqs_kcaMhcLYHkg0sPBy15VDdZDi9tAcMgOj-z0Mey2IIy2PbvkltGwfIPKeirIYrxd8oJ68f250g3yMHz4DDJ-novcufSqW24NFcsuSl1q9rq4l6cHGxBA4ZfsScpDKOzkLErKOeGk11Ooq2SCtT3tSoXH2eYDNQkY1w45Y73gVa_cpcrLfozmoPhAiLsfmvcgxu3056j9ZLxt9eZSy5kImsabpGlOnfDRSM1_T60bJZqb_QWGKkpXLa0TtDpIdC4ZMq117a5tvg2GiT4nx26bKWUUyAGNNxHHopp3OMndBtYSoo2lzRUXZ7__5B87SHOxlyUyvUl2nMUPfrPv_JM3SxAdsjKMwCt1J4y9vr-CBbPopljKKFC7ra13bevb6IyTxIbpAG25hVJdDJUonFmPU-yBP6ksfv0EQcStPL2q9Qv8zOJWMwwyfQFa9_vAszK0DpwbZwP0nL2K_sQxV1Rhs_R535mSir5fnP9tGOIKnrTQx93L8MvrQ567GxaxfjVRwILQceA1G-ZBoHk3u1EJPRZ7PN5ygdnCUfhj-XUMFprR11NpulTuePyq-SnegBd5REaKt7Erl1r18Nv1bKUGFwTlXP4Vy_Tx7e1aBGbGbOoDeU8Kr2SXhUEcBuzhYChVCTKwNjdgwHjXRR7ZZK5dbLGHNC-sctPbqXiZsQjm3S0MtdxY3Nb-IHafLQzjCwWQrQiqVuB6xamC5-GIf1HcAxRHGYOLycshNBEnjAxvIXjnjgHGjqlr2TVU8xbiQDWpfalxFzYhcVifXY-vqKLTJ9b2B8IxjrAXknkis0zRknj3F1Gm7_IzdauNxa0GkwR2zoGkJGHmE5xSlXqBA_P7ov4iXElPdsmZTnHi7jh5CCNkL_PEZkb6TZ_YNPsx_4QuzTmesgTUz5It44vvP0jCvbB5WaSX8M5WXBYUNOWoYReBFuO7MIk2NtWu9LIoHImumUbki1jLggT-4oj0rNnY2nk5Db9p1W_x5DvrTUJW3AlX-bbSjBMbgXapt3iH000rjFa6-nnpYGp8OoUGW2awVrw0RBFlnPOvjDDiGvuRJGt5ZbFMTnSww5Nxe3RkK2IG6zHF8BITmujukhErl7u7n9pbJUChRmIvN-NbLJzHHHMAjO-W0VVjtcsqgOm99cE4tCPaYh6TqH7ik23t1iorU5DK7Y3cAktopz2UOaqsPKho5ZsZMAifkUZ8Lr1qebQvCKbHOODxpT2O-4eVgrIxR9evkjZR6MYAJT5DD1IOex79uFudg7bxoPLEJMcWSREV7SDmIkUrMP7fVZJGxeEH1yZrb7ZNc8ZB-oc8zJ7lVIHHop1eRKaBL_UeiXcgULmlKyYwuhw4JyUULzQzNlJK7WFYsnsrGw_Rbt8xO9uTgA4gud5-CYY_ng9-8iepzU8K-ydLFiS0Vu7UFGvvtmUaN3Sw-oK19ozik90sfhqMre2pRHIAoP9I7NP7Auhe0n5XGZHdZRG3vkgMJQHRy5zSx31dE-0UXVKJCeAhRKRX6SrNnVsb05R6u7_0itnID_M1gzpuB2DgMvoNvR-Sy-bNfZfx8QAMclHoD19yg9ZFvURr32Dhvbb8bwiBvB_BPS-oCtm2af5b4HCLY0znYxsQYdsAk-pKNaDXNvBqecac0Ohzg6m_jHBy9wqxH9lmzAEhMTxw5d5ZCwIhGJBKzSHsz1vL0xQNLEB9z6217rHdvxHxUTYlPPNg4foAEIPJZFBqtcrHSk3mT9EevD3SQDKgOdtVOz4fmxHoTgYjmLInnh2fJJZhTTkRbDF0JJrG2I0RYblL-ZgbwBfwU_nQ8mtaqyysx12qCrBAItFtJLYSalI4qWLrhUm4yZlBsbaqOxM7WT8yTRCEqPuD0G7A0WU34HPkWiMem6iY9gJ0XAG69Mw1JKJtasLJSop574aErdDm63u-BqrNX6Ygs6Ax_GpQVp9GF4aVU7S6xeYOz7F8544svffBMewra8MrukActfxAb03KnR02KSFOnpTVhEvp6rmIE7_7eDsP-goHvf-XS8xljRLbeVmAVilRH0HClIFZB9yy3bNN2m-s1-_-ma1h1dIc6qS7fqHhnIkoDLC12crqWqw9GjP3MckViPfS9HB3FIJUqEmq4QotMiyysBge6Nk1hysd20Zi90rhxunNN6Prc7yQOuUkdgfgFXA2gnOv6KSeFc6PsVnRS-u8Xn-rIBXMHB8Z6f74wk-BgGb2cFm2qi3zfEJ2MvQHUj6b3L3n5VegE2kCCNodVfw7iM4wVtSQf3vsmI_jNvG22MeL8BD36x1c2lURaDYvlBB5EiqwOO_d5fSVkQ497bUzxGMJg22TxVehMtakQOw6n-QBJgE70ZHk_6OxMeKWbFdEcgK3cDEm4C0jrW606oIBTWnpYvRC1OA9bJXegU1jrqKmoPEikPPMmtI0XrJqVha0CLmw6VGbd-YdW7W2D5DgcT9SVgDI7KEuAS8XFjsNPaj_HSqlO8HMdhEoDG0w29L9mGK_jJcRlvI7ELwx-v8j9ZGnSqwxdVDi5cBX79Qfelq-sH2TMfAe2huKEyvHIfZfNbncCUhcLYbLmB8PYRbxihNt0xqBl7GM-UqNtw3daVqBulNv83xgYjFkkEGxyT-CMTKa2Oi0Qh4vfENL29Ym270pcQnq4w4rR-RGA63vq7knEbo7XLA_bOEeJOAdWz8T654bNAvc7jMiEV83DEd-TXC3sIL5PyfD3adMMLHKkbes93EWhQJ_zUAQHiHeXfsWALuP0bNw2ia73y7Ix4GIyW9DbTgi5Av8LTmc-lC6NpPHLQMVsAifI3MbcUmflwncOdI3m9eKyHNjqN0hDcnOxXrg6OBnUYbI87zZ3s3neaHYV38LEJG6kFiObD92aWoHXIm5NI9vGgdiqtTHmDuzD8LPdqc3bFxxEGvlyEgz0JsOCXnb4b4Blf53r77HLLcFuxTNAccd3SVt63CNLaEfmtUVn-B9qIX7aSiEkH5-w58jSrPD056rf45ITVqclIDFMFZ1EQjELKDD-CtR-EkIcj0B1uWHfKrFa7K9iIQfanWqQ8AfA==\",\n      \"summary\": []\n    },\n    {\n      \"id\": \"rs_0fc6088f6d9a3963016ab37db4d9c887d0aa7356a6cb05be9e\",\n      \"type\": \"reasoning\",\n      \"content\": [],\n      \"encrypted_content\": \"gAAAAABqs33Bxw1mforfeEpSywmYGtUVViYPdMLhOQU-lTamWSdSJ-vgVtEuHq8IAnMO1HFQvhIjUU6WQSkhUevb16mYWaFdhGcWLTi6zdQ8lonsec6GReKcgu_hXjTc3bQPq-6nyuGlB327TeG-du0dAiFj3wFYUwGLwvRWNAe_u2hGKnvfbZYFLPyju0it-jq51GF7G-KL23nRMdSJVGL98WJfUjn3hn0rJtnFpZbRnzRKNTu4tABtHOq6iU7OLpq5KKXJ0XY24gdkKtN4OzsTy7_JAkHjLRp8prEzxqrrljzGMpdWVIZhdWsHtBPnDOHX1TpKWhaQ8Ue8j9WdsNHTXzVRbQHl8TggNCy9nRJyKqbq2cQrql45htWr-hsjLJOFltYqUd5WmUcjWcUb2Ck0KPqvdqDy0GG2qC6lV0YaQAWdYkGzIjquS_PHS-XLsOElV_GXUkVPcdymCTowMCKfTHFBsW1W53vJTbWPw-Z13RjRMaF1ItLAfeZBU2OtaA-3NMGwZs1fhcLy_oIPrI1Fo7WMCjl6eWaaEjCBqIMZJnbDeew8dXFZCMV5bzcfMARWz3EOuv7JTWxIpnNYcxDOnEjWnVdEA5e76-mnuAyGKKttS2dIQwzakAXmTGBOO-lymJ_gbX_WlNt1EJi2JMfHLVs1vya2w00FYbKXzf0UxWzAXCYGVgPMOiJq-HtpjxIdMwiosOaXVWuoVsuXvTmv1M9nbsG4tGfJPgpB-AIt_0qe4tcWZLOKwW-XdPwJ5WyFAErhRKhpcdnKoae1SZN_ILHCqdK4e-HtNnRVCzhMAwn0Pio7sdf1Ww0MP3zKOFROmzlyWuiDR6nCG-KVJTOufgBOMg-mwjl0S9UEfs-UKiCE2b7frc4uy3J5e8-dqHMP-ds2QWc_4pSJU5-gSajSXOgkteMAZHFKiMebfqBA7Y2nts3YRY-w2GOHhxOyv2DCQttPhG1yZn1MyGbwJUE83AnDRLXtemFZ3e31SWKzAxAEWTq73tNqC5RpWC7vH7lpxVZypYhzImtPvETto7WZadx6T5J10WQi7vwa6Ta92OEh4umsXEF90Hs6m2sNAEUxbsM-O9c2ywJd-EyeYQP2slwOJfAjFxfOj93qtyORuOqC9gWddnWc_ihxPaS9K0Mv1vOUKO0Fn_t0TiuNtTV6R4YkR_hFnp_4tjlt-zn4pYX6biTdGWE_e9Hu1xjei24AiDz5DLF6qKpbBqi6gu82Qist9qbdnUBmIEk_7f4YcnCtjFCc6BgIU_WpG2omj5lOAszek5dj8OpxceE0MxLsDsdIc8MERhZL533sbEB_Sdfclu_lQbFxCBr7HqvO6bTQLKEugFgCbU8CcefnAIXdFblyOQIMogVx-GhgrYdehO9yHzNEaMF50fz957UzDjnKDU90ikYnSl99ivc5bjrvh3uP5SwWo4boCrZRGBI9YjI0GOvaEOpUpL1tI-_w7-Qlip_WXZtDfeWCrvykFbNXCo2M3R9l4v1rvNcty2UCGQEEGlD5Jy3J82-byf_Y4cnhU7eXvv6VR_LKVn7QrNlzh3lcaiXnvnQjqKI8tUMUNNa1lso5wJld03YQrYQYqY_lZ6f1lXuqbtFIffQ8AalyZWayLe3DBwBrbiJPi6wWy-VuGi6Q6AUe7PkOXIpnqjDI0ymzizuyo1qVTg1YAUeB3sRW_JgmS19cMpjXFMHhKJtcNOiF5TO65NuLCV8BPIIxD-UCvLLrumH498oJJDFSDlMK4tuk5DU7mWSp1n4AfbvYvAEf3QTKzxN0SFofjDgpWNEWKNcNV0aNthzMbIBMGOJUduwIZN90HAm59J38RiAdInQshoFBgg_i-ziszSV_7pCAiA9lNhmlmKgoi2tt2h7UH07KiqL0ZRoSragI6Gz4YFR_uFg15iCicK2etrisq9wfFj7fuKOf_yMgr7AKOUlRsM39tOeafWV5ktMQ2pa2sdC3UU9gDxqMcdN8KiwdsFyzOfpRfmWYPGY4acQIhz0wElmtugMAN9AOKGmAQlPQwneaoD92yTIcJJ_U4-o-uHj1lcSQae2sJKN80xy1A5gmD_h7XDcF-zdVCUbkgZPJdL9DPUvCXn13x_ic5anilsL5hweccgiGAIC6_QHZuQYSSbvB-2V8zTNi792yjDVQiS6JSwheCKfOwKKCEZ0kk-5960isdVJFlT2MaAtyJqITuwB0Ljr0k6xRwJxsJYU_Z8RoczGa9GfimzwaYRJvYQdwrns1mO4R8fEjGHyp_An8b_xSc1Dm_ShpJvH7dkPMOeFhTyUb2OKG_lTxbcpNrXi0FdXPLTU8zklTtXfFmNR-tInFZdjwhdwHQ9fVeGydFY6hdLr6yFthsfFRsowecm3_K6rU2Xq8YNfwARbmRLkJvzYy6k-lrt8U2BrpWvhI6rah5RBO235oycXwN2NixTTs80UoNCL-5ezJvRf1jxWRqTe_pZ6wl51MF-FnJhhs1EfuSAWaks3KVC23sucDysTApbNx9UOIFwLaLUDYyTl6JlVxngGzkmWvCa3a51UOmkcWpNtfYLWxMGko31i2do8DlnfcggW2qOWNgYzJ_dVGAMaja0BKTEVLSaK4w8AJFS6qyKXwTSAiqCDNj9ywZOgHuPJ-s9NUcEFoO0mj2m9dCE8KYzWz1bka5fuYADb7tKjxJ94FCYu8Up-w7SGlTyRpYn0w2OLu0a3YEbMzmaSt2WJXkzUzx8YEXhLqbf4FixTRmdchzD8WVupThpYtg5ukRK49RzEtkX-YcHdNt0y5CfzUqYDszcayO9hNFnayJP_iCS5-8tmmZShrIjCYNIcXhPHs3-NPnygZs4hnpaEAIxahiHEMk0nknmyY5Y7IpYZswuqGtXwzgS1sjqMlMtknQn7dbDHnAMUn6V0QjuAKEwTbdovVPpSed9sMZ7y-8kvG1Iz9NouyXZ2WuamIYaPYU8eiBuix5F1ja8DJSrXnA9Ld3VZZv5nOjXLXvQbGTVaTnDx-K4M3pDRAk_t2UkvqXvLQHIU6QKfBVfLs8iygRS8SbEbVi0fZI-zU9lA25iAX0wCICKA3h8N7x1QWTS9b8mfnFA0NHHUyeL6YDbuaQfpEnJXaDSraSmtq_9v0OAeHW1Jntd0Ed8DBljo8shfuvgLcMJ-1Hb0oV-0J96AugqWP_joEaIIKyYzLRKNKH6-TJmdqwQcuqbLJhvsuuhap4rJm8tqyE2WKYpXua_5peIiGsGSjbxQn_Y9ppOBvO1oZoxM9uqvvM5gQdLXhTjf_0pAudXNQBpYPXwfM0PIEhhDappkHTAyF3RsBYFvP-C0HLxP4DMAZYS82v_4os_zNeIV3LiSlsjxPvfxD2RDg_PvJwtANb0F1_Dk_IhD18JDGFFuX0-f7Yv9i16p32F1DRcR3_K2XFcnLTuuZlkeODURJi9RLWKnVfRuw4yhFFyCCcyEPnpaxO3cqpmPnxRKMGXu3CbJU9hFA4kzzhgSmwFp3jpgoeVT5b97jwNx6-OFm65-4zUiwcYHahKKTp_P-owi1droC3S4zl1t7R7HNJnVPgazRMRMziA7jVWkJiOFCJbtfeXxSnieLEyGOjOVC1CnpjnXTj9remvm38HlwAHJAdjPq3osiiU8RBxDke62VAR7akVcpKyLlen1ZNKtQ3xMZzv5zvMxa7rXI6_OmjsLGtamrgO5BDZITPXrmWTs8mzp19SF3hxFxvXI3JSutZHncS10HQzojFf86uKI-LrxTwxsVaIz3Sf_FmT29d9x1nYGN2fj9RpLNfrBcWSqPJHxVTWrTNe0l8cyeEm2P-ieTR4cdMirU0AwV45IsbCKbiasft10zlgT_Kh2hUJJKBlZhL-PwqVva9tMaMVgqDYZGHqxp0PkukGYN4ErXXs_5y81_aQdPTlKRtxu2BIgs8CSlWusnQ1m_1nZyUSSsb4J2Vlg7vJWWusZLMAr6aIGzDq0FdT02hAFPFGhCDPdMsD_yX473oQKMcxfPzo8p8ScP4Q==\",\n      \"summary\": []\n    },\n    {\n      \"id\": \"rs_0fc6088f6d9a3963016ab37db8e47c87d0ba64818c5fd9b192\",\n      \"type\": \"reasoning\",\n      \"content\": [],\n      \"encrypted_content\": \"gAAAAABqs33BaXqSR05t40Bo1NU1fqPPocXrX57EDhVEWi1fTpsvKP4ZBCEkTgGkZ3d78XWtBdHgIV7VqBxs44B44jmYv2k7V1LlwFO4uCoxZzOkR83fNTmGkbVT4jM-ZM7PTdoaIKTkL0S-5dQQjd8fjNjfF-3nOzEdf0ZVz58fDmMaN2_tCf0OvZyoVMm_DJ-QGFgmCY_Pm6Gd5wISidKJ_Wc3JRHFBtd-3MiW1P2h31zcfg_G9I1onZBD-kJ9LfIaQoNzYN02-PdgqZ7aShH77AS6BAlPBYip3otRUd8ND6d6S3brkU6V_TIqK7MkQb8OwUnvDYkr7IeaQ1XTgafssBduMEBCEJtYrpc3cM5NKRYIbITnGbe5LerWUlqUTXMgWTXZAw1SPBl77O6jjFLW7KxZeO5cY6XstlWK22V3XMdkk46aFYukbspkwznhaZJT6uApfeh3V9A12vtyPyt83EB3wGYofYXnFqnZ8RVtIjuJsT7fOqBOORVTAJt6TwpfeuVkcW-Pm4g3TISZsptjrB9HkCXo9nlpE35n3xW_hObK93sMxA5bCznOJqO40dJ528SVuVZe-uMzBWNTZv0Pm0kYZRl1zz_u6TEHuDZz1ZktMzsea7GT3okgyOsE169BFSppso8Ur-biiNSVhGPuSlTMAZw6ydkFpy6v7AreeoeNYrKEOJP8bSS4DvuJTWL3Oo-S3PV0b7vbaenZ-92ImHfpG7h0e0KwpyQJXrowrQnn5KDQjgIUsPHA0LkX2az_ydb0yZoSflqz2lOd9RdxfPXx4z2vXHn5Jmz5cvvZWOtw1FOvXIea2Fy_sStX6EmlSTJ1eMR20vTUVNztGsBBrvfGlRAFRRD-fj9L46HNXRxVSuOP6rVcvEOw8yJodecC_W99sOz8H3WPAj2WFhwTjeI_8SYYvz22J1mOX8pe3JFuVzDYEjHe3BdvotbMWeI54XcKqIKDsL9h9Px8hXuesP9DHE-oqZFLKCz9gV0UXp6Vo_aXA2xb2pI3A-SAGLtA1W585CJccQ1R_EqCfv65iqu2VFovLPtmMv9atgxWTkKUxkaPcRHOafALRJVj6d0uKRoU-VsTe9vuXXc1kqy8Jc8nxy5QrtFkmGdCtE1udUaPINKe5iMI15tH1EMIsN23SbsrQPcf3qaSjsPOBOympCG9K19aL0Q5JFqgzdyx3sel6X5hr4SU1wy0QOurJFJKxsMQ7n8gPWQYqLbrBjKFKV5obs3czsNgpEX4IyqbDP562xGwAinu1bXrAoJ_tLOb245dxTDnpv_5eLaRY384o_VJMnp_1XZpk84bzIJz2q6oS561MXfrb_-YizkC0ywdSeJu4uCM_fQN9xbDiKYyUdNEIf8kitQ-w6Hahe_VX7pZALrdNmuIS7s09oT3Duo-inagRMcOy0q9fROwgaPC9IrS-ZsuIr743vqex69umTll5H0kqviNHny4AlRyiVZfiXS_vsdv3kvLk76iGxOATvuhaXnYTKDGw0uGqQGSyBAF90NEgmP6iQTnn_X1Z7IhjQHekVwJ\",\n      \"summary\": []\n    },\n    {\n      \"id\": \"msg_0fc6088f6d9a3963016ab37db9e0b487d0a83559592e05cd9b\",\n      \"type\": \"message\",\n      \"status\": \"completed\",\n      \"content\": [\n        {\n          \"type\": \"output_text\",\n          \"annotations\": [],\n          \"logprobs\": [],\n          \"text\": \"{\\\"schemaVersion\\\":\\\"distant-connection-comparison-index-response-v001\\\",\\\"candidates\\\":[{\\\"anchorIndex\\\":89,\\\"firstPartUtteranceIndexes\\\":[126,128],\\\"secondPartUtteranceIndexes\\\":[219],\\\"addedUnderstanding\\\":\\\"Discordでオリジナル球種の作り方を尋ねたあと、リリカからフォークが強いという助言が届き、相談が具体的に前進する。\\\",\\\"direction\\\":\\\"past\\\"},{\\\"anchorIndex\\\":20,\\\"firstPartUtteranceIndexes\\\":[97],\\\"secondPartUtteranceIndexes\\\":[209,210,212],\\\"addedUnderstanding\\\":\\\"フブちゃん一択か迷っていた問いが、他の投手との役割を踏まえた議論の末に「フブちゃんでいこう」と決まる。\\\",\\\"direction\\\":\\\"future\\\"},{\\\"anchorIndex\\\":14,\\\"firstPartUtteranceIndexes\\\":[91,92],\\\"secondPartUtteranceIndexes\\\":[391],\\\"addedUnderstanding\\\":\\\"フブちゃんの既存球種を伸ばし直すべきか悩んだ末、オリジナル球種を作って実際に習得させる展開になる。\\\",\\\"direction\\\":\\\"future\\\"},{\\\"anchorIndex\\\":142,\\\"firstPartUtteranceIndexes\\\":[328],\\\"secondPartUtteranceIndexes\\\":[391,392],\\\"addedUnderstanding\\\":\\\"フブちゃんの技をイメージして名付けた「スーパーノヴァ」が、後にフブちゃんの新球種として完成し、本人が投げる。\\\",\\\"direction\\\":\\\"future\\\"},{\\\"anchorIndex\\\":319,\\\"firstPartUtteranceIndexes\\\":[650],\\\"secondPartUtteranceIndexes\\\":[683,687,688],\\\"addedUnderstanding\\\":\\\"1点を確実に取るべきか迷って転がす案を考えたあと、センター返しを選び、実際に1点を取る。\\\",\\\"direction\\\":\\\"future\\\"},{\\\"anchorIndex\\\":299,\\\"firstPartUtteranceIndexes\\\":[606],\\\"secondPartUtteranceIndexes\\\":[626,627],\\\"addedUnderstanding\\\":\\\"甲子園到着時に漏れそうだと騒いでかかとで押さえた話を、あとで「漏らしてない」と必死に念押しする。\\\",\\\"direction\\\":\\\"past\\\"},{\\\"anchorIndex\\\":547,\\\"firstPartUtteranceIndexes\\\":[391,392],\\\"secondPartUtteranceIndexes\\\":[1003,1004],\\\"addedUnderstanding\\\":\\\"苦労してフブちゃんに覚えさせたスーパーノヴァが、甲子園の試合で相手に打たれる場面までつながる。\\\",\\\"direction\\\":\\\"past\\\"},{\\\"anchorIndex\\\":649,\\\"firstPartUtteranceIndexes\\\":[1196,1201,1202],\\\"secondPartUtteranceIndexes\\\":[1204],\\\"addedUnderstanding\\\":\\\"勝つにはリスクを取るしかないかと悩み、送りバントも候補にした直後、実際にセーフになる。\\\",\\\"direction\\\":\\\"past\\\"},{\\\"anchorIndex\\\":707,\\\"firstPartUtteranceIndexes\\\":[483,492],\\\"secondPartUtteranceIndexes\\\":[1261,1262],\\\"addedUnderstanding\\\":\\\"甲子園で絶対勝つと宣言し、勝ったら選手を許すと言ったあと、苦しい試合を実際に勝ち切る。\\\",\\\"direction\\\":\\\"past\\\"}]}\"\n        }\n      ],\n      \"phase\": \"final_answer\",\n      \"role\": \"assistant\"\n    }\n  ],\n  \"parallel_tool_calls\": true,\n  \"presence_penalty\": 0,\n  \"previous_response_id\": null,\n  \"prompt_cache_key\": null,\n  \"prompt_cache_retention\": \"24h\",\n  \"reasoning\": {\n    \"context\": \"all_turns\",\n    \"effort\": \"medium\",\n    \"mode\": \"standard\",\n    \"summary\": null\n  },\n  \"safety_identifier\": null,\n  \"service_tier\": \"default\",\n  \"store\": false,\n  \"temperature\": 1,\n  \"text\": {\n    \"format\": {\n      \"type\": \"json_schema\",\n      \"description\": null,\n      \"name\": \"distant_connection_comparison_index_response_v001\",\n      \"schema\": {\n        \"type\": \"object\",\n        \"additionalProperties\": false,\n        \"required\": [\n          \"schemaVersion\",\n          \"candidates\"\n        ],\n        \"properties\": {\n          \"schemaVersion\": {\n            \"type\": \"string\",\n            \"const\": \"distant-connection-comparison-index-response-v001\"\n          },\n          \"candidates\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"object\",\n              \"additionalProperties\": false,\n              \"required\": [\n                \"anchorIndex\",\n                \"firstPartUtteranceIndexes\",\n                \"secondPartUtteranceIndexes\",\n                \"addedUnderstanding\",\n                \"direction\"\n              ],\n              \"properties\": {\n                \"anchorIndex\": {\n                  \"type\": \"integer\",\n                  \"minimum\": 0,\n                  \"maximum\": 740\n                },\n                \"firstPartUtteranceIndexes\": {\n                  \"type\": \"array\",\n                  \"minItems\": 1,\n                  \"items\": {\n                    \"type\": \"integer\",\n                    \"minimum\": 0,\n                    \"maximum\": 1322\n                  }\n                },\n                \"secondPartUtteranceIndexes\": {\n                  \"type\": \"array\",\n                  \"minItems\": 1,\n                  \"items\": {\n                    \"type\": \"integer\",\n                    \"minimum\": 0,\n                    \"maximum\": 1322\n                  }\n                },\n                \"addedUnderstanding\": {\n                  \"type\": \"string\",\n                  \"minLength\": 1\n                },\n                \"direction\": {\n                  \"type\": \"string\",\n                  \"enum\": [\n                    \"past\",\n                    \"future\"\n                  ]\n                }\n              }\n            }\n          }\n        }\n      },\n      \"strict\": true\n    },\n    \"verbosity\": \"medium\"\n  },\n  \"tool_choice\": \"auto\",\n  \"tool_usage\": {\n    \"image_gen\": {\n      \"input_tokens\": 0,\n      \"input_tokens_details\": {\n        \"image_tokens\": 0,\n        \"text_tokens\": 0\n      },\n      \"output_tokens\": 0,\n      \"output_tokens_details\": {\n        \"image_tokens\": 0,\n        \"text_tokens\": 0\n      },\n      \"total_tokens\": 0\n    },\n    \"web_search\": {\n      \"num_requests\": 0\n    }\n  },\n  \"tools\": [],\n  \"top_logprobs\": 0,\n  \"top_p\": 0.98,\n  \"truncation\": \"disabled\",\n  \"usage\": {\n    \"input_tokens\": 97818,\n    \"input_tokens_details\": {\n      \"cache_write_tokens\": 97815,\n      \"cached_tokens\": 0\n    },\n    \"output_tokens\": 4410,\n    \"output_tokens_details\": {\n      \"reasoning_tokens\": 3692\n    },\n    \"total_tokens\": 102228\n  },\n  \"user\": null,\n  \"metadata\": {}\n}\n",
+      "result": {
+        "id": "openai-gpt-6-luna",
+        "model": "gpt-6-luna",
+        "httpStatus": 200,
+        "elapsedMs": 47099.240957999995,
+        "automaticRetry": false,
+        "validation": "passed",
+        "validationError": null,
+        "usage": {
+          "input_tokens": 97818,
+          "input_tokens_details": {
+            "cache_write_tokens": 97815,
+            "cached_tokens": 0
+          },
+          "output_tokens": 4410,
+          "output_tokens_details": {
+            "reasoning_tokens": 3692
+          },
+          "total_tokens": 102228
+        },
+        "answer": {
+          "schemaVersion": "distant-connection-comparison-index-response-v001",
+          "candidates": [
+            {
+              "anchorIndex": 89,
+              "firstPartUtteranceIndexes": [
+                126,
+                128
+              ],
+              "secondPartUtteranceIndexes": [
+                219
+              ],
+              "addedUnderstanding": "Discordでオリジナル球種の作り方を尋ねたあと、リリカからフォークが強いという助言が届き、相談が具体的に前進する。",
+              "direction": "past"
+            },
+            {
+              "anchorIndex": 20,
+              "firstPartUtteranceIndexes": [
+                97
+              ],
+              "secondPartUtteranceIndexes": [
+                209,
+                210,
+                212
+              ],
+              "addedUnderstanding": "フブちゃん一択か迷っていた問いが、他の投手との役割を踏まえた議論の末に「フブちゃんでいこう」と決まる。",
+              "direction": "future"
+            },
+            {
+              "anchorIndex": 14,
+              "firstPartUtteranceIndexes": [
+                91,
+                92
+              ],
+              "secondPartUtteranceIndexes": [
+                391
+              ],
+              "addedUnderstanding": "フブちゃんの既存球種を伸ばし直すべきか悩んだ末、オリジナル球種を作って実際に習得させる展開になる。",
+              "direction": "future"
+            },
+            {
+              "anchorIndex": 142,
+              "firstPartUtteranceIndexes": [
+                328
+              ],
+              "secondPartUtteranceIndexes": [
+                391,
+                392
+              ],
+              "addedUnderstanding": "フブちゃんの技をイメージして名付けた「スーパーノヴァ」が、後にフブちゃんの新球種として完成し、本人が投げる。",
+              "direction": "future"
+            },
+            {
+              "anchorIndex": 319,
+              "firstPartUtteranceIndexes": [
+                650
+              ],
+              "secondPartUtteranceIndexes": [
+                683,
+                687,
+                688
+              ],
+              "addedUnderstanding": "1点を確実に取るべきか迷って転がす案を考えたあと、センター返しを選び、実際に1点を取る。",
+              "direction": "future"
+            },
+            {
+              "anchorIndex": 299,
+              "firstPartUtteranceIndexes": [
+                606
+              ],
+              "secondPartUtteranceIndexes": [
+                626,
+                627
+              ],
+              "addedUnderstanding": "甲子園到着時に漏れそうだと騒いでかかとで押さえた話を、あとで「漏らしてない」と必死に念押しする。",
+              "direction": "past"
+            },
+            {
+              "anchorIndex": 547,
+              "firstPartUtteranceIndexes": [
+                391,
+                392
+              ],
+              "secondPartUtteranceIndexes": [
+                1003,
+                1004
+              ],
+              "addedUnderstanding": "苦労してフブちゃんに覚えさせたスーパーノヴァが、甲子園の試合で相手に打たれる場面までつながる。",
+              "direction": "past"
+            },
+            {
+              "anchorIndex": 649,
+              "firstPartUtteranceIndexes": [
+                1196,
+                1201,
+                1202
+              ],
+              "secondPartUtteranceIndexes": [
+                1204
+              ],
+              "addedUnderstanding": "勝つにはリスクを取るしかないかと悩み、送りバントも候補にした直後、実際にセーフになる。",
+              "direction": "past"
+            },
+            {
+              "anchorIndex": 707,
+              "firstPartUtteranceIndexes": [
+                483,
+                492
+              ],
+              "secondPartUtteranceIndexes": [
+                1261,
+                1262
+              ],
+              "addedUnderstanding": "甲子園で絶対勝つと宣言し、勝ったら選手を許すと言ったあと、苦しい試合を実際に勝ち切る。",
+              "direction": "past"
+            }
+          ]
+        },
+        "estimatedStandardUsd": 0.014432174999999998
+      }
+    },
+    {
+      "intent": {
+        "mode": "gemini-video",
+        "model": "gemini-3.5-flash",
+        "requestSha256": "586a825e2a22fb50e4cd67b0143f3a11fa963e84959b1e1703da10509d41e664",
+        "startedAt": "2026-09-23T07:20:28.864Z",
+        "retry": 0,
+        "requestShapeChanged": []
+      },
+      "rawSha256": "5ab823279dfeb093315db9c0eaeb09f5b134f07c3d3341469774234344c2db6e",
+      "rawText": "{\n  \"sdkHttpResponse\": {\n    \"headers\": {\n      \"alt-svc\": \"h3=\\\":443\\\"; ma=2592000,h3-29=\\\":443\\\"; ma=2592000\",\n      \"content-encoding\": \"gzip\",\n      \"content-type\": \"application/json; charset=UTF-8\",\n      \"date\": \"Wed, 23 Sep 2026 07:20:46 GMT\",\n      \"server\": \"scaffolding on HTTPServer2\",\n      \"server-timing\": \"gfet4t7; dur=15064\",\n      \"transfer-encoding\": \"chunked\",\n      \"vary\": \"Origin, X-Origin, Referer\",\n      \"x-content-type-options\": \"nosniff\",\n      \"x-frame-options\": \"SAMEORIGIN\",\n      \"x-gemini-service-tier\": \"standard\",\n      \"x-xss-protection\": \"0\"\n    }\n  },\n  \"candidates\": [\n    {\n      \"content\": {\n        \"parts\": [\n          {\n            \"text\": \"{\\n  \\\"title\\\": \\\"マリン船長の片付け事情と無意識の脱衣癖\\\",\\n  \\\"hookText\\\": \\\"片付けあるある？と思いきや、最後に衝撃の事実が…\\\",\\n  \\\"renderSegments\\\": [\\n    {\\n      \\\"role\\\": \\\"本編\\\",\\n      \\\"caption\\\": \\\"片付け中に他のことをやり始めちゃう話\\\",\\n      \\\"screenLayoutId\\\": \\\"speaker_only\\\",\\n      \\\"layoutReason\\\": \\\"画面右側に大きく表示されている話者（宝鐘マリン）がメインの視覚対象であり、左側のコメント欄や装飾は場面理解に必須の独立映像ではないため、話者単体のレイアウトが最適と判断しました。\\\",\\n      \\\"detections\\\": {\\n        \\\"speaker\\\": {\\n          \\\"face\\\": [100, 620, 550, 880],\\n          \\\"body\\\": [40, 520, 1000, 1000]\\n        }\\n      }\\n    }\\n  ],\\n  \\\"telopPlan\\\": [\\n    {\\n      \\\"sourceSpeechIds\\\": [1, 2, 3],\\n      \\\"text\\\": \\\"何かやってる最中でも、違うことが気になったらやり始めちゃう。これやばいよね\\\",\\n      \\\"role\\\": \\\"話者の特徴的な癖の告白\\\"\\n    },\\n    {\\n      \\\"sourceSpeechIds\\\": [4, 5, 6],\\n      \\\"text\\\": \\\"最近引っ越しで片付けてるんだけど、最中に「そうだ、あれやらないと」ってやり始めるから…\\\",\\n      \\\"role\\\": \\\"具体的なエピソード\\\"\\n    },\\n    {\\n      \\\"sourceSpeechIds\\\": [7, 8],\\n      \\\"text\\\": \\\"あっちこっちに30%だけ進んだものが大量にあって、ぐるぐる回りながら片付けていくの\\\",\\n      \\\"role\\\": \\\"カオスな片付け状況の説明\\\"\\n    },\\n    {\\n      \\\"sourceSpeechIds\\\": [9, 10, 11, 12],\\n      \\\"text\\\": \\\"でもね結局全部片付くの！あれもこれもってやってるうちに一応全部綺麗にはなるんだけど…\\\",\\n      \\\"role\\\": \\\"一応の解決と弁明\\\"\\n    },\\n    {\\n      \\\"sourceSpeechIds\\\": [13, 14],\\n      \\\"text\\\": \\\"やりかけで色んなことやり始めちゃう。困ったもんです\\\",\\n      \\\"role\\\": \\\"自身の行動に対する呆れ\\\"\\n    },\\n    {\\n      \\\"sourceSpeechIds\\\": [15, 16],\\n      \\\"text\\\": \\\"…え、なんか無意識にまた服脱いでたんだけど！？寒っ！着直そう…\\\",\\n      \\\"role\\\": \\\"突然気付いた衝撃の無意識行動\\\"\\n    }\\n  ]\\n}\",\n            \"thoughtSignature\": \"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\"\n          }\n        ],\n        \"role\": \"model\"\n      },\n      \"finishReason\": \"STOP\",\n      \"index\": 0\n    }\n  ],\n  \"modelVersion\": \"gemini-3.5-flash\",\n  \"responseId\": \"v32zaqjyJIaVvr0PhZL3yAw\",\n  \"usageMetadata\": {\n    \"promptTokenCount\": 7056,\n    \"candidatesTokenCount\": 621,\n    \"totalTokenCount\": 9772,\n    \"promptTokensDetails\": [\n      {\n        \"modality\": \"VIDEO\",\n        \"tokenCount\": 4722\n      },\n      {\n        \"modality\": \"TEXT\",\n        \"tokenCount\": 2334\n      }\n    ],\n    \"thoughtsTokenCount\": 2095,\n    \"serviceTier\": \"standard\"\n  }\n}\n",
+      "result": {
+        "id": "gemini-video-gemini-3.5-flash",
+        "model": "gemini-3.5-flash",
+        "httpStatus": null,
+        "elapsedMs": 15312.374291,
+        "automaticRetry": false,
+        "validation": "passed",
+        "validationError": null,
+        "usage": {
+          "promptTokenCount": 7056,
+          "candidatesTokenCount": 621,
+          "totalTokenCount": 9772,
+          "promptTokensDetails": [
+            {
+              "modality": "VIDEO",
+              "tokenCount": 4722
+            },
+            {
+              "modality": "TEXT",
+              "tokenCount": 2334
+            }
+          ],
+          "thoughtsTokenCount": 2095,
+          "serviceTier": "standard"
+        },
+        "answer": {
+          "title": "マリン船長の片付け事情と無意識の脱衣癖",
+          "hookText": "片付けあるある？と思いきや、最後に衝撃の事実が…",
+          "renderSegments": [
+            {
+              "role": "本編",
+              "caption": "片付け中に他のことをやり始めちゃう話",
+              "screenLayoutId": "speaker_only",
+              "layoutReason": "画面右側に大きく表示されている話者（宝鐘マリン）がメインの視覚対象であり、左側のコメント欄や装飾は場面理解に必須の独立映像ではないため、話者単体のレイアウトが最適と判断しました。",
+              "detections": {
+                "speaker": {
+                  "face": [
+                    100,
+                    620,
+                    550,
+                    880
+                  ],
+                  "body": [
+                    40,
+                    520,
+                    1000,
+                    1000
+                  ]
+                }
+              }
+            }
+          ],
+          "telopPlan": [
+            {
+              "sourceSpeechIds": [
+                1,
+                2,
+                3
+              ],
+              "text": "何かやってる最中でも、違うことが気になったらやり始めちゃう。これやばいよね",
+              "role": "話者の特徴的な癖の告白"
+            },
+            {
+              "sourceSpeechIds": [
+                4,
+                5,
+                6
+              ],
+              "text": "最近引っ越しで片付けてるんだけど、最中に「そうだ、あれやらないと」ってやり始めるから…",
+              "role": "具体的なエピソード"
+            },
+            {
+              "sourceSpeechIds": [
+                7,
+                8
+              ],
+              "text": "あっちこっちに30%だけ進んだものが大量にあって、ぐるぐる回りながら片付けていくの",
+              "role": "カオスな片付け状況の説明"
+            },
+            {
+              "sourceSpeechIds": [
+                9,
+                10,
+                11,
+                12
+              ],
+              "text": "でもね結局全部片付くの！あれもこれもってやってるうちに一応全部綺麗にはなるんだけど…",
+              "role": "一応の解決と弁明"
+            },
+            {
+              "sourceSpeechIds": [
+                13,
+                14
+              ],
+              "text": "やりかけで色んなことやり始めちゃう。困ったもんです",
+              "role": "自身の行動に対する呆れ"
+            },
+            {
+              "sourceSpeechIds": [
+                15,
+                16
+              ],
+              "text": "…え、なんか無意識にまた服脱いでたんだけど！？寒っ！着直そう…",
+              "role": "突然気付いた衝撃の無意識行動"
+            }
+          ]
+        },
+        "plan": null,
+        "estimatedStandardUsd": 0.035028
+      }
+    },
+    {
+      "intent": {
+        "mode": "gemini-video",
+        "model": "gemini-3.8-flash",
+        "requestSha256": "1353569319648c40eee7f2e5ff0f6ebbc04860e21ec4be5460a2940a208371b0",
+        "startedAt": "2026-09-23T07:21:14.681Z",
+        "retry": 0,
+        "requestShapeChanged": []
+      },
+      "rawSha256": "ddf9458c199310c30e75eca60fd9d8585778df39f3d6910117a295f269f3626e",
+      "rawText": "{\n  \"sdkHttpResponse\": {\n    \"headers\": {\n      \"alt-svc\": \"h3=\\\":443\\\"; ma=2592000,h3-29=\\\":443\\\"; ma=2592000\",\n      \"content-encoding\": \"gzip\",\n      \"content-type\": \"application/json; charset=UTF-8\",\n      \"date\": \"Wed, 23 Sep 2026 07:21:23 GMT\",\n      \"server\": \"scaffolding on HTTPServer2\",\n      \"server-timing\": \"gfet4t7; dur=6754\",\n      \"transfer-encoding\": \"chunked\",\n      \"vary\": \"Origin, X-Origin, Referer\",\n      \"x-content-type-options\": \"nosniff\",\n      \"x-frame-options\": \"SAMEORIGIN\",\n      \"x-gemini-service-tier\": \"standard\",\n      \"x-xss-protection\": \"0\"\n    }\n  },\n  \"candidates\": [\n    {\n      \"content\": {\n        \"parts\": [\n          {\n            \"text\": \"{\\n  \\\"title\\\": \\\"マリンの片付け事情と無意識の脱衣癖\\\",\\n  \\\"hookText\\\": \\\"片付け中に別のことを始めちゃう船長\\\",\\n  \\\"renderSegments\\\": [\\n    {\\n      \\\"role\\\": \\\"本編\\\",\\n      \\\"caption\\\": \\\"あっちこっち手をつけて片付ける船長\\\",\\n      \\\"screenLayoutId\\\": \\\"speaker_only\\\",\\n      \\\"layoutReason\\\": \\\"コメント欄や告知画像が配置された雑談配信画面であり、内容理解に必須な独立画面はないため話者単独のレイアウトを選択。\\\",\\n      \\\"detections\\\": {\\n        \\\"speaker\\\": {\\n          \\\"face\\\": [54, 611, 480, 995],\\n          \\\"body\\\": [54, 532, 1000, 1000]\\n        }\\n      }\\n    }\\n  ],\\n  \\\"telopPlan\\\": [\\n    {\\n      \\\"sourceSpeechIds\\\": [1, 2, 3],\\n      \\\"text\\\": \\\"何かやってる最中に違うことが気になったら始めちゃうんだよね\\\",\\n      \\\"role\\\": \\\"テーマ提起\\\"\\n    },\\n    {\\n      \\\"sourceSpeechIds\\\": [4, 5, 6],\\n      \\\"text\\\": \\\"最近の引っ越しで片付けてる最中に「あれやらないと」って思ったら\\\",\\n      \\\"role\\\": \\\"エピソード導入\\\"\\n    },\\n    {\\n      \\\"sourceSpeechIds\\\": [7, 8],\\n      \\\"text\\\": \\\"30%だけ進んだものが大量にあって ぐるぐる回りながら片付けていくの\\\",\\n      \\\"role\\\": \\\"状況説明\\\"\\n    },\\n    {\\n      \\\"sourceSpeechIds\\\": [9, 10, 11, 12],\\n      \\\"text\\\": \\\"でも「あれもこれも」ってやってるうちに一応全部片付きはするの\\\",\\n      \\\"role\\\": \\\"弁解\\\"\\n    },\\n    {\\n      \\\"sourceSpeechIds\\\": [13, 14],\\n      \\\"text\\\": \\\"綺麗にはなるけどやりかけで色々始めちゃう 困ったもんです\\\",\\n      \\\"role\\\": \\\"オチ\\\"\\n    },\\n    {\\n      \\\"sourceSpeechIds\\\": [15, 16],\\n      \\\"text\\\": \\\"え、なんか無意識にまた服脱いでたけど…寒い！着よ！\\\",\\n      \\\"role\\\": \\\"追加のハプニング\\\"\\n    }\\n  ]\\n}\",\n            \"thoughtSignature\": \"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\"\n          }\n        ],\n        \"role\": \"model\"\n      },\n      \"finishReason\": \"STOP\",\n      \"index\": 0\n    }\n  ],\n  \"modelVersion\": \"gemini-3.8-flash\",\n  \"responseId\": \"7X2zaov0IurV9tMPqPm3gQk\",\n  \"usageMetadata\": {\n    \"promptTokenCount\": 7056,\n    \"candidatesTokenCount\": 548,\n    \"totalTokenCount\": 8083,\n    \"promptTokensDetails\": [\n      {\n        \"modality\": \"VIDEO\",\n        \"tokenCount\": 4722\n      },\n      {\n        \"modality\": \"TEXT\",\n        \"tokenCount\": 2334\n      }\n    ],\n    \"thoughtsTokenCount\": 479,\n    \"serviceTier\": \"standard\"\n  }\n}\n",
+      "result": {
+        "id": "gemini-video-gemini-3.8-flash",
+        "model": "gemini-3.8-flash",
+        "httpStatus": null,
+        "elapsedMs": 7059.258833,
+        "automaticRetry": false,
+        "validation": "passed",
+        "validationError": null,
+        "usage": {
+          "promptTokenCount": 7056,
+          "candidatesTokenCount": 548,
+          "totalTokenCount": 8083,
+          "promptTokensDetails": [
+            {
+              "modality": "VIDEO",
+              "tokenCount": 4722
+            },
+            {
+              "modality": "TEXT",
+              "tokenCount": 2334
+            }
+          ],
+          "thoughtsTokenCount": 479,
+          "serviceTier": "standard"
+        },
+        "answer": {
+          "title": "マリンの片付け事情と無意識の脱衣癖",
+          "hookText": "片付け中に別のことを始めちゃう船長",
+          "renderSegments": [
+            {
+              "role": "本編",
+              "caption": "あっちこっち手をつけて片付ける船長",
+              "screenLayoutId": "speaker_only",
+              "layoutReason": "コメント欄や告知画像が配置された雑談配信画面であり、内容理解に必須な独立画面はないため話者単独のレイアウトを選択。",
+              "detections": {
+                "speaker": {
+                  "face": [
+                    54,
+                    611,
+                    480,
+                    995
+                  ],
+                  "body": [
+                    54,
+                    532,
+                    1000,
+                    1000
+                  ]
+                }
+              }
+            }
+          ],
+          "telopPlan": [
+            {
+              "sourceSpeechIds": [
+                1,
+                2,
+                3
+              ],
+              "text": "何かやってる最中に違うことが気になったら始めちゃうんだよね",
+              "role": "テーマ提起"
+            },
+            {
+              "sourceSpeechIds": [
+                4,
+                5,
+                6
+              ],
+              "text": "最近の引っ越しで片付けてる最中に「あれやらないと」って思ったら",
+              "role": "エピソード導入"
+            },
+            {
+              "sourceSpeechIds": [
+                7,
+                8
+              ],
+              "text": "30%だけ進んだものが大量にあって ぐるぐる回りながら片付けていくの",
+              "role": "状況説明"
+            },
+            {
+              "sourceSpeechIds": [
+                9,
+                10,
+                11,
+                12
+              ],
+              "text": "でも「あれもこれも」ってやってるうちに一応全部片付きはするの",
+              "role": "弁解"
+            },
+            {
+              "sourceSpeechIds": [
+                13,
+                14
+              ],
+              "text": "綺麗にはなるけどやりかけで色々始めちゃう 困ったもんです",
+              "role": "オチ"
+            },
+            {
+              "sourceSpeechIds": [
+                15,
+                16
+              ],
+              "text": "え、なんか無意識にまた服脱いでたけど…寒い！着よ！",
+              "role": "追加のハプニング"
+            }
+          ]
+        },
+        "plan": null,
+        "estimatedStandardUsd": 0.00914325
+      }
+    },
+    {
+      "intent": {
+        "mode": "gemini-layout",
+        "model": "gemini-3.5-flash",
+        "requestSha256": "e321fcb0e6164f1aaaccfb29854cea21592e612a6a1dadf242bb8e0c20fc97d0",
+        "startedAt": "2026-09-23T07:21:33.278Z",
+        "retry": 0,
+        "requestShapeChanged": []
+      },
+      "rawSha256": "006f6e404a43906920beeebb220794b225814573f2148406e9d9e71466b56373",
+      "rawText": "{\n  \"sdkHttpResponse\": {\n    \"headers\": {\n      \"alt-svc\": \"h3=\\\":443\\\"; ma=2592000,h3-29=\\\":443\\\"; ma=2592000\",\n      \"content-encoding\": \"gzip\",\n      \"content-type\": \"application/json; charset=UTF-8\",\n      \"date\": \"Wed, 23 Sep 2026 07:21:39 GMT\",\n      \"server\": \"scaffolding on HTTPServer2\",\n      \"server-timing\": \"gfet4t7; dur=3959\",\n      \"transfer-encoding\": \"chunked\",\n      \"vary\": \"Origin, X-Origin, Referer\",\n      \"x-content-type-options\": \"nosniff\",\n      \"x-frame-options\": \"SAMEORIGIN\",\n      \"x-gemini-service-tier\": \"standard\",\n      \"x-xss-protection\": \"0\"\n    }\n  },\n  \"candidates\": [\n    {\n      \"content\": {\n        \"parts\": [\n          {\n            \"text\": \"{\\n  \\\"renderSegments\\\": [\\n    {\\n      \\\"selectedCandidateId\\\": \\\"screen_speaker_body\\\",\\n      \\\"reason\\\": \\\"話者の顔全体と衣装がバランス良くフレーム内に収まっており、レイアウトが自然であるため。\\\"\\n    }\\n  ]\\n}\",\n            \"thoughtSignature\": \"EvUJCvIJAWkUfRMln7g7E5oRiby9Ktumw5AlzBHgcvYhgEzfD6YXS88vd1mxKVjafs9whpnbzjcS6q2cPwxnK9QXbg8X1AUdYlsr/lCFuyCdnECnfJHAaC6NNieX9xNuYc1iD3nbT8ckNvZyS0io/m673U+tf0YD2mNzGAjuWMAvv/kzISIXAFlgcgDIwLzC4Gl9yc6NNHSv/N08ArBBMF0zjPwtzYuWpwqTTf4arHpBwPGkrhZBVwBiKK/pqWtmS/FTP69s+GCZXb/kCJr3xJtOPZx8arJHrsRktil0tWX4+Xk3u92cwxA5lUoOl2c+TZKcsIqjaBYkDB8wRQS/do1VTeOgT7vLaDMsPOmzFE4DuHkzpf80OgEVtvvFpJoW3aSPaCqoc3rAjREDUbtQi/lIT2vrItL94d5IawWt3OOtkbcIeHZplyhR80kuBJECYhTtw/wk8zRhphtV2ee+qfQi79staMV4dJdOoAgoNltrR7duDttBkXnWNJZWRhkmlLHlt3/CBVOkAYCHeYs0RAEp18m68LAPXXHDMsF7wLOm5gvfBrjeZmqGRcil8X04FfsvZwpvssKXJtVSeOTJc5YNsfIZZtzQk7KNwHvsE9umvBqjGigS7Q9ahaJ9+vatyIDTRt5PwA5umyfrgOXbcMTLW3y1a8cG/DaOZUOFPmgw++tlKOeA8fy89JYze3xe+Iq6wzQCZcEah0DcH/9Zs/zUCY6nhEZYNLxtbzGLqyItXqX/A4itY2B9b5jUypL/o/pGD4fvb8vAIOrqQRWFJizZTCZO4qsnYf/aT4dIGaQWTDDLkvbHmLKJT4WZdNtXPFR49iY9ETUvE/t0C/ssDqgN4NAVHGdtsCD09a6qPIrMC6VaPdzPiZfiz+N56Osxg4QlgWcwyTgXr+xnK/MXaK7Bs4Y0iAKgRXu5FRJu3QkWfiwx4wpDNyjWpPHRUV+uy0zMuOOaPzxERiIt/iqheeai8eqZSWerYK95se6Fo8S0+UJZ7plVS7DBhbsYnojGl00Ts0ZqiXcABFsonpz2GuYqnu9lHcHMmhbSXQQlc5Hqw7pxevcCBCSBs+bjRh5w9hCET3y7KnXdSIeYjyEkr9Ht2HwGWCA3NHyhFBJ93MffkYPjOWmW2wIWzZN//T/Jr9Ztp5E1WAOavRtKInrMSKUlK/IM6s5k6cH6kuUNswYCZE2p3y4Vu3s5J1RLnCxxlkRZupaWEc6xBaPJuGydEjn6L8ukGzTbxf6NvURrCCAdS1i0oHXU90MoSQHO2vj5WtlAeJM5W5QF9uEHY6Rj/Zikvr5o2LLNC5RiOe4q/Cgc1e15UryfUoVBVrJq/lypP0LxkWohSc52IqrANb3TiNoeRYuLYYF0LkjRttgsnm/FzQqXhq/7ibeBzIut3R7GMUGune0y2zg3l1sKcU2hJTzgScAcH9yyhGjNUmoaJErBVAENVVQkYRwzYUo6L78DTrKiP4US7iZqFYmiH0VQU9j5RtsupMjxpPF3LvtuWoNohWwqH+B1raM9sJmm8xXMTCReyj+7DPeej+EJdz1etENKE+hlzByL7IeRcMAImHiiM3AEM6fMnMlaMxmLbv4b08aAdyuFxOZcddKV27N0MrUYeRO5KXzxXsnnmtzxogf2OjCo5nmUs/b2N1Y5U+J6wUOfv3fSCOaSTFZxzpTz9jYnEUbtQRAD\"\n          }\n        ],\n        \"role\": \"model\"\n      },\n      \"finishReason\": \"STOP\",\n      \"index\": 0\n    }\n  ],\n  \"modelVersion\": \"gemini-3.5-flash\",\n  \"responseId\": \"_32zaof5NMqX1e8P6YvS6Qw\",\n  \"usageMetadata\": {\n    \"promptTokenCount\": 2569,\n    \"candidatesTokenCount\": 61,\n    \"totalTokenCount\": 2882,\n    \"promptTokensDetails\": [\n      {\n        \"modality\": \"IMAGE\",\n        \"tokenCount\": 2200\n      },\n      {\n        \"modality\": \"TEXT\",\n        \"tokenCount\": 369\n      }\n    ],\n    \"thoughtsTokenCount\": 252,\n    \"serviceTier\": \"standard\"\n  }\n}\n",
+      "result": {
+        "id": "gemini-layout-gemini-3.5-flash",
+        "model": "gemini-3.5-flash",
+        "httpStatus": null,
+        "elapsedMs": 4162.492208000001,
+        "automaticRetry": false,
+        "validation": "passed",
+        "validationError": null,
+        "usage": {
+          "promptTokenCount": 2569,
+          "candidatesTokenCount": 61,
+          "totalTokenCount": 2882,
+          "promptTokensDetails": [
+            {
+              "modality": "IMAGE",
+              "tokenCount": 2200
+            },
+            {
+              "modality": "TEXT",
+              "tokenCount": 369
+            }
+          ],
+          "thoughtsTokenCount": 252,
+          "serviceTier": "standard"
+        },
+        "answer": {
+          "renderSegments": [
+            {
+              "selectedCandidateId": "screen_speaker_body",
+              "reason": "話者の顔全体と衣装がバランス良くフレーム内に収まっており、レイアウトが自然であるため。"
+            }
+          ]
+        },
+        "plan": {
+          "kind": "edit_plan_json",
+          "mode": "gemini-api-edit-plan",
+          "generatedAt": "2026-09-23T07:21:37.443Z",
+          "selectedThemeId": "candidate-59",
+          "title": "片付け中に脱線しまくるマリン船長の片付け事情",
+          "hookText": "何かやってる最中に別のこと始めちゃう…",
+          "sourceStartMs": 5941162,
+          "sourceEndMs": 5992736,
+          "geminiApiInput": [
+            {
+              "sourceUri": "saved-candidate-59.mp4",
+              "sourceStartMs": 5941162,
+              "sourceEndMs": 5992736,
+              "purpose": "本編: undefined"
+            }
+          ],
+          "renderSegments": [
+            {
+              "sourceStartMs": 5941162,
+              "sourceEndMs": 5992736,
+              "role": "本編",
+              "caption": "マリンのADHD的な片付け事情",
+              "speechIds": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ],
+              "speechUnits": [
+                {
+                  "id": 1,
+                  "sourceStartMs": 5941162,
+                  "sourceEndMs": 5946345,
+                  "text": "あ、さあ船長さあ何かやってる最中でもさあ"
+                },
+                {
+                  "id": 2,
+                  "sourceStartMs": 5946345,
+                  "sourceEndMs": 5948907,
+                  "text": "違うことが気になったらそれやり始めちゃうんだよね"
+                },
+                {
+                  "id": 3,
+                  "sourceStartMs": 5948907,
+                  "sourceEndMs": 5949827,
+                  "text": "これやばいよね"
+                },
+                {
+                  "id": 4,
+                  "sourceStartMs": 5949827,
+                  "sourceEndMs": 5953610,
+                  "text": "なんか最近さあ引っ越しがあってさあ片付けてるんだけど"
+                },
+                {
+                  "id": 5,
+                  "sourceStartMs": 5953610,
+                  "sourceEndMs": 5955951,
+                  "text": "最中にそうだあれやらないとって思ったら"
+                },
+                {
+                  "id": 6,
+                  "sourceStartMs": 5955951,
+                  "sourceEndMs": 5958653,
+                  "text": "やり始めるからあっちこっちで"
+                },
+                {
+                  "id": 7,
+                  "sourceStartMs": 5958653,
+                  "sourceEndMs": 5961675,
+                  "text": "30%だけ進んだものが大量にあって"
+                },
+                {
+                  "id": 8,
+                  "sourceStartMs": 5961675,
+                  "sourceEndMs": 5968359,
+                  "text": "でぐるぐる回りながら一つずつ片付けていくの"
+                },
+                {
+                  "id": 9,
+                  "sourceStartMs": 5968359,
+                  "sourceEndMs": 5969820,
+                  "text": "うんでもね結局全部片付けてる"
+                },
+                {
+                  "id": 10,
+                  "sourceStartMs": 5970002,
+                  "sourceEndMs": 5973064,
+                  "text": "片付けよう1個ずつ片付けていく"
+                },
+                {
+                  "id": 11,
+                  "sourceStartMs": 5973064,
+                  "sourceEndMs": 5975265,
+                  "text": "あ、そうだあれもこれもってやってるうちに"
+                },
+                {
+                  "id": 12,
+                  "sourceStartMs": 5975265,
+                  "sourceEndMs": 5978867,
+                  "text": "1個ずつ片付いていって一応全部片付けはするの"
+                },
+                {
+                  "id": 13,
+                  "sourceStartMs": 5978867,
+                  "sourceEndMs": 5984951,
+                  "text": "綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう"
+                },
+                {
+                  "id": 14,
+                  "sourceStartMs": 5984951,
+                  "sourceEndMs": 5986672,
+                  "text": "困ったもんです"
+                },
+                {
+                  "id": 15,
+                  "sourceStartMs": 5986672,
+                  "sourceEndMs": 5988353,
+                  "text": "え、なんか無意識にまた服脱いでたけど"
+                },
+                {
+                  "id": 16,
+                  "sourceStartMs": 5988353,
+                  "sourceEndMs": 5992736,
+                  "text": "寒い気をこうしてと"
+                }
+              ],
+              "screenLayout": {
+                "screenLayoutId": "screen_speaker",
+                "detections": {
+                  "screen": [
+                    0,
+                    0,
+                    1000,
+                    1000
+                  ],
+                  "speaker": {
+                    "face": [
+                      180,
+                      600,
+                      520,
+                      960
+                    ],
+                    "body": [
+                      150,
+                      520,
+                      1000,
+                      1000
+                    ]
+                  }
+                },
+                "viewports": {
+                  "screen": [
+                    0.18359375,
+                    0,
+                    0.81640625,
+                    1
+                  ],
+                  "speaker": [
+                    0.46210937500000004,
+                    0.14999999999999997,
+                    1,
+                    1
+                  ]
+                },
+                "displaySummary": "画面と話者",
+                "selectedCandidateId": "screen_speaker_body",
+                "candidateSummary": "画面と話者全体",
+                "selectionReason": "話者の顔全体と衣装がバランス良くフレーム内に収まっており、レイアウトが自然であるため。",
+                "candidateOptions": [
+                  {
+                    "id": "screen_speaker_body",
+                    "label": "画面と話者全体",
+                    "reason": "上に画面、下に顔を入れた話者全体を表示する",
+                    "viewports": {
+                      "screen": [
+                        0.18359375,
+                        0,
+                        0.81640625,
+                        1
+                      ],
+                      "speaker": [
+                        0.46210937500000004,
+                        0.14999999999999997,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "id": "screen_speaker_face",
+                    "label": "画面と顔寄せ",
+                    "reason": "上に画面、下に顔の見やすさを優先した話者を表示する",
+                    "viewports": {
+                      "screen": [
+                        0.18359375,
+                        0,
+                        0.81640625,
+                        1
+                      ],
+                      "speaker": [
+                        0.6000000000000001,
+                        0.06555555555555553,
+                        0.9600000000000001,
+                        0.6344444444444444
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "telopPlan": [
+            {
+              "sourceSpeechIds": [
+                1,
+                2,
+                3
+              ],
+              "text": "何かやってる最中に違うことが気になるとやり始めちゃう",
+              "role": "強調"
+            },
+            {
+              "sourceSpeechIds": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "text": "引っ越しの片付け中も30%だけ進んだものが大量発生",
+              "role": "エピソード説明"
+            },
+            {
+              "sourceSpeechIds": [
+                8,
+                9,
+                10
+              ],
+              "text": "ぐるぐる回りながら1個ずつ片付けて一応全部終わる",
+              "role": "状況説明"
+            },
+            {
+              "sourceSpeechIds": [
+                11,
+                12,
+                13,
+                14
+              ],
+              "text": "綺麗にはなるけどやりかけで色々始めちゃう困った性格",
+              "role": "オチ"
+            },
+            {
+              "sourceSpeechIds": [
+                15,
+                16
+              ],
+              "text": "えっ…無意識にまた服脱いでて寒い",
+              "role": "補足・ツッコミ"
+            }
+          ]
+        },
+        "estimatedStandardUsd": 0.0066705
+      }
+    },
+    {
+      "intent": {
+        "mode": "gemini-layout",
+        "model": "gemini-3.8-flash",
+        "requestSha256": "66de6e03702225c0827e07bb89ba68e7790a39287e050a2efb1e524d66d3339c",
+        "startedAt": "2026-09-23T07:21:53.597Z",
+        "retry": 0,
+        "requestShapeChanged": []
+      },
+      "rawSha256": "e7ca35cda942efb4c153251e635b6ffe67772076b6b5fae8414c5a47ebb42864",
+      "rawText": "{\n  \"sdkHttpResponse\": {\n    \"headers\": {\n      \"alt-svc\": \"h3=\\\":443\\\"; ma=2592000,h3-29=\\\":443\\\"; ma=2592000\",\n      \"content-encoding\": \"gzip\",\n      \"content-type\": \"application/json; charset=UTF-8\",\n      \"date\": \"Wed, 23 Sep 2026 07:22:01 GMT\",\n      \"server\": \"scaffolding on HTTPServer2\",\n      \"server-timing\": \"gfet4t7; dur=5439\",\n      \"transfer-encoding\": \"chunked\",\n      \"vary\": \"Origin, X-Origin, Referer\",\n      \"x-content-type-options\": \"nosniff\",\n      \"x-frame-options\": \"SAMEORIGIN\",\n      \"x-gemini-service-tier\": \"standard\",\n      \"x-xss-protection\": \"0\"\n    }\n  },\n  \"candidates\": [\n    {\n      \"content\": {\n        \"parts\": [\n          {\n            \"text\": \"{\\n  \\\"renderSegments\\\": [\\n    {\\n      \\\"selectedCandidateId\\\": \\\"screen_speaker_body\\\",\\n      \\\"reason\\\": \\\"話者の顔と身体のバランスが適切で、構図が自然に見えるため。\\\"\\n    }\\n  ]\\n}\",\n            \"thoughtSignature\": \"Ev8HCvwHAWkUfRNQJutZOlOu/Gl4gvqsp1PIiI67vVyiVn6va7jmHaXx6LT3BM9qjbDojpmU9lSK90/HHBiN/IR+Km/e9XqhGHNnGGJtmKOZFE1UDLTvKvBTaRU9gxdFZE4hXh8DQPl34nqTMEyrtYQTHZ599OJ8bHPNMS71oevnAGfLcYtn09+u7rTZR1jCUCUEj2oQ9gwMvPwDH6bKMy5ied51meYuZktDfY2darUSkuLUl/e4zYj72bwAHpFeVjXNf3KbHReTo83SPSA3rXRmovrvpbpwdCv9Sc60LKhLaX2O16dC7d3UFRX0L+pg12d5I60MnqK4Rb91MpyKPSuMKAeqpfRQvcMMYiQ0WfLVPNJK5zuf4T3Eay7gTHZI8nMuV/ElV+edxTXrpsRjHi1Px8Gjg+E9b1GuXYp/x5KWCuwIZF5y/WKMmGZwz+LcBXThvZlUwUpSJcPC86ZknkLP5ijusWw5LciGATu7LhLA1wxvV/bT4KymqfFvp2db30y9GbvYJjXhd0kl1gcfM84D2SCgMcmXZl/L9FpyFYTOSxOl+WaXIhwH0gm9cYOVyekRKA95MFAJzLtkuymxCP6ePwcm2m8xeP3rRZm6Pxhk36cep+qMLoCVi/bArG8rClgTP4+tStiB4l3jXcW5oOmLEdrhR2+uAh9VAbHgZsy31NROzPj97WFX/hpDZZm118gUZIsHcAVMQICqLVwC0HONm4Hf1ys2k2/Z6dvSomsBJ7cpC+qn3hzIgCntWCChiG9BjyUSh2gdn45vcEyTB8UZaGeAilb6Y8hDdl0yxZCBG6SizA1qHyBNj0+IBN6Sft7dW7CAFI4NwZNumT8DAYRv1RNKkznAW+laxgqy8af6KHs93N55cbTCKFRltP4IWs1NJQyey/F2AlYNyOYGr12iLRHdwT5RAHGL7OHNWnwqhJH0ifrfidsxXhf5mdP+g9KbOlrkzQoLAMKO/A20q7GGEjOSXEaY7jIev4iLi/BcXQid/Ji2TGpYH5zvkXgBbW+j8zKPqMC1Aj7vMytat22Z39rQJmCrQ5FEgO4rV+fpEuEo6Ov1qcWPZdDwm9ItAVIp0OwiHB331PV/iho0EE/7jG3dsOTAZEGM2nmIFyFtazRaKULMdvG2ngarfXM830S0sZPoxty9sb2k6lDD7BXS/BaTZMsk4k+ZAExWOz2qbLnoN4iF9nxNukhZDeThy2KHonW1EEJvQ7CvsIAeKBrSKsON6rZmLn8fcxAevgC2flmSoVQKPaa3oV54bSTrp0xCRY5HVcKeKqcQqYaPFJqb46J+EwUsCHyRWe9jdn2Z9gUqeo3yKYWWhtqQlZWoMZUyT0W8zaEXbW3mINg7VrKE\"\n          }\n        ],\n        \"role\": \"model\"\n      },\n      \"finishReason\": \"STOP\",\n      \"index\": 0\n    }\n  ],\n  \"modelVersion\": \"gemini-3.8-flash\",\n  \"responseId\": \"FH6zaqnzAquA1e8P4svEoQM\",\n  \"usageMetadata\": {\n    \"promptTokenCount\": 2569,\n    \"candidatesTokenCount\": 58,\n    \"totalTokenCount\": 2847,\n    \"promptTokensDetails\": [\n      {\n        \"modality\": \"IMAGE\",\n        \"tokenCount\": 2200\n      },\n      {\n        \"modality\": \"TEXT\",\n        \"tokenCount\": 369\n      }\n    ],\n    \"thoughtsTokenCount\": 220,\n    \"serviceTier\": \"standard\"\n  }\n}\n",
+      "result": {
+        "id": "gemini-layout-gemini-3.8-flash",
+        "model": "gemini-3.8-flash",
+        "httpStatus": null,
+        "elapsedMs": 5572.340291,
+        "automaticRetry": false,
+        "validation": "passed",
+        "validationError": null,
+        "usage": {
+          "promptTokenCount": 2569,
+          "candidatesTokenCount": 58,
+          "totalTokenCount": 2847,
+          "promptTokensDetails": [
+            {
+              "modality": "IMAGE",
+              "tokenCount": 2200
+            },
+            {
+              "modality": "TEXT",
+              "tokenCount": 369
+            }
+          ],
+          "thoughtsTokenCount": 220,
+          "serviceTier": "standard"
+        },
+        "answer": {
+          "renderSegments": [
+            {
+              "selectedCandidateId": "screen_speaker_body",
+              "reason": "話者の顔と身体のバランスが適切で、構図が自然に見えるため。"
+            }
+          ]
+        },
+        "plan": {
+          "kind": "edit_plan_json",
+          "mode": "gemini-api-edit-plan",
+          "generatedAt": "2026-09-23T07:21:59.172Z",
+          "selectedThemeId": "candidate-59",
+          "title": "片付け中に脱線しまくるマリン船長の片付け事情",
+          "hookText": "何かやってる最中に別のこと始めちゃう…",
+          "sourceStartMs": 5941162,
+          "sourceEndMs": 5992736,
+          "geminiApiInput": [
+            {
+              "sourceUri": "saved-candidate-59.mp4",
+              "sourceStartMs": 5941162,
+              "sourceEndMs": 5992736,
+              "purpose": "本編: undefined"
+            }
+          ],
+          "renderSegments": [
+            {
+              "sourceStartMs": 5941162,
+              "sourceEndMs": 5992736,
+              "role": "本編",
+              "caption": "マリンのADHD的な片付け事情",
+              "speechIds": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ],
+              "speechUnits": [
+                {
+                  "id": 1,
+                  "sourceStartMs": 5941162,
+                  "sourceEndMs": 5946345,
+                  "text": "あ、さあ船長さあ何かやってる最中でもさあ"
+                },
+                {
+                  "id": 2,
+                  "sourceStartMs": 5946345,
+                  "sourceEndMs": 5948907,
+                  "text": "違うことが気になったらそれやり始めちゃうんだよね"
+                },
+                {
+                  "id": 3,
+                  "sourceStartMs": 5948907,
+                  "sourceEndMs": 5949827,
+                  "text": "これやばいよね"
+                },
+                {
+                  "id": 4,
+                  "sourceStartMs": 5949827,
+                  "sourceEndMs": 5953610,
+                  "text": "なんか最近さあ引っ越しがあってさあ片付けてるんだけど"
+                },
+                {
+                  "id": 5,
+                  "sourceStartMs": 5953610,
+                  "sourceEndMs": 5955951,
+                  "text": "最中にそうだあれやらないとって思ったら"
+                },
+                {
+                  "id": 6,
+                  "sourceStartMs": 5955951,
+                  "sourceEndMs": 5958653,
+                  "text": "やり始めるからあっちこっちで"
+                },
+                {
+                  "id": 7,
+                  "sourceStartMs": 5958653,
+                  "sourceEndMs": 5961675,
+                  "text": "30%だけ進んだものが大量にあって"
+                },
+                {
+                  "id": 8,
+                  "sourceStartMs": 5961675,
+                  "sourceEndMs": 5968359,
+                  "text": "でぐるぐる回りながら一つずつ片付けていくの"
+                },
+                {
+                  "id": 9,
+                  "sourceStartMs": 5968359,
+                  "sourceEndMs": 5969820,
+                  "text": "うんでもね結局全部片付けてる"
+                },
+                {
+                  "id": 10,
+                  "sourceStartMs": 5970002,
+                  "sourceEndMs": 5973064,
+                  "text": "片付けよう1個ずつ片付けていく"
+                },
+                {
+                  "id": 11,
+                  "sourceStartMs": 5973064,
+                  "sourceEndMs": 5975265,
+                  "text": "あ、そうだあれもこれもってやってるうちに"
+                },
+                {
+                  "id": 12,
+                  "sourceStartMs": 5975265,
+                  "sourceEndMs": 5978867,
+                  "text": "1個ずつ片付いていって一応全部片付けはするの"
+                },
+                {
+                  "id": 13,
+                  "sourceStartMs": 5978867,
+                  "sourceEndMs": 5984951,
+                  "text": "綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう"
+                },
+                {
+                  "id": 14,
+                  "sourceStartMs": 5984951,
+                  "sourceEndMs": 5986672,
+                  "text": "困ったもんです"
+                },
+                {
+                  "id": 15,
+                  "sourceStartMs": 5986672,
+                  "sourceEndMs": 5988353,
+                  "text": "え、なんか無意識にまた服脱いでたけど"
+                },
+                {
+                  "id": 16,
+                  "sourceStartMs": 5988353,
+                  "sourceEndMs": 5992736,
+                  "text": "寒い気をこうしてと"
+                }
+              ],
+              "screenLayout": {
+                "screenLayoutId": "screen_speaker",
+                "detections": {
+                  "screen": [
+                    0,
+                    0,
+                    1000,
+                    1000
+                  ],
+                  "speaker": {
+                    "face": [
+                      180,
+                      600,
+                      520,
+                      960
+                    ],
+                    "body": [
+                      150,
+                      520,
+                      1000,
+                      1000
+                    ]
+                  }
+                },
+                "viewports": {
+                  "screen": [
+                    0.18359375,
+                    0,
+                    0.81640625,
+                    1
+                  ],
+                  "speaker": [
+                    0.46210937500000004,
+                    0.14999999999999997,
+                    1,
+                    1
+                  ]
+                },
+                "displaySummary": "画面と話者",
+                "selectedCandidateId": "screen_speaker_body",
+                "candidateSummary": "画面と話者全体",
+                "selectionReason": "話者の顔と身体のバランスが適切で、構図が自然に見えるため。",
+                "candidateOptions": [
+                  {
+                    "id": "screen_speaker_body",
+                    "label": "画面と話者全体",
+                    "reason": "上に画面、下に顔を入れた話者全体を表示する",
+                    "viewports": {
+                      "screen": [
+                        0.18359375,
+                        0,
+                        0.81640625,
+                        1
+                      ],
+                      "speaker": [
+                        0.46210937500000004,
+                        0.14999999999999997,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "id": "screen_speaker_face",
+                    "label": "画面と顔寄せ",
+                    "reason": "上に画面、下に顔の見やすさを優先した話者を表示する",
+                    "viewports": {
+                      "screen": [
+                        0.18359375,
+                        0,
+                        0.81640625,
+                        1
+                      ],
+                      "speaker": [
+                        0.6000000000000001,
+                        0.06555555555555553,
+                        0.9600000000000001,
+                        0.6344444444444444
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "telopPlan": [
+            {
+              "sourceSpeechIds": [
+                1,
+                2,
+                3
+              ],
+              "text": "何かやってる最中に違うことが気になるとやり始めちゃう",
+              "role": "強調"
+            },
+            {
+              "sourceSpeechIds": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "text": "引っ越しの片付け中も30%だけ進んだものが大量発生",
+              "role": "エピソード説明"
+            },
+            {
+              "sourceSpeechIds": [
+                8,
+                9,
+                10
+              ],
+              "text": "ぐるぐる回りながら1個ずつ片付けて一応全部終わる",
+              "role": "状況説明"
+            },
+            {
+              "sourceSpeechIds": [
+                11,
+                12,
+                13,
+                14
+              ],
+              "text": "綺麗にはなるけどやりかけで色々始めちゃう困った性格",
+              "role": "オチ"
+            },
+            {
+              "sourceSpeechIds": [
+                15,
+                16
+              ],
+              "text": "えっ…無意識にまた服脱いでて寒い",
+              "role": "補足・ツッコミ"
+            }
+          ]
+        },
+        "estimatedStandardUsd": 0.00296925
+      }
+    }
+  ],
+  "historicalOpenAI": {
+    "rawPath": "evals/clip_composition/outputs/work-distant-connection-comparison-luna-b6-candidates-o8rZAhARXAc-v001/attempt-0001/raw-response-v001.json",
+    "rawSha256": "fa9d4e9caaff607ffb24f6b8f785f4efe6b7eaea61264d764e2ca094c8b0901e",
+    "transport": {
+      "schemaVersion": "distant-connection-comparison-luna-b6-transport-v001",
+      "attemptId": "attempt-0001",
+      "apiCallNumber": 1,
+      "automaticRetry": false,
+      "startedAt": "2026-09-01T07:19:19.546Z",
+      "finishedAt": "2026-09-01T07:19:59.016Z",
+      "elapsedMilliseconds": 39463.723207999996,
+      "endpoint": "https://api.openai.com/v1/responses",
+      "requestBinding": {
+        "path": "evals/clip_composition/outputs/work-distant-connection-comparison-input-o8rZAhARXAc-v001/exact-request-v001.json",
+        "schemaVersion": "openai-responses-distant-connection-comparison-request-v001",
+        "fileSha256": "9d40efc855b6620719bccbf416dc34cc3a12838271e3ddabe1c0b17beb083777"
+      },
+      "tokenMeasurementBinding": {
+        "path": "evals/clip_composition/outputs/work-distant-connection-comparison-luna-b5-token-count-o8rZAhARXAc-v001/input-token-count-measurement-v001.json",
+        "schemaVersion": "distant-connection-comparison-luna-b5-token-count-measurement-v001",
+        "fileSha256": "c1af0cd7afccb23ad9464f28363939722e523bf5a02d4f158d2987f0267d7d16"
+      },
+      "rawResponseBinding": {
+        "path": "evals/clip_composition/outputs/work-distant-connection-comparison-luna-b6-candidates-o8rZAhARXAc-v001/attempt-0001/raw-response-v001.json",
+        "schemaVersion": "openai-responses-distant-connection-comparison-raw-v001",
+        "fileSha256": "fa9d4e9caaff607ffb24f6b8f785f4efe6b7eaea61264d764e2ca094c8b0901e",
+        "byteLength": 30724
+      },
+      "http": {
+        "status": 200,
+        "statusText": "OK",
+        "ok": true,
+        "requestId": "req_48b8a0e4486341188279b6dcb70e055c",
+        "openaiProcessingMilliseconds": "38142",
+        "contentType": "application/json",
+        "openaiVersion": "2020-10-01"
+      },
+      "transportError": null,
+      "credentialValuePersisted": false,
+      "rawResponseSavedBeforeInterpretation": true
+    },
+    "usage": {
+      "input_tokens": 97818,
+      "input_tokens_details": {
+        "cache_write_tokens": 97815,
+        "cached_tokens": 0
+      },
+      "output_tokens": 3244,
+      "output_tokens_details": {
+        "reasoning_tokens": 2624
+      },
+      "total_tokens": 101062
+    },
+    "answer": {
+      "schemaVersion": "distant-connection-comparison-index-response-v001",
+      "candidates": [
+        {
+          "anchorIndex": 94,
+          "firstPartUtteranceIndexes": [
+            255,
+            256
+          ],
+          "secondPartUtteranceIndexes": [
+            389,
+            390,
+            391
+          ],
+          "addedUnderstanding": "フブちゃんにオリジナル変化球を覚えさせると決めた迷いが、後半で実際にスーパーノヴァを習得させる実行として回収される。",
+          "direction": "future"
+        },
+        {
+          "anchorIndex": 167,
+          "firstPartUtteranceIndexes": [
+            372
+          ],
+          "secondPartUtteranceIndexes": [
+            386,
+            387,
+            388
+          ],
+          "addedUnderstanding": "カーブは重さより変化を重視して重さを下げるという方針が、投票を経て実際に重さを削った仕様を選ぶ結果につながる。",
+          "direction": "future"
+        },
+        {
+          "anchorIndex": 183,
+          "firstPartUtteranceIndexes": [
+            392
+          ],
+          "secondPartUtteranceIndexes": [
+            939,
+            940,
+            941,
+            945
+          ],
+          "addedUnderstanding": "覚えたばかりのスーパーノヴァをキレキレだと喜んだ直後ではなく、後の試合でその球が打たれ、失点につながる意外な反転が起きる。",
+          "direction": "future"
+        },
+        {
+          "anchorIndex": 269,
+          "firstPartUtteranceIndexes": [
+            492
+          ],
+          "secondPartUtteranceIndexes": [
+            1260,
+            1261,
+            1262
+          ],
+          "addedUnderstanding": "甲子園で勝てば選手たちを許すという宣言が、長い接戦の末に実際の勝利として回収される。",
+          "direction": "future"
+        },
+        {
+          "anchorIndex": 420,
+          "firstPartUtteranceIndexes": [
+            751
+          ],
+          "secondPartUtteranceIndexes": [
+            907,
+            910,
+            918,
+            919,
+            920
+          ],
+          "addedUnderstanding": "向かい風なら打球が飛びにくいという判断が、引っ張った打球が入りそうで入らず本塁打にならない場面で具体的に現れる。",
+          "direction": "future"
+        },
+        {
+          "anchorIndex": 487,
+          "firstPartUtteranceIndexes": [
+            856,
+            857
+          ],
+          "secondPartUtteranceIndexes": [
+            1196,
+            1201,
+            1204
+          ],
+          "addedUnderstanding": "天野の盗塁は危険だという迷いを越えて、後半ではリスクを取らないと勝てない局面で盗塁を選び、実際にセーフになる。",
+          "direction": "future"
+        },
+        {
+          "anchorIndex": 600,
+          "firstPartUtteranceIndexes": [
+            1155
+          ],
+          "secondPartUtteranceIndexes": [
+            1261,
+            1262
+          ],
+          "addedUnderstanding": "ここで1点取れば勝てるという終盤の切迫した見通しが、その後の苦戦と最終的な勝利によって回収される。",
+          "direction": "future"
+        }
+      ]
+    },
+    "estimatedAtCurrentStandardUsd": 0.02834715
+  },
+  "media": {
+    "durationSeconds": 51.566667,
+    "codecs": [
+      "h264 video",
+      "aac audio"
+    ],
+    "usageNote": "Gemini reports combined VIDEO tokens; no separate AUDIO count. The original audio track was sent unchanged."
+  },
+  "pricing": {
+    "checkedAt": "2026-09-23",
+    "unit": "USD per million tokens",
+    "openai": {
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "gpt-5.6-luna": {
+        "input": 0.2,
+        "cacheWrite": 0.25,
+        "cachedInput": 0.02,
+        "outputIncludingReasoning": 1.2
+      },
+      "gpt-6-luna": {
+        "input": 0.1,
+        "cacheWrite": 0.125,
+        "cachedInput": 0.01,
+        "outputIncludingReasoning": 0.5
+      }
+    },
+    "gemini": {
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "gemini-3.5-flash": {
+        "input": 1.5,
+        "outputIncludingThinking": 9
+      },
+      "gemini-3.8-flash": {
+        "input": 0.75,
+        "outputIncludingThinking": 3.75,
+        "through": "2026-12-31",
+        "after20270101": {
+          "input": 1.5,
+          "outputIncludingThinking": 7.5
+        }
+      }
+    },
+    "basis": "Published standard paid-tier estimates, not billing statements; no batch, priority, grounding or explicit cache. OpenAI cache-write counts use the published write premium."
+  },
+  "tests": {
+    "typeCheck": "passed",
+    "uiContract": "passed",
+    "webGeminiReviewScript": "passed",
+    "historicalOpenAIB5B6": {
+      "passed": 22,
+      "failed": 0
+    },
+    "fullAgentScenario": {
+      "status": "blocked-by-existing-fixture",
+      "exitCode": 1,
+      "missing": "runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/transcript.json",
+      "stage": "run_stt, before model invocation",
+      "previousRecord": "docs/reports/main-integration-20260923/README.md:39"
+    }
+  }
+}

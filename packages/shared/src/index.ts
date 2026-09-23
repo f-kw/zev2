@@ -51,23 +51,13 @@ export const WORKFLOW_STEPS = [
   }
 ] as const;
 
-export const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash';
+export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash';
 
 export const GEMINI_MODEL_OPTIONS = [
   {
-    value: 'gemini-3.5-flash',
-    label: 'Gemini 3.5 Flash',
+    value: 'gemini-3.8-flash',
+    label: 'Gemini 3.8 Flash',
     purpose: '品質確認'
-  },
-  {
-    value: 'gemini-3-flash-preview',
-    label: 'Gemini 3 Flash Preview',
-    purpose: '軽い確認'
-  },
-  {
-    value: 'gemini-2.5-flash',
-    label: 'Gemini 2.5 Flash',
-    purpose: '疎通確認'
   }
 ] as const;
 
