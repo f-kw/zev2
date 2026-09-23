@@ -215,9 +215,9 @@ function normalizeRuntimeConfig(value: unknown): RuntimeConfig {
   const source = recordValue(root.source);
 
   const sttMode = parseSttMode(stt.mode ?? DEFAULT_RUNTIME_CONFIG.stt.mode);
-  const sttLocalServerUrl = stringFromConfig(stt.localServerUrl, DEFAULT_RUNTIME_CONFIG.stt.localServerUrl);
+  const sttLocalServerUrl = process.env.STT_BASE_URL?.trim() || stringFromConfig(stt.localServerUrl, DEFAULT_RUNTIME_CONFIG.stt.localServerUrl);
   if (sttMode === 'local' && !sttLocalServerUrl) {
-    throw new Error('設定ファイルの stt.mode が local の場合は stt.localServerUrl を指定してください');
+    throw new Error('設定ファイルの stt.mode が local の場合は STT_BASE_URL または stt.localServerUrl を指定してください');
   }
 
   return {

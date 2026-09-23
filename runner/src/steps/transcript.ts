@@ -1,5 +1,5 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { transcribeWithGpuStt } from '../gpu-stt.js';
 import { recordValue as recordFrom, type AgentRequest, type Zev2State } from '@zev2/shared';
 import type { SttSegment, TranscriptArtifact, TranscriptThemeSeed } from '../workflow-artifacts.js';
 
@@ -9,10 +9,8 @@ export type BuildTranscriptArtifactContext = {
   sttSamplePath: string;
   fixedTranscriptPath: string;
   useFixedTranscript: boolean;
-  ffmpegCommand: string;
   requestArtifactDir: (request: AgentRequest) => string;
   resolveSourceVideoPath: (state: Zev2State, request: AgentRequest) => string | undefined;
-  runCommand: (command: string, args: string[]) => Promise<void>;
 };
 
 const ZEV_SPEECH_UNIT_LONG_GAP_MS = 1200;
@@ -217,39 +215,6 @@ function toSttServerLanguage(language: string): string {
   return language.split('-')[0] || language;
 }
 
-function buildSttAbortSignal(context: BuildTranscriptArtifactContext): AbortSignal | undefined {
-  if (!Number.isFinite(context.sttServerTimeoutMs) || context.sttServerTimeoutMs <= 0) {
-    return undefined;
-  }
-
-  return AbortSignal.timeout(context.sttServerTimeoutMs);
-}
-
-async function extractAudioForStt(
-  request: AgentRequest,
-  sourceVideoPath: string,
-  context: BuildTranscriptArtifactContext
-): Promise<string> {
-  const directory = context.requestArtifactDir(request);
-  const audioPath = path.join(directory, 'source-audio.flac');
-  await mkdir(directory, { recursive: true });
-  await context.runCommand(context.ffmpegCommand, [
-    '-y',
-    '-i',
-    sourceVideoPath,
-    '-vn',
-    '-ac',
-    '1',
-    '-ar',
-    '16000',
-    '-sample_fmt',
-    's16',
-    audioPath
-  ]);
-
-  return audioPath;
-}
-
 function normalizeLocalSttResponse(payload: unknown, request: AgentRequest): TranscriptArtifact {
   const record = recordFrom(payload);
   const segments = normalizeSegments(record.segments);
@@ -262,7 +227,7 @@ function normalizeLocalSttResponse(payload: unknown, request: AgentRequest): Tra
     kind: 'transcript_json',
     mode: 'zev-local-stt',
     sourceUri: request.target.sourceUri,
-    notes: ['ZEVローカルSTTサーバーで文字起こしした結果です。'],
+    notes: ['GPU-STTの非同期jobから取得した文字起こしです。生結果とjob受付情報は同じ成果物フォルダーに保存しています。'],
     generatedAt: new Date().toISOString(),
     language,
     durationSec,
@@ -299,57 +264,6 @@ async function buildFixedTranscript(
   };
 }
 
-async function transcribeWithLocalStt(
-  audioPath: string,
-  request: AgentRequest,
-  context: BuildTranscriptArtifactContext
-): Promise<TranscriptArtifact> {
-  if (!context.sttServerUrl) {
-    throw new Error('ローカルSTTサーバの接続先が設定されていないため、文字起こしを開始できません。ZEV2_STT_SERVER_URL または ZEV_STT_SERVER_URL を設定してください。');
-  }
-
-  const fileBuffer = await readFile(audioPath);
-  const formData = new FormData();
-  formData.append('file', new Blob([new Uint8Array(fileBuffer)], { type: 'audio/flac' }), path.basename(audioPath));
-  formData.append('language', toSttServerLanguage(process.env.ZEV2_STT_LANGUAGE ?? 'ja-JP'));
-
-  const transcribeUrl = new URL('/transcribe', context.sttServerUrl).toString();
-  const requestInit: RequestInit = {
-    method: 'POST',
-    headers: {
-      accept: 'application/json'
-    },
-    body: formData
-  };
-  const abortSignal = buildSttAbortSignal(context);
-  if (abortSignal) {
-    requestInit.signal = abortSignal;
-  }
-
-  let response: Response;
-  try {
-    response = await fetch(transcribeUrl, requestInit);
-  } catch {
-    throw new Error(`ローカルSTTサーバへ接続できないため、文字起こしを開始できません。接続先: ${transcribeUrl}`);
-  }
-
-  const responseText = await response.text();
-  if (!response.ok) {
-    throw new Error(`ローカルSTTサーバが文字起こしエラーを返しました (${response.status}): ${responseText}`);
-  }
-
-  let responseJson: unknown;
-  try {
-    responseJson = JSON.parse(responseText) as unknown;
-  } catch (error) {
-    throw new Error(`STTサーバーの応答JSONを読めません: ${String(error)}`);
-  }
-
-  const responseJsonPath = path.join(path.dirname(audioPath), 'source-audio.local-stt-response.json');
-  await writeFile(responseJsonPath, `${JSON.stringify(responseJson, null, 2)}\n`, 'utf8');
-  return normalizeLocalSttResponse(responseJson, request);
-}
-
 function isSampleRequest(request: AgentRequest): boolean {
   return request.target.sourceUri.startsWith('zev-sample://');
 }
@@ -372,6 +286,13 @@ export async function buildTranscriptArtifact(
     throw new Error('文字起こしに使う動画ファイルを取得できません');
   }
 
-  const audioPath = await extractAudioForStt(request, sourcePath, context);
-  return transcribeWithLocalStt(audioPath, request, context);
+  const result = await transcribeWithGpuStt({
+    baseUrl: context.sttServerUrl,
+    timeoutMs: context.sttServerTimeoutMs,
+    mediaPath: sourcePath,
+    sourceUri: request.target.sourceUri,
+    language: toSttServerLanguage(process.env.ZEV2_STT_LANGUAGE ?? 'ja-JP'),
+    artifactDir: context.requestArtifactDir(request)
+  });
+  return normalizeLocalSttResponse(result, request);
 }

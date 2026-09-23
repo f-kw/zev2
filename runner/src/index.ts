@@ -67,7 +67,7 @@ const defaultApiBaseUrl = process.env.ZEV2_API_BASE_URL ?? 'http://localhost:808
 const youtubeDownloaderCommand = process.env.ZEV2_YTDLP_BIN ?? 'yt-dlp';
 const ffmpegCommand = process.env.ZEV2_FFMPEG_BIN ?? process.env.FFMPEG_BIN ?? 'ffmpeg';
 const ffprobeCommand = process.env.ZEV2_FFPROBE_BIN ?? process.env.FFPROBE_BIN ?? defaultFfprobeCommand();
-const sttServerUrl = (process.env.ZEV2_STT_SERVER_URL ?? process.env.ZEV_STT_SERVER_URL ?? '').trim();
+const sttServerUrl = process.env.STT_BASE_URL?.trim() || (process.env.ZEV2_STT_SERVER_URL ?? process.env.ZEV_STT_SERVER_URL ?? '').trim();
 const sttServerTimeoutMs = Number.parseInt(process.env.ZEV2_STT_SERVER_TIMEOUT_MS ?? process.env.ZEV_STT_SERVER_TIMEOUT_MS ?? '1800000', 10);
 const geminiApiKey = (process.env.GEMINI_API_KEY ?? process.env.GOOGLE_API_KEY ?? '').trim();
 const defaultGeminiModelName = process.env.ZEV2_GEMINI_MODEL ?? DEFAULT_GEMINI_MODEL;
@@ -430,10 +430,8 @@ async function buildTranscript(request: AgentRequest, state: Zev2State): Promise
     sttSamplePath: ZEV_STT_SAMPLE_PATH,
     fixedTranscriptPath: FIXED_TRANSCRIPT_PATH,
     useFixedTranscript,
-    ffmpegCommand,
     requestArtifactDir,
-    resolveSourceVideoPath,
-    runCommand
+    resolveSourceVideoPath
   });
 }
 

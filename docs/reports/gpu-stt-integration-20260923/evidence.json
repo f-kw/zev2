@@ -1,0 +1,851 @@
+{
+  "verifiedAt": "2026-09-23T07:58:20.997Z",
+  "health": {
+    "ok": true,
+    "apiAlive": true,
+    "workerActive": true,
+    "storage": {
+      "accessible": true,
+      "readWrite": true,
+      "freeBytes": 1853281660928
+    },
+    "gpu": {
+      "available": true,
+      "deviceCount": 1,
+      "name": "NVIDIA GeForce RTX 4090",
+      "runtimeVersion": "12.8",
+      "checkedAt": "2026-09-23T07:37:57.966087+00:00",
+      "check": "CUDA initialization and one-element tensor; no STT model loaded",
+      "cached": true,
+      "probeIntervalSeconds": 300,
+      "ageSeconds": 157.5,
+      "fresh": true
+    },
+    "apiPid": 17676,
+    "model": "large-v3",
+    "bindAddress": "0.0.0.0",
+    "port": 8000,
+    "device": "cuda",
+    "alignDevice": "cpu",
+    "computeType": "float16",
+    "diarizationEnabled": true,
+    "diarizationDevice": "cpu",
+    "vadMethod": "silero",
+    "mode": "asynchronous-full-input",
+    "pipelineVersion": "zev-full-stt-1"
+  },
+  "connection": {
+    "baseUrl": "http://192.168.1.7:8000",
+    "httpStatus": 200,
+    "elapsedSeconds": 0.20950729213654995,
+    "hostnameResolved": false
+  },
+  "openApiSha256": "7d6631f9bc777bda19e960ed9ef9938917a7fa776deab0e8cc7c96fde24611fb",
+  "openApi": {
+    "openapi": "3.1.0",
+    "info": {
+      "title": "ZEV Full STT Jobs",
+      "version": "0.1.0"
+    },
+    "paths": {
+      "/health": {
+        "get": {
+          "summary": "Health",
+          "operationId": "health_health_get",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "/jobs": {
+        "post": {
+          "summary": "Submit",
+          "operationId": "submit_jobs_post",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body_submit_jobs_post"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "202": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/jobs/{job_id}": {
+        "get": {
+          "summary": "Status",
+          "operationId": "status_jobs__job_id__get",
+          "parameters": [
+            {
+              "name": "job_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "title": "Job Id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/jobs/{job_id}/result": {
+        "get": {
+          "summary": "Result",
+          "operationId": "result_jobs__job_id__result_get",
+          "parameters": [
+            {
+              "name": "job_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "title": "Job Id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/jobs/{job_id}/transcript": {
+        "get": {
+          "summary": "Transcript",
+          "operationId": "transcript_jobs__job_id__transcript_get",
+          "parameters": [
+            {
+              "name": "job_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "title": "Job Id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/transcribe": {
+        "post": {
+          "summary": "Legacy Transcribe",
+          "description": "Compatibility for the previous client. New clients should use /jobs.",
+          "operationId": "legacy_transcribe_transcribe_post",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body_legacy_transcribe_transcribe_post"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Body_legacy_transcribe_transcribe_post": {
+          "properties": {
+            "file": {
+              "type": "string",
+              "contentMediaType": "application/octet-stream",
+              "title": "File"
+            },
+            "language": {
+              "type": "string",
+              "title": "Language",
+              "default": ""
+            }
+          },
+          "type": "object",
+          "required": [
+            "file"
+          ],
+          "title": "Body_legacy_transcribe_transcribe_post"
+        },
+        "Body_submit_jobs_post": {
+          "properties": {
+            "file": {
+              "type": "string",
+              "contentMediaType": "application/octet-stream",
+              "title": "File"
+            },
+            "language": {
+              "type": "string",
+              "title": "Language",
+              "default": "ja"
+            }
+          },
+          "type": "object",
+          "required": [
+            "file"
+          ],
+          "title": "Body_submit_jobs_post"
+        },
+        "HTTPValidationError": {
+          "properties": {
+            "detail": {
+              "items": {
+                "$ref": "#/components/schemas/ValidationError"
+              },
+              "type": "array",
+              "title": "Detail"
+            }
+          },
+          "type": "object",
+          "title": "HTTPValidationError"
+        },
+        "ValidationError": {
+          "properties": {
+            "loc": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ]
+              },
+              "type": "array",
+              "title": "Location"
+            },
+            "msg": {
+              "type": "string",
+              "title": "Message"
+            },
+            "type": {
+              "type": "string",
+              "title": "Error Type"
+            },
+            "input": {
+              "title": "Input"
+            },
+            "ctx": {
+              "type": "object",
+              "title": "Context"
+            }
+          },
+          "type": "object",
+          "required": [
+            "loc",
+            "msg",
+            "type"
+          ],
+          "title": "ValidationError"
+        }
+      }
+    }
+  },
+  "freshRun": {
+    "receipt": {
+      "sourceUri": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "inputSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+      "baseUrl": "http://192.168.1.7:8000/",
+      "language": "ja",
+      "registeredAt": "2026-09-23T07:57:01.127Z",
+      "receipt": {
+        "job": {
+          "schemaVersion": 1,
+          "id": "adb050d1999e4fb9b83fa2e5a6e0b3e7",
+          "state": "queued",
+          "registeredAt": "2026-09-23T07:57:01.286322+00:00",
+          "startedAt": null,
+          "endedAt": null,
+          "input": {
+            "originalFilename": "base-media.mp4",
+            "sha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+            "bytes": 30335498
+          },
+          "model": "large-v3",
+          "pipeline": {
+            "version": "zev-full-stt-1",
+            "settings": {
+              "model": "large-v3",
+              "device": "cuda",
+              "computeType": "float16",
+              "alignDevice": "cpu",
+              "diarizationDevice": "cpu",
+              "enableDiarization": true,
+              "vadMethod": "silero",
+              "numSpeakers": null,
+              "speakerCoverageThreshold": 0.7,
+              "speakerMarginThreshold": 0.15,
+              "minDiarizationAudioSeconds": 1,
+              "batchSize": 16,
+              "offline": true
+            },
+            "language": "ja",
+            "packages": {
+              "whisperx": "3.8.4",
+              "faster-whisper": "1.2.1",
+              "ctranslate2": "4.7.1",
+              "torch": "2.8.0+cu128",
+              "torchaudio": "2.8.0+cu128",
+              "pyannote-audio": "4.0.4",
+              "transformers": "4.57.6",
+              "numpy": "2.4.3",
+              "nltk": "3.9.4"
+            },
+            "modelRevisions": {
+              "models--jonatasgrosman--wav2vec2-large-xlsr-53-japanese": "cf031e020336460d15a417eba710bbc5bb43be9a",
+              "models--pyannote--speaker-diarization-community-1": "3533c8cf8e369892e6b79ff1bf80f7b0286a54ee",
+              "models--Systran--faster-whisper-large-v3": "edaa852ec7e145841d8ffdb056a99866b5f0a478"
+            },
+            "sourceSha256": {
+              "main.py": "bb80827908401762dfe9d1040659550d8a5c7d83e203a28165b8d4d523a14bfd",
+              "stt_pipeline.py": "9fbf3c0c07f23324ce305edfc1c2970cdd63a36301874ecba5510eb322445dbe"
+            },
+            "ffmpeg": "ffmpeg version 7.1.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+            "returnCharAlignments": true,
+            "ompThreads": 1,
+            "mklThreads": 1
+          },
+          "resultIdentity": "93faa1df013ee2d687a47812304626d58fabdb137d29c6ff8f06372048da79e7",
+          "error": null
+        },
+        "reused": false,
+        "deduplicated": false,
+        "registrationSeconds": 0.0492,
+        "statusUrl": "/jobs/adb050d1999e4fb9b83fa2e5a6e0b3e7",
+        "resultUrl": "/jobs/adb050d1999e4fb9b83fa2e5a6e0b3e7/result",
+        "transcriptUrl": "/jobs/adb050d1999e4fb9b83fa2e5a6e0b3e7/transcript"
+      }
+    },
+    "job": {
+      "claim": "b61eae57cab24885a47741ac9f8939ed",
+      "endedAt": "2026-09-23T07:58:18.946942+00:00",
+      "error": null,
+      "id": "adb050d1999e4fb9b83fa2e5a6e0b3e7",
+      "input": {
+        "bytes": 30335498,
+        "originalFilename": "base-media.mp4",
+        "sha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967"
+      },
+      "metrics": {
+        "gpu": {
+          "meanUtilizationPercent": 1.23,
+          "name": "NVIDIA GeForce RTX 4090",
+          "peakMemoryMiB": 5017,
+          "peakUtilizationPercent": 65,
+          "sampleCount": 74,
+          "scope": "whole GPU, sampled once per second"
+        },
+        "pipelineSeconds": 76.311,
+        "runnerSeconds": 77.419,
+        "segmentCount": 2
+      },
+      "model": "large-v3",
+      "pipeline": {
+        "ffmpeg": "ffmpeg version 7.1.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+        "language": "ja",
+        "mklThreads": 1,
+        "modelRevisions": {
+          "models--Systran--faster-whisper-large-v3": "edaa852ec7e145841d8ffdb056a99866b5f0a478",
+          "models--jonatasgrosman--wav2vec2-large-xlsr-53-japanese": "cf031e020336460d15a417eba710bbc5bb43be9a",
+          "models--pyannote--speaker-diarization-community-1": "3533c8cf8e369892e6b79ff1bf80f7b0286a54ee"
+        },
+        "ompThreads": 1,
+        "packages": {
+          "ctranslate2": "4.7.1",
+          "faster-whisper": "1.2.1",
+          "nltk": "3.9.4",
+          "numpy": "2.4.3",
+          "pyannote-audio": "4.0.4",
+          "torch": "2.8.0+cu128",
+          "torchaudio": "2.8.0+cu128",
+          "transformers": "4.57.6",
+          "whisperx": "3.8.4"
+        },
+        "returnCharAlignments": true,
+        "settings": {
+          "alignDevice": "cpu",
+          "batchSize": 16,
+          "computeType": "float16",
+          "device": "cuda",
+          "diarizationDevice": "cpu",
+          "enableDiarization": true,
+          "minDiarizationAudioSeconds": 1,
+          "model": "large-v3",
+          "numSpeakers": null,
+          "offline": true,
+          "speakerCoverageThreshold": 0.7,
+          "speakerMarginThreshold": 0.15,
+          "vadMethod": "silero"
+        },
+        "sourceSha256": {
+          "main.py": "bb80827908401762dfe9d1040659550d8a5c7d83e203a28165b8d4d523a14bfd",
+          "stt_pipeline.py": "9fbf3c0c07f23324ce305edfc1c2970cdd63a36301874ecba5510eb322445dbe"
+        },
+        "version": "zev-full-stt-1"
+      },
+      "registeredAt": "2026-09-23T07:57:01.286322+00:00",
+      "resultIdentity": "93faa1df013ee2d687a47812304626d58fabdb137d29c6ff8f06372048da79e7",
+      "resultSha256": "bb178bd7152fe69fec7e3e39592dafab4afc67d3e47a276b8a791f6a786fd7c6",
+      "runnerPid": 20100,
+      "schemaVersion": 1,
+      "startedAt": "2026-09-23T07:57:01.463954+00:00",
+      "state": "completed",
+      "workerPid": 17896
+    },
+    "zev": {
+      "recordedAt": "2026-09-23T07:58:20.997Z",
+      "sourceUri": "evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+      "sourceSha256": "faad660c7623cdbf3a8f3b55cdaffc34729d06683ce391997c51f10fbc076967",
+      "sttSeconds": 81.26307908300001,
+      "jobId": "adb050d1999e4fb9b83fa2e5a6e0b3e7",
+      "reused": false,
+      "deduplicated": false,
+      "transcriptSha256": "3f19efe90f7a60442f0e5577b1d5cbad0cd680c8583b872d345e9c15b39e4b6f",
+      "durationSec": 51.584,
+      "segmentCount": 269,
+      "speechUnitGroupCount": 2,
+      "speakers": [
+        "unknown",
+        "SPEAKER_00"
+      ],
+      "downstreamAccepted": true,
+      "downstreamThemeCount": 2,
+      "productionPaths": [
+        "loadRuntimeConfig",
+        "createRunnerEnvironmentFromConfig",
+        "run_stt",
+        "buildTranscriptArtifact",
+        "transcribeWithGpuStt",
+        "assertTranscriptArtifact",
+        "propose_clip_themes",
+        "buildThemeOptionsArtifact",
+        "assertThemeArtifact"
+      ]
+    }
+  },
+  "comparison": {
+    "oldTranscriptPath": "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/transcript.json",
+    "oldTranscriptSha256": "5d7e2bf0f821eda23e0c93474e0c66281e3cc5328bf2c5e4bd4368402696799e",
+    "sourceRangeMs": [
+      5941162,
+      5992736
+    ],
+    "oldSegments": 281,
+    "gpuSegments": 269,
+    "oldGroupsOverlapping": 281,
+    "gpuGroups": 2,
+    "oldSpeakers": [
+      "SPEAKER_00",
+      "unknown"
+    ],
+    "gpuSpeakers": [
+      "SPEAKER_00",
+      "unknown"
+    ],
+    "gpuUnknownSpeakerSegments": 12,
+    "oldText": "あ、さあ船長さあ何かやってる最中でもさあ違うことが気になったらそれやり始めちゃうんだよねこれやばいよねなんか最近さあ引っ越しがあってさあ片付けてるんだけど最中にそうだあれやらないとって思ったらやり始めるからあっちこっちで30%だけ進んだものが大量にあってでぐるぐる回りながら一つずつ片付けていくのうんでもね結局全部片付けてる片付けよう1個ずつ片付けていくあ、そうだあれもこれもってやってるうちに1個ずつ片付いていって一応全部片付けはするの綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう困ったもんですえ、なんか無意識にまた服脱いでたけど寒い気をこうしてと",
+    "gpuText": "あさあ船長さあ何かやってる最中でもさあ違うことが気になったらそれやり始めちゃうんだよねこれやばいよねなんか最近さあ引っ越しがあってさあ片付けてるんだけど最中にそうだあれやらないとって思ったらやり始めるからあっちこっちで30%だけ進んだものが大量にあってでぐるぐる回りながら一つずつ片付けていくのうんでもね結局全部片付くよ1個ずつ片付けていくそうだあれもこれもってやってるうちに1個ずつ片付いていって一応全部片付けはするの綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう困ったもんですなんか無意識にまた服脱いでたけど寒い気をこうして",
+    "normalizationForTextComparison": "NFKC then retain alphanumeric characters; difflib SequenceMatcher autojunk=False. Descriptive comparison, no quality scoring/weights.",
+    "normalizedOldCharacters": 277,
+    "normalizedGpuCharacters": 268,
+    "exactMatchedCharacters": 267,
+    "differences": [
+      {
+        "operation": "replace",
+        "old": "けてる片付け",
+        "gpu": "く"
+      },
+      {
+        "operation": "delete",
+        "old": "う",
+        "gpu": ""
+      },
+      {
+        "operation": "delete",
+        "old": "あ",
+        "gpu": ""
+      },
+      {
+        "operation": "delete",
+        "old": "え",
+        "gpu": ""
+      },
+      {
+        "operation": "delete",
+        "old": "と",
+        "gpu": ""
+      }
+    ],
+    "matchedCharacterStartAbsoluteDifferenceMs": {
+      "median": 8,
+      "maximum": 842
+    },
+    "gpuInvalidTimestamps": [],
+    "gpuStartTimeReversals": [],
+    "gpuFirstSpeechMs": 842,
+    "gpuLastSpeechMs": 51404,
+    "trailingUntranscribedMs": 180.0
+  },
+  "rawResultSha256": "bb178bd7152fe69fec7e3e39592dafab4afc67d3e47a276b8a791f6a786fd7c6",
+  "transcriptSha256": "3f19efe90f7a60442f0e5577b1d5cbad0cd680c8583b872d345e9c15b39e4b6f",
+  "preflightAndReuse": {
+    "submission": {
+      "status": 202,
+      "elapsedSeconds": 0.8515418749302626
+    },
+    "job": {
+      "claim": "9c44ccef92474fbdad924f39e0aed934",
+      "endedAt": "2026-09-23T07:44:06.730242+00:00",
+      "error": null,
+      "id": "f7b7500f90064ed39b3265372373d2c9",
+      "input": {
+        "bytes": 4767399,
+        "originalFilename": "candidate-59-legacy-input-640.mp4",
+        "sha256": "535590429f26233a1b5bd5a41696b1dfb119b2743d8c9b0fa6404ae2585a68a2"
+      },
+      "metrics": {
+        "gpu": {
+          "meanUtilizationPercent": 2.87,
+          "name": "NVIDIA GeForce RTX 4090",
+          "peakMemoryMiB": 4963,
+          "peakUtilizationPercent": 60,
+          "sampleCount": 101,
+          "scope": "whole GPU, sampled once per second"
+        },
+        "pipelineSeconds": 105.383,
+        "runnerSeconds": 106.506,
+        "segmentCount": 2
+      },
+      "model": "large-v3",
+      "pipeline": {
+        "ffmpeg": "ffmpeg version 7.1.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+        "language": "ja",
+        "mklThreads": 1,
+        "modelRevisions": {
+          "models--Systran--faster-whisper-large-v3": "edaa852ec7e145841d8ffdb056a99866b5f0a478",
+          "models--jonatasgrosman--wav2vec2-large-xlsr-53-japanese": "cf031e020336460d15a417eba710bbc5bb43be9a",
+          "models--pyannote--speaker-diarization-community-1": "3533c8cf8e369892e6b79ff1bf80f7b0286a54ee"
+        },
+        "ompThreads": 1,
+        "packages": {
+          "ctranslate2": "4.7.1",
+          "faster-whisper": "1.2.1",
+          "nltk": "3.9.4",
+          "numpy": "2.4.3",
+          "pyannote-audio": "4.0.4",
+          "torch": "2.8.0+cu128",
+          "torchaudio": "2.8.0+cu128",
+          "transformers": "4.57.6",
+          "whisperx": "3.8.4"
+        },
+        "returnCharAlignments": true,
+        "settings": {
+          "alignDevice": "cpu",
+          "batchSize": 16,
+          "computeType": "float16",
+          "device": "cuda",
+          "diarizationDevice": "cpu",
+          "enableDiarization": true,
+          "minDiarizationAudioSeconds": 1.0,
+          "model": "large-v3",
+          "numSpeakers": null,
+          "offline": true,
+          "speakerCoverageThreshold": 0.7,
+          "speakerMarginThreshold": 0.15,
+          "vadMethod": "silero"
+        },
+        "sourceSha256": {
+          "main.py": "bb80827908401762dfe9d1040659550d8a5c7d83e203a28165b8d4d523a14bfd",
+          "stt_pipeline.py": "9fbf3c0c07f23324ce305edfc1c2970cdd63a36301874ecba5510eb322445dbe"
+        },
+        "version": "zev-full-stt-1"
+      },
+      "registeredAt": "2026-09-23T07:42:19.796394+00:00",
+      "resultIdentity": "3b5d54efce4521d32afd4a69e69d61384fe43e1c7138d15a441afa709f484566",
+      "resultSha256": "05227155f11e589937a527ae697784f7b456c6cc4544f0c33b0de6e32d0110fe",
+      "runnerPid": 20672,
+      "schemaVersion": 1,
+      "startedAt": "2026-09-23T07:42:20.140474+00:00",
+      "state": "completed",
+      "workerPid": 17896
+    },
+    "zev": {
+      "recordedAt": "2026-09-23T07:53:52.060Z",
+      "sourceUri": "evals/clip_composition/outputs/presentation/vertical-preset-previews/qdczJpv8RCc-candidate-59-vertical-preset-v001-candidate/legacy-crop/candidate-59-legacy-input-640.mp4",
+      "sourceSha256": "535590429f26233a1b5bd5a41696b1dfb119b2743d8c9b0fa6404ae2585a68a2",
+      "sttSeconds": 0.567603875,
+      "jobId": "f7b7500f90064ed39b3265372373d2c9",
+      "reused": true,
+      "deduplicated": true,
+      "transcriptSha256": "2e91a00b3cb5e49368d52047729bd85eb815535cc99df5d881144473cb9b9b51",
+      "durationSec": 51.5626875,
+      "segmentCount": 260,
+      "speechUnitGroupCount": 2,
+      "speakers": [
+        "unknown",
+        "SPEAKER_00"
+      ],
+      "downstreamAccepted": true,
+      "downstreamThemeCount": 2,
+      "productionPaths": [
+        "loadRuntimeConfig",
+        "createRunnerEnvironmentFromConfig",
+        "run_stt",
+        "buildTranscriptArtifact",
+        "transcribeWithGpuStt",
+        "assertTranscriptArtifact",
+        "propose_clip_themes",
+        "buildThemeOptionsArtifact",
+        "assertThemeArtifact"
+      ]
+    },
+    "comparison": {
+      "oldTranscriptPath": "evals/clip_composition/stt/nE_bNeBNp4E_qdczJpv8RCc_local30_v001/source/transcript.json",
+      "oldTranscriptSha256": "5d7e2bf0f821eda23e0c93474e0c66281e3cc5328bf2c5e4bd4368402696799e",
+      "sourceRangeMs": [
+        5941162,
+        5992736
+      ],
+      "oldSegments": 281,
+      "gpuSegments": 260,
+      "oldGroupsOverlapping": 281,
+      "gpuGroups": 2,
+      "oldSpeakers": [
+        "SPEAKER_00",
+        "unknown"
+      ],
+      "gpuSpeakers": [
+        "SPEAKER_00",
+        "unknown"
+      ],
+      "gpuUnknownSpeakerSegments": 12,
+      "oldText": "あ、さあ船長さあ何かやってる最中でもさあ違うことが気になったらそれやり始めちゃうんだよねこれやばいよねなんか最近さあ引っ越しがあってさあ片付けてるんだけど最中にそうだあれやらないとって思ったらやり始めるからあっちこっちで30%だけ進んだものが大量にあってでぐるぐる回りながら一つずつ片付けていくのうんでもね結局全部片付けてる片付けよう1個ずつ片付けていくあ、そうだあれもこれもってやってるうちに1個ずつ片付いていって一応全部片付けはするの綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう困ったもんですえ、なんか無意識にまた服脱いでたけど寒い気をこうしてと",
+      "gpuText": "あさあ船長さあ何かやってる最中でもさあ違うことが気になったらそれやり始めちゃうんだよねこれやばいよねなんか最近さあ引っ越しがあってさあ片付けてるんだけど最中にそうだあれやらないとって思ったらやり始めるからあっちこっちで30%だけ進んだものが大量にあってでぐるぐる回りながら一つずつ片付けていくのうんでもね結局全部片付くよ1個ずつ片付けていくそうだあれもこれもってやってるうちに1個ずつ片付いていって一応全部片付けはするの綺麗にはなるんだけどやりかけでいろんなことやり始めちゃう困ったもんです無意識にまた服脱いでたけど寒い",
+      "normalizedOldCharacters": 277,
+      "normalizedGpuCharacters": 259,
+      "exactMatchedCharacters": 258,
+      "differences": [
+        {
+          "operation": "replace",
+          "old": "けてる片付け",
+          "gpu": "く"
+        },
+        {
+          "operation": "delete",
+          "old": "う",
+          "gpu": ""
+        },
+        {
+          "operation": "delete",
+          "old": "あ",
+          "gpu": ""
+        },
+        {
+          "operation": "delete",
+          "old": "えなんか",
+          "gpu": ""
+        },
+        {
+          "operation": "delete",
+          "old": "気をこうしてと",
+          "gpu": ""
+        }
+      ],
+      "matchedCharacterStartAbsoluteDifferenceMs": {
+        "median": 7.0,
+        "maximum": 2570
+      },
+      "gpuInvalidTimestamps": [],
+      "gpuStartTimeReversals": [],
+      "gpuFirstSpeechMs": 843,
+      "gpuLastSpeechMs": 47460,
+      "trailingUntranscribedMs": 4102.6875
+    }
+  },
+  "initialStoredJob": {
+    "id": "a1147bac164e4ccbb35ff5afe7bb092e",
+    "sha256": "8164ffe4cb45930964f79fa66c76f20335e7524f6a42f6e566a5830c531149a7",
+    "referenceSha256Matches": true
+  },
+  "productionStepManifests": [
+    {
+      "kind": "workflow_step_manifest",
+      "requestDraftId": "codex3-stt-real-20260923",
+      "requestId": "codex3-stt-real-20260923",
+      "stepType": "run_stt",
+      "stepLabel": "GPU文字起こし実素材検証",
+      "createdAt": "2026-09-23T07:58:20.989Z",
+      "mode": "zev-local-stt",
+      "inputs": [
+        {
+          "dependencyType": "prepare_video",
+          "kind": "source_video",
+          "uri": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/base-media/qdczJpv8RCc-candidate-59-v001/base-media.mp4",
+          "meaning": "STTが読む入力動画参照"
+        }
+      ],
+      "outputs": [
+        {
+          "kind": "transcript_json",
+          "uri": "/private/tmp/zev2-codex3-gpu-stt-20260923/zev-fresh/transcript_json.json",
+          "mimeType": "application/json",
+          "access": "local",
+          "meaning": "動画から発話ID付きで作った文字起こし"
+        }
+      ]
+    },
+    {
+      "kind": "workflow_step_manifest",
+      "requestDraftId": "codex3-stt-real-20260923",
+      "requestId": "codex3-stt-real-20260923-downstream",
+      "stepType": "propose_clip_themes",
+      "stepLabel": "GPU文字起こし実素材検証",
+      "createdAt": "2026-09-23T07:58:20.997Z",
+      "mode": "transcript-content-options",
+      "inputs": [
+        {
+          "dependencyType": "run_stt",
+          "kind": "transcript_json",
+          "uri": "/private/tmp/zev2-codex3-gpu-stt-20260923/zev-fresh/transcript_json.json",
+          "meaning": "テーマ作成が読む文字起こし成果物"
+        }
+      ],
+      "outputs": [
+        {
+          "kind": "theme_json",
+          "uri": "/private/tmp/zev2-codex3-gpu-stt-20260923/zev-fresh/theme_json.json",
+          "mimeType": "application/json",
+          "access": "local",
+          "meaning": "ユーザーが切り抜くテーマを選ぶための候補"
+        }
+      ]
+    }
+  ],
+  "tests": {
+    "gpuAndExistingTranscript": {
+      "passed": 31,
+      "failed": 0,
+      "command": "cd runner && node --import tsx --test test/gpu-stt-integration.test.mts test/source-video-transcript-reuse-artifact-v001.test.mts test/semantic-utterance-artifact-v001.test.mts",
+      "output": "✔ 非同期jobを一度だけ投入し、生結果と対応を保存して既存の後続工程が受理する (4104.332167ms)\n✔ 保存済みjobの再利用を受理し、同じ生結果を上書きしない (58.099ms)\n✔ health失敗では投入しない (5.208584ms)\n✔ HTTPエラーでは投入しない (4.908459ms)\n✔ 接続切断では投入しない (5.646208ms)\n✔ 受付不明では自動再送しない (11.262125ms)\n✔ 失敗したjobでは結果を読まない (8.096916ms)\n✔ 中断したjobでは結果を読まない (6.943291ms)\n✔ 別動画の結果を拒否する (7.456542ms)\n✔ 応答JSON破損を拒否する (14.214958ms)\n✔ 既存形式に不適合な発話を拒否する (14.704625ms)\n✔ 待機上限ではjob情報を残し、二重投入せず終了する (157.043541ms)\n✔ 結果の本文読み込みにも同じ待機上限を適用する (162.342167ms)\n✔ 既存設定へ環境接続先を渡せ、fixedはネットワークを使用しない (7.209292ms)\n✔ 正式意味発話は現行の発話まとまりを安定ID・本文・時刻・元断片へ変換する (2.184209ms)\n✔ 長尺分割STTを正式入力として受理し、未登録の作成方法は拒否する (0.9565ms)\n✔ 各STT断片の完全被覆を要求し、未知・重複・欠落・順序逆転を個別に拒否する (2.254125ms)\n✔ 元transcript自体の時系列逆転も拒否する (0.281667ms)\n✔ 束縛した元transcriptのSHA-256が異なる場合はfail-closedで拒否する (1.020625ms)\n✔ 同一入力はbyte単位で同一の成果物になり、再読後も元transcriptと一致する (2.7695ms)\n✔ 成果物の余分なfieldや元transcriptと異なる本文を拒否する (0.515625ms)\n✔ 保存済みの現行transcriptを正式入力として読める (14.297375ms)\n✔ 取得動画と既存全文STTを動画ID・path・SHA・実測尺で正式に束縛する (3.046875ms)\n✔ 取得動画のbyteまたは実測尺が承認済み履歴値と違う場合は拒否する (0.622958ms)\n✔ 動画IDとtranscript動画参照の不一致を拒否し、同一byteの配置pathは同一性に混ぜない (1.68275ms)\n✔ transcriptの動画尺差、時系列逆転、動画尺外断片を拒否する (1.977417ms)\n✔ transcriptの小数ミリ秒は既存ZEVと同じ最寄りミリ秒へ決定的に正規化する (0.475459ms)\n✔ file入口は動画を一括読込せずSHAを計算し、同じ正式成果物を作る (19.316208ms)\n✔ 元STT断片の欠落、重複、順序変更を完全被覆検査で拒否する (1.114ms)\n✔ 同じ入力は同じformal byteになり、SHA差と余分なfieldはfail-closedする (1.574292ms)\n✔ o8rの既存34,507断片STTは再生成せず正式再利用検査へ入力できる (103.233125ms)\nℹ tests 31\nℹ suites 0\nℹ pass 31\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 5027.445167\n"
+    },
+    "typeCheck": {
+      "passed": true,
+      "command": "corepack pnpm run type-check",
+      "output": "\n> zev2@ type-check /Users/kawafmm/workspace/zev2\n> corepack pnpm run build:shared && corepack pnpm --filter backend type-check && corepack pnpm --filter client type-check && corepack pnpm --filter @zev2/agent-runner type-check\n\n\n> zev2@ build:shared /Users/kawafmm/workspace/zev2\n> corepack pnpm --filter @zev2/shared build\n\n\n> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared\n> tsc -p tsconfig.json\n\n\n> backend@0.1.0 type-check /Users/kawafmm/workspace/zev2/backend\n> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit\n\n\n> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared\n> tsc -p tsconfig.json\n\n\n> client@0.1.0 type-check /Users/kawafmm/workspace/zev2/client\n> corepack pnpm --filter @zev2/shared build && vue-tsc --build\n\n\n> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared\n> tsc -p tsconfig.json\n\n\n> @zev2/agent-runner@0.1.0 type-check /Users/kawafmm/workspace/zev2/runner\n> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit && tsc -p tsconfig.remotion.json\n\n\n> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared\n> tsc -p tsconfig.json\n\n"
+    },
+    "existingSuite": {
+      "passed": false,
+      "uiContractPassed": true,
+      "webGeminiReviewPassed": true,
+      "scenarioStatus": "pre-existing fixed transcript missing; no GPU call reached",
+      "command": "corepack pnpm test",
+      "output": "\n> zev2@ test /Users/kawafmm/workspace/zev2\n> corepack pnpm run ui:contract:test && corepack pnpm run web-gemini:review:test && corepack pnpm run scenario:agent\n\n\n> zev2@ ui:contract:test /Users/kawafmm/workspace/zev2\n> node scripts/ui-contract-test.mjs\n\nUI契約テスト成功\n\n> zev2@ web-gemini:review:test /Users/kawafmm/workspace/zev2\n> corepack pnpm run build:backend && node scripts/web-gemini-review-script-test.mjs\n\n\n> zev2@ build:backend /Users/kawafmm/workspace/zev2\n> corepack pnpm --filter backend build\n\n\n> backend@0.1.0 build /Users/kawafmm/workspace/zev2/backend\n> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json\n\n\n> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared\n> tsc -p tsconfig.json\n\nWeb Geminiレビュースクリプトテスト成功: /var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev2-web-gemini-script-2pUI78\n\n> zev2@ scenario:agent /Users/kawafmm/workspace/zev2\n> node scripts/agent-scenario-test.mjs\n\nnode runner/dist/index.js --max-steps=2 failed with code 1\nAIエージェント実行開始: 動画取り込み (prepare_video)\nAIエージェント実行完了: 動画取り込み\nAIエージェント実行開始: STT (run_stt)\nnode:internal/fs/promises:639\n  return new FileHandle(await PromisePrototypeThen(\n                        ^\n\nError: ENOENT: no such file or directory, open '/Users/kawafmm/workspace/zev2/runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/transcript.json'\n    at async open (node:internal/fs/promises:639:25)\n    at async readFile (node:internal/fs/promises:1246:14)\n    at async buildFixedTranscript (file:///Users/kawafmm/workspace/zev2/runner/dist/steps/transcript.js:188:17)\n    at async Object.run_stt (file:///Users/kawafmm/workspace/zev2/runner/dist/workflow-step-builders.js:59:153)\n    at async completeRequest (file:///Users/kawafmm/workspace/zev2/runner/dist/index.js:619:22)\n    at async runDryRunLoop (file:///Users/kawafmm/workspace/zev2/runner/dist/index.js:643:13)\n    at async file:///Users/kawafmm/workspace/zev2/runner/dist/index.js:659:1 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: '/Users/kawafmm/workspace/zev2/runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/transcript.json'\n}\n\nNode.js v20.19.6\n\n ELIFECYCLE  Command failed with exit code 1.\n ELIFECYCLE  Test failed. See above for more details.\n"
+    }
+  }
+}

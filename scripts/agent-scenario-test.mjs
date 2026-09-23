@@ -1642,6 +1642,7 @@ async function runAgentWithoutFixedDataExpectFailure(apiBaseUrl, runtimeDir) {
         GOOGLE_CLOUD_PROJECT: '',
         PROJECT_ID: '',
         GCP_PROJECT_ID: '',
+        STT_BASE_URL: '',
         ZEV2_STT_SERVER_URL: '',
         ZEV_STT_SERVER_URL: '',
         ZEV2_RUNTIME_DIR: runtimeDir,
