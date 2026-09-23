@@ -1,0 +1,36 @@
+
+> zev2@ type-check /Users/kawafmm/workspace/zev2
+> corepack pnpm run build:shared && corepack pnpm --filter backend type-check && corepack pnpm --filter client type-check && corepack pnpm --filter @zev2/agent-runner type-check
+
+
+> zev2@ build:shared /Users/kawafmm/workspace/zev2
+> corepack pnpm --filter @zev2/shared build
+
+
+> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+> tsc -p tsconfig.json
+
+
+> backend@0.1.0 type-check /Users/kawafmm/workspace/zev2/backend
+> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit
+
+
+> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+> tsc -p tsconfig.json
+
+
+> client@0.1.0 type-check /Users/kawafmm/workspace/zev2/client
+> corepack pnpm --filter @zev2/shared build && vue-tsc --build
+
+
+> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+> tsc -p tsconfig.json
+
+
+> @zev2/agent-runner@0.1.0 type-check /Users/kawafmm/workspace/zev2/runner
+> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json --noEmit && tsc -p tsconfig.remotion.json
+
+
+> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+> tsc -p tsconfig.json
+

@@ -1,0 +1,48 @@
+{
+  "type_check": {
+    "exit_code": 0,
+    "scope": "shared/backend/client/runner"
+  },
+  "workspace_build": {
+    "exit_code": 0,
+    "scope": "all workspace packages"
+  },
+  "standard_test": {
+    "exit_code": 1,
+    "passed": [
+      "UI contract",
+      "Web Gemini review script with local mock"
+    ],
+    "blocked": "Fixed transcript absent at runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/transcript.json. Same absence recorded 2026-09-06; original-main script and STT reader bytes unchanged."
+  },
+  "changed_tests": {
+    "file_count": 64,
+    "summary": {
+      "tests": 856,
+      "suites": 0,
+      "pass": 785,
+      "fail": 65,
+      "cancelled": 0,
+      "skipped": 6,
+      "todo": 0,
+      "duration_ms": 643962.143292
+    },
+    "first_attempt": "All 64 failed before load because root package has no tsx import alias; raw result retained in temporary snapshot. Retried with installed absolute loader path.",
+    "status": "not passed",
+    "top_level_failed_count": 58,
+    "limitations": [
+      "Some scripts require per-job environment inputs or React loader configuration.",
+      "Older Panel tests omit the newer finite-palette requirement.",
+      "Saved fixture rendering-rule bindings and some local drawing-evidence files do not match this checkout.",
+      "Older formal-path invariant tests refer to historical file sets and baselines.",
+      "Not all failures have been fully diagnosed; no production code or test expectations were changed to mask them."
+    ]
+  },
+  "connection_research": {
+    "exit_code": 0,
+    "positive_cases": 12,
+    "expected_rejections": 66
+  },
+  "existing_code_matches_latest_source_branch": true,
+  "overall_test_condition_met": false
+}

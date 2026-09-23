@@ -1,0 +1,347 @@
+{
+  "schemaVersion": "presentation-render-execution-resource-equivalence-v001",
+  "status": "passed",
+  "implementationBinding": {
+    "path": "evals/clip_composition/render_presentation_v002.mjs",
+    "bytes": 135283,
+    "fileSha256": "d0a7d4eae95779943ca5865b3aa3f1886a72f3a1cd95b75026dfc98451ffe6e7"
+  },
+  "fixtureBindings": [
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/base.mp4",
+      "bytes": 31417882,
+      "fileSha256": "375c8f2594cd07ff1b9080aa08125444349486064563de8430973ac02460a6b4"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/target.png",
+      "bytes": 8721,
+      "fileSha256": "f367c93858ea5994bde7450130c7a3fd16894ebdf75a518d2d10e0fe668769a9"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/other.png",
+      "bytes": 8742,
+      "fileSha256": "c3e192749d72d8d8373e8c632aba24d04bf7ba94654c165dd64daab9c041f233"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/moved.png",
+      "bytes": 8723,
+      "fileSha256": "d4f0b45baccdd08b7a8adf2216c71d6e2d6df7a05eb35cb12c01a86dbdc5a410"
+    },
+    {
+      "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/qc-integrated-fixture-v001-ibyU3m/transparent.png",
+      "bytes": 8329,
+      "fileSha256": "0c769e30958eec259d9e7143266d689641688b71bb71612e19ac1f0d1b19e386"
+    }
+  ],
+  "capturedImplementationFileSha256": "b5670f2e9a665fddf7082fee107b322181f6a2c6a89edb6c1d77fcebce38a61b",
+  "defaultArgumentsUnchangedExceptFrameClock": true,
+  "movieTimeScale": 30,
+  "additionalArguments": "frame-grid movie timescale plus PNG/filter execution control only",
+  "baseDecoderAndEncoderThreadsUnchanged": true,
+  "allDecodedFramesIdentical": true,
+  "streamedQcFramesIdentical": true,
+  "wrongOmissionDistinguished": true,
+  "positionMutationDistinguished": true,
+  "evidence": [
+    {
+      "name": "regular",
+      "frames": 900,
+      "allDecodedFramesIdentical": true,
+      "streamedQcFrameIdentical": true,
+      "representativeFrame": 120,
+      "beforeVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/regular-before.mp4",
+        "bytes": 30592747,
+        "fileSha256": "dd0166582c0d20da172dbb1fb3c5b77a0aeb58c6b3ab75fdcaf168ce3edfed6c"
+      },
+      "afterVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/regular-after.mp4",
+        "bytes": 30592747,
+        "fileSha256": "3fd7f6ac773467693a376291a3d57b6cdbe97a9a25684fb72ec6b66b7853b14c"
+      },
+      "frameHash": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/regular-after.framehash.txt",
+        "bytes": 101019,
+        "fileSha256": "18215eb0c3e785295a2515cdc5ec3ef29f7ab77c5229a0473899caf377b1eb8f"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "target",
+        "representativeFrame": 120,
+        "expectedFrameCount": 900,
+        "encodedFrames": 446,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "d078207eb231f5ccc73274bb64f6bbc8ddd42e30bf38ce208b5b208a09ba0875",
+        "encoderArgumentsCanonicalSha256": "fa8baabac9f1854352dbff38c7fbdefbae2dbaafa3516ecfa21c889dc5ef96a9",
+        "decoderArgumentsCanonicalSha256": "c0fc16fe9e6770dc8f65601732f39955148b96e0752ad7d9aee9b6883221bce2",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=42\nfps=6.37\nstream_0_0_q=26.0\nbitrate=   4.7kbits/s\ntotal_size=780\nout_time_us=1333333\nout_time_ms=1333333\nout_time=00:00:01.333333\ndup_frames=0\ndrop_frames=0\nspeed=0.202x\nprogress=continue\nframe=45\nfps=6.34\nstream_0_0_q=26.0\nbitrate=   4.4kbits/s\ntotal_size=780\nout_time_us=1433333\nout_time_ms=1433333\nout_time=00:00:01.433333\ndup_frames=0\ndrop_frames=0\nspeed=0.202x\nprogress=continue\nframe=48\nfps=6.31\nstream_0_0_q=26.0\nbitrate=   4.1kbits/s\ntotal_size=780\nout_time_us=1533333\nout_time_ms=1533333\nout_time=00:00:01.533333\ndup_frames=0\ndrop_frames=0\nspeed=0.202x\nprogress=continue\nframe=50\nfps=6.16\nstream_0_0_q=26.0\nbitrate=   3.9kbits/s\ntotal_size=780\nout_time_us=1600000\nout_time_ms=1600000\nout_time=00:00:01.600000\ndup_frames=0\ndrop_frames=0\nspeed=0.197x\nprogress=continue\nframe=53\nfps=6.15\nstream_0_0_q=26.0\nbitrate=   3.7kbits/s\ntotal_size=780\nout_time_us=1700000\nout_time_ms=1700000\nout_time=00:00:01.700000\ndup_frames=0\ndrop_frames=0\nspeed=0.197x\nprogress=continue\nframe=56\nfps=6.13\nstream_0_0_q=26.0\nbitrate=   3.5kbits/s\ntotal_size=780\nout_time_us=1800000\nout_time_ms=1800000\nout_time=00:00:01.800000\ndup_frames=0\ndrop_frames=0\nspeed=0.197x\nprogress=continue\nframe=58\nfps=6.02\nstream_0_0_q=26.0\nbitrate=   3.3kbits/s\ntotal_size=780\nout_time_us=1866667\nout_time_ms=1866667\nout_time=00:00:01.866667\ndup_frames=0\ndrop_frames=0\nspeed=0.194x\nprogress=continue\nframe=61\nfps=6.01\nstream_0_0_q=26.0\nbitrate=   3.2kbits/s\ntotal_size=780\nout_time_us=1966667\nout_time_ms=1966667\nout_time=00:00:01.966667\ndup_frames=0\ndrop_frames=0\nspeed=0.194x\nprogress=continue\nframe=62\nfps=5.81\nstream_0_0_q=26.0\nbitrate=   3.1kbits/s\ntotal_size=780\nout_time_us=2000000\nout_time_ms=2000000\nout_time=00:00:02.000000\ndup_frames=0\ndrop_frames=0\nspeed=0.188x\nprogress=continue\nframe=62\nfps=5.55\nstream_0_0_q=26.0\nbitrate=   3.1kbits/s\ntotal_size=780\nout_time_us=2000000\nout_time_ms=2000000\nout_time=00:00:02.000000\ndup_frames=0\ndrop_frames=0\nspeed=0.179x\nprogress=continue\nframe=62\nfps=5.31\nstream_0_0_q=26.0\nbitrate=   3.1kbits/s\ntotal_size=780\nout_time_us=2000000\nout_time_ms=2000000\nout_time=00:00:02.000000\ndup_frames=0\ndrop_frames=0\nspeed=0.171x\nprogress=continue\nframe=63\nfps=5.17\nstream_0_0_q=26.0\nbitrate=   3.1kbits/s\ntotal_size=780\nout_time_us=2033333\nout_time_ms=2033333\nout_time=00:00:02.033333\ndup_frames=0\ndrop_frames=0\nspeed=0.167x\nprogress=continue\nframe=66\nfps=5.20\nstream_0_0_q=26.0\nbitrate=   2.9kbits/s\ntotal_size=780\nout_time_us=2133333\nout_time_ms=2133333\nout_time=00:00:02.133333\ndup_frames=0\ndrop_frames=0\nspeed=0.168x\nprogress=continue\nframe=68\nfps=5.15\nstream_0_0_q=26.0\nbitrate=   2.8kbits/s\ntotal_size=780\nout_time_us=2200000\nout_time_ms=2200000\nout_time=00:00:02.200000\ndup_frames=0\ndrop_frames=0\nspeed=0.167x\nprogress=continue\nframe=71\nfps=5.18\nstream_0_0_q=26.0\nbitrate=   2.7kbits/s\ntotal_size=780\nout_time_us=2300000\nout_time_ms=2300000\nout_time=00:00:02.300000\ndup_frames=0\ndrop_frames=0\nspeed=0.168x\nprogress=continue\nframe=83\nfps=5.84\nstream_0_0_q=26.0\nbitrate=   2.3kbits/s\ntotal_size=780\nout_time_us=2700000\nout_time_ms=2700000\nout_time=00:00:02.700000\ndup_frames=0\ndrop_frames=0\nspeed=0.19x\nprogress=continue\nframe=85\nfps=5.77\nstream_0_0_q=26.0\nbitrate=   2.3kbits/s\ntotal_size=780\nout_time_us=2766667\nout_time_ms=2766667\nout_time=00:00:02.766667\ndup_frames=0\ndrop_frames=0\nspeed=0.188x\nprogress=continue\nframe=88\nfps=5.77\nstream_0_0_q=26.0\nbitrate=   2.2kbits/s\ntotal_size=780\nout_time_us=2866667\nout_time_ms=2866667\nout_time=00:00:02.866667\ndup_frames=0\ndrop_frames=0\nspeed=0.188x\nprogress=continue\nframe=91\nfps=5.78\nstream_0_0_q=26.0\nbitrate=   2.1kbits/s\ntotal_size=780\nout_time_us=2966667\nout_time_ms=2966667\nout_time=00:00:02.966667\ndup_frames=0\ndrop_frames=0\nspeed=0.188x\nprogress=continue\nframe=93\nfps=5.72\nstream_0_0_q=26.0\nbitrate=   2.1kbits/s\ntotal_size=780\nout_time_us=3033333\nout_time_ms=3033333\nout_time=00:00:03.033333\ndup_frames=0\ndrop_frames=0\nspeed=0.187x\nprogress=continue\nframe=205\nfps=12.23\nstream_0_0_q=26.0\nbitrate=   0.9kbits/s\ntotal_size=780\nout_time_us=6766667\nout_time_ms=6766667\nout_time=00:00:06.766667\ndup_frames=0\ndrop_frames=0\nspeed=0.404x\nprogress=continue\nframe=446\nfps=25.51\nstream_0_0_q=-1.0\nbitrate=8185.8kbits/s\ntotal_size=15143695\nout_time_us=14800000\nout_time_ms=14800000\nout_time=00:00:14.800000\ndup_frames=0\ndrop_frames=0\nspeed=0.847x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "8f4bc8ca60ff0d10a94eacdbf3967719283b6851f74c671b3d839fbadc3e2625"
+      }
+    },
+    {
+      "name": "short-fade",
+      "frames": 900,
+      "allDecodedFramesIdentical": true,
+      "streamedQcFrameIdentical": true,
+      "representativeFrame": 191,
+      "beforeVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/short-fade-before.mp4",
+        "bytes": 30589227,
+        "fileSha256": "c17d46016107d76e21e1b35e03487ec5fc1985e460efa15ea4aa94b1e2416940"
+      },
+      "afterVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/short-fade-after.mp4",
+        "bytes": 30589227,
+        "fileSha256": "cce99174cd5c8362e0f30de16448ca994868142cc9df26078cf66daa4079038d"
+      },
+      "frameHash": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/short-fade-after.framehash.txt",
+        "bytes": 101019,
+        "fileSha256": "58038c27a5013652479baa79e8a904f3c2203e61efb946c456fc69d752178ccc"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "target",
+        "representativeFrame": 191,
+        "expectedFrameCount": 900,
+        "encodedFrames": 471,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "988841c183c77805b6f0322ac347c7b548d76a0ad1c21f1b5e6c53e45b0e6638",
+        "encoderArgumentsCanonicalSha256": "d34efcba570f01079d96266874d238e4f3993278bcdb1b90cddf438bb5641ac8",
+        "decoderArgumentsCanonicalSha256": "2481538047740289a68f2e61af53b13dca851d8a7da8fa5d74b648b559c151ec",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=61\nfps=10.95\nstream_0_0_q=26.0\nbitrate=   3.2kbits/s\ntotal_size=780\nout_time_us=1966667\nout_time_ms=1966667\nout_time=00:00:01.966667\ndup_frames=0\ndrop_frames=0\nspeed=0.353x\nprogress=continue\nframe=235\nfps=38.63\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7766667\nout_time_ms=7766667\nout_time=00:00:07.766667\ndup_frames=0\ndrop_frames=0\nspeed=1.28x\nprogress=continue\nframe=471\nfps=69.21\nstream_0_0_q=-1.0\nbitrate=8199.1kbits/s\ntotal_size=16022395\nout_time_us=15633333\nout_time_ms=15633333\nout_time=00:00:15.633333\ndup_frames=0\ndrop_frames=0\nspeed= 2.3x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "9b5b6d4ad18f3a44273309aae02b84cdd5ced970e522b356b4d5c1bb35c0ce34"
+      }
+    },
+    {
+      "name": "simultaneous",
+      "frames": 900,
+      "allDecodedFramesIdentical": true,
+      "streamedQcFrameIdentical": true,
+      "representativeFrame": 300,
+      "beforeVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/simultaneous-before.mp4",
+        "bytes": 30588494,
+        "fileSha256": "14c7fc5c9da67345e42b4d3bd33fc5330fde4b3c325cc800fa89e1bb0048a05b"
+      },
+      "afterVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/simultaneous-after.mp4",
+        "bytes": 30588494,
+        "fileSha256": "948152e1f798ec486e3c8c37bdfcd3f950a957f8d790b3471e3c02340ce5a7b2"
+      },
+      "frameHash": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/simultaneous-after.framehash.txt",
+        "bytes": 101019,
+        "fileSha256": "99c6775c428181fe24090716f7b01eda514f8ea309086861d0e427777d706e4e"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "target",
+        "representativeFrame": 300,
+        "expectedFrameCount": 900,
+        "encodedFrames": 787,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "ec905212455b05855b2cb6fca08248314555dc4f45452b5ade7e1f843e08b2c6",
+        "encoderArgumentsCanonicalSha256": "a97bc2a5df68ceb094d878b435e758666ab58dc66a0cddb4b250f9b6c52aec07",
+        "decoderArgumentsCanonicalSha256": "2511d402703140066318b10d0b6b34a9f9bec0120e7e740a2e24bed0193bb099",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=75\nfps=18.52\nstream_0_0_q=26.0\nbitrate=   2.6kbits/s\ntotal_size=780\nout_time_us=2433333\nout_time_ms=2433333\nout_time=00:00:02.433333\ndup_frames=0\ndrop_frames=0\nspeed=0.601x\nprogress=continue\nframe=227\nfps=49.87\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7500000\nout_time_ms=7500000\nout_time=00:00:07.500000\ndup_frames=0\ndrop_frames=0\nspeed=1.65x\nprogress=continue\nframe=227\nfps=44.84\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7500000\nout_time_ms=7500000\nout_time=00:00:07.500000\ndup_frames=0\ndrop_frames=0\nspeed=1.48x\nprogress=continue\nframe=229\nfps=41.13\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7566667\nout_time_ms=7566667\nout_time=00:00:07.566667\ndup_frames=0\ndrop_frames=0\nspeed=1.36x\nprogress=continue\nframe=232\nfps=38.23\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7666667\nout_time_ms=7666667\nout_time=00:00:07.666667\ndup_frames=0\ndrop_frames=0\nspeed=1.26x\nprogress=continue\nframe=234\nfps=35.58\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7733333\nout_time_ms=7733333\nout_time=00:00:07.733333\ndup_frames=0\ndrop_frames=0\nspeed=1.18x\nprogress=continue\nframe=235\nfps=33.18\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7766667\nout_time_ms=7766667\nout_time=00:00:07.766667\ndup_frames=0\ndrop_frames=0\nspeed= 1.1x\nprogress=continue\nframe=236\nfps=31.11\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7800000\nout_time_ms=7800000\nout_time=00:00:07.800000\ndup_frames=0\ndrop_frames=0\nspeed=1.03x\nprogress=continue\nframe=237\nfps=29.28\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7833333\nout_time_ms=7833333\nout_time=00:00:07.833333\ndup_frames=0\ndrop_frames=0\nspeed=0.968x\nprogress=continue\nframe=238\nfps=27.66\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7866667\nout_time_ms=7866667\nout_time=00:00:07.866667\ndup_frames=0\ndrop_frames=0\nspeed=0.914x\nprogress=continue\nframe=240\nfps=26.34\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7933333\nout_time_ms=7933333\nout_time=00:00:07.933333\ndup_frames=0\ndrop_frames=0\nspeed=0.871x\nprogress=continue\nframe=242\nfps=25.15\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8000000\nout_time_ms=8000000\nout_time=00:00:08.000000\ndup_frames=0\ndrop_frames=0\nspeed=0.831x\nprogress=continue\nframe=243\nfps=23.98\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8033333\nout_time_ms=8033333\nout_time=00:00:08.033333\ndup_frames=0\ndrop_frames=0\nspeed=0.793x\nprogress=continue\nframe=244\nfps=22.93\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8066667\nout_time_ms=8066667\nout_time=00:00:08.066667\ndup_frames=0\ndrop_frames=0\nspeed=0.758x\nprogress=continue\nframe=245\nfps=21.99\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8100000\nout_time_ms=8100000\nout_time=00:00:08.100000\ndup_frames=0\ndrop_frames=0\nspeed=0.727x\nprogress=continue\nframe=246\nfps=21.13\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8133333\nout_time_ms=8133333\nout_time=00:00:08.133333\ndup_frames=0\ndrop_frames=0\nspeed=0.699x\nprogress=continue\nframe=246\nfps=20.24\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8133333\nout_time_ms=8133333\nout_time=00:00:08.133333\ndup_frames=0\ndrop_frames=0\nspeed=0.669x\nprogress=continue\nframe=246\nfps=19.44\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8133333\nout_time_ms=8133333\nout_time=00:00:08.133333\ndup_frames=0\ndrop_frames=0\nspeed=0.643x\nprogress=continue\nframe=247\nfps=18.77\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8166667\nout_time_ms=8166667\nout_time=00:00:08.166667\ndup_frames=0\ndrop_frames=0\nspeed=0.621x\nprogress=continue\nframe=249\nfps=18.21\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8233333\nout_time_ms=8233333\nout_time=00:00:08.233333\ndup_frames=0\ndrop_frames=0\nspeed=0.602x\nprogress=continue\nframe=249\nfps=17.56\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8233333\nout_time_ms=8233333\nout_time=00:00:08.233333\ndup_frames=0\ndrop_frames=0\nspeed=0.581x\nprogress=continue\nframe=250\nfps=17.02\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8266667\nout_time_ms=8266667\nout_time=00:00:08.266667\ndup_frames=0\ndrop_frames=0\nspeed=0.563x\nprogress=continue\nframe=252\nfps=16.59\nstream_0_0_q=26.0\nbitrate=8173.2kbits/s\ntotal_size=8513787\nout_time_us=8333333\nout_time_ms=8333333\nout_time=00:00:08.333333\ndup_frames=0\ndrop_frames=0\nspeed=0.549x\nprogress=continue\nframe=254\nfps=16.18\nstream_0_0_q=26.0\nbitrate=8108.4kbits/s\ntotal_size=8513787\nout_time_us=8400000\nout_time_ms=8400000\nout_time=00:00:08.400000\ndup_frames=0\ndrop_frames=0\nspeed=0.535x\nprogress=continue\nframe=256\nfps=15.80\nstream_0_0_q=26.0\nbitrate=8044.5kbits/s\ntotal_size=8513787\nout_time_us=8466667\nout_time_ms=8466667\nout_time=00:00:08.466667\ndup_frames=0\ndrop_frames=0\nspeed=0.522x\nprogress=continue\nframe=259\nfps=15.50\nstream_0_0_q=26.0\nbitrate=7950.6kbits/s\ntotal_size=8513787\nout_time_us=8566667\nout_time_ms=8566667\nout_time=00:00:08.566667\ndup_frames=0\ndrop_frames=0\nspeed=0.513x\nprogress=continue\nframe=262\nfps=15.22\nstream_0_0_q=26.0\nbitrate=7858.9kbits/s\ntotal_size=8513787\nout_time_us=8666667\nout_time_ms=8666667\nout_time=00:00:08.666667\ndup_frames=0\ndrop_frames=0\nspeed=0.504x\nprogress=continue\nframe=263\nfps=14.85\nstream_0_0_q=26.0\nbitrate=7828.8kbits/s\ntotal_size=8513787\nout_time_us=8700000\nout_time_ms=8700000\nout_time=00:00:08.700000\ndup_frames=0\ndrop_frames=0\nspeed=0.491x\nprogress=continue\nframe=265\nfps=14.55\nstream_0_0_q=26.0\nbitrate=7769.2kbits/s\ntotal_size=8513787\nout_time_us=8766667\nout_time_ms=8766667\nout_time=00:00:08.766667\ndup_frames=0\ndrop_frames=0\nspeed=0.481x\nprogress=continue\nframe=268\nfps=14.31\nstream_0_0_q=26.0\nbitrate=7681.6kbits/s\ntotal_size=8513787\nout_time_us=8866667\nout_time_ms=8866667\nout_time=00:00:08.866667\ndup_frames=0\ndrop_frames=0\nspeed=0.474x\nprogress=continue\nframe=270\nfps=14.04\nstream_0_0_q=26.0\nbitrate=7624.3kbits/s\ntotal_size=8513787\nout_time_us=8933333\nout_time_ms=8933333\nout_time=00:00:08.933333\ndup_frames=0\ndrop_frames=0\nspeed=0.464x\nprogress=continue\nframe=273\nfps=13.83\nstream_0_0_q=26.0\nbitrate=7539.9kbits/s\ntotal_size=8513787\nout_time_us=9033333\nout_time_ms=9033333\nout_time=00:00:09.033333\ndup_frames=0\ndrop_frames=0\nspeed=0.457x\nprogress=continue\nframe=350\nfps=17.28\nstream_0_0_q=26.0\nbitrate=5871.6kbits/s\ntotal_size=8513787\nout_time_us=11600000\nout_time_ms=11600000\nout_time=00:00:11.600000\ndup_frames=0\ndrop_frames=0\nspeed=0.573x\nprogress=continue\nframe=501\nfps=24.13\nstream_0_0_q=26.0\nbitrate=4030.2kbits/s\ntotal_size=8513787\nout_time_us=16900000\nout_time_ms=16900000\nout_time=00:00:16.900000\ndup_frames=0\ndrop_frames=0\nspeed=0.814x\nprogress=continue\nframe=787\nfps=36.63\nstream_0_0_q=-1.0\nbitrate=8152.5kbits/s\ntotal_size=26665466\nout_time_us=26166667\nout_time_ms=26166667\nout_time=00:00:26.166667\ndup_frames=0\ndrop_frames=0\nspeed=1.22x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "7db1e5d4721e028f7933ce8f9e6f504958f7aacaeef798f220b4d35922011e98"
+      }
+    },
+    {
+      "name": "transparent",
+      "frames": 900,
+      "allDecodedFramesIdentical": true,
+      "streamedQcFrameIdentical": true,
+      "representativeFrame": 425,
+      "beforeVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/transparent-before.mp4",
+        "bytes": 30584263,
+        "fileSha256": "26384baa1a38cbeb5c004607d381e80dab94cc9171c308837a3e31a2e61865a2"
+      },
+      "afterVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/transparent-after.mp4",
+        "bytes": 30584263,
+        "fileSha256": "ebc56c43fd3e37fc19ae9f5a690becf6ae8a551e0a65d0310c70b6ed23284884"
+      },
+      "frameHash": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/transparent-after.framehash.txt",
+        "bytes": 101019,
+        "fileSha256": "72ae06897edcd390d73cb672c3a30528714628928f87f87aad1d4f5030b059af"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "target",
+        "representativeFrame": 425,
+        "expectedFrameCount": 900,
+        "encodedFrames": 697,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "b52f47df7f11a567744ef7598f7db3b40bb97de2bdbe514be83e47bbae36f0d6",
+        "encoderArgumentsCanonicalSha256": "e4705f1505be8569dfedfe86f8fe8084c46a550409f3aaa74f8e126995e6fce0",
+        "decoderArgumentsCanonicalSha256": "fbfa61cbfe8d287b7e28c7cf4ece448e446708644fc194f209ac6d53adef6896",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=169\nfps=37.12\nstream_0_0_q=26.0\nbitrate=   1.1kbits/s\ntotal_size=780\nout_time_us=5566667\nout_time_ms=5566667\nout_time=00:00:05.566667\ndup_frames=0\ndrop_frames=0\nspeed=1.22x\nprogress=continue\nframe=318\nfps=62.80\nstream_0_0_q=26.0\nbitrate=6466.2kbits/s\ntotal_size=8513787\nout_time_us=10533333\nout_time_ms=10533333\nout_time=00:00:10.533333\ndup_frames=0\ndrop_frames=0\nspeed=2.08x\nprogress=continue\nframe=358\nfps=64.27\nstream_0_0_q=26.0\nbitrate=5739.6kbits/s\ntotal_size=8513787\nout_time_us=11866667\nout_time_ms=11866667\nout_time=00:00:11.866667\ndup_frames=0\ndrop_frames=0\nspeed=2.13x\nprogress=continue\nframe=359\nfps=59.05\nstream_0_0_q=26.0\nbitrate=5723.6kbits/s\ntotal_size=8513787\nout_time_us=11900000\nout_time_ms=11900000\nout_time=00:00:11.900000\ndup_frames=0\ndrop_frames=0\nspeed=1.96x\nprogress=continue\nframe=362\nfps=54.94\nstream_0_0_q=26.0\nbitrate=5675.9kbits/s\ntotal_size=8513787\nout_time_us=12000000\nout_time_ms=12000000\nout_time=00:00:12.000000\ndup_frames=0\ndrop_frames=0\nspeed=1.82x\nprogress=continue\nframe=364\nfps=51.27\nstream_0_0_q=26.0\nbitrate=5644.5kbits/s\ntotal_size=8513787\nout_time_us=12066667\nout_time_ms=12066667\nout_time=00:00:12.066667\ndup_frames=0\ndrop_frames=0\nspeed= 1.7x\nprogress=continue\nframe=365\nfps=48.01\nstream_0_0_q=26.0\nbitrate=5629.0kbits/s\ntotal_size=8513787\nout_time_us=12100000\nout_time_ms=12100000\nout_time=00:00:12.100000\ndup_frames=0\ndrop_frames=0\nspeed=1.59x\nprogress=continue\nframe=365\nfps=45.01\nstream_0_0_q=26.0\nbitrate=5629.0kbits/s\ntotal_size=8513787\nout_time_us=12100000\nout_time_ms=12100000\nout_time=00:00:12.100000\ndup_frames=0\ndrop_frames=0\nspeed=1.49x\nprogress=continue\nframe=367\nfps=42.58\nstream_0_0_q=26.0\nbitrate=5598.1kbits/s\ntotal_size=8513787\nout_time_us=12166667\nout_time_ms=12166667\nout_time=00:00:12.166667\ndup_frames=0\ndrop_frames=0\nspeed=1.41x\nprogress=continue\nframe=368\nfps=40.32\nstream_0_0_q=26.0\nbitrate=5582.8kbits/s\ntotal_size=8513787\nout_time_us=12200000\nout_time_ms=12200000\nout_time=00:00:12.200000\ndup_frames=0\ndrop_frames=0\nspeed=1.34x\nprogress=continue\nframe=369\nfps=38.29\nstream_0_0_q=26.0\nbitrate=5567.6kbits/s\ntotal_size=8513787\nout_time_us=12233333\nout_time_ms=12233333\nout_time=00:00:12.233333\ndup_frames=0\ndrop_frames=0\nspeed=1.27x\nprogress=continue\nframe=370\nfps=36.47\nstream_0_0_q=26.0\nbitrate=5552.5kbits/s\ntotal_size=8513787\nout_time_us=12266667\nout_time_ms=12266667\nout_time=00:00:12.266667\ndup_frames=0\ndrop_frames=0\nspeed=1.21x\nprogress=continue\nframe=371\nfps=34.83\nstream_0_0_q=26.0\nbitrate=5537.4kbits/s\ntotal_size=8513787\nout_time_us=12300000\nout_time_ms=12300000\nout_time=00:00:12.300000\ndup_frames=0\ndrop_frames=0\nspeed=1.15x\nprogress=continue\nframe=373\nfps=33.42\nstream_0_0_q=26.0\nbitrate=5507.6kbits/s\ntotal_size=8513787\nout_time_us=12366667\nout_time_ms=12366667\nout_time=00:00:12.366667\ndup_frames=0\ndrop_frames=0\nspeed=1.11x\nprogress=continue\nframe=374\nfps=32.04\nstream_0_0_q=26.0\nbitrate=5492.8kbits/s\ntotal_size=8513787\nout_time_us=12400000\nout_time_ms=12400000\nout_time=00:00:12.400000\ndup_frames=0\ndrop_frames=0\nspeed=1.06x\nprogress=continue\nframe=376\nfps=30.87\nstream_0_0_q=26.0\nbitrate=5463.4kbits/s\ntotal_size=8513787\nout_time_us=12466667\nout_time_ms=12466667\nout_time=00:00:12.466667\ndup_frames=0\ndrop_frames=0\nspeed=1.02x\nprogress=continue\nframe=377\nfps=29.72\nstream_0_0_q=26.0\nbitrate=5448.8kbits/s\ntotal_size=8513787\nout_time_us=12500000\nout_time_ms=12500000\nout_time=00:00:12.500000\ndup_frames=0\ndrop_frames=0\nspeed=0.985x\nprogress=continue\nframe=377\nfps=28.57\nstream_0_0_q=26.0\nbitrate=5448.8kbits/s\ntotal_size=8513787\nout_time_us=12500000\nout_time_ms=12500000\nout_time=00:00:12.500000\ndup_frames=0\ndrop_frames=0\nspeed=0.947x\nprogress=continue\nframe=377\nfps=27.51\nstream_0_0_q=26.0\nbitrate=5448.8kbits/s\ntotal_size=8513787\nout_time_us=12500000\nout_time_ms=12500000\nout_time=00:00:12.500000\ndup_frames=0\ndrop_frames=0\nspeed=0.912x\nprogress=continue\nframe=381\nfps=26.80\nstream_0_0_q=26.0\nbitrate=5391.3kbits/s\ntotal_size=8513787\nout_time_us=12633333\nout_time_ms=12633333\nout_time=00:00:12.633333\ndup_frames=0\ndrop_frames=0\nspeed=0.889x\nprogress=continue\nframe=384\nfps=26.09\nstream_0_0_q=26.0\nbitrate=5349.0kbits/s\ntotal_size=8513787\nout_time_us=12733333\nout_time_ms=12733333\nout_time=00:00:12.733333\ndup_frames=0\ndrop_frames=0\nspeed=0.865x\nprogress=continue\nframe=387\nfps=25.41\nstream_0_0_q=26.0\nbitrate=5307.3kbits/s\ntotal_size=8513787\nout_time_us=12833333\nout_time_ms=12833333\nout_time=00:00:12.833333\ndup_frames=0\ndrop_frames=0\nspeed=0.843x\nprogress=continue\nframe=389\nfps=24.72\nstream_0_0_q=26.0\nbitrate=5279.9kbits/s\ntotal_size=8513787\nout_time_us=12900000\nout_time_ms=12900000\nout_time=00:00:12.900000\ndup_frames=0\ndrop_frames=0\nspeed=0.82x\nprogress=continue\nframe=392\nfps=24.13\nstream_0_0_q=26.0\nbitrate=5239.3kbits/s\ntotal_size=8513787\nout_time_us=13000000\nout_time_ms=13000000\nout_time=00:00:13.000000\ndup_frames=0\ndrop_frames=0\nspeed= 0.8x\nprogress=continue\nframe=395\nfps=23.57\nstream_0_0_q=26.0\nbitrate=5199.3kbits/s\ntotal_size=8513787\nout_time_us=13100000\nout_time_ms=13100000\nout_time=00:00:13.100000\ndup_frames=0\ndrop_frames=0\nspeed=0.782x\nprogress=continue\nframe=397\nfps=22.99\nstream_0_0_q=26.0\nbitrate=5172.9kbits/s\ntotal_size=8513787\nout_time_us=13166667\nout_time_ms=13166667\nout_time=00:00:13.166667\ndup_frames=0\ndrop_frames=0\nspeed=0.763x\nprogress=continue\nframe=400\nfps=22.51\nstream_0_0_q=26.0\nbitrate=5133.9kbits/s\ntotal_size=8513787\nout_time_us=13266667\nout_time_ms=13266667\nout_time=00:00:13.266667\ndup_frames=0\ndrop_frames=0\nspeed=0.747x\nprogress=continue\nframe=400\nfps=21.89\nstream_0_0_q=26.0\nbitrate=5133.9kbits/s\ntotal_size=8513787\nout_time_us=13266667\nout_time_ms=13266667\nout_time=00:00:13.266667\ndup_frames=0\ndrop_frames=0\nspeed=0.726x\nprogress=continue\nframe=461\nfps=24.54\nstream_0_0_q=26.0\nbitrate=4451.7kbits/s\ntotal_size=8513787\nout_time_us=15300000\nout_time_ms=15300000\nout_time=00:00:15.300000\ndup_frames=0\ndrop_frames=0\nspeed=0.814x\nprogress=continue\nframe=697\nfps=35.73\nstream_0_0_q=-1.0\nbitrate=8195.5kbits/s\ntotal_size=23732932\nout_time_us=23166667\nout_time_ms=23166667\nout_time=00:00:23.166667\ndup_frames=0\ndrop_frames=0\nspeed=1.19x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "3517cd42617628721ff1e909f7ae93bd6d0a9e3ed13762a757deb6f30865caa9"
+      }
+    },
+    {
+      "name": "wrong-omission",
+      "frames": 900,
+      "allDecodedFramesIdentical": true,
+      "streamedQcFrameIdentical": true,
+      "representativeFrame": 300,
+      "beforeVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/wrong-omission-before.mp4",
+        "bytes": 30576564,
+        "fileSha256": "66863f350021672663714078082e1346e92aaad5f90098742caaa8d371c16b2f"
+      },
+      "afterVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/wrong-omission-after.mp4",
+        "bytes": 30576564,
+        "fileSha256": "f68c49db067cadaa6f18db3ae1924fc29eace7c2ad537bec2dc26daf29bd914e"
+      },
+      "frameHash": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/wrong-omission-after.framehash.txt",
+        "bytes": 101019,
+        "fileSha256": "2bdedaa868f62a4cd72b350f5212cb344b670704a2436408ca457d2387de4262"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "target",
+        "representativeFrame": 300,
+        "expectedFrameCount": 900,
+        "encodedFrames": 771,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "667380f2e78ea882dfd19fea4275497745a05530f07c26c8ec4f49f83220318a",
+        "encoderArgumentsCanonicalSha256": "6ddf925880ddae01719e9ab0c4caee5b03187403ff9e4d29debd684eb99d1513",
+        "decoderArgumentsCanonicalSha256": "8d94aa30afefd5d2d47a27bd0b551ae586fc176b1a2f1f5ff284ac4537cf78e7",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=107\nfps=23.54\nstream_0_0_q=26.0\nbitrate=   1.8kbits/s\ntotal_size=780\nout_time_us=3500000\nout_time_ms=3500000\nout_time=00:00:03.500000\ndup_frames=0\ndrop_frames=0\nspeed=0.77x\nprogress=continue\nframe=228\nfps=45.11\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7533333\nout_time_ms=7533333\nout_time=00:00:07.533333\ndup_frames=0\ndrop_frames=0\nspeed=1.49x\nprogress=continue\nframe=229\nfps=41.18\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7566667\nout_time_ms=7566667\nout_time=00:00:07.566667\ndup_frames=0\ndrop_frames=0\nspeed=1.36x\nprogress=continue\nframe=232\nfps=38.21\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7666667\nout_time_ms=7666667\nout_time=00:00:07.666667\ndup_frames=0\ndrop_frames=0\nspeed=1.26x\nprogress=continue\nframe=233\nfps=35.40\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7700000\nout_time_ms=7700000\nout_time=00:00:07.700000\ndup_frames=0\ndrop_frames=0\nspeed=1.17x\nprogress=continue\nframe=235\nfps=33.14\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7766667\nout_time_ms=7766667\nout_time=00:00:07.766667\ndup_frames=0\ndrop_frames=0\nspeed= 1.1x\nprogress=continue\nframe=235\nfps=30.94\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7766667\nout_time_ms=7766667\nout_time=00:00:07.766667\ndup_frames=0\ndrop_frames=0\nspeed=1.02x\nprogress=continue\nframe=237\nfps=29.24\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7833333\nout_time_ms=7833333\nout_time=00:00:07.833333\ndup_frames=0\ndrop_frames=0\nspeed=0.966x\nprogress=continue\nframe=238\nfps=27.64\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7866667\nout_time_ms=7866667\nout_time=00:00:07.866667\ndup_frames=0\ndrop_frames=0\nspeed=0.914x\nprogress=continue\nframe=239\nfps=26.23\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7900000\nout_time_ms=7900000\nout_time=00:00:07.900000\ndup_frames=0\ndrop_frames=0\nspeed=0.867x\nprogress=continue\nframe=240\nfps=24.94\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7933333\nout_time_ms=7933333\nout_time=00:00:07.933333\ndup_frames=0\ndrop_frames=0\nspeed=0.825x\nprogress=continue\nframe=241\nfps=23.80\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7966667\nout_time_ms=7966667\nout_time=00:00:07.966667\ndup_frames=0\ndrop_frames=0\nspeed=0.787x\nprogress=continue\nframe=243\nfps=22.86\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8033333\nout_time_ms=8033333\nout_time=00:00:08.033333\ndup_frames=0\ndrop_frames=0\nspeed=0.756x\nprogress=continue\nframe=244\nfps=21.93\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8066667\nout_time_ms=8066667\nout_time=00:00:08.066667\ndup_frames=0\ndrop_frames=0\nspeed=0.725x\nprogress=continue\nframe=245\nfps=21.06\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8100000\nout_time_ms=8100000\nout_time=00:00:08.100000\ndup_frames=0\ndrop_frames=0\nspeed=0.696x\nprogress=continue\nframe=247\nfps=20.35\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8166667\nout_time_ms=8166667\nout_time=00:00:08.166667\ndup_frames=0\ndrop_frames=0\nspeed=0.673x\nprogress=continue\nframe=247\nfps=19.53\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8166667\nout_time_ms=8166667\nout_time=00:00:08.166667\ndup_frames=0\ndrop_frames=0\nspeed=0.646x\nprogress=continue\nframe=247\nfps=18.78\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8166667\nout_time_ms=8166667\nout_time=00:00:08.166667\ndup_frames=0\ndrop_frames=0\nspeed=0.621x\nprogress=continue\nframe=247\nfps=18.08\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8166667\nout_time_ms=8166667\nout_time=00:00:08.166667\ndup_frames=0\ndrop_frames=0\nspeed=0.598x\nprogress=continue\nframe=248\nfps=17.51\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8200000\nout_time_ms=8200000\nout_time=00:00:08.200000\ndup_frames=0\ndrop_frames=0\nspeed=0.579x\nprogress=continue\nframe=251\nfps=17.11\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8300000\nout_time_ms=8300000\nout_time=00:00:08.300000\ndup_frames=0\ndrop_frames=0\nspeed=0.566x\nprogress=continue\nframe=251\nfps=16.54\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8300000\nout_time_ms=8300000\nout_time=00:00:08.300000\ndup_frames=0\ndrop_frames=0\nspeed=0.547x\nprogress=continue\nframe=251\nfps=16.00\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8300000\nout_time_ms=8300000\nout_time=00:00:08.300000\ndup_frames=0\ndrop_frames=0\nspeed=0.529x\nprogress=continue\nframe=254\nfps=15.68\nstream_0_0_q=26.0\nbitrate=8108.4kbits/s\ntotal_size=8513787\nout_time_us=8400000\nout_time_ms=8400000\nout_time=00:00:08.400000\ndup_frames=0\ndrop_frames=0\nspeed=0.519x\nprogress=continue\nframe=257\nfps=15.39\nstream_0_0_q=26.0\nbitrate=8013.0kbits/s\ntotal_size=8513787\nout_time_us=8500000\nout_time_ms=8500000\nout_time=00:00:08.500000\ndup_frames=0\ndrop_frames=0\nspeed=0.509x\nprogress=continue\nframe=260\nfps=15.10\nstream_0_0_q=26.0\nbitrate=7919.8kbits/s\ntotal_size=8513787\nout_time_us=8600000\nout_time_ms=8600000\nout_time=00:00:08.600000\ndup_frames=0\ndrop_frames=0\nspeed= 0.5x\nprogress=continue\nframe=262\nfps=14.79\nstream_0_0_q=26.0\nbitrate=7858.9kbits/s\ntotal_size=8513787\nout_time_us=8666667\nout_time_ms=8666667\nout_time=00:00:08.666667\ndup_frames=0\ndrop_frames=0\nspeed=0.489x\nprogress=continue\nframe=265\nfps=14.54\nstream_0_0_q=26.0\nbitrate=7769.2kbits/s\ntotal_size=8513787\nout_time_us=8766667\nout_time_ms=8766667\nout_time=00:00:08.766667\ndup_frames=0\ndrop_frames=0\nspeed=0.481x\nprogress=continue\nframe=266\nfps=14.20\nstream_0_0_q=26.0\nbitrate=7739.8kbits/s\ntotal_size=8513787\nout_time_us=8800000\nout_time_ms=8800000\nout_time=00:00:08.800000\ndup_frames=0\ndrop_frames=0\nspeed=0.47x\nprogress=continue\nframe=266\nfps=13.83\nstream_0_0_q=26.0\nbitrate=7739.8kbits/s\ntotal_size=8513787\nout_time_us=8800000\nout_time_ms=8800000\nout_time=00:00:08.800000\ndup_frames=0\ndrop_frames=0\nspeed=0.457x\nprogress=continue\nframe=266\nfps=13.47\nstream_0_0_q=26.0\nbitrate=7739.8kbits/s\ntotal_size=8513787\nout_time_us=8800000\nout_time_ms=8800000\nout_time=00:00:08.800000\ndup_frames=0\ndrop_frames=0\nspeed=0.446x\nprogress=continue\nframe=341\nfps=16.84\nstream_0_0_q=26.0\nbitrate=6027.5kbits/s\ntotal_size=8513787\nout_time_us=11300000\nout_time_ms=11300000\nout_time=00:00:11.300000\ndup_frames=0\ndrop_frames=0\nspeed=0.558x\nprogress=continue\nframe=501\nfps=24.14\nstream_0_0_q=26.0\nbitrate=4030.2kbits/s\ntotal_size=8513787\nout_time_us=16900000\nout_time_ms=16900000\nout_time=00:00:16.900000\ndup_frames=0\ndrop_frames=0\nspeed=0.814x\nprogress=continue\nframe=771\nfps=35.91\nstream_0_0_q=-1.0\nbitrate=8154.6kbits/s\ntotal_size=26128562\nout_time_us=25633333\nout_time_ms=25633333\nout_time=00:00:25.633333\ndup_frames=0\ndrop_frames=0\nspeed=1.19x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "dd7b392bb22137e9c72a33961c4627d897455176cb4b65aacb48058b61714daf"
+      }
+    },
+    {
+      "name": "moved-target",
+      "frames": 900,
+      "allDecodedFramesIdentical": true,
+      "streamedQcFrameIdentical": true,
+      "representativeFrame": 300,
+      "beforeVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/moved-target-before.mp4",
+        "bytes": 30393476,
+        "fileSha256": "66ac11bf78523e723fd6b34281e179a2d3eeb419492fcf05a938b1e1fb8c1b90"
+      },
+      "afterVideo": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/moved-target-after.mp4",
+        "bytes": 30393476,
+        "fileSha256": "1c3c15f06d4028806897f92dc041efaa8452ecfbf16f2e600acc43bc3d70b23f"
+      },
+      "frameHash": {
+        "path": "evals/clip_composition/outputs/work-unseen-material-thin-plan-024-v001/resource-control-fixture-v001-9U7Ar1/moved-target-after.framehash.txt",
+        "bytes": 101019,
+        "fileSha256": "91d5be8e73c4380f82857c506d2ffc8a1c78177ea7e9dd6ed35d090826092d14"
+      },
+      "outcome": {
+        "status": "completed",
+        "instructionId": "target",
+        "representativeFrame": 300,
+        "expectedFrameCount": 900,
+        "encodedFrames": 775,
+        "targetDecodedBeforeQuit": true,
+        "quitRequestedAfterDecoderExit": true,
+        "inputCanonicalSha256": "697167d172ce61b3f8ff423e757dd6d460ba8012979feb0322d8ed0707ebb92b",
+        "encoderArgumentsCanonicalSha256": "0bfc20370cd912886468d35048881f0efc0f52e8837e39d872f6ac117a553728",
+        "decoderArgumentsCanonicalSha256": "cc191c222a0eb4121e4f56e10fe6cf87d94d09a65e45eedcbaf136cc5f198360",
+        "encoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": "frame=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=0\nfps=0.00\nstream_0_0_q=0.0\nbitrate=N/A\ntotal_size=0\nout_time_us=N/A\nout_time_ms=N/A\nout_time=N/A\ndup_frames=0\ndrop_frames=0\nspeed=N/A\nprogress=continue\nframe=110\nfps=24.13\nstream_0_0_q=26.0\nbitrate=   1.7kbits/s\ntotal_size=780\nout_time_us=3600000\nout_time_ms=3600000\nout_time=00:00:03.600000\ndup_frames=0\ndrop_frames=0\nspeed=0.79x\nprogress=continue\nframe=228\nfps=44.98\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7533333\nout_time_ms=7533333\nout_time=00:00:07.533333\ndup_frames=0\ndrop_frames=0\nspeed=1.49x\nprogress=continue\nframe=228\nfps=40.93\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7533333\nout_time_ms=7533333\nout_time=00:00:07.533333\ndup_frames=0\ndrop_frames=0\nspeed=1.35x\nprogress=continue\nframe=231\nfps=37.99\nstream_0_0_q=23.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7633333\nout_time_ms=7633333\nout_time=00:00:07.633333\ndup_frames=0\ndrop_frames=0\nspeed=1.26x\nprogress=continue\nframe=233\nfps=35.36\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7700000\nout_time_ms=7700000\nout_time=00:00:07.700000\ndup_frames=0\ndrop_frames=0\nspeed=1.17x\nprogress=continue\nframe=235\nfps=33.13\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7766667\nout_time_ms=7766667\nout_time=00:00:07.766667\ndup_frames=0\ndrop_frames=0\nspeed=1.09x\nprogress=continue\nframe=236\nfps=31.07\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7800000\nout_time_ms=7800000\nout_time=00:00:07.800000\ndup_frames=0\ndrop_frames=0\nspeed=1.03x\nprogress=continue\nframe=237\nfps=29.24\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7833333\nout_time_ms=7833333\nout_time=00:00:07.833333\ndup_frames=0\ndrop_frames=0\nspeed=0.966x\nprogress=continue\nframe=238\nfps=27.65\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7866667\nout_time_ms=7866667\nout_time=00:00:07.866667\ndup_frames=0\ndrop_frames=0\nspeed=0.914x\nprogress=continue\nframe=240\nfps=26.35\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7933333\nout_time_ms=7933333\nout_time=00:00:07.933333\ndup_frames=0\ndrop_frames=0\nspeed=0.871x\nprogress=continue\nframe=241\nfps=25.07\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=7966667\nout_time_ms=7966667\nout_time=00:00:07.966667\ndup_frames=0\ndrop_frames=0\nspeed=0.829x\nprogress=continue\nframe=242\nfps=23.91\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8000000\nout_time_ms=8000000\nout_time=00:00:08.000000\ndup_frames=0\ndrop_frames=0\nspeed=0.79x\nprogress=continue\nframe=244\nfps=22.95\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8066667\nout_time_ms=8066667\nout_time=00:00:08.066667\ndup_frames=0\ndrop_frames=0\nspeed=0.759x\nprogress=continue\nframe=245\nfps=21.99\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8100000\nout_time_ms=8100000\nout_time=00:00:08.100000\ndup_frames=0\ndrop_frames=0\nspeed=0.727x\nprogress=continue\nframe=246\nfps=21.12\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8133333\nout_time_ms=8133333\nout_time=00:00:08.133333\ndup_frames=0\ndrop_frames=0\nspeed=0.698x\nprogress=continue\nframe=247\nfps=20.32\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8166667\nout_time_ms=8166667\nout_time=00:00:08.166667\ndup_frames=0\ndrop_frames=0\nspeed=0.672x\nprogress=continue\nframe=247\nfps=19.51\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8166667\nout_time_ms=8166667\nout_time=00:00:08.166667\ndup_frames=0\ndrop_frames=0\nspeed=0.645x\nprogress=continue\nframe=248\nfps=18.83\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8200000\nout_time_ms=8200000\nout_time=00:00:08.200000\ndup_frames=0\ndrop_frames=0\nspeed=0.622x\nprogress=continue\nframe=250\nfps=18.27\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8266667\nout_time_ms=8266667\nout_time=00:00:08.266667\ndup_frames=0\ndrop_frames=0\nspeed=0.604x\nprogress=continue\nframe=250\nfps=17.62\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8266667\nout_time_ms=8266667\nout_time=00:00:08.266667\ndup_frames=0\ndrop_frames=0\nspeed=0.582x\nprogress=continue\nframe=251\nfps=17.08\nstream_0_0_q=26.0\nbitrate=   0.8kbits/s\ntotal_size=780\nout_time_us=8300000\nout_time_ms=8300000\nout_time=00:00:08.300000\ndup_frames=0\ndrop_frames=0\nspeed=0.565x\nprogress=continue\nframe=252\nfps=16.58\nstream_0_0_q=26.0\nbitrate=8173.2kbits/s\ntotal_size=8513787\nout_time_us=8333333\nout_time_ms=8333333\nout_time=00:00:08.333333\ndup_frames=0\ndrop_frames=0\nspeed=0.548x\nprogress=continue\nframe=254\nfps=16.17\nstream_0_0_q=26.0\nbitrate=8108.4kbits/s\ntotal_size=8513787\nout_time_us=8400000\nout_time_ms=8400000\nout_time=00:00:08.400000\ndup_frames=0\ndrop_frames=0\nspeed=0.535x\nprogress=continue\nframe=255\nfps=15.72\nstream_0_0_q=26.0\nbitrate=8076.3kbits/s\ntotal_size=8513787\nout_time_us=8433333\nout_time_ms=8433333\nout_time=00:00:08.433333\ndup_frames=0\ndrop_frames=0\nspeed=0.52x\nprogress=continue\nframe=258\nfps=15.43\nstream_0_0_q=26.0\nbitrate=7981.7kbits/s\ntotal_size=8513787\nout_time_us=8533333\nout_time_ms=8533333\nout_time=00:00:08.533333\ndup_frames=0\ndrop_frames=0\nspeed=0.51x\nprogress=continue\nframe=261\nfps=15.15\nstream_0_0_q=26.0\nbitrate=7889.2kbits/s\ntotal_size=8513787\nout_time_us=8633333\nout_time_ms=8633333\nout_time=00:00:08.633333\ndup_frames=0\ndrop_frames=0\nspeed=0.501x\nprogress=continue\nframe=263\nfps=14.82\nstream_0_0_q=26.0\nbitrate=7828.8kbits/s\ntotal_size=8513787\nout_time_us=8700000\nout_time_ms=8700000\nout_time=00:00:08.700000\ndup_frames=0\ndrop_frames=0\nspeed=0.49x\nprogress=continue\nframe=265\nfps=14.52\nstream_0_0_q=26.0\nbitrate=7769.2kbits/s\ntotal_size=8513787\nout_time_us=8766667\nout_time_ms=8766667\nout_time=00:00:08.766667\ndup_frames=0\ndrop_frames=0\nspeed=0.48x\nprogress=continue\nframe=265\nfps=14.12\nstream_0_0_q=26.0\nbitrate=7769.2kbits/s\ntotal_size=8513787\nout_time_us=8766667\nout_time_ms=8766667\nout_time=00:00:08.766667\ndup_frames=0\ndrop_frames=0\nspeed=0.467x\nprogress=continue\nframe=265\nfps=13.76\nstream_0_0_q=26.0\nbitrate=7769.2kbits/s\ntotal_size=8513787\nout_time_us=8766667\nout_time_ms=8766667\nout_time=00:00:08.766667\ndup_frames=0\ndrop_frames=0\nspeed=0.455x\nprogress=continue\nframe=265\nfps=13.40\nstream_0_0_q=26.0\nbitrate=7769.2kbits/s\ntotal_size=8513787\nout_time_us=8766667\nout_time_ms=8766667\nout_time=00:00:08.766667\ndup_frames=0\ndrop_frames=0\nspeed=0.443x\nprogress=continue\nframe=342\nfps=16.87\nstream_0_0_q=26.0\nbitrate=6009.7kbits/s\ntotal_size=8513787\nout_time_us=11333333\nout_time_ms=11333333\nout_time=00:00:11.333333\ndup_frames=0\ndrop_frames=0\nspeed=0.559x\nprogress=continue\nframe=501\nfps=24.11\nstream_0_0_q=26.0\nbitrate=4030.2kbits/s\ntotal_size=8513787\nout_time_us=16900000\nout_time_ms=16900000\nout_time=00:00:16.900000\ndup_frames=0\ndrop_frames=0\nspeed=0.813x\nprogress=continue\nframe=775\nfps=36.05\nstream_0_0_q=-1.0\nbitrate=8113.9kbits/s\ntotal_size=26133615\nout_time_us=25766667\nout_time_ms=25766667\nout_time=00:00:25.766667\ndup_frames=0\ndrop_frames=0\nspeed= 1.2x\nprogress=end\n"
+        },
+        "decoder": {
+          "code": 0,
+          "signal": null,
+          "errors": [],
+          "stderr": ""
+        },
+        "pipeErrors": [
+          "EPIPE"
+        ],
+        "outputFileSha256": "be8e46cf34943a39ee9c807294835ab39ec2ff443dd8bd5e87a1816869112b5f"
+      }
+    }
+  ]
+}

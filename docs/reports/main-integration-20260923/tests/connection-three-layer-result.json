@@ -1,0 +1,635 @@
+{
+  "schemaVersion": "connection-three-layer-fixture-result-research-v001",
+  "status": "passed",
+  "scope": "研究用の保存・解決だけ。実AI、人間評価、媒体製造、renderer・字幕の本番統合なし。",
+  "baselineCommit": "56d31b71febebe124397c9015812b7077cbe6a51",
+  "profileBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-connection-objective-profiles-20260917.json",
+    "sha256": "d4ecf121803b4abc3587f20e6bd1d81a0fdda112172ed49eea4a3d5b0a47b9b7"
+  },
+  "trustedDigestRef": {
+    "version": "digest-v1-phase2-completed-20260914-v001",
+    "completionId": "digest-v1-phase2-completed-20260914-v001",
+    "sha256": "665c31638dcf55af4bf1e6327f915839bbed31d905c007a6a9281e29776b8c34"
+  },
+  "connectionCount": 11,
+  "passed": [
+    {
+      "name": "実11境界の同一性と保存SHAを固定",
+      "status": "passed",
+      "boundaries": 11,
+      "profileFileSha256": "d4ecf121803b4abc3587f20e6bd1d81a0fdda112172ed49eea4a3d5b0a47b9b7"
+    },
+    {
+      "name": "固定Normalのみで全11接続が通常、出所はbaseline",
+      "status": "passed",
+      "normalConnections": 11
+    },
+    {
+      "name": "模擬自動原案を全件そのまま解決し、AI実走と区別",
+      "status": "passed",
+      "simulatedSeparatorConnections": [
+        "connection-01",
+        "connection-11"
+      ],
+      "otherConnectionsNormal": 9
+    },
+    {
+      "name": "11接続それぞれの逆role変更とResetで他10行をbyte不変に保つ",
+      "status": "passed",
+      "individualChanges": 11,
+      "individualResets": 11,
+      "unrelatedRowByteComparisons": 220
+    },
+    {
+      "name": "明示Normalと未指定を区別し、ResetはSeparator原案へ戻る",
+      "status": "passed"
+    },
+    {
+      "name": "固定Normal基準でも模擬上書きの削除で基準へ戻る",
+      "status": "passed"
+    },
+    {
+      "name": "自動原案も通常でも、人間の明示通常と原案の採用元を区別",
+      "status": "passed"
+    },
+    {
+      "name": "複数の模擬上書きから1件だけ削除し他の保存行・実効出所を保つ",
+      "status": "passed",
+      "unrelatedRows": 10
+    },
+    {
+      "name": "同じ保存状態の反復解決・同じ設定・空のResetが完全一致",
+      "status": "passed"
+    },
+    {
+      "name": "全55組の編集順序を交換して同一の保存状態と実効結果へ到達",
+      "status": "passed",
+      "connectionPairs": 55
+    },
+    {
+      "name": "全11接続が上書きされても原案を変更せず出所を区別",
+      "status": "passed",
+      "overriddenConnections": 11
+    },
+    {
+      "name": "保存した個別文書を読み戻し、明示通常とReset後を同じ結果へ再解決",
+      "status": "passed",
+      "restoredModes": 2
+    }
+  ],
+  "rejected": [
+    {
+      "name": "catalogue: 保存SHA不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue canonical SHA differs",
+      "inputSha256": "d62ae725206130da66cf613b10385670dae72e9408655281f23b661b3b497bc9"
+    },
+    {
+      "name": "catalogue: 研究版不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue schema version differs",
+      "inputSha256": "8f605fcd6b721a6bde5dd9392c91a4ab04f59155126179be81f44281ae8f4cd1"
+    },
+    {
+      "name": "catalogue: 正本SHA不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue.digestRef differs from the trusted Digest reference",
+      "inputSha256": "7b39735a4941eaaacb15f0383c98428aa5fd4ae46921c86c218622f63416df9c"
+    },
+    {
+      "name": "catalogue: 正本版不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue.digestRef differs from the trusted Digest reference",
+      "inputSha256": "ef8d8dcf656e91123f2efdb4bb89dda540637cc040060e2027328cc5f9ed0f93"
+    },
+    {
+      "name": "catalogue: 未知field",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue.data has missing or unknown fields",
+      "inputSha256": "2d5d75c8e01d7aea11087043457da5811b1261fb8bef625c36b15ecedff04c17"
+    },
+    {
+      "name": "baseline: 保存SHA不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: baseline canonical SHA differs",
+      "inputSha256": "f1c84e3fc936cb5d78c7e14b1d1719dd5d20f37bcfb18100bb8ddc665317187a"
+    },
+    {
+      "name": "baseline: 研究版不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: baseline schema version differs",
+      "inputSha256": "d5b58fae4f763f861ee756babd4c310dc6a628d9802b53c99fd73ffd809d7c6d"
+    },
+    {
+      "name": "baseline: 正本SHA不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: baseline.digestRef differs from the trusted Digest reference",
+      "inputSha256": "d559d24f6b4239412559272dfa5244de1ad6764e834269a046ce2a6dc6553641"
+    },
+    {
+      "name": "baseline: 正本版不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: baseline.digestRef differs from the trusted Digest reference",
+      "inputSha256": "5966fc43864c67941c31b4a17f6e03a22d68870026ec3bd6298426bd0fcbc360"
+    },
+    {
+      "name": "baseline: 未知field",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: baseline.data has missing or unknown fields",
+      "inputSha256": "1a872b1044d864231c60d6f9ca2ff3f5d3ad285a11952ceb606beb21c7cba8eb"
+    },
+    {
+      "name": "autoDraft: 保存SHA不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft canonical SHA differs",
+      "inputSha256": "a4e44c5fd7535cc5d1c9886be75a99f06ffea34266ef781f518103ea6e9faf9e"
+    },
+    {
+      "name": "autoDraft: 研究版不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft schema version differs",
+      "inputSha256": "32b48a748602987f71a8430eb573dec3d733daf51dfbb738ca776d30999a3451"
+    },
+    {
+      "name": "autoDraft: 正本SHA不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.digestRef differs from the trusted Digest reference",
+      "inputSha256": "16f5b1eb54b87bb54387011327f56e5be93f36d3db62018241d0f2bdc473272e"
+    },
+    {
+      "name": "autoDraft: 正本版不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.digestRef differs from the trusted Digest reference",
+      "inputSha256": "0e5cee175f1cd4000ad18d0ca69fe9f180eb92153f69bef93f5325b0b9016377"
+    },
+    {
+      "name": "autoDraft: 未知field",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.data has missing or unknown fields",
+      "inputSha256": "c212a1ef920f2f8c0eab565d532355b37195878c89432a128ba8040318141cff"
+    },
+    {
+      "name": "overrides: 保存SHA不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides canonical SHA differs",
+      "inputSha256": "b3ae528e78595a3f96007cda1d44ab4447dbc1458b026c5e5109a8d1ebade9e0"
+    },
+    {
+      "name": "overrides: 研究版不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides schema version differs",
+      "inputSha256": "e876f1322deae09e18493cb734d02966af5ae5a9eb70a253480ad33a640c7c9c"
+    },
+    {
+      "name": "overrides: 正本SHA不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.digestRef differs from the trusted Digest reference",
+      "inputSha256": "542428b9a3bcffb11e7be68b15ec166951555036319851a85bed12a947120d37"
+    },
+    {
+      "name": "overrides: 正本版不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.digestRef differs from the trusted Digest reference",
+      "inputSha256": "f66259802320e30e07d4fedfa9287fe5b50182689aaa1a4e0ff7d7ce9b69c34f"
+    },
+    {
+      "name": "overrides: 未知field",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.data has missing or unknown fields",
+      "inputSha256": "f2ccc91c0df06a7030f52f966f1ad3e4cf52c87ffa14201793ece50cec33f01b"
+    },
+    {
+      "name": "baseline: catalogueRefへの古いSHA参照",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: baseline.catalogueRef version or SHA differs",
+      "inputSha256": "217fbdcf2196c5c2db0985a5926ff1fb165fb72d794cea1bf2dfc3ac1e111db8"
+    },
+    {
+      "name": "baseline: catalogueRefへの異版参照",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: baseline.catalogueRef version or SHA differs",
+      "inputSha256": "d9c403cd56a6f3ef97a5489c5a26f81a939a56d1e5692fd27d12d7724184731f"
+    },
+    {
+      "name": "autoDraft: catalogueRefへの古いSHA参照",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.catalogueRef version or SHA differs",
+      "inputSha256": "d8208914e48e9fcee23261d1a05419bf0101fdb145388ad8487348c2d0c376c9"
+    },
+    {
+      "name": "autoDraft: catalogueRefへの異版参照",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.catalogueRef version or SHA differs",
+      "inputSha256": "0b8d894d066458eb19fef569012d52e949decb7c68733c27112f090819011026"
+    },
+    {
+      "name": "autoDraft: baselineRefへの古いSHA参照",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.baselineRef version or SHA differs",
+      "inputSha256": "a83c647ee0f88df298a794f2ca15d42343c0f0c69972790d11d271a54784686f"
+    },
+    {
+      "name": "autoDraft: baselineRefへの異版参照",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.baselineRef version or SHA differs",
+      "inputSha256": "081d089d013e4af98b98c5683f312790d00531f1636c03e8d7a580f4e38f5f0b"
+    },
+    {
+      "name": "overrides: catalogueRefへの古いSHA参照",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.catalogueRef version or SHA differs",
+      "inputSha256": "e291fa650f16eab469abb2ae0e88d7c369c12bc4d520f747b8aca7141920d741"
+    },
+    {
+      "name": "overrides: catalogueRefへの異版参照",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.catalogueRef version or SHA differs",
+      "inputSha256": "f08b855307f7429b2542586bc0c3ee478f70917a41d16ee572bd977b4ccb8178"
+    },
+    {
+      "name": "overrides: baselineRefへの古いSHA参照",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.baselineRef version or SHA differs",
+      "inputSha256": "77e1ae28d7cbae6637bb85c458e34ae43fb1a5b7282a485f4477e5b1609ade21"
+    },
+    {
+      "name": "overrides: baselineRefへの異版参照",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.baselineRef version or SHA differs",
+      "inputSha256": "cdd9ab24134c9fe1286ca1edb00bbeddf9f7f2a0acf18258f2688bf8dcf48898"
+    },
+    {
+      "name": "信頼側の正本SHAを変更",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue.digestRef differs from the trusted Digest reference",
+      "inputSha256": "3b8af811712954a3d9c99e88a7b8e681cd7b709e0b85a0eeeb96ccfce0172c2d"
+    },
+    {
+      "name": "信頼側の正本版を変更",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue.digestRef differs from the trusted Digest reference",
+      "inputSha256": "8ec6a9a8b605e9f0caabe92ad57f61a782387ff49eb3413b58b09d6007684838"
+    },
+    {
+      "name": "接続一覧の重複ID",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue.connections[1] duplicates a connection ID",
+      "inputSha256": "1d82d72c57a8410197ef58478a1a66e1a1793b4683eb723d804285abce4349b2"
+    },
+    {
+      "name": "接続一覧の非隣接区間",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue.connections[1] does not continue the adjacent segment chain",
+      "inputSha256": "1e6ad1eea80b4e3dc306c7f3dffb54c73c18753df49d819d52c9e0ef369bb7d3"
+    },
+    {
+      "name": "接続一覧の境界順序不整合",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue.connections[1] is not in canonical boundary order",
+      "inputSha256": "1255065c975bdf9eaf23db7e077f998d8d860e2135f145405daceb6d45467a8c"
+    },
+    {
+      "name": "接続一覧が11件未満",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: catalogue must contain exactly eleven research boundaries",
+      "inputSha256": "e6dc60507a80734ce38e1656019a8679f5240e1131fdd115fc24576085dd9ef3"
+    },
+    {
+      "name": "Normal基準の役割がSeparator",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: baseline.entries[0] changes the fixed Normal baseline",
+      "inputSha256": "6b70abb6f84e9b1597ba67f5d070d93f81ef5e174a2904ef9d5caf79c04896e7"
+    },
+    {
+      "name": "模擬原案の未知接続",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.entries[0] refers to an unknown connection",
+      "inputSha256": "6b96c0e373f2aae73c838b03c9c3f56e2a97a050f2f0a74cea623335a7a95b87"
+    },
+    {
+      "name": "模擬原案の接続重複",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.entries[1] duplicates a connection",
+      "inputSha256": "32f6034cdc4c0f80e27166d403c2078e61cc619c77c565ed0efa14bf6c59427c"
+    },
+    {
+      "name": "模擬原案の未知role",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.entries[0] has an unknown role",
+      "inputSha256": "434a762ccd21a6acfa02a6885e85470734bf24a63b131a6c81bfd913ba87f73f"
+    },
+    {
+      "name": "模擬原案の判断欠落",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.entries must cover every catalogue boundary",
+      "inputSha256": "3fee1760bc3a4cb256b95b20399ba4e4497b2e463fd4fe89493006e559df03d1"
+    },
+    {
+      "name": "模擬原案の順序不一致",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.entries must be stored in canonical catalogue order",
+      "inputSha256": "1441994a32d60b7afe927e9720afd72da249eef6c1e775c632d5dc359d442a92"
+    },
+    {
+      "name": "模擬原案へ任意描画値",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.entries[0] has missing or unknown fields",
+      "inputSha256": "662c394b7994543fa9877d9cdf52401c06f6d029edabc7bc47cc79a4c7557ee3"
+    },
+    {
+      "name": "模擬原案を実AIとして偽装",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft must identify the research fixture author",
+      "inputSha256": "4a0e96f68cd7da55bca2569d533979fb415f321d4a61869620ad2a63d65223af"
+    },
+    {
+      "name": "auto modeで原案文書欠落",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: auto mode requires the saved auto draft, even when every connection has an override",
+      "inputSha256": "3f6fc5cdb44c6a2e593e5bd8466736712c38ebf3ed3ccbd032ab50570cfb1b6a"
+    },
+    {
+      "name": "Normal-only modeに原案を黙って残す",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: normal-only mode must explicitly have no auto draft",
+      "inputSha256": "fd59dee37e7a259dfcacd0fd477b65eb7f7508598d4a843a151ad89aa748e95b"
+    },
+    {
+      "name": "未知mode",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: context has an unknown selection mode",
+      "inputSha256": "f6be5c8a2ae84927664a7415176dbf6103a3998f0bc5d7413a3b45b324374667"
+    },
+    {
+      "name": "模擬人間指定の未知接続",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.entries[0] refers to an unknown connection",
+      "inputSha256": "98eef8754dbdbdb4f52a8705e996a85629c26c9f9fcf9757c22b90163cef5f0d"
+    },
+    {
+      "name": "模擬人間指定の接続重複",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.entries[1] duplicates a connection",
+      "inputSha256": "444e41b3d1ebd3df922345bfa72a38bc11f85d9fec63988025e75c5dc522ac9c"
+    },
+    {
+      "name": "模擬人間指定の未知role",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.entries[0] has an unknown role",
+      "inputSha256": "b7affc2c4421d1552414b27546a1d51452d014f8e6e6e2def81536132f0eac2b"
+    },
+    {
+      "name": "模擬人間指定へ任意描画値",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.entries[0] has missing or unknown fields",
+      "inputSha256": "7ebf06e1ddc91fb2dfef165cb294071c6d6a5c51af9685fdf64dbd97a14c5afd"
+    },
+    {
+      "name": "接続指定へ字幕設定を混入",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.data has missing or unknown fields",
+      "inputSha256": "aa27aad3204816617578b9e20315f81d25cab355170e7e31dfd23535a24a34bf"
+    },
+    {
+      "name": "模擬人間指定を本人評価として偽装",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides must identify simulated human decisions",
+      "inputSha256": "d363316d71eb4d4bbce2817931a030c4c75bca0c2220817f1febcde7220304a7"
+    },
+    {
+      "name": "模擬人間指定が別modeへ束縛",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides selection mode is stale",
+      "inputSha256": "ddb37910c5158fe4c4e76c71fe0ffe5a4e4a09cceef29885cc3d1dd91c39f9c5"
+    },
+    {
+      "name": "古い原案への模擬人間指定",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.selectionBase.autoDraftRef version or SHA differs",
+      "inputSha256": "3b87c5d31f0df65c38f80a188b1838e1de4567f4613dff6c7d1bf9e7f1a7a66e"
+    },
+    {
+      "name": "異版原案への模擬人間指定",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.selectionBase.autoDraftRef version or SHA differs",
+      "inputSha256": "f3d5494e2dfb863d6d50c47bb3b44800764e5a66758ae245d3e408aa27247165"
+    },
+    {
+      "name": "要求の未知field",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: context has missing or unknown fields",
+      "inputSha256": "60812fce0e13e45f083e20dfd8e92ac471ffc84ebff2f65ee8e65cf67b3dbcc5"
+    },
+    {
+      "name": "保存外枠の未知field",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft has missing or unknown fields",
+      "inputSha256": "98fccbfa5723431fd55e0d5fe7b09fd9358361fa8ddb2c5522b023063a82bad3"
+    },
+    {
+      "name": "未指定Resetでも壊れた原案は拒否",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft canonical SHA differs",
+      "inputSha256": "a4e44c5fd7535cc5d1c9886be75a99f06ffea34266ef781f518103ea6e9faf9e"
+    },
+    {
+      "name": "同じ値の再設定でも壊れた原案は拒否",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft canonical SHA differs",
+      "inputSha256": "85390375abb774c32e217fae288610d2595281ee8f9f77d8dfd350909d2e74f2"
+    },
+    {
+      "name": "未指定Resetでも再封印した原案内の別正本参照を拒否",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.digestRef differs from the trusted Digest reference",
+      "inputSha256": "16f5b1eb54b87bb54387011327f56e5be93f36d3db62018241d0f2bdc473272e"
+    },
+    {
+      "name": "同値再設定でも再封印した古い上書きを拒否",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: overrides.selectionBase.autoDraftRef version or SHA differs",
+      "inputSha256": "3b87c5d31f0df65c38f80a188b1838e1de4567f4613dff6c7d1bf9e7f1a7a66e"
+    },
+    {
+      "name": "全接続を上書きしていても不完全原案を拒否",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: autoDraft.entries must cover every catalogue boundary",
+      "inputSha256": "8bfc506f99be0d1452e0d14c63b1b8ebe7c104d854d3a243b96f2608e84d344b"
+    },
+    {
+      "name": "不明接続のReset",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: reset refers to an unknown connection",
+      "inputSha256": "20f0b19aaf17dc75eda3aa6544cac1568a6fa650a017b18d854c25332a9828de"
+    },
+    {
+      "name": "設定commandの未知field",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: override choice has missing or unknown fields",
+      "inputSha256": "20f0b19aaf17dc75eda3aa6544cac1568a6fa650a017b18d854c25332a9828de"
+    },
+    {
+      "name": "設定commandの未知role",
+      "status": "rejected-as-expected",
+      "code": "CONNECTION_RESEARCH_INVALID",
+      "message": "connection research: override choice[0] has an unknown role",
+      "inputSha256": "20f0b19aaf17dc75eda3aa6544cac1568a6fa650a017b18d854c25332a9828de"
+    }
+  ],
+  "positiveCaseCount": 12,
+  "rejectedCaseCount": 66,
+  "snapshotBindings": [
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/catalogue.json",
+      "sha256": "67384468bf671a8d9e83dd4bacfa8e902c5ad30771963aaabf958d22714a3eea",
+      "recordSha256": "d48296695ef1c563377eb90b73fae7a0f50f7e18fc241d9283c60594aca3703d"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/baseline.json",
+      "sha256": "1d5fdb334c401a99a2922ed479009037ad3f9581dfbd47a70a4983b476e5e272",
+      "recordSha256": "ebfc4ca5bffa2840dc9316b1c6e89abd9c85bc898a25a72a7a6a13ebbad58c16"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/simulatedAuto.json",
+      "sha256": "e98af6cca658c40ede504efa97629c835594486a57d7e39305cfd989ff6ce722",
+      "recordSha256": "cbbab2eba10b3fc2ebbede0d7e6b60c8868a5ab9b328a0eca1b3771fd0c8cf9b"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/emptyAutoOverrides.json",
+      "sha256": "eb6a66a674e1f37540ded97e90969596eca1397a9113e1bc1c493eb9b057500d",
+      "recordSha256": "92c5109ffe7fff5fed4aa7bf2b2721bc3d25e83e35aa924d822161de5ac930a4"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/emptyNormalOverrides.json",
+      "sha256": "54f99bce62a3b49a84a6bcb867dbd5ba9147c3aead3b416801a76646bfb6254d",
+      "recordSha256": "1289af957925648e83982541545d9a013d37266069ebf58bf572070f1e4206f2"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/normalOnly.json",
+      "sha256": "3198e80d190db1ccac7435f3b862fcc2c52560d23861dc8950f309b5e4aa5b72",
+      "recordSha256": "03c962383c9da88b721497acd250196e2a66528f28c25261fae930f7e493cee0"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/autoOnly.json",
+      "sha256": "936993b0b229ae183caf207e44fc137d8550a5bf71f23e2aee935364dfc0db1a",
+      "recordSha256": "41c40cb856b12ef969409f64624b84bb5fa575bcc66c528101d38bff0a5c76cf"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/explicitNormalOverride.json",
+      "sha256": "c6930abaf5884713b35e6d49da8dd5bf236c1017b0e12a70322f031e55348e94",
+      "recordSha256": "b8f99d015754ee38da4f3234781d74c996e8a067b3f39ef3281e72c7a4f65761"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/explicitNormalEffective.json",
+      "sha256": "d41b545e46f8bf1e6eeb18dc5cbbf15908262393d6d151247c952617a1cab2e6",
+      "recordSha256": "27b776207f513a3e6904caf96352acd1ace9144dffcbf6a6317c83effaf731d4"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/afterReset.json",
+      "sha256": "936993b0b229ae183caf207e44fc137d8550a5bf71f23e2aee935364dfc0db1a",
+      "recordSha256": "41c40cb856b12ef969409f64624b84bb5fa575bcc66c528101d38bff0a5c76cf"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/explicitNormalOverAutoNormal.json",
+      "sha256": "6fb3ad404487fdc84949a23fbc6ea0e0006e2c613186dc1a9018f1d0ecbdea9c",
+      "recordSha256": "393c9639f0f30d4d1bdde81b2eb0d52895c4ca72c960b771575b88c810e664fc"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/twoOverrides.json",
+      "sha256": "2049b0471a54750b905df297e41b41820d032634ac08331d06959e3a1c8b5f9e",
+      "recordSha256": "a77dec452e8d66ab00ebe5e44a9afd619d94deef2a761374a84f6eb34c786e95"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/oneOverrideAfterReset.json",
+      "sha256": "52b4921e8160c60f25d73091bddda305c654eab40e4af97b4dde304a28f7948e",
+      "recordSha256": "e4f0e0859570e6ba9c9e32bb45c2d3a15e9db08a84e09b856f63848962cd6b4b"
+    },
+    {
+      "path": "/private/tmp/zev-main-integration-20260923-89cho30x/connection-three-layer/allOverrides.json",
+      "sha256": "b84807514bed515facd2e02c3e42777b339df5c8cf30dcc8c8b937348a464c3f",
+      "recordSha256": "1eea6c04eef35d484d594bcafdaa81d8292f91f61003fb63bbf270f844f95155"
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/connection_three_layer_research_v001.mjs",
+      "bytes": 15856,
+      "sha256": "f5a2aa93a80aa73febb7144bc469255759cb63b7ff1e1f1c30013bd886f6a5c0"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/connection_three_layer_fixture_v001.mjs",
+      "bytes": 22516,
+      "sha256": "0bd83836dd71b32735f4c682f5dfced1ac4395f40e5604970b4676ba4861e317"
+    }
+  ],
+  "aiCalls": 0,
+  "mediaRenders": 0,
+  "humanJudgments": 0,
+  "limitation": "保存の意味論を実11境界で検証。正本の再復号、字幕や媒体の再投影、production入口の統合を検証したものではない。"
+}

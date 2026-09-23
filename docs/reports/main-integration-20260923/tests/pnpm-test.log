@@ -1,0 +1,56 @@
+
+> zev2@ test /Users/kawafmm/workspace/zev2
+> corepack pnpm run ui:contract:test && corepack pnpm run web-gemini:review:test && corepack pnpm run scenario:agent
+
+
+> zev2@ ui:contract:test /Users/kawafmm/workspace/zev2
+> node scripts/ui-contract-test.mjs
+
+UI契約テスト成功
+
+> zev2@ web-gemini:review:test /Users/kawafmm/workspace/zev2
+> corepack pnpm run build:backend && node scripts/web-gemini-review-script-test.mjs
+
+
+> zev2@ build:backend /Users/kawafmm/workspace/zev2
+> corepack pnpm --filter backend build
+
+
+> backend@0.1.0 build /Users/kawafmm/workspace/zev2/backend
+> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json
+
+
+> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+> tsc -p tsconfig.json
+
+Web Geminiレビュースクリプトテスト成功: /var/folders/hb/lm6r0cts2px9tcw0kqz3kmjr0000gn/T/zev2-web-gemini-script-O6iQip
+
+> zev2@ scenario:agent /Users/kawafmm/workspace/zev2
+> node scripts/agent-scenario-test.mjs
+
+node runner/dist/index.js --max-steps=2 failed with code 1
+AIエージェント実行開始: 動画取り込み (prepare_video)
+AIエージェント実行完了: 動画取り込み
+AIエージェント実行開始: STT (run_stt)
+node:internal/fs/promises:639
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/kawafmm/workspace/zev2/runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/transcript.json'
+    at async open (node:internal/fs/promises:639:25)
+    at async readFile (node:internal/fs/promises:1246:14)
+    at async buildFixedTranscript (file:///Users/kawafmm/workspace/zev2/runner/dist/steps/transcript.js:213:17)
+    at async Object.run_stt (file:///Users/kawafmm/workspace/zev2/runner/dist/workflow-step-builders.js:59:153)
+    at async completeRequest (file:///Users/kawafmm/workspace/zev2/runner/dist/index.js:621:22)
+    at async runDryRunLoop (file:///Users/kawafmm/workspace/zev2/runner/dist/index.js:645:13)
+    at async file:///Users/kawafmm/workspace/zev2/runner/dist/index.js:661:1 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/kawafmm/workspace/zev2/runtime/artifacts/draft_w4Lp9IJC6pQl3FsRfFL9t/transcript.json'
+}
+
+Node.js v20.19.6
+
+ ELIFECYCLE  Command failed with exit code 1.
+ ELIFECYCLE  Test failed. See above for more details.

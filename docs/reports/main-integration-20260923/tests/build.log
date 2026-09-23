@@ -1,0 +1,65 @@
+Scope: 4 of 5 workspace projects
+packages/shared build$ tsc -p tsconfig.json
+packages/shared build: Done
+backend build$ corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json
+client build$ run-p type-check "build-only {@}" --
+runner build$ corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json
+runner build: > @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+runner build: > tsc -p tsconfig.json
+backend build: > @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+backend build: > tsc -p tsconfig.json
+client build: > client@0.1.0 type-check /Users/kawafmm/workspace/zev2/client
+client build: > corepack pnpm --filter @zev2/shared build && vue-tsc --build
+client build: > client@0.1.0 build-only /Users/kawafmm/workspace/zev2/client
+client build: > vite build
+client build: > @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+client build: > tsc -p tsconfig.json
+client build: vite v6.4.2 building for production...
+client build: transforming...
+backend build: Done
+runner build: Done
+client build: ✓ 642 modules transformed.
+client build: rendering chunks...
+client build: computing gzip size...
+client build: dist/index.html                                             0.38 kB │ gzip:   0.26 kB
+client build: dist/assets/Roboto-Thin-NicBC1pN.woff2                     63.05 kB
+client build: dist/assets/Roboto-Light-DHTugVNA.woff2                    64.32 kB
+client build: dist/assets/Roboto-Regular-C6rbFxYz.woff2                  64.63 kB
+client build: dist/assets/Roboto-Bold-hN3duQhD.woff2                     64.74 kB
+client build: dist/assets/Roboto-Black-VhoA2qKx.woff2                    64.96 kB
+client build: dist/assets/Roboto-Medium-ByKogCTi.woff2                   65.48 kB
+client build: dist/assets/Roboto-ThinItalic-CKlCjrO_.woff2               68.33 kB
+client build: dist/assets/Roboto-RegularItalic-CvPUdkvM.woff2            70.28 kB
+client build: dist/assets/Roboto-BoldItalic-BWDm51uc.woff2               70.36 kB
+client build: dist/assets/Roboto-LightItalic-JQyp2Y3P.woff2              70.76 kB
+client build: dist/assets/Roboto-MediumItalic-i1eR0KbF.woff2             71.28 kB
+client build: dist/assets/Roboto-BlackItalic-D4yie1YO.woff2              72.09 kB
+client build: dist/assets/Roboto-Thin-BfJvJcog.woff                      84.22 kB
+client build: dist/assets/Roboto-Light-Cu-PAxXt.woff                     85.69 kB
+client build: dist/assets/Roboto-Regular-BX5l9hRW.woff                   85.88 kB
+client build: dist/assets/Roboto-Bold-D9plYbeK.woff                      86.18 kB
+client build: dist/assets/Roboto-Medium-b81vv18W.woff                    86.44 kB
+client build: dist/assets/Roboto-Black-B0ZKieaB.woff                     86.51 kB
+client build: dist/assets/Roboto-ThinItalic-DnIWFxRE.woff                90.78 kB
+client build: dist/assets/Roboto-RegularItalic-BjnLZsam.woff             91.73 kB
+client build: dist/assets/Roboto-BoldItalic-CyLKvOHD.woff                91.97 kB
+client build: dist/assets/Roboto-LightItalic-CZg5kHIB.woff               92.86 kB
+client build: dist/assets/Roboto-MediumItalic-DFQ-RYa0.woff              93.23 kB
+client build: dist/assets/Roboto-BlackItalic-D0gSnuIb.woff               94.05 kB
+client build: dist/assets/materialdesignicons-webfont-Dp5v-WZN.woff2    403.22 kB
+client build: dist/assets/materialdesignicons-webfont-PXm3-2wK.woff     587.98 kB
+client build: dist/assets/materialdesignicons-webfont-B7mPwVP_.ttf    1,307.66 kB
+client build: dist/assets/materialdesignicons-webfont-CSr8KVlo.eot    1,307.88 kB
+client build: dist/assets/PresentationEditing-CqiP-0t-.css               10.53 kB │ gzip:   2.56 kB
+client build: dist/assets/App-BN4J17Ha.css                               27.32 kB │ gzip:   5.27 kB
+client build: dist/assets/index-g0x6fdv4.css                            848.43 kB │ gzip: 118.72 kB
+client build: dist/assets/_plugin-vue_export-helper-DlAUqK2U.js           0.09 kB │ gzip:   0.10 kB
+client build: dist/assets/PresentationEditing-B1_tBFg2.js                37.17 kB │ gzip:  11.82 kB
+client build: dist/assets/App-BIJpm1kb.js                                94.43 kB │ gzip:  31.15 kB
+client build: dist/assets/index-BTJ3dbPZ.js                             636.90 kB │ gzip: 203.39 kB
+client build: ✓ built in 1.73s
+client build: (!) Some chunks are larger than 500 kB after minification. Consider:
+client build: - Using dynamic import() to code-split the application
+client build: - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+client build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+client build: Done
