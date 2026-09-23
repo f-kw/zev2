@@ -63,6 +63,21 @@ zev2 は ZEV を参考にするが、既存ZEVの後方互換を持たない新�
 - Electronは初期構成に入れない。現時点では使う予定がない。
 - client/backendで共有する型、工程定義、制御ルールは `packages/shared` を優先して検討する。
 
+## Git運用の基本ルール
+
+本節は通常開発の標準手順であり、上記の指示経路・着工承認・commit/push権限・監査を省略する許可ではない。作業は明示された範囲内で行う。
+
+1. 通常のZEV開発は `main` branchで行う。
+2. Codexが自己判断で新しいbranch / worktreeを作らない。
+3. 特別な理由でbranch / worktreeが必要な場合は、作成前に相談役またはユーザーの明示承認を得る。
+4. 作業開始時に `git status` を確認し、staged変更・tracked未commit変更・untrackedを区別する。
+5. 他作業由来の変更を勝手にreset / stash / 削除しない。由来不明のfileを推測で消さない。
+6. 作業成果はその作業内でcommitし、既存の権限・監査ルールに従って `main` へpushする。commit messageには変更内容と作業内容を記す。
+7. 作業完了時は `git status` をcleanにする。未解決の変更がある状態を完了と報告しない。
+8. 作業完了時にuntrackedファイルを残さない。必要な成果・記録は適切な場所でGit管理する。
+9. 不要と確認した一時物は削除し、恒常的な生成物だけ `.gitignore` へ最小限追加する。未整理の成果や判断不能なfileを隠すためにignoreを使わない。
+10. 作業完了報告には、branch / HEAD / `git status --short` / untracked件数 / push結果を必ず示す。
+
 ## 固定方針
 
 - 優先度高: Web版Gemini、Web版ChatGPT、ChatGPT Workflowなど、AIエージェントがWebサービスを操作する場合は Microsoft Edge を使う。Chrome はユーザーの普段使い用なので使わない。
