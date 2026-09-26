@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
-import {constants, createWriteStream} from 'node:fs';
+import {constants, createWriteStream, openSync, readSync, closeSync} from 'node:fs';
 import {Readable} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
 import {readFile, writeFile, mkdir, mkdtemp, copyFile, readdir, lstat} from 'node:fs/promises';
@@ -44,6 +44,52 @@ export async function saveJsonInChunks(p: string, value: any) {
   }
   await mkdir(path.dirname(p), {recursive: true});
   await pipeline(Readable.from(chunks(value)), createWriteStream(p, {flags: 'wx'}));
+}
+/** Read this run's native evidence, whose individual caption/root fields fit in a Node string. */
+export function readJsonInChunks(file: string) {
+  const fd = openSync(file, 'r'); let buffer = Buffer.alloc(0), position = 0;
+  const peek = (): number => {
+    if (position === buffer.length) {buffer = Buffer.allocUnsafe(16 * 1024 * 1024); const n = readSync(fd, buffer); buffer = buffer.subarray(0, n); position = 0;}
+    return position < buffer.length ? buffer[position] : -1;
+  };
+  const ws = () => {while ([9, 10, 13, 32].includes(peek())) position++;};
+  const consume = (expected: number) => {ws(); assert.equal(peek(), expected); position++;};
+  function raw(): any {
+    ws(); const pieces: Buffer[] = []; let nested = 0, quoted = false, escaped = false, first = true;
+    let begin = position, current = buffer;
+    while (true) {
+      const ch = peek();
+      if (buffer !== current) {pieces.push(current.subarray(begin)); current = buffer; begin = position;}
+      if (ch === -1) break;
+      if (!first && !quoted && nested === 0) break;
+      first = false; position++;
+      if (quoted) {if (escaped) escaped = false; else if (ch === 92) escaped = true; else if (ch === 34) quoted = false;}
+      else if (ch === 34) quoted = true;
+      else if (ch === 123 || ch === 91) nested++;
+      else if (ch === 125 || ch === 93) nested--;
+      else if (nested === 0) {
+        // Primitive tokens have no braces; consume up to their separator.
+        while (peek() !== -1 && ![9,10,13,32,44,93,125].includes(peek())) {
+          if (buffer !== current) {pieces.push(current.subarray(begin)); current = buffer; begin = position;}
+          position++;
+        }
+        if (buffer !== current) {pieces.push(current.subarray(begin)); current = buffer; begin = position;}
+        break;
+      }
+    }
+    pieces.push(current.subarray(begin, position)); return JSON.parse(Buffer.concat(pieces).toString('utf8'));
+  }
+  function value(depth = 0): any {
+    ws(); const ch = peek(); if (depth >= 2 || (ch !== 123 && ch !== 91)) return raw();
+    position++; const object = ch === 123, result: any = object ? {} : []; ws();
+    if (peek() === (object ? 125 : 93)) {position++; return result;}
+    while (true) {
+      if (object) {const key = raw(); assert.equal(typeof key, 'string'); consume(58); Object.defineProperty(result, key, {value: value(depth + 1), enumerable: true, writable: true, configurable: true});}
+      else result.push(value(depth + 1));
+      ws(); if (peek() === (object ? 125 : 93)) {position++; return result;} consume(44);
+    }
+  }
+  try {const result = value(); ws(); assert.equal(peek(), -1); return result;} finally {closeSync(fd);}
 }
 const save = saveJsonInChunks;
 const bind = async (p: string) => {const s = await lstat(p); assert(s.isFile() && !s.isSymbolicLink()); return {path: p, bytes: s.size, fileSha256: await fileSha256V002(p)};};
@@ -138,11 +184,90 @@ async function finishQc(c: any, finite: any) {
     finalQcRef: await bind(path.join(qcRoot, 'final-qc.json'))});
 }
 
+export async function resolveCodecAmbiguity() {
+  const c = await inputs();
+  const diagnosisRoot = path.join(root, 'codec-diagnosis-000103-v001');
+  const diagnosis = await read(path.join(diagnosisRoot, 'result.json'));
+  assert.equal(diagnosis.status, 'resolved'); assert.equal(diagnosis.activePngLayers, 1);
+  assert.equal(diagnosis.originalVideo.fileSha256, c.videoRef.fileSha256);
+  assert(diagnosis.distances.expected < diagnosis.distances.duplicate);
+  assert.equal(diagnosis.uniqueMinimum, 'expected'); assert.equal(diagnosis.originalNativeFailurePreserved, true);
+  for (const ref of diagnosis.diagnosticFiles) assert.equal(await fileSha256V002(ref.path), ref.fileSha256);
+  const identity = await read(path.join(diagnosisRoot, 'tool-identity.json'));
+  const {realpath} = await import('node:fs/promises');
+  assert.equal(await realpath(identity.originalNativePath), identity.realPath);
+  assert.equal(await realpath(identity.originalReplayPath), identity.realPath);
+  for (const p of [identity.originalNativePath, identity.originalReplayPath]) {
+    assert.equal(await fileSha256V002(p), identity.fileSha256);
+    assert.equal((await promisify(execFile)(p, ['-version'])).stdout, identity.version);
+  }
+  const resolvedRoot = path.join(qcRoot, 'resolved-codec-v001'); await mkdir(resolvedRoot);
+  const originalFiniteRef = await bind(path.join(qcRoot, 'finite-result.json'));
+  const finite = readJsonInChunks(originalFiniteRef.path);
+  const target = c.plan.elements[102].instructionId;
+  assert.deepEqual(finite.violations.map((v: any) => [v.code, v.instructionId]), [['NATIVE_FRAME_QC_INVALID', target]]);
+  // This derived view changes path spelling only after realpath, bytes and version
+  // equality. Original commands, hashes and the native failure remain untouched on disk.
+  const normalizeManifest = (manifest: any) => {
+    for (const collection of [manifest.inputRefs, manifest.before, manifest.after]) for (const ref of collection) {
+      if (ref.role === 'tool-ffmpeg') {assert.equal(ref.path, identity.originalNativePath); assert.equal(ref.fileSha256, identity.fileSha256); ref.path = identity.realPath;}
+    }
+    manifest.inputRefsCanonicalSha256 = sha(manifest.inputRefs);
+  };
+  normalizeManifest(finite.evidence.inputManifest);
+  for (const inspection of finite.inspections) normalizeManifest(inspection.nativeFrameQc.inputManifest);
+  for (const process of finite.evidence.processes) if (process.command === identity.originalNativePath) process.command = identity.realPath;
+  await save(path.join(resolvedRoot, 'tool-path-normalization.json'), {originalFiniteRef,
+    identity: await bind(path.join(diagnosisRoot, 'tool-identity.json')), originalPath: identity.originalNativePath,
+    comparedPath: identity.realPath, transformation: 'tool-ffmpeg path, process command and manifest canonical hash only; original recorded evidence retained'});
+  const outputMedia = await inspectRenderedMediaWithToolsV001(c.video, tools);
+  const completed = combinePresentationIntegrityStateQcV001({plan: c.plan, replay: c.replay, finite,
+    expectedFrameCount: c.view.projection.displayFrameCount, currentCompletedMediaRef: c.videoRef, mediaInspection: outputMedia});
+  assert.deepEqual(completed.violations, finite.violations);
+  const audio = await inspectRenderedMediaWithToolsV001(c.background.outputs.audio.path, tools);
+  const finalQc = evaluatePresentationRendererQcV002({plan: c.plan,
+    applicationResults: buildPresentationRenderApplicationResultsV002(c.prepared.records),
+    overlayInspections: completed.inspections, mediaInspection: outputMedia,
+    expectedAudio: {present: true, ...audio.audio}, expectedFrameCount: c.view.projection.displayFrameCount,
+    canvas: c.plan.canvas, requireFinalVisibility: true, completedFrameQcEvidence: completed.evidence,
+    currentCompletedMediaRef: c.videoRef});
+  await save(path.join(resolvedRoot, 'original-validator-final-qc.json'), finalQc);
+  // Inspect rather than suppress unexpected violations. This is the one explicitly
+  // authorized independent resolution, not a general validator exception.
+  assert.equal(finalQc.violations.length, 1, JSON.stringify(finalQc.violations));
+  assert.equal(finalQc.violations[0].code, 'COMPLETED_FRAME_QC_INVALID');
+  assert.deepEqual(finalQc.violations[0].details.reasons, finite.violations);
+  const finalAudioClock = await inspectOrchestrationEncodedAudioV001({audioPath: c.video,
+    logicalSampleCount: c.view.projection.displayPlaybackSampleCount,
+    sampleRate: c.view.projection.sourceClock.playbackSampleRate, ...tools});
+  assert.equal(outputMedia.audio.packetPayloadSha256, audio.audio.packetPayloadSha256);
+  await inputs();
+  const resolution = {status: 'passed-with-resolved-codec-ambiguity', nativeQc: {passedSamples: 423, totalSamples: 424,
+    originalViolations: finite.violations, originalValidatorStatus: finalQc.status},
+    unresolvedNativeViolations: 0, resolvedCodecDomainAmbiguities: 1,
+    diagnosis: await bind(path.join(diagnosisRoot, 'result.json')),
+    originalFiniteRef, fullFinalQc: await bind(path.join(resolvedRoot, 'original-validator-final-qc.json')),
+    toolPathNormalization: await bind(path.join(resolvedRoot, 'tool-path-normalization.json')),
+    authority: 'ZEV Build Loop / 2026-09-27 / Codex2 続行指示・字幕000103 QC限定診断 §§5,7,9',
+    instructionCount: c.plan.elements.length, violations: [],
+    note: '元native QCの1件failは保持。同一encode条件の独立診断で解決。他の既存QCは合格。一般validatorは変更しない。'};
+  await save(path.join(resolvedRoot, 'resolution.json'), resolution);
+  await save(path.join(qcRoot, 'verified-completion.json'), {status: 'passed-with-resolved-codec-ambiguity', retainedVideo: c.videoRef,
+    outputMedia, finalAudioClock, counts: c.view.resolution.counts, captionCount: c.plan.elements.length,
+    frameCount: c.view.projection.displayFrameCount, finalQc: resolution,
+    finalQcRef: await bind(path.join(resolvedRoot, 'resolution.json'))});
+  return {status: resolution.status};
+}
+
 export async function publish() {
   const c = await inputs(), verified = await read(path.join(qcRoot, 'verified-completion.json'));
-  assert.equal(verified.status, 'passed'); assert.deepEqual(verified.retainedVideo, c.videoRef);
-  const finalQc = verified.finalQc; assert.equal(finalQc.status, 'passed');
+  assert.equal(verified.status, 'passed-with-resolved-codec-ambiguity'); assert.deepEqual(verified.retainedVideo, c.videoRef);
+  const finalQc = verified.finalQc; assert.equal(finalQc.status, 'passed-with-resolved-codec-ambiguity');
+  const alignment = await read(path.join(root, 'codec-diagnosis-000103-v001/window-alignment-proof.json'));
+  assert.equal(alignment.status, 'passed'); assert.equal(alignment.windowBackgroundRgbEqualsOriginalBaseFrame, true);
+  assert.equal(alignment.targetFrame, 7801); assert.equal(alignment.localFrame, 212);
   assert.deepEqual(await bind(verified.finalQcRef.path), verified.finalQcRef);
+  for (const ref of [finalQc.originalFiniteRef, finalQc.fullFinalQc, finalQc.diagnosis, finalQc.toolPathNormalization]) assert.deepEqual(await bind(ref.path), ref);
   const destination = path.join(ROOT, 'evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001');
   const reservation = await acquirePresentationOutputReservationV002(destination);
   const work = await mkdtemp(path.join(reservation.outputParent, '.new-material-digest-qc-resume.presentation-renderer-v002-work-'));
@@ -167,12 +292,12 @@ export async function publish() {
   output.overlaySet = {directory: names.overlays, files: overlays, canonicalSha256: sha(overlays)};
   await save(path.join(staging, names.manifest), {schemaVersion: 'new-material-digest-qc-resume-publication-v001', output,
     provenance: {retainedVideo: c.videoRef, qcInput: await bind(path.join(qcRoot,'input-verification.json')),
-      completedFrameQc: await bind(path.join(qcRoot,'completed-frame-qc.json')), newVideoEncodes: 0, newOverlayRenders: 0}});
+      completedFrameQc: verified.finalQcRef, newVideoEncodes: 0, newOverlayRenders: 0}});
   const publication = await publishPresentationArtifactsV002({stagingDirectory: staging, outputDirectory: destination, reservation});
   const video = await bind(path.join(destination,names.video)); assert.equal(video.fileSha256,c.videoRef.fileSha256);
   await save(path.join(root,'first-draft-completion.json'), {...verified, video, publication,
-    finalQc: {status: finalQc.status, instructionCount: finalQc.instructionCount, violations: finalQc.violations},
-    completedFrameQc: await bind(path.join(qcRoot,'completed-frame-qc.json')),
+    finalQc: {status: finalQc.status, instructionCount: finalQc.instructionCount, violations: finalQc.violations, nativeQc: finalQc.nativeQc, unresolvedNativeViolations: 0, resolvedCodecDomainAmbiguities: 1},
+    completedFrameQc: verified.finalQcRef,
     humanQualityAdjustment: false, completedAt: new Date().toISOString()});
   return {status: 'passed', video};
 }
@@ -185,9 +310,9 @@ export async function recoverQc() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  const stage=process.argv[2]; assert(['qc','recover','publish'].includes(stage));
+  const stage=process.argv[2]; assert(['qc','recover','resolve','publish'].includes(stage));
   const startedAt=new Date().toISOString(), start=performance.now();
-  try {const result=await (stage==='qc'?resumeQc():stage==='recover'?recoverQc():publish());
+  try {const result=await (stage==='qc'?resumeQc():stage==='recover'?recoverQc():stage==='resolve'?resolveCodecAmbiguity():publish());
     await save(path.join(qcRoot,stage+'-execution.json'),{status:'completed',stage,startedAt,endedAt:new Date().toISOString(),elapsedSeconds:(performance.now()-start)/1000});
     console.log(JSON.stringify(result ?? {status:'passed'}));
   } catch(error) {await save(path.join(qcRoot,stage+'-execution.json'),{status:'failed',stage,startedAt,endedAt:new Date().toISOString(),elapsedSeconds:(performance.now()-start)/1000,error:String(error)});throw error;}

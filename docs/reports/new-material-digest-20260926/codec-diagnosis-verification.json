@@ -1,0 +1,141 @@
+{
+  "status": "resolved",
+  "resolution": "codec-domain false positive resolved",
+  "distances": {
+    "expected": 1062962,
+    "duplicate": 1283841
+  },
+  "uniqueMinimum": "expected",
+  "originalNativeFailurePreserved": true,
+  "originalNativeDistances": {
+    "expected": 1345125,
+    "duplicate": 1344947
+  },
+  "nativeQcPassed": 423,
+  "nativeQcSamples": 424,
+  "originalVideo": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/presentation-rendered-v002.mp4",
+    "fileSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+  },
+  "wholeReplayByteIdentityMaintained": true,
+  "activePngLayers": 1,
+  "window": {
+    "startFrame": 7589,
+    "endFrameExclusive": 8054,
+    "fullFrameCount": 27949
+  },
+  "toolIdentity": {
+    "status": "passed",
+    "originalReplayPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+    "originalNativePath": "/opt/homebrew/bin/ffmpeg",
+    "realPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+    "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+    "version": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers\nbuilt with Apple clang version 16.0.0 (clang-1600.0.26.6)\nconfiguration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-videotoolbox --enable-audiotoolbox --enable-neon\nlibavutil      60.  8.100 / 60.  8.100\nlibavcodec     62. 11.100 / 62. 11.100\nlibavformat    62.  3.100 / 62.  3.100\nlibavdevice    62.  1.100 / 62.  1.100\nlibavfilter    11.  4.100 / 11.  4.100\nlibswscale      9.  1.100 /  9.  1.100\nlibswresample   6.  1.100 /  6.  1.100\n\nExiting with exit code 0\n"
+  },
+  "renderGraphProof": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/render-graph-proof.json",
+    "fileSha256": "bd33738439e4414fc995914076f35ec51210e2b69b49f75cd24b6bf975fd3ebf"
+  },
+  "completedReference": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/native/native-frame-qc-Dddalc/sample-164-completed.rgb",
+    "fileSha256": "ad5ec6fc426c52a68836f80da20c184c5265b2727b1af4e8a4230c847a8b8e07"
+  },
+  "diagnosticFiles": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/expected.mp4",
+      "fileSha256": "bc1e30e00fb37a663203d4124a4c3435aa1010fbfaef5e326e4975338cbdec18"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/duplicate.mp4",
+      "fileSha256": "b72bec2aa3aeb8af2bdb9284f9d97ec5d8fcb7c535a4db69c1d5993822021e11"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/expected.png",
+      "fileSha256": "669ebc6ab9486642aca4a19514c7393fb7ff8ff923817b79d3424a9408df1897"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/duplicate.png",
+      "fileSha256": "856e3fa352663dd7c6bf9eee82a57425604238dc3a595da770ee545bd171183b"
+    }
+  ],
+  "noProductionVideoChanges": true,
+  "note": "比較対象は相談役が指定した正しい1回描画Eと同じPNGの二重描画D。既存native failureを合格へ書き換えない。",
+  "windowAlignment": {
+    "status": "passed",
+    "targetFrame": 7801,
+    "localFrame": 212,
+    "windowBackgroundRgbEqualsOriginalBaseFrame": true,
+    "rgbSha256": "3354d18d0383889ab7b41874d8b918d66aaf9eed4e6de6f7b66f83686001541d",
+    "originalBaseFrame": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/native/native-frame-qc-Dddalc/frames/base/frame-000000164.png",
+      "fileSha256": "d6fbc0e96c21a18b3e319e004694261552488aed5ba723835fd6bb0cedac1f86"
+    },
+    "command": [
+      "/opt/homebrew/bin/ffmpeg",
+      "-v",
+      "error",
+      "-n",
+      "-i",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/background.nut",
+      "-vf",
+      "select=eq(n\\,212)",
+      "-frames:v",
+      "1",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/window-target-background.png"
+    ],
+    "startedAt": "2026-09-26T22:30:38.645000+00:00",
+    "endedAt": "2026-09-26T22:30:39.253829+00:00",
+    "elapsedSeconds": 0.6088989169802517
+  },
+  "renderGraph": {
+    "status": "passed",
+    "target": 7801,
+    "videoRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/presentation-rendered-v002.mp4",
+      "fileSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+    },
+    "executedRequest": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/render-processes/2841-video-composite/request.json",
+      "fileSha256": "9ac6ebab256851ecb56c8e5f5b839f229539442d31af82bc8ff334d0f2fd039c"
+    },
+    "builderExactlyMatchesExecutedArguments": true,
+    "captions": [
+      {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000102",
+        "startFrame": 7706,
+        "endFrameExclusive": 7731,
+        "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/102-ea58f2790344.png",
+        "pngSha256": "c5f6c359b611e4a1b88817ab9dfe882db0a3756a3fbaa9bd5e31defbbfb862a4"
+      },
+      {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+        "startFrame": 7731,
+        "endFrameExclusive": 7872,
+        "pngPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/103-75946ab947b9.png",
+        "pngSha256": "c5f6c359b611e4a1b88817ab9dfe882db0a3756a3fbaa9bd5e31defbbfb862a4"
+      }
+    ],
+    "activeLayers": [
+      {
+        "order": 102,
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+        "pngSha256": "c5f6c359b611e4a1b88817ab9dfe882db0a3756a3fbaa9bd5e31defbbfb862a4"
+      }
+    ],
+    "targetPngActiveLayerCount": 1,
+    "relevantExecutedFilters": [
+      "[134:v]format=rgba,trim=end_frame=25,setpts=PTS-STARTPTS,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='alpha(X,Y)*min(1,min((N+1)/4,(25-N)/4))',setpts=PTS+7706/30/TB[overlay101]",
+      "[video101][overlay101]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[video102]",
+      "[135:v]format=rgba,trim=end_frame=141,setpts=PTS-STARTPTS,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='alpha(X,Y)*min(1,min((N+1)/4,(141-N)/4))',setpts=PTS+7731/30/TB[overlay102]",
+      "[video102][overlay102]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[video103]",
+      "[video103][overlay103]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[video104]",
+      "[video104][overlay104]overlay=0:0:eof_action=pass:shortest=0:repeatlast=0[video105]"
+    ]
+  },
+  "execution": {
+    "status": "completed",
+    "startedAt": "2026-09-26T22:26:34.688Z",
+    "endedAt": "2026-09-26T22:30:06.121Z",
+    "elapsedSeconds": 211.43853625
+  }
+}
