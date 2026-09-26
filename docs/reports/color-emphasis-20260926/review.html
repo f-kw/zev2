@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>13.1〜13.2 字幕色・強調比較</title>
+<style>
+body{max-width:1100px;margin:32px auto;padding:0 20px;font:17px/1.7 system-ui,sans-serif;color:#eee;background:#15171b}
+video{width:100%;display:block;background:#000}section{margin:32px 0}h1{font-size:26px}h2{font-size:21px}a{color:#87cefa}
+</style>
+<h1>字幕色・強調比較 A / B / C</h1>
+<p>同じHRB区間：元Digestの101.067〜147.233秒（各46.167秒）。手指定の比較素材です。水色は未採用です。</p>
+<p>後でまとめて見る点は2つだけです。</p>
+<ol><li>単調さが自然に減ったか</li><li>うるささ・違和感・読みにくさが増えていないか</li></ol>
+<p>Bは11.633〜18.867秒「アングルで怖がらせんの」に強調を絞り、25.900〜29.467秒「分かってくる」を追加。Cはその2範囲だけを水色（#87CEFA）にしています。</p>
+<section><h2>A：現状</h2><video aria-label="A 現状" controls preload="metadata" src="A-current.mp4"></video><a href="A-current.mp4">A-current.mp4</a></section>
+<section><h2>B：黄色だけで強調箇所を調整</h2><video aria-label="B 黄色のみ" controls preload="metadata" src="B-yellow-selection.mp4"></video><a href="B-yellow-selection.mp4">B-yellow-selection.mp4</a></section>
+<section><h2>C：Bと同じ範囲で黄色＋水色</h2><video aria-label="C 黄色と水色" controls preload="metadata" src="C-yellow-cyan.mp4"></video><a href="C-yellow-cyan.mp4">C-yellow-cyan.mp4</a></section>
+<script>document.querySelectorAll('video').forEach(video=>video.addEventListener('play',()=>document.querySelectorAll('video').forEach(other=>{if(other!==video)other.pause()})));</script>
+</html>
