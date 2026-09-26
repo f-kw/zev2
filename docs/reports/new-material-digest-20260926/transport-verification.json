@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "new-material-gpu-upload-verification-v001",
+  "nodeVersion": "v20.19.6",
+  "sourceBytes": 4803412827,
+  "sourceSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+  "originalBlobSize": 508445531,
+  "missingBytes": 4294967296,
+  "before": {
+    "kind": "loopback-upload-transport-probe",
+    "status": "failed",
+    "startedAt": "2026-09-26T06:25:22.398Z",
+    "endedAt": "2026-09-26T06:27:22.422Z",
+    "elapsedSeconds": 120.02009066599999,
+    "receivedBytes": 508428440,
+    "contentLength": 508445814,
+    "error": "TimeoutError: The operation was aborted due to timeout",
+    "nodeVersion": "v20.19.6",
+    "remoteGpuSubmitted": false,
+    "transcriptionExecuted": false
+  },
+  "after": {
+    "kind": "loopback-upload-transport-probe",
+    "status": "passed",
+    "startedAt": "2026-09-26T06:31:22.027Z",
+    "endedAt": "2026-09-26T06:31:25.097Z",
+    "elapsedSeconds": 3.0692846250000003,
+    "sourceBytes": 4803412827,
+    "receivedBytes": 4803413170,
+    "contentLength": 4803413170,
+    "nodeVersion": "v20.19.6",
+    "remoteGpuSubmitted": false,
+    "transcriptionExecuted": false
+  },
+  "regression": {
+    "tests": 18,
+    "passed": 18,
+    "failed": 0,
+    "command": "node --import ./runner/node_modules/tsx/dist/loader.mjs --test runner/test/gpu-stt-integration.test.mts"
+  },
+  "typeCheck": {
+    "status": "passed",
+    "command": "corepack pnpm --filter @zev2/agent-runner type-check"
+  },
+  "limits": [
+    "Local receiver measures transport only; it does not execute transcription.",
+    "GPU runtime is recorded separately.",
+    "No model, source encoding, transcript contract, selection criteria or quality adjustment changed."
+  ],
+  "gpuReceipt": {
+    "jobId": "b50a498c86264de58a7c8c69b7be6ab3",
+    "clientReceivedAt": "2026-09-26T06:36:05.958Z",
+    "input": {
+      "originalFilename": "source-video.mp4",
+      "sha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "bytes": 4803412827
+    },
+    "reused": false,
+    "deduplicated": false,
+    "model": "large-v3",
+    "stateAtReceipt": "queued",
+    "jobDirectory": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-002",
+    "meaning": "Corrected full-video upload accepted; transcription completion is separate."
+  },
+  "longRunningJobDiagnostics": {
+    "observedAt": "2026-09-26T07:45:30.842994+00:00",
+    "jobId": "b50a498c86264de58a7c8c69b7be6ab3",
+    "state": "running",
+    "startedAt": "2026-09-26T06:36:08.469930+00:00",
+    "endedAt": null,
+    "error": null,
+    "runnerPid": 19624,
+    "workerPid": 17896,
+    "settings": {
+      "alignDevice": "cpu",
+      "batchSize": 16,
+      "computeType": "float16",
+      "device": "cuda",
+      "diarizationDevice": "cpu",
+      "enableDiarization": true,
+      "minDiarizationAudioSeconds": 1,
+      "model": "large-v3",
+      "numSpeakers": null,
+      "offline": true,
+      "speakerCoverageThreshold": 0.7,
+      "speakerMarginThreshold": 0.15,
+      "vadMethod": "silero"
+    },
+    "ompThreads": 1,
+    "mklThreads": 1,
+    "health": {
+      "observedAt": "2026-09-26T07:29:29.270883+00:00",
+      "health": {
+        "ok": true,
+        "apiAlive": true,
+        "workerActive": true,
+        "storage": {
+          "accessible": true,
+          "readWrite": true,
+          "freeBytes": 1843865321472
+        },
+        "gpu": {
+          "available": true,
+          "deviceCount": 1,
+          "name": "NVIDIA GeForce RTX 4090",
+          "runtimeVersion": "12.8",
+          "checkedAt": "2026-09-26T07:28:46.635260+00:00",
+          "check": "CUDA initialization and one-element tensor; no STT model loaded",
+          "cached": true,
+          "probeIntervalSeconds": 300,
+          "ageSeconds": 42.4,
+          "fresh": true
+        },
+        "apiPid": 17676,
+        "model": "large-v3",
+        "bindAddress": "0.0.0.0",
+        "port": 8000,
+        "device": "cuda",
+        "alignDevice": "cpu",
+        "computeType": "float16",
+        "diarizationEnabled": true,
+        "diarizationDevice": "cpu",
+        "vadMethod": "silero",
+        "mode": "asynchronous-full-input",
+        "pipelineVersion": "zev-full-stt-1"
+      }
+    },
+    "resultReads": [
+      {
+        "route": "/jobs/b50a498c86264de58a7c8c69b7be6ab3/result",
+        "status": 409,
+        "responseBytes": 43,
+        "body": "{\"detail\":{\"state\":\"running\",\"error\":null}}"
+      },
+      {
+        "route": "/jobs/b50a498c86264de58a7c8c69b7be6ab3/transcript",
+        "status": 409,
+        "responseBytes": 43,
+        "body": "{\"detail\":{\"state\":\"running\",\"error\":null}}"
+      }
+    ],
+    "sshService": {
+      "connected": false,
+      "error": "timed out"
+    },
+    "localFollowerStopped": true,
+    "remoteCancelRequested": false,
+    "resubmitted": false,
+    "conclusion": "STT is not complete. Status and health do not prove progress. CPU alignment/diarization are a possible bottleneck; GPU-side logs or current process resource measurements are needed to distinguish slow progress from a stalled process.",
+    "baseline": {
+      "source": "docs/reports/gpu-stt-integration-20260923/gpu-result.json",
+      "audioSeconds": 51.584,
+      "pipelineSeconds": 76.311,
+      "runnerSeconds": 77.419,
+      "gpuMeanUtilizationPercent": 1.23,
+      "limit": "Short-source evidence only; cannot extrapolate long-source elapsed time or identify the current slow stage."
+    },
+    "nextStep": "Diagnose this existing job on the GPU machine before changing settings or resubmitting."
+  }
+}

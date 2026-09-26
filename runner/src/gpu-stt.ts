@@ -1,7 +1,8 @@
-import { createHash } from 'node:crypto';
-import { createReadStream, openAsBlob } from 'node:fs';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { createHash, randomUUID } from 'node:crypto';
+import { createReadStream } from 'node:fs';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { Readable } from 'node:stream';
 import { setTimeout as delay } from 'node:timers/promises';
 import { recordValue } from '@zev2/shared';
 
@@ -13,6 +14,34 @@ type GpuSttInput = {
   language: string;
   artifactDir: string;
 };
+
+/** Stream exact file bytes without Blob's 32-bit file-size truncation on the
+ * supported Node runtime. The same multipart path handles every file size. */
+export async function createGpuSttUpload(mediaPath: string, language: string, signal?: AbortSignal) {
+  const { size } = await stat(mediaPath);
+  if (!Number.isSafeInteger(size) || size <= 0) throw new Error('GPU-STTの入力ファイルサイズが不正です');
+  const boundary = `----zev-gpu-stt-${randomUUID()}`;
+  const filename = path.basename(mediaPath).replace(/[\r\n"]/g, c =>
+    c === '\r' ? '%0D' : c === '\n' ? '%0A' : '%22');
+  const prefix = Buffer.from(`--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="${filename}"\r\nContent-Type: application/octet-stream\r\n\r\n`);
+  const suffix = Buffer.from(`\r\n--${boundary}\r\nContent-Disposition: form-data; name="language"\r\n\r\n${language}\r\n--${boundary}--\r\n`);
+  const contentLength = prefix.length + size + suffix.length;
+  if (!Number.isSafeInteger(contentLength)) throw new Error('GPU-STTの送信サイズが不正です');
+  async function* parts() {
+    yield prefix;
+    let bytes = 0;
+    for await (const chunk of createReadStream(mediaPath, { signal })) {
+      bytes += chunk.length;
+      if (bytes > size) throw new Error('GPU-STTの送信中に入力サイズが変わりました');
+      yield chunk;
+    }
+    if (bytes !== size) throw new Error('GPU-STTの送信中に入力サイズが変わりました');
+    yield suffix;
+  }
+  return { body: Readable.toWeb(Readable.from(parts())) as ReadableStream,
+    duplex: 'half' as const,
+    headers: { 'content-type': `multipart/form-data; boundary=${boundary}`, 'content-length': String(contentLength) } };
+}
 
 async function saveRawResult(filePath: string, bytes: Buffer): Promise<void> {
   try {
@@ -56,10 +85,8 @@ export async function transcribeWithGpuStt(input: GpuSttInput): Promise<unknown>
     const hash = createHash('sha256');
     for await (const chunk of createReadStream(input.mediaPath, { signal })) hash.update(chunk);
     const inputSha256 = hash.digest('hex');
-    const form = new FormData();
-    form.append('file', await openAsBlob(input.mediaPath), path.basename(input.mediaPath));
-    form.append('language', input.language);
-    const receipt = (await requestJson('/jobs', { method: 'POST', body: form })).payload;
+    const upload = await createGpuSttUpload(input.mediaPath, input.language, signal);
+    const receipt = (await requestJson('/jobs', { method: 'POST', ...upload })).payload;
     const registeredJob = recordValue(receipt.job);
     if (typeof registeredJob.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(registeredJob.id)) {
       throw new Error('GPU-STTの受付応答に有効なjob IDがありません。自動再送は行いません');

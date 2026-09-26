@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "new-material-digest-run-plan-v001",
+  "planId": "new-material-digest-20260926-v001",
+  "session": "Codex2",
+  "epic": "5. 新素材Digest生成",
+  "sourceId": "youtube-2UUTkv9qvk",
+  "youtubeVideoId": "-2UUTkv9qvk",
+  "sourceUrl": "https://www.youtube.com/watch?v=-2UUTkv9qvk",
+  "productionRequest": "この動画から、単独で見ても内容と面白さが分かる複数の見どころを選び、前後の文脈を保ったDigest初稿を作る",
+  "authorization": {
+    "origin": "ZEV Build Loop / 6ab30b1e-1f6c-83e8-9c83-56f3030d5ad7。2026-09-26にユーザーが添付した Codex2｜5. 新素材Digest生成 の第0節",
+    "scope": "指定素材取得、既存GPU-STT、現行Skillの候補探索・選択・保持・字幕判断、採用済みGemini、既存renderer、検証、report、main commit/push、直接報告",
+    "runSpecificPlanAndAdapter": true,
+    "humanQualityAdjustment": false,
+    "newProvider": false,
+    "unadoptedCyan": false,
+    "nextEpic": false,
+    "receivedInstructionSha256": "1680a04badb099eb5261bab8d0d5a8d1e91b1f2887703f4f753df14c24006160"
+  },
+  "runtimeConfig": {
+    "stt": {
+      "mode": "local",
+      "language": "ja-JP"
+    },
+    "contentDiscovery": {
+      "mode": "transcript"
+    },
+    "editPlan": {
+      "mode": "gemini"
+    }
+  },
+  "geminiModel": "gemini-3.8-flash",
+  "judgmentMode": "current-codex-stdin-v001",
+  "artifactRoot": "runtime/artifacts/digest-new-material-20260926-v001",
+  "baselineMain": "0bb91e31167220dbc483a141e231147ed7a9971b",
+  "firstDraftPolicy": "最初の機械的成立動画を保存し上書きしない。人間品質判定は6へ残す。"
+}

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
-import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, open, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -11,6 +11,39 @@ import { buildThemeOptionsArtifact } from '../src/steps/theme-options.js';
 import { buildClipComposition } from '../src/steps/composition.js';
 import { assertClipCompositionArtifact, assertThemeArtifact, assertTranscriptArtifact } from '../src/workflow-artifact-validation.js';
 import { createRunnerEnvironmentFromConfig, loadRuntimeConfig } from '../../backend/src/config/runtime-config.js';
+import { createGpuSttUpload } from '../src/gpu-stt.js';
+
+test('4GBを超える動画でも送信サイズを32bitへ切り詰めず、未送信streamを閉じられる', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'zev-gpu-large-upload-'));
+  const mediaPath = path.join(directory, 'large.mp4');
+  const file = await open(mediaPath, 'w');
+  const size = 2 ** 32 + 17;
+  await file.truncate(size); await file.close();
+  try {
+    const upload = await createGpuSttUpload(mediaPath, 'ja');
+    assert(Number(upload.headers['content-length']) > size);
+    assert.match(upload.headers['content-type'], /^multipart\/form-data; boundary=/);
+    assert.equal(upload.duplex, 'half');
+    await upload.body.cancel();
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('multipart送信は二進データ・日本語ファイル名を保持し、宣言サイズと全送信bytesが一致する', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'zev-gpu-upload-bytes-'));
+  const mediaPath = path.join(directory, '元動画.mp4');
+  const bytes = Buffer.from([0, 255, 13, 10, 128, 34]);
+  await writeFile(mediaPath, bytes);
+  try {
+    const upload = await createGpuSttUpload(mediaPath, 'ja');
+    const body = Buffer.from(await new Response(upload.body).arrayBuffer());
+    assert(body.toString().includes('filename="元動画.mp4"'));
+    assert.equal(body.length, Number(upload.headers['content-length']));
+    const headerEnd = body.indexOf('\r\n\r\n') + 4;
+    assert.deepEqual(body.subarray(headerEnd, headerEnd + bytes.length), bytes);
+    const boundary = upload.headers['content-type'].split('boundary=')[1];
+    assert(body.subarray(headerEnd + bytes.length).toString().endsWith(`\r\nja\r\n--${boundary}--\r\n`));
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
 
 const media = Buffer.from('existing media bytes');
 const sha256 = createHash('sha256').update(media).digest('hex');
