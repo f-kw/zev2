@@ -8,7 +8,7 @@ kawafmmの「2つのレビューを参考に計画を立て、実行可能なタ
 
 完了した1〜4は現行進行表へ戻さない。13.1〜13.2の字幕色比較は完了し、A/B/C比較を保存済み。**13.3は人間確認待ち**で、水色は未採用。13.4〜13.5は開始しない。この待ちは本線を止めない。
 
-**現在のActiveは5. 新素材Digest生成。** GPU側の話者分離ON/OFF実装はremote main `9429b31dcc339ac1c3329755b486ab5bbf541331` まで反映済み。2026-09-26 18:40:17 JST時点で稼働APIは旧schema（file/languageのみ）のままで、API PIDも旧プロセスのまま。ZEV側は送信・job照合・resume対応まで準備済み。現在の唯一のブロッカーはGPUサービス再起動とOpenAPI反映確認であり、新jobはまだ送信しない。 指定素材は `https://www.youtube.com/watch?v=-2UUTkv9qvk`。この未調整素材から現在の正式構成で品質調整前の初稿を1本作り、入力・設定・実行記録を保存する。13の未採用水色は混ぜない。今回の素材は話者1人なので、STTは `enableDiarization=false` で実行する。ZEV側のrunごとの話者分離指定・job照合・resume対応は実装・検証済み。現時点の未完了はGPUサービスへの新API反映、新job全編STT、STT後のProspect→構成・字幕・演出→初稿生成。新jobはまだ送信していない。次は **6. 問題箇所の発見 → 必要な修正 → 8. 別素材で再検証**。7の自動反映は必要時のみ。
+**現在のActiveは5. 新素材Digest生成。** 指定素材は `https://www.youtube.com/watch?v=-2UUTkv9qvk`。話者分離なしの新job `3c0d89617715475eb78f798645521933` は正しいSHA・4,803,412,827 bytes・`enableDiarization=false` で1回だけ登録済み。2026-09-26 18:56 JST時点では `queued`、`startedAt=null`。ZEV側の送信・job照合・resume対応は完了しており、現在の唯一のブロッカーはGPU側worker／先行runner／排他ロック等による開始待ち。新jobは再登録・cancelせず保持し、`queued→running` 後に全編STT→Prospect→構成・字幕・演出→未調整初稿まで続行する。13.3の人間確認待ちは本線を止めない。
 
 5はCodex2が継続中。ZEV側実装commitは `46440dcb8b383f20ecf9917f132dc48bdc02265f`。GPU公開APIに `enableDiarization` が反映されたことを確認するまで新jobは送信しない。remote mainへのpushは解消済み。反映後は `enableDiarization=false` を明示して新jobを一度だけ登録し、そのjob IDで全編STTから初稿まで続行する。既存のGoal数値、契約、正式採用条件は変更しない。Git・監査・直接報告は現行AGENTS.mdと監査プロトコルへ従う。
 
