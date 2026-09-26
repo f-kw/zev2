@@ -155,5 +155,41 @@
       "limit": "Short-source evidence only; cannot extrapolate long-source elapsed time or identify the current slow stage."
     },
     "nextStep": "Diagnose this existing job on the GPU machine before changing settings or resubmitting."
+  },
+  "asyncJobResumeVerification": {
+    "tests": {
+      "total": 32,
+      "passed": 32,
+      "failed": 0,
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-resume-final.tap",
+      "sha256": "bb8660b501493b00ae265e307bcb08d678c540e2e1d19d4b2c88fb91d22339d3"
+    },
+    "typeCheck": "passed",
+    "actualResume": {
+      "startedAt": "2026-09-26T08:08:42.198Z",
+      "endedAt": "2026-09-26T08:08:44.643Z",
+      "status": "passed",
+      "observation": {
+        "jobId": "b50a498c86264de58a7c8c69b7be6ab3",
+        "inputSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+        "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+        "observedAt": "2026-09-26T08:08:44.642Z",
+        "state": "running",
+        "resubmitted": false
+      },
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/jobs/b50a498c86264de58a7c8c69b7be6ab3",
+          "status": 200
+        }
+      ],
+      "receiptUnchanged": true
+    },
+    "completedResultTest": "passed with mock GPU in a separate Node process",
+    "actualCompletedResult": "pending at recorded observation",
+    "productionPostOnResume": false,
+    "sourceModelAlignmentDiarizationChanged": false,
+    "uploadFixPreserved": true
   }
 }

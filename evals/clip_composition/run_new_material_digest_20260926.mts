@@ -1,14 +1,14 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
-import { setTimeout as delay } from 'node:timers/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import type { AgentRequest, Zev2State } from '@zev2/shared';
 import { buildTranscriptArtifact, normalizeGpuSttResponse } from '../../runner/src/steps/transcript.js';
+import { resumeGpuSttJob } from '../../runner/src/gpu-stt.js';
 import { assertTranscriptArtifact } from '../../runner/src/workflow-artifact-validation.js';
 import { loadRuntimeConfig, createRunnerEnvironmentFromConfig } from '../../backend/src/config/runtime-config.js';
 
@@ -94,60 +94,45 @@ export async function runGpuTranscript(afterUploadFix = false) {
   return { transcript: `${ARTIFACTS}/transcript.json`, segmentCount: transcript.segmentCount };
 }
 
-/** Continue the already accepted asynchronous job after the client deadline.
- * This run-specific continuation has no submission endpoint or retry loop. */
-export async function followAcceptedGpuJob() {
-  const attempt = `${ARTIFACTS}/stt-attempt-002`;
-  const executions = await Promise.all((await readdir(absolute(`${ARTIFACTS}/execution`)))
-    .filter(name => name.startsWith('stt-after-upload-fix-')).map(name => load(`${ARTIFACTS}/execution/${name}`)));
-  assert(executions.some(e => e.status === 'failed' && e.error.includes('待機時間を超えました')),
-    'Follow only after the original client has ended at its deadline');
-  const receipt = await load(`${attempt}/gpu-stt-job.json`), jobId = receipt.receipt.job.id;
-  assert(/^[a-zA-Z0-9_-]+$/.test(jobId));
-  assert.equal(receipt.receipt.statusUrl, `/jobs/${jobId}`);
-  assert.equal(receipt.receipt.resultUrl, `/jobs/${jobId}/result`);
-  const source = `${ARTIFACTS}/source/source-video.mp4`, sourceSha256 = await sha256File(source);
-  assert.equal(sourceSha256, receipt.inputSha256);
-  const originalStart = await load(`${ARTIFACTS}/stt-attempt-002-start.json`);
-  const followStartedAt = new Date().toISOString();
-  await save(`${attempt}/follow-start.json`, {jobId, sourceSha256, followStartedAt, resubmitted: false});
-  const get = async (route: string) => {
-    const response = await fetch(new URL(route, receipt.baseUrl));
-    assert(response.ok, `Existing GPU job read failed: HTTP ${response.status}`);
-    const bytes = Buffer.from(await response.arrayBuffer());
-    return {bytes, value: JSON.parse(bytes.toString('utf8'))};
-  };
-  while (true) {
-    const {value: job} = await get(receipt.receipt.statusUrl);
-    assert.equal(job.id, jobId); assert.equal(job.input.sha256, sourceSha256);
-    await writeFile(absolute(`${attempt}/follow-status.json`), JSON.stringify(job, null, 2) + '\n');
-    if (job.state === 'completed') break;
-    assert(['queued', 'running'].includes(job.state), `Existing GPU job failed: ${JSON.stringify(job.error)}`);
-    await delay(2000);
+/** Resume only this accepted job through the production client's GET-only path. */
+export async function resumeAcceptedGpuJob() {
+  assert.equal((await load(PLAN)).runtimeConfig.stt.mode, 'local');
+  const attempt = `${ARTIFACTS}/stt-attempt-002`, source = `${ARTIFACTS}/source/source-video.mp4`;
+  const receipt = await load(`${attempt}/gpu-stt-job.json`);
+  assert.equal(receipt.receipt.job.id, 'b50a498c86264de58a7c8c69b7be6ab3');
+  const observation = await resumeGpuSttJob({artifactDir: absolute(attempt), mediaPath: absolute(source),
+    sourceUri: absolute(source), timeoutMs: Number.parseInt(process.env.ZEV2_STT_SERVER_TIMEOUT_MS ?? '1800000', 10)});
+  const {result, ...metadata} = observation.state === 'completed' ? observation : {...observation, result: undefined};
+  await save(`${attempt}/resume-observation-${observation.observedAt.replaceAll(':', '-')}.json`,
+    {...metadata, resubmitted: false, implementationSha256: await sha256File('runner/src/gpu-stt.ts')});
+  if (observation.state !== 'completed') return {...metadata, resubmitted: false};
+  const existing = await readFile(absolute(`${ARTIFACTS}/transcript.json`), 'utf8').catch(error => {
+    if (error.code === 'ENOENT') return null;
+    throw error;
+  });
+  const converted = normalizeGpuSttResponse(result, {target: {sourceUri: absolute(source)}} as AgentRequest);
+  assertTranscriptArtifact(converted);
+  assert.deepEqual(converted.speechUnitGroups, converted.segments.map(s => [s.id]));
+  if (existing) {
+    const saved = JSON.parse(existing);
+    assert.deepEqual({...converted, generatedAt: saved.generatedAt}, saved, 'Saved transcript changed');
+  } else await save(`${ARTIFACTS}/transcript.json`, converted);
+  const priorExecution = await readFile(absolute(`${ARTIFACTS}/stt-execution.json`), 'utf8').catch(error => {
+    if (error.code === 'ENOENT') return null;
+    throw error;
+  });
+  if (!priorExecution) {
+    const originalStart = await load(`${ARTIFACTS}/stt-attempt-002-start.json`);
+    await save(`${ARTIFACTS}/stt-execution.json`, {startedAt: originalStart.startedAt,
+      endedAt: new Date().toISOString(), elapsedSeconds: (Date.now() - Date.parse(originalStart.startedAt)) / 1000,
+      attemptName: 'stt-attempt-002', completionMode: 'production-resume-existing-job', resubmitted: false,
+      sourceSha256: observation.inputSha256, jobId: observation.jobId,
+      segmentCount: converted.segmentCount, groupCount: converted.speechUnitGroups.length,
+      durationSec: converted.durationSec, reversed: converted.segments.filter(s => s.startMs > s.endMs).length,
+      outsideAudio: converted.segments.filter(s => s.startMs < 0 || s.endMs > converted.durationSec * 1000).length,
+      speakers: [...new Set(converted.segments.map(s => s.speaker ?? 'unspecified'))]});
   }
-  const {bytes, value} = await get(receipt.receipt.resultUrl);
-  assert.equal(value.jobId, jobId); assert.equal(value.input.sha256, sourceSha256);
-  assert(value.zevResult && !Array.isArray(value.zevResult) && typeof value.zevResult === 'object');
-  assert(Number.isFinite(value.audioDurationSeconds) && value.audioDurationSeconds > 0);
-  const rawPath = absolute(`${attempt}/gpu-stt-${jobId}.response.json`);
-  try {await writeFile(rawPath, bytes, {flag: 'wx'});}
-  catch (error) {
-    if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error;
-    assert((await readFile(rawPath)).equals(bytes), 'Saved raw GPU result changed');
-  }
-  const transcript = normalizeGpuSttResponse({...value.zevResult, durationSec: value.audioDurationSeconds},
-    {target: {sourceUri: absolute(source)}} as AgentRequest);
-  assertTranscriptArtifact(transcript);
-  assert.deepEqual(transcript.speechUnitGroups, transcript.segments.map(s => [s.id]));
-  await save(`${ARTIFACTS}/transcript.json`, transcript);
-  await save(`${ARTIFACTS}/stt-execution.json`, {startedAt: originalStart.startedAt, followStartedAt,
-    endedAt: new Date().toISOString(), elapsedSeconds: (Date.now() - Date.parse(originalStart.startedAt)) / 1000,
-    attemptName: 'stt-attempt-002', completionMode: 'follow-existing-job-after-client-deadline', resubmitted: false,
-    sourceSha256, jobId, segmentCount: transcript.segmentCount, groupCount: transcript.speechUnitGroups.length,
-    durationSec: transcript.durationSec, reversed: transcript.segments.filter(s => s.startMs > s.endMs).length,
-    outsideAudio: transcript.segments.filter(s => s.startMs < 0 || s.endMs > transcript.durationSec * 1000).length,
-    speakers: [...new Set(transcript.segments.map(s => s.speaker ?? 'unspecified'))]});
-  return {transcript: `${ARTIFACTS}/transcript.json`, jobId, segmentCount: transcript.segmentCount, resubmitted: false};
+  return {...metadata, transcript: `${ARTIFACTS}/transcript.json`, segmentCount: converted.segmentCount, resubmitted: false};
 }
 
 // The old runners bind their historical media and authorization. This adapter
@@ -399,7 +384,7 @@ export async function acceptDisplay(responsePath: string) {
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const [stage, input] = process.argv.slice(2);
   const stages: Record<string, () => Promise<unknown>> = { stt: runGpuTranscript,
-    'stt-after-upload-fix': () => runGpuTranscript(true), 'follow-stt': followAcceptedGpuJob, prepare: prepareDiscovery,
+    'stt-after-upload-fix': () => runGpuTranscript(true), 'resume-stt': resumeAcceptedGpuJob, prepare: prepareDiscovery,
     discovery: () => acceptDiscovery(input), selection: () => acceptSelection(input),
     retention: () => acceptRetention(input), base: buildBaseAndDisplayRequests, display: () => acceptDisplay(input) };
   assert(stages[stage], 'Unknown execution stage');

@@ -2,7 +2,7 @@
 
 ## 現在状態
 
-診断待ち・未完了。素材取得・同定済み。GPU-STTは受領後約69分の観測時点でもrunningで、文字起こし結果・初稿動画は未生成。
+続行中・未完了。素材取得・同定済み。続行指示に基づきtimeout責務と正式resume経路を修正。2026-09-26 08:08:44 UTCの実resumeでは同じGPU jobがrunningで、文字起こし結果・初稿動画はまだ未生成。
 人間品質調整・人間による採用判定は行っていない。
 
 ## 今回の範囲と制作要求
@@ -139,3 +139,40 @@ adapterのimport確認は済んでいるが、候補探索以降の新素材実�
 今回の未完了はSTT完了確認から初稿生成・QCまで。人間品質調整・水色採用・別エピック着手はない。
 詳細は [transport-verification.json](transport-verification.json) の長時間処理診断、
 生状態・API応答は `runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-002/`。
+
+## 続行指示による非同期job timeout修正
+
+今回の実走を妨げた、health・SHA計算・upload・polling・結果取得へ一つの期限を共有する欠陥を、
+続行指示「Codex2 続行指示｜5. 新素材Digest生成」の範囲で修正した。
+長尺のGPU処理そのものの高速化は行っていない。
+
+- health、upload、状態GET、結果GETはそれぞれ新しい通信timeoutを持ち、応答本文の読込みも同じ個別通信の期限に含む。ローカルSHA計算にはHTTP期限を適用しない。
+- 受付情報は上書きせず保存する。クライアント待機の期限は受付保存後に開始し、uploadまでの時間から独立する。期限到達は `GPU_STT_CLIENT_INTERRUPTED` / `polling-timeout` として記録し、GPU側のqueued/running状態を失敗へ書き換えない。
+- 通常の文字起こし入口は、同じ成果物ディレクトリに受付情報があれば保存jobを再開する。healthとPOSTを繰り返さない。
+- `runner/src/gpu-stt.ts` の正式な `resumeGpuSttJob` は、保存受付のjob ID・入力SHA・接続先・sourceを読み、現在の元動画SHAとsourceを照合して状態を一回取得する。queued/runningならその状態と観測時刻を返し、completedなら同じjobの生結果を保存・返却する。この経路にPOSTはない。
+- 保存ID不正、source/元動画SHA/受付SHA/サーバーのID・SHA不一致を拒否する。failed/interrupted等のサーバー側終端状態を、クライアント側のtimeoutと区別し、自動再投入しない。
+- 個別GETのtimeoutでも受付を保持し、同じ保存jobからresume可能と通知する。4GB超のstream送信を維持した。
+- 今回run adapter内の一時的な追跡実装は削除し、正式resume入口を呼ぶ `resume-stt` へ置換した。
+
+今回のjobを読むcommand（新規POSTなし）:
+
+```sh
+node --import ./runner/node_modules/tsx/dist/loader.mjs \
+  evals/clip_composition/run_new_material_digest_20260926.mts resume-stt
+```
+
+汎用の正式resume関数へ渡すのは、受付ファイルを含む成果物ディレクトリ、照合するローカル動画path、
+現在のsource参照、個別通信timeout。接続先とjob IDは保存受付から読む。
+通常の文字起こし関数は個別通信timeoutとは独立したクライアント待機時間も指定でき、
+未指定時は既存設定値をそれぞれの責務へ別々に使う。GPU jobの生存期限は設定しない。
+
+### 検証
+
+- GPU連携テスト **32/32合格**。受付後のclient timeoutと受付保存、GETだけでのrunning確認、別Nodeプロセスからcompleted結果取得、通常入口の再実行でもPOST一回、SHA/source/ID不一致拒否、failed再投入なし、通信ごとの期限、既存短尺・1断片1まとまり・4GB送信を確認。
+- runner型検査合格。今回adapterのimport確認合格。
+- 初回のsandbox実行はlocalhost listen拒否。実行権限を整えて再実行した。期限直前の合法な状態GETによってqueuedからrunningへ進む場合を、最初のテストが過剰に限定していたため、実際の待機中状態と再投入禁止を検証する形へ訂正した。最終32件に失敗なし。
+- 実GPUで2026-09-26 08:08:42〜08:08:44 UTCに正式resumeを実行。通信は既存jobへのGET **1件、POST 0件**、HTTP 200、running。元動画SHA・保存受付SHA・GPU側SHA一致、保存受付byte不変。
+- completed結果取得は模擬サーバーで検証済み。今回の実素材でのcompleted確認・結果取得は、上記観測時点ではまだ未実施。処理時間だけを根拠にGPU異常とは判定しない。
+
+軽量証拠は [transport-verification.json](transport-verification.json) の非同期job再開検証。
+GPU処理のどこが主要ボトルネックかは、完成後の実測とGPU側記録から別途判断する。

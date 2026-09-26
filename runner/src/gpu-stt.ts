@@ -6,9 +6,10 @@ import { Readable } from 'node:stream';
 import { setTimeout as delay } from 'node:timers/promises';
 import { recordValue } from '@zev2/shared';
 
-type GpuSttInput = {
+export type GpuSttInput = {
   baseUrl: string;
   timeoutMs: number;
+  pollingTimeoutMs?: number;
   mediaPath: string;
   sourceUri: string;
   language: string;
@@ -54,83 +55,173 @@ async function saveRawResult(filePath: string, bytes: Buffer): Promise<void> {
   }
 }
 
-/** Full-input jobs: submit once, retain the receipt, and poll without resubmitting. */
-export async function transcribeWithGpuStt(input: GpuSttInput): Promise<unknown> {
-  if (!input.baseUrl.trim()) {
-    throw new Error('GPU-STTの接続先がありません。STT_BASE_URL または stt.localServerUrl を設定してください。');
+type SavedJob = {
+  sourceUri: string;
+  inputSha256: string;
+  baseUrl: string;
+  receipt: Record<string, unknown>;
+};
+export type GpuSttResumeInput = Pick<GpuSttInput, 'artifactDir' | 'mediaPath' | 'sourceUri' | 'timeoutMs'>;
+export type GpuSttJobObservation = {
+  jobId: string; inputSha256: string; sourceUri: string; observedAt: string;
+} & ({state: 'queued' | 'running'} | {state: 'completed'; result: unknown; rawResultPath: string});
+
+/** Client interruption is distinct from a terminal state reported by the GPU. */
+export class GpuSttClientInterruptedError extends Error {
+  readonly code = 'GPU_STT_CLIENT_INTERRUPTED';
+  constructor(readonly reason: 'http-timeout' | 'polling-timeout', message: string,
+    readonly jobId?: string, options?: ErrorOptions) {
+    super(message, options);
+    this.name = 'GpuSttClientInterruptedError';
   }
-  const baseUrl = new URL(input.baseUrl);
-  if (!['http:', 'https:'].includes(baseUrl.protocol)) throw new Error('GPU-STTの接続先はHTTP(S)で指定してください');
-  if (!Number.isSafeInteger(input.timeoutMs) || input.timeoutMs <= 0) {
-    throw new Error('GPU-STTの待機時間は正の整数ミリ秒で指定してください');
+}
+
+function validateTimeout(value: number) {
+  if (!Number.isSafeInteger(value) || value <= 0) throw new Error('GPU-STTのtimeoutは正の整数ミリ秒で指定してください');
+}
+function httpUrl(value: string) {
+  if (!value.trim()) throw new Error('GPU-STTの接続先がありません。STT_BASE_URL または stt.localServerUrl を設定してください。');
+  const url = new URL(value);
+  if (!['http:', 'https:'].includes(url.protocol)) throw new Error('GPU-STTの接続先はHTTP(S)で指定してください');
+  return url;
+}
+async function fileSha256(mediaPath: string) {
+  const hash = createHash('sha256');
+  // Local hashing has no HTTP deadline and does not consume the polling budget.
+  for await (const chunk of createReadStream(mediaPath)) hash.update(chunk);
+  return hash.digest('hex');
+}
+async function readSavedJob(artifactDir: string): Promise<SavedJob | undefined> {
+  let bytes: string;
+  try { bytes = await readFile(path.join(artifactDir, 'gpu-stt-job.json'), 'utf8'); }
+  catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return undefined;
+    throw error;
   }
-  const signal = AbortSignal.timeout(input.timeoutMs);
-  let jobId: string | undefined;
-  const requestJson = async (route: string, init?: RequestInit) => {
-    const response = await fetch(new URL(route, baseUrl), { ...init, signal });
+  const saved = recordValue(JSON.parse(bytes));
+  const receipt = recordValue(saved.receipt), job = recordValue(receipt.job);
+  if (typeof job.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(job.id)
+    || typeof saved.inputSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(saved.inputSha256)
+    || typeof saved.sourceUri !== 'string' || !saved.sourceUri
+    || typeof saved.baseUrl !== 'string') throw new Error('保存済みGPU-STT受付情報が不正です。再投入しません');
+  httpUrl(saved.baseUrl);
+  if (recordValue(job.input).sha256 !== saved.inputSha256) throw new Error('保存jobと受付のSHA-256が一致しません。再投入しません');
+  return saved as SavedJob;
+}
+async function verifySource(saved: SavedJob, input: GpuSttResumeInput) {
+  if (saved.sourceUri !== input.sourceUri) throw new Error('保存jobのsourceと現在の動画参照が一致しません');
+  if (await fileSha256(input.mediaPath) !== saved.inputSha256) throw new Error('保存jobと元動画のSHA-256が一致しません');
+}
+
+/** Each request owns its timeout, including upload streaming and response body. */
+async function requestJson(baseUrl: string, timeoutMs: number, route: string,
+  makeInit?: (signal: AbortSignal) => Promise<RequestInit>) {
+  validateTimeout(timeoutMs);
+  const signal = AbortSignal.timeout(timeoutMs);
+  try {
+    const init = await makeInit?.(signal);
+    const response = await fetch(new URL(route, httpUrl(baseUrl)), {...init, signal});
     const bytes = Buffer.from(await response.arrayBuffer());
     if (!response.ok) throw new Error(`GPU-STT ${route} がHTTP ${response.status}を返しました: ${bytes.toString('utf8')}`);
-    try {
-      return { bytes, payload: recordValue(JSON.parse(bytes.toString('utf8'))) };
-    } catch {
-      throw new Error(`GPU-STT ${route} の応答JSONを読めません`);
-    }
-  };
-
-  try {
-    const health = (await requestJson('/health')).payload;
-    if (health.ok !== true || health.workerActive !== true) throw new Error('GPU-STTのhealth確認で利用可能なworkerを確認できません');
-
-    await mkdir(input.artifactDir, { recursive: true });
-    const hash = createHash('sha256');
-    for await (const chunk of createReadStream(input.mediaPath, { signal })) hash.update(chunk);
-    const inputSha256 = hash.digest('hex');
-    const upload = await createGpuSttUpload(input.mediaPath, input.language, signal);
-    const receipt = (await requestJson('/jobs', { method: 'POST', ...upload })).payload;
-    const registeredJob = recordValue(receipt.job);
-    if (typeof registeredJob.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(registeredJob.id)) {
-      throw new Error('GPU-STTの受付応答に有効なjob IDがありません。自動再送は行いません');
-    }
-    jobId = registeredJob.id;
-    await writeFile(path.join(input.artifactDir, 'gpu-stt-job.json'), `${JSON.stringify({
-      sourceUri: input.sourceUri,
-      inputSha256,
-      baseUrl: baseUrl.toString(),
-      language: input.language,
-      registeredAt: new Date().toISOString(),
-      receipt
-    }, null, 2)}\n`);
-    if (recordValue(registeredJob.input).sha256 !== inputSha256) throw new Error('GPU-STTの受付と送信した動画のSHA-256が一致しません');
-
-    let job = registeredJob;
-    while (true) {
-      if (job.id !== jobId || recordValue(job.input).sha256 !== inputSha256) throw new Error('GPU-STTのjobと動画の対応が一致しません');
-      await writeFile(path.join(input.artifactDir, 'gpu-stt-status.json'), `${JSON.stringify(job, null, 2)}\n`);
-      if (job.state === 'completed') break;
-      if (job.state !== 'queued' && job.state !== 'running') {
-        throw new Error(`GPU-STTのjobを完了できません: ${String(job.state)} ${JSON.stringify(job.error ?? '')}`);
-      }
-      await delay(2000, undefined, { signal });
-      job = (await requestJson(`/jobs/${jobId}`)).payload;
-    }
-
-    const result = await requestJson(`/jobs/${jobId}/result`);
-    await saveRawResult(path.join(input.artifactDir, `gpu-stt-${jobId}.response.json`), result.bytes);
-    if (result.payload.jobId !== jobId || recordValue(result.payload.input).sha256 !== inputSha256) {
-      throw new Error('GPU-STTの結果と動画の対応が一致しません');
-    }
-    if (!result.payload.zevResult || typeof result.payload.zevResult !== 'object' || Array.isArray(result.payload.zevResult)) {
-      throw new Error('GPU-STTの結果にZEV用の文字起こしがありません');
-    }
-    const durationSec = result.payload.audioDurationSeconds;
-    if (typeof durationSec !== 'number' || !Number.isFinite(durationSec) || durationSec <= 0) {
-      throw new Error('GPU-STTの結果に入力全体の長さがありません');
-    }
-    // zevResult.durationSec can be the last spoken timestamp; retain trailing silence.
-    return { ...result.payload.zevResult, durationSec };
+    try { return {bytes, payload: recordValue(JSON.parse(bytes.toString('utf8')))}; }
+    catch { throw new Error(`GPU-STT ${route} の応答JSONを読めません`); }
   } catch (error) {
-    const tracking = jobId ? ` job ID: ${jobId}。保存した受付情報から状態を確認できます。` : ' job受付が不明な場合はGPU側の状態を確認してください。';
-    if (signal.aborted) throw new Error(`GPU-STTの待機時間を超えました。GPU側のjobは取り消していません。${tracking}`, { cause: error });
-    throw new Error(`GPU-STT処理に失敗しました。${tracking} ${error instanceof Error ? error.message : String(error)}`, { cause: error });
+    if (signal.aborted) throw new GpuSttClientInterruptedError('http-timeout',
+      `GPU-STTの個別HTTP timeout / interrupted: ${route}。GPU jobの失敗・取消を意味しません。`, undefined, {cause: error});
+    throw error;
   }
+}
+async function recordClient(input: GpuSttResumeInput, saved: SavedJob, status: string,
+  details: Record<string, unknown> = {}) {
+  await writeFile(path.join(input.artifactDir, 'gpu-stt-client-status.json'), JSON.stringify({
+    status, jobId: recordValue(saved.receipt.job).id, sourceUri: saved.sourceUri,
+    inputSha256: saved.inputSha256, observedAt: new Date().toISOString(), ...details
+  }, null, 2) + '\n');
+}
+async function observeJob(input: GpuSttResumeInput, saved: SavedJob,
+  initialJob?: Record<string, unknown>): Promise<GpuSttJobObservation> {
+  const jobId = String(recordValue(saved.receipt.job).id);
+  try {
+    const job = initialJob ?? (await requestJson(saved.baseUrl, input.timeoutMs, `/jobs/${jobId}`)).payload;
+    if (job.id !== jobId || recordValue(job.input).sha256 !== saved.inputSha256) throw new Error('GPU-STTのjobと動画の対応が一致しません');
+    await writeFile(path.join(input.artifactDir, 'gpu-stt-status.json'), JSON.stringify(job, null, 2) + '\n');
+    const observation = {jobId, inputSha256: saved.inputSha256, sourceUri: saved.sourceUri, observedAt: new Date().toISOString()};
+    if (job.state === 'queued' || job.state === 'running') {
+      await recordClient(input, saved, 'pending', {jobState: job.state});
+      return {...observation, state: job.state};
+    }
+    if (job.state !== 'completed') {
+      await recordClient(input, saved, 'server-job-terminal', {jobState: job.state, error: job.error ?? null});
+      throw new Error(`GPU-STTのjobを完了できません: ${String(job.state)} ${JSON.stringify(job.error ?? '')}。自動再投入しません`);
+    }
+    const result = await requestJson(saved.baseUrl, input.timeoutMs, `/jobs/${jobId}/result`);
+    const rawResultPath = path.join(input.artifactDir, `gpu-stt-${jobId}.response.json`);
+    await saveRawResult(rawResultPath, result.bytes);
+    if (result.payload.jobId !== jobId || recordValue(result.payload.input).sha256 !== saved.inputSha256) throw new Error('GPU-STTの結果と動画の対応が一致しません');
+    if (!result.payload.zevResult || typeof result.payload.zevResult !== 'object' || Array.isArray(result.payload.zevResult)) throw new Error('GPU-STTの結果にZEV用の文字起こしがありません');
+    const durationSec = result.payload.audioDurationSeconds;
+    if (typeof durationSec !== 'number' || !Number.isFinite(durationSec) || durationSec <= 0) throw new Error('GPU-STTの結果に入力全体の長さがありません');
+    await recordClient(input, saved, 'completed', {jobState: 'completed', rawResultPath});
+    return {...observation, state: 'completed', rawResultPath, result: {...result.payload.zevResult, durationSec}};
+  } catch (error) {
+    if (error instanceof GpuSttClientInterruptedError) {
+      await recordClient(input, saved, 'interrupted', {reason: error.reason});
+      throw new GpuSttClientInterruptedError(error.reason,
+        `${error.message} job ID: ${jobId}。保存したgpu-stt-job.jsonからresume可能です。`, jobId, {cause: error});
+    }
+    throw error;
+  }
+}
+
+/** Read the saved job once. This entry point never calls health or POST /jobs. */
+export async function resumeGpuSttJob(input: GpuSttResumeInput): Promise<GpuSttJobObservation> {
+  validateTimeout(input.timeoutMs);
+  const saved = await readSavedJob(input.artifactDir);
+  if (!saved) throw new Error('保存済みgpu-stt-job.jsonがありません。resumeでは新規投入しません');
+  await verifySource(saved, input);
+  return observeJob(input, saved);
+}
+
+/** Submit only when no receipt exists; subsequent process runs resume that receipt. */
+export async function transcribeWithGpuStt(input: GpuSttInput): Promise<unknown> {
+  validateTimeout(input.timeoutMs);
+  const pollingTimeoutMs = input.pollingTimeoutMs ?? input.timeoutMs;
+  validateTimeout(pollingTimeoutMs);
+  await mkdir(input.artifactDir, {recursive: true});
+  let saved = await readSavedJob(input.artifactDir);
+  let initialJob: Record<string, unknown> | undefined;
+  if (saved) {
+    await verifySource(saved, input);
+  } else {
+    const baseUrl = httpUrl(input.baseUrl).toString();
+    const health = (await requestJson(baseUrl, input.timeoutMs, '/health')).payload;
+    if (health.ok !== true || health.workerActive !== true) throw new Error('GPU-STTのhealth確認で利用可能なworkerを確認できません');
+    const inputSha256 = await fileSha256(input.mediaPath);
+    const receipt = (await requestJson(baseUrl, input.timeoutMs, '/jobs', async signal => ({
+      method: 'POST', ...await createGpuSttUpload(input.mediaPath, input.language, signal)
+    }))).payload;
+    const registeredJob = recordValue(receipt.job);
+    if (typeof registeredJob.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(registeredJob.id)) throw new Error('GPU-STTの受付応答に有効なjob IDがありません。自動再送は行いません');
+    saved = {sourceUri: input.sourceUri, inputSha256, baseUrl, receipt};
+    await writeFile(path.join(input.artifactDir, 'gpu-stt-job.json'), JSON.stringify({
+      ...saved, language: input.language, registeredAt: new Date().toISOString()
+    }, null, 2) + '\n', {flag: 'wx'});
+    if (recordValue(registeredJob.input).sha256 !== inputSha256) throw new Error('GPU-STTの受付と送信した動画のSHA-256が一致しません');
+    initialJob = registeredJob;
+  }
+  // The polling budget starts after upload/receipt (or source verification on resume).
+  const deadline = performance.now() + pollingTimeoutMs;
+  let observation = await observeJob(input, saved, initialJob);
+  while (observation.state !== 'completed') {
+    const remaining = deadline - performance.now();
+    if (remaining <= 0) {
+      await recordClient(input, saved, 'interrupted', {reason: 'polling-timeout', jobState: observation.state});
+      throw new GpuSttClientInterruptedError('polling-timeout',
+        `GPU-STT client-side polling timeout / interrupted。GPU jobは${observation.state}であり、失敗・取消を意味しません。 job ID: ${observation.jobId}。保存したgpu-stt-job.jsonからresume可能です。`, observation.jobId);
+    }
+    await delay(Math.min(2000, remaining));
+    if (performance.now() >= deadline) continue;
+    observation = await observeJob(input, saved);
+  }
+  return observation.result;
 }
