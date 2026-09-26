@@ -1,18 +1,15 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { appendFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
-import type { AgentRequest, Zev2State } from '@zev2/shared';
-import { buildTranscriptArtifact, normalizeGpuSttResponse } from '../../runner/src/steps/transcript.js';
-import { resumeGpuSttJob } from '../../runner/src/gpu-stt.js';
+import type { AgentRequest } from '@zev2/shared';
+import { normalizeGpuSttResponse } from '../../runner/src/steps/transcript.js';
+import { resumeGpuSttJob, transcribeWithGpuStt, GpuSttClientInterruptedError } from '../../runner/src/gpu-stt.js';
 import { assertTranscriptArtifact } from '../../runner/src/workflow-artifact-validation.js';
 import { loadRuntimeConfig, createRunnerEnvironmentFromConfig } from '../../backend/src/config/runtime-config.js';
 
-const exec = promisify(execFile);
 export const ROOT = path.resolve(import.meta.dirname, '../..');
 export const PLAN = 'docs/reports/new-material-digest-20260926/plan.json';
 export const ARTIFACTS = 'runtime/artifacts/digest-new-material-20260926-v001';
@@ -28,80 +25,119 @@ export async function sha256File(p: string) {
   return hash.digest('hex');
 }
 
-/** Run-specific wiring only: use the existing GPU job and transcript conversion. */
-export async function runGpuTranscript(afterUploadFix = false) {
-  const plan = await load(PLAN);
+const STT_ATTEMPT = `${ARTIFACTS}/stt-attempt-003-no-diarization`;
+const OLD_JOB_ID = 'b50a498c86264de58a7c8c69b7be6ab3';
+
+/** This run explicitly opts out of diarization; no server default is changed. */
+export async function runGpuTranscript() {
+  const plan = await load(PLAN), source = `${ARTIFACTS}/source/source-video.mp4`;
   assert.equal(plan.sourceUrl, 'https://www.youtube.com/watch?v=-2UUTkv9qvk');
   assert.equal(plan.runtimeConfig.stt.mode, 'local');
+  assert.equal(plan.sttRun.enableDiarization, false);
+  assert.equal(plan.sttRun.attemptDirectory, STT_ATTEMPT);
   assert(process.env.STT_BASE_URL?.trim(), 'Existing GPU endpoint must be supplied explicitly');
-  if (afterUploadFix) {
-    const stopped = await load(`${ARTIFACTS}/stt-send-interruption.json`);
-    assert.equal(stopped.jobReceiptPresent, false);
-    assert.equal(stopped.difference, 2 ** 32);
-    assert.equal((await load(`${ARTIFACTS}/tests/upload-client-probe-after.json`)).status, 'passed');
-    const receipt = await readFile(absolute(`${ARTIFACTS}/stt/gpu-stt-job.json`)).catch(error => {
+  await mkdir(absolute(STT_ATTEMPT), {recursive: true});
+  const configPath = `${STT_ATTEMPT}/runtime-config.json`;
+  const existingConfig = await readFile(absolute(configPath), 'utf8').catch(error => {
+    if (error.code === 'ENOENT') return null;
+    throw error;
+  });
+  if (existingConfig) assert.deepEqual(JSON.parse(existingConfig), plan.runtimeConfig);
+  else await save(configPath, plan.runtimeConfig);
+  process.env.ZEV2_RUNTIME_CONFIG_PATH = absolute(configPath);
+  const config = await loadRuntimeConfig();
+  assert.equal(createRunnerEnvironmentFromConfig(config).ZEV2_STT_RUNTIME_MODE, 'local');
+  assert.equal(new URL(config.stt.localServerUrl).origin, new URL(process.env.STT_BASE_URL!).origin);
+  const receiptPath = absolute(`${STT_ATTEMPT}/gpu-stt-job.json`);
+  const previous = await readFile(receiptPath, 'utf8').then(JSON.parse).catch(error => {
+    if (error.code === 'ENOENT') return null;
+    throw error;
+  });
+  const verified = await load(`${ARTIFACTS}/source/verified-source.json`);
+  assert.equal(await sha256File(source), verified.sha256);
+  const {size: inputBytes} = await stat(absolute(source));
+  let registeredId: string | undefined = previous?.receipt.job.id;
+  if (previous) {
+    assert.notEqual(registeredId, OLD_JOB_ID);
+    assert.equal(previous.enableDiarization, false);
+    assert.equal(previous.receipt.job.pipeline.settings.enableDiarization, false);
+  } else {
+    // A marker survives an uncertain upload: restarting must not blindly POST again.
+    const marker = await readFile(absolute(`${STT_ATTEMPT}/submission-start.json`)).catch(error => {
       if (error.code === 'ENOENT') return null;
       throw error;
     });
-    assert.equal(receipt, null, 'An existing job must be inspected before any new submission');
+    assert.equal(marker, null, 'Submission was already attempted; inspect its evidence instead of resubmitting');
+    const api = await fetch(new URL('/openapi.json', process.env.STT_BASE_URL), {signal: AbortSignal.timeout(30000)});
+    assert(api.ok);
+    const specification = await api.json();
+    const bodyRef = specification.paths['/jobs'].post.requestBody.content['multipart/form-data'].schema.$ref;
+    const body = specification.components.schemas[bodyRef.split('/').at(-1)];
+    const option = body.properties.enableDiarization;
+    assert(option && (option.type === 'boolean' || option.anyOf?.some((v: any) => v.type === 'boolean')),
+      'GPU API does not yet advertise the optional enableDiarization field');
+    await save(`${STT_ATTEMPT}/submission-openapi.json`, specification);
+    await save(`${STT_ATTEMPT}/submission-start.json`, {startedAt: new Date().toISOString(),
+      source, inputSha256: verified.sha256, inputBytes, enableDiarization: false,
+      excludedJobId: OLD_JOB_ID, implementationSha256: await sha256File('runner/src/gpu-stt.ts')});
+    await writeFile(absolute(`${STT_ATTEMPT}/gpu-stt-client-at-submission.ts`),
+      await readFile(absolute('runner/src/gpu-stt.ts')), {flag: 'wx'});
   }
-  const attemptName = afterUploadFix ? 'stt-attempt-002' : 'stt';
-  const configPath = `${ARTIFACTS}/${afterUploadFix ? 'runtime-config-after-upload-fix' : 'runtime-config'}.json`;
-  await save(configPath, plan.runtimeConfig);
-  process.env.ZEV2_RUNTIME_CONFIG_PATH = absolute(configPath);
-  const config = await loadRuntimeConfig();
-  const environment = createRunnerEnvironmentFromConfig(config);
-  assert.equal(environment.ZEV2_STT_RUNTIME_MODE, 'local');
-  const source = `${ARTIFACTS}/source/source-video.mp4`;
-  const acquisition = await load(`${ARTIFACTS}/source/acquisition-execution.json`);
-  assert.equal(acquisition.exitCode, 0);
-  const sourceSha256 = await sha256File(source);
-  const metadata = await load(`${ARTIFACTS}/source/youtube-metadata.json`);
-  assert.equal(metadata.id, plan.youtubeVideoId);
-  const { stdout } = await exec('/opt/homebrew/bin/ffprobe', ['-v', 'error', '-show_format', '-show_streams', '-of', 'json', absolute(source)]);
-  const media = JSON.parse(stdout);
-  if (afterUploadFix) assert.equal((await load(`${ARTIFACTS}/source/verified-source.json`)).sha256, sourceSha256);
-  else await save(`${ARTIFACTS}/source/verified-source.json`, {
-      sourceUrl: plan.sourceUrl, videoId: metadata.id, title: metadata.title,
-      path: source, sha256: sourceSha256, acquisition, media
-    });
-  const startedAt = new Date().toISOString(), start = performance.now();
-  await save(`${ARTIFACTS}/${attemptName}-start.json`, { startedAt, mode: config.stt.mode, sourceSha256,
-    afterUploadFix, implementationSha256: await sha256File('runner/src/gpu-stt.ts') });
-  const health = await fetch(new URL('/health', config.stt.localServerUrl));
-  assert(health.ok);
-  await save(`${ARTIFACTS}/${attemptName}-health.json`, await health.json());
-  const request = { target: { sourceUri: absolute(source) } } as AgentRequest;
-  const transcript = await buildTranscriptArtifact(request, {} as Zev2State, {
-    sttServerUrl: config.stt.localServerUrl,
-    sttServerTimeoutMs: Number.parseInt(process.env.ZEV2_STT_SERVER_TIMEOUT_MS ?? '1800000', 10),
-    sttSamplePath: '', fixedTranscriptPath: '', useFixedTranscript: config.stt.mode === 'fixed',
-    requestArtifactDir: () => absolute(`${ARTIFACTS}/${attemptName}`),
-    resolveSourceVideoPath: () => absolute(source)
-  });
-  assertTranscriptArtifact(transcript);
-  assert.equal(transcript.mode, 'zev-local-stt');
-  assert.deepEqual(transcript.speechUnitGroups, transcript.segments.map(s => [s.id]));
-  await save(`${ARTIFACTS}/transcript.json`, transcript);
-  await save(`${ARTIFACTS}/stt-execution.json`, {
-    startedAt, endedAt: new Date().toISOString(), elapsedSeconds: (performance.now() - start) / 1000,
-    sourceSha256, attemptName, afterUploadFix, segmentCount: transcript.segmentCount, groupCount: transcript.speechUnitGroups.length,
-    durationSec: transcript.durationSec,
-    reversed: transcript.segments.filter(s => s.startMs > s.endMs).length,
-    outsideAudio: transcript.segments.filter(s => s.startMs < 0 || s.endMs > transcript.durationSec * 1000).length,
-    speakers: [...new Set(transcript.segments.map(s => s.speaker ?? 'unspecified'))]
-  });
-  return { transcript: `${ARTIFACTS}/transcript.json`, segmentCount: transcript.segmentCount };
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url, options) => {
+    const target = new URL(String(url)), method = options?.method ?? 'GET';
+    assert.equal(target.origin, new URL(process.env.STT_BASE_URL!).origin);
+    assert(target.pathname === '/health' && method === 'GET'
+      || target.pathname === '/jobs' && method === 'POST' && !registeredId
+      || registeredId && method === 'GET' && ['/jobs/' + registeredId, '/jobs/' + registeredId + '/result'].includes(target.pathname));
+    const response = await realFetch(url, options);
+    await appendFile(absolute(`${STT_ATTEMPT}/http-trace.ndjson`),
+      JSON.stringify({observedAt: new Date().toISOString(), method, route: target.pathname, status: response.status}) + '\n');
+    if (method === 'POST' && response.ok) {
+      const receipt = await response.clone().json(), job = receipt.job;
+      await save(`${STT_ATTEMPT}/registration-response.json`, receipt);
+      assert.equal(job.input.sha256, verified.sha256);
+      assert.equal(job.input.bytes, inputBytes);
+      assert.equal(job.pipeline.settings.enableDiarization, false);
+      assert.equal(job.pipeline.settings.model, 'large-v3');
+      assert.equal(job.pipeline.settings.alignDevice, 'cpu');
+      assert.equal(typeof job.id, 'string'); assert(job.id.length > 0);
+      assert.notEqual(job.id, OLD_JOB_ID);
+      registeredId = job.id;
+    }
+    return response;
+  };
+  try {
+    for (;;) {
+      try {
+        await transcribeWithGpuStt({baseUrl: process.env.STT_BASE_URL!, timeoutMs: 1800000,
+          pollingTimeoutMs: 1800000, mediaPath: absolute(source), sourceUri: absolute(source),
+          language: 'ja', artifactDir: absolute(STT_ATTEMPT), enableDiarization: false});
+        break;
+      } catch (error) {
+        if (!(error instanceof GpuSttClientInterruptedError) || error.reason !== 'polling-timeout') throw error;
+        const receipt = await load(`${STT_ATTEMPT}/gpu-stt-job.json`);
+        assert.equal(receipt.receipt.job.id, registeredId); assert.notEqual(registeredId, OLD_JOB_ID);
+        console.log(JSON.stringify({observedAt: new Date().toISOString(), clientInterrupted: true,
+          jobId: registeredId, action: 'resume-same-saved-job', resubmitted: false}));
+      }
+    }
+    return await resumeAcceptedGpuJob();
+  } finally {globalThis.fetch = realFetch;}
 }
 
-/** Resume only this accepted job through the production client's GET-only path. */
+/** Resume only the new no-diarization attempt through the GET-only path. */
 export async function resumeAcceptedGpuJob() {
-  assert.equal((await load(PLAN)).runtimeConfig.stt.mode, 'local');
-  const attempt = `${ARTIFACTS}/stt-attempt-002`, source = `${ARTIFACTS}/source/source-video.mp4`;
+  const plan = await load(PLAN);
+  assert.equal(plan.runtimeConfig.stt.mode, 'local');
+  assert.equal(plan.sttRun.enableDiarization, false);
+  const attempt = STT_ATTEMPT, source = `${ARTIFACTS}/source/source-video.mp4`;
   const receipt = await load(`${attempt}/gpu-stt-job.json`);
-  assert.equal(receipt.receipt.job.id, 'b50a498c86264de58a7c8c69b7be6ab3');
+  assert.notEqual(receipt.receipt.job.id, OLD_JOB_ID);
+  assert.equal(receipt.enableDiarization, false);
+  assert.equal(receipt.receipt.job.pipeline.settings.enableDiarization, false);
   const observation = await resumeGpuSttJob({artifactDir: absolute(attempt), mediaPath: absolute(source),
-    sourceUri: absolute(source), timeoutMs: Number.parseInt(process.env.ZEV2_STT_SERVER_TIMEOUT_MS ?? '1800000', 10)});
+    sourceUri: absolute(source), enableDiarization: false, timeoutMs: Number.parseInt(process.env.ZEV2_STT_SERVER_TIMEOUT_MS ?? '1800000', 10)});
   const {result, ...metadata} = observation.state === 'completed' ? observation : {...observation, result: undefined};
   await save(`${attempt}/resume-observation-${observation.observedAt.replaceAll(':', '-')}.json`,
     {...metadata, resubmitted: false, implementationSha256: await sha256File('runner/src/gpu-stt.ts')});
@@ -122,10 +158,10 @@ export async function resumeAcceptedGpuJob() {
     throw error;
   });
   if (!priorExecution) {
-    const originalStart = await load(`${ARTIFACTS}/stt-attempt-002-start.json`);
+    const originalStart = await load(`${STT_ATTEMPT}/submission-start.json`);
     await save(`${ARTIFACTS}/stt-execution.json`, {startedAt: originalStart.startedAt,
       endedAt: new Date().toISOString(), elapsedSeconds: (Date.now() - Date.parse(originalStart.startedAt)) / 1000,
-      attemptName: 'stt-attempt-002', completionMode: 'production-resume-existing-job', resubmitted: false,
+      attemptName: 'stt-attempt-003-no-diarization', enableDiarization: false, completionMode: 'production-resume-existing-job', resubmitted: false,
       sourceSha256: observation.inputSha256, jobId: observation.jobId,
       segmentCount: converted.segmentCount, groupCount: converted.speechUnitGroups.length,
       durationSec: converted.durationSec, reversed: converted.segments.filter(s => s.startMs > s.endMs).length,
@@ -383,8 +419,8 @@ export async function acceptDisplay(responsePath: string) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const [stage, input] = process.argv.slice(2);
-  const stages: Record<string, () => Promise<unknown>> = { stt: runGpuTranscript,
-    'stt-after-upload-fix': () => runGpuTranscript(true), 'resume-stt': resumeAcceptedGpuJob, prepare: prepareDiscovery,
+  const stages: Record<string, () => Promise<unknown>> = { 'stt-no-diarization': runGpuTranscript,
+    'resume-stt': resumeAcceptedGpuJob, prepare: prepareDiscovery,
     discovery: () => acceptDiscovery(input), selection: () => acceptSelection(input),
     retention: () => acceptRetention(input), base: buildBaseAndDisplayRequests, display: () => acceptDisplay(input) };
   assert(stages[stage], 'Unknown execution stage');

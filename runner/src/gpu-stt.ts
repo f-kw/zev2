@@ -13,19 +13,23 @@ export type GpuSttInput = {
   mediaPath: string;
   sourceUri: string;
   language: string;
+  enableDiarization?: boolean;
   artifactDir: string;
 };
 
 /** Stream exact file bytes without Blob's 32-bit file-size truncation on the
  * supported Node runtime. The same multipart path handles every file size. */
-export async function createGpuSttUpload(mediaPath: string, language: string, signal?: AbortSignal) {
+export async function createGpuSttUpload(mediaPath: string, language: string, signal?: AbortSignal, enableDiarization?: boolean) {
+  validateDiarization(enableDiarization);
   const { size } = await stat(mediaPath);
   if (!Number.isSafeInteger(size) || size <= 0) throw new Error('GPU-STTの入力ファイルサイズが不正です');
   const boundary = `----zev-gpu-stt-${randomUUID()}`;
   const filename = path.basename(mediaPath).replace(/[\r\n"]/g, c =>
     c === '\r' ? '%0D' : c === '\n' ? '%0A' : '%22');
   const prefix = Buffer.from(`--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="${filename}"\r\nContent-Type: application/octet-stream\r\n\r\n`);
-  const suffix = Buffer.from(`\r\n--${boundary}\r\nContent-Disposition: form-data; name="language"\r\n\r\n${language}\r\n--${boundary}--\r\n`);
+  const diarizationPart = enableDiarization === undefined ? ''
+    : `--${boundary}\r\nContent-Disposition: form-data; name="enableDiarization"\r\n\r\n${enableDiarization}\r\n`;
+  const suffix = Buffer.from(`\r\n--${boundary}\r\nContent-Disposition: form-data; name="language"\r\n\r\n${language}\r\n${diarizationPart}--${boundary}--\r\n`);
   const contentLength = prefix.length + size + suffix.length;
   if (!Number.isSafeInteger(contentLength)) throw new Error('GPU-STTの送信サイズが不正です');
   async function* parts() {
@@ -58,10 +62,12 @@ async function saveRawResult(filePath: string, bytes: Buffer): Promise<void> {
 type SavedJob = {
   sourceUri: string;
   inputSha256: string;
+  inputBytes?: number;
+  enableDiarization?: boolean;
   baseUrl: string;
   receipt: Record<string, unknown>;
 };
-export type GpuSttResumeInput = Pick<GpuSttInput, 'artifactDir' | 'mediaPath' | 'sourceUri' | 'timeoutMs'>;
+export type GpuSttResumeInput = Pick<GpuSttInput, 'artifactDir' | 'mediaPath' | 'sourceUri' | 'timeoutMs' | 'enableDiarization'>;
 export type GpuSttJobObservation = {
   jobId: string; inputSha256: string; sourceUri: string; observedAt: string;
 } & ({state: 'queued' | 'running'} | {state: 'completed'; result: unknown; rawResultPath: string});
@@ -78,6 +84,17 @@ export class GpuSttClientInterruptedError extends Error {
 
 function validateTimeout(value: number) {
   if (!Number.isSafeInteger(value) || value <= 0) throw new Error('GPU-STTのtimeoutは正の整数ミリ秒で指定してください');
+}
+function validateDiarization(value: unknown) {
+  if (value !== undefined && typeof value !== 'boolean') throw new Error('GPU-STTの話者分離指定はbooleanで指定してください');
+}
+function jobDiarization(job: Record<string, unknown>): unknown {
+  return recordValue(recordValue(job.pipeline).settings).enableDiarization;
+}
+function verifyJobIdentity(job: Record<string, unknown>, saved: SavedJob) {
+  const expected = saved.enableDiarization ?? jobDiarization(recordValue(saved.receipt.job));
+  if (expected !== undefined && jobDiarization(job) !== expected) throw new Error('GPU-STTの話者分離設定が保存job・要求と一致しません。再投入しません');
+  if (saved.inputBytes !== undefined && recordValue(job.input).bytes !== saved.inputBytes) throw new Error('GPU-STTの入力byte数が保存job・元動画と一致しません');
 }
 function httpUrl(value: string) {
   if (!value.trim()) throw new Error('GPU-STTの接続先がありません。STT_BASE_URL または stt.localServerUrl を設定してください。');
@@ -105,11 +122,18 @@ async function readSavedJob(artifactDir: string): Promise<SavedJob | undefined> 
     || typeof saved.sourceUri !== 'string' || !saved.sourceUri
     || typeof saved.baseUrl !== 'string') throw new Error('保存済みGPU-STT受付情報が不正です。再投入しません');
   httpUrl(saved.baseUrl);
+  validateDiarization(saved.enableDiarization);
   if (recordValue(job.input).sha256 !== saved.inputSha256) throw new Error('保存jobと受付のSHA-256が一致しません。再投入しません');
+  if (saved.inputBytes !== undefined && (!Number.isSafeInteger(saved.inputBytes) || Number(saved.inputBytes) <= 0)) throw new Error('保存jobの入力byte数が不正です');
+  verifyJobIdentity(job, saved as SavedJob);
   return saved as SavedJob;
 }
 async function verifySource(saved: SavedJob, input: GpuSttResumeInput) {
+  validateDiarization(input.enableDiarization);
+  const effective = jobDiarization(recordValue(saved.receipt.job));
+  if (input.enableDiarization !== undefined && effective !== input.enableDiarization) throw new Error('要求した話者分離設定と保存jobが一致しません。再投入しません');
   if (saved.sourceUri !== input.sourceUri) throw new Error('保存jobのsourceと現在の動画参照が一致しません');
+  if (saved.inputBytes !== undefined && (await stat(input.mediaPath)).size !== saved.inputBytes) throw new Error('保存jobと元動画のbyte数が一致しません');
   if (await fileSha256(input.mediaPath) !== saved.inputSha256) throw new Error('保存jobと元動画のSHA-256が一致しません');
 }
 
@@ -144,6 +168,7 @@ async function observeJob(input: GpuSttResumeInput, saved: SavedJob,
   try {
     const job = initialJob ?? (await requestJson(saved.baseUrl, input.timeoutMs, `/jobs/${jobId}`)).payload;
     if (job.id !== jobId || recordValue(job.input).sha256 !== saved.inputSha256) throw new Error('GPU-STTのjobと動画の対応が一致しません');
+    verifyJobIdentity(job, saved);
     await writeFile(path.join(input.artifactDir, 'gpu-stt-status.json'), JSON.stringify(job, null, 2) + '\n');
     const observation = {jobId, inputSha256: saved.inputSha256, sourceUri: saved.sourceUri, observedAt: new Date().toISOString()};
     if (job.state === 'queued' || job.state === 'running') {
@@ -158,6 +183,7 @@ async function observeJob(input: GpuSttResumeInput, saved: SavedJob,
     const rawResultPath = path.join(input.artifactDir, `gpu-stt-${jobId}.response.json`);
     await saveRawResult(rawResultPath, result.bytes);
     if (result.payload.jobId !== jobId || recordValue(result.payload.input).sha256 !== saved.inputSha256) throw new Error('GPU-STTの結果と動画の対応が一致しません');
+    verifyJobIdentity(result.payload, saved);
     if (!result.payload.zevResult || typeof result.payload.zevResult !== 'object' || Array.isArray(result.payload.zevResult)) throw new Error('GPU-STTの結果にZEV用の文字起こしがありません');
     const durationSec = result.payload.audioDurationSeconds;
     if (typeof durationSec !== 'number' || !Number.isFinite(durationSec) || durationSec <= 0) throw new Error('GPU-STTの結果に入力全体の長さがありません');
@@ -185,6 +211,7 @@ export async function resumeGpuSttJob(input: GpuSttResumeInput): Promise<GpuSttJ
 /** Submit only when no receipt exists; subsequent process runs resume that receipt. */
 export async function transcribeWithGpuStt(input: GpuSttInput): Promise<unknown> {
   validateTimeout(input.timeoutMs);
+  validateDiarization(input.enableDiarization);
   const pollingTimeoutMs = input.pollingTimeoutMs ?? input.timeoutMs;
   validateTimeout(pollingTimeoutMs);
   await mkdir(input.artifactDir, {recursive: true});
@@ -197,16 +224,19 @@ export async function transcribeWithGpuStt(input: GpuSttInput): Promise<unknown>
     const health = (await requestJson(baseUrl, input.timeoutMs, '/health')).payload;
     if (health.ok !== true || health.workerActive !== true) throw new Error('GPU-STTのhealth確認で利用可能なworkerを確認できません');
     const inputSha256 = await fileSha256(input.mediaPath);
+    const inputBytes = (await stat(input.mediaPath)).size;
     const receipt = (await requestJson(baseUrl, input.timeoutMs, '/jobs', async signal => ({
-      method: 'POST', ...await createGpuSttUpload(input.mediaPath, input.language, signal)
+      method: 'POST', ...await createGpuSttUpload(input.mediaPath, input.language, signal, input.enableDiarization)
     }))).payload;
     const registeredJob = recordValue(receipt.job);
     if (typeof registeredJob.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(registeredJob.id)) throw new Error('GPU-STTの受付応答に有効なjob IDがありません。自動再送は行いません');
-    saved = {sourceUri: input.sourceUri, inputSha256, baseUrl, receipt};
+    saved = {sourceUri: input.sourceUri, inputSha256, inputBytes, baseUrl, receipt,
+      ...(input.enableDiarization === undefined ? {} : {enableDiarization: input.enableDiarization})};
     await writeFile(path.join(input.artifactDir, 'gpu-stt-job.json'), JSON.stringify({
       ...saved, language: input.language, registeredAt: new Date().toISOString()
     }, null, 2) + '\n', {flag: 'wx'});
     if (recordValue(registeredJob.input).sha256 !== inputSha256) throw new Error('GPU-STTの受付と送信した動画のSHA-256が一致しません');
+    verifyJobIdentity(registeredJob, saved);
     initialJob = registeredJob;
   }
   // The polling budget starts after upload/receipt (or source verification on resume).

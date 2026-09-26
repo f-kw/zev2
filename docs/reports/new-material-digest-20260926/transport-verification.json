@@ -191,5 +191,78 @@
     "productionPostOnResume": false,
     "sourceModelAlignmentDiarizationChanged": false,
     "uploadFixPreserved": true
+  },
+  "manualGpuStopObservation": {
+    "recordedAt": "2026-09-26T08:40:49.668Z",
+    "jobId": "b50a498c86264de58a7c8c69b7be6ab3",
+    "inputSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+    "userStatement": "GPU側の処理を手動で終了した",
+    "gpuTerminationTime": null,
+    "gpuTerminationIndependentlyVerified": false,
+    "lastApiObservation": {
+      "status": "pending",
+      "jobId": "b50a498c86264de58a7c8c69b7be6ab3",
+      "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "inputSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "observedAt": "2026-09-26T08:39:02.035Z",
+      "jobState": "running"
+    },
+    "lastApiJobState": "running",
+    "lastApiEndedAt": null,
+    "lastApiError": null,
+    "localFollower": {
+      "pid": 20603,
+      "exitCode": 143,
+      "stopped": true
+    },
+    "resumedRequestTrace": {
+      "first": {
+        "observedAt": "2026-09-26T08:13:10.200Z",
+        "method": "GET",
+        "route": "/jobs/b50a498c86264de58a7c8c69b7be6ab3",
+        "status": 200
+      },
+      "last": {
+        "observedAt": "2026-09-26T08:39:02.034Z",
+        "method": "GET",
+        "route": "/jobs/b50a498c86264de58a7c8c69b7be6ab3",
+        "status": 200
+      },
+      "requestCount": 741,
+      "postCount": 0,
+      "allGet200": true,
+      "sha256": "3e945e4ff28713fa74b2360ddd1da2c7f5af8c3d4fd9130ec75ea95937ae5716"
+    },
+    "remoteCancellationRequestedByCodex": false,
+    "resubmitted": false,
+    "completedResultRetrieved": false,
+    "transcriptGenerated": false,
+    "digestGenerated": false,
+    "conclusion": "ユーザーがGPU側処理の手動終了を明示したため、ローカル追跡も停止した。APIはrunningのままで終了状態を反映していない可能性がある。話者分離が主な遅延要因かは未確認。",
+    "singleSpeakerDirection": "ユーザーは今回の字幕対象が1人のため話者分離不要との方針を示した。文字起こし・時刻合わせは維持する。今回のjobの設定変更・再投入は行っていない。"
+  },
+  "noDiarizationVerification": {
+    "requestedEnableDiarization": false,
+    "attemptDirectory": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization",
+    "excludedJobId": "b50a498c86264de58a7c8c69b7be6ab3",
+    "tests": {
+      "total": 41,
+      "passed": 41,
+      "failed": 0,
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-no-diarization.tap",
+      "sha256": "da1fc16c00ab53a4e89d8c99bb397504b4c20f0c75c62540ff95d17048cd94b1"
+    },
+    "typeCheck": "passed",
+    "oldJobTimingReportedByUser": {
+      "whisperApproxSeconds": 150,
+      "alignmentApproxSeconds": 3895,
+      "diarization": "long-running before manual termination",
+      "independentlyVerified": false
+    },
+    "newJob": {
+      "registered": false,
+      "latestApiSchemaObservation": "2026-09-26T09:19:40.440Z",
+      "optionalDiarizationAdvertised": false
+    }
   }
 }

@@ -2,7 +2,10 @@
 
 ## 現在状態
 
-続行中・未完了。素材取得・同定済み。続行指示に基づきtimeout責務と正式resume経路を修正。2026-09-26 08:08:44 UTCの実resumeでは同じGPU jobがrunningで、文字起こし結果・初稿動画はまだ未生成。
+続行中・未完了。今回の字幕対象は1人とする最新指示により、話者分離だけを省いた新job用の接続を準備した。
+任意の話者分離指定、設定を含めたjob対応照合、41件のGPU連携テスト、runner型検査は合格。
+2026-09-26 18:19 JST時点のGPU公開APIにはまだ任意指定がなく、新jobは未送信。反映確認後に全編文字認識・時刻合わせを実行する。
+旧jobはユーザーが手動終了したとの申告があり、新しい最終STT結果には使用しない。文字起こし結果・初稿動画はまだ未取得・未生成。
 人間品質調整・人間による採用判定は行っていない。
 
 ## 今回の範囲と制作要求
@@ -44,7 +47,7 @@ originをfetchし、計画・現在地の更新だけをfast-forwardして
 [plan.json](plan.json) を今回素材専用の実行planとする。
 旧素材のplan / authorization / 選択結果は上書きしない。
 
-- 主文字起こし: `stt.mode=local` を実際の設定読込後にも確認し、既存GPU非同期ジョブへ動画全体を一度だけ投入する。large-v3 / CUDA / float16。生結果と入力SHAを検証して既存ZEV変換へ渡し、1断片=1まとまりを維持する。
+- 主文字起こし: `stt.mode=local` を実際の設定読込後にも確認する。今回の新attemptで `enableDiarization=false` を明示して動画全体を一度だけ投入する。large-v3 / CUDA / float16、全編文字認識と時刻合わせを維持。生結果と入力SHAを検証して既存ZEV変換へ渡し、1断片=1まとまりを維持する。旧jobの結果は使用しない。
 - 候補探索・採用・保持・字幕境界: 既存Skill、ID・範囲・証拠・順序・来歴の既存検証を使用する。回答は今回素材に対する現在のCodex判断を保存する。
 - 本文・時計: 保存済みの今回採用範囲と実際のGPU断片を、既存の共通描画入力へ接続する。
 - 演出: 現行の統合演出選択と有限presetを使用する。音声観測・実フォントの適用可能性を入力にし、現行Panel背景・paletteを扱う。旧単一preset選択実行器の古いPanel出力は経由しない。
@@ -113,8 +116,9 @@ GPU側の処理は継続中であり、再投入・モデル変更・待機上�
 
 ## 未実施・未確認
 
-GPU-STT完了後の文字起こし検査、候補・採用・保持・構成・字幕・演出の実走、初稿生成、
-decode / QC、各工程の最終時間、commit / push、相談役への直接報告は実施待ち。
+GPU-STT完了結果の取得と文字起こし検査、候補・採用・保持・構成・字幕・演出の実走、初稿生成、
+decode / QC、各工程の最終時間は未実施。送信修正と診断checkpointは `1897565e1b992da5b8c95e829a47a824c1de649c`、
+timeout/resume修正と検証は `ac500db6d59bd45b437a5c22d20849225cbe9b92` としてmainへcommit/push済み。
 人間による動画品質判断は今回の対象外で、6へ残す。
 
 ## 長時間処理の診断依頼（2026-09-26 07:45 UTC）
@@ -176,3 +180,40 @@ node --import ./runner/node_modules/tsx/dist/loader.mjs \
 
 軽量証拠は [transport-verification.json](transport-verification.json) の非同期job再開検証。
 GPU処理のどこが主要ボトルネックかは、完成後の実測とGPU側記録から別途判断する。
+
+## GPU側の手動終了（2026-09-26 17:38〜17:39 JST）
+
+ユーザーの「終了した」の対象を確認し、「GPU側の処理を手動で終了した」と回答を得た。
+この申告を受け、Codexが開始したローカルの正式クライアントによる追跡だけを終了した（終了code 143）。
+CodexからGPUへの取消・再投入は行っていない。元動画、保存受付、元の設定を保持している。
+
+- 正式クライアントによる連続追跡: 08:13:10〜08:39:02 UTC、同じjobへのGET 741件、すべてHTTP 200、POST 0件。
+- 最後のAPI応答はrunning・error null・終了時刻null。GPU側プロセスの実終了はユーザー申告であり、API応答から独立確認できていない。残存したrunning表示を処理継続の証拠にしない。
+- GPU側開始06:36:08から最終観測08:39:02まで約2時間2分54秒。これは観測間隔であり、処理完了時間や工程別所要時間ではない。
+- 生結果・ZEV transcript・初稿動画は未取得／未生成。実jobのcompleted結果取得は未確認であり、模擬サーバーでの合格と区別する。
+- ユーザーは今回の字幕対象が1人なので話者分離は不要と指摘した。今回に限り話者分離を省き、文字起こしと時刻合わせを維持する方針が適切と考える。ただし、話者分離が遅延の主因かは未確定。今回の追補にある再投入禁止を受け、新jobの送信やGPU側設定変更は行っていない。
+
+GPU側の終了状態・保存結果の有無と、話者分離を省いた再実行の扱いを相談役へ報告する。
+新素材生成を完了とは扱わず、別エピックへ進まない。
+軽量証拠は [transport-verification.json](transport-verification.json) の手動終了観測、原本は成果物rootの
+`stt-attempt-002/manual-stop-observation.json`。
+
+## 続行指示: 今回だけ話者分離なしで新規登録
+
+最新指示「Codex2 続行指示｜5. 新素材Digest生成」により、字幕対象が1人の今回runだけ
+`enableDiarization=false` とする。一般UIとサーバー既定値は変更しない。
+旧job `b50a498c86264de58a7c8c69b7be6ab3` は話者分離ありのため、今回の最終結果へ引き継がない。
+
+- 送信: 既存stream multipartへ、指定された場合だけ `enableDiarization=true/false` を追加する。省略時はGPU側既定値を使う。
+- 受付: 要求した設定と入力SHA・byte数を保存し、GPUが返す実効設定と照合する。今回adapterは旧jobと異なるIDであることも、登録応答を保存した直後・polling開始前に確認する。
+- 再開: 元動画SHA・source・保存受付の設定・GPU側の設定を照合する。旧true jobをfalse要求へresumeせず、登録後やresultの設定相違も拒否する。受付不明時に同じrunを起動し直してPOSTしないための送信開始記録も残す。
+- 結果: 話者情報の `unknown` をそのまま維持し、`Speaker 1` などへ補完しない。本文・文字時計・1断片1まとまりの既存変換を維持する。
+- 新attempt: `runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/`。旧attemptの受付・生証拠は上書きしない。
+- 実行command: `STT_BASE_URL=<既存GPU接続先> node --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/run_new_material_digest_20260926.mts stt-no-diarization`。再開入口 `resume-stt` も新attemptだけを読む。
+- 検証: GPU連携 **41/41合格**、runner型検査合格、adapter importと差分書式検査合格。旧32件に、設定あり/なしの送信・保存・再開、設定不一致拒否、入力byte数拒否、unknown保持等を追加した。
+- GPU反映確認: 18:13頃と18:19 JSTに既存APIの公開仕様をGET。POSTの項目はfile/languageのみで、話者分離指定はまだ確認できない。新job送信は0件。
+
+旧jobの工程時間は最新指示で提示されたGPU側実測として、Whisper約2分30秒、alignment約64分55秒、
+diarizationは長時間継続と記録する。これらの内訳はCodex側で独立取得したログではなく、ユーザー指示の実測報告である。
+新jobについてはupload・Whisper・alignment・diarizationのskipped状態・全体を取得できた範囲で別記する。
+未取得の内訳を0秒や推定値で埋めず、旧jobの時間を新jobの測定値へ混ぜない。

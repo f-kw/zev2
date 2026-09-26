@@ -33,5 +33,11 @@
   "judgmentMode": "current-codex-stdin-v001",
   "artifactRoot": "runtime/artifacts/digest-new-material-20260926-v001",
   "baselineMain": "0bb91e31167220dbc483a141e231147ed7a9971b",
-  "firstDraftPolicy": "最初の機械的成立動画を保存し上書きしない。人間品質判定は6へ残す。"
+  "firstDraftPolicy": "最初の機械的成立動画を保存し上書きしない。人間品質判定は6へ残す。",
+  "sttRun": {
+    "attemptDirectory": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization",
+    "enableDiarization": false,
+    "excludedJobId": "b50a498c86264de58a7c8c69b7be6ab3",
+    "instruction": "Codex2 続行指示｜5. 新素材Digest生成。今回の字幕対象は1人。全編文字認識・時刻合わせを維持し、話者分離だけをrunごとに省く。"
+  }
 }

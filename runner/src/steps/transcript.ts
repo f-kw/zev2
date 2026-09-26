@@ -6,6 +6,7 @@ import type { SttSegment, TranscriptArtifact, TranscriptThemeSeed } from '../wor
 export type BuildTranscriptArtifactContext = {
   sttServerUrl: string;
   sttServerTimeoutMs: number;
+  enableDiarization?: boolean;
   sttSamplePath: string;
   fixedTranscriptPath: string;
   useFixedTranscript: boolean;
@@ -296,6 +297,7 @@ export async function buildTranscriptArtifact(
     mediaPath: sourcePath,
     sourceUri: request.target.sourceUri,
     language: toSttServerLanguage(process.env.ZEV2_STT_LANGUAGE ?? 'ja-JP'),
+    enableDiarization: context.enableDiarization,
     artifactDir: context.requestArtifactDir(request)
   });
   return normalizeGpuSttResponse(result, request);

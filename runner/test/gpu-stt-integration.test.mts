@@ -63,6 +63,8 @@ type Options = {
   noJobId?: boolean; stalledResult?: boolean; invalidJson?: boolean; reused?: boolean;
   httpError?: boolean; disconnect?: boolean; statusSha?: string; statusJobId?: string;
   httpDelayMs?: number; stalledStatus?: boolean;
+  requestDiarization?: boolean; receiptDiarization?: boolean;
+  statusDiarization?: boolean; resultDiarization?: boolean; receiptBytes?: number;
 };
 
 async function withServer(options: Options, run: (setup: {
@@ -74,7 +76,8 @@ async function withServer(options: Options, run: (setup: {
   const mediaPath = path.join(directory, 'source.mp4');
   await writeFile(mediaPath, media);
   const calls: string[] = [];
-  const job = (state: string) => ({ id: 'job_1', state, input: { sha256 } });
+  const settings = (override?: boolean) => ({settings: {enableDiarization: override ?? options.receiptDiarization ?? options.requestDiarization ?? true}});
+  const job = (state: string) => ({ id: 'job_1', state, input: { sha256, bytes: options.receiptBytes ?? media.length }, pipeline: settings() });
   let polls = 0;
   const server = createServer(async (req, res) => {
     calls.push(`${req.method} ${req.url}`);
@@ -90,19 +93,24 @@ async function withServer(options: Options, run: (setup: {
       for await (const chunk of req) buffers.push(chunk);
       const body = Buffer.concat(buffers).toString();
       assert.ok(body.includes('source.mp4') && body.includes(media.toString()) && body.includes('\r\nja\r\n'));
+      if (options.requestDiarization === undefined) assert(!body.includes('name="enableDiarization"'));
+      else assert(body.includes(`name="enableDiarization"\r\n\r\n${options.requestDiarization}\r\n`));
       res.statusCode = 202;
       return json({ job: options.noJobId ? {} : job(options.state ?? 'queued'), reused: Boolean(options.reused) });
     }
     if (req.url === '/jobs/job_1') {
       if (options.stalledStatus) {res.writeHead(200); res.write('{'); return;}
       return json({...job(options.state ?? (++polls === 1 ? 'running' : 'completed')),
-        id: options.statusJobId ?? 'job_1', input: {sha256: options.statusSha ?? sha256}});
+        id: options.statusJobId ?? 'job_1', input: {sha256: options.statusSha ?? sha256, bytes: media.length},
+        pipeline: settings(options.statusDiarization)});
     }
     if (req.url === '/jobs/job_1/result') {
       if (options.stalledResult) { res.writeHead(200); res.write('{'); return; }
       if (options.invalidJson) return res.end('invalid JSON');
-      return json({ jobId: 'job_1', input: { sha256: options.resultSha ?? sha256 }, audioDurationSeconds: 5,
-        zevResult: options.invalidSegments ? { ...zevResult, segments: [{ id: 1 }] } : zevResult,
+      return json({ jobId: 'job_1', input: { sha256: options.resultSha ?? sha256, bytes: media.length }, audioDurationSeconds: 5,
+        pipeline: settings(options.resultDiarization),
+        zevResult: options.invalidSegments ? { ...zevResult, segments: [{ id: 1 }] } : options.requestDiarization === false
+          ? {...zevResult, segments: zevResult.segments.map(s => ({...s, speaker: 'unknown'}))} : zevResult,
         rawOnlyEvidence: 'retained' });
     }
     res.statusCode = 404; res.end();
@@ -110,10 +118,12 @@ async function withServer(options: Options, run: (setup: {
   await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
   const address = server.address() as { port: number };
   const baseUrl = `http://127.0.0.1:${address.port}`;
-  const resume = (timeoutMs = 10_000) => resumeGpuSttJob({artifactDir: directory, mediaPath, sourceUri: mediaPath, timeoutMs});
+  const resume = (timeoutMs = 10_000) => resumeGpuSttJob({artifactDir: directory, mediaPath, sourceUri: mediaPath, timeoutMs,
+    enableDiarization: options.requestDiarization});
   const request = { target: { sourceUri: mediaPath }, constraints: { themeCountLabel: '2件' } } as AgentRequest;
   const execute = (timeoutMs = 10_000) => buildTranscriptArtifact(request, {} as Zev2State, {
     sttServerUrl: `http://127.0.0.1:${address.port}`, sttServerTimeoutMs: timeoutMs,
+    enableDiarization: options.requestDiarization,
     sttSamplePath: '', fixedTranscriptPath: '', useFixedTranscript: false,
     requestArtifactDir: () => directory, resolveSourceVideoPath: () => mediaPath
   });
@@ -388,5 +398,87 @@ test('resumeの個別HTTP timeoutもjob失敗にせず、同じ受付から再�
     options.stalledStatus = false; options.state = 'completed';
     assert.equal((await resume()).state, 'completed');
     assert.equal(calls.filter(c => c === 'POST /jobs').length, 1);
+  });
+});
+
+for (const enabled of [false, true]) {
+  test(`話者分離${enabled}をmultipartへ送り、保存・再開・結果取得でも同じ設定を維持する`, async () => {
+    const options: Options = {state: 'running', requestDiarization: enabled};
+    await withServer(options, async ({directory, execute, resume, calls}) => {
+      await assert.rejects(execute(150), GpuSttClientInterruptedError);
+      const receipt = JSON.parse(await readFile(path.join(directory, 'gpu-stt-job.json'), 'utf8'));
+      assert.equal(receipt.enableDiarization, enabled);
+      assert.equal(receipt.receipt.job.pipeline.settings.enableDiarization, enabled);
+      assert.equal(receipt.inputBytes, media.length);
+      assert.equal((await resume()).state, 'running');
+      options.state = 'completed';
+      const converted = await execute();
+      assertTranscriptArtifact(converted);
+      assert.deepEqual(converted.segments.map(s => [s.text, s.startMs, s.endMs]),
+        zevResult.segments.map(s => [s.text, s.startMs, s.endMs]));
+      assert.deepEqual(converted.speechUnitGroups, [[1], [2]]);
+      if (!enabled) assert(converted.segments.every(s => s.speaker === 'unknown'));
+      assert.equal(calls.filter(c => c === 'POST /jobs').length, 1);
+    });
+  });
+}
+
+test('話者分離の省略時は送信せず、GPU既定値で作った既存受付を維持する', async () => {
+  await withServer({state: 'completed'}, async ({directory, execute}) => {
+    await execute();
+    const p = path.join(directory, 'gpu-stt-job.json');
+    const receipt = JSON.parse(await readFile(p, 'utf8'));
+    assert(!Object.hasOwn(receipt, 'enableDiarization'));
+    assert.equal(receipt.receipt.job.pipeline.settings.enableDiarization, true);
+    delete receipt.inputBytes; // Receipt written by the existing client before this change.
+    await writeFile(p, JSON.stringify(receipt));
+    assertTranscriptArtifact(await execute());
+  });
+});
+
+test('既存の話者分離ありjobをfalse要求へ再開せず、追加通信もしない', async () => {
+  const options: Options = {state: 'running'};
+  await withServer(options, async ({execute, resume, calls}) => {
+    await assert.rejects(execute(150), GpuSttClientInterruptedError);
+    options.requestDiarization = false;
+    const before = [...calls];
+    await assert.rejects(resume(), /話者分離.*一致/);
+    await assert.rejects(execute(), /話者分離.*一致/);
+    assert.deepEqual(calls, before);
+  });
+});
+
+test('falseが登録応答へ反映されなければ受付証拠を残して停止し、再送しない', async () => {
+  await withServer({requestDiarization: false, receiptDiarization: true}, async ({directory, execute, calls}) => {
+    await assert.rejects(execute(), /話者分離.*一致/);
+    assert.equal(JSON.parse(await readFile(path.join(directory, 'gpu-stt-job.json'), 'utf8')).receipt.job.id, 'job_1');
+    await assert.rejects(execute(), /話者分離.*一致/);
+    assert.deepEqual(calls, ['GET /health', 'POST /jobs']);
+  });
+});
+
+for (const mismatch of ['saved', 'status', 'result'] as const) {
+  test(`話者分離なしjobの${mismatch}設定不一致を拒否する`, async () => {
+    const options: Options = {state: 'running', requestDiarization: false};
+    await withServer(options, async ({directory, execute, resume, calls}) => {
+      await assert.rejects(execute(150), GpuSttClientInterruptedError);
+      if (mismatch === 'saved') {
+        const p = path.join(directory, 'gpu-stt-job.json'), saved = JSON.parse(await readFile(p, 'utf8'));
+        saved.enableDiarization = true;
+        await writeFile(p, JSON.stringify(saved));
+      }
+      if (mismatch === 'status') options.statusDiarization = true;
+      if (mismatch === 'result') {options.state = 'completed'; options.resultDiarization = true;}
+      await assert.rejects(resume(), /話者分離.*一致/);
+      assert.equal(calls.filter(c => c === 'POST /jobs').length, 1);
+    });
+  });
+}
+
+test('登録応答の入力byte数不一致は保存後に拒否し、自動再送しない', async () => {
+  await withServer({requestDiarization: false, receiptBytes: media.length - 1}, async ({execute, calls}) => {
+    await assert.rejects(execute(), /byte数.*一致/);
+    await assert.rejects(execute(), /byte数.*一致/);
+    assert.deepEqual(calls, ['GET /health', 'POST /jobs']);
   });
 });
