@@ -1,5 +1,6 @@
 import {scopeOrchestrationPlanV001, assertOrchestrationScopedPlansV001} from './presentation_orchestration_render_scope_v001.mjs';
 import {createHash} from 'node:crypto';
+import {createReadStream} from 'node:fs';
 import {spawn} from 'node:child_process';
 import {stat, mkdir, mkdtemp, readFile, readdir, writeFile} from 'node:fs/promises';
 import path from 'node:path';
@@ -395,6 +396,16 @@ async function readBoundRef(ref) {
   if (ref.canonicalSha256 !== undefined) requireValue(hashJson(JSON.parse(bytes.toString('utf8'))) === ref.canonicalSha256,
     'input canonical content changed: ' + ref.role);
   return bytes;
+}
+
+/** Verify media and executable references without buffering their entire contents. */
+export async function verifyPresentationNativeInputRefV001(ref) {
+  const metadata = await stat(ref.path);
+  requireValue(metadata.isFile(), 'an input is not a regular file');
+  const digest = createHash('sha256');
+  for await (const chunk of createReadStream(ref.path)) digest.update(chunk);
+  requireValue(digest.digest('hex') === ref.fileSha256, 'input bytes changed: ' + ref.role);
+  if (ref.canonicalSha256 !== undefined) await readBoundRef(ref);
 }
 
 function frameExtractionArguments(input, frames, outputPattern) {
@@ -807,7 +818,7 @@ export async function inspectPresentationNativeFrameQcV001({
           : {autoPresentationCanonicalSha256: hashJson(autoPresentation)}),
         inputRefs: refs, inputRefsCanonicalSha256: hashJson(refs), before: [], after: []};
       for (const ref of refs) {
-        await readBoundRef(ref);
+        await verifyPresentationNativeInputRefV001(ref);
         manifest.before.push({role: ref.role, path: ref.path, fileSha256: ref.fileSha256});
       }
       return {recipe, refs, baselinePlan, autoPresentation, orchestrationInput};
@@ -920,7 +931,7 @@ export async function inspectPresentationNativeFrameQcV001({
     }
     await timed('verification', async () => {
       for (const ref of refs) {
-        await readBoundRef(ref);
+        await verifyPresentationNativeInputRefV001(ref);
         manifest.after.push({role: ref.role, path: ref.path, fileSha256: ref.fileSha256});
       }
       for (const artifact of outputArtifacts) requireValue(hashBytes(await readFile(artifact.path)) === artifact.fileSha256,

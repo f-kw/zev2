@@ -7,6 +7,7 @@ import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {ROOT, ARTIFACTS, PLAN} from './run_new_material_digest_20260926.mts';
+import {ARTIFACTS as CAPTIONS} from './run_new_material_digest_20260926_caption_retry.mts';
 import {inspectPresentationRenderLayoutV001} from './inspect_presentation_render_layout_v001.js';
 import {buildPresentationRendererOverlayAdapterV001, executeValidatedPresentationDrawAndQcV001,
   commitValidatedPresentationArtifactsV002} from './render_presentation_v002.mjs';
@@ -54,7 +55,7 @@ function adapter(processObserver: any) {
 /** Same finite native-layout checks as the existing Stage 1 preparation, with
  * the actual source-specific caption count instead of the historical 32. */
 export async function preparePresentation() {
-  const plan = await read(`${ARTIFACTS}/normal-plan.json`), registry = await read(registryPath);
+  const plan = await read(`${CAPTIONS}/normal-plan.json`), registry = await read(registryPath);
   assert(plan.elements.length > 0 && plan.elements.every((e: Json) => e.kind === 'speech-caption'));
   assert.deepEqual([plan.canvas.width, plan.canvas.height, plan.canvas.fps], [1920, 1080, 30]);
   assert(plan.elements.every((e: Json) => !['presentationColorRange', 'presentationPreset', 'presentationPulse', 'presentationMotion'].some(k => Object.hasOwn(e, k))));
@@ -125,7 +126,7 @@ export async function preparePresentation() {
     }));
   }
   const request = await read(PLAN), adoption = await read(`${ARTIFACTS}/machine-adoption.json`);
-  const meaning = await read(`${ARTIFACTS}/meaning-input.json`), base = await read(`${ARTIFACTS}/base-media-bindings.json`);
+  const meaning = await read(`${CAPTIONS}/meaning-input.json`), base = await read(`${ARTIFACTS}/base-media-bindings.json`);
   const candidates = [...new Map(adoption.selectedCandidates.map((c: Json) => [c.candidateId, c])).values()] as Json[];
   const membership = new Map(meaning.orderedCandidates.flatMap((g: Json) => g.atomOccurrenceIds.map((id: string) => [id, g.candidateId])));
   const context = {digestId: request.planId, productionPurpose: request.productionRequest,
@@ -142,7 +143,7 @@ export async function preparePresentation() {
 /** Current orchestration consumes the native measurement binding, not the
  * retired Stage 1 single-preset choice. No old/fabricated AI answer is supplied. */
 export async function prepareNativeInput() {
-  const baselinePath = absolute(`${ARTIFACTS}/normal-plan.json`), contextPath = `${output}/context.json`;
+  const baselinePath = absolute(`${CAPTIONS}/normal-plan.json`), contextPath = `${output}/context.json`;
   const audio = await loadBoundAudioEvidenceV005(`${output}/audio/digest/audio-candidates.json`);
   const input = buildPresentationFocusSelectionInputV005(await read(baselinePath), await read(contextPath), audio);
   const peaks = audio.sourceRefs.filter(r => path.basename(r.path) === 'acoustic-peaks.json');
@@ -167,7 +168,7 @@ export async function prepareOrchestration() {
   const media = await inspectRenderedMediaWithToolsV001(absolute(base.baseMedia.path), tools);
   const refs: Json = {};
   for (const [key, p] of Object.entries({canonicalEditPlan: `${ARTIFACTS}/edit-plan.json`,
-    normalCaptionPlan: `${ARTIFACTS}/normal-plan.json`, canonicalTimeline: base.timeline.path,
+    normalCaptionPlan: `${CAPTIONS}/normal-plan.json`, canonicalTimeline: base.timeline.path,
     baseMedia: base.baseMedia.path, stage1JudgmentInput: `${output}/native-decision-input.json`})) refs[key] = await bind(p as string);
   const inventoryPath = `${output}/inventory.json`;
   await save(inventoryPath, {digestId: (await read(PLAN)).planId, refs, playbackClock: {sampleRate: media.audio.sampleRate}});
@@ -210,7 +211,8 @@ export async function render() {
   for (const b of [background.outputs.background, background.outputs.audio]) assert.deepEqual(await bind(b.path), b);
   const media = await inspectRenderedMediaWithToolsV001(background.outputs.background.path, tools);
   const processObserver = createPresentationRendererProcessObserverV001({observationDirectory: `${output}/render-processes`});
-  const draw = await executeValidatedPresentationDrawAndQcV001({outputDirectory: `${output}/render`,
+  const draw = await executeValidatedPresentationDrawAndQcV001({outputDirectory:
+    absolute('evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-v001'),
     plan: view.projectedNormalPlan, presetRegistry: await read(registryPath),
     baseMediaPath: background.outputs.background.path, baseMediaInspection: {media},
     expectedFrameCount: view.projection.displayFrameCount, overlayAdapter: adapter(processObserver), processObserver,
@@ -218,7 +220,7 @@ export async function render() {
     counterfactualQcMethod: PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001, orchestrationDrawingView: view,
     orchestrationBackground: {projectionSha256: background.projectionSha256, displayFrameCount: background.displayFrameCount,
       video: background.outputs.background, audio: background.outputs.audio}});
-  await save(`${output}/draw-result.json`, draw);
+  await save(`${output}/draw-result-attempt-003.json`, draw);
   assert.equal(draw.exitCode, 0, JSON.stringify(draw.failure ?? draw.finalQc));
   assert.equal(draw.finalQc.status, 'passed'); assert.deepEqual(draw.resolvedPlan, view.resolvedPlan);
   assert.equal(draw.outputMedia.video.frameCount, view.projection.displayFrameCount);

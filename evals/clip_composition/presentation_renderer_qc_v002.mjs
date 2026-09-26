@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
-import {readFile} from 'node:fs/promises';
+import {createReadStream} from 'node:fs';
 import {isPresentationPanelBackgroundV002} from './presentation_panel_presets_v002.mjs';
 import {PRESENTATION_PULSE_PRESET_V001, getPresentationPulseProgramV001,
   buildPresentationPulseStateElementsV001, assertPresentationPulseAnchorsV001,
@@ -937,5 +937,7 @@ export async function inspectRenderedMediaWithToolsV001(filePath, tools) {
 }
 
 export async function fileSha256V002(filePath) {
-  return createHash('sha256').update(await readFile(filePath)).digest('hex');
+  const hash = createHash('sha256');
+  for await (const chunk of createReadStream(filePath)) hash.update(chunk);
+  return hash.digest('hex');
 }

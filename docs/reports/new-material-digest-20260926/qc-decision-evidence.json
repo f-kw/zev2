@@ -1,0 +1,68 @@
+{
+  "status": "failed",
+  "task": "5. 新素材Digest生成",
+  "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+  "text": "こっち来ちゃうから",
+  "frame": 7801,
+  "fps": 30,
+  "completedSeconds": 260.03333333333336,
+  "expectedRgbDifference": 1345125,
+  "nearestCounterfactualRgbDifference": 1344947,
+  "difference": 178,
+  "nearestCounterfactual": "同一PNGの直前字幕を余分に重ねる比較画像",
+  "caption102and103PngSha256": "c5f6c359b611e4a1b88817ab9dfe882db0a3756a3fbaa9bd5e31defbbfb862a4",
+  "nativeViolationCount": 1,
+  "decodedVideoPassed": true,
+  "wholeVideoExactReplayPassed": true,
+  "videoSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a",
+  "nativeEvidenceSaved": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/finite-result.json",
+  "targetInspection": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/failure-inspection-000103.json",
+  "classDistances": [
+    {
+      "id": "class-262",
+      "rgbSha256": "9544e551244ed09c4625b4489bf3689e2ec336dbc02d9015d79b3441f59946ca",
+      "referenceIds": [
+        "add-caption-101-native-static"
+      ],
+      "absoluteRgbDifference": 1344947
+    },
+    {
+      "id": "class-0",
+      "rgbSha256": "ab2108f2017e0b6d9e29bb143c8dee8df3f91501e75d96cc4774fa66748b0110",
+      "referenceIds": [
+        "expected",
+        "alternate-normal",
+        "replace-caption-101-native-static"
+      ],
+      "absoluteRgbDifference": 1345125
+    },
+    {
+      "id": "class-440",
+      "rgbSha256": "d8bcfcb995a997a05e9e4130ee41e1e2907e1a7d1424c26875e5d82ca0afa66a",
+      "referenceIds": [
+        "add-caption-183-native-static",
+        "add-caption-216-native-static"
+      ],
+      "absoluteRgbDifference": 7331160
+    },
+    {
+      "id": "class-245",
+      "rgbSha256": "96031c6332239ec13f54fcb1c6d508a5d6b37a88de41e7922d0f4db759506f8e",
+      "referenceIds": [
+        "add-caption-96-native-static",
+        "add-caption-99-native-static"
+      ],
+      "absoluteRgbDifference": 7526739
+    },
+    {
+      "id": "class-157",
+      "rgbSha256": "0e8a392b8ad5c7f046d81465659af6f18645c95a56d02162b7067ba68c88493e",
+      "referenceIds": [
+        "add-caption-68-native-static"
+      ],
+      "absoluteRgbDifference": 8275714
+    }
+  ],
+  "inference": "圧縮後画像と非圧縮参照の誤差で重ね描き候補の方が178だけ近い。誤検出の疑い。検査不合格を維持し、閾値緩和・字幕除外・文言変更は行わず相談役へ技術判断を依頼する。",
+  "humanQualityDecision": "not-performed"
+}

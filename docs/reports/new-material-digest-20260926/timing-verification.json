@@ -1,0 +1,784 @@
+{
+  "generatedAt": "2026-09-26T22:15:35.838370+00:00",
+  "notes": [
+    "工程時間は入れ子・並行実行を含むため単純合算しない。",
+    "判断の思考・手動待機・修正作業の個別実働時間は計測されていない。開始終了間の全経過時間と区別する。",
+    "新jobのWhisperとalignmentの個別時間はサーバー結果にないため未計測。旧jobの内訳は新jobへ流用しない。"
+  ],
+  "sttBreakdownSeconds": {
+    "uploadIncludingHashAndServerSave": 221.715,
+    "queue": 5731.071793,
+    "gpuProcessing": 3929.822851,
+    "diarization": 0,
+    "diarizationStatus": "skipped",
+    "whisper": null,
+    "alignment": null
+  },
+  "stages": [
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/execution/base-2026-09-26T12-36-35.345Z.json",
+      "stage": "base",
+      "startedAt": "2026-09-26T12:36:35.345Z",
+      "endedAt": "2026-09-26T13:19:33.681Z",
+      "elapsedSeconds": 2580.3871867499997,
+      "status": "failed",
+      "meaning": "土台映像の初回生成（来歴検証で失敗）"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/execution/discovery-2026-09-26T12-34-45.248Z.json",
+      "stage": "discovery",
+      "startedAt": "2026-09-26T12:34:45.248Z",
+      "endedAt": "2026-09-26T12:34:50.406Z",
+      "elapsedSeconds": 5.156820583,
+      "status": "completed",
+      "meaning": "見どころ候補の検証・保存"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/execution/display-2026-09-26T14-11-28.470Z.json",
+      "stage": "display",
+      "startedAt": "2026-09-26T14:11:28.470Z",
+      "endedAt": "2026-09-26T14:11:31.893Z",
+      "elapsedSeconds": 3.421521875,
+      "status": "completed",
+      "meaning": "字幕区切りの検証・保存"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/execution/prepare-2026-09-26T12-32-19.923Z.json",
+      "stage": "prepare",
+      "startedAt": "2026-09-26T12:32:19.923Z",
+      "endedAt": "2026-09-26T12:32:22.503Z",
+      "elapsedSeconds": 2.578550917,
+      "status": "completed",
+      "meaning": "入力準備"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/execution/retention-2026-09-26T12-36-17.246Z.json",
+      "stage": "retention",
+      "startedAt": "2026-09-26T12:36:17.246Z",
+      "endedAt": "2026-09-26T12:36:20.092Z",
+      "elapsedSeconds": 2.8442666250000004,
+      "status": "completed",
+      "meaning": "保持範囲の検証・保存"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/execution/selection-2026-09-26T12-35-22.286Z.json",
+      "stage": "selection",
+      "startedAt": "2026-09-26T12:35:22.286Z",
+      "endedAt": "2026-09-26T12:35:25.187Z",
+      "elapsedSeconds": 2.899895583,
+      "status": "completed",
+      "meaning": "候補採用の検証・保存"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/execution/stt-after-upload-fix-2026-09-26T06-32-52.896Z.json",
+      "stage": "stt-after-upload-fix",
+      "startedAt": "2026-09-26T06:32:52.896Z",
+      "endedAt": "2026-09-26T07:02:57.408Z",
+      "elapsedSeconds": 1802.4258892920002,
+      "status": "failed",
+      "meaning": "旧話者分離ありjobの送信・待機（クライアント期限で中断）"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/execution/stt-no-diarization-2026-09-26T09-46-13.148Z.json",
+      "stage": "stt-no-diarization",
+      "startedAt": "2026-09-26T09:46:13.148Z",
+      "endedAt": "2026-09-26T12:31:13.991Z",
+      "elapsedSeconds": 9900.798751791,
+      "status": "completed",
+      "meaning": "話者分離なしSTT（呼出し全体）"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/background-2026-09-26T14-20-43.778Z.json",
+      "stage": "background",
+      "startedAt": "2026-09-26T14:20:43.778Z",
+      "endedAt": "2026-09-26T14:30:57.616Z",
+      "elapsedSeconds": 613.818706,
+      "status": "completed",
+      "meaning": "接続後の背景・音声生成と非変更検証"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/native-2026-09-26T14-16-02.283Z.json",
+      "stage": "native",
+      "startedAt": "2026-09-26T14:16:02.283Z",
+      "endedAt": "2026-09-26T14:16:02.792Z",
+      "elapsedSeconds": 0.508802459,
+      "status": "completed",
+      "meaning": "演出入力の検証・保存"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/orchestration-2026-09-26T14-20-30.787Z.json",
+      "stage": "orchestration",
+      "startedAt": "2026-09-26T14:20:30.787Z",
+      "endedAt": "2026-09-26T14:20:31.526Z",
+      "elapsedSeconds": 0.7389885839999999,
+      "status": "completed",
+      "meaning": "演出・接続判断の検証・保存"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/prepare-2026-09-26T14-11-45.093Z.json",
+      "stage": "prepare",
+      "startedAt": "2026-09-26T14:11:45.093Z",
+      "endedAt": "2026-09-26T14:11:45.128Z",
+      "elapsedSeconds": 0.03412804199999999,
+      "status": "failed",
+      "meaning": "入力準備"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/prepare-2026-09-26T14-14-29.751Z.json",
+      "stage": "prepare",
+      "startedAt": "2026-09-26T14:14:29.751Z",
+      "endedAt": "2026-09-26T14:14:29.751Z",
+      "elapsedSeconds": 0.0002990419999999858,
+      "status": "failed",
+      "meaning": "入力準備"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/prepare-2026-09-26T14-15-55.838Z.json",
+      "stage": "prepare",
+      "startedAt": "2026-09-26T14:15:55.838Z",
+      "endedAt": "2026-09-26T14:15:56.412Z",
+      "elapsedSeconds": 0.5739375,
+      "status": "completed",
+      "meaning": "入力準備"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/prepare-orchestration-2026-09-26T14-16-09.325Z.json",
+      "stage": "prepare-orchestration",
+      "startedAt": "2026-09-26T14:16:09.325Z",
+      "endedAt": "2026-09-26T14:17:41.046Z",
+      "elapsedSeconds": 91.717790708,
+      "status": "completed",
+      "meaning": "演出選択用の音声・字幕・実フォント入力準備"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/render-2026-09-26T14-32-11.022Z.json",
+      "stage": "render",
+      "startedAt": "2026-09-26T14:32:11.022Z",
+      "endedAt": "2026-09-26T14:44:31.472Z",
+      "elapsedSeconds": 740.7158085,
+      "status": "failed",
+      "meaning": "字幕画像・動画描画・QC（試行全体）"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/render-2026-09-26T14-46-59.317Z.json",
+      "stage": "render",
+      "startedAt": "2026-09-26T14:46:59.317Z",
+      "endedAt": "2026-09-26T14:59:31.661Z",
+      "elapsedSeconds": 752.383012709,
+      "status": "failed",
+      "meaning": "字幕画像・動画描画・QC（試行全体）"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/render-2026-09-26T15-03-24.914Z.json",
+      "stage": "render",
+      "startedAt": "2026-09-26T15:03:24.914Z",
+      "endedAt": "2026-09-26T18:39:07.960Z",
+      "elapsedSeconds": 12942.866702166,
+      "status": "failed",
+      "meaning": "字幕画像・動画描画・QC（試行全体）"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-001/qc-execution.json",
+      "stage": "qc",
+      "startedAt": "2026-09-26T18:44:29.824Z",
+      "endedAt": "2026-09-26T18:44:41.718Z",
+      "elapsedSeconds": 11.893939833000001,
+      "status": "failed",
+      "meaning": "字幕状態QCの再開"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/filesystem-compression-first-execution.json",
+      "startedAt": "2026-09-26T19:35:37.738292+00:00",
+      "endedAt": "2026-09-26T20:15:24.028132+00:00",
+      "elapsedSeconds": 2386.2898399829865,
+      "status": "interrupted",
+      "meaning": "QC比較画像の透過圧縮（QCと並行）"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/filesystem-compression-resume-execution.json",
+      "startedAt": "2026-09-26T20:16:47.448753+00:00",
+      "endedAt": "2026-09-26T21:14:02.692955+00:00",
+      "elapsedSeconds": 3431.1824447498657,
+      "status": "completed",
+      "meaning": "QC比較画像の透過圧縮（QCと並行）"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/filesystem-layer-compression-execution.json",
+      "startedAt": "2026-09-26T19:37:48.887634+00:00",
+      "endedAt": "2026-09-26T19:38:57.152990+00:00",
+      "elapsedSeconds": 68.26512879203074,
+      "status": "completed",
+      "meaning": "QC字幕中間画像の透過圧縮"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/qc-execution.json",
+      "stage": "qc",
+      "startedAt": "2026-09-26T18:45:43.025Z",
+      "endedAt": "2026-09-26T21:14:01.006Z",
+      "elapsedSeconds": 8897.682529209,
+      "status": "failed",
+      "meaning": "字幕状態QCの再開"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/recover-execution.json",
+      "stage": "recover",
+      "startedAt": "2026-09-26T21:14:44.034Z",
+      "endedAt": "2026-09-26T22:13:41.024Z",
+      "elapsedSeconds": 3537.098565166,
+      "status": "failed",
+      "meaning": "保存済み比較画像からのQC証拠復元・再判定"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/full-decode-verification.json",
+      "stage": "完成候補の全編映像・音声デコード",
+      "startedAt": "2026-09-26T17:28:28.189298+00:00",
+      "endedAt": "2026-09-26T17:28:43.558801+00:00",
+      "elapsedSeconds": 15.368269458878785,
+      "status": "passed",
+      "meaning": "完成候補の全編映像・音声デコード"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/source/acquisition-execution.json",
+      "stage": "素材取得",
+      "startedAt": "2026-09-26T05:51:26.026690+00:00",
+      "endedAt": "2026-09-26T06:09:04.927016+00:00",
+      "elapsedSeconds": 1058.7949739580508,
+      "meaning": "素材取得"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/execution.json",
+      "stage": "土台映像の再試行",
+      "startedAt": "2026-09-26T13:25:06.673Z",
+      "endedAt": "2026-09-26T14:10:49.639Z",
+      "elapsedSeconds": 2740.8993022500003,
+      "status": "completed",
+      "meaning": "土台映像の再試行"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/stt-execution.json",
+      "stage": "話者分離なしSTTのクライアント全体",
+      "startedAt": "2026-09-26T09:46:15.488Z",
+      "endedAt": "2026-09-26T12:31:13.989Z",
+      "elapsedSeconds": 9898.501,
+      "meaning": "話者分離なしSTTのクライアント全体"
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/presentation/audio/summary.json",
+      "stage": "演出用の独立した音声観測",
+      "elapsedSeconds": 2288.892089959001,
+      "status": "completed",
+      "note": "土台映像の再試行と並行。素材全編のGPU-STTとは別処理。",
+      "meaning": "演出用の独立した音声観測"
+    }
+  ],
+  "renderAndQcSubprocessGroups": {
+    "native-qc-tool-version": {
+      "calls": 2,
+      "childSeconds": 0.07173120799999742,
+      "evidenceWriteSeconds": 0.0016015409999963594,
+      "nonzeroExits": 0
+    },
+    "native-qc-source-frames-extract": {
+      "calls": 1,
+      "childSeconds": 74.054029209,
+      "evidenceWriteSeconds": 0.012732957999993232,
+      "nonzeroExits": 0
+    },
+    "native-qc-completed-frames-extract": {
+      "calls": 1,
+      "childSeconds": 18.78860158300001,
+      "evidenceWriteSeconds": 0.0009771659999969415,
+      "nonzeroExits": 0
+    },
+    "native-qc-native-layer-prepare": {
+      "calls": 372,
+      "childSeconds": 158.19822585000045,
+      "evidenceWriteSeconds": 0.19362925900041572,
+      "nonzeroExits": 0
+    },
+    "native-qc-native-layer-decode": {
+      "calls": 453,
+      "childSeconds": 39.810208251000404,
+      "evidenceWriteSeconds": 0.29727362800022805,
+      "nonzeroExits": 0
+    },
+    "native-qc-completed-rgb-crop": {
+      "calls": 424,
+      "childSeconds": 28.443581734001583,
+      "evidenceWriteSeconds": 0.31162133100180645,
+      "nonzeroExits": 0
+    },
+    "native-qc-native-reference-composite": {
+      "calls": 424,
+      "childSeconds": 5483.758364004994,
+      "evidenceWriteSeconds": 2.006508750002016,
+      "nonzeroExits": 0
+    },
+    "orchestration-audio-inspection-ffprobe": {
+      "calls": 2,
+      "childSeconds": 0.9183490839999868,
+      "evidenceWriteSeconds": 0.002566583000123501,
+      "nonzeroExits": 0
+    },
+    "orchestration-audio-inspection-audio-payload": {
+      "calls": 2,
+      "childSeconds": 0.1939536669999361,
+      "evidenceWriteSeconds": 0.008368501000106335,
+      "nonzeroExits": 0
+    },
+    "layout-inspection": {
+      "calls": 1,
+      "childSeconds": 0.31065312500006986,
+      "evidenceWriteSeconds": 0.0005082079999847338,
+      "nonzeroExits": 0
+    },
+    "overlay-still": {
+      "calls": 918,
+      "childSeconds": 1051.2083279590122,
+      "evidenceWriteSeconds": 0.45956788900610945,
+      "nonzeroExits": 0
+    },
+    "overlay-line-mask": {
+      "calls": 421,
+      "childSeconds": 480.63829249999816,
+      "evidenceWriteSeconds": 0.21595992099819714,
+      "nonzeroExits": 0
+    },
+    "overlay-line-inspection-alpha": {
+      "calls": 414,
+      "childSeconds": 36.52700359200462,
+      "evidenceWriteSeconds": 0.2278382969971281,
+      "nonzeroExits": 0
+    },
+    "overlay-line-inspection-bounds": {
+      "calls": 414,
+      "childSeconds": 59.53420414800569,
+      "evidenceWriteSeconds": 0.2304204649977617,
+      "nonzeroExits": 0
+    },
+    "overlay-final-inspection-alpha": {
+      "calls": 378,
+      "childSeconds": 33.22856970899925,
+      "evidenceWriteSeconds": 0.22786762299877575,
+      "nonzeroExits": 0
+    },
+    "overlay-final-inspection-bounds": {
+      "calls": 378,
+      "childSeconds": 54.34441124700217,
+      "evidenceWriteSeconds": 0.20781662600371065,
+      "nonzeroExits": 0
+    },
+    "motion-native-canvas-inspection": {
+      "calls": 62,
+      "childSeconds": 1.5565386700007369,
+      "evidenceWriteSeconds": 0.029810539998696192,
+      "nonzeroExits": 0
+    },
+    "overlay-calibration-inspection-alpha": {
+      "calls": 7,
+      "childSeconds": 0.6130495000003139,
+      "evidenceWriteSeconds": 0.0036391259999945763,
+      "nonzeroExits": 0
+    },
+    "overlay-calibration-inspection-bounds": {
+      "calls": 7,
+      "childSeconds": 1.0100819169997703,
+      "evidenceWriteSeconds": 0.0034355000001378357,
+      "nonzeroExits": 0
+    },
+    "video-composite": {
+      "calls": 1,
+      "childSeconds": 5116.859306958,
+      "evidenceWriteSeconds": 0.0034936669999733566,
+      "nonzeroExits": 0
+    },
+    "output-media-inspection-ffprobe": {
+      "calls": 1,
+      "childSeconds": 88.83002683299966,
+      "evidenceWriteSeconds": 0.0005427089994773269,
+      "nonzeroExits": 0
+    },
+    "output-media-inspection-audio-payload": {
+      "calls": 1,
+      "childSeconds": 0.13392858299985527,
+      "evidenceWriteSeconds": 0.0029404579997062683,
+      "nonzeroExits": 0
+    },
+    "output-frame-count": {
+      "calls": 1,
+      "childSeconds": 88.09666104200016,
+      "evidenceWriteSeconds": 0.0005975420000031591,
+      "nonzeroExits": 0
+    },
+    "exact-replay-version-ffmpeg": {
+      "calls": 1,
+      "childSeconds": 0.03620145799964666,
+      "evidenceWriteSeconds": 0.00039666600059717894,
+      "nonzeroExits": 0
+    },
+    "exact-replay-version-ffprobe": {
+      "calls": 1,
+      "childSeconds": 0.01854345799982548,
+      "evidenceWriteSeconds": 0.00048670800030231474,
+      "nonzeroExits": 0
+    },
+    "exact-replay-encode": {
+      "calls": 1,
+      "childSeconds": 5118.652013209,
+      "evidenceWriteSeconds": 0.006853041000664234,
+      "nonzeroExits": 0
+    },
+    "exact-replay-video-probe-completed": {
+      "calls": 1,
+      "childSeconds": 0.04560929099842906,
+      "evidenceWriteSeconds": 0.0008715419992804527,
+      "nonzeroExits": 0
+    },
+    "exact-replay-video-probe-replay": {
+      "calls": 1,
+      "childSeconds": 0.03187366599962115,
+      "evidenceWriteSeconds": 0.0009978750012815,
+      "nonzeroExits": 0
+    },
+    "native-center-layout-reconstruction": {
+      "calls": 1,
+      "childSeconds": 0.3042735419999808,
+      "evidenceWriteSeconds": 0.0005894169993698597,
+      "nonzeroExits": 0
+    },
+    "native-qc-diagnostic-overlay-inspection-alpha": {
+      "calls": 88,
+      "childSeconds": 7.715771539010108,
+      "evidenceWriteSeconds": 0.05558483499102295,
+      "nonzeroExits": 0
+    },
+    "native-qc-diagnostic-overlay-inspection-bounds": {
+      "calls": 88,
+      "childSeconds": 12.638592250997203,
+      "evidenceWriteSeconds": 0.05005224700644614,
+      "nonzeroExits": 0
+    }
+  },
+  "subprocessAttemptGroups": {
+    "qc-resume-attempt-002": {
+      "native-qc-tool-version": {
+        "calls": 2,
+        "childSeconds": 0.07173120799999742,
+        "evidenceWriteSeconds": 0.0016015409999963594,
+        "nonzeroExits": 0
+      },
+      "native-qc-source-frames-extract": {
+        "calls": 1,
+        "childSeconds": 74.054029209,
+        "evidenceWriteSeconds": 0.012732957999993232,
+        "nonzeroExits": 0
+      },
+      "native-qc-completed-frames-extract": {
+        "calls": 1,
+        "childSeconds": 18.78860158300001,
+        "evidenceWriteSeconds": 0.0009771659999969415,
+        "nonzeroExits": 0
+      },
+      "native-qc-native-layer-prepare": {
+        "calls": 372,
+        "childSeconds": 158.19822585000045,
+        "evidenceWriteSeconds": 0.19362925900041572,
+        "nonzeroExits": 0
+      },
+      "native-qc-native-layer-decode": {
+        "calls": 453,
+        "childSeconds": 39.810208251000404,
+        "evidenceWriteSeconds": 0.29727362800022805,
+        "nonzeroExits": 0
+      },
+      "native-qc-completed-rgb-crop": {
+        "calls": 424,
+        "childSeconds": 28.443581734001583,
+        "evidenceWriteSeconds": 0.31162133100180645,
+        "nonzeroExits": 0
+      },
+      "native-qc-native-reference-composite": {
+        "calls": 424,
+        "childSeconds": 5483.758364004994,
+        "evidenceWriteSeconds": 2.006508750002016,
+        "nonzeroExits": 0
+      }
+    },
+    "render-processes": {
+      "orchestration-audio-inspection-ffprobe": {
+        "calls": 1,
+        "childSeconds": 0.46013891700003295,
+        "evidenceWriteSeconds": 0.0015312080000294372,
+        "nonzeroExits": 0
+      },
+      "orchestration-audio-inspection-audio-payload": {
+        "calls": 1,
+        "childSeconds": 0.09573262499994599,
+        "evidenceWriteSeconds": 0.0041959170000627636,
+        "nonzeroExits": 0
+      },
+      "layout-inspection": {
+        "calls": 1,
+        "childSeconds": 0.31065312500006986,
+        "evidenceWriteSeconds": 0.0005082079999847338,
+        "nonzeroExits": 0
+      },
+      "overlay-still": {
+        "calls": 918,
+        "childSeconds": 1051.2083279590122,
+        "evidenceWriteSeconds": 0.45956788900610945,
+        "nonzeroExits": 0
+      },
+      "overlay-line-mask": {
+        "calls": 421,
+        "childSeconds": 480.63829249999816,
+        "evidenceWriteSeconds": 0.21595992099819714,
+        "nonzeroExits": 0
+      },
+      "overlay-line-inspection-alpha": {
+        "calls": 414,
+        "childSeconds": 36.52700359200462,
+        "evidenceWriteSeconds": 0.2278382969971281,
+        "nonzeroExits": 0
+      },
+      "overlay-line-inspection-bounds": {
+        "calls": 414,
+        "childSeconds": 59.53420414800569,
+        "evidenceWriteSeconds": 0.2304204649977617,
+        "nonzeroExits": 0
+      },
+      "overlay-final-inspection-alpha": {
+        "calls": 378,
+        "childSeconds": 33.22856970899925,
+        "evidenceWriteSeconds": 0.22786762299877575,
+        "nonzeroExits": 0
+      },
+      "overlay-final-inspection-bounds": {
+        "calls": 378,
+        "childSeconds": 54.34441124700217,
+        "evidenceWriteSeconds": 0.20781662600371065,
+        "nonzeroExits": 0
+      },
+      "motion-native-canvas-inspection": {
+        "calls": 62,
+        "childSeconds": 1.5565386700007369,
+        "evidenceWriteSeconds": 0.029810539998696192,
+        "nonzeroExits": 0
+      },
+      "overlay-calibration-inspection-alpha": {
+        "calls": 7,
+        "childSeconds": 0.6130495000003139,
+        "evidenceWriteSeconds": 0.0036391259999945763,
+        "nonzeroExits": 0
+      },
+      "overlay-calibration-inspection-bounds": {
+        "calls": 7,
+        "childSeconds": 1.0100819169997703,
+        "evidenceWriteSeconds": 0.0034355000001378357,
+        "nonzeroExits": 0
+      },
+      "video-composite": {
+        "calls": 1,
+        "childSeconds": 5116.859306958,
+        "evidenceWriteSeconds": 0.0034936669999733566,
+        "nonzeroExits": 0
+      },
+      "output-media-inspection-ffprobe": {
+        "calls": 1,
+        "childSeconds": 88.83002683299966,
+        "evidenceWriteSeconds": 0.0005427089994773269,
+        "nonzeroExits": 0
+      },
+      "output-media-inspection-audio-payload": {
+        "calls": 1,
+        "childSeconds": 0.13392858299985527,
+        "evidenceWriteSeconds": 0.0029404579997062683,
+        "nonzeroExits": 0
+      },
+      "output-frame-count": {
+        "calls": 1,
+        "childSeconds": 88.09666104200016,
+        "evidenceWriteSeconds": 0.0005975420000031591,
+        "nonzeroExits": 0
+      },
+      "exact-replay-version-ffmpeg": {
+        "calls": 1,
+        "childSeconds": 0.03620145799964666,
+        "evidenceWriteSeconds": 0.00039666600059717894,
+        "nonzeroExits": 0
+      },
+      "exact-replay-version-ffprobe": {
+        "calls": 1,
+        "childSeconds": 0.01854345799982548,
+        "evidenceWriteSeconds": 0.00048670800030231474,
+        "nonzeroExits": 0
+      },
+      "exact-replay-encode": {
+        "calls": 1,
+        "childSeconds": 5118.652013209,
+        "evidenceWriteSeconds": 0.006853041000664234,
+        "nonzeroExits": 0
+      },
+      "exact-replay-video-probe-completed": {
+        "calls": 1,
+        "childSeconds": 0.04560929099842906,
+        "evidenceWriteSeconds": 0.0008715419992804527,
+        "nonzeroExits": 0
+      },
+      "exact-replay-video-probe-replay": {
+        "calls": 1,
+        "childSeconds": 0.03187366599962115,
+        "evidenceWriteSeconds": 0.0009978750012815,
+        "nonzeroExits": 0
+      },
+      "native-center-layout-reconstruction": {
+        "calls": 1,
+        "childSeconds": 0.3042735419999808,
+        "evidenceWriteSeconds": 0.0005894169993698597,
+        "nonzeroExits": 0
+      },
+      "native-qc-diagnostic-overlay-inspection-alpha": {
+        "calls": 88,
+        "childSeconds": 7.715771539010108,
+        "evidenceWriteSeconds": 0.05558483499102295,
+        "nonzeroExits": 0
+      },
+      "native-qc-diagnostic-overlay-inspection-bounds": {
+        "calls": 88,
+        "childSeconds": 12.638592250997203,
+        "evidenceWriteSeconds": 0.05005224700644614,
+        "nonzeroExits": 0
+      }
+    },
+    "render-processes-attempt-002": {
+      "orchestration-audio-inspection-ffprobe": {
+        "calls": 1,
+        "childSeconds": 0.4582101669999538,
+        "evidenceWriteSeconds": 0.0010353750000940635,
+        "nonzeroExits": 0
+      },
+      "orchestration-audio-inspection-audio-payload": {
+        "calls": 1,
+        "childSeconds": 0.09822104199999013,
+        "evidenceWriteSeconds": 0.004172584000043571,
+        "nonzeroExits": 0
+      }
+    }
+  },
+  "judgmentStageWallIntervals": [
+    {
+      "meaning": "見どころ探索・結果検証",
+      "startedAt": "2026-09-26T12:32:22.503Z",
+      "endedAt": "2026-09-26T12:34:50.406Z",
+      "elapsedSeconds": 147.903,
+      "timeBasis": "ログ上の入力準備完了から回答検証完了までの区間経過。読解・判断・操作を含み、モデル単体の応答時間ではない。"
+    },
+    {
+      "meaning": "候補採用判断・結果検証",
+      "startedAt": "2026-09-26T12:34:50.406Z",
+      "endedAt": "2026-09-26T12:35:25.187Z",
+      "elapsedSeconds": 34.781,
+      "timeBasis": "ログ上の入力準備完了から回答検証完了までの区間経過。読解・判断・操作を含み、モデル単体の応答時間ではない。"
+    },
+    {
+      "meaning": "保持範囲判断・結果検証",
+      "startedAt": "2026-09-26T12:35:25.187Z",
+      "endedAt": "2026-09-26T12:36:20.092Z",
+      "elapsedSeconds": 54.905,
+      "timeBasis": "ログ上の入力準備完了から回答検証完了までの区間経過。読解・判断・操作を含み、モデル単体の応答時間ではない。"
+    },
+    {
+      "meaning": "初回字幕区切り判断・検証",
+      "startedAt": "2026-09-26T14:10:49.639Z",
+      "endedAt": "2026-09-26T14:11:31.893Z",
+      "elapsedSeconds": 42.254,
+      "timeBasis": "ログ上の入力準備完了から回答検証完了までの区間経過。読解・判断・操作を含み、モデル単体の応答時間ではない。"
+    },
+    {
+      "meaning": "演出・接続判断・検証",
+      "startedAt": "2026-09-26T14:17:41.046Z",
+      "endedAt": "2026-09-26T14:20:31.526Z",
+      "elapsedSeconds": 170.48,
+      "timeBasis": "ログ上の入力準備完了から回答検証完了までの区間経過。読解・判断・操作を含み、モデル単体の応答時間ではない。"
+    }
+  ],
+  "testExecutions": [
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/clocks-and-background.tap",
+      "tests": 44,
+      "pass": 44,
+      "fail": 0,
+      "duration_ms": 11970.407167
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-no-diarization.tap",
+      "tests": 41,
+      "pass": 41,
+      "fail": 0,
+      "duration_ms": 9024.801792
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-resume-final.tap",
+      "tests": 32,
+      "pass": 32,
+      "fail": 0,
+      "duration_ms": 7969.478375
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-resume-sandbox.tap",
+      "tests": 32,
+      "pass": 5,
+      "fail": 27,
+      "duration_ms": 205.539625
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-resume.tap",
+      "tests": 32,
+      "pass": 30,
+      "fail": 2,
+      "duration_ms": 7904.043084
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-upload-fix-final.tap",
+      "tests": 18,
+      "pass": 18,
+      "fail": 0,
+      "duration_ms": 4607.1825
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-upload-fix.tap",
+      "tests": 18,
+      "pass": 18,
+      "fail": 0,
+      "duration_ms": 4609.112625
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/native-large-media.tap",
+      "tests": 15,
+      "pass": 15,
+      "fail": 0,
+      "duration_ms": 4358.243834
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/presentation.tap",
+      "tests": 146,
+      "pass": 140,
+      "fail": 6,
+      "duration_ms": 1047.09825
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/qc-storage.tap",
+      "tests": 2,
+      "pass": 2,
+      "fail": 0,
+      "duration_ms": 2978.423958
+    },
+    {
+      "record": "runtime/artifacts/digest-new-material-20260926-v001/tests/skills-and-gpu.tap",
+      "tests": 56,
+      "pass": 56,
+      "fail": 0,
+      "duration_ms": 4621.423792
+    }
+  ]
+}

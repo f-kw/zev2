@@ -277,14 +277,98 @@
       "serverRegistrationSeconds": 4.819,
       "reused": false,
       "deduplicated": false,
-      "observedAt": "2026-09-26T09:52:11.620486+00:00",
-      "state": "queued",
-      "startedAt": null,
-      "endedAt": null,
+      "observedAt": "2026-09-26T12:31:00.262007+00:00",
+      "state": "completed",
+      "startedAt": "2026-09-26T11:25:28.224325+00:00",
+      "endedAt": "2026-09-26T12:30:58.047176+00:00",
       "identityChecks": "passed",
       "receiptSha256": "3a49ffd5b42410c592484f9d742aa4949788d4fb97ce4e32b4b74a35ae8a32cc",
-      "gpuQueueCause": "unconfirmed; reported to advisor for GPU-side inspection",
-      "completedResultRetrieved": false
+      "gpuQueueCause": "同じworkerの先行job終了後に新job開始。API再起動だけでは先行処理は終了していなかった。",
+      "completedResultRetrieved": true,
+      "queuedSeconds": 5731.071793,
+      "startAfterPriorJobEndedSeconds": 1.41406,
+      "priorJobEndDiagnostic": {
+        "jobId": "b50a498c86264de58a7c8c69b7be6ab3",
+        "state": "failed",
+        "endedAt": "2026-09-26T11:25:26.810265+00:00",
+        "error": {
+          "message": "'str' object does not support the context manager protocol",
+          "type": "TypeError"
+        },
+        "sameWorker": true,
+        "resultRetrieved": false,
+        "failureLocation": "not available from API"
+      },
+      "jobProcessingSeconds": 3929.822851,
+      "postCount": 1,
+      "metrics": {
+        "gpu": {
+          "meanUtilizationPercent": 1.99,
+          "name": "NVIDIA GeForce RTX 4090",
+          "peakMemoryMiB": 10373,
+          "peakUtilizationPercent": 100,
+          "sampleCount": 3765,
+          "scope": "whole GPU, sampled once per second"
+        },
+        "pipelineSeconds": 3926.103,
+        "runnerSeconds": 3929.535,
+        "segmentCount": 424
+      },
+      "transcript": {
+        "startedAt": "2026-09-26T09:46:15.488Z",
+        "endedAt": "2026-09-26T12:31:13.989Z",
+        "elapsedSeconds": 9898.501,
+        "attemptName": "stt-attempt-003-no-diarization",
+        "enableDiarization": false,
+        "completionMode": "production-resume-existing-job",
+        "resubmitted": false,
+        "sourceSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+        "jobId": "3c0d89617715475eb78f798645521933",
+        "segmentCount": 44002,
+        "groupCount": 44002,
+        "durationSec": 12036.08675,
+        "reversed": 0,
+        "outsideAudio": 0,
+        "speakers": [
+          "unknown"
+        ]
+      },
+      "contentInspection": {
+        "observedAt": "2026-09-26T12:34:45.058148+00:00",
+        "jobId": "3c0d89617715475eb78f798645521933",
+        "segmentCount": 44002,
+        "groupCount": 44002,
+        "zeroLengthFragments": 0,
+        "reversed": 0,
+        "outsideAudio": 0,
+        "rawWarnings": [],
+        "contentReview": "全文確認。叫び・相づちに長い反復文字があり、認識由来の異常疑いとして保持。本文の人手補正・削除なし。通常会話から複数の独立した候補を読めるため全体を致命的失敗とは判定しない。後半には通話相手への応答らしい文脈があるが、話者を推定付与せず指示どおりunknownを維持。認識精度の全編音声照合は未実施。",
+        "suspectedRepetitionUtteranceIds": [
+          "common-utterance-000117",
+          "common-utterance-000569",
+          "common-utterance-000637",
+          "common-utterance-000725",
+          "common-utterance-000794",
+          "common-utterance-000974",
+          "common-utterance-001066",
+          "common-utterance-001072",
+          "common-utterance-001215",
+          "common-utterance-001219",
+          "common-utterance-001437",
+          "common-utterance-001438",
+          "common-utterance-001445",
+          "common-utterance-001530"
+        ],
+        "manualTranscriptChanges": false
+      },
+      "timingLimits": {
+        "whisperSeconds": null,
+        "alignmentSeconds": null,
+        "diarization": "skipped (explicit false)",
+        "note": "工程別時間はAPI結果になく推定しない。旧jobの工程時間と混ぜない。"
+      },
+      "resultSha256": "1cd79aefc4b6edcb8a74962bf4cf27fd4fa5569816c0980482d8507cdc4be834",
+      "transcriptSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b"
     }
   }
 }
