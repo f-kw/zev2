@@ -8,7 +8,7 @@ kawafmmの「2つのレビューを参考に計画を立て、実行可能なタ
 
 完了した1〜4は現行進行表へ戻さない。13.1〜13.2の字幕色比較は完了し、A/B/C比較を保存済み。**13.3は人間確認待ち**で、水色は未採用。13.4〜13.5は開始しない。この待ちは本線を止めない。
 
-**現在のActiveは5. 新素材Digest生成。** 指定素材は `https://www.youtube.com/watch?v=-2UUTkv9qvk`。話者分離なしの新job `3c0d89617715475eb78f798645521933` は正しいSHA・4,803,412,827 bytes・`enableDiarization=false` で1回だけ登録済み。2026-09-26 18:56 JST時点では `queued`、`startedAt=null`。ZEV側の送信・job照合・resume対応は完了しており、現在の唯一のブロッカーはGPU側worker／先行runner／排他ロック等による開始待ち。新jobは再登録・cancelせず保持し、`queued→running` 後に全編STT→Prospect→構成・字幕・演出→未調整初稿まで続行する。13.3の人間確認待ちは本線を止めない。
+**現在のActiveは5. 新素材Digest生成。** 指定素材は `https://www.youtube.com/watch?v=-2UUTkv9qvk`。話者分離なしの新job `3c0d89617715475eb78f798645521933` は正しいSHA・4,803,412,827 bytes・`enableDiarization=false` で1回だけ登録済み。2026-09-26 18:56 JST時点では `queued`、`startedAt=null`。ZEV側の送信・job照合・resume対応は完了しており、現在の唯一のブロッカーはGPU側worker／先行runner／排他ロック等による開始待ち。新jobは再登録・cancelせず保持し、`queued→running` 後に全編STT→Prospect→構成・字幕・演出→未調整初稿まで続行する。13.3の人間確認待ちは本線を止めない。5の初稿完成後は6で品質問題を確認し、必要な7の後に **14. 制作時間・判断コスト改善** を実施する。14では5の工程別実測を基にボトルネックを順位付けし、Jevを含む有限判断の置換をshadow評価する。詳細は `相談役/方針/2026-09-27_制作時間_判断コスト改善_Jev_v001.md`。
 
 5はCodex2が継続中。ZEV側実装commitは `46440dcb8b383f20ecf9917f132dc48bdc02265f`。GPU公開APIに `enableDiarization` が反映されたことを確認するまで新jobは送信しない。remote mainへのpushは解消済み。反映後は `enableDiarization=false` を明示して新jobを一度だけ登録し、そのjob IDで全編STTから初稿まで続行する。既存のGoal数値、契約、正式採用条件は変更しない。Git・監査・直接報告は現行AGENTS.mdと監査プロトコルへ従う。
 
