@@ -11,6 +11,8 @@ import {restoreOrchestrationDrawingViewEvidenceV001} from './presentation_orches
 import {deriveEditingPreviewRangeV001, assertEditingRangeV001} from './presentation_editing_navigation_v001.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
 import {readPresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
+import {PRESENTATION_NATIVE_STREAM_EXECUTION_V001, verifyPresentationNativeSampleReceiptsV001}
+  from './presentation_native_qc_streaming_v001.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const json = async file => JSON.parse(await readFile(file, 'utf8'));
@@ -102,6 +104,9 @@ export async function createEditingJobsV001({directory, generatedRoot, drawingRu
     demand(result.status === 'passed' && result.viewSha256 === job.viewSha256
       && result.projectionSha256 === job.projectionSha256 && equal(result.range, job.range), '出力は開始時の保存版・範囲と一致しません');
     demand(equal(result.drawingRulesRef, job.drawingRulesRef), '描画規則が実行開始時と一致しません');
+    const finite = result.completedFrameQc?.evidence?.finiteState;
+    if (finite?.executionMethod === PRESENTATION_NATIVE_STREAM_EXECUTION_V001)
+      await verifyPresentationNativeSampleReceiptsV001({samples: finite.samples});
     const candidate = await assertEditingFileV001(result.candidateVideo);
     const content = {schemaVersion: 'presentation-editing-media-v001', ...candidate, id: job.id, kind: job.kind,
       revision: job.revision, jobKey: job.jobKey, range: job.range, drawingRulesRef: job.drawingRulesRef,

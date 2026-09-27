@@ -20,12 +20,24 @@ const HASH = /^[a-f0-9]{64}$/u;
 const same = (left, right) => left === right || canonicalJson(left) === canonicalJson(right);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const canonicalDigest = value => digest(canonicalJson(value));
+const STREAMING_EXECUTION = 'sample-batched-native-references-v003';
+const RETENTION_SCHEMA = 'native-reference-retention-v001';
+const exactKeys = (value, keys) => value !== null && typeof value === 'object' && !Array.isArray(value)
+  && same(Object.keys(value).sort(), [...keys].sort());
 
-function checkFiniteExecutionEvidence(finite, inspections, canvas) {
+/** Structural execution verification; actual retained/released byte checks use the asynchronous reader. */
+export function checkFiniteExecutionEvidence(finite, inspections, canvas) {
+  const streaming = finite?.executionMethod === STREAMING_EXECUTION;
   requireValue(finite?.schemaVersion === PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001
     && Array.isArray(finite.samples) && Array.isArray(finite.processes)
-    && Array.isArray(finite.outputArtifacts) && finite.executionMethod === PRESENTATION_NATIVE_FRAME_EXECUTION_V001,
+    && Array.isArray(finite.outputArtifacts)
+    && (streaming || finite.executionMethod === PRESENTATION_NATIVE_FRAME_EXECUTION_V001),
   'complete current finite-state execution evidence is missing');
+  if (streaming) requireValue(Number.isSafeInteger(finite.referenceBatchSize) && finite.referenceBatchSize > 0,
+    'reference batch size is invalid');
+  else requireValue(!Object.hasOwn(finite, 'referenceBatchSize')
+    && finite.samples.every(sample => !Object.hasOwn(sample, 'referenceRetention')),
+  'historical execution cannot declare streaming retention');
   const flattened = [];
   for (const inspection of inspections) {
     const local = inspection.nativeFrameQc;
@@ -122,8 +134,23 @@ function checkFiniteExecutionEvidence(finite, inspections, canvas) {
       buildPresentationNativeLayerDecodeArgumentsV001(group), emptyStdoutSha256);
     for (const layer of group) expectArtifact(generatedByPath.get(layer.decodedPath));
   }
+  if (Object.hasOwn(finite, 'preparationReuse')) {
+    const reuse = finite.preparationReuse;
+    requireValue(streaming && exactKeys(reuse, ['schemaVersion', 'sourceEvidence', 'sourceExecutionMethod', 'reusedProcessCount'])
+      && reuse.schemaVersion === 'saved-native-preparation-reuse-v001'
+      && reuse.sourceExecutionMethod === PRESENTATION_NATIVE_FRAME_EXECUTION_V001
+      && Number.isSafeInteger(reuse.reusedProcessCount) && reuse.reusedProcessCount === cursor
+      && exactKeys(reuse.sourceEvidence, ['path', 'fileSha256'])
+      && typeof reuse.sourceEvidence.path === 'string' && path.isAbsolute(reuse.sourceEvidence.path)
+      && HASH.test(reuse.sourceEvidence.fileSha256),
+    'saved preparation reuse is not bound to the complete historical preparation prefix');
+    // This source is a retained historical evidence artifact, never a newly
+    // generated output. The asynchronous caller verifies its file SHA, prefix
+    // records, prepared files and input bindings against the saved source.
+    requireValue(!outputPaths.has(reuse.sourceEvidence.path), 'preparation source aliases a generated output');
+  }
   const references = new Map();
-  for (const sample of finite.samples) {
+  for (const [sampleIndex, sample] of finite.samples.entries()) {
     requireValue(frameObservations.has(sample.frame), 'a finite sample frame was not extracted');
     const crop = sample.crop;
     const cropArgs = [sample.completedFrame.path, '-crop',
@@ -133,22 +160,59 @@ function checkFiniteExecutionEvidence(finite, inspections, canvas) {
       'saved completed RGB hash differs');
     expectProcess('completed-rgb-crop', magick.path, cropArgs, sample.completedRgbSha256);
     expectArtifact(sample.completedRgb);
+    const sampleDirectory = streaming ? path.join(finite.referenceDirectory, 'sample-' + sampleIndex) : null;
+    if (streaming) requireValue(sample.completedRgb.path === path.join(sampleDirectory, 'completed.rgb'),
+      'completed RGB is outside its sample directory');
     const executions = buildPresentationNativeReferenceExecutionV001({sample,
-      sceneBindings: finite.sceneBindings, nativeLayers: layers, directory: finite.referenceDirectory});
-    const fresh = [...new Map(executions.filter(row => !references.has(row.key)).map(row => [row.key, row])).values()];
+      sceneBindings: finite.sceneBindings, nativeLayers: layers,
+      directory: streaming ? path.join(sampleDirectory, 'references') : finite.referenceDirectory});
+    const sampleReferences = streaming ? new Map() : references;
+    const fresh = [...new Map(executions.filter(row => !sampleReferences.has(row.key)).map(row => [row.key, row])).values()];
     if (fresh.length > 0) {
-      expectProcess('native-reference-composite', ffmpeg.path,
-        buildPresentationNativeReferenceArgumentsV001({sample: {...sample, references: fresh.map(row => row.reference)},
-          sceneBindings: finite.sceneBindings, baseFramePath: sample.baseFrame.path,
-          nativeLayers: layers, outputPaths: fresh.map(row => row.path)}), emptyStdoutSha256);
+      const batchSize = streaming ? finite.referenceBatchSize : fresh.length;
+      for (let offset = 0; offset < fresh.length; offset += batchSize) {
+        const batch = fresh.slice(offset, offset + batchSize);
+        expectProcess('native-reference-composite', ffmpeg.path,
+          buildPresentationNativeReferenceArgumentsV001({sample: {...sample, references: batch.map(row => row.reference)},
+            sceneBindings: finite.sceneBindings, baseFramePath: sample.baseFrame.path,
+            nativeLayers: layers, outputPaths: batch.map(row => row.path)}), emptyStdoutSha256);
+      }
       for (const row of fresh) {
         const ref = {path: row.path, fileSha256: row.reference.rgbSha256};
-        references.set(row.key, ref); expectArtifact(ref);
+        sampleReferences.set(row.key, ref);
+        if (!streaming) expectArtifact(ref);
       }
     }
     for (const row of executions) requireValue(row.reference.rgbPath === row.path
-      && row.reference.rgbSha256 === references.get(row.key).fileSha256,
+      && row.reference.rgbSha256 === sampleReferences.get(row.key).fileSha256,
     'a shared reference is not bound to the same complete composition');
+    if (streaming) {
+      const retention = sample.referenceRetention;
+      requireValue(exactKeys(retention, ['schemaVersion', 'state', 'checkpoint', 'artifacts'])
+        && retention.schemaVersion === RETENTION_SCHEMA
+        && ['retained', 'released-verified-pass'].includes(retention.state),
+      'sample retention state is missing, unknown or incomplete');
+      requireValue(exactKeys(retention.checkpoint, ['path', 'fileSha256'])
+        && retention.checkpoint.path === path.join(sampleDirectory, 'sample-proof.json'),
+      'sample retention checkpoint path differs');
+      expectArtifact(retention.checkpoint);
+      const bytes = crop.width * crop.height * 3;
+      const artifacts = fresh.map(row => ({path: row.path, fileSha256: row.reference.rgbSha256, bytes}));
+      requireValue(Number.isSafeInteger(bytes) && bytes > 0 && same(retention.artifacts, artifacts),
+        'sample retention artifacts differ from every complete reference');
+      if (retention.state === 'retained') {
+        for (const ref of retention.artifacts) expectArtifact(ref);
+      } else {
+        const expected = sample.references.find(row => row.id === 'expected');
+        const omitted = sample.references.find(row => row.id === 'omitted');
+        const wanted = sample.classes?.find(row => row.id === expected?.classId);
+        requireValue(sample.visible === true && wanted && omitted
+          && sample.expectedClassId === expected.classId && sample.omittedClassId === omitted.classId
+          && expected.classId !== omitted.classId
+          && sample.classes.every(row => row.id === wanted.id || wanted.absoluteRgbDifference < row.absoluteRgbDifference),
+        'only a verified unique-minimum passing sample may release reference images');
+      }
+    }
   }
   requireValue(cursor === finite.processes.length, 'finite-state execution contains missing or extra processes');
   requireValue(same(finite.outputArtifacts, expectedArtifacts),

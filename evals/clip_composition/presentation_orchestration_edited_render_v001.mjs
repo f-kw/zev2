@@ -42,7 +42,7 @@ const codeNames = ['presentation_orchestration_edited_render_v001.mjs', 'present
   'presentation_renderer_qc_v002.mjs', 'presentation_native_frame_qc_v001.mjs',
   'presentation_native_frame_qc_preparation_v001.mjs', 'presentation_exact_replay_qc_v001.mjs',
   'presentation_integrity_state_qc_v001.mjs', 'presentation_renderer_process_observation_v001.mjs',
-  'presentation_qc_evidence_store_v001.mjs'];
+  'presentation_qc_evidence_store_v001.mjs', 'presentation_native_qc_streaming_v001.mjs'];
 const nativeNames = ['runner/src/remotion/components/TelopText.tsx', 'runner/src/telop/telop-render-model.ts',
   'runner/src/remotion/utils/telop-font.ts', 'runner/src/telop/text-metrics.ts', 'runner/src/telop/telop-line-break.ts',
   'runner/src/shared/telop-glow.ts', 'pnpm-lock.yaml', 'runner/node_modules/@remotion/cli/package.json',

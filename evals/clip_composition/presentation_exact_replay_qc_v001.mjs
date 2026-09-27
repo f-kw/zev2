@@ -12,6 +12,7 @@ import {buildPresentationCaptionMotionStateElementsV001} from './presentation_ca
 import {buildPresentationCompositeArgumentsV001} from './render_presentation_v002.mjs';
 
 export const PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V001 = 'presentation-exact-replay-qc-v001';
+export const PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V002 = 'presentation-exact-replay-qc-v002';
 const MODULE_FILE = fileURLToPath(import.meta.url);
 const WORKSPACE = path.resolve(path.dirname(MODULE_FILE), '../..');
 const HASH = /^[a-f0-9]{64}$/u;
@@ -356,7 +357,20 @@ function validateRawExecutionEvidence(evidence, inputByRole, plan) {
     return target;
   };
   const fixedInput = {plan, recordBindings: evidence.recordBindings, compositorInput: evidence.compositorInput};
-  requireArtifact('fixed-input.json', JSON.stringify(fixedInput, null, 2) + '\n');
+  if (evidence.schemaVersion === PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V002) {
+    requireValue(typeof evidence.fixedInputUtf8 === 'string'
+      && Buffer.from(evidence.fixedInputUtf8, 'utf8').toString('utf8') === evidence.fixedInputUtf8,
+    'original fixed input UTF-8 is missing or invalid');
+    requireArtifact('fixed-input.json', evidence.fixedInputUtf8);
+    requireValue(same(JSON.parse(evidence.fixedInputUtf8), fixedInput),
+      'original fixed input differs from the bound plan and compositor input');
+  } else {
+    // Historical v001 evidence retains its original byte reconstruction rule.
+    // New executions store the original text, since shared JSON restoration can
+    // reorder object keys without changing their values or canonical hashes.
+    requireValue(!Object.hasOwn(evidence, 'fixedInputUtf8'), 'historical replay evidence cannot declare v002 fixed input');
+    requireArtifact('fixed-input.json', JSON.stringify(fixedInput, null, 2) + '\n');
+  }
   requireArtifact('encode-arguments.json', JSON.stringify({
     compositorArguments: evidence.compositorArguments, encodeArguments: evidence.encodeArguments,
     observationOnlyArguments: ['-progress', 'pipe:1', '-nostats'],
@@ -409,7 +423,7 @@ export function validatePresentationExactReplayQcEvidenceV001({plan, evidence, e
       && currentCompletedMediaRef.path === evidence?.completed?.path
       && currentCompletedMediaRef.fileSha256 === evidence?.completed?.fileSha256,
     'current completed media identity does not match the exact replay evidence');
-    requireValue(evidence?.schemaVersion === PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V001
+    requireValue([PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V001, PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V002].includes(evidence?.schemaVersion)
       && evidence.expectedFrameCount === expectedFrameCount && evidence.planCanonicalSha256 === canonicalDigest(plan),
     'exact replay evidence does not bind the fixed plan');
     const records = recordsFromBindings(plan, evidence.recordBindings);
@@ -614,7 +628,8 @@ export async function inspectPresentationExactReplayQcV001({
     const compositorArguments = buildPresentationCompositeArgumentsV001({baseMediaPath, plan,
       overlayRecords: records, expectedFrameCount, serializePngAndFilters, presentationTimeline, timelineAudio, audioMediaPath, renderRange});
     const encodeArguments = appendOutputArguments(compositorArguments, replayPath);
-    await save('fixed-input.json', JSON.stringify({plan, recordBindings, compositorInput}, null, 2) + '\n');
+    const fixedInputUtf8 = JSON.stringify({plan, recordBindings, compositorInput}, null, 2) + '\n';
+    await save('fixed-input.json', fixedInputUtf8);
     await save('encode-arguments.json', JSON.stringify({compositorArguments, encodeArguments,
       observationOnlyArguments: ['-progress', 'pipe:1', '-nostats'],
       unchangedProductionSuffix: ['-movflags', '+faststart']}, null, 2) + '\n');
@@ -651,7 +666,7 @@ export async function inspectPresentationExactReplayQcV001({
       }
     }
     timings.exactComparisonWallClockMs = performance.now() - comparisonStarted;
-    evidence = {schemaVersion: PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V001, expectedFrameCount,
+    evidence = {schemaVersion: PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V002, expectedFrameCount, fixedInputUtf8,
       planCanonicalSha256: canonicalDigest(plan), recordBindings, compositorInput, compositorArguments, encodeArguments,
       compositorArgumentsCanonicalSha256: canonicalDigest(compositorArguments),
       encodeArgumentsCanonicalSha256: canonicalDigest(encodeArguments),

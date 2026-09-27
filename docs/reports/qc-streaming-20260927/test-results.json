@@ -1,0 +1,50 @@
+{
+  "checkpointSuite": {
+    "path": "runtime/artifacts/qc-streaming-20260927-v001/checkpoint-tests.tap",
+    "fileSha256": "e21ad7a208a59a5765e12ffdb3d8312cbc5f50a4dac06877140624055cda1f24",
+    "tests": 151,
+    "pass": 151,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "durationMs": 14902.770166
+  },
+  "rendererTargeted": {
+    "path": "runtime/artifacts/qc-streaming-20260927-v001/renderer-regression-agent.tap",
+    "fileSha256": "028dcb1a73e998e877b6439713ee41220bd2d370d026832e548b6a552b219822",
+    "tests": 20,
+    "pass": 2,
+    "fail": 1,
+    "skipped": 17,
+    "cancelled": 0,
+    "durationMs": 273.774792
+  },
+  "rendererBeforeBaseline": {
+    "path": "runtime/artifacts/qc-evidence-common-20260927-v001/renderer-baseline.tap",
+    "fileSha256": "4a69f8c8fb8d5290919d0044060eaa94b6a655d9070b8d84b15cbba742365e8a",
+    "tests": 20,
+    "pass": 2,
+    "fail": 1,
+    "skipped": 17,
+    "cancelled": 0,
+    "durationMs": 228.943583
+  },
+  "knownRendererFailureSameMessage": true,
+  "knownRendererFailure": "12 行数・行の正の交差・安全領域・空alphaを独立して検出する",
+  "notes": [
+    "No fixture expected verdict was relaxed.",
+    "151/151 targeted streaming/native/storage/replay/editing tests passed; this is not a claim that the full repository suite passes.",
+    "Renderer: 2 pass, 1 unchanged known failure, 17 outside selected test-name pattern."
+  ],
+  "testFiles": [
+    "presentation_qc_evidence_store_v001.test.mjs",
+    "presentation_qc_common_validation_v001.test.mjs",
+    "presentation_native_frame_qc_v001.test.mjs",
+    "presentation_native_frame_qc_preparation_v001.test.mjs",
+    "presentation_native_qc_streaming_v001.test.mjs",
+    "presentation_integrity_streaming_qc_v001.test.mjs",
+    "presentation_native_streaming_integration_v001.test.mjs",
+    "presentation_exact_replay_qc_v001.test.mjs",
+    "presentation_editing_jobs_v001.test.mjs"
+  ]
+}

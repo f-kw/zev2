@@ -2868,6 +2868,7 @@ export async function executePresentationRendererV002(jobInput) {
       path.join(MODULE_DIRECTORY, 'presentation_renderer_text_layout_v001.mjs'),
       path.join(MODULE_DIRECTORY, 'presentation_renderer_qc_v002.mjs'),
       path.join(MODULE_DIRECTORY, 'presentation_qc_evidence_store_v001.mjs'),
+      path.join(MODULE_DIRECTORY, 'presentation_native_qc_streaming_v001.mjs'),
       fileURLToPath(import.meta.url),
       LAYOUT_INSPECTOR,
       ...(plan.elements.some(element => Object.hasOwn(element, 'presentationPulse')) ? [

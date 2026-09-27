@@ -2,7 +2,9 @@
  * Caption saves still pass the real font/geometry acceptance and drawing rules. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp, mkdir, readFile, writeFile, lstat, utimes, rename, rm} from 'node:fs/promises';
+import {mkdtemp, mkdir, readFile, writeFile, lstat, utimes, rename, rm, realpath} from 'node:fs/promises';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
 import {setTimeout as delay} from 'node:timers/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -13,6 +15,10 @@ import {initializeEditingWorkspaceV001, bindEditingFileV001,
 import {AUTO_PRESENTATION_RULES_REF_V008} from './presentation_auto_effects_v001.mjs';
 import {createOrchestrationContextV001, createOrchestrationJudgmentInputV001,
   fixOrchestrationJudgmentV001} from './presentation_orchestration_v001.mjs';
+import {buildPresentationNativeLayerPlanV001, buildPresentationNativeLayerDecodeArgumentsV001,
+  buildPresentationNativeReferenceArgumentsV001} from './presentation_native_frame_qc_v001.mjs';
+import {PRESENTATION_NATIVE_STREAM_EXECUTION_V001, processPresentationNativeSampleV001,
+  hashPresentationNativeFileV001} from './presentation_native_qc_streaming_v001.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const saved = path.join(repo, 'docs/reports/digest-presentation-orchestration-stage3-inputs-20260918');
@@ -25,7 +31,7 @@ async function until(operation) {
   while (Date.now() < deadline) {const result = await operation(); if (result) return result; await delay(10);}
   throw new Error('Synthetic worker did not reach the expected state');
 }
-async function fixture(t, mode = 'success') {
+async function fixture(t, mode = 'success', {streamingSample = null} = {}) {
   const root = await mkdtemp(path.join(os.tmpdir(), 'zev-editing-jobs-test-'));
   const generatedRoot = await mkdtemp(path.join(repo, 'evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-'));
   const managers = [];
@@ -102,6 +108,9 @@ if(mode==='partial-fail'||mode==='partial-cancel') {
 const result={status:'passed',viewSha256:job.viewSha256,projectionSha256:job.projectionSha256,
   range:job.range,drawingRulesRef:job.drawingRulesRef,candidateVideo:{path:candidatePath,
     bytes:bytes.length,fileSha256:createHash('sha256').update(bytes).digest('hex')}};
+const streamingSample=${JSON.stringify(streamingSample)};
+if(streamingSample) result.completedFrameQc={evidence:{finiteState:{
+  executionMethod:${JSON.stringify(PRESENTATION_NATIVE_STREAM_EXECUTION_V001)},samples:[streamingSample]}}};
 await writePresentationQcEvidenceV001(job.resultPath+'.pending',result);
 await rename(job.resultPath+'.pending',job.resultPath);
 if(mode==='gate') {
@@ -119,6 +128,77 @@ if(mode==='gate') {
 async function finished(manager) {
   return until(async () => {const job = await manager.refresh(); return job && job.status !== 'running' ? job : null;});
 }
+
+// This receipt-gate fixture creates real 8x8 comparison RGBs and a bound saved
+// proof. The editing worker's media remains synthetic: full native/final-QC
+// semantics are tested by presentation_native_streaming_integration_v001.test.
+async function streamingReceipt(t) {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'zev-editing-receipt-test-'));
+  t.after(() => rm(root, {recursive: true, force: true}));
+  const exec = promisify(execFile);
+  const run = async (command, args) => exec(command, args, {maxBuffer: 1024 * 1024});
+  const bind = async pathname => ({path: pathname, fileSha256: await hashPresentationNativeFileV001(pathname)});
+  const ffmpeg = await realpath('/opt/homebrew/bin/ffmpeg'), magick = await realpath('/opt/homebrew/bin/magick');
+  const tools = {ffmpeg: await bind(ffmpeg), imageMagick: await bind(magick)};
+  const base = path.join(root, 'base.png'), caption = path.join(root, 'caption.png');
+  await run(magick, ['-size', '8x8', 'xc:#101010', base]);
+  await run(magick, ['-size', '8x8', 'xc:none', '-fill', '#ffffff80', '-draw', 'rectangle 2,2 5,5', caption]);
+  const captionRef = await bind(caption), layer = {bindingId: 'caption-state', localFrame: 3, displayFrameCount: 10};
+  const sceneBindings = [{instructionId: 'caption-000001', states: [{bindingId: 'caption-state',
+    pngPath: caption, pngSha256: captionRef.fileSha256}], alternates: []}];
+  const sample = {instructionId: 'caption-000001', frame: 4, mediaFrame: 4, expectedState: 'native-static',
+    expectedOverlaySha256: captionRef.fileSha256, crop: {left: 0, top: 0, width: 8, height: 8},
+    baseFrame: await bind(base), completedFrame: null,
+    references: [{id: 'expected', kind: 'expected', layers: [layer]}, {id: 'omitted', kind: 'omitted', layers: []}]};
+  const layerDirectory = path.join(root, 'layers'); await mkdir(layerDirectory);
+  const nativeLayers = buildPresentationNativeLayerPlanV001({samples: [sample], sceneBindings,
+    directory: layerDirectory, canvas: {width: 8, height: 8}});
+  await run(ffmpeg, buildPresentationNativeLayerDecodeArgumentsV001(nativeLayers.layers));
+  const preparedArtifacts = await Promise.all(nativeLayers.layers.map(row => bind(row.decodedPath)));
+  const expected = path.join(root, 'expected.rgb'), completed = path.join(root, 'completed.png');
+  await run(ffmpeg, buildPresentationNativeReferenceArgumentsV001({sample: {...sample, references: [sample.references[0]]},
+    sceneBindings, nativeLayers, baseFramePath: base, outputPaths: [expected]}));
+  await run(ffmpeg, ['-hide_banner', '-loglevel', 'error', '-nostdin', '-f', 'rawvideo', '-pixel_format', 'rgb24',
+    '-video_size', '8x8', '-i', expected, '-frames:v', '1', '-c:v', 'png', '-pix_fmt', 'rgb24', completed]);
+  sample.completedFrame = await bind(completed);
+  const result = await processPresentationNativeSampleV001({sample, sceneBindings, nativeLayers, tools,
+    preparedArtifacts, directory: path.join(root, 'receipt'), retention: 'retain-all'});
+  assert.equal(result.sample.visible, true);
+  return result.sample;
+}
+
+test('共有保存後の実比較証拠を再読し、正常時だけ編集jobを公開し、欠損・改ざんを成功にしない', async t => {
+  for (const mode of ['valid', 'missing', 'tampered']) await t.test(mode, async t => {
+    const sample = await streamingReceipt(t), f = await fixture(t, 'gate', {streamingSample: sample});
+    const manager = await f.create(), started = await manager.start({snapshot: f.snapshot, kind: 'full'});
+    await until(() => exists(f.ready));
+    await writeFile(f.release, 'release'); await until(() => exists(f.resultReady));
+    const checkpoint = sample.referenceRetention.checkpoint.path;
+    if (mode === 'missing') await rm(checkpoint);
+    if (mode === 'tampered') {
+      const original = await readFile(checkpoint, 'utf8');
+      const altered = original.replace('caption-000001', 'caption-000002');
+      assert.notEqual(altered, original);
+      await writeFile(checkpoint, altered);
+    }
+    // A newly created manager reads the persisted shared result, not the
+    // original worker's in-memory pass flag, while the worker is still gated.
+    const restarted = await f.create(), restored = await restarted.refresh();
+    assert.equal(restored.id, started.id);
+    assert.equal(restored.status, mode === 'valid' ? 'succeeded' : 'failed');
+    if (mode === 'valid') {
+      assert.equal((await restarted.getMedia(started.id)).row.id, started.id);
+      assert(restarted.listMedia(f.snapshot.revision).some(row => row.id === started.id));
+    } else {
+      assert.match(restored.error, mode === 'missing' ? /ENOENT/ : /SHA mismatch/);
+      assert.equal(restarted.listMedia(f.snapshot.revision).some(row => row.id === started.id), false);
+      await assert.rejects(restarted.getMedia(started.id), {code: 'EDITING_NOT_FOUND'});
+      assert.equal(await exists(path.join(f.directory, 'media', started.id + '.json')), false);
+    }
+    await writeFile(f.exit, 'exit');
+    assert.equal((await finished(manager)).status, restored.status);
+  });
+});
 
 test('即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する', async t => {
   const f = await fixture(t, 'fail'), manager = await f.create();

@@ -6,6 +6,8 @@ import {stat, mkdir, mkdtemp, readFile, readdir, writeFile} from 'node:fs/promis
 import path from 'node:path';
 import {performance} from 'node:perf_hooks';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+import {processPresentationNativeSampleV001, PRESENTATION_NATIVE_STREAM_EXECUTION_V001,
+  PRESENTATION_NATIVE_REFERENCE_BATCH_SIZE_V001} from './presentation_native_qc_streaming_v001.mjs';
 
 // Evidence validation reuses the actual executed command builders.
 export {
@@ -330,25 +332,27 @@ export async function classifyPresentationNativeReferenceFilesV001({
   requireValue(Buffer.isBuffer(completedRgb) && completedRgb.length > 0
     && hashBytes(completedRgb) === completedRgbRef?.fileSha256
     && Array.isArray(references) && references.length >= 2, 'RGB file observations are missing');
+  const readRgb = async file => {const bytes = await readFile(file);
+    counts.rgbReadBytes = (counts.rgbReadBytes ?? 0) + bytes.length; return bytes;};
   const ids = new Set(), classes = [], observed = [];
   for (const reference of references) {
     requireValue(nonempty(reference.id) && !ids.has(reference.id) && path.isAbsolute(reference.path)
       && HASH.test(reference.fileSha256), 'RGB file reference identity differs');
     ids.add(reference.id);
-    const rgb = await readFile(reference.path);
+    const rgb = await readRgb(reference.path);
     requireValue(rgb.length === completedRgb.length && hashBytes(rgb) === reference.fileSha256,
       'RGB reference dimensions or bytes differ');
     let group;
     for (const candidate of classes.filter(row => row.rgbSha256 === reference.fileSha256)) {
-      if (rgb.equals(await readFile(candidate.rgbPath))) {group = candidate; break;}
+      if (rgb.equals(await readRgb(candidate.rgbPath))) {group = candidate; break;}
     }
     if (!group) {
       const key = hashJson({completed: completedRgbRef.fileSha256, reference: reference.fileSha256});
       const matches = distanceCache.get(key) ?? [];
       let cached;
       for (const candidate of matches) {
-        if (completedRgb.equals(await readFile(candidate.completedPath))
-          && rgb.equals(await readFile(candidate.referencePath))) {cached = candidate; break;}
+        if (completedRgb.equals(await readRgb(candidate.completedPath))
+          && rgb.equals(await readRgb(candidate.referencePath))) {cached = candidate; break;}
       }
       let absoluteRgbDifference;
       if (cached) {
@@ -783,6 +787,7 @@ export function validatePresentationNativeFrameQcInspectionsV001({plan, inspecti
 /** QC-only native reference execution. It never produces a replacement completed video. */
 export async function inspectPresentationNativeFrameQcV001({
   plan, records, provenance, media, tools, scratchDirectory, processObserver = null, renderRange = null,
+  referenceRetention = 'retain-all', referenceBatchSize = PRESENTATION_NATIVE_REFERENCE_BATCH_SIZE_V001,
 }) {
   const started = performance.now();
   plan = clone(plan); records = clone(records); provenance = clone(provenance);
@@ -929,45 +934,27 @@ export async function inspectPresentationNativeFrameQcV001({
         }
       }
     });
-    const samples = [], referenceFiles = new Map(), distanceCache = new Map();
+    const samples = [], sampleMeasurements = [];
+    const preparedArtifacts = [...outputArtifacts];
+    let retainedReferenceBytes = 0, peakReferenceBytes = 0;
     for (const [sampleIndex, recipeSample] of recipe.samples.entries()) {
       const frames = extracted.get(recipeSample.frame);
       requireValue(frames, 'a required sample frame was not extracted');
-      const sample = {...recipeSample, ...frames}, crop = sample.crop;
-      const completed = await timed('completedRgbCrop', () => run(tools.imageMagick.path,
-        [sample.completedFrame.path, '-crop', crop.width + 'x' + crop.height + '+' + crop.left + '+' + crop.top,
-          '+repage', '-alpha', 'off', '-depth', '8', 'rgb:-'], 'completed-rgb-crop'));
-      const byteCount = crop.width * crop.height * 3;
-      requireValue(completed.stdout.length === byteCount, 'completed RGB crop dimensions differ');
-      const completedRgb = {path: path.join(work, 'sample-' + sampleIndex + '-completed.rgb'),
-        fileSha256: hashBytes(completed.stdout)};
-      await timed('evidenceWrite', () => writeFile(completedRgb.path, completed.stdout, {flag: 'wx'}));
-      outputArtifacts.push(completedRgb);
+      const result = await processPresentationNativeSampleV001({sample: {...recipeSample, ...frames},
+        sceneBindings: recipe.sceneBindings, nativeLayers, preparedArtifacts, tools, run,
+        directory: path.join(referenceDirectory, 'sample-' + sampleIndex),
+        batchSize: referenceBatchSize, retention: referenceRetention});
+      samples.push(result.sample); outputArtifacts.push(...result.outputArtifacts);
+      sampleMeasurements.push(result.metrics);
+      peakReferenceBytes = Math.max(peakReferenceBytes, retainedReferenceBytes + result.metrics.peakReferenceBytes);
+      retainedReferenceBytes += result.metrics.retainedReferenceBytes;
       counts.completedRgbOutputs++;
-      const executions = buildPresentationNativeReferenceExecutionV001({sample,
-        sceneBindings: recipe.sceneBindings, nativeLayers, directory: referenceDirectory});
-      const fresh = [...new Map(executions.filter(row => !referenceFiles.has(row.key)).map(row => [row.key, row])).values()];
-      if (fresh.length > 0) await timed('referenceComposition', async () => {
-        await run(tools.ffmpeg.path, nativeReferenceArguments({sample: {...sample, references: fresh.map(row => row.reference)},
-          sceneBindings: recipe.sceneBindings, baseFramePath: sample.baseFrame.path,
-          nativeLayers, outputPaths: fresh.map(row => row.path)}), 'native-reference-composite');
-        for (const row of fresh) {
-          const rgb = await readFile(row.path);
-          requireValue(rgb.length === byteCount, 'reference RGB does not contain exactly one complete crop');
-          const ref = {path: row.path, fileSha256: hashBytes(rgb)};
-          referenceFiles.set(row.key, ref); outputArtifacts.push(ref);
-          counts.referenceRgbOutputs++;
-        }
-      });
-      counts.logicalReferenceCount += executions.length;
-      counts.reusedReferenceRgbCount += executions.length - fresh.length;
-      const decision = await timed('rgbDistance', () => classifyPresentationNativeReferenceFilesV001({
-        completedRgb: completed.stdout, completedRgbRef: completedRgb,
-        references: executions.map(row => ({id: row.reference.id, ...referenceFiles.get(row.key)})), distanceCache, counts}));
-      samples.push({...sample, completedRgb, completedRgbSha256: completedRgb.fileSha256, ...decision,
-        references: sample.references.map((reference, index) => ({...reference,
-          ...decision.references[index], rgbPath: executions[index].path}))});
+      for (const key of ['logicalReferenceCount', 'referenceRgbOutputs', 'reusedReferenceRgbCount',
+        'exactDistanceCalculations', 'reusedExactDistances']) counts[key] += result.metrics[key];
+      for (const [key, value] of Object.entries(result.metrics.phasesMilliseconds))
+        phasesMilliseconds[key] = (phasesMilliseconds[key] ?? 0) + value;
     }
+    Object.assign(counts, {peakReferenceBytes, retainedReferenceBytes});
     await timed('verification', async () => {
       for (const ref of refs) {
         await verifyPresentationNativeInputRefV001(ref);
@@ -997,7 +984,7 @@ export async function inspectPresentationNativeFrameQcV001({
     return {status: violations.length === 0 ? 'passed' : 'failed', violations, inspections,
       evidence: {schemaVersion: PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, inputManifest: manifest,
         baselinePlan, autoPresentation, orchestrationInput, renderRange, sceneBindings: recipe.sceneBindings, samples, processes,
-        executionMethod: PRESENTATION_NATIVE_FRAME_EXECUTION_V001, frameExtraction, nativeLayers, referenceDirectory,
+        executionMethod: PRESENTATION_NATIVE_STREAM_EXECUTION_V001, referenceBatchSize, sampleMeasurements, frameExtraction, nativeLayers, referenceDirectory,
         outputArtifacts, executableVersions: version},
       performance: performanceRecord()};
   } catch (error) {

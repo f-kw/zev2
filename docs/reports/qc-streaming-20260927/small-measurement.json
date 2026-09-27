@@ -1,0 +1,699 @@
+{
+  "schemaVersion": "qc-streaming-small-report-v001",
+  "scope": "Same seven saved points; old actual pre-change builder/classifier versus new 32-reference batches. Same media and prepared planes. Single runs; cache and other-process contention uncontrolled.",
+  "sourceMeasurements": [
+    {
+      "path": "runtime/artifacts/qc-streaming-20260927-v001/legacy-small-v001/measurement.json",
+      "bytes": 7375,
+      "fileSha256": "f6dfe9606eac597ba3e496557187c2b71ddcc977d779243aef429aae4bf7cbf6"
+    },
+    {
+      "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/measurement.json",
+      "bytes": 16635,
+      "fileSha256": "3c9945eec42a820fc45eeca59c0ce29540b9736c2f890c70f9d9615aa5610455"
+    }
+  ],
+  "old": {
+    "schemaVersion": "historical-small-qc-measurement-summary-v001",
+    "status": "passed",
+    "startedAt": "2026-09-27T05:24:15.494Z",
+    "endedAt": "2026-09-27T05:28:01.115Z",
+    "elapsedSeconds": 225.62177383300002,
+    "readAndBindSeconds": 10.457837999999999,
+    "historicalCode": {
+      "commit": "d65eba0a507218a5e2b3f6c606ec218cbe361344",
+      "repositoryPath": "evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "original": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/legacy-small-v001/historical-native-source.mjs",
+        "bytes": 67535,
+        "fileSha256": "2676baf00537d93b86a3f15683d7a6059151ee15c97125cc000c59b5bcc8086e"
+      },
+      "adapter": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/legacy-small-v001/historical-native-import-adapter.mjs",
+        "bytes": 67883,
+        "fileSha256": "d1952e882d07c83db22e7aa69eae85a57b13a4dd20f9dd8438728e60fc104b0c"
+      },
+      "importedFiles": [
+        {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_render_scope_v001.mjs",
+          "fileSha256": "3d4a6a2e06c659b7502f0d65a87cfb195d8a9599818893a3c32332da803e81e3"
+        },
+        {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_caption_contract_v002.mjs",
+          "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c"
+        },
+        {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_frame_qc_preparation_v001.mjs",
+          "fileSha256": "740effe22c1278945562aedafa52df2aaf9d2ab7fe8277a05acd32be8818f939"
+        },
+        {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_v001.mjs",
+          "fileSha256": "1e1a4e5357466a502087c1e2f5a10110e5d30bf6e3dd68af8ff32896695612e2"
+        },
+        {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_pulse_v001.mjs",
+          "fileSha256": "b4a437f64d26c1c8ee64bbedab7956c2fc5d1cfd1c1fa946e060e90789c12e05"
+        },
+        {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_caption_motion_v001.mjs",
+          "fileSha256": "97306f1ec65af6622d275090736618389676d65aff2e763a3b9316f32056f325"
+        }
+      ],
+      "transformation": "Only relative static-import specifiers changed to absolute file URLs. All function bodies and existing exports are untouched."
+    },
+    "source": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-evidence-common-20260927-v001/measurement-v003/shared-qc.json",
+      "fileSha256": "89a37d22c3d6ad66a8a12dda2dcdebaac86ee51a3bf3b3c2316417d3267e5d29"
+    },
+    "phasesSeconds": {
+      "completedRgbCrop": 0.3777182500000271,
+      "completedRgbWrite": 0.002528167000011308,
+      "referenceComposition": 100.844044749,
+      "referenceReadAndBind": 4.4501092080000015,
+      "rgbComparison": 14.641845958000019,
+      "baselineByteComparison": 12.324276664999983,
+      "generatedOutputFinalVerification": 8.997984250000009,
+      "evidenceSave": 0.08928579199998057
+    },
+    "preparationVerificationBefore": {
+      "elapsedSeconds": 36.275586290999996,
+      "verifiedFileCount": 4024,
+      "verifiedBytes": 34958119247
+    },
+    "preparationVerificationAfter": {
+      "elapsedSeconds": 35.63413495799998,
+      "verifiedFileCount": 4024,
+      "verifiedBytes": 34958119247
+    },
+    "samples": [
+      {
+        "sampleIndex": 0,
+        "description": "Normal",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000001",
+        "frame": 31,
+        "logicalCandidates": 757,
+        "physicalReferencesGenerated": 744,
+        "classCount": 740,
+        "visible": true,
+        "elapsedSeconds": 19.40670516599999
+      },
+      {
+        "sampleIndex": 1,
+        "description": "partial yellow Color",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000002",
+        "frame": 107,
+        "logicalCandidates": 758,
+        "physicalReferencesGenerated": 746,
+        "classCount": 746,
+        "visible": true,
+        "elapsedSeconds": 18.995741416000005
+      },
+      {
+        "sampleIndex": 18,
+        "description": "Bounce moving state",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000019",
+        "frame": 1149,
+        "logicalCandidates": 752,
+        "physicalReferencesGenerated": 739,
+        "classCount": 739,
+        "visible": true,
+        "elapsedSeconds": 18.369582958
+      },
+      {
+        "sampleIndex": 54,
+        "description": "Panel plain/dark",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000046",
+        "frame": 2991,
+        "logicalCandidates": 758,
+        "physicalReferencesGenerated": 746,
+        "classCount": 746,
+        "visible": true,
+        "elapsedSeconds": 18.832206291999988
+      },
+      {
+        "sampleIndex": 118,
+        "description": "Shake moving state",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000092",
+        "frame": 7453,
+        "logicalCandidates": 751,
+        "physicalReferencesGenerated": 738,
+        "classCount": 738,
+        "visible": true,
+        "elapsedSeconds": 19.109816791999997
+      },
+      {
+        "sampleIndex": 163,
+        "description": "same PNG as subtitle 000103, other background/time",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000102",
+        "frame": 7718,
+        "logicalCandidates": 757,
+        "physicalReferencesGenerated": 745,
+        "classCount": 741,
+        "visible": true,
+        "elapsedSeconds": 19.800497875
+      },
+      {
+        "sampleIndex": 164,
+        "description": "original native failure",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+        "frame": 7801,
+        "logicalCandidates": 757,
+        "physicalReferencesGenerated": 745,
+        "classCount": 741,
+        "visible": false,
+        "elapsedSeconds": 19.175634707999997
+      }
+    ],
+    "sampleCount": 7,
+    "counts": {
+      "exactDistanceCalculations": 5191,
+      "reusedExactDistances": 0
+    },
+    "comparisonRgbPeakAndFinal": {
+      "files": 5203,
+      "logicalBytes": 7730763084,
+      "allocatedBytes": 12275417088
+    },
+    "comparisonPeakMeaning": "all newly generated reference RGB files retained; final size equals logical peak, final allocated blocks are measured separately",
+    "nodeParentPeakResidentSetBytes": 1662517248,
+    "childProcessCount": 14,
+    "maximumTimedChildResidentSetBytes": 12862930944,
+    "childBlockInputOperations": 0,
+    "childBlockOutputOperations": 0,
+    "childResourcesMeaning": "sequential /usr/bin/time -l tool calls; OS counters are not I/O byte estimates; not combined simultaneous parent+child peak",
+    "baselineMeaning": "actual pre-change reference builder and classifier; saved frame/layer preparation reused, no whole QC preparation or whole video rerun",
+    "equality": {
+      "allReferenceBytes": true,
+      "allCandidates": true,
+      "classesAndDistances": true,
+      "verdicts": true
+    },
+    "video": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-rendered-v002.mp4",
+      "bytes": 671459095,
+      "fileSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+    },
+    "actions": {
+      "videoEncodes": 0,
+      "subtitleRenders": 0,
+      "sttRuns": 0,
+      "paidApiCalls": 0
+    }
+  },
+  "new": {
+    "schemaVersion": "qc-streaming-measurement-summary-v001",
+    "status": "passed",
+    "stage": "small",
+    "variant": "stream32",
+    "startedAt": "2026-09-27T05:28:22.319Z",
+    "completedAt": "2026-09-27T05:30:53.833Z",
+    "elapsedSeconds": 151.514134916,
+    "readAndBindSeconds": 10.927267583,
+    "evidenceWriteSeconds": 0.1288996669999906,
+    "preparationVerificationBefore": null,
+    "preparationVerificationAfter": null,
+    "protectedEvidenceVerification": null,
+    "finiteReceipt": null,
+    "source": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-evidence-common-20260927-v001/measurement-v003/shared-qc.json",
+      "fileSha256": "89a37d22c3d6ad66a8a12dda2dcdebaac86ee51a3bf3b3c2316417d3267e5d29"
+    },
+    "preparation": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/native-qc-preparation/preparation.json",
+      "bytes": 12076185,
+      "fileSha256": "d1222db572c30b60c235f9a3f5f72dc2d8d7f3edfc204d49575238a0f8fa074f"
+    },
+    "plan": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/native-qc-preparation/plan.json",
+      "bytes": 2040014,
+      "fileSha256": "326ddc674da49508c71639df33e5284549f26a140744b1ac874ccf824a0ecf0b"
+    },
+    "video": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-rendered-v002.mp4",
+      "bytes": 671459095,
+      "fileSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+    },
+    "environment": {
+      "node": "v20.19.6",
+      "platform": "darwin",
+      "arch": "arm64",
+      "cpu": "Apple M3 Max",
+      "totalMemoryBytes": 38654705664,
+      "cacheControl": "OS cache and external process contention not controlled"
+    },
+    "nodeParentPeakResidentSetBytes": 1669496832,
+    "parentMemoryScope": "Node measurement parent, includes one full saved shared evidence read; excludes external tools",
+    "childProcessCount": 175,
+    "maximumTimedChildResidentSetBytes": 619380736,
+    "childBlockInputOperations": 0,
+    "childBlockOutputOperations": 0,
+    "childResourcesMeaning": "sequential /usr/bin/time -l tool calls; OS counters are not I/O byte estimates; not combined simultaneous parent+child peak",
+    "samples": [
+      {
+        "sampleIndex": 0,
+        "description": "Normal",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000001",
+        "frame": 31,
+        "expectedState": "static",
+        "logicalCandidates": 757,
+        "classCount": 740,
+        "visible": true,
+        "elapsedSeconds": 22.475503750000005,
+        "metrics": {
+          "logicalReferenceCount": 757,
+          "referenceRgbOutputs": 744,
+          "reusedReferenceRgbCount": 13,
+          "exactDistanceCalculations": 740,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1105456032,
+          "retainedReferenceBytes": 0,
+          "generatedReferenceBytes": 1105456032,
+          "referenceReadBytes": 3337169688,
+          "baselineReadBytes": 1124771796,
+          "inputVerificationBytes": 3138019451,
+          "rgbReadBytes": 1150030872,
+          "phasesMilliseconds": {
+            "inputVerification": 2650.0005840000013,
+            "completedRgbCrop": 150.2395830000005,
+            "evidenceWrite": 38.57612499999959,
+            "referenceComposition": 14140.950459000018,
+            "referenceVerification": 619.165122999988,
+            "rgbComparison": 2110.529541,
+            "baselineComparison": 1501.2937089999978,
+            "checkpointRead": 88.32591700000194,
+            "cleanup": 724.5241669999959
+          },
+          "wallClockMs": 22471.923458,
+          "batchSize": 32,
+          "checkpointBytes": 5261448
+        },
+        "retainedDirectory": {
+          "files": 2,
+          "logicalBytes": 6747276,
+          "allocatedBytes": 6750208
+        },
+        "peakReferenceStorage": {
+          "files": 744,
+          "logicalBytes": 1105456032,
+          "allocatedBytes": 1106214912
+        },
+        "retainedReferenceStorage": {
+          "files": 0,
+          "logicalBytes": 0,
+          "allocatedBytes": 0
+        }
+      },
+      {
+        "sampleIndex": 1,
+        "description": "partial yellow Color",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000002",
+        "frame": 107,
+        "expectedState": "static",
+        "logicalCandidates": 758,
+        "classCount": 746,
+        "visible": true,
+        "elapsedSeconds": 18.730384583,
+        "metrics": {
+          "logicalReferenceCount": 758,
+          "referenceRgbOutputs": 746,
+          "reusedReferenceRgbCount": 12,
+          "exactDistanceCalculations": 746,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1108427688,
+          "retainedReferenceBytes": 0,
+          "generatedReferenceBytes": 1108427688,
+          "referenceReadBytes": 3344598828,
+          "baselineReadBytes": 1126257624,
+          "inputVerificationBytes": 3155123906,
+          "rgbReadBytes": 1144087560,
+          "phasesMilliseconds": {
+            "inputVerification": 2589.1435839999976,
+            "completedRgbCrop": 42.590041999996174,
+            "evidenceWrite": 37.66591700000572,
+            "referenceComposition": 10453.138207000018,
+            "referenceVerification": 659.3895029999912,
+            "rgbComparison": 2159.460291000003,
+            "baselineComparison": 1550.807541999995,
+            "checkpointRead": 89.0439170000027,
+            "cleanup": 728.2128750000047
+          },
+          "wallClockMs": 18727.903832999997,
+          "batchSize": 32,
+          "checkpointBytes": 5270349
+        },
+        "retainedDirectory": {
+          "files": 2,
+          "logicalBytes": 6756177,
+          "allocatedBytes": 6758400
+        },
+        "peakReferenceStorage": {
+          "files": 746,
+          "logicalBytes": 1108427688,
+          "allocatedBytes": 1109188608
+        },
+        "retainedReferenceStorage": {
+          "files": 0,
+          "logicalBytes": 0,
+          "allocatedBytes": 0
+        }
+      },
+      {
+        "sampleIndex": 18,
+        "description": "Bounce moving state",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000019",
+        "frame": 1149,
+        "expectedState": "small",
+        "logicalCandidates": 752,
+        "classCount": 739,
+        "visible": true,
+        "elapsedSeconds": 22.794373042000007,
+        "metrics": {
+          "logicalReferenceCount": 752,
+          "referenceRgbOutputs": 739,
+          "reusedReferenceRgbCount": 13,
+          "exactDistanceCalculations": 739,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1098026892,
+          "retainedReferenceBytes": 0,
+          "generatedReferenceBytes": 1098026892,
+          "referenceReadBytes": 3314882268,
+          "baselineReadBytes": 1117342656,
+          "inputVerificationBytes": 3138126215,
+          "rgbReadBytes": 1136658420,
+          "phasesMilliseconds": {
+            "inputVerification": 2596.3486660000053,
+            "completedRgbCrop": 43.77008400000341,
+            "evidenceWrite": 36.24295799998799,
+            "referenceComposition": 14362.60412600002,
+            "referenceVerification": 645.2373300000181,
+            "rgbComparison": 2246.919167,
+            "baselineComparison": 1617.7527910000063,
+            "checkpointRead": 97.29358300000604,
+            "cleanup": 726.8239580000081
+          },
+          "wallClockMs": 22792.242542,
+          "batchSize": 32,
+          "checkpointBytes": 5258408
+        },
+        "retainedDirectory": {
+          "files": 2,
+          "logicalBytes": 6744236,
+          "allocatedBytes": 6746112
+        },
+        "peakReferenceStorage": {
+          "files": 739,
+          "logicalBytes": 1098026892,
+          "allocatedBytes": 1098780672
+        },
+        "retainedReferenceStorage": {
+          "files": 0,
+          "logicalBytes": 0,
+          "allocatedBytes": 0
+        }
+      },
+      {
+        "sampleIndex": 54,
+        "description": "Panel plain/dark",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000046",
+        "frame": 2991,
+        "expectedState": "static",
+        "logicalCandidates": 758,
+        "classCount": 746,
+        "visible": true,
+        "elapsedSeconds": 18.789905500000007,
+        "metrics": {
+          "logicalReferenceCount": 758,
+          "referenceRgbOutputs": 746,
+          "reusedReferenceRgbCount": 12,
+          "exactDistanceCalculations": 746,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1108427688,
+          "retainedReferenceBytes": 0,
+          "generatedReferenceBytes": 1108427688,
+          "referenceReadBytes": 3344598828,
+          "baselineReadBytes": 1126257624,
+          "inputVerificationBytes": 3154752750,
+          "rgbReadBytes": 1144087560,
+          "phasesMilliseconds": {
+            "inputVerification": 2591.97304099999,
+            "completedRgbCrop": 42.983124999998836,
+            "evidenceWrite": 37.409250000011525,
+            "referenceComposition": 10509.575373,
+            "referenceVerification": 685.251711000019,
+            "rgbComparison": 2135.1039579999924,
+            "baselineComparison": 1544.6196670000063,
+            "checkpointRead": 88.17470800000592,
+            "cleanup": 733.4184580000001
+          },
+          "wallClockMs": 18787.848542000007,
+          "batchSize": 32,
+          "checkpointBytes": 5270385
+        },
+        "retainedDirectory": {
+          "files": 2,
+          "logicalBytes": 6756213,
+          "allocatedBytes": 6758400
+        },
+        "peakReferenceStorage": {
+          "files": 746,
+          "logicalBytes": 1108427688,
+          "allocatedBytes": 1109188608
+        },
+        "retainedReferenceStorage": {
+          "files": 0,
+          "logicalBytes": 0,
+          "allocatedBytes": 0
+        }
+      },
+      {
+        "sampleIndex": 118,
+        "description": "Shake moving state",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000092",
+        "frame": 7453,
+        "expectedState": "left-12",
+        "logicalCandidates": 751,
+        "classCount": 738,
+        "visible": true,
+        "elapsedSeconds": 20.13561858400001,
+        "metrics": {
+          "logicalReferenceCount": 751,
+          "referenceRgbOutputs": 738,
+          "reusedReferenceRgbCount": 13,
+          "exactDistanceCalculations": 738,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1096541064,
+          "retainedReferenceBytes": 0,
+          "generatedReferenceBytes": 1096541064,
+          "referenceReadBytes": 3310424784,
+          "baselineReadBytes": 1115856828,
+          "inputVerificationBytes": 3143545671,
+          "rgbReadBytes": 1135172592,
+          "phasesMilliseconds": {
+            "inputVerification": 2612.1271249999845,
+            "completedRgbCrop": 49.29299999999057,
+            "evidenceWrite": 35.94100000002072,
+            "referenceComposition": 10894.528125999976,
+            "referenceVerification": 671.6898739999597,
+            "rgbComparison": 2261.5759169999947,
+            "baselineComparison": 2387.376166999995,
+            "checkpointRead": 84.86870799999451,
+            "cleanup": 726.0401249999995
+          },
+          "wallClockMs": 20133.933917000002,
+          "batchSize": 32,
+          "checkpointBytes": 5247983
+        },
+        "retainedDirectory": {
+          "files": 2,
+          "logicalBytes": 6733811,
+          "allocatedBytes": 6737920
+        },
+        "peakReferenceStorage": {
+          "files": 738,
+          "logicalBytes": 1096541064,
+          "allocatedBytes": 1097293824
+        },
+        "retainedReferenceStorage": {
+          "files": 0,
+          "logicalBytes": 0,
+          "allocatedBytes": 0
+        }
+      },
+      {
+        "sampleIndex": 163,
+        "description": "same PNG as subtitle 000103, other background/time",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000102",
+        "frame": 7718,
+        "expectedState": "static",
+        "logicalCandidates": 757,
+        "classCount": 741,
+        "visible": true,
+        "elapsedSeconds": 19.243988415999993,
+        "metrics": {
+          "logicalReferenceCount": 757,
+          "referenceRgbOutputs": 745,
+          "reusedReferenceRgbCount": 12,
+          "exactDistanceCalculations": 741,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1106941860,
+          "retainedReferenceBytes": 0,
+          "generatedReferenceBytes": 1106941860,
+          "referenceReadBytes": 3340141344,
+          "baselineReadBytes": 1124771796,
+          "inputVerificationBytes": 3140064629,
+          "rgbReadBytes": 1148545044,
+          "phasesMilliseconds": {
+            "inputVerification": 2584.840624999997,
+            "completedRgbCrop": 46.953708000000915,
+            "evidenceWrite": 39.29250000001048,
+            "referenceComposition": 10653.731291999924,
+            "referenceVerification": 656.139915000007,
+            "rgbComparison": 2231.194292,
+            "baselineComparison": 1782.393584000005,
+            "checkpointRead": 85.88116600000649,
+            "cleanup": 734.392583000008
+          },
+          "wallClockMs": 19242.248749999984,
+          "batchSize": 32,
+          "checkpointBytes": 5268169
+        },
+        "retainedDirectory": {
+          "files": 2,
+          "logicalBytes": 6753997,
+          "allocatedBytes": 6758400
+        },
+        "peakReferenceStorage": {
+          "files": 745,
+          "logicalBytes": 1106941860,
+          "allocatedBytes": 1107701760
+        },
+        "retainedReferenceStorage": {
+          "files": 0,
+          "logicalBytes": 0,
+          "allocatedBytes": 0
+        }
+      },
+      {
+        "sampleIndex": 164,
+        "description": "original native failure",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+        "frame": 7801,
+        "expectedState": "static",
+        "logicalCandidates": 757,
+        "classCount": 741,
+        "visible": false,
+        "elapsedSeconds": 17.883092167000026,
+        "metrics": {
+          "logicalReferenceCount": 757,
+          "referenceRgbOutputs": 745,
+          "reusedReferenceRgbCount": 12,
+          "exactDistanceCalculations": 741,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1106941860,
+          "retainedReferenceBytes": 1106941860,
+          "generatedReferenceBytes": 1106941860,
+          "referenceReadBytes": 3340141344,
+          "baselineReadBytes": 1124771796,
+          "inputVerificationBytes": 3136858487,
+          "rgbReadBytes": 1148545044,
+          "phasesMilliseconds": {
+            "inputVerification": 2545.4464580000204,
+            "completedRgbCrop": 41.56837500000256,
+            "evidenceWrite": 37.97191599998041,
+            "referenceComposition": 10312.347332999867,
+            "referenceVerification": 659.363960000017,
+            "rgbComparison": 2202.6664159999928,
+            "baselineComparison": 1543.6024170000164,
+            "checkpointRead": 89.64670800001477
+          },
+          "wallClockMs": 17863.913499999995,
+          "batchSize": 32,
+          "checkpointBytes": 5268542
+        },
+        "retainedDirectory": {
+          "files": 747,
+          "logicalBytes": 1113696230,
+          "allocatedBytes": 1114460160
+        },
+        "peakReferenceStorage": {
+          "files": 745,
+          "logicalBytes": 1106941860,
+          "allocatedBytes": 1107701760
+        },
+        "retainedReferenceStorage": {
+          "files": 745,
+          "logicalBytes": 1106941860,
+          "allocatedBytes": 1107701760
+        }
+      }
+    ],
+    "sampleCount": 7,
+    "logicalCandidateCount": 5290,
+    "unchangedOutcomes": true,
+    "originalNativeFailurePreserved": [
+      "new-material-digest-20260926-v001-instruction-instruction-000103"
+    ],
+    "cumulativeNewReferencePeakLogicalBytes": 1108427688,
+    "finalNewReferenceLogicalBytes": 1106941860,
+    "cumulativeNewReferencePeakAllocatedBytes": 1109188608,
+    "finalNewReferenceAllocatedBytes": 1107701760,
+    "cumulativePeakMeaning": "sum of prior retained comparison RGB bytes plus current module-reported comparison RGB peak; completed RGB, proof JSON and retained prepared inputs are excluded and reported separately",
+    "finalDirectory": {
+      "files": 1643,
+      "logicalBytes": 1180035667,
+      "allocatedBytes": 1182941184
+    },
+    "bundle": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/samples.qc.json",
+      "schemaVersion": "presentation-qc-evidence-store-v001",
+      "fileSha256": "90f3635d7a90b6233dc9944de17171b10ef25842410b97ae89a6ebe064ab22af",
+      "rootSha256": "89bb5c9fda9f6679516584789847e8a7ea955d1dc150f8f907ab6af5d28d30a3",
+      "bytes": 17080758,
+      "nodeCount": 29281,
+      "reusedObjectCount": 5639,
+      "deduplicatedNodeCount": 4423
+    },
+    "historicalInputsReused": "saved base/completed PNGs and decoded native layers, excluded from newly generated comparison holding",
+    "actions": {
+      "videoEncodes": 0,
+      "subtitleRenders": 0,
+      "sttRuns": 0,
+      "paidApiCalls": 0
+    }
+  },
+  "newPhasesSeconds": {
+    "inputVerification": 18.169880082999995,
+    "completedRgbCrop": 0.41739791699999296,
+    "evidenceWrite": 0.26309966600001644,
+    "referenceComposition": 81.32687491599982,
+    "referenceVerification": 4.596237416,
+    "rgbComparison": 15.347449581999983,
+    "baselineComparison": 11.92784587700002,
+    "checkpointRead": 0.6232347070000323,
+    "cleanup": 4.3734121660000165
+  },
+  "sameStepSeconds": {
+    "old": 120.31371816500005,
+    "new": 101.68795983099979,
+    "reduction": 18.625758334000267,
+    "reductionPercent": 15.48099303892896,
+    "includes": [
+      "completed frame crop",
+      "reference composition",
+      "reference RGB read and hash",
+      "RGB distance and byte-equivalence classification"
+    ],
+    "excludes": [
+      "global or per-point input verification",
+      "old/new byte comparison",
+      "proof serialization and reread",
+      "cleanup"
+    ]
+  },
+  "limits": [
+    "Whole elapsed boundaries differ; do not calculate a whole-QC speedup from their raw totals.",
+    "Parent RSS did not improve. Child RSS is separate from parent and not a simultaneous total.",
+    "Old allocated reference size is final stat measurement, not historical sampling of every write. New allocated peak is at completed batch boundaries.",
+    "Full 424-point measurement and storage-policy adoption remain pending advisor audit."
+  ]
+}
