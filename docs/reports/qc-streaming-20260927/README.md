@@ -1,7 +1,7 @@
 # 14.8.2 全比較QCの省メモリ化
 
 担当: Codex2。着工基準: main `d65eba0a507218a5e2b3f6c606ec218cbe361344`。
-状態: 小型実証を監査し、相談役が§5の保管方式採用と§6B/C続行を許可済み。公開後の入力参照を補強し、実移動試験・独立レビュー済み。最終コードの小型確認完了、全424点は未実行。
+状態: 保管方式は相談役監査済み。小型と全424点の新旧一致、整理後の独立再生成、公開後の編集経路、最終QCの保存・別process再読まで技術検証を完了した。
 
 ## 目的と処理単位
 
@@ -141,9 +141,122 @@ renderer対象試験は2合格・既知1不合格・17対象外。旧fixtureを�
 今回の全424点では保存済み全編再現結果を利用し、元入力本文をSHA照合して参照する派生証拠として区別する。
 全編再描画で埋め合わせない。
 
+## 全424点の実測
+
+実装固定commit `28e85752ccb8d95748a56a36ee0066ff9e26b962` で、2026-09-27 15:03:18〜17:30:50 JSTに一度実行した。
+詳細は [full-measurement.json](full-measurement.json)。保存初稿326字幕・424点・全320,439論理候補で、
+順序・recipe・RGB実byte・距離・クラス・判定が旧実測と一致した。物理RGB生成314,994件、同一合成の共有5,445件。
+423正常点の新規比較RGBを整理し、000103の不合格1点の745実画像を保持した。
+000103は7801f・757候補・741クラス、expected 1,345,125、同じPNGの別字幕を二重追加した候補1,344,947のまま。
+codec診断による別判定へ置き換えていない。
+
+| 保存初稿全件の範囲 | 結果 |
+|---|---:|
+| 比較RGBのピーク論理保持量 | 2,215,369,548 bytes（2.215GB） |
+| 比較RGBの終了時論理量 | 1,106,941,860 bytes（1.107GB） |
+| 比較RGBのバッチ終了時ピーク割当て量 | 2,216,890,368 bytes |
+| 比較RGBの終了時割当て量 | 1,107,701,760 bytes |
+| 完成側の切出しRGB・424件の終了量 | 629,991,072 bytes |
+| 完成側RGBも含むピーク論理量（測定境界から算定） | 2,842,388,964 bytes |
+| 完成側RGBも含む終了時論理量 | 1,736,932,932 bytes |
+| 記録・ログ・2つの保存束を含む全件測定終了時のdirectory量 | 6,222,361,173 bytes論理 / 6,359,023,616 bytes割当て |
+| Node親最大常駐メモリ | 2,263,990,272 bytes（2.264GB） |
+| 子tool最大常駐メモリ | 625,410,048 bytes（0.625GB） |
+| 全件経過時間 | 8,851.853秒（147分31.9秒） |
+
+旧比較RGBの全保持量468.027GBは現物の容量を合算した値で、旧方式の保持ピークとしては構造からの算定値。
+新方式の2.215GBは生成完了の各境界で実測した保持量である。過去の約232GB観測と混ぜない。
+親RSSには旧共有証拠の読込み・新しい全件証拠の組立/保存も含む。子は順次実行したtoolの最大値で、
+親子を足して同時刻の全体ピークとはしない。全件と小型の親RSSも同条件比較ではない。
+
+### 工程別時間とI/O
+
+| 工程 | 秒 |
+|---|---:|
+| 完成側RGBの切出し | 26.915 |
+| 比較RGB合成（32件ずつ） | 4,816.138 |
+| 生成RGBの読込み・SHA照合 | 282.195 |
+| RGB絶対差・実byteによる等価クラス計算 | 909.478 |
+| 各点の入力/生成物の再照合 | 1,233.852 |
+| 各点の証拠書込み / 再読 | 16.134 / 37.371 |
+| 正常比較画像の照合・整理 | 315.278 |
+| 旧RGBとの実byte照合という今回限りの追加負担 | 807.030 |
+| 共有準備入力の事前 / 事後照合 | 36.755 / 37.193 |
+| 全件証拠の組立と実行列の検証 | 122.686 |
+| 最終QC用証拠束 / 測定用証拠束の保存 | 7.827 / 7.830 |
+
+全件時間は入力読込みから全件保存・保護MP4再照合までで、最後のdirectory集計と測定JSON自身の保存は含めない。
+工程外の組立・計測記録等を含むため、上表の単純合計を全経過と同じとはしない。
+全件の旧方式を時間比較のために再実行していない。旧約148分との高速化率や全制作時間短縮を主張しない。
+小型の同条件共通工程は120.314→100.542秒（16.43%短縮）である。
+
+実生成した比較RGBの累積書出し容量は468,026,905,032 bytesで、旧側と同数・同byte量。
+保持し続ける量を減らしたもので、同量を生成した事実を省略しない。
+アプリケーション側で数えた読込みは、比較RGB・完成側RGBの読込/照合1,412,801,039,628 bytes、距離/等価クラス485,403,663,492 bytes、
+旧画像476,117,238,492 bytes、入力照合1,332,912,705,084 bytes。各計数の範囲を混同せず、物理disk I/Oとは扱わない。
+子toolのOS block入出力counterはともに0だった。cacheを含む実I/Oが0だったという意味ではなく、
+子toolの入力byte量、整理前のstream hash再読など未計数の範囲を推測で補わない。
+
+初稿MP4、旧巨大JSON、共有JSON、保存計画、字幕PNG、背景/完成フレームと準備済み描画層はSHA照合済みで不変。
+全編再描画・字幕PNG生成・STT・AI/APIは0。全編再現検査は省略する契約へ変更せず、保存済みの実行結果を使う。
+
+## 全件保存後の独立再検証
+
+[revalidation.json](revalidation.json) の全件記録では、別Node processで424点の保存記録と保持入力4,051fileを照合し、
+423点が意図した正常整理済み、000103の比較画像は保持済みであることを確認した。
+全件の共有証拠を再読し、保存済み準備・実行列・保持出力・326字幕の判定も検証した。
+代表7点の5,290論理候補を再生成し、保存されたhash・距離・クラス・判定に一致した。
+全424点をもう一度合成した結果とは報告しない。小型では再生成画像と旧画像の実byte一致も別processで確認済み。
+
+- 再読から代表7点再生成まで: 670.386秒（11分10.4秒）。
+- 最初の保存束読込み: 10.786秒。全点の記録/保持入力照合: 181.398秒。
+- 全件証拠の検証: 243.349秒（うち共通準備入力照合43.247秒）。
+- 代表7点の再生成・各点検証の実行時間合計: 164.112秒。表外の照合・組立も全経過に含む。
+- 再生成確認directoryの追加量: 7,787,030,799 bytes論理 / 7,794,356,224 bytes割当て。
+- 親RSS最大3,075,162,112 bytes、子RSS最大619,692,032 bytes。全件読戻しの親RSSは本実行より大きい。
+
+全件測定directoryの容量表は最初の最終棚卸し時点であり、この独立再検証の診断画像や後から保存した測定JSONを含まない。
+再生成確認は診断用に画像を保持した実証で、通常QCの終了残量1.107GBとは区別する。
+各測定JSONの `passed` は新旧一致・証拠検証の成功を示す。動画の元nativeは423/424合格であり、全件合格ではない。
+
+保存済み初稿の全編再現結果・背景/音声・媒体検査へ、今回の全424点結果を接続して最終QCを保存した。
+326字幕の検査、全編再現との統合、rendererの最終判定は、000103に由来する不合格1件のみで一致した。
+元の全編再現証拠・媒体はSHAで結び付け、旧toolの別名pathを実体へ対応させる派生viewと、元入力本文を束縛するv002証拠を明示した。
+元のproof・過去の保存物・実行引数は書き換えていない。動画encode・字幕PNG再生成・媒体probeは0。
+
+最終QCの読込み・検証・組立・保存には758.427秒（12分38.4秒）、親Node RSS最大5,406,359,552 bytesを要した。
+これは全件QC実行8,851.853秒/親2.264GBとは別の追加検証であり、今回計測した親メモリがすべて2.264GB以下という意味ではない。
+最終QCの保存束は866,513,597 bytes。画像本体の保持量とは分けて記録する。
+
+さらに別processで全件・元入力から最終QCを再構成し、保存束を読み直して全内容一致を確認した。
+所要794.517秒（13分14.5秒）、親RSS最大4,955,455,488 bytes。native・統合・最終QCはいずれも000103だけが不合格のまま。
+これら2回の最終検証は本実行時間に含めず、動画本体・比較画像の生成も行っていない。
+最終検証中のGit履歴読出し子processのRSS、実物理disk I/O、親子同時刻の合算ピークは未計測。
+
+## 指示書の完了条件確認
+
+1. **小単位化**: 一検査点・32物理候補バッチで生成し、各点の比較・保存・再読後に正常RGBを整理した。全件生成後だけの削除ではない。
+2. **監査と独立再検証**: 相談役の採用判断後に通常経路へ接続。正常点の再生成成功、不合格点の実画像保持、公開後の明示参照対応を確認。
+3. **新旧同一性**: 小型7点/バッチ境界と全424点・320,439論理候補でRGB実byte・距離・クラス・判定が一致。
+4. **保護対象**: 000103の757候補/741クラス・両距離・元不合格と別codec診断を区別。初稿MP4・旧証拠・保存入力のSHA不変。
+5. **異常系と通常接続**: 関連153試験合格。欠損/改ざん/途中保存/取消/子process失敗、不正な公開先、実移動後の別process再読・編集job登録を確認。保存初稿の最終QCも組立/保存/別process再構成が一致。
+6. **測定**: ピーク/終了量、親/子メモリ、各工程時間、I/Oの観測範囲、独立再検証の追加時間/容量を分離して記録。既知renderer試験1不合格と未計測範囲を明記。
+7. **Git・報告**: 実装はmainの監査checkpoint `5f909dd5` と公開接続修正 `28e85752` へcommit/push済み。この全件結果を追加commit/pushし、Git clean/untracked 0を再確認したうえで、指示元会話へ直接完了報告する。最終SHAと送信確認はその完了報告に記す。
+
+未完了の限定実装・検証はない。全制作時間の改善、人間による作品採用、未計測の物理I/Oは今回の実証範囲外。
+独立renderer CLIの既存不整合と既知fixture不合格は変更せず、14.8.3・14.9.1等へ続行しない。
+
+### 変更範囲
+
+- native比較の小単位実行・保管/再生成: `presentation_native_qc_streaming_v001.mjs`、`presentation_native_frame_qc_v001.mjs`、`render_presentation_v002.mjs`。
+- 通常最終QC・共通保存との接続: `presentation_integrity_state_qc_v001.mjs`、`presentation_exact_replay_qc_v001.mjs`。
+- 公開後の参照・編集job再読: `presentation_orchestration_edited_render_v001.mjs`、`presentation_editing_jobs_v001.mjs`。
+- 回帰試験4file、実測/再現driver `verify_qc_streaming_20260927.mts`、本reportと軽量JSON。すべて `evals/clip_composition/` または本report directory内。
+- 14.8.1の保存store実装・正式字幕契約・保存済み素材/PNG・媒体本体は変更していない。
+
 ## 再現入口
 
-`evals/clip_composition/verify_qc_streaming_20260927.mts` の `legacy-small` / `small` / `reread` / `full`。
+`evals/clip_composition/verify_qc_streaming_20260927.mts` の `legacy-small` / `small` / `reread` / `byte-check` / `full` / `final-qc` / `final-qc-reread`。
 実測ではNode v20.19.6とrunnerのtsx loader、macOSの `/usr/bin/time -l` を使う。
 新規directoryは排他的作成で、既存directoryや証拠を上書きしない。
 
@@ -152,6 +265,8 @@ NODE_PATH=./runner/node_modules node --max-old-space-size=12288 --import ./runne
 NODE_PATH=./runner/node_modules node --max-old-space-size=12288 --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/verify_qc_streaming_20260927.mts small <未使用の保存先> stream32
 NODE_PATH=./runner/node_modules node --max-old-space-size=12288 --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/verify_qc_streaming_20260927.mts reread <直前の保存先>
 NODE_PATH=./runner/node_modules node --max-old-space-size=12288 --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/verify_qc_streaming_20260927.mts byte-check <旧小型の保存先> <新小型の保存先>
+NODE_PATH=./runner/node_modules node --max-old-space-size=12288 --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/verify_qc_streaming_20260927.mts final-qc <全424点の保存先>
+NODE_PATH=./runner/node_modules node --max-old-space-size=12288 --import ./runner/node_modules/tsx/dist/loader.mjs evals/clip_composition/verify_qc_streaming_20260927.mts final-qc-reread <全424点の保存先>
 ```
 
 `full` は保管方式の相談役監査後に一度だけ実行する。全424点の再読は全receiptと保持入力を検証し、

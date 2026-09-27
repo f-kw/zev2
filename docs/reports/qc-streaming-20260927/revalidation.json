@@ -476,5 +476,426 @@
     "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/result.json",
     "fileSha256": "e6557d38c6ad10d2628af2ae98155689d19cace15a52431773488dd2844dac2c",
     "bytes": 2011175
+  },
+  "full424": {
+    "status": "passed",
+    "processId": 64687,
+    "readSeconds": 10.785949542,
+    "elapsedSeconds": 670.386154459,
+    "receiptCount": 424,
+    "receiptVerification": {
+      "status": "passed",
+      "samples": 424,
+      "verifiedFileCount": 4051,
+      "releasedSamples": 423,
+      "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+    },
+    "receiptVerificationSeconds": 181.398144417,
+    "fullFiniteVerification": {
+      "status": "passed",
+      "nativeStatus": "failed",
+      "violations": [
+        {
+          "code": "NATIVE_FRAME_QC_INVALID",
+          "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+          "reason": "native frame QC: expected class is absent, invisible, tied or not the unique nearest reference"
+        }
+      ],
+      "inspectionCount": 326,
+      "sampleCount": 424,
+      "elapsedSeconds": 243.349296417,
+      "retainedPreparationVerification": {
+        "elapsedSeconds": 43.246627999999994,
+        "verifiedFileCount": 4024,
+        "verifiedBytes": 34958119247
+      },
+      "meaning": "saved full native bundle independently read, all retained artifacts checked, historical preparation source and new process chain verified"
+    },
+    "independentRegenerationSampleCount": 7,
+    "independentRegenerationScope": "named representative cases only; all saved samples receive receipt verification; no full regeneration accumulation",
+    "nodeParentPeakResidentSetBytes": 3075162112,
+    "childProcessCount": 175,
+    "maximumTimedChildResidentSetBytes": 619692032,
+    "childBlockInputOperations": 0,
+    "childBlockOutputOperations": 0,
+    "childResourcesMeaning": "sequential /usr/bin/time -l tool calls; OS counters are not I/O byte estimates; not combined simultaneous parent+child peak",
+    "finalDirectory": {
+      "files": 6092,
+      "logicalBytes": 7787030799,
+      "allocatedBytes": 7794356224
+    },
+    "source": {
+      "path": "runtime/artifacts/qc-streaming-20260927-v001/full424-v001/independent-reread/result.json",
+      "fileSha256": "1c8e36dd59ef6ee45410394312d7d761c877810a07170a3f5695b1057f04eb8a",
+      "bytes": 1981480
+    },
+    "samplesReceipt": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/samples.qc.json",
+      "schemaVersion": "presentation-qc-evidence-store-v001",
+      "fileSha256": "b0a87d31811fd20b4f8a19d5cad0fb92016eebeaa84efa0a70e71650e1445686",
+      "rootSha256": "fb3c443a45134a66e296a15a07f19f1a1468134454d58a2c6910803ec3ef922b",
+      "bytes": 847821423,
+      "nodeCount": 1463163,
+      "reusedObjectCount": 320611,
+      "deduplicatedNodeCount": 313395
+    },
+    "regeneratedSamples": [
+      {
+        "sampleIndex": 0,
+        "description": "Normal",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000001",
+        "frame": 31,
+        "visible": true,
+        "metrics": {
+          "logicalReferenceCount": 757,
+          "referenceRgbOutputs": 744,
+          "reusedReferenceRgbCount": 13,
+          "exactDistanceCalculations": 740,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1105456032,
+          "retainedReferenceBytes": 1105456032,
+          "generatedReferenceBytes": 1105456032,
+          "referenceReadBytes": 2212397892,
+          "baselineReadBytes": 0,
+          "inputVerificationBytes": 3138026365,
+          "rgbReadBytes": 1150030872,
+          "phasesMilliseconds": {
+            "inputVerification": 5854.374374999956,
+            "completedRgbCrop": 161.08024999999907,
+            "evidenceWrite": 52.4246249999851,
+            "referenceComposition": 15147.486288000073,
+            "referenceVerification": 704.6026270000148,
+            "rgbComparison": 2218.01333300001,
+            "checkpointRead": 102.90649999998277
+          },
+          "wallClockMs": 24757.89387500001,
+          "batchSize": 32,
+          "checkpointBytes": 5281665
+        }
+      },
+      {
+        "sampleIndex": 1,
+        "description": "partial yellow Color",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000002",
+        "frame": 107,
+        "visible": true,
+        "metrics": {
+          "logicalReferenceCount": 758,
+          "referenceRgbOutputs": 746,
+          "reusedReferenceRgbCount": 12,
+          "exactDistanceCalculations": 746,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1108427688,
+          "retainedReferenceBytes": 1108427688,
+          "generatedReferenceBytes": 1108427688,
+          "referenceReadBytes": 2218341204,
+          "baselineReadBytes": 0,
+          "inputVerificationBytes": 3155130820,
+          "rgbReadBytes": 1144087560,
+          "phasesMilliseconds": {
+            "inputVerification": 5626.797124999983,
+            "completedRgbCrop": 55.52933300001314,
+            "evidenceWrite": 45.441290999995545,
+            "referenceComposition": 14623.071291000117,
+            "referenceVerification": 707.6336259998498,
+            "rgbComparison": 2213.97104199999,
+            "checkpointRead": 100.04812499997206
+          },
+          "wallClockMs": 23880.585416999995,
+          "batchSize": 32,
+          "checkpointBytes": 5290591
+        }
+      },
+      {
+        "sampleIndex": 18,
+        "description": "Bounce moving state",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000019",
+        "frame": 1149,
+        "visible": true,
+        "metrics": {
+          "logicalReferenceCount": 752,
+          "referenceRgbOutputs": 739,
+          "reusedReferenceRgbCount": 13,
+          "exactDistanceCalculations": 739,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1098026892,
+          "retainedReferenceBytes": 1098026892,
+          "generatedReferenceBytes": 1098026892,
+          "referenceReadBytes": 2197539612,
+          "baselineReadBytes": 0,
+          "inputVerificationBytes": 3138133129,
+          "rgbReadBytes": 1136658420,
+          "phasesMilliseconds": {
+            "inputVerification": 5599.860832999926,
+            "completedRgbCrop": 53.2601250000298,
+            "evidenceWrite": 44.8992080000462,
+            "referenceComposition": 15215.265081999707,
+            "referenceVerification": 709.9185430002399,
+            "rgbComparison": 2264.849042000016,
+            "checkpointRead": 96.88337499997579
+          },
+          "wallClockMs": 24473.822749999992,
+          "batchSize": 32,
+          "checkpointBytes": 5280723
+        }
+      },
+      {
+        "sampleIndex": 54,
+        "description": "Panel plain/dark",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000046",
+        "frame": 2991,
+        "visible": true,
+        "metrics": {
+          "logicalReferenceCount": 758,
+          "referenceRgbOutputs": 746,
+          "reusedReferenceRgbCount": 12,
+          "exactDistanceCalculations": 746,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1108427688,
+          "retainedReferenceBytes": 1108427688,
+          "generatedReferenceBytes": 1108427688,
+          "referenceReadBytes": 2218341204,
+          "baselineReadBytes": 0,
+          "inputVerificationBytes": 3154759664,
+          "rgbReadBytes": 1144087560,
+          "phasesMilliseconds": {
+            "inputVerification": 5298.2993750000605,
+            "completedRgbCrop": 52.99062499997672,
+            "evidenceWrite": 55.77887499984354,
+            "referenceComposition": 14215.288417999865,
+            "referenceVerification": 715.800244999933,
+            "rgbComparison": 2193.5508750000736,
+            "checkpointRead": 108.02691600006074
+          },
+          "wallClockMs": 23190.93391699996,
+          "batchSize": 32,
+          "checkpointBytes": 5292881
+        }
+      },
+      {
+        "sampleIndex": 118,
+        "description": "Shake moving state",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000092",
+        "frame": 7453,
+        "visible": true,
+        "metrics": {
+          "logicalReferenceCount": 751,
+          "referenceRgbOutputs": 738,
+          "reusedReferenceRgbCount": 13,
+          "exactDistanceCalculations": 738,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1096541064,
+          "retainedReferenceBytes": 1096541064,
+          "generatedReferenceBytes": 1096541064,
+          "referenceReadBytes": 2194567956,
+          "baselineReadBytes": 0,
+          "inputVerificationBytes": 3143552585,
+          "rgbReadBytes": 1135172592,
+          "phasesMilliseconds": {
+            "inputVerification": 5234.796916999971,
+            "completedRgbCrop": 59.96783300000243,
+            "evidenceWrite": 50.62525000004098,
+            "referenceComposition": 14155.11712499999,
+            "referenceVerification": 691.1684570001671,
+            "rgbComparison": 2194.191499999957,
+            "checkpointRead": 105.34883299993817
+          },
+          "wallClockMs": 22989.103166999994,
+          "batchSize": 32,
+          "checkpointBytes": 5272471
+        }
+      },
+      {
+        "sampleIndex": 163,
+        "description": "same PNG as subtitle 000103, other background/time",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000102",
+        "frame": 7718,
+        "visible": true,
+        "metrics": {
+          "logicalReferenceCount": 757,
+          "referenceRgbOutputs": 745,
+          "reusedReferenceRgbCount": 12,
+          "exactDistanceCalculations": 741,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1106941860,
+          "retainedReferenceBytes": 1106941860,
+          "generatedReferenceBytes": 1106941860,
+          "referenceReadBytes": 2215369548,
+          "baselineReadBytes": 0,
+          "inputVerificationBytes": 3140071543,
+          "rgbReadBytes": 1148545044,
+          "phasesMilliseconds": {
+            "inputVerification": 5021.880582999904,
+            "completedRgbCrop": 55.19975000002887,
+            "evidenceWrite": 46.809416999924,
+            "referenceComposition": 13914.83787399996,
+            "referenceVerification": 703.3193709998159,
+            "rgbComparison": 2181.803791000042,
+            "checkpointRead": 102.76991700008512
+          },
+          "wallClockMs": 22558.469209000003,
+          "batchSize": 32,
+          "checkpointBytes": 5292880
+        }
+      },
+      {
+        "sampleIndex": 164,
+        "description": "original native failure",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+        "frame": 7801,
+        "visible": false,
+        "metrics": {
+          "logicalReferenceCount": 757,
+          "referenceRgbOutputs": 745,
+          "reusedReferenceRgbCount": 12,
+          "exactDistanceCalculations": 741,
+          "reusedExactDistances": 0,
+          "peakReferenceBytes": 1106941860,
+          "retainedReferenceBytes": 1106941860,
+          "generatedReferenceBytes": 1106941860,
+          "referenceReadBytes": 2215369548,
+          "baselineReadBytes": 0,
+          "inputVerificationBytes": 3136865401,
+          "rgbReadBytes": 1148545044,
+          "phasesMilliseconds": {
+            "inputVerification": 4959.094416999957,
+            "completedRgbCrop": 52.67258300003596,
+            "evidenceWrite": 48.185958000132814,
+            "referenceComposition": 13618.297666999628,
+            "referenceVerification": 706.7508299998008,
+            "rgbComparison": 2253.9942919999594,
+            "checkpointRead": 97.75233299995307
+          },
+          "wallClockMs": 22261.331292000017,
+          "batchSize": 32,
+          "checkpointBytes": 5293262
+        }
+      }
+    ],
+    "regenerationSampleWallSeconds": 164.11213962699998,
+    "finalQcConnection": {
+      "source": {
+        "path": "runtime/artifacts/qc-streaming-20260927-v001/full424-v001/final-qc-verification.json",
+        "fileSha256": "94d97ddf56cf5c99dedef4cefe7943d037563840e6eeb1e7b13a334daa11611c",
+        "bytes": 2008
+      },
+      "result": {
+        "status": "passed",
+        "processId": 66068,
+        "elapsedSeconds": 758.4274249580001,
+        "mode": "saved-input-final-gate",
+        "meaning": "Connection/verification succeeded; original video native and final QC still fail only on 000103",
+        "sourceFiniteReceipt": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/finite-result.receipt.json",
+          "bytes": 464,
+          "fileSha256": "3a9f7d45c3ecd6417cc163e3b08526f782752fbc93595241416c158bfd15d1d5"
+        },
+        "finalQcReceipt": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/final-qc.qc.json",
+          "schemaVersion": "presentation-qc-evidence-store-v001",
+          "fileSha256": "0cab04774077cdf8946a0657a2f9680c6ceb13285bb626aad4d4b639650ee4b6",
+          "rootSha256": "530fb1f20067a95a638921da696cd71d7907e206732449f98340f20d7ee20601",
+          "bytes": 866513597,
+          "nodeCount": 1483090,
+          "reusedObjectCount": 645962,
+          "deduplicatedNodeCount": 861
+        },
+        "sampleCount": 424,
+        "instructionCount": 326,
+        "nativeStatus": "failed",
+        "nativeViolations": [
+          {
+            "code": "NATIVE_FRAME_QC_INVALID",
+            "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+            "reason": "native frame QC: expected class is absent, invisible, tied or not the unique nearest reference"
+          }
+        ],
+        "finalQcStatus": "failed",
+        "finalQcViolations": [
+          {
+            "code": "COMPLETED_FRAME_QC_INVALID",
+            "relatedIds": [],
+            "details": {
+              "reasons": [
+                {
+                  "code": "NATIVE_FRAME_QC_INVALID",
+                  "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+                  "reason": "native frame QC: expected class is absent, invisible, tied or not the unique nearest reference"
+                }
+              ]
+            }
+          }
+        ],
+        "nodeParentPeakResidentSetBytes": 5406359552,
+        "actions": {
+          "videoEncodes": 0,
+          "imageGenerations": 0,
+          "mediaProbes": 0,
+          "oldEvidenceWrites": 0
+        }
+      }
+    },
+    "finalQcIndependentReread": {
+      "source": {
+        "path": "runtime/artifacts/qc-streaming-20260927-v001/full424-v001/final-qc-reread.json",
+        "fileSha256": "197c41f1d1a0ba1aa60d8ae6aa06b0acfcc0fbc8385fa4982c538f82c497722d",
+        "bytes": 2019
+      },
+      "result": {
+        "status": "passed",
+        "processId": 66542,
+        "elapsedSeconds": 794.516870583,
+        "mode": "independent-reconstruction-and-reread",
+        "meaning": "Connection/verification succeeded; original video native and final QC still fail only on 000103",
+        "sourceFiniteReceipt": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/finite-result.receipt.json",
+          "bytes": 464,
+          "fileSha256": "3a9f7d45c3ecd6417cc163e3b08526f782752fbc93595241416c158bfd15d1d5"
+        },
+        "finalQcReceipt": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/final-qc.qc.json",
+          "schemaVersion": "presentation-qc-evidence-store-v001",
+          "fileSha256": "0cab04774077cdf8946a0657a2f9680c6ceb13285bb626aad4d4b639650ee4b6",
+          "rootSha256": "530fb1f20067a95a638921da696cd71d7907e206732449f98340f20d7ee20601",
+          "bytes": 866513597,
+          "nodeCount": 1483090,
+          "reusedObjectCount": 645962,
+          "deduplicatedNodeCount": 861
+        },
+        "sampleCount": 424,
+        "instructionCount": 326,
+        "nativeStatus": "failed",
+        "nativeViolations": [
+          {
+            "code": "NATIVE_FRAME_QC_INVALID",
+            "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+            "reason": "native frame QC: expected class is absent, invisible, tied or not the unique nearest reference"
+          }
+        ],
+        "finalQcStatus": "failed",
+        "finalQcViolations": [
+          {
+            "code": "COMPLETED_FRAME_QC_INVALID",
+            "relatedIds": [],
+            "details": {
+              "reasons": [
+                {
+                  "code": "NATIVE_FRAME_QC_INVALID",
+                  "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+                  "reason": "native frame QC: expected class is absent, invisible, tied or not the unique nearest reference"
+                }
+              ]
+            }
+          }
+        ],
+        "nodeParentPeakResidentSetBytes": 4955455488,
+        "actions": {
+          "videoEncodes": 0,
+          "imageGenerations": 0,
+          "mediaProbes": 0,
+          "oldEvidenceWrites": 0
+        }
+      }
+    }
   }
 }

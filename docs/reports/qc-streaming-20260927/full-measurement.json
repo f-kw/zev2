@@ -1,0 +1,268 @@
+{
+  "schemaVersion": "qc-streaming-full-report-v001",
+  "sourceMeasurement": {
+    "path": "runtime/artifacts/qc-streaming-20260927-v001/full424-v001/measurement.json",
+    "bytes": 779929,
+    "fileSha256": "be7b7911d1f3d6a6024983d0fa6c2a53cb45673857c069d722b0998796a7fb08"
+  },
+  "implementationCommit": "28e85752ccb8d95748a56a36ee0066ff9e26b962",
+  "measurement": {
+    "status": "passed",
+    "stage": "full",
+    "variant": "stream32",
+    "startedAt": "2026-09-27T06:03:18.176Z",
+    "completedAt": "2026-09-27T08:30:50.103Z",
+    "elapsedSeconds": 8851.853493,
+    "readAndBindSeconds": 10.334217792,
+    "evidenceWriteSeconds": 7.829886083999648,
+    "finiteAssemblySeconds": 122.68590387499891,
+    "finiteEvidenceWriteSeconds": 7.826670207999647,
+    "preparationVerificationBefore": {
+      "elapsedSeconds": 36.755408499999994,
+      "verifiedFileCount": 4024,
+      "verifiedBytes": 34958119247
+    },
+    "preparationVerificationAfter": {
+      "elapsedSeconds": 37.19272424999997,
+      "verifiedFileCount": 4024,
+      "verifiedBytes": 34958119247
+    },
+    "protectedEvidenceVerification": {
+      "elapsedSeconds": 2.507269041998312,
+      "legacy": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/finite-result.json",
+        "bytes": 3428363761,
+        "fileSha256": "32534f5b909b1a91dbf2ed7cb098ef561c909d42650a086ca17b8d26fefc73c7"
+      },
+      "shared": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-evidence-common-20260927-v001/measurement-v003/shared-qc.json",
+        "fileSha256": "89a37d22c3d6ad66a8a12dda2dcdebaac86ee51a3bf3b3c2316417d3267e5d29"
+      }
+    },
+    "finiteReceipt": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/finite-result.qc.json",
+      "schemaVersion": "presentation-qc-evidence-store-v001",
+      "fileSha256": "c1b5573c264325948e8d600307f294a797c5d6b757770641c8c3925075dd8efa",
+      "rootSha256": "5d8ab58061e8825043d3ca48d17013c4a7d881a2cd79b47f96fa7247ca3da8e9",
+      "bytes": 861121352,
+      "nodeCount": 1483295,
+      "reusedObjectCount": 332119,
+      "deduplicatedNodeCount": 314321
+    },
+    "source": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-evidence-common-20260927-v001/measurement-v003/shared-qc.json",
+      "fileSha256": "89a37d22c3d6ad66a8a12dda2dcdebaac86ee51a3bf3b3c2316417d3267e5d29"
+    },
+    "preparation": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/native-qc-preparation/preparation.json",
+      "bytes": 12076185,
+      "fileSha256": "d1222db572c30b60c235f9a3f5f72dc2d8d7f3edfc204d49575238a0f8fa074f"
+    },
+    "plan": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/native-qc-preparation/plan.json",
+      "bytes": 2040014,
+      "fileSha256": "326ddc674da49508c71639df33e5284549f26a140744b1ac874ccf824a0ecf0b"
+    },
+    "video": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-rendered-v002.mp4",
+      "bytes": 671459095,
+      "fileSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+    },
+    "environment": {
+      "node": "v20.19.6",
+      "platform": "darwin",
+      "arch": "arm64",
+      "cpu": "Apple M3 Max",
+      "totalMemoryBytes": 38654705664,
+      "cacheControl": "OS cache and external process contention not controlled"
+    },
+    "nodeParentPeakResidentSetBytes": 2263990272,
+    "parentMemoryScope": "Node measurement parent, includes one full saved shared evidence read; excludes external tools",
+    "childProcessCount": 10600,
+    "maximumTimedChildResidentSetBytes": 625410048,
+    "childBlockInputOperations": 0,
+    "childBlockOutputOperations": 0,
+    "childResourcesMeaning": "sequential /usr/bin/time -l tool calls; OS counters are not I/O byte estimates; not combined simultaneous parent+child peak",
+    "sampleCount": 424,
+    "logicalCandidateCount": 320439,
+    "unchangedOutcomes": true,
+    "originalNativeFailurePreserved": [
+      "new-material-digest-20260926-v001-instruction-instruction-000103"
+    ],
+    "cumulativeNewReferencePeakLogicalBytes": 2215369548,
+    "finalNewReferenceLogicalBytes": 1106941860,
+    "cumulativeNewReferencePeakAllocatedBytes": 2216890368,
+    "finalNewReferenceAllocatedBytes": 1107701760,
+    "cumulativePeakMeaning": "sum of prior retained comparison RGB bytes plus current module-reported comparison RGB peak; completed RGB, proof JSON and retained prepared inputs are excluded and reported separately",
+    "finalDirectory": {
+      "files": 55021,
+      "logicalBytes": 6222361173,
+      "allocatedBytes": 6359023616
+    },
+    "bundle": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/samples.qc.json",
+      "schemaVersion": "presentation-qc-evidence-store-v001",
+      "fileSha256": "b0a87d31811fd20b4f8a19d5cad0fb92016eebeaa84efa0a70e71650e1445686",
+      "rootSha256": "fb3c443a45134a66e296a15a07f19f1a1468134454d58a2c6910803ec3ef922b",
+      "bytes": 847821423,
+      "nodeCount": 1463163,
+      "reusedObjectCount": 320611,
+      "deduplicatedNodeCount": 313395
+    },
+    "historicalInputsReused": "saved base/completed PNGs and decoded native layers, excluded from newly generated comparison holding",
+    "actions": {
+      "videoEncodes": 0,
+      "subtitleRenders": 0,
+      "sttRuns": 0,
+      "paidApiCalls": 0
+    }
+  },
+  "phasesSeconds": {
+    "inputVerification": 1233.8520863020094,
+    "completedRgbCrop": 26.914928014003905,
+    "evidenceWrite": 16.13350181599245,
+    "referenceComposition": 4816.1383537770425,
+    "referenceVerification": 282.1947562539836,
+    "rgbComparison": 909.4784244879971,
+    "baselineComparison": 807.0304970819963,
+    "checkpointRead": 37.37144621900472,
+    "cleanup": 315.2776716660081
+  },
+  "operationCounts": {
+    "logicalReferenceCount": 320439,
+    "referenceRgbOutputs": 314994,
+    "reusedReferenceRgbCount": 5445,
+    "exactDistanceCalculations": 314189,
+    "reusedExactDistances": 0,
+    "generatedReferenceBytes": 468026905032,
+    "referenceReadBytes": 1412801039628,
+    "baselineReadBytes": 476117238492,
+    "inputVerificationBytes": 1332912705084,
+    "rgbReadBytes": 485403663492,
+    "checkpointBytes": 2240282960
+  },
+  "releasedPassingSamples": 423,
+  "retainedFailingSamples": 1,
+  "completedRgbRetained": {
+    "files": 424,
+    "logicalBytes": 629991072,
+    "allocatedBytes": 630423552
+  },
+  "allNewRgbLogicalPeakReconstructedFromMeasuredBoundaries": 2842388964,
+  "allNewRgbFinalLogicalBytes": 1736932932,
+  "originalFailure": {
+    "proof": {
+      "path": "runtime/artifacts/qc-streaming-20260927-v001/full424-v001/reference-samples/sample-164/sample-proof.json",
+      "fileSha256": "5f5be91f7a8fe478b4cc43b23afb8da42fa8e9f0f5fe5b3f31102d43b3e34c46",
+      "bytes": 5291021
+    },
+    "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+    "frame": 7801,
+    "referenceCount": 757,
+    "classCount": 741,
+    "visible": false,
+    "expectedClassId": "class-0",
+    "references": [
+      {
+        "classId": "class-0",
+        "id": "expected",
+        "kind": "expected",
+        "layers": [
+          {
+            "bindingId": "caption-102-native-static",
+            "displayFrameCount": 141,
+            "localFrame": 70,
+            "slotCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000103"
+          }
+        ],
+        "rgbPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/reference-samples/sample-164/references/reference-97156d9def3f490b5866911c63c2edd23aade096d63efc01aaf972364b943d6a.rgb",
+        "rgbSha256": "ab2108f2017e0b6d9e29bb143c8dee8df3f91501e75d96cc4774fa66748b0110"
+      },
+      {
+        "classId": "class-0",
+        "id": "alternate-normal",
+        "kind": "target-alternate",
+        "layers": [
+          {
+            "bindingId": "caption-102-alternate-normal",
+            "displayFrameCount": 141,
+            "localFrame": 70,
+            "slotCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000103"
+          }
+        ],
+        "rgbPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/reference-samples/sample-164/references/reference-97156d9def3f490b5866911c63c2edd23aade096d63efc01aaf972364b943d6a.rgb",
+        "rgbSha256": "ab2108f2017e0b6d9e29bb143c8dee8df3f91501e75d96cc4774fa66748b0110"
+      },
+      {
+        "classId": "class-0",
+        "id": "replace-caption-101-native-static",
+        "kind": "foreign-replacement",
+        "layers": [
+          {
+            "bindingId": "caption-101-native-static",
+            "displayFrameCount": 141,
+            "localFrame": 70,
+            "slotCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000103"
+          }
+        ],
+        "rgbPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/reference-samples/sample-164/references/reference-97156d9def3f490b5866911c63c2edd23aade096d63efc01aaf972364b943d6a.rgb",
+        "rgbSha256": "ab2108f2017e0b6d9e29bb143c8dee8df3f91501e75d96cc4774fa66748b0110"
+      },
+      {
+        "classId": "class-262",
+        "id": "add-caption-101-native-static",
+        "kind": "inactive-foreign-addition",
+        "layers": [
+          {
+            "bindingId": "caption-102-native-static",
+            "displayFrameCount": 141,
+            "localFrame": 70,
+            "slotCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000103"
+          },
+          {
+            "bindingId": "caption-101-native-static",
+            "displayFrameCount": 141,
+            "localFrame": 70,
+            "slotCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000103"
+          }
+        ],
+        "rgbPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/full424-v001/reference-samples/sample-164/references/reference-b46a0de1cf91e24def18bf6cef6fff2b073b2250d0f18c82f4828da07b83d32a.rgb",
+        "rgbSha256": "9544e551244ed09c4625b4489bf3689e2ec336dbc02d9015d79b3441f59946ca"
+      }
+    ],
+    "classes": [
+      {
+        "absoluteRgbDifference": 1345125,
+        "id": "class-0",
+        "referenceIds": [
+          "expected",
+          "alternate-normal",
+          "replace-caption-101-native-static"
+        ],
+        "rgbSha256": "ab2108f2017e0b6d9e29bb143c8dee8df3f91501e75d96cc4774fa66748b0110"
+      },
+      {
+        "absoluteRgbDifference": 1344947,
+        "id": "class-262",
+        "referenceIds": [
+          "add-caption-101-native-static"
+        ],
+        "rgbSha256": "9544e551244ed09c4625b4489bf3689e2ec336dbc02d9015d79b3441f59946ca"
+      }
+    ]
+  },
+  "originalFailureSource": {
+    "path": "runtime/artifacts/qc-streaming-20260927-v001/full424-v001/000103-summary.json",
+    "bytes": 3985,
+    "fileSha256": "a67b55e30ef0d389bead4d6e02a91c687d5f9a00a9fc982219f96f7911ba7359"
+  },
+  "limits": [
+    "Comparison reference RGB peak/final excludes completed crops, JSON and process logs; those remain reported separately.",
+    "Full elapsed includes old/new RGB byte comparison and verification of reused inputs. It excludes final directory inventory and writing measurement.json itself.",
+    "Batch-completion allocated blocks are observed st_blocks*512, not a continuous disk sampler or unique APFS extents.",
+    "Application-layer counted file bytes are not physical disk I/O. Child block counters were zero; uninstrumented reads and filesystem writes are not estimated.",
+    "Full original preparation/extraction and whole-video replay are verified saved results, not rerun.",
+    "The old 148-minute inclusive duration and 232GB intermediate observation are not comparison denominators.",
+    "Parent and child maximum RSS are separate peaks, not a simultaneous process-tree total."
+  ]
+}
