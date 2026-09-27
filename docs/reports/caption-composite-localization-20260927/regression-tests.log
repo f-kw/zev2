@@ -1,0 +1,537 @@
+TAP version 13
+# Subtest: both entrance programs select the independently specified state on every real frame and apply the shared fade once
+ok 1 - both entrance programs select the independently specified state on every real frame and apply the shared fade once
+  ---
+  duration_ms: 1832.763917
+  ...
+# Subtest: fixed old compositor matches Normal, partial Color, Panel, lengths 1–9, gaps and simultaneous translucent layers
+ok 2 - fixed old compositor matches Normal, partial Color, Panel, lengths 1–9, gaps and simultaneous translucent layers
+  ---
+  duration_ms: 775.575292
+  ...
+# Subtest: fixed old compositor matches every Pulse, Bounce and Shake state through range cuts and fade boundaries
+ok 3 - fixed old compositor matches every Pulse, Bounce and Shake state through range cuts and fade boundaries
+  ---
+  duration_ms: 1760.395042
+  ...
+# Subtest: the unchanged byte oracle detects position, alpha loss, motion bounds, timing, layer order and source PNG faults
+ok 4 - the unchanged byte oracle detects position, alpha loss, motion bounds, timing, layer order and source PNG faults
+  ---
+  duration_ms: 523.36775
+  ...
+# Subtest: 共有保存後の実比較証拠を再読し、正常時だけ編集jobを公開し、欠損・改ざんを成功にしない
+    # Subtest: valid
+    ok 1 - valid
+      ---
+      duration_ms: 649.946083
+      ...
+    # Subtest: missing
+    ok 2 - missing
+      ---
+      duration_ms: 460.7225
+      ...
+    # Subtest: tampered
+    ok 3 - tampered
+      ---
+      duration_ms: 452.836333
+      ...
+    1..3
+ok 5 - 共有保存後の実比較証拠を再読し、正常時だけ編集jobを公開し、欠損・改ざんを成功にしない
+  ---
+  duration_ms: 1564.196542
+  ...
+# Subtest: 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+ok 6 - 即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する
+  ---
+  duration_ms: 879.230041
+  ...
+# Subtest: 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+ok 7 - 媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない
+  ---
+  duration_ms: 413.218084
+  ...
+# Subtest: partial-fail: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+ok 8 - partial-fail: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+  ---
+  duration_ms: 381.284625
+  ...
+# Subtest: partial-cancel: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+ok 9 - partial-cancel: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない
+  ---
+  duration_ms: 424.3285
+  ...
+# Subtest: 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+ok 10 - 実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ
+  ---
+  duration_ms: 749.785916
+  ...
+# Subtest: 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+ok 11 - 未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する
+  ---
+  duration_ms: 354.931167
+  ...
+# Subtest: 生成結果と描画証拠も検証cacheで改変を見逃さない
+ok 12 - 生成結果と描画証拠も検証cacheで改変を見逃さない
+  ---
+  duration_ms: 435.003
+  ...
+# Subtest: service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+ok 13 - service終了ではworkerだけでなく同じgroupの子processにも停止を伝える
+  ---
+  duration_ms: 293.529667
+  ...
+# Subtest: audio-only QC requires packet identity for copies and the declared duration and codec after edits
+ok 14 - audio-only QC requires packet identity for copies and the declared duration and codec after edits
+  ---
+  duration_ms: 1.415583
+  ...
+# Subtest: no selections and explicit normal preserve the plan and arguments except exact frame-clock muxing and verified identity-alpha bypass
+ok 15 - no selections and explicit normal preserve the plan and arguments except exact frame-clock muxing and verified identity-alpha bypass
+  ---
+  duration_ms: 14.917375
+  ...
+# Subtest: preset changes only its selected display property; text, IDs, boundaries and position stay intact
+ok 16 - preset changes only its selected display property; text, IDs, boundaries and position stay intact
+  ---
+  duration_ms: 0.231417
+  ...
+# Subtest: invalid and duplicate selections, nonadjacent connections and crossing captions fail closed
+ok 17 - invalid and duplicate selections, nonadjacent connections and crossing captions fail closed
+  ---
+  duration_ms: 0.432
+  ...
+# Subtest: two black insertions preserve source references and cumulatively move video, audio and captions
+ok 18 - two black insertions preserve source references and cumulatively move video, audio and captions
+  ---
+  duration_ms: 370.852709
+  ...
+# Subtest: production drawing rejects missing and standalone diagnostic QC methods before output or child processes
+ok 19 - production drawing rejects missing and standalone diagnostic QC methods before output or child processes
+  ---
+  duration_ms: 5.404708
+  ...
+# Subtest: diagnostic completed-frame QC also requires an explicitly selected method before any work
+ok 20 - diagnostic completed-frame QC also requires an explicitly selected method before any work
+  ---
+  duration_ms: 1.240792
+  ...
+# Subtest: public combined QC entry rejects an unsupported frame rate before every media child without fallback
+ok 21 - public combined QC entry rejects an unsupported frame rate before every media child without fallback
+  ---
+  duration_ms: 4.88875
+  ...
+# Subtest: public combined QC entry rejects absent, relative or changed normal-plan references before every media child
+ok 22 - public combined QC entry rejects absent, relative or changed normal-plan references before every media child
+  ---
+  duration_ms: 7.554
+  ...
+# Subtest: production evaluator accepts complete combined evidence with valid application, layout and media inputs
+ok 23 - production evaluator accepts complete combined evidence with valid application, layout and media inputs
+  ---
+  duration_ms: 16.756083
+  ...
+# Subtest: production final QC rejects old pixel-count and valid native-only evidence without the new global proof
+ok 24 - production final QC rejects old pixel-count and valid native-only evidence without the new global proof
+  ---
+  duration_ms: 10.875167
+  ...
+# Subtest: production evaluator rejects missing global evidence or a missing whole-video proof
+ok 25 - production evaluator rejects missing global evidence or a missing whole-video proof
+  ---
+  duration_ms: 10.497459
+  ...
+# Subtest: production evaluator rejects a missing or substituted current completed-video path or hash
+ok 26 - production evaluator rejects a missing or substituted current completed-video path or hash
+  ---
+  duration_ms: 16.901083
+  ...
+# Subtest: production evaluator rejects whole-video corruption even when native state observations pass
+ok 27 - production evaluator rejects whole-video corruption even when native state observations pass
+  ---
+  duration_ms: 7.110709
+  ...
+# Subtest: production evaluator rejects an omitted native caption even when whole-video equality passes
+ok 28 - production evaluator rejects an omitted native caption even when whole-video equality passes
+  ---
+  duration_ms: 8.148042
+  ...
+# Subtest: production evaluator rejects detached finite-state evidence and a mixed comparison basis
+ok 29 - production evaluator rejects detached finite-state evidence and a mixed comparison basis
+  ---
+  duration_ms: 8.871958
+  ...
+# Subtest: production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements
+ok 30 - production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements
+  ---
+  duration_ms: 5.051
+  ...
+# Subtest: combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs
+ok 31 - combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs
+  ---
+  duration_ms: 4.531958
+  ...
+# Subtest: combined proof rejects missing whole-video evidence despite cached pass flags
+ok 32 - combined proof rejects missing whole-video evidence despite cached pass flags
+  ---
+  duration_ms: 2.47975
+  ...
+# Subtest: combined proof rejects mixing individually valid observations from different completed videos
+ok 33 - combined proof rejects mixing individually valid observations from different completed videos
+  ---
+  duration_ms: 7.199416
+  ...
+# Subtest: combined proof requires the current completed-video path and hash supplied by its caller
+ok 34 - combined proof requires the current completed-video path and hash supplied by its caller
+  ---
+  duration_ms: 4.545958
+  ...
+# Subtest: combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain
+ok 35 - combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain
+  ---
+  duration_ms: 13.1425
+  ...
+# Subtest: combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing
+ok 36 - combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing
+  ---
+  duration_ms: 25.182625
+  ...
+# Subtest: combined proof rejects missing or substituted planar layers and a severed decode-to-composition chain
+ok 37 - combined proof rejects missing or substituted planar layers and a severed decode-to-composition chain
+  ---
+  duration_ms: 93.04725
+  ...
+# Subtest: all decoded frame hashes retain order and exact rational timestamps
+ok 38 - all decoded frame hashes retain order and exact rational timestamps
+  ---
+  duration_ms: 0.257292
+  ...
+# Subtest: frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps
+ok 39 - frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps
+  ---
+  duration_ms: 0.358208
+  ...
+# Subtest: audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS
+ok 40 - audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS
+  ---
+  duration_ms: 0.198792
+  ...
+# Subtest: audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks
+ok 41 - audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks
+  ---
+  duration_ms: 0.189208
+  ...
+# Subtest: byte equality and full decoded equality are independently valid exact gates
+ok 42 - byte equality and full decoded equality are independently valid exact gates
+  ---
+  duration_ms: 1.552875
+  ...
+# Subtest: one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests
+ok 43 - one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests
+  ---
+  duration_ms: 6.86675
+  ...
+# Subtest: a cached pass cannot replace complete observations, stable input bindings or original encoder arguments
+ok 44 - a cached pass cannot replace complete observations, stable input bindings or original encoder arguments
+  ---
+  duration_ms: 5.257417
+  ...
+# Subtest: byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison
+ok 45 - byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison
+  ---
+  duration_ms: 1.377542
+  ...
+# Subtest: mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames
+ok 46 - mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames
+  ---
+  duration_ms: 154.684
+  ...
+# Subtest: mock I/O compares every decoded frame and audio packet when container bytes differ
+ok 47 - mock I/O compares every decoded frame and audio packet when container bytes differ
+  ---
+  duration_ms: 138.182166
+  ...
+# Subtest: mock I/O preserves exact failure for an unknown one-pixel change
+ok 48 - mock I/O preserves exact failure for an unknown one-pixel change
+  ---
+  duration_ms: 132.759125
+  ...
+# Subtest: mock I/O detects inputs changing during encode and rejects a missing production PNG before any child
+ok 49 - mock I/O detects inputs changing during encode and rejects a missing production PNG before any child
+  ---
+  duration_ms: 169.994084
+  ...
+# Subtest: pulse replay binds every production PNG to its exact native state and order
+ok 50 - pulse replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.507209
+  ...
+# Subtest: bounce replay binds every production PNG to its exact native state and order
+ok 51 - bounce replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 2.279625
+  ...
+# Subtest: shake replay binds every production PNG to its exact native state and order
+ok 52 - shake replay binds every production PNG to its exact native state and order
+  ---
+  duration_ms: 1.969167
+  ...
+# Subtest: current completed-file identity is mandatory and rejects a stale pass for another same-format video
+ok 53 - current completed-file identity is mandatory and rejects a stale pass for another same-format video
+  ---
+  duration_ms: 0.441458
+  ...
+# Subtest: raw evidence, all observed commands, original stdout and artifact correspondence are mandatory
+ok 54 - raw evidence, all observed commands, original stdout and artifact correspondence are mandatory
+  ---
+  duration_ms: 13.164041
+  ...
+# Subtest: parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes
+ok 55 - parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes
+  ---
+  duration_ms: 1.51825
+  ...
+# Subtest: sample/display aspect, color meaning and display side data must match despite identical pixel hashes
+ok 56 - sample/display aspect, color meaning and display side data must match despite identical pixel hashes
+  ---
+  duration_ms: 7.452292
+  ...
+# Subtest: bounce native QC rejects clamping, unbound images, missing states and invalid static layouts
+ok 57 - bounce native QC rejects clamping, unbound images, missing states and invalid static layouts
+  ---
+  duration_ms: 5.515334
+  ...
+# Subtest: bounce collision checks follow the moving state interval beyond the disjoint stable box
+ok 58 - bounce collision checks follow the moving state interval beyond the disjoint stable box
+  ---
+  duration_ms: 1.194667
+  ...
+# Subtest: shake native QC rejects clamping, unbound images, missing states and invalid static layouts
+ok 59 - shake native QC rejects clamping, unbound images, missing states and invalid static layouts
+  ---
+  duration_ms: 4.844375
+  ...
+# Subtest: shake collision checks follow the moving state interval beyond the disjoint stable box
+ok 60 - shake collision checks follow the moving state interval beyond the disjoint stable box
+  ---
+  duration_ms: 1.292708
+  ...
+# Subtest: normal native inspector feeds shared storage, a separate reader and combined exact-replay QC
+    # Subtest: new replay explicitly carries original fixed-input bytes under schema v002
+    ok 1 - new replay explicitly carries original fixed-input bytes under schema v002
+      ---
+      duration_ms: 1.088167
+      ...
+    # Subtest: historical schema v001 still enforces its original exact byte rule
+    ok 2 - historical schema v001 still enforces its original exact byte rule
+      ---
+      duration_ms: 1.308125
+      ...
+    # Subtest: approved baseline reproduces the pre-existing nested-key-order reload defect
+    ok 3 - approved baseline reproduces the pre-existing nested-key-order reload defect
+      ---
+      duration_ms: 23.007916
+      ...
+    # Subtest: v002 keeps the raw artifact binding after all nested object keys are reordered
+    ok 4 - v002 keeps the raw artifact binding after all nested object keys are reordered
+      ---
+      duration_ms: 1.821792
+      ...
+    # Subtest: missing original text is rejected
+    ok 5 - missing original text is rejected
+      ---
+      duration_ms: 1.034917
+      ...
+    # Subtest: null original text is rejected
+    ok 6 - null original text is rejected
+      ---
+      duration_ms: 0.813917
+      ...
+    # Subtest: object in place of original text is rejected
+    ok 7 - object in place of original text is rejected
+      ---
+      duration_ms: 0.618584
+      ...
+    # Subtest: unpaired surrogate in original text is rejected
+    ok 8 - unpaired surrogate in original text is rejected
+      ---
+      duration_ms: 1.217792
+      ...
+    # Subtest: empty original text is rejected
+    ok 9 - empty original text is rejected
+      ---
+      duration_ms: 0.728125
+      ...
+    # Subtest: truncated original text is rejected
+    ok 10 - truncated original text is rejected
+      ---
+      duration_ms: 0.650209
+      ...
+    # Subtest: whitespace changed without artifact rebinding is rejected
+    ok 11 - whitespace changed without artifact rebinding is rejected
+      ---
+      duration_ms: 0.580458
+      ...
+    # Subtest: unknown proof version is rejected
+    ok 12 - unknown proof version is rejected
+      ---
+      duration_ms: 0.155042
+      ...
+    # Subtest: v001 mislabeled with v002 raw text is rejected
+    ok 13 - v001 mislabeled with v002 raw text is rejected
+      ---
+      duration_ms: 0.557375
+      ...
+    # Subtest: fixed input artifact SHA changed is rejected
+    ok 14 - fixed input artifact SHA changed is rejected
+      ---
+      duration_ms: 1.027542
+      ...
+    # Subtest: fixed input artifact byte count changed is rejected
+    ok 15 - fixed input artifact byte count changed is rejected
+      ---
+      duration_ms: 0.83975
+      ...
+    # Subtest: fixed input artifact missing is rejected
+    ok 16 - fixed input artifact missing is rejected
+      ---
+      duration_ms: 0.627792
+      ...
+    # Subtest: raw caption changed even with forged artifact hash is rejected
+    ok 17 - raw caption changed even with forged artifact hash is rejected
+      ---
+      duration_ms: 0.743
+      ...
+    # Subtest: raw clock changed even with forged artifact hash is rejected
+    ok 18 - raw clock changed even with forged artifact hash is rejected
+      ---
+      duration_ms: 0.676167
+      ...
+    # Subtest: raw image binding changed even with forged artifact hash is rejected
+    ok 19 - raw image binding changed even with forged artifact hash is rejected
+      ---
+      duration_ms: 0.714083
+      ...
+    # Subtest: raw compositor changed even with forged artifact hash is rejected
+    ok 20 - raw compositor changed even with forged artifact hash is rejected
+      ---
+      duration_ms: 1.460917
+      ...
+    # Subtest: raw input field removed even with forged artifact hash is rejected
+    ok 21 - raw input field removed even with forged artifact hash is rejected
+      ---
+      duration_ms: 1.136583
+      ...
+    # Subtest: extra raw input field even with forged artifact hash is rejected
+    ok 22 - extra raw input field even with forged artifact hash is rejected
+      ---
+      duration_ms: 0.842792
+      ...
+    1..22
+ok 61 - normal native inspector feeds shared storage, a separate reader and combined exact-replay QC
+  ---
+  duration_ms: 1243.693541
+  ...
+# Subtest: real missing, foreign, double and shifted captions preserve old candidate bytes, distances, classes and failures
+ok 62 - real missing, foreign, double and shifted captions preserve old candidate bytes, distances, classes and failures
+  ---
+  duration_ms: 3493.065375
+  ...
+# Subtest: normal inspector rejects a missing, substituted or changed native input before invoking a child
+ok 63 - normal inspector rejects a missing, substituted or changed native input before invoking a child
+  ---
+  duration_ms: 95.591042
+  ...
+# Subtest: range compositing matches every precompression full-program frame through finite state and fade cuts
+ok 64 - range compositing matches every precompression full-program frame through finite state and fade cuts
+  ---
+  duration_ms: 1305.38525
+  ...
+# Subtest: Pulse compositor owns all five finite inputs, nine contiguous phases and one common fade
+ok 65 - Pulse compositor owns all five finite inputs, nine contiguous phases and one common fade
+  ---
+  duration_ms: 2.532667
+  ...
+# Subtest: one Pulse application binds every finite native PNG and forward-only metadata
+ok 66 - one Pulse application binds every finite native PNG and forward-only metadata
+  ---
+  duration_ms: 1.221458
+  ...
+# Subtest: Pulse native geometry rejects missing, substituted, unsafe and clamped states without final visibility
+ok 67 - Pulse native geometry rejects missing, substituted, unsafe and clamped states without final visibility
+  ---
+  duration_ms: 10.553708
+  ...
+# Subtest: Pulse layout collision checks use the actual finite phase, including expanded-only intersections
+ok 68 - Pulse layout collision checks use the actual finite phase, including expanded-only intersections
+  ---
+  duration_ms: 1.731542
+  ...
+# Subtest: local Pulse frame diagnostics reject ties and wrong return without granting final acceptance
+ok 69 - local Pulse frame diagnostics reject ties and wrong return without granting final acceptance
+  ---
+  duration_ms: 3.650042
+  ...
+# Subtest: native-only Pulse evidence cannot satisfy the final completed-video requirement
+ok 70 - native-only Pulse evidence cannot satisfy the final completed-video requirement
+  ---
+  duration_ms: 1.723333
+  ...
+# Subtest: Pulse refuses a normal precomputed layout and sends all native states to the real layout boundary
+ok 71 - Pulse refuses a normal precomputed layout and sends all native states to the real layout boundary
+  ---
+  duration_ms: 10.116459
+  ...
+# Subtest: the real finite compositor selects exactly the declared state at every frame, including all boundaries and fades
+ok 72 - the real finite compositor selects exactly the declared state at every frame, including all boundaries and fades
+  ---
+  duration_ms: 9546.238541
+  ...
+# Subtest: valid JSON envelope preserves every observation while common objects are restored once
+ok 73 - valid JSON envelope preserves every observation while common objects are restored once
+  ---
+  duration_ms: 7.616125
+  ...
+# Subtest: a separate Node process preserves shared identity and the existing RGB classifier result
+ok 74 - a separate Node process preserves shared identity and the existing RGB classifier result
+  ---
+  duration_ms: 57.6855
+  ...
+# Subtest: large expanded common data never becomes a multi-gigabyte string, including in a fresh reader
+ok 75 - large expanded common data never becomes a multi-gigabyte string, including in a fresh reader
+  ---
+  duration_ms: 81.7345
+  ...
+# Subtest: common content, common SHA and inspection-specific tampering are rejected
+ok 76 - common content, common SHA and inspection-specific tampering are rejected
+  ---
+  duration_ms: 4.90325
+  ...
+# Subtest: missing common, missing inspection, invalid references and unknown schema are rejected
+ok 77 - missing common, missing inspection, invalid references and unknown schema are rejected
+  ---
+  duration_ms: 8.756375
+  ...
+# Subtest: file binding detects re-serialized transport bytes and refuses existing-file overwrite
+ok 78 - file binding detects re-serialized transport bytes and refuses existing-file overwrite
+  ---
+  duration_ms: 3.788167
+  ...
+# Subtest: literal reference-like keys, prototype-like keys and existing JSON undefined semantics are retained
+ok 79 - literal reference-like keys, prototype-like keys and existing JSON undefined semantics are retained
+  ---
+  duration_ms: 0.96375
+  ...
+# Subtest: cycles and non-JSON values fail without silently changing the evidence
+ok 80 - cycles and non-JSON values fail without silently changing the evidence
+  ---
+  duration_ms: 2.028125
+  ...
+1..80
+# tests 105
+# suites 0
+# pass 105
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 29037.863084

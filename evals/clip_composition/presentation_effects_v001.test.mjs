@@ -35,7 +35,7 @@ test('audio-only QC requires packet identity for copies and the declared duratio
   }
 });
 
-test('no selections and explicit normal preserve the plan and all compositor arguments except exact frame-clock muxing', () => {
+test('no selections and explicit normal preserve the plan and arguments except exact frame-clock muxing and verified identity-alpha bypass', () => {
   const captured = execFileSync('git', ['show', '3a3270be35246b8335b45b61dc5be8bd1b5d8b21:evals/clip_composition/render_presentation_v002.mjs'], {encoding: 'utf8'});
   const begin = captured.indexOf('export const buildPresentationCompositeArgumentsV001 =');
   const end = captured.indexOf('\nconst composite =', begin);
@@ -48,7 +48,18 @@ test('no selections and explicit normal preserve the plan and all compositor arg
     const current = argsFor(argsInput), capturedArguments = Array.from(before(argsInput));
     assert(!capturedArguments.includes('-movie_timescale'));
     assert.deepEqual(current.slice(-2), ['-movie_timescale', String(plan.canvas.fps)]);
-    assert.deepEqual(current.slice(0, -2), capturedArguments);
+    const normalized = current.slice(0, -2), graphIndex = normalized.indexOf('-filter_complex') + 1;
+    assert(graphIndex > 0);
+    for (const [index, {element}] of argsInput.overlayRecords.entries()) {
+      const frames = element.displayFrameCount;
+      const unchangedGeq = `geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='alpha(X,Y)*min(1,min((N+1)/4,(${frames}-N)/4))'`;
+      const followingClock = `,setpts=PTS+${element.startFrame}/${plan.canvas.fps}/TB[overlay${index}]`;
+      const expected = unchangedGeq + `:enable='lt(n,3)+gt(n,${frames - 4})'` + followingClock;
+      assert(normalized[graphIndex].includes(expected), 'the exact fade-only condition is required for ' + element.instructionId);
+      normalized[graphIndex] = normalized[graphIndex].replace(expected, unchangedGeq + followingClock);
+    }
+    assert.deepEqual(normalized, capturedArguments,
+      'every argument except exact frame-clock muxing and the verified identity-alpha bypass remains unchanged');
   }
 });
 

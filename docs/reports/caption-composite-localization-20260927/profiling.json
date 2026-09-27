@@ -1,0 +1,1074 @@
+{
+  "schemaVersion": "caption-composite-localization-profiling-v001",
+  "status": "completed-diagnostic-profiling",
+  "source": "Completed command, stderr and timing files; generated profile-alpha-summary.json is deliberately not used because its name-based regex did not match this FFmpeg log format.",
+  "scope": "A and B are two different representative ranges, not before/after variants. These instrumented profile runs are distinct from uninstrumented baseline/candidate speed comparisons.",
+  "interpretation": {
+    "alphaBracket": "The recorded diagnostic graph places bench=start immediately before the existing geq and bench=stop immediately after it. Each t is elapsed seconds across those boundaries, including intervening automatic conversion, scheduling/initialization effects. It is not isolated CPU time.",
+    "pointerIdentity": "Logged bench pointers are opaque process-local identities; no subtitle ID is inferred from pointer values or first-observation order. Counts are observed lines, not independently verified encoded frame counts.",
+    "aggregation": "Only individual t values are summed. avg/max/min are cumulative reports and are retained as the final printed values, not summed. Bracket durations and codec call spans are not additive partitions of overall wall time.",
+    "codecCallSpans": "benchmark_all identifies background decoder, PNG decoder inputs, output encoder and flush calls. Counts can exceed frames. Threading and asynchronous codec work prevent interpreting grouped call spans as exclusive complete stage costs.",
+    "codecCallSpanUnit": "Integer user/sys/real values are retained exactly as printed. The captured lines and installed ffmpeg man do not state their unit; no conversion to seconds or exclusive cost percentage is claimed.",
+    "decodeControl": "Base-decode control decodes the same prepared FFV1 range to the null output without subtitles or final x264 encoding. It includes process/demux/null-output overhead, and does not measure original source decode or total PNG I/O.",
+    "memory": "Maximum resident set bytes come from macOS /usr/bin/time -l. The FFmpeg maxrss printed KiB label has the same numeric value as macOS byte measurement on this host; it is retained as raw text and not multiplied by 1024. Node parent excluded.",
+    "notMeasuredSeparately": [
+      "PNG storage read latency",
+      "automatic color conversion exclusive cost",
+      "overlay exclusive CPU cost",
+      "mux exclusive cost",
+      "complete asynchronous codec-worker CPU by stage"
+    ],
+    "uncontrolled": [
+      "OS file cache state",
+      "other process competition",
+      "thermal state"
+    ],
+    "noExtrapolation": "Do not scale these diagnostic intervals to the full 85-minute render or add them to form a complete stage budget."
+  },
+  "localDocumentation": [
+    {
+      "path": "/opt/homebrew/share/man/man1/ffmpeg-filters.1",
+      "section": "bench, abench",
+      "meaning": "frame metadata start/stop; t/avg/max/min expressed in seconds"
+    },
+    {
+      "path": "/opt/homebrew/share/man/man1/ffmpeg.1",
+      "section": "-benchmark_all",
+      "meaning": "user/system/real observations for encode/decode steps; unit and exclusivity not specified in this installed text"
+    }
+  ],
+  "ranges": [
+    {
+      "name": "A",
+      "range": {
+        "startFrame": 7347,
+        "endFrameExclusive": 7872,
+        "frameCount": 525,
+        "subtitleCount": 13
+      },
+      "structure": {
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30
+        },
+        "frameCount": 525,
+        "subtitleCount": 13,
+        "inputCount": 32,
+        "pngInputCount": 30,
+        "overlayCount": 13,
+        "alphaEquationCount": 13,
+        "baselineGraphCharacters": 5795,
+        "diagnosticGraphCharacters": 6425,
+        "diagnosticBenchFilters": 26,
+        "explicitBaselineFilterCount": 146,
+        "serializedComplexFilterThreads": "1",
+        "pngDecoderThreadOptions": 30,
+        "videoEncoder": "libx264",
+        "encoderPreset": "fast",
+        "encoderCrf": "20",
+        "outputPixelFormat": "yuv420p",
+        "audioCodec": "copy",
+        "onlyGraphChangeIsDiagnosticBenchPairs": true
+      },
+      "sourceFiles": [
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/A-profile-alpha-command.json",
+          "bytes": 16160,
+          "sha256": "1244a64e5cd09403c46563c3ade91b9534dbf94df68a059c2a61d88f8b8d5d82"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/A-profile-alpha-timing.json",
+          "bytes": 615,
+          "sha256": "945b96dc0b518c7bd01bbb04db89aa77924a6c305f24561e85717078204ca3bb"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/A-profile-alpha.log",
+          "bytes": 295165,
+          "sha256": "1fe27f5eb87ee9250ef46d1d9b42fdbe443ec2b3a7f34e0971d2e9e260f81c34"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/A-profile-base-decode-command.json",
+          "bytes": 289,
+          "sha256": "3aa7d2b7a596eb9cd621d89486569d9a96aad9d2a04b31840ac0d47a93cd90ef"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/A-profile-base-decode-timing.json",
+          "bytes": 636,
+          "sha256": "1e5e61dfde743148b5a086cb404b42076e1fabc0faa732a1420bcba0036acdb4"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/A-profile-base-decode.log",
+          "bytes": 2261,
+          "sha256": "e71ad99daa182178de0a363e2056b4921761867e133f4f2508d69992c34a7f7a"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/A-baseline-arguments.json",
+          "bytes": 14739,
+          "sha256": "87f0e445b0bb13512d42434c520cf5a9e2f8ce373a4f54989b1be95e442ea5b5"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/A-manifest.json",
+          "bytes": 11981,
+          "sha256": "6798d3128a060f2753c3b0f7f113d3f31f5d857fc268633b82db1b0d04a19689"
+        }
+      ],
+      "instrumentedComposite": {
+        "timing": {
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 84.699286958,
+          "realSeconds": 84.69,
+          "userSeconds": 111.47,
+          "systemSeconds": 2.26,
+          "maximumResidentSetBytes": 4089217024,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 1.3428976266383281
+        },
+        "ffmpegOverall": {
+          "userSeconds": 111.378,
+          "systemSeconds": 2.123,
+          "realSeconds": 84.407,
+          "ffmpegMaximumRssPrinted": "4089217024KiB"
+        },
+        "outputBytes": 12489213,
+        "alphaBrackets": {
+          "groupCount": 13,
+          "observedIntervals": 436,
+          "sumObservedSeconds": 94.810454,
+          "groups": [
+            {
+              "pointer": "0xb2d8c2100",
+              "observedIntervals": 17,
+              "finalPrintedAverageSeconds": 0.182466,
+              "finalPrintedMaximumSeconds": 0.184195,
+              "finalPrintedMinimumSeconds": 0.180904,
+              "sumObservedSeconds": 3.101936,
+              "meanObservedSeconds": 0.182466824,
+              "minimumObservedSeconds": 0.180904,
+              "maximumObservedSeconds": 0.184195
+            },
+            {
+              "pointer": "0xb2d8c2b00",
+              "observedIntervals": 78,
+              "finalPrintedAverageSeconds": 0.186161,
+              "finalPrintedMaximumSeconds": 0.378316,
+              "finalPrintedMinimumSeconds": 0.180706,
+              "sumObservedSeconds": 14.520601,
+              "meanObservedSeconds": 0.186161551,
+              "minimumObservedSeconds": 0.180706,
+              "maximumObservedSeconds": 0.378316
+            },
+            {
+              "pointer": "0xb2d8c2f80",
+              "observedIntervals": 2,
+              "finalPrintedAverageSeconds": 0.378905,
+              "finalPrintedMaximumSeconds": 0.570013,
+              "finalPrintedMinimumSeconds": 0.187797,
+              "sumObservedSeconds": 0.75781,
+              "meanObservedSeconds": 0.378905,
+              "minimumObservedSeconds": 0.187797,
+              "maximumObservedSeconds": 0.570013
+            },
+            {
+              "pointer": "0xb2d8c3400",
+              "observedIntervals": 23,
+              "finalPrintedAverageSeconds": 0.208124,
+              "finalPrintedMaximumSeconds": 0.760451,
+              "finalPrintedMinimumSeconds": 0.181573,
+              "sumObservedSeconds": 4.78686,
+              "meanObservedSeconds": 0.208124348,
+              "minimumObservedSeconds": 0.181573,
+              "maximumObservedSeconds": 0.760451
+            },
+            {
+              "pointer": "0xb2dc49980",
+              "observedIntervals": 36,
+              "finalPrintedAverageSeconds": 0.204593,
+              "finalPrintedMaximumSeconds": 0.950065,
+              "finalPrintedMinimumSeconds": 0.180639,
+              "sumObservedSeconds": 7.365372,
+              "meanObservedSeconds": 0.204593667,
+              "minimumObservedSeconds": 0.180639,
+              "maximumObservedSeconds": 0.950065
+            },
+            {
+              "pointer": "0xb2dc49e00",
+              "observedIntervals": 35,
+              "finalPrintedAverageSeconds": 0.209869,
+              "finalPrintedMaximumSeconds": 1.141563,
+              "finalPrintedMinimumSeconds": 0.180554,
+              "sumObservedSeconds": 7.345426,
+              "meanObservedSeconds": 0.209869314,
+              "minimumObservedSeconds": 0.180554,
+              "maximumObservedSeconds": 1.141563
+            },
+            {
+              "pointer": "0xb2dc4a280",
+              "observedIntervals": 5,
+              "finalPrintedAverageSeconds": 0.413124,
+              "finalPrintedMaximumSeconds": 1.332772,
+              "finalPrintedMinimumSeconds": 0.181963,
+              "sumObservedSeconds": 2.06562,
+              "meanObservedSeconds": 0.413124,
+              "minimumObservedSeconds": 0.181963,
+              "maximumObservedSeconds": 1.332772
+            },
+            {
+              "pointer": "0xb2dc4a700",
+              "observedIntervals": 15,
+              "finalPrintedAverageSeconds": 0.272282,
+              "finalPrintedMaximumSeconds": 1.522911,
+              "finalPrintedMinimumSeconds": 0.181475,
+              "sumObservedSeconds": 4.084242,
+              "meanObservedSeconds": 0.2722828,
+              "minimumObservedSeconds": 0.181475,
+              "maximumObservedSeconds": 1.522911
+            },
+            {
+              "pointer": "0xb2dc4b780",
+              "observedIntervals": 36,
+              "finalPrintedAverageSeconds": 0.226004,
+              "finalPrintedMaximumSeconds": 1.713386,
+              "finalPrintedMinimumSeconds": 0.181281,
+              "sumObservedSeconds": 8.136178,
+              "meanObservedSeconds": 0.226004944,
+              "minimumObservedSeconds": 0.181281,
+              "maximumObservedSeconds": 1.713386
+            },
+            {
+              "pointer": "0xb2dc4bc00",
+              "observedIntervals": 6,
+              "finalPrintedAverageSeconds": 0.470347,
+              "finalPrintedMaximumSeconds": 1.904811,
+              "finalPrintedMinimumSeconds": 0.182254,
+              "sumObservedSeconds": 2.822083,
+              "meanObservedSeconds": 0.470347167,
+              "minimumObservedSeconds": 0.182254,
+              "maximumObservedSeconds": 1.904811
+            },
+            {
+              "pointer": "0xb2dc54080",
+              "observedIntervals": 17,
+              "finalPrintedAverageSeconds": 0.296567,
+              "finalPrintedMaximumSeconds": 2.094366,
+              "finalPrintedMinimumSeconds": 0.180232,
+              "sumObservedSeconds": 5.041639,
+              "meanObservedSeconds": 0.296567,
+              "minimumObservedSeconds": 0.180232,
+              "maximumObservedSeconds": 2.094366
+            },
+            {
+              "pointer": "0xb2dc54500",
+              "observedIntervals": 25,
+              "finalPrintedAverageSeconds": 0.267065,
+              "finalPrintedMaximumSeconds": 2.285271,
+              "finalPrintedMinimumSeconds": 0.181008,
+              "sumObservedSeconds": 6.676626,
+              "meanObservedSeconds": 0.26706504,
+              "minimumObservedSeconds": 0.181008,
+              "maximumObservedSeconds": 2.285271
+            },
+            {
+              "pointer": "0xb2dc54980",
+              "observedIntervals": 141,
+              "finalPrintedAverageSeconds": 0.199333,
+              "finalPrintedMaximumSeconds": 2.476733,
+              "finalPrintedMinimumSeconds": 0.180838,
+              "sumObservedSeconds": 28.106061,
+              "meanObservedSeconds": 0.199333766,
+              "minimumObservedSeconds": 0.180838,
+              "maximumObservedSeconds": 2.476733
+            }
+          ]
+        },
+        "codecCallSpans": {
+          "unit": "raw integer values printed by FFmpeg; no time-unit conversion applied",
+          "grouped": {
+            "background": {
+              "streamCount": 1,
+              "callSpanCount": 1029,
+              "userRawSum": 71558,
+              "systemRawSum": 7997,
+              "realRawSum": 13169
+            },
+            "png": {
+              "streamCount": 30,
+              "callSpanCount": 1347,
+              "userRawSum": 15686,
+              "systemRawSum": 9868,
+              "realRawSum": 9761
+            },
+            "outputVideoEncode": {
+              "streamCount": 1,
+              "callSpanCount": 995,
+              "userRawSum": 4954005,
+              "systemRawSum": 380129,
+              "realRawSum": 650842
+            },
+            "outputVideoFlush": {
+              "streamCount": 1,
+              "callSpanCount": 56,
+              "userRawSum": 534657,
+              "systemRawSum": 18336,
+              "realRawSum": 68991
+            }
+          },
+          "perStream": [
+            {
+              "operation": "decode_video",
+              "streamLabel": "0:0",
+              "role": "background",
+              "callSpanCount": 1029,
+              "userRawSum": 71558,
+              "systemRawSum": 7997,
+              "realRawSum": 13169,
+              "inputFile": "runtime/artifacts/caption-composite-localization-20260927-v001/A-background.nut"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "1:0",
+              "role": "png",
+              "callSpanCount": 43,
+              "userRawSum": 554,
+              "systemRawSum": 428,
+              "realRawSum": 401,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/91-97cce49c7817.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "5:0",
+              "role": "png",
+              "callSpanCount": 19,
+              "userRawSum": 250,
+              "systemRawSum": 86,
+              "realRawSum": 48,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-left-8.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "2:0",
+              "role": "png",
+              "callSpanCount": 149,
+              "userRawSum": 203,
+              "systemRawSum": 1147,
+              "realRawSum": 1243,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-stable.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "4:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 289,
+              "systemRawSum": 110,
+              "realRawSum": 70,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-right-12.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "7:0",
+              "role": "png",
+              "callSpanCount": 19,
+              "userRawSum": 164,
+              "systemRawSum": 139,
+              "realRawSum": 92,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-left-4.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "6:0",
+              "role": "png",
+              "callSpanCount": 19,
+              "userRawSum": 176,
+              "systemRawSum": 167,
+              "realRawSum": 81,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-right-8.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "3:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 44,
+              "systemRawSum": 112,
+              "realRawSum": 65,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-left-12.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "10:0",
+              "role": "png",
+              "callSpanCount": 65,
+              "userRawSum": 1532,
+              "systemRawSum": 407,
+              "realRawSum": 421,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/94-d9530d05c7fb.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "8:0",
+              "role": "png",
+              "callSpanCount": 19,
+              "userRawSum": 781,
+              "systemRawSum": 106,
+              "realRawSum": 73,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-right-4.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "9:0",
+              "role": "png",
+              "callSpanCount": 19,
+              "userRawSum": 70,
+              "systemRawSum": 110,
+              "realRawSum": 92,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/93-6ed609cd3dcc.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "11:0",
+              "role": "png",
+              "callSpanCount": 73,
+              "userRawSum": 898,
+              "systemRawSum": 483,
+              "realRawSum": 505,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-stable.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "12:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 157,
+              "systemRawSum": 159,
+              "realRawSum": 114,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-small.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "13:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 59,
+              "systemRawSum": 96,
+              "realRawSum": 77,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-middle.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "14:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 113,
+              "systemRawSum": 162,
+              "realRawSum": 95,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-maximum.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "15:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 370,
+              "systemRawSum": 100,
+              "realRawSum": 67,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-between-middle-maximum.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "16:0",
+              "role": "png",
+              "callSpanCount": 23,
+              "userRawSum": 58,
+              "systemRawSum": 94,
+              "realRawSum": 56,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-between-middle-stable.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "17:0",
+              "role": "png",
+              "callSpanCount": 81,
+              "userRawSum": 195,
+              "systemRawSum": 463,
+              "realRawSum": 509,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/96-3f4bb653fc69.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "18:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 6167,
+              "systemRawSum": 507,
+              "realRawSum": 600,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/97-6065248ce32e.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "19:0",
+              "role": "png",
+              "callSpanCount": 49,
+              "userRawSum": 95,
+              "systemRawSum": 273,
+              "realRawSum": 260,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/98-484b793df038.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "20:0",
+              "role": "png",
+              "callSpanCount": 66,
+              "userRawSum": 259,
+              "systemRawSum": 368,
+              "realRawSum": 442,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-stable.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "21:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 99,
+              "systemRawSum": 94,
+              "realRawSum": 69,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-left-12.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "22:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 60,
+              "systemRawSum": 80,
+              "realRawSum": 45,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-right-12.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "23:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 119,
+              "systemRawSum": 97,
+              "realRawSum": 55,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-left-8.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "24:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 111,
+              "systemRawSum": 155,
+              "realRawSum": 55,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-right-8.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "25:0",
+              "role": "png",
+              "callSpanCount": 23,
+              "userRawSum": 311,
+              "systemRawSum": 140,
+              "realRawSum": 104,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-left-4.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "26:0",
+              "role": "png",
+              "callSpanCount": 17,
+              "userRawSum": 639,
+              "systemRawSum": 270,
+              "realRawSum": 182,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-right-4.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "27:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 577,
+              "systemRawSum": 177,
+              "realRawSum": 122,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/100-e9927529f6b9.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "28:0",
+              "role": "png",
+              "callSpanCount": 53,
+              "userRawSum": 310,
+              "systemRawSum": 473,
+              "realRawSum": 481,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/101-b34d0eccd013.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "29:0",
+              "role": "png",
+              "callSpanCount": 59,
+              "userRawSum": 110,
+              "systemRawSum": 431,
+              "realRawSum": 469,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/102-ea58f2790344.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "30:0",
+              "role": "png",
+              "callSpanCount": 299,
+              "userRawSum": 916,
+              "systemRawSum": 2434,
+              "realRawSum": 2868,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/103-75946ab947b9.png"
+            },
+            {
+              "operation": "encode_video",
+              "streamLabel": "0.0",
+              "role": "outputVideoEncode",
+              "callSpanCount": 995,
+              "userRawSum": 4954005,
+              "systemRawSum": 380129,
+              "realRawSum": 650842
+            },
+            {
+              "operation": "flush_video",
+              "streamLabel": "0.0",
+              "role": "outputVideoFlush",
+              "callSpanCount": 56,
+              "userRawSum": 534657,
+              "systemRawSum": 18336,
+              "realRawSum": 68991
+            }
+          ]
+        }
+      },
+      "baseDecodeControl": {
+        "timing": {
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 1.2168912090000086,
+          "realSeconds": 1.21,
+          "userSeconds": 12.78,
+          "systemSeconds": 0.17,
+          "maximumResidentSetBytes": 140443648,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 10.702479338842975
+        },
+        "ffmpegOverall": {
+          "userSeconds": 12.769,
+          "systemSeconds": 0.164,
+          "realSeconds": 1.182,
+          "ffmpegMaximumRssPrinted": "140443648KiB"
+        },
+        "commandPurpose": "same prepared FFV1 range → null output; audio disabled; no subtitle input or final x264 encoding"
+      },
+      "coverageChecks": {
+        "successfulTimingFiles": true,
+        "profileFrameCountMatchesFrozenRange": true,
+        "allBenchRowsParsed": true,
+        "backgroundInputMatchesRange": true
+      }
+    },
+    {
+      "name": "B",
+      "range": {
+        "startFrame": 10058,
+        "endFrameExclusive": 10552,
+        "frameCount": 494,
+        "subtitleCount": 7
+      },
+      "structure": {
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30
+        },
+        "frameCount": 494,
+        "subtitleCount": 7,
+        "inputCount": 14,
+        "pngInputCount": 12,
+        "overlayCount": 7,
+        "alphaEquationCount": 7,
+        "baselineGraphCharacters": 2666,
+        "diagnosticGraphCharacters": 3002,
+        "diagnosticBenchFilters": 14,
+        "explicitBaselineFilterCount": 68,
+        "serializedComplexFilterThreads": "1",
+        "pngDecoderThreadOptions": 12,
+        "videoEncoder": "libx264",
+        "encoderPreset": "fast",
+        "encoderCrf": "20",
+        "outputPixelFormat": "yuv420p",
+        "audioCodec": "copy",
+        "onlyGraphChangeIsDiagnosticBenchPairs": true
+      },
+      "sourceFiles": [
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/B-profile-alpha-command.json",
+          "bytes": 7435,
+          "sha256": "d4591a319e6e889e50c1ceccb4d21368126741894c5ad5db975555e7a21d28f0"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/B-profile-alpha-timing.json",
+          "bytes": 615,
+          "sha256": "c9eb7fe4a8a767b1f0cdba8607c7ba8d73723795f889e16341cab3c7cbf9166e"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/B-profile-alpha.log",
+          "bytes": 253678,
+          "sha256": "559a768b972162247f9627b89188c6105e6d27518d06f92edf1415cb8c58bca4"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/B-profile-base-decode-command.json",
+          "bytes": 289,
+          "sha256": "e7e09809a304bd842b3444c2e156d3e3e06afd079a0370fab42aec543c5b2223"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/B-profile-base-decode-timing.json",
+          "bytes": 634,
+          "sha256": "5af28b11ae23b17248a99cc2ffabb39ed612c66aba4abcb8681705af513b082f"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/B-profile-base-decode.log",
+          "bytes": 2261,
+          "sha256": "64ec7d37f51f3f0ba518c971075edb109430c5c490a213db481bcc6d6c0096e5"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/B-baseline-arguments.json",
+          "bytes": 6596,
+          "sha256": "ef138ab89f8f9290fc5b9f469581a44d839dccb3bf22960a297186d676fc2d9f"
+        },
+        {
+          "path": "runtime/artifacts/caption-composite-localization-20260927-v001/B-manifest.json",
+          "bytes": 5442,
+          "sha256": "1835b7dcc5cd0a7f35adb6faf05dba593caf357c90eb2f99c96e41695810af25"
+        }
+      ],
+      "instrumentedComposite": {
+        "timing": {
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 79.868521375,
+          "realSeconds": 79.86,
+          "userSeconds": 106.37,
+          "systemSeconds": 1.64,
+          "maximumResidentSetBytes": 2365865984,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 1.3524918607563237
+        },
+        "ffmpegOverall": {
+          "userSeconds": 106.325,
+          "systemSeconds": 1.604,
+          "realSeconds": 79.759,
+          "ffmpegMaximumRssPrinted": "2365865984KiB"
+        },
+        "outputBytes": 12069582,
+        "alphaBrackets": {
+          "groupCount": 7,
+          "observedIntervals": 413,
+          "sumObservedSeconds": 79.498269,
+          "groups": [
+            {
+              "pointer": "0xc71802e00",
+              "observedIntervals": 25,
+              "finalPrintedAverageSeconds": 0.182742,
+              "finalPrintedMaximumSeconds": 0.184226,
+              "finalPrintedMinimumSeconds": 0.181086,
+              "sumObservedSeconds": 4.568551,
+              "meanObservedSeconds": 0.18274204,
+              "minimumObservedSeconds": 0.181086,
+              "maximumObservedSeconds": 0.184226
+            },
+            {
+              "pointer": "0xc71803280",
+              "observedIntervals": 136,
+              "finalPrintedAverageSeconds": 0.184214,
+              "finalPrintedMaximumSeconds": 0.374413,
+              "finalPrintedMinimumSeconds": 0.179965,
+              "sumObservedSeconds": 25.053161,
+              "meanObservedSeconds": 0.184214419,
+              "minimumObservedSeconds": 0.179965,
+              "maximumObservedSeconds": 0.374413
+            },
+            {
+              "pointer": "0xc71803700",
+              "observedIntervals": 39,
+              "finalPrintedAverageSeconds": 0.192792,
+              "finalPrintedMaximumSeconds": 0.562864,
+              "finalPrintedMinimumSeconds": 0.180626,
+              "sumObservedSeconds": 7.518893,
+              "meanObservedSeconds": 0.192792128,
+              "minimumObservedSeconds": 0.180626,
+              "maximumObservedSeconds": 0.562864
+            },
+            {
+              "pointer": "0xc71803b80",
+              "observedIntervals": 76,
+              "finalPrintedAverageSeconds": 0.190184,
+              "finalPrintedMaximumSeconds": 0.752259,
+              "finalPrintedMinimumSeconds": 0.179899,
+              "sumObservedSeconds": 14.454038,
+              "meanObservedSeconds": 0.190184711,
+              "minimumObservedSeconds": 0.179899,
+              "maximumObservedSeconds": 0.752259
+            },
+            {
+              "pointer": "0xc710463c0",
+              "observedIntervals": 37,
+              "finalPrintedAverageSeconds": 0.202787,
+              "finalPrintedMaximumSeconds": 0.941874,
+              "finalPrintedMinimumSeconds": 0.180138,
+              "sumObservedSeconds": 7.503121,
+              "meanObservedSeconds": 0.202787054,
+              "minimumObservedSeconds": 0.180138,
+              "maximumObservedSeconds": 0.941874
+            },
+            {
+              "pointer": "0xc71043680",
+              "observedIntervals": 61,
+              "finalPrintedAverageSeconds": 0.198345,
+              "finalPrintedMaximumSeconds": 1.131623,
+              "finalPrintedMinimumSeconds": 0.180622,
+              "sumObservedSeconds": 12.099084,
+              "meanObservedSeconds": 0.198345639,
+              "minimumObservedSeconds": 0.180622,
+              "maximumObservedSeconds": 1.131623
+            },
+            {
+              "pointer": "0xc71011280",
+              "observedIntervals": 39,
+              "finalPrintedAverageSeconds": 0.212856,
+              "finalPrintedMaximumSeconds": 1.321966,
+              "finalPrintedMinimumSeconds": 0.180513,
+              "sumObservedSeconds": 8.301421,
+              "meanObservedSeconds": 0.212856949,
+              "minimumObservedSeconds": 0.180513,
+              "maximumObservedSeconds": 1.321966
+            }
+          ]
+        },
+        "codecCallSpans": {
+          "unit": "raw integer values printed by FFmpeg; no time-unit conversion applied",
+          "grouped": {
+            "background": {
+              "streamCount": 1,
+              "callSpanCount": 975,
+              "userRawSum": 9417,
+              "systemRawSum": 5128,
+              "realRawSum": 7166
+            },
+            "png": {
+              "streamCount": 12,
+              "callSpanCount": 994,
+              "userRawSum": 4712,
+              "systemRawSum": 5508,
+              "realRawSum": 6165
+            },
+            "outputVideoEncode": {
+              "streamCount": 1,
+              "callSpanCount": 933,
+              "userRawSum": 4795755,
+              "systemRawSum": 304969,
+              "realRawSum": 615210
+            },
+            "outputVideoFlush": {
+              "streamCount": 1,
+              "callSpanCount": 56,
+              "userRawSum": 1225104,
+              "systemRawSum": 28374,
+              "realRawSum": 217690
+            }
+          },
+          "perStream": [
+            {
+              "operation": "decode_video",
+              "streamLabel": "0:0",
+              "role": "background",
+              "callSpanCount": 975,
+              "userRawSum": 9417,
+              "systemRawSum": 5128,
+              "realRawSum": 7166,
+              "inputFile": "runtime/artifacts/caption-composite-localization-20260927-v001/B-background.nut"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "1:0",
+              "role": "png",
+              "callSpanCount": 69,
+              "userRawSum": 177,
+              "systemRawSum": 378,
+              "realRawSum": 372,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/134-ea31dc32a44d.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "2:0",
+              "role": "png",
+              "callSpanCount": 291,
+              "userRawSum": 516,
+              "systemRawSum": 1755,
+              "realRawSum": 2132,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/135-3b97d3056c20.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "3:0",
+              "role": "png",
+              "callSpanCount": 89,
+              "userRawSum": 167,
+              "systemRawSum": 478,
+              "realRawSum": 565,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/136-afe3a261d2cd.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "5:0",
+              "role": "png",
+              "callSpanCount": 84,
+              "userRawSum": 142,
+              "systemRawSum": 376,
+              "realRawSum": 432,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/138-537c9100bbb8.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "6:0",
+              "role": "png",
+              "callSpanCount": 123,
+              "userRawSum": 1073,
+              "systemRawSum": 697,
+              "realRawSum": 791,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-stable.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "4:0",
+              "role": "png",
+              "callSpanCount": 162,
+              "userRawSum": 1014,
+              "systemRawSum": 1009,
+              "realRawSum": 1142,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/137-f7f3774178ca.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "7:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 45,
+              "systemRawSum": 61,
+              "realRawSum": 51,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-small.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "8:0",
+              "role": "png",
+              "callSpanCount": 21,
+              "userRawSum": 10,
+              "systemRawSum": 61,
+              "realRawSum": 39,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-middle.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "9:0",
+              "role": "png",
+              "callSpanCount": 19,
+              "userRawSum": 31,
+              "systemRawSum": 70,
+              "realRawSum": 57,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-maximum.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "10:0",
+              "role": "png",
+              "callSpanCount": 15,
+              "userRawSum": 181,
+              "systemRawSum": 45,
+              "realRawSum": 41,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-between-middle-maximum.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "11:0",
+              "role": "png",
+              "callSpanCount": 11,
+              "userRawSum": 28,
+              "systemRawSum": 78,
+              "realRawSum": 48,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-between-middle-stable.png"
+            },
+            {
+              "operation": "decode_video",
+              "streamLabel": "12:0",
+              "role": "png",
+              "callSpanCount": 89,
+              "userRawSum": 1328,
+              "systemRawSum": 500,
+              "realRawSum": 495,
+              "inputFile": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/140-8384fea4f489.png"
+            },
+            {
+              "operation": "encode_video",
+              "streamLabel": "0.0",
+              "role": "outputVideoEncode",
+              "callSpanCount": 933,
+              "userRawSum": 4795755,
+              "systemRawSum": 304969,
+              "realRawSum": 615210
+            },
+            {
+              "operation": "flush_video",
+              "streamLabel": "0.0",
+              "role": "outputVideoFlush",
+              "callSpanCount": 56,
+              "userRawSum": 1225104,
+              "systemRawSum": 28374,
+              "realRawSum": 217690
+            }
+          ]
+        }
+      },
+      "baseDecodeControl": {
+        "timing": {
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 1.248614750000008,
+          "realSeconds": 1.24,
+          "userSeconds": 13.5,
+          "systemSeconds": 0.17,
+          "maximumResidentSetBytes": 127598592,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 11.024193548387096
+        },
+        "ffmpegOverall": {
+          "userSeconds": 13.487,
+          "systemSeconds": 0.165,
+          "realSeconds": 1.222,
+          "ffmpegMaximumRssPrinted": "127598592KiB"
+        },
+        "commandPurpose": "same prepared FFV1 range → null output; audio disabled; no subtitle input or final x264 encoding"
+      },
+      "coverageChecks": {
+        "successfulTimingFiles": true,
+        "profileFrameCountMatchesFrozenRange": true,
+        "allBenchRowsParsed": true,
+        "backgroundInputMatchesRange": true
+      }
+    }
+  ]
+}

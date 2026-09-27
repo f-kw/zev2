@@ -1,0 +1,1032 @@
+{
+  "schemaVersion": "caption-composite-localization-measurement-20260927-v001",
+  "baselineCommit": "c17c8de83f127d156c0d031d6866ba2024c7b490",
+  "outputDirectory": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001",
+  "renderer": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+    "bytes": 137900,
+    "sha256": "aaba692617e6139e36b08486cd80344477ac2370f1aa85709e591f22dd49baa2"
+  },
+  "order": [
+    "baseline-1",
+    "candidate-1",
+    "precompression verification",
+    "candidate-2",
+    "baseline-2",
+    "encode-control"
+  ],
+  "conditions": {
+    "encoder": "libx264",
+    "preset": "fast",
+    "crf": 20,
+    "pixelFormat": "yuv420p",
+    "fps": 30,
+    "canvas": [
+      1920,
+      1080
+    ],
+    "audio": "same packet-copy AAC sidecar",
+    "operatingSystemCacheControlled": false,
+    "otherProcessesFullyControlled": false,
+    "ownPerformanceRunsSequential": true,
+    "fullDraftReencoded": false,
+    "caveat": "representative ranges only; no proportional prediction of the 85-minute full composite"
+  },
+  "sources": {
+    "beforeCommit": "c17c8de83f127d156c0d031d6866ba2024c7b490",
+    "renderer": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 137540,
+      "sha256": "9b43a4ff3e1aad66769fe71add0e531434197c970b7a503be2d55e2f05ccba9e"
+    },
+    "tool": {
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "bytes": 442864,
+      "sha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+    },
+    "version": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers\nbuilt with Apple clang version 16.0.0 (clang-1600.0.26.6)\nconfiguration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-videotoolbox --enable-audiotoolbox --enable-neon\nlibavutil      60.  8.100 / 60.  8.100\nlibavcodec     62. 11.100 / 62. 11.100\nlibavformat    62.  3.100 / 62.  3.100\nlibavdevice    62.  1.100 / 62.  1.100\nlibavfilter    11.  4.100 / 11.  4.100\nlibswscale      9.  1.100 /  9.  1.100\nlibswresample   6.  1.100 /  6.  1.100\n\nExiting with exit code 0\n",
+    "plan": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/native-qc-preparation/plan.json",
+      "bytes": 2040014,
+      "sha256": "326ddc674da49508c71639df33e5284549f26a140744b1ac874ccf824a0ecf0b"
+    },
+    "preparation": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/native-qc-preparation/preparation.json",
+      "bytes": 12076185,
+      "sha256": "d1222db572c30b60c235f9a3f5f72dc2d8d7f3edfc204d49575238a0f8fa074f"
+    },
+    "background": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/background/background.nut",
+      "bytes": 19423708759,
+      "sha256": "7f3121a8640b23b29c9093a12f150d5ebfc6fc4f4eb9dbe25b773cf5e9ef6229"
+    },
+    "audio": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/background/audio.m4a",
+      "bytes": 22997322,
+      "sha256": "0950960f092818a5ad927565f7a2770ad43418c05669513c524a909255fdb5e4"
+    }
+  },
+  "protectedOriginal": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-rendered-v002.mp4",
+    "bytes": 671459095,
+    "sha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+  },
+  "unchangedInputs": {
+    "status": "unchanged",
+    "checked": [
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/native-qc-preparation/plan.json",
+        "bytes": 2040014,
+        "sha256": "326ddc674da49508c71639df33e5284549f26a140744b1ac874ccf824a0ecf0b"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/native-qc-preparation/preparation.json",
+        "bytes": 12076185,
+        "sha256": "d1222db572c30b60c235f9a3f5f72dc2d8d7f3edfc204d49575238a0f8fa074f"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/background/background.nut",
+        "bytes": 19423708759,
+        "sha256": "7f3121a8640b23b29c9093a12f150d5ebfc6fc4f4eb9dbe25b773cf5e9ef6229"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/background/audio.m4a",
+        "bytes": 22997322,
+        "sha256": "0950960f092818a5ad927565f7a2770ad43418c05669513c524a909255fdb5e4"
+      },
+      {
+        "path": "/opt/homebrew/bin/ffmpeg",
+        "bytes": 442864,
+        "sha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-background.nut",
+        "bytes": 294240566,
+        "sha256": "250f9d5dd1726450dfbefea3bf2571558ab3a92bcf3bee9c7b34a2a11dec74ff"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-audio.m4a",
+        "bytes": 431753,
+        "sha256": "ce400ae14ab518c87a7ab211a0b5ee6b58bee20a08dea8eb7be100a684c69624"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/91-97cce49c7817.png",
+        "bytes": 72362,
+        "sha256": "638717957554d831c27a108f67d141291ea6c4e23ab9153f20b3ae9a7e08fc06"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-stable.png",
+        "bytes": 107665,
+        "sha256": "00a2435c66a160ecc2cc8fe8c3bd847676601465cc9169d125be99ddac5de909"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-left-12.png",
+        "bytes": 107686,
+        "sha256": "e2427f80c9592d0736b11595eccafa9cb964b9f6b5ab07e093647529cd17fd77"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-right-12.png",
+        "bytes": 107650,
+        "sha256": "02f615ed1e77b6b54130d7731b8d451e7471d510ba43b30583583a44110755c3"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-left-8.png",
+        "bytes": 107684,
+        "sha256": "757b6c23150f01dfeaadfaa21428c7d9b59e072e881df0a0cd3e92c490a69e82"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-right-8.png",
+        "bytes": 107642,
+        "sha256": "ef4e24262001132b7a878d8e487adafff4c7090f99f6c78cebe94a38b6203b27"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-left-4.png",
+        "bytes": 107707,
+        "sha256": "a3df0b72b91fecb7e39452d7fdc1c4603c4fa3b30f09554ebe2b2030ea1f9254"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-right-4.png",
+        "bytes": 107597,
+        "sha256": "778a42ae283ece853af8050a20c43a1619da139f8ab6bb7ebbe55d349f615b38"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/93-6ed609cd3dcc.png",
+        "bytes": 66991,
+        "sha256": "0531a4517e276ed00634538bb4a3fa9f565468da58e543d2e41842d8accc20d1"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/94-d9530d05c7fb.png",
+        "bytes": 103007,
+        "sha256": "55ea0e4037448e83cb5e5fbec8461d1d82b5ad3f4952b0c3746c1332444d1f9c"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-stable.png",
+        "bytes": 104272,
+        "sha256": "4eb8ff6fb658fe57b07d85ec653a446ed5f78c56a64a529e053f2912e130b417"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-small.png",
+        "bytes": 108161,
+        "sha256": "dabdfc5b877d8a943a5443ae0e9849eea11336b1a72d7c81fd03c557686f3f4b"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-middle.png",
+        "bytes": 110255,
+        "sha256": "b18cb7461f189c1481ccc1dd9611a0d4ef865053da9676a39663136f0c9088c3"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-maximum.png",
+        "bytes": 125981,
+        "sha256": "93d7bbe861559355d58e03ce4c12697d90d984359ebd2529de898b1aa97f15f6"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-between-middle-maximum.png",
+        "bytes": 123603,
+        "sha256": "f4e516bdb0932b2846f32584ea6e673db671797dff5fae5b61bae6e47f1fc399"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-between-middle-stable.png",
+        "bytes": 107283,
+        "sha256": "c55ba71e07b0e34ae634434f1bee69c4c0140e56fff55542811e11deaecda758"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/96-3f4bb653fc69.png",
+        "bytes": 107493,
+        "sha256": "f135f174e2ad53264b2faa239cd28cf7874e06f8896917ff2893ce1eafd5d428"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/97-6065248ce32e.png",
+        "bytes": 59955,
+        "sha256": "254ebf55a494a9439367be12262f5b600cfcbddbad03b56efa2716519adbf59f"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/98-484b793df038.png",
+        "bytes": 92503,
+        "sha256": "cf6104117c323694cc45d43b9a17b5b8d36430e4430745821a77999b01e5df8c"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-stable.png",
+        "bytes": 92503,
+        "sha256": "cf6104117c323694cc45d43b9a17b5b8d36430e4430745821a77999b01e5df8c"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-left-12.png",
+        "bytes": 92547,
+        "sha256": "9bdb438f466fd5289181ed8399f8dd75995ee8da32448bae16bf6bf0c9dec777"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-right-12.png",
+        "bytes": 92462,
+        "sha256": "00f9696f6a44c0fd7f38b9dbf042d0bac9b6c39e075b3e4f6090215f8dea7278"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-left-8.png",
+        "bytes": 92547,
+        "sha256": "ed183cf5ee60b7322d54b8aece9dab206fae83a90a78fd22091d1bafe82f56fd"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-right-8.png",
+        "bytes": 92440,
+        "sha256": "894ebe1e72c025a9a06b0cd8e6d7e1c68ed24028e3fdf0e8a0add73365aeaa11"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-left-4.png",
+        "bytes": 92494,
+        "sha256": "df155affd0b4887402f0b4fa895ac9c39427542fdef94f0ac2fd237f6a28e987"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-right-4.png",
+        "bytes": 92466,
+        "sha256": "caa9a5332981c94d36223164a8c75bdeb425480bae74ae68fc5dad3e13edf68c"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/100-e9927529f6b9.png",
+        "bytes": 59955,
+        "sha256": "254ebf55a494a9439367be12262f5b600cfcbddbad03b56efa2716519adbf59f"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/101-b34d0eccd013.png",
+        "bytes": 64747,
+        "sha256": "0bec571b4a19a8257ab47b1d3cacd23f87ba1f4f471d517781f2f38a1a4ebc1c"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/102-ea58f2790344.png",
+        "bytes": 109860,
+        "sha256": "c5f6c359b611e4a1b88817ab9dfe882db0a3756a3fbaa9bd5e31defbbfb862a4"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/103-75946ab947b9.png",
+        "bytes": 109860,
+        "sha256": "c5f6c359b611e4a1b88817ab9dfe882db0a3756a3fbaa9bd5e31defbbfb862a4"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-background.nut",
+        "bytes": 317366032,
+        "sha256": "e133d0a794ed29ee679389353e8098e02ed29403c42ad8ea8cc627a9afd8e3d6"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-audio.m4a",
+        "bytes": 401403,
+        "sha256": "13e74af9520f1a797a1e2fa106609e8a187626c88a6c097350aae6eb546db7ba"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/134-ea31dc32a44d.png",
+        "bytes": 101485,
+        "sha256": "c215af341f91970bb006122ecae88115f3f31cad7bb14dfc3812ce01226f0224"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/135-3b97d3056c20.png",
+        "bytes": 76007,
+        "sha256": "391e48867beb16674f3602aa8959f80e165c04db647b615e9c8a085d8a29cd20"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/136-afe3a261d2cd.png",
+        "bytes": 131151,
+        "sha256": "3a8974432086271ed17dd666cb67704a9dafa268848e2810611d044622878265"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/137-f7f3774178ca.png",
+        "bytes": 126363,
+        "sha256": "cb1e5c1ae9cfdb8b923ddab427387e87ba88f8c77610742f41f9e766c2ba8dc8"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/138-537c9100bbb8.png",
+        "bytes": 117820,
+        "sha256": "ace7678ccae79c6d40386b58df6be5b5591d396f31efd930777943be0af45e81"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-stable.png",
+        "bytes": 128958,
+        "sha256": "a2bbaf0791b6eb555f3cfa41e9f6338bc5f37aa06a1edecd889dbdae75e0ff2c"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-small.png",
+        "bytes": 123954,
+        "sha256": "920dc36e4dff7416e94969c88789db998fd264cbbe4882c243678cd5865e9e66"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-middle.png",
+        "bytes": 136101,
+        "sha256": "ca4b3964430382c86a8ca35e7d5f5a50c4a5eab92535119d9d307ed384edb2a8"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-maximum.png",
+        "bytes": 144863,
+        "sha256": "41033cfeea4f3ea5e73687234d08802811acf4cce3e8ad66585cb7639dc123cd"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-between-middle-maximum.png",
+        "bytes": 140955,
+        "sha256": "b60d9aa720843d8fb07a533e92b01637598554b294239ca7f8ef3e09be4cc569"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-between-middle-stable.png",
+        "bytes": 122344,
+        "sha256": "834e11e24082b9abc3bcd1da1436f3b16cfaf59fcad15557f4ae6e1f359f4eee"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/140-8384fea4f489.png",
+        "bytes": 106568,
+        "sha256": "e3dd0a8d889af82d31fb9fa03ad7762129b6d6a00241df49ea83477c4a00d076"
+      }
+    ]
+  },
+  "observations": [
+    {
+      "manifest": {
+        "name": "A",
+        "startFrame": 7347,
+        "endFrameExclusive": 7872,
+        "reason": "Normal, Shake, Bounce, short fades, gaps and identical PNG at different clocks",
+        "frameCount": 525,
+        "subtitleIds": [
+          "new-material-digest-20260926-v001-instruction-instruction-000091",
+          "new-material-digest-20260926-v001-instruction-instruction-000092",
+          "new-material-digest-20260926-v001-instruction-instruction-000093",
+          "new-material-digest-20260926-v001-instruction-instruction-000094",
+          "new-material-digest-20260926-v001-instruction-instruction-000095",
+          "new-material-digest-20260926-v001-instruction-instruction-000096",
+          "new-material-digest-20260926-v001-instruction-instruction-000097",
+          "new-material-digest-20260926-v001-instruction-instruction-000098",
+          "new-material-digest-20260926-v001-instruction-instruction-000099",
+          "new-material-digest-20260926-v001-instruction-instruction-000100",
+          "new-material-digest-20260926-v001-instruction-instruction-000101",
+          "new-material-digest-20260926-v001-instruction-instruction-000102",
+          "new-material-digest-20260926-v001-instruction-instruction-000103"
+        ],
+        "subtitleCount": 13,
+        "structure": {
+          "pngInputs": 30,
+          "overlayCount": 13,
+          "alphaCount": 13,
+          "graphCharacters": 5795,
+          "explicitFilterCount": 146
+        },
+        "input": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-background.nut",
+          "bytes": 294240566,
+          "sha256": "250f9d5dd1726450dfbefea3bf2571558ab3a92bcf3bee9c7b34a2a11dec74ff"
+        },
+        "audio": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-audio.m4a",
+          "bytes": 431753,
+          "sha256": "ce400ae14ab518c87a7ab211a0b5ee6b58bee20a08dea8eb7be100a684c69624"
+        },
+        "pngs": [
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/91-97cce49c7817.png",
+            "bytes": 72362,
+            "sha256": "638717957554d831c27a108f67d141291ea6c4e23ab9153f20b3ae9a7e08fc06"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-stable.png",
+            "bytes": 107665,
+            "sha256": "00a2435c66a160ecc2cc8fe8c3bd847676601465cc9169d125be99ddac5de909"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-left-12.png",
+            "bytes": 107686,
+            "sha256": "e2427f80c9592d0736b11595eccafa9cb964b9f6b5ab07e093647529cd17fd77"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-right-12.png",
+            "bytes": 107650,
+            "sha256": "02f615ed1e77b6b54130d7731b8d451e7471d510ba43b30583583a44110755c3"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-left-8.png",
+            "bytes": 107684,
+            "sha256": "757b6c23150f01dfeaadfaa21428c7d9b59e072e881df0a0cd3e92c490a69e82"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-right-8.png",
+            "bytes": 107642,
+            "sha256": "ef4e24262001132b7a878d8e487adafff4c7090f99f6c78cebe94a38b6203b27"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-left-4.png",
+            "bytes": 107707,
+            "sha256": "a3df0b72b91fecb7e39452d7fdc1c4603c4fa3b30f09554ebe2b2030ea1f9254"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/92-a7b8a506ed0b-right-4.png",
+            "bytes": 107597,
+            "sha256": "778a42ae283ece853af8050a20c43a1619da139f8ab6bb7ebbe55d349f615b38"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/93-6ed609cd3dcc.png",
+            "bytes": 66991,
+            "sha256": "0531a4517e276ed00634538bb4a3fa9f565468da58e543d2e41842d8accc20d1"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/94-d9530d05c7fb.png",
+            "bytes": 103007,
+            "sha256": "55ea0e4037448e83cb5e5fbec8461d1d82b5ad3f4952b0c3746c1332444d1f9c"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-stable.png",
+            "bytes": 104272,
+            "sha256": "4eb8ff6fb658fe57b07d85ec653a446ed5f78c56a64a529e053f2912e130b417"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-small.png",
+            "bytes": 108161,
+            "sha256": "dabdfc5b877d8a943a5443ae0e9849eea11336b1a72d7c81fd03c557686f3f4b"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-middle.png",
+            "bytes": 110255,
+            "sha256": "b18cb7461f189c1481ccc1dd9611a0d4ef865053da9676a39663136f0c9088c3"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-maximum.png",
+            "bytes": 125981,
+            "sha256": "93d7bbe861559355d58e03ce4c12697d90d984359ebd2529de898b1aa97f15f6"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-between-middle-maximum.png",
+            "bytes": 123603,
+            "sha256": "f4e516bdb0932b2846f32584ea6e673db671797dff5fae5b61bae6e47f1fc399"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/95-59335d3376a4-between-middle-stable.png",
+            "bytes": 107283,
+            "sha256": "c55ba71e07b0e34ae634434f1bee69c4c0140e56fff55542811e11deaecda758"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/96-3f4bb653fc69.png",
+            "bytes": 107493,
+            "sha256": "f135f174e2ad53264b2faa239cd28cf7874e06f8896917ff2893ce1eafd5d428"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/97-6065248ce32e.png",
+            "bytes": 59955,
+            "sha256": "254ebf55a494a9439367be12262f5b600cfcbddbad03b56efa2716519adbf59f"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/98-484b793df038.png",
+            "bytes": 92503,
+            "sha256": "cf6104117c323694cc45d43b9a17b5b8d36430e4430745821a77999b01e5df8c"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-stable.png",
+            "bytes": 92503,
+            "sha256": "cf6104117c323694cc45d43b9a17b5b8d36430e4430745821a77999b01e5df8c"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-left-12.png",
+            "bytes": 92547,
+            "sha256": "9bdb438f466fd5289181ed8399f8dd75995ee8da32448bae16bf6bf0c9dec777"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-right-12.png",
+            "bytes": 92462,
+            "sha256": "00f9696f6a44c0fd7f38b9dbf042d0bac9b6c39e075b3e4f6090215f8dea7278"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-left-8.png",
+            "bytes": 92547,
+            "sha256": "ed183cf5ee60b7322d54b8aece9dab206fae83a90a78fd22091d1bafe82f56fd"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-right-8.png",
+            "bytes": 92440,
+            "sha256": "894ebe1e72c025a9a06b0cd8e6d7e1c68ed24028e3fdf0e8a0add73365aeaa11"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-left-4.png",
+            "bytes": 92494,
+            "sha256": "df155affd0b4887402f0b4fa895ac9c39427542fdef94f0ac2fd237f6a28e987"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/99-be97a8b209ec-right-4.png",
+            "bytes": 92466,
+            "sha256": "caa9a5332981c94d36223164a8c75bdeb425480bae74ae68fc5dad3e13edf68c"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/100-e9927529f6b9.png",
+            "bytes": 59955,
+            "sha256": "254ebf55a494a9439367be12262f5b600cfcbddbad03b56efa2716519adbf59f"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/101-b34d0eccd013.png",
+            "bytes": 64747,
+            "sha256": "0bec571b4a19a8257ab47b1d3cacd23f87ba1f4f471d517781f2f38a1a4ebc1c"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/102-ea58f2790344.png",
+            "bytes": 109860,
+            "sha256": "c5f6c359b611e4a1b88817ab9dfe882db0a3756a3fbaa9bd5e31defbbfb862a4"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/103-75946ab947b9.png",
+            "bytes": 109860,
+            "sha256": "c5f6c359b611e4a1b88817ab9dfe882db0a3756a3fbaa9bd5e31defbbfb862a4"
+          }
+        ]
+      },
+      "baseline": [
+        {
+          "label": "A-baseline-1",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 84.221300167,
+          "realSeconds": 84.21,
+          "userSeconds": 111.08,
+          "systemSeconds": 1.81,
+          "maximumResidentSetBytes": 4092641280,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 1.3405771286070538,
+          "logPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-baseline-1.log",
+          "stdoutPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-baseline-1.stdout",
+          "pngInputs": 30,
+          "overlayCount": 13,
+          "alphaCount": 13,
+          "graphCharacters": 5795,
+          "explicitFilterCount": 146,
+          "output": {
+            "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-baseline-1.mp4",
+            "bytes": 12489213,
+            "sha256": "91535b8f6d5c1a937c8bd6ae8ead6e50590a5c1746bb08273b21fe1564333a88"
+          },
+          "rendererAtInvocation": {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+            "bytes": 137900,
+            "sha256": "aaba692617e6139e36b08486cd80344477ac2370f1aa85709e591f22dd49baa2"
+          },
+          "argumentSource": "c17c8de83f127d156c0d031d6866ba2024c7b490"
+        },
+        {
+          "label": "A-baseline-2",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 84.368530333,
+          "realSeconds": 84.36,
+          "userSeconds": 111.22,
+          "systemSeconds": 1.99,
+          "maximumResidentSetBytes": 4096049152,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 1.3419867235656708,
+          "logPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-baseline-2.log",
+          "stdoutPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-baseline-2.stdout",
+          "pngInputs": 30,
+          "overlayCount": 13,
+          "alphaCount": 13,
+          "graphCharacters": 5795,
+          "explicitFilterCount": 146,
+          "output": {
+            "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-baseline-2.mp4",
+            "bytes": 12489213,
+            "sha256": "91535b8f6d5c1a937c8bd6ae8ead6e50590a5c1746bb08273b21fe1564333a88"
+          },
+          "argumentSource": "c17c8de83f127d156c0d031d6866ba2024c7b490",
+          "rendererAtInvocation": {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+            "bytes": 137900,
+            "sha256": "aaba692617e6139e36b08486cd80344477ac2370f1aa85709e591f22dd49baa2"
+          }
+        }
+      ],
+      "candidate": [
+        {
+          "label": "A-candidate-1",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 18.418287540999998,
+          "realSeconds": 18.41,
+          "userSeconds": 46.92,
+          "systemSeconds": 1.18,
+          "maximumResidentSetBytes": 4056793088,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 2.612710483432917,
+          "logPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-candidate-1.log",
+          "stdoutPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-candidate-1.stdout",
+          "pngInputs": 30,
+          "overlayCount": 13,
+          "alphaCount": 13,
+          "graphCharacters": 6132,
+          "explicitFilterCount": 146,
+          "output": {
+            "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-candidate-1.mp4",
+            "bytes": 12489213,
+            "sha256": "91535b8f6d5c1a937c8bd6ae8ead6e50590a5c1746bb08273b21fe1564333a88"
+          },
+          "argumentSource": "current builder",
+          "rendererAtInvocation": {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+            "bytes": 137900,
+            "sha256": "aaba692617e6139e36b08486cd80344477ac2370f1aa85709e591f22dd49baa2"
+          }
+        },
+        {
+          "label": "A-candidate-2",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 19.126196875,
+          "realSeconds": 19.12,
+          "userSeconds": 47.54,
+          "systemSeconds": 1.36,
+          "maximumResidentSetBytes": 4071112704,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 2.557531380753138,
+          "logPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-candidate-2.log",
+          "stdoutPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-candidate-2.stdout",
+          "pngInputs": 30,
+          "overlayCount": 13,
+          "alphaCount": 13,
+          "graphCharacters": 6132,
+          "explicitFilterCount": 146,
+          "output": {
+            "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-candidate-2.mp4",
+            "bytes": 12489213,
+            "sha256": "91535b8f6d5c1a937c8bd6ae8ead6e50590a5c1746bb08273b21fe1564333a88"
+          },
+          "argumentSource": "current builder",
+          "rendererAtInvocation": {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+            "bytes": 137900,
+            "sha256": "aaba692617e6139e36b08486cd80344477ac2370f1aa85709e591f22dd49baa2"
+          }
+        }
+      ],
+      "comparison": {
+        "video": true,
+        "audio": true,
+        "mp4": true
+      },
+      "meanWallSeconds": {
+        "baseline": 84.29491525,
+        "candidate": 18.772242208,
+        "saved": 65.52267304200001,
+        "reductionPercent": 77.73027927921193
+      },
+      "maximumFfmpegResidentBytes": {
+        "baseline": 4096049152,
+        "candidate": 4071112704
+      },
+      "calculatedPixelEquationFrames": {
+        "baseline": 436,
+        "candidate": 73,
+        "meaning": "calculated from exact saved caption clocks and enable condition; not an instrumented execution count"
+      },
+      "precompression": {
+        "equal": true,
+        "baseline": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-baseline-precompression.stdout",
+          "bytes": 59019,
+          "sha256": "495d2678761b7b94744cd204e46f4ddbbae3c83be6f1eddeb09ef593da769150"
+        },
+        "candidate": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-candidate-precompression.stdout",
+          "bytes": 59019,
+          "sha256": "495d2678761b7b94744cd204e46f4ddbbae3c83be6f1eddeb09ef593da769150"
+        }
+      },
+      "audio": {
+        "equal": true,
+        "baseline": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-baseline-audio.stdout",
+          "bytes": 84681,
+          "sha256": "fd7ee14c05434e188a29f8e6bba6326d9a59023acb71c5d733ca44311f836a90"
+        },
+        "candidate": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-candidate-audio.stdout",
+          "bytes": 84681,
+          "sha256": "fd7ee14c05434e188a29f8e6bba6326d9a59023acb71c5d733ca44311f836a90"
+        }
+      },
+      "encodeControl": {
+        "label": "A-encode-control",
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "wallSeconds": 2.781916584,
+        "realSeconds": 2.77,
+        "userSeconds": 29.87,
+        "systemSeconds": 0.61,
+        "maximumResidentSetBytes": 876675072,
+        "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+        "averageCpuCores": 11.00361010830325,
+        "logPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-encode-control.log",
+        "stdoutPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-encode-control.stdout"
+      },
+      "encodeControlOutput": {
+        "output": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/A-encode-control.mp4",
+          "bytes": 12489213,
+          "sha256": "91535b8f6d5c1a937c8bd6ae8ead6e50590a5c1746bb08273b21fe1564333a88"
+        },
+        "meaning": "separate measurement: FFV1 decoding of the exact preencoder frames plus original encoder/audio-copy/mux; not isolated codec CPU time"
+      }
+    },
+    {
+      "manifest": {
+        "name": "B",
+        "startFrame": 10058,
+        "endFrameExclusive": 10552,
+        "reason": "Normal, partial Color, Panel, Bounce, switches and gaps",
+        "frameCount": 494,
+        "subtitleIds": [
+          "new-material-digest-20260926-v001-instruction-instruction-000134",
+          "new-material-digest-20260926-v001-instruction-instruction-000135",
+          "new-material-digest-20260926-v001-instruction-instruction-000136",
+          "new-material-digest-20260926-v001-instruction-instruction-000137",
+          "new-material-digest-20260926-v001-instruction-instruction-000138",
+          "new-material-digest-20260926-v001-instruction-instruction-000139",
+          "new-material-digest-20260926-v001-instruction-instruction-000140"
+        ],
+        "subtitleCount": 7,
+        "structure": {
+          "pngInputs": 12,
+          "overlayCount": 7,
+          "alphaCount": 7,
+          "graphCharacters": 2666,
+          "explicitFilterCount": 68
+        },
+        "input": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-background.nut",
+          "bytes": 317366032,
+          "sha256": "e133d0a794ed29ee679389353e8098e02ed29403c42ad8ea8cc627a9afd8e3d6"
+        },
+        "audio": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-audio.m4a",
+          "bytes": 401403,
+          "sha256": "13e74af9520f1a797a1e2fa106609e8a187626c88a6c097350aae6eb546db7ba"
+        },
+        "pngs": [
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/134-ea31dc32a44d.png",
+            "bytes": 101485,
+            "sha256": "c215af341f91970bb006122ecae88115f3f31cad7bb14dfc3812ce01226f0224"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/135-3b97d3056c20.png",
+            "bytes": 76007,
+            "sha256": "391e48867beb16674f3602aa8959f80e165c04db647b615e9c8a085d8a29cd20"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/136-afe3a261d2cd.png",
+            "bytes": 131151,
+            "sha256": "3a8974432086271ed17dd666cb67704a9dafa268848e2810611d044622878265"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/137-f7f3774178ca.png",
+            "bytes": 126363,
+            "sha256": "cb1e5c1ae9cfdb8b923ddab427387e87ba88f8c77610742f41f9e766c2ba8dc8"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/138-537c9100bbb8.png",
+            "bytes": 117820,
+            "sha256": "ace7678ccae79c6d40386b58df6be5b5591d396f31efd930777943be0af45e81"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-stable.png",
+            "bytes": 128958,
+            "sha256": "a2bbaf0791b6eb555f3cfa41e9f6338bc5f37aa06a1edecd889dbdae75e0ff2c"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-small.png",
+            "bytes": 123954,
+            "sha256": "920dc36e4dff7416e94969c88789db998fd264cbbe4882c243678cd5865e9e66"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-middle.png",
+            "bytes": 136101,
+            "sha256": "ca4b3964430382c86a8ca35e7d5f5a50c4a5eab92535119d9d307ed384edb2a8"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-maximum.png",
+            "bytes": 144863,
+            "sha256": "41033cfeea4f3ea5e73687234d08802811acf4cce3e8ad66585cb7639dc123cd"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-between-middle-maximum.png",
+            "bytes": 140955,
+            "sha256": "b60d9aa720843d8fb07a533e92b01637598554b294239ca7f8ef3e09be4cc569"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/139-050a52de9787-between-middle-stable.png",
+            "bytes": 122344,
+            "sha256": "834e11e24082b9abc3bcd1da1436f3b16cfaf59fcad15557f4ae6e1f359f4eee"
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/overlays/140-8384fea4f489.png",
+            "bytes": 106568,
+            "sha256": "e3dd0a8d889af82d31fb9fa03ad7762129b6d6a00241df49ea83477c4a00d076"
+          }
+        ]
+      },
+      "baseline": [
+        {
+          "label": "B-baseline-1",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 79.6906215,
+          "realSeconds": 79.68,
+          "userSeconds": 106.32,
+          "systemSeconds": 1.51,
+          "maximumResidentSetBytes": 2421309440,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 1.3532881526104417,
+          "logPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-baseline-1.log",
+          "stdoutPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-baseline-1.stdout",
+          "pngInputs": 12,
+          "overlayCount": 7,
+          "alphaCount": 7,
+          "graphCharacters": 2666,
+          "explicitFilterCount": 68,
+          "output": {
+            "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-baseline-1.mp4",
+            "bytes": 12069582,
+            "sha256": "dd165886308ef1c3ade52b546c67655c9e5b7bebffbafd65e1fd85430bfb5a96"
+          },
+          "rendererAtInvocation": {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+            "bytes": 137900,
+            "sha256": "aaba692617e6139e36b08486cd80344477ac2370f1aa85709e591f22dd49baa2"
+          },
+          "argumentSource": "c17c8de83f127d156c0d031d6866ba2024c7b490"
+        },
+        {
+          "label": "B-baseline-2",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 79.86267220799999,
+          "realSeconds": 79.85,
+          "userSeconds": 106.35,
+          "systemSeconds": 1.71,
+          "maximumResidentSetBytes": 2365276160,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 1.3532874139010644,
+          "logPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-baseline-2.log",
+          "stdoutPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-baseline-2.stdout",
+          "pngInputs": 12,
+          "overlayCount": 7,
+          "alphaCount": 7,
+          "graphCharacters": 2666,
+          "explicitFilterCount": 68,
+          "output": {
+            "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-baseline-2.mp4",
+            "bytes": 12069582,
+            "sha256": "dd165886308ef1c3ade52b546c67655c9e5b7bebffbafd65e1fd85430bfb5a96"
+          },
+          "argumentSource": "c17c8de83f127d156c0d031d6866ba2024c7b490",
+          "rendererAtInvocation": {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+            "bytes": 137900,
+            "sha256": "aaba692617e6139e36b08486cd80344477ac2370f1aa85709e591f22dd49baa2"
+          }
+        }
+      ],
+      "candidate": [
+        {
+          "label": "B-candidate-1",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 12.633408917,
+          "realSeconds": 12.62,
+          "userSeconds": 40.65,
+          "systemSeconds": 0.86,
+          "maximumResidentSetBytes": 2374516736,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 3.2892234548335977,
+          "logPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-candidate-1.log",
+          "stdoutPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-candidate-1.stdout",
+          "pngInputs": 12,
+          "overlayCount": 7,
+          "alphaCount": 7,
+          "graphCharacters": 2849,
+          "explicitFilterCount": 68,
+          "output": {
+            "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-candidate-1.mp4",
+            "bytes": 12069582,
+            "sha256": "dd165886308ef1c3ade52b546c67655c9e5b7bebffbafd65e1fd85430bfb5a96"
+          },
+          "argumentSource": "current builder",
+          "rendererAtInvocation": {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+            "bytes": 137900,
+            "sha256": "aaba692617e6139e36b08486cd80344477ac2370f1aa85709e591f22dd49baa2"
+          }
+        },
+        {
+          "label": "B-candidate-2",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "wallSeconds": 12.576613499999999,
+          "realSeconds": 12.57,
+          "userSeconds": 40.74,
+          "systemSeconds": 0.85,
+          "maximumResidentSetBytes": 2299248640,
+          "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+          "averageCpuCores": 3.3086714399363566,
+          "logPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-candidate-2.log",
+          "stdoutPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-candidate-2.stdout",
+          "pngInputs": 12,
+          "overlayCount": 7,
+          "alphaCount": 7,
+          "graphCharacters": 2849,
+          "explicitFilterCount": 68,
+          "output": {
+            "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-candidate-2.mp4",
+            "bytes": 12069582,
+            "sha256": "dd165886308ef1c3ade52b546c67655c9e5b7bebffbafd65e1fd85430bfb5a96"
+          },
+          "argumentSource": "current builder",
+          "rendererAtInvocation": {
+            "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+            "bytes": 137900,
+            "sha256": "aaba692617e6139e36b08486cd80344477ac2370f1aa85709e591f22dd49baa2"
+          }
+        }
+      ],
+      "comparison": {
+        "video": true,
+        "audio": true,
+        "mp4": true
+      },
+      "meanWallSeconds": {
+        "baseline": 79.776646854,
+        "candidate": 12.605011208499999,
+        "saved": 67.1716356455,
+        "reductionPercent": 84.19962268962175
+      },
+      "maximumFfmpegResidentBytes": {
+        "baseline": 2421309440,
+        "candidate": 2374516736
+      },
+      "calculatedPixelEquationFrames": {
+        "baseline": 413,
+        "candidate": 42,
+        "meaning": "calculated from exact saved caption clocks and enable condition; not an instrumented execution count"
+      },
+      "precompression": {
+        "equal": true,
+        "baseline": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-baseline-precompression.stdout",
+          "bytes": 55547,
+          "sha256": "b3f4b5cb08162061fba5bdf5ec7327dc36f3f281a2e31791008aefdf204a4688"
+        },
+        "candidate": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-candidate-precompression.stdout",
+          "bytes": 55547,
+          "sha256": "b3f4b5cb08162061fba5bdf5ec7327dc36f3f281a2e31791008aefdf204a4688"
+        }
+      },
+      "audio": {
+        "equal": true,
+        "baseline": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-baseline-audio.stdout",
+          "bytes": 79753,
+          "sha256": "2cab41b66f4129fdf11f6bdbe76829c753d1b7fa0a7909f4f5b8913a9f3374a6"
+        },
+        "candidate": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-candidate-audio.stdout",
+          "bytes": 79753,
+          "sha256": "2cab41b66f4129fdf11f6bdbe76829c753d1b7fa0a7909f4f5b8913a9f3374a6"
+        }
+      },
+      "encodeControl": {
+        "label": "B-encode-control",
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "wallSeconds": 2.902386125,
+        "realSeconds": 2.89,
+        "userSeconds": 29.24,
+        "systemSeconds": 0.57,
+        "maximumResidentSetBytes": 893435904,
+        "memoryScope": "timed ffmpeg process, all its threads; Node parent excluded",
+        "averageCpuCores": 10.314878892733564,
+        "logPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-encode-control.log",
+        "stdoutPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-encode-control.stdout"
+      },
+      "encodeControlOutput": {
+        "output": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-composite-localization-20260927-v001/B-encode-control.mp4",
+          "bytes": 12069582,
+          "sha256": "dd165886308ef1c3ade52b546c67655c9e5b7bebffbafd65e1fd85430bfb5a96"
+        },
+        "meaning": "separate measurement: FFV1 decoding of the exact preencoder frames plus original encoder/audio-copy/mux; not isolated codec CPU time"
+      }
+    }
+  ]
+}

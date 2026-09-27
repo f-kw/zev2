@@ -1050,6 +1050,10 @@ export const buildPresentationCompositeArgumentsV001 = ({
     const phaseOffset = visibleStart - element.startFrame;
     const phase = phaseOffset === 0 ? 'N' : `(N+${phaseOffset})`;
     const alpha = `alpha(X,Y)*min(1,min((${phase}+1)/4,(${element.displayFrameCount}-${phase})/4))`;
+    // The original four-frame envelope is exactly one on this interior.
+    // Keep its absolute caption phase through range cuts and finite-state joins.
+    const fadePhase = phaseOffset === 0 ? 'n' : `(n+${phaseOffset})`;
+    const fadeOnly = `lt(${fadePhase},3)+gt(${fadePhase},${element.displayFrameCount - 4})`;
     if (Object.hasOwn(element, 'presentationPulse') || Object.hasOwn(element, 'presentationMotion')) {
       const motion = Object.hasOwn(element, 'presentationMotion');
       const program = motion ? getPresentationCaptionMotionProgramV001({element, canvas: plan.canvas})
@@ -1076,12 +1080,12 @@ export const buildPresentationCompositeArgumentsV001 = ({
       }
       filters.push(segments.map((_segment, segmentIndex) => `[${prefix}${index}segment${segmentIndex}]`).join('')
         + `concat=n=${segments.length}:v=1:a=0,settb=expr=1/${plan.canvas.fps},setpts=N,`
-        + `geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='${alpha}',`
+        + `geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='${alpha}':enable='${fadeOnly}',`
         + `setpts=PTS+${visibleStart - origin}/${plan.canvas.fps}/TB[overlay${index}]`);
     } else {
       filters.push(
         `[${inputIndex}:v]format=rgba,trim=end_frame=${visibleEnd - visibleStart},setpts=PTS-STARTPTS,`
-        + `geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='${alpha}',`
+        + `geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='${alpha}':enable='${fadeOnly}',`
         + `setpts=PTS+${visibleStart - origin}/${plan.canvas.fps}/TB[overlay${index}]`,
       );
     }
