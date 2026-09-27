@@ -28,6 +28,94 @@ const checkFile = async ref => {
   requireValue((await stat(ref.path)).isFile(), 'input is not a regular file: ' + ref.path);
   requireValue(await hashPresentationNativeFileV001(ref.path) === ref.fileSha256, 'file SHA mismatch: ' + ref.path);
 };
+const inside = (root, file) => {
+  const relative = path.relative(root, file);
+  return relative !== '' && relative !== '..' && !relative.startsWith('..' + path.sep) && !path.isAbsolute(relative);
+};
+
+function publicationDescriptor({finiteState, stagingDirectory, publication, candidateVideo}) {
+  requireValue(finiteState?.executionMethod === PRESENTATION_NATIVE_STREAM_EXECUTION_V001
+    && publication?.status === 'published' && path.isAbsolute(publication.outputDirectory ?? '')
+    && path.resolve(publication.outputDirectory) === publication.outputDirectory,
+  'invalid native publication context');
+  const refs = finiteState.inputManifest?.inputRefs;
+  requireValue(Array.isArray(refs), 'published native inputs are missing');
+  const completed = refs.filter(ref => ref.role === 'completed-media');
+  requireValue(completed.length === 1 && path.dirname(completed[0].path) === stagingDirectory
+    && path.isAbsolute(stagingDirectory) && path.resolve(stagingDirectory) === stagingDirectory
+    && path.basename(stagingDirectory) === 'publish'
+    && publication.outputDirectory !== stagingDirectory && !inside(stagingDirectory, publication.outputDirectory)
+    && !inside(publication.outputDirectory, stagingDirectory), 'invalid published input roots');
+  requireValue(candidateVideo?.path === path.join(publication.outputDirectory, path.basename(completed[0].path))
+    && candidateVideo.fileSha256 === completed[0].fileSha256
+    && Number.isSafeInteger(candidateVideo.bytes) && candidateVideo.bytes > 0,
+  'published candidate differs from completed native input');
+  const byPath = new Map();
+  for (const ref of refs) {
+    requireValue(path.isAbsolute(ref.path) && path.resolve(ref.path) === ref.path && /^[a-f0-9]{64}$/.test(ref.fileSha256),
+      'invalid published source input');
+    requireValue(!byPath.has(ref.path) || byPath.get(ref.path).fileSha256 === ref.fileSha256,
+      'conflicting published source input');
+    byPath.set(ref.path, ref);
+  }
+  for (const group of finiteState.sceneBindings) for (const binding of [...group.states, ...group.alternates])
+    requireValue(byPath.get(binding.pngPath)?.fileSha256 === binding.pngSha256, 'published PNG lacks original input binding');
+  const files = [...byPath.values()].filter(ref => inside(stagingDirectory, ref.path)).map(ref => ({
+    sourcePath: ref.path, publishedPath: path.join(publication.outputDirectory, path.relative(stagingDirectory, ref.path)),
+    fileSha256: ref.fileSha256, inputRoles: refs.filter(row => row.path === ref.path).map(row => row.role),
+    captionBindings: finiteState.sceneBindings.flatMap(group => [...group.states, ...group.alternates]
+      .filter(binding => binding.pngPath === ref.path).map(binding => ({instructionId: group.instructionId, bindingId: binding.bindingId})))}));
+  return {schemaVersion: 'native-qc-publication-binding-v001', operation: 'atomic-directory-rename', stagingDirectory,
+    outputDirectory: publication.outputDirectory, candidateVideo, files};
+}
+
+async function checkPublicationFiles(binding) {
+  let sourceExists = true;
+  try {await lstat(binding.stagingDirectory);} catch (error) {if (error.code === 'ENOENT') sourceExists = false; else throw error;}
+  requireValue(!sourceExists, 'publication source directory still exists');
+  const root = await lstat(binding.outputDirectory);
+  requireValue(root.isDirectory() && !root.isSymbolicLink(), 'published output root is not a real directory');
+  for (const ref of binding.files) {
+    let current = binding.outputDirectory;
+    const components = path.relative(binding.outputDirectory, ref.publishedPath).split(path.sep);
+    for (const [index, component] of components.entries()) {
+      current = path.join(current, component); const info = await lstat(current);
+      requireValue(!info.isSymbolicLink() && (index === components.length - 1 ? info.isFile() : info.isDirectory()),
+        'published input is not a regular file under its output root');
+    }
+    await checkFile({path: ref.publishedPath, fileSha256: ref.fileSha256});
+  }
+  requireValue((await stat(binding.candidateVideo.path)).size === binding.candidateVideo.bytes, 'published candidate size differs');
+}
+
+/** Explicitly bind the completed atomic directory move; no missing-path search or proof rewrite. */
+export async function createPresentationNativePublicationBindingV001(context) {
+  const binding = publicationDescriptor(context); await checkPublicationFiles(binding); return binding;
+}
+
+async function publicationAccess(context, samples) {
+  if (context === null) return {resolve: ref => ref, verify: checkFile};
+  const {binding, finiteState, publication, candidateVideo} = context;
+  const expected = publicationDescriptor({finiteState, stagingDirectory: binding?.stagingDirectory, publication, candidateVideo});
+  requireValue(equal(binding, expected), 'published input mapping differs from exact native input coverage');
+  const savedSamples = new Map(finiteState.samples.map(sample => [sample.instructionId + ':' + sample.frame, sample]));
+  requireValue(samples.every(sample => equal(savedSamples.get(sample.instructionId + ':' + sample.frame), sample)),
+    'published sample differs from completed native evidence');
+  await checkPublicationFiles(binding);
+  const byPath = new Map(binding.files.map(ref => [ref.sourcePath, ref]));
+  const resolve = ref => {
+    const mapped = byPath.get(ref.path);
+    if (!mapped) return ref;
+    requireValue(ref.fileSha256 === mapped.fileSha256, 'published input SHA differs from saved proof');
+    return {...ref, path: mapped.publishedPath};
+  };
+  return {resolve, verify: ref => checkFile(resolve(ref)), binding, finiteState};
+}
+
+function checkPublicationProof(access, proof) {
+  if (access.binding) requireValue(equal(proof.sceneBindings, access.finiteState.sceneBindings)
+    && equal(proof.nativeLayers, access.finiteState.nativeLayers), 'published proof differs from native preparation');
+}
 const recipeOnly = sample => ({instructionId: sample.instructionId, frame: sample.frame,
   mediaFrame: sample.mediaFrame, expectedState: sample.expectedState, expectedOverlaySha256: sample.expectedOverlaySha256,
   crop: sample.crop, references: sample.references.map(({id, kind, layers}) => ({id, kind, layers})),
@@ -256,30 +344,40 @@ async function readSampleReceipt(sample, verify = checkFile) {
  * Sharing file checks is confined to this call; no result cache survives it.
  * Released RGBs are reported as absent/reproducible, never as checked bytes.
  */
-export async function verifyPresentationNativeSampleReceiptsV001({samples}) {
+export async function verifyPresentationNativeSampleReceiptsV001({samples, publication = null}) {
+  const access = await publicationAccess(publication, samples);
   const verified = new Map();
   const verify = async ref => {
     const previous = verified.get(ref.path);
     requireValue(previous === undefined || previous === ref.fileSha256, 'conflicting retained input SHA');
-    if (previous === undefined) {await checkFile(ref); verified.set(ref.path, ref.fileSha256);}
+    if (previous === undefined) {await access.verify(ref); verified.set(ref.path, ref.fileSha256);}
   };
-  for (const sample of samples) await readSampleReceipt(sample, verify);
+  for (const sample of samples) checkPublicationProof(access, await readSampleReceipt(sample, verify));
   return {status: 'passed', samples: samples.length, verifiedFileCount: verified.size,
     releasedSamples: samples.filter(sample => sample.referenceRetention.state === 'released-verified-pass').length,
     scope: 'receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry'};
 }
 
 /** Re-execute saved comparisons in a new directory; an intentionally absent file is never declared verified. */
-export async function revalidatePresentationNativeSampleV001({sample, directory, run, batchSize, signal}) {
-  const proof = await readSampleReceipt(sample);
-  const result = await processPresentationNativeSampleV001({sample: proof.sample, sceneBindings: proof.sceneBindings,
-    nativeLayers: proof.nativeLayers, tools: proof.tools, directory, run, batchSize: batchSize ?? proof.batchSize,
-    retention: 'retain-all', preparedArtifacts: proof.inputRefs, signal});
+export async function revalidatePresentationNativeSampleV001({sample, directory, run, batchSize, signal, publication = null}) {
+  const access = await publicationAccess(publication, [sample]);
+  const proof = await readSampleReceipt(sample, access.verify);
+  checkPublicationProof(access, proof);
+  const mapping = new Map((access.binding?.files ?? []).map(ref => [ref.sourcePath, ref.publishedPath]));
+  const relocate = (value, key = '') => Array.isArray(value) ? value.map(row => relocate(row))
+    : value !== null && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([name, row]) => [name, relocate(row, name)]))
+      : ['path', 'pngPath', 'sourcePath', 'outputPath'].includes(key) && mapping.has(value) ? mapping.get(value) : value;
+  const runtime = relocate(proof);
+  const result = await processPresentationNativeSampleV001({sample: runtime.sample, sceneBindings: runtime.sceneBindings,
+    nativeLayers: runtime.nativeLayers, tools: runtime.tools, directory, run, batchSize: batchSize ?? proof.batchSize,
+    retention: 'retain-all', preparedArtifacts: runtime.inputRefs, signal});
   const newSample = result.sample;
   requireValue(equal(newSample.classes, sample.classes) && newSample.visible === sample.visible
     && newSample.completedRgbSha256 === sample.completedRgbSha256
     && equal(newSample.references.map(({rgbPath: _path, ...row}) => row), sample.references.map(({rgbPath: _path, ...row}) => row)),
   'regenerated RGB hash, distances, classes or decision differ');
-  for (const ref of proof.inputRefs) await checkFile(ref);
+  for (const ref of proof.inputRefs) await access.verify(ref);
+  if (access.binding) result.publicationRevalidation = {schemaVersion: 'native-published-input-revalidation-v001',
+    sourceCheckpoint: sample.referenceRetention.checkpoint, publicationBindingSha256: hashJson(access.binding)};
   return result;
 }

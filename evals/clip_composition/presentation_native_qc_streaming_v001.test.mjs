@@ -9,7 +9,8 @@ import path from 'node:path';
 import {buildPresentationNativeLayerPlanV001, buildPresentationNativeLayerDecodeArgumentsV001,
   buildPresentationNativeReferenceArgumentsV001} from './presentation_native_frame_qc_v001.mjs';
 import {processPresentationNativeSampleV001, revalidatePresentationNativeSampleV001,
-  verifyPresentationNativeSampleReceiptsV001, hashPresentationNativeFileV001} from './presentation_native_qc_streaming_v001.mjs';
+  verifyPresentationNativeSampleReceiptsV001, hashPresentationNativeFileV001,
+  createPresentationNativePublicationBindingV001, PRESENTATION_NATIVE_STREAM_EXECUTION_V001} from './presentation_native_qc_streaming_v001.mjs';
 import {readPresentationQcEvidenceV001, writePresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 
 const exec = promisify(execFile), hash = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -31,12 +32,14 @@ const observation = sample => ({frame: sample.frame, instructionId: sample.instr
 
 // Only 8 x 8 PNGs and native planar/RGB reference files are generated. There is
 // no final video, encode, subtitle rendering, model call or external material.
-async function fixture(root, {passing = true} = {}) {
+async function fixture(root, {passing = true, publishing = false} = {}) {
   const input = path.join(root, 'input'); await mkdir(input);
   const ffmpegPath = await realpath('/opt/homebrew/bin/ffmpeg');
   const magickPath = await realpath('/opt/homebrew/bin/magick');
   const tools = {ffmpeg: await ref(ffmpegPath), imageMagick: await ref(magickPath)};
-  const base = path.join(input, 'base.png'), png = path.join(input, 'caption.png');
+  const stagingDirectory = path.join(root, 'work', 'publish');
+  if (publishing) await mkdir(path.join(stagingDirectory, 'overlays'), {recursive: true});
+  const base = path.join(input, 'base.png'), png = publishing ? path.join(stagingDirectory, 'overlays', 'caption.png') : path.join(input, 'caption.png');
   await run(magickPath, ['-size', '8x8', 'xc:#101010', base]);
   await run(magickPath, ['-size', '8x8', 'xc:none', '-fill', '#ffffff80', '-draw', 'rectangle 2,2 5,5', png]);
   const pngRef = await ref(png);
@@ -65,8 +68,86 @@ async function fixture(root, {passing = true} = {}) {
       '-c:v', 'png', '-pix_fmt', 'rgb24', completed]);
   } else await copyFile(base, completed);
   sample.completedFrame = await ref(completed);
-  return {sample, sceneBindings, nativeLayers, tools, preparedArtifacts};
+  return {sample, sceneBindings, nativeLayers, tools, preparedArtifacts, stagingDirectory};
 }
+
+async function publishFixture(root, input, result) {
+  // Only the publication mechanics are represented by these synthetic media
+  // bytes. The PNG, planar inputs, sample RGBs and proof are actual tool output.
+  const media = path.join(input.stagingDirectory, 'presentation-rendered-v002.mp4');
+  await writeFile(media, 'SYNTHETIC STORAGE FIXTURE, NOT VIDEO');
+  const completed = {...await ref(media), role: 'completed-media'};
+  const finiteState = {executionMethod: PRESENTATION_NATIVE_STREAM_EXECUTION_V001,
+    inputManifest: {inputRefs: [completed, {...await ref(input.sceneBindings[0].states[0].pngPath), role: 'png-caption-state'}]},
+    sceneBindings: input.sceneBindings, nativeLayers: input.nativeLayers, samples: [result.sample]};
+  const publication = {status: 'published', outputDirectory: path.join(root, 'published')};
+  await rename(input.stagingDirectory, publication.outputDirectory);
+  const candidateVideo = {...await ref(path.join(publication.outputDirectory, path.basename(media))), bytes: (await stat(path.join(publication.outputDirectory, path.basename(media)))).size};
+  const binding = await createPresentationNativePublicationBindingV001({finiteState, stagingDirectory: input.stagingDirectory,
+    publication, candidateVideo});
+  return {binding, finiteState, publication, candidateVideo};
+}
+
+test('published PNGs use an explicit rename binding; another process rereads and regenerates released pass and retained failure', async () => temporary(async root => {
+  for (const passing of [true, false]) {
+    const directory = path.join(root, String(passing)); await mkdir(directory);
+    const input = await fixture(directory, {passing, publishing: true});
+    const baseline = await processPresentationNativeSampleV001({...input, directory: path.join(directory, 'baseline')});
+    const result = await processPresentationNativeSampleV001({...input, directory: path.join(directory, 'sample'),
+      retention: 'verified-pass-regenerable-v001'});
+    assert.equal(result.sample.referenceRetention.state, passing ? 'released-verified-pass' : 'retained');
+    const originalProof = await readFile(result.sample.referenceRetention.checkpoint.path);
+    const publication = await publishFixture(directory, input, result);
+    await assert.rejects(verifyPresentationNativeSampleReceiptsV001({samples: [result.sample]}), /ENOENT/);
+    const contextPath = path.join(directory, 'published-context.json'), resultPath = path.join(directory, 'regeneration.json');
+    await writeFile(contextPath, JSON.stringify(publication), {flag: 'wx'});
+    await exec(process.execPath, ['--input-type=module', '-e', `
+      import {readFile,writeFile} from 'node:fs/promises';
+      import {verifyPresentationNativeSampleReceiptsV001,revalidatePresentationNativeSampleV001} from ${JSON.stringify(moduleUrl)};
+      const publication=JSON.parse(await readFile(process.argv[1],'utf8'));
+      const sample=publication.finiteState.samples[0];
+      const receipt=await verifyPresentationNativeSampleReceiptsV001({samples:[sample],publication});
+      const result=await revalidatePresentationNativeSampleV001({sample,publication,directory:process.argv[2]});
+      await writeFile(process.argv[3],JSON.stringify({receipt,result}),{flag:'wx'});
+    `, contextPath, path.join(directory, 'regenerated'), resultPath], {maxBuffer: 1024 * 1024});
+    const regenerated = await readJson(resultPath);
+    assert.equal(regenerated.receipt.status, 'passed');
+    assert.deepEqual(observation(regenerated.result.sample), observation(result.sample));
+    assert.deepEqual(regenerated.result.publicationRevalidation.sourceCheckpoint, result.sample.referenceRetention.checkpoint);
+    assert.match(regenerated.result.publicationRevalidation.publicationBindingSha256, /^[a-f0-9]{64}$/);
+    for (const [index, row] of regenerated.result.sample.references.entries())
+      assert.deepEqual(await readFile(row.rgbPath), await readFile(baseline.sample.references[index].rgbPath));
+    assert.deepEqual(await readFile(result.sample.referenceRetention.checkpoint.path), originalProof);
+  }
+}));
+
+test('published mappings reject omissions, duplicates, foreign roots/identities and replaced or missing files', async () => temporary(async root => {
+  const input = await fixture(root, {publishing: true});
+  const result = await processPresentationNativeSampleV001({...input, directory: path.join(root, 'sample'), retention: 'verified-pass-regenerable-v001'});
+  const publication = await publishFixture(root, input, result);
+  for (const mutate of [
+    p => {p.binding.files.pop();}, p => {p.binding.files.push(p.binding.files[0]);},
+    p => {p.binding.files[1].publishedPath += '.other';}, p => {p.binding.files[1].sourcePath += '.other';},
+    p => {p.binding.files[1].captionBindings[0].instructionId = 'caption-other';},
+    p => {p.binding.files[1].fileSha256 = '0'.repeat(64);},
+    p => {p.binding.outputDirectory = path.dirname(p.binding.outputDirectory);},
+    p => {p.binding.stagingDirectory = path.dirname(p.binding.stagingDirectory);},
+    p => {p.binding.files[1].publishedPath = path.join(p.binding.outputDirectory, '..', 'foreign.png');},
+    p => {p.candidateVideo.path += '.other';}, p => {p.binding.schemaVersion = 'unknown';},
+  ]) {
+    const forged = structuredClone(publication); mutate(forged);
+    await assert.rejects(verifyPresentationNativeSampleReceiptsV001({samples: [result.sample], publication: forged}),
+      /published|publication/);
+  }
+  const png = publication.binding.files.find(row => row.captionBindings.length).publishedPath, bytes = await readFile(png);
+  await copyFile(input.sample.baseFrame.path, png);
+  await assert.rejects(verifyPresentationNativeSampleReceiptsV001({samples: [result.sample], publication}), /SHA mismatch/);
+  await writeFile(png, bytes); await rename(png, png + '.hidden');
+  try {await assert.rejects(revalidatePresentationNativeSampleV001({sample: result.sample, publication,
+    directory: path.join(root, 'must-not-start'), run: async () => assert.fail('missing publication must not run tools')}), /ENOENT/);}
+  finally {await rename(png + '.hidden', png);}
+  assert.equal((await verifyPresentationNativeSampleReceiptsV001({samples: [result.sample], publication})).status, 'passed');
+}));
 
 test('retained and released passing samples keep every candidate, then a separate Node regenerates byte-identical evidence', async () => temporary(async root => {
   const input = await fixture(root);

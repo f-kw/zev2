@@ -18,6 +18,7 @@ import {PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001} from './presentation_integr
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
 import {createPresentationNativeAssetCacheV001} from './presentation_native_asset_cache_v001.mjs';
 import {writePresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
+import {createPresentationNativePublicationBindingV001} from './presentation_native_qc_streaming_v001.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const directory = path.join(repo, 'evals/clip_composition');
@@ -210,6 +211,9 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     assert.equal(publication.status, 'published');
     const candidateVideo = await bind(path.join(publication.outputDirectory, 'presentation-rendered-v002.mp4'));
     assert.equal(candidateVideo.fileSha256, rendered.fileSha256);
+    const nativeQcPublication = await createPresentationNativePublicationBindingV001({
+      finiteState: draw.completedFrameQc.evidence.finiteState, stagingDirectory: draw.stagingDirectory,
+      publication, candidateVideo});
     await verifySourceReferences(view, drawingEvidenceRef); await verifyEditedOrchestrationDrawingRulesRefV001(rules);
     assert.equal((await bind(backgroundProofRef.path)).fileSha256, backgroundProofRef.fileSha256);
     timings.publicationAndReverificationMilliseconds = performance.now() - publicationStarted;
@@ -221,7 +225,7 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
       scope: derived.scope, qcScope: range === null ? 'full-digest' : 'requested-range-only',
       expectedFrameCount: derived.scope.frameCount, sourceReferences, finalAudioClock, outputMedia: draw.outputMedia,
       background, backgroundProofRef, nativeAssets: {...cache.stats, profileSha256: cache.profileSha256},
-      finalQc: draw.finalQc, completedFrameQc: draw.completedFrameQc, publication, timings,
+      finalQc: draw.finalQc, completedFrameQc: draw.completedFrameQc, publication, nativeQcPublication, timings,
       processTimings: processObserver.getPerformance(),
       timingScope: 'completion excludes its own serialization/write and the caller result write',
       formalTrustChanged: false, humanQuality: 'not-evaluated', paidApiCalls: 0, newExternalMediaTransfers: 0};

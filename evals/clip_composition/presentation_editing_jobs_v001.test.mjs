@@ -18,7 +18,7 @@ import {createOrchestrationContextV001, createOrchestrationJudgmentInputV001,
 import {buildPresentationNativeLayerPlanV001, buildPresentationNativeLayerDecodeArgumentsV001,
   buildPresentationNativeReferenceArgumentsV001} from './presentation_native_frame_qc_v001.mjs';
 import {PRESENTATION_NATIVE_STREAM_EXECUTION_V001, processPresentationNativeSampleV001,
-  hashPresentationNativeFileV001} from './presentation_native_qc_streaming_v001.mjs';
+  hashPresentationNativeFileV001, createPresentationNativePublicationBindingV001} from './presentation_native_qc_streaming_v001.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const saved = path.join(repo, 'docs/reports/digest-presentation-orchestration-stage3-inputs-20260918');
@@ -31,7 +31,7 @@ async function until(operation) {
   while (Date.now() < deadline) {const result = await operation(); if (result) return result; await delay(10);}
   throw new Error('Synthetic worker did not reach the expected state');
 }
-async function fixture(t, mode = 'success', {streamingSample = null} = {}) {
+async function fixture(t, mode = 'success', {streamingSample = null, streamingPublication = null} = {}) {
   const root = await mkdtemp(path.join(os.tmpdir(), 'zev-editing-jobs-test-'));
   const generatedRoot = await mkdtemp(path.join(repo, 'evals/clip_composition/outputs/presentation/stage4-editing-jobs-test-'));
   const managers = [];
@@ -111,6 +111,13 @@ const result={status:'passed',viewSha256:job.viewSha256,projectionSha256:job.pro
 const streamingSample=${JSON.stringify(streamingSample)};
 if(streamingSample) result.completedFrameQc={evidence:{finiteState:{
   executionMethod:${JSON.stringify(PRESENTATION_NATIVE_STREAM_EXECUTION_V001)},samples:[streamingSample]}}};
+const streamingPublication=${JSON.stringify(streamingPublication)};
+if(streamingPublication) {
+  result.candidateVideo=streamingPublication.candidateVideo;
+  result.publication=streamingPublication.publication;
+  result.nativeQcPublication=streamingPublication.binding;
+  result.completedFrameQc={evidence:{finiteState:streamingPublication.finiteState}};
+}
 await writePresentationQcEvidenceV001(job.resultPath+'.pending',result);
 await rename(job.resultPath+'.pending',job.resultPath);
 if(mode==='gate') {
@@ -140,7 +147,8 @@ async function streamingReceipt(t) {
   const bind = async pathname => ({path: pathname, fileSha256: await hashPresentationNativeFileV001(pathname)});
   const ffmpeg = await realpath('/opt/homebrew/bin/ffmpeg'), magick = await realpath('/opt/homebrew/bin/magick');
   const tools = {ffmpeg: await bind(ffmpeg), imageMagick: await bind(magick)};
-  const base = path.join(root, 'base.png'), caption = path.join(root, 'caption.png');
+  const stagingDirectory = path.join(root, 'work', 'publish'); await mkdir(path.join(stagingDirectory, 'overlays'), {recursive: true});
+  const base = path.join(root, 'base.png'), caption = path.join(stagingDirectory, 'overlays', 'caption.png');
   await run(magick, ['-size', '8x8', 'xc:#101010', base]);
   await run(magick, ['-size', '8x8', 'xc:none', '-fill', '#ffffff80', '-draw', 'rectangle 2,2 5,5', caption]);
   const captionRef = await bind(caption), layer = {bindingId: 'caption-state', localFrame: 3, displayFrameCount: 10};
@@ -162,14 +170,26 @@ async function streamingReceipt(t) {
     '-video_size', '8x8', '-i', expected, '-frames:v', '1', '-c:v', 'png', '-pix_fmt', 'rgb24', completed]);
   sample.completedFrame = await bind(completed);
   const result = await processPresentationNativeSampleV001({sample, sceneBindings, nativeLayers, tools,
-    preparedArtifacts, directory: path.join(root, 'receipt'), retention: 'retain-all'});
+    preparedArtifacts, directory: path.join(root, 'receipt'), retention: 'verified-pass-regenerable-v001'});
   assert.equal(result.sample.visible, true);
-  return result.sample;
+  const sourceVideo = path.join(stagingDirectory, 'presentation-rendered-v002.mp4');
+  await writeFile(sourceVideo, 'SYNTHETIC RESULT: process test, not playable media');
+  const completedRef = {...await bind(sourceVideo), role: 'completed-media'};
+  const finiteState = {executionMethod: PRESENTATION_NATIVE_STREAM_EXECUTION_V001,
+    inputManifest: {inputRefs: [completedRef, {...captionRef, role: 'png-caption-state'}]},
+    sceneBindings, nativeLayers, samples: [result.sample]};
+  const publication = {status: 'published', outputDirectory: path.join(root, 'published')};
+  await rename(stagingDirectory, publication.outputDirectory);
+  const candidatePath = path.join(publication.outputDirectory, path.basename(sourceVideo));
+  const candidateVideo = {...await bind(candidatePath), bytes: (await lstat(candidatePath)).size};
+  const binding = await createPresentationNativePublicationBindingV001({finiteState, stagingDirectory, publication, candidateVideo});
+  return {sample: result.sample, publication: {binding, finiteState, publication, candidateVideo}};
 }
 
 test('共有保存後の実比較証拠を再読し、正常時だけ編集jobを公開し、欠損・改ざんを成功にしない', async t => {
   for (const mode of ['valid', 'missing', 'tampered']) await t.test(mode, async t => {
-    const sample = await streamingReceipt(t), f = await fixture(t, 'gate', {streamingSample: sample});
+    const {sample, publication} = await streamingReceipt(t);
+    const f = await fixture(t, 'gate', {streamingSample: sample, streamingPublication: publication});
     const manager = await f.create(), started = await manager.start({snapshot: f.snapshot, kind: 'full'});
     await until(() => exists(f.ready));
     await writeFile(f.release, 'release'); await until(() => exists(f.resultReady));

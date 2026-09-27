@@ -8,9 +8,9 @@
       "fileSha256": "f6dfe9606eac597ba3e496557187c2b71ddcc977d779243aef429aae4bf7cbf6"
     },
     {
-      "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/measurement.json",
-      "bytes": 16635,
-      "fileSha256": "3c9945eec42a820fc45eeca59c0ce29540b9736c2f890c70f9d9615aa5610455"
+      "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/measurement.json",
+      "bytes": 16628,
+      "fileSha256": "a9ff8979225b33e2953cdca0413883f6b69aa7b81076765d806c6b5e205e9b7b"
     }
   ],
   "old": {
@@ -205,11 +205,11 @@
     "status": "passed",
     "stage": "small",
     "variant": "stream32",
-    "startedAt": "2026-09-27T05:28:22.319Z",
-    "completedAt": "2026-09-27T05:30:53.833Z",
-    "elapsedSeconds": 151.514134916,
-    "readAndBindSeconds": 10.927267583,
-    "evidenceWriteSeconds": 0.1288996669999906,
+    "startedAt": "2026-09-27T05:54:57.656Z",
+    "completedAt": "2026-09-27T05:57:26.859Z",
+    "elapsedSeconds": 149.202449583,
+    "readAndBindSeconds": 10.157632957999999,
+    "evidenceWriteSeconds": 0.14617987500000162,
     "preparationVerificationBefore": null,
     "preparationVerificationAfter": null,
     "protectedEvidenceVerification": null,
@@ -241,10 +241,10 @@
       "totalMemoryBytes": 38654705664,
       "cacheControl": "OS cache and external process contention not controlled"
     },
-    "nodeParentPeakResidentSetBytes": 1669496832,
+    "nodeParentPeakResidentSetBytes": 1674133504,
     "parentMemoryScope": "Node measurement parent, includes one full saved shared evidence read; excludes external tools",
     "childProcessCount": 175,
-    "maximumTimedChildResidentSetBytes": 619380736,
+    "maximumTimedChildResidentSetBytes": 618217472,
     "childBlockInputOperations": 0,
     "childBlockOutputOperations": 0,
     "childResourcesMeaning": "sequential /usr/bin/time -l tool calls; OS counters are not I/O byte estimates; not combined simultaneous parent+child peak",
@@ -258,7 +258,7 @@
         "logicalCandidates": 757,
         "classCount": 740,
         "visible": true,
-        "elapsedSeconds": 22.475503750000005,
+        "elapsedSeconds": 21.599189666999997,
         "metrics": {
           "logicalReferenceCount": 757,
           "referenceRgbOutputs": 744,
@@ -270,26 +270,26 @@
           "generatedReferenceBytes": 1105456032,
           "referenceReadBytes": 3337169688,
           "baselineReadBytes": 1124771796,
-          "inputVerificationBytes": 3138019451,
+          "inputVerificationBytes": 3138026365,
           "rgbReadBytes": 1150030872,
           "phasesMilliseconds": {
-            "inputVerification": 2650.0005840000013,
-            "completedRgbCrop": 150.2395830000005,
-            "evidenceWrite": 38.57612499999959,
-            "referenceComposition": 14140.950459000018,
-            "referenceVerification": 619.165122999988,
-            "rgbComparison": 2110.529541,
-            "baselineComparison": 1501.2937089999978,
-            "checkpointRead": 88.32591700000194,
-            "cleanup": 724.5241669999959
+            "inputVerification": 2559.2257510000018,
+            "completedRgbCrop": 44.699500000000626,
+            "evidenceWrite": 37.95754099999613,
+            "referenceComposition": 13519.086626,
+            "referenceVerification": 624.00504,
+            "rgbComparison": 2071.4718749999993,
+            "baselineComparison": 1485.8414169999996,
+            "checkpointRead": 86.85579199999847,
+            "cleanup": 724.7659170000006
           },
-          "wallClockMs": 22471.923458,
+          "wallClockMs": 21595.764042,
           "batchSize": 32,
-          "checkpointBytes": 5261448
+          "checkpointBytes": 5261447
         },
         "retainedDirectory": {
           "files": 2,
-          "logicalBytes": 6747276,
+          "logicalBytes": 6747275,
           "allocatedBytes": 6750208
         },
         "peakReferenceStorage": {
@@ -312,7 +312,7 @@
         "logicalCandidates": 758,
         "classCount": 746,
         "visible": true,
-        "elapsedSeconds": 18.730384583,
+        "elapsedSeconds": 18.699767875,
         "metrics": {
           "logicalReferenceCount": 758,
           "referenceRgbOutputs": 746,
@@ -324,26 +324,26 @@
           "generatedReferenceBytes": 1108427688,
           "referenceReadBytes": 3344598828,
           "baselineReadBytes": 1126257624,
-          "inputVerificationBytes": 3155123906,
+          "inputVerificationBytes": 3155130820,
           "rgbReadBytes": 1144087560,
           "phasesMilliseconds": {
-            "inputVerification": 2589.1435839999976,
-            "completedRgbCrop": 42.590041999996174,
-            "evidenceWrite": 37.66591700000572,
-            "referenceComposition": 10453.138207000018,
-            "referenceVerification": 659.3895029999912,
-            "rgbComparison": 2159.460291000003,
-            "baselineComparison": 1550.807541999995,
-            "checkpointRead": 89.0439170000027,
-            "cleanup": 728.2128750000047
+            "inputVerification": 2577.802958,
+            "completedRgbCrop": 40.934792000000016,
+            "evidenceWrite": 39.199791999999434,
+            "referenceComposition": 10418.035834999988,
+            "referenceVerification": 656.3560409999845,
+            "rgbComparison": 2180.9845419999983,
+            "baselineComparison": 1536.8535839999968,
+            "checkpointRead": 94.13549999999668,
+            "cleanup": 731.8341250000012
           },
-          "wallClockMs": 18727.903832999997,
+          "wallClockMs": 18697.282334,
           "batchSize": 32,
-          "checkpointBytes": 5270349
+          "checkpointBytes": 5270328
         },
         "retainedDirectory": {
           "files": 2,
-          "logicalBytes": 6756177,
+          "logicalBytes": 6756156,
           "allocatedBytes": 6758400
         },
         "peakReferenceStorage": {
@@ -366,7 +366,7 @@
         "logicalCandidates": 752,
         "classCount": 739,
         "visible": true,
-        "elapsedSeconds": 22.794373042000007,
+        "elapsedSeconds": 23.012899249999997,
         "metrics": {
           "logicalReferenceCount": 752,
           "referenceRgbOutputs": 739,
@@ -378,26 +378,26 @@
           "generatedReferenceBytes": 1098026892,
           "referenceReadBytes": 3314882268,
           "baselineReadBytes": 1117342656,
-          "inputVerificationBytes": 3138126215,
+          "inputVerificationBytes": 3138133129,
           "rgbReadBytes": 1136658420,
           "phasesMilliseconds": {
-            "inputVerification": 2596.3486660000053,
-            "completedRgbCrop": 43.77008400000341,
-            "evidenceWrite": 36.24295799998799,
-            "referenceComposition": 14362.60412600002,
-            "referenceVerification": 645.2373300000181,
-            "rgbComparison": 2246.919167,
-            "baselineComparison": 1617.7527910000063,
-            "checkpointRead": 97.29358300000604,
-            "cleanup": 726.8239580000081
+            "inputVerification": 2589.149999999994,
+            "completedRgbCrop": 41.882791000003635,
+            "evidenceWrite": 37.21166600000288,
+            "referenceComposition": 14629.673957999941,
+            "referenceVerification": 662.3684150000336,
+            "rgbComparison": 2179.113207999995,
+            "baselineComparison": 1619.6472080000094,
+            "checkpointRead": 96.60700000000361,
+            "cleanup": 727.9437079999916
           },
-          "wallClockMs": 22792.242542,
+          "wallClockMs": 23010.843625,
           "batchSize": 32,
-          "checkpointBytes": 5258408
+          "checkpointBytes": 5258416
         },
         "retainedDirectory": {
           "files": 2,
-          "logicalBytes": 6744236,
+          "logicalBytes": 6744244,
           "allocatedBytes": 6746112
         },
         "peakReferenceStorage": {
@@ -420,7 +420,7 @@
         "logicalCandidates": 758,
         "classCount": 746,
         "visible": true,
-        "elapsedSeconds": 18.789905500000007,
+        "elapsedSeconds": 18.799028584,
         "metrics": {
           "logicalReferenceCount": 758,
           "referenceRgbOutputs": 746,
@@ -432,26 +432,26 @@
           "generatedReferenceBytes": 1108427688,
           "referenceReadBytes": 3344598828,
           "baselineReadBytes": 1126257624,
-          "inputVerificationBytes": 3154752750,
+          "inputVerificationBytes": 3154759664,
           "rgbReadBytes": 1144087560,
           "phasesMilliseconds": {
-            "inputVerification": 2591.97304099999,
-            "completedRgbCrop": 42.983124999998836,
-            "evidenceWrite": 37.409250000011525,
-            "referenceComposition": 10509.575373,
-            "referenceVerification": 685.251711000019,
-            "rgbComparison": 2135.1039579999924,
-            "baselineComparison": 1544.6196670000063,
-            "checkpointRead": 88.17470800000592,
-            "cleanup": 733.4184580000001
+            "inputVerification": 2584.494041999991,
+            "completedRgbCrop": 44.56762499999604,
+            "evidenceWrite": 36.871790999983205,
+            "referenceComposition": 10544.82850100001,
+            "referenceVerification": 663.0692509999935,
+            "rgbComparison": 2152.321250000008,
+            "baselineComparison": 1532.8998330000031,
+            "checkpointRead": 87.76412500000151,
+            "cleanup": 729.7804160000087
           },
-          "wallClockMs": 18787.848542000007,
+          "wallClockMs": 18797.210833999998,
           "batchSize": 32,
-          "checkpointBytes": 5270385
+          "checkpointBytes": 5270374
         },
         "retainedDirectory": {
           "files": 2,
-          "logicalBytes": 6756213,
+          "logicalBytes": 6756202,
           "allocatedBytes": 6758400
         },
         "peakReferenceStorage": {
@@ -474,7 +474,7 @@
         "logicalCandidates": 751,
         "classCount": 738,
         "visible": true,
-        "elapsedSeconds": 20.13561858400001,
+        "elapsedSeconds": 19.55817262499999,
         "metrics": {
           "logicalReferenceCount": 751,
           "referenceRgbOutputs": 738,
@@ -486,26 +486,26 @@
           "generatedReferenceBytes": 1096541064,
           "referenceReadBytes": 3310424784,
           "baselineReadBytes": 1115856828,
-          "inputVerificationBytes": 3143545671,
+          "inputVerificationBytes": 3143552585,
           "rgbReadBytes": 1135172592,
           "phasesMilliseconds": {
-            "inputVerification": 2612.1271249999845,
-            "completedRgbCrop": 49.29299999999057,
-            "evidenceWrite": 35.94100000002072,
-            "referenceComposition": 10894.528125999976,
-            "referenceVerification": 671.6898739999597,
-            "rgbComparison": 2261.5759169999947,
-            "baselineComparison": 2387.376166999995,
-            "checkpointRead": 84.86870799999451,
-            "cleanup": 726.0401249999995
+            "inputVerification": 2589.315542000011,
+            "completedRgbCrop": 52.08787499999744,
+            "evidenceWrite": 35.534124999991036,
+            "referenceComposition": 10592.27845599997,
+            "referenceVerification": 646.7182880000182,
+            "rgbComparison": 2165.421875,
+            "baselineComparison": 2241.6192909999954,
+            "checkpointRead": 86.63204199999745,
+            "cleanup": 727.6156669999909
           },
-          "wallClockMs": 20133.933917000002,
+          "wallClockMs": 19556.57708399999,
           "batchSize": 32,
-          "checkpointBytes": 5247983
+          "checkpointBytes": 5247971
         },
         "retainedDirectory": {
           "files": 2,
-          "logicalBytes": 6733811,
+          "logicalBytes": 6733799,
           "allocatedBytes": 6737920
         },
         "peakReferenceStorage": {
@@ -528,7 +528,7 @@
         "logicalCandidates": 757,
         "classCount": 741,
         "visible": true,
-        "elapsedSeconds": 19.243988415999993,
+        "elapsedSeconds": 19.094092334000003,
         "metrics": {
           "logicalReferenceCount": 757,
           "referenceRgbOutputs": 745,
@@ -540,26 +540,26 @@
           "generatedReferenceBytes": 1106941860,
           "referenceReadBytes": 3340141344,
           "baselineReadBytes": 1124771796,
-          "inputVerificationBytes": 3140064629,
+          "inputVerificationBytes": 3140071543,
           "rgbReadBytes": 1148545044,
           "phasesMilliseconds": {
-            "inputVerification": 2584.840624999997,
-            "completedRgbCrop": 46.953708000000915,
-            "evidenceWrite": 39.29250000001048,
-            "referenceComposition": 10653.731291999924,
-            "referenceVerification": 656.139915000007,
-            "rgbComparison": 2231.194292,
-            "baselineComparison": 1782.393584000005,
-            "checkpointRead": 85.88116600000649,
-            "cleanup": 734.392583000008
+            "inputVerification": 2551.3909589999967,
+            "completedRgbCrop": 49.26379100000486,
+            "evidenceWrite": 36.73033400000713,
+            "referenceComposition": 10682.04229399997,
+            "referenceVerification": 655.5615029999317,
+            "rgbComparison": 2122.002124999999,
+            "baselineComparison": 1765.171875,
+            "checkpointRead": 82.87516599999799,
+            "cleanup": 726.2017079999932
           },
-          "wallClockMs": 19242.248749999984,
+          "wallClockMs": 19092.617541999993,
           "batchSize": 32,
-          "checkpointBytes": 5268169
+          "checkpointBytes": 5268163
         },
         "retainedDirectory": {
           "files": 2,
-          "logicalBytes": 6753997,
+          "logicalBytes": 6753991,
           "allocatedBytes": 6758400
         },
         "peakReferenceStorage": {
@@ -582,7 +582,7 @@
         "logicalCandidates": 757,
         "classCount": 741,
         "visible": false,
-        "elapsedSeconds": 17.883092167000026,
+        "elapsedSeconds": 17.705641333000006,
         "metrics": {
           "logicalReferenceCount": 757,
           "referenceRgbOutputs": 745,
@@ -594,25 +594,25 @@
           "generatedReferenceBytes": 1106941860,
           "referenceReadBytes": 3340141344,
           "baselineReadBytes": 1124771796,
-          "inputVerificationBytes": 3136858487,
+          "inputVerificationBytes": 3136865401,
           "rgbReadBytes": 1148545044,
           "phasesMilliseconds": {
-            "inputVerification": 2545.4464580000204,
-            "completedRgbCrop": 41.56837500000256,
-            "evidenceWrite": 37.97191599998041,
-            "referenceComposition": 10312.347332999867,
-            "referenceVerification": 659.363960000017,
-            "rgbComparison": 2202.6664159999928,
-            "baselineComparison": 1543.6024170000164,
-            "checkpointRead": 89.64670800001477
+            "inputVerification": 2468.403874999989,
+            "completedRgbCrop": 45.831915999995545,
+            "evidenceWrite": 38.73733299999731,
+            "referenceComposition": 10288.973123999924,
+            "referenceVerification": 657.7831230000302,
+            "rgbComparison": 2110.6061250000203,
+            "baselineComparison": 1562.7636249999923,
+            "checkpointRead": 92.28945899999235
           },
-          "wallClockMs": 17863.913499999995,
+          "wallClockMs": 17683.965875000024,
           "batchSize": 32,
-          "checkpointBytes": 5268542
+          "checkpointBytes": 5268541
         },
         "retainedDirectory": {
           "files": 747,
-          "logicalBytes": 1113696230,
+          "logicalBytes": 1113696229,
           "allocatedBytes": 1114460160
         },
         "peakReferenceStorage": {
@@ -640,15 +640,15 @@
     "cumulativePeakMeaning": "sum of prior retained comparison RGB bytes plus current module-reported comparison RGB peak; completed RGB, proof JSON and retained prepared inputs are excluded and reported separately",
     "finalDirectory": {
       "files": 1643,
-      "logicalBytes": 1180035667,
+      "logicalBytes": 1180035579,
       "allocatedBytes": 1182941184
     },
     "bundle": {
-      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/samples.qc.json",
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/samples.qc.json",
       "schemaVersion": "presentation-qc-evidence-store-v001",
-      "fileSha256": "90f3635d7a90b6233dc9944de17171b10ef25842410b97ae89a6ebe064ab22af",
-      "rootSha256": "89bb5c9fda9f6679516584789847e8a7ea955d1dc150f8f907ab6af5d28d30a3",
-      "bytes": 17080758,
+      "fileSha256": "0bbce4824984ed63702d823d12e50d8d340014bd01c906305445ad65c16a29d5",
+      "rootSha256": "1234a5c83240a9133fb5eee04d64d3a00ca2471a9ac85fc9e6cdf7cdda3de6d9",
+      "bytes": 17080706,
       "nodeCount": 29281,
       "reusedObjectCount": 5639,
       "deduplicatedNodeCount": 4423
@@ -662,21 +662,21 @@
     }
   },
   "newPhasesSeconds": {
-    "inputVerification": 18.169880082999995,
-    "completedRgbCrop": 0.41739791699999296,
-    "evidenceWrite": 0.26309966600001644,
-    "referenceComposition": 81.32687491599982,
-    "referenceVerification": 4.596237416,
-    "rgbComparison": 15.347449581999983,
-    "baselineComparison": 11.92784587700002,
-    "checkpointRead": 0.6232347070000323,
-    "cleanup": 4.3734121660000165
+    "inputVerification": 17.919783126999988,
+    "completedRgbCrop": 0.3192682899999982,
+    "evidenceWrite": 0.26224258199997713,
+    "referenceComposition": 80.67491879399981,
+    "referenceVerification": 4.565861660999992,
+    "rgbComparison": 14.98192100000002,
+    "baselineComparison": 11.744796832999997,
+    "checkpointRead": 0.627159083999988,
+    "cleanup": 4.368141540999986
   },
   "sameStepSeconds": {
     "old": 120.31371816500005,
-    "new": 101.68795983099979,
-    "reduction": 18.625758334000267,
-    "reductionPercent": 15.48099303892896,
+    "new": 100.5419697449998,
+    "reduction": 19.77174842000025,
+    "reductionPercent": 16.43349463515455,
     "includes": [
       "completed frame crop",
       "reference composition",
@@ -694,6 +694,11 @@
     "Whole elapsed boundaries differ; do not calculate a whole-QC speedup from their raw totals.",
     "Parent RSS did not improve. Child RSS is separate from parent and not a simultaneous total.",
     "Old allocated reference size is final stat measurement, not historical sampling of every write. New allocated peak is at completed batch boundaries.",
-    "Full 424-point measurement and storage-policy adoption remain pending advisor audit."
-  ]
+    "Storage policy approved by advisor; full 424-point execution follows final publication-fix small proof."
+  ],
+  "auditCheckpointMeasurement": {
+    "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/measurement.json",
+    "bytes": 16635,
+    "fileSha256": "3c9945eec42a820fc45eeca59c0ce29540b9736c2f890c70f9d9615aa5610455"
+  }
 }

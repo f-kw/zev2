@@ -106,7 +106,9 @@ export async function createEditingJobsV001({directory, generatedRoot, drawingRu
     demand(equal(result.drawingRulesRef, job.drawingRulesRef), '描画規則が実行開始時と一致しません');
     const finite = result.completedFrameQc?.evidence?.finiteState;
     if (finite?.executionMethod === PRESENTATION_NATIVE_STREAM_EXECUTION_V001)
-      await verifyPresentationNativeSampleReceiptsV001({samples: finite.samples});
+      await verifyPresentationNativeSampleReceiptsV001({samples: finite.samples,
+        publication: result.publication || result.nativeQcPublication ? {binding: result.nativeQcPublication,
+          finiteState: finite, candidateVideo: result.candidateVideo, publication: result.publication} : null});
     const candidate = await assertEditingFileV001(result.candidateVideo);
     const content = {schemaVersion: 'presentation-editing-media-v001', ...candidate, id: job.id, kind: job.kind,
       revision: job.revision, jobKey: job.jobKey, range: job.range, drawingRulesRef: job.drawingRulesRef,

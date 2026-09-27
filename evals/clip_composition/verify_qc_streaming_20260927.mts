@@ -3,13 +3,17 @@ import assert from 'node:assert/strict';
 import {execFileSync, spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createReadStream} from 'node:fs';
-import {lstat, mkdir, readFile, readdir, stat, writeFile} from 'node:fs/promises';
+import {lstat, mkdir, readFile, readdir, realpath, stat, writeFile} from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {readPresentationQcEvidenceV001, writePresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 import {validatePresentationNativeFrameQcInspectionsV001, verifyPresentationNativeInputRefV001} from './presentation_native_frame_qc_v001.mjs';
-import {checkFiniteExecutionEvidence} from './presentation_integrity_state_qc_v001.mjs';
+import {checkFiniteExecutionEvidence, combinePresentationIntegrityStateQcV001} from './presentation_integrity_state_qc_v001.mjs';
+import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+import {PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V002} from './presentation_exact_replay_qc_v001.mjs';
+import {evaluatePresentationRendererQcV002} from './presentation_renderer_qc_v002.mjs';
+import {buildPresentationRenderApplicationResultsV002} from './render_presentation_v002.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SOURCE = path.join(ROOT, 'runtime/artifacts/qc-evidence-common-20260927-v001/measurement-v003/shared-qc.json');
@@ -276,13 +280,17 @@ export async function measureQcStreaming20260927({stage, directory, variant = 's
       assert.equal(await fileSha(SOURCE), SOURCE_SHA, 'original shared evidence changed');
       protectedEvidenceVerification = {elapsedSeconds: seconds(start), legacy, shared: source.source};
     }
-    let finiteReceipt: any = null;
+    let finiteReceipt: any = null, finiteAssemblySeconds = 0, finiteEvidenceWriteSeconds = 0;
     if (stage === 'full') {
+      const assemblyStart = performance.now();
       const finite = assembleFullFinite(source, outputs, referenceRoot, {sampleMeasurements: rows,
         phaseMeaning: 'new sample processing only; historical prepared frames/layers were verified and reused, never rerun'});
+      finiteAssemblySeconds = seconds(assemblyStart);
+      const finiteWriteStart = performance.now();
       const file = path.join(directory, 'finite-result.qc.json');
       finiteReceipt = {path: file, ...await writePresentationQcEvidenceV001(file, finite)};
       await save(path.join(directory, 'finite-result.receipt.json'), finiteReceipt);
+      finiteEvidenceWriteSeconds = seconds(finiteWriteStart);
     }
     const writeStart = performance.now();
     const bundlePath = path.join(directory, 'samples.qc.json');
@@ -295,7 +303,7 @@ export async function measureQcStreaming20260927({stage, directory, variant = 's
     assert.equal(await fileSha(MP4), MP4_SHA, 'fixed first draft changed during measurement');
     const completedAt = new Date().toISOString();
     const measurement = {schemaVersion: 'qc-streaming-measurement-summary-v001', status: 'passed', stage, variant,
-      startedAt, completedAt, elapsedSeconds: seconds(began), readAndBindSeconds: source.readAndBindSeconds, evidenceWriteSeconds,
+      startedAt, completedAt, elapsedSeconds: seconds(began), readAndBindSeconds: source.readAndBindSeconds, evidenceWriteSeconds, finiteAssemblySeconds, finiteEvidenceWriteSeconds,
       preparationVerificationBefore, preparationVerificationAfter, protectedEvidenceVerification, finiteReceipt,
       source: source.source, preparation: source.preparationRef, plan: source.planRef, video: source.video,
       environment: {node: process.version, platform: process.platform, arch: process.arch, cpu: os.cpus()[0].model,
@@ -545,11 +553,175 @@ export async function byteCheckQcStreaming20260927(legacyDirectory: string, stre
   await save(path.join(streamDirectory, 'independent-reread/byte-check.json'), result); return result;
 }
 
+/** Reuse the bound historical whole-video execution; never execute media tools here. */
+async function buildSavedFinalQc20260927(directory: string) {
+  const source = await loadSource(), reused = reusedPreparation(source);
+  const receiptPath = path.join(directory, 'finite-result.receipt.json'), receipt = await json(receiptPath);
+  assert.equal(receipt.path, path.join(directory, 'finite-result.qc.json'));
+  const finite: any = await readPresentationQcEvidenceV001(receipt.path, {expectedFileSha256: receipt.fileSha256});
+  assert.equal(finite.evidence.samples.length, 424); assert.equal(finite.inspections.length, 326);
+  assert.deepEqual(finite.evidence.preparationReuse, reused.descriptor);
+  assert.deepEqual(finite.evidence.processes.slice(0, reused.processes.length), reused.processes);
+  for (const key of ['baselinePlan', 'autoPresentation', 'orchestrationInput', 'inputManifest', 'renderRange',
+    'sceneBindings', 'nativeLayers', 'frameExtraction', 'executableVersions'])
+    assert.deepEqual(finite.evidence[key], source.finite.evidence[key], 'saved native preparation changed: ' + key);
+  const expectedViolations = source.finite.violations;
+  assert.equal(expectedViolations.length, 1); assert.equal(expectedViolations[0].code, 'NATIVE_FRAME_QC_INVALID');
+  assert(expectedViolations[0].instructionId.endsWith('000103'));
+  assert.deepEqual(finite.violations, expectedViolations); assert.equal(finite.status, 'failed');
+  const preparationVerification = await verifyPreparation(source);
+  const module = await import('./presentation_native_qc_streaming_v001.mjs');
+  const receiptVerification = await module.verifyPresentationNativeSampleReceiptsV001({samples: finite.evidence.samples});
+  for (const ref of finite.evidence.outputArtifacts) assert.equal(await fileSha(ref.path), ref.fileSha256, 'retained native output changed');
+  const native = validatePresentationNativeFrameQcInspectionsV001({plan: source.plan, inspections: finite.inspections});
+  assert.equal(native.status, 'failed'); assert.deepEqual(native.violations, expectedViolations);
+  checkFiniteExecutionEvidence(finite.evidence, finite.inspections, source.plan.canvas);
+
+  const originalRoot = path.join(ROOT, 'runtime/artifacts/digest-new-material-20260926-v001/presentation');
+  const fixedMetadata = [
+    {name: 'replay', path: path.join(RETAINED, 'scratch/exact-replay-result.json'),
+      fileSha256: 'd49a047830fb7872e3a506fe0b9054a6b10af5dc7d3ff9f0bf9ddf26da2f81e8'},
+    {name: 'completion', path: path.join(originalRoot, 'qc-resume-attempt-002/verified-completion.json'),
+      fileSha256: 'd603a1ebcdec2dedadf295ff76462dc339273a098d4ca102814043b3e8997cdd'},
+    {name: 'background', path: path.join(originalRoot, 'background/proof.json'),
+      fileSha256: '75f5864949775ee684f2861c81a8835f867354fdccf08ab4180c466417a05c45'},
+    {name: 'toolIdentity', path: path.join(originalRoot, 'codec-diagnosis-000103-v001/tool-identity.json'),
+      fileSha256: '88abcd2efc7124566a60858440409dc987fb475180585e7531c24027e96d209c'},
+  ];
+  const metadata: any = {};
+  for (const ref of fixedMetadata) {
+    const bytes = await readFile(ref.path); assert.equal(digest(bytes), ref.fileSha256, 'historical metadata changed');
+    metadata[ref.name] = JSON.parse(bytes.toString('utf8'));
+  }
+  const {replay, completion, background, toolIdentity: identity} = metadata;
+  assert.equal(replay.status, 'passed'); assert.deepEqual(replay.violations, []);
+  assert.equal(background.status, 'passed'); assert.equal(background.encodedAudio.status, 'passed');
+  assert.equal(completion.frameCount, 27949); assert.equal(completion.captionCount, 326);
+  assert.deepEqual(await boundFile(completion.retainedVideo.path), completion.retainedVideo);
+  assert.equal(completion.retainedVideo.fileSha256, MP4_SHA);
+  const historicalCommits: Record<string, string> = Object.fromEntries([
+    'presentation_exact_replay_qc_v001.mjs', 'render_presentation_v002.mjs',
+    'presentation_native_frame_qc_v001.mjs', 'presentation_integrity_state_qc_v001.mjs',
+  ].map(file => ['evals/clip_composition/' + file, '6d720c64c5c60f2078beaf1621157adf182a88bd']));
+  historicalCommits['evals/clip_composition/presentation_renderer_qc_v002.mjs'] = 'c2d76dc7e8b9da03631f48babb5fb67a639518ac';
+  const historicalCode = [];
+  for (const ref of replay.evidence.inputManifest.refs) {
+    if (ref.role.startsWith('source:') && historicalCommits[ref.role.slice(7)]) {
+      const repositoryPath = ref.role.slice(7), commit = historicalCommits[repositoryPath];
+      assert.equal(ref.path, path.join(ROOT, repositoryPath));
+      const bytes = execFileSync('git', ['show', commit + ':' + repositoryPath], {cwd: ROOT});
+      assert.equal(digest(bytes), ref.fileSha256); assert.equal(bytes.length, ref.bytes);
+      historicalCode.push({repositoryPath, commit, fileSha256: ref.fileSha256, bytes: ref.bytes});
+    } else {
+      await verifyPresentationNativeInputRefV001(ref);
+      assert.equal((await stat(ref.path)).size, ref.bytes); assert.equal(await realpath(ref.path), ref.realPath);
+    }
+  }
+  for (const ref of [...replay.evidence.generatedArtifacts, ...Object.values(background.outputs) as any[]]) {
+    assert.equal(await fileSha(ref.path), ref.fileSha256); assert.equal((await stat(ref.path)).size, ref.bytes);
+    if (ref.realPath) assert.equal(await realpath(ref.path), ref.realPath);
+  }
+  assert.equal(identity.status, 'passed');
+  assert.equal(replay.evidence.executableVersions.ffmpeg, identity.version);
+  assert.equal(finite.evidence.executableVersions.ffmpeg, identity.version);
+  for (const file of [identity.originalNativePath, identity.originalReplayPath]) {
+    assert.equal(await realpath(file), identity.realPath); assert.equal(await fileSha(file), identity.fileSha256);
+  }
+  const fixedInput = replay.evidence.generatedArtifacts.find((ref: any) => ref.path === path.join(path.dirname(replay.evidence.replay.path), 'fixed-input.json'));
+  assert(fixedInput, 'original exact-replay fixed input missing');
+  const fixedBytes = await readFile(fixedInput.path), fixedInputUtf8 = fixedBytes.toString('utf8');
+  assert.equal(digest(fixedBytes), fixedInput.fileSha256); assert.equal(fixedBytes.length, fixedInput.bytes);
+  assert(Buffer.from(fixedInputUtf8, 'utf8').equals(fixedBytes), 'fixed input is not lossless UTF-8');
+  assert.deepEqual(JSON.parse(fixedInputUtf8), {plan: source.plan, recordBindings: replay.evidence.recordBindings,
+    compositorInput: replay.evidence.compositorInput});
+  const derivedReplay = {...replay, evidence: {...replay.evidence,
+    schemaVersion: PRESENTATION_EXACT_REPLAY_QC_SCHEMA_V002, fixedInputUtf8}};
+
+  // Only metadata is copied and normalized. Sample/proof/artifact objects remain unchanged.
+  // All original receipts and original commands were verified above, before this view exists.
+  const normalizedManifests = new Map<any, any>();
+  const normalizeManifest = (original: any) => {
+    if (normalizedManifests.has(original)) return normalizedManifests.get(original);
+    const manifest = {...original};
+    for (const key of ['inputRefs', 'before', 'after']) manifest[key] = original[key].map((ref: any) => {
+      if (ref.role !== 'tool-ffmpeg') return ref;
+      assert.equal(ref.path, identity.originalNativePath); assert.equal(ref.fileSha256, identity.fileSha256);
+      return {...ref, path: identity.realPath};
+    });
+    manifest.inputRefsCanonicalSha256 = digest(canonicalJson(manifest.inputRefs));
+    normalizedManifests.set(original, manifest); return manifest;
+  };
+  const derivedFinite = {...finite, evidence: {...finite.evidence,
+    inputManifest: normalizeManifest(finite.evidence.inputManifest),
+    processes: finite.evidence.processes.map((row: any) => row.command === identity.originalNativePath
+      ? {...row, command: identity.realPath} : row)},
+    inspections: finite.inspections.map((row: any) => ({...row,
+      nativeFrameQc: {...row.nativeFrameQc, inputManifest: normalizeManifest(row.nativeFrameQc.inputManifest)}}))};
+  const mediaInspection = completion.outputMedia, expectedFrameCount = replay.evidence.expectedFrameCount;
+  assert.equal(expectedFrameCount, completion.frameCount);
+  const currentCompletedMediaRef = completion.retainedVideo;
+  const completed = combinePresentationIntegrityStateQcV001({plan: source.plan, replay: derivedReplay, finite: derivedFinite,
+    expectedFrameCount, currentCompletedMediaRef, mediaInspection});
+  assert.equal(completed.status, 'failed'); assert.deepEqual(completed.violations, expectedViolations);
+  const expectedAudio = {present: true, codecName: 'aac', sampleRate: background.encodedAudio.sampleRate,
+    packetPayloadSha256: background.encodedAudio.packetPayloadSha256};
+  const finalQc = evaluatePresentationRendererQcV002({plan: source.plan,
+    applicationResults: buildPresentationRenderApplicationResultsV002(source.preparation.records),
+    overlayInspections: completed.inspections, mediaInspection, expectedAudio, expectedFrameCount,
+    canvas: source.plan.canvas, requireFinalVisibility: true, completedFrameQcEvidence: completed.evidence,
+    currentCompletedMediaRef});
+  assert.equal(finalQc.status, 'failed'); assert.equal(finalQc.violations.length, 1);
+  assert.equal(finalQc.violations[0].code, 'COMPLETED_FRAME_QC_INVALID');
+  assert.deepEqual(finalQc.violations[0].details.reasons, expectedViolations);
+  for (const ref of fixedMetadata) assert.equal(await fileSha(ref.path), ref.fileSha256);
+  assert.equal(await fileSha(receipt.path), receipt.fileSha256);
+  const payload = {schemaVersion: 'saved-native-final-qc-verification-v001',
+    provenance: {finiteReceipt: receipt, preparationSource: source.source, plan: source.planRef, preparation: source.preparationRef,
+      historicalMetadata: fixedMetadata, historicalCode, fixedInput,
+      preparationVerification: {verifiedFileCount: preparationVerification.verifiedFileCount, verifiedBytes: preparationVerification.verifiedBytes},
+      sampleReceiptVerification: receiptVerification,
+      replayTransformation: {originalSchemaVersion: replay.evidence.schemaVersion, derivedSchemaVersion: derivedReplay.evidence.schemaVersion,
+        change: 'Bind original fixed-input.json bytes as fixedInputUtf8; no historical replay execution or stored evidence changed'},
+      toolPathTransformation: {originalPath: identity.originalNativePath, comparedPath: identity.realPath, fileSha256: identity.fileSha256,
+        change: 'Derived finite manifest tool-ffmpeg path and canonical hash, and derived process command spelling only; sample proof receipts unchanged'},
+      mediaObservationMeaning: 'Frozen saved output/media/audio observations bound to unchanged media bytes; no fresh media probe, render or whole-video replay',
+      actions: {videoEncodes: 0, imageGenerations: 0, mediaProbes: 0, oldEvidenceWrites: 0}},
+    nativeStatus: finite.status, nativeViolations: finite.violations, combinedStatus: completed.status,
+    combinedViolations: completed.violations, finalQc};
+  return {payload, receiptPath};
+}
+
+export async function finalQcStreaming20260927(directory: string, reread = false) {
+  const began = performance.now(), built = await buildSavedFinalQc20260927(directory);
+  const outputPath = path.join(directory, 'final-qc.qc.json'), receiptPath = path.join(directory, 'final-qc.receipt.json');
+  let receipt;
+  if (reread) {
+    receipt = await json(receiptPath); assert.equal(receipt.path, outputPath);
+    const saved: any = await readPresentationQcEvidenceV001(receipt.path, {expectedFileSha256: receipt.fileSha256});
+    assert.deepEqual(saved, built.payload, 'independent final QC reconstruction differs from the saved derived result');
+  } else {
+    receipt = {path: outputPath, ...await writePresentationQcEvidenceV001(outputPath, built.payload)};
+    await save(receiptPath, receipt);
+  }
+  const result = {status: 'passed', processId: process.pid, elapsedSeconds: seconds(began),
+    mode: reread ? 'independent-reconstruction-and-reread' : 'saved-input-final-gate',
+    meaning: 'Connection/verification succeeded; original video native and final QC still fail only on 000103',
+    sourceFiniteReceipt: await boundFile(built.receiptPath), finalQcReceipt: receipt,
+    sampleCount: 424, instructionCount: built.payload.finalQc.instructionCount,
+    nativeStatus: built.payload.nativeStatus, nativeViolations: built.payload.nativeViolations,
+    finalQcStatus: built.payload.finalQc.status, finalQcViolations: built.payload.finalQc.violations,
+    nodeParentPeakResidentSetBytes: process.resourceUsage().maxRSS * 1024,
+    actions: built.payload.provenance.actions};
+  await save(path.join(directory, reread ? 'final-qc-reread.json' : 'final-qc-verification.json'), result); return result;
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  const stage = process.argv[2]; assert(['small', 'full', 'reread', 'legacy-small', 'byte-check'].includes(stage), 'usage: small|full|reread|legacy-small [directory] [retain-all|stream32|stream64], or byte-check <legacy-directory> <stream-directory>');
+  const stage = process.argv[2]; assert(['small', 'full', 'reread', 'legacy-small', 'byte-check', 'final-qc', 'final-qc-reread'].includes(stage), 'usage: small|full|reread|legacy-small [directory] [retain-all|stream32|stream64], byte-check <legacy-directory> <stream-directory>, or final-qc|final-qc-reread <full-directory>');
   const directory = path.resolve(process.argv[3] ?? path.join(DEFAULT_DIRECTORY, stage + '-' + (process.argv[4] ?? 'stream32') + '-v001'));
   if (stage === 'byte-check') assert(process.argv[3] && process.argv[4], 'byte-check requires both saved run directories');
-  const result = stage === 'byte-check' ? await byteCheckQcStreaming20260927(directory, path.resolve(process.argv[4]))
+  if (stage === 'final-qc' || stage === 'final-qc-reread') assert(process.argv[3], 'final QC requires the saved full-run directory');
+  const result = stage === 'final-qc' || stage === 'final-qc-reread' ? await finalQcStreaming20260927(directory, stage === 'final-qc-reread')
+    : stage === 'byte-check' ? await byteCheckQcStreaming20260927(directory, path.resolve(process.argv[4]))
     : stage === 'reread' ? await rereadQcStreaming20260927(directory)
     : stage === 'legacy-small' ? await measureLegacySmall20260927(directory)
     : await measureQcStreaming20260927({stage: stage as 'small' | 'full', directory, variant: process.argv[4]});

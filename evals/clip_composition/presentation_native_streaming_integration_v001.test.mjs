@@ -138,10 +138,12 @@ async function separateReader(file, receipt) {
 
 test('normal native inspector feeds shared storage, a separate reader and combined exact-replay QC', async t => {
   const f = await fixture(t), completed = await composed(f, 'normal');
-  const native = await inspectPresentationNativeFrameQcV001(input(f, completed, 'native'));
+  const native = await inspectPresentationNativeFrameQcV001({...input(f, completed, 'native'),
+    referenceRetention: 'verified-pass-regenerable-v001'});
   assert.equal(native.status, 'passed', JSON.stringify(native.violations));
   assert.equal(native.evidence.executionMethod, 'sample-batched-native-references-v003');
-  assert(native.evidence.samples.every(row => row.referenceRetention.state === 'retained'), 'audit-stage default retains images');
+  assert(native.evidence.samples.every(row => row.referenceRetention.state === 'released-verified-pass'),
+    'normal renderer policy releases only verified passing references');
   checkFiniteExecutionEvidence(native.evidence, native.inspections, f.plan.canvas);
   const replay = await inspectPresentationExactReplayQcV001({plan: f.plan, records: f.records,
     baseMediaPath: f.base.path, completedMediaPath: completed.path, expectedFrameCount: 30,

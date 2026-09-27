@@ -1935,6 +1935,7 @@ export async function inspectPresentationCompletedFrameQcV001({
           imageMagick: {path: imageMagickPath, fileSha256: await fileSha256V002(imageMagickPath)},
         },
         scratchDirectory: path.join(scratchDirectory, 'native-frame-qc'), processObserver,
+        referenceRetention: 'verified-pass-regenerable-v001',
       });
       if (!Array.isArray(native.inspections) || native.inspections.length !== records.length
         || native.inspections.some((inspection, index) => inspection.instructionId !== records[index].element.instructionId)) {

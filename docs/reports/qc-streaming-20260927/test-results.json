@@ -33,7 +33,7 @@
   "knownRendererFailure": "12 行数・行の正の交差・安全領域・空alphaを独立して検出する",
   "notes": [
     "No fixture expected verdict was relaxed.",
-    "151/151 targeted streaming/native/storage/replay/editing tests passed; this is not a claim that the full repository suite passes.",
+    "Final 153/153 targeted streaming/native/storage/replay/editing/publication tests passed; not a full repository suite claim.",
     "Renderer: 2 pass, 1 unchanged known failure, 17 outside selected test-name pattern."
   ],
   "testFiles": [
@@ -46,5 +46,15 @@
     "presentation_native_streaming_integration_v001.test.mjs",
     "presentation_exact_replay_qc_v001.test.mjs",
     "presentation_editing_jobs_v001.test.mjs"
-  ]
+  ],
+  "finalSuite": {
+    "path": "runtime/artifacts/qc-streaming-20260927-v001/final-tests.tap",
+    "fileSha256": "6c9d8ed54e9e9a55e02e80fd750255cb5903f63d071ff67397a2edccc7c8026b",
+    "tests": 153,
+    "pass": 153,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "durationMs": 14606.748084
+  }
 }

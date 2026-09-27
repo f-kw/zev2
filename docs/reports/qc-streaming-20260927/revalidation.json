@@ -1,14 +1,14 @@
 {
   "schemaVersion": "qc-streaming-revalidation-report-v001",
   "source": {
-    "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/result.json",
-    "fileSha256": "e6557d38c6ad10d2628af2ae98155689d19cace15a52431773488dd2844dac2c",
-    "bytes": 2011175
+    "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/independent-reread/result.json",
+    "fileSha256": "ed04ad965e010729883a8ed3d87166d8df7825ee760753eba2daaf88356a788d",
+    "bytes": 2011199
   },
   "status": "passed",
   "receiptCount": 7,
-  "elapsedSeconds": 152.183082458,
-  "readSeconds": 0.212603708,
+  "elapsedSeconds": 153.977241584,
+  "readSeconds": 0.214438459,
   "receiptVerification": {
     "status": "passed",
     "samples": 7,
@@ -16,15 +16,15 @@
     "releasedSamples": 6,
     "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
   },
-  "receiptVerificationSeconds": 6.079335459,
+  "receiptVerificationSeconds": 6.084347707999999,
   "independentRegenerationSampleCount": 7,
   "finalDirectory": {
     "files": 6092,
-    "logicalBytes": 7787184976,
+    "logicalBytes": 7787184936,
     "allocatedBytes": 7794450432
   },
-  "nodeParentPeakResidentSetBytes": 317538304,
-  "maximumTimedChildResidentSetBytes": 617398272,
+  "nodeParentPeakResidentSetBytes": 301563904,
+  "maximumTimedChildResidentSetBytes": 616677376,
   "regeneratedSamples": [
     {
       "sampleIndex": 0,
@@ -42,20 +42,20 @@
         "generatedReferenceBytes": 1105456032,
         "referenceReadBytes": 2212397892,
         "baselineReadBytes": 0,
-        "inputVerificationBytes": 3138019451,
+        "inputVerificationBytes": 3138026365,
         "rgbReadBytes": 1150030872,
         "phasesMilliseconds": {
-          "inputVerification": 2744.701959000002,
-          "completedRgbCrop": 49.044292000000496,
-          "evidenceWrite": 35.40150000000358,
-          "referenceComposition": 10369.961836000002,
-          "referenceVerification": 667.1482919999944,
-          "rgbComparison": 2217.3615000000027,
-          "checkpointRead": 86.85174999999799
+          "inputVerification": 2792.4436669999996,
+          "completedRgbCrop": 47.79254100000071,
+          "evidenceWrite": 42.422083999997994,
+          "referenceComposition": 10594.815542000011,
+          "referenceVerification": 675.3438320000023,
+          "rgbComparison": 2302.1009589999994,
+          "checkpointRead": 90.0970840000009
         },
-        "wallClockMs": 16559.572,
+        "wallClockMs": 16923.523208,
         "batchSize": 32,
-        "checkpointBytes": 5297392
+        "checkpointBytes": 5297390
       }
     },
     {
@@ -74,20 +74,20 @@
         "generatedReferenceBytes": 1108427688,
         "referenceReadBytes": 2218341204,
         "baselineReadBytes": 0,
-        "inputVerificationBytes": 3155123906,
+        "inputVerificationBytes": 3155130820,
         "rgbReadBytes": 1144087560,
         "phasesMilliseconds": {
-          "inputVerification": 2800.2580000000016,
-          "completedRgbCrop": 44.55500000000029,
-          "evidenceWrite": 34.6911670000045,
-          "referenceComposition": 10539.234627999998,
-          "referenceVerification": 659.7783329999875,
-          "rgbComparison": 2353.7917920000036,
-          "checkpointRead": 88.49433399999543
+          "inputVerification": 2822.8046659999964,
+          "completedRgbCrop": 43.34008399999948,
+          "evidenceWrite": 35.61495800000557,
+          "referenceComposition": 10659.730579999989,
+          "referenceVerification": 668.8304970000027,
+          "rgbComparison": 2257.322583000001,
+          "checkpointRead": 87.80154100000073
         },
-        "wallClockMs": 16917.12825,
+        "wallClockMs": 16965.410999999996,
         "batchSize": 32,
-        "checkpointBytes": 5306365
+        "checkpointBytes": 5306356
       }
     },
     {
@@ -106,20 +106,20 @@
         "generatedReferenceBytes": 1098026892,
         "referenceReadBytes": 2197539612,
         "baselineReadBytes": 0,
-        "inputVerificationBytes": 3138126215,
+        "inputVerificationBytes": 3138133129,
         "rgbReadBytes": 1136658420,
         "phasesMilliseconds": {
-          "inputVerification": 2804.0205419999984,
-          "completedRgbCrop": 42.79704199999833,
-          "evidenceWrite": 33.52629200000956,
-          "referenceComposition": 10438.640289999988,
-          "referenceVerification": 651.9702919999982,
-          "rgbComparison": 2231.571499999998,
-          "checkpointRead": 88.01058299999568
+          "inputVerification": 2910.2663329999996,
+          "completedRgbCrop": 42.72608300000138,
+          "evidenceWrite": 38.126416999992216,
+          "referenceComposition": 10551.366997999969,
+          "referenceVerification": 657.1638320000129,
+          "rgbComparison": 2275.071125000002,
+          "checkpointRead": 91.08079199999338
         },
-        "wallClockMs": 16654.779791999994,
+        "wallClockMs": 16925.771541999995,
         "batchSize": 32,
-        "checkpointBytes": 5294124
+        "checkpointBytes": 5294114
       }
     },
     {
@@ -138,20 +138,20 @@
         "generatedReferenceBytes": 1108427688,
         "referenceReadBytes": 2218341204,
         "baselineReadBytes": 0,
-        "inputVerificationBytes": 3154752750,
+        "inputVerificationBytes": 3154759664,
         "rgbReadBytes": 1144087560,
         "phasesMilliseconds": {
-          "inputVerification": 2883.7475010000053,
-          "completedRgbCrop": 45.04641699999047,
-          "evidenceWrite": 35.99566600000253,
-          "referenceComposition": 10467.032625999957,
-          "referenceVerification": 667.6764179999736,
-          "rgbComparison": 2217.106375000003,
-          "checkpointRead": 90.96333300000697
+          "inputVerification": 2828.6352489999845,
+          "completedRgbCrop": 44.30483300000196,
+          "evidenceWrite": 37.08837399999902,
+          "referenceComposition": 10993.278499000022,
+          "referenceVerification": 673.0711680000531,
+          "rgbComparison": 2239.0214169999963,
+          "checkpointRead": 90.61562500000582
         },
-        "wallClockMs": 16822.73220900001,
+        "wallClockMs": 17293.390333999996,
         "batchSize": 32,
-        "checkpointBytes": 5306400
+        "checkpointBytes": 5306395
       }
     },
     {
@@ -170,20 +170,20 @@
         "generatedReferenceBytes": 1096541064,
         "referenceReadBytes": 2194567956,
         "baselineReadBytes": 0,
-        "inputVerificationBytes": 3143545671,
+        "inputVerificationBytes": 3143552585,
         "rgbReadBytes": 1135172592,
         "phasesMilliseconds": {
-          "inputVerification": 2842.1127500000002,
-          "completedRgbCrop": 51.551250000004075,
-          "evidenceWrite": 36.34233299999323,
-          "referenceComposition": 10491.948458999992,
-          "referenceVerification": 664.3371649999899,
-          "rgbComparison": 2209.1159580000094,
-          "checkpointRead": 90.47908299999835
+          "inputVerification": 2930.8930830000027,
+          "completedRgbCrop": 52.92750000000524,
+          "evidenceWrite": 34.98808399999689,
+          "referenceComposition": 10802.609169000018,
+          "referenceVerification": 685.5887029999722,
+          "rgbComparison": 2271.630833000003,
+          "checkpointRead": 82.46733300000778
         },
-        "wallClockMs": 16758.394499999995,
+        "wallClockMs": 17262.665416999997,
         "batchSize": 32,
-        "checkpointBytes": 5283622
+        "checkpointBytes": 5283628
       }
     },
     {
@@ -202,20 +202,20 @@
         "generatedReferenceBytes": 1106941860,
         "referenceReadBytes": 2215369548,
         "baselineReadBytes": 0,
-        "inputVerificationBytes": 3140064629,
+        "inputVerificationBytes": 3140071543,
         "rgbReadBytes": 1148545044,
         "phasesMilliseconds": {
-          "inputVerification": 2880.4054160000087,
-          "completedRgbCrop": 44.1296250000014,
-          "evidenceWrite": 34.01854099999764,
-          "referenceComposition": 10551.64808300008,
-          "referenceVerification": 670.5202090000384,
-          "rgbComparison": 2239.489791,
-          "checkpointRead": 82.08650000000489
+          "inputVerification": 2790.2216240000125,
+          "completedRgbCrop": 47.086708000002545,
+          "evidenceWrite": 35.64399900000717,
+          "referenceComposition": 10471.582417000041,
+          "referenceVerification": 665.0587510000041,
+          "rgbComparison": 2183.598333999995,
+          "checkpointRead": 83.45475000000442
         },
-        "wallClockMs": 16867.628582999998,
+        "wallClockMs": 16624.98533400001,
         "batchSize": 32,
-        "checkpointBytes": 5304127
+        "checkpointBytes": 5304135
       }
     },
     {
@@ -234,49 +234,51 @@
         "generatedReferenceBytes": 1106941860,
         "referenceReadBytes": 2215369548,
         "baselineReadBytes": 0,
-        "inputVerificationBytes": 3136858487,
+        "inputVerificationBytes": 3136865401,
         "rgbReadBytes": 1148545044,
         "phasesMilliseconds": {
-          "inputVerification": 2841.382708000019,
-          "completedRgbCrop": 47.885459000011906,
-          "evidenceWrite": 36.21329200002947,
-          "referenceComposition": 10179.037369999889,
-          "referenceVerification": 663.9394169999869,
-          "rgbComparison": 2165.081208000018,
-          "checkpointRead": 83.42629099998157
+          "inputVerification": 2870.814167000033,
+          "completedRgbCrop": 46.25220799999079,
+          "evidenceWrite": 38.69533399998909,
+          "referenceComposition": 10463.325248999987,
+          "referenceVerification": 675.8825829999696,
+          "rgbComparison": 2233.527417000005,
+          "checkpointRead": 93.93983299998217
         },
-        "wallClockMs": 16404.81058399999,
+        "wallClockMs": 16793.61933299998,
         "batchSize": 32,
-        "checkpointBytes": 5304516
+        "checkpointBytes": 5304514
       }
     }
   ],
   "allRgbHashesDistancesClassesAndDecisionsMatch": true,
   "batch64Source": {
-    "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream64-v002/measurement.json",
-    "fileSha256": "b2d3dcb5bfae2065adc79e2fa30d1dcae7d7471b5be63479619ec6e8f87d5b19",
-    "bytes": 5603
+    "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream64-v003/measurement.json",
+    "bytes": 5673,
+    "fileSha256": "87c6ea6236dc61a0b16b29d8a8709b6d4acb63d84b571153aeee5a2db9dd9735"
   },
   "batch64": {
     "status": "passed",
     "sampleCount": 1,
     "logicalCandidateCount": 757,
     "unchangedOutcomes": true,
-    "elapsedSeconds": 29.756864958999998,
-    "maximumTimedChildResidentSetBytes": 1188298752,
+    "elapsedSeconds": 29.979576958000003,
+    "nodeParentPeakResidentSetBytes": 1676967936,
+    "maximumTimedChildResidentSetBytes": 1186840576,
     "cumulativeNewReferencePeakLogicalBytes": 1105456032,
     "finalNewReferenceLogicalBytes": 0
   },
   "independentActualByteComparison": {
     "source": {
-      "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/byte-check.json",
-      "fileSha256": "6663b577b01129b136d00576fc01bb5929229b507e7ab2baba85343092817771"
+      "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/independent-reread/byte-check.json",
+      "fileSha256": "b71cf03d4976ccb22f905657958dd75aa97dc71c88261ffa1d987b9879868483",
+      "bytes": 8964
     },
     "result": {
       "schemaVersion": "qc-streaming-independent-byte-check-v001",
       "status": "passed",
-      "processId": 26441,
-      "elapsedSeconds": 13.240267292,
+      "processId": 30275,
+      "elapsedSeconds": 13.207502792000001,
       "source": {
         "fileSha256": "89a37d22c3d6ad66a8a12dda2dcdebaac86ee51a3bf3b3c2316417d3267e5d29",
         "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-evidence-common-20260927-v001/measurement-v003/shared-qc.json"
@@ -287,9 +289,9 @@
         "fileSha256": "0b09ad9c72ffb388be8db21cfe73e5a23105954a09c3b447410442e43b0a8878"
       },
       "streamReceipt": {
-        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/samples.receipt.json",
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/samples.receipt.json",
         "bytes": 458,
-        "fileSha256": "8b8fb017ccdf59cc5a1f94210ba7fc06227cef7c11280191c9f2f555d972d39c"
+        "fileSha256": "d5888f230a9e77f27a2c61cc817ab7abbc04016502e36c340f4a23e306b1045b"
       },
       "legacyBundle": {
         "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/legacy-small-v001/legacy-samples.qc.json",
@@ -302,78 +304,78 @@
         "deduplicatedNodeCount": 4423
       },
       "streamBundle": {
-        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/samples.qc.json",
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/samples.qc.json",
         "schemaVersion": "presentation-qc-evidence-store-v001",
-        "fileSha256": "90f3635d7a90b6233dc9944de17171b10ef25842410b97ae89a6ebe064ab22af",
-        "rootSha256": "89bb5c9fda9f6679516584789847e8a7ea955d1dc150f8f907ab6af5d28d30a3",
-        "bytes": 17080758,
+        "fileSha256": "0bbce4824984ed63702d823d12e50d8d340014bd01c906305445ad65c16a29d5",
+        "rootSha256": "1234a5c83240a9133fb5eee04d64d3a00ca2471a9ac85fc9e6cdf7cdda3de6d9",
+        "bytes": 17080706,
         "nodeCount": 29281,
         "reusedObjectCount": 5639,
         "deduplicatedNodeCount": 4423
       },
       "independentReread": {
-        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/result.json",
-        "bytes": 2011175,
-        "fileSha256": "e6557d38c6ad10d2628af2ae98155689d19cace15a52431773488dd2844dac2c"
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/independent-reread/result.json",
+        "bytes": 2011199,
+        "fileSha256": "ed04ad965e010729883a8ed3d87166d8df7825ee760753eba2daaf88356a788d"
       },
       "sourceProofs": [
         {
-          "fileSha256": "f73fc3c2f375646c99fd0661ec455dfb5a7dde7d4a702a92dd396256a9280653",
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/sample-0000/sample-proof.json"
+          "fileSha256": "c9f70f4863131aa5645617ac547058c9fe5a8ab7fa5c14e0538db9c6ff5f95c7",
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/sample-0000/sample-proof.json"
         },
         {
-          "fileSha256": "1fc2a63b2b8f9e503017702d14bba966267994fe2c9c21e912042ab3c75192c9",
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/sample-0001/sample-proof.json"
+          "fileSha256": "a7bd5638fc36c118ec1d2382d92ecad29b8f077c9e0287b7f40ef07217092a81",
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/sample-0001/sample-proof.json"
         },
         {
-          "fileSha256": "5e3fcb53d907a4fc51d2cd88990b09a81cab63457b836137c5ba8cbcdf91561a",
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/sample-0018/sample-proof.json"
+          "fileSha256": "ddb58100149ace37d1fb1396379c35c1e247860db4c5e62243690e971f9e53b8",
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/sample-0018/sample-proof.json"
         },
         {
-          "fileSha256": "061cdf3219568710b8c9e6324e7914a8293b35caa140711b4fc0aa7bd4c3fcad",
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/sample-0054/sample-proof.json"
+          "fileSha256": "9c121dae4ec931735bfcffc6c08f4327a1a31c9beeb01871f2096c0c3a3ed387",
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/sample-0054/sample-proof.json"
         },
         {
-          "fileSha256": "97e9a0bfb8978485eba65eefa4990f062c408d1a42b74cada018657a5691cf97",
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/sample-0118/sample-proof.json"
+          "fileSha256": "31731ad5708466caf4a36ca81203ea136927139670b94dd9413481949aa7241c",
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/sample-0118/sample-proof.json"
         },
         {
-          "fileSha256": "3f2c9b8d3807db1d60f38b4cf034d7ac6ef37d8941d9f93584ad6c7762eb3c0c",
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/sample-0163/sample-proof.json"
+          "fileSha256": "4e30330767ca484d2b7a9376cb7754f6a737e718e6838988ee6da240fd717c14",
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/sample-0163/sample-proof.json"
         },
         {
-          "fileSha256": "2a217e9a86b94b4fd905456cd0e0a9d85b02a42bd6266e059f0711ba86138c0e",
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/sample-0164/sample-proof.json"
+          "fileSha256": "4cdbba6111e71a213a51e6ec0d6321db1584cb971fce08e928446b8b4fbf7a88",
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/sample-0164/sample-proof.json"
         }
       ],
       "regenerationProofs": [
         {
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/sample-0/sample-proof.json",
-          "fileSha256": "18055ff68e53d2c1f351c4f1963297108653428d2440987914f572f394b4fb03"
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/independent-reread/sample-0/sample-proof.json",
+          "fileSha256": "877f0502597a79b4845df3193f6e33f9f9b81d3e93478b6cf5c47503d55ea31b"
         },
         {
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/sample-1/sample-proof.json",
-          "fileSha256": "1996112063b98678ebfad83f5b8536fb92ff6c47e63540c9c36b65adb552f5a6"
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/independent-reread/sample-1/sample-proof.json",
+          "fileSha256": "a80df0fadcb388aff5b592abd3b7458550a0d85fe62b6e4cd10a43ab337ca494"
         },
         {
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/sample-2/sample-proof.json",
-          "fileSha256": "f940fc815db8833754eb3904ee13bab57156ef6a6f5742d512b046c4f6468229"
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/independent-reread/sample-2/sample-proof.json",
+          "fileSha256": "00400910fda21d56d36d2ce94d90bc9d2747fe0fd6c4059637e667eaec2c97bb"
         },
         {
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/sample-3/sample-proof.json",
-          "fileSha256": "9b408af67cfd283f2812adb9a5cd9e6575310c418e59596e9f94ff5ac322bf17"
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/independent-reread/sample-3/sample-proof.json",
+          "fileSha256": "f46d4acf32bef0963a0fabaa2c0963eccd06dd75d748074ffd08a0fa9c619c25"
         },
         {
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/sample-4/sample-proof.json",
-          "fileSha256": "f4815b32141f808395ab90f45ed3454dbb938c29f2611a5472ae717188e04a4a"
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/independent-reread/sample-4/sample-proof.json",
+          "fileSha256": "02724441a38ea1d0d5c55bce769c456f51a97b53cb6839e1d8e58fec6e6eeeb0"
         },
         {
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/sample-5/sample-proof.json",
-          "fileSha256": "dc216a1324221441d8998e41502989d4b094856679a1441d49be8ce207ac0da2"
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/independent-reread/sample-5/sample-proof.json",
+          "fileSha256": "4a8656f6341a091321eaab886bee93a430d9436a73ffce5005d5d4f4a8f9057b"
         },
         {
-          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/sample-6/sample-proof.json",
-          "fileSha256": "ed01b1b6c17d04f99fa04fa990ed5f5218bf4f91d0e01518a97421710f20f55e"
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v003/independent-reread/sample-6/sample-proof.json",
+          "fileSha256": "205b0b268126e1091288534df24a95d600ba9e3f0f831fa5d4749554171f0acc"
         }
       ],
       "sampleCount": 7,
@@ -469,5 +471,10 @@
         "oldEvidenceWrites": 0
       }
     }
+  },
+  "auditCheckpointSource": {
+    "path": "runtime/artifacts/qc-streaming-20260927-v001/small-stream32-v002/independent-reread/result.json",
+    "fileSha256": "e6557d38c6ad10d2628af2ae98155689d19cace15a52431773488dd2844dac2c",
+    "bytes": 2011175
   }
 }
