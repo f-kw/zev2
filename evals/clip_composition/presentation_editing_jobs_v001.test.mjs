@@ -72,6 +72,7 @@ import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {setTimeout as delay} from 'node:timers/promises';
 import path from 'node:path';
+import {writePresentationQcEvidenceV001} from ${JSON.stringify(new URL('./presentation_qc_evidence_store_v001.mjs', import.meta.url).href)};
 const job=JSON.parse(await readFile(process.argv[2],'utf8'));
 const mode=await readFile(${JSON.stringify(modePath)},'utf8');
 if(mode==='fail') process.exit(17);
@@ -101,7 +102,7 @@ if(mode==='partial-fail'||mode==='partial-cancel') {
 const result={status:'passed',viewSha256:job.viewSha256,projectionSha256:job.projectionSha256,
   range:job.range,drawingRulesRef:job.drawingRulesRef,candidateVideo:{path:candidatePath,
     bytes:bytes.length,fileSha256:createHash('sha256').update(bytes).digest('hex')}};
-await writeFile(job.resultPath+'.pending',JSON.stringify(result)+'\\n',{flag:'wx'});
+await writePresentationQcEvidenceV001(job.resultPath+'.pending',result);
 await rename(job.resultPath+'.pending',job.resultPath);
 if(mode==='gate') {
   await writeFile(${JSON.stringify(resultReady)},'ready');
@@ -124,9 +125,12 @@ test('即時失敗を記録し、後から保存が進んでも失敗時の状�
   const started = await manager.start({snapshot: f.snapshot, kind: 'full'});
   const failed = await finished(manager);
   assert.equal(failed.id, started.id); assert.equal(failed.status, 'failed');
+  // This storage/process test needs a newer saved revision, not a new caption
+  // bitmap. Use the existing connection edit so retry isolation is verified
+  // without making real font rendering a prerequisite for evidence storage.
   const changed = await saveEditingOverrideV001({directory: f.directory, drawingRulesRef: rules,
     applicabilityOptions: {generatedRoot: f.generatedRoot, nativeAssetReuse: path.join(f.generatedRoot, 'native-assets')},
-    expectedRevision: f.snapshot.revision, kind: 'caption', itemId: f.snapshot.context.captionIds[0], selection: 'Normal'});
+    expectedRevision: f.snapshot.revision, kind: 'connection', itemId: 'connection-01', selection: 'black-separator'});
   assert.notEqual(changed.revision, f.snapshot.revision);
   await writeFile(f.modePath, 'success');
   const retried = await manager.retry(failed.id);

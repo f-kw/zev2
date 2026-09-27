@@ -1,3 +1,4 @@
+import {readPresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {mkdtemp, readFile, readdir, rm, writeFile} from 'node:fs/promises';
@@ -425,15 +426,21 @@ async function assertCombinedProfileRejectedBeforeMedia(t, {change, reason}) {
   });
   assert.deepEqual(calls, []);
   assert.deepEqual({plan: input.plan, records: input.records}, before);
-  const {failureFile, ...failure} = caught.completedFrameQcFailure;
-  assert.equal(failure.method, PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001);
-  assert.equal(failure.phase, 'profile-validation');
-  assert.equal(failure.replay, null); assert.equal(failure.preparation, null);
-  assert.equal(failure.exactReplayFailure, null); assert.equal(failure.finiteStateFailure, null);
-  assert.equal(Object.hasOwn(failure, 'failureRecordWriteError'), false);
+  const summary = caught.completedFrameQcFailure, {failureFile} = summary;
+  assert.equal(summary.method, PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001);
+  assert.equal(summary.phase, 'profile-validation');
+  assert.equal(summary.status, 'failed');
+  assert.equal(Object.hasOwn(summary, 'replay'), false);
+  assert.equal(Object.hasOwn(summary, 'finiteStateFailure'), false);
+  assert.equal(Object.hasOwn(summary, 'failureRecordWriteError'), false);
   const saved = await readFile(failureFile.path);
   assert.equal(failureFile.fileSha256, hash(saved));
-  assert.deepEqual(JSON.parse(saved), failure);
+  const failure = await readPresentationQcEvidenceV001(failureFile.path, {expectedFileSha256: failureFile.fileSha256});
+  assert.equal(failure.method, summary.method);
+  assert.equal(failure.phase, summary.phase);
+  assert.equal(failure.reason, summary.reason);
+  assert.equal(failure.replay, null); assert.equal(failure.preparation, null);
+  assert.equal(failure.exactReplayFailure, null); assert.equal(failure.finiteStateFailure, null);
   assert.deepEqual((await readdir(directory)).sort(), [...filesBefore, 'completed-frame-qc-failure.json'].sort());
 }
 

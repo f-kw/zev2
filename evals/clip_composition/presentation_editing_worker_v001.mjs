@@ -1,6 +1,7 @@
-import {readFile, writeFile, rename} from 'node:fs/promises';
+import {readFile, writeFile, rename, chmod} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {renderEditedOrchestrationV001} from './presentation_orchestration_edited_render_v001.mjs';
+import {writePresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 const [jobPath] = process.argv.slice(2);
 if (!jobPath) throw new Error('A registered immutable editing job is required');
 const job = JSON.parse(await readFile(jobPath, 'utf8'));
@@ -28,7 +29,10 @@ try {
     });
   }});
   await progressWrites;
-  await save(job.resultPath, result);
+  const pendingResult = job.resultPath + '.' + randomUUID() + '.pending';
+  await writePresentationQcEvidenceV001(pendingResult, result);
+  await chmod(pendingResult, 0o600);
+  await rename(pendingResult, job.resultPath);
 } catch (error) {
   await save(job.failurePath, {status: 'failed', message: String(error.message), stack: error.stack,
     observedAt: new Date().toISOString()});

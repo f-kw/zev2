@@ -1,3 +1,4 @@
+import {readPresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
@@ -1550,7 +1551,7 @@ test('14 空素材indexのG7を外枠で停止しpreviewカードを代用しな
 test('15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する', async () => {
   const rendered = await getRenderedFixture();
   const plan = await readJson(rendered.outputs.plan);
-  const qc = await readJson(rendered.outputs.qc);
+  const qc = await readPresentationQcEvidenceV001(rendered.outputs.qc);
   const applicationDocument = await readJson(rendered.outputs.applicationResults);
   assert.equal(plan.elements.length, 9);
   assert.equal(qc.status, 'passed');
@@ -1591,7 +1592,7 @@ test('16 合成MP4の映像・代表frame差分・基礎音声packetを保全す
   const rendered = await getRenderedFixture();
   const outputMedia = await inspectRenderedMediaV002(rendered.outputs.video);
   const baseMedia = await inspectRenderedMediaV002(rendered.fixture.baseMediaPath);
-  const qc = await readJson(rendered.outputs.qc);
+  const qc = await readPresentationQcEvidenceV001(rendered.outputs.qc);
   assert.deepEqual(
     {width: outputMedia.video.width, height: outputMedia.video.height, fps: outputMedia.video.fps},
     {width: 1920, height: 1080, fps: 30},
@@ -1662,7 +1663,7 @@ test('17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成
     readJson(rendered.outputs.plan),
     readJson(rendered.outputs.applicationResults),
     readJson(rendered.outputs.manifest),
-    readJson(rendered.outputs.qc),
+    readPresentationQcEvidenceV001(rendered.outputs.qc),
   ]);
   assert.equal(rendered.processResult.code, 0);
   assert.match(rendered.processResult.stderr, /published_with_retained_safety_artifacts/);
@@ -1723,7 +1724,7 @@ test('17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成
   assert.equal(qc.status, 'passed');
   assert.deepEqual(plan, await readJson(rendered.outputs.plan));
   assert.deepEqual(applications, await readJson(rendered.outputs.applicationResults));
-  assert.deepEqual(qc, await readJson(rendered.outputs.qc));
+  assert.deepEqual(qc, await readPresentationQcEvidenceV001(rendered.outputs.qc));
   const syntheticRecords = plan.elements.map((element) => {
     const result = applications.results.find((item) => item.instructionId === element.instructionId);
     return {

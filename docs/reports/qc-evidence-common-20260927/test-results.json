@@ -1,0 +1,555 @@
+{
+  "targetedChecks": {
+    "passed": 79,
+    "failed": 0
+  },
+  "runs": [
+    {
+      "scope": "共通保存・共通検証・不合格保存・既存native/全編再現",
+      "path": "runtime/artifacts/qc-evidence-common-20260927-v001/required-tests-final.tap",
+      "sha256": "da022c6d73a094be4e09e684d8d88e74f1c76efd51f8d1ef847f1f06e3e00366",
+      "tests": 71,
+      "pass": 71,
+      "fail": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "status": "ok",
+          "name": "production drawing rejects missing and standalone diagnostic QC methods before output or child processes"
+        },
+        {
+          "status": "ok",
+          "name": "diagnostic completed-frame QC also requires an explicitly selected method before any work"
+        },
+        {
+          "status": "ok",
+          "name": "public combined QC entry rejects an unsupported frame rate before every media child without fallback"
+        },
+        {
+          "status": "ok",
+          "name": "public combined QC entry rejects absent, relative or changed normal-plan references before every media child"
+        },
+        {
+          "status": "ok",
+          "name": "production evaluator accepts complete combined evidence with valid application, layout and media inputs"
+        },
+        {
+          "status": "ok",
+          "name": "production final QC rejects old pixel-count and valid native-only evidence without the new global proof"
+        },
+        {
+          "status": "ok",
+          "name": "production evaluator rejects missing global evidence or a missing whole-video proof"
+        },
+        {
+          "status": "ok",
+          "name": "production evaluator rejects a missing or substituted current completed-video path or hash"
+        },
+        {
+          "status": "ok",
+          "name": "production evaluator rejects whole-video corruption even when native state observations pass"
+        },
+        {
+          "status": "ok",
+          "name": "production evaluator rejects an omitted native caption even when whole-video equality passes"
+        },
+        {
+          "status": "ok",
+          "name": "production evaluator rejects detached finite-state evidence and a mixed comparison basis"
+        },
+        {
+          "status": "ok",
+          "name": "production Pulse rejects legacy final proof and retains native state checks without duplicate new-method requirements"
+        },
+        {
+          "status": "ok",
+          "name": "combined proof accepts matching complete evidence and ignores cached decisions without mutating inputs"
+        },
+        {
+          "status": "ok",
+          "name": "combined proof rejects missing whole-video evidence despite cached pass flags"
+        },
+        {
+          "status": "ok",
+          "name": "combined proof rejects mixing individually valid observations from different completed videos"
+        },
+        {
+          "status": "ok",
+          "name": "combined proof requires the current completed-video path and hash supplied by its caller"
+        },
+        {
+          "status": "ok",
+          "name": "combined proof rejects local/global disagreement and a severed RGB stdout or artifact chain"
+        },
+        {
+          "status": "ok",
+          "name": "combined proof rejects altered batch clocks, prepared alpha, missing processes and false reference sharing"
+        },
+        {
+          "status": "ok",
+          "name": "combined proof rejects missing or substituted planar layers and a severed decode-to-composition chain"
+        },
+        {
+          "status": "ok",
+          "name": "all decoded frame hashes retain order and exact rational timestamps"
+        },
+        {
+          "status": "ok",
+          "name": "frame parser rejects malformed hash, incomplete pixel data, wrong canvas and decimal timestamps"
+        },
+        {
+          "status": "ok",
+          "name": "audio parser retains payload order and integer-clock metadata, including negative initial AAC PTS"
+        },
+        {
+          "status": "ok",
+          "name": "audio parser rejects missing packet hashes, uncovered streams and inexact numeric clocks"
+        },
+        {
+          "status": "ok",
+          "name": "byte equality and full decoded equality are independently valid exact gates"
+        },
+        {
+          "status": "ok",
+          "name": "one changed frame, all-black corruption, changed audio, order and timing are rejected with recomputed digests"
+        },
+        {
+          "status": "ok",
+          "name": "a cached pass cannot replace complete observations, stable input bindings or original encoder arguments"
+        },
+        {
+          "status": "ok",
+          "name": "byte equality does not invent decoded-frame counts, and an MP4 hash mismatch cannot skip full comparison"
+        },
+        {
+          "status": "ok",
+          "name": "mock I/O runs one replay from the real compositor arguments and reports no unobserved decoded frames"
+        },
+        {
+          "status": "ok",
+          "name": "mock I/O compares every decoded frame and audio packet when container bytes differ"
+        },
+        {
+          "status": "ok",
+          "name": "mock I/O preserves exact failure for an unknown one-pixel change"
+        },
+        {
+          "status": "ok",
+          "name": "mock I/O detects inputs changing during encode and rejects a missing production PNG before any child"
+        },
+        {
+          "status": "ok",
+          "name": "pulse replay binds every production PNG to its exact native state and order"
+        },
+        {
+          "status": "ok",
+          "name": "bounce replay binds every production PNG to its exact native state and order"
+        },
+        {
+          "status": "ok",
+          "name": "shake replay binds every production PNG to its exact native state and order"
+        },
+        {
+          "status": "ok",
+          "name": "current completed-file identity is mandatory and rejects a stale pass for another same-format video"
+        },
+        {
+          "status": "ok",
+          "name": "raw evidence, all observed commands, original stdout and artifact correspondence are mandatory"
+        },
+        {
+          "status": "ok",
+          "name": "parsed equality cannot conceal different raw framehash or packet output with freshly recomputed proof hashes"
+        },
+        {
+          "status": "ok",
+          "name": "sample/display aspect, color meaning and display side data must match despite identical pixel hashes"
+        },
+        {
+          "status": "ok",
+          "name": "bounce native QC rejects clamping, unbound images, missing states and invalid static layouts"
+        },
+        {
+          "status": "ok",
+          "name": "bounce collision checks follow the moving state interval beyond the disjoint stable box"
+        },
+        {
+          "status": "ok",
+          "name": "shake native QC rejects clamping, unbound images, missing states and invalid static layouts"
+        },
+        {
+          "status": "ok",
+          "name": "shake collision checks follow the moving state interval beyond the disjoint stable box"
+        },
+        {
+          "status": "ok",
+          "name": "the fixed recipe includes every caption and all moving Pulse frames without caller-selected samples"
+        },
+        {
+          "status": "ok",
+          "name": "mandatory Color/Panel/Normal references and their drawing conditions cannot be silently omitted"
+        },
+        {
+          "status": "ok",
+          "name": "a partial selection that covers the whole caption still gets the resolver-required duplicate alternative"
+        },
+        {
+          "status": "ok",
+          "name": "foreign references occupy the target clock and candidate bounds, not the inactive caption clock or corrupted frame bounds"
+        },
+        {
+          "status": "ok",
+          "name": "simultaneous captions retain their own fades and receive a real pair-order alternative"
+        },
+        {
+          "status": "ok",
+          "name": "exact pixel classes permit a Normal alias but reject target absence and an unequal-image tie"
+        },
+        {
+          "status": "ok",
+          "name": "whole-caption overpaint and foreign pixels need adversarial references even without empirical thresholds"
+        },
+        {
+          "status": "ok",
+          "name": "the pure validator accepts complete synthetic evidence and independently rejects material evidence tampering"
+        },
+        {
+          "status": "ok",
+          "name": "bounce native recipe covers every entrance frame and stable visibility with every wrong state as an adversary"
+        },
+        {
+          "status": "ok",
+          "name": "bounce rejects a missing, reordered or mixed native state set and missing entrance/stable observations"
+        },
+        {
+          "status": "ok",
+          "name": "shake native recipe covers every entrance frame and stable visibility with every wrong state as an adversary"
+        },
+        {
+          "status": "ok",
+          "name": "shake rejects a missing, reordered or mixed native state set and missing entrance/stable observations"
+        },
+        {
+          "status": "ok",
+          "name": "shared and separately read common evidence retain every standalone native decision"
+        },
+        {
+          "status": "ok",
+          "name": "a valid preceding caption cannot hide changed common evidence or local observations"
+        },
+        {
+          "status": "ok",
+          "name": "native unique-minimum failure remains failed with the same violation after common reuse"
+        },
+        {
+          "status": "ok",
+          "name": "a later call revalidates mutated common inputs without trusting the earlier result"
+        },
+        {
+          "status": "ok",
+          "name": "combined snapshot detaches inputs while preserving common and sample sharing across local/global evidence"
+        },
+        {
+          "status": "ok",
+          "name": "renderer QC snapshot preserves shared evidence across captions and whole-video proof without aliasing its input"
+        },
+        {
+          "status": "ok",
+          "name": "valid JSON envelope preserves every observation while common objects are restored once"
+        },
+        {
+          "status": "ok",
+          "name": "a separate Node process preserves shared identity and the existing RGB classifier result"
+        },
+        {
+          "status": "ok",
+          "name": "large expanded common data never becomes a multi-gigabyte string, including in a fresh reader"
+        },
+        {
+          "status": "ok",
+          "name": "common content, common SHA and inspection-specific tampering are rejected"
+        },
+        {
+          "status": "ok",
+          "name": "missing common, missing inspection, invalid references and unknown schema are rejected"
+        },
+        {
+          "status": "ok",
+          "name": "file binding detects re-serialized transport bytes and refuses existing-file overwrite"
+        },
+        {
+          "status": "ok",
+          "name": "literal reference-like keys, prototype-like keys and existing JSON undefined semantics are retained"
+        },
+        {
+          "status": "ok",
+          "name": "cycles and non-JSON values fail without silently changing the evidence"
+        },
+        {
+          "status": "ok",
+          "name": "the production post-render rejection preserves failed observations on disk and emits a small CLI report"
+        },
+        {
+          "status": "ok",
+          "name": "exception evidence is preserved separately and neither duplicate-save nor missing-directory errors restore the huge inline graph"
+        },
+        {
+          "status": "ok",
+          "name": "a missing saved evidence file is rejected by the reader"
+        }
+      ]
+    },
+    {
+      "scope": "現行編集jobの保存・登録・再起動・retry",
+      "path": "runtime/artifacts/qc-evidence-common-20260927-v001/editing-jobs-tests-final.tap",
+      "sha256": "550cd5955b665c4cda348e043d06d2764cb2fc0ae00b77aa633168e6463d07d8",
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "status": "ok",
+          "name": "即時失敗を記録し、後から保存が進んでも失敗時の状態を再試行する"
+        },
+        {
+          "status": "ok",
+          "name": "媒体登録後の中断から再起動して成功記録を補完し登録時刻を変えない"
+        },
+        {
+          "status": "ok",
+          "name": "partial-fail: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない"
+        },
+        {
+          "status": "ok",
+          "name": "partial-cancel: 部分媒体と未完了結果を残しても失敗・取消後と再起動後に公開しない"
+        },
+        {
+          "status": "ok",
+          "name": "実行中の保存は固定入力を変えず、同時開始と復帰後の二重完了を防ぐ"
+        },
+        {
+          "status": "ok",
+          "name": "未変更の検証済み時計は再利用し、同一size/mtimeの改変もctimeから検出する"
+        },
+        {
+          "status": "ok",
+          "name": "生成結果と描画証拠も検証cacheで改変を見逃さない"
+        },
+        {
+          "status": "ok",
+          "name": "service終了ではworkerだけでなく同じgroupの子processにも停止を伝える"
+        }
+      ]
+    },
+    {
+      "scope": "既存rendererの行・交差・安全領域の選択回帰",
+      "path": "runtime/artifacts/qc-evidence-common-20260927-v001/renderer-regression.tap",
+      "sha256": "78858cba740db61580b70de3bdf3e009440d83288bb2b87624bd7ae55091c690",
+      "tests": 20,
+      "pass": 2,
+      "fail": 1,
+      "skipped": 17,
+      "cases": [
+        {
+          "status": "ok",
+          "name": "01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "03 v002だけを受理しv001と旧telopPlanを描画前に拒否する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "04 外枠passedだけを通しpartialとfailedを異なるコードで停止する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "05 正式空素材で到達可能な9種類を1指示1要素へ解決する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "06 caption本文・明示行・開始終了anchorを一文字も変えず保持する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "not ok",
+          "name": "12 行数・行の正の交差・安全領域・空alphaを独立して検出する"
+        },
+        {
+          "status": "ok",
+          "name": "12b 旧差分・native単独・成功フラグは新しい完成映像全体証拠の代わりにならない"
+        },
+        {
+          "status": "ok",
+          "name": "13 時間と空間の正の交差だけを衝突とし境界接触は許容する"
+        },
+        {
+          "status": "ok",
+          "name": "14 空素材indexのG7を外枠で停止しpreviewカードを代用しない # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "16 合成MP4の映像・代表frame差分・基礎音声packetを保全する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する # SKIP test name does not match pattern"
+        }
+      ]
+    },
+    {
+      "scope": "変更前HEADのrenderer QCで同じ選択回帰",
+      "path": "runtime/artifacts/qc-evidence-common-20260927-v001/renderer-baseline.tap",
+      "sha256": "4a69f8c8fb8d5290919d0044060eaa94b6a655d9070b8d84b15cbba742365e8a",
+      "tests": 20,
+      "pass": 2,
+      "fail": 1,
+      "skipped": 17,
+      "cases": [
+        {
+          "status": "ok",
+          "name": "01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "03 v002だけを受理しv001と旧telopPlanを描画前に拒否する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "04 外枠passedだけを通しpartialとfailedを異なるコードで停止する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "05 正式空素材で到達可能な9種類を1指示1要素へ解決する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "06 caption本文・明示行・開始終了anchorを一文字も変えず保持する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "not ok",
+          "name": "12 行数・行の正の交差・安全領域・空alphaを独立して検出する"
+        },
+        {
+          "status": "ok",
+          "name": "12b 旧差分・native単独・成功フラグは新しい完成映像全体証拠の代わりにならない"
+        },
+        {
+          "status": "ok",
+          "name": "13 時間と空間の正の交差だけを衝突とし境界接触は許容する"
+        },
+        {
+          "status": "ok",
+          "name": "14 空素材indexのG7を外枠で停止しpreviewカードを代用しない # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "16 合成MP4の映像・代表frame差分・基礎音声packetを保全する # SKIP test name does not match pattern"
+        },
+        {
+          "status": "ok",
+          "name": "17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する # SKIP test name does not match pattern"
+        }
+      ]
+    }
+  ],
+  "knownPreExistingFailure": "renderer test12 expects OUTPUT_ELEMENT_NOT_VISIBLE from a legacy per-caption fixture; both current and HEAD baseline instead reject mixed visibility evidence / missing global evidence. The unrelated fixture was not repaired.",
+  "editingRetryFixture": "The retry-isolation test advances the saved revision by an existing connection edit, preserving all retry/previous-version/media assertions without requiring real caption bitmap creation.",
+  "commands": [
+    "NODE_PATH=./runner/node_modules node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/presentation_qc_evidence_store_v001.test.mjs evals/clip_composition/presentation_qc_common_validation_v001.test.mjs evals/clip_composition/presentation_renderer_qc_failure_store_v001.test.mjs evals/clip_composition/presentation_native_frame_qc_v001.test.mjs evals/clip_composition/presentation_exact_replay_qc_v001.test.mjs",
+    "node --test evals/clip_composition/presentation_editing_jobs_v001.test.mjs",
+    "NODE_PATH=./runner/node_modules node --import ./runner/node_modules/tsx/dist/loader.mjs --test --test-name-pattern='^(12|13)' evals/clip_composition/presentation_renderer_v002.test.mjs"
+  ],
+  "mediaEncodeRuns": 0,
+  "captionRenderRuns": 0,
+  "finalStorageRerun": {
+    "purpose": "呼出し内identity Mapと0600 file作成への最終変更後、保存・別process再読・failure経路を再検証",
+    "path": "runtime/artifacts/qc-evidence-common-20260927-v001/map-storage-regression.tap",
+    "sha256": "487af51391b05d398a54de3d90f9e777a4cb378bc3b3d6d060dac920165d2dde",
+    "tests": 11,
+    "pass": 11,
+    "fail": 0,
+    "skipped": 0
+  },
+  "finalAllTargetedRerun": {
+    "purpose": "Final combined run after all code changes",
+    "path": "runtime/artifacts/qc-evidence-common-20260927-v001/all-targeted-final.tap",
+    "sha256": "c0e20c9d0baa865695fb7259c1e6cd631f961837336c7849b504612376e16532",
+    "tests": 79,
+    "pass": 79,
+    "fail": 0,
+    "skipped": 0
+  }
+}

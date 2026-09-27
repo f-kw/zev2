@@ -10,6 +10,7 @@ import {bindEditingFileV001, assertEditingFileV001, hashEditingValueV001, writeE
 import {restoreOrchestrationDrawingViewEvidenceV001} from './presentation_orchestration_v001.mjs';
 import {deriveEditingPreviewRangeV001, assertEditingRangeV001} from './presentation_editing_navigation_v001.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
+import {readPresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const json = async file => JSON.parse(await readFile(file, 'utf8'));
@@ -93,7 +94,11 @@ export async function createEditingJobsV001({directory, generatedRoot, drawingRu
     try {return await checking;} finally {if (verifyingMedia.get(key) === checking) verifyingMedia.delete(key);}
   }
   async function finishOnce(job, resultPath) {
-    const result = await json(resultPath);
+    const resultRef = await bindEditingFileV001(resultPath);
+    const savedResultRef = media.get(job.id)?.resultRef;
+    if (savedResultRef) demand(equal(resultRef, savedResultRef), '登録済みの処理結果が変わっています', 'EDITING_BINDING_CHANGED');
+    const result = await readPresentationQcEvidenceV001(resultPath,
+      {expectedFileSha256: savedResultRef?.fileSha256 ?? resultRef.fileSha256});
     demand(result.status === 'passed' && result.viewSha256 === job.viewSha256
       && result.projectionSha256 === job.projectionSha256 && equal(result.range, job.range), '出力は開始時の保存版・範囲と一致しません');
     demand(equal(result.drawingRulesRef, job.drawingRulesRef), '描画規則が実行開始時と一致しません');
@@ -102,7 +107,7 @@ export async function createEditingJobsV001({directory, generatedRoot, drawingRu
       revision: job.revision, jobKey: job.jobKey, range: job.range, drawingRulesRef: job.drawingRulesRef,
       drawingEvidenceRef: job.drawingEvidenceRef, viewSha256: job.viewSha256,
       projectionSha256: job.projectionSha256, fourSavedSha256: job.fourSavedSha256,
-      resultRef: await bindEditingFileV001(resultPath),
+      resultRef,
       label: job.kind === 'preview' ? '周辺確認' : '変更を反映した全編', renderVerified: true};
     await verifyMedia(content);
     const savedRecord = path.join(directory, 'media', job.id + '.json');

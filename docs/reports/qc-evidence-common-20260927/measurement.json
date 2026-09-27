@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "qc-evidence-common-measurement-v001",
+  "environment": {
+    "node": "v20.19.6",
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "25.6.0",
+    "cpu": "Apple M3 Max",
+    "totalMemoryBytes": 38654705664
+  },
+  "scope": "Saved finite evidence only; single measurement per format on the same Mac; no media execution; cache/other-process contention uncontrolled",
+  "source": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/finite-result.json",
+    "bytes": 3428363761,
+    "fileSha256": "32534f5b909b1a91dbf2ed7cb098ef561c909d42650a086ca17b8d26fefc73c7"
+  },
+  "sharedEvidence": {
+    "schemaVersion": "presentation-qc-evidence-store-v001",
+    "fileSha256": "89a37d22c3d6ad66a8a12dda2dcdebaac86ee51a3bf3b3c2316417d3267e5d29",
+    "rootSha256": "130cd94f501584a2b622b42089bfcdae38a18be64efdc69b2e52b62bb2e5b478",
+    "bytes": 869774951,
+    "nodeCount": 1460153,
+    "reusedObjectCount": 0,
+    "deduplicatedNodeCount": 14298219
+  },
+  "sourceBindings": [
+    {
+      "path": "runtime/artifacts/qc-evidence-common-20260927-v001/measurement-v003/legacy-measurement.json",
+      "bytes": 1854,
+      "fileSha256": "bd85384c442a04c7edeaa109e36e68209fe77cfde4fa034f9aac5f47ceed2b00"
+    },
+    {
+      "path": "runtime/artifacts/qc-evidence-common-20260927-v001/measurement-v003/shared-measurement.json",
+      "bytes": 1891,
+      "fileSha256": "8351c460a9496279d6518c56099239d6bc95d86f85ed30e190d6f777436b1835"
+    },
+    {
+      "path": "runtime/artifacts/qc-evidence-common-20260927-v001/measurement-v003/legacy-read-checkpoint.json",
+      "bytes": 542,
+      "fileSha256": "35c166fb73546bdcf0da92b041a7d24505c9880414687a2c66763a3cc594b236"
+    }
+  ],
+  "comparisons": {
+    "jsonBytes": {
+      "before": 3428363761,
+      "after": 869774951,
+      "reduction": 2558588810,
+      "reductionPercent": 74.63002727731843
+    },
+    "readSeconds": {
+      "before": 37.73711425,
+      "after": 10.061099542,
+      "reduction": 27.676014707999997,
+      "reductionPercent": 73.33898009437752
+    },
+    "readOnlyPeakRssBytes": {
+      "before": 5650595840,
+      "after": 1529217024,
+      "reduction": 4121378816,
+      "reductionPercent": 72.93706597851458
+    },
+    "serializationSeconds": {
+      "before": 18.706236791999995,
+      "after": 6.598543541000002,
+      "reduction": 12.107693250999993,
+      "reductionPercent": 64.72543561609373
+    }
+  },
+  "validation": {
+    "oldSeparateValidationSeconds": null,
+    "oldReason": "Original native verdict retained; validation-only time was not separately measured",
+    "newNativeValidationSeconds": 2.8519771660000006,
+    "readIncludes": "New reader verifies every node hash, reachability and whole-file SHA; old reader parses chunked JSON",
+    "status": "failed",
+    "violations": [
+      {
+        "code": "NATIVE_FRAME_QC_INVALID",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+        "reason": "native frame QC: expected class is absent, invisible, tied or not the unique nearest reference"
+      }
+    ],
+    "nativeObservations": {
+      "visible": 423,
+      "notVisible": 1,
+      "failure103": {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+        "frame": 7801,
+        "visible": false,
+        "expectedClassId": "class-0",
+        "expected": 1345125,
+        "duplicate": 1344947,
+        "referenceCount": 757,
+        "classCount": 741
+      }
+    }
+  },
+  "unchanged": {
+    "logicalDigestVersion": "complete-json-merkle-v002",
+    "logicalSha256": "77adc43acfb56bb0b522aa04897257adedfc929f99bcbb386a33a48aac86e065",
+    "completeValueMatches": true,
+    "originalEvidenceUnchanged": true,
+    "videoSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+  },
+  "inspections": 326,
+  "samples": 424,
+  "commonDuplication": {
+    "logicalBytesByField": {
+      "baselinePlan": 1255058,
+      "autoPresentation": 0,
+      "orchestrationInput": 5145232,
+      "inputManifest": 772896,
+      "renderRange": 4,
+      "sceneBindings": 606517
+    },
+    "oneSetLogicalBytes": 7779707,
+    "originalCopiesIncludingGlobal": 327,
+    "extraExpandedCommonLogicalBytes": 2536184482,
+    "note": "Sum of compact JSON value bytes for present named common fields, excluding key text and transport formatting; absent autoPresentation is zero. Not a physical file size."
+  },
+  "temporaryEvidenceJson": {
+    "oldOneArtifactBytes": 3428363761,
+    "newOneArtifactBytes": 869774951,
+    "savedBytesPerArtifact": 2558588810,
+    "originalFilesRetained": true,
+    "note": "Capacity difference per equivalent evidence file. Original evidence intentionally remains on disk; only copies made for this measurement were removed. Images are unchanged."
+  },
+  "verificationOverhead": {
+    "legacyLogicalDigestSeconds": 54.46946925,
+    "sharedLogicalDigestSeconds": 4.556111084,
+    "legacyToNewFirstConversionSeconds": 69.2408365,
+    "legacyWorkerPeakRssBytes": 7852441600,
+    "sharedWorkerPeakRssBytes": 2569289728,
+    "note": "Whole-worker peaks include complete-value digest and conversion/validation; do not describe these as serialization-only memory."
+  },
+  "actions": {
+    "videoEncodes": 0,
+    "captionRenders": 0,
+    "sttRuns": 0,
+    "paidApiCalls": 0
+  }
+}

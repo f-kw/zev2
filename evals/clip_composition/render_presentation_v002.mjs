@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {writePresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 
 import {createHash, randomUUID} from 'node:crypto';
 import {spawn} from 'node:child_process';
@@ -1701,6 +1702,42 @@ const contractFailure = (
   },
 });
 
+/** Preserve complete failed QC on disk while keeping process/CLI reports bounded. */
+export async function savePresentationRendererQcFailureV001({scratchDirectory, evidence,
+  kind = 'post-render-qc'}) {
+  if (!['post-render-qc', 'completed-frame-qc'].includes(kind)) throw new TypeError('unknown QC failure evidence kind');
+  const summary = {
+    schemaVersion: 'presentation-qc-failure-summary-v001',
+    status: evidence?.status ?? 'failed',
+    ...(typeof evidence?.schemaVersion === 'string' ? {evidenceSchemaVersion: evidence.schemaVersion} : {}),
+    ...(typeof evidence?.method === 'string' ? {method: evidence.method} : {}),
+    ...(typeof evidence?.phase === 'string' ? {phase: evidence.phase} : {}),
+    ...(typeof evidence?.reason === 'string' ? {reason: evidence.reason} : {}),
+    ...(Number.isFinite(evidence?.wallClockMs) ? {wallClockMs: evidence.wallClockMs} : {}),
+    ...(Array.isArray(evidence?.violations) ? {violationCount: evidence.violations.length} : {}),
+    ...(Array.isArray(evidence?.inspections) ? {inspectionCount: evidence.inspections.length} : {}),
+    ...(Number.isSafeInteger(evidence?.instructionCount) ? {instructionCount: evidence.instructionCount} : {}),
+  };
+  const failurePath = path.join(scratchDirectory, kind + '-failure.json');
+  try {
+    const receipt = await writePresentationQcEvidenceV001(failurePath, evidence);
+    summary.failureFile = {path: failurePath, fileSha256: receipt.fileSha256};
+  } catch (error) {
+    // A failed or already-existing recording never replaces the QC failure,
+    // overwrites its previous evidence, or sends the huge graph to the CLI.
+    summary.failureRecordWriteError = error instanceof Error ? error.message : String(error);
+    summary.failureRecordPath = failurePath;
+  }
+  return summary;
+}
+
+export async function createPresentationRendererFailureAfterWorkV001({violations, stage, nested,
+  cleanupWarnings = [], scratchDirectory}) {
+  const reported = stage === 'post-render-qc' && nested !== undefined
+    ? await savePresentationRendererQcFailureV001({scratchDirectory, evidence: nested}) : nested;
+  return contractFailure(violations, stage, reported, cleanupWarnings);
+}
+
 const processFailure = (stage, error, cleanupWarnings = []) => {
   const result = {
     exitCode: 2,
@@ -1926,14 +1963,8 @@ export async function inspectPresentationCompletedFrameQcV001({
         exactReplayFailure: reported.exactReplayQcFailure ?? null,
         finiteStateFailure: reported.nativeFrameQcFailure ?? null,
         wallClockMs: performance.now() - started};
-      try {
-        const failurePath = path.join(scratchDirectory, 'completed-frame-qc-failure.json');
-        await writeFile(failurePath, JSON.stringify(failure, null, 2) + '\n', {flag: 'wx'});
-        failure.failureFile = {path: failurePath, fileSha256: await fileSha256V002(failurePath)};
-      } catch (recordError) {
-        failure.failureRecordWriteError = recordError.message;
-      }
-      reported.completedFrameQcFailure = failure;
+      reported.completedFrameQcFailure = await savePresentationRendererQcFailureV001({
+        scratchDirectory, evidence: failure, kind: 'completed-frame-qc'});
       throw reported;
     }
   }
@@ -2216,9 +2247,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
   }
 
   const cleanupWarnings = retainedCleanupDiagnosticsV002({reservation, workDirectory});
-  const failAfterWork = async (violations, stage, nested = undefined) => (
-    contractFailure(violations, stage, nested, cleanupWarnings)
-  );
+  const failAfterWork = (violations, stage, nested = undefined) => createPresentationRendererFailureAfterWorkV001({
+    violations, stage, nested, cleanupWarnings, scratchDirectory});
 
   try {
     await onProgress({phase: 'native-assets', captions: plan.elements.length});
@@ -2837,6 +2867,7 @@ export async function executePresentationRendererV002(jobInput) {
       path.join(MODULE_DIRECTORY, 'presentation_renderer_plan_v002.mjs'),
       path.join(MODULE_DIRECTORY, 'presentation_renderer_text_layout_v001.mjs'),
       path.join(MODULE_DIRECTORY, 'presentation_renderer_qc_v002.mjs'),
+      path.join(MODULE_DIRECTORY, 'presentation_qc_evidence_store_v001.mjs'),
       fileURLToPath(import.meta.url),
       LAYOUT_INSPECTOR,
       ...(plan.elements.some(element => Object.hasOwn(element, 'presentationPulse')) ? [
@@ -2855,7 +2886,7 @@ export async function executePresentationRendererV002(jobInput) {
     await Promise.all([
       writeJson(planPath, finalPlan),
       writeJson(applicationResultsPath, applicationDocument),
-      writeJson(qcPath, finalQc),
+      writePresentationQcEvidenceV001(qcPath, finalQc),
     ]);
     const [
       videoFileSha256,

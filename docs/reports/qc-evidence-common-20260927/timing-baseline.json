@@ -1,0 +1,3326 @@
+{
+  "scope": "14.1 計測基準整理（既存runの再構成、全編再実行なし）",
+  "source": {
+    "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+    "bytes": 61259,
+    "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956"
+  },
+  "categories": {
+    "required": "正常経路の必要処理。保存結果の再利用候補も含む。",
+    "waiting": "外部処理待ちとして記録から特定できた時間。",
+    "failed/retry": "失敗・再試行の包括記録。必要な成功部分の内包は別記する。",
+    "recovery": "今回の不具合・容量・判定の復旧。通常必要処理を内包する場合も明記。",
+    "duplicate-verification-candidate": "重複の可能性を調べる対象。現在の省略許可ではない。"
+  },
+  "recordCountsByCategory": {
+    "failed/retry": 11,
+    "required": 44,
+    "recovery": 17,
+    "duplicate-verification-candidate": 32,
+    "waiting": 1
+  },
+  "stages": [
+    {
+      "stage": "stage-01",
+      "purpose": "土台映像の初回生成（来歴検証で失敗）",
+      "startedAt": "2026-09-26T12:36:35.345Z",
+      "endedAt": "2026-09-26T13:19:33.681Z",
+      "elapsedSeconds": 2580.3871867499997,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/execution/base-2026-09-26T12-36-35.345Z.json",
+          "bytes": 245,
+          "sha256": "ef5c044a67154a9e6bb8afa39f2965305aaae8d6ac6c2b51ff5263973c397cd9"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/0"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "failed"
+    },
+    {
+      "stage": "stage-02",
+      "purpose": "見どころ候補の検証・保存",
+      "startedAt": "2026-09-26T12:34:45.248Z",
+      "endedAt": "2026-09-26T12:34:50.406Z",
+      "elapsedSeconds": 5.156820583,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/execution/discovery-2026-09-26T12-34-45.248Z.json",
+          "bytes": 305,
+          "sha256": "2acacb2cf4cd2df9602214fe955559bcd9a7718da19fd8e1f0db893f44e71a34"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/1"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "judgment-1",
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-03",
+      "purpose": "字幕区切りの検証・保存",
+      "startedAt": "2026-09-26T14:11:28.470Z",
+      "endedAt": "2026-09-26T14:11:31.893Z",
+      "elapsedSeconds": 3.421521875,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/execution/display-2026-09-26T14-11-28.470Z.json",
+          "bytes": 300,
+          "sha256": "20075acc08b12b8facd0a1b2ac6c5111c92515219c143578c3fcc0431acc6395"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/2"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "judgment-4",
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-04",
+      "purpose": "入力準備",
+      "startedAt": "2026-09-26T12:32:19.923Z",
+      "endedAt": "2026-09-26T12:32:22.503Z",
+      "elapsedSeconds": 2.578550917,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/execution/prepare-2026-09-26T12-32-19.923Z.json",
+          "bytes": 306,
+          "sha256": "ff0433f436ed267dce748f11821bf4cd0da5a8baeb86a964e0587f1989b51fd7"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/3"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-05",
+      "purpose": "保持範囲の検証・保存",
+      "startedAt": "2026-09-26T12:36:17.246Z",
+      "endedAt": "2026-09-26T12:36:20.092Z",
+      "elapsedSeconds": 2.8442666250000004,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/execution/retention-2026-09-26T12-36-17.246Z.json",
+          "bytes": 250,
+          "sha256": "7f8842a26552bf1f8df7cec419657c8c910fb60c4b885059d51bcbd00fa1dc8c"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/4"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "judgment-3",
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-06",
+      "purpose": "候補採用の検証・保存",
+      "startedAt": "2026-09-26T12:35:22.286Z",
+      "endedAt": "2026-09-26T12:35:25.187Z",
+      "elapsedSeconds": 2.899895583,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/execution/selection-2026-09-26T12-35-22.286Z.json",
+          "bytes": 423,
+          "sha256": "baac7eeafa1fdecd3da0a06683f90f95b2b8a64582305549f915df396a9e2021"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/5"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "judgment-2",
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-07",
+      "purpose": "旧話者分離ありjobの送信・待機（クライアント期限で中断）",
+      "startedAt": "2026-09-26T06:32:52.896Z",
+      "endedAt": "2026-09-26T07:02:57.408Z",
+      "elapsedSeconds": 1802.4258892920002,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/execution/stt-after-upload-fix-2026-09-26T06-32-52.896Z.json",
+          "bytes": 398,
+          "sha256": "a4ad21b71e66f84424975485d3284310636c9b41da00ab0bed71fa608d425e6d"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/6"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "failed"
+    },
+    {
+      "stage": "stage-08",
+      "purpose": "話者分離なしSTT（呼出し全体）",
+      "startedAt": "2026-09-26T09:46:13.148Z",
+      "endedAt": "2026-09-26T12:31:13.991Z",
+      "elapsedSeconds": 9900.798751791,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/execution/stt-no-diarization-2026-09-26T09-46-13.148Z.json",
+          "bytes": 867,
+          "sha256": "710ceb8ad6b0e35479c67bb3be4e338fd022ca763fa5bc10d05aeafe0102f46d"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/7"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed",
+      "note": "キュー待ちを内包。正常参考ではこの外側呼出し時間から記録済みキュー待ちだけを控除する。"
+    },
+    {
+      "stage": "stage-09",
+      "purpose": "接続後の背景・音声生成と非変更検証",
+      "startedAt": "2026-09-26T14:20:43.778Z",
+      "endedAt": "2026-09-26T14:30:57.616Z",
+      "elapsedSeconds": 613.818706,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/background-2026-09-26T14-20-43.778Z.json",
+          "bytes": 169,
+          "sha256": "17212aeed5499fb4e28affbaf2459708a8eddf295f2564f18ed5757dd99f9b5f"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/8"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-10",
+      "purpose": "演出入力の検証・保存",
+      "startedAt": "2026-09-26T14:16:02.283Z",
+      "endedAt": "2026-09-26T14:16:02.792Z",
+      "elapsedSeconds": 0.508802459,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/native-2026-09-26T14-16-02.283Z.json",
+          "bytes": 166,
+          "sha256": "fcd536963db5af987d64df78d3985c076539631f11a74be6dd642e2af96666c2"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/9"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-11",
+      "purpose": "演出・接続判断の検証・保存",
+      "startedAt": "2026-09-26T14:20:30.787Z",
+      "endedAt": "2026-09-26T14:20:31.526Z",
+      "elapsedSeconds": 0.7389885839999999,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/orchestration-2026-09-26T14-20-30.787Z.json",
+          "bytes": 180,
+          "sha256": "f027c8cbfb94ed1fc6506facdf4caba06527b169edf8d1d145441174ec80d1d6"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/10"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "judgment-5",
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-12",
+      "purpose": "入力準備",
+      "startedAt": "2026-09-26T14:11:45.093Z",
+      "endedAt": "2026-09-26T14:11:45.128Z",
+      "elapsedSeconds": 0.03412804199999999,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/prepare-2026-09-26T14-11-45.093Z.json",
+          "bytes": 244,
+          "sha256": "17901d2bef56d3a988a7225f5c98a97dc9b1be2d66283b7b94af749f73d7c261"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/11"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "failed"
+    },
+    {
+      "stage": "stage-13",
+      "purpose": "入力準備",
+      "startedAt": "2026-09-26T14:14:29.751Z",
+      "endedAt": "2026-09-26T14:14:29.751Z",
+      "elapsedSeconds": 0.0002990419999999858,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/prepare-2026-09-26T14-14-29.751Z.json",
+          "bytes": 356,
+          "sha256": "1850a81da895cdd25b44c6daa585761a81dec6e18a40cebe9773414c57d88c5e"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/12"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "failed"
+    },
+    {
+      "stage": "stage-14",
+      "purpose": "入力準備",
+      "startedAt": "2026-09-26T14:15:55.838Z",
+      "endedAt": "2026-09-26T14:15:56.412Z",
+      "elapsedSeconds": 0.5739375,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/prepare-2026-09-26T14-15-55.838Z.json",
+          "bytes": 165,
+          "sha256": "e30ccd12225bff35a0024a56eb93820cec24ea56861321427f9e59ee6315a482"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/13"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-15",
+      "purpose": "演出選択用の音声・字幕・実フォント入力準備",
+      "startedAt": "2026-09-26T14:16:09.325Z",
+      "endedAt": "2026-09-26T14:17:41.046Z",
+      "elapsedSeconds": 91.717790708,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/prepare-orchestration-2026-09-26T14-16-09.325Z.json",
+          "bytes": 182,
+          "sha256": "e724bdabccfe82c968cea6c27c267d0d2e50260fd08ca8a99a8be9b1158c970a"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/14"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-16",
+      "purpose": "字幕画像・動画描画・QC（試行全体）",
+      "startedAt": "2026-09-26T14:32:11.022Z",
+      "endedAt": "2026-09-26T14:44:31.472Z",
+      "elapsedSeconds": 740.7158085,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/render-2026-09-26T14-32-11.022Z.json",
+          "bytes": 259,
+          "sha256": "8a9e03cfd7f08b4a39685064ae1ada7250ca2f09677bdf34be8e3897838678e0"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/15"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "failed"
+    },
+    {
+      "stage": "stage-17",
+      "purpose": "字幕画像・動画描画・QC（試行全体）",
+      "startedAt": "2026-09-26T14:46:59.317Z",
+      "endedAt": "2026-09-26T14:59:31.661Z",
+      "elapsedSeconds": 752.383012709,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/render-2026-09-26T14-46-59.317Z.json",
+          "bytes": 509,
+          "sha256": "0a8129d30886537756ebe3b1f0df4d30086d653d1774f343359b01cbec8c0272"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/16"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "failed"
+    },
+    {
+      "stage": "stage-18",
+      "purpose": "字幕画像・動画描画・QC（試行全体）",
+      "startedAt": "2026-09-26T15:03:24.914Z",
+      "endedAt": "2026-09-26T18:39:07.960Z",
+      "elapsedSeconds": 12942.866702166,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/render-2026-09-26T15-03-24.914Z.json",
+          "bytes": 4524068,
+          "sha256": "1aea3a5ad294db9021aaf64d9e96643adbe5dcb62338742482df842cb41865ce"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/17"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "failed",
+      "note": "本体動画と全編再現検査は成功。後続の大容量入力SHA読込みで失敗。全体を失敗コストとして除くと必要処理も失う。"
+    },
+    {
+      "stage": "stage-19",
+      "purpose": "字幕状態QCの再開",
+      "startedAt": "2026-09-26T18:44:29.824Z",
+      "endedAt": "2026-09-26T18:44:41.718Z",
+      "elapsedSeconds": 11.893939833000001,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-001/qc-execution.json",
+          "bytes": 297,
+          "sha256": "4a9a5e6f74690e63489c1b58d390cca6ea9d5c8eff4b90b361f5b3ed9d2c7e4b"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/18"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "failed"
+    },
+    {
+      "stage": "stage-20",
+      "purpose": "QC比較画像の透過圧縮（QCと並行）",
+      "startedAt": "2026-09-26T19:35:37.738292+00:00",
+      "endedAt": "2026-09-26T20:15:24.028132+00:00",
+      "elapsedSeconds": 2386.2898399829865,
+      "category": "recovery",
+      "parallelWith": [
+        "stage-24"
+      ],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/filesystem-compression-first-execution.json",
+          "bytes": 694,
+          "sha256": "b7e5327a9f97ed6246ff2cd650b370d813b80294e73cf809d886e2aa0aa19b89"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/19"
+        }
+      ],
+      "timeBasis": "filesystem-observation-not-monotonic",
+      "parentStage": null,
+      "originalStatus": "interrupted"
+    },
+    {
+      "stage": "stage-21",
+      "purpose": "QC比較画像の透過圧縮（QCと並行）",
+      "startedAt": "2026-09-26T20:16:47.448753+00:00",
+      "endedAt": "2026-09-26T21:14:02.692955+00:00",
+      "elapsedSeconds": 3431.1824447498657,
+      "category": "recovery",
+      "parallelWith": [
+        "stage-24"
+      ],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/filesystem-compression-resume-execution.json",
+          "bytes": 419,
+          "sha256": "da7a84f891081a2d88943e1c6281e1acfc7143e17b1a012ef295f08b8e4b1f08"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/20"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-22",
+      "purpose": "QC字幕中間画像の透過圧縮",
+      "startedAt": "2026-09-26T19:37:48.887634+00:00",
+      "endedAt": "2026-09-26T19:38:57.152990+00:00",
+      "elapsedSeconds": 68.26512879203074,
+      "category": "recovery",
+      "parallelWith": [
+        "stage-24",
+        "stage-20"
+      ],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/filesystem-layer-compression-execution.json",
+          "bytes": 269,
+          "sha256": "ae09708c09006961de768e0771493cb45af4761831ebb01ff820f4efd5ad925c"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/21"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-23",
+      "purpose": "検証済み初稿の固定保存",
+      "startedAt": "2026-09-26T23:20:38.622Z",
+      "endedAt": "2026-09-26T23:21:20.272Z",
+      "elapsedSeconds": 41.651125541,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/publish-execution.json",
+          "bytes": 146,
+          "sha256": "ae9891766b31eafd1d227fe755f61c05d7af5bcd9bf285d2ffb8a441e10d07f1"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/22"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-24",
+      "purpose": "字幕状態QCの再開",
+      "startedAt": "2026-09-26T18:45:43.025Z",
+      "endedAt": "2026-09-26T21:14:01.006Z",
+      "elapsedSeconds": 8897.682529209,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/qc-execution.json",
+          "bytes": 210,
+          "sha256": "b78979ec97a0bc92077902b8014f3876be5767227eab52cceb0b070071c0ea21"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/23"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "failed",
+      "note": "424サンプル比較完了後のJSON保存で失敗。必要QCと保存失敗末尾の独立計時がなく、正常参考では包括値を代用する。"
+    },
+    {
+      "stage": "stage-25",
+      "purpose": "保存済み比較画像からのQC証拠復元・再判定",
+      "startedAt": "2026-09-26T21:14:44.034Z",
+      "endedAt": "2026-09-26T22:13:41.024Z",
+      "elapsedSeconds": 3537.098565166,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/recover-execution.json",
+          "bytes": 379,
+          "sha256": "32739351ad22d6f80a950d7163a5cb757744700130075a979ee33e7415f119aa"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/24"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "failed"
+    },
+    {
+      "stage": "stage-26",
+      "purpose": "独立診断を含む最終検証・初稿固定条件の照合",
+      "startedAt": "2026-09-26T22:30:39.441Z",
+      "endedAt": "2026-09-26T23:19:04.258Z",
+      "elapsedSeconds": 2904.893011584,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/resolve-execution.json",
+          "bytes": 148,
+          "sha256": "87e938628f9289267c264d93a6e9372c79e7580b6535368461779722cdc94c38"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/25"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed",
+      "note": "字幕000103限定解決の最終処理。通常必要なvalidator・音声・入力照合と復旧専用再読・正規化・GCを分離計時していない。"
+    },
+    {
+      "stage": "stage-27",
+      "purpose": "完成候補の全編映像・音声デコード",
+      "startedAt": "2026-09-26T17:28:28.189298+00:00",
+      "endedAt": "2026-09-26T17:28:43.558801+00:00",
+      "elapsedSeconds": 15.368269458878785,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [
+        "exact-replay"
+      ],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/full-decode-verification.json",
+          "bytes": 1020,
+          "sha256": "dcef71d11d3ae523a67e9affc9387c7a09a80e6d9ead3996ec0df454a1b26d7c"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/26"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "passed",
+      "note": "全編再現encode中に完走。実走の追加クリティカルパス時間は0と扱い、子処理時間は保持する。"
+    },
+    {
+      "stage": "stage-28",
+      "purpose": "素材取得",
+      "startedAt": "2026-09-26T05:51:26.026690+00:00",
+      "endedAt": "2026-09-26T06:09:04.927016+00:00",
+      "elapsedSeconds": 1058.7949739580508,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/source/acquisition-execution.json",
+          "bytes": 571,
+          "sha256": "383d6c05386c56443f53b73f0408579714ff93fc7218737dac9189bf3530be74"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/27"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "recorded"
+    },
+    {
+      "stage": "stage-29",
+      "purpose": "土台映像の再試行",
+      "startedAt": "2026-09-26T13:25:06.673Z",
+      "endedAt": "2026-09-26T14:10:49.639Z",
+      "elapsedSeconds": 2740.8993022500003,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/execution.json",
+          "bytes": 421,
+          "sha256": "55bb6777c9cbd9da06e1965c63ae52f847250b68ee73bc95785a14ed0dcf5237"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/28"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed",
+      "note": "実走上は再試行だが、成功した土台生成1回分の代表値として正常参考へ採用する。"
+    },
+    {
+      "stage": "stage-30",
+      "purpose": "話者分離なしSTTのクライアント全体",
+      "startedAt": "2026-09-26T09:46:15.488Z",
+      "endedAt": "2026-09-26T12:31:13.989Z",
+      "elapsedSeconds": 9898.501,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-execution.json",
+          "bytes": 560,
+          "sha256": "fbabe29ac5b231c1bebedb58fe865993d2b61785e3ce2411d4ac452340b54a96"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/29"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-08",
+      "originalStatus": "recorded",
+      "note": "外側STT呼出しと同一job。二重に合計しない。"
+    },
+    {
+      "stage": "stage-31",
+      "purpose": "字幕1件の圧縮条件を合わせた限定診断",
+      "startedAt": "2026-09-26T22:26:34.688Z",
+      "endedAt": "2026-09-26T22:30:06.121Z",
+      "elapsedSeconds": 211.43853625,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/execution.json",
+          "bytes": 30656,
+          "sha256": "6fc25251db1636b63356375d6d498ed899522c871950628081f221dc961bc3a6"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/30"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed"
+    },
+    {
+      "stage": "stage-32",
+      "purpose": "診断区間の背景・フレーム一致確認",
+      "startedAt": "2026-09-26T22:30:38.645000+00:00",
+      "endedAt": "2026-09-26T22:30:39.253829+00:00",
+      "elapsedSeconds": 0.6088989169802517,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/window-alignment-proof.json",
+          "bytes": 1115,
+          "sha256": "cfa3f31dea8544f0c46828f934b1a1a8ecdd4823a61ca127006cade318ff1d87"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/31"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "passed"
+    },
+    {
+      "stage": "stage-33",
+      "purpose": "演出用の独立した音声観測",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 2288.892089959001,
+      "category": "required",
+      "parallelWith": [
+        "stage-29"
+      ],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/audio/summary.json",
+          "bytes": 1911,
+          "sha256": "0bcb933893b5b5596d1283936443deebd4371873a739f30c05a633888d90e392"
+        },
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/stages/32"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": null,
+      "originalStatus": "completed",
+      "note": "初回失敗土台の完成byteを利用し成功土台再試行と並行。開始・終了時刻は未保存。失敗のない経路で同じ並列が成立した証拠にはならない。"
+    },
+    {
+      "stage": "judgment-1",
+      "purpose": "見どころ探索・結果検証",
+      "startedAt": "2026-09-26T12:32:22.503Z",
+      "endedAt": "2026-09-26T12:34:50.406Z",
+      "elapsedSeconds": 147.903,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/judgmentStageWallIntervals/0"
+        }
+      ],
+      "timeBasis": "saved-wall-interval",
+      "parentStage": null,
+      "note": "ログ上の入力準備完了から回答検証完了までの区間経過。読解・判断・操作を含み、モデル単体の応答時間ではない。"
+    },
+    {
+      "stage": "judgment-2",
+      "purpose": "候補採用判断・結果検証",
+      "startedAt": "2026-09-26T12:34:50.406Z",
+      "endedAt": "2026-09-26T12:35:25.187Z",
+      "elapsedSeconds": 34.781,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/judgmentStageWallIntervals/1"
+        }
+      ],
+      "timeBasis": "saved-wall-interval",
+      "parentStage": null,
+      "note": "ログ上の入力準備完了から回答検証完了までの区間経過。読解・判断・操作を含み、モデル単体の応答時間ではない。"
+    },
+    {
+      "stage": "judgment-3",
+      "purpose": "保持範囲判断・結果検証",
+      "startedAt": "2026-09-26T12:35:25.187Z",
+      "endedAt": "2026-09-26T12:36:20.092Z",
+      "elapsedSeconds": 54.905,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/judgmentStageWallIntervals/2"
+        }
+      ],
+      "timeBasis": "saved-wall-interval",
+      "parentStage": null,
+      "note": "ログ上の入力準備完了から回答検証完了までの区間経過。読解・判断・操作を含み、モデル単体の応答時間ではない。"
+    },
+    {
+      "stage": "judgment-4",
+      "purpose": "初回字幕区切り判断・検証",
+      "startedAt": "2026-09-26T14:10:49.639Z",
+      "endedAt": "2026-09-26T14:11:31.893Z",
+      "elapsedSeconds": 42.254,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/judgmentStageWallIntervals/3"
+        }
+      ],
+      "timeBasis": "saved-wall-interval",
+      "parentStage": null,
+      "note": "ログ上の入力準備完了から回答検証完了までの区間経過。読解・判断・操作を含み、モデル単体の応答時間ではない。"
+    },
+    {
+      "stage": "judgment-5",
+      "purpose": "演出・接続判断・検証",
+      "startedAt": "2026-09-26T14:17:41.046Z",
+      "endedAt": "2026-09-26T14:20:31.526Z",
+      "elapsedSeconds": 170.48,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/judgmentStageWallIntervals/4"
+        }
+      ],
+      "timeBasis": "saved-wall-interval",
+      "parentStage": null,
+      "note": "ログ上の入力準備完了から回答検証完了までの区間経過。読解・判断・操作を含み、モデル単体の応答時間ではない。"
+    },
+    {
+      "stage": "stt-upload",
+      "purpose": "入力SHA確認・転送・受付保存",
+      "startedAt": "2026-09-26T09:46:15.488Z",
+      "endedAt": "2026-09-26T09:49:57.203Z",
+      "elapsedSeconds": 221.715,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-status.json",
+          "bytes": 2586,
+          "sha256": "5ea61bf8cd221d6252c52304835944d37f35bf94f95b7f0069bc455dce5d6ac9"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-job.json",
+          "bytes": 2914,
+          "sha256": "3a49ffd5b42410c592484f9d742aa4949788d4fb97ce4e32b4b74a35ae8a32cc"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-execution.json",
+          "bytes": 560,
+          "sha256": "fbabe29ac5b231c1bebedb58fe865993d2b61785e3ce2411d4ac452340b54a96"
+        }
+      ],
+      "timeBasis": "saved-wall-interval",
+      "parentStage": "stage-30",
+      "note": "GPUはserver、送信前後はclient時計。受付時刻の約0.05秒差があり内訳の単純和で外側記録を置換しない。"
+    },
+    {
+      "stage": "stt-queue",
+      "purpose": "GPU先行jobの終了待ち",
+      "startedAt": "2026-09-26T09:49:57.152532+00:00",
+      "endedAt": "2026-09-26T11:25:28.224325+00:00",
+      "elapsedSeconds": 5731.071793,
+      "category": "waiting",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-status.json",
+          "bytes": 2586,
+          "sha256": "5ea61bf8cd221d6252c52304835944d37f35bf94f95b7f0069bc455dce5d6ac9"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-job.json",
+          "bytes": 2914,
+          "sha256": "3a49ffd5b42410c592484f9d742aa4949788d4fb97ce4e32b4b74a35ae8a32cc"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-execution.json",
+          "bytes": 560,
+          "sha256": "fbabe29ac5b231c1bebedb58fe865993d2b61785e3ce2411d4ac452340b54a96"
+        }
+      ],
+      "timeBasis": "saved-wall-interval",
+      "parentStage": "stage-30",
+      "note": "GPUはserver、送信前後はclient時計。受付時刻の約0.05秒差があり内訳の単純和で外側記録を置換しない。"
+    },
+    {
+      "stage": "stt-processing",
+      "purpose": "全編文字認識・時刻合わせ",
+      "startedAt": "2026-09-26T11:25:28.224325+00:00",
+      "endedAt": "2026-09-26T12:30:58.047176+00:00",
+      "elapsedSeconds": 3929.822851,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-status.json",
+          "bytes": 2586,
+          "sha256": "5ea61bf8cd221d6252c52304835944d37f35bf94f95b7f0069bc455dce5d6ac9"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-job.json",
+          "bytes": 2914,
+          "sha256": "3a49ffd5b42410c592484f9d742aa4949788d4fb97ce4e32b4b74a35ae8a32cc"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-execution.json",
+          "bytes": 560,
+          "sha256": "fbabe29ac5b231c1bebedb58fe865993d2b61785e3ce2411d4ac452340b54a96"
+        }
+      ],
+      "timeBasis": "saved-wall-interval",
+      "parentStage": "stage-30",
+      "note": "GPUはserver、送信前後はclient時計。受付時刻の約0.05秒差があり内訳の単純和で外側記録を置換しない。"
+    },
+    {
+      "stage": "stt-result",
+      "purpose": "完了検知・結果取得・変換終了まで",
+      "startedAt": "2026-09-26T12:30:58.047176+00:00",
+      "endedAt": "2026-09-26T12:31:13.989Z",
+      "elapsedSeconds": 15.941824,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-status.json",
+          "bytes": 2586,
+          "sha256": "5ea61bf8cd221d6252c52304835944d37f35bf94f95b7f0069bc455dce5d6ac9"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-job.json",
+          "bytes": 2914,
+          "sha256": "3a49ffd5b42410c592484f9d742aa4949788d4fb97ce4e32b4b74a35ae8a32cc"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-execution.json",
+          "bytes": 560,
+          "sha256": "fbabe29ac5b231c1bebedb58fe865993d2b61785e3ce2411d4ac452340b54a96"
+        }
+      ],
+      "timeBasis": "saved-wall-interval",
+      "parentStage": "stage-30",
+      "note": "GPUはserver、送信前後はclient時計。受付時刻の約0.05秒差があり内訳の単純和で外側記録を置換しない。"
+    },
+    {
+      "stage": "stt-whisper",
+      "purpose": "新jobの文字認識のみ",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": null,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-status.json",
+          "bytes": 2586,
+          "sha256": "5ea61bf8cd221d6252c52304835944d37f35bf94f95b7f0069bc455dce5d6ac9"
+        }
+      ],
+      "timeBasis": "not-reported",
+      "parentStage": "stt-processing",
+      "note": "旧jobの時間を流用しない。"
+    },
+    {
+      "stage": "stt-alignment",
+      "purpose": "新jobの時刻合わせのみ",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": null,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-status.json",
+          "bytes": 2586,
+          "sha256": "5ea61bf8cd221d6252c52304835944d37f35bf94f95b7f0069bc455dce5d6ac9"
+        }
+      ],
+      "timeBasis": "not-reported",
+      "parentStage": "stt-processing",
+      "note": "旧jobの時間を流用しない。"
+    },
+    {
+      "stage": "stt-diarization",
+      "purpose": "話者分離",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/stt-attempt-003-no-diarization/gpu-stt-status.json",
+          "bytes": 2586,
+          "sha256": "5ea61bf8cd221d6252c52304835944d37f35bf94f95b7f0069bc455dce5d6ac9"
+        }
+      ],
+      "timeBasis": "disabled-skipped",
+      "parentStage": "stt-processing",
+      "note": "今回明示的に無効。"
+    },
+    {
+      "stage": "exact-replay",
+      "purpose": "全編を同一条件で再描画し完成byteとの一致を検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 5143.953816042,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [
+        "stage-27"
+      ],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/exact-replay-result.json",
+          "bytes": 3905899,
+          "sha256": "d49a047830fb7872e3a506fe0b9054a6b10af5dc7d3ff9f0bf9ddf26da2f81e8",
+          "jsonPointer": "/performance"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-18",
+      "note": "現行では必須・今回省略不可。子encode時間を追加で合計しない。開始終了の絶対時刻は未保存。"
+    },
+    {
+      "stage": "first-video-generation",
+      "purpose": "描画開始から最初の本体合成完了記録保存まで",
+      "startedAt": "2026-09-26T15:03:24.914Z",
+      "endedAt": "2026-09-26T17:06:45.238834+00:00",
+      "elapsedSeconds": 7400.324834,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/render-2026-09-26T15-03-24.914Z.json",
+          "bytes": 4524068,
+          "sha256": "1aea3a5ad294db9021aaf64d9e96643adbe5dcb62338742482df842cb41865ce"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/render-processes/2841-video-composite/timing.json",
+          "bytes": 198,
+          "sha256": "1a3134c83ac6959e86f879bff2739e616ca2e8159cbd0181ce3dbfc06b5a22a5"
+        }
+      ],
+      "timeBasis": "stage-clock-to-filesystem-observation",
+      "parentStage": "stage-18",
+      "note": "終点は子処理終了後の記録mtime。厳密な合成終了時計ではなく、QC前参考の近接観測境界。"
+    },
+    {
+      "stage": "render-before-encode",
+      "purpose": "入力準備・字幕画像・描画前検査等（本体encode以外）",
+      "startedAt": "2026-09-26T15:03:24.914Z",
+      "endedAt": null,
+      "elapsedSeconds": 2283.465527042,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/render-2026-09-26T15-03-24.914Z.json",
+          "bytes": 4524068,
+          "sha256": "1aea3a5ad294db9021aaf64d9e96643adbe5dcb62338742482df842cb41865ce"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/render-processes/2841-video-composite/timing.json",
+          "bytes": 198,
+          "sha256": "1a3134c83ac6959e86f879bff2739e616ca2e8159cbd0181ce3dbfc06b5a22a5"
+        }
+      ],
+      "timeBasis": "residual-derived-from-observation",
+      "parentStage": "first-video-generation",
+      "note": "合成完了記録までの観測区間から単調時計のencode時間を控除した残差。SHA・描画・検査の内訳は分離不能。"
+    },
+    {
+      "stage": "post-encode-other",
+      "purpose": "完成媒体走査・native比較の準備等（再現検査以外）",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 398.58805212400057,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/execution/render-2026-09-26T15-03-24.914Z.json",
+          "bytes": 4524068,
+          "sha256": "1aea3a5ad294db9021aaf64d9e96643adbe5dcb62338742482df842cb41865ce"
+        },
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/render-processes/2841-video-composite/timing.json",
+          "bytes": 198,
+          "sha256": "1a3134c83ac6959e86f879bff2739e616ca2e8159cbd0181ce3dbfc06b5a22a5"
+        },
+        {
+          "path": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/exact-replay-result.json",
+          "bytes": 3905899,
+          "sha256": "d49a047830fb7872e3a506fe0b9054a6b10af5dc7d3ff9f0bf9ddf26da2f81e8",
+          "jsonPointer": "/performance"
+        }
+      ],
+      "timeBasis": "residual-derived-from-observation",
+      "parentStage": "stage-18",
+      "note": "描画試行全体から本体完成までと全編再現検査を控除。最後の入力SHA失敗と失敗記録処理を含み、その全量は未分離。"
+    },
+    {
+      "stage": "processes/qc-resume-attempt-002/native-qc-tool-version",
+      "purpose": "QCツール版の取得",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.07173120799999742,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/qc-resume-attempt-002/native-qc-tool-version"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-24",
+      "childCount": 2,
+      "evidenceWriteSeconds": 0.0016015409999963594,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/qc-resume-attempt-002/native-qc-source-frames-extract",
+      "purpose": "比較元の対象フレーム抽出",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 74.054029209,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/qc-resume-attempt-002/native-qc-source-frames-extract"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-24",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.012732957999993232,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/qc-resume-attempt-002/native-qc-completed-frames-extract",
+      "purpose": "完成動画の対象フレーム抽出",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 18.78860158300001,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/qc-resume-attempt-002/native-qc-completed-frames-extract"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-24",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0009771659999969415,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/qc-resume-attempt-002/native-qc-native-layer-prepare",
+      "purpose": "比較用字幕層の準備",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 158.19822585000045,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/qc-resume-attempt-002/native-qc-native-layer-prepare"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-24",
+      "childCount": 372,
+      "evidenceWriteSeconds": 0.19362925900041572,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/qc-resume-attempt-002/native-qc-native-layer-decode",
+      "purpose": "比較用字幕層の復号",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 39.810208251000404,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/qc-resume-attempt-002/native-qc-native-layer-decode"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-24",
+      "childCount": 453,
+      "evidenceWriteSeconds": 0.29727362800022805,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/qc-resume-attempt-002/native-qc-completed-rgb-crop",
+      "purpose": "完成フレームの比較範囲RGB読取り",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 28.443581734001583,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/qc-resume-attempt-002/native-qc-completed-rgb-crop"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-24",
+      "childCount": 424,
+      "evidenceWriteSeconds": 0.31162133100180645,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/qc-resume-attempt-002/native-qc-native-reference-composite",
+      "purpose": "字幕状態ごとの比較候補合成",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 5483.758364004994,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/qc-resume-attempt-002/native-qc-native-reference-composite"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-24",
+      "childCount": 424,
+      "evidenceWriteSeconds": 2.006508750002016,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/orchestration-audio-inspection-ffprobe",
+      "purpose": "演出用音声の媒体情報確認",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.46013891700003295,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/orchestration-audio-inspection-ffprobe"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0015312080000294372,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/orchestration-audio-inspection-audio-payload",
+      "purpose": "演出用音声の圧縮packet照合",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.09573262499994599,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/orchestration-audio-inspection-audio-payload"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0041959170000627636,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/layout-inspection",
+      "purpose": "字幕配置の検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.31065312500006986,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/layout-inspection"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0005082079999847338,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/overlay-still",
+      "purpose": "字幕画像の描画",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 1051.2083279590122,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/overlay-still"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 918,
+      "evidenceWriteSeconds": 0.45956788900610945,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/overlay-line-mask",
+      "purpose": "字幕行の比較mask作成",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 480.63829249999816,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/overlay-line-mask"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 421,
+      "evidenceWriteSeconds": 0.21595992099819714,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/overlay-line-inspection-alpha",
+      "purpose": "字幕行の透明度検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 36.52700359200462,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/overlay-line-inspection-alpha"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 414,
+      "evidenceWriteSeconds": 0.2278382969971281,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/overlay-line-inspection-bounds",
+      "purpose": "字幕行の領域検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 59.53420414800569,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/overlay-line-inspection-bounds"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 414,
+      "evidenceWriteSeconds": 0.2304204649977617,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/overlay-final-inspection-alpha",
+      "purpose": "字幕画像の透明度検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 33.22856970899925,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/overlay-final-inspection-alpha"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 378,
+      "evidenceWriteSeconds": 0.22786762299877575,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/overlay-final-inspection-bounds",
+      "purpose": "字幕画像の領域検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 54.34441124700217,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/overlay-final-inspection-bounds"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 378,
+      "evidenceWriteSeconds": 0.20781662600371065,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/motion-native-canvas-inspection",
+      "purpose": "動く字幕の描画領域検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 1.5565386700007369,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/motion-native-canvas-inspection"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 62,
+      "evidenceWriteSeconds": 0.029810539998696192,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/overlay-calibration-inspection-alpha",
+      "purpose": "字幕位置校正用の透明度検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.6130495000003139,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/overlay-calibration-inspection-alpha"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 7,
+      "evidenceWriteSeconds": 0.0036391259999945763,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/overlay-calibration-inspection-bounds",
+      "purpose": "字幕位置校正用の領域検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 1.0100819169997703,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/overlay-calibration-inspection-bounds"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 7,
+      "evidenceWriteSeconds": 0.0034355000001378357,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/video-composite",
+      "purpose": "本体動画合成",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 5116.859306958,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/video-composite"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0034936669999733566,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/output-media-inspection-ffprobe",
+      "purpose": "完成媒体の形式・フレーム走査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 88.83002683299966,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/output-media-inspection-ffprobe"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0005427089994773269,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/output-media-inspection-audio-payload",
+      "purpose": "完成媒体の音声packet照合",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.13392858299985527,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/output-media-inspection-audio-payload"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0029404579997062683,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/output-frame-count",
+      "purpose": "完成媒体のフレーム数走査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 88.09666104200016,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/output-frame-count"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0005975420000031591,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/exact-replay-version-ffmpeg",
+      "purpose": "再現検査の描画ツール版確認",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.03620145799964666,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/exact-replay-version-ffmpeg"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.00039666600059717894,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/exact-replay-version-ffprobe",
+      "purpose": "再現検査の検査ツール版確認",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.01854345799982548,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/exact-replay-version-ffprobe"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.00048670800030231474,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/exact-replay-encode",
+      "purpose": "全編再現encode",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 5118.652013209,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/exact-replay-encode"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.006853041000664234,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/exact-replay-video-probe-completed",
+      "purpose": "再現照合前の完成動画情報確認",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.04560929099842906,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/exact-replay-video-probe-completed"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0008715419992804527,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/exact-replay-video-probe-replay",
+      "purpose": "再現照合前の再現動画情報確認",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.03187366599962115,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/exact-replay-video-probe-replay"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0009978750012815,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/native-center-layout-reconstruction",
+      "purpose": "字幕中心配置の再構築",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.3042735419999808,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/native-center-layout-reconstruction"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0005894169993698597,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/native-qc-diagnostic-overlay-inspection-alpha",
+      "purpose": "比較候補字幕の透明度検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 7.715771539010108,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/native-qc-diagnostic-overlay-inspection-alpha"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 88,
+      "evidenceWriteSeconds": 0.05558483499102295,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes/native-qc-diagnostic-overlay-inspection-bounds",
+      "purpose": "比較候補字幕の領域検査",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 12.638592250997203,
+      "category": "duplicate-verification-candidate",
+      "parallelWith": [],
+      "couldPotentiallyReuse": true,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes/native-qc-diagnostic-overlay-inspection-bounds"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-18",
+      "childCount": 88,
+      "evidenceWriteSeconds": 0.05005224700644614,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes-attempt-002/orchestration-audio-inspection-ffprobe",
+      "purpose": "演出用音声の媒体情報確認",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.4582101669999538,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes-attempt-002/orchestration-audio-inspection-ffprobe"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-17",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.0010353750000940635,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "processes/render-processes-attempt-002/orchestration-audio-inspection-audio-payload",
+      "purpose": "演出用音声の圧縮packet照合",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.09822104199999013,
+      "category": "failed/retry",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/subprocessAttemptGroups/render-processes-attempt-002/orchestration-audio-inspection-audio-payload"
+        }
+      ],
+      "timeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval",
+      "parentStage": "stage-17",
+      "childCount": 1,
+      "evidenceWriteSeconds": 0.004172584000043571,
+      "note": "絶対開始終了は未保存。親工程へ内包し、正常参考では親と二重加算しない。再利用候補は省略許可を意味しない。"
+    },
+    {
+      "stage": "diagnostic-child-1",
+      "purpose": "字幕000103限定診断: version-real",
+      "startedAt": "2026-09-26T22:26:35.417Z",
+      "endedAt": "2026-09-26T22:26:35.438Z",
+      "elapsedSeconds": 0.02096995800000002,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/codecDiagnosticProcesses/0"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-31"
+    },
+    {
+      "stage": "diagnostic-child-2",
+      "purpose": "字幕000103限定診断: version-alias",
+      "startedAt": "2026-09-26T22:26:35.438Z",
+      "endedAt": "2026-09-26T22:26:35.458Z",
+      "elapsedSeconds": 0.019471415999999978,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/codecDiagnosticProcesses/1"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-31"
+    },
+    {
+      "stage": "diagnostic-child-3",
+      "purpose": "字幕000103限定診断: keyframes",
+      "startedAt": "2026-09-26T22:26:35.459Z",
+      "endedAt": "2026-09-26T22:26:38.324Z",
+      "elapsedSeconds": 2.865507625,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/codecDiagnosticProcesses/2"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-31"
+    },
+    {
+      "stage": "diagnostic-child-4",
+      "purpose": "字幕000103限定診断: window-background",
+      "startedAt": "2026-09-26T22:26:38.325Z",
+      "endedAt": "2026-09-26T22:26:40.841Z",
+      "elapsedSeconds": 2.5166135830000003,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/codecDiagnosticProcesses/3"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-31"
+    },
+    {
+      "stage": "diagnostic-child-5",
+      "purpose": "字幕000103限定診断: expected-encode",
+      "startedAt": "2026-09-26T22:26:40.843Z",
+      "endedAt": "2026-09-26T22:28:09.710Z",
+      "elapsedSeconds": 88.86968149999998,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/codecDiagnosticProcesses/4"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-31"
+    },
+    {
+      "stage": "diagnostic-child-6",
+      "purpose": "字幕000103限定診断: expected-frame",
+      "startedAt": "2026-09-26T22:28:09.710Z",
+      "endedAt": "2026-09-26T22:28:09.879Z",
+      "elapsedSeconds": 0.1694768330000079,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/codecDiagnosticProcesses/5"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-31"
+    },
+    {
+      "stage": "diagnostic-child-7",
+      "purpose": "字幕000103限定診断: duplicate-encode",
+      "startedAt": "2026-09-26T22:28:09.881Z",
+      "endedAt": "2026-09-26T22:30:05.368Z",
+      "elapsedSeconds": 115.490460167,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/codecDiagnosticProcesses/6"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-31"
+    },
+    {
+      "stage": "diagnostic-child-8",
+      "purpose": "字幕000103限定診断: duplicate-frame",
+      "startedAt": "2026-09-26T22:30:05.368Z",
+      "endedAt": "2026-09-26T22:30:05.537Z",
+      "elapsedSeconds": 0.1695572079999838,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/codecDiagnosticProcesses/7"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-31"
+    },
+    {
+      "stage": "diagnostic-child-9",
+      "purpose": "字幕000103限定診断: expected-rgb",
+      "startedAt": "2026-09-26T22:30:05.581Z",
+      "endedAt": "2026-09-26T22:30:05.735Z",
+      "elapsedSeconds": 0.15440291699999945,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/codecDiagnosticProcesses/8"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-31"
+    },
+    {
+      "stage": "diagnostic-child-10",
+      "purpose": "字幕000103限定診断: duplicate-rgb",
+      "startedAt": "2026-09-26T22:30:05.741Z",
+      "endedAt": "2026-09-26T22:30:05.781Z",
+      "elapsedSeconds": 0.03968370799999684,
+      "category": "recovery",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+          "bytes": 61259,
+          "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+          "jsonPointer": "/codecDiagnosticProcesses/9"
+        }
+      ],
+      "timeBasis": "saved-monotonic-elapsed",
+      "parentStage": "stage-31"
+    },
+    {
+      "stage": "test-1",
+      "purpose": "開発回帰試験: clocks-and-background.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 11.970407167,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/clocks-and-background.tap",
+          "bytes": 10218,
+          "sha256": "52436a7bf5d29434569d96d1b81aa68ed3c926702fac42bd6dd65ceaff481967"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "44件中44合格/0失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-2",
+      "purpose": "開発回帰試験: gpu-no-diarization.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 9.024801792,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-no-diarization.tap",
+          "bytes": 8579,
+          "sha256": "da1fc16c00ab53a4e89d8c99bb397504b4c20f0c75c62540ff95d17048cd94b1"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "41件中41合格/0失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-3",
+      "purpose": "開発回帰試験: gpu-resume-final.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 7.969478375,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-resume-final.tap",
+          "bytes": 6545,
+          "sha256": "bb8660b501493b00ae265e307bcb08d678c540e2e1d19d4b2c88fb91d22339d3"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "32件中32合格/0失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-4",
+      "purpose": "開発回帰試験: gpu-resume-sandbox.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 0.205539625,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-resume-sandbox.tap",
+          "bytes": 18134,
+          "sha256": "d8a4eda6bd51ac90a5ba467f00d936d8d2f082649d26e4769ba59cc993498216"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "32件中5合格/27失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-5",
+      "purpose": "開発回帰試験: gpu-resume.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 7.9040430839999996,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-resume.tap",
+          "bytes": 8342,
+          "sha256": "330935f6b54ab7ecf9069328becaddbf730f142b0d62a9f81157e2c343ee3261"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "32件中30合格/2失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-6",
+      "purpose": "開発回帰試験: gpu-upload-fix-final.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 4.6071824999999995,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-upload-fix-final.tap",
+          "bytes": 3496,
+          "sha256": "c726670ea98212861569030360ccd0c46de5b9b3ac43d2149f732d234d279df6"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "18件中18合格/0失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-7",
+      "purpose": "開発回帰試験: gpu-upload-fix.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 4.609112625,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/gpu-upload-fix.tap",
+          "bytes": 3477,
+          "sha256": "cfb573690fb8d32ba41e4281bebdc96ebb18511458f894cdebfce2a9002a845e"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "18件中18合格/0失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-8",
+      "purpose": "開発回帰試験: native-large-media.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 4.358243834,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/native-large-media.tap",
+          "bytes": 3876,
+          "sha256": "e69a54cd5f2bf57e1c35679c9a1596009f9101b3140fe57ab219998431bb489c"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "15件中15合格/0失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-9",
+      "purpose": "開発回帰試験: presentation.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 1.04709825,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/presentation.tap",
+          "bytes": 37682,
+          "sha256": "d306d8cb35f3ed24ab7fd1580ec53d0994715ec7169e8ce61cc32cfd8b788ffd"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "146件中140合格/6失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-10",
+      "purpose": "開発回帰試験: qc-storage-read-final.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 6.123844833,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/qc-storage-read-final.tap",
+          "bytes": 515,
+          "sha256": "b3686602b4b5352bc6f17bfc62cf03780833959a27089047ff337f6706022177"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "2件中2合格/0失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-11",
+      "purpose": "開発回帰試験: qc-storage-read.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 6.042781375,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/qc-storage-read.tap",
+          "bytes": 515,
+          "sha256": "a8b99b1790db321c833c357218ddc9e8a16ed6b3d6afb6d0eecf684d56b4141c"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "2件中2合格/0失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-12",
+      "purpose": "開発回帰試験: qc-storage.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 2.978423958,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/qc-storage.tap",
+          "bytes": 513,
+          "sha256": "37df0a64da6de7f7725f23c9764bce4f2bd876170df0ac11c03964ef16146a24"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "2件中2合格/0失敗。制作1本の正常参考へは算入しない。"
+    },
+    {
+      "stage": "test-13",
+      "purpose": "開発回帰試験: skills-and-gpu.tap",
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 4.621423792,
+      "category": "required",
+      "parallelWith": [],
+      "couldPotentiallyReuse": false,
+      "evidence": [
+        {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/tests/skills-and-gpu.tap",
+          "bytes": 9793,
+          "sha256": "b9619d18921143bdfe2fc0b593fda908c6f9a7bd9eb7cd90ca6d88ffc3b8f115"
+        }
+      ],
+      "timeBasis": "test-runner-monotonic-duration",
+      "parentStage": null,
+      "scope": "development-test-not-per-video-stage",
+      "note": "56件中56合格/0失敗。制作1本の正常参考へは算入しない。"
+    }
+  ],
+  "wallCoverage": {
+    "overall": {
+      "meaning": "素材取得開始から検証済み初稿固定まで（旧job、待機、修正、再試行を含む）",
+      "startedAt": "2026-09-26T05:51:26.026690+00:00",
+      "endedAt": "2026-09-26T23:21:20.270Z",
+      "elapsedSeconds": 62994.24331
+    },
+    "recordedIntervalUnionSeconds": 49288.03611,
+    "unassignedSeconds": 13706.2072,
+    "unassignedIntervals": [
+      {
+        "startedAt": "2026-09-26T06:09:04.927016+00:00",
+        "endedAt": "2026-09-26T06:32:52.896000+00:00",
+        "elapsedSeconds": 1427.968984,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T07:02:57.408000+00:00",
+        "endedAt": "2026-09-26T09:46:13.148000+00:00",
+        "elapsedSeconds": 9795.74,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T12:31:13.991000+00:00",
+        "endedAt": "2026-09-26T12:32:19.923000+00:00",
+        "elapsedSeconds": 65.932,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T12:36:20.092000+00:00",
+        "endedAt": "2026-09-26T12:36:35.345000+00:00",
+        "elapsedSeconds": 15.253,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T13:19:33.681000+00:00",
+        "endedAt": "2026-09-26T13:25:06.673000+00:00",
+        "elapsedSeconds": 332.992,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T14:11:31.893000+00:00",
+        "endedAt": "2026-09-26T14:11:45.093000+00:00",
+        "elapsedSeconds": 13.2,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T14:11:45.128000+00:00",
+        "endedAt": "2026-09-26T14:14:29.751000+00:00",
+        "elapsedSeconds": 164.623,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T14:14:29.751000+00:00",
+        "endedAt": "2026-09-26T14:15:55.838000+00:00",
+        "elapsedSeconds": 86.087,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T14:15:56.412000+00:00",
+        "endedAt": "2026-09-26T14:16:02.283000+00:00",
+        "elapsedSeconds": 5.871,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T14:16:02.792000+00:00",
+        "endedAt": "2026-09-26T14:16:09.325000+00:00",
+        "elapsedSeconds": 6.533,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T14:20:31.526000+00:00",
+        "endedAt": "2026-09-26T14:20:43.778000+00:00",
+        "elapsedSeconds": 12.252,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T14:30:57.616000+00:00",
+        "endedAt": "2026-09-26T14:32:11.022000+00:00",
+        "elapsedSeconds": 73.406,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T14:44:31.472000+00:00",
+        "endedAt": "2026-09-26T14:46:59.317000+00:00",
+        "elapsedSeconds": 147.845,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T14:59:31.661000+00:00",
+        "endedAt": "2026-09-26T15:03:24.914000+00:00",
+        "elapsedSeconds": 233.253,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T18:39:07.960000+00:00",
+        "endedAt": "2026-09-26T18:44:29.824000+00:00",
+        "elapsedSeconds": 321.864,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T18:44:41.718000+00:00",
+        "endedAt": "2026-09-26T18:45:43.025000+00:00",
+        "elapsedSeconds": 61.307,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T21:14:02.692955+00:00",
+        "endedAt": "2026-09-26T21:14:44.034000+00:00",
+        "elapsedSeconds": 41.341045,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T22:13:41.024000+00:00",
+        "endedAt": "2026-09-26T22:26:34.688000+00:00",
+        "elapsedSeconds": 773.664,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T22:30:06.121000+00:00",
+        "endedAt": "2026-09-26T22:30:38.645000+00:00",
+        "elapsedSeconds": 32.524,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T22:30:39.253829+00:00",
+        "endedAt": "2026-09-26T22:30:39.441000+00:00",
+        "elapsedSeconds": 0.187171,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      },
+      {
+        "startedAt": "2026-09-26T23:19:04.258000+00:00",
+        "endedAt": "2026-09-26T23:20:38.622000+00:00",
+        "elapsedSeconds": 94.364,
+        "category": null,
+        "reason": "個別工程の計時計録なし。人間待ち・修正・思考等へ恣意的に配賦しない。"
+      }
+    ],
+    "note": "時刻付き親・子・判断区間の和集合。音声観測・test・子処理の絶対時刻不明分は新たに配賦しない。"
+  },
+  "referenceReconstruction": {
+    "status": "conditional-reference-not-a-normal-run-measurement-or-guaranteed-bound",
+    "normalReferenceSeconds": 36204.927481042054,
+    "nonMixedContributionSeconds": 24003.763888125053,
+    "failureOrRecoveryContainingProxySeconds": 12201.163592916999,
+    "videoBeforePostRenderQcReferenceSeconds": 18818.158946542055,
+    "sameCaseWithRecordedExceptionalDiagnosisSeconds": 36416.97491620904,
+    "terms": [
+      {
+        "stage": "stage-28",
+        "purpose": "素材取得",
+        "contributionSeconds": 1058.7949739580508,
+        "beforeQc": true,
+        "certainty": "measured-one-run",
+        "note": null,
+        "rank": 9,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-08-minus-stt-queue",
+        "purpose": "STT送信・処理・結果取得（キューを除く外側呼出し）",
+        "contributionSeconds": 4169.7269587910005,
+        "beforeQc": true,
+        "certainty": "mixed-clock-derived",
+        "note": null,
+        "rank": 4,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "認識・時刻合わせ内訳は未計測。今回はSTTを変更しない。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-04",
+        "purpose": "文字起こし入力準備",
+        "contributionSeconds": 2.578550917,
+        "beforeQc": true,
+        "certainty": "measured-one-run",
+        "note": null,
+        "rank": 19,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "judgment-1",
+        "purpose": "見どころ探索・結果検証",
+        "contributionSeconds": 147.903,
+        "beforeQc": true,
+        "certainty": "measured-judgment-and-operation-interval",
+        "note": null,
+        "rank": 13,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "judgment-2",
+        "purpose": "候補採用判断・結果検証",
+        "contributionSeconds": 34.781,
+        "beforeQc": true,
+        "certainty": "measured-judgment-and-operation-interval",
+        "note": null,
+        "rank": 18,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "judgment-3",
+        "purpose": "保持範囲判断・結果検証",
+        "contributionSeconds": 54.905,
+        "beforeQc": true,
+        "certainty": "measured-judgment-and-operation-interval",
+        "note": null,
+        "rank": 15,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-29",
+        "purpose": "成功した土台生成1回",
+        "contributionSeconds": 2740.8993022500003,
+        "beforeQc": true,
+        "certainty": "measured-one-run",
+        "note": null,
+        "rank": 6,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-33",
+        "purpose": "成功土台を使う独立音声観測1回",
+        "contributionSeconds": 2288.892089959001,
+        "beforeQc": true,
+        "certainty": "measured-duration-with-serial-dependency-assumption",
+        "note": "失敗土台を流用した実走の並行を正常一発経路へ転用しない。土台完了後に置く直列参考。",
+        "rank": 7,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "judgment-4",
+        "purpose": "字幕区切り判断と検証",
+        "contributionSeconds": 42.254,
+        "beforeQc": true,
+        "certainty": "measured-judgment-and-operation-interval",
+        "note": null,
+        "rank": 16,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-14",
+        "purpose": "入力準備",
+        "contributionSeconds": 0.5739375,
+        "beforeQc": true,
+        "certainty": "measured-one-run",
+        "note": null,
+        "rank": 20,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-10",
+        "purpose": "演出入力の検証・保存",
+        "contributionSeconds": 0.508802459,
+        "beforeQc": true,
+        "certainty": "measured-one-run",
+        "note": null,
+        "rank": 21,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-15",
+        "purpose": "演出選択用の音声・字幕・実フォント入力準備",
+        "contributionSeconds": 91.717790708,
+        "beforeQc": true,
+        "certainty": "measured-one-run",
+        "note": null,
+        "rank": 14,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "judgment-5",
+        "purpose": "演出・接続判断と検証",
+        "contributionSeconds": 170.48,
+        "beforeQc": true,
+        "certainty": "measured-judgment-and-operation-interval",
+        "note": null,
+        "rank": 12,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-09",
+        "purpose": "接続後背景・音声と非変更確認",
+        "contributionSeconds": 613.818706,
+        "beforeQc": true,
+        "certainty": "measured-one-run",
+        "note": null,
+        "rank": 10,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "render-before-encode",
+        "purpose": "字幕画像・描画前の準備と検査",
+        "contributionSeconds": 2283.465527042,
+        "beforeQc": true,
+        "certainty": "observed-boundary-residual",
+        "note": null,
+        "rank": 8,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "同じ字幕画像・共通入力照合の再利用候補。今回の証拠表現変更以外は実装しない。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "processes/render-processes/video-composite",
+        "purpose": "本体動画合成",
+        "contributionSeconds": 5116.859306958,
+        "beforeQc": true,
+        "certainty": "measured-one-run",
+        "note": null,
+        "rank": 3,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "14.9.1 字幕合成局所化の候補。今回は描画方式を変更しない。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "post-encode-other",
+        "purpose": "完成媒体検査・比較準備等",
+        "contributionSeconds": 398.58805212400057,
+        "beforeQc": false,
+        "certainty": "failure-containing-proxy",
+        "note": "終端SHA失敗と記録処理を完全分離できない。削減可能時間と断定しない。",
+        "rank": 11,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "exact-replay",
+        "purpose": "全編再現一致QC",
+        "contributionSeconds": 5143.953816042,
+        "beforeQc": false,
+        "certainty": "measured-one-run",
+        "note": "省略しない。本体描画と二重加算しない。",
+        "rank": 2,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "全編再現を今回は維持。省略・代替には別指示と品質保証の根拠が必要。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-24",
+        "purpose": "字幕状態QC1回・証拠保存までの包括時間",
+        "contributionSeconds": 8897.682529209,
+        "beforeQc": false,
+        "certainty": "failure-containing-proxy",
+        "note": "JSON保存失敗末尾と入力事前照合の時間を分離できず包括値を代用。",
+        "rank": 1,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "14.8.1 共通証拠の保存・再読重複。比較画像・RGB逐次処理は14.8.2候補。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-26",
+        "purpose": "最終validator・音声・入力照合を含む包括時間",
+        "contributionSeconds": 2904.893011584,
+        "beforeQc": false,
+        "certainty": "recovery-containing-proxy",
+        "note": "復旧専用再読・正規化・GCを含み、正常処理のみの実測ではない。",
+        "rank": 5,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "共通資料再展開・巨大JSON読込み・canonical化・GC。14.8.1で対象範囲を測定する。",
+        "specificationChangeRequiredToOmit": true
+      },
+      {
+        "stage": "stage-23",
+        "purpose": "初稿固定保存",
+        "contributionSeconds": 41.651125541,
+        "beforeQc": false,
+        "certainty": "measured-one-run",
+        "note": null,
+        "rank": 17,
+        "required": true,
+        "mayOmitInCurrentScope": false,
+        "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+        "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+        "specificationChangeRequiredToOmit": true
+      }
+    ],
+    "parallelHandling": [
+      "全編decode15.368秒は再現encodeと並行。参考経過には追加しない。",
+      "QC中の圧縮3記録は復旧。QCと重なるので正常参考へ追加しない。",
+      "音声観測は失敗土台を使って成功土台再試行と並行した。正常一発経路の並列成立は未検証なので、成功土台後の直列参考へ置く。",
+      "判断区間に内包する検証時間、STT内側client、描画親/子、全編再現親/子、QC reference生成子時間を二重加算しない。"
+    ],
+    "limitations": [
+      "正常全通し実測は存在しない。失敗のない時間を測るための全編再実行は行わない。",
+      "QC保存失敗末尾、入力再照合、復旧専用再読・正規化・GCの独立時間がないため包括値を代用している。精密な正常時間、最短値、上限値ではない。",
+      "実走時のCPU/I/O競合がなくなった場合の時間は不明。同じ各処理時間が再現する保証はない。",
+      "字幕修正・操作・監査待ち等の個別時間は未計測。未知時間を0秒の正常処理として保証しない。",
+      "000103の元native failureは残る。今回素材の完了を再現するなら限定診断211.439秒と対応確認0.609秒を別途要する。正常参考をQC合格の主張にしない。"
+    ],
+    "previousReferenceCorrection": {
+      "previousClaimMinutes": 665,
+      "previousTableMinutes": [
+        87,
+        65,
+        216,
+        148,
+        49
+      ],
+      "previousTableSumMinutes": 565,
+      "arithmeticDifferenceMinutes": 100,
+      "finding": "以前の約11時間5分は自身の表の合計と100分不一致。正式基準へ昇格せず訂正する。",
+      "previousSixHourFinding": "以前のQC前約6時間は全編再現検査等を含む描画試行全体を参照しており、QC前の境界ではない。"
+    }
+  },
+  "bottleneckRanking": [
+    {
+      "stage": "stage-24",
+      "purpose": "字幕状態QC1回・証拠保存までの包括時間",
+      "contributionSeconds": 8897.682529209,
+      "beforeQc": false,
+      "certainty": "failure-containing-proxy",
+      "note": "JSON保存失敗末尾と入力事前照合の時間を分離できず包括値を代用。",
+      "rank": 1,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "14.8.1 共通証拠の保存・再読重複。比較画像・RGB逐次処理は14.8.2候補。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "exact-replay",
+      "purpose": "全編再現一致QC",
+      "contributionSeconds": 5143.953816042,
+      "beforeQc": false,
+      "certainty": "measured-one-run",
+      "note": "省略しない。本体描画と二重加算しない。",
+      "rank": 2,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "全編再現を今回は維持。省略・代替には別指示と品質保証の根拠が必要。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "processes/render-processes/video-composite",
+      "purpose": "本体動画合成",
+      "contributionSeconds": 5116.859306958,
+      "beforeQc": true,
+      "certainty": "measured-one-run",
+      "note": null,
+      "rank": 3,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "14.9.1 字幕合成局所化の候補。今回は描画方式を変更しない。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-08-minus-stt-queue",
+      "purpose": "STT送信・処理・結果取得（キューを除く外側呼出し）",
+      "contributionSeconds": 4169.7269587910005,
+      "beforeQc": true,
+      "certainty": "mixed-clock-derived",
+      "note": null,
+      "rank": 4,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "認識・時刻合わせ内訳は未計測。今回はSTTを変更しない。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-26",
+      "purpose": "最終validator・音声・入力照合を含む包括時間",
+      "contributionSeconds": 2904.893011584,
+      "beforeQc": false,
+      "certainty": "recovery-containing-proxy",
+      "note": "復旧専用再読・正規化・GCを含み、正常処理のみの実測ではない。",
+      "rank": 5,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "共通資料再展開・巨大JSON読込み・canonical化・GC。14.8.1で対象範囲を測定する。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-29",
+      "purpose": "成功した土台生成1回",
+      "contributionSeconds": 2740.8993022500003,
+      "beforeQc": true,
+      "certainty": "measured-one-run",
+      "note": null,
+      "rank": 6,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-33",
+      "purpose": "成功土台を使う独立音声観測1回",
+      "contributionSeconds": 2288.892089959001,
+      "beforeQc": true,
+      "certainty": "measured-duration-with-serial-dependency-assumption",
+      "note": "失敗土台を流用した実走の並行を正常一発経路へ転用しない。土台完了後に置く直列参考。",
+      "rank": 7,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "render-before-encode",
+      "purpose": "字幕画像・描画前の準備と検査",
+      "contributionSeconds": 2283.465527042,
+      "beforeQc": true,
+      "certainty": "observed-boundary-residual",
+      "note": null,
+      "rank": 8,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "同じ字幕画像・共通入力照合の再利用候補。今回の証拠表現変更以外は実装しない。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-28",
+      "purpose": "素材取得",
+      "contributionSeconds": 1058.7949739580508,
+      "beforeQc": true,
+      "certainty": "measured-one-run",
+      "note": null,
+      "rank": 9,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-09",
+      "purpose": "接続後背景・音声と非変更確認",
+      "contributionSeconds": 613.818706,
+      "beforeQc": true,
+      "certainty": "measured-one-run",
+      "note": null,
+      "rank": 10,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "post-encode-other",
+      "purpose": "完成媒体検査・比較準備等",
+      "contributionSeconds": 398.58805212400057,
+      "beforeQc": false,
+      "certainty": "failure-containing-proxy",
+      "note": "終端SHA失敗と記録処理を完全分離できない。削減可能時間と断定しない。",
+      "rank": 11,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "judgment-5",
+      "purpose": "演出・接続判断と検証",
+      "contributionSeconds": 170.48,
+      "beforeQc": true,
+      "certainty": "measured-judgment-and-operation-interval",
+      "note": null,
+      "rank": 12,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "judgment-1",
+      "purpose": "見どころ探索・結果検証",
+      "contributionSeconds": 147.903,
+      "beforeQc": true,
+      "certainty": "measured-judgment-and-operation-interval",
+      "note": null,
+      "rank": 13,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-15",
+      "purpose": "演出選択用の音声・字幕・実フォント入力準備",
+      "contributionSeconds": 91.717790708,
+      "beforeQc": true,
+      "certainty": "measured-one-run",
+      "note": null,
+      "rank": 14,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "judgment-3",
+      "purpose": "保持範囲判断・結果検証",
+      "contributionSeconds": 54.905,
+      "beforeQc": true,
+      "certainty": "measured-judgment-and-operation-interval",
+      "note": null,
+      "rank": 15,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "judgment-4",
+      "purpose": "字幕区切り判断と検証",
+      "contributionSeconds": 42.254,
+      "beforeQc": true,
+      "certainty": "measured-judgment-and-operation-interval",
+      "note": null,
+      "rank": 16,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-23",
+      "purpose": "初稿固定保存",
+      "contributionSeconds": 41.651125541,
+      "beforeQc": false,
+      "certainty": "measured-one-run",
+      "note": null,
+      "rank": 17,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "judgment-2",
+      "purpose": "候補採用判断・結果検証",
+      "contributionSeconds": 34.781,
+      "beforeQc": true,
+      "certainty": "measured-judgment-and-operation-interval",
+      "note": null,
+      "rank": 18,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-04",
+      "purpose": "文字起こし入力準備",
+      "contributionSeconds": 2.578550917,
+      "beforeQc": true,
+      "certainty": "measured-one-run",
+      "note": null,
+      "rank": 19,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-14",
+      "purpose": "入力準備",
+      "contributionSeconds": 0.5739375,
+      "beforeQc": true,
+      "certainty": "measured-one-run",
+      "note": null,
+      "rank": 20,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    },
+    {
+      "stage": "stage-10",
+      "purpose": "演出入力の検証・保存",
+      "contributionSeconds": 0.508802459,
+      "beforeQc": true,
+      "certainty": "measured-one-run",
+      "note": null,
+      "rank": 21,
+      "required": true,
+      "mayOmitInCurrentScope": false,
+      "reuseCondition": "同じ入力byte・判断・描画条件・ツール・検査条件への束縛が必要。再利用可否の実装評価前。",
+      "implementationCandidate": "順位だけでは短縮可能性を判定しない。今回追加実装なし。",
+      "specificationChangeRequiredToOmit": true
+    }
+  ],
+  "unmeasured": [
+    "新jobのWhisper単体時間",
+    "新jobのalignment単体時間",
+    "判断のモデル単体時間",
+    "人間判断待ちだけの時間",
+    "コード修正だけの時間",
+    "各SHA走査だけの時間",
+    "QC保存失敗末尾だけの時間",
+    "通常の最終validatorと復旧専用処理の分離時間"
+  ],
+  "prohibitedActionsPerformed": {
+    "fullVideoReruns": 0,
+    "encodes": 0,
+    "sttRuns": 0,
+    "paidApiCalls": 0,
+    "oldEvidenceWrites": 0
+  }
+}

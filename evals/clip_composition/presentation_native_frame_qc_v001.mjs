@@ -644,8 +644,43 @@ function checkInputManifest(manifest, plan, baselinePlan, autoPresentation, orch
   }
 }
 
-/** Validate saved evidence by rederiving its complete finite recipe, never by trusting a saved pass flag. */
-export function validatePresentationNativeFrameQcEvidenceV001({plan, inspection, renderRange = null}) {
+const COMMON_EVIDENCE_KEYS = ['inputManifest', 'baselinePlan', 'autoPresentation', 'orchestrationInput', 'renderRange', 'sceneBindings'];
+
+// This cache exists only during one synchronous validation call. It never
+// accepts a caller-provided context or carries a decision into the next call.
+function nativeCommonValidationForCall(plan, renderRange) {
+  const contexts = [];
+  return evidence => {
+    const existing = contexts.find(context => COMMON_EVIDENCE_KEYS.every(key =>
+      evidence[key] === context.evidence[key] || same(evidence[key], context.evidence[key])));
+    if (existing) return existing;
+    const view = evidence.orchestrationInput === undefined ? undefined
+      : restoreOrchestrationDrawingViewEvidenceV001(evidence.orchestrationInput);
+    checkInputManifest(evidence.inputManifest, plan, evidence.baselinePlan, evidence.autoPresentation,
+      evidence.orchestrationInput, view, renderRange);
+    const recipes = deriveRecipes(plan, evidence.baselinePlan, evidence.autoPresentation, evidence.sceneBindings,
+      view, renderRange);
+    const byInstruction = new Map();
+    for (const recipe of recipes) {
+      if (!byInstruction.has(recipe.instructionId)) byInstruction.set(recipe.instructionId, []);
+      byInstruction.get(recipe.instructionId).push(recipe);
+    }
+    let bindingsChecked = false;
+    const context = {evidence, byInstruction, checkBindings() {
+      if (bindingsChecked) return;
+      for (const binding of evidence.sceneBindings.flatMap(row => [...row.states, ...row.alternates])) {
+        const ref = evidence.inputManifest.inputRefs.find(row => row.role === 'png-' + binding.bindingId);
+        requireValue(ref?.path === binding.pngPath && ref.fileSha256 === binding.pngSha256,
+          'native PNG is absent from verified input references');
+      }
+      bindingsChecked = true;
+    }};
+    contexts.push(context);
+    return context;
+  };
+}
+
+function validateNativeInspection({plan, inspection, renderRange}, commonFor) {
   const instructionId = inspection?.instructionId;
   try {
     const evidence = inspection?.nativeFrameQc;
@@ -655,13 +690,8 @@ export function validatePresentationNativeFrameQcEvidenceV001({plan, inspection,
       && evidence.instructionId === instructionId, 'native evidence identity or basis differs');
     const index = plan.elements.findIndex(element => element.instructionId === instructionId);
     requireValue(index >= 0, 'inspection caption is not in the plan');
-    const orchestrationDrawingView = evidence.orchestrationInput === undefined ? undefined
-      : restoreOrchestrationDrawingViewEvidenceV001(evidence.orchestrationInput);
-    checkInputManifest(evidence.inputManifest, plan, evidence.baselinePlan, evidence.autoPresentation,
-      evidence.orchestrationInput, orchestrationDrawingView, renderRange);
-    const recipes = deriveRecipes(plan, evidence.baselinePlan, evidence.autoPresentation, evidence.sceneBindings,
-      orchestrationDrawingView, renderRange)
-      .filter(sample => sample.instructionId === instructionId);
+    const common = commonFor(evidence);
+    const recipes = common.byInstruction.get(instructionId) ?? [];
     const element = plan.elements[index];
     const representativeFrame = renderRange !== null ? recipes[Math.floor(recipes.length / 2)].frame : Object.hasOwn(element, 'presentationPulse')
       ? getPresentationPulseProgramV001({element, canvas: plan.canvas}).maximumFrame
@@ -683,11 +713,7 @@ export function validatePresentationNativeFrameQcEvidenceV001({plan, inspection,
             && observed.appliedOverlayPropsCanonicalSha256 === state.propsCanonicalSha256;
         }), 'expression inspection does not bind every native state PNG');
     }
-    for (const binding of evidence.sceneBindings.flatMap(row => [...row.states, ...row.alternates])) {
-      const ref = evidence.inputManifest.inputRefs.find(row => row.role === 'png-' + binding.bindingId);
-      requireValue(ref?.path === binding.pngPath && ref.fileSha256 === binding.pngSha256,
-        'native PNG is absent from verified input references');
-    }
+    common.checkBindings();
     for (const [sampleIndex, recipe] of recipes.entries()) {
       const sample = evidence.samples[sampleIndex];
       requireValue(sample?.frame === recipe.frame && sample.mediaFrame === recipe.mediaFrame && sample.expectedState === recipe.expectedState
@@ -739,6 +765,19 @@ export function validatePresentationNativeFrameQcEvidenceV001({plan, inspection,
   } catch (error) {
     return {status: 'failed', violations: [violation(instructionId ?? null, error.message)]};
   }
+}
+
+/** Validate saved evidence by rederiving its complete finite recipe, never by trusting a saved pass flag. */
+export function validatePresentationNativeFrameQcEvidenceV001({plan, inspection, renderRange = null}) {
+  return validateNativeInspection({plan, inspection, renderRange}, nativeCommonValidationForCall(plan, renderRange));
+}
+
+/** Validate every local observation while deriving each identical common input once. */
+export function validatePresentationNativeFrameQcInspectionsV001({plan, inspections, renderRange = null}) {
+  const commonFor = nativeCommonValidationForCall(plan, renderRange);
+  const results = inspections.map(inspection => validateNativeInspection({plan, inspection, renderRange}, commonFor));
+  const violations = results.flatMap(result => result.violations);
+  return {status: violations.length === 0 ? 'passed' : 'failed', violations, results};
 }
 
 /** QC-only native reference execution. It never produces a replacement completed video. */
@@ -953,7 +992,7 @@ export async function inspectPresentationNativeFrameQcV001({
       delete inspection.changedPixelsAgainstInstructionOmittedFrame;
       return inspection;
     });
-    const violations = inspections.flatMap(inspection => validatePresentationNativeFrameQcEvidenceV001({plan, inspection, renderRange}).violations);
+    const {violations} = validatePresentationNativeFrameQcInspectionsV001({plan, inspections, renderRange});
     phasesMilliseconds.evidenceConstruction += performance.now() - evidenceStarted;
     return {status: violations.length === 0 ? 'passed' : 'failed', violations, inspections,
       evidence: {schemaVersion: PRESENTATION_NATIVE_FRAME_QC_SCHEMA_V001, inputManifest: manifest,

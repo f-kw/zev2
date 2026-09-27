@@ -17,6 +17,7 @@ import {inspectRenderedMediaWithToolsV001} from './presentation_renderer_qc_v002
 import {PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001} from './presentation_integrity_state_qc_v001.mjs';
 import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_output_directory_v001.mjs';
 import {createPresentationNativeAssetCacheV001} from './presentation_native_asset_cache_v001.mjs';
+import {writePresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const directory = path.join(repo, 'evals/clip_composition');
@@ -40,7 +41,8 @@ const codeNames = ['presentation_orchestration_edited_render_v001.mjs', 'present
   'inspect_presentation_render_layout_v001.ts', 'presentation_renderer_text_layout_v001.mjs',
   'presentation_renderer_qc_v002.mjs', 'presentation_native_frame_qc_v001.mjs',
   'presentation_native_frame_qc_preparation_v001.mjs', 'presentation_exact_replay_qc_v001.mjs',
-  'presentation_integrity_state_qc_v001.mjs', 'presentation_renderer_process_observation_v001.mjs'];
+  'presentation_integrity_state_qc_v001.mjs', 'presentation_renderer_process_observation_v001.mjs',
+  'presentation_qc_evidence_store_v001.mjs'];
 const nativeNames = ['runner/src/remotion/components/TelopText.tsx', 'runner/src/telop/telop-render-model.ts',
   'runner/src/remotion/utils/telop-font.ts', 'runner/src/telop/text-metrics.ts', 'runner/src/telop/telop-line-break.ts',
   'runner/src/shared/telop-glow.ts', 'pnpm-lock.yaml', 'runner/node_modules/@remotion/cli/package.json',
@@ -186,9 +188,11 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     await nativeAdapter.close();
     timings.drawAndQcMilliseconds = performance.now() - drawStarted;
     const drawEvidenceStarted = performance.now();
-    await save(path.join(evidenceDirectory, 'draw-result.json'), draw);
+    await writePresentationQcEvidenceV001(path.join(evidenceDirectory, 'draw-result.json'), draw);
     timings.drawEvidenceWriteMilliseconds = performance.now() - drawEvidenceStarted;
-    assert.equal(draw.exitCode, 0, JSON.stringify(draw.failure ?? draw.finalQc));
+    assert.equal(draw.exitCode, 0, JSON.stringify({status: draw.failure?.status ?? draw.finalQc?.status,
+      violations: draw.failure?.violations ?? draw.finalQc?.violations, stage: draw.failure?.stage,
+      evidencePath: path.join(evidenceDirectory, 'draw-result.json')}));
     assert.equal(draw.finalQc.status, 'passed'); assert.deepEqual(draw.resolvedPlan, derived.resolvedPlan);
     assert.equal(draw.outputMedia.video.frameCount, derived.scope.frameCount);
     const finalVerificationStarted = performance.now();
@@ -221,7 +225,7 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
       processTimings: processObserver.getPerformance(),
       timingScope: 'completion excludes its own serialization/write and the caller result write',
       formalTrustChanged: false, humanQuality: 'not-evaluated', paidApiCalls: 0, newExternalMediaTransfers: 0};
-    await save(path.join(evidenceDirectory, 'completion.json'), result);
+    await writePresentationQcEvidenceV001(path.join(evidenceDirectory, 'completion.json'), result);
     await onProgress({phase: 'complete', scope: derived.scope, timings});
     return result;
   } catch (error) {

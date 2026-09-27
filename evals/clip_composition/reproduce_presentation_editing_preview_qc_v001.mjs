@@ -14,6 +14,7 @@ import {validatePresentationIntegrityStateQcEvidenceV001} from './presentation_i
 import {createPresentationRendererProcessObserverV001} from './presentation_renderer_process_observation_v001.mjs';
 import * as previous from './presentation_native_frame_qc_before_sharing_fixture_v001.mjs';
 import {checkFiniteExecutionEvidence} from './presentation_integrity_state_qc_before_sharing_fixture_v001.mjs';
+import {readPresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 
 const directory = path.dirname(fileURLToPath(import.meta.url)), repo = path.resolve(directory, '../..');
 export const PREVIEW_QC_BEFORE_SHARING_COMMIT_V001 = 'efdee0aabea10b87d39203bee6f9f6e7460032d0';
@@ -76,7 +77,8 @@ export function relocatePreviewQcPathsV001(value, relocations, key = '') {
     ? relocations.find(row => row.from === value)?.to ?? value : value;
 }
 export async function loadPreviewQcComparisonInputV001(resultPath) {
-  const resultRef = await bindPreviewQcFileV001(resultPath), result = await parse(resultPath);
+  const resultRef = await bindPreviewQcFileV001(resultPath);
+  const result = await readPresentationQcEvidenceV001(resultPath, {expectedFileSha256: resultRef.fileSha256});
   assert.equal(result.schemaVersion, 'presentation-edited-render-completion-v001');
   assert.equal(result.status, 'passed'); assert.equal(result.qcScope, 'requested-range-only');
   assert.equal(result.publication.status, 'published');

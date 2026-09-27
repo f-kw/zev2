@@ -1,3 +1,4 @@
+import {readPresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
@@ -304,7 +305,7 @@ const runBuilderRendererCase = async ({
     const [plan, manifest, qc] = await Promise.all([
       readJson(path.join(renderOutput, PRESENTATION_RENDERER_OUTPUT_NAMES.plan)),
       readJson(path.join(renderOutput, PRESENTATION_RENDERER_OUTPUT_NAMES.manifest)),
-      readJson(path.join(renderOutput, PRESENTATION_RENDERER_OUTPUT_NAMES.qc)),
+      readPresentationQcEvidenceV001(path.join(renderOutput, PRESENTATION_RENDERER_OUTPUT_NAMES.qc)),
     ]);
     assert.equal(plan.schemaVersion, 'presentation-render-plan-v002');
     assert.equal(plan.timelineSchemaVersion, 'presentation-base-media-timeline-v002');

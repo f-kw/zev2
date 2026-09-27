@@ -672,7 +672,7 @@ function evaluatePresentationRendererQc({
       alphaMax: inspection?.alphaMax ?? null,
       alphaBounds: inspection?.alphaBounds ?? null,
       lineCount: inspection?.lineCount ?? null,
-      lineAlphaBounds: structuredClone(inspection?.lineAlphaBounds ?? []),
+      lineAlphaBounds: inspection?.lineAlphaBounds ?? [],
       visibilityComparisonBasis: inspection?.visibilityComparisonBasis ?? null,
       representativeFrame: inspection?.representativeFrame ?? null,
       changedPixelsAgainstInstructionOmittedFrame:
@@ -683,12 +683,13 @@ function evaluatePresentationRendererQc({
       inspectedOverlayFile: inspection?.overlayFile ?? null,
       applicationOverlaySha256: application?.overlaySha256 ?? null,
       overlaySha256: inspection?.overlaySha256 ?? null,
-      ...(inspection?.pulse === undefined ? {} : {pulse: structuredClone(inspection.pulse)}),
-      ...(inspection?.motion === undefined ? {} : {motion: structuredClone(inspection.motion)}),
-      ...(inspection?.nativeFrameQc === undefined ? {} : {nativeFrameQc: structuredClone(inspection.nativeFrameQc)}),
+      ...(inspection?.pulse === undefined ? {} : {pulse: inspection.pulse}),
+      ...(inspection?.motion === undefined ? {} : {motion: inspection.motion}),
+      ...(inspection?.nativeFrameQc === undefined ? {} : {nativeFrameQc: inspection.nativeFrameQc}),
     };
   });
-  return {
+  // One detached snapshot preserves common evidence identity across all captions.
+  return structuredClone({
     schemaVersion: outputProfile.schemaVersion,
     status: violations.length === 0 ? 'passed' : 'failed',
     instructionCount: instructionIds.length,
@@ -719,16 +720,16 @@ function evaluatePresentationRendererQc({
     },
     instructionEvidence,
     ...(requireFinalVisibility ? {
-      completedFrameQcEvidence: structuredClone(completedFrameQcEvidence ?? null),
-      currentCompletedMediaRef: structuredClone(currentCompletedMediaRef ?? null),
+      completedFrameQcEvidence: completedFrameQcEvidence ?? null,
+      currentCompletedMediaRef: currentCompletedMediaRef ?? null,
     } : {}),
     mediaEvidence: {
-      observed: structuredClone(mediaInspection ?? null),
-      expectedAudio: structuredClone(expectedAudio ?? null),
+      observed: mediaInspection ?? null,
+      expectedAudio: expectedAudio ?? null,
       expectedFrameCount: Number.isInteger(expectedFrameCount) ? expectedFrameCount : null,
     },
     violations,
-  };
+  });
 }
 
 export function evaluatePresentationRendererQcV002(input) {

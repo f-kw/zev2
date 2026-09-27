@@ -9,7 +9,7 @@ import {PRESENTATION_NATIVE_FRAME_QC_BASIS_V001,
   buildPresentationNativeLayerArgumentsV001, buildPresentationNativeLayerDecodeArgumentsV001,
   buildPresentationNativeReferenceExecutionV001,
   buildPresentationNativeReferenceArgumentsV001,
-  validatePresentationNativeFrameQcScopeV001, validatePresentationNativeFrameQcEvidenceV001} from './presentation_native_frame_qc_v001.mjs';
+  validatePresentationNativeFrameQcScopeV001, validatePresentationNativeFrameQcInspectionsV001} from './presentation_native_frame_qc_v001.mjs';
 
 export const PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001 = 'exact-replay-native-v1';
 export const PRESENTATION_INTEGRITY_STATE_QC_SCHEMA_V001 = 'presentation-integrity-state-qc-v001';
@@ -17,7 +17,7 @@ export const PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001 = 'exact-replay-and-nati
 
 const requireValue = (condition, reason) => {if (!condition) throw new TypeError(reason);};
 const HASH = /^[a-f0-9]{64}$/u;
-const same = (left, right) => canonicalJson(left) === canonicalJson(right);
+const same = (left, right) => left === right || canonicalJson(left) === canonicalJson(right);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const canonicalDigest = value => digest(canonicalJson(value));
 
@@ -37,7 +37,9 @@ function checkFiniteExecutionEvidence(finite, inspections, canvas) {
     'a finite-state observation is labeled as another caption');
     flattened.push(...local.samples);
   }
-  requireValue(same(finite.samples, flattened), 'global finite-state observations differ from the inspected captions');
+  requireValue(finite.samples.length === flattened.length
+    && finite.samples.every((sample, index) => same(sample, flattened[index])),
+  'global finite-state observations differ from the inspected captions');
   const inputByRole = new Map(finite.inputManifest.inputRefs.map(ref => [ref.role, ref]));
   const base = inputByRole.get('base-media'), completed = inputByRole.get('completed-media');
   const ffmpeg = inputByRole.get('tool-ffmpeg'), magick = inputByRole.get('tool-imagemagick');
@@ -198,13 +200,14 @@ export function validatePresentationIntegrityStateQcEvidenceV001({
     checkSharedInputs(evidence.exactReplay, evidence.finiteState);
     requireValue(Array.isArray(overlayInspections) && overlayInspections.length === plan.elements.length,
       'finite-state evidence must cover all logical overlays exactly once');
+    const finite = validatePresentationNativeFrameQcInspectionsV001({plan,
+      inspections: overlayInspections.map(inspection => ({...inspection,
+        visibilityComparisonBasis: PRESENTATION_NATIVE_FRAME_QC_BASIS_V001})), renderRange});
     for (const [index, inspection] of overlayInspections.entries()) {
       requireValue(inspection?.instructionId === plan.elements[index].instructionId
         && inspection.visibilityComparisonBasis === PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001,
       'combined inspection identity or comparison basis differs');
-      const finite = validatePresentationNativeFrameQcEvidenceV001({plan,
-        inspection: {...inspection, visibilityComparisonBasis: PRESENTATION_NATIVE_FRAME_QC_BASIS_V001}, renderRange});
-      violations.push(...finite.violations);
+      violations.push(...finite.results[index].violations);
       checkSharedInputs(evidence.exactReplay, inspection.nativeFrameQc);
     }
     checkFiniteExecutionEvidence(evidence.finiteState, overlayInspections, plan.canvas);
@@ -218,11 +221,14 @@ export function validatePresentationIntegrityStateQcEvidenceV001({
 export function combinePresentationIntegrityStateQcV001({
   plan, replay, finite, expectedFrameCount, currentCompletedMediaRef, mediaInspection, renderRange = null,
 }) {
-  const inspections = finite.inspections.map(inspection => ({...structuredClone(inspection),
+  // Clone one complete graph so its shared common inputs and sample objects
+  // remain shared in the detached result, including across local/global proof.
+  const snapshot = structuredClone({inspections: finite.inspections, finite: finite.evidence, replay: replay.evidence});
+  const inspections = snapshot.inspections.map(inspection => ({...inspection,
     visibilityComparisonBasis: PRESENTATION_INTEGRITY_STATE_QC_BASIS_V001}));
   const evidence = {schemaVersion: PRESENTATION_INTEGRITY_STATE_QC_SCHEMA_V001,
-    method: PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001, exactReplay: structuredClone(replay.evidence),
-    finiteState: structuredClone(finite.evidence)};
+    method: PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001, exactReplay: snapshot.replay,
+    finiteState: snapshot.finite};
   return {method: PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001, inspections, evidence,
     ...validatePresentationIntegrityStateQcEvidenceV001({plan, overlayInspections: inspections,
       evidence, expectedFrameCount, currentCompletedMediaRef, mediaInspection, renderRange})};
