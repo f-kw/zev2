@@ -317,16 +317,57 @@ test('file-based exact distances match the pure classifier, reuse equal byte pai
 
 test('process timing separates child completion from evidence write on success and failure', async t => {
   const directory = await temporary(t), observer = createPresentationRendererProcessObserverV001({observationDirectory: directory});
-  await observer.run(process.execPath, ['-e', "process.stdout.write('ok')"], {observationLabel: 'success'});
+  const began = Date.now();
+  const success = await observer.run(process.execPath, ['-e', "process.stdout.write('ok')"], {observationLabel: 'success'});
+  assert.equal(success.stdout.toString(), 'ok');
   await assert.rejects(observer.run(process.execPath, ['-e', 'process.exit(3)'], {observationLabel: 'failure'}));
+  await assert.rejects(observer.run(path.join(directory, 'missing-executable'), [], {observationLabel: 'spawn-failure'}),
+    error => error.spawnErrorCode === 'ENOENT');
+  const ended = Date.now();
   const result = observer.getPerformance();
-  assert.equal(result.records.length, 2);
-  assert.deepEqual(result.records.map(row => row.code), [0, 3]);
+  assert.equal(result.records.length, 3);
+  assert.deepEqual(result.records.map(row => row.code), [0, 3, null]);
+  assert.deepEqual(result.records.map(row => row.spawnFailed), [false, false, true]);
   for (const row of result.records) {
+    assert.equal(new Date(row.startedAt).toISOString(), row.startedAt);
+    assert.equal(new Date(row.endedAt).toISOString(), row.endedAt);
+    assert(began <= Date.parse(row.startedAt) && Date.parse(row.startedAt) <= Date.parse(row.endedAt)
+      && Date.parse(row.endedAt) <= ended);
     assert(Number.isFinite(row.childMilliseconds) && row.childMilliseconds >= 0);
     assert(Number.isFinite(row.evidenceWriteMilliseconds) && row.evidenceWriteMilliseconds >= 0);
     assert.equal(result.byLabel[row.label].processCount, 1);
+    const saved = JSON.parse(await readFile(path.join(directory,
+      `${String(row.sequence).padStart(4, '0')}-${row.label}`, 'timing.json'), 'utf8'));
+    assert.deepEqual(saved, row);
   }
   result.records[0].label = 'mutated-copy';
   assert.equal(observer.getPerformance().records[0].label, 'success');
+});
+
+test('renderer operation timestamps surround the callback and survive failure and saved reread', async t => {
+  const directory = await temporary(t), observer = createPresentationRendererProcessObserverV001({observationDirectory: directory});
+  const callbackTimes = [];
+  for (const fail of [false, true]) {
+    const request = observer.observeOperation({observationLabel: fail ? 'failed-operation' : 'successful-operation',
+      operationKind: 'fixture-operation', input: {fail}}, async () => {
+      callbackTimes.push(Date.now());
+      if (fail) throw new Error('controlled operation failure');
+      return 'callback-result';
+    });
+    if (fail) await assert.rejects(request, /controlled operation failure/u);
+    else assert.equal(await request, 'callback-result');
+  }
+  const result = observer.getPerformance();
+  assert.equal(result.records.length, 0);
+  assert.deepEqual(result.operations.map(row => row.status), ['passed', 'failed']);
+  for (const [index, row] of result.operations.entries()) {
+    assert.equal(new Date(row.startedAt).toISOString(), row.startedAt);
+    assert.equal(new Date(row.endedAt).toISOString(), row.endedAt);
+    assert(Date.parse(row.startedAt) <= callbackTimes[index] && callbackTimes[index] <= Date.parse(row.endedAt));
+    assert(Number.isFinite(row.elapsedMilliseconds) && row.elapsedMilliseconds >= 0);
+    assert.deepEqual(JSON.parse(await readFile(path.join(row.observationDirectory, 'operation.json'), 'utf8')), row);
+    assert.equal(result.byOperationLabel[row.label].operationCount, 1);
+  }
+  assert.equal(result.operations[0].failure, null);
+  assert.equal(result.operations[1].failure.message, 'controlled operation failure');
 });

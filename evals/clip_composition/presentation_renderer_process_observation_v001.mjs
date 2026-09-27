@@ -46,6 +46,7 @@ export function createPresentationRendererProcessObserverV001({observationDirect
     }
     sequence += 1;
     const processStarted = performance.now();
+    const startedAt = new Date().toISOString();
     const recordSequence = sequence;
     const recordDirectory = path.join(
       observationDirectory,
@@ -92,12 +93,13 @@ export function createPresentationRendererProcessObserverV001({observationDirect
     const finish = async ({code, signal, spawnError = null}) => {
       if (finalized) return;
       finalized = true;
+      const endedAt = new Date().toISOString();
       const childMilliseconds = performance.now() - processStarted;
       const writingStarted = performance.now();
       let result;
       try {
         try {result = await persist({code, signal});} finally {
-          const timing = {sequence: recordSequence, label, childMilliseconds,
+          const timing = {sequence: recordSequence, label, startedAt, endedAt, childMilliseconds,
             evidenceWriteMilliseconds: performance.now() - writingStarted, code, signal,
             spawnFailed: spawnError !== null};
           timingRecords.push(timing);
@@ -159,6 +161,7 @@ export function createPresentationRendererProcessObserverV001({observationDirect
       node: process.execPath, nodeVersion: process.version,
     }, null, 2) + '\n', {flag: 'wx', mode: 0o444});
     const start = performance.now();
+    const startedAt = new Date().toISOString();
     let status = 'failed', failure = null;
     try {
       const result = await task();
@@ -168,7 +171,8 @@ export function createPresentationRendererProcessObserverV001({observationDirect
       failure = {name: error?.name ?? null, code: error?.code ?? null, message: String(error?.message ?? error)};
       throw error;
     } finally {
-      const record = {sequence: recordSequence, label: observationLabel, operationKind,
+      const endedAt = new Date().toISOString();
+      const record = {sequence: recordSequence, label: observationLabel, operationKind, startedAt, endedAt,
         elapsedMilliseconds: performance.now() - start, status, failure, observationDirectory: recordDirectory};
       await writeFile(path.join(recordDirectory, 'operation.json'), JSON.stringify(record, null, 2) + '\n',
         {flag: 'wx', mode: 0o444});

@@ -1,0 +1,927 @@
+{
+  "schemaVersion": "production-time-integration-measurement-v001",
+  "status": "completed",
+  "measuredAt": "2026-09-27T18:54:10.339Z",
+  "sourceReferences": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/integration-execution.json",
+      "bytes": 6459,
+      "fileSha256": "647310cb32bc273a618acec43eacaec3c8beb73860fe223da229f9ba75827135"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/render/integration-completion.json.reread.json",
+      "bytes": 2280,
+      "fileSha256": "c54f5a725caa6100ae51a26e656616140f766ce54c369c9235c4132934119f24"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/reread-invocation.json",
+      "bytes": 559,
+      "fileSha256": "e2c8ecd11c1ef62ede3afcc86f11241044ab0070598f1aa899595242d96ce158"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/run-resource-summary.json",
+      "bytes": 687,
+      "fileSha256": "f8b3027f022e2c2d5555915ae61e31d7d4a705fd89b62dc54f97cabeb4ff0b2f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/reread-resource-summary.json",
+      "bytes": 673,
+      "fileSha256": "c0202e329fd02059ea59cd9d67252f1de35d200a9f5f30e60370a91cd9ed51cf"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/render/integration-completion.json.receipt.json",
+      "bytes": 463,
+      "fileSha256": "4edeef6eaf779b81c57fc9bcfc59a174bd56fcae93f97d4bf38695fd020bda37"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/render/integration-completion.json",
+      "schemaVersion": "presentation-qc-evidence-store-v001",
+      "fileSha256": "135ec9b9d55183dc2d72bbce81593975385101d14b9e457f57e292ec388ead16",
+      "rootSha256": "1df86a7f60083e78f0e85dbcd0ca26bdcc6ee29ec706dcc245a6aad40a2bf54b",
+      "bytes": 835376,
+      "nodeCount": 2301,
+      "reusedObjectCount": 1,
+      "deduplicatedNodeCount": 4
+    },
+    {
+      "fileSha256": "26680e01c0e2c6826d29f1d678f59bf55cf1a66d1294452dacd0e9f09fbdadc2",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.production-time-integration-20260927-v001.presentation-renderer-v002-work-vhrEZO/scratch/post-render-qc-failure.json"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/preflight.json",
+      "bytes": 56164,
+      "fileSha256": "3f1f5040fe69d44f8c36524bdb772f0f8934463c4885fe84a71d9c3f7530eb4a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/integration-start.json",
+      "bytes": 363,
+      "fileSha256": "af324687351c332280039ade5e3e12d24acb510f7b07855f4438c7c39c5a6279"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/fixed-input-read.json",
+      "bytes": 3728,
+      "fileSha256": "3e1f3ad6c12e23409db7d4bbd542ffe3c500c63feffa99fb4e7b79883c429d22"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/native-target-observation.json",
+      "bytes": 951,
+      "fileSha256": "3032bf0295bff911852c82216a949481eab810639d71c8107b978d806b92a7d7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/render/failure.json",
+      "bytes": 2050,
+      "fileSha256": "4ae6bb5b4e0898083f42680ac51d27f422a33d943ebbf58d9821dd5111db2c96"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/normal-gate-result.json",
+      "bytes": 2871,
+      "fileSha256": "20b537eca093894003e449166e01a4dd8d8ffea2152c5c03a3c24754f5e9b7cb"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/body-identity-before-qc.json",
+      "bytes": 601,
+      "fileSha256": "4b6ca011c826b14a9ef8de0dc46efdb9ad644905dee6b1cb4e298341db0090e2"
+    },
+    {
+      "directory": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/render/processes",
+      "recordCount": 14625,
+      "timingFileListCanonicalSha256": "fb598ea1d3b4871687d322e184d3a0c0d37c440fe955c9c9927ecb90e24c27df",
+      "meaning": "SHA of sorted JSON array of timing/operation file path and SHA pairs; individual logs remain in the run."
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/qc-evidence-common-20260927/timing-baseline.json",
+      "bytes": 142448,
+      "fileSha256": "e07f514888f609fd7f6f4eb81dd5af6ebc3d5c57fd2f1e30f2a55d154446ceb0"
+    }
+  ],
+  "input": {
+    "savedSource": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "bytes": 4803412827
+    },
+    "savedStt": {
+      "jobId": "3c0d89617715475eb78f798645521933",
+      "enableDiarization": false,
+      "segmentCount": 44002,
+      "normalizedSpeechUnitGroups": 44002,
+      "rawSpeechUnitGroups": 424,
+      "speakers": [
+        "unknown"
+      ],
+      "durationSec": 12036.08675,
+      "currentConversionIdentical": true
+    },
+    "fixedSummary": {
+      "schemaVersion": "production-time-integration-fixed-inputs-v001",
+      "status": "passed",
+      "source": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+        "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+        "bytes": 4803412827
+      },
+      "stt": {
+        "jobId": "3c0d89617715475eb78f798645521933",
+        "enableDiarization": false,
+        "segmentCount": 44002,
+        "normalizedSpeechUnitGroups": 44002,
+        "rawSpeechUnitGroups": 424,
+        "speakers": [
+          "unknown"
+        ],
+        "durationSec": 12036.08675,
+        "currentConversionIdentical": true
+      },
+      "discovery": {
+        "candidates": 5,
+        "currentValidationIdentical": true
+      },
+      "selection": {
+        "adopted": 5,
+        "rejected": 0,
+        "currentValidationIdentical": true
+      },
+      "retention": {
+        "segments": [
+          {
+            "candidateId": "candidate-0001",
+            "segmentId": "segment-0001",
+            "sourceStartMs": 213077,
+            "sourceEndMs": 327084,
+            "sourceSegments": 658
+          },
+          {
+            "candidateId": "candidate-0002",
+            "segmentId": "segment-0002",
+            "sourceStartMs": 1993090,
+            "sourceEndMs": 2225192,
+            "sourceSegments": 894
+          },
+          {
+            "candidateId": "candidate-0003",
+            "segmentId": "segment-0003",
+            "sourceStartMs": 5468987,
+            "sourceEndMs": 5675926,
+            "sourceSegments": 778
+          },
+          {
+            "candidateId": "candidate-0004",
+            "segmentId": "segment-0004",
+            "sourceStartMs": 8054427,
+            "sourceEndMs": 8336849,
+            "sourceSegments": 1431
+          },
+          {
+            "candidateId": "candidate-0005",
+            "segmentId": "segment-0005",
+            "sourceStartMs": 11147538,
+            "sourceEndMs": 11242100,
+            "sourceSegments": 363
+          }
+        ],
+        "currentValidationIdentical": true
+      },
+      "captions": {
+        "count": 326,
+        "displayJudgments": 5,
+        "currentValidationIdentical": true,
+        "normalPlan": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/caption-attempt-003/normal-plan.json",
+          "fileSha256": "4cde887dfb3665f3df898e7f9ae44dd502d3c6482c74c0d3ebc570236f7e92f8"
+        },
+        "captionOverrides": 0,
+        "connectionOverrides": 0
+      },
+      "drawing": {
+        "viewSha256": "e9a0235959031dbc571df9afb5d967e0fbfde7e1dcb0834eea100a3ffd6f4b30",
+        "frameCount": 27949,
+        "drawingEvidenceRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/drawing-evidence.json",
+          "fileSha256": "8239001075cf2744f72cdd4d5a2902a5d7b204ee63ad253ac90446a861556a64",
+          "bytes": 7506854
+        }
+      },
+      "originalVideoRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-rendered-v002.mp4",
+        "fileSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a",
+        "bytes": 671459095
+      },
+      "originalNative": {
+        "passed": 423,
+        "samples": 424,
+        "separateCodecDiagnosis": "resolved"
+      },
+      "semantics": "saved decisions revalidated; no new STT, AI judgment, human adoption or historical implementation replacement",
+      "backgroundAdmission": "full background/proof/tool/PCM admission is performed separately by inspectSavedOrchestrationBackgroundReuseV001"
+    },
+    "currentVideo": {
+      "bytes": 671459095,
+      "fileSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/production-time-integration-20260927-v001/presentation-rendered-v002.mp4"
+    },
+    "originalVideoUnchanged": {
+      "fileSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/presentation-rendered-v002.mp4"
+    },
+    "protectedInputReverification": {
+      "startedAt": "2026-09-27T18:53:59.915Z",
+      "endedAt": "2026-09-27T18:54:06.568Z",
+      "elapsedSeconds": 6.652173917000002,
+      "fileCount": 79,
+      "bytesRead": 11938809671,
+      "allHashesAndSizesUnchanged": true,
+      "scope": "Post-save audit of every preflight-protected reference, including original source/STT/decisions/media and old evidence. No rendering or final-QC reconstruction. Outside A and the separate C reader; not added to either wall time."
+    },
+    "fullMp4ByteComparison": {
+      "alignment": {
+        "fileSha256": "cfa3f31dea8544f0c46828f934b1a1a8ecdd4823a61ca127006cade318ff1d87",
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/window-alignment-proof.json"
+      },
+      "comparedMp4Bytes": 671459095,
+      "diagnosis": {
+        "fileSha256": "b63e029b090f19ff341b3029b39bc6d70f40f0ca278543eb49a85a5313c4ff76",
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/result.json"
+      },
+      "fullMp4BytesEqual": true,
+      "meaning": "Existing diagnosis applies to identical complete media bytes and identical current target/candidate evidence; historical graph/tool records remain historical, not claimed as this new execution.",
+      "originalResolution": {
+        "fileSha256": "e584010b6bd3be6d434c29c75a1732219022fe71b2ddc4e504dfe44f4e376db2",
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/qc-resume-attempt-002/resolved-codec-v001/resolution.json"
+      },
+      "originalTargetRenderGraph": {
+        "fileSha256": "bd33738439e4414fc995914076f35ec51210e2b69b49f75cd24b6bf975fd3ebf",
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/render-graph-proof.json"
+      },
+      "originalToolIdentity": {
+        "fileSha256": "88abcd2efc7124566a60858440409dc987fb475180585e7531c24027e96d209c",
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/codec-diagnosis-000103-v001/tool-identity.json"
+      },
+      "originalVideo": {
+        "fileSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a",
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/publish/presentation-rendered-v002.mp4"
+      },
+      "targetCurrentBinding": {
+        "activeLayerCount": 1,
+        "endFrameExclusive": 7872,
+        "frame": 7801,
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+        "pngSha256": "c5f6c359b611e4a1b88817ab9dfe882db0a3756a3fbaa9bd5e31defbbfb862a4",
+        "startFrame": 7731
+      }
+    },
+    "headAtStart": "f3e96733e2d508441e2fea0b3c54864e93652ada",
+    "executionDeclaration": {
+      "bodyComposites": 1,
+      "fullReplays": 1,
+      "nativeSamples": 424,
+      "logicalCandidates": 320439,
+      "aiCalls": 0,
+      "sttRuns": 0,
+      "originalOutputsWritable": false
+    },
+    "executionDeclarationScope": "Saved preflight scope declaration, not a new network/API telemetry measurement."
+  },
+  "boundaries": {
+    "A": {
+      "startedAt": "2026-09-27T15:17:53.806Z",
+      "endedAt": "2026-09-27T18:42:40.813Z",
+      "elapsedSeconds": 12286.920932334,
+      "scope": "Outer normal integration from its start marker/fixed-input verification through verified publication and completion receipt. Includes reuse verification, new PNG work, body, new full replay, all native QC, failed-gate save, same-media diagnosis binding and publication verification. Excludes preflight/current-rules precheck, own execution summary write, independent reread, and this measurement."
+    },
+    "B": {
+      "startedAt": "2026-09-27T15:17:53.806Z",
+      "endedAt": "2026-09-27T15:51:22.335Z",
+      "elapsedSeconds": 2008.529,
+      "scope": "Same outer start to observed body child close, before process-evidence serialization and later media inspection. Absolute ISO wall timestamps have millisecond precision; OS exit to close-notification latency is included."
+    },
+    "C": {
+      "startedAt": null,
+      "endedAt": null,
+      "elapsedSeconds": 630.907819334,
+      "invocationBoundary": {
+        "startedAt": "2026-09-27T18:43:01.867Z",
+        "endedAt": "2026-09-27T18:53:35.591Z",
+        "elapsedSeconds": 633.7068141670898,
+        "exitCode": 0,
+        "command": [
+          "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "--max-old-space-size=12288",
+          "--import",
+          "./runner/node_modules/tsx/dist/loader.mjs",
+          "evals/clip_composition/run_production_time_integration_20260927.mts",
+          "monitor",
+          "reread"
+        ],
+        "scope": "monitor invocation including child startup, summary serialization and monitor sampling shutdown; encloses C verification",
+        "evidencePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/reread-invocation.json"
+      },
+      "scope": "Separate process independent verification from entry to completed checks, before its summary serialization. Absolute verification entry/end timestamps were not recorded. The independently timed enclosing invocation includes startup, summary serialization and monitor shutdown; its endpoints are not substituted for C."
+    },
+    "additivity": "B is contained in A. C is separate. No sum of A, B, nested QC stages or parallel child/operation totals is a production wall time."
+  },
+  "timing": {
+    "preflightSecondsOutsideA": 34.880258416000004,
+    "fixedInputVerificationSeconds": 7.9021599579999995,
+    "parallelKnownFailureObservation": {
+      "startedAt": "2026-09-27T17:04:37.697Z",
+      "endedAt": "2026-09-27T17:04:37.782Z",
+      "elapsedSeconds": 0.083372833,
+      "scope": "One read-only inspection of a finished retained sample during the integrated run, to distinguish the explicitly allowed original failure from a new violation. Runs alongside A; no regeneration, no final-QC reconstruction.",
+      "source": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.production-time-integration-20260927-v001.presentation-renderer-v002-work-vhrEZO/scratch/native-frame-qc/native-frame-qc-H6Rd6M/references/sample-164/sample-proof.json",
+        "fileSha256": "a9c12cda22ffbc2ad876129f421db3a530bd5223305dbb9a82e65b6314041d69"
+      },
+      "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+      "frame": 7801,
+      "referenceCount": 757,
+      "classCount": 741,
+      "visible": false,
+      "expectedDistance": 1345125,
+      "duplicateDistance": 1344947
+    },
+    "parallelKnownFailureObservationScope": "A one-time read of the retained sample during A to detect a new stop condition promptly. It is parallel monitoring, not an added production stage or post-save C time.",
+    "normalEntryMilliseconds": {
+      "inputBindingMilliseconds": 1274.2537909999992,
+      "initialEvidenceWriteMilliseconds": 0.4029160000009142,
+      "backgroundMilliseconds": 25656.298416000005,
+      "preparationMilliseconds": 759700.3280000001,
+      "drawAndQcMilliseconds": 10641443.3535,
+      "drawEvidenceWriteMilliseconds": 0.3042089994996786
+    },
+    "normalEntryElapsedMilliseconds": 11401159.533458,
+    "normalEntryTimingScope": "Preparation is cumulative and includes input binding, start evidence, background reuse checks and initial media inspection. drawAndQc includes production preparation, body, post-media QC, raw failed-QC save and browser close. Do not add parents to child stages.",
+    "productionPngAndLayoutInterval": {
+      "startedAt": "2026-09-27T15:30:57.506Z",
+      "endedAt": "2026-09-27T15:39:17.525Z",
+      "elapsedSeconds": 500.019,
+      "monotonicSeconds": 500.0155147500001
+    },
+    "body": {
+      "startedAt": "2026-09-27T15:39:17.532Z",
+      "endedAt": "2026-09-27T15:51:22.335Z",
+      "elapsedSeconds": 724.803,
+      "childSeconds": 724.806894041,
+      "evidenceWriteSeconds": 0.0020542089999653398,
+      "evidencePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/render/processes/2844-video-composite/timing.json"
+    },
+    "completedFrameQc": {
+      "exactReplay": {
+        "childProcessCount": 5,
+        "childProcessesByPurpose": {
+          "encode": 1,
+          "version-ffmpeg": 1,
+          "version-ffprobe": 1,
+          "video-probe-completed": 1,
+          "video-probe-replay": 1
+        },
+        "comparedAudioPackets": null,
+        "comparedFrames": null,
+        "decodedFrames": null,
+        "encodeWallClockMs": 721630.5179590001,
+        "encodedFrames": 27949,
+        "exactComparisonWallClockMs": 91.52812500018626,
+        "observationScope": "One actual full-video encode. Decoded frame counts are observed framehash rows only; byte equality does not fabricate decoded or compared frame counts.",
+        "wallClockMs": 746602.4421249996
+      },
+      "finiteState": {
+        "childProcessCount": 11429,
+        "childProcessesByPurpose": {
+          "completed-frames-extract": 1,
+          "completed-rgb-crop": 424,
+          "native-layer-decode": 453,
+          "native-layer-prepare": 372,
+          "native-reference-composite": 10176,
+          "source-frames-extract": 1,
+          "tool-version": 2
+        },
+        "completedFrameOutputs": 424,
+        "completedRgbOutputs": 424,
+        "decodedLayerBytes": 13013913600,
+        "decodedLayerOutputs": 1569,
+        "exactDistanceCalculations": 314189,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred",
+        "logicalReferenceCount": 320439,
+        "peakReferenceBytes": 2215369548,
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "phasesMilliseconds": {
+          "checkpointRead": 39869.572541988455,
+          "cleanup": 344031.2681239983,
+          "completedRgbCrop": 20289.45879901247,
+          "evidenceConstruction": 3571.9053339995444,
+          "evidenceWrite": 18968.444127012976,
+          "frameExtraction": 97257.29916699976,
+          "inputBinding": 14031.81949999975,
+          "inputVerification": 1099784.687588987,
+          "nativeLayerDecode": 53952.208249999676,
+          "nativeLayerPreparation": 160341.8448330001,
+          "referenceComposition": 4689803.306148959,
+          "referenceVerification": 292040.9315029951,
+          "rgbComparison": 1174172.068877988,
+          "rgbDistance": 0,
+          "verification": 28613.067750001326
+        },
+        "preparedLayerOutputs": 1116,
+        "referenceRgbOutputs": 314994,
+        "retainedReferenceBytes": 1106941860,
+        "reusedExactDistances": 0,
+        "reusedReferenceRgbCount": 5445,
+        "sourceFrameOutputs": 424,
+        "wallClockMs": 8219520.236749999
+      },
+      "finiteStateExecuted": true,
+      "finiteStateWallClockMs": 8297288.601750001,
+      "preparationWallClockMs": 65716.5982499998,
+      "wallClockMs": 9213748.455458
+    },
+    "completedFrameQcScope": "QC total includes full replay, diagnostic PNG preparation, native QC and combination checks. finiteStateWallClockMs contains preparationWallClockMs and finiteState.wallClockMs. Native phase durations are measured disjoint suboperations, not additional wall time.",
+    "replayEncodeChild": {
+      "startedAt": "2026-09-27T15:54:30.246Z",
+      "endedAt": "2026-09-27T16:06:31.872Z",
+      "elapsedSeconds": 721.626,
+      "childSeconds": 721.6235808339999,
+      "evidencePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001/render/processes/2850-exact-replay-encode/timing.json"
+    },
+    "failedQcSaveStandaloneSeconds": null,
+    "failedQcSaveScope": "Included in normal drawAndQc; original failed-QC shared writer has no separate timer. drawEvidenceWriteMilliseconds times the bounded draw-result save, not the complete raw QC graph save.",
+    "resolutionPhasesSeconds": {
+      "savedCurrentQcRead": 13.704512041999028,
+      "currentInputsAndReceipts": 361.82988533299977,
+      "savedFullBaselineReadAndCompare": 14.505072000000625,
+      "sameMediaAndDiagnosisVerification": 5.730310291999951,
+      "currentMediaObservation": 89.50355829199962,
+      "finalQcEvaluation": 136.26058741600067,
+      "currentAudioClock": 1.2200288329999893,
+      "finalQcSave": 8.675716375000775,
+      "publicationAndReceiptVerification": 231.01511695799977
+    },
+    "resolutionPhaseIntervals": {
+      "savedCurrentQcRead": {
+        "startedAt": "2026-09-27T18:28:04.548Z",
+        "endedAt": "2026-09-27T18:28:18.253Z"
+      },
+      "currentInputsAndReceipts": {
+        "startedAt": "2026-09-27T18:28:18.683Z",
+        "endedAt": "2026-09-27T18:34:20.515Z"
+      },
+      "savedFullBaselineReadAndCompare": {
+        "startedAt": "2026-09-27T18:34:20.515Z",
+        "endedAt": "2026-09-27T18:34:35.020Z"
+      },
+      "sameMediaAndDiagnosisVerification": {
+        "startedAt": "2026-09-27T18:34:35.020Z",
+        "endedAt": "2026-09-27T18:34:40.751Z"
+      },
+      "currentMediaObservation": {
+        "startedAt": "2026-09-27T18:34:52.002Z",
+        "endedAt": "2026-09-27T18:36:21.506Z"
+      },
+      "finalQcEvaluation": {
+        "startedAt": "2026-09-27T18:36:21.589Z",
+        "endedAt": "2026-09-27T18:38:37.851Z"
+      },
+      "currentAudioClock": {
+        "startedAt": "2026-09-27T18:38:37.851Z",
+        "endedAt": "2026-09-27T18:38:39.071Z"
+      },
+      "finalQcSave": {
+        "startedAt": "2026-09-27T18:38:39.071Z",
+        "endedAt": "2026-09-27T18:38:47.747Z"
+      },
+      "publicationAndReceiptVerification": {
+        "startedAt": "2026-09-27T18:38:49.784Z",
+        "endedAt": "2026-09-27T18:42:40.801Z"
+      }
+    },
+    "resolutionElapsedSeconds": 877.7260754169989,
+    "processGroups": {
+      "orchestration-audio-inspection-ffprobe": {
+        "count": 1,
+        "summedObservedSeconds": 0.4588445419999771,
+        "summedEvidenceWriteSeconds": 0.0007152909999713302,
+        "firstObservedStart": "2026-09-27T15:30:56.915Z",
+        "lastObservedEnd": "2026-09-27T15:30:57.374Z"
+      },
+      "orchestration-audio-inspection-audio-payload": {
+        "count": 1,
+        "summedObservedSeconds": 0.09667487500002608,
+        "summedEvidenceWriteSeconds": 0.004489249999984167,
+        "firstObservedStart": "2026-09-27T15:30:57.375Z",
+        "lastObservedEnd": "2026-09-27T15:30:57.471Z"
+      },
+      "layout-inspection": {
+        "count": 1,
+        "summedObservedSeconds": 0.3871223330000648,
+        "summedEvidenceWriteSeconds": 0.0005349579999456182,
+        "firstObservedStart": "2026-09-27T15:30:57.522Z",
+        "lastObservedEnd": "2026-09-27T15:30:57.909Z"
+      },
+      "overlay-line-inspection-alpha": {
+        "count": 414,
+        "summedObservedSeconds": 37.297949782999204,
+        "summedEvidenceWriteSeconds": 0.24174212800071118,
+        "firstObservedStart": "2026-09-27T15:31:00.467Z",
+        "lastObservedEnd": "2026-09-27T15:39:17.096Z"
+      },
+      "overlay-line-inspection-bounds": {
+        "count": 414,
+        "summedObservedSeconds": 60.450063992998345,
+        "summedEvidenceWriteSeconds": 0.25020216499979153,
+        "firstObservedStart": "2026-09-27T15:31:00.675Z",
+        "lastObservedEnd": "2026-09-27T15:39:17.242Z"
+      },
+      "overlay-final-inspection-alpha": {
+        "count": 378,
+        "summedObservedSeconds": 33.83168678199851,
+        "summedEvidenceWriteSeconds": 0.2099011580002262,
+        "firstObservedStart": "2026-09-27T15:31:00.822Z",
+        "lastObservedEnd": "2026-09-27T15:39:17.332Z"
+      },
+      "overlay-final-inspection-bounds": {
+        "count": 378,
+        "summedObservedSeconds": 55.193385133000604,
+        "summedEvidenceWriteSeconds": 0.2207343759982613,
+        "firstObservedStart": "2026-09-27T15:31:00.912Z",
+        "lastObservedEnd": "2026-09-27T15:39:17.477Z"
+      },
+      "motion-native-canvas-inspection": {
+        "count": 62,
+        "summedObservedSeconds": 1.5896878740007525,
+        "summedEvidenceWriteSeconds": 0.03145608999987599,
+        "firstObservedStart": "2026-09-27T15:31:25.354Z",
+        "lastObservedEnd": "2026-09-27T15:37:32.361Z"
+      },
+      "overlay-calibration-inspection-alpha": {
+        "count": 7,
+        "summedObservedSeconds": 0.6194864589999197,
+        "summedEvidenceWriteSeconds": 0.0043644999999087305,
+        "firstObservedStart": "2026-09-27T15:32:05.916Z",
+        "lastObservedEnd": "2026-09-27T15:36:07.779Z"
+      },
+      "overlay-calibration-inspection-bounds": {
+        "count": 7,
+        "summedObservedSeconds": 1.0226237080002902,
+        "summedEvidenceWriteSeconds": 0.0038554990001721306,
+        "firstObservedStart": "2026-09-27T15:32:06.006Z",
+        "lastObservedEnd": "2026-09-27T15:36:07.925Z"
+      },
+      "native-qc-native-reference-composite": {
+        "count": 10176,
+        "summedObservedSeconds": 4626.490940017916,
+        "summedEvidenceWriteSeconds": 8.005511431096592,
+        "firstObservedStart": "2026-09-27T16:13:29.207Z",
+        "lastObservedEnd": "2026-09-27T18:24:23.235Z"
+      },
+      "native-qc-completed-rgb-crop": {
+        "count": 424,
+        "summedObservedSeconds": 19.41374225999928,
+        "summedEvidenceWriteSeconds": 0.2947684129760604,
+        "firstObservedStart": "2026-09-27T16:13:28.983Z",
+        "lastObservedEnd": "2026-09-27T18:24:11.061Z"
+      },
+      "video-composite": {
+        "count": 1,
+        "summedObservedSeconds": 724.806894041,
+        "summedEvidenceWriteSeconds": 0.0020542089999653398,
+        "firstObservedStart": "2026-09-27T15:39:17.532Z",
+        "lastObservedEnd": "2026-09-27T15:51:22.335Z"
+      },
+      "output-media-inspection-ffprobe": {
+        "count": 1,
+        "summedObservedSeconds": 88.07541166600002,
+        "summedEvidenceWriteSeconds": 0.0007175419998820871,
+        "firstObservedStart": "2026-09-27T15:51:22.337Z",
+        "lastObservedEnd": "2026-09-27T15:52:50.413Z"
+      },
+      "output-media-inspection-audio-payload": {
+        "count": 1,
+        "summedObservedSeconds": 0.1465846250001341,
+        "summedEvidenceWriteSeconds": 0.004351124999579042,
+        "firstObservedStart": "2026-09-27T15:52:50.415Z",
+        "lastObservedEnd": "2026-09-27T15:52:50.561Z"
+      },
+      "output-frame-count": {
+        "count": 1,
+        "summedObservedSeconds": 87.0869860419999,
+        "summedEvidenceWriteSeconds": 0.0006003330000676215,
+        "firstObservedStart": "2026-09-27T15:52:50.574Z",
+        "lastObservedEnd": "2026-09-27T15:54:17.662Z"
+      },
+      "exact-replay-version-ffmpeg": {
+        "count": 1,
+        "summedObservedSeconds": 0.03668254199996591,
+        "summedEvidenceWriteSeconds": 0.0004694580002687871,
+        "firstObservedStart": "2026-09-27T15:54:30.187Z",
+        "lastObservedEnd": "2026-09-27T15:54:30.224Z"
+      },
+      "exact-replay-version-ffprobe": {
+        "count": 1,
+        "summedObservedSeconds": 0.019385416999924927,
+        "summedEvidenceWriteSeconds": 0.0005949999997392297,
+        "firstObservedStart": "2026-09-27T15:54:30.225Z",
+        "lastObservedEnd": "2026-09-27T15:54:30.244Z"
+      },
+      "exact-replay-encode": {
+        "count": 1,
+        "summedObservedSeconds": 721.6235808339999,
+        "summedEvidenceWriteSeconds": 0.0057002090001478795,
+        "firstObservedStart": "2026-09-27T15:54:30.246Z",
+        "lastObservedEnd": "2026-09-27T16:06:31.872Z"
+      },
+      "exact-replay-video-probe-completed": {
+        "count": 1,
+        "summedObservedSeconds": 0.05537512500025332,
+        "summedEvidenceWriteSeconds": 0.0004982090000994504,
+        "firstObservedStart": "2026-09-27T16:06:32.294Z",
+        "lastObservedEnd": "2026-09-27T16:06:32.350Z"
+      },
+      "exact-replay-video-probe-replay": {
+        "count": 1,
+        "summedObservedSeconds": 0.033303625000175086,
+        "summedEvidenceWriteSeconds": 0.0005282910000532865,
+        "firstObservedStart": "2026-09-27T16:06:32.351Z",
+        "lastObservedEnd": "2026-09-27T16:06:32.385Z"
+      },
+      "native-center-layout-reconstruction": {
+        "count": 1,
+        "summedObservedSeconds": 0.3030387499998324,
+        "summedEvidenceWriteSeconds": 0.00047195799974724653,
+        "firstObservedStart": "2026-09-27T16:06:45.236Z",
+        "lastObservedEnd": "2026-09-27T16:06:45.539Z"
+      },
+      "native-qc-diagnostic-overlay-inspection-alpha": {
+        "count": 88,
+        "summedObservedSeconds": 7.923631088995837,
+        "summedEvidenceWriteSeconds": 0.05843775300076233,
+        "firstObservedStart": "2026-09-27T16:06:45.554Z",
+        "lastObservedEnd": "2026-09-27T16:07:50.092Z"
+      },
+      "native-qc-diagnostic-overlay-inspection-bounds": {
+        "count": 88,
+        "summedObservedSeconds": 12.769635709997734,
+        "summedEvidenceWriteSeconds": 0.05892170900106431,
+        "firstObservedStart": "2026-09-27T16:06:45.733Z",
+        "lastObservedEnd": "2026-09-27T16:07:50.237Z"
+      },
+      "native-qc-tool-version": {
+        "count": 2,
+        "summedObservedSeconds": 0.061387458000332115,
+        "summedEvidenceWriteSeconds": 0.0011836250005289911,
+        "firstObservedStart": "2026-09-27T16:08:17.361Z",
+        "lastObservedEnd": "2026-09-27T16:08:17.423Z"
+      },
+      "native-qc-source-frames-extract": {
+        "count": 1,
+        "summedObservedSeconds": 76.94110291699972,
+        "summedEvidenceWriteSeconds": 0.0007867499999701977,
+        "firstObservedStart": "2026-09-27T16:08:17.424Z",
+        "lastObservedEnd": "2026-09-27T16:09:34.365Z"
+      },
+      "native-qc-completed-frames-extract": {
+        "count": 1,
+        "summedObservedSeconds": 18.686712834000122,
+        "summedEvidenceWriteSeconds": 0.000704541000071913,
+        "firstObservedStart": "2026-09-27T16:09:34.367Z",
+        "lastObservedEnd": "2026-09-27T16:09:53.053Z"
+      },
+      "native-qc-native-layer-prepare": {
+        "count": 372,
+        "summedObservedSeconds": 159.87747804500492,
+        "summedEvidenceWriteSeconds": 0.20910586699377773,
+        "firstObservedStart": "2026-09-27T16:09:54.682Z",
+        "lastObservedEnd": "2026-09-27T16:12:35.022Z"
+      },
+      "native-qc-native-layer-decode": {
+        "count": 453,
+        "summedObservedSeconds": 45.59773624899931,
+        "summedEvidenceWriteSeconds": 0.36345421098917735,
+        "firstObservedStart": "2026-09-27T16:12:35.245Z",
+        "lastObservedEnd": "2026-09-27T16:13:28.971Z"
+      }
+    },
+    "rendererApiOperationGroups": {
+      "overlay-bundle": {
+        "count": 1,
+        "summedObservedSeconds": 0.7758965420000022,
+        "summedEvidenceWriteSeconds": null,
+        "firstObservedStart": "2026-09-27T15:30:58.251Z",
+        "lastObservedEnd": "2026-09-27T15:30:59.027Z"
+      },
+      "overlay-browser-open": {
+        "count": 2,
+        "summedObservedSeconds": 0.4484142909999937,
+        "summedEvidenceWriteSeconds": null,
+        "firstObservedStart": "2026-09-27T15:30:59.027Z",
+        "lastObservedEnd": "2026-09-27T15:30:59.926Z"
+      },
+      "overlay-still": {
+        "count": 918,
+        "summedObservedSeconds": 239.1542129500062,
+        "summedEvidenceWriteSeconds": null,
+        "firstObservedStart": "2026-09-27T15:30:59.381Z",
+        "lastObservedEnd": "2026-09-27T16:07:49.995Z"
+      },
+      "overlay-line-mask": {
+        "count": 421,
+        "summedObservedSeconds": 108.66488532799985,
+        "summedEvidenceWriteSeconds": null,
+        "firstObservedStart": "2026-09-27T15:31:00.204Z",
+        "lastObservedEnd": "2026-09-27T15:39:17.007Z"
+      },
+      "overlay-browser-close": {
+        "count": 2,
+        "summedObservedSeconds": 0.038773792000487445,
+        "summedEvidenceWriteSeconds": null,
+        "firstObservedStart": "2026-09-27T18:28:02.955Z",
+        "lastObservedEnd": "2026-09-27T18:28:02.995Z"
+      },
+      "overlay-browser-process-cleanup": {
+        "count": 2,
+        "summedObservedSeconds": 0.0004285839982330799,
+        "summedEvidenceWriteSeconds": null,
+        "firstObservedStart": "2026-09-27T18:28:02.995Z",
+        "lastObservedEnd": "2026-09-27T18:28:02.996Z"
+      },
+      "overlay-bundle-remove": {
+        "count": 1,
+        "summedObservedSeconds": 0.004251374999061227,
+        "summedEvidenceWriteSeconds": null,
+        "firstObservedStart": "2026-09-27T18:28:02.996Z",
+        "lastObservedEnd": "2026-09-27T18:28:03.001Z"
+      }
+    },
+    "observationScope": "Process child time excludes observer evidence serialization; renderer API operations may enclose child or other operation work. Group sums are call-span work, not additive stage wall totals. Operation evidence serialization is not separately timed."
+  },
+  "beforeAfter": {
+    "body": {
+      "beforeSeconds": 5116.859306958,
+      "afterSeconds": 724.806894041,
+      "differenceSeconds": 4392.052412917,
+      "reductionPercent": 85.8349262592506,
+      "baseline": {
+        "path": "/Users/kawafmm/workspace/zev2/docs/reports/qc-evidence-common-20260927/timing-baseline.json",
+        "jsonPointer": "/stages/68",
+        "sourceEvidence": [
+          {
+            "path": "docs/reports/new-material-digest-20260926/timing-verification.json",
+            "bytes": 61259,
+            "sha256": "10b13419f565aa390b05051628cdb81accc49b054456f82ea518c2ee3865d956",
+            "jsonPointer": "/subprocessAttemptGroups/render-processes/video-composite"
+          }
+        ]
+      },
+      "historicalTimeBasis": "sum-of-child-monotonic-durations-not-a-stage-wall-interval"
+    },
+    "fullReplay": {
+      "beforeSeconds": 5143.953816042,
+      "afterSeconds": 746.6024421249996,
+      "differenceSeconds": 4397.351373917,
+      "reductionPercent": 85.48582532376874,
+      "baseline": {
+        "path": "/Users/kawafmm/workspace/zev2/docs/reports/qc-evidence-common-20260927/timing-baseline.json",
+        "jsonPointer": "/stages/45",
+        "sourceEvidence": [
+          {
+            "path": "evals/clip_composition/outputs/presentation/.new-material-digest-20260926-first-draft-v001.presentation-renderer-v002-work-JdfNbP/scratch/exact-replay-result.json",
+            "bytes": 3905899,
+            "sha256": "d49a047830fb7872e3a506fe0b9054a6b10af5dc7d3ff9f0bf9ddf26da2f81e8",
+            "jsonPointer": "/performance"
+          }
+        ]
+      },
+      "historicalTimeBasis": "saved-monotonic-elapsed"
+    },
+    "scope": "Body compares the same child-command scope; full replay compares the complete mandatory replay QC scope, not only its encoder. Old broad normal-path reconstruction, old QC-inclusive failures and STT/AI waiting are not speedup denominators for A."
+  },
+  "nativeQc": {
+    "instructionCount": 326,
+    "sampleCount": 424,
+    "logicalCandidates": 320439,
+    "physicalReferenceRgbOutputs": 314994,
+    "physicalReferenceReuses": 5445,
+    "exactDistanceCalculations": 314189,
+    "reusedExactDistances": 0,
+    "rawStatus": "failed",
+    "violations": [
+      {
+        "code": "NATIVE_FRAME_QC_INVALID",
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+        "reason": "native frame QC: expected class is absent, invisible, tied or not the unique nearest reference"
+      }
+    ],
+    "visibleSampleCount": 423,
+    "targetFailure": {
+      "originalViolations": [
+        {
+          "code": "NATIVE_FRAME_QC_INVALID",
+          "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+          "reason": "native frame QC: expected class is absent, invisible, tied or not the unique nearest reference"
+        }
+      ],
+      "passedSamples": 423,
+      "status": "failed",
+      "totalSamples": 424
+    },
+    "independentResolution": "passed-with-resolved-codec-ambiguity",
+    "phaseMilliseconds": {
+      "checkpointRead": 39869.572541988455,
+      "cleanup": 344031.2681239983,
+      "completedRgbCrop": 20289.45879901247,
+      "evidenceConstruction": 3571.9053339995444,
+      "evidenceWrite": 18968.444127012976,
+      "frameExtraction": 97257.29916699976,
+      "inputBinding": 14031.81949999975,
+      "inputVerification": 1099784.687588987,
+      "nativeLayerDecode": 53952.208249999676,
+      "nativeLayerPreparation": 160341.8448330001,
+      "referenceComposition": 4689803.306148959,
+      "referenceVerification": 292040.9315029951,
+      "rgbComparison": 1174172.068877988,
+      "rgbDistance": 0,
+      "verification": 28613.067750001326
+    }
+  },
+  "comparisonRgb": {
+    "peakLogicalBytes": 2215369548,
+    "retainedAtNativeQcEndLogicalBytes": 1106941860,
+    "generatedLogicalBytes": 468026905032,
+    "releasedSampleCount": 423,
+    "retainedSampleCount": 1,
+    "scope": "Only unique comparison-reference RGB files. Exact live logical-byte accounting accumulates earlier retained failed samples plus the current sample, before its cleanup. Excludes completed RGB, extracted source/completed frames, prepared planes, checkpoints, PNGs, MP4s and logs. Not Node memory or allocated disk blocks.",
+    "measuredReadSubsetsBytes": {
+      "referenceVerificationAndProofChecks": 936683801136,
+      "classifierFileReads": 485403663492,
+      "sampleInputVerification": 1332912705084,
+      "baselineImageComparison": 0
+    },
+    "physicalIoBytes": null,
+    "ioScope": "Program-level counted read subsets only; repeated reads count repeatedly. These do not cover all hashing, decoding, receipt reads or OS cache/disk I/O."
+  },
+  "resources": {
+    "integration": {
+      "nodeProcessLifetimeMaximumRssBytes": 4463902720,
+      "sampledNodeMaximumRssBytes": 4459462656,
+      "sampledLargestSingleDescendantRssBytes": 12769067008,
+      "sampledSimultaneousNodeAndDescendantsRssBytes": 13283655680,
+      "exactSimultaneousProcessTreeMaximumRssBytes": null,
+      "sampledNewRunPeakLogicalBytes": 22601398971,
+      "sampledNewRunPeakAllocatedBytes": 22853779456,
+      "observations": 5855,
+      "validParentObservations": 5855,
+      "validDescendantObservations": 5830,
+      "validStorageObservations": 391,
+      "observationErrors": 0,
+      "scope": "Node self resourceUsage is the process-lifetime high-water mark, including startup. Descendants are those observed by current PPID ancestry; short-lived or reparented processes may be missed. Simultaneous RSS is the per-sample sum including Node, never the sum of separate peaks. RSS nominally 2s and storage 30s; scans are non-atomic. Storage covers the named run, work and output roots, not sibling ownership locks or external browser/system temporary directories. st_blocks*512 is allocated file blocks, not exclusive physical APFS extents. Atomic rename during a scan can temporarily omit or double-count a moved file."
+    },
+    "independentReread": {
+      "nodeProcessLifetimeMaximumRssBytes": 5362941952,
+      "sampledNodeMaximumRssBytes": 5362974720,
+      "sampledLargestSingleDescendantRssBytes": null,
+      "sampledSimultaneousNodeAndDescendantsRssBytes": 5362974720,
+      "exactSimultaneousProcessTreeMaximumRssBytes": null,
+      "sampledNewRunPeakLogicalBytes": 22602311982,
+      "sampledNewRunPeakAllocatedBytes": 22854709248,
+      "observations": 290,
+      "validParentObservations": 290,
+      "validDescendantObservations": 0,
+      "validStorageObservations": 20,
+      "observationErrors": 0,
+      "scope": "Node self resourceUsage is the process-lifetime high-water mark, including startup. Descendants are those observed by current PPID ancestry; short-lived or reparented processes may be missed. Simultaneous RSS is the per-sample sum including Node, never the sum of separate peaks. RSS nominally 2s and storage 30s; scans are non-atomic. Storage covers the named run, work and output roots, not sibling ownership locks or external browser/system temporary directories. st_blocks*512 is allocated file blocks, not exclusive physical APFS extents. Atomic rename during a scan can temporarily omit or double-count a moved file."
+    }
+  },
+  "postRunStorage": {
+    "measuredAt": "2026-09-27T18:54:10.340Z",
+    "roots": [
+      {
+        "directory": "/Users/kawafmm/workspace/zev2/runtime/artifacts/production-time-integration-20260927-v001",
+        "files": 70034,
+        "logicalBytes": 1379990368,
+        "allocatedBytes": 1589202944,
+        "symlinkEntriesNotFollowed": 0
+      },
+      {
+        "directory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/production-time-integration-20260927-v001",
+        "files": 383,
+        "logicalBytes": 722593302,
+        "allocatedBytes": 739794944,
+        "symlinkEntriesNotFollowed": 0
+      },
+      {
+        "directory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.production-time-integration-20260927-v001.presentation-renderer-v002-work-vhrEZO",
+        "files": 6105,
+        "logicalBytes": 20499735271,
+        "allocatedBytes": 20525727744,
+        "symlinkEntriesNotFollowed": 0
+      }
+    ],
+    "logicalBytes": 22602318941,
+    "allocatedBytes": 22854725632,
+    "scope": "Metadata scan after run and separate reread, before this report write. Includes their logs/receipts and the named new run cache/work/output roots only; excludes old reused background/source/evidence, sibling ownership locks and external browser/system temporary directories. Not an execution-time peak."
+  },
+  "unmeasured": [
+    "Exact simultaneous process-tree peak RSS",
+    "Physical device I/O",
+    "Standalone raw failed-QC shared serialization duration",
+    "Absolute C verification entry/end timestamps",
+    "Peaks occurring between resource samples"
+  ]
+}
