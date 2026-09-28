@@ -1,0 +1,238 @@
+{
+  "scope": "Playback entry only; no quality analysis or QC rerun",
+  "baselineHead": "51ddf281854507eff010fe8943bad8a5d303b323",
+  "protectedFilesBefore": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-rendered-v002.mp4",
+      "bytes": 671459095,
+      "sha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/production-time-integration-20260927-v001/presentation-rendered-v002.mp4",
+      "bytes": 671459095,
+      "sha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-color-emphasis-20260926-v001/A-current.mp4",
+      "bytes": 17484564,
+      "sha256": "4f95335e118c6f2ff5439f75d1d8f9e87c5eeaaa000ddd5eb2d2a2801d711aef"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-color-emphasis-20260926-v001/B-yellow-selection.mp4",
+      "bytes": 17482160,
+      "sha256": "de64e90904a9fcd7620d4c3234e04b8aea362cca46845a570e2bc1a7776ab348"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-color-emphasis-20260926-v001/C-yellow-cyan.mp4",
+      "bytes": 17486017,
+      "sha256": "d05fa1a91140abb190ca62f8b5783787a62a0d269770a5adcf5f062ba59b0292"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-color-emphasis-20260926-v001/review.html",
+      "bytes": 1815,
+      "sha256": "95d130385ef6220766906ef0bddd0cdd9026ee915793a5af835fa74621fd44b0"
+    },
+    {
+      "path": "docs/reports/color-emphasis-20260926/verification.json",
+      "bytes": 60137,
+      "sha256": "28d1a7b8ceb871f437b5ae86adc0785f4d3b6cc62fe0f2f85e1973947a7026b6"
+    },
+    {
+      "path": "docs/reports/color-emphasis-20260926/README.md",
+      "bytes": 9240,
+      "sha256": "619b852f51aa7d0d9cc62b8c80aef2a5db215564152fae6711412b6261e10c8f"
+    },
+    {
+      "path": "docs/reports/color-emphasis-20260926/review.html",
+      "bytes": 1815,
+      "sha256": "95d130385ef6220766906ef0bddd0cdd9026ee915793a5af835fa74621fd44b0"
+    },
+    {
+      "path": "docs/reports/new-material-digest-20260926/README.md",
+      "bytes": 45729,
+      "sha256": "93f862bb80d57724980133e2c547c0a6154b08e06603c82f8b4b991c84bf8af2"
+    },
+    {
+      "path": "docs/reports/production-time-integration-20260927/README.md",
+      "bytes": 25352,
+      "sha256": "4fd21cb247710d79a27f14afb21482dd33ce5d4949438f5f196edfeeb5806813"
+    }
+  ],
+  "origin": "http://127.0.0.1:60965/",
+  "httpChecks": {
+    "videos": [
+      {
+        "route": "/digest.mp4",
+        "head": 200,
+        "leadingRange": 206,
+        "suffixRange": 206,
+        "bytesMatchSource": true
+      },
+      {
+        "route": "/A-current.mp4",
+        "head": 200,
+        "leadingRange": 206,
+        "suffixRange": 206,
+        "bytesMatchSource": true
+      },
+      {
+        "route": "/B-yellow-selection.mp4",
+        "head": 200,
+        "leadingRange": 206,
+        "suffixRange": 206,
+        "bytesMatchSource": true
+      },
+      {
+        "route": "/C-yellow-cyan.mp4",
+        "head": 200,
+        "leadingRange": 206,
+        "suffixRange": 206,
+        "bytesMatchSource": true
+      }
+    ],
+    "unknownAndTraversalRejected": true,
+    "outOfRangeRejected": true
+  },
+  "browserPlayback": {
+    "browser": "Microsoft Edge",
+    "method": "Native player controls; DOM media clock/state; native Edge audio-playing indication and volume controls. No content or listening-quality analysis.",
+    "videos": [
+      {
+        "label": "Digest",
+        "route": "/digest.mp4",
+        "durationSeconds": 931.633333,
+        "playingStartSeconds": 0.079054,
+        "laterSeconds": 36.211382,
+        "seekSeconds": 465.816666,
+        "afterSeekPlayingSeconds": 496.406225,
+        "muted": false,
+        "nativeVolumePercent": 100,
+        "edgeAudioPlayingIndicator": true,
+        "readyState": 4,
+        "mediaError": null
+      },
+      {
+        "label": "A",
+        "route": "/A-current.mp4",
+        "durationSeconds": 46.166667,
+        "playingStartSeconds": 0.150681,
+        "laterSeconds": 9.197172,
+        "seekSeconds": 23.112645,
+        "afterSeekPlayingSeconds": null,
+        "muted": false,
+        "nativeVolumePercent": 100,
+        "edgeAudioPlayingIndicator": true,
+        "readyState": 4,
+        "mediaError": null
+      },
+      {
+        "label": "B",
+        "route": "/B-yellow-selection.mp4",
+        "durationSeconds": 46.166667,
+        "playingStartSeconds": 0.093875,
+        "laterSeconds": 46.166667,
+        "seekSeconds": 23.083333,
+        "afterSeekPlayingSeconds": 23.214677,
+        "muted": false,
+        "nativeVolumePercent": 100,
+        "edgeAudioPlayingIndicator": true,
+        "readyState": 4,
+        "mediaError": null
+      },
+      {
+        "label": "C",
+        "route": "/C-yellow-cyan.mp4",
+        "durationSeconds": 46.166667,
+        "playingStartSeconds": 0.248232,
+        "laterSeconds": 17.134041,
+        "seekSeconds": 23.113275,
+        "afterSeekPlayingSeconds": null,
+        "muted": false,
+        "nativeVolumePercent": 100,
+        "edgeAudioPlayingIndicator": true,
+        "readyState": 4,
+        "mediaError": null
+      }
+    ],
+    "singlePlayingVideoConfirmed": true,
+    "step2InitiallyNotRenderedOrFetched": true,
+    "questions": 2,
+    "finalEntryState": {
+      "step": 1,
+      "currentTime": 0,
+      "paused": true,
+      "liveVideoElements": 1,
+      "mediaError": null,
+      "browserConsoleErrors": []
+    }
+  },
+  "protectedFilesAfter": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-rendered-v002.mp4",
+      "bytes": 671459095,
+      "sha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/production-time-integration-20260927-v001/presentation-rendered-v002.mp4",
+      "bytes": 671459095,
+      "sha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-color-emphasis-20260926-v001/A-current.mp4",
+      "bytes": 17484564,
+      "sha256": "4f95335e118c6f2ff5439f75d1d8f9e87c5eeaaa000ddd5eb2d2a2801d711aef"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-color-emphasis-20260926-v001/B-yellow-selection.mp4",
+      "bytes": 17482160,
+      "sha256": "de64e90904a9fcd7620d4c3234e04b8aea362cca46845a570e2bc1a7776ab348"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-color-emphasis-20260926-v001/C-yellow-cyan.mp4",
+      "bytes": 17486017,
+      "sha256": "d05fa1a91140abb190ca62f8b5783787a62a0d269770a5adcf5f062ba59b0292"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/stage4-editing-color-emphasis-20260926-v001/review.html",
+      "bytes": 1815,
+      "sha256": "95d130385ef6220766906ef0bddd0cdd9026ee915793a5af835fa74621fd44b0"
+    },
+    {
+      "path": "docs/reports/color-emphasis-20260926/verification.json",
+      "bytes": 60137,
+      "sha256": "28d1a7b8ceb871f437b5ae86adc0785f4d3b6cc62fe0f2f85e1973947a7026b6"
+    },
+    {
+      "path": "docs/reports/color-emphasis-20260926/README.md",
+      "bytes": 9240,
+      "sha256": "619b852f51aa7d0d9cc62b8c80aef2a5db215564152fae6711412b6261e10c8f"
+    },
+    {
+      "path": "docs/reports/color-emphasis-20260926/review.html",
+      "bytes": 1815,
+      "sha256": "95d130385ef6220766906ef0bddd0cdd9026ee915793a5af835fa74621fd44b0"
+    },
+    {
+      "path": "docs/reports/new-material-digest-20260926/README.md",
+      "bytes": 45729,
+      "sha256": "93f862bb80d57724980133e2c547c0a6154b08e06603c82f8b4b991c84bf8af2"
+    },
+    {
+      "path": "docs/reports/production-time-integration-20260927/README.md",
+      "bytes": 25352,
+      "sha256": "4fd21cb247710d79a27f14afb21482dd33ce5d4949438f5f196edfeeb5806813"
+    }
+  ],
+  "protectedFilesUnchanged": true,
+  "checkedAtUtc": "2026-09-28T00:45:20.288437+00:00",
+  "effects": {
+    "originalArtifactsChanged": 0,
+    "videoCopies": 0,
+    "regenerations": 0,
+    "aiContentAnalyses": 0,
+    "paidApiCalls": 0,
+    "qcReruns": 0,
+    "humanDecisionRecorded": false
+  },
+  "staticReview": "Independent read-only review: no blocking findings in step ordering, two questions, four fixed media routes, existing HTTP handler reuse."
+}

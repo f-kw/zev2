@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>動画確認</title>
+<style>
+  :root { color-scheme: light; font-family: system-ui, sans-serif; color: #202124; background: #f6f6f6; }
+  body { max-width: 1000px; margin: 0 auto; padding: 24px 20px 64px; }
+  h1 { font-size: 1.5rem; } h2 { font-size: 1.15rem; }
+  p, li { line-height: 1.7; }
+  video { display: block; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 6px; }
+  button { font: inherit; padding: 12px 20px; border-radius: 6px; border: 1px solid #ccc; background: white; cursor: pointer; }
+  button:focus-visible { outline: 3px solid #2459a6; outline-offset: 3px; }
+  .next { margin-top: 24px; background: #202124; color: white; border-color: #202124; }
+  .duration { color: #555; } article { margin: 32px 0; }
+  [hidden] { display: none !important; }
+</style>
+<main>
+  <section id="first">
+    <h1>STEP 1｜新素材Digest</h1>
+    <p>まずこの動画を普通に見てください。</p>
+    <p class="duration">15:31.633</p>
+    <video aria-label="新素材Digest" controls playsinline preload="metadata" src="/digest.mp4"></video>
+    <button class="next" id="next" type="button">見終わったら次へ</button>
+  </section>
+  <section id="second" hidden></section>
+  <template id="comparison">
+    <h1 tabindex="-1">STEP 2｜字幕色A/B/C</h1>
+    <p class="duration">各46.167秒</p>
+    <ol>
+      <li><strong>BはAより自然に要点が伝わるか。</strong><br>不要な強調や違和感が増えていないかも含めて、自由に感想をお聞かせください。</li>
+      <li><strong>CはBより自然な変化が増えているか。</strong><br>水色による読みにくさ、色のうるささ、不自然さ、見やすさなど、感じたことを自由にお聞かせください。</li>
+    </ol>
+    <article><h2>A：現在</h2><video aria-label="A 現在" controls playsinline preload="metadata" src="/A-current.mp4"></video></article>
+    <article><h2>B：強調箇所を調整</h2><video aria-label="B 強調箇所を調整" controls playsinline preload="metadata" src="/B-yellow-selection.mp4"></video></article>
+    <article><h2>C：Bと同じ強調箇所で、一部だけ水色</h2><video aria-label="C 一部だけ水色" controls playsinline preload="metadata" src="/C-yellow-cyan.mp4"></video></article>
+    <p>感想はZEV相談役の会話へ自由にお寄せください。採点は不要です。</p>
+    <button id="back" type="button">新素材Digestへ戻る</button>
+  </template>
+</main>
+<script>
+  const first = document.querySelector('#first');
+  const second = document.querySelector('#second');
+  const pauseAll = () => document.querySelectorAll('video').forEach(video => video.pause());
+  document.addEventListener('play', event => {
+    if (event.target.tagName === 'VIDEO') {
+      document.querySelectorAll('video').forEach(video => { if (video !== event.target) video.pause(); });
+    }
+  }, true);
+  document.querySelector('#next').addEventListener('click', () => {
+    pauseAll();
+    if (!second.hasChildNodes()) {
+      second.append(document.querySelector('#comparison').content.cloneNode(true));
+      document.querySelector('#back').addEventListener('click', () => {
+        pauseAll(); second.hidden = true; first.hidden = false;
+        document.querySelector('#next').focus(); window.scrollTo(0, 0);
+      });
+    }
+    first.hidden = true; second.hidden = false;
+    second.querySelector('h1').focus(); window.scrollTo(0, 0);
+  });
+</script>
+</html>
