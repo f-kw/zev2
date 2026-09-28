@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "task": "14.3 Jev shadow比較",
+  "session": "Codex1",
+  "date": "2026-09-28",
+  "status": "waiting_credential",
+  "completion": "incomplete",
+  "conclusion": "inconclusive",
+  "decision_type": "HUMAN_DECISION",
+  "reason": "No existing TypeSafe credential is available in the checked environment; instruction section 5 requires stopping. This is not an API or model quality failure.",
+  "base_commit": "ca292ca7749e2d02f35189774e0fac56fb6cb30b",
+  "model": {
+    "id": null,
+    "metadata": null,
+    "retrieved_at": null,
+    "response_sha256": null,
+    "pinned": false,
+    "documented_api_version": "v1",
+    "observed_api_version": null
+  },
+  "public_sources": [
+    {
+      "url": "https://docs.typesafe.ai/api",
+      "reviewed_on": "2026-09-28"
+    },
+    {
+      "url": "https://docs.typesafe.ai/models",
+      "reviewed_on": "2026-09-28"
+    }
+  ],
+  "unreviewed_before_stop": [
+    "Customer Data handling",
+    "current terms and MCA",
+    "actual account pricing and access"
+  ],
+  "limits": {
+    "external_api_usd": 1.0,
+    "post_requests": 12,
+    "retry_per_request": 1,
+    "tuning_attempts": 3
+  },
+  "requests": {
+    "get_models": 0,
+    "post_systemone": 0,
+    "questions_sent": 0,
+    "success": 0,
+    "failure": 0,
+    "retry": 0,
+    "timeout": 0,
+    "rate_limit": 0,
+    "wall_latency_seconds": null,
+    "shadow_wall_seconds": null
+  },
+  "usage": {
+    "provider_reported": null,
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "cost": {
+    "incremental_external_api_usd": 0.0,
+    "basis": "No external inference/model-list API calls; not a provider invoice measurement.",
+    "documented_input_usd_per_million_tokens": 0.042,
+    "documented_output_token_price": "free"
+  },
+  "tuning_attempts": 0,
+  "freeze": {
+    "completed": false,
+    "manifest": null
+  },
+  "reduced_input_codex": {
+    "performed": false,
+    "answers": 0
+  },
+  "scenes": [
+    {
+      "id": "candidate-0001",
+      "split": "tuning",
+      "captions": 53,
+      "saved_normal": 45,
+      "saved_effect": 8,
+      "jev_answers": 0,
+      "unresolved": 53,
+      "unresolved_reason": "credential_not_available"
+    },
+    {
+      "id": "candidate-0002",
+      "split": "held_out",
+      "captions": 84,
+      "saved_normal": 69,
+      "saved_effect": 15,
+      "jev_answers": 0,
+      "unresolved": 84,
+      "unresolved_reason": "credential_not_available"
+    },
+    {
+      "id": "candidate-0003",
+      "split": "held_out",
+      "captions": 61,
+      "saved_normal": 49,
+      "saved_effect": 12,
+      "jev_answers": 0,
+      "unresolved": 61,
+      "unresolved_reason": "credential_not_available"
+    },
+    {
+      "id": "candidate-0004",
+      "split": "held_out",
+      "captions": 101,
+      "saved_normal": 88,
+      "saved_effect": 13,
+      "jev_answers": 0,
+      "unresolved": 101,
+      "unresolved_reason": "credential_not_available"
+    },
+    {
+      "id": "candidate-0005",
+      "split": "held_out",
+      "captions": 27,
+      "saved_normal": 23,
+      "saved_effect": 4,
+      "jev_answers": 0,
+      "unresolved": 27,
+      "unresolved_reason": "credential_not_available"
+    }
+  ],
+  "totals": {
+    "captions": 326,
+    "tuning": 53,
+    "held_out": 273,
+    "saved_normal": 274,
+    "saved_effect": 52,
+    "held_out_saved_normal": 229,
+    "held_out_saved_effect": 44,
+    "jev_answers": 0,
+    "unresolved": 326
+  },
+  "agreement": {
+    "current_vs_jev": null,
+    "current_vs_reduced_codex": null,
+    "reduced_codex_vs_jev": null,
+    "by_current_group": null,
+    "direction": null
+  },
+  "confidence": null,
+  "disagreement_diagnosis": null,
+  "japanese_case_analysis": "not_performed",
+  "transmitted": {
+    "payload_bytes": 0,
+    "caption_texts": 0,
+    "video_files": 0,
+    "audio_files": 0,
+    "full_transcripts": 0
+  },
+  "changes": {
+    "production": 0,
+    "video": 0,
+    "captions": 0,
+    "effects": 0,
+    "qc": 0
+  },
+  "human_ground_truth": false,
+  "individual_quality_findings_published": false,
+  "credential_evidence": {
+    "path": "runtime/artifacts/jev-shadow-20260928-v001/credential-preflight.json",
+    "sha256": "a84a024e4ba6c0aec88e31e1b00466d09c68fd0a2e295fda55bd2e575da6d480",
+    "bytes": 745,
+    "secret_values_present": false
+  },
+  "completion_checklist_reference": "README.md#完了条件の一件ずつの確認",
+  "git_and_advisor_delivery": "Checkpoint commit/push, final clean check and direct report delivery are verified in the advisor message."
+}
