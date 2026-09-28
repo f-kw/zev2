@@ -5,8 +5,8 @@
 
 ## 状態と確認入口
 
-**7Aは未完了。候補版の通常経路接続は監査済み、全編実走は容量の運用数値に関する第1層判断待ち。**
-途中の見た目確認待ちではない。2026-09-29の相談役回答と停止理由は末尾「容量判断の訂正と現在の停止範囲」に記録する。
+**7Aは未完了。容量条件の第1層承認を受け、候補版の全編実走へ向けて続行中。**
+途中の見た目確認は要求しない。2026-09-29の停止と承認後の再開は末尾に記録する。
 本番の既定値・旧trust・旧registry・元動画・保存済み計画は変更していない。
 2026-09-28の「人間確認を最後に集約して主線を完了する継続指示」（kawafmm承認済み）により、
 途中の見た目確認による停止を解除した。明示候補版として通常の保存・描画・QC・再読まで接続し、全編候補を検証する。
@@ -313,3 +313,45 @@ AGENTS上はそのまま使えません」と訂正し、今回限りの数値�
 回答の画面証拠は既存runtime領域の
 `caption-readability-candidate-connection-20260928-v001/advisor-capacity-authority-response.png`に保存。
 今回の追記は監査と停止事実の記録だけであり、DECISIONS.mdへの承認行や新運用数値を追加するものではない。
+
+### 容量条件承認後の再開（2026-09-29）
+
+kawafmm承認済みの直接続行指示を受け、mainを`a5dc2b197f486ae3bb7759ac1b88b3e896e5e2dc`から
+`6319689500949c5090aae0ab7aa9cb688cc2c2b3`へfast-forwardした。差分は計画とCURRENT_GOALの承認記録2件、
+開始時のstaged・未commit・untrackedは0。上記の停止条件は解消済み。
+
+今回の7A全編実走だけに、承認された28,680,038,400 bytesの開始条件（12,000,000,000 bytesの余裕を含む）と、
+native中10,000,000,000 bytes未満で次の重いバッチへ入らない条件を適用する。
+専用実行driverに明示して保存し、一般rendererの既定値やQC判定へ持ち込まない。
+本体・full replay保存後の確認、および既存の画像生成単位ごとの確認を接続する。
+予定生成bytesは記録するが、新しい停止数値や係数へ置き換えない。
+
+processを跨ぐ場合に本体を再生成しない最小の保存・再開接続も今回の承認範囲。
+保存された本体・字幕画像・replayと入力/実装/所有情報を照合してnative以後へ接続する。
+途中のnative証拠は保持し、完成していない検査を成功扱いしない。汎用のjob基盤には広げない。
+
+再開時の保存入力79参照は7.816秒で検証成功。元STTと判断の再実行はない。
+全編実走の入力指定は既存runtime記録領域の`full-run-spec-20260929-v001.json`に保存した。
+新しい本体は`caption-readability-full-20260929-v001`の未使用出力先を使う。
+全編の成功・最終QC・独立再読はまだ実測前であり、接続試験の合格から推定しない。
+
+容量接続の小型回帰は90/90、7A専用の境界試験は5/5、保存再開の照合試験は4/4合格。
+容量観測の有無で比較RGB・距離・分類・判定が一致し、中断時も不合格画像と途中証拠を保持した。
+28,680,038,400 bytes／10,000,000,000 bytesの境界値そのものと、その1 byte下を区別する。
+予定生成量から別の停止余裕を作らない。保存済み記録・媒体・PNG・元planの改変、未完了replay、
+異なる描画規則、既に公開済みの出力への再開は拒否する。
+
+1字幕・30 frameの実媒体では、本体＋合格replay直後に意図的に中断し、別Node processから
+native比較・最終QC・公開保存まで完走した（50.819秒）。再開時の本体合成とreplay encodeは各0件。
+公開後MP4のSHAは中断時の本体と一致し、保存replayも不変。
+証拠は`runtime/artifacts/caption-readability-native-resume-test-jCpkn8/verification.json`。
+最初のsandbox内試験は描画前のIPC権限制限で終了し、新しい試験directoryで再実施した。
+これは全編の画素検査を代替せず、元の成果物も変更しない。
+
+追加の通常renderer／範囲合成回帰は13/21合格。範囲の全画素比較は合格。
+残る8件のうち7件は旧formal trustと現行描画部品のSHA不一致であり、拒否対象6pathと
+validator/testは再開開始HEADから無変更。候補版は明示した候補trustを使用し、旧trustを更新しない。
+残る1件は[14.8.2で確認済みの旧fixture不一致](../qc-streaming-20260927/README.md)と同じ
+完成フレーム証拠形式の不一致。全repository試験合格とは報告しない。
+軽量証拠は[native-capacity-resume-verification.json](native-capacity-resume-verification.json)、
+詳細は同directoryの`native-execution-control-tests.tap`と`before-native-resume-*.tap`を参照。

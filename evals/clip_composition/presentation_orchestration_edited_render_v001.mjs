@@ -10,7 +10,7 @@ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {restoreOrchestrationDrawingViewEvidenceV001, assertOrchestrationDrawingViewV001} from './presentation_orchestration_v001.mjs';
 import {createOrchestrationRenderScopeV001} from './presentation_orchestration_render_scope_v001.mjs';
 import * as backgroundRenderer from './presentation_orchestration_background_v001.mjs';
-import {executeValidatedPresentationDrawAndQcV001, createPresentationRendererOverlayJobV001,
+import {executeValidatedPresentationDrawAndQcV001, resumeValidatedPresentationDrawAndQcV001, createPresentationRendererOverlayJobV001,
   commitValidatedPresentationArtifactsV002} from './render_presentation_v002.mjs';
 import {createPresentationRendererProcessObserverV001} from './presentation_renderer_process_observation_v001.mjs';
 import {inspectRenderedMediaWithToolsV001} from './presentation_renderer_qc_v002.mjs';
@@ -149,7 +149,8 @@ export async function verifyEditedOrchestrationCandidateTrustV001({candidateTrus
 
 export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputDirectory, evidenceDirectory,
   range = null, backgroundReuseProofPath, backgroundReuseDecoderRef = null,
-  nativeAssetReuse, drawingRulesRef, onProgress = () => {}}) {
+  nativeAssetReuse, drawingRulesRef, onProgress = () => {}, nativeQcExecutionControl,
+  resumeFromCheckpointRef = null}) {
   assert.equal(process.version, 'v20.19.6');
   assert(!Object.hasOwn(process.env, 'NODE_OPTIONS'));
   for (const file of [drawingEvidenceRef?.path, outputDirectory, evidenceDirectory]) assert(path.isAbsolute(file ?? ''));
@@ -158,7 +159,16 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     assertIgnoredPresentationOutputDirectoryV001({repositoryRoot: repo, outputDirectory: output}));
   await mkdir(evidenceDirectory);
   const started = performance.now(), timings = {};
-  let nativeAdapter;
+  let nativeAdapter, continuationCheckpointRef = null;
+  let resumed = null;
+  if (resumeFromCheckpointRef !== null) {
+    assert.deepEqual(await bind(resumeFromCheckpointRef.path), resumeFromCheckpointRef, 'saved native continuation receipt changed');
+    resumed = await json(resumeFromCheckpointRef.path);
+    assert.equal(resumed.schemaVersion, 'presentation-edited-before-native-v001');
+    assert.equal(resumed.status, 'native-pending');
+    assert.equal(resumed.outputDirectory, outputDirectory);
+    assert.deepEqual(resumed.drawingEvidenceRef, drawingEvidenceRef);
+  }
   try {
     await onProgress({phase: 'prepare'});
     const inputBindingStarted = performance.now();
@@ -171,6 +181,11 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     assert.deepEqual(rules.decoderRoles.savedBackgroundObservation, backgroundReuseDecoderRef,
       'saved background decoder must match the immutable job drawing rules');
     const derived = createOrchestrationRenderScopeV001(view, range);
+    if (resumed !== null) {
+      assert.equal(resumed.viewSha256, view.viewSha256, 'saved native continuation belongs to another view');
+      assert.deepEqual(resumed.rules, rules, 'saved native continuation implementation changed');
+      assert.deepEqual(resumed.scope, derived.scope, 'saved native continuation scope changed');
+    }
     const sourceReferences = await verifySourceReferences(view, drawingEvidenceRef);
     timings.inputBindingMilliseconds = performance.now() - inputBindingStarted;
     const initialEvidenceStarted = performance.now();
@@ -196,8 +211,11 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     timings.initialEvidenceWriteMilliseconds = performance.now() - initialEvidenceStarted;
     const backgroundStarted = performance.now();
     await onProgress({phase: 'background', scope: derived.scope});
-    let background, backgroundProofRef;
-    if (range === null && backgroundReuseProofPath) {
+    let background = resumed?.background, backgroundProofRef = resumed?.backgroundProofRef;
+    if (resumed !== null) for (const ref of [background.outputs.background, background.outputs.audio]) {
+      assert.deepEqual(await bind(ref.path), ref, 'saved continuation background changed');
+    }
+    if (resumed === null && range === null && backgroundReuseProofPath) {
       assert(backgroundReuseDecoderRef !== null, 'saved full-background observations require an explicit bound decoder');
       await verifyDecoderReference(backgroundReuseDecoderRef);
       const reusable = await backgroundRenderer.inspectSavedOrchestrationBackgroundReuseV001({drawingView: view,
@@ -220,7 +238,7 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     assert.equal((await bind(backgroundProofRef.path)).fileSha256, backgroundProofRef.fileSha256);
     assert.equal(background.status, 'passed');
     timings.backgroundMilliseconds = performance.now() - backgroundStarted;
-    const media = await inspectRenderedMediaWithToolsV001(background.outputs.background.path, toolPaths);
+    const media = resumed?.media ?? await inspectRenderedMediaWithToolsV001(background.outputs.background.path, toolPaths);
     assert.equal(media.video.frameCount, derived.scope.frameCount);
     const processObserver = createPresentationRendererProcessObserverV001({observationDirectory: path.join(evidenceDirectory, 'processes')});
     nativeAdapter = createPresentationRendererOverlayJobV001({
@@ -232,7 +250,23 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
       adapter: nativeAdapter, drawingProfile: rules});
     timings.preparationMilliseconds = performance.now() - started;
     const drawStarted = performance.now();
-    const draw = await executeValidatedPresentationDrawAndQcV001({outputDirectory, plan: derived.normalPlan,
+    const saveContinuation = async ({checkpointRef, replayRef}) => {
+      const receiptPath = path.join(evidenceDirectory, 'before-native-checkpoint.json');
+      await save(receiptPath, {schemaVersion: 'presentation-edited-before-native-v001', status: 'native-pending',
+        drawingEvidenceRef, outputDirectory, viewSha256: view.viewSha256, rules, scope: derived.scope,
+        rendererCheckpointRef: checkpointRef, replayRef, background, backgroundProofRef, media,
+        previousCheckpointRef: resumeFromCheckpointRef,
+        completedWork: {timings: {...timings}, processTimings: processObserver.getPerformance(),
+          nativeAssets: {...cache.stats, profileSha256: cache.profileSha256}}});
+      continuationCheckpointRef = await bind(receiptPath);
+    };
+    const control = nativeQcExecutionControl === undefined ? undefined : {...nativeQcExecutionControl,
+      beforeStart: async event => nativeQcExecutionControl.beforeStart?.({...event, checkpointRef: continuationCheckpointRef})};
+    const draw = await (resumed === null ? executeValidatedPresentationDrawAndQcV001 : resumeValidatedPresentationDrawAndQcV001)({
+      ...(resumed === null ? {} : {checkpointRef: resumed.rendererCheckpointRef}),
+      nativeQcExecutionControl: control,
+      onBeforeNativeCheckpoint: nativeQcExecutionControl === undefined && resumed === null ? undefined : saveContinuation,
+      outputDirectory, plan: derived.normalPlan,
       presetRegistry: rules.candidateExecution?.registry ?? await json(registryPath), baseMediaPath: background.outputs.background.path,
       baseMediaInspection: {media}, expectedFrameCount: derived.scope.frameCount,
       overlayAdapter: cache.adapter, processObserver, toolPaths, serializePngAndFilters: true,
@@ -246,6 +280,11 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     const drawEvidenceStarted = performance.now();
     await writePresentationQcEvidenceV001(path.join(evidenceDirectory, 'draw-result.json'), draw);
     timings.drawEvidenceWriteMilliseconds = performance.now() - drawEvidenceStarted;
+    if (draw.exitCode !== 0 && draw.failure?.capacityObservation !== undefined) {
+      throw Object.assign(new Error(draw.failure.message ?? 'native QC execution interrupted'), {
+        code: draw.failure.code, capacityObservation: draw.failure.capacityObservation,
+        checkpointRef: continuationCheckpointRef, drawFailure: draw.failure});
+    }
     assert.equal(draw.exitCode, 0, JSON.stringify({status: draw.failure?.status ?? draw.finalQc?.status,
       violations: draw.failure?.violations ?? draw.finalQc?.violations, stage: draw.failure?.stage,
       evidencePath: path.join(evidenceDirectory, 'draw-result.json')}));
@@ -283,7 +322,9 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
       finalQc: draw.finalQc, completedFrameQc: draw.completedFrameQc, publication, nativeQcPublication, timings,
       processTimings: processObserver.getPerformance(),
       timingScope: 'completion excludes its own serialization/write and the caller result write',
-      formalTrustChanged: false, humanQuality: 'not-evaluated', paidApiCalls: 0, newExternalMediaTransfers: 0};
+      formalTrustChanged: false, humanQuality: 'not-evaluated', paidApiCalls: 0, newExternalMediaTransfers: 0,
+      ...(resumed === null ? {} : {continuation: {checkpointRef: resumeFromCheckpointRef,
+        reusedCompletedBody: true, reusedPassedExactReplay: true, previousWork: resumed.completedWork}})};
     if (candidateTrustRef !== null) {
       await verifyEditedOrchestrationCandidateTrustV001({candidateTrustRef, view, drawingRulesRef: rules, drawingEvidenceRef});
       result.candidateExecution = {...view.candidateExecution, candidateTrustRef};
@@ -292,8 +333,12 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     await onProgress({phase: 'complete', scope: derived.scope, timings});
     return result;
   } catch (error) {
-    await save(path.join(evidenceDirectory, 'failure.json'), {status: 'failed', message: String(error), stack: error?.stack,
-      timings, elapsedMilliseconds: performance.now() - started});
+    await save(path.join(evidenceDirectory, 'failure.json'), {
+      status: error?.capacityObservation === undefined ? 'failed' : 'interrupted',
+      message: String(error), stack: error?.stack,
+      ...(typeof error?.code === 'string' ? {code: error.code} : {}),
+      ...(error?.capacityObservation === undefined ? {} : {capacityObservation: error.capacityObservation}),
+      checkpointRef: continuationCheckpointRef, timings, elapsedMilliseconds: performance.now() - started});
     throw error;
   } finally {
     await nativeAdapter?.close();

@@ -29,6 +29,62 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const json = async file => JSON.parse(await readFile(file, 'utf8'));
 const save = (file, value) => writeFile(file, JSON.stringify(value, null, 2) + '\n', {flag: 'wx'});
 const head = () => execFileSync('git', ['rev-parse', 'HEAD'], {cwd: root, encoding: 'utf8'}).trim();
+
+// Explicit first-layer approval for this 7A full candidate only. This is not a
+// renderer default, a QC threshold, or an estimate of total required storage.
+export const READABILITY_FULL_RUN_CAPACITY_V001 = Object.freeze({
+  scope: '7A-full-candidate-only',
+  approvalCommit: '6319689500949c5090aae0ab7aa9cb688cc2c2b3',
+  nativeStartMinimumFreeBytes: 28_680_038_400,
+  includedReserveBytes: 12_000_000_000,
+  nativeHardFloorBytes: 10_000_000_000,
+});
+
+/** Observe real free space at existing stage/batch boundaries. Planned output
+ * bytes are evidence only: they do not introduce another stopping condition. */
+export function createReadabilityCapacityControlV001({capacity, observeDisk = disk,
+  record = async () => {}, observeRetained = retainedFootprint}) {
+  assert.deepEqual(capacity, READABILITY_FULL_RUN_CAPACITY_V001, 'this execution requires the exact approved 7A capacity conditions');
+  const check = async (event, minimumFreeBytes) => {
+    const observed = await observeDisk();
+    assert(Number.isSafeInteger(observed.availableBytes) && observed.availableBytes >= 0, 'invalid available capacity observation');
+    const row = {...event, disk: observed, minimumFreeBytes,
+      status: observed.availableBytes < minimumFreeBytes ? 'capacity-interrupted' : 'continue'};
+    await record(row);
+    if (row.status === 'capacity-interrupted') {
+      const error = new Error('Approved 7A capacity boundary reached; saved work is incomplete and retained');
+      error.code = 'READABILITY_CAPACITY_INTERRUPTED'; error.capacityObservation = row;
+      throw error;
+    }
+    return row;
+  };
+  return {
+    beforeStart: event => check({phase: 'before-native-qc', checkpointRef: event.checkpointRef ?? null},
+      capacity.nativeStartMinimumFreeBytes),
+    beforeHeavyBatch: event => check({...event}, capacity.nativeHardFloorBytes),
+    afterSample: async event => {
+      const retained = event.visible ? null : await observeRetained(event);
+      // Keep lightweight facts; candidate/class arrays remain in the ordinary
+      // per-sample proof, avoiding another copy of the full QC evidence.
+      return check({phase: 'native-sample-complete', sampleIndex: event.sampleIndex,
+        instructionId: event.instructionId, frame: event.frame, visible: event.visible,
+        referenceRetention: {state: event.referenceRetention?.state,
+          checkpoint: event.referenceRetention?.checkpoint}, metrics: event.metrics, retained},
+      capacity.nativeHardFloorBytes);
+    },
+  };
+}
+async function retainedFootprint(event) {
+  const refs = [...event.referenceRetention.artifacts, event.referenceRetention.checkpoint];
+  const seen = new Set(), result = {files: 0, logicalBytes: 0, allocatedBytes: 0};
+  for (const ref of refs) {
+    if (seen.has(ref.path)) continue; seen.add(ref.path);
+    const info = await lstat(ref.path);
+    assert(info.isFile() && !info.isSymbolicLink(), 'retained evidence must be a regular file');
+    result.files++; result.logicalBytes += info.size; result.allocatedBytes += info.blocks * 512;
+  }
+  return {...result, scope: 'retained sample reference RGB and proof; allocated bytes use st_blocks times 512'};
+}
 async function bind(file) {
   assert(path.isAbsolute(file));
   const before = await lstat(file); assert(before.isFile() && !before.isSymbolicLink());
@@ -53,6 +109,7 @@ export async function prepareReadabilityCandidateRunV001(specPath) {
   const started = performance.now(), spec = await json(specPath);
   assert.equal(spec.schemaVersion, 'caption-readability-candidate-execution-spec-v001');
   assert.equal(spec.candidateVersion, 'candidate-readability-v001');
+  assert.deepEqual(spec.capacity, READABILITY_FULL_RUN_CAPACITY_V001);
   for (const ref of [spec.originalEvidenceRef, spec.meaningRef, spec.segmentationEvidenceRef,
     spec.savedResolutionRef, spec.referenceCandidatePlanRef, spec.backgroundProofRef,
     spec.backgroundReuseDecoderRef, ...spec.protectedRefs]) await verify(ref);
@@ -86,13 +143,35 @@ export async function prepareReadabilityCandidateRunV001(specPath) {
       range: null, backgroundReuseProofPath: spec.backgroundProofRef.path,
       backgroundReuseDecoderRef: spec.backgroundReuseDecoderRef,
       nativeAssetReuse: path.join(spec.runDirectory, 'native-assets')}};
-  await save(path.join(spec.runDirectory, 'preflight.json'), {status: 'passed', observedAt: new Date().toISOString(),
+  await save(path.join(spec.runDirectory, 'preflight.json'), {status: 'inputs-and-background-verified', observedAt: new Date().toISOString(),
     specificationRef: await bind(specPath), elapsedSeconds: (performance.now() - started) / 1000,
-    viewSha256: view.viewSha256, candidate: view.candidateExecution, backgroundReuse, disk: await disk()});
+    viewSha256: view.viewSha256, candidate: view.candidateExecution, backgroundReuse, disk: await disk(),
+    capacity: spec.capacity, nativeCapacityGate: 'not-yet-reached; observe after body and full replay'});
   const jobPath = path.join(spec.runDirectory, 'job.json'); await save(jobPath, job);
   await readJob(jobPath);
   process.stdout.write(JSON.stringify({status: 'prepared', jobPath, viewSha256: view.viewSha256}) + '\n');
   return job;
+}
+
+/** This candidate's saved body/replay continuation only. A new run record and
+ * new native evidence are created; neither old media nor old proof is replaced. */
+export async function prepareReadabilityCandidateResumeV001(jobPath, checkpointPath, runDirectory) {
+  for (const file of [jobPath, checkpointPath, runDirectory]) assert(path.isAbsolute(file));
+  const {job} = await readJob(jobPath), checkpointRef = await bind(checkpointPath);
+  assert.notEqual(path.dirname(jobPath), runDirectory);
+  assertIgnoredPresentationOutputDirectoryV001({repositoryRoot: root, outputDirectory: runDirectory});
+  await mkdir(runDirectory);
+  const resumedJob = {...job, head: head(), resumedFrom: {jobRef: await bind(jobPath), checkpointRef},
+    protectedRefs: [...job.protectedRefs, checkpointRef],
+    renderOptions: {...job.renderOptions, evidenceDirectory: path.join(runDirectory, 'render'),
+      resumeFromCheckpointRef: checkpointRef}};
+  const nextJobPath = path.join(runDirectory, 'job.json');
+  await save(nextJobPath, resumedJob);
+  await readJob(nextJobPath);
+  process.stdout.write(JSON.stringify({status: 'resume-job-prepared', jobPath: nextJobPath,
+    bodyAndReplay: 'retained; admission and SHA validation occur before native execution',
+    nativeQc: 'new execution; incomplete earlier native evidence is retained'}) + '\n');
+  return resumedJob;
 }
 async function readJob(file) {
   assert(path.isAbsolute(file));
@@ -101,6 +180,7 @@ async function readJob(file) {
   assert.equal(job.candidateVersion, 'candidate-readability-v001');
   assert.equal(job.humanQuality, 'not-evaluated');
   assert.equal(job.productionDefaultChanged, false);
+  assert.deepEqual(job.capacity, READABILITY_FULL_RUN_CAPACITY_V001);
   assert(/^[a-f0-9]{40}$/.test(job.head), 'execution checkpoint SHA required');
   assert.equal(execFileSync('git', ['branch', '--show-current'], {cwd: root, encoding: 'utf8'}).trim(), 'main');
   await verifyEditedOrchestrationDrawingRulesRefV001(job.renderOptions.drawingRulesRef);
@@ -119,13 +199,16 @@ export async function runReadabilityCandidateV001(jobPath) {
   const {job} = await readJob(jobPath), directory = path.dirname(jobPath);
   const inputReadSeconds = (performance.now() - started) / 1000;
   const available = await disk();
-  assert.equal(job.capacity.status, 'sufficient');
-  assert(Number.isSafeInteger(job.capacity.requiredAdditionalBytes) && job.capacity.requiredAdditionalBytes > 0);
-  assert(available.availableBytes >= job.capacity.requiredAdditionalBytes, 'available capacity is below the saved execution estimate');
   await save(path.join(directory, 'execution-start.json'), {startedAt, processId: process.pid,
     jobRef: await bind(jobPath), inputReadSeconds, disk: available});
   try {
-    const result = await renderEditedOrchestrationV001({...job.renderOptions, onProgress: async event => {
+    const nativeQcExecutionControl = createReadabilityCapacityControlV001({capacity: job.capacity, record: async event => {
+      const row = {...event, observedAt: new Date().toISOString(), elapsedSeconds: (performance.now() - started) / 1000};
+      await appendFile(path.join(directory, 'capacity-observations.jsonl'), JSON.stringify(row) + '\n');
+      if (event.phase === 'before-native-qc' || event.phase === 'native-sample-complete' || event.status === 'capacity-interrupted')
+        process.stdout.write(JSON.stringify(row) + '\n');
+    }});
+    const result = await renderEditedOrchestrationV001({...job.renderOptions, nativeQcExecutionControl, onProgress: async event => {
       const row = {...event, observedAt: new Date().toISOString(), elapsedSeconds: (performance.now() - started) / 1000,
         disk: await disk()};
       await appendFile(path.join(directory, 'execution-progress.jsonl'), JSON.stringify(row) + '\n');
@@ -142,16 +225,17 @@ export async function runReadabilityCandidateV001(jobPath) {
       elapsedSeconds: (performance.now() - started) / 1000, inputReadSeconds, completionRef, drawRef,
       video: result.candidateVideo, nativeSamples: finite.samples.length, expected: job.expected,
       parentMaximumRssBytes: process.resourceUsage().maxRSS * 1024,
-      memoryScope: 'Node parent only; child peaks are reported by the renderer process observations',
+      memoryScope: 'Node parent only; renderer observations record child wall time, not child RSS',
       timings: result.timings, processTimings: result.processTimings, disk: await disk(),
       humanQuality: 'not-evaluated', productionDefaultChanged: false};
     await save(path.join(directory, 'execution-result.json'), summary);
     process.stdout.write(JSON.stringify({status: summary.status, elapsedSeconds: summary.elapsedSeconds, video: summary.video}) + '\n');
     return summary;
   } catch (error) {
-    await save(path.join(directory, 'execution-failure.json'), {status: 'failed', startedAt,
+    await save(path.join(directory, 'execution-failure.json'), {status: error.code === 'READABILITY_CAPACITY_INTERRUPTED' ? 'capacity-interrupted' : 'failed', startedAt,
       endedAt: new Date().toISOString(), elapsedSeconds: (performance.now() - started) / 1000,
-      message: String(error), stack: error.stack, disk: await disk()});
+      message: String(error), stack: error.stack, capacityObservation: error.capacityObservation ?? null,
+      checkpointRef: error.checkpointRef ?? null, disk: await disk()});
     throw error;
   }
 }
@@ -208,9 +292,10 @@ export async function rereadReadabilityCandidateV001(jobPath) {
   return resultSummary;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  const [mode, jobPath] = process.argv.slice(2);
+  const [mode, jobPath, checkpointPath, runDirectory] = process.argv.slice(2);
   if (mode === 'prepare') await prepareReadabilityCandidateRunV001(jobPath);
+  else if (mode === 'prepare-resume') await prepareReadabilityCandidateResumeV001(jobPath, checkpointPath, runDirectory);
   else if (mode === 'run') await runReadabilityCandidateV001(jobPath);
   else if (mode === 'reread') await rereadReadabilityCandidateV001(jobPath);
-  else throw Error('usage: prepare absolute-spec.json | run|reread absolute-candidate-job.json');
+  else throw Error('usage: prepare absolute-spec.json | prepare-resume old-job.json checkpoint.json new-run-directory | run|reread absolute-candidate-job.json');
 }

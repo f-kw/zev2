@@ -5,6 +5,7 @@ import {spawn} from 'node:child_process';
 import {stat, mkdir, mkdtemp, readFile, readdir, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {performance} from 'node:perf_hooks';
+import {writePresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {processPresentationNativeSampleV001, PRESENTATION_NATIVE_STREAM_EXECUTION_V001,
   PRESENTATION_NATIVE_REFERENCE_BATCH_SIZE_V001} from './presentation_native_qc_streaming_v001.mjs';
@@ -788,7 +789,11 @@ export function validatePresentationNativeFrameQcInspectionsV001({plan, inspecti
 export async function inspectPresentationNativeFrameQcV001({
   plan, records, provenance, media, tools, scratchDirectory, processObserver = null, renderRange = null,
   referenceRetention = 'retain-all', referenceBatchSize = PRESENTATION_NATIVE_REFERENCE_BATCH_SIZE_V001,
+  executionControl = null,
 }) {
+  requireValue(executionControl === null || (object(executionControl)
+    && ['beforeHeavyBatch', 'afterSample'].every(key => executionControl[key] === undefined
+      || typeof executionControl[key] === 'function')), 'invalid native execution control');
   const started = performance.now();
   plan = clone(plan); records = clone(records); provenance = clone(provenance);
   media = clone(media); tools = clone(tools);
@@ -803,7 +808,10 @@ export async function inspectPresentationNativeFrameQcV001({
     const began = performance.now();
     try {return await operation();} finally {phasesMilliseconds[name] += performance.now() - began;}
   };
-  let manifest;
+  let manifest, progress = null;
+  const beforeHeavyBatch = async event => {
+    if (executionControl?.beforeHeavyBatch) await executionControl.beforeHeavyBatch(clone({sampleIndex: null, ...event}));
+  };
   const performanceRecord = () => ({wallClockMs: performance.now() - started,
     phasesMilliseconds: {...phasesMilliseconds}, phaseMeaning: 'disjoint measured operations; total also includes tool versions and setup',
     childProcessCount: processes.length, childProcessesByPurpose: Object.fromEntries(
@@ -875,6 +883,11 @@ export async function inspectPresentationNativeFrameQcV001({
     const nativeLayers = buildPresentationNativeLayerPlanV001({samples: recipe.samples,
       sceneBindings: recipe.sceneBindings, directory: path.join(work, 'layers'), canvas: plan.canvas});
     const referenceDirectory = path.join(work, 'references');
+    const samples = [], sampleMeasurements = [];
+    progress = {schemaVersion: 'native-frame-qc-interrupted-v001', status: 'incomplete', workDirectory: work,
+      inputManifest: manifest, expectedSampleCount: recipe.samples.length, nextSampleIndex: 0,
+      currentSample: null, sceneBindings: recipe.sceneBindings, frameExtraction, nativeLayers,
+      referenceDirectory, completedSamples: samples, sampleMeasurements, outputArtifacts};
     await mkdir(referenceDirectory);
     await mkdir(nativeLayers.directory);
     const version = {};
@@ -888,7 +901,13 @@ export async function inspectPresentationNativeFrameQcV001({
         await mkdir(path.dirname(pattern), {recursive: true});
       if (frameExtraction.frames.length > 0) {
         const frames = frameExtraction.frames.map(row => row.mediaFrame);
+        await beforeHeavyBatch({phase: 'source-frames-extract', directory: path.dirname(frameExtraction.baseOutputPattern),
+          outputPaths: frameExtraction.frames.map(row => row.basePath), outputCount: frames.length, plannedLogicalBytes: null,
+          byteMeaning: 'Compressed PNG sizes are unknown before extraction'});
         await run(tools.ffmpeg.path, frameExtractionArguments(media.base.path, frames, frameExtraction.baseOutputPattern), 'source-frames-extract');
+        await beforeHeavyBatch({phase: 'completed-frames-extract', directory: path.dirname(frameExtraction.completedOutputPattern),
+          outputPaths: frameExtraction.frames.map(row => row.completedPath), outputCount: frames.length, plannedLogicalBytes: null,
+          byteMeaning: 'Compressed PNG sizes are unknown before extraction'});
         await run(tools.ffmpeg.path, frameExtractionArguments(media.completed.path, frames, frameExtraction.completedOutputPattern), 'completed-frames-extract');
       }
       for (const row of await readPresentationNativeFrameBatchOutputsV001(frameExtraction)) {
@@ -904,6 +923,9 @@ export async function inspectPresentationNativeFrameQcV001({
         groups.get(layer.sourceSha256).push(layer);
       }
       for (const layers of groups.values()) {
+        await beforeHeavyBatch({phase: 'native-layer-prepare', directory: nativeLayers.directory,
+          outputPaths: layers.map(row => row.outputPath), outputCount: layers.length, plannedLogicalBytes: null,
+          byteMeaning: 'Compressed faded PNG sizes are unknown before preparation'});
         await run(tools.ffmpeg.path, buildPresentationNativeLayerArgumentsV001(layers), 'native-layer-prepare');
         for (const layer of layers) {
           outputArtifacts.push({path: layer.outputPath, fileSha256: hashBytes(await readFile(layer.outputPath))});
@@ -925,6 +947,10 @@ export async function inspectPresentationNativeFrameQcV001({
         groups.get(layer.sourceSha256).push(layer);
       }
       for (const layers of groups.values()) {
+        await beforeHeavyBatch({phase: 'native-layer-decode', directory: nativeLayers.directory,
+          outputPaths: layers.map(row => row.decodedPath), outputCount: layers.length,
+          plannedLogicalBytes: layers.reduce((sum, row) => sum + row.width * row.height * 4, 0),
+          byteMeaning: 'Exact full-canvas GBRAP bytes; excludes filesystem allocation and process memory'});
         await run(tools.ffmpeg.path, buildPresentationNativeLayerDecodeArgumentsV001(layers), 'native-layer-decode');
         for (const layer of layers) {
           const decoded = await readFile(layer.decodedPath);
@@ -934,15 +960,21 @@ export async function inspectPresentationNativeFrameQcV001({
         }
       }
     });
-    const samples = [], sampleMeasurements = [];
     const preparedArtifacts = [...outputArtifacts];
     let retainedReferenceBytes = 0, peakReferenceBytes = 0;
     for (const [sampleIndex, recipeSample] of recipe.samples.entries()) {
       const frames = extracted.get(recipeSample.frame);
       requireValue(frames, 'a required sample frame was not extracted');
+      const sampleDirectory = path.join(referenceDirectory, 'sample-' + sampleIndex);
+      progress.currentSample = {sampleIndex, instructionId: recipeSample.instructionId, frame: recipeSample.frame,
+        directory: sampleDirectory};
+      await beforeHeavyBatch({...progress.currentSample, phase: 'native-sample-start',
+        outputCount: 0, outputPaths: [], plannedLogicalBytes: 0,
+        byteMeaning: 'Boundary before the next sample; this callback itself creates no media',
+        retainedReferenceLogicalBytes: retainedReferenceBytes});
       const result = await processPresentationNativeSampleV001({sample: {...recipeSample, ...frames},
         sceneBindings: recipe.sceneBindings, nativeLayers, preparedArtifacts, tools, run,
-        directory: path.join(referenceDirectory, 'sample-' + sampleIndex),
+        directory: sampleDirectory, sampleIndex, executionControl,
         batchSize: referenceBatchSize, retention: referenceRetention});
       samples.push(result.sample); outputArtifacts.push(...result.outputArtifacts);
       sampleMeasurements.push(result.metrics);
@@ -953,6 +985,14 @@ export async function inspectPresentationNativeFrameQcV001({
         'exactDistanceCalculations', 'reusedExactDistances']) counts[key] += result.metrics[key];
       for (const [key, value] of Object.entries(result.metrics.phasesMilliseconds))
         phasesMilliseconds[key] = (phasesMilliseconds[key] ?? 0) + value;
+      Object.assign(counts, {peakReferenceBytes, retainedReferenceBytes});
+      progress.nextSampleIndex = sampleIndex + 1;
+      progress.currentSample = null;
+      if (executionControl?.afterSample) await executionControl.afterSample(clone({phase: 'native-sample-complete',
+        sampleIndex, instructionId: result.sample.instructionId, frame: result.sample.frame, directory: sampleDirectory,
+        visible: result.sample.visible, referenceRetention: result.sample.referenceRetention,
+        metrics: result.metrics, outputArtifacts: result.outputArtifacts, completedSampleCount: samples.length,
+        retainedReferenceLogicalBytes: retainedReferenceBytes, peakReferenceLogicalBytes: peakReferenceBytes}));
     }
     Object.assign(counts, {peakReferenceBytes, retainedReferenceBytes});
     await timed('verification', async () => {
@@ -989,6 +1029,20 @@ export async function inspectPresentationNativeFrameQcV001({
       performance: performanceRecord()};
   } catch (error) {
     error.nativeFrameQcFailure = {inputManifest: manifest ?? null, processes, performance: performanceRecord()};
+    if (executionControl !== null && progress !== null) {
+      const interruptedPath = path.join(progress.workDirectory, 'interrupted-native-qc.json');
+      try {
+        const saved = await writePresentationQcEvidenceV001(interruptedPath, {...progress, reason: error.message,
+          sampleFailure: error.nativeSampleFailure ?? null, processes, performance: performanceRecord()});
+        error.nativeFrameQcFailure.interrupted = {path: interruptedPath, fileSha256: saved.fileSha256,
+          bytes: saved.bytes, completedSampleCount: progress.completedSamples.length,
+          nextSampleIndex: progress.nextSampleIndex, currentSample: progress.currentSample};
+      } catch (recordError) {
+        error.nativeFrameQcFailure.interrupted = {path: interruptedPath, recordWriteError: recordError.message,
+          completedSampleCount: progress.completedSamples.length, nextSampleIndex: progress.nextSampleIndex,
+          currentSample: progress.currentSample};
+      }
+    }
     throw error;
   }
 }

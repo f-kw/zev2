@@ -1,0 +1,461 @@
+TAP version 13
+# Subtest: awaited generation boundaries and completed receipts preserve unguarded native decisions and bytes
+ok 1 - awaited generation boundaries and completed receipts preserve unguarded native decisions and bytes
+  ---
+  duration_ms: 1300.075917
+  ...
+# Subtest: a guard refusal before any large preparation command preserves incomplete evidence without executing that batch
+ok 2 - a guard refusal before any large preparation command preserves incomplete evidence without executing that batch
+  ---
+  duration_ms: 388.446375
+  ...
+# Subtest: refusal before a later reference batch retains completed RGB, earlier batch outputs and incomplete point evidence
+ok 3 - refusal before a later reference batch retains completed RGB, earlier batch outputs and incomplete point evidence
+  ---
+  duration_ms: 278.270458
+  ...
+# Subtest: a completed-point guard failure preserves its verified receipt and does not start the next point
+ok 4 - a completed-point guard failure preserves its verified receipt and does not start the next point
+  ---
+  duration_ms: 290.749166
+  ...
+# Subtest: failed point observation follows complete proof preservation and reports actual retained reference sizes
+ok 5 - failed point observation follows complete proof preservation and reports actual retained reference sizes
+  ---
+  duration_ms: 354.263875
+  ...
+# Subtest: diagnostic alternatives retain the saved decisions and distinguish partial-color overpaint, plate loss and absent scale
+ok 6 - diagnostic alternatives retain the saved decisions and distinguish partial-color overpaint, plate loss and absent scale
+  ---
+  duration_ms: 5.414375
+  ...
+# Subtest: an altered current plan cannot nominate its own expected reference
+ok 7 - an altered current plan cannot nominate its own expected reference
+  ---
+  duration_ms: 1.240584
+  ...
+# Subtest: unsupported timelines and positions require an explicit encoded oracle, with no fast fallback
+ok 8 - unsupported timelines and positions require an explicit encoded oracle, with no fast fallback
+  ---
+  duration_ms: 0.655792
+  ...
+# Subtest: reference preparation binds source bytes, renders diagnostic states twice and reuses only the identical normal state
+ok 9 - reference preparation binds source bytes, renders diagnostic states twice and reuses only the identical normal state
+  ---
+  duration_ms: 24.790625
+  ...
+# Subtest: changed baseline bytes are rejected before any diagnostic draw
+ok 10 - changed baseline bytes are rejected before any diagnostic draw
+  ---
+  duration_ms: 2.9205
+  ...
+# Subtest: a native adapter that mutates the expected properties is rejected
+ok 11 - a native adapter that mutates the expected properties is rejected
+  ---
+  duration_ms: 42.879917
+  ...
+# Subtest: changed production PNG bytes cannot be treated as normal-state reuse
+ok 12 - changed production PNG bytes cannot be treated as normal-state reuse
+  ---
+  duration_ms: 8.486417
+  ...
+# Subtest: diagnostic PNG modification during inspection is rejected before preparation succeeds
+ok 13 - diagnostic PNG modification during inspection is rejected before preparation succeeds
+  ---
+  duration_ms: 23.681666
+  ...
+# Subtest: saved expected plan modification during drawing is rejected before preparation succeeds
+ok 14 - saved expected plan modification during drawing is rejected before preparation succeeds
+  ---
+  duration_ms: 12.192458
+  ...
+# Subtest: Pulse evidence cannot disappear from records while the fixed plan still requires it
+ok 15 - Pulse evidence cannot disappear from records while the fixed plan still requires it
+  ---
+  duration_ms: 4.3365
+  ...
+# Subtest: ordinary records cannot acquire an unrequested Pulse state array
+ok 16 - ordinary records cannot acquire an unrequested Pulse state array
+  ---
+  duration_ms: 3.528917
+  ...
+# Subtest: bounce preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing
+ok 17 - bounce preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing
+  ---
+  duration_ms: 14.36125
+  ...
+# Subtest: bounce preparation rejects omitted states and altered production bytes before drawing
+ok 18 - bounce preparation rejects omitted states and altered production bytes before drawing
+  ---
+  duration_ms: 10.597667
+  ...
+# Subtest: shake preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing
+ok 19 - shake preparation binds every production PNG and reuses the exact stable caption without new diagnostic drawing
+  ---
+  duration_ms: 12.595292
+  ...
+# Subtest: shake preparation rejects omitted states and altered production bytes before drawing
+ok 20 - shake preparation rejects omitted states and altered production bytes before drawing
+  ---
+  duration_ms: 14.008625
+  ...
+# Subtest: ordinary records cannot acquire an unrequested motion state array
+ok 21 - ordinary records cannot acquire an unrequested motion state array
+  ---
+  duration_ms: 4.490417
+  ...
+# Subtest: verified Panel centering calibration is reobserved and retained when only diagnostic plate paint is removed
+ok 22 - verified Panel centering calibration is reobserved and retained when only diagnostic plate paint is removed
+  ---
+  duration_ms: 16.135125
+  ...
+# Subtest: changed centering correction is rejected even if production PNG and inspection hashes match the changed props
+ok 23 - changed centering correction is rejected even if production PNG and inspection hashes match the changed props
+  ---
+  duration_ms: 6.472125
+  ...
+# Subtest: missing, replaced or wrongly hashed calibration mask is rejected before diagnostic drawing
+ok 24 - missing, replaced or wrongly hashed calibration mask is rejected before diagnostic drawing
+  ---
+  duration_ms: 12.788083
+  ...
+# Subtest: calibration for other uncorrected props and invented observed bounds cannot authorize correction
+ok 25 - calibration for other uncorrected props and invented observed bounds cannot authorize correction
+  ---
+  duration_ms: 8.585834
+  ...
+# Subtest: calibration is neither optional for corrected props nor allowed without correction or on ordinary captions
+ok 26 - calibration is neither optional for corrected props nor allowed without correction or on ordinary captions
+  ---
+  duration_ms: 15.314084
+  ...
+# Subtest: centering container cannot move in lockstep with correction and matching production hashes
+ok 27 - centering container cannot move in lockstep with correction and matching production hashes
+  ---
+  duration_ms: 3.918167
+  ...
+# Subtest: corrected captions require independent layout observation with no self-declared-container fallback
+ok 28 - corrected captions require independent layout observation with no self-declared-container fallback
+  ---
+  duration_ms: 4.019292
+  ...
+# Subtest: failed, incomplete, misidentified or geometrically different layout observations reject calibration
+ok 29 - failed, incomplete, misidentified or geometrically different layout observations reject calibration
+  ---
+  duration_ms: 23.580125
+  ...
+# Subtest: the fixed recipe includes every caption and all moving Pulse frames without caller-selected samples
+ok 30 - the fixed recipe includes every caption and all moving Pulse frames without caller-selected samples
+  ---
+  duration_ms: 13.338292
+  ...
+# Subtest: mandatory Color/Panel/Normal references and their drawing conditions cannot be silently omitted
+ok 31 - mandatory Color/Panel/Normal references and their drawing conditions cannot be silently omitted
+  ---
+  duration_ms: 19.9785
+  ...
+# Subtest: a partial selection that covers the whole caption still gets the resolver-required duplicate alternative
+ok 32 - a partial selection that covers the whole caption still gets the resolver-required duplicate alternative
+  ---
+  duration_ms: 6.781542
+  ...
+# Subtest: foreign references occupy the target clock and candidate bounds, not the inactive caption clock or corrupted frame bounds
+ok 33 - foreign references occupy the target clock and candidate bounds, not the inactive caption clock or corrupted frame bounds
+  ---
+  duration_ms: 24.422625
+  ...
+# Subtest: simultaneous captions retain their own fades and receive a real pair-order alternative
+ok 34 - simultaneous captions retain their own fades and receive a real pair-order alternative
+  ---
+  duration_ms: 13.401583
+  ...
+# Subtest: exact pixel classes permit a Normal alias but reject target absence and an unequal-image tie
+ok 35 - exact pixel classes permit a Normal alias but reject target absence and an unequal-image tie
+  ---
+  duration_ms: 0.507958
+  ...
+# Subtest: whole-caption overpaint and foreign pixels need adversarial references even without empirical thresholds
+ok 36 - whole-caption overpaint and foreign pixels need adversarial references even without empirical thresholds
+  ---
+  duration_ms: 0.155459
+  ...
+# Subtest: the pure validator accepts complete synthetic evidence and independently rejects material evidence tampering
+ok 37 - the pure validator accepts complete synthetic evidence and independently rejects material evidence tampering
+  ---
+  duration_ms: 64.939375
+  ...
+# Subtest: bounce native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+ok 38 - bounce native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+  ---
+  duration_ms: 8.316584
+  ...
+# Subtest: bounce rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+ok 39 - bounce rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+  ---
+  duration_ms: 52.346416
+  ...
+# Subtest: shake native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+ok 40 - shake native recipe covers every entrance frame and stable visibility with every wrong state as an adversary
+  ---
+  duration_ms: 7.192375
+  ...
+# Subtest: shake rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+ok 41 - shake rejects a missing, reordered or mixed native state set and missing entrance/stable observations
+  ---
+  duration_ms: 52.804333
+  ...
+# Subtest: published PNGs use an explicit rename binding; another process rereads and regenerates released pass and retained failure
+ok 42 - published PNGs use an explicit rename binding; another process rereads and regenerates released pass and retained failure
+  ---
+  duration_ms: 652.621291
+  ...
+# Subtest: published mappings reject omissions, duplicates, foreign roots/identities and replaced or missing files
+ok 43 - published mappings reject omissions, duplicates, foreign roots/identities and replaced or missing files
+  ---
+  duration_ms: 143.434709
+  ...
+# Subtest: retained and released passing samples keep every candidate, then a separate Node regenerates byte-identical evidence
+ok 44 - retained and released passing samples keep every candidate, then a separate Node regenerates byte-identical evidence
+  ---
+  duration_ms: 343.60475
+  ...
+# Subtest: a failed sample retains all references even when passing-sample release is requested
+ok 45 - a failed sample retains all references even when passing-sample release is requested
+  ---
+  duration_ms: 133.387875
+  ...
+# Subtest: unknown state, modified observation, changed or missing checkpoint are rejected without regeneration
+ok 46 - unknown state, modified observation, changed or missing checkpoint are rejected without regeneration
+  ---
+  duration_ms: 133.619041
+  ...
+# Subtest: changed and missing inputs or retained references cannot be accepted from saved pass flags
+ok 47 - changed and missing inputs or retained references cannot be accepted from saved pass flags
+  ---
+  duration_ms: 150.330375
+  ...
+# Subtest: released references must remain absent, and a forged released failed sample is rejected
+ok 48 - released references must remain absent, and a forged released failed sample is rejected
+  ---
+  duration_ms: 134.859458
+  ...
+# Subtest: a storage failure keeps actual references and incomplete diagnostics, without claiming cleanup success
+ok 49 - a storage failure keeps actual references and incomplete diagnostics, without claiming cleanup success
+  ---
+  duration_ms: 128.176
+  ...
+# Subtest: failed child, missing child output and cancellation preserve diagnostic artifacts and never return success
+ok 50 - failed child, missing child output and cancellation preserve diagnostic artifacts and never return success
+  ---
+  duration_ms: 180.237584
+  ...
+# Subtest: missing or changed historical process evidence is rejected even when the modified checkpoint has a new valid file SHA
+ok 51 - missing or changed historical process evidence is rejected even when the modified checkpoint has a new valid file SHA
+  ---
+  duration_ms: 133.2385
+  ...
+# Subtest: an existing output directory and unknown retention policy cannot overwrite earlier files
+ok 52 - an existing output directory and unknown retention policy cannot overwrite earlier files
+  ---
+  duration_ms: 85.8685
+  ...
+# Subtest: receipt verification checks retained bytes on every call and distinguishes intentionally released references
+ok 53 - receipt verification checks retained bytes on every call and distinguishes intentionally released references
+  ---
+  duration_ms: 180.434958
+  ...
+# Subtest: missing or incorrect prepared-plane bindings cannot produce a releasable receipt
+ok 54 - missing or incorrect prepared-plane bindings cannot produce a releasable receipt
+  ---
+  duration_ms: 161.782541
+  ...
+# Subtest: every required code binding must survive receipt reading and independent revalidation even after checkpoint SHA rebinding
+ok 55 - every required code binding must survive receipt reading and independent revalidation even after checkpoint SHA rebinding
+  ---
+  duration_ms: 356.635833
+  ...
+# Subtest: normal native inspector feeds shared storage, a separate reader and combined exact-replay QC
+    # Subtest: new replay explicitly carries original fixed-input bytes under schema v002
+    ok 1 - new replay explicitly carries original fixed-input bytes under schema v002
+      ---
+      duration_ms: 1.1455
+      ...
+    # Subtest: historical schema v001 still enforces its original exact byte rule
+    ok 2 - historical schema v001 still enforces its original exact byte rule
+      ---
+      duration_ms: 1.189459
+      ...
+    # Subtest: approved baseline reproduces the pre-existing nested-key-order reload defect
+    ok 3 - approved baseline reproduces the pre-existing nested-key-order reload defect
+      ---
+      duration_ms: 20.900584
+      ...
+    # Subtest: v002 keeps the raw artifact binding after all nested object keys are reordered
+    ok 4 - v002 keeps the raw artifact binding after all nested object keys are reordered
+      ---
+      duration_ms: 1.466084
+      ...
+    # Subtest: missing original text is rejected
+    ok 5 - missing original text is rejected
+      ---
+      duration_ms: 1.049167
+      ...
+    # Subtest: null original text is rejected
+    ok 6 - null original text is rejected
+      ---
+      duration_ms: 0.782
+      ...
+    # Subtest: object in place of original text is rejected
+    ok 7 - object in place of original text is rejected
+      ---
+      duration_ms: 1.09125
+      ...
+    # Subtest: unpaired surrogate in original text is rejected
+    ok 8 - unpaired surrogate in original text is rejected
+      ---
+      duration_ms: 0.756334
+      ...
+    # Subtest: empty original text is rejected
+    ok 9 - empty original text is rejected
+      ---
+      duration_ms: 0.814875
+      ...
+    # Subtest: truncated original text is rejected
+    ok 10 - truncated original text is rejected
+      ---
+      duration_ms: 0.738
+      ...
+    # Subtest: whitespace changed without artifact rebinding is rejected
+    ok 11 - whitespace changed without artifact rebinding is rejected
+      ---
+      duration_ms: 0.680875
+      ...
+    # Subtest: unknown proof version is rejected
+    ok 12 - unknown proof version is rejected
+      ---
+      duration_ms: 0.18075
+      ...
+    # Subtest: v001 mislabeled with v002 raw text is rejected
+    ok 13 - v001 mislabeled with v002 raw text is rejected
+      ---
+      duration_ms: 0.795916
+      ...
+    # Subtest: fixed input artifact SHA changed is rejected
+    ok 14 - fixed input artifact SHA changed is rejected
+      ---
+      duration_ms: 0.642958
+      ...
+    # Subtest: fixed input artifact byte count changed is rejected
+    ok 15 - fixed input artifact byte count changed is rejected
+      ---
+      duration_ms: 0.577083
+      ...
+    # Subtest: fixed input artifact missing is rejected
+    ok 16 - fixed input artifact missing is rejected
+      ---
+      duration_ms: 0.677125
+      ...
+    # Subtest: raw caption changed even with forged artifact hash is rejected
+    ok 17 - raw caption changed even with forged artifact hash is rejected
+      ---
+      duration_ms: 0.831416
+      ...
+    # Subtest: raw clock changed even with forged artifact hash is rejected
+    ok 18 - raw clock changed even with forged artifact hash is rejected
+      ---
+      duration_ms: 0.955833
+      ...
+    # Subtest: raw image binding changed even with forged artifact hash is rejected
+    ok 19 - raw image binding changed even with forged artifact hash is rejected
+      ---
+      duration_ms: 1.114542
+      ...
+    # Subtest: raw compositor changed even with forged artifact hash is rejected
+    ok 20 - raw compositor changed even with forged artifact hash is rejected
+      ---
+      duration_ms: 0.866583
+      ...
+    # Subtest: raw input field removed even with forged artifact hash is rejected
+    ok 21 - raw input field removed even with forged artifact hash is rejected
+      ---
+      duration_ms: 0.731959
+      ...
+    # Subtest: extra raw input field even with forged artifact hash is rejected
+    ok 22 - extra raw input field even with forged artifact hash is rejected
+      ---
+      duration_ms: 0.708542
+      ...
+    1..22
+ok 56 - normal native inspector feeds shared storage, a separate reader and combined exact-replay QC
+  ---
+  duration_ms: 1233.672208
+  ...
+# Subtest: real missing, foreign, double and shifted captions preserve old candidate bytes, distances, classes and failures
+ok 57 - real missing, foreign, double and shifted captions preserve old candidate bytes, distances, classes and failures
+  ---
+  duration_ms: 3119.190666
+  ...
+# Subtest: normal inspector rejects a missing, substituted or changed native input before invoking a child
+ok 58 - normal inspector rejects a missing, substituted or changed native input before invoking a child
+  ---
+  duration_ms: 91.685792
+  ...
+# Subtest: valid JSON envelope preserves every observation while common objects are restored once
+ok 59 - valid JSON envelope preserves every observation while common objects are restored once
+  ---
+  duration_ms: 8.585208
+  ...
+# Subtest: a separate Node process preserves shared identity and the existing RGB classifier result
+ok 60 - a separate Node process preserves shared identity and the existing RGB classifier result
+  ---
+  duration_ms: 91.721417
+  ...
+# Subtest: large expanded common data never becomes a multi-gigabyte string, including in a fresh reader
+ok 61 - large expanded common data never becomes a multi-gigabyte string, including in a fresh reader
+  ---
+  duration_ms: 78.932041
+  ...
+# Subtest: common content, common SHA and inspection-specific tampering are rejected
+ok 62 - common content, common SHA and inspection-specific tampering are rejected
+  ---
+  duration_ms: 6.432708
+  ...
+# Subtest: missing common, missing inspection, invalid references and unknown schema are rejected
+ok 63 - missing common, missing inspection, invalid references and unknown schema are rejected
+  ---
+  duration_ms: 9.109625
+  ...
+# Subtest: file binding detects re-serialized transport bytes and refuses existing-file overwrite
+ok 64 - file binding detects re-serialized transport bytes and refuses existing-file overwrite
+  ---
+  duration_ms: 4.235875
+  ...
+# Subtest: literal reference-like keys, prototype-like keys and existing JSON undefined semantics are retained
+ok 65 - literal reference-like keys, prototype-like keys and existing JSON undefined semantics are retained
+  ---
+  duration_ms: 1.457542
+  ...
+# Subtest: cycles and non-JSON values fail without silently changing the evidence
+ok 66 - cycles and non-JSON values fail without silently changing the evidence
+  ---
+  duration_ms: 1.351417
+  ...
+# Subtest: saved 431-caption candidate keeps every native recipe, true Normal alternatives and its source binding through preparation and reread
+ok 67 - saved 431-caption candidate keeps every native recipe, true Normal alternatives and its source binding through preparation and reread
+  ---
+  duration_ms: 8526.405875
+  ...
+# Subtest: candidate QC preserves correct/omitted/wrong-state/duplicate/shift decisions through common storage and independent reread
+ok 68 - candidate QC preserves correct/omitted/wrong-state/duplicate/shift decisions through common storage and independent reread
+  ---
+  duration_ms: 1084.986459
+  ...
+1..68
+# tests 90
+# suites 0
+# pass 90
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9698.557

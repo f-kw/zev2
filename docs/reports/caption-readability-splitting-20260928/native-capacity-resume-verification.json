@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "caption-readability-native-capacity-resume-verification-v001",
+  "status": "small-tests-passed",
+  "observedAt": "2026-09-28T15:35:54.211Z",
+  "scope": "7A continuation mechanics; full candidate execution pending",
+  "approvedCapacity": {
+    "scope": "7A-full-candidate-only",
+    "approvalCommit": "6319689500949c5090aae0ab7aa9cb688cc2c2b3",
+    "nativeStartMinimumFreeBytes": 28680038400,
+    "includedReserveBytes": 12000000000,
+    "nativeHardFloorBytes": 10000000000
+  },
+  "testEvidence": [
+    "native-execution-control-tests.tap",
+    "before-native-resume-target-tests.tap",
+    "before-native-resume-renderer-regression.tap"
+  ],
+  "mediaProbe": {
+    "status": "passed",
+    "scope": "one caption, 30 frames; full Digest not verified",
+    "checkpointRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-resume-test-jCpkn8/body-attempt/before-native-checkpoint.json",
+      "bytes": 63761,
+      "fileSha256": "1aac86960aad1d81f006fc0a78c3d850ff0df9a013d915ccfa4c7e5831171729"
+    },
+    "finalQc": "passed",
+    "media": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-caption-readability-native-resume-test-jCpkn8/output/presentation-rendered-v002.mp4",
+      "bytes": 461597,
+      "fileSha256": "b939745ae2480ef17baa403471d64d027f3eecccc4a5d1d67a0f2150ac7c76ee"
+    },
+    "reusedBodySha256": "b939745ae2480ef17baa403471d64d027f3eecccc4a5d1d67a0f2150ac7c76ee",
+    "replayRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-caption-readability-native-resume-test-jCpkn8/.output.presentation-renderer-v002-work-yqKQyZ/scratch/exact-replay-result.json",
+      "bytes": 106788,
+      "fileSha256": "9fb3db64603373e6d3e63d008b45b9eca3258f4a328c0d49fb35d2ee0a81ce77"
+    },
+    "newBodyEncodesOnResume": 0,
+    "newReplayEncodesOnResume": 0,
+    "elapsedSeconds": 50.819,
+    "sourceVerificationPath": "runtime/artifacts/caption-readability-native-resume-test-jCpkn8/verification.json"
+  },
+  "wholeDigestPixelQc": "not-yet-executed",
+  "productionDefaultChanged": false,
+  "tests": {
+    "nativeControls": {
+      "passed": 90,
+      "failed": 0
+    },
+    "capacityBoundaries": {
+      "passed": 5,
+      "failed": 0
+    },
+    "savedResumeAndRelated": {
+      "passed": 66,
+      "failed": 0
+    },
+    "realMedia": {
+      "passed": 1,
+      "failed": 0
+    },
+    "additionalRenderer": {
+      "passed": 13,
+      "failed": 8,
+      "knownCauses": "unchanged formal trust mismatches (7), previously recorded completed-frame fixture mismatch (1)"
+    },
+    "countsMeaning": "Separate suites; overlapping regressions are not added into a total"
+  }
+}

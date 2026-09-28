@@ -16,14 +16,14 @@ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {resolvePresentationEffectsV001, buildPresentationTimelineFiltersV001} from './presentation_effects_v001.mjs';
 import {resolveAutoPresentationV001} from './presentation_auto_effects_v001.mjs';
 import {isPresentationPanelBackgroundV002} from './presentation_panel_presets_v002.mjs';
-import {assertOrchestrationDrawingViewV001, exportOrchestrationDrawingViewEvidenceV001}
+import {assertOrchestrationDrawingViewV001, exportOrchestrationDrawingViewEvidenceV001, restoreOrchestrationDrawingViewEvidenceV001}
   from './presentation_orchestration_v001.mjs';
 import {preparePresentationNativeFrameQcV001, buildPresentationNativeQcAlternativeElementsV001}
   from './presentation_native_frame_qc_preparation_v001.mjs';
 import {inspectPresentationNativeFrameQcV001} from './presentation_native_frame_qc_v001.mjs';
 import {inspectPresentationEncodedOmissionQcV002,
   PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002} from './presentation_encoded_omission_qc_v002.mjs';
-import {inspectPresentationExactReplayQcV001} from './presentation_exact_replay_qc_v001.mjs';
+import {inspectPresentationExactReplayQcV001, validatePresentationExactReplayQcEvidenceV001} from './presentation_exact_replay_qc_v001.mjs';
 import {combinePresentationIntegrityStateQcV001,
   PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001, PRESENTATION_INTEGRITY_STATE_QC_SCHEMA_V001}
   from './presentation_integrity_state_qc_v001.mjs';
@@ -1750,6 +1750,8 @@ const processFailure = (stage, error, cleanupWarnings = []) => {
       status: 'process_failed',
       stage,
       message: error instanceof Error ? error.message : String(error),
+      ...(typeof error?.code === 'string' ? {code: error.code} : {}),
+      ...(error?.capacityObservation === undefined ? {} : {capacityObservation: error.capacityObservation}),
       ...(error?.completedFrameQcFailure === undefined ? {} : {nested: error.completedFrameQcFailure}),
       ...(cleanupWarnings.length === 0 ? {} : {cleanupWarnings}),
     },
@@ -1843,6 +1845,7 @@ export async function inspectPresentationCompletedFrameQcV001({
   processObserver = null, serializePngAndFilters = false,
   presentationTimeline = null, timelineAudio = null,
   counterfactualQcMethod, orchestrationDrawingView, audioMediaPath = null, renderRange = null,
+  savedExactReplayRef = null, nativeQcExecutionControl, onReplaySaved,
 }) {
   if (!['encoded', 'native', PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002,
     PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001].includes(counterfactualQcMethod)) {
@@ -1888,14 +1891,20 @@ export async function inspectPresentationCompletedFrameQcV001({
               : {startFrame: renderRange.startFrame, endFrameExclusive: renderRange.endFrameExclusive}).normalPlan, plan,
           autoPresentation, presentationTimeline, orchestrationDrawingView, renderRange});
         phase = 'exact-replay';
-        replay = await inspectPresentationExactReplayQcV001({plan, records: overlayRecords,
-          baseMediaPath, completedMediaPath, expectedFrameCount,
-          scratchDirectory: path.join(scratchDirectory, 'exact-replay-qc'), ffmpegPath,
-          ffprobePath: await nativeQcExecutable(toolPaths.ffprobePath), processObserver,
-          serializePngAndFilters, presentationTimeline, timelineAudio, audioMediaPath, renderRange});
-        phase = 'save-exact-replay-proof';
-        await writeFile(path.join(scratchDirectory, 'exact-replay-result.json'),
-          JSON.stringify(replay, null, 2) + '\n', {flag: 'wx'});
+        if (savedExactReplayRef === null) {
+          replay = await inspectPresentationExactReplayQcV001({plan, records: overlayRecords,
+            baseMediaPath, completedMediaPath, expectedFrameCount,
+            scratchDirectory: path.join(scratchDirectory, 'exact-replay-qc'), ffmpegPath,
+            ffprobePath: await nativeQcExecutable(toolPaths.ffprobePath), processObserver,
+            serializePngAndFilters, presentationTimeline, timelineAudio, audioMediaPath, renderRange});
+          phase = 'save-exact-replay-proof';
+          const replayPath = path.join(scratchDirectory, 'exact-replay-result.json');
+          await writeFile(replayPath, JSON.stringify(replay, null, 2) + '\n', {flag: 'wx'});
+          savedExactReplayRef = await bindPresentationResumeFileV001(replayPath);
+        } else {
+          replay = await readVerifiedPresentationReplayV001({ref: savedExactReplayRef, plan, records: overlayRecords,
+            expectedFrameCount, completedMediaPath, renderRange});
+        }
         if (replay.status !== 'passed') return {method: counterfactualQcMethod,
           status: 'failed', violations: replay.violations,
           inspections: overlayRecords.map(record => record.inspection),
@@ -1903,6 +1912,12 @@ export async function inspectPresentationCompletedFrameQcV001({
             method: counterfactualQcMethod, exactReplay: replay.evidence, finiteState: null},
           performance: {wallClockMs: performance.now() - started,
             exactReplay: replay.performance, finiteStateExecuted: false}};
+      }
+      if (onReplaySaved !== undefined) await onReplaySaved({replayRef: savedExactReplayRef, replay});
+      if (nativeQcExecutionControl?.beforeStart !== undefined) {
+        phase = 'native-capacity-gate';
+        await nativeQcExecutionControl.beforeStart({phase: 'before-native', replayRef: savedExactReplayRef,
+          completedMediaPath, scratchDirectory, expectedFrameCount});
       }
       const finiteStarted = performance.now();
       phase = 'native-preparation';
@@ -1940,6 +1955,8 @@ export async function inspectPresentationCompletedFrameQcV001({
         },
         scratchDirectory: path.join(scratchDirectory, 'native-frame-qc'), processObserver,
         referenceRetention: 'verified-pass-regenerable-v001',
+        executionControl: nativeQcExecutionControl === undefined ? undefined : {
+          beforeHeavyBatch: nativeQcExecutionControl.beforeHeavyBatch, afterSample: nativeQcExecutionControl.afterSample},
       });
       if (!Array.isArray(native.inspections) || native.inspections.length !== records.length
         || native.inspections.some((inspection, index) => inspection.instructionId !== records[index].element.instructionId)) {
@@ -2077,6 +2094,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
   orchestrationBackground = undefined,
   renderRange = null,
   onProgress = () => {},
+  nativeQcExecutionControl,
+  onBeforeNativeCheckpoint,
   baseTimeline,
   runCounterfactualQc = true,
   counterfactualQcMethod,
@@ -2535,6 +2554,159 @@ export async function executeValidatedPresentationDrawAndQcV001({
       );
     }
 
+    return await finishPresentationDrawAndQcV001({
+      state: {outputDirectory, reservation, workDirectory, stagingDirectory, scratchDirectory, cleanupWarnings,
+        overlayRecords, applicationResults, baseExpectedAudio, completedExpectedAudio, outputMedia, workVideo,
+        plan, expectedFrameCount, presentationTimeline, timelineAudio, baseMediaPath, serializePngAndFilters,
+        autoPresentationResolution, autoPresentationInputs, autoPresentation, runCounterfactualQc,
+        counterfactualQcMethod, orchestrationBackground, audioMediaPath, renderRange,
+        ...(orchestrationDrawingView === undefined ? {} : {
+          orchestrationInput: exportOrchestrationDrawingViewEvidenceV001(orchestrationDrawingView)})},
+      orchestrationDrawingView, orchestrationScope, presetRegistry, overlayAdapter, toolPaths,
+      processObserver, evaluateQc, onProgress, nativeQcExecutionControl, onBeforeNativeCheckpoint});
+  } catch (error) {
+    const rendererCode = error?.rendererViolationCode;
+    if (rendererCode) {
+      const outputSafetyCode = rendererCode.startsWith('RENDER_OUTPUT_');
+      return contractFailure(
+        [makeViolation(rendererCode, outputSafetyCode ? '$.outputDirectory' : '$render')],
+        outputSafetyCode ? 'publish' : 'overlay-render',
+        error.completedFrameQcFailure,
+        cleanupWarnings,
+      );
+    }
+    return processFailure('execution', error, cleanupWarnings);
+  }
+}
+
+const requireResume = (condition, message) => {if (!condition) throw new TypeError('saved draw resume: ' + message);};
+async function bindPresentationResumeFileV001(file) {
+  const metadata = await lstat(file);
+  requireResume(metadata.isFile() && !metadata.isSymbolicLink(), 'reference must be a regular file');
+  return {path: path.resolve(file), bytes: metadata.size, fileSha256: await fileSha256V002(file)};
+}
+async function verifyPresentationResumeRefV001(ref) {
+  requireResume(path.isAbsolute(ref?.path ?? '') && /^[a-f0-9]{64}$/.test(ref.fileSha256 ?? ''), 'invalid file reference');
+  const actual = await bindPresentationResumeFileV001(ref.path);
+  requireResume(actual.fileSha256 === ref.fileSha256
+    && (ref.bytes === undefined || actual.bytes === ref.bytes)
+    && (ref.realPath === undefined || await realpath(ref.path) === ref.realPath), 'saved file changed: ' + ref.path);
+}
+async function readVerifiedPresentationReplayV001({ref, plan, records, expectedFrameCount, completedMediaPath, renderRange}) {
+  await verifyPresentationResumeRefV001(ref);
+  const replay = await readJson(ref.path);
+  requireResume(replay.status === 'passed' && replay.violations?.length === 0, 'full replay is not complete and passed');
+  const currentCompletedMediaRef = await bindPresentationResumeFileV001(completedMediaPath);
+  const validation = validatePresentationExactReplayQcEvidenceV001({plan, evidence: replay.evidence,
+    expectedFrameCount, currentCompletedMediaRef, renderRange});
+  requireResume(validation.status === 'passed', 'saved full replay does not validate: ' + JSON.stringify(validation.violations));
+  const bindings = records.map((record, index) => ({instructionId: record.element.instructionId,
+    elementCanonicalSha256: sha256Canonical(record.element),
+    states: (record.pulseStates ?? record.motionStates ?? [record]).map(physical => ({
+      state: physical.state ?? 'static', elementCanonicalSha256: sha256Canonical(physical.element),
+      pngPath: physical.pngPath, pngSha256: physical.pngSha256,
+      inputRole: 'overlay:' + index + ':' + (physical.state ?? 'static')}))}));
+  requireResume(canonicalJson(bindings) === canonicalJson(replay.evidence.recordBindings),
+    'saved physical draw records differ from the completed replay');
+  for (const bound of [...replay.evidence.inputManifest.refs, ...replay.evidence.generatedArtifacts]) {
+    await verifyPresentationResumeRefV001(bound);
+  }
+  return replay;
+}
+async function savePresentationBeforeNativeCheckpointV001({state, presetRegistry, toolPaths, replayRef, file}) {
+  requireResume(state.orchestrationInput !== undefined
+    && state.counterfactualQcMethod === PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001,
+  'staged native execution requires a bound orchestration draw');
+  const body = {schemaVersion: 'presentation-before-native-checkpoint-v001',
+    stage: 'body-and-exact-replay-verified', finalQcComplete: false,
+    state, presetRegistry, toolPaths, replayRef};
+  await writeFile(file, JSON.stringify(body, null, 2) + '\n', {flag: 'wx'});
+  return bindPresentationResumeFileV001(file);
+}
+
+/** Only completed body/replay work is reusable. This does not certify native or final QC. */
+export async function readPresentationBeforeNativeCheckpointV001({checkpointRef, presetRegistry, toolPaths,
+  orchestrationDrawingView, outputDirectory}) {
+  assertOrchestrationDrawingViewV001(orchestrationDrawingView);
+  await verifyPresentationResumeRefV001(checkpointRef);
+  const saved = await readJson(checkpointRef.path), state = saved.state;
+  requireResume(saved.schemaVersion === 'presentation-before-native-checkpoint-v001'
+    && saved.stage === 'body-and-exact-replay-verified' && saved.finalQcComplete === false,
+  'checkpoint is not the completed body/replay boundary');
+  requireResume(canonicalJson(saved.presetRegistry) === canonicalJson(presetRegistry)
+    && canonicalJson(saved.toolPaths) === canonicalJson(toolPaths), 'drawing registry or tool paths changed');
+  const restored = restoreOrchestrationDrawingViewEvidenceV001(state.orchestrationInput);
+  requireResume(restored.viewSha256 === orchestrationDrawingView.viewSha256, 'saved drawing view changed');
+  const scope = createOrchestrationRenderScopeV001(restored, state.renderRange === null ? null
+    : {startFrame: state.renderRange.startFrame, endFrameExclusive: state.renderRange.endFrameExclusive});
+  requireResume(canonicalJson(state.plan) === canonicalJson(scope.resolvedPlan)
+    && state.expectedFrameCount === scope.scope.frameCount
+    && state.counterfactualQcMethod === PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001
+    && state.runCounterfactualQc === true, 'saved draw plan or QC scope changed');
+  requireResume(state.outputDirectory === outputDirectory && state.reservation.outputDirectory === outputDirectory,
+    'resume output differs');
+  await validatePublishTopologyV002(state.reservation, state.stagingDirectory);
+  await assertReservationOwnershipV002(state.reservation);
+  requireResume(await lstatOrNull(outputDirectory) === null, 'output is already published');
+  requireResume(path.dirname(state.stagingDirectory) === state.workDirectory
+    && state.scratchDirectory.startsWith(state.workDirectory + path.sep)
+    && path.dirname(state.workVideo) === state.stagingDirectory, 'work topology differs');
+  const source = restored.sourceRefs;
+  for (const ref of [source.planRef, source.timelineRef, source.mediaRef, source.decisionInputRef,
+    source.pulseTimingEvidence.sourceRef, source.pulseTimingEvidence.candidatesRef, source.pulseTimingEvidence.peaksRef]) {
+    await verifyPresentationResumeRefV001(ref);
+  }
+  requireResume(state.orchestrationBackground.projectionSha256 === restored.projection.projectionSha256
+    && state.baseMediaPath === state.orchestrationBackground.video.path
+    && state.audioMediaPath === state.orchestrationBackground.audio.path,
+  'saved background projection differs');
+  for (const ref of [state.orchestrationBackground.video, state.orchestrationBackground.audio]) await verifyPresentationResumeRefV001(ref);
+  requireResume(state.overlayRecords.length === state.plan.elements.length
+    && state.overlayRecords.every((record, index) => canonicalJson(record.element) === canonicalJson(state.plan.elements[index]))
+    && canonicalJson(buildPresentationRenderApplicationResults(state.overlayRecords, PRESENTATION_RENDERER_OUTPUT_NAMES))
+      === canonicalJson(state.applicationResults), 'physical records or application results differ');
+  for (const record of state.overlayRecords) for (const physical of record.pulseStates ?? record.motionStates ?? [record]) {
+    await verifyPresentationResumeRefV001({path: physical.pngPath, fileSha256: physical.pngSha256});
+    for (const mask of physical.visibleCenterCalibration?.lineMasks ?? []) {
+      await verifyPresentationResumeRefV001({path: mask.pngPath, fileSha256: mask.pngSha256});
+    }
+  }
+  await readVerifiedPresentationReplayV001({ref: saved.replayRef, plan: state.plan, records: state.overlayRecords,
+    expectedFrameCount: state.expectedFrameCount, completedMediaPath: state.workVideo, renderRange: state.renderRange});
+  return saved;
+}
+
+/** Resume native/final QC only; existing PNGs, completed body and exact replay are never drawn again. */
+export async function resumeValidatedPresentationDrawAndQcV001({checkpointRef, outputDirectory, presetRegistry,
+  orchestrationDrawingView, overlayAdapter = DEFAULT_PRESENTATION_OVERLAY_ADAPTER_V001,
+  toolPaths = DEFAULT_PRESENTATION_DRAW_TOOL_PATHS_V001, processObserver = null,
+  evaluateQc = evaluatePresentationRendererQcV002, onProgress = () => {},
+  nativeQcExecutionControl, onBeforeNativeCheckpoint}) {
+  const saved = await readPresentationBeforeNativeCheckpointV001({checkpointRef, presetRegistry, toolPaths,
+    orchestrationDrawingView, outputDirectory});
+  const state = structuredClone(saved.state);
+  // A new verification attempt preserves the previous failure and all old native evidence.
+  state.scratchDirectory = await mkdtemp(path.join(state.workDirectory, 'native-continuation-'));
+  const scope = createOrchestrationRenderScopeV001(orchestrationDrawingView, state.renderRange === null ? null
+    : {startFrame: state.renderRange.startFrame, endFrameExclusive: state.renderRange.endFrameExclusive});
+  try {
+    return await finishPresentationDrawAndQcV001({state, presetRegistry, overlayAdapter, toolPaths, processObserver,
+      evaluateQc, onProgress, orchestrationDrawingView, orchestrationScope: scope,
+      nativeQcExecutionControl, onBeforeNativeCheckpoint, savedExactReplayRef: saved.replayRef});
+  } catch (error) {return processFailure('native-continuation', error, state.cleanupWarnings);}
+}
+
+/** Continue the same verified draw through native QC and the unchanged final gate. */
+async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView, orchestrationScope,
+  presetRegistry, overlayAdapter, toolPaths, processObserver, evaluateQc, onProgress,
+  nativeQcExecutionControl, onBeforeNativeCheckpoint, savedExactReplayRef = null}) {
+  const {outputDirectory, reservation, workDirectory, stagingDirectory, scratchDirectory, cleanupWarnings,
+    overlayRecords, applicationResults, baseExpectedAudio, completedExpectedAudio, outputMedia, workVideo,
+    plan, expectedFrameCount, presentationTimeline, timelineAudio, baseMediaPath, serializePngAndFilters,
+    autoPresentationResolution, autoPresentationInputs, autoPresentation, runCounterfactualQc,
+    counterfactualQcMethod, orchestrationBackground, audioMediaPath, renderRange} = state;
+  const failAfterWork = (violations, stage, nested) => createPresentationRendererFailureAfterWorkV001({
+    violations, stage, nested, cleanupWarnings, scratchDirectory});
     let completedFrameQc;
     if (runCounterfactualQc) {
       await onProgress({phase: 'range-qc', scope: orchestrationScope?.scope ?? null});
@@ -2543,6 +2715,13 @@ export async function executeValidatedPresentationDrawAndQcV001({
         expectedFrameCount, scratchDirectory, presetRegistry, autoPresentation,
         overlayAdapter, toolPaths, processObserver, serializePngAndFilters,
         presentationTimeline, timelineAudio, counterfactualQcMethod, orchestrationDrawingView, audioMediaPath, renderRange,
+        savedExactReplayRef, nativeQcExecutionControl,
+        onReplaySaved: nativeQcExecutionControl === undefined && onBeforeNativeCheckpoint === undefined ? undefined
+          : async ({replayRef}) => {
+            const checkpointRef = await savePresentationBeforeNativeCheckpointV001({state, presetRegistry, toolPaths,
+              replayRef, file: path.join(scratchDirectory, 'before-native-checkpoint.json')});
+            await onBeforeNativeCheckpoint?.({checkpointRef, replayRef});
+          },
       });
       if (completedFrameQc.status !== 'passed' || completedFrameQc.violations.length !== 0) {
         return failAfterWork([makeViolation('COMPLETED_FRAME_QC_INVALID', '$completedFrames', [],
@@ -2604,19 +2783,6 @@ export async function executeValidatedPresentationDrawAndQcV001({
         orchestrationBackground, audioMediaPath, renderRange, renderScope: orchestrationScope.scope}),
       ...(completedFrameQc === undefined ? {} : {completedFrameQc}),
     };
-  } catch (error) {
-    const rendererCode = error?.rendererViolationCode;
-    if (rendererCode) {
-      const outputSafetyCode = rendererCode.startsWith('RENDER_OUTPUT_');
-      return contractFailure(
-        [makeViolation(rendererCode, outputSafetyCode ? '$.outputDirectory' : '$render')],
-        outputSafetyCode ? 'publish' : 'overlay-render',
-        error.completedFrameQcFailure,
-        cleanupWarnings,
-      );
-    }
-    return processFailure('execution', error, cleanupWarnings);
-  }
 }
 
 export async function executePresentationRendererV002(jobInput) {

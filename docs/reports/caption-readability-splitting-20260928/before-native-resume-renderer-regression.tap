@@ -1,0 +1,814 @@
+TAP version 13
+# Subtest: range compositing matches every precompression full-program frame through finite state and fade cuts
+ok 1 - range compositing matches every precompression full-program frame through finite state and fade cuts
+  ---
+  duration_ms: 1432.527208
+  ...
+# Subtest: 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+ok 2 - 01 jobとtimeline manifestの必須field・未知field・hash形式を固定検査する
+  ---
+  duration_ms: 15.722584
+  ...
+# Subtest: 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+ok 3 - 01b 新規出力・所有lock・原子的publishを固定し既存成功物を変更しない
+  ---
+  duration_ms: 11.963667
+  ...
+# Subtest: 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+ok 4 - 01c directory publish成功後のlock異常を成功成果物の失敗へ戻さない
+  ---
+  duration_ms: 3.652666
+  ...
+# Subtest: 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+not ok 5 - 02 固定信頼根・台帳・preview・描画部品・tool・fontを照合しfont失敗を分類する
+  ---
+  duration_ms: 16.208
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:891:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[2]","relatedIds":["runner/src/remotion/components/TelopText.tsx"],"details":{"actualFileSha256":"05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7","expectedFileSha256":"9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[3]","relatedIds":["runner/src/telop/telop-render-model.ts"],"details":{"actualFileSha256":"d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a","expectedFileSha256":"5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[0]","relatedIds":["evals/clip_composition/presentation_renderer_entry_v001.tsx"],"details":{"actualFileSha256":"96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e","expectedFileSha256":"884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[1]","relatedIds":["evals/clip_composition/presentation_renderer_text_layout_v001.mjs"],"details":{"actualFileSha256":"ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385","expectedFileSha256":"066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[2]","relatedIds":["runner/src/remotion/components/TelopText.tsx"],"details":{"actualFileSha256":"05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7","expectedFileSha256":"9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[4]","relatedIds":["runner/src/telop/telop-render-model.ts"],"details":{"actualFileSha256":"d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a","expectedFileSha256":"5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"}}]
+    + actual - expected
+
+    + 'failed'
+    - 'passed'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:894:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+not ok 6 - 03 v002だけを受理しv001と旧telopPlanを描画前に拒否する
+  ---
+  duration_ms: 301.842125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:963:1'
+  failureType: 'testCodeFailure'
+  error: 'INSTRUCTION_CONTRACT_NOT_PASSED was not observed: [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[2]","relatedIds":["runner/src/remotion/components/TelopText.tsx"],"details":{"actualFileSha256":"05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7","expectedFileSha256":"9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[3]","relatedIds":["runner/src/telop/telop-render-model.ts"],"details":{"actualFileSha256":"d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a","expectedFileSha256":"5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[0]","relatedIds":["evals/clip_composition/presentation_renderer_entry_v001.tsx"],"details":{"actualFileSha256":"96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e","expectedFileSha256":"884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[1]","relatedIds":["evals/clip_composition/presentation_renderer_text_layout_v001.mjs"],"details":{"actualFileSha256":"ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385","expectedFileSha256":"066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[2]","relatedIds":["runner/src/remotion/components/TelopText.tsx"],"details":{"actualFileSha256":"05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7","expectedFileSha256":"9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[4]","relatedIds":["runner/src/telop/telop-render-model.ts"],"details":{"actualFileSha256":"d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a","expectedFileSha256":"5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"}}]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    assertHasCode (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:116:10)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:986:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+not ok 7 - 04 外枠passedだけを通しpartialとfailedを異なるコードで停止する
+  ---
+  duration_ms: 289.249417
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1042:1'
+  failureType: 'testCodeFailure'
+  error: 'INSTRUCTION_CONTRACT_NOT_PASSED was not observed: [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[2]","relatedIds":["runner/src/remotion/components/TelopText.tsx"],"details":{"actualFileSha256":"05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7","expectedFileSha256":"9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[3]","relatedIds":["runner/src/telop/telop-render-model.ts"],"details":{"actualFileSha256":"d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a","expectedFileSha256":"5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[0]","relatedIds":["evals/clip_composition/presentation_renderer_entry_v001.tsx"],"details":{"actualFileSha256":"96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e","expectedFileSha256":"884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[1]","relatedIds":["evals/clip_composition/presentation_renderer_text_layout_v001.mjs"],"details":{"actualFileSha256":"ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385","expectedFileSha256":"066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[2]","relatedIds":["runner/src/remotion/components/TelopText.tsx"],"details":{"actualFileSha256":"05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7","expectedFileSha256":"9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[4]","relatedIds":["runner/src/telop/telop-render-model.ts"],"details":{"actualFileSha256":"d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a","expectedFileSha256":"5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"}}]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    assertHasCode (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:116:10)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1050:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+ok 8 - 05 正式空素材で到達可能な9種類を1指示1要素へ解決する
+  ---
+  duration_ms: 1.581083
+  ...
+# Subtest: 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+ok 9 - 06 caption本文・明示行・開始終了anchorを一文字も変えず保持する
+  ---
+  duration_ms: 0.129667
+  ...
+# Subtest: 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+ok 10 - 07 非caption本文と終了責任を保ち句点・空白・元改行の文字indexを欠落なく追跡する
+  ---
+  duration_ms: 0.353375
+  ...
+# Subtest: 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+ok 11 - 08 speaker表示名は明示targetだけから解決しsource話者ラベルを人物名に使わない
+  ---
+  duration_ms: 0.7445
+  ...
+# Subtest: 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+ok 12 - 09 1 source・cut対応・速度・frame数・未対応・曖昧・segment跨ぎを個別に止める
+  ---
+  duration_ms: 2.883875
+  ...
+# Subtest: 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+ok 13 - 10 v002はsource frameをoutput frameへ直接写し短尺alpha包絡を固定する
+  ---
+  duration_ms: 0.184
+  ...
+# Subtest: 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+ok 14 - 11 正式台帳の種類・状態・font・背景・transitionをfallbackなしで解決する
+  ---
+  duration_ms: 0.701791
+  ...
+# Subtest: 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+not ok 15 - 12 行数・行の正の交差・安全領域・空alphaを独立して検出する
+  ---
+  duration_ms: 62.11125
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1341:1'
+  failureType: 'testCodeFailure'
+  error: 'OUTPUT_ELEMENT_NOT_VISIBLE was not observed: [{"code":"COMPLETED_FRAME_QC_INVALID","relatedIds":["instruction-caption"],"details":{"mixedComparisonMethods":true}},{"code":"COMPLETED_FRAME_QC_INVALID","relatedIds":["instruction-comment"],"details":{"mixedComparisonMethods":true}},{"code":"COMPLETED_FRAME_QC_INVALID","relatedIds":["instruction-discovery"],"details":{"mixedComparisonMethods":true}},{"code":"COMPLETED_FRAME_QC_INVALID","relatedIds":["instruction-emotion"],"details":{"mixedComparisonMethods":true}},{"code":"COMPLETED_FRAME_QC_INVALID","relatedIds":["instruction-important"],"details":{"mixedComparisonMethods":true}},{"code":"COMPLETED_FRAME_QC_INVALID","relatedIds":["instruction-lyrics"],"details":{"mixedComparisonMethods":true}},{"code":"COMPLETED_FRAME_QC_INVALID","relatedIds":["instruction-mistake"],"details":{"mixedComparisonMethods":true}},{"code":"COMPLETED_FRAME_QC_INVALID","relatedIds":["instruction-narration"],"details":{"mixedComparisonMethods":true}},{"code":"COMPLETED_FRAME_QC_INVALID","relatedIds":["instruction-speaker"],"details":{"mixedComparisonMethods":true}},{"code":"COMPLETED_FRAME_QC_INVALID","relatedIds":[],"details":{"missingGlobalEvidence":true}}]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    assertHasCode (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:116:10)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1462:3)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 12b 旧差分・native単独・成功フラグは新しい完成映像全体証拠の代わりにならない
+ok 16 - 12b 旧差分・native単独・成功フラグは新しい完成映像全体証拠の代わりにならない
+  ---
+  duration_ms: 0.742833
+  ...
+# Subtest: 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+ok 17 - 13 時間と空間の正の交差だけを衝突とし境界接触は許容する
+  ---
+  duration_ms: 0.552667
+  ...
+# Subtest: 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+not ok 18 - 14 空素材indexのG7を外枠で停止しpreviewカードを代用しない
+  ---
+  duration_ms: 287.35725
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1523:1'
+  failureType: 'testCodeFailure'
+  error: 'INSTRUCTION_CONTRACT_NOT_PASSED was not observed: [{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[0]","relatedIds":["runner/src/remotion/Root.tsx"],"details":{"actualFileSha256":"a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23","expectedFileSha256":"9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[1]","relatedIds":["runner/src/remotion/renderer/TelopRenderer.tsx"],"details":{"actualFileSha256":"7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b","expectedFileSha256":"94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[2]","relatedIds":["runner/src/remotion/components/TelopText.tsx"],"details":{"actualFileSha256":"05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7","expectedFileSha256":"9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.approvedPreview.componentProvenance[3]","relatedIds":["runner/src/telop/telop-render-model.ts"],"details":{"actualFileSha256":"d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a","expectedFileSha256":"5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[0]","relatedIds":["evals/clip_composition/presentation_renderer_entry_v001.tsx"],"details":{"actualFileSha256":"96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e","expectedFileSha256":"884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[1]","relatedIds":["evals/clip_composition/presentation_renderer_text_layout_v001.mjs"],"details":{"actualFileSha256":"ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385","expectedFileSha256":"066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[2]","relatedIds":["runner/src/remotion/components/TelopText.tsx"],"details":{"actualFileSha256":"05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7","expectedFileSha256":"9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"}},{"code":"RENDERER_COMPONENT_HASH_MISMATCH","path":"$.rendererDependencies[4]","relatedIds":["runner/src/telop/telop-render-model.ts"],"details":{"actualFileSha256":"d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a","expectedFileSha256":"5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"}}]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    assertHasCode (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:116:10)
+    TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1544:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+not ok 19 - 15 9種類の透明PNGは非空・safe area内で同じ入力を同じhashへ再描画する
+  ---
+  duration_ms: 1541.461834
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1551:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "trust",
+      "violations": [
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[0]",
+          "relatedIds": [
+            "runner/src/remotion/Root.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+            "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[1]",
+          "relatedIds": [
+            "runner/src/remotion/renderer/TelopRenderer.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+            "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[2]",
+          "relatedIds": [
+            "runner/src/remotion/components/TelopText.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+            "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[3]",
+          "relatedIds": [
+            "runner/src/telop/telop-render-model.ts"
+          ],
+          "details": {
+            "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+            "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[0]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e",
+            "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[1]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+          ],
+          "details": {
+            "actualFileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385",
+            "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[2]",
+          "relatedIds": [
+            "runner/src/remotion/components/TelopText.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+            "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[4]",
+          "relatedIds": [
+            "runner/src/telop/telop-render-model.ts"
+          ],
+          "details": {
+            "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+            "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+          }
+        }
+      ],
+      "nested": {
+        "schemaVersion": "presentation-renderer-trust-report-v001",
+        "status": "failed",
+        "violations": [
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[0]",
+            "relatedIds": [
+              "runner/src/remotion/Root.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+              "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[1]",
+            "relatedIds": [
+              "runner/src/remotion/renderer/TelopRenderer.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+              "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[2]",
+            "relatedIds": [
+              "runner/src/remotion/components/TelopText.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+              "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[3]",
+            "relatedIds": [
+              "runner/src/telop/telop-render-model.ts"
+            ],
+            "details": {
+              "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+              "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[0]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e",
+              "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[1]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+            ],
+            "details": {
+              "actualFileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385",
+              "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[2]",
+            "relatedIds": [
+              "runner/src/remotion/components/TelopText.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+              "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[4]",
+            "relatedIds": [
+              "runner/src/telop/telop-render-model.ts"
+            ],
+            "details": {
+              "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+              "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+            }
+          }
+        ],
+        "trust": null,
+        "trustCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+      }
+    }
+
+
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:706:12
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1552:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+not ok 20 - 16 合成MP4の映像・代表frame差分・基礎音声packetを保全する
+  ---
+  duration_ms: 0.299833
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1591:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "trust",
+      "violations": [
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[0]",
+          "relatedIds": [
+            "runner/src/remotion/Root.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+            "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[1]",
+          "relatedIds": [
+            "runner/src/remotion/renderer/TelopRenderer.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+            "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[2]",
+          "relatedIds": [
+            "runner/src/remotion/components/TelopText.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+            "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[3]",
+          "relatedIds": [
+            "runner/src/telop/telop-render-model.ts"
+          ],
+          "details": {
+            "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+            "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[0]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e",
+            "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[1]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+          ],
+          "details": {
+            "actualFileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385",
+            "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[2]",
+          "relatedIds": [
+            "runner/src/remotion/components/TelopText.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+            "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[4]",
+          "relatedIds": [
+            "runner/src/telop/telop-render-model.ts"
+          ],
+          "details": {
+            "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+            "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+          }
+        }
+      ],
+      "nested": {
+        "schemaVersion": "presentation-renderer-trust-report-v001",
+        "status": "failed",
+        "violations": [
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[0]",
+            "relatedIds": [
+              "runner/src/remotion/Root.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+              "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[1]",
+            "relatedIds": [
+              "runner/src/remotion/renderer/TelopRenderer.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+              "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[2]",
+            "relatedIds": [
+              "runner/src/remotion/components/TelopText.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+              "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[3]",
+            "relatedIds": [
+              "runner/src/telop/telop-render-model.ts"
+            ],
+            "details": {
+              "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+              "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[0]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e",
+              "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[1]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+            ],
+            "details": {
+              "actualFileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385",
+              "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[2]",
+            "relatedIds": [
+              "runner/src/remotion/components/TelopText.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+              "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[4]",
+            "relatedIds": [
+              "runner/src/telop/telop-render-model.ts"
+            ],
+            "details": {
+              "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+              "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+            }
+          }
+        ],
+        "trust": null,
+        "trustCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+      }
+    }
+
+
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:706:12
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1552:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+not ok 21 - 17 適用結果・manifest・QC・CLI 0/1/2・publish後残留警告で成功を覆さない・全固有コード集合を固定する
+  ---
+  duration_ms: 0.319334
+  location: '/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1660:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "schemaVersion": "presentation-render-failure-v002",
+      "status": "failed",
+      "stage": "trust",
+      "violations": [
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[0]",
+          "relatedIds": [
+            "runner/src/remotion/Root.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+            "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[1]",
+          "relatedIds": [
+            "runner/src/remotion/renderer/TelopRenderer.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+            "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[2]",
+          "relatedIds": [
+            "runner/src/remotion/components/TelopText.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+            "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.approvedPreview.componentProvenance[3]",
+          "relatedIds": [
+            "runner/src/telop/telop-render-model.ts"
+          ],
+          "details": {
+            "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+            "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[0]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e",
+            "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[1]",
+          "relatedIds": [
+            "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+          ],
+          "details": {
+            "actualFileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385",
+            "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[2]",
+          "relatedIds": [
+            "runner/src/remotion/components/TelopText.tsx"
+          ],
+          "details": {
+            "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+            "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+          }
+        },
+        {
+          "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+          "path": "$.rendererDependencies[4]",
+          "relatedIds": [
+            "runner/src/telop/telop-render-model.ts"
+          ],
+          "details": {
+            "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+            "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+          }
+        }
+      ],
+      "nested": {
+        "schemaVersion": "presentation-renderer-trust-report-v001",
+        "status": "failed",
+        "violations": [
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[0]",
+            "relatedIds": [
+              "runner/src/remotion/Root.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "a08c4c888a0fcd356dc0911732aeb51badd3420305056b1d02ac109b39d0fd23",
+              "expectedFileSha256": "9c58b452d81b3083c8637e6d2e8ec971bc948ae39ce0452675bb1fd2a005cc8f"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[1]",
+            "relatedIds": [
+              "runner/src/remotion/renderer/TelopRenderer.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "7fe1296f6884c90acadb61dcd2e45c81d24e2fddac14cf78b120897f05ca289b",
+              "expectedFileSha256": "94b1ef2f132acbda86181034c89a57caabc72e4a150d213c01e5be8159327863"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[2]",
+            "relatedIds": [
+              "runner/src/remotion/components/TelopText.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+              "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.approvedPreview.componentProvenance[3]",
+            "relatedIds": [
+              "runner/src/telop/telop-render-model.ts"
+            ],
+            "details": {
+              "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+              "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[0]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_entry_v001.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e",
+              "expectedFileSha256": "884c2361feab659264ed0e00e65ae726e681b030c1a594c80985bd0225d7dce7"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[1]",
+            "relatedIds": [
+              "evals/clip_composition/presentation_renderer_text_layout_v001.mjs"
+            ],
+            "details": {
+              "actualFileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385",
+              "expectedFileSha256": "066a62adaa7fa3f8b8eda92c82e9a85940e43f372af976edc4b327ef4cf9ce5e"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[2]",
+            "relatedIds": [
+              "runner/src/remotion/components/TelopText.tsx"
+            ],
+            "details": {
+              "actualFileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7",
+              "expectedFileSha256": "9e941db470dd2586485134f093679bda947e722c4d000d25b0e7fb6ec5daf001"
+            }
+          },
+          {
+            "code": "RENDERER_COMPONENT_HASH_MISMATCH",
+            "path": "$.rendererDependencies[4]",
+            "relatedIds": [
+              "runner/src/telop/telop-render-model.ts"
+            ],
+            "details": {
+              "actualFileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a",
+              "expectedFileSha256": "5c32103a6f8faaa3ea1d30bb4624f0ca092385c8b77446aa5f51e3e3a0583412"
+            }
+          }
+        ],
+        "trust": null,
+        "trustCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+      }
+    }
+
+
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:706:12
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_v002.test.mjs:1552:20)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 13
+# fail 8
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2621.634458

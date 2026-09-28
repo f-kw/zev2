@@ -179,10 +179,14 @@ async function execute(command, args) {
 /** One complete finite sample. Batching changes resource use, never candidate order or the composite builder. */
 export async function processPresentationNativeSampleV001({sample: suppliedSample, sceneBindings, nativeLayers,
   directory, tools, run: executor = execute, batchSize = PRESENTATION_NATIVE_REFERENCE_BATCH_SIZE_V001,
-  retention = 'retain-all', baselineSample = null, preparedArtifacts = [], signal = null}) {
+  retention = 'retain-all', baselineSample = null, preparedArtifacts = [], signal = null,
+  executionControl = null, sampleIndex = null}) {
   requireValue(path.isAbsolute(directory) && Number.isSafeInteger(batchSize) && batchSize > 0,
     'absolute unused directory and positive execution batch size required');
   requireValue(['retain-all', 'verified-pass-regenerable-v001'].includes(retention), 'unknown retention policy');
+  requireValue(executionControl === null || (typeof executionControl === 'object'
+    && (executionControl.beforeHeavyBatch === undefined || typeof executionControl.beforeHeavyBatch === 'function')),
+  'invalid native execution control');
   const sample = recipeOnly(suppliedSample), started = performance.now();
   const processes = [], phases = {}, artifacts = [];
   const metrics = {logicalReferenceCount: sample.references.length, referenceRgbOutputs: 0, reusedReferenceRgbCount: 0,
@@ -191,6 +195,10 @@ export async function processPresentationNativeSampleV001({sample: suppliedSampl
   const timed = async (name, fn) => {const start = performance.now(); try {return await fn();}
     finally {phases[name] = (phases[name] ?? 0) + performance.now() - start;}};
   const checkCancelled = () => {if (signal?.aborted) throw signal.reason ?? new Error('comparison cancelled');};
+  const beforeHeavyBatch = async event => {
+    if (executionControl?.beforeHeavyBatch) await executionControl.beforeHeavyBatch(structuredClone({
+      sampleIndex, instructionId: sample.instructionId, frame: sample.frame, directory, ...event}));
+  };
   const run = async (command, args, purpose) => {
     checkCancelled(); const start = performance.now();
     const record = {purpose, command, args, argumentsCanonicalSha256: hashJson(args)}; processes.push(record);
@@ -212,6 +220,9 @@ export async function processPresentationNativeSampleV001({sample: suppliedSampl
       await checkFile(ref); metrics.inputVerificationBytes += (await stat(ref.path)).size;
     }});
     const crop = sample.crop, byteCount = crop.width * crop.height * 3;
+    await beforeHeavyBatch({phase: 'completed-rgb-crop', outputCount: 1,
+      outputPaths: [path.join(directory, 'completed.rgb')], plannedLogicalBytes: byteCount,
+      byteMeaning: 'Exact RGB24 crop bytes; excludes filesystem allocation and process memory'});
     const completed = await timed('completedRgbCrop', () => run(tools.imageMagick.path,
       [sample.completedFrame.path, '-crop', crop.width + 'x' + crop.height + '+' + crop.left + '+' + crop.top,
         '+repage', '-alpha', 'off', '-depth', '8', 'rgb:-'], 'completed-rgb-crop'));
@@ -223,6 +234,11 @@ export async function processPresentationNativeSampleV001({sample: suppliedSampl
     const referenceFiles = new Map();
     for (let start = 0; start < fresh.length; start += batchSize) {
       checkCancelled(); const batch = fresh.slice(start, start + batchSize);
+      await beforeHeavyBatch({phase: 'native-reference-composite', batchIndex: Math.floor(start / batchSize),
+        referenceOffset: start, physicalReferenceCount: fresh.length, logicalReferenceCount: sample.references.length,
+        outputCount: batch.length, outputPaths: batch.map(row => row.path),
+        plannedLogicalBytes: batch.length * byteCount, existingReferenceLogicalBytes: metrics.generatedReferenceBytes,
+        byteMeaning: 'Exact new RGB24 reference bytes; logical candidates with the same derived composition share one output'});
       await timed('referenceComposition', () => run(tools.ffmpeg.path,
         buildPresentationNativeReferenceArgumentsV001({sample: {...sample, references: batch.map(row => row.reference)},
           sceneBindings, baseFramePath: sample.baseFrame.path, nativeLayers, outputPaths: batch.map(row => row.path)}),
@@ -310,8 +326,19 @@ export async function processPresentationNativeSampleV001({sample: suppliedSampl
     return {sample: resultSample, processes, outputArtifacts, metrics: {...metrics, phasesMilliseconds: phases,
       wallClockMs: performance.now() - started, batchSize, checkpointBytes: saved.bytes}};
   } catch (error) {
-    await writeFile(path.join(directory, 'incomplete.json'), JSON.stringify({status: 'incomplete', message: error.message,
-      processes, metrics, phasesMilliseconds: phases}, null, 2), {flag: 'wx'});
+    const incompletePath = path.join(directory, 'incomplete.json');
+    try {
+      await writeFile(incompletePath, JSON.stringify({status: 'incomplete', message: error.message,
+        ...(executionControl === null ? {} : {sampleIndex, instructionId: sample.instructionId, frame: sample.frame,
+          directory, generatedArtifacts: artifacts}), processes, metrics, phasesMilliseconds: phases}, null, 2), {flag: 'wx'});
+      if (executionControl !== null) error.nativeSampleFailure = {status: 'incomplete', sampleIndex,
+        instructionId: sample.instructionId, frame: sample.frame, directory,
+        incomplete: {path: incompletePath, fileSha256: await hashPresentationNativeFileV001(incompletePath)}};
+    } catch (recordError) {
+      if (executionControl === null) throw recordError;
+      error.nativeSampleFailure = {status: 'incomplete', sampleIndex, directory, incompletePath,
+        recordWriteError: recordError.message};
+    }
     throw error;
   }
 }
