@@ -7,7 +7,7 @@ import {lstat, mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {restoreOrchestrationDrawingViewEvidenceV001} from './presentation_orchestration_v001.mjs';
+import {restoreOrchestrationDrawingViewEvidenceV001, assertOrchestrationDrawingViewV001} from './presentation_orchestration_v001.mjs';
 import {createOrchestrationRenderScopeV001} from './presentation_orchestration_render_scope_v001.mjs';
 import * as backgroundRenderer from './presentation_orchestration_background_v001.mjs';
 import {executeValidatedPresentationDrawAndQcV001, createPresentationRendererOverlayJobV001,
@@ -19,6 +19,8 @@ import {assertIgnoredPresentationOutputDirectoryV001} from './presentation_outpu
 import {createPresentationNativeAssetCacheV001} from './presentation_native_asset_cache_v001.mjs';
 import {writePresentationQcEvidenceV001} from './presentation_qc_evidence_store_v001.mjs';
 import {createPresentationNativePublicationBindingV001} from './presentation_native_qc_streaming_v001.mjs';
+import {READABILITY_CANDIDATE_PROFILE_V001, buildReadabilityCandidateRegistryV001}
+  from '../../tools/digest-quality/caption-readability-candidate.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const directory = path.join(repo, 'evals/clip_composition');
@@ -58,9 +60,12 @@ async function verifyDecoderReference(ref) {
     && /^[a-f0-9]{64}$/.test(ref.fileSha256), 'explicit saved-observation decoder reference is invalid');
   assert.deepEqual(await bind(ref.path), ref, 'saved-observation decoder bytes changed');
 }
-export async function buildEditedOrchestrationDrawingRulesRefV001({backgroundReuseDecoderRef = null} = {}) {
+export async function buildEditedOrchestrationDrawingRulesRefV001({backgroundReuseDecoderRef = null,
+  candidateVersion = null} = {}) {
   if (backgroundReuseDecoderRef !== null) await verifyDecoderReference(backgroundReuseDecoderRef);
   const registry = await json(registryPath);
+  const candidateRegistry = candidateVersion === null ? null
+    : buildReadabilityCandidateRegistryV001({registry, version: candidateVersion});
   const sources = new Set();
   const walk = async file => {
     if (sources.has(file)) return;
@@ -95,12 +100,18 @@ export async function buildEditedOrchestrationDrawingRulesRefV001({backgroundReu
   const body = {schemaVersion: 'presentation-edited-drawing-rules-v001',
     files: await Promise.all([...new Set(files)].sort().map(bind)),
     decoderRoles: {currentDrawingAndNewAudio: await bind(await realpath(toolPaths.ffmpegPath)),
-      savedBackgroundObservation: backgroundReuseDecoderRef === null ? null : structuredClone(backgroundReuseDecoderRef)}};
+      savedBackgroundObservation: backgroundReuseDecoderRef === null ? null : structuredClone(backgroundReuseDecoderRef)},
+    ...(candidateRegistry === null ? {} : {candidateExecution: {
+      version: candidateVersion, profile: structuredClone(READABILITY_CANDIDATE_PROFILE_V001),
+      registry: candidateRegistry, registryCanonicalSha256: hash(candidateRegistry),
+      humanQuality: 'not-evaluated', productionDefaultChanged: false,
+      elementRegistryIdentity: 'preserved original input provenance; effective candidate registry is bound here'}})};
   return {...body, canonicalSha256: hash(body)};
 }
 export async function verifyEditedOrchestrationDrawingRulesRefV001(ref) {
   assert.deepEqual(await buildEditedOrchestrationDrawingRulesRefV001({
-    backgroundReuseDecoderRef: ref.decoderRoles?.savedBackgroundObservation ?? null}), ref, 'drawing implementation changed');
+    backgroundReuseDecoderRef: ref.decoderRoles?.savedBackgroundObservation ?? null,
+    candidateVersion: ref.candidateExecution?.version ?? null}), ref, 'drawing implementation changed');
   return true;
 }
 async function verifySourceReferences(view, drawingEvidenceRef) {
@@ -109,6 +120,31 @@ async function verifySourceReferences(view, drawingEvidenceRef) {
     source.pulseTimingEvidence.sourceRef, source.pulseTimingEvidence.candidatesRef, source.pulseTimingEvidence.peaksRef];
   for (const ref of refs) assert.equal((await bind(ref.path)).fileSha256, ref.fileSha256, 'saved source bytes changed');
   return refs;
+}
+
+/** Candidate execution binding only: this never grants human appearance approval. */
+export async function verifyEditedOrchestrationCandidateTrustV001({candidateTrustRef, view, drawingRulesRef,
+  drawingEvidenceRef}) {
+  assertOrchestrationDrawingViewV001(view);
+  assert(view.candidateExecution && drawingRulesRef.candidateExecution, 'explicit candidate execution is required');
+  assert.equal(view.candidateExecution.version, drawingRulesRef.candidateExecution.version, 'candidate drawing version differs');
+  assert.deepEqual(view.candidateExecution.profile, drawingRulesRef.candidateExecution.profile, 'candidate drawing profile differs');
+  assert.deepEqual(await bind(candidateTrustRef.path), candidateTrustRef, 'candidate execution trust changed');
+  const trust = await json(candidateTrustRef.path);
+  assert.equal(trust.schemaVersion, 'presentation-candidate-execution-trust-v001');
+  assert.equal(trust.version, view.candidateExecution.version);
+  assert.equal(trust.candidateViewSha256, view.viewSha256);
+  assert.equal(trust.sourceViewSha256, view.candidateExecution.sourceViewSha256);
+  assert.equal(trust.candidateSha256, view.candidateExecution.candidateSha256);
+  assert.equal(trust.humanQuality, 'not-evaluated'); assert.equal(trust.productionDefaultChanged, false);
+  assert.deepEqual(trust.drawingEvidenceRef, drawingEvidenceRef);
+  assert.equal((await bind(drawingEvidenceRef.path)).fileSha256, drawingEvidenceRef.fileSha256);
+  assert.deepEqual(trust.drawingRulesRef, drawingRulesRef);
+  for (const ref of [trust.profileRef, trust.registryRef]) assert.deepEqual(await bind(ref.path), ref, 'candidate profile/registry bytes changed');
+  assert.deepEqual(await json(trust.profileRef.path), view.candidateExecution.profile);
+  assert.deepEqual(await json(trust.registryRef.path), drawingRulesRef.candidateExecution.registry);
+  assert.equal(hash(await json(trust.registryRef.path)), drawingRulesRef.candidateExecution.registryCanonicalSha256);
+  return {status: 'passed', version: trust.version, humanQuality: 'not-evaluated', candidateTrustRef};
 }
 
 export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputDirectory, evidenceDirectory,
@@ -126,18 +162,37 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
   try {
     await onProgress({phase: 'prepare'});
     const inputBindingStarted = performance.now();
-    const rules = drawingRulesRef ?? await buildEditedOrchestrationDrawingRulesRefV001({backgroundReuseDecoderRef});
-    await verifyEditedOrchestrationDrawingRulesRefV001(rules);
-    assert.deepEqual(rules.decoderRoles.savedBackgroundObservation, backgroundReuseDecoderRef,
-      'saved background decoder must match the immutable job drawing rules');
     assert.equal((await bind(drawingEvidenceRef.path)).fileSha256, drawingEvidenceRef.fileSha256);
     const view = restoreOrchestrationDrawingViewEvidenceV001(await json(drawingEvidenceRef.path));
+    const candidateVersion = view.candidateExecution?.version ?? null;
+    const rules = drawingRulesRef ?? await buildEditedOrchestrationDrawingRulesRefV001({backgroundReuseDecoderRef, candidateVersion});
+    await verifyEditedOrchestrationDrawingRulesRefV001(rules);
+    assert.equal(rules.candidateExecution?.version ?? null, candidateVersion, 'drawing rules belong to another candidate/default');
+    assert.deepEqual(rules.decoderRoles.savedBackgroundObservation, backgroundReuseDecoderRef,
+      'saved background decoder must match the immutable job drawing rules');
     const derived = createOrchestrationRenderScopeV001(view, range);
     const sourceReferences = await verifySourceReferences(view, drawingEvidenceRef);
     timings.inputBindingMilliseconds = performance.now() - inputBindingStarted;
     const initialEvidenceStarted = performance.now();
     await save(path.join(evidenceDirectory, 'start.json'), {schemaVersion: 'presentation-edited-render-start-v001',
       guards, drawingEvidenceRef, rules, scope: derived.scope, sourceReferences});
+    let candidateTrustRef = null;
+    if (candidateVersion !== null) {
+      assert.deepEqual(view.candidateExecution.profile, rules.candidateExecution.profile, 'candidate profile differs from bound drawing rules');
+      const profilePath = path.join(evidenceDirectory, 'candidate-profile.json');
+      const candidateRegistryPath = path.join(evidenceDirectory, 'candidate-registry.json');
+      await save(profilePath, rules.candidateExecution.profile);
+      await save(candidateRegistryPath, rules.candidateExecution.registry);
+      const candidateTrustPath = path.join(evidenceDirectory, 'candidate-trust.json');
+      await save(candidateTrustPath, {schemaVersion: 'presentation-candidate-execution-trust-v001',
+        version: candidateVersion, purpose: 'explicit technical candidate execution; no human appearance approval',
+        drawingEvidenceRef, sourceViewSha256: view.candidateExecution.sourceViewSha256,
+        candidateViewSha256: view.viewSha256, candidateSha256: view.candidateExecution.candidateSha256,
+        profileRef: await bind(profilePath), registryRef: await bind(candidateRegistryPath),
+        drawingRulesRef: rules, humanQuality: 'not-evaluated', productionDefaultChanged: false,
+        elementRegistryIdentity: rules.candidateExecution.elementRegistryIdentity});
+      candidateTrustRef = await bind(candidateTrustPath);
+    }
     timings.initialEvidenceWriteMilliseconds = performance.now() - initialEvidenceStarted;
     const backgroundStarted = performance.now();
     await onProgress({phase: 'background', scope: derived.scope});
@@ -178,7 +233,7 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
     timings.preparationMilliseconds = performance.now() - started;
     const drawStarted = performance.now();
     const draw = await executeValidatedPresentationDrawAndQcV001({outputDirectory, plan: derived.normalPlan,
-      presetRegistry: await json(registryPath), baseMediaPath: background.outputs.background.path,
+      presetRegistry: rules.candidateExecution?.registry ?? await json(registryPath), baseMediaPath: background.outputs.background.path,
       baseMediaInspection: {media}, expectedFrameCount: derived.scope.frameCount,
       overlayAdapter: cache.adapter, processObserver, toolPaths, serializePngAndFilters: true,
       runCounterfactualQc: true, counterfactualQcMethod: PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001,
@@ -229,6 +284,10 @@ export async function renderEditedOrchestrationV001({drawingEvidenceRef, outputD
       processTimings: processObserver.getPerformance(),
       timingScope: 'completion excludes its own serialization/write and the caller result write',
       formalTrustChanged: false, humanQuality: 'not-evaluated', paidApiCalls: 0, newExternalMediaTransfers: 0};
+    if (candidateTrustRef !== null) {
+      await verifyEditedOrchestrationCandidateTrustV001({candidateTrustRef, view, drawingRulesRef: rules, drawingEvidenceRef});
+      result.candidateExecution = {...view.candidateExecution, candidateTrustRef};
+    }
     await writePresentationQcEvidenceV001(path.join(evidenceDirectory, 'completion.json'), result);
     await onProgress({phase: 'complete', scope: derived.scope, timings});
     return result;

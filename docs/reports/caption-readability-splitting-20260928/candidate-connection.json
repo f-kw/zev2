@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "readability-candidate-connection-verification-v001",
+  "observedAt": "2026-09-28T14:55:36.743Z",
+  "status": "connection-tests-passed-full-render-not-run",
+  "candidateVersion": "candidate-readability-v001",
+  "candidateViewSha256": "7b8f47471c7fa404ba00547cc2abf074d068342b3fcd3a8cc309369f1df0c3d1",
+  "originalViewSha256": "e9a0235959031dbc571df9afb5d967e0fbfde7e1dcb0834eea100a3ffd6f4b30",
+  "inputs": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/drawing-evidence.json",
+      "bytes": 7506854,
+      "fileSha256": "8239001075cf2744f72cdd4d5a2902a5d7b204ee63ad253ac90446a861556a64"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/caption-attempt-003/meaning-input.json",
+      "bytes": 2084605,
+      "fileSha256": "bb008b9ebd609ca45472aca9aa87804f1d506eafb4c52c9fbd02d6d2201aaaed"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/readability-evidence.json",
+      "bytes": 1475483,
+      "fileSha256": "55c37ca39f48bee1aaa944b1205d930b3e598b0b024ea76543b76258b5f695a3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/readability-resolution.json",
+      "bytes": 2832648,
+      "fileSha256": "57719a6c4bb0892819ab8a80ebd28d9f4e0b48fa3a6724e3765431bb280bbd56"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-candidate-connection-20260928-v001/target-tests-v002.tap",
+      "bytes": 22459,
+      "fileSha256": "827e5505b3e4ff0c128a7f5c141c14bb8f919d430d3ff70990e2a0ed2b64060f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/caption-readability-splitting-20260928/candidate-qc-tests.tap",
+      "bytes": 17002,
+      "fileSha256": "b7f9cac8e42ead872294ed959018a14a8d8d21ca5e2e1a5ceaf84468a7463d2e"
+    }
+  ],
+  "tests": {
+    "target": {
+      "passed": 118,
+      "failed": 0,
+      "skipped": 0
+    },
+    "nativeRegression": {
+      "passed": 68,
+      "failed": 0,
+      "skipped": 0
+    },
+    "countsMustNotBeSummed": "suites overlap",
+    "knownSeparateFailures": "2 legacy Panel fixtures missing; no expectation changes"
+  },
+  "inventory": {
+    "schemaVersion": "readability-candidate-native-structural-inventory-v001",
+    "scope": "Exact logical recipe enumeration; synthetic complete-props identities for a decoded-layer storage upper bound. Not QC evidence or measured capacity.",
+    "captions": 431,
+    "nativeStates": 483,
+    "samples": 529,
+    "logicalReferences": 511014,
+    "wholeColorAlternatives": 32,
+    "captionKinds": {
+      "normal": 379,
+      "color": 33,
+      "bounce": 8,
+      "panel": 7,
+      "scale": 2,
+      "shake": 2
+    },
+    "fullCanvasPlanarBytesPerLayer": 8294400,
+    "decodedLayerCountUpperBound": 2011,
+    "decodedLayerLogicalBytesUpperBound": 16680038400,
+    "layersByFadeNumerator": {
+      "1": 483,
+      "2": 483,
+      "3": 483,
+      "4": 562
+    },
+    "generatedFadePngCountUpperBound": 1449,
+    "extractedFullFramePngCount": 1058,
+    "unmeasured": [
+      "PNG/MP4 compression sizes",
+      "serialized shared evidence bytes",
+      "real RGB crop bounds",
+      "new failure count and retained RGB bytes",
+      "browser and OS temporary storage",
+      "memory and physical I/O"
+    ]
+  },
+  "backgroundReuse": {
+    "used": true,
+    "fullCoverage": true,
+    "reason": "verified-source-and-full-projection-match",
+    "observation": "separate read-only admission call passed; bound full-run preflight will save its complete proof"
+  },
+  "disk": {
+    "availableBytes": 31859068928
+  },
+  "humanQuality": "not-evaluated",
+  "productionDefaultChanged": false,
+  "fullRender": "not-run",
+  "fullNativeQc": "not-run"
+}

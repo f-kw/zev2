@@ -13,7 +13,9 @@ import {createConnectionExpressionContextV001, createConnectionExpressionOrigina
   resetConnectionExpressionOverrideV001, resolveConnectionExpressionV001}
   from './connection_expression_v001.mjs';
 import {createOrchestrationProjectionV001, projectCaptionPlanV001, projectAudioPeakV001,
-  projectAudioEvidenceIntervalV001} from './presentation_orchestration_projection_v001.mjs';
+  projectAudioEvidenceIntervalV001, projectCaptionIntervalV001} from './presentation_orchestration_projection_v001.mjs';
+import {buildReadabilityCandidateV001, READABILITY_CANDIDATE_PROFILE_V001, materializeReadabilityCandidateCaptionV001}
+  from '../../tools/digest-quality/caption-readability-candidate.mjs';
 
 export const ORCHESTRATION_VERSION_V002 = 'presentation-orchestration-v002';
 export const ORCHESTRATION_VERSION_V003 = 'presentation-orchestration-v003';
@@ -647,6 +649,43 @@ export function resolveOrchestrationDrawingViewV001({context, state}) {
   return view;
 }
 export function assertOrchestrationDrawingViewV001(view) {viewData(view); return true;}
+
+/** Explicit, unadopted rendering derived from immutable original choices.
+ * The source projection and four original saved systems remain authoritative;
+ * candidate segmentation never overwrites or relabels those original records. */
+export function deriveReadabilityOrchestrationDrawingViewV001({view, meaning, evidence, savedResolution,
+  version}) {
+  const original = viewData(view);
+  require(!original.candidateInput, 'candidate must derive from an original saved drawing view');
+  const source = contextData(original.context).source;
+  const input = {version, meaning: clone(meaning), evidence: clone(evidence), savedResolution: clone(savedResolution)};
+  const candidate = buildReadabilityCandidateV001({sourceView: view, source, ...input});
+  const captionTimings = candidate.captionMappings.flatMap(mapping => {
+    const parent = view.captionTimings.find(timing => timing.source.captionId === mapping.parentCaptionId);
+    require(parent, 'candidate parent clock is missing');
+    const shift = parent.startFrame - parent.source.startFrame;
+    return mapping.children.map(child => {
+      const timing = projectCaptionIntervalV001({projection: view.projection, caption: {
+        clock: 'digest-original', sourceClockSha256: view.projection.sourceClockSha256,
+        captionId: child.captionId, startFrame: child.startFrame - shift,
+        endFrameExclusive: child.endFrameExclusive - shift}});
+      require(timing.startFrame === child.startFrame && timing.endFrameExclusive === child.endFrameExclusive,
+        'candidate clock cannot reproduce the saved source projection');
+      return timing;
+    });
+  });
+  const {viewSha256: ignored, ...originalBody} = clone(view);
+  const body = {...originalBody, schemaVersion: 'presentation-orchestration-drawing-view-candidate-v001',
+    version, candidateExecution: {version, sourceViewSha256: view.viewSha256,
+      candidateSha256: candidate.candidateSha256, profile: clone(READABILITY_CANDIDATE_PROFILE_V001),
+      humanQuality: 'not-evaluated', productionDefaultChanged: false},
+    projectedNormalPlan: clone(candidate.projectedNormalPlan), resolvedPlan: clone(candidate.resolvedPlan),
+    effectiveSelections: clone(candidate.effectiveSelections), resolution: clone(candidate.resolution),
+    captionTimings};
+  const derived = freeze({...body, viewSha256: hash(body)});
+  views.set(derived, {...original, originalView: view, candidateInput: freeze(input)});
+  return derived;
+}
 export function assertOrchestrationDrawingViewMatchesStateV001({view, context, state}) {
   viewData(view);
   const expected = resolveOrchestrationDrawingViewV001({context, state});
@@ -657,13 +696,14 @@ export function assertOrchestrationDrawingViewMatchesStateV001({view, context, s
 /** The projected normal caption keeps the same font, geometry and display clock.
  * Alternatives change only the intended discriminating visual property. */
 export function buildOrchestrationNativeQcAlternativeElementsV001(view) {
-  viewData(view);
+  const candidate = viewData(view).candidateInput;
   const alternatives = view.effectiveSelections.map(row => {
     const normal = view.projectedNormalPlan.elements.find(element => element.instructionId === row.captionId);
     const selected = view.resolvedPlan.elements.find(element => element.instructionId === row.captionId);
     const entries = [{kind: 'normal', element: clone(normal)}];
     if (row.selection.role === 'Focus' && row.selection.scope === 'partial-caption') entries.push({kind: 'whole-color',
-      element: materializeFiniteAutoPresentationCaptionV001({element: clone(normal), canvas: view.projectedNormalPlan.canvas,
+      element: (candidate ? materializeReadabilityCandidateCaptionV001 : materializeFiniteAutoPresentationCaptionV001)({
+        ...(candidate ? {version: candidate.version} : {}), element: clone(normal), canvas: view.projectedNormalPlan.canvas,
         selection: {role: 'Focus', presentation: 'provisional-focus', scope: 'whole-caption'}})});
     if (row.selection.role === 'Panel accent') {
       const element = clone(selected);
@@ -678,12 +718,29 @@ export function buildOrchestrationNativeQcAlternativeElementsV001(view) {
 /** A saved proof is a recipe, never a trusted projected plan. Reload rebuilds
  * all sources, semantic choices, overrides, projection and finite drawing. */
 export function exportOrchestrationDrawingViewEvidenceV001(view) {
-  const {context, state} = viewData(view), data = contextData(context);
+  const saved = viewData(view);
+  if (saved.candidateInput) {
+    const body = {schemaVersion: 'presentation-orchestration-drawing-evidence-candidate-v001',
+      originalEvidence: exportOrchestrationDrawingViewEvidenceV001(saved.originalView),
+      candidateInput: clone(saved.candidateInput), expectedViewSha256: view.viewSha256};
+    return freeze({...body, evidenceSha256: hash(body)});
+  }
+  const {context, state} = saved, data = contextData(context);
   const body = {schemaVersion: wireSchema(context, 'drawing-evidence'),
     source: clone(data.source), state: clone(state), expectedViewSha256: view.viewSha256};
   return freeze({...body, evidenceSha256: hash(body)});
 }
 export function restoreOrchestrationDrawingViewEvidenceV001(evidence) {
+  if (evidence?.schemaVersion === 'presentation-orchestration-drawing-evidence-candidate-v001') {
+    exact(evidence, ['schemaVersion', 'originalEvidence', 'candidateInput', 'expectedViewSha256', 'evidenceSha256'], 'candidate drawing proof');
+    const {evidenceSha256, ...body} = evidence;
+    require(hash(body) === evidenceSha256, 'candidate drawing proof SHA differs');
+    exact(evidence.candidateInput, ['version', 'meaning', 'evidence', 'savedResolution'], 'candidate input');
+    const original = restoreOrchestrationDrawingViewEvidenceV001(evidence.originalEvidence);
+    const view = deriveReadabilityOrchestrationDrawingViewV001({view: original, ...evidence.candidateInput});
+    require(view.viewSha256 === evidence.expectedViewSha256, 'reconstructed candidate drawing view differs');
+    return view;
+  }
   exact(evidence, ['schemaVersion', 'source', 'state', 'expectedViewSha256', 'evidenceSha256'], 'drawing proof');
   const {evidenceSha256, ...body} = evidence;
   require(['presentation-orchestration-drawing-evidence-v002', 'presentation-orchestration-drawing-evidence-v003'].includes(evidence.schemaVersion)
