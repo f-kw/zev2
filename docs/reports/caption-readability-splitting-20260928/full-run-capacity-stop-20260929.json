@@ -1,0 +1,264 @@
+{
+  "schemaVersion": "caption-readability-full-capacity-stop-v001",
+  "status": "incomplete-capacity-hard-stop",
+  "approvalCommit": "6319689500949c5090aae0ab7aa9cb688cc2c2b3",
+  "implementationCommit": "f4af0913ebc6cdf09b90b663e9714bb1549d71e7",
+  "scope": "7A full candidate only; no completed native or final QC claim",
+  "runRef": {
+    "path": "runtime/artifacts/caption-readability-full-20260929-v001/job.json",
+    "bytes": 60864,
+    "sha256": "cba979eab71910b0099dc824220cc9f7275f3e22792a5c50f408a9e8faf4cd99"
+  },
+  "failureRef": {
+    "path": "runtime/artifacts/caption-readability-full-20260929-v001/execution-failure.json",
+    "bytes": 9224,
+    "sha256": "62a9e41dd2ab6c86a30c672e18e15dc3f4ad2f8726efb35d94555b1bd7aca9c3"
+  },
+  "capacityObservationsRef": {
+    "path": "runtime/artifacts/caption-readability-full-20260929-v001/capacity-observations.jsonl",
+    "bytes": 60421615,
+    "sha256": "66a6900f1af6fa75174178a1b72166dde0bc222af11eda15e4e971baa80e001a"
+  },
+  "startedAt": "2026-09-28T15:39:40.082Z",
+  "endedAt": "2026-09-28T18:00:25.810Z",
+  "elapsedSecondsToFailureEvidenceSaved": 8445.823189416,
+  "capacity": {
+    "nativeStartMinimumBytes": 28680038400,
+    "includedReserveBytes": 12000000000,
+    "nativeStartAvailableBytes": 29871611904,
+    "nativeStartObservedAt": "2026-09-28T16:35:14.067Z",
+    "hardFloorBytes": 10000000000,
+    "interruptedBeforeHeavyBatch": {
+      "sampleIndex": 169,
+      "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+      "frame": 7564,
+      "directory": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/scratch/native-frame-qc/native-frame-qc-rkG58x/references/sample-169",
+      "phase": "native-reference-composite",
+      "batchIndex": 29,
+      "referenceOffset": 928,
+      "physicalReferenceCount": 949,
+      "logicalReferenceCount": 962,
+      "outputCount": 21,
+      "plannedLogicalBytes": 54893916,
+      "existingReferenceLogicalBytes": 2425788288,
+      "byteMeaning": "Exact new RGB24 reference bytes; logical candidates with the same derived composition share one output",
+      "disk": {
+        "observedAt": "2026-09-28T18:00:20.074Z",
+        "availableBytes": 9998073856
+      },
+      "minimumFreeBytes": 10000000000,
+      "status": "capacity-interrupted"
+    },
+    "afterFailureEvidence": {
+      "observedAt": "2026-09-28T18:00:25.810Z",
+      "availableBytes": 9368834048
+    }
+  },
+  "body": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/publish/presentation-rendered-v002.mp4",
+    "bytes": 675155103,
+    "fileSha256": "c5191911e77c2b20da19b5a4d6156a9c7eabe011134e5bcfa2fb1a6226d6a4fa"
+  },
+  "replay": {
+    "status": "passed",
+    "violations": [],
+    "mp4ByteEqualToBody": true,
+    "frameCount": 27949,
+    "bytes": 675155103,
+    "resultRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/scratch/exact-replay-result.json",
+      "bytes": 5619839,
+      "fileSha256": "415261d1a39223b90a2748c799af2175d5cfa8b1ef4b800d5b1bb1a13eb8cf5b"
+    }
+  },
+  "native": {
+    "expectedSamples": 529,
+    "plannedLogicalReferences": 511014,
+    "completedSamples": 169,
+    "completedPassedSamples": 169,
+    "completedFailedSamples": 0,
+    "incompleteSamples": 1,
+    "notStartedSamples": 359,
+    "incompleteSampleIndex": 169,
+    "incompleteFrame": 7564,
+    "incompleteCaption": "new-material-digest-20260926-v001-instruction-instruction-000095",
+    "incompleteLogicalReferences": 962,
+    "incompletePhysicalReferences": 949,
+    "generatedReferencesRetained": 928,
+    "generatedReferenceBytesRetained": 2425788288,
+    "notGeneratedReferences": 21,
+    "notGeneratedBytes": 54893916,
+    "notGeneratedPathsVerifiedAbsent": true,
+    "notGeneratedPathsAbsentFromExecutionRecords": true,
+    "completedReceipts": 169,
+    "completedRetention": "released-verified-pass",
+    "incompleteSuccessReceiptExists": false,
+    "failureEvidenceSha256": "741ee20a1b5fb4171f02120f0d59d8bb686544fff849321ba592aac20b48f467",
+    "interruptedEvidenceSha256": "a919b85e354b4e40d70c3a22fa6448c9940f57d16c88798e4f9cbc23455dbe85",
+    "sharedFailureReferencesMatchActualHashes": true,
+    "old000103Frame7801Reached": false
+  },
+  "timingSeconds": {
+    "preflightOutsideRun": 32.854066291,
+    "inputValidation": 6.676541625,
+    "preparationInclusive": 745.581028084,
+    "backgroundReuseAdmissionWithinPreparation": 25.867303125,
+    "captionImagesProgressInterval": 616.964,
+    "bodyComposition": 879.416316875,
+    "fullReplayComposition": 877.085376958,
+    "fullReplayInspectionInclusive": 902.9544225,
+    "startToNativeGate": 3333.9669045,
+    "nativeGateToHardStop": 5106.12,
+    "nativeToFirstSample": 470.302,
+    "completed169SamplesWallSum": 4619.665,
+    "incompleteSamplePartial": 15.863,
+    "stopToFailureEvidenceSaved": 5.736,
+    "readbackAfterStopOutsideRun": 25.078989625
+  },
+  "completedSampleTimingSecondsWithinNative": {
+    "inputValidation": 663.341,
+    "completedRgbCrop": 9.625,
+    "referenceComposition": 2443.927,
+    "referenceValidation": 252.272,
+    "rgbComparison": 816.505,
+    "evidenceSave": 10.178,
+    "evidenceReadback": 21.177,
+    "normalReferenceRelease": 293.858
+  },
+  "timingCaution": "Nested and progress-interval timings overlap; do not sum them into run wall time. No final QC, publication or full QC independent readback completed.",
+  "retainedStorageAfterStop": {
+    "observedAtApproximateJst": "2026-09-29 03:02",
+    "method": "stat of regular files in this run and renderer work directory only; allocated bytes = st_blocks * 512; no old inputs, directory metadata, symlinks or hardlinks",
+    "runRecords": {
+      "logicalBytes": 353343924,
+      "allocatedBytes": 480727040
+    },
+    "rendererWork": {
+      "logicalBytes": 24918041563,
+      "allocatedBytes": 24943390720
+    },
+    "total": {
+      "logicalBytes": 25271385487,
+      "allocatedBytes": 25424117760
+    },
+    "nativeLayers": {
+      "logicalBytes": 16633443856,
+      "allocatedBytes": 16636350464,
+      "gbrapFiles": 1987,
+      "gbrapLogicalBytes": 16480972800
+    },
+    "referencesAndReceipts": {
+      "logicalBytes": 4127746603,
+      "allocatedBytes": 4131815424
+    },
+    "completedAndBackgroundPng": {
+      "logicalBytes": 1819928624,
+      "allocatedBytes": 1822052352
+    },
+    "nativeInterruptionEvidence": {
+      "logicalBytes": 506407141,
+      "allocatedBytes": 506408960
+    },
+    "completedSamples": {
+      "receiptJsonBytes": 1256157147,
+      "completedRgbBytes": 441765324,
+      "retainedReferenceRgbBytes": 0,
+      "cumulativeGeneratedReferenceRgbBytes": 420788006100,
+      "largestSingleCompletedSampleConcurrentReferenceRgbBytes": 2498980176
+    },
+    "incompleteSample": {
+      "jsonBytes": 1421848,
+      "rgbFilesIncludingCompleted": 929,
+      "rgbBytesIncludingCompleted": 2428402284
+    },
+    "caution": "Post-stop retained size, not whole-run peak or physical I/O. Agent readback may add a lightweight record after this observation."
+  },
+  "independentBodyReplayReadback": {
+    "ref": {
+      "path": "runtime/artifacts/caption-readability-full-20260929-v001/body-replay-readback-after-stop.json",
+      "bytes": 2851,
+      "sha256": "58bdd739dc1c6ee955757e431e85711f1220190d04042abee5f06c88acaa070d"
+    },
+    "result": {
+      "schemaVersion": "presentation-body-replay-readback-after-stop-v001",
+      "status": "passed",
+      "startedAt": "2026-09-28T18:03:07.962Z",
+      "endedAt": "2026-09-28T18:03:33.041Z",
+      "elapsedMilliseconds": 25078.989625,
+      "processId": 73492,
+      "scope": "Read-only independent process verification of saved body, physical PNGs, full replay and input references after capacity stop; no native or final QC completion claim.",
+      "jobRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-full-20260929-v001/job.json",
+        "bytes": 60864,
+        "fileSha256": "cba979eab71910b0099dc824220cc9f7275f3e22792a5c50f408a9e8faf4cd99"
+      },
+      "receiptRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-full-20260929-v001/render/before-native-checkpoint.json",
+        "bytes": 1624395,
+        "fileSha256": "6fba9c81f3eef4fed421e6a262ae86fa55d05e0cace0aaf86d979b5803dcd7da"
+      },
+      "rendererCheckpointRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/scratch/before-native-checkpoint.json",
+        "bytes": 26165029,
+        "fileSha256": "df50e9bbab0a6902017d64f8d087ce7d0301f56a2fbea6810f25cd11a6b6a43e"
+      },
+      "drawingEvidenceRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-full-20260929-v001/candidate-drawing-evidence.json",
+        "bytes": 14946621,
+        "fileSha256": "47daba62ab462c1945a2d4742a46604aecf359eb004cca92577636bcb7ce39e1"
+      },
+      "viewSha256": "7b8f47471c7fa404ba00547cc2abf074d068342b3fcd3a8cc309369f1df0c3d1",
+      "rulesFileCount": 69,
+      "frameCount": 27949,
+      "captionCount": 431,
+      "physicalPngCount": 483,
+      "completedBody": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/publish/presentation-rendered-v002.mp4",
+        "bytes": 675155103,
+        "fileSha256": "c5191911e77c2b20da19b5a4d6156a9c7eabe011134e5bcfa2fb1a6226d6a4fa"
+      },
+      "replayRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/scratch/exact-replay-result.json",
+        "bytes": 5619839,
+        "fileSha256": "415261d1a39223b90a2748c799af2175d5cfa8b1ef4b800d5b1bb1a13eb8cf5b"
+      },
+      "replayStatus": "passed",
+      "replayViolations": [],
+      "replayInputRefCount": 528,
+      "replayGeneratedArtifactCount": 8,
+      "rendererStage": "body-and-exact-replay-verified",
+      "finalQcComplete": false,
+      "nativeQcStarted": false,
+      "resumeInvoked": false,
+      "mediaRecompositions": 0,
+      "processLaunchAttempts": 0,
+      "writes": "This lightweight readback report only; saved rendering artifacts unchanged."
+    }
+  },
+  "resumeState": {
+    "bodyAndReplayCheckpointVerified": true,
+    "smallSeparateProcessResumeTestPassed": true,
+    "fullRunResumeExecuted": false,
+    "nativeSampleCheckpointResumeImplemented": false,
+    "currentResumeStartsNativeAgain": true,
+    "oldAndIncompleteEvidenceRetained": true
+  },
+  "notCompleted": [
+    "remaining 360 native samples",
+    "final QC",
+    "candidate publication/fixed completion",
+    "independent readback of completed full QC",
+    "7A technical completion report and NEXT_REQUEST"
+  ],
+  "prohibitedOperationsPerformed": {
+    "oldArtifactDeletion": false,
+    "oldArtifactOverwrite": false,
+    "qcRelaxation": false,
+    "candidateReduction": false,
+    "thresholdChange": false,
+    "stt": false,
+    "paidApi": false,
+    "bodyOrReplayRerenderAfterStop": false
+  },
+  "resourceLimits": "Whole process-tree memory peak and physical I/O are not established by this stop summary."
+}
