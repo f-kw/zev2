@@ -1,0 +1,326 @@
+{
+  "schemaVersion": "caption-readability-local-verification-v001",
+  "recordedAt": "2026-09-28T13:45:08.562506+00:00",
+  "status": "local-preview-verified-not-adopted-not-7A-complete",
+  "profile": {
+    "schemaVersion": "caption-readability-preview-profile-v001",
+    "adoption": "not-adopted-human-preview-required",
+    "normalFontSizePx": 144,
+    "scaleFontSizePx": 192,
+    "borderWidthPx": 4,
+    "glowWidthPx": 4,
+    "outlineColor": "#2F4F4F",
+    "outlineColorOrigin": "DarkSlateGray named color",
+    "geometryEngine": "normal-landscape-render-layout-v001",
+    "horizontalSafeMarginRatio": 0,
+    "safeAreaPx": {
+      "left": 4,
+      "right": 4,
+      "top": 40,
+      "bottom": 40
+    },
+    "protectionReason": "Existing engine minimum 4px; full stroke/glow raster must fit. Vertical placement protection retained."
+  },
+  "sourcePlan": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-render-plan-v002.json",
+    "bytes": 1287124,
+    "sha256": "8a694c9d162b08e46996bf777c351f971f1364a0156df3cec30da668af86bbfa"
+  },
+  "semantics": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/caption-readability-splitting-20260928/semantic-boundaries.json",
+    "bytes": 60786,
+    "sha256": "09656ce2441d5efde10e7d1856b16e20d80707a8ce915045b72fab134f0d487b"
+  },
+  "summary": {
+    "originalCaptions": 326,
+    "outputCaptions": 431,
+    "splitParents": 99,
+    "oneLineCaptions": 392,
+    "twoLineCaptions": 39
+  },
+  "layout": {
+    "status": "passed",
+    "states": 483,
+    "overflow": []
+  },
+  "raster": {
+    "status": "passed",
+    "checks": 48,
+    "representativeParents": [
+      "000053",
+      "000026",
+      "000089",
+      "000260",
+      "000137",
+      "000135",
+      "000095",
+      "000263",
+      "000092",
+      "000117",
+      "000139",
+      "000071",
+      "000119",
+      "000266",
+      "000278",
+      "000312",
+      "000318",
+      "000304"
+    ],
+    "pngRepeatScope": "same renderer job; not an independent-process redraw"
+  },
+  "package": {
+    "video": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/review-v002/7A-current-then-candidate-cfr.mp4",
+      "bytes": 15377637,
+      "sha256": "fb70de4b2b8f59ff9f680c0ffe61492c091c3ba51a4bbeefce6a60c1e9c18a80"
+    },
+    "totalFrames": 712,
+    "totalVideoSeconds": 23.733333333333334,
+    "exactCfrPts": true,
+    "humanApproval": false,
+    "questions": [
+      "文字サイズ・分割はこの方向でよいか",
+      "縁取りは現行よりよいか"
+    ]
+  },
+  "completedFrameCheck": {
+    "status": "passed",
+    "frames": 16,
+    "observations": 32,
+    "background": "16 sampled source frame RGB bytes identical",
+    "pairedAudio": [
+      {
+        "caption": "000260",
+        "sourceRangeSamples": [
+          32531100,
+          32889780
+        ],
+        "status": "identical-packets-and-clock",
+        "observations": [
+          {
+            "side": "current",
+            "packetCount": 352,
+            "packetSha256": "219520527e66f05ed2b9aca162910350070974caf410387503fe34a0b55fb45d",
+            "durationSamples": 358680
+          },
+          {
+            "side": "candidate",
+            "packetCount": 352,
+            "packetSha256": "219520527e66f05ed2b9aca162910350070974caf410387503fe34a0b55fb45d",
+            "durationSamples": 358680
+          }
+        ],
+        "note": "The shared M4A container duration can differ by edit-list rounding; packet clocks match exactly."
+      },
+      {
+        "caption": "000137",
+        "sourceRangeSamples": [
+          15170400,
+          15282120
+        ],
+        "status": "identical-packets-and-clock",
+        "observations": [
+          {
+            "side": "current",
+            "packetCount": 111,
+            "packetSha256": "27e72f014d5e814c7d1a25a91ae09edc90759401f8c57cd5e876ca4e7cb19994",
+            "durationSamples": 111720
+          },
+          {
+            "side": "candidate",
+            "packetCount": 111,
+            "packetSha256": "27e72f014d5e814c7d1a25a91ae09edc90759401f8c57cd5e876ca4e7cb19994",
+            "durationSamples": 111720
+          }
+        ],
+        "note": "The shared M4A container duration can differ by edit-list rounding; packet clocks match exactly."
+      },
+      {
+        "caption": "000095",
+        "sourceRangeSamples": [
+          11107320,
+          11160240
+        ],
+        "status": "identical-packets-and-clock",
+        "observations": [
+          {
+            "side": "current",
+            "packetCount": 53,
+            "packetSha256": "1862de64554a086bb4e70057f16bcf518337fef8d8a241fcb52d2fa06b7555ec",
+            "durationSamples": 52920
+          },
+          {
+            "side": "candidate",
+            "packetCount": 53,
+            "packetSha256": "1862de64554a086bb4e70057f16bcf518337fef8d8a241fcb52d2fa06b7555ec",
+            "durationSamples": 52920
+          }
+        ],
+        "note": "The shared M4A container duration can differ by edit-list rounding; packet clocks match exactly."
+      }
+    ],
+    "finalAudio": {
+      "status": "identical-independent-AAC-packets-and-clock",
+      "packetCount": 1024,
+      "packetSha256": "68316a1aff56a155eea08575dcf8a172d9ae7f81b9d24bda51a757808a42ceb1",
+      "durationSamples": 1046640,
+      "reference": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/frame-check/rgba-shift-v002/expected-package-audio.m4a",
+        "bytes": 392173,
+        "sha256": "2b0f3aa238d787d5d3e9662bd8eed8250c6f85d3b7938dc8c11b4bb567a210e6"
+      },
+      "limitation": "Final AAC is a continuous re-encoding, not byte-identical to the six input AAC streams."
+    },
+    "startedAt": "2026-09-28T13:41:49.624Z",
+    "finishedAt": "2026-09-28T13:42:24.454Z"
+  },
+  "tests": {
+    "passed": 131,
+    "failed": 0,
+    "knownSeparateExistingFailure": {
+      "file": "evals/clip_composition/presentation_orchestration_panel_palettes_v003.test.mjs",
+      "passed": 11,
+      "failed": 2,
+      "reason": "Two prior quality-q4 fixture files absent; expectations not modified"
+    },
+    "command": "node --test tools/digest-quality/caption-readability-plan.test.mjs tools/digest-quality/caption-readability-source.test.mjs tools/digest-quality/caption-readability-preview.test.mjs tools/digest-quality/r1-caption-plan.test.mjs evals/clip_composition/presentation_readability_motion_v001.test.mjs evals/clip_composition/presentation_caption_motion_v001.test.mjs evals/clip_composition/presentation_motion_smoothing_v002.test.mjs evals/clip_composition/presentation_auto_effects_pulse_v001.test.mjs evals/clip_composition/presentation_auto_effects_motion_v001.test.mjs evals/clip_composition/presentation_renderer_line_layout_rule_v002.test.mjs"
+  },
+  "protectedOriginalVideo": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-rendered-v002.mp4",
+    "bytes": 671459095,
+    "sha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a",
+    "rehashedAfterLocalWork": true
+  },
+  "geminiObservation": {
+    "url": "https://gemini.google.com/app/032374ddebdec9d8",
+    "model": "Web Gemini Pro",
+    "videoSha256": "fb70de4b2b8f59ff9f680c0ffe61492c091c3ba51a4bbeefce6a60c1e9c18a80",
+    "visualFaultClaims": "first-pass outline/overlap/Bounce claims retracted as unsupported after asking for specific locations; not used as proof of pass",
+    "speechBoundary": "estimates changed between answers; final estimate about 6.7s vs saved-atom cut 6.9667s in source excerpt",
+    "status": "precise auditory alignment unconfirmed; no inferred clock correction"
+  },
+  "notDone": [
+    "human adoption",
+    "production/default activation",
+    "full Digest rendering",
+    "full native QC",
+    "general automatic speech-pace optimization"
+  ],
+  "evidence": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/prepared.json",
+      "bytes": 1513,
+      "sha256": "8914072ab1b35e0ada2112f8ab4f417b5b342868c9adf34d597754de632526d5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/source-atoms.json",
+      "bytes": 3395125,
+      "sha256": "3281666e3c79405390cb9a13144bf6811a2c35289193d479d4baf8fdb04db41a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/candidate-profile.json",
+      "bytes": 602,
+      "sha256": "10861efcecb4f76506ef438ef7155036d6ca4a66019fa668b999e7f2322dae4f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/unsplit-core-plan.json",
+      "bytes": 2039124,
+      "sha256": "07d64cc700d5fa7411d38bdaf7d73396b9364dc3cb097ff37d00d04a22c88996"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/readability-evidence.json",
+      "bytes": 1475483,
+      "sha256": "55c37ca39f48bee1aaa944b1205d930b3e598b0b024ea76543b76258b5f695a3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/readability-resolution.json",
+      "bytes": 2832648,
+      "sha256": "57719a6c4bb0892819ab8a80ebd28d9f4e0b48fa3a6724e3765431bb280bbd56"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/candidate-render-plan.json",
+      "bytes": 2295242,
+      "sha256": "42efedab8a07bae3794c9cf6a43842f06ed95743ff748f0452375f56602892dc"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/span-font-measurements.json",
+      "bytes": 319048,
+      "sha256": "e63fb121eb211b96a35af5aa12c5ce16c5fb6b97e8e553f7be4bb7395a6a9e44"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/resolved-layout/span-font-measurements.json",
+      "bytes": 243586,
+      "sha256": "f95a585cd6092a59c7c96d9d26dac7d5292dc9944d9939e1f95cdeabfd33f6c3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/resolved-layout-summary.json",
+      "bytes": 60,
+      "sha256": "215b895b8f681229b2141cf057df38f20ad9801004e1a10fefc87bf6e28a0d67"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/raster-records.json",
+      "bytes": 305642,
+      "sha256": "89f8fafc28df6a5f698dc337e2ac761f0d31e12c7cbbb74239e759aaac14abc5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/raster-verification.json",
+      "bytes": 280126,
+      "sha256": "840aaf21ca46a08c7b371c3b75faf139d3fd418cea4c11db124b574f0ed02385"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/target-tests.tap",
+      "bytes": 20826,
+      "sha256": "50ee7222e5ae0298ce77a3eed61d6487f8ce0942f8ff81dc8441ff6b37b21159"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/human-package-final.json",
+      "bytes": 133739,
+      "sha256": "14e30d5486e1f104f7125a4b3570eb8175b1a7864cd7ca94bf5cd7af515886ae"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/frame-check/rgba-shift-v002/verification.json",
+      "bytes": 169670,
+      "sha256": "f225da198a37bca129b20f9b595bf2d2bea9aa6d606fd469bf6ea411c55b89d2"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/frame-check/rgba-shift-v002/commands.json",
+      "bytes": 282222,
+      "sha256": "f22aee3ae29f76eb1b4def3d12950e565accfd491ad7a212b1f1c3d9b59f7c39"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/final-target-tests.tap",
+      "bytes": 22398,
+      "sha256": "82843af2d2d68e9ac58c197ab2c469e63d63e6eedd93682fb5341ee6b0a87f8a"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/saved-readback.json",
+      "bytes": 92,
+      "sha256": "11bf975283537efb62d47451708b36b075f3892b612afbb792a80c9e33831e9e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v006/package-readback.json",
+      "bytes": 118,
+      "sha256": "9902009036d47ff995d8746ae9f62772d54b7c78ce38a667aa7c7ebab40741fa"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/caption-readability-splitting-20260928/invariant-verification.json",
+      "bytes": 62712,
+      "sha256": "e2c6dc82b8791b9463807969e286bef78822d579176f963db4d6bed428c50d10"
+    }
+  ],
+  "savedReadback": {
+    "saved-readback.json": {
+      "status": "passed",
+      "rasterImages": 48,
+      "repeatScope": "same-overlay-job",
+      "mediaRedrawn": false
+    },
+    "package-readback.json": {
+      "status": "passed",
+      "rasterImages": 39,
+      "repeatScope": "same-overlay-job",
+      "mediaRedrawn": false,
+      "packageFiles": "verified"
+    }
+  }
+}

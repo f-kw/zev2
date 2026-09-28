@@ -48,8 +48,27 @@ export const PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001 = freeze({
   returnRule: 'normal-at-speech-end-or-one-frame-before-common-exit-fade',
 });
 
-function checkCaption(element, canvas) {
-  const preset = PRESENTATION_PULSE_PRESET_V001;
+/** Explicit 144 px readability candidate; no default or saved 96 px state changes. */
+export const PRESENTATION_PULSE_READABILITY_PRESET_V001 = freeze({
+  ...PRESENTATION_PULSE_PRESET_V001, version: 'presentation-pulse-readability-v001',
+  normalFontSizePx: 144, middleFontSizePx: 168, maximumFontSizePx: 192,
+  states: [
+    {state: 'normal', fontSizePx: 144},
+    {state: 'middle', fontSizePx: 168},
+    {state: 'maximum', fontSizePx: 192},
+    {state: 'between-normal-middle', fontSizePx: 156},
+    {state: 'between-middle-maximum', fontSizePx: 180},
+  ],
+});
+
+function presetForVersion(version) {
+  const preset = [PRESENTATION_PULSE_PRESET_V001, PRESENTATION_PULSE_READABILITY_PRESET_V001,
+    PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001].find(value => value.version === version);
+  if (!preset) reject('unknown finite preset version');
+  return preset;
+}
+
+function checkCaption(element, canvas, preset) {
   if (canvas?.fps !== preset.fps) reject('the finite preset requires 30 fps');
   if (element?.kind !== 'speech-caption'
     || !integer(element.startFrame) || !integer(element.endFrameExclusive)
@@ -58,7 +77,7 @@ function checkCaption(element, canvas) {
     reject('invalid fixed caption interval');
   }
   if (element.visualState?.textStyle?.fontSizePx !== preset.normalFontSizePx) {
-    reject('the finite preset requires the unchanged 96 px normal caption');
+    reject(`the finite preset requires the unchanged ${preset.normalFontSizePx} px normal caption`);
   }
   if (element.visualState?.position?.preset !== preset.positionPreset) {
     reject('the finite preset requires the existing bottom-centre caption anchor');
@@ -66,11 +85,15 @@ function checkCaption(element, canvas) {
   if (Object.hasOwn(element, 'presentationColorRange')) reject('expressions cannot be stacked');
 }
 
-function programForAnchor(element, canvas, anchorFrame, speechEndFrame) {
-  checkCaption(element, canvas);
+function programForAnchor(element, canvas, anchorFrame, speechEndFrame,
+  presetVersion = speechEndFrame === undefined ? PRESENTATION_PULSE_PRESET_V001.version
+    : PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001.version) {
+  const preset = presetForVersion(presetVersion);
+  checkCaption(element, canvas, preset);
   if (!integer(anchorFrame)) reject('invalid derived anchor frame');
-  const preset = speechEndFrame === undefined ? PRESENTATION_PULSE_PRESET_V001
-    : PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001;
+  if (Object.hasOwn(preset, 'returnStates') !== (speechEndFrame !== undefined)) {
+    reject('finite preset and speech-end return differ');
+  }
   if (speechEndFrame !== undefined && (!integer(speechEndFrame) || speechEndFrame <= anchorFrame
     || speechEndFrame > element.endFrameExclusive)) reject('invalid bound speech end');
   let excursion = preset.excursion.map(row => ({state: row.state,
@@ -116,8 +139,9 @@ function programForAnchor(element, canvas, anchorFrame, speechEndFrame) {
 }
 
 /** Derive the one excursion from an actual measured sample, never AI seconds. */
-export function resolvePresentationPulseTimingV001({element, canvas, peakSample, sampleRate, frameOffset = 0}) {
-  checkCaption(element, canvas);
+export function resolvePresentationPulseTimingV001({element, canvas, peakSample, sampleRate, frameOffset = 0,
+  presetVersion = PRESENTATION_PULSE_PRESET_V001.version}) {
+  checkCaption(element, canvas, presetForVersion(presetVersion));
   if (!integer(peakSample) || !integer(sampleRate) || sampleRate === 0) reject('invalid measured peak sample');
   if (!integer(frameOffset)) reject('invalid explicit output-frame offset');
   const rate = BigInt(sampleRate);
@@ -130,7 +154,7 @@ export function resolvePresentationPulseTimingV001({element, canvas, peakSample,
   }
   const frame = sampleTime / rate;
   if (frame > BigInt(Number.MAX_SAFE_INTEGER)) reject('derived frame is outside the exact integer range');
-  return programForAnchor(element, canvas, Number(frame));
+  return programForAnchor(element, canvas, Number(frame), undefined, presetVersion);
 }
 
 /** The peak and phrase boundary use the same already-projected output clock. */
@@ -144,21 +168,27 @@ export function resolvePresentationPulseSpeechReturnTimingV001({element, canvas,
 export function getPresentationPulseProgramV001({element, canvas}) {
   const value = element?.presentationPulse;
   const speechReturn = value?.presetVersion === PRESENTATION_PULSE_SPEECH_RETURN_PRESET_V001.version;
+  const readability = value?.presetVersion === PRESENTATION_PULSE_READABILITY_PRESET_V001.version;
   if (!exact(value, speechReturn ? ['presentation', 'presetVersion', 'anchorPeakId', 'anchorFrame', 'speechEndFrame']
+    : readability ? ['presentation', 'presetVersion', 'anchorPeakId', 'anchorFrame']
     : ['presentation', 'anchorPeakId', 'anchorFrame'])
     || value.presentation !== PRESENTATION_PULSE_PRESET_V001.presentation
     || typeof value.anchorPeakId !== 'string' || value.anchorPeakId.trim().length === 0) {
     reject('expected finite pulse metadata with one measured peak ID');
   }
   if (speechReturn && !integer(value.speechEndFrame)) reject('invalid bound speech end');
-  return programForAnchor(element, canvas, value.anchorFrame, speechReturn ? value.speechEndFrame : undefined);
+  return programForAnchor(element, canvas, value.anchorFrame, speechReturn ? value.speechEndFrame : undefined,
+    Object.hasOwn(value, 'presetVersion') ? value.presetVersion : PRESENTATION_PULSE_PRESET_V001.version);
+}
+
+export function getPresentationPulsePresetV001({element, canvas}) {
+  return presetForVersion(getPresentationPulseProgramV001({element, canvas}).presetVersion);
 }
 
 /** Every finite native PNG belongs to the same logical caption and retains its times. */
 export function buildPresentationPulseStateElementsV001({element, canvas}) {
-  getPresentationPulseProgramV001({element, canvas});
+  const preset = getPresentationPulsePresetV001({element, canvas});
   const {presentationPulse, ...normal} = element;
-  const preset = PRESENTATION_PULSE_PRESET_V001;
   return preset.states.map(({state, fontSizePx}) => ({state, element: state === 'normal' ? normal
     : {...normal, visualState: {...normal.visualState,
       textStyle: {...normal.visualState.textStyle, fontSizePx}}}}));

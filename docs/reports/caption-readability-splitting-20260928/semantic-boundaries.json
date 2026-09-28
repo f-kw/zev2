@@ -1,0 +1,1510 @@
+{
+  "schemaVersion": "caption-readability-semantic-boundaries-v001",
+  "status": "preview-language-judgment-not-adopted",
+  "judgmentOrigin": "Codex2 existing source-based language judgment for local preview; no external API",
+  "sourcePlan": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-render-plan-v002.json",
+    "bytes": 1287124,
+    "sha256": "8a694c9d162b08e46996bf777c351f971f1364a0156df3cec30da668af86bbfa"
+  },
+  "preflight": {
+    "path": "runtime/artifacts/caption-readability-20260928-preview-v002/all-layout-preflight.json",
+    "sha256": "b5605a9fc278a08d09593e4200f3da472f1de690cf0723bbe975a99650444d01"
+  },
+  "policy": {
+    "scope": "Only measured one-line-overflow captions and existing two-line captions; no source wording correction.",
+    "timing": "No clocks are invented here. The resolver must bind proposed cuts to saved source fragments and reject unsupported or too-busy transitions.",
+    "effects": "Do not divide a partial Color range. Panel and motion remain one caption; their two listed line-break proposals do not duplicate effects.",
+    "exceptions": "All two-line exceptions are proposals, not automatic adoption. Preserve parent outer clocks and original effect clocks."
+  },
+  "requiredCaptionCount": 129,
+  "rows": [
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000002",
+      "parts": [
+        "ノエちゃん家で",
+        "ドッグセラピー",
+        "受けたんで。"
+      ],
+      "reason": "場所・処置名・受けた結果を区別し、Colorの処置名を分断しない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000007",
+      "parts": [
+        "めっちゃ強い",
+        "アレルギーの薬を",
+        "飲んで行ったんですよ"
+      ],
+      "reason": "強さの説明、薬名、服用して訪問した動作。Color語句を一まとまりで残す。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000008",
+      "parts": [
+        "で触ったら",
+        "アレルギー出るから"
+      ],
+      "reason": "条件とその結果で区切る。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000009",
+      "parts": [
+        "でもなんかね",
+        "すっごいね",
+        "すっごいねなんかね"
+      ],
+      "reason": "接続から反応へ分け、繰返された「すっごいね」は語句ごと保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000010",
+      "parts": [
+        "撫でて撫でて撫でて撫でてって"
+      ],
+      "reason": "元時計では同じ依頼の繰返しが17frame・15frameに分かれるため、全体32frameの一表示に保持して短い連続切替を追加しない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000011",
+      "parts": [
+        "すごいぴょんぴょん",
+        "ぴょんぴょんって"
+      ],
+      "reason": "擬態語を文字途中で切らず、二回ずつのまとまりにする。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000014",
+      "parts": [
+        "一旦撫でさせてもらったんですよ"
+      ],
+      "reason": "元時計では時間副詞「一旦」12frameの後に長い動作語句29frameが続くため、全体41frameの一表示に保持し切替を追加しない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000020",
+      "parts": [
+        "撫でさせていただきますがなって"
+      ],
+      "reason": "元時計では依頼動作15frame・丁寧な結び26frameに分かれるため、全体41frameの一表示で動作と結びを保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000022",
+      "parts": [
+        "で割と",
+        "どれくらいいたんだろう"
+      ],
+      "reason": "前置きと滞在時間を振り返る疑問を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000026",
+      "parts": [
+        "あのワンチョム",
+        "バチクソ撫でまくって"
+      ],
+      "reason": "呼称をまとめ、犬への行動の述語を次に置く。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000035",
+      "parts": [
+        "でもちょっと",
+        "薬が効いてるから"
+      ],
+      "reason": "前置きと薬効の理由を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000037",
+      "parts": [
+        "鼻水が出るけど",
+        "鼻が詰まるみたいな"
+      ],
+      "reason": "対比する二症状の接続で区切る。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000040",
+      "parts": [
+        "下向くと",
+        "鼻水がだーって",
+        "垂れてくるみたいな"
+      ],
+      "reason": "動作条件、症状の主部、症状の述部。擬態表現を保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000043",
+      "parts": [
+        "ちょっとうまく隠しながら",
+        "やっていこうかなと"
+      ],
+      "reason": "隠す付帯動作と継続する意向を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000045",
+      "parts": [
+        "ちょっと誘惑に勝てませんでした"
+      ],
+      "reason": "元時計では「ちょっと」が6frameで、既存4frameずつのfadeを保つ分割が成立しない。否定Color範囲を保持して一表示2行へ。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000048",
+      "parts": [
+        "ドッグセラピー",
+        "受けてきたんで"
+      ],
+      "reason": "処置名を途中で切らず、経験を述べる述語と分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000050",
+      "parts": [
+        "たぶんワンチョムが",
+        "マリンを守ってくれると思う"
+      ],
+      "reason": "主語と推量する述部。Color範囲を後半に全量保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000051",
+      "parts": [
+        "わけのわからないことを",
+        "言いながら"
+      ],
+      "reason": "否定を含む連体句をまとめ、後続する発言行為を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000055",
+      "parts": [
+        "君さぁ",
+        "何を見てたんですか今まで"
+      ],
+      "reason": "呼びかけと問いを分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000057",
+      "parts": [
+        "待って",
+        "なんかでかくなってるかも"
+      ],
+      "reason": "反応と対象の変化についての推量を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000058",
+      "parts": [
+        "こんなでかくなかったかもしんない"
+      ],
+      "reason": "元時計では指示語「こんな」だけ9frameとなるため、否定過去と推量を述べる語句と106frameの一表示に保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000061",
+      "parts": [
+        "ここに葉っぱなんか",
+        "落ちてたっけ?"
+      ],
+      "reason": "元時計の「ここに」単独は7frameでfadeが成立しない。場所と対象を一まとまりにし、後続の疑問述語へ分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000065",
+      "parts": [
+        "君花瓶はさ",
+        "ずっとあったでしょ"
+      ],
+      "reason": "呼びかけを含む話題と以前からあったことを分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000066",
+      "parts": [
+        "これだから",
+        "新入りは困るんですよ"
+      ],
+      "reason": "導入と新入りへの評価を分け、Color語句は後半に保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000068",
+      "parts": [
+        "この仕事",
+        "金属15年やってるんですよ"
+      ],
+      "reason": "話題と年数を含む述部。保存本文の「金属」は訂正せず15年を分割しない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000070",
+      "parts": [
+        "あなたみたいなね、新入りがねぇ"
+      ],
+      "reason": "元時計で対象名詞だけ10frameになる分割を撤回。修飾と対象を40frameの一表示に保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000074",
+      "parts": [
+        "こないだ入ったばっかの",
+        "ぺいぺいが"
+      ],
+      "reason": "連体修飾と名詞句を分け、語の内部では切らない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000078",
+      "parts": [
+        "アーシーが一番わかってるんですから"
+      ],
+      "reason": "元時計では主語「アーシーが」だけ9frameとなるため、評価する述部と163frameの一表示に保持する。Colorの対象語句は同じ表示内で保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000082",
+      "parts": [
+        "今君",
+        "あの勘を見落とすようじゃ"
+      ],
+      "reason": "呼びかけと条件節を分ける。保存本文の「勘」を維持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000085",
+      "parts": [
+        "なんか",
+        "めでたいまであるななんか"
+      ],
+      "reason": "末尾の言い添えは4frameなので分離しない。実時刻17frameを持つ冒頭の言いよどみと、その後の慣用表現全体へ分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000089",
+      "parts": [
+        "お風呂場が最近",
+        "窓が割れるくらいのことしか",
+        "起こらないんですよね"
+      ],
+      "reason": "場所・例示・否定する述語。否定動詞の内部は切らない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000090",
+      "parts": [
+        "もうちょっと",
+        "何かありそうですけど"
+      ],
+      "reason": "程度と予想を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000107",
+      "parts": [
+        "あいつがいっちゃんやばいんだから"
+      ],
+      "reason": "元時計では主語「あいつが」だけ13frameとなるため、評価述語と94frameの一表示に保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000117",
+      "parts": [
+        "間違いがあってもいいんです"
+      ],
+      "reason": "Panelの時間・演出を保持するため子字幕に分割せず、例外欄の改行だけを候補にする。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000118",
+      "parts": [
+        "常に気づきを得る、",
+        "これがだ…"
+      ],
+      "reason": "読点の既存節境界を使い、言いかけの末尾をそのまま残す。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000122",
+      "parts": [
+        "ギャーじゃなくて、やらないと"
+      ],
+      "reason": "元時計では必要な動作「やらないと」だけ11frameとなるため、否定対比と39frameの一表示に保持する。否定表現を途中で切らない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000125",
+      "parts": [
+        "正社員としての",
+        "これ責任ですから"
+      ],
+      "reason": "立場と責任についての述部を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000133",
+      "parts": [
+        "あんたも持って帰っていいわよ"
+      ],
+      "reason": "元時計では相手の指定「あんたも」だけ11frameとなるため、許可する動作と58frameの一表示に保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000141",
+      "parts": [
+        "こんな開きながらトイレ行くのは"
+      ],
+      "reason": "元時計では主動作「トイレ行くのは」だけ16frameとなるため、付帯状況と51frameの一表示に保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000145",
+      "parts": [
+        "あのこの金属30年のマリンがね"
+      ],
+      "reason": "元時計では前置き「あの」だけ9frameとなるため、年数・人物名を含む後続語句と75frameの一表示に保持する。保存本文の「金属30年」は訂正しない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000148",
+      "parts": [
+        "こういう最中に",
+        "トイレには行かない"
+      ],
+      "reason": "状況と否定動作を区別。Colorの否定表現全体を後半に保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000152",
+      "parts": [
+        "一人になったら",
+        "過去の餌食でしょ"
+      ],
+      "reason": "条件と帰結を分ける。保存本文の「過去」を訂正しない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000153",
+      "parts": [
+        "そんなこともわからないんですか"
+      ],
+      "reason": "元時計では対象16frame・否定疑問31frameに分かれるため、全体47frameの一表示で対象と否定疑問を保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000154",
+      "parts": [
+        "だからジュオンくらいは",
+        "見とけって言ってんの"
+      ],
+      "reason": "前置き・作品名を含む対象と発言の述部を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000157",
+      "parts": [
+        "一人だろうと",
+        "二人だろうと",
+        "全員殺されるんだけど"
+      ],
+      "reason": "並列条件を一つずつ保持し、Colorの帰結を最後にまとめる。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000159",
+      "parts": [
+        "強いんだよな",
+        "ジュオンのお化け"
+      ],
+      "reason": "評価と後置された主題を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000160",
+      "parts": [
+        "カヤコカヤコと",
+        "トシオと黒猫が"
+      ],
+      "reason": "繰返された固有名詞を消さず、並列する登場者の区切りを使う。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000164",
+      "parts": [
+        "チームプレイで",
+        "殺しに来るからね"
+      ],
+      "reason": "Colorの行動様式と主動作を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000165",
+      "parts": [
+        "ジオンだから",
+        "強いんだよジオンは"
+      ],
+      "reason": "理由と結論を分け、保存本文の固有名詞表記を維持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000166",
+      "parts": [
+        "貞子は言うて",
+        "ターゲットした人?"
+      ],
+      "reason": "話題と狙う相手の名詞句を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000170",
+      "parts": [
+        "関わりを持ったら",
+        "まとめてやるからね"
+      ],
+      "reason": "条件と帰結を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000175",
+      "parts": [
+        "YouTubeとかあるから",
+        "SNSとか"
+      ],
+      "reason": "サービス名を途中で切らず、後置された追加例を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000176",
+      "parts": [
+        "カヤコの勢いは",
+        "増すばかりでしょ"
+      ],
+      "reason": "主題と増加についての述部を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000178",
+      "parts": [
+        "あ、だだだだだ",
+        "ベイビーが立った"
+      ],
+      "reason": "驚きの発声と出来事の説明を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000182",
+      "parts": [
+        "どんどん誰も行かなくなるけど"
+      ],
+      "reason": "元時計では副詞「どんどん」だけ12frameとなるため、否定述語と77frameの一表示に保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000183",
+      "parts": [
+        "さだこはビデオは",
+        "誰も見なくなったものの"
+      ],
+      "reason": "対比する主題と否定を含む譲歩節を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000185",
+      "parts": [
+        "動画、動画だから",
+        "結局はそれをね、"
+      ],
+      "reason": "繰返す名詞と理由を一緒にし、後半の言いかけを保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000186",
+      "parts": [
+        "あのなんか",
+        "さだこvsかやことかでね"
+      ],
+      "reason": "作品を指す「さだこvsかやこ」を途中で切らず、前置きを分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000187",
+      "parts": [
+        "YouTubeとか",
+        "動画配信サイトに"
+      ],
+      "reason": "サービス例と上位概念を助詞境界で分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000188",
+      "parts": [
+        "アップロードする",
+        "みたいなのも出てきてたから"
+      ],
+      "reason": "動作語をまとめ、例示と出現を述べる後半を一つにする。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000191",
+      "parts": [
+        "かやこんちはもう",
+        "誰も行かなくなるで",
+        "終わりなんだけど"
+      ],
+      "reason": "話題、否定動作、帰結を分け、保存された不自然な助詞も書き換えない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000194",
+      "parts": [
+        "貞子は現代でも通用すんだよな"
+      ],
+      "reason": "元時計では主題「貞子は」だけ10frameとなるため、その評価と131frameの一表示に保持する。Colorの対象語句は同じ表示内で保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000197",
+      "parts": [
+        "いやマジで",
+        "デジタル化までしていく"
+      ],
+      "reason": "前置きと変化についての述部を分け、Color語句を保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000198",
+      "parts": [
+        "ちょっと格が",
+        "やっぱ違うのかなって",
+        "感じがしますよね"
+      ],
+      "reason": "主語、引用される推量、受け止めを分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000199",
+      "parts": [
+        "あのーXとかで話したんですけど"
+      ],
+      "reason": "元時計では前置き「あのー」だけ8frameとなるため、その後の説明と52frameの一表示に保持する。本文と元の開始・終了は変更しない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000201",
+      "parts": [
+        "ちょっとそうだ",
+        "言っとかないと"
+      ],
+      "reason": "思い出した反応と必要な発言を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000202",
+      "parts": [
+        "意外と知らない人が",
+        "いるかもしれないから"
+      ],
+      "reason": "否定の連体修飾を保持した主語と推量述語を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000203",
+      "parts": [
+        "ちょっと教えておきたいんですけど"
+      ],
+      "reason": "元時計では前置き18frameの後に説明意図の長い語句23frameが続くため、全体41frameの一表示に保持して切替を追加しない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000208",
+      "parts": [
+        "このバッグこれね、",
+        "なんかね、"
+      ],
+      "reason": "対象提示と後続する言いよどみを既存読点で分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000209",
+      "parts": [
+        "マリンがあのね、",
+        "足にね、付けてるやつが"
+      ],
+      "reason": "主語提示と装着場所を含む名詞句を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000214",
+      "parts": [
+        "はい見ての通り",
+        "手前についてる"
+      ],
+      "reason": "導入句と位置説明を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000216",
+      "parts": [
+        "ほらお揃いのデザインに",
+        "なっているでしょ?"
+      ],
+      "reason": "デザインの説明句と確認の述部を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000221",
+      "parts": [
+        "このバッグがこれね",
+        "でかいんですよ"
+      ],
+      "reason": "主語を提示してからColor語句を含む評価を表示する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000222",
+      "parts": [
+        "気持ちちっちゃくはありません"
+      ],
+      "reason": "否定全体を意味単位として保持し、例外欄の2行候補にする。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000223",
+      "parts": [
+        "はいこれはですね",
+        "あのマリンが"
+      ],
+      "reason": "対象提示と話者を示す導入を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000226",
+      "parts": [
+        "ちょうど",
+        "iPadが入るような",
+        "サイズ感のカバンがなくて"
+      ],
+      "reason": "Colorの機器名と収容可能性を一まとまりに残し、否定は名詞句と合わせる。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000227",
+      "parts": [
+        "いつもでけえトートバッグに",
+        "入れていってるんですよね"
+      ],
+      "reason": "頻度とバッグの名詞句、入れる動作の述部を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000228",
+      "parts": [
+        "だからちょうどいい",
+        "サイズ感のものが"
+      ],
+      "reason": "求める程度と対象の名詞句を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000233",
+      "parts": [
+        "カバンの底が",
+        "その重みで",
+        "グニョンって飛び出すのね"
+      ],
+      "reason": "対象、原因、擬態語を伴う結果を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000235",
+      "parts": [
+        "だからちょっとカッチリした形で"
+      ],
+      "reason": "元時計では前置き14frame・形状の要求22frameと連続して切り替わるため、全体36frameの一表示で要求を保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000236",
+      "parts": [
+        "そういうiPadとかの",
+        "重みのあるものを入れても"
+      ],
+      "reason": "機器名を切らず、重い物を入れる条件を後半にまとめる。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000238",
+      "parts": [
+        "あのたわまないような風にしたいです"
+      ],
+      "reason": "元時計では希望を表す「したいです」だけ15frameとなるため、否定の様態と111frameの一表示に保持する。Colorの対象語句は同じ表示内で保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000239",
+      "parts": [
+        "っていうことを",
+        "言っていまして"
+      ],
+      "reason": "引用対象と発言行為を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000240",
+      "parts": [
+        "だから",
+        "そういう仕様になる予定です"
+      ],
+      "reason": "接続詞と予定の説明を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000242",
+      "parts": [
+        "せんちゃんよくあんまりサイズ",
+        "よくわかんないんですけど"
+      ],
+      "reason": "呼称だけ13frameになる切替を作らず、隣接の対象語句と47frameで保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000243",
+      "parts": [
+        "どのくらいがどのくらいっていうのが"
+      ],
+      "reason": "元時計では疑問語句が16frame・27frameで切り替わるため、全体43frameの一表示に保持し同じ問いの連続切替を追加しない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000245",
+      "parts": [
+        "A4も入るって",
+        "ひまちが言ってんの",
+        "見たんで"
+      ],
+      "reason": "規格名を含む引用、発言者、見たという受け止めを分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000246",
+      "parts": [
+        "A4とかも入る",
+        "サイズっぽいっす"
+      ],
+      "reason": "Colorの規格名を含む機能とサイズの推量を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000249",
+      "parts": [
+        "自分も使おうと思って",
+        "考えたんだから"
+      ],
+      "reason": "Colorの意図と企画した行動を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000251",
+      "parts": [
+        "とはいえさ",
+        "使いやすい",
+        "シックなデザインだけどさ"
+      ],
+      "reason": "導入と使い勝手、意匠についての名詞句を順に分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000252",
+      "parts": [
+        "この手前のこの",
+        "ハートのところとかがねぇ"
+      ],
+      "reason": "指示語のまとまりとハート部分の名詞句を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000254",
+      "parts": [
+        "外せるみたいな",
+        "仕様にしたいとか"
+      ],
+      "reason": "Colorの取り外し可否を保持し、仕様への希望を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000256",
+      "parts": [
+        "あのー",
+        "書いてあると思うんですけど"
+      ],
+      "reason": "前置きと記載についての推量を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000258",
+      "parts": [
+        "付け替えできるみたいな書いてあるんですけど"
+      ],
+      "reason": "0.867秒の現行表示を忙しい複数切替にせず、例外欄の2行候補で保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000259",
+      "parts": [
+        "はい付け替えれるような",
+        "仕様みたいな"
+      ],
+      "reason": "Color語句を含む機能説明と仕様の名詞句を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000260",
+      "parts": [
+        "そうなんか",
+        "男性でも",
+        "恥ずかしくないように"
+      ],
+      "reason": "導入、想定する使用者、否定を含む意図を順に分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000261",
+      "parts": [
+        "っていうのは",
+        "意識しましたはい"
+      ],
+      "reason": "引用対象と配慮した結論を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000263",
+      "parts": [
+        "押しバック風に",
+        "できる感じにもしたい"
+      ],
+      "reason": "用途・外観と希望を分け、保存本文の「押し」を維持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000264",
+      "parts": [
+        "みたいな話も",
+        "してたんですけど"
+      ],
+      "reason": "話題と発言行為を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000266",
+      "parts": [
+        "まだサンプルが届いてないんで"
+      ],
+      "reason": "Colorの否定範囲を切らず、「んで」だけも孤立させない。例外欄の2行候補で保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000269",
+      "parts": [
+        "あの動画撮って",
+        "見せますね君たちに"
+      ],
+      "reason": "撮影と提示の連続動作で区切る。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000271",
+      "parts": [
+        "A4が入る時点で",
+        "かなり便利だし"
+      ],
+      "reason": "規格名を保持した条件と評価を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000272",
+      "parts": [
+        "いつもマリンが",
+        "考えるグッズが"
+      ],
+      "reason": "話者を示す主語と企画物を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000274",
+      "parts": [
+        "マリン船長大好きですみたいな"
+      ],
+      "reason": "元時計では引用を受ける「みたいな」だけ10frameとなるため、引用本文と44frameの一表示に保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000275",
+      "parts": [
+        "オタクっぽいグッズを考えてたんで"
+      ],
+      "reason": "元時計では理由を述べる「考えてたんで」だけ16frameとなるため、対象の名詞句と43frameの一表示に保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000278",
+      "parts": [
+        "あんまりオタク感のないカバンが",
+        "欲しいって言われたから"
+      ],
+      "reason": "Colorの否定修飾＋対象名詞を一つの子字幕に保持。その子だけ2行例外候補にし、要望を次にする。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000280",
+      "parts": [
+        "でこうやってこれ",
+        "2wayなんですけど"
+      ],
+      "reason": "対象提示とColorの製品仕様を分け、2wayを切らない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000281",
+      "parts": [
+        "あのなんか手で持つ",
+        "ハンドバッグみたいな"
+      ],
+      "reason": "持ち方の修飾節とバッグ種別を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000285",
+      "parts": [
+        "ショルダーにも",
+        "できるみたいな"
+      ],
+      "reason": "機能名と可能性の述部を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000286",
+      "parts": [
+        "マリンはどう考えても",
+        "ショルダーバッグ以外使わないし"
+      ],
+      "reason": "否定述語だけ12frameになる切替を作らず、限定する対象と38frameで保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000290",
+      "parts": [
+        "ショルダーは",
+        "ちょっとなみたいな"
+      ],
+      "reason": "話題とためらう評価を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000293",
+      "parts": [
+        "なんかカバン自体",
+        "そもそも持ってる印象",
+        "あんまないけどさ"
+      ],
+      "reason": "話題と印象、否定評価のまとまり。否定語内部は切らない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000294",
+      "parts": [
+        "手で持ったり",
+        "リュック背負ったり",
+        "するもんなのかなみたいなイメージで"
+      ],
+      "reason": "元時計では後置名詞「イメージで」だけ16frameとなるため、直前の推量74frameと90frameの一表示に保持する。前の二つの並列動作と外側時計は維持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000295",
+      "parts": [
+        "だからちょっと",
+        "このショルダー部分は"
+      ],
+      "reason": "接続・前置きと部品の名詞句を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000298",
+      "parts": [
+        "いけるみたいなの",
+        "イメージしました"
+      ],
+      "reason": "引用的な内容と構想した行為を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000301",
+      "parts": [
+        "船長はダンスに限界感じてると",
+        "おっしゃってましたが"
+      ],
+      "reason": "主語と対象だけ12frameになる切替を作らず、引用内容と51frameで保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000302",
+      "parts": [
+        "いや、ダンスだね、",
+        "マジでもうね、"
+      ],
+      "reason": "既存読点に沿って話題と反応を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000303",
+      "parts": [
+        "もうあ、",
+        "もう無理だと感じる、"
+      ],
+      "reason": "言いよどみと否定評価を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000304",
+      "parts": [
+        "ほんとに自己肯定感失っていくわ"
+      ],
+      "reason": "保存時計では副詞249frame・主要述語15frameと偏るため分割しない。元の264frameを保持し、話速改善の成功例には数えない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000307",
+      "parts": [
+        "もともとめっちゃ運動神経悪いから"
+      ],
+      "reason": "1秒の現行表示で複数切替を増やさず、例外欄の2行候補にする。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000308",
+      "parts": [
+        "もうレッスンも",
+        "なんかすっごい一一倍時間かかるし"
+      ],
+      "reason": "程度語だけ15frameになる切替を作らず、程度と述部を85frameで保持する。保存本文の一一倍は訂正しない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000310",
+      "parts": [
+        "テクニック?体力?テクニック?"
+      ],
+      "reason": "短い問い直しを40frame内で多重切替せず一表示で保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000312",
+      "parts": [
+        "そんなに体力はそんなにきつくないんだけど"
+      ],
+      "reason": "主題だけ10frameになる切替を撤回。否定評価を48frameの一表示で保持する。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000318",
+      "parts": [
+        "なんでこんな覚えられないんだろうって",
+        "くらい覚えらんない"
+      ],
+      "reason": "否定述語だけ10frameになる分割を撤回し、問いと同じ30frameで保持する。語句が密な元時計の制約を残し、十分な可読性は未確認とする。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000319",
+      "parts": [
+        "初期から比べると",
+        "うまくなってる"
+      ],
+      "reason": "比較条件とColorの評価述語を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000320",
+      "parts": [
+        "そうだよね",
+        "もうあの頃を思うと"
+      ],
+      "reason": "同意と振り返りの条件句を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000322",
+      "parts": [
+        "やったことないよ",
+        "船長人生で一度も"
+      ],
+      "reason": "否定経験を一まとまりにし、後置された人生についての限定を分ける。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000323",
+      "parts": [
+        "ワッタンとかとさ",
+        "やりながらさ"
+      ],
+      "reason": "呼称と並行動作を分け、名前を切らない。"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000324",
+      "parts": [
+        "こんな動き",
+        "人生で初めてしたって言いながらやってるもん船長"
+      ],
+      "reason": "末尾の長い語句だけ20frameになる切替を撤回。Color対象を保った隣接引用と60frameで表示する。"
+    }
+  ],
+  "twoLineExceptions": [
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000117",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "間違いがあっても",
+        "いいんです"
+      ],
+      "reason": "Panelの保存された一表示・演出時間を維持し、144pxで収容するための改行だけを候補にする。",
+      "status": "proposal-awaiting-layout-timing-and-advisor-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000139",
+      "scope": "whole-caption",
+      "partIndex": null,
+      "operation": "line-break-only",
+      "lines": [
+        "いやいや、",
+        "今行かないって!"
+      ],
+      "reason": "Bounceの全state・時計・一回の動作を維持し、最大168pxを収容するための改行だけを候補にする。",
+      "status": "proposal-awaiting-layout-timing-and-advisor-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000222",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "気持ち",
+        "ちっちゃくはありません"
+      ],
+      "reason": "程度副詞を単独字幕にすると「気持ち」の別義が浮くため、否定文を一表示で保持する例外候補。",
+      "status": "proposal-awaiting-layout-timing-and-advisor-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000258",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "付け替えできるみたいな",
+        "書いてあるんですけど"
+      ],
+      "reason": "保存表示0.867秒。短時間に二つの長めの字幕を切り替えるより、同じ時計内の2行を候補にする。",
+      "status": "proposal-awaiting-layout-timing-and-advisor-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000266",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "まだサンプルが",
+        "届いてないんで"
+      ],
+      "reason": "Colorの否定範囲を切らず、語尾「んで」だけを別表示にしない例外候補。Colorは行をまたいでも連続範囲のまま。",
+      "status": "proposal-awaiting-layout-timing-and-advisor-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000278",
+      "scope": "split-part",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "あんまりオタク感のない",
+        "カバンが"
+      ],
+      "reason": "Colorの連体否定句＋名詞が14字で144px一行を超える。Colorの全範囲を同じ子字幕内へ保持し、その子だけ2行にする候補。",
+      "status": "proposal-awaiting-layout-timing-and-advisor-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000307",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "もともとめっちゃ",
+        "運動神経悪いから"
+      ],
+      "reason": "保存表示1秒。述べている理由を一表示で保持する2行候補。",
+      "status": "proposal-awaiting-layout-timing-and-advisor-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000045",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "ちょっと",
+        "誘惑に勝てませんでした"
+      ],
+      "reason": "元時計では「ちょっと」が6frameで、既存4frameずつのfadeを保つ分割が成立しない。否定Color範囲を保持して一表示2行へ。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000070",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "あなたみたいなね、",
+        "新入りがねぇ"
+      ],
+      "reason": "元時計で対象名詞だけ10frameになる分割を撤回。修飾と対象を40frameの一表示に保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000242",
+      "scope": "one-child",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "せんちゃんよく",
+        "あんまりサイズ"
+      ],
+      "reason": "呼称だけ13frameになる切替を作らず、隣接の対象語句と47frameで保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000286",
+      "scope": "one-child",
+      "partIndex": 1,
+      "operation": "line-break-only",
+      "lines": [
+        "ショルダーバッグ以外",
+        "使わないし"
+      ],
+      "reason": "否定述語だけ12frameになる切替を作らず、限定する対象と38frameで保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000301",
+      "scope": "one-child",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "船長はダンスに",
+        "限界感じてると"
+      ],
+      "reason": "主語と対象だけ12frameになる切替を作らず、引用内容と51frameで保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000304",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "ほんとに",
+        "自己肯定感失っていくわ"
+      ],
+      "reason": "保存時計では副詞249frame・主要述語15frameと偏るため分割しない。元の264frameを保持し、話速改善の成功例には数えない。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000308",
+      "scope": "one-child",
+      "partIndex": 1,
+      "operation": "line-break-only",
+      "lines": [
+        "なんかすっごい",
+        "一一倍時間かかるし"
+      ],
+      "reason": "程度語だけ15frameになる切替を作らず、程度と述部を85frameで保持する。保存本文の一一倍は訂正しない。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000310",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "テクニック?",
+        "体力?テクニック?"
+      ],
+      "reason": "短い問い直しを40frame内で多重切替せず一表示で保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000312",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "そんなに体力は",
+        "そんなにきつくないんだけど"
+      ],
+      "reason": "主題だけ10frameになる切替を撤回。否定評価を48frameの一表示で保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000318",
+      "scope": "one-child",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "なんでこんな",
+        "覚えられないんだろうって"
+      ],
+      "reason": "否定述語だけ10frameになる分割を撤回し、問いと同じ30frameで保持する。語句が密な元時計の制約を残し、十分な可読性は未確認とする。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000324",
+      "scope": "one-child",
+      "partIndex": 1,
+      "operation": "line-break-only",
+      "lines": [
+        "人生で初めてしたって",
+        "言いながらやってるもん船長"
+      ],
+      "reason": "末尾の長い語句だけ20frameになる切替を撤回。Color対象を保った隣接引用と60frameで表示する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000199",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "あのー",
+        "Xとかで話したんですけど"
+      ],
+      "reason": "元時計では前置き「あのー」だけ8frameとなるため、その後の説明と52frameの一表示に保持する。本文と元の開始・終了は変更しない。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000058",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "こんな",
+        "でかくなかったかもしんない"
+      ],
+      "reason": "元時計では指示語「こんな」だけ9frameとなるため、否定過去と推量を述べる語句と106frameの一表示に保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000078",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "アーシーが",
+        "一番わかってるんですから"
+      ],
+      "reason": "元時計では主語「アーシーが」だけ9frameとなるため、評価する述部と163frameの一表示に保持する。Colorの対象語句は同じ表示内で保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000145",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "あの",
+        "この金属30年のマリンがね"
+      ],
+      "reason": "元時計では前置き「あの」だけ9frameとなるため、年数・人物名を含む後続語句と75frameの一表示に保持する。保存本文の「金属30年」は訂正しない。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000194",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "貞子は",
+        "現代でも通用すんだよな"
+      ],
+      "reason": "元時計では主題「貞子は」だけ10frameとなるため、その評価と131frameの一表示に保持する。Colorの対象語句は同じ表示内で保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000274",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "マリン船長大好きです",
+        "みたいな"
+      ],
+      "reason": "元時計では引用を受ける「みたいな」だけ10frameとなるため、引用本文と44frameの一表示に保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000122",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "ギャーじゃなくて、",
+        "やらないと"
+      ],
+      "reason": "元時計では必要な動作「やらないと」だけ11frameとなるため、否定対比と39frameの一表示に保持する。否定表現を途中で切らない。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000133",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "あんたも",
+        "持って帰っていいわよ"
+      ],
+      "reason": "元時計では相手の指定「あんたも」だけ11frameとなるため、許可する動作と58frameの一表示に保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000014",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "一旦",
+        "撫でさせてもらったんですよ"
+      ],
+      "reason": "元時計では時間副詞「一旦」12frameの後に長い動作語句29frameが続くため、全体41frameの一表示に保持し切替を追加しない。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000182",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "どんどん",
+        "誰も行かなくなるけど"
+      ],
+      "reason": "元時計では副詞「どんどん」だけ12frameとなるため、否定述語と77frameの一表示に保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000107",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "あいつが",
+        "いっちゃんやばいんだから"
+      ],
+      "reason": "元時計では主語「あいつが」だけ13frameとなるため、評価述語と94frameの一表示に保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000235",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "だからちょっと",
+        "カッチリした形で"
+      ],
+      "reason": "元時計では前置き14frame・形状の要求22frameと連続して切り替わるため、全体36frameの一表示で要求を保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000010",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "撫でて撫でて",
+        "撫でて撫でてって"
+      ],
+      "reason": "元時計では同じ依頼の繰返しが17frame・15frameに分かれるため、全体32frameの一表示に保持して短い連続切替を追加しない。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000020",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "撫でさせて",
+        "いただきますがなって"
+      ],
+      "reason": "元時計では依頼動作15frame・丁寧な結び26frameに分かれるため、全体41frameの一表示で動作と結びを保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000238",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "あのたわまないような風に",
+        "したいです"
+      ],
+      "reason": "元時計では希望を表す「したいです」だけ15frameとなるため、否定の様態と111frameの一表示に保持する。Colorの対象語句は同じ表示内で保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000141",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "こんな開きながら",
+        "トイレ行くのは"
+      ],
+      "reason": "元時計では主動作「トイレ行くのは」だけ16frameとなるため、付帯状況と51frameの一表示に保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000153",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "そんなことも",
+        "わからないんですか"
+      ],
+      "reason": "元時計では対象16frame・否定疑問31frameに分かれるため、全体47frameの一表示で対象と否定疑問を保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000243",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "どのくらいが",
+        "どのくらいっていうのが"
+      ],
+      "reason": "元時計では疑問語句が16frame・27frameで切り替わるため、全体43frameの一表示に保持し同じ問いの連続切替を追加しない。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000275",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "オタクっぽいグッズを",
+        "考えてたんで"
+      ],
+      "reason": "元時計では理由を述べる「考えてたんで」だけ16frameとなるため、対象の名詞句と43frameの一表示に保持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000203",
+      "scope": "whole-caption",
+      "partIndex": 0,
+      "operation": "line-break-only",
+      "lines": [
+        "ちょっと",
+        "教えておきたいんですけど"
+      ],
+      "reason": "元時計では前置き18frameの後に説明意図の長い語句23frameが続くため、全体41frameの一表示に保持して切替を追加しない。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000294",
+      "scope": "one-child",
+      "partIndex": 2,
+      "operation": "line-break-only",
+      "lines": [
+        "するもんなのかなみたいな",
+        "イメージで"
+      ],
+      "reason": "元時計では後置名詞「イメージで」だけ16frameとなるため、直前の推量74frameと90frameの一表示に保持する。前の二つの並列動作と外側時計は維持する。",
+      "status": "proposal-awaiting-raster-and-human-check"
+    }
+  ]
+}

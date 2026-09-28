@@ -62,17 +62,44 @@ export const PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001 = freeze({
   returnRule: 'normal-at-speech-end-or-one-frame-before-common-exit-fade',
 });
 
+/** Explicit 144 px readability candidate. Saved 96 px definitions remain intact. */
+export const PRESENTATION_CAPTION_MOTION_READABILITY_PRESETS_V001 = freeze({
+  bounce: {...PRESENTATION_CAPTION_MOTION_PRESETS_V001.bounce,
+    version: 'presentation-caption-motion-readability-v001', normalFontSizePx: 144,
+    states: [
+      {state: 'stable', fontSizePx: 144, offsetXPx: 0},
+      {state: 'small', fontSizePx: 132, offsetXPx: 0},
+      {state: 'middle', fontSizePx: 156, offsetXPx: 0},
+      {state: 'maximum', fontSizePx: 168, offsetXPx: 0},
+      {state: 'between-middle-maximum', fontSizePx: 162, offsetXPx: 0},
+      {state: 'between-middle-stable', fontSizePx: 150, offsetXPx: 0},
+    ]},
+  shake: {...PRESENTATION_CAPTION_MOTION_PRESETS_V001.shake,
+    version: 'presentation-caption-motion-readability-v001', normalFontSizePx: 144,
+    states: [
+      {state: 'stable', fontSizePx: 144, offsetXPx: 0},
+      {state: 'left-18', fontSizePx: 144, offsetXPx: -18},
+      {state: 'right-18', fontSizePx: 144, offsetXPx: 18},
+      {state: 'left-12', fontSizePx: 144, offsetXPx: -12},
+      {state: 'right-12', fontSizePx: 144, offsetXPx: 12},
+      {state: 'left-6', fontSizePx: 144, offsetXPx: -6},
+      {state: 'right-6', fontSizePx: 144, offsetXPx: 6},
+    ],
+    excursion: PRESENTATION_CAPTION_MOTION_PRESETS_V001.shake.excursion.map((row, index) => ({...row,
+      state: ['left-18', 'right-18', 'left-12', 'right-12', 'left-6', 'right-6'][index]}))},
+});
+
 function checkedPreset(element, canvas) {
   const metadata = element?.presentationMotion;
-  const speechReturn = metadata?.presetVersion === PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001.version;
+  const preset = [
+    ...Object.values(PRESENTATION_CAPTION_MOTION_PRESETS_V001),
+    ...Object.values(PRESENTATION_CAPTION_MOTION_READABILITY_PRESETS_V001),
+    PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001,
+  ].find(value => value.version === metadata?.presetVersion && value.presentation === metadata?.presentation);
+  if (!preset) reject('unknown presentation or preset version');
+  const speechReturn = Object.hasOwn(preset, 'returnStates');
   if (!exact(metadata, speechReturn ? ['presentation', 'presetVersion', 'speechEndFrame']
     : ['presentation', 'presetVersion'])) reject('expected one finite presentation and preset version');
-  const preset = speechReturn ? PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001
-    : Object.values(PRESENTATION_CAPTION_MOTION_PRESETS_V001)
-    .find(value => value.presentation === metadata.presentation);
-  if (!preset || metadata.presetVersion !== preset.version || metadata.presentation !== preset.presentation) {
-    reject('unknown presentation or preset version');
-  }
   if (canvas?.fps !== preset.fps || !integer(canvas.width) || canvas.width === 0
     || !integer(canvas.height) || canvas.height === 0) reject('the finite preset requires an integer canvas at 30 fps');
   if (element.kind !== 'speech-caption' || !integer(element.startFrame) || !integer(element.endFrameExclusive)
@@ -81,7 +108,7 @@ function checkedPreset(element, canvas) {
     reject('invalid fixed caption interval');
   }
   if (element.visualState?.textStyle?.fontSizePx !== preset.normalFontSizePx) {
-    reject('the finite preset requires the unchanged 96 px normal caption');
+    reject(`the finite preset requires the unchanged ${preset.normalFontSizePx} px normal caption`);
   }
   const position = element.visualState?.position;
   if (position?.preset !== preset.positionPreset || position.alignment !== 'center'
@@ -99,10 +126,14 @@ function checkedPreset(element, canvas) {
   return preset;
 }
 
+export function getPresentationCaptionMotionPresetV001({element, canvas}) {
+  return checkedPreset(element, canvas);
+}
+
 /** The original caption start is the entrance clock; it is not inferred speech onset. */
 export function getPresentationCaptionMotionProgramV001({element, canvas}) {
   const preset = checkedPreset(element, canvas);
-  if (preset.version === PRESENTATION_BOUNCE_SPEECH_RETURN_PRESET_V001.version) {
+  if (Object.hasOwn(preset, 'returnStates')) {
     // The bound speech end is independent evidence. The unchanged exit fade
     // limits the return so a fully opaque normal state is visible before it.
     const speechEndFrame = element.presentationMotion.speechEndFrame;

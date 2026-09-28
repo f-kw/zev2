@@ -1,0 +1,1399 @@
+{
+  "schemaVersion": "caption-readability-invariant-verification-v001",
+  "observedAt": "2026-09-28T13:44:45.252Z",
+  "status": "passed-structural-invariants-only",
+  "method": "Separate Node process. Does not invoke the new readability resolver or source adapter. Reconstructs atoms from saved meaning records and existing production timeline/projection functions; independently checks every parent/child, then checks all unexpected element/top-level differences by deep equality after enumerated candidate edits.",
+  "inputs": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-render-plan-v002.json",
+      "bytes": 1287124,
+      "sha256": "8a694c9d162b08e46996bf777c351f971f1364a0156df3cec30da668af86bbfa"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/source-atoms.json",
+      "bytes": 3395125,
+      "sha256": "3281666e3c79405390cb9a13144bf6811a2c35289193d479d4baf8fdb04db41a"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/readability-evidence.json",
+      "bytes": 1475483,
+      "sha256": "55c37ca39f48bee1aaa944b1205d930b3e598b0b024ea76543b76258b5f695a3"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/readability-resolution.json",
+      "bytes": 2832648,
+      "sha256": "57719a6c4bb0892819ab8a80ebd28d9f4e0b48fa3a6724e3765431bb280bbd56"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/candidate-render-plan.json",
+      "bytes": 2295242,
+      "sha256": "42efedab8a07bae3794c9cf6a43842f06ed95743ff748f0452375f56602892dc"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/unsplit-core-plan.json",
+      "bytes": 2039124,
+      "sha256": "07d64cc700d5fa7411d38bdaf7d73396b9364dc3cb097ff37d00d04a22c88996"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/resolved-layout-summary.json",
+      "bytes": 60,
+      "sha256": "215b895b8f681229b2141cf057df38f20ad9801004e1a10fefc87bf6e28a0d67"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/prepared.json",
+      "bytes": 1513,
+      "sha256": "8914072ab1b35e0ada2112f8ab4f417b5b342868c9adf34d597754de632526d5"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/caption-attempt-003/meaning-input.json",
+      "bytes": 2084605,
+      "sha256": "bb008b9ebd609ca45472aca9aa87804f1d506eafb4c52c9fbd02d6d2201aaaed"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/drawing-evidence.json",
+      "bytes": 7506854,
+      "sha256": "8239001075cf2744f72cdd4d5a2902a5d7b204ee63ad253ac90446a861556a64"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/background/projection.json",
+      "bytes": 8128,
+      "sha256": "4dbad6ec0b897b2cccbc01e8236bf8787907ec09d054bf0f0c167c437aa580e2"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/candidate-render-plan.json",
+      "bytes": 2361077,
+      "sha256": "cbac650c8677f12df573f06fa8d3502260d9e91ba5998d462548b89e56200e5d"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/readability-resolution.json",
+      "bytes": 2923743,
+      "sha256": "e009af0678324ec56f894638d8349f54a234c2a0bf8e99b2814b00706652e1f9"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster-verification.json",
+      "bytes": 220084,
+      "sha256": "ace39e04012566d527aa2fe64444130124fde528b4f0e4c85af80ff521e2ff70"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster-verification.json",
+      "bytes": 280126,
+      "sha256": "840aaf21ca46a08c7b371c3b75faf139d3fd418cea4c11db124b574f0ed02385"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster-records.json",
+      "bytes": 240685,
+      "sha256": "2ca8406cae3805702244301934fe7e45a2861db82a16de4f20e7b92ed1b4ad74"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster-records.json",
+      "bytes": 305642,
+      "sha256": "89f8fafc28df6a5f698dc337e2ac761f0d31e12c7cbbb74239e759aaac14abc5"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/human-package-final.json",
+      "bytes": 133739,
+      "sha256": "14e30d5486e1f104f7125a4b3570eb8175b1a7864cd7ca94bf5cd7af515886ae"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster/12.png",
+      "bytes": 158237,
+      "sha256": "51992ca078fbeb4d6eccfbd2e6a84bd9eee1b524879f7e7ef3583ee2817176d2"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster/14.png",
+      "bytes": 158237,
+      "sha256": "51992ca078fbeb4d6eccfbd2e6a84bd9eee1b524879f7e7ef3583ee2817176d2"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster/13.png",
+      "bytes": 174523,
+      "sha256": "35c8e1d407155c429e4dbba319aa0340af20454936c6949f74e2cb55c6ac32b0"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster/15.png",
+      "bytes": 174523,
+      "sha256": "35c8e1d407155c429e4dbba319aa0340af20454936c6949f74e2cb55c6ac32b0"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster/10.png",
+      "bytes": 182551,
+      "sha256": "8c913347a5eb4f32bb3e3441d2d388f8dae1c347654a692856d8d9fa52683f79"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster/12.png",
+      "bytes": 182551,
+      "sha256": "8c913347a5eb4f32bb3e3441d2d388f8dae1c347654a692856d8d9fa52683f79"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster/7-stable.png",
+      "bytes": 170431,
+      "sha256": "09466f8881a1b878668e51c82c6216e774d475cfc8cc0000af369606a6349613"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster/8-stable.png",
+      "bytes": 170431,
+      "sha256": "09466f8881a1b878668e51c82c6216e774d475cfc8cc0000af369606a6349613"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster/7-small.png",
+      "bytes": 159977,
+      "sha256": "d9ca93d0dd223fdc01abbe165e2a26fdb4a3cd72bfec1b9105a2d4122d02739c"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster/8-small.png",
+      "bytes": 159977,
+      "sha256": "d9ca93d0dd223fdc01abbe165e2a26fdb4a3cd72bfec1b9105a2d4122d02739c"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster/7-middle.png",
+      "bytes": 180377,
+      "sha256": "3ec057b06ddca72d9eff1d7dd293319df32e4a8f4aeb25cf47fb80c9ee8b8e74"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster/8-middle.png",
+      "bytes": 180377,
+      "sha256": "3ec057b06ddca72d9eff1d7dd293319df32e4a8f4aeb25cf47fb80c9ee8b8e74"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster/7-maximum.png",
+      "bytes": 190266,
+      "sha256": "7ab73218abf168dc49b6c4cc2af0df1057c6881c50bd91c1a819980b9d9f794d"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster/8-maximum.png",
+      "bytes": 190266,
+      "sha256": "7ab73218abf168dc49b6c4cc2af0df1057c6881c50bd91c1a819980b9d9f794d"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster/7-between-middle-maximum.png",
+      "bytes": 185239,
+      "sha256": "4de50d365f478070f4fff9537605183569c6e6f14e54bb504106d6bc3c41c223"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster/8-between-middle-maximum.png",
+      "bytes": 185239,
+      "sha256": "4de50d365f478070f4fff9537605183569c6e6f14e54bb504106d6bc3c41c223"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster/7-between-middle-stable.png",
+      "bytes": 152987,
+      "sha256": "d1e2e2f1704a4e3e520c818a9898a5bf4c1aed219546e17dd9fa2802a0541c94"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v006/raster/8-between-middle-stable.png",
+      "bytes": 152987,
+      "sha256": "d1e2e2f1704a4e3e520c818a9898a5bf4c1aed219546e17dd9fa2802a0541c94"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/review-v002/7A-current-then-candidate-cfr.mp4",
+      "bytes": 15377637,
+      "sha256": "fb70de4b2b8f59ff9f680c0ffe61492c091c3ba51a4bbeefce6a60c1e9c18a80"
+    },
+    {
+      "path": "tools/digest-quality/caption-readability-plan.mjs",
+      "bytes": 18505,
+      "sha256": "eac6fccc5f5fbf33d46a0cb682c6dc0d15e7f44f30bbc804a1c1842e9e69d141"
+    },
+    {
+      "path": "tools/digest-quality/caption-readability-source.mjs",
+      "bytes": 10196,
+      "sha256": "8abe98417a71ccf19a79f1b63db09b3f8697380576b7d59951af48d1047af54b"
+    },
+    {
+      "path": "tools/digest-quality/caption-readability-preview.mjs",
+      "bytes": 37269,
+      "sha256": "832d61d3413ec2a37b32e475ec5b5caafc9b59646147dc02cd7764643a34fe53"
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+      "bytes": 62522,
+      "sha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32"
+    },
+    {
+      "path": "evals/clip_composition/presentation_orchestration_projection_v001.mjs",
+      "bytes": 19232,
+      "sha256": "350272ca2a0abc0082c69b302d3cee626c92aab51770aaf400e63a2526ae9bef"
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_motion_v001.mjs",
+      "bytes": 13134,
+      "sha256": "aad69313a74d7d855f295c6f9dfae26654fe21545adaa181cd4e7d65df8b5e6c"
+    },
+    {
+      "path": "evals/clip_composition/presentation_pulse_v001.mjs",
+      "bytes": 11540,
+      "sha256": "60893d8c854b2e858821cfa47d6b89cb06c7a410455fcc87a878fbaefcdee8d0"
+    },
+    {
+      "path": "docs/reports/caption-readability-splitting-20260928/semantic-boundaries.json",
+      "bytes": 60786,
+      "sha256": "09656ce2441d5efde10e7d1856b16e20d80707a8ce915045b72fab134f0d487b"
+    }
+  ],
+  "counts": {
+    "originalCaptions": 326,
+    "candidateCaptions": 431,
+    "sourceAtoms": 4124,
+    "zeroFrameSourceAtoms": 196,
+    "splitParents": 99,
+    "internalBoundaries": 105,
+    "oneLineCaptions": 392,
+    "twoLineCaptions": 39,
+    "preflightStates": 483,
+    "overflow": 0,
+    "originalEffects": {
+      "normal": 274,
+      "color": 33,
+      "panel": 7,
+      "scale": 2,
+      "pulse": 0,
+      "bounce": 8,
+      "shake": 2
+    }
+  },
+  "checks": {
+    "allTextAndOrderPreserved": true,
+    "allAtomIdsAndOrderPreserved": true,
+    "zeroFrameAtomsRetained": true,
+    "parentOuterClocksPreserved": true,
+    "childSourceRangesMatchExactAtoms": true,
+    "internalClockUsesRightSourceAtom": true,
+    "sourceClocksMatchExistingProductionProjection": true,
+    "allLineSourceUnitsConserved": true,
+    "colorTargetTextColorAndSingleChildPreserved": true,
+    "protectedEffectsUnsplitWithOriginalClocksAndFade": true,
+    "allOtherElementAndPlanFieldsUnchanged": true,
+    "unknownDifferences": 0
+  },
+  "allowedCandidateChanges": [
+    "New caption IDs/text/line breaks/source provenance only through exact partitions; no wording changes.",
+    "Source milliseconds and segment fields reconstructed from existing saved source records.",
+    "144px normal and 192px Scale candidate; non-Panel border/glow 4px DarkSlateGray; Panel appearance retained apart from allowed font/line changes.",
+    "Explicit preview motion version; existing motion payload and outer clocks retained.",
+    "Left/right protection 4px and horizontal margin 0 in preview only; vertical protection retained.",
+    "Old overlay hashes removed from new unmaterialized candidate."
+  ],
+  "internalBoundaries": [
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000002",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000002-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000019",
+      "sourceStartMs": 215899,
+      "frame": 85
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000007",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000007-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000076",
+      "sourceStartMs": 224971,
+      "frame": 357
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000007",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000007-readability-03",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000084",
+      "sourceStartMs": 225952,
+      "frame": 387
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000008",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000008-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000099",
+      "sourceStartMs": 228573,
+      "frame": 465
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000009",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000009-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000119",
+      "sourceStartMs": 231915,
+      "frame": 565
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000011",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000011-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000151",
+      "sourceStartMs": 235757,
+      "frame": 681
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000022",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000022-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000276",
+      "sourceStartMs": 259579,
+      "frame": 1395
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000026",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000026-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000323",
+      "sourceStartMs": 270664,
+      "frame": 1728
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000035",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000035-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000426",
+      "sourceStartMs": 288584,
+      "frame": 2266
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000037",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000037-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000454",
+      "sourceStartMs": 292846,
+      "frame": 2393
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000040",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000040-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000495",
+      "sourceStartMs": 299969,
+      "frame": 2607
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000043",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000043-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000539",
+      "sourceStartMs": 307336,
+      "frame": 2828
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000048",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000048-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000590",
+      "sourceStartMs": 315599,
+      "frame": 3076
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000050",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000050-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000613",
+      "sourceStartMs": 318621,
+      "frame": 3167
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000051",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000051-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000637",
+      "sourceStartMs": 322602,
+      "frame": 3286
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000055",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000055-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000670",
+      "sourceStartMs": 1995031,
+      "frame": 3491
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000057",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000057-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000689",
+      "sourceStartMs": 1998993,
+      "frame": 3610
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000061",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000061-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000745",
+      "sourceStartMs": 2009371,
+      "frame": 3921
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000065",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000065-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000789",
+      "sourceStartMs": 2020641,
+      "frame": 4259
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000066",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000066-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000803",
+      "sourceStartMs": 2024124,
+      "frame": 4364
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000068",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000068-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000823",
+      "sourceStartMs": 2033011,
+      "frame": 4630
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000074",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000074-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000893",
+      "sourceStartMs": 2050304,
+      "frame": 5149
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000082",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000082-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-000979",
+      "sourceStartMs": 2082254,
+      "frame": 6108
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000085",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000085-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001012",
+      "sourceStartMs": 2087437,
+      "frame": 6263
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000089",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000089-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001061",
+      "sourceStartMs": 2112495,
+      "frame": 7015
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000089",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000089-readability-03",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001074",
+      "sourceStartMs": 2114336,
+      "frame": 7070
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000090",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000090-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001090",
+      "sourceStartMs": 2120400,
+      "frame": 7252
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000118",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000118-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001353",
+      "sourceStartMs": 2179392,
+      "frame": 9022
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000125",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000125-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001424",
+      "sourceStartMs": 2192351,
+      "frame": 9411
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000148",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000148-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001675",
+      "sourceStartMs": 5490363,
+      "frame": 11049
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000152",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000152-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001718",
+      "sourceStartMs": 5499028,
+      "frame": 11309
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000154",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000154-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001752",
+      "sourceStartMs": 5506184,
+      "frame": 11524
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000157",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000157-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001795",
+      "sourceStartMs": 5514948,
+      "frame": 11786
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000159",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000159-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001818",
+      "sourceStartMs": 5523613,
+      "frame": 12046
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000160",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000160-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001833",
+      "sourceStartMs": 5529436,
+      "frame": 12221
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000164",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000164-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001869",
+      "sourceStartMs": 5540957,
+      "frame": 12567
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000165",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000165-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001883",
+      "sourceStartMs": 5545200,
+      "frame": 12694
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000166",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000166-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001898",
+      "sourceStartMs": 5553427,
+      "frame": 12941
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000170",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000170-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-001945",
+      "sourceStartMs": 5569555,
+      "frame": 13425
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000175",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000175-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002007",
+      "sourceStartMs": 5587550,
+      "frame": 13965
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000176",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000176-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002019",
+      "sourceStartMs": 5591733,
+      "frame": 14090
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000178",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000178-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002045",
+      "sourceStartMs": 5597758,
+      "frame": 14271
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000183",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000183-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002105",
+      "sourceStartMs": 5620277,
+      "frame": 14946
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000185",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000185-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002126",
+      "sourceStartMs": 5628825,
+      "frame": 15203
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000186",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000186-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002139",
+      "sourceStartMs": 5632566,
+      "frame": 15315
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000187",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000187-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002160",
+      "sourceStartMs": 5634967,
+      "frame": 15387
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000188",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000188-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002176",
+      "sourceStartMs": 5637908,
+      "frame": 15475
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000191",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000191-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002215",
+      "sourceStartMs": 5648353,
+      "frame": 15789
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000191",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000191-readability-03",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002224",
+      "sourceStartMs": 5649193,
+      "frame": 15814
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000197",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000197-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002296",
+      "sourceStartMs": 5668582,
+      "frame": 16395
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000198",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000198-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002313",
+      "sourceStartMs": 5673184,
+      "frame": 16534
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000198",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000198-readability-03",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002323",
+      "sourceStartMs": 5674165,
+      "frame": 16563
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000201",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000201-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002362",
+      "sourceStartMs": 8059548,
+      "frame": 16781
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000202",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000202-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002378",
+      "sourceStartMs": 8061388,
+      "frame": 16837
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000208",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000208-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002456",
+      "sourceStartMs": 8094371,
+      "frame": 17826
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000209",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000209-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002469",
+      "sourceStartMs": 8098052,
+      "frame": 17937
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000214",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000214-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002530",
+      "sourceStartMs": 8114355,
+      "frame": 18426
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000216",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000216-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002558",
+      "sourceStartMs": 8118298,
+      "frame": 18544
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000221",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000221-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002603",
+      "sourceStartMs": 8131388,
+      "frame": 18937
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000223",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000223-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002632",
+      "sourceStartMs": 8138493,
+      "frame": 19150
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000226",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000226-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002672",
+      "sourceStartMs": 8147712,
+      "frame": 19426
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000227",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000227-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002697",
+      "sourceStartMs": 8152294,
+      "frame": 19564
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000228",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000228-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002718",
+      "sourceStartMs": 8154834,
+      "frame": 19640
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000233",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000233-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002785",
+      "sourceStartMs": 8170019,
+      "frame": 20096
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000236",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000236-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002828",
+      "sourceStartMs": 8175741,
+      "frame": 20267
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000239",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000239-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002874",
+      "sourceStartMs": 8183224,
+      "frame": 20492
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000240",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000240-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002884",
+      "sourceStartMs": 8184845,
+      "frame": 20540
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000242",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000242-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002920",
+      "sourceStartMs": 8191628,
+      "frame": 20744
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000245",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000245-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002968",
+      "sourceStartMs": 8199926,
+      "frame": 20993
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000246",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000246-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-002988",
+      "sourceStartMs": 8202487,
+      "frame": 21070
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000249",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000249-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003027",
+      "sourceStartMs": 8209089,
+      "frame": 21268
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000251",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000251-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003057",
+      "sourceStartMs": 8214710,
+      "frame": 21436
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000252",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000252-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003076",
+      "sourceStartMs": 8219152,
+      "frame": 21570
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000254",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000254-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003106",
+      "sourceStartMs": 8224873,
+      "frame": 21741
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000256",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000256-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003126",
+      "sourceStartMs": 8229606,
+      "frame": 21883
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000259",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000259-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003184",
+      "sourceStartMs": 8236208,
+      "frame": 22081
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000260",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000260-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003199",
+      "sourceStartMs": 8244810,
+      "frame": 22339
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000261",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000261-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003215",
+      "sourceStartMs": 8246691,
+      "frame": 22396
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000263",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000263-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003242",
+      "sourceStartMs": 8254493,
+      "frame": 22630
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000264",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000264-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003258",
+      "sourceStartMs": 8256954,
+      "frame": 22704
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000269",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000269-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003321",
+      "sourceStartMs": 8267011,
+      "frame": 23005
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000271",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000271-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003350",
+      "sourceStartMs": 8272674,
+      "frame": 23175
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000272",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000272-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003364",
+      "sourceStartMs": 8275235,
+      "frame": 23252
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000278",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000278-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003450",
+      "sourceStartMs": 8289483,
+      "frame": 23679
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000280",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000280-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003478",
+      "sourceStartMs": 8292544,
+      "frame": 23771
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000281",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000281-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003497",
+      "sourceStartMs": 8296066,
+      "frame": 23877
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000285",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000285-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003547",
+      "sourceStartMs": 8302628,
+      "frame": 24074
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000286",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000286-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003564",
+      "sourceStartMs": 8304629,
+      "frame": 24134
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000290",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000290-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003615",
+      "sourceStartMs": 8312393,
+      "frame": 24367
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000293",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000293-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003650",
+      "sourceStartMs": 8316655,
+      "frame": 24495
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000293",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000293-readability-03",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003660",
+      "sourceStartMs": 8317455,
+      "frame": 24519
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000294",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000294-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003674",
+      "sourceStartMs": 8319857,
+      "frame": 24591
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000294",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000294-readability-03",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003683",
+      "sourceStartMs": 8320677,
+      "frame": 24615
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000295",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000295-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003707",
+      "sourceStartMs": 8324720,
+      "frame": 24737
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000298",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000298-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003743",
+      "sourceStartMs": 8330364,
+      "frame": 24906
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000301",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000301-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003784",
+      "sourceStartMs": 11153261,
+      "frame": 25284
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000302",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000302-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003803",
+      "sourceStartMs": 11155642,
+      "frame": 25355
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000303",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000303-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003814",
+      "sourceStartMs": 11158463,
+      "frame": 25440
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000308",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000308-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-003879",
+      "sourceStartMs": 11178567,
+      "frame": 26043
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000318",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000318-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-004001",
+      "sourceStartMs": 11213172,
+      "frame": 27081
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000319",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000319-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-004018",
+      "sourceStartMs": 11219857,
+      "frame": 27282
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000320",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000320-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-004030",
+      "sourceStartMs": 11221138,
+      "frame": 27320
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000322",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000322-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-004054",
+      "sourceStartMs": 11224501,
+      "frame": 27421
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000323",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000323-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-004070",
+      "sourceStartMs": 11228685,
+      "frame": 27547
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000324",
+      "rightChildId": "new-material-digest-20260926-v001-instruction-instruction-000324-readability-02",
+      "rightAtomId": "new-material-digest-20260926-v001-atom-004081",
+      "sourceStartMs": 11231007,
+      "frame": 27616
+    }
+  ],
+  "colorTargets": [
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000002",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000002-readability-02",
+      "target": "ドッグセラピー",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000007",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000007-readability-02",
+      "target": "アレルギーの薬",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000023",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000023",
+      "target": "1時間半",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000028",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000028",
+      "target": "アレルギー",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000045",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000045",
+      "target": "誘惑に勝てませんでした",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000050",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000050-readability-02",
+      "target": "マリンを守ってくれる",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000066",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000066-readability-02",
+      "target": "新入り",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000068",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000068-readability-02",
+      "target": "15年",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000078",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000078",
+      "target": "一番わかってる",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000137",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000137",
+      "target": "ラッキーな霊障",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000147",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000147",
+      "target": "30年",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000148",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000148-readability-02",
+      "target": "トイレには行かない",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000157",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000157-readability-02",
+      "target": "全員殺される",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000164",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000164-readability-01",
+      "target": "チームプレイ",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000168",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000168",
+      "target": "狙い撃ちタイプ",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000171",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000171",
+      "target": "ソロプレイ",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000194",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000194",
+      "target": "現代でも通用",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000197",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000197-readability-02",
+      "target": "デジタル化",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000221",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000221-readability-02",
+      "target": "でかい",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000226",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000226-readability-01",
+      "target": "iPadが入る",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000238",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000238",
+      "target": "たわまない",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000246",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000246-readability-01",
+      "target": "A4",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000249",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000249-readability-01",
+      "target": "自分も使おう",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000254",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000254-readability-01",
+      "target": "外せる",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000259",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000259-readability-01",
+      "target": "付け替えれる",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000266",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000266",
+      "target": "まだサンプルが届いてない",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000278",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000278-readability-01",
+      "target": "あんまりオタク感のないカバン",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000280",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000280-readability-02",
+      "target": "2way",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000288",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000288",
+      "target": "絶対ショルダー派",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000315",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000315",
+      "target": "テクニックができない",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000316",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000316",
+      "target": "覚えられない",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000319",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000319-readability-02",
+      "target": "うまくなってる",
+      "color": "#FFD65A"
+    },
+    {
+      "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000324",
+      "childCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000324-readability-02",
+      "target": "人生で初めてした",
+      "color": "#FFD65A"
+    }
+  ],
+  "protectedEffects": [
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000019",
+      "kind": "bounce",
+      "startFrame": 1149,
+      "endFrameExclusive": 1217
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000046",
+      "kind": "panel",
+      "startFrame": 2954,
+      "endFrameExclusive": 3029
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000059",
+      "kind": "bounce",
+      "startFrame": 3751,
+      "endFrameExclusive": 3804
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000071",
+      "kind": "scale",
+      "startFrame": 4805,
+      "endFrameExclusive": 4813
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000084",
+      "kind": "bounce",
+      "startFrame": 6206,
+      "endFrameExclusive": 6246
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000092",
+      "kind": "shake",
+      "startFrame": 7453,
+      "endFrameExclusive": 7531
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+      "kind": "bounce",
+      "startFrame": 7556,
+      "endFrameExclusive": 7592
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000099",
+      "kind": "shake",
+      "startFrame": 7647,
+      "endFrameExclusive": 7683
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000117",
+      "kind": "panel",
+      "startFrame": 8944,
+      "endFrameExclusive": 8985
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000119",
+      "kind": "scale",
+      "startFrame": 9042,
+      "endFrameExclusive": 9124
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000123",
+      "kind": "panel",
+      "startFrame": 9277,
+      "endFrameExclusive": 9327
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000131",
+      "kind": "panel",
+      "startFrame": 9763,
+      "endFrameExclusive": 9940
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000135",
+      "kind": "panel",
+      "startFrame": 10145,
+      "endFrameExclusive": 10281
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000139",
+      "kind": "bounce",
+      "startFrame": 10445,
+      "endFrameExclusive": 10506
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000177",
+      "kind": "bounce",
+      "startFrame": 14124,
+      "endFrameExclusive": 14249
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000189",
+      "kind": "panel",
+      "startFrame": 15560,
+      "endFrameExclusive": 15703
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000196",
+      "kind": "panel",
+      "startFrame": 16304,
+      "endFrameExclusive": 16341
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000206",
+      "kind": "bounce",
+      "startFrame": 17470,
+      "endFrameExclusive": 17557
+    },
+    {
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000248",
+      "kind": "bounce",
+      "startFrame": 21202,
+      "endFrameExclusive": 21231
+    }
+  ],
+  "reviewReuse": {
+    "status": "same-three-examples-no-regeneration-required",
+    "sourceRun": "runtime/artifacts/caption-readability-20260928-preview-v004",
+    "candidateRun": "runtime/artifacts/caption-readability-20260928-preview-v006",
+    "examples": [
+      {
+        "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000260",
+        "mappingDeepEqual": true,
+        "children": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000260-readability-01",
+            "elementSha256": "0d3a15c62f4a4d1f03d523e2de858bc393cc6d6bcd730e4e2a4049e29a02a8a0",
+            "propsCount": 1,
+            "allPropsDeepEqual": true,
+            "rasterCount": 1,
+            "rasterBytesEqual": true
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000260-readability-02",
+            "elementSha256": "a000d17754cc3c1fb7ee27e19ba1bd731287f4508038b3f545df0d87db92055d",
+            "propsCount": 1,
+            "allPropsDeepEqual": true,
+            "rasterCount": 1,
+            "rasterBytesEqual": true
+          }
+        ]
+      },
+      {
+        "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000137",
+        "mappingDeepEqual": true,
+        "children": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000137",
+            "elementSha256": "aa09fddcb9d5fc747c5ca05a6493ec8359977c840e9ea4829396c04a3560f10c",
+            "propsCount": 2,
+            "allPropsDeepEqual": true,
+            "rasterCount": 1,
+            "rasterBytesEqual": true
+          }
+        ]
+      },
+      {
+        "parentCaptionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+        "mappingDeepEqual": true,
+        "children": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+            "elementSha256": "87bb8daaf5fda955bb6e680e7736e44725f442bd2d6ece21002abcaa4511b318",
+            "propsCount": 6,
+            "allPropsDeepEqual": true,
+            "rasterCount": 6,
+            "rasterBytesEqual": true
+          }
+        ]
+      }
+    ],
+    "video": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/review-v002/7A-current-then-candidate-cfr.mp4",
+      "bytes": 15377637,
+      "sha256": "fb70de4b2b8f59ff9f680c0ffe61492c091c3ba51a4bbeefce6a60c1e9c18a80"
+    },
+    "videoShaChecked": true,
+    "scope": "Candidate elements, mapping, all rendered props and PNG bytes for 000260/000137/000095 are identical. This reuses only the existing three-example local comparison, not all-caption raster or full-video verification."
+  },
+  "limitations": [
+    "Structural/timing conservation and bounds do not certify reading speed or human readability.",
+    "000318 retains source-timing density even after its conservative merge; 000304 retains strongly uneven saved timing.",
+    "This check does not decode the MP4 to verify caption state/transition frames. Final media frame verification is recorded separately.",
+    "No full-Digest rendering, human adoption or old-MP4 full-byte check was performed by this verification."
+  ]
+}
