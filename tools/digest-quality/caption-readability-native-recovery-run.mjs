@@ -352,8 +352,11 @@ export async function rereadReadabilityNativeRecoveryV001(file) {
     ...completed.evidence.exactReplay.inputManifest.refs, ...completed.evidence.exactReplay.generatedArtifacts]) await verify(ref, mapping);
   const gate = evaluatePresentationNativeResumeRendererQcV001(qcInput(saved.state, completed));
   assert.deepEqual(gate, draw.finalQc, 'independent final gate differs'); assert.equal(gate.status, 'passed');
+  const materializationPath = path.join(directory, 'independent-materialization.json');
+  await writePresentationQcEvidenceV001(materializationPath, materializer.getProvenance());
   const outcome = {status: 'passed', processId: process.pid, endedAt: new Date().toISOString(),
     elapsedSeconds: (performance.now() - started) / 1000, receiptVerification: receipts, outputVerification: outputs,
+    materializationEvidenceRef: await bind(materializationPath),
     processTimings: observed.getPerformance(), regeneratedVideo: false, finalQcStatus: gate.status,
     nativeSamples: finite.samples.length, humanQuality: 'not-evaluated', productionDefaultChanged: false};
   await save(path.join(directory, 'independent-reread.json'), outcome); return outcome;
