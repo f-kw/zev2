@@ -1,0 +1,1956 @@
+{
+  "schemaVersion": "caption-readability-current-inspection-v001",
+  "observedAt": "2026-09-28T12:59:54.053Z",
+  "head": "319b9e4e3af313ba152d8e0e5a902e26e6ded9dd",
+  "status": "inspection-passed-adoption-not-performed",
+  "refs": [
+    {
+      "path": "evals/clip_composition/outputs/presentation/new-material-digest-20260926-first-draft-qc-resume-v001/presentation-render-plan-v002.json",
+      "bytes": 1287124,
+      "sha256": "8a694c9d162b08e46996bf777c351f971f1364a0156df3cec30da668af86bbfa"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/caption-attempt-003/normal-plan.json",
+      "bytes": 2032590,
+      "sha256": "4cde887dfb3665f3df898e7f9ae44dd502d3c6482c74c0d3ebc570236f7e92f8"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/caption-attempt-003/meaning-input.json",
+      "bytes": 2084605,
+      "sha256": "bb008b9ebd609ca45472aca9aa87804f1d506eafb4c52c9fbd02d6d2201aaaed"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/presentation/feasibility/normal.json",
+      "bytes": 199666,
+      "sha256": "d96957301bcbe7c15136224cb0da70ac400e84a7a8550d0eeaa4e9f3587ee531"
+    },
+    {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "bytes": 14291,
+      "sha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8"
+    }
+  ],
+  "fonts": [
+    {
+      "fontAssetId": "line-seed-jp-extra-bold-v001",
+      "fileName": "LINESeedJP_A_OTF_Eb.otf",
+      "path": "runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+      "sha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+      "licensePath": "runner/public/font/OFL_LINESeedJP.txt"
+    },
+    {
+      "fontAssetId": "shippori-mincho-bold-v001",
+      "fileName": "ShipporiMincho-Bold.ttf",
+      "path": "runner/public/font/ShipporiMincho-Bold.ttf",
+      "sha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f",
+      "licensePath": "runner/public/font/OFL_ShipporiMincho-Bold.txt"
+    }
+  ],
+  "captions": 326,
+  "lineCounts": {
+    "one": 290,
+    "two": 36
+  },
+  "effectCounts": {
+    "Normal": 274,
+    "Color": 33,
+    "Bounce": 8,
+    "Panel": 7,
+    "Scale": 2,
+    "Shake": 2,
+    "Pulse": 0
+  },
+  "normalStyle": {
+    "stateId": "caption-core-v001",
+    "textStyle": {
+      "fontAssetId": "line-seed-jp-extra-bold-v001",
+      "fontSizePx": 96,
+      "fontColor": "#FFFDF8",
+      "borderColor": "#111827",
+      "borderWidthPx": 8,
+      "lineSpacingPercent": 150,
+      "glowColor": "#000000",
+      "glowWidthPx": 12,
+      "glowOpacityPercent": 82
+    },
+    "position": {
+      "preset": "bottom-center",
+      "alignment": "center",
+      "offsetXPercent": 0,
+      "offsetYPercent": -6
+    },
+    "background": null,
+    "layout": {
+      "maxCharsPerLine": 36,
+      "maxLines": 2,
+      "singleLine": false
+    },
+    "transitionId": "quick-fade-4f-v001"
+  },
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "safeAreaPx": {
+      "top": 40,
+      "right": 80,
+      "bottom": 40,
+      "left": 80
+    }
+  },
+  "layoutRules": {
+    "layoutRuleVersion": "normal-landscape-render-layout-v001",
+    "fontWeight": 800,
+    "minimumFontSizePx": 12,
+    "textSafePaddingRatio": 0.04,
+    "horizontalSafeMarginRatio": 0.04,
+    "verticalSafeMarginRatio": 0.02,
+    "fallbackTextAreaRatio": 0.98,
+    "lowerThirdAnchorPercent": 67,
+    "renderScale": 1,
+    "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2",
+    "borderStrokeWidthRule": "2 * max(0, borderWidthPx)",
+    "glowStrokeWidthRule": "2 * max(0, glowWidthPx) + 2 * max(0, borderWidthPx)",
+    "marginRule": "max(glowStrokeWidth, borderStrokeWidth) / 2",
+    "safePaddingRule": "max(2, ceil(fontSizePx * textSafePaddingRatio))",
+    "placementClampRule": "clamp full alpha bounds inside canvas safe margins",
+    "humanReapprovalRule": "Any numeric or formula change requires a new rendered preview and human approval before a new trust and renderer version may be activated."
+  },
+  "representatives": [
+    {
+      "id": "new-material-digest-20260926-v001-instruction-instruction-000053",
+      "text": "やれるかな",
+      "lines": [
+        "やれるかな"
+      ],
+      "startFrame": 3366,
+      "endFrameExclusive": 3421,
+      "displaySeconds": 1.8333333333333333,
+      "codePoints": 5,
+      "displayedCodePointsPerSecond": 2.7272727272727275,
+      "sourceAtoms": [
+        {
+          "id": "new-material-digest-20260926-v001-atom-000654",
+          "text": "や",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 325263,
+              "sourceEndMs": 325363
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000655",
+          "text": "れ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 325363,
+              "sourceEndMs": 325443
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000656",
+          "text": "る",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 325443,
+              "sourceEndMs": 325544
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000657",
+          "text": "か",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 325544,
+              "sourceEndMs": 326784
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000658",
+          "text": "な",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 326784,
+              "sourceEndMs": 327084
+            }
+          ]
+        }
+      ],
+      "savedNodeLayoutEstimate": {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000053",
+        "stateId": "caption-core-v001",
+        "lineCount": 1,
+        "lineRects": [
+          {
+            "left": 700,
+            "top": 815.2,
+            "right": 1220,
+            "bottom": 951.2
+          }
+        ],
+        "wrapper": {
+          "top": 811.2,
+          "left": 696,
+          "width": 528,
+          "height": 164
+        }
+      },
+      "color": null,
+      "motion": null,
+      "background": null
+    },
+    {
+      "id": "new-material-digest-20260926-v001-instruction-instruction-000026",
+      "text": "あのワンチョムバチクソ撫でまくって",
+      "lines": [
+        "あのワンチョムバチクソ撫でまくって"
+      ],
+      "startFrame": 1674,
+      "endFrameExclusive": 1807,
+      "displaySeconds": 4.433333333333334,
+      "codePoints": 17,
+      "displayedCodePointsPerSecond": 3.834586466165413,
+      "sourceAtoms": [
+        {
+          "id": "new-material-digest-20260926-v001-atom-000316",
+          "text": "あ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 268863,
+              "sourceEndMs": 268983
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000317",
+          "text": "の",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 268983,
+              "sourceEndMs": 269103
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000318",
+          "text": "ワ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 269103,
+              "sourceEndMs": 269304
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000319",
+          "text": "ン",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 269304,
+              "sourceEndMs": 269404
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000320",
+          "text": "チ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 269404,
+              "sourceEndMs": 270004
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000321",
+          "text": "ョ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 270004,
+              "sourceEndMs": 270104
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000322",
+          "text": "ム",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 270104,
+              "sourceEndMs": 270664
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000323",
+          "text": "バ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 270664,
+              "sourceEndMs": 270804
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000324",
+          "text": "チ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 270804,
+              "sourceEndMs": 270904
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000325",
+          "text": "ク",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 270904,
+              "sourceEndMs": 270984
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000326",
+          "text": "ソ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 270984,
+              "sourceEndMs": 271124
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000327",
+          "text": "撫",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 271124,
+              "sourceEndMs": 271224
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000328",
+          "text": "で",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 271224,
+              "sourceEndMs": 271344
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000329",
+          "text": "ま",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 271344,
+              "sourceEndMs": 271504
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000330",
+          "text": "く",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 271504,
+              "sourceEndMs": 271765
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000331",
+          "text": "っ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 271765,
+              "sourceEndMs": 271785
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-000332",
+          "text": "て",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0001",
+              "sourceStartMs": 271785,
+              "sourceEndMs": 273285
+            }
+          ]
+        }
+      ],
+      "savedNodeLayoutEstimate": {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000026",
+        "stateId": "caption-core-v001",
+        "lineCount": 1,
+        "lineRects": [
+          {
+            "left": 124,
+            "top": 815.2,
+            "right": 1796,
+            "bottom": 951.2
+          }
+        ],
+        "wrapper": {
+          "top": 811.2,
+          "left": 120,
+          "width": 1680,
+          "height": 164
+        }
+      },
+      "color": null,
+      "motion": null,
+      "background": null
+    },
+    {
+      "id": "new-material-digest-20260926-v001-instruction-instruction-000089",
+      "text": "お風呂場が最近窓が割れるくらいのことしか起こらないんですよね",
+      "lines": [
+        "お風呂場が最近窓が割れるくらいの",
+        "ことしか起こらないんですよね"
+      ],
+      "startFrame": 6980,
+      "endFrameExclusive": 7236,
+      "displaySeconds": 8.533333333333333,
+      "codePoints": 30,
+      "displayedCodePointsPerSecond": 3.515625,
+      "sourceAtoms": [
+        {
+          "id": "new-material-digest-20260926-v001-atom-001054",
+          "text": "お",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2111335,
+              "sourceEndMs": 2111455
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001055",
+          "text": "風",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2111455,
+              "sourceEndMs": 2111595
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001056",
+          "text": "呂",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2111595,
+              "sourceEndMs": 2111715
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001057",
+          "text": "場",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2111715,
+              "sourceEndMs": 2111855
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001058",
+          "text": "が",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2111855,
+              "sourceEndMs": 2111995
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001059",
+          "text": "最",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2111995,
+              "sourceEndMs": 2112295
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001060",
+          "text": "近",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2112295,
+              "sourceEndMs": 2112495
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001061",
+          "text": "窓",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2112495,
+              "sourceEndMs": 2112736
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001062",
+          "text": "が",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2112736,
+              "sourceEndMs": 2112836
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001063",
+          "text": "割",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2112836,
+              "sourceEndMs": 2112936
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001064",
+          "text": "れ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2112936,
+              "sourceEndMs": 2113056
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001065",
+          "text": "る",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2113056,
+              "sourceEndMs": 2113196
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001066",
+          "text": "く",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2113196,
+              "sourceEndMs": 2113296
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001067",
+          "text": "ら",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2113296,
+              "sourceEndMs": 2113456
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001068",
+          "text": "い",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2113456,
+              "sourceEndMs": 2113716
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001069",
+          "text": "の",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2113716,
+              "sourceEndMs": 2113856
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001070",
+          "text": "こ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2113856,
+              "sourceEndMs": 2113976
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001071",
+          "text": "と",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2113976,
+              "sourceEndMs": 2114076
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001072",
+          "text": "し",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2114076,
+              "sourceEndMs": 2114156
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001073",
+          "text": "か",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2114156,
+              "sourceEndMs": 2114336
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001074",
+          "text": "起",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2114336,
+              "sourceEndMs": 2114477
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001075",
+          "text": "こ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2114477,
+              "sourceEndMs": 2114577
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001076",
+          "text": "ら",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2114577,
+              "sourceEndMs": 2114697
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001077",
+          "text": "な",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2114697,
+              "sourceEndMs": 2114817
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001078",
+          "text": "い",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2114817,
+              "sourceEndMs": 2114937
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001079",
+          "text": "ん",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2114937,
+              "sourceEndMs": 2115057
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001080",
+          "text": "で",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2115057,
+              "sourceEndMs": 2115177
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001081",
+          "text": "す",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2115177,
+              "sourceEndMs": 2115297
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001082",
+          "text": "よ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2115297,
+              "sourceEndMs": 2115437
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001083",
+          "text": "ね",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2115437,
+              "sourceEndMs": 2119879
+            }
+          ]
+        }
+      ],
+      "savedNodeLayoutEstimate": {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000089",
+        "stateId": "caption-core-v001",
+        "lineCount": 2,
+        "lineRects": [
+          {
+            "left": 172,
+            "top": 671.2,
+            "right": 1748,
+            "bottom": 807.2
+          },
+          {
+            "left": 268,
+            "top": 815.2,
+            "right": 1652,
+            "bottom": 951.2
+          }
+        ],
+        "wrapper": {
+          "top": 667.2,
+          "left": 168,
+          "width": 1584,
+          "height": 308
+        }
+      },
+      "color": null,
+      "motion": null,
+      "background": null
+    },
+    {
+      "id": "new-material-digest-20260926-v001-instruction-instruction-000260",
+      "text": "そうなんか男性でも恥ずかしくないように",
+      "lines": [
+        "そうなんか男性でも",
+        "恥ずかしくないように"
+      ],
+      "startFrame": 22130,
+      "endFrameExclusive": 22374,
+      "displaySeconds": 8.133333333333333,
+      "codePoints": 19,
+      "displayedCodePointsPerSecond": 2.336065573770492,
+      "sourceAtoms": [
+        {
+          "id": "new-material-digest-20260926-v001-atom-003190",
+          "text": "そ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8237829,
+              "sourceEndMs": 8238129
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003191",
+          "text": "う",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8238129,
+              "sourceEndMs": 8241530
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003192",
+          "text": "な",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8241530,
+              "sourceEndMs": 8243350
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003193",
+          "text": "ん",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8243350,
+              "sourceEndMs": 8243370
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003194",
+          "text": "か",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8243370,
+              "sourceEndMs": 8243770
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003195",
+          "text": "男",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8243770,
+              "sourceEndMs": 8244030
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003196",
+          "text": "性",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8244030,
+              "sourceEndMs": 8244210
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003197",
+          "text": "で",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8244210,
+              "sourceEndMs": 8244370
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003198",
+          "text": "も",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8244370,
+              "sourceEndMs": 8244810
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003199",
+          "text": "恥",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8244810,
+              "sourceEndMs": 8244930
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003200",
+          "text": "ず",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8244930,
+              "sourceEndMs": 8245050
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003201",
+          "text": "か",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8245050,
+              "sourceEndMs": 8245191
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003202",
+          "text": "し",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8245191,
+              "sourceEndMs": 8245311
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003203",
+          "text": "く",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8245311,
+              "sourceEndMs": 8245411
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003204",
+          "text": "な",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8245411,
+              "sourceEndMs": 8245571
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003205",
+          "text": "い",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8245571,
+              "sourceEndMs": 8245671
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003206",
+          "text": "よ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8245671,
+              "sourceEndMs": 8245751
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003207",
+          "text": "う",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8245751,
+              "sourceEndMs": 8245831
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003208",
+          "text": "に",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8245831,
+              "sourceEndMs": 8245951
+            }
+          ]
+        }
+      ],
+      "savedNodeLayoutEstimate": {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000260",
+        "stateId": "caption-core-v001",
+        "lineCount": 2,
+        "lineRects": [
+          {
+            "left": 508,
+            "top": 671.2,
+            "right": 1412,
+            "bottom": 807.2
+          },
+          {
+            "left": 460,
+            "top": 815.2,
+            "right": 1460,
+            "bottom": 951.2
+          }
+        ],
+        "wrapper": {
+          "top": 667.2,
+          "left": 456,
+          "width": 1008,
+          "height": 308
+        }
+      },
+      "color": null,
+      "motion": null,
+      "background": null
+    },
+    {
+      "id": "new-material-digest-20260926-v001-instruction-instruction-000137",
+      "text": "これラッキーな霊障だから",
+      "lines": [
+        "これラッキーな霊障だから"
+      ],
+      "startFrame": 10320,
+      "endFrameExclusive": 10396,
+      "displaySeconds": 2.533333333333333,
+      "codePoints": 12,
+      "displayedCodePointsPerSecond": 4.736842105263158,
+      "sourceAtoms": [
+        {
+          "id": "new-material-digest-20260926-v001-atom-001541",
+          "text": "こ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2222672,
+              "sourceEndMs": 2222692
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001542",
+          "text": "れ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2222692,
+              "sourceEndMs": 2222772
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001543",
+          "text": "ラ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2222772,
+              "sourceEndMs": 2222972
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001544",
+          "text": "ッ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2222972,
+              "sourceEndMs": 2223012
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001545",
+          "text": "キ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2223012,
+              "sourceEndMs": 2223072
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001546",
+          "text": "ー",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2223072,
+              "sourceEndMs": 2223152
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001547",
+          "text": "な",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2223152,
+              "sourceEndMs": 2223232
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001548",
+          "text": "霊",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2223232,
+              "sourceEndMs": 2223392
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001549",
+          "text": "障",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2223392,
+              "sourceEndMs": 2223532
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001550",
+          "text": "だ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2223532,
+              "sourceEndMs": 2223632
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001551",
+          "text": "か",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2223632,
+              "sourceEndMs": 2223672
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001552",
+          "text": "ら",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2223672,
+              "sourceEndMs": 2225192
+            }
+          ]
+        }
+      ],
+      "savedNodeLayoutEstimate": {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000137",
+        "stateId": "caption-core-v001",
+        "lineCount": 1,
+        "lineRects": [
+          {
+            "left": 364,
+            "top": 815.2,
+            "right": 1556,
+            "bottom": 951.2
+          }
+        ],
+        "wrapper": {
+          "top": 811.2,
+          "left": 360,
+          "width": 1200,
+          "height": 164
+        }
+      },
+      "color": {
+        "startCodePoint": 2,
+        "endCodePointExclusive": 9,
+        "fontColor": "#FFD65A"
+      },
+      "motion": null,
+      "background": null
+    },
+    {
+      "id": "new-material-digest-20260926-v001-instruction-instruction-000135",
+      "text": "霊障弁当の廃棄が出てます",
+      "lines": [
+        "霊障弁当の廃棄が出てます"
+      ],
+      "startFrame": 10145,
+      "endFrameExclusive": 10281,
+      "displaySeconds": 4.533333333333333,
+      "codePoints": 12,
+      "displayedCodePointsPerSecond": 2.6470588235294117,
+      "sourceAtoms": [
+        {
+          "id": "new-material-digest-20260926-v001-atom-001518",
+          "text": "霊",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2216830,
+              "sourceEndMs": 2217030
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001519",
+          "text": "障",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2217030,
+              "sourceEndMs": 2217210
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001520",
+          "text": "弁",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2217210,
+              "sourceEndMs": 2217390
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001521",
+          "text": "当",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2217390,
+              "sourceEndMs": 2217510
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001522",
+          "text": "の",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2217510,
+              "sourceEndMs": 2217610
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001523",
+          "text": "廃",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2217610,
+              "sourceEndMs": 2217810
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001524",
+          "text": "棄",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2217810,
+              "sourceEndMs": 2217890
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001525",
+          "text": "が",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2217890,
+              "sourceEndMs": 2217970
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001526",
+          "text": "出",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2217970,
+              "sourceEndMs": 2218050
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001527",
+          "text": "て",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2218050,
+              "sourceEndMs": 2218150
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001528",
+          "text": "ま",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2218150,
+              "sourceEndMs": 2218290
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001529",
+          "text": "す",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2218290,
+              "sourceEndMs": 2221351
+            }
+          ]
+        }
+      ],
+      "savedNodeLayoutEstimate": {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000135",
+        "stateId": "caption-core-v001",
+        "lineCount": 1,
+        "lineRects": [
+          {
+            "left": 364,
+            "top": 815.2,
+            "right": 1556,
+            "bottom": 951.2
+          }
+        ],
+        "wrapper": {
+          "top": 811.2,
+          "left": 360,
+          "width": 1200,
+          "height": 164
+        }
+      },
+      "color": null,
+      "motion": null,
+      "background": {
+        "color": "#172338",
+        "borderRadiusPx": 0,
+        "paddingXPx": 24,
+        "paddingYPx": 16,
+        "panelPresetId": "plain",
+        "panelPaletteId": "dark"
+      }
+    },
+    {
+      "id": "new-material-digest-20260926-v001-instruction-instruction-000095",
+      "text": "こいつ一番やばいやつ!",
+      "lines": [
+        "こいつ一番やばいやつ!"
+      ],
+      "startFrame": 7556,
+      "endFrameExclusive": 7592,
+      "displaySeconds": 1.2,
+      "codePoints": 11,
+      "displayedCodePointsPerSecond": 9.166666666666668,
+      "sourceAtoms": [
+        {
+          "id": "new-material-digest-20260926-v001-atom-001126",
+          "text": "こ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2130535,
+              "sourceEndMs": 2130595
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001127",
+          "text": "い",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2130595,
+              "sourceEndMs": 2130695
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001128",
+          "text": "つ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2130695,
+              "sourceEndMs": 2130775
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001129",
+          "text": "一",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2130775,
+              "sourceEndMs": 2130915
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001130",
+          "text": "番",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2130915,
+              "sourceEndMs": 2131035
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001131",
+          "text": "や",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2131035,
+              "sourceEndMs": 2131115
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001132",
+          "text": "ば",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2131115,
+              "sourceEndMs": 2131135
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001133",
+          "text": "い",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2131135,
+              "sourceEndMs": 2131275
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001134",
+          "text": "や",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2131275,
+              "sourceEndMs": 2131395
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001135",
+          "text": "つ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2131395,
+              "sourceEndMs": 2131635
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001136",
+          "text": "!",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2131635,
+              "sourceEndMs": 2131736
+            }
+          ]
+        }
+      ],
+      "savedNodeLayoutEstimate": {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+        "stateId": "caption-core-v001",
+        "lineCount": 1,
+        "lineRects": [
+          {
+            "left": 436,
+            "top": 815.2,
+            "right": 1484,
+            "bottom": 951.2
+          }
+        ],
+        "wrapper": {
+          "top": 811.2,
+          "left": 432,
+          "width": 1056,
+          "height": 164
+        }
+      },
+      "color": null,
+      "motion": {
+        "presentation": "provisional-bounce",
+        "presetVersion": "presentation-caption-motion-v002"
+      },
+      "background": null
+    },
+    {
+      "id": "new-material-digest-20260926-v001-instruction-instruction-000263",
+      "text": "押しバック風にできる感じにもしたい",
+      "lines": [
+        "押しバック風にできる感じにもしたい"
+      ],
+      "startFrame": 22582,
+      "endFrameExclusive": 22664,
+      "displaySeconds": 2.7333333333333334,
+      "codePoints": 17,
+      "displayedCodePointsPerSecond": 6.219512195121951,
+      "sourceAtoms": [
+        {
+          "id": "new-material-digest-20260926-v001-atom-003235",
+          "text": "押",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8252893,
+              "sourceEndMs": 8253013
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003236",
+          "text": "し",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8253013,
+              "sourceEndMs": 8253133
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003237",
+          "text": "バ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8253133,
+              "sourceEndMs": 8253313
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003238",
+          "text": "ッ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8253313,
+              "sourceEndMs": 8253373
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003239",
+          "text": "ク",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8253373,
+              "sourceEndMs": 8253513
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003240",
+          "text": "風",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8253513,
+              "sourceEndMs": 8254333
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003241",
+          "text": "に",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8254333,
+              "sourceEndMs": 8254493
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003242",
+          "text": "で",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8254493,
+              "sourceEndMs": 8254633
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003243",
+          "text": "き",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8254633,
+              "sourceEndMs": 8254733
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003244",
+          "text": "る",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8254733,
+              "sourceEndMs": 8254853
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003245",
+          "text": "感",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8254853,
+              "sourceEndMs": 8255093
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003246",
+          "text": "じ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8255093,
+              "sourceEndMs": 8255173
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003247",
+          "text": "に",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8255173,
+              "sourceEndMs": 8255293
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003248",
+          "text": "も",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8255293,
+              "sourceEndMs": 8255393
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003249",
+          "text": "し",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8255393,
+              "sourceEndMs": 8255453
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003250",
+          "text": "た",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8255453,
+              "sourceEndMs": 8255573
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-003251",
+          "text": "い",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0004",
+              "sourceStartMs": 8255573,
+              "sourceEndMs": 8255633
+            }
+          ]
+        }
+      ],
+      "savedNodeLayoutEstimate": {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000263",
+        "stateId": "caption-core-v001",
+        "lineCount": 1,
+        "lineRects": [
+          {
+            "left": 124,
+            "top": 815.2,
+            "right": 1796,
+            "bottom": 951.2
+          }
+        ],
+        "wrapper": {
+          "top": 811.2,
+          "left": 120,
+          "width": 1680,
+          "height": 164
+        }
+      },
+      "color": null,
+      "motion": null,
+      "background": null
+    },
+    {
+      "id": "new-material-digest-20260926-v001-instruction-instruction-000092",
+      "text": "ここもなんかうわ!",
+      "lines": [
+        "ここもなんかうわ!"
+      ],
+      "startFrame": 7453,
+      "endFrameExclusive": 7531,
+      "displaySeconds": 2.6,
+      "codePoints": 9,
+      "displayedCodePointsPerSecond": 3.4615384615384612,
+      "sourceAtoms": [
+        {
+          "id": "new-material-digest-20260926-v001-atom-001104",
+          "text": "こ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2127114,
+              "sourceEndMs": 2129035
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001105",
+          "text": "こ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2129035,
+              "sourceEndMs": 2129155
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001106",
+          "text": "も",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2129155,
+              "sourceEndMs": 2129175
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001107",
+          "text": "な",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2129175,
+              "sourceEndMs": 2129315
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001108",
+          "text": "ん",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2129315,
+              "sourceEndMs": 2129415
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001109",
+          "text": "か",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2129415,
+              "sourceEndMs": 2129435
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001110",
+          "text": "う",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2129435,
+              "sourceEndMs": 2129455
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001111",
+          "text": "わ",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2129455,
+              "sourceEndMs": 2129595
+            }
+          ]
+        },
+        {
+          "id": "new-material-digest-20260926-v001-atom-001112",
+          "text": "!",
+          "spans": [
+            {
+              "timelineSegmentId": "segment-0002",
+              "sourceStartMs": 2129595,
+              "sourceEndMs": 2129695
+            }
+          ]
+        }
+      ],
+      "savedNodeLayoutEstimate": {
+        "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000092",
+        "stateId": "caption-core-v001",
+        "lineCount": 1,
+        "lineRects": [
+          {
+            "left": 532,
+            "top": 815.2,
+            "right": 1388,
+            "bottom": 951.2
+          }
+        ],
+        "wrapper": {
+          "top": 811.2,
+          "left": 528,
+          "width": 864,
+          "height": 164
+        }
+      },
+      "color": null,
+      "motion": {
+        "presentation": "provisional-shake",
+        "presetVersion": "presentation-caption-motion-v002"
+      },
+      "background": null
+    }
+  ],
+  "contractChecks": [
+    {
+      "presentation": "provisional-bounce",
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000019",
+      "currentAccepted": true,
+      "currentSegmentCount": 8,
+      "proposedFontSizePx": 144,
+      "rejection": "Caption motion: the finite preset requires the unchanged 96 px normal caption"
+    },
+    {
+      "presentation": "provisional-shake",
+      "captionId": "new-material-digest-20260926-v001-instruction-instruction-000092",
+      "currentAccepted": true,
+      "currentSegmentCount": 7,
+      "proposedFontSizePx": 144,
+      "rejection": "Caption motion: the finite preset requires the unchanged 96 px normal caption"
+    },
+    {
+      "presentation": "provisional-pulse",
+      "fixture": "synthetic; no saved Pulse in this Digest",
+      "currentAccepted": true,
+      "proposedFontSizePx": 144,
+      "rejection": "Pulse Accent: the finite preset requires the unchanged 96 px normal caption"
+    }
+  ],
+  "productionChanged": false,
+  "rasterRendered": false,
+  "speechPaceVerifiedByAudio": false
+}
